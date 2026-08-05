@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/rayleen-a4-selector-candidate.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "candidate_provenance",
+    "intent",
+    "projection_kind",
+    "practitioner_ref",
+    "waiting_area_ref",
+    "focus_appointment_ref",
+    "evidence_appointment_refs",
+    "context_revision",
+    "response_code",
+    "authority_ceiling",
+    "writes_authorized",
+    "success_claimed"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.rayleen.a4.selector_candidate.v1"},
+    "case_id": {"const": "authored-synthetic-a4-selector-001"},
+    "candidate_provenance": {"const": "untrusted_model"},
+    "intent": {"const": "select_projection"},
+    "projection_kind": {"const": "longest_wait"},
+    "practitioner_ref": {"type": "string", "pattern": "^practitioner_[0-9a-f]{24}$"},
+    "waiting_area_ref": {"type": "string", "pattern": "^waiting_area_[0-9a-f]{24}$"},
+    "focus_appointment_ref": {"type": "string", "pattern": "^appointment_[0-9a-f]{24}$"},
+    "evidence_appointment_refs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^appointment_[0-9a-f]{24}$"}
+    },
+    "context_revision": {"const": 1836412047},
+    "response_code": {"const": "LONGEST_WAIT_MODEL_SELECTED"},
+    "authority_ceiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirmation", "command", "database", "product_read", "tool", "write"],
+      "properties": {
+        "confirmation": {"const": false}, "command": {"const": false},
+        "database": {"const": false}, "product_read": {"const": false},
+        "tool": {"const": false}, "write": {"const": false}
+      }
+    },
+    "writes_authorized": {"const": false},
+    "success_claimed": {"const": false}
+  }
+}

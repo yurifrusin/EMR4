@@ -1,0 +1,37 @@
+{
+  "schema_version": "emr4.model_required_bureau_a4.selector_source_review.v1",
+  "status": "passed",
+  "decision": "pass",
+  "reviewer": "codex_independent_a4_2_grounding_recovery_source_veto",
+  "independent_read_only_review": true,
+  "provider_called": false,
+  "closed_boundary_verified": true,
+  "checks": {
+    "predecessor_occupied_failure_hash_and_context_bound": true,
+    "predecessor_exactly_one_call_and_usd_0_25_consumed": true,
+    "predecessor_selector_not_grounded_and_zero_release": true,
+    "recovery_reason_exactly_selector_not_grounded": true,
+    "materially_distinct_same_fact_singleton_correction": true,
+    "grounding_freshness_and_authority_gate_not_weakened": true,
+    "live_recovery_binds_predecessor_and_fresh_context": true,
+    "cumulative_two_call_and_usd_0_50_ceiling": true,
+    "no_fallback_tools_retrieval_cache_or_raw_retention": true,
+    "provider_free_recovery_zero_new_calls_and_admitted_proof": true,
+    "provider_free_recovery_audit_ledger_and_cleanup_pass": true,
+    "blocked_schema_artifacts_preserved": true,
+    "focused_selector_tests_14_passed": true
+  },
+  "source_hashes": {
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/authored-synthetic-selector-context.json": "sha256:761530979e95d479f63e77600fda221703315fdca7bb27f4347ed5ba6935c87b",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/cell-request.schema.json": "sha256:c69d8db4ab0c8e4d231d433ae101b6c16ed95720559770b79e607d5fa0af4f3d",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/cost-ledger.schema.json": "sha256:b1a2f0f98fc0ef9014ed3b7fde1bed301af33ca23b2da6b1bdd9084cac6ffe8d",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/selector-candidate.schema.json": "sha256:5e602e995cb1f8ba3fa22d70bbe1665c7e939e0f4a389a529faca2c3d28c1529",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/selector-context.schema.json": "sha256:1fa93994c6b4847fb0bd6ca24cd2b121d8fa18f20f4fd0c78047e4e138f0205a",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/selector-model-body.schema.json": "sha256:33399db8f88cae4bf0fe40871507fe8c9fefb91e7bd993a9c27979227289c892",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/single-use-ledger.schema.json": "sha256:fa68d66d7ff8aadb0c2d307c835128c0f75fd240616a6a9ac37d413d00a8b066",
+    "scripts/model_required_bureau_a4_selector_broker.py": "sha256:eb236cfc8a596e6bb7f12c23a7641134528c47310d00951de2244a6f438afad9",
+    "scripts/model_required_bureau_a4_selector_contracts.py": "sha256:d9be3fb2a3538804471c82eecd5080d8c3c57d0af7c8a2929fa0d1bf79565c89",
+    "scripts/model_required_bureau_a4_selector_live.py": "sha256:8cafd390949949141bbcf8f67f0ec48f46646f0cd63e147785ccb29c4a4d0bd6",
+    "tests/test_model_required_bureau_a4_selector.py": "sha256:89b40103c4fb889d33aeccc4270f878a77c6838264e2d95554e0ae0e32f774a1"
+  }
+}

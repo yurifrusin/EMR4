@@ -1,0 +1,61 @@
+{
+  "claims_not_made": [
+    "production_readiness",
+    "real_patient_safety",
+    "australian_physical_or_sovereign_processing",
+    "deployment_or_release"
+  ],
+  "command_count": 0,
+  "console_errors": [],
+  "data_class": "authored_synthetic",
+  "database_access_during_ui": 0,
+  "deployment_count": 0,
+  "diary_logic_modified_beyond_api_origin": false,
+  "evidence_hash": "sha256:41405c666dac72fdfd8a063e069fcdac17e538fbe7ab9a4bc315c467cb8339cb",
+  "evidence_label": "occupied_authored_synthetic_live_local_product_read_ui",
+  "execution_context_hash": "sha256:9a02929bd64b6f24d22698436d429d64b0debceffd5b3df6c68a4c5874b775b7",
+  "http_failures": [],
+  "observed_dom": {
+    "card_count": 1,
+    "escape_closed": true,
+    "footer": "Read-only display. No booking is reserved, confirmed or changed.",
+    "patient_display_token": "synthetic:patient-a08e75075c67",
+    "provenance": "Model-selected, proofreader admitted",
+    "refresh_recovered": true,
+    "reopen_rendered": true,
+    "status": "1 appointment; read at 09:59:42."
+  },
+  "occupied_selector_evidence_hash": "sha256:c1b5ff2d874abc3e25e8e1b763db5160fb2f191b3e1399fd352f8c44588a5b94",
+  "origin_is_loopback": true,
+  "page_errors": [],
+  "proofreader_admitted": true,
+  "protected_ref_movement_count": 0,
+  "provider_call_count": 2,
+  "provider_calls_during_ui": 0,
+  "release_hash": "sha256:d9adc711ac50e975e9f3027ce9640fd296af0dd5a76540cedc5955acde80e2bd",
+  "release_read_count": 3,
+  "request_failures": [],
+  "result": "model_required_bureau_a4_occupied_product_read_ui_pass",
+  "route_interception": false,
+  "schema_version": "emr4.model_required_bureau_a4.occupied_ui.v1",
+  "screenshot": {
+    "path": "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-model-selected-projection.png",
+    "sha256": "sha256:29689210fb5dc92917e3582bb40f855cc8f5fc99d1dc2720b07e065108112a71"
+  },
+  "selected_count": 1,
+  "selector_provenance": "model_selected_proofreader_admitted",
+  "server_stopped": true,
+  "source_hashes": {
+    "docs/diary/diary.css": "sha256:8c771909aacb68f4adaf993624c7c8554f7b04c056b882f7b8d9eb9f3a17c664",
+    "docs/diary/diary.html": "sha256:3a90948bd80a59039b9d5c30c4b75dc59067793ca01faf9b9136d2ff69606777",
+    "docs/diary/diary.js": "sha256:cc2d5546bce7402de0df10291508e6f9708e56ae485e9a640503a9d187f66fdf",
+    "docs/diary/rayleen-waiting-room-projection.mjs": "sha256:98a96fae4cde5f72e87b8e0d92ec1d0ce4c784ac18065108f570ac925d487538",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-ui-revalidated-selector-context.json": "sha256:9a02929bd64b6f24d22698436d429d64b0debceffd5b3df6c68a4c5874b775b7",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-ui-revalidated-selector-evidence.json": "sha256:c1b5ff2d874abc3e25e8e1b763db5160fb2f191b3e1399fd352f8c44588a5b94",
+    "scripts/model_required_bureau_a4_occupied_ui_acceptance.py": "sha256:d53dbbc1ab7a5f416b25fc3793fedb25b56bbb57f5972900984b100e2fb7738a"
+  },
+  "temporary_tls_material_absent": true,
+  "test_only_diary_api_origin": "https://127.0.0.1:62563",
+  "transport": "test_only_https_playwright_no_route_interception",
+  "write_count": 0
+}

@@ -1,0 +1,14 @@
+{
+  "fallback_permitted": false,
+  "lane_calls": {
+    "rayleen_a4_selector": 0
+  },
+  "maximum_cost_usd": 0.5,
+  "maximum_provider_calls": 2,
+  "provider_calls_consumed": 0,
+  "provider_calls_reserved": 0,
+  "reserved_cost_usd": 0,
+  "schema_version": "emr4.model_required_bureau_a4.cost_ledger.v1",
+  "status": "open",
+  "tranche_id": "model-required-bureau-a4-occupied-selector-001"
+}

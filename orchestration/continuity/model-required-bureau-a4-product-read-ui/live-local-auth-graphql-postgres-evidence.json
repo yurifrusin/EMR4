@@ -1,0 +1,73 @@
+{
+  "appointment_and_audit_truth_unchanged": true,
+  "appointment_writes_during_read": 0,
+  "audit_writes_during_read": 0,
+  "bridge_denied_count": 0,
+  "bridge_open_count": 3,
+  "bridge_type": "ApplicationSessionRayleenWaitingRoomBridge",
+  "claims_not_made": [
+    "production_readiness",
+    "real_patient_safety",
+    "provider_processing",
+    "deployment_or_release"
+  ],
+  "command_calls": 0,
+  "data_class": "authored_synthetic",
+  "event_writes_during_read": 0,
+  "evidence_label": "live_local_browser_backend_postgres",
+  "evidence_reconciliation": {
+    "browser_rerun_required": false,
+    "change_scope": "exact_evidence_label_only",
+    "original_evidence_label": "live_local_https_graphql_auth_backend_postgres",
+    "original_evidence_sha256": "sha256:8da4779e4ab031a3d5b86fe1622cc0dcca07de4a659876616868dd2f9bbf09d2",
+    "original_executed_script_sha256": "sha256:2c80481570dd712ab3ebb896532dbc0f66115e87dd9ce8e4dcdb434903e6abe0"
+  },
+  "graphql_mutation": false,
+  "graphql_query_fixed": true,
+  "origin": "https://127.0.0.1:8769",
+  "owned_cleanup_complete": true,
+  "owned_counts_after_browser": {
+    "appointment_audit_log": 1,
+    "appointments": 2,
+    "practice_locations": 1,
+    "practices": 1,
+    "practitioners": 1,
+    "users": 1,
+    "waiting_areas": 1
+  },
+  "owned_counts_after_cleanup": {
+    "appointment_audit_log": 0,
+    "appointments": 0,
+    "practice_locations": 0,
+    "practices": 0,
+    "practitioners": 0,
+    "users": 0,
+    "waiting_areas": 0
+  },
+  "owned_counts_before_browser": {
+    "appointment_audit_log": 1,
+    "appointments": 2
+  },
+  "owned_truth_hash_after_browser": "sha256:817b4e42177e3f8eb7a8dea97503aae4e907291d7e8a721c60534aff7e7c04c0",
+  "owned_truth_hash_before_browser": "sha256:817b4e42177e3f8eb7a8dea97503aae4e907291d7e8a721c60534aff7e7c04c0",
+  "provider_calls": 0,
+  "rayleen_database_capability_role": "emr4_rayleen_read_runtime_a4live00004bf8",
+  "rayleen_database_login_role": "emr4_rayleen_read_login_a4live00004bf8",
+  "rayleen_database_role_distinct_from_practitioner_directory": true,
+  "remote_address_is_loopback_or_in_process": true,
+  "required_authorization_audit_count": 3,
+  "result": "provider_free_rayleen_a4_live_local_auth_pass",
+  "route": "/api/v1/application-auth/rayleen/graphql",
+  "schema_version": "emr4.model_required_bureau_a4.live_local.v1",
+  "source_hashes": {
+    "app/graphql/native_diary_rayleen_waiting_room.py": "sha256:0eb3900e31b2a68f1bcdc09799b7ac5448674c243e8767968c2d57b22ea7fd71",
+    "app/services/application_auth_rayleen_read_database_role.py": "sha256:056b5ddc062e6ed80ac84d90af7a1c0f96ab7ca0fbdd861fd1c4fedad9af172b",
+    "app/services/application_auth_rayleen_waiting_room.py": "sha256:8ccc5e5893d82625ce4edf0c8a6e53f1c314eaed265b93e2ee2fa7d50e7159c9",
+    "app/services/diary/rayleen_waiting_room_projection.py": "sha256:e06719bbf3438c572364b65cd64fad01feee4a0dc2cc153f0699accc773b3569",
+    "docs/diary/rayleen-waiting-room-projection.mjs": "sha256:98a96fae4cde5f72e87b8e0d92ec1d0ce4c784ac18065108f570ac925d487538",
+    "scripts/model_required_bureau_a4_live_local_acceptance.py": "sha256:5f4b27b9a01b0ff115c5ccd95f61fd284197a4e5901fa6bdab3fdf9789ea4449"
+  },
+  "synthetic_practice_allowlist_enforced": true,
+  "transaction_local_practice_rls_context": true,
+  "transport": "canonical_https_browser"
+}

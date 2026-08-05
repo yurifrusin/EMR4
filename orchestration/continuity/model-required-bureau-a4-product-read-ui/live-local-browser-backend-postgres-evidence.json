@@ -1,0 +1,48 @@
+{
+  "appointment_and_audit_truth_unchanged": true,
+  "appointment_writes_during_read": 0,
+  "audit_writes_during_read": 0,
+  "bridge_denied_count": 0,
+  "bridge_open_count": 2,
+  "claims_not_made": [
+    "production_readiness",
+    "real_patient_safety",
+    "provider_processing",
+    "deployment_or_release"
+  ],
+  "command_calls": 0,
+  "data_class": "authored_synthetic",
+  "event_writes_during_read": 0,
+  "evidence_label": "live_local_browser_backend_postgres",
+  "graphql_mutation": false,
+  "graphql_query_fixed": true,
+  "origin": "http://127.0.0.1:8765",
+  "owned_cleanup_complete": true,
+  "owned_counts_after_browser": {
+    "appointment_audit_log": 1,
+    "appointments": 2,
+    "practice_locations": 1,
+    "practices": 1,
+    "practitioners": 1,
+    "users": 1,
+    "waiting_areas": 1
+  },
+  "owned_counts_after_cleanup": {
+    "appointment_audit_log": 0,
+    "appointments": 0,
+    "practice_locations": 0,
+    "practices": 0,
+    "practitioners": 0,
+    "users": 0,
+    "waiting_areas": 0
+  },
+  "owned_counts_before_browser": {
+    "appointment_audit_log": 1,
+    "appointments": 2
+  },
+  "provider_calls": 0,
+  "remote_address_is_loopback": true,
+  "result": "provider_free_rayleen_a4_live_local_pass",
+  "route": "/api/v1/application-auth/rayleen/graphql",
+  "schema_version": "emr4.model_required_bureau_a4.live_local.v1"
+}

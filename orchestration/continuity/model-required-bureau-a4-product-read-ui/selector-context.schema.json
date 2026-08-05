@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/rayleen-a4-trusted-selector-context.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "case_id", "context_revision", "generated_at",
+    "evaluation_time", "expires_at", "request_scope_salt",
+    "staff_utterance", "authority_ceiling", "source_response"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.rayleen.a4.trusted_selector_context.v1"},
+    "case_id": {"const": "authored-synthetic-a4-selector-001"},
+    "context_revision": {"const": 1836412047},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "evaluation_time": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "request_scope_salt": {"type": "string", "minLength": 32, "maxLength": 96},
+    "staff_utterance": {"const": "Show the single arrived appointment with the longest elapsed wait."},
+    "authority_ceiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirmation", "command", "database", "product_read", "tool", "write"],
+      "properties": {
+        "confirmation": {"const": false}, "command": {"const": false},
+        "database": {"const": false}, "product_read": {"const": false},
+        "tool": {"const": false}, "write": {"const": false}
+      }
+    },
+    "source_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["data"],
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rayleenWaitingRoom"],
+          "properties": {
+            "rayleenWaitingRoom": {"$ref": "#/$defs/frame"}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion", "frameId", "practiceId", "locationId",
+        "contextRevision", "generatedAt", "expiresAt", "reader",
+        "excludedFieldClasses", "projection", "backendFacts", "derivedSignals"
+      ],
+      "properties": {
+        "schemaVersion": {"const": "emr4.waiting_room_context_frame.v1"},
+        "frameId": {"type": "string", "format": "uuid"},
+        "practiceId": {"type": "string", "format": "uuid"},
+        "locationId": {"type": "string", "format": "uuid"},
+        "contextRevision": {"const": 1836412047},
+        "generatedAt": {"type": "string", "format": "date-time"},
+        "expiresAt": {"type": "string", "format": "date-time"},
+        "reader": {"const": "authorized_reception_surface"},
+        "excludedFieldClasses": {
+          "const": ["contact_details", "national_identifiers", "clinical_text", "appointment_notes", "unrestricted_history", "credentials", "raw_provider_data"]
+        },
+        "projection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "selectedCount", "practitionerId", "waitingAreaId", "focusAppointmentId", "selectorProvenance", "authorityCeiling", "writesAuthorized"],
+          "properties": {
+            "kind": {"const": "FULL_QUEUE"},
+            "selectedCount": {"const": 2},
+            "practitionerId": {"const": null},
+            "waitingAreaId": {"const": null},
+            "focusAppointmentId": {"const": null},
+            "selectorProvenance": {"const": "deterministic_product_read"},
+            "authorityCeiling": {"const": "data_only"},
+            "writesAuthorized": {"const": false}
+          }
+        },
+        "backendFacts": {"type": "array", "minItems": 1, "maxItems": 21, "items": {"type": "object"}},
+        "derivedSignals": {"type": "array", "minItems": 1, "maxItems": 64, "items": {"type": "object"}}
+      }
+    }
+  }
+}

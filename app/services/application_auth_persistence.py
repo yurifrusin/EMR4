@@ -172,6 +172,33 @@ class PostgresApplicationAuthRuntime:
             ),
         )
 
+    def authorize_rayleen_waiting_room_read(
+        self,
+        *,
+        surface_session_value: str,
+        surface: Surface,
+        origin: str,
+        fresh_principal: SyntheticPrincipal | None,
+        fresh_user_active: bool,
+        resource_practice_id: str,
+        audience: str = SURFACE_AUDIENCE,
+        correlation_id: str | None = None,
+    ) -> ValidatedSurfaceContext:
+        surface_hash = _hash_opaque_value(surface_session_value)
+        return self._execute(
+            key_lookup=lambda db: self._key_for_surface(db, surface_hash),
+            operation=lambda runtime: runtime.authorize_rayleen_waiting_room_read(
+                surface_session_value=surface_session_value,
+                surface=surface,
+                origin=origin,
+                fresh_principal=fresh_principal,
+                fresh_user_active=fresh_user_active,
+                resource_practice_id=resource_practice_id,
+                audience=audience,
+                correlation_id=correlation_id,
+            ),
+        )
+
     def issue_exchange(
         self,
         *,

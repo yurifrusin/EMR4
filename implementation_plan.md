@@ -46,6 +46,16 @@ Both lanes used explicit positive bounded reasoning, deterministic proofreading
 and advisory-only release; this establishes neither product data access nor a
 read, command, write, actuator, production or clinical authority.
 
+Rayleen A4 now also passes its narrow default-off development product-read/UI
+descendant. A dedicated Receptionist-only, practice/location-scoped GraphQL read
+projects newly authored synthetic waiting-room truth through Reception One. One
+Sydney Vertex selector required the single planned grounding correction, then
+the unchanged deterministic proofreader admitted one model-selected view. The
+two-call/USD 0.50 ledger is consumed; real/patient data, commands, writes,
+production, deployment and release remain closed. The next planned paired
+descendant is A5.1/B4.1 command planning and implementation under backend-owned
+human confirmation, idempotency, atomic audit/outbox and deterministic readback.
+
 ### 1.1 Business & Licensing Model
 
 | Aspect | Decision |

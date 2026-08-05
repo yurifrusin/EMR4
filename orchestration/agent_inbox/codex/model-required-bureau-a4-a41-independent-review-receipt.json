@@ -1,0 +1,30 @@
+{
+  "schema_version": "emr4.model_required_bureau_a4.a41_independent_review.v1",
+  "status": "passed",
+  "decision": "pass",
+  "reviewed_on": "2026-08-05",
+  "reviewer_lane": "independent_a3_rayleen_analysis",
+  "review_mode": "read_only_provider_free",
+  "result": "provider_free_rayleen_a4_current_source_human_browser_pass",
+  "evidence_label": "live_local_browser_backend_postgres",
+  "current_evidence_sha256": "ce6c265d12e10b861b2e31923b7def56041c9923277befdafcd3fc0724147110",
+  "generator_sha256": "5f4b27b9a01b0ff115c5ccd95f61fd284197a4e5901fa6bdab3fdf9789ea4449",
+  "original_evidence_sha256": "8da4779e4ab031a3d5b86fe1622cc0dcca07de4a659876616868dd2f9bbf09d2",
+  "original_executed_script_sha256": "2c80481570dd712ab3ebb896532dbc0f66115e87dd9ce8e4dcdb434903e6abe0",
+  "checks": {
+    "exact_frozen_evidence_label": true,
+    "current_evidence_hash_reproduced": true,
+    "human_receipt_binding_exact": true,
+    "generator_label_and_hash_exact": true,
+    "label_only_reconciliation_transparent": true,
+    "predecessor_hash_reconstructed": true,
+    "human_browser_warning_expiry_refresh_escape_pass": true,
+    "canonical_browser_backend_postgres_pass": true,
+    "zero_provider_command_or_write": true,
+    "complete_owned_cleanup": true
+  },
+  "provider_invoked": false,
+  "files_edited_by_reviewer": false,
+  "remaining_findings": [],
+  "authority_boundary": "a41_acceptance_only_no_a42_provider_command_write_deploy_release_or_protected_ref_authority"
+}

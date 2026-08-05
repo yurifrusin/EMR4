@@ -1,0 +1,254 @@
+{
+  "actuator_count": 0,
+  "attempt_id": "a4-rayleen-selector-primary-001",
+  "attempt_number": 1,
+  "build_context": {
+    "base_image_pulled_for_attempt": true,
+    "pinned_base_image": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+    "repository_root_used": false,
+    "source_hashes": {
+      "generated:cell-request.json": "sha256:a6e78aec8b2809c924b56fec94a0b6fc657e3c470b3342557d4a08e6c8c30c59",
+      "orchestration/continuity/model-required-bureau-a3-b3/Dockerfile": "sha256:3d47934e293dcecb182e10c64ebfabcbedbcec67c1998166a3fee2dbf495481e",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:9f4a86f4d82223d7cc2f8f5be21d8d3ec152e2eb0c57e0ac70e1c27d5020ef66"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_policy": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "credential_environment_present": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "emr4-a4-rayleen-selector-1-internal"
+    ],
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true
+  },
+  "cleanup_passed": true,
+  "command_count": 0,
+  "correction_eligible": false,
+  "credential_or_token_retained": false,
+  "database_access_count": 0,
+  "evidence_hash": "sha256:001ffa615308b725c92dbbbc104b3313e438b555edca57e60c876d0069d4d86b",
+  "evidence_mode": "provider_free_authored_synthetic_selector",
+  "fallback_count": 0,
+  "lane": "rayleen_a4_selector",
+  "mode": "dry-run",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "emr4-a4-rayleen-selector-1-internal"
+  },
+  "patient_or_clinical_data_count": 0,
+  "preflight_hash": null,
+  "product_read_count": 0,
+  "proofreader_reason_code": "proofreader_admitted",
+  "proofreader_verdict": "admitted",
+  "provider_call_count": 0,
+  "provider_contacted": false,
+  "provider_context_class": "request_scoped_opaque_bounded_waiting_signals",
+  "provider_metadata": null,
+  "provider_metadata_status": "provider_free_fixture",
+  "provider_tool_call_count": 0,
+  "raw_prompt_retained": false,
+  "raw_provider_response_retained": false,
+  "relay_policy": {
+    "broker_alias_present": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "emr4-a4-rayleen-selector-1-internal"
+    ],
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "token_mount_exact": true,
+    "user": "65532:65532"
+  },
+  "release": {
+    "authority_ceiling": {
+      "command": false,
+      "confirmation": false,
+      "database": false,
+      "product_read": false,
+      "tool": false,
+      "write": false
+    },
+    "evidence_mode": "proofreader_admitted_display_projection",
+    "response": {
+      "data": {
+        "rayleenWaitingRoom": {
+          "backendFacts": [
+            {
+              "appointmentId": "a4000000-0000-4000-8000-000000000011",
+              "arrivedAt": "2026-08-04T22:56:11Z",
+              "label": {
+                "authorityCeiling": "data_only",
+                "confidentialityReaders": [
+                  "authorized_reception_surface"
+                ],
+                "expiresAt": "2026-08-04T23:38:11Z",
+                "freshnessState": "fresh",
+                "integrityPrincipals": [
+                  "backend_truth"
+                ],
+                "observedAt": "2026-08-04T23:36:11Z",
+                "sourceIds": [
+                  "backend:appointment:a4000000-0000-4000-8000-000000000011"
+                ]
+              },
+              "patientDisplayToken": "synthetic:patient-a08e75075c67",
+              "practitionerId": "a4000000-0000-4000-8000-000000000021",
+              "scheduledAt": "2026-08-04T22:51:11Z",
+              "status": "arrived",
+              "waitingAreaId": "a4000000-0000-4000-8000-000000000031"
+            }
+          ],
+          "contextRevision": 1836412047,
+          "derivedSignals": [
+            {
+              "appointmentId": "a4000000-0000-4000-8000-000000000011",
+              "booleanValue": null,
+              "derivedBy": "deterministic_projection_engine",
+              "integerValue": 40,
+              "kind": "elapsed_wait_minutes",
+              "label": {
+                "authorityCeiling": "data_only",
+                "confidentialityReaders": [
+                  "authorized_reception_surface"
+                ],
+                "expiresAt": "2026-08-04T23:38:11Z",
+                "freshnessState": "fresh",
+                "integrityPrincipals": [
+                  "backend_truth"
+                ],
+                "observedAt": "2026-08-04T23:36:11Z",
+                "sourceIds": [
+                  "backend:appointment:a4000000-0000-4000-8000-000000000011"
+                ]
+              },
+              "textValue": null
+            },
+            {
+              "appointmentId": "a4000000-0000-4000-8000-000000000011",
+              "booleanValue": null,
+              "derivedBy": "deterministic_projection_engine",
+              "integerValue": null,
+              "kind": "threshold_band",
+              "label": {
+                "authorityCeiling": "data_only",
+                "confidentialityReaders": [
+                  "authorized_reception_surface"
+                ],
+                "expiresAt": "2026-08-04T23:38:11Z",
+                "freshnessState": "fresh",
+                "integrityPrincipals": [
+                  "backend_truth"
+                ],
+                "observedAt": "2026-08-04T23:36:11Z",
+                "sourceIds": [
+                  "backend:appointment:a4000000-0000-4000-8000-000000000011"
+                ]
+              },
+              "textValue": "30_minutes_or_more"
+            },
+            {
+              "appointmentId": "a4000000-0000-4000-8000-000000000011",
+              "booleanValue": null,
+              "derivedBy": "deterministic_projection_engine",
+              "integerValue": 1,
+              "kind": "longest_wait_rank",
+              "label": {
+                "authorityCeiling": "data_only",
+                "confidentialityReaders": [
+                  "authorized_reception_surface"
+                ],
+                "expiresAt": "2026-08-04T23:38:11Z",
+                "freshnessState": "fresh",
+                "integrityPrincipals": [
+                  "backend_truth"
+                ],
+                "observedAt": "2026-08-04T23:36:11Z",
+                "sourceIds": [
+                  "backend:appointment:a4000000-0000-4000-8000-000000000011"
+                ]
+              },
+              "textValue": null
+            }
+          ],
+          "excludedFieldClasses": [
+            "contact_details",
+            "national_identifiers",
+            "clinical_text",
+            "appointment_notes",
+            "unrestricted_history",
+            "credentials",
+            "raw_provider_data"
+          ],
+          "expiresAt": "2026-08-04T23:38:11Z",
+          "frameId": "a4000000-0000-4000-8000-000000000001",
+          "generatedAt": "2026-08-04T23:36:11Z",
+          "locationId": "a4000000-0000-4000-8000-000000000003",
+          "practiceId": "a4000000-0000-4000-8000-000000000002",
+          "projection": {
+            "authorityCeiling": "data_only",
+            "focusAppointmentId": "a4000000-0000-4000-8000-000000000011",
+            "kind": "LONGEST_WAIT",
+            "practitionerId": "a4000000-0000-4000-8000-000000000021",
+            "selectedCount": 1,
+            "selectorProvenance": "model_selected_proofreader_admitted",
+            "waitingAreaId": "a4000000-0000-4000-8000-000000000031",
+            "writesAuthorized": false
+          },
+          "reader": "authorized_reception_surface",
+          "schemaVersion": "emr4.waiting_room_context_frame.v1"
+        }
+      }
+    },
+    "schema_version": "emr4.rayleen.a4.selector_release.v1",
+    "status": "display_projection_only"
+  },
+  "request_binding": {
+    "context_hash": "sha256:40b869d9c669cfb232ebfcbfddea546e2c5f0a428ec473e8e1651b275644cd88",
+    "policy_id": "emr4-model-required-bureau-a4-sydney-selector-v1",
+    "provider_request_hash": "sha256:ecede39ac3c5ddc7704a91b2c259d92f91697e2ec50dd4e9cef91f87d1704a2e"
+  },
+  "result": "attempt_pass",
+  "schema_version": "emr4.model_required_bureau_a4.selector_attempt_evidence.v1",
+  "trusted_context_data_class": "authored_synthetic",
+  "write_count": 0
+}

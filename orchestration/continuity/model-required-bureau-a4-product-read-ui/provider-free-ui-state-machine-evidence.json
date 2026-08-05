@@ -1,0 +1,65 @@
+{
+  "schema_version": "emr4.model_required_bureau_a4.ui_acceptance.v1",
+  "result": "provider_free_rayleen_a4_ui_state_machine_pass",
+  "evidence_label": "provider_free_default_off_product_read_ui_state_machine",
+  "data_class": "authored_synthetic",
+  "case_count": 11,
+  "passed_case_count": 11,
+  "failed_case_count": 0,
+  "cases": [
+    {
+      "name": "closed_response_admitted",
+      "passed": true
+    },
+    {
+      "name": "released_frame_frozen",
+      "passed": true
+    },
+    {
+      "name": "unknown_field_rejected",
+      "passed": true
+    },
+    {
+      "name": "expired_frame_rejected",
+      "passed": true
+    },
+    {
+      "name": "foreign_location_rejected",
+      "passed": true
+    },
+    {
+      "name": "authority_bearing_bootstrap_rejected",
+      "passed": true
+    },
+    {
+      "name": "latest_read_wins",
+      "passed": true
+    },
+    {
+      "name": "invalidation_suppresses_release",
+      "passed": true
+    },
+    {
+      "name": "rendered_frame_expires_and_clears",
+      "passed": true
+    },
+    {
+      "name": "pre_expiry_warning_is_emitted",
+      "passed": true
+    },
+    {
+      "name": "module_has_no_direct_effectful_surface",
+      "passed": true
+    }
+  ],
+  "properties": {
+    "strict_true_default_off": true,
+    "latest_read_wins": true,
+    "interruption_suppresses_release": true,
+    "response_schema_closed": true,
+    "provider_or_external_effect": false,
+    "command_or_write_authority": false,
+    "browser_or_backend_claim": false
+  },
+  "module_sha256": "98a96fae4cde5f72e87b8e0d92ec1d0ce4c784ac18065108f570ac925d487538"
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records accepted result model_required_bureau_a4_product_read_ui_pass and names paired A5.1/B4.1 command planning as the next dependency-satisfied descendant after task-branch publication.",
+    "current_authority_allocation": "GPT Sol owns exact boundary derivation, acceptance, explicit-path task-branch publication and uninterrupted planned continuation. The native independent lane supplied a read-only veto with no integration authority. DeepSeek through Claude Code --bare and Gemini through a fresh Antigravity project remain available planned Ariadne capabilities but were not dispatched for this final closeout. Yuri's standing authority removes ceremonial gate pauses without broadening closed surfaces.",
+    "active_plan_and_acceptance": "The A4 plan, threat-model delta, provider-free read/UI evidence, exact two-call occupied evidence, deterministic recovery and freshness revalidation, human browser evidence, closeout and Sol acceptance are complete. The fresh final veto passed 116 of 116 tests, Ruff, 13 in-memory Python compiles, diff checks, 27 artifact hashes and 33 source hashes with no findings. Five exact A4 HTTPS trees and two owned TLS directories were cleaned with zero residue.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary evidence remain sealed. Real patient, clinical, product-derived, participant, production and external-client data; further provider calls; commands or writes before a newly frozen descendant; actuators; cloud or IAM mutation; deployment; release; Pages and protected refs remain closed. docs/branding and the existing Consultant, Gate-minus-one and A3/B3 pre-push receipt/state files remain untracked, untouched and excluded.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at fb3cf995e03d8500c88fca7484fa04aeb0b698d9, aligned with its origin task ref before this commit. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree has no unstaged changes; the exact accepted A4 and standing-authority candidate is explicitly staged, with all protected user-owned paths excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

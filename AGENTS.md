@@ -11,21 +11,13 @@ At a new session, after conversation compaction/restoration, after a model/provi
 
 1. Read this file completely.
 2. Read the active acceptance/plan documents named in the Current Baton.
-3. Restore the protected-evidence and user-decision boundaries in sections 5
-   and 6.
+3. Restore the protected-evidence and user-decision boundaries in sections 5 and 6.
 4. Verify `git status`, `HEAD`, `master`, `handoff/current`, `origin/master`, and `origin/handoff/current`.
-5. Generate a fresh Ariadne orchestrator receipt naming all five sources:
-   `live_handover_current_baton`, `current_authority_allocation`,
-   `active_plan_and_acceptance`, `protected_evidence_boundaries`, and
-   `git_refs_and_worktree`.
+5. Generate a fresh Ariadne orchestrator receipt naming all five sources: `live_handover_current_baton`, `current_authority_allocation`, `active_plan_and_acceptance`, `protected_evidence_boundaries`, and `git_refs_and_worktree`.
 
 A conversation summary is a continuity aid only. It is never authoritative for model allocation, provider transport, holdout rules, write authority, or user decision boundaries. `rehydrated_from_receipt: true` without the five named sources is insufficient and must return `revision_required`.
 
-Use a fresh chat context for each named tranche by default. The new context must
-repeat this full rehydration before acting; prior-chat memory never substitutes
-for the five sources. Durable decisions that must survive the handoff belong in
-this file and the active plan/evidence documents. The outgoing tranche must name
-its exact result, artifacts, unresolved gates, next tranche, and reasoning level.
+Use a fresh chat context for each named tranche by default. The new context must repeat this full rehydration before acting; prior-chat memory never substitutes for the five sources. Durable decisions that must survive the handoff belong in this file and the active plan/evidence documents. The outgoing tranche must name its exact result, artifacts, unresolved gates, next tranche, and reasoning level.
 
 ## 3. Current Baton
 
@@ -63,8 +55,9 @@ its exact result, artifacts, unresolved gates, next tranche, and reasoning level
 | Model-required Bureau Gate zero acceptance | `docs/emr4-model-required-bureau-gate-zero-shared-contract.md`, `docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md`, `orchestration/continuity/model-required-bureau-gate-zero/`, `scripts/model_required_bureau_gate_zero_acceptance.py`, `tests/test_model_required_bureau_gate_zero.py`, `orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json`, `docs/emr4-model-required-bureau-gate-zero-closeout.md`, `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`, `scripts/model_required_bureau_gate_zero_continuity_update.py`, and `tests/test_model_required_bureau_gate_zero_continuity.py` |
 | Model-required Bureau A3/B3 terminal-reconciliation acceptance | `docs/emr4-model-required-bureau-a3-b3-occupied-rehearsal-plan.md`, `docs/security/emr4-model-required-bureau-a3-b3-threat-model-delta.md`, `docs/emr4-model-required-bureau-a3-b3-terminal-rejection-checkpoint.md`, `docs/emr4-model-required-bureau-a3-b3-terminal-reconciliation-closeout.md`, `orchestration/continuity/model-required-bureau-a3-b3/`, `scripts/model_required_bureau_a3_b3_broker.py`, `scripts/model_required_bureau_a3_b3_live.py`, `scripts/model_required_bureau_a3_b3_acceptance.py`, `tests/test_model_required_bureau_a3_b3.py`, `docs/ariadne-agent-error-correction-register-revision-9.md`, `docs/ariadne-agent-error-correction-register-revision-12.md`, `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-9-receipt.json`, and `orchestration/agent_inbox/codex/model-required-bureau-a3-b3-terminal-reconciliation-sol-acceptance.md` |
 | Model-required Bureau A3/B3 request-contract recovery acceptance | `docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md`, `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`, `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/`, `scripts/model_required_bureau_a3_b3_recovery_contracts.py`, `scripts/model_required_bureau_a3_b3_recovery_broker.py`, `scripts/model_required_bureau_a3_b3_recovery_live.py`, `scripts/model_required_bureau_a3_b3_recovery_acceptance.py`, `tests/test_model_required_bureau_a3_b3_request_contract_recovery.py`, `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`, `docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md`, `orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md`, `docs/ariadne-agent-error-correction-register-revision-14.md`, `scripts/model_required_bureau_a3_b3_recovery_continuity_update.py`, and `tests/test_model_required_bureau_a3_b3_recovery_continuity.py` |
-| Current result | The immutable parent remains `model_required_bureau_a3_b3_occupied_terminal_rejection`, but its authorised distinct request-contract recovery now passes as `model_required_bureau_a3_b3_request_contract_recovery_pass` at Continuity 212 / Compass 193. Fresh Gemini 3.6 Flash/high returned one exact source-veto `pass` at `a70d06fd047733bac9a72921d0fd2f81e1b946db`. The exact keyless-ADC Sydney Vertex preflight then passed per lane. Rayleen admitted first and alone unlocked Davida; each used one `gemini-2.5-flash` call, one `STOP` candidate, deterministic proofreading and one advisory-only authored-synthetic release. The positive 1,024 thinking / 2,048 output request produced non-zero provider-reported thinking tokens in both lanes. Exactly two calls and USD 0.50 reservation were consumed; no retry, correction, fallback, product/database access, command, write, actuator, cloud/IAM mutation, deployment or protected-ref movement occurred, raw content/thoughts were not retained, and cleanup is complete. AER-0020 is corrected under register revision 14; the rejected predecessor review remains preserved. |
-| Next implementation | The currently authorised A3/B3 recovery block is complete and no dependency-satisfied non-material implementation gate remains. A4 product read/UI projection, A5/B4 writes, C4 actuator rehearsal and actual update/import/activation are separate material choices requiring an exact frozen boundary before execution. Product/runtime/real-data/write surfaces, deployment, production, release, Pages, protected evidence and protected refs remain closed. Preserve and exclude `docs/branding/` and the four existing Consultant/Gate-minus-one pre-push files. |
+| Model-required Bureau A4 product-read/UI acceptance | `docs/emr4-model-required-bureau-a4-product-read-ui-plan.md`, `docs/security/emr4-model-required-bureau-a4-product-read-ui-threat-model-delta.md`, `app/graphql/native_diary_rayleen_waiting_room.py`, `app/services/application_auth_rayleen_read_database_role.py`, `app/services/application_auth_rayleen_read_operational.py`, `app/services/application_auth_rayleen_waiting_room.py`, `app/services/diary/rayleen_waiting_room_projection.py`, `docs/diary/rayleen-waiting-room-projection.mjs`, `scripts/model_required_bureau_a4_live_local_acceptance.py`, `scripts/model_required_bureau_a4_selector_contracts.py`, `scripts/model_required_bureau_a4_selector_broker.py`, `scripts/model_required_bureau_a4_selector_live.py`, `scripts/model_required_bureau_a4_occupied_ui_acceptance.py`, `scripts/model_required_bureau_a4_ui_acceptance.mjs`, `tests/test_model_required_bureau_a4_product_read.py`, `tests/test_model_required_bureau_a4_ui.py`, `tests/test_model_required_bureau_a4_selector.py`, `tests/test_model_required_bureau_a4_occupied_ui.py`, `orchestration/continuity/model-required-bureau-a4-product-read-ui/`, `orchestration/agent_inbox/codex/model-required-bureau-a4-a41-independent-review-receipt.json`, `orchestration/agent_inbox/codex/model-required-bureau-a4-selector-source-review-receipt.json`, `orchestration/agent_inbox/codex/model-required-bureau-a4-selector-recovery-source-review-receipt.json`, `orchestration/agent_inbox/codex/model-required-bureau-a4-final-independent-review-receipt.json`, `docs/emr4-model-required-bureau-a4-product-read-ui-closeout.md`, and `orchestration/agent_inbox/codex/model-required-bureau-a4-sol-acceptance.md` |
+| Current result | A4 passes as `model_required_bureau_a4_product_read_ui_pass`. A4.1 proves a default-off Receptionist-only, practice/location-scoped GraphQL waiting-room read through live-local HTTPS browser, FastAPI and PostgreSQL with exact minimal fields, unchanged appointment/audit/event truth, visible pre-expiry warning and expiry clearing, zero provider/write/command calls and complete owned cleanup. A4.2 used the exact keyless-ADC Sydney Vertex `gemini-2.5-flash` boundary with 1,024 thinking/2,048 output. The first HTTP 200 candidate failed `selector_not_grounded` and released nothing; the single evidence-selected same-fact/singleton correction passed fresh source review and deterministic proofreading. Exactly two calls/USD 0.50 are consumed. The final model-selected view passed loopback HTTPS Reception One rendering, refresh, Escape and reopen with empty console/page/HTTP/request failures and cleanup. Provider-free freshness revalidation changed no selection and made zero calls. The final independent veto passed 113 tests, both audit chains, 27 artifact and 32 source hashes with no findings. This is authored-synthetic development product-read/UI evidence only, not real-data, command/write, production, deployment, release or sovereignty evidence. |
+| Next implementation | Publish the accepted A4 task-branch candidate, then rehydrate and freeze the paired A5.1/B4.1 command descendant. A5.1 begins with the narrowest Rayleen check-in/status proposal-confirm path; B4.1 begins with the accepted Davida practitioner default-location command boundary. Both require backend-owned human confirmation, current identity/scope, idempotency, atomic truth/audit/outbox behavior, replay rejection and deterministic readback. Standing programme authority permits planning and provider-free deterministic implementation without another permission pause. Provider calls, patient data, production, deployment, release, Pages, protected evidence and protected-ref movement remain closed. Preserve and exclude `docs/branding/` and all existing Consultant/Gate-minus-one/A3-B3 pre-push files. |
 ### Compact historical evaluation and transition state
 
 The detailed language-evaluation chronology is indexed in `docs/handover-ledgers/bernie-language-evaluation.md`; the active acceptance
@@ -102,29 +95,17 @@ for present decisions are:
   are historical context and do not broaden current authority.
 ## 4. Authority Allocation
 
-This section overrides conflicting historical text in archives, ledgers,
-packets, or older Ariadne documents.
+This section overrides conflicting historical text in archives, ledgers, packets, or older Ariadne documents.
 
-- **GPT Sol** is Conductor, sprint planner, architecture and acceptance owner,
-  recovery owner, and protected integrator.
+- **GPT Sol** is Conductor, sprint planner, architecture and acceptance owner, recovery owner, and protected integrator.
 - **DeepSeek V4 Flash/high via Claude Code `--bare`** is the preferred economical bounded implementation/test worker. Launcher: `scripts/ariadne_deepseek_claude.py`.
 - **Gemini 3.6 Flash/high via Antigravity** is the preferred independent veto reviewer. Launcher: `scripts/ariadne_antigravity.py`.
-- **DeepSeek Pro is not the Conductor** and must not be launched for planning,
-  allocation, acceptance revision, or routine fallback without a new explicit
-  instruction from Yuri.
+- **DeepSeek Pro is not the Conductor** and must not be launched for planning, allocation, acceptance revision, or routine fallback without a new explicit instruction from Yuri.
 - Deep Code is a real-TTY fallback only, not the default DeepSeek transport.
-- Claude/Fable/Opus and native Codex workers are leverage- and
-  availability-gated options. They never receive integration authority.
-- No external worker or consultant may certify its own corpus, accept its own
-  implementation, move the baton, or push protected refs.
+- Claude/Fable/Opus and native Codex workers are leverage- and availability-gated options. They never receive integration authority.
+- No external worker or consultant may certify its own corpus, accept its own implementation, move the baton, or push protected refs.
 
-The versioned execution contract is
-`orchestration/harness_settings/verifier_execution_policy.yaml`. It fixes Sol
-at High for routine bounded work and Extra High for material architecture,
-authority, security, provider, production or release decisions; DeepSeek V4
-Flash/high owns bounded separable implementation/test artifacts; and Gemini
-3.6 Flash/high owns fresh independent review only. External model review is
-eligible only after its deterministic gate passes.
+The versioned execution contract is `orchestration/harness_settings/verifier_execution_policy.yaml`. It fixes Sol at High for routine bounded work and Extra High for material architecture, authority, security, provider, production or release decisions; DeepSeek V4 Flash/high owns bounded separable implementation/test artifacts; and Gemini 3.6 Flash/high owns fresh independent review only. External model review is eligible only after its deterministic gate passes.
 
 Use workers only for bounded separable artifacts or genuine veto surfaces.
 Tiny, serial, protected, or tightly coupled work may remain Sol-owned. Record
@@ -271,16 +252,29 @@ dependency-satisfied gate when an active accepted plan freezes its scope,
 inputs/outputs, material data/provider/cost posture, side effects, forbidden
 surfaces, acceptance, recovery, evidence label and claim boundary.
 
+Yuri clarified on 2026-08-05 that a planned gate's materiality never creates a
+pause by itself and that the absence of a pre-existing descendant plan is not a
+user decision fork. When the accepted sequence identifies the next gate, Sol
+must derive and freeze its narrowest fail-closed architecture-strengthening
+boundary, then plan, dispatch and execute it without seeking ceremonial fresh
+authority. Older plan language requiring a `fresh decision`, `fresh authority`
+or a `material decision` for a planned gate is satisfied by this standing
+authority. The exact boundary remains an engineering and evidence control, not
+a permission checkpoint.
+
 This covers planning, dispatch, implementation, tests, review, recovery,
 acceptance, task-branch publication and the next qualifying gate.
 It never self-authorises a generic future candidate or erases an explicit closure.
 When those recorded conditions hold, continue without another permission request.
 
-Pause only for an unplanned material fork, missing user-only choice/action,
-conflicting evidence that changes acceptance, exhausted bounded recovery,
-scope/protected-evidence expansion, or explicit user pause. Routine failures,
-rehydration, receipts, commits, known next steps and passing gate closeouts are
-not permission gates. Full policy: `docs/ariadne-autonomous-continuation.md` and
+Pause only for a genuinely non-inferable unplanned fork between materially
+different user-owned outcomes, a human-only external choice/action, conflicting
+evidence that changes acceptance, exhausted bounded recovery, protected-
+evidence access, work outside the accepted programme sequence, or explicit
+user pause. Gate materiality, missing descendant paperwork, older fresh-
+authority language, routine failures, rehydration, receipts, commits, known
+next steps and passing gate closeouts are not permission gates. Full policy:
+`docs/ariadne-autonomous-continuation.md` and
 `orchestration/harness_settings/autonomous_continuation.yaml`.
 
 When an already-authorised in-scope choice exists, choose the path that
@@ -327,17 +321,20 @@ organisational deployment and production credential lifecycle remain closed.
 The Bernie/Davida seam and first five pairs pass. The Gate -1 containment and
 Gate-zero shared contract also pass; every named intelligent loop remains
 provider-model-required while deterministic labels, proofreading, authority,
-human gates, commands and readback remain independently mandatory. Material
-provider/data/cost, product, write, actuator, update, cloud/IAM, deployment,
-production, release, protected-evidence and protected-ref forks return to Yuri
-unless an active accepted plan has already frozen them exactly.
+human gates, commands and readback remain independently mandatory. For every
+planned provider/data/cost, product, write, actuator, update, deployment or
+release descendant, Sol freezes the narrowest architecture-strengthening
+boundary and proceeds; materiality alone never returns the sequence to Yuri.
+Only non-inferable competing outcomes, human-only actions, protected-evidence
+access or work outside the accepted sequence require attention.
 On 2026-08-03 Yuri replaced the preferred independent Antigravity verifier allocation with Gemini 3.6 Flash/high. It must use a fresh project, an exact bound non-protected worktree, the stable `gemini-3.6-flash-high` slug and explicit `high` effort. It may review repository code, diffs, tests and authored-synthetic evidence only; it receives no implementation ownership, self-acceptance, integration, baton, protected-ref, patient/clinical/product-derived data, deployment, production or release authority, and no silent model fallback is permitted. Its first live review envelope was rejected for duplicate decisions; the fail-closed single-decision repair then received one fresh exact `pass` with 25 independent tests and an unchanged clean candidate at `b439fb5c3bacc20c9b5f664b3af9322cfcdcbd3f`.
 On 2026-08-03 Yuri authorised a durable agent-error register. Revision 14 records 20 bounded known incidents: 15 agent-behavior observations, three harness failures, one repository defect and one transport timeout, with no open incident. AER-0017 is corrected by the accepted evidence-only terminal reconciliation; AER-0018 contains Review 7's rejected duplicate-decision envelope; AER-0019 is corrected by the fresh-Windows-worktree LF/hash proof and Review 9 pass; and AER-0020 preserves the request-contract recovery review whose otherwise clean no-finding report repeated its terminal marker after a background completion notification. Its asynchronous-finalization control then passed in a fresh exact-HEAD worktree with one terminal decision, so AER-0020 is corrected without erasing the rejected envelope. Corrections never erase immutable failure evidence and recurrence is keyed by the full classification composite. Duplicate verifier terminal decisions remain an exact four-occurrence pattern; detached verifier worktrees remain an exact two-occurrence pattern. The AER-0020 control requires every background notification to complete before one final response and forbids a post-decision follow-up while retaining exact-single-decision wrapper admission. AER-0014 activates an executable exact-HEAD/clean/non-protected-branch preflight before verifier receipts or launches. AER-0015 preserves the first Gate -1 review's transport-accounting error. AER-0016 preserves the preflight-blocked A3/B3 reservation, and AER-0017 preserves the provider-contacted terminal child/parent accounting split and adds evidence-only reconciliation. The register drives a controlled correction loop: preserve, classify, apply a narrow control, regress it mechanically, then admit a corrected attempt only after the applicable deterministic and independent gates pass. It is evidence-backed harness learning, not autonomous model fine-tuning or comparative provider/agent quality scoring. Future qualifying rejected reviews, worktree postcondition failures, command-scope breaches, evidence conflicts or worker transports without a closeout must be registered before a corrected attempt is accepted.
 The historical Gate-zero pause above is superseded; Gate zero now passes at
-Continuity 209 / Compass 190 under Yuri's standing authority. Older fresh-decision text binds only unresolved material boundaries
-(including sealed/protected evidence, unspecified provider/data/cost/write/
-release scope or external authority), not routine permission checkpoints. Once
-an active accepted plan resolves one exactly, continue without repeat consent.
+Continuity 209 / Compass 190 under Yuri's standing authority. Older fresh-
+decision text does not bind a planned gate: Sol derives and records its exact
+fail-closed boundary, then continues without repeat consent. Protected evidence,
+human-only external actions and genuinely non-inferable alternatives remain the
+exceptions.
 Yuri then selected the exact historical Sydney Vertex development envelope for
 paired A3/B3: `gemini-2.5-flash`, `bernie-emr4-dev`, the named Bernie service
 account, existing keyless impersonated ADC, `australia-southeast1`, newly
@@ -358,9 +355,11 @@ contract descendant without changing that outer envelope. At exact source HEAD
 admitted Rayleen before Davida with exactly two calls and USD 0.50 reserved.
 Both releases are authored-synthetic and advisory-only; the ledgers are
 consumed, no call followed success and all runtime resources are absent. This
-new result supersedes the historical no-repeat pause only for its completed
-descendant. A4/A5/B4, C4 and every product/read/write/actuator boundary remain
-closed.
+new result supersedes the historical no-repeat pause for its completed
+  descendant. A4 now passes its authored-synthetic development-only product-
+  read/UI descendant. The paired A5.1/B4.1 command descendant is next under
+  standing authority; C4 and later planned boundaries follow through exact
+  derive-freeze-execute descendants rather than fresh-permission pauses.
 Dependabot alerts 5 and 8-15 and CodeQL alerts 295, 272 and 268 have exact evidence-backed dismissed readback matching the durable register under Yuri's consumed disposition authority. Dependabot alert 17 was created after that snapshot: it is registered as `SF-0020`, statically `not_actionable`, and remains native-open/`needs_review`; no dismissal is authorised. PR 70 CodeQL warning 543 and high alert 544 are fixed by source changes and fresh native readback without dismissal; alert 544 is registered as remediated `SF-0021`. The affected development-only dependency resolutions remain in the lockfile; do not force dependency overrides, erase instance history or broaden any disposition without a new register revision and current evidence.
 
 ## 7. Ariadne Operating Rules

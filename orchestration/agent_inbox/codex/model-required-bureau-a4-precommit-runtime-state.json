@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread after A4 acceptance and formatting-only compaction at 473 lines / 72670 bytes / SHA-256 4347a7a6219e2fc8781a2ceca1f19f10f5febdb43ab7a92468f957878a02040f. It records model_required_bureau_a4_product_read_ui_pass and names paired A5.1/B4.1 command planning as the next dependency-satisfied descendant.",
+    "current_authority_allocation": "GPT Sol owns exact boundary derivation, acceptance, recovery, explicit-path task-branch publication and uninterrupted planned continuation. The native independent reviewer supplied read-only veto receipts only and has no acceptance, integration, baton or protected-ref authority. Yuri's standing authority removes ceremonial gate pauses but does not broaden closed provider, patient-data, production, deployment, release or protected surfaces.",
+    "active_plan_and_acceptance": "The accepted A4 plan, threat-model delta, live-local evidence, two occupied attempt chains, provider-free recovery/revalidation evidence, final UI evidence, final independent pass, closeout and Sol acceptance are complete. The independent veto passed 113 tests, both audit chains, 27 artifact and 32 source hashes with no findings; the post-acceptance A4/API/standing-policy/acceptance-index suites pass 116 tests.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary evidence remain sealed. Real patient, clinical, product-derived, participant, production and external-client data; further provider calls; commands/writes before the next exact frozen descendant; actuators; cloud/IAM; deployment; release; Pages and protected refs remain closed. docs/branding and the existing Consultant, Gate-minus-one and A3/B3 pre-push receipt/state files remain user-owned, untracked, untouched and excluded from staging.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at fb3cf995e03d8500c88fca7484fa04aeb0b698d9, aligned with origin task before closeout. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty; accepted standing-policy and A4 changes are unstaged, and the explicitly excluded user-owned paths remain untracked."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_a4_precommit_final",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "All five authoritative sources were restored and reread before explicit-path task-branch publication."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Independent A4.1, pre-occupied source and whole-candidate veto lanes completed with exact durable receipts and no integration authority."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Antigravity worker was dispatched for the final whole-candidate veto."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker was dispatched for this tightly coupled A4 runtime tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY Deep Code fallback was not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane was not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

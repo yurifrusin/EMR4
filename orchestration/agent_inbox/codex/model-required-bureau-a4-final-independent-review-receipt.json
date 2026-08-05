@@ -1,0 +1,191 @@
+{
+  "schema_version": "emr4.model_required_bureau_a4.final_independent_review.v1",
+  "reviewed_on": "2026-08-05",
+  "reviewer": "codex_independent_whole_candidate_a4_veto",
+  "decision": "pass",
+  "independent_read_only_review": true,
+  "provider_called": false,
+  "candidate_result": "model_required_bureau_a4_product_read_ui_pass",
+  "git_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "head": "fb3cf995e03d8500c88fca7484fa04aeb0b698d9",
+    "master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin_master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin_handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs_moved_by_review": false
+  },
+  "tests": {
+    "a4_inherited_and_api_spine_combined": {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_model_required_bureau_a4_product_read.py tests/test_model_required_bureau_a4_ui.py tests/test_model_required_bureau_a4_selector.py tests/test_model_required_bureau_a4_occupied_ui.py tests/test_api_spine_artifacts.py tests/test_raisa_provider_free_session_practitioner_directory_read_bridge.py tests/test_raisa_provider_free_native_diary_application_session_ui_composition.py -q",
+      "collected": 106,
+      "a4_and_inherited_count": 70,
+      "api_spine_artifact_count": 36,
+      "failed": 0
+    },
+    "standing_authority_and_acceptance_index_regression": {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_ariadne_autonomous_continuation.py tests/test_agents_acceptance_index.py -q",
+      "collected": 10,
+      "failed": 0
+    },
+    "final_regression_total": {
+      "collected": 116,
+      "failed": 0
+    },
+    "selector_focused": {
+      "collected_within_a4_suite": 14,
+      "failed": 0
+    },
+    "provider_free_ui_state_machine": {
+      "durable_case_count": 11,
+      "durable_failed_case_count": 0
+    },
+    "ruff": {
+      "scope": "A4 Python application, harness and test sources",
+      "failed": 0
+    },
+    "python_compile_in_memory": {
+      "source_count": 13,
+      "failed": 0
+    },
+    "git_diff_check": {
+      "failed": 0
+    },
+    "durable_artifact_audit": {
+      "canonical_evidence_hashes_valid": true,
+      "audit_hash_chains_valid": 2,
+      "failed": 0
+    }
+  },
+  "reviewed_artifact_hashes": {
+    "orchestration/agent_inbox/codex/model-required-bureau-a4-a41-independent-review-receipt.json": "sha256:094e135c67404c2ed957703485d9a7473eaa6ab1a132606c1b144de3b8b956d8",
+    "orchestration/agent_inbox/codex/model-required-bureau-a4-human-browser-evidence-receipt.json": "sha256:410bedf61a4a63ab9f1c4bccb916c5d450219859eb90e838836fb11b4400e2c2",
+    "orchestration/agent_inbox/codex/model-required-bureau-a4-selector-recovery-source-review-receipt.json": "sha256:019cd088ccc36161c55e8dcef641652cc173cffc52c7592c6e3c1d7e2667e12a",
+    "orchestration/agent_inbox/codex/model-required-bureau-a4-selector-source-review-receipt.json": "sha256:91b901f9c0d7ed8b5718b7d2136f399306d4ee9290e31e0a18d2e6540d331830",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/human-browser-expired-cleared.png": "sha256:33b537920953c31407889763a47e877f1c001bf77196ca011d23e05798ccfa15",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/human-browser-expiry-warning.png": "sha256:2317255c2b4535142aba6828f8c45f833ee9e94b9c6d8fa3c7d2a34f0b3de44d",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/live-local-auth-graphql-postgres-evidence.json": "sha256:93f09bbfbd09bb2708b6fe4fb802d34bf8a384eff814531ca138b9fa11d8182f",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/live-local-browser-backend-postgres-evidence.json": "sha256:c660018eeb4218bcef926e57e4d04c6ba19886221190b42d5c3d528f91d9db5f",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-authored-synthetic-selector-context-recovery-2.json": "sha256:6b10ee3ce014224d9dbbbd00b2547979b3e001e8eb4508e0f343b1b8107e8e3d",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-authored-synthetic-selector-context.json": "sha256:9355ae848ebe6552d4c30143bb26762097199e6642972c84b512ce99623ec195",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-model-selected-projection.png": "sha256:29689210fb5dc92917e3582bb40f855cc8f5fc99d1dc2720b07e065108112a71",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-selector-cost-ledger.json": "sha256:fd637802ff50268494d3208f38e887d5053a5bb2c6130d45926dfe4fe5c0a88e",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-selector-evidence.json": "sha256:f6065ab47bca5985ef82ebbcb5fd2edfb3f422294434d3c4b2a21e643dfbc9c0",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-selector-recovery-cost-ledger.json": "sha256:79047fa639b6b106629d0495537f5fb5945077afe7c6cad98700bdc3f81eef96",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-selector-recovery-evidence.json": "sha256:9e2bfe4caccf8bfa50de896ccc6ea38abc76f8098923e1e5b19326a7c3a3fb60",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-ui-browser-evidence.json": "sha256:52211cad1785b8fd959a856ee07e2e179bf0d3bf87bde457896dbce00cdf86eb",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-ui-revalidated-selector-context.json": "sha256:9a02929bd64b6f24d22698436d429d64b0debceffd5b3df6c68a4c5874b775b7",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-ui-revalidated-selector-evidence.json": "sha256:c1b5ff2d874abc3e25e8e1b763db5160fb2f191b3e1399fd352f8c44588a5b94",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/provider-free-ui-state-machine-evidence.json": "sha256:eb7ad677951c1b25392d270fa130687434a9b0807c976daac87924a4fefb15bb",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/rayleen-a4-selector-attempt-1-occupied-audit.jsonl": "sha256:6bf2db015dfc4bb0d023dd9f589657a6b371e217ae34f827cca3476769b2a534",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/rayleen-a4-selector-attempt-1-occupied-evidence.json": "sha256:de769ded1533ce3bcd540a7fd4d9c1614313b7f528dc4748b2bf2bf448747a88",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/rayleen-a4-selector-attempt-1-occupied-ledger.json": "sha256:80a6f4de32f114936d9f344870b968a3beeaa7c2dc04e2ce68cb9f0d675eb06a",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/rayleen-a4-selector-attempt-1-preflight.json": "sha256:eb4534ca567c442eafb2fffc0b6062549f95eb0a541bbedb5a884cec05f644e3",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/rayleen-a4-selector-attempt-2-occupied-audit.jsonl": "sha256:07d1247131a90c614a26471130dbab915549e4334d7a50af597d19bcd5a468eb",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/rayleen-a4-selector-attempt-2-occupied-evidence.json": "sha256:82da1ba3e4883ee6d8f7b722b7f0cb8ff419fc4ed011f40140772330bca875bb",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/rayleen-a4-selector-attempt-2-occupied-ledger.json": "sha256:e57090c192d8de04f3543da0276fefbf76023fc38c581aee39bf5bf367da21ad",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/rayleen-a4-selector-attempt-2-preflight.json": "sha256:16b7e08f49230b9bc062cf5e98a090b161d4d1993f831dff39c031b9954435fb"
+  },
+  "reviewed_source_hashes": {
+    "AGENTS.md": "sha256:4347a7a6219e2fc8781a2ceca1f19f10f5febdb43ab7a92468f957878a02040f",
+    "app/config.py": "sha256:120e1830fdf44da4694edb0a81787b50e7da17f4a77ca302199da78585e7829f",
+    "app/graphql/native_diary_rayleen_waiting_room.py": "sha256:0eb3900e31b2a68f1bcdc09799b7ac5448674c243e8767968c2d57b22ea7fd71",
+    "app/services/application_auth_persistence.py": "sha256:1dbfa4474178490b19c2332ebac29875641c3ea17742afe77f40aa56189f064b",
+    "app/services/application_auth_rayleen_read_database_role.py": "sha256:056b5ddc062e6ed80ac84d90af7a1c0f96ab7ca0fbdd861fd1c4fedad9af172b",
+    "app/services/application_auth_rayleen_read_operational.py": "sha256:491b52d74626420f336fc6f166938707c13e60a29cf7ce60378a6e42bc76463c",
+    "app/services/application_auth_rayleen_waiting_room.py": "sha256:8ccc5e5893d82625ce4edf0c8a6e53f1c314eaed265b93e2ee2fa7d50e7159c9",
+    "app/services/application_auth_runtime.py": "sha256:6ba125ce963e79634f0321cd0867655deb4dbf7f1b086bda49ebe529cfa3738f",
+    "app/services/diary/rayleen_waiting_room_projection.py": "sha256:e06719bbf3438c572364b65cd64fad01feee4a0dc2cc153f0699accc773b3569",
+    "docs/ariadne-autonomous-continuation.md": "sha256:5019a7c96bdf79547e810f1b0dd532a75577813b161aed5a91a2ffada8ff352f",
+    "docs/diary/diary.css": "sha256:8c771909aacb68f4adaf993624c7c8554f7b04c056b882f7b8d9eb9f3a17c664",
+    "docs/diary/diary.html": "sha256:3a90948bd80a59039b9d5c30c4b75dc59067793ca01faf9b9136d2ff69606777",
+    "docs/diary/diary.js": "sha256:cc2d5546bce7402de0df10291508e6f9708e56ae485e9a640503a9d187f66fdf",
+    "docs/diary/rayleen-waiting-room-projection.mjs": "sha256:98a96fae4cde5f72e87b8e0d92ec1d0ce4c784ac18065108f570ac925d487538",
+    "docs/emr4-model-required-bureau-a4-product-read-ui-closeout.md": "sha256:006b755d7db9f3466df8c543485fd2db635f92a7372e25edc43b360e777e16f7",
+    "docs/emr4-model-required-bureau-a4-product-read-ui-plan.md": "sha256:d6206c91af36646dad6f9e507accc94ee43243eab8efe82f525541ab358f1876",
+    "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md": "sha256:003db835ce58b355aae276e8fbd19ba7e93b781c9f0fb74d112079c6c32d1a0b",
+    "docs/security/emr4-model-required-bureau-a4-product-read-ui-threat-model-delta.md": "sha256:31e62454da3190c0b6b9384e8a65cf92b7384aec302b448f0a262bd1e0ca4fb7",
+    "implementation_plan.md": "sha256:556171e8247cde96a1dd186572df87f048833c7a5a1de3edf6030d2b7d5752c2",
+    "orchestration/harness_settings/autonomous_continuation.yaml": "sha256:094c1e0894cd2fb544114348ed03cc31d9b55cd310e7eca61acec5ec332e333f",
+    "scripts/model_required_bureau_a4_live_local_acceptance.py": "sha256:5f4b27b9a01b0ff115c5ccd95f61fd284197a4e5901fa6bdab3fdf9789ea4449",
+    "scripts/model_required_bureau_a4_occupied_ui_acceptance.py": "sha256:0e88957a54064b1c981fbae4b98f9e52e3a8186582eb1ee31894235f112220de",
+    "scripts/model_required_bureau_a4_selector_broker.py": "sha256:eb236cfc8a596e6bb7f12c23a7641134528c47310d00951de2244a6f438afad9",
+    "scripts/model_required_bureau_a4_selector_contracts.py": "sha256:d9be3fb2a3538804471c82eecd5080d8c3c57d0af7c8a2929fa0d1bf79565c89",
+    "scripts/model_required_bureau_a4_selector_live.py": "sha256:8cafd390949949141bbcf8f67f0ec48f46646f0cd63e147785ccb29c4a4d0bd6",
+    "scripts/model_required_bureau_a4_ui_acceptance.mjs": "sha256:01ca221eec5638cfa46d4617d37f8414ba0a90ac2807db5387aaaf623d93440c",
+    "tests/test_ariadne_autonomous_continuation.py": "sha256:b4409fe9be8530082f10c53986325d20b92f881a149dab1a032350ef9acfffca",
+    "tests/test_model_required_bureau_a4_occupied_ui.py": "sha256:ed1247b2d00d2f474f78d0beee6b32b5f35b994905e5de03bb67c3c1a0e4b45f",
+    "tests/test_model_required_bureau_a4_product_read.py": "sha256:5a90f9cafe17745b88f634e2c7df510001f94e08c7fb2ec1c4af46ca951d168b",
+    "tests/test_model_required_bureau_a4_selector.py": "sha256:89b40103c4fb889d33aeccc4270f878a77c6838264e2d95554e0ae0e32f774a1",
+    "tests/test_model_required_bureau_a4_ui.py": "sha256:1d6b8797d2ecbbc0371f3847f38c43ebb07853811d250d4e5516ba2b08b9fefd",
+    "tests/test_raisa_provider_free_native_diary_application_session_ui_composition.py": "sha256:16a8debb39f8b0b89d2d8b06c05ca0a378ef77c69b8670b29486411c96fbebb2",
+    "tests/test_raisa_provider_free_session_practitioner_directory_read_bridge.py": "sha256:0a2d2a861b828594f9aebe523918475112ab9d77d5ab9f90feda520c42cc5c2a"
+  },
+  "protected_workspace_snapshot": {
+    "docs_branding_file_count": 5,
+    "docs_branding_tree_manifest_sha256": "sha256:e28e597058c90b3f39beeffd2ca54ae75ebaac74eb95dbcce2bd7e6c0b9ebb09",
+    "consultant_receipt_sha256": "sha256:34823205a0e5afee18091477e13484907cfb0731a722c26682f08c618b9b6620",
+    "consultant_runtime_state_sha256": "sha256:2f041f0f8bc2638d0b7f8af596ba680090725b25c85fd0006c6de0d6cb9ddd48",
+    "a3_b3_receipt_sha256": "sha256:a4797c28216a7e3e61e51a316c8b898695ef231ff7605c8f8810b12cc7b2bfb0",
+    "a3_b3_runtime_state_sha256": "sha256:1a8f63a989df762df7198d5086f8e7ae511692edfd22a5d57d0d9786e0a6d00a",
+    "gate_minus_one_receipt_sha256": "sha256:c487e766ae9800851e12a9cc9e3d2ba4063bfb870c7857d0ecf8c4db8f463fba",
+    "gate_minus_one_runtime_state_sha256": "sha256:c3a97620ccd0c6363f7dabefb1b0c2cdf472e74e025f70621aebb2a16e71117d"
+  },
+  "canonicalization_reconciliation": {
+    "repository_json_eol_contract": "lf",
+    "semantic_change": false,
+    "canonical_live_local_auth_graphql_postgres_evidence_sha256": "sha256:93f09bbfbd09bb2708b6fe4fb802d34bf8a384eff814531ca138b9fa11d8182f",
+    "historical_pre_normalization_live_local_auth_sha256": "sha256:ce6c265d12e10b861b2e31923b7def56041c9923277befdafcd3fc0724147110",
+    "canonical_live_local_browser_backend_postgres_evidence_sha256": "sha256:c660018eeb4218bcef926e57e4d04c6ba19886221190b42d5c3d528f91d9db5f",
+    "historical_pre_normalization_live_local_browser_sha256": "sha256:b866c130b4785d28fe8b3c1e1a1b99c21d6a8ccbca809b8b4eb5144bd4e4c597",
+    "historical_a4_1_receipts_retained_as_lineage": true
+  },
+  "owned_cleanup_verification": {
+    "validated_a4_https_server_trees_stopped": 5,
+    "validated_a4_processes_stopped": 15,
+    "validated_a4_ports": [8765, 8766, 8767, 8768, 8769],
+    "owned_tls_directories_removed": 2,
+    "owned_tls_files_removed": 4,
+    "matching_processes_after_cleanup": 0,
+    "matching_listeners_after_cleanup": 0,
+    "owned_tls_directories_after_cleanup": 0
+  },
+  "boundary_checks": {
+    "active_plan_threat_model_and_closeout_consistent": true,
+    "a4_1_exact_live_browser_backend_postgres_label": true,
+    "a4_1_truth_unchanged_and_owned_cleanup_complete": true,
+    "a4_1_provider_command_and_write_counts_zero": true,
+    "selector_source_veto_receipts_bound": true,
+    "first_occupied_attempt_http_200_stop_then_selector_not_grounded": true,
+    "first_occupied_attempt_zero_release": true,
+    "one_materially_distinct_same_fact_singleton_correction": true,
+    "second_occupied_attempt_proofreader_admitted": true,
+    "exact_total_provider_calls_two": true,
+    "exact_total_reserved_cost_usd_0_50": true,
+    "single_use_ledgers_consumed": true,
+    "no_call_after_admission": true,
+    "deterministic_grounding_freshness_and_authority_gates_unchanged": true,
+    "original_two_minute_lease_not_extended_or_ignored": true,
+    "provider_free_revalidation_selected_appointment_unchanged": true,
+    "provider_free_revalidation_practitioner_unchanged": true,
+    "provider_free_revalidation_waiting_area_unchanged": true,
+    "provider_calls_during_revalidation_zero": true,
+    "final_ui_loopback_https": true,
+    "final_ui_route_interception_false": true,
+    "final_ui_console_page_http_and_request_failure_arrays_empty": true,
+    "final_ui_server_and_temporary_tls_cleanup_complete": true,
+    "canonical_lf_evidence_files_bound": true,
+    "historical_pre_normalization_receipts_preserved_as_lineage": true,
+    "final_whole_candidate_staged_and_worktree_blobs_match": true,
+    "patient_or_clinical_data_used_by_review": false,
+    "product_database_accessed_by_review": false,
+    "runtime_or_product_write_by_review": false,
+    "provider_or_credential_access_by_review": false,
+    "deployment_release_or_pages_action_by_review": false,
+    "protected_refs_moved_by_review": false,
+    "protected_user_files_touched_or_staged_by_review": false,
+    "claims_limited_to_authored_synthetic_development_evidence": true,
+    "no_production_real_patient_clinical_safety_sovereignty_or_release_claim": true
+  },
+  "findings": []
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/model-required-bureau-a4-single-use-ledger.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ledger_id", "attempt_id", "lane", "policy_id", "status", "maximum_provider_calls", "provider_calls_consumed", "reserved_cost_usd", "fallback_permitted"],
+  "properties": {
+    "schema_version": {"const": "emr4.model_required_bureau_a4.single_use_ledger.v1"},
+    "ledger_id": {"type": "string", "pattern": "^ledger-a4-rayleen-selector-"},
+    "attempt_id": {"type": "string", "pattern": "^a4-rayleen-selector-"},
+    "lane": {"const": "rayleen_a4_selector"},
+    "policy_id": {"const": "emr4-model-required-bureau-a4-sydney-selector-v1"},
+    "status": {"enum": ["open", "consumed"]},
+    "maximum_provider_calls": {"enum": [0, 1]},
+    "provider_calls_consumed": {"enum": [0, 1]},
+    "reserved_cost_usd": {"enum": [0, 0.25]},
+    "fallback_permitted": {"const": false}
+  }
+}

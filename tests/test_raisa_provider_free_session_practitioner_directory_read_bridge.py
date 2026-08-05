@@ -183,6 +183,9 @@ def test_product_read_role_is_finite_exact_column_and_non_inheriting() -> None:
     assert "select (id, practice_id, role, practitioner_id, is_active)" in sql
     assert "first_name, last_name, specialty, default_location_id" in sql
     assert "select (id, practice_id, name, is_active)" in sql
+    assert "public.practices" not in sql
+    assert "public.appointments" not in sql
+    assert "public.appointment_audit_log" not in sql
     assert all(
         prohibited not in sql
         for prohibited in (
@@ -192,6 +195,13 @@ def test_product_read_role_is_finite_exact_column_and_non_inheriting() -> None:
             "hpi_i",
             "email",
             "phone",
+            "patient_id",
+            "patient_name_provisional",
+            "reason",
+            "notes",
+            "confirmed_by_user_id",
+            "status_before",
+            "confirmed_warnings",
             "insert on",
             "update on",
             "delete on",

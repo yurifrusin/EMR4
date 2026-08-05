@@ -1,0 +1,174 @@
+{
+  "actuator_count": 0,
+  "candidate_runtime_provider_call_count": 2,
+  "cloud_or_iam_mutation_count": 0,
+  "command_count": 0,
+  "credential_or_token_retained": false,
+  "database_access_count": 0,
+  "deployment_count": 0,
+  "evidence_hash": "sha256:8bb29537ff42b87e4c2df4b13973df3cbd6169e5ab8612c51cc635faaa98185c",
+  "evidence_label": "occupied_authored_synthetic_live_local_product_read_ui",
+  "execution_context_hash": "sha256:9a02929bd64b6f24d22698436d429d64b0debceffd5b3df6c68a4c5874b775b7",
+  "execution_context_materialized_fresh": true,
+  "execution_context_path": "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-ui-revalidated-selector-context.json",
+  "fallback_count": 0,
+  "original_attempt_evidence_hash": "sha256:ee1c7666fcd115f8a5513827a9a714cab951ba2e72848e5ee708461dce3aa54b",
+  "original_occupied_selector_evidence_hash": "sha256:9e2bfe4caccf8bfa50de896ccc6ea38abc76f8098923e1e5b19326a7c3a3fb60",
+  "original_occupied_selector_evidence_path": "orchestration/continuity/model-required-bureau-a4-product-read-ui/occupied-selector-recovery-evidence.json",
+  "original_release_hash": "sha256:59c4990ced86c015d0b1a6c7be2424187c4852aaaaf0a23216e6fd3fe12f5ffb",
+  "patient_or_clinical_data_count": 0,
+  "protected_ref_movement_count": 0,
+  "provider_calls_during_revalidation": 0,
+  "provider_tool_call_count": 0,
+  "raw_prompt_retained": false,
+  "raw_provider_response_retained": false,
+  "result": "model_required_bureau_a4_occupied_selector_ui_revalidation_pass",
+  "schema_version": "emr4.model_required_bureau_a4.occupied_ui_revalidation.v1",
+  "selection_changed": false,
+  "selector_admitted": true,
+  "selector_still_unique_and_grounded": true,
+  "ui_release": {
+    "authority_ceiling": {
+      "command": false,
+      "confirmation": false,
+      "database": false,
+      "product_read": false,
+      "tool": false,
+      "write": false
+    },
+    "evidence_mode": "proofreader_admitted_display_projection",
+    "response": {
+      "data": {
+        "rayleenWaitingRoom": {
+          "backendFacts": [
+            {
+              "appointmentId": "a4000000-0000-4000-8000-000000000011",
+              "arrivedAt": "2026-08-04T23:19:42Z",
+              "label": {
+                "authorityCeiling": "data_only",
+                "confidentialityReaders": [
+                  "authorized_reception_surface"
+                ],
+                "expiresAt": "2026-08-05T00:01:42Z",
+                "freshnessState": "fresh",
+                "integrityPrincipals": [
+                  "backend_truth"
+                ],
+                "observedAt": "2026-08-04T23:59:42Z",
+                "sourceIds": [
+                  "backend:appointment:a4000000-0000-4000-8000-000000000011"
+                ]
+              },
+              "patientDisplayToken": "synthetic:patient-a08e75075c67",
+              "practitionerId": "a4000000-0000-4000-8000-000000000021",
+              "scheduledAt": "2026-08-04T23:14:42Z",
+              "status": "arrived",
+              "waitingAreaId": "a4000000-0000-4000-8000-000000000031"
+            }
+          ],
+          "contextRevision": 1836412047,
+          "derivedSignals": [
+            {
+              "appointmentId": "a4000000-0000-4000-8000-000000000011",
+              "booleanValue": null,
+              "derivedBy": "deterministic_projection_engine",
+              "integerValue": 40,
+              "kind": "elapsed_wait_minutes",
+              "label": {
+                "authorityCeiling": "data_only",
+                "confidentialityReaders": [
+                  "authorized_reception_surface"
+                ],
+                "expiresAt": "2026-08-05T00:01:42Z",
+                "freshnessState": "fresh",
+                "integrityPrincipals": [
+                  "backend_truth"
+                ],
+                "observedAt": "2026-08-04T23:59:42Z",
+                "sourceIds": [
+                  "backend:appointment:a4000000-0000-4000-8000-000000000011"
+                ]
+              },
+              "textValue": null
+            },
+            {
+              "appointmentId": "a4000000-0000-4000-8000-000000000011",
+              "booleanValue": null,
+              "derivedBy": "deterministic_projection_engine",
+              "integerValue": null,
+              "kind": "threshold_band",
+              "label": {
+                "authorityCeiling": "data_only",
+                "confidentialityReaders": [
+                  "authorized_reception_surface"
+                ],
+                "expiresAt": "2026-08-05T00:01:42Z",
+                "freshnessState": "fresh",
+                "integrityPrincipals": [
+                  "backend_truth"
+                ],
+                "observedAt": "2026-08-04T23:59:42Z",
+                "sourceIds": [
+                  "backend:appointment:a4000000-0000-4000-8000-000000000011"
+                ]
+              },
+              "textValue": "30_minutes_or_more"
+            },
+            {
+              "appointmentId": "a4000000-0000-4000-8000-000000000011",
+              "booleanValue": null,
+              "derivedBy": "deterministic_projection_engine",
+              "integerValue": 1,
+              "kind": "longest_wait_rank",
+              "label": {
+                "authorityCeiling": "data_only",
+                "confidentialityReaders": [
+                  "authorized_reception_surface"
+                ],
+                "expiresAt": "2026-08-05T00:01:42Z",
+                "freshnessState": "fresh",
+                "integrityPrincipals": [
+                  "backend_truth"
+                ],
+                "observedAt": "2026-08-04T23:59:42Z",
+                "sourceIds": [
+                  "backend:appointment:a4000000-0000-4000-8000-000000000011"
+                ]
+              },
+              "textValue": null
+            }
+          ],
+          "excludedFieldClasses": [
+            "contact_details",
+            "national_identifiers",
+            "clinical_text",
+            "appointment_notes",
+            "unrestricted_history",
+            "credentials",
+            "raw_provider_data"
+          ],
+          "expiresAt": "2026-08-05T00:01:42Z",
+          "frameId": "a4000000-0000-4000-8000-000000000001",
+          "generatedAt": "2026-08-04T23:59:42Z",
+          "locationId": "a4000000-0000-4000-8000-000000000003",
+          "practiceId": "a4000000-0000-4000-8000-000000000002",
+          "projection": {
+            "authorityCeiling": "data_only",
+            "focusAppointmentId": "a4000000-0000-4000-8000-000000000011",
+            "kind": "LONGEST_WAIT",
+            "practitionerId": "a4000000-0000-4000-8000-000000000021",
+            "selectedCount": 1,
+            "selectorProvenance": "model_selected_proofreader_admitted",
+            "waitingAreaId": "a4000000-0000-4000-8000-000000000031",
+            "writesAuthorized": false
+          },
+          "reader": "authorized_reception_surface",
+          "schemaVersion": "emr4.waiting_room_context_frame.v1"
+        }
+      }
+    },
+    "schema_version": "emr4.rayleen.a4.selector_release.v1",
+    "status": "display_projection_only"
+  },
+  "write_count": 0
+}

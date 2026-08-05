@@ -1,4 +1,4 @@
-schema_version: ariadne.autonomous_continuation.v2
+schema_version: ariadne.autonomous_continuation.v3
 default_posture: continue_without_user_permission
 applies_when: [verified_sprint_is_active, failure_is_inside_existing_mandate, no_user_owned_decision_is_required]
 policy_decision:
@@ -11,12 +11,25 @@ standing_programme_authority:
     - live_current_baton_plan
     - accepted_descendant_plans
     - dependency_satisfied_successor_gates
-  gate_is_executable_only_when_all:
-    - objective_inputs_outputs_are_exact
-    - data_provider_identity_region_cost_and_licence_are_exact_where_applicable
-    - allowed_side_effects_and_forbidden_surfaces_are_exact
-    - evidence_labels_acceptance_and_stop_conditions_are_exact
-    - no_explicit_closure_or_user_owned_choice_remains_unresolved
+  planned_gate_boundary_rule:
+    exact_descendant_plan_already_exists: execute_without_user_pause
+    exact_descendant_plan_does_not_yet_exist: conductor_freezes_narrowest_fail_closed_boundary_then_executes
+    material_gate_classification_alone_is_never_a_pause_condition: true
+    fresh_authority_language_in_older_plans_is_satisfied_by_standing_authority: true
+  conductor_boundary_derivation_must_fix:
+    - objective_inputs_outputs
+    - data_provider_identity_region_cost_and_licence_where_applicable
+    - allowed_side_effects_and_forbidden_surfaces
+    - evidence_labels_acceptance_recovery_and_stop_conditions
+    - claim_boundary_and_cleanup
+  conductor_boundary_derivation_defaults:
+    - development_before_production
+    - authored_synthetic_before_real_or_product_derived_data
+    - read_before_write
+    - default_off_before_default_on
+    - smallest_practice_role_resource_scope
+    - deterministic_authority_and_readback
+    - architecture_strengthening_path
   authorizes:
     - planning_and_exact_worker_dispatch
     - implementation_and_deterministic_tests
@@ -24,12 +37,15 @@ standing_programme_authority:
     - bounded_recovery_and_acceptance
     - explicit_path_staging_and_task_branch_commit_push
     - immediate_transition_to_next_qualifying_gate
+    - freeze_narrowest_safe_descendant_boundary_for_each_planned_gate
+    - execute_planned_product_read_write_provider_and_actuator_descendants_without_ceremonial_reauthorization
   does_not_self_authorize:
-    - generic_future_candidate
-    - unresolved_provider_model_data_cost_or_licence_boundary
-    - unresolved_clinical_product_write_deployment_release_or_protected_boundary
+    - unplanned_future_candidate_outside_the_accepted_sequence
+    - noninferable_choice_between_competing_product_clinical_privacy_security_regulatory_architecture_authority_or_economic_outcomes
+    - human_only_external_action_or_credential_change
     - protected_evidence_access
-    - scope_outside_active_accepted_plan
+    - real_patient_or_clinical_data_without_a_separately_accepted_data_governance_boundary
+    - scope_outside_the_accepted_programme_sequence
 architecture_strengthening_choice_policy:
   owner: conductor
   applies_only_inside_frozen_material_boundary: true
@@ -56,13 +72,18 @@ execution_limits:
   progress_observation_preferred: true
 pause_for_user_only_when:
   - explicit_user_stop_pause_or_redirect
-  - unplanned_material_product_clinical_privacy_security_regulatory_architecture_authority_or_economic_fork
-  - next_gate_has_unresolved_user_owned_choice_or_material_boundary
+  - unplanned_noninferable_product_clinical_privacy_security_regulatory_architecture_authority_or_economic_fork
+  - two_or_more_in_scope_paths_have_materially_different_user_owned_outcomes_and_architecture_strengthening_does_not_select_one
   - conflicting_valid_evidence_changes_acceptance_meaning
   - bounded_in_scope_recovery_is_exhausted
   - required_external_credential_or_human_only_action
-  - action_would_expand_beyond_active_accepted_plan_or_access_protected_evidence
+  - action_would_expand_beyond_the_accepted_programme_sequence_or_access_protected_evidence
 must_not_pause_for:
+  - material_gate_classification_alone
+  - older_plan_language_requiring_fresh_authority_for_a_planned_gate
+  - absence_of_a_preexisting_descendant_plan_when_the_narrowest_fail_closed_boundary_is_derivable
+  - conductor_freezing_an_exact_architecture_strengthening_boundary
+  - planned_product_read_write_provider_or_actuator_gate_classification
   - dependency_satisfied_transition_to_next_planned_gate
   - fresh_authority_request_for_already_planned_gate
   - successful_gate_closeout_with_known_executable_successor

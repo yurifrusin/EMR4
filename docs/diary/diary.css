@@ -1810,6 +1810,186 @@ html, body {
   }
 }
 
+/* Default-off Rayleen waiting-room product-read projection. */
+.btn-rayleen-toggle {
+  min-height: 36px;
+  border: 1px solid #356c63;
+  border-radius: 8px;
+  background: #eff8f5;
+  color: #173f39;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-rayleen-toggle[aria-expanded="true"] {
+  background: #dcefe9;
+  box-shadow: 0 0 0 2px rgba(53, 108, 99, 0.18);
+}
+
+.rayleen-waiting-room-panel {
+  width: min(380px, 100%);
+  min-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fbfdfc;
+  border-left: 1px solid #bfd5cf;
+  box-shadow: -4px 0 16px rgba(21, 58, 52, 0.09);
+  color: #173f39;
+  z-index: 55;
+}
+
+.rayleen-waiting-room-panel.hidden {
+  display: none !important;
+}
+
+.rayleen-waiting-room-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid #d7e6e2;
+}
+
+.rayleen-waiting-room-header h2,
+.rayleen-waiting-room-header p {
+  margin: 0;
+}
+
+.rayleen-waiting-room-kicker {
+  color: #467068;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#rayleen-waiting-room-provenance {
+  margin-top: 4px;
+  color: #536b66;
+  font-size: 0.78rem;
+}
+
+.rayleen-waiting-room-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.rayleen-waiting-room-actions button {
+  min-width: 44px;
+  min-height: 40px;
+  border: 1px solid #9ebbb4;
+  border-radius: 7px;
+  background: #fff;
+  color: #173f39;
+  cursor: pointer;
+}
+
+.rayleen-waiting-room-status {
+  margin: 0;
+  padding: 10px 16px;
+  background: #eef6f3;
+  border-bottom: 1px solid #d7e6e2;
+  color: #385d56;
+  font-size: 0.84rem;
+}
+
+.rayleen-waiting-room-status.is-expiring {
+  padding-left: 18px;
+  background: #fff4ce;
+  border-bottom-color: #c98712;
+  box-shadow: inset 5px 0 0 #c98712;
+  color: #633c00;
+  font-weight: 800;
+}
+
+.rayleen-waiting-room-status.is-expired {
+  background: #fde8e7;
+  border-bottom-color: #b84a42;
+  box-shadow: inset 5px 0 0 #b84a42;
+  color: #772d28;
+  font-weight: 800;
+}
+
+.rayleen-waiting-room-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.rayleen-waiting-room-empty {
+  margin: 12px 4px;
+  color: #536b66;
+}
+
+.rayleen-waiting-room-card {
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid #c8dcd7;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.rayleen-waiting-room-content[data-freshness-state="expired"] .rayleen-waiting-room-card {
+  display: none !important;
+}
+
+.rayleen-waiting-room-card h3 {
+  margin: 0 0 7px;
+  font-size: 0.95rem;
+}
+
+.rayleen-waiting-room-card dl {
+  display: grid;
+  grid-template-columns: minmax(92px, auto) 1fr;
+  gap: 4px 10px;
+  margin: 0;
+  font-size: 0.82rem;
+}
+
+.rayleen-waiting-room-card dt {
+  color: #607973;
+}
+
+.rayleen-waiting-room-card dd {
+  margin: 0;
+  font-weight: 650;
+}
+
+.rayleen-waiting-room-panel footer {
+  padding: 10px 16px;
+  border-top: 1px solid #d7e6e2;
+  color: #536b66;
+  font-size: 0.75rem;
+}
+
+.btn-rayleen-toggle:focus-visible,
+.rayleen-waiting-room-panel button:focus-visible {
+  outline: 3px solid #146b5c;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .rayleen-waiting-room-panel {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(380px, 100%);
+    min-width: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .rayleen-waiting-room-panel {
+    width: 100%;
+  }
+
+  .rayleen-waiting-room-header {
+    padding: 12px;
+  }
+}
+
 /* ─── NON-BOOKABLE COLUMN STYLING ──────────────── */
 .diary-column.col-non-bookable {
   background-color: var(--grey-1);

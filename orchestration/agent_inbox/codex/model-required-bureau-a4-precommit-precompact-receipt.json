@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted A4 plan, threat-model delta, live-local evidence, two occupied attempt chains, provider-free recovery/revalidation evidence, final UI evidence, final independent pass, closeout and Sol acceptance are complete. The independent veto passed 113 tests, both audit chains, 27 artifact and 32 source hashes with no findings. The next exact work is a freshly rehydrated paired A5.1 Rayleen and B4.1 Davida command descendant.",
+    "current_authority_allocation": "GPT Sol owns exact boundary derivation, acceptance, recovery, explicit-path task-branch publication and uninterrupted planned continuation. The native independent reviewer supplied read-only veto receipts only and has no acceptance, integration, baton or protected-ref authority. Yuri's standing authority removes ceremonial gate pauses but does not broaden closed provider, patient-data, production, deployment, release or protected surfaces.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at fb3cf995e03d8500c88fca7484fa04aeb0b698d9, aligned with origin task before closeout. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty; accepted standing-policy and A4 changes are unstaged, and the explicitly excluded user-owned paths remain untracked.",
+    "live_handover_current_baton": "AGENTS.md was reread after A4 acceptance at 493 lines / 72692 bytes / SHA-256 65ea6f83715e60a30a98e39e97880d6c84aac7bcff4446d65227a02d575bd7ca. It records model_required_bureau_a4_product_read_ui_pass and names paired A5.1/B4.1 command planning as the next dependency-satisfied descendant.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary evidence remain sealed. Real patient, clinical, product-derived, participant, production and external-client data; further provider calls; commands/writes before the next exact frozen descendant; actuators; cloud/IAM; deployment; release; Pages and protected refs remain closed. docs/branding and the existing Consultant, Gate-minus-one and A3/B3 pre-push receipt/state files remain user-owned, untracked, untouched and excluded from staging."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

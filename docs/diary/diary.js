@@ -2720,6 +2720,7 @@ function hideAuthBanner() {
 }
 
 function clearExpiredAuthToken() {
+  closeRayleenWaitingRoom({ restoreFocus: false });
   token = null;
   currentUserRole = null;
   currentUserRoleToken = null;
@@ -2798,6 +2799,257 @@ const APPLICATION_SESSION_PRACTITIONER_FAILURE =
   "application_session_practitioner_directory_failure";
 let applicationSessionPractitionerDirectory = null;
 let applicationSessionPractitionerReader = null;
+
+const RAYLEEN_WAITING_ROOM_BOOTSTRAP_GLOBAL = "__EMR4_RAYLEEN_WAITING_ROOM__";
+let rayleenWaitingRoomProjection = null;
+let rayleenWaitingRoomReader = null;
+
+function getRayleenWaitingRoomBootstrap() {
+  return window[RAYLEEN_WAITING_ROOM_BOOTSTRAP_GLOBAL];
+}
+
+function isRayleenWaitingRoomEnabled() {
+  const bootstrap = getRayleenWaitingRoomBootstrap();
+  return (
+    isLocalHarnessCapabilityEnabled("rayleen_waiting_room")
+    && currentUserRole === "Receptionist"
+    && bootstrap !== null
+    && typeof bootstrap === "object"
+    && !Array.isArray(bootstrap)
+    && bootstrap.enabled === true
+  );
+}
+
+function setRayleenWaitingRoomStatus(message, tone = "neutral") {
+  const statusEl = document.getElementById("rayleen-waiting-room-status");
+  if (!statusEl) return;
+  statusEl.textContent = String(message || "");
+  statusEl.classList.toggle("is-expiring", tone === "expiring");
+  statusEl.classList.toggle("is-expired", tone === "expired");
+  statusEl.setAttribute("aria-live", tone === "neutral" ? "polite" : "assertive");
+}
+
+function clearRayleenWaitingRoomContent(
+  message = "Open the view to read the current waiting room.",
+  freshnessState = "empty"
+) {
+  const content = document.getElementById("rayleen-waiting-room-content");
+  if (!content) return;
+  content.dataset.freshnessState = freshnessState;
+  content.replaceChildren();
+  const empty = document.createElement("p");
+  empty.className = "rayleen-waiting-room-empty";
+  empty.textContent = message;
+  content.appendChild(empty);
+}
+
+function expireRayleenWaitingRoomFrame() {
+  clearRayleenWaitingRoomContent(
+    "This Rayleen projection expired. Refresh to read current waiting-room truth.",
+    "expired"
+  );
+  setRayleenWaitingRoomStatus(
+    "Expired — stale cards have been removed. Refresh for a current read.",
+    "expired"
+  );
+}
+
+function warnRayleenWaitingRoomFrameExpiry() {
+  const content = document.getElementById("rayleen-waiting-room-content");
+  if (content) content.dataset.freshnessState = "expiring";
+  setRayleenWaitingRoomStatus(
+    "Attention — this read expires in 30 seconds. Refresh now to keep it current.",
+    "expiring"
+  );
+}
+
+function invalidateAndResetRayleenWaitingRoom() {
+  if (rayleenWaitingRoomProjection !== null) {
+    rayleenWaitingRoomProjection.invalidateSession();
+  }
+  rayleenWaitingRoomProjection = null;
+  rayleenWaitingRoomReader = null;
+}
+
+function updateRayleenWaitingRoomAvailability() {
+  const button = document.getElementById("btn-rayleen-waiting-room");
+  const available = isRayleenWaitingRoomEnabled();
+  if (button) button.classList.toggle("hidden", !available);
+  if (!available) closeRayleenWaitingRoom({ restoreFocus: false });
+  return available;
+}
+
+async function getRayleenWaitingRoomProjection() {
+  const bootstrap = getRayleenWaitingRoomBootstrap();
+  const module = await import("./rayleen-waiting-room-projection.mjs?v=2");
+  module.assertRayleenWaitingRoomBootstrap(bootstrap);
+  if (rayleenWaitingRoomProjection === null) {
+    rayleenWaitingRoomProjection = module.createRayleenWaitingRoomProjection(bootstrap);
+    rayleenWaitingRoomReader = bootstrap.readFixedWaitingRoom;
+  } else {
+    if (bootstrap.readFixedWaitingRoom !== rayleenWaitingRoomReader) {
+      throw new Error("rayleen_waiting_room_reader_changed");
+    }
+    const generation = rayleenWaitingRoomProjection.snapshot().sessionGeneration;
+    if (bootstrap.sessionGeneration > generation) {
+      rayleenWaitingRoomProjection.advanceSessionGeneration(bootstrap.sessionGeneration);
+    } else if (bootstrap.sessionGeneration !== generation) {
+      throw new Error("rayleen_waiting_room_generation_stale");
+    }
+  }
+  return rayleenWaitingRoomProjection;
+}
+
+function addRayleenDetail(list, label, value) {
+  const term = document.createElement("dt");
+  term.textContent = label;
+  const detail = document.createElement("dd");
+  detail.textContent = value;
+  list.append(term, detail);
+}
+
+function signalValue(signal) {
+  if (signal.integerValue !== null) return String(signal.integerValue);
+  if (signal.textValue !== null) return signal.textValue.replaceAll("_", " ");
+  if (signal.booleanValue !== null) return signal.booleanValue ? "Yes" : "No";
+  return "Unavailable";
+}
+
+function renderRayleenWaitingRoomFrame(frame) {
+  const content = document.getElementById("rayleen-waiting-room-content");
+  const provenance = document.getElementById("rayleen-waiting-room-provenance");
+  if (!content || !provenance) return;
+  content.dataset.freshnessState = "fresh";
+  content.replaceChildren();
+  provenance.textContent = frame.projection.selectorProvenance === "model_selected_proofreader_admitted"
+    ? "Model-selected, proofreader admitted"
+    : "Deterministic product read";
+  if (frame.backendFacts.length === 0) {
+    clearRayleenWaitingRoomContent(
+      "No active waiting-room appointments are in this projection.",
+      "fresh"
+    );
+  } else {
+    const byAppointment = new Map();
+    frame.derivedSignals.forEach(signal => {
+      if (!byAppointment.has(signal.appointmentId)) byAppointment.set(signal.appointmentId, []);
+      byAppointment.get(signal.appointmentId).push(signal);
+    });
+    frame.backendFacts.forEach(fact => {
+      const card = document.createElement("article");
+      card.className = "rayleen-waiting-room-card";
+      const title = document.createElement("h3");
+      title.textContent = fact.patientDisplayToken;
+      const details = document.createElement("dl");
+      addRayleenDetail(details, "Status", fact.status.replaceAll("_", " "));
+      addRayleenDetail(details, "Scheduled", new Date(fact.scheduledAt).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+      }));
+      const signals = byAppointment.get(fact.appointmentId) || [];
+      signals.forEach(signal => {
+        const label = {
+          elapsed_wait_minutes: "Waiting",
+          threshold_band: "Band",
+          longest_wait_rank: "Wait rank",
+          flow_exception: "Needs review"
+        }[signal.kind] || "Signal";
+        const suffix = signal.kind === "elapsed_wait_minutes" ? " minutes" : "";
+        addRayleenDetail(details, label, `${signalValue(signal)}${suffix}`);
+      });
+      card.append(title, details);
+      content.appendChild(card);
+    });
+  }
+  const generated = new Date(frame.generatedAt).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
+  setRayleenWaitingRoomStatus(
+    `${frame.projection.selectedCount} appointment${frame.projection.selectedCount === 1 ? "" : "s"}; read at ${generated}.`
+  );
+}
+
+async function loadRayleenWaitingRoom() {
+  if (!updateRayleenWaitingRoomAvailability() || !activeLocationId) {
+    setRayleenWaitingRoomStatus("Rayleen view is unavailable for this session or location.");
+    clearRayleenWaitingRoomContent("The ordinary Waiting Room remains available.");
+    return;
+  }
+  const refresh = document.getElementById("btn-refresh-rayleen-waiting-room");
+  if (refresh) refresh.disabled = true;
+  setRayleenWaitingRoomStatus("Reading the current waiting room…");
+  try {
+    const projection = await getRayleenWaitingRoomProjection();
+    const result = await projection.readAndRender(
+      {
+        locationId: activeLocationId,
+        projectionKind: "FULL_QUEUE",
+        practitionerId: null,
+        waitingAreaId: null,
+        focusAppointmentId: null
+      },
+      renderRayleenWaitingRoomFrame,
+      expireRayleenWaitingRoomFrame,
+      warnRayleenWaitingRoomFrameExpiry,
+    );
+    if (!result.ok && !["request_interrupted", "request_superseded"].includes(result.reason)) {
+      clearRayleenWaitingRoomContent("The Rayleen projection could not be admitted. The ordinary Waiting Room is unchanged.");
+      setRayleenWaitingRoomStatus("Read unavailable or stale; nothing was released.");
+    }
+  } catch (_error) {
+    invalidateAndResetRayleenWaitingRoom();
+    clearRayleenWaitingRoomContent("The Rayleen projection is unavailable. The ordinary Waiting Room is unchanged.");
+    setRayleenWaitingRoomStatus("Read unavailable; nothing was released.");
+  } finally {
+    if (refresh) refresh.disabled = false;
+  }
+}
+
+function openRayleenWaitingRoom() {
+  if (!updateRayleenWaitingRoomAvailability()) return;
+  const panel = document.getElementById("rayleen-waiting-room-panel");
+  const button = document.getElementById("btn-rayleen-waiting-room");
+  if (panel) panel.classList.remove("hidden");
+  if (button) button.setAttribute("aria-expanded", "true");
+  loadRayleenWaitingRoom();
+}
+
+function closeRayleenWaitingRoom({ restoreFocus = true } = {}) {
+  const panel = document.getElementById("rayleen-waiting-room-panel");
+  const button = document.getElementById("btn-rayleen-waiting-room");
+  invalidateAndResetRayleenWaitingRoom();
+  if (panel) panel.classList.add("hidden");
+  if (button) button.setAttribute("aria-expanded", "false");
+  clearRayleenWaitingRoomContent();
+  setRayleenWaitingRoomStatus("Rayleen view is closed.");
+  if (restoreFocus && button && !button.classList.contains("hidden")) button.focus();
+}
+
+function handleRayleenWaitingRoomEscape(event) {
+  const panel = document.getElementById("rayleen-waiting-room-panel");
+  if (
+    event.key === "Escape"
+    && panel
+    && !panel.classList.contains("hidden")
+  ) {
+    event.preventDefault();
+    closeRayleenWaitingRoom();
+  }
+}
+
+function initRayleenWaitingRoom() {
+  const button = document.getElementById("btn-rayleen-waiting-room");
+  const refresh = document.getElementById("btn-refresh-rayleen-waiting-room");
+  const close = document.getElementById("btn-close-rayleen-waiting-room");
+  if (button) button.onclick = openRayleenWaitingRoom;
+  if (refresh) refresh.onclick = loadRayleenWaitingRoom;
+  if (close) close.onclick = () => closeRayleenWaitingRoom();
+  document.addEventListener("keydown", handleRayleenWaitingRoomEscape);
+  clearRayleenWaitingRoomContent();
+  updateRayleenWaitingRoomAvailability();
+}
 
 function getApplicationSessionPractitionerBootstrap() {
   return window[APPLICATION_SESSION_PRACTITIONER_BOOTSTRAP_GLOBAL];
@@ -4642,6 +4894,7 @@ async function loadDiaryData(silent = false, options = {}, smokeMode = false) {
 
   hideAuthBanner();
   await ensureCurrentUserRole();
+  updateRayleenWaitingRoomAvailability();
 
   if (!silent) {
     showLoading(true);
@@ -5178,7 +5431,7 @@ async function navigateDiaryForProjection(targetDateKey) {
 
 function scheduleRefresh() {
   if (refreshTimer) clearTimeout(refreshTimer);
-  refreshTimer = setTimeout(() => { loadDiary(true); scheduleRefresh(); }, REFRESH_INTERVAL_MS);
+  refreshTimer = setTimeout(doRefresh, REFRESH_INTERVAL_MS);
 }
 function stopRefresh() {
   if (refreshTimer) clearTimeout(refreshTimer);
@@ -7892,6 +8145,7 @@ async function initBernieReview() {
 // ─── INIT ──────────────────────────────────────────────────
 Office.onReady(() => {
   loadBreakOverrides();
+  initRayleenWaitingRoom();
   document.addEventListener("keydown", handleBernieConfirmShortcut);
 
   setActiveTemplate(activeTemplate);
@@ -10762,6 +11016,7 @@ async function initLocationSelector() {
   locationOptionsLoaded = true;
 
   selectEl.onchange = () => {
+    closeRayleenWaitingRoom({ restoreFocus: false });
     activeLocationId = selectEl.value || null;
     if (activeLocationId) {
       localStorage.setItem(LOCATION_STORAGE_KEY, activeLocationId);

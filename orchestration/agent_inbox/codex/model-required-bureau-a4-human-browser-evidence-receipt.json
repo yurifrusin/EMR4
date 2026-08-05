@@ -1,0 +1,76 @@
+{
+  "schema_version": "emr4.model_required_bureau_a4.human_browser_evidence.v1",
+  "status": "passed",
+  "result": "provider_free_rayleen_a4_current_source_human_browser_pass",
+  "observed_on": "2026-08-05",
+  "origin": "https://127.0.0.1:8769",
+  "route": "/api/v1/application-auth/rayleen/graphql",
+  "transport": "canonical_https_browser",
+  "operator": "Yuri",
+  "data_class": "authored_synthetic",
+  "browser_interception": false,
+  "observations": {
+    "current_cards_rendered": true,
+    "escape_closed_projection": true,
+    "ordinary_diary_sixty_second_refresh_preserved_rayleen_lease": true,
+    "thirty_second_pre_expiry_warning_visible": true,
+    "pre_expiry_warning_tone": "high_contrast_amber",
+    "cards_present_during_warning": true,
+    "cards_removed_at_expiry": true,
+    "expiry_tone": "high_contrast_red",
+    "refresh_recovered_fresh_cards_repeatedly": true,
+    "ordinary_waiting_room_unchanged": true
+  },
+  "screenshots": [
+    {
+      "path": "orchestration/continuity/model-required-bureau-a4-product-read-ui/human-browser-expiry-warning.png",
+      "sha256": "2317255c2b4535142aba6828f8c45f833ee9e94b9c6d8fa3c7d2a34f0b3de44d",
+      "proves": [
+        "visible_thirty_second_warning",
+        "cards_remain_visible_while_fresh",
+        "deterministic_product_read_provenance"
+      ]
+    },
+    {
+      "path": "orchestration/continuity/model-required-bureau-a4-product-read-ui/human-browser-expired-cleared.png",
+      "sha256": "33b537920953c31407889763a47e877f1c001bf77196ca011d23e05798ccfa15",
+      "proves": [
+        "visible_expired_state",
+        "stale_cards_removed",
+        "manual_refresh_available"
+      ]
+    }
+  ],
+  "browser_backend_evidence": {
+    "path": "orchestration/continuity/model-required-bureau-a4-product-read-ui/live-local-auth-graphql-postgres-evidence.json",
+    "sha256": "ce6c265d12e10b861b2e31923b7def56041c9923277befdafcd3fc0724147110",
+    "result": "provider_free_rayleen_a4_live_local_auth_pass",
+    "evidence_label": "live_local_browser_backend_postgres",
+    "bridge_open_count": 3,
+    "required_authorization_audit_count": 3,
+    "appointment_and_audit_truth_unchanged": true,
+    "owned_cleanup_complete": true,
+    "provider_calls": 0,
+    "command_calls": 0,
+    "writes_during_read": 0
+  },
+  "current_ui_source_hashes": {
+    "docs/diary/diary.html": "sha256:3a90948bd80a59039b9d5c30c4b75dc59067793ca01faf9b9136d2ff69606777",
+    "docs/diary/diary.js": "sha256:cc2d5546bce7402de0df10291508e6f9708e56ae485e9a640503a9d187f66fdf",
+    "docs/diary/diary.css": "sha256:8c771909aacb68f4adaf993624c7c8554f7b04c056b882f7b8d9eb9f3a17c664",
+    "docs/diary/rayleen-waiting-room-projection.mjs": "sha256:98a96fae4cde5f72e87b8e0d92ec1d0ce4c784ac18065108f570ac925d487538"
+  },
+  "repaired_failures": [
+    "escape_listener_was_panel_scoped",
+    "refresh_reused_a_fixed_expiry_timestamp",
+    "warning_was_not_visually_salient",
+    "ordinary_diary_sixty_second_refresh_preempted_rayleen_ttl"
+  ],
+  "claims_not_made": [
+    "production_readiness",
+    "real_patient_safety",
+    "provider_processing",
+    "deployment_or_release"
+  ],
+  "authority_boundary": "evidence_only_no_provider_command_write_deploy_release_or_protected_ref_authority"
+}

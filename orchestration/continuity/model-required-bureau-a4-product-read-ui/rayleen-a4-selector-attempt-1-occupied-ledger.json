@@ -1,0 +1,12 @@
+{
+  "attempt_id": "a4-rayleen-selector-primary-001",
+  "fallback_permitted": false,
+  "lane": "rayleen_a4_selector",
+  "ledger_id": "ledger-a4-rayleen-selector-primary-001",
+  "maximum_provider_calls": 1,
+  "policy_id": "emr4-model-required-bureau-a4-sydney-selector-v1",
+  "provider_calls_consumed": 1,
+  "reserved_cost_usd": 0.25,
+  "schema_version": "emr4.model_required_bureau_a4.single_use_ledger.v1",
+  "status": "consumed"
+}

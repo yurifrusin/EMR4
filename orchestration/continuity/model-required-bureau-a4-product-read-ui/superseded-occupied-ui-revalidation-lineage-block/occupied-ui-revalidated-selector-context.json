@@ -1,0 +1,195 @@
+{
+  "authority_ceiling": {
+    "command": false,
+    "confirmation": false,
+    "database": false,
+    "product_read": false,
+    "tool": false,
+    "write": false
+  },
+  "case_id": "authored-synthetic-a4-selector-001",
+  "context_revision": 1836412047,
+  "evaluation_time": "2026-08-04T23:59:14Z",
+  "expires_at": "2026-08-05T00:01:14Z",
+  "generated_at": "2026-08-04T23:59:14Z",
+  "request_scope_salt": "a4-disposable-authored-synthetic-scope-9f38a7d2",
+  "schema_version": "emr4.rayleen.a4.trusted_selector_context.v1",
+  "source_response": {
+    "data": {
+      "rayleenWaitingRoom": {
+        "backendFacts": [
+          {
+            "appointmentId": "a4000000-0000-4000-8000-000000000011",
+            "arrivedAt": "2026-08-04T23:19:14Z",
+            "label": {
+              "authorityCeiling": "data_only",
+              "confidentialityReaders": [
+                "authorized_reception_surface"
+              ],
+              "expiresAt": "2026-08-05T00:01:14Z",
+              "freshnessState": "fresh",
+              "integrityPrincipals": [
+                "backend_truth"
+              ],
+              "observedAt": "2026-08-04T23:59:14Z",
+              "sourceIds": [
+                "backend:appointment:a4000000-0000-4000-8000-000000000011"
+              ]
+            },
+            "patientDisplayToken": "synthetic:patient-a08e75075c67",
+            "practitionerId": "a4000000-0000-4000-8000-000000000021",
+            "scheduledAt": "2026-08-04T23:14:14Z",
+            "status": "arrived",
+            "waitingAreaId": "a4000000-0000-4000-8000-000000000031"
+          },
+          {
+            "appointmentId": "a4000000-0000-4000-8000-000000000012",
+            "arrivedAt": null,
+            "label": {
+              "authorityCeiling": "data_only",
+              "confidentialityReaders": [
+                "authorized_reception_surface"
+              ],
+              "expiresAt": "2026-08-05T00:01:14Z",
+              "freshnessState": "fresh",
+              "integrityPrincipals": [
+                "backend_truth"
+              ],
+              "observedAt": "2026-08-04T23:59:14Z",
+              "sourceIds": [
+                "backend:appointment:a4000000-0000-4000-8000-000000000012"
+              ]
+            },
+            "patientDisplayToken": "synthetic:patient-c1c6988d0dca",
+            "practitionerId": "a4000000-0000-4000-8000-000000000022",
+            "scheduledAt": "2026-08-04T23:29:14Z",
+            "status": "in_consult",
+            "waitingAreaId": "a4000000-0000-4000-8000-000000000031"
+          }
+        ],
+        "contextRevision": 1836412047,
+        "derivedSignals": [
+          {
+            "appointmentId": "a4000000-0000-4000-8000-000000000011",
+            "booleanValue": null,
+            "derivedBy": "deterministic_projection_engine",
+            "integerValue": 40,
+            "kind": "elapsed_wait_minutes",
+            "label": {
+              "authorityCeiling": "data_only",
+              "confidentialityReaders": [
+                "authorized_reception_surface"
+              ],
+              "expiresAt": "2026-08-05T00:01:14Z",
+              "freshnessState": "fresh",
+              "integrityPrincipals": [
+                "backend_truth"
+              ],
+              "observedAt": "2026-08-04T23:59:14Z",
+              "sourceIds": [
+                "backend:appointment:a4000000-0000-4000-8000-000000000011"
+              ]
+            },
+            "textValue": null
+          },
+          {
+            "appointmentId": "a4000000-0000-4000-8000-000000000011",
+            "booleanValue": null,
+            "derivedBy": "deterministic_projection_engine",
+            "integerValue": null,
+            "kind": "threshold_band",
+            "label": {
+              "authorityCeiling": "data_only",
+              "confidentialityReaders": [
+                "authorized_reception_surface"
+              ],
+              "expiresAt": "2026-08-05T00:01:14Z",
+              "freshnessState": "fresh",
+              "integrityPrincipals": [
+                "backend_truth"
+              ],
+              "observedAt": "2026-08-04T23:59:14Z",
+              "sourceIds": [
+                "backend:appointment:a4000000-0000-4000-8000-000000000011"
+              ]
+            },
+            "textValue": "30_minutes_or_more"
+          },
+          {
+            "appointmentId": "a4000000-0000-4000-8000-000000000011",
+            "booleanValue": null,
+            "derivedBy": "deterministic_projection_engine",
+            "integerValue": 1,
+            "kind": "longest_wait_rank",
+            "label": {
+              "authorityCeiling": "data_only",
+              "confidentialityReaders": [
+                "authorized_reception_surface"
+              ],
+              "expiresAt": "2026-08-05T00:01:14Z",
+              "freshnessState": "fresh",
+              "integrityPrincipals": [
+                "backend_truth"
+              ],
+              "observedAt": "2026-08-04T23:59:14Z",
+              "sourceIds": [
+                "backend:appointment:a4000000-0000-4000-8000-000000000011"
+              ]
+            },
+            "textValue": null
+          },
+          {
+            "appointmentId": "a4000000-0000-4000-8000-000000000012",
+            "booleanValue": null,
+            "derivedBy": "deterministic_projection_engine",
+            "integerValue": null,
+            "kind": "flow_exception",
+            "label": {
+              "authorityCeiling": "data_only",
+              "confidentialityReaders": [
+                "authorized_reception_surface"
+              ],
+              "expiresAt": "2026-08-05T00:01:14Z",
+              "freshnessState": "fresh",
+              "integrityPrincipals": [
+                "backend_truth"
+              ],
+              "observedAt": "2026-08-04T23:59:14Z",
+              "sourceIds": [
+                "backend:appointment:a4000000-0000-4000-8000-000000000012"
+              ]
+            },
+            "textValue": "missing_arrival_timestamp"
+          }
+        ],
+        "excludedFieldClasses": [
+          "contact_details",
+          "national_identifiers",
+          "clinical_text",
+          "appointment_notes",
+          "unrestricted_history",
+          "credentials",
+          "raw_provider_data"
+        ],
+        "expiresAt": "2026-08-05T00:01:14Z",
+        "frameId": "a4000000-0000-4000-8000-000000000001",
+        "generatedAt": "2026-08-04T23:59:14Z",
+        "locationId": "a4000000-0000-4000-8000-000000000003",
+        "practiceId": "a4000000-0000-4000-8000-000000000002",
+        "projection": {
+          "authorityCeiling": "data_only",
+          "focusAppointmentId": null,
+          "kind": "FULL_QUEUE",
+          "practitionerId": null,
+          "selectedCount": 2,
+          "selectorProvenance": "deterministic_product_read",
+          "waitingAreaId": null,
+          "writesAuthorized": false
+        },
+        "reader": "authorized_reception_surface",
+        "schemaVersion": "emr4.waiting_room_context_frame.v1"
+      }
+    }
+  },
+  "staff_utterance": "Show the single arrived appointment with the longest elapsed wait."
+}

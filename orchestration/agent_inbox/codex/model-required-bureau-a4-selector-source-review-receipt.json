@@ -1,0 +1,37 @@
+{
+  "schema_version": "emr4.model_required_bureau_a4.selector_source_review.v1",
+  "status": "passed",
+  "decision": "pass",
+  "reviewer": "codex_independent_a4_2_pre_occupied_source_veto",
+  "independent_read_only_review": true,
+  "provider_called": false,
+  "closed_boundary_verified": true,
+  "checks": {
+    "exact_vertex_gemini_2_5_flash_sydney_bernie_keyless_boundary": true,
+    "thinking_budget_1024_and_max_output_tokens_2048": true,
+    "two_call_and_usd_0_50_parent_ceiling": true,
+    "no_tools_retrieval_cache_fallback_or_raw_retention": true,
+    "authored_synthetic_request_scoped_opaque_provider_context": true,
+    "strict_response_candidate_and_grounding_proofreader": true,
+    "fresh_two_minute_execution_context_and_proof_time_expiry": true,
+    "single_use_broker_and_isolated_one_shot_cell": true,
+    "correction_only_for_schema_invalid": true,
+    "provider_free_zero_call_audit_and_cleanup": true,
+    "no_product_database_command_write_or_provider_action_in_dry_run": true,
+    "superseded_zero_call_artifacts_preserved_transparently": true,
+    "focused_selector_tests_13_passed": true
+  },
+  "source_hashes": {
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/authored-synthetic-selector-context.json": "sha256:761530979e95d479f63e77600fda221703315fdca7bb27f4347ed5ba6935c87b",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/cell-request.schema.json": "sha256:aeb14cae531b81597850ccec03e2441437239d106f4bbcee18572c3b7a996264",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/cost-ledger.schema.json": "sha256:b1a2f0f98fc0ef9014ed3b7fde1bed301af33ca23b2da6b1bdd9084cac6ffe8d",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/selector-candidate.schema.json": "sha256:5e602e995cb1f8ba3fa22d70bbe1665c7e939e0f4a389a529faca2c3d28c1529",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/selector-context.schema.json": "sha256:1fa93994c6b4847fb0bd6ca24cd2b121d8fa18f20f4fd0c78047e4e138f0205a",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/selector-model-body.schema.json": "sha256:33399db8f88cae4bf0fe40871507fe8c9fefb91e7bd993a9c27979227289c892",
+    "orchestration/continuity/model-required-bureau-a4-product-read-ui/single-use-ledger.schema.json": "sha256:fa68d66d7ff8aadb0c2d307c835128c0f75fd240616a6a9ac37d413d00a8b066",
+    "scripts/model_required_bureau_a4_selector_broker.py": "sha256:eb236cfc8a596e6bb7f12c23a7641134528c47310d00951de2244a6f438afad9",
+    "scripts/model_required_bureau_a4_selector_contracts.py": "sha256:5666bff913c71b3640b5b23c463fc43839a8e777d10bc6d6e4946d0122b75c90",
+    "scripts/model_required_bureau_a4_selector_live.py": "sha256:252f3862faa2d0b5fde7b4ebed2b35d6d74663c50d1c7ba4581965a9d85053ab",
+    "tests/test_model_required_bureau_a4_selector.py": "sha256:ca9565c8b7d121a769af8fea4a232e5301b006453527355df3254f65a5d1b10b"
+  }
+}

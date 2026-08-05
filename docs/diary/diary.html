@@ -7,9 +7,9 @@
   <title>EMR — Diary</title>
   <script src="../hosting-policy.js?v=1"></script>
   <script src="office-bootstrap.js?v=2"></script>
-  <link rel="stylesheet" href="diary.css?v=138" />
+  <link rel="stylesheet" href="diary.css?v=140" />
   <link rel="stylesheet" href="meta-grid.css?v=11" />
-  <script src="diary.js?v=195" defer></script>
+  <script src="diary.js?v=199" defer></script>
   <script src="meta-grid.js?v=16" defer></script>
 </head>
 <body>
@@ -54,6 +54,10 @@
       <span aria-hidden="true">👥</span>
       <span>Waiting Room</span>
       <span class="flow-count-pill" id="flow-waiting-count">0</span>
+    </button>
+    <button id="btn-rayleen-waiting-room" class="btn-rayleen-toggle hidden" type="button" title="Open the read-only Rayleen waiting-room projection" aria-expanded="false" aria-controls="rayleen-waiting-room-panel">
+      <span aria-hidden="true">◇</span>
+      <span>Rayleen view</span>
     </button>
     <button id="btn-refresh" title="Refresh appointments">&#8635; Refresh</button>
     <button id="btn-meta-grid-launch" class="hidden" data-testid="meta-grid-launch-button" title="Open the intent-projected Diary">Project view</button>
@@ -144,6 +148,23 @@
       </div>
     </div>
   </div>
+
+  <section id="rayleen-waiting-room-panel" class="rayleen-waiting-room-panel hidden" aria-labelledby="rayleen-waiting-room-title" data-testid="rayleen-waiting-room-panel">
+    <header class="rayleen-waiting-room-header">
+      <div>
+        <p class="rayleen-waiting-room-kicker">Read-only projection</p>
+        <h2 id="rayleen-waiting-room-title">Rayleen waiting-room view</h2>
+        <p id="rayleen-waiting-room-provenance">Deterministic product read</p>
+      </div>
+      <div class="rayleen-waiting-room-actions">
+        <button id="btn-refresh-rayleen-waiting-room" type="button">Refresh</button>
+        <button id="btn-close-rayleen-waiting-room" type="button" aria-label="Close Rayleen waiting-room view">&times;</button>
+      </div>
+    </header>
+    <p id="rayleen-waiting-room-status" class="rayleen-waiting-room-status" role="status" aria-live="polite" aria-atomic="true">Rayleen view is closed.</p>
+    <div id="rayleen-waiting-room-content" class="rayleen-waiting-room-content" data-freshness-state="empty"></div>
+    <footer>Read-only display. No booking is reserved, confirmed or changed.</footer>
+  </section>
 
   <section id="bernie-meta-grid" class="meta-grid hidden" role="dialog" aria-modal="false" aria-labelledby="meta-grid-title" aria-describedby="meta-grid-bureau-status" data-testid="meta-grid-workspace">
     <a class="meta-grid-skip-link" href="#meta-grid-canvas">Skip to projected Diary view</a>

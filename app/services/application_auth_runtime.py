@@ -30,6 +30,9 @@ PRACTITIONER_DIRECTORY_POLICY_VERSION = (
 )
 PRACTITIONER_DIRECTORY_ACTION = "practice.practitioner-directory.read"
 PRACTITIONER_DIRECTORY_RESOURCE_TYPE = "practitioner_directory"
+RAYLEEN_WAITING_ROOM_POLICY_VERSION = "rayleen-waiting-room-read.v1"
+RAYLEEN_WAITING_ROOM_ACTION = "diary.waiting-room.read"
+RAYLEEN_WAITING_ROOM_RESOURCE_TYPE = "waiting_room_projection"
 MAX_PARENT_TTL = timedelta(hours=8)
 MAX_IDLE_TTL = timedelta(minutes=30)
 MAX_EXCHANGE_TTL = timedelta(seconds=60)
@@ -583,6 +586,112 @@ class ApplicationAuthRuntime:
                         policy_version=PRACTITIONER_DIRECTORY_POLICY_VERSION,
                         decision=AuthAuditDecision.ALLOWED,
                         reason="active_practitioner_directory_authorized",
+                    ),
+                )
+            )
+            self._store.parent_sessions[
+                parent.session_reference_hash
+            ] = refreshed_parent
+            self._store.surface_sessions[surface_hash] = refreshed_binding
+
+        principal = parent.principal
+        return ValidatedSurfaceContext(
+            user_id=principal.user_id,
+            practice_id=principal.practice_id,
+            current_backend_role=principal.current_backend_role,
+            practitioner_id=principal.practitioner_id,
+            surface=surface,
+            origin=origin,
+            audience=audience,
+            generation=parent.generation,
+            parent_expires_at=parent.expires_at,
+            surface_idle_expires_at=refreshed_binding.idle_expires_at,
+        )
+
+    def authorize_rayleen_waiting_room_read(
+        self,
+        *,
+        surface_session_value: str,
+        surface: Surface,
+        origin: str,
+        fresh_principal: SyntheticPrincipal | None,
+        fresh_user_active: bool,
+        resource_practice_id: str,
+        audience: str = SURFACE_AUDIENCE,
+        correlation_id: str | None = None,
+    ) -> ValidatedSurfaceContext:
+        """Admit one Receptionist-only native-Diary waiting-room read."""
+
+        now = self._now()
+        surface_hash = _hash_secret(surface_session_value)
+        with self._store.lock:
+            try:
+                self._require_surface_binding(surface, origin, audience)
+                parent, binding = self._active_surface_records(
+                    surface_hash=surface_hash,
+                    expected_surface=surface,
+                    expected_origin=origin,
+                    expected_audience=audience,
+                    now=now,
+                )
+            except AuthRuntimeDenied as exc:
+                self._record_surface_denial(
+                    surface_hash=surface_hash,
+                    requested_surface=surface,
+                    now=now,
+                    correlation_id=correlation_id,
+                    reason=exc.reason_code,
+                )
+                raise
+
+            denial_reason: str | None = None
+            if not fresh_user_active or fresh_principal is None:
+                denial_reason = "fresh_product_user_inactive"
+            elif fresh_principal != parent.principal:
+                denial_reason = "fresh_product_principal_mismatch"
+            elif resource_practice_id != parent.principal.practice_id:
+                denial_reason = "resource_practice_mismatch"
+            elif surface is not Surface.NATIVE_DIARY:
+                denial_reason = "native_diary_surface_required"
+            elif fresh_principal.current_backend_role != "Receptionist":
+                denial_reason = "receptionist_role_required"
+
+            bounded_correlation_id = self._bounded_correlation_id(correlation_id)
+            if denial_reason is not None:
+                self._record_required(
+                    (
+                        self._event(
+                            AuthAuditEventType.AUTHORIZATION_DENIED,
+                            now=now,
+                            correlation_id=bounded_correlation_id,
+                            parent=parent,
+                            surface=surface.value,
+                            action=RAYLEEN_WAITING_ROOM_ACTION,
+                            resource_type=RAYLEEN_WAITING_ROOM_RESOURCE_TYPE,
+                            policy_version=RAYLEEN_WAITING_ROOM_POLICY_VERSION,
+                            decision=AuthAuditDecision.DENIED,
+                            reason=denial_reason,
+                        ),
+                    )
+                )
+                raise AuthRuntimeDenied(denial_reason)
+
+            refreshed_parent, refreshed_binding = self._refreshed_records(
+                parent, binding, now
+            )
+            self._record_required(
+                (
+                    self._event(
+                        AuthAuditEventType.AUTHORIZATION_ALLOWED,
+                        now=now,
+                        correlation_id=bounded_correlation_id,
+                        parent=parent,
+                        surface=surface.value,
+                        action=RAYLEEN_WAITING_ROOM_ACTION,
+                        resource_type=RAYLEEN_WAITING_ROOM_RESOURCE_TYPE,
+                        policy_version=RAYLEEN_WAITING_ROOM_POLICY_VERSION,
+                        decision=AuthAuditDecision.ALLOWED,
+                        reason="rayleen_waiting_room_read_authorized",
                     ),
                 )
             )

@@ -107,6 +107,12 @@ class Settings(BaseSettings):
     reception_one_product_context_vertex_authority_path: str = ""
     reception_one_product_context_vertex_preflight_path: str = ""
     reception_one_product_context_vertex_evidence_dir: str = ""
+    rayleen_a4_product_read_enabled: bool = False
+    rayleen_a4_synthetic_practice_ids: str = ""
+    rayleen_a4_vertex_selector_enabled: bool = False
+    rayleen_a4_vertex_authority_path: str = ""
+    rayleen_a4_vertex_preflight_path: str = ""
+    rayleen_a4_vertex_evidence_dir: str = ""
 
     # Raw appointment compatibility endpoint guard.
     #   "audit" - attach raw_compat_* audit evidence tags only.

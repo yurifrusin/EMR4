@@ -11,16 +11,18 @@ Architecture parent:
 
 ## Objective
 
-Prepare the next development sequence without opening it. The sequence makes a
+Execute the planned development sequence. The sequence makes a
 provider model mandatory in every named intelligent loop while keeping typed
 proofreading, deterministic authority, human gates, commands and post-action
 verification independent and mandatory.
 
 The current fifth Bernie/Davida pair remains the completed candidate parent.
-This plan opens Gate zero and authorises uninterrupted movement through later
-dependency-satisfied gates whose complete material boundaries are frozen here
-or in an accepted descendant plan. It does not by itself open a material live-
-backend/Davida-write successor, provider call or other generic future gate.
+This plan and Yuri's clarified standing authority authorise uninterrupted
+movement through its later dependency-satisfied gates. When a descendant
+boundary is not yet written, Sol derives the narrowest fail-closed
+architecture-strengthening boundary, records it and executes it; missing
+paperwork and materiality are not permission gates. The sequence does not
+authorise unplanned work outside this programme or access to protected evidence.
 
 ## Standing programme continuation authority
 
@@ -40,10 +42,12 @@ product access, write/actuator, licence/cost, deployment/release, protected ref
 or protected-evidence action remains non-executable whenever its exact boundary
 is absent or explicitly closed in the active plan.
 
-Return to Yuri only for an unplanned material fork, an unresolved user-owned
-choice or human-only input, conflicting evidence that changes acceptance
-meaning, exhausted bounded recovery, scope beyond the accepted plan, or an
-explicit user pause/redirect. A passing gate, known next gate, fresh-context
+Return to Yuri only for a genuinely non-inferable unplanned fork between
+materially different user-owned outcomes, a human-only external choice/action,
+conflicting evidence that changes acceptance meaning, exhausted bounded
+recovery, protected-evidence access, scope beyond this accepted programme, or
+an explicit user pause/redirect. A material-gate label, missing descendant
+plan, older fresh-authority phrase, passing gate, known next gate, fresh-context
 rehydration, worker/verifier wait, test failure or ordinary recovery is not a
 permission gate.
 
@@ -151,12 +155,12 @@ review, activation-barrier and rollback designs with current provenance/LKG
 eligibility and independent readback requirements. No material side-effect
 boundary opened.
 
-No further dependency-satisfied provider-free implementation gate remains in
-this sequence. A3/B3, A4/A5/B4, C4 and actual update/migration work each require
-an unresolved provider, product-read/write, actuator or activation boundary.
-The recommended next fork is paired A3/B3 authored-synthetic occupied advisory
-rehearsal, but its exact provider/model/region/identity/data/cost/call boundary
-is a genuine Yuri-owned decision under the standing policy.
+At that historical checkpoint no further already-frozen provider-free
+implementation gate remained. The next descendants required Sol to freeze
+provider, product-read/write, actuator or activation boundaries. Yuri has since
+clarified that this boundary-freezing work belongs to the Conductor and is not
+a user pause unless the architecture cannot select between materially different
+user-owned outcomes.
 
 ## A3/B3 occupied terminal-rejection checkpoint
 
@@ -229,6 +233,28 @@ This is occupied authored-synthetic Access AI rehearsal evidence only. It opens
 no A4 product read, A5/B4 write, C4 actuator, update/import, deployment,
 production, release, Pages or protected-ref authority.
 
+## A4 product-read/UI result
+
+The planned A4 descendant now passes as
+`model_required_bureau_a4_product_read_ui_pass`. Its provider-free half uses a
+dedicated Receptionist-only, practice/location-scoped GraphQL and database-role
+boundary and proves live-local HTTPS browser/FastAPI/PostgreSQL readback with
+unchanged appointment, audit and event truth. Its client proves strict closed
+frames, latest-read-wins, interruption, a visible 30-second warning and card
+removal on expiry.
+
+The occupied half used the exact accepted Sydney Vertex `gemini-2.5-flash`
+envelope with positive 1,024-token thinking and 2,048-token output headroom. The
+first HTTP 200 candidate failed deterministic grounding and released nothing.
+One evidence-selected same-fact/singleton correction then passed fresh source
+review and deterministic proofreading. Exactly two calls/USD 0.50 are consumed.
+The final model-selected projection passed the local Reception One browser with
+refresh, Escape, reopen, empty console/page/HTTP/request-failure arrays and
+complete runtime cleanup. Provider-free freshness revalidation changed no
+selection and made no provider call. The evidence proves authored-synthetic
+development product read/UI only, not real-data, write, production, deployment,
+release or Australian-sovereignty claims.
+
 ## Lane A: Rayleen waiting-room intelligence
 
 ### A1. Read and projection boundary
@@ -279,14 +305,17 @@ No patient data or product write is opened by A3.
 
 ### A4. Product read and UI projection
 
-After a fresh product-read decision, connect authorized waiting-room truth to
-Rayleen's deterministic projection engine and present the admitted model-
-selected view in Reception One. This requires privacy, role, interruption,
-accessibility, stale-response and cross-practice evidence.
+Under standing programme authority, freeze the narrowest development-only
+product-read descendant, connect authorized waiting-room truth to Rayleen's
+deterministic projection engine and present the admitted model-selected view in
+Reception One. This requires privacy, role, interruption, accessibility,
+stale-response and cross-practice evidence. No additional ceremonial product-
+read permission request is required.
 
 ### A5. Arrival/status/waiting-area command descendants
 
-Each write is a separate material gate. Reuse or deliberately extend the
+Each write remains a separately frozen and accepted descendant, but materiality
+alone does not create a user pause. Reuse or deliberately extend the
 existing status proposal/confirm path. Check-in and waiting-area movement must
 prove signed or server-held confirmation evidence, current identity and scope,
 idempotency, atomic status/waiting-area/audit/outbox behavior, replay rejection
@@ -372,7 +401,8 @@ maximum blast radius, rollback, expiry, idempotency, audit and postconditions.
 
 ### C4. Allowlisted actuator rehearsal
 
-Only after a material actuator decision, build a provider-free authored-
+As the planned actuator descendant after its dependencies pass, freeze and
+build the narrowest provider-free authored-
 synthetic simulator that accepts one-use typed execution evidence for exact
 runbooks. It must reject shell/SQL text from the model, unknown parameters,
 scope expansion, stale plans, replay and partial verification.
@@ -416,7 +446,9 @@ rollback. A provider model participates in the operator dialogue and plan, but
 cannot certify source authenticity, approve itself or activate the update.
 
 Actual download, licence acceptance, database import, migration, activation or
-production change is a separate material gate.
+production change remains a separately frozen descendant. Its materiality does
+not itself cause a permission pause; only a non-inferable fork or human-only
+external action does.
 
 ## Parallelization after gate zero
 
@@ -459,18 +491,17 @@ Each packet must retain the ownership, isolation, evidence and forbidden-surface
 requirements in `AGENTS.md`; no packet receives acceptance, integration or
 authority-expansion rights.
 
-## Genuine Yuri-attention gates
+## Genuine Yuri-attention conditions
 
-Pause only when the next step needs a material boundary or input that the active
-accepted plan has not already made exact, including:
+Do not pause merely because the next planned step needs a material boundary.
+Sol derives the narrowest exact boundary and proceeds. Pause only when the
+boundary cannot be derived without Yuri choosing between materially different
+outcomes, or when an external human-only action is indispensable, including:
 
-- an unselected provider/model/region/identity/data class, external
-  transmission, cost, licence, retention or residency posture;
-- an unfrozen patient-facing Rayleen surface, product read/model runtime,
-  arrival/waiting-area/administrative/recovery write, actuator, shell, SQL,
-  cloud, IAM, migration, backup restore or external-data activation;
-- an unfrozen deployment, production, release, protected-ref, Pages or public-
-  branding action;
+- competing provider/model/region/identity/data/cost/licence/retention or
+  residency postures where accepted architecture and evidence cannot select one;
+- competing patient-facing, product-read, write, actuator, migration,
+  deployment or release outcomes with materially different user consequences;
 - a participant nomination, credential restoration, console action, external
   coordination or other human-only step;
 - an unplanned clinical, product, privacy, security, regulatory, architecture
@@ -478,10 +509,9 @@ accepted plan has not already made exact, including:
 - conflicting evidence or exhausted bounded recovery that requires acceptance
   meaning or scope to change.
 
-Mentioning one of these as a future candidate does not make it exact. If a later
-active accepted plan freezes and authorises the complete boundary, the standing
-policy permits its execution and subsequent planned transitions without a
-repeat permission request.
+Protected-evidence access and work outside this accepted programme remain
+separate safety boundaries. For work inside the sequence, Sol creates the exact
+descendant plan and executes it without a repeat permission request.
 
 Gate -1 additionally forbids treating a detector, delimiter, model refusal,
 human confirmation or sandbox alone as proof that prompt injection cannot
@@ -490,8 +520,12 @@ architecture decision.
 
 ## Current next action
 
-Close out and task-branch publish the accepted A3/B3 recovery evidence. No
-dependency-satisfied planned implementation gate remains inside the current
-material boundary. A4 product read, A5/B4 writes, C4 actuator rehearsal and
-actual update/import work are separate material choices; product/runtime/data/
-write, deployment, release, Pages and protected refs remain closed.
+Publish the accepted A4 candidate to the task branch, then perform a fresh
+five-source rehydration and freeze the paired A5.1/B4.1 command descendant. A5.1
+begins with the narrowest Rayleen check-in/status proposal-confirm path; B4.1
+begins with the already designed Davida practitioner default-location command
+runtime. Both must retain backend-owned human confirmation, current identity and
+scope, idempotency, atomic truth/audit/outbox behavior, replay rejection and
+deterministic readback. Planning and provider-free deterministic implementation
+begin without a repeat permission handback. Provider calls, patient data,
+production, deployment, release, Pages and protected-ref movement remain closed.

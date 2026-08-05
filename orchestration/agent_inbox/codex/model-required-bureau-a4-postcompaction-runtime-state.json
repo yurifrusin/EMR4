@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the 2026-08-05 compaction. The exact baton is the accepted model-required Bureau A3/B3 request-contract recovery pass at task HEAD fb3cf995e03d8500c88fca7484fa04aeb0b698d9; its two occupied authored-synthetic advisory calls and ledgers are consumed, cleanup is complete, and A4 product read/UI projection is the next architecture-strengthening programme lane.",
+    "current_authority_allocation": "GPT Sol owns architecture, exact boundary derivation, recovery, acceptance, task-branch publication and uninterrupted movement through planned gates. Bounded workers may own separable artifacts and Gemini 3.6 Flash/high may provide a fresh veto but neither receives acceptance, integration, baton or protected-ref authority. Yuri has clarified that material-gate classification alone is never a pause condition and that Sol should select the narrowest safe architecture-strengthening path when no genuinely non-inferable decision exists.",
+    "active_plan_and_acceptance": "The controlled-recovery development plan defines A4 as connecting authorized waiting-room truth to Rayleen's deterministic projection engine and Reception One with privacy, role, interruption, accessibility, stale-response and cross-practice evidence. The accepted A1/A2 and A3 contracts remain parents. Ariadne autonomous continuation requires immediate progression through planned work and is being durably strengthened so exact boundary derivation, rather than ceremonial fresh consent, controls the transition.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary material, patient/clinical/production data, external patient surfaces, provider tools or fallback, raw provider content, model-to-database writes, deployment, production, release, Pages and protected refs remain closed. A4 will begin with authored-synthetic development-only, practice-scoped read/UI work and no command, write or actuator. docs/branding/ and all existing Consultant, Gate-minus-one and A3/B3 pre-push receipt/state files remain preserved and excluded; Git staging is explicit-path only.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at fb3cf995e03d8500c88fca7484fa04aeb0b698d9 and origin task is aligned. Local/origin master and local/origin handoff/current are all unchanged at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean; only the seven named preserved untracked paths exist before this receipt state is added."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "a4_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol restored all five authoritative sources, completed the API Spine source pass, and verified exact refs and preserved workspace exclusions."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fresh external veto eligibility will be decided only after the deterministic A4 candidate passes."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Worker use will be selected only for bounded separable A4 artifacts after the exact plan is frozen."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Real-TTY fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated Claude is not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lanes are eligible for bounded parallel read-only analysis after this rehydration."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

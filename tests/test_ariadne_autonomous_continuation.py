@@ -15,7 +15,7 @@ def load_policy() -> dict:
 
 def test_continuation_is_default_without_active_execution_limits() -> None:
     policy = load_policy()
-    assert policy["schema_version"] == "ariadne.autonomous_continuation.v2"
+    assert policy["schema_version"] == "ariadne.autonomous_continuation.v3"
     assert policy["default_posture"] == "continue_without_user_permission"
     assert policy["execution_limits"]["enforcement"] == "inactive"
     assert policy["execution_limits"]["wall_clock_deadlines"] == "inactive"
@@ -40,12 +40,17 @@ def test_user_pause_surface_is_narrow() -> None:
         in policy["must_not_pause_for"]
     )
     assert (
-        "unplanned_material_product_clinical_privacy_security_regulatory_"
+        "unplanned_noninferable_product_clinical_privacy_security_regulatory_"
         "architecture_authority_or_economic_fork" in policy["pause_for_user_only_when"]
     )
     assert "ordinary_worker_timeout" in policy["must_not_pause_for"]
     assert "verifier_requested_plan_revision" in policy["must_not_pause_for"]
     assert "same_lane_execution_retry" in policy["must_not_pause_for"]
+    assert "material_gate_classification_alone" in policy["must_not_pause_for"]
+    assert (
+        "planned_product_read_write_provider_or_actuator_gate_classification"
+        in policy["must_not_pause_for"]
+    )
 
 
 def test_internal_checkpoint_cannot_end_the_task() -> None:
@@ -65,7 +70,7 @@ def test_internal_checkpoint_cannot_end_the_task() -> None:
     )
 
 
-def test_standing_programme_authority_is_exact_and_not_self_authorizing() -> None:
+def test_standing_programme_authority_derives_exact_planned_boundaries() -> None:
     policy = load_policy()
     standing = policy["standing_programme_authority"]
     assert policy["policy_decision"] == {
@@ -78,12 +83,20 @@ def test_standing_programme_authority_is_exact_and_not_self_authorizing() -> Non
         == "continue_without_additional_user_message"
     )
     assert "accepted_descendant_plans" in standing["applies_to"]
-    assert (
-        "no_explicit_closure_or_user_owned_choice_remains_unresolved"
-        in standing["gate_is_executable_only_when_all"]
+    boundary_rule = standing["planned_gate_boundary_rule"]
+    assert boundary_rule["material_gate_classification_alone_is_never_a_pause_condition"] is True
+    assert boundary_rule["exact_descendant_plan_does_not_yet_exist"] == (
+        "conductor_freezes_narrowest_fail_closed_boundary_then_executes"
     )
     assert "immediate_transition_to_next_qualifying_gate" in standing["authorizes"]
-    assert "generic_future_candidate" in standing["does_not_self_authorize"]
+    assert (
+        "freeze_narrowest_safe_descendant_boundary_for_each_planned_gate"
+        in standing["authorizes"]
+    )
+    assert (
+        "unplanned_future_candidate_outside_the_accepted_sequence"
+        in standing["does_not_self_authorize"]
+    )
     assert "protected_evidence_access" in standing["does_not_self_authorize"]
 
 
@@ -99,15 +112,14 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
     for text in (agents, plan, policy_doc):
         assert "standing" in text.lower()
         assert "dependency-satisfied" in text
-        assert "generic future" in text.lower()
+        assert "accepted" in text.lower()
+        assert "sequence" in text.lower()
 
     assert "without another permission request" in agents
     normalized_plan = " ".join(plan.split())
     assert "A3/B3 request-contract recovery result" in normalized_plan
     assert "No retry or correction call followed either admission" in normalized_plan
-    assert "No dependency-satisfied planned implementation gate remains" in (
-        normalized_plan
-    )
+    assert "material-gate label" in normalized_plan.lower()
 
 
 def test_architecture_strengthening_prefers_bounded_model_reasoning() -> None:
