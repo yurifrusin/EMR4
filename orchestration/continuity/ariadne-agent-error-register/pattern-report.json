@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "0232b1984d6f81ee7516382761705759f7f6b409b74a85b06f2faa54a68eeb74",
+  "canonical_register_sha256": "f287c8030a61e335864bff57b96df2094d956640a1056ee72c36c5c67893dc83",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 1,
-      "canonical_unchanged": 18,
+      "canonical_unchanged": 19,
       "untrusted_partial_worktree": 3
     },
     "by_category": {
       "command_scope_violation": 3,
       "evidence_misreport": 2,
       "harness_failure": 3,
-      "output_contract_violation": 9,
+      "output_contract_violation": 10,
       "read_only_violation": 1,
       "reasoning_claim_error": 1,
       "repository_defect": 1,
       "transport_timeout": 2
     },
     "by_origin": {
-      "agent_behavior": 16,
+      "agent_behavior": 17,
       "harness": 3,
       "repository": 1,
       "transport": 2
     },
     "by_process_severity": {
-      "low": 5,
+      "low": 6,
       "material": 5,
       "moderate": 12
     },
@@ -31,7 +31,7 @@
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 10,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 4,
+      "codex-primary-orchestrator::orchestrator": 5,
       "deepseek-flash-workers::implementer": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
@@ -40,12 +40,12 @@
     },
     "by_role": {
       "implementer": 3,
-      "orchestrator": 8,
+      "orchestrator": 9,
       "verifier": 11
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 22,
+  "incident_count": 23,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -66,6 +66,30 @@
         "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate."
       ],
       "recurrence_signature": "orchestrator.detached_verifier_branch",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0013",
+        "AER-0023"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml and preserve any fail-closed envelope before issuing a corrected distinct receipt.",
+        "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt."
+      ],
+      "recurrence_signature": "orchestrator.unapproved_continuation_event",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -102,7 +126,7 @@
       ]
     }
   ],
-  "register_revision": 16,
+  "register_revision": 17,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-05"
 }

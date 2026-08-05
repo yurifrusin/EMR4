@@ -38,10 +38,10 @@ def test_committed_register_is_semantically_valid_after_a5_b4_code_veto() -> Non
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 16
+    assert register["register_revision"] == 17
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 23)
+        f"AER-{index:04d}" for index in range(1, 24)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 16
+    assert len(agent_incidents) == 17
     assert len(transport_incidents) == 2
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -117,6 +117,43 @@ def test_antigravity_auth_timeout_retains_no_oauth_material_or_fake_decision() -
     assert review["dirty_after"] is False
 
 
+def test_c4_preplan_event_failure_is_preserved_before_corrected_receipt() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0023"
+    )
+    failed = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c4-preplan-receipt.json"
+    )
+    corrected = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c4-preplan-2-receipt.json"
+    )
+
+    assert incident["status"] == "corrected"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.unapproved_continuation_event"
+    )
+    assert failed["continuation_event"] == "pre_plan"
+    assert failed["status"] == "revision_required"
+    assert failed["worker_dispatch_permitted"] is False
+    assert corrected["continuation_event"] == "pre_sprint_planning"
+    assert corrected["status"] == "passed"
+    assert corrected["rehydration_sources"] == [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree",
+    ]
+
+
 def test_davida_review_errors_match_preserved_evidence() -> None:
     register = _register()
     rows = {row["incident_id"]: row for row in register["incidents"]}
@@ -156,10 +193,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 22
+    assert report["incident_count"] == 23
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 16,
+        "agent_behavior": 17,
         "harness": 3,
         "repository": 1,
         "transport": 2,
@@ -168,7 +205,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         "command_scope_violation": 3,
         "evidence_misreport": 2,
         "harness_failure": 3,
-        "output_contract_violation": 9,
+        "output_contract_violation": 10,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "repository_defect": 1,
@@ -176,7 +213,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 1,
-        "canonical_unchanged": 18,
+        "canonical_unchanged": 19,
         "untrusted_partial_worktree": 3,
     }
     assert report["recurring_patterns"] == [
@@ -191,6 +228,19 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
             "prevention_controls": [
                 "Verifier setup must validate a non-empty non-protected codex/review branch and exact candidate HEAD before issuing the pre-verifier receipt or invoking Antigravity.",
                 "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate.",
+            ],
+        },
+        {
+            "recurrence_signature": "orchestrator.unapproved_continuation_event",
+            "incident_count": 2,
+            "incident_ids": ["AER-0013", "AER-0023"],
+            "origins": ["agent_behavior"],
+            "categories": ["output_contract_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml and preserve any fail-closed envelope before issuing a corrected distinct receipt.",
+                "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt.",
             ],
         },
         {

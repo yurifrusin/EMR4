@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 16,
+  "register_revision": 17,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-05",
@@ -853,6 +853,44 @@
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-16.md",
           "orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0023",
+      "attempt_id": "model-required-bureau-c4-preplan-001",
+      "observed_on": "2026-08-05",
+      "tranche": "model-required-bureau-c4-planning",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every pre-planning receipt must use one exact continuation event declared by the active orchestrator requirements before it can claim five-source rehydration or permit planning.",
+      "observed_error": "Root used the unsupported event pre_plan, so the deterministic preflight returned revision_required with continuation_event_missing_or_unapproved, emitted no rehydration sources and prohibited worker dispatch.",
+      "detection_method": "The local receipt builder failed closed before C4 implementation dispatch, external review, product/runtime activity, staging, commit or ref movement.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/model-required-bureau-c4-preplan-runtime-state.json",
+        "orchestration/agent_inbox/codex/model-required-bureau-c4-preplan-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unapproved_continuation_event",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed state and receipt were preserved. A distinct runtime state then used the exact approved pre_sprint_planning event and sprint_planning action with the same five-source C4 boundary, and the deterministic receipt passed before planning continued.",
+        "prevention_control": "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt.",
+        "evidence_paths": [
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "orchestration/agent_inbox/codex/model-required-bureau-c4-preplan-2-runtime-state.json",
+          "orchestration/agent_inbox/codex/model-required-bureau-c4-preplan-2-receipt.json"
         ]
       },
       "status": "corrected"

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c4_allowlisted_actuator_simulator_plan_for_fresh_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The C4 plan SHA-256 is bdd6afdf1b7adc755b0f444e163fff2fcd10439067eb46d129447141450c9876 and its threat-model delta SHA-256 is fd15daf972dfdc239b542412f3171ef1e67db22e4af158294286d63faeb7f497. It freezes one exact in-memory synthetic service transition, exact rollback, closed schemas, opaque one-use backend evidence, hard-coded callable admission, monotone evidence consumption, distinct fresh readback and verified-versus-inconclusive rollback. The corrected five-source preplan receipt passed; focused plan and AER tests passed 33 of 33 and git diff --check passed.",
+    "current_authority_allocation": "Sol owns C4 architecture, recovery, integration and acceptance. Gemini 3.6 Flash/high receives one fresh read-only architecture/security veto after the plan commit. DeepSeek V4 Flash/high remains held until that pass and may then implement only the frozen bounded packet. No worker or reviewer has product-runtime, provider-product-call, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Primary task HEAD and origin task are exact 4c3a682e6c1076d8b5cfdc6143a4a07a57d63a57 before C4 plan staging. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree contains only bounded tracked C4/AER changes plus preserved untracked files, and the index is clean before explicit staging.",
+    "live_handover_current_baton": "A5.1/B4.1 is accepted and pushed on the task branch. The exact next descendant is C4's narrowest provider-free authored-synthetic allowlisted-actuator simulator; no C5 or live-actuator authority is open.",
+    "protected_evidence_boundaries": "C4 remains local, provider-free and newly authored-synthetic. Holdouts v1-v10, docs/branding, patient/clinical/product-derived/participant/protected/production data, real processes/files/databases/networks/cloud/IAM, product routes, external effects, C5, deployment, release, Pages and protected refs remain closed. All unrelated untracked files remain preserved and excluded; explicit-path staging only is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
