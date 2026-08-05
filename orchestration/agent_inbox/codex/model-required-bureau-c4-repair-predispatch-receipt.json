@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_deepseek_v4_flash_high_c4_material_finding_repair",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "AER-0025 and model-required-bureau-c4-worker-independent-review.md reject the original self-pass while preserving the exact clean owned-path candidate. The repair packet SHA-256 is 0f8248f0b37d11f372ba56729826347a77510ee8d4843057c64167e6fdfdac53 and requires scalar fail-closed admission, full actual-target readback, current authority sources, success-only effect audit, exact counter schemas, non-caller-selectable entropy and concurrency-safe issuance with adversarial regressions. No candidate is accepted until deterministic checks and fresh Gemini veto pass.",
+    "current_authority_allocation": "Sol owns defect classification, repair packet, acceptance, integration and final review. One fresh DeepSeek V4 Flash/high process through Claude Code bare may repair only the seven frozen findings in the existing isolated worker branch. Gemini 3.6 Flash/high retains only the later fresh exact-head veto. No worker has acceptance, push, product-runtime, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Primary task HEAD is exact e51e935a60393c5f01a2a026267074c3fc44fa54. The clean repair worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-c4-simulator is on non-protected branch codex/worker-model-required-bureau-c4-simulator at exact untrusted candidate c56267d23c24dd9e4fe642df85e74cc95de07a6e. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary preserved untracked files remain outside the worker worktree.",
+    "live_handover_current_baton": "C4 remains the exact active descendant. The first worker candidate c56267d23c24dd9e4fe642df85e74cc95de07a6e is untrusted and not integrated after independent review reproduced material authority, admission and readback defects. A bounded repair descendant is the next safe action under standing recovery authority.",
+    "protected_evidence_boundaries": "The repair worker may edit only the original 15-path C4 simulator/schema/acceptance/test/OpenAPI boundary. AGENTS, plans/threats/reviews/receipts, existing tests, app code, migrations, global Continuity/Compass, docs/branding, protected evidence, patient/clinical/product-derived/production data, real targets/credentials, provider product runtime, C5, deployment, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 18,
+  "register_revision": 19,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-05",
@@ -933,6 +933,43 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0025",
+      "attempt_id": "model-required-bureau-c4-simulator-worker-001",
+      "observed_on": "2026-08-05",
+      "tranche": "model-required-bureau-c4-implementation",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-c4-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A worker may self-report pass only when its exact owned-path candidate satisfies the frozen authority, schema-admission, target-readback, audit, cryptographic-evidence and acceptance invariants; Sol and fresh independent review remain mandatory before acceptance.",
+      "observed_error": "The worker returned DECISION: pass and committed a clean owned-path candidate, but independent review reproduced malformed-input evidence consumption before an exception, false success for the wrong actual target, absent current authority sources, retained effect audit after rollback, non-exact receipt counter schemas, caller-selected evidence entropy and unlocked issuance uniqueness.",
+      "detection_method": "Sol inspected the exact worker diff and a bounded independent native review reproduced both P1 failures while the worker worktree stayed clean; focused and inherited tests passed but did not cover the missing invariants.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/model-required-bureau-c4-simulator-worker-receipt.json",
+        "orchestration/agent_inbox/codex/model-required-bureau-c4-worker-independent-review.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The worker receipt and commit are preserved as untrusted and are not integrated. Sol froze a distinct exact-finding repair descendant; any corrected candidate must pass expanded adversarial tests, full deterministic verification and a fresh exact-head Gemini implementation veto before acceptance.",
+        "prevention_control": "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/model-required-bureau-c4-worker-independent-review.md",
+          "docs/ariadne-agent-error-correction-register-revision-19.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

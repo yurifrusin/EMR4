@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c4_untrusted_worker_rejection_aer_0025_and_repair_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 remains active. The first worker candidate is rejected and untrusted; a distinct exact-finding repair is now active only after its fresh pre-worker-dispatch receipt passed.",
+    "current_authority_allocation": "Sol retains all acceptance, integration and recovery authority. The repair worker may change only original C4 owned paths and commit its non-protected branch. Gemini final veto remains held. No worker has product-runtime, push, protected-ref, deployment or release authority.",
+    "active_plan_and_acceptance": "AER-0025 revision 19 contains the rejected worker self-pass and independent review's two P1, four P2 and one concurrency-hardening finding. The register has 25 bounded incidents, AER-0025 contained/escalated and none open; 32 focused register tests and git diff --check pass. The original worker receipt and exact review memo are preserved. The repair packet and passing dispatch receipt bind the next attempt to the seven exact findings without widening C4.",
+    "protected_evidence_boundaries": "Only revision 19, the original worker receipt, independent review memo, repair packet, passing repair-dispatch pair and this precommit pair are eligible for explicit staging. Docs/branding and all unrelated untracked files remain preserved/excluded. Product/provider runtime, real targets, patient/product/protected data, C5, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Primary task HEAD is exact e51e935a60393c5f01a2a026267074c3fc44fa54 before staging. The repair worker started from clean exact c56267d23c24dd9e4fe642df85e74cc95de07a6e on codex/worker-model-required-bureau-c4-simulator. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary index is clean and preserved unrelated files are outside the candidate."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c4_repair_control_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol rejected the worker self-pass, preserved exact evidence and froze the bounded repair."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The bounded native review completed read-only and produced exact reproducible findings."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The plan veto passed; final code veto remains held until a corrected deterministic candidate exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh DeepSeek V4 Flash/high repair transport started only after the exact corrected dispatch receipt passed."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is transport only; no Claude model lane is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": ["model-required-bureau-c4-simulator-repair-001"],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "model-required-bureau-c4-simulator-repair-001",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-c4-simulator",
+      "branch": "codex/worker-model-required-bureau-c4-simulator",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-05T18:00:00+10:00",
+      "source_head": "c56267d23c24dd9e4fe642df85e74cc95de07a6e",
+      "candidate_head": "c56267d23c24dd9e4fe642df85e74cc95de07a6e"
+    }
+  ],
+  "assigned_agent_ids": ["model-required-bureau-c4-simulator-repair-001"]
+}

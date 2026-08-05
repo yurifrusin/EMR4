@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_deepseek_v4_flash_high_c4_material_finding_repair",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 remains the exact active descendant. The first worker candidate c56267d23c24dd9e4fe642df85e74cc95de07a6e is untrusted and not integrated after independent review reproduced material authority, admission and readback defects. A bounded repair descendant is the next safe action under standing recovery authority.",
+    "current_authority_allocation": "Sol owns defect classification, repair packet, acceptance, integration and final review. One fresh DeepSeek V4 Flash/high process through Claude Code bare may repair only the seven frozen findings in the existing isolated worker branch. Gemini 3.6 Flash/high retains only the later fresh exact-head veto. No worker has acceptance, push, product-runtime, protected-ref, deployment or release authority.",
+    "active_plan_and_acceptance": "AER-0025 and model-required-bureau-c4-worker-independent-review.md reject the original self-pass while preserving the exact clean owned-path candidate. The repair packet SHA-256 is 0f8248f0b37d11f372ba56729826347a77510ee8d4843057c64167e6fdfdac53 and requires scalar fail-closed admission, full actual-target readback, current authority sources, success-only effect audit, exact counter schemas, non-caller-selectable entropy and concurrency-safe issuance with adversarial regressions. No candidate is accepted until deterministic checks and fresh Gemini veto pass.",
+    "protected_evidence_boundaries": "The repair worker may edit only the original 15-path C4 simulator/schema/acceptance/test/OpenAPI boundary. AGENTS, plans/threats/reviews/receipts, existing tests, app code, migrations, global Continuity/Compass, docs/branding, protected evidence, patient/clinical/product-derived/production data, real targets/credentials, provider product runtime, C5, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Primary task HEAD is exact e51e935a60393c5f01a2a026267074c3fc44fa54. The clean repair worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-c4-simulator is on non-protected branch codex/worker-model-required-bureau-c4-simulator at exact untrusted candidate c56267d23c24dd9e4fe642df85e74cc95de07a6e. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary preserved untracked files remain outside the worker worktree."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c4_repair_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol independently reproduced/reconciled the material findings and froze their exact repair packet."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["A bounded native read-only review completed and conferred no implementation or acceptance authority."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The plan veto passed; final implementation veto remains held until a deterministic repaired candidate exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["DEEPSEEK_API_KEY presence is represented without disclosure; a fresh exact deepseek-v4-flash/high repair process with no fallback is ready."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is transport only; no Claude model lane is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": ["model-required-bureau-c4-simulator-repair-001"],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "model-required-bureau-c4-simulator-repair-001",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-c4-simulator",
+      "branch": "codex/worker-model-required-bureau-c4-simulator",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-05T18:00:00+10:00",
+      "source_head": "c56267d23c24dd9e4fe642df85e74cc95de07a6e",
+      "candidate_head": "c56267d23c24dd9e4fe642df85e74cc95de07a6e"
+    }
+  ],
+  "assigned_agent_ids": ["model-required-bureau-c4-simulator-repair-001"]
+}
