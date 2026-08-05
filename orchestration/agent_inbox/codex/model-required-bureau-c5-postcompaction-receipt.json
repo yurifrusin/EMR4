@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "preserve_the_rejected_c5_worker_candidate_and_begin_bounded_sol_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling boundary is docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md with its security threat-model delta, passed Sol plan acceptance and exact DeepSeek worker packet. The first independent provider-free audit reproduced material candidate, port, process-readback, rollback, cleanup, shared-store issuance, adapter-contract, artifact-pinning and accounting gaps in worker commit 45a7a76e0705a2b534779847866507017370c557. That self-pass is rejected and must be preserved; recovery remains inside the frozen C5 plan and cannot proceed to any live target, socket or provider action until deterministic and fresh independent implementation gates pass.",
+    "current_authority_allocation": "GPT Sol owns C5 architecture, recovery, acceptance and task-branch integration. DeepSeek V4 Flash/high through Claude Code bare supplied only an untrusted bounded implementation candidate at 45a7a76e0705a2b534779847866507017370c557. Gemini 3.6 Flash/high through a fresh Antigravity project remains eligible only for a later deterministic-gated exact-HEAD read-only veto. Native audit lanes have read-only reproduction authority and no acceptance, integration, live-action or protected-ref authority.",
+    "git_refs_and_worktree": "The active worktree is C:\\Users\\sarashera\\emr4 on codex/ariadne-bernie-davida-parallel-seam at HEAD 953073e18ab48420b58d80ed78d41e8033534cb8, two commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Local and origin master plus local and origin handoff/current remain exactly aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked index/worktree is clean and all listed untracked files, especially docs/branding/, are preserved. The rejected worker worktree remains clean at 45a7a76e0705a2b534779847866507017370c557.",
+    "live_handover_current_baton": "AGENTS.md names accepted C4 as the current result and C5 disposable non-PHI live-development recovery as the planned successor under standing uninterrupted-development authority. The C5 plan itself is now frozen and independently accepted at plan HEAD cc81ccbcc1676d616ca4bae5cb5702b8dbede7b6, while implementation remains unaccepted. The separate Raisa Practice Context Fabric is durably recorded as an accepted strategic direction with implementation unstarted.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, patient, clinical, participant, product-derived, protected and production data; app/product/database/runtime routes; ordinary services; provider calls and ADC inspection; target process, socket, port or task-directory live action; deployment, release, Pages and protected refs remain closed during recovery. docs/branding/ and every existing unrelated untracked Consultant, Gate-minus-one, A3/B3, A4 and A5 receipt/state file remain preserved and excluded. Git staging remains explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

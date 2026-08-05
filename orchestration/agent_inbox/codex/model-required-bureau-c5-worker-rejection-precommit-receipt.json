@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_c5_worker_rejection_and_activate_bounded_sol_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen C5 plan, threat delta and passed plan acceptance remain unchanged. The worker audit records material candidate/proofreader/port binding, process readback, rollback, cleanup, shared-store issuance, adapter, pinning, grounding, approval, schema, correction-state and accounting defects. Revision 22 contains AER-0027 and the exact Sol recovery lease adds one direct adversarial regression per finding. No live action can be considered until deterministic recovery and a fresh independent veto pass.",
+    "current_authority_allocation": "DeepSeek V4 Flash/high supplied only rejected untrusted C5 source and receives no same-lane repair, acceptance, integration or live authority. Sol owns the exact recovery lease and task-branch integration. Gemini 3.6 Flash/high remains eligible only for a fresh deterministic-gated exact-HEAD read-only veto after recovery. The completed native audit lanes made no edits and hold no continuing authority.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 953073e18ab48420b58d80ed78d41e8033534cb8, two commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Local/origin master and local/origin handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The rejected worker worktree is clean at 45a7a76e0705a2b534779847866507017370c557. This commit stages only the C5 worker packet/receipts, independent audit, AER revision/register/report/tests, recovery lease, AGENTS baton update and Ariadne receipt/state files.",
+    "live_handover_current_baton": "C4 remains the last accepted implementation result. The exact C5 plan passes, but DeepSeek worker commit 45a7a76e0705a2b534779847866507017370c557 and its self-pass are rejected as AER-0027 after independent provider-free audits reproduced fourteen material gaps. The accepted Context Fabric remains a separate unimplemented staged direction.",
+    "protected_evidence_boundaries": "Only local provider-free authored-synthetic C5 source, receipts, schemas and fakes are in scope. Protected holdouts v1-v10, historical PHI, patient/clinical/participant/product-derived/protected/production data, app/product/database/runtime routes, providers and ADC, real target/process/socket/port/directory action, deployment, release, Pages and protected refs remain closed. docs/branding/ and all unrelated untracked receipt/state files remain preserved and excluded by explicit-path staging."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

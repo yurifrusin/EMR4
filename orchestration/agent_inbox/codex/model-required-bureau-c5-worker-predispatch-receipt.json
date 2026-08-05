@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_v4_flash_high_c5_provider_free_implementation_worker",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling plan is docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md at reviewed source cc81ccbcc1676d616ca4bae5cb5702b8dbede7b6, accepted and carried into worker source 953073e18ab48420b58d80ed78d41e8033534cb8. Fresh Gemini returned one pass after 202 tests with zero finding and exact clean unchanged worktree. Worker packet SHA-256 is ffb9d7511850ce8891a68c1e28b88cf14d510024af0e0738d74f8011f2c09a2e and permits only provider-free implementation/readiness evidence using fakes.",
+    "current_authority_allocation": "Sol owns C5 architecture, recovery, live sequence, integration and acceptance. One DeepSeek V4 Flash/high worker through Claude Code bare may implement only the frozen provider-free owned-path packet. Gemini plan-veto authority is closed and a separate fresh code veto remains later. The worker may commit only its non-protected branch and may not start the target, open a socket, call the candidate provider, push, deploy or move refs.",
+    "git_refs_and_worktree": "Primary task HEAD is exact 953073e18ab48420b58d80ed78d41e8033534cb8. Fresh clean worker worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-c5-implementation is on non-protected branch codex/worker-model-required-bureau-c5-implementation at the same exact source. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary preserved untracked files remain outside the worker worktree and candidate index.",
+    "live_handover_current_baton": "C4 is accepted and published. C5's exact disposable live-development recovery plan is now frozen and accepted at source 953073e18ab48420b58d80ed78d41e8033534cb8 after a fresh exact-head architecture/security veto; the Context Fabric remains a separate staged horizon.",
+    "protected_evidence_boundaries": "The worker owns only the named C5 scripts, two new focused tests, the new C5 continuity directory and optional explicitly not_mounted OpenAPI document. It may not edit AGENTS, plan/threat/review artifacts, app code, migrations, existing tests, C4, global Continuity/Compass, docs/branding, provider configuration, deployment files, protected evidence or another worktree. Patient/clinical/product/protected data, actual process/socket/filesystem runtime effects, candidate-provider calls, product/database/ordinary-service access, Context Fabric implementation, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

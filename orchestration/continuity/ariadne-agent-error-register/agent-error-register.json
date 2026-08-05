@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 21,
+  "register_revision": 22,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-05",
@@ -1014,6 +1014,44 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0027",
+      "attempt_id": "model-required-bureau-c5-implementation-worker-001",
+      "observed_on": "2026-08-05",
+      "tranche": "model-required-bureau-c5-implementation",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-c5-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A worker may self-report pass only when its exact owned-path C5 candidate satisfies the frozen model/proofreader/approval/evidence/port/process/readback/rollback/cleanup/schema/accounting invariants; Sol and fresh independent review remain mandatory before acceptance or live eligibility.",
+      "observed_error": "The worker returned DECISION: pass and committed a clean owned-path candidate, but independent provider-free audits reproduced fourteen material gaps including unbound candidate/proofreader/port evidence, no fresh process success readback, rollback escape on exceptions, false cleanup verification, issuer-local one-use state, an incomplete real adapter, absent executable/artifact pinning, under-grounded stopped-process diagnosis, incomplete approval revalidation, contradictory frame/proofreader schemas, unenforced correction-call state, parser/schema divergence and false live-operation accounting.",
+      "detection_method": "Sol and two bounded native read-only audit lanes inspected exact clean worker commit 45a7a76e0705a2b534779847866507017370c557 and used only in-memory fakes to reproduce the P1 success, rollback, cleanup and shared-store failures; the worker-focused suite and acceptance check still passed, demonstrating missing adversarial coverage.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/model-required-bureau-c5-implementation-worker-receipt.json",
+        "orchestration/agent_inbox/codex/model-required-bureau-c5-worker-independent-audit.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The worker receipt and commit remain preserved as rejected untrusted provenance. The material authority and state-machine gaps move directly to Sol's named recovery lease with one direct adversarial regression per finding, full deterministic verification and a fresh exact-head Gemini 3.6 Flash/high veto required before any live C5 action.",
+        "prevention_control": "C5 implementation acceptance must adversarially bind candidate, proofreader, frame, provider ledger, port, artifact and full approval; require fresh process plus HTTP readback; rollback every post-launch exception; prove cleanup predicates before success; share issuance/correction/idempotency state; pin exact paths and hashes; and mechanically align closed schemas with runtime admission.",
+        "evidence_paths": [
+          "docs/ariadne-orchestrator-recovery-lease.md",
+          "orchestration/agent_inbox/codex/model-required-bureau-c5-worker-independent-audit.md",
+          "docs/ariadne-agent-error-correction-register-revision-22.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

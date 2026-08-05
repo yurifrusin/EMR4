@@ -32,16 +32,16 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_c4_sol_recovery() -> None:
+def test_committed_register_is_semantically_valid_after_c5_worker_rejection() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 21
+    assert register["register_revision"] == 22
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 27)
+        f"AER-{index:04d}" for index in range(1, 28)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 20
+    assert len(agent_incidents) == 21
     assert len(transport_incidents) == 2
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -266,6 +266,40 @@ def test_c4_bounded_repair_self_pass_is_corrected_by_exact_transactional_control
     assert "exact reviewer role" in action
 
 
+def test_c5_worker_self_pass_is_contained_and_routes_to_sol_recovery() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0027"
+    )
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "deepseek"
+        / "model-required-bureau-c5-implementation-worker-receipt.json"
+    )
+    audit = (
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c5-worker-independent-audit.md"
+    ).read_text(encoding="utf-8")
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "implementer"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert incident["status"] == "contained"
+    assert receipt["model"] == "deepseek-v4-flash"
+    assert "DECISION: pass" in receipt["result"]
+    assert "execution is not bound" in audit
+    assert "cleanup can falsely claim" in audit
+    assert "proofreader does not require" in audit
+    assert "Disposition: `revision_required`" in audit
+
+
 def test_davida_review_errors_match_preserved_evidence() -> None:
     register = _register()
     rows = {row["incident_id"]: row for row in register["incidents"]}
@@ -305,10 +339,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 26
+    assert report["incident_count"] == 27
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 20,
+        "agent_behavior": 21,
         "harness": 3,
         "repository": 1,
         "transport": 2,
@@ -319,14 +353,14 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "harness_failure": 3,
         "output_contract_violation": 11,
         "read_only_violation": 1,
-        "reasoning_claim_error": 3,
+        "reasoning_claim_error": 4,
         "repository_defect": 1,
         "transport_timeout": 2,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 1,
         "canonical_unchanged": 20,
-        "untrusted_partial_worktree": 5,
+        "untrusted_partial_worktree": 6,
     }
     assert report["recurring_patterns"] == [
         {
