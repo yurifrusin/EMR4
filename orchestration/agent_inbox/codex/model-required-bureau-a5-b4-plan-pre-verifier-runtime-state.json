@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_fresh_gemini_a5_b4_architecture_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton names provider-free paired A5.1 Rayleen check-in/status proposal-confirm and B4.1 Davida practitioner default-location command runtime as the next safe descendant. The exact plan candidate is now committed for a mandatory fresh security/architecture veto before implementation.",
+    "current_authority_allocation": "Sol retains architecture, acceptance, recovery and integration authority. Gemini 3.6 Flash/high through a fresh Antigravity project has read-only independent veto authority on this exact candidate and may return only pass or revision_required. It has no implementation, commit, integration, baton, protected-ref, provider-runtime, product-data, deployment or release authority. DeepSeek implementation remains held pending the veto.",
+    "active_plan_and_acceptance": "Candidate commit 7bcd7cc46eff549300dfd60e6a269781e820b9e8 freezes the paired plan and threat-model delta. Focused Ariadne tests passed 33 of 33, git diff --check passed, and the exact verifier worktree preflight passed on branch codex/review-model-required-bureau-a5-b4-plan at the same head with clean=true and provider_or_model_calls=0.",
+    "protected_evidence_boundaries": "Review is repository-local and read-only. Holdouts v1-v10, patient/clinical/product-derived/participant/protected/production data and historical reviewer artifacts are excluded. The verifier may not edit, call product providers, open runtime/product-data gates, publish events, deploy, release, rebuild Pages, move protected refs or inspect docs/branding. Only the exact plan, threat delta, current relevant source/API-spine contracts and five-source authority may be read.",
+    "git_refs_and_worktree": "The primary task HEAD is 7bcd7cc46eff549300dfd60e6a269781e820b9e8, one local commit ahead of origin task. The clean review worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a5-b4-plan-gemini-review is on non-protected branch codex/review-model-required-bureau-a5-b4-plan at exact head 7bcd7cc46eff549300dfd60e6a269781e820b9e8. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary preserved untracked files remain outside the candidate and index."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "a5_b4_pre_verifier_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol committed and bound the exact plan candidate and retained all protected boundaries."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The bounded Rayleen analysis lane is read-only and holds no acceptance or integration authority."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The repository Antigravity adapter accepted model gemini-3.6-flash-high/high and the exact clean non-protected verifier worktree passed deterministic preflight."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek V4 Flash/high remains uncalled and held until the independent architecture veto passes."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected or used."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude model lane is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

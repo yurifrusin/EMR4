@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.local_analysis_receipt.v1",
+  "status": "completed",
+  "decision": "revision_required",
+  "candidate_head": "7bcd7cc46eff549300dfd60e6a269781e820b9e8",
+  "lane": "bounded_read_only_rayleen_a5_1_analysis",
+  "provider_or_model_calls": 0,
+  "files_modified": [],
+  "material_findings": [
+    {
+      "code": "a5_signed_evidence_not_durably_one_use",
+      "finding": "The generic signed status-confirm evidence could be reused with a different idempotency key after appointment state was restored because no durable evidence-consumption key survived the first command.",
+      "required_correction": "Use an A5-specific expiring signed nonce token, hash it onto a durable uniquely constrained check-in command claim, resolve exact same-key replay before evidence consumption, and return confirmation_replay_rejected for different-key reuse."
+    },
+    {
+      "code": "a5_generic_status_surface_too_broad",
+      "finding": "The generic status route admits arbitrary status operations and GP, Nurse, Admin and PracticeOwner roles and returns patient-bearing AppointmentOut.",
+      "required_correction": "Use a dedicated default-off Receptionist-only check-in proposal/confirm operation for exactly Booked or Confirmed to Arrived with a patient-free receipt; keep generic status semantics unchanged."
+    },
+    {
+      "code": "a5_waiting_area_location_binding_missing",
+      "finding": "Same-practice active waiting-area validation alone does not prove compatibility with the appointment location.",
+      "required_correction": "Require an exact non-null appointment location and the same waiting-area location under the locked confirmation transaction."
+    },
+    {
+      "code": "a5_event_feed_family_isolation_missing",
+      "finding": "The current reschedule feed does not filter the event type in both cursor validation and row selection and could parse a new check-in row as a reschedule payload.",
+      "required_correction": "Filter diary.appointment_rescheduled in cursor validation and row selection and add an interleaved check-in regression."
+    }
+  ],
+  "acceptance_additions": [
+    "different_key_same_evidence_replay_after_state_restoration",
+    "two_concurrent_distinct_key_confirms_exactly_one_success",
+    "injected_atomic_failure_rollbacks",
+    "patient_free_receipt_serialization",
+    "interleaved_check_in_reschedule_feed_cursor_regression",
+    "single_alembic_head_upgrade_downgrade_forced_rls_and_append_only_checks"
+  ],
+  "authority_boundary": "read_only_analysis_no_edit_commit_integration_acceptance_provider_or_protected_ref_authority"
+}

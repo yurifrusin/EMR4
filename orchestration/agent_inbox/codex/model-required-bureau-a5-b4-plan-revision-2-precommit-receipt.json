@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_a5_1_b4_1_plan_revision_2_for_fresh_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Revision 2 plan SHA-256 is d982e8b6dfbefffb3f12de03a6dca8f893ca5ab759bb0cc204d7ebed0c0b5097 and threat delta SHA-256 is 0655c6ba439aafc81682bec8a32e4a5b100542fbd1456a8d5599373f9d6e4d87. The local Rayleen analysis receipt SHA-256 5474931d2760febcb48f7ac21cb3a8dfceff422c83ae34dd6f0276551f0a5687 identified reusable evidence, generic-route breadth, waiting-area location and feed-isolation defects. Gemini receipt SHA-256 67aa8a4e11264a9a2494c294ef87df3d5a2eccde486f3c6538d58dab08b34ed7 independently returned revision_required for missing OpenAPI attestation, incomplete diary-event migration specification and ambiguous role normalization. Revision 2 closes all seven findings. Focused Ariadne tests passed 33 of 33 and git diff --check passed.",
+    "current_authority_allocation": "Sol owns the revision, acceptance and integration. The read-only native Rayleen lane and Gemini 3.6 Flash/high Antigravity veto had finding authority only and modified nothing. DeepSeek V4 Flash/high implementation remains held until a fresh exact-head veto passes. No lane receives provider-runtime, product-data, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Primary HEAD is exact first plan commit 7bcd7cc46eff549300dfd60e6a269781e820b9e8 on codex/ariadne-bernie-davida-parallel-seam. The old review worktree remains clean and unchanged at that exact historical head. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean before explicit revision staging and all unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "The live baton requires the paired provider-free A5.1 Rayleen check-in and B4.1 Davida default-location command descendant. The first plan candidate was correctly rejected and revision 2 is the next bounded recovery candidate under standing uninterrupted authority.",
+    "protected_evidence_boundaries": "Revision remains local, provider-free product runtime and authored-synthetic only. Holdouts v1-v10, patient/clinical/product-derived/participant/protected/production data, autonomous action, GraphQL mutation, external event delivery, deployment, release, Pages and protected refs remain closed. docs/branding and preserved Consultant, Gate-minus-one, A3/B3 and A4 pre-push files remain untracked and untouched. Only the exact revision and its new review/receipt lineage may be explicitly staged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,7 +1,7 @@
 # EMR4 Model-Required Bureaus — Paired A5.1/B4.1 Command Runtime Plan
 
 Date: 2026-08-05
-Status: frozen candidate for independent architecture veto before implementation
+Status: revision 2 candidate for independent architecture veto before implementation
 Parent authority: `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`
 API authority: `orchestration/api_spine_adr.md`
 
@@ -10,14 +10,13 @@ API authority: `orchestration/api_spine_adr.md`
 This descendant implements two provider-free, backend-owned and human-confirmed
 command paths without joining their domain authority:
 
-1. **A5.1 Rayleen check-in** deliberately extends the existing appointment
-   status proposal/confirm family for the exact `Booked|Confirmed -> Arrived`
-   transition, with an optional current-practice active waiting area. The
-   existing signed confirmation evidence remains the proposal binding. The
-   confirmation transaction gains row locking, exact current-state
-   revalidation, durable idempotency correlation, one immutable appointment
-   audit row, one patient-free committed check-in event and deterministic
-   readback.
+1. **A5.1 Rayleen check-in** adds a dedicated command operation built from the
+   existing appointment status primitives for the exact
+   `Booked|Confirmed -> Arrived` transition, with an optional compatible active
+   waiting area. It uses a server-minted expiring signed token whose hash is
+   durably consumed once, a dedicated idempotency namespace, row locking, exact
+   current-state revalidation, one immutable appointment audit row, one
+   patient-free committed check-in event and a bounded patient-free readback.
 2. **B4.1 Davida default location** mounts the already designed single-purpose
    practitioner default-location proposal/attestation/confirm family. Davida is
    proposal provenance only. Only a currently authenticated human `Admin`
@@ -75,19 +74,26 @@ descendant. Domain services own their schemas, failure codes and persistence.
 
 ## 4. A5.1 Rayleen check-in contract
 
-### 4.1 Reused surface
+### 4.1 Dedicated operation, shared Diary truth
 
-Reuse and deliberately extend:
+Add two routes to the existing appointment REST router:
 
-- `POST /api/v1/appointments/proposals/status/{appointment_id}`
-- `POST /api/v1/appointments/proposals/status-confirm`
-- `AppointmentStatusProposalIn`, `AppointmentStatusProposalConfirmationIn`
-- the accepted HMAC signed status-confirm evidence and freshness binding
-- `AppointmentCommandIdempotency` and `AppointmentAuditLog`
+- `POST /api/v1/appointments/proposals/check-in/{appointment_id}`
+- `POST /api/v1/appointments/proposals/check-in/confirm`
 
-No Rayleen-only mutation endpoint or private action grammar is added. Rayleen
-may supply proposal provenance; the current authenticated human remains the
-actor and confirmer.
+The routes reuse the authoritative appointment/waiting-area models and internal
+status/audit/idempotency primitives, but use closed A5-specific schemas and
+operation id `confirmAppointmentCheckInProposal`. This avoids changing the
+generic status-confirm token semantics or admitting arbitrary status changes,
+GP/Nurse roles and patient-bearing `AppointmentOut` into A5 evidence.
+
+The initial path is default-off and admitted only for explicitly configured
+authored-synthetic practice ids. The confirmer is exactly a current
+`Receptionist`. `Admin`, `PracticeOwner`, GP and Nurse remain outside this
+initial A5.1 route. Rayleen may supply bounded proposal provenance; the current
+authenticated receptionist remains the only actor and confirmer. The route is
+not a private Rayleen action grammar: it invokes the one backend-owned Diary
+check-in command.
 
 ### 4.2 Exact check-in admission
 
@@ -95,42 +101,96 @@ The A5.1 committed-event branch applies only when all of these hold:
 
 - current status is `Booked` or `Confirmed`;
 - requested status is exactly `Arrived`;
-- the proposal and signed evidence bind the same appointment, practice,
-  authenticated staff user, current status, current waiting area, target
-  status, target waiting area and freshness identifier;
-- an optional target waiting area is active and belongs to the same practice;
-- `confirmed=true` and the ordinary status-confirm role dependency admits the
-  current human user;
+- the proposal and server-minted evidence bind the same appointment, practice,
+  authenticated receptionist, current status, current waiting area, target
+  status, target waiting area, evidence nonce/expiry and freshness identifier;
+- an optional target waiting area is active, belongs to the same practice and
+  has the same non-null location as the appointment; an appointment without a
+  resolved location cannot be assigned a waiting area through A5.1;
+- `confirmed=true`, the default-off practice gate is open for the exact
+  authored-synthetic practice and the dedicated Receptionist dependency admits
+  the current human user;
 - the exact appointment row is locked before the final state/evidence check.
 
-Other existing status confirmations keep their present behavior and produce no
-new check-in event. `Arrived -> Arrived`, terminal-to-arrived, stale, tampered,
-cross-practice, inactive-area and role/session mismatch paths produce no truth,
-audit, idempotency completion or event effect.
+The proposal changes no database state. Its HMAC-signed opaque evidence contains
+a cryptographically random nonce, exact purpose, issued-at and bounded expiry;
+the client cannot mint or alter it. Confirmation hashes that evidence and
+records the hash on the dedicated durable command claim under a unique partial
+constraint on `(practice_id, operation_id, confirmation_evidence_hash)`. The
+token is one opaque patient-free base64url value; client-visible structured
+claims cannot be submitted as a substitute. Same-key exact replay is resolved
+from the stored receipt before evidence consumption. A first-use claim uses a
+conflict-aware insert/savepoint so the losing concurrent transaction is
+deterministically classified rather than leaking a database integrity error.
+Any different-key reuse of the same evidence hash returns
+`confirmation_replay_rejected`, including after appointment state is later
+restored. Other existing status confirmations keep their present behavior and
+produce no check-in event. `Arrived -> Arrived`, terminal-to-arrived, stale,
+expired, tampered, wrong-purpose, wrong-actor, wrong-practice, cross-practice,
+inactive/incompatible-area and role/session mismatch paths produce no truth,
+audit, idempotency completion, evidence consumption or event effect.
 
 ### 4.3 Atomic unit and event
 
-Within the existing durable status-confirm transaction, A5.1 must:
+Within the dedicated check-in transaction, using the existing durable
+appointment-command primitives, A5.1 must:
 
-1. claim the scoped idempotency key and canonical request fingerprint;
-2. lock and revalidate the exact practice-scoped appointment;
-3. verify the accepted signed status evidence and exact freshness;
-4. update status to `Arrived` and apply the explicitly supplied waiting area;
-5. append exactly one `AppointmentAuditLog` row bound to the command id;
-6. append exactly one `DiaryCommittedEvent` with:
+1. return an exact same-key/same-fingerprint completed receipt if present;
+2. claim the A5-scoped idempotency key, canonical request fingerprint and
+   unique signed-evidence hash;
+3. lock and revalidate the exact practice-scoped appointment;
+4. verify the A5 evidence purpose, signature, nonce, expiry and exact freshness;
+5. update status to `Arrived` and apply the explicitly supplied waiting area;
+6. append exactly one `AppointmentAuditLog` row bound to the command id;
+7. append exactly one `DiaryCommittedEvent` with:
    - event type `diary.appointment_checked_in`;
    - schema version `diary.appointment_checked_in.v1`;
    - exact allowlisted patient-free payload fields
-     `appointment_id`, `practitioner_id`, `location_id`, `status`,
-     `waiting_area_id`, `reason_codes`;
+     `appointment_id`, `practitioner_id`, `location_id`, `status_before`,
+     `status_after`, `waiting_area_id_before`, `waiting_area_id_after`,
+     `reason_codes`;
    - reason codes exactly `["appointment_checked_in"]`;
-7. complete the idempotency receipt with appointment and audit correlation;
-8. commit once and return the freshly reloaded appointment.
+8. complete the idempotency receipt with appointment, evidence and audit
+   correlation;
+9. commit once and return a freshly reloaded bounded receipt containing only
+   appointment id, resulting status, resulting waiting-area id, audit id, event
+   id, command id and commit time.
 
 The committed-event table and schema are extended by an exact conditional
 allowlist for the second event family; the existing reschedule event contract
-must remain byte-for-byte equivalent in behavior. No external publisher or
-consumer is added.
+must remain byte-for-byte equivalent in behavior. The existing reschedule feed
+must filter `event_type = diary.appointment_rescheduled` during both cursor
+validation and row selection so an interleaved check-in row cannot be parsed as
+a reschedule payload or corrupt cursor semantics. No check-in consumer,
+external publisher or worker is added.
+
+### 4.4 A5.1 persistence and declarative contracts
+
+The sequential descendant migration must deliberately add nullable
+`confirmation_evidence_hash` and `confirmation_evidence_consumed_at` columns to
+`appointment_command_idempotency`. Operation
+`confirmAppointmentCheckInProposal` requires both values; other existing
+operations preserve null. A unique partial index over
+`(practice_id, operation_id, confirmation_evidence_hash)` where the hash is
+non-null prevents the same evidence from being committed by two command rows.
+A completed confirmed check-in additionally requires target appointment and
+audit correlation. The migration must also replace, by exact name, all three
+existing `diary_committed_events` constraints that otherwise admit only
+reschedule rows:
+
+- `ck_diary_committed_events_type`;
+- `ck_diary_committed_events_schema`; and
+- `ck_diary_committed_events_payload_allowlist`.
+
+The replacements are conditional on the exact event type and require the exact
+matching schema/payload for either reschedule or check-in. The existing source,
+evidence-mode, revision, expiry and correlation constraints remain unchanged.
+The migration upgrade and downgrade must each restore one valid Alembic head.
+
+Update the declarative appointment OpenAPI and async-event manifests with only
+the dedicated check-in proposal/confirm family and the patient-free checked-in
+event. YAML remains documentation/manifest policy and does not confer runtime
+authority.
 
 ## 5. B4.1 Davida default-location contract
 
@@ -179,6 +239,18 @@ valid evidence record from structured claims. An exact retry returns the same
 still-live unconsumed reference. Consumed, expired, changed-role or changed-
 payload evidence requires a fresh proposal and attestation.
 
+Role assertion normalization is exact and server-owned. Before comparing the
+non-authoritative body assertion, the server maps only
+`UserRole.Admin -> practice_manager` and
+`UserRole.PracticeOwner -> practice_owner`; there are no aliases, case folding,
+fallbacks or client-selected mappings. The mapped value must equal the asserted
+value. The underlying current enum remains authoritative for authorization.
+
+Evidence issuance uses a canonical attestation payload hash and one unique
+practice/actor/proposal-hash record. A concurrent exact retry may return the
+same still-live unconsumed reference; a changed payload conflicts. An expired
+or consumed record cannot be renewed from the old proposal.
+
 ### 5.4 Confirmation transaction
 
 The confirm route, in order:
@@ -218,6 +290,16 @@ Add one sequential Alembic descendant after the current head with:
 - `practice_administration_audit_events`;
 - `practice_administration_outbox_events`.
 
+The accepted OpenAPI artifact
+`docs/api-spine/openapi/practice-administration-default-location-commands.yaml`
+must be revised from architecture-only to this exact authorized local runtime
+and must add the missing
+`/proposals/{proposal_id}/confirmation-evidence` operation, its closed request
+and response schemas, idempotency/replay semantics, role normalization and
+zero-domain-mutation effect. Its proposal and confirm operations must be made
+consistent with the three-step contract. This declarative update alone grants
+no authority.
+
 Every table is practice-scoped. Durable rows store hashes and bounded enum/code
 values, never raw idempotency keys, provider output, patient data or free text.
 Audit and outbox rows are append-only. Row-level security is enabled and forced
@@ -244,20 +326,31 @@ provider configuration, deployment files or `docs/branding/`.
 
 ### A5.1 deterministic acceptance
 
-- proposal is non-mutating and signed evidence binds current state;
+- proposal is non-mutating and expiring signed evidence binds current state,
+  purpose, actor and a random nonce;
 - exact Booked/Confirmed-to-Arrived success, with and without active waiting
   area;
+- default-off practice admission and exact Receptionist-only role behavior;
+- same-practice waiting area must be active and location-compatible;
 - row-lock/current-state revalidation under stale and concurrent change;
 - same-key replay returns exact stored response and no second audit/event;
 - same-key changed body conflicts and in-progress fails closed;
+- different-key same-evidence replay fails even after the appointment is
+  deliberately restored to its original state;
+- two concurrent distinct-key confirms of one evidence token produce exactly
+  one success and one replay rejection;
 - tampered/wrong-purpose/expired evidence, cross-practice appointment/area,
   inactive area, terminal source and no-op all produce zero effects;
 - appointment status, waiting area, command-bound audit, committed event and
   idempotency completion are atomic;
+- injected failures at evidence claim, audit, event and idempotency completion
+  roll back every member;
 - event payload contains no patient identifier/name or clinical/free text;
-- existing reschedule event, other status-confirm and raw compatibility suites
-  remain green;
-- deterministic readback matches committed PostgreSQL truth.
+- the A5 receipt serialization is patient-free;
+- an interleaved check-in row cannot enter or corrupt the reschedule feed;
+- existing reschedule event, generic status-confirm, past-date and raw
+  compatibility suites remain green;
+- deterministic bounded readback matches committed PostgreSQL truth.
 
 ### B4.1 deterministic acceptance
 
@@ -265,6 +358,8 @@ provider configuration, deployment files or `docs/branding/`.
 - proposal performs zero database writes and is bounded to 120 seconds;
 - attestation returns only a server-held opaque reference and changes no
   practitioner truth;
+- the OpenAPI attestation operation is closed-schema and exactly matches the
+  mounted route, role normalization and retry rules;
 - exact Admin and PracticeOwner success paths;
 - signed proposal/path/body/hash/actor/role/practice/version/before-state and
   evidence-payload binding adversarial cases;

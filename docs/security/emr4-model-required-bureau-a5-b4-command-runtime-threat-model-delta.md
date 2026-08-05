@@ -8,12 +8,18 @@ Parent: `docs/security/emr4-model-required-bureaus-controlled-recovery-threat-mo
 | Rayleen or Davida is treated as command actor | Authenticated current human user is the only actor/confirmer; agent identity is bounded provenance only | Reject or acceptance failure; zero mutation |
 | A4 read capability is reused as write authority | Command routes use the ordinary authenticated staff session and exact role checks; A4 token is never admitted | `401/403`; no disclosure or effect |
 | Client asserts another practice, actor or role | Session-derived values are authoritative; body assertions must exactly match before resource disclosure | Uniform scope/authorization rejection |
-| Stale appointment check-in overwrites current state | Durable claim, appointment row lock, signed-current-state freshness and final revalidation | Blocked confirmation; full rollback |
+| Runtime role strings drift from architectural role assertions | Exact server mapping `Admin -> practice_manager`, `PracticeOwner -> practice_owner` before equality; no aliases/fallbacks | Assertion mismatch rejection |
+| Stale appointment check-in overwrites current state | Dedicated operation, durable claim, appointment row lock, signed-current-state freshness and final revalidation | Blocked confirmation; full rollback |
+| Signed check-in evidence is reused with a different key after state restoration | Random signed nonce/expiry plus unique durable evidence hash on the A5 command claim; completed same-key replay is resolved first | `confirmation_replay_rejected`; zero new effects |
+| Generic status-confirm widens A5 roles or action set | Dedicated default-off Receptionist-only check-in routes and schemas; generic route semantics unchanged | `403` or closed-gate rejection |
+| Waiting area belongs to another appointment location | Same-practice active waiting-area and exact non-null appointment-location equality under lock | Scope/location rejection; zero effects |
 | Check-in event leaks patient or clinical data | Exact database and Pydantic payload allowlist with identifiers limited to appointment/practitioner/location/waiting area and fixed reason code | Insert rejected / acceptance failure |
 | Status/audit/event/idempotency diverge | One transaction; command id binds audit and event; commit once | Full rollback, no partial result |
 | Existing reschedule event is weakened by second event family | Conditional event-type/schema/payload constraints and regression suite | Migration/test failure |
+| Check-in row is parsed by the reschedule feed | Reschedule event type is required in cursor validation and row selection | Row excluded; cursor semantics unchanged |
 | Read-only Davida proposal secretly reserves or mutates | Proposal is signed self-contained and executes no insert/update/delete | Zero row-count delta |
 | Historical server-held evidence contract has no issuance path | Explicit human-attestation route verifies signed proposal/current session/current state before issuing one opaque reference | No domain mutation; exact evidence row only |
+| Runtime route exists without declarative API contract | OpenAPI adds the exact attestation operation, schemas, retry semantics and role normalization in the same descendant | Contract test failure |
 | Client mints confirmation evidence | Random server-held reference; stored proposal and payload hashes; no client claims create authority | `confirmation_evidence_invalid` |
 | Evidence is replayed with another key | Evidence row locked and unique one-way consumed state inside command transaction | `confirmation_replay_rejected`; zero new effects |
 | Same idempotency key changes meaning | HMAC-hashed key plus canonical request/proposal fingerprint and exact scoped uniqueness | `idempotency_conflict` |
