@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import secrets
 import threading
 from dataclasses import dataclass, field, replace
@@ -54,6 +55,27 @@ DENIAL_RECEIPT_SCHEMA = "emr4.simulator_denial_receipt.v1"
 
 RECOVERY_PLAN_SCHEMA = "emr4.recovery_plan_candidate.v1"
 RECOVERY_AUTHORITY_DECISION_SCHEMA = "emr4.recovery_authority_decision.v1"
+
+# --------------------------------------------------------------------------- #
+# Scalar admission bounds / formats (fail-closed before any lookup)
+# --------------------------------------------------------------------------- #
+
+_UUID36_RE = re.compile(r"^[0-9a-f-]{36}$")
+_SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+_OP_ID_RE = re.compile(r"^op-[a-z0-9-]+$")
+_MAX_FIELD_LENGTH = 256
+
+
+def _is_bounded_str(value: Any, *, min_len: int = 1, max_len: int = _MAX_FIELD_LENGTH) -> bool:
+    return isinstance(value, str) and min_len <= len(value) <= max_len
+
+
+def _is_opaque_reference(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and 8 <= len(value) <= _MAX_FIELD_LENGTH
+        and not any(ch.isspace() for ch in value)
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -578,6 +600,7 @@ class CommandEnvelope:
 class ExecutionReceipt:
     correlation_id: str
     idempotency_key_sha256: str
+    target: TargetRef
     before_health: str
     after_health: str
     readback_health: str
@@ -596,13 +619,8 @@ class ExecutionReceipt:
             "result": "simulated_effect_verified",
             "simulated_effect": "health_transition_degraded_to_healthy",
             "runbook_id": FORWARD_RUNBOOK,
-            "target": {
-                "environment": PLAN_ENVIRONMENT,
-                "kind": TARGET_KIND,
-                "target_id": TARGET_ID,
-                "expected_revision": EXPECTED_REVISION,
-            },
-            "expected_revision": EXPECTED_REVISION,
+            "target": self.target.to_dict(),
+            "expected_revision": self.target.expected_revision,
             "correlation_id": self.correlation_id,
             "idempotency_key_sha256": self.idempotency_key_sha256,
             "before_health": self.before_health,
@@ -713,6 +731,144 @@ class InMemoryAuditLog:
 
     def read(self) -> list:
         return list(self._records)
+
+
+# --------------------------------------------------------------------------- #
+# Genuine current-authority state (read fresh inside the critical section)
+# --------------------------------------------------------------------------- #
+
+@dataclass(frozen=True)
+class CurrentObservation:
+    """Current in-memory observation record (the fresh source, not a snapshot)."""
+
+    observation_id: str
+    content_sha256: str
+    observed_at: str
+    expires_at: str
+    must_be_fresh: bool
+
+
+@dataclass(frozen=True)
+class CurrentAuthoritySnapshot:
+    """A fresh read of the current-authority store taken inside the lock.
+
+    The evidence record remains a snapshot/binding; this snapshot is the live
+    current source revalidated at execution time.
+    """
+
+    # plan
+    plan_id: str
+    plan_revision: int
+    plan_sha256: str
+    plan_expires_at: str
+    plan_superseded: bool
+    # decision
+    decision_id: str
+    decision_sha256: str
+    policy_version: str
+    authority_class: str
+    required_authority: str
+    decision_expires_at: str
+    decision_superseded: bool
+    execution_authorized: bool
+    actuator_gate: str
+    current_state: str
+    # catalog
+    catalog_version: str
+    catalog_digest: str
+    catalog_runbook_id: str
+    catalog_rollback_runbook_id: str
+    catalog_expires_at: str
+    catalog_target: TargetRef
+    # actor
+    actor_id: str
+    actor_role: str
+    actor_expires_at: str
+    # reviewer
+    reviewer_id: str
+    reviewer_role: str
+    reviewer_expires_at: str
+    generator_id: str
+    # observations
+    observations: tuple[CurrentObservation, ...]
+
+
+@dataclass
+class CurrentAuthorityStore:
+    """Closed in-memory current-authority state/store with no persistence.
+
+    The runtime reads this store fresh inside the critical section.  It is the
+    current source of truth for plan, decision, catalog, actor, reviewer and
+    observations; the one-use evidence record is only a snapshot binding.
+    """
+
+    _snapshot: Optional[CurrentAuthoritySnapshot] = None
+
+    def set_snapshot(self, snapshot: CurrentAuthoritySnapshot) -> None:
+        self._snapshot = snapshot
+
+    def snapshot(self) -> Optional[CurrentAuthoritySnapshot]:
+        return self._snapshot
+
+    @classmethod
+    def from_fixtures(
+        cls,
+        *,
+        plan: dict[str, Any],
+        decision: dict[str, Any],
+        catalog_entry: RunbookCatalogEntry,
+        actor: Actor,
+        actor_expires_at: str,
+        reviewer_id: str,
+        reviewer_role: str,
+        reviewer_expires_at: str,
+        generator_id: str,
+        observations: list[dict[str, Any]],
+        plan_superseded: bool = False,
+        decision_superseded: bool = False,
+    ) -> "CurrentAuthorityStore":
+        current_observations = tuple(
+            CurrentObservation(
+                observation_id=o["observation_id"],
+                content_sha256=o["content_sha256"],
+                observed_at=o["observed_at"],
+                expires_at=o["expires_at"],
+                must_be_fresh=True,
+            )
+            for o in observations
+        )
+        snapshot = CurrentAuthoritySnapshot(
+            plan_id=plan["plan_id"],
+            plan_revision=plan.get("plan_revision", 1),
+            plan_sha256=decision["plan_sha256"],
+            plan_expires_at=plan.get("expires_at", ""),
+            plan_superseded=plan_superseded,
+            decision_id=decision["decision_id"],
+            decision_sha256=canonical_sha256(decision),
+            policy_version=decision.get("policy_version", POLICY_VERSION),
+            authority_class=decision.get("computed_risk_tier", ""),
+            required_authority=decision.get("required_authority", ""),
+            decision_expires_at=decision.get("effective_expiry", ""),
+            decision_superseded=decision_superseded,
+            execution_authorized=decision.get("execution_authorized", True) is not False,
+            actuator_gate=decision.get("actuator_gate", ""),
+            current_state=decision.get("current_state", ""),
+            catalog_version=catalog_entry.catalog_version,
+            catalog_digest=catalog_entry.catalog_digest,
+            catalog_runbook_id=catalog_entry.runbook_id,
+            catalog_rollback_runbook_id=catalog_entry.rollback_runbook_id,
+            catalog_expires_at=catalog_entry.expires_at,
+            catalog_target=catalog_entry.target,
+            actor_id=actor.actor_id,
+            actor_role=actor.role,
+            actor_expires_at=actor_expires_at,
+            reviewer_id=reviewer_id,
+            reviewer_role=reviewer_role,
+            reviewer_expires_at=reviewer_expires_at,
+            generator_id=generator_id,
+            observations=current_observations,
+        )
+        return cls(_snapshot=snapshot)
 
 
 # --------------------------------------------------------------------------- #
@@ -846,6 +1002,96 @@ def _nested_keys_ok(value: Any, expected: set[str]) -> bool:
     return isinstance(value, dict) and set(value.keys()) == expected
 
 
+def _scalar_admission_violation(raw: dict) -> Optional[DenialReason]:
+    """Fail-closed scalar/nested type and format admission.
+
+    Rejects every required scalar and nested field type violation, closed
+    enum/format drift and non-empty/bounded-value violation before a request
+    is constructed.  Booleans never satisfy integer fields (``plan_revision``)
+    and a numeric idempotency key is rejected here, so invalid inputs never
+    reach ``fingerprint()``, authority lookup, idempotency sealing, evidence
+    consumption or audit.
+    """
+    idem = raw.get("idempotency_key")
+    if not isinstance(idem, str) or not _UUID36_RE.match(idem):
+        return DenialReason.SCHEMA_REJECTED
+    corr = raw.get("correlation_id")
+    if not isinstance(corr, str) or not _UUID36_RE.match(corr):
+        return DenialReason.SCHEMA_REJECTED
+    ref = raw.get("evidence_reference")
+    if not _is_opaque_reference(ref):
+        return DenialReason.SCHEMA_REJECTED
+    runbook = raw.get("runbook_id")
+    if not isinstance(runbook, str) or not runbook or len(runbook) > _MAX_FIELD_LENGTH:
+        return DenialReason.UNKNOWN_RUNBOOK
+
+    target = raw.get("target")
+    if not isinstance(target, dict):
+        return DenialReason.SCHEMA_REJECTED
+    for key in ("environment", "kind", "target_id", "expected_revision"):
+        if not _is_bounded_str(target.get(key)):
+            return DenialReason.SCHEMA_REJECTED
+
+    actor = raw.get("actor")
+    if not isinstance(actor, dict):
+        return DenialReason.SCHEMA_REJECTED
+    actor_id = actor.get("actor_id")
+    if not isinstance(actor_id, str) or not _OP_ID_RE.match(actor_id):
+        return DenialReason.SCHEMA_REJECTED
+    actor_role = actor.get("role")
+    if not isinstance(actor_role, str) or not actor_role:
+        return DenialReason.AUTHORITY_MISMATCH
+
+    plan = raw.get("plan_binding")
+    if not isinstance(plan, dict):
+        return DenialReason.SCHEMA_REJECTED
+    plan_id = plan.get("plan_id")
+    if not isinstance(plan_id, str) or not _UUID36_RE.match(plan_id):
+        return DenialReason.SCHEMA_REJECTED
+    plan_rev = plan.get("plan_revision")
+    if not isinstance(plan_rev, int) or isinstance(plan_rev, bool) or plan_rev < 1:
+        return DenialReason.SCHEMA_REJECTED
+    plan_sha = plan.get("plan_sha256")
+    if not isinstance(plan_sha, str) or not _SHA256_RE.match(plan_sha):
+        return DenialReason.SCHEMA_REJECTED
+
+    decision = raw.get("decision_binding")
+    if not isinstance(decision, dict):
+        return DenialReason.SCHEMA_REJECTED
+    decision_id = decision.get("decision_id")
+    if not isinstance(decision_id, str) or not _UUID36_RE.match(decision_id):
+        return DenialReason.SCHEMA_REJECTED
+    decision_sha = decision.get("decision_sha256")
+    if not isinstance(decision_sha, str) or not _SHA256_RE.match(decision_sha):
+        return DenialReason.SCHEMA_REJECTED
+    policy_version = decision.get("policy_version")
+    if not isinstance(policy_version, str) or not policy_version:
+        return DenialReason.SCHEMA_REJECTED
+
+    catalog = raw.get("catalog_binding")
+    if not isinstance(catalog, dict):
+        return DenialReason.SCHEMA_REJECTED
+    catalog_version = catalog.get("catalog_version")
+    if not isinstance(catalog_version, str) or not catalog_version:
+        return DenialReason.SCHEMA_REJECTED
+    catalog_digest = catalog.get("catalog_digest")
+    if not isinstance(catalog_digest, str) or not _SHA256_RE.match(catalog_digest):
+        return DenialReason.SCHEMA_REJECTED
+
+    supersession_key = raw.get("supersession_key")
+    if not isinstance(supersession_key, str) or not supersession_key:
+        return DenialReason.SCHEMA_REJECTED
+
+    readback = raw.get("readback_contract")
+    if not isinstance(readback, dict):
+        return DenialReason.SCHEMA_REJECTED
+    for key in ("health", "revision"):
+        if not _is_bounded_str(readback.get(key)):
+            return DenialReason.SCHEMA_REJECTED
+
+    return None
+
+
 def parse_request(
     raw: Any, now: str
 ) -> tuple[Optional[SimulatorRequest], Optional[DenialReceipt]]:
@@ -854,6 +1100,8 @@ def parse_request(
     Unknown properties, executable content/command text, arbitrary callable
     names, unknown runbook ids, non-empty/unknown parameters and scope or
     revision drift all fail closed here, before any authority or state lookup.
+    Every required scalar and nested field type, closed enum/format and
+    non-empty/bounded value is admitted before a request is constructed.
     """
     counters = ForbiddenOperationCounters().to_dict()
 
@@ -882,6 +1130,10 @@ def parse_request(
 
     if _scan_for_executable(raw):
         return deny(DenialReason.EXECUTABLE_CONTENT_REJECTED, hint)
+
+    scalar_violation = _scalar_admission_violation(raw)
+    if scalar_violation is not None:
+        return deny(scalar_violation, hint)
 
     try:
         runbook_id = RunbookId(raw.get("runbook_id"))
@@ -977,11 +1229,27 @@ def parse_request(
 # Evidence issuer (separate backend authority function)
 # --------------------------------------------------------------------------- #
 
+def _generate_reference() -> str:
+    """Production entropy source for the opaque execution reference."""
+    return secrets.token_hex(32)
+
+
+def _generate_nonce() -> str:
+    """Production entropy source for the server-held evidence nonce."""
+    return secrets.token_hex(16)
+
+
 class EvidenceIssuer:
     """Mints one opaque one-use execution reference after every binding passes.
 
     The raw opaque reference is returned once and only its one-way SHA-256
-    digest is stored in the server-held record.
+    digest is stored in the server-held record.  Production issuance always
+    draws both the reference and the nonce from ``secrets.token_hex``; no
+    caller-supplied reference/nonce is accepted.  The complete
+    check-and-insert sequence for the one effective ``(plan_revision,
+    supersession_key)`` record is protected by an issuer-owned lock so exactly
+    one concurrent mint wins and every other contender receives the stable
+    stale/superseded denial.
     """
 
     def __init__(
@@ -994,6 +1262,7 @@ class EvidenceIssuer:
         self._records: dict[str, ExecutionEvidenceRecord] = {}
         self._issued_keys: set[tuple[int, str]] = set()
         self._sequence = 0
+        self._lock = threading.Lock()
 
     @property
     def records(self) -> dict[str, ExecutionEvidenceRecord]:
@@ -1011,8 +1280,6 @@ class EvidenceIssuer:
         actor: Actor,
         observations: list[dict[str, Any]],
         correlation_id: str,
-        reference: Optional[str] = None,
-        nonce: Optional[str] = None,
         actor_expires_at: Optional[str] = None,
         reviewer_expires_at: Optional[str] = None,
     ) -> IssuedEvidence:
@@ -1118,51 +1385,54 @@ class EvidenceIssuer:
 
         plan_revision = plan.get("plan_revision", 1)
         issued_key = (plan_revision, SUPERSESSION_KEY)
-        if issued_key in self._issued_keys:
-            raise IssuanceDenied(DenialReason.STALE_OR_SUPERSEDED)
+        # The complete check-and-insert for the one effective
+        # (plan_revision, supersession_key) record is concurrency-safe under
+        # the issuer-owned lock: exactly one concurrent mint inserts, every
+        # other contender receives the stable stale/superseded denial.
+        with self._lock:
+            if issued_key in self._issued_keys:
+                raise IssuanceDenied(DenialReason.STALE_OR_SUPERSEDED)
 
-        if reference is None:
-            reference = secrets.token_hex(32)
-        if nonce is None:
-            nonce = secrets.token_hex(16)
-        reference_sha256 = _sha256_hex(reference.encode("utf-8"))
-        self._sequence += 1
-        evidence_id = "72000000-0000-4000-8000-%012d" % self._sequence
+            reference = _generate_reference()
+            nonce = _generate_nonce()
+            reference_sha256 = _sha256_hex(reference.encode("utf-8"))
+            self._sequence += 1
+            evidence_id = "72000000-0000-4000-8000-%012d" % self._sequence
 
-        record = ExecutionEvidenceRecord(
-            evidence_id=evidence_id,
-            reference_sha256=reference_sha256,
-            state=EvidenceState.ISSUED,
-            plan_id=plan["plan_id"],
-            plan_revision=plan_revision,
-            plan_sha256=plan_sha256,
-            decision_id=decision["decision_id"],
-            decision_sha256=canonical_sha256(decision),
-            policy_version=decision.get("policy_version", POLICY_VERSION),
-            catalog_version=entry.catalog_version,
-            catalog_digest=entry.catalog_digest,
-            runbook_id=entry.runbook_id,
-            rollback_runbook_id=entry.rollback_runbook_id,
-            target=TargetRef(
-                PLAN_ENVIRONMENT,
-                TARGET_KIND,
-                TARGET_ID,
-                plan_target.get("expected_revision", EXPECTED_REVISION),
-            ),
-            actor=actor,
-            candidate_generator_id=candidate_generator_id,
-            reviewer_id=reviewer_id,
-            observations=tuple(evidence_observations),
-            parameters_sha256=canonical_sha256({}),
-            correlation_id=correlation_id,
-            nonce=nonce,
-            issued_at=now_iso,
-            expires_at=evidence_expires_at,
-            supersession_key=SUPERSESSION_KEY,
-        )
-        self._records[reference_sha256] = record
-        self._issued_keys.add(issued_key)
-        return IssuedEvidence(reference=reference, record=record)
+            record = ExecutionEvidenceRecord(
+                evidence_id=evidence_id,
+                reference_sha256=reference_sha256,
+                state=EvidenceState.ISSUED,
+                plan_id=plan["plan_id"],
+                plan_revision=plan_revision,
+                plan_sha256=plan_sha256,
+                decision_id=decision["decision_id"],
+                decision_sha256=canonical_sha256(decision),
+                policy_version=decision.get("policy_version", POLICY_VERSION),
+                catalog_version=entry.catalog_version,
+                catalog_digest=entry.catalog_digest,
+                runbook_id=entry.runbook_id,
+                rollback_runbook_id=entry.rollback_runbook_id,
+                target=TargetRef(
+                    PLAN_ENVIRONMENT,
+                    TARGET_KIND,
+                    TARGET_ID,
+                    plan_target.get("expected_revision", EXPECTED_REVISION),
+                ),
+                actor=actor,
+                candidate_generator_id=candidate_generator_id,
+                reviewer_id=reviewer_id,
+                observations=tuple(evidence_observations),
+                parameters_sha256=canonical_sha256({}),
+                correlation_id=correlation_id,
+                nonce=nonce,
+                issued_at=now_iso,
+                expires_at=evidence_expires_at,
+                supersession_key=SUPERSESSION_KEY,
+            )
+            self._records[reference_sha256] = record
+            self._issued_keys.add(issued_key)
+            return IssuedEvidence(reference=reference, record=record)
 
 
 # --------------------------------------------------------------------------- #
@@ -1184,6 +1454,7 @@ class SimulatorRuntime:
         attempt_audit: InMemoryAuditLog,
         effect_audit: InMemoryAuditLog,
         evidence_records: dict[str, ExecutionEvidenceRecord],
+        authority_store: CurrentAuthorityStore,
         now: Callable[[], datetime],
     ) -> None:
         self._lock = threading.RLock()
@@ -1192,6 +1463,7 @@ class SimulatorRuntime:
         self._attempt_audit = attempt_audit
         self._effect_audit = effect_audit
         self._evidence_records = evidence_records
+        self._authority_store = authority_store
         self._now = now
         self._idempotency: dict[str, IdempotencyRecord] = {}
         self._superseded_keys: set[str] = set()
@@ -1270,9 +1542,18 @@ class SimulatorRuntime:
         attempt_evidence_sha256: str,
         effect_audit_sha256: str,
     ) -> ExecutionReceipt:
+        # The success receipt derives its target from the verified fresh
+        # readback, never from module constants.
+        verified_target = TargetRef(
+            readback.environment,
+            readback.target_kind,
+            readback.target_id,
+            readback.revision,
+        )
         return ExecutionReceipt(
             correlation_id=request.correlation_id,
             idempotency_key_sha256=_sha256_hex(request.idempotency_key.encode("utf-8")),
+            target=verified_target,
             before_health=before.health,
             after_health=after.health,
             readback_health=readback.health,
@@ -1285,6 +1566,109 @@ class SimulatorRuntime:
             issued_at=now_iso,
         )
 
+    def _revalidate_current_authority(
+        self,
+        request: SimulatorRequest,
+        record: ExecutionEvidenceRecord,
+        current: Optional[CurrentAuthoritySnapshot],
+        now_iso: str,
+    ) -> Optional[SimulatorResult]:
+        """Step 4a: revalidate every binding against the live current authority.
+
+        The evidence record is only a snapshot/binding.  This method reads the
+        current in-memory authority store fresh inside the critical section and
+        rejects catalog replacement, plan/decision drift or supersession, role
+        loss, actor/reviewer expiry, reviewer separation loss, observation
+        content drift, observation replacement/staleness and missing current
+        records with stable denials and zero simulated effect.
+        """
+        counters = self._counters.to_dict()
+        if current is None:
+            return self._denial(DenialReason.STALE_OR_SUPERSEDED, request, now_iso, counters)
+        now = _parse_time(now_iso)
+
+        # Current canonical plan.
+        if (
+            current.plan_id != record.plan_id
+            or current.plan_revision != record.plan_revision
+            or current.plan_sha256 != record.plan_sha256
+        ):
+            return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
+        if current.plan_superseded:
+            return self._denial(DenialReason.STALE_OR_SUPERSEDED, request, now_iso, counters)
+        if now >= _parse_time(current.plan_expires_at):
+            return self._denial(DenialReason.STALE_OR_SUPERSEDED, request, now_iso, counters)
+
+        # Current decision (authority class, expiry, closed C3 lineage).
+        if (
+            current.decision_id != record.decision_id
+            or current.decision_sha256 != record.decision_sha256
+            or current.policy_version != record.policy_version
+        ):
+            return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
+        if current.decision_superseded:
+            return self._denial(DenialReason.STALE_OR_SUPERSEDED, request, now_iso, counters)
+        if now >= _parse_time(current.decision_expires_at):
+            return self._denial(DenialReason.STALE_OR_SUPERSEDED, request, now_iso, counters)
+        if current.authority_class != RISK_TIER or current.required_authority != REQUIRED_AUTHORITY:
+            return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
+        if current.execution_authorized is not False:
+            return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
+        if current.actuator_gate != "closed" or current.current_state != "review_required":
+            return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
+
+        # Current immutable catalog entry (replacement fails closed).
+        if (
+            current.catalog_version != record.catalog_version
+            or current.catalog_digest != record.catalog_digest
+            or current.catalog_runbook_id != record.runbook_id
+            or current.catalog_rollback_runbook_id != record.rollback_runbook_id
+        ):
+            return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
+        if current.catalog_target != record.target:
+            return self._denial(DenialReason.SCOPE_EXPANSION_REJECTED, request, now_iso, counters)
+        if now >= _parse_time(current.catalog_expires_at):
+            return self._denial(DenialReason.STALE_OR_SUPERSEDED, request, now_iso, counters)
+
+        # Current actor (role loss / expiry).
+        if current.actor_id != request.actor.actor_id or current.actor_id != record.actor.actor_id:
+            return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
+        if current.actor_role != REQUIRED_ROLE:
+            return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
+        if now >= _parse_time(current.actor_expires_at):
+            return self._denial(DenialReason.STALE_OR_SUPERSEDED, request, now_iso, counters)
+
+        # Current reviewer (separation from generator/actor, expiry).
+        if current.reviewer_id != record.reviewer_id:
+            return self._denial(DenialReason.REVIEWER_INVALID, request, now_iso, counters)
+        if not _is_bounded_str(current.reviewer_role) or not current.reviewer_role:
+            return self._denial(DenialReason.REVIEWER_INVALID, request, now_iso, counters)
+        if current.reviewer_id == current.generator_id:
+            return self._denial(DenialReason.REVIEWER_INVALID, request, now_iso, counters)
+        if current.reviewer_id == current.actor_id:
+            return self._denial(DenialReason.REVIEWER_INVALID, request, now_iso, counters)
+        if now >= _parse_time(current.reviewer_expires_at):
+            return self._denial(DenialReason.STALE_OR_SUPERSEDED, request, now_iso, counters)
+
+        # Current observations (content drift, replacement, staleness, expiry).
+        record_observations = {o.observation_id: o for o in record.observations}
+        current_observations = {o.observation_id: o for o in current.observations}
+        for obs_id, record_obs in record_observations.items():
+            current_obs = current_observations.get(obs_id)
+            if current_obs is None:
+                return self._denial(DenialReason.OBSERVATION_MISMATCH, request, now_iso, counters)
+            if current_obs.content_sha256 != record_obs.expected_sha256:
+                return self._denial(DenialReason.OBSERVATION_MISMATCH, request, now_iso, counters)
+            if current_obs.observed_at != record_obs.observed_at:
+                return self._denial(DenialReason.OBSERVATION_MISMATCH, request, now_iso, counters)
+            if now >= _parse_time(current_obs.expires_at):
+                return self._denial(DenialReason.OBSERVATION_MISMATCH, request, now_iso, counters)
+            if current_obs.must_be_fresh:
+                observed = _parse_time(current_obs.observed_at)
+                if observed > now or (now - observed) > timedelta(seconds=FRESHNESS_SECONDS):
+                    return self._denial(DenialReason.OBSERVATION_MISMATCH, request, now_iso, counters)
+        return None
+
     def _revalidate(
         self,
         request: SimulatorRequest,
@@ -1293,6 +1677,20 @@ class SimulatorRuntime:
     ) -> Optional[SimulatorResult]:
         """Step 4: reauthorize actor/role and revalidate every binding."""
         counters = self._counters.to_dict()
+
+        # Fail closed before consumption when the actual in-memory state does
+        # not match the exact target the operation is bound to (environment,
+        # kind, id, revision).
+        current_state = self._state_store.read()
+        if (
+            current_state.environment != request.target.environment
+            or current_state.target_kind != request.target.kind
+            or current_state.target_id != request.target.target_id
+            or current_state.revision != request.target.expected_revision
+        ):
+            if current_state.revision != request.target.expected_revision:
+                return self._denial(DenialReason.TARGET_REVISION_CONFLICT, request, now_iso, counters)
+            return self._denial(DenialReason.SCOPE_EXPANSION_REJECTED, request, now_iso, counters)
 
         if request.actor.role != REQUIRED_ROLE:
             return self._denial(DenialReason.AUTHORITY_MISMATCH, request, now_iso, counters)
@@ -1407,6 +1805,16 @@ class SimulatorRuntime:
                 DenialReason.EXECUTION_EVIDENCE_INVALID, request, now_iso, counters
             )
 
+        # Step 4a: revalidate against the live current-authority store read
+        # fresh inside the critical section (the evidence record is only a
+        # snapshot/binding).
+        current = self._authority_store.snapshot()
+        current_revalidation = self._revalidate_current_authority(
+            request, record, current, now_iso
+        )
+        if current_revalidation is not None:
+            return current_revalidation
+
         # Step 4: reauthorize actor/role and revalidate every binding.
         revalidation = self._revalidate(request, record, now_iso)
         if revalidation is not None:
@@ -1511,14 +1919,17 @@ class SimulatorRuntime:
         # Step 10: perform a separately invoked fresh state-store read.
         readback = self._fresh_read(fault, first=True)
 
-        # Step 11: release success only on exact expected health/revision
-        # readback; otherwise invoke only the exact rollback, freshly read
-        # again and distinguish verified rollback from inconclusive rollback.
+        # Step 11: release success only on exact expected full-state tuple
+        # (environment, target kind, target id, revision, health) readback;
+        # otherwise invoke only the exact rollback, freshly read again and
+        # distinguish verified rollback from inconclusive rollback.
         expected_health = request.readback_contract.health
-        expected_revision = request.readback_contract.revision
         if (
-            readback.health == expected_health
-            and readback.revision == expected_revision
+            readback.environment == request.target.environment
+            and readback.target_kind == request.target.kind
+            and readback.target_id == request.target.target_id
+            and readback.revision == request.target.expected_revision
+            and readback.health == expected_health
         ):
             receipt = self._execution_receipt(
                 request,
@@ -1589,6 +2000,13 @@ class SimulatorRuntime:
         state_snapshot: SyntheticServiceState,
         effect_audit_snapshot: list,
     ) -> SimulatorResult:
+        # The effect audit may have been prepared before readback, but it must
+        # not remain in the durable in-memory effect log unless the exact full
+        # fresh readback verified success.  Every transition/audit/readback/
+        # rollback failure path restores the effect-audit snapshot; the
+        # monotone attempt audit and consumed evidence remain.
+        self._effect_audit.restore(effect_audit_snapshot)
+
         # Step 11 continued: invoke only the exact rollback runbook.
         try:
             if fault == FaultInjection.ROLLBACK_FAILED:
@@ -1602,8 +2020,11 @@ class SimulatorRuntime:
 
         readback_after_rollback = self._fresh_read(fault, first=False)
         if (
-            readback_after_rollback.health == state_snapshot.health
+            readback_after_rollback.environment == state_snapshot.environment
+            and readback_after_rollback.target_kind == state_snapshot.target_kind
+            and readback_after_rollback.target_id == state_snapshot.target_id
             and readback_after_rollback.revision == state_snapshot.revision
+            and readback_after_rollback.health == state_snapshot.health
         ):
             denial = self._denial(
                 DenialReason.SIMULATED_READBACK_FAILED_ROLLBACK_VERIFIED,

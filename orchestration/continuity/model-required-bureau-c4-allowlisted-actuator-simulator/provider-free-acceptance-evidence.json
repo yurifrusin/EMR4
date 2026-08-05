@@ -9,11 +9,71 @@
     "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-command-envelope.example.json": "4aaf3c91cda3219c300aaabe695e0f4fc739dbb9819a7ce646552076bfd6533f",
     "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-command-envelope.schema.json": "1bfd67d3653f3bdac605283f4fecfab43e36ad27dbaa45b19a3b1dc76d54b42d",
     "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-denial-receipt.example.json": "0ba4412517269ecd892140a14fbde5d3239d5afca720d54a599c18ddd591fca5",
-    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-denial-receipt.schema.json": "12d943b0acd6b29e35911b7cabb218e0eb6a0ecd75f899adc40508126f392388",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-denial-receipt.schema.json": "d067bf526337518671b1b2fc7915b609d565ee4d7e8cd71f294ab688421e751e",
     "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-execution-receipt.example.json": "4d8e3fc7ff8ed59a8708e2dc1d11a106df9432813329b23c0acc1a600d14c2f7",
-    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-execution-receipt.schema.json": "a880d10061a3c676c72eb43b4bd8d3794c24a307c95dc905813512d37d663978",
-    "scripts/model_required_bureau_c4_acceptance.py": "348fb7558d26b1e62ea3b55973575da270dd2ddb26a0e777941f7fd47025da7f",
-    "scripts/model_required_bureau_c4_simulator.py": "4d26f60a381a23c4c73d02451166563b81497a1b1547b7c9b5a3382577931bd1"
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-execution-receipt.schema.json": "4250a9aec3e79fdd25c97155c61b06ec4313b2618ee94b2f19dc67e0120d2940",
+    "scripts/model_required_bureau_c4_acceptance.py": "adfb648ff5de7fe483c27d47c23fe2e4935c1e81480cf8e236c29c54e3ebc312",
+    "scripts/model_required_bureau_c4_simulator.py": "c6bfde3d5027e829c75ab31286659994b159e59151cadc8d895810e21defde93"
+  },
+  "counter_schemas": {
+    "denial_each_omitted": "REJECTED",
+    "denial_extra_name": "REJECTED",
+    "denial_nonzero": "REJECTED",
+    "denial_renamed_arbitrary": "REJECTED",
+    "execution_each_omitted": "REJECTED",
+    "execution_extra_name": "REJECTED",
+    "execution_nonzero": "REJECTED",
+    "execution_renamed_arbitrary": "REJECTED"
+  },
+  "current_authority": {
+    "actor_expiry": {
+      "effect_record_count": 0,
+      "reason_code": "STALE_OR_SUPERSEDED"
+    },
+    "actor_role_loss": {
+      "effect_record_count": 0,
+      "reason_code": "AUTHORITY_MISMATCH"
+    },
+    "catalog_replacement": {
+      "effect_record_count": 0,
+      "reason_code": "AUTHORITY_MISMATCH"
+    },
+    "decision_drift": {
+      "effect_record_count": 0,
+      "reason_code": "AUTHORITY_MISMATCH"
+    },
+    "decision_supersession": {
+      "effect_record_count": 0,
+      "reason_code": "STALE_OR_SUPERSEDED"
+    },
+    "missing_current_records": {
+      "effect_record_count": 0,
+      "reason_code": "STALE_OR_SUPERSEDED"
+    },
+    "observation_content_drift": {
+      "effect_record_count": 0,
+      "reason_code": "OBSERVATION_MISMATCH"
+    },
+    "observation_replacement": {
+      "effect_record_count": 0,
+      "reason_code": "OBSERVATION_MISMATCH"
+    },
+    "plan_drift": {
+      "effect_record_count": 0,
+      "reason_code": "AUTHORITY_MISMATCH"
+    },
+    "plan_supersession": {
+      "effect_record_count": 0,
+      "reason_code": "STALE_OR_SUPERSEDED"
+    },
+    "reviewer_expiry": {
+      "effect_record_count": 0,
+      "reason_code": "STALE_OR_SUPERSEDED"
+    },
+    "reviewer_separation_loss": {
+      "effect_record_count": 0,
+      "reason_code": "REVIEWER_INVALID"
+    }
   },
   "denial_cases": {
     "expired_evidence": {
@@ -90,7 +150,7 @@
     },
     "first_readback_failed": {
       "attempt_record_count": 1,
-      "effect_record_count": 1,
+      "effect_record_count": 0,
       "evidence_consumed": true,
       "reason_code": "SIMULATED_READBACK_FAILED_ROLLBACK_VERIFIED",
       "rollback": {
@@ -102,7 +162,7 @@
     },
     "handler_false_return": {
       "attempt_record_count": 1,
-      "effect_record_count": 1,
+      "effect_record_count": 0,
       "evidence_consumed": true,
       "reason_code": "SIMULATED_READBACK_FAILED_ROLLBACK_VERIFIED",
       "rollback": {
@@ -114,7 +174,7 @@
     },
     "rollback_failed": {
       "attempt_record_count": 1,
-      "effect_record_count": 1,
+      "effect_record_count": 0,
       "evidence_consumed": true,
       "reason_code": "SIMULATED_ROLLBACK_UNVERIFIED",
       "rollback": {
@@ -126,7 +186,7 @@
     },
     "rollback_readback_unverified": {
       "attempt_record_count": 1,
-      "effect_record_count": 1,
+      "effect_record_count": 0,
       "evidence_consumed": true,
       "reason_code": "SIMULATED_ROLLBACK_UNVERIFIED",
       "rollback": {
@@ -162,6 +222,13 @@
     "readback_health": "healthy",
     "result": "simulated_effect_verified"
   },
+  "issuance_concurrency": {
+    "contender_count": 8,
+    "issued_key_count": 1,
+    "record_count": 1,
+    "stale_or_superseded_count": 7,
+    "success_count": 1
+  },
   "mutation_rejections": {
     "duplicate_key": "REJECTED",
     "executable_content": "EXECUTABLE_CONTENT_REJECTED",
@@ -196,6 +263,10 @@
     "template_url_path_operations": 0
   },
   "passed": true,
+  "production_entropy": {
+    "production_signature_has_no_reference_or_nonce": true,
+    "unpatched_issuances_differ": true
+  },
   "replay_and_concurrency": {
     "concurrent_single_winner": {
       "attempt_record_count": 1,
@@ -215,6 +286,60 @@
     }
   },
   "result": "model_required_bureau_c4_allowlisted_actuator_simulator_pass",
+  "scalar_admission": {
+    "all_rejected": true,
+    "field_mutation_count": 46,
+    "numeric_idempotency_key_denial": "SCHEMA_REJECTED",
+    "rejections": {
+      "bool_actor_id": "SCHEMA_REJECTED",
+      "bool_catalog_version": "SCHEMA_REJECTED",
+      "bool_correlation_id": "SCHEMA_REJECTED",
+      "bool_decision_sha256": "SCHEMA_REJECTED",
+      "bool_idempotency_key": "SCHEMA_REJECTED",
+      "bool_plan_id": "SCHEMA_REJECTED",
+      "bool_plan_revision": "SCHEMA_REJECTED",
+      "bool_plan_sha256": "SCHEMA_REJECTED",
+      "bool_readback_revision": "SCHEMA_REJECTED",
+      "bool_runbook": "UNKNOWN_RUNBOOK",
+      "bool_supersession_key": "SCHEMA_REJECTED",
+      "bool_target_environment": "SCHEMA_REJECTED",
+      "empty_evidence_reference": "SCHEMA_REJECTED",
+      "empty_idempotency_key": "SCHEMA_REJECTED",
+      "float_plan_revision": "SCHEMA_REJECTED",
+      "list_actor_role": "AUTHORITY_MISMATCH",
+      "list_catalog_digest": "SCHEMA_REJECTED",
+      "list_evidence_reference": "SCHEMA_REJECTED",
+      "list_idempotency_key": "SCHEMA_REJECTED",
+      "list_parameters": "UNKNOWN_PARAMETER",
+      "list_readback_contract": "SCHEMA_REJECTED",
+      "list_runbook": "UNKNOWN_RUNBOOK",
+      "list_target": "SCHEMA_REJECTED",
+      "none_actor_id": "SCHEMA_REJECTED",
+      "none_correlation_id": "SCHEMA_REJECTED",
+      "none_readback_health": "SCHEMA_REJECTED",
+      "none_supersession_key": "SCHEMA_REJECTED",
+      "none_target_id": "SCHEMA_REJECTED",
+      "numeric_actor_id": "SCHEMA_REJECTED",
+      "numeric_actor_role": "AUTHORITY_MISMATCH",
+      "numeric_catalog_digest": "SCHEMA_REJECTED",
+      "numeric_correlation_id": "SCHEMA_REJECTED",
+      "numeric_decision_id": "SCHEMA_REJECTED",
+      "numeric_evidence_reference": "SCHEMA_REJECTED",
+      "numeric_idempotency_key": "SCHEMA_REJECTED",
+      "numeric_plan_sha256": "SCHEMA_REJECTED",
+      "numeric_policy_version": "SCHEMA_REJECTED",
+      "numeric_readback_health": "SCHEMA_REJECTED",
+      "numeric_runbook": "UNKNOWN_RUNBOOK",
+      "numeric_supersession_key": "SCHEMA_REJECTED",
+      "numeric_target_kind": "SCHEMA_REJECTED",
+      "numeric_target_revision": "SCHEMA_REJECTED",
+      "oversized_idempotency_key": "SCHEMA_REJECTED",
+      "string_parameters": "UNKNOWN_PARAMETER",
+      "whitespace_evidence_reference": "SCHEMA_REJECTED",
+      "zero_plan_revision": "SCHEMA_REJECTED"
+    },
+    "zero_state_evidence_idempotency_audit_change": true
+  },
   "schema_version": "emr4.model_required_bureau_c4_acceptance.v1",
   "schemas": {
     "all_examples_valid": true,
@@ -231,11 +356,45 @@
       "enum",
       "hashlib",
       "json",
+      "re",
       "secrets",
       "threading",
       "typing"
     ],
     "simulator_source_lf": true
   },
-  "source_head": "b66b37a81120b1abd655ce65c42daf7518b8f7d5"
+  "source_head": "b66b37a81120b1abd655ce65c42daf7518b8f7d5",
+  "target_readback": {
+    "success_expected_revision": "api-synthetic-1.2.3",
+    "success_target": {
+      "environment": "isolated_authored_synthetic",
+      "expected_revision": "api-synthetic-1.2.3",
+      "kind": "service",
+      "target_id": "synthetic:api-service"
+    },
+    "wrong_environment": {
+      "effect_record_count": 0,
+      "reason_code": "SCOPE_EXPANSION_REJECTED",
+      "state_health": "degraded",
+      "success": false
+    },
+    "wrong_kind": {
+      "effect_record_count": 0,
+      "reason_code": "SCOPE_EXPANSION_REJECTED",
+      "state_health": "degraded",
+      "success": false
+    },
+    "wrong_revision": {
+      "effect_record_count": 0,
+      "reason_code": "TARGET_REVISION_CONFLICT",
+      "state_health": "degraded",
+      "success": false
+    },
+    "wrong_target_id": {
+      "effect_record_count": 0,
+      "reason_code": "SCOPE_EXPANSION_REJECTED",
+      "state_health": "degraded",
+      "success": false
+    }
+  }
 }

@@ -54,9 +54,47 @@
     },
     "operation_counters": {
       "type": "object",
-      "minProperties": 18,
-      "maxProperties": 18,
-      "additionalProperties": {"const": 0}
+      "additionalProperties": false,
+      "required": [
+        "filesystem_operations",
+        "process_operations",
+        "shell_operations",
+        "sql_operations",
+        "socket_operations",
+        "network_operations",
+        "database_operations",
+        "container_operations",
+        "cloud_operations",
+        "iam_operations",
+        "secret_store_operations",
+        "product_route_operations",
+        "provider_operations",
+        "external_event_operations",
+        "dynamic_import_operations",
+        "eval_exec_operations",
+        "reflection_operations",
+        "template_url_path_operations"
+      ],
+      "properties": {
+        "filesystem_operations": {"const": 0},
+        "process_operations": {"const": 0},
+        "shell_operations": {"const": 0},
+        "sql_operations": {"const": 0},
+        "socket_operations": {"const": 0},
+        "network_operations": {"const": 0},
+        "database_operations": {"const": 0},
+        "container_operations": {"const": 0},
+        "cloud_operations": {"const": 0},
+        "iam_operations": {"const": 0},
+        "secret_store_operations": {"const": 0},
+        "product_route_operations": {"const": 0},
+        "provider_operations": {"const": 0},
+        "external_event_operations": {"const": 0},
+        "dynamic_import_operations": {"const": 0},
+        "eval_exec_operations": {"const": 0},
+        "reflection_operations": {"const": 0},
+        "template_url_path_operations": {"const": 0}
+      }
     },
     "issued_at": {"type": "string", "format": "date-time"}
   }
