@@ -12,8 +12,10 @@ import ast as _ast
 import hashlib
 import inspect
 import json
+from dataclasses import replace
 from pathlib import Path
 
+import pytest
 from jsonschema import Draft202012Validator, FormatChecker
 
 import scripts.model_required_bureau_c5_contract as c5
@@ -27,6 +29,13 @@ from scripts.model_required_bureau_c5_acceptance import (
     NOW,
     POLICY_DIGEST,
     TARGET_NONCE,
+    PYTHON_EXECUTABLE_SHA256,
+    PORT,
+    admit_provider_candidate,
+    build_frame,
+    load_candidate_example,
+    now_callable,
+    parse_candidate,
     _validate_argument_vector,
     _validate_candidate_parsing_and_proofreading,
     _validate_cleanup,
@@ -40,10 +49,15 @@ from scripts.model_required_bureau_c5_acceptance import (
     _validate_source_checks,
     build_approval,
     build_evidence,
+    mint_evidence as build_issued_evidence,
 )
 from scripts.model_required_bureau_c5_contract import (
     C5EvidenceIssuer,
+    C5SharedStore,
+    IssuanceDenied,
     RunbookCatalog,
+    build_provider_request_metadata,
+    proofread_candidate,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -194,15 +208,9 @@ def test_production_mint_signature_has_no_reference_or_nonce():
 
 
 def test_two_unpatched_issuances_produce_different_values():
-    approval = build_approval()
-
     def mint_once():
-        return C5EvidenceIssuer(lambda: NOW).mint(
-            approval=approval,
-            target_nonce=TARGET_NONCE,
-            generation=2,
-            artifact_sha256=c5.EXPECTED_ARTIFACT_SHA256,
-            correlation_id=CORRELATION_ID,
+        return build_issued_evidence(
+            C5EvidenceIssuer(lambda: NOW), fixed_entropy=False
         )
 
     first = mint_once()
@@ -239,3 +247,269 @@ def test_contract_has_no_ambient_live_capability_imports():
                 imported.add(node.module.split(".")[0])
     banned = {"subprocess", "socket", "http", "urllib", "pathlib", "os", "app"}
     assert not (imported & banned)
+
+
+def _mint_with_approval(approval):
+    frame = build_frame()
+    candidate = parse_candidate(frame)
+    proofreader = proofread_candidate(candidate, frame)
+    return C5EvidenceIssuer(now_callable, C5SharedStore()).mint(
+        approval=approval,
+        frame=frame,
+        candidate=candidate,
+        proofreader=proofreader,
+        provider_admission_digest="3" * 64,
+        port=PORT,
+        target_nonce=c5._generate_nonce(),
+        generation=2,
+        artifact_sha256=c5.EXPECTED_ARTIFACT_SHA256,
+        python_executable_sha256=PYTHON_EXECUTABLE_SHA256,
+        correlation_id=CORRELATION_ID,
+    )
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "expected_reason"),
+    [
+        ("schema_version", "emr4.execution_approval.v0", "AUTHORITY_MISMATCH"),
+        ("approval_id", "not-an-approval", "AUTHORITY_MISMATCH"),
+        ("approval_basis", "unrecorded_basis", "AUTHORITY_MISMATCH"),
+        ("plan_sha256", "0" * 64, "AUTHORITY_MISMATCH"),
+        ("plan_revision", 2, "AUTHORITY_MISMATCH"),
+        ("target", c5.TargetRef(c5.PLAN_ENVIRONMENT, c5.TARGET_KIND, "synthetic:other"), "AUTHORITY_MISMATCH"),
+        ("fault", "different_fault", "AUTHORITY_MISMATCH"),
+        ("runbook_id", "attacker-runbook", "AUTHORITY_MISMATCH"),
+        ("rollback_runbook_id", "attacker-rollback", "AUTHORITY_MISMATCH"),
+        ("provider", {"model": "other"}, "AUTHORITY_MISMATCH"),
+        ("cost_ceiling_usd", 0.51, "AUTHORITY_MISMATCH"),
+        ("call_limit", 3, "AUTHORITY_MISMATCH"),
+        ("thinking_budget", 0, "AUTHORITY_MISMATCH"),
+        ("max_output_tokens", 4096, "AUTHORITY_MISMATCH"),
+        ("expires_at", "2026-08-05T08:20:00Z", "STALE_OR_SUPERSEDED"),
+        ("rehearsal_count", 2, "AUTHORITY_MISMATCH"),
+        ("evidence_label", "different_label", "AUTHORITY_MISMATCH"),
+        ("scope_expansion", True, "AUTHORITY_MISMATCH"),
+        ("non_transferable", False, "AUTHORITY_MISMATCH"),
+    ],
+)
+def test_every_mutated_frozen_approval_field_is_denied_at_issuance(
+    field, value, expected_reason
+):
+    with pytest.raises(IssuanceDenied) as caught:
+        _mint_with_approval(replace(build_approval(), **{field: value}))
+    assert caught.value.reason == expected_reason
+
+
+def test_frame_semantics_and_proofreader_require_distinct_post_fault_evidence():
+    frame = build_frame()
+    duplicate = replace(
+        frame,
+        observations=(frame.observations[0], frame.observations[0]),
+        frame_digest="",
+    )
+    duplicate = replace(duplicate, frame_digest=duplicate.digest())
+    with pytest.raises(ValueError):
+        c5.validate_frame_semantics(duplicate, now=NOW)
+
+    wrong_source = replace(
+        frame,
+        observations=(
+            frame.observations[0],
+            replace(
+                frame.observations[1],
+                observation_source_id=frame.observations[0].observation_source_id,
+            ),
+        ),
+        frame_digest="",
+    )
+    wrong_source = replace(wrong_source, frame_digest=wrong_source.digest())
+    with pytest.raises(ValueError):
+        c5.validate_frame_semantics(wrong_source, now=NOW)
+
+    candidate = parse_candidate(frame)
+    baseline_only = replace(
+        candidate,
+        diagnosis=replace(
+            candidate.diagnosis,
+            evidence_observation_ids=(frame.observations[0].observation_id,),
+        ),
+    )
+    disposition = proofread_candidate(baseline_only, frame)
+    assert disposition.admitted is False
+    assert "POST_FAULT_EVIDENCE_REQUIRED" in disposition.reason_codes
+
+
+def test_frame_source_policy_catalog_and_runbook_drift_are_denied():
+    frame = build_frame()
+    for mutation in (
+        {"service_artifact_sha256": "0" * 64},
+        {"policy_digest": "0" * 64},
+        {"catalog_digest": "0" * 64},
+        {"target_reference": "c5:other-target"},
+        {"runbooks": {"forward": {}, "rollback": {}}},
+    ):
+        changed = replace(frame, **mutation, frame_digest="")
+        changed = replace(changed, frame_digest=changed.digest())
+        with pytest.raises(ValueError):
+            c5.validate_frame_semantics(changed, now=NOW)
+
+
+def test_two_issuers_over_one_shared_store_have_exactly_one_winner():
+    store = C5SharedStore()
+    frame = build_frame()
+    candidate = parse_candidate(frame)
+    proofreader = proofread_candidate(candidate, frame)
+    admission = admit_provider_candidate(
+        store, frame=frame, candidate=candidate, proofreader=proofreader
+    )
+    first = C5EvidenceIssuer(now_callable, store)
+    second = C5EvidenceIssuer(now_callable, store)
+    issued = first.mint(
+        approval=build_approval(),
+        frame=frame,
+        candidate=candidate,
+        proofreader=proofreader,
+        provider_admission_digest=admission,
+        port=PORT,
+        target_nonce=TARGET_NONCE,
+        generation=2,
+        artifact_sha256=c5.EXPECTED_ARTIFACT_SHA256,
+        python_executable_sha256=PYTHON_EXECUTABLE_SHA256,
+        correlation_id=CORRELATION_ID,
+    )
+    assert issued.record.state == "issued"
+    with pytest.raises(IssuanceDenied, match="STALE_OR_SUPERSEDED"):
+        second.mint(
+            approval=build_approval(),
+            frame=frame,
+            candidate=candidate,
+            proofreader=proofreader,
+            provider_admission_digest=admission,
+            port=PORT,
+            target_nonce=TARGET_NONCE,
+            generation=2,
+            artifact_sha256=c5.EXPECTED_ARTIFACT_SHA256,
+            python_executable_sha256=PYTHON_EXECUTABLE_SHA256,
+            correlation_id=CORRELATION_ID,
+        )
+    assert len(store.evidence_records) == 1
+
+
+def test_provider_call_and_one_correction_state_is_shared_and_terminal():
+    frame = build_frame()
+    valid = parse_candidate(frame)
+
+    store = C5SharedStore()
+    store.reserve_provider_attempt(
+        correlation_id=CORRELATION_ID,
+        request_metadata=build_provider_request_metadata(),
+        frame_digest=frame.frame_digest,
+    )
+    rejected = replace(valid, success_claim=True)
+    rejected_proof = proofread_candidate(rejected, frame)
+    store.record_provider_candidate(
+        correlation_id=CORRELATION_ID,
+        frame=frame,
+        candidate=rejected,
+        disposition=rejected_proof,
+    )
+    ticket = rejected_proof.correction_ticket
+    with pytest.raises(ValueError, match="unchanged correction"):
+        store.record_provider_candidate(
+            correlation_id=CORRELATION_ID,
+            frame=frame,
+            candidate=rejected,
+            disposition=rejected_proof,
+            correction_ticket=ticket,
+        )
+
+    corrected_but_denied = replace(
+        rejected,
+        operator_explanation=rejected.operator_explanation + " Bounded correction.",
+    )
+    corrected_proof = proofread_candidate(corrected_but_denied, frame)
+    store.record_provider_candidate(
+        correlation_id=CORRELATION_ID,
+        frame=frame,
+        candidate=corrected_but_denied,
+        disposition=corrected_proof,
+        correction_ticket=ticket,
+    )
+    with pytest.raises(ValueError, match="terminal state"):
+        store.record_provider_candidate(
+            correlation_id=CORRELATION_ID,
+            frame=frame,
+            candidate=valid,
+            disposition=proofread_candidate(valid, frame),
+            correction_ticket=ticket,
+        )
+
+    for failure_kind in ("schema", "transport"):
+        failed_store = C5SharedStore()
+        correlation = CORRELATION_ID[:-1] + ("2" if failure_kind == "schema" else "3")
+        failed_store.reserve_provider_attempt(
+            correlation_id=correlation,
+            request_metadata=build_provider_request_metadata(),
+            frame_digest=frame.frame_digest,
+        )
+        failed_store.record_provider_failure(correlation, failure_kind)
+        with pytest.raises(ValueError, match="terminal state"):
+            failed_store.record_provider_candidate(
+                correlation_id=correlation,
+                frame=frame,
+                candidate=valid,
+                disposition=proofread_candidate(valid, frame),
+            )
+
+    admitted_store = C5SharedStore()
+    admit_provider_candidate(
+        admitted_store,
+        frame=frame,
+        candidate=valid,
+        proofreader=proofread_candidate(valid, frame),
+    )
+    with pytest.raises(ValueError, match="terminal state"):
+        admitted_store.record_provider_candidate(
+            correlation_id=CORRELATION_ID,
+            frame=frame,
+            candidate=valid,
+            disposition=proofread_candidate(valid, frame),
+        )
+
+
+def test_runtime_parser_and_schemas_reject_duplicate_or_contradictory_arrays():
+    raw = load_candidate_example()
+    raw["diagnosis"]["evidence_observation_ids"] = ["post-fault", "post-fault"]
+    candidate, denial = c5.parse_recovery_candidate(raw, NOW.isoformat())
+    assert candidate is None and denial.reason_codes == ("SCHEMA_REJECTED",)
+
+    raw = load_candidate_example()
+    raw["diagnosis"]["missing_evidence"] = ["same", "same"]
+    candidate, denial = c5.parse_recovery_candidate(raw, NOW.isoformat())
+    assert candidate is None and denial.reason_codes == ("SCHEMA_REJECTED",)
+
+    raw = load_candidate_example()
+    raw["diagnosis"]["missing_evidence"] = [str(index) for index in range(9)]
+    candidate, denial = c5.parse_recovery_candidate(raw, NOW.isoformat())
+    assert candidate is None and denial.reason_codes == ("SCHEMA_REJECTED",)
+
+    artifact_root = ROOT / "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery"
+    frame_value = json.loads((artifact_root / "system-anatomy-frame-set.example.json").read_text())
+    frame_value["observations"][1] = dict(frame_value["observations"][0])
+    assert _errors(artifact_root / "system-anatomy-frame-set.schema.json", frame_value)
+
+    proof_value = json.loads((artifact_root / "proofreader-disposition.example.json").read_text())
+    proof_value["reason_codes"] = ["CONTRADICTION"]
+    proof_value["correction_ticket"] = {
+        "ticket_id": "ticket-c5-1234567890abcdef",
+        "field_paths": ["diagnosis"],
+        "reason_codes": ["CONTRADICTION"],
+        "frame_digest": proof_value["frame_digest"],
+        "open": True,
+    }
+    assert _errors(artifact_root / "proofreader-disposition.schema.json", proof_value)
+
+    proof_value["admitted"] = False
+    proof_value["reason_codes"] = []
+    proof_value["correction_ticket"] = None
+    assert _errors(artifact_root / "proofreader-disposition.schema.json", proof_value)

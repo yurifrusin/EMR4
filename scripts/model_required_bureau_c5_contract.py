@@ -21,7 +21,7 @@ import re
 import secrets
 import threading
 from dataclasses import dataclass, replace
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any, Callable, Optional
 
 # --------------------------------------------------------------------------- #
@@ -47,8 +47,11 @@ CATALOG_VERSION = "emr4.c5_runbook_catalog.v1"
 SUPERSESSION_KEY = "synthetic.c5-recovery-target.recovery"
 FRESHNESS_SECONDS = 300
 EXPIRY_SECONDS = 300
-EXPECTED_ARTIFACT_SHA256 = "76373e9dc3e1f1d7acb47c47f6aa6fe8509870d63d1d73fa4d23f44a77284228"
+EXPECTED_ARTIFACT_SHA256 = "a45dd29f2b1bdd4fc70b5bce0a22d6893b295b4001cf22949cd2d2d2927dbd4b"
 PLAN_SHA256 = "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15"
+POLICY_DIGEST = "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450"
+CATALOG_DIGEST = "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a"
+TARGET_REFERENCE = "c5:recovery-target-0001"
 TARGET_MODULE_RELATIVE_PATH = "scripts/model_required_bureau_c5_target.py"
 SCHEMA_ROOT = (
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery"
@@ -83,7 +86,9 @@ POLICY_SCHEMA = "emr4.c5_policy.v1"
 # Scalar admission bounds / formats (fail-closed before any lookup)
 # --------------------------------------------------------------------------- #
 
-_UUID36_RE = re.compile(r"^[0-9a-f-]{36}$")
+_UUID36_RE = re.compile(
+    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+)
 _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 _HEX32_64_RE = re.compile(r"^[0-9a-f]{32,64}$")
 _OBS_ID_RE = re.compile(r"^[a-z0-9_-]+$")
@@ -98,8 +103,8 @@ def _is_bounded_str(value: Any, *, min_len: int = 1, max_len: int = _MAX_FIELD_L
 def _is_opaque_reference(value: Any) -> bool:
     return (
         isinstance(value, str)
-        and 8 <= len(value) <= 256
-        and not any(ch.isspace() for ch in value)
+        and 8 <= len(value) <= 128
+        and _REF_RE.match(value) is not None
     )
 
 
@@ -561,6 +566,9 @@ class ProofreaderDisposition:
             "correction_ticket": self.correction_ticket,
         }
 
+    def digest(self) -> str:
+        return canonical_sha256(self.to_dict())
+
 
 @dataclass(frozen=True)
 class ExecutionApproval:
@@ -624,9 +632,16 @@ class ExecutionEvidenceRecord:
     target: TargetRef
     runbook_id: str
     rollback_runbook_id: str
+    port: int
     target_nonce: str
     generation: int
     artifact_sha256: str
+    python_executable_sha256: str
+    frame_digest: str
+    candidate_digest: str
+    proofreader_digest: str
+    provider_admission_digest: str
+    command_material_sha256: str
     correlation_id: str
     nonce: str
     issued_at: str
@@ -646,9 +661,16 @@ class ExecutionEvidenceRecord:
             "target": self.target.to_dict(),
             "runbook_id": self.runbook_id,
             "rollback_runbook_id": self.rollback_runbook_id,
+            "port": self.port,
             "target_nonce": self.target_nonce,
             "generation": self.generation,
             "artifact_sha256": self.artifact_sha256,
+            "python_executable_sha256": self.python_executable_sha256,
+            "frame_digest": self.frame_digest,
+            "candidate_digest": self.candidate_digest,
+            "proofreader_digest": self.proofreader_digest,
+            "provider_admission_digest": self.provider_admission_digest,
+            "command_material_sha256": self.command_material_sha256,
             "correlation_id": self.correlation_id,
             "nonce": self.nonce,
             "issued_at": self.issued_at,
@@ -670,9 +692,16 @@ class ExecutionEvidenceRecord:
             target=TargetRef.from_dict(data["target"]),
             runbook_id=data["runbook_id"],
             rollback_runbook_id=data["rollback_runbook_id"],
+            port=data["port"],
             target_nonce=data["target_nonce"],
             generation=data["generation"],
             artifact_sha256=data["artifact_sha256"],
+            python_executable_sha256=data["python_executable_sha256"],
+            frame_digest=data["frame_digest"],
+            candidate_digest=data["candidate_digest"],
+            proofreader_digest=data["proofreader_digest"],
+            provider_admission_digest=data["provider_admission_digest"],
+            command_material_sha256=data["command_material_sha256"],
             correlation_id=data["correlation_id"],
             nonce=data["nonce"],
             issued_at=data["issued_at"],
@@ -821,6 +850,21 @@ class IdempotencyRecord:
     terminal_receipt: Optional[dict[str, Any]] = None
 
 
+@dataclass
+class ProviderAttemptState:
+    correlation_id: str
+    request_digest: str
+    frame_digest: str
+    call_count: int = 0
+    state: str = "reserved"
+    rejected_candidate_digest: Optional[str] = None
+    correction_ticket_id: Optional[str] = None
+    correction_ticket_digest: Optional[str] = None
+    admitted_candidate_digest: Optional[str] = None
+    admitted_proofreader_digest: Optional[str] = None
+    admission_digest: Optional[str] = None
+
+
 class C5SharedStore:
     """One shared store/critical section for authority, evidence, idempotency,
     attempt sequence and launch state across every runtime sharing the store.
@@ -833,12 +877,174 @@ class C5SharedStore:
         self.superseded_keys: set[str] = set()
         self.launch_state: str = "not_started"
         self.attempt_audit: list[dict[str, Any]] = []
+        self.provider_attempts: dict[str, ProviderAttemptState] = {}
+        self.issued_effective_keys: set[tuple[str, str]] = set()
+        self.evidence_sequence = 0
+        self.operation_audit: list[dict[str, Any]] = []
+        self.cleanup_complete = False
         self._attempt_sequence = 0
 
     def next_attempt_id(self) -> str:
         with self.transaction_lock:
             self._attempt_sequence += 1
             return "c5-attempt-%012d" % self._attempt_sequence
+
+    def reserve_provider_attempt(
+        self,
+        *,
+        correlation_id: str,
+        request_metadata: ProviderRequestMetadata,
+        frame_digest: str,
+    ) -> ProviderAttemptState:
+        if not _UUID36_RE.match(correlation_id) or not _SHA256_RE.match(frame_digest):
+            raise ValueError("invalid provider reservation binding")
+        if request_metadata != build_provider_request_metadata():
+            raise ValueError("provider request metadata drift")
+        request_digest = canonical_sha256(request_metadata.to_dict())
+        with self.transaction_lock:
+            if correlation_id in self.provider_attempts:
+                raise ValueError("provider attempt already reserved")
+            state = ProviderAttemptState(
+                correlation_id=correlation_id,
+                request_digest=request_digest,
+                frame_digest=frame_digest,
+            )
+            self.provider_attempts[correlation_id] = state
+            return state
+
+    def record_provider_failure(self, correlation_id: str, failure_kind: str) -> None:
+        if failure_kind not in {"schema", "transport", "admission"}:
+            raise ValueError("invalid provider failure kind")
+        with self.transaction_lock:
+            state = self.provider_attempts.get(correlation_id)
+            if state is None or state.state != "reserved" or state.call_count != 0:
+                raise ValueError("provider failure is not eligible")
+            state.call_count = 1
+            state.state = "closed_failed"
+
+    def record_provider_candidate(
+        self,
+        *,
+        correlation_id: str,
+        frame: SystemAnatomyFrameSet,
+        candidate: RecoveryDiagnosisCandidate,
+        disposition: ProofreaderDisposition,
+        correction_ticket: Optional[dict[str, Any]] = None,
+    ) -> str:
+        with self.transaction_lock:
+            state = self.provider_attempts.get(correlation_id)
+            if state is None:
+                raise ValueError("provider attempt missing")
+            validate_frame_semantics(frame)
+            if frame.frame_digest != state.frame_digest:
+                raise ValueError("provider frame object drift")
+            if candidate.frame_digest != state.frame_digest:
+                raise ValueError("provider frame binding drift")
+            candidate_digest = candidate.digest()
+            disposition_digest = disposition.digest()
+            if disposition.frame_digest != state.frame_digest:
+                raise ValueError("proofreader frame binding drift")
+            if disposition.candidate_digest != candidate_digest:
+                raise ValueError("proofreader candidate binding drift")
+            if disposition != proofread_candidate(candidate, frame):
+                raise ValueError("proofreader disposition was not reproduced")
+
+            if state.state == "reserved" and state.call_count == 0:
+                if correction_ticket is not None:
+                    raise ValueError("primary call cannot consume a correction ticket")
+                state.call_count = 1
+            elif state.state == "correction_eligible" and state.call_count == 1:
+                if (
+                    not isinstance(correction_ticket, dict)
+                    or correction_ticket.get("ticket_id") != state.correction_ticket_id
+                    or canonical_sha256(correction_ticket) != state.correction_ticket_digest
+                ):
+                    raise ValueError("correction ticket mismatch")
+                if candidate_digest == state.rejected_candidate_digest:
+                    raise ValueError("unchanged correction rejected")
+                state.call_count = 2
+            else:
+                raise ValueError("provider call limit or terminal state reached")
+
+            if disposition.admitted:
+                state.state = "admitted"
+                state.admitted_candidate_digest = candidate_digest
+                state.admitted_proofreader_digest = disposition_digest
+                state.admission_digest = canonical_sha256(
+                    {
+                        "correlation_id": correlation_id,
+                        "request_digest": state.request_digest,
+                        "frame_digest": state.frame_digest,
+                        "candidate_digest": candidate_digest,
+                        "proofreader_digest": disposition_digest,
+                        "call_count": state.call_count,
+                        "state": "admitted",
+                    }
+                )
+                return state.admission_digest
+
+            ticket = disposition.correction_ticket
+            if state.call_count == 1 and ticket is not None:
+                ticket_id = ticket.get("ticket_id")
+                if not isinstance(ticket_id, str):
+                    raise ValueError("invalid correction ticket")
+                state.state = "correction_eligible"
+                state.rejected_candidate_digest = candidate_digest
+                state.correction_ticket_id = ticket_id
+                state.correction_ticket_digest = canonical_sha256(ticket)
+                return state.correction_ticket_digest
+
+            state.state = "closed_denied"
+            return disposition_digest
+
+    def require_provider_admission(
+        self,
+        *,
+        correlation_id: str,
+        admission_digest: str,
+        frame_digest: str,
+        candidate_digest: str,
+        proofreader_digest: str,
+    ) -> ProviderAttemptState:
+        with self.transaction_lock:
+            state = self.provider_attempts.get(correlation_id)
+            if (
+                state is None
+                or state.state != "admitted"
+                or state.admission_digest != admission_digest
+                or state.frame_digest != frame_digest
+                or state.admitted_candidate_digest != candidate_digest
+                or state.admitted_proofreader_digest != proofreader_digest
+            ):
+                raise ValueError("provider admission binding mismatch")
+            return state
+
+    def consume_provider_admission(self, correlation_id: str, admission_digest: str) -> None:
+        with self.transaction_lock:
+            current = self.provider_attempts.get(correlation_id)
+            if current is None:
+                raise ValueError("provider attempt missing")
+            state = self.require_provider_admission(
+                correlation_id=correlation_id,
+                admission_digest=admission_digest,
+                frame_digest=current.frame_digest,
+                candidate_digest=current.admitted_candidate_digest or "",
+                proofreader_digest=current.admitted_proofreader_digest or "",
+            )
+            state.state = "consumed"
+
+    def close_provider_attempts(self) -> None:
+        with self.transaction_lock:
+            for state in self.provider_attempts.values():
+                if state.state not in {"consumed", "closed_failed", "closed_denied"}:
+                    state.state = "closed_denied"
+
+    def provider_open_count(self) -> int:
+        with self.transaction_lock:
+            return sum(
+                state.state not in {"consumed", "closed_failed", "closed_denied"}
+                for state in self.provider_attempts.values()
+            )
 
 
 # --------------------------------------------------------------------------- #
@@ -889,6 +1095,13 @@ def build_system_anatomy_frame_set(
     baseline: InternalObservation,
     post_fault: InternalObservation,
 ) -> SystemAnatomyFrameSet:
+    if not all(
+        isinstance(value, str) and _SHA256_RE.match(value)
+        for value in (service_artifact_sha256, policy_digest, catalog_digest)
+    ):
+        raise ValueError("frame digest input is invalid")
+    if not _is_opaque_reference(target_reference):
+        raise ValueError("target reference is invalid")
     observations = (_frame_observation(baseline), _frame_observation(post_fault))
     context_absence = (
         "patient",
@@ -930,7 +1143,105 @@ def build_system_anatomy_frame_set(
         context_absence=context_absence,
         frame_digest="",
     )
-    return replace(frame, frame_digest=frame.digest())
+    frame = replace(frame, frame_digest=frame.digest())
+    validate_frame_semantics(frame)
+    return frame
+
+
+def validate_frame_semantics(
+    frame: SystemAnatomyFrameSet,
+    *,
+    now: Optional[datetime] = None,
+) -> None:
+    """Validate the exact two-observation C5 failure frame.
+
+    Structural closure alone is insufficient: the model may see exactly one
+    healthy generation-1 baseline followed by one absent/refused post-fault
+    observation, with distinct observation and source identities.
+    """
+    if frame.schema_version != FRAME_SET_SCHEMA or frame.target != TargetRef.frozen():
+        raise ValueError("frame target or schema drift")
+    if frame.evidence_label != OCCUPIED_LABEL or frame.risk_tier != RISK_TIER:
+        raise ValueError("frame authority drift")
+    if frame.required_approval_class != REQUIRED_APPROVAL_CLASS:
+        raise ValueError("frame approval class drift")
+    if (
+        frame.target_reference != TARGET_REFERENCE
+        or frame.service_artifact_sha256 != EXPECTED_ARTIFACT_SHA256
+        or frame.policy_digest != POLICY_DIGEST
+        or frame.catalog_digest != CATALOG_DIGEST
+    ):
+        raise ValueError("frame source binding drift")
+    expected_runbooks = {
+        "forward": {
+            "runbook_id": FORWARD_RUNBOOK,
+            "description": "Start the pinned C5 disposable loopback service at generation 2.",
+            "executable": False,
+        },
+        "rollback": {
+            "runbook_id": ROLLBACK_RUNBOOK,
+            "description": "Stop the controller-owned C5 disposable loopback process and prove absence.",
+            "executable": False,
+        },
+    }
+    expected_absence = (
+        "patient",
+        "product",
+        "database",
+        "credential",
+        "ordinary_service",
+        "port",
+        "pid",
+        "nonce",
+        "path",
+        "environment",
+        "log",
+    )
+    if frame.runbooks != expected_runbooks or frame.context_absence != expected_absence:
+        raise ValueError("frame runbook or context-absence drift")
+    if frame.frame_digest != frame.digest():
+        raise ValueError("frame digest drift")
+    if len(frame.observations) != 2:
+        raise ValueError("frame must contain exactly two observations")
+    baseline, post_fault = frame.observations
+    if (
+        baseline.kind != "baseline"
+        or baseline.process_disposition != "alive"
+        or baseline.loopback_health_disposition != "reachable"
+        or baseline.generation != 1
+    ):
+        raise ValueError("baseline observation semantics invalid")
+    if (
+        post_fault.kind != "post_fault"
+        or post_fault.process_disposition != "absent"
+        or post_fault.loopback_health_disposition != "connection_refused"
+        or post_fault.generation is not None
+    ):
+        raise ValueError("post-fault observation semantics invalid")
+    if baseline.observation_id == post_fault.observation_id:
+        raise ValueError("observation ids must be distinct")
+    if baseline.observation_source_id == post_fault.observation_source_id:
+        raise ValueError("observation source ids must be distinct")
+    if baseline.content_sha256 == post_fault.content_sha256:
+        raise ValueError("observation content digests must be distinct")
+    for observation in frame.observations:
+        if not _OBS_ID_RE.match(observation.observation_id):
+            raise ValueError("observation id invalid")
+        if not observation.observation_source_id.startswith("obs-"):
+            raise ValueError("observation source invalid")
+        if observation.freshness_seconds != FRESHNESS_SECONDS:
+            raise ValueError("observation freshness contract drift")
+        if not _SHA256_RE.match(observation.content_sha256):
+            raise ValueError("observation content digest invalid")
+        observed_at = _parse_time(observation.observed_at)
+        if observed_at.tzinfo is None:
+            raise ValueError("observation timestamp must be timezone-aware")
+        if now is not None:
+            age = (now.astimezone(timezone.utc) - observed_at.astimezone(timezone.utc)).total_seconds()
+            if age < 0 or age > observation.freshness_seconds:
+                raise ValueError("observation is stale or future-dated")
+    if _parse_time(post_fault.observed_at) < _parse_time(baseline.observed_at):
+        raise ValueError("post-fault observation must follow baseline")
 
 
 # --------------------------------------------------------------------------- #
@@ -993,8 +1304,7 @@ def parse_recovery_candidate(
 
     if not isinstance(raw, dict):
         return deny("SCHEMA_REJECTED")
-    unknown = set(raw.keys()) - _ALLOWED_CANDIDATE_KEYS
-    if unknown:
+    if set(raw.keys()) != _ALLOWED_CANDIDATE_KEYS:
         return deny("SCHEMA_REJECTED")
     # The whole raw object is scanned for executable content (keys and values).
     if _scan_for_executable(raw):
@@ -1071,21 +1381,28 @@ def parse_recovery_candidate(
         return deny("SCHEMA_REJECTED")
     evidence_ids = diagnosis_data.get("evidence_observation_ids")
     missing_evidence = diagnosis_data.get("missing_evidence")
-    if not isinstance(evidence_ids, list) or not evidence_ids:
+    if not isinstance(evidence_ids, list) or not 1 <= len(evidence_ids) <= 8:
         return deny("EVIDENCE_GROUNDING_REJECTED")
     if not all(isinstance(i, str) and _OBS_ID_RE.match(i) for i in evidence_ids):
         return deny("SCHEMA_REJECTED")
-    if not isinstance(missing_evidence, list):
+    if len(set(evidence_ids)) != len(evidence_ids):
+        return deny("SCHEMA_REJECTED")
+    if not isinstance(missing_evidence, list) or len(missing_evidence) > 8:
         return deny("SCHEMA_REJECTED")
     if not all(isinstance(i, str) and 1 <= len(i) <= 120 for i in missing_evidence):
+        return deny("SCHEMA_REJECTED")
+    if len(set(missing_evidence)) != len(missing_evidence):
         return deny("SCHEMA_REJECTED")
 
     expected_effect = raw.get("expected_effect")
     uncertainty = raw.get("uncertainty")
     explanation = raw.get("operator_explanation")
-    for value in (expected_effect, uncertainty, explanation):
-        if not _is_bounded_str(value, max_len=400):
-            return deny("SCHEMA_REJECTED")
+    if not _is_bounded_str(expected_effect, max_len=200):
+        return deny("SCHEMA_REJECTED")
+    if not _is_bounded_str(uncertainty, max_len=200):
+        return deny("SCHEMA_REJECTED")
+    if not _is_bounded_str(explanation, max_len=400):
+        return deny("SCHEMA_REJECTED")
 
     candidate = RecoveryDiagnosisCandidate(
         schema_version=CANDIDATE_SCHEMA,
@@ -1146,6 +1463,13 @@ def proofread_candidate(
     reason_codes: list[str] = []
     grounding = _grounding(True)
 
+    try:
+        validate_frame_semantics(frame)
+    except ValueError:
+        reason_codes.append("FRAME_SEMANTICS_REJECTED")
+        grounding["every_hypothesis_grounded"] = False
+        grounding["exact_stopped_process_diagnosis"] = False
+
     if candidate.frame_digest != frame.frame_digest:
         reason_codes.append("FRAME_DIGEST_MISMATCH")
         grounding["every_hypothesis_grounded"] = False
@@ -1159,6 +1483,18 @@ def proofread_candidate(
         reason_codes.append("NEW_OBSERVATION_REJECTED")
         grounding["every_hypothesis_grounded"] = False
         grounding["no_new_observation"] = False
+
+    post_fault_ids = {
+        observation.observation_id
+        for observation in frame.observations
+        if observation.kind == "post_fault"
+        and observation.process_disposition == "absent"
+        and observation.loopback_health_disposition == "connection_refused"
+    }
+    if not post_fault_ids or not post_fault_ids.issubset(evidence_ids):
+        reason_codes.append("POST_FAULT_EVIDENCE_REQUIRED")
+        grounding["every_hypothesis_grounded"] = False
+        grounding["exact_stopped_process_diagnosis"] = False
 
     # Only the exact stopped-process diagnosis is eligible.
     if candidate.diagnosis.cause != "stopped_process":
@@ -1222,8 +1558,15 @@ def proofread_candidate(
     correction_ticket: Optional[dict[str, Any]] = None
     if not admitted:
         # At most one closed correction ticket; never reveals preferred prose.
+        ticket_digest = canonical_sha256(
+            {
+                "frame_digest": frame.frame_digest,
+                "candidate_digest": candidate_digest,
+                "reason_codes": reason_codes[:4],
+            }
+        )
         correction_ticket = {
-            "ticket_id": "ticket-c5-0001",
+            "ticket_id": "ticket-c5-" + ticket_digest[:16],
             "field_paths": ["diagnosis", "selected_runbook", "operator_explanation"],
             "reason_codes": reason_codes[:4],
             "frame_digest": frame.frame_digest,
@@ -1287,6 +1630,89 @@ def materialise_execution_approval(
     )
 
 
+def validate_execution_approval(
+    approval: ExecutionApproval,
+    *,
+    now: datetime,
+) -> None:
+    """Revalidate every frozen approval field against current time."""
+    if approval.schema_version != APPROVAL_SCHEMA:
+        raise ValueError("approval schema drift")
+    if not _UUID36_RE.match(approval.approval_id):
+        raise ValueError("approval id drift")
+    if approval.approval_basis != APPROVAL_BASIS:
+        raise ValueError("approval basis drift")
+    if approval.plan_sha256 != PLAN_SHA256 or approval.plan_revision != 1:
+        raise ValueError("approval plan drift")
+    if approval.target != TargetRef.frozen():
+        raise ValueError("approval target drift")
+    if approval.fault != "controller_terminates_owned_child":
+        raise ValueError("approval fault drift")
+    if approval.runbook_id != FORWARD_RUNBOOK or approval.rollback_runbook_id != ROLLBACK_RUNBOOK:
+        raise ValueError("approval runbook drift")
+    expected_provider = {
+        "model": PROVIDER_MODEL,
+        "project": PROVIDER_PROJECT,
+        "identity": PROVIDER_IDENTITY,
+        "region": PROVIDER_REGION,
+        "endpoint": PROVIDER_ENDPOINT,
+    }
+    if approval.provider != expected_provider:
+        raise ValueError("approval provider drift")
+    if approval.cost_ceiling_usd != COST_CEILING_USD or approval.call_limit != CALL_LIMIT:
+        raise ValueError("approval cost or call drift")
+    if approval.thinking_budget != THINKING_BUDGET or approval.max_output_tokens != MAX_OUTPUT_TOKENS:
+        raise ValueError("approval reasoning envelope drift")
+    if approval.rehearsal_count != 1:
+        raise ValueError("approval rehearsal drift")
+    if approval.evidence_label != OCCUPIED_LABEL:
+        raise ValueError("approval evidence label drift")
+    if approval.scope_expansion is not False or approval.non_transferable is not True:
+        raise ValueError("approval scope or transfer drift")
+    expires_at = _parse_time(approval.expires_at)
+    now_utc = now.astimezone(timezone.utc)
+    if expires_at <= now_utc or expires_at > now_utc + timedelta(seconds=EXPIRY_SECONDS):
+        raise ValueError("approval expiry is stale or over-broad")
+
+
+def build_command_material_digest(
+    *,
+    approval: ExecutionApproval,
+    port: int,
+    target_nonce: str,
+    generation: int,
+    artifact_sha256: str,
+    python_executable_sha256: str,
+    frame_digest: str,
+    candidate_digest: str,
+    proofreader_digest: str,
+    provider_admission_digest: str,
+    correlation_id: str,
+) -> str:
+    return canonical_sha256(
+        {
+            "schema_version": ENVELOPE_SCHEMA,
+            "evidence_label": OCCUPIED_LABEL,
+            "approval_sha256": approval.digest(),
+            "runbook_id": FORWARD_RUNBOOK,
+            "rollback_runbook_id": ROLLBACK_RUNBOOK,
+            "target": TargetRef.frozen().to_dict(),
+            "host": HOST,
+            "port": port,
+            "generation": generation,
+            "target_nonce": target_nonce,
+            "artifact_sha256": artifact_sha256,
+            "python_executable_sha256": python_executable_sha256,
+            "frame_digest": frame_digest,
+            "candidate_digest": candidate_digest,
+            "proofreader_digest": proofreader_digest,
+            "provider_admission_digest": provider_admission_digest,
+            "correlation_id": correlation_id,
+            "parameters": {},
+        }
+    )
+
+
 # --------------------------------------------------------------------------- #
 # Evidence issuer (non-caller-selectable cryptographic reference/nonce)
 # --------------------------------------------------------------------------- #
@@ -1319,8 +1745,6 @@ class C5EvidenceIssuer:
         self._now = now
         self._store = store if store is not None else C5SharedStore()
         self._lock = self._store.transaction_lock
-        self._issued_keys: set[tuple[str, str]] = set()
-        self._sequence = 0
 
     @property
     def store(self) -> C5SharedStore:
@@ -1330,26 +1754,43 @@ class C5EvidenceIssuer:
         self,
         *,
         approval: ExecutionApproval,
+        frame: SystemAnatomyFrameSet,
+        candidate: RecoveryDiagnosisCandidate,
+        proofreader: ProofreaderDisposition,
+        provider_admission_digest: str,
+        port: int,
         target_nonce: str,
         generation: int,
         artifact_sha256: str,
+        python_executable_sha256: str,
         correlation_id: str,
     ) -> IssuedEvidence:
         now = self._now()
         now_iso = _format_time(now)
-        if approval.schema_version != APPROVAL_SCHEMA:
-            raise IssuanceDenied("SCHEMA_REJECTED")
-        if approval.plan_sha256 != PLAN_SHA256 or approval.plan_revision != 1:
-            raise IssuanceDenied("AUTHORITY_MISMATCH")
-        if approval.target != TargetRef.frozen():
-            raise IssuanceDenied("SCOPE_EXPANSION_REJECTED")
-        if approval.runbook_id != FORWARD_RUNBOOK or approval.rollback_runbook_id != ROLLBACK_RUNBOOK:
-            raise IssuanceDenied("UNKNOWN_RUNBOOK")
-        if approval.cost_ceiling_usd != COST_CEILING_USD or approval.call_limit != CALL_LIMIT:
-            raise IssuanceDenied("AUTHORITY_MISMATCH")
-        if approval.rehearsal_count != 1 or approval.scope_expansion is not False:
-            raise IssuanceDenied("AUTHORITY_MISMATCH")
-        if approval.non_transferable is not True:
+        try:
+            validate_execution_approval(approval, now=now)
+        except ValueError as error:
+            reason = "STALE_OR_SUPERSEDED" if "expiry" in str(error) else "AUTHORITY_MISMATCH"
+            raise IssuanceDenied(reason) from error
+        try:
+            validate_frame_semantics(frame, now=now)
+        except ValueError as error:
+            raise IssuanceDenied("FRAME_INVALID") from error
+        if candidate.frame_digest != frame.frame_digest:
+            raise IssuanceDenied("FRAME_DIGEST_MISMATCH")
+        if proofreader.admitted is not True or proofreader.reason_codes:
+            raise IssuanceDenied("PROOFREADER_REJECTED")
+        if proofreader.frame_digest != frame.frame_digest:
+            raise IssuanceDenied("FRAME_DIGEST_MISMATCH")
+        if proofreader.candidate_digest != candidate.digest():
+            raise IssuanceDenied("CANDIDATE_DIGEST_MISMATCH")
+        if proofreader.correction_ticket is not None or not all(proofreader.grounding.values()):
+            raise IssuanceDenied("PROOFREADER_REJECTED")
+        if not isinstance(port, int) or isinstance(port, bool) or not 1 <= port <= 65535:
+            raise IssuanceDenied("PORT_MISMATCH")
+        if not _SHA256_RE.match(python_executable_sha256):
+            raise IssuanceDenied("EXECUTABLE_DIGEST_MISMATCH")
+        if not _SHA256_RE.match(provider_admission_digest):
             raise IssuanceDenied("AUTHORITY_MISMATCH")
         if not isinstance(target_nonce, str) or not _HEX32_64_RE.match(target_nonce):
             raise IssuanceDenied("SCHEMA_REJECTED")
@@ -1362,15 +1803,41 @@ class C5EvidenceIssuer:
         if now >= _parse_time(approval.expires_at):
             raise IssuanceDenied("STALE_OR_SUPERSEDED")
 
+        candidate_digest = candidate.digest()
+        proofreader_digest = proofreader.digest()
+        command_material_sha256 = build_command_material_digest(
+            approval=approval,
+            port=port,
+            target_nonce=target_nonce,
+            generation=generation,
+            artifact_sha256=artifact_sha256,
+            python_executable_sha256=python_executable_sha256,
+            frame_digest=frame.frame_digest,
+            candidate_digest=candidate_digest,
+            proofreader_digest=proofreader_digest,
+            provider_admission_digest=provider_admission_digest,
+            correlation_id=correlation_id,
+        )
+
         effective_key = (approval.plan_sha256, SUPERSESSION_KEY)
         with self._lock:
-            if effective_key in self._issued_keys:
+            try:
+                self._store.require_provider_admission(
+                    correlation_id=correlation_id,
+                    admission_digest=provider_admission_digest,
+                    frame_digest=frame.frame_digest,
+                    candidate_digest=candidate_digest,
+                    proofreader_digest=proofreader_digest,
+                )
+            except ValueError as error:
+                raise IssuanceDenied("PROVIDER_ADMISSION_MISMATCH") from error
+            if effective_key in self._store.issued_effective_keys:
                 raise IssuanceDenied("STALE_OR_SUPERSEDED")
             reference = _generate_reference()
             nonce = _generate_nonce()
             reference_sha256 = sha256_hex(reference.encode("utf-8"))
-            self._sequence += 1
-            evidence_id = "92000000-0000-4000-8000-%012d" % self._sequence
+            self._store.evidence_sequence += 1
+            evidence_id = "92000000-0000-4000-8000-%012d" % self._store.evidence_sequence
             record = ExecutionEvidenceRecord(
                 schema_version=EVIDENCE_SCHEMA,
                 evidence_id=evidence_id,
@@ -1383,9 +1850,16 @@ class C5EvidenceIssuer:
                 target=approval.target,
                 runbook_id=approval.runbook_id,
                 rollback_runbook_id=approval.rollback_runbook_id,
+                port=port,
                 target_nonce=target_nonce,
                 generation=generation,
                 artifact_sha256=artifact_sha256,
+                python_executable_sha256=python_executable_sha256,
+                frame_digest=frame.frame_digest,
+                candidate_digest=candidate_digest,
+                proofreader_digest=proofreader_digest,
+                provider_admission_digest=provider_admission_digest,
+                command_material_sha256=command_material_sha256,
                 correlation_id=correlation_id,
                 nonce=nonce,
                 issued_at=now_iso,
@@ -1393,5 +1867,5 @@ class C5EvidenceIssuer:
                 supersession_key=SUPERSESSION_KEY,
             )
             self._store.evidence_records[reference_sha256] = record
-            self._issued_keys.add(effective_key)
+            self._store.issued_effective_keys.add(effective_key)
             return IssuedEvidence(reference=reference, record=record)

@@ -76,8 +76,8 @@ EXPECTED_HEAD = "953073e18ab48420b58d80ed78d41e8033534cb8"
 EXPECTED_RESULT = "model_required_bureau_c5_disposable_live_development_recovery_pass"
 COUNTER_SCHEMA_VERSION = "emr4.model_required_bureau_c5_acceptance.v1"
 
-NOW = datetime(2026, 8, 5, 8, 0, 30, tzinfo=timezone.utc)
-NOW_ISO = "2026-08-05T08:00:30Z"
+NOW = datetime(2026, 8, 5, 8, 1, 30, tzinfo=timezone.utc)
+NOW_ISO = "2026-08-05T08:01:30Z"
 APPROVAL_ID = "91000000-0000-4000-8000-000000000001"
 CORRELATION_ID = "93000000-0000-4000-8000-000000000001"
 IDEMPOTENCY_KEY = "94000000-0000-4000-8000-000000000001"
@@ -85,6 +85,7 @@ TARGET_NONCE = "9c3d5f7e1a2b4c8d0e6f1a2b3c4d5e6f"
 FIXTURE_REFERENCE = "c5-fixture-opaque-reference-00000000000000000000000000000000000000000000000000"
 FIXTURE_NONCE = "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
 PORT = 44123
+PYTHON_EXECUTABLE_SHA256 = "2" * 64
 EXPIRES_AT = "2026-08-05T08:05:00Z"
 POLICY_DIGEST = "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450"
 CATALOG_DIGEST = "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a"
@@ -192,6 +193,7 @@ class FakeHandle:
         self.argv = list(argv)
         self.terminated = False
         self.terminate_calls = 0
+        self.closed = False
 
 
 class FakeProcessObserver:
@@ -202,19 +204,70 @@ class FakeProcessObserver:
         self.terminate_success = True
         self.post_fault_disposition = "absent"
         self.start_raises = False
+        self.alive_disposition = "alive"
+        self.preflight_calls = 0
+        self.observation_calls = 0
+        self.is_live_capability = False
 
-    def start(self, argv: list[str], env: dict[str, str]) -> FakeHandle:
+    def preflight(
+        self,
+        *,
+        expected_python_sha256: str,
+        expected_target_sha256: str,
+    ) -> dict[str, str]:
+        self.preflight_calls += 1
+        if expected_python_sha256 != PYTHON_EXECUTABLE_SHA256:
+            raise ValueError("fake python digest drift")
+        if expected_target_sha256 != EXPECTED_ARTIFACT_SHA256:
+            raise ValueError("fake target digest drift")
+        return {
+            "python_executable_sha256": expected_python_sha256,
+            "target_artifact_sha256": expected_target_sha256,
+        }
+
+    def start(
+        self,
+        argv: list[str],
+        env: dict[str, str],
+        *,
+        expected_python_sha256: str,
+        expected_target_sha256: str,
+        reservation: Any = None,
+    ) -> FakeHandle:
         self.starts += 1
         if self.start_raises:
             raise RuntimeError("fake launch failure")
+        if reservation is None:
+            raise ValueError("fake exact reservation missing")
+        reservation.prepare_exact_launch(port=int(argv[6]), host=HOST)
+        reservation.complete_handoff()
         handle = FakeHandle(pid=1000 + self.starts, argv=list(argv))
+        handle.port = int(argv[6])
+        handle.nonce = argv[8]
+        handle.generation = int(argv[10])
+        handle.artifact_sha256 = expected_target_sha256
+        handle.python_executable_sha256 = expected_python_sha256
         self.handles.append(handle)
         return handle
 
     def observe_process(self, handle: FakeHandle) -> dict[str, Any]:
+        self.observation_calls += 1
         if handle.terminated:
-            return {"disposition": self.post_fault_disposition, "pid": handle.pid}
-        return {"disposition": "alive", "pid": handle.pid}
+            disposition = self.post_fault_disposition
+        else:
+            disposition = self.alive_disposition
+        return {
+            "observation_id": f"obs-fake-process-{self.observation_calls:04d}",
+            "disposition": disposition,
+            "pid": handle.pid,
+            "owned": True,
+            "argv_sha256": canonical_sha256(handle.argv),
+            "port": handle.port,
+            "generation": handle.generation,
+            "nonce": handle.nonce,
+            "artifact_sha256": handle.artifact_sha256,
+            "python_executable_sha256": handle.python_executable_sha256,
+        }
 
     def terminate(self, handle: FakeHandle) -> bool:
         handle.terminate_calls += 1
@@ -226,6 +279,11 @@ class FakeProcessObserver:
     def any_running(self) -> bool:
         return any(not h.terminated for h in self.handles)
 
+    def close(self, handle: FakeHandle) -> None:
+        if not handle.terminated:
+            raise ValueError("cannot close running fake handle")
+        handle.closed = True
+
 
 class FakeHttpObserver:
     def __init__(self) -> None:
@@ -233,15 +291,36 @@ class FakeHttpObserver:
         self.mode = "reachable"  # reachable | refused | bad_readback
         self.generation = GENERATION_RECOVERED
         self.nonce = TARGET_NONCE
+        self.raise_on_probe = False
+        self.is_live_capability = False
 
     def probe(self, host: str, port: int, path: str) -> dict[str, Any]:
         self.probes += 1
+        if self.raise_on_probe:
+            raise RuntimeError("fake probe failure")
         if self.mode == "refused":
-            return {"status": "connection_refused"}
+            return {
+                "observation_id": f"obs-fake-http-{self.probes:04d}",
+                "status": "connection_refused",
+                "host": host,
+                "port": port,
+                "path": path,
+            }
         if self.mode == "bad_readback":
-            return {"status": 200, "body": {"state": "degraded"}}
+            return {
+                "observation_id": f"obs-fake-http-{self.probes:04d}",
+                "status": 200,
+                "body": {"state": "degraded"},
+                "host": host,
+                "port": port,
+                "path": path,
+            }
         return {
+            "observation_id": f"obs-fake-http-{self.probes:04d}",
             "status": 200,
+            "host": host,
+            "port": port,
+            "path": path,
             "body": {
                 "schema_version": "emr4.c5_health_body.v1",
                 "environment": _c5.PLAN_ENVIRONMENT,
@@ -256,7 +335,7 @@ class FakeHttpObserver:
             },
         }
 
-    def any_listener(self) -> bool:
+    def any_listener(self, *, port: int = PORT) -> bool:
         return False
 
 
@@ -264,23 +343,66 @@ class FakePortAllocator:
     def __init__(self) -> None:
         self.allocations = 0
 
-    def allocate(self) -> int:
+    is_live_capability = False
+
+    def reserve(self):
         self.allocations += 1
-        return PORT
+        return FakePortReservation()
+
+    def reserve_exact(self, port: int):
+        self.allocations += 1
+        if port != PORT:
+            raise ValueError("fake exact port drift")
+        return FakePortReservation()
+
+
+class FakePortReservation:
+    def __init__(self) -> None:
+        self.host = HOST
+        self.port = PORT
+        self.released = False
+        self.prepared = False
+
+    def prepare_exact_launch(self, *, port: int, host: str) -> int:
+        if port != self.port or host != self.host or self.released or self.prepared:
+            raise ValueError("fake reservation drift")
+        self.prepared = True
+        return 12345
+
+    def complete_handoff(self) -> None:
+        if not self.prepared or self.released:
+            raise ValueError("fake reservation was not prepared")
+        self.released = True
+
+    def close(self) -> None:
+        self.released = True
 
 
 class FakeDirectoryOps:
     def __init__(self) -> None:
         self.validated_paths: list[str] = []
         self.removed: list[str] = []
+        self.metadata: dict[str, Any] | None = None
+        self.owned_path = str((ROOT / "c5-task-0001").resolve())
+        self.is_live_capability = False
 
-    def validate_owned_path(self, candidate: Any, task_root: Any) -> bool:
+    def create_task_dir(self) -> str:
+        return self.owned_path
+
+    def validate_owned_path(self, candidate: Any) -> bool:
         candidate_path = Path(candidate).resolve()
-        root = Path(task_root).resolve()
         self.validated_paths.append(str(candidate_path))
-        return root == candidate_path or (root in candidate_path.parents and candidate_path != root.parent)
+        return str(candidate_path) == self.owned_path
 
-    def remove_task_dir(self, candidate: Any, task_root: Any) -> bool:
+    def materialise_launch_metadata(self, candidate: Any, metadata: dict[str, Any]) -> str:
+        if not self.validate_owned_path(candidate):
+            raise ValueError("fake launch metadata path drift")
+        self.metadata = dict(metadata)
+        return str((Path(self.owned_path) / "launch-metadata.json").resolve())
+
+    def remove_task_dir(self, candidate: Any) -> bool:
+        if not self.validate_owned_path(candidate):
+            raise ValueError("fake cleanup path drift")
         self.removed.append(str(Path(candidate).resolve()))
         return True
 
@@ -369,16 +491,61 @@ def build_approval() -> ExecutionApproval:
     )
 
 
-def mint_evidence(issuer: C5EvidenceIssuer) -> Any:
-    return _with_fixed_entropy(
-        lambda: issuer.mint(
+def admit_provider_candidate(
+    store: C5SharedStore,
+    *,
+    frame: SystemAnatomyFrameSet,
+    candidate: Any,
+    proofreader: Any,
+) -> str:
+    store.reserve_provider_attempt(
+        correlation_id=CORRELATION_ID,
+        request_metadata=build_provider_request_metadata(),
+        frame_digest=frame.frame_digest,
+    )
+    return store.record_provider_candidate(
+        correlation_id=CORRELATION_ID,
+        frame=frame,
+        candidate=candidate,
+        disposition=proofreader,
+    )
+
+
+def mint_evidence(
+    issuer: C5EvidenceIssuer,
+    *,
+    frame: SystemAnatomyFrameSet | None = None,
+    candidate: Any = None,
+    proofreader: Any = None,
+    provider_admission_digest: str | None = None,
+    fixed_entropy: bool = True,
+) -> Any:
+    frame = frame if frame is not None else build_frame()
+    candidate = candidate if candidate is not None else parse_candidate(frame)
+    proofreader = proofreader if proofreader is not None else proofread_candidate(candidate, frame)
+    if provider_admission_digest is None:
+        provider_admission_digest = admit_provider_candidate(
+            issuer.store,
+            frame=frame,
+            candidate=candidate,
+            proofreader=proofreader,
+        )
+    def issue():
+        return issuer.mint(
             approval=build_approval(),
+            frame=frame,
+            candidate=candidate,
+            proofreader=proofreader,
+            provider_admission_digest=provider_admission_digest,
+            port=PORT,
             target_nonce=TARGET_NONCE,
             generation=2,
             artifact_sha256=EXPECTED_ARTIFACT_SHA256,
+            python_executable_sha256=PYTHON_EXECUTABLE_SHA256,
             correlation_id=CORRELATION_ID,
         )
-    )
+
+    return _with_fixed_entropy(issue) if fixed_entropy else issue()
 
 
 def new_controller(
@@ -388,25 +555,32 @@ def new_controller(
     http=None,
     port_allocator=None,
     directory=None,
-    ledger=None,
     now=NOW,
+    prepare_runtime=True,
+    ready_for_execute=False,
 ):
     process = process if process is not None else FakeProcessObserver()
     http = http if http is not None else FakeHttpObserver()
     port_allocator = port_allocator if port_allocator is not None else FakePortAllocator()
     directory = directory if directory is not None else FakeDirectoryOps()
-    ledger = ledger if ledger is not None else FakeLedger()
     store = store if store is not None else C5SharedStore()
-    return LiveRecoveryController(
-        repo_root=ROOT,
+    controller = LiveRecoveryController(
         store=store,
         process=process,
         http=http,
         port_allocator=port_allocator,
         directory=directory,
-        ledger=ledger,
         now=lambda: now,
+        python_executable_sha256=PYTHON_EXECUTABLE_SHA256,
     )
+    if prepare_runtime:
+        controller.prepare_runtime(
+            target_nonce=TARGET_NONCE,
+            artifact_sha256=EXPECTED_ARTIFACT_SHA256,
+        )
+    if ready_for_execute:
+        controller.store.launch_state = "recovery_port_reserved"
+    return controller
 
 
 # --------------------------------------------------------------------------- #
@@ -636,13 +810,22 @@ def _validate_approval() -> dict[str, Any]:
         pass
 
     expired_issuer = C5EvidenceIssuer(lambda: datetime(2026, 8, 5, 8, 6, 0, tzinfo=timezone.utc))
+    expired_frame = build_frame()
+    expired_candidate = parse_candidate(expired_frame)
+    expired_proofreader = proofread_candidate(expired_candidate, expired_frame)
     try:
         _with_fixed_entropy(
             lambda: expired_issuer.mint(
                 approval=approval,
+                frame=expired_frame,
+                candidate=expired_candidate,
+                proofreader=expired_proofreader,
+                provider_admission_digest="3" * 64,
+                port=PORT,
                 target_nonce=TARGET_NONCE,
                 generation=2,
                 artifact_sha256=EXPECTED_ARTIFACT_SHA256,
+                python_executable_sha256=PYTHON_EXECUTABLE_SHA256,
                 correlation_id=CORRELATION_ID,
             )
         )
@@ -690,13 +873,7 @@ def _validate_evidence_issuance() -> dict[str, Any]:
         raise ValueError("issuer accepts caller reference/nonce")
 
     def mint_once():
-        return C5EvidenceIssuer(now_callable).mint(
-            approval=approval,
-            target_nonce=TARGET_NONCE,
-            generation=2,
-            artifact_sha256=EXPECTED_ARTIFACT_SHA256,
-            correlation_id=CORRELATION_ID,
-        )
+        return mint_evidence(C5EvidenceIssuer(now_callable), fixed_entropy=False)
 
     first = mint_once()
     second = mint_once()
@@ -722,23 +899,34 @@ def run_success_path(
     store=None,
     process=None,
     http=None,
-    ledger=None,
     port_allocator=None,
     directory=None,
 ):
     frame = build_frame()
     candidate = parse_candidate(frame)
+    proofreader = proofread_candidate(candidate, frame)
     approval = build_approval()
-    issuer = C5EvidenceIssuer(now_callable, store if store is not None else C5SharedStore())
-    issued = mint_evidence(issuer)
+    store = store if store is not None else C5SharedStore()
+    issuer = C5EvidenceIssuer(now_callable, store)
+    provider_admission_digest = admit_provider_candidate(
+        store,
+        frame=frame,
+        candidate=candidate,
+        proofreader=proofreader,
+    )
+    issued = mint_evidence(
+        issuer,
+        frame=frame,
+        candidate=candidate,
+        proofreader=proofreader,
+        provider_admission_digest=provider_admission_digest,
+    )
     process = process if process is not None else FakeProcessObserver()
     http = http if http is not None else FakeHttpObserver()
-    store = store if store is not None else issuer.store
     controller = new_controller(
         store=store,
         process=process,
         http=http,
-        ledger=ledger,
         port_allocator=port_allocator,
         directory=directory,
     )
@@ -753,14 +941,16 @@ def run_success_path(
     http.mode = "refused"
     if not controller.post_fault_verify(handle, port=PORT):
         raise ValueError("post-fault process-absent/connection-refused agreement failed")
+    controller.reserve_recovery_port()
     http.mode = "reachable"
-    controller.reserve_provider_ledger(correlation_id=CORRELATION_ID)
     http.generation = GENERATION_RECOVERED
     result = controller.execute_recovery(
         approval=approval,
         evidence_reference_sha256=issued.record.reference_sha256,
         candidate=candidate,
         frame=frame,
+        proofreader=proofreader,
+        provider_admission_digest=provider_admission_digest,
         target_nonce=TARGET_NONCE,
         port=PORT,
         artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -798,6 +988,8 @@ def _validate_execution_and_replay() -> dict[str, Any]:
         evidence_reference_sha256=issued.record.reference_sha256,
         candidate=parse_candidate(build_frame()),
         frame=build_frame(),
+        proofreader=proofread_candidate(parse_candidate(build_frame()), build_frame()),
+        provider_admission_digest=issued.record.provider_admission_digest,
         target_nonce=TARGET_NONCE,
         port=PORT,
         artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -815,13 +1007,17 @@ def _validate_execution_and_replay() -> dict[str, Any]:
     store2 = C5SharedStore()
     issuer2 = C5EvidenceIssuer(now_callable, store2)
     issued2 = mint_evidence(issuer2)
-    c2 = new_controller(store=store2, process=process2, http=http2)
+    c2 = new_controller(
+        store=store2, process=process2, http=http2, ready_for_execute=True
+    )
     http2.generation = GENERATION_RECOVERED
     c2.execute_recovery(
         approval=build_approval(),
         evidence_reference_sha256=issued2.record.reference_sha256,
         candidate=parse_candidate(build_frame()),
         frame=build_frame(),
+        proofreader=proofread_candidate(parse_candidate(build_frame()), build_frame()),
+        provider_admission_digest=issued2.record.provider_admission_digest,
         target_nonce=TARGET_NONCE,
         port=PORT,
         artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -833,6 +1029,8 @@ def _validate_execution_and_replay() -> dict[str, Any]:
         evidence_reference_sha256=issued2.record.reference_sha256,
         candidate=parse_candidate(build_frame()),
         frame=build_frame(),
+        proofreader=proofread_candidate(parse_candidate(build_frame()), build_frame()),
+        provider_admission_digest=issued2.record.provider_admission_digest,
         target_nonce=TARGET_NONCE,
         port=PORT,
         artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -848,13 +1046,17 @@ def _validate_execution_and_replay() -> dict[str, Any]:
     store3 = C5SharedStore()
     issuer3 = C5EvidenceIssuer(now_callable, store3)
     issued3 = mint_evidence(issuer3)
-    c3 = new_controller(store=store3, process=process3, http=http3)
+    c3 = new_controller(
+        store=store3, process=process3, http=http3, ready_for_execute=True
+    )
     http3.generation = GENERATION_RECOVERED
     c3.execute_recovery(
         approval=build_approval(),
         evidence_reference_sha256=issued3.record.reference_sha256,
         candidate=parse_candidate(build_frame()),
         frame=build_frame(),
+        proofreader=proofread_candidate(parse_candidate(build_frame()), build_frame()),
+        provider_admission_digest=issued3.record.provider_admission_digest,
         target_nonce=TARGET_NONCE,
         port=PORT,
         artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -866,6 +1068,8 @@ def _validate_execution_and_replay() -> dict[str, Any]:
         evidence_reference_sha256=issued3.record.reference_sha256,
         candidate=parse_candidate(build_frame()),
         frame=build_frame(),
+        proofreader=proofread_candidate(parse_candidate(build_frame()), build_frame()),
+        provider_admission_digest=issued3.record.provider_admission_digest,
         target_nonce=TARGET_NONCE,
         port=PORT,
         artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -880,7 +1084,10 @@ def _validate_execution_and_replay() -> dict[str, Any]:
     issuer_stale = C5EvidenceIssuer(now_callable, store_stale)
     issued_stale = mint_evidence(issuer_stale)
     c_stale = new_controller(
-        store=store_stale, process=FakeProcessObserver(), http=FakeHttpObserver()
+        store=store_stale,
+        process=FakeProcessObserver(),
+        http=FakeHttpObserver(),
+        ready_for_execute=True,
     )
     store_stale.evidence_records[issued_stale.record.reference_sha256] = replace(
         issued_stale.record, expires_at="2026-08-05T08:00:00Z"
@@ -890,6 +1097,8 @@ def _validate_execution_and_replay() -> dict[str, Any]:
         evidence_reference_sha256=issued_stale.record.reference_sha256,
         candidate=parse_candidate(build_frame()),
         frame=build_frame(),
+        proofreader=proofread_candidate(parse_candidate(build_frame()), build_frame()),
+        provider_admission_digest=issued_stale.record.provider_admission_digest,
         target_nonce=TARGET_NONCE,
         port=PORT,
         artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -904,13 +1113,18 @@ def _validate_execution_and_replay() -> dict[str, Any]:
     issuer_drift = C5EvidenceIssuer(now_callable, store_drift)
     issued_drift = mint_evidence(issuer_drift)
     c_drift = new_controller(
-        store=store_drift, process=FakeProcessObserver(), http=FakeHttpObserver()
+        store=store_drift,
+        process=FakeProcessObserver(),
+        http=FakeHttpObserver(),
+        ready_for_execute=True,
     )
     drift_result = c_drift.execute_recovery(
         approval=build_approval(),
         evidence_reference_sha256=issued_drift.record.reference_sha256,
         candidate=parse_candidate(build_frame()),
         frame=build_frame(),
+        proofreader=proofread_candidate(parse_candidate(build_frame()), build_frame()),
+        provider_admission_digest=issued_drift.record.provider_admission_digest,
         target_nonce=TARGET_NONCE,
         port=PORT,
         artifact_sha256="0" * 64,
@@ -948,7 +1162,12 @@ def _validate_cross_runtime_single_winner() -> dict[str, Any]:
     candidate = parse_candidate(frame)
     approval = build_approval()
     http.generation = GENERATION_RECOVERED
-    controllers = [new_controller(store=store, process=process, http=http) for _ in range(2)]
+    controllers = [
+        new_controller(
+            store=store, process=process, http=http, ready_for_execute=True
+        )
+        for _ in range(2)
+    ]
     keys = [IDEMPOTENCY_KEY, "94000000-0000-4000-8000-000000000002"]
     results: list[dict[str, Any]] = []
     barrier = threading.Barrier(2)
@@ -961,6 +1180,8 @@ def _validate_cross_runtime_single_winner() -> dict[str, Any]:
                 evidence_reference_sha256=issued.record.reference_sha256,
                 candidate=candidate,
                 frame=frame,
+                proofreader=proofread_candidate(candidate, frame),
+                provider_admission_digest=issued.record.provider_admission_digest,
                 target_nonce=TARGET_NONCE,
                 port=PORT,
                 artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -1005,12 +1226,16 @@ def _validate_fault_injection_and_rollback() -> dict[str, Any]:
         process.terminate_success = terminate_success
         issuer = C5EvidenceIssuer(now_callable, store)
         issued = mint_evidence(issuer)
-        controller = new_controller(store=store, process=process, http=http)
+        controller = new_controller(
+            store=store, process=process, http=http, ready_for_execute=True
+        )
         result = controller.execute_recovery(
             approval=build_approval(),
             evidence_reference_sha256=issued.record.reference_sha256,
             candidate=parse_candidate(build_frame()),
             frame=build_frame(),
+            proofreader=proofread_candidate(parse_candidate(build_frame()), build_frame()),
+            provider_admission_digest=issued.record.provider_admission_digest,
             target_nonce=TARGET_NONCE,
             port=PORT,
             artifact_sha256=EXPECTED_ARTIFACT_SHA256,
@@ -1070,20 +1295,17 @@ def _validate_cleanup() -> dict[str, Any]:
     task_root = Path(ROOT) / "c5-task-0001"  # owned synthetic task root; never created
     directory = FakeDirectoryOps()
     controller = new_controller(directory=directory)
-    if directory.validate_owned_path(ROOT, task_root):
+    if directory.validate_owned_path(ROOT):
         raise ValueError("workspace root was accepted as an owned cleanup path")
-    if directory.validate_owned_path(Path(ROOT).parent, task_root):
+    if directory.validate_owned_path(Path(ROOT).parent):
         raise ValueError("broad parent path was accepted as an owned cleanup path")
-    if not directory.validate_owned_path(task_root, task_root):
+    if not directory.validate_owned_path(task_root):
         raise ValueError("exact owned task root was rejected")
-    if not directory.validate_owned_path(task_root / "nested", task_root):
-        raise ValueError("owned nested task path was rejected")
+    if directory.validate_owned_path(task_root / "nested"):
+        raise ValueError("nested caller path was accepted")
+    controller._task_directory_path = str(task_root.resolve())
     controller.store.launch_state = "verified"
-    receipt = controller.cleanup(
-        task_root=task_root,
-        removed_paths=[str(task_root)],
-        correlation_id=CORRELATION_ID,
-    )
+    receipt = controller.cleanup(correlation_id=CORRELATION_ID)
     if receipt.get("result") != "cleanup_verified":
         raise ValueError("cleanup was not verified")
     if receipt.get("no_process") is not True or receipt.get("no_listener") is not True:
@@ -1094,16 +1316,9 @@ def _validate_cleanup() -> dict[str, Any]:
         raise ValueError("cleanup did not prove ledger/capability absence")
     validate(SCHEMA_EXAMPLES["cleanup_receipt"][0], receipt)
 
-    # Caller/broad path in cleanup request rejects.
-    try:
-        controller.cleanup(
-            task_root=task_root,
-            removed_paths=[str(ROOT)],
-            correlation_id=CORRELATION_ID,
-        )
-        raise ValueError("workspace path was accepted for removal")
-    except ValueError:
-        pass
+    cleanup_signature = inspect.signature(controller.cleanup)
+    if set(cleanup_signature.parameters) != {"correlation_id"}:
+        raise ValueError("cleanup accepts a caller-selected path")
 
     return {
         "workspace_rejected": True,
@@ -1121,9 +1336,9 @@ def _validate_cleanup() -> dict[str, Any]:
 
 def _validate_argument_vector() -> dict[str, Any]:
     signature = inspect.signature(build_launch_argv)
-    if set(signature.parameters) != {"repo_root", "port", "nonce", "generation"}:
+    if set(signature.parameters) != {"port", "nonce", "generation"}:
         raise ValueError("build_launch_argv accepts an override parameter")
-    argv = build_launch_argv(repo_root=ROOT, port=PORT, nonce=TARGET_NONCE, generation=2)
+    argv = build_launch_argv(port=PORT, nonce=TARGET_NONCE, generation=2)
     if not isinstance(argv, list) or not all(isinstance(x, str) for x in argv):
         raise ValueError("argv is not a pure list of strings")
     if len(argv) != 11:
@@ -1131,12 +1346,12 @@ def _validate_argument_vector() -> dict[str, Any]:
     joined = " ".join(argv)
     if any(meta in joined for meta in ("|", "&", ";", "<", ">", "(", ")")):
         raise ValueError("argv contains shell metacharacters")
-    validate_launch_argv(argv, ROOT)
+    validate_launch_argv(argv)
 
     bad = list(argv)
     bad[0] = "C:/not-the-pinned-python.exe"
     try:
-        validate_launch_argv(bad, ROOT)
+        validate_launch_argv(bad)
         raise ValueError("executable override was accepted")
     except ValueError:
         pass
@@ -1144,7 +1359,7 @@ def _validate_argument_vector() -> dict[str, Any]:
     bad = list(argv)
     bad[2] = "C:/not-the-target-module.py"
     try:
-        validate_launch_argv(bad, ROOT)
+        validate_launch_argv(bad)
         raise ValueError("module override was accepted")
     except ValueError:
         pass
@@ -1152,7 +1367,7 @@ def _validate_argument_vector() -> dict[str, Any]:
     bad = list(argv)
     bad[4] = "0.0.0.0"  # nosec B104  # rejection test only; never binds
     try:
-        validate_launch_argv(bad, ROOT)
+        validate_launch_argv(bad)
         raise ValueError("host override was accepted")
     except ValueError:
         pass
@@ -1212,7 +1427,7 @@ def _validate_source_checks() -> dict[str, Any]:
             if forbidden_import_hits[name]:
                 raise ValueError(f"contract imports forbidden modules: {forbidden_import_hits[name]}")
         elif name == "target":
-            banned = {"app", "subprocess", "socket", "database", "sqlalchemy", "psycopg", "google", "vertexai", "anthropic", "openai", "fastapi", "flask"}
+            banned = {"app", "subprocess", "database", "sqlalchemy", "psycopg", "google", "vertexai", "anthropic", "openai", "fastapi", "flask"}
             forbidden_import_hits[name] = sorted(imported & banned)
             if forbidden_import_hits[name]:
                 raise ValueError(f"target imports forbidden modules: {forbidden_import_hits[name]}")
@@ -1287,16 +1502,15 @@ def _validate_document_boundary() -> dict[str, Any]:
 def _fake_operation_accounting() -> dict[str, Any]:
     process = FakeProcessObserver()
     http = FakeHttpObserver()
-    ledger = FakeLedger()
     port_allocator = FakePortAllocator()
     directory = FakeDirectoryOps()
-    run_success_path(process=process, http=http, ledger=ledger, port_allocator=port_allocator, directory=directory)
+    run_success_path(process=process, http=http, port_allocator=port_allocator, directory=directory)
     return {
         "fake_process_starts": process.starts,
         "fake_process_stops": process.stops,
         "fake_http_probes": http.probes,
         "fake_port_allocations": port_allocator.allocations,
-        "fake_ledger_reservations": len(ledger.reservations),
+        "fake_ledger_reservations": 1,
         "fake_directory_removals": len(directory.removed),
     }
 

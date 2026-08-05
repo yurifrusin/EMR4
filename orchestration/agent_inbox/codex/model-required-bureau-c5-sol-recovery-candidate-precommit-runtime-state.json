@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_c5_sol_recovery_candidate_for_fresh_exact_head_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 remains the accepted implementation result. C5 has an accepted frozen plan, rejected worker node AER-0027, preserved exact rejected provenance at 45a7a76e0705a2b534779847866507017370c557 and an active Sol recovery lease. The Practice Context Fabric remains recorded, separate and unimplemented.",
+    "current_authority_allocation": "Sol owns recovery, deterministic acceptance, task-branch commit and later integration interpretation. Gemini 3.6 Flash/high through a fresh Antigravity project owns the next read-only exact-HEAD veto. No worker or verifier owns live execution, acceptance, product runtime or protected refs.",
+    "active_plan_and_acceptance": "The frozen C5 plan and threat delta plus the exact fourteen-control Sol recovery lease govern this candidate. Provider-free acceptance is reproducible; 63 focused and 268 widened inherited tests pass; Ruff, compilation, Bandit, JSON/YAML and diff checks pass. This candidate remains ineligible for live execution until committed and independently vetoed.",
+    "protected_evidence_boundaries": "No process, socket, port, task-directory operation, provider call, ADC inspection, product/app/database route, patient/product/protected data, deployment, release, Pages or protected ref was touched. docs/branding/ and every unrelated untracked receipt/state file remain preserved and excluded. Only explicit owned paths may be staged.",
+    "git_refs_and_worktree": "Primary worktree is on codex/ariadne-bernie-davida-parallel-seam at 3ed1d8cb8ebbee9c48384441485f47117b098a2c before the recovery commit. Local/origin master and local/origin handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task branch remains 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Tracked changes are confined to recovery-lease-owned C5 scripts, tests, schemas/evidence and the unmounted API document."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_sol_recovery_candidate_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol recovery is provider-free and deterministically green."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The two completed native read-only audits remain the rejection basis; no new subagent was needed for recovery edits."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The historical worker source is preserved as rejected provenance only."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh exact-HEAD Gemini 3.6 Flash/high veto is the next gate after this commit."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare carried only the historical rejected worker transport."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

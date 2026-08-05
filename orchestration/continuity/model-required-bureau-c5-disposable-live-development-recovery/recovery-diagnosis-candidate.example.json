@@ -10,7 +10,7 @@
   },
   "executable_content": false,
   "expected_effect": "A fresh pinned generation 2 loopback process becomes reachable and healthy.",
-  "frame_digest": "d650a505b599f1ccc255eae27cce702edaf3e6a6d8f48382140e7ca308e37874",
+  "frame_digest": "5c6bd6f2b75bb0d9f05f6de9722b8650ba73d365fb3c545681781ed0e6cc319a",
   "operator_explanation": "The controller terminated its owned child handle and both fresh observations agree the process is absent and the loopback read is refused. Starting the pinned service artifact is the only eligible runbook.",
   "parameters": {},
   "risk_tier": "reversible_scoped_service_recovery",

@@ -17,7 +17,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
+import socket
 import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
@@ -86,6 +88,24 @@ class C5LoopbackServer(HTTPServer):
         self.generation = generation
         super().__init__(server_address, handler_class)
 
+    @classmethod
+    def from_inherited_socket(
+        cls, inherited_socket: socket.socket, handler_class, *, nonce: str, generation: int
+    ):
+        server = cls.__new__(cls)
+        server.nonce = nonce
+        server.generation = generation
+        HTTPServer.__init__(
+            server,
+            inherited_socket.getsockname(),
+            handler_class,
+            bind_and_activate=False,
+        )
+        server.socket.close()
+        server.socket = inherited_socket
+        server.server_address = inherited_socket.getsockname()
+        return server
+
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
@@ -106,8 +126,16 @@ def main(argv=None) -> int:
     if not isinstance(args.port, int) or args.port <= 0 or args.port > 65535:
         raise SystemExit("port must be an OS-assigned server-held ephemeral port")
 
-    with C5LoopbackServer(
-        (args.host, args.port),
+    inherited_fd = os.environ.pop("EMR4_C5_INHERITED_SOCKET_FD", None)
+    if inherited_fd is None or not inherited_fd.isdecimal():
+        raise SystemExit("an exact inherited loopback socket is required")
+    inherited_socket = socket.socket(fileno=int(inherited_fd))
+    if inherited_socket.getsockname() != (HOST, args.port):
+        inherited_socket.close()
+        raise SystemExit("inherited socket binding drift")
+
+    with C5LoopbackServer.from_inherited_socket(
+        inherited_socket,
         _HealthHandler,
         nonce=args.nonce,
         generation=args.generation,

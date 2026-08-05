@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://emr4.local/schemas/cleanup-receipt.v1.json",
   "title": "Idempotent owned-resource cleanup receipt",
-  "description": "Closed cleanup receipt proving no owned process, listener, task directory, open ledger or reusable capability remains, with exact owned-path removal and zero live/external capability during provider-free acceptance.",
+  "description": "Closed cleanup receipt proving no owned process, listener, task directory, open ledger or reusable capability remains, with exact owned-path removal and truthful non-negative operation accounting. Provider-free fake-only acceptance remains exactly zero.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -22,18 +22,18 @@
   "properties": {
     "schema_version": {"const": "emr4.cleanup_receipt.v1"},
     "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
-    "result": {"const": "cleanup_verified"},
-    "no_process": {"const": true},
-    "no_listener": {"const": true},
-    "no_task_directory": {"const": true},
-    "no_open_ledger": {"const": true},
-    "no_reusable_capability": {"const": true},
+    "result": {"enum": ["cleanup_verified", "cleanup_inconclusive"]},
+    "no_process": {"type": "boolean"},
+    "no_listener": {"type": "boolean"},
+    "no_task_directory": {"type": "boolean"},
+    "no_open_ledger": {"type": "boolean"},
+    "no_reusable_capability": {"type": "boolean"},
     "removed_paths": {
       "type": "array",
       "maxItems": 8,
       "items": {"type": "string", "minLength": 1, "maxLength": 512}
     },
-    "ledger_consumed": {"const": true},
+    "ledger_consumed": {"type": "boolean"},
     "operation_counters": {
       "type": "object",
       "additionalProperties": false,
@@ -60,28 +60,43 @@
         "reflection_operations"
       ],
       "properties": {
-        "process_starts": {"const": 0},
-        "process_stops": {"const": 0},
-        "socket_binds": {"const": 0},
-        "socket_connects": {"const": 0},
-        "port_allocations": {"const": 0},
-        "directory_creates": {"const": 0},
-        "directory_removals": {"const": 0},
-        "provider_calls": {"const": 0},
-        "database_operations": {"const": 0},
-        "product_operations": {"const": 0},
-        "cloud_iam_operations": {"const": 0},
-        "deployment_operations": {"const": 0},
-        "external_event_operations": {"const": 0},
-        "protected_operations": {"const": 0},
-        "shell_operations": {"const": 0},
-        "sql_operations": {"const": 0},
-        "network_operations": {"const": 0},
-        "dynamic_import_operations": {"const": 0},
-        "eval_exec_operations": {"const": 0},
-        "reflection_operations": {"const": 0}
+        "process_starts": {"type": "integer", "minimum": 0},
+        "process_stops": {"type": "integer", "minimum": 0},
+        "socket_binds": {"type": "integer", "minimum": 0},
+        "socket_connects": {"type": "integer", "minimum": 0},
+        "port_allocations": {"type": "integer", "minimum": 0},
+        "directory_creates": {"type": "integer", "minimum": 0},
+        "directory_removals": {"type": "integer", "minimum": 0},
+        "provider_calls": {"type": "integer", "minimum": 0},
+        "database_operations": {"type": "integer", "minimum": 0},
+        "product_operations": {"type": "integer", "minimum": 0},
+        "cloud_iam_operations": {"type": "integer", "minimum": 0},
+        "deployment_operations": {"type": "integer", "minimum": 0},
+        "external_event_operations": {"type": "integer", "minimum": 0},
+        "protected_operations": {"type": "integer", "minimum": 0},
+        "shell_operations": {"type": "integer", "minimum": 0},
+        "sql_operations": {"type": "integer", "minimum": 0},
+        "network_operations": {"type": "integer", "minimum": 0},
+        "dynamic_import_operations": {"type": "integer", "minimum": 0},
+        "eval_exec_operations": {"type": "integer", "minimum": 0},
+        "reflection_operations": {"type": "integer", "minimum": 0}
       }
     },
     "issued_at": {"type": "string", "format": "date-time"}
-  }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"result": {"const": "cleanup_verified"}}, "required": ["result"]},
+      "then": {
+        "properties": {
+          "no_process": {"const": true},
+          "no_listener": {"const": true},
+          "no_task_directory": {"const": true},
+          "no_open_ledger": {"const": true},
+          "no_reusable_capability": {"const": true},
+          "ledger_consumed": {"const": true}
+        }
+      }
+    }
+  ]
 }

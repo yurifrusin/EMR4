@@ -1,9 +1,10 @@
 {
-  "artifact_sha256": "76373e9dc3e1f1d7acb47c47f6aa6fe8509870d63d1d73fa4d23f44a77284228",
-  "attempt_evidence_sha256": "2bf10c27f3fbe563d2a9a562d3d267464e8760a652e496f134148ecaaca448be",
+  "artifact_sha256": "a45dd29f2b1bdd4fc70b5bce0a22d6893b295b4001cf22949cd2d2d2927dbd4b",
+  "attempt_evidence_sha256": "89dd0835abab9a63f2044f67a9d72a081073ba6cbb89bec37c03990579e14414",
+  "command_material_sha256": "c6fd5ebba2140b0cf7f9c3b0e7516a01e6af11c1eecbdce31b8c2d9665f55878",
   "evidence_label": "occupied_authored_synthetic_disposable_live_development_recovery",
   "generation": 2,
-  "http_readback_observation_id": "obs-recovered-http-0001",
+  "http_readback_observation_id": "obs-fake-http-0003",
   "issued_at": "2026-08-05T08:01:30Z",
   "operation_counters": {
     "cloud_iam_operations": 0,
@@ -27,7 +28,9 @@
     "socket_connects": 0,
     "sql_operations": 0
   },
-  "process_observation_id": "obs-recovered-process-0001",
+  "port": 44123,
+  "process_observation_id": "obs-fake-process-0004",
+  "python_executable_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
   "result": "live_development_recovery_verified",
   "rollback": {
     "invoked": false,

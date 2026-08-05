@@ -40,33 +40,43 @@
     "observations": {
       "type": "array",
       "minItems": 2,
-      "maxItems": 8,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "observation_id",
-          "observation_source_id",
-          "kind",
-          "observed_at",
-          "freshness_seconds",
-          "process_disposition",
-          "loopback_health_disposition",
-          "generation",
-          "content_sha256"
-        ],
-        "properties": {
-          "observation_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
-          "observation_source_id": {"type": "string", "pattern": "^obs-[a-z0-9-]+$"},
-          "kind": {"enum": ["baseline", "post_fault"]},
-          "observed_at": {"type": "string", "format": "date-time"},
-          "freshness_seconds": {"const": 300},
-          "process_disposition": {"enum": ["alive", "absent"]},
-          "loopback_health_disposition": {"enum": ["reachable", "connection_refused"]},
-          "generation": {"type": ["integer", "null"], "minimum": 1, "maximum": 2},
-          "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      "maxItems": 2,
+      "uniqueItems": true,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["observation_id", "observation_source_id", "kind", "observed_at", "freshness_seconds", "process_disposition", "loopback_health_disposition", "generation", "content_sha256"],
+          "properties": {
+            "observation_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
+            "observation_source_id": {"type": "string", "pattern": "^obs-[a-z0-9-]+$"},
+            "kind": {"const": "baseline"},
+            "observed_at": {"type": "string", "format": "date-time"},
+            "freshness_seconds": {"const": 300},
+            "process_disposition": {"const": "alive"},
+            "loopback_health_disposition": {"const": "reachable"},
+            "generation": {"const": 1},
+            "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["observation_id", "observation_source_id", "kind", "observed_at", "freshness_seconds", "process_disposition", "loopback_health_disposition", "generation", "content_sha256"],
+          "properties": {
+            "observation_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
+            "observation_source_id": {"type": "string", "pattern": "^obs-[a-z0-9-]+$"},
+            "kind": {"const": "post_fault"},
+            "observed_at": {"type": "string", "format": "date-time"},
+            "freshness_seconds": {"const": 300},
+            "process_disposition": {"const": "absent"},
+            "loopback_health_disposition": {"const": "connection_refused"},
+            "generation": {"type": "null"},
+            "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          }
         }
-      }
+      ],
+      "items": false
     },
     "runbooks": {
       "type": "object",

@@ -25,6 +25,15 @@ x-emr4-current-backend-alignment:
   target_kind: task_owned_loopback_http_service
   target_id: synthetic:c5-recovery-target
   bind_host: 127.0.0.1
+  future_mounted_command_requirements:
+    status: separately_deferred
+    requires_new_authority: true
+    fields:
+      - authenticated_actor
+      - practice_scope
+      - transport_idempotency
+      - durable_audit_metadata
+    current_contract_implication: none
 servers: []
 tags:
   - name: TechnicalControlLiveDevelopmentRecovery
@@ -32,68 +41,219 @@ tags:
 paths: {}
 components:
   schemas:
-    LiveRecoveryCommandEnvelope:
-      description: Backend-owned closed command envelope (documentation only).
+    Target:
       type: object
       additionalProperties: false
+      required: [environment, kind, target_id]
       properties:
-        schema_version:
-          const: emr4.live_recovery_command_envelope.v1
-        evidence_label:
-          const: occupied_authored_synthetic_disposable_live_development_recovery
-        runbook_id:
-          const: start-c5-disposable-service.v1
-        rollback_runbook_id:
-          const: stop-c5-disposable-service.v1
-        host:
-          const: 127.0.0.1
-        port:
-          type: integer
-          minimum: 1
-          maximum: 65535
-        generation:
-          const: 2
-        parameters:
-          type: object
-          maxProperties: 0
-          additionalProperties: false
+        environment: {const: c5_disposable_authored_synthetic}
+        kind: {const: task_owned_loopback_http_service}
+        target_id: {const: "synthetic:c5-recovery-target"}
+    OperationCounters:
+      type: object
+      additionalProperties: false
+      required:
+        - process_starts
+        - process_stops
+        - socket_binds
+        - socket_connects
+        - port_allocations
+        - directory_creates
+        - directory_removals
+        - provider_calls
+        - database_operations
+        - product_operations
+        - cloud_iam_operations
+        - deployment_operations
+        - external_event_operations
+        - protected_operations
+        - shell_operations
+        - sql_operations
+        - network_operations
+        - dynamic_import_operations
+        - eval_exec_operations
+        - reflection_operations
+      properties:
+        process_starts: {type: integer, minimum: 0}
+        process_stops: {type: integer, minimum: 0}
+        socket_binds: {type: integer, minimum: 0}
+        socket_connects: {type: integer, minimum: 0}
+        port_allocations: {type: integer, minimum: 0}
+        directory_creates: {type: integer, minimum: 0}
+        directory_removals: {type: integer, minimum: 0}
+        provider_calls: {type: integer, minimum: 0}
+        database_operations: {type: integer, minimum: 0}
+        product_operations: {type: integer, minimum: 0}
+        cloud_iam_operations: {type: integer, minimum: 0}
+        deployment_operations: {type: integer, minimum: 0}
+        external_event_operations: {type: integer, minimum: 0}
+        protected_operations: {type: integer, minimum: 0}
+        shell_operations: {type: integer, minimum: 0}
+        sql_operations: {type: integer, minimum: 0}
+        network_operations: {type: integer, minimum: 0}
+        dynamic_import_operations: {type: integer, minimum: 0}
+        eval_exec_operations: {type: integer, minimum: 0}
+        reflection_operations: {type: integer, minimum: 0}
+    LiveRecoveryCommandEnvelope:
+      description: Backend-owned closed command envelope (documentation only, not mounted).
+      type: object
+      additionalProperties: false
       required:
         - schema_version
         - evidence_label
         - runbook_id
         - rollback_runbook_id
+        - target
         - host
         - port
         - generation
+        - target_nonce
+        - artifact_sha256
+        - python_executable_sha256
+        - frame_digest
+        - candidate_digest
+        - proofreader_digest
+        - provider_admission_digest
+        - command_material_sha256
         - parameters
+        - approval_binding
+        - evidence_binding
+        - idempotency_key
+        - correlation_id
+        - issued_at
+        - readback_contract
+      properties:
+        schema_version: {const: emr4.live_recovery_command_envelope.v1}
+        evidence_label: {const: occupied_authored_synthetic_disposable_live_development_recovery}
+        runbook_id: {const: start-c5-disposable-service.v1}
+        rollback_runbook_id: {const: stop-c5-disposable-service.v1}
+        target: {$ref: "#/components/schemas/Target"}
+        host: {const: 127.0.0.1}
+        port:
+          type: integer
+          minimum: 1
+          maximum: 65535
+        generation: {const: 2}
+        target_nonce: {type: string, pattern: "^[0-9a-f]{32,64}$"}
+        artifact_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        python_executable_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        frame_digest: {type: string, pattern: "^[0-9a-f]{64}$"}
+        candidate_digest: {type: string, pattern: "^[0-9a-f]{64}$"}
+        proofreader_digest: {type: string, pattern: "^[0-9a-f]{64}$"}
+        provider_admission_digest: {type: string, pattern: "^[0-9a-f]{64}$"}
+        command_material_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        parameters:
+          type: object
+          maxProperties: 0
+          additionalProperties: false
+        approval_binding:
+          type: object
+          additionalProperties: false
+          required: [approval_id, approval_sha256, plan_sha256]
+          properties:
+            approval_id: {type: string, format: uuid}
+            approval_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+            plan_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        evidence_binding:
+          type: object
+          additionalProperties: false
+          required: [evidence_id, reference_sha256]
+          properties:
+            evidence_id: {type: string, format: uuid}
+            reference_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        idempotency_key: {type: string, format: uuid}
+        correlation_id: {type: string, format: uuid}
+        issued_at: {type: string, format: date-time}
+        readback_contract:
+          type: object
+          additionalProperties: false
+          required: [host, port, generation, state, artifact_sha256, target_nonce]
+          properties:
+            host: {const: 127.0.0.1}
+            port: {type: integer, minimum: 1, maximum: 65535}
+            generation: {const: 2}
+            state: {const: healthy}
+            artifact_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+            target_nonce: {type: string, pattern: "^[0-9a-f]{32,64}$"}
     LiveRecoveryAttemptReceipt:
       description: Bounded terminal success receipt released only after a distinct fresh process and loopback HTTP readback.
       type: object
       additionalProperties: false
+      required:
+        - schema_version
+        - evidence_label
+        - result
+        - runbook_id
+        - target
+        - generation
+        - state
+        - artifact_sha256
+        - python_executable_sha256
+        - port
+        - target_nonce
+        - process_observation_id
+        - http_readback_observation_id
+        - command_material_sha256
+        - attempt_evidence_sha256
+        - rollback
+        - operation_counters
+        - issued_at
       properties:
-        result:
-          const: live_development_recovery_verified
-        generation:
-          const: 2
-        state:
-          const: healthy
+        schema_version: {const: emr4.live_recovery_attempt_receipt.v1}
+        evidence_label: {const: occupied_authored_synthetic_disposable_live_development_recovery}
+        result: {const: live_development_recovery_verified}
+        runbook_id: {const: start-c5-disposable-service.v1}
+        target: {$ref: "#/components/schemas/Target"}
+        generation: {const: 2}
+        state: {const: healthy}
+        artifact_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        python_executable_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        port: {type: integer, minimum: 1, maximum: 65535}
+        target_nonce: {type: string, pattern: "^[0-9a-f]{32,64}$"}
+        process_observation_id: {type: string, pattern: "^obs-[a-z0-9-]+$"}
+        http_readback_observation_id: {type: string, pattern: "^obs-[a-z0-9-]+$"}
+        command_material_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        attempt_evidence_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
         rollback:
           type: object
           additionalProperties: false
+          required: [invoked, verified]
           properties:
-            invoked:
-              const: false
+            invoked: {const: false}
+            verified: {type: [boolean, "null"]}
+        operation_counters: {$ref: "#/components/schemas/OperationCounters"}
+        issued_at: {type: string, format: date-time}
     CleanupReceipt:
       description: Bounded cleanup receipt proving no owned process, listener, task directory, open ledger or reusable capability remains.
       type: object
       additionalProperties: false
+      required:
+        - schema_version
+        - evidence_label
+        - result
+        - no_process
+        - no_listener
+        - no_task_directory
+        - no_open_ledger
+        - no_reusable_capability
+        - removed_paths
+        - ledger_consumed
+        - operation_counters
+        - issued_at
       properties:
-        result:
-          const: cleanup_verified
-        no_process:
-          const: true
-        no_listener:
-          const: true
-        no_task_directory:
-          const: true
+        schema_version: {const: emr4.cleanup_receipt.v1}
+        evidence_label: {const: occupied_authored_synthetic_disposable_live_development_recovery}
+        result: {enum: [cleanup_verified, cleanup_inconclusive]}
+        no_process: {type: boolean}
+        no_listener: {type: boolean}
+        no_task_directory: {type: boolean}
+        no_open_ledger: {type: boolean}
+        no_reusable_capability: {type: boolean}
+        removed_paths:
+          type: array
+          maxItems: 8
+          items: {type: string, minLength: 1, maxLength: 512}
+        ledger_consumed: {type: boolean}
+        operation_counters: {$ref: "#/components/schemas/OperationCounters"}
+        issued_at: {type: string, format: date-time}
 security: []
