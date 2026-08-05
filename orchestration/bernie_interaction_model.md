@@ -160,6 +160,32 @@ This is the useful middle path: richer than a single selected appointment, much
 smaller than dumping the whole diary, and easier to test. Availability is still
 resolved by deterministic slot-search APIs, not by the LLM.
 
+### Raisa Practice Context Fabric
+
+The patient-specific frame is one early thread in the accepted
+[`Raisa Practice Context Fabric`](../docs/raisa-practice-context-fabric-direction.md).
+The longer-range interaction model should let a Bureau propose a typed
+`ContextNeed` from the user's request—for example the current day's Diary, the
+waiting room now, a bounded prior waiting-room state, or recent events involving
+the current practice. Deterministic backend policy then narrows that request by
+principal, role, practice, location, purpose, source, fields, temporal window,
+freshness and result count before assembling an expiring `ContextFrameSet`.
+
+This permits natural questions such as “Who was the person called George who
+came in this morning and was attended by Priya?” without treating a provider
+model as practice memory. The assembler may return a small, purpose-scoped
+candidate frame with explicit match evidence and ambiguity; Bernie or Rayleen
+may explain it or ask for a discriminator. Neither may query a global Diary
+dump, silently assert identity, disclose unrelated patients or turn the frame
+into write authority.
+
+The model, proofreader and any intent projection must be bound to the same
+admitted frame-set digest and source revisions. Committed events are signals for
+fresh authorised reads, historical states require explicit temporal storage and
+retention policy, per-user session state remains separate from shared recent
+practice context, and a cross-Bureau handoff is a new typed scope decision—not
+an informal transcript transfer.
+
 ### Date Context Resolution
 
 If the receptionist omits an explicit date, *bernie* should not default to
@@ -285,6 +311,12 @@ interrupts the current lane and resets to a fresh query.
 
 Each staff user has their own Bernie session, transcript, and confirmation queue.
 Practice-level views may aggregate Bernie activity, but sessions are isolated.
+
+Shared recent-practice context, when implemented through the Context Fabric,
+does not weaken this isolation. It is a separate backend-owned, role- and
+purpose-filtered read projection with bounded retention and provenance. A user's
+private transcript is never promoted into collective practice memory merely
+because it is recent.
 
 ## State Machine Memory And Clarification Turns
 

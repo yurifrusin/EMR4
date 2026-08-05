@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_accepted_unimplemented_raisa_practice_context_fabric_direction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "docs/raisa-practice-context-fabric-direction.md defines the staged future contract: model-required ContextNeed candidate, deterministic ContextScopeGrant, backend-assembled typed expiring ContextFrameSet, same-packet proofreader and ContextWeaveTrace. implementation_plan.md section 2.11, orchestration/bernie_interaction_model.md, AGENTS.md and Compass revision 195 carry the same accepted-but-unimplemented boundary; Compass validation and 17 focused tests pass.",
+    "current_authority_allocation": "Sol owns this architecture record and the continuing C4 recovery. The existing read-only subagent supplied schema-valid Compass insertion analysis only. No external model or worker receives implementation, integration or acceptance authority from this documentation commit.",
+    "git_refs_and_worktree": "Primary task branch remains at pre-documentation HEAD b988cba9964b516ab5589ae92b64d16a84a8bc8f, four commits ahead of origin task ref 4c3a682e6c1076d8b5cfdc6143a4a07a57d63a57. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named Context Fabric documentation, Compass map/render, handover and focused test are eligible for this commit; all other untracked artifacts are excluded.",
+    "live_handover_current_baton": "C4 remains the active implementation descendant. Yuri separately accepted the Raisa Practice Context Fabric as a permanent programme direction, so the handover, master blueprint, interaction model and read-only Compass now record it without changing the active C4 baton.",
+    "protected_evidence_boundaries": "This architecture record opens no patient, clinical, participant, product-derived, protected, historical-PHI or production data; provider or external retrieval; runtime persistence or wiring; temporal retention; command/write; deployment; release; Pages; protected evidence or protected-ref action. docs/branding and every unrelated untracked receipt/state artifact remain preserved and excluded through explicit-path staging only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

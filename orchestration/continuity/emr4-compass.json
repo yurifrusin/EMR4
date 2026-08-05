@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 194,
-  "updated_at": "2026-08-05T10:00:00Z",
+  "map_revision": 195,
+  "updated_at": "2026-08-05T10:01:47Z",
   "source_graph_revision": 213,
-  "orientation_statement": "EMR4 is at Continuity 213 / Compass 194. A5.1 Rayleen check-in and B4.1 Davida default-location command runtimes pass at default-off authored-synthetic boundaries. Standing authority opens the provider-free C4 allowlisted-actuator simulator next.",
+  "orientation_statement": "EMR4 is at Continuity 213 / Compass 195. A5.1 Rayleen check-in and B4.1 Davida default-location command runtimes pass at default-off authored-synthetic boundaries. Standing authority opens the provider-free C4 allowlisted-actuator simulator next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1688,6 +1688,25 @@
         "docs/bernie-reception-one-committed-event-vertical-closeout.md",
         "docs/bernie-reception-one-availability-reconciliation-closeout.md",
         "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md"
+      ]
+    },
+    {
+      "id": "raisa-practice-context-fabric",
+      "title": "Raisa Practice Context Fabric",
+      "status": "candidate",
+      "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
+      "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
+      "prerequisites": [
+        "Freeze a provider-free authored-synthetic architecture contract for ContextNeed, ContextScopeGrant, ContextFrameSet, weave trace, source classes, practice and principal scope, purpose, provenance, freshness, retention and per-Bureau projection.",
+        "Reuse the existing API Spine capability charters and typed context-frame contracts before defining any new envelope or temporal store.",
+        "Separately gate every patient, clinical or product-data projection, provider or external retrieval, historical-state retention, runtime persistence or wiring, command or write path, deployment, production or release descendant."
+      ],
+      "boundary_changes": [],
+      "evidence": [
+        "docs/raisa-practice-context-fabric-direction.md",
+        "implementation_plan.md",
+        "orchestration/bernie_interaction_model.md",
+        "docs/api-spine/manifests/agent-capability-charters.yaml"
       ]
     },
     {

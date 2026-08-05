@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 213 / Compass 194. A5.1 Rayleen check-in and B4.1 Davida default-location command runtimes pass at default-off authored-synthetic boundaries. Standing authority opens the provider-free C4 allowlisted-actuator simulator next.
+> EMR4 is at Continuity 213 / Compass 195. A5.1 Rayleen check-in and B4.1 Davida default-location command runtimes pass at default-off authored-synthetic boundaries. Standing authority opens the provider-free C4 allowlisted-actuator simulator next.
 
 ## North star
 
@@ -278,6 +278,18 @@ Prerequisites:
 - The accepted repository-local protocol proof remains the frozen source for scope leases, bilateral routing, fresh-read reconciliation, replay and supersession.
 - A fresh Yuri decision naming the exact existing local feed adapter and a runtime threat model before any connection or persistent mailbox.
 - Explicit authentication, durable deduplication, persistence, failure, dead-letter and retention decisions while preserving separation from the development Continuity graph.
+
+### Raisa Practice Context Fabric — candidate
+
+How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?
+
+A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.
+
+Prerequisites:
+
+- Freeze a provider-free authored-synthetic architecture contract for ContextNeed, ContextScopeGrant, ContextFrameSet, weave trace, source classes, practice and principal scope, purpose, provenance, freshness, retention and per-Bureau projection.
+- Reuse the existing API Spine capability charters and typed context-frame contracts before defining any new envelope or temporal store.
+- Separately gate every patient, clinical or product-data projection, provider or external retrieval, historical-state retention, runtime persistence or wiring, command or write path, deployment, production or release descendant.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -573,6 +585,7 @@ Prerequisites:
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
 - `deploy/raisa-office-web-dev/server.mjs`
+- `docs/api-spine/manifests/agent-capability-charters.yaml`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
 - `docs/ariadne-autonomous-continuation.md`
@@ -735,6 +748,7 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-design.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
+- `docs/raisa-practice-context-fabric-direction.md`
 - `docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md`
 - `docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md`
@@ -1013,6 +1027,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-result-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-sol-acceptance.md`
 - `orchestration/api_spine_adr.md`
+- `orchestration/bernie_interaction_model.md`
 - `orchestration/bernie_release_gates.md`
 - `orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-003-audit-analysis.json`
@@ -1422,4 +1437,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 194; continuity graph revision 213._
+_Compass map revision 195; continuity graph revision 213._

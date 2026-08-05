@@ -59,6 +59,17 @@ descendant is C4's narrowest provider-free, authored-synthetic, allowlisted-
 actuator simulator; it opens no live target, real database, provider product
 runtime, deployment or production action.
 
+Raisa's accepted longer-range integration direction is the backend-owned
+**Practice Context Fabric** described in
+[`docs/raisa-practice-context-fabric-direction.md`](docs/raisa-practice-context-fabric-direction.md).
+It will knit the Bureaus together by assembling query-shaped, permissioned,
+typed and expiring context frames from authoritative current, event, temporal,
+session and later clinical/evidence sources. It is not provider-model memory or
+a broad practice-data dump. The direction is accepted and its implementation
+sequence is planned, but no product/patient data, provider call, historical
+state, runtime route, command, deployment or production authority follows from
+this blueprint entry.
+
 ### 1.1 Business & Licensing Model
 
 | Aspect | Decision |
@@ -275,6 +286,34 @@ Preconfigured transaction rollback, liveness, timeout, circuit-breaker and
 platform-restart behavior remains deterministic infrastructure rather than
 model-optional intelligence. The staged plan is
 [`docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`](docs/emr4-rayleen-davida-controlled-recovery-development-plan.md).
+
+### 2.11 Raisa Practice Context Fabric
+
+The shared "brain" of Raisa should not be an omniscient model session. It should
+be a backend-owned temporal Context Fabric that gives each Bureau the smallest
+authorised working context for the current purpose. A model-required intent
+stage may propose a closed `ContextNeed`; deterministic policy intersects it
+with the current user, role, practice, location, purpose and data authority; a
+backend assembler then returns an immutable `ContextFrameSet` with provenance,
+freshness, redaction, source revisions, expiry and `command_authority: false`.
+
+The fabric can eventually weave together current Diary and waiting-room truth,
+selected historical operational states, committed events, recent collective
+practice work, per-user session state, practice-administration context,
+Consultant's durable Diagnostic Thread and licensed evidence-source packets.
+These threads remain distinct. Events trigger fresh reads rather than becoming
+truth; session state is not a database; Diagnostic Thread remains the durable
+clinical domain object; Cochrane remains a cited licensed evidence source; and
+no Bureau inherits another Bureau's private narrative or authority.
+
+Implementation proceeds from provider-free authored-synthetic contracts, to
+composition of existing current read models, to a patient-free temporal weave,
+then to intent-shaped retrieval rehearsals and separately gated real-product and
+clinical descendants. GraphQL/query services remain read-only; mutations remain
+backend REST/OpenAPI commands with fresh authorization, human gates where
+required, idempotency, audit and deterministic readback. The controlling
+direction is
+[`docs/raisa-practice-context-fabric-direction.md`](docs/raisa-practice-context-fabric-direction.md).
 
 ---
 
@@ -780,6 +819,13 @@ Context frames should be merged into a typed proposal envelope:
   hints where available, and a clear "verify before confirming" message where
   confidence is not high
 - write the normal appointment only after explicit receptionist confirmation
+
+These task-local frames are the first threads of the accepted Raisa Practice
+Context Fabric. Future retrieval should begin with a typed request-shaped
+`ContextNeed`, pass deterministic purpose/role/tenant minimisation, and produce
+one expiring `ContextFrameSet` whose provenance and source revisions are visible
+to the model and proofreader. It must not widen this booking path into a whole-
+practice Diary dump or give context command authority.
 
 Patient identity tiers should be conservative. A unique name + DOB match can be
 operationally useful, but production confirmation should prefer at least one
