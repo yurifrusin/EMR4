@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 213,
+  "graph_revision": 214,
   "harvests": [],
   "nodes": [
     {
@@ -12328,9 +12328,109 @@
         "External event delivery, further command families and update activation remain closed.",
         "Production, deployment, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-c4-allowlisted-actuator-simulator",
+      "title": "Provider-Free Allowlisted-Actuator Simulator",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-05T12:00:00Z",
+      "updated_at": "2026-08-05T12:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "955b6a566f7097f58929dcb2fa9c4ed0aaad8b29",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-a5-b4-command-runtime",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "C4 passes only as local provider-free authored-synthetic simulation.",
+          "One shared store owns evidence, idempotency, supersession and attempt transaction semantics.",
+          "AER-0025 and AER-0026 close only through Sol's named recovery lease and fresh veto.",
+          "Standing authority opens exact C5 planning, not a live recovery action."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-model-required-bureau-c4-simulator",
+          "source": "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md",
+          "status": "accepted",
+          "summary": "Accept one fixed provider-free authored-synthetic forward transition and exact rollback behind typed one-use evidence."
+        }
+      ],
+      "claim_scope": [
+        "Exact scalar admission, current authority, one-use evidence and cross-runtime transaction regressions pass.",
+        "Fresh readback and exact rollback distinguish verified success from every terminal denial.",
+        "Fresh Gemini source veto passed 389 tests on the exact unchanged clean candidate.",
+        "No provider, live target, product data, real database, route or external actuator is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "tests/test_model_required_bureau_c4_simulator.py"
+          ],
+          "note": "C4 has no Diary intent surface and leaves the inherited combined-scope contract unchanged."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_reception_one_availability_reconciliation.py",
+            "tests/test_model_required_bureau_c4_simulator.py",
+            "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md"
+          ],
+          "note": "C4 has no product event consumer and leaves the inherited reschedule reconciliation contract unchanged."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md",
+          "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+          "docs/security/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-threat-model-delta.md",
+          "docs/api-spine/openapi/technical-control-simulator-commands.yaml"
+        ],
+        "findings": [
+          "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/provider-free-acceptance-evidence.json",
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-c4-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json"
+        ],
+        "tests": [
+          "scripts/model_required_bureau_c4_acceptance.py",
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_model_required_bureau_c4_simulator.py",
+          "tests/test_model_required_bureau_c4_plan.py",
+          "tests/test_model_required_bureau_c4_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "C5 requires a separately frozen exact disposable non-PHI target, provider/model boundary, human authority, rollback, audit and cleanup before any live development action.",
+        "Real databases, ordinary services, cloud/IAM operations, product routes and external actuators remain closed.",
+        "Patient, clinical, product-derived or protected data and patient-facing Rayleen remain closed.",
+        "Update download/import/migration/activation and external event delivery remain closed.",
+        "Production, deployment, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-05T10:00:00Z"
+  "updated_at": "2026-08-05T12:00:00Z"
 }

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen C4 plan and threat delta remain unchanged. Sol recovery closes all ten independently reproduced findings. Provider-free acceptance evidence, 31 focused tests, the widened local closeout suite, Ruff, compilation, Bandit, JSON, Continuity, Compass, acceptance-index and whitespace checks pass. The fresh Gemini review passed 389 tests with no material finding and a clean unchanged exact-head worktree.",
+    "current_authority_allocation": "Sol owns final C4 acceptance, closeout, explicit-path staging, task-branch commit and push. Gemini 3.6 Flash/high completed one read-only exact-head veto with pass and no write/integration authority. DeepSeek's original and repair lanes remain rejected provenance and receive no further authority.",
+    "git_refs_and_worktree": "Primary task branch is at 955b6a566f7097f58929dcb2fa9c4ed0aaad8b29 with only intended C4 closeout/continuity/AER/Compass/plan/index amendments plus preserved unrelated untracked files. Fresh verifier worktree is clean and unchanged at that exact head. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 4c3a682e6c1076d8b5cfdc6143a4a07a57d63a57.",
+    "live_handover_current_baton": "C4 is accepted as model_required_bureau_c4_allowlisted_actuator_simulator_pass at exact reviewed source HEAD 955b6a566f7097f58929dcb2fa9c4ed0aaad8b29. Continuity 214 / Compass 196 and the live baton name C5 exact planning as next while keeping the Context Fabric a candidate horizon.",
+    "protected_evidence_boundaries": "C4 remains one local in-memory provider-free authored-synthetic transition and exact rollback with zero candidate-runtime external effects. No patient/product/protected data, provider product runtime, live target, real database, mounted route, C5 action, production, deployment, release, Pages, protected evidence or protected-ref movement is opened. docs/branding and every unrelated untracked receipt/state artifact remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

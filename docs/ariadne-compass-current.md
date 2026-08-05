@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 213 / Compass 195. A5.1 Rayleen check-in and B4.1 Davida default-location command runtimes pass at default-off authored-synthetic boundaries. Standing authority opens the provider-free C4 allowlisted-actuator simulator next.
+> EMR4 is at Continuity 214 / Compass 196. C4's provider-free authored-synthetic allowlisted-actuator simulator passes after Sol recovery and a fresh exact-head veto. Standing authority opens exact C5 planning next, but no live target or recovery action is yet authorised by C4.
 
 ## North star
 
@@ -200,24 +200,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A3/B3 pass; no dependency-satisfied non-material successor remains. Lineage parent: `model-required-bureau-c3-d3`.
 92. **Backend-owned Rayleen and Davida command foundations — Rayleen Check-In and Davida Default-Location Commands**
    A5.1/B4.1 pass; provider-free C4 planning is next. Lineage parent: `model-required-bureau-a3-b3-request-contract-recovery`.
+93. **First one-use deterministic technical action simulator — Provider-Free Allowlisted-Actuator Simulator**
+   C4 passes; exact disposable C5 planning is next. Lineage parent: `model-required-bureau-a5-b4-command-runtime`.
 
 ## Current position
 
-**Rayleen and Davida bounded command runtimes accepted — Rayleen Check-In and Davida Default-Location Commands**
+**Provider-free allowlisted-actuator simulator accepted — Provider-Free Allowlisted-Actuator Simulator**
 
-**Why this proof came next:** A4 product read and the prior Davida command design supplied the dependency-complete boundaries for the first two human-confirmed commands.
+**Why this proof came next:** C3 authority policy and the accepted A5/B4 backend command foundations made one exact zero-external-effect technical simulator dependency-complete.
 
-Two separate default-off authored-synthetic command paths pass deterministic, migration and independent review.
+One fixed authored-synthetic recovery transition now passes deterministic, Sol recovery and independent source veto.
 
 ### What this unlocks
 
-- Immediate provider-free C4 allowlisted-actuator simulator planning.
-- Later separately frozen A5/B4 command descendants.
+- Freeze C5's narrowest disposable non-PHI live-development-recovery plan.
+- Use C4's typed authority and readback lessons in the later Context Fabric technical thread.
 
 ### What it does not solve
 
-- Ordinary-practice, patient-facing or clinical product use.
-- Live recovery, real-database or external actuator execution.
+- A live provider diagnosis or any live development recovery action.
+- Real database/service targets, product data, commands, cloud/IAM or production actuators.
 - Deployment, production, release, Pages or protected actions.
 
 ## Continuity and authority
@@ -478,6 +480,7 @@ Prerequisites:
 
 ## Map limits
 
+- C4 proves one in-memory authored-synthetic technical transition only; it does not prove a live model diagnosis, real target, database, external actuator, development recovery, deployment, production or release.
 - A5.1/B4.1 prove bounded authored-synthetic command semantics only; they do not prove ordinary-practice, patient-facing, live-recovery, production, deployment or release suitability.
 - A3/B3 prove bounded authored-synthetic occupied advisory formation only; they do not prove product data, commands, writes, actuators, clinical decisions, production suitability or sovereign processing.
 - C3/D3 prove provider-free risk, authority, staged-promotion and rollback contracts only; they do not prove a provider, observer, reviewer, command, actuator, updater, migration or activation runtime.
@@ -588,6 +591,7 @@ Prerequisites:
 - `docs/api-spine/manifests/agent-capability-charters.yaml`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
+- `docs/api-spine/openapi/technical-control-simulator-commands.yaml`
 - `docs/ariadne-autonomous-continuation.md`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
 - `docs/ariadne-compass-increment2-plan.md`
@@ -714,6 +718,8 @@ Prerequisites:
 - `docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md`
 - `docs/emr4-model-required-bureau-c3-d3-closeout.md`
 - `docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md`
+- `docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md`
+- `docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md`
 - `docs/emr4-model-required-bureau-gate-minus-one-closeout.md`
 - `docs/emr4-model-required-bureau-gate-zero-closeout.md`
 - `docs/emr4-model-required-bureau-gate-zero-shared-contract.md`
@@ -820,6 +826,7 @@ Prerequisites:
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-a5-b4-command-runtime-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md`
+- `docs/security/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureaus-gate-minus-one-threat-model-delta.md`
@@ -861,6 +868,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json`
@@ -901,6 +909,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/model-required-bureau-c4-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md`
@@ -1029,6 +1038,7 @@ Prerequisites:
 - `orchestration/api_spine_adr.md`
 - `orchestration/bernie_interaction_model.md`
 - `orchestration/bernie_release_gates.md`
+- `orchestration/continuity/ariadne-agent-error-register/agent-error-register.json`
 - `orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-003-audit-analysis.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-004-audit-analysis.json`
@@ -1076,6 +1086,7 @@ Prerequisites:
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json`
 - `orchestration/continuity/model-required-bureau-c3-d3/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json`
@@ -1437,4 +1448,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 195; continuity graph revision 213._
+_Compass map revision 196; continuity graph revision 214._

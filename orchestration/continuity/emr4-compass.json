@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 195,
-  "updated_at": "2026-08-05T10:01:47Z",
-  "source_graph_revision": 213,
-  "orientation_statement": "EMR4 is at Continuity 213 / Compass 195. A5.1 Rayleen check-in and B4.1 Davida default-location command runtimes pass at default-off authored-synthetic boundaries. Standing authority opens the provider-free C4 allowlisted-actuator simulator next.",
+  "map_revision": 196,
+  "updated_at": "2026-08-05T12:00:00Z",
+  "source_graph_revision": 214,
+  "orientation_statement": "EMR4 is at Continuity 214 / Compass 196. C4's provider-free authored-synthetic allowlisted-actuator simulator passes after Sol recovery and a fresh exact-head veto. Standing authority opens exact C5 planning next, but no live target or recovery action is yet authorised by C4.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1578,30 +1578,49 @@
         "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md",
         "orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json"
       ]
+    },
+    {
+      "node_id": "model-required-bureau-c4-allowlisted-actuator-simulator",
+      "lineage_parent": "model-required-bureau-a5-b4-command-runtime",
+      "strategic_role": "First one-use deterministic technical action simulator",
+      "outcome": "C4 passes; exact disposable C5 planning is next.",
+      "evidence": [
+        "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md",
+        "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+        "docs/security/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-threat-model-delta.md",
+        "docs/api-spine/openapi/technical-control-simulator-commands.yaml",
+        "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/provider-free-acceptance-evidence.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md",
+        "orchestration/agent_inbox/codex/model-required-bureau-c4-sol-acceptance.md",
+        "orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "model-required-bureau-a5-b4-command-runtime",
-    "strategic_role": "Rayleen and Davida bounded command runtimes accepted",
-    "why_now": "A4 product read and the prior Davida command design supplied the dependency-complete boundaries for the first two human-confirmed commands.",
-    "outcome": "Two separate default-off authored-synthetic command paths pass deterministic, migration and independent review.",
+    "node_id": "model-required-bureau-c4-allowlisted-actuator-simulator",
+    "strategic_role": "Provider-free allowlisted-actuator simulator accepted",
+    "why_now": "C3 authority policy and the accepted A5/B4 backend command foundations made one exact zero-external-effect technical simulator dependency-complete.",
+    "outcome": "One fixed authored-synthetic recovery transition now passes deterministic, Sol recovery and independent source veto.",
     "unlocks": [
-      "Immediate provider-free C4 allowlisted-actuator simulator planning.",
-      "Later separately frozen A5/B4 command descendants."
+      "Freeze C5's narrowest disposable non-PHI live-development-recovery plan.",
+      "Use C4's typed authority and readback lessons in the later Context Fabric technical thread."
     ],
     "does_not_solve": [
-      "Ordinary-practice, patient-facing or clinical product use.",
-      "Live recovery, real-database or external actuator execution.",
+      "A live provider diagnosis or any live development recovery action.",
+      "Real database/service targets, product data, commands, cloud/IAM or production actuators.",
       "Deployment, production, release, Pages or protected actions."
     ],
     "evidence": [
-      "docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md",
+      "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md",
       "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
-      "docs/security/emr4-model-required-bureau-a5-b4-command-runtime-threat-model-delta.md",
-      "docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md",
-      "docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md",
-      "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md",
-      "orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json"
+      "docs/security/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-threat-model-delta.md",
+      "docs/api-spine/openapi/technical-control-simulator-commands.yaml",
+      "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/provider-free-acceptance-evidence.json",
+      "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+      "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md",
+      "orchestration/agent_inbox/codex/model-required-bureau-c4-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json"
     ]
   },
   "decision_horizon": [
@@ -2551,6 +2570,7 @@
     }
   ],
   "map_limits": [
+    "C4 proves one in-memory authored-synthetic technical transition only; it does not prove a live model diagnosis, real target, database, external actuator, development recovery, deployment, production or release.",
     "A5.1/B4.1 prove bounded authored-synthetic command semantics only; they do not prove ordinary-practice, patient-facing, live-recovery, production, deployment or release suitability.",
     "A3/B3 prove bounded authored-synthetic occupied advisory formation only; they do not prove product data, commands, writes, actuators, clinical decisions, production suitability or sovereign processing.",
     "C3/D3 prove provider-free risk, authority, staged-promotion and rollback contracts only; they do not prove a provider, observer, reviewer, command, actuator, updater, migration or activation runtime.",

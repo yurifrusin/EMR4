@@ -32,13 +32,13 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_a5_b4_code_veto() -> None:
+def test_committed_register_is_semantically_valid_after_c4_sol_recovery() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 20
+    assert register["register_revision"] == 21
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 27)
@@ -189,7 +189,7 @@ def test_c4_worker_dispatch_contract_fails_closed_before_corrected_receipt() -> 
     assert corrected["reasons"] == []
 
 
-def test_c4_worker_self_pass_is_contained_before_repair_acceptance() -> None:
+def test_c4_worker_self_pass_is_corrected_only_through_sol_recovery() -> None:
     incident = next(
         row for row in _register()["incidents"] if row["incident_id"] == "AER-0025"
     )
@@ -212,16 +212,26 @@ def test_c4_worker_self_pass_is_contained_before_repair_acceptance() -> None:
     assert incident["role"] == "implementer"
     assert incident["category"] == "reasoning_claim_error"
     assert incident["candidate_state"] == "untrusted_partial_worktree"
-    assert incident["status"] == "contained"
-    assert incident["correction"]["status"] == "contained_then_escalated"
+    verifier = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "model-required-bureau-c4-code-review-receipt.json"
+    )
+    assert incident["status"] == "corrected"
+    assert incident["correction"]["status"] == "recovery_lease_applied"
     assert receipt["model"] == "deepseek-v4-flash"
     assert "DECISION: pass" in receipt["result"]
     assert "P1 — malformed scalar input" in review
     assert "P1 — fresh readback" in review
     assert "Disposition: `revision_required`" in review
+    assert verifier["decision"] == "pass"
+    assert verifier["head_after"] == "955b6a566f7097f58929dcb2fa9c4ed0aaad8b29"
+    assert verifier["dirty_after"] is False
 
 
-def test_c4_bounded_repair_self_pass_is_contained_and_escalated_to_sol() -> None:
+def test_c4_bounded_repair_self_pass_is_corrected_by_exact_transactional_controls() -> None:
     incident = next(
         row for row in _register()["incidents"] if row["incident_id"] == "AER-0026"
     )
@@ -243,13 +253,17 @@ def test_c4_bounded_repair_self_pass_is_contained_and_escalated_to_sol() -> None
     assert incident["related_incident_ids"] == []
     assert incident["candidate_state"] == "untrusted_partial_worktree"
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
-    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert incident["correction"]["status"] == "recovery_lease_applied"
+    assert incident["status"] == "corrected"
     assert receipt["model"] == "deepseek-v4-flash"
     assert "DECISION: pass" in receipt["result"]
     assert "Current reviewer role is not bound" in audit
     assert "Current-authority mutation is not transactionally excluded" in audit
     assert "One-use evidence is not atomic across runtime instances" in audit
     assert "Disposition: `revision_required`" in audit
+    action = incident["correction"]["action"]
+    assert "shared execution-store transaction" in action
+    assert "exact reviewer role" in action
 
 
 def test_davida_review_errors_match_preserved_evidence() -> None:

@@ -54,10 +54,13 @@ the unchanged deterministic proofreader admitted one model-selected view. The
 two-call/USD 0.50 ledger is consumed; real/patient data, commands, writes,
 production, deployment and release remain closed. The paired A5.1/B4.1 command
 descendant now also passes under backend-owned human confirmation, idempotency,
-atomic audit/outbox and deterministic readback. The next dependency-satisfied
-descendant is C4's narrowest provider-free, authored-synthetic, allowlisted-
-actuator simulator; it opens no live target, real database, provider product
-runtime, deployment or production action.
+atomic audit/outbox and deterministic readback. C4's narrowest provider-free,
+authored-synthetic allowlisted-actuator simulator now also passes with shared
+one-use execution transactions, exact current-authority locking and fresh
+readback/rollback proof. The next dependency-satisfied action is to freeze the
+narrowest C5 disposable non-PHI live-development-recovery plan; C4 itself opens
+no live target, real database, provider product runtime, deployment or
+production action.
 
 Raisa's accepted longer-range integration direction is the backend-owned
 **Practice Context Fabric** described in

@@ -3,8 +3,8 @@
 Date: 2026-08-04
 
 Status: Gate -1, Gate zero, provider-free A1/A2, B1/B2, C1/C2, D1/D2,
-C3/D3, the bounded positive-reasoning A3/B3 request-contract recovery, A4 and
-the paired A5.1/B4.1 command runtimes pass
+C3/D3, the bounded positive-reasoning A3/B3 request-contract recovery, A4,
+the paired A5.1/B4.1 command runtimes and C4 pass
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -255,6 +255,32 @@ selection and made no provider call. The evidence proves authored-synthetic
 development product read/UI only, not real-data, write, production, deployment,
 release or Australian-sovereignty claims.
 
+## C4 provider-free allowlisted-actuator result
+
+The frozen C4 descendant now passes as
+`model_required_bureau_c4_allowlisted_actuator_simulator_pass` at exact source
+HEAD `955b6a566f7097f58929dcb2fa9c4ed0aaad8b29`. It admits one opaque one-use
+execution-evidence reference for exact `restart-api-synthetic.v1` against only
+`isolated_authored_synthetic / service / synthetic:api-service`, performs one
+pure in-memory `degraded -> healthy` transition and permits only exact
+`restore-api-synthetic-lkg.v1` rollback.
+
+The first worker and its bounded repair self-passed with ten independently
+reproduced material gaps. AER-0025/AER-0026 preserve both rejections. Sol's named
+recovery lease added store-wide execution/idempotency/attempt coordination,
+full execution-section current-authority locking and exact reviewer-role
+authority. Direct regressions, reproducible acceptance, inherited tests and a
+fresh Gemini 3.6 Flash/high exact-HEAD veto pass with no material finding and a
+clean unchanged candidate.
+
+C4 has zero candidate-runtime external effects and no filesystem, process,
+shell, SQL, network, database, cloud/IAM, provider, event or product-route
+capability. It opens no live target or C5 action. Standing programme authority
+now opens exact C5 planning; the plan must freeze a disposable non-PHI isolated
+target, reversible injected fault, provider/model and reasoning boundary,
+human approval, rollback, cost, audit and cleanup before any live development
+action can be admitted.
+
 ## Lane A: Rayleen waiting-room intelligence
 
 ### A1. Read and projection boundary
@@ -409,10 +435,9 @@ scope expansion, stale plans, replay and partial verification.
 
 No production deployment or real database is part of C4.
 
-C4 is now the dependency-satisfied successor after A5.1/B4.1. Standing
-programme authority opens planning and provider-free deterministic
-implementation of the narrowest exact simulator boundary; it does not open C5
-or any live target.
+C4 is accepted at its exact provider-free authored-synthetic boundary. Standing
+programme authority opens planning for the narrowest C5 descendant; C4 does
+not itself open C5 execution or any live target.
 
 ### C5. Live development recovery
 
@@ -525,11 +550,12 @@ architecture decision.
 
 ## Current next action
 
-Close and publish the accepted paired A5.1/B4.1 command runtimes, perform the
-fresh five-source rehydration, then freeze and implement Bureau C4's narrowest
-provider-free authored-synthetic allowlisted-actuator simulator. C4 accepts only
-typed one-use execution evidence for exact runbooks and must reject model-
-supplied shell/SQL, unknown parameters, scope expansion, stale plans, replay and
-partial verification. No provider call, real database, live target, C5 action,
-patient/product data, production, deployment, release, Pages or protected-ref
-movement is opened.
+Close and publish accepted C4, perform the fresh five-source rehydration, then
+freeze Bureau C5's narrowest disposable live-development-recovery plan. Planning
+must select one isolated non-PHI synthetic target and reversible injected fault,
+the exact approved provider/model/region/identity/data/cost/call boundary,
+positive bounded reasoning, deterministic proofreader and authority policy,
+human approval, rollback, fresh readback, audit and complete cleanup. No live
+action begins merely because the plan exists. Patient/product/protected data,
+real practice databases, ordinary services, production, deployment, release,
+Pages and protected-ref movement remain closed.

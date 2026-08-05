@@ -40,13 +40,13 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
     )
     assert manifest["source_agents_path"] == "AGENTS.md"
     assert manifest["source_git_head"] == (
-        "167618a9806cfb5431f0c55ddaa4dcef5b51e8b6"
+        "955b6a566f7097f58929dcb2fa9c4ed0aaad8b29"
     )
     assert manifest["source_agents_sha256"] == (
-        "f8bbfbafc9c2da981f0aef91628828c39783da97e78bfda02bd77bde43dcdd1e"
+        "19f84b6e0d06c0346defe69b2d091cbe676b4890df65a79f9bdaed9848e7b92b"
     )
-    assert manifest["source_agents_byte_count"] == 170970
-    assert manifest["source_agents_line_count"] == 497
+    assert manifest["source_agents_byte_count"] == 78449
+    assert manifest["source_agents_line_count"] == 478
     assert len(payload) == manifest["ledger_byte_count"]
     assert len(payload.decode("utf-8").splitlines()) == manifest["ledger_line_count"]
     assert hashlib.sha256(payload).hexdigest() == manifest["ledger_sha256"]
@@ -56,7 +56,7 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
         after_header="| Item | Indexed acceptance artifacts |",
     )
     assert ledger_labels == manifest["moved_labels"]
-    assert len(ledger_labels) == manifest["moved_row_count"] == 90
+    assert len(ledger_labels) == manifest["moved_row_count"] == 109
 
 
 def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> None:
@@ -66,9 +66,8 @@ def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> N
     baton = live.split("### Compact historical evaluation", 1)[0]
     live_labels = _row_labels(baton, after_header="| Item | Current value |")
 
-    # The active four-pair Bernie/Davida acceptance set remains in the live
-    # rehydration surface. Keep the baton below half its pre-compaction size
-    # while allowing those deliberately classified current rows.
+    # Keep only current authority, active acceptance and future-direction rows
+    # in the live rehydration surface; historical acceptance remains hash-bound.
     assert len(live_bytes) < 75_000
     assert len(live.splitlines()) < 475
     assert "Current Baton acceptance index" in live_labels

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 20,
+  "register_revision": 21,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-05",
@@ -961,15 +961,18 @@
       "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "The worker receipt and commit are preserved as untrusted and are not integrated. Sol froze a distinct exact-finding repair descendant; any corrected candidate must pass expanded adversarial tests, full deterministic verification and a fresh exact-head Gemini implementation veto before acceptance.",
+        "status": "recovery_lease_applied",
+        "action": "The worker receipt and commit remain preserved as rejected untrusted provenance. After its bounded repair also failed independent audit, Sol adopted both commits only as source under the named recovery lease, closed all ten reproduced findings with shared transactional execution and exact current-authority controls, passed deterministic verification, and obtained a fresh exact-HEAD Gemini 3.6 Flash/high veto with one pass and a clean unchanged candidate.",
         "prevention_control": "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/model-required-bureau-c4-worker-independent-review.md",
-          "docs/ariadne-agent-error-correction-register-revision-19.md"
+          "docs/ariadne-agent-error-correction-register-revision-19.md",
+          "docs/ariadne-agent-error-correction-register-revision-21.md",
+          "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0026",
@@ -998,16 +1001,19 @@
       "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "The repair receipt and commit remain preserved as untrusted. The single permitted same-lane Flash correction is exhausted; Sol will adopt the two worker commits only under the named recovery lease, add shared transactional execution coordination and exact current-authority/reviewer-role controls, and require deterministic plus fresh Gemini exact-head veto evidence before acceptance.",
+        "status": "recovery_lease_applied",
+        "action": "The repair receipt and commit remain preserved as rejected untrusted provenance. Sol applied the named recovery lease, added one shared execution-store transaction with shared idempotency, supersession and attempt sequencing, locked current authority across the full execution section, required the exact reviewer role, passed direct regressions and deterministic verification, and obtained a fresh exact-HEAD Gemini 3.6 Flash/high veto with one pass and a clean unchanged candidate.",
         "prevention_control": "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
         "evidence_paths": [
           "docs/ariadne-orchestrator-recovery-lease.md",
           "orchestration/agent_inbox/codex/model-required-bureau-c4-repair-independent-audit.md",
-          "docs/ariadne-agent-error-correction-register-revision-20.md"
+          "docs/ariadne-agent-error-correction-register-revision-20.md",
+          "docs/ariadne-agent-error-correction-register-revision-21.md",
+          "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     }
   ]
 }

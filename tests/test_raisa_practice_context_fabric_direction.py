@@ -42,8 +42,8 @@ def test_context_fabric_compass_horizon_is_candidate_without_boundary_opening() 
         if row["id"] == "raisa-practice-context-fabric"
     )
 
-    assert compass["map_revision"] == 195
-    assert compass["source_graph_revision"] == 213
+    assert compass["map_revision"] == 196
+    assert compass["source_graph_revision"] == 214
     assert item["status"] == "candidate"
     assert item["boundary_changes"] == []
     assert "docs/raisa-practice-context-fabric-direction.md" in item["evidence"]
@@ -51,4 +51,4 @@ def test_context_fabric_compass_horizon_is_candidate_without_boundary_opening() 
 
     rendered = (ROOT / "docs/ariadne-compass-current.md").read_text(encoding="utf-8")
     assert "### Raisa Practice Context Fabric — candidate" in rendered
-    assert "_Compass map revision 195; continuity graph revision 213._" in rendered
+    assert "_Compass map revision 196; continuity graph revision 214._" in rendered

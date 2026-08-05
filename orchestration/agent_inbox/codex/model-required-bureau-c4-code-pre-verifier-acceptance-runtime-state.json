@@ -1,0 +1,82 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 remains the active provider-free authored-synthetic simulator descendant. The Sol recovery candidate is committed at exact task-branch HEAD 955b6a566f7097f58929dcb2fa9c4ed0aaad8b29 and has not yet been accepted; a fresh independent code veto is the next required action.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project receives one read-only exact-head veto. It may inspect and run read-only/local tests but may not edit, integrate, push, deploy or claim acceptance. Sol retains final acceptance and any correction authority; DeepSeek remains closed.",
+    "active_plan_and_acceptance": "The frozen C4 plan and threat delta remain unchanged. The verifier must assess the original seven findings and three residual repair findings against the exact recovered code, schemas, generated evidence and regressions. Local deterministic acceptance and the widened inherited suite pass, but those results do not replace the independent veto.",
+    "protected_evidence_boundaries": "The review is source-only and provider-free at candidate runtime: no patient, product or protected data, product/provider runtime, real target, database, process, network, cloud, IAM, route, deployment, production, release, Pages or protected-ref action. The only non-zero external activity is the authorised Antigravity source-review transport containing repository source and authored-synthetic evidence. docs/branding and unrelated untracked files are excluded.",
+    "git_refs_and_worktree": "Fresh verifier worktree C:/Users/sarashera/EMR4-worktrees/review-model-required-bureau-c4-code is clean on non-protected branch codex/review-model-required-bureau-c4-code at exact HEAD 955b6a566f7097f58929dcb2fa9c4ed0aaad8b29; its verifier preflight passed with zero calls. Primary task branch is the same HEAD and clean except preserved untracked files plus the new bounded verifier artifacts. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c4_code_pre_verifier_acceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol recovery candidate 955b6a56 is committed and deterministically green."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Native read-only audit is complete; no native agent is assigned final veto authority."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek's bounded correction opportunity is exhausted and closed."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh clean exact-head verifier worktree and branch passed local preflight; no review call has yet occurred."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is not selected for independent verification."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-verifiers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/model-required-bureau-c4-code-verifier-worktree-preflight.json"
+  ],
+  "assigned_agent_ids": []
+}

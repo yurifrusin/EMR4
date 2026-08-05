@@ -35,29 +35,12 @@ ACTIVE_LABELS = (
     "Active product track",
     "Antigravity independent-verifier allocation",
     "Ariadne agent error and correction register acceptance",
-    "Provider-free Office directory lifecycle descendants acceptance",
-    "Bernie/Davida parallel seam acceptance",
-    "Native-Diary application-session practitioner composition architecture acceptance",
-    "Davida practice-administration boundary acceptance",
-    "Native-Diary application-session practitioner runtime acceptance",
-    "Davida provider-free practice-administration pure-read acceptance",
-    "Native-Diary practitioner reconciliation acceptance",
-    "Davida practice-administration advisory acceptance",
-    "Native-Diary default-off application-session UI composition acceptance",
-    "Davida default-location dry-run proposal acceptance",
-    "Native-Diary route-intercepted browser acceptance",
-    "Davida default-location command-boundary acceptance",
-    "Bernie/Davida fifth-pair acceptance",
     "Model-required Bureau architecture and paused development plan",
-    "Model-required Bureau Gate -1 acceptance",
-    "Model-required Bureau Gate zero acceptance",
-    "Model-required Bureau A3/B3 terminal-reconciliation acceptance",
-    "Model-required Bureau A3/B3 request-contract recovery acceptance",
-    "Model-required Bureau A4 product-read/UI acceptance",
-    "Model-required Bureau A5.1/B4.1 command runtime acceptance",
+    "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
+    "Raisa Practice Context Fabric direction",
 )
 
 
@@ -163,16 +146,35 @@ def write_compaction() -> dict[str, Any]:
     header, end = _table_bounds(lines)
     rows = _table_rows(lines, header, end)
     labels = [_row_label(row) for row in rows]
-    if INDEX_LABEL in labels:
-        raise ValueError("Current Baton is already compacted; use --check")
     missing_active = [label for label in ACTIVE_LABELS if label not in labels]
     if missing_active:
         raise ValueError(f"active Current Baton rows missing: {missing_active}")
 
     active = set(ACTIVE_LABELS)
     kept_rows = [row for row in rows if _row_label(row) in active]
-    moved_rows = [row for row in rows if _row_label(row) not in active]
+    newly_moved_rows = [
+        row
+        for row in rows
+        if _row_label(row) not in active and _row_label(row) != INDEX_LABEL
+    ]
+    if INDEX_LABEL in labels:
+        ledger_lines = LEDGER_PATH.read_text(encoding="utf-8").splitlines(
+            keepends=True
+        )
+        ledger_header = next(
+            i for i, line in enumerate(ledger_lines) if line.startswith("| Item |")
+        )
+        existing_moved_rows = [
+            line
+            for line in ledger_lines[ledger_header + 2 :]
+            if line.startswith("| ") and _row_label(line) not in active
+        ]
+        moved_rows = [*existing_moved_rows, *newly_moved_rows]
+    else:
+        moved_rows = newly_moved_rows
     moved_labels = [_row_label(row) for row in moved_rows]
+    if len(moved_labels) != len(set(moved_labels)):
+        raise ValueError("acceptance-index refresh would duplicate moved labels")
     source_hash = _sha256(source_bytes)
     source_head = _source_head()
     ledger_bytes = _build_ledger(
