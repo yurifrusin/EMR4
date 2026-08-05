@@ -38,10 +38,10 @@ def test_committed_register_is_semantically_valid_after_a5_b4_code_veto() -> Non
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 19
+    assert register["register_revision"] == 20
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 26)
+        f"AER-{index:04d}" for index in range(1, 27)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 19
+    assert len(agent_incidents) == 20
     assert len(transport_incidents) == 2
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -221,6 +221,37 @@ def test_c4_worker_self_pass_is_contained_before_repair_acceptance() -> None:
     assert "Disposition: `revision_required`" in review
 
 
+def test_c4_bounded_repair_self_pass_is_contained_and_escalated_to_sol() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0026"
+    )
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "deepseek"
+        / "model-required-bureau-c4-simulator-repair-worker-receipt.json"
+    )
+    audit = (
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c4-repair-independent-audit.md"
+    ).read_text(encoding="utf-8")
+
+    assert incident["related_incident_ids"] == []
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert receipt["model"] == "deepseek-v4-flash"
+    assert "DECISION: pass" in receipt["result"]
+    assert "Current reviewer role is not bound" in audit
+    assert "Current-authority mutation is not transactionally excluded" in audit
+    assert "One-use evidence is not atomic across runtime instances" in audit
+    assert "Disposition: `revision_required`" in audit
+
+
 def test_davida_review_errors_match_preserved_evidence() -> None:
     register = _register()
     rows = {row["incident_id"]: row for row in register["incidents"]}
@@ -257,13 +288,13 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
     assert rows["AER-0002"]["related_incident_ids"] == ["AER-0001"]
 
 
-def test_pattern_report_detects_both_recurring_control_signals() -> None:
+def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 25
+    assert report["incident_count"] == 26
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 19,
+        "agent_behavior": 20,
         "harness": 3,
         "repository": 1,
         "transport": 2,
@@ -274,14 +305,14 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         "harness_failure": 3,
         "output_contract_violation": 11,
         "read_only_violation": 1,
-        "reasoning_claim_error": 2,
+        "reasoning_claim_error": 3,
         "repository_defect": 1,
         "transport_timeout": 2,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 1,
         "canonical_unchanged": 20,
-        "untrusted_partial_worktree": 4,
+        "untrusted_partial_worktree": 5,
     }
     assert report["recurring_patterns"] == [
         {
@@ -323,6 +354,19 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
                 "The verifier wrapper must continue exact-single-decision admission; duplicate output never becomes a verdict, and bounded recovery uses a fresh project/worktree without changing candidate scope.",
                 "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions.",
                 "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory.",
+            ],
+        },
+        {
+            "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
+            "incident_count": 2,
+            "incident_ids": ["AER-0025", "AER-0026"],
+            "origins": ["agent_behavior"],
+            "categories": ["reasoning_claim_error"],
+            "roles": ["implementer"],
+            "resource_ids": ["deepseek-v4-flash-c4-worker"],
+            "prevention_controls": [
+                "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
+                "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness.",
             ],
         },
     ]

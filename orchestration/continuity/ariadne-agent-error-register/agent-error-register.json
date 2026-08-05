@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 19,
+  "register_revision": 20,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-05",
@@ -967,6 +967,44 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/model-required-bureau-c4-worker-independent-review.md",
           "docs/ariadne-agent-error-correction-register-revision-19.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0026",
+      "attempt_id": "model-required-bureau-c4-simulator-repair-worker-001",
+      "observed_on": "2026-08-05",
+      "tranche": "model-required-bureau-c4-implementation",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-c4-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "The single bounded same-lane repair may self-report pass only if current reviewer role remains exact, current authority cannot drift during an admitted execution, and one shared one-use evidence store admits at most one effect across every runtime instance.",
+      "observed_error": "The repair worker returned DECISION: pass, but independent audit reproduced success after a non-empty reviewer-role revocation, success after authority was revoked between the single snapshot and the effect, and two successes from two runtime instances sharing one evidence/state/audit store because locks, idempotency and attempt sequencing remained instance-local.",
+      "detection_method": "Sol reran the repair's deterministic baseline and bounded adversarial scripts against exact clean commit 0a60d559ec9a555e038bec5dc428b6c323c2ff04; a separate native read-only audit independently reproduced the shared-store and current-authority races before integration or external veto.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/model-required-bureau-c4-simulator-repair-worker-receipt.json",
+        "orchestration/agent_inbox/codex/model-required-bureau-c4-repair-independent-audit.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The repair receipt and commit remain preserved as untrusted. The single permitted same-lane Flash correction is exhausted; Sol will adopt the two worker commits only under the named recovery lease, add shared transactional execution coordination and exact current-authority/reviewer-role controls, and require deterministic plus fresh Gemini exact-head veto evidence before acceptance.",
+        "prevention_control": "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
+        "evidence_paths": [
+          "docs/ariadne-orchestrator-recovery-lease.md",
+          "orchestration/agent_inbox/codex/model-required-bureau-c4-repair-independent-audit.md",
+          "docs/ariadne-agent-error-correction-register-revision-20.md"
         ]
       },
       "status": "contained"

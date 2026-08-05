@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All verification passes post-commit. Here is the complete report.\n\n## Repaired findings (exact seven, no scope widening)\n\n**1. Fail-closed scalar admission** \u2014 `parse_request` now runs `_scalar_admission_violation` before any request construction: type/enum/format/bounded-value checks for idempotency key, correlation id, actor id/role, evidence reference, runbook, target strings/revision, plan id/revision/hash, decision id/hash/policy, catalog version/digest, supersession key and readback values. `plan_revision` rejects `bool` (`True` is `int` in Python); the reproduced numeric-idempotency-key case returns `SCHEMA_REJECTED`. 46 adversarial type mutations assert denial with zero state/evidence/idempotency/audit change.\n\n**2. Exact actual-target readback** \u2014 success and rollback verification now compare the full tuple `(environment, kind, id, revision, health)`. `synthetic:wrong-service` plus wrong-environment/kind/revision seeded stores fail closed before consumption (`SCOPE_EXPANSION_REJECTED` / `TARGET_REVISION_CONFLICT`). The success receipt derives `target` from the verified fresh readback, never module constants.\n\n**3. Genuine current-authority sources** \u2014 new closed in-memory `CurrentAuthorityStore`/`CurrentAuthoritySnapshot`/`CurrentObservation` read fresh inside the critical section. Revalidates current plan/decision (class, expiry, closed C3 `execution_authorized:false`/`actuator_gate:closed`/`current_state:review_required`), immutable catalog entry, actor/role/expiry, reviewer/role/expiry/separation, and observation ids/digests/timestamps. Denies catalog replacement, plan/decision drift and supersession, role loss, actor/reviewer expiry, reviewer separation loss, observation drift/replacement/staleness, and missing current records \u2014 all stable denials, zero simulated effect.\n\n**4. Effect audit only on verified success** \u2014 `_rollback_path` restores the effect-audit snapshot; every transition/audit/readback/rollback failure path now leaves zero retained effect records, while the monotone attempt audit and consumed evidence remain. Evidence shows all denial/rollback cases `effect_record_count: 0`; success `1`.\n\n**5. Exact counter-property schemas** \u2014 both receipt schemas enumerate/require all 18 named zero-capability counters with `additionalProperties:false` and `const:0`. Schema mutations (rename to `arbitrary_0..17`, omit each name, add an extra name, non-zero) all reject.\n\n**6. Non-caller-selectable entropy** \u2014 `EvidenceIssuer.mint` no longer accepts `reference`/`nonce`; production always calls module `_generate_reference()`/`_generate_nonce()` (`secrets.token_hex`). Deterministic acceptance patches only inside `_with_fixed_entropy`. Tests prove the signature has no such params and two unpatched issuances differ.\n\n**7. Concurrency-safe issuance** \u2014 the complete `(plan_revision, supersession_key)` check-and-insert is under an issuer-owned lock. 8-thread barrier test: exactly one mint succeeds, seven get `STALE_OR_SUPERSEDED`, exactly one record and one issued key.\n\n## Changed files (exactly the 6 C4 worker-owned paths)\n- `scripts/model_required_bureau_c4_simulator.py`\n- `scripts/model_required_bureau_c4_acceptance.py`\n- `tests/test_model_required_bureau_c4_simulator.py`\n- `orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-execution-receipt.schema.json`\n- `orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-denial-receipt.schema.json`\n- `orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/provider-free-acceptance-evidence.json`\n\n`docs/api-spine/openapi/technical-control-simulator-commands.yaml` was left unchanged and remains explicitly `not_mounted`. No `docs/branding/` path is in the diff or index.\n\n## Verification\n- **Tests:** 177 passed serially (28 owned + 149 inherited: C4 plan, C3/D3, Gate-zero, API Spine), 0 failures.\n- **Tooling:** Ruff clean; `py_compile` OK; Bandit 0 issues; JSON/YAML parse OK; `git diff --check` clean.\n- **Evidence:** regenerated `provider-free-acceptance-evidence.json`; `--check` reproduces (verified multiple times).\n- **Commit:** new repair commit `0a60d559ec9a555e038bec5dc428b6c323c2ff04` on `codex/worker-model-required-bureau-c4-simulator`; original `c56267d2` preserved (not amended/erased). No fetch/merge/rebase/switch/push/protected-ref movement.\n\n## Blockers\n- The packet named `orchestration/agent_inbox/codex/model-required-bureau-c4-worker-independent-review.md` and a \"preserved original worker receipt\"; neither file exists in this worktree. This did not block the repairs \u2014 the original `DECISION: pass` rejection findings were executed directly against the owned paths. No other blockers.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 117811,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 18518272,
+    "output_tokens": 103333,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 12.446535999999998,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

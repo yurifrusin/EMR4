@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verify_the_bounded_c4_repair_then_record_the_accepted_unimplemented_raisa_practice_context_fabric_direction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling implementation boundary is docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md with docs/security/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-threat-model-delta.md and the seven-finding repair packet orchestration/agent_inbox/codex/model-required-bureau-c4-deepseek-repair-packet.md. C4 remains isolated, local, in-memory, provider-free and authored-synthetic; its repaired candidate is unaccepted until independent deterministic reproduction, integration and the required fresh Gemini veto pass. The Context Fabric may be documented in the programme blueprint, interaction model and Compass only as accepted unimplemented architecture.",
+    "current_authority_allocation": "GPT Sol owns architecture, recovery, integration and acceptance. DeepSeek V4 Flash/high through Claude Code bare owns only the completed bounded C4 repair artifact. Gemini 3.6 Flash/high through a fresh Antigravity project owns the later exact-HEAD read-only veto. The user separately authorised recording Raisa Practice Context Fabric as a permanent strategic direction, without provider, patient/product-data, runtime, command, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at b988cba9964b516ab5589ae92b64d16a84a8bc8f, four commits ahead of origin task ref 4c3a682e6c1076d8b5cfdc6143a4a07a57d63a57. Remote heads were read directly: local and origin master plus local and origin handoff/current are all unchanged at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked task worktree is clean; listed untracked artifacts are preserved, including docs/branding and the completed C4 repair worker receipt.",
+    "live_handover_current_baton": "AGENTS.md names C4 as the exact active descendant: a provider-free authored-synthetic in-memory allowlisted-actuator simulator. The first worker self-pass remains rejected under AER-0025, and only the distinct bounded repair candidate may proceed to deterministic integration and a fresh independent veto.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, patient/clinical/participant/product-derived/protected/production data, provider calls, mounted product routes, real databases or targets, shell/SQL/network/cloud/IAM, C5 live action, deployment, release, Pages and protected-ref movement remain closed. docs/branding and every existing untracked Consultant, Gate-minus-one, A3/B3, A4, A5 and receipt/state artifact remain preserved and excluded; Git staging must use explicit paths only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_c4_bounded_repair_rejection_and_activate_sol_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 remains the exact active descendant. The first worker self-pass is AER-0025; its one permitted bounded same-lane repair at 0a60d559 also self-reported pass but is rejected as AER-0026, so the C4 source remains unaccepted and recovery moves to Sol without a user pause.",
+    "current_authority_allocation": "DeepSeek V4 Flash/high has exhausted the permitted same-lane correction and retains no acceptance or integration authority. Sol owns the narrow recovery lease and later integration. Gemini 3.6 Flash/high remains eligible only for a fresh final exact-head read-only veto after deterministic recovery passes.",
+    "active_plan_and_acceptance": "The frozen C4 plan and threat delta remain unchanged. Independent audit of exact repair commit 0a60d559 reproduced non-exact reviewer-role admission, authority mutation between snapshot and effect, and duplicate one-use execution across two runtime instances sharing stores. Revision 20 records AER-0026; the register validates and 33 focused register tests pass. The permitted recovery is limited to shared transactional coordination, full-section current-authority locking and exact reviewer role plus adversarial regressions.",
+    "protected_evidence_boundaries": "Only local provider-free authored-synthetic C4 source and evidence are involved. Patient/product/protected data, providers, real targets/databases, mounted routes, C5, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked receipt/state files remain preserved and excluded through explicit-path staging.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 3feb6925 after the accepted Context Fabric direction commit. Local/origin protected master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The repair worker branch is clean at 0a60d559ec9a555e038bec5dc428b6c323c2ff04. This commit is limited to the repair receipt, independent audit, AER revision 20, post-compaction receipt/state and this precommit evidence."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c4_repair_rejection_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol independently reproduced the reviewer-role and current-authority race and reconciled the native shared-store audit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The bounded read-only native audit reproduced all three residual material failures and made no edits."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The distinct repair transport completed, but its self-pass is rejected and no further same-lane correction is eligible."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The plan veto remains passed; final code veto is gated on deterministic Sol recovery."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare carried the rejected DeepSeek repair transport and transfers no acceptance authority."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
