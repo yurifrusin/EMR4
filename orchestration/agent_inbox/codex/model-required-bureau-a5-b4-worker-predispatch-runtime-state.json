@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_parallel_a5_1_and_b4_1_deepseek_workers",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton now names the frozen paired A5.1/B4.1 command-runtime implementation as next. Revision 3 passed a fresh exact-head Gemini veto, and the Consultant Cochrane direction was durably recorded without changing this command boundary.",
+    "current_authority_allocation": "Sol owns architecture, acceptance, recovery, cross-lane migration ordering and integration. Two DeepSeek V4 Flash/high workers through Claude Code bare may implement the separable A5.1 and B4.1 owned paths only. Gemini 3.6 Flash/high remains the later independent veto reviewer. No worker has acceptance, integration, protected-ref, product-provider, product-data, deployment or release authority.",
+    "active_plan_and_acceptance": "The controlling plan is docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md revision 3 at reviewed commit d7276fa63df16b4129fa523226d84c3cb2c5996e. Fresh review receipt model-required-bureau-a5-b4-plan-review-3-receipt.json returned pass with the exact worktree clean and unchanged. The worker source 902040a551668bf8e5a1dd9abaae379224995eec adds only accepted review lineage and durable Consultant direction; it does not alter the frozen A5/B4 plan or threat delta.",
+    "protected_evidence_boundaries": "Both lanes are local, product-runtime-provider-free and authored-synthetic only. Holdouts v1-v10, docs/branding, patient/clinical/product-derived/participant/protected/production data, generic status widening, GraphQL mutation, autonomous model action, external event/outbox delivery, deployment, release, Pages and protected refs remain closed. Existing unrelated pre-push files remain untracked and untouched.",
+    "git_refs_and_worktree": "Primary task HEAD and both fresh clean worker heads are exactly 902040a551668bf8e5a1dd9abaae379224995eec. Worker branches are codex/worker-model-required-bureau-a5-1-check-in and codex/worker-model-required-bureau-b4-1-default-location in their exact named worktrees. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary index is clean and preserved untracked files remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "a5_b4_worker_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["DEEPSEEK_API_KEY presence was checked without disclosure; two exact high-effort Flash packets and clean worktrees are ready."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected; no fallback is authorised."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Claude Code bare is the authorised transport wrapper for the two DeepSeek workers."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh Gemini 3.6 Flash/high revision 3 plan veto passed; final code veto remains later."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol retains acceptance, recovery, migration ordering, integration and every protected authority."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is assigned to implementation; external worker packets are bounded and separable."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": ["deepseek-a5-1-check-in", "deepseek-b4-1-default-location"], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    {"agent_id": "deepseek-a5-1-check-in", "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-a5-1-check-in", "branch": "codex/worker-model-required-bureau-a5-1-check-in", "clean": true, "at_handoff_current": true, "source_head": "902040a551668bf8e5a1dd9abaae379224995eec", "candidate_head": "902040a551668bf8e5a1dd9abaae379224995eec"},
+    {"agent_id": "deepseek-b4-1-default-location", "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-b4-1-default-location", "branch": "codex/worker-model-required-bureau-b4-1-default-location", "clean": true, "at_handoff_current": true, "source_head": "902040a551668bf8e5a1dd9abaae379224995eec", "candidate_head": "902040a551668bf8e5a1dd9abaae379224995eec"}
+  ],
+  "assigned_agent_ids": ["deepseek-a5-1-check-in", "deepseek-b4-1-default-location"]
+}

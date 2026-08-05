@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All work is complete and committed. Here is the final report.\n\n## Five-source rehydration statement\n\nThe exact five sources named in `AGENTS.md` \u00a72, all read in this session:\n\n1. **`live_handover_current_baton`** \u2014 `AGENTS.md` \u00a73 Current Baton (A5.1/B4.1 revision 3 frozen at `d7276fa63df16b4129fa523226d84c3cb2c5996e`, two DeepSeek lanes, Sol integration, no provider/patient/production/deployment/Pages/protected-ref authority).\n2. **`current_authority_allocation`** \u2014 `AGENTS.md` \u00a74 (DeepSeek V4 Flash/high via Claude Code `--bare` is the bounded implementation worker; no acceptance/integration/baton authority).\n3. **`active_plan_and_acceptance`** \u2014 `docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md` \u00a75 + \u00a77 B4.1 acceptance matrix; `docs/davida-practice-administration-default-location-command-boundary-plan.md`, `-design.md`, `-threat-model-delta.md`; `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`; `orchestration/api_spine_adr.md`, `orchestration/api_spine_programme.md`; the command-boundary closeout API-steward checklist.\n4. **`protected_evidence_boundaries`** \u2014 `AGENTS.md` \u00a75/\u00a76 (no protected evidence, no `docs/branding/`, no provider/patient/production/write-autonomous authority, default-off authored-synthetic-only).\n5. **`git_refs_and_worktree`** \u2014 worktree `model-required-bureau-b4-1-default-location`, branch `codex/worker-model-required-bureau-b4-1-default-location`, source HEAD `902040a551668bf8e5a1dd9abaae379224995eec`, clean tree before/after commit.\n\n## Files committed (exact owned paths)\n\n- `app/config.py`\n- `app/main.py`\n- `app/models/tenancy.py`\n- `app/models/practice_administration_commands.py` (new)\n- `app/schemas/practice_administration_default_location_command.py` (new)\n- `app/services/practice/practice_administration_default_location_command.py` (new)\n- `app/routers/practice_administration.py` (new)\n- `alembic/versions/v1w2x3y4z5b6_add_b4_default_location_runtime.py` (new, provisional descendant of `u0v1w2x3y4z5`)\n- `docs/api-spine/openapi/practice-administration-default-location-commands.yaml`\n- `tests/test_model_required_bureau_b4_1_default_location_runtime.py` (new)\n\nCommit: `8ef3f5021e9f01ce5845032462202505b463b6f8` on `codex/worker-model-required-bureau-b4-1-default-location`; worktree clean. No `docs/branding/` cached; no fetch/merge/rebase/switch/push.\n\n## Checks run (all passed)\n\n- `py_compile` on every owned file.\n- Ruff (E9/F401) on every owned file.\n- YAML parse, 94 local `$ref`s resolve, all object schemas closed.\n- `alembic heads` \u2192 exactly one head `v1w2x3y4z5b6`; history chain intact.\n- `git diff --check` clean.\n- Pure-helper sanity: proposal sign/verify round-trip, wrong-secret/expiry rejection, hashes, schema instantiation.\n- Router OpenAPI: exactly three mounted routes with the three matching operation IDs.\n- `Base.metadata` registers all four B4 tables + `practitioners.aggregate_version`.\n\n## Blockers / notes\n\n- PostgreSQL pytest and the acceptance script were **not** run, per the packet (Sol holds the shared serial database/test lease).\n- The pre-existing frozen boundary test `tests/test_davida_practice_administration_default_location_command_boundary.py` asserts architecture-only status, exactly two paths, and no mounted boundary source. The plan \u00a75.5 mandates revising that OpenAPI to the authorized runtime and adding the evidence route, so that historical test is now expected to require Sol's integration update (it is outside my owned paths).\n- Full `app.main` import fails in this local Python 3.14 sandbox only because `authlib` is absent (pre-existing environment gap); the B4 router imports in isolation correctly, and Sol's pytest venv has the dependency.\n\nScope delivered exactly: one default-off, authored-synthetic-practice-only, provider-free three-route REST command family; no publisher/consumer, no GraphQL mutation, no provider call, no patient/secret/free-text storage.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 137926,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 39981824,
+    "output_tokens": 204933,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 25.821831999999993,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

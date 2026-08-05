@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 14,
+  "register_revision": 15,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-04",
+    "source_cutoff_on": "2026-08-05",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -779,6 +779,45 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0021",
+      "attempt_id": "model-required-bureau-a5-1-check-in-worker-001",
+      "observed_on": "2026-08-05",
+      "tranche": "model-required-bureau-a5-b4-command-runtime",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-a5-1-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The bounded implementation worker must edit and commit only the exact owned paths named in its packet, and its closeout must classify every committed path against that list.",
+      "observed_error": "The A5.1 worker committed app/schemas/diary_events.py even though that path was absent from its owned-path list, then described all 14 committed paths as owned. The added closed patient-free checked-in event payload is relevant to the frozen design, but relevance does not transfer file authority.",
+      "detection_method": "Sol compared git diff --name-status for worker commit 52370189dac575bbbaa59a2458c6ea583edb8d6c against the immutable worker packet and observed the extra schema path before cherry-pick or acceptance; the worker worktree otherwise remained clean.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/model-required-bureau-a5-1-check-in-deepseek-packet.md",
+        "orchestration/agent_inbox/deepseek/model-required-bureau-a5-1-check-in-worker-receipt.json",
+        "docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.out_of_packet_owned_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Sol preserves the worker receipt and commit as untrusted, explicitly assumes ownership of the necessary closed diary-event schema change through a recovery lease, and will reconcile inventory tests and the cross-lane migration chain before deterministic and fresh independent verification.",
+        "prevention_control": "Before worker acceptance, compare the exact committed path set mechanically with the packet-owned path set; any extra path rejects worker self-closeout and requires either removal or a named Sol recovery lease with risk-proportional independent review.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-15.md",
+          "docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "open"
     }
   ]
 }

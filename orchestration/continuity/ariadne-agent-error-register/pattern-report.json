@@ -1,13 +1,13 @@
 {
-  "canonical_register_sha256": "db5a9d091f1d05f2d12e7f45c48f6070dde6e155b1c117ca6b51b9cd9546431d",
+  "canonical_register_sha256": "7c9fca9d30eecd37d1dfd1bacc9cd8ca35aa0577324ea173eb6404b6f81ad3d1",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 1,
       "canonical_unchanged": 17,
-      "untrusted_partial_worktree": 2
+      "untrusted_partial_worktree": 3
     },
     "by_category": {
-      "command_scope_violation": 2,
+      "command_scope_violation": 3,
       "evidence_misreport": 2,
       "harness_failure": 3,
       "output_contract_violation": 9,
@@ -17,7 +17,7 @@
       "transport_timeout": 1
     },
     "by_origin": {
-      "agent_behavior": 15,
+      "agent_behavior": 16,
       "harness": 3,
       "repository": 1,
       "transport": 1
@@ -25,7 +25,7 @@
     "by_process_severity": {
       "low": 5,
       "material": 5,
-      "moderate": 10
+      "moderate": 11
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 9,
@@ -33,20 +33,23 @@
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-orchestrator::orchestrator": 4,
       "deepseek-flash-workers::implementer": 1,
+      "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 2,
+      "implementer": 3,
       "orchestrator": 8,
       "verifier": 10
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 20,
+  "incident_count": 21,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
-  "open_incident_ids": [],
+  "open_incident_ids": [
+    "AER-0021"
+  ],
   "recurring_patterns": [
     {
       "categories": [
@@ -101,7 +104,7 @@
       ]
     }
   ],
-  "register_revision": 14,
+  "register_revision": 15,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-04"
+  "source_cutoff_on": "2026-08-05"
 }

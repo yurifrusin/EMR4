@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All checks pass and the commit is complete. Here is my worker closeout.\n\n## Five-source rehydration statement\n\n1. **`live_handover_current_baton`** \u2014 `AGENTS.md` \u00a73 (Current Baton) + \u00a76 standing decisions, read completely (474 lines).\n2. **`current_authority_allocation`** \u2014 `AGENTS.md` \u00a74 (Authority Allocation) + \u00a77 (Ariadne Operating Rules); DeepSeek V4 Flash/high bounded worker, no acceptance/integration authority.\n3. **`active_plan_and_acceptance`** \u2014 `docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md` (read fully), its threat-model delta, `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`, `orchestration/api_spine_adr.md`, `orchestration/api_spine_programme.md`, `orchestration/bernie_release_gates.md`, and the EMR4 API Steward skill/checklist pattern (referenced `references/review-checklist.md` is absent from checkout per prior Codex note; API-Steward checklist disposition follows the davida command-boundary closeout).\n4. **`protected_evidence_boundaries`** \u2014 `AGENTS.md` \u00a75 (Protected Evidence and Closed Gates) + \u00a76 (User Decision Boundaries); no protected/historical evidence touched.\n5. **`git_refs_and_worktree`** \u2014 verified clean worktree, branch `codex/worker-model-required-bureau-a5-1-check-in`, HEAD `902040a551668bf8e5a1dd9abaae379224995eec`, `master`/`handoff/current`/`origin/master`/`origin/handoff/current` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n## Exact commit / files / checks\n\n**Commit:** `52370189dac575bbbaa59a2458c6ea583edb8d6c` on worker branch (one commit, tree clean).\n\n**Files (14, all owned paths):** `app/config.py`, `app/models/appointments.py`, `app/models/diary_events.py`, `app/routers/appointments.py`, `app/routers/diary_events.py`, `app/schemas/appointments.py`, `app/schemas/diary_events.py`, `app/services/appointment_idempotency.py`, `app/services/diary_committed_events.py`, `alembic/versions/v1w2x3y4z5a6_add_a5_check_in_runtime.py` (new), `docs/api-spine/openapi/appointment-commands.yaml`, `docs/api-spine/openapi/diary-committed-events.yaml`, `docs/api-spine/async/integration-events.yaml`, `tests/test_model_required_bureau_a5_1_check_in_runtime.py` (new). No `docs/branding/` staged or modified; no other path touched.\n\n**Checks run:** Ruff (clean), `py_compile` (all owned files), AST parse, YAML parse (all 3 manifests), `git diff --check` (clean), Alembic single head (`v1w2x3y4z5a6` descending from `u0v1w2x3y4z5`). PostgreSQL pytest and the acceptance script were **not** run (Sol holds the serial DB/test lease).\n\n## Implementation scope completed (plan \u00a74 + A5.1 matrix)\n\n- Two routes: `POST /api/v1/appointments/proposals/check-in/{appointment_id}` (non-mutating, opaque HMAC 120s random-nonce purpose/actor/practice/state/area/freshness-bound token) and `POST /api/v1/appointments/proposals/check-in/confirm` (`confirmAppointmentCheckInProposal`).\n- Default-off flag + authored-synthetic practice allowlist gate, Receptionist-only authority; row-lock, fresh state/area/evidence revalidation.\n- One transaction: status\u2192Arrived, optional area assign/preserve, one command-bound audit, one `diary.appointment_checked_in.v1` event with exact patient-free payload, one bounded idempotency receipt.\n- Evidence-hash unique partial index + conflict-aware savepoint claim (`evidence_replay_rejected`); same-key replay before evidence consumption; changed-body conflict; in-progress denial.\n- Three committed-event constraints extended conditionally; migration adds `confirmation_evidence_hash`/`confirmation_evidence_consumed_at`, unique index, and check-in correlation constraints; downgrade restores originals.\n- Reschedule feed: exact `event_type` filters added to cursor validation and row selection; no check-in consumer/publisher/worker added.\n- New test file covers both source states, with/without assignment, preservation, non-mutation, gate/role, tamper/expiry/purpose/actor/practice, location/active-area/null-location, stale, no-op/terminal, replay/conflict/in-progress, cross-key evidence replay after restoration, concurrent single-winner, four rollback injections, exact payload, feed isolation, migration constraints/head, zero patient/provider patterns.\n\n## Blockers / integration notes (Sol-owned, not worker scope)\n\nThree frozen artifact/contract tests will require Sol lane-boundary reconciliation at integration (the plan's mandated route/schema additions inherently change these exact-set inventories, and they are not in my owned-path set):\n\n1. `tests/test_api_spine_appointment_openapi_drift_guard.py::test_router_route_inventory_is_exhaustive_for_current_appointment_router` \u2014 the two new check-in routes are not in `EXPECTED_ROUTE_INVENTORY`.\n2. `tests/test_api_spine_appointment_openapi_drift_guard.py::test_openapi_path_set_changes_are_intentional` \u2014 the two new OpenAPI check-in paths are not in `EXPECTED_OPENAPI_PATHS`.\n3. `tests/test_api_spine_appointment_idempotency_model_migration.py::test_model_declares_appointment_command_idempotency_table_contract` \u2014 the plan-mandated `confirmation_evidence_hash`/`confirmation_evidence_consumed_at` columns change the exact `REQUIRED_COLUMNS` tuple equality.\n\nBehavioral reschedule/status-confirm/past-date/raw-compat suites are structurally unaffected. No provider, patient, product, GraphQL, deployment, release, or protected-ref action occurred.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 190432,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 37566720,
+    "output_tokens": 156650,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 23.66691999999999,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
