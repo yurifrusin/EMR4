@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_paired_a5_1_b4_1_command_runtime_descendant",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Gate -1, Gate zero, A1/B1, A2/B2, A3/B3 and A4 are accepted. A4 is commit add94f3c40398f5972fb197ae505373292af1b08 with 116 of 116 tests, Ruff, 13 in-memory compiles, canonical evidence hashes, audit chains and zero-residue cleanup passed. The controlled-recovery plan now authorizes planning and implementation only for provider-free A5.1 and B4.1: explicit human confirmation, current practice identity and scope, deterministic revalidation, durable idempotency, atomic truth/audit/outbox, replay rejection and deterministic readback.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted movement through dependency-satisfied planned gates without a ceremonial pause. Sol owns architecture, exact scope, acceptance, recovery and integration; DeepSeek V4 Flash/high through Claude Code --bare may implement bounded separable work, and Gemini 3.6 Flash/high through a fresh Antigravity project may perform independent veto review. No worker or reviewer receives integration, protected-ref, provider, product-data, production, deployment or release authority.",
+    "git_refs_and_worktree": "HEAD, local codex/ariadne-bernie-davida-parallel-seam and origin/codex/ariadne-bernie-davida-parallel-seam are exactly add94f3c40398f5972fb197ae505373292af1b08. Local/origin master and local/origin handoff/current are all exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index and tracked worktree are clean; only docs/branding plus the preserved Consultant, Gate-minus-one, A3/B3, A4 and this new A5/B4 preplan receipt/state evidence are untracked. Any later staging must use explicit paths only; git add . and git add -A are forbidden.",
+    "live_handover_current_baton": "The live baton records model_required_bureau_a4_product_read_ui_pass as accepted and published on the non-protected task branch, and names the paired A5.1 Rayleen check-in/status proposal-confirm path and B4.1 Davida practitioner default-location proposal-confirm runtime as the next dependency-satisfied safe descendant.",
+    "protected_evidence_boundaries": "Holdouts v1-v10 remain sealed and may not be accessed, enumerated, hashed or listed. Patient, clinical, product-derived, participant, protected and production data; raw model content; provider calls; autonomous action; GraphQL mutation; external event transport; deployment; release; Pages; protected-ref movement and protected integration remain closed. docs/branding must remain byte-for-byte untouched and never broadly staged; the existing Consultant, Gate-minus-one, A3/B3 and A4 pre-push receipt/state pairs remain preserved outside the tracked candidate unless a later active handover explicitly directs otherwise."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

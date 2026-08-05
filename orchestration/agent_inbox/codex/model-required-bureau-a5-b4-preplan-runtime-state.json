@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_paired_a5_1_b4_1_command_runtime_descendant",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton records model_required_bureau_a4_product_read_ui_pass as accepted and published on the non-protected task branch, and names the paired A5.1 Rayleen check-in/status proposal-confirm path and B4.1 Davida practitioner default-location proposal-confirm runtime as the next dependency-satisfied safe descendant.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted movement through dependency-satisfied planned gates without a ceremonial pause. Sol owns architecture, exact scope, acceptance, recovery and integration; DeepSeek V4 Flash/high through Claude Code --bare may implement bounded separable work, and Gemini 3.6 Flash/high through a fresh Antigravity project may perform independent veto review. No worker or reviewer receives integration, protected-ref, provider, product-data, production, deployment or release authority.",
+    "active_plan_and_acceptance": "Gate -1, Gate zero, A1/B1, A2/B2, A3/B3 and A4 are accepted. A4 is commit add94f3c40398f5972fb197ae505373292af1b08 with 116 of 116 tests, Ruff, 13 in-memory compiles, canonical evidence hashes, audit chains and zero-residue cleanup passed. The controlled-recovery plan now authorizes planning and implementation only for provider-free A5.1 and B4.1: explicit human confirmation, current practice identity and scope, deterministic revalidation, durable idempotency, atomic truth/audit/outbox, replay rejection and deterministic readback.",
+    "protected_evidence_boundaries": "Holdouts v1-v10 remain sealed and may not be accessed, enumerated, hashed or listed. Patient, clinical, product-derived, participant, protected and production data; raw model content; provider calls; autonomous action; GraphQL mutation; external event transport; deployment; release; Pages; protected-ref movement and protected integration remain closed. docs/branding must remain byte-for-byte untouched and never broadly staged; the existing Consultant, Gate-minus-one, A3/B3 and A4 pre-push receipt/state pairs remain preserved outside the tracked candidate unless a later active handover explicitly directs otherwise.",
+    "git_refs_and_worktree": "HEAD, local codex/ariadne-bernie-davida-parallel-seam and origin/codex/ariadne-bernie-davida-parallel-seam are exactly add94f3c40398f5972fb197ae505373292af1b08. Local/origin master and local/origin handoff/current are all exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index and tracked worktree are clean; only docs/branding plus the preserved Consultant, Gate-minus-one, A3/B3, A4 and this new A5/B4 preplan receipt/state evidence are untracked. Any later staging must use explicit paths only; git add . and git add -A are forbidden."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "a5_b4_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the five-source rehydration, verified the exact accepted A4 task head and all protected refs, and is freezing the paired A5.1/B4.1 boundary before any worker dispatch."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The prior native analysis lane is interrupted and holds no active assignment, worktree or integration authority."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini 3.6 Flash/high through a fresh Antigravity project remains the preferred independent veto reviewer after deterministic gates; no call has been made for this descendant."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek V4 Flash/high through Claude Code --bare remains the preferred bounded implementation/test worker; no call has been made for this descendant."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is an unselected fallback adapter and is not assigned or used."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude model lane is assigned; Claude Code --bare is only the declared DeepSeek transport when that worker is dispatched."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

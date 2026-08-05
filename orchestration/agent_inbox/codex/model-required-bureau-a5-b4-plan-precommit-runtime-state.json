@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_a5_1_b4_1_plan_candidate_for_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton names paired A5.1 Rayleen check-in/status proposal-confirm and B4.1 Davida practitioner default-location command runtime as the next dependency-satisfied descendant after accepted A4 publication.",
+    "current_authority_allocation": "Standing programme authority permits Sol to freeze and commit the non-protected plan candidate without a ceremonial pause. Sol retains architecture, acceptance and integration authority; DeepSeek V4 Flash/high through Claude Code --bare is reserved for later bounded implementation and Gemini 3.6 Flash/high through a fresh Antigravity project is reserved for independent veto. Neither receives protected-ref, provider, product-data, deployment or release authority.",
+    "active_plan_and_acceptance": "The paired plan SHA-256 is 9d511eb69ab1e5b6924f735c1497c0148b253324ef12dba978af1a57a4292b2b and its threat-model delta SHA-256 is 96332ae7eeef17cb36de8c8ba638f11a5110963ac7e556b5e4a8f4d9338f2ab7. It freezes a narrowly extended existing signed appointment check-in path plus a separate Davida proposal/human-attestation/confirm path that closes the server-held evidence issuance gap. The preplan receipt passed with SHA-256 454b8869723f8590b02795cf08d9396291428a7106fc5c00235b084d07835a52. The focused Ariadne allocation, Antigravity and orchestrator-preflight suite passed 33 of 33; git diff --check passed.",
+    "protected_evidence_boundaries": "The plan candidate grants no product runtime provider call, patient or clinical data, autonomous action, GraphQL mutation, external event delivery, production, deployment, release, Pages, protected integration or protected-ref movement. Holdouts v1-v10 remain sealed. docs/branding and the existing Consultant, Gate-minus-one, A3/B3 and A4 pre-push receipt/state files remain untracked and untouched. Staging is limited to the two new plan documents and the A5/B4 preplan and plan-precommit receipt/state files by explicit path.",
+    "git_refs_and_worktree": "HEAD, local and origin codex/ariadne-bernie-davida-parallel-seam are exactly add94f3c40398f5972fb197ae505373292af1b08. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index are clean before explicit staging; all unrelated user-owned untracked files remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "a5_b4_plan_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol authored the exact paired plan candidate, restored API-spine invariants and passed deterministic local checks."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A bounded read-only Rayleen analysis lane is active and has no edit, commit, integration or acceptance authority."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini 3.6 Flash/high is assigned only after this exact plan candidate is committed into a clean independent-review worktree."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek V4 Flash/high implementation is held until the plan passes the independent architecture veto."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected or used."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude model lane is assigned; Claude Code --bare remains only the declared transport for a later DeepSeek worker."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
