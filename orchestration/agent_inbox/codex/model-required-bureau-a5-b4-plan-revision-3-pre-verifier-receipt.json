@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_fresh_gemini_a5_b4_plan_revision_3_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate d7276fa63df16b4129fa523226d84c3cb2c5996e retains the revision 2 pass and additionally freezes no-remove/no-move A5 waiting-area semantics, default-off B4 feature/practice admission, bounded correlation/idempotency headers, a dedicated server-only signing secret and the exact unpublished B4 outbox type/schema/payload. Plan SHA-256 is 81f5a60e45e6b272f186f032e8e1339a0cde18db8f0480789303c34ed219813c; threat-delta SHA-256 is 9132b35fc8fe3cd2af7ed4fffa52aa14e786175b9333bdc2960977a420bddc67. Focused Ariadne tests passed 27 of 27 after post-compaction rehydration and git diff --check passed. The fresh verifier worktree preflight passed at the exact candidate head, clean=true, provider_or_model_calls=0.",
+    "current_authority_allocation": "Sol owns architecture, acceptance, recovery and integration. A fresh Gemini 3.6 Flash/high Antigravity project has read-only veto authority on exact revision 3 and may return only pass or revision_required. DeepSeek implementation remains held until pass. No verifier or worker has protected-ref, product-provider-runtime, product-data, deployment or release authority.",
+    "git_refs_and_worktree": "Primary task HEAD is d7276fa63df16b4129fa523226d84c3cb2c5996e. Fresh clean review worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a5-b4-plan-gemini-review-3 is on non-protected branch codex/review-model-required-bureau-a5-b4-plan-3 at the same exact head. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Preserved primary untracked files remain outside the candidate and index.",
+    "live_handover_current_baton": "The live baton requires the paired provider-free A5.1 Rayleen check-in and B4.1 Davida default-location command descendant. Revision 3 is the frozen final plan candidate before implementation dispatch.",
+    "protected_evidence_boundaries": "The fresh review excludes all prior A5/B4 review, analysis, packet, receipt and preflight artifacts. Holdouts v1-v10, docs/branding, patient/clinical/product-derived/participant/protected/production data, product-provider runtime, autonomous action, deployment, release, Pages and protected refs remain closed. The reviewer is read-only and may inspect only current authority, active plan and relevant source/API contracts."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
