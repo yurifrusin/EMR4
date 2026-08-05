@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/live-recovery-attempt-receipt.v1.json",
+  "title": "Live recovery attempt receipt",
+  "description": "Closed terminal receipt released only after a distinct fresh process observation and loopback HTTP readback prove exact generation 2, target nonce, artifact digest and healthy state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_label",
+    "result",
+    "runbook_id",
+    "target",
+    "generation",
+    "state",
+    "artifact_sha256",
+    "target_nonce",
+    "process_observation_id",
+    "http_readback_observation_id",
+    "attempt_evidence_sha256",
+    "rollback",
+    "operation_counters",
+    "issued_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.live_recovery_attempt_receipt.v1"},
+    "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
+    "result": {"const": "live_development_recovery_verified"},
+    "runbook_id": {"const": "start-c5-disposable-service.v1"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id"],
+      "properties": {
+        "environment": {"const": "c5_disposable_authored_synthetic"},
+        "kind": {"const": "task_owned_loopback_http_service"},
+        "target_id": {"const": "synthetic:c5-recovery-target"}
+      }
+    },
+    "generation": {"const": 2},
+    "state": {"const": "healthy"},
+    "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "target_nonce": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"},
+    "process_observation_id": {"type": "string", "pattern": "^obs-[a-z0-9-]+$"},
+    "http_readback_observation_id": {"type": "string", "pattern": "^obs-[a-z0-9-]+$"},
+    "attempt_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invoked", "verified"],
+      "properties": {
+        "invoked": {"const": false},
+        "verified": {"type": ["boolean", "null"]}
+      }
+    },
+    "operation_counters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "process_starts",
+        "process_stops",
+        "socket_binds",
+        "socket_connects",
+        "port_allocations",
+        "directory_creates",
+        "directory_removals",
+        "provider_calls",
+        "database_operations",
+        "product_operations",
+        "cloud_iam_operations",
+        "deployment_operations",
+        "external_event_operations",
+        "protected_operations",
+        "shell_operations",
+        "sql_operations",
+        "network_operations",
+        "dynamic_import_operations",
+        "eval_exec_operations",
+        "reflection_operations"
+      ],
+      "properties": {
+        "process_starts": {"const": 0},
+        "process_stops": {"const": 0},
+        "socket_binds": {"const": 0},
+        "socket_connects": {"const": 0},
+        "port_allocations": {"const": 0},
+        "directory_creates": {"const": 0},
+        "directory_removals": {"const": 0},
+        "provider_calls": {"const": 0},
+        "database_operations": {"const": 0},
+        "product_operations": {"const": 0},
+        "cloud_iam_operations": {"const": 0},
+        "deployment_operations": {"const": 0},
+        "external_event_operations": {"const": 0},
+        "protected_operations": {"const": 0},
+        "shell_operations": {"const": 0},
+        "sql_operations": {"const": 0},
+        "network_operations": {"const": 0},
+        "dynamic_import_operations": {"const": 0},
+        "eval_exec_operations": {"const": 0},
+        "reflection_operations": {"const": 0}
+      }
+    },
+    "issued_at": {"type": "string", "format": "date-time"}
+  }
+}

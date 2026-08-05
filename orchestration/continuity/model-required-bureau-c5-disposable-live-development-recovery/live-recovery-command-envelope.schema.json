@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/live-recovery-command-envelope.v1.json",
+  "title": "Backend-owned live recovery command envelope",
+  "description": "Closed backend-owned command envelope consumed by the separate C5 actuator. Carries server-held loopback host, OS-assigned port, target nonce, generation, artifact digest and readback contract. Never emitted by the cognitive or proof plane.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_label",
+    "runbook_id",
+    "rollback_runbook_id",
+    "target",
+    "host",
+    "port",
+    "generation",
+    "target_nonce",
+    "artifact_sha256",
+    "parameters",
+    "approval_binding",
+    "evidence_binding",
+    "idempotency_key",
+    "correlation_id",
+    "issued_at",
+    "readback_contract"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.live_recovery_command_envelope.v1"},
+    "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
+    "runbook_id": {"const": "start-c5-disposable-service.v1"},
+    "rollback_runbook_id": {"const": "stop-c5-disposable-service.v1"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id"],
+      "properties": {
+        "environment": {"const": "c5_disposable_authored_synthetic"},
+        "kind": {"const": "task_owned_loopback_http_service"},
+        "target_id": {"const": "synthetic:c5-recovery-target"}
+      }
+    },
+    "host": {"const": "127.0.0.1"},
+    "port": {"type": "integer", "minimum": 1, "maximum": 65535},
+    "generation": {"const": 2},
+    "target_nonce": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"},
+    "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "parameters": {
+      "type": "object",
+      "maxProperties": 0,
+      "additionalProperties": false
+    },
+    "approval_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approval_id", "approval_sha256", "plan_sha256"],
+      "properties": {
+        "approval_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+        "approval_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "evidence_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "reference_sha256"],
+      "properties": {
+        "evidence_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+        "reference_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "idempotency_key": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "correlation_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "readback_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generation", "state", "artifact_sha256", "target_nonce"],
+      "properties": {
+        "generation": {"const": 2},
+        "state": {"const": "healthy"},
+        "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "target_nonce": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"}
+      }
+    }
+  }
+}

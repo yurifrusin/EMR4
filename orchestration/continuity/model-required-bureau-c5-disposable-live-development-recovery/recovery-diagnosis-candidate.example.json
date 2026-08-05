@@ -1,0 +1,27 @@
+{
+  "diagnosis": {
+    "cause": "stopped_process",
+    "evidence_observation_ids": [
+      "post-fault"
+    ],
+    "hypothesis": "The controller-owned disposable loopback process is no longer running; the loopback health read is connection-refused.",
+    "impact": "The disposable authored-synthetic loopback service is absent.",
+    "missing_evidence": []
+  },
+  "executable_content": false,
+  "expected_effect": "A fresh pinned generation 2 loopback process becomes reachable and healthy.",
+  "frame_digest": "d650a505b599f1ccc255eae27cce702edaf3e6a6d8f48382140e7ca308e37874",
+  "operator_explanation": "The controller terminated its owned child handle and both fresh observations agree the process is absent and the loopback read is refused. Starting the pinned service artifact is the only eligible runbook.",
+  "parameters": {},
+  "risk_tier": "reversible_scoped_service_recovery",
+  "rollback_runbook_id": "stop-c5-disposable-service.v1",
+  "schema_version": "emr4.recovery_diagnosis_candidate.v1",
+  "selected_runbook": "start-c5-disposable-service.v1",
+  "success_claim": false,
+  "target": {
+    "environment": "c5_disposable_authored_synthetic",
+    "kind": "task_owned_loopback_http_service",
+    "target_id": "synthetic:c5-recovery-target"
+  },
+  "uncertainty": "Low; the stopped-process diagnosis is grounded in the exact post-fault observation."
+}

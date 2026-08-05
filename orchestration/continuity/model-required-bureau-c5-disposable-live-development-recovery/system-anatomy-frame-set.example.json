@@ -1,0 +1,65 @@
+{
+  "catalog_digest": "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a",
+  "context_absence": [
+    "patient",
+    "product",
+    "database",
+    "credential",
+    "ordinary_service",
+    "port",
+    "pid",
+    "nonce",
+    "path",
+    "environment",
+    "log"
+  ],
+  "evidence_label": "occupied_authored_synthetic_disposable_live_development_recovery",
+  "frame_digest": "d650a505b599f1ccc255eae27cce702edaf3e6a6d8f48382140e7ca308e37874",
+  "observations": [
+    {
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "freshness_seconds": 300,
+      "generation": 1,
+      "kind": "baseline",
+      "loopback_health_disposition": "reachable",
+      "observation_id": "baseline-health",
+      "observation_source_id": "obs-baseline-0001",
+      "observed_at": "2026-08-05T08:00:10Z",
+      "process_disposition": "alive"
+    },
+    {
+      "content_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "freshness_seconds": 300,
+      "generation": null,
+      "kind": "post_fault",
+      "loopback_health_disposition": "connection_refused",
+      "observation_id": "post-fault",
+      "observation_source_id": "obs-postfault-0001",
+      "observed_at": "2026-08-05T08:00:40Z",
+      "process_disposition": "absent"
+    }
+  ],
+  "policy_digest": "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450",
+  "required_approval_class": "ordinary_confirmation",
+  "risk_tier": "reversible_scoped_service_recovery",
+  "runbooks": {
+    "forward": {
+      "description": "Start the pinned C5 disposable loopback service at generation 2.",
+      "executable": false,
+      "runbook_id": "start-c5-disposable-service.v1"
+    },
+    "rollback": {
+      "description": "Stop the controller-owned C5 disposable loopback process and prove absence.",
+      "executable": false,
+      "runbook_id": "stop-c5-disposable-service.v1"
+    }
+  },
+  "schema_version": "emr4.system_anatomy_frame_set.v1",
+  "service_artifact_sha256": "76373e9dc3e1f1d7acb47c47f6aa6fe8509870d63d1d73fa4d23f44a77284228",
+  "target": {
+    "environment": "c5_disposable_authored_synthetic",
+    "kind": "task_owned_loopback_http_service",
+    "target_id": "synthetic:c5-recovery-target"
+  },
+  "target_reference": "c5:recovery-target-0001"
+}

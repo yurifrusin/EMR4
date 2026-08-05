@@ -1,0 +1,25 @@
+{
+  "approval_id": "91000000-0000-4000-8000-000000000001",
+  "approval_sha256": "2295c2218624b237e9ef58359be2dd36a37e3c2c5e214ee519b2968d14343e3b",
+  "artifact_sha256": "76373e9dc3e1f1d7acb47c47f6aa6fe8509870d63d1d73fa4d23f44a77284228",
+  "correlation_id": "93000000-0000-4000-8000-000000000001",
+  "evidence_id": "92000000-0000-4000-8000-000000000001",
+  "expires_at": "2026-08-05T08:05:00Z",
+  "generation": 2,
+  "issued_at": "2026-08-05T08:01:00Z",
+  "nonce": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+  "plan_revision": 1,
+  "plan_sha256": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15",
+  "reference_sha256": "7c3cafcb8e64484cc007b82e58b259525dd686c578bc1588f0b5d39bb99d1415",
+  "rollback_runbook_id": "stop-c5-disposable-service.v1",
+  "runbook_id": "start-c5-disposable-service.v1",
+  "schema_version": "emr4.execution_evidence.v1",
+  "state": "issued",
+  "supersession_key": "synthetic.c5-recovery-target.recovery",
+  "target": {
+    "environment": "c5_disposable_authored_synthetic",
+    "kind": "task_owned_loopback_http_service",
+    "target_id": "synthetic:c5-recovery-target"
+  },
+  "target_nonce": "9c3d5f7e1a2b4c8d0e6f1a2b3c4d5e6f"
+}

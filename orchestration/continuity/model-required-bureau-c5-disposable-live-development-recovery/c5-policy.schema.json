@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/c5-policy.v1.json",
+  "title": "Source-bound C5 recovery policy and immutable two-entry runbook catalog",
+  "description": "Closed source-bound policy binding the exact committed C5 plan hash, target, host, risk tier, required approval class, standing approval basis, evidence label and the immutable two-entry runbook catalog with a reproducible catalog digest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "source_bound_plan",
+    "plan_sha256",
+    "environment",
+    "target",
+    "host",
+    "risk_tier",
+    "required_approval_class",
+    "approval_basis",
+    "evidence_label",
+    "runbook_catalog",
+    "expiry_seconds",
+    "scope_expansion"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.c5_policy.v1"},
+    "policy_version": {"const": "emr4.c5_recovery_policy.v1"},
+    "source_bound_plan": {"const": "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md"},
+    "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "environment": {"const": "c5_disposable_authored_synthetic"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id"],
+      "properties": {
+        "environment": {"const": "c5_disposable_authored_synthetic"},
+        "kind": {"const": "task_owned_loopback_http_service"},
+        "target_id": {"const": "synthetic:c5-recovery-target"}
+      }
+    },
+    "host": {"const": "127.0.0.1"},
+    "risk_tier": {"const": "reversible_scoped_service_recovery"},
+    "required_approval_class": {"const": "ordinary_confirmation"},
+    "approval_basis": {"const": "yuri_standing_programme_authority_2026-08-04"},
+    "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
+    "runbook_catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalog_version", "catalog_digest", "entries", "immutable"],
+      "properties": {
+        "catalog_version": {"const": "emr4.c5_runbook_catalog.v1"},
+        "catalog_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "entries": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "entry_id",
+              "runbook_id",
+              "rollback_runbook_id",
+              "operation_class",
+              "risk_tier",
+              "required_approval_class",
+              "target",
+              "parameter_schema",
+              "expected_effect",
+              "executable",
+              "immutable"
+            ],
+            "properties": {
+              "entry_id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+              "runbook_id": {"enum": ["start-c5-disposable-service.v1", "stop-c5-disposable-service.v1"]},
+              "rollback_runbook_id": {"type": ["string", "null"]},
+              "operation_class": {"const": "task_owned_loopback_http_service_recovery"},
+              "risk_tier": {"const": "reversible_scoped_service_recovery"},
+              "required_approval_class": {"const": "ordinary_confirmation"},
+              "target": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["environment", "kind", "target_id"],
+                "properties": {
+                  "environment": {"const": "c5_disposable_authored_synthetic"},
+                  "kind": {"const": "task_owned_loopback_http_service"},
+                  "target_id": {"const": "synthetic:c5-recovery-target"}
+                }
+              },
+              "parameter_schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["type", "properties", "additionalProperties"],
+                "properties": {
+                  "type": {"const": "object"},
+                  "properties": {"type": "object", "maxProperties": 0, "additionalProperties": false},
+                  "additionalProperties": {"const": false}
+                }
+              },
+              "expected_effect": {"enum": ["fresh_generation_healthy_readback", "owned_process_absent_connection_refused"]},
+              "executable": {"const": false},
+              "immutable": {"const": true}
+            }
+          }
+        },
+        "immutable": {"const": true}
+      }
+    },
+    "expiry_seconds": {"const": 300},
+    "scope_expansion": {"const": false}
+  }
+}

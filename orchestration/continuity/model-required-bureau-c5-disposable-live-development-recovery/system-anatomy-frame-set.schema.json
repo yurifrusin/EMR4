@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/system-anatomy-frame-set.v1.json",
+  "title": "Closed system-anatomy frame set for the C5 provider cell",
+  "description": "Minimized provider-visible frame set containing only typed technical observations and non-executable runbook ids. Excludes port, PID, nonce, path, environment, credential, log and product values.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_label",
+    "target",
+    "target_reference",
+    "service_artifact_sha256",
+    "policy_digest",
+    "catalog_digest",
+    "observations",
+    "runbooks",
+    "risk_tier",
+    "required_approval_class",
+    "context_absence",
+    "frame_digest"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.system_anatomy_frame_set.v1"},
+    "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id"],
+      "properties": {
+        "environment": {"const": "c5_disposable_authored_synthetic"},
+        "kind": {"const": "task_owned_loopback_http_service"},
+        "target_id": {"const": "synthetic:c5-recovery-target"}
+      }
+    },
+    "target_reference": {"type": "string", "minLength": 8, "maxLength": 128, "pattern": "^c5:[a-z0-9-]+$"},
+    "service_artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "policy_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "catalog_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "observations": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "observation_id",
+          "observation_source_id",
+          "kind",
+          "observed_at",
+          "freshness_seconds",
+          "process_disposition",
+          "loopback_health_disposition",
+          "generation",
+          "content_sha256"
+        ],
+        "properties": {
+          "observation_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
+          "observation_source_id": {"type": "string", "pattern": "^obs-[a-z0-9-]+$"},
+          "kind": {"enum": ["baseline", "post_fault"]},
+          "observed_at": {"type": "string", "format": "date-time"},
+          "freshness_seconds": {"const": 300},
+          "process_disposition": {"enum": ["alive", "absent"]},
+          "loopback_health_disposition": {"enum": ["reachable", "connection_refused"]},
+          "generation": {"type": ["integer", "null"], "minimum": 1, "maximum": 2},
+          "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "runbooks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["forward", "rollback"],
+      "properties": {
+        "forward": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["runbook_id", "description", "executable"],
+          "properties": {
+            "runbook_id": {"const": "start-c5-disposable-service.v1"},
+            "description": {"type": "string", "minLength": 1, "maxLength": 200},
+            "executable": {"const": false}
+          }
+        },
+        "rollback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["runbook_id", "description", "executable"],
+          "properties": {
+            "runbook_id": {"const": "stop-c5-disposable-service.v1"},
+            "description": {"type": "string", "minLength": 1, "maxLength": 200},
+            "executable": {"const": false}
+          }
+        }
+      }
+    },
+    "risk_tier": {"const": "reversible_scoped_service_recovery"},
+    "required_approval_class": {"const": "ordinary_confirmation"},
+    "context_absence": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "items": {"enum": ["patient", "product", "database", "credential", "ordinary_service", "port", "pid", "nonce", "path", "environment", "log"]}
+    },
+    "frame_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "emr4.execution_approval.v1",
+  "approval_id": "91000000-0000-4000-8000-000000000001",
+  "approval_basis": "yuri_standing_programme_authority_2026-08-04",
+  "plan_sha256": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15",
+  "plan_revision": 1,
+  "target": {
+    "environment": "c5_disposable_authored_synthetic",
+    "kind": "task_owned_loopback_http_service",
+    "target_id": "synthetic:c5-recovery-target"
+  },
+  "fault": "controller_terminates_owned_child",
+  "runbook_id": "start-c5-disposable-service.v1",
+  "rollback_runbook_id": "stop-c5-disposable-service.v1",
+  "provider": {
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "identity": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "region": "australia-southeast1",
+    "endpoint": "australia-southeast1-aiplatform.googleapis.com"
+  },
+  "cost_ceiling_usd": 0.50,
+  "call_limit": 2,
+  "thinking_budget": 1024,
+  "max_output_tokens": 2048,
+  "expires_at": "2026-08-05T08:05:00Z",
+  "rehearsal_count": 1,
+  "evidence_label": "occupied_authored_synthetic_disposable_live_development_recovery",
+  "scope_expansion": false,
+  "non_transferable": true
+}

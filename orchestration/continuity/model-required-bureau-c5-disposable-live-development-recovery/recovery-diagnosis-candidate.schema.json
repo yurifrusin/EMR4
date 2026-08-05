@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/recovery-diagnosis-candidate.v1.json",
+  "title": "Closed model-required recovery diagnosis candidate",
+  "description": "Closed provider candidate shape with evidence-linked hypothesis, missing evidence, impact, exact runbook selection, expected effect, rollback id, uncertainty and operator explanation. Contains no shell, SQL, PowerShell, path, URL, port, PID, module, callable, environment-variable, cloud, IAM or free-form execution field.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "frame_digest",
+    "diagnosis",
+    "selected_runbook",
+    "expected_effect",
+    "rollback_runbook_id",
+    "risk_tier",
+    "target",
+    "parameters",
+    "uncertainty",
+    "operator_explanation",
+    "success_claim",
+    "executable_content"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.recovery_diagnosis_candidate.v1"},
+    "frame_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "diagnosis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hypothesis", "evidence_observation_ids", "missing_evidence", "impact", "cause"],
+      "properties": {
+        "hypothesis": {"type": "string", "minLength": 1, "maxLength": 400},
+        "evidence_observation_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {"type": "string", "pattern": "^[a-z0-9_-]+$"}
+        },
+        "missing_evidence": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {"type": "string", "minLength": 1, "maxLength": 120}
+        },
+        "impact": {"type": "string", "minLength": 1, "maxLength": 200},
+        "cause": {"const": "stopped_process"}
+      }
+    },
+    "selected_runbook": {"const": "start-c5-disposable-service.v1"},
+    "expected_effect": {"type": "string", "minLength": 1, "maxLength": 200},
+    "rollback_runbook_id": {"const": "stop-c5-disposable-service.v1"},
+    "risk_tier": {"const": "reversible_scoped_service_recovery"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id"],
+      "properties": {
+        "environment": {"const": "c5_disposable_authored_synthetic"},
+        "kind": {"const": "task_owned_loopback_http_service"},
+        "target_id": {"const": "synthetic:c5-recovery-target"}
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "maxProperties": 0,
+      "additionalProperties": false
+    },
+    "uncertainty": {"type": "string", "minLength": 1, "maxLength": 200},
+    "operator_explanation": {"type": "string", "minLength": 1, "maxLength": 400},
+    "success_claim": {"const": false},
+    "executable_content": {"const": false}
+  }
+}

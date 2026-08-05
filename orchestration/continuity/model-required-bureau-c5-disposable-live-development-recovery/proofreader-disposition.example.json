@@ -1,0 +1,25 @@
+{
+  "admitted": true,
+  "candidate_digest": "e8e055ec6a351447a93b295f678ebe72c8804201a8343593ec6d5fa1324dab88",
+  "correction_ticket": null,
+  "frame_digest": "d650a505b599f1ccc255eae27cce702edaf3e6a6d8f48382140e7ca308e37874",
+  "grounding": {
+    "every_hypothesis_grounded": true,
+    "exact_rollback_bound": true,
+    "exact_runbook_bound": true,
+    "exact_stopped_process_diagnosis": true,
+    "exact_target_bound": true,
+    "no_credential_request": true,
+    "no_executable_content": true,
+    "no_hidden_authority": true,
+    "no_new_observation": true,
+    "no_product_reference": true,
+    "no_scope_expansion": true,
+    "no_sovereignty_claim": true,
+    "no_success_claim": true,
+    "parameters_empty": true,
+    "risk_tier_bound": true
+  },
+  "reason_codes": [],
+  "schema_version": "emr4.proofreader_disposition.v1"
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/execution-evidence.v1.json",
+  "title": "Server-held one-use execution evidence record",
+  "description": "Closed server-held record binding the exact approval, plan, target, runbook, rollback, target nonce, generation, artifact digest, correlation, nonce, issued/expiry and one-use state. Only the one-way SHA-256 digest of the opaque random reference is stored; the raw reference is returned once and never persisted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "reference_sha256",
+    "state",
+    "approval_id",
+    "approval_sha256",
+    "plan_sha256",
+    "plan_revision",
+    "target",
+    "runbook_id",
+    "rollback_runbook_id",
+    "target_nonce",
+    "generation",
+    "artifact_sha256",
+    "correlation_id",
+    "nonce",
+    "issued_at",
+    "expires_at",
+    "supersession_key"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.execution_evidence.v1"},
+    "evidence_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "reference_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "state": {"enum": ["issued", "consumed"]},
+    "approval_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "approval_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "plan_revision": {"const": 1},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id"],
+      "properties": {
+        "environment": {"const": "c5_disposable_authored_synthetic"},
+        "kind": {"const": "task_owned_loopback_http_service"},
+        "target_id": {"const": "synthetic:c5-recovery-target"}
+      }
+    },
+    "runbook_id": {"const": "start-c5-disposable-service.v1"},
+    "rollback_runbook_id": {"const": "stop-c5-disposable-service.v1"},
+    "target_nonce": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"},
+    "generation": {"const": 2},
+    "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "correlation_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "nonce": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "supersession_key": {"const": "synthetic.c5-recovery-target.recovery"}
+  }
+}

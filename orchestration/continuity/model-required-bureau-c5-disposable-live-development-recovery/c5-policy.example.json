@@ -1,0 +1,68 @@
+{
+  "schema_version": "emr4.c5_policy.v1",
+  "policy_version": "emr4.c5_recovery_policy.v1",
+  "source_bound_plan": "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md",
+  "plan_sha256": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15",
+  "environment": "c5_disposable_authored_synthetic",
+  "target": {
+    "environment": "c5_disposable_authored_synthetic",
+    "kind": "task_owned_loopback_http_service",
+    "target_id": "synthetic:c5-recovery-target"
+  },
+  "host": "127.0.0.1",
+  "risk_tier": "reversible_scoped_service_recovery",
+  "required_approval_class": "ordinary_confirmation",
+  "approval_basis": "yuri_standing_programme_authority_2026-08-04",
+  "evidence_label": "occupied_authored_synthetic_disposable_live_development_recovery",
+  "runbook_catalog": {
+    "catalog_version": "emr4.c5_runbook_catalog.v1",
+    "catalog_digest": "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a",
+    "entries": [
+      {
+        "entry_id": "start-c5-disposable-service-v1-entry",
+        "runbook_id": "start-c5-disposable-service.v1",
+        "rollback_runbook_id": "stop-c5-disposable-service.v1",
+        "operation_class": "task_owned_loopback_http_service_recovery",
+        "risk_tier": "reversible_scoped_service_recovery",
+        "required_approval_class": "ordinary_confirmation",
+        "target": {
+          "environment": "c5_disposable_authored_synthetic",
+          "kind": "task_owned_loopback_http_service",
+          "target_id": "synthetic:c5-recovery-target"
+        },
+        "parameter_schema": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        },
+        "expected_effect": "fresh_generation_healthy_readback",
+        "executable": false,
+        "immutable": true
+      },
+      {
+        "entry_id": "stop-c5-disposable-service-v1-entry",
+        "runbook_id": "stop-c5-disposable-service.v1",
+        "rollback_runbook_id": null,
+        "operation_class": "task_owned_loopback_http_service_recovery",
+        "risk_tier": "reversible_scoped_service_recovery",
+        "required_approval_class": "ordinary_confirmation",
+        "target": {
+          "environment": "c5_disposable_authored_synthetic",
+          "kind": "task_owned_loopback_http_service",
+          "target_id": "synthetic:c5-recovery-target"
+        },
+        "parameter_schema": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        },
+        "expected_effect": "owned_process_absent_connection_refused",
+        "executable": false,
+        "immutable": true
+      }
+    ],
+    "immutable": true
+  },
+  "expiry_seconds": 300,
+  "scope_expansion": false
+}

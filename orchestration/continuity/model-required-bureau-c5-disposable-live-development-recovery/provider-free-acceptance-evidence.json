@@ -1,0 +1,347 @@
+{
+  "approval": {
+    "exact_plan_bound": true,
+    "expiring": true,
+    "non_transferable": true,
+    "one_rehearsal": true,
+    "scope_expansion_false": true
+  },
+  "argument_vector": {
+    "argument_count": 11,
+    "contains_no_shell_string": true,
+    "environment_credential_free": true,
+    "executable_override_rejected": true,
+    "host_override_rejected": true,
+    "module_override_rejected": true,
+    "vector": [
+      "C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-c5-implementation\\.venv\\Scripts\\python.exe",
+      "-I",
+      "C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-c5-implementation\\scripts\\model_required_bureau_c5_target.py",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "44123",
+      "--nonce",
+      "9c3d5f7e1a2b4c8d0e6f1a2b3c4d5e6f",
+      "--generation",
+      "2"
+    ]
+  },
+  "artifact_hashes": {
+    "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15",
+    "docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md": "baa1723f3fa174d8fc0932ddee8fca1ece356f147ee09a90746fa8742f51002c",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/c5-policy.example.json": "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/c5-policy.schema.json": "e48f6e3deeaadf090d8227b30657776e75e1a34cf8efe00df7de583ec9fcaa48",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/cleanup-receipt.example.json": "6a812de71aacc68a5ff75d90c44ca19ef7f8f76c0840c8a88a609a77169c4ee8",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/cleanup-receipt.schema.json": "2c2e1dda88055c4f87c1caf4c9e829d3eda332d6b05ce8168521b9bc72d39b1e",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/execution-approval.example.json": "706a428d1159af814b76fb9ab560c7bc1fd5e87e8b77a531327fc829e2ff168d",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/execution-approval.schema.json": "b95c073293401cb630024c4267b4a0a866bad71d8fe2576f621e4d3853a4abaf",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/execution-evidence.example.json": "8b30573d44ae18366369fc4edb9d573c104e92018ea6c3514bb08c1a97e409a1",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/execution-evidence.schema.json": "0a4f07d94d090148d429d1165bce03a533bbd98f8846c34c680f1d061d6be7b6",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-recovery-attempt-receipt.example.json": "09d06e2a065d17e8faf8ec48505ccda86f9a05f30c04e7b964fce6b4e45a6f0f",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-recovery-attempt-receipt.schema.json": "adfba5ccdeed8ab37ab0f66d05912f50442f841b2ab26df04c6bf2530fe1437b",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-recovery-command-envelope.example.json": "c497fd3208a1b52f5d09cc754b2bbb1e60952774613d6dd6072ac96be7244883",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-recovery-command-envelope.schema.json": "7d0bbd80d4a1c995c06816e2cb7692e7cd8cb4eee6289d64ca06d0988326f9a6",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/proofreader-disposition.example.json": "809039eca553fe9526e61d5bf59f0da3e3d8dcfbddb5e461e394390b847fe76f",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/proofreader-disposition.schema.json": "b595b05f9a038eca0967199d4d86b9a7423da156858e8d78ae6c30322b89cf05",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/recovery-diagnosis-candidate.example.json": "8b0858b410c47b48471bb7fef10be791533c9c57f57b232cf0713beb0d5d830a",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/recovery-diagnosis-candidate.schema.json": "3137da26c45fc659e984f2c7a1a3038f8cc8d8f2ebd22694cc5dd82969a0afc4",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/system-anatomy-frame-set.example.json": "c81a93e393dc19da0d8bf5afbb532b31021b0b9b59c2060456f08cced36c9d41",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/system-anatomy-frame-set.schema.json": "72211c42c8c67976583ab2c113ace957ac71237a91e529bf6916fc0c8d0e96b1",
+    "scripts/model_required_bureau_c5_acceptance.py": "8833c63e2b5fa66699776f71f0691d48e2edd02f0b8a0580acf5748814fc1cb0",
+    "scripts/model_required_bureau_c5_contract.py": "2c8dadff33f8c8aff61ae8f990ed3a79fbf5435c5a2b7ff8622f6918d0f4d1f9",
+    "scripts/model_required_bureau_c5_rehearsal.py": "38e4199b449d7c83d1885e7e35e8fc378be581d8077cd57600be9673ffe18e8d",
+    "scripts/model_required_bureau_c5_target.py": "76373e9dc3e1f1d7acb47c47f6aa6fe8509870d63d1d73fa4d23f44a77284228"
+  },
+  "candidate_parsing_and_proofreading": {
+    "correction_ticket_at_most_one": true,
+    "grounding_all_true": true,
+    "nominal_admitted": true,
+    "rejections": {
+      "credential_request": "CREDENTIAL_REQUEST_REJECTED",
+      "duplicate_key": "REJECTED",
+      "executable_content": "EXECUTABLE_CONTENT_REJECTED",
+      "product_reference": "PRODUCT_REFERENCE_REJECTED",
+      "risk_tier_mismatch": "RISK_TIER_MISMATCH",
+      "scope_expansion": "SCOPE_EXPANSION_REJECTED",
+      "success_claim": "SUCCESS_CLAIM_REJECTED",
+      "unknown_parameter": "UNKNOWN_PARAMETER",
+      "unknown_property": "SCHEMA_REJECTED",
+      "unknown_runbook": "UNKNOWN_RUNBOOK",
+      "unsupported_diagnosis": "UNSUPPORTED_DIAGNOSIS",
+      "wrong_rollback": "UNKNOWN_RUNBOOK"
+    }
+  },
+  "cleanup": {
+    "broad_path_rejected": true,
+    "caller_path_rejected": true,
+    "exact_owned_removed": true,
+    "idempotent": true,
+    "no_listener": true,
+    "no_open_ledger": true,
+    "no_process": true,
+    "no_reusable_capability": true,
+    "no_task_directory": true,
+    "workspace_rejected": true
+  },
+  "context_fabric_implemented": false,
+  "cross_runtime_single_winner": {
+    "attempt_record_count": 1,
+    "evidence_consumed_count": 1,
+    "launch_attempts": 1,
+    "result_codes": [
+      "EXECUTION_EVIDENCE_REPLAY",
+      "live_development_recovery_verified"
+    ]
+  },
+  "digest_reproduction": {
+    "approval_sha256_reproduces": "2295c2218624b237e9ef58359be2dd36a37e3c2c5e214ee519b2968d14343e3b",
+    "candidate_digest_reproduces": "e8e055ec6a351447a93b295f678ebe72c8804201a8343593ec6d5fa1324dab88",
+    "catalog_digest_reproduces": "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a",
+    "frame_digest_reproduces": "d650a505b599f1ccc255eae27cce702edaf3e6a6d8f48382140e7ca308e37874",
+    "plan_sha256": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15",
+    "policy_digest_reproduces": "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450",
+    "reference_sha256_reproduces": "7c3cafcb8e64484cc007b82e58b259525dd686c578bc1588f0b5d39bb99d1415"
+  },
+  "documents": {
+    "document_count": 2,
+    "required_boundary_count": 10
+  },
+  "evidence_issuance": {
+    "expiring": true,
+    "issued_evidence_id": "92000000-0000-4000-8000-000000000001",
+    "one_use": true,
+    "production_signature_has_no_reference_or_nonce": true,
+    "raw_reference_not_persisted": true,
+    "unpatched_issuances_differ": true
+  },
+  "evidence_label": "provider_free_authored_synthetic_c5_implementation_readiness",
+  "execution_and_replay": {
+    "attempt_record_count": 1,
+    "baseline_agreement": true,
+    "different_key_evidence_reuse": "EXECUTION_EVIDENCE_REPLAY",
+    "evidence_consumed": "consumed",
+    "fake_process_starts": 2,
+    "fake_process_stops": 1,
+    "generation": 2,
+    "post_fault_agreement": true,
+    "result": "live_development_recovery_verified",
+    "same_key_changed_fingerprint": "IDEMPOTENCY_CONFLICT",
+    "same_key_exact_replay": {
+      "attempt_record_count": 1,
+      "same_receipt": true
+    },
+    "stale_authority_rejection": "STALE_OR_SUPERSEDED",
+    "state": "healthy",
+    "target_drift_rejection": "TARGET_DRIFT_REJECTED"
+  },
+  "fake_operation_accounting": {
+    "fake_directory_removals": 0,
+    "fake_http_probes": 3,
+    "fake_ledger_reservations": 1,
+    "fake_port_allocations": 0,
+    "fake_process_starts": 2,
+    "fake_process_stops": 1
+  },
+  "fault_injection_and_rollback": {
+    "audit_failed": {
+      "attempt_record_count": 1,
+      "evidence_consumed": "consumed",
+      "launch_state": "rolled_back",
+      "reason_code": "LIVE_RECOVERY_ROLLBACK_VERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": true
+      },
+      "success": false
+    },
+    "launch_failed": {
+      "attempt_record_count": 1,
+      "evidence_consumed": "consumed",
+      "launch_state": "rolled_back",
+      "reason_code": "LIVE_RECOVERY_ROLLBACK_VERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": true
+      },
+      "success": false
+    },
+    "readback_failed_rollback_inconclusive": {
+      "attempt_record_count": 1,
+      "evidence_consumed": "consumed",
+      "launch_state": "rollback_inconclusive",
+      "reason_code": "LIVE_RECOVERY_ROLLBACK_UNVERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": false
+      },
+      "success": false
+    },
+    "readback_failed_rollback_verified": {
+      "attempt_record_count": 1,
+      "evidence_consumed": "consumed",
+      "launch_state": "rolled_back",
+      "reason_code": "LIVE_RECOVERY_ROLLBACK_VERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": true
+      },
+      "success": false
+    },
+    "terminate_failed_rollback_inconclusive": {
+      "attempt_record_count": 1,
+      "evidence_consumed": "consumed",
+      "launch_state": "rollback_inconclusive",
+      "reason_code": "LIVE_RECOVERY_ROLLBACK_UNVERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": false
+      },
+      "success": false
+    }
+  },
+  "frame_minimisation": {
+    "context_absence_declared": [
+      "credential",
+      "database",
+      "environment",
+      "log",
+      "nonce",
+      "ordinary_service",
+      "path",
+      "patient",
+      "pid",
+      "port",
+      "product"
+    ],
+    "credential_excluded": true,
+    "environment_excluded": true,
+    "log_excluded": true,
+    "nonce_excluded": true,
+    "path_excluded": true,
+    "pid_excluded": true,
+    "port_excluded": true,
+    "product_excluded": true
+  },
+  "operation_counters": {
+    "cloud_iam_operations": 0,
+    "database_operations": 0,
+    "deployment_operations": 0,
+    "directory_creates": 0,
+    "directory_removals": 0,
+    "dynamic_import_operations": 0,
+    "eval_exec_operations": 0,
+    "external_event_operations": 0,
+    "network_operations": 0,
+    "port_allocations": 0,
+    "process_starts": 0,
+    "process_stops": 0,
+    "product_operations": 0,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "reflection_operations": 0,
+    "shell_operations": 0,
+    "socket_binds": 0,
+    "socket_connects": 0,
+    "sql_operations": 0
+  },
+  "passed": true,
+  "provider_request_metadata": {
+    "exact": {
+      "call_limit": 2,
+      "candidate_count": 1,
+      "cost_ceiling_usd": 0.5,
+      "endpoint": "australia-southeast1-aiplatform.googleapis.com",
+      "fallback_enabled": false,
+      "identity": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+      "max_output_tokens": 2048,
+      "model": "gemini-2.5-flash",
+      "project": "bernie-emr4-dev",
+      "provider": "google_vertex_ai",
+      "region": "australia-southeast1",
+      "temperature": 0,
+      "thinking_budget": 1024
+    }
+  },
+  "result": "model_required_bureau_c5_disposable_live_development_recovery_pass",
+  "schema_version": "emr4.model_required_bureau_c5_acceptance.v1",
+  "schemas": {
+    "all_examples_valid": true,
+    "canonical_example_count": 9,
+    "closed_schema_count": 9,
+    "named_object_count": 9
+  },
+  "source_checks": {
+    "forbidden_imports": {
+      "acceptance": [],
+      "contract": [],
+      "rehearsal": [],
+      "target": []
+    },
+    "imported_modules": {
+      "acceptance": [
+        "__future__",
+        "argparse",
+        "ast",
+        "dataclasses",
+        "datetime",
+        "hashlib",
+        "inspect",
+        "json",
+        "jsonschema",
+        "pathlib",
+        "scripts",
+        "sys",
+        "threading",
+        "typing"
+      ],
+      "contract": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "hashlib",
+        "json",
+        "re",
+        "secrets",
+        "threading",
+        "typing"
+      ],
+      "rehearsal": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "hashlib",
+        "http",
+        "os",
+        "pathlib",
+        "re",
+        "scripts",
+        "socket",
+        "subprocess",
+        "typing"
+      ],
+      "target": [
+        "__future__",
+        "argparse",
+        "hashlib",
+        "http",
+        "json",
+        "pathlib",
+        "re",
+        "sys"
+      ]
+    },
+    "lf_bytes": {
+      "acceptance": true,
+      "contract": true,
+      "rehearsal": true,
+      "target": true
+    },
+    "no_dynamic_import_in_contract": true,
+    "no_generic_runner": true,
+    "no_mounted_route": true,
+    "no_process_discovery": true,
+    "no_shell_invocation": true
+  },
+  "source_head": "953073e18ab48420b58d80ed78d41e8033534cb8"
+}

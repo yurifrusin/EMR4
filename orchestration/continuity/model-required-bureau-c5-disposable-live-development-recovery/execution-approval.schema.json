@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/execution-approval.v1.json",
+  "title": "Closed deterministic execution approval materialised from Yuri's standing programme authority",
+  "description": "Backend-materialised human approval record binding one committed C5 plan hash, exact target, fault, runbook, rollback, provider/cost envelope, one rehearsal and one expiry. Non-transferable and scope-expansion false; any changed field rejects.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "approval_id",
+    "approval_basis",
+    "plan_sha256",
+    "plan_revision",
+    "target",
+    "fault",
+    "runbook_id",
+    "rollback_runbook_id",
+    "provider",
+    "cost_ceiling_usd",
+    "call_limit",
+    "thinking_budget",
+    "max_output_tokens",
+    "expires_at",
+    "rehearsal_count",
+    "evidence_label",
+    "scope_expansion",
+    "non_transferable"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.execution_approval.v1"},
+    "approval_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "approval_basis": {"const": "yuri_standing_programme_authority_2026-08-04"},
+    "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "plan_revision": {"const": 1},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id"],
+      "properties": {
+        "environment": {"const": "c5_disposable_authored_synthetic"},
+        "kind": {"const": "task_owned_loopback_http_service"},
+        "target_id": {"const": "synthetic:c5-recovery-target"}
+      }
+    },
+    "fault": {"const": "controller_terminates_owned_child"},
+    "runbook_id": {"const": "start-c5-disposable-service.v1"},
+    "rollback_runbook_id": {"const": "stop-c5-disposable-service.v1"},
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "project", "identity", "region", "endpoint"],
+      "properties": {
+        "model": {"const": "gemini-2.5-flash"},
+        "project": {"const": "bernie-emr4-dev"},
+        "identity": {"const": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"},
+        "region": {"const": "australia-southeast1"},
+        "endpoint": {"const": "australia-southeast1-aiplatform.googleapis.com"}
+      }
+    },
+    "cost_ceiling_usd": {"const": 0.50},
+    "call_limit": {"const": 2},
+    "thinking_budget": {"const": 1024},
+    "max_output_tokens": {"const": 2048},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "rehearsal_count": {"const": 1},
+    "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
+    "scope_expansion": {"const": false},
+    "non_transferable": {"const": true}
+  }
+}

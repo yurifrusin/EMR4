@@ -1,0 +1,99 @@
+openapi: 3.1.0
+info:
+  title: EMR4 Bureau C5 Technical Control Live-Development-Recovery Commands (not_mounted)
+  version: 0.1.0
+  summary: Declarative documentation of a future single-purpose REST ownership.
+  description: >
+    This document is a declarative OpenAPI-shaped command contract ONLY. It is
+    explicitly `not_mounted`: it registers no FastAPI route, imports nothing
+    into `app.main`, claims no existing route, and exposes no runtime surface.
+    The Bureau C5 foundation is implementation-readiness code that starts no
+    process, binds or connects no socket, allocates no port, creates or removes
+    no directory, invokes no provider and performs no live rehearsal. A later
+    real command route or live recovery sequence requires a separate exact
+    descendant after the deterministic and independent gates pass.
+x-emr4-current-backend-alignment:
+  status: not_mounted_documentation_only
+  mounted: false
+  imported_by_app_main: false
+  claims_no_existing_route: true
+  evidence_label: provider_free_authored_synthetic_c5_implementation_readiness
+  source_plan: docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md
+  forward_runbook: start-c5-disposable-service.v1
+  rollback_runbook: stop-c5-disposable-service.v1
+  target_environment: c5_disposable_authored_synthetic
+  target_kind: task_owned_loopback_http_service
+  target_id: synthetic:c5-recovery-target
+  bind_host: 127.0.0.1
+servers: []
+tags:
+  - name: TechnicalControlLiveDevelopmentRecovery
+    description: Future single-purpose live-development-recovery command ownership (documentation only, not mounted).
+paths: {}
+components:
+  schemas:
+    LiveRecoveryCommandEnvelope:
+      description: Backend-owned closed command envelope (documentation only).
+      type: object
+      additionalProperties: false
+      properties:
+        schema_version:
+          const: emr4.live_recovery_command_envelope.v1
+        evidence_label:
+          const: occupied_authored_synthetic_disposable_live_development_recovery
+        runbook_id:
+          const: start-c5-disposable-service.v1
+        rollback_runbook_id:
+          const: stop-c5-disposable-service.v1
+        host:
+          const: 127.0.0.1
+        port:
+          type: integer
+          minimum: 1
+          maximum: 65535
+        generation:
+          const: 2
+        parameters:
+          type: object
+          maxProperties: 0
+          additionalProperties: false
+      required:
+        - schema_version
+        - evidence_label
+        - runbook_id
+        - rollback_runbook_id
+        - host
+        - port
+        - generation
+        - parameters
+    LiveRecoveryAttemptReceipt:
+      description: Bounded terminal success receipt released only after a distinct fresh process and loopback HTTP readback.
+      type: object
+      additionalProperties: false
+      properties:
+        result:
+          const: live_development_recovery_verified
+        generation:
+          const: 2
+        state:
+          const: healthy
+        rollback:
+          type: object
+          additionalProperties: false
+          properties:
+            invoked:
+              const: false
+    CleanupReceipt:
+      description: Bounded cleanup receipt proving no owned process, listener, task directory, open ledger or reusable capability remains.
+      type: object
+      additionalProperties: false
+      properties:
+        result:
+          const: cleanup_verified
+        no_process:
+          const: true
+        no_listener:
+          const: true
+        no_task_directory:
+          const: true
+security: []

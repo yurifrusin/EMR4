@@ -1,0 +1,45 @@
+{
+  "artifact_sha256": "76373e9dc3e1f1d7acb47c47f6aa6fe8509870d63d1d73fa4d23f44a77284228",
+  "attempt_evidence_sha256": "2bf10c27f3fbe563d2a9a562d3d267464e8760a652e496f134148ecaaca448be",
+  "evidence_label": "occupied_authored_synthetic_disposable_live_development_recovery",
+  "generation": 2,
+  "http_readback_observation_id": "obs-recovered-http-0001",
+  "issued_at": "2026-08-05T08:01:30Z",
+  "operation_counters": {
+    "cloud_iam_operations": 0,
+    "database_operations": 0,
+    "deployment_operations": 0,
+    "directory_creates": 0,
+    "directory_removals": 0,
+    "dynamic_import_operations": 0,
+    "eval_exec_operations": 0,
+    "external_event_operations": 0,
+    "network_operations": 0,
+    "port_allocations": 0,
+    "process_starts": 0,
+    "process_stops": 0,
+    "product_operations": 0,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "reflection_operations": 0,
+    "shell_operations": 0,
+    "socket_binds": 0,
+    "socket_connects": 0,
+    "sql_operations": 0
+  },
+  "process_observation_id": "obs-recovered-process-0001",
+  "result": "live_development_recovery_verified",
+  "rollback": {
+    "invoked": false,
+    "verified": null
+  },
+  "runbook_id": "start-c5-disposable-service.v1",
+  "schema_version": "emr4.live_recovery_attempt_receipt.v1",
+  "state": "healthy",
+  "target": {
+    "environment": "c5_disposable_authored_synthetic",
+    "kind": "task_owned_loopback_http_service",
+    "target_id": "synthetic:c5-recovery-target"
+  },
+  "target_nonce": "9c3d5f7e1a2b4c8d0e6f1a2b3c4d5e6f"
+}

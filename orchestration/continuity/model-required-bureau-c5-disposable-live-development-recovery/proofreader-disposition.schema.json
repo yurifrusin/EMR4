@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/proofreader-disposition.v1.json",
+  "title": "Deterministic proofreader disposition for a recovery diagnosis candidate",
+  "description": "Closed deterministic disposition emitted by the C5 proofreader after grounding every candidate claim against the exact admitted frame digest, stopped-process evidence and the fixed two-entry runbook catalog.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "frame_digest",
+    "candidate_digest",
+    "admitted",
+    "reason_codes",
+    "grounding",
+    "correction_ticket"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.proofreader_disposition.v1"},
+    "frame_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidate_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "admitted": {"type": "boolean"},
+    "reason_codes": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {"type": "string", "minLength": 1, "maxLength": 64}
+    },
+    "grounding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "every_hypothesis_grounded",
+        "exact_stopped_process_diagnosis",
+        "exact_target_bound",
+        "exact_runbook_bound",
+        "exact_rollback_bound",
+        "risk_tier_bound",
+        "parameters_empty",
+        "no_executable_content",
+        "no_success_claim",
+        "no_scope_expansion",
+        "no_product_reference",
+        "no_credential_request",
+        "no_new_observation",
+        "no_hidden_authority",
+        "no_sovereignty_claim"
+      ],
+      "properties": {
+        "every_hypothesis_grounded": {"type": "boolean"},
+        "exact_stopped_process_diagnosis": {"type": "boolean"},
+        "exact_target_bound": {"type": "boolean"},
+        "exact_runbook_bound": {"type": "boolean"},
+        "exact_rollback_bound": {"type": "boolean"},
+        "risk_tier_bound": {"type": "boolean"},
+        "parameters_empty": {"type": "boolean"},
+        "no_executable_content": {"type": "boolean"},
+        "no_success_claim": {"type": "boolean"},
+        "no_scope_expansion": {"type": "boolean"},
+        "no_product_reference": {"type": "boolean"},
+        "no_credential_request": {"type": "boolean"},
+        "no_new_observation": {"type": "boolean"},
+        "no_hidden_authority": {"type": "boolean"},
+        "no_sovereignty_claim": {"type": "boolean"}
+      }
+    },
+    "correction_ticket": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["ticket_id", "field_paths", "reason_codes", "frame_digest", "open"],
+      "properties": {
+        "ticket_id": {"type": "string", "pattern": "^ticket-[a-z0-9-]+$"},
+        "field_paths": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {"type": "string", "minLength": 1, "maxLength": 120}
+        },
+        "reason_codes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {"type": "string", "minLength": 1, "maxLength": 64}
+        },
+        "frame_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "open": {"const": true}
+      }
+    }
+  }
+}
