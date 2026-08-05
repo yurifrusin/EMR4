@@ -42,15 +42,16 @@ ROLLBACK_ENTRY_ID = "stop-c5-disposable-service-v1-entry"
 RISK_TIER = "reversible_scoped_service_recovery"
 REQUIRED_APPROVAL_CLASS = "ordinary_confirmation"
 APPROVAL_BASIS = "yuri_standing_programme_authority_2026-08-04"
-POLICY_VERSION = "emr4.c5_recovery_policy.v1"
-CATALOG_VERSION = "emr4.c5_runbook_catalog.v1"
+POLICY_VERSION = "emr4.c5_recovery_policy.v2"
+CATALOG_VERSION = "emr4.c5_runbook_catalog.v2"
 SUPERSESSION_KEY = "synthetic.c5-recovery-target.recovery"
 FRESHNESS_SECONDS = 300
 EXPIRY_SECONDS = 300
 EXPECTED_ARTIFACT_SHA256 = "a45dd29f2b1bdd4fc70b5bce0a22d6893b295b4001cf22949cd2d2d2927dbd4b"
-PLAN_SHA256 = "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15"
-POLICY_DIGEST = "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450"
-CATALOG_DIGEST = "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a"
+PLAN_SHA256 = "eb801556ee28a1a0e4520e7ee6aa02849eaee8b54127af1e20da3ed080c58b43"
+PLAN_REVISION = 2
+POLICY_DIGEST = "31c573269bfb7d626e2d0f75657a4a7704fad1cbbcae1011618aed3af0fa3757"
+CATALOG_DIGEST = "cab2c605dd6c9a4e658e7f2b2ea1643d9c2515333d9ddba4d81d6d63a2075feb"
 TARGET_REFERENCE = "c5:recovery-target-0001"
 TARGET_MODULE_RELATIVE_PATH = "scripts/model_required_bureau_c5_target.py"
 SCHEMA_ROOT = (
@@ -72,15 +73,15 @@ COST_CEILING_USD = 0.50
 FALLBACK_ENABLED = False
 
 # Schema versions
-FRAME_SET_SCHEMA = "emr4.system_anatomy_frame_set.v1"
+FRAME_SET_SCHEMA = "emr4.system_anatomy_frame_set.v2"
 CANDIDATE_SCHEMA = "emr4.recovery_diagnosis_candidate.v1"
 PROOFREADER_SCHEMA = "emr4.proofreader_disposition.v1"
-APPROVAL_SCHEMA = "emr4.execution_approval.v1"
-EVIDENCE_SCHEMA = "emr4.execution_evidence.v1"
+APPROVAL_SCHEMA = "emr4.execution_approval.v2"
+EVIDENCE_SCHEMA = "emr4.execution_evidence.v2"
 ENVELOPE_SCHEMA = "emr4.live_recovery_command_envelope.v1"
 ATTEMPT_RECEIPT_SCHEMA = "emr4.live_recovery_attempt_receipt.v1"
 CLEANUP_SCHEMA = "emr4.cleanup_receipt.v1"
-POLICY_SCHEMA = "emr4.c5_policy.v1"
+POLICY_SCHEMA = "emr4.c5_policy.v2"
 
 # --------------------------------------------------------------------------- #
 # Scalar admission bounds / formats (fail-closed before any lookup)
@@ -386,7 +387,7 @@ class InternalObservation:
     kind: str
     observed_at: str
     process_disposition: str
-    loopback_health_disposition: str
+    loopback_endpoint_disposition: str
     generation: Optional[int]
     content_sha256: str
     # internal-only (excluded from provider-visible frames)
@@ -406,7 +407,7 @@ class FrameObservation:
     observed_at: str
     freshness_seconds: int
     process_disposition: str
-    loopback_health_disposition: str
+    loopback_endpoint_disposition: str
     generation: Optional[int]
     content_sha256: str
 
@@ -418,7 +419,7 @@ class FrameObservation:
             "observed_at": self.observed_at,
             "freshness_seconds": self.freshness_seconds,
             "process_disposition": self.process_disposition,
-            "loopback_health_disposition": self.loopback_health_disposition,
+            "loopback_endpoint_disposition": self.loopback_endpoint_disposition,
             "generation": self.generation,
             "content_sha256": self.content_sha256,
         }
@@ -829,7 +830,7 @@ class RunbookCatalog:
                 required_approval_class=REQUIRED_APPROVAL_CLASS,
                 target=TargetRef.frozen(),
                 parameter_schema={"type": "object", "properties": {}, "additionalProperties": False},
-                expected_effect="owned_process_absent_connection_refused",
+                expected_effect="owned_process_absent_exact_port_reacquired",
                 executable=False,
                 immutable=True,
             ),
@@ -1101,7 +1102,7 @@ def _frame_observation(internal: InternalObservation) -> FrameObservation:
         observed_at=internal.observed_at,
         freshness_seconds=FRESHNESS_SECONDS,
         process_disposition=internal.process_disposition,
-        loopback_health_disposition=internal.loopback_health_disposition,
+        loopback_endpoint_disposition=internal.loopback_endpoint_disposition,
         generation=internal.generation,
         content_sha256=internal.content_sha256,
     )
@@ -1228,14 +1229,14 @@ def validate_frame_semantics(
     if (
         baseline.kind != "baseline"
         or baseline.process_disposition != "alive"
-        or baseline.loopback_health_disposition != "reachable"
+        or baseline.loopback_endpoint_disposition != "reachable"
         or baseline.generation != 1
     ):
         raise ValueError("baseline observation semantics invalid")
     if (
         post_fault.kind != "post_fault"
         or post_fault.process_disposition != "absent"
-        or post_fault.loopback_health_disposition != "connection_refused"
+        or post_fault.loopback_endpoint_disposition != "exact_port_reacquired"
         or post_fault.generation is not None
     ):
         raise ValueError("post-fault observation semantics invalid")
@@ -1510,7 +1511,7 @@ def proofread_candidate(
         for observation in frame.observations
         if observation.kind == "post_fault"
         and observation.process_disposition == "absent"
-        and observation.loopback_health_disposition == "connection_refused"
+        and observation.loopback_endpoint_disposition == "exact_port_reacquired"
     }
     if not post_fault_ids or not post_fault_ids.issubset(evidence_ids):
         reason_codes.append("POST_FAULT_EVIDENCE_REQUIRED")
@@ -1620,7 +1621,7 @@ def materialise_execution_approval(
         raise ValueError("invalid approval_id")
     if plan_sha256 != PLAN_SHA256:
         raise ValueError("plan hash drift")
-    if plan_revision != 1:
+    if plan_revision != PLAN_REVISION:
         raise ValueError("plan revision drift")
     return ExecutionApproval(
         schema_version=APPROVAL_SCHEMA,
@@ -1663,7 +1664,10 @@ def validate_execution_approval(
         raise ValueError("approval id drift")
     if approval.approval_basis != APPROVAL_BASIS:
         raise ValueError("approval basis drift")
-    if approval.plan_sha256 != PLAN_SHA256 or approval.plan_revision != 1:
+    if (
+        approval.plan_sha256 != PLAN_SHA256
+        or approval.plan_revision != PLAN_REVISION
+    ):
         raise ValueError("approval plan drift")
     if approval.target != TargetRef.frozen():
         raise ValueError("approval target drift")

@@ -1,13 +1,19 @@
 from __future__ import annotations
 
+import errno
 import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 from scripts import model_required_bureau_c5_contract as contract
 from scripts import model_required_bureau_c5_live as live
-from scripts.model_required_bureau_c5_rehearsal import HttpReadbackProbe
+from scripts.model_required_bureau_c5_rehearsal import (
+    HttpReadbackProbe,
+    LoopbackPortAllocator,
+)
 
 
 NOW = datetime(2026, 8, 5, 10, 0, 0, tzinfo=timezone.utc)
@@ -21,7 +27,7 @@ def _frame():
         kind="baseline",
         observed_at="2026-08-05T10:00:00Z",
         process_disposition="alive",
-        loopback_health_disposition="reachable",
+        loopback_endpoint_disposition="reachable",
         generation=1,
         content_sha256="1" * 64,
     )
@@ -31,7 +37,7 @@ def _frame():
         kind="post_fault",
         observed_at="2026-08-05T10:00:01Z",
         process_disposition="absent",
-        loopback_health_disposition="connection_refused",
+        loopback_endpoint_disposition="exact_port_reacquired",
         generation=None,
         content_sha256="2" * 64,
     )
@@ -55,7 +61,7 @@ def _candidate(frame, *, use_post_fault: bool = True) -> dict[str, Any]:
         "schema_version": contract.CANDIDATE_SCHEMA,
         "frame_digest": frame.frame_digest,
         "diagnosis": {
-            "hypothesis": "The owned process is absent and the closed health read is refused.",
+            "hypothesis": "The owned process is absent and the exact loopback endpoint is reacquired.",
             "evidence_observation_ids": [evidence_id],
             "missing_evidence": [],
             "impact": "The authored-synthetic loopback target is absent.",
@@ -68,7 +74,7 @@ def _candidate(frame, *, use_post_fault: bool = True) -> dict[str, Any]:
         "target": contract.TargetRef.frozen().to_dict(),
         "parameters": {},
         "uncertainty": "Low because both closed observations agree.",
-        "operator_explanation": "The exact owned process is absent and the eligible pinned recovery is proposed without claiming success.",
+        "operator_explanation": "The exact owned process is absent, the endpoint is retained and the eligible pinned recovery is proposed without claiming success.",
         "success_claim": False,
         "executable_content": False,
     }
@@ -134,6 +140,7 @@ class _FakeProcess:
     def __init__(self):
         self.handles: list[_FakeHandle] = []
         self.closed_generations: list[int] = []
+        self.start_reservations: list[_Reservation] = []
         self.observation_count = 0
 
     def preflight(self, *, expected_python_sha256, expected_target_sha256):
@@ -145,6 +152,7 @@ class _FakeProcess:
 
     def start(self, argv, env, *, expected_python_sha256, expected_target_sha256, reservation):
         assert not any("GOOGLE" in key.upper() for key in env)
+        self.start_reservations.append(reservation)
         reservation.prepare_exact_launch(port=int(argv[6]), host=contract.HOST)
         reservation.complete_handoff()
         handle = _FakeHandle(argv, expected_python_sha256)
@@ -246,12 +254,20 @@ class _Reservation:
 class _FakePortAllocator:
     is_live_capability = False
 
+    def __init__(self):
+        self.reservations: list[_Reservation] = []
+
+    def _new_reservation(self):
+        reservation = _Reservation()
+        self.reservations.append(reservation)
+        return reservation
+
     def reserve(self):
-        return _Reservation()
+        return self._new_reservation()
 
     def reserve_exact(self, port):
         assert port == PORT
-        return _Reservation()
+        return self._new_reservation()
 
 
 class _FakeDirectory:
@@ -403,12 +419,49 @@ def test_health_readiness_retries_only_connection_refused(monkeypatch):
     monkeypatch.setattr(probe, "probe", lambda *_args: observations.pop(0))
     result = probe.probe_until_healthy("127.0.0.1", PORT, "/healthz")
     assert result["status"] == 200
+    assert result["probe_attempts"] == 2
     assert observations == []
+
+
+def test_exact_port_reacquisition_retries_only_address_in_use(monkeypatch):
+    allocator = LoopbackPortAllocator()
+    reservation = _Reservation()
+    attempts = 0
+
+    def reserve_exact(port):
+        nonlocal attempts
+        attempts += 1
+        if attempts < 3:
+            raise OSError(errno.EADDRINUSE, "address in use")
+        assert port == PORT
+        return reservation
+
+    monkeypatch.setattr(allocator, "reserve_exact", reserve_exact)
+    monkeypatch.setattr(live.time, "sleep", lambda _seconds: None)
+    result = allocator.reserve_exact_until_owned(PORT)
+    assert result is reservation
+    assert result.bind_attempts == 3
+
+
+def test_exact_port_reacquisition_does_not_retry_other_socket_errors(monkeypatch):
+    allocator = LoopbackPortAllocator()
+    attempts = 0
+
+    def reserve_exact(_port):
+        nonlocal attempts
+        attempts += 1
+        raise OSError(errno.EACCES, "access denied")
+
+    monkeypatch.setattr(allocator, "reserve_exact", reserve_exact)
+    with pytest.raises(OSError):
+        allocator.reserve_exact_until_owned(PORT)
+    assert attempts == 1
 
 
 def test_provider_free_full_orchestration_closes_generation_one_and_all_resources():
     process = _FakeProcess()
     provider = _FakeProvider(correction=True)
+    port_allocator = _FakePortAllocator()
     evidence, ledger = live.run_serial_rehearsal(
         source_head="a" * 40,
         preexecution_receipt_sha256="b" * 64,
@@ -416,12 +469,13 @@ def test_provider_free_full_orchestration_closes_generation_one_and_all_resource
         provider=provider,
         process=process,
         http=_FakeHttp(process),
-        port_allocator=_FakePortAllocator(),
+        port_allocator=port_allocator,
         directory=_FakeDirectory(),
         now=lambda: NOW,
     )
     assert provider.calls == 2
     assert process.closed_generations == [1, 2]
+    assert process.start_reservations[1] is port_allocator.reservations[1]
     assert evidence["attempt_receipt"]["result"] == "live_development_recovery_verified"
     assert evidence["cleanup_receipt"]["result"] == "cleanup_verified"
     assert evidence["result"].endswith("terminal_failure")
@@ -441,6 +495,14 @@ def test_provider_free_full_orchestration_closes_generation_one_and_all_resource
 def test_preexecution_receipt_binds_five_sources_and_exact_review(monkeypatch, tmp_path):
     source_review = tmp_path / "review.json"
     ariadne = tmp_path / "ariadne.json"
+    ariadne_runtime_state = tmp_path / "ariadne-runtime-state.json"
+    source_evidence = {source: f"fresh {source}" for source in live.REHYDRATION_SOURCES}
+    refs = {
+        "master": live.PROTECTED_HEAD,
+        "handoff_current": live.PROTECTED_HEAD,
+        "origin_master": live.PROTECTED_HEAD,
+        "origin_handoff_current": live.PROTECTED_HEAD,
+    }
     source_review.write_text(
         json.dumps(
             {
@@ -463,6 +525,33 @@ def test_preexecution_receipt_binds_five_sources_and_exact_review(monkeypatch, t
                 "continuation_event": "pre_sprint_planning",
                 "planned_action": "execute_frozen_serial_c5_live_rehearsal",
                 "rehydration_sources": live.REHYDRATION_SOURCES,
+                "source_evidence": source_evidence,
+            }
+        ),
+        encoding="utf-8",
+    )
+    ariadne_runtime_state.write_text(
+        json.dumps(
+            {
+                "continuation_event": "pre_sprint_planning",
+                "planned_action": "execute_frozen_serial_c5_live_rehearsal",
+                "source_evidence": source_evidence,
+                "authority_binding": {
+                    "source_head": "c" * 40,
+                    "branch": live.TARGET_BRANCH,
+                    "protected_refs": refs,
+                    "recorded_at": "2026-08-05T10:00:00Z",
+                    "expires_at": "2026-08-05T10:30:00Z",
+                },
+                "context_health": {
+                    "agent_contexts": [
+                        {
+                            "agent_id": "orchestrator",
+                            "rehydrated_from_receipt": True,
+                            "rehydration_sources": live.REHYDRATION_SOURCES,
+                        }
+                    ]
+                },
             }
         ),
         encoding="utf-8",
@@ -473,12 +562,7 @@ def test_preexecution_receipt_binds_five_sources_and_exact_review(monkeypatch, t
         lambda: (
             "c" * 40,
             live.TARGET_BRANCH,
-            {
-                "master": live.PROTECTED_HEAD,
-                "handoff_current": live.PROTECTED_HEAD,
-                "origin_master": live.PROTECTED_HEAD,
-                "origin_handoff_current": live.PROTECTED_HEAD,
-            },
+            refs,
         ),
     )
     monkeypatch.setattr(
@@ -489,21 +573,60 @@ def test_preexecution_receipt_binds_five_sources_and_exact_review(monkeypatch, t
     monkeypatch.setattr(
         live,
         "_repository_relative",
-        lambda _path, prefix: (
+        lambda path, prefix: (
             "repository://orchestration/agent_inbox/antigravity/review.json"
             if "antigravity" in prefix
-            else "repository://orchestration/agent_inbox/codex/ariadne.json"
+            else (
+                "repository://orchestration/agent_inbox/codex/ariadne-runtime-state.json"
+                if "runtime-state" in path.name
+                else "repository://orchestration/agent_inbox/codex/ariadne.json"
+            )
         ),
     )
     receipt = live.build_preexecution_receipt(
         source_review_path=source_review,
         ariadne_receipt_path=ariadne,
+        ariadne_runtime_state_path=ariadne_runtime_state,
         now=lambda: NOW,
     )
     assert receipt["status"] == "passed"
     assert receipt["source_head"] == "c" * 40
     assert receipt["ariadne_receipt"]["rehydration_sources"] == live.REHYDRATION_SOURCES
+    assert receipt["ariadne_receipt"]["source_head"] == "c" * 40
+    assert receipt["ariadne_receipt"]["protected_refs"] == refs
+    assert receipt["ariadne_receipt"]["runtime_state_sha256"]
     assert receipt["provider"]["reserved_cost_per_call_usd"] == 0.25
+
+    stale = json.loads(ariadne_runtime_state.read_text(encoding="utf-8"))
+    stale["authority_binding"]["source_head"] = "d" * 40
+    ariadne_runtime_state.write_text(json.dumps(stale), encoding="utf-8")
+    with pytest.raises(live.C5LiveError, match="ariadne_authority_binding_invalid"):
+        live.build_preexecution_receipt(
+            source_review_path=source_review,
+            ariadne_receipt_path=ariadne,
+            ariadne_runtime_state_path=ariadne_runtime_state,
+            now=lambda: NOW,
+        )
+    stale["authority_binding"]["source_head"] = "c" * 40
+    stale["authority_binding"]["expires_at"] = "2026-08-05T09:59:59Z"
+    ariadne_runtime_state.write_text(json.dumps(stale), encoding="utf-8")
+    with pytest.raises(live.C5LiveError, match="ariadne_authority_receipt_expired"):
+        live.build_preexecution_receipt(
+            source_review_path=source_review,
+            ariadne_receipt_path=ariadne,
+            ariadne_runtime_state_path=ariadne_runtime_state,
+            now=lambda: NOW,
+        )
+
+
+def test_preexecution_artifact_set_binds_every_c5_schema_and_example():
+    bound = set(live.PREEXECUTION_ARTIFACTS)
+    expected = {
+        path.relative_to(live.ROOT).as_posix()
+        for path in live.ARTIFACT_ROOT.iterdir()
+        if path.name.endswith((".schema.json", ".example.json"))
+    }
+    assert expected <= bound
 
 
 def test_preexecution_and_occupied_schemas_are_closed():

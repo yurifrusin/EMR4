@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://emr4.local/schemas/c5-policy.v1.json",
+  "$id": "https://emr4.local/schemas/c5-policy.v2.json",
   "title": "Source-bound C5 recovery policy and immutable two-entry runbook catalog",
   "description": "Closed source-bound policy binding the exact committed C5 plan hash, target, host, risk tier, required approval class, standing approval basis, evidence label and the immutable two-entry runbook catalog with a reproducible catalog digest.",
   "type": "object",
@@ -22,8 +22,8 @@
     "scope_expansion"
   ],
   "properties": {
-    "schema_version": {"const": "emr4.c5_policy.v1"},
-    "policy_version": {"const": "emr4.c5_recovery_policy.v1"},
+    "schema_version": {"const": "emr4.c5_policy.v2"},
+    "policy_version": {"const": "emr4.c5_recovery_policy.v2"},
     "source_bound_plan": {"const": "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md"},
     "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "environment": {"const": "c5_disposable_authored_synthetic"},
@@ -47,7 +47,7 @@
       "additionalProperties": false,
       "required": ["catalog_version", "catalog_digest", "entries", "immutable"],
       "properties": {
-        "catalog_version": {"const": "emr4.c5_runbook_catalog.v1"},
+        "catalog_version": {"const": "emr4.c5_runbook_catalog.v2"},
         "catalog_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
         "entries": {
           "type": "array",
@@ -96,7 +96,7 @@
                   "additionalProperties": {"const": false}
                 }
               },
-              "expected_effect": {"enum": ["fresh_generation_healthy_readback", "owned_process_absent_connection_refused"]},
+              "expected_effect": {"enum": ["fresh_generation_healthy_readback", "owned_process_absent_exact_port_reacquired"]},
               "executable": {"const": false},
               "immutable": {"const": true}
             }

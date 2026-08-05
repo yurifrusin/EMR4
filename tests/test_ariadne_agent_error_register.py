@@ -32,16 +32,16 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_c5_sol_recovery() -> None:
+def test_committed_register_is_semantically_valid_after_c5_windows_recovery() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 23
+    assert register["register_revision"] == 24
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 28)
+        f"AER-{index:04d}" for index in range(1, 30)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 21
+    assert len(agent_incidents) == 22
     assert len(transport_incidents) == 2
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -303,6 +303,65 @@ def test_c5_worker_self_pass_remains_rejected_after_sol_recovery() -> None:
     assert "Disposition: `revision_required`" in audit
 
 
+def test_c5_windows_teardown_repository_defect_is_corrected_by_endpoint_ownership() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0028"
+    )
+    diagnostic = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c5-windows-teardown-diagnostic-receipt.json"
+    )
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "corrected"
+    assert diagnostic["original_failure"]["provider_calls"] == 0
+    assert diagnostic["bounded_diagnosis"]["exact_port_reacquisition_succeeded"]
+    assert diagnostic["bounded_diagnosis"]["windows_exclusive_address_use_set_before_bind"]
+    assert diagnostic["bounded_diagnosis"]["so_reuseaddr_used"] is False
+    lifecycle = diagnostic["repaired_provider_free_lifecycle"]
+    assert lifecycle["attempt_result"] == "live_development_recovery_verified"
+    assert lifecycle["cleanup_result"] == "cleanup_verified"
+    assert lifecycle["operation_counters"]["provider_calls"] == 0
+
+
+def test_c5_credential_restoration_guidance_separates_adc_and_cli_stores() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0029"
+    )
+    analysis = (
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c5-credential-restoration-guidance-analysis.md"
+    ).read_text(encoding="utf-8")
+    preflight = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c5-live-cli-reauth-cloud-preflight.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+    assert "Application" in analysis and "Default Credentials" in analysis
+    assert "gcloud CLI credential store" in analysis
+    assert preflight["result"] == "ariadne_vertex_sydney_gemini_25_adc_preflight_pass"
+    assert all(preflight["checks"].values())
+
+
 def test_davida_review_errors_match_preserved_evidence() -> None:
     register = _register()
     rows = {row["incident_id"]: row for row in register["incidents"]}
@@ -342,12 +401,12 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 27
+    assert report["incident_count"] == 29
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 21,
+        "agent_behavior": 22,
         "harness": 3,
-        "repository": 1,
+        "repository": 2,
         "transport": 2,
     }
     assert report["counts"]["by_category"] == {
@@ -356,13 +415,13 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "harness_failure": 3,
         "output_contract_violation": 11,
         "read_only_violation": 1,
-        "reasoning_claim_error": 4,
-        "repository_defect": 1,
+        "reasoning_claim_error": 5,
+        "repository_defect": 2,
         "transport_timeout": 2,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 1,
-        "canonical_unchanged": 20,
+        "accepted_candidate_changed": 2,
+        "canonical_unchanged": 21,
         "untrusted_partial_worktree": 6,
     }
     assert report["recurring_patterns"] == [

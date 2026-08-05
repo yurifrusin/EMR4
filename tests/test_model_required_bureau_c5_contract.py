@@ -303,7 +303,7 @@ def _mint_with_approval(approval):
         ("approval_id", "not-an-approval", "AUTHORITY_MISMATCH"),
         ("approval_basis", "unrecorded_basis", "AUTHORITY_MISMATCH"),
         ("plan_sha256", "0" * 64, "AUTHORITY_MISMATCH"),
-        ("plan_revision", 2, "AUTHORITY_MISMATCH"),
+        ("plan_revision", 1, "AUTHORITY_MISMATCH"),
         ("target", c5.TargetRef(c5.PLAN_ENVIRONMENT, c5.TARGET_KIND, "synthetic:other"), "AUTHORITY_MISMATCH"),
         ("fault", "different_fault", "AUTHORITY_MISMATCH"),
         ("runbook_id", "attacker-runbook", "AUTHORITY_MISMATCH"),

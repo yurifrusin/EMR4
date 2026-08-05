@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import errno
 import hashlib
 import inspect
 import json
@@ -41,6 +42,7 @@ from scripts.model_required_bureau_c5_contract import (
     HOST,
     InternalObservation,
     IssuanceDenied,
+    PLAN_REVISION,
     PLAN_SHA256,
     ROLLBACK_RUNBOOK,
     RunbookCatalog,
@@ -88,8 +90,8 @@ FIXTURE_NONCE = "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2
 PORT = 44123
 PYTHON_EXECUTABLE_SHA256 = "2" * 64
 EXPIRES_AT = "2026-08-05T08:05:00Z"
-POLICY_DIGEST = "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450"
-CATALOG_DIGEST = "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a"
+POLICY_DIGEST = "31c573269bfb7d626e2d0f75657a4a7704fad1cbbcae1011618aed3af0fa3757"
+CATALOG_DIGEST = "cab2c605dd6c9a4e658e7f2b2ea1643d9c2515333d9ddba4d81d6d63a2075feb"
 
 SCHEMA_EXAMPLES: dict[str, tuple[Path, Path]] = {
     "system_anatomy_frame_set": (
@@ -361,6 +363,8 @@ class FakePortReservation:
     def __init__(self) -> None:
         self.host = HOST
         self.port = PORT
+        self.exclusive_address_use = True
+        self.bind_attempts = 1
         self.released = False
         self.prepared = False
 
@@ -433,7 +437,7 @@ def build_frame() -> SystemAnatomyFrameSet:
         kind="baseline",
         observed_at="2026-08-05T08:00:10Z",
         process_disposition="alive",
-        loopback_health_disposition="reachable",
+        loopback_endpoint_disposition="reachable",
         generation=1,
         content_sha256="0" * 64,
         port=PORT,
@@ -449,7 +453,7 @@ def build_frame() -> SystemAnatomyFrameSet:
         kind="post_fault",
         observed_at="2026-08-05T08:00:40Z",
         process_disposition="absent",
-        loopback_health_disposition="connection_refused",
+        loopback_endpoint_disposition="exact_port_reacquired",
         generation=None,
         content_sha256="1" * 64,
         port=PORT,
@@ -457,7 +461,7 @@ def build_frame() -> SystemAnatomyFrameSet:
         nonce=TARGET_NONCE,
         process_path="C:/fake/target.py",
         environment_names=("PATH",),
-        log_excerpt="connection refused",
+        log_excerpt="exact port reacquired",
     )
     return build_system_anatomy_frame_set(
         target_reference="c5:recovery-target-0001",
@@ -487,7 +491,7 @@ def build_approval() -> ExecutionApproval:
     return materialise_execution_approval(
         approval_id=APPROVAL_ID,
         plan_sha256=PLAN_SHA256,
-        plan_revision=1,
+        plan_revision=PLAN_REVISION,
         expires_at=EXPIRES_AT,
     )
 
@@ -783,7 +787,10 @@ def _validate_approval() -> dict[str, Any]:
     approval = build_approval()
     if approval.approval_basis != "yuri_standing_programme_authority_2026-08-04":
         raise ValueError("approval basis drift")
-    if approval.plan_sha256 != PLAN_SHA256 or approval.plan_revision != 1:
+    if (
+        approval.plan_sha256 != PLAN_SHA256
+        or approval.plan_revision != PLAN_REVISION
+    ):
         raise ValueError("approval plan binding drift")
     if approval.target != TargetRef.frozen():
         raise ValueError("approval target drift")
@@ -803,7 +810,7 @@ def _validate_approval() -> dict[str, Any]:
         materialise_execution_approval(
             approval_id=APPROVAL_ID,
             plan_sha256="0" * 64,
-            plan_revision=1,
+            plan_revision=PLAN_REVISION,
             expires_at=EXPIRES_AT,
         )
         raise ValueError("changed plan hash admitted")
@@ -941,7 +948,7 @@ def run_success_path(
         raise ValueError("fault injection failed")
     http.mode = "refused"
     if not controller.post_fault_verify(handle, port=PORT):
-        raise ValueError("post-fault process-absent/connection-refused agreement failed")
+        raise ValueError("post-fault process-absent/exact-port-reacquisition proof failed")
     controller.reserve_recovery_port()
     http.mode = "reachable"
     http.generation = GENERATION_RECOVERED
@@ -1218,7 +1225,13 @@ def _validate_cross_runtime_single_winner() -> dict[str, Any]:
 def _validate_fault_injection_and_rollback() -> dict[str, Any]:
     outcomes: dict[str, Any] = {}
 
-    def run_fault(fault: str, *, http_mode: str, terminate_success: bool = True) -> dict[str, Any]:
+    def run_fault(
+        fault: str,
+        *,
+        http_mode: str,
+        terminate_success: bool = True,
+        exact_port_reacquisition: bool = True,
+    ) -> dict[str, Any]:
         store = C5SharedStore()
         process = FakeProcessObserver()
         http = FakeHttpObserver()
@@ -1227,8 +1240,18 @@ def _validate_fault_injection_and_rollback() -> dict[str, Any]:
         process.terminate_success = terminate_success
         issuer = C5EvidenceIssuer(now_callable, store)
         issued = mint_evidence(issuer)
+        port_allocator = FakePortAllocator()
+        if not exact_port_reacquisition:
+            def occupied(_port):
+                raise OSError(errno.EADDRINUSE, "exact port remains occupied")
+
+            port_allocator.reserve_exact = occupied
         controller = new_controller(
-            store=store, process=process, http=http, ready_for_execute=True
+            store=store,
+            process=process,
+            http=http,
+            port_allocator=port_allocator,
+            ready_for_execute=True,
         )
         result = controller.execute_recovery(
             approval=build_approval(),
@@ -1276,7 +1299,9 @@ def _validate_fault_injection_and_rollback() -> dict[str, Any]:
         raise ValueError("readback-failed rollback disposition drift")
 
     outcomes["readback_failed_rollback_inconclusive"] = run_fault(
-        "readback_failed", http_mode="reachable"
+        "readback_failed",
+        http_mode="reachable",
+        exact_port_reacquisition=False,
     )
     if outcomes["readback_failed_rollback_inconclusive"]["reason_code"] != "LIVE_RECOVERY_ROLLBACK_UNVERIFIED":
         raise ValueError("readback-failed inconclusive rollback drift")

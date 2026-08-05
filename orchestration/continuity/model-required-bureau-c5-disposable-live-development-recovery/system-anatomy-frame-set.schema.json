@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://emr4.local/schemas/system-anatomy-frame-set.v1.json",
+  "$id": "https://emr4.local/schemas/system-anatomy-frame-set.v2.json",
   "title": "Closed system-anatomy frame set for the C5 provider cell",
   "description": "Minimized provider-visible frame set containing only typed technical observations and non-executable runbook ids. Excludes port, PID, nonce, path, environment, credential, log and product values.",
   "type": "object",
@@ -21,7 +21,7 @@
     "frame_digest"
   ],
   "properties": {
-    "schema_version": {"const": "emr4.system_anatomy_frame_set.v1"},
+    "schema_version": {"const": "emr4.system_anatomy_frame_set.v2"},
     "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
     "target": {
       "type": "object",
@@ -46,7 +46,7 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["observation_id", "observation_source_id", "kind", "observed_at", "freshness_seconds", "process_disposition", "loopback_health_disposition", "generation", "content_sha256"],
+          "required": ["observation_id", "observation_source_id", "kind", "observed_at", "freshness_seconds", "process_disposition", "loopback_endpoint_disposition", "generation", "content_sha256"],
           "properties": {
             "observation_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
             "observation_source_id": {"type": "string", "pattern": "^obs-[a-z0-9-]+$"},
@@ -54,7 +54,7 @@
             "observed_at": {"type": "string", "format": "date-time"},
             "freshness_seconds": {"const": 300},
             "process_disposition": {"const": "alive"},
-            "loopback_health_disposition": {"const": "reachable"},
+            "loopback_endpoint_disposition": {"const": "reachable"},
             "generation": {"const": 1},
             "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
           }
@@ -62,7 +62,7 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["observation_id", "observation_source_id", "kind", "observed_at", "freshness_seconds", "process_disposition", "loopback_health_disposition", "generation", "content_sha256"],
+          "required": ["observation_id", "observation_source_id", "kind", "observed_at", "freshness_seconds", "process_disposition", "loopback_endpoint_disposition", "generation", "content_sha256"],
           "properties": {
             "observation_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
             "observation_source_id": {"type": "string", "pattern": "^obs-[a-z0-9-]+$"},
@@ -70,7 +70,7 @@
             "observed_at": {"type": "string", "format": "date-time"},
             "freshness_seconds": {"const": 300},
             "process_disposition": {"const": "absent"},
-            "loopback_health_disposition": {"const": "connection_refused"},
+            "loopback_endpoint_disposition": {"const": "exact_port_reacquired"},
             "generation": {"type": "null"},
             "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
           }

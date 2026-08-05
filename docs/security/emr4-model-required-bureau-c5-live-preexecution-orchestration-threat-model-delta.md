@@ -40,7 +40,12 @@ project read-only transport, exact model/effort, exact identical before/after
 HEAD, one `pass` and `dirty_after: false`. The Ariadne receipt must be
 `pre_sprint_planning`, name exactly
 `execute_frozen_serial_c5_live_rehearsal`, and contain the five exact mandatory
-rehydration sources. Both files are repository-scoped and hash-bound.
+rehydration sources. Its separately hash-bound runtime state must contain the
+same five source-evidence entries, exact current branch/HEAD/protected refs and
+a bounded creation/expiry interval. The runner rereads both files, compares
+their shared source evidence and rejects stale or substituted authority state
+immediately before execution. All three evidence files are repository-scoped
+and hash-bound.
 
 ### Provider routing follows a proxy or redirect
 
@@ -95,19 +100,26 @@ reports contact. A provider-free fake can exercise the serial state machine but
 must terminate as accounting failure rather than emit the occupied pass. The
 focused regression proves this property.
 
-### Child startup race causes a false baseline or readback failure
+### Child startup or Windows socket teardown race causes false evidence
 
 Controls: only connection-refused is retried, against the same exact host/port/
 path, for at most two seconds. Any response or different exception terminates
-the wait. Post-fault and cleanup absence probes never use readiness retry.
+the startup wait. Post-fault, rollback and cleanup do not infer absence from an
+HTTP exception: the exact owned process must be absent and the controller must
+successfully reacquire the same address/port without `SO_REUSEADDR`. On Windows
+every candidate socket sets `SO_EXCLUSIVEADDRUSE` before bind and only exact
+address-in-use may be retried for at most two seconds. The successful reservation
+is retained through generation 2, closing the substitution race. Reset and
+timeout remain truthful diagnostic states and never prove absence.
 
 ### The terminated generation-1 process handle leaks or is confused with
 generation 2
 
-Controls: after absence proof, the controller first reacquires the exact port,
-then closes the exact terminated generation-1 handle before provider admission.
-The later generation-2 handle replaces it only inside the one-use execution
-critical section. Cleanup stops and closes the remaining exact owned handle.
+Controls: exact-port reacquisition is part of the absence proof. The controller
+retains that reservation, then closes the exact terminated generation-1 handle
+before provider admission. The later generation-2 handle replaces it only
+inside the one-use execution critical section. Cleanup stops and closes the
+remaining exact owned handle and proves the port can again be exclusively bound.
 
 ### Terminal failure leaves live resources or an open ledger
 

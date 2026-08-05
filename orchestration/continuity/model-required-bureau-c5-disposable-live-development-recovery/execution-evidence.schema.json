@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://emr4.local/schemas/execution-evidence.v1.json",
+  "$id": "https://emr4.local/schemas/execution-evidence.v2.json",
   "title": "Server-held one-use execution evidence record",
   "description": "Closed server-held record binding the exact approval, plan, target, runbook, rollback, target nonce, generation, artifact digest, correlation, nonce, issued/expiry and one-use state. Only the one-way SHA-256 digest of the opaque random reference is stored; the raw reference is returned once and never persisted.",
   "type": "object",
@@ -34,14 +34,14 @@
     "supersession_key"
   ],
   "properties": {
-    "schema_version": {"const": "emr4.execution_evidence.v1"},
+    "schema_version": {"const": "emr4.execution_evidence.v2"},
     "evidence_id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
     "reference_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "state": {"enum": ["issued", "consumed"]},
     "approval_id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
     "approval_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "plan_revision": {"const": 1},
+    "plan_revision": {"const": 2},
     "target": {
       "type": "object",
       "additionalProperties": false,

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://emr4.local/schemas/cleanup-receipt.v1.json",
   "title": "Idempotent owned-resource cleanup receipt",
-  "description": "Closed cleanup receipt proving no owned process, listener, task directory, open ledger or reusable capability remains, with exact owned-path removal and truthful non-negative operation accounting. Provider-free fake-only acceptance remains exactly zero.",
+  "description": "Closed cleanup receipt proving no owned process, task directory, open ledger or reusable capability remains. no_listener means a point-in-time exact-port availability proof established by a successful no-sharing bind that is immediately released; Windows requires SO_EXCLUSIVEADDRUSE and never SO_REUSEADDR. Provider-free fake-only acceptance remains exactly zero.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -24,7 +24,7 @@
     "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
     "result": {"enum": ["cleanup_verified", "cleanup_inconclusive"]},
     "no_process": {"type": "boolean"},
-    "no_listener": {"type": "boolean"},
+    "no_listener": {"type": "boolean", "description": "True only after exact-address/port reacquisition without address sharing and immediate reservation release."},
     "no_task_directory": {"type": "boolean"},
     "no_open_ledger": {"type": "boolean"},
     "no_reusable_capability": {"type": "boolean"},

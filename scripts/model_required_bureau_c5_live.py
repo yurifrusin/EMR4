@@ -126,7 +126,23 @@ PREEXECUTION_ARTIFACTS = (
     "tests/test_model_required_bureau_c5_rehearsal.py",
     "orchestration/continuity/ariadne-vertex-sydney-gemini-25/broker-policy.json",
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/c5-policy.example.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/c5-policy.schema.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/system-anatomy-frame-set.example.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/system-anatomy-frame-set.schema.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/recovery-diagnosis-candidate.example.json",
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/recovery-diagnosis-candidate.schema.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/proofreader-disposition.example.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/proofreader-disposition.schema.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/execution-approval.example.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/execution-approval.schema.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/execution-evidence.example.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/execution-evidence.schema.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-recovery-command-envelope.example.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-recovery-command-envelope.schema.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-recovery-attempt-receipt.example.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-recovery-attempt-receipt.schema.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/cleanup-receipt.example.json",
+    "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/cleanup-receipt.schema.json",
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/live-preexecution-receipt.schema.json",
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-evidence.schema.json",
 )
@@ -253,10 +269,69 @@ def _artifact_hashes() -> dict[str, str]:
     return hashes
 
 
+def _validate_ariadne_authority_binding(
+    *,
+    ariadne: Mapping[str, Any],
+    runtime_state: Mapping[str, Any],
+    head: str,
+    branch: str,
+    refs: Mapping[str, str],
+    current: datetime,
+) -> dict[str, Any]:
+    """Require one fresh five-source state bound to the current Git authority."""
+    source_evidence = runtime_state.get("source_evidence")
+    binding = runtime_state.get("authority_binding")
+    contexts = (runtime_state.get("context_health") or {}).get("agent_contexts")
+    orchestrator_context = next(
+        (
+            item
+            for item in contexts or []
+            if isinstance(item, dict) and item.get("agent_id") == "orchestrator"
+        ),
+        None,
+    )
+    if (
+        runtime_state.get("continuation_event") != "pre_sprint_planning"
+        or runtime_state.get("planned_action")
+        != "execute_frozen_serial_c5_live_rehearsal"
+        or not isinstance(source_evidence, dict)
+        or set(source_evidence) != set(REHYDRATION_SOURCES)
+        or not isinstance(binding, dict)
+        or set(binding)
+        != {"source_head", "branch", "protected_refs", "recorded_at", "expires_at"}
+        or binding.get("source_head") != head
+        or binding.get("branch") != branch
+        or binding.get("protected_refs") != dict(refs)
+        or not isinstance(orchestrator_context, dict)
+        or orchestrator_context.get("rehydrated_from_receipt") is not True
+        or orchestrator_context.get("rehydration_sources") != REHYDRATION_SOURCES
+        or ariadne.get("status") != "passed"
+        or ariadne.get("continuation_event") != runtime_state.get("continuation_event")
+        or ariadne.get("planned_action") != runtime_state.get("planned_action")
+        or ariadne.get("rehydration_sources") != REHYDRATION_SOURCES
+        or ariadne.get("source_evidence") != source_evidence
+    ):
+        raise C5LiveError("ariadne_authority_binding_invalid")
+    try:
+        recorded_at = _parse_time(binding["recorded_at"])
+        expires_at = _parse_time(binding["expires_at"])
+    except (AttributeError, KeyError, TypeError, ValueError) as error:
+        raise C5LiveError("ariadne_authority_binding_invalid") from error
+    current_utc = current.astimezone(timezone.utc)
+    if not (
+        recorded_at <= current_utc < expires_at
+        and expires_at - recorded_at
+        <= timedelta(seconds=PREEXECUTION_EXPIRY_SECONDS)
+    ):
+        raise C5LiveError("ariadne_authority_receipt_expired")
+    return dict(binding)
+
+
 def build_preexecution_receipt(
     *,
     source_review_path: Path,
     ariadne_receipt_path: Path,
+    ariadne_runtime_state_path: Path,
     now: Callable[[], datetime] = _now,
 ) -> dict[str, Any]:
     head, branch, refs = _current_source_state()
@@ -274,18 +349,19 @@ def build_preexecution_receipt(
     ):
         raise C5LiveError("source_review_binding_invalid")
     ariadne = _load_object(ariadne_receipt_path)
-    if (
-        ariadne.get("status") != "passed"
-        or ariadne.get("continuation_event") != "pre_sprint_planning"
-        or ariadne.get("planned_action")
-        != "execute_frozen_serial_c5_live_rehearsal"
-        or ariadne.get("rehydration_sources") != REHYDRATION_SOURCES
-    ):
-        raise C5LiveError("ariadne_preexecution_receipt_invalid")
+    ariadne_runtime_state = _load_object(ariadne_runtime_state_path)
     hashes = _artifact_hashes()
     created = now()
+    authority_binding = _validate_ariadne_authority_binding(
+        ariadne=ariadne,
+        runtime_state=ariadne_runtime_state,
+        head=head,
+        branch=branch,
+        refs=refs,
+        current=created,
+    )
     receipt = {
-        "schema_version": "emr4.c5_live_preexecution_receipt.v1",
+        "schema_version": "emr4.c5_live_preexecution_receipt.v2",
         "status": "passed",
         "source_head": head,
         "branch": branch,
@@ -315,10 +391,16 @@ def build_preexecution_receipt(
                 "orchestration/agent_inbox/codex/",
             ),
             "receipt_sha256": _sha256_file(ariadne_receipt_path),
+            "runtime_state_path": _repository_relative(
+                ariadne_runtime_state_path,
+                "orchestration/agent_inbox/codex/",
+            ),
+            "runtime_state_sha256": _sha256_file(ariadne_runtime_state_path),
             "status": "passed",
             "continuation_event": "pre_sprint_planning",
             "planned_action": "execute_frozen_serial_c5_live_rehearsal",
             "rehydration_sources": REHYDRATION_SOURCES,
+            **authority_binding,
         },
         "provider": {
             "provider": "google_vertex_ai",
@@ -371,6 +453,9 @@ def validate_preexecution_receipt(
         receipt["source_head"] != head
         or receipt["branch"] != branch
         or receipt["protected_refs"] != refs
+        or receipt["ariadne_receipt"]["source_head"] != head
+        or receipt["ariadne_receipt"]["branch"] != branch
+        or receipt["ariadne_receipt"]["protected_refs"] != refs
         or receipt["artifact_hashes"] != _artifact_hashes()
         or receipt["artifact_set_sha256"]
         != canonical_sha256(receipt["artifact_hashes"])
@@ -379,18 +464,50 @@ def validate_preexecution_receipt(
     current = now().astimezone(timezone.utc)
     if not (_parse_time(receipt["created_at"]) <= current < _parse_time(receipt["expires_at"])):
         raise C5LiveError("preexecution_receipt_expired")
-    for section, prefix in (
-        ("source_review", "repository://"),
-        ("ariadne_receipt", "repository://"),
-    ):
-        relative = receipt[section]["receipt_path"]
+    evidence_files = (
+        (
+            receipt["source_review"]["receipt_path"],
+            receipt["source_review"]["receipt_sha256"],
+        ),
+        (
+            receipt["ariadne_receipt"]["receipt_path"],
+            receipt["ariadne_receipt"]["receipt_sha256"],
+        ),
+        (
+            receipt["ariadne_receipt"]["runtime_state_path"],
+            receipt["ariadne_receipt"]["runtime_state_sha256"],
+        ),
+    )
+    for relative, expected_sha256 in evidence_files:
+        prefix = "repository://"
         if not relative.startswith(prefix):
             raise C5LiveError("preexecution_evidence_path_invalid")
         source = (ROOT / relative[len(prefix):]).resolve()
         if ROOT.resolve() not in source.parents or not source.is_file():
             raise C5LiveError("preexecution_evidence_missing")
-        if _sha256_file(source) != receipt[section]["receipt_sha256"]:
+        if _sha256_file(source) != expected_sha256:
             raise C5LiveError("preexecution_evidence_digest_drift")
+    ariadne_path = (
+        ROOT
+        / receipt["ariadne_receipt"]["receipt_path"][len("repository://") :]
+    ).resolve()
+    runtime_state_path = (
+        ROOT
+        / receipt["ariadne_receipt"]["runtime_state_path"][len("repository://") :]
+    ).resolve()
+    authority_binding = _validate_ariadne_authority_binding(
+        ariadne=_load_object(ariadne_path),
+        runtime_state=_load_object(runtime_state_path),
+        head=head,
+        branch=branch,
+        refs=refs,
+        current=current,
+    )
+    if any(
+        receipt["ariadne_receipt"].get(key) != value
+        for key, value in authority_binding.items()
+    ):
+        raise C5LiveError("ariadne_authority_summary_drift")
     return receipt
 
 
@@ -1109,7 +1226,7 @@ def run_serial_rehearsal(
             kind="baseline",
             observed_at=_format_time(baseline_at),
             process_disposition="alive",
-            loopback_health_disposition="reachable",
+            loopback_endpoint_disposition="reachable",
             generation=1,
             content_sha256=canonical_sha256(
                 {
@@ -1127,14 +1244,14 @@ def run_serial_rehearsal(
             kind="post_fault",
             observed_at=_format_time(post_fault_at),
             process_disposition="absent",
-            loopback_health_disposition="connection_refused",
+            loopback_endpoint_disposition="exact_port_reacquired",
             generation=None,
             content_sha256=canonical_sha256(
                 {
                     "target_id": TARGET_ID,
                     "artifact_sha256": artifact_sha256,
                     "process": "absent",
-                    "health": "connection_refused",
+                    "endpoint": "exact_port_reacquired",
                     "generation": None,
                 }
             ),
@@ -1287,6 +1404,7 @@ def _parser() -> argparse.ArgumentParser:
     prepare = subparsers.add_parser("prepare-receipt")
     prepare.add_argument("--source-review", type=Path, required=True)
     prepare.add_argument("--ariadne-receipt", type=Path, required=True)
+    prepare.add_argument("--ariadne-runtime-state", type=Path, required=True)
     prepare.add_argument("--output", type=Path, required=True)
     run = subparsers.add_parser("run")
     run.add_argument("--preexecution-receipt", type=Path, required=True)
@@ -1302,6 +1420,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             receipt = build_preexecution_receipt(
                 source_review_path=args.source_review,
                 ariadne_receipt_path=args.ariadne_receipt,
+                ariadne_runtime_state_path=args.ariadne_runtime_state,
             )
             _atomic_write(args.output, receipt)
             summary = {

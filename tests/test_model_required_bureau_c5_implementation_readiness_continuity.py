@@ -63,7 +63,7 @@ def test_c5_recovery_closes_aer_0027_without_erasing_failed_candidate():
     register = load(
         "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
     )
-    assert register["register_revision"] == 23
+    assert register["register_revision"] >= 23
     incident = next(
         item for item in register["incidents"] if item["incident_id"] == "AER-0027"
     )

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://emr4.local/schemas/c5-live-preexecution-receipt.v1.json",
+  "$id": "https://emr4.local/schemas/c5-live-preexecution-receipt.v2.json",
   "title": "C5 exact-head live pre-execution receipt",
   "type": "object",
   "additionalProperties": false,
@@ -24,7 +24,7 @@
     "expires_at"
   ],
   "properties": {
-    "schema_version": {"const": "emr4.c5_live_preexecution_receipt.v1"},
+    "schema_version": {"const": "emr4.c5_live_preexecution_receipt.v2"},
     "status": {"const": "passed"},
     "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "branch": {"const": "codex/ariadne-bernie-davida-parallel-seam"},
@@ -40,9 +40,9 @@
         "origin_handoff_current": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"}
       }
     },
-    "plan_sha256": {"const": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15"},
-    "policy_digest": {"const": "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450"},
-    "catalog_digest": {"const": "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a"},
+    "plan_sha256": {"const": "eb801556ee28a1a0e4520e7ee6aa02849eaee8b54127af1e20da3ed080c58b43"},
+    "policy_digest": {"const": "31c573269bfb7d626e2d0f75657a4a7704fad1cbbcae1011618aed3af0fa3757"},
+    "catalog_digest": {"const": "cab2c605dd6c9a4e658e7f2b2ea1643d9c2515333d9ddba4d81d6d63a2075feb"},
     "source_review": {
       "type": "object",
       "additionalProperties": false,
@@ -63,10 +63,12 @@
     "ariadne_receipt": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["receipt_path", "receipt_sha256", "status", "continuation_event", "planned_action", "rehydration_sources"],
+      "required": ["receipt_path", "receipt_sha256", "runtime_state_path", "runtime_state_sha256", "status", "continuation_event", "planned_action", "rehydration_sources", "source_head", "branch", "protected_refs", "recorded_at", "expires_at"],
       "properties": {
         "receipt_path": {"type": "string", "pattern": "^repository://orchestration/agent_inbox/codex/[a-z0-9._/-]+\\.json$"},
         "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "runtime_state_path": {"type": "string", "pattern": "^repository://orchestration/agent_inbox/codex/[a-z0-9._/-]+\\.json$"},
+        "runtime_state_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
         "status": {"const": "passed"},
         "continuation_event": {"const": "pre_sprint_planning"},
         "planned_action": {"const": "execute_frozen_serial_c5_live_rehearsal"},
@@ -78,7 +80,22 @@
             "protected_evidence_boundaries",
             "git_refs_and_worktree"
           ]
-        }
+        },
+        "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "branch": {"const": "codex/ariadne-bernie-davida-parallel-seam"},
+        "protected_refs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["master", "handoff_current", "origin_master", "origin_handoff_current"],
+          "properties": {
+            "master": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+            "handoff_current": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+            "origin_master": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+            "origin_handoff_current": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"}
+          }
+        },
+        "recorded_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time"}
       }
     },
     "provider": {
@@ -122,7 +139,7 @@
     "artifact_hashes": {
       "type": "object",
       "minProperties": 6,
-      "maxProperties": 32,
+      "maxProperties": 48,
       "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
       "propertyNames": {"pattern": "^[a-zA-Z0-9_./-]+$"}
     },

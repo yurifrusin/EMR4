@@ -2,8 +2,8 @@
 
 Date: 2026-08-05
 
-Status: frozen plan candidate; no provider call, target process or actuator action
-is authorised until the deterministic and independent plan gates pass
+Status: frozen recovery revision 2; live execution remains closed until the
+repaired deterministic and fresh exact-HEAD independent gates pass
 
 Source HEAD: `8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f`
 
@@ -40,7 +40,7 @@ The exact target is:
 | Port | OS-assigned ephemeral port, server-held and bound into every later object |
 | Service artifact | one C5-authored Python module whose LF-byte SHA-256 is frozen before execution |
 | Baseline | exact closed JSON health body, generation `1`, state `healthy` |
-| Injected fault | controller terminates its exact child process and proves process exit plus loopback connection refusal |
+| Injected fault | controller terminates its exact child process, proves process exit, then atomically reacquires and retains the exact loopback address/port without address sharing |
 | Recovery runbook | `start-c5-disposable-service.v1` |
 | Rollback runbook | `stop-c5-disposable-service.v1` |
 | Expected recovery | generation `2`, exact service-artifact hash, state `healthy` |
@@ -86,7 +86,7 @@ The model receives one closed `SystemAnatomyFrameSet` containing only:
 - the target kind and opaque target reference;
 - frozen service-artifact and policy digests;
 - the prior healthy observation and current post-fault observations;
-- exact process-liveness and loopback-health dispositions;
+- exact process-liveness and loopback-endpoint-ownership dispositions;
 - timestamps, freshness and observation-source ids;
 - the two signed-catalog runbook ids and their non-executable descriptions;
 - the allowed risk tier and required approval class; and
@@ -112,8 +112,12 @@ The live rehearsal is one monotone state machine:
 4. allocate one loopback ephemeral port, start generation `1` with the fixed
    launcher, and prove exact healthy baseline by process and HTTP observations;
 5. inject the sole fault by terminating the controller-owned child handle;
-6. prove the process exited and a fresh loopback health read is connection-
-   refused; no provider call occurs unless both observations agree;
+6. prove the process exited and atomically reacquire the exact loopback address/
+   port without `SO_REUSEADDR`; on Windows the controller must set
+   `SO_EXCLUSIVEADDRUSE` before every bind. Only successful exact reacquisition
+   and retained ownership admit the provider-visible
+   `loopback_endpoint_disposition: exact_port_reacquired` observation or any
+   provider call;
 7. invoke the model once with the exact admitted frame set;
 8. strictly parse and deterministically proofread the candidate against current
    evidence, catalog, risk, scope, freshness and authority. One correction is
@@ -132,8 +136,8 @@ The live rehearsal is one monotone state machine:
     `live_development_recovery_verified`;
 13. if execution, audit or postcondition verification fails after launch,
     invoke only `stop-c5-disposable-service.v1`, freshly prove process absence
-    and connection refusal, and distinguish verified rollback from inconclusive
-    rollback; and
+    and exact no-sharing port reacquisition, and distinguish verified rollback
+    from inconclusive rollback; and
 14. in every terminal outcome, consume ledgers, terminate any owned process,
     close handles, prove the port is no longer listening, remove only the exact
     task-created temporary directory, and prove no C5 runtime resource remains.
@@ -200,15 +204,16 @@ under
 `orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/`
 for:
 
-- `system-anatomy-frame-set.v1`;
+- `system-anatomy-frame-set.v2`;
 - `recovery-diagnosis-candidate.v1`;
 - `proofreader-disposition.v1`;
-- `execution-approval.v1`;
-- `execution-evidence.v1`;
+- `execution-approval.v2`;
+- `execution-evidence.v2`;
 - `live-recovery-command-envelope.v1`;
 - `live-recovery-attempt-receipt.v1`;
 - `cleanup-receipt.v1`; and
-- a source-bound `c5-policy.v1` and immutable two-entry runbook catalog.
+- a source-bound `c5-policy.v2`, source-bound `live-preexecution-receipt.v2`
+  and immutable two-entry runbook catalog.
 
 Every object uses `additionalProperties: false`, canonical scalar bounds,
 opaque identifiers, exact timestamps, explicit schema/policy versions and
@@ -269,7 +274,8 @@ Before any target process or candidate-runtime provider call:
    exact LF-byte hashes;
 2. provider-free tests prove frame construction, parser/proofreader behavior,
    approval binding, evidence issuance, idempotency, shared-store concurrency,
-   fault injection, launch allowlisting, readback, rollback and cleanup using
+   fault injection, exact no-sharing port reacquisition, launch allowlisting,
+   readback, rollback and cleanup using
    fakes that start no process and open no socket;
 3. source inspection proves no product import, database client, cloud-control
    client, generic shell/command runner, deployment route or ambient credential
@@ -294,7 +300,8 @@ C5 passes only if all of these hold in one source-bound run:
 
 - the initial process is exact, loopback-only, task-owned and freshly healthy;
 - the sole injected termination is exact and the post-fault observations prove
-  both process absence and connection refusal;
+  both process absence and retained exact-port reacquisition without address
+  sharing;
 - provider preflight, reservation and accounting bind the exact frozen envelope;
 - one admitted model candidate cites only admitted technical evidence, selects
   only `start-c5-disposable-service.v1` and contains no executable material;

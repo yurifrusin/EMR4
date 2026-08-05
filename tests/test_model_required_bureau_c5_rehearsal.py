@@ -8,12 +8,15 @@ capability adapters are implemented but never invoked here.
 
 from __future__ import annotations
 
+import errno
 import inspect
+import socket
 from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
+from scripts import model_required_bureau_c5_rehearsal as rehearsal
 from scripts.model_required_bureau_c5_acceptance import (
     EXPECTED_ARTIFACT_SHA256,
     CORRELATION_ID,
@@ -21,6 +24,7 @@ from scripts.model_required_bureau_c5_acceptance import (
     PORT,
     TARGET_NONCE,
     FakeHttpObserver,
+    FakePortAllocator,
     FakeProcessObserver,
     admit_provider_candidate,
     build_approval,
@@ -111,6 +115,118 @@ def test_baseline_fault_post_fault_agreement_with_fakes():
     http.mode = "refused"
     assert controller.post_fault_verify(handle, port=PORT) is True
     assert process.stops == 1
+
+
+def test_post_fault_absence_uses_exact_port_reacquisition_not_http_inference():
+    process = FakeProcessObserver()
+    http = FakeHttpObserver()
+    http.is_live_capability = True
+    port_allocator = FakePortAllocator()
+    port_allocator.is_live_capability = True
+    controller = new_controller(
+        process=process,
+        http=http,
+        port_allocator=port_allocator,
+    )
+    http.generation = 1
+    handle, healthy = controller.run_baseline(
+        port=PORT, nonce=TARGET_NONCE, artifact_sha256=EXPECTED_ARTIFACT_SHA256
+    )
+    assert healthy is True
+    assert controller.inject_fault(handle) is True
+    assert controller.post_fault_verify(handle, port=PORT) is True
+    assert controller.operation_counters["socket_connects"] == 1
+    assert controller.operation_counters["socket_binds"] == 2
+    assert controller.operation_counters["port_allocations"] == 2
+    assert port_allocator.allocations == 2
+
+
+def test_post_fault_does_not_bind_until_owned_process_is_absent():
+    process = FakeProcessObserver()
+    http = FakeHttpObserver()
+    port_allocator = FakePortAllocator()
+    controller = new_controller(
+        process=process,
+        http=http,
+        port_allocator=port_allocator,
+    )
+    http.generation = 1
+    handle, healthy = controller.run_baseline(
+        port=PORT, nonce=TARGET_NONCE, artifact_sha256=EXPECTED_ARTIFACT_SHA256
+    )
+    assert healthy is True
+    controller.store.launch_state = "fault_injected"
+    assert controller.post_fault_verify(handle, port=PORT) is False
+    assert port_allocator.allocations == 1
+
+
+def test_failed_exact_port_reacquisition_counts_every_bind_attempt():
+    process = FakeProcessObserver()
+    http = FakeHttpObserver()
+    port_allocator = FakePortAllocator()
+    port_allocator.is_live_capability = True
+    controller = new_controller(
+        process=process,
+        http=http,
+        port_allocator=port_allocator,
+    )
+    http.generation = 1
+    handle, healthy = controller.run_baseline(
+        port=PORT, nonce=TARGET_NONCE, artifact_sha256=EXPECTED_ARTIFACT_SHA256
+    )
+    assert healthy is True
+    assert controller.inject_fault(handle) is True
+
+    def exhausted(_port):
+        error = OSError(errno.EADDRINUSE, "address remains in use")
+        error.bind_attempts = 3
+        raise error
+
+    port_allocator.reserve_exact = exhausted
+    assert controller.post_fault_verify(handle, port=PORT) is False
+    assert controller.operation_counters["socket_binds"] == 4
+    assert controller.operation_counters["port_allocations"] == 1
+
+
+def test_windows_port_allocator_sets_exclusive_before_bind_and_never_reuse(
+    monkeypatch,
+):
+    events = []
+
+    class FakeSocket:
+        def __init__(self):
+            self.bound_port = 0
+
+        def setsockopt(self, level, option, value):
+            events.append(("setsockopt", level, option, value))
+
+        def bind(self, endpoint):
+            events.append(("bind", endpoint))
+            self.bound_port = 49199
+
+        def getsockname(self):
+            return ("127.0.0.1", self.bound_port)
+
+        def close(self):
+            events.append(("close",))
+
+    monkeypatch.setattr(rehearsal.os, "name", "nt")
+    monkeypatch.setattr(socket, "SO_EXCLUSIVEADDRUSE", -5, raising=False)
+    monkeypatch.setattr(socket, "socket", lambda *_args: FakeSocket())
+    reservation = LoopbackPortAllocator().reserve()
+    assert events[0] == (
+        "setsockopt",
+        socket.SOL_SOCKET,
+        socket.SO_EXCLUSIVEADDRUSE,
+        1,
+    )
+    assert events[1] == ("bind", ("127.0.0.1", 0))
+    assert all(
+        event[2] != socket.SO_REUSEADDR
+        for event in events
+        if event[0] == "setsockopt"
+    )
+    assert reservation.exclusive_address_use is True
 
 
 def test_pid_handle_and_nonce_generation_artifact_checks_prevent_substitution():
@@ -400,7 +516,7 @@ def test_post_launch_observer_exceptions_are_terminal_and_contained_by_rollback(
         controller, frame, candidate, proofreader, admission, issued
     )
     assert result["result"] == "denied"
-    assert result["reason_code"] == "LIVE_RECOVERY_ROLLBACK_UNVERIFIED"
+    assert result["reason_code"] == "LIVE_RECOVERY_ROLLBACK_VERIFIED"
     assert process.any_running() is False
 
 
@@ -432,7 +548,10 @@ def test_cleanup_never_claims_verified_when_an_absence_proof_is_false(failed_pro
     if failed_proof == "process":
         controller.process.any_running = lambda: True
     elif failed_proof == "listener":
-        controller.http.any_listener = lambda **kwargs: True
+        def occupied(_port):
+            raise OSError(errno.EADDRINUSE, "exact port remains occupied")
+
+        controller.port_allocator.reserve_exact = occupied
     elif failed_proof == "directory":
         controller.directory.remove_task_dir = lambda candidate: False
     elif failed_proof == "ledger":

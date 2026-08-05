@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 23,
+  "register_revision": 24,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-05",
+    "source_cutoff_on": "2026-08-06",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -1052,6 +1052,88 @@
           "docs/ariadne-agent-error-correction-register-revision-23.md",
           "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-receipt.json",
           "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-2-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0028",
+      "attempt_id": "model-required-bureau-c5-live-windows-teardown-001",
+      "observed_on": "2026-08-06",
+      "tranche": "model-required-bureau-c5-live-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "model-required-bureau-c5-live-controller",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_windows_live_rehearsal",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "After exact termination of the controller-owned generation-1 child, C5 must prove process absence and exclusive ownership of the exact loopback endpoint using an operating-system-valid, race-free method, retain that reservation through generation-2 launch, and never treat an ambiguous TCP teardown result as absence.",
+      "observed_error": "The accepted controller required a literal post-termination connection-refused health result. On Windows the exact child was absent, but fresh connections reset once and then timed out during TCP teardown, so refusal never became a reliable absence signal and cleanup remained inconclusive even though the exact port could subsequently be reacquired.",
+      "detection_method": "The source-bound occupied rehearsal stopped before provider admission with zero provider calls and no product or cloud mutation. Bounded provider-free Windows diagnostics reproduced reset and timeout results after exact child termination and showed that successful exact-port reacquisition was the truthful ownership transition.",
+      "evidence_paths": [
+        "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-control-reauth-evidence.json",
+        "orchestration/agent_inbox/codex/model-required-bureau-c5-windows-teardown-diagnostic-receipt.json",
+        "docs/emr4-model-required-bureau-c5-windows-endpoint-ownership-recovery.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.windows_tcp_teardown_refusal_absence_assumption",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "C5 replaced literal connection-refused absence with exact process absence plus bounded reacquisition of the same 127.0.0.1 port. Windows sockets set SO_EXCLUSIVEADDRUSE before bind, never set SO_REUSEADDR, retry only address-in-use during bounded teardown, and retain the successful reservation through the generation-2 inherited-socket launch. Rollback and cleanup use the same ownership proof, every actual bind attempt is counted, and the changed typed contract passed provider-free Windows lifecycle and focused deterministic tests without claiming a provider or product result.",
+        "prevention_control": "Disposable Windows listener recovery must use process-handle absence plus exact exclusive endpoint reacquisition, not connect-refusal timing. A bounded provider-free diagnostic must exercise real Windows terminate/reacquire/inherit/cleanup behavior; focused tests must reject address sharing, count failed and successful bind attempts, and prove the same reservation remains controller-owned until child inheritance.",
+        "evidence_paths": [
+          "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md",
+          "docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md",
+          "docs/emr4-model-required-bureau-c5-live-preexecution-orchestration-boundary.md",
+          "docs/security/emr4-model-required-bureau-c5-live-preexecution-orchestration-threat-model-delta.md",
+          "scripts/model_required_bureau_c5_rehearsal.py",
+          "tests/test_model_required_bureau_c5_live.py",
+          "tests/test_model_required_bureau_c5_rehearsal.py",
+          "orchestration/agent_inbox/codex/model-required-bureau-c5-windows-teardown-diagnostic-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0029",
+      "attempt_id": "model-required-bureau-c5-credential-restoration-001",
+      "observed_on": "2026-08-06",
+      "tranche": "model-required-bureau-c5-live-preexecution",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Credential-restoration guidance at a human-only gate must distinguish Application Default Credentials from the gcloud CLI credential store, require genuinely fresh authentication where cached source credentials are expired, and verify both stores read-only before another live attempt.",
+      "observed_error": "The first restoration instruction supplied an account argument that reused the expired cached ADC source credential, and the subsequent ADC-only restoration did not address the separate gcloud CLI credential needed by the billing control, causing two avoidable zero-call preexecution failures.",
+      "detection_method": "Distinct sanitized occupied evidence recorded repeated impersonated_adc_refresh_failed and billing_control_read_failed terminal states with zero provider calls. Separate read-only ADC and gcloud CLI checks then identified the two credential stores, after which the exact cloud preflight passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/model-required-bureau-c5-credential-restoration-guidance-analysis.md",
+        "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-adc-restored-evidence.json",
+        "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-fresh-reauth-evidence.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.credential_store_restoration_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed attempts remain preserved. Guidance was corrected to restore and verify impersonated ADC and gcloud CLI authentication separately, without changing IAM or cloud configuration, and the exact read-only Sydney preflight subsequently passed.",
+        "prevention_control": "At Google authentication gates, diagnose ADC and gcloud CLI credentials as separate stores, avoid account-qualified login commands when forced fresh consent is required, and run both sanitized read-only refresh and cloud-control checks before admitting another live attempt.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/model-required-bureau-c5-credential-restoration-guidance-analysis.md",
+          "orchestration/agent_inbox/codex/model-required-bureau-c5-live-cli-reauth-cloud-preflight.json"
         ]
       },
       "status": "corrected"

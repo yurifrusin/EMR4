@@ -1,8 +1,8 @@
 {
-  "schema_version": "emr4.c5_policy.v1",
-  "policy_version": "emr4.c5_recovery_policy.v1",
+  "schema_version": "emr4.c5_policy.v2",
+  "policy_version": "emr4.c5_recovery_policy.v2",
   "source_bound_plan": "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md",
-  "plan_sha256": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15",
+  "plan_sha256": "eb801556ee28a1a0e4520e7ee6aa02849eaee8b54127af1e20da3ed080c58b43",
   "environment": "c5_disposable_authored_synthetic",
   "target": {
     "environment": "c5_disposable_authored_synthetic",
@@ -15,8 +15,8 @@
   "approval_basis": "yuri_standing_programme_authority_2026-08-04",
   "evidence_label": "occupied_authored_synthetic_disposable_live_development_recovery",
   "runbook_catalog": {
-    "catalog_version": "emr4.c5_runbook_catalog.v1",
-    "catalog_digest": "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a",
+    "catalog_version": "emr4.c5_runbook_catalog.v2",
+    "catalog_digest": "cab2c605dd6c9a4e658e7f2b2ea1643d9c2515333d9ddba4d81d6d63a2075feb",
     "entries": [
       {
         "entry_id": "start-c5-disposable-service-v1-entry",
@@ -56,7 +56,7 @@
           "properties": {},
           "additionalProperties": false
         },
-        "expected_effect": "owned_process_absent_connection_refused",
+        "expected_effect": "owned_process_absent_exact_port_reacquired",
         "executable": false,
         "immutable": true
       }

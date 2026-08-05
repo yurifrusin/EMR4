@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "9560ba0385f38ebd8d4a17777da5e5edd5a02bb1f51fc0d123d4d37caafe7f24",
+  "canonical_register_sha256": "cd057f10a0859116e1ee8cbaa25121e818ca6ea6dc6da82817221b5fa074a0c8",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 1,
-      "canonical_unchanged": 20,
+      "accepted_candidate_changed": 2,
+      "canonical_unchanged": 21,
       "untrusted_partial_worktree": 6
     },
     "by_category": {
@@ -12,42 +12,43 @@
       "harness_failure": 3,
       "output_contract_violation": 11,
       "read_only_violation": 1,
-      "reasoning_claim_error": 4,
-      "repository_defect": 1,
+      "reasoning_claim_error": 5,
+      "repository_defect": 2,
       "transport_timeout": 2
     },
     "by_origin": {
-      "agent_behavior": 21,
+      "agent_behavior": 22,
       "harness": 3,
-      "repository": 1,
+      "repository": 2,
       "transport": 2
     },
     "by_process_severity": {
       "low": 7,
-      "material": 8,
-      "moderate": 12
+      "material": 9,
+      "moderate": 13
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 10,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 6,
+      "codex-primary-orchestrator::orchestrator": 7,
       "deepseek-flash-workers::implementer": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
+      "model-required-bureau-c5-live-controller::orchestrator": 1,
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
       "implementer": 6,
-      "orchestrator": 10,
+      "orchestrator": 12,
       "verifier": 11
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 27,
+  "incident_count": 29,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -152,7 +153,7 @@
       ]
     }
   ],
-  "register_revision": 23,
+  "register_revision": 24,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-05"
+  "source_cutoff_on": "2026-08-06"
 }

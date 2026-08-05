@@ -1,0 +1,73 @@
+{
+  "schema_version": "emr4.c5_windows_teardown_diagnostic_receipt.v1",
+  "observed_on": "2026-08-06",
+  "environment": "c5_disposable_authored_synthetic",
+  "platform": "windows",
+  "result": "provider_free_windows_endpoint_ownership_recovery_verified",
+  "original_failure": {
+    "evidence_path": "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-control-reauth-evidence.json",
+    "terminal_reason_code": "unexpected_fail_closed",
+    "provider_calls": 0,
+    "external_mutations": 0,
+    "finding": "A literal connection-refused result is not a reliable post-termination listener-absence oracle on this Windows host."
+  },
+  "bounded_diagnosis": {
+    "owned_process_absent": true,
+    "observed_tcp_dispositions": [
+      "reset",
+      "timeout"
+    ],
+    "exact_port_reacquisition_succeeded": true,
+    "address_sharing_used": false,
+    "windows_exclusive_address_use_set_before_bind": true,
+    "so_reuseaddr_used": false
+  },
+  "repaired_provider_free_lifecycle": {
+    "generation_1_healthy": true,
+    "exact_owned_process_terminated": true,
+    "same_endpoint_reacquired": true,
+    "same_reservation_retained_through_generation_2": true,
+    "generation_2_healthy": true,
+    "attempt_result": "live_development_recovery_verified",
+    "cleanup_result": "cleanup_verified",
+    "cleanup_predicates": {
+      "no_process": true,
+      "no_listener": true,
+      "no_task_directory": true,
+      "no_open_ledger": true,
+      "no_reusable_capability": true
+    },
+    "operation_counters": {
+      "cloud_iam_operations": 0,
+      "database_operations": 0,
+      "deployment_operations": 0,
+      "directory_creates": 1,
+      "directory_removals": 1,
+      "dynamic_import_operations": 0,
+      "eval_exec_operations": 0,
+      "external_event_operations": 0,
+      "network_operations": 0,
+      "port_allocations": 3,
+      "process_starts": 2,
+      "process_stops": 2,
+      "product_operations": 0,
+      "protected_operations": 0,
+      "provider_calls": 0,
+      "reflection_operations": 0,
+      "shell_operations": 0,
+      "socket_binds": 4,
+      "socket_connects": 2,
+      "sql_operations": 0
+    }
+  },
+  "claim_boundary": {
+    "provider_free": true,
+    "candidate_runtime_provider_called": false,
+    "patient_or_product_data_used": false,
+    "product_runtime_touched": false,
+    "deployment_or_release": false,
+    "protected_ref_moved": false,
+    "occupied_c5_pass_claimed": false,
+    "terminal_accounting_disposition": "cleanup_or_accounting_not_verified_expected_for_non_live_provider_capability"
+  }
+}

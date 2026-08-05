@@ -23,8 +23,10 @@ region, data, call, cost, authority, rollback, cleanup or claim boundary.
   strict response extraction, keyless-ADC invocation cell, cost/call ledger,
   source-gate validation and serial orchestration.
 - `live-preexecution-receipt.schema.json` binds the exact reviewed Git HEAD,
-  source-review receipt, Ariadne five-source receipt, plan/policy/catalog and
-  exact live-runner artifact set before any live capability opens.
+  source-review receipt, the fresh Ariadne five-source runtime-state digest and
+  receipt, their exact branch/HEAD/protected refs and bounded freshness,
+  plan/policy/catalog and the exact live-runner artifact set before any live
+  capability opens.
 - `occupied-rehearsal-evidence.schema.json` admits only sanitized provider,
   target, proofreader, authority, readback, accounting and cleanup evidence.
 - focused provider-free tests inject fake preflight, provider, process, HTTP,
@@ -54,17 +56,24 @@ USD 0.25 for each possible call. No call follows admission.
 ## Serial lifecycle
 
 1. Validate the exact clean non-protected Git HEAD, accepted fresh source veto,
-   Ariadne five-source receipt and C5 pre-execution receipt.
+   fresh Ariadne five-source receipt plus its exact runtime-state digest,
+   branch/HEAD/protected refs and expiry, and the C5 pre-execution receipt.
 2. Run the existing read-only exact Sydney cloud/ADC control preflight; retain
    no credential and transmit no C5 frame.
 3. Hash the pinned Python executable and frozen target artifact.
 4. Create only the task-owned OS-temporary directory and inherited loopback
    reservation, launch generation 1, and wait within a fixed short deadline
-   only for connection-refused startup readiness.
+   only for connection-refused startup readiness. Count every actual loopback
+   connection attempt rather than only the logical observation.
 5. Record a fresh healthy baseline, terminate the exact generation-1 handle,
-   and prove process absence plus connection refusal.
-6. Reacquire the exact port, close the terminated generation-1 process handle,
-   build the minimal provider-visible frame and reserve the primary cost slot.
+   prove process absence, and atomically reacquire the exact address/port without
+   `SO_REUSEADDR`. On Windows every bind sets `SO_EXCLUSIVEADDRUSE` first and
+   only address-in-use is retried for at most two seconds. Timeout or reset is
+   diagnostic evidence, never absence evidence.
+6. Retain that exact reservation through the generation-2 inherited-socket
+   handoff, close the terminated generation-1 process handle, build the truthful
+   provider-visible `loopback_endpoint_disposition: exact_port_reacquired`
+   frame and reserve the primary cost slot.
 7. Invoke the provider cell, strictly parse and proofread in memory, discard
    raw request/response bytes and provider text, and perform at most the exact
    proofreader-ticketed correction.

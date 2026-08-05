@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c5_windows_endpoint_ownership_recovery_candidate_for_fresh_exact_head_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the frozen serial C5 authored-synthetic live rehearsal as the immediate gate and the provider-free Practice Context Fabric contract as its automatic successor. The first target-lifecycle attempt stopped before provider admission because the accepted Windows listener-absence assumption was invalid; the repository defect has now been repaired provider-free and must be committed, independently reviewed and fully regated before another occupied attempt.",
+    "current_authority_allocation": "GPT Sol owns C5 diagnosis, bounded repository recovery, serial live execution, acceptance and non-protected task-branch integration. Gemini 3.6 Flash/high through a genuinely fresh Antigravity project owns the required read-only exact-HEAD veto after commit. Existing native agents may audit read-only but receive no provider, actuator, acceptance, deployment, product-data or protected-ref authority.",
+    "active_plan_and_acceptance": "C5 recovery revision 2 binds one task-owned IPv4-loopback authored-synthetic target, exact owned-process termination, exact no-sharing endpoint reacquisition retained through generation 2, Sydney Vertex gemini-2.5-flash through the Bernie development identity, thinkingBudget 1024, maxOutputTokens 2048, one primary plus at most one proofreader-ticketed correction, USD 0.50 total, deterministic proofreader and authority, one-use actuator, fresh readback, rollback and complete cleanup. The v2 pre-execution gate also binds the fresh Ariadne runtime-state digest, exact branch/HEAD/protected refs and bounded freshness, and revalidates them immediately before execution. The widened deterministic suite, schema/example/digest reproduction, real provider-free Windows lifecycle, static analysis and register revision 24 pass; no occupied C5 success is claimed.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, patient, clinical, participant, product-derived, protected and production data, real databases, ordinary product services/runtime, provider tools/retrieval, raw prompt/response/thought retention, credential or IAM mutation, deployment, production, release, Pages, protected evidence and protected-ref movement remain closed. docs/branding/ and unrelated untracked receipts/states remain preserved and excluded. Only explicit-path staging is permitted.",
+    "git_refs_and_worktree": "The primary worktree is on codex/ariadne-bernie-davida-parallel-seam at exact precommit HEAD 7a8c4e2bdd3251458fb08a9afc2c4b6780aa26b1, eight commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f, with the intentional C5 Windows endpoint-ownership recovery candidate and preserved untracked artifacts. Local and origin master plus handoff/current are all exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602 and will not move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_windows_endpoint_recovery_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the post-restoration five-source rehydration and deterministic C5 recovery gates."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini 3.6 Flash/high remains allocated to a fresh exact-HEAD read-only veto after this commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No implementation worker is selected for the completed tightly coupled Windows recovery."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains an unused real-TTY fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Claude Code bare is not selected for the serial C5 recovery."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native audit lanes are read-only and hold no shared mutable C5 execution or acceptance authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,9 +1,9 @@
 {
-  "schema_version": "emr4.execution_approval.v1",
+  "schema_version": "emr4.execution_approval.v2",
   "approval_id": "91000000-0000-4000-8000-000000000001",
   "approval_basis": "yuri_standing_programme_authority_2026-08-04",
-  "plan_sha256": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15",
-  "plan_revision": 1,
+  "plan_sha256": "eb801556ee28a1a0e4520e7ee6aa02849eaee8b54127af1e20da3ed080c58b43",
+  "plan_revision": 2,
   "target": {
     "environment": "c5_disposable_authored_synthetic",
     "kind": "task_owned_loopback_http_service",

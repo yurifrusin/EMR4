@@ -22,6 +22,7 @@ anything except its owned handle.
 from __future__ import annotations
 
 import hashlib
+import errno
 import json
 import os
 import re
@@ -41,12 +42,14 @@ from scripts.model_required_bureau_c5_contract import (
     FORWARD_RUNBOOK,
     HOST,
     IdempotencyRecord,
+    PLAN_REVISION,
+    PLAN_SHA256,
+    PLAN_ENVIRONMENT,
     RecoveryDiagnosisCandidate,
     ROLLBACK_RUNBOOK,
     SystemAnatomyFrameSet,
     TARGET_ID,
     TARGET_KIND,
-    PLAN_ENVIRONMENT,
     ProofreaderDisposition,
     TargetRef,
     build_command_material_digest,
@@ -421,6 +424,22 @@ class HttpReadbackProbe:
                 "port": port,
                 "path": path,
             }
+        except ConnectionResetError:
+            return {
+                "observation_id": "obs-http-" + secrets.token_hex(8),
+                "status": "connection_reset",
+                "host": host,
+                "port": port,
+                "path": path,
+            }
+        except TimeoutError:
+            return {
+                "observation_id": "obs-http-" + secrets.token_hex(8),
+                "status": "connection_timeout",
+                "host": host,
+                "port": port,
+                "path": path,
+            }
         finally:
             conn.close()
 
@@ -441,12 +460,14 @@ class HttpReadbackProbe:
         if deadline_seconds <= 0 or deadline_seconds > 5:
             raise ValueError("health readiness deadline drift")
         deadline = time.monotonic() + deadline_seconds
+        attempts = 0
         while True:
             observation = self.probe(host, port, path)
+            attempts += 1
             if observation.get("status") != "connection_refused":
-                return observation
+                return {**observation, "probe_attempts": attempts}
             if time.monotonic() >= deadline:
-                return observation
+                return {**observation, "probe_attempts": attempts}
             time.sleep(0.025)
 
     def any_listener(self, *, port: int) -> bool:
@@ -456,10 +477,18 @@ class HttpReadbackProbe:
 class PortReservation:
     """Controller-held loopback reservation released only inside exact start."""
 
-    def __init__(self, sock: Any) -> None:
+    def __init__(
+        self,
+        sock: Any,
+        *,
+        exclusive_address_use: bool = False,
+        bind_attempts: int = 1,
+    ) -> None:
         self._socket = sock
         self.host = HOST
         self.port = int(sock.getsockname()[1])
+        self.exclusive_address_use = exclusive_address_use
+        self.bind_attempts = bind_attempts
         self.released = False
         self.prepared = False
 
@@ -488,13 +517,28 @@ class LoopbackPortAllocator:
 
     is_live_capability = True
 
-    def reserve(self) -> PortReservation:
+    @staticmethod
+    def _new_socket() -> tuple[Any, bool]:
         import socket
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        exclusive_address_use = False
+        if os.name == "nt":
+            if not hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+                sock.close()
+                raise RuntimeError("Windows exclusive-address control is unavailable")
+            sock.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+            exclusive_address_use = True
+        return sock, exclusive_address_use
+
+    def reserve(self) -> PortReservation:
+        sock, exclusive_address_use = self._new_socket()
         try:
             sock.bind((HOST, 0))
-            return PortReservation(sock)
+            return PortReservation(
+                sock,
+                exclusive_address_use=exclusive_address_use,
+            )
         except Exception:
             sock.close()
             raise
@@ -502,15 +546,49 @@ class LoopbackPortAllocator:
     def reserve_exact(self, port: int) -> PortReservation:
         if not isinstance(port, int) or isinstance(port, bool) or not 1 <= port <= 65535:
             raise ValueError("exact port reservation drift")
-        import socket
-
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock, exclusive_address_use = self._new_socket()
         try:
             sock.bind((HOST, port))
-            return PortReservation(sock)
+            return PortReservation(
+                sock,
+                exclusive_address_use=exclusive_address_use,
+            )
         except Exception:
             sock.close()
             raise
+
+    def reserve_exact_until_owned(
+        self,
+        port: int,
+        *,
+        deadline_seconds: float = 2.0,
+    ) -> PortReservation:
+        """Reacquire and retain the exact port without address sharing.
+
+        A successful bind is the absence proof.  On Windows every candidate
+        socket has ``SO_EXCLUSIVEADDRUSE`` set before bind; ``SO_REUSEADDR`` is
+        never used.  Only address-in-use is retried, covering the bounded TCP
+        teardown interval after exact child termination.  Any other socket
+        error fails immediately.
+        """
+        if deadline_seconds <= 0 or deadline_seconds > 5:
+            raise ValueError("exact-port reacquisition deadline drift")
+        deadline = time.monotonic() + deadline_seconds
+        attempts = 0
+        while True:
+            attempts += 1
+            try:
+                reservation = self.reserve_exact(port)
+                reservation.bind_attempts = attempts
+                return reservation
+            except OSError as exc:
+                exc.bind_attempts = attempts
+                address_in_use = exc.errno == errno.EADDRINUSE or getattr(
+                    exc, "winerror", None
+                ) == 10048
+                if not address_in_use or time.monotonic() >= deadline:
+                    raise
+                time.sleep(0.025)
 
 
 class TaskDirectoryOps:
@@ -647,6 +725,81 @@ class LiveRecoveryController:
                         "recorded_at": _format_time(self.now()),
                     }
                 )
+
+    def _record_http_observation(self, observation: dict[str, Any]) -> None:
+        attempts = observation.get("probe_attempts", 1)
+        if (
+            not isinstance(attempts, int)
+            or isinstance(attempts, bool)
+            or not 1 <= attempts <= 128
+        ):
+            raise ValueError("HTTP probe attempt accounting drift")
+        outcome = str(observation.get("status"))
+        for _ in range(attempts):
+            self._record_operation(self.http, "socket_connects", outcome)
+
+    def _acquire_exact_absence_reservation(self, port: int) -> Any:
+        acquire = getattr(self.port_allocator, "reserve_exact_until_owned", None)
+        try:
+            reservation = (
+                acquire(port)
+                if callable(acquire)
+                else self.port_allocator.reserve_exact(port)
+            )
+        except OSError as exc:
+            attempts = getattr(exc, "bind_attempts", 1)
+            if (
+                not isinstance(attempts, int)
+                or isinstance(attempts, bool)
+                or not 1 <= attempts <= 256
+            ):
+                attempts = 1
+            for _ in range(attempts):
+                self._record_operation(
+                    self.port_allocator,
+                    "socket_binds",
+                    "exact_absence_bind_failed",
+                )
+            raise
+        if (
+            reservation.host != HOST
+            or reservation.port != port
+            or reservation.released
+            or reservation.prepared
+        ):
+            reservation.close()
+            raise ValueError("exact-port absence reservation drift")
+        if (
+            os.name == "nt"
+            and getattr(self.port_allocator, "is_live_capability", False)
+            and getattr(reservation, "exclusive_address_use", False) is not True
+        ):
+            reservation.close()
+            raise ValueError("Windows exact-port reservation is not exclusive")
+        attempts = getattr(reservation, "bind_attempts", 1)
+        if (
+            not isinstance(attempts, int)
+            or isinstance(attempts, bool)
+            or not 1 <= attempts <= 256
+        ):
+            reservation.close()
+            raise ValueError("exact-port bind-attempt accounting drift")
+        for attempt in range(1, attempts + 1):
+            self._record_operation(
+                self.port_allocator,
+                "socket_binds",
+                (
+                    "exact_absence_bound"
+                    if attempt == attempts
+                    else "exact_absence_address_in_use"
+                ),
+            )
+        self._record_operation(
+            self.port_allocator,
+            "port_allocations",
+            "exact_absence_owned",
+        )
+        return reservation
 
     def _denial(
         self,
@@ -837,9 +990,7 @@ class LiveRecoveryController:
                 if callable(readiness_probe)
                 else self.http.probe(HOST, port, HEALTH_PATH)
             )
-            self._record_operation(
-                self.http, "socket_connects", str(http_observation.get("status"))
-            )
+            self._record_http_observation(http_observation)
             healthy = proc_disposition == "alive" and self._matches_health(
                 http_observation,
                 port=port,
@@ -875,7 +1026,7 @@ class LiveRecoveryController:
         return stopped
 
     def post_fault_verify(self, handle: Any, *, port: int) -> bool:
-        """Prove process-absent and loopback connection-refused agreement."""
+        """Prove process absence and atomically reacquire the exact port."""
         if (
             self.store.launch_state != "fault_injected"
             or handle is not self._last_handle
@@ -883,12 +1034,15 @@ class LiveRecoveryController:
         ):
             raise ValueError("post-fault verification is out of sequence")
         proc_disposition = self.process.observe_process(handle).get("disposition")
-        http_observation = self.http.probe(HOST, port, HEALTH_PATH)
-        self._record_operation(self.http, "socket_connects", str(http_observation.get("status")))
-        verified = (
-            proc_disposition == "absent"
-            and http_observation.get("status") == "connection_refused"
-        )
+        reservation = None
+        if proc_disposition == "absent":
+            try:
+                reservation = self._acquire_exact_absence_reservation(port)
+            except Exception:
+                reservation = None
+        verified = reservation is not None
+        if verified:
+            self._last_reservation = reservation
         self.store.launch_state = "post_fault_verified" if verified else "post_fault_failed"
         return verified
 
@@ -903,11 +1057,14 @@ class LiveRecoveryController:
         if self.process.observe_process(self._last_handle).get("disposition") != "absent":
             raise ValueError("baseline process is not absent")
         baseline_handle = self._last_handle
-        reservation = self.port_allocator.reserve_exact(self._last_port)
-        self._record_operation(self.port_allocator, "socket_binds", "bound_exact")
-        self._record_operation(self.port_allocator, "port_allocations", "allocated_exact")
-        if reservation.host != HOST or reservation.port != self._last_port:
-            reservation.close()
+        reservation = self._last_reservation
+        if (
+            reservation is None
+            or reservation.host != HOST
+            or reservation.port != self._last_port
+            or reservation.released
+            or reservation.prepared
+        ):
             raise ValueError("recovery port reservation drift")
         close = getattr(self.process, "close", None)
         if callable(close):
@@ -917,7 +1074,6 @@ class LiveRecoveryController:
                 reservation.close()
                 raise
         self._last_handle = None
-        self._last_reservation = reservation
         self.store.launch_state = "recovery_port_reserved"
         return reservation.port
 
@@ -947,8 +1103,8 @@ class LiveRecoveryController:
     def materialise_approval(self, *, approval_id: str, expires_at: str) -> ExecutionApproval:
         return materialise_execution_approval(
             approval_id=approval_id,
-            plan_sha256="9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15",
-            plan_revision=1,
+            plan_sha256=PLAN_SHA256,
+            plan_revision=PLAN_REVISION,
             expires_at=expires_at,
         )
 
@@ -1211,7 +1367,7 @@ class LiveRecoveryController:
                     if callable(readiness_probe)
                     else self.http.probe(HOST, port, HEALTH_PATH)
                 )
-                self._record_operation(self.http, "socket_connects", str(http_observation.get("status")))
+                self._record_http_observation(http_observation)
                 if fault == "readback_failed":
                     http_observation = {"status": 503, "body": "{}"}
                 if not self._matches_health(
@@ -1288,12 +1444,12 @@ class LiveRecoveryController:
             except Exception:
                 proc_absent = False
             try:
-                http_observation = self.http.probe(HOST, port, HEALTH_PATH)
-                self._record_operation(self.http, "socket_connects", str(http_observation.get("status")))
-                http_refused = http_observation.get("status") == "connection_refused"
+                reservation = self._acquire_exact_absence_reservation(port)
+                self._last_reservation = reservation
+                exact_port_reacquired = True
             except Exception:
-                http_refused = False
-            rollback_verified = bool(proc_absent and http_refused)
+                exact_port_reacquired = False
+            rollback_verified = bool(proc_absent and exact_port_reacquired)
         else:
             rollback_verified = False
         self.store.launch_state = "rolled_back" if rollback_verified else "rollback_inconclusive"
@@ -1357,16 +1513,14 @@ class LiveRecoveryController:
         except Exception:
             no_process = False
         try:
-            no_listener = (
-                True
-                if self._last_port is None
-                else self.http.any_listener(port=self._last_port) is False
-            )
-        except TypeError:
-            try:
-                no_listener = self.http.any_listener() is False
-            except Exception:
-                no_listener = False
+            if self._last_port is None:
+                no_listener = True
+            else:
+                cleanup_reservation = self._acquire_exact_absence_reservation(
+                    self._last_port
+                )
+                cleanup_reservation.close()
+                no_listener = True
         except Exception:
             no_listener = False
         no_task_directory = (

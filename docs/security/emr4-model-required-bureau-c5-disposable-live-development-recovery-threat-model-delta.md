@@ -67,10 +67,13 @@ the owned handle and fail closed if ownership cannot be proved.
 ### Ephemeral port race reaches or replaces another listener
 
 Controls: the controller owns the socket allocation handoff, binds only
-`127.0.0.1`, carries an opaque target nonce in the exact health response, and
-binds port, generation and nonce into observations and evidence. Address-in-use,
-nonce mismatch or unexpected listener is a terminal denial, never a retry
-against another port after provider admission.
+`127.0.0.1`, never sets `SO_REUSEADDR`, and on Windows sets
+`SO_EXCLUSIVEADDRUSE` before every bind. It carries an opaque target nonce in
+the exact health response and binds port, generation and nonce into observations
+and evidence. After termination it retries only exact address-in-use during a
+short bounded teardown interval, then retains the successfully reacquired exact
+port through generation 2. Non-address errors, nonce mismatch, an occupied port
+after the deadline or any different port are terminal denials.
 
 ### Child process inherits cloud credentials or ambient authority
 
@@ -81,10 +84,12 @@ environment contract without exposing secret values.
 
 ### Pre-fault or post-fault evidence is stale or fabricated
 
-Controls: independent process and HTTP observers, exact source/revision/time
-bindings, short expiry, monotone generation, fresh connection-refused proof and
-frame-set digest. Any process/HTTP disagreement, stale observation or changed
-target stops before the provider call or actuator.
+Controls: independent process and HTTP baseline observers, exact source/
+revision/time bindings, short expiry, monotone generation, a fresh exact-owned-
+process absence observation and atomic no-sharing reacquisition of the same
+address/port. A Windows timeout or reset is retained as diagnostic transport
+evidence but never used as an absence oracle. Any stale observation, changed
+target or failed exact reacquisition stops before the provider call or actuator.
 
 ### Provider invents a cause, runbook or success
 
@@ -111,9 +116,9 @@ readback; cross-runtime adversarial tests require one winner.
 ### Launch or readback failure leaves an uncontrolled process
 
 Controls: any post-launch failure invokes only the exact stop rollback through
-the owned handle, followed by fresh process-absence and connection-refused
-checks. Verified and inconclusive rollback are distinct terminal states. No
-failure reopens evidence.
+the owned handle, followed by fresh process-absence and exact no-sharing port
+reacquisition. Verified and inconclusive rollback are distinct terminal states.
+No failure reopens evidence.
 
 ### Cleanup deletes unrelated files or leaves residue
 

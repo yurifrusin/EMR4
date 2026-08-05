@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://emr4.local/schemas/execution-approval.v1.json",
+  "$id": "https://emr4.local/schemas/execution-approval.v2.json",
   "title": "Closed deterministic execution approval materialised from Yuri's standing programme authority",
   "description": "Backend-materialised human approval record binding one committed C5 plan hash, exact target, fault, runbook, rollback, provider/cost envelope, one rehearsal and one expiry. Non-transferable and scope-expansion false; any changed field rejects.",
   "type": "object",
@@ -27,11 +27,11 @@
     "non_transferable"
   ],
   "properties": {
-    "schema_version": {"const": "emr4.execution_approval.v1"},
+    "schema_version": {"const": "emr4.execution_approval.v2"},
     "approval_id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
     "approval_basis": {"const": "yuri_standing_programme_authority_2026-08-04"},
     "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "plan_revision": {"const": 1},
+    "plan_revision": {"const": 2},
     "target": {
       "type": "object",
       "additionalProperties": false,
