@@ -271,7 +271,7 @@ components:
     SignedProposalRef:
       type: string
       minLength: 24
-      maxLength: 1024
+      maxLength: 4096
       pattern: "^dlp1\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+$"
       description: >
         Backend-issued signed opaque self-contained proposal reference. It

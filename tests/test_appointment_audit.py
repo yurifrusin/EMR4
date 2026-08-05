@@ -13,7 +13,6 @@ Covers:
 - Unauthenticated GET /{id}/audit returns 401.
 - Multiple mutations produce multiple ordered entries.
 """
-import json
 from datetime import date, datetime, time, timedelta, timezone
 
 import pytest
@@ -94,7 +93,7 @@ def test_proposal_update_does_not_write_audit(
     client.post(
         f"{APPT_URL}/proposals/update/{appt.id}",
         json={"duration_minutes": 30},
-        headers=_auth(token),
+        headers={**_auth(token), "Idempotency-Key": "audit-update-proposal-key"},
     )
     assert db.query(AppointmentAuditLog).count() == 0
 
@@ -107,7 +106,7 @@ def test_proposal_status_does_not_write_audit(
     client.post(
         f"{APPT_URL}/proposals/status/{appt.id}",
         json={"status": "Confirmed"},
-        headers=_auth(token),
+        headers={**_auth(token), "Idempotency-Key": "audit-status-proposal-key"},
     )
     assert db.query(AppointmentAuditLog).count() == 0
 
@@ -120,7 +119,7 @@ def test_proposal_delete_does_not_write_audit(
     client.post(
         f"{APPT_URL}/proposals/delete/{appt.id}",
         json={"cancellation_reason": "Patient request"},
-        headers=_auth(token),
+        headers={**_auth(token), "Idempotency-Key": "audit-delete-proposal-key"},
     )
     assert db.query(AppointmentAuditLog).count() == 0
 
@@ -278,7 +277,7 @@ def test_signed_delete_confirm_writes_delete_audit_evidence(
     proposal_resp = client.post(
         f"{APPT_URL}/proposals/delete/{appt.id}",
         json={"cancellation_reason": "Patient request"},
-        headers=_auth(token),
+        headers={**_auth(token), "Idempotency-Key": "audit-signed-delete-proposal-key"},
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]
@@ -474,7 +473,7 @@ def test_delete_confirm_preserves_cancellation_reason_on_appointment_and_audit(
     resp = client.post(
         f"{APPT_URL}/proposals/delete/{appt.id}",
         json={"cancellation_reason": reason},
-        headers=_auth(token),
+        headers={**_auth(token), "Idempotency-Key": "audit-delete-reason-proposal-key"},
     )
     assert resp.status_code == 200
     payload = resp.json()["confirm_payload"]

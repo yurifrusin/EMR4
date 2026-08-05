@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_integrated_a5_1_b4_1_repair_candidate_on_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton names the paired Bureau A5.1 Rayleen check-in and Bureau B4.1 Davida default-location command runtime as the active planned descendant. The integrated candidate remains under Sol acceptance and the A5.1 recovery lease; this commit is a non-protected candidate checkpoint before the mandatory fresh code veto.",
+    "current_authority_allocation": "GPT Sol owns the integration repair, migration-chain reconciliation, acceptance and task-branch commit. DeepSeek V4 Flash/high worker source is preserved without self-acceptance. Gemini 3.6 Flash/high through a fresh Antigravity project remains the later independent read-only veto. No protected integration, provider/runtime, patient/product-data, deployment, release or Pages authority is allocated.",
+    "active_plan_and_acceptance": "docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md revision 3, its A5/B4 threat-model delta, the passing plan-review-3 receipt and docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md control this checkpoint. The integrated A5.1 and B4.1 focused/API-spine tests, a widened 389-test ordinary command/event regression set, 80 maintenance/A3 tests, the 69-test canonical fast profile, Ruff, compilation, whitespace, one-head upgrade/downgrade/upgrade lifecycle and the canonical Bandit profile pass. Final acceptance still requires a fresh exact-head clean Gemini code veto.",
+    "protected_evidence_boundaries": "All execution was local, provider-free and authored-synthetic. No protected holdout, historical PHI, patient/clinical/participant/product-derived/protected/production data, provider call, GraphQL mutation, autonomous action, external event publication, deployment, release, Pages or protected-ref movement occurred. docs/branding and the preserved Consultant, Gate-minus-one, A3/B3, A4 and pre-push receipt/state files remain unstaged.",
+    "git_refs_and_worktree": "Active task branch codex/ariadne-bernie-davida-parallel-seam remains at precommit HEAD 1e0385f3ac21ec2ca735956a99bd32304e569e89, eight commits ahead of origin task ref add94f3c40398f5972fb197ae505373292af1b08. The intended tracked diff is the bounded integration/test/security-gate repair set; explicit-path staging will include only that set and the valid A5/B4 rehydration/precommit records. Local/origin master and handoff/current remain at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "a5_b4_integration_repair_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Both worker source candidates are integrated as untrusted inputs; their transports are closed."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare completed the bounded DeepSeek transports before Sol recovery."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The final Gemini code veto is the next gate after this clean candidate commit."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol has reviewed the complete bounded diff and deterministic evidence."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No new native subagent was needed for the serial shared-database repair."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

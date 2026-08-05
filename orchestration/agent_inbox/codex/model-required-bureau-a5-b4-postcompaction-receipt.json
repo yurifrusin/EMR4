@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "sol_repair_and_verify_integrated_a5_1_b4_1_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling frozen plan is docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md revision 3, with docs/security/emr4-model-required-bureau-a5-b4-command-runtime-threat-model-delta.md and docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md. The integrated candidate is not accepted: the first focused run failed, so deterministic Sol repair and rerun precede any independent veto.",
+    "current_authority_allocation": "GPT Sol owns architecture, acceptance, recovery, the single Alembic chain and integration. DeepSeek V4 Flash/high worker packets are complete and confer no acceptance. Gemini 3.6 Flash/high remains the later fresh read-only independent veto reviewer. No worker or reviewer has protected-ref, provider/runtime, patient/product-data, deployment, release or Pages authority.",
+    "git_refs_and_worktree": "The active task branch is codex/ariadne-bernie-davida-parallel-seam at HEAD 1e0385f3ac21ec2ca735956a99bd32304e569e89, ahead of origin task ref add94f3c40398f5972fb197ae505373292af1b08. The only tracked worktree modification is the intended B4 migration down-revision reconciliation. Local/origin master and handoff/current are all unchanged at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; preserved untracked files are untouched.",
+    "live_handover_current_baton": "The live baton identifies paired A5.1/B4.1 command runtime as the next planned descendant under standing uninterrupted-development authority. The two bounded worker candidates have now been integrated on the task branch as unaccepted source, with A5 governed by the recorded Sol recovery lease.",
+    "protected_evidence_boundaries": "Work remains local, provider-free and authored-synthetic. Holdouts v1-v10, historical PHI, patient/clinical/product-derived/participant/protected/production data, GraphQL mutation, autonomous model action, external event/outbox delivery, deployment, release, Pages and protected refs remain closed. docs/branding and every existing untracked pre-push receipt/state file remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

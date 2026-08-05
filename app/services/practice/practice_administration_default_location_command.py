@@ -147,6 +147,23 @@ def _actor_ref(user_id: UUID) -> str:
     return f"user_{user_id.hex}"
 
 
+def _resource_ref(
+    *,
+    kind: str,
+    practice_id: UUID,
+    resource_id: UUID,
+    secret: bytes,
+) -> str:
+    """Return a stable, non-positional opaque reference for one resource."""
+    digest = hmac.new(
+        secret,
+        f"b4-resource-ref:v1:{practice_id}:{kind}:{resource_id}".encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()[:24]
+    prefix = "prac" if kind == "practitioner" else "loc"
+    return f"{prefix}_synth_{digest}"
+
+
 def _practice_allowlist() -> frozenset[str]:
     raw = settings.b4_default_location_command_synthetic_practice_ids or ""
     return frozenset(part.strip() for part in raw.split(",") if part.strip())
@@ -217,6 +234,7 @@ def _build_registry(
     *,
     practice_id: UUID,
     practice_ref: str,
+    secret: bytes,
 ) -> _PracticeResourceRegistry:
     practitioners = (
         db.query(Practitioner)
@@ -238,14 +256,24 @@ def _build_registry(
     )
     practitioner_by_ref: dict[str, UUID] = {}
     ref_by_practitioner: dict[UUID, str] = {}
-    for index, practitioner in enumerate(practitioners, start=1):
-        ref = f"prac_synth_{index:04d}"
+    for practitioner in practitioners:
+        ref = _resource_ref(
+            kind="practitioner",
+            practice_id=practice_id,
+            resource_id=practitioner.id,
+            secret=secret,
+        )
         practitioner_by_ref[ref] = practitioner.id
         ref_by_practitioner[practitioner.id] = ref
     location_by_ref: dict[str, UUID] = {}
     ref_by_location: dict[UUID, str] = {}
-    for index, location in enumerate(locations, start=1):
-        ref = f"loc_synth_{index:04d}"
+    for location in locations:
+        ref = _resource_ref(
+            kind="location",
+            practice_id=practice_id,
+            resource_id=location.id,
+            secret=secret,
+        )
         location_by_ref[ref] = location.id
         ref_by_location[location.id] = ref
     return _PracticeResourceRegistry(
@@ -303,8 +331,11 @@ def _verify_proposal(
     if len(parts) != 3 or parts[0] != SIGNED_PROPOSAL_PREFIX:
         raise B4CommandError("proposal_hash_mismatch", status_code=409)
     try:
-        canonical = _b64url_decode(parts[1]).decode("utf-8")
+        canonical_bytes = _b64url_decode(parts[1])
         signature = _b64url_decode(parts[2])
+        if _b64url(canonical_bytes) != parts[1] or _b64url(signature) != parts[2]:
+            raise ValueError("non-canonical base64url")
+        canonical = canonical_bytes.decode("utf-8")
     except (ValueError, UnicodeDecodeError):
         raise B4CommandError("proposal_hash_mismatch", status_code=409)
     expected = hmac.new(secret, canonical.encode("utf-8"), hashlib.sha256).digest()
@@ -387,8 +418,12 @@ def generate_default_location_proposal(
     now = now or _now()
     practice_ref = _practice_ref(current_user.practice_id)
     actor_ref = _actor_ref(current_user.id)
+    secret = _b4_secret()
     registry = _build_registry(
-        db, practice_id=current_user.practice_id, practice_ref=practice_ref
+        db,
+        practice_id=current_user.practice_id,
+        practice_ref=practice_ref,
+        secret=secret,
     )
     practitioner_uuid = _resolve_practitioner(registry, request.practitioner_ref)
     location_uuid = _resolve_location(registry, request.requested_default_location_ref)
@@ -467,7 +502,7 @@ def generate_default_location_proposal(
     proposal_hash = _sha256(proposal_material)
     signed_payload = dict(proposal_material)
     signed_payload["proposal_hash"] = proposal_hash
-    proposal_id = _sign_proposal(signed_payload, _b4_secret())
+    proposal_id = _sign_proposal(signed_payload, secret)
 
     return DefaultLocationProposalEnvelope(
         schema_version=PROPOSAL_ENVELOPE_SCHEMA_VERSION,
@@ -604,8 +639,26 @@ def issue_confirmation_evidence(
         expected_aggregate_version=request.expected_aggregate_version,
     )
 
+    existing_evidence = (
+        db.query(PracticeAdministrationConfirmationEvidence)
+        .filter(
+            PracticeAdministrationConfirmationEvidence.practice_id
+            == current_user.practice_id,
+            PracticeAdministrationConfirmationEvidence.actor_user_id
+            == current_user.id,
+            PracticeAdministrationConfirmationEvidence.proposal_hash
+            == request.proposal_hash,
+        )
+        .first()
+    )
+    if existing_evidence is not None and existing_evidence.state == "consumed":
+        raise B4CommandError("confirmation_replay_rejected", status_code=409)
+
     registry = _build_registry(
-        db, practice_id=current_user.practice_id, practice_ref=practice_ref
+        db,
+        practice_id=current_user.practice_id,
+        practice_ref=practice_ref,
+        secret=secret,
     )
     practitioner_uuid = _resolve_practitioner(registry, request.practitioner_ref)
     location_uuid = _resolve_location(registry, request.requested_default_location_ref)
@@ -800,7 +853,7 @@ def confirm_default_location_change(
     proposal_hash = payload["proposal_hash"]
 
     kind, idem_record = claim_b4_command(
-        db,
+        db=db,
         practice_id=current_user.practice_id,
         actor_user_id=current_user.id,
         actor_role=runtime_role,
@@ -863,7 +916,10 @@ def confirm_default_location_change(
         raise B4CommandError("resource_scope_mismatch", status_code=403)
 
     registry = _build_registry(
-        db, practice_id=current_user.practice_id, practice_ref=practice_ref
+        db,
+        practice_id=current_user.practice_id,
+        practice_ref=practice_ref,
+        secret=secret,
     )
     current_version = int(practitioner.aggregate_version or 0)
     if evidence.expected_aggregate_version != current_version:

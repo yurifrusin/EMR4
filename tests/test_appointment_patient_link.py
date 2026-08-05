@@ -6,15 +6,15 @@ Splits patient identity from attendance status:
 - A linked booking carries patient_id and exposes the full PatientBrief.
 - A provisional can be linked to a real patient later via PUT patient_id.
 
-WEDNESDAY = 2026-06-24 (a real Wednesday; fits the Mon-Fri schedule fixture).
+WEDNESDAY is the next real Wednesday; it fits the Mon-Fri schedule fixture and
+keeps this patient-link contract independent of the raw temporal guard.
 """
-from datetime import date, datetime
-
-import pytest
+from datetime import date, datetime, timedelta
 
 from tests.conftest import make_token
 
-WEDNESDAY = date(2026, 6, 24)
+_days_until_wednesday = (2 - date.today().weekday()) % 7 or 7
+WEDNESDAY = date.today() + timedelta(days=_days_until_wednesday)
 
 
 def _start(hour: int, minute: int = 0) -> str:

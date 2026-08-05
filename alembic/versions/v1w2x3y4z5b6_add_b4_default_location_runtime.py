@@ -1,7 +1,7 @@
 """Add B4.1 Davida default-location command runtime persistence.
 
 Revision ID: v1w2x3y4z5b6
-Revises: u0v1w2x3y4z5
+Revises: v1w2x3y4z5a6
 Create Date: 2026-08-05
 """
 
@@ -13,7 +13,7 @@ from sqlalchemy.dialects.postgresql import JSONB, UUID
 
 
 revision: str = "v1w2x3y4z5b6"
-down_revision: Union[str, Sequence[str], None] = "u0v1w2x3y4z5"
+down_revision: Union[str, Sequence[str], None] = "v1w2x3y4z5a6"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
@@ -59,7 +59,7 @@ def upgrade() -> None:
             nullable=False,
         ),
         sa.Column("actor_role", sa.String(length=64), nullable=False),
-        sa.Column("proposal_id", sa.String(length=1024), nullable=False),
+        sa.Column("proposal_id", sa.String(length=4096), nullable=False),
         sa.Column("proposal_hash", sa.String(length=64), nullable=False),
         sa.Column("canonical_request_hash", sa.String(length=64), nullable=False),
         sa.Column("before_state_hash", sa.String(length=64), nullable=False),

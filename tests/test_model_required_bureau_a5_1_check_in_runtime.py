@@ -122,6 +122,11 @@ def _make_appt(
     )
     db.add(appt)
     db.flush()
+    # The HTTP route owns and may roll back its transaction. Persist the
+    # authored-synthetic setup first so a rejected or injected-failure request
+    # cannot expunge the baseline appointment used for zero-effect readback.
+    db.commit()
+    db.refresh(appt)
     return appt
 
 
@@ -785,8 +790,13 @@ def test_different_key_evidence_replay_rejected_after_state_restoration(
 
 
 def test_concurrent_distinct_key_evidence_claim_single_winner(
-    engine, practice, receptionist_user
+    engine, db, practice, receptionist_user
 ):
+    practice_id = receptionist_user.practice_id
+    actor_user_id = str(receptionist_user.id)
+    # The two workers use independent database sessions, so their referenced
+    # practice and actor must be visible outside the fixture session.
+    db.commit()
     Session_ = sessionmaker(bind=engine)
     evidence_hash = hashlib.sha256(b"same-evidence-token").hexdigest()
     results = []
@@ -798,8 +808,8 @@ def test_concurrent_distinct_key_evidence_claim_single_winner(
             barrier.wait()
             decision = claim_appointment_check_in_command(
                 session,
-                practice_id=receptionist_user.practice_id,
-                actor_user_id=str(receptionist_user.id),
+                practice_id=practice_id,
+                actor_user_id=actor_user_id,
                 actor_role="Receptionist",
                 operation_id="confirmAppointmentCheckInProposal",
                 route_family="check-in-confirm",
@@ -1059,7 +1069,7 @@ def test_migration_keeps_one_alembic_head():
     cfg = alembic.config.Config(str(ROOT / "alembic.ini"))
     script = alembic.script.ScriptDirectory.from_config(cfg)
     heads = script.get_heads()
-    assert heads == ["v1w2x3y4z5a6"]
+    assert heads == ["v1w2x3y4z5b6"]
     assert len(heads) == 1
 
 

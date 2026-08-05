@@ -673,7 +673,8 @@ def _run_attempt(
         network_policy = _verify_network(docker.inspect("network", names["network"]), names["network"])
         docker.run([
             "create", "--name", names["relay_container"], "--network", "bridge", "--read-only",
-            "--user", "65532:65532", "--tmpfs", "/tmp:rw,noexec,nosuid,size=8m",
+            "--user", "65532:65532", "--tmpfs",
+            "/tmp:rw,noexec,nosuid,size=8m",  # nosec B108 -- container-internal tmpfs
             "--memory", "64m", "--memory-swap", "64m", "--cpus", "0.25", "--pids-limit", "32",
             "--ulimit", "nofile=64:64", "--cap-drop", "ALL", "--security-opt", "no-new-privileges=true",
             "--mount", f"type=bind,src={token_path},dst={TOKEN_DESTINATION},readonly",
@@ -687,7 +688,9 @@ def _run_attempt(
         docker.run([
             "create", "--name", names["cell_container"], "--hostname", "emr4-a3-b3-model-cell",
             "--network", names["network"], "--read-only", "--user", "65532:65532",
-            "--tmpfs", "/tmp:rw,noexec,nosuid,size=8m", "--memory", "128m", "--memory-swap", "128m",
+            "--tmpfs",
+            "/tmp:rw,noexec,nosuid,size=8m",  # nosec B108 -- container-internal tmpfs
+            "--memory", "128m", "--memory-swap", "128m",
             "--cpus", "0.50", "--pids-limit", "64", "--ulimit", "nofile=64:64",
             "--cap-drop", "ALL", "--security-opt", "no-new-privileges=true", names["cell_image"],
         ])

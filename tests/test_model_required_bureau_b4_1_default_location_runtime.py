@@ -128,29 +128,23 @@ def _headers(user: User, correlation_id: str, idem_key: str | None = None):
 
 
 def _location_refs(db, practice_id: uuid.UUID) -> dict[uuid.UUID, str]:
-    rows = (
-        db.query(PracticeLocation)
-        .filter(
-            PracticeLocation.practice_id == practice_id,
-            PracticeLocation.is_active.is_(True),
-        )
-        .order_by(PracticeLocation.id.asc())
-        .all()
+    registry = service._build_registry(
+        db,
+        practice_id=practice_id,
+        practice_ref=f"practice_{practice_id.hex}",
+        secret=B4_SECRET.encode("utf-8"),
     )
-    return {row.id: f"loc_synth_{index:04d}" for index, row in enumerate(rows, 1)}
+    return registry.ref_by_location
 
 
 def _practitioner_refs(db, practice_id: uuid.UUID) -> dict[uuid.UUID, str]:
-    rows = (
-        db.query(Practitioner)
-        .filter(
-            Practitioner.practice_id == practice_id,
-            Practitioner.is_active.is_(True),
-        )
-        .order_by(Practitioner.id.asc())
-        .all()
+    registry = service._build_registry(
+        db,
+        practice_id=practice_id,
+        practice_ref=f"practice_{practice_id.hex}",
+        secret=B4_SECRET.encode("utf-8"),
     )
-    return {row.id: f"prac_synth_{index:04d}" for index, row in enumerate(rows, 1)}
+    return registry.ref_by_practitioner
 
 
 @pytest.fixture
@@ -215,6 +209,10 @@ def b4_data(db):
     db.flush()
     loc_refs = _location_refs(db, practice.id)
     prac_refs = _practitioner_refs(db, practice.id)
+    # Route-level rollback is correct for a request transaction. Commit the
+    # authored-synthetic fixture first so a rejected request cannot roll back
+    # the identities and resources used by a later request in the same test.
+    db.commit()
     return {
         "practice": practice,
         "location_a": location_a,
@@ -764,8 +762,9 @@ def test_confirm_expired_evidence(monkeypatch, client, b4_data, db) -> None:
         )
         .one()
     )
-    row.expires_at = now - timedelta(seconds=1)
-    db.flush()
+    row.expires_at = now + timedelta(seconds=1)
+    db.commit()
+    monkeypatch.setattr(service, "_now", lambda: now + timedelta(seconds=2))
     confirm_resp = _confirm(
         client, b4_data, user, "practice_manager", corr, proposal, evidence
     )
@@ -898,7 +897,11 @@ def test_in_progress_denial(monkeypatch, client, b4_data, db) -> None:
     body = _confirm_body(
         b4_data, user, "practice_manager", corr, proposal, evidence
     )
-    canonical_request_hash = service._sha256(body)
+    canonical_request_hash = service._sha256(
+        service.DefaultLocationConfirmationCommand.model_validate(body).model_dump(
+            mode="json"
+        )
+    )
     proposal_hash = proposal["proposal_hash"]
     fingerprint = service._sha256(
         {
@@ -1074,12 +1077,13 @@ def test_migration_enforces_forced_rls_cross_practice_denial() -> None:
         "practice_administration_audit_events",
         "practice_administration_outbox_events",
     )
+    assert "ENABLE ROW LEVEL SECURITY" in migration
+    assert "FORCE ROW LEVEL SECURITY" in migration
+    assert "USING ({_PRACTICE_CONTEXT}) WITH CHECK ({_PRACTICE_CONTEXT})" in migration
+    assert migration.count("_enable_all_practice_policy(") == 5
     for table in tables:
-        assert f'ALTER TABLE "{table}" ENABLE ROW LEVEL SECURITY' in migration
-        assert f'ALTER TABLE "{table}" FORCE ROW LEVEL SECURITY' in migration
+        assert f'        "{table}",' in migration
         assert "current_setting('app.current_practice_id', true)" in migration
-    assert migration.count("CREATE POLICY") >= 4
-    assert migration.count("FORCE ROW LEVEL SECURITY") >= 4
 
 
 def test_migration_enforces_append_only_audit_and_outbox() -> None:
@@ -1188,6 +1192,8 @@ def test_openapi_three_route_parity() -> None:
     assert api["x-emr4-boundary"]["status"] == "authorized_local_runtime"
     assert api["x-emr4-boundary"]["actual_command_implementation_authorized"] is True
     assert api["x-emr4-boundary"]["actual_write_authority"] is True
+    assert api["components"]["schemas"]["SignedProposalRef"]["maxLength"] == 4096
+    assert PracticeAdministrationConfirmationEvidence.__table__.c.proposal_id.type.length == 4096
 
     openapi_rejection_codes = api["components"]["schemas"]["Rejection"]["properties"][
         "reason_code"
@@ -1197,7 +1203,16 @@ def test_openapi_three_route_parity() -> None:
     # Every route carries the bounded headers.
     for path in expected_paths:
         parameters = api["paths"][path]["post"]["parameters"]
-        names = {parameter["name"] for parameter in parameters}
+        names = {
+            (
+                api["components"]["parameters"][
+                    parameter["$ref"].rsplit("/", 1)[-1]
+                ]["name"]
+                if "$ref" in parameter
+                else parameter["name"]
+            )
+            for parameter in parameters
+        }
         assert {"Idempotency-Key", "X-Correlation-Id"} <= names
 
     evidence = api["paths"][
@@ -1227,21 +1242,10 @@ def test_openapi_three_route_parity() -> None:
 
 
 def test_one_alembic_head() -> None:
-    versions_dir = ROOT / "alembic" / "versions"
-    revisions: list[str] = []
-    down_revisions: list[str] = []
-    for path in versions_dir.glob("*.py"):
-        tree = ast.parse(path.read_text(encoding="utf-8"))
-        for node in tree.body:
-            if isinstance(node, ast.Assign):
-                for target in node.targets:
-                    if not isinstance(target, ast.Name):
-                        continue
-                    if target.id == "revision":
-                        revisions.append(ast.literal_eval(node.value))
-                    elif target.id == "down_revision":
-                        value = ast.literal_eval(node.value)
-                        if isinstance(value, str):
-                            down_revisions.append(value)
-    heads = set(revisions) - set(down_revisions)
-    assert heads == {"v1w2x3y4z5b6"}, heads
+    import alembic.config
+    import alembic.script
+
+    cfg = alembic.config.Config(str(ROOT / "alembic.ini"))
+    script = alembic.script.ScriptDirectory.from_config(cfg)
+    heads = script.get_heads()
+    assert heads == ["v1w2x3y4z5b6"], heads

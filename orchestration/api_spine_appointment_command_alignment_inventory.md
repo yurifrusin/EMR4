@@ -40,6 +40,8 @@ Reviewed sources:
 | `POST /api/v1/appointments/proposals/status/{appointment_id}` | `propose_status_update` | `proposeAppointmentStatus` | `proposal command` | Prepares status-change evidence with waiting-area side-effect visibility, warning/block envelope, freshness, signed evidence, and confirm payload; no appointment write. |
 | `POST /api/v1/appointments/proposals/waiting-area/{appointment_id}` | `propose_waiting_area_update` | `proposeAppointmentStatus` | `proposal command` | Waiting-area proposal shares the status command family; prepares staff-review evidence and blocks/warnings without mutating appointment state. |
 | `POST /api/v1/appointments/proposals/status-confirm` | `confirm_status_proposal_route` | `confirmAppointmentStatusProposal` | `confirm command` | Requires explicit confirmation, signed evidence, freshness/current-state revalidation, and audit evidence before status or waiting-area mutation. |
+| `POST /api/v1/appointments/proposals/check-in/{appointment_id:uuid}` | `propose_check_in_appointment` | `proposeAppointmentCheckIn` | `proposal command` | Default-off authored-synthetic A5.1 proposal for exact `Booked|Confirmed -> Arrived`; returns expiring signed patient-free confirmation evidence and changes no appointment truth. |
+| `POST /api/v1/appointments/proposals/check-in/confirm` | `confirm_check_in_proposal_route` | `confirmAppointmentCheckInProposal` | `confirm command` | Receptionist-only A5.1 confirmation; freshly reauthorizes and revalidates, then atomically commits appointment truth, one audit row, one patient-free checked-in event and one durable idempotency receipt. |
 | `POST /api/v1/appointments/proposals/delete/{appointment_id}` | `propose_delete_appointment` | `proposeAppointmentDelete` | `proposal command` | Prepares delete/cancel proposal, always requires staff confirmation, includes freshness/signed evidence, and does not delete. |
 | `POST /api/v1/appointments/proposals/delete-confirm` | `confirm_delete_proposal_route` | `confirmAppointmentDeleteProposal` | `confirm command` | Requires explicit confirmation, signed evidence, freshness/current-state revalidation, and audit evidence before delete/cancel mutation. |
 | `POST /api/v1/appointments/proposals/slot-search/normalize` | `normalize_slot_search_proposal_command` | `normalizeSlotSearchCommand` | `command-style read` | Deterministic normalizer with explicit `reference_date`; no database lookup, slot search, provider call, audit write, or appointment mutation. |
@@ -63,7 +65,7 @@ Reviewed sources:
 | `GET /api/v1/appointments/types` | `list_appointment_types` | reference read | `read-only route` | Appointment type vocabulary only. |
 | `GET /api/v1/appointments` | `list_appointments` | diary read model | `read-only route` | Appointment list read filtered by tenant/date/practitioner/patient/status/location. |
 | `GET /api/v1/appointments/{appointment_id}` | `get_appointment` | appointment read model | `read-only route` | Single appointment read. |
-| `GET /api/v1/appointments/{appointment_id}/checkin-defaults` | `get_checkin_defaults` | check-in context read | `read-only route` | Context/defaults only; no native `check_in` command authority yet. |
+| `GET /api/v1/appointments/{appointment_id}/checkin-defaults` | `get_checkin_defaults` | check-in context read | `read-only route` | Context/defaults only; this read confers no A5.1 command authority. |
 | `GET /api/v1/appointments/{appointment_id}/audit` | `get_appointment_audit` | audit read model | `read-only route` | Audit trail read only. |
 | `GET /api/v1/appointments/waiting-room` | `get_waiting_room` | waiting-room read model | `read-only route` | Waiting-room state read only. |
 | `GET /api/v1/appointments/slots/{practitioner_id}` | `get_available_slots` | availability read model | `read-only route` | Slot availability read; proposal or confirmation routes remain separate. |
@@ -71,6 +73,7 @@ Reviewed sources:
 ## Alignment Findings
 
 - The current FastAPI surface already has proposal-confirm families for create, update, status/waiting-area, and delete/cancel writes.
+- A5.1 adds one separate default-off Receptionist-only check-in proposal/confirm family; it does not widen the generic status command or the read-only check-in-defaults route.
 - Slot-search normalize/search/normalized/selection routes match the API Spine command-style read posture: command-shaped input, deterministic evidence, and no booking write.
 - Bernie intent, interpretation, supervised booking, no-slot selection, and session routes are appointment-adjacent surfaces in the appointments router. They do not create appointment write authority by themselves; the session routes maintain bounded session state, and interpreter provider mode remains default-disabled/gate-controlled.
 - Current backend confirm route names differ from the OpenAPI draft for several canonical paths:

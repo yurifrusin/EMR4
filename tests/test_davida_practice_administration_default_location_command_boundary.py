@@ -41,6 +41,7 @@ THREAT = (
 )
 
 PROPOSAL_PATH = "/practice-administration/practitioners/default-location/proposals"
+EVIDENCE_PATH = f"{PROPOSAL_PATH}/{{proposal_id}}/confirmation-evidence"
 CONFIRM_PATH = f"{PROPOSAL_PATH}/{{proposal_id}}/confirm"
 PERMITTED_ROLES = ["practice_manager", "practice_owner"]
 REJECTION_CODES = [
@@ -108,7 +109,7 @@ def test_contract_validates_against_draft_2020_12_schema() -> None:
     jsonschema.Draft202012Validator(_json(SCHEMA)).validate(_json(CONTRACT))
 
 
-def test_openapi_is_separate_documentation_only_artifact() -> None:
+def test_openapi_is_separate_authorized_local_runtime_artifact() -> None:
     api = _yaml(OPENAPI)
     boundary = api["x-emr4-boundary"]
 
@@ -116,13 +117,13 @@ def test_openapi_is_separate_documentation_only_artifact() -> None:
     assert api["servers"] == [
         {
             "url": "https://api.example.invalid/api/v1",
-            "description": "Documentation placeholder; no live endpoint exists.",
+            "description": "Local authored-synthetic runtime; the three routes mount under this prefix.",
         }
     ]
-    assert set(api["paths"]) == {PROPOSAL_PATH, CONFIRM_PATH}
-    assert boundary["status"] == "documentation_only_no_runtime_route"
-    assert boundary["actual_command_implementation_authorized"] is False
-    assert boundary["actual_write_authority"] is False
+    assert set(api["paths"]) == {PROPOSAL_PATH, EVIDENCE_PATH, CONFIRM_PATH}
+    assert boundary["status"] == "authorized_local_runtime"
+    assert boundary["actual_command_implementation_authorized"] is True
+    assert boundary["actual_write_authority"] is True
     assert OPENAPI != APPOINTMENT_OPENAPI
 
 
@@ -204,7 +205,7 @@ def test_session_is_authority_and_body_is_binding_assertion_only() -> None:
     )
 
 
-def test_role_policy_is_future_contract_not_current_runtime_grant() -> None:
+def test_role_policy_preserves_historical_contract_and_exact_runtime_mapping() -> None:
     api = _yaml(OPENAPI)
     contract = _json(CONTRACT)["confirmation_phase"]
     matrix = _yaml(PERMISSION_MATRIX)
@@ -212,7 +213,7 @@ def test_role_policy_is_future_contract_not_current_runtime_grant() -> None:
 
     assert (
         confirmation["x-emr4-role-policy"]
-        == "proposed_future_contract_not_current_permission_matrix_runtime_grant"
+        == "authorized_local_runtime_exact_server_role_mapping"
     )
     assert contract["role_policy_status"] == (
         "proposed_future_contract_not_current_permission_matrix_runtime_grant"
@@ -397,19 +398,17 @@ def test_api_spine_planes_remain_distinct() -> None:
     }
 
 
-def test_runtime_source_has_no_mounted_boundary() -> None:
-    needles = {
-        "proposePractitionerDefaultLocationChange",
-        "confirmPractitionerDefaultLocationChange",
-        PROPOSAL_PATH,
-    }
-    hits: list[tuple[Path, str]] = []
-    for path in sorted((ROOT / "app").rglob("*.py")):
-        text = path.read_text(encoding="utf-8")
-        for needle in needles:
-            if needle in text:
-                hits.append((path.relative_to(ROOT), needle))
-    assert hits == []
+def test_runtime_source_mounts_only_the_three_authorized_routes() -> None:
+    router = (ROOT / "app/routers/practice_administration.py").read_text(
+        encoding="utf-8"
+    )
+    main = (ROOT / "app/main.py").read_text(encoding="utf-8")
+
+    assert 'prefix="/api/v1/practice-administration"' in router
+    assert "proposePractitionerDefaultLocationChange" in router
+    assert "issuePractitionerDefaultLocationConfirmationEvidence" in router
+    assert "confirmPractitionerDefaultLocationChange" in router
+    assert 'app.include_router(practice_administration.router)' in main
 
 
 def test_public_docs_keep_runtime_and_branding_gates_closed() -> None:

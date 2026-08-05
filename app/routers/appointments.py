@@ -3233,8 +3233,9 @@ def _a5_check_in_target_area_id(
 
 
 @router.post(
-    "/proposals/check-in/{appointment_id}",
+    "/proposals/check-in/{appointment_id:uuid}",
     response_model=AppointmentCheckInProposalOut,
+    operation_id="proposeAppointmentCheckIn",
 )
 def propose_check_in_appointment(
     appointment_id: uuid.UUID,
@@ -3351,6 +3352,7 @@ def propose_check_in_appointment(
 @router.post(
     "/proposals/check-in/confirm",
     response_model=AppointmentConfirmCheckInProposalOut,
+    operation_id="confirmAppointmentCheckInProposal",
 )
 def confirm_check_in_proposal_route(
     body: AppointmentCheckInProposalConfirmationIn,

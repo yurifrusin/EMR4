@@ -35,7 +35,7 @@ class PracticeAdministrationConfirmationEvidence(Base):
     practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
     actor_user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     actor_role = Column(String(64), nullable=False)
-    proposal_id = Column(String(1024), nullable=False)
+    proposal_id = Column(String(4096), nullable=False)
     proposal_hash = Column(String(64), nullable=False)
     canonical_request_hash = Column(String(64), nullable=False)
     before_state_hash = Column(String(64), nullable=False)

@@ -19,6 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field
 OPAQUE_REF_PATTERN = r"^[a-z][a-z0-9_]*_[A-Za-z0-9_-]+$"
 SHA256_PATTERN = r"^[0-9a-f]{64}$"
 SIGNED_PROPOSAL_PATTERN = r"^dlp1\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$"
+MAX_SIGNED_PROPOSAL_LENGTH = 4096
 HEADER_VALUE_PATTERN = r"^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
 
 PROPOSAL_REQUEST_SCHEMA_VERSION = (
@@ -156,7 +157,10 @@ class DefaultLocationProposalEnvelope(_StrictModel):
         "emr4.practice_administration.default_location.proposal_envelope.v1"
     ]
     status: Literal["proposal_only"]
-    proposal_id: str = Field(pattern=SIGNED_PROPOSAL_PATTERN)
+    proposal_id: str = Field(
+        max_length=MAX_SIGNED_PROPOSAL_LENGTH,
+        pattern=SIGNED_PROPOSAL_PATTERN,
+    )
     practice_ref: str = Field(pattern=OPAQUE_REF_PATTERN)
     practitioner_ref: str = Field(pattern=OPAQUE_REF_PATTERN)
     operation: Literal["UPDATE_PRACTITIONER_DEFAULT_LOCATION"]
@@ -185,7 +189,10 @@ class DefaultLocationEvidenceRequest(_StrictModel):
     operation: Literal["CONFIRM_UPDATE_PRACTITIONER_DEFAULT_LOCATION"]
     confirmed: Literal[True] = True
     binding: SessionBindingAssertion
-    proposal_id: str = Field(pattern=SIGNED_PROPOSAL_PATTERN)
+    proposal_id: str = Field(
+        max_length=MAX_SIGNED_PROPOSAL_LENGTH,
+        pattern=SIGNED_PROPOSAL_PATTERN,
+    )
     proposal_hash: str = Field(pattern=SHA256_PATTERN)
     proposal_expires_at: datetime
     practitioner_ref: str = Field(pattern=OPAQUE_REF_PATTERN)
@@ -213,7 +220,10 @@ class DefaultLocationConfirmationCommand(_StrictModel):
     operation: Literal["CONFIRM_UPDATE_PRACTITIONER_DEFAULT_LOCATION"]
     confirmed: Literal[True] = True
     binding: SessionBindingAssertion
-    proposal_id: str = Field(pattern=SIGNED_PROPOSAL_PATTERN)
+    proposal_id: str = Field(
+        max_length=MAX_SIGNED_PROPOSAL_LENGTH,
+        pattern=SIGNED_PROPOSAL_PATTERN,
+    )
     proposal_hash: str = Field(pattern=SHA256_PATTERN)
     proposal_expires_at: datetime
     practitioner_ref: str = Field(pattern=OPAQUE_REF_PATTERN)
@@ -300,6 +310,7 @@ __all__ = [
     "EVIDENCE_REQUEST_SCHEMA_VERSION",
     "HEADER_VALUE_PATTERN",
     "Issue",
+    "MAX_SIGNED_PROPOSAL_LENGTH",
     "MAXIMUM_LIFETIME_SECONDS",
     "OPAQUE_REF_PATTERN",
     "OPERATION_CONFIRM",

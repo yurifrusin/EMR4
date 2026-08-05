@@ -3,7 +3,7 @@ Appointment audit warning-summary contract tests.
 
 Covers:
 - confirmed_warnings codes are persisted on create/update/status_change/delete.
-- Empty confirmed_warnings list stores NULL (not an empty JSON array).
+- The default raw-compatibility evidence code is preserved with those warnings.
 - confirmed_warnings is returned in GET /{id}/audit as a list of strings.
 - Proposal (non-mutating) endpoints never write confirmed_warnings.
 - confirmed_warnings contains only codes, not human-readable text or PHI.
@@ -12,6 +12,7 @@ from datetime import date, datetime, time, timezone
 
 import pytest
 
+import app.routers.appointments as appointments_router
 from app.models.appointments import (
     Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel,
 )
@@ -19,6 +20,16 @@ from tests.conftest import make_token
 
 TODAY = date.today()
 APPT_URL = "/api/v1/appointments"
+
+
+@pytest.fixture(autouse=True)
+def _freeze_audit_warning_clock(monkeypatch):
+    """Keep same-day raw-command fixtures inside an open appointment window."""
+
+    def fixed_now(tz):
+        return datetime.combine(TODAY, time(8, 0), tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
 
 
 def _make_appt(db, practice, practitioner, patient, start_h=9):
@@ -72,10 +83,14 @@ def test_create_stores_confirmed_warnings(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt_id
     ).one()
-    assert entry.confirmed_warnings == ["break_overlap", "provisional_patient"]
+    assert entry.confirmed_warnings == [
+        "raw_compat_create",
+        "break_overlap",
+        "provisional_patient",
+    ]
 
 
-def test_create_without_warnings_stores_null(
+def test_create_without_warnings_stores_raw_compat_evidence_only(
     client, db, practice, practitioner, patient, receptionist_user
 ):
     token = make_token(receptionist_user)
@@ -90,10 +105,10 @@ def test_create_without_warnings_stores_null(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt_id
     ).one()
-    assert entry.confirmed_warnings is None
+    assert entry.confirmed_warnings == ["raw_compat_create"]
 
 
-def test_create_with_empty_warnings_stores_null(
+def test_create_with_empty_warnings_stores_raw_compat_evidence_only(
     client, db, practice, practitioner, patient, receptionist_user
 ):
     token = make_token(receptionist_user)
@@ -108,7 +123,7 @@ def test_create_with_empty_warnings_stores_null(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt_id
     ).one()
-    assert entry.confirmed_warnings is None
+    assert entry.confirmed_warnings == ["raw_compat_create"]
 
 
 # ─── confirmed_warnings persisted on update ──────────────────────────────────
@@ -135,7 +150,7 @@ def test_update_stores_confirmed_warnings(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
     ).one()
-    assert entry.confirmed_warnings == ["provisional_patient"]
+    assert entry.confirmed_warnings == ["raw_compat_update", "provisional_patient"]
 
 
 # ─── confirmed_warnings persisted on status change ───────────────────────────
@@ -155,10 +170,10 @@ def test_status_change_stores_confirmed_warnings(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
     ).one()
-    assert entry.confirmed_warnings == ["waiting_area_cleared"]
+    assert entry.confirmed_warnings == ["raw_compat_status", "waiting_area_cleared"]
 
 
-def test_status_change_without_warnings_stores_null(
+def test_status_change_without_warnings_stores_raw_compat_evidence_only(
     client, db, practice, practitioner, patient, receptionist_user
 ):
     appt = _make_appt(db, practice, practitioner, patient)
@@ -171,7 +186,7 @@ def test_status_change_without_warnings_stores_null(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
     ).one()
-    assert entry.confirmed_warnings is None
+    assert entry.confirmed_warnings == ["raw_compat_status"]
 
 
 # ─── confirmed_warnings persisted on delete ──────────────────────────────────
@@ -192,10 +207,10 @@ def test_delete_stores_confirmed_warnings(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
     ).one()
-    assert entry.confirmed_warnings == ["waiting_area_cleared"]
+    assert entry.confirmed_warnings == ["raw_compat_delete", "waiting_area_cleared"]
 
 
-def test_delete_without_body_stores_null(
+def test_delete_without_body_stores_raw_compat_evidence_only(
     client, db, practice, practitioner, patient, receptionist_user
 ):
     appt = _make_appt(db, practice, practitioner, patient)
@@ -206,7 +221,7 @@ def test_delete_without_body_stores_null(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
     ).one()
-    assert entry.confirmed_warnings is None
+    assert entry.confirmed_warnings == ["raw_compat_delete"]
 
 
 # ─── confirmed_warnings exposed in GET /{id}/audit ───────────────────────────
@@ -227,10 +242,10 @@ def test_audit_endpoint_returns_confirmed_warnings(
     assert audit_resp.status_code == 200
     entries = audit_resp.json()
     assert len(entries) == 1
-    assert entries[0]["confirmed_warnings"] == ["break_overlap"]
+    assert entries[0]["confirmed_warnings"] == ["raw_compat_create", "break_overlap"]
 
 
-def test_audit_endpoint_returns_empty_list_when_no_warnings(
+def test_audit_endpoint_returns_raw_compat_evidence_when_no_submitted_warnings(
     client, db, practice, practitioner, patient, receptionist_user
 ):
     token = make_token(receptionist_user)
@@ -246,7 +261,7 @@ def test_audit_endpoint_returns_empty_list_when_no_warnings(
     assert audit_resp.status_code == 200
     entries = audit_resp.json()
     assert len(entries) == 1
-    assert entries[0]["confirmed_warnings"] == []
+    assert entries[0]["confirmed_warnings"] == ["raw_compat_create"]
 
 
 # ─── confirmed_warnings are code-only (no PHI, no human text) ────────────────
@@ -299,7 +314,7 @@ def test_unknown_warning_codes_are_not_persisted(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt_id
     ).one()
-    assert entry.confirmed_warnings == ["break_overlap"]
+    assert entry.confirmed_warnings == ["raw_compat_create", "break_overlap"]
 
 
 # ─── Proposal endpoints never write confirmed_warnings ───────────────────────

@@ -12,13 +12,10 @@ All assertions are fully deterministic against a pinned clinic-local now.
 """
 from __future__ import annotations
 
-import datetime as _dt
 from datetime import date, datetime, time, timezone
 
-import pytest
-
 import app.routers.appointments as appointments_router
-from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
+from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
 from tests.conftest import make_token
 
 # Fixed dates used across tests
@@ -296,7 +293,11 @@ def test_update_proposal_reschedule_into_past_blocked(
         "duration_minutes": 15,
     }
     url = PROPOSAL_UPDATE_URL.format(appt_id=appt.id)
-    resp = client.post(url, json=body, headers=_auth(gp_user))
+    resp = client.post(
+        url,
+        json=body,
+        headers={**_auth(gp_user), "Idempotency-Key": "raw-temporal-update-past-key"},
+    )
     assert resp.status_code == 200
     data = resp.json()
     assert data["safe"] is False
@@ -319,7 +320,11 @@ def test_update_proposal_reschedule_into_future_safe(
         "duration_minutes": 15,
     }
     url = PROPOSAL_UPDATE_URL.format(appt_id=appt.id)
-    resp = client.post(url, json=body, headers=_auth(gp_user))
+    resp = client.post(
+        url,
+        json=body,
+        headers={**_auth(gp_user), "Idempotency-Key": "raw-temporal-update-future-key"},
+    )
     assert resp.status_code == 200
     data = resp.json()
     assert data["safe"] is True
@@ -336,7 +341,11 @@ def test_update_proposal_non_temporal_field_safe(
     monkeypatch.setattr(appointments_router, "_clinic_local_now", _fixed_now(_FUTURE_DATE, 23, 59))
     body = {"reason": "Reason-only update, no date change"}
     url = PROPOSAL_UPDATE_URL.format(appt_id=appt.id)
-    resp = client.post(url, json=body, headers=_auth(gp_user))
+    resp = client.post(
+        url,
+        json=body,
+        headers={**_auth(gp_user), "Idempotency-Key": "raw-temporal-update-reason-key"},
+    )
     assert resp.status_code == 200
     data = resp.json()
     # Temporal guard must not fire; proposal should be safe (no temporal blocks)

@@ -64,7 +64,10 @@ def _sha256(payload: bytes) -> str:
 
 def _git_blob_sha1(payload: bytes) -> str:
     header = f"blob {len(payload)}\0".encode("ascii")
-    return hashlib.sha1(header + payload).hexdigest()  # noqa: S324 -- Git identity
+    return hashlib.sha1(  # noqa: S324 -- Git object identity, not security
+        header + payload,
+        usedforsecurity=False,
+    ).hexdigest()
 
 
 def _row_label(line: str) -> str:

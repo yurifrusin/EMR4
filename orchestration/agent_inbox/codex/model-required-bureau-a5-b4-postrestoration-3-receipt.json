@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_regression_reconciliation_and_verify_integrated_a5_1_b4_1_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling frozen boundary is docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md revision 3 with docs/security/emr4-model-required-bureau-a5-b4-command-runtime-threat-model-delta.md, the passing orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-plan-review-3-receipt.json and docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md. Focused A5.1/B4.1 and API-spine tests plus the disposable PostgreSQL migration lifecycle pass; current work is a mechanical reconciliation of stale ordinary appointment regression tests to the already accepted raw-compatibility and idempotency contracts before the final deterministic and independent gates.",
+    "current_authority_allocation": "GPT Sol owns architecture, recovery, the single Alembic chain, integration and acceptance. The DeepSeek V4 Flash/high implementation packets are complete and confer no acceptance. Gemini 3.6 Flash/high through a fresh Antigravity project owns the later read-only veto only. No worker or reviewer has provider/runtime, patient/product-data, deployment, release, Pages, protected-evidence or protected-ref authority.",
+    "git_refs_and_worktree": "After an explicit fetch, active branch codex/ariadne-bernie-davida-parallel-seam is at HEAD 1e0385f3ac21ec2ca735956a99bd32304e569e89 and is eight commits ahead of origin task ref add94f3c40398f5972fb197ae505373292af1b08. The worktree contains only the intended tracked A5.1/B4.1 integration repairs plus preserved untracked files. Local/origin master and local/origin handoff/current are all unchanged at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md identifies the paired Bureau A5.1 Rayleen check-in and Bureau B4.1 Davida default-location command runtime as the active descendant. The two worker candidates are integrated only as unaccepted task-branch source, and A5.1 remains governed by the recorded Sol recovery lease until deterministic acceptance and a fresh independent veto pass.",
+    "protected_evidence_boundaries": "Work remains local, provider-free and authored-synthetic. Holdouts v1-v10; historical PHI; patient, clinical, participant, product-derived, protected and production data; provider calls; GraphQL mutation; autonomous model action; external outbox/event delivery; deployment; release; Pages; and protected-ref movement remain closed. docs/branding and all existing untracked Consultant, Gate-minus-one, A3/B3, A4 and receipt/state artifacts remain preserved and excluded from broad staging."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

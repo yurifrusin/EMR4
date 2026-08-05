@@ -13,8 +13,6 @@ Covers:
 """
 from datetime import date, datetime, time, timezone
 
-import pytest
-
 from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
 from app.models.diary import WaitingArea
 from tests.conftest import make_token
@@ -161,10 +159,6 @@ def test_assign_appointment_to_waiting_area_via_put(
     r = client.put(
         f"/api/v1/appointments/{appt.id}",
         json={
-            "patient_id": str(patient.id),
-            "practitioner_id": str(practitioner.id),
-            "appointment_date": str(TODAY),
-            "start_time_local": "09:00:00",
             "waiting_area_id": str(area.id),
         },
         headers={"Authorization": f"Bearer {token}"},
@@ -182,10 +176,6 @@ def test_cross_practice_waiting_area_rejected(
     r = client.put(
         f"/api/v1/appointments/{appt.id}",
         json={
-            "patient_id": str(patient.id),
-            "practitioner_id": str(practitioner.id),
-            "appointment_date": str(TODAY),
-            "start_time_local": "09:00:00",
             "waiting_area_id": str(area_b.id),
         },
         headers={"Authorization": f"Bearer {token_a}"},
