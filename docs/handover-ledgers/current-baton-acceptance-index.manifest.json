@@ -15,6 +15,7 @@
     "Ariadne agent error and correction register acceptance",
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
+    "Model-required Bureau C5 plan and recovery state",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -24,7 +25,7 @@
   "ledger_byte_count": 144875,
   "ledger_line_count": 125,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "3bfbfc22d2e6ad022aae20b7ec1cfdf7bc283cb01a1ddd6fa6f500adc89e52e9",
+  "ledger_sha256": "db5a1cdab12009f15636f8bff34439e40d28fa10f14c5e4e7238e3d612304d43",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -138,10 +139,10 @@
   ],
   "moved_row_count": 109,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 78449,
-  "source_agents_git_blob_sha1": "37294f23e8e6fb5e513dd73cb066ed3bd6a006ae",
-  "source_agents_line_count": 478,
+  "source_agents_byte_count": 56693,
+  "source_agents_git_blob_sha1": "03bb08d67b22bd719fd779b7ea1d89a8a9f9e667",
+  "source_agents_line_count": 460,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "19f84b6e0d06c0346defe69b2d091cbe676b4890df65a79f9bdaed9848e7b92b",
-  "source_git_head": "955b6a566f7097f58929dcb2fa9c4ed0aaad8b29"
+  "source_agents_sha256": "bd318120969579a1ef88500ab68cb28bff3308f5d38913d4a56b6c5485fa0ea4",
+  "source_git_head": "d82de54ba59071d231adbf45a3aae1bbc0642ff4"
 }

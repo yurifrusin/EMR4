@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 22,
+  "register_revision": 23,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-05",
@@ -1042,16 +1042,19 @@
       "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "The worker receipt and commit remain preserved as rejected untrusted provenance. The material authority and state-machine gaps move directly to Sol's named recovery lease with one direct adversarial regression per finding, full deterministic verification and a fresh exact-head Gemini 3.6 Flash/high veto required before any live C5 action.",
+        "status": "recovery_lease_applied",
+        "action": "The worker receipt and commit remain preserved as rejected untrusted provenance. Sol adopted only the source under the named recovery lease, closed all fourteen reproduced defects with direct provider-free regressions, completed the focused and widened deterministic gates, repaired two worktree-portability and source-identity evidence findings from the first exact-head veto, and obtained a fresh Gemini 3.6 Flash/high pass on corrected clean HEAD d82de54ba59071d231adbf45a3aae1bbc0642ff4. This corrects implementation readiness only and does not claim that the live C5 rehearsal has run.",
         "prevention_control": "C5 implementation acceptance must adversarially bind candidate, proofreader, frame, provider ledger, port, artifact and full approval; require fresh process plus HTTP readback; rollback every post-launch exception; prove cleanup predicates before success; share issuance/correction/idempotency state; pin exact paths and hashes; and mechanically align closed schemas with runtime admission.",
         "evidence_paths": [
           "docs/ariadne-orchestrator-recovery-lease.md",
           "orchestration/agent_inbox/codex/model-required-bureau-c5-worker-independent-audit.md",
-          "docs/ariadne-agent-error-correction-register-revision-22.md"
+          "docs/ariadne-agent-error-correction-register-revision-22.md",
+          "docs/ariadne-agent-error-correction-register-revision-23.md",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-2-receipt.json"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     }
   ]
 }

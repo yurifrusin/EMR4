@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c5_provider_free_implementation_readiness_acceptance_and_open_only_the_distinct_pre_execution_gate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records C5 provider-free implementation readiness as the current result at candidate HEAD d82de54ba59071d231adbf45a3aae1bbc0642ff4 and names the distinct pre-execution receipt plus frozen serial rehearsal as next. It explicitly states that no live C5 result exists and that Practice Context Fabric remains a later separate descendant.",
+    "current_authority_allocation": "Sol owns verifier acceptance, AER correction, Continuity/Compass/baton closeout and this task-branch commit. Gemini supplied the fresh read-only veto only; DeepSeek's failed source remains rejected. No worker receives live execution, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The frozen C5 plan, threat delta, worker audit, Sol recovery lease, first revision-required veto and corrected exact-head pass support only provider-free implementation readiness. AER revision 23, the closeout, Sol acceptance, Continuity 215 and Compass 197 preserve that limit. The combined closeout suite plus reproducible acceptance, register/index checks, Ruff, compilation and whitespace checks pass.",
+    "protected_evidence_boundaries": "No C5 process, socket, port, task directory, candidate-runtime provider call or ADC inspection occurred. Patient/clinical/product/protected data, real databases, ordinary/product runtime, Context Fabric implementation, deployment, production, release, Pages, protected evidence and protected refs remain closed. docs/branding/ and all unrelated untracked receipt/state files remain preserved and excluded; staging remains exact-path only.",
+    "git_refs_and_worktree": "Primary remains on codex/ariadne-bernie-davida-parallel-seam at parent HEAD d82de54ba59071d231adbf45a3aae1bbc0642ff4 with only the intended readiness closeout, continuity, register, baton, tests and corrected-review artifacts changed or untracked. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. The corrected review worktree remains clean and unchanged at d82de54ba59071d231adbf45a3aae1bbc0642ff4."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_implementation_readiness_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The preserved first review returned revision_required; the genuinely fresh corrected review returned one pass and left exact HEAD clean."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the acceptance chain, generated current continuity and baton artifacts and completed all closeout checks."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The failed C5 worker remains rejected immutable provenance and is corrected only by the separate Sol recovery descendant."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare carried only the historical rejected DeepSeek transport."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent received acceptance, write or live-sequence authority for this closeout."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

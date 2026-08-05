@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "launch_one_fresh_corrected_gemini_36_flash_high_veto_for_exact_c5_recovery_head",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen C5 plan, threat delta, rejected-worker audit, Sol recovery lease and preserved first veto control this corrected review. The repair makes evidence location-independent without weakening actual runtime path pinning and separates the plan baseline from canonical artifact-set candidate binding. Deterministic focused, widened, reproducibility, static, security, JSON/YAML and whitespace gates pass.",
+    "current_authority_allocation": "Sol owns the repair and acceptance. Gemini 3.6 Flash/high receives one new read-only exact-HEAD source veto through Antigravity and no implementation, live-action, acceptance, Git, deployment or protected-ref authority. DeepSeek remains rejected provenance and is not redispatched.",
+    "git_refs_and_worktree": "Primary is codex/ariadne-bernie-davida-parallel-seam at exact d82de54ba59071d231adbf45a3aae1bbc0642ff4 with tracked-clean state and preserved unrelated untracked files. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Fresh worktree C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-c5-sol-recovery-review-2 is clean on codex/review-model-required-bureau-c5-sol-recovery-2 at exact d82de54ba59071d231adbf45a3aae1bbc0642ff4, and its executable preflight passed.",
+    "live_handover_current_baton": "AGENTS.md requires a fresh exact-HEAD Gemini pass before any C5 live pre-execution receipt. The first review validly vetoed only path-dependent and ambiguously named acceptance evidence; corrected candidate d82de54ba59071d231adbf45a3aae1bbc0642ff4 now awaits a genuinely fresh veto. Practice Context Fabric implementation remains separately unstarted.",
+    "protected_evidence_boundaries": "The reviewer may read repository source and authored-synthetic evidence and run provider-free checks only. No protected holdout, historical PHI, docs/branding/, credential/ADC, patient/clinical/product data, database, ordinary runtime, C5 live process/socket/port/directory/provider action, Context Fabric implementation, deployment, release, Pages or protected ref is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

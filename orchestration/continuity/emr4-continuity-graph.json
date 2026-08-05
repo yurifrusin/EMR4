@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 214,
+  "graph_revision": 215,
   "harvests": [],
   "nodes": [
     {
@@ -12428,9 +12428,117 @@
         "Update download/import/migration/activation and external event delivery remain closed.",
         "Production, deployment, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-c5-provider-free-implementation-readiness",
+      "title": "C5 Provider-Free Implementation Readiness",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-05T14:30:00Z",
+      "updated_at": "2026-08-05T14:30:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "d82de54ba59071d231adbf45a3aae1bbc0642ff4",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-c4-allowlisted-actuator-simulator",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "autonomous-action",
+            "source": "docs/emr4-model-required-bureau-c5-provider-free-implementation-readiness-closeout.md",
+            "scope": "Prepare the distinct exact-head C5 pre-execution receipt; this opening itself performs no live action."
+          }
+        ],
+        "notes": [
+          "Only provider-free implementation readiness is accepted; no live C5 result exists.",
+          "AER-0027 closes only through Sol recovery, two preserved veto outcomes and the corrected exact-head pass.",
+          "The distinct pre-execution receipt must bind the frozen serial target/provider/cost/cleanup envelope before live action.",
+          "Practice Context Fabric remains a separate unimplemented successor direction."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-model-required-bureau-c5-implementation-readiness",
+          "source": "docs/emr4-model-required-bureau-c5-provider-free-implementation-readiness-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the recovered C5 provider-free source and controls only as readiness for a distinct gated live rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "All fourteen worker-audit findings and both first-veto evidence findings are closed by direct regressions.",
+        "Fresh corrected Gemini review passed 269 tests on the exact clean unchanged candidate.",
+        "No target process, socket, port, task directory or candidate-runtime provider call occurred.",
+        "No product, database, ordinary-service, Context Fabric, deployment, production or release capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "tests/test_model_required_bureau_c5_contract.py"
+          ],
+          "note": "C5 uses patient-free technical frames and leaves the inherited Diary combined-scope contract unchanged."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_reception_one_availability_reconciliation.py",
+            "tests/test_model_required_bureau_c5_rehearsal.py",
+            "docs/emr4-model-required-bureau-c5-provider-free-implementation-readiness-closeout.md"
+          ],
+          "note": "C5 has no product event consumer and leaves the inherited reschedule reconciliation contract unchanged."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md",
+          "docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md",
+          "docs/api-spine/openapi/technical-control-live-development-recovery-commands.yaml"
+        ],
+        "findings": [
+          "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/provider-free-acceptance-evidence.json",
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-23.md"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-c5-provider-free-implementation-readiness-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-c5-provider-free-implementation-readiness-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-2-receipt.json"
+        ],
+        "tests": [
+          "scripts/model_required_bureau_c5_acceptance.py",
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_model_required_bureau_c5_contract.py",
+          "tests/test_model_required_bureau_c5_rehearsal.py",
+          "tests/test_model_required_bureau_c5_plan.py",
+          "tests/test_model_required_bureau_c5_implementation_readiness_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The distinct exact-head C5 pre-execution receipt must pass before any task-owned target, socket, port, temporary-directory or Sydney Vertex action.",
+        "Only the frozen gemini-2.5-flash Sydney envelope, authored-synthetic technical frame, at most two calls and USD 0.50 may be considered in that serial rehearsal.",
+        "A fresh live result must prove baseline, exact fault, admitted diagnosis, one-use authority, generation-2 readback, rollback semantics and complete cleanup.",
+        "Patient, clinical, product-derived, protected and production data; real databases; ordinary services; product routes and Context Fabric runtime remain closed.",
+        "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-05T12:00:00Z"
+  "updated_at": "2026-08-05T14:30:00Z"
 }

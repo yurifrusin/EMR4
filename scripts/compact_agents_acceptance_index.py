@@ -37,6 +37,7 @@ ACTIVE_LABELS = (
     "Ariadne agent error and correction register acceptance",
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
+    "Model-required Bureau C5 plan and recovery state",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",

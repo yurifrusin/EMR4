@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 214 / Compass 196. C4's provider-free authored-synthetic allowlisted-actuator simulator passes after Sol recovery and a fresh exact-head veto. Standing authority opens exact C5 planning next, but no live target or recovery action is yet authorised by C4.
+> EMR4 is at Continuity 215 / Compass 197. C5 provider-free implementation readiness passes after Sol recovery, one preserved revision veto and one fresh corrected exact-head pass. The distinct serial C5 pre-execution gate is next; no live C5 result exists yet.
 
 ## North star
 
@@ -202,32 +202,35 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A5.1/B4.1 pass; provider-free C4 planning is next. Lineage parent: `model-required-bureau-a3-b3-request-contract-recovery`.
 93. **First one-use deterministic technical action simulator — Provider-Free Allowlisted-Actuator Simulator**
    C4 passes; exact disposable C5 planning is next. Lineage parent: `model-required-bureau-a5-b4-command-runtime`.
+94. **Recovered C5 provider-free implementation readiness — C5 Provider-Free Implementation Readiness**
+   C5 source gates pass; the distinct serial pre-execution gate is next. Lineage parent: `model-required-bureau-c4-allowlisted-actuator-simulator`.
 
 ## Current position
 
-**Provider-free allowlisted-actuator simulator accepted — Provider-Free Allowlisted-Actuator Simulator**
+**C5 provider-free implementation ready for its exact live gate — C5 Provider-Free Implementation Readiness**
 
-**Why this proof came next:** C3 authority policy and the accepted A5/B4 backend command foundations made one exact zero-external-effect technical simulator dependency-complete.
+**Why this proof came next:** C4 and the frozen C5 plan made the provider-free controller/authority source dependency-complete; Sol recovery and fresh veto now pass.
 
-One fixed authored-synthetic recovery transition now passes deterministic, Sol recovery and independent source veto.
+The C5 source and safety controls are accepted, but no live recovery or provider result exists until the distinct serial rehearsal passes.
 
 ### What this unlocks
 
-- Freeze C5's narrowest disposable non-PHI live-development-recovery plan.
-- Use C4's typed authority and readback lessons in the later Context Fabric technical thread.
+- Create the exact-head C5 pre-execution receipt and run only the frozen serial rehearsal.
+- After C5 live acceptance, begin the provider-free Practice Context Fabric contract descendant.
 
 ### What it does not solve
 
-- A live provider diagnosis or any live development recovery action.
+- A live model diagnosis, target lifecycle, recovery readback or cleanup result.
 - Real database/service targets, product data, commands, cloud/IAM or production actuators.
-- Deployment, production, release, Pages or protected actions.
+- Context Fabric implementation, deployment, production, release, Pages or protected actions.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
 - Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
 - Contract `committed-reschedule-availability-reconciliation`: **satisfied**
-- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
+- Bounded opening `autonomous-action`: Prepare the distinct exact-head C5 pre-execution receipt; this opening itself performs no live action.
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -480,6 +483,7 @@ Prerequisites:
 
 ## Map limits
 
+- C5 implementation readiness proves provider-free source controls only; it does not prove a live target, provider diagnosis, recovery, cleanup, product runtime, Context Fabric, deployment, production or release.
 - C4 proves one in-memory authored-synthetic technical transition only; it does not prove a live model diagnosis, real target, database, external actuator, development recovery, deployment, production or release.
 - A5.1/B4.1 prove bounded authored-synthetic command semantics only; they do not prove ordinary-practice, patient-facing, live-recovery, production, deployment or release suitability.
 - A3/B3 prove bounded authored-synthetic occupied advisory formation only; they do not prove product data, commands, writes, actuators, clinical decisions, production suitability or sovereign processing.
@@ -591,7 +595,9 @@ Prerequisites:
 - `docs/api-spine/manifests/agent-capability-charters.yaml`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
+- `docs/api-spine/openapi/technical-control-live-development-recovery-commands.yaml`
 - `docs/api-spine/openapi/technical-control-simulator-commands.yaml`
+- `docs/ariadne-agent-error-correction-register-revision-23.md`
 - `docs/ariadne-autonomous-continuation.md`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
 - `docs/ariadne-compass-increment2-plan.md`
@@ -720,6 +726,8 @@ Prerequisites:
 - `docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md`
 - `docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md`
 - `docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md`
+- `docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md`
+- `docs/emr4-model-required-bureau-c5-provider-free-implementation-readiness-closeout.md`
 - `docs/emr4-model-required-bureau-gate-minus-one-closeout.md`
 - `docs/emr4-model-required-bureau-gate-zero-closeout.md`
 - `docs/emr4-model-required-bureau-gate-zero-shared-contract.md`
@@ -827,6 +835,7 @@ Prerequisites:
 - `docs/security/emr4-model-required-bureau-a5-b4-command-runtime-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-threat-model-delta.md`
+- `docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureaus-gate-minus-one-threat-model-delta.md`
@@ -869,6 +878,8 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-2-receipt.json`
+- `orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json`
@@ -910,6 +921,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-c4-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/model-required-bureau-c5-provider-free-implementation-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md`
@@ -1087,6 +1099,7 @@ Prerequisites:
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json`
 - `orchestration/continuity/model-required-bureau-c3-d3/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json`
@@ -1448,4 +1461,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 196; continuity graph revision 214._
+_Compass map revision 197; continuity graph revision 215._

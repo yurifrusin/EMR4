@@ -40,13 +40,13 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
     )
     assert manifest["source_agents_path"] == "AGENTS.md"
     assert manifest["source_git_head"] == (
-        "955b6a566f7097f58929dcb2fa9c4ed0aaad8b29"
+        "d82de54ba59071d231adbf45a3aae1bbc0642ff4"
     )
     assert manifest["source_agents_sha256"] == (
-        "19f84b6e0d06c0346defe69b2d091cbe676b4890df65a79f9bdaed9848e7b92b"
+        "bd318120969579a1ef88500ab68cb28bff3308f5d38913d4a56b6c5485fa0ea4"
     )
-    assert manifest["source_agents_byte_count"] == 78449
-    assert manifest["source_agents_line_count"] == 478
+    assert manifest["source_agents_byte_count"] == 56693
+    assert manifest["source_agents_line_count"] == 460
     assert len(payload) == manifest["ledger_byte_count"]
     assert len(payload.decode("utf-8").splitlines()) == manifest["ledger_line_count"]
     assert hashlib.sha256(payload).hexdigest() == manifest["ledger_sha256"]

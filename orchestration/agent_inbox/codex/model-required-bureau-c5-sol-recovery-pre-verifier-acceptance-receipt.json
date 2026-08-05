@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_fresh_exact_head_c5_recovery_source_veto_and_open_only_distinct_pre_execution_planning",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen C5 plan, threat delta, rejected-worker audit, Sol recovery lease, first revision-required review and corrected exact-head pass form the acceptance chain. The corrected review independently passed reproducible worktree-portable evidence, 269 tests, Ruff, Bandit and exact Git checks while reconfirming all fourteen controls. This can accept provider-free implementation readiness only; no target/provider/live result exists.",
+    "current_authority_allocation": "Sol alone may interpret and accept the verifier result, close AER-0027 through the named recovery lease and prepare the next exact serial gate. Gemini 3.6 Flash/high supplied only a read-only veto with no implementation, live execution, integration or protected-ref authority. DeepSeek's failed candidate remains rejected provenance.",
+    "git_refs_and_worktree": "Primary is tracked-clean on codex/ariadne-bernie-davida-parallel-seam at d82de54ba59071d231adbf45a3aae1bbc0642ff4 with only intended untracked corrected-review artifacts plus preserved unrelated untracked files. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task is 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. The fresh review worktree is clean and unchanged at exact d82de54ba59071d231adbf45a3aae1bbc0642ff4; its receipt contains one terminal pass.",
+    "live_handover_current_baton": "AGENTS.md requires one fresh exact-HEAD Gemini pass after deterministic C5 recovery and before a distinct live pre-execution receipt. Corrected candidate d82de54ba59071d231adbf45a3aae1bbc0642ff4 now has that pass; C4 remains the prior completed runtime result, and Practice Context Fabric implementation remains separate and unstarted.",
+    "protected_evidence_boundaries": "Acceptance opens only preparation of the distinct C5 pre-execution receipt. It does not itself start a process/socket/port/directory, call Vertex or inspect ADC, and grants no patient/clinical/product data, database, ordinary service, Context Fabric implementation, deployment, production, release, Pages, protected evidence or protected-ref movement. docs/branding/ and unrelated untracked receipts remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

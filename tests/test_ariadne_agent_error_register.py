@@ -32,13 +32,13 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_c5_worker_rejection() -> None:
+def test_committed_register_is_semantically_valid_after_c5_sol_recovery() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 22
+    assert register["register_revision"] == 23
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 28)
@@ -266,7 +266,7 @@ def test_c4_bounded_repair_self_pass_is_corrected_by_exact_transactional_control
     assert "exact reviewer role" in action
 
 
-def test_c5_worker_self_pass_is_contained_and_routes_to_sol_recovery() -> None:
+def test_c5_worker_self_pass_remains_rejected_after_sol_recovery() -> None:
     incident = next(
         row for row in _register()["incidents"] if row["incident_id"] == "AER-0027"
     )
@@ -290,8 +290,11 @@ def test_c5_worker_self_pass_is_contained_and_routes_to_sol_recovery() -> None:
     assert incident["category"] == "reasoning_claim_error"
     assert incident["candidate_state"] == "untrusted_partial_worktree"
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
-    assert incident["correction"]["status"] == "contained_then_escalated"
-    assert incident["status"] == "contained"
+    assert incident["correction"]["status"] == "recovery_lease_applied"
+    assert incident["status"] == "corrected"
+    assert "d82de54ba59071d231adbf45a3aae1bbc0642ff4" in incident["correction"][
+        "action"
+    ]
     assert receipt["model"] == "deepseek-v4-flash"
     assert "DECISION: pass" in receipt["result"]
     assert "execution is not bound" in audit

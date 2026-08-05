@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 196,
-  "updated_at": "2026-08-05T12:00:00Z",
-  "source_graph_revision": 214,
-  "orientation_statement": "EMR4 is at Continuity 214 / Compass 196. C4's provider-free authored-synthetic allowlisted-actuator simulator passes after Sol recovery and a fresh exact-head veto. Standing authority opens exact C5 planning next, but no live target or recovery action is yet authorised by C4.",
+  "map_revision": 197,
+  "updated_at": "2026-08-05T14:30:00Z",
+  "source_graph_revision": 215,
+  "orientation_statement": "EMR4 is at Continuity 215 / Compass 197. C5 provider-free implementation readiness passes after Sol recovery, one preserved revision veto and one fresh corrected exact-head pass. The distinct serial C5 pre-execution gate is next; no live C5 result exists yet.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1595,32 +1595,51 @@
         "orchestration/agent_inbox/codex/model-required-bureau-c4-sol-acceptance.md",
         "orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json"
       ]
+    },
+    {
+      "node_id": "model-required-bureau-c5-provider-free-implementation-readiness",
+      "lineage_parent": "model-required-bureau-c4-allowlisted-actuator-simulator",
+      "strategic_role": "Recovered C5 provider-free implementation readiness",
+      "outcome": "C5 source gates pass; the distinct serial pre-execution gate is next.",
+      "evidence": [
+        "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md",
+        "docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md",
+        "docs/api-spine/openapi/technical-control-live-development-recovery-commands.yaml",
+        "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/provider-free-acceptance-evidence.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-23.md",
+        "docs/emr4-model-required-bureau-c5-provider-free-implementation-readiness-closeout.md",
+        "orchestration/agent_inbox/codex/model-required-bureau-c5-provider-free-implementation-readiness-sol-acceptance.md",
+        "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-receipt.json",
+        "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-2-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "model-required-bureau-c4-allowlisted-actuator-simulator",
-    "strategic_role": "Provider-free allowlisted-actuator simulator accepted",
-    "why_now": "C3 authority policy and the accepted A5/B4 backend command foundations made one exact zero-external-effect technical simulator dependency-complete.",
-    "outcome": "One fixed authored-synthetic recovery transition now passes deterministic, Sol recovery and independent source veto.",
+    "node_id": "model-required-bureau-c5-provider-free-implementation-readiness",
+    "strategic_role": "C5 provider-free implementation ready for its exact live gate",
+    "why_now": "C4 and the frozen C5 plan made the provider-free controller/authority source dependency-complete; Sol recovery and fresh veto now pass.",
+    "outcome": "The C5 source and safety controls are accepted, but no live recovery or provider result exists until the distinct serial rehearsal passes.",
     "unlocks": [
-      "Freeze C5's narrowest disposable non-PHI live-development-recovery plan.",
-      "Use C4's typed authority and readback lessons in the later Context Fabric technical thread."
+      "Create the exact-head C5 pre-execution receipt and run only the frozen serial rehearsal.",
+      "After C5 live acceptance, begin the provider-free Practice Context Fabric contract descendant."
     ],
     "does_not_solve": [
-      "A live provider diagnosis or any live development recovery action.",
+      "A live model diagnosis, target lifecycle, recovery readback or cleanup result.",
       "Real database/service targets, product data, commands, cloud/IAM or production actuators.",
-      "Deployment, production, release, Pages or protected actions."
+      "Context Fabric implementation, deployment, production, release, Pages or protected actions."
     ],
     "evidence": [
-      "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md",
-      "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
-      "docs/security/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-threat-model-delta.md",
-      "docs/api-spine/openapi/technical-control-simulator-commands.yaml",
-      "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/provider-free-acceptance-evidence.json",
+      "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md",
+      "docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md",
+      "docs/api-spine/openapi/technical-control-live-development-recovery-commands.yaml",
+      "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/provider-free-acceptance-evidence.json",
       "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
-      "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-closeout.md",
-      "orchestration/agent_inbox/codex/model-required-bureau-c4-sol-acceptance.md",
-      "orchestration/agent_inbox/antigravity/model-required-bureau-c4-code-review-receipt.json"
+      "docs/ariadne-agent-error-correction-register-revision-23.md",
+      "docs/emr4-model-required-bureau-c5-provider-free-implementation-readiness-closeout.md",
+      "orchestration/agent_inbox/codex/model-required-bureau-c5-provider-free-implementation-readiness-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-receipt.json",
+      "orchestration/agent_inbox/antigravity/model-required-bureau-c5-sol-recovery-review-2-receipt.json"
     ]
   },
   "decision_horizon": [
@@ -2570,6 +2589,7 @@
     }
   ],
   "map_limits": [
+    "C5 implementation readiness proves provider-free source controls only; it does not prove a live target, provider diagnosis, recovery, cleanup, product runtime, Context Fabric, deployment, production or release.",
     "C4 proves one in-memory authored-synthetic technical transition only; it does not prove a live model diagnosis, real target, database, external actuator, development recovery, deployment, production or release.",
     "A5.1/B4.1 prove bounded authored-synthetic command semantics only; they do not prove ordinary-practice, patient-facing, live-recovery, production, deployment or release suitability.",
     "A3/B3 prove bounded authored-synthetic occupied advisory formation only; they do not prove product data, commands, writes, actuators, clinical decisions, production suitability or sovereign processing.",
