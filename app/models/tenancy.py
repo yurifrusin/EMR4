@@ -1,7 +1,7 @@
 import uuid
 import enum
 from sqlalchemy import (
-    Column, String, Boolean, DateTime, Enum, ForeignKey, Float, Index,
+    Column, String, Boolean, DateTime, Enum, ForeignKey, Float, Index, Integer,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship
@@ -101,6 +101,7 @@ class Practitioner(Base):
     hpi_i = Column(String(20))
     specialty = Column(String(100))
     default_location_id = Column(UUID(as_uuid=True), ForeignKey("practice_locations.id"), nullable=True)
+    aggregate_version = Column(Integer, nullable=False, server_default="0", default=0)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

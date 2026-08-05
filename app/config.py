@@ -121,6 +121,15 @@ class Settings(BaseSettings):
     rayleen_a4_vertex_preflight_path: str = ""
     rayleen_a4_vertex_evidence_dir: str = ""
 
+    # B4.1 Davida default-location command runtime (default-off). The exact
+    # authored-synthetic practice allowlist is separate from every other gate,
+    # and a dedicated server-only command secret is required before any B4
+    # proposal, evidence or confirm path opens. Missing/invalid configuration
+    # fails the whole feature closed before practitioner or location lookup.
+    b4_default_location_command_runtime_enabled: bool = False
+    b4_default_location_command_synthetic_practice_ids: str = ""
+    b4_default_location_command_secret: str = ""
+
     # Raw appointment compatibility endpoint guard.
     #   "audit" - attach raw_compat_* audit evidence tags only.
     #   "header" - attach raw_compat_* audit evidence tags AND set
