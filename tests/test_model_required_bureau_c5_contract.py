@@ -19,12 +19,13 @@ import pytest
 from jsonschema import Draft202012Validator, FormatChecker
 
 import scripts.model_required_bureau_c5_contract as c5
+import scripts.model_required_bureau_c5_rehearsal as c5_rehearsal
 
 from scripts.model_required_bureau_c5_acceptance import (
     CATALOG_DIGEST,
     CORRELATION_ID,
     EVIDENCE_LABEL,
-    EXPECTED_HEAD,
+    PLAN_SOURCE_HEAD,
     EXPECTED_RESULT,
     NOW,
     POLICY_DIGEST,
@@ -74,7 +75,15 @@ def test_acceptance_passes_with_exact_label_and_zero_operation_counters():
     evidence = build_evidence()
     assert evidence["passed"] is True
     assert evidence["result"] == EXPECTED_RESULT
-    assert evidence["source_head"] == EXPECTED_HEAD
+    assert "source_head" not in evidence
+    assert evidence["plan_source_head"] == PLAN_SOURCE_HEAD
+    assert evidence["candidate_source_binding"] == {
+        "binding_kind": "repository_relative_artifact_sha256_set",
+        "artifact_count": len(evidence["artifact_hashes"]),
+        "artifact_set_sha256": c5.canonical_sha256(evidence["artifact_hashes"]),
+        "exact_git_head_bound_by_external_review_receipt": True,
+        "embedded_git_head": False,
+    }
     assert evidence["evidence_label"] == EVIDENCE_LABEL
     assert len(evidence["operation_counters"]) == 20
     assert set(evidence["operation_counters"].values()) == {0}
@@ -199,6 +208,25 @@ def test_argument_vector_rejects_overrides_and_contains_no_shell():
     assert argvec["module_override_rejected"] is True
     assert argvec["host_override_rejected"] is True
     assert argvec["environment_credential_free"] is True
+
+
+def test_acceptance_argument_vector_is_portable_across_worktree_roots(
+    monkeypatch, tmp_path
+):
+    first = _validate_argument_vector()["vector"]
+    alternate_root = tmp_path / "fresh-review-worktree"
+    monkeypatch.setattr(c5_rehearsal, "REPOSITORY_ROOT", alternate_root)
+    monkeypatch.setattr(
+        c5_rehearsal,
+        "TARGET_MODULE_PATH",
+        alternate_root / "scripts" / "model_required_bureau_c5_target.py",
+    )
+    second = _validate_argument_vector()["vector"]
+
+    assert second == first
+    assert first[0].startswith("repository://.venv/")
+    assert first[2] == "repository://scripts/model_required_bureau_c5_target.py"
+    assert not any(str(ROOT) in item for item in first)
 
 
 def test_production_mint_signature_has_no_reference_or_nonce():

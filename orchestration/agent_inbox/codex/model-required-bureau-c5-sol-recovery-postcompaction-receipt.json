@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "obtain_fresh_exact_head_gemini_veto_for_the_sol_recovered_c5_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling frozen C5 plan and threat delta permit only a provider-free source recovery before independent review. Commit 792f6e06a3c91a6684af0b0127c65660fd690b67 closes the fourteen reproduced defects with direct regressions and passed focused, widened, API-Spine, schema, static and acceptance gates. The fresh verifier must review that exact candidate; only one pass can open a distinct pre-execution receipt for the separately bounded live C5 rehearsal.",
+    "current_authority_allocation": "GPT Sol owns C5 recovery, acceptance and task-branch integration. DeepSeek V4 Flash/high supplied only the rejected worker provenance; no further same-lane correction is eligible. Gemini 3.6 Flash/high through a fresh Antigravity project owns only the deterministic-gated read-only veto in a clean exact-HEAD non-protected review worktree. No reviewer owns implementation, live execution, acceptance, protected refs or deployment.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the primary task worktree is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 792f6e06a3c91a6684af0b0127c65660fd690b67, five commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f, with a clean tracked tree and preserved untracked files. Local/origin master and local/origin handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The review worktree C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-c5-sol-recovery-review is clean on codex/review-model-required-bureau-c5-sol-recovery at exact HEAD 792f6e06a3c91a6684af0b0127c65660fd690b67, and its executable preflight passed.",
+    "live_handover_current_baton": "AGENTS.md names protected master and handoff/current at 2e34bdad732fdab32fbf778280b3d3c70d66d602, accepted C4 as the current implementation result, and the rejected C5 worker as AER-0027 under a Sol recovery lease. The Sol recovery implementation is now committed on the task branch at 792f6e06a3c91a6684af0b0127c65660fd690b67 and awaits the required fresh exact-HEAD Gemini veto. The accepted Practice Context Fabric remains a separate staged successor with implementation unstarted.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, patient, clinical, participant, product-derived, protected and production data; ordinary product/app/database/runtime surfaces; C5 target process, socket, port and task-directory live action; C5 candidate-runtime provider calls and ADC inspection; deployment, release, Pages and protected-ref movement remain closed during source review. The sole permitted external action is the fresh Gemini source-review transport over repository code and authored-synthetic evidence. docs/branding/ and all existing unrelated untracked receipt/state files remain preserved and excluded; Git staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

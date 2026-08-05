@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "launch_one_fresh_read_only_gemini_36_flash_high_veto_for_exact_c5_recovery_head",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps protected integration closed at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and requires the recovered C5 source to pass one fresh exact-HEAD Gemini veto before any distinct live pre-execution receipt. The separate accepted Practice Context Fabric remains implementation-unstarted successor work.",
+    "current_authority_allocation": "GPT Sol owns C5 recovery and acceptance. Gemini 3.6 Flash/high through one fresh Antigravity project receives only read-only source-review authority for exact candidate 792f6e06a3c91a6684af0b0127c65660fd690b67. It cannot edit, implement, accept, start C5 resources, call the candidate-runtime provider, integrate, deploy or move refs.",
+    "active_plan_and_acceptance": "The frozen C5 plan, threat delta, rejected-worker audit and exact Sol recovery lease control this dispatch. Focused and widened provider-free gates passed for the committed Sol candidate, and the review packet adversarially enumerates all fourteen recovery findings plus sequence, inherited-socket, API-Spine, evidence and Context Fabric boundaries. One terminal pass is required; any material finding returns to bounded Sol recovery.",
+    "protected_evidence_boundaries": "The reviewer may read only repository source and authored-synthetic evidence in its exact clean review worktree and run provider-free tests/static checks with external temporary output. Protected holdouts, historical PHI, docs/branding/, credentials/ADC, patient/clinical/product-derived data, databases, ordinary runtime, C5 live process/socket/port/directory actions, C5 candidate provider calls, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "After fresh origin verification, primary is codex/ariadne-bernie-davida-parallel-seam at 792f6e06a3c91a6684af0b0127c65660fd690b67 with no tracked changes and preserved untracked files; origin task is 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Local/origin master and handoff/current are all 2e34bdad732fdab32fbf778280b3d3c70d66d602. The executable verifier preflight passed for clean review branch codex/review-model-required-bureau-c5-sol-recovery at exact 792f6e06a3c91a6684af0b0127c65660fd690b67."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_sol_recovery_pre_verifier_dispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The exact clean review worktree passed the mandatory executable preflight and the packet permits one fresh source-review transport."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the deterministic candidate, authored the bounded packet and retains all acceptance authority."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek is not redispatched; its C5 candidate remains rejected provenance."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare carried only the historical rejected DeepSeek transport."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned to this verifier dispatch; prior read-only audit lanes supplied no source edits or acceptance decision."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -29,6 +29,7 @@ if str(_BOOTSTRAP_ROOT) not in sys.path:
     sys.path.insert(0, str(_BOOTSTRAP_ROOT))
 
 import scripts.model_required_bureau_c5_contract as _c5
+import scripts.model_required_bureau_c5_rehearsal as _c5_rehearsal
 from scripts.model_required_bureau_c5_contract import (
     C5EvidenceIssuer,
     C5SharedStore,
@@ -72,7 +73,7 @@ THREAT = (
     / "docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md"
 )
 DEFAULT_OUTPUT = ARTIFACT_ROOT / "provider-free-acceptance-evidence.json"
-EXPECTED_HEAD = "953073e18ab48420b58d80ed78d41e8033534cb8"
+PLAN_SOURCE_HEAD = "953073e18ab48420b58d80ed78d41e8033534cb8"
 EXPECTED_RESULT = "model_required_bureau_c5_disposable_live_development_recovery_pass"
 COUNTER_SCHEMA_VERSION = "emr4.model_required_bureau_c5_acceptance.v1"
 
@@ -1377,6 +1378,19 @@ def _validate_argument_vector() -> dict[str, Any]:
     if any(any(tok in key.upper() for tok in blocked_tokens) for key in environment):
         raise ValueError("minimal environment contains a credential-shaped variable")
 
+    # The real runtime vector is validated above against paths pinned to this
+    # checkout.  Durable provider-free evidence records the same vector with
+    # repository-relative path identities so an exact candidate reproduces in
+    # a fresh worktree at a different absolute location.
+    repository_root = _c5_rehearsal.REPOSITORY_ROOT.resolve()
+    portable_argv = list(argv)
+    for index in (0, 2):
+        try:
+            relative = Path(argv[index]).resolve().relative_to(repository_root)
+        except ValueError as exc:
+            raise ValueError("argument-vector path escapes repository root") from exc
+        portable_argv[index] = f"repository://{relative.as_posix()}"
+
     return {
         "argument_count": len(argv),
         "contains_no_shell_string": True,
@@ -1384,7 +1398,8 @@ def _validate_argument_vector() -> dict[str, Any]:
         "module_override_rejected": True,
         "host_override_rejected": True,
         "environment_credential_free": True,
-        "vector": argv,
+        "vector": portable_argv,
+        "runtime_paths_validated_before_portable_projection": True,
     }
 
 
@@ -1546,11 +1561,23 @@ def build_evidence() -> dict[str, Any]:
         ]
     )
 
+    artifact_hashes = {
+        str(path.relative_to(ROOT)).replace("\\", "/"): sha256_bytes(path)
+        for path in artifact_paths
+    }
+
     return {
         "schema_version": COUNTER_SCHEMA_VERSION,
         "passed": True,
         "result": EXPECTED_RESULT,
-        "source_head": EXPECTED_HEAD,
+        "plan_source_head": PLAN_SOURCE_HEAD,
+        "candidate_source_binding": {
+            "binding_kind": "repository_relative_artifact_sha256_set",
+            "artifact_count": len(artifact_hashes),
+            "artifact_set_sha256": canonical_sha256(artifact_hashes),
+            "exact_git_head_bound_by_external_review_receipt": True,
+            "embedded_git_head": False,
+        },
         "evidence_label": EVIDENCE_LABEL,
         "schemas": schemas,
         "digest_reproduction": digests,
@@ -1569,10 +1596,7 @@ def build_evidence() -> dict[str, Any]:
         "operation_counters": operation_counters,
         "fake_operation_accounting": _fake_operation_accounting(),
         "context_fabric_implemented": False,
-        "artifact_hashes": {
-            str(path.relative_to(ROOT)).replace("\\", "/"): sha256_bytes(path)
-            for path in artifact_paths
-        },
+        "artifact_hashes": artifact_hashes,
     }
 
 
@@ -1597,7 +1621,10 @@ def main() -> int:
             {
                 "passed": True,
                 "result": EXPECTED_RESULT,
-                "source_head": EXPECTED_HEAD,
+                "plan_source_head": PLAN_SOURCE_HEAD,
+                "candidate_artifact_set_sha256": evidence[
+                    "candidate_source_binding"
+                ]["artifact_set_sha256"],
             }
         )
     )
