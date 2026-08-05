@@ -1,0 +1,32 @@
+{
+  "schema_version": "emr4.runbook_catalog_entry.v1",
+  "catalog_version": "emr4.synthetic_runbook_catalog.v1",
+  "entry_id": "restart-api-synthetic-v1-entry",
+  "runbook_id": "restart-api-synthetic.v1",
+  "rollback_runbook_id": "restore-api-synthetic-lkg.v1",
+  "operation_class": "scoped_service_recovery",
+  "risk_tier": "reversible_scoped_service_recovery",
+  "required_authority": "ordinary_confirmation",
+  "target": {
+    "environment": "isolated_authored_synthetic",
+    "kind": "service",
+    "target_id": "synthetic:api-service",
+    "expected_revision": "api-synthetic-1.2.3"
+  },
+  "parameter_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false
+  },
+  "expected_transition": {
+    "from_health": "degraded",
+    "to_health": "healthy"
+  },
+  "readback_contract": {
+    "health": "healthy",
+    "revision": "api-synthetic-1.2.3"
+  },
+  "expires_at": "2026-08-04T08:05:00Z",
+  "immutable": true,
+  "catalog_digest": "e39b504e77f48483e82c495d23f57d47471183fe77ea1f733de5329114874b4c"
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/simulator-denial-receipt.v1.json",
+  "title": "Bounded simulator denial receipt",
+  "description": "Closed terminal denial with one stable reason code and sanitized bounded correlation only. Never exposes secrets, raw evidence references, stack traces, attacker-controlled prose or ambient state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_label",
+    "result",
+    "reason_code",
+    "correlation_digest",
+    "simulated_effect",
+    "rollback",
+    "operation_counters",
+    "issued_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.simulator_denial_receipt.v1"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_allowlisted_actuator_simulation"},
+    "result": {"const": "denied"},
+    "reason_code": {
+      "enum": [
+        "SCHEMA_REJECTED",
+        "EXECUTABLE_CONTENT_REJECTED",
+        "UNKNOWN_RUNBOOK",
+        "UNKNOWN_PARAMETER",
+        "SCOPE_EXPANSION_REJECTED",
+        "STALE_OR_SUPERSEDED",
+        "TARGET_REVISION_CONFLICT",
+        "OBSERVATION_MISMATCH",
+        "AUTHORITY_MISMATCH",
+        "REVIEWER_INVALID",
+        "EXECUTION_EVIDENCE_INVALID",
+        "EXECUTION_EVIDENCE_REPLAY",
+        "IDEMPOTENCY_CONFLICT",
+        "IDEMPOTENCY_IN_PROGRESS",
+        "SIMULATED_TRANSITION_FAILED",
+        "SIMULATED_READBACK_FAILED_ROLLBACK_VERIFIED",
+        "SIMULATED_ROLLBACK_UNVERIFIED"
+      ]
+    },
+    "correlation_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "simulated_effect": {"enum": ["none", "state_restored_to_last_known_good"]},
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invoked", "verified"],
+      "properties": {
+        "invoked": {"type": "boolean"},
+        "verified": {"type": ["boolean", "null"]}
+      }
+    },
+    "operation_counters": {
+      "type": "object",
+      "minProperties": 18,
+      "maxProperties": 18,
+      "additionalProperties": {"const": 0}
+    },
+    "issued_at": {"type": "string", "format": "date-time"}
+  }
+}

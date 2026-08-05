@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/runbook-catalog-entry.v1.json",
+  "title": "Immutable synthetic runbook catalog entry",
+  "description": "Closed immutable entry for the single allowlisted forward runbook restart-api-synthetic.v1 and its exact rollback runbook restore-api-synthetic-lkg.v1. Carries a reproducible catalog digest bound from LF canonical bytes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "catalog_version",
+    "entry_id",
+    "runbook_id",
+    "rollback_runbook_id",
+    "operation_class",
+    "risk_tier",
+    "required_authority",
+    "target",
+    "parameter_schema",
+    "expected_transition",
+    "readback_contract",
+    "expires_at",
+    "catalog_digest",
+    "immutable"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.runbook_catalog_entry.v1"},
+    "catalog_version": {"const": "emr4.synthetic_runbook_catalog.v1"},
+    "entry_id": {"const": "restart-api-synthetic-v1-entry"},
+    "runbook_id": {"const": "restart-api-synthetic.v1"},
+    "rollback_runbook_id": {"const": "restore-api-synthetic-lkg.v1"},
+    "operation_class": {"const": "scoped_service_recovery"},
+    "risk_tier": {"const": "reversible_scoped_service_recovery"},
+    "required_authority": {"const": "ordinary_confirmation"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id", "expected_revision"],
+      "properties": {
+        "environment": {"const": "isolated_authored_synthetic"},
+        "kind": {"const": "service"},
+        "target_id": {"const": "synthetic:api-service"},
+        "expected_revision": {"const": "api-synthetic-1.2.3"}
+      }
+    },
+    "parameter_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "properties", "additionalProperties"],
+      "properties": {
+        "type": {"const": "object"},
+        "properties": {
+          "type": "object",
+          "maxProperties": 0,
+          "additionalProperties": false
+        },
+        "additionalProperties": {"const": false}
+      }
+    },
+    "expected_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_health", "to_health"],
+      "properties": {
+        "from_health": {"const": "degraded"},
+        "to_health": {"const": "healthy"}
+      }
+    },
+    "readback_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["health", "revision"],
+      "properties": {
+        "health": {"const": "healthy"},
+        "revision": {"const": "api-synthetic-1.2.3"}
+      }
+    },
+    "expires_at": {"type": "string", "format": "date-time"},
+    "catalog_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "immutable": {"const": true}
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "emr4.simulator_execution_receipt.v1",
+  "evidence_label": "provider_free_authored_synthetic_allowlisted_actuator_simulation",
+  "result": "simulated_effect_verified",
+  "simulated_effect": "health_transition_degraded_to_healthy",
+  "runbook_id": "restart-api-synthetic.v1",
+  "target": {
+    "environment": "isolated_authored_synthetic",
+    "kind": "service",
+    "target_id": "synthetic:api-service",
+    "expected_revision": "api-synthetic-1.2.3"
+  },
+  "expected_revision": "api-synthetic-1.2.3",
+  "correlation_id": "73000000-0000-4000-8000-000000000001",
+  "idempotency_key_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "before_health": "degraded",
+  "after_health": "healthy",
+  "readback_health": "healthy",
+  "readback_revision": "api-synthetic-1.2.3",
+  "readback_fresh": true,
+  "evidence_consumed": true,
+  "attempt_evidence_sha256": "d111111111111111111111111111111111111111111111111111111111111111",
+  "effect_audit_sha256": "e222222222222222222222222222222222222222222222222222222222222222",
+  "rollback": {
+    "invoked": false,
+    "verified": null
+  },
+  "operation_counters": {
+    "filesystem_operations": 0,
+    "process_operations": 0,
+    "shell_operations": 0,
+    "sql_operations": 0,
+    "socket_operations": 0,
+    "network_operations": 0,
+    "database_operations": 0,
+    "container_operations": 0,
+    "cloud_operations": 0,
+    "iam_operations": 0,
+    "secret_store_operations": 0,
+    "product_route_operations": 0,
+    "provider_operations": 0,
+    "external_event_operations": 0,
+    "dynamic_import_operations": 0,
+    "eval_exec_operations": 0,
+    "reflection_operations": 0,
+    "template_url_path_operations": 0
+  },
+  "issued_at": "2026-08-04T08:00:30Z"
+}

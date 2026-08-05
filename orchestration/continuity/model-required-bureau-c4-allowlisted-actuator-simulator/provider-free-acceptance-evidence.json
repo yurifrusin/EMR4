@@ -1,0 +1,241 @@
+{
+  "artifact_hashes": {
+    "docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md": "bdd6afdf1b7adc755b0f444e163fff2fcd10439067eb46d129447141450c9876",
+    "docs/security/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-threat-model-delta.md": "fd15daf972dfdc239b542412f3171ef1e67db22e4af158294286d63faeb7f497",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/execution-evidence.example.json": "616a5c99e9f95f994dc38b561e0ec565628c24efee3ff05b47f84439acdf98c3",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/execution-evidence.schema.json": "dea6496db4c6488df782cb7602b6ff1f955d6efa1eb96ae5fd7aec955e2d35a1",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/runbook-catalog-entry.example.json": "b3e125d39e815f399a8d2d0b3961bf0f105ace264ed8ed6cbe62a7c986c440ac",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/runbook-catalog-entry.schema.json": "1118858524032333d43d86c9f6cd27e23626d8fbbe4516773d42a46c0ebc7933",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-command-envelope.example.json": "4aaf3c91cda3219c300aaabe695e0f4fc739dbb9819a7ce646552076bfd6533f",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-command-envelope.schema.json": "1bfd67d3653f3bdac605283f4fecfab43e36ad27dbaa45b19a3b1dc76d54b42d",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-denial-receipt.example.json": "0ba4412517269ecd892140a14fbde5d3239d5afca720d54a599c18ddd591fca5",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-denial-receipt.schema.json": "12d943b0acd6b29e35911b7cabb218e0eb6a0ecd75f899adc40508126f392388",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-execution-receipt.example.json": "4d8e3fc7ff8ed59a8708e2dc1d11a106df9432813329b23c0acc1a600d14c2f7",
+    "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-execution-receipt.schema.json": "a880d10061a3c676c72eb43b4bd8d3794c24a307c95dc905813512d37d663978",
+    "scripts/model_required_bureau_c4_acceptance.py": "348fb7558d26b1e62ea3b55973575da270dd2ddb26a0e777941f7fd47025da7f",
+    "scripts/model_required_bureau_c4_simulator.py": "4d26f60a381a23c4c73d02451166563b81497a1b1547b7c9b5a3382577931bd1"
+  },
+  "denial_cases": {
+    "expired_evidence": {
+      "effect_record_count": 0,
+      "reason_code": "STALE_OR_SUPERSEDED"
+    },
+    "issuance_observation_mismatch": "OBSERVATION_MISMATCH",
+    "issuance_reviewer_separation": "REVIEWER_INVALID",
+    "mismatched_plan_binding": {
+      "effect_record_count": 0,
+      "reason_code": "AUTHORITY_MISMATCH"
+    },
+    "multiple_environment": {
+      "effect_record_count": 0,
+      "reason_code": "SCOPE_EXPANSION_REJECTED"
+    },
+    "reviewer_separation": {
+      "effect_record_count": 0,
+      "reason_code": "REVIEWER_INVALID"
+    },
+    "scope_expansion": {
+      "effect_record_count": 0,
+      "reason_code": "SCOPE_EXPANSION_REJECTED"
+    },
+    "stale_observation": {
+      "effect_record_count": 0,
+      "reason_code": "OBSERVATION_MISMATCH"
+    },
+    "superseded_evidence": {
+      "effect_record_count": 0,
+      "reason_code": "STALE_OR_SUPERSEDED"
+    },
+    "target_revision_drift": {
+      "effect_record_count": 0,
+      "reason_code": "TARGET_REVISION_CONFLICT"
+    },
+    "unknown_evidence": {
+      "effect_record_count": 0,
+      "reason_code": "EXECUTION_EVIDENCE_INVALID"
+    },
+    "wrong_actor": {
+      "effect_record_count": 0,
+      "reason_code": "AUTHORITY_MISMATCH"
+    },
+    "wrong_role": {
+      "effect_record_count": 0,
+      "reason_code": "AUTHORITY_MISMATCH"
+    }
+  },
+  "digest_reproduction": {
+    "catalog_digest_reproduces": "e39b504e77f48483e82c495d23f57d47471183fe77ea1f733de5329114874b4c",
+    "decision_sha256_reproduces": "9d2c40d853b9b18c5c51803f826a5d1c65ebe80a693e8feb5c55a848159045bb",
+    "empty_parameters_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "plan_sha256_reproduces": "f09bf9cf0b9f2bf5a9382fc7722a0e46043d7a798c7e43b3307b68c7b250206a",
+    "request_fingerprint_reproduces": "1d0e8c43ddfae7f1ebc3e467203b5449c07802c37c0b40a4ad6f64416b97d6e0"
+  },
+  "documents": {
+    "document_count": 2,
+    "required_boundary_count": 8
+  },
+  "evidence_label": "provider_free_authored_synthetic_allowlisted_actuator_simulation",
+  "fault_injection": {
+    "effect_audit_append_failed": {
+      "attempt_record_count": 1,
+      "effect_record_count": 0,
+      "evidence_consumed": true,
+      "reason_code": "SIMULATED_TRANSITION_FAILED",
+      "rollback": {
+        "invoked": false,
+        "verified": null
+      },
+      "state_health": "degraded",
+      "success": false
+    },
+    "first_readback_failed": {
+      "attempt_record_count": 1,
+      "effect_record_count": 1,
+      "evidence_consumed": true,
+      "reason_code": "SIMULATED_READBACK_FAILED_ROLLBACK_VERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": true
+      },
+      "state_health": "degraded",
+      "success": false
+    },
+    "handler_false_return": {
+      "attempt_record_count": 1,
+      "effect_record_count": 1,
+      "evidence_consumed": true,
+      "reason_code": "SIMULATED_READBACK_FAILED_ROLLBACK_VERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": true
+      },
+      "state_health": "degraded",
+      "success": false
+    },
+    "rollback_failed": {
+      "attempt_record_count": 1,
+      "effect_record_count": 1,
+      "evidence_consumed": true,
+      "reason_code": "SIMULATED_ROLLBACK_UNVERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": false
+      },
+      "state_health": "healthy",
+      "success": false
+    },
+    "rollback_readback_unverified": {
+      "attempt_record_count": 1,
+      "effect_record_count": 1,
+      "evidence_consumed": true,
+      "reason_code": "SIMULATED_ROLLBACK_UNVERIFIED",
+      "rollback": {
+        "invoked": true,
+        "verified": false
+      },
+      "state_health": "degraded",
+      "success": false
+    },
+    "transition_failed": {
+      "attempt_record_count": 1,
+      "effect_record_count": 0,
+      "evidence_consumed": true,
+      "reason_code": "SIMULATED_TRANSITION_FAILED",
+      "rollback": {
+        "invoked": false,
+        "verified": null
+      },
+      "state_health": "degraded",
+      "success": false
+    }
+  },
+  "issuance_and_execution": {
+    "after_health": "healthy",
+    "attempt_evidence_sha256": "b292d51fcc16b40f2626ca883eb38d8d61aa34749b65b6b750f9c8f1add6a097",
+    "attempt_record_count": 1,
+    "before_health": "degraded",
+    "effect_audit_sha256": "a02d113079bde7067b9a9d7451b3d665d2e9d88d6998bd09563aab5c09153bc9",
+    "effect_record_count": 1,
+    "evidence_state_after": "consumed",
+    "issued_evidence_id": "72000000-0000-4000-8000-000000000001",
+    "readback_fresh": true,
+    "readback_health": "healthy",
+    "result": "simulated_effect_verified"
+  },
+  "mutation_rejections": {
+    "duplicate_key": "REJECTED",
+    "executable_content": "EXECUTABLE_CONTENT_REJECTED",
+    "readback_contract_drift": "TARGET_REVISION_CONFLICT",
+    "scope_expansion": "SCOPE_EXPANSION_REJECTED",
+    "supersession_key_drift": "SCOPE_EXPANSION_REJECTED",
+    "target_revision_drift": "TARGET_REVISION_CONFLICT",
+    "unknown_nested_property": "SCHEMA_REJECTED",
+    "unknown_parameter": "UNKNOWN_PARAMETER",
+    "unknown_property": "SCHEMA_REJECTED",
+    "unknown_runbook": "UNKNOWN_RUNBOOK",
+    "wrong_role": "AUTHORITY_MISMATCH"
+  },
+  "operation_counters": {
+    "cloud_operations": 0,
+    "container_operations": 0,
+    "database_operations": 0,
+    "dynamic_import_operations": 0,
+    "eval_exec_operations": 0,
+    "external_event_operations": 0,
+    "filesystem_operations": 0,
+    "iam_operations": 0,
+    "network_operations": 0,
+    "process_operations": 0,
+    "product_route_operations": 0,
+    "provider_operations": 0,
+    "reflection_operations": 0,
+    "secret_store_operations": 0,
+    "shell_operations": 0,
+    "socket_operations": 0,
+    "sql_operations": 0,
+    "template_url_path_operations": 0
+  },
+  "passed": true,
+  "replay_and_concurrency": {
+    "concurrent_single_winner": {
+      "attempt_record_count": 1,
+      "effect_record_count": 1,
+      "evidence_consumed_count": 1,
+      "success_count": 2,
+      "total_results": 2
+    },
+    "different_key_evidence_replay": "EXECUTION_EVIDENCE_REPLAY",
+    "in_progress_key": "IDEMPOTENCY_IN_PROGRESS",
+    "same_key_changed_fingerprint": "IDEMPOTENCY_CONFLICT",
+    "same_key_exact_replay": {
+      "attempt_record_count": 1,
+      "effect_record_count": 1,
+      "same_receipt": true,
+      "success": true
+    }
+  },
+  "result": "model_required_bureau_c4_allowlisted_actuator_simulator_pass",
+  "schema_version": "emr4.model_required_bureau_c4_acceptance.v1",
+  "schemas": {
+    "all_examples_valid": true,
+    "canonical_example_count": 5,
+    "closed_schema_count": 5
+  },
+  "source_checks": {
+    "forbidden_call_hits": [],
+    "forbidden_imports": [],
+    "imported_modules": [
+      "__future__",
+      "dataclasses",
+      "datetime",
+      "enum",
+      "hashlib",
+      "json",
+      "secrets",
+      "threading",
+      "typing"
+    ],
+    "simulator_source_lf": true
+  },
+  "source_head": "b66b37a81120b1abd655ce65c42daf7518b8f7d5"
+}

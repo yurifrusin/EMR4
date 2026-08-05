@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/execution-evidence.v1.json",
+  "title": "Server-held one-use execution evidence record",
+  "description": "Closed server-held record binding the exact plan/decision/catalog/actor/role/context/target/preconditions, correlation, nonce, issued/expiry and one-use state. Only the one-way SHA-256 digest of the opaque random reference is stored; the raw opaque reference is never persisted or exposed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "reference_sha256",
+    "state",
+    "plan_id",
+    "plan_revision",
+    "plan_sha256",
+    "decision_id",
+    "decision_sha256",
+    "policy_version",
+    "catalog_version",
+    "catalog_digest",
+    "runbook_id",
+    "rollback_runbook_id",
+    "target",
+    "actor",
+    "candidate_generator_id",
+    "reviewer_id",
+    "observations",
+    "parameters_sha256",
+    "correlation_id",
+    "nonce",
+    "issued_at",
+    "expires_at",
+    "supersession_key"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.execution_evidence.v1"},
+    "evidence_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "reference_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "state": {"enum": ["issued", "consumed"]},
+    "plan_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "plan_revision": {"type": "integer", "minimum": 1},
+    "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "decision_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "decision_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "policy_version": {"const": "emr4.recovery_risk_policy.v1"},
+    "catalog_version": {"const": "emr4.synthetic_runbook_catalog.v1"},
+    "catalog_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "runbook_id": {"const": "restart-api-synthetic.v1"},
+    "rollback_runbook_id": {"const": "restore-api-synthetic-lkg.v1"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id", "expected_revision"],
+      "properties": {
+        "environment": {"const": "isolated_authored_synthetic"},
+        "kind": {"const": "service"},
+        "target_id": {"const": "synthetic:api-service"},
+        "expected_revision": {"const": "api-synthetic-1.2.3"}
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_id", "role"],
+      "properties": {
+        "actor_id": {"type": "string", "pattern": "^op-[a-z0-9-]+$"},
+        "role": {"const": "authorized_technical_operator"}
+      }
+    },
+    "candidate_generator_id": {"type": "string", "pattern": "^gen-[a-z0-9-]+$"},
+    "reviewer_id": {"type": "string", "pattern": "^rev-[a-z0-9-]+$"},
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["observation_id", "expected_sha256", "must_be_fresh", "observed_at"],
+        "properties": {
+          "observation_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
+          "expected_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "must_be_fresh": {"const": true},
+          "observed_at": {"type": "string", "format": "date-time"}
+        }
+      }
+    },
+    "parameters_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "correlation_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "nonce": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "supersession_key": {"const": "synthetic.api-service.recovery"}
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/simulator-command-envelope.v1.json",
+  "title": "Backend-owned simulator command envelope",
+  "description": "Closed backend-owned command envelope binding the exact runbook, target, expected revision, empty parameters, plan/decision/catalog/evidence bindings, actor, correlation, idempotency hash and readback contract. Cannot be emitted by a model, candidate, reviewer or proofreader.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_label",
+    "runbook_id",
+    "rollback_runbook_id",
+    "target",
+    "expected_revision",
+    "parameters",
+    "plan_binding",
+    "decision_binding",
+    "catalog_binding",
+    "evidence_binding",
+    "actor",
+    "correlation_id",
+    "idempotency_key",
+    "request_fingerprint",
+    "readback_contract",
+    "issued_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.simulator_command_envelope.v1"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_allowlisted_actuator_simulation"},
+    "runbook_id": {"const": "restart-api-synthetic.v1"},
+    "rollback_runbook_id": {"const": "restore-api-synthetic-lkg.v1"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id", "expected_revision"],
+      "properties": {
+        "environment": {"const": "isolated_authored_synthetic"},
+        "kind": {"const": "service"},
+        "target_id": {"const": "synthetic:api-service"},
+        "expected_revision": {"const": "api-synthetic-1.2.3"}
+      }
+    },
+    "expected_revision": {"const": "api-synthetic-1.2.3"},
+    "parameters": {
+      "type": "object",
+      "maxProperties": 0,
+      "additionalProperties": false
+    },
+    "plan_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan_id", "plan_revision", "plan_sha256"],
+      "properties": {
+        "plan_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+        "plan_revision": {"type": "integer", "minimum": 1},
+        "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "decision_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision_id", "decision_sha256", "policy_version"],
+      "properties": {
+        "decision_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+        "decision_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "policy_version": {"const": "emr4.recovery_risk_policy.v1"}
+      }
+    },
+    "catalog_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalog_version", "catalog_digest"],
+      "properties": {
+        "catalog_version": {"const": "emr4.synthetic_runbook_catalog.v1"},
+        "catalog_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "evidence_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "reference_sha256"],
+      "properties": {
+        "evidence_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+        "reference_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_id", "role"],
+      "properties": {
+        "actor_id": {"type": "string", "pattern": "^op-[a-z0-9-]+$"},
+        "role": {"const": "authorized_technical_operator"}
+      }
+    },
+    "correlation_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "idempotency_key": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "request_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "readback_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["health", "revision"],
+      "properties": {
+        "health": {"const": "healthy"},
+        "revision": {"const": "api-synthetic-1.2.3"}
+      }
+    },
+    "issued_at": {"type": "string", "format": "date-time"}
+  }
+}

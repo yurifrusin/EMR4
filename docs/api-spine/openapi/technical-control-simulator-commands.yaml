@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: EMR4 Bureau C4 Technical Control Simulator Commands (not_mounted)
+  version: 0.1.0
+  summary: Declarative documentation of a future single-purpose REST ownership.
+  description: >
+    This document is a declarative OpenAPI-shaped command contract ONLY. It is
+    explicitly `not_mounted`: it registers no FastAPI route, imports nothing
+    into `app.main`, claims no existing route, and exposes no runtime surface.
+    The Bureau C4 allowlisted-actuator simulator is a pure in-memory component
+    with no filesystem, process, shell, SQL, socket, network, database,
+    container, cloud, IAM, secret-store, product-route, provider or
+    external-event capability. A later real command route, database-backed
+    evidence store, external actuator or C5 target requires a new exact
+    descendant.
+x-emr4-current-backend-alignment:
+  status: not_mounted_documentation_only
+  mounted: false
+  imported_by_app_main: false
+  claims_no_existing_route: true
+  evidence_label: provider_free_authored_synthetic_allowlisted_actuator_simulation
+  source_plan: docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md
+  forward_runbook: restart-api-synthetic.v1
+  rollback_runbook: restore-api-synthetic-lkg.v1
+  target_environment: isolated_authored_synthetic
+  target_kind: service
+  target_id: synthetic:api-service
+servers: []
+tags:
+  - name: TechnicalControlSimulator
+    description: Future single-purpose simulator command ownership (documentation only, not mounted).
+paths: {}
+components:
+  schemas:
+    SimulatorCommandEnvelope:
+      description: Backend-owned closed command envelope (documentation only).
+      type: object
+      additionalProperties: false
+      properties:
+        schema_version:
+          const: emr4.simulator_command_envelope.v1
+        evidence_label:
+          const: provider_free_authored_synthetic_allowlisted_actuator_simulation
+        runbook_id:
+          const: restart-api-synthetic.v1
+        rollback_runbook_id:
+          const: restore-api-synthetic-lkg.v1
+        parameters:
+          type: object
+          maxProperties: 0
+          additionalProperties: false
+      required:
+        - schema_version
+        - evidence_label
+        - runbook_id
+        - rollback_runbook_id
+        - parameters
+    SimulatorExecutionReceipt:
+      description: Bounded terminal success receipt released only after a distinct fresh readback.
+      type: object
+      additionalProperties: false
+      properties:
+        result:
+          const: simulated_effect_verified
+        readback_fresh:
+          const: true
+        evidence_consumed:
+          const: true
+    SimulatorDenialReceipt:
+      description: Bounded terminal denial with one stable sanitized reason code.
+      type: object
+      additionalProperties: false
+      properties:
+        result:
+          const: denied
+        reason_code:
+          type: string
+security: []

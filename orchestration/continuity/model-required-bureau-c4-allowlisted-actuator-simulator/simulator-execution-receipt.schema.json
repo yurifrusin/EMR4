@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/simulator-execution-receipt.v1.json",
+  "title": "Bounded simulator execution receipt",
+  "description": "Closed terminal receipt released only after a distinct fresh readback proves the exact expected health/revision. Never carries raw evidence references, secrets, stack traces or attacker-controlled prose.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_label",
+    "result",
+    "simulated_effect",
+    "runbook_id",
+    "target",
+    "expected_revision",
+    "correlation_id",
+    "idempotency_key_sha256",
+    "before_health",
+    "after_health",
+    "readback_health",
+    "readback_revision",
+    "readback_fresh",
+    "evidence_consumed",
+    "attempt_evidence_sha256",
+    "effect_audit_sha256",
+    "rollback",
+    "operation_counters",
+    "issued_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.simulator_execution_receipt.v1"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_allowlisted_actuator_simulation"},
+    "result": {"enum": ["simulated_effect_verified"]},
+    "simulated_effect": {"const": "health_transition_degraded_to_healthy"},
+    "runbook_id": {"const": "restart-api-synthetic.v1"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id", "expected_revision"],
+      "properties": {
+        "environment": {"const": "isolated_authored_synthetic"},
+        "kind": {"const": "service"},
+        "target_id": {"const": "synthetic:api-service"},
+        "expected_revision": {"const": "api-synthetic-1.2.3"}
+      }
+    },
+    "expected_revision": {"const": "api-synthetic-1.2.3"},
+    "correlation_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "idempotency_key_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "before_health": {"const": "degraded"},
+    "after_health": {"const": "healthy"},
+    "readback_health": {"const": "healthy"},
+    "readback_revision": {"const": "api-synthetic-1.2.3"},
+    "readback_fresh": {"const": true},
+    "evidence_consumed": {"const": true},
+    "attempt_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "effect_audit_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invoked", "verified"],
+      "properties": {
+        "invoked": {"const": false},
+        "verified": {"type": "null"}
+      }
+    },
+    "operation_counters": {
+      "type": "object",
+      "minProperties": 18,
+      "maxProperties": 18,
+      "additionalProperties": {"const": 0}
+    },
+    "issued_at": {"type": "string", "format": "date-time"}
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "emr4.execution_evidence.v1",
+  "evidence_id": "72000000-0000-4000-8000-000000000001",
+  "reference_sha256": "b013a9504aadae72fbe526e5d037a05c608f24d22f92664e187cecbbc306ca66",
+  "state": "issued",
+  "plan_id": "70000000-0000-4000-8000-000000000001",
+  "plan_revision": 1,
+  "plan_sha256": "f09bf9cf0b9f2bf5a9382fc7722a0e46043d7a798c7e43b3307b68c7b250206a",
+  "decision_id": "71000000-0000-4000-8000-000000000001",
+  "decision_sha256": "9d2c40d853b9b18c5c51803f826a5d1c65ebe80a693e8feb5c55a848159045bb",
+  "policy_version": "emr4.recovery_risk_policy.v1",
+  "catalog_version": "emr4.synthetic_runbook_catalog.v1",
+  "catalog_digest": "e39b504e77f48483e82c495d23f57d47471183fe77ea1f733de5329114874b4c",
+  "runbook_id": "restart-api-synthetic.v1",
+  "rollback_runbook_id": "restore-api-synthetic-lkg.v1",
+  "target": {
+    "environment": "isolated_authored_synthetic",
+    "kind": "service",
+    "target_id": "synthetic:api-service",
+    "expected_revision": "api-synthetic-1.2.3"
+  },
+  "actor": {
+    "actor_id": "op-operator-1",
+    "role": "authorized_technical_operator"
+  },
+  "candidate_generator_id": "gen-synthetic-c4",
+  "reviewer_id": "rev-independent-1",
+  "observations": [
+    {
+      "observation_id": "api-health",
+      "expected_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "must_be_fresh": true,
+      "observed_at": "2026-08-04T08:00:00Z"
+    }
+  ],
+  "parameters_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "correlation_id": "73000000-0000-4000-8000-000000000001",
+  "nonce": "9c3d5f7e1a2b4c8d0e6f1a2b3c4d5e6f",
+  "issued_at": "2026-08-04T08:00:30Z",
+  "expires_at": "2026-08-04T08:01:00Z",
+  "supersession_key": "synthetic.api-service.recovery"
+}

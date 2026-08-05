@@ -1,0 +1,33 @@
+{
+  "schema_version": "emr4.simulator_denial_receipt.v1",
+  "evidence_label": "provider_free_authored_synthetic_allowlisted_actuator_simulation",
+  "result": "denied",
+  "reason_code": "EXECUTION_EVIDENCE_REPLAY",
+  "correlation_digest": "f333333333333333333333333333333333333333333333333333333333333333",
+  "simulated_effect": "none",
+  "rollback": {
+    "invoked": false,
+    "verified": null
+  },
+  "operation_counters": {
+    "filesystem_operations": 0,
+    "process_operations": 0,
+    "shell_operations": 0,
+    "sql_operations": 0,
+    "socket_operations": 0,
+    "network_operations": 0,
+    "database_operations": 0,
+    "container_operations": 0,
+    "cloud_operations": 0,
+    "iam_operations": 0,
+    "secret_store_operations": 0,
+    "product_route_operations": 0,
+    "provider_operations": 0,
+    "external_event_operations": 0,
+    "dynamic_import_operations": 0,
+    "eval_exec_operations": 0,
+    "reflection_operations": 0,
+    "template_url_path_operations": 0
+  },
+  "issued_at": "2026-08-04T08:00:30Z"
+}
