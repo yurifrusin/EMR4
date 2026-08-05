@@ -217,7 +217,8 @@ Required slices:
 - privacy impact and data-flow assessment covering patient context, provider
   regions, retention, training use, logs, and cross-border disclosure;
 - evidence-source registry with licence, jurisdiction, currency, citation,
-  caching, PHI, and provenance policy; and
+  caching, PHI, and provenance policy, recording Cochrane Library as the central
+  general pillar while keeping complementary source classes explicit; and
 - clinical evaluation protocol, adjudication method, protected test set,
   subgroup/accessibility review, and release criteria.
 
@@ -238,6 +239,15 @@ remain separately visible and clinician controlled. A backend-owned
 Diagnostic Thread must carry that reasoning and its unresolved obligations
 across encounters without becoming provider-model memory.
 
+Cochrane Library is the selected central general evidence-based pillar for this
+future contract, continuing the original EMR practice of giving every GP direct
+licensed access to it. The intended trial candidate is the licensed Wiley Agent
+Knowledge Base: Cochrane Library through AWS Marketplace. It remains one adapter
+behind the provider-neutral contract: Australian guidelines, regulatory and
+drug sources, diagnostic-test evidence, local pathways, specialty and rare-
+disease sources remain complementary, and lack of a Cochrane answer must be
+reported as an evidence gap rather than converted into reassurance.
+
 Candidate slices:
 
 - `consultant` charter and least-authority Access AI capability;
@@ -249,7 +259,13 @@ Candidate slices:
 - a longitudinal Diagnostic Thread and typed FollowUp Obligations that bridge
   to reminders and recalls while keeping delivery, attendance, evidence review
   and clinical completion distinct;
-- evidence retrieval contract and licensed-source adapters;
+- provider-neutral, source-type-aware evidence retrieval contract with a
+  licensed Cochrane adapter as the central general pillar and separately
+  governed complementary-source adapters;
+- an AWS/Wiley trial-readiness gate binding exact product identity, licence and
+  entitlement scope, excerpts/full-text/caching/embedding rights, cost, region,
+  PHI/query logging, retention/training terms, citations/versioning, rate limits,
+  failure semantics, privacy assessment and TGA/CDSS posture before any call;
 - advisory schema containing question understood, source citations and dates,
   evidence summary, uncertainty, contradictions, missing information, suggested
   questions, red flags for clinician attention, candidate discriminators,

@@ -927,6 +927,12 @@ past reasoning, present uncertainty and future results, referrals, reminders,
 recalls and safety-net obligations across encounters. It is not model memory
 and Consultant is not a top-one diagnosis engine.
 
+This direction continues Dr Michael Shera's original practice of ensuring that
+every GP at his medical centre could reach the licensed Cochrane Library from a
+button in the EMR toolbar. In Consultant, Cochrane becomes the central general
+evidence-based pillar through a licensed agentic adapter, while the GP remains
+the clinical authority and complementary evidence layers remain visible.
+
 | Item | Details |
 |:---|:---|
 | DDx tab | `[ DDx ]` tab in Patient Mode with separate Act now, Must not miss, Most likely, Discriminators, Outstanding evidence, and Safety net projections |
@@ -940,11 +946,12 @@ and Consultant is not a top-one diagnosis engine.
 - Build DDx/CDS as clinician-controlled evidence assistance, not replacement
   diagnosis. It should explain, cite, and prompt the doctor to consider gaps,
   red flags, and evidence, while preserving clinician judgment and accountability.
-- Use an evidence-provider abstraction with citation/audit support before
-  committing to any single corpus. The core clinical decision-support pipeline
-  should ask a provider-neutral service for evidence, not call Cochrane, Wiley,
-  RACGP, Therapeutic Guidelines, MBS/PBS, TGA, or any future corpus directly from
-  the UI or reasoning prompt.
+- Use an evidence-provider abstraction with citation/audit support. Cochrane
+  Library is the selected central general evidence-based pillar, but the core
+  clinical decision-support pipeline must still ask a provider-neutral,
+  source-type-aware service for evidence rather than calling Cochrane, Wiley,
+  RACGP, Therapeutic Guidelines, MBS/PBS, TGA, or any future corpus directly
+  from the UI or reasoning prompt.
 - Treat each provider as a plug-in behind a common contract:
   - input: clinician-controlled clinical question, optional de-identified PICO,
     specialty/context, patient safety flags, and source preference
@@ -961,8 +968,17 @@ and Consultant is not a top-one diagnosis engine.
 - Store an audit trail for clinical-safety review: clinician, patient/encounter,
   source ids, provider, prompt category, model/version, evidence versions, output
   shown, clinician edits/override, and final action.
-- Cochrane/Wiley is a high-value future spike, but licensing, Australian privacy,
-  data residency, and TGA/CDSS posture must be resolved before production use.
+- Trial the licensed **Wiley Agent Knowledge Base: Cochrane Library** available
+  through AWS Marketplace as Consultant's central general evidence adapter.
+  Exact private-offer/EULA acceptance, entitlement scope, cost, caching and
+  embedding rights, PHI/query handling, Australian privacy, data residency,
+  retention/training terms and TGA/CDSS posture must be resolved before any
+  call or production use. This is licensed API integration, not scraping.
+- Keep complementary evidence layers for questions Cochrane does not cover or
+  cannot answer currently: Australian guidelines and safety notices,
+  diagnostic-test evidence, medicines and interactions, local pathways,
+  specialty and rare-disease sources, and appropriately governed primary
+  literature. Absence of a Cochrane review is not evidence of absence.
 - See `orchestration/research/cochrane_cds_pipeline.md` for the initial research
   note on Wiley Agent Knowledge Base: Cochrane Library and broader Australian CDS
   pipeline considerations.

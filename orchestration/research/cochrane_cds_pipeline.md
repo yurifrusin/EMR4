@@ -1,12 +1,19 @@
 # Cochrane / Evidence CDS Pipeline Research Note
 
-Status: early research note, not an implementation commitment.
+Status: strategic evidence-source direction; no provider/runtime authority.
 
 2026-06-20 update: Yuri has signed up with AWS and requested a private offer
 for Wiley Agent Knowledge Base: Cochrane Library. Treat any vendor response as
 input to licensing, data-flow, and architecture design; do not implement against
 the product until use rights, privacy posture, data residency, and cost model are
 clear.
+
+2026-08-05 decision: Cochrane Library is the selected central general evidence-
+based pillar for future Consultant. Yuri plans to trial the licensed Wiley Agent
+Knowledge Base: Cochrane Library through AWS Marketplace. Other evidence layers
+remain complementary. This decision authorises durable architecture direction,
+not subscription/EULA acceptance, cost, API calls, patient or product data,
+runtime wiring, clinical use, deployment or production.
 
 ## Bottom Line
 
@@ -17,9 +24,20 @@ small-practice feature. Public pricing is private-offer/enterprise shaped, and
 privacy, data residency, clinical safety, and licensing questions would need
 formal answers before EMR4 sends any patient-context query to it.
 
-For EMR4, the right near-term architectural move is to design an
-evidence-provider abstraction with citation and audit support, not to bake Wiley
-or Cochrane assumptions into the core workflow.
+For EMR4, the architectural move is to design an evidence-provider abstraction
+with citation and audit support, implement Cochrane as the preferred central
+general adapter only after its exact gate passes, and avoid baking AWS/Wiley
+transport assumptions into the core clinical reasoning workflow.
+
+## Clinical Lineage And Current Decision
+
+Yuri recalls that Dr Michael Shera ensured every GP practising at his medical
+centre had licensed Cochrane Library access through a button in the original EMR
+toolbar. Consultant is intended as the natural evolution of that universal,
+clinician-initiated evidence access: licensed retrieval can pre-compose relevant
+evidence and citations, while the GP remains responsible for interpretation and
+care. This is user-supplied practice history and product direction, not an
+independently verified biographical claim.
 
 ## Evidence-Provider Abstraction Target
 
@@ -36,9 +54,10 @@ Each evidence provider should expose the same internal shape:
 - Policy metadata: PHI allowance, caching rights, snippet-storage rights, audit
   retention rights, region/data-residency status, rate limit, and licence scope.
 
-This lets EMR4 start with cheaper/public or already-licensed Australian sources,
-then add Cochrane/Wiley if the licence and cost model work, without rebuilding
-the clinical reasoning layer.
+This lets EMR4 place a licensed Cochrane/Wiley adapter at the centre when the
+licence and trial gate pass, add Australian and other complementary sources
+without rebuilding the reasoning layer, and fail transparently when a source
+does not cover the clinical question.
 
 ## What Wiley/Cochrane Appears To Offer
 
@@ -122,6 +141,8 @@ evidence-provider layer that can later include:
 
 - AWS Marketplace - Wiley Agent Knowledge Base: Cochrane Library:
   https://aws.amazon.com/marketplace/pp/prodview-rxkns32my7r7m
+- Wiley - Building better healthcare AI with Cochrane Library:
+  https://www.wiley.com/en-mx/insights/trending-stories/healthcare-ai-aws-cochrane/
 - Cochrane Library data reuse:
   https://www.cochranelibrary.com/data
 - OAIC Guide to health privacy:

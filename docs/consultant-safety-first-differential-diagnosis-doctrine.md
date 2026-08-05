@@ -41,6 +41,15 @@ remaining differential until the evidence supports a safe working conclusion.
 This is a user-supplied account of Dr Shera's clinical approach, not an
 independently verified biographical claim.
 
+Yuri also recalls that Dr Shera ensured every GP practising at his medical
+centre had licensed Cochrane Library access through a button in the original
+EMR toolbar. The architectural lineage for Consultant is therefore not merely
+"add retrieval": preserve universal clinician access to a trusted evidence
+standard and evolve the old human-initiated library link into licensed,
+source-grounded assistance inside the new EMR/Raisa workspace. This is likewise
+user-supplied practice history, not an independently verified biographical or
+commercial claim.
+
 That principle is consistent with two established diagnostic-safety ideas:
 
 - the Australian `restricted rule-out` approach considers both the common
@@ -54,6 +63,41 @@ false positives, incidental findings, overdiagnosis, anxiety and harmful
 investigation cascades. Consultant must support diagnostic stewardship: the
 right evidence or test for this patient at the right time, with its limitations
 and downstream obligations visible.
+
+## Evidence hierarchy and licensed Cochrane centrality
+
+The Cochrane Library is the selected **central general evidence-based pillar**
+for Consultant. The intended first integration candidate is the licensed
+**Wiley Agent Knowledge Base: Cochrane Library** offered through AWS
+Marketplace. It exposes structured Cochrane evidence through an API for AI and
+retrieval workflows, so it is a natural licensed successor to the original EMR
+toolbar access. Consultant must not scrape Cochrane Library pages or treat an
+ordinary human-reader subscription as permission for agentic use.
+
+Central does not mean exclusive or sufficient for every question. Cochrane's
+systematic reviews, protocols and clinical answers should anchor general
+evidence synthesis where they apply. Australian guidelines and regulatory
+sources, diagnostic-test evidence, drug and interaction references, local
+pathways, specialty guidance, rare-disease references, primary studies and
+current safety notices remain complementary layers. Absence of a relevant or
+current Cochrane review is an evidence gap, not evidence that a condition,
+association or intervention is absent.
+
+The backend must preserve a provider-neutral, source-type-aware evidence
+contract even though Cochrane is the preferred central corpus. Every retrieved
+item needs source identity, title, version/date, evidence type, citation or DOI,
+permitted excerpt, retrieval time, currency, licence and provenance metadata,
+and any source-supplied certainty or risk-of-bias information. Consultant's
+reasoning layer receives bounded evidence packets and cites them; the UI and
+model prompt never call a corpus directly, and provider/model memory never
+becomes the evidence store.
+
+This direction authorises architecture and contract planning only. Subscribing
+to a private offer or EULA, accepting cost, calling the AWS/Wiley API, sending
+patient or product-derived context, caching or embedding licensed content,
+choosing a region or retention policy, or making a regulatory or production
+claim each remains subject to its exact licence, privacy, security, clinical-
+safety and human-authority gate.
 
 ## Safety-weighted differential, not one ranking score
 
@@ -405,20 +449,36 @@ This note does not decide or authorise:
 - exact plausibility, escalation, exclusion or testing thresholds;
 - a provider, model, region, identity, patient-data class, retention policy or
   cost;
-- any licensed evidence source, retrieval runtime, memory, RAG or GraphRAG;
+- exact AWS/Wiley offer acceptance, licence rights, cost, API runtime, region,
+  PHI/data handling, caching, embedding, retention, RAG or GraphRAG design;
 - real patient/context access, a clinician study or a patient-facing surface;
 - test, referral, prescribing, record-write or autonomous action authority;
 - a runtime isolation profile beyond the accepted Gate -1 requirements; or
 - deployment, production, release, protected integration or Pages.
 
-Those decisions require their own evidence and authority gates. The immediate
-programme remains paused before Gate zero.
+Those decisions require their own evidence and authority gates. Selecting
+Cochrane as Consultant's central general evidence pillar grants no provider,
+licence, patient-data, clinical, implementation, deployment or production
+authority; current Bureau development remains governed by its separate baton.
 
 ## References
 
 - Yuri's account of Dr Michael Shera's differential-diagnosis practice
   principle, EMR4 architecture discussion, 2026-08-04. User-supplied oral
   history; no external biographical claim is made.
+- Yuri's account of Dr Michael Shera providing every GP at his medical centre
+  with licensed Cochrane Library access through the original EMR toolbar, and
+  Yuri's selection of Cochrane as Consultant's central general evidence pillar,
+  EMR4 architecture discussion, 2026-08-05. User-supplied oral history and
+  product direction; no external biographical claim is made.
+- AWS Marketplace. [Wiley Agent Knowledge Base: Cochrane
+  Library](https://aws.amazon.com/marketplace/pp/prodview-rxkns32my7r7m),
+  including the API-based delivery, private-offer licensing and entitlement-
+  dependent full-text access described by the vendor listing.
+- Wiley. [Building better healthcare AI with Cochrane
+  Library](https://www.wiley.com/en-mx/insights/trending-stories/healthcare-ai-aws-cochrane/),
+  2026, describing the licensed machine-readable evidence feed for AI
+  workflows.
 - Bayeshi M, Kocaman V, Naqvi MA, Gul Y, Talby D. [DeepLens Diagnosis Agent:
   Agentic Workflow Design Lets a Small Reasoning Model Compete with Frontier
   LLMs](https://arxiv.org/abs/2607.22555), arXiv:2607.22555v1, 2026.
