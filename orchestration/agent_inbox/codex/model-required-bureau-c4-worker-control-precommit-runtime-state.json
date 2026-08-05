@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c4_worker_dispatch_control_and_aer_0024",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 is the exact active descendant. Its plan passed the fresh architecture/security veto and the bounded implementation worker is now active only after a corrected exact-settings-derived pre-worker-dispatch receipt passed.",
+    "current_authority_allocation": "Sol owns acceptance, integration and recovery. DeepSeek V4 Flash/high has only the committed worker packet and isolated non-protected worktree; it cannot modify this primary task branch. Gemini final code veto remains later. No worker has protected-ref, product-runtime, deployment or release authority.",
+    "active_plan_and_acceptance": "The first C4 dispatch receipt failed closed with invalid adapter method and missing workspace receipt before provider contact. AER-0024 preserves that envelope. The distinct corrected receipt used allowed synthetic_fixture observation and a complete assigned-worker workspace receipt and passed before launch. Revision 18 has 24 bounded incidents, no incident open, and its focused 31-test register suite plus git diff --check pass. The worker packet remains bound to exact source b66b37a81120b1abd655ce65c42daf7518b8f7d5.",
+    "protected_evidence_boundaries": "Only AER revision 18, exact failed/corrected worker-dispatch states and receipts, the bounded worker packet, tests and this precommit pair are eligible for explicit staging. Docs/branding and every unrelated untracked receipt/state file remain preserved and excluded. Patient/clinical/product-derived/protected/production data, real targets, provider product-runtime, C5, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Primary task HEAD is exact b66b37a81120b1abd655ce65c42daf7518b8f7d5 before explicit staging. Worker worktree remains isolated on codex/worker-model-required-bureau-c4-simulator from that exact source. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary index is clean and only bounded tracked/untracked C4 control artifacts are intended for this commit."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c4_worker_control_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved, classified and mechanically tested the dispatch control correction."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned C4 authority."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The fresh Gemini plan veto passed and is closed; final code veto remains later."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The bounded exact-model worker transport started only after the corrected dispatch receipt passed."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is transport only; no Claude model lane is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": ["model-required-bureau-c4-simulator-002"],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "model-required-bureau-c4-simulator-002",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-c4-simulator",
+      "branch": "codex/worker-model-required-bureau-c4-simulator",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-05T16:30:00+10:00",
+      "source_head": "b66b37a81120b1abd655ce65c42daf7518b8f7d5",
+      "candidate_head": "b66b37a81120b1abd655ce65c42daf7518b8f7d5"
+    }
+  ],
+  "assigned_agent_ids": ["model-required-bureau-c4-simulator-002"]
+}

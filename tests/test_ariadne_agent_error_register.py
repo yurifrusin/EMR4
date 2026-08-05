@@ -38,10 +38,10 @@ def test_committed_register_is_semantically_valid_after_a5_b4_code_veto() -> Non
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 17
+    assert register["register_revision"] == 18
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 24)
+        f"AER-{index:04d}" for index in range(1, 25)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 17
+    assert len(agent_incidents) == 18
     assert len(transport_incidents) == 2
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -154,6 +154,41 @@ def test_c4_preplan_event_failure_is_preserved_before_corrected_receipt() -> Non
     ]
 
 
+def test_c4_worker_dispatch_contract_fails_closed_before_corrected_receipt() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0024"
+    )
+    failed = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c4-worker-predispatch-receipt.json"
+    )
+    corrected = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-c4-worker-predispatch-2-receipt.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["status"] == "corrected"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.worker_dispatch_runtime_contract"
+    )
+    assert failed["status"] == "revision_required"
+    assert failed["worker_dispatch_permitted"] is False
+    assert set(failed["reasons"]) == {
+        "adapter_probe_method_invalid:deepseek_via_claude_code_bare",
+        "workspace_receipt_missing:model-required-bureau-c4-simulator-001",
+    }
+    assert corrected["status"] == "passed"
+    assert corrected["worker_dispatch_permitted"] is True
+    assert corrected["reasons"] == []
+
+
 def test_davida_review_errors_match_preserved_evidence() -> None:
     register = _register()
     rows = {row["incident_id"]: row for row in register["incidents"]}
@@ -193,10 +228,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 23
+    assert report["incident_count"] == 24
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 17,
+        "agent_behavior": 18,
         "harness": 3,
         "repository": 1,
         "transport": 2,
@@ -205,7 +240,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         "command_scope_violation": 3,
         "evidence_misreport": 2,
         "harness_failure": 3,
-        "output_contract_violation": 10,
+        "output_contract_violation": 11,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "repository_defect": 1,
@@ -213,7 +248,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 1,
-        "canonical_unchanged": 19,
+        "canonical_unchanged": 20,
         "untrusted_partial_worktree": 3,
     }
     assert report["recurring_patterns"] == [

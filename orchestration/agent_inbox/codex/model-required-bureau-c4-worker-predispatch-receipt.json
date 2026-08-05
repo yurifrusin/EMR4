@@ -1,0 +1,28 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_v4_flash_high_c4_simulator_worker",
+  "reasons": [
+    "adapter_probe_method_invalid:deepseek_via_claude_code_bare",
+    "workspace_receipt_missing:model-required-bureau-c4-simulator-001"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling plan is docs/emr4-model-required-bureau-c4-allowlisted-actuator-simulator-plan.md at reviewed candidate febe4c47094e626ae58f1a84514fc86a43fa9b26. Fresh Gemini receipt model-required-bureau-c4-plan-review-receipt.json returned one pass after 193 tests with exact clean unchanged head and no material finding. Source b66b37a81120b1abd655ce65c42daf7518b8f7d5 adds only that accepted review lineage. Worker packet SHA-256 is 0d86119300aacf08695f9085356e66ef7c47bd858796b063d98237bdcb4440dd.",
+    "current_authority_allocation": "Sol owns architecture, recovery, integration, deterministic verification and final acceptance. One DeepSeek V4 Flash/high worker through Claude Code bare may implement only the frozen owned-path C4 packet. Gemini has completed plan-veto authority and will later receive a separate fresh exact-head implementation veto. The worker may commit only its non-protected branch and may not push, deploy or move refs.",
+    "git_refs_and_worktree": "Primary task HEAD is exact b66b37a81120b1abd655ce65c42daf7518b8f7d5. Fresh clean worker worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-c4-simulator is on non-protected branch codex/worker-model-required-bureau-c4-simulator at the same exact source. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary preserved untracked files remain outside the worker worktree and candidate index.",
+    "live_handover_current_baton": "C4 is the exact next descendant after accepted A5.1/B4.1. Its provider-free authored-synthetic allowlisted-actuator simulator plan is frozen and the independent architecture/security veto passed.",
+    "protected_evidence_boundaries": "The worker may create only the named simulator/acceptance/test files, the new C4 continuity directory and an optional explicitly not_mounted OpenAPI-shaped document. It receives no authority over AGENTS, plan/threat/review artifacts, app code, migrations, existing tests, global Continuity/Compass, docs/branding, protected evidence, patient/clinical/product-derived/participant/production data, real targets/credentials, provider product runtime, C5, deployment, release, Pages or protected refs."
+  },
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}
