@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen C4 plan and threat delta remain unchanged. The recovered candidate now uses one shared evidence execution transaction for cross-runtime evidence consumption, idempotency, supersession and attempt sequencing; holds current authority stable across the complete execution decision and simulated effect; requires the exact reviewer role; and includes direct adversarial regressions plus regenerated deterministic acceptance evidence. The focused and inherited provider-free suites, Ruff, py_compile, Bandit, JSON validation, acceptance --check and diff checks pass.",
+    "current_authority_allocation": "Sol alone owns the recovery amendment, deterministic precommit decision and task-branch commit. DeepSeek's correction lane is closed. Gemini 3.6 Flash/high remains the independent veto for a later fresh exact committed candidate and has no write or integration authority.",
+    "git_refs_and_worktree": "The task branch has adopted worker source commits as 00227b90 and 79bce7ee and carries exactly four tracked Sol recovery amendments awaiting explicit-path staging. The C4 preintegration state and receipt are also intended C4 recovery artifacts awaiting explicit-path staging. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref has moved.",
+    "live_handover_current_baton": "C4 remains the active provider-free authored-synthetic allowlisted-actuator simulator descendant. The two rejected worker attempts remain preserved as AER-0025 and AER-0026; their source has been adopted on the task branch only, and Sol has completed the bounded recovery without claiming final acceptance.",
+    "protected_evidence_boundaries": "The candidate remains local, in-memory, provider-free and authored-synthetic with exactly one fixed forward simulator transition and one fixed rollback. It has no patient, product or protected data; real target; filesystem, process, shell, network, database, container, cloud, IAM, provider or external-event capability; mounted runtime route; deployment, production, release, Pages or protected-ref authority. docs/branding and all unrelated untracked receipt/state files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

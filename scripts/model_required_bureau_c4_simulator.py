@@ -22,10 +22,11 @@ import json
 import re
 import secrets
 import threading
+from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from enum import Enum
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Iterator, Optional
 
 EVIDENCE_LABEL = "provider_free_authored_synthetic_allowlisted_actuator_simulation"
 
@@ -40,6 +41,7 @@ OPERATION_CLASS = "scoped_service_recovery"
 RISK_TIER = "reversible_scoped_service_recovery"
 REQUIRED_AUTHORITY = "ordinary_confirmation"
 REQUIRED_ROLE = "authorized_technical_operator"
+REVIEWER_ROLE = "reviewer"
 POLICY_VERSION = "emr4.recovery_risk_policy.v1"
 CATALOG_VERSION = "emr4.synthetic_runbook_catalog.v1"
 SUPERSESSION_KEY = "synthetic.api-service.recovery"
@@ -695,6 +697,29 @@ class IdempotencyRecord:
     terminal_receipt: Optional[SimulatorResult] = None
 
 
+class InMemoryExecutionStore(dict[str, ExecutionEvidenceRecord]):
+    """Shared transaction boundary for every runtime resolving this evidence.
+
+    The evidence state, idempotency decisions, supersession state and monotone
+    attempt sequence must not be runtime-instance local.  Keeping them behind
+    one shared re-entrant lock makes evidence consumption linearizable even
+    when more than one simulator runtime is constructed over the same store.
+    """
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.transaction_lock = threading.RLock()
+        self.idempotency_records: dict[str, IdempotencyRecord] = {}
+        self.superseded_keys: set[str] = set()
+        self._attempt_sequence = 0
+
+    def next_attempt_id(self) -> str:
+        """Return the next store-wide attempt identifier."""
+        with self.transaction_lock:
+            self._attempt_sequence += 1
+            return "c4-attempt-%012d" % self._attempt_sequence
+
+
 @dataclass(frozen=True)
 class IssuedEvidence:
     reference: str
@@ -803,12 +828,23 @@ class CurrentAuthorityStore:
     """
 
     _snapshot: Optional[CurrentAuthoritySnapshot] = None
+    _lock: threading.RLock = field(
+        default_factory=threading.RLock, init=False, repr=False
+    )
 
-    def set_snapshot(self, snapshot: CurrentAuthoritySnapshot) -> None:
-        self._snapshot = snapshot
+    def set_snapshot(self, snapshot: Optional[CurrentAuthoritySnapshot]) -> None:
+        with self._lock:
+            self._snapshot = snapshot
 
     def snapshot(self) -> Optional[CurrentAuthoritySnapshot]:
-        return self._snapshot
+        with self._lock:
+            return self._snapshot
+
+    @contextmanager
+    def locked_snapshot(self) -> Iterator[Optional[CurrentAuthoritySnapshot]]:
+        """Hold current authority stable for one complete execution decision."""
+        with self._lock:
+            yield self._snapshot
 
     @classmethod
     def from_fixtures(
@@ -1259,13 +1295,13 @@ class EvidenceIssuer:
     ) -> None:
         self._catalog = catalog
         self._now = now
-        self._records: dict[str, ExecutionEvidenceRecord] = {}
+        self._records = InMemoryExecutionStore()
         self._issued_keys: set[tuple[int, str]] = set()
         self._sequence = 0
-        self._lock = threading.Lock()
+        self._lock = self._records.transaction_lock
 
     @property
-    def records(self) -> dict[str, ExecutionEvidenceRecord]:
+    def records(self) -> InMemoryExecutionStore:
         # The live store is shared with the runtime so evidence consumption is
         # observed by the issuer (one-use monotone semantics).
         return self._records
@@ -1453,11 +1489,11 @@ class SimulatorRuntime:
         state_store: InMemoryStateStore,
         attempt_audit: InMemoryAuditLog,
         effect_audit: InMemoryAuditLog,
-        evidence_records: dict[str, ExecutionEvidenceRecord],
+        evidence_records: InMemoryExecutionStore,
         authority_store: CurrentAuthorityStore,
         now: Callable[[], datetime],
     ) -> None:
-        self._lock = threading.RLock()
+        self._lock = evidence_records.transaction_lock
         self._catalog = catalog
         self._state_store = state_store
         self._attempt_audit = attempt_audit
@@ -1465,10 +1501,9 @@ class SimulatorRuntime:
         self._evidence_records = evidence_records
         self._authority_store = authority_store
         self._now = now
-        self._idempotency: dict[str, IdempotencyRecord] = {}
-        self._superseded_keys: set[str] = set()
+        self._idempotency = evidence_records.idempotency_records
+        self._superseded_keys = evidence_records.superseded_keys
         self._counters = ForbiddenOperationCounters()
-        self._attempt_counter = 0
         self._last_envelope: Optional[CommandEnvelope] = None
 
     @property
@@ -1477,7 +1512,8 @@ class SimulatorRuntime:
 
     @property
     def idempotency_records(self) -> dict[str, IdempotencyRecord]:
-        return dict(self._idempotency)
+        with self._lock:
+            return dict(self._idempotency)
 
     @property
     def last_envelope(self) -> Optional[CommandEnvelope]:
@@ -1493,11 +1529,13 @@ class SimulatorRuntime:
 
     def mark_superseded(self, supersession_key: str) -> None:
         """Test-only explicit state: record that a key is superseded."""
-        self._superseded_keys.add(supersession_key)
+        with self._lock:
+            self._superseded_keys.add(supersession_key)
 
     def seed_in_progress_idempotency(self, key: str, fingerprint: str) -> None:
         """Test-only explicit state: simulate a crashed in-progress attempt."""
-        self._idempotency[key] = IdempotencyRecord(key=key, fingerprint=fingerprint)
+        with self._lock:
+            self._idempotency[key] = IdempotencyRecord(key=key, fingerprint=fingerprint)
 
     def handle(
         self,
@@ -1505,7 +1543,8 @@ class SimulatorRuntime:
         fault: FaultInjection = FaultInjection.NONE,
     ) -> SimulatorResult:
         with self._lock:
-            return self._handle_locked(request, fault)
+            with self._authority_store.locked_snapshot() as current:
+                return self._handle_locked(request, fault, current)
 
     # -- helpers ------------------------------------------------------------ #
 
@@ -1641,7 +1680,7 @@ class SimulatorRuntime:
         # Current reviewer (separation from generator/actor, expiry).
         if current.reviewer_id != record.reviewer_id:
             return self._denial(DenialReason.REVIEWER_INVALID, request, now_iso, counters)
-        if not _is_bounded_str(current.reviewer_role) or not current.reviewer_role:
+        if current.reviewer_role != REVIEWER_ROLE:
             return self._denial(DenialReason.REVIEWER_INVALID, request, now_iso, counters)
         if current.reviewer_id == current.generator_id:
             return self._denial(DenialReason.REVIEWER_INVALID, request, now_iso, counters)
@@ -1778,6 +1817,7 @@ class SimulatorRuntime:
         self,
         request: SimulatorRequest,
         fault: FaultInjection,
+        current: Optional[CurrentAuthoritySnapshot],
     ) -> SimulatorResult:
         counters = self._counters.to_dict()
         now_iso = _format_time(self._now())
@@ -1808,7 +1848,6 @@ class SimulatorRuntime:
         # Step 4a: revalidate against the live current-authority store read
         # fresh inside the critical section (the evidence record is only a
         # snapshot/binding).
-        current = self._authority_store.snapshot()
         current_revalidation = self._revalidate_current_authority(
             request, record, current, now_iso
         )
@@ -1838,8 +1877,7 @@ class SimulatorRuntime:
         self._evidence_records[reference_sha256] = replace(
             record, state=EvidenceState.CONSUMED
         )
-        self._attempt_counter += 1
-        attempt_id = "c4-attempt-%012d" % self._attempt_counter
+        attempt_id = self._evidence_records.next_attempt_id()
         attempt_record = {
             "kind": "attempt",
             "attempt_id": attempt_id,

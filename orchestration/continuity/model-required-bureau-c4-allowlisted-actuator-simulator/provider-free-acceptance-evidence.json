@@ -12,8 +12,8 @@
     "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-denial-receipt.schema.json": "d067bf526337518671b1b2fc7915b609d565ee4d7e8cd71f294ab688421e751e",
     "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-execution-receipt.example.json": "4d8e3fc7ff8ed59a8708e2dc1d11a106df9432813329b23c0acc1a600d14c2f7",
     "orchestration/continuity/model-required-bureau-c4-allowlisted-actuator-simulator/simulator-execution-receipt.schema.json": "4250a9aec3e79fdd25c97155c61b06ec4313b2618ee94b2f19dc67e0120d2940",
-    "scripts/model_required_bureau_c4_acceptance.py": "adfb648ff5de7fe483c27d47c23fe2e4935c1e81480cf8e236c29c54e3ebc312",
-    "scripts/model_required_bureau_c4_simulator.py": "c6bfde3d5027e829c75ab31286659994b159e59151cadc8d895810e21defde93"
+    "scripts/model_required_bureau_c4_acceptance.py": "54d18748208564e748f229d2ae52db1fb3d5d5131b8d311be0469a8f030f802f",
+    "scripts/model_required_bureau_c4_simulator.py": "8b57729c571fe4ea0fe922b73c61d6b93a8386f0c6b530bd17f43a94fb1b497a"
   },
   "counter_schemas": {
     "denial_each_omitted": "REJECTED",
@@ -69,6 +69,10 @@
     "reviewer_expiry": {
       "effect_record_count": 0,
       "reason_code": "STALE_OR_SUPERSEDED"
+    },
+    "reviewer_role_loss": {
+      "effect_record_count": 0,
+      "reason_code": "REVIEWER_INVALID"
     },
     "reviewer_separation_loss": {
       "effect_record_count": 0,
@@ -346,11 +350,40 @@
     "canonical_example_count": 5,
     "closed_schema_count": 5
   },
+  "sol_recovery_guards": {
+    "authority_snapshot_execution_lock": {
+      "mutation_blocked_during_execution": true,
+      "post_revocation_effect_record_count": 0,
+      "post_revocation_reason_code": "AUTHORITY_MISMATCH",
+      "pre_revocation_result": "SUCCESS"
+    },
+    "exact_reviewer_role": {
+      "effect_record_count": 0,
+      "mutated_role": "revoked_but_nonempty",
+      "reason_code": "REVIEWER_INVALID",
+      "required_role": "reviewer"
+    },
+    "shared_cross_runtime_idempotency": {
+      "attempt_record_count": 1,
+      "effect_record_count": 1,
+      "same_receipt": true
+    },
+    "shared_cross_runtime_transaction": {
+      "attempt_record_count": 1,
+      "effect_record_count": 1,
+      "evidence_state": "consumed",
+      "result_codes": [
+        "EXECUTION_EVIDENCE_REPLAY",
+        "SUCCESS"
+      ]
+    }
+  },
   "source_checks": {
     "forbidden_call_hits": [],
     "forbidden_imports": [],
     "imported_modules": [
       "__future__",
+      "contextlib",
       "dataclasses",
       "datetime",
       "enum",

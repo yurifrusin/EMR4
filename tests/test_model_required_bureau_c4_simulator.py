@@ -17,6 +17,8 @@ from pathlib import Path
 import pytest
 from jsonschema import Draft202012Validator, FormatChecker
 
+import scripts.model_required_bureau_c4_simulator as c4
+
 from scripts.model_required_bureau_c4_acceptance import (
     ACTOR_ID,
     CORRELATION_ID,
@@ -48,8 +50,11 @@ from scripts.model_required_bureau_c4_simulator import (
     FaultInjection,
     HEALTH_DEGRADED,
     HEALTH_HEALTHY,
+    InMemoryAuditLog,
+    InMemoryStateStore,
     IssuanceDenied,
     PLAN_ENVIRONMENT,
+    RunbookId,
     SyntheticServiceState,
     TARGET_ID,
     TARGET_KIND,
@@ -255,6 +260,83 @@ def test_concurrent_single_winner():
     assert len(consumed) == 1
 
 
+def test_two_runtime_instances_share_one_evidence_transaction_and_attempt_sequence():
+    catalog, plan, decision, observations = _fixtures()
+    entry = catalog["restart-api-synthetic.v1"]
+    issuer, issued = _mint(catalog, plan, decision, observations)
+    authority = _authority_store(entry, plan, decision, observations)
+    state_store = InMemoryStateStore()
+    attempt_audit = InMemoryAuditLog()
+    effect_audit = InMemoryAuditLog()
+    runtimes = [
+        new_runtime(
+            catalog,
+            issuer,
+            authority_store=authority,
+            state_store=state_store,
+            attempt_audit=attempt_audit,
+            effect_audit=effect_audit,
+        )
+        for _ in range(2)
+    ]
+    requests = [
+        build_request(issued, entry, plan, decision),
+        build_request(
+            issued,
+            entry,
+            plan,
+            decision,
+            idempotency_key="74000000-0000-4000-8000-000000000002",
+        ),
+    ]
+    barrier = threading.Barrier(2)
+    results = []
+
+    def worker(index):
+        barrier.wait()
+        results.append(runtimes[index].handle(requests[index]))
+
+    threads = [threading.Thread(target=worker, args=(i,)) for i in range(2)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+
+    codes = sorted(result.to_dict().get("reason_code", "SUCCESS") for result in results)
+    assert codes == [DenialReason.EXECUTION_EVIDENCE_REPLAY.value, "SUCCESS"]
+    assert len(attempt_audit.read()) == 1
+    assert len(effect_audit.read()) == 1
+    assert attempt_audit.read()[0]["attempt_id"] == "c4-attempt-000000000001"
+    assert issuer.records[issued.record.reference_sha256].state == EvidenceState.CONSUMED
+
+
+def test_two_runtime_instances_share_same_key_terminal_replay():
+    catalog, plan, decision, observations = _fixtures()
+    entry = catalog["restart-api-synthetic.v1"]
+    issuer, issued = _mint(catalog, plan, decision, observations)
+    authority = _authority_store(entry, plan, decision, observations)
+    state_store = InMemoryStateStore()
+    attempt_audit = InMemoryAuditLog()
+    effect_audit = InMemoryAuditLog()
+    runtimes = [
+        new_runtime(
+            catalog,
+            issuer,
+            authority_store=authority,
+            state_store=state_store,
+            attempt_audit=attempt_audit,
+            effect_audit=effect_audit,
+        )
+        for _ in range(2)
+    ]
+    request = build_request(issued, entry, plan, decision)
+    first = runtimes[0].handle(request)
+    replay = runtimes[1].handle(request)
+    assert first.to_dict() == replay.to_dict()
+    assert len(attempt_audit.read()) == 1
+    assert len(effect_audit.read()) == 1
+
+
 @pytest.mark.parametrize(
     ("fault", "expected_code"),
     [
@@ -342,6 +424,7 @@ def test_simulator_module_has_no_forbidden_capability():
         "re",
         "secrets",
         "threading",
+        "contextlib",
         "dataclasses",
         "datetime",
         "enum",
@@ -513,6 +596,12 @@ def test_current_authority_denials_fail_closed():
             lambda s: s.set_snapshot(replace(s.snapshot(), reviewer_expires_at="2026-08-04T08:00:00Z")),
             DenialReason.STALE_OR_SUPERSEDED,
         ),
+        "reviewer_role_loss": (
+            lambda s: s.set_snapshot(
+                replace(s.snapshot(), reviewer_role="revoked_but_nonempty")
+            ),
+            DenialReason.REVIEWER_INVALID,
+        ),
         "reviewer_separation_loss": (
             lambda s: s.set_snapshot(replace(s.snapshot(), reviewer_id=s.snapshot().generator_id)),
             DenialReason.REVIEWER_INVALID,
@@ -541,6 +630,67 @@ def test_current_authority_denials_fail_closed():
         assert result.is_denial, f"{name}: false success"
         assert result.to_dict()["reason_code"] == expected.value, name
         assert len(runtime.effect_audit_records) == 0, name
+
+
+def test_current_authority_mutation_cannot_interleave_between_validation_and_effect():
+    catalog, plan, decision, observations = _fixtures()
+    entry = catalog["restart-api-synthetic.v1"]
+    issuer, issued = _mint(catalog, plan, decision, observations)
+    authority = _authority_store(entry, plan, decision, observations)
+    runtime = new_runtime(catalog, issuer, authority_store=authority)
+    request = build_request(issued, entry, plan, decision)
+    revoked = replace(authority.snapshot(), actor_role="revoked_but_nonempty")
+    entered_transition = threading.Event()
+    release_transition = threading.Event()
+    mutation_started = threading.Event()
+    mutation_finished = threading.Event()
+    results = []
+    runbook = RunbookId.RESTART_API_SYNTHETIC_V1
+    original_transition = c4._RUNBOOK_CALLABLES[runbook]
+
+    def blocking_transition(state):
+        entered_transition.set()
+        assert release_transition.wait(timeout=2)
+        return original_transition(state)
+
+    def revoke_authority():
+        mutation_started.set()
+        authority.set_snapshot(revoked)
+        mutation_finished.set()
+
+    handler_thread = threading.Thread(target=lambda: results.append(runtime.handle(request)))
+    mutation_thread = threading.Thread(target=revoke_authority)
+    c4._RUNBOOK_CALLABLES[runbook] = blocking_transition
+    try:
+        handler_thread.start()
+        assert entered_transition.wait(timeout=2)
+        mutation_thread.start()
+        assert mutation_started.wait(timeout=2)
+        assert not mutation_finished.wait(timeout=0.05)
+        release_transition.set()
+        handler_thread.join(timeout=2)
+        mutation_thread.join(timeout=2)
+    finally:
+        release_transition.set()
+        c4._RUNBOOK_CALLABLES[runbook] = original_transition
+        handler_thread.join(timeout=2)
+        if mutation_thread.ident is not None:
+            mutation_thread.join(timeout=2)
+
+    assert not handler_thread.is_alive()
+    assert not mutation_thread.is_alive()
+    assert mutation_finished.is_set()
+    assert len(results) == 1 and results[0].is_success
+
+    followup_issuer, followup_issued = _mint(catalog, plan, decision, observations)
+    followup_runtime = new_runtime(
+        catalog, followup_issuer, authority_store=authority
+    )
+    followup = followup_runtime.handle(
+        build_request(followup_issued, entry, plan, decision)
+    )
+    assert followup.to_dict()["reason_code"] == DenialReason.AUTHORITY_MISMATCH.value
+    assert len(followup_runtime.effect_audit_records) == 0
 
 
 def test_effect_audit_retained_only_for_verified_success():
@@ -682,5 +832,6 @@ def test_evidence_includes_new_repair_sections():
         "counter_schemas",
         "production_entropy",
         "issuance_concurrency",
+        "sol_recovery_guards",
     ):
         assert section in evidence, f"evidence missing section {section}"

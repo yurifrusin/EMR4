@@ -49,6 +49,7 @@ from scripts.model_required_bureau_c4_simulator import (
     PlanBinding,
     ReadbackContract,
     REQUIRED_ROLE,
+    REVIEWER_ROLE,
     RunbookCatalogEntry,
     RunbookId,
     SimulatorRequest,
@@ -307,6 +308,9 @@ def new_runtime(
     decision: dict[str, Any] | None = None,
     observations: list[dict[str, Any]] | None = None,
     authority_store: CurrentAuthorityStore | None = None,
+    state_store: InMemoryStateStore | None = None,
+    attempt_audit: InMemoryAuditLog | None = None,
+    effect_audit: InMemoryAuditLog | None = None,
     now=NOW,
 ) -> SimulatorRuntime:
     if plan is None or decision is None or observations is None:
@@ -319,9 +323,11 @@ def new_runtime(
         authority_store = _authority_store(entry, plan, decision, observations)
     runtime = SimulatorRuntime(
         catalog=catalog,
-        state_store=InMemoryStateStore(),
-        attempt_audit=InMemoryAuditLog(),
-        effect_audit=InMemoryAuditLog(),
+        state_store=state_store if state_store is not None else InMemoryStateStore(),
+        attempt_audit=(
+            attempt_audit if attempt_audit is not None else InMemoryAuditLog()
+        ),
+        effect_audit=effect_audit if effect_audit is not None else InMemoryAuditLog(),
         evidence_records=issuer.records,
         authority_store=authority_store,
         now=lambda: now,
@@ -1398,6 +1404,13 @@ def _validate_current_authority_denials(
         "STALE_OR_SUPERSEDED",
     )
     run_with_authority(
+        "reviewer_role_loss",
+        lambda s: set_snapshot(
+            s, replace(snapshot_of(s), reviewer_role="revoked_but_nonempty")
+        ),
+        "REVIEWER_INVALID",
+    )
+    run_with_authority(
         "reviewer_separation_loss",
         lambda s: set_snapshot(s, replace(snapshot_of(s), reviewer_id=snapshot_of(s).generator_id)),
         "REVIEWER_INVALID",
@@ -1452,6 +1465,204 @@ def _validate_current_authority_denials(
         "STALE_OR_SUPERSEDED",
     )
 
+    return outcomes
+
+
+def _validate_sol_recovery_guards(
+    catalog, plan, decision, observations
+) -> dict[str, Any]:
+    """Prove the three residual review findings are closed, not merely described."""
+    entry = catalog[FORWARD_RUNBOOK]
+    outcomes: dict[str, Any] = {}
+
+    # A non-empty but non-exact reviewer role is revoked authority.
+    issuer = EvidenceIssuer(catalog, now_callable)
+    issued = mint_evidence(issuer, plan, decision, observations)
+    authority = _authority_store(
+        entry,
+        plan,
+        decision,
+        observations,
+        reviewer_role="revoked_but_nonempty",
+    )
+    runtime = new_runtime(catalog, issuer, authority_store=authority)
+    role_result = runtime.handle(build_request(issued, entry, plan, decision))
+    if role_result.to_dict().get("reason_code") != "REVIEWER_INVALID":
+        raise ValueError("non-exact reviewer role did not fail closed")
+    if runtime.effect_audit_records:
+        raise ValueError("non-exact reviewer role produced an effect")
+    outcomes["exact_reviewer_role"] = {
+        "required_role": REVIEWER_ROLE,
+        "mutated_role": "revoked_but_nonempty",
+        "reason_code": role_result.to_dict()["reason_code"],
+        "effect_record_count": 0,
+    }
+
+    # Two independently constructed runtimes share one evidence transaction.
+    issuer = EvidenceIssuer(catalog, now_callable)
+    issued = mint_evidence(issuer, plan, decision, observations)
+    authority = _authority_store(entry, plan, decision, observations)
+    state_store = InMemoryStateStore()
+    attempt_audit = InMemoryAuditLog()
+    effect_audit = InMemoryAuditLog()
+    runtimes = [
+        new_runtime(
+            catalog,
+            issuer,
+            authority_store=authority,
+            state_store=state_store,
+            attempt_audit=attempt_audit,
+            effect_audit=effect_audit,
+        )
+        for _ in range(2)
+    ]
+    requests = [
+        build_request(issued, entry, plan, decision),
+        build_request(
+            issued,
+            entry,
+            plan,
+            decision,
+            idempotency_key="74000000-0000-4000-8000-000000000002",
+        ),
+    ]
+    barrier = threading.Barrier(2)
+    results: list = []
+
+    def competing_worker(index: int) -> None:
+        barrier.wait()
+        results.append(runtimes[index].handle(requests[index]))
+
+    threads = [threading.Thread(target=competing_worker, args=(i,)) for i in range(2)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+    result_codes = sorted(
+        result.to_dict().get("reason_code", "SUCCESS") for result in results
+    )
+    if result_codes != ["EXECUTION_EVIDENCE_REPLAY", "SUCCESS"]:
+        raise ValueError(f"cross-runtime evidence race drift: {result_codes}")
+    if len(attempt_audit.read()) != 1 or len(effect_audit.read()) != 1:
+        raise ValueError("cross-runtime evidence race produced duplicate work")
+    outcomes["shared_cross_runtime_transaction"] = {
+        "result_codes": result_codes,
+        "attempt_record_count": len(attempt_audit.read()),
+        "effect_record_count": len(effect_audit.read()),
+        "evidence_state": issuer.records[issued.record.reference_sha256].state.value,
+    }
+
+    # Same-key replay is also shared across separately constructed runtimes.
+    issuer = EvidenceIssuer(catalog, now_callable)
+    issued = mint_evidence(issuer, plan, decision, observations)
+    authority = _authority_store(entry, plan, decision, observations)
+    state_store = InMemoryStateStore()
+    attempt_audit = InMemoryAuditLog()
+    effect_audit = InMemoryAuditLog()
+    first_runtime = new_runtime(
+        catalog,
+        issuer,
+        authority_store=authority,
+        state_store=state_store,
+        attempt_audit=attempt_audit,
+        effect_audit=effect_audit,
+    )
+    second_runtime = new_runtime(
+        catalog,
+        issuer,
+        authority_store=authority,
+        state_store=state_store,
+        attempt_audit=attempt_audit,
+        effect_audit=effect_audit,
+    )
+    request = build_request(issued, entry, plan, decision)
+    first_result = first_runtime.handle(request)
+    replay_result = second_runtime.handle(request)
+    if first_result.to_dict() != replay_result.to_dict():
+        raise ValueError("cross-runtime same-key replay did not return stored receipt")
+    if len(attempt_audit.read()) != 1 or len(effect_audit.read()) != 1:
+        raise ValueError("cross-runtime same-key replay duplicated work")
+    outcomes["shared_cross_runtime_idempotency"] = {
+        "same_receipt": True,
+        "attempt_record_count": 1,
+        "effect_record_count": 1,
+    }
+
+    # Authority mutation cannot interleave after validation and before effect.
+    issuer = EvidenceIssuer(catalog, now_callable)
+    issued = mint_evidence(issuer, plan, decision, observations)
+    authority = _authority_store(entry, plan, decision, observations)
+    runtime = new_runtime(catalog, issuer, authority_store=authority)
+    request = build_request(issued, entry, plan, decision)
+    entered_transition = threading.Event()
+    release_transition = threading.Event()
+    mutation_started = threading.Event()
+    mutation_finished = threading.Event()
+    handler_results: list = []
+    revoked = replace(authority.snapshot(), actor_role="revoked_but_nonempty")
+    runbook = RunbookId.RESTART_API_SYNTHETIC_V1
+    original_transition = _sim._RUNBOOK_CALLABLES[runbook]
+
+    def blocking_transition(state):
+        entered_transition.set()
+        if not release_transition.wait(timeout=2):
+            raise ValueError("authority-lock proof timed out")
+        return original_transition(state)
+
+    def mutate_authority() -> None:
+        mutation_started.set()
+        authority.set_snapshot(revoked)
+        mutation_finished.set()
+
+    handler_thread = threading.Thread(
+        target=lambda: handler_results.append(runtime.handle(request))
+    )
+    mutation_thread = threading.Thread(target=mutate_authority)
+    _sim._RUNBOOK_CALLABLES[runbook] = blocking_transition
+    try:
+        handler_thread.start()
+        if not entered_transition.wait(timeout=2):
+            raise ValueError("handler never entered transition")
+        mutation_thread.start()
+        if not mutation_started.wait(timeout=2):
+            raise ValueError("authority mutation never started")
+        mutation_blocked_during_execution = not mutation_finished.wait(timeout=0.05)
+        release_transition.set()
+        handler_thread.join(timeout=2)
+        mutation_thread.join(timeout=2)
+    finally:
+        release_transition.set()
+        _sim._RUNBOOK_CALLABLES[runbook] = original_transition
+        handler_thread.join(timeout=2)
+        if mutation_thread.ident is not None:
+            mutation_thread.join(timeout=2)
+    if handler_thread.is_alive() or mutation_thread.is_alive():
+        raise ValueError("authority-lock proof left a live thread")
+    if not mutation_blocked_during_execution or not mutation_finished.is_set():
+        raise ValueError("authority mutation interleaved with execution")
+    if len(handler_results) != 1 or not handler_results[0].is_success:
+        raise ValueError("linearized pre-revocation execution did not complete")
+
+    followup_issuer = EvidenceIssuer(catalog, now_callable)
+    followup_issued = mint_evidence(
+        followup_issuer, plan, decision, observations
+    )
+    followup_runtime = new_runtime(
+        catalog, followup_issuer, authority_store=authority
+    )
+    followup = followup_runtime.handle(
+        build_request(followup_issued, entry, plan, decision)
+    )
+    if followup.to_dict().get("reason_code") != "AUTHORITY_MISMATCH":
+        raise ValueError("execution after authority revocation did not fail closed")
+    if followup_runtime.effect_audit_records:
+        raise ValueError("execution after authority revocation produced an effect")
+    outcomes["authority_snapshot_execution_lock"] = {
+        "mutation_blocked_during_execution": True,
+        "pre_revocation_result": "SUCCESS",
+        "post_revocation_reason_code": followup.to_dict()["reason_code"],
+        "post_revocation_effect_record_count": 0,
+    }
     return outcomes
 
 
@@ -1650,6 +1861,7 @@ def _validate_source_checks() -> dict[str, Any]:
         "re",
         "secrets",
         "threading",
+        "contextlib",
         "dataclasses",
         "datetime",
         "enum",
@@ -1731,6 +1943,9 @@ def build_evidence() -> dict[str, Any]:
     current_authority = _validate_current_authority_denials(
         catalog, plan, decision, observations
     )
+    sol_recovery_guards = _validate_sol_recovery_guards(
+        catalog, plan, decision, observations
+    )
     production_entropy = _validate_production_entropy(
         catalog, plan, decision, observations
     )
@@ -1767,6 +1982,7 @@ def build_evidence() -> dict[str, Any]:
         "fault_injection": fault_injection,
         "target_readback": target_readback,
         "current_authority": current_authority,
+        "sol_recovery_guards": sol_recovery_guards,
         "production_entropy": production_entropy,
         "issuance_concurrency": issuance_concurrency,
         "operation_counters": operation_counters,

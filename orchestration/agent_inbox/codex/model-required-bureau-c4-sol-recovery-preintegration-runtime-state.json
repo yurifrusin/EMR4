@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "integration",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 is the active provider-free authored-synthetic simulator descendant. AER-0025 and AER-0026 preserve and reject the first worker and its bounded repair self-passes; the exact two worker commits may now be adopted only as untrusted source under Sol's recorded recovery lease.",
+    "current_authority_allocation": "Sol owns recovery, task-branch integration, source amendments and acceptance. DeepSeek has exhausted its correction loop and has no integration or self-acceptance authority. Gemini 3.6 Flash/high receives only a later fresh exact-head veto after the recovered deterministic candidate passes.",
+    "active_plan_and_acceptance": "The frozen C4 plan, threat delta and API Spine boundary remain unchanged. Worker commits c56267d23c24dd9e4fe642df85e74cc95de07a6e and 0a60d559ec9a555e038bec5dc428b6c323c2ff04 are clean owned-path source but unaccepted. Sol recovery is limited to a shared execution-store transaction lock with shared idempotency/attempt sequence, full execution-section current-authority locking, exact reviewer role and adversarial regressions for the three residual findings; no conceptual scope expansion is permitted.",
+    "protected_evidence_boundaries": "The adopted source remains a local in-memory provider-free authored-synthetic simulator. No patient/product/protected data, provider, real database/target, process/network/cloud/IAM capability, mounted route, C5 action, deployment, production, release, Pages, protected evidence or protected-ref movement is opened. docs/branding and every unrelated untracked receipt/state artifact remain preserved and excluded.",
+    "git_refs_and_worktree": "Primary task branch is clean except preserved untracked files at HEAD 371a94f342d7caebf36276f6e9902b7769600037. The source worker branch is clean at 0a60d559ec9a555e038bec5dc428b6c323c2ff04 with c56267d2 as its parent repair source. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Integration means cherry-picking only these two non-protected commits onto the task branch before separate Sol amendments."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c4_sol_recovery_preintegration_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol has preserved both rejected attempts and is adopting only their bounded source under the recovery lease."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Independent read-only audit reproduced the three exact residual failures; no subagent has integration authority."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Both worker transports are closed and their commits are untrusted recovery inputs only."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The final fresh code veto remains closed until recovered deterministic acceptance passes."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare completed the rejected DeepSeek transports and conveys no further authority."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
