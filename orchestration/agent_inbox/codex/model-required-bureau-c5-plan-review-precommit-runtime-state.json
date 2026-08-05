@@ -1,0 +1,77 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c5_plan_review_acceptance_lineage",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 remains accepted and published; C5 plan freezing is the active successor. The exact C5 candidate is committed at cc81ccbcc1676d616ca4bae5cb5702b8dbede7b6 and implementation remains closed pending acceptance of the fresh plan veto.",
+    "current_authority_allocation": "Fresh Gemini 3.6 Flash/high completed read-only plan-veto authority only. Sol owns acceptance and may next dispatch one bounded provider-free DeepSeek V4 Flash/high implementation worker. No plan reviewer or implementation worker receives live target, candidate-provider, integration, deployment or protected-ref authority.",
+    "active_plan_and_acceptance": "The frozen C5 plan/threat candidate at cc81ccbcc1676d616ca4bae5cb5702b8dbede7b6 passed 42 local plan tests and a fresh exact-head Antigravity veto. Gemini independently passed 202 tests, found zero material issue, emitted one terminal pass and left the review worktree clean and unchanged. Sol acceptance opens implementation only, not the live sequence.",
+    "protected_evidence_boundaries": "Commit only the C5 review packet, exact verifier preflight, Gemini receipt, Sol plan acceptance and this receipt pair. No process/socket/provider candidate-runtime call, patient/product/protected data, ordinary service, database, Context Fabric implementation, cloud/IAM, deployment, production, release, Pages or protected-ref action occurred. docs/branding/ and unrelated untracked files remain excluded by explicit paths.",
+    "git_refs_and_worktree": "Primary task HEAD is cc81ccbcc1676d616ca4bae5cb5702b8dbede7b6 with only bounded C5 review lineage and preserved unrelated files untracked. Fresh review branch codex/review-model-required-bureau-c5-plan is clean and unchanged at the same exact HEAD. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_plan_review_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reviewed the exact plan, local checks and fresh Gemini receipt before acceptance."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent owns acceptance or implementation."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.6 Flash/high returned one exact pass and left the candidate unchanged."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The implementation lane remains unlaunched until a distinct worker packet and pre-dispatch receipt pass."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare remains only the future DeepSeek transport wrapper."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/model-required-bureau-c5-plan-verifier-worktree-preflight.json"
+  ],
+  "assigned_agent_ids": []
+}
