@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_c4_closeout_to_existing_non_protected_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton records model_required_bureau_c4_allowlisted_actuator_simulator_pass and names the freeze of the narrowest C5 disposable non-PHI live-development-recovery descendant as the immediate successor under standing programme authority. The Context Fabric remains a durable staged programme horizon and gains no runtime authority from C4.",
+    "current_authority_allocation": "GPT Sol may publish the accepted C4 closeout to the existing non-protected task branch and continue directly into bounded C5 planning. DeepSeek V4 Flash/high through Claude Code bare remains the implementation/test worker allocation and Gemini 3.6 Flash/high through a fresh Antigravity project remains the independent veto allocation. No protected integration, product provider call, live actuator, patient or product data, deployment, release or Pages authority is allocated.",
+    "active_plan_and_acceptance": "The controlled-recovery development plan, C4 plan and threat-model delta, provider-free acceptance evidence, deterministic gates, successful fresh exact-HEAD Gemini veto, closeout and Sol acceptance pass. Commit 5f84421f0aff63bb4e65f53bec3b459439a3e465 contains the intentional closeout set; accepted implementation source is 955b6a566f7097f58929dcb2fa9c4ed0aaad8b29.",
+    "protected_evidence_boundaries": "Push only refs/heads/codex/ariadne-bernie-davida-parallel-seam. Protected holdouts, historical PHI, patient, clinical, participant, product-derived, protected and production data; provider product-runtime calls; live targets or actuators; external event delivery; cloud or IAM mutation; deployment; release; Pages and protected-ref movement remain closed. docs/branding/ and every unrelated untracked receipt/state file remain preserved and excluded by explicit-path staging.",
+    "git_refs_and_worktree": "After an explicit fetch, HEAD is 5f84421f0aff63bb4e65f53bec3b459439a3e465 and origin task is 4c3a682e6c1076d8b5cfdc6143a4a07a57d63a57 with a 0-behind/10-ahead relation. Local/origin master and local/origin handoff/current remain aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree has no tracked changes; preserved untracked paths remain unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c4_closeout_prepush_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The C4 implementation and bounded repair worker transports are closed; no implementation worker is active for this push."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The Claude Code bare transport is closed."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The fresh exact-HEAD Gemini 3.6 Flash/high code veto passed and changed no files."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the exact task-branch relation, focused acceptance suite and protected refs."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is required for this receipt-only push action."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
