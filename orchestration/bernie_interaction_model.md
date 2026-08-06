@@ -198,8 +198,9 @@ reassembly, and keeps bitemporal snapshots outside current-truth authority.
 The retrieval rehearsal proves that five closed intents select only the
 minimum granted Current, recent-work and historical components, with explicit
 vocabulary mapping, bilateral Bureau scope, ambiguity and upstream/same-packet
-proofreading. The next planned descendant is a separately frozen authored-
-synthetic model-required intent-shaping envelope; real event transport,
+proofreading. The exact next descendant is now frozen in the authored-synthetic
+model-required intent-shaping plan; its provider-free implementation,
+deterministic gates and one-use occupied execution follow. Real event transport,
 historical persistence, patient/product data, product retrieval, runtime and
 command authority remain separately closed.
 

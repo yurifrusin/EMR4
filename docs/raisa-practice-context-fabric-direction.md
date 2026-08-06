@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction through provider-free intent-shaped temporal retrieval; occupied authored-synthetic intent shaping next
+Status: accepted direction through provider-free intent-shaped temporal retrieval; exact occupied intent-shaping plan frozen
 
 ## Purpose
 
@@ -264,8 +264,10 @@ large “memory” feature:
    Current coherence packet, require bilateral Memory sharing, return bounded
    opaque alternatives instead of guessed identity, reject invalidated Current
    state and recompute every upstream and same-packet proofreader.
-5. **Occupied model-required intent shaping** — **next**; under one separately
-   derived and frozen authored-synthetic envelope, prove that the selected
+5. **Occupied model-required intent shaping** — **plan frozen** in
+   `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`;
+   implement and deterministically verify the provider-free contract first,
+   then use the exact one-use Sydney Vertex envelope to prove that the selected
    provider model can propose only the closed non-authoritative intent candidate
    which the accepted deterministic retrieval contract may narrow or reject.
 6. **Real product read descendants** — open one source and one role/purpose at a

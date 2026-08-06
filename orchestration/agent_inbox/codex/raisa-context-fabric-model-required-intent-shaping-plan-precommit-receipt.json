@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_frozen_model_required_intent_shaping_plan_to_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The new plan, design and threat delta bind one synthetic comparison utterance, closed provider body, trusted wrapper, two deterministic proofreaders, exact gemini-2.5-flash Sydney Vertex identity/project/region, 1024/2048 reasoning allocation, maximum two calls/USD 0.50, no fallback and strict claim limits. The focused plan/direction/API Spine/orchestrator suite passes, Ruff passes and git diff --check is clean.",
+    "current_authority_allocation": "GPT Sol owns this material architecture freeze and task-branch commit. No implementation worker, verifier or provider cell is dispatched by the plan commit, and no agent receives protected integration authority.",
+    "git_refs_and_worktree": "Before exact-path staging, task HEAD and origin task are aligned at 8b1f2c8452f4bf03868beae057d7a24cc893fc43; local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named plan, direction, handover, preflight and static-test files are eligible for this commit.",
+    "live_handover_current_baton": "AGENTS.md now records the accepted provider-free parent and the exact frozen authored-synthetic model-required intent-shaping plan as the next implementation boundary without changing the accepted Current result.",
+    "protected_evidence_boundaries": "This commit contains architecture, plan-state and static test artifacts only. It makes zero provider calls and opens no patient/product/protected data, source, database/watcher, persistence, product API/runtime, command/write, deployment, production, release, Pages or protected-ref action. docs/branding and unrelated untracked artifacts remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

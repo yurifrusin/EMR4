@@ -1,0 +1,89 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_authored_synthetic_model_required_intent_shaping_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the preceding tranche closeout. Its Current result accepts provider-free intent-shaped temporal retrieval at reviewed source b24b56bda296f3713b5e2c0e52545c749e71540a and names a separately derived and frozen authored-synthetic model-required intent-shaping rehearsal as the exact next dependency-satisfied descendant.",
+    "current_authority_allocation": "GPT Sol owns the material architecture, exact occupied-envelope plan, deterministic acceptance, recovery and task-branch integration. DeepSeek Flash is eligible only for bounded separable implementation if leverage justifies dispatch. Gemini 3.6 Flash/high may supply a later fresh read-only veto. No external agent receives acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The complete accepted retrieval plan, design, threat delta, closeout and Sol acceptance were re-read together with the Context Fabric direction, model-required Bureau architecture, controlled-recovery plan, master implementation plan and Bernie interaction model. The accepted deterministic contract exposes five closed non-authoritative intents and requires the next model stage to propose only a candidate which backend policy and the existing proofreader may narrow or reject.",
+    "protected_evidence_boundaries": "The next plan may use only newly authored patient-free synthetic intent/context material and must freeze exact gemini-2.5-flash, bernie-emr4-dev, australia-southeast1, Bernie keyless impersonated ADC, positive bounded thinking, exact call/cost ledger and no fallback before dispatch. Patient, clinical, product-derived, financial, protected and historical-PHI data; live product sources; database/watcher/persistence; runtime/API wiring; commands/writes; deployment, production, release, Pages, protected evidence and protected-ref movement remain closed. docs/branding and unrelated untracked artifacts remain excluded.",
+    "git_refs_and_worktree": "Task branch HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at 8b1f2c8452f4bf03868beae057d7a24cc893fc43. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index and tracked worktree are clean; preserved untracked files remain unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_model_required_intent_shaping_preplan_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol is present to freeze the exact plan before any occupied action."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No independent review is dispatched before deterministic plan and candidate gates pass."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected by this receipt."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains an unused real-TTY fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude CLI is not independently selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent holds an active lease."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-intent-shaped-temporal-retrieval-prepush-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

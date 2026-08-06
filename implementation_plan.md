@@ -72,9 +72,11 @@ intents select only minimum granted Current, recent-work and bitemporal
 Historical components, private session remains same-Bureau, bilateral Memory
 sharing is explicit, ambiguous opaque references are not resolved as identity,
 invalidated Current state fails closed, and every upstream plus same-packet
-proofreader is recomputed. The next dependency-satisfied action is a separately
-frozen authored-synthetic model-required intent-shaping rehearsal over that
-exact deterministic contract.
+proofreader is recomputed. The exact authored-synthetic model-required intent-
+shaping rehearsal is now frozen in
+[`docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`](docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md).
+Its provider-free contract and deterministic gates are the next dependency-
+satisfied action before its one-use occupied Sydney Vertex execution.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -103,8 +105,9 @@ typed and expiring context frames from authoritative current, event, temporal,
 session and later clinical/evidence sources. It is not provider-model memory or
 a broad practice-data dump. The direction, first unmounted provider-free
 contract, Current operational weave, patient-free temporal weave and provider-
-free intent-shaped retrieval rehearsal are accepted; a separately frozen
-authored-synthetic occupied model-required intent-shaping envelope is next. No
+free intent-shaped retrieval rehearsal are accepted; the exact authored-
+synthetic occupied model-required intent-shaping envelope is frozen and its
+provider-free implementation is next. No
 product/patient data, provider call outside that later exact envelope, real
 historical-state retention, runtime route, command, deployment or production
 authority follows from this blueprint entry.
@@ -368,10 +371,12 @@ Implementation proceeds from the accepted provider-free authored-synthetic contr
 `ContextScopeGrant`, `BureauMemorySelector`, `BureauMemoryItem`, `ContextFrame`,
 `ContextFrameSet`, selector/weave trace and same-packet proofreader trace, to
 the accepted composition of four existing current read shapes and the accepted
-patient-free temporal invalidation/bitemporal contract. The next descendant is
-a separately bounded provider-free patient-free unmounted intent-shaped
-temporal retrieval rehearsal, followed by separately gated model-required,
-real-product and clinical descendants. GraphQL/query services remain read-only; mutations
+patient-free temporal invalidation/bitemporal contract and the accepted
+provider-free intent-shaped temporal retrieval rehearsal. Its exact model-
+required authored-synthetic descendant is now frozen; provider-free contract
+implementation, deterministic review and the one-use occupied Sydney Vertex
+execution follow before separately gated real-product and clinical descendants.
+GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is
 [`docs/raisa-practice-context-fabric-direction.md`](docs/raisa-practice-context-fabric-direction.md).

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_frozen_model_required_intent_shaping_plan_to_task_branch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records the accepted provider-free parent and the exact frozen authored-synthetic model-required intent-shaping plan as the next implementation boundary without changing the accepted Current result.",
+    "current_authority_allocation": "GPT Sol owns this material architecture freeze and task-branch commit. No implementation worker, verifier or provider cell is dispatched by the plan commit, and no agent receives protected integration authority.",
+    "active_plan_and_acceptance": "The new plan, design and threat delta bind one synthetic comparison utterance, closed provider body, trusted wrapper, two deterministic proofreaders, exact gemini-2.5-flash Sydney Vertex identity/project/region, 1024/2048 reasoning allocation, maximum two calls/USD 0.50, no fallback and strict claim limits. The focused plan/direction/API Spine/orchestrator suite passes, Ruff passes and git diff --check is clean.",
+    "protected_evidence_boundaries": "This commit contains architecture, plan-state and static test artifacts only. It makes zero provider calls and opens no patient/product/protected data, source, database/watcher, persistence, product API/runtime, command/write, deployment, production, release, Pages or protected-ref action. docs/branding and unrelated untracked artifacts remain excluded.",
+    "git_refs_and_worktree": "Before exact-path staging, task HEAD and origin task are aligned at 8b1f2c8452f4bf03868beae057d7a24cc893fc43; local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named plan, direction, handover, preflight and static-test files are eligible for this commit."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_model_required_intent_shaping_plan_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Sol owns the exact-path plan commit."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Independent source review remains downstream of implementation and deterministic gates."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is active during plan freeze."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude CLI is not independently selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No subagent holds an active lease."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

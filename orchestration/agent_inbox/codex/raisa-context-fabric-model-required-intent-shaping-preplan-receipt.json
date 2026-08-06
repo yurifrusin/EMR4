@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_authored_synthetic_model_required_intent_shaping_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete accepted retrieval plan, design, threat delta, closeout and Sol acceptance were re-read together with the Context Fabric direction, model-required Bureau architecture, controlled-recovery plan, master implementation plan and Bernie interaction model. The accepted deterministic contract exposes five closed non-authoritative intents and requires the next model stage to propose only a candidate which backend policy and the existing proofreader may narrow or reject.",
+    "current_authority_allocation": "GPT Sol owns the material architecture, exact occupied-envelope plan, deterministic acceptance, recovery and task-branch integration. DeepSeek Flash is eligible only for bounded separable implementation if leverage justifies dispatch. Gemini 3.6 Flash/high may supply a later fresh read-only veto. No external agent receives acceptance, integration or protected-ref authority.",
+    "git_refs_and_worktree": "Task branch HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at 8b1f2c8452f4bf03868beae057d7a24cc893fc43. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index and tracked worktree are clean; preserved untracked files remain unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the preceding tranche closeout. Its Current result accepts provider-free intent-shaped temporal retrieval at reviewed source b24b56bda296f3713b5e2c0e52545c749e71540a and names a separately derived and frozen authored-synthetic model-required intent-shaping rehearsal as the exact next dependency-satisfied descendant.",
+    "protected_evidence_boundaries": "The next plan may use only newly authored patient-free synthetic intent/context material and must freeze exact gemini-2.5-flash, bernie-emr4-dev, australia-southeast1, Bernie keyless impersonated ADC, positive bounded thinking, exact call/cost ledger and no fallback before dispatch. Patient, clinical, product-derived, financial, protected and historical-PHI data; live product sources; database/watcher/persistence; runtime/API wiring; commands/writes; deployment, production, release, Pages, protected evidence and protected-ref movement remain closed. docs/branding and unrelated untracked artifacts remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

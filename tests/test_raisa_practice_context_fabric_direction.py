@@ -18,7 +18,7 @@ def test_context_fabric_is_durable_and_occupied_intent_shaping_is_next() -> None
     handover = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 
     assert (
-        "Status: accepted direction through provider-free intent-shaped temporal retrieval; occupied authored-synthetic intent shaping next"
+        "Status: accepted direction through provider-free intent-shaped temporal retrieval; exact occupied intent-shaping plan frozen"
         in direction
     )
     assert "ContextNeed" in direction
