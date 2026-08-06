@@ -1,0 +1,424 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-source-specific-durability-architecture-v1.json",
+  "title": "Raisa Context Fabric source-specific durability architecture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "evidence_label",
+    "source_profile",
+    "principals",
+    "source_coordinate",
+    "payload_free_projection",
+    "checkpoint",
+    "frame_fence",
+    "atomic_transaction",
+    "decision_dispositions",
+    "restart_and_retention",
+    "key_rotation",
+    "audit",
+    "effect_ceilings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.context_fabric.source_specific_durability_architecture.v1"
+    },
+    "status": {
+      "const": "architecture_only"
+    },
+    "evidence_label": {
+      "const": "provider_free_unmounted_authored_synthetic_source_specific_durability_architecture"
+    },
+    "source_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_system",
+        "event_type",
+        "event_schema_version",
+        "aggregate_class",
+        "stream_id",
+        "stream_partition",
+        "stream_epoch",
+        "existing_delivery_cursor_eligible",
+        "existing_delivery_expiry_eligible",
+        "existing_payload_eligible",
+        "future_control_projection"
+      ],
+      "properties": {
+        "source_system": {"const": "emr4-diary"},
+        "event_type": {"const": "diary.appointment_rescheduled"},
+        "event_schema_version": {"const": "diary.appointment_rescheduled.v1"},
+        "aggregate_class": {"const": "APPOINTMENT"},
+        "stream_id": {"const": "emr4:diary:appointment-rescheduled:v1"},
+        "stream_partition": {"const": "practice"},
+        "stream_epoch": {"const": 1},
+        "existing_delivery_cursor_eligible": {"const": false},
+        "existing_delivery_expiry_eligible": {"const": false},
+        "existing_payload_eligible": {"const": false},
+        "future_control_projection": {"const": "diary_context_observation_outbox_v1"}
+      }
+    },
+    "principals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_integration", "durability_coordinator", "fresh_read"],
+      "properties": {
+        "observation_integration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "principal_id",
+            "principal_kind",
+            "select_payload_free_projection",
+            "select_payload_or_product_tables",
+            "reuses_staff_jwt_or_application_session",
+            "persistence_authority",
+            "fresh_read_authority",
+            "provider_authority",
+            "command_authority"
+          ],
+          "properties": {
+            "principal_id": {"const": "emr4:integration:context-fabric:diary-appointment-rescheduled-observer:v1"},
+            "principal_kind": {"const": "integration_service_account"},
+            "select_payload_free_projection": {"const": true},
+            "select_payload_or_product_tables": {"const": false},
+            "reuses_staff_jwt_or_application_session": {"const": false},
+            "persistence_authority": {"const": false},
+            "fresh_read_authority": {"const": false},
+            "provider_authority": {"const": false},
+            "command_authority": {"const": false}
+          }
+        },
+        "durability_coordinator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "principal_id",
+            "principal_kind",
+            "select_source_payload",
+            "atomic_durability_transaction_only",
+            "fresh_read_authority",
+            "provider_authority",
+            "command_authority"
+          ],
+          "properties": {
+            "principal_id": {"const": "emr4:service:context-fabric:temporal-durability-coordinator:v1"},
+            "principal_kind": {"const": "internal_service_principal"},
+            "select_source_payload": {"const": false},
+            "atomic_durability_transaction_only": {"const": true},
+            "fresh_read_authority": {"const": false},
+            "provider_authority": {"const": false},
+            "command_authority": {"const": false}
+          }
+        },
+        "fresh_read": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "principal_kind",
+            "fresh_context_scope_grant_required",
+            "inherits_observer_or_checkpoint_authority"
+          ],
+          "properties": {
+            "principal_kind": {"const": "current_application_principal"},
+            "fresh_context_scope_grant_required": {"const": true},
+            "inherits_observer_or_checkpoint_authority": {"const": false}
+          }
+        }
+      }
+    },
+    "source_coordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "head_kind",
+        "partition_key",
+        "baseline_position",
+        "next_position_rule",
+        "predecessor_rule",
+        "producer_transaction_members",
+        "rollback_reuses_position",
+        "postgres_sequence_or_identity_allowed",
+        "occurred_at_or_event_id_allowed",
+        "transaction_id_or_commit_timestamp_allowed",
+        "wal_lsn_allowed",
+        "counter_wrap_allowed",
+        "aggregate_revision_role"
+      ],
+      "properties": {
+        "head_kind": {"const": "transactional_locked_row"},
+        "partition_key": {
+          "const": ["practice_id", "stream_id"]
+        },
+        "baseline_position": {"const": 0},
+        "next_position_rule": {"const": "last_position_plus_one"},
+        "predecessor_rule": {"const": "equals_last_position"},
+        "producer_transaction_members": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 64}
+        },
+        "rollback_reuses_position": {"const": true},
+        "postgres_sequence_or_identity_allowed": {"const": false},
+        "occurred_at_or_event_id_allowed": {"const": false},
+        "transaction_id_or_commit_timestamp_allowed": {"const": false},
+        "wal_lsn_allowed": {"const": false},
+        "counter_wrap_allowed": {"const": false},
+        "aggregate_revision_role": {"const": "freshness_anomaly_only_not_stream_continuity"}
+      }
+    },
+    "payload_free_projection": {
+      "$ref": "#/$defs/closed_field_lists"
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key_fields",
+        "states",
+        "means_classified_through_position",
+        "observed_cursor_can_advance",
+        "in_memory_decision_can_advance",
+        "command_or_read_authority"
+      ],
+      "properties": {
+        "key_fields": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 64}
+        },
+        "states": {
+          "const": ["ACTIVE", "REBASE_REQUIRED", "CONSUMED", "REVOKED"]
+        },
+        "means_classified_through_position": {"const": true},
+        "observed_cursor_can_advance": {"const": false},
+        "in_memory_decision_can_advance": {"const": false},
+        "command_or_read_authority": {"const": false}
+      }
+    },
+    "frame_fence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invalidation_state",
+        "watermark_key",
+        "frame_requires_assembled_through_position",
+        "watermark_newer_than_frame_means_non_current",
+        "in_memory_only_retirement_allowed",
+        "replacement_read_fence",
+        "raced_or_unverifiable_replacement_release_allowed"
+      ],
+      "properties": {
+        "invalidation_state": {"const": "monotonic_durable_watermark"},
+        "watermark_key": {
+          "const": [
+            "practice_binding_digest",
+            "stream_id",
+            "stream_epoch",
+            "observer_generation",
+            "frame_type"
+          ]
+        },
+        "frame_requires_assembled_through_position": {"const": true},
+        "watermark_newer_than_frame_means_non_current": {"const": true},
+        "in_memory_only_retirement_allowed": {"const": false},
+        "replacement_read_fence": {"const": "same_snapshot_or_equal_before_after_source_head"},
+        "raced_or_unverifiable_replacement_release_allowed": {"const": false}
+      }
+    },
+    "atomic_transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lock_checkpoint_first",
+        "commit_members",
+        "all_or_nothing",
+        "one_obligation_per_frame_generation",
+        "restore_retired_frame_allowed",
+        "source_or_fresh_read_executed"
+      ],
+      "properties": {
+        "lock_checkpoint_first": {"const": true},
+        "commit_members": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 64}
+        },
+        "all_or_nothing": {"const": true},
+        "one_obligation_per_frame_generation": {"const": true},
+        "restore_retired_frame_allowed": {"const": false},
+        "source_or_fresh_read_executed": {"const": false}
+      }
+    },
+    "decision_dispositions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contiguous_admit",
+        "contiguous_no_intersection",
+        "contiguous_full_invalidation",
+        "exact_redelivery",
+        "coverage_gap",
+        "same_position_identity_mismatch",
+        "observation_digest_reused_at_new_position",
+        "malformed_or_foreign_or_wrong_contract"
+      ],
+      "properties": {
+        "contiguous_admit": {"const": "advance_after_atomic_commit"},
+        "contiguous_no_intersection": {"const": "advance_after_receipt_and_audit"},
+        "contiguous_full_invalidation": {"const": "advance_only_after_all_potentially_affected_frames_retired"},
+        "exact_redelivery": {"const": "return_existing_receipt_without_mutation"},
+        "coverage_gap": {"const": "hold_checkpoint_full_invalidate_and_rebase"},
+        "same_position_identity_mismatch": {"const": "hold_checkpoint_full_invalidate_and_rebase"},
+        "observation_digest_reused_at_new_position": {"const": "hold_checkpoint_full_invalidate_and_rebase"},
+        "malformed_or_foreign_or_wrong_contract": {"const": "no_checkpoint_change_and_stop_generation"}
+      }
+    },
+    "restart_and_retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resume_requires_exact_next_retained_position",
+        "resume_requires_predecessor_match",
+        "resume_requires_policy_binding_registry_impact_and_key_schedule_match",
+        "missing_or_corrupt_checkpoint_disposition",
+        "retention_basis",
+        "existing_event_ttl_controls_retention",
+        "drop_or_sample_on_overflow",
+        "continuity_loss_disposition"
+      ],
+      "properties": {
+        "resume_requires_exact_next_retained_position": {"const": true},
+        "resume_requires_predecessor_match": {"const": true},
+        "resume_requires_policy_binding_registry_impact_and_key_schedule_match": {"const": true},
+        "missing_or_corrupt_checkpoint_disposition": {"const": "full_invalidate_and_new_generation"},
+        "retention_basis": {"const": "minimum_eligible_checkpoint_plus_pins_key_overlap_and_safety_grace"},
+        "existing_event_ttl_controls_retention": {"const": false},
+        "drop_or_sample_on_overflow": {"const": false},
+        "continuity_loss_disposition": {"const": "full_invalidate_and_new_baseline"}
+      }
+    },
+    "key_rotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schedule_basis",
+        "dedicated_identity_key_ring",
+        "reuse_application_or_auth_or_provider_secret",
+        "try_all_keys_allowed",
+        "routine_rotation_preserves_generation_only_with_valid_position_fence_and_overlap",
+        "key_material_in_source_checkpoint_audit_or_evidence",
+        "raw_event_id_persisted_after_normalization",
+        "old_key_destroyed_before_all_dependent_positions_drain",
+        "retroactive_schedule_change_allowed",
+        "missing_required_key_disposition"
+      ],
+      "properties": {
+        "schedule_basis": {"const": "non_overlapping_transaction_position_intervals"},
+        "dedicated_identity_key_ring": {"const": true},
+        "reuse_application_or_auth_or_provider_secret": {"const": false},
+        "try_all_keys_allowed": {"const": false},
+        "routine_rotation_preserves_generation_only_with_valid_position_fence_and_overlap": {"const": true},
+        "key_material_in_source_checkpoint_audit_or_evidence": {"const": false},
+        "raw_event_id_persisted_after_normalization": {"const": false},
+        "old_key_destroyed_before_all_dependent_positions_drain": {"const": false},
+        "retroactive_schedule_change_allowed": {"const": false},
+        "missing_required_key_disposition": {"const": "full_invalidate_and_new_generation"}
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_fields",
+        "prohibited_fields",
+        "bureau_memory_or_context_authority",
+        "read_or_command_evidence"
+      ],
+      "properties": {
+        "allowed_fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 96}
+        },
+        "prohibited_fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 96}
+        },
+        "bureau_memory_or_context_authority": {"const": false},
+        "read_or_command_evidence": {"const": false}
+      }
+    },
+    "effect_ceilings": {
+      "type": "object",
+      "minProperties": 11,
+      "maxProperties": 11,
+      "required": [
+        "database_or_source_contact",
+        "migration_or_database_object",
+        "operational_checkpoint_persisted",
+        "product_read",
+        "patient_or_product_data",
+        "provider_called",
+        "command_executed",
+        "runtime_wired",
+        "deployment_or_release",
+        "pages_rebuilt",
+        "protected_ref_moved"
+      ],
+      "propertyNames": {
+        "enum": [
+          "database_or_source_contact",
+          "migration_or_database_object",
+          "operational_checkpoint_persisted",
+          "product_read",
+          "patient_or_product_data",
+          "provider_called",
+          "command_executed",
+          "runtime_wired",
+          "deployment_or_release",
+          "pages_rebuilt",
+          "protected_ref_moved"
+        ]
+      },
+      "additionalProperties": {"const": false}
+    }
+  },
+  "$defs": {
+    "closed_field_lists": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_fields", "prohibited_fields"],
+      "properties": {
+        "allowed_fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 96}
+        },
+        "prohibited_fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 96}
+        }
+      }
+    }
+  }
+}
