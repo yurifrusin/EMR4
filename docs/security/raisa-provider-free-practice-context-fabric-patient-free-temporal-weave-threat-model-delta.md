@@ -27,12 +27,14 @@ disclosure.
 | Cross-practice or cross-session invalidation | Exact practice/session-binding/session-generation/policy/manifest equality before cursor or state processing. |
 | Replay or duplicate creates repeated disruption | Deduplication binds event id, lease/generation and frame-set digest; equal/older aggregate revisions are suppressed. |
 | Reordered or missing events leave stale context usable | Cursor discontinuity fails closed, retires the old set and requires a new baseline plus fresh authority. |
+| Backdated insertion falls behind an occurrence-time cursor | No no-loss runtime claim is made; a future watcher requires a monotonic transaction/outbox position and treats re-baseline, revision jump or ordering uncertainty as a coverage gap. |
 | Slow reassembly overwrites newer context | Opaque single-use ticket, monotonic request revision, exact generation/grant/manifest binding and stale-result rejection. |
 | Lease expiry/revocation races a signal | Expiry/revocation is checked before classification; old set becomes unavailable and no read is executed. |
 | Overbroad event family or selector causes ambient invalidation | Event family, frame/source class, location, aggregate, time and sensitivity must be a deterministic intersection of manifest and backend lease. |
 | Event-to-command escalation | Signals, decisions and requirements are read-only with no command authority; no command/API/runtime import exists. |
 | Historical snapshot is asserted as current truth | Distinct type with valid/transaction time, retention class and constant `current_truth_authority: false`. |
 | Correction overwrites historical evidence | Immutable correction/supersession lineage; temporal overlap without lineage fails proofreading. |
+| Event occurrence invents historical valid time | Event metadata can only invalidate; fresh authorised source evidence establishes valid time, and missing coverage remains explicit. |
 | Historical retention becomes ambient practice memory | Purpose, scope, retention class, maximum lookback/count and fields are backend-clipped; no production retention is chosen here. |
 | Sensitive event data leaks into evidence | Authored-synthetic opaque refs only; no payload, patient, free text or product-derived values; traces use digests and safe codes. |
 

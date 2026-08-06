@@ -67,6 +67,8 @@ The pure classifier's sealed result for one signal. Decisions are:
 - `REASSEMBLY_REQUIRED`: the first relevant change to a current set;
 - `COALESCED`: another relevant change while reassembly is already required;
 - `CURSOR_GAP`: ordered delivery cannot be proved;
+- `REVISION_GAP`: an aggregate revision jumped over unobserved changes;
+- `ORDERING_UNCERTAIN`: a late coordinate carries a newer aggregate revision;
 - `EXPIRED`: the frame set or lease has expired; or
 - `REVOKED`: authority/session generation is no longer current.
 
@@ -100,7 +102,26 @@ The original record remains addressable after correction. “What appeared true
 at 09:00?” uses valid time; “what had the practice recorded by 10:00?” also
 clips transaction time. Neither question is answered by replaying event payloads.
 
-## Classification order
+## Cursor, checkpoint and classification order
+
+`ObservedCursor` describes what the feed supplied. `CommittedCheckpoint`
+describes what the watcher has durably classified. The pure transition seals
+the observation, decision, invalidation/suppression and next checkpoint as one
+unit before a fresh read is attempted. Reassembly failure cannot rewind or
+erase the invalidation cause.
+
+A noninitial response that establishes a new baseline, a cursor mismatch, an
+aggregate revision jump or a late event with a newer aggregate revision is a
+continuity gap. The safe result is full invalidation plus an explicit historical
+coverage gap, never interpolation or silent continuation.
+
+The accepted Reception One cursor orders `(occurred_at, event_id)`. A future
+no-loss runtime watcher needs a monotonic transaction/outbox position because a
+later-inserted backdated event can otherwise fall behind that coordinate. This
+tranche proves the checkpoint contract only and makes no no-loss transport
+claim.
+
+The engine checks each signal in this order:
 
 For each signal the engine checks, in order:
 
@@ -133,6 +154,14 @@ candidate may propose a named horizon or explicit interval and source classes;
 backend policy supplies the permitted purpose, locations, retention classes,
 maximum lookback, count and disclosure fields. The released historical frames
 are canonically ordered by valid start, transaction start and snapshot id.
+
+Queries intersect both `valid_at` and `known_at`. A late correction appends a
+new transaction-time version with explicit supersession lineage; it does not
+rewrite the version that was known earlier. `event.occurred_at` is not
+automatically `valid_from`: only a fresh authoritative read can establish the
+operational interval. Coverage state is explicit, and absence of a snapshot is
+never evidence that nothing happened. Event-delivery TTL and historical
+retention class are independent policy dimensions.
 
 Overlapping snapshots for one source/subject must have explicit correction or
 supersession lineage. Unknown gaps remain gaps; the engine does not interpolate

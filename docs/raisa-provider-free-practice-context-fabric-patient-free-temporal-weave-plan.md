@@ -54,6 +54,11 @@ no listener, database, feed, source reader, operational registry or clock.
 - a closed JSON Schema, admitted example, deterministic acceptance evidence and
   focused tests.
 
+`ObservedCursor` and `CommittedCheckpoint` are distinct. One sealed watcher
+transition records the observation, decision, emitted invalidation/suppression
+and next checkpoint before any reassembly begins. A failed fresh read therefore
+cannot lose the signal that made the old set stale.
+
 ## Deterministic lifecycle
 
 1. Verify the exact parent frame-set, source, grant, binding and proofreader
@@ -71,16 +76,20 @@ no listener, database, feed, source reader, operational registry or clock.
    `REASSEMBLY_REQUIRED` and emit one inert reassembly requirement. Further
    relevant signals may coalesce into the same requirement but cannot restore,
    patch or release the old set.
-7. Cursor gaps, lease expiry, session invalidation or revocation fail closed.
+7. A revision jump, noninitial feed re-baseline, cursor mismatch or late event
+   with a newer aggregate revision is an explicit continuity gap. It invalidates
+   the affected set, requires full reassembly and prohibits historical-
+   continuity claims across the gap.
+8. Lease expiry, session invalidation or revocation fail closed.
    They make the old set unavailable and require a fresh authority decision;
    they are never guessed through.
-8. A future reassembly result is admissible only to the exact current lease,
+9. A future reassembly result is admissible only to the exact current lease,
    session generation and newest request revision. Earlier asynchronous results
    are rejected as stale generation or superseded request.
-9. Historical selection intersects the authorised temporal window and retention
+10. Historical selection intersects the authorised temporal window and retention
    class. Corrections preserve both the original valid-time claim and the later
    transaction-time knowledge; no record is overwritten in place.
-10. Proofreading recomputes every digest, transition, suppression, coalescence
+11. Proofreading recomputes every digest, transition, suppression, coalescence
     and temporal relation using the same caller-supplied clock.
 
 ## Data, provider, cost and licence posture
@@ -124,7 +133,7 @@ exclude `docs/branding/` and unrelated untracked artifacts.
    state, user-visible content or command evidence.
 6. Irrelevant, foreign-practice, replayed, duplicate, equal/older, expired,
    undeclared and superseded-generation signals remain silent and deterministic.
-7. Cursor gaps, revocation, lease expiry and session-generation change fail
+7. Cursor/revision/ordering gaps, revocation, lease expiry and session-generation change fail
    closed without retaining the old frame set as usable context.
 8. Multiple relevant signals coalesce without losing their ordered cause
    digests; one active set produces at most one outstanding requirement.
@@ -133,9 +142,12 @@ exclude `docs/branding/` and unrelated untracked artifacts.
 10. Historical snapshots prove half-open valid-time and transaction-time,
     correction/supersession lineage, purpose-specific selection and explicit
     `current_truth_authority: false`.
-11. The same-packet proofreader blocks tampering, expiry, state rollback,
+11. Historical queries intersect both `valid_at` and `known_at`; missing
+    coverage is explicit, event occurrence is not treated as valid-time truth,
+    and delivery TTL never defines snapshot retention.
+12. The same-packet proofreader blocks tampering, expiry, state rollback,
     payload smuggling, temporal overlap defects or digest mismatch.
-12. API Spine regressions prove no new API or command surface; static/runtime
+13. API Spine regressions prove no new API or command surface; static/runtime
     counters prove zero provider, network, database, subprocess, filesystem-
     write, product-runtime, listener, command, deployment and protected actions.
 
