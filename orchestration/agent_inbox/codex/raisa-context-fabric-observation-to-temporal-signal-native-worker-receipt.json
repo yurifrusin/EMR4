@@ -99,5 +99,49 @@
   "acceptance_authority_transferred": false,
   "push_performed": false,
   "residual_concerns": [],
+  "correction_records": [
+    {
+      "source_candidate_head": "594715bfd3487515d8cf6f5ace08182c1d74ae64",
+      "sol_admission_decision": "revision_required",
+      "defect": "direct public validators admitted self-consistently resealed substitutions because exact frozen policy, binding, registry, impact, activation, prior-coordinate, observation and admission invariants were enforced only by canonical-packet proofreading",
+      "correction_commit": "3baee204839615967a2ba60200b0a25afd044875",
+      "correction_tree": "d2dde234236a00c44cde650a3c2eb4f28f7b88e3",
+      "repairs": [
+        "exact frozen policy identity version source contract lists limits continuity and authority ceilings",
+        "exact binding identity integration principal authentication scope lists and authority ceilings while preserving revoked and expired decisions",
+        "canonical backend-owned alias registry and impact policy equality blocks coordinated resealing and authority widening",
+        "activation schema identity and frozen plan version are required before synthetic classification",
+        "prior coordinate schema and exact bool list observer and aggregate types fail closed without erasing baseline restart overflow or generation uncertainty decisions",
+        "malformed raw event identity types raise ObservationToSignalViolation rather than leaking TypeError",
+        "public mapping reconstructs the frozen registry impact policy binding prior and observation identity and rejects coordinated resealed cross-link substitutions"
+      ],
+      "tests": {
+        "focused_serial_passed": 84,
+        "inherited_serial_passed": 69,
+        "total_passed": 153,
+        "failed": 0,
+        "warnings": 2,
+        "direct_adversarial_families_added": [
+          "coordinated_registry_or_impact_authority_widening",
+          "policy_identity_scope_list_limit_and_continuity_substitution",
+          "binding_identity_principal_authentication_list_and_authority_substitution",
+          "activation_identity_and_plan_substitution",
+          "prior_coordinate_type_confusion",
+          "raw_event_identity_type_confusion",
+          "public_mapping_registry_impact_alias_and_observation_cross_link_substitution"
+        ]
+      },
+      "deterministic_checks": {
+        "py_compile": "passed",
+        "ruff_check": "passed",
+        "ruff_format_check": "passed",
+        "json_schema_draft_2020_12_validation": "passed",
+        "generated_artifacts_reproduced_byte_for_byte": 3,
+        "diff_check": "passed",
+        "explicit_path_staging_only": true
+      },
+      "boundary_result": "no source database feed watcher listener provider runtime persistence command deployment pages or protected-ref action"
+    }
+  ],
   "decision": "candidate_ready_for_sol_review"
 }
