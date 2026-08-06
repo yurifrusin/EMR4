@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push_task_branch_only_after_patient_free_temporal_weave_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 03820d641c866574c89f47b6d8f8a65579b55344 contains the accepted temporal closeout, Sol acceptance, exact review reconciliation, AER revision 31, continuity update and branded-workspace/atomic-Bureau direction. The final 13-file regression packet passed 199/199 with acceptance generation, Ruff, compileall, JSON and diff checks clean.",
+    "current_authority_allocation": "GPT Sol may publish the accepted bounded task branch. No worker or verifier may push or move protected refs; Gemini supplied review only and the contained DeepSeek transport supplied no candidate.",
+    "git_refs_and_worktree": "After a fresh origin fetch, task HEAD is 03820d641c866574c89f47b6d8f8a65579b55344 and is six commits ahead of origin task e1cfdcf7b1a7e98fe6a0db164dc8cdfcfa925d59. Local/origin master and local/origin handoff/current are all unchanged at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index and tracked worktree are clean; only preserved unrelated untracked files remain.",
+    "live_handover_current_baton": "AGENTS.md names the accepted patient-free temporal weave, exact reviewed source f32004a2f39ac769ba746afe2663813f7c422d8a, Continuity 219 / Compass 201 and the provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal as next under standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "The push target is only origin/codex/ariadne-bernie-davida-parallel-seam. No master, handoff/current, Pages, deployment, production or release action is authorised. No patient/product/protected data, live watcher/runtime, provider call or command is opened. docs/branding and all unrelated untracked files remain preserved and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
