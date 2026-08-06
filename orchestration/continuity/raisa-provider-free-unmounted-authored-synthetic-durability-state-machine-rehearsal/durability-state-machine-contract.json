@@ -1,0 +1,110 @@
+{
+  "schema_version": "emr4.context-fabric.durability-state-machine-contract.v1",
+  "status": "provider_free_unmounted_authored_synthetic_rehearsal_only",
+  "evidence_label": "provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal",
+  "result": "raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass",
+  "parent_result": "raisa_provider_free_unmounted_source_specific_durability_architecture_pass",
+  "source_profile": {
+    "source_system": "emr4-diary",
+    "event_type": "diary.appointment_rescheduled",
+    "event_schema_version": "diary.appointment_rescheduled.v1",
+    "aggregate_class": "APPOINTMENT",
+    "stream_id": "emr4:diary:appointment-rescheduled:v1",
+    "stream_epoch": 1
+  },
+  "frame_types": [
+    "current_diary_projection",
+    "current_waiting_room_projection"
+  ],
+  "atomic_members": [
+    "classified_observation_receipt",
+    "monotonic_invalidation_watermark",
+    "coalesced_reassembly_obligation",
+    "privacy_safe_audit",
+    "positive_checkpoint_advance_or_hold"
+  ],
+  "count_buckets": [
+    "ONE",
+    "TWO_TO_FOUR",
+    "FIVE_PLUS"
+  ],
+  "restart_dispositions": [
+    "RESUME",
+    "REBASE_REQUIRED",
+    "NEW_GENERATION_REQUIRED"
+  ],
+  "key_rotation": {
+    "atomic": true,
+    "strictly_future_position_fenced": true,
+    "historical_positions_preserved": true,
+    "predecessor_available_through_dependency_and_safety_overlap": true,
+    "try_all_keys": false,
+    "key_material_present": false
+  },
+  "retention": {
+    "complete_state_census_required": true,
+    "independent_census_and_registry_digest_required": true,
+    "minimum_non_consumed_checkpoint_controls": true,
+    "omission_or_duplication_denied": true,
+    "wall_clock_or_event_ttl_used": false,
+    "deletion_effect": false
+  },
+  "scenario_ids": [
+    "relevant_selective_retirement",
+    "exact_redelivery",
+    "irrelevant_contiguous",
+    "coalesced_later_cause",
+    "contiguous_full_invalidation",
+    "coverage_gap",
+    "same_position_mismatch",
+    "digest_reuse",
+    "rollback_receipt",
+    "rollback_watermark",
+    "rollback_obligation",
+    "rollback_audit",
+    "rollback_checkpoint",
+    "restart_resume",
+    "restart_gap",
+    "restart_corrupt_state",
+    "key_boundary_before",
+    "key_boundary_successor",
+    "key_rotation_commit",
+    "key_rotation_retroactive",
+    "key_rotation_underlap",
+    "key_rotation_missing_predecessor",
+    "key_schedule_gap",
+    "key_schedule_history_change",
+    "retention_eligible",
+    "retention_minimum_checkpoint",
+    "retention_omitted_generation",
+    "retention_duplicate_generation",
+    "retention_recovery_pin",
+    "retention_audit_pin",
+    "retention_key_overlap",
+    "retention_safety_grace",
+    "effect_ceilings"
+  ],
+  "effect_ceilings": {
+    "database_or_source_contact": false,
+    "migration_or_database_object": false,
+    "operational_checkpoint_persisted": false,
+    "product_read": false,
+    "patient_or_product_data": false,
+    "provider_called": false,
+    "command_executed": false,
+    "runtime_wired": false,
+    "deployment_or_release": false,
+    "pages_rebuilt": false,
+    "protected_ref_moved": false
+  },
+  "later_live_gates": [
+    "postgresql_schema_and_migration",
+    "transaction_isolation_and_locking",
+    "rls_roles_and_credentials",
+    "database_backed_crash_recovery",
+    "operational_retention_and_monitoring",
+    "live_source_mounting",
+    "product_data_privacy_assessment",
+    "runtime_deployment_and_production"
+  ]
+}

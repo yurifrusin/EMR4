@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.native-worker-containment-receipt.v1",
+  "status": "contained_no_candidate",
+  "attempt_id": "raisa-context-fabric-durability-state-machine-native-implementation-001",
+  "starting_head": "24b1cac8748521a817a4c0bc44077c5b7518d4af",
+  "ending_head": "24b1cac8748521a817a4c0bc44077c5b7518d4af",
+  "owned_artifacts_written": 0,
+  "tracked_files_changed_by_worker": 0,
+  "worker_claim_received": false,
+  "self_acceptance_received": false,
+  "provider_or_model_calls": 0,
+  "database_source_runtime_or_command_effects": 0,
+  "protected_refs_moved": false,
+  "disposition": "The orchestrator cancelled the slow no-artifact lane without admitting a candidate and completed the frozen implementation under Sol ownership.",
+  "incident_boundary": "No deadline or output invariant had been breached and no candidate, claim, scope breach, transport failure or repository mutation existed; this is preserved containment provenance, not an agent-error attribution."
+}

@@ -1,0 +1,2003 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/durability-state-machine-contract.schema.json",
+  "title": "Closed durability state-machine rehearsal contract and evidence",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "status",
+        "evidence_label",
+        "result",
+        "parent_result",
+        "source_profile",
+        "frame_types",
+        "atomic_members",
+        "count_buckets",
+        "restart_dispositions",
+        "key_rotation",
+        "retention",
+        "scenario_ids",
+        "effect_ceilings",
+        "later_live_gates"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "emr4.context-fabric.durability-state-machine-contract.v1"
+        },
+        "status": {
+          "const": "provider_free_unmounted_authored_synthetic_rehearsal_only"
+        },
+        "evidence_label": {
+          "const": "provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal"
+        },
+        "result": {
+          "const": "raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass"
+        },
+        "parent_result": {
+          "const": "raisa_provider_free_unmounted_source_specific_durability_architecture_pass"
+        },
+        "source_profile": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_system",
+            "event_type",
+            "event_schema_version",
+            "aggregate_class",
+            "stream_id",
+            "stream_epoch"
+          ],
+          "properties": {
+            "source_system": {
+              "const": "emr4-diary"
+            },
+            "event_type": {
+              "const": "diary.appointment_rescheduled"
+            },
+            "event_schema_version": {
+              "const": "diary.appointment_rescheduled.v1"
+            },
+            "aggregate_class": {
+              "const": "APPOINTMENT"
+            },
+            "stream_id": {
+              "const": "emr4:diary:appointment-rescheduled:v1"
+            },
+            "stream_epoch": {
+              "const": 1
+            }
+          }
+        },
+        "frame_types": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "current_diary_projection"
+            },
+            {
+              "const": "current_waiting_room_projection"
+            }
+          ],
+          "items": false
+        },
+        "atomic_members": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "prefixItems": [
+            {
+              "const": "classified_observation_receipt"
+            },
+            {
+              "const": "monotonic_invalidation_watermark"
+            },
+            {
+              "const": "coalesced_reassembly_obligation"
+            },
+            {
+              "const": "privacy_safe_audit"
+            },
+            {
+              "const": "positive_checkpoint_advance_or_hold"
+            }
+          ],
+          "items": false
+        },
+        "count_buckets": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "const": "ONE"
+            },
+            {
+              "const": "TWO_TO_FOUR"
+            },
+            {
+              "const": "FIVE_PLUS"
+            }
+          ],
+          "items": false
+        },
+        "restart_dispositions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "const": "RESUME"
+            },
+            {
+              "const": "REBASE_REQUIRED"
+            },
+            {
+              "const": "NEW_GENERATION_REQUIRED"
+            }
+          ],
+          "items": false
+        },
+        "key_rotation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "atomic",
+            "strictly_future_position_fenced",
+            "historical_positions_preserved",
+            "predecessor_available_through_dependency_and_safety_overlap",
+            "try_all_keys",
+            "key_material_present"
+          ],
+          "properties": {
+            "atomic": {
+              "const": true
+            },
+            "strictly_future_position_fenced": {
+              "const": true
+            },
+            "historical_positions_preserved": {
+              "const": true
+            },
+            "predecessor_available_through_dependency_and_safety_overlap": {
+              "const": true
+            },
+            "try_all_keys": {
+              "const": false
+            },
+            "key_material_present": {
+              "const": false
+            }
+          }
+        },
+        "retention": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "complete_state_census_required",
+            "independent_census_and_registry_digest_required",
+            "minimum_non_consumed_checkpoint_controls",
+            "omission_or_duplication_denied",
+            "wall_clock_or_event_ttl_used",
+            "deletion_effect"
+          ],
+          "properties": {
+            "complete_state_census_required": {
+              "const": true
+            },
+            "independent_census_and_registry_digest_required": {
+              "const": true
+            },
+            "minimum_non_consumed_checkpoint_controls": {
+              "const": true
+            },
+            "omission_or_duplication_denied": {
+              "const": true
+            },
+            "wall_clock_or_event_ttl_used": {
+              "const": false
+            },
+            "deletion_effect": {
+              "const": false
+            }
+          }
+        },
+        "scenario_ids": {
+          "type": "array",
+          "minItems": 33,
+          "maxItems": 33,
+          "prefixItems": [
+            {
+              "const": "relevant_selective_retirement"
+            },
+            {
+              "const": "exact_redelivery"
+            },
+            {
+              "const": "irrelevant_contiguous"
+            },
+            {
+              "const": "coalesced_later_cause"
+            },
+            {
+              "const": "contiguous_full_invalidation"
+            },
+            {
+              "const": "coverage_gap"
+            },
+            {
+              "const": "same_position_mismatch"
+            },
+            {
+              "const": "digest_reuse"
+            },
+            {
+              "const": "rollback_receipt"
+            },
+            {
+              "const": "rollback_watermark"
+            },
+            {
+              "const": "rollback_obligation"
+            },
+            {
+              "const": "rollback_audit"
+            },
+            {
+              "const": "rollback_checkpoint"
+            },
+            {
+              "const": "restart_resume"
+            },
+            {
+              "const": "restart_gap"
+            },
+            {
+              "const": "restart_corrupt_state"
+            },
+            {
+              "const": "key_boundary_before"
+            },
+            {
+              "const": "key_boundary_successor"
+            },
+            {
+              "const": "key_rotation_commit"
+            },
+            {
+              "const": "key_rotation_retroactive"
+            },
+            {
+              "const": "key_rotation_underlap"
+            },
+            {
+              "const": "key_rotation_missing_predecessor"
+            },
+            {
+              "const": "key_schedule_gap"
+            },
+            {
+              "const": "key_schedule_history_change"
+            },
+            {
+              "const": "retention_eligible"
+            },
+            {
+              "const": "retention_minimum_checkpoint"
+            },
+            {
+              "const": "retention_omitted_generation"
+            },
+            {
+              "const": "retention_duplicate_generation"
+            },
+            {
+              "const": "retention_recovery_pin"
+            },
+            {
+              "const": "retention_audit_pin"
+            },
+            {
+              "const": "retention_key_overlap"
+            },
+            {
+              "const": "retention_safety_grace"
+            },
+            {
+              "const": "effect_ceilings"
+            }
+          ],
+          "items": false
+        },
+        "effect_ceilings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "database_or_source_contact",
+            "migration_or_database_object",
+            "operational_checkpoint_persisted",
+            "product_read",
+            "patient_or_product_data",
+            "provider_called",
+            "command_executed",
+            "runtime_wired",
+            "deployment_or_release",
+            "pages_rebuilt",
+            "protected_ref_moved"
+          ],
+          "properties": {
+            "database_or_source_contact": {
+              "const": false
+            },
+            "migration_or_database_object": {
+              "const": false
+            },
+            "operational_checkpoint_persisted": {
+              "const": false
+            },
+            "product_read": {
+              "const": false
+            },
+            "patient_or_product_data": {
+              "const": false
+            },
+            "provider_called": {
+              "const": false
+            },
+            "command_executed": {
+              "const": false
+            },
+            "runtime_wired": {
+              "const": false
+            },
+            "deployment_or_release": {
+              "const": false
+            },
+            "pages_rebuilt": {
+              "const": false
+            },
+            "protected_ref_moved": {
+              "const": false
+            }
+          }
+        },
+        "later_live_gates": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "prefixItems": [
+            {
+              "const": "postgresql_schema_and_migration"
+            },
+            {
+              "const": "transaction_isolation_and_locking"
+            },
+            {
+              "const": "rls_roles_and_credentials"
+            },
+            {
+              "const": "database_backed_crash_recovery"
+            },
+            {
+              "const": "operational_retention_and_monitoring"
+            },
+            {
+              "const": "live_source_mounting"
+            },
+            {
+              "const": "product_data_privacy_assessment"
+            },
+            {
+              "const": "runtime_deployment_and_production"
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "evidence_label",
+        "result",
+        "data_class",
+        "contract_digest",
+        "case_count",
+        "passed_case_count",
+        "cases",
+        "effect_ceilings",
+        "claim_boundary"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "emr4.context-fabric.durability-state-machine-rehearsal.v1"
+        },
+        "evidence_label": {
+          "const": "provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal"
+        },
+        "result": {
+          "const": "raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass"
+        },
+        "data_class": {
+          "const": "newly_authored_synthetic_opaque_control_metadata"
+        },
+        "contract_digest": {
+          "const": "sha256:e5e3c9f727233b147d75bcdd36593aa3c2c9fc665ae31eae608dd9ae61780b60"
+        },
+        "case_count": {
+          "const": 33
+        },
+        "passed_case_count": {
+          "const": 33
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 33,
+          "maxItems": 33,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "relevant_selective_retirement"
+                },
+                "disposition": {
+                  "const": "ADVANCE_AFTER_ATOMIC_COMMIT"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:2bd8b4981428dd3cb4c3646fb04fd0c629f70772307ce060c15088cfe599fca4"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "SELECTIVE_WATERMARK"
+                    },
+                    {
+                      "const": "IRREVERSIBLE_RETIREMENT"
+                    },
+                    {
+                      "const": "ONE_OBLIGATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "exact_redelivery"
+                },
+                "disposition": {
+                  "const": "EXACT_REDELIVERY"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:2bd8b4981428dd3cb4c3646fb04fd0c629f70772307ce060c15088cfe599fca4"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "CONSTANT_TIME_DIGEST"
+                    },
+                    {
+                      "const": "IDENTICAL_STATE"
+                    },
+                    {
+                      "const": "EXISTING_RECEIPT"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "irrelevant_contiguous"
+                },
+                "disposition": {
+                  "const": "ADVANCE_AFTER_RECEIPT_AND_AUDIT"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:e414a87fd87a834c891899432f43356d7603570e16b1f75f6d04db6b74a4421f"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "NO_INVALIDATION"
+                    },
+                    {
+                      "const": "RECEIPT_RECORDED"
+                    },
+                    {
+                      "const": "AUDIT_RECORDED"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "coalesced_later_cause"
+                },
+                "disposition": {
+                  "const": "ADVANCE_AFTER_ATOMIC_COMMIT"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:e27c6135ae774c732a7938e1fd1be67773e79649a027813f950c664b504eeb5e"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "ONE_OBLIGATION"
+                    },
+                    {
+                      "const": "ROLLING_DIGEST"
+                    },
+                    {
+                      "const": "TWO_TO_FOUR"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "contiguous_full_invalidation"
+                },
+                "disposition": {
+                  "const": "ADVANCE_AFTER_ATOMIC_COMMIT"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:d743efa0a1bbc41e868d468a6d3b41f33edd3d7aa8c5c838c99d24c0ade42d83"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "BOTH_WATERMARKS"
+                    },
+                    {
+                      "const": "ALL_FRAMES_RETIRED"
+                    },
+                    {
+                      "const": "CHECKPOINT_ADVANCED"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "coverage_gap"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:351c1adf6e3531ad841c42b7d40e317fe3dc86b42c7d9223c704b97f7c9bb966"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "CHECKPOINT_HELD"
+                    },
+                    {
+                      "const": "FULL_INVALIDATION"
+                    },
+                    {
+                      "const": "NO_SKIPPED_POSITION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "same_position_mismatch"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:f4e3e269e36ff244a35e055b3b12cbe697c8456143e7001184cdbef02e1abac6"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "CHECKPOINT_HELD"
+                    },
+                    {
+                      "const": "IDENTITY_CORRUPTION"
+                    },
+                    {
+                      "const": "FULL_INVALIDATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "digest_reuse"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:b25b4afd32c707d6d6d3b5917814178f4b7cfd4533f4e88f9577e9bdf5122199"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "CHECKPOINT_HELD"
+                    },
+                    {
+                      "const": "DIGEST_REUSE_CORRUPTION"
+                    },
+                    {
+                      "const": "FULL_INVALIDATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "rollback_receipt"
+                },
+                "disposition": {
+                  "const": "ROLLED_BACK"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "ORIGINAL_STATE"
+                    },
+                    {
+                      "const": "ZERO_RESIDUE"
+                    },
+                    {
+                      "const": "FAULT_RECEIPT"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "rollback_watermark"
+                },
+                "disposition": {
+                  "const": "ROLLED_BACK"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "ORIGINAL_STATE"
+                    },
+                    {
+                      "const": "ZERO_RESIDUE"
+                    },
+                    {
+                      "const": "FAULT_WATERMARK"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "rollback_obligation"
+                },
+                "disposition": {
+                  "const": "ROLLED_BACK"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "ORIGINAL_STATE"
+                    },
+                    {
+                      "const": "ZERO_RESIDUE"
+                    },
+                    {
+                      "const": "FAULT_OBLIGATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "rollback_audit"
+                },
+                "disposition": {
+                  "const": "ROLLED_BACK"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "ORIGINAL_STATE"
+                    },
+                    {
+                      "const": "ZERO_RESIDUE"
+                    },
+                    {
+                      "const": "FAULT_AUDIT"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "rollback_checkpoint"
+                },
+                "disposition": {
+                  "const": "ROLLED_BACK"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "ORIGINAL_STATE"
+                    },
+                    {
+                      "const": "ZERO_RESIDUE"
+                    },
+                    {
+                      "const": "FAULT_CHECKPOINT"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "restart_resume"
+                },
+                "disposition": {
+                  "const": "RESUME"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:2bd8b4981428dd3cb4c3646fb04fd0c629f70772307ce060c15088cfe599fca4"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "INTEGRITY_VALID"
+                    },
+                    {
+                      "const": "ANCHOR_EXACT"
+                    },
+                    {
+                      "const": "NEXT_ROW_EXACT"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "restart_gap"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:882bae22e55c8f45f246c27cf27b53c75349b03a359702559ed8e5a4bb614cab"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "ANCHOR_EXACT"
+                    },
+                    {
+                      "const": "CHECKPOINT_HELD"
+                    },
+                    {
+                      "const": "FULL_INVALIDATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "restart_corrupt_state"
+                },
+                "disposition": {
+                  "const": "NEW_GENERATION_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:3689b48abafaf63e40ab27bec916f2bf7f8180f6173b6c809379d83cd9c9f8ef"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "NO_SUCCESSOR_STATE"
+                    },
+                    {
+                      "const": "NO_CANDIDATE_COORDINATE"
+                    },
+                    {
+                      "const": "INTEGRITY_FAILED"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "key_boundary_before"
+                },
+                "disposition": {
+                  "const": "key:alpha"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:b989752e31c5a92e69bbdb7b7d3675f9a42d24a53d29b8d145a295ab9101e6be"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "SOLE_KEY"
+                    },
+                    {
+                      "const": "LAST_PRE_ROTATION_POSITION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "key_boundary_successor"
+                },
+                "disposition": {
+                  "const": "key:beta"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:b989752e31c5a92e69bbdb7b7d3675f9a42d24a53d29b8d145a295ab9101e6be"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "SOLE_KEY"
+                    },
+                    {
+                      "const": "FIRST_SUCCESSOR_POSITION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "key_rotation_commit"
+                },
+                "disposition": {
+                  "const": "ROTATION_COMMITTED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:6ea03916fc93366343aa6ddb6a5a3968778ec23e64fcdf1b115161968cb9ecc9"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "ATOMIC_ROTATION"
+                    },
+                    {
+                      "const": "FUTURE_FENCE"
+                    },
+                    {
+                      "const": "PREDECESSOR_OVERLAP"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "key_rotation_retroactive"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:ea4f862bf56a6d617e873041e9500543d75cb742e544a83534f1c3b5c4c7d968"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "RETROACTIVE_REJECTED"
+                    },
+                    {
+                      "const": "FULL_INVALIDATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "key_rotation_underlap"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:e9a741c32a68f6a3130f1e246d3861cbf1d924014a3cc370c29309337aa593c3"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "UNDERLAP_REJECTED"
+                    },
+                    {
+                      "const": "FULL_INVALIDATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "key_rotation_missing_predecessor"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:e9a741c32a68f6a3130f1e246d3861cbf1d924014a3cc370c29309337aa593c3"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "MISSING_KEY_REJECTED"
+                    },
+                    {
+                      "const": "NO_TRY_ALL_KEYS"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "key_schedule_gap"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:e9a741c32a68f6a3130f1e246d3861cbf1d924014a3cc370c29309337aa593c3"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "GAP_REJECTED"
+                    },
+                    {
+                      "const": "FULL_INVALIDATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "key_schedule_history_change"
+                },
+                "disposition": {
+                  "const": "REBASE_REQUIRED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:e9a741c32a68f6a3130f1e246d3861cbf1d924014a3cc370c29309337aa593c3"
+                },
+                "mutation_committed": {
+                  "const": true
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "HISTORY_CHANGE_REJECTED"
+                    },
+                    {
+                      "const": "FULL_INVALIDATION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "retention_eligible"
+                },
+                "disposition": {
+                  "const": "ELIGIBLE"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "prefixItems": [
+                    {
+                      "const": "COMPLETE_CENSUS"
+                    },
+                    {
+                      "const": "MINIMUM_CHECKPOINT"
+                    },
+                    {
+                      "const": "INERT_DECISION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "retention_minimum_checkpoint"
+                },
+                "disposition": {
+                  "const": "DENIED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "SLOWEST_GENERATION_CONTROLS"
+                    },
+                    {
+                      "const": "INERT_DECISION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "retention_omitted_generation"
+                },
+                "disposition": {
+                  "const": "DENIED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:0f8aa2d6a79ce213f4f35b9844780ef08b507542d8a1244ccf650906442cbfdb"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "CENSUS_DIGEST_MISMATCH"
+                    },
+                    {
+                      "const": "OMISSION_REJECTED"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "retention_duplicate_generation"
+                },
+                "disposition": {
+                  "const": "DENIED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:b56fab2775dee60f92b88af6bbfccd0327acf44084bcda9543efb392239edcd4"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "CENSUS_INTEGRITY_FAILED"
+                    },
+                    {
+                      "const": "DUPLICATE_REJECTED"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "retention_recovery_pin"
+                },
+                "disposition": {
+                  "const": "DENIED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "RECOVERY_PIN"
+                    },
+                    {
+                      "const": "INERT_DECISION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "retention_audit_pin"
+                },
+                "disposition": {
+                  "const": "DENIED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "AUDIT_PIN"
+                    },
+                    {
+                      "const": "INERT_DECISION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "retention_key_overlap"
+                },
+                "disposition": {
+                  "const": "DENIED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "KEY_OVERLAP_OPEN"
+                    },
+                    {
+                      "const": "INERT_DECISION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "retention_safety_grace"
+                },
+                "disposition": {
+                  "const": "DENIED"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "SAFETY_GRACE_PENDING"
+                    },
+                    {
+                      "const": "INERT_DECISION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "disposition",
+                "passed",
+                "state_digest",
+                "mutation_committed",
+                "proof_codes"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "effect_ceilings"
+                },
+                "disposition": {
+                  "const": "ALL_FALSE"
+                },
+                "passed": {
+                  "const": true
+                },
+                "state_digest": {
+                  "const": "sha256:69ddb79778fa7c3d0654fa45db1e1e750cbd6f811fa0d805ffa9a669f9c7e896"
+                },
+                "mutation_committed": {
+                  "const": false
+                },
+                "proof_codes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "NO_LIVE_EFFECT"
+                    },
+                    {
+                      "const": "NO_AUTHORITY_EXPANSION"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            }
+          ],
+          "items": false
+        },
+        "effect_ceilings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "database_or_source_contact",
+            "migration_or_database_object",
+            "operational_checkpoint_persisted",
+            "product_read",
+            "patient_or_product_data",
+            "provider_called",
+            "command_executed",
+            "runtime_wired",
+            "deployment_or_release",
+            "pages_rebuilt",
+            "protected_ref_moved"
+          ],
+          "properties": {
+            "database_or_source_contact": {
+              "const": false
+            },
+            "migration_or_database_object": {
+              "const": false
+            },
+            "operational_checkpoint_persisted": {
+              "const": false
+            },
+            "product_read": {
+              "const": false
+            },
+            "patient_or_product_data": {
+              "const": false
+            },
+            "provider_called": {
+              "const": false
+            },
+            "command_executed": {
+              "const": false
+            },
+            "runtime_wired": {
+              "const": false
+            },
+            "deployment_or_release": {
+              "const": false
+            },
+            "pages_rebuilt": {
+              "const": false
+            },
+            "protected_ref_moved": {
+              "const": false
+            }
+          }
+        },
+        "claim_boundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "pure_in_memory_state_transitions_only",
+            "database_or_migration_proved",
+            "source_delivery_or_crash_recovery_proved",
+            "patient_privacy_or_product_read_proved",
+            "provider_command_runtime_or_production_proved"
+          ],
+          "properties": {
+            "pure_in_memory_state_transitions_only": {
+              "const": true
+            },
+            "database_or_migration_proved": {
+              "const": false
+            },
+            "source_delivery_or_crash_recovery_proved": {
+              "const": false
+            },
+            "patient_privacy_or_product_read_proved": {
+              "const": false
+            },
+            "provider_command_runtime_or_production_proved": {
+              "const": false
+            }
+          }
+        }
+      }
+    }
+  ]
+}

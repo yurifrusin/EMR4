@@ -1,0 +1,412 @@
+{
+  "schema_version": "emr4.context-fabric.durability-state-machine-rehearsal.v1",
+  "evidence_label": "provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal",
+  "result": "raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass",
+  "data_class": "newly_authored_synthetic_opaque_control_metadata",
+  "contract_digest": "sha256:e5e3c9f727233b147d75bcdd36593aa3c2c9fc665ae31eae608dd9ae61780b60",
+  "case_count": 33,
+  "passed_case_count": 33,
+  "cases": [
+    {
+      "case_id": "relevant_selective_retirement",
+      "disposition": "ADVANCE_AFTER_ATOMIC_COMMIT",
+      "passed": true,
+      "state_digest": "sha256:2bd8b4981428dd3cb4c3646fb04fd0c629f70772307ce060c15088cfe599fca4",
+      "mutation_committed": true,
+      "proof_codes": [
+        "SELECTIVE_WATERMARK",
+        "IRREVERSIBLE_RETIREMENT",
+        "ONE_OBLIGATION"
+      ]
+    },
+    {
+      "case_id": "exact_redelivery",
+      "disposition": "EXACT_REDELIVERY",
+      "passed": true,
+      "state_digest": "sha256:2bd8b4981428dd3cb4c3646fb04fd0c629f70772307ce060c15088cfe599fca4",
+      "mutation_committed": false,
+      "proof_codes": [
+        "CONSTANT_TIME_DIGEST",
+        "IDENTICAL_STATE",
+        "EXISTING_RECEIPT"
+      ]
+    },
+    {
+      "case_id": "irrelevant_contiguous",
+      "disposition": "ADVANCE_AFTER_RECEIPT_AND_AUDIT",
+      "passed": true,
+      "state_digest": "sha256:e414a87fd87a834c891899432f43356d7603570e16b1f75f6d04db6b74a4421f",
+      "mutation_committed": true,
+      "proof_codes": [
+        "NO_INVALIDATION",
+        "RECEIPT_RECORDED",
+        "AUDIT_RECORDED"
+      ]
+    },
+    {
+      "case_id": "coalesced_later_cause",
+      "disposition": "ADVANCE_AFTER_ATOMIC_COMMIT",
+      "passed": true,
+      "state_digest": "sha256:e27c6135ae774c732a7938e1fd1be67773e79649a027813f950c664b504eeb5e",
+      "mutation_committed": true,
+      "proof_codes": [
+        "ONE_OBLIGATION",
+        "ROLLING_DIGEST",
+        "TWO_TO_FOUR"
+      ]
+    },
+    {
+      "case_id": "contiguous_full_invalidation",
+      "disposition": "ADVANCE_AFTER_ATOMIC_COMMIT",
+      "passed": true,
+      "state_digest": "sha256:d743efa0a1bbc41e868d468a6d3b41f33edd3d7aa8c5c838c99d24c0ade42d83",
+      "mutation_committed": true,
+      "proof_codes": [
+        "BOTH_WATERMARKS",
+        "ALL_FRAMES_RETIRED",
+        "CHECKPOINT_ADVANCED"
+      ]
+    },
+    {
+      "case_id": "coverage_gap",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:351c1adf6e3531ad841c42b7d40e317fe3dc86b42c7d9223c704b97f7c9bb966",
+      "mutation_committed": true,
+      "proof_codes": [
+        "CHECKPOINT_HELD",
+        "FULL_INVALIDATION",
+        "NO_SKIPPED_POSITION"
+      ]
+    },
+    {
+      "case_id": "same_position_mismatch",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:f4e3e269e36ff244a35e055b3b12cbe697c8456143e7001184cdbef02e1abac6",
+      "mutation_committed": true,
+      "proof_codes": [
+        "CHECKPOINT_HELD",
+        "IDENTITY_CORRUPTION",
+        "FULL_INVALIDATION"
+      ]
+    },
+    {
+      "case_id": "digest_reuse",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:b25b4afd32c707d6d6d3b5917814178f4b7cfd4533f4e88f9577e9bdf5122199",
+      "mutation_committed": true,
+      "proof_codes": [
+        "CHECKPOINT_HELD",
+        "DIGEST_REUSE_CORRUPTION",
+        "FULL_INVALIDATION"
+      ]
+    },
+    {
+      "case_id": "rollback_receipt",
+      "disposition": "ROLLED_BACK",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "ORIGINAL_STATE",
+        "ZERO_RESIDUE",
+        "FAULT_RECEIPT"
+      ]
+    },
+    {
+      "case_id": "rollback_watermark",
+      "disposition": "ROLLED_BACK",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "ORIGINAL_STATE",
+        "ZERO_RESIDUE",
+        "FAULT_WATERMARK"
+      ]
+    },
+    {
+      "case_id": "rollback_obligation",
+      "disposition": "ROLLED_BACK",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "ORIGINAL_STATE",
+        "ZERO_RESIDUE",
+        "FAULT_OBLIGATION"
+      ]
+    },
+    {
+      "case_id": "rollback_audit",
+      "disposition": "ROLLED_BACK",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "ORIGINAL_STATE",
+        "ZERO_RESIDUE",
+        "FAULT_AUDIT"
+      ]
+    },
+    {
+      "case_id": "rollback_checkpoint",
+      "disposition": "ROLLED_BACK",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "ORIGINAL_STATE",
+        "ZERO_RESIDUE",
+        "FAULT_CHECKPOINT"
+      ]
+    },
+    {
+      "case_id": "restart_resume",
+      "disposition": "RESUME",
+      "passed": true,
+      "state_digest": "sha256:2bd8b4981428dd3cb4c3646fb04fd0c629f70772307ce060c15088cfe599fca4",
+      "mutation_committed": false,
+      "proof_codes": [
+        "INTEGRITY_VALID",
+        "ANCHOR_EXACT",
+        "NEXT_ROW_EXACT"
+      ]
+    },
+    {
+      "case_id": "restart_gap",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:882bae22e55c8f45f246c27cf27b53c75349b03a359702559ed8e5a4bb614cab",
+      "mutation_committed": true,
+      "proof_codes": [
+        "ANCHOR_EXACT",
+        "CHECKPOINT_HELD",
+        "FULL_INVALIDATION"
+      ]
+    },
+    {
+      "case_id": "restart_corrupt_state",
+      "disposition": "NEW_GENERATION_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:3689b48abafaf63e40ab27bec916f2bf7f8180f6173b6c809379d83cd9c9f8ef",
+      "mutation_committed": false,
+      "proof_codes": [
+        "NO_SUCCESSOR_STATE",
+        "NO_CANDIDATE_COORDINATE",
+        "INTEGRITY_FAILED"
+      ]
+    },
+    {
+      "case_id": "key_boundary_before",
+      "disposition": "key:alpha",
+      "passed": true,
+      "state_digest": "sha256:b989752e31c5a92e69bbdb7b7d3675f9a42d24a53d29b8d145a295ab9101e6be",
+      "mutation_committed": false,
+      "proof_codes": [
+        "SOLE_KEY",
+        "LAST_PRE_ROTATION_POSITION"
+      ]
+    },
+    {
+      "case_id": "key_boundary_successor",
+      "disposition": "key:beta",
+      "passed": true,
+      "state_digest": "sha256:b989752e31c5a92e69bbdb7b7d3675f9a42d24a53d29b8d145a295ab9101e6be",
+      "mutation_committed": false,
+      "proof_codes": [
+        "SOLE_KEY",
+        "FIRST_SUCCESSOR_POSITION"
+      ]
+    },
+    {
+      "case_id": "key_rotation_commit",
+      "disposition": "ROTATION_COMMITTED",
+      "passed": true,
+      "state_digest": "sha256:6ea03916fc93366343aa6ddb6a5a3968778ec23e64fcdf1b115161968cb9ecc9",
+      "mutation_committed": true,
+      "proof_codes": [
+        "ATOMIC_ROTATION",
+        "FUTURE_FENCE",
+        "PREDECESSOR_OVERLAP"
+      ]
+    },
+    {
+      "case_id": "key_rotation_retroactive",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:ea4f862bf56a6d617e873041e9500543d75cb742e544a83534f1c3b5c4c7d968",
+      "mutation_committed": true,
+      "proof_codes": [
+        "RETROACTIVE_REJECTED",
+        "FULL_INVALIDATION"
+      ]
+    },
+    {
+      "case_id": "key_rotation_underlap",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:e9a741c32a68f6a3130f1e246d3861cbf1d924014a3cc370c29309337aa593c3",
+      "mutation_committed": true,
+      "proof_codes": [
+        "UNDERLAP_REJECTED",
+        "FULL_INVALIDATION"
+      ]
+    },
+    {
+      "case_id": "key_rotation_missing_predecessor",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:e9a741c32a68f6a3130f1e246d3861cbf1d924014a3cc370c29309337aa593c3",
+      "mutation_committed": true,
+      "proof_codes": [
+        "MISSING_KEY_REJECTED",
+        "NO_TRY_ALL_KEYS"
+      ]
+    },
+    {
+      "case_id": "key_schedule_gap",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:e9a741c32a68f6a3130f1e246d3861cbf1d924014a3cc370c29309337aa593c3",
+      "mutation_committed": true,
+      "proof_codes": [
+        "GAP_REJECTED",
+        "FULL_INVALIDATION"
+      ]
+    },
+    {
+      "case_id": "key_schedule_history_change",
+      "disposition": "REBASE_REQUIRED",
+      "passed": true,
+      "state_digest": "sha256:e9a741c32a68f6a3130f1e246d3861cbf1d924014a3cc370c29309337aa593c3",
+      "mutation_committed": true,
+      "proof_codes": [
+        "HISTORY_CHANGE_REJECTED",
+        "FULL_INVALIDATION"
+      ]
+    },
+    {
+      "case_id": "retention_eligible",
+      "disposition": "ELIGIBLE",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "COMPLETE_CENSUS",
+        "MINIMUM_CHECKPOINT",
+        "INERT_DECISION"
+      ]
+    },
+    {
+      "case_id": "retention_minimum_checkpoint",
+      "disposition": "DENIED",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "SLOWEST_GENERATION_CONTROLS",
+        "INERT_DECISION"
+      ]
+    },
+    {
+      "case_id": "retention_omitted_generation",
+      "disposition": "DENIED",
+      "passed": true,
+      "state_digest": "sha256:0f8aa2d6a79ce213f4f35b9844780ef08b507542d8a1244ccf650906442cbfdb",
+      "mutation_committed": false,
+      "proof_codes": [
+        "CENSUS_DIGEST_MISMATCH",
+        "OMISSION_REJECTED"
+      ]
+    },
+    {
+      "case_id": "retention_duplicate_generation",
+      "disposition": "DENIED",
+      "passed": true,
+      "state_digest": "sha256:b56fab2775dee60f92b88af6bbfccd0327acf44084bcda9543efb392239edcd4",
+      "mutation_committed": false,
+      "proof_codes": [
+        "CENSUS_INTEGRITY_FAILED",
+        "DUPLICATE_REJECTED"
+      ]
+    },
+    {
+      "case_id": "retention_recovery_pin",
+      "disposition": "DENIED",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "RECOVERY_PIN",
+        "INERT_DECISION"
+      ]
+    },
+    {
+      "case_id": "retention_audit_pin",
+      "disposition": "DENIED",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "AUDIT_PIN",
+        "INERT_DECISION"
+      ]
+    },
+    {
+      "case_id": "retention_key_overlap",
+      "disposition": "DENIED",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "KEY_OVERLAP_OPEN",
+        "INERT_DECISION"
+      ]
+    },
+    {
+      "case_id": "retention_safety_grace",
+      "disposition": "DENIED",
+      "passed": true,
+      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "mutation_committed": false,
+      "proof_codes": [
+        "SAFETY_GRACE_PENDING",
+        "INERT_DECISION"
+      ]
+    },
+    {
+      "case_id": "effect_ceilings",
+      "disposition": "ALL_FALSE",
+      "passed": true,
+      "state_digest": "sha256:69ddb79778fa7c3d0654fa45db1e1e750cbd6f811fa0d805ffa9a669f9c7e896",
+      "mutation_committed": false,
+      "proof_codes": [
+        "NO_LIVE_EFFECT",
+        "NO_AUTHORITY_EXPANSION"
+      ]
+    }
+  ],
+  "effect_ceilings": {
+    "database_or_source_contact": false,
+    "migration_or_database_object": false,
+    "operational_checkpoint_persisted": false,
+    "product_read": false,
+    "patient_or_product_data": false,
+    "provider_called": false,
+    "command_executed": false,
+    "runtime_wired": false,
+    "deployment_or_release": false,
+    "pages_rebuilt": false,
+    "protected_ref_moved": false
+  },
+  "claim_boundary": {
+    "pure_in_memory_state_transitions_only": true,
+    "database_or_migration_proved": false,
+    "source_delivery_or_crash_recovery_proved": false,
+    "patient_privacy_or_product_read_proved": false,
+    "provider_command_runtime_or_production_proved": false
+  }
+}
