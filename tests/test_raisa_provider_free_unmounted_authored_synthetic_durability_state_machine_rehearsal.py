@@ -308,6 +308,100 @@ def test_resealed_audit_chain_and_receipt_links_are_rejected(mutation: str) -> N
     assert not verify_state(resealed)
 
 
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        "joint_no_intersection",
+        "joint_wrong_disposition",
+        "audit_schedule_digest",
+        "audit_key_id",
+        "audit_predecessor",
+        "audit_lifecycle",
+        "prefix_audit_deleted",
+        "state_lifecycle_inflated",
+        "frame_order",
+        "obligation_semantics",
+    ),
+)
+def test_resealed_semantic_effect_and_lifecycle_forgeries_are_rejected(
+    mutation: str,
+) -> None:
+    state = build_initial_state()
+    state = transition(state, candidate_for(state, position=5)).state
+    receipt = state.receipts[-1]
+    audit = state.audits[-1]
+
+    if mutation == "joint_no_intersection":
+        forged_receipt = replace(
+            receipt,
+            decision="CONTIGUOUS_NO_INTERSECTION",
+            reason="NO_INTERSECTION",
+            affected_frame_types=(),
+            checkpoint_disposition="ADVANCE_AFTER_RECEIPT_AND_AUDIT",
+        )
+        forged_audit = replace(
+            audit,
+            decision=forged_receipt.decision,
+            reason=forged_receipt.reason,
+            affected_frame_types=forged_receipt.affected_frame_types,
+            checkpoint_disposition=forged_receipt.checkpoint_disposition,
+        )
+        forged = replace(
+            state,
+            receipts=(state.receipts[0], forged_receipt),
+            audits=(forged_audit,),
+        )
+    elif mutation == "joint_wrong_disposition":
+        forged_receipt = replace(
+            receipt,
+            checkpoint_disposition="ADVANCE_AFTER_RECEIPT_AND_AUDIT",
+        )
+        forged = replace(
+            state,
+            receipts=(state.receipts[0], forged_receipt),
+            audits=(
+                replace(
+                    audit,
+                    checkpoint_disposition=forged_receipt.checkpoint_disposition,
+                ),
+            ),
+        )
+    elif mutation == "audit_schedule_digest":
+        forged = replace(
+            state,
+            audits=(
+                replace(
+                    audit,
+                    key_schedule_digest=synthetic_digest("detached-schedule"),
+                ),
+            ),
+        )
+    elif mutation == "audit_key_id":
+        forged = replace(state, audits=(replace(audit, key_id="key:detached"),))
+    elif mutation == "audit_predecessor":
+        forged = replace(state, audits=(replace(audit, predecessor_position=0),))
+    elif mutation == "audit_lifecycle":
+        forged = replace(state, audits=(replace(audit, lifecycle_revision=1),))
+    elif mutation == "prefix_audit_deleted":
+        later = transition(state, candidate_for(state, position=6)).state
+        remaining = replace(
+            later.audits[-1],
+            prior_audit_digest=synthetic_digest("audit:genesis"),
+        )
+        forged = replace(later, audits=(remaining,))
+    elif mutation == "state_lifecycle_inflated":
+        forged = replace(state, lifecycle_revision=state.lifecycle_revision + 9)
+    elif mutation == "frame_order":
+        forged = replace(state, frames=tuple(reversed(state.frames)))
+    else:
+        forged_obligation = replace(
+            state.obligations[0],
+            count_bucket="FIVE_PLUS",
+        )
+        forged = replace(state, obligations=(forged_obligation,))
+    assert not verify_state(seal_state(replace(forged, integrity_digest="")))
+
+
 def test_restart_requires_integrity_anchor_exact_next_row_and_sole_key() -> None:
     state = transition(build_initial_state(), candidate_for(build_initial_state(), position=5)).state
     anchor = recovery_anchor(state)
@@ -393,6 +487,36 @@ def test_key_intervals_and_atomic_future_fenced_rotation() -> None:
     assert not validate_key_schedule(
         (KeyInterval("key:alpha", 0, 6), KeyInterval("key:beta", 7, None))
     )
+
+
+def test_rotation_preserves_historical_audit_binding_and_future_transitions() -> None:
+    state = build_initial_state()
+    state = transition(state, candidate_for(state, position=5)).state
+    predecessor_audit_digest = state.audits[-1].key_schedule_digest
+    successor = (
+        KeyInterval("key:alpha", 0, 7),
+        KeyInterval("key:beta", 7, None),
+    )
+    rotation = KeyScheduleTransition(
+        predecessor_schedule_digest=digest_value(
+            [asdict(item) for item in state.key_schedule]
+        ),
+        successor_schedule=successor,
+        activation_position=7,
+        predecessor_key_id="key:alpha",
+        successor_key_id="key:beta",
+        maximum_dependent_position=6,
+        predecessor_key_available_through_position=9,
+        safety_overlap_positions=2,
+    )
+    state = apply_key_rotation(state, rotation).state
+    assert verify_state(state)
+    assert state.audits[-1].key_schedule_digest == predecessor_audit_digest
+
+    state = transition(state, candidate_for(state, position=6)).state
+    state = transition(state, candidate_for(state, position=7)).state
+    assert state.audits[-1].key_id == "key:beta"
+    assert verify_state(state)
 
 
 def test_retention_uses_complete_integrity_bound_census_and_is_inert() -> None:

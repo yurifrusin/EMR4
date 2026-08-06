@@ -293,6 +293,27 @@ class RetentionAnchor:
     expected_observer_generations: tuple[int, ...]
 
 
+_BASELINE_FRAMES = (
+    FrameGeneration("frame:diary:1", FRAME_TYPES[0], 4, "CURRENT"),
+    FrameGeneration("frame:waiting:1", FRAME_TYPES[1], 4, "CURRENT"),
+)
+_BASELINE_RECEIPT = ClassifiedReceipt(
+    4,
+    synthetic_digest("observation:4"),
+    "CONTIGUOUS_NO_INTERSECTION",
+    "NO_INTERSECTION",
+    (),
+    "ADVANCE_AFTER_RECEIPT_AND_AUDIT",
+)
+
+
+def _canonical_frame_subset(values: tuple[str, ...]) -> bool:
+    return (
+        len(values) == len(set(values))
+        and values == tuple(frame_type for frame_type in FRAME_TYPES if frame_type in values)
+    )
+
+
 def _census_body(census: GenerationCensus) -> dict[str, Any]:
     return {
         "registry_digest": census.registry_digest,
@@ -391,13 +412,33 @@ def verify_state(state: DurabilityState) -> bool:
         or state.lifecycle_revision < 1
     ):
         return False
-    if state.checkpoint_state not in CHECKPOINT_STATES:
+    if state.checkpoint_state not in ("ACTIVE", "REBASE_REQUIRED"):
         return False
     if tuple(frame_type for frame_type, _ in state.watermarks) != FRAME_TYPES:
+        return False
+    if tuple(
+        (
+            frame.frame_generation_id,
+            frame.frame_type,
+            frame.assembled_through_position,
+        )
+        for frame in state.frames
+    ) != tuple(
+        (
+            frame.frame_generation_id,
+            frame.frame_type,
+            frame.assembled_through_position,
+        )
+        for frame in _BASELINE_FRAMES
+    ):
         return False
     if len({frame.frame_generation_id for frame in state.frames}) != len(state.frames):
         return False
     if len({item.frame_generation_id for item in state.obligations}) != len(state.obligations):
+        return False
+    if state.obligations != tuple(
+        sorted(state.obligations, key=lambda item: item.frame_generation_id)
+    ):
         return False
     receipt_positions = [item.position for item in state.receipts]
     receipt_digests = [item.observation_digest for item in state.receipts]
@@ -411,12 +452,16 @@ def verify_state(state: DurabilityState) -> bool:
         return False
     if len(set(receipt_digests)) != len(receipt_digests):
         return False
+    if not state.receipts or state.receipts[0] != _BASELINE_RECEIPT:
+        return False
     if not validate_key_schedule(state.key_schedule):
         return False
     if not hmac.compare_digest(
         state.key_schedule_digest,
         digest_value([asdict(item) for item in state.key_schedule]),
     ):
+        return False
+    if state.lifecycle_revision != len(state.audits) + len(state.key_schedule):
         return False
     watermarks = dict(state.watermarks)
     if any(type(value) is not int or value < 0 for value in watermarks.values()):
@@ -458,7 +503,7 @@ def verify_state(state: DurabilityState) -> bool:
             or not _is_digest(receipt.observation_digest)
             or receipt.decision not in DECISIONS
             or receipt.reason not in REASONS
-            or any(item not in FRAME_TYPES for item in receipt.affected_frame_types)
+            or not _canonical_frame_subset(receipt.affected_frame_types)
             or receipt.checkpoint_disposition
             not in (
                 "ADVANCE_AFTER_ATOMIC_COMMIT",
@@ -467,16 +512,22 @@ def verify_state(state: DurabilityState) -> bool:
         ):
             return False
         if receipt.decision == "CONTIGUOUS_ADMIT" and (
-            receipt.reason != "RELEVANT" or not receipt.affected_frame_types
+            receipt.reason != "RELEVANT"
+            or not receipt.affected_frame_types
+            or receipt.checkpoint_disposition != "ADVANCE_AFTER_ATOMIC_COMMIT"
         ):
             return False
         if receipt.decision == "CONTIGUOUS_NO_INTERSECTION" and (
-            receipt.reason != "NO_INTERSECTION" or receipt.affected_frame_types
+            receipt.reason != "NO_INTERSECTION"
+            or receipt.affected_frame_types
+            or receipt.checkpoint_disposition
+            != "ADVANCE_AFTER_RECEIPT_AND_AUDIT"
         ):
             return False
         if receipt.decision == "CONTIGUOUS_FULL_INVALIDATION" and (
             receipt.reason != "CONSERVATIVE_FULL_INVALIDATION"
             or receipt.affected_frame_types != FRAME_TYPES
+            or receipt.checkpoint_disposition != "ADVANCE_AFTER_ATOMIC_COMMIT"
         ):
             return False
     last_receipt = next(
@@ -506,6 +557,12 @@ def verify_state(state: DurabilityState) -> bool:
     audit_positions = [item.position for item in state.audits]
     if len(audit_positions) != len(set(audit_positions)):
         return False
+    audit_revisions = [item.lifecycle_revision for item in state.audits]
+    if (
+        len(audit_revisions) != len(set(audit_revisions))
+        or any(revision < 2 for revision in audit_revisions)
+    ):
+        return False
     audit_order = [(item.lifecycle_revision, item.position) for item in state.audits]
     if audit_order != sorted(audit_order) or len(audit_order) != len(set(audit_order)):
         return False
@@ -527,6 +584,11 @@ def verify_state(state: DurabilityState) -> bool:
         )
         if audit.opaque_audit_id != expected_audit_id:
             return False
+        if not hmac.compare_digest(
+            audit.key_schedule_digest,
+            _audit_key_schedule_digest(state.key_schedule, audit.position),
+        ):
+            return False
         receipt = receipts_by_position.get(audit.position)
         if receipt is not None:
             if audit.decision not in DECISIONS or (
@@ -535,6 +597,9 @@ def verify_state(state: DurabilityState) -> bool:
                 or receipt.reason != audit.reason
                 or receipt.affected_frame_types != audit.affected_frame_types
                 or receipt.checkpoint_disposition != audit.checkpoint_disposition
+                or audit.predecessor_position != receipt.position - 1
+                or key_for_position(state.key_schedule, audit.position)
+                != audit.key_id
             ):
                 return False
         elif audit.decision in DECISIONS:
@@ -554,14 +619,36 @@ def verify_state(state: DurabilityState) -> bool:
         ):
             return False
         previous_audit = audit
-    if state.audits and state.receipts:
-        first_audited_position = min(item.position for item in state.audits)
-        for receipt in state.receipts:
-            if receipt.position >= first_audited_position and not any(
-                audit.position == receipt.position and audit.decision in DECISIONS
-                for audit in state.audits
-            ):
-                return False
+    decision_audit_positions = tuple(
+        audit.position for audit in state.audits if audit.decision in DECISIONS
+    )
+    if decision_audit_positions != tuple(receipt_positions[1:]):
+        return False
+    rebase_audits = tuple(
+        audit
+        for audit in state.audits
+        if audit.decision == "FULL_INVALIDATION_REQUIRED"
+    )
+    if rebase_audits:
+        if (
+            len(rebase_audits) != 1
+            or state.audits[-1] != rebase_audits[0]
+            or state.checkpoint_state != "REBASE_REQUIRED"
+            or rebase_audits[0].position <= state.last_classified_position
+        ):
+            return False
+    elif state.checkpoint_state != "ACTIVE":
+        return False
+    expected_effects = _rederive_effects(state.audits)
+    if expected_effects is None:
+        return False
+    expected_frames, expected_watermarks, expected_obligations = expected_effects
+    if (
+        state.frames != expected_frames
+        or state.watermarks != expected_watermarks
+        or state.obligations != expected_obligations
+    ):
+        return False
     return True
 
 
@@ -610,7 +697,7 @@ def _audit_valid(audit: AuditRecord, state: DurabilityState) -> bool:
                 audit.prior_audit_digest,
             )
         )
-        and all(item in FRAME_TYPES for item in audit.affected_frame_types)
+        and _canonical_frame_subset(audit.affected_frame_types)
         and audit.retired_count_bucket in ("ZERO", *COUNT_BUCKETS)
         and audit.coalesced_count_bucket in ("ZERO", *COUNT_BUCKETS)
         and type(audit.lifecycle_revision) is int
@@ -648,6 +735,31 @@ def key_for_position(schedule: tuple[KeyInterval, ...], position: int) -> str | 
         and (item.end_position is None or position < item.end_position)
     ]
     return matches[0] if len(matches) == 1 else None
+
+
+def _audit_key_schedule_digest(
+    schedule: tuple[KeyInterval, ...],
+    position: int,
+) -> str:
+    return digest_value(
+        {
+            "position": position,
+            "resolved_intervals": [
+                {
+                    "key_id": interval.key_id,
+                    "start_position": interval.start_position,
+                    "end_position": min(
+                        interval.end_position
+                        if interval.end_position is not None
+                        else position + 1,
+                        position + 1,
+                    ),
+                }
+                for interval in schedule
+                if interval.start_position <= position
+            ],
+        }
+    )
 
 
 def _watermarks(state: DurabilityState) -> dict[str, int]:
@@ -701,9 +813,7 @@ def _candidate_valid(candidate: Candidate) -> bool:
         return False
     if candidate.decision not in DECISIONS or candidate.reason not in REASONS:
         return False
-    if len(set(candidate.affected_frame_types)) != len(candidate.affected_frame_types):
-        return False
-    if any(item not in FRAME_TYPES for item in candidate.affected_frame_types):
+    if not _canonical_frame_subset(candidate.affected_frame_types):
         return False
     expected = {
         "CONTIGUOUS_ADMIT": ("RELEVANT", True),
@@ -792,6 +902,82 @@ def _retire_and_obligate(
     )
 
 
+def _rederive_effects(
+    audits: tuple[AuditRecord, ...],
+) -> tuple[
+    tuple[FrameGeneration, ...],
+    tuple[tuple[str, int], ...],
+    tuple[ReassemblyObligation, ...],
+] | None:
+    frames = _BASELINE_FRAMES
+    watermarks = {frame_type: 0 for frame_type in FRAME_TYPES}
+    obligations: dict[str, ReassemblyObligation] = {}
+    for audit in audits:
+        force_all = audit.decision in (
+            "CONTIGUOUS_FULL_INVALIDATION",
+            "FULL_INVALIDATION_REQUIRED",
+        )
+        for frame_type in audit.affected_frame_types:
+            watermarks[frame_type] = max(watermarks[frame_type], audit.position)
+        updated_frames: list[FrameGeneration] = []
+        retired = 0
+        coalesced = 0
+        for frame in frames:
+            should_retire = frame.frame_type in audit.affected_frame_types and (
+                force_all
+                or watermarks[frame.frame_type] > frame.assembled_through_position
+            )
+            updated = frame
+            if frame.lifecycle == "CURRENT" and should_retire:
+                updated = replace(frame, lifecycle="RETIRED")
+                retired += 1
+            updated_frames.append(updated)
+            if updated.lifecycle != "RETIRED" or not should_retire:
+                continue
+            existing = obligations.get(frame.frame_generation_id)
+            if existing is None:
+                obligations[frame.frame_generation_id] = ReassemblyObligation(
+                    frame_generation_id=frame.frame_generation_id,
+                    frame_type=frame.frame_type,
+                    first_position=audit.position,
+                    latest_position=audit.position,
+                    rolling_cause_digest=digest_value(
+                        [
+                            "obligation",
+                            frame.frame_generation_id,
+                            audit.observation_digest,
+                            audit.position,
+                        ]
+                    ),
+                    count_bucket="ONE",
+                )
+            elif audit.position > existing.latest_position:
+                obligations[frame.frame_generation_id] = replace(
+                    existing,
+                    latest_position=audit.position,
+                    rolling_cause_digest=digest_value(
+                        [
+                            existing.rolling_cause_digest,
+                            audit.observation_digest,
+                            audit.position,
+                        ]
+                    ),
+                    count_bucket=_next_bucket(existing.count_bucket),
+                )
+                coalesced += 1
+        if (
+            audit.retired_count_bucket != _bucket_count(retired)
+            or audit.coalesced_count_bucket != _bucket_count(coalesced)
+        ):
+            return None
+        frames = tuple(updated_frames)
+    return (
+        frames,
+        tuple((frame_type, watermarks[frame_type]) for frame_type in FRAME_TYPES),
+        tuple(sorted(obligations.values(), key=lambda item: item.frame_generation_id)),
+    )
+
+
 def _audit(
     state: DurabilityState,
     *,
@@ -818,7 +1004,7 @@ def _audit(
         source_contract_digest=state.source_contract_digest,
         registry_digest=state.registry_digest,
         impact_policy_digest=state.impact_policy_digest,
-        key_schedule_digest=state.key_schedule_digest,
+        key_schedule_digest=_audit_key_schedule_digest(state.key_schedule, position),
         observer_id=state.observer_id,
         observer_generation=state.observer_generation,
         stream_id=state.stream_id,
@@ -1107,6 +1293,24 @@ def apply_key_rotation(
     )
     valid = valid and rotation.activation_position > state.last_classified_position
     valid = valid and rotation.safety_overlap_positions >= 0
+    valid = valid and len(rotation.successor_schedule) == len(state.key_schedule) + 1
+    if valid:
+        valid = rotation.successor_schedule[:-2] == state.key_schedule[:-1]
+    if valid:
+        predecessor_final = state.key_schedule[-1]
+        closed_predecessor = rotation.successor_schedule[-2]
+        successor_final = rotation.successor_schedule[-1]
+        valid = (
+            predecessor_final.end_position is None
+            and closed_predecessor
+            == replace(predecessor_final, end_position=rotation.activation_position)
+            and successor_final
+            == KeyInterval(
+                rotation.successor_key_id,
+                rotation.activation_position,
+                None,
+            )
+        )
     valid = valid and key_for_position(state.key_schedule, rotation.activation_position - 1) == rotation.predecessor_key_id
     valid = valid and key_for_position(rotation.successor_schedule, rotation.activation_position) == rotation.successor_key_id
     if valid:
@@ -1233,22 +1437,10 @@ def build_initial_state() -> DurabilityState:
         last_classified_position=4,
         last_observation_digest=synthetic_digest("observation:4"),
         lifecycle_revision=1,
-        frames=(
-            FrameGeneration("frame:diary:1", FRAME_TYPES[0], 4, "CURRENT"),
-            FrameGeneration("frame:waiting:1", FRAME_TYPES[1], 4, "CURRENT"),
-        ),
+        frames=_BASELINE_FRAMES,
         watermarks=((FRAME_TYPES[0], 0), (FRAME_TYPES[1], 0)),
         obligations=(),
-        receipts=(
-            ClassifiedReceipt(
-                4,
-                synthetic_digest("observation:4"),
-                "CONTIGUOUS_NO_INTERSECTION",
-                "NO_INTERSECTION",
-                (),
-                "ADVANCE_AFTER_RECEIPT_AND_AUDIT",
-            ),
-        ),
+        receipts=(_BASELINE_RECEIPT,),
         audits=(),
         key_schedule=schedule,
         generation_census=census,

@@ -1,5 +1,5 @@
 {
-  "canonical_register_sha256": "a0fc15dace162bc179b2968a22db4f5515a637a6728a92dca13f868bceac124f",
+  "canonical_register_sha256": "1c394c9bac6695634b69273403a99a172147dfc74769cf28ca48054943a0fe30",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
@@ -260,7 +260,7 @@
       ]
     }
   ],
-  "register_revision": 45,
+  "register_revision": 46,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-06"
 }

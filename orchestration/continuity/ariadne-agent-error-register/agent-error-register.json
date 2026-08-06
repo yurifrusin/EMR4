@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 45,
+  "register_revision": 46,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1920,7 +1920,9 @@
       "detection_method": "A fresh exact-head native independent veto used bounded authored-synthetic resealing and self-echoed retention inputs against candidate 2054500a44fbea21d87ecd65b7e7ed5a83492394 and returned two P1 findings before acceptance.",
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-independent-veto.md",
-        "docs/ariadne-agent-error-correction-register-revision-45.md"
+        "docs/ariadne-agent-error-correction-register-revision-45.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-recovery-independent-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-46.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
@@ -1929,10 +1931,11 @@
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_implemented_pending_acceptance",
-        "action": "Sol preserved and rejected the first candidate, invoked the plan's recovery lease, added canonical receipt and audit invariants with exact audit-chain and receipt-link validation, introduced a separately typed backend-authored retention anchor with exact expected generation membership, and added direct resealed and self-echo adversarial tests. Fresh exact-head acceptance remains pending.",
+        "action": "Sol preserved and rejected both candidates and kept the plan's recovery lease active. The first recovery added canonical receipt/audit structure and a separately typed backend-authored retention anchor. After the second veto showed that a mutually forged receipt and audit could still disagree with effects, Sol added decision-specific dispositions, complete audit-prefix accounting, stable position-bounded key-schedule linkage, exact predecessor/key/lifecycle checks and deterministic rederivation of watermarks, frame retirement, obligation rolling digests and count buckets. Fresh exact-head acceptance remains pending.",
         "prevention_control": "Before accepting an integrity-sealed state machine, independently mutate every ordered collection, unique identity, digest chain and cross-record link after resealing; for deletion or retention decisions, also attempt to self-authorize an incomplete population using replacement expected digests and require a non-candidate-owned authority boundary.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-recovery-independent-veto.md",
           "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py"
         ]
       },
