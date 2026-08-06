@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_provider_free_patient_free_unmounted_intent_shaped_temporal_retrieval_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely for the new tranche at 464 lines, 58371 bytes and SHA-256 0b213d94a502eed1cecba4c27a4199e03d860f179981a1c09a768f15840635fd. It names the accepted patient-free temporal weave at reviewed source f32004a2f39ac769ba746afe2663813f7c422d8a and the provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal as next.",
+    "current_authority_allocation": "GPT Sol owns boundary derivation, planning, architecture, acceptance, recovery and task-branch integration. DeepSeek V4 Flash/high may receive a bounded separable implementation/test packet only after the contract is frozen and if economical; Gemini 3.6 Flash/high remains fresh independent veto only after deterministic gates. No worker may self-accept, integrate or move protected refs.",
+    "active_plan_and_acceptance": "The accepted temporal plan, design, threat delta, closeout and Sol acceptance, the full Context Fabric direction, and the active master-plan and Bernie interaction-model ranges were reread. The next rehearsal must deterministically turn a closed non-authoritative request candidate into the minimum admitted current, recent-work and historical authored-synthetic frames, with explicit ambiguity, denied/narrowed scope, provenance, expiry, stale-frame rejection and same-packet proofreading. It must reuse the accepted Fabric, Memory, Current-weave and temporal contracts rather than create a parallel retrieval authority.",
+    "protected_evidence_boundaries": "Only newly authored patient-free synthetic fixtures and existing accepted provider-free contract artifacts are eligible. No patient, clinical, product-derived, protected or historical-PHI data; real sources, database/session/feed/watcher; persistence or operational retention; provider/model/external retrieval; product route/runtime; raw audit; command/write; deployment, production, release, Pages; protected evidence or protected-ref movement is open. Requests/referrals, prescribing/medicines and billing/claims remain architecture-only future Bureaus. docs/branding and all unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "Task HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at 0bcb8e9c8183830bdf301465a9ff47df2d6b6588 after temporal closeout publication. Local/origin master and local/origin handoff/current are unchanged and aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index and tracked worktree are clean; only preserved unrelated untracked files remain."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "intent_shaped_temporal_retrieval_new_tranche_complete_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the fresh-tranche five-source reconstruction and will freeze an unmounted provider-free authored-synthetic contract only."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No verifier dispatch or provider call occurs during pre-planning."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Any implementation allocation follows only after the exact contract and worker packet are frozen; AER-0036 informs transport monitoring."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude CLI is not selected independently."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A bounded read-only scout may be used only if its leverage exceeds briefing and reconciliation cost."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
