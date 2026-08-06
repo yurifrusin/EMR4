@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_current_operational_weave_candidate_and_acceptance_commits_to_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names raisa_provider_free_practice_context_fabric_current_operational_weave_pass, exact candidate d8bc059212e65a6ed2d7ac8d57734096d14b9139, accepted closeout commit b973dad0e9af5260de52d8b0c1123b539ae2f07b, Continuity 218 / Compass 200, and the patient-free temporal weave as next.",
+    "current_authority_allocation": "GPT Sol may publish the accepted bounded work to codex/ariadne-bernie-davida-parallel-seam. This grants no protected integration, baton movement, deployment, release or Pages authority; Gemini and all workers retain no push or integration authority.",
+    "active_plan_and_acceptance": "The pure four-source authored-synthetic weave passed deterministic acceptance, Ruff, compilation, JSON checks, one exact-head Gemini schema-constrained pass, exact 155-test reviewer-packet reproduction and 173 closeout regression tests. The accepted closeout and AER reconciliation are committed at b973dad0e9af5260de52d8b0c1123b539ae2f07b.",
+    "protected_evidence_boundaries": "No patient, clinical, product-derived, protected or historical-PHI data; real event transport/database/persistence; provider call; runtime; command/write; deployment, production, release, Pages; protected evidence/ref; or docs/branding access is permitted by this push.",
+    "git_refs_and_worktree": "Immediately before this receipt, the task branch is at b973dad0e9af5260de52d8b0c1123b539ae2f07b and origin task remains 619dbc3b9d7ce5610c75031f76c14a4ebbd7fa5f. Local/origin/remote master and handoff/current are verified at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree has only preserved unrelated untracked files; docs/branding/ is untracked and untouched. Push target is the exact task branch only and force is forbidden."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "current_operational_weave_closeout_prepush_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol committed only the explicit accepted closeout paths and left protected refs unchanged."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Independent review is complete and no provider action is part of publication."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No implementation worker is active during task-branch push."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Claude CLI is not selected independently."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent holds push, acceptance, baton or protected-ref authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
