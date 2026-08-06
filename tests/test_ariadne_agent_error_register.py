@@ -38,14 +38,14 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 43
+    assert register["register_revision"] == 44
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 50)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == ["AER-0049"]
+    ] == []
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -117,9 +117,9 @@ def test_durability_state_plan_veto_requires_complete_recovery_semantics() -> No
     incident = next(
         row for row in _register()["incidents"] if row["incident_id"] == "AER-0049"
     )
-    assert incident["status"] == "open"
+    assert incident["status"] == "corrected"
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
-    assert incident["correction"]["status"] == "control_implemented_pending_acceptance"
+    assert incident["correction"]["status"] == "recovery_lease_applied"
     joined = " ".join(
         (
             incident["expected_invariant"],
@@ -757,7 +757,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
     assert report["incident_count"] == 49
-    assert report["open_incident_ids"] == ["AER-0049"]
+    assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 37,
         "harness": 3,

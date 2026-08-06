@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 43,
+  "register_revision": 44,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1889,16 +1889,17 @@
       "recurrence_signature": "orchestrator.durability_recovery_retention_restart_rotation_underfrozen",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Sol rejected implementation admission, preserved the review and froze an integrity-bound complete observer-generation census, a separately trusted RecoveryAnchor with terminal NEW_GENERATION_REQUIRED handling for corrupt state, and one atomic future-position-fenced key transition with predecessor availability through dependency drain plus safety overlap. A fresh no-finding review remains required.",
+        "status": "recovery_lease_applied",
+        "action": "Sol rejected implementation admission, preserved the review and froze an integrity-bound complete observer-generation census, a separately trusted RecoveryAnchor with terminal NEW_GENERATION_REQUIRED handling for corrupt state, and one atomic future-position-fenced key transition with predecessor availability through dependency drain plus safety overlap. Fresh exact-head veto d2b8e0c67218f3d6131e9141c9304caf2f9998df passed 112 serial checks with no P0-P2 finding.",
         "prevention_control": "Before implementing a durability plan, independently challenge completeness of every population used for deletion, provenance of every recovery coordinate after integrity failure, and the atomic transition semantics around all key-schedule boundaries rather than testing static snapshots alone.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-plan-challenge.md",
           "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-plan.md",
-          "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_plan.py"
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_plan.py",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-plan-recovery-final-independent-review.md"
         ]
       },
-      "status": "open"
+      "status": "corrected"
     }
   ]
 }

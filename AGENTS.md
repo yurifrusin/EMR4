@@ -364,6 +364,16 @@ new result supersedes the historical no-repeat pause for its completed
   derive-freeze-execute descendants rather than fresh-permission pauses.
 Dependabot alerts 5 and 8-15 and CodeQL alerts 295, 272 and 268 have exact evidence-backed dismissed readback matching the durable register under Yuri's consumed disposition authority. Dependabot alert 17 was created after that snapshot: it is registered as `SF-0020`, statically `not_actionable`, and remains native-open/`needs_review`; no dismissal is authorised. PR 70 CodeQL warning 543 and high alert 544 are fixed by source changes and fresh native readback without dismissal; alert 544 is registered as remediated `SF-0021`. The affected development-only dependency resolutions remain in the lockfile; do not force dependency overrides, erase instance history or broaden any disposition without a new register revision and current evidence.
 
+Revision 44 supersedes the earlier revision-42 register count above. It records
+49 bounded incidents: 37 agent-behavior observations, three harness failures,
+two repository defects and seven transport timeouts. AER-0049 preserves the
+rejected under-frozen durability rehearsal plan and closes only after the
+complete generation census, independently trusted recovery anchor and atomic
+future-fenced key-rotation recovery passed a fresh 112-check exact-head veto at
+`d2b8e0c67218f3d6131e9141c9304caf2f9998df`. No incident remains open, and the
+passing plan grants only the pure provider-free unmounted authored-synthetic
+implementation tranche.
+
 ## 7. Ariadne Operating Rules
 ### Receipts and workspace isolation
 
