@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 33,
+  "register_revision": 35,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1546,6 +1546,82 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-review-worktree-postcondition-recovery-receipt.json",
           "orchestration/harness_settings/verifier_execution_policy.yaml"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0041",
+      "attempt_id": "raisa-context-fabric-rayleen-source-adapter-provenance-veto-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-rayleen-waiting-room-source-adapter",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "codex-native-independent-reviewer",
+      "model": "gpt-5.6-sol",
+      "reasoning_level": "xhigh",
+      "transport": "codex_native_subagent",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "A protected-safe independent review must inspect only the exact allowlisted authored-synthetic candidate paths and must never open, enumerate, list, search, hash-check or infer any protected holdout path or material.",
+      "observed_error": "Before source review, the verifier ran broad repository filename discovery and its filtered output included path names beneath protected holdout directories. No protected file content was opened or read, and the reviewer immediately self-reported the breach.",
+      "detection_method": "The verifier self-reported the command-scope breach before candidate analysis. Sol stopped the review and independently verified the exact candidate HEAD and tracked-clean worktree without re-enumerating protected paths.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-protected-path-enumeration-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-34.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "verifier.protected_path_enumeration",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Sol stopped and rejected the review. A new independent context must review the same exact clean candidate using only an explicit path allowlist and may not use repository-wide file discovery.",
+        "prevention_control": "Every protected-safe review packet and reviewer instruction must enumerate the exact readable paths and exact test commands; broad rg --files, recursive directory listing and repository-wide search are forbidden even when nominally read-only.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-protected-path-enumeration-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-provenance-repair-review-packet.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0042",
+      "attempt_id": "raisa-context-fabric-rayleen-source-adapter-provenance-veto-packet-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-rayleen-waiting-room-source-adapter",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "A review packet that states an exact inherited test count must name the exact accepted test files whose mechanical collection equals that count.",
+      "observed_error": "The packet required 195 inherited tests but named the three-test Context Fabric direction file instead of the accepted 31-test Fabric/Memory contract file. The exact listed command consequently passed 167 tests.",
+      "detection_method": "The independent reviewer reconciled pytest progress and corrected its own preliminary status. Sol then compared the two exact known test paths and established the complete arithmetic explanation: 167 minus 3 plus 31 equals 195.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-review-packet-count-reconciliation-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-35.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.review_packet_test_path_substitution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The packet now names the exact 31-test Fabric/Memory contract path in place of the three-test direction path and requires the full corrected seven-file command to pass 195 tests before review completion.",
+        "prevention_control": "Before dispatch, mechanically collect every exact review test command and bind both its path list and collected count; never reconstruct an inherited packet from prose component labels alone.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-review-packet-count-reconciliation-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-provenance-repair-review-packet.md"
         ]
       },
       "status": "corrected"

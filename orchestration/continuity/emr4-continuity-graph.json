@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 221,
+  "graph_revision": 222,
   "harvests": [],
   "nodes": [
     {
@@ -13180,9 +13180,122 @@
         "Clinical, prescribing, referral, billing, administrative and all other commands and writes remain separately closed.",
         "Cloud/IAM mutation, deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter",
+      "title": "Unmounted Rayleen waiting-room Context Fabric source adapter",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T11:40:00Z",
+      "updated_at": "2026-08-06T11:40:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "12fbab157551954018e781810e4b100f05698dfb",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The adapter consumes only a completed authorised read shape and cannot invoke or refresh it.",
+          "The sole handoff recomputes the complete result from authoritative inputs and releases a deep copy only.",
+          "A live database/feed watcher, real product data and persistence remain separately closed.",
+          "Reception One and Clinician One remain workspace brands; atomic Bureau grants remain backend-owned."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unmounted-rayleen-waiting-room-source-adapter",
+          "source": "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-closeout.md",
+          "status": "accepted",
+          "summary": "Accept one externally anchored provider-free mapping from the serialized A4 frame to an unchanged Current-weave source-envelope handoff."
+        }
+      ],
+      "claim_scope": [
+        "One authored-synthetic serialized A4 waiting-room frame is validated, minimized and opaquely aliased.",
+        "The adapter preserves freshness and all-false authority and composes through the unchanged parent proofreader.",
+        "The exact candidate passed fresh allowlisted review with 36 focused and 195 inherited tests.",
+        "No live source, product data, watcher, persistence, provider, command, deployment or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py",
+            "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-closeout.md"
+          ],
+          "note": "The adapter remains a read-only context source and cannot bypass the accepted proposal or command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_reception_one_availability_reconciliation.py",
+            "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py",
+            "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-closeout.md"
+          ],
+          "note": "Freshness remains owned by the source; future invalidation must retire and reassemble rather than patch the frame."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md",
+          "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-design.md",
+          "docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/provider-free-acceptance-evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/adapter-result.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/acceptance-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/authored-synthetic-waiting-room-frame.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-provenance-repair-independent-review.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-review-packet-count-reconciliation-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-protected-path-enumeration-failure-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_intent_shaped_temporal_retrieval_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py",
+          "tests/test_model_required_bureau_a4_product_read.py",
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py",
+          "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_acceptance.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data and real source identifiers remain closed.",
+        "Real databases, event transport, live watchers/feeds, persistence and operational retention remain closed.",
+        "External evidence, provider calls, product routes and cross-Bureau clinical source handoffs remain closed.",
+        "Consultant, requests/referrals, prescribing/medicines, billing/claims and all commands/writes remain separately closed.",
+        "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T08:20:00Z"
+  "updated_at": "2026-08-06T11:40:00Z"
 }

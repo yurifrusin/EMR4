@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_allowlisted_independent_sol_veto_after_aer_0041",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate 12fbab157551954018e781810e4b100f05698dfb remains unchanged. The corrected packet allows only exact named paths and commands while requiring reproduction of provenance detachment and all sixteen waiting-field grant subsets.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance and integration. A genuinely fresh independent GPT Sol context receives read-only veto authority only. The prior native review attempt is rejected; no decision transfers.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r3 remains tracked-clean at exact 12fbab157551954018e781810e4b100f05698dfb on codex/review-context-fabric-rayleen-source-adapter-12fbab15. Primary task HEAD matches. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md names fresh exact-head independent veto of the externally anchored provider-free unmounted Rayleen source-adapter candidate as the next action; rejected AER-0041 changes no candidate claim.",
+    "protected_evidence_boundaries": "AER-0041 is durably registered before corrected review. No protected content was opened. The corrected reviewer may read only the packet's exact allowlist and must not perform broad discovery, protected-path enumeration, providers/cloud, product/patient data, runtime, command, deployment, release, Pages or ref operations."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_reviewed_rayleen_source_adapter_closeout_and_continuity",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the accepted exact source HEAD 12fbab157551954018e781810e4b100f05698dfb, final allowlisted veto and provider-free invalidation/reassembly seam as next.",
+    "current_authority_allocation": "GPT Sol owns the explicit-path task-branch commit and later push. Reviewers own no commit, acceptance, integration, baton or protected-ref authority.",
+    "active_plan_and_acceptance": "Final closeout/acceptance, AER-0041/AER-0042, Continuity 222 / Compass 204 and exact review evidence are present. The primary closeout packet collected and passed 247 tests; the additional handover/Compass packet passed 18 tests; ruff, py_compile and diff checks pass.",
+    "protected_evidence_boundaries": "Commit includes only named source-adapter closeout, incident, continuity and compass artifacts. No protected content, docs/branding, unrelated receipt/state/evidence/cost-ledger, live watcher, patient/product data, provider, command, deployment, release or Pages artifact is included.",
+    "git_refs_and_worktree": "Primary task HEAD remains 12fbab157551954018e781810e4b100f05698dfb before closeout commit. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review worktree r3 is clean at the accepted source HEAD; explicit-path staging only will preserve every unrelated untracked file."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "rayleen_source_adapter_closeout_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed acceptance, Continuity/Compass generation and all exact final checks."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The admitted independent review is preserved as one exact-head pass; rejected attempts remain non-transferable."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "AER-0039 preserves the zero-call OAuth timeout."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unreachable",
+      "evidence": [
+        "AER-0038 preserves the timeout and quarantined partial work; no worker source was adopted."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

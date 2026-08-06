@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_and_closeout_exact_reviewed_rayleen_source_adapter",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records the exact 12fbab157551954018e781810e4b100f05698dfb Rayleen source-adapter pass candidate and names the provider-free invalidation/reassembly seam as next.",
+    "current_authority_allocation": "GPT Sol owns acceptance and closeout. The final fresh x-high context held read-only veto authority only and returned pass without edits; no worker or reviewer receives integration or baton authority.",
+    "active_plan_and_acceptance": "Closed evidence is 18/18. The final exact-allowlist veto found no issue, verified all sixteen grant subsets and external provenance anchoring, and passed 36 focused, 195 corrected inherited and 43 immutable-candidate register tests at unchanged exact HEAD.",
+    "protected_evidence_boundaries": "AER-0041 rejects path-name enumeration without content access and the admitted review used exact named paths only. No protected content, patient/product data, live watcher, provider, runtime, command, deployment, release, Pages or protected-ref action is opened by acceptance.",
+    "git_refs_and_worktree": "Accepted source HEAD is 12fbab157551954018e781810e4b100f05698dfb on the task branch; exact review worktree r3 is clean at that HEAD. Primary contains bounded closeout/continuity changes plus preserved unrelated untracked files. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "rayleen_source_adapter_final_preacceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled all exact test counts, registered AER-0041/AER-0042 and prepared bounded closeout/continuity artifacts."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh allowlisted x-high independent veto returned one terminal pass at unchanged exact HEAD."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "AER-0039 preserves the zero-call OAuth timeout; no Gemini decision is claimed."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unreachable",
+      "evidence": [
+        "AER-0038 preserves the contained timeout and quarantined partial work; no worker source was adopted."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

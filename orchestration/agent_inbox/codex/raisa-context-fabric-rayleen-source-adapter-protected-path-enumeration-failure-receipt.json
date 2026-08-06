@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.review-scope-failure-receipt.v1",
+  "status": "attempt_rejected_and_contained",
+  "attempt_id": "raisa-context-fabric-rayleen-source-adapter-provenance-veto-001",
+  "observed_on": "2026-08-06",
+  "reviewer_role": "independent_verifier",
+  "review_transport": "codex_native_subagent",
+  "candidate": {
+    "worktree": "C:/Users/sarashera/EMR4-worktrees/r3",
+    "branch": "codex/review-context-fabric-rayleen-source-adapter-12fbab15",
+    "required_head": "12fbab157551954018e781810e4b100f05698dfb",
+    "head_after_containment": "12fbab157551954018e781810e4b100f05698dfb",
+    "tracked_clean_after_containment": true,
+    "candidate_changed": false
+  },
+  "incident": {
+    "category": "command_scope_violation",
+    "command_shape": "broad repository filename enumeration followed by a task-name filter",
+    "protected_path_names_observed": true,
+    "protected_file_content_opened_or_read": false,
+    "protected_hash_or_metadata_queried": false,
+    "patient_or_product_data_accessed": false,
+    "network_or_cloud_used": false,
+    "candidate_runtime_provider_calls": 0,
+    "review_decision_admissible": false
+  },
+  "detection": {
+    "method": "reviewer self-report before source review",
+    "review_stopped_by_orchestrator": true,
+    "protected_paths_reenumerated_during_containment": false
+  },
+  "correction": {
+    "attempt_disposition": "rejected",
+    "next_attempt_requires_fresh_context": true,
+    "next_attempt_requires_exact_allowlisted_paths": true,
+    "broad_file_discovery_forbidden": true,
+    "register_before_acceptance_required": true
+  },
+  "authority_boundary": "Failure evidence only; grants no protected access, review acceptance, implementation, integration, runtime, deployment, release or ref authority."
+}

@@ -38,10 +38,10 @@ def test_committed_register_is_semantically_valid_after_source_adapter_recovery(
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 33
+    assert register["register_revision"] == 35
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 41)
+        f"AER-{index:04d}" for index in range(1, 43)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 28
+    assert len(agent_incidents) == 30
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -258,6 +258,61 @@ def test_source_adapter_review_worktree_regeneration_is_restored() -> None:
     assert receipt["provider_or_model_calls"] == 0
     assert receipt["product_or_database_reads"] == 0
     assert receipt["protected_ref_updates"] == 0
+
+
+def test_source_adapter_protected_path_enumeration_attempt_is_rejected() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0041"
+    )
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-rayleen-source-adapter-protected-path-enumeration-failure-receipt.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["status"] == "contained"
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert receipt["status"] == "attempt_rejected_and_contained"
+    assert receipt["incident"]["protected_path_names_observed"] is True
+    assert receipt["incident"]["protected_file_content_opened_or_read"] is False
+    assert receipt["incident"]["protected_hash_or_metadata_queried"] is False
+    assert receipt["incident"]["patient_or_product_data_accessed"] is False
+    assert receipt["candidate"]["candidate_changed"] is False
+    assert receipt["candidate"]["tracked_clean_after_containment"] is True
+    assert receipt["correction"]["next_attempt_requires_exact_allowlisted_paths"] is True
+
+
+def test_source_adapter_review_packet_count_is_exactly_reconciled() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0042"
+    )
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-rayleen-source-adapter-review-packet-count-reconciliation-receipt.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["status"] == "corrected"
+    assert receipt["classification"]["reviewer_error"] is False
+    assert receipt["classification"]["candidate_finding"] is False
+    assert receipt["observed_run"]["actual_collected_and_passed_count"] == 167
+    assert receipt["observed_run"]["incorrectly_named_path_test_count"] == 3
+    assert receipt["correction"]["required_path_test_count"] == 31
+    assert receipt["correction"]["corrected_expected_test_count"] == 195
+    assert receipt["correction"]["arithmetic_reconciliation"] == "167 - 3 + 31 = 195"
+    assert receipt["candidate_changed"] is False
 
 
 def test_a5_worker_scope_breach_closes_only_through_recovery_lease() -> None:
@@ -596,17 +651,17 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 40
+    assert report["incident_count"] == 42
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 28,
+        "agent_behavior": 30,
         "harness": 3,
         "repository": 2,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 3,
-        "evidence_misreport": 4,
+        "command_scope_violation": 4,
+        "evidence_misreport": 5,
         "harness_failure": 3,
         "output_contract_violation": 14,
         "read_only_violation": 2,
@@ -616,7 +671,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 31,
+        "canonical_unchanged": 33,
         "untrusted_partial_worktree": 7,
     }
     assert report["recurring_patterns"] == [

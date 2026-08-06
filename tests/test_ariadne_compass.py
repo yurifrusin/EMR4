@@ -51,7 +51,8 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
     assert report["current_position"]["node_id"] == (
-        "raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval"
+        "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-"
+        "source-adapter"
     )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]

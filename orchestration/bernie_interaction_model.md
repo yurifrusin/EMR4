@@ -202,14 +202,18 @@ proofreading. The authored-synthetic model-required intent-shaping descendant
 now also passes after one source-reviewed Sydney Vertex primary proposed the
 exact closed comparison intent and deterministic code rebuilt and admitted the
 parent retrieval packet. The provider-free unmounted Rayleen A4 waiting-room
-source adapter is now in exact-head independent-veto repair. It consumes only
+source adapter now passes at exact independently reviewed source HEAD
+`12fbab157551954018e781810e4b100f05698dfb`. It consumes only
 a completed authored-synthetic `emr4.waiting_room_context_frame.v1`, applies
 the accepted binding/grant and backend-issued opaque aliases, and emits one
 Current source envelope without invoking or refreshing the read, watching
 changes, mounting a route or accessing real product data. Its corrected
-boundary separates closed result/evidence schemas, recomputes the complete
+accepted boundary separates closed result/evidence schemas, recomputes the complete
 expected result from authoritative inputs at one deep-copy handoff and
-supports independently granted waiting fields before the unchanged parent projection.
+supports independently granted waiting fields before the unchanged parent
+projection. The next safe descendant is a provider-free unmounted seam that
+retires the old frame set on a typed payload-free authored-synthetic signal and
+emits one inert reassembly requirement; it does not open a live watcher.
 Real event transport,
 historical persistence, patient/product data, product retrieval, runtime and
 command authority remain separately closed.

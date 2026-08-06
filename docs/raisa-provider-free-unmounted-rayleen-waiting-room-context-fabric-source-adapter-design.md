@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: revised provider-free authored-synthetic candidate after independent veto
+Status: accepted provider-free authored-synthetic design at exact reviewed source HEAD
 
 ## Placement
 

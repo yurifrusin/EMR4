@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_independent_sol_context_for_rayleen_provenance_repair_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records both rejected exact-head reviews and names the externally anchored provider-free unmounted Rayleen source-adapter candidate as active. Fresh independent veto is the next action.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance and integration. A genuinely fresh independent GPT Sol context receives read-only fallback-veto authority only; it may not edit or accept. Antigravity remains zero-call unavailable under contained AER-0039.",
+    "active_plan_and_acceptance": "Exact candidate 12fbab157551954018e781810e4b100f05698dfb recomputes the complete expected result from authoritative inputs at handoff, requires canonical equality, binds digest-derived ids, supports all sixteen waiting-field subsets, records 18/18 acceptance cases, passes 36 focused and 195 inherited tests.",
+    "protected_evidence_boundaries": "Reviewer receives committed authored-synthetic repository material only and may run non-regenerative provider-free checks. It may not edit, run the generator, access cloud/provider/product/patient/protected data or docs/branding, open runtime/watchers/commands, deploy, release, rebuild Pages or move refs.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r3 is tracked-clean on codex/review-context-fabric-rayleen-source-adapter-12fbab15 at exact 12fbab157551954018e781810e4b100f05698dfb. Primary task HEAD matches. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "rayleen_provenance_repair_pre_verifier_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol froze and verified the exact externally anchored candidate and clean r3 worktree."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["A new independent x-high context is selected for read-only veto."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "unreachable", "evidence": ["AER-0039 preserves the bounded zero-call OAuth timeout; no Gemini decision exists."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unreachable", "evidence": ["AER-0038 remains contained and no worker source is adopted."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

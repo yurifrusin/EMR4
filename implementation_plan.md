@@ -79,19 +79,27 @@ rehearsal now also passes at exact independently reviewed source HEAD
 trusted code rebuilt and admitted the unchanged parent retrieval packet. The
 controlling plan is
 [`docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`](docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md).
-The first provider-free unmounted one-source adapter is now in exact-head
-independent-veto repair around Rayleen A4's existing authorised
+The first provider-free unmounted one-source adapter is accepted at exact
+independently reviewed source HEAD
+`12fbab157551954018e781810e4b100f05698dfb` around Rayleen A4's existing authorised
 `emr4.waiting_room_context_frame.v1` shape. It consumes only a completed
 authored-synthetic frame, validates and minimizes it, applies backend-issued
 request-scoped aliases and emits one Current source envelope; it cannot invoke
 or refresh the source, watch changes, mount a route, call a provider or execute
 against real product data. Two useful vetoes exposed first a misnamed
 evidence-only result schema and then fully resealed provenance detachment. The
-current repair separates recursively closed result/evidence schemas,
+accepted repair separates recursively closed result/evidence schemas,
 recomputes the complete expected result from authoritative inputs at one
 deep-copy handoff, and supports every independent waiting-field grant subset
 before parent projection. The controlling plan is
 [`docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`](docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md).
+
+The next safe descendant is a provider-free unmounted Rayleen
+invalidation/reassembly seam. It may connect the accepted adapter to the
+accepted temporal dependency/invalidation protocol using only payload-free
+authored-synthetic signals, retire the immutable old set and emit an inert
+fresh-reassembly requirement. It may not open a live watcher/feed, patch
+context, persist state, read product data, call a provider or execute a command.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -387,10 +395,10 @@ Implementation proceeds from the accepted provider-free authored-synthetic contr
 the accepted composition of four existing current read shapes and the accepted
 patient-free temporal invalidation/bitemporal contract, the accepted provider-
 free intent-shaped temporal retrieval rehearsal and the accepted authored-
-synthetic model-required intent-shaping descendant. The next step is the fresh
-exact-head independent veto of the repaired unmounted provider-free Rayleen A4
-waiting-room source adapter before separately gated real-product and clinical
-descendants.
+synthetic model-required intent-shaping descendant and the exact independently
+reviewed unmounted provider-free Rayleen A4 waiting-room source adapter. The
+next step is its provider-free authored-synthetic invalidation/reassembly seam
+before separately gated live watcher, real-product and clinical descendants.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

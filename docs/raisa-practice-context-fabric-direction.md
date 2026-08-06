@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction through occupied authored-synthetic model-required intent shaping
+Status: accepted direction through the unmounted Rayleen A4 source adapter
 
 ## Purpose
 
@@ -273,7 +273,8 @@ large “memory” feature:
    provider/credential material was retained and owned cleanup completed. The
    controlling frozen plan is
    `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`.
-6. **One-source provider-free adapter** — **in independent-veto repair**;
+6. **One-source provider-free adapter** — **accepted** at exact independently
+   reviewed source HEAD `12fbab157551954018e781810e4b100f05698dfb`;
    the first descendant consumes only a completed authored-synthetic instance
    of Rayleen A4's `emr4.waiting_room_context_frame.v1`, validates and minimizes
    it behind the accepted binding/grant, applies a complete backend-authored
@@ -281,15 +282,20 @@ large “memory” feature:
    `current_waiting_room_projection` source envelope. It cannot invoke or
    refresh the source, watch changes, mount a route, call a provider or execute
    against real product data. Two vetoes found the nominal evidence-only result
-   schema and then fully resealed provenance detachment. The current candidate
+   schema and then fully resealed provenance detachment. The accepted repair
    separates closed result/evidence schemas, recomputes the entire expected
    result from authoritative inputs at the deep-copy handoff and supports all
    independent waiting-field grant subsets before the unchanged parent
    projection. The controlling plan is
    `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`.
-7. **Real product read descendants** — open one source and one role/purpose at a
+7. **Provider-free invalidation/reassembly seam** — bind the accepted Rayleen
+   adapter and immutable parent frame set to the accepted temporal protocol;
+   typed payload-free authored-synthetic signals may retire the old set and
+   emit one inert fresh-reassembly requirement, but cannot patch context,
+   watch a live source, persist state, read product data or execute a command.
+8. **Real product read descendants** — open one source and one role/purpose at a
    time with privacy, identity, audit, retention and database acceptance.
-8. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+9. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 

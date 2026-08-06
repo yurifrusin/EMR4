@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "continue_exact_head_independent_veto_for_rayleen_provenance_repair",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md completely reread after restoration; its Current Baton records two rejected exact-head reviews and names fresh independent veto of the externally anchored provider-free unmounted Rayleen source-adapter candidate as the next action.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance and integration. A genuinely fresh independent GPT Sol context may perform only the read-only fallback veto; it receives no edit, acceptance, integration, protected-ref or runtime authority. Antigravity remains zero-call unavailable under contained AER-0039.",
+    "active_plan_and_acceptance": "The active plan, design and threat-model delta were reread completely. Exact candidate 12fbab157551954018e781810e4b100f05698dfb recomputes the complete expected result from authoritative inputs at handoff, requires canonical equality, binds digest-derived ids, supports all sixteen waiting-field subsets and remains pending one fresh exact-head veto.",
+    "protected_evidence_boundaries": "Sections 5 and 6 were restored. Review is limited to committed authored-synthetic repository material and non-regenerative provider-free checks. Patient, product, clinical, protected or historical-PHI data; providers/cloud; live watchers/runtime/routes; commands/writes; deployment/release/Pages; protected refs; and docs/branding remain closed.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is at 12fbab157551954018e781810e4b100f05698dfb. Review worktree C:/Users/sarashera/EMR4-worktrees/r3 is tracked-clean at the same HEAD. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains bcd5f57842d1ba010064214634859a3ba650bb3d. Existing untracked files are preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "rayleen_provenance_repair_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the mandatory post-restoration five-source rehydration and verified exact refs/worktrees."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A new independent x-high context remains selected for the bounded read-only veto."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "AER-0039 preserves the bounded zero-call OAuth timeout; no Gemini decision exists."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unreachable",
+      "evidence": [
+        "AER-0038 remains contained and no worker source is adopted."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

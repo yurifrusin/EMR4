@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.review-packet-reconciliation-receipt.v1",
+  "status": "packet_corrected_candidate_unchanged",
+  "incident_id": "AER-0042",
+  "observed_on": "2026-08-06",
+  "candidate_head": "12fbab157551954018e781810e4b100f05698dfb",
+  "candidate_worktree": "C:/Users/sarashera/EMR4-worktrees/r3",
+  "candidate_tracked_clean": true,
+  "candidate_changed": false,
+  "observed_run": {
+    "packet_expected_test_count": 195,
+    "actual_collected_and_passed_count": 167,
+    "exit_code": 0,
+    "incorrectly_named_path": "tests/test_raisa_practice_context_fabric_direction.py",
+    "incorrectly_named_path_test_count": 3
+  },
+  "correction": {
+    "required_path": "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py",
+    "required_path_test_count": 31,
+    "corrected_expected_test_count": 195,
+    "arithmetic_reconciliation": "167 - 3 + 31 = 195",
+    "corrected_packet_requires_full_rerun": true,
+    "candidate_source_or_test_changed": false
+  },
+  "classification": {
+    "origin": "agent_behavior",
+    "role": "orchestrator",
+    "category": "evidence_misreport",
+    "reviewer_error": false,
+    "repository_or_pytest_defect": false,
+    "candidate_finding": false
+  },
+  "operation_counters": {
+    "provider_or_model_calls_added": 0,
+    "patient_or_product_data_reads": 0,
+    "protected_evidence_actions": 0,
+    "runtime_or_command_actions": 0,
+    "protected_ref_updates": 0
+  }
+}
