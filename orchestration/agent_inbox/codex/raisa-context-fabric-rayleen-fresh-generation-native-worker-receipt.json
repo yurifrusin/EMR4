@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.native_worker_receipt.v1",
+  "worker": "native_gpt_sol_high",
+  "task": "rayleen_fresh_generation_impl",
+  "source_head": "8e6528427854fcb79a8356be8a2ea236d2443133",
+  "branch": "codex/ariadne-bernie-davida-parallel-seam",
+  "worktree": "C:/Users/sarashera/emr4",
+  "owned_files": [
+    "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal.py",
+    "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal.py"
+  ],
+  "result": "implementation_and_focused_tests_complete_not_accepted",
+  "worker_checks": {
+    "focused_tests_passed": 23,
+    "ruff": "passed",
+    "py_compile": "passed",
+    "diff_check": "passed",
+    "head_unchanged": true,
+    "staged_or_committed": false
+  },
+  "sol_review": {
+    "complete_source_and_test_read": true,
+    "bounded_amendment": "Explicitly added requesting Bureau, purpose, binding and session-binding equality plus fixed read/command/provider ceilings to the no-wider grant proof and focused assertion.",
+    "acceptance_authority_transferred": false
+  },
+  "semantic_conflict": null,
+  "claim_boundary": "Pure provider-free authored-synthetic unmounted reconstruction only; no filesystem, network, database, subprocess, provider, listener, product-read, runtime, route, persistence or command effect or authority."
+}

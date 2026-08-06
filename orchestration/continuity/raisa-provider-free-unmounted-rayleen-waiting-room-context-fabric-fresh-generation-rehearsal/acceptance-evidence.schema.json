@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/practice-context-fabric-rayleen-fresh-generation-acceptance.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "case_count",
+    "passed_case_count",
+    "predecessor_packet_digest",
+    "requirement_digest",
+    "instruction_digest",
+    "authority_trace_digest",
+    "refresh_trace_digest",
+    "carry_forward_trace_digest",
+    "adapter_result_digest",
+    "new_frame_set_digest",
+    "new_source_trace_digest",
+    "new_current_proofreader_trace_digest",
+    "new_manifest_digest",
+    "new_lease_digest",
+    "admission_digest",
+    "older_result_rejection_digest",
+    "old_then_new_trace_digest",
+    "new_then_old_trace_digest",
+    "immutability_trace_digest",
+    "fresh_generation_proofreader_trace_digest",
+    "fresh_generation_proofreader_decision",
+    "positive_invariants",
+    "negative_reason_codes",
+    "zero_action_posture",
+    "artifact_hashes",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.practice_context_fabric_rayleen_fresh_generation_acceptance.v1"},
+    "result": {"const": "raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal_pass"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_unmounted_rayleen_fresh_generation_rehearsal"},
+    "case_count": {"type": "integer", "minimum": 30},
+    "passed_case_count": {"type": "integer", "minimum": 30},
+    "predecessor_packet_digest": {"$ref": "#/$defs/digest"},
+    "requirement_digest": {"$ref": "#/$defs/digest"},
+    "instruction_digest": {"$ref": "#/$defs/digest"},
+    "authority_trace_digest": {"$ref": "#/$defs/digest"},
+    "refresh_trace_digest": {"$ref": "#/$defs/digest"},
+    "carry_forward_trace_digest": {"$ref": "#/$defs/digest"},
+    "adapter_result_digest": {"$ref": "#/$defs/digest"},
+    "new_frame_set_digest": {"$ref": "#/$defs/digest"},
+    "new_source_trace_digest": {"$ref": "#/$defs/digest"},
+    "new_current_proofreader_trace_digest": {"$ref": "#/$defs/digest"},
+    "new_manifest_digest": {"$ref": "#/$defs/digest"},
+    "new_lease_digest": {"$ref": "#/$defs/digest"},
+    "admission_digest": {"$ref": "#/$defs/digest"},
+    "older_result_rejection_digest": {"$ref": "#/$defs/digest"},
+    "old_then_new_trace_digest": {"$ref": "#/$defs/digest"},
+    "new_then_old_trace_digest": {"$ref": "#/$defs/digest"},
+    "immutability_trace_digest": {"$ref": "#/$defs/digest"},
+    "fresh_generation_proofreader_trace_digest": {"$ref": "#/$defs/digest"},
+    "fresh_generation_proofreader_decision": {"const": "RELEASE"},
+    "positive_invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "predecessor_reconstructed",
+        "requirement_refresh_coverage_exact",
+        "event_metadata_not_used_as_truth",
+        "authority_no_wider",
+        "diary_and_waiting_sources_new",
+        "adapter_extractor_chain_exact",
+        "unaffected_carry_forward_exact",
+        "current_proofreader_released",
+        "new_frame_set_distinct",
+        "new_temporal_objects_rederived",
+        "new_generation_admitted",
+        "older_result_rejected",
+        "both_orders_converge",
+        "old_generation_immutable_and_retired"
+      ],
+      "properties": {
+        "predecessor_reconstructed": {"const": true},
+        "requirement_refresh_coverage_exact": {"const": true},
+        "event_metadata_not_used_as_truth": {"const": true},
+        "authority_no_wider": {"const": true},
+        "diary_and_waiting_sources_new": {"const": true},
+        "adapter_extractor_chain_exact": {"const": true},
+        "unaffected_carry_forward_exact": {"const": true},
+        "current_proofreader_released": {"const": true},
+        "new_frame_set_distinct": {"const": true},
+        "new_temporal_objects_rederived": {"const": true},
+        "new_generation_admitted": {"const": true},
+        "older_result_rejected": {"const": true},
+        "both_orders_converge": {"const": true},
+        "old_generation_immutable_and_retired": {"const": true}
+      }
+    },
+    "negative_reason_codes": {
+      "type": "array",
+      "minItems": 12,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "zero_action_posture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_calls",
+        "network_calls",
+        "database_calls",
+        "product_api_calls",
+        "source_reads",
+        "commands_or_writes",
+        "watcher_or_event_subscriptions",
+        "deployments_or_releases",
+        "protected_actions"
+      ],
+      "properties": {
+        "provider_calls": {"const": 0},
+        "network_calls": {"const": 0},
+        "database_calls": {"const": 0},
+        "product_api_calls": {"const": 0},
+        "source_reads": {"const": 0},
+        "commands_or_writes": {"const": 0},
+        "watcher_or_event_subscriptions": {"const": 0},
+        "deployments_or_releases": {"const": 0},
+        "protected_actions": {"const": 0}
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fresh_generation_module",
+        "invalidation_seam_module",
+        "source_adapter_module",
+        "current_weave_module",
+        "temporal_weave_module",
+        "fresh_generation_packet_schema",
+        "acceptance_evidence_schema"
+      ],
+      "properties": {
+        "fresh_generation_module": {"$ref": "#/$defs/digest"},
+        "invalidation_seam_module": {"$ref": "#/$defs/digest"},
+        "source_adapter_module": {"$ref": "#/$defs/digest"},
+        "current_weave_module": {"$ref": "#/$defs/digest"},
+        "temporal_weave_module": {"$ref": "#/$defs/digest"},
+        "fresh_generation_packet_schema": {"$ref": "#/$defs/digest"},
+        "acceptance_evidence_schema": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "claim_boundary": {
+      "const": "Provider-free authored-synthetic unmounted retire-to-new-generation and deterministic supersession evidence only; no real data, live watcher, source read, persistence, provider, runtime, command, deployment or production claim."
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}
