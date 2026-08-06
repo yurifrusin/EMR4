@@ -26,7 +26,8 @@ authoritative merely because its seal is internally valid.
 The source-shaped input is recursively closed before use. Its raw event id is a
 non-semantic transport coordinate constrained by an exact ASCII grammar and
 length ceiling. Trusted code derives a domain-separated keyed digest binding
-source contract, observer generation and raw id, then drops the raw value. The
+practice-binding digest, source-system id, source-contract digest, observer id,
+observer generation and raw id, then drops the raw value. The
 admitted observation contains no patient, person, appointment, practitioner,
 location, time-slot, field, selector, correlation, reason, payload or callback
 value.
@@ -46,19 +47,31 @@ impact field, so omission cannot narrow classification. An absent route,
 unresolvable alias or inconsistent registry returns bounded full invalidation
 and cannot produce an ordinary signal or an `IRRELEVANT` result.
 
+The sole positive profile maps source
+`diary.appointment_rescheduled.v1` to the existing temporal
+`emr4.diary.appointment_rescheduled.v1` for event type
+`diary.appointment_rescheduled` and aggregate class `APPOINTMENT`. Its exact
+mandatory floor is `current_diary_projection` plus
+`current_waiting_room_projection`; the registry resolves the accepted
+synthetic appointment, Brisbane-one location and practitioner-one references.
+
 ## Disabled policy and synthetic activation
 
 Policy is and remains disabled. The test-only activation is a distinct sealed
 coordinate accepted by only the pure rehearsal function, only with
-`AUTHORED_SYNTHETIC` evidence, and only while all source/runtime/authority flags
-are false. It changes no policy field and cannot be passed to a future live
+`activation_mode: AUTHORED_SYNTHETIC_REHEARSAL`, only when the separate
+observation field is `evidence_mode: AUTHORED_SYNTHETIC`, and only while all
+source/runtime/authority flags are false. It changes no policy field and cannot be passed to a future live
 observer. Without it, admission deterministically returns
 `OBSERVER_DISABLED` before temporal construction.
 
 ## Admission and continuity
 
 Admission compares exact prior observation coordinates supplied as inert
-function input. Exact duplicate identity suppresses as duplicate; an older
+function input. That sealed coordinate binds practice/source/contract,
+observer generation, controlling digests, stream alias, established baseline,
+last position, aggregate revisions and seen observation digests while fixing
+restart, overflow and checkpoint-persisted false. Exact duplicate identity suppresses as duplicate; an older
 position suppresses as replay. Missing baseline, predecessor mismatch,
 position gap, revision gap, overflow or restart uncertainty returns
 `FULL_INVALIDATION_REQUIRED` without advancing any cursor. No decision is
@@ -68,6 +81,12 @@ The emitted design-time continuity requirement states what a later runtime must
 atomically persist, but every present effect flag is false. Observed coordinates
 are not a durable checkpoint and success makes no no-loss or crash-recovery
 claim.
+
+`FULL_INVALIDATION_REQUIRED` carries the exact sorted mandatory two-frame
+impact floor, closed reasons, all controlling digests and false signal,
+checkpoint, durable-handoff and authority/effect flags. It is admission-only in
+this rehearsal; no claim is made that the accepted temporal processor has
+retired context for that no-signal outcome.
 
 ## Temporal handoff
 

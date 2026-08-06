@@ -16,7 +16,7 @@ signal remains control metadata, not context truth or authority.
 | Threat | Control |
 |---|---|
 | Source payload or PHI is smuggled as metadata | Recursively closed input; no selectors, field lists, correlations, reason text, people, practitioners, locations, timeslots, callbacks or arbitrary strings; unknown fields block. |
-| Raw event id becomes a semantic identifier or leaks | Exact non-semantic source-contract grammar; domain-separated HMAC-SHA-256; raw id and key absent from every output/error/evidence value. |
+| Raw event id becomes a semantic identifier, cross-scope collision or leak | Exact non-semantic source-contract grammar; domain-separated HMAC-SHA-256 binds practice, source system, source contract, observer id/generation and raw id; raw id and key absent from every output/error/evidence value. |
 | Hashing or aliasing legitimises prohibited content | Prohibition is semantic as well as structural; only backend-issued registered aliases resolve and arbitrary source strings cannot enter the admitted object. |
 | Source narrows invalidation | Source input has no impact field; non-empty backend event/schema/aggregate floor is unioned with registry impact. |
 | Unknown impact becomes silent irrelevance | Return bounded `FULL_INVALIDATION_REQUIRED`; emit no ordinary signal and never classify as `IRRELEVANT`. |
@@ -25,7 +25,9 @@ signal remains control metadata, not context truth or authority.
 | Bool passes as an integer coordinate | Explicit type checks exclude bool and enforce `1..9007199254740991`. |
 | Wall-clock time claims stream completeness | Transaction position and expected predecessor govern admission; source time is skew-bounded metadata only. |
 | Duplicate/replay renews authority or advances state | Pure closed decision with no mutation; no lease, activation or binding is renewed. |
+| Prior cursor/revision state is ambiguous or caller-selected | Recursively closed sealed prior-coordinate contract binds exact practice/source/observer/digests/baseline/position/revisions/seen ids; fixed decision precedence; no persistence claim. |
 | Gap/revision uncertainty is guessed through | `FULL_INVALIDATION_REQUIRED`; no signal/checkpoint advancement or current-context continuation claim. |
+| Full-invalidation decision overclaims temporal retirement | Exact two-frame conservative impact plus false ordinary-signal, checkpoint and durable-handoff flags; claim remains admission-only until a later durable handoff. |
 | Registry substitution crosses a valid seal | Exact registry digest and practice/source/class bindings are reconstructed and compared in the same packet. |
 | Impact policy is self-consistently replaced | Exact policy id/digest and non-empty mandatory floor are reconstructed by the proofreader. |
 | Temporal signal is source-supplied | Only trusted code may call the accepted constructor after admission; supplied signals are not inputs. |
