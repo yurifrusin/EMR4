@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "execute_frozen_serial_c5_live_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the frozen serial C5 authored-synthetic occupied rehearsal as the immediate gate and the provider-free Practice Context Fabric contract as its automatic successor. The Windows endpoint-ownership recovery plus isolated-worktree interpreter binding now pass on exact source HEAD dff672049ab5ce47058d7340525e63589fefc5c1, including a fresh Gemini 3.6 Flash/high veto.",
+    "current_authority_allocation": "The user's standing programme authority authorizes uninterrupted movement through this planned C5 gate. GPT Sol alone owns live admission, serial execution, recovery and acceptance. The occupied diagnosis cell is fixed to Gemini 2.5 Flash via Sydney Vertex using the Bernie development identity and receives diagnosis-only authority. Deterministic proofreader, standing-authority validation, one-use evidence, actuator, readback and cleanup remain independent; no integration, deployment, product-data or protected-ref authority is delegated.",
+    "active_plan_and_acceptance": "C5 revision 2 binds one task-owned IPv4-loopback authored-synthetic target, exact process absence, Windows exclusive exact-port reacquisition retained through generation 2, exact active controller interpreter, frozen target artifact, Sydney Vertex gemini-2.5-flash, thinkingBudget 1024, maxOutputTokens 2048, one primary plus at most one proofreader-ticketed correction, USD 0.50 total, deterministic proofreading and authority, one-use actuator, fresh readback, rollback and complete cleanup. Provider-free acceptance, widened tests, static gates and fresh exact-head veto pass. The reviewer receipt claims no live result.",
+    "protected_evidence_boundaries": "Only the closed newly authored patient-free C5 frame may reach the occupied provider. Protected holdouts v1-v10, historical PHI, patient, clinical, participant, product-derived, protected and production data, real databases, ordinary product services/runtime, tools/retrieval, raw prompt/response/thought retention, credential or IAM mutation, deployment, production, release, Pages, protected evidence and protected-ref movement remain closed. docs/branding/ and unrelated untracked artifacts remain preserved.",
+    "git_refs_and_worktree": "Primary is tracked-clean on codex/ariadne-bernie-davida-parallel-seam at exact dff672049ab5ce47058d7340525e63589fefc5c1, ten commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f, with only preserved and current-gate untracked receipt/state/evidence paths. Local/origin master and handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Fresh review worktree C:\\Users\\sarashera\\EMR4-worktrees\\c5i-review is clean and unchanged on codex/review-model-required-bureau-c5-interpreter-binding with exact head_before/head_after dff672049ab5ce47058d7340525e63589fefc5c1 and one terminal pass."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_interpreter_binding_live_preexecution_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "authority_binding": {
+    "source_head": "dff672049ab5ce47058d7340525e63589fefc5c1",
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "protected_refs": {
+      "master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "origin_master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "origin_handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "recorded_at": "2026-08-06T00:16:08.4581041Z",
+    "expires_at": "2026-08-06T00:41:08.4581041Z"
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the fresh exact-head veto admission and retains live execution and acceptance authority."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.6 Flash/high exact-head review passed with 132 provider-free tests and a clean unchanged worktree."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker participates in the frozen serial occupied execution."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is not selected for the occupied execution."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent has provider, actuator or acceptance authority."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,46 @@
+{
+  "attempts": [
+    {
+      "admitted": true,
+      "attempt_kind": "primary",
+      "metadata": {
+        "candidate_count": 1,
+        "discarded_provider_response_sha256": "9dab2fe727cde11e9fe26c101035f4bef80a69a4fd3514309078060b9a6bda10",
+        "finish_reason": "STOP",
+        "http_status": 200,
+        "latency_ms": 6049,
+        "model_version": "gemini-2.5-flash",
+        "part_kinds": [
+          "text"
+        ],
+        "provider_contacted": true,
+        "provider_response_bytes": 2267,
+        "provider_text_retained": false,
+        "raw_prompt_retained": false,
+        "raw_provider_response_retained": false,
+        "raw_response_retained": false,
+        "request_sha256": "912dec6c68dbe4eb2d639728fa36f1ba9466c4115c9a2058fe18439786bb5c49",
+        "thought_content_retained": false,
+        "usage": {
+          "candidatesTokenCount": 445,
+          "promptTokenCount": 1301,
+          "thoughtsTokenCount": 830,
+          "totalTokenCount": 2576
+        }
+      },
+      "provider_contacted": true,
+      "reason_code": "proofreader_admitted",
+      "reservation_id": "c5-primary-001"
+    }
+  ],
+  "fallback_used": false,
+  "maximum_cost_usd": 0.5,
+  "maximum_provider_calls": 2,
+  "maximum_reserved_cost_consumed_usd": 0.25,
+  "provider_calls_consumed": 1,
+  "provider_calls_reserved": 0,
+  "reserved_cost_per_call_usd": 0.25,
+  "reserved_cost_usd": 0.0,
+  "schema_version": "emr4.c5_live_cost_ledger.v1",
+  "status": "closed"
+}

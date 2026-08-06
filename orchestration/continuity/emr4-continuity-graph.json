@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 215,
+  "graph_revision": 216,
   "harvests": [],
   "nodes": [
     {
@@ -12536,9 +12536,115 @@
         "Patient, clinical, product-derived, protected and production data; real databases; ordinary services; product routes and Context Fabric runtime remain closed.",
         "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-c5-occupied-live-rehearsal",
+      "title": "C5 Occupied Authored-Synthetic Live Rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T00:25:00Z",
+      "updated_at": "2026-08-06T00:25:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "dff672049ab5ce47058d7340525e63589fefc5c1",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-c5-provider-free-implementation-readiness",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/emr4-model-required-bureau-c5-occupied-live-rehearsal-closeout.md",
+            "scope": "Define the first provider-free, authored-synthetic, unmounted Practice Context Fabric and Bureau Memory Bank read contract; no product route, persistence or runtime."
+          }
+        ],
+        "notes": [
+          "C5 acceptance is limited to one disposable authored-synthetic development loop.",
+          "One Gemini 2.5 Flash call was deterministically admitted; no correction call followed.",
+          "Final cleanup proves no owned process, listener, task directory, open ledger or reusable capability.",
+          "Practice Context Fabric remains provider-free and unmounted in its first descendant."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-model-required-bureau-c5-occupied-live-rehearsal",
+          "source": "docs/emr4-model-required-bureau-c5-occupied-live-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the exact authored-synthetic C5 diagnosis, one-use recovery, generation-2 readback and complete cleanup result."
+        }
+      ],
+      "claim_scope": [
+        "One exact Sydney Vertex gemini-2.5-flash call was admitted under the bounded diagnosis-only envelope.",
+        "One disposable loopback target recovered from generation 1 to generation 2 with fresh readback.",
+        "The closed ledger consumed one provider call and at most USD 0.25 of the USD 0.50 reservation ceiling.",
+        "No patient, product, database, ordinary-service, production, deployment or release capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-interpreter-binding-evidence.json"
+          ],
+          "note": "C5 used only patient-free technical frames and did not alter the Diary combined-scope contract."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_reception_one_availability_reconciliation.py",
+            "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-interpreter-binding-evidence.json",
+            "docs/emr4-model-required-bureau-c5-occupied-live-rehearsal-closeout.md"
+          ],
+          "note": "C5 introduced no product event consumer and left committed reschedule reconciliation unchanged."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md",
+          "docs/emr4-model-required-bureau-c5-live-preexecution-orchestration-boundary.md",
+          "docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md",
+          "docs/security/emr4-model-required-bureau-c5-live-preexecution-orchestration-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-interpreter-binding-evidence.json",
+          "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-interpreter-binding-cost-ledger.json"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-c5-occupied-live-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-c5-occupied-live-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c5-interpreter-binding-review-receipt.json",
+          "orchestration/agent_inbox/codex/model-required-bureau-c5-interpreter-binding-live-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_model_required_bureau_c5_live.py",
+          "tests/test_model_required_bureau_c5_rehearsal.py",
+          "tests/test_model_required_bureau_c5_contract.py",
+          "tests/test_model_required_bureau_c5_occupied_live_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Practice Context Fabric and Bureau Memory Bank may begin only as provider-free authored-synthetic unmounted read contracts.",
+        "Product routes, persistence, temporal retention, provider calls and external retrieval remain closed.",
+        "Patient, clinical, product-derived, protected and production data; real databases and ordinary services remain closed.",
+        "Commands, writes, deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-05T14:30:00Z"
+  "updated_at": "2026-08-06T00:25:00Z"
 }

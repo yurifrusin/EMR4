@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted strategic architecture direction; implementation unstarted
+Status: accepted strategic architecture direction; first provider-free contract next
 
 ## Purpose
 
@@ -141,6 +141,48 @@ Where both "what was known then" and "what was later corrected" matter, the
 source should support valid-time and transaction-time semantics rather than
 overwriting history.
 
+## Bureau Memory Bank
+
+Recent collective work should be available through a named **Bureau Memory
+Bank**, but only as another Context Fabric frame. It is not a new source of
+truth, a second audit ledger, a provider-model memory, a global transcript or a
+standalone search API.
+
+The compliance audit and the Memory Bank serve different purposes:
+
+- the audit is complete, immutable, compliance-oriented and independently
+  retained;
+- the Memory Bank is derived, lossy, minimal, purpose-filtered, expiring and
+  rebuildable;
+- a Bureau never queries or receives raw audit records;
+- memory items are historical references, not evidence of current truth,
+  identity, present authority or command success; and
+- correction or supersession rebuilds or omits a projection rather than
+  patching an already released frame.
+
+The first contract should place `bureau_memory_item_set` under the existing
+`recent_collective_work` source class. A closed `BureauMemorySelector` may name
+originating Bureaus, allowlisted action families, the actor relation (`self`,
+`same_practice_staff` or `system`), outcome codes, a temporal hint and a maximum
+result count. It must not support free-text audit search, SQL-like predicates,
+wildcard sources or model-selected identity scope.
+
+Each released `BureauMemoryItem` should carry only a bounded request label,
+action family, outcome code, initiator relation, target kind, policy-permitted
+opaque target reference, start/completion times, source receipt/revision/digest,
+supersession state, relevance reasons and an
+`authority_ceiling: read_context_only`. Raw prompts and responses, before/after
+payloads, secrets, IP addresses, user agents, database keys, unrestricted actor
+identities and command material are forbidden.
+
+The model may propose one named horizon: `current_turn`, `current_session`,
+`current_practice_day`, `previous_practice_day`, `recent_operational`,
+`explicit_interval` or `durable_thread_link`. Backend policy converts the hint
+into an effective interval by intersecting it with practice timezone, role,
+purpose, source availability and the authorised cap. It can only preserve or
+narrow the request. Fixture durations used in the first descendant set no
+production retention period.
+
 ## Example: “Who was that person called George?”
 
 A request such as “Who was the person who came in this morning, probably
@@ -183,9 +225,13 @@ not an informal transcript transfer.
 The direction should be implemented through narrow descendants rather than one
 large “memory” feature:
 
-1. **Fabric contract** — provider-free authored-synthetic schemas for
-   `ContextNeed`, `ContextScopeGrant`, `ContextFrameSet` and weave trace, aligned
-   with the API Spine and existing Bureau frame contracts.
+1. **Fabric and Memory Bank contract** — provider-free authored-synthetic
+   schemas for `ContextNeedCandidate`, backend `ContextAuthorityBinding`,
+   `ContextNeed`, deterministic `ContextScopeGrant`, `BureauMemorySelector`,
+   `BureauMemoryItem`, `ContextFrame`, `ContextFrameSet`, selector/weave trace
+   and same-packet proofreader trace, aligned with the API Spine and existing
+   Bureau frame contracts. The GraphQL surface remains documentation-only and
+   unmounted.
 2. **Current operational weave** — compose existing authorised Diary,
    waiting-room, directory and session read projections without adding a new
    product route or data source.
@@ -218,6 +264,9 @@ and release no success based on a context frame alone.
 - No stale frame, transcript, prior projection or Bureau output used as command
   evidence.
 - No cross-user or cross-Bureau sharing without an explicit typed scope decision.
+- No raw audit access, transcript replay, unrestricted actor lookup or standalone
+  Memory Bank endpoint; memory is requested only through an ordinary scoped
+  `ContextNeed`.
 - No patient, product, provider, historical-PHI, clinical, production,
   deployment or release authority is created by this direction.
 

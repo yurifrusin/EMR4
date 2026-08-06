@@ -46,21 +46,15 @@ Both lanes used explicit positive bounded reasoning, deterministic proofreading
 and advisory-only release; this establishes neither product data access nor a
 read, command, write, actuator, production or clinical authority.
 
-Rayleen A4 now also passes its narrow default-off development product-read/UI
-descendant. A dedicated Receptionist-only, practice/location-scoped GraphQL read
-projects newly authored synthetic waiting-room truth through Reception One. One
-Sydney Vertex selector required the single planned grounding correction, then
-the unchanged deterministic proofreader admitted one model-selected view. The
-two-call/USD 0.50 ledger is consumed; real/patient data, commands, writes,
-production, deployment and release remain closed. The paired A5.1/B4.1 command
-descendant now also passes under backend-owned human confirmation, idempotency,
-atomic audit/outbox and deterministic readback. C4's narrowest provider-free,
-authored-synthetic allowlisted-actuator simulator now also passes with shared
-one-use execution transactions, exact current-authority locking and fresh
-readback/rollback proof. The next dependency-satisfied action is to freeze the
-narrowest C5 disposable non-PHI live-development-recovery plan; C4 itself opens
-no live target, real database, provider product runtime, deployment or
-production action.
+Rayleen A4, paired A5.1/B4.1 and C4 now pass their bounded product-read,
+command-boundary and provider-free actuator-simulator descendants. C5 also
+passes one source-bound authored-synthetic live-development-recovery loop: one
+Sydney Vertex `gemini-2.5-flash` diagnosis was deterministically admitted,
+generation 2 passed fresh process-plus-HTTP readback, the ledger closed after
+one call and cleanup proved zero reusable runtime capability. This does not
+open a product service, database, patient-data path, general repair agent,
+production, deployment or release action. The next dependency-satisfied action
+is the provider-free Practice Context Fabric and Bureau Memory Bank contract.
 
 Raisa's accepted longer-range integration direction is the backend-owned
 **Practice Context Fabric** described in
@@ -309,7 +303,28 @@ truth; session state is not a database; Diagnostic Thread remains the durable
 clinical domain object; Cochrane remains a cited licensed evidence source; and
 no Bureau inherits another Bureau's private narrative or authority.
 
-Implementation proceeds from provider-free authored-synthetic contracts, to
+Each Bureau may also receive a narrowly selected **Bureau Memory Bank** frame
+when the request requires reference to recent work. This is not a second audit
+log and never exposes raw audit rows. It is a backend-derived, lossy, minimal,
+purpose-filtered, expiring and rebuildable projection over authorised completed
+action receipts or audit-derived records. A memory item may say which Bureau
+handled a request family, its bounded outcome and provenance, but not reveal raw
+prompts, responses, before/after payloads, secrets, unrestricted actor identity
+or command material. Memory remains historical context: it cannot assert
+current truth, identity, authority or successful present execution.
+
+The requesting model may propose a named temporal horizon such as current turn,
+current session, current practice day, previous practice day, recent
+operational history, an explicit interval or a durable-thread link. Backend
+policy resolves and clips that proposal against purpose, role, practice,
+location, source availability, freshness and the maximum authorised lookback.
+The effective interval is always an intersection and this first contract sets
+no production retention period.
+
+Implementation proceeds from provider-free authored-synthetic contracts for
+`ContextNeedCandidate`, backend `ContextAuthorityBinding`, `ContextNeed`,
+`ContextScopeGrant`, `BureauMemorySelector`, `BureauMemoryItem`, `ContextFrame`,
+`ContextFrameSet`, selector/weave trace and same-packet proofreader trace, to
 composition of existing current read models, to a patient-free temporal weave,
 then to intent-shaped retrieval rehearsals and separately gated real-product and
 clinical descendants. GraphQL/query services remain read-only; mutations remain

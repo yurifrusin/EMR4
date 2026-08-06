@@ -14,17 +14,25 @@ def load(path):
 def test_c5_implementation_readiness_continuity_and_compass_are_current():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 215
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 197
-    assert compass["source_graph_revision"] == 215
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert "no live C5 result exists yet" in compass["orientation_statement"]
+    node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
+    assert graph["graph_revision"] >= 216
+    assert node["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] >= 198
+    assert compass["source_graph_revision"] >= 216
+    assert compass["current_position"]["node_id"] == (
+        "model-required-bureau-c5-occupied-live-rehearsal"
+    )
+    assert "C5 occupied" in compass["orientation_statement"]
 
 
 def test_c5_node_opens_only_distinct_pre_execution_preparation():
-    node = load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    node = next(
+        item
+        for item in load("orchestration/continuity/emr4-continuity-graph.json")[
+            "nodes"
+        ]
+        if item["id"] == NODE_ID
+    )
     assert node["authority"]["authorized_openings"] == [
         {
             "boundary": "autonomous-action",
@@ -100,6 +108,6 @@ def test_context_fabric_remains_candidate_and_unimplemented_successor():
     )
     assert fabric["status"] == "candidate"
     assert fabric["boundary_changes"] == []
-    assert "Practice Context Fabric contract" in compass["current_position"][
-        "unlocks"
-    ][1]
+    assert "Practice Context Fabric" in " ".join(
+        compass["current_position"]["unlocks"]
+    )

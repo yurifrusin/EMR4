@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "launch_fresh_gemini_36_flash_high_veto_for_exact_c5_interpreter_binding_descendant",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the frozen serial C5 authored-synthetic live rehearsal as the immediate gate and provider-free Practice Context Fabric as its automatic successor. The isolated-worktree defect found by the first veto is repaired in new exact descendant dff672049ab5ce47058d7340525e63589fefc5c1, which now requires a genuinely fresh independent veto before any occupied attempt.",
+    "current_authority_allocation": "GPT Sol retains implementation, live execution, recovery and acceptance. Gemini 3.6 Flash/high receives one fresh Antigravity-project read-only veto of the exact descendant and no implementation, ADC/provider, target/process, actuator, integration, deployment, product-data or protected-ref authority.",
+    "active_plan_and_acceptance": "The descendant binds the child to the exact absolute active controller interpreter, rejects missing/relative/alternative identity, hashes and rechecks it before spawn, and preserves the repository-pinned target, fixed argv, isolated mode, no shell, minimal environment and all C5 endpoint, authority, proofreader, cost, readback, rollback and cleanup controls. Provider-free focused/widened tests, acceptance regeneration/check and static gates pass. The fresh veto must reproduce isolated-worktree success and review the complete candidate.",
+    "protected_evidence_boundaries": "Review is source-only and provider-free. ADC/cloud, Vertex, real C5 target/process/socket/port/directory, protected holdouts, historical PHI, patient/clinical/product data, databases, ordinary runtime, docs/branding/, deployment, release, Pages and protected-ref movement are forbidden. Existing untracked artifacts remain preserved.",
+    "git_refs_and_worktree": "Primary is tracked-clean on codex/ariadne-bernie-davida-parallel-seam at exact dff672049ab5ce47058d7340525e63589fefc5c1 with only preserved untracked files and is ten commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Fresh short-path worktree C:\\Users\\sarashera\\EMR4-worktrees\\c5i-review is clean on codex/review-model-required-bureau-c5-interpreter-binding at exact dff672049ab5ce47058d7340525e63589fefc5c1; its executable verifier preflight passed with zero provider/model calls."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_interpreter_binding_pre_verifier_dispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The restored launcher exposes exact gemini-3.6-flash-high/high and the new exact-head worktree preflight passed."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol retains all implementation, execution, recovery and acceptance authority."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek is not dispatched for this independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is not selected for this review."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The completed native audit has no reviewer or acceptance authority."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_and_push_c5_occupied_live_closeout_then_begin_context_fabric_contract",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread at 462 lines, 54131 bytes and SHA-256 836f2fa65fe6b0bacd9752a34dadcf316bf36037e1267a6160e970ae6b5dd471. It records C5 as passed and the provider-free authored-synthetic Practice Context Fabric and Bureau Memory Bank contract as the next implementation.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted movement through planned gates and ordinary task-branch closeout. GPT Sol retains architecture, acceptance, integration and task-branch Git authority. The fresh Gemini verifier and native audit lanes were read-only and receive no implementation, provider, product, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "The exact C5 occupied evidence passes with one Sydney Vertex gemini-2.5-flash call, deterministic admission without correction, generation-2 process-plus-HTTP readback, closed USD 0.50 accounting and complete owned cleanup. The independent Gemini 3.6 Flash/high review passed at source HEAD dff672049ab5ce47058d7340525e63589fefc5c1. Focused C5, Continuity, Compass and acceptance-index tests plus Ruff, compilation and diff checks pass. The successor is limited to provider-free schemas, deterministic selectors, authored-synthetic fixtures, an unmounted read-only GraphQL document and evidence.",
+    "protected_evidence_boundaries": "No further provider call, patient or clinical data, product data, real practice database, ordinary runtime, persistence, command or write, deployment, production, release, Pages, protected evidence or protected-ref action is open. docs/branding/ and every unrelated untracked receipt, runtime state, cost ledger and evidence file remain preserved and excluded. Staging is explicit-path only.",
+    "git_refs_and_worktree": "The task worktree is codex/ariadne-bernie-davida-parallel-seam at precommit source HEAD dff672049ab5ce47058d7340525e63589fefc5c1 and is ten commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602 and will not move. Only the enumerated C5 closeout, continuity, current-compass, active-plan and Context direction artifacts will be committed."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_occupied_live_closeout_precommit_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the occupied result, independent veto, cleanup, continuity and next contract boundary."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh Gemini 3.6 Flash/high review passed exact source HEAD dff672049ab5ce47058d7340525e63589fefc5c1 with a clean unchanged worktree."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No implementation worker was needed for the serial C5 closeout."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Claude CLI is not selected for this closeout."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Independent native read-only audit reproduced C5 hashes, accounting, schema validity, cleanup and protected-ref stability."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
