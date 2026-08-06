@@ -1,10 +1,10 @@
 {
-  "canonical_register_sha256": "1509381f1e78192bc37146b926e44bd7e651ad295acb2879bfeab2b7ec1ef3b3",
+  "canonical_register_sha256": "cb7a9c0a5c23fe74b0478bc889923a13cd1245cd6b34945c082f40fe66bcd6bd",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
       "canonical_unchanged": 29,
-      "untrusted_partial_worktree": 6
+      "untrusted_partial_worktree": 7
     },
     "by_category": {
       "command_scope_violation": 3,
@@ -14,25 +14,25 @@
       "read_only_violation": 1,
       "reasoning_claim_error": 5,
       "repository_defect": 2,
-      "transport_timeout": 5
+      "transport_timeout": 6
     },
     "by_origin": {
       "agent_behavior": 27,
       "harness": 3,
       "repository": 2,
-      "transport": 5
+      "transport": 6
     },
     "by_process_severity": {
       "low": 10,
       "material": 9,
-      "moderate": 18
+      "moderate": 19
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 16,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-orchestrator::orchestrator": 8,
-      "deepseek-flash-workers::implementer": 2,
+      "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -42,13 +42,13 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 7,
+      "implementer": 8,
       "orchestrator": 13,
       "verifier": 17
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 37,
+  "incident_count": 38,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -208,6 +208,30 @@
       "categories": [
         "transport_timeout"
       ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0036",
+        "AER-0038"
+      ],
+      "origins": [
+        "transport"
+      ],
+      "prevention_controls": [
+        "DeepSeek implementation leases retain the bounded no-artifact/no-terminal observation window, exact process/worktree readback, sanitized failure receipt and no-source-adoption rule; recurrence triggers direct Sol fallback rather than a same-lane retry.",
+        "Occupied development workers require a bounded no-artifact/no-terminal observation window, exact process and worktree readback, a sanitized failure receipt, and a declared fallback that cannot broaden the frozen packet or protected authority."
+      ],
+      "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
+      "resource_ids": [
+        "deepseek-flash-workers"
+      ],
+      "roles": [
+        "implementer"
+      ]
+    },
+    {
+      "categories": [
+        "transport_timeout"
+      ],
       "incident_count": 3,
       "incident_ids": [
         "AER-0022",
@@ -231,7 +255,7 @@
       ]
     }
   ],
-  "register_revision": 31,
+  "register_revision": 32,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-06"
 }

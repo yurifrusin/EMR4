@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 31,
+  "register_revision": 32,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1437,6 +1437,43 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0038",
+      "attempt_id": "raisa-context-fabric-rayleen-source-adapter-deepseek-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-rayleen-waiting-room-source-adapter",
+      "origin": "transport",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded occupied DeepSeek implementation lease must produce owned artifacts and a structured terminal receipt within its useful observation window, or be stopped with exact worktree and process containment before fallback.",
+      "observed_error": "The occupied worker remained connected for more than ten minutes without terminal or launcher output. After the verified process tree was stopped, a later audit found uncommitted partial owned-path writes at the unchanged worker HEAD, without tests, receipt or candidate commit.",
+      "detection_method": "Sol monitored the exact worker worktree and launcher output path, enumerated and stopped only the exact launcher descendant process tree, then repeated HEAD, status, path and process readback and quarantined the late partial worktree without source adoption.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-deepseek-timeout-failure-receipt.json",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The exact disposable process tree was stopped after the bounded no-output window. Late uncommitted partial writes remained quarantined at the unchanged worker HEAD, no worker source was adopted, and the independently authored Sol implementation continued in the primary task worktree.",
+        "prevention_control": "DeepSeek implementation leases retain the bounded no-artifact/no-terminal observation window, exact process/worktree readback, sanitized failure receipt and no-source-adoption rule; recurrence triggers direct Sol fallback rather than a same-lane retry.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-deepseek-timeout-failure-receipt.json",
+          "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

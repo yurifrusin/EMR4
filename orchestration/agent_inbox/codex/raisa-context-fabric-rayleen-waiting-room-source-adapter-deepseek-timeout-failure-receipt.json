@@ -1,0 +1,45 @@
+{
+  "schema_version": "ariadne.worker_failure_receipt.v1",
+  "attempt_id": "raisa-context-fabric-rayleen-source-adapter-deepseek-001",
+  "observed_on": "2026-08-06",
+  "status": "contained_transport_timeout",
+  "origin": "transport",
+  "worker": {
+    "model": "deepseek-v4-flash",
+    "reasoning_level": "high",
+    "transport": "claude_code_bare_deepseek"
+  },
+  "source": {
+    "worktree": "C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-worker",
+    "branch": "codex/context-fabric-rayleen-source-adapter-worker",
+    "source_head": "1f008abf806c27c7e37251384f846a4a513dbad5",
+    "packet_sha256": "87737d5f60064fed078f5b72e38f9fdc0f9deeac4e7676f4fde0924319220fc5"
+  },
+  "observation": {
+    "bounded_wait_exceeded_seconds": 600,
+    "terminal_output_received": false,
+    "launcher_output_file_created": false,
+    "owned_files_created_or_modified": [
+      "scripts/raisa_provider_free_practice_context_fabric_current_operational_weave.py",
+      "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py",
+      "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_acceptance.py",
+      "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/adapter-result.schema.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/authored-synthetic-waiting-room-frame.json"
+    ],
+    "candidate_commit_created": false,
+    "tracked_worktree_clean_after_stop": false,
+    "late_partial_writes_detected": true,
+    "head_unchanged_after_stop": true
+  },
+  "containment": {
+    "verified_disposable_root_process_id": 18592,
+    "verified_stopped_descendant_process_ids": [31108, 31400, 61124],
+    "unrelated_processes_stopped": false,
+    "worker_source_adopted": false,
+    "provider_call_made": false,
+    "product_or_database_accessed": false,
+    "protected_ref_moved": false
+  },
+  "disposition": "attempt_rejected_and_sol_recovery_lease_opened",
+  "claim_boundary": "This records a bounded transport timeout followed by quarantined late uncommitted partial writes at the unchanged worker HEAD. No worker source was adopted. It is not evidence about DeepSeek reasoning quality or adapter correctness."
+}

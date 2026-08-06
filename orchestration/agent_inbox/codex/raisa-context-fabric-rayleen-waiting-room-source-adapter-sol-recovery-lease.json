@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.orchestrator_recovery_lease.v1",
+  "tranche": "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter",
+  "opened_on": "2026-08-06",
+  "status": "sol_candidate_ready_for_independent_review",
+  "source_head": "1f008abf806c27c7e37251384f846a4a513dbad5",
+  "failed_worker_attempt": "raisa-context-fabric-rayleen-source-adapter-deepseek-001",
+  "failed_worker_receipt": "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-deepseek-timeout-failure-receipt.json",
+  "worker_candidate_adopted": false,
+  "worker_partial_worktree": {
+    "path": "C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-worker",
+    "head": "1f008abf806c27c7e37251384f846a4a513dbad5",
+    "state": "quarantined_uncommitted_partial",
+    "used_as_source": false
+  },
+  "sol_recovery": {
+    "implementation_origin": "independently_authored_from_frozen_plan",
+    "scope_changed": false,
+    "authority_changed": false,
+    "provider_or_product_boundary_changed": false,
+    "material_amendments": [
+      "Preserved the accepted Current operational-weave source byte-for-byte after its historical artifact-hash test rejected an optional-field edit.",
+      "Made missing-arrival composition conditional on deterministic scope omitting unavailable elapsed/threshold fields instead of weakening or patching the accepted parent."
+    ],
+    "owned_source_hashes": {
+      "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py": "sha256:d58e846e32a357ebbbd48cadf436c18e52f8bf5fa18351e57b592503a18d2532",
+      "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_acceptance.py": "sha256:01b57dc04bd2b9113af6612088c8019102688223ddbaf590fdbc7dc49f0e83d6",
+      "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py": "sha256:07e0c419ec84e3fb4ffcda52db88c4bb70c8eca56a4f01931f5926268730c08a"
+    },
+    "acceptance_evidence_sha256": "sha256:57135440de524f90c1abf0a2382a11305fc0969aeef1bde9de9aee96a8de69e4",
+    "focused_and_inherited_tests_passed": 173,
+    "ruff_and_compile_passed": true,
+    "parent_historical_evidence_preserved": true
+  },
+  "decision": "candidate_for_fresh_gemini_veto_not_acceptance",
+  "authority_boundary": "Sol retains acceptance and integration; this lease grants no provider, real-data, watcher, runtime, command, deployment, production, release, Pages or protected-ref authority."
+}

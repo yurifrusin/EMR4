@@ -1,0 +1,27 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_sol_recovered_rayleen_waiting_room_source_adapter_candidate",
+  "reasons": [
+    "stale_worker_resolution_required:deepseek-flash-workers"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan/design/threat delta and recovery lease bind one authored-synthetic A4 frame, accepted binding/grant, complete opaque alias manifest, one exact Current source envelope and unchanged parent assembler/proofreader. The Sol candidate passed 14 focused tests and 173 combined A4/Context Fabric tests; the deterministic evidence records 13/13 acceptance cases and parent RELEASE.",
+    "current_authority_allocation": "GPT Sol owns recovery, architecture, candidate commit and later acceptance. The DeepSeek partial worktree is quarantined and no source was adopted. Gemini 3.6 Flash/high remains the fresh read-only veto after an exact clean candidate commit; no worker owns integration or protected refs.",
+    "git_refs_and_worktree": "Primary task branch source is 1f008abf806c27c7e37251384f846a4a513dbad5 with only named candidate/recovery/register files intended for commit. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The failed worker branch remains at source HEAD with quarantined uncommitted partial files and is not integrated.",
+    "live_handover_current_baton": "AGENTS.md identifies the frozen provider-free unmounted Rayleen A4 waiting-room source adapter as active. The DeepSeek lease is contained at AER-0038 and the independently authored Sol candidate now passes its deterministic gates without broadening the baton.",
+    "protected_evidence_boundaries": "The candidate contains static authored-synthetic data and pure scripts only. The accepted Current-weave module and historical evidence are byte-preserved. Real patient/product data, live database/session/feed/watcher, provider, route/runtime, command/write, deployment, production, release, Pages, protected evidence and protected refs remain closed. docs/branding and unrelated untracked files remain excluded; staging is explicit-path only."
+  },
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

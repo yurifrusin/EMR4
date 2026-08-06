@@ -1,0 +1,45 @@
+{
+  "schema_version": "emr4.practice_context_fabric_source_adapter_acceptance.v1",
+  "result": "raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_pass",
+  "evidence_label": "provider_free_authored_synthetic_unmounted_rayleen_waiting_room_source_adapter",
+  "case_count": 13,
+  "passed_case_count": 13,
+  "source_frame_file_digest": "sha256:be4a592c3acbe6b080a8af1720bb3744d135fd1c0a910c31ff996655452d5fe2",
+  "source_frame_digest": "sha256:2ad043ade3384d5ab18e7deb70353f13b355c4472cd643a3fbbc988ac198acba",
+  "alias_manifest_digest": "sha256:cbef3ec45c416504bd1075cdfa0c4bdfbd8089ff95e378b2342397e57ad9d72c",
+  "source_envelope_digest": "sha256:979c93ded65467aa5f0611bc59633bb090c85c78312f766b5e709ff1adb29708",
+  "adapter_trace_digest": "sha256:e67e84a6ffc08d0a93d8546eafc27ff0b2cea44080533b53b490a7ddeb0c8f8f",
+  "adapter_result_digest": "sha256:0684aed34c2d0ae71405674f214ee940c2695d2d6a85123adc68aa1770d79e6a",
+  "parent_frame_set_digest": "sha256:683de93a7b98a87b64312c407d0f75c08209b1896909d8d2c080414bb565e5bb",
+  "parent_proofreader_trace_digest": "sha256:cd162aeef6e8156cb46b408889405899873d0e9ae9e883e4c3c087074d58bc4b",
+  "parent_proofreader_decision": "RELEASE",
+  "negative_reason_codes": [
+    "adapter_authority_invalid",
+    "alias_location_not_admitted",
+    "alias_manifest_digest_invalid",
+    "alias_manifest_not_complete",
+    "duplicate_source_signal",
+    "grant_binding_mismatch",
+    "orphan_source_signal",
+    "source_schema_invalid",
+    "source_scope_not_admitted",
+    "source_signal_label_mismatch",
+    "source_signal_not_grounded",
+    "source_ttl_invalid"
+  ],
+  "zero_action_posture": {
+    "provider_calls": 0,
+    "network_calls": 0,
+    "database_calls": 0,
+    "product_api_calls": 0,
+    "commands_or_writes": 0,
+    "watcher_or_event_subscriptions": 0,
+    "deployments_or_releases": 0,
+    "protected_actions": 0
+  },
+  "artifact_hashes": {
+    "adapter_module": "sha256:d58e846e32a357ebbbd48cadf436c18e52f8bf5fa18351e57b592503a18d2532",
+    "current_weave_module": "sha256:9f1881c3acb232da6608f85bf05dee9c898319ced02a3ae3a6ba126cea400772"
+  },
+  "claim_boundary": "Provider-free authored-synthetic unmounted source-adapter evidence only; no real data, live source, watcher, provider, runtime, command, deployment or production claim."
+}

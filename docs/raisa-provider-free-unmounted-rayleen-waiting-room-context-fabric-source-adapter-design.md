@@ -63,6 +63,9 @@ entries:
 
 Optional derived values are included only when the source truth supports them.
 The adapter never emits a sentinel elapsed time or treats absence as zero.
+The accepted Current-weave implementation is not patched: deterministic scope
+must omit an unavailable derived field before assembling that exceptional
+shape, while a scope that requests it releases nothing.
 
 ## Validation order
 

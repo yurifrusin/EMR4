@@ -1,0 +1,82 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_flash_rayleen_waiting_room_source_adapter_implementation",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was rehydrated completely and now names the frozen provider-free unmounted Rayleen A4 waiting-room source adapter as the active descendant after the accepted Context Fabric intent-shaping result.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance, recovery and integration. DeepSeek V4 Flash/high through Claude Code --bare receives only the named pure implementation/test files in a non-protected worker branch. Gemini 3.6 Flash/high remains the later fresh veto. The worker cannot accept its result, touch the baton or push protected refs.",
+    "active_plan_and_acceptance": "Commit 1f008abf806c27c7e37251384f846a4a513dbad5 freezes the plan, design, threat delta and API Spine boundary. Worker packet SHA-256 is 87737d5f60064fed078f5b72e38f9fdc0f9deeac4e7676f4fde0924319220fc5. The worker must adapt one static authored-synthetic emr4.waiting_room_context_frame.v1 through the accepted Current binding/grant, complete opaque aliases and existing assembler/proofreader without invoking a source.",
+    "protected_evidence_boundaries": "Worker data is newly authored patient-free synthetic only. app/**, docs/diary/**, product services/routes, database/network/provider/subprocess runtime, commands/writes, deployment, production, release, Pages, protected evidence and protected refs are forbidden. The worker may run local deterministic tests only, must use explicit-path staging and must not touch preserved untracked files.",
+    "git_refs_and_worktree": "Worker worktree C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-worker is on codex/context-fabric-rayleen-source-adapter-worker at exact clean source 1f008abf806c27c7e37251384f846a4a513dbad5. The primary task worktree is also at 1f008abf and contains only the fresh untracked dispatch evidence plus preserved unrelated untracked artifacts. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_rayleen_waiting_room_source_adapter_worker_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Sol is present to supervise and independently review the candidate."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Verifier dispatch remains closed until deterministic candidate gates pass."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["One bounded implementation/test lease is ready at exact source HEAD 1f008abf806c27c7e37251384f846a4a513dbad5."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains an unused real-TTY fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is transport only; Claude is not the selected worker model."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent receives this lease."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": ["context-fabric-rayleen-source-adapter-implementation-001"], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "context-fabric-rayleen-source-adapter-implementation-001",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\context-fabric-rayleen-source-adapter-worker",
+      "branch": "codex/context-fabric-rayleen-source-adapter-worker",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-06T19:25:00+10:00",
+      "source_head": "1f008abf806c27c7e37251384f846a4a513dbad5",
+      "candidate_head": "1f008abf806c27c7e37251384f846a4a513dbad5"
+    }
+  ],
+  "assigned_agent_ids": ["context-fabric-rayleen-source-adapter-implementation-001"]
+}

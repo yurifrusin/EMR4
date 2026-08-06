@@ -89,8 +89,10 @@ Trusted code must:
 
 Missing arrival time is not repaired or invented. Its entry may carry only the
 closed exception code; absent elapsed/threshold fields remain absent. The
-accepted Current weave projector must therefore preserve optionality rather
-than indexing a missing derived field.
+already accepted Current-weave source and its historical evidence stay
+byte-unchanged. Such an entry is composable only when deterministic scope
+intersection has omitted the unavailable elapsed/threshold disclosure fields;
+a grant that still requests them fails before release.
 
 ## Authored-synthetic proof
 

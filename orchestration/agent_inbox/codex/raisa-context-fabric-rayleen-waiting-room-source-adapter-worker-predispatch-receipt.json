@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_flash_rayleen_waiting_room_source_adapter_implementation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 1f008abf806c27c7e37251384f846a4a513dbad5 freezes the plan, design, threat delta and API Spine boundary. Worker packet SHA-256 is 87737d5f60064fed078f5b72e38f9fdc0f9deeac4e7676f4fde0924319220fc5. The worker must adapt one static authored-synthetic emr4.waiting_room_context_frame.v1 through the accepted Current binding/grant, complete opaque aliases and existing assembler/proofreader without invoking a source.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance, recovery and integration. DeepSeek V4 Flash/high through Claude Code --bare receives only the named pure implementation/test files in a non-protected worker branch. Gemini 3.6 Flash/high remains the later fresh veto. The worker cannot accept its result, touch the baton or push protected refs.",
+    "git_refs_and_worktree": "Worker worktree C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-worker is on codex/context-fabric-rayleen-source-adapter-worker at exact clean source 1f008abf806c27c7e37251384f846a4a513dbad5. The primary task worktree is also at 1f008abf and contains only the fresh untracked dispatch evidence plus preserved unrelated untracked artifacts. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was rehydrated completely and now names the frozen provider-free unmounted Rayleen A4 waiting-room source adapter as the active descendant after the accepted Context Fabric intent-shaping result.",
+    "protected_evidence_boundaries": "Worker data is newly authored patient-free synthetic only. app/**, docs/diary/**, product services/routes, database/network/provider/subprocess runtime, commands/writes, deployment, production, release, Pages, protected evidence and protected refs are forbidden. The worker may run local deterministic tests only, must use explicit-path staging and must not touch preserved untracked files."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

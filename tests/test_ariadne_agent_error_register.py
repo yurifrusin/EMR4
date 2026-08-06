@@ -32,16 +32,16 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_temporal_weave_recovery() -> None:
+def test_committed_register_is_semantically_valid_after_source_adapter_recovery() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 31
+    assert register["register_revision"] == 32
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 38)
+        f"AER-{index:04d}" for index in range(1, 39)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -54,13 +54,14 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
     assert len(agent_incidents) == 27
-    assert len(transport_incidents) == 5
+    assert len(transport_incidents) == 6
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
         "AER-0031",
         "AER-0034",
         "AER-0036",
+        "AER-0038",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -178,6 +179,33 @@ def test_temporal_weave_review_evidence_is_reconciled_at_exact_head() -> None:
         "authoritative_failure_receipt_path"
     ]
     assert receipt["additional_provider_calls"] == 0
+
+
+def test_source_adapter_deepseek_timeout_is_sanitized_and_contained() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0038"
+    )
+    failure = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-rayleen-waiting-room-source-adapter-deepseek-timeout-failure-receipt.json"
+    )
+
+    assert incident["origin"] == "transport"
+    assert incident["role"] == "implementer"
+    assert incident["status"] == "contained"
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert failure["status"] == "contained_transport_timeout"
+    assert failure["observation"]["owned_files_created_or_modified"]
+    assert failure["observation"]["candidate_commit_created"] is False
+    assert failure["observation"]["tracked_worktree_clean_after_stop"] is False
+    assert failure["observation"]["late_partial_writes_detected"] is True
+    assert failure["containment"]["worker_source_adopted"] is False
+    assert failure["containment"]["provider_call_made"] is False
+    assert failure["containment"]["product_or_database_accessed"] is False
+    assert failure["containment"]["protected_ref_moved"] is False
 
 
 def test_a5_worker_scope_breach_closes_only_through_recovery_lease() -> None:
@@ -516,13 +544,13 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 37
+    assert report["incident_count"] == 38
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 27,
         "harness": 3,
         "repository": 2,
-        "transport": 5,
+        "transport": 6,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 3,
@@ -532,12 +560,12 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "read_only_violation": 1,
         "reasoning_claim_error": 5,
         "repository_defect": 2,
-        "transport_timeout": 5,
+        "transport_timeout": 6,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
         "canonical_unchanged": 29,
-        "untrusted_partial_worktree": 6,
+        "untrusted_partial_worktree": 7,
     }
     assert report["recurring_patterns"] == [
         {
@@ -627,6 +655,19 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
             "prevention_controls": [
                 "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
                 "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness.",
+            ],
+        },
+        {
+            "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
+            "incident_count": 2,
+            "incident_ids": ["AER-0036", "AER-0038"],
+            "origins": ["transport"],
+            "categories": ["transport_timeout"],
+            "roles": ["implementer"],
+            "resource_ids": ["deepseek-flash-workers"],
+            "prevention_controls": [
+                "DeepSeek implementation leases retain the bounded no-artifact/no-terminal observation window, exact process/worktree readback, sanitized failure receipt and no-source-adoption rule; recurrence triggers direct Sol fallback rather than a same-lane retry.",
+                "Occupied development workers require a bounded no-artifact/no-terminal observation window, exact process and worktree readback, a sanitized failure receipt, and a declared fallback that cannot broaden the frozen packet or protected authority.",
             ],
         },
         {

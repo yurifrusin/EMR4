@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_sol_recovered_rayleen_waiting_room_source_adapter_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md identifies the frozen provider-free unmounted Rayleen A4 waiting-room source adapter as active. The DeepSeek lease is contained at AER-0038 and the independently authored Sol candidate now passes its deterministic gates without broadening the baton.",
+    "current_authority_allocation": "GPT Sol owns recovery, architecture, candidate commit and later acceptance. The DeepSeek partial worktree is quarantined and no source was adopted. Gemini 3.6 Flash/high remains the fresh read-only veto after an exact clean candidate commit; no worker owns integration or protected refs.",
+    "active_plan_and_acceptance": "The frozen plan/design/threat delta and recovery lease bind one authored-synthetic A4 frame, accepted binding/grant, complete opaque alias manifest, one exact Current source envelope and unchanged parent assembler/proofreader. The Sol candidate passed 14 focused tests and 173 combined A4/Context Fabric tests; the deterministic evidence records 13/13 acceptance cases and parent RELEASE.",
+    "protected_evidence_boundaries": "The candidate contains static authored-synthetic data and pure scripts only. The accepted Current-weave module and historical evidence are byte-preserved. Real patient/product data, live database/session/feed/watcher, provider, route/runtime, command/write, deployment, production, release, Pages, protected evidence and protected refs remain closed. docs/branding and unrelated untracked files remain excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "Primary task branch source is 1f008abf806c27c7e37251384f846a4a513dbad5 with only named candidate/recovery/register files intended for commit. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The failed worker branch remains at source HEAD with quarantined uncommitted partial files and is not integrated."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_rayleen_source_adapter_recovery_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol independently authored and verified the bounded recovery candidate."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent holds a lease."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fresh review remains closed until this exact candidate is committed and isolated."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unreachable", "evidence": ["AER-0038 contains the timed-out lease; its late partial worktree is quarantined."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code was not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No further Claude Code transport is open."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-sol-recovery-lease.json"
+  ],
+  "assigned_agent_ids": []
+}
