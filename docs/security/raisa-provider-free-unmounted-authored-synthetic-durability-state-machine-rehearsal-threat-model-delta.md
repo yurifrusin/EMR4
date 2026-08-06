@@ -30,11 +30,14 @@ authority.
 | Frame/session identity leaks through obligation | Opaque generation id and closed frame type only; no user/session/source alias. |
 | Same source position is replaced | Mismatched digest at a classified position is corruption and forces rebase. |
 | Observation digest is reused at a new position | Digest index makes reuse corruption and forces rebase. |
-| Restart trusts a copied or stale checkpoint | Recompute full state integrity digest and controlling digests before exact-next-position resume. |
+| Restart trusts a copied or stale checkpoint | Recompute full state integrity digest, then require equality to a separately trusted recovery anchor before exact-next-position resume. |
+| Corrupt restart state supplies its own supposedly prior coordinate | Integrity failure returns `NEW_GENERATION_REQUIRED` with no successor state and adopts no candidate coordinate. |
 | Restart skips a missing retained row | Unavailable/non-contiguous next row fully invalidates and requires a new generation. |
 | Key schedule overlap or gap chooses an arbitrary key | Validate one ordered gap-free interval partition and resolve exactly one key; never try all keys. |
+| Routine key rotation changes history or drops the predecessor key early | Validate one atomic successor schedule at a strictly future position fence; historical intervals remain identical and predecessor-key availability covers all retained dependencies plus safety overlap. |
 | Key bytes leak into evidence | Key schedule carries opaque ids/positions only; schema prohibits material recursively. |
-| Fast checkpoint authorizes unsafe purge | Retention uses the minimum eligible non-consumed checkpoint plus pins, key overlap and grace. |
+| Caller omits the slowest generation to authorize purge | Retention consumes the integrity-bound complete state census, verifies its independent registry/census digest and denies omission, duplication or filtering. |
+| Fast checkpoint authorizes unsafe purge | Retention uses the minimum exact non-consumed checkpoint from the complete census plus pins, key overlap and grace. |
 | Wall clock or existing event TTL drives purge | Retention inputs contain no event expiry; output is inert eligibility, not deletion. |
 | Audit becomes context or command evidence | Closed privacy-safe fields and explicit false authority ceilings. |
 | Synthetic fixture smuggles product or free text | Recursively closed schemas plus prohibited-key traversal and adversarial tests. |

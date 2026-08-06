@@ -15,9 +15,11 @@ is represented in the same immutable successor state.
 ## State boundary
 
 `DurabilityState` is a frozen value containing checkpoint, frames, watermarks,
-obligations, receipts, audits and metadata-only key intervals. Every collection
-is canonicalized into a stable ordered tuple for hashing and evidence. Public
-constructors reject unknown keys and values before transition logic runs.
+obligations, receipts, audits, metadata-only key intervals and one complete
+observer-generation census bound to the controlling registry digest. Every
+collection is canonicalized into a stable ordered tuple for hashing and
+evidence. Public constructors reject unknown keys and values before transition
+logic runs.
 
 The state integrity digest covers the complete canonical state except the
 digest field itself. Restart reproduces it before trusting any checkpoint.
@@ -81,10 +83,13 @@ state for operator handling outside this rehearsal.
 
 ## Restart
 
-Restart validates the state integrity digest, every controlling digest, source
-coordinates and exact key interval before returning `RESUME`. Failure uses the
-same conservative rebase transition and keeps the last known contiguous
-position. It never derives current truth from an event or audit record.
+Restart first validates the candidate state integrity digest, then compares it
+with a separately trusted `RecoveryAnchor` before evaluating the retained row.
+A missing or integrity-invalid candidate produces `NEW_GENERATION_REQUIRED`
+with no successor state, so no coordinate is adopted from corrupt input. Once
+integrity and anchor equality pass, retained-row/key uncertainty uses the same
+conservative rebase transition and holds the anchored contiguous position. It
+never derives current truth from an event or audit record.
 
 ## Key schedule
 
@@ -93,12 +98,21 @@ Only key ids and position intervals are represented. An interval has inclusive
 open interval. Validation proves a single ordered, non-overlapping, gap-free
 partition. Key bytes and credential operations are outside the model.
 
+A routine rotation is a separately validated atomic value: predecessor and
+successor schedules, a strictly future activation fence, exact predecessor and
+successor boundary keys, and predecessor-key availability through the retained
+dependency plus safety-overlap fence. Historical intervals cannot change and a
+partial or underlapped transition cannot preserve the generation.
+
 ## Retention decision
 
-The pure retention function receives one source-row position, eligible
-generation checkpoints and explicit booleans for recovery/audit pin, key-
-overlap completion and safety-grace completion. It returns an inert eligibility
-decision and closed reasons. It neither reads a clock nor deletes anything.
+The pure retention function receives one source-row position, the state-carried
+complete generation census, an independently expected census/registry digest
+and explicit booleans for recovery/audit pin, key-overlap completion and safety-
+grace completion. It rejects an omitted, duplicated, filtered or digest-
+mismatched census and computes the minimum across every exact non-consumed
+member. It returns an inert eligibility decision and closed reasons. It neither
+reads a clock nor deletes anything.
 
 ## Deterministic evidence
 

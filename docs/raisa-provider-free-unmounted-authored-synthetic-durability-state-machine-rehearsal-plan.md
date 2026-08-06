@@ -66,8 +66,10 @@ The canonical state contains only:
 - monotonic invalidation watermarks by closed frame type;
 - at most one pending reassembly obligation per frame-generation id;
 - immutable classified receipts keyed by exact position;
-- minimized audit records; and
-- a metadata-only key schedule with no key material.
+- minimized audit records;
+- a metadata-only key schedule with no key material; and
+- one complete backend-authored generation census, bound to the controlling
+  observer-registry digest and covered by the state integrity digest.
 
 No patient, appointment, practitioner, location, time-slot, actor, session,
 payload, command, provider or free-text field is admitted.
@@ -147,8 +149,11 @@ obligation for it.
 
 ## Restart reconstruction
 
-The pure restart function receives a candidate durable state plus exact next
-retained-row metadata. It may return `RESUME` only when:
+The pure restart function receives a candidate durable state, an independently
+trusted `RecoveryAnchor` and exact next retained-row metadata. The anchor is
+outside the candidate state and freezes the exact practice/source/stream/
+epoch/generation identity, controlling digests and last known contiguous
+position/digest. It may return `RESUME` only when:
 
 - checkpoint state is `ACTIVE`;
 - all controlling digests match backend-authored expected values;
@@ -158,10 +163,15 @@ retained-row metadata. It may return `RESUME` only when:
 - the observation's key id is the sole key interval for that position; and
 - the state integrity digest reproduces.
 
-Any missing/corrupt state, mismatch, unavailable next row, retention overrun,
-unknown key or non-contiguous coordinate returns a new fully invalidated
-`REBASE_REQUIRED` state holding the prior contiguous position. It never reads a
-payload, reconstructs truth or adopts an older frame as current.
+If the candidate state is missing or its integrity digest does not reproduce,
+restart returns the terminal closed disposition `NEW_GENERATION_REQUIRED` and
+no successor state. It must not derive a coordinate, frame, watermark,
+obligation or checkpoint from the untrusted candidate. Only after candidate
+integrity and exact anchor equality pass may an unavailable next row, retention
+overrun, unknown key or non-contiguous coordinate return a fully invalidated
+`REBASE_REQUIRED` successor holding the independently anchored contiguous
+position. It never reads a payload, reconstructs truth or adopts an older frame
+as current.
 
 ## Key-interval rehearsal
 
@@ -176,13 +186,29 @@ position, overlap, gap, retroactive change, missing key id and attempt to use a
 different interval key. Any unverifiable schedule consumes the generation
 through full invalidation/rebase; no verifier tries every key.
 
+Routine rotation is a separate atomic `KeyScheduleTransition`: it carries an
+integrity-bound predecessor schedule and successor schedule, a future
+`activation_position` strictly greater than the anchored checkpoint, the
+predecessor key id that verifies `activation_position - 1`, the successor key
+id that uniquely verifies `activation_position`, and a closed predecessor-key
+availability interval that remains open through every dependent retained
+position plus the declared safety overlap. The transition commits only when
+all members validate together. A retroactive fence, changed historical
+interval, absent predecessor key, insufficient overlap, schedule gap/overlap or
+non-atomic partial transition forces full invalidation and a new generation.
+
 ## Retention eligibility rehearsal
 
 Retention is a pure decision over authored-synthetic row metadata. A position
-is purge-eligible only when every eligible non-consumed generation checkpoint
-is at or beyond it, no recovery/audit pin remains, its verification-key overlap
-is closed and the declared safety grace has elapsed. The minimum eligible
-checkpoint controls; the existing event TTL and wall clock are absent.
+is purge-eligible only when the state-carried generation census is integrity-
+valid, its census digest matches the independently expected complete registry
+snapshot, it includes every non-consumed observer generation exactly once,
+every such generation checkpoint is at or beyond the position, no recovery/
+audit pin remains, its verification-key overlap is closed and the declared
+safety grace has elapsed. The caller cannot supply or filter an ad hoc
+checkpoint population. The minimum checkpoint in the complete census controls;
+the existing event TTL and wall clock are absent. Missing, duplicated, unknown
+or omitted census members conservatively deny eligibility.
 
 Source-row, classified-receipt/checkpoint and audit retention remain separate
 closed result families. The rehearsal decides source-row eligibility only and
@@ -214,9 +240,12 @@ single closed evidence packet covering at least:
 6. gap/hold/rebase with no skipped checkpoint;
 7. same-position mismatch and digest reuse corruption;
 8. five member-by-member atomic rollback injections;
-9. successful restart plus gap, digest and retention-loss restart failures;
-10. key-boundary success and overlap/gap/missing-key failure;
-11. minimum-checkpoint, pin, key-overlap and grace retention decisions; and
+9. successful restart plus anchored gap/retention-loss failure and terminal
+   corrupt-state failure that adopts no candidate coordinate;
+10. key-boundary success plus atomic future-fenced rotation and overlap/gap/
+    retroactive-fence/predecessor-key/missing-key failure;
+11. complete-census minimum-checkpoint, omitted-generation, duplicate-
+    generation, pin, key-overlap and grace retention decisions; and
 12. static proof that all effect ceilings remain false.
 
 Evidence must be regenerated from authoritative input artifacts and must not be
@@ -267,12 +296,18 @@ exclude `docs/branding/` and every unrelated untracked artifact.
    mismatched same-position and digest-reuse candidates force rebase.
 9. Gaps and restart uncertainty hold the last contiguous checkpoint, fully
    invalidate and require a new generation; they never skip forward.
-10. Restart resumes only from an integrity-verified state and exact next row
-    with all controlling digests and the sole position key matching.
-11. Key intervals are ordered, gap-free and non-overlapping; boundary success
-    and malformed/unavailable schedule failures are deterministic.
-12. Retention eligibility uses the minimum eligible checkpoint plus pins, key
-    overlap and safety grace; the event TTL and wall-clock are ineligible.
+10. Restart resumes only from an integrity-verified state equal to an
+    independently trusted recovery anchor and an exact next row with all
+    controlling digests and the sole position key matching; missing/corrupt
+    state returns `NEW_GENERATION_REQUIRED` without trusting its coordinates.
+11. Key intervals are ordered, gap-free and non-overlapping; routine rotation
+    is one future-position-fenced atomic transition that preserves predecessor-
+    key availability through the required overlap, and malformed/unavailable
+    schedule failures are deterministic.
+12. Retention eligibility uses the minimum checkpoint from one integrity-bound
+    complete non-consumed-generation census plus pins, key overlap and safety
+    grace; omission or duplication denies eligibility, and event TTL/wall-clock
+    are ineligible.
 13. Audit/evidence use only the closed privacy-safe allowlist and cannot become
     context, read or command evidence.
 14. Canonical evidence is regenerated deterministically, validates under Draft

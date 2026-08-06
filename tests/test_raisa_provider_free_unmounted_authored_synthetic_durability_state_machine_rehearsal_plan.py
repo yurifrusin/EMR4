@@ -48,7 +48,11 @@ def test_plan_freezes_exact_state_machine_semantics() -> None:
         "current_waiting_room_projection",
         "ONE`, `TWO_TO_FOUR`, `FIVE_PLUS",
         "five member-by-member atomic rollback injections",
-        "minimum eligible checkpoint",
+        "minimum checkpoint",
+        "NEW_GENERATION_REQUIRED",
+        "RecoveryAnchor",
+        "complete non-consumed-generation census",
+        "future-position-fenced atomic transition",
     ):
         assert phrase.lower() in text.lower()
 
@@ -71,6 +75,9 @@ def test_design_and_threat_delta_preserve_non_authority() -> None:
         "key bytes leak into evidence",
         "passing rehearsal is claimed as live durability",
         "no protected holdout",
+        "caller omits the slowest generation",
+        "corrupt restart state supplies its own",
+        "routine key rotation changes history",
     ):
         assert phrase in threat
 
