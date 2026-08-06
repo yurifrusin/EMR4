@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: active
+Status: completed
 
 Rejected candidate:
 `92cf76b17bbab276df701ee1e0af0da77e1768a9`
@@ -30,3 +30,10 @@ No architecture meaning, principal, stream, data posture, live/runtime gate or
 claim may widen. A fresh exact-head reviewer must verify the correction and all
 postconditions before acceptance. No database/source/provider/runtime/command,
 deployment, Pages or protected-ref action is authorised.
+
+## Closure
+
+The bounded correction is committed at
+`14e8d3257b9531601260bef094c73e08a9c7b92d`. A genuinely fresh exact-head
+review rejected all 28 independent tuple mutations, passed 160 checks and found
+no P0-P2 issue. The lease is therefore complete without widening scope.

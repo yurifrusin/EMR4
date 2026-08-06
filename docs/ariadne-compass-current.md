@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 226 / Compass 208. The provider-free unmounted observation-to-temporal-signal rehearsal passes at exact reviewed HEAD. A source-specific durability architecture is next; every live and real-data boundary remains closed.
+> EMR4 is at Continuity 227 / Compass 209. The provider-free unmounted source-specific durability architecture passes at exact reviewed HEAD. A pure in-memory durability state-machine rehearsal is next; every live and real-data boundary remains closed.
 
 ## North star
 
@@ -226,25 +226,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A default-off integration principal may only produce a backend-mapped payload-free invalidation signal. Lineage parent: `raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal`.
 105. **Prove full-domain observation admission and temporal handoff — Unmounted authored-synthetic observation-to-signal rehearsal**
    One pure authored-synthetic committed change maps through backend impact and proofreader gates into the accepted temporal processor. Lineage parent: `raisa-provider-free-default-off-live-source-observation-boundary`.
+106. **Freeze no-loss source-specific durability before runtime — Unmounted source-specific durability architecture**
+   A rollback-safe source coordinate, durable watermark/frame fence and fail-closed checkpoint lifecycle pass as exact unmounted contracts. Lineage parent: `raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal`.
 
 ## Current position
 
-**Unmounted observation-to-signal rehearsal accepted; source-specific durability architecture is next — Unmounted authored-synthetic observation-to-signal rehearsal**
+**Unmounted source-specific durability architecture accepted; pure durability state-machine rehearsal is next — Unmounted source-specific durability architecture**
 
-**Why this proof came next:** The full admitted identity, prior and two-sided clock domain plus proofreader-only public egress are independently accepted.
+**Why this proof came next:** The exact no-loss coordinate, atomic durability unit, watermark/fence and failure lifecycle are independently accepted before implementation.
 
-The repaired exact candidate passed 227 checks and a fresh no-finding independent veto.
+The repaired exact candidate rejected all 28 tuple mutations, passed 160 checks and received a fresh no-finding veto.
 
 ### What this unlocks
 
-- Freeze an architecture-only integration principal and durable monotonic outbox/transaction coordinate for diary.appointment_rescheduled.v1.
-- Specify atomic decision-invalidation-checkpoint, restart, retention and key-rotation contracts without mounting a source.
+- Implement pure in-memory provider-free transitions for redelivery, contiguous processing, invalidation, gaps, restart, key intervals and retention eligibility.
+- Exercise the exact durability contract without mounting a source or persisting operational state.
 
 ### What it does not solve
 
-- Real patient/product data, live database/outbox/feed/watcher/listener access or product source reads.
-- Operational credentials, checkpoint persistence, restart execution or runtime retention.
-- Provider cognition, cross-Bureau clinical sources, commands, deployment or production.
+- Real patient/product data, migrations or live database/outbox/feed/watcher/listener/source access.
+- Operational credentials, checkpoint persistence, product reads or runtime retention.
+- Provider cognition, cross-Bureau clinical sources, routes, commands, deployment or production.
 - Release, Pages, protected evidence or protected-ref movement.
 
 ## Continuity and authority
@@ -314,9 +316,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- The default-off live-source architecture and full-domain unmounted observation-to-signal rehearsal are accepted at exact reviewed HEADs.
-- The next safe candidate is a provider-free unmounted source-specific durability architecture for diary.appointment_rescheduled.v1.
-- Separately gate live database/outbox/feed access, operational credentials, persistence, product reads, clinical data, commands, deployment and release.
+- The unmounted observation-to-signal rehearsal and source-specific durability architecture are accepted at exact reviewed HEADs.
+- The next safe candidate is a pure provider-free unmounted durability state-machine rehearsal over authored-synthetic state.
+- Separately gate migrations, live source/database access, operational credentials, persistence, product reads, clinical data, commands, deployment and release.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -505,6 +507,7 @@ Prerequisites:
 
 ## Map limits
 
+- Source-specific durability architecture acceptance proves only exact provider-free unmounted contracts; it creates no migration, live source, database, persistence, product-read, provider, command, runtime, deployment or protected authority.
 - Unmounted observation-to-signal acceptance proves only pure authored-synthetic admission, mapping and proofreading; it creates no live source, database, persistence, product-read, provider, command, runtime, deployment or protected authority.
 - Live-source observation architecture acceptance proves only a provider-free default-off authority design; it creates no live source, delivery, database, product-read, persistence, provider, command, deployment or protected authority.
 - Fresh-generation acceptance proves one authored-synthetic unmounted retire-to-new-generation lifecycle only; it creates no live observation, product-read, persistence, provider, command, deployment or protected authority.
@@ -854,6 +857,9 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-closeout.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-design.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`
+- `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-closeout.md`
+- `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-design.md`
+- `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-plan.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-closeout.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
@@ -935,6 +941,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-source-specific-durability-architecture-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
@@ -1036,6 +1043,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-protected-path-enumeration-failure-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-provenance-repair-independent-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-review-packet-count-reconciliation-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-analysis.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-final-independent-review.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-independent-veto.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-sol-recovery-lease.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
@@ -1047,6 +1059,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-source-specific-durability-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-sol-acceptance.md`
@@ -1606,4 +1619,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 208; continuity graph revision 226._
+_Compass map revision 209; continuity graph revision 227._

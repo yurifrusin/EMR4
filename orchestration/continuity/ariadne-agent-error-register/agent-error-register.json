@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 41,
+  "register_revision": 42,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1849,16 +1849,17 @@
       "recurrence_signature": "orchestrator.closed_contract_safety_arrays_not_exact",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Sol rejected the candidate, preserved the veto, invoked the named recovery lease and limited correction to exact schema tuples plus direct append, removal, replacement and reordering tests. The incident remains open pending a genuinely fresh no-finding veto.",
+        "status": "recovery_lease_applied",
+        "action": "Sol rejected the candidate, preserved the veto, invoked the named recovery lease, made all seven safety-critical tuples exact schema constants and added direct append, removal, replacement and reordering tests. A genuinely fresh exact-head veto at 14e8d3257b9531601260bef094c73e08a9c7b92d rejected all 28 independent tuple mutations and passed all 160 checks with no P0-P2 finding.",
         "prevention_control": "For every security- or authority-critical collection described as closed or exact, require the machine schema to enumerate the complete ordered tuple and require adversarial tests for append, removal, replacement and order changes; subset assertions are insufficient.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-independent-veto.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-sol-recovery-lease.md",
-          "tests/test_raisa_provider_free_unmounted_source_specific_durability_architecture.py"
+          "tests/test_raisa_provider_free_unmounted_source_specific_durability_architecture.py",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-final-independent-review.md"
         ]
       },
-      "status": "open"
+      "status": "corrected"
     }
   ]
 }

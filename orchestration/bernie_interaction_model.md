@@ -231,9 +231,14 @@ persistence or command authority. Its pure unmounted authored-synthetic
 observation-to-signal rehearsal is accepted at exact independently reviewed
 source HEAD `c0502c398df4a56c9558bc68eddedb2adf20d12d`: full-domain raw-id, prior
 and two-sided clock admission maps through backend-owned impact and aliases,
-and public signal egress requires same-packet proofreader release. The next
-safe descendant is a source-specific durability architecture for patient-free
-`diary.appointment_rescheduled.v1`. Real event transport, historical
+and public signal egress requires same-packet proofreader release. Its source-
+specific durability architecture for patient-free
+`diary.appointment_rescheduled.v1` is accepted at exact independently reviewed
+repaired source HEAD `14e8d3257b9531601260bef094c73e08a9c7b92d` with a distinct
+payload-free observer, rollback-safe transaction coordinate, atomic durability
+state, durable watermark/frame fence and fail-closed lifecycle. The next safe
+descendant is a pure in-memory authored-synthetic durability state-machine
+rehearsal. Real event transport, historical
 persistence, patient/product data, product retrieval, runtime and command
 authority remain separately closed.
 

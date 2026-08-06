@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction through the unmounted observation-to-signal rehearsal
+Status: accepted direction through the unmounted source-specific durability architecture
 
 ## Purpose
 
@@ -324,14 +324,25 @@ large “memory” feature:
    authored-synthetic metadata. Two rejected vetoes are preserved as AER-0046
    and AER-0047; the final fresh veto found no P0-P2 issue with 227 checks.
    This proves no live source, persistence, product read, provider or command.
-11. **Source-specific durability architecture** — freeze the exact integration
-   principal, durable monotonic outbox/transaction coordinate, atomic decision-
-   invalidation-checkpoint transaction, restart/gap/retention behavior, key
-   rotation and audit fields for patient-free
-   `diary.appointment_rescheduled.v1`, without mounting a source or runtime.
-12. **Real product read descendants** — open one source and one role/purpose at
+11. **Source-specific durability architecture** — **accepted** at exact
+   independently reviewed repaired source HEAD
+   `14e8d3257b9531601260bef094c73e08a9c7b92d`. It freezes distinct observer and
+   coordinator principals, a rollback-safe per-practice transaction position,
+   one atomic receipt/watermark/obligation/audit/checkpoint unit, durable frame
+   freshness, source-head fencing, fail-closed gap/restart/retention semantics,
+   dedicated key intervals and minimized audit for patient-free
+   `diary.appointment_rescheduled.v1`. The first veto exposed generically
+   bounded safety-critical arrays; the recovered exact tuples rejected all 28
+   independent mutations and passed a fresh 160-check veto. No source, database
+   or runtime is mounted.
+12. **Pure durability state-machine rehearsal** — implement the accepted exact
+   transitions in memory over authored-synthetic state: redelivery, contiguous
+   relevant and irrelevant observations, invalidation watermark/coalescing,
+   gap/hold/rebase, restart reconstruction, key intervals and retention
+   eligibility. Add no application code, migration, source or persistence.
+13. **Real product read descendants** — open one source and one role/purpose at
    a time with privacy, identity, audit, retention and database acceptance.
-13. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+14. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 226,
+  "graph_revision": 227,
   "harvests": [],
   "nodes": [
     {
@@ -13747,9 +13747,124 @@
         "Product reads, external evidence, provider calls, cross-Bureau clinical sources and every command/write remain closed.",
         "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-source-specific-durability-architecture",
+      "title": "Unmounted source-specific durability architecture",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T19:00:00Z",
+      "updated_at": "2026-08-06T19:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "14e8d3257b9531601260bef094c73e08a9c7b92d",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The architecture is provider-free, unmounted and payload-free.",
+          "Observer, durability coordinator and application principals remain distinct.",
+          "Durable watermark and source-head fence are specifications, not operational persistence.",
+          "No database, no source, no product read, no provider, no command, no runtime or protected capability is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-source-specific-durability-architecture",
+          "source": "docs/raisa-provider-free-unmounted-source-specific-durability-architecture-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the rollback-safe source position, atomic durability unit, fail-closed continuity and exact closed machine contract."
+        }
+      ],
+      "claim_scope": [
+        "A distinct payload-free observer and internal durability coordinator are frozen.",
+        "The future producer coordinate is per-practice, transactional, rollback-safe and independent of aggregate revision.",
+        "Durable invalidation watermark, source-head fence, checkpoint, restart, retention and key rotation contracts are exact.",
+        "The fresh recovery veto rejected 28/28 tuple mutations and found no P0-P2 issue across 160 checks.",
+        "No live source, persistence, product read, provider, command, runtime, deployment or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-source-specific-durability-architecture-plan.md",
+            "docs/api-spine/async/integration-events.yaml",
+            "docs/api-spine/openapi/diary-committed-events.yaml",
+            "tests/test_raisa_provider_free_unmounted_source_specific_durability_architecture.py",
+            "docs/raisa-provider-free-unmounted-source-specific-durability-architecture-closeout.md"
+          ],
+          "note": "The existing event contract is retained, while the future payload-free durability projection is a separately gated surface."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/api-spine/graphql/practice-context-fabric-read.graphql",
+            "docs/raisa-provider-free-unmounted-source-specific-durability-architecture-design.md",
+            "tests/test_raisa_provider_free_unmounted_source_specific_durability_architecture.py",
+            "docs/raisa-provider-free-unmounted-source-specific-durability-architecture-closeout.md"
+          ],
+          "note": "Frame invalidation architecture adds neither a read model nor command authority."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-source-specific-durability-architecture-plan.md",
+          "docs/raisa-provider-free-unmounted-source-specific-durability-architecture-design.md",
+          "docs/security/raisa-provider-free-unmounted-source-specific-durability-architecture-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-analysis.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-sol-recovery-lease.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-final-independent-review.md",
+          "docs/ariadne-agent-error-correction-register-revision-41.md",
+          "docs/ariadne-agent-error-correction-register-revision-42.md",
+          "docs/api-spine/async/integration-events.yaml",
+          "docs/api-spine/openapi/diary-committed-events.yaml",
+          "docs/api-spine/graphql/practice-context-fabric-read.graphql"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-source-specific-durability-architecture-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-source-specific-durability-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_source_specific_durability_architecture.py",
+          "tests/test_raisa_provider_free_default_off_live_source_observation_boundary_plan.py",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_plan.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_raisa_provider_free_unmounted_source_specific_durability_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-source-specific-durability-architecture/",
+          "scripts/raisa_provider_free_unmounted_source_specific_durability_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
+        "Database/outbox/feed/watcher/listener/source access and operational credentials remain closed.",
+        "Migrations, source rows, checkpoint persistence, runtime restart and live retention remain closed.",
+        "Product reads, providers, cross-Bureau clinical sources and every route or command/write remain closed.",
+        "Deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T18:00:00Z"
+  "updated_at": "2026-08-06T19:00:00Z"
 }

@@ -113,10 +113,15 @@ exact independently reviewed source HEAD
 `c0502c398df4a56c9558bc68eddedb2adf20d12d`. It proves exact scope-bound keyed
 identity, closed prior continuity, backend-owned impact and alias mapping, the
 full admitted raw-id/prior/two-sided-clock domain and proofreader-only public
-signal egress. Neither acceptance gives the observer truth, returned-data,
-read, provider, persistence or command authority. The next safe descendant is
-a provider-free unmounted source-specific durability architecture for
-`diary.appointment_rescheduled.v1`, not live source or runtime wiring.
+signal egress. Its provider-free unmounted source-specific durability
+architecture is now accepted at exact independently reviewed repaired source
+HEAD `14e8d3257b9531601260bef094c73e08a9c7b92d`: distinct observer/coordinator
+principals, rollback-safe transaction positions, atomic durability state,
+durable invalidation watermarks, source-head fences and fail-closed lifecycle
+contracts are exact. None of these acceptances gives the observer truth,
+returned-data, read, provider, persistence or command authority. The next safe
+descendant is a pure in-memory authored-synthetic durability state-machine
+rehearsal, not live source or runtime wiring.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -423,10 +428,15 @@ generation rehearsal. The architecture-only provider-free default-off
   authority and a new no-wider grant. Its pure unmounted authored-synthetic
   observation-to-signal rehearsal is accepted at exact independently reviewed
   source HEAD `c0502c398df4a56c9558bc68eddedb2adf20d12d`, including full-domain mapping
-  and proofreader-only public egress. The next step is a provider-free unmounted
-  source-specific durability architecture for `diary.appointment_rescheduled.v1`
-  before separately gated live implementation, real-product and clinical
-  descendants.
+  and proofreader-only public egress. The provider-free unmounted source-
+  specific durability architecture for `diary.appointment_rescheduled.v1` is
+  accepted at exact independently reviewed repaired source HEAD
+  `14e8d3257b9531601260bef094c73e08a9c7b92d`, with distinct principals, a
+  rollback-safe transaction position, atomic durability state, durable
+  invalidation watermarks, source-head fencing and fail-closed restart/gap/
+  retention/key/audit contracts. The next step is a pure in-memory authored-
+  synthetic durability state-machine rehearsal before separately gated live
+  implementation, real-product and clinical descendants.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

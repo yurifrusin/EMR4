@@ -32,20 +32,20 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_register_is_valid_during_durability_schema_recovery() -> None:
+def test_register_is_valid_after_durability_schema_recovery() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 41
+    assert register["register_revision"] == 42
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 49)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == ["AER-0048"]
+    ] == []
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -109,10 +109,8 @@ def test_durability_schema_veto_requires_exact_list_recovery() -> None:
     assert incident["category"] == "output_contract_violation"
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
-    assert incident["correction"]["status"] == (
-        "control_implemented_pending_acceptance"
-    )
-    assert incident["status"] == "open"
+    assert incident["correction"]["status"] == "recovery_lease_applied"
+    assert incident["status"] == "corrected"
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -736,7 +734,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
     assert report["incident_count"] == 48
-    assert report["open_incident_ids"] == ["AER-0048"]
+    assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 36,
         "harness": 3,

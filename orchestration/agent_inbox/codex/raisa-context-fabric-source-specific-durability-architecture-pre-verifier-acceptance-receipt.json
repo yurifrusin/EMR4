@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_provider_free_unmounted_source_specific_durability_architecture",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, design, threat delta, exact machine contract and 58 focused tests define a patient-free payload-free durability architecture only. The first veto exposed generic safety-critical arrays; AER-0048 and the named recovery lease preserve that rejection. Exact ordered schema constants plus 28 adversarial tuple mutations then passed a genuinely fresh recovery veto and 160 serial checks with no P0-P2 finding.",
+    "current_authority_allocation": "GPT Sol owns acceptance, recovery, continuity and integration. Fresh native read-only reviewers challenged the architecture and recovery in isolated clean exact-head worktrees; they received no self-acceptance, baton, integration or protected-ref authority. No provider or model lane was opened.",
+    "git_refs_and_worktree": "Task HEAD is the recovered source 14e8d3257b9531601260bef094c73e08a9c7b92d and origin/codex/ariadne-bernie-davida-parallel-seam remains 64439484e124848a542d0db9d0603d1c37d520d2 pending explicit-path closeout. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only named closeout/register artifacts are modified or newly created; all unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "The live handover names a provider-free unmounted source-specific durability architecture for diary.appointment_rescheduled.v1 as the active descendant after the accepted observation-to-temporal-signal rehearsal. The architecture candidate was frozen at 92cf76b17bbab276df701ee1e0af0da77e1768a9, rejected by a fresh exact-head veto, recovered under the named Sol lease and now stands at exact source 14e8d3257b9531601260bef094c73e08a9c7b92d.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI may be opened. No database, outbox, feed, watcher, listener or source may be mounted or contacted; no operational cursor or checkpoint may be persisted or advanced; and no product read, patient/product/protected data, route, provider, command/write, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and all unrelated untracked receipt/state/evidence/cost-ledger files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
