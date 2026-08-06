@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_provider_free_unmounted_durability_state_machine_rehearsal_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The plan, design, threat delta, 33-case evidence, three vetoes, AER-0050 recovery, fourth passing veto, closeout and Sol acceptance bind exact source 95a2ed5e. Continuity 228 and Compass 210 open only architecture for a future PostgreSQL realization. The expanded acceptance packet passed 225 checks, Ruff and diff validation.",
+    "current_authority_allocation": "GPT Sol owns acceptance, continuity, explicit-path commit, task-branch push and immediate bounded continuation. All native reviewers are complete; no provider/model, live runtime, database/source, command or protected-ref authority is active.",
+    "git_refs_and_worktree": "Task HEAD is 95a2ed5e960c58686262b5e82ce2e89354a3860a with only explicit named acceptance, review, register, direction, continuity, index, receipt and test artifacts selected for closeout. Origin task remains 9e26c0b87f8b37e761ec12da8f0fc090e7b8dec0. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only will preserve docs/branding and all unrelated untracked files.",
+    "live_handover_current_baton": "The live handover now records the pure durability state-machine rehearsal pass at exact reviewed source 95a2ed5e and names migration-and-transaction architecture as the next safe descendant under standing uninterrupted-gate authority.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI was opened. No application, migration, database/outbox/feed/watcher/listener/source, operational persistence or credential, product read, patient/product/protected data, route, provider, command/write, runtime, deployment, production, release, Pages or protected-ref activity is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger file remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

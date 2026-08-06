@@ -1,0 +1,94 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_durability_count_rotation_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton and standing authority permit uninterrupted acceptance work within the pure provider-free unmounted authored-synthetic durability rehearsal; all live app, database/source, product-data, provider, command, runtime, deployment, Pages and protected-ref boundaries remain closed.",
+    "current_authority_allocation": "GPT Sol retains recovery, acceptance, integration and baton authority. A fourth distinct native reviewer receives exact-head read-only veto authority only and may not write, integrate, push, call a provider or open a live surface.",
+    "active_plan_and_acceptance": "Candidate 95a2ed5e preserves three revision-required vetoes, keeps the prior structural/retention/effect repairs and adds exact audit-derived cause bucketing plus a minimal rotation-revision ledger disjointly covering lifecycle with audits. Thirty-three cases and 207 serial checks pass. AER-0050 remains open pending this fresh veto.",
+    "protected_evidence_boundaries": "Review is limited to AGENTS.md, active plan/design/threat, three vetoes, AER-0050/revisions 45-47, implementation/continuity surfaces and exact seven tests. It must not enumerate/open branding, protected holdouts, unrelated receipts/evidence, product data, app/database/source/runtime/provider/command/deployment surfaces or write any file/ref.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r22 is clean on codex/review-durability-state-machine-count-rotation-95a2ed5e at exact HEAD 95a2ed5e960c58686262b5e82ce2e89354a3860a and its official preflight passed. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_count_rotation_veto_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Exact candidate 95a2ed5e is committed and clean; its 207-check packet and review preflight pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Three previous reviewer contexts are complete; a distinct fresh reviewer is required."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "No external provider/model call is authorised."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-codex-durability-state-machine-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-count-rotation-review-worktree-preflight.json"
+  ],
+  "assigned_agent_ids": []
+}

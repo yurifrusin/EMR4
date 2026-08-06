@@ -1,0 +1,82 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton and standing uninterrupted-gate authority permit acceptance of the pure provider-free unmounted durability rehearsal after fresh risk-proportional veto. It opens no live, data, provider, command, runtime, deployment or protected capability.",
+    "current_authority_allocation": "GPT Sol owns recovery, acceptance, continuity, explicit-path task-branch integration and immediate bounded continuation. Four distinct native exact-head reviewers held read-only veto authority only; no reviewer could write, self-accept, push or open a provider/database/runtime surface.",
+    "active_plan_and_acceptance": "Candidate 95a2ed5e implements 33 closed evidence cases. Three immutable vetoes drove structural/retention, semantic-effect and count/rotation recovery. The fresh fourth veto passed 29 targeted attacks, 49 focused tests and the exact 207-check packet with no P0-P2 issue. AER-0050 is corrected in revision 48.",
+    "protected_evidence_boundaries": "Acceptance proves deterministic pure transitions, not cryptographic authenticity. No application, migration, database/outbox/feed/watcher/listener/source, operational persistence or credential, product read, patient/product/protected data, route, provider, command/write, runtime, deployment, production, release, Pages or protected-ref activity is authorised. docs/branding and unrelated untracked artifacts remain preserved and excluded.",
+    "git_refs_and_worktree": "Accepted source candidate is exact HEAD 95a2ed5e960c58686262b5e82ce2e89354a3860a on codex/ariadne-bernie-davida-parallel-seam. Origin task remains 9e26c0b87f8b37e761ec12da8f0fc090e7b8dec0. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The final review worktree remained clean and the main worktree contains only bounded closeout changes plus preserved untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_state_machine_rehearsal_pre_verifier_acceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved every rejection and reconciled the final passing veto before acceptance."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The fresh fourth exact-head reviewer completed read-only with no P0-P2 finding."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["No external provider/model call is authorised or required."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-codex-durability-state-machine-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-count-rotation-review-worktree-preflight.json"
+  ],
+  "assigned_agent_ids": []
+}

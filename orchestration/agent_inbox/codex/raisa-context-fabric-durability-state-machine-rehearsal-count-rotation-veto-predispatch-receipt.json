@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_durability_count_rotation_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 95a2ed5e preserves three revision-required vetoes, keeps the prior structural/retention/effect repairs and adds exact audit-derived cause bucketing plus a minimal rotation-revision ledger disjointly covering lifecycle with audits. Thirty-three cases and 207 serial checks pass. AER-0050 remains open pending this fresh veto.",
+    "current_authority_allocation": "GPT Sol retains recovery, acceptance, integration and baton authority. A fourth distinct native reviewer receives exact-head read-only veto authority only and may not write, integrate, push, call a provider or open a live surface.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r22 is clean on codex/review-durability-state-machine-count-rotation-95a2ed5e at exact HEAD 95a2ed5e960c58686262b5e82ce2e89354a3860a and its official preflight passed. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The live baton and standing authority permit uninterrupted acceptance work within the pure provider-free unmounted authored-synthetic durability rehearsal; all live app, database/source, product-data, provider, command, runtime, deployment, Pages and protected-ref boundaries remain closed.",
+    "protected_evidence_boundaries": "Review is limited to AGENTS.md, active plan/design/threat, three vetoes, AER-0050/revisions 45-47, implementation/continuity surfaces and exact seven tests. It must not enumerate/open branding, protected holdouts, unrelated receipts/evidence, product data, app/database/source/runtime/provider/command/deployment surfaces or write any file/ref."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

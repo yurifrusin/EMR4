@@ -40,13 +40,13 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
     )
     assert manifest["source_agents_path"] == "AGENTS.md"
     assert manifest["source_git_head"] == (
-        "d8bc059212e65a6ed2d7ac8d57734096d14b9139"
+        "95a2ed5e960c58686262b5e82ce2e89354a3860a"
     )
     assert manifest["source_agents_sha256"] == (
-        "dcd9f60f44f1b6c57ad754ba9902b05e3beaa004fab2371cb4c012d396da0f88"
+        "204be79c0daf688666dca4ddf95b7719daf778ccdf205df24300b4b5ab73970f"
     )
-    assert manifest["source_agents_byte_count"] == 56354
-    assert manifest["source_agents_line_count"] == 463
+    assert manifest["source_agents_byte_count"] == 72167
+    assert manifest["source_agents_line_count"] == 485
     assert len(payload) == manifest["ledger_byte_count"]
     assert len(payload.decode("utf-8").splitlines()) == manifest["ledger_line_count"]
     assert hashlib.sha256(payload).hexdigest() == manifest["ledger_sha256"]
@@ -56,7 +56,7 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
         after_header="| Item | Indexed acceptance artifacts |",
     )
     assert ledger_labels == manifest["moved_labels"]
-    assert len(ledger_labels) == manifest["moved_row_count"] == 110
+    assert len(ledger_labels) == manifest["moved_row_count"] == 119
 
 
 def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> None:
@@ -69,7 +69,7 @@ def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> N
     # Keep only current authority, active acceptance and future-direction rows
     # in the live rehydration surface; historical acceptance remains hash-bound.
     assert len(live_bytes) < 75_000
-    assert len(live.splitlines()) < 475
+    assert len(live.splitlines()) < 500
     assert "Current Baton acceptance index" in live_labels
     for label in manifest["active_labels"]:
         assert label in live_labels

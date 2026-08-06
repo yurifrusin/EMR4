@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 227 / Compass 209. The provider-free unmounted source-specific durability architecture passes at exact reviewed HEAD. A pure in-memory durability state-machine rehearsal is next; every live and real-data boundary remains closed.
+> EMR4 is at Continuity 228 / Compass 210. The provider-free unmounted durability state-machine rehearsal passes at exact reviewed HEAD. A pure migration-and-transaction architecture tranche is next; every live and real-data boundary remains closed.
 
 ## North star
 
@@ -228,26 +228,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One pure authored-synthetic committed change maps through backend impact and proofreader gates into the accepted temporal processor. Lineage parent: `raisa-provider-free-default-off-live-source-observation-boundary`.
 106. **Freeze no-loss source-specific durability before runtime — Unmounted source-specific durability architecture**
    A rollback-safe source coordinate, durable watermark/frame fence and fail-closed checkpoint lifecycle pass as exact unmounted contracts. Lineage parent: `raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal`.
+107. **Prove durability transitions before database design — Unmounted durability state-machine rehearsal**
+   The pure state machine passes exact atomic, restart, rotation and retention transitions under fresh adversarial veto. Lineage parent: `raisa-provider-free-unmounted-source-specific-durability-architecture`.
 
 ## Current position
 
-**Unmounted source-specific durability architecture accepted; pure durability state-machine rehearsal is next — Unmounted source-specific durability architecture**
+**Pure durability state machine accepted; migration-and-transaction architecture is next — Unmounted durability state-machine rehearsal**
 
-**Why this proof came next:** The exact no-loss coordinate, atomic durability unit, watermark/fence and failure lifecycle are independently accepted before implementation.
+**Why this proof came next:** The exact pure transition semantics are independently accepted before freezing their future PostgreSQL realization.
 
-The repaired exact candidate rejected all 28 tuple mutations, passed 160 checks and received a fresh no-finding veto.
+Thirty-three evidence cases and 29 adversarial attacks pass, with 207 serial checks and no P0-P2 finding.
 
 ### What this unlocks
 
-- Implement pure in-memory provider-free transitions for redelivery, contiguous processing, invalidation, gaps, restart, key intervals and retention eligibility.
-- Exercise the exact durability contract without mounting a source or persisting operational state.
+- Freeze the future PostgreSQL schema, isolation, locking, rollback, RLS/roles, credential binding and retention architecture.
+- Design database-backed authored-synthetic acceptance without creating or mounting the database surfaces.
 
 ### What it does not solve
 
-- Real patient/product data, migrations or live database/outbox/feed/watcher/listener/source access.
-- Operational credentials, checkpoint persistence, product reads or runtime retention.
-- Provider cognition, cross-Bureau clinical sources, routes, commands, deployment or production.
-- Release, Pages, protected evidence or protected-ref movement.
+- Migrations, live database/outbox/feed/watcher/listener/source access or operational credentials.
+- Application/runtime implementation, persistence, product reads or real patient/product data.
+- Provider cognition, routes, commands, deployment, production or release.
+- Pages, protected evidence or protected-ref movement.
 
 ## Continuity and authority
 
@@ -316,9 +318,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- The unmounted observation-to-signal rehearsal and source-specific durability architecture are accepted at exact reviewed HEADs.
-- The next safe candidate is a pure provider-free unmounted durability state-machine rehearsal over authored-synthetic state.
-- Separately gate migrations, live source/database access, operational credentials, persistence, product reads, clinical data, commands, deployment and release.
+- The source-specific durability architecture and pure durability state-machine rehearsal are accepted at exact reviewed HEADs.
+- The next safe candidate is migration-and-transaction architecture only, without creating a migration or database object.
+- Separately gate live database/source access, operational credentials, implementation, product reads, clinical data, commands, deployment and release.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -507,6 +509,7 @@ Prerequisites:
 
 ## Map limits
 
+- Durability state-machine acceptance proves deterministic pure transitions, not cryptographic authenticity, a migration, live database/source, persistence, product-read, provider, command, runtime or deployment safety.
 - Source-specific durability architecture acceptance proves only exact provider-free unmounted contracts; it creates no migration, live source, database, persistence, product-read, provider, command, runtime, deployment or protected authority.
 - Unmounted observation-to-signal acceptance proves only pure authored-synthetic admission, mapping and proofreading; it creates no live source, database, persistence, product-read, provider, command, runtime, deployment or protected authority.
 - Live-source observation architecture acceptance proves only a provider-free default-off authority design; it creates no live source, delivery, database, product-read, persistence, provider, command, deployment or protected authority.
@@ -845,6 +848,9 @@ Prerequisites:
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
+- `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-design.md`
+- `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md`
@@ -937,6 +943,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-threat-model-delta.md`
@@ -1023,6 +1030,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-final-independent-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-repair-independent-review.md`
@@ -1055,6 +1063,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-sol-acceptance.md`
@@ -1619,4 +1628,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 209; continuity graph revision 227._
+_Compass map revision 210; continuity graph revision 228._

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_provider_free_unmounted_durability_state_machine_rehearsal_closeout",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover now records the pure durability state-machine rehearsal pass at exact reviewed source 95a2ed5e and names migration-and-transaction architecture as the next safe descendant under standing uninterrupted-gate authority.",
+    "current_authority_allocation": "GPT Sol owns acceptance, continuity, explicit-path commit, task-branch push and immediate bounded continuation. All native reviewers are complete; no provider/model, live runtime, database/source, command or protected-ref authority is active.",
+    "active_plan_and_acceptance": "The plan, design, threat delta, 33-case evidence, three vetoes, AER-0050 recovery, fourth passing veto, closeout and Sol acceptance bind exact source 95a2ed5e. Continuity 228 and Compass 210 open only architecture for a future PostgreSQL realization. The expanded acceptance packet passed 225 checks, Ruff and diff validation.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI was opened. No application, migration, database/outbox/feed/watcher/listener/source, operational persistence or credential, product read, patient/product/protected data, route, provider, command/write, runtime, deployment, production, release, Pages or protected-ref activity is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger file remain preserved and excluded.",
+    "git_refs_and_worktree": "Task HEAD is 95a2ed5e960c58686262b5e82ce2e89354a3860a with only explicit named acceptance, review, register, direction, continuity, index, receipt and test artifacts selected for closeout. Origin task remains 9e26c0b87f8b37e761ec12da8f0fc090e7b8dec0. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only will preserve docs/branding and all unrelated untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_state_machine_rehearsal_closeout_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled the fourth passing veto, closed AER-0050 and completed the acceptance/continuity packet."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh exact-head review passed 29 attacks and 207 checks without mutation or P0-P2 finding."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["No external provider/model call is authorised or required."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

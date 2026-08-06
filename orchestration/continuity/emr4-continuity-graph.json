@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 227,
+  "graph_revision": 228,
   "harvests": [],
   "nodes": [
     {
@@ -13862,9 +13862,121 @@
         "Product reads, providers, cross-Bureau clinical sources and every route or command/write remain closed.",
         "Deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal",
+      "title": "Unmounted durability state-machine rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T00:00:00Z",
+      "updated_at": "2026-08-06T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "95a2ed5e960c58686262b5e82ce2e89354a3860a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-source-specific-durability-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The rehearsal is pure, provider-free, unmounted and authored-synthetic.",
+          "Integrity sealing is deterministic test evidence, not a cryptographic MAC.",
+          "No application, migration, database/source, product read, provider, command or runtime capability is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-durability-state-machine-rehearsal",
+          "source": "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the pure atomic checkpoint, watermark, obligation, audit, restart, rotation and retention transitions."
+        }
+      ],
+      "claim_scope": [
+        "Thirty-three closed authored-synthetic evidence cases pass.",
+        "Exact cause cardinality and audit/rotation lifecycle chronology are deterministically rederived.",
+        "The fresh fourth veto passed 29 attacks, 49 focused tests and 207 serial checks with no P0-P2 issue.",
+        "No migration, database/source, operational persistence, product read, provider, command, runtime or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-plan.md",
+            "scripts/raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py",
+            "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py",
+            "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-closeout.md"
+          ],
+          "note": "The committed signal remains patient-free and unmounted; no live feed, read or command is added."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-design.md",
+            "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py",
+            "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-closeout.md"
+          ],
+          "note": "The rehearsal carries no patient or appointment payload."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-plan.md",
+          "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-design.md",
+          "docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "scripts/raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-recovery-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-semantic-recovery-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-final-independent-review.md",
+          "docs/ariadne-agent-error-correction-register-revision-45.md",
+          "docs/ariadne-agent-error-correction-register-revision-46.md",
+          "docs/ariadne-agent-error-correction-register-revision-47.md",
+          "docs/ariadne-agent-error-correction-register-revision-48.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_unmounted_source_specific_durability_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_plan.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_blueprint_first_boundary.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal",
+          "scripts/raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py",
+          "scripts/raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_acceptance.py",
+          "scripts/raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
+        "Migrations, database/outbox/feed/watcher/listener/source access and operational credentials remain closed.",
+        "Operational persistence, product reads, providers and every route or command/write remain closed.",
+        "Deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T19:00:00Z"
+  "updated_at": "2026-08-06T00:00:00Z"
 }

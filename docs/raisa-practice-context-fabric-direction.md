@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction through the unmounted source-specific durability architecture
+Status: accepted direction through the unmounted durability state-machine rehearsal
 
 ## Purpose
 
@@ -335,14 +335,21 @@ large “memory” feature:
    bounded safety-critical arrays; the recovered exact tuples rejected all 28
    independent mutations and passed a fresh 160-check veto. No source, database
    or runtime is mounted.
-12. **Pure durability state-machine rehearsal** — implement the accepted exact
-   transitions in memory over authored-synthetic state: redelivery, contiguous
-   relevant and irrelevant observations, invalidation watermark/coalescing,
-   gap/hold/rebase, restart reconstruction, key intervals and retention
-   eligibility. Add no application code, migration, source or persistence.
-13. **Real product read descendants** — open one source and one role/purpose at
+12. **Pure durability state-machine rehearsal** — **accepted** at exact
+   independently reviewed source HEAD
+   `95a2ed5e960c58686262b5e82ce2e89354a3860a`. Thirty-three authored-synthetic
+   cases prove immutable redelivery, atomic transitions, watermark/coalescing,
+   gap/hold/rebase, restart, key rotation and complete-census retention. Three
+   rejected candidates are preserved; the fourth fresh veto passed 29 attacks
+   and 207 serial checks. This is deterministic integrity evidence, not a MAC,
+   and mounts no source, database or runtime.
+13. **Migration-and-transaction architecture** — freeze the future PostgreSQL
+   schema, isolation/locking, producer rollback, RLS/roles, credential binding,
+   operational retention and database-backed authored-synthetic acceptance
+   design without creating a migration, database object, source or persistence.
+14. **Real product read descendants** — open one source and one role/purpose at
    a time with privacy, identity, audit, retention and database acceptance.
-14. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+15. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 
