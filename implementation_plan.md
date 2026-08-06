@@ -106,7 +106,8 @@ accepted adapter/Current proofreader, admits one distinct new frame set with a
 new manifest/lease and rejects an older result in both completion orders. It
 performs no product read and mounts no observer, watcher, feed or persistence.
 The architecture-only provider-free default-off live-source observation
-boundary is now frozen for independent acceptance. It separates integration-
+boundary is accepted at exact independently reviewed repaired source HEAD
+`fdbda21b28371778f5e50b0bc2cbd870bbf40e42`. It separates integration-
 principal observation, payload-free temporal classification and a separately
 authorised fresh-read plane; requires exact non-wildcard policy/binding,
 monotonic transaction positioning, baseline-before-frame binding, fail-closed
@@ -413,7 +414,8 @@ synthetic model-required intent-shaping descendant, the exact independently
 reviewed unmounted provider-free Rayleen A4 waiting-room source adapter and its
 provider-free authored-synthetic invalidation/reassembly seam and fresh-
 generation rehearsal. The architecture-only provider-free default-off
-live-source observation boundary is now frozen: authenticated integration
+live-source observation boundary is accepted at exact independently reviewed
+repaired source HEAD `fdbda21b28371778f5e50b0bc2cbd870bbf40e42`: authenticated integration
 metadata may only be admitted into a backend-constructed payload-free temporal
 signal, while any later source read starts from current application-principal
 authority and a new no-wider grant. The next step is a pure unmounted authored-

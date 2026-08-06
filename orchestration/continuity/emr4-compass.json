@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 206,
-  "updated_at": "2026-08-06T16:30:00Z",
-  "source_graph_revision": 224,
-  "orientation_statement": "EMR4 is at Continuity 224 / Compass 206. The provider-free unmounted Rayleen fresh-generation rehearsal passes at exact reviewed HEAD. An architecture-only default-off live-source observation boundary is next; live implementation, product reads and real data remain closed.",
+  "map_revision": 207,
+  "updated_at": "2026-08-06T19:30:00Z",
+  "source_graph_revision": 225,
+  "orientation_statement": "EMR4 is at Continuity 225 / Compass 207. The provider-free default-off live-source observation architecture passes at exact reviewed HEAD. An unmounted authored-synthetic observation-to-signal rehearsal is next; every live and real-data boundary remains closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1781,36 +1781,50 @@
         "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md",
         "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-default-off-live-source-observation-boundary",
+      "lineage_parent": "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal",
+      "strategic_role": "Freeze the observer non-truth and authority membrane",
+      "outcome": "A default-off integration principal may only produce a backend-mapped payload-free invalidation signal.",
+      "evidence": [
+        "docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md",
+        "docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md",
+        "docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-analysis.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-repair-independent-review.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-pre-verifier-acceptance-receipt.json",
+        "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal",
-    "strategic_role": "Rayleen fresh-generation rehearsal accepted; architecture-only live-source observation boundary is the next safe candidate",
-    "why_now": "Retirement, fresh generation and deterministic supersession are now proven without live observation, so the observer's non-truth boundary can be frozen before any implementation.",
-    "outcome": "The repaired exact candidate passed 45/45 evidence cases, 26 focused and 238 inherited tests plus a fresh no-finding veto.",
+    "node_id": "raisa-provider-free-default-off-live-source-observation-boundary",
+    "strategic_role": "Default-off live-source observation architecture accepted; unmounted synthetic observation-to-signal rehearsal is next",
+    "why_now": "The observer's non-truth, metadata, impact, activation and authority boundaries are independently accepted before any implementation.",
+    "outcome": "The repaired exact candidate passed 67 of 67 tests and a fresh no-finding independent veto.",
     "unlocks": [
-      "Freeze a default-off provider-free architecture for authenticated practice-scoped payload-free change observation.",
-      "Define a separately authorised fresh-read request without granting observer truth, data-return or command authority."
+      "Implement pure typed observation policy, binding, activation, admission and signal-mapping contracts over authored-synthetic metadata.",
+      "Prove backend impact floors, registered aliases and zero-effect default-off behavior without a live source."
     ],
     "does_not_solve": [
-      "Real patient/product data access, a live observation/feed/watcher or product source read.",
-      "Database/event transport, persistence, restart recovery or operational retention.",
+      "Real patient/product data, a live observation/feed/watcher or product source read.",
+      "Database/event transport, checkpoint persistence, restart recovery or operational retention.",
       "Provider cognition, cross-Bureau clinical sources, commands, deployment or production.",
       "Release, Pages, protected evidence or protected-ref movement."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-plan.md",
-      "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-design.md",
-      "docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/provider-free-acceptance-evidence.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/fresh-generation-packet.schema.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/acceptance-evidence.schema.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/authored-synthetic-fresh-generation-packet.json",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-validity-window-review.md",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-repair-independent-review.md",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-pre-verifier-acceptance-receipt.json",
-      "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md"
+      "docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md",
+      "docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md",
+      "docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-analysis.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-veto.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-repair-independent-review.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-pre-verifier-acceptance-receipt.json",
+      "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
@@ -1906,9 +1920,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "The Fabric/Memory contract, Current and temporal weaves, intent-shaped retrieval, model-required intent shaping and the complete unmounted Rayleen retire-to-new-generation lifecycle are accepted at exact reviewed HEADs.",
-        "The next safe candidate is an architecture-only provider-free default-off live-source observation boundary.",
-        "Separately gate every live database/feed implementation, product read, persistence/retention, cross-Bureau clinical source, command, deployment, production and release boundary."
+        "The complete unmounted Rayleen lifecycle and default-off live-source observation architecture are accepted at exact reviewed HEADs.",
+        "The next safe candidate is a provider-free unmounted authored-synthetic observation-to-temporal-signal contract rehearsal.",
+        "Separately gate every real source/event family, transport principal, database/feed, product read, persistence, clinical, command, deployment and release boundary."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -2001,7 +2015,16 @@
         "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-repair-independent-review.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-pre-verifier-acceptance-receipt.json",
         "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md",
-        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md"
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md",
+        "docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md",
+        "docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md",
+        "docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-analysis.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-repair-independent-review.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-pre-verifier-acceptance-receipt.json",
+        "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md"
       ]
     },
     {
@@ -2846,6 +2869,7 @@
     }
   ],
   "map_limits": [
+    "Live-source observation architecture acceptance proves only a provider-free default-off authority design; it creates no live source, delivery, database, product-read, persistence, provider, command, deployment or protected authority.",
     "Fresh-generation acceptance proves one authored-synthetic unmounted retire-to-new-generation lifecycle only; it creates no live observation, product-read, persistence, provider, command, deployment or protected authority.",
     "Invalidation-seam acceptance proves one authored-synthetic unmounted retire-and-require handoff only; it creates no live-source, watcher, persistence, provider, command, deployment or protected authority.",
     "Source-adapter acceptance proves one authored-synthetic unmounted read/context mapping only; it creates no live-source, database-watcher, real-data, persistence, provider, command, deployment or protected authority.",

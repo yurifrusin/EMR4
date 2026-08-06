@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 224,
+  "graph_revision": 225,
   "harvests": [],
   "nodes": [
     {
@@ -13520,9 +13520,120 @@
         "Consultant, requests/referrals, prescribing/medicines, billing/claims and all commands/writes remain separately closed.",
         "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-default-off-live-source-observation-boundary",
+      "title": "Default-off live-source observation architecture",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T19:30:00Z",
+      "updated_at": "2026-08-06T19:30:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "fdbda21b28371778f5e50b0bc2cbd870bbf40e42",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The observer is not truth and has no returned-data, read, provider, persistence or command authority.",
+          "Backend impact floors cannot be narrowed by source metadata; unknown impact requires bounded full invalidation.",
+          "The policy stays default-off; synthetic classification activation has fixed zero-effect ceilings and is ineligible for live mode.",
+          "Live sources, databases, event transport, product reads and all runtime capabilities remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-default-off-live-source-observation-architecture",
+          "source": "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the three-plane provider-free observer membrane with backend-owned impact and no inherited read authority."
+        }
+      ],
+      "claim_scope": [
+        "Observation, temporal classification and fresh-read authority remain separate.",
+        "Allowed metadata is closed, bounded and backend-issued or domain-separated.",
+        "Baseline, monotonic position, gaps, overflow, restart and coalescing are fail-closed.",
+        "The first veto findings were repaired and a fresh exact-worktree veto returned pass with 67 of 67 tests.",
+        "No live observation, database, product read, provider, command, runtime, deployment or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md",
+            "docs/api-spine/async/integration-events.yaml",
+            "docs/api-spine/openapi/diary-committed-events.yaml",
+            "tests/test_raisa_provider_free_default_off_live_source_observation_boundary_plan.py",
+            "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md"
+          ],
+          "note": "The architecture treats events only as invalidation signals and explicitly excludes the existing polling cursor from any no-loss claim."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/api-spine/graphql/practice-context-fabric-read.graphql",
+            "tests/test_raisa_provider_free_default_off_live_source_observation_boundary_plan.py",
+            "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md"
+          ],
+          "note": "The observer adds no read or write surface and cannot become command evidence."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md",
+          "docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md",
+          "docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-analysis.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-repair-independent-review.md",
+          "docs/api-spine/async/integration-events.yaml",
+          "docs/api-spine/openapi/diary-committed-events.yaml",
+          "docs/api-spine/graphql/practice-context-fabric-read.graphql"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_live_source_observation_boundary_plan.py",
+          "tests/test_raisa_practice_context_fabric_direction.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_ariadne_autonomous_continuation.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_raisa_provider_free_default_off_live_source_observation_boundary_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_default_off_live_source_observation_boundary_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
+        "The exact first source/event family, transport principal, database/outbox/feed/watcher/listener and durable position/checkpoint remain closed.",
+        "Product reads, persistence, restart recovery, operational audit/retention and live runtime remain closed.",
+        "External evidence, provider calls, cross-Bureau clinical sources and every command/write remain closed.",
+        "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T16:30:00Z"
+  "updated_at": "2026-08-06T19:30:00Z"
 }

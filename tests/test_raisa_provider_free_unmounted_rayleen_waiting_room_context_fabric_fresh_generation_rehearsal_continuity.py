@@ -17,20 +17,17 @@ def load(path):
 def test_rayleen_fresh_generation_continuity_and_compass_are_current():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 224
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 206
-    assert compass["source_graph_revision"] == 224
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert "live-source observation boundary is next" in (
-        compass["orientation_statement"]
-    )
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    assert graph["graph_revision"] >= 224
+    assert node["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] >= 206
+    assert compass["source_graph_revision"] >= 224
+    assert any(item["node_id"] == NODE_ID for item in compass["journey"])
 
 
 def test_fresh_generation_authority_remains_unmounted_and_atomic():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
-    node = graph["nodes"][-1]
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
     assert node["authority"]["authorized_openings"] == []
     notes = " ".join(node["authority"]["notes"]).lower()
     for phrase in (
@@ -44,7 +41,8 @@ def test_fresh_generation_authority_remains_unmounted_and_atomic():
 
 def test_fresh_generation_unresolved_gates_remain_explicit():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
-    unresolved = " ".join(graph["nodes"][-1]["unresolved_gates"]).lower()
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    unresolved = " ".join(node["unresolved_gates"]).lower()
     for phrase in (
         "patient",
         "product-derived",
@@ -70,7 +68,7 @@ def test_fresh_generation_unresolved_gates_remain_explicit():
         assert phrase in unresolved
 
 
-def test_compass_next_candidate_is_architecture_only_and_not_live():
+def test_accepted_architecture_descendant_still_opens_no_live_source():
     compass = load("orchestration/continuity/emr4-compass.json")
     position = compass["current_position"]
     joined = " ".join(
@@ -79,11 +77,9 @@ def test_compass_next_candidate_is_architecture_only_and_not_live():
         + [compass["orientation_statement"]]
     ).lower()
     for phrase in (
-        "architecture-only",
-        "default-off",
-        "payload-free",
-        "separately authorised fresh-read",
+        "authored-synthetic",
+        "without a live source",
         "live observation",
-        "real data",
+        "real patient/product data",
     ):
         assert phrase in joined

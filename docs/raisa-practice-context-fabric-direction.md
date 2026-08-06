@@ -303,21 +303,26 @@ large “memory” feature:
    independently authored synthetic completed-read-shaped input, and the new
    frame set, manifest and lease survive both older-result completion orders.
    This proves no live source, watcher, persistence, provider or command.
-9. **Default-off live-source observation architecture** — **frozen for
-   independent acceptance** in
+9. **Default-off live-source observation architecture** — **accepted** at exact
+   independently reviewed repaired source HEAD
+   `fdbda21b28371778f5e50b0bc2cbd870bbf40e42` under
    `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`.
    Integration-principal observation, payload-free temporal classification and
    application-principal fresh read are separate planes. Exact non-wildcard
    policy/binding, monotonic source position, baseline-before-frame binding,
    fail-closed gap/overflow/restart handling and coalesced pending requirements
    are mandatory. The observer is not truth, returns no data and has no read,
-   provider, persistence or command authority. After acceptance, the next safe
-   descendant is a pure unmounted authored-synthetic observation-to-signal
-   rehearsal; architecture acceptance must precede any database/feed/watcher
+   provider, persistence or command authority. The first veto's impact,
+   metadata-smuggling and activation findings are repaired and a fresh veto
+   passed 67/67. Architecture acceptance precedes every database/feed/watcher
    implementation.
-10. **Real product read descendants** — open one source and one role/purpose at
+10. **Unmounted observation-to-signal rehearsal** — implement pure typed policy,
+   binding, backend impact floor, registered-alias, synthetic-only activation,
+   admission, signal-mapping and proofreader contracts over authored-synthetic
+   metadata, with no live source or persistence.
+11. **Real product read descendants** — open one source and one role/purpose at
    a time with privacy, identity, audit, retention and database acceptance.
-11. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+12. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 

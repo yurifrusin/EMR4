@@ -221,13 +221,14 @@ passes at exact independently reviewed repaired source HEAD
 are sealed and enforced, every affected Diary/waiting dependency is refreshed
 from independently authored synthetic completed-read-shaped input, a distinct
 no-wider Current generation is admitted and older completion cannot roll it
-back. The architecture-only default-off live-source observation boundary is now
-frozen for independent acceptance. It separates an integration-principal
+back. The architecture-only default-off live-source observation boundary is
+accepted at exact independently reviewed repaired source HEAD
+`fdbda21b28371778f5e50b0bc2cbd870bbf40e42`. It separates an integration-principal
 observation plane, backend-constructed payload-free temporal signal and current
 application-principal fresh-read plane. The observer is not truth, receives and
 returns no data, cannot supply dependency impact, and has no read, provider,
-persistence or command authority. After acceptance, the next safe descendant
-is a pure unmounted authored-synthetic observation-to-signal rehearsal. Real
+persistence or command authority. The next safe descendant is a pure unmounted
+authored-synthetic observation-to-signal rehearsal. Real
 event transport, historical persistence, patient/product data, product
 retrieval, runtime and command authority remain separately closed.
 

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "sol_acceptance_of_repaired_live_source_observation_architecture",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact repaired HEAD fdbda21b closes source-narrowable impact, metadata-smuggling and synthetic-activation findings. A genuinely fresh exact-worktree veto found no P0-P2 issues and returned pass; both local and reviewer packets pass 67 of 67 tests and both diff checks pass.",
+    "current_authority_allocation": "GPT Sol retains sole acceptance and continuity authority. The fresh native Sol/xhigh reviewer supplied a read-only veto pass at exact repair and has no acceptance, implementation, integration or ref authority.",
+    "git_refs_and_worktree": "Task HEAD is exact repaired candidate fdbda21b28371778f5e50b0bc2cbd870bbf40e42; origin task remains cead332c43afccafed4d0c3ef00ef0e1f36f0869 before closeout. Review worktree r9 is unchanged clean at exact candidate. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md names the frozen provider-free default-off live-source observation architecture packet as active and its unmounted authored-synthetic contract rehearsal as next only after acceptance.",
+    "protected_evidence_boundaries": "Acceptance proves architecture only. No live observer/delivery, database/outbox/feed/watcher/listener, checkpoint/persistence, product read, patient/product/protected data, provider, command, runtime, deploy, release, Pages or protected-ref capability opens. docs/branding and unrelated untracked artifacts remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

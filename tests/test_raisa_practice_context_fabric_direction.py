@@ -49,13 +49,13 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
         if row["id"] == "raisa-practice-context-fabric"
     )
 
-    assert compass["map_revision"] == 206
-    assert compass["source_graph_revision"] == 224
+    assert compass["map_revision"] == 207
+    assert compass["source_graph_revision"] == 225
     assert item["status"] == "active"
     assert item["boundary_changes"] == []
     assert "docs/raisa-practice-context-fabric-direction.md" in item["evidence"]
     assert any(
-        "Separately gate every live database/feed implementation" in value
+        "Separately gate every real source/event family" in value
         for value in item["prerequisites"]
     )
 
@@ -64,7 +64,7 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
     )
     assert "### Raisa Practice Context Fabric" in rendered
     assert "active" in rendered
-    assert "_Compass map revision 206; continuity graph revision 224._" in rendered
+    assert "_Compass map revision 207; continuity graph revision 225._" in rendered
 
 
 def test_branded_workspaces_do_not_become_authority_boundaries() -> None:
