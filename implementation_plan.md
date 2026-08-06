@@ -94,18 +94,21 @@ deep-copy handoff, and supports every independent waiting-field grant subset
 before parent projection. The controlling plan is
 [`docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`](docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md).
 
-The provider-free unmounted Rayleen invalidation/reassembly seam now passes at
-exact independently reviewed source HEAD
-`72b5f46146393c644ee8fbfa1bb9ee0869d8d994`. It reconstructs the accepted
-adapter-built Current weave and temporal manifest/lease, lets one payload-free
-authored-synthetic signal retire the byte-identical immutable old set and emits
-only one inert fresh-reassembly requirement/instruction. It performs no fresh
-read and admits no replacement frame set. The next safe descendant is a
-separately frozen provider-free unmounted fresh-generation rehearsal using a
-second newly authored synthetic input and proving that an older asynchronous
-result cannot supersede the newer frame-set generation. It may not open a live
-watcher/feed, persist state, read product data, call a provider or execute a
-command.
+The provider-free unmounted Rayleen invalidation/reassembly seam passes at exact
+independently reviewed source HEAD
+`72b5f46146393c644ee8fbfa1bb9ee0869d8d994`. Its provider-free fresh-generation
+descendant now also passes at exact independently reviewed repaired source HEAD
+`9516b85542a4de1fcef305423ec15fd34f7731aa`. It reconstructs the inert
+obligations, seals and enforces their validity windows, derives one distinct
+no-wider request/grant, refreshes every affected Diary and waiting dependency
+from independently authored synthetic completed-read-shaped inputs, reruns the
+accepted adapter/Current proofreader, admits one distinct new frame set with a
+new manifest/lease and rejects an older result in both completion orders. It
+performs no product read and mounts no observer, watcher, feed or persistence.
+The next safe descendant is an architecture-only provider-free plan for a
+default-off live-source observation boundary; it may define payload-free
+invalidation and a separately authorised fresh-read request but may not
+implement the live boundary.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -403,9 +406,10 @@ patient-free temporal invalidation/bitemporal contract, the accepted provider-
 free intent-shaped temporal retrieval rehearsal and the accepted authored-
 synthetic model-required intent-shaping descendant, the exact independently
 reviewed unmounted provider-free Rayleen A4 waiting-room source adapter and its
-provider-free authored-synthetic invalidation/reassembly seam. The next step is
-a provider-free unmounted fresh-generation rehearsal before separately gated
-live watcher, real-product and clinical descendants.
+provider-free authored-synthetic invalidation/reassembly seam and fresh-
+generation rehearsal. The next step is an architecture-only provider-free
+default-off live-source observation boundary before separately gated live
+implementation, real-product and clinical descendants.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

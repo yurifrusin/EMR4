@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_context_fabric_is_durable_and_unmounted_source_adapter_is_accepted() -> None:
+def test_context_fabric_is_durable_and_unmounted_lifecycle_is_accepted() -> None:
     direction = (ROOT / "docs/raisa-practice-context-fabric-direction.md").read_text(
         encoding="utf-8"
     )
@@ -20,8 +20,8 @@ def test_context_fabric_is_durable_and_unmounted_source_adapter_is_accepted() ->
     handover = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 
     assert (
-        "Status: accepted direction through the unmounted Rayleen A4 "
-        "source adapter" in direction
+        "Status: accepted direction through the unmounted Rayleen fresh generation"
+        in direction
     )
     assert "ContextNeed" in direction
     assert "ContextScopeGrant" in direction
@@ -49,13 +49,13 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
         if row["id"] == "raisa-practice-context-fabric"
     )
 
-    assert compass["map_revision"] == 204
-    assert compass["source_graph_revision"] == 222
+    assert compass["map_revision"] == 206
+    assert compass["source_graph_revision"] == 224
     assert item["status"] == "active"
     assert item["boundary_changes"] == []
     assert "docs/raisa-practice-context-fabric-direction.md" in item["evidence"]
     assert any(
-        "Separately gate every live product source" in value
+        "Separately gate every live database/feed implementation" in value
         for value in item["prerequisites"]
     )
 
@@ -64,7 +64,7 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
     )
     assert "### Raisa Practice Context Fabric" in rendered
     assert "active" in rendered
-    assert "_Compass map revision 204; continuity graph revision 222._" in rendered
+    assert "_Compass map revision 206; continuity graph revision 224._" in rendered
 
 
 def test_branded_workspaces_do_not_become_authority_boundaries() -> None:

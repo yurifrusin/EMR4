@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 223 / Compass 205. The provider-free unmounted Rayleen invalidation/reassembly seam passes at exact reviewed HEAD. A provider-free fresh-generation rehearsal is next; live watchers, source reads and real data remain closed.
+> EMR4 is at Continuity 224 / Compass 206. The provider-free unmounted Rayleen fresh-generation rehearsal passes at exact reviewed HEAD. An architecture-only default-off live-source observation boundary is next; live implementation, product reads and real data remain closed.
 
 ## North star
 
@@ -220,24 +220,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One serialized A4 waiting-room frame now reaches the unchanged Current weave through an externally anchored, minimized and opaque provider-free adapter. Lineage parent: `raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping`.
 102. **First concrete Current-source temporal lifecycle seam — Unmounted Rayleen Context Fabric invalidation/reassembly seam**
    One adapter-built Rayleen Current frame set is deterministically retired by a payload-free signal and yields only an inert fresh-generation requirement. Lineage parent: `raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter`.
+103. **Complete provider-free Rayleen Current lifecycle rehearsal — Unmounted Rayleen Context Fabric fresh-generation rehearsal**
+   One inert invalidation requirement becomes a distinct same-packet-proofread new generation and older completion cannot roll it back. Lineage parent: `raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly`.
 
 ## Current position
 
-**Rayleen Current invalidation/reassembly seam accepted; provider-free fresh-generation rehearsal is the next safe candidate — Unmounted Rayleen Context Fabric invalidation/reassembly seam**
+**Rayleen fresh-generation rehearsal accepted; architecture-only live-source observation boundary is the next safe candidate — Unmounted Rayleen Context Fabric fresh-generation rehearsal**
 
-**Why this proof came next:** Retirement and the inert requirement are proven, so a wholly new authored-synthetic generation can now be rehearsed without a live source.
+**Why this proof came next:** Retirement, fresh generation and deterministic supersession are now proven without live observation, so the observer's non-truth boundary can be frozen before any implementation.
 
-The exact reconstruction passed 32/32 evidence cases, 22 focused and 212 inherited tests plus a fresh no-finding veto.
+The repaired exact candidate passed 45/45 evidence cases, 26 focused and 238 inherited tests plus a fresh no-finding veto.
 
 ### What this unlocks
 
-- Freeze a provider-free unmounted fresh-generation rehearsal over newly authored synthetic source input.
-- Prove older asynchronous results cannot supersede the newer frame-set generation.
+- Freeze a default-off provider-free architecture for authenticated practice-scoped payload-free change observation.
+- Define a separately authorised fresh-read request without granting observer truth, data-return or command authority.
 
 ### What it does not solve
 
-- Real patient/product data access, a live source read or waiting-room integration.
-- Database/event watchers, transport, persistence, restart recovery or operational retention.
+- Real patient/product data access, a live observation/feed/watcher or product source read.
+- Database/event transport, persistence, restart recovery or operational retention.
 - Provider cognition, cross-Bureau clinical sources, commands, deployment or production.
 - Release, Pages, protected evidence or protected-ref movement.
 
@@ -308,9 +310,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- The Fabric/Memory contract, Current and temporal weaves, intent-shaped retrieval, model-required intent shaping, unmounted Rayleen source adapter and its inert invalidation/reassembly seam are accepted at exact reviewed HEADs.
-- The next safe candidate is a provider-free unmounted fresh-generation rehearsal consuming the inert requirement and rejecting an older result.
-- Separately gate every live product source, database watcher/feed, persistence/retention, cross-Bureau clinical source, command, deployment, production and release boundary.
+- The Fabric/Memory contract, Current and temporal weaves, intent-shaped retrieval, model-required intent shaping and the complete unmounted Rayleen retire-to-new-generation lifecycle are accepted at exact reviewed HEADs.
+- The next safe candidate is an architecture-only provider-free default-off live-source observation boundary.
+- Separately gate every live database/feed implementation, product read, persistence/retention, cross-Bureau clinical source, command, deployment, production and release boundary.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -499,6 +501,7 @@ Prerequisites:
 
 ## Map limits
 
+- Fresh-generation acceptance proves one authored-synthetic unmounted retire-to-new-generation lifecycle only; it creates no live observation, product-read, persistence, provider, command, deployment or protected authority.
 - Invalidation-seam acceptance proves one authored-synthetic unmounted retire-and-require handoff only; it creates no live-source, watcher, persistence, provider, command, deployment or protected authority.
 - Source-adapter acceptance proves one authored-synthetic unmounted read/context mapping only; it creates no live-source, database-watcher, real-data, persistence, provider, command, deployment or protected authority.
 - Occupied intent-shaping acceptance proves one authored-synthetic closed model proposal only; it creates no real-source, patient, product, live-watcher, persistence, runtime, command, clinical, deployment or protected authority.
@@ -830,6 +833,9 @@ Prerequisites:
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
+- `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-design.md`
+- `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-closeout.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-design.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-plan.md`
@@ -912,6 +918,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
@@ -997,6 +1004,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-deepseek-timeout-failure-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-review-evidence-reconciliation-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-repair-independent-review.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-validity-window-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-independent-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-register-search-scope-failure-receipt.json`
@@ -1010,6 +1020,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
@@ -1225,6 +1236,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/acceptance-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/authored-synthetic-fresh-generation-packet.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/fresh-generation-packet.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly/acceptance-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly/authored-synthetic-seam-packet.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly/provider-free-acceptance-evidence.json`
@@ -1567,4 +1582,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 205; continuity graph revision 223._
+_Compass map revision 206; continuity graph revision 224._

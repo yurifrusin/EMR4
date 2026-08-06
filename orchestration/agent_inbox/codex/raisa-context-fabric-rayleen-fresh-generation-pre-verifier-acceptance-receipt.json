@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_exact_independently_reviewed_rayleen_fresh_generation_rehearsal_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate 9516b855 now passes all fourteen frozen conditions: evidence 45/45, focused 26/26, exact inherited eight-file packet 238/238, Ruff, py_compile, artifact/schema/type/static checks and both release gates at 03:01:29/30/31. The first veto defect is repaired and the fresh reviewer reports no finding.",
+    "current_authority_allocation": "GPT Sol retains sole acceptance, closeout, continuity, commit and task-branch integration authority. The fresh native Sol xhigh reviewer exercised independent read-only veto authority only and returned pass without mutation.",
+    "git_refs_and_worktree": "Primary task HEAD is exact candidate 9516b85542a4de1fcef305423ec15fd34f7731aa. Review r6 stayed clean before and after on codex/review-rayleen-fresh-generation-repair-9516b855 at that exact HEAD. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; all unrelated untracked files and docs/branding remain preserved.",
+    "live_handover_current_baton": "AGENTS.md records the frozen Rayleen fresh-generation plan and closed provider-free unmounted boundary.",
+    "protected_evidence_boundaries": "Acceptance remains limited to provider-free authored-synthetic unmounted retire-to-new-generation composition and deterministic supersession. No live observation/read, product or patient data, persistence, provider, runtime, API route, command, deployment, release, Pages, protected evidence or protected-ref authority opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

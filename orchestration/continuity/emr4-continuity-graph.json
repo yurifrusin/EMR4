@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 223,
+  "graph_revision": 224,
   "harvests": [],
   "nodes": [
     {
@@ -13406,9 +13406,123 @@
         "Consultant, requests/referrals, prescribing/medicines, billing/claims and all commands/writes remain separately closed.",
         "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal",
+      "title": "Unmounted Rayleen Context Fabric fresh-generation rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T16:30:00Z",
+      "updated_at": "2026-08-06T16:30:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "9516b85542a4de1fcef305423ec15fd34f7731aa",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The rehearsal consumes only reconstructed inert obligations and independently authored synthetic completed-read-shaped inputs.",
+          "Both predecessor authority objects must remain current; either expiry blocks both release paths.",
+          "The observer, source read, watcher, persistence, provider and command boundaries remain closed.",
+          "Reception One and Clinician One remain workspace brands; atomic Bureau grants remain backend-owned."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unmounted-rayleen-fresh-generation-rehearsal",
+          "source": "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept one provider-free authored-synthetic retire-to-new-generation composition with deterministic supersession."
+        }
+      ],
+      "claim_scope": [
+        "Every affected Diary and waiting dependency is refreshed from independent authored-synthetic completed-read-shaped input.",
+        "A distinct no-wider request, frame set, manifest and lease are admitted only while predecessor authority is current.",
+        "An older result is rejected in both completion orders and cannot restore the immutable retired generation.",
+        "The exact repaired candidate passed 45 evidence cases, 26 focused and 238 inherited tests plus a fresh no-finding veto.",
+        "No real data, live observation/read, watcher, persistence, provider, command, runtime, deployment or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal.py",
+            "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py",
+            "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md"
+          ],
+          "note": "Payload-free change metadata can retire old context, while only a separately reconstructed fresh generation becomes current."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal.py",
+            "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md"
+          ],
+          "note": "The lifecycle rehearsal stays outside the accepted proposal and command path and adds no write authority."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-plan.md",
+          "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-design.md",
+          "docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/provider-free-acceptance-evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/fresh-generation-packet.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/acceptance-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/authored-synthetic-fresh-generation-packet.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-native-worker-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-validity-window-review.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-repair-independent-review.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-fresh-generation-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_invalidation_reassembly.py",
+          "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py",
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal.py",
+          "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal_acceptance.py",
+          "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_fresh_generation_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data and real source identifiers remain closed.",
+        "Real databases, live observation, event transport, watchers/feeds, product reads, persistence, restart recovery and operational retention remain closed.",
+        "External evidence, provider calls, product routes and cross-Bureau clinical handoffs remain closed.",
+        "Consultant, requests/referrals, prescribing/medicines, billing/claims and all commands/writes remain separately closed.",
+        "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T15:00:00Z"
+  "updated_at": "2026-08-06T16:30:00Z"
 }

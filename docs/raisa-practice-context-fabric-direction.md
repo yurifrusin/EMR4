@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction through the unmounted Rayleen A4 source adapter
+Status: accepted direction through the unmounted Rayleen fresh generation
 
 ## Purpose
 
@@ -295,14 +295,22 @@ large “memory” feature:
    payload-free authored-synthetic signal retires the old set and emits one
    inert fresh-reassembly requirement/instruction. It patches nothing, performs
    no fresh read and admits no replacement frame set.
-8. **Provider-free fresh-generation rehearsal** — consume the inert
-   requirement using a second newly authored synthetic authority/read-shaped
-   input, rerun adapter/assembler/same-packet proofreading and reject an older
-   result against the newer frame-set generation, without a live source,
-   watcher, persistence, provider or command.
-9. **Real product read descendants** — open one source and one role/purpose at a
-   time with privacy, identity, audit, retention and database acceptance.
-10. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+8. **Provider-free fresh-generation rehearsal** — **accepted** at exact
+   independently reviewed repaired source HEAD
+   `9516b85542a4de1fcef305423ec15fd34f7731aa`; the inert requirement is
+   reconstructed, both predecessor validity windows are sealed and enforced,
+   one distinct no-wider request refreshes every affected dependency from
+   independently authored synthetic completed-read-shaped input, and the new
+   frame set, manifest and lease survive both older-result completion orders.
+   This proves no live source, watcher, persistence, provider or command.
+9. **Default-off live-source observation architecture** — freeze how an
+   authenticated practice-scoped observation may emit only payload-free
+   invalidation and request a separately authorised fresh read. The observer
+   is not truth, returns no data and has no command authority. Architecture
+   acceptance must precede any database/feed/watcher implementation.
+10. **Real product read descendants** — open one source and one role/purpose at
+   a time with privacy, identity, audit, retention and database acceptance.
+11. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 
