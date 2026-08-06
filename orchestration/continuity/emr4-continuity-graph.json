@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 225,
+  "graph_revision": 226,
   "harvests": [],
   "nodes": [
     {
@@ -13631,9 +13631,125 @@
         "External evidence, provider calls, cross-Bureau clinical sources and every command/write remain closed.",
         "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal",
+      "title": "Unmounted authored-synthetic observation-to-signal rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T18:00:00Z",
+      "updated_at": "2026-08-06T18:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "c0502c398df4a56c9558bc68eddedb2adf20d12d",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-default-off-live-source-observation-boundary",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The rehearsal is pure, provider-free, authored-synthetic and unmounted.",
+          "The observer emits no truth and receives no read, provider, persistence or command authority.",
+          "Admission and mapping are internal; public signal egress requires same-packet proofreader RELEASE.",
+          "Live source, database, watcher, durable checkpoint, product read and runtime capabilities remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unmounted-observation-to-temporal-signal-rehearsal",
+          "source": "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the full-domain synthetic observation admission, backend-owned mapping and proofreader-gated temporal handoff."
+        }
+      ],
+      "claim_scope": [
+        "Exact scope-bound HMAC identity, prior continuity, registered aliases and backend impact floors pass.",
+        "Every admitted raw-id, prior and two-sided clock coordinate maps from actual trusted inputs.",
+        "The final fresh veto found no P0-P2 issue and passed 227 checks.",
+        "No live source, persistence, product read, provider, command, runtime, deployment or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md",
+            "docs/api-spine/async/integration-events.yaml",
+            "docs/api-spine/openapi/diary-committed-events.yaml",
+            "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py",
+            "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md"
+          ],
+          "note": "The patient-free reschedule event is admitted only as an invalidation signal and creates no source read or write."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/api-spine/graphql/practice-context-fabric-read.graphql",
+            "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py",
+            "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md"
+          ],
+          "note": "The temporal handoff adds no read or command surface and cannot become command evidence."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md",
+          "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-design.md",
+          "docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-final-independent-review.md",
+          "docs/ariadne-agent-error-correction-register-revision-38.md",
+          "docs/ariadne-agent-error-correction-register-revision-39.md",
+          "docs/ariadne-agent-error-correction-register-revision-40.md",
+          "docs/api-spine/async/integration-events.yaml",
+          "docs/api-spine/openapi/diary-committed-events.yaml",
+          "docs/api-spine/graphql/practice-context-fabric-read.graphql"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py",
+          "scripts/raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_acceptance.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal/",
+          "scripts/raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
+        "Live database/outbox/feed/watcher/listener delivery, operational credentials and source access remain closed.",
+        "Durable transaction position, checkpoint persistence, restart recovery, retention and live audit remain closed.",
+        "Product reads, external evidence, provider calls, cross-Bureau clinical sources and every command/write remain closed.",
+        "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T19:30:00Z"
+  "updated_at": "2026-08-06T18:00:00Z"
 }

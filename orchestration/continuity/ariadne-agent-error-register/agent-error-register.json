@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 39,
+  "register_revision": 40,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1759,7 +1759,9 @@
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-independent-veto.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-lease.md",
-        "docs/ariadne-agent-error-correction-register-revision-38.md"
+        "docs/ariadne-agent-error-correction-register-revision-38.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-final-independent-review.md",
+        "docs/ariadne-agent-error-correction-register-revision-40.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "untrusted_partial_worktree",
@@ -1767,15 +1769,16 @@
       "recurrence_signature": "implementer.observation_mapper_fixture_overfit_and_proofreader_bypass",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Sol invoked the named recovery lease, made admission and mapping internal, left one public packet builder as the only signal-bearing egress, rebuilt mapping from the actual validated source, policy, binding and prior coordinate, and added alternate-domain plus export-surface adversarial tests. A fresh exact-head veto remains mandatory before correction acceptance.",
+        "status": "recovery_lease_applied",
+        "action": "Sol invoked the named recovery lease, made admission and mapping internal, left one public packet builder as the only signal-bearing egress, rebuilt mapping from the actual validated source, policy, binding and prior coordinate, and added alternate-domain plus export-surface adversarial tests. Fresh exact-head veto c0502c398df4a56c9558bc68eddedb2adf20d12d passed all 227 checks with no P0-P2 finding.",
         "prevention_control": "For each mapper behind a deterministic egress gate, test at least one non-canonical valid value for every contract-varying coordinate and mechanically assert that all pre-proofreader signal-producing functions are absent from the public export surface.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-lease.md",
-          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py"
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-final-independent-review.md"
         ]
       },
-      "status": "open"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0047",
@@ -1797,7 +1800,9 @@
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-independent-veto.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-lease.md",
-        "docs/ariadne-agent-error-correction-register-revision-39.md"
+        "docs/ariadne-agent-error-correction-register-revision-39.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-final-independent-review.md",
+        "docs/ariadne-agent-error-correction-register-revision-40.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "untrusted_partial_worktree",
@@ -1805,15 +1810,16 @@
       "recurrence_signature": "orchestrator.clock_skew_domain_one_sided_recovery",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Sol kept the recovery lease active, replaced the one-sided mapping predicate with the same exact absolute-skew ceiling used by admission, retained the independent expiry condition, and added a positive-skew admission-to-mapping test. Another genuinely fresh exact-head veto remains mandatory.",
+        "status": "recovery_lease_applied",
+        "action": "Sol kept the recovery lease active, replaced the one-sided mapping predicate with the same exact absolute-skew ceiling used by admission, retained the independent expiry condition, and added two-direction boundary tests. Fresh exact-head veto c0502c398df4a56c9558bc68eddedb2adf20d12d passed all 227 checks with no P0-P2 finding.",
         "prevention_control": "When a validator admits a symmetric or multi-branch domain, recovery tests and verifier instructions must exercise every boundary direction rather than one representative non-canonical value.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-independent-veto.md",
-          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py"
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-final-independent-review.md"
         ]
       },
-      "status": "open"
+      "status": "corrected"
     }
   ]
 }

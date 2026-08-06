@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_fresh_no_finding_exact_head_veto_for_the_provider_free_unmounted_observation_to_temporal_signal_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, design and threat delta require full-domain admission-to-mapping consistency, backend-owned aliases and impact floors, closed prior continuity, zero-effect synthetic activation, accepted temporal handoff and same-packet proofreader release. The final fresh reviewer independently confirmed minus/plus 120-second inclusion, minus/plus 121-second rejection, alternate raw identity and prior-coordinate mapping, coordinated reseal rejection, internal-only low-level functions, public builder RELEASE and forced BLOCK raising. It passed 93 focused, 69 inherited and 65 register/handover tests, plus compile, Ruff, schema and three-artifact byte reproduction, with no P0-P2 finding.",
+    "current_authority_allocation": "GPT Sol owns final acceptance and repository-local closeout. The genuinely fresh native reviewer owned read-only veto only and returned pass with no P0-P2 finding at the exact clean candidate. No worker or reviewer owns integration, push, provider, runtime, command, deployment, release, baton or protected-ref authority.",
+    "git_refs_and_worktree": "The task worktree is tracked-clean at c0502c398df4a56c9558bc68eddedb2adf20d12d. Fresh review worktree r14 is tracked-clean on codex/review-observation-to-signal-c0502c39 at the same exact commit before and after review. Origin task remains 3821c0fe44dbdb6e962745807399fe205cd9cc98. Local and origin master plus handoff/current remain aligned and protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active Context Fabric descendant is the provider-free unmounted authored-synthetic observation-to-temporal-signal rehearsal. Its exact corrected source is c0502c398df4a56c9558bc68eddedb2adf20d12d after two preserved rejected vetoes and the bounded Sol recovery lease.",
+    "protected_evidence_boundaries": "Acceptance proves only the pure provider-free unmounted authored-synthetic contract rehearsal. Patient/product/clinical/financial/protected data, live source/database/outbox/feed/watcher/listener, durable cursor/checkpoint, product reads, providers, API/app routes, commands/writes, runtime wiring, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

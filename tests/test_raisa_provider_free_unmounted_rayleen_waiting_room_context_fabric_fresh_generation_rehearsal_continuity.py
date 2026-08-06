@@ -77,9 +77,9 @@ def test_accepted_architecture_descendant_still_opens_no_live_source():
         + [compass["orientation_statement"]]
     ).lower()
     for phrase in (
-        "authored-synthetic",
-        "without a live source",
-        "live observation",
+        "source-specific durability architecture",
+        "without mounting a source",
+        "live database/outbox/feed/watcher/listener",
         "real patient/product data",
     ):
         assert phrase in joined

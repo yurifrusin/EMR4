@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction through the unmounted Rayleen fresh generation
+Status: accepted direction through the unmounted observation-to-signal rehearsal
 
 ## Purpose
 
@@ -316,13 +316,22 @@ large “memory” feature:
    metadata-smuggling and activation findings are repaired and a fresh veto
    passed 67/67. Architecture acceptance precedes every database/feed/watcher
    implementation.
-10. **Unmounted observation-to-signal rehearsal** — implement pure typed policy,
-   binding, backend impact floor, registered-alias, synthetic-only activation,
-   admission, signal-mapping and proofreader contracts over authored-synthetic
-   metadata, with no live source or persistence.
-11. **Real product read descendants** — open one source and one role/purpose at
+10. **Unmounted observation-to-signal rehearsal** — **accepted** at exact
+   independently reviewed source HEAD
+   `c0502c398df4a56c9558bc68eddedb2adf20d12d`. Pure typed policy, binding,
+   backend impact floor, registered-alias, synthetic-only activation,
+   admission, full-domain signal-mapping and proofreader contracts pass over
+   authored-synthetic metadata. Two rejected vetoes are preserved as AER-0046
+   and AER-0047; the final fresh veto found no P0-P2 issue with 227 checks.
+   This proves no live source, persistence, product read, provider or command.
+11. **Source-specific durability architecture** — freeze the exact integration
+   principal, durable monotonic outbox/transaction coordinate, atomic decision-
+   invalidation-checkpoint transaction, restart/gap/retention behavior, key
+   rotation and audit fields for patient-free
+   `diary.appointment_rescheduled.v1`, without mounting a source or runtime.
+12. **Real product read descendants** — open one source and one role/purpose at
    a time with privacy, identity, audit, retention and database acceptance.
-12. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+13. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 

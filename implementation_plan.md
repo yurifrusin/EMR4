@@ -107,14 +107,16 @@ new manifest/lease and rejects an older result in both completion orders. It
 performs no product read and mounts no observer, watcher, feed or persistence.
 The architecture-only provider-free default-off live-source observation
 boundary is accepted at exact independently reviewed repaired source HEAD
-`fdbda21b28371778f5e50b0bc2cbd870bbf40e42`. It separates integration-
-principal observation, payload-free temporal classification and a separately
-authorised fresh-read plane; requires exact non-wildcard policy/binding,
-monotonic transaction positioning, baseline-before-frame binding, fail-closed
-gap/overflow/restart handling and one coalesced pending requirement; and gives
-the observer no truth, returned-data, read, provider, persistence or command
-authority. Its next safe descendant is an unmounted authored-synthetic
-observation-to-temporal-signal contract rehearsal, not a live boundary.
+`fdbda21b28371778f5e50b0bc2cbd870bbf40e42`. Its provider-free unmounted
+authored-synthetic observation-to-temporal-signal descendant is accepted at
+exact independently reviewed source HEAD
+`c0502c398df4a56c9558bc68eddedb2adf20d12d`. It proves exact scope-bound keyed
+identity, closed prior continuity, backend-owned impact and alias mapping, the
+full admitted raw-id/prior/two-sided-clock domain and proofreader-only public
+signal egress. Neither acceptance gives the observer truth, returned-data,
+read, provider, persistence or command authority. The next safe descendant is
+a provider-free unmounted source-specific durability architecture for
+`diary.appointment_rescheduled.v1`, not live source or runtime wiring.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -414,13 +416,17 @@ synthetic model-required intent-shaping descendant, the exact independently
 reviewed unmounted provider-free Rayleen A4 waiting-room source adapter and its
 provider-free authored-synthetic invalidation/reassembly seam and fresh-
 generation rehearsal. The architecture-only provider-free default-off
-live-source observation boundary is accepted at exact independently reviewed
-repaired source HEAD `fdbda21b28371778f5e50b0bc2cbd870bbf40e42`: authenticated integration
-metadata may only be admitted into a backend-constructed payload-free temporal
-signal, while any later source read starts from current application-principal
-authority and a new no-wider grant. The next step is a pure unmounted authored-
-synthetic observation-to-signal rehearsal before separately gated source-
-specific live implementation, real-product and clinical descendants.
+  live-source observation boundary is accepted at exact independently reviewed
+  repaired source HEAD `fdbda21b28371778f5e50b0bc2cbd870bbf40e42`: authenticated integration
+  metadata may only be admitted into a backend-constructed payload-free temporal
+  signal, while any later source read starts from current application-principal
+  authority and a new no-wider grant. Its pure unmounted authored-synthetic
+  observation-to-signal rehearsal is accepted at exact independently reviewed
+  source HEAD `c0502c398df4a56c9558bc68eddedb2adf20d12d`, including full-domain mapping
+  and proofreader-only public egress. The next step is a provider-free unmounted
+  source-specific durability architecture for `diary.appointment_rescheduled.v1`
+  before separately gated live implementation, real-product and clinical
+  descendants.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

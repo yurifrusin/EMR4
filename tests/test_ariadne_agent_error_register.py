@@ -38,14 +38,14 @@ def test_register_is_valid_during_observation_signal_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 39
+    assert register["register_revision"] == 40
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 48)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == ["AER-0046", "AER-0047"]
+    ] == []
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -80,10 +80,8 @@ def test_observation_signal_worker_veto_requires_fresh_acceptance() -> None:
     assert incident["category"] == "output_contract_violation"
     assert incident["candidate_state"] == "untrusted_partial_worktree"
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
-    assert incident["correction"]["status"] == (
-        "control_implemented_pending_acceptance"
-    )
-    assert incident["status"] == "open"
+    assert incident["correction"]["status"] == "recovery_lease_applied"
+    assert incident["status"] == "corrected"
 
 
 def test_observation_signal_sol_recovery_requires_two_sided_clock_veto() -> None:
@@ -97,10 +95,8 @@ def test_observation_signal_sol_recovery_requires_two_sided_clock_veto() -> None
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
     assert incident["related_incident_ids"] == []
     assert rows["AER-0046"]["related_incident_ids"] == []
-    assert incident["correction"]["status"] == (
-        "control_implemented_pending_acceptance"
-    )
-    assert incident["status"] == "open"
+    assert incident["correction"]["status"] == "recovery_lease_applied"
+    assert incident["status"] == "corrected"
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -712,7 +708,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
     assert report["incident_count"] == 47
-    assert report["open_incident_ids"] == ["AER-0046", "AER-0047"]
+    assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 35,
         "harness": 3,

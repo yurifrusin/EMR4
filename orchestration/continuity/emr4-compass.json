@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 207,
-  "updated_at": "2026-08-06T19:30:00Z",
-  "source_graph_revision": 225,
-  "orientation_statement": "EMR4 is at Continuity 225 / Compass 207. The provider-free default-off live-source observation architecture passes at exact reviewed HEAD. An unmounted authored-synthetic observation-to-signal rehearsal is next; every live and real-data boundary remains closed.",
+  "map_revision": 208,
+  "updated_at": "2026-08-06T18:00:00Z",
+  "source_graph_revision": 226,
+  "orientation_statement": "EMR4 is at Continuity 226 / Compass 208. The provider-free unmounted observation-to-temporal-signal rehearsal passes at exact reviewed HEAD. A source-specific durability architecture is next; every live and real-data boundary remains closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1798,33 +1798,50 @@
         "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md",
         "orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal",
+      "lineage_parent": "raisa-provider-free-default-off-live-source-observation-boundary",
+      "strategic_role": "Prove full-domain observation admission and temporal handoff",
+      "outcome": "One pure authored-synthetic committed change maps through backend impact and proofreader gates into the accepted temporal processor.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md",
+        "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-design.md",
+        "docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-independent-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-independent-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-final-independent-review.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-pre-verifier-acceptance-receipt.json",
+        "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-sol-acceptance.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-default-off-live-source-observation-boundary",
-    "strategic_role": "Default-off live-source observation architecture accepted; unmounted synthetic observation-to-signal rehearsal is next",
-    "why_now": "The observer's non-truth, metadata, impact, activation and authority boundaries are independently accepted before any implementation.",
-    "outcome": "The repaired exact candidate passed 67 of 67 tests and a fresh no-finding independent veto.",
+    "node_id": "raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal",
+    "strategic_role": "Unmounted observation-to-signal rehearsal accepted; source-specific durability architecture is next",
+    "why_now": "The full admitted identity, prior and two-sided clock domain plus proofreader-only public egress are independently accepted.",
+    "outcome": "The repaired exact candidate passed 227 checks and a fresh no-finding independent veto.",
     "unlocks": [
-      "Implement pure typed observation policy, binding, activation, admission and signal-mapping contracts over authored-synthetic metadata.",
-      "Prove backend impact floors, registered aliases and zero-effect default-off behavior without a live source."
+      "Freeze an architecture-only integration principal and durable monotonic outbox/transaction coordinate for diary.appointment_rescheduled.v1.",
+      "Specify atomic decision-invalidation-checkpoint, restart, retention and key-rotation contracts without mounting a source."
     ],
     "does_not_solve": [
-      "Real patient/product data, a live observation/feed/watcher or product source read.",
-      "Database/event transport, checkpoint persistence, restart recovery or operational retention.",
+      "Real patient/product data, live database/outbox/feed/watcher/listener access or product source reads.",
+      "Operational credentials, checkpoint persistence, restart execution or runtime retention.",
       "Provider cognition, cross-Bureau clinical sources, commands, deployment or production.",
       "Release, Pages, protected evidence or protected-ref movement."
     ],
     "evidence": [
-      "docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md",
-      "docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md",
-      "docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-analysis.md",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-veto.md",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-repair-independent-review.md",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-pre-verifier-acceptance-receipt.json",
-      "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md"
+      "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md",
+      "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-design.md",
+      "docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-independent-veto.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-independent-veto.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-final-independent-review.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-pre-verifier-acceptance-receipt.json",
+      "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
@@ -1920,9 +1937,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "The complete unmounted Rayleen lifecycle and default-off live-source observation architecture are accepted at exact reviewed HEADs.",
-        "The next safe candidate is a provider-free unmounted authored-synthetic observation-to-temporal-signal contract rehearsal.",
-        "Separately gate every real source/event family, transport principal, database/feed, product read, persistence, clinical, command, deployment and release boundary."
+        "The default-off live-source architecture and full-domain unmounted observation-to-signal rehearsal are accepted at exact reviewed HEADs.",
+        "The next safe candidate is a provider-free unmounted source-specific durability architecture for diary.appointment_rescheduled.v1.",
+        "Separately gate live database/outbox/feed access, operational credentials, persistence, product reads, clinical data, commands, deployment and release."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -2024,7 +2041,16 @@
         "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-repair-independent-review.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-pre-verifier-acceptance-receipt.json",
         "docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md",
-        "orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md"
+        "orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md",
+        "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md",
+        "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-design.md",
+        "docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-independent-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-independent-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-final-independent-review.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-pre-verifier-acceptance-receipt.json",
+        "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-sol-acceptance.md"
       ]
     },
     {
@@ -2869,6 +2895,7 @@
     }
   ],
   "map_limits": [
+    "Unmounted observation-to-signal acceptance proves only pure authored-synthetic admission, mapping and proofreading; it creates no live source, database, persistence, product-read, provider, command, runtime, deployment or protected authority.",
     "Live-source observation architecture acceptance proves only a provider-free default-off authority design; it creates no live source, delivery, database, product-read, persistence, provider, command, deployment or protected authority.",
     "Fresh-generation acceptance proves one authored-synthetic unmounted retire-to-new-generation lifecycle only; it creates no live observation, product-read, persistence, provider, command, deployment or protected authority.",
     "Invalidation-seam acceptance proves one authored-synthetic unmounted retire-and-require handoff only; it creates no live-source, watcher, persistence, provider, command, deployment or protected authority.",
