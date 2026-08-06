@@ -245,6 +245,58 @@ ACTIVATION_KEYS = {
     "persistence_authority",
     "activation_digest",
 }
+OBSERVATION_KEYS = {
+    "schema_version",
+    "observation_id",
+    "event_type",
+    "event_schema_version",
+    "source_system_id",
+    "source_contract_id",
+    "source_contract_digest",
+    "observer_id",
+    "observer_generation",
+    "practice_binding_digest",
+    "aggregate_class",
+    "aggregate_alias",
+    "aggregate_revision",
+    "stream_alias",
+    "expected_predecessor_position",
+    "transaction_position",
+    "committed",
+    "evidence_mode",
+    "source_transaction_committed_at",
+    "observed_at",
+    "expires_at",
+    "sensitivity",
+    "binding_digest",
+    "policy_digest",
+    "alias_registry_digest",
+    "impact_policy_digest",
+    "observation_digest",
+}
+ADMISSION_KEYS = {
+    "schema_version",
+    "decision",
+    "reason_codes",
+    "observation_digest",
+    "policy_digest",
+    "binding_digest",
+    "alias_registry_digest",
+    "impact_policy_digest",
+    "prior_coordinate_digest",
+    "conservative_impact_frame_types",
+    "signal_digest",
+    "ordinary_temporal_signal_emitted",
+    "checkpoint_advanced",
+    "durable_handoff_implemented",
+    "authority_renewed",
+    "returns_data",
+    "read_authority",
+    "provider_authority",
+    "command_authority",
+    "persistence_authority",
+    "admission_digest",
+}
 
 
 class ObservationToSignalViolation(ContractViolation):
@@ -363,6 +415,18 @@ def derive_observation_id(
     return "sha256:" + hmac.new(hmac_key, message, hashlib.sha256).hexdigest()
 
 
+def _expected_source_contract_digest() -> str:
+    return canonical_sha256(
+        {
+            "source_contract_id": SOURCE_CONTRACT_ID,
+            "source_event_type": EVENT_TYPE,
+            "source_event_schema": SOURCE_EVENT_SCHEMA_VERSION,
+            "temporal_event_schema": TEMPORAL_EVENT_SCHEMA_VERSION,
+            "aggregate_class": AGGREGATE_CLASS,
+        }
+    )
+
+
 def build_live_source_observation_policy(
     practice_binding_digest: str,
     *,
@@ -380,15 +444,7 @@ def build_live_source_observation_policy(
             "practice_binding_digest": practice_binding_digest,
             "source_system_id": SOURCE_SYSTEM_ID,
             "source_contract_id": SOURCE_CONTRACT_ID,
-            "source_contract_digest": canonical_sha256(
-                {
-                    "source_contract_id": SOURCE_CONTRACT_ID,
-                    "source_event_type": EVENT_TYPE,
-                    "source_event_schema": SOURCE_EVENT_SCHEMA_VERSION,
-                    "temporal_event_schema": TEMPORAL_EVENT_SCHEMA_VERSION,
-                    "aggregate_class": AGGREGATE_CLASS,
-                }
-            ),
+            "source_contract_digest": _expected_source_contract_digest(),
             "allowed_event_types": [EVENT_TYPE],
             "allowed_event_schema_versions": [SOURCE_EVENT_SCHEMA_VERSION],
             "allowed_aggregate_classes": [AGGREGATE_CLASS],
@@ -619,8 +675,20 @@ def _validate_source_input(value: dict[str, Any]) -> None:
     _expect_exact_keys(value, SOURCE_INPUT_KEYS, "source_input_shape_invalid")
     if value["schema_version"] != SCHEMA_VERSION:
         raise ObservationToSignalViolation("source_input_schema_invalid")
+    for field in (
+        "source_system_id",
+        "source_contract_id",
+        "event_type",
+        "event_schema_version",
+        "aggregate_class",
+        "evidence_mode",
+    ):
+        if not isinstance(value[field], str):
+            raise ObservationToSignalViolation(f"source_{field}_type_invalid")
     _expect_digest(value["practice_binding_digest"], "practice_binding_digest_invalid")
-    if not _RAW_EVENT_ID_RE.fullmatch(value["raw_source_event_id"]):
+    if not isinstance(
+        value["raw_source_event_id"], str
+    ) or not _RAW_EVENT_ID_RE.fullmatch(value["raw_source_event_id"]):
         raise ObservationToSignalViolation("raw_event_id_invalid")
     _expect_alias(value["aggregate_alias"], "aggregate", "aggregate_alias_invalid")
     _expect_alias(value["stream_alias"], "stream", "stream_alias_invalid")
@@ -660,14 +728,27 @@ def _validate_trusted_contracts(
     ):
         _verify(value, field)
     for field in (
-        "policy_version",
-        "maximum_events_per_minute",
-        "maximum_batch_size",
-        "maximum_clock_skew_seconds",
+        "practice_binding_digest",
+        "source_contract_digest",
+        "alias_registry_digest",
+        "impact_policy_digest",
     ):
-        _expect_positive_integer(policy[field], f"policy_{field}_invalid")
-    _expect_positive_integer(
-        binding["observer_generation"], "binding_observer_generation_invalid"
+        _expect_digest(policy[field], f"policy_{field}_invalid")
+    _expect_digest(
+        binding["integration_principal_digest"],
+        "binding_integration_principal_digest_invalid",
+    )
+    for field in (
+        "practice_binding_digest",
+        "source_contract_digest",
+        "policy_digest",
+        "alias_registry_digest",
+        "impact_policy_digest",
+    ):
+        _expect_digest(binding[field], f"binding_{field}_invalid")
+    _expect_digest(
+        alias_registry["practice_binding_digest"],
+        "alias_registry_practice_binding_digest_invalid",
     )
     for value in (
         policy["issued_at"],
@@ -677,6 +758,36 @@ def _validate_trusted_contracts(
         binding["expires_at"],
     ):
         _instant(value)
+    if _instant(policy["expires_at"]) <= _instant(policy["issued_at"]):
+        raise ObservationToSignalViolation("policy_time_window_invalid")
+    if not (
+        _instant(binding["issued_at"])
+        <= _instant(binding["not_before"])
+        < _instant(binding["expires_at"])
+    ):
+        raise ObservationToSignalViolation("binding_time_window_invalid")
+    expected_policy_fields = {
+        "schema_version": SCHEMA_VERSION,
+        "policy_id": "synthetic:live-source-observation-policy:001",
+        "policy_version": 1,
+        "source_system_id": SOURCE_SYSTEM_ID,
+        "source_contract_id": SOURCE_CONTRACT_ID,
+        "source_contract_digest": _expected_source_contract_digest(),
+        "allowed_event_types": [EVENT_TYPE],
+        "allowed_event_schema_versions": [SOURCE_EVENT_SCHEMA_VERSION],
+        "allowed_aggregate_classes": [AGGREGATE_CLASS],
+        "allowed_sensitivities": [SENSITIVITY],
+        "required_authentication_kinds": ["SYNTHETIC_INTEGRATION_PRINCIPAL"],
+        "maximum_events_per_minute": 20,
+        "maximum_batch_size": 1,
+        "maximum_clock_skew_seconds": 120,
+        "continuity_mode": "MONOTONIC_POSITION_AND_AGGREGATE_REVISION",
+        "impact_policy_id": "synthetic:observation-impact-policy:001",
+    }
+    if any(
+        policy[field] != expected for field, expected in expected_policy_fields.items()
+    ):
+        raise ObservationToSignalViolation("policy_contract_not_exact")
     if not (
         policy["enabled_by_default"] is False
         and policy["enabled"] is False
@@ -684,6 +795,34 @@ def _validate_trusted_contracts(
         and policy["persistence_authority"] is False
     ):
         raise ObservationToSignalViolation("policy_default_off_ceiling_invalid")
+    expected_binding_fields = {
+        "schema_version": SCHEMA_VERSION,
+        "binding_id": "synthetic:live-source-observer-binding:001",
+        "observer_id": "synthetic:observer:001",
+        "observer_generation": 1,
+        "integration_principal_digest": canonical_sha256(
+            {"principal": "synthetic:integration-principal:observation-001"}
+        ),
+        "authentication_kind": "SYNTHETIC_INTEGRATION_PRINCIPAL",
+        "practice_binding_digest": policy["practice_binding_digest"],
+        "source_system_id": SOURCE_SYSTEM_ID,
+        "source_contract_id": SOURCE_CONTRACT_ID,
+        "source_contract_digest": _expected_source_contract_digest(),
+        "policy_version": 1,
+        "policy_digest": policy["policy_digest"],
+        "allowed_event_types": [EVENT_TYPE],
+        "allowed_event_schema_versions": [SOURCE_EVENT_SCHEMA_VERSION],
+        "allowed_aggregate_classes": [AGGREGATE_CLASS],
+        "alias_registry_digest": alias_registry["alias_registry_digest"],
+        "impact_policy_digest": impact_policy["impact_policy_digest"],
+    }
+    if any(
+        binding[field] != expected
+        for field, expected in expected_binding_fields.items()
+    ):
+        raise ObservationToSignalViolation("binding_contract_not_exact")
+    if type(binding["revoked"]) is not bool:
+        raise ObservationToSignalViolation("binding_revoked_invalid")
     for field in (
         "returns_data",
         "read_authority",
@@ -711,23 +850,18 @@ def _validate_trusted_contracts(
         raise ObservationToSignalViolation("source_impact_authority_forbidden")
     if impact_policy["unknown_impact_decision"] != "FULL_INVALIDATION_REQUIRED":
         raise ObservationToSignalViolation("unknown_impact_must_fail_closed")
-    if not (
-        policy["source_system_id"] == SOURCE_SYSTEM_ID
-        and policy["source_contract_id"] == SOURCE_CONTRACT_ID
-        and policy["allowed_event_types"] == [EVENT_TYPE]
-        and policy["allowed_event_schema_versions"] == [SOURCE_EVENT_SCHEMA_VERSION]
-        and policy["allowed_aggregate_classes"] == [AGGREGATE_CLASS]
-        and binding["authentication_kind"] == "SYNTHETIC_INTEGRATION_PRINCIPAL"
-        and binding["observer_id"] == "synthetic:observer:001"
-        and alias_registry["practice_binding_digest"]
-        == policy["practice_binding_digest"]
-        and alias_registry["source_system_id"] == SOURCE_SYSTEM_ID
-        and alias_registry["source_contract_id"] == SOURCE_CONTRACT_ID
-        and alias_registry["aggregate_class"] == AGGREGATE_CLASS
-        and alias_registry["backend_issued_only"] is True
+    expected_registry = build_observation_alias_registry(
+        policy["practice_binding_digest"]
+    )
+    if alias_registry != expected_registry:
+        raise ObservationToSignalViolation("alias_registry_contract_not_exact")
+    expected_impact_policy = build_observation_impact_policy()
+    if impact_policy != expected_impact_policy:
+        raise ObservationToSignalViolation("impact_policy_contract_not_exact")
+    if (
+        not isinstance(impact_policy["routes"], list)
+        or len(impact_policy["routes"]) != 1
     ):
-        raise ObservationToSignalViolation("trusted_scope_contract_invalid")
-    if len(impact_policy["routes"]) != 1:
         raise ObservationToSignalViolation("impact_route_not_exact")
     route = impact_policy["routes"][0]
     _expect_exact_keys(
@@ -753,7 +887,9 @@ def _validate_trusted_contracts(
     ):
         raise ObservationToSignalViolation("impact_route_not_exact")
     if (
-        len(alias_registry["entries"]) != 1
+        not isinstance(alias_registry["entries"], list)
+        or not isinstance(alias_registry["stream_entries"], list)
+        or len(alias_registry["entries"]) != 1
         or len(alias_registry["stream_entries"]) != 1
     ):
         raise ObservationToSignalViolation("alias_registry_entries_not_exact")
@@ -781,6 +917,10 @@ def _validate_trusted_contracts(
         entry["aggregate_alias"], "aggregate", "registry_aggregate_alias_invalid"
     )
     _expect_alias(stream["stream_alias"], "stream", "registry_stream_alias_invalid")
+    if not isinstance(entry["location_aliases"], list) or not isinstance(
+        entry["practitioner_aliases"], list
+    ):
+        raise ObservationToSignalViolation("alias_registry_alias_lists_invalid")
     for alias in entry["location_aliases"]:
         _expect_alias(alias, "location", "registry_location_alias_invalid")
     for alias in entry["practitioner_aliases"]:
@@ -806,6 +946,8 @@ def _validate_prior_coordinate(
         coordinate, PRIOR_COORDINATE_KEYS, "prior_coordinate_shape_invalid"
     )
     _verify(coordinate, "coordinate_digest")
+    if coordinate["schema_version"] != SCHEMA_VERSION:
+        raise ObservationToSignalViolation("prior_coordinate_schema_invalid")
     for field in (
         "practice_binding_digest",
         "source_contract_digest",
@@ -815,6 +957,11 @@ def _validate_prior_coordinate(
         "impact_policy_digest",
     ):
         _expect_digest(coordinate[field], f"prior_{field}_invalid")
+    for field in ("source_system_id", "source_contract_id", "observer_id"):
+        if not isinstance(coordinate[field], str):
+            raise ObservationToSignalViolation(f"prior_{field}_invalid")
+    if not _OBSERVER_ID_RE.fullmatch(coordinate["observer_id"]):
+        raise ObservationToSignalViolation("prior_observer_id_invalid")
     _expect_positive_integer(
         coordinate["observer_generation"], "prior_observer_generation_invalid"
     )
@@ -823,6 +970,8 @@ def _validate_prior_coordinate(
         "prior_transaction_position_invalid",
     )
     _expect_alias(coordinate["stream_alias"], "stream", "prior_stream_alias_invalid")
+    if type(coordinate["baseline_established"]) is not bool:
+        raise ObservationToSignalViolation("prior_baseline_established_invalid")
     if not (
         coordinate["practice_binding_digest"]
         == policy["practice_binding_digest"]
@@ -846,7 +995,10 @@ def _validate_prior_coordinate(
         and coordinate["impact_policy_digest"] == impact_policy["impact_policy_digest"]
     ):
         raise ObservationToSignalViolation("prior_coordinate_binding_mismatch")
-    if len(coordinate["aggregate_revisions"]) != 1:
+    if (
+        not isinstance(coordinate["aggregate_revisions"], list)
+        or len(coordinate["aggregate_revisions"]) != 1
+    ):
         raise ObservationToSignalViolation("prior_aggregate_revision_shape_invalid")
     aggregate = coordinate["aggregate_revisions"][0]
     _expect_exact_keys(
@@ -898,7 +1050,11 @@ def _activation_current_and_exact(
             "persistence_authority",
         )
         return (
-            activation["activation_mode"] == ACTIVATION_MODE
+            activation["schema_version"] == SCHEMA_VERSION
+            and activation["activation_id"]
+            == "synthetic:observation-classification-activation:001"
+            and activation["plan_version"] == "2026-08-06.frozen.v1"
+            and activation["activation_mode"] == ACTIVATION_MODE
             and activation["evidence_mode"] == SYNTHETIC_EVIDENCE_MODE
             and source_input["evidence_mode"] == SYNTHETIC_EVIDENCE_MODE
             and activation["policy_digest"] == policy["policy_digest"]
@@ -1372,6 +1528,10 @@ def map_observation_to_temporal_signal(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Construct one accepted signal from backend-owned impact and aliases."""
 
+    _expect_exact_keys(observation, OBSERVATION_KEYS, "observation_shape_invalid")
+    _expect_exact_keys(admission, ADMISSION_KEYS, "admission_shape_invalid")
+    _expect_exact_keys(alias_registry, REGISTRY_KEYS, "alias_registry_shape_invalid")
+    _expect_exact_keys(impact_policy, IMPACT_POLICY_KEYS, "impact_policy_shape_invalid")
     _verify(observation, "observation_digest")
     _verify(admission, "admission_digest")
     _verify(alias_registry, "alias_registry_digest")
@@ -1381,6 +1541,129 @@ def map_observation_to_temporal_signal(
         or admission["ordinary_temporal_signal_emitted"] is not True
     ):
         raise ObservationToSignalViolation("only_admit_signal_may_map")
+    _expect_digest(
+        observation["practice_binding_digest"],
+        "observation_practice_binding_digest_invalid",
+    )
+    for field in (
+        "observation_id",
+        "source_contract_digest",
+        "binding_digest",
+        "policy_digest",
+        "alias_registry_digest",
+        "impact_policy_digest",
+    ):
+        _expect_digest(observation[field], f"observation_{field}_invalid")
+    for field in (
+        "observation_digest",
+        "policy_digest",
+        "binding_digest",
+        "alias_registry_digest",
+        "impact_policy_digest",
+        "prior_coordinate_digest",
+        "signal_digest",
+    ):
+        _expect_digest(admission[field], f"admission_{field}_invalid")
+    expected_registry = build_observation_alias_registry(
+        observation["practice_binding_digest"]
+    )
+    expected_impact_policy = build_observation_impact_policy()
+    if alias_registry != expected_registry:
+        raise ObservationToSignalViolation("alias_registry_contract_not_exact")
+    if impact_policy != expected_impact_policy:
+        raise ObservationToSignalViolation("impact_policy_contract_not_exact")
+    expected_policy = build_live_source_observation_policy(
+        observation["practice_binding_digest"],
+        alias_registry_digest=expected_registry["alias_registry_digest"],
+        impact_policy_digest=expected_impact_policy["impact_policy_digest"],
+    )
+    expected_binding = build_live_source_observer_binding(
+        expected_policy, expected_registry, expected_impact_policy
+    )
+    expected_prior = build_observation_prior_coordinate(
+        practice_binding_digest=observation["practice_binding_digest"],
+        policy=expected_policy,
+        binding=expected_binding,
+        alias_registry=expected_registry,
+        impact_policy=expected_impact_policy,
+    )
+    expected_observation_fields = {
+        "schema_version": SCHEMA_VERSION,
+        "event_type": EVENT_TYPE,
+        "event_schema_version": SOURCE_EVENT_SCHEMA_VERSION,
+        "source_system_id": SOURCE_SYSTEM_ID,
+        "source_contract_id": SOURCE_CONTRACT_ID,
+        "source_contract_digest": _expected_source_contract_digest(),
+        "observer_id": "synthetic:observer:001",
+        "observer_generation": 1,
+        "aggregate_class": AGGREGATE_CLASS,
+        "aggregate_alias": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+        "aggregate_revision": 12,
+        "stream_alias": "syn/v1/stream/d0e1f2a3b4c5d6e7",
+        "expected_predecessor_position": 100,
+        "transaction_position": 101,
+        "committed": True,
+        "evidence_mode": SYNTHETIC_EVIDENCE_MODE,
+        "source_transaction_committed_at": "2026-08-06T03:00:10Z",
+        "observed_at": "2026-08-06T03:00:11Z",
+        "expires_at": "2026-08-06T03:02:00Z",
+        "sensitivity": SENSITIVITY,
+        "binding_digest": expected_binding["binding_digest"],
+        "policy_digest": expected_policy["policy_digest"],
+        "alias_registry_digest": expected_registry["alias_registry_digest"],
+        "impact_policy_digest": expected_impact_policy["impact_policy_digest"],
+    }
+    if any(
+        observation[field] != expected
+        for field, expected in expected_observation_fields.items()
+    ):
+        raise ObservationToSignalViolation("observation_contract_not_exact")
+    expected_observation_id = derive_observation_id(
+        "evt_0123456789abcdef0123456789abcdef",
+        practice_binding_digest=observation["practice_binding_digest"],
+        source_system_id=SOURCE_SYSTEM_ID,
+        source_contract_id=SOURCE_CONTRACT_ID,
+        source_contract_digest=_expected_source_contract_digest(),
+        observer_id="synthetic:observer:001",
+        observer_generation=1,
+        hmac_key=b"authored-synthetic-observation-key-0001",
+    )
+    if not hmac.compare_digest(observation["observation_id"], expected_observation_id):
+        raise ObservationToSignalViolation("observation_identity_not_exact")
+    observed_at = _instant(observation["observed_at"])
+    expires_at = _instant(observation["expires_at"])
+    if not (
+        _instant(observation["source_transaction_committed_at"])
+        <= observed_at
+        < expires_at
+    ):
+        raise ObservationToSignalViolation("observation_time_window_invalid")
+    expected_admission_fields = {
+        "schema_version": SCHEMA_VERSION,
+        "decision": "ADMIT_SIGNAL",
+        "reason_codes": ["ADMISSION_CHECKS_PASSED"],
+        "observation_digest": observation["observation_digest"],
+        "policy_digest": expected_policy["policy_digest"],
+        "binding_digest": expected_binding["binding_digest"],
+        "alias_registry_digest": expected_registry["alias_registry_digest"],
+        "impact_policy_digest": expected_impact_policy["impact_policy_digest"],
+        "prior_coordinate_digest": expected_prior["coordinate_digest"],
+        "conservative_impact_frame_types": list(MANDATORY_FRAME_FLOOR),
+        "ordinary_temporal_signal_emitted": True,
+        "checkpoint_advanced": False,
+        "durable_handoff_implemented": False,
+        "authority_renewed": False,
+        "returns_data": False,
+        "read_authority": False,
+        "provider_authority": False,
+        "command_authority": False,
+        "persistence_authority": False,
+    }
+    if any(
+        admission[field] != expected
+        for field, expected in expected_admission_fields.items()
+    ):
+        raise ObservationToSignalViolation("admission_contract_not_exact")
     source_shape = {
         "event_type": observation["event_type"],
         "event_schema_version": observation["event_schema_version"],

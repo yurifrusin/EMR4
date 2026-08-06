@@ -105,6 +105,26 @@ def _activate(values: dict) -> None:
     )
 
 
+def _coordinate_trusted_contracts(values: dict) -> None:
+    practice = values["registry"]["practice_binding_digest"]
+    values["policy"] = build_live_source_observation_policy(
+        practice,
+        alias_registry_digest=values["registry"]["alias_registry_digest"],
+        impact_policy_digest=values["impact"]["impact_policy_digest"],
+    )
+    values["binding"] = build_live_source_observer_binding(
+        values["policy"], values["registry"], values["impact"]
+    )
+    _activate(values)
+    values["prior"] = build_observation_prior_coordinate(
+        practice_binding_digest=practice,
+        policy=values["policy"],
+        binding=values["binding"],
+        alias_registry=values["registry"],
+        impact_policy=values["impact"],
+    )
+
+
 def _admit(values: dict, **kwargs):
     return admit_synthetic_committed_change(
         values["source"],
@@ -268,6 +288,139 @@ def test_malformed_typed_source_coordinates_fail_closed(
         _admit(values)
 
 
+@pytest.mark.parametrize("raw_id", [None, 1, True, {}, []])
+def test_malformed_raw_event_identity_has_closed_domain_error(raw_id: object) -> None:
+    values = _inputs()
+    values["source"]["raw_source_event_id"] = raw_id
+    with pytest.raises(ObservationToSignalViolation, match="raw_event_id_invalid"):
+        _admit(values)
+
+
+@pytest.mark.parametrize(
+    ("contract", "field", "value"),
+    [
+        ("registry", "command_authority", True),
+        ("registry", "read_only", False),
+        ("impact", "command_authority", True),
+        ("impact", "read_only", False),
+    ],
+)
+def test_coordinated_resealed_authority_widening_never_admits(
+    contract: str, field: str, value: object
+) -> None:
+    values = _inputs()
+    digest_field = (
+        "alias_registry_digest" if contract == "registry" else "impact_policy_digest"
+    )
+    values[contract][field] = value
+    values[contract] = _reseal(values[contract], digest_field)
+    _coordinate_trusted_contracts(values)
+    with pytest.raises(ObservationToSignalViolation, match="contract_not_exact"):
+        _admit(values)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("schema_version", "emr4.substituted.v1"),
+        ("policy_id", "synthetic:substituted-policy:001"),
+        ("policy_version", 2),
+        ("allowed_sensitivities", ["PUBLIC"]),
+        ("required_authentication_kinds", ["SUBSTITUTED"]),
+        ("continuity_mode", "BEST_EFFORT"),
+        ("source_contract_digest", "sha256:" + "6" * 64),
+    ],
+)
+def test_coordinated_resealed_policy_substitution_is_structurally_rejected(
+    field: str, value: object
+) -> None:
+    values = _inputs()
+    values["policy"][field] = value
+    values["policy"] = _reseal(values["policy"], "policy_digest")
+    values["binding"] = build_live_source_observer_binding(
+        values["policy"], values["registry"], values["impact"]
+    )
+    _activate(values)
+    values["prior"] = build_observation_prior_coordinate(
+        practice_binding_digest=values["policy"]["practice_binding_digest"],
+        policy=values["policy"],
+        binding=values["binding"],
+        alias_registry=values["registry"],
+        impact_policy=values["impact"],
+    )
+    with pytest.raises(ObservationToSignalViolation, match="policy_contract_not_exact"):
+        _admit(values)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("schema_version", "emr4.substituted.v1"),
+        ("binding_id", "synthetic:substituted-binding:001"),
+        ("integration_principal_digest", "sha256:" + "7" * 64),
+        ("authentication_kind", "SUBSTITUTED"),
+        ("allowed_event_types", []),
+        ("read_authority", True),
+        ("provider_authority", True),
+        ("command_authority", True),
+        ("persistence_authority", True),
+    ],
+)
+def test_resealed_binding_substitution_is_structurally_rejected(
+    field: str, value: object
+) -> None:
+    values = _inputs()
+    values["binding"][field] = value
+    values["binding"] = _reseal(values["binding"], "binding_digest")
+    _activate(values)
+    values["prior"] = build_observation_prior_coordinate(
+        practice_binding_digest=values["policy"]["practice_binding_digest"],
+        policy=values["policy"],
+        binding=values["binding"],
+        alias_registry=values["registry"],
+        impact_policy=values["impact"],
+    )
+    with pytest.raises(ObservationToSignalViolation):
+        _admit(values)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("schema_version", "emr4.substituted.v1"),
+        ("activation_id", "synthetic:substituted-activation:001"),
+        ("plan_version", "2026-08-06.substituted"),
+    ],
+)
+def test_resealed_activation_identity_substitution_keeps_observer_disabled(
+    field: str, value: object
+) -> None:
+    values = _inputs()
+    values["activation"][field] = value
+    values["activation"] = _reseal(values["activation"], "activation_digest")
+    _decision(values, "OBSERVER_DISABLED")
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "error"),
+    [
+        ("schema_version", "emr4.substituted.v1", "prior_coordinate_schema_invalid"),
+        ("baseline_established", 1, "prior_baseline_established_invalid"),
+        ("aggregate_revisions", {}, "prior_aggregate_revision_shape_invalid"),
+        ("observer_generation", True, "prior_observer_generation_invalid"),
+        ("observer_id", 7, "prior_observer_id_invalid"),
+    ],
+)
+def test_malformed_prior_coordinate_types_fail_structurally(
+    field: str, value: object, error: str
+) -> None:
+    values = _inputs()
+    values["prior"][field] = value
+    values["prior"] = _reseal(values["prior"], "coordinate_digest")
+    with pytest.raises(ObservationToSignalViolation, match=error):
+        _admit(values)
+
+
 def test_foreign_scope_precedes_expiry() -> None:
     values = _inputs()
     values["source"]["practice_binding_digest"] = "sha256:" + "5" * 64
@@ -421,6 +574,74 @@ def test_non_admit_decision_cannot_be_mapped_to_temporal_signal() -> None:
             admission,
             packet["alias_registry"],
             packet["impact_policy"],
+        )
+
+
+def test_public_mapping_rejects_coordinated_resealed_registry_widening() -> None:
+    values = _inputs()
+    observation, admission = _admit(values)
+    assert observation is not None
+    values["registry"]["command_authority"] = True
+    values["registry"] = _reseal(values["registry"], "alias_registry_digest")
+    observation["alias_registry_digest"] = values["registry"]["alias_registry_digest"]
+    observation = _reseal(observation, "observation_digest")
+    admission["alias_registry_digest"] = values["registry"]["alias_registry_digest"]
+    admission["observation_digest"] = observation["observation_digest"]
+    admission = _reseal(admission, "admission_digest")
+    with pytest.raises(
+        ObservationToSignalViolation, match="alias_registry_contract_not_exact"
+    ):
+        map_observation_to_temporal_signal(
+            observation, admission, values["registry"], values["impact"]
+        )
+
+
+def test_public_mapping_rejects_coordinated_resealed_observation_links() -> None:
+    values = _inputs()
+    observation, admission = _admit(values)
+    assert observation is not None
+    observation["policy_digest"] = "sha256:" + "8" * 64
+    observation = _reseal(observation, "observation_digest")
+    admission["policy_digest"] = observation["policy_digest"]
+    admission["observation_digest"] = observation["observation_digest"]
+    admission = _reseal(admission, "admission_digest")
+    with pytest.raises(
+        ObservationToSignalViolation, match="observation_contract_not_exact"
+    ):
+        map_observation_to_temporal_signal(
+            observation, admission, values["registry"], values["impact"]
+        )
+
+
+def test_public_mapping_rejects_resealed_alias_resolution_substitution() -> None:
+    values = _inputs()
+    observation, admission = _admit(values)
+    assert observation is not None
+    values["registry"]["entries"][0]["aggregate_ref"] = (
+        "synthetic:appointment:substituted"
+    )
+    values["registry"] = _reseal(values["registry"], "alias_registry_digest")
+    with pytest.raises(
+        ObservationToSignalViolation, match="alias_registry_contract_not_exact"
+    ):
+        map_observation_to_temporal_signal(
+            observation, admission, values["registry"], values["impact"]
+        )
+
+
+def test_public_mapping_rejects_resealed_impact_route_substitution() -> None:
+    values = _inputs()
+    observation, admission = _admit(values)
+    assert observation is not None
+    values["impact"]["routes"][0]["temporal_event_schema_version"] = (
+        "emr4.substituted.v1"
+    )
+    values["impact"] = _reseal(values["impact"], "impact_policy_digest")
+    with pytest.raises(
+        ObservationToSignalViolation, match="impact_policy_contract_not_exact"
+    ):
+        map_observation_to_temporal_signal(
+            observation, admission, values["registry"], values["impact"]
         )
 
 
