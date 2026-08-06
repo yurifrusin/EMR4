@@ -18,6 +18,7 @@ from scripts.raisa_authored_synthetic_model_required_practice_context_fabric_int
     ContractError,
     build_dry_run_provider_packet,
     build_intent_shaping_request,
+    build_prompt,
     build_vertex_request,
     canonical_model_body_fixture,
     extract_provider_candidate,
@@ -35,9 +36,16 @@ from scripts.raisa_authored_synthetic_model_required_practice_context_fabric_int
 )
 from scripts.raisa_provider_free_practice_context_fabric_bureau_memory_contract import (
     seal,
+    verify_seal,
 )
 from scripts.raisa_provider_free_practice_context_fabric_intent_shaped_temporal_retrieval_rehearsal import (
     proofread_intent_packet,
+)
+from scripts import (
+    model_required_bureau_a3_b3_broker as broker,
+    raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker as intent_broker,
+    raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts as contracts,
+    raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live as intent_live,
 )
 
 
@@ -80,6 +88,126 @@ def _envelope(
             "parts_count": 1,
         },
     )
+
+
+def _cell_request(
+    context: dict,
+    *,
+    attempt_number: int = 1,
+    correction_of=None,
+    correction_reason_code=None,
+) -> dict:
+    return intent_live._request_packet(
+        contracts.LANE,
+        context,
+        attempt_number=attempt_number,
+        correction_of=correction_of,
+        correction_reason_code=correction_reason_code,
+    )
+
+
+class _FakeBrokerState:
+    """Minimal broker state for exercising ``intent_broker._execute`` directly.
+
+    Dry-run and live paths are exercised without Docker, credentials or a
+    provider transport: the dry-run packet or a stubbed provider call supplies
+    the provider response, and the ledger/audit side effects are in-memory.
+    """
+
+    def __init__(self, *, mode: str, context: dict, expected_request: dict) -> None:
+        self.mode = mode
+        self.context = context
+        self.expected_request = expected_request
+        self.events: list[dict] = []
+        self._claimed = False
+        self._dry_run_packet_impl = None
+        self._provider_call_impl = None
+
+    def claim_once(self) -> None:
+        if self._claimed:
+            raise broker.BrokerError("broker_already_used")
+        self._claimed = True
+
+    def append_event(self, event_type: str, fields: dict) -> None:
+        self.events.append({"event_type": event_type, "fields": dict(fields)})
+
+    def consume_ledger(self) -> dict:
+        return {"status": "consumed"}
+
+    def _provider_request(self) -> dict:
+        return contracts.provider_request_for_attempt(
+            self.context,
+            attempt_number=self.expected_request["attempt_number"],
+            correction_reason_code=self.expected_request[
+                "correction_reason_code"
+            ],
+        )
+
+    def _dry_run_packet(self) -> dict:
+        if self._dry_run_packet_impl is not None:
+            return self._dry_run_packet_impl()
+        return contracts.build_dry_run_provider_packet()
+
+    def _provider_call(self, provider_request: dict):
+        if self._provider_call_impl is None:
+            raise AssertionError("provider must not be contacted in dry-run")
+        return self._provider_call_impl(provider_request)
+
+
+def _live_call_metadata() -> dict:
+    return {
+        "provider_contacted": True,
+        "http_status": 200,
+        "latency_ms": 1,
+        "discarded_provider_response_sha256": "sha256:" + "0" * 64,
+        "provider_response_bytes": 10,
+        "raw_provider_response_retained": False,
+    }
+
+
+def _live_packet(usage: dict) -> dict:
+    body = canonical_model_body_fixture(
+        "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON"
+    )
+    return {
+        "candidates": [
+            {
+                "finishReason": "STOP",
+                "content": {"parts": [{"text": json.dumps(body)}]},
+            }
+        ],
+        "usageMetadata": usage,
+        "modelVersion": contracts.MODEL,
+    }
+
+
+def _current_head() -> str:
+    import subprocess
+
+    return subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        shell=False,
+    ).stdout.strip()
+
+
+def _valid_source_review_receipt(head: str) -> dict:
+    return {
+        "schema_version": "emr4.raisa_intent_shaping.source_review.v1",
+        "status": "passed",
+        "decision": "pass",
+        "independent_read_only_review": True,
+        "provider_called": False,
+        "source_hashes": intent_live._review_source_hashes(),
+        "closed_boundary_verified": True,
+        "head_before": head,
+        "head_after": head,
+        "dirty_after": False,
+    }
 
 
 def test_all_schemas_are_draft_2020_12_and_closed() -> None:
@@ -144,6 +272,21 @@ def test_provider_request_exact_allocation_no_tools_or_cache() -> None:
         "recent_practice_work",
     ):
         assert forbidden not in prompt
+
+
+def test_prompt_requires_canonical_cue_codes_order() -> None:
+    intent_request = _request()
+    vertex_request = build_vertex_request(intent_request)
+    prompt = vertex_request["contents"][0]["parts"][0]["text"]
+    assert build_prompt(intent_request) == prompt
+    assert (
+        "Return cue_codes in the canonical CUE_CODES order displayed above."
+        in prompt
+    )
+    cue_block = prompt.split("CUE_CODES:", 1)[1].split(
+        "Return cue_codes", 1
+    )[0]
+    assert cue_block.strip() == ", ".join(intent_request["cue_codes"])
 
 
 def test_provider_request_size_stays_below_the_frozen_cap() -> None:
@@ -258,6 +401,122 @@ def test_source_review_validation_requires_exact_receipt() -> None:
     assert SOURCE_REVIEW_RECEIPT.name.endswith(".json")
 
 
+def test_source_review_binds_exact_head_and_tracked_worktree(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    acceptance_rel = (
+        "scripts/"
+        "raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py"
+    )
+    head = _current_head()
+    monkeypatch.setattr(
+        intent_live.live, "_tracked_worktree_clean", lambda: True
+    )
+
+    def _write(name: str, receipt: dict) -> Path:
+        path = tmp_path / name
+        path.write_text(json.dumps(receipt), encoding="utf-8")
+        return path
+
+    # A valid receipt at the current candidate HEAD passes.
+    ok = _write("ok.json", _valid_source_review_receipt(head))
+    assert (
+        intent_live._validate_source_review(ok, expected_path=ok)["decision"]
+        == "pass"
+    )
+
+    # Wrong HEAD fails closed.
+    wrong_head = _write(
+        "wrong-head.json",
+        _valid_source_review_receipt("sha256:" + "0" * 64),
+    )
+    with pytest.raises(
+        intent_live.live.LiveError, match="independent_source_review_not_exact"
+    ):
+        intent_live._validate_source_review(wrong_head, expected_path=wrong_head)
+
+    # Dirty review fails closed.
+    dirty = _valid_source_review_receipt(head)
+    dirty["dirty_after"] = True
+    dirty_path = _write("dirty.json", dirty)
+    with pytest.raises(
+        intent_live.live.LiveError, match="independent_source_review_not_exact"
+    ):
+        intent_live._validate_source_review(dirty_path, expected_path=dirty_path)
+
+    # head_before != head_after fails closed.
+    unequal = _valid_source_review_receipt(head)
+    unequal["head_after"] = "sha256:" + "0" * 64
+    unequal_path = _write("unequal.json", unequal)
+    with pytest.raises(
+        intent_live.live.LiveError, match="independent_source_review_not_exact"
+    ):
+        intent_live._validate_source_review(
+            unequal_path, expected_path=unequal_path
+        )
+
+    # Missing acceptance generator hash fails closed.
+    missing = _valid_source_review_receipt(head)
+    missing["source_hashes"] = {
+        key: value
+        for key, value in missing["source_hashes"].items()
+        if key != acceptance_rel
+    }
+    missing_path = _write("missing-acceptance.json", missing)
+    with pytest.raises(
+        intent_live.live.LiveError, match="independent_source_review_not_exact"
+    ):
+        intent_live._validate_source_review(
+            missing_path, expected_path=missing_path
+        )
+
+    # Stale acceptance generator hash fails closed.
+    stale = _valid_source_review_receipt(head)
+    stale["source_hashes"] = dict(stale["source_hashes"])
+    stale["source_hashes"][acceptance_rel] = "sha256:" + "0" * 64
+    stale_path = _write("stale-acceptance.json", stale)
+    with pytest.raises(
+        intent_live.live.LiveError, match="independent_source_review_not_exact"
+    ):
+        intent_live._validate_source_review(stale_path, expected_path=stale_path)
+
+    # Tracked worktree drift fails closed while untracked files remain
+    # permitted (the monkeypatched clean check is False only here).
+    monkeypatch.setattr(
+        intent_live.live, "_tracked_worktree_clean", lambda: False
+    )
+    drift_path = _write("tracked-drift.json", _valid_source_review_receipt(head))
+    with pytest.raises(
+        intent_live.live.LiveError, match="independent_source_review_not_exact"
+    ):
+        intent_live._validate_source_review(
+            drift_path, expected_path=drift_path
+        )
+
+
+def test_reviewed_sources_include_the_acceptance_generator() -> None:
+    reviewed = {
+        path.relative_to(ROOT).as_posix()
+        for path in intent_live.REVIEWED_SOURCE_PATHS
+    }
+    assert (
+        "scripts/"
+        "raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py"
+        in reviewed
+    )
+    assert (
+        "scripts/"
+        "raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts.py"
+        in reviewed
+    )
+    assert (
+        "tests/"
+        "test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py"
+        in reviewed
+    )
+    assert len(reviewed) >= 13
+
+
 def test_positive_thinking_evidence_is_required_for_occupied_acceptance() -> None:
     from scripts.raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live import (
         _positive_thinking_evidence,
@@ -274,6 +533,111 @@ def test_positive_thinking_evidence_is_required_for_occupied_acceptance() -> Non
     assert _positive_thinking_evidence(
         {"usage": {"thoughtsTokenCount": "1024"}}
     ) is False
+
+
+@pytest.mark.parametrize(
+    "usage",
+    (
+        {
+            "promptTokenCount": 0,
+            "candidatesTokenCount": 0,
+            "thoughtsTokenCount": 0,
+            "totalTokenCount": 0,
+        },
+        {"promptTokenCount": 0, "candidatesTokenCount": 0, "totalTokenCount": 0},
+        {
+            "promptTokenCount": 0,
+            "candidatesTokenCount": 0,
+            "thoughtsTokenCount": "1024",
+            "totalTokenCount": 0,
+        },
+    ),
+)
+def test_live_non_positive_thinking_is_terminal_preproof_and_no_release(
+    usage: dict,
+) -> None:
+    context = _request()
+    packet = _cell_request(context)
+    state = _FakeBrokerState(mode="live", context=context, expected_request=packet)
+    state._provider_call_impl = lambda _provider_request: (
+        _live_packet(usage),
+        _live_call_metadata(),
+    )
+    with pytest.raises(
+        broker.BrokerError, match="positive_thinking_evidence_required"
+    ) as excinfo:
+        intent_broker._execute(state, packet)
+    assert excinfo.value.reason_code == "positive_thinking_evidence_required"
+    assert excinfo.value.metadata.get("provider_contacted") is True
+    assert state._claimed is True
+    event_types = [event["event_type"] for event in state.events]
+    assert "provider_call_completed" in event_types
+    assert "release_committed" not in event_types
+    assert "proofreader_completed" not in event_types
+    assert contracts.positive_thinking_evidence(
+        {"usage": usage}
+    ) is False
+
+
+def test_dry_run_zero_thinking_remains_eligible() -> None:
+    context = _request()
+    packet = _cell_request(context)
+    state = _FakeBrokerState(mode="dry-run", context=context, expected_request=packet)
+    result = intent_broker._execute(state, packet)
+    assert result["status"] == "completed"
+    assert result["proofreader"]["verdict"] == "admitted"
+    assert result["release"] is not None
+    assert state.events[-1]["event_type"] == "release_committed"
+    assert result["provider_metadata"]["usage"]["thoughtsTokenCount"] == 0
+
+
+def test_schema_invalid_provider_body_reaches_eligible_correction_path() -> None:
+    context = _request()
+    packet = _cell_request(context)
+    state = _FakeBrokerState(mode="dry-run", context=context, expected_request=packet)
+    invalid_body = deepcopy(
+        canonical_model_body_fixture(
+            "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON"
+        )
+    )
+    invalid_body["prose"] = "unexpected field value"
+    expected_hash = prefixed_sha256(invalid_body)
+    state._dry_run_packet_impl = lambda: {
+        "candidates": [
+            {
+                "finishReason": "STOP",
+                "content": {
+                    "parts": [{"text": json.dumps(invalid_body)}]
+                },
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 0,
+            "candidatesTokenCount": 0,
+            "thoughtsTokenCount": 0,
+            "totalTokenCount": 0,
+        },
+        "modelVersion": contracts.DRY_RUN_MODEL_VERSION,
+    }
+    result = intent_broker._execute(state, packet)
+    assert result["status"] == "completed"
+    assert result["release"] is None
+    assert result["proofreader"]["reason_code"] == (
+        "provider_body_schema_invalid"
+    )
+    assert result["proofreader"]["correction_eligible"] is True
+    assert result["proofreader"]["candidate_hash"] == expected_hash
+    # The invalid object is hashed and discarded; no release is created and no
+    # unexpected field name or value survives in audit/evidence.
+    assert "release_committed" not in [
+        event["event_type"] for event in state.events
+    ]
+    audit_raw = json.dumps(state.events)
+    assert "unexpected field value" not in audit_raw
+    assert "prose" not in audit_raw
+    result_raw = json.dumps(result)
+    assert "unexpected field value" not in result_raw
+    assert "prose" not in result_raw
 
 
 def test_broker_safe_provider_metadata_allowlists_part_shape() -> None:
@@ -575,6 +939,42 @@ def test_release_digest_recomputation_detects_tamper() -> None:
     }
     assert release["release_digest"] == prefixed_sha256(original_material)
     assert tampered["release_digest"] != release["release_digest"]
+
+
+def test_release_is_immutable_after_envelope_zeroisation() -> None:
+    request = _request()
+    body = canonical_model_body_fixture(
+        "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON"
+    )
+    envelope = _envelope(request, body)
+    proof = proofread_intent_candidate(request, envelope, ground_to_case=True)
+    assert proof["verdict"] == "admitted"
+    release = proof["released"]
+    nested_envelope = deepcopy(release["model_intent_candidate_envelope"])
+    nested_body = deepcopy(release["model_intent_candidate_envelope"]["body"])
+    nested_parent_packet = deepcopy(release["parent_packet"])
+    nested_parent_trace = deepcopy(release["parent_proofreader_trace"])
+
+    # Simulate broker zeroisation after admission.
+    envelope["body"].clear()
+    envelope.clear()
+
+    # The released envelope, nested body and parent material remain intact.
+    assert release["model_intent_candidate_envelope"] == nested_envelope
+    assert release["model_intent_candidate_envelope"]["body"] == nested_body
+    assert release["parent_packet"] == nested_parent_packet
+    assert release["parent_proofreader_trace"] == nested_parent_trace
+    assert (
+        release["model_intent_candidate_envelope"]["body"]["intent_code"]
+        == "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON"
+    )
+    assert release["model_intent_candidate_envelope"]["body"]["cue_codes"] == list(
+        CUE_CODES
+    )
+
+    # Both the release digest and the nested envelope digest remain valid.
+    verify_seal(release, "release_digest")
+    verify_seal(release["model_intent_candidate_envelope"], "envelope_digest")
 
 
 def test_correction_requests_are_distinct_and_bounded() -> None:

@@ -268,6 +268,24 @@ def _execute(
                 "model_version": model_version,
             },
         )
+    # Positive reported thinking-token use is acceptance evidence of the frozen
+    # intelligence posture.  Missing, non-integer or non-positive counts in
+    # live mode are a terminal pre-proof failure: the single-use ledger is
+    # already consumed, nothing may be released, and the tranche cost ledger
+    # reconciles the consumed call.  Dry-run remains eligible with zero tokens.
+    if (
+        self.mode == "live"
+        and not contracts.positive_thinking_evidence(bounded_metadata)
+    ):
+        provider_packet.clear()
+        raise broker.BrokerError(
+            "positive_thinking_evidence_required",
+            metadata={
+                **call_metadata,
+                "provider_metadata": sanitized_provider,
+                "model_version": model_version,
+            },
+        )
     try:
         body = contracts.extract_provider_candidate(provider_packet)
     except contracts.ContractError as error:
@@ -281,9 +299,7 @@ def _execute(
             },
         )
     provider_packet.clear()
-    model_authored_field_labels = {
-        key: "untrusted_model" for key in sorted(body)
-    }
+    model_authored_field_labels = contracts.bounded_body_field_labels(body)
     if self.mode == "dry-run":
         response_hash = contracts.prefixed_sha256(
             contracts.build_dry_run_provider_packet()
@@ -297,20 +313,30 @@ def _execute(
         "finish_reason": bounded_metadata.get("finish_reason", "UNRECOGNIZED"),
         "parts_count": bounded_metadata.get("parts_count", 0),
     }
-    envelope = contracts.wrap_provider_body(
-        self.context,
-        body,
-        attempt_id=request_packet["attempt_id"],
-        ledger_id=request_packet["ledger_id"],
-        provider_request_hash=request_packet["provider_request_hash"],
-        provider_response_hash=response_hash,
-        provider_response_shape=provider_response_shape,
-    )
-    proof = contracts.proofread(
-        self.context, envelope, ground_to_case=True
-    )
-    body.clear()
-    envelope.clear()
+    try:
+        envelope = contracts.wrap_provider_body(
+            self.context,
+            body,
+            attempt_id=request_packet["attempt_id"],
+            ledger_id=request_packet["ledger_id"],
+            provider_request_hash=request_packet["provider_request_hash"],
+            provider_response_hash=response_hash,
+            provider_response_shape=provider_response_shape,
+        )
+    except contracts.ContractError as error:
+        # A JSON object that fails the closed provider-body schema must reach
+        # the structured proofreader so the single allowed
+        # ``provider_body_schema_invalid`` correction stays eligible.  The
+        # invalid object is hashed for the candidate digest and discarded.
+        reason = str(error).split(":", 1)[0]
+        proof = contracts.provider_body_rejection(body, reason)
+        body.clear()
+    else:
+        proof = contracts.proofread(
+            self.context, envelope, ground_to_case=True
+        )
+        body.clear()
+        envelope.clear()
 
     proof_metadata = {
         "verdict": proof["verdict"],

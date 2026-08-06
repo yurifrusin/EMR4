@@ -148,6 +148,20 @@ PREPROOF_TERMINAL_REASON_CODES = frozenset(
         "provider_part_non_text_invalid",
         "provider_candidate_not_json",
         "provider_candidate_not_object",
+        "positive_thinking_evidence_required",
+    }
+)
+
+# Fixed allowlist of provider-body field labels.  Field-label telemetry may
+# name only these keys plus bounded counts; unexpected provider field names or
+# values must never be retained in audit/evidence.
+BODY_FIELD_ALLOWLIST = frozenset(
+    {
+        "intent_code",
+        "temporal_coordinate_code",
+        "cue_codes",
+        "response_code",
+        *AUTHORITY_KEYS,
     }
 )
 
@@ -409,6 +423,7 @@ def build_prompt(request: dict[str, Any]) -> str:
             coordinate_lines,
             "CUE_CODES:",
             ", ".join(request["cue_codes"]),
+            "Return cue_codes in the canonical CUE_CODES order displayed above.",
             "Return only the selector JSON body matching the response schema.",
             "Never invent an intent, coordinate, cue, identifier, URL, tool, "
             "SQL or command. All authority values must remain false.",
@@ -694,6 +709,69 @@ def _rejection(
     }
 
 
+def provider_body_rejection(
+    body: dict[str, Any],
+    reason: str,
+) -> dict[str, Any]:
+    """Structured proofreader rejection for a provider body that cannot wrap.
+
+    A JSON object that fails the closed provider-body schema must not raise
+    from ``wrap_provider_body`` and bypass the structured proofreader.  This
+    returns the same sealed rejection shape as :func:`_rejection` so the one
+    allowed ``provider_body_schema_invalid`` correction remains eligible.  The
+    body is hashed for the candidate digest and then discarded by the caller.
+    """
+    reason_code = reason.split(":", 1)[0]
+    if reason_code == "schema_invalid":
+        reason_code = "provider_body_schema_invalid"
+    return {
+        "verdict": "rejected",
+        "lane": LANE,
+        "reason_code": reason_code,
+        "candidate_hash": prefixed_sha256(body),
+        "correction_eligible": reason_code in CORRECTION_REASON_CODES,
+        "released": None,
+    }
+
+
+def positive_thinking_evidence(metadata: dict[str, Any]) -> bool:
+    """Return True only for a positive integer provider-reported thinking count.
+
+    Live occupied acceptance requires positive provider-reported thinking-token
+    use.  Missing, non-integer or non-positive counts fail closed.  Provider-free
+    dry-run remains eligible with zero thinking tokens.
+    """
+    usage = metadata.get("usage") if isinstance(metadata, dict) else None
+    if not isinstance(usage, dict):
+        return False
+    return (
+        type(usage.get("thoughtsTokenCount")) is int
+        and usage["thoughtsTokenCount"] > 0
+    )
+
+
+def bounded_body_field_labels(body: dict[str, Any]) -> dict[str, Any]:
+    """Allowlisted field-label telemetry plus bounded counts for a provider body.
+
+    Unexpected provider field names or values must not be retained in
+    audit/evidence.  Only the fixed :data:`BODY_FIELD_ALLOWLIST` names may be
+    reported as ``known_field_labels``; every other field is folded into a
+    bounded ``unknown_field_count``.
+    """
+    known = {
+        key: "untrusted_model"
+        for key in body
+        if key in BODY_FIELD_ALLOWLIST
+    }
+    return {
+        "known_field_labels": known,
+        "known_field_count": len(known),
+        "unknown_field_count": sum(
+            1 for key in body if key not in BODY_FIELD_ALLOWLIST
+        ),
+    }
+
+
 def _admission(
     envelope: dict[str, Any],
     release: dict[str, Any],
@@ -727,13 +805,16 @@ def _build_release(
         "provider_response_hash": envelope["provider_response_hash"],
         "attempt_id": envelope["attempt_id"],
         "ledger_id": envelope["ledger_id"],
-        "model_intent_candidate_envelope": envelope,
-        "intent_proofreader_trace": trace,
-        "parent_candidate": candidate,
+        # The release must own immutable/deep-copied nested material.  The
+        # broker later zeroises the original envelope and body, and that
+        # zeroisation must not change this release or invalidate its digest.
+        "model_intent_candidate_envelope": deepcopy(envelope),
+        "intent_proofreader_trace": deepcopy(trace),
+        "parent_candidate": deepcopy(candidate),
         "parent_binding_digest": binding["binding_digest"],
         "parent_catalog_digest": catalog["catalog_digest"],
-        "parent_packet": packet,
-        "parent_proofreader_trace": packet["proofreader_trace"],
+        "parent_packet": deepcopy(packet),
+        "parent_proofreader_trace": deepcopy(packet["proofreader_trace"]),
         "read_only": True,
         "provider_authority": False,
         "command_authority": False,
@@ -828,6 +909,7 @@ def proofread(
 __all__ = [
     "ARTIFACT_ROOT",
     "AUTHORITY_KEYS",
+    "BODY_FIELD_ALLOWLIST",
     "BODY_SCHEMA_VERSION",
     "CANDIDATE_ENVELOPE_SCHEMA_PATH",
     "ContractError",
@@ -881,15 +963,18 @@ __all__ = [
     "build_intent_shaping_request",
     "build_prompt",
     "build_vertex_request",
+    "bounded_body_field_labels",
     "canonical_bytes",
     "canonical_model_body_fixture",
     "canonical_sha256",
     "correction_request",
     "extract_provider_candidate",
     "load_object",
+    "positive_thinking_evidence",
     "prefixed_sha256",
     "proofread",
     "proofread_intent_candidate",
+    "provider_body_rejection",
     "provider_request_for_attempt",
     "provider_response_schema",
     "validate_instance",

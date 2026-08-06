@@ -27,13 +27,16 @@ from scripts.raisa_authored_synthetic_model_required_practice_context_fabric_int
     INTENT_CODES,
     REQUEST_FIXTURE_PATH,
     SYNTHETIC_COORDINATE_CODE,
+    bounded_body_field_labels,
     build_dry_run_provider_packet,
     build_intent_shaping_request,
     build_vertex_request,
     canonical_model_body_fixture,
     extract_provider_candidate,
+    positive_thinking_evidence,
     prefixed_sha256,
     proofread_intent_candidate,
+    provider_body_rejection,
     wrap_provider_body,
 )
 from scripts.raisa_provider_free_practice_context_fabric_bureau_memory_contract import (
@@ -209,6 +212,7 @@ def _source_review_checks() -> dict[str, Any]:
         CONTRACTS_PATH,
         ROOT / "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker.py",
         ROOT / "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live.py",
+        ROOT / "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py",
         ROOT / "tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py",
         REQUEST_SCHEMA_PATH,
         PROVIDER_BODY_SCHEMA_PATH,
@@ -265,6 +269,11 @@ def build_evidence() -> dict[str, Any]:
         )
     ):
         raise ValueError("provider prompt not exact")
+    if (
+        "Return cue_codes in the canonical CUE_CODES order displayed above."
+        not in vertex_request["contents"][0]["parts"][0]["text"]
+    ):
+        raise ValueError("provider prompt cue order not exact")
 
     dry_run_packet = build_dry_run_provider_packet()
     body = extract_provider_candidate(dry_run_packet)
@@ -273,6 +282,47 @@ def build_evidence() -> dict[str, Any]:
         raise ValueError("dry-run fixture not occupied comparison")
     if body["temporal_coordinate_code"] != SYNTHETIC_COORDINATE_CODE:
         raise ValueError("dry-run fixture coordinate not grounded")
+
+    # Positive reported thinking-token use is occupied acceptance evidence;
+    # missing/non-integer/non-positive counts fail closed while provider-free
+    # dry-run remains eligible with zero tokens.
+    if positive_thinking_evidence(
+        {"usage": {"thoughtsTokenCount": 1024}}
+    ) is not True:
+        raise ValueError("positive thinking evidence gate drifted")
+    for invalid_usage in (
+        {"usage": {"thoughtsTokenCount": 0}},
+        {"usage": {}},
+        {"usage": {"thoughtsTokenCount": "1024"}},
+    ):
+        if positive_thinking_evidence(invalid_usage) is not False:
+            raise ValueError("invalid thinking evidence wrongly eligible")
+    dry_run_bounded_metadata = {
+        "usage": dry_run_packet["usageMetadata"],
+    }
+    if positive_thinking_evidence(dry_run_bounded_metadata) is not False:
+        raise ValueError("dry-run zero thinking not eligible")
+
+    # A schema-invalid provider body must reach the structured proofreader as
+    # the one allowed correction and must not retain unexpected field names.
+    invalid_body = canonical_model_body_fixture(
+        "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON"
+    )
+    invalid_body["prose"] = "unexpected"
+    invalid_rejection = provider_body_rejection(
+        invalid_body, "schema_invalid:$.prose"
+    )
+    if (
+        invalid_rejection["reason_code"] != "provider_body_schema_invalid"
+        or invalid_rejection["correction_eligible"] is not True
+        or invalid_rejection["released"] is not None
+    ):
+        raise ValueError("provider body schema rejection drifted")
+    invalid_telemetry = bounded_body_field_labels(invalid_body)
+    if invalid_telemetry["unknown_field_count"] != 1:
+        raise ValueError("provider body field telemetry count drifted")
+    if "prose" in json.dumps(invalid_telemetry):
+        raise ValueError("provider body telemetry retained unexpected field")
 
     # All five code-owned fixtures traverse the unchanged parent engine.
     fixture_results: dict[str, str] = {}
@@ -310,6 +360,36 @@ def build_evidence() -> dict[str, Any]:
     if occupied_proof["verdict"] != "admitted":
         raise ValueError("occupied classification was not admitted")
     occupied_release = occupied_proof["released"]
+
+    # Immutable release after zeroisation: clearing the original envelope must
+    # not change the released envelope or invalidate its digests.
+    immutable_envelope = _envelope(request, deepcopy(occupied_body))
+    immutable_proof = proofread_intent_candidate(
+        request, immutable_envelope, ground_to_case=True
+    )
+    if immutable_proof["verdict"] != "admitted":
+        raise ValueError("immutable release proof not admitted")
+    immutable_release = immutable_proof["released"]
+    immutable_envelope["body"].clear()
+    immutable_envelope.clear()
+    if (
+        immutable_release["model_intent_candidate_envelope"]["body"]
+        != occupied_body
+    ):
+        raise ValueError("release body not immutable after zeroisation")
+    try:
+        verify_seal(immutable_release, "release_digest")
+    except ValueError as error:
+        raise ValueError("release digest invalid after zeroisation") from error
+    try:
+        verify_seal(
+            immutable_release["model_intent_candidate_envelope"],
+            "envelope_digest",
+        )
+    except ValueError as error:
+        raise ValueError(
+            "release envelope digest invalid after zeroisation"
+        ) from error
     occupied_components = [
         item["component_code"]
         for item in occupied_release["parent_packet"]["frame_set"]["components"]
@@ -544,9 +624,14 @@ def build_evidence() -> dict[str, Any]:
             "request_tamper_blocked": True,
             "parent_tamper_blocked": True,
             "release_tamper_blocked": True,
+            "release_immutable_after_zeroisation": True,
             "trusted_wrapper_supplies_parent_fields": True,
             "all_five_fixtures_traverse_parent": fixture_results,
             "fixture_dispositions": fixture_dispositions,
+            "schema_invalid_body_eligible_correction": True,
+            "positive_thinking_terminal_gate": True,
+            "canonical_cue_order_in_prompt": True,
+            "acceptance_generator_in_reviewed_sources": True,
             "zero_provider_calls_in_dry_run": True,
             "two_call_ceiling": 2,
             "usd_050_ceiling": 0.5,

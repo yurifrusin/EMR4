@@ -52,6 +52,7 @@ REVIEWED_SOURCE_PATHS = (
     ROOT / "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts.py",
     ROOT / "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker.py",
     ROOT / "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live.py",
+    ROOT / "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py",
     ROOT / "tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py",
     ARTIFACT_ROOT / "intent-shaping-request.schema.json",
     ARTIFACT_ROOT / "provider-intent-body.schema.json",
@@ -166,13 +167,7 @@ def _intent_popen(
 
 
 def _positive_thinking_evidence(metadata: dict[str, Any]) -> bool:
-    usage = metadata.get("usage") if isinstance(metadata, dict) else None
-    if not isinstance(usage, dict):
-        return False
-    return (
-        type(usage.get("thoughtsTokenCount")) is int
-        and usage["thoughtsTokenCount"] > 0
-    )
+    return contracts.positive_thinking_evidence(metadata)
 
 
 def _run_attempt(**keywords: Any) -> dict[str, Any]:
@@ -181,14 +176,14 @@ def _run_attempt(**keywords: Any) -> dict[str, Any]:
         evidence = _PARENT_RUN_ATTEMPT(**keywords)
     finally:
         live.subprocess.Popen = _PARENT_POPEN
-    if (
-        evidence["mode"] == "live"
-        and evidence["proofreader_verdict"] == "admitted"
-        and not _positive_thinking_evidence(
-            evidence.get("provider_metadata") or {}
-        )
-    ):
-        raise live.LiveError("positive_thinking_evidence_required")
+    # Positive-thinking enforcement is terminal and ledger-accountable inside
+    # the broker ``_execute``: a missing/non-integer/non-positive reported
+    # thinking count in live mode releases nothing, returns a structured
+    # pre-proof ``positive_thinking_evidence_required`` result after the
+    # provider call has consumed its single-use ledger, and is never
+    # correction-eligible.  This wrapper therefore never raises after a release
+    # has been created nor strands the tranche cost ledger before
+    # reconciliation.  Provider-free dry-run remains eligible with zero tokens.
     evidence["schema_version"] = (
         "emr4.raisa_intent_shaping.attempt_evidence.v1"
     )
@@ -222,6 +217,15 @@ def _validate_source_review(
 ) -> dict[str, Any]:
     receipt = contracts.load_object(path)
     expected_hashes = _review_source_hashes()
+    head = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        shell=False,
+    ).stdout.strip()
     if (
         path.resolve() != expected_path.resolve()
         or receipt.get("schema_version")
@@ -232,6 +236,18 @@ def _validate_source_review(
         or receipt.get("provider_called") is not False
         or receipt.get("source_hashes") != expected_hashes
         or receipt.get("closed_boundary_verified") is not True
+        # A passing review receipt must bind to exact equal
+        # ``head_before``/``head_after``, ``dirty_after: false`` and the
+        # current candidate HEAD.  This prevents an unreviewed accepted-parent
+        # or transport edit from entering the occupied run.
+        or not isinstance(receipt.get("head_before"), str)
+        or receipt.get("head_before") != head
+        or receipt.get("head_after") != receipt.get("head_before")
+        or receipt.get("dirty_after") is not False
+        # Occupied validation also requires the current tracked worktree to be
+        # unchanged from HEAD while unrelated preserved untracked
+        # receipt/evidence files remain permitted.
+        or not live._tracked_worktree_clean()
     ):
         raise live.LiveError("independent_source_review_not_exact")
     return receipt
