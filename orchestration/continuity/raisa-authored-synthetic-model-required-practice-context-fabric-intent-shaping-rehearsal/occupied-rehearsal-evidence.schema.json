@@ -1,0 +1,164 @@
+{
+  "$id": "https://emr4.invalid/schemas/raisa-intent-shaping-occupied-rehearsal-evidence.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actuator_count": {
+      "const": 0
+    },
+    "authored_synthetic_context_count": {
+      "const": 1
+    },
+    "candidate_runtime_provider_call_count": {
+      "maximum": 2,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "cloud_or_iam_mutation_count": {
+      "const": 0
+    },
+    "combined_pass": {
+      "type": "boolean"
+    },
+    "command_count": {
+      "const": 0
+    },
+    "credential_or_token_retained": {
+      "const": false
+    },
+    "database_access_count": {
+      "const": 0
+    },
+    "deployment_count": {
+      "const": 0
+    },
+    "evidence_hash": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "evidence_label": {
+      "enum": [
+        "provider_free_authored_synthetic_model_intent_shaping",
+        "occupied_authored_synthetic_model_intent_shaping"
+      ]
+    },
+    "execution_context_hash": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "execution_context_materialized_fresh": {
+      "type": "boolean"
+    },
+    "execution_context_path": {
+      "type": "string"
+    },
+    "fallback_count": {
+      "const": 0
+    },
+    "intent_admitted": {
+      "type": "boolean"
+    },
+    "lane_results": {
+      "maxItems": 2,
+      "minItems": 1,
+      "type": "array"
+    },
+    "maximum_cost_usd": {
+      "const": 0.5
+    },
+    "maximum_provider_calls": {
+      "const": 2
+    },
+    "mode": {
+      "enum": [
+        "dry-run",
+        "live"
+      ]
+    },
+    "patient_or_clinical_data_count": {
+      "const": 0
+    },
+    "protected_ref_movement_count": {
+      "const": 0
+    },
+    "provider_tool_call_count": {
+      "const": 0
+    },
+    "raw_prompt_retained": {
+      "const": false
+    },
+    "raw_provider_response_retained": {
+      "const": false
+    },
+    "reserved_cost_usd": {
+      "maximum": 0.5,
+      "minimum": 0,
+      "multipleOf": 0.25,
+      "type": "number"
+    },
+    "result": {
+      "enum": [
+        "raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal_pass",
+        "raisa_intent_shaping_occupied_terminal_rejection"
+      ]
+    },
+    "schema_version": {
+      "const": "emr4.raisa_intent_shaping.tranche_evidence.v1"
+    },
+    "source_hashes": {
+      "additionalProperties": {
+        "pattern": "^sha256:[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "source_review_receipt_hash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_review_transport_nonzero": {
+      "type": "boolean"
+    },
+    "write_count": {
+      "const": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "mode",
+    "combined_pass",
+    "intent_admitted",
+    "lane_results",
+    "candidate_runtime_provider_call_count",
+    "maximum_provider_calls",
+    "reserved_cost_usd",
+    "maximum_cost_usd",
+    "source_review_transport_nonzero",
+    "source_review_receipt_hash",
+    "source_hashes",
+    "execution_context_path",
+    "execution_context_hash",
+    "execution_context_materialized_fresh",
+    "authored_synthetic_context_count",
+    "patient_or_clinical_data_count",
+    "database_access_count",
+    "command_count",
+    "write_count",
+    "actuator_count",
+    "provider_tool_call_count",
+    "fallback_count",
+    "cloud_or_iam_mutation_count",
+    "deployment_count",
+    "protected_ref_movement_count",
+    "raw_prompt_retained",
+    "raw_provider_response_retained",
+    "credential_or_token_retained",
+    "evidence_hash"
+  ],
+  "title": "Raisa model-required intent-shaping occupied rehearsal evidence",
+  "type": "object"
+}

@@ -1,0 +1,72 @@
+{
+  "$id": "https://emr4.invalid/schemas/raisa-intent-shaping-cost-ledger.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "fallback_permitted": {
+      "const": false
+    },
+    "lane_calls": {
+      "additionalProperties": false,
+      "properties": {
+        "rayleen_context_fabric_intent_shaping": {
+          "maximum": 2,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "rayleen_context_fabric_intent_shaping"
+      ],
+      "type": "object"
+    },
+    "maximum_cost_usd": {
+      "const": 0.5
+    },
+    "maximum_provider_calls": {
+      "const": 2
+    },
+    "provider_calls_consumed": {
+      "maximum": 2,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "provider_calls_reserved": {
+      "maximum": 2,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "reserved_cost_usd": {
+      "maximum": 0.5,
+      "minimum": 0,
+      "multipleOf": 0.25,
+      "type": "number"
+    },
+    "schema_version": {
+      "const": "emr4.raisa_intent_shaping.cost_ledger.v1"
+    },
+    "status": {
+      "enum": [
+        "open",
+        "consumed"
+      ]
+    },
+    "tranche_id": {
+      "const": "raisa-intent-shaping-occupied-001"
+    }
+  },
+  "required": [
+    "schema_version",
+    "tranche_id",
+    "status",
+    "maximum_provider_calls",
+    "maximum_cost_usd",
+    "provider_calls_reserved",
+    "provider_calls_consumed",
+    "reserved_cost_usd",
+    "lane_calls",
+    "fallback_permitted"
+  ],
+  "title": "Raisa intent-shaping cost ledger",
+  "type": "object"
+}

@@ -1,0 +1,79 @@
+{
+  "$id": "https://emr4.invalid/schemas/raisa-provider-intent-body.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "command": {
+      "const": false
+    },
+    "cue_codes": {
+      "items": {
+        "enum": [
+          "CURRENT_STATE_REQUESTED",
+          "PRIOR_STATE_REQUESTED",
+          "VALID_TIME_1030",
+          "KNOWLEDGE_CUTOFF_1230"
+        ]
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "database": {
+      "const": false
+    },
+    "identity": {
+      "const": false
+    },
+    "intent_code": {
+      "enum": [
+        "CURRENT_OPERATIONAL_STATUS",
+        "RECENT_PRACTICE_WORK",
+        "HISTORICAL_OPERATIONAL_STATE",
+        "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+        "RECENT_OPERATIONAL_REFERENCE"
+      ]
+    },
+    "patient": {
+      "const": false
+    },
+    "provider_tool": {
+      "const": false
+    },
+    "response_code": {
+      "const": "INTENT_CANDIDATE_ONLY"
+    },
+    "source": {
+      "const": false
+    },
+    "temporal_coordinate_code": {
+      "enum": [
+        "NONE",
+        "SYNTHETIC_1030_VALID_1230_KNOWN"
+      ]
+    },
+    "tenancy": {
+      "const": false
+    },
+    "write": {
+      "const": false
+    }
+  },
+  "required": [
+    "intent_code",
+    "temporal_coordinate_code",
+    "cue_codes",
+    "response_code",
+    "identity",
+    "tenancy",
+    "patient",
+    "source",
+    "provider_tool",
+    "database",
+    "command",
+    "write"
+  ],
+  "title": "Raisa model-required intent-shaping closed provider body",
+  "type": "object"
+}

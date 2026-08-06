@@ -1,0 +1,175 @@
+{
+  "$id": "https://emr4.invalid/schemas/raisa-intent-shaping-request.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_ceiling": {
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "const": false
+        },
+        "database": {
+          "const": false
+        },
+        "identity": {
+          "const": false
+        },
+        "patient": {
+          "const": false
+        },
+        "provider_tool": {
+          "const": false
+        },
+        "source": {
+          "const": false
+        },
+        "tenancy": {
+          "const": false
+        },
+        "write": {
+          "const": false
+        }
+      },
+      "required": [
+        "identity",
+        "tenancy",
+        "patient",
+        "source",
+        "provider_tool",
+        "database",
+        "command",
+        "write"
+      ],
+      "type": "object"
+    },
+    "cue_codes": {
+      "items": {
+        "enum": [
+          "CURRENT_STATE_REQUESTED",
+          "PRIOR_STATE_REQUESTED",
+          "VALID_TIME_1030",
+          "KNOWLEDGE_CUTOFF_1230"
+        ]
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "expires_at": {
+      "pattern": "^2026-08-06T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "type": "string"
+    },
+    "intent_codes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "enum": [
+              "CURRENT_OPERATIONAL_STATUS",
+              "RECENT_PRACTICE_WORK",
+              "HISTORICAL_OPERATIONAL_STATE",
+              "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+              "RECENT_OPERATIONAL_REFERENCE"
+            ]
+          },
+          "description": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "description"
+        ],
+        "type": "object"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "issued_at": {
+      "pattern": "^2026-08-06T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "type": "string"
+    },
+    "parent_contract_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "parent_policy_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "reference_date": {
+      "const": "2026-08-06"
+    },
+    "request_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "request_id": {
+      "const": "synthetic:intent-shaping:occupied:rayleen:001"
+    },
+    "schema_version": {
+      "const": "emr4.raisa_intent_shaping.request.v1"
+    },
+    "synthetic_label": {
+      "const": "authored_synthetic"
+    },
+    "temporal_coordinate_codes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "enum": [
+              "NONE",
+              "SYNTHETIC_1030_VALID_1230_KNOWN"
+            ]
+          },
+          "description": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "description"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "timezone": {
+      "const": "Australia/Brisbane"
+    },
+    "utterance": {
+      "const": "Compare the current waiting-room operational picture with the earlier state at 10:30 this morning, using only what was known by 12:30."
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "utterance",
+    "synthetic_label",
+    "timezone",
+    "reference_date",
+    "intent_codes",
+    "temporal_coordinate_codes",
+    "cue_codes",
+    "parent_contract_digest",
+    "parent_policy_digest",
+    "issued_at",
+    "expires_at",
+    "authority_ceiling",
+    "request_digest"
+  ],
+  "title": "Raisa model-required intent-shaping request",
+  "type": "object"
+}

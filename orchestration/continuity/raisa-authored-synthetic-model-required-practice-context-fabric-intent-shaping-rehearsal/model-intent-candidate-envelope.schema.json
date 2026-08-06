@@ -1,0 +1,259 @@
+{
+  "$defs": {
+    "provider_intent_body": {
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "const": false
+        },
+        "cue_codes": {
+          "items": {
+            "enum": [
+              "CURRENT_STATE_REQUESTED",
+              "PRIOR_STATE_REQUESTED",
+              "VALID_TIME_1030",
+              "KNOWLEDGE_CUTOFF_1230"
+            ]
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "database": {
+          "const": false
+        },
+        "identity": {
+          "const": false
+        },
+        "intent_code": {
+          "enum": [
+            "CURRENT_OPERATIONAL_STATUS",
+            "RECENT_PRACTICE_WORK",
+            "HISTORICAL_OPERATIONAL_STATE",
+            "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+            "RECENT_OPERATIONAL_REFERENCE"
+          ]
+        },
+        "patient": {
+          "const": false
+        },
+        "provider_tool": {
+          "const": false
+        },
+        "response_code": {
+          "const": "INTENT_CANDIDATE_ONLY"
+        },
+        "source": {
+          "const": false
+        },
+        "temporal_coordinate_code": {
+          "enum": [
+            "NONE",
+            "SYNTHETIC_1030_VALID_1230_KNOWN"
+          ]
+        },
+        "tenancy": {
+          "const": false
+        },
+        "write": {
+          "const": false
+        }
+      },
+      "required": [
+        "intent_code",
+        "temporal_coordinate_code",
+        "cue_codes",
+        "response_code",
+        "identity",
+        "tenancy",
+        "patient",
+        "source",
+        "provider_tool",
+        "database",
+        "command",
+        "write"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://emr4.invalid/schemas/raisa-model-intent-candidate-envelope.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempt_id": {
+      "pattern": "^raisa-intent-shaping-(primary|correction)-[0-9]{3}$",
+      "type": "string"
+    },
+    "body": {
+      "$ref": "#/$defs/provider_intent_body"
+    },
+    "candidate_id": {
+      "pattern": "^synthetic:intent-shaping-candidate:[a-z0-9_]+$",
+      "type": "string"
+    },
+    "candidate_provenance": {
+      "const": "untrusted_model"
+    },
+    "command_authority": {
+      "const": false
+    },
+    "envelope_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "ledger_id": {
+      "pattern": "^ledger-raisa-intent-shaping-(primary|correction)-[0-9]{3}$",
+      "type": "string"
+    },
+    "provider_authority": {
+      "const": false
+    },
+    "provider_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "api_key_authentication_used": {
+          "const": false
+        },
+        "api_path": {
+          "const": "/v1/projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash:generateContent"
+        },
+        "authentication": {
+          "const": "existing_keyless_impersonated_service_account_adc"
+        },
+        "cached_content_used": {
+          "const": false
+        },
+        "endpoint_hostname": {
+          "const": "australia-southeast1-aiplatform.googleapis.com"
+        },
+        "fallback_used": {
+          "const": false
+        },
+        "grounding_used": {
+          "const": false
+        },
+        "location": {
+          "const": "australia-southeast1"
+        },
+        "model": {
+          "const": "gemini-2.5-flash"
+        },
+        "oauth_scope": {
+          "const": "https://www.googleapis.com/auth/cloud-platform"
+        },
+        "project": {
+          "const": "bernie-emr4-dev"
+        },
+        "provider": {
+          "const": "google_cloud_vertex_ai"
+        },
+        "provider_tools_used": {
+          "const": false
+        },
+        "retrieval_used": {
+          "const": false
+        },
+        "service_account": {
+          "const": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+        },
+        "service_account_key_authentication_used": {
+          "const": false
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "project",
+        "service_account",
+        "authentication",
+        "oauth_scope",
+        "location",
+        "endpoint_hostname",
+        "api_path",
+        "api_key_authentication_used",
+        "service_account_key_authentication_used",
+        "fallback_used",
+        "provider_tools_used",
+        "grounding_used",
+        "retrieval_used",
+        "cached_content_used"
+      ],
+      "type": "object"
+    },
+    "provider_request_hash": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provider_response_hash": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provider_response_shape": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_count": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "finish_reason": {
+          "enum": [
+            "STOP",
+            "MAX_TOKENS",
+            "SAFETY",
+            "RECITATION",
+            "OTHER",
+            "BLOCKLIST",
+            "PROHIBITED_CONTENT",
+            "SPII",
+            "MALFORMED_FUNCTION_CALL",
+            "MODEL_ARMOR",
+            "UNRECOGNIZED"
+          ],
+          "type": "string"
+        },
+        "parts_count": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "candidate_count",
+        "finish_reason",
+        "parts_count"
+      ],
+      "type": "object"
+    },
+    "read_only": {
+      "const": true
+    },
+    "request_hash": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "emr4.raisa_intent_shaping.candidate_envelope.v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "request_hash",
+    "provider_request_hash",
+    "provider_response_hash",
+    "provider_response_shape",
+    "provider_binding",
+    "attempt_id",
+    "ledger_id",
+    "candidate_provenance",
+    "body",
+    "read_only",
+    "provider_authority",
+    "command_authority",
+    "envelope_digest"
+  ],
+  "title": "Raisa model-required intent-shaping candidate envelope",
+  "type": "object"
+}
