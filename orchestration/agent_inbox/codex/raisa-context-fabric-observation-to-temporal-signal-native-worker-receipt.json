@@ -1,0 +1,103 @@
+{
+  "schema_version": "ariadne.native_worker_receipt.v1",
+  "worker": "native_codex_subagent",
+  "task": "provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r10",
+  "branch": "codex/worker-observation-to-signal-e9e9ab2f",
+  "initial_source_head": "e9e9ab2fe9db866bbe82cc4053a429d7561c5d98",
+  "repaired_frozen_source_head": "7bf42d536214154084c900f0051cc3dd6eb00c78",
+  "implementation_commit": "b7e8ecc9bfe65c547435bff1b100c7ff1600fc4e",
+  "implementation_tree": "4da3fdef1f2e4c6f7f1532efaeeac8328a3f2b20",
+  "plan_review_reconciliation": {
+    "initial_decision": "revision_required",
+    "repairs_consumed": [
+      "hmac_preimage_binds_practice_source_system_source_contract_digest_observer_id_and_generation",
+      "sealed_observation_prior_coordinate_fixes_position_100_and_revision_11",
+      "source_schema_diary_v1_maps_to_temporal_schema_emr4_diary_v1",
+      "appointment_profile_uses_exact_diary_and_waiting_room_frame_floor",
+      "full_invalidation_decision_is_machine_readable_and_admission_only",
+      "activation_mode_and_observation_evidence_mode_are_distinct"
+    ]
+  },
+  "api_spine_classification": "provider_free_unmounted_async_event_contract_rehearsal_no_graphql_rest_or_command_change",
+  "api_steward_applied": true,
+  "owned_files": [
+    "scripts/raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py",
+    "scripts/raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_acceptance.py",
+    "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal/contract.schema.json",
+    "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal/authored-synthetic-example.json",
+    "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal/provider-free-acceptance-evidence.json",
+    "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py",
+    "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-native-worker-receipt.json"
+  ],
+  "implementation_result": {
+    "result_label": "raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_pass",
+    "evidence_label": "provider_free_authored_synthetic_unmounted_observation_to_temporal_signal_rehearsal",
+    "canonical_proofreader_decision": "RELEASE",
+    "canonical_temporal_decision": "REASSEMBLY_REQUIRED",
+    "canonical_temporal_requirement_execution_enabled": false,
+    "raw_source_event_id_released": false,
+    "hmac_key_released": false,
+    "full_invalidation_claim": "admission_only_no_temporal_retirement_claim_for_no_signal_outcomes"
+  },
+  "tests": [
+    {
+      "command": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m pytest tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_plan.py tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py -q",
+      "passed": 47,
+      "failed": 0,
+      "serial": true
+    },
+    {
+      "command": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m pytest tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py tests/test_api_spine_artifacts.py tests/test_raisa_provider_free_default_off_live_source_observation_boundary_plan.py -q",
+      "passed": 69,
+      "failed": 0,
+      "serial": true
+    }
+  ],
+  "test_totals": {
+    "passed": 116,
+    "failed": 0,
+    "warnings": 2
+  },
+  "deterministic_checks": {
+    "py_compile": "passed",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "generated_artifacts_reproduced_byte_for_byte": 3,
+    "json_schema_draft_2020_12_validation": "passed",
+    "explicit_path_staging_only": true,
+    "cached_diff_check": "passed"
+  },
+  "no_side_effect_counts": {
+    "source_connections": 0,
+    "credential_acquisitions": 0,
+    "source_reads": 0,
+    "fresh_reads": 0,
+    "listener_or_watcher_mounts": 0,
+    "runtime_mounts": 0,
+    "filesystem_effects_from_pure_module": 0,
+    "network_calls": 0,
+    "database_calls": 0,
+    "subprocess_calls": 0,
+    "checkpoint_writes": 0,
+    "provider_calls": 0,
+    "commands_or_writes": 0,
+    "deployments_or_releases": 0,
+    "pages_rebuilds": 0,
+    "protected_ref_actions": 0
+  },
+  "preserved_boundaries": {
+    "patient_product_clinical_financial_and_protected_data": "closed",
+    "source_database_outbox_feed_watcher_listener": "closed",
+    "api_app_diary_route_graphql_rest_openapi": "unchanged",
+    "provider_external_retrieval": "closed",
+    "persistence_checkpoint_and_operational_cursor": "closed",
+    "command_write_deploy_release_pages_production": "closed",
+    "docs_branding": "preserved_and_excluded",
+    "protected_master_handoff_and_origin_refs": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  },
+  "acceptance_authority_transferred": false,
+  "push_performed": false,
+  "residual_concerns": [],
+  "decision": "candidate_ready_for_sol_review"
+}
