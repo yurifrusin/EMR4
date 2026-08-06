@@ -53,16 +53,39 @@ the observer.
 ## Payload-free normalization
 
 Normalization is strict structural mapping, not a source read. Allowlisted
-metadata is limited to stable identity, event/schema/source coordinates,
-practice binding, opaque aggregate and selector references, positive revision,
-monotonic transaction position, safe times, sensitivity and reason codes.
+metadata is limited to a backend-derived event-id digest, closed event/schema/
+source/aggregate enums, practice binding, a backend-issued registered aggregate
+alias, bounded positive revision and monotonic positions, canonical UTC times,
+closed sensitivity/evidence enums and controlling digests.
 
 Unknown fields, arbitrary nested objects, arrays beyond fixed selector/reason
 limits, direct identifiers, free text, before/after values, appointment or
 waiting-room state and provider/credential material block admission. Hashing,
 aliasing or encrypting a prohibited payload does not make it eligible metadata.
-Practitioner, location and appointment-time values are prohibited too; only an
-already-authorised sealed selector digest may identify a dependency.
+Practitioner, location and appointment-time values are prohibited too. Source-
+supplied selectors, dependency ids, field lists, correlation ids and reason
+strings are not admitted fields.
+
+Released digests use one exact SHA-256 grammar. Backend aliases use a bounded
+closed namespace/version/random-token grammar and must resolve in the binding's
+exact practice/source/class alias registry. Raw source event identity crosses
+only its source-contract grammar and length ceiling and is converted by trusted
+code to a domain-separated keyed digest before the admitted object exists.
+Integers exclude booleans and have explicit positive upper bounds; enums,
+array/cardinality limits and canonical RFC 3339 UTC instants are exact.
+The source contract makes event identity non-semantic, constrains its
+transaction commit time by policy clock skew, and trusted code authors observed
+time, expiry and admission reasons rather than copying them from the source.
+
+## Backend-owned impact floor
+
+Each policy binds an impact mapping from exact event/schema and aggregate class
+to a conservative minimum set of dependency classes. A source supplies no
+selector or field-impact list. Trusted code unions that mandatory floor with
+any impact independently resolved from a registered aggregate alias before it
+constructs the accepted temporal signal. Missing or unresolvable impact causes
+bounded full invalidation for the allowlisted source class. It cannot become
+`IRRELEVANT` merely because source metadata omitted a selector.
 
 ## Ordering and atomicity
 
@@ -115,7 +138,8 @@ revision invalidates rather than interpolates.
 Exactly one pending requirement exists for a frame-set generation. Further
 relevant observations coalesce as bounded privacy-safe cause digests; they
 cannot create an unbounded read loop. Dependency impact comes from the sealed
-manifest, never an event-supplied dependency or field list.
+manifest plus the policy's mandatory backend impact floor, never an event-
+supplied selector, dependency or field list.
 
 ## Audit posture
 
@@ -139,6 +163,13 @@ While disabled there is zero source connection, credential acquisition,
 admission, cursor movement or read request. This plan does not acknowledge an
 event, persist a checkpoint, retain observations, schedule a retry or claim
 crash recovery.
+
+The next pure rehearsal may evaluate one positive path only with a sealed
+`SyntheticObservationClassificationActivation` bound to exact authored-
+synthetic fixtures and fixed zero-effect ceilings. This coordinate neither
+changes `enabled: false` nor connects to a source and is rejected for
+`LIVE` evidence mode. Without it the disabled decision is
+`OBSERVER_DISABLED`.
 
 ## Non-authority statement
 

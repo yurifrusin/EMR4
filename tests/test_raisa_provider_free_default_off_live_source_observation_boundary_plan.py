@@ -25,6 +25,7 @@ def test_boundary_is_architecture_only_provider_free_and_default_off() -> None:
         "read_authority: false",
         "provider_authority: false",
         "command_authority: false",
+        "persistence_authority: false",
     ):
         assert phrase in joined
 
@@ -47,6 +48,7 @@ def test_typed_contracts_and_minimum_coordinates_are_frozen() -> None:
         "LiveSourceObservationPolicy",
         "LiveSourceObserverBinding",
         "CommittedChangeObservation",
+        "SyntheticObservationClassificationActivation",
         "ObservationAdmissionDecision",
         "ObservationToTemporalSignalTrace",
         "ObservationContinuityRequirement",
@@ -61,7 +63,8 @@ def test_typed_contracts_and_minimum_coordinates_are_frozen() -> None:
         "aggregate revision",
         "practice-binding digest",
         "opaque aggregate reference",
-        "binding and policy digests",
+        "binding, policy, source-contract",
+        "alias-registry and impact-policy digests",
     ):
         assert phrase in plan
 
@@ -139,6 +142,39 @@ def test_event_cannot_supply_impact_or_no_loss_cursor() -> None:
         "does not establish a no-loss",
         "unknown impact",
         "bounded full invalidation",
+        "mandatory event/schema/aggregate floor",
+        "omission can never narrow",
+    ):
+        assert phrase in joined
+
+
+def test_metadata_channels_are_canonical_and_backend_issued() -> None:
+    joined = "\n".join((_text(PLAN), _text(DESIGN), _text(THREAT))).lower()
+    for phrase in (
+        "domain-separated keyed digest",
+        "backend-issued registered alias",
+        "sha256:[0-9a-f]{64}",
+        "maximum 96",
+        "closed enums",
+        "non-boolean integers",
+        "source-supplied selector digests",
+        "correlation ids",
+        "reason strings",
+    ):
+        assert phrase in joined
+
+
+def test_synthetic_positive_path_cannot_enable_live_observer() -> None:
+    joined = "\n".join((_text(PLAN), _text(DESIGN), _text(THREAT))).lower()
+    for phrase in (
+        "activation_mode: authored_synthetic_rehearsal",
+        "source_connection: false",
+        "credential_acquisition: false",
+        "cursor_persistence: false",
+        "current policy remains disabled",
+        "no synthetic artifact can enable a source connection",
+        "observer_disabled",
+        "be accepted with `live` evidence mode",
     ):
         assert phrase in joined
 
@@ -170,4 +206,4 @@ def test_next_descendant_remains_unmounted_and_authored_synthetic() -> None:
     plan = _text(PLAN)
     assert "provider-free,\nunmounted, authored-synthetic" in plan
     assert "pure typed constructors, validators, admission" in plan
-    assert "It may not\nmount a source, database, feed, watcher, listener" in plan
+    assert "the rehearsal may not\nmount a source, database, feed, watcher, listener" in plan

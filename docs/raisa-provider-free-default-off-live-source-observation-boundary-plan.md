@@ -76,6 +76,11 @@ contract and schema version; and no wildcard practice, source, event, schema,
 aggregate or selector scope. Its fixed ceilings also include
 `payload_allowed: false` and `persistence_authority: false`.
 
+It also binds a backend-owned alias-registry digest and an exact impact-policy
+id/digest. The impact policy maps each allowlisted event/schema plus aggregate
+class to a conservative minimum set of dependency classes. Source metadata can
+never remove, narrow or override that minimum.
+
 ### `LiveSourceObserverBinding`
 
 A backend-issued, expiring and revocable binding over:
@@ -83,7 +88,8 @@ A backend-issued, expiring and revocable binding over:
 - observer id and generation;
 - authenticated integration-principal digest and authentication kind;
 - practice-binding digest, source-system id and source-contract digest;
-- exact policy version and event/schema allowlist;
+- exact policy version, event/schema/aggregate allowlist, alias-registry digest
+  and impact-policy digest;
 - issued, not-before and expiry instants; and
 - fixed `returns_data: false`, `read_authority: false`,
   `provider_authority: false`, `command_authority: false` and
@@ -96,20 +102,23 @@ It is not a database credential, human session, `ContextAuthorityBinding`,
 
 A recursively closed payload-free envelope containing only:
 
-- stable observation/event identity and exact event/schema type;
-- source-system id, exact source-contract revision and observer-generation
-  coordinate;
+- a backend-derived domain-separated observation-id digest, never the raw
+  source event id;
+- exact allowlisted event-type and schema-version enums;
+- a backend-owned source alias, exact source-contract revision and
+  observer-generation coordinate;
 - practice-binding digest;
-- aggregate class plus opaque aggregate reference;
-- positive aggregate revision;
-- monotonic transaction/outbox position, expected predecessor position and
-  stream id;
-- fixed `committed: true` and authored-synthetic/live evidence mode;
-- committed, observed and expiry instants;
-- allowlisted sealed selector digests already representable by the temporal
-  dependency manifest;
-- sensitivity code, correlation id and privacy-safe reason codes; and
-- the binding and policy digests.
+- aggregate-class enum plus a backend-issued opaque aggregate reference
+  registered for the exact practice/source/class;
+- positive bounded aggregate revision;
+- positive bounded monotonic transaction/outbox position and expected
+  predecessor position plus a backend-owned stream alias;
+- fixed `committed: true` and exact `AUTHORED_SYNTHETIC` or separately gated
+  `LIVE` evidence-mode enum;
+- a canonical UTC source-transaction commit instant constrained by policy clock
+  skew, plus backend-generated observed and expiry instants;
+- patient-free-control-metadata sensitivity enum; and
+- binding, policy, source-contract, alias-registry and impact-policy digests.
 
 It has no arbitrary payload, patient identifier, patient name, contact detail,
 date of birth, Medicare identifier, free text, clinical/financial value,
@@ -117,11 +126,43 @@ before/after state, appointment content, replacement context, provider output,
 credential, URL, callback or command material. `occurred_at` or wall-clock time
 must never be the ordering coordinate.
 
-Practitioner, location and appointment-time values are also prohibited; a
-sealed selector digest may identify an already-authorised dependency but may
-not disclose the underlying value. Hashing, aliasing or encrypting prohibited
-payload does not make it eligible metadata. Opaque references remain sensitive,
-internal, expiring and unavailable to the observer after admission.
+Practitioner, location and appointment-time values are also prohibited.
+Source-supplied selector digests, dependency ids, field lists, correlation ids
+and reason strings are not fields of the admitted envelope. Hashing, aliasing
+or encrypting prohibited payload does not make it eligible metadata. Opaque
+references remain sensitive, internal, expiring and unavailable to the
+observer after admission.
+
+Every released digest must match `sha256:[0-9a-f]{64}`. Backend aliases use a
+closed ASCII namespace/version/random-token grammar, have a maximum 96
+characters, and must resolve in the exact bound practice/source/class registry;
+arbitrary source strings are never accepted as aliases. The source event id is
+accepted only under the exact source-contract grammar and length ceiling, then
+converted by trusted code to a domain-separated keyed digest before this object
+exists; the source contract must define that id as a non-semantic event
+coordinate rather than a patient, person or appointment key. Observed/expiry
+times and privacy-safe admission reason codes are backend-authored, never copied
+from source input. Event/schema/source/aggregate/sensitivity/evidence values are exact
+closed enums; positions and revisions are non-boolean integers from 1 through
+9,007,199,254,740,991; instants are canonical bounded RFC 3339 UTC strings.
+Admission and trace reason codes come only from a closed backend enum.
+
+### `SyntheticObservationClassificationActivation`
+
+A sealed test-only coordinate permits the next unmounted rehearsal to exercise
+the positive pure-classification path while the current observer policy remains
+disabled. It binds the exact plan version, policy/binding/fixture digests,
+`activation_mode: AUTHORED_SYNTHETIC_REHEARSAL`, a bounded validity interval
+and fixed `source_connection: false`, `credential_acquisition: false`,
+`cursor_persistence: false`, `returns_data: false`, `read_authority: false`,
+`provider_authority: false`, `command_authority: false` and
+`persistence_authority: false`.
+
+It is accepted only by the pure rehearsal function and is structurally
+ineligible for a runtime observer, live evidence mode or later fresh-read path.
+Without this exact synthetic coordinate, a disabled policy returns
+`OBSERVER_DISABLED`; no synthetic artifact can enable a source connection or
+change the policy's current disabled state.
 
 ### `ObservationAdmissionDecision`
 
@@ -150,14 +191,18 @@ codes, fixes `checkpoint_persisted: false`, and grants no authority.
 
 A sealed one-way mapping from exactly one admitted observation to exactly one
 accepted `TemporalSignalEnvelope`. It binds every repeated identity, practice,
-aggregate, revision, selector, transaction-position, time, sensitivity,
-binding and policy field. The temporal signal contains no observation payload,
-and the mapping cannot narrow a known impact to a convenient dependency.
+aggregate, revision, transaction-position, time, sensitivity, binding, policy,
+alias-registry and backend impact-policy field. The temporal signal contains no
+observation payload, and the mapping cannot narrow a known impact to a
+convenient dependency.
 
-The backend constructs the temporal signal from admitted metadata. An
-event-supplied `TemporalSignalEnvelope`, dependency list or field-impact claim
-is never trusted. Unknown impact either blocks or causes bounded full
-invalidation for the allowlisted source class; it never widens access.
+The backend constructs the temporal signal from admitted metadata and the
+exact bound impact policy. An event-supplied `TemporalSignalEnvelope`,
+selector, dependency list or field-impact claim is never trusted. Signal impact
+is the union of the policy's mandatory event/schema/aggregate floor and any
+independently resolved registered aggregate alias; omission can never narrow
+it. An unknown, missing or unresolvable impact coordinate causes bounded full
+invalidation for the allowlisted source class and never silent irrelevance.
 
 The accepted temporal classifier alone intersects the signal with each
 session-bound `TemporalDependencyManifest` and `TemporalWatchLease`. A shared
@@ -218,6 +263,11 @@ Disabled means zero source connection, credential acquisition, admission,
 cursor movement or read request.
 Disablement stops future admission and cannot make already invalidated context current again.
 A new generation requires a new baseline and new frame-set binding.
+
+The authored-synthetic classification activation above is not observer
+enablement. It admits only an in-memory, caller-supplied synthetic fixture into
+a pure function, performs no source interaction or state movement, and cannot
+be accepted with `LIVE` evidence mode.
 
 ## Fresh-read handoff
 
@@ -282,6 +332,8 @@ unrelated untracked receipt, state, evidence or cost-ledger file.
    principal/generation scoped, expiring and revocable.
 4. The observation envelope is recursively closed and payload-free and
    excludes all direct patient/product/clinical/financial/free-text values.
+   Every remaining identifier is an exact enum, bounded canonical coordinate,
+   domain-separated keyed digest or backend-issued registered alias.
 5. Only monotonic transaction/outbox position orders the stream; wall-clock
    time is never accepted as a no-loss coordinate.
 6. Baseline establishment precedes frame/manifest binding; uncertainty forces
@@ -289,7 +341,9 @@ unrelated untracked receipt, state, evidence or cost-ledger file.
 7. Duplicate, replay, foreign-practice, wrong-source, wrong-schema, expired,
    revoked, gap, overflow, restart and policy-rotation cases fail closed.
 8. Mapping to the accepted `TemporalSignalEnvelope` is exact, sealed and
-   one-way; the observer cannot inspect frames or narrow dependency impact.
+   one-way; backend impact-policy floors and registered alias resolution mean
+   the observer cannot inspect frames, omit selectors or narrow dependency
+   impact.
 9. Every session-bound manifest/lease independently classifies a shared signal
    and no practice observer can disclose or mix session context.
 10. Invalidation is monotonic: observer disablement or recovery cannot restore
@@ -306,6 +360,10 @@ unrelated untracked receipt, state, evidence or cost-ledger file.
     and static tests prove that no runtime/API/database/provider/command/
     deployment surface was added while permanent compass text preserves every
     closed gate.
+
+The next rehearsal's positive `ADMIT_SIGNAL` case additionally requires the
+exact sealed `SyntheticObservationClassificationActivation`; absent, expired,
+substituted or live-mode activation returns `OBSERVER_DISABLED`.
 
 Evidence label:
 `provider_free_architecture_only_default_off_live_source_observation_boundary`.
@@ -334,7 +392,9 @@ or no-loss claim.
 After architecture acceptance, the next safe descendant is a provider-free,
 unmounted, authored-synthetic observation-to-temporal-signal contract
 rehearsal. It may implement pure typed constructors, validators, admission,
-normalization and adversarial tests over synthetic metadata only. It may not
+normalization, backend impact-floor mapping, registered-alias resolution,
+synthetic-only activation and adversarial tests over synthetic metadata only.
+The current policy remains disabled and the rehearsal may not
 mount a source, database, feed, watcher, listener, route, persistence,
 checkpoint, product read, provider, patient/product data, command, deployment
 or protected ref.

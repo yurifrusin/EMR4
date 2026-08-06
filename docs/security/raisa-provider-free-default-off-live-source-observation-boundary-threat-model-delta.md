@@ -7,8 +7,8 @@ Status: frozen provider-free architecture-only delta
 ## Trust boundaries and assets
 
 Untrusted inputs are source metadata, claimed principal/source/practice,
-event/schema identity, aggregate and cursor coordinates, timestamps, selectors,
-reason codes, policy/binding copies and any restart/recovery claim.
+event/schema identity, aggregate and cursor coordinates, timestamps,
+policy/binding copies and any restart/recovery claim.
 
 Protected assets are practice and session isolation, immutable Current frame
 generations, source/event separation, observer/read/command authority
@@ -24,8 +24,8 @@ integrity, audit minimization and the absence of patient/product payloads.
 | Existing Diary feed silently becomes the Context Fabric watcher | Independent default-off policy, integration-principal binding, observer generation, baseline and runtime gate; no inherited enablement. |
 | Foreign practice or source poisons cursor state | Authenticate and verify principal/practice/source/policy before deduplication, cursor or aggregate revision processing. |
 | Integration principal acquires user/session or read authority | Separate principal and binding types; observer binding fixes data-return/read/provider/command authority false and is ineligible for `ContextAuthorityBinding`. |
-| PHI or product truth is smuggled as metadata | Recursively closed fields and exact types; reject arbitrary payloads, free text, direct identifiers, before/after values and hashes/aliases of prohibited content. |
-| Event supplies a convenient dependency list to narrow impact | Derive impact only from the sealed manifest; unknown impact blocks or causes bounded full invalidation without widening access. |
+| PHI or product truth is smuggled as metadata | Remove selectors/correlation/reason strings; use exact enums and numeric/time bounds, a domain-separated keyed event-id digest and only backend-issued registered aliases. Closure alone is insufficient. |
+| Event omits or supplies convenient impact to narrow invalidation | Accept no source selector/dependency/field list; union a backend-owned event/schema/aggregate impact floor with registered-alias resolution, and use bounded full invalidation for unknown impact. |
 | Backdated event disappears behind wall-clock cursor | Require monotonic transaction/outbox position; occurrence/receipt times never prove completeness. |
 | Duplicate or replay renews state or authority | Stable identity plus observer generation, stream position and aggregate revision deduplication; suppression cannot renew any binding or lease. |
 | Cursor/revision gap is silently ignored | Full invalidation, explicit coverage-gap reason and new baseline; never replay payloads or interpolate truth. |
@@ -40,6 +40,7 @@ integrity, audit minimization and the absence of patient/product payloads.
 | Policy or principal rotates without new baseline | Rotation consumes observer generation, checkpoint eligibility and unclassified input; successor establishes a new verified baseline. |
 | Architecture document is mislabeled live evidence | Strict architecture-only evidence label and static checks proving no runtime/API/database/listener/provider/command artifact. |
 | Self-consistent substituted provenance crosses proofreading | Reconstruct policy, binding, observation, manifest/lease, decision and signal digest from authoritative inputs; never trust a supplied temporal envelope. |
+| Synthetic positive-path evidence silently enables the observer | Require an exact sealed authored-synthetic-only activation with every effect/authority ceiling false; reject it for live mode and keep policy enabled false. |
 
 ## Residual risks deliberately deferred
 
