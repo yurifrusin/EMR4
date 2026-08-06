@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.worker-transport-failure.v1",
+  "status": "transport_failed",
+  "observed_on": "2026-08-06",
+  "attempt_id": "raisa-context-fabric-bureau-memory-review-001",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "requested_model": "gemini-3.6-flash-high",
+  "requested_reasoning_effort": "high",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-bureau-memory-review",
+  "branch": "codex/review-context-fabric-bureau-memory-1289f9b8",
+  "head_before": "1289f9b822c571341b224ab9c6b5caaeefaf0c71",
+  "head_after": "1289f9b822c571341b224ab9c6b5caaeefaf0c71",
+  "dirty_after": false,
+  "failure_class": "authentication_required_timeout",
+  "packet_delivered_to_model": false,
+  "terminal_decision_observed": false,
+  "provider_or_model_calls": 0,
+  "credentials_or_oauth_values_retained": false,
+  "candidate_unchanged": true,
+  "next_action": "Human restores Antigravity authentication, then a fresh exact-head new-project veto may be attempted."
+}

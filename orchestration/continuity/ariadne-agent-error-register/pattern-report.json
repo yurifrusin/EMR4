@@ -1,37 +1,37 @@
 {
-  "canonical_register_sha256": "cd057f10a0859116e1ee8cbaa25121e818ca6ea6dc6da82817221b5fa074a0c8",
+  "canonical_register_sha256": "e6bfdc914b5fd0f5d7f2e2d5e8d46704a6528115b379a1ad7923ff8dac13dfcf",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 21,
+      "canonical_unchanged": 23,
       "untrusted_partial_worktree": 6
     },
     "by_category": {
       "command_scope_violation": 3,
       "evidence_misreport": 2,
       "harness_failure": 3,
-      "output_contract_violation": 11,
+      "output_contract_violation": 12,
       "read_only_violation": 1,
       "reasoning_claim_error": 5,
       "repository_defect": 2,
-      "transport_timeout": 2
+      "transport_timeout": 3
     },
     "by_origin": {
-      "agent_behavior": 22,
+      "agent_behavior": 23,
       "harness": 3,
       "repository": 2,
-      "transport": 2
+      "transport": 3
     },
     "by_process_severity": {
-      "low": 7,
+      "low": 8,
       "material": 9,
-      "moderate": 13
+      "moderate": 14
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 10,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 11,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 7,
+      "codex-primary-orchestrator::orchestrator": 8,
       "deepseek-flash-workers::implementer": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -43,14 +43,16 @@
     },
     "by_role": {
       "implementer": 6,
-      "orchestrator": 12,
-      "verifier": 11
+      "orchestrator": 13,
+      "verifier": 12
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 29,
+  "incident_count": 31,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
-  "open_incident_ids": [],
+  "open_incident_ids": [
+    "AER-0031"
+  ],
   "recurring_patterns": [
     {
       "categories": [
@@ -93,6 +95,30 @@
         "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt."
       ],
       "recurrence_signature": "orchestrator.unapproved_continuation_event",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0024",
+        "AER-0030"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
+        "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field."
+      ],
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -151,9 +177,33 @@
       "roles": [
         "implementer"
       ]
+    },
+    {
+      "categories": [
+        "transport_timeout"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0022",
+        "AER-0031"
+      ],
+      "origins": [
+        "transport"
+      ],
+      "prevention_controls": [
+        "Authentication failures remain transport incidents with no inferred reviewer decision; preserve a sanitized failure, require human credential restoration, then use a fresh process and reverify exact HEAD, clean status and single-decision admission.",
+        "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance."
+      ],
+      "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
+      "resource_ids": [
+        "antigravity-gemini-flash-3-6-high-verifier"
+      ],
+      "roles": [
+        "verifier"
+      ]
     }
   ],
-  "register_revision": 24,
+  "register_revision": 25,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-06"
 }

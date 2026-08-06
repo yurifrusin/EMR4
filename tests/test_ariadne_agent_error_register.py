@@ -32,20 +32,20 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_c5_windows_recovery() -> None:
+def test_committed_register_is_semantically_valid_after_context_fabric_auth_gate() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 24
+    assert register["register_revision"] == 25
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 30)
+        f"AER-{index:04d}" for index in range(1, 32)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == []
+    ] == ["AER-0031"]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -53,11 +53,12 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 22
-    assert len(transport_incidents) == 2
+    assert len(agent_incidents) == 23
+    assert len(transport_incidents) == 3
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
+        "AER-0031",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -401,27 +402,27 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 29
-    assert report["open_incident_ids"] == []
+    assert report["incident_count"] == 31
+    assert report["open_incident_ids"] == ["AER-0031"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 22,
+        "agent_behavior": 23,
         "harness": 3,
         "repository": 2,
-        "transport": 2,
+        "transport": 3,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 3,
         "evidence_misreport": 2,
         "harness_failure": 3,
-        "output_contract_violation": 11,
+        "output_contract_violation": 12,
         "read_only_violation": 1,
         "reasoning_claim_error": 5,
         "repository_defect": 2,
-        "transport_timeout": 2,
+        "transport_timeout": 3,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 21,
+        "canonical_unchanged": 23,
         "untrusted_partial_worktree": 6,
     }
     assert report["recurring_patterns"] == [
@@ -452,6 +453,19 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
             ],
         },
         {
+            "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+            "incident_count": 2,
+            "incident_ids": ["AER-0024", "AER-0030"],
+            "origins": ["agent_behavior"],
+            "categories": ["output_contract_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
+                "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
+            ],
+        },
+        {
             "recurrence_signature": "verifier.multiple_terminal_decisions",
             "incident_count": 4,
             "incident_ids": ["AER-0004", "AER-0006", "AER-0018", "AER-0020"],
@@ -477,6 +491,19 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
             "prevention_controls": [
                 "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
                 "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness.",
+            ],
+        },
+        {
+            "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
+            "incident_count": 2,
+            "incident_ids": ["AER-0022", "AER-0031"],
+            "origins": ["transport"],
+            "categories": ["transport_timeout"],
+            "roles": ["verifier"],
+            "resource_ids": ["antigravity-gemini-flash-3-6-high-verifier"],
+            "prevention_controls": [
+                "Authentication failures remain transport incidents with no inferred reviewer decision; preserve a sanitized failure, require human credential restoration, then use a fresh process and reverify exact HEAD, clean status and single-decision admission.",
+                "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance.",
             ],
         },
     ]

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_commit_context_fabric_verifier_auth_gate_state",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was fully rehydrated and now truthfully records deterministic candidate commit 1289f9b822c571341b224ab9c6b5caaeefaf0c71 plus the human-only Antigravity authentication gate before independent acceptance.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high retains independent veto only after authentication restoration. GPT Sol may preserve the failed transport and task-branch state but cannot authenticate, mutate credentials, infer a reviewer decision or accept without a fresh veto.",
+    "active_plan_and_acceptance": "The Context Fabric candidate remains deterministically passing and clean in its exact review worktree. AER-0030 records the corrected predispatch method error; AER-0031 records the OAuth timeout as the only open incident. The packet never reached Gemini and acceptance remains withheld.",
+    "protected_evidence_boundaries": "No protected holdout, PHI, patient/clinical/product data, raw audit, provider/model admission, database, runtime, command/write, deployment, production, release, Pages or protected-ref action occurred. docs/branding/ and unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "Task HEAD is 1289f9b822c571341b224ab9c6b5caaeefaf0c71 and the exact review worktree remains clean at that commit. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only enumerated auth-gate receipts, register state, AGENTS and tests will be staged explicitly."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_bureau_memory_auth_gate_precommit_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved the transport boundary and inferred no reviewer decision."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unreachable",
+      "evidence": ["Antigravity reported authentication required and timed out before model admission; human restoration is required."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude CLI is not selected independently."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is active or assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

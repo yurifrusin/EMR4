@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_context_fabric_gemini_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after restoration. The live baton names the provider-free Context Fabric and Bureau Memory Bank contract as the exact next implementation and requires a fresh exact-head independent veto for this material authority architecture.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project owns independent veto only. GPT Sol retains architecture, acceptance and integration; the reviewer may read and test but cannot edit, accept itself, call providers, deploy, release or move refs.",
+    "active_plan_and_acceptance": "Candidate commit 1289f9b822c571341b224ab9c6b5caaeefaf0c71 passes the result raisa_provider_free_practice_context_fabric_bureau_memory_contract_pass, 33 focused and 134 broader tests, Ruff, Bandit, compile and diff checks. The review packet sha256 is 770f1e9120a914b0752aece680eb8af6564ed443f5fc9921b3e847dbd64eeaee.",
+    "protected_evidence_boundaries": "Review is repository-local and provider-free. No protected holdout, PHI, patient/clinical/product data, raw audit, database, provider/external retrieval, runtime, command/write, deployment, production, release, Pages or protected-ref action. docs/branding/ is expressly forbidden.",
+    "git_refs_and_worktree": "Fresh clean non-protected worktree C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-bureau-memory-review is on branch codex/review-context-fabric-bureau-memory-1289f9b8 at exact HEAD 1289f9b822c571341b224ab9c6b5caaeefaf0c71. Its preflight sha256 is 771317ddb68dc9abeb57a15641efa3b5e71187743174145faf1defeb84b5edb2. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_bureau_memory_pre_verifier_dispatch_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed and bound the exact candidate without moving protected refs."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The launcher fixes gemini-3.6-flash-high, explicit high effort, plan mode, one new project and the exact clean worktree."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker is active during independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude CLI is not selected independently."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is active or assigned to this veto."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

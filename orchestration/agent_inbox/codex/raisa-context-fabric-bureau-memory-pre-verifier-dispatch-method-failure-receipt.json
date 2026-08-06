@@ -1,0 +1,25 @@
+{
+  "schema_version": "ariadne.orchestrator-receipt-failure.v1",
+  "status": "revision_required",
+  "observed_on": "2026-08-06",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_context_fabric_gemini_veto",
+  "candidate_head": "1289f9b822c571341b224ab9c6b5caaeefaf0c71",
+  "failed_adapter_id": "antigravity_cli_print",
+  "failed_method": "antigravity_new_project_preflight",
+  "reasons": [
+    "adapter_probe_method_invalid:antigravity_cli_print"
+  ],
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "worker_dispatch_permitted": false,
+  "worker_started": false,
+  "provider_or_model_calls": 0,
+  "candidate_unchanged": true,
+  "correction": "Use the admitted synthetic_fixture observation method and rerun the deterministic receipt before dispatch."
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 24,
+  "register_revision": 25,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1137,6 +1137,79 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0030",
+      "attempt_id": "raisa-context-fabric-bureau-memory-predispatch-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-bureau-memory-contract",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A pre-worker-dispatch runtime state must select the Antigravity adapter observation method exactly from the admitted transport-adapter vocabulary before an external verifier can start.",
+      "observed_error": "The first Context Fabric verifier-dispatch state used unsupported method antigravity_new_project_preflight, so the deterministic receipt returned adapter_probe_method_invalid and worker_dispatch_permitted false.",
+      "detection_method": "The Ariadne orchestrator preflight rejected the state before Antigravity was invoked; the exact review worktree remained clean and no provider or model call occurred.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-pre-verifier-dispatch-method-failure-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failure was preserved. The corrected state used the admitted synthetic_fixture observation method with the same five-source authority and exact clean candidate, and its receipt passed before Antigravity launch.",
+        "prevention_control": "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
+        "evidence_paths": [
+          "orchestration/harness_settings/transport_adapters.yaml",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-pre-verifier-dispatch-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0031",
+      "attempt_id": "raisa-context-fabric-bureau-memory-review-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-bureau-memory-contract",
+      "origin": "transport",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh exact-HEAD Antigravity verifier transport must authenticate, return one non-transferable review receipt or fail with sanitized explicit containment while leaving the candidate unchanged.",
+      "observed_error": "The first Context Fabric veto required Google OAuth restoration and timed out after 60 seconds before model admission, producing no reviewer decision and no ordinary worker receipt while the exact candidate remained clean and unchanged.",
+      "detection_method": "The launcher returned authentication_required and timed out; Sol preserved a sanitized transport receipt with no OAuth values and independently verified exact HEAD plus a clean worktree.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-auth-timeout-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-review-worktree-preflight.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The failed transport is preserved without raw OAuth material and no reviewer decision is inferred. A fresh attempt is withheld until human Antigravity authentication is restored, after which exact HEAD, clean status and five-source dispatch authority must be reverified.",
+        "prevention_control": "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-auth-timeout-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-gemini-review-packet.md"
+        ]
+      },
+      "status": "open"
     }
   ]
 }
