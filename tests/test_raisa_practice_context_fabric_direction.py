@@ -57,3 +57,28 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
     rendered = (ROOT / "docs/ariadne-compass-current.md").read_text(encoding="utf-8")
     assert "### Raisa Practice Context Fabric — active" in rendered
     assert "_Compass map revision 200; continuity graph revision 218._" in rendered
+
+
+def test_branded_workspaces_do_not_become_authority_boundaries() -> None:
+    direction = (ROOT / "docs/raisa-practice-context-fabric-direction.md").read_text(
+        encoding="utf-8"
+    )
+    implementation_plan = (ROOT / "implementation_plan.md").read_text(
+        encoding="utf-8"
+    )
+    bureau_architecture = (
+        ROOT / "docs/emr4-model-required-deterministic-authority-bureau-architecture.md"
+    ).read_text(encoding="utf-8")
+
+    for text in (direction, implementation_plan, bureau_architecture):
+        assert "Clinician One" in text
+        assert "requests" in text
+        assert "referral" in text
+        assert "prescri" in text
+        assert "billing" in text
+        assert "command" in text
+
+    assert "not authorisation domains" in direction
+    assert "Atomic backend capability grants" in implementation_plan
+    assert "Branded workspaces are not authority boundaries" in bureau_architecture
+    assert "brand, screen or occupational label grants nothing" in direction

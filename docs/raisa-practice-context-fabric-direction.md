@@ -213,12 +213,23 @@ behaviour; it grants none of those authorities.
   dry-run frames, never unrestricted administration state.
 - **Consultant** receives curated patient/encounter, Diagnostic Thread and cited
   evidence-source frames. The clinician remains the clinical authority.
+- **Requests/referrals, prescribing/medicines and billing/claims Bureaus** will
+  receive only the task-specific encounter, correspondence, medication,
+  eligibility or financial frames independently authorised for their purpose.
+  Each retains its own proofreader and command gate.
 - **Proofreaders and command services** receive the exact grounding and
   authority bindings needed for their task, not a Bureau's private narrative.
 
 Bureaus may share the Fabric but do not share private model memory or authority.
 A cross-Bureau handoff is a new typed request with bilateral scope and provenance,
 not an informal transcript transfer.
+
+`RECEPTION ONE™` and the candidate `Clinician One` are user-facing workspace and
+projection families, not authorisation domains. The Fabric may knit several
+independently granted Bureaus into either experience, including capabilities
+that legitimately cross reception and clinical work. The user's current
+atomic capability grants determine which Bureaus and actions are present; the
+brand, screen or occupational label grants nothing by itself.
 
 ## Implementation sequence
 

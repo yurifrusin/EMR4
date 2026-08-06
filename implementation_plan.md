@@ -64,6 +64,25 @@ expiring and same-packet-proofread bundle without a new product route or data
 source. The next dependency-satisfied action is the separately bounded
 patient-free temporal weave.
 
+The longer clinical/practice Bureau programme must not collapse into one
+Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
+future independently governed capability Bureaus are required at minimum for
+requests/correspondence/referrals, prescribing/medicines/medication safety, and
+billing/claims/financial administration. Their Context Fabric frames and typed
+handoffs may legitimately interweave with Diary, waiting-room and other
+Reception One work.
+
+`RECEPTION ONE™` and the candidate `Clinician One` are therefore branded
+workspace/projection families rather than strict user or authority boundaries.
+Atomic backend capability grants—role, practice, location, purpose,
+patient/encounter relationship where applicable, consent and explicit action
+scope—determine which Bureaus and commands each user can access. A branded
+surface never grants authority, and each Bureau keeps its own deterministic
+proofreader, command gate, audit, idempotency and post-action verification.
+This direction grants no implementation, patient/product-data, clinical,
+prescribing, referral, billing, provider, runtime, command, deployment or
+production authority.
+
 Raisa's accepted longer-range integration direction is the backend-owned
 **Practice Context Fabric** described in
 [`docs/raisa-practice-context-fabric-direction.md`](docs/raisa-practice-context-fabric-direction.md).

@@ -135,6 +135,43 @@ model forms typed read, explanation, dry-run and proposal candidates. The
 deterministic practice-administration services and command plane retain all
 authority.
 
+### Branded workspaces are not authority boundaries
+
+`RECEPTION ONE™` and the candidate `Clinician One` name should be treated as
+coherent user-facing workspace/projection families, not as security principals,
+monolithic agents or fixed staff-role partitions. Branding can organise the
+experience around reception and clinical work, but it does not decide which
+capabilities a user may invoke.
+
+Authority belongs to smaller typed Bureau capabilities and their backend
+actions. A user's effective Raisa surface is assembled atomically from current
+role, practice, location, purpose, patient/encounter relationship where
+applicable, consent and explicit capability grants. The same person may be
+authorised for some capabilities commonly shown in Clinician One or Reception
+One and not others; a workspace must omit or disable every Bureau and command
+that is not independently granted.
+
+Alongside Consultant's diagnosis and patient-safety focus, the clinical and
+practice system will require at least these separately governed future Bureau
+families:
+
+- requests, correspondence and referrals;
+- prescribing, medicines and medication safety; and
+- billing, claiming and financial administration.
+
+These families may interweave with Diary, arrival, practitioner, encounter and
+practice-administration work. They do so through typed Context Fabric frames,
+bilateral handoffs and the ordinary backend command plane—not through shared
+private model memory or authority inherited from a branded shell. Prescribing,
+referral, billing and clinical commands retain their own proofreader, human
+confirmation, audit, idempotency, post-action verification and professional or
+statutory controls.
+
+This section is a permanent architecture direction only. It grants no product,
+patient, clinical, prescribing, referral, billing, provider, runtime, command,
+deployment or production authority and does not settle final Bureau names or
+public branding.
+
 ### Controlled recovery and update intelligence: technical control plane
 
 The recovery/update intelligence is separate from all product-domain agents and
