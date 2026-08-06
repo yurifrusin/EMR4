@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push_task_branch_context_fabric_bureau_memory_contract_acceptance_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 5b2b87e86788b50e34234a8fd0a6efa063d94f0b records the exact-head Gemini pass, Sol acceptance, closeout, Continuity 217 / Compass 199 and passing regression/static checks. Commit cb1b0a712f8ee5340e73d8adde19103af0d9ed97 contains the reviewed evidence repair.",
+    "current_authority_allocation": "GPT Sol may push accepted bounded work to the non-protected task branch. No authority exists to move master, handoff/current, Pages, deployment, production or release state.",
+    "git_refs_and_worktree": "After fresh fetch, task HEAD is 5b2b87e86788b50e34234a8fd0a6efa063d94f0b and origin task is 0ea34b195c3966c14c01d7b381bfe9782b1a5167. Local/origin master and handoff/current are all exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree state is clean; preserved untracked files remain outside the push.",
+    "live_handover_current_baton": "AGENTS.md records the accepted Context Fabric and Bureau Memory Bank contract at exact reviewed source cb1b0a712f8ee5340e73d8adde19103af0d9ed97 and the Current operational weave as the next planned descendant.",
+    "protected_evidence_boundaries": "Push only the task branch. No patient, clinical, product-derived, provider, database, persistence, runtime, command, deployment, production, release, Pages, protected-evidence or protected-ref operation. docs/branding/ and all unrelated untracked receipts, states, evidence and cost ledgers remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
