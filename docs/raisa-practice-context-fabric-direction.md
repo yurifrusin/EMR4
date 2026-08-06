@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction through provider-free intent-shaped temporal retrieval; exact occupied intent-shaping plan frozen
+Status: accepted direction through occupied authored-synthetic model-required intent shaping
 
 ## Purpose
 
@@ -264,15 +264,22 @@ large “memory” feature:
    Current coherence packet, require bilateral Memory sharing, return bounded
    opaque alternatives instead of guessed identity, reject invalidated Current
    state and recompute every upstream and same-packet proofreader.
-5. **Occupied model-required intent shaping** — **plan frozen** in
-   `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`;
-   implement and deterministically verify the provider-free contract first,
-   then use the exact one-use Sydney Vertex envelope to prove that the selected
-   provider model can propose only the closed non-authoritative intent candidate
-   which the accepted deterministic retrieval contract may narrow or reject.
-6. **Real product read descendants** — open one source and one role/purpose at a
+5. **Occupied model-required intent shaping** — **accepted** at exact
+   independently reviewed source HEAD
+   `44f341481b55f99a18a47838da0f2b7e43a2f73e`; one primary Sydney Vertex
+   `gemini-2.5-flash` call proposed the exact closed comparison intent, and the
+   deterministic parent retrieval proofreader alone admitted it. One call and
+   USD 0.25 were consumed, no correction or post-success call occurred, no raw
+   provider/credential material was retained and owned cleanup completed. The
+   controlling frozen plan is
+   `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`.
+6. **One-source provider-free adapter** — derive and freeze an unmounted
+   authored-synthetic adapter over exactly one existing authorised current
+   operational read shape, without a new product route, provider or real-data
+   execution. This is the next safe candidate.
+7. **Real product read descendants** — open one source and one role/purpose at a
    time with privacy, identity, audit, retention and database acceptance.
-7. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+8. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 

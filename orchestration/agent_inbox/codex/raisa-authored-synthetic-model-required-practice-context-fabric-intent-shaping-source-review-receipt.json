@@ -1,0 +1,26 @@
+{
+  "schema_version": "emr4.raisa_intent_shaping.source_review.v1",
+  "status": "passed",
+  "decision": "pass",
+  "independent_read_only_review": true,
+  "provider_called": false,
+  "source_hashes": {
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/authored-synthetic-intent-shaping-request.json": "sha256:08bbfef5e6822d940ec9b414da1ce26b0d33ec1c7af23cc7925e3e669e440dde",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/cell-request.schema.json": "sha256:384d8a0fd101067803c78179ff0f36f3f41141cd7eb77e96693516f75f400a99",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/cost-ledger.schema.json": "sha256:dabcdcc9b9e4062d2bd043a746af7e70632ca5a1a407c9349b47aa0e5c85d2ad",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/intent-shaping-request.schema.json": "sha256:9554143f182358d7edb0432ee180c54c326c418e90a3db6ecdbd63d4901400f5",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/model-intent-candidate-envelope.schema.json": "sha256:432c5fe55edd21372d8a182961faae54dc1370456e9d10e289cfc5770b2a37f7",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.schema.json": "sha256:7acc8589dfaca9a201bf7e96675f47454cf624e624d7c5ebe3d3aba8c05c6e47",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-intent-body.schema.json": "sha256:0362f2f812183499bd07caf232da817f00fe0339f10920429315fdc97ece8050",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/single-use-ledger.schema.json": "sha256:f9d3c06893ff14444369469b36931af1d1b58df044ade7cb3e43624a391a6ea5",
+    "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py": "sha256:ea91a4fd885a788b3778f2060c69add54715ab6d776c6466edd61efd10203410",
+    "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker.py": "sha256:09c527ad1125c4c3c001608194cef2ae1819bb0d499e7dc9723b582f104469b7",
+    "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts.py": "sha256:425d179e0e1dbe7c36fdab2a141fbfcbb01d101adef8324d0b355f5cf476fc64",
+    "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live.py": "sha256:bb8f4f3d0600aaa095d1e25e51881506666b20f56615f1d38867bd036825efc7",
+    "tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py": "sha256:60ff54b8349dedeb082541e806fff4cdeef112d65783e15ae7f82fddd68946df"
+  },
+  "closed_boundary_verified": true,
+  "head_before": "44f341481b55f99a18a47838da0f2b7e43a2f73e",
+  "head_after": "44f341481b55f99a18a47838da0f2b7e43a2f73e",
+  "dirty_after": false
+}

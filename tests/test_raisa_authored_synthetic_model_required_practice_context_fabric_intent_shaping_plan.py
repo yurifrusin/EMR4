@@ -68,7 +68,7 @@ def test_frozen_descendant_preserves_closed_product_and_command_surfaces() -> No
         assert boundary in combined
 
 
-def test_live_handover_and_compass_direction_name_plan_as_frozen() -> None:
+def test_live_handover_and_direction_name_the_accepted_plan() -> None:
     handover = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     direction = (ROOT / "docs/raisa-practice-context-fabric-direction.md").read_text(
         encoding="utf-8"
@@ -79,4 +79,5 @@ def test_live_handover_and_compass_direction_name_plan_as_frozen() -> None:
     assert plan_name in handover
     assert plan_name in direction
     assert plan_name in implementation
-    assert "exact occupied intent-shaping plan frozen" in direction
+    assert "**Occupied model-required intent shaping** — **accepted**" in direction
+    assert "44f341481b55f99a18a47838da0f2b7e43a2f73e" in direction

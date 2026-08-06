@@ -20,7 +20,7 @@ def test_context_fabric_contract_continuity_and_compass_are_current():
     assert compass["map_revision"] >= 199
     assert compass["source_graph_revision"] >= 217
     assert "Context Fabric" in compass["orientation_statement"]
-    assert "patient-free temporal weave" in compass["orientation_statement"]
+    assert "provider-free one-source adapter" in compass["orientation_statement"]
 
 
 def test_context_fabric_horizon_is_active_and_bound_to_acceptance():

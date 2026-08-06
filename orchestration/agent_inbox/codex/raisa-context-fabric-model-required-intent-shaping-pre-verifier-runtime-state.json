@@ -1,0 +1,91 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_gemini_36_flash_high_exact_head_read_only_source_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the frozen authored-synthetic model-required Context Fabric intent-shaping rehearsal as current next work. The provider-free candidate is not yet accepted.",
+    "current_authority_allocation": "GPT Sol is conductor/integrator. DeepSeek V4 Flash/high completed the initial worker and one bounded same-lane repair. Gemini 3.6 Flash/high through a fresh Antigravity project is now allocated the required independent read-only veto only.",
+    "active_plan_and_acceptance": "The frozen plan, design and threat delta are unchanged. Commit 44f341481b55f99a18a47838da0f2b7e43a2f73e contains the complete provider-free candidate, Sol recovery and zero-call evidence. Review covers the exact 13-source hash set and full planning-source diff.",
+    "protected_evidence_boundaries": "The reviewer may read only the committed candidate and run provider-free tests. It may not edit, access ADC/cloud, call Vertex, inspect patient/product/protected data or docs/branding, open product/API/database/command/watch/runtime authority, deploy, release, rebuild Pages or move refs.",
+    "git_refs_and_worktree": "Review worktree C:\\Users\\sarashera\\EMR4-worktrees\\context-fabric-model-intent-shaping-review is tracked-clean on codex/review-context-fabric-model-intent-shaping at exact HEAD 44f341481b55f99a18a47838da0f2b7e43a2f73e. The primary task branch matches that HEAD. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_model_intent_shaping_pre_verifier_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed the recovered provider-free candidate and verified the exact clean review worktree before dispatch."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned; the independent lane uses the allocated Antigravity verifier transport."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Antigravity authentication was restored earlier; a fresh project is required for this exact-HEAD read-only review."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Worker implementation and its one bounded repair are complete; no further worker correction is dispatched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is unselected for this review."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare was only the completed DeepSeek transport wrapper."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-flash-reviewers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "gemini-context-fabric-intent-shaping-review",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\context-fabric-model-intent-shaping-review",
+      "branch": "codex/review-context-fabric-model-intent-shaping",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-06T18:15:00+10:00",
+      "source_head": "5ddc052fae16298436d8873312e48464d52a9567",
+      "candidate_head": "44f341481b55f99a18a47838da0f2b7e43a2f73e"
+    }
+  ],
+  "assigned_agent_ids": ["gemini-context-fabric-intent-shaping-review"]
+}

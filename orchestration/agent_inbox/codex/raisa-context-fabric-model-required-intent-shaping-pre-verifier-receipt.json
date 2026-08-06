@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_gemini_36_flash_high_exact_head_read_only_source_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, design and threat delta are unchanged. Commit 44f341481b55f99a18a47838da0f2b7e43a2f73e contains the complete provider-free candidate, Sol recovery and zero-call evidence. Review covers the exact 13-source hash set and full planning-source diff.",
+    "current_authority_allocation": "GPT Sol is conductor/integrator. DeepSeek V4 Flash/high completed the initial worker and one bounded same-lane repair. Gemini 3.6 Flash/high through a fresh Antigravity project is now allocated the required independent read-only veto only.",
+    "git_refs_and_worktree": "Review worktree C:\\Users\\sarashera\\EMR4-worktrees\\context-fabric-model-intent-shaping-review is tracked-clean on codex/review-context-fabric-model-intent-shaping at exact HEAD 44f341481b55f99a18a47838da0f2b7e43a2f73e. The primary task branch matches that HEAD. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md names the frozen authored-synthetic model-required Context Fabric intent-shaping rehearsal as current next work. The provider-free candidate is not yet accepted.",
+    "protected_evidence_boundaries": "The reviewer may read only the committed candidate and run provider-free tests. It may not edit, access ADC/cloud, call Vertex, inspect patient/product/protected data or docs/branding, open product/API/database/command/watch/runtime authority, deploy, release, rebuild Pages or move refs."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

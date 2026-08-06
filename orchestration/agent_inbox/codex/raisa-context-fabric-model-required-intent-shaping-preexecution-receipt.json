@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "run_read_only_adc_preflight_then_bounded_authored_synthetic_vertex_intent_shaping_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan authorises one primary and only one proofreader-ticketed correction, at most two calls and USD 0.50, thinkingBudget 1024 and maxOutputTokens 2048, using only the committed authored-synthetic utterance and closed typed result. Provider-free acceptance, isolated zero-call rehearsal and independent source review all pass at exact HEAD 44f341481b55f99a18a47838da0f2b7e43a2f73e.",
+    "current_authority_allocation": "GPT Sol conducts the occupied rehearsal. Gemini 3.6 Flash/high completed the mandatory exact-HEAD read-only veto with decision pass. The occupied provider is fixed to Vertex gemini-2.5-flash through the exact Bernie impersonated ADC in australia-southeast1; no other worker, provider or fallback is allocated.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean at exact reviewed HEAD 44f341481b55f99a18a47838da0f2b7e43a2f73e, with only preserved untracked receipts/evidence. The review branch remains clean at the same HEAD. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md identifies the frozen authored-synthetic model-required Context Fabric intent-shaping descendant as current next work. The provider-free implementation is committed but the occupied result is not yet accepted.",
+    "protected_evidence_boundaries": "The run may perform only read-only keyless ADC preflight and the bounded authored-synthetic Vertex call sequence. It may not use patient, clinical, product or Diary data; tools, retrieval, cache or fallback; product runtime/API/database/watcher/command surfaces; clinical or administrative authority; cloud/IAM mutation; deployment, release, production, Pages, protected evidence mutation or protected-ref movement. Raw prompt, response, model text, thought content and credentials may not be durably retained."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

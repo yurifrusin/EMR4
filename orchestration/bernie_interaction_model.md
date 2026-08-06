@@ -198,9 +198,11 @@ reassembly, and keeps bitemporal snapshots outside current-truth authority.
 The retrieval rehearsal proves that five closed intents select only the
 minimum granted Current, recent-work and historical components, with explicit
 vocabulary mapping, bilateral Bureau scope, ambiguity and upstream/same-packet
-proofreading. The exact next descendant is now frozen in the authored-synthetic
-model-required intent-shaping plan; its provider-free implementation,
-deterministic gates and one-use occupied execution follow. Real event transport,
+proofreading. The authored-synthetic model-required intent-shaping descendant
+now also passes after one source-reviewed Sydney Vertex primary proposed the
+exact closed comparison intent and deterministic code rebuilt and admitted the
+parent retrieval packet. A provider-free unmounted adapter around one existing
+authorised current read shape is the next safe candidate. Real event transport,
 historical persistence, patient/product data, product retrieval, runtime and
 command authority remain separately closed.
 

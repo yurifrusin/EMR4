@@ -1,0 +1,878 @@
+{
+  "actuator_count": 0,
+  "attempt_id": "raisa-intent-shaping-primary-001",
+  "attempt_number": 1,
+  "build_context": {
+    "base_image_pulled_for_attempt": true,
+    "pinned_base_image": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+    "repository_root_used": false,
+    "source_hashes": {
+      "generated:cell-request.json": "sha256:39a57bca3120a1be971f9e0f81de83737c698ddf787b52f6a290d92fcee5c6bc",
+      "orchestration/continuity/model-required-bureau-a3-b3/Dockerfile": "sha256:3d47934e293dcecb182e10c64ebfabcbedbcec67c1998166a3fee2dbf495481e",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:9f4a86f4d82223d7cc2f8f5be21d8d3ec152e2eb0c57e0ac70e1c27d5020ef66"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_policy": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "credential_environment_present": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "emr4-raisaintent-context-fabric-intent-shaping-1-internal"
+    ],
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true
+  },
+  "cleanup_passed": true,
+  "command_count": 0,
+  "correction_eligible": false,
+  "credential_or_token_retained": false,
+  "database_access_count": 0,
+  "evidence_hash": "sha256:b6ac82ec1ceadb656bc88e6731733c85c6fc30c9d760fd6fa0f0a9e73c3339fe",
+  "evidence_mode": "occupied_authored_synthetic_model_intent_shaping",
+  "fallback_count": 0,
+  "lane": "rayleen_context_fabric_intent_shaping",
+  "mode": "live",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "emr4-raisaintent-context-fabric-intent-shaping-1-internal"
+  },
+  "parent_retrieval_recomputed": true,
+  "patient_or_clinical_data_count": 0,
+  "preflight_hash": "sha256:541ed2756a39e2db0286ebaad789a2ab98a8d20fd8009cc183b0d11025ab0877",
+  "product_read_count": 0,
+  "proofreader_reason_code": "proofreader_admitted",
+  "proofreader_verdict": "admitted",
+  "provider_call_count": 1,
+  "provider_contacted": true,
+  "provider_metadata": {
+    "candidate_count": 1,
+    "discarded_provider_response_sha256": "sha256:f94ef528a12836e5a97cd161e86ae546c9aa4320a2e1171aec3b60b0ed0a1f0f",
+    "finish_reason": "STOP",
+    "fixture_used": false,
+    "http_status": 200,
+    "latency_ms": 3807,
+    "model_version": "gemini-2.5-flash",
+    "parts_count": 1,
+    "provider_contacted": true,
+    "provider_response_bytes": 1198,
+    "provider_text_retained": false,
+    "raw_prompt_retained": false,
+    "raw_provider_response_retained": false,
+    "raw_response_retained": false,
+    "usage": {
+      "candidatesTokenCount": 130,
+      "promptTokenCount": 551,
+      "thoughtsTokenCount": 676,
+      "totalTokenCount": 1357
+    }
+  },
+  "provider_metadata_status": "sanitized_allowlist",
+  "provider_tool_call_count": 0,
+  "raw_prompt_retained": false,
+  "raw_provider_response_retained": false,
+  "relay_policy": {
+    "broker_alias_present": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "emr4-raisaintent-context-fabric-intent-shaping-1-internal"
+    ],
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "token_mount_exact": true,
+    "user": "65532:65532"
+  },
+  "release": {
+    "attempt_id": "raisa-intent-shaping-primary-001",
+    "command_authority": false,
+    "intent_proofreader_trace": {
+      "checked_at": "2026-08-06T03:01:01Z",
+      "grounded_to_case": true,
+      "reason_codes": [
+        "ALL_CHECKS_PASSED"
+      ],
+      "release_decision": "ADMIT",
+      "schema_version": "emr4.raisa_intent_shaping.v1"
+    },
+    "ledger_id": "ledger-raisa-intent-shaping-primary-001",
+    "model_intent_candidate_envelope": {
+      "attempt_id": "raisa-intent-shaping-primary-001",
+      "body": {
+        "command": false,
+        "cue_codes": [
+          "CURRENT_STATE_REQUESTED",
+          "PRIOR_STATE_REQUESTED",
+          "VALID_TIME_1030",
+          "KNOWLEDGE_CUTOFF_1230"
+        ],
+        "database": false,
+        "identity": false,
+        "intent_code": "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+        "patient": false,
+        "provider_tool": false,
+        "response_code": "INTENT_CANDIDATE_ONLY",
+        "source": false,
+        "temporal_coordinate_code": "SYNTHETIC_1030_VALID_1230_KNOWN",
+        "tenancy": false,
+        "write": false
+      },
+      "candidate_id": "synthetic:intent-shaping-candidate:current_and_prior_operational_comparison",
+      "candidate_provenance": "untrusted_model",
+      "command_authority": false,
+      "envelope_digest": "sha256:ff242adf9f59b8f9736976d74bf906337aa88a00b234e455d48ce6d2c6ae088f",
+      "ledger_id": "ledger-raisa-intent-shaping-primary-001",
+      "provider_authority": false,
+      "provider_binding": {
+        "api_key_authentication_used": false,
+        "api_path": "/v1/projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash:generateContent",
+        "authentication": "existing_keyless_impersonated_service_account_adc",
+        "cached_content_used": false,
+        "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+        "fallback_used": false,
+        "grounding_used": false,
+        "location": "australia-southeast1",
+        "model": "gemini-2.5-flash",
+        "oauth_scope": "https://www.googleapis.com/auth/cloud-platform",
+        "project": "bernie-emr4-dev",
+        "provider": "google_cloud_vertex_ai",
+        "provider_tools_used": false,
+        "retrieval_used": false,
+        "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+        "service_account_key_authentication_used": false
+      },
+      "provider_request_hash": "sha256:93d32c8bb6e6e6dd3617fadf4b7efc6feccada8fe2b8adf6912314d6c455e419",
+      "provider_response_hash": "sha256:f94ef528a12836e5a97cd161e86ae546c9aa4320a2e1171aec3b60b0ed0a1f0f",
+      "provider_response_shape": {
+        "candidate_count": 1,
+        "finish_reason": "STOP",
+        "parts_count": 1
+      },
+      "read_only": true,
+      "request_hash": "sha256:58c606c4c277d41ec0bb2867d1077fce25f8aa0f1644654dd791467b5d29a9b3",
+      "schema_version": "emr4.raisa_intent_shaping.candidate_envelope.v1"
+    },
+    "parent_binding_digest": "sha256:e3dbc02b14c8fac838a5e062a1da455989de36d4a56b386bff09ddb69556f74c",
+    "parent_candidate": {
+      "candidate_digest": "sha256:9675bdb2bbecf1c3e16bd7d5d769fbccc290d2c14e01b0bb8b3ecce89184ccff",
+      "candidate_id": "synthetic:intent-candidate:current_and_prior_operational_comparison",
+      "command_authority": false,
+      "intent_code": "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+      "issued_at": "2026-08-06T03:00:30Z",
+      "maximum_alternatives": 2,
+      "maximum_bytes": 16000,
+      "maximum_components": 3,
+      "maximum_facts": 12,
+      "provider_authority": false,
+      "read_only": true,
+      "requested_components": [
+        "CURRENT_OPERATIONAL",
+        "HISTORICAL_OPERATIONAL"
+      ],
+      "requested_field_profiles": [
+        "CURRENT_MINIMAL",
+        "HISTORICAL_MINIMAL"
+      ],
+      "requesting_bureau": "RAYLEEN",
+      "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+      "temporal_coordinate": {
+        "known_at": "2026-08-06T02:30:00Z",
+        "valid_at": "2026-08-06T00:30:00Z"
+      }
+    },
+    "parent_catalog_digest": "sha256:23d5fcc8b583f19f249b70129c6539e30e58947e4b9ecae01ae20769134a03a1",
+    "parent_packet": {
+      "assembled_at": "2026-08-06T03:01:00Z",
+      "authority_binding": {
+        "allowed_catalog_digest": "sha256:23d5fcc8b583f19f249b70129c6539e30e58947e4b9ecae01ae20769134a03a1",
+        "allowed_components": [
+          "CURRENT_OPERATIONAL",
+          "BUREAU_MEMORY",
+          "HISTORICAL_OPERATIONAL"
+        ],
+        "allowed_field_profiles": [
+          "CURRENT_MINIMAL",
+          "HISTORICAL_MINIMAL",
+          "MEMORY_MINIMAL",
+          "MEMORY_REFERENCE_MINIMAL"
+        ],
+        "allowed_intents": [
+          "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+          "CURRENT_OPERATIONAL_STATUS",
+          "HISTORICAL_OPERATIONAL_STATE",
+          "RECENT_OPERATIONAL_REFERENCE",
+          "RECENT_PRACTICE_WORK"
+        ],
+        "allowed_requesting_bureaus": [
+          "BERNIE",
+          "RAYLEEN"
+        ],
+        "authorized_time_window": {
+          "ends_at": "2026-08-06T03:02:00Z",
+          "starts_at": "2026-08-06T00:00:00Z"
+        },
+        "bilateral_shares": [
+          "BERNIE<-RAYLEEN:recent_practice_work"
+        ],
+        "binding_digest": "sha256:e3dbc02b14c8fac838a5e062a1da455989de36d4a56b386bff09ddb69556f74c",
+        "binding_id": "synthetic:binding:intent-shaped-retrieval",
+        "command_authority": false,
+        "expires_at": "2026-08-06T03:02:00Z",
+        "issued_at": "2026-08-06T03:00:00Z",
+        "location_refs": [
+          "synthetic:location:brisbane-one"
+        ],
+        "maximum_alternatives": 2,
+        "maximum_bytes": 14000,
+        "maximum_components": 3,
+        "maximum_facts": 12,
+        "policy_version": "context-fabric-intent-shaped-retrieval.v1",
+        "practice_id": "synthetic:practice:one",
+        "principal_ref": "synthetic:principal:reception-one",
+        "provider_authority": false,
+        "read_only": true,
+        "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+        "session_generation": 7,
+        "session_id": "synthetic:session:one",
+        "upstream_binding_digests": [
+          "sha256:04c23e7a85bc7b685145a236c05ad95888670dfd562fb56e7436be6327446e2a",
+          "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+          "sha256:acf415719005426e3f317c6ae97b8ac03f3813a8a78894b4798f7f47b51c0497"
+        ]
+      },
+      "authority_ceiling": "read_context_only",
+      "blocked_boundaries": [
+        "patient_data",
+        "product_data",
+        "provider",
+        "database",
+        "persistence",
+        "product_runtime",
+        "api",
+        "command",
+        "clinical_authority",
+        "prescribing",
+        "referral",
+        "billing",
+        "deployment",
+        "production",
+        "release",
+        "protected_refs"
+      ],
+      "candidate": {
+        "candidate_digest": "sha256:9675bdb2bbecf1c3e16bd7d5d769fbccc290d2c14e01b0bb8b3ecce89184ccff",
+        "candidate_id": "synthetic:intent-candidate:current_and_prior_operational_comparison",
+        "command_authority": false,
+        "intent_code": "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+        "issued_at": "2026-08-06T03:00:30Z",
+        "maximum_alternatives": 2,
+        "maximum_bytes": 16000,
+        "maximum_components": 3,
+        "maximum_facts": 12,
+        "provider_authority": false,
+        "read_only": true,
+        "requested_components": [
+          "CURRENT_OPERATIONAL",
+          "HISTORICAL_OPERATIONAL"
+        ],
+        "requested_field_profiles": [
+          "CURRENT_MINIMAL",
+          "HISTORICAL_MINIMAL"
+        ],
+        "requesting_bureau": "RAYLEEN",
+        "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+        "temporal_coordinate": {
+          "known_at": "2026-08-06T02:30:00Z",
+          "valid_at": "2026-08-06T00:30:00Z"
+        }
+      },
+      "contract_digest": "sha256:c406c99423e4dd956d5b311e2708c96fc99a31d5af81b81661c982553a131520",
+      "data_class": "authored_synthetic_patient_free_context_metadata",
+      "evidence_label": "provider_free_authored_synthetic_intent_shaped_temporal_retrieval",
+      "frame_set": {
+        "alternatives": [],
+        "ambiguity_state": "NONE",
+        "assembled_at": "2026-08-06T03:01:00Z",
+        "binding_digest": "sha256:e3dbc02b14c8fac838a5e062a1da455989de36d4a56b386bff09ddb69556f74c",
+        "candidate_digest": "sha256:9675bdb2bbecf1c3e16bd7d5d769fbccc290d2c14e01b0bb8b3ecce89184ccff",
+        "catalog_digest": "sha256:23d5fcc8b583f19f249b70129c6539e30e58947e4b9ecae01ae20769134a03a1",
+        "command_authority": false,
+        "components": [
+          {
+            "command_authority": false,
+            "component_code": "CURRENT_OPERATIONAL",
+            "expires_at": "2026-08-06T03:02:00Z",
+            "facts": [
+              {
+                "command_authority": false,
+                "component_code": "CURRENT_OPERATIONAL",
+                "fact_code": "CURRENT_APPOINTMENT_STATUS",
+                "fact_digest": "sha256:8114a9ad660c1ffcad26f67194d6cc0c0b7b0829baf247477941921f0cc649c4",
+                "fact_id": "synthetic:fact:current-diary-status",
+                "frame_type": "current_diary_projection",
+                "known_at": null,
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "current_diary",
+                "subject_ref": "synthetic:appointment:one",
+                "upstream_digest": "sha256:2e85dfa32468bb0c2387d5b5db12928b6a25a599d12b4d5ef3dd4047e10527cc",
+                "valid_at": null,
+                "value": "ARRIVED",
+                "value_kind": "CODE"
+              },
+              {
+                "command_authority": false,
+                "component_code": "CURRENT_OPERATIONAL",
+                "fact_code": "CURRENT_WAIT_MINUTES",
+                "fact_digest": "sha256:fc9f7745bac261a5c20a751ac2a083e9efed6ea512de58d6fe9b9f7732252e9d",
+                "fact_id": "synthetic:fact:current-wait-minutes",
+                "frame_type": "current_waiting_room_projection",
+                "known_at": null,
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "current_waiting_room",
+                "subject_ref": "synthetic:appointment:one",
+                "upstream_digest": "sha256:e0d8a2276a5db1a3cd959c197aa05cb0b52c3e651ed1dd1573b2b367feba1237",
+                "valid_at": null,
+                "value": 10,
+                "value_kind": "COUNT"
+              },
+              {
+                "command_authority": false,
+                "component_code": "CURRENT_OPERATIONAL",
+                "fact_code": "CURRENT_PRACTITIONER_ROLE",
+                "fact_digest": "sha256:e2c015f259d1a4b318d994cc61b3d193b639005307977b5c0d48a148c3c48e29",
+                "fact_id": "synthetic:fact:current-practitioner-role",
+                "frame_type": "active_practitioner_directory",
+                "known_at": null,
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "practitioner_directory",
+                "subject_ref": "synthetic:practitioner:one",
+                "upstream_digest": "sha256:b543dd838d5d834121ce9a0ff641ee458233f723ff4d1295b55dc44bdceed783",
+                "valid_at": null,
+                "value": "General practitioner",
+                "value_kind": "CODE"
+              },
+              {
+                "command_authority": false,
+                "component_code": "CURRENT_OPERATIONAL",
+                "fact_code": "CURRENT_SESSION_PROPOSAL_STATE",
+                "fact_digest": "sha256:3c5f6e281a6e54d1fddd5bb76aa4cbb0f8e62e814cf3a6e6c510b61e88486335",
+                "fact_id": "synthetic:fact:current-session-proposal-state",
+                "frame_type": "private_application_session_state",
+                "known_at": null,
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "private_session_state",
+                "subject_ref": "synthetic:session:one",
+                "upstream_digest": "sha256:f7fd3615c93fe966fb7bb9af4a39330ba87f67885343deca4a1c26a3cd0c4103",
+                "valid_at": null,
+                "value": "NONE",
+                "value_kind": "CODE"
+              }
+            ],
+            "originating_bureau": "RAYLEEN",
+            "provider_authority": false,
+            "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+            "read_only": true,
+            "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+            "selected_component_digest": "sha256:1c472b66e86f9ede5d8def582246f3fdd91f22c2ac7e41c886ea0088bb9f5f8b",
+            "source_revisions": [
+              "synthetic:diary-revision:11",
+              "synthetic:directory-revision:5",
+              "synthetic:session-revision:19",
+              "synthetic:waiting-revision:7"
+            ],
+            "upstream_binding_digest": "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+            "upstream_component_digest": "sha256:b4993049a4675cfe91e892146ac0a76c058e8267b0420758a50b5b1a35a42fe9",
+            "upstream_frame_digests": [
+              "sha256:2e85dfa32468bb0c2387d5b5db12928b6a25a599d12b4d5ef3dd4047e10527cc",
+              "sha256:b543dd838d5d834121ce9a0ff641ee458233f723ff4d1295b55dc44bdceed783",
+              "sha256:e0d8a2276a5db1a3cd959c197aa05cb0b52c3e651ed1dd1573b2b367feba1237",
+              "sha256:f7fd3615c93fe966fb7bb9af4a39330ba87f67885343deca4a1c26a3cd0c4103"
+            ],
+            "upstream_packet_digest": "sha256:9f71c1e444b4b87735c03304c571f5ea6f1a3b552c34b0a9ec26c1a494392209",
+            "upstream_proofreader_digest": "sha256:70c3d642d59bd13d3e24ce29fe1d9fb249961854876b1d7783e9bafac1e1662c"
+          },
+          {
+            "command_authority": false,
+            "component_code": "HISTORICAL_OPERATIONAL",
+            "expires_at": "2026-08-06T03:02:00Z",
+            "facts": [
+              {
+                "command_authority": false,
+                "component_code": "HISTORICAL_OPERATIONAL",
+                "fact_code": "HISTORICAL_WAITING_COUNT",
+                "fact_digest": "sha256:d3192f2a09e5f9ad60db3d2e3604b590163ce703c95dba9d7c8e22909ae8d6d3",
+                "fact_id": "synthetic:fact:historical-waiting:2026-08-06T02:30:00Z",
+                "frame_type": "historical_waiting_room_projection",
+                "known_at": "2026-08-06T02:30:00Z",
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "historical_waiting_room",
+                "subject_ref": "synthetic:snapshot:waiting-corrected",
+                "upstream_digest": "sha256:800e2ce81ee5a5e2c55e58345dbc5e12e8bfbded837cb407695ff7dbcc142070",
+                "valid_at": "2026-08-06T00:30:00Z",
+                "value": 3,
+                "value_kind": "COUNT"
+              }
+            ],
+            "originating_bureau": "RAYLEEN",
+            "provider_authority": false,
+            "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+            "read_only": true,
+            "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+            "selected_component_digest": "sha256:e67aefcb1339603da752d7e1cb86df2bf3d1057e2b694858df8e1dc4f6afb2f6",
+            "source_revisions": [
+              "synthetic:snapshot:waiting-corrected",
+              "synthetic:snapshot:waiting-original"
+            ],
+            "upstream_binding_digest": "sha256:04c23e7a85bc7b685145a236c05ad95888670dfd562fb56e7436be6327446e2a",
+            "upstream_component_digest": "sha256:750ef57d7e57ceb9607f9dc67bcb2ce945c52f21805d1965ad35d30c68f8d7c3",
+            "upstream_frame_digests": [
+              "sha256:800e2ce81ee5a5e2c55e58345dbc5e12e8bfbded837cb407695ff7dbcc142070",
+              "sha256:fb98abade255cdc8b32b92edc2f1f2438aab1f844b8bb5aa0cfa082221ee03da"
+            ],
+            "upstream_packet_digest": "sha256:ac649eb5592ef0fadd0a46b15b0bdb7241043bae08bd26413e8427116e65caac",
+            "upstream_proofreader_digest": "sha256:76c1662c56cdbb7d0fbe0dced1f385e45d3edbca6dbdb0bf4134b2dbe29419cf"
+          }
+        ],
+        "disposition": "ADMIT",
+        "expires_at": "2026-08-06T03:02:00Z",
+        "frame_set_digest": "sha256:a3e79b3d6b01b1f93765c5aa7570273c2e04b62ba615a24f15f7aef70329c6a7",
+        "frame_set_id": "synthetic:intent-frame-set:synthetic:intent-candidate:current_and_prior_operational_comparison",
+        "maximum_disclosure_bytes": 14000,
+        "omission_reason_codes": [],
+        "plan_digest": "sha256:af370ce9ab302a6f8df37ba973d7e8ea8c739157e91cd54355a6ad70cdd0fcce",
+        "provider_authority": false,
+        "read_only": true,
+        "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+        "selection_trace_digest": "sha256:194dd10a26798caf767845ed4b32b8c21e022fdd89d1e5ed9b6fc078d668adf2"
+      },
+      "intent_plan": {
+        "ambiguity_policy": "NONE",
+        "assembled_at": "2026-08-06T03:01:00Z",
+        "binding_digest": "sha256:e3dbc02b14c8fac838a5e062a1da455989de36d4a56b386bff09ddb69556f74c",
+        "candidate_digest": "sha256:9675bdb2bbecf1c3e16bd7d5d769fbccc290d2c14e01b0bb8b3ecce89184ccff",
+        "command_authority": false,
+        "decision": "ADMIT",
+        "expires_at": "2026-08-06T03:02:00Z",
+        "field_profiles": [
+          "CURRENT_MINIMAL",
+          "HISTORICAL_MINIMAL"
+        ],
+        "intent_code": "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+        "maximum_alternatives": 2,
+        "maximum_bytes": 14000,
+        "maximum_components": 3,
+        "maximum_facts": 12,
+        "plan_digest": "sha256:af370ce9ab302a6f8df37ba973d7e8ea8c739157e91cd54355a6ad70cdd0fcce",
+        "plan_id": "synthetic:intent-plan:synthetic:intent-candidate:current_and_prior_operational_comparison",
+        "policy_version": "context-fabric-intent-shaped-retrieval.v1",
+        "provider_authority": false,
+        "read_only": true,
+        "reduction_reason_codes": [],
+        "requesting_bureau": "RAYLEEN",
+        "required_components": [
+          "CURRENT_OPERATIONAL",
+          "HISTORICAL_OPERATIONAL"
+        ],
+        "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+        "temporal_coordinate": {
+          "known_at": "2026-08-06T02:30:00Z",
+          "valid_at": "2026-08-06T00:30:00Z"
+        }
+      },
+      "proofreader_trace": {
+        "checked_at": "2026-08-06T03:01:01Z",
+        "checks": [
+          "closed_candidate_and_binding",
+          "explicit_component_vocabulary",
+          "atomic_bureau_capability",
+          "bilateral_sharing",
+          "current_temporal_state",
+          "bitemporal_coordinate",
+          "minimal_disclosure",
+          "ambiguity_without_identity_assertion",
+          "upstream_provenance",
+          "same_packet_recomputation",
+          "authority_ceiling"
+        ],
+        "command_authority": false,
+        "packet_digest": "sha256:a8891614dea0485a9b9a85bc09569063ab62d5d2db00c70947f770bdcf908453",
+        "proofreader_trace_digest": "sha256:1788f8a07fa85f9eb7d626348840867095c1ce135a1acfee0224d21d7fbf11ae",
+        "provider_authority": false,
+        "read_only": true,
+        "reason_codes": [
+          "ALL_CHECKS_PASSED"
+        ],
+        "release_decision": "RELEASE",
+        "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1"
+      },
+      "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+      "selection_trace": {
+        "ambiguity_state": "NONE",
+        "binding_digest": "sha256:e3dbc02b14c8fac838a5e062a1da455989de36d4a56b386bff09ddb69556f74c",
+        "candidate_digest": "sha256:9675bdb2bbecf1c3e16bd7d5d769fbccc290d2c14e01b0bb8b3ecce89184ccff",
+        "catalog_digest": "sha256:23d5fcc8b583f19f249b70129c6539e30e58947e4b9ecae01ae20769134a03a1",
+        "command_operations": 0,
+        "disclosed_bytes": 6025,
+        "fact_count": 5,
+        "omission_reason_codes": [],
+        "plan_digest": "sha256:af370ce9ab302a6f8df37ba973d7e8ea8c739157e91cd54355a6ad70cdd0fcce",
+        "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+        "selected_component_digests": [
+          "sha256:1c472b66e86f9ede5d8def582246f3fdd91f22c2ac7e41c886ea0088bb9f5f8b",
+          "sha256:e67aefcb1339603da752d7e1cb86df2bf3d1057e2b694858df8e1dc4f6afb2f6"
+        ],
+        "selection_trace_digest": "sha256:194dd10a26798caf767845ed4b32b8c21e022fdd89d1e5ed9b6fc078d668adf2",
+        "source_reads_executed": 0
+      },
+      "source_catalog": {
+        "catalog_digest": "sha256:23d5fcc8b583f19f249b70129c6539e30e58947e4b9ecae01ae20769134a03a1",
+        "catalog_id": "synthetic:intent-retrieval-catalog",
+        "command_authority": false,
+        "component_vocabulary_digest": "sha256:21a836219ba5bcb9829bf275f3103b539c855c755256cf3af4ec3ac2f6bc9e08",
+        "components": [
+          {
+            "canonical_bureau": "RAYLEEN",
+            "command_authority": false,
+            "component_code": "CURRENT_OPERATIONAL",
+            "component_digest": "sha256:b4993049a4675cfe91e892146ac0a76c058e8267b0420758a50b5b1a35a42fe9",
+            "component_id": "synthetic:retrieval-component:current_operational",
+            "contains_private_session": true,
+            "current_state": "CURRENT",
+            "current_state_digest": "sha256:d0f1792afa6661e66f737294718dcacf603204079a0eaafcff0c0c40176efde1",
+            "expires_at": "2026-08-06T03:02:00Z",
+            "facts": [
+              {
+                "command_authority": false,
+                "component_code": "CURRENT_OPERATIONAL",
+                "fact_code": "CURRENT_APPOINTMENT_STATUS",
+                "fact_digest": "sha256:8114a9ad660c1ffcad26f67194d6cc0c0b7b0829baf247477941921f0cc649c4",
+                "fact_id": "synthetic:fact:current-diary-status",
+                "frame_type": "current_diary_projection",
+                "known_at": null,
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "current_diary",
+                "subject_ref": "synthetic:appointment:one",
+                "upstream_digest": "sha256:2e85dfa32468bb0c2387d5b5db12928b6a25a599d12b4d5ef3dd4047e10527cc",
+                "valid_at": null,
+                "value": "ARRIVED",
+                "value_kind": "CODE"
+              },
+              {
+                "command_authority": false,
+                "component_code": "CURRENT_OPERATIONAL",
+                "fact_code": "CURRENT_WAIT_MINUTES",
+                "fact_digest": "sha256:fc9f7745bac261a5c20a751ac2a083e9efed6ea512de58d6fe9b9f7732252e9d",
+                "fact_id": "synthetic:fact:current-wait-minutes",
+                "frame_type": "current_waiting_room_projection",
+                "known_at": null,
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "current_waiting_room",
+                "subject_ref": "synthetic:appointment:one",
+                "upstream_digest": "sha256:e0d8a2276a5db1a3cd959c197aa05cb0b52c3e651ed1dd1573b2b367feba1237",
+                "valid_at": null,
+                "value": 10,
+                "value_kind": "COUNT"
+              },
+              {
+                "command_authority": false,
+                "component_code": "CURRENT_OPERATIONAL",
+                "fact_code": "CURRENT_PRACTITIONER_ROLE",
+                "fact_digest": "sha256:e2c015f259d1a4b318d994cc61b3d193b639005307977b5c0d48a148c3c48e29",
+                "fact_id": "synthetic:fact:current-practitioner-role",
+                "frame_type": "active_practitioner_directory",
+                "known_at": null,
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "practitioner_directory",
+                "subject_ref": "synthetic:practitioner:one",
+                "upstream_digest": "sha256:b543dd838d5d834121ce9a0ff641ee458233f723ff4d1295b55dc44bdceed783",
+                "valid_at": null,
+                "value": "General practitioner",
+                "value_kind": "CODE"
+              },
+              {
+                "command_authority": false,
+                "component_code": "CURRENT_OPERATIONAL",
+                "fact_code": "CURRENT_SESSION_PROPOSAL_STATE",
+                "fact_digest": "sha256:3c5f6e281a6e54d1fddd5bb76aa4cbb0f8e62e814cf3a6e6c510b61e88486335",
+                "fact_id": "synthetic:fact:current-session-proposal-state",
+                "frame_type": "private_application_session_state",
+                "known_at": null,
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "CURRENT_OPERATIONAL_AWARENESS",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "private_session_state",
+                "subject_ref": "synthetic:session:one",
+                "upstream_digest": "sha256:f7fd3615c93fe966fb7bb9af4a39330ba87f67885343deca4a1c26a3cd0c4103",
+                "valid_at": null,
+                "value": "NONE",
+                "value_kind": "CODE"
+              }
+            ],
+            "provider_authority": false,
+            "read_only": true,
+            "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+            "shareability": "SAME_BUREAU_ONLY",
+            "source_revisions": [
+              "synthetic:diary-revision:11",
+              "synthetic:directory-revision:5",
+              "synthetic:session-revision:19",
+              "synthetic:waiting-revision:7"
+            ],
+            "upstream_binding_digest": "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+            "upstream_bureau": "RAYLEEN",
+            "upstream_frame_digests": [
+              "sha256:2e85dfa32468bb0c2387d5b5db12928b6a25a599d12b4d5ef3dd4047e10527cc",
+              "sha256:b543dd838d5d834121ce9a0ff641ee458233f723ff4d1295b55dc44bdceed783",
+              "sha256:e0d8a2276a5db1a3cd959c197aa05cb0b52c3e651ed1dd1573b2b367feba1237",
+              "sha256:f7fd3615c93fe966fb7bb9af4a39330ba87f67885343deca4a1c26a3cd0c4103"
+            ],
+            "upstream_packet_digest": "sha256:9f71c1e444b4b87735c03304c571f5ea6f1a3b552c34b0a9ec26c1a494392209",
+            "upstream_proofreader_digest": "sha256:70c3d642d59bd13d3e24ce29fe1d9fb249961854876b1d7783e9bafac1e1662c",
+            "upstream_purpose": "CURRENT_OPERATIONAL_AWARENESS"
+          },
+          {
+            "canonical_bureau": "RAYLEEN",
+            "command_authority": false,
+            "component_code": "BUREAU_MEMORY",
+            "component_digest": "sha256:45c073c6a64448f3be42c9bff86434dd3562036da2a6961b7694d9b51214931e",
+            "component_id": "synthetic:retrieval-component:bureau_memory",
+            "contains_private_session": false,
+            "current_state": null,
+            "current_state_digest": null,
+            "expires_at": "2026-08-06T03:02:00Z",
+            "facts": [
+              {
+                "command_authority": false,
+                "component_code": "BUREAU_MEMORY",
+                "fact_code": "RECENT_REQUEST_LABEL",
+                "fact_digest": "sha256:c82d99b1ea1604234f69a138ebe958b752b53ca8199e13623c834b7c14775c3a",
+                "fact_id": "synthetic:fact:reference-two",
+                "frame_type": "bureau_memory_item_set",
+                "known_at": "2026-08-06T02:59:00Z",
+                "originating_bureau": "rayleen",
+                "purpose_code": "recent_practice_work",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "recent_collective_work",
+                "subject_ref": "synthetic:opaque-operational-ref:two",
+                "upstream_digest": "sha256:9fc7a312903cedbb9414d6c5b1ac3c014fc8e7aaa1631371add197a94adea4de",
+                "valid_at": null,
+                "value": "recent_operational_read",
+                "value_kind": "CODE"
+              },
+              {
+                "command_authority": false,
+                "component_code": "BUREAU_MEMORY",
+                "fact_code": "RECENT_REQUEST_LABEL",
+                "fact_digest": "sha256:d63579774c55a320f3643e508bda408839bc07303845c03dcf50dd85d3086b5a",
+                "fact_id": "synthetic:fact:reference-one",
+                "frame_type": "bureau_memory_item_set",
+                "known_at": "2026-08-06T02:58:00Z",
+                "originating_bureau": "rayleen",
+                "purpose_code": "recent_practice_work",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "recent_collective_work",
+                "subject_ref": "synthetic:opaque-operational-ref:one",
+                "upstream_digest": "sha256:a8c94730c6fb6786dd7f0a9789a44731e1ad5ab53c9bd6df373a51de2184bd3e",
+                "valid_at": null,
+                "value": "recent_operational_read",
+                "value_kind": "CODE"
+              }
+            ],
+            "provider_authority": false,
+            "read_only": true,
+            "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+            "shareability": "BILATERAL_ONLY",
+            "source_revisions": [
+              "synthetic:memory-source-revision:1"
+            ],
+            "upstream_binding_digest": "sha256:acf415719005426e3f317c6ae97b8ac03f3813a8a78894b4798f7f47b51c0497",
+            "upstream_bureau": "rayleen",
+            "upstream_frame_digests": [
+              "sha256:d84efa7d98063dadd7c2cfd231e18821b5dcafde47a7c6fc43e49f3562c187c6"
+            ],
+            "upstream_packet_digest": "sha256:4e0818241b3405a5976a97d85cc80af1ac49b8b46ec1311668acce9ce10e3ed7",
+            "upstream_proofreader_digest": "sha256:67e24796a08593d2a39deeb513bcf86a4d679e41ba5e8caeb81cbfca1f84fc60",
+            "upstream_purpose": "recent_practice_work"
+          },
+          {
+            "canonical_bureau": "RAYLEEN",
+            "command_authority": false,
+            "component_code": "HISTORICAL_OPERATIONAL",
+            "component_digest": "sha256:750ef57d7e57ceb9607f9dc67bcb2ce945c52f21805d1965ad35d30c68f8d7c3",
+            "component_id": "synthetic:retrieval-component:historical_operational",
+            "contains_private_session": false,
+            "current_state": null,
+            "current_state_digest": null,
+            "expires_at": "2026-08-06T03:02:00Z",
+            "facts": [
+              {
+                "command_authority": false,
+                "component_code": "HISTORICAL_OPERATIONAL",
+                "fact_code": "HISTORICAL_WAITING_COUNT",
+                "fact_digest": "sha256:9d30f00ea22d1c390b3e0d3c93de9d98030d29e9c3ac007a03122d56f067734d",
+                "fact_id": "synthetic:fact:historical-waiting:2026-08-06T01:00:00Z",
+                "frame_type": "historical_waiting_room_projection",
+                "known_at": "2026-08-06T01:00:00Z",
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "historical_waiting_room",
+                "subject_ref": "synthetic:snapshot:waiting-original",
+                "upstream_digest": "sha256:fb98abade255cdc8b32b92edc2f1f2438aab1f844b8bb5aa0cfa082221ee03da",
+                "valid_at": "2026-08-06T00:30:00Z",
+                "value": 2,
+                "value_kind": "COUNT"
+              },
+              {
+                "command_authority": false,
+                "component_code": "HISTORICAL_OPERATIONAL",
+                "fact_code": "HISTORICAL_WAITING_COUNT",
+                "fact_digest": "sha256:d3192f2a09e5f9ad60db3d2e3604b590163ce703c95dba9d7c8e22909ae8d6d3",
+                "fact_id": "synthetic:fact:historical-waiting:2026-08-06T02:30:00Z",
+                "frame_type": "historical_waiting_room_projection",
+                "known_at": "2026-08-06T02:30:00Z",
+                "originating_bureau": "RAYLEEN",
+                "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+                "read_only": true,
+                "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+                "source_class": "historical_waiting_room",
+                "subject_ref": "synthetic:snapshot:waiting-corrected",
+                "upstream_digest": "sha256:800e2ce81ee5a5e2c55e58345dbc5e12e8bfbded837cb407695ff7dbcc142070",
+                "valid_at": "2026-08-06T00:30:00Z",
+                "value": 3,
+                "value_kind": "COUNT"
+              }
+            ],
+            "provider_authority": false,
+            "read_only": true,
+            "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+            "shareability": "BILATERAL_ONLY",
+            "source_revisions": [
+              "synthetic:snapshot:waiting-corrected",
+              "synthetic:snapshot:waiting-original"
+            ],
+            "upstream_binding_digest": "sha256:04c23e7a85bc7b685145a236c05ad95888670dfd562fb56e7436be6327446e2a",
+            "upstream_bureau": "RAYLEEN",
+            "upstream_frame_digests": [
+              "sha256:800e2ce81ee5a5e2c55e58345dbc5e12e8bfbded837cb407695ff7dbcc142070",
+              "sha256:fb98abade255cdc8b32b92edc2f1f2438aab1f844b8bb5aa0cfa082221ee03da"
+            ],
+            "upstream_packet_digest": "sha256:ac649eb5592ef0fadd0a46b15b0bdb7241043bae08bd26413e8427116e65caac",
+            "upstream_proofreader_digest": "sha256:76c1662c56cdbb7d0fbe0dced1f385e45d3edbca6dbdb0bf4134b2dbe29419cf",
+            "upstream_purpose": "TEMPORAL_OPERATIONAL_RECALL"
+          }
+        ],
+        "read_only": true,
+        "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1",
+        "source_reads_executed": 0
+      }
+    },
+    "parent_proofreader_trace": {
+      "checked_at": "2026-08-06T03:01:01Z",
+      "checks": [
+        "closed_candidate_and_binding",
+        "explicit_component_vocabulary",
+        "atomic_bureau_capability",
+        "bilateral_sharing",
+        "current_temporal_state",
+        "bitemporal_coordinate",
+        "minimal_disclosure",
+        "ambiguity_without_identity_assertion",
+        "upstream_provenance",
+        "same_packet_recomputation",
+        "authority_ceiling"
+      ],
+      "command_authority": false,
+      "packet_digest": "sha256:a8891614dea0485a9b9a85bc09569063ab62d5d2db00c70947f770bdcf908453",
+      "proofreader_trace_digest": "sha256:1788f8a07fa85f9eb7d626348840867095c1ce135a1acfee0224d21d7fbf11ae",
+      "provider_authority": false,
+      "read_only": true,
+      "reason_codes": [
+        "ALL_CHECKS_PASSED"
+      ],
+      "release_decision": "RELEASE",
+      "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1"
+    },
+    "provider_authority": false,
+    "provider_request_hash": "sha256:93d32c8bb6e6e6dd3617fadf4b7efc6feccada8fe2b8adf6912314d6c455e419",
+    "provider_response_hash": "sha256:f94ef528a12836e5a97cd161e86ae546c9aa4320a2e1171aec3b60b0ed0a1f0f",
+    "read_only": true,
+    "release_digest": "sha256:017b7261f9542e44927913307327a9c900904fd38ed9fb5d7fea1a7ff721507c",
+    "release_id": "synthetic:intent-shaping-release:current_and_prior_operational_comparison",
+    "request_hash": "sha256:58c606c4c277d41ec0bb2867d1077fce25f8aa0f1644654dd791467b5d29a9b3",
+    "schema_version": "emr4.raisa_intent_shaping.release.v1"
+  },
+  "request_binding": {
+    "context_hash": "sha256:58c606c4c277d41ec0bb2867d1077fce25f8aa0f1644654dd791467b5d29a9b3",
+    "policy_id": "raisa-context-fabric-model-required-intent-shaping-sydney-v1",
+    "provider_request_hash": "sha256:93d32c8bb6e6e6dd3617fadf4b7efc6feccada8fe2b8adf6912314d6c455e419"
+  },
+  "result": "attempt_pass",
+  "schema_version": "emr4.raisa_intent_shaping.attempt_evidence.v1",
+  "write_count": 0
+}

@@ -16,14 +16,15 @@ def load(path):
 def test_intent_shaped_retrieval_continuity_and_compass_are_current():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 220
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 202
-    assert compass["source_graph_revision"] == 220
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert "intent-shaped temporal retrieval" in compass["orientation_statement"]
-    assert "model-required intent-shaping rehearsal" in compass[
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    assert graph["graph_revision"] >= 220
+    assert node["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] >= 202
+    assert compass["source_graph_revision"] >= 220
+    assert compass["current_position"]["node_id"] == (
+        "raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping"
+    )
+    assert "model-required Practice Context Fabric intent-shaping" in compass[
         "orientation_statement"
     ]
 
@@ -38,7 +39,8 @@ def test_context_fabric_horizon_records_retrieval_acceptance_and_next_dependency
     joined = " ".join(horizon["prerequisites"] + horizon["evidence"]).lower()
     for phrase in (
         "intent-shaped retrieval rehearsal",
-        "gemini-2.5-flash",
+        "occupied-rehearsal-evidence.json",
+        "provider-free adapter",
         "intent-shaped-temporal-retrieval-contract.schema.json",
         "temporal-retrieval-review-receipt.json",
         "temporal-retrieval-rehearsal-closeout.md",
@@ -48,7 +50,7 @@ def test_context_fabric_horizon_records_retrieval_acceptance_and_next_dependency
 
 def test_next_model_required_descendant_is_exactly_bounded():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
-    node = graph["nodes"][-1]
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
     opening = node["authority"]["authorized_openings"][0]
     scope = opening["scope"].lower()
     for phrase in (
@@ -68,7 +70,8 @@ def test_next_model_required_descendant_is_exactly_bounded():
 
 def test_live_clinical_command_and_protected_boundaries_remain_closed():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
-    unresolved = " ".join(graph["nodes"][-1]["unresolved_gates"]).lower()
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    unresolved = " ".join(node["unresolved_gates"]).lower()
     for phrase in (
         "patient",
         "clinical",
@@ -97,7 +100,8 @@ def test_live_clinical_command_and_protected_boundaries_remain_closed():
 
 def test_branded_workspaces_and_future_bureaus_have_no_inherited_authority():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
-    notes = " ".join(graph["nodes"][-1]["authority"]["notes"])
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    notes = " ".join(node["authority"]["notes"])
     assert "Reception One and Clinician One are branded workspace families" in notes
     assert "atomic Bureau grants remain backend-owned" in notes
     assert "requests/referrals" in notes

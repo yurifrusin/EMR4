@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 220 / Compass 202. The provider-free Practice Context Fabric intent-shaped temporal retrieval rehearsal passes at an exact independently reviewed HEAD. A separately frozen authored-synthetic model-required intent-shaping rehearsal is next.
+> EMR4 is at Continuity 221 / Compass 203. The authored-synthetic model-required Practice Context Fabric intent-shaping rehearsal passes with one source-reviewed Sydney Vertex call and deterministic parent admission. A separately frozen provider-free one-source adapter is the next safe candidate; real data and runtime remain closed.
 
 ## North star
 
@@ -214,25 +214,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One provider-free authored-synthetic control plane retires stale frame sets, preserves checkpoint causes and selects explicit bitemporal historical context without executing a read. Lineage parent: `raisa-provider-free-practice-context-fabric-current-operational-weave`.
 99. **Intent-shaped minimum Context Fabric retrieval — Provider-free Practice Context Fabric intent-shaped temporal retrieval**
    One provider-free authored-synthetic selector converts closed intent codes into minimum granted Current, recent-work and historical components with safe ambiguity and same-packet proofreading. Lineage parent: `raisa-provider-free-practice-context-fabric-patient-free-temporal-weave`.
+100. **Model-required closed intent proposal — Authored-synthetic model-required Context Fabric intent shaping**
+   One source-reviewed Sydney Vertex call proposed the exact closed synthetic comparison intent; deterministic Context Fabric code alone rebuilt and admitted the parent retrieval packet. Lineage parent: `raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval`.
 
 ## Current position
 
-**Provider-free intent-shaped retrieval accepted; occupied authored-synthetic intent shaping next — Provider-free Practice Context Fabric intent-shaped temporal retrieval**
+**Occupied authored-synthetic intent shaping accepted; one-source provider-free adapter planning is the next safe candidate — Authored-synthetic model-required Context Fabric intent shaping**
 
-**Why this proof came next:** Closed intent mapping, minimum component disclosure, bilateral Bureau scope, temporal rejection, ambiguity and proofreader bindings passed deterministic and independent review.
+**Why this proof came next:** The required model can now propose a closed intent without seeing source frames or inheriting authority, and the deterministic parent retrieval path remains intact.
 
-The first request-shaped retrieval layer is accepted without opening a provider call, live source, patient data, runtime or command.
+One primary Sydney Vertex call passed exact identity, schema, reasoning, accounting, proofreader, retention and cleanup gates.
 
 ### What this unlocks
 
-- Freeze the exact authored-synthetic model-required intent-shaping envelope.
-- Test whether the selected model proposes only the closed non-authoritative intent candidate accepted by the deterministic layer.
+- Freeze a provider-free adapter contract around one existing authorised current operational read shape.
+- Keep the adapter unmounted and authored-synthetic until a separate real-product authority opens.
 
 ### What it does not solve
 
-- Patient, clinical or product-data access; live retrieval/watching; real historical retention or external evidence.
-- Product runtime, persistence, clinical or administrative commands, deployment or production.
-- Consultant, requests/referrals, medicines/prescribing or billing/claims implementation authority.
+- General natural-language understanding or real staff-language fitness.
+- Patient, clinical or product-data access; live retrieval/watching; persistence, retention or external evidence.
+- Cross-Bureau/clinical source access, product runtime, commands, deployment or production.
 - Release, Pages, protected evidence or protected-ref movement.
 
 ## Continuity and authority
@@ -240,8 +242,7 @@ The first request-shaped retrieval layer is accepted without opening a provider 
 - Current-node audit: **passed**
 - Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
 - Contract `committed-reschedule-availability-reconciliation`: **satisfied**
-- Bounded opening `provider-call`: Derive and freeze one authored-synthetic model-required intent-shaping rehearsal using exact gemini-2.5-flash, the Bernie Vertex development project, australia-southeast1, a positive thinking budget, closed schema, deterministic proofreader, exact call/cost ledger and no fallback; execute no call before that envelope is frozen and use no patient/product/runtime/command data or authority.
-- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `release`, `security-review`, `stage-3b`, `voice`.
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -303,9 +304,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- The provider-free Fabric/Memory contract, Current operational weave, patient-free temporal weave and intent-shaped retrieval rehearsal are accepted at exact independently reviewed source HEADs.
-- The next authored-synthetic model-required intent-shaping rehearsal must freeze exact gemini-2.5-flash Sydney Vertex transport, thinking, schema, proofreader, call/cost and no-fallback boundaries before one occupied sequence.
-- Separately gate patient, clinical or product data, real sources/watchers, persistence/retention, external evidence, commands, deployment, production and release.
+- The provider-free Fabric/Memory contract, Current operational weave, patient-free temporal weave and intent-shaped retrieval rehearsal plus the occupied authored-synthetic model-required intent path are accepted at exact source-reviewed HEADs.
+- The next safe candidate is a separately frozen provider-free adapter over one already authorised current operational read shape, without a new route or real-data execution.
+- Separately gate every real product/patient source, watcher/feed, persistence/retention, cross-Bureau or clinical source, command, deployment, production and release boundary.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -494,6 +495,7 @@ Prerequisites:
 
 ## Map limits
 
+- Occupied intent-shaping acceptance proves one authored-synthetic closed model proposal only; it creates no real-source, patient, product, live-watcher, persistence, runtime, command, clinical, deployment or protected authority.
 - Intent-shaped retrieval acceptance proves pure provider-free authored-synthetic context selection only; it creates no natural-language, provider, patient, product, live-source, persistence, runtime, command, deployment or protected authority.
 - Patient-free temporal-weave acceptance proves pure provider-free authored-synthetic invalidation and bitemporal selection only; it creates no live watcher, patient, product, persistence, provider, runtime, command, deployment or protected authority.
 - Current operational weave acceptance proves pure provider-free authored-synthetic composition only; it creates no patient, product, persistence, provider, runtime, command, deployment or protected authority.
@@ -754,6 +756,9 @@ Prerequisites:
 - `docs/emr4-model-required-bureau-provider-free-successor-lanes.md`
 - `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`
 - `docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md`
+- `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
+- `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
+- `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
 - `docs/raisa-clinician-one-readonly-document-context-closeout.md`
 - `docs/raisa-clinician-one-readonly-document-context-plan.md`
 - `docs/raisa-clinician-one-word-desktop-selection-check-closeout.md`
@@ -874,6 +879,7 @@ Prerequisites:
 - `docs/security/hardening/model-required-bureau-gate-minus-one/hardening.json`
 - `docs/security/hardening/raisa-two-component-oidc-verifier/hardening.md`
 - `docs/security/pr70-codeql-alerts-543-544-triage-2026-08-01.md`
+- `docs/security/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
 - `docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md`
@@ -923,6 +929,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
@@ -968,6 +975,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -1155,6 +1164,11 @@ Prerequisites:
 - `orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json`
 - `orchestration/continuity/model-required-bureau-provider-free-successor-lanes/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-cost-ledger.json`
+- `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.json`
+- `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-dry-run-evidence.json`
+- `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/rayleen-context-fabric-intent-shaping-attempt-1-preflight.json`
 - `orchestration/continuity/raisa-cloud-run-api-runtime-identity-enablement/evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/browser-word-online-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/interim-residue-evidence.json`
@@ -1522,4 +1536,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 202; continuity graph revision 220._
+_Compass map revision 203; continuity graph revision 221._

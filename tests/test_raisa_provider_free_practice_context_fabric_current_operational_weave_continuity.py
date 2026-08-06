@@ -15,17 +15,16 @@ def test_current_operational_weave_continuity_remains_in_accepted_lineage():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
     node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
-    assert graph["graph_revision"] == 219
+    assert graph["graph_revision"] >= 219
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 201
-    assert compass["source_graph_revision"] == 219
+    assert compass["map_revision"] >= 201
+    assert compass["source_graph_revision"] >= 219
     assert compass["current_position"]["node_id"] == (
-        "raisa-provider-free-practice-context-fabric-patient-free-temporal-weave"
+        "raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping"
     )
-    assert "patient-free temporal weave" in compass["orientation_statement"]
-    assert "intent-shaped temporal retrieval rehearsal" in (
-        compass["orientation_statement"]
-    )
+    assert "model-required Practice Context Fabric" in compass[
+        "orientation_statement"
+    ]
 
 
 def test_context_fabric_horizon_records_acceptance_and_next_dependency():

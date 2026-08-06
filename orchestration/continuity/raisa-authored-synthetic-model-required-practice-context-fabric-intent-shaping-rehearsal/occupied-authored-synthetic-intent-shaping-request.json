@@ -1,0 +1,61 @@
+{
+  "authority_ceiling": {
+    "command": false,
+    "database": false,
+    "identity": false,
+    "patient": false,
+    "provider_tool": false,
+    "source": false,
+    "tenancy": false,
+    "write": false
+  },
+  "cue_codes": [
+    "CURRENT_STATE_REQUESTED",
+    "PRIOR_STATE_REQUESTED",
+    "VALID_TIME_1030",
+    "KNOWLEDGE_CUTOFF_1230"
+  ],
+  "expires_at": "2026-08-06T08:24:55Z",
+  "intent_codes": [
+    {
+      "code": "CURRENT_OPERATIONAL_STATUS",
+      "description": "Current coherent operational component only."
+    },
+    {
+      "code": "RECENT_PRACTICE_WORK",
+      "description": "Bureau Memory component only."
+    },
+    {
+      "code": "HISTORICAL_OPERATIONAL_STATE",
+      "description": "One bitemporal historical selection only."
+    },
+    {
+      "code": "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+      "description": "Current plus historical comparison."
+    },
+    {
+      "code": "RECENT_OPERATIONAL_REFERENCE",
+      "description": "Bounded opaque alternatives from recent-work context."
+    }
+  ],
+  "issued_at": "2026-08-06T08:14:55Z",
+  "parent_contract_digest": "sha256:c1482702d07a61391dc217a27029c549a1242c8ef12ac287b4fb02c39d10ed0f",
+  "parent_policy_digest": "sha256:071363c16e5e7a4d034d7252c45d14a27570b421f12c6a32bbd875d2ae0ba688",
+  "reference_date": "2026-08-06",
+  "request_digest": "sha256:89dd49423bff52de2d7783817344ba7738a872876350a7f0e2407b17ae029108",
+  "request_id": "synthetic:intent-shaping:occupied:rayleen:001",
+  "schema_version": "emr4.raisa_intent_shaping.request.v1",
+  "synthetic_label": "authored_synthetic",
+  "temporal_coordinate_codes": [
+    {
+      "code": "NONE",
+      "description": "No temporal coordinate."
+    },
+    {
+      "code": "SYNTHETIC_1030_VALID_1230_KNOWN",
+      "description": "10:30 valid-time state as known by 12:30."
+    }
+  ],
+  "timezone": "Australia/Brisbane",
+  "utterance": "Compare the current waiting-room operational picture with the earlier state at 10:30 this morning, using only what was known by 12:30."
+}

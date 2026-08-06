@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_accepted_model_required_context_fabric_intent_shaping_evidence_and_continuity_on_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan target passes at source HEAD 44f341481b55f99a18a47838da0f2b7e43a2f73e. Provider-free acceptance, zero-call rehearsal, independent veto, exact source receipt, read-only ADC preflight and one-call occupied evidence all pass. Closeout, Sol acceptance and Continuity 221 / Compass 203 record the bounded result.",
+    "current_authority_allocation": "GPT Sol owns closeout and task-branch integration. DeepSeek implementation and repair receipts remain attributed to their worker. Gemini 3.6 Flash/high completed its exact-HEAD read-only veto. No further provider call or worker is allocated.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at 44f341481b55f99a18a47838da0f2b7e43a2f73e with only the named closeout/evidence/continuity tracked edits plus preserved untracked files. Review branch remains clean at the exact reviewed HEAD. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md now records the exact occupied result, consumed provider authority, closed real-data/runtime boundaries and the provider-free unmounted one-source adapter as next safe candidate.",
+    "protected_evidence_boundaries": "This event permits only an explicit-path task-branch commit of the named occupied evidence, review/authority receipts, closeout, handover and continuity artifacts. It grants no additional provider call, patient/product data, live source or watcher, persistence, API/runtime/command, clinical or administrative authority, cloud/IAM mutation, deployment, production, release, Pages, protected evidence mutation or protected-ref movement. All unrelated untracked files and docs/branding remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

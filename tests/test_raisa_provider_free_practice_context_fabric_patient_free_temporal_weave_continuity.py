@@ -14,14 +14,17 @@ def load(path):
 def test_patient_free_temporal_weave_continuity_and_compass_are_current():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 219
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 201
-    assert compass["source_graph_revision"] == 219
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert "patient-free temporal weave" in compass["orientation_statement"]
-    assert "intent-shaped temporal retrieval rehearsal" in compass["orientation_statement"]
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    assert graph["graph_revision"] >= 219
+    assert node["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] >= 201
+    assert compass["source_graph_revision"] >= 219
+    assert compass["current_position"]["node_id"] == (
+        "raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping"
+    )
+    assert "model-required Practice Context Fabric" in compass[
+        "orientation_statement"
+    ]
 
 
 def test_context_fabric_horizon_records_temporal_acceptance_and_next_dependency():
@@ -46,7 +49,7 @@ def test_context_fabric_horizon_records_temporal_acceptance_and_next_dependency(
 
 def test_next_descendant_keeps_live_and_future_bureau_boundaries_closed():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
-    node = graph["nodes"][-1]
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
     opening = node["authority"]["authorized_openings"][0]
     assert "provider-free patient-free unmounted" in opening["scope"]
     assert "no patient/product data" in opening["scope"]
@@ -78,6 +81,7 @@ def test_next_descendant_keeps_live_and_future_bureau_boundaries_closed():
 
 def test_branded_workspaces_do_not_become_authority_boundaries():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
-    notes = " ".join(graph["nodes"][-1]["authority"]["notes"])
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    notes = " ".join(node["authority"]["notes"])
     assert "Reception One and Clinician One are branded workspace families" in notes
     assert "atomic Bureau grants remain backend-owned" in notes

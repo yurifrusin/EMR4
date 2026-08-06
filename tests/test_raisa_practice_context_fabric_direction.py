@@ -7,19 +7,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_context_fabric_is_durable_and_occupied_intent_shaping_is_next() -> None:
+def test_context_fabric_is_durable_and_occupied_intent_shaping_is_accepted() -> None:
     direction = (ROOT / "docs/raisa-practice-context-fabric-direction.md").read_text(
         encoding="utf-8"
     )
-    implementation_plan = (ROOT / "implementation_plan.md").read_text(encoding="utf-8")
+    implementation_plan = (ROOT / "implementation_plan.md").read_text(
+        encoding="utf-8"
+    )
     interaction_model = (
         ROOT / "orchestration/bernie_interaction_model.md"
     ).read_text(encoding="utf-8")
     handover = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 
     assert (
-        "Status: accepted direction through provider-free intent-shaped temporal retrieval; exact occupied intent-shaping plan frozen"
-        in direction
+        "Status: accepted direction through occupied authored-synthetic "
+        "model-required intent shaping" in direction
     )
     assert "ContextNeed" in direction
     assert "ContextScopeGrant" in direction
@@ -47,16 +49,22 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
         if row["id"] == "raisa-practice-context-fabric"
     )
 
-    assert compass["map_revision"] == 202
-    assert compass["source_graph_revision"] == 220
+    assert compass["map_revision"] == 203
+    assert compass["source_graph_revision"] == 221
     assert item["status"] == "active"
     assert item["boundary_changes"] == []
     assert "docs/raisa-practice-context-fabric-direction.md" in item["evidence"]
-    assert any("Separately gate patient" in value for value in item["prerequisites"])
+    assert any(
+        "Separately gate every real product/patient source" in value
+        for value in item["prerequisites"]
+    )
 
-    rendered = (ROOT / "docs/ariadne-compass-current.md").read_text(encoding="utf-8")
-    assert "### Raisa Practice Context Fabric — active" in rendered
-    assert "_Compass map revision 202; continuity graph revision 220._" in rendered
+    rendered = (ROOT / "docs/ariadne-compass-current.md").read_text(
+        encoding="utf-8"
+    )
+    assert "### Raisa Practice Context Fabric" in rendered
+    assert "active" in rendered
+    assert "_Compass map revision 203; continuity graph revision 221._" in rendered
 
 
 def test_branded_workspaces_do_not_become_authority_boundaries() -> None:
@@ -67,7 +75,8 @@ def test_branded_workspaces_do_not_become_authority_boundaries() -> None:
         encoding="utf-8"
     )
     bureau_architecture = (
-        ROOT / "docs/emr4-model-required-deterministic-authority-bureau-architecture.md"
+        ROOT
+        / "docs/emr4-model-required-deterministic-authority-bureau-architecture.md"
     ).read_text(encoding="utf-8")
 
     for text in (direction, implementation_plan, bureau_architecture):
