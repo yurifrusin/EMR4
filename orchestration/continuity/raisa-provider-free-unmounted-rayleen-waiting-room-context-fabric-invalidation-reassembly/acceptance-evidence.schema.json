@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/practice-context-fabric-rayleen-invalidation-reassembly-acceptance.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "case_count",
+    "passed_case_count",
+    "adapter_result_digest",
+    "adapter_binding_digest",
+    "adapted_parent_frame_set_digest",
+    "adapted_parent_proofreader_trace_digest",
+    "manifest_digest",
+    "lease_digest",
+    "signal_digest",
+    "decision_digest",
+    "checkpoint_digest",
+    "state_digest",
+    "requirement_digest",
+    "instruction_digest",
+    "stale_reassembly_decision_digest",
+    "temporal_trace_digest",
+    "seam_proofreader_trace_digest",
+    "seam_proofreader_decision",
+    "positive_invariants",
+    "negative_reason_codes",
+    "zero_action_posture",
+    "artifact_hashes",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.practice_context_fabric_rayleen_invalidation_reassembly_acceptance.v1"},
+    "result": {"const": "raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_invalidation_reassembly_seam_pass"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_unmounted_rayleen_invalidation_reassembly_seam"},
+    "case_count": {"type": "integer", "minimum": 20},
+    "passed_case_count": {"type": "integer", "minimum": 20},
+    "adapter_result_digest": {"$ref": "#/$defs/digest"},
+    "adapter_binding_digest": {"$ref": "#/$defs/digest"},
+    "adapted_parent_frame_set_digest": {"$ref": "#/$defs/digest"},
+    "adapted_parent_proofreader_trace_digest": {"$ref": "#/$defs/digest"},
+    "manifest_digest": {"$ref": "#/$defs/digest"},
+    "lease_digest": {"$ref": "#/$defs/digest"},
+    "signal_digest": {"$ref": "#/$defs/digest"},
+    "decision_digest": {"$ref": "#/$defs/digest"},
+    "checkpoint_digest": {"$ref": "#/$defs/digest"},
+    "state_digest": {"$ref": "#/$defs/digest"},
+    "requirement_digest": {"$ref": "#/$defs/digest"},
+    "instruction_digest": {"$ref": "#/$defs/digest"},
+    "stale_reassembly_decision_digest": {"$ref": "#/$defs/digest"},
+    "temporal_trace_digest": {"$ref": "#/$defs/digest"},
+    "seam_proofreader_trace_digest": {"$ref": "#/$defs/digest"},
+    "seam_proofreader_decision": {"const": "RELEASE"},
+    "positive_invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parent_current_proofreader_released",
+        "adapter_source_frame_dependency_chain_exact",
+        "signal_payload_free",
+        "old_frame_set_byte_immutable",
+        "old_frame_set_retired",
+        "exactly_one_requirement",
+        "waiting_dependency_required",
+        "instruction_inert",
+        "stale_request_rejected"
+      ],
+      "properties": {
+        "parent_current_proofreader_released": {"const": true},
+        "adapter_source_frame_dependency_chain_exact": {"const": true},
+        "signal_payload_free": {"const": true},
+        "old_frame_set_byte_immutable": {"const": true},
+        "old_frame_set_retired": {"const": true},
+        "exactly_one_requirement": {"const": true},
+        "waiting_dependency_required": {"const": true},
+        "instruction_inert": {"const": true},
+        "stale_request_rejected": {"const": true}
+      }
+    },
+    "negative_reason_codes": {
+      "type": "array",
+      "minItems": 10,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "zero_action_posture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_calls",
+        "network_calls",
+        "database_calls",
+        "product_api_calls",
+        "source_reads",
+        "commands_or_writes",
+        "watcher_or_event_subscriptions",
+        "deployments_or_releases",
+        "protected_actions"
+      ],
+      "properties": {
+        "provider_calls": {"const": 0},
+        "network_calls": {"const": 0},
+        "database_calls": {"const": 0},
+        "product_api_calls": {"const": 0},
+        "source_reads": {"const": 0},
+        "commands_or_writes": {"const": 0},
+        "watcher_or_event_subscriptions": {"const": 0},
+        "deployments_or_releases": {"const": 0},
+        "protected_actions": {"const": 0}
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seam_module",
+        "source_adapter_module",
+        "current_weave_module",
+        "temporal_weave_module",
+        "seam_packet_schema",
+        "acceptance_evidence_schema"
+      ],
+      "properties": {
+        "seam_module": {"$ref": "#/$defs/digest"},
+        "source_adapter_module": {"$ref": "#/$defs/digest"},
+        "current_weave_module": {"$ref": "#/$defs/digest"},
+        "temporal_weave_module": {"$ref": "#/$defs/digest"},
+        "seam_packet_schema": {"$ref": "#/$defs/digest"},
+        "acceptance_evidence_schema": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "claim_boundary": {
+      "const": "Provider-free authored-synthetic unmounted adapter-to-temporal invalidation and inert reassembly-handoff evidence only; no real data, live watcher, source read, persistence, provider, runtime, command, deployment or production claim."
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

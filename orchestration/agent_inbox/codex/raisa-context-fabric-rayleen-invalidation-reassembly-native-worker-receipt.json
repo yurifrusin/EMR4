@@ -1,0 +1,27 @@
+{
+  "schema_version": "emr4.ariadne.native_worker_receipt.v1",
+  "attempt_id": "raisa-context-fabric-rayleen-invalidation-reassembly-native-worker-002",
+  "worker": "codex-native-subagent",
+  "task_name": "rayleen_invalidation_seam_impl",
+  "source_head": "abf5d91b08a3d0db5d9b0309f168d5261b26190b",
+  "authority": "bounded_implementation_and_focused_test_only",
+  "owned_files": [
+    "scripts/raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_invalidation_reassembly.py",
+    "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_invalidation_reassembly.py"
+  ],
+  "result": "candidate_returned_without_acceptance_claim",
+  "reported_verification": {
+    "focused_tests_passed": 19,
+    "focused_tests_failed": 0,
+    "git_diff_check": "passed"
+  },
+  "postconditions": {
+    "other_files_touched": false,
+    "files_staged": false,
+    "files_committed": false,
+    "provider_or_network_activity": false,
+    "database_or_product_runtime_activity": false,
+    "route_command_or_deployment_activity": false
+  },
+  "claim_boundary": "Non-transferable implementation provenance only. GPT Sol independently reviews, amends, verifies and accepts or rejects the candidate."
+}
