@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 37,
+  "register_revision": 38,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1738,6 +1738,44 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0046",
+      "attempt_id": "raisa-context-fabric-observation-to-signal-worker-veto-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-observation-to-temporal-signal-rehearsal",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "native-codex-observation-to-signal-worker",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_subagent",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "Every syntactically and cryptographically admissible source packet inside the frozen contract domain must map from its actual trusted inputs, and no signal-bearing result may leave the rehearsal before the deterministic proofreader returns RELEASE.",
+      "observed_error": "The worker mapper admitted only the canonical authored-synthetic fixture after admission had accepted alternate valid raw identifiers, backend timestamps or prior seen-id sets, and exported low-level admission and mapping functions allowed a same-process caller to obtain signal material without traversing the proofreader gate.",
+      "detection_method": "A fresh exact-head native independent veto passed the 153-test deterministic packet, then used bounded contract-domain reproductions to demonstrate the three mapper overfits and inspected the public export surface to demonstrate the proofreader bypass.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-independent-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-lease.md",
+        "docs/ariadne-agent-error-correction-register-revision-38.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.observation_mapper_fixture_overfit_and_proofreader_bypass",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Sol invoked the named recovery lease, made admission and mapping internal, left one public packet builder as the only signal-bearing egress, rebuilt mapping from the actual validated source, policy, binding and prior coordinate, and added alternate-domain plus export-surface adversarial tests. A fresh exact-head veto remains mandatory before correction acceptance.",
+        "prevention_control": "For each mapper behind a deterministic egress gate, test at least one non-canonical valid value for every contract-varying coordinate and mechanically assert that all pre-proofreader signal-producing functions are absent from the public export surface.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-lease.md",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py"
+        ]
+      },
+      "status": "open"
     }
   ]
 }

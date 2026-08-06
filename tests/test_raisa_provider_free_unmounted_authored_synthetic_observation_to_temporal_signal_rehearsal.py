@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import ast
-from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
@@ -19,6 +18,7 @@ from scripts.raisa_provider_free_practice_context_fabric_current_operational_wea
 from scripts.raisa_provider_free_practice_context_fabric_patient_free_temporal_weave import (
     derive_dependency_manifest,
 )
+import scripts.raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal as rehearsal
 from scripts.raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal import (
     ACTIVATION_MODE,
     ADMISSION_DECISIONS,
@@ -30,7 +30,7 @@ from scripts.raisa_provider_free_unmounted_authored_synthetic_observation_to_tem
     RESULT,
     SOURCE_CONTRACT_ID,
     SOURCE_SYSTEM_ID,
-    admit_synthetic_committed_change,
+    _admit_synthetic_committed_change,
     build_authored_synthetic_observation_to_signal_packet,
     build_authored_synthetic_source_input,
     build_live_source_observation_policy,
@@ -40,7 +40,7 @@ from scripts.raisa_provider_free_unmounted_authored_synthetic_observation_to_tem
     build_observation_prior_coordinate,
     build_synthetic_observation_classification_activation,
     derive_observation_id,
-    map_observation_to_temporal_signal,
+    _map_observation_to_temporal_signal,
     proofread_observation_to_signal_packet,
     validate_observation_to_signal_packet,
 )
@@ -126,7 +126,7 @@ def _coordinate_trusted_contracts(values: dict) -> None:
 
 
 def _admit(values: dict, **kwargs):
-    return admit_synthetic_committed_change(
+    return _admit_synthetic_committed_change(
         values["source"],
         values["policy"],
         values["binding"],
@@ -137,6 +137,20 @@ def _admit(values: dict, **kwargs):
         observed_at=kwargs.get("observed_at", "2026-08-06T03:00:11Z"),
         expires_at=kwargs.get("expires_at", "2026-08-06T03:02:00Z"),
         hmac_key=kwargs.get("hmac_key", KEY),
+    )
+
+
+def _map(values: dict, observation: dict, admission: dict):
+    return _map_observation_to_temporal_signal(
+        observation,
+        admission,
+        values["source"],
+        values["policy"],
+        values["binding"],
+        values["prior"],
+        values["registry"],
+        values["impact"],
+        hmac_key=KEY,
     )
 
 
@@ -180,9 +194,7 @@ def test_positive_admission_binds_one_reconstructed_signal_digest() -> None:
     assert admission["decision"] == "ADMIT_SIGNAL"
     assert admission["ordinary_temporal_signal_emitted"] is True
     assert admission["conservative_impact_frame_types"] == list(MANDATORY_FRAME_FLOOR)
-    signal, trace = map_observation_to_temporal_signal(
-        observation, admission, values["registry"], values["impact"]
-    )
+    signal, trace = _map(values, observation, admission)
     assert admission["signal_digest"] == signal["signal_digest"]
     assert trace["source_event_schema_version"] == ("diary.appointment_rescheduled.v1")
     assert trace["temporal_event_schema_version"] == (
@@ -190,6 +202,67 @@ def test_positive_admission_binds_one_reconstructed_signal_digest() -> None:
     )
     assert trace["impact_floor_preserved"] is True
     assert trace["source_selector_used"] is False
+
+
+def test_alternate_valid_raw_event_identity_admits_and_maps_internally() -> None:
+    values = _inputs()
+    values["source"]["raw_source_event_id"] = "evt_ffffffffffffffffffffffffffffffff"
+    _activate(values)
+
+    observation, admission = _admit(values)
+
+    assert observation is not None
+    assert admission["decision"] == "ADMIT_SIGNAL"
+    signal, trace = _map(values, observation, admission)
+    assert signal["signal_digest"] == admission["signal_digest"]
+    assert trace["observation_digest"] == observation["observation_digest"]
+
+
+def test_alternate_valid_backend_clock_values_admit_and_map_internally() -> None:
+    values = _inputs()
+    values["source"]["source_transaction_committed_at"] = "2026-08-06T03:00:20Z"
+    _activate(values)
+
+    observation, admission = _admit(
+        values,
+        observed_at="2026-08-06T03:00:21Z",
+        expires_at="2026-08-06T03:01:59Z",
+    )
+
+    assert observation is not None
+    signal, trace = _map(values, observation, admission)
+    assert signal["received_at"] == "2026-08-06T03:00:21Z"
+    assert signal["expires_at"] == "2026-08-06T03:01:59Z"
+    assert trace["observed_at"] == "2026-08-06T03:00:21Z"
+
+
+def test_alternate_valid_prior_seen_set_admits_and_maps_internally() -> None:
+    values = _inputs()
+    values["prior"]["seen_observation_ids"] = ["sha256:" + "9" * 64]
+    values["prior"] = _reseal(values["prior"], "coordinate_digest")
+
+    observation, admission = _admit(values)
+
+    assert observation is not None
+    signal, trace = _map(values, observation, admission)
+    assert signal["signal_digest"] == admission["signal_digest"]
+    assert trace["admission_digest"] == admission["admission_digest"]
+
+
+def test_signal_bearing_low_level_functions_are_not_public_egress() -> None:
+    exported = set(rehearsal.__all__)
+
+    assert not {
+        "admit_synthetic_committed_change",
+        "map_observation_to_temporal_signal",
+        "_admit_synthetic_committed_change",
+        "_map_observation_to_temporal_signal",
+    }.intersection(exported)
+    packet = rehearsal.build_authored_synthetic_observation_to_signal_packet()
+    assert packet["proofreader_trace"]["release_decision"] == "RELEASE"
+    assert packet["proofreader_trace"]["packet_digest"] == canonical_sha256(
+        {key: value for key, value in packet.items() if key != "proofreader_trace"}
+    )
 
 
 def test_activation_mode_and_observation_evidence_are_distinct_exact_fields() -> None:
@@ -562,22 +635,18 @@ def test_unresolved_backend_alias_requires_full_invalidation_not_irrelevance() -
 
 
 def test_non_admit_decision_cannot_be_mapped_to_temporal_signal() -> None:
-    packet = build_authored_synthetic_observation_to_signal_packet()
-    admission = deepcopy(packet["admission_decision"])
+    values = _inputs()
+    observation, admission = _admit(values)
+    assert observation is not None
     admission["decision"] = "FULL_INVALIDATION_REQUIRED"
     admission["ordinary_temporal_signal_emitted"] = False
     admission["signal_digest"] = None
     admission = _reseal(admission, "admission_digest")
     with pytest.raises(ObservationToSignalViolation, match="only_admit_signal_may_map"):
-        map_observation_to_temporal_signal(
-            packet["observation"],
-            admission,
-            packet["alias_registry"],
-            packet["impact_policy"],
-        )
+        _map(values, observation, admission)
 
 
-def test_public_mapping_rejects_coordinated_resealed_registry_widening() -> None:
+def test_internal_mapping_rejects_coordinated_resealed_registry_widening() -> None:
     values = _inputs()
     observation, admission = _admit(values)
     assert observation is not None
@@ -588,15 +657,11 @@ def test_public_mapping_rejects_coordinated_resealed_registry_widening() -> None
     admission["alias_registry_digest"] = values["registry"]["alias_registry_digest"]
     admission["observation_digest"] = observation["observation_digest"]
     admission = _reseal(admission, "admission_digest")
-    with pytest.raises(
-        ObservationToSignalViolation, match="alias_registry_contract_not_exact"
-    ):
-        map_observation_to_temporal_signal(
-            observation, admission, values["registry"], values["impact"]
-        )
+    with pytest.raises(ObservationToSignalViolation, match="contract_not_exact"):
+        _map(values, observation, admission)
 
 
-def test_public_mapping_rejects_coordinated_resealed_observation_links() -> None:
+def test_internal_mapping_rejects_coordinated_resealed_observation_links() -> None:
     values = _inputs()
     observation, admission = _admit(values)
     assert observation is not None
@@ -608,12 +673,10 @@ def test_public_mapping_rejects_coordinated_resealed_observation_links() -> None
     with pytest.raises(
         ObservationToSignalViolation, match="observation_contract_not_exact"
     ):
-        map_observation_to_temporal_signal(
-            observation, admission, values["registry"], values["impact"]
-        )
+        _map(values, observation, admission)
 
 
-def test_public_mapping_rejects_resealed_alias_resolution_substitution() -> None:
+def test_internal_mapping_rejects_resealed_alias_resolution_substitution() -> None:
     values = _inputs()
     observation, admission = _admit(values)
     assert observation is not None
@@ -621,15 +684,11 @@ def test_public_mapping_rejects_resealed_alias_resolution_substitution() -> None
         "synthetic:appointment:substituted"
     )
     values["registry"] = _reseal(values["registry"], "alias_registry_digest")
-    with pytest.raises(
-        ObservationToSignalViolation, match="alias_registry_contract_not_exact"
-    ):
-        map_observation_to_temporal_signal(
-            observation, admission, values["registry"], values["impact"]
-        )
+    with pytest.raises(ObservationToSignalViolation, match="contract_not_exact"):
+        _map(values, observation, admission)
 
 
-def test_public_mapping_rejects_resealed_impact_route_substitution() -> None:
+def test_internal_mapping_rejects_resealed_impact_route_substitution() -> None:
     values = _inputs()
     observation, admission = _admit(values)
     assert observation is not None
@@ -637,12 +696,8 @@ def test_public_mapping_rejects_resealed_impact_route_substitution() -> None:
         "emr4.substituted.v1"
     )
     values["impact"] = _reseal(values["impact"], "impact_policy_digest")
-    with pytest.raises(
-        ObservationToSignalViolation, match="impact_policy_contract_not_exact"
-    ):
-        map_observation_to_temporal_signal(
-            observation, admission, values["registry"], values["impact"]
-        )
+    with pytest.raises(ObservationToSignalViolation, match="contract_not_exact"):
+        _map(values, observation, admission)
 
 
 def test_temporal_handoff_retires_without_mutating_old_frame_bytes_or_reading() -> None:
