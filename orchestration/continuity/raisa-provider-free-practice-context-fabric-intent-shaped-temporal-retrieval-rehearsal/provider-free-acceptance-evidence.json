@@ -1,0 +1,94 @@
+{
+  "api_spine_checks": {
+    "new_graphql_resolvers": 0,
+    "new_graphql_roots": 0,
+    "new_rest_commands": 0,
+    "new_subscriptions": 0,
+    "read_context_remains_non_command": true
+  },
+  "artifact_hashes": {
+    "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-design.md": "31cd30c5aaf70366bd57ab2d34dcb4a43dbb5077fe88bda0e298f07e04ea93bb",
+    "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-plan.md": "ba7a5b6a1afaf6f89edbe550c02b11776849c55e61d66f97983ad30049042d68",
+    "docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md": "ccbd2efc76f475ae33e89760868cb3b9237b45120902bc81cda0f55bd5bd4499",
+    "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.schema.json": "3f5b6935c353201acaae255cce0dd13918b34c03ecd74d57dcea84baec638ade",
+    "scripts/raisa_provider_free_practice_context_fabric_intent_shaped_temporal_retrieval_rehearsal.py": "7cc7330d80c7998a2ff82cca579da71e51fc128d983912edf6d3defe8d4bc413",
+    "scripts/raisa_provider_free_practice_context_fabric_intent_shaped_temporal_retrieval_rehearsal_acceptance.py": "7eab7f0bfa5a21c07688c0cf22ddefca87d397a2c85452afbaa07ff071edc0a3",
+    "tests/test_raisa_provider_free_practice_context_fabric_intent_shaped_temporal_retrieval_rehearsal.py": "7be74eddd8b869c534644bfb31febbd1b547bdbb41ccfdb1bb522f10568d2f63"
+  },
+  "artifact_set_digest": "sha256:4a00be3a2041e68b9ca27dd8e0a1f4642baf2ddbb651e4ff778107a3121d4018",
+  "authority_and_side_effects": {
+    "billing_operations": 0,
+    "clinical_authority_operations": 0,
+    "command_operations": 0,
+    "database_operations": 0,
+    "deployment_operations": 0,
+    "event_listener_operations": 0,
+    "filesystem_write_operations_by_engine": 0,
+    "network_operations": 0,
+    "prescribing_operations": 0,
+    "product_runtime_operations": 0,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "referral_operations": 0,
+    "source_read_operations": 0,
+    "subprocess_operations_by_engine": 0
+  },
+  "claim_boundary": "Unmounted provider-free authored-synthetic intent-to-context selection only; no natural-language classification, patient/product data, provider, live retrieval, watcher, runtime, clinical or administrative command, deployment or protected-ref claim.",
+  "deterministic_checks": {
+    "ambiguous_reference_returns_alternatives": true,
+    "bilateral_memory_share_admitted": true,
+    "brand_is_not_authority": true,
+    "candidate_authority_injection_blocked": true,
+    "closed_objects": true,
+    "coverage_gap_not_absence": true,
+    "current_four_source_component_atomic": [
+      "CURRENT_APPOINTMENT_STATUS",
+      "CURRENT_WAIT_MINUTES",
+      "CURRENT_PRACTITIONER_ROLE",
+      "CURRENT_SESSION_PROPOSAL_STATE"
+    ],
+    "explicit_vocabulary_mapping": true,
+    "identity_assertions": 0,
+    "invalidated_current_blocked": true,
+    "known_then_and_corrected_later_distinct": [
+      2,
+      3
+    ],
+    "minimal_component_results": {
+      "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON": [
+        "CURRENT_OPERATIONAL",
+        "HISTORICAL_OPERATIONAL"
+      ],
+      "CURRENT_OPERATIONAL_STATUS": [
+        "CURRENT_OPERATIONAL"
+      ],
+      "HISTORICAL_OPERATIONAL_STATE": [
+        "HISTORICAL_OPERATIONAL"
+      ],
+      "RECENT_PRACTICE_WORK": [
+        "BUREAU_MEMORY"
+      ]
+    },
+    "private_session_cross_bureau_blocked": true,
+    "same_packet_content_tamper_blocked": true,
+    "same_packet_proofreader_release": true,
+    "schema_valid": true
+  },
+  "evidence_label": "provider_free_authored_synthetic_intent_shaped_temporal_retrieval",
+  "passed": true,
+  "result": "raisa_provider_free_practice_context_fabric_intent_shaped_temporal_retrieval_rehearsal_pass",
+  "schema_version": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval_acceptance.v1",
+  "source_binding": {
+    "artifact_count": 7,
+    "checkout_line_endings_normalized": true,
+    "git_head_self_reference_forbidden": true,
+    "mode": "canonical_lf_artifact_hashes_with_external_exact_head_receipt"
+  },
+  "static_checks": {
+    "api_surface_changes": 0,
+    "application_imports": 0,
+    "caller_clocked": true,
+    "forbidden_calls": [],
+    "forbidden_imports": []
+  }
+}

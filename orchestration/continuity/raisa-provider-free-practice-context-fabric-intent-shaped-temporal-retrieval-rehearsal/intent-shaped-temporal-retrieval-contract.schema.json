@@ -1,0 +1,510 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/intent-shaped-temporal-retrieval-contract.schema.json",
+  "title": "EMR4 provider-free intent-shaped temporal retrieval rehearsal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_label",
+    "data_class",
+    "candidate",
+    "authority_binding",
+    "source_catalog",
+    "intent_plan",
+    "selection_trace",
+    "frame_set",
+    "authority_ceiling",
+    "blocked_boundaries",
+    "assembled_at",
+    "proofreader_trace",
+    "contract_digest"
+  ],
+  "properties": {
+    "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_intent_shaped_temporal_retrieval"},
+    "data_class": {"const": "authored_synthetic_patient_free_context_metadata"},
+    "candidate": {"$ref": "#/$defs/Candidate"},
+    "authority_binding": {"$ref": "#/$defs/Binding"},
+    "source_catalog": {"$ref": "#/$defs/Catalog"},
+    "intent_plan": {"$ref": "#/$defs/Plan"},
+    "selection_trace": {"$ref": "#/$defs/SelectionTrace"},
+    "frame_set": {"$ref": "#/$defs/FrameSet"},
+    "authority_ceiling": {"const": "read_context_only"},
+    "blocked_boundaries": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/Code"}
+    },
+    "assembled_at": {"$ref": "#/$defs/Instant"},
+    "proofreader_trace": {"$ref": "#/$defs/Proofreader"},
+    "contract_digest": {"$ref": "#/$defs/Digest"}
+  },
+  "$defs": {
+    "SchemaVersion": {
+      "const": "emr4.practice_context_fabric_intent_shaped_temporal_retrieval.v1"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "Instant": {"type": "string", "format": "date-time"},
+    "Ref": {"type": "string", "minLength": 1, "maxLength": 256},
+    "Code": {"type": "string", "minLength": 1, "maxLength": 128},
+    "DigestArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/Digest"}
+    },
+    "CodeArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/Code"}
+    },
+    "TimeWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["starts_at", "ends_at"],
+      "properties": {
+        "starts_at": {"$ref": "#/$defs/Instant"},
+        "ends_at": {"$ref": "#/$defs/Instant"}
+      }
+    },
+    "TemporalCoordinate": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["valid_at", "known_at"],
+          "properties": {
+            "valid_at": {"$ref": "#/$defs/Instant"},
+            "known_at": {"$ref": "#/$defs/Instant"}
+          }
+        }
+      ]
+    },
+    "Candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "candidate_id",
+        "requesting_bureau",
+        "intent_code",
+        "requested_components",
+        "requested_field_profiles",
+        "temporal_coordinate",
+        "maximum_components",
+        "maximum_facts",
+        "maximum_bytes",
+        "maximum_alternatives",
+        "issued_at",
+        "read_only",
+        "provider_authority",
+        "command_authority",
+        "candidate_digest"
+      ],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "candidate_id": {"$ref": "#/$defs/Ref"},
+        "requesting_bureau": {"enum": ["BERNIE", "RAYLEEN"]},
+        "intent_code": {
+          "enum": [
+            "CURRENT_OPERATIONAL_STATUS",
+            "RECENT_PRACTICE_WORK",
+            "HISTORICAL_OPERATIONAL_STATE",
+            "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON",
+            "RECENT_OPERATIONAL_REFERENCE"
+          ]
+        },
+        "requested_components": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"enum": ["CURRENT_OPERATIONAL", "BUREAU_MEMORY", "HISTORICAL_OPERATIONAL"]}
+        },
+        "requested_field_profiles": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "CURRENT_MINIMAL",
+              "MEMORY_MINIMAL",
+              "MEMORY_REFERENCE_MINIMAL",
+              "HISTORICAL_MINIMAL"
+            ]
+          }
+        },
+        "temporal_coordinate": {"$ref": "#/$defs/TemporalCoordinate"},
+        "maximum_components": {"type": "integer", "minimum": 1, "maximum": 3},
+        "maximum_facts": {"type": "integer", "minimum": 1, "maximum": 32},
+        "maximum_bytes": {"type": "integer", "minimum": 256, "maximum": 64000},
+        "maximum_alternatives": {"type": "integer", "minimum": 1, "maximum": 5},
+        "issued_at": {"$ref": "#/$defs/Instant"},
+        "read_only": {"const": true},
+        "provider_authority": {"const": false},
+        "command_authority": {"const": false},
+        "candidate_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "binding_id",
+        "principal_ref",
+        "practice_id",
+        "location_refs",
+        "session_id",
+        "session_generation",
+        "allowed_requesting_bureaus",
+        "allowed_intents",
+        "allowed_components",
+        "allowed_field_profiles",
+        "bilateral_shares",
+        "upstream_binding_digests",
+        "allowed_catalog_digest",
+        "authorized_time_window",
+        "maximum_components",
+        "maximum_facts",
+        "maximum_bytes",
+        "maximum_alternatives",
+        "policy_version",
+        "issued_at",
+        "expires_at",
+        "read_only",
+        "provider_authority",
+        "command_authority",
+        "binding_digest"
+      ],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "binding_id": {"$ref": "#/$defs/Ref"},
+        "principal_ref": {"$ref": "#/$defs/Ref"},
+        "practice_id": {"$ref": "#/$defs/Ref"},
+        "location_refs": {"$ref": "#/$defs/CodeArray"},
+        "session_id": {"$ref": "#/$defs/Ref"},
+        "session_generation": {"type": "integer", "minimum": 1},
+        "allowed_requesting_bureaus": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["BERNIE", "RAYLEEN"]}
+        },
+        "allowed_intents": {"$ref": "#/$defs/CodeArray"},
+        "allowed_components": {"$ref": "#/$defs/CodeArray"},
+        "allowed_field_profiles": {"$ref": "#/$defs/CodeArray"},
+        "bilateral_shares": {"$ref": "#/$defs/CodeArray"},
+        "upstream_binding_digests": {"$ref": "#/$defs/DigestArray"},
+        "allowed_catalog_digest": {"$ref": "#/$defs/Digest"},
+        "authorized_time_window": {"$ref": "#/$defs/TimeWindow"},
+        "maximum_components": {"type": "integer", "minimum": 1, "maximum": 3},
+        "maximum_facts": {"type": "integer", "minimum": 1, "maximum": 32},
+        "maximum_bytes": {"type": "integer", "minimum": 256, "maximum": 64000},
+        "maximum_alternatives": {"type": "integer", "minimum": 1, "maximum": 5},
+        "policy_version": {"$ref": "#/$defs/Code"},
+        "issued_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"},
+        "read_only": {"const": true},
+        "provider_authority": {"const": false},
+        "command_authority": {"const": false},
+        "binding_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "fact_id",
+        "component_code",
+        "originating_bureau",
+        "purpose_code",
+        "frame_type",
+        "source_class",
+        "subject_ref",
+        "fact_code",
+        "value_kind",
+        "value",
+        "valid_at",
+        "known_at",
+        "upstream_digest",
+        "read_only",
+        "command_authority",
+        "fact_digest"
+      ],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "fact_id": {"$ref": "#/$defs/Ref"},
+        "component_code": {"enum": ["CURRENT_OPERATIONAL", "BUREAU_MEMORY", "HISTORICAL_OPERATIONAL"]},
+        "originating_bureau": {"enum": ["RAYLEEN", "rayleen"]},
+        "purpose_code": {"enum": ["CURRENT_OPERATIONAL_AWARENESS", "recent_practice_work", "TEMPORAL_OPERATIONAL_RECALL"]},
+        "frame_type": {"$ref": "#/$defs/Code"},
+        "source_class": {"$ref": "#/$defs/Code"},
+        "subject_ref": {"$ref": "#/$defs/Ref"},
+        "fact_code": {
+          "enum": [
+            "CURRENT_APPOINTMENT_STATUS",
+            "CURRENT_WAIT_MINUTES",
+            "CURRENT_PRACTITIONER_ROLE",
+            "CURRENT_SESSION_PROPOSAL_STATE",
+            "RECENT_REQUEST_LABEL",
+            "HISTORICAL_WAITING_COUNT"
+          ]
+        },
+        "value_kind": {"enum": ["CODE", "COUNT", "REF", "TIME"]},
+        "value": {"oneOf": [{"type": "string", "maxLength": 256}, {"type": "integer"}]},
+        "valid_at": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/Instant"}]},
+        "known_at": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/Instant"}]},
+        "upstream_digest": {"$ref": "#/$defs/Digest"},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "fact_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "component_id",
+        "component_code",
+        "canonical_bureau",
+        "upstream_bureau",
+        "upstream_purpose",
+        "shareability",
+        "contains_private_session",
+        "upstream_packet_digest",
+        "upstream_binding_digest",
+        "upstream_proofreader_digest",
+        "upstream_frame_digests",
+        "source_revisions",
+        "current_state_digest",
+        "current_state",
+        "expires_at",
+        "facts",
+        "read_only",
+        "provider_authority",
+        "command_authority",
+        "component_digest"
+      ],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "component_id": {"$ref": "#/$defs/Ref"},
+        "component_code": {"enum": ["CURRENT_OPERATIONAL", "BUREAU_MEMORY", "HISTORICAL_OPERATIONAL"]},
+        "canonical_bureau": {"const": "RAYLEEN"},
+        "upstream_bureau": {"enum": ["RAYLEEN", "rayleen"]},
+        "upstream_purpose": {"enum": ["CURRENT_OPERATIONAL_AWARENESS", "recent_practice_work", "TEMPORAL_OPERATIONAL_RECALL"]},
+        "shareability": {"enum": ["SAME_BUREAU_ONLY", "BILATERAL_ONLY"]},
+        "contains_private_session": {"type": "boolean"},
+        "upstream_packet_digest": {"$ref": "#/$defs/Digest"},
+        "upstream_binding_digest": {"$ref": "#/$defs/Digest"},
+        "upstream_proofreader_digest": {"$ref": "#/$defs/Digest"},
+        "upstream_frame_digests": {"$ref": "#/$defs/DigestArray"},
+        "source_revisions": {"$ref": "#/$defs/CodeArray"},
+        "current_state_digest": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/Digest"}]},
+        "current_state": {"oneOf": [{"type": "null"}, {"enum": ["CURRENT", "REASSEMBLY_REQUIRED", "EXPIRED", "REVOKED"]}]},
+        "expires_at": {"$ref": "#/$defs/Instant"},
+        "facts": {"type": "array", "minItems": 1, "maxItems": 16, "items": {"$ref": "#/$defs/Fact"}},
+        "read_only": {"const": true},
+        "provider_authority": {"const": false},
+        "command_authority": {"const": false},
+        "component_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "catalog_id", "components", "component_vocabulary_digest", "source_reads_executed", "read_only", "command_authority", "catalog_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "catalog_id": {"$ref": "#/$defs/Ref"},
+        "components": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/Component"}},
+        "component_vocabulary_digest": {"$ref": "#/$defs/Digest"},
+        "source_reads_executed": {"const": 0},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "catalog_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "plan_id",
+        "candidate_digest",
+        "binding_digest",
+        "intent_code",
+        "requesting_bureau",
+        "decision",
+        "required_components",
+        "field_profiles",
+        "ambiguity_policy",
+        "temporal_coordinate",
+        "maximum_components",
+        "maximum_facts",
+        "maximum_bytes",
+        "maximum_alternatives",
+        "reduction_reason_codes",
+        "policy_version",
+        "assembled_at",
+        "expires_at",
+        "read_only",
+        "provider_authority",
+        "command_authority",
+        "plan_digest"
+      ],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "plan_id": {"$ref": "#/$defs/Ref"},
+        "candidate_digest": {"$ref": "#/$defs/Digest"},
+        "binding_digest": {"$ref": "#/$defs/Digest"},
+        "intent_code": {"$ref": "#/$defs/Code"},
+        "requesting_bureau": {"enum": ["BERNIE", "RAYLEEN", "NOT_AVAILABLE"]},
+        "decision": {"enum": ["ADMIT", "NOT_AVAILABLE"]},
+        "required_components": {"$ref": "#/$defs/CodeArray"},
+        "field_profiles": {"$ref": "#/$defs/CodeArray"},
+        "ambiguity_policy": {"enum": ["NONE", "RETURN_ALTERNATIVES"]},
+        "temporal_coordinate": {"$ref": "#/$defs/TemporalCoordinate"},
+        "maximum_components": {"type": "integer", "minimum": 0, "maximum": 3},
+        "maximum_facts": {"type": "integer", "minimum": 0, "maximum": 32},
+        "maximum_bytes": {"type": "integer", "minimum": 0, "maximum": 64000},
+        "maximum_alternatives": {"type": "integer", "minimum": 0, "maximum": 5},
+        "reduction_reason_codes": {"$ref": "#/$defs/CodeArray"},
+        "policy_version": {"$ref": "#/$defs/Code"},
+        "assembled_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"},
+        "read_only": {"const": true},
+        "provider_authority": {"const": false},
+        "command_authority": {"const": false},
+        "plan_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "SelectedComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "component_code",
+        "originating_bureau",
+        "purpose_code",
+        "upstream_component_digest",
+        "upstream_packet_digest",
+        "upstream_binding_digest",
+        "upstream_proofreader_digest",
+        "upstream_frame_digests",
+        "source_revisions",
+        "facts",
+        "expires_at",
+        "read_only",
+        "provider_authority",
+        "command_authority",
+        "selected_component_digest"
+      ],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "component_code": {"enum": ["CURRENT_OPERATIONAL", "BUREAU_MEMORY", "HISTORICAL_OPERATIONAL"]},
+        "originating_bureau": {"const": "RAYLEEN"},
+        "purpose_code": {"enum": ["CURRENT_OPERATIONAL_AWARENESS", "recent_practice_work", "TEMPORAL_OPERATIONAL_RECALL"]},
+        "upstream_component_digest": {"$ref": "#/$defs/Digest"},
+        "upstream_packet_digest": {"$ref": "#/$defs/Digest"},
+        "upstream_binding_digest": {"$ref": "#/$defs/Digest"},
+        "upstream_proofreader_digest": {"$ref": "#/$defs/Digest"},
+        "upstream_frame_digests": {"$ref": "#/$defs/DigestArray"},
+        "source_revisions": {"$ref": "#/$defs/CodeArray"},
+        "facts": {"type": "array", "minItems": 1, "maxItems": 16, "items": {"$ref": "#/$defs/Fact"}},
+        "expires_at": {"$ref": "#/$defs/Instant"},
+        "read_only": {"const": true},
+        "provider_authority": {"const": false},
+        "command_authority": {"const": false},
+        "selected_component_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Alternative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "alternative_id", "opaque_subject_ref", "discriminator_code", "upstream_fact_digest", "identity_asserted", "read_only", "command_authority", "alternative_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "alternative_id": {"$ref": "#/$defs/Ref"},
+        "opaque_subject_ref": {"$ref": "#/$defs/Ref"},
+        "discriminator_code": {"const": "OPAQUE_RECENT_WORK_REFERENCE"},
+        "upstream_fact_digest": {"$ref": "#/$defs/Digest"},
+        "identity_asserted": {"const": false},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "alternative_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "SelectionTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "candidate_digest", "binding_digest", "plan_digest", "catalog_digest", "selected_component_digests", "omission_reason_codes", "fact_count", "disclosed_bytes", "ambiguity_state", "source_reads_executed", "command_operations", "selection_trace_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "candidate_digest": {"$ref": "#/$defs/Digest"},
+        "binding_digest": {"$ref": "#/$defs/Digest"},
+        "plan_digest": {"$ref": "#/$defs/Digest"},
+        "catalog_digest": {"$ref": "#/$defs/Digest"},
+        "selected_component_digests": {"$ref": "#/$defs/DigestArray"},
+        "omission_reason_codes": {"$ref": "#/$defs/CodeArray"},
+        "fact_count": {"type": "integer", "minimum": 0, "maximum": 32},
+        "disclosed_bytes": {"type": "integer", "minimum": 0, "maximum": 64000},
+        "ambiguity_state": {"enum": ["NONE", "ALTERNATIVES", "NOT_AVAILABLE"]},
+        "source_reads_executed": {"const": 0},
+        "command_operations": {"const": 0},
+        "selection_trace_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "FrameSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "frame_set_id", "candidate_digest", "binding_digest", "plan_digest", "catalog_digest", "selection_trace_digest", "disposition", "components", "ambiguity_state", "alternatives", "omission_reason_codes", "assembled_at", "expires_at", "maximum_disclosure_bytes", "read_only", "provider_authority", "command_authority", "frame_set_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "frame_set_id": {"$ref": "#/$defs/Ref"},
+        "candidate_digest": {"$ref": "#/$defs/Digest"},
+        "binding_digest": {"$ref": "#/$defs/Digest"},
+        "plan_digest": {"$ref": "#/$defs/Digest"},
+        "catalog_digest": {"$ref": "#/$defs/Digest"},
+        "selection_trace_digest": {"$ref": "#/$defs/Digest"},
+        "disposition": {"enum": ["ADMIT", "ALTERNATIVES", "NOT_AVAILABLE"]},
+        "components": {"type": "array", "maxItems": 3, "items": {"$ref": "#/$defs/SelectedComponent"}},
+        "ambiguity_state": {"enum": ["NONE", "ALTERNATIVES", "NOT_AVAILABLE"]},
+        "alternatives": {"type": "array", "maxItems": 5, "items": {"$ref": "#/$defs/Alternative"}},
+        "omission_reason_codes": {"$ref": "#/$defs/CodeArray"},
+        "assembled_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"},
+        "maximum_disclosure_bytes": {"type": "integer", "minimum": 0, "maximum": 64000},
+        "read_only": {"const": true},
+        "provider_authority": {"const": false},
+        "command_authority": {"const": false},
+        "frame_set_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Proofreader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "packet_digest", "checked_at", "checks", "release_decision", "reason_codes", "read_only", "provider_authority", "command_authority", "proofreader_trace_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "packet_digest": {"$ref": "#/$defs/Digest"},
+        "checked_at": {"$ref": "#/$defs/Instant"},
+        "checks": {"$ref": "#/$defs/CodeArray"},
+        "release_decision": {"enum": ["RELEASE", "BLOCK"]},
+        "reason_codes": {"$ref": "#/$defs/CodeArray"},
+        "read_only": {"const": true},
+        "provider_authority": {"const": false},
+        "command_authority": {"const": false},
+        "proofreader_trace_digest": {"$ref": "#/$defs/Digest"}
+      }
+    }
+  }
+}
