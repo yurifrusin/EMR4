@@ -1,0 +1,94 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_durability_count_bucket_and_rotation_chronology_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton and standing authority permit uninterrupted recovery within the pure provider-free unmounted authored-synthetic durability rehearsal; every live app, database/source, product-data, provider, command, runtime, deployment, Pages and protected-ref surface remains closed.",
+    "current_authority_allocation": "GPT Sol retains the named recovery lease, explicit-path commit, acceptance and baton authority. The completed third reviewer had exact-head read-only veto authority only, and no external worker/provider lane is active.",
+    "active_plan_and_acceptance": "The third veto rejected 62d0cc54 because cause three was prematurely bucketed FIVE_PLUS and rotation chronology could be reassigned to an audit. The recovery now derives exact cause count from canonical audits while exporting only the closed bucket, and records a minimal payload-free rotation-revision ledger whose union with audit revisions exactly and disjointly covers lifecycle. Thirty-three cases and 207 serial checks pass. AER-0050 remains open pending a fourth fresh veto.",
+    "protected_evidence_boundaries": "The commit is limited to the pure module/test, regenerated schema/evidence, preserved third veto and its review preflight/predispatch evidence, AER revision 47 register/report/test, and this receipt pair. No branding or unrelated untracked artifact may be staged; no app, migration, Diary, API route, database/source, product data, provider, command, runtime, deployment, Pages or protected ref may be opened.",
+    "git_refs_and_worktree": "Task HEAD is 62d0cc5402fe93c4f37cf23f587fc04a7daf01c3 on codex/ariadne-bernie-davida-parallel-seam; origin task remains 9e26c0b87f8b37e761ec12da8f0fc090e7b8dec0. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit recovery paths will be staged; docs/branding and all unrelated untracked files remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_count_rotation_recovery_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Exact cause-bucket and lifecycle forgeries now reject; 33 evidence cases, 207 serial checks, Ruff and diff checks pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The third exact-head veto is preserved as revision-required and left its worktree clean."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "No external provider/model call is authorised."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-codex-durability-state-machine-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-semantic-recovery-review-worktree-preflight.json"
+  ],
+  "assigned_agent_ids": []
+}

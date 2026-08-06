@@ -11,7 +11,7 @@
       "case_id": "relevant_selective_retirement",
       "disposition": "ADVANCE_AFTER_ATOMIC_COMMIT",
       "passed": true,
-      "state_digest": "sha256:13ee3273f003906f4b7d609932447217a85da61bb731569ae9fb91a0a7aea898",
+      "state_digest": "sha256:ee7b5e5b70ec99cac5e0ae74b13851925ee17e2763d4f91efbea5d4ace042605",
       "mutation_committed": true,
       "proof_codes": [
         "SELECTIVE_WATERMARK",
@@ -23,7 +23,7 @@
       "case_id": "exact_redelivery",
       "disposition": "EXACT_REDELIVERY",
       "passed": true,
-      "state_digest": "sha256:13ee3273f003906f4b7d609932447217a85da61bb731569ae9fb91a0a7aea898",
+      "state_digest": "sha256:ee7b5e5b70ec99cac5e0ae74b13851925ee17e2763d4f91efbea5d4ace042605",
       "mutation_committed": false,
       "proof_codes": [
         "CONSTANT_TIME_DIGEST",
@@ -35,7 +35,7 @@
       "case_id": "irrelevant_contiguous",
       "disposition": "ADVANCE_AFTER_RECEIPT_AND_AUDIT",
       "passed": true,
-      "state_digest": "sha256:23eb46931f3ecd45e9088fc2fa487b1d740c4ee3a030e9bc143d4a49a55e6350",
+      "state_digest": "sha256:883b82007675bd27fc9af915511dc7f2d471e6f777e1572f624771af78cb310d",
       "mutation_committed": true,
       "proof_codes": [
         "NO_INVALIDATION",
@@ -47,7 +47,7 @@
       "case_id": "coalesced_later_cause",
       "disposition": "ADVANCE_AFTER_ATOMIC_COMMIT",
       "passed": true,
-      "state_digest": "sha256:e39db388015c74bcd2252074ded7e0b7ff00d20c2ddd4a487cca338ed3836f0e",
+      "state_digest": "sha256:922667bac65d7c04a263b99b9161e893af6c052e07df2b4a388567bc271fea21",
       "mutation_committed": true,
       "proof_codes": [
         "ONE_OBLIGATION",
@@ -59,7 +59,7 @@
       "case_id": "contiguous_full_invalidation",
       "disposition": "ADVANCE_AFTER_ATOMIC_COMMIT",
       "passed": true,
-      "state_digest": "sha256:71e6f11251f03260b263e5a0f9cb0a2932604fc98ac55fdc8aa7eff85d5bf2ba",
+      "state_digest": "sha256:ce3c5f637f5c5634cd96f8038bd358b4a6168c474d223abf6a301cf147f3b66e",
       "mutation_committed": true,
       "proof_codes": [
         "BOTH_WATERMARKS",
@@ -71,7 +71,7 @@
       "case_id": "coverage_gap",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:55e2df93ff8040ee23e27199c4cd5d2b6cf81c2e9a75a79b4c18e64845f1bd68",
+      "state_digest": "sha256:7f231826baa0a06b070ca2423d7907b55f45d7c9cf32f0bc701953a5476bdc62",
       "mutation_committed": true,
       "proof_codes": [
         "CHECKPOINT_HELD",
@@ -83,7 +83,7 @@
       "case_id": "same_position_mismatch",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:9a52d77b5f86911fbab5479b748aaf72f842aa1f3d9aac6146eb7e34b3520a31",
+      "state_digest": "sha256:dde40c0e8f51d6fbab07c7e5a909a315663661497d1dd2e139968a792213639e",
       "mutation_committed": true,
       "proof_codes": [
         "CHECKPOINT_HELD",
@@ -95,7 +95,7 @@
       "case_id": "digest_reuse",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:cb0982b07c79a3b85ff4cdb14e743c17fe56e6ec8f75868acc1014a1d9639004",
+      "state_digest": "sha256:68a7f95ffdb5df5519f077ace9801b1e514f8dc1a682a3eab0277727a6414c91",
       "mutation_committed": true,
       "proof_codes": [
         "CHECKPOINT_HELD",
@@ -107,7 +107,7 @@
       "case_id": "rollback_receipt",
       "disposition": "ROLLED_BACK",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "ORIGINAL_STATE",
@@ -119,7 +119,7 @@
       "case_id": "rollback_watermark",
       "disposition": "ROLLED_BACK",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "ORIGINAL_STATE",
@@ -131,7 +131,7 @@
       "case_id": "rollback_obligation",
       "disposition": "ROLLED_BACK",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "ORIGINAL_STATE",
@@ -143,7 +143,7 @@
       "case_id": "rollback_audit",
       "disposition": "ROLLED_BACK",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "ORIGINAL_STATE",
@@ -155,7 +155,7 @@
       "case_id": "rollback_checkpoint",
       "disposition": "ROLLED_BACK",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "ORIGINAL_STATE",
@@ -167,7 +167,7 @@
       "case_id": "restart_resume",
       "disposition": "RESUME",
       "passed": true,
-      "state_digest": "sha256:13ee3273f003906f4b7d609932447217a85da61bb731569ae9fb91a0a7aea898",
+      "state_digest": "sha256:ee7b5e5b70ec99cac5e0ae74b13851925ee17e2763d4f91efbea5d4ace042605",
       "mutation_committed": false,
       "proof_codes": [
         "INTEGRITY_VALID",
@@ -179,7 +179,7 @@
       "case_id": "restart_gap",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:c2053dfef9475789aa628037d38918745226d0742f5fffa5d6498fda7ddd6ea2",
+      "state_digest": "sha256:4d8c85112e79b809902dba4112e3368f6b5d8048ddc5724620c8de13ed930beb",
       "mutation_committed": true,
       "proof_codes": [
         "ANCHOR_EXACT",
@@ -225,7 +225,7 @@
       "case_id": "key_rotation_commit",
       "disposition": "ROTATION_COMMITTED",
       "passed": true,
-      "state_digest": "sha256:6ea03916fc93366343aa6ddb6a5a3968778ec23e64fcdf1b115161968cb9ecc9",
+      "state_digest": "sha256:8d3aaaaf1a0381ffd552be813ba8349d24e9dc55dbc7142397979415755d3ee6",
       "mutation_committed": true,
       "proof_codes": [
         "ATOMIC_ROTATION",
@@ -237,7 +237,7 @@
       "case_id": "key_rotation_retroactive",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:200e332ed28eb24b69e8bf42751161357f360d3c27cb72135f1854038a4ab19c",
+      "state_digest": "sha256:b181142998cbfd221c217996be2105496151776eac48178186029338287a8243",
       "mutation_committed": true,
       "proof_codes": [
         "RETROACTIVE_REJECTED",
@@ -248,7 +248,7 @@
       "case_id": "key_rotation_underlap",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:c4284ce0cf8fecff1e2947d038346226d3162bc7fcc1a5c26ffce44498e4b450",
+      "state_digest": "sha256:cc90917d1459607308507511c215cf0bf16bdaa68a05bac1d5fcdb35cb0749b9",
       "mutation_committed": true,
       "proof_codes": [
         "UNDERLAP_REJECTED",
@@ -259,7 +259,7 @@
       "case_id": "key_rotation_missing_predecessor",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:c4284ce0cf8fecff1e2947d038346226d3162bc7fcc1a5c26ffce44498e4b450",
+      "state_digest": "sha256:cc90917d1459607308507511c215cf0bf16bdaa68a05bac1d5fcdb35cb0749b9",
       "mutation_committed": true,
       "proof_codes": [
         "MISSING_KEY_REJECTED",
@@ -270,7 +270,7 @@
       "case_id": "key_schedule_gap",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:c4284ce0cf8fecff1e2947d038346226d3162bc7fcc1a5c26ffce44498e4b450",
+      "state_digest": "sha256:cc90917d1459607308507511c215cf0bf16bdaa68a05bac1d5fcdb35cb0749b9",
       "mutation_committed": true,
       "proof_codes": [
         "GAP_REJECTED",
@@ -281,7 +281,7 @@
       "case_id": "key_schedule_history_change",
       "disposition": "REBASE_REQUIRED",
       "passed": true,
-      "state_digest": "sha256:c4284ce0cf8fecff1e2947d038346226d3162bc7fcc1a5c26ffce44498e4b450",
+      "state_digest": "sha256:cc90917d1459607308507511c215cf0bf16bdaa68a05bac1d5fcdb35cb0749b9",
       "mutation_committed": true,
       "proof_codes": [
         "HISTORY_CHANGE_REJECTED",
@@ -292,7 +292,7 @@
       "case_id": "retention_eligible",
       "disposition": "ELIGIBLE",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "COMPLETE_CENSUS",
@@ -304,7 +304,7 @@
       "case_id": "retention_minimum_checkpoint",
       "disposition": "DENIED",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "SLOWEST_GENERATION_CONTROLS",
@@ -315,7 +315,7 @@
       "case_id": "retention_omitted_generation",
       "disposition": "DENIED",
       "passed": true,
-      "state_digest": "sha256:0f8aa2d6a79ce213f4f35b9844780ef08b507542d8a1244ccf650906442cbfdb",
+      "state_digest": "sha256:bb00891685f1c03bd6ececec7bbd1adfa9bf0abdffcfc626ab0eb5c46891c6ba",
       "mutation_committed": false,
       "proof_codes": [
         "CENSUS_DIGEST_MISMATCH",
@@ -327,7 +327,7 @@
       "case_id": "retention_duplicate_generation",
       "disposition": "DENIED",
       "passed": true,
-      "state_digest": "sha256:b56fab2775dee60f92b88af6bbfccd0327acf44084bcda9543efb392239edcd4",
+      "state_digest": "sha256:0462e17b3757652f7da2158d2d2beb1714d85120b5f3fcb9a50be020db48e873",
       "mutation_committed": false,
       "proof_codes": [
         "CENSUS_INTEGRITY_FAILED",
@@ -338,7 +338,7 @@
       "case_id": "retention_recovery_pin",
       "disposition": "DENIED",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "RECOVERY_PIN",
@@ -349,7 +349,7 @@
       "case_id": "retention_audit_pin",
       "disposition": "DENIED",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "AUDIT_PIN",
@@ -360,7 +360,7 @@
       "case_id": "retention_key_overlap",
       "disposition": "DENIED",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "KEY_OVERLAP_OPEN",
@@ -371,7 +371,7 @@
       "case_id": "retention_safety_grace",
       "disposition": "DENIED",
       "passed": true,
-      "state_digest": "sha256:78d3928a2230371b4f4566ebc17f76d4edf36ac96d7b8b6d05acbf6a4762f512",
+      "state_digest": "sha256:a52bfabd53670f33ffad2e50dc6675a3ae08f8a986f493c1880d2b3b579e0ad2",
       "mutation_committed": false,
       "proof_codes": [
         "SAFETY_GRACE_PENDING",

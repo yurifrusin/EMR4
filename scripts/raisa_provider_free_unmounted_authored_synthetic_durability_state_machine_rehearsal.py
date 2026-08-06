@@ -191,6 +191,7 @@ class DurabilityState:
     obligations: tuple[ReassemblyObligation, ...]
     receipts: tuple[ClassifiedReceipt, ...]
     audits: tuple[AuditRecord, ...]
+    key_rotation_revisions: tuple[int, ...]
     key_schedule: tuple[KeyInterval, ...]
     generation_census: GenerationCensus
     integrity_digest: str
@@ -463,6 +464,16 @@ def verify_state(state: DurabilityState) -> bool:
         return False
     if state.lifecycle_revision != len(state.audits) + len(state.key_schedule):
         return False
+    if (
+        len(state.key_rotation_revisions) != len(state.key_schedule) - 1
+        or state.key_rotation_revisions
+        != tuple(sorted(set(state.key_rotation_revisions)))
+        or any(
+            revision < 2 or revision > state.lifecycle_revision
+            for revision in state.key_rotation_revisions
+        )
+    ):
+        return False
     watermarks = dict(state.watermarks)
     if any(type(value) is not int or value < 0 for value in watermarks.values()):
         return False
@@ -565,6 +576,12 @@ def verify_state(state: DurabilityState) -> bool:
         return False
     audit_order = [(item.lifecycle_revision, item.position) for item in state.audits]
     if audit_order != sorted(audit_order) or len(audit_order) != len(set(audit_order)):
+        return False
+    if set(audit_revisions).intersection(state.key_rotation_revisions):
+        return False
+    if sorted((*audit_revisions, *state.key_rotation_revisions)) != list(
+        range(2, state.lifecycle_revision + 1)
+    ):
         return False
     receipts_by_position = {item.position: item for item in state.receipts}
     previous_audit: AuditRecord | None = None
@@ -829,12 +846,6 @@ def _candidate_valid(candidate: Candidate) -> bool:
     return candidate.affected_frame_types == FRAME_TYPES
 
 
-def _next_bucket(bucket: str) -> str:
-    if bucket == "ONE":
-        return "TWO_TO_FOUR"
-    return "FIVE_PLUS"
-
-
 def _bucket_count(value: int) -> str:
     if value == 0:
         return "ZERO"
@@ -884,13 +895,18 @@ def _retire_and_obligate(
                 count_bucket="ONE",
             )
         elif position > existing.latest_position:
+            exact_cause_count = 1 + sum(
+                1
+                for audit in state.audits
+                if frame.frame_type in audit.affected_frame_types
+            )
             prior_obligations[frame.frame_generation_id] = replace(
                 existing,
                 latest_position=position,
                 rolling_cause_digest=digest_value(
                     [existing.rolling_cause_digest, cause_digest, position]
                 ),
-                count_bucket=_next_bucket(existing.count_bucket),
+                count_bucket=_bucket_count(exact_cause_count),
             )
             coalesced += 1
     return (
@@ -912,6 +928,7 @@ def _rederive_effects(
     frames = _BASELINE_FRAMES
     watermarks = {frame_type: 0 for frame_type in FRAME_TYPES}
     obligations: dict[str, ReassemblyObligation] = {}
+    cause_counts: dict[str, int] = {}
     for audit in audits:
         force_all = audit.decision in (
             "CONTIGUOUS_FULL_INVALIDATION",
@@ -936,6 +953,7 @@ def _rederive_effects(
                 continue
             existing = obligations.get(frame.frame_generation_id)
             if existing is None:
+                cause_counts[frame.frame_generation_id] = 1
                 obligations[frame.frame_generation_id] = ReassemblyObligation(
                     frame_generation_id=frame.frame_generation_id,
                     frame_type=frame.frame_type,
@@ -952,6 +970,7 @@ def _rederive_effects(
                     count_bucket="ONE",
                 )
             elif audit.position > existing.latest_position:
+                cause_counts[frame.frame_generation_id] += 1
                 obligations[frame.frame_generation_id] = replace(
                     existing,
                     latest_position=audit.position,
@@ -962,7 +981,9 @@ def _rederive_effects(
                             audit.position,
                         ]
                     ),
-                    count_bucket=_next_bucket(existing.count_bucket),
+                    count_bucket=_bucket_count(
+                        cause_counts[frame.frame_generation_id]
+                    ),
                 )
                 coalesced += 1
         if (
@@ -1352,6 +1373,10 @@ def apply_key_rotation(
                 key_schedule=rotation.successor_schedule,
                 key_schedule_digest=successor_digest,
                 lifecycle_revision=state.lifecycle_revision + 1,
+                key_rotation_revisions=(
+                    *state.key_rotation_revisions,
+                    state.lifecycle_revision + 1,
+                ),
                 integrity_digest="",
             )
         ),
@@ -1442,6 +1467,7 @@ def build_initial_state() -> DurabilityState:
         obligations=(),
         receipts=(_BASELINE_RECEIPT,),
         audits=(),
+        key_rotation_revisions=(),
         key_schedule=schedule,
         generation_census=census,
         integrity_digest="",

@@ -104,6 +104,22 @@ def test_later_relevant_cause_coalesces_one_obligation_and_never_reopens_frame()
     assert second.frames[0].lifecycle == "RETIRED"
 
 
+def test_coalesced_count_bucket_changes_only_at_exact_fifth_cause() -> None:
+    state = build_initial_state()
+    observed = []
+    for position in range(5, 10):
+        state = transition(state, candidate_for(state, position=position)).state
+        observed.append(state.obligations[0].count_bucket)
+        assert verify_state(state)
+    assert observed == [
+        "ONE",
+        "TWO_TO_FOUR",
+        "TWO_TO_FOUR",
+        "TWO_TO_FOUR",
+        "FIVE_PLUS",
+    ]
+
+
 def test_full_invalidation_retires_both_frame_types() -> None:
     state = build_initial_state()
     candidate = candidate_for(
@@ -512,11 +528,31 @@ def test_rotation_preserves_historical_audit_binding_and_future_transitions() ->
     state = apply_key_rotation(state, rotation).state
     assert verify_state(state)
     assert state.audits[-1].key_schedule_digest == predecessor_audit_digest
+    assert state.key_rotation_revisions == (3,)
 
     state = transition(state, candidate_for(state, position=6)).state
     state = transition(state, candidate_for(state, position=7)).state
     assert state.audits[-1].key_id == "key:beta"
     assert verify_state(state)
+
+    first, second, third = state.audits
+    forged_first = replace(first, lifecycle_revision=3)
+    forged_second = replace(
+        second,
+        prior_audit_digest=digest_value(asdict(forged_first)),
+    )
+    forged_third = replace(
+        third,
+        prior_audit_digest=digest_value(asdict(forged_second)),
+    )
+    forged = seal_state(
+        replace(
+            state,
+            audits=(forged_first, forged_second, forged_third),
+            integrity_digest="",
+        )
+    )
+    assert not verify_state(forged)
 
 
 def test_retention_uses_complete_integrity_bound_census_and_is_inert() -> None:
