@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_v4_flash_high_model_intent_shaping_provider_free_implementation",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the accepted provider-free retrieval parent and the exact frozen model-required intent-shaping plan. The provider-free contract and one-use controller implementation are the next bounded step before deterministic review or any occupied action.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance, recovery, provider execution, integration and protected-ref authority. One DeepSeek V4 Flash/high worker through Claude Code bare may implement only the named provider-free owned paths and commit its non-protected worker branch. Gemini 3.6 Flash/high remains a later independent read-only veto.",
+    "active_plan_and_acceptance": "The controlling plan, design and threat delta are committed at source 5ddc052fae16298436d8873312e48464d52a9567. Worker packet SHA-256 is 3b1c5f7bf7e38be23251634348d7817f6f079a5d3d17e751caf6baaa255166d1 and fixes the exact synthetic utterance, closed candidate, 1024/2048 request, two deterministic proofreaders, new ledgers, no fallback and zero-call worker boundary.",
+    "protected_evidence_boundaries": "The worker may edit only the four new scripts, one new focused test and eight named files under the new continuity directory. It may not call a provider, inspect credentials, run Docker, open product/database/runtime/API/command surfaces, edit accepted parents, plans, AGENTS, API Spine, global Continuity/Compass, docs/branding, protected evidence or refs, deploy, release or push.",
+    "git_refs_and_worktree": "Primary task source is 5ddc052fae16298436d8873312e48464d52a9567. Fresh clean worker worktree C:/Users/sarashera/EMR4-worktrees/context-fabric-model-intent-shaping is on non-protected branch codex/context-fabric-model-intent-shaping-worker at the same source. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary untracked user artifacts are outside the worker index."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_intent_shaping_worker_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the exact source, packet, branch, owned paths and clean isolated worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned; the named external DeepSeek worker is the implementation lane."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Independent source review remains closed until the implementation candidate passes deterministic gates."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The exact deepseek-v4-flash/high Claude Code bare launcher and packet are selected with no fallback."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is the transport wrapper only; no Claude model lane is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": ["context-fabric-model-intent-shaping-implementation-001"],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "context-fabric-model-intent-shaping-implementation-001",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\context-fabric-model-intent-shaping",
+      "branch": "codex/context-fabric-model-intent-shaping-worker",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-06T16:51:12.6657689+10:00",
+      "source_head": "5ddc052fae16298436d8873312e48464d52a9567",
+      "candidate_head": "5ddc052fae16298436d8873312e48464d52a9567"
+    }
+  ],
+  "assigned_agent_ids": ["context-fabric-model-intent-shaping-implementation-001"]
+}

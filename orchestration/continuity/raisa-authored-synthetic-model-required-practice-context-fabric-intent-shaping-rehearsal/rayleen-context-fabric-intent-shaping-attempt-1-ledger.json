@@ -1,0 +1,12 @@
+{
+  "attempt_id": "raisa-intent-shaping-primary-001",
+  "fallback_permitted": false,
+  "lane": "rayleen_context_fabric_intent_shaping",
+  "ledger_id": "ledger-raisa-intent-shaping-primary-001",
+  "maximum_provider_calls": 0,
+  "policy_id": "raisa-context-fabric-model-required-intent-shaping-sydney-v1",
+  "provider_calls_consumed": 0,
+  "reserved_cost_usd": 0,
+  "schema_version": "emr4.raisa_intent_shaping.single_use_ledger.v1",
+  "status": "consumed"
+}

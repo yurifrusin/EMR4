@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_bounded_sol_recovery_and_zero_call_provider_free_evidence_on_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the frozen authored-synthetic model-required Context Fabric intent-shaping rehearsal as current next work. The candidate is not accepted and no occupied call has occurred.",
+    "current_authority_allocation": "GPT Sol owns recovery and task-branch integration. DeepSeek V4 Flash/high completed its initial worker pass and single allowed same-lane repair; that correction loop is exhausted. Gemini 3.6 Flash/high remains the mandatory fresh exact-HEAD independent read-only veto after this commit.",
+    "active_plan_and_acceptance": "The frozen plan, design and threat delta remain unchanged. The recovery lease limits Sol amendments to provider-schema compatibility, fresh live expiry enforcement, closed digest-bound evidence summaries and direct regressions. Provider-free acceptance and an isolated zero-call dry-run pass within those limits.",
+    "protected_evidence_boundaries": "This event permits only an explicit-path task-branch commit of the named candidate, worker/recovery receipts and provider-free evidence. It grants no provider call, ADC preflight, credential inspection, patient or product data, product runtime/API/database/command surface, clinical or administrative authority, deployment, release, Pages, protected evidence mutation or protected-ref movement. All unrelated untracked files and docs/branding remain preserved.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at ce317df5e28bc0fad17c315199afda0b0ecdc012 with six intended tracked Sol amendments and named untracked audit/evidence files. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. No protected ref moved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_intent_shaping_sol_recovery_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol amendments, focused tests, provider-free acceptance and the isolated zero-call Docker rehearsal passed with complete owned cleanup."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned; Sol owns the recovery commit."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Independent Gemini source review remains closed until this candidate is committed at an exact clean review HEAD."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The initial and one bounded repair worker results are preserved; the same-lane correction loop is exhausted."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected for this descendant."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare was only the completed DeepSeek transport wrapper; no Claude model lane is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

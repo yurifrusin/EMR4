@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_single_bounded_deepseek_v4_flash_high_model_intent_shaping_mechanical_repair",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the exact frozen authored-synthetic model-required Context Fabric intent-shaping descendant as current next work. The first worker candidate is unintegrated and GPT Sol review found bounded mechanical release-immutability, correction-routing, thinking-evidence and exact-review-binding defects before any provider call.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance, recovery, provider execution, integration and protected-ref authority. Under the Flash correction-loop rule, the exact DeepSeek V4 Flash/high worker through Claude Code bare may receive one same-lane mechanical revision only. Gemini 3.6 Flash/high remains the later independent read-only veto.",
+    "active_plan_and_acceptance": "The frozen plan, design and threat delta remain unchanged at planning source 5ddc052fae16298436d8873312e48464d52a9567. Rejected worker candidate d0d7584ff02df0d311b3f71d556cb95333292a82 remains unintegrated. Repair packet SHA-256 is 7c42e6ec20937a4026cb58d43bbbedcdad274b8465ac94423179043a2cfa0bfe and permits only five named implementation/test paths with zero provider calls.",
+    "protected_evidence_boundaries": "The repair worker may edit only the four new intent-shaping scripts and one focused test named in the packet. It may not call a provider, inspect credentials, run Docker, open product/database/runtime/API/command surfaces, edit schemas or accepted parents without stopping, edit plans, AGENTS, API Spine, global Continuity/Compass, docs/branding, protected evidence or refs, deploy, release or push.",
+    "git_refs_and_worktree": "Primary task HEAD is 5ddc052fae16298436d8873312e48464d52a9567. Clean worker worktree C:/Users/sarashera/EMR4-worktrees/context-fabric-model-intent-shaping is on codex/context-fabric-model-intent-shaping-worker at rejected candidate d0d7584ff02df0d311b3f71d556cb95333292a82. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary untracked user artifacts remain outside the worker index and preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_intent_shaping_repair_worker_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed exact-source read-only review, classified the defects as mechanical and verified protected refs plus the clean isolated repair worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned; the named external DeepSeek worker is the one permitted same-lane repair resource."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Independent source review remains closed until the repaired candidate passes deterministic gates."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The exact deepseek-v4-flash/high Claude Code bare launcher and the single bounded mechanical repair packet are selected with no fallback."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is the transport wrapper only; no Claude model lane is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": ["context-fabric-model-intent-shaping-mechanical-repair-001"],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "context-fabric-model-intent-shaping-mechanical-repair-001",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\context-fabric-model-intent-shaping",
+      "branch": "codex/context-fabric-model-intent-shaping-worker",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-06T17:24:28.8052644+10:00",
+      "source_head": "d0d7584ff02df0d311b3f71d556cb95333292a82",
+      "candidate_head": "d0d7584ff02df0d311b3f71d556cb95333292a82"
+    }
+  ],
+  "assigned_agent_ids": ["context-fabric-model-intent-shaping-mechanical-repair-001"]
+}

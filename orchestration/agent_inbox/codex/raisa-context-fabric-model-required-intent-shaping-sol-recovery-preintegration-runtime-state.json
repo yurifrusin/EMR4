@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "fast_forward_untrusted_worker_source_then_apply_bounded_sol_recovery_without_provider_execution",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the exact frozen model-required Context Fabric intent-shaping descendant as current next work. The provider-free candidate remains unaccepted and no occupied action has occurred.",
+    "current_authority_allocation": "GPT Sol is the recovery and integration owner. The single allowed DeepSeek V4 Flash/high same-lane revision is exhausted at ce317df5e28bc0fad17c315199afda0b0ecdc012; no further worker correction is permitted. Gemini 3.6 Flash/high remains the later exact-HEAD read-only veto.",
+    "active_plan_and_acceptance": "The frozen plan/design/threat delta at planning source 5ddc052fae16298436d8873312e48464d52a9567 remain unchanged. The named Sol recovery lease preserves worker commits d0d7584ff02df0d311b3f71d556cb95333292a82 and ce317df5e28bc0fad17c315199afda0b0ecdc012 as untrusted source and limits Sol to provider-schema compatibility, fresh live expiry, closed digest-bound evidence summaries and direct regressions.",
+    "protected_evidence_boundaries": "Integration is task-branch-only source adoption. No provider call, preflight, credential inspection, Docker run, product/database/API/command surface, patient or product data, accepted parent, protected evidence, docs/branding, deployment, release, Pages or protected-ref movement is authorised by this event. All unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean at 5ddc052fae16298436d8873312e48464d52a9567 with preserved untracked files. Worker branch codex/context-fabric-model-intent-shaping-worker is clean at ce317df5e28bc0fad17c315199afda0b0ecdc012 and is a direct descendant. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_intent_shaping_sol_recovery_preintegration_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reviewed both worker commits, ran the focused/inherited serial suite and static gates, preserved the remaining findings, and opened the named recovery lease before source adoption."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent or second worker correction is assigned; Sol owns the bounded recovery amendments."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh independent veto remains closed until Sol recovery passes deterministic gates at an exact clean candidate HEAD."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Initial and single mechanical-repair worker receipts are preserved; their source is adopted as untrusted and their acceptance claims are not transferred."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected for recovery."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare was the completed DeepSeek transport wrapper only; no Claude model lane is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "openai-primary-orchestrator",
+      "worktree": "C:\\Users\\sarashera\\emr4",
+      "branch": "codex/ariadne-bernie-davida-parallel-seam",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-06T17:45:00+10:00",
+      "source_head": "5ddc052fae16298436d8873312e48464d52a9567",
+      "candidate_head": "ce317df5e28bc0fad17c315199afda0b0ecdc012"
+    }
+  ],
+  "assigned_agent_ids": ["openai-primary-orchestrator"]
+}

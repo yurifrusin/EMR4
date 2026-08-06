@@ -14,6 +14,8 @@ provider packet through the identical parser, wrapper and proofreaders.
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
+from datetime import datetime, timedelta, timezone
 import json
 import os
 from pathlib import Path
@@ -170,6 +172,21 @@ def _positive_thinking_evidence(metadata: dict[str, Any]) -> bool:
     return contracts.positive_thinking_evidence(metadata)
 
 
+def _fresh_live_request(*, now: datetime | None = None) -> dict[str, Any]:
+    """Materialise the exact short-lived occupied request without changing the fixture."""
+    instant = now or datetime.now(timezone.utc)
+    if instant.tzinfo is None or instant.utcoffset() is None:
+        raise live.LiveError("live_request_clock_invalid")
+    issued = instant.astimezone(timezone.utc).replace(microsecond=0)
+    expires = issued + timedelta(seconds=contracts.LIVE_REQUEST_TTL_SECONDS)
+    if issued.date().isoformat() != contracts.SYNTHETIC_REFERENCE_DATE:
+        raise live.LiveError("live_request_date_outside_frozen_plan")
+    return contracts.build_intent_shaping_request(
+        issued_at=issued.isoformat().replace("+00:00", "Z"),
+        expires_at=expires.isoformat().replace("+00:00", "Z"),
+    )
+
+
 def _run_attempt(**keywords: Any) -> dict[str, Any]:
     live.subprocess.Popen = _intent_popen
     try:
@@ -268,6 +285,7 @@ def _tranche_evidence(
         if admitted
         else "raisa_intent_shaping_occupied_terminal_rejection"
     )
+    summaries = [_attempt_summary(item) for item in lane_results]
     evidence = {
         "schema_version": "emr4.raisa_intent_shaping.tranche_evidence.v1",
         "result": result,
@@ -279,7 +297,10 @@ def _tranche_evidence(
         "mode": mode,
         "combined_pass": admitted,
         "intent_admitted": admitted,
-        "lane_results": lane_results,
+        # Final tranche evidence retains only closed digest-bound summaries.
+        # The separately written attempt evidence remains hash-bound here and
+        # contains the sealed typed release when admission occurred.
+        "lane_results": summaries,
         "candidate_runtime_provider_call_count": ledger[
             "provider_calls_consumed"
         ],
@@ -315,6 +336,79 @@ def _tranche_evidence(
     }
     evidence["evidence_hash"] = contracts.prefixed_sha256(evidence)
     return evidence
+
+
+def _attempt_summary(attempt: dict[str, Any]) -> dict[str, Any]:
+    """Reduce one parent attempt to the final closed evidence allowlist."""
+    required = {
+        "result",
+        "mode",
+        "lane",
+        "attempt_id",
+        "attempt_number",
+        "provider_contacted",
+        "provider_call_count",
+        "proofreader_verdict",
+        "proofreader_reason_code",
+        "correction_eligible",
+        "cleanup_passed",
+        "evidence_hash",
+    }
+    if not required.issubset(attempt):
+        raise live.LiveError("attempt_evidence_summary_invalid")
+    if (
+        attempt["mode"] not in {"dry-run", "live"}
+        or attempt["lane"] != contracts.LANE
+        or attempt["attempt_number"] not in {1, 2}
+        or attempt["provider_call_count"] not in {0, 1}
+        or attempt["proofreader_verdict"]
+        not in {"admitted", "rejected", "not_reached"}
+        or type(attempt["provider_contacted"]) is not bool
+        or type(attempt["correction_eligible"]) is not bool
+        or type(attempt["cleanup_passed"]) is not bool
+    ):
+        raise live.LiveError("attempt_evidence_summary_invalid")
+    evidence_path = live._attempt_paths(
+        contracts.LANE,
+        attempt["attempt_number"],
+        mode=attempt["mode"],
+    )["evidence"]
+    if not evidence_path.is_file():
+        raise live.LiveError("attempt_evidence_summary_missing")
+    release = attempt.get("release")
+    release_digest = None
+    parent_packet_digest = None
+    if attempt["proofreader_verdict"] == "admitted":
+        if not isinstance(release, dict):
+            raise live.LiveError("attempt_release_missing")
+        try:
+            contracts.validate_release_integrity(release)
+        except contracts.ContractError as error:
+            raise live.LiveError("attempt_release_invalid") from error
+        release_digest = release["release_digest"]
+        parent_packet_digest = release["parent_packet"]["contract_digest"]
+    elif release is not None:
+        raise live.LiveError("attempt_release_unexpected")
+    summary = {
+        "schema_version": "emr4.raisa_intent_shaping.attempt_summary.v1",
+        "result": attempt["result"],
+        "mode": attempt["mode"],
+        "lane": attempt["lane"],
+        "attempt_id": attempt["attempt_id"],
+        "attempt_number": attempt["attempt_number"],
+        "provider_contacted": attempt["provider_contacted"],
+        "provider_call_count": attempt["provider_call_count"],
+        "proofreader_verdict": attempt["proofreader_verdict"],
+        "proofreader_reason_code": attempt["proofreader_reason_code"],
+        "correction_eligible": attempt["correction_eligible"],
+        "release_digest": release_digest,
+        "parent_packet_digest": parent_packet_digest,
+        "attempt_evidence_path": evidence_path.relative_to(ROOT).as_posix(),
+        "attempt_evidence_hash": live._file_hash(evidence_path),
+        "cleanup_passed": attempt["cleanup_passed"],
+        "attempt_evidence_digest": attempt["evidence_hash"],
+    }
+    return deepcopy(summary)
 
 
 def _configure() -> None:
@@ -372,7 +466,11 @@ def run_tranche(
             execution_context_path = DRY_RUN_CONTEXT_PATH
         if execution_context_path.exists():
             raise live.LiveError("execution_context_already_exists")
-        execution_context = contracts.build_intent_shaping_request()
+        execution_context = (
+            _fresh_live_request()
+            if mode == "live"
+            else contracts.build_intent_shaping_request()
+        )
         live._write_json(execution_context_path, execution_context)
         contracts.RAYLEEN_CONTEXT_PATH = execution_context_path
         contracts.DAVIDA_CONTEXT_PATH = execution_context_path
@@ -435,6 +533,7 @@ def run_tranche(
             execution_context_path=execution_context_path,
             review_path=source_review_path,
         )
+        contracts.validate_instance(OCCUPIED_EVIDENCE_SCHEMA, evidence)
         live._write_json(output_path, evidence)
         return evidence
     finally:

@@ -1,0 +1,123 @@
+{
+  "artifact_hashes": {
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/authored-synthetic-intent-shaping-request.json": "sha256:08bbfef5e6822d940ec9b414da1ce26b0d33ec1c7af23cc7925e3e669e440dde",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/cell-request.schema.json": "sha256:384d8a0fd101067803c78179ff0f36f3f41141cd7eb77e96693516f75f400a99",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/cost-ledger.schema.json": "sha256:dabcdcc9b9e4062d2bd043a746af7e70632ca5a1a407c9349b47aa0e5c85d2ad",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/intent-shaping-request.schema.json": "sha256:9554143f182358d7edb0432ee180c54c326c418e90a3db6ecdbd63d4901400f5",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/model-intent-candidate-envelope.schema.json": "sha256:432c5fe55edd21372d8a182961faae54dc1370456e9d10e289cfc5770b2a37f7",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.schema.json": "sha256:7acc8589dfaca9a201bf7e96675f47454cf624e624d7c5ebe3d3aba8c05c6e47",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-intent-body.schema.json": "sha256:0362f2f812183499bd07caf232da817f00fe0339f10920429315fdc97ece8050",
+    "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/single-use-ledger.schema.json": "sha256:f9d3c06893ff14444369469b36931af1d1b58df044ade7cb3e43624a391a6ea5",
+    "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py": "sha256:ea91a4fd885a788b3778f2060c69add54715ab6d776c6466edd61efd10203410",
+    "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker.py": "sha256:09c527ad1125c4c3c001608194cef2ae1819bb0d499e7dc9723b582f104469b7",
+    "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts.py": "sha256:425d179e0e1dbe7c36fdab2a141fbfcbb01d101adef8324d0b355f5cf476fc64",
+    "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live.py": "sha256:bb8f4f3d0600aaa095d1e25e51881506666b20f56615f1d38867bd036825efc7",
+    "tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py": "sha256:60ff54b8349dedeb082541e806fff4cdeef112d65783e15ae7f82fddd68946df"
+  },
+  "artifact_set_digest": "sha256:cc5441111f41291be9ddd77724ecadb69adbac431159f7698061a37bbaad5237",
+  "authority_and_side_effects": {
+    "billing_operations": 0,
+    "clinical_authority_operations": 0,
+    "cloud_or_iam_mutation_operations": 0,
+    "command_operations": 0,
+    "database_operations": 0,
+    "deployment_operations": 0,
+    "event_listener_operations": 0,
+    "filesystem_write_operations_by_contracts": 0,
+    "network_operations": 0,
+    "prescribing_operations": 0,
+    "product_runtime_operations": 0,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "referral_operations": 0,
+    "source_read_operations": 0,
+    "subprocess_operations_by_contracts": 0
+  },
+  "claim_boundary": "Provider-free authored-synthetic closed-intent model path through the accepted deterministic Context Fabric retrieval contract only; no natural-language coverage claim, patient/product data, live retrieval, watcher, runtime, clinical or administrative command, deployment or protected-ref claim.",
+  "deterministic_checks": {
+    "acceptance_generator_in_reviewed_sources": true,
+    "all_false_authority_ceiling": true,
+    "all_five_fixtures_traverse_parent": {
+      "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON": "ADMIT",
+      "CURRENT_OPERATIONAL_STATUS": "ADMIT",
+      "HISTORICAL_OPERATIONAL_STATE": "ADMIT",
+      "RECENT_OPERATIONAL_REFERENCE": "ADMIT",
+      "RECENT_PRACTICE_WORK": "ADMIT"
+    },
+    "body_schema_closed_enum_bounded": true,
+    "canonical_cue_order_in_prompt": true,
+    "closed_digest_bound_attempt_summaries": true,
+    "envelope_digest_tamper_blocked": true,
+    "extra_cue_blocked": true,
+    "fixture_dispositions": {
+      "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON": "ADMIT",
+      "CURRENT_OPERATIONAL_STATUS": "ADMIT",
+      "HISTORICAL_OPERATIONAL_STATE": "ADMIT",
+      "RECENT_OPERATIONAL_REFERENCE": "ALTERNATIVES",
+      "RECENT_PRACTICE_WORK": "ADMIT"
+    },
+    "fresh_live_request_expiry_enforced": true,
+    "missing_cue_blocked": true,
+    "no_fallback": true,
+    "no_tools_or_cache_in_provider_request": true,
+    "occupied_classification_grounded": true,
+    "occupied_comparison_components": [
+      "CURRENT_OPERATIONAL",
+      "HISTORICAL_OPERATIONAL"
+    ],
+    "parent_tamper_blocked": true,
+    "positive_thinking_terminal_gate": true,
+    "prose_or_extra_field_blocked": true,
+    "provider_request_allocation_exact": true,
+    "provider_response_schema_supported_subset": true,
+    "release_immutable_after_zeroisation": true,
+    "release_tamper_blocked": true,
+    "request_tamper_blocked": true,
+    "resealed_candidate_tamper_blocked": true,
+    "schema_invalid_body_eligible_correction": true,
+    "schemas_closed_and_fixture_valid": true,
+    "true_authority_blocked": true,
+    "trusted_wrapper_supplies_parent_fields": true,
+    "two_call_ceiling": 2,
+    "usd_050_ceiling": 0.5,
+    "wrong_coordinate_blocked": true,
+    "wrong_intent_blocked": true,
+    "zero_provider_calls_in_dry_run": true
+  },
+  "evidence_label": "provider_free_authored_synthetic_model_intent_shaping",
+  "passed": true,
+  "result": "raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal_pass",
+  "schema_version": "emr4.raisa_intent_shaping_acceptance.v1",
+  "source_binding": {
+    "artifact_count": 13,
+    "checkout_line_endings_normalized": true,
+    "git_head_self_reference_forbidden": true,
+    "mode": "canonical_lf_artifact_hashes_with_external_exact_head_receipt"
+  },
+  "source_review_checks": {
+    "missing_wrong_receipt_fails": true,
+    "source_hashes": {
+      "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/authored-synthetic-intent-shaping-request.json": "sha256:08bbfef5e6822d940ec9b414da1ce26b0d33ec1c7af23cc7925e3e669e440dde",
+      "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/cell-request.schema.json": "sha256:384d8a0fd101067803c78179ff0f36f3f41141cd7eb77e96693516f75f400a99",
+      "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/cost-ledger.schema.json": "sha256:dabcdcc9b9e4062d2bd043a746af7e70632ca5a1a407c9349b47aa0e5c85d2ad",
+      "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/intent-shaping-request.schema.json": "sha256:9554143f182358d7edb0432ee180c54c326c418e90a3db6ecdbd63d4901400f5",
+      "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/model-intent-candidate-envelope.schema.json": "sha256:432c5fe55edd21372d8a182961faae54dc1370456e9d10e289cfc5770b2a37f7",
+      "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.schema.json": "sha256:7acc8589dfaca9a201bf7e96675f47454cf624e624d7c5ebe3d3aba8c05c6e47",
+      "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-intent-body.schema.json": "sha256:0362f2f812183499bd07caf232da817f00fe0339f10920429315fdc97ece8050",
+      "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/single-use-ledger.schema.json": "sha256:f9d3c06893ff14444369469b36931af1d1b58df044ade7cb3e43624a391a6ea5",
+      "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py": "sha256:ea91a4fd885a788b3778f2060c69add54715ab6d776c6466edd61efd10203410",
+      "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker.py": "sha256:09c527ad1125c4c3c001608194cef2ae1819bb0d499e7dc9723b582f104469b7",
+      "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts.py": "sha256:425d179e0e1dbe7c36fdab2a141fbfcbb01d101adef8324d0b355f5cf476fc64",
+      "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live.py": "sha256:bb8f4f3d0600aaa095d1e25e51881506666b20f56615f1d38867bd036825efc7",
+      "tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py": "sha256:60ff54b8349dedeb082541e806fff4cdeef112d65783e15ae7f82fddd68946df"
+    },
+    "source_path_count": 13,
+    "stale_receipt_fails": true
+  },
+  "static_checks": {
+    "api_surface_changes": 0,
+    "application_imports": 0,
+    "forbidden_calls": [],
+    "forbidden_imports": []
+  }
+}

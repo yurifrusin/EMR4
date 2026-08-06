@@ -12,6 +12,7 @@ makes zero provider calls.
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 import hmac
 from typing import Any, Mapping
 
@@ -133,6 +134,36 @@ def _provider_request(self: broker.BrokerState) -> dict[str, Any]:
     )
 
 
+def _validate_live_request_freshness(
+    request: dict[str, Any],
+    *,
+    now: datetime,
+) -> None:
+    """Require the exact short-lived occupied request window.
+
+    Provider-free fixtures remain deterministic and may carry their committed
+    synthetic issuance window. Only live broker admission applies wall-clock
+    freshness, independently of the controller that materialised the request.
+    """
+    if now.tzinfo is None or now.utcoffset() is None:
+        raise broker.BrokerError("live_request_clock_invalid")
+    try:
+        issued_at = datetime.fromisoformat(
+            request["issued_at"].replace("Z", "+00:00")
+        )
+        expires_at = datetime.fromisoformat(
+            request["expires_at"].replace("Z", "+00:00")
+        )
+    except (KeyError, TypeError, ValueError) as error:
+        raise broker.BrokerError("live_request_window_invalid") from error
+    now_utc = now.astimezone(timezone.utc)
+    lifetime_seconds = int((expires_at - issued_at).total_seconds())
+    if lifetime_seconds != contracts.LIVE_REQUEST_TTL_SECONDS:
+        raise broker.BrokerError("live_request_lifetime_invalid")
+    if not issued_at <= now_utc < expires_at:
+        raise broker.BrokerError("live_request_not_fresh")
+
+
 def _validate_request_and_context(self: broker.BrokerState) -> None:
     try:
         contracts.validate_instance(
@@ -146,6 +177,11 @@ def _validate_request_and_context(self: broker.BrokerState) -> None:
         contracts.validate_intent_shaping_request(self.context)
     except contracts.ContractError as error:
         raise broker.BrokerError("context_invalid") from error
+    if self.mode == "live":
+        _validate_live_request_freshness(
+            self.context,
+            now=datetime.now(timezone.utc),
+        )
     context_hash = contracts.prefixed_sha256(self.context)
     if not hmac.compare_digest(
         self.expected_request["context_hash"], context_hash

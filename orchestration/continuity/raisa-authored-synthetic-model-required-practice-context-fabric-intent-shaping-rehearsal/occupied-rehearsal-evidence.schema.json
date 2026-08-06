@@ -1,95 +1,225 @@
 {
   "$id": "https://emr4.invalid/schemas/raisa-intent-shaping-occupied-rehearsal-evidence.v1.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "nullable_digest": {
+      "anyOf": [
+        {"$ref": "#/$defs/digest"},
+        {"type": "null"}
+      ]
+    },
+    "attempt_summary": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {"properties": {"mode": {"const": "dry-run"}}},
+          "then": {
+            "properties": {
+              "provider_call_count": {"const": 0},
+              "provider_contacted": {"const": false}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"mode": {"const": "live"}}},
+          "then": {
+            "properties": {
+              "provider_call_count": {"const": 1},
+              "provider_contacted": {"const": true}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"proofreader_verdict": {"const": "admitted"}}},
+          "then": {
+            "properties": {
+              "parent_packet_digest": {"$ref": "#/$defs/digest"},
+              "release_digest": {"$ref": "#/$defs/digest"},
+              "result": {"const": "attempt_pass"}
+            }
+          },
+          "else": {
+            "properties": {
+              "parent_packet_digest": {"const": null},
+              "release_digest": {"const": null}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"attempt_number": {"const": 1}}},
+          "then": {
+            "properties": {
+              "attempt_id": {"const": "raisa-intent-shaping-primary-001"},
+              "attempt_evidence_path": {
+                "pattern": "^orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/rayleen-context-fabric-intent-shaping-attempt-1-(dry-run|occupied)-evidence\\.json$"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "attempt_id": {"const": "raisa-intent-shaping-correction-002"},
+              "attempt_evidence_path": {
+                "pattern": "^orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/rayleen-context-fabric-intent-shaping-attempt-2-(dry-run|occupied)-evidence\\.json$"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "attempt_evidence_digest": {"$ref": "#/$defs/digest"},
+        "attempt_evidence_hash": {"$ref": "#/$defs/digest"},
+        "attempt_evidence_path": {"type": "string"},
+        "attempt_id": {"type": "string"},
+        "attempt_number": {"enum": [1, 2]},
+        "cleanup_passed": {"const": true},
+        "correction_eligible": {"type": "boolean"},
+        "lane": {"const": "rayleen_context_fabric_intent_shaping"},
+        "mode": {"enum": ["dry-run", "live"]},
+        "parent_packet_digest": {"$ref": "#/$defs/nullable_digest"},
+        "proofreader_reason_code": {
+          "anyOf": [
+            {"pattern": "^[a-z0-9_]+$", "type": "string"},
+            {"type": "null"}
+          ]
+        },
+        "proofreader_verdict": {
+          "enum": ["admitted", "rejected", "not_reached"]
+        },
+        "provider_call_count": {"enum": [0, 1]},
+        "provider_contacted": {"type": "boolean"},
+        "release_digest": {"$ref": "#/$defs/nullable_digest"},
+        "result": {
+          "enum": [
+            "attempt_pass",
+            "attempt_revision_required",
+            "attempt_terminal_rejection"
+          ]
+        },
+        "schema_version": {
+          "const": "emr4.raisa_intent_shaping.attempt_summary.v1"
+        }
+      },
+      "required": [
+        "schema_version",
+        "result",
+        "mode",
+        "lane",
+        "attempt_id",
+        "attempt_number",
+        "provider_contacted",
+        "provider_call_count",
+        "proofreader_verdict",
+        "proofreader_reason_code",
+        "correction_eligible",
+        "release_digest",
+        "parent_packet_digest",
+        "attempt_evidence_path",
+        "attempt_evidence_hash",
+        "cleanup_passed",
+        "attempt_evidence_digest"
+      ],
+      "type": "object"
+    }
+  },
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal_pass"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "combined_pass": {"const": true},
+          "intent_admitted": {"const": true}
+        }
+      },
+      "else": {
+        "properties": {
+          "combined_pass": {"const": false},
+          "intent_admitted": {"const": false}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"mode": {"const": "dry-run"}}},
+      "then": {
+        "properties": {
+          "candidate_runtime_provider_call_count": {"const": 0},
+          "lane_results": {"maxItems": 1},
+          "reserved_cost_usd": {"const": 0},
+          "source_review_receipt_hash": {"const": null},
+          "source_review_transport_nonzero": {"const": false}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"mode": {"const": "live"}}},
+      "then": {
+        "properties": {
+          "candidate_runtime_provider_call_count": {
+            "maximum": 2,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "source_review_receipt_hash": {"$ref": "#/$defs/digest"},
+          "source_review_transport_nonzero": {"const": true}
+        }
+      }
+    }
+  ],
   "properties": {
-    "actuator_count": {
-      "const": 0
-    },
-    "authored_synthetic_context_count": {
-      "const": 1
-    },
+    "actuator_count": {"const": 0},
+    "authored_synthetic_context_count": {"const": 1},
     "candidate_runtime_provider_call_count": {
       "maximum": 2,
       "minimum": 0,
       "type": "integer"
     },
-    "cloud_or_iam_mutation_count": {
-      "const": 0
-    },
-    "combined_pass": {
-      "type": "boolean"
-    },
-    "command_count": {
-      "const": 0
-    },
-    "credential_or_token_retained": {
-      "const": false
-    },
-    "database_access_count": {
-      "const": 0
-    },
-    "deployment_count": {
-      "const": 0
-    },
-    "evidence_hash": {
-      "pattern": "^sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
+    "cloud_or_iam_mutation_count": {"const": 0},
+    "combined_pass": {"type": "boolean"},
+    "command_count": {"const": 0},
+    "credential_or_token_retained": {"const": false},
+    "database_access_count": {"const": 0},
+    "deployment_count": {"const": 0},
+    "evidence_hash": {"$ref": "#/$defs/digest"},
     "evidence_label": {
       "enum": [
         "provider_free_authored_synthetic_model_intent_shaping",
         "occupied_authored_synthetic_model_intent_shaping"
       ]
     },
-    "execution_context_hash": {
-      "pattern": "^sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "execution_context_materialized_fresh": {
-      "type": "boolean"
-    },
+    "execution_context_hash": {"$ref": "#/$defs/digest"},
+    "execution_context_materialized_fresh": {"const": true},
     "execution_context_path": {
-      "type": "string"
+      "enum": [
+        "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-authored-synthetic-intent-shaping-request.json",
+        "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-authored-synthetic-intent-shaping-request.json"
+      ]
     },
-    "fallback_count": {
-      "const": 0
-    },
-    "intent_admitted": {
-      "type": "boolean"
-    },
+    "fallback_count": {"const": 0},
+    "intent_admitted": {"type": "boolean"},
     "lane_results": {
+      "items": {"$ref": "#/$defs/attempt_summary"},
       "maxItems": 2,
       "minItems": 1,
       "type": "array"
     },
-    "maximum_cost_usd": {
-      "const": 0.5
-    },
-    "maximum_provider_calls": {
-      "const": 2
-    },
-    "mode": {
-      "enum": [
-        "dry-run",
-        "live"
-      ]
-    },
-    "patient_or_clinical_data_count": {
-      "const": 0
-    },
-    "protected_ref_movement_count": {
-      "const": 0
-    },
-    "provider_tool_call_count": {
-      "const": 0
-    },
-    "raw_prompt_retained": {
-      "const": false
-    },
-    "raw_provider_response_retained": {
-      "const": false
-    },
+    "maximum_cost_usd": {"const": 0.5},
+    "maximum_provider_calls": {"const": 2},
+    "mode": {"enum": ["dry-run", "live"]},
+    "patient_or_clinical_data_count": {"const": 0},
+    "protected_ref_movement_count": {"const": 0},
+    "provider_tool_call_count": {"const": 0},
+    "raw_prompt_retained": {"const": false},
+    "raw_provider_response_retained": {"const": false},
     "reserved_cost_usd": {
       "maximum": 0.5,
       "minimum": 0,
@@ -106,24 +236,31 @@
       "const": "emr4.raisa_intent_shaping.tranche_evidence.v1"
     },
     "source_hashes": {
-      "additionalProperties": {
-        "pattern": "^sha256:[0-9a-f]{64}$",
-        "type": "string"
+      "additionalProperties": {"$ref": "#/$defs/digest"},
+      "maxProperties": 13,
+      "minProperties": 13,
+      "propertyNames": {
+        "enum": [
+          "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/authored-synthetic-intent-shaping-request.json",
+          "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/cell-request.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/cost-ledger.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/intent-shaping-request.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/model-intent-candidate-envelope.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-intent-body.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/single-use-ledger.schema.json",
+          "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py",
+          "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker.py",
+          "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts.py",
+          "scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live.py",
+          "tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py"
+        ]
       },
       "type": "object"
     },
-    "source_review_receipt_hash": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "source_review_transport_nonzero": {
-      "type": "boolean"
-    },
-    "write_count": {
-      "const": 0
-    }
+    "source_review_receipt_hash": {"$ref": "#/$defs/nullable_digest"},
+    "source_review_transport_nonzero": {"type": "boolean"},
+    "write_count": {"const": 0}
   },
   "required": [
     "schema_version",

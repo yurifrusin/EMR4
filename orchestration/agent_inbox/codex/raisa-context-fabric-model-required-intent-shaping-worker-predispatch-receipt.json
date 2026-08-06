@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_v4_flash_high_model_intent_shaping_provider_free_implementation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling plan, design and threat delta are committed at source 5ddc052fae16298436d8873312e48464d52a9567. Worker packet SHA-256 is 3b1c5f7bf7e38be23251634348d7817f6f079a5d3d17e751caf6baaa255166d1 and fixes the exact synthetic utterance, closed candidate, 1024/2048 request, two deterministic proofreaders, new ledgers, no fallback and zero-call worker boundary.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance, recovery, provider execution, integration and protected-ref authority. One DeepSeek V4 Flash/high worker through Claude Code bare may implement only the named provider-free owned paths and commit its non-protected worker branch. Gemini 3.6 Flash/high remains a later independent read-only veto.",
+    "git_refs_and_worktree": "Primary task source is 5ddc052fae16298436d8873312e48464d52a9567. Fresh clean worker worktree C:/Users/sarashera/EMR4-worktrees/context-fabric-model-intent-shaping is on non-protected branch codex/context-fabric-model-intent-shaping-worker at the same source. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary untracked user artifacts are outside the worker index.",
+    "live_handover_current_baton": "AGENTS.md records the accepted provider-free retrieval parent and the exact frozen model-required intent-shaping plan. The provider-free contract and one-use controller implementation are the next bounded step before deterministic review or any occupied action.",
+    "protected_evidence_boundaries": "The worker may edit only the four new scripts, one new focused test and eight named files under the new continuity directory. It may not call a provider, inspect credentials, run Docker, open product/database/runtime/API/command surfaces, edit accepted parents, plans, AGENTS, API Spine, global Continuity/Compass, docs/branding, protected evidence or refs, deploy, release or push."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

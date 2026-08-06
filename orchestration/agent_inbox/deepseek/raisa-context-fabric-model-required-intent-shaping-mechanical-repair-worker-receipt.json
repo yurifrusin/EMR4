@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All repairs complete, committed, and verified. Here is the final report.\n\n---\n\n## Five-source rehydration statement\n\n- **`live_handover_current_baton`** \u2014 AGENTS.md \u00a73 read completely. Baton ref `handoff/current`; current result is the provider-free patient-free intent-shaped temporal retrieval rehearsal pass; next implementation is the frozen model-required intent-shaping descendant. Worker worktree root and branch confirmed.\n- **`current_authority_allocation`** \u2014 AGENTS.md \u00a74 read. GPT Sol holds Conductor/acceptance/recovery/integration/protected-ref authority. DeepSeek V4 Flash/high via Claude Code `--bare` is this bounded implementation/test lane. Gemini 3.6 Flash/high is the fresh independent veto reviewer. No fallback or authority move was exercised.\n- **`active_plan_and_acceptance`** \u2014 Frozen plan `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`, design, and threat-model delta read completely. Acceptance meaning, provider/model/region, cost ceiling, and product/clinical boundaries unchanged.\n- **`protected_evidence_boundaries`** \u2014 AGENTS.md \u00a75 read. Holdouts sealed; T3 paused; no patient/clinical/product data touched; `docs/branding/` and unrelated untracked receipt/evidence files preserved and excluded.\n- **`git_refs_and_worktree`** \u2014 Verified exact clean HEAD `d0d7584ff02df0d311b3f71d556cb95333292a82` before editing; branch `codex/context-fabric-model-intent-shaping-worker`; no protected ref altered; no push.\n\n## Repairs implemented (all five required)\n\n1. **Immutable release after zeroisation** \u2014 `_build_release` deep-copies `envelope`, `trace`, `candidate`, `packet`, `packet[\"proofreader_trace\"]`; regression test clears/mutates the original envelope after admission and proves the released envelope, release digest and nested body stay intact/valid.\n2. **Schema-invalid body reaches eligible correction path** \u2014 broker catches `wrap_provider_body` failure, hashes/discards the invalid object, releases nothing, and returns a structured rejection with exactly `provider_body_schema_invalid` and `correction_eligible: true`; field-label telemetry uses a fixed allowlist plus bounded counts; direct regression test added.\n3. **Positive-thinking failure is terminal and ledger-accountable** \u2014 broker rejects pre-release in live mode (`positive_thinking_evidence_required`, not correction-eligible) after the single-use ledger is consumed; `_run_attempt` no longer raises after a release or strands the cost ledger; live zero/missing/invalid and dry-run zero tests added.\n4. **Exact clean source-veto binding** \u2014 acceptance generator added to both reviewed-source hash sets; `_validate_source_review` binds `head_before == head_after`, `dirty_after: false`, current candidate HEAD, and tracked-clean worktree (untracked preserved files permitted); wrong-HEAD, dirty-review, tracked-drift, missing-acceptance-hash, and stale-hash tests fail closed.\n5. **Canonical cue ordering prompt** \u2014 prompt now explicitly requires canonical `CUE_CODES` order; exact-order proofreader unchanged; instruction-presence test added.\n\n## Commit / files / checks\n\n- **Commit:** `ce317df5e28bc0fad17c315199afda0b0ecdc012` \u2014 \"Repair model-required intent-shaping bounded defects\" (5 files, 649 insertions, 37 deletions).\n- **Owned files committed (explicit-path staging only):**\n  - `scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts.py`\n  - `scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker.py`\n  - `scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live.py`\n  - `scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py`\n  - `tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py`\n- **Checks:** `py -m py_compile` OK on all five; focused pure tests 36/36 passed; related pure plan + A3/B3 tests 117/117 passed; acceptance generator passes (`source_path_count: 13`); Ruff clean on all five; `git diff --check` clean; live vs acceptance reviewed-source hash sets identical (13 paths). No provider call, credential inspection, Docker, database, repository pytest (only `--noconftest` pure tests), push, deploy, or protected-ref action performed. No schema or forbidden file edited.\n\nAll five required repairs are complete with direct regression coverage. No new conceptual issue appeared, and no `revision_required` condition is present.\n\n`DECISION: pass`",
+  "usage": {
+    "input_tokens": 132789,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 13495936,
+    "output_tokens": 86208,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 9.587108,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

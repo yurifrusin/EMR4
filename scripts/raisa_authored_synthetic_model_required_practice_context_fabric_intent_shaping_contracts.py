@@ -79,6 +79,7 @@ MAX_CALLS_TOTAL = 2
 MAX_CALLS_PER_LANE = 2
 MAX_COST_USD = 0.50
 RESERVED_COST_PER_CALL_USD = 0.25
+LIVE_REQUEST_TTL_SECONDS = 600
 DRY_RUN_MODEL_VERSION = "provider-free-intent-shaping-fixture"
 
 LANE = "rayleen_context_fabric_intent_shaping"
@@ -327,8 +328,17 @@ def validate_provider_intent_body(body: dict[str, Any]) -> None:
     validate_instance(PROVIDER_BODY_SCHEMA_PATH, body)
 
 
-def build_intent_shaping_request() -> dict[str, Any]:
-    """Return the sealed occupied authored-synthetic request."""
+def build_intent_shaping_request(
+    *,
+    issued_at: str = OCCUPIED_ISSUED_AT,
+    expires_at: str = OCCUPIED_EXPIRES_AT,
+) -> dict[str, Any]:
+    """Return one sealed authored-synthetic request.
+
+    The defaults preserve the committed deterministic provider-free fixture.
+    The live controller supplies a fresh bounded issuance/expiry pair before
+    any occupied attempt; the broker independently verifies that live window.
+    """
     material = {
         "schema_version": REQUEST_SCHEMA_VERSION,
         "request_id": OCCUPIED_REQUEST_ID,
@@ -350,8 +360,8 @@ def build_intent_shaping_request() -> dict[str, Any]:
         "cue_codes": list(CUE_CODES),
         "parent_contract_digest": PARENT_CONTRACT_DIGEST,
         "parent_policy_digest": PARENT_POLICY_DIGEST,
-        "issued_at": OCCUPIED_ISSUED_AT,
-        "expires_at": OCCUPIED_EXPIRES_AT,
+        "issued_at": issued_at,
+        "expires_at": expires_at,
         "authority_ceiling": {key: False for key in AUTHORITY_KEYS},
     }
     request = seal(material, "request_digest")
@@ -384,7 +394,6 @@ def provider_response_schema() -> dict[str, Any]:
                 "items": {"type": "STRING", "enum": list(CUE_CODES)},
                 "minItems": 1,
                 "maxItems": 4,
-                "uniqueItems": True,
             },
             "response_code": {
                 "type": "STRING",
@@ -822,6 +831,31 @@ def _build_release(
     return seal(material, "release_digest")
 
 
+def validate_release_integrity(release: dict[str, Any]) -> None:
+    """Validate the sealed, read-only release chain used by final evidence."""
+    try:
+        verify_seal(release, "release_digest")
+        envelope = release["model_intent_candidate_envelope"]
+        verify_seal(envelope, "envelope_digest")
+        validate_instance(CANDIDATE_ENVELOPE_SCHEMA_PATH, envelope)
+        parent_packet = release["parent_packet"]
+        verify_seal(parent_packet, "contract_digest")
+        release_parent_trace = release["parent_proofreader_trace"]
+        packet_parent_trace = parent_packet["proofreader_trace"]
+    except (KeyError, TypeError, ValueError) as error:
+        raise ContractError("release_integrity_invalid") from error
+    if (
+        release.get("read_only") is not True
+        or release.get("provider_authority") is not False
+        or release.get("command_authority") is not False
+        or not isinstance(release_parent_trace, dict)
+        or release_parent_trace.get("release_decision") != "RELEASE"
+        or not isinstance(packet_parent_trace, dict)
+        or packet_parent_trace.get("release_decision") != "RELEASE"
+    ):
+        raise ContractError("release_integrity_invalid")
+
+
 def proofread_intent_candidate(
     request: dict[str, Any],
     envelope: dict[str, Any],
@@ -925,6 +959,7 @@ __all__ = [
     "LANE",
     "LANES",
     "LOCATION",
+    "LIVE_REQUEST_TTL_SECONDS",
     "MAX_CALLS_PER_LANE",
     "MAX_CALLS_TOTAL",
     "MAX_CELL_REQUEST_BYTES",
@@ -980,5 +1015,6 @@ __all__ = [
     "validate_instance",
     "validate_intent_shaping_request",
     "validate_provider_intent_body",
+    "validate_release_integrity",
     "wrap_provider_body",
 ]

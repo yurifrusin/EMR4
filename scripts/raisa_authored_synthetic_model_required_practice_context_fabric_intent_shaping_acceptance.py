@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+from datetime import datetime, timezone
 import hashlib
 import json
 import sys
@@ -42,6 +43,10 @@ from scripts.raisa_authored_synthetic_model_required_practice_context_fabric_int
 from scripts.raisa_provider_free_practice_context_fabric_bureau_memory_contract import (
     seal,
     verify_seal,
+)
+from scripts import (
+    raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker as intent_broker,
+    raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live as intent_live,
 )
 
 
@@ -114,6 +119,27 @@ def _validate(path: Path, instance: Any) -> None:
         raise ValueError(
             f"schema validation failed at {list(first.absolute_path)}: {first.message}"
         )
+
+
+def _assert_schema_structurally_bounded(value: Any, *, path: str = "$") -> None:
+    """Reject open object/array positions in committed evidence contracts."""
+    if isinstance(value, dict):
+        if value.get("type") == "object":
+            additional = value.get("additionalProperties")
+            typed_map = (
+                isinstance(additional, dict)
+                and "propertyNames" in value
+                and type(value.get("maxProperties")) is int
+            )
+            if additional is not False and not typed_map:
+                raise ValueError(f"open object schema at {path}")
+        if value.get("type") == "array" and "items" not in value:
+            raise ValueError(f"open array schema at {path}")
+        for key, item in value.items():
+            _assert_schema_structurally_bounded(item, path=f"{path}.{key}")
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            _assert_schema_structurally_bounded(item, path=f"{path}[{index}]")
 
 
 def _request() -> dict[str, Any]:
@@ -249,7 +275,9 @@ def build_evidence() -> dict[str, Any]:
         COST_LEDGER_SCHEMA_PATH,
         OCCUPIED_EVIDENCE_SCHEMA_PATH,
     ):
-        Draft202012Validator.check_schema(json.loads(schema_path.read_text(encoding="utf-8")))
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(schema)
+        _assert_schema_structurally_bounded(schema)
 
     vertex_request = build_vertex_request(request)
     generation = vertex_request["generationConfig"]
@@ -263,6 +291,15 @@ def build_evidence() -> dict[str, Any]:
         or "systemInstruction" in vertex_request
     ):
         raise ValueError("provider request allocation drifted")
+    if "uniqueItems" in json.dumps(generation["responseSchema"]):
+        raise ValueError("provider response schema contains unsupported keyword")
+    if (
+        json.loads(PROVIDER_BODY_SCHEMA_PATH.read_text(encoding="utf-8"))[
+            "properties"
+        ]["cue_codes"].get("uniqueItems")
+        is not True
+    ):
+        raise ValueError("local cue uniqueness proof drifted")
     if not (
         vertex_request["contents"][0]["parts"][0]["text"].startswith(
             "Interpret the authored-synthetic Context Fabric staff request."
@@ -282,6 +319,37 @@ def build_evidence() -> dict[str, Any]:
         raise ValueError("dry-run fixture not occupied comparison")
     if body["temporal_coordinate_code"] != SYNTHETIC_COORDINATE_CODE:
         raise ValueError("dry-run fixture coordinate not grounded")
+
+    fresh_now = datetime(2026, 8, 6, 7, 30, tzinfo=timezone.utc)
+    fresh_request = intent_live._fresh_live_request(now=fresh_now)
+    intent_broker._validate_live_request_freshness(
+        fresh_request,
+        now=fresh_now,
+    )
+    if (
+        datetime.fromisoformat(
+            fresh_request["expires_at"].replace("Z", "+00:00")
+        )
+        - datetime.fromisoformat(
+            fresh_request["issued_at"].replace("Z", "+00:00")
+        )
+    ).total_seconds() != 600:
+        raise ValueError("fresh live request lifetime drifted")
+
+    evidence_schema = json.loads(
+        OCCUPIED_EVIDENCE_SCHEMA_PATH.read_text(encoding="utf-8")
+    )
+    attempt_summary_schema = evidence_schema["$defs"]["attempt_summary"]
+    if (
+        attempt_summary_schema.get("additionalProperties") is not False
+        or evidence_schema["properties"]["lane_results"].get("items")
+        != {"$ref": "#/$defs/attempt_summary"}
+        or evidence_schema["properties"]["source_hashes"].get(
+            "maxProperties"
+        )
+        != 13
+    ):
+        raise ValueError("occupied evidence summary schema not closed")
 
     # Positive reported thinking-token use is occupied acceptance evidence;
     # missing/non-integer/non-positive counts fail closed while provider-free
@@ -608,6 +676,7 @@ def build_evidence() -> dict[str, Any]:
         "deterministic_checks": {
             "schemas_closed_and_fixture_valid": True,
             "provider_request_allocation_exact": True,
+            "provider_response_schema_supported_subset": True,
             "no_tools_or_cache_in_provider_request": True,
             "body_schema_closed_enum_bounded": True,
             "all_false_authority_ceiling": True,
@@ -630,6 +699,8 @@ def build_evidence() -> dict[str, Any]:
             "fixture_dispositions": fixture_dispositions,
             "schema_invalid_body_eligible_correction": True,
             "positive_thinking_terminal_gate": True,
+            "fresh_live_request_expiry_enforced": True,
+            "closed_digest_bound_attempt_summaries": True,
             "canonical_cue_order_in_prompt": True,
             "acceptance_generator_in_reviewed_sources": True,
             "zero_provider_calls_in_dry_run": True,

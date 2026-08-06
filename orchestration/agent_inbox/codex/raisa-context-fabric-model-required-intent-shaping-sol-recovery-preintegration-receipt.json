@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "fast_forward_untrusted_worker_source_then_apply_bounded_sol_recovery_without_provider_execution",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan/design/threat delta at planning source 5ddc052fae16298436d8873312e48464d52a9567 remain unchanged. The named Sol recovery lease preserves worker commits d0d7584ff02df0d311b3f71d556cb95333292a82 and ce317df5e28bc0fad17c315199afda0b0ecdc012 as untrusted source and limits Sol to provider-schema compatibility, fresh live expiry, closed digest-bound evidence summaries and direct regressions.",
+    "current_authority_allocation": "GPT Sol is the recovery and integration owner. The single allowed DeepSeek V4 Flash/high same-lane revision is exhausted at ce317df5e28bc0fad17c315199afda0b0ecdc012; no further worker correction is permitted. Gemini 3.6 Flash/high remains the later exact-HEAD read-only veto.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean at 5ddc052fae16298436d8873312e48464d52a9567 with preserved untracked files. Worker branch codex/context-fabric-model-intent-shaping-worker is clean at ce317df5e28bc0fad17c315199afda0b0ecdc012 and is a direct descendant. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md names the exact frozen model-required Context Fabric intent-shaping descendant as current next work. The provider-free candidate remains unaccepted and no occupied action has occurred.",
+    "protected_evidence_boundaries": "Integration is task-branch-only source adoption. No provider call, preflight, credential inspection, Docker run, product/database/API/command surface, patient or product data, accepted parent, protected evidence, docs/branding, deployment, release, Pages or protected-ref movement is authorised by this event. All unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

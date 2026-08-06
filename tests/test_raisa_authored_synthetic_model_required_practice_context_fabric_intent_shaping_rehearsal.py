@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import ast
 from copy import deepcopy
+from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 
@@ -226,6 +227,29 @@ def test_all_schemas_are_draft_2020_12_and_closed() -> None:
         assert schema.get("additionalProperties") is False
 
 
+def test_all_schema_positions_are_structurally_bounded() -> None:
+    def _walk(value, path="$") -> None:
+        if isinstance(value, dict):
+            if value.get("type") == "object":
+                additional = value.get("additionalProperties")
+                typed_map = (
+                    isinstance(additional, dict)
+                    and "propertyNames" in value
+                    and type(value.get("maxProperties")) is int
+                )
+                assert additional is False or typed_map, path
+            if value.get("type") == "array":
+                assert "items" in value, path
+            for key, item in value.items():
+                _walk(item, f"{path}.{key}")
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                _walk(item, f"{path}[{index}]")
+
+    for path in ARTIFACT_ROOT.glob("*.schema.json"):
+        _walk(_load(path))
+
+
 def test_request_fixture_validates_and_is_grounded() -> None:
     request = _request()
     assert _errors(
@@ -252,6 +276,9 @@ def test_provider_request_exact_allocation_no_tools_or_cache() -> None:
     assert "tools" not in request
     assert "cachedContent" not in request
     assert "systemInstruction" not in request
+    assert "uniqueItems" not in json.dumps(generation["responseSchema"])
+    local_schema = _load(ARTIFACT_ROOT / "provider-intent-body.schema.json")
+    assert local_schema["properties"]["cue_codes"]["uniqueItems"] is True
     prompt = request["contents"][0]["parts"][0]["text"]
     assert (
         "Compare the current waiting-room operational picture" in prompt
@@ -689,9 +716,57 @@ def test_provider_response_schema_is_enum_bounded_and_authority_closed() -> None
         SYNTHETIC_COORDINATE_CODE,
     ]
     assert properties["cue_codes"]["maxItems"] == 4
+    assert "uniqueItems" not in properties["cue_codes"]
     assert properties["response_code"]["enum"] == ["INTENT_CANDIDATE_ONLY"]
     for key in AUTHORITY_KEYS:
         assert key in properties
+
+
+def test_fresh_live_request_is_short_lived_and_broker_enforced() -> None:
+    now = datetime(2026, 8, 6, 7, 30, tzinfo=timezone.utc)
+    request = intent_live._fresh_live_request(now=now)
+    assert request["issued_at"] == "2026-08-06T07:30:00Z"
+    assert request["expires_at"] == "2026-08-06T07:40:00Z"
+    assert _errors(
+        ARTIFACT_ROOT / "intent-shaping-request.schema.json", request
+    ) == []
+    intent_broker._validate_live_request_freshness(request, now=now)
+    intent_broker._validate_live_request_freshness(
+        request, now=now + timedelta(seconds=599)
+    )
+    with pytest.raises(broker.BrokerError, match="live_request_not_fresh"):
+        intent_broker._validate_live_request_freshness(
+            request, now=now + timedelta(seconds=600)
+        )
+    with pytest.raises(broker.BrokerError, match="live_request_not_fresh"):
+        intent_broker._validate_live_request_freshness(
+            request, now=now - timedelta(seconds=1)
+        )
+    with pytest.raises(broker.BrokerError, match="live_request_clock_invalid"):
+        intent_broker._validate_live_request_freshness(
+            request, now=datetime(2026, 8, 6, 7, 30)
+        )
+    wrong_lifetime = build_intent_shaping_request(
+        issued_at="2026-08-06T07:30:00Z",
+        expires_at="2026-08-06T07:39:59Z",
+    )
+    with pytest.raises(broker.BrokerError, match="live_request_lifetime_invalid"):
+        intent_broker._validate_live_request_freshness(
+            wrong_lifetime, now=now
+        )
+
+
+def test_committed_provider_free_request_fixture_remains_deterministic() -> None:
+    assert build_intent_shaping_request() == _load(
+        ARTIFACT_ROOT / "authored-synthetic-intent-shaping-request.json"
+    )
+    with pytest.raises(
+        intent_live.live.LiveError,
+        match="live_request_date_outside_frozen_plan",
+    ):
+        intent_live._fresh_live_request(
+            now=datetime(2026, 8, 7, tzinfo=timezone.utc)
+        )
 
 
 def test_dry_run_packet_extracts_one_body_and_zero_call() -> None:
@@ -975,6 +1050,83 @@ def test_release_is_immutable_after_envelope_zeroisation() -> None:
     # Both the release digest and the nested envelope digest remain valid.
     verify_seal(release, "release_digest")
     verify_seal(release["model_intent_candidate_envelope"], "envelope_digest")
+    contracts.validate_release_integrity(release)
+
+
+def test_release_integrity_rejects_nested_tamper_even_after_outer_reseal() -> None:
+    request = _request()
+    body = canonical_model_body_fixture(
+        "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON"
+    )
+    proof = proofread_intent_candidate(
+        request, _envelope(request, body), ground_to_case=True
+    )
+    tampered = deepcopy(proof["released"])
+    tampered["model_intent_candidate_envelope"]["body"]["cue_codes"].pop()
+    tampered.pop("release_digest")
+    tampered = seal(tampered, "release_digest")
+    with pytest.raises(ContractError, match="release_integrity_invalid"):
+        contracts.validate_release_integrity(tampered)
+
+
+def test_final_attempt_summary_is_closed_digest_only(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    request = _request()
+    body = canonical_model_body_fixture(
+        "CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON"
+    )
+    release = proofread_intent_candidate(
+        request, _envelope(request, body), ground_to_case=True
+    )["released"]
+    evidence_path = (
+        tmp_path
+        / "orchestration/continuity"
+        / "raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal"
+        / "rayleen-context-fabric-intent-shaping-attempt-1-dry-run-evidence.json"
+    )
+    evidence_path.parent.mkdir(parents=True)
+    evidence_path.write_text('{"sealed":"attempt"}\n', encoding="utf-8")
+    monkeypatch.setattr(intent_live, "ROOT", tmp_path)
+    monkeypatch.setattr(
+        intent_live.live,
+        "_attempt_paths",
+        lambda *_args, **_kwargs: {"evidence": evidence_path},
+    )
+    attempt = {
+        "result": "attempt_pass",
+        "mode": "dry-run",
+        "lane": contracts.LANE,
+        "attempt_id": "raisa-intent-shaping-primary-001",
+        "attempt_number": 1,
+        "provider_contacted": False,
+        "provider_call_count": 0,
+        "proofreader_verdict": "admitted",
+        "proofreader_reason_code": None,
+        "correction_eligible": False,
+        "cleanup_passed": True,
+        "evidence_hash": prefixed_sha256({"sealed": "attempt"}),
+        "release": release,
+        "provider_metadata": {"raw": "must not survive"},
+    }
+    summary = intent_live._attempt_summary(attempt)
+    raw = json.dumps(summary)
+    assert "provider_metadata" not in summary
+    assert "release" not in summary
+    assert "must not survive" not in raw
+    assert summary["release_digest"] == release["release_digest"]
+    assert summary["parent_packet_digest"] == (
+        release["parent_packet"]["contract_digest"]
+    )
+    schema = _load(ARTIFACT_ROOT / "occupied-rehearsal-evidence.schema.json")
+    summary_schema = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$defs": schema["$defs"],
+        **schema["$defs"]["attempt_summary"],
+    }
+    assert list(
+        Draft202012Validator(summary_schema).iter_errors(summary)
+    ) == []
 
 
 def test_correction_requests_are_distinct_and_bounded() -> None:

@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All work is committed and the worktree is clean. Here is the final report.\n\n## Five-source rehydration statement\n\n- **`live_handover_current_baton`**: `AGENTS.md` read completely (466 lines). Current Baton table lists the frozen `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md` as the \"Next implementation\" under Yuri's standing uninterrupted-development authority; the exact `gemini-2.5-flash`/`bernie-emr4-dev`/`australia-southeast1` envelope, USD 0.50, no-fallback, no-command and closed-data boundaries are recorded.\n- **`current_authority_allocation`**: `AGENTS.md` \u00a74 \u2014 DeepSeek V4 Flash/high via Claude Code `--bare` is the bounded implementation/test worker with implementation/test ownership only; GPT Sol retains architecture, acceptance, recovery, integration, provider execution and protected-ref authority; Codex has no credential, IAM or cloud-config mutation authority.\n- **`active_plan_and_acceptance`**: Read completely the frozen plan, design and threat-model delta; the accepted parent intent-shaped temporal retrieval plan/design/closeout and its implementation engine; the accepted provider-free parent closeout; `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`; the A3/B3 request-contract recovery plan and the A4 product-read/UI plan; and the A3/B3 + A4 contract/broker/live modules as immutable reuse examples.\n- **`protected_evidence_boundaries`**: `AGENTS.md` \u00a75 \u2014 protected holdouts v1-v10 sealed, no access/tune/evaluate; T3 provider lane paused; historical PHI trove local-only; product authority backend-owned; no patient/clinical/product/protected data used.\n- **`git_refs_and_worktree`**: exact source HEAD `5ddc052fae16298436d8873312e48464d52a9567` on branch `codex/context-fabric-model-intent-shaping-worker`; clean tracked tree verified before editing; `master`/`handoff/current` and origin refs aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n## Commit and files\n\nExact commit: **`d0d7584f`** \u2014 \"Implement provider-free model-required Context Fabric intent-shaping rehearsal\" (13 files, 4009 insertions).\n\n- `scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_contracts.py`\n- `scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_broker.py`\n- `scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_live.py`\n- `scripts/raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_acceptance.py`\n- `tests/test_raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal.py`\n- `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/` \u2014 `intent-shaping-request.schema.json`, `provider-intent-body.schema.json`, `model-intent-candidate-envelope.schema.json`, `cell-request.schema.json`, `single-use-ledger.schema.json`, `cost-ledger.schema.json`, `occupied-rehearsal-evidence.schema.json`, `authored-synthetic-intent-shaping-request.json`\n\n## Checks run (all passed)\n\n- **Acceptance generator** (pure, no `--write`, no evidence generated): exit 0; result `raisa_authored_synthetic_model_required_practice_context_fabric_intent_shaping_rehearsal_pass`; all 27 deterministic checks true, 13 artifacts, 12 source-review paths, zero forbidden imports/calls.\n- **25 focused test functions** executed directly (pure imports): all pass, including the parametrized occupied-grounding cases.\n- **Broker dry-run simulation**: one in-memory one-shot `execute` \u2192 `status=completed`, `proofreader=admitted`, `provider_contacted=False`, release for `CURRENT_AND_PRIOR_OPERATIONAL_COMPARISON`, ledger consumed, correct audit chain.\n- **Ruff**: `All checks passed!` on all 5 owned Python files.\n- **`py_compile`/`compileall`**: OK on all 5 owned Python files.\n- **JSON Schema**: all 7 schemas are valid Draft 2020-12 and closed (`additionalProperties: false`); the authored-synthetic request fixture validates against its schema; simulated tranche evidence validates against the occupied evidence schema.\n- **`git diff --check` / `git diff --cached --check`**: clean.\n- No provider call, no occupied ledger/evidence, no `git add .`/`-A` (explicit-path staging only), no repository pytest/PostgreSQL, no push, no fetch/merge/rebase.\n\n## Blockers\n\nNone. No material semantic/authority/provider change was required; no mechanical repair was needed beyond the initial implementation.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 155667,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 24038912,
+    "output_tokens": 149847,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 16.563090999999996,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
