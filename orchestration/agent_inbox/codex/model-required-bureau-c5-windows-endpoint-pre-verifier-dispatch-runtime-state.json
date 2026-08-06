@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "launch_one_fresh_gemini_36_flash_high_veto_for_exact_c5_windows_endpoint_recovery_head",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the frozen serial C5 authored-synthetic live rehearsal as the immediate gate and the provider-free Practice Context Fabric contract as its automatic successor. The Windows endpoint-ownership recovery is now committed at exact 88b330870bd559b5276ae8191a41d152c48e9d7b and requires a fresh exact-HEAD independent veto before any new occupied attempt.",
+    "current_authority_allocation": "GPT Sol owns implementation, serial live execution, bounded recovery and acceptance. Gemini 3.6 Flash/high receives one fresh Antigravity-project read-only veto of the exact committed descendant and no implementation, ADC/provider, target/process, actuator, acceptance, Git integration, deployment, product-data or protected-ref authority. The user's standing programme authority permits uninterrupted progression through the planned gates and a fresh occupied Sydney rehearsal after a passing veto.",
+    "active_plan_and_acceptance": "C5 recovery revision 2 replaces the invalid Windows connection-refused absence proxy with exact owned-process absence plus exclusive exact-port reacquisition, retains that reservation through generation 2, forbids SO_REUSEADDR, and binds a fresh Ariadne runtime-state digest and short-lived branch/HEAD/protected-ref authority interval into the pre-execution receipt. Provider-free Windows lifecycle, widened tests, schema/example/digest checks, static analysis and error-register revision 24 pass. The fresh reviewer must independently verify those claims and the unchanged closed Sydney Vertex, authored-synthetic, deterministic-authority, one-use actuator, readback, rollback, cleanup and unmounted API boundaries.",
+    "protected_evidence_boundaries": "Review may read only repository source, plans, tests and authored-synthetic evidence and may run provider-free checks. ADC/cloud inspection, Vertex calls, C5 target/process/socket/port/directory effects, protected holdouts, historical PHI, patient/clinical/product data, ordinary runtime, databases, docs/branding/, deployment, release, Pages and protected-ref movement are forbidden. Existing untracked receipt/state and cost-ledger files remain preserved.",
+    "git_refs_and_worktree": "Primary is codex/ariadne-bernie-davida-parallel-seam at exact 88b330870bd559b5276ae8191a41d152c48e9d7b, nine commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f, tracked-clean with only preserved untracked files. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Fresh review worktree C:\\Users\\sarashera\\EMR4-worktrees\\model-required-bureau-c5-windows-endpoint-review is clean on codex/review-model-required-bureau-c5-windows-endpoint at the same exact HEAD, and its executable verifier preflight passed with zero provider/model calls."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_windows_endpoint_pre_verifier_dispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The launcher exposes exact gemini-3.6-flash-high/high and the fresh isolated worktree preflight passed."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol retains implementation, serial execution, recovery and acceptance authority."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek is not dispatched for this independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is not selected for this review."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Earlier native audit lanes are complete and have no acceptance authority."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

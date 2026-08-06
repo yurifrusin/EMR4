@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c5_active_controller_interpreter_binding_repair_for_fresh_exact_head_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the frozen serial C5 authored-synthetic live rehearsal as the immediate gate and the provider-free Practice Context Fabric contract as its automatic successor. The first fresh veto of Windows recovery HEAD 88b330870bd559b5276ae8191a41d152c48e9d7b found one isolated-worktree interpreter-path defect; that review remains revision_required and the bounded repair is ready for a new descendant commit and fresh veto.",
+    "current_authority_allocation": "GPT Sol owns the bounded repair, deterministic verification, descendant commit, fresh reviewer dispatch, serial live execution and acceptance. Gemini 3.6 Flash/high owns the next fresh Antigravity-project read-only exact-HEAD veto. The user's standing programme authority permits uninterrupted continuation through these planned gates; neither reviewer nor future provider receives implementation, actuator, integration, deployment, product-data or protected-ref authority.",
+    "active_plan_and_acceptance": "The repaired controller binds its child to the exact absolute process-owned sys.executable, rejects missing or relative identity, hashes that file, revalidates equality and digest before spawn, and accepts no caller path or PATH/environment fallback. The target remains repository-pinned; the fixed argument vector, -I, shell=False, minimal credential-free environment, endpoint ownership, deterministic authority, one-use evidence, readback, rollback and cleanup controls remain intact. Provider-free portable evidence uses controller://active-python without persisting an absolute checkout path. Focused and widened tests, acceptance regeneration/check, Ruff, compilation, Bandit and diff checks pass. No live C5 or product result is claimed.",
+    "protected_evidence_boundaries": "The repair and all verification are provider-free, authored-synthetic and repository-local. No ADC/cloud check, Vertex call, target process, socket, port, task directory, protected holdout, historical PHI, patient/clinical/product data, database, ordinary runtime, deployment, release, Pages or protected-ref action occurred. docs/branding/ and all unrelated untracked receipts, states and cost ledgers remain preserved and excluded; staging must be explicit-path only.",
+    "git_refs_and_worktree": "Primary is codex/ariadne-bernie-davida-parallel-seam at precommit HEAD 88b330870bd559b5276ae8191a41d152c48e9d7b with only the intentional interpreter-binding repair plus fresh review/receipt artifacts and preserved unrelated untracked files. It remains nine commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602 and will not move. The rejected review worktree remains clean and unchanged at 88b330870bd559b5276ae8191a41d152c48e9d7b."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_interpreter_binding_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reproduced the exact verifier finding, applied the narrow repair and completed deterministic gates."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The first fresh exact-HEAD veto returned revision_required and remains immutable; a new exact-head project is required after commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker was needed for the narrow coupled repair."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is not selected for this serial repair."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["A native read-only audit independently confirmed the finding and narrow sys.executable binding; it has no acceptance authority."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

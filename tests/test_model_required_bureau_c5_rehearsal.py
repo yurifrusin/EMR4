@@ -11,6 +11,7 @@ from __future__ import annotations
 import errno
 import inspect
 import socket
+import sys
 from dataclasses import replace
 from pathlib import Path
 
@@ -46,6 +47,7 @@ from scripts.model_required_bureau_c5_rehearsal import (
     build_launch_argv,
     build_minimal_environment,
     validate_launch_argv,
+    resolve_python_executable,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -92,6 +94,39 @@ def test_launch_argv_is_fixed_and_rejects_overrides():
         build_launch_argv(port=PORT, nonce="not-a-nonce", generation=2)
     with pytest.raises(ValueError):
         build_launch_argv(port=PORT, nonce=TARGET_NONCE, generation=3)
+
+
+def test_python_executable_is_the_absolute_active_controller_interpreter():
+    expected = Path(sys.executable).absolute()
+    assert resolve_python_executable() == expected
+    assert resolve_python_executable().is_file()
+    argv = build_launch_argv(port=PORT, nonce=TARGET_NONCE, generation=2)
+    assert argv[0] == str(expected)
+
+
+def test_python_executable_rejects_relative_or_missing_process_identity(
+    monkeypatch, tmp_path
+):
+    monkeypatch.setattr(rehearsal.sys, "executable", "python.exe")
+    with pytest.raises(ValueError, match="not absolute"):
+        resolve_python_executable()
+
+    missing = tmp_path / "missing-python.exe"
+    monkeypatch.setattr(rehearsal.sys, "executable", str(missing))
+    with pytest.raises(ValueError, match="absent"):
+        resolve_python_executable()
+
+
+def test_process_preflight_rejects_any_non_active_executable(monkeypatch, tmp_path):
+    alternative = tmp_path / "other-python.exe"
+    alternative.write_bytes(b"not-the-active-interpreter")
+    monkeypatch.setattr(rehearsal, "resolve_python_executable", lambda: alternative)
+    adapter = ProcessAdapter()
+    with pytest.raises(ValueError, match="active controller"):
+        adapter.preflight(
+            expected_python_sha256="0" * 64,
+            expected_target_sha256=EXPECTED_ARTIFACT_SHA256,
+        )
 
 
 def test_minimal_environment_is_credential_free():

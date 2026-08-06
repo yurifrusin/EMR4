@@ -15,7 +15,7 @@
     "module_override_rejected": true,
     "runtime_paths_validated_before_portable_projection": true,
     "vector": [
-      "repository://.venv/Scripts/python.exe",
+      "controller://active-python",
       "-I",
       "repository://scripts/model_required_bureau_c5_target.py",
       "--host",
@@ -49,9 +49,9 @@
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/recovery-diagnosis-candidate.schema.json": "8632c60e524216cc548a1e5c5ed47b6d8aae2833ae96886ded6ddc1fc52b2a90",
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/system-anatomy-frame-set.example.json": "c9fa93449d9d1133781a1fd35f0d9390f6d7d14ca7f8c7f2dcbfff929feef7bf",
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/system-anatomy-frame-set.schema.json": "8f6af8be640118c15913bf9647b3bd4c1335e25c417e79e1b03226a9419b3810",
-    "scripts/model_required_bureau_c5_acceptance.py": "a4d0ef10dc0c25a17d0f0dd593de39edfef1938534bfa8ecd1dd581c22622b0c",
+    "scripts/model_required_bureau_c5_acceptance.py": "51d441a4de53b7826597f1c4238399bf2d229e9612a7eb68f08fc86661870f14",
     "scripts/model_required_bureau_c5_contract.py": "26bc36ab8b8501a23c460563cc08252ce09fd847de4455b21eb55bd627b8e2a0",
-    "scripts/model_required_bureau_c5_rehearsal.py": "a807600dad0400af4b7fc6447108f669256ce06443ee12379411248eac3358f5",
+    "scripts/model_required_bureau_c5_rehearsal.py": "bbcbf0a244f24c48e8bfa3f3f84ec8037abeb6162212edd5cad0e16f9acb01a5",
     "scripts/model_required_bureau_c5_target.py": "a45dd29f2b1bdd4fc70b5bce0a22d6893b295b4001cf22949cd2d2d2927dbd4b"
   },
   "candidate_parsing_and_proofreading": {
@@ -75,7 +75,7 @@
   },
   "candidate_source_binding": {
     "artifact_count": 24,
-    "artifact_set_sha256": "095cca4fcd5886afdb94f6d42a284344d7b8019c41ae81db5cf5140b9c1e92f7",
+    "artifact_set_sha256": "b391b5314f6c555c1fa7497214503a42144e0553d2346988b52a0707445d6c61",
     "binding_kind": "repository_relative_artifact_sha256_set",
     "embedded_git_head": false,
     "exact_git_head_bound_by_external_review_receipt": true
@@ -331,6 +331,7 @@
         "secrets",
         "socket",
         "subprocess",
+        "sys",
         "tempfile",
         "time",
         "typing"

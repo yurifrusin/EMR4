@@ -28,6 +28,7 @@ import os
 import re
 import secrets
 import subprocess  # nosec B404  # real adapter; never invoked in this tranche
+import sys
 import tempfile
 import time
 from dataclasses import dataclass, replace
@@ -89,15 +90,23 @@ def _format_time(value: datetime) -> str:
 # --------------------------------------------------------------------------- #
 
 def resolve_python_executable() -> Path:
-    """Resolve the exact repository virtual-environment Python executable.
+    """Resolve the exact interpreter already executing the C5 controller.
 
-    The returned path is deterministic from the repository root.  The real
-    adapter hashes this path during live preflight; this function itself only
-    constructs the path and never reads the file.
+    ``sys.executable`` is process-owned rather than caller supplied.  Binding
+    the child to that absolute path keeps the interpreter identity stable in a
+    linked Git worktree, where the source root intentionally has no duplicate
+    ``.venv`` directory.  The real adapter hashes this exact file during live
+    preflight and verifies the same digest again before each launch.
     """
-    if os.name == "nt":
-        return REPOSITORY_ROOT / ".venv" / "Scripts" / "python.exe"
-    return REPOSITORY_ROOT / ".venv" / "bin" / "python"
+    if not isinstance(sys.executable, str) or not sys.executable:
+        raise ValueError("active Python executable is unavailable")
+    python = Path(sys.executable)
+    if not python.is_absolute():
+        raise ValueError("active Python executable is not absolute")
+    python = python.absolute()
+    if not python.is_file():
+        raise ValueError("active Python executable is absent")
+    return python
 
 
 def resolve_target_module() -> Path:
@@ -118,8 +127,8 @@ def build_launch_argv(
 ) -> list[str]:
     """Build the fixed allowlisted argument vector.
 
-    The function accepts only server-held ``port``/``nonce``/``generation`` and
-    a repository root.  It does **not** accept a caller executable, path, host,
+    The function accepts only server-held ``port``/``nonce``/``generation``.
+    It does **not** accept a caller executable, path, host,
     module or environment override.  It contains no shell or string command.
     """
     if not isinstance(port, int) or isinstance(port, bool) or port <= 0 or port > 65535:
@@ -268,10 +277,11 @@ class ProcessAdapter:
         expected_python_sha256: str,
         expected_target_sha256: str,
     ) -> dict[str, str]:
-        python = resolve_python_executable().resolve()
+        python = resolve_python_executable()
         target = resolve_target_module().resolve()
-        if python.parent.parent.parent != REPOSITORY_ROOT.resolve():
-            raise ValueError("python executable escaped the pinned repository")
+        active_python = Path(sys.executable).absolute()
+        if python != active_python:
+            raise ValueError("python executable drifted from the active controller")
         if target != TARGET_MODULE_PATH.resolve():
             raise ValueError("target module escaped the pinned repository")
         if not python.is_file() or not target.is_file():

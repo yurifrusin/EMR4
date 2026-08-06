@@ -1403,18 +1403,19 @@ def _validate_argument_vector() -> dict[str, Any]:
     if any(any(tok in key.upper() for tok in blocked_tokens) for key in environment):
         raise ValueError("minimal environment contains a credential-shaped variable")
 
-    # The real runtime vector is validated above against paths pinned to this
-    # checkout.  Durable provider-free evidence records the same vector with
-    # repository-relative path identities so an exact candidate reproduces in
-    # a fresh worktree at a different absolute location.
+    # The real runtime vector is validated above against the active controller
+    # interpreter and the target path pinned to this checkout. Durable
+    # provider-free evidence records semantic path identities so an exact
+    # candidate reproduces in a clean linked worktree without a duplicate
+    # virtual environment at the worktree root.
     repository_root = _c5_rehearsal.REPOSITORY_ROOT.resolve()
     portable_argv = list(argv)
-    for index in (0, 2):
-        try:
-            relative = Path(argv[index]).resolve().relative_to(repository_root)
-        except ValueError as exc:
-            raise ValueError("argument-vector path escapes repository root") from exc
-        portable_argv[index] = f"repository://{relative.as_posix()}"
+    portable_argv[0] = "controller://active-python"
+    try:
+        target_relative = Path(argv[2]).resolve().relative_to(repository_root)
+    except ValueError as exc:
+        raise ValueError("target path escapes repository root") from exc
+    portable_argv[2] = f"repository://{target_relative.as_posix()}"
 
     return {
         "argument_count": len(argv),

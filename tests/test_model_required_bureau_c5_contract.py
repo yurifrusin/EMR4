@@ -224,7 +224,7 @@ def test_acceptance_argument_vector_is_portable_across_worktree_roots(
     second = _validate_argument_vector()["vector"]
 
     assert second == first
-    assert first[0].startswith("repository://.venv/")
+    assert first[0] == "controller://active-python"
     assert first[2] == "repository://scripts/model_required_bureau_c5_target.py"
     assert not any(str(ROOT) in item for item in first)
 
