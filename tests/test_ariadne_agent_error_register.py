@@ -38,10 +38,10 @@ def test_committed_register_is_semantically_valid_after_source_adapter_recovery(
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 36
+    assert register["register_revision"] == 37
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 45)
+        f"AER-{index:04d}" for index in range(1, 46)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 32
+    assert len(agent_incidents) == 33
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -678,10 +678,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 44
+    assert report["incident_count"] == 45
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 32,
+        "agent_behavior": 33,
         "harness": 3,
         "repository": 2,
         "transport": 7,
@@ -692,13 +692,13 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "harness_failure": 3,
         "output_contract_violation": 14,
         "read_only_violation": 2,
-        "reasoning_claim_error": 5,
+        "reasoning_claim_error": 6,
         "repository_defect": 2,
         "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 35,
+        "canonical_unchanged": 36,
         "untrusted_partial_worktree": 7,
     }
     assert report["recurring_patterns"] == [

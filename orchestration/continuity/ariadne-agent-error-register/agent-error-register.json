@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 36,
+  "register_revision": 37,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1699,6 +1699,45 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0045",
+      "attempt_id": "raisa-context-fabric-observation-to-signal-plan-challenge-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-observation-to-temporal-signal-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A frozen security-sensitive observation-admission plan must fully determine every tenant/source identity binding, prior continuity input, source-to-temporal normalization, conservative impact floor, full-invalidation output shape and synthetic activation/evidence distinction before implementation dispatch.",
+      "observed_error": "The first committed plan omitted practice/source/observer identity from the keyed event-id preimage, did not freeze a prior-coordinate contract, left the event/schema/aggregate/frame-floor normalization selectable, underspecified the machine-readable FULL_INVALIDATION_REQUIRED result and used ambiguous activation/evidence terminology.",
+      "detection_method": "A separately receipted exact-path native plan challenge inspected the clean committed plan against the repaired parent architecture, canonical API Spine and accepted temporal constructor/processor. Its exact serial packet passed 60 tests but it returned four P1 findings and one P2 finding before implementation admission.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-plan-challenge.md",
+        "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-37.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.security_plan_trust_coordinates_underfrozen",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Sol preserved the rejected review, repaired and recommitted the plan before allowing implementation finalization, and froze practice/source/contract/observer HMAC binding, one sealed prior coordinate, the exact source-to-temporal profile and two-frame floor, an admission-only conservative full-invalidation shape, and distinct activation/evidence fields.",
+        "prevention_control": "Before dispatching implementation of a security-sensitive adapter or observation membrane, require an exact-path independent plan challenge that enumerates every trusted input, prior-state coordinate, normalization mapping, conservative failure output and authority/effect flag rather than relying on non-empty or closed-enum prose alone.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-plan-challenge.md",
+          "docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_plan.py"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }
