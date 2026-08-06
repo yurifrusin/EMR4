@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_sixth_durability_migration_transaction_architecture_recovery_candidate_to_task_branch",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted durability migration-and-transaction architecture descendant on codex/ariadne-bernie-davida-parallel-seam under Yuri's standing uninterrupted-development authority. The architecture remains a candidate pending a genuinely fresh exact-head veto, and no DDL, migration, database, source, provider, product-data, runtime, deployment or protected-ref authority is open.",
+    "current_authority_allocation": "GPT Sol owns the recovery, deterministic gate, task-branch commit and later acceptance. This pre-commit event dispatches no worker. The next reviewer, after a separate pre-dispatch receipt, will be a fresh bounded read-only native veto with exact paths and no Git command authority. External implementation and provider/model lanes remain inactive.",
+    "active_plan_and_acceptance": "The sixth candidate freezes PostgreSQL 16's exact xid8-to-low-XID32 comparison, forbids savepoints and subtransaction-authored producer members, derives positive and negative reschedule publication from the exact appointment OLD/NEW temporal predicate, and closes immediate/deferred claim, appointment, audit, event, alias, head and outbox trigger operations. Its schema-validated canonical contract hash is sha256:1346e7d0a00e0c89231791f62a92daefcc4b001c4e2bf1c6f3e04a71bad64956 and enumerates all 18 relations, roles, RLS, entry points, triggers, admission, lifecycle, anchor, key and retention surfaces. All 208 exact focused, register, parent durability and API Spine tests pass; Ruff, canonical schema/hash validation and exact-path diff checks pass. AER-0051 remains open pending fresh veto.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI was opened. No app, Alembic, Diary or API Spine file changed; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, new command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement occurred. docs/branding and all unrelated untracked receipts, evidence and cost ledgers remain preserved and excluded. Staging and commit use only explicit paths.",
+    "git_refs_and_worktree": "After the latest fresh fetch, the active branch and HEAD are codex/ariadne-bernie-davida-parallel-seam at eda1039b959321ea1e602a6db5b35caf2cc85cb7, six commits ahead of origin task 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicit sixth-recovery plan, design, threat, implementation-plan, contract/schema, tests, incident-register and bounded receipt/diagnostic artifacts are eligible for staging; docs/branding and unrelated untracked artifacts remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_recovery_6_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the sixth recovery and its 208-test deterministic gate without opening any forbidden runtime or data boundary."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "unknown",
+      "evidence": ["No reviewer is active during this pre-commit event; the next dispatch requires a distinct receipt after the candidate commit."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider or model call is authorised or active."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

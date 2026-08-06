@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: fifth recovered architecture candidate pending fresh independent veto
+Status: sixth recovered architecture candidate pending fresh independent veto
 
 ## Trust boundaries and assets
 
@@ -30,8 +30,9 @@ and the separation between invalidation and current truth/commands.
 | Producer invokes alias creation outside the signed command | There is no separately executable alias helper. The sole producer projection entry point rederives `session_user` and requires the exact `IN_PROGRESS` update-confirm claim, matching locked appointment/revision and just-authored bound event before any alias/head/outbox effect. |
 | Atomic command is split across identities, capabilities or transactions | The signed update-confirm and projection use one physical connection, one transaction, one logical capability and one `session_user`; no second login, `SET ROLE` or transaction hand-off is permitted. |
 | Caller substitutes a claim, event or revision | The entry point locks the exact operation/route/request-digest claim, loads the sole event through its existing practice-scoped `(practice_id, command_id)` foreign key plus unique `command_id` constraint and verifies event type/schema, target appointment, audit and aggregate revision against the claim and locked product state. |
-| Same login reuses committed in-progress rows in a later transaction | Claim, appointment tuple version, audit and event must have database-derived `xmin = pg_current_xact_id()` and the immutable claim creation time must equal transaction start; XID is ephemeral, non-caller-supplied, non-retained and never a durability position. |
-| Producer call passes but a partial combination commits | Owner-only fixed-search-path before/deferred constraint triggers forbid prior-transaction claim adoption and any committed exact-operation `IN_PROGRESS` row, then fail commit unless event, completed claim, target/audit, outbox/head and any first alias are bidirectionally complete in the same transaction. |
+| Same login reuses committed in-progress rows in a later transaction | PostgreSQL-16 exact XID32 comparison, immutable transaction-start creation time, zero legacy census, no state reversion and no committed exact-operation `IN_PROGRESS` row; savepoints/subtransactions are forbidden and fail rather than being normalized. XID is ephemeral, non-caller-supplied, non-retained and never a durability position. |
+| Temporal update evades publication by suppressing or deleting its event | The appointment `OLD`/`NEW` start/duration transition is the database-derived obligation. Exact claim/appointment/audit/event/alias/head/outbox immediate/deferred trigger operations reject missing, extra, updated or insert-deleted members; non-temporal updates require projection absence. |
+| Producer call passes but a partial combination commits | Owner-only fixed-search-path guards and deferred constraint triggers forbid prior-transaction claim adoption, state reversion and any committed exact-operation `IN_PROGRESS` row, then fail commit unless the temporal transition, event, completed claim, target/audit, outbox/head and any first alias are bidirectionally complete in the same top-level transaction. |
 | Two product appointments share one alias or delete/recreate changes identity | Forward and reverse practice/source uniqueness make the mapping bijective; rows and aliases are immutable and non-deletable for the v1 epoch, same-appointment races return the winner and collision rolls back the command. |
 | Durability retention deletes or uses the product alias bridge as purge authority | The bridge is outside all three durability retention families, update/delete are prohibited for v1 and any future erasure/non-reuse scheme requires a new reviewed contract/epoch; it never cascades or rewrites retained opaque evidence. |
 | Alias-only failure survives command rollback | Appointment truth, audit, event, alias, head, outbox and idempotency result share one transaction; standalone/mismatched invocation fails before effect and every member rolls back together. |
@@ -62,7 +63,8 @@ and the separation between invalidation and current truth/commands.
 | Disabled/default state acquires credentials or moves data | No runtime binding and retention executor disabled; later gate proves zero capability. |
 | Event starts a fresh read or command | Event may invalidate and create inert obligation only; later read requires application principal and new grant. |
 | Digest chain is claimed cryptographically authentic | Explicit tamper-evidence/integrity label; no MAC or compromised-owner claim. |
-| Architecture artifacts execute SQL | Static boundary tests forbid migrations, app/API/runtime/database changes. |
+| Machine schema lists relations but leaves unsafe columns/keys/roles/triggers unconstrained | The normative contract enumerates exact columns/types, ordered keys, FK targets/delete actions, RLS/role/entry-point matrix, trigger events, admission/lifecycle/anchor/key and retention surfaces; the schema is whole-contract constant and mutations span every section. |
+| Architecture artifacts execute SQL | Static boundary tests and exact Git pre/postflight forbid migrations, app/API/runtime/database changes. |
 
 ## Residual risks deliberately deferred
 

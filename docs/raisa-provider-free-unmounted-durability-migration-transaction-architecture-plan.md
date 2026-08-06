@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: fifth recovered architecture plan candidate pending fresh independent veto
+Status: sixth recovered architecture plan candidate pending fresh independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
@@ -22,6 +22,8 @@ The intended result is
 This tranche is declarative, provider-free and unmounted. It creates no
 migration, database object, SQL role, credential, source connection, runtime or
 product data path.
+
+No applied migration exists or is authorised by this tranche.
 
 ## API Spine classification
 
@@ -292,8 +294,10 @@ transaction. At `READ COMMITTED`, its fixed lock/effect order is:
    verifies its exact reschedule type/schema, appointment, audit and aggregate
    revision against the claim and locked product state. It also compares the
    claim, current appointment tuple version, audit and event `xmin` values with
-   the internally derived `pg_current_xact_id()` and verifies the immutable
-   claim `created_at` equals this transaction's start. A completed, previously
+   the PostgreSQL-16 top-level XID32 expression frozen below and verifies the
+   immutable claim `created_at` equals this transaction's start. Savepoints,
+   nested transactions and subtransaction-authored members are forbidden from
+   claim insertion until outer commit. A completed, previously
    committed, absent, duplicate, foreign, mismatched or caller-substituted
    context fails before any bridge/head/outbox effect;
 5. inside that same entry point, create or return the immutable bijective alias,
@@ -321,32 +325,81 @@ no downgrade may drop, truncate or silently stop the projection.
 
 ### Transaction-local provenance and deferred commit fence
 
-`xmin` and `pg_current_xact_id()` are permitted only as an ephemeral same-
-transaction provenance comparison inside the narrow producer entry point and
-deferred constraint functions. The XID is derived by the database, never
-caller-supplied, stored in a user column, copied into a digest or outbox,
-retained after the transaction, exposed to an observer, or used as the durable
-position. The immutable claim `created_at = transaction_timestamp()` condition
-distinguishes a newly inserted claim from a previously committed row that was
-merely updated and therefore acquired a new tuple `xmin`.
+The later inert DDL must target PostgreSQL 16 and render this exact top-level
+comparison; an implementer may not choose a different cast:
 
-Owner-only fixed-search-path `DEFERRABLE INITIALLY DEFERRED` constraint
-triggers make the transaction fail at commit unless all of these bidirectional
-invariants hold for the exact reschedule family:
+```sql
+xmin = ((((pg_current_xact_id()::text)::bigint & 4294967295)::text)::xid)
+```
 
-- an event inserted in the transaction has the exact completed idempotency
-  claim, target appointment and audit, exactly one payload-free outbox row and
-  the matching stream-head advance;
-- an outbox row has that exact event and command result, and any alias first
-  inserted in the transaction is referenced by that outbox row;
-- no exact update-confirm claim can itself commit in `IN_PROGRESS`, even when
-  no temporal event was produced; a scoped before-update guard also forbids
-  target/audit/completion adoption when the prior claim tuple was not created
-  in the current transaction;
-- no eligible event can commit while its claim is failed, absent or bound to a
-  different target/audit; and
-- appointment mutation, audit, event, first alias, head advance, outbox and
-  idempotency completion therefore all commit once or all roll back.
+`pg_current_xact_id()` supplies epoch-aware `xid8`; the mask deliberately
+extracts its low 32-bit transaction id before the explicit text-to-`xid` cast.
+That equality is used only while the same top-level transaction is active and
+only together with all of these facts: the exact claim was inserted in this
+transaction, its server-default `created_at` equals `transaction_timestamp()`,
+the pre-enable census contains zero committed exact-operation `IN_PROGRESS`
+rows, state cannot transition back to `IN_PROGRESS`, and no exact-operation
+`IN_PROGRESS` row can commit. Savepoints, `Session.begin_nested()`, explicit
+`SAVEPOINT`/`ROLLBACK TO` and any subtransaction around claim, appointment,
+audit, event, projection or completion are forbidden; a subtransaction-
+authored tuple is rejected rather than normalized. Wrap/freeze cannot authorize
+an old row because no committed eligible row survives and the comparison is
+neither stored nor used after commit.
+
+`xmin` and XID are permitted only inside the narrow producer entry point and
+guard/constraint functions. They are database-derived, never caller-supplied,
+stored in a user column, copied into a digest or outbox, retained, exposed to
+an observer, or used as the durable position.
+
+The exact temporal obligation is the existing source condition:
+`OLD.start_time IS DISTINCT FROM NEW.start_time OR
+OLD.duration_minutes IS DISTINCT FROM NEW.duration_minutes`. Practitioner,
+reason, notes, status and other fields do not broaden this v1 family. When the
+exact producer binding is active, a temporal update-confirm must commit exactly
+one matching reschedule event and projection; a non-temporal update-confirm
+must commit neither. This predicate is database-derived from the `appointments`
+transition, never caller-supplied or inferred from a feature flag. Before
+binding activation the guards are inert; activation is permitted only after
+the application hook and zero-legacy census pass together.
+
+Owner-only fixed-search-path immediate guards and `DEFERRABLE INITIALLY
+DEFERRED` constraint triggers cover the exact event surface:
+
+- `appointment_command_idempotency`: immediate `BEFORE UPDATE OR DELETE`
+  state/provenance guard plus deferred `AFTER INSERT OR UPDATE OR DELETE`
+  completeness;
+- `appointments`: deferred `AFTER UPDATE OF start_time, duration_minutes`
+  temporal-obligation check with `OLD`/`NEW` transition values;
+- `appointment_audit_log` and `diary_committed_events`: immediate `BEFORE
+  UPDATE OR DELETE` immutability plus deferred `AFTER INSERT OR UPDATE OR
+  DELETE` completeness;
+- `diary_context_aggregate_aliases_v1` and
+  `diary_context_observation_outbox_v1`: immediate `BEFORE UPDATE OR DELETE`
+  immutability plus deferred `AFTER INSERT OR UPDATE OR DELETE` completeness;
+  and
+- `context_observation_stream_head`: immediate `BEFORE DELETE` and rollback/
+  monotonicity guard plus deferred `AFTER INSERT OR UPDATE OR DELETE`
+  completeness.
+
+Insert-then-delete sequences remain visible to queued constraint-trigger
+events, while immediate delete guards prevent immutable members disappearing.
+At commit the bidirectional invariants require:
+
+- a temporal appointment transition has the exact newly inserted then
+  completed claim, target appointment and audit, exactly one immutable event,
+  one outbox row and matching stream-head advance;
+- a non-temporal transition has its completed claim/audit but no reschedule
+  event, alias insertion, head advance or outbox row;
+- every event has that temporal transition, completed claim, target/audit,
+  outbox and head advance;
+- every outbox has that event/result, and any alias first inserted in the
+  transaction is referenced by that outbox;
+- no exact claim can commit in `IN_PROGRESS`, revert to `IN_PROGRESS`, be
+  deleted in its creation transaction or adopt target/audit/completion when its
+  prior tuple was not created by the same top-level transaction; and
+- appointment mutation, audit, event when required, first alias when required,
+  head advance when required, outbox when required and idempotency completion
+  all commit once or all roll back.
 
 The producer cannot disable or defer the fence beyond transaction end, invoke
 the private trigger functions, supply an XID, or convert a previously committed
@@ -356,7 +409,7 @@ execute. A transaction-local comparison is evidence of atomic co-authorship,
 not durable ordering, cryptographic signature verification or authority beyond
 the already authenticated REST command.
 
-PostgreSQL sequences/identities, UUID/time ordering, `xmin`, transaction id,
+PostgreSQL sequences/identities, UUID/time ordering, retained `xmin`, transaction id,
 commit timestamp, WAL LSN, the existing `(occurred_at,event_id)` cursor and
 `aggregate_revision` are all ineligible as the durability position.
 
@@ -558,8 +611,11 @@ authored synthetic opaque coordinates only. At minimum it must prove:
    also proven to use one logical capability and one `session_user` without a
    second login, role switch or transaction; a previously committed or merely
    updated `IN_PROGRESS` claim/event fails the current-XID/immutable-created-at
-   check, and every event/outbox/alias/claim partial combination fails the
-   deferred commit fence with no durable effect;
+   check, every savepoint/subtransaction attempt is rejected, and every event/
+   outbox/alias/claim partial or insert-then-delete combination fails the
+   immediate/deferred fence with no durable effect; a temporal start/duration
+   transition without event/projection fails while a non-temporal exact update-
+   confirm completes without event, alias, head or outbox effect;
 2. concurrent same-stream producers yield contiguous unique positions and
    different practices share no counter;
 3. duplicate idempotency yields one mutation, one immutable alias and one
@@ -687,13 +743,15 @@ production, release, Pages or protected-ref movement. Preserve and exclude
     semantics.
 14. Database-backed authored-synthetic positive and adversarial cases are exact
     and include disabled-mode zero-capability proof.
-15. Static tests validate the closed machine contract against its JSON Schema,
-    parse the existing idempotency/event constraints, mechanically reconcile
-    the exact 18 relations and owned artifact allowlist, and reject adversarial
-    relation, transaction-provenance, commit-fence, alias-key/lifecycle and
-    authority mutations; they also prove that no application, migration,
-    database/runtime/API, provider, data, deployment or protected surface
-    changed.
+15. Static tests validate the closed machine contract against its JSON Schema;
+    mechanically reconcile every exact relation column/type/key/foreign-key/
+    delete action, role, entry point, RLS policy, trigger event, admission,
+    lifecycle/anchor, key interval and retention family; parse the existing
+    idempotency/event constraints and exact update-confirm flow; and reject
+    adversarial mutations across every one of those surfaces. Explicit Git
+    preflight/postflight—not the schema alone—proves that no application,
+    migration, database/runtime/API, provider, data, deployment or protected
+    artifact changed.
 16. The claim remains architecture-only and does not claim cryptographic
     authenticity or operational safety.
 

@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: fifth recovered design candidate pending fresh independent veto
+Status: sixth recovered design candidate pending fresh independent veto
 
 ## Purpose
 
@@ -56,24 +56,29 @@ projection.
 
 The entry point additionally requires the idempotency claim, current
 appointment tuple version, audit and event to have database-derived `xmin`
-equal to `pg_current_xact_id()`, while the claim's immutable `created_at`
-matches `transaction_timestamp()`. This use is ephemeral transaction
-provenance only: no XID is accepted from the caller, stored in a user column,
-retained, exposed or treated as a durability coordinate. A committed stale
-claim cannot become eligible merely by being updated in a later transaction.
+equal to the PostgreSQL-16 top-level XID32 expression
+`((((pg_current_xact_id()::text)::bigint & 4294967295)::text)::xid)`, while the
+claim's immutable server-default `created_at` matches
+`transaction_timestamp()`. Savepoints and subtransactions are forbidden from
+claim insertion through outer commit; a subtransaction-authored tuple fails.
+This use is ephemeral provenance only: no XID is caller-supplied, stored,
+retained, exposed or treated as a durability coordinate. The zero legacy
+in-progress census, no-reversion guard and no-`IN_PROGRESS`-at-commit constraint
+remove old-row and wrap/freeze ambiguity.
 
-Owner-only `DEFERRABLE INITIALLY DEFERRED` constraint triggers then fail the
-commit unless no exact update-confirm claim remains `IN_PROGRESS`, each exact
-reschedule event has its completed matching
-idempotency target/audit, one outbox row and stream-head advance; every outbox
-has that event/result; and a first alias insertion is referenced by that
-outbox. These bidirectional commit-time checks close the interval after the
-projection call: no event may commit with an in-progress claim and no alias,
-head or outbox partial may survive. The fixed-search-path trigger functions are
-not directly executable by a runtime role. A scoped before-update guard rejects
-target/audit/completion adoption when the old claim tuple was not created in
-the current transaction. Default-off enablement first requires a zero census of
-legacy committed exact-operation in-progress rows.
+The database-derived event obligation is the existing `OLD`/`NEW`
+`start_time` or `duration_minutes` transition. A deferred appointment trigger
+therefore requires event/outbox/head only for that transition and requires
+their absence for a non-temporal update. Immediate immutable-member guards plus
+deferred claim, appointment, audit, event, alias, head and outbox triggers cover
+INSERT, UPDATE and DELETE, so insert-delete cannot erase an obligation. They
+also fail commit unless no exact claim remains or returns to `IN_PROGRESS`,
+each event has its completed matching target/audit and projection, every outbox
+has that event/result, and a first alias is referenced by that outbox. The
+machine contract enumerates the exact trigger operations. Trigger functions
+are fixed-search-path owner code with no runtime execute. Default-off
+enablement first requires zero legacy committed exact-operation in-progress
+rows.
 
 This deliberately makes durability availability part of the enabled command's
 atomic contract. A failed append or head lock fails the command; it cannot be
@@ -242,6 +247,17 @@ Relational constraints, append-only privileges and digest chains provide
 integrity and tamper-evidence controls. They are not a cryptographic MAC and do
 not make a database owner or compromised credential trustworthy. Operational
 key storage, credentials, monitoring and incident response remain later gates.
+
+## Machine-closed catalogue
+
+The JSON contract is normative where this prose summarizes. It enumerates every
+column and logical PostgreSQL type, ordered primary/unique key, composite
+foreign-key target and delete action for all 18 relations; the complete role/
+entry-point/RLS matrix; exact immediate and deferred trigger events; admission,
+anchor, lifecycle and key-partition invariants; retention-family membership;
+and the exact core artifact surface. Its JSON Schema accepts only that complete
+contract. The next inert DDL gate may render those values but may not invent or
+omit one.
 
 ## Non-authority statement
 

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_sixth_durability_migration_transaction_architecture_recovery_candidate_to_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The sixth candidate freezes PostgreSQL 16's exact xid8-to-low-XID32 comparison, forbids savepoints and subtransaction-authored producer members, derives positive and negative reschedule publication from the exact appointment OLD/NEW temporal predicate, and closes immediate/deferred claim, appointment, audit, event, alias, head and outbox trigger operations. Its schema-validated canonical contract hash is sha256:1346e7d0a00e0c89231791f62a92daefcc4b001c4e2bf1c6f3e04a71bad64956 and enumerates all 18 relations, roles, RLS, entry points, triggers, admission, lifecycle, anchor, key and retention surfaces. All 208 exact focused, register, parent durability and API Spine tests pass; Ruff, canonical schema/hash validation and exact-path diff checks pass. AER-0051 remains open pending fresh veto.",
+    "current_authority_allocation": "GPT Sol owns the recovery, deterministic gate, task-branch commit and later acceptance. This pre-commit event dispatches no worker. The next reviewer, after a separate pre-dispatch receipt, will be a fresh bounded read-only native veto with exact paths and no Git command authority. External implementation and provider/model lanes remain inactive.",
+    "git_refs_and_worktree": "After the latest fresh fetch, the active branch and HEAD are codex/ariadne-bernie-davida-parallel-seam at eda1039b959321ea1e602a6db5b35caf2cc85cb7, six commits ahead of origin task 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicit sixth-recovery plan, design, threat, implementation-plan, contract/schema, tests, incident-register and bounded receipt/diagnostic artifacts are eligible for staging; docs/branding and unrelated untracked artifacts remain excluded.",
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted durability migration-and-transaction architecture descendant on codex/ariadne-bernie-davida-parallel-seam under Yuri's standing uninterrupted-development authority. The architecture remains a candidate pending a genuinely fresh exact-head veto, and no DDL, migration, database, source, provider, product-data, runtime, deployment or protected-ref authority is open.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI was opened. No app, Alembic, Diary or API Spine file changed; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, new command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement occurred. docs/branding and all unrelated untracked receipts, evidence and cost ledgers remain preserved and excluded. Staging and commit use only explicit paths."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

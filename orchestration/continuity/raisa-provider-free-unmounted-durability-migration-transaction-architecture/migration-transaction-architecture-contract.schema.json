@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://emr4.local/schemas/raisa-context-fabric-durability-migration-transaction-architecture-v1.json",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-durability-migration-transaction-architecture-v2.json",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -8,215 +8,225 @@
     "status",
     "source_contract",
     "evidence_mode",
-    "relation_catalogue",
+    "contract_sha256",
+    "postgresql_target",
     "existing_model_contract",
-    "producer_transaction",
-    "alias_bridge",
+    "relation_catalogue",
+    "role_matrix",
+    "entry_points",
+    "trigger_surface",
+    "cross_relation_invariants",
     "artifact_boundary"
   ],
   "properties": {
-    "schema_version": {"const": "raisa.context_fabric.durability_migration_transaction_architecture.v1"},
+    "schema_version": {"const": "raisa.context_fabric.durability_migration_transaction_architecture.v2"},
     "status": {"const": "architecture_only_unmounted"},
     "source_contract": {"const": "diary.appointment_rescheduled.v1"},
     "evidence_mode": {"const": "repository_authored_schema_metadata"},
-    "relation_catalogue": {
+    "contract_sha256": {"const": "sha256:1346e7d0a00e0c89231791f62a92daefcc4b001c4e2bf1c6f3e04a71bad64956"},
+    "postgresql_target": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["count", "names"],
+      "required": ["major", "producer_isolation", "coordinator_isolation", "retention_isolation", "top_level_xid32_expression", "tuple_provenance_predicate", "savepoints_allowed", "subtransactions_allowed", "caller_supplied_xid", "stored_xid", "retained_xid", "xid_is_durability_position", "wrap_freeze_policy"],
       "properties": {
-        "count": {"const": 18},
-        "names": {
-          "type": "array",
-          "minItems": 18,
-          "maxItems": 18,
-          "prefixItems": [
-            {"const": "context_observation_stream_head"},
-            {"const": "diary_context_aggregate_aliases_v1"},
-            {"const": "diary_context_observation_outbox_v1"},
-            {"const": "context_proofread_observation_admission"},
-            {"const": "context_generation_registry_barrier"},
-            {"const": "context_observer_generation"},
-            {"const": "context_durability_checkpoint"},
-            {"const": "context_recovery_anchor"},
-            {"const": "context_classified_observation_receipt"},
-            {"const": "context_frame_generation"},
-            {"const": "context_invalidation_watermark"},
-            {"const": "context_reassembly_obligation"},
-            {"const": "context_durability_lifecycle"},
-            {"const": "context_durability_audit"},
-            {"const": "context_observation_key_interval"},
-            {"const": "context_recovery_pin"},
-            {"const": "context_service_practice_binding"},
-            {"const": "context_retention_policy"}
-          ],
-          "items": false
-        }
+        "major": {"const": 16},
+        "producer_isolation": {"const": "READ COMMITTED"},
+        "coordinator_isolation": {"const": "SERIALIZABLE"},
+        "retention_isolation": {"const": "SERIALIZABLE"},
+        "top_level_xid32_expression": {"const": "((((pg_current_xact_id()::text)::bigint & 4294967295)::text)::xid)"},
+        "tuple_provenance_predicate": {"const": "xmin = ((((pg_current_xact_id()::text)::bigint & 4294967295)::text)::xid)"},
+        "savepoints_allowed": {"const": false},
+        "subtransactions_allowed": {"const": false},
+        "caller_supplied_xid": {"const": false},
+        "stored_xid": {"const": false},
+        "retained_xid": {"const": false},
+        "xid_is_durability_position": {"const": false},
+        "wrap_freeze_policy": {"const": "active_top_level_only_zero_legacy_no_committed_in_progress"}
       }
     },
     "existing_model_contract": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["idempotency_table", "operation_id", "route_family", "in_progress_state", "target_binding_field", "audit_binding_field", "event_table", "event_command_foreign_key", "event_unique_fields", "event_type", "event_schema_version"],
+      "required": ["appointment_table", "appointment_practice_key", "temporal_transition_columns", "temporal_obligation_sql", "idempotency_table", "operation_id", "route_family", "in_progress_state", "completed_state", "target_binding_field", "audit_binding_field", "claim_created_at_field", "claim_created_at_default", "audit_table", "audit_practice_command_key", "event_table", "event_command_foreign_key", "event_appointment_foreign_key", "event_audit_foreign_key", "event_unique_fields", "event_type", "event_schema_version", "route_call_order", "one_sqlalchemy_session", "nested_transaction_calls_allowed"],
       "properties": {
+        "appointment_table": {"const": "appointments"},
+        "appointment_practice_key": {"const": ["practice_id", "id"]},
+        "temporal_transition_columns": {"const": ["start_time", "duration_minutes"]},
+        "temporal_obligation_sql": {"const": "OLD.start_time IS DISTINCT FROM NEW.start_time OR OLD.duration_minutes IS DISTINCT FROM NEW.duration_minutes"},
         "idempotency_table": {"const": "appointment_command_idempotency"},
         "operation_id": {"const": "confirmAppointmentUpdateProposal"},
         "route_family": {"const": "update-confirm"},
         "in_progress_state": {"const": "in_progress"},
+        "completed_state": {"const": "completed"},
         "target_binding_field": {"const": "target_appointment_id"},
         "audit_binding_field": {"const": "audit_log_id"},
+        "claim_created_at_field": {"const": "created_at"},
+        "claim_created_at_default": {"const": "now()"},
+        "audit_table": {"const": "appointment_audit_log"},
+        "audit_practice_command_key": {"const": ["practice_id", "command_id"]},
         "event_table": {"const": "diary_committed_events"},
-        "event_command_foreign_key": {
-          "type": "array",
-          "minItems": 2,
-          "maxItems": 2,
-          "prefixItems": [{"const": "practice_id"}, {"const": "command_id"}],
-          "items": false
-        },
-        "event_unique_fields": {
-          "type": "array",
-          "minItems": 2,
-          "maxItems": 2,
-          "prefixItems": [{"const": "command_id"}, {"const": "audit_log_id"}],
-          "items": false
-        },
+        "event_command_foreign_key": {"const": {"columns": ["practice_id", "command_id"], "references_table": "appointment_command_idempotency", "references_columns": ["practice_id", "id"]}},
+        "event_appointment_foreign_key": {"const": {"columns": ["practice_id", "appointment_id"], "references_table": "appointments", "references_columns": ["practice_id", "id"]}},
+        "event_audit_foreign_key": {"const": {"columns": ["practice_id", "audit_log_id"], "references_table": "appointment_audit_log", "references_columns": ["practice_id", "id"]}},
+        "event_unique_fields": {"const": ["command_id", "audit_log_id"]},
         "event_type": {"const": "diary.appointment_rescheduled"},
-        "event_schema_version": {"const": "diary.appointment_rescheduled.v1"}
+        "event_schema_version": {"const": "diary.appointment_rescheduled.v1"},
+        "route_call_order": {"const": ["claim_appointment_command", "appointment_for_update", "confirm_update_proposal_commit_false", "load_update_audit_by_practice_and_command", "complete_appointment_command", "session_commit"]},
+        "one_sqlalchemy_session": {"const": true},
+        "nested_transaction_calls_allowed": {"const": false}
       }
     },
-    "producer_transaction": {
+    "relation_catalogue": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["isolation", "one_physical_connection", "one_transaction", "one_logical_capability", "one_session_user", "caller_supplied_event_id", "transaction_provenance", "deferred_commit_fence"],
+      "required": ["count", "relations"],
       "properties": {
-        "isolation": {"const": "READ COMMITTED"},
-        "one_physical_connection": {"const": true},
-        "one_transaction": {"const": true},
-        "one_logical_capability": {"const": true},
-        "one_session_user": {"const": true},
-        "caller_supplied_event_id": {"const": false},
-        "transaction_provenance": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["database_xid_function", "tuple_system_column", "required_current_transaction_tuples", "claim_inserted_in_current_transaction", "immutable_claim_created_at_equals_transaction_timestamp", "caller_supplied", "stored_in_user_column", "retained_after_commit", "durability_position_authority"],
-          "properties": {
-            "database_xid_function": {"const": "pg_current_xact_id()"},
-            "tuple_system_column": {"const": "xmin"},
-            "required_current_transaction_tuples": {
-              "type": "array",
-              "minItems": 4,
-              "maxItems": 4,
-              "prefixItems": [
-                {"const": "idempotency_claim"},
-                {"const": "appointment_current_tuple"},
-                {"const": "appointment_audit"},
-                {"const": "diary_committed_event"}
-              ],
-              "items": false
-            },
-            "claim_inserted_in_current_transaction": {"const": true},
-            "immutable_claim_created_at_equals_transaction_timestamp": {"const": true},
-            "caller_supplied": {"const": false},
-            "stored_in_user_column": {"const": false},
-            "retained_after_commit": {"const": false},
-            "durability_position_authority": {"const": false}
-          }
-        },
-        "deferred_commit_fence": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["constraint_mode", "owner_only_trigger_function", "runtime_execute", "bidirectional", "required_atomic_members", "event_requires_completed_claim_and_outbox", "outbox_requires_event_and_completed_claim", "first_alias_requires_same_transaction_outbox", "in_progress_event_commit_forbidden", "in_progress_claim_commit_forbidden", "prior_transaction_claim_adoption_forbidden"],
-          "properties": {
-            "constraint_mode": {"const": "DEFERRABLE INITIALLY DEFERRED"},
-            "owner_only_trigger_function": {"const": true},
-            "runtime_execute": {"const": false},
-            "bidirectional": {"const": true},
-            "required_atomic_members": {
-              "type": "array",
-              "minItems": 7,
-              "maxItems": 7,
-              "prefixItems": [
-                {"const": "appointment_mutation"},
-                {"const": "appointment_audit"},
-                {"const": "diary_committed_event"},
-                {"const": "first_alias_if_needed"},
-                {"const": "stream_head_advance"},
-                {"const": "payload_free_outbox"},
-                {"const": "idempotency_completion"}
-              ],
-              "items": false
-            },
-            "event_requires_completed_claim_and_outbox": {"const": true},
-            "outbox_requires_event_and_completed_claim": {"const": true},
-            "first_alias_requires_same_transaction_outbox": {"const": true},
-            "in_progress_event_commit_forbidden": {"const": true},
-            "in_progress_claim_commit_forbidden": {"const": true},
-            "prior_transaction_claim_adoption_forbidden": {"const": true}
-          }
+        "count": {"const": 18},
+        "relations": {
+          "type": "array",
+          "minItems": 18,
+          "maxItems": 18,
+          "prefixItems": [
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_observation_stream_head"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "diary_context_aggregate_aliases_v1"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "diary_context_observation_outbox_v1"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_proofread_observation_admission"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_generation_registry_barrier"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_observer_generation"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_durability_checkpoint"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_recovery_anchor"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_classified_observation_receipt"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_frame_generation"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_invalidation_watermark"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_reassembly_obligation"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_durability_lifecycle"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_durability_audit"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_observation_key_interval"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_recovery_pin"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_service_practice_binding"}}}]},
+            {"allOf": [{"$ref": "#/$defs/relation"}, {"properties": {"name": {"const": "context_retention_policy"}}}]}
+          ],
+          "items": false
         }
       }
     },
-    "alias_bridge": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["relation", "forward_key", "reverse_unique_key", "owner_generated", "caller_selectable", "runtime_direct_dml", "update_allowed", "delete_allowed", "alias_reuse_allowed", "same_appointment_race", "cross_appointment_collision"],
-      "properties": {
-        "relation": {"const": "diary_context_aggregate_aliases_v1"},
-        "forward_key": {
-          "type": "array",
-          "minItems": 3,
-          "maxItems": 3,
-          "prefixItems": [{"const": "practice_id"}, {"const": "source_contract_id"}, {"const": "product_appointment_uuid"}],
-          "items": false
-        },
-        "reverse_unique_key": {
-          "type": "array",
-          "minItems": 3,
-          "maxItems": 3,
-          "prefixItems": [{"const": "practice_id"}, {"const": "source_contract_id"}, {"const": "opaque_aggregate_alias"}],
-          "items": false
-        },
-        "owner_generated": {"const": true},
-        "caller_selectable": {"const": false},
-        "runtime_direct_dml": {"const": false},
-        "update_allowed": {"const": false},
-        "delete_allowed": {"const": false},
-        "alias_reuse_allowed": {"const": false},
-        "same_appointment_race": {"const": "reload_existing"},
-        "cross_appointment_collision": {"const": "rollback_command"}
-      }
+    "role_matrix": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/role"}, {"properties": {"role": {"const": "context_schema_owner"}}}]},
+        {"allOf": [{"$ref": "#/$defs/role"}, {"properties": {"role": {"const": "context_producer"}}}]},
+        {"allOf": [{"$ref": "#/$defs/role"}, {"properties": {"role": {"const": "context_observer"}}}]},
+        {"allOf": [{"$ref": "#/$defs/role"}, {"properties": {"role": {"const": "context_admission_receiver"}}}]},
+        {"allOf": [{"$ref": "#/$defs/role"}, {"properties": {"role": {"const": "context_coordinator"}}}]},
+        {"allOf": [{"$ref": "#/$defs/role"}, {"properties": {"role": {"const": "context_lifecycle"}}}]},
+        {"allOf": [{"$ref": "#/$defs/role"}, {"properties": {"role": {"const": "context_retention"}}}]},
+        {"allOf": [{"$ref": "#/$defs/role"}, {"properties": {"role": {"const": "context_application_read"}}}]}
+      ],
+      "items": false
     },
+    "entry_points": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "project_update_confirm_reschedule_v1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "admit_proofread_observation_v1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "apply_durability_transition_v1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "register_observer_generation_v1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "append_recovery_anchor_v1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "rotate_observation_key_v1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "consume_observer_generation_v1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "evaluate_source_retention_v1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/entry_point"}, {"properties": {"name": {"const": "purge_source_rows_v1"}}}]}
+      ],
+      "items": false
+    },
+    "trigger_surface": {"type": "array", "minItems": 13, "maxItems": 13, "items": {"$ref": "#/$defs/trigger"}},
+    "cross_relation_invariants": {"type": "array", "minItems": 12, "maxItems": 12, "uniqueItems": true, "items": {"type": "string", "minLength": 20}},
     "artifact_boundary": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["owned_artifacts", "forbidden_prefixes", "executable_ddl", "database_contact", "provider_contact", "runtime_wiring"],
+      "required": ["core_owned_artifacts", "evidence_artifact_prefixes", "forbidden_prefixes", "executable_ddl", "database_contact", "provider_contact", "runtime_wiring", "product_data_processed"],
       "properties": {
-        "owned_artifacts": {
-          "type": "array",
-          "minItems": 7,
-          "maxItems": 7,
-          "prefixItems": [
-            {"const": "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md"},
-            {"const": "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-design.md"},
-            {"const": "docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md"},
-            {"const": "implementation_plan.md"},
-            {"const": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json"},
-            {"const": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json"},
-            {"const": "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"}
-          ],
-          "items": false
-        },
-        "forbidden_prefixes": {
-          "type": "array",
-          "minItems": 4,
-          "maxItems": 4,
-          "prefixItems": [{"const": "app/"}, {"const": "alembic/"}, {"const": "docs/diary/"}, {"const": "docs/api-spine/"}],
-          "items": false
-        },
+        "core_owned_artifacts": {"const": ["docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md", "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-design.md", "docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md", "implementation_plan.md", "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json", "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json", "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"]},
+        "evidence_artifact_prefixes": {"const": ["docs/ariadne-agent-error-correction-register-revision-", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-", "orchestration/continuity/ariadne-agent-error-register/", "tests/test_ariadne_agent_error_register.py"]},
+        "forbidden_prefixes": {"const": ["app/", "alembic/", "docs/diary/", "docs/api-spine/", "docs/branding/"]},
         "executable_ddl": {"const": false},
         "database_contact": {"const": false},
         "provider_contact": {"const": false},
-        "runtime_wiring": {"const": false}
+        "runtime_wiring": {"const": false},
+        "product_data_processed": {"const": false}
       }
+    }
+  },
+  "$defs": {
+    "string_array": {"type": "array", "items": {"type": "string"}},
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "columns", "primary_key", "unique_keys", "foreign_keys", "checks", "rls", "mutation", "retention_family"],
+      "properties": {
+        "name": {"type": "string"},
+        "columns": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*:[A-Za-z0-9_()]+:(not_null|nullable)$"}},
+        "primary_key": {"$ref": "#/$defs/string_array"},
+        "unique_keys": {"type": "array", "items": {"$ref": "#/$defs/string_array"}},
+        "foreign_keys": {"$ref": "#/$defs/string_array"},
+        "checks": {"$ref": "#/$defs/string_array"},
+        "rls": {"type": "string", "minLength": 10},
+        "mutation": {"type": "string", "minLength": 10},
+        "retention_family": {"enum": ["source", "receipt_checkpoint", "audit", "none"]}
+      }
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "login", "noinherit", "nobypassrls", "owns_objects", "direct_table_select", "direct_table_dml", "execute_entry_points"],
+      "properties": {
+        "role": {"type": "string"},
+        "login": {"type": "boolean"},
+        "noinherit": {"const": true},
+        "nobypassrls": {"const": true},
+        "owns_objects": {"type": "boolean"},
+        "direct_table_select": {"$ref": "#/$defs/string_array"},
+        "direct_table_dml": {"const": []},
+        "execute_entry_points": {"$ref": "#/$defs/string_array"}
+      }
+    },
+    "entry_point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "executor_role", "owner", "security_definer", "fixed_search_path", "dynamic_sql", "public_execute", "input", "authority_source", "effect"],
+      "properties": {
+        "name": {"type": "string"},
+        "executor_role": {"type": "string"},
+        "owner": {"type": "string"},
+        "security_definer": {"const": true},
+        "fixed_search_path": {"const": true},
+        "dynamic_sql": {"const": false},
+        "public_execute": {"const": false},
+        "input": {"$ref": "#/$defs/string_array"},
+        "authority_source": {"type": "string", "minLength": 15},
+        "effect": {"type": "string", "minLength": 10}
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["table", "timing", "events", "deferrable", "purpose"],
+      "properties": {
+        "table": {"enum": ["appointment_command_idempotency", "appointments", "appointment_audit_log", "diary_committed_events", "diary_context_aggregate_aliases_v1", "context_observation_stream_head", "diary_context_observation_outbox_v1"]},
+        "timing": {"enum": ["BEFORE", "AFTER"]},
+        "events": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["INSERT", "UPDATE", "DELETE", "UPDATE OF start_time,duration_minutes"]}},
+        "deferrable": {"type": "boolean"},
+        "initially_deferred": {"const": true},
+        "purpose": {"type": "string", "minLength": 15}
+      },
+      "allOf": [
+        {"if": {"properties": {"deferrable": {"const": true}}}, "then": {"required": ["initially_deferred"], "properties": {"timing": {"const": "AFTER"}}}},
+        {"if": {"properties": {"deferrable": {"const": false}}}, "then": {"not": {"required": ["initially_deferred"]}, "properties": {"timing": {"const": "BEFORE"}}}}
+      ]
     }
   }
 }

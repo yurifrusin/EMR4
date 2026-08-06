@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_sixth_durability_migration_transaction_architecture_recovery_and_fresh_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The complete live handover accepts the provider-free unmounted durability state-machine rehearsal at 95a2ed5e960c58686262b5e82ce2e89354a3860a and directs the declarative migration-and-transaction architecture descendant on codex/ariadne-bernie-davida-parallel-seam under Yuri's standing uninterrupted-development authority. The architecture remains revision_required until the sixth recovery passes deterministic gates and a fresh independent veto; no DDL, migration, database or runtime authority exists yet.",
+    "current_authority_allocation": "GPT Sol owns architecture recovery, acceptance and task-branch integration. A genuinely fresh bounded read-only native veto is permitted only after deterministic checks and a distinct pre-dispatch receipt; the reviewer receives exact paths and no Git command authority. DeepSeek, Antigravity and provider lanes are inactive for this correction. No worker receives acceptance, integration, baton, protected-ref, provider, data, runtime, deployment or release authority.",
+    "active_plan_and_acceptance": "The sixth recovered candidate freezes PostgreSQL 16 top-level XID32 provenance with savepoints and subtransactions forbidden, derives the exact temporal event obligation from appointment start-time or duration transitions, covers claim/appointment/audit/event/alias/head/outbox insert-update-delete commit fences, and normatively closes all 18 relations, roles, RLS, entry points, triggers, admission, lifecycle, anchor, key and retention surfaces in a schema-validated contract. AER-0051 remains open until this complete candidate passes a fresh exact-head veto; AER-0053 and AER-0054 preserve contained command-scope incidents and grant no evidence authority.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI may be opened, listed, searched or inferred. No app, Alembic, Diary or API Spine artifact may change; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, new command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and all unrelated untracked receipts, evidence and cost ledgers remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the active branch and HEAD are codex/ariadne-bernie-davida-parallel-seam at eda1039b959321ea1e602a6db5b35caf2cc85cb7, six commits ahead of origin task 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree contains only the known sixth-recovery architecture, contract, register and test edits; user-owned untracked docs/branding and unrelated artifacts remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_recovery_6_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the mandatory post-compaction five-source rehydration, fresh origin-ref verification and API Spine steward pass before continuing the sixth recovery."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "unknown",
+      "evidence": ["No fresh reviewer has been dispatched in this post-compaction continuation."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider or model call is authorised or active in this provider-free architecture recovery."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

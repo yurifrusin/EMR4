@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_read_only_fifth_recovery_durability_architecture_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate eda1039b freezes 18 relations, one-session update-confirm transaction provenance, an immutable bijective owner-private alias bridge, bidirectional deferred commit completeness, a closed JSON contract/schema and 12 adversarial architecture mutations. Deterministic gates pass: 62 focused architecture/register tests, 98 parent/source/API Spine tests, Ruff and diff checks. AER-0051 remains open pending this fresh veto.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery and acceptance authority. A fresh native read-only reviewer is selected as a permitted independent veto surface because Yuri authorised worker lanes and the live policy permits native read-only review where independence has leverage. The reviewer receives no edits, implementation, acceptance, integration, baton, push or protected-ref authority and may emit only one terminal pass or revision_required decision.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r28 is clean on codex/review-durability-migration-transaction-plan-recovery-5-eda1039b at exact HEAD eda1039b959321ea1e602a6db5b35caf2cc85cb7. Main task branch is at the same candidate; local/origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602, origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa, and user untracked docs/branding remains preserved outside the reviewer worktree.",
+    "live_handover_current_baton": "The live handover directs the pure provider-free unmounted migration-and-transaction architecture descendant under standing uninterrupted-development authority. Candidate eda1039b959321ea1e602a6db5b35caf2cc85cb7 is explicitly revision_required until an independent exact-head veto passes; no inert DDL rehearsal is admitted yet.",
+    "protected_evidence_boundaries": "Reviewer access is limited to AGENTS.md, the API Steward skill and its checklist, named API Spine architecture files, exact candidate plan/design/threat/contract/schema/test files, implementation plan relevant context, and exact current appointment idempotency/event/router/service model files. Prior review artifacts, AER content, protected holdouts, historical PHI, unrelated files, provider/model calls, database/source/network contact, writes, caches, app execution, migration/DDL application, deployment and protected refs are forbidden."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

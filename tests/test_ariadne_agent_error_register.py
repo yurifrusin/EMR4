@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 53
+    assert register["register_revision"] == 55
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 53)
+        f"AER-{index:04d}" for index in range(1, 55)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 40
+    assert len(agent_incidents) == 42
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -156,9 +156,9 @@ def test_migration_architecture_plan_veto_and_review_bootstrap_are_preserved() -
     assert plan["correction"]["status"] == "control_implemented_pending_acceptance"
     assert "bounded PRIMARY/CONFLICT admission" in plan["correction"]["action"]
     assert "purge-safe comparison" in plan["correction"]["action"]
-    assert "sole owner-private immutable alias bijection" in plan["correction"][
-        "action"
-    ]
+    assert (
+        "sole owner-private immutable alias bijection" in plan["correction"]["action"]
+    )
     assert "pg_current_xact_id()" in plan["correction"]["action"]
     assert "prior-transaction claim adoption" in plan["correction"]["action"]
     assert "bidirectional deferred commit fences" in plan["correction"]["action"]
@@ -172,9 +172,45 @@ def test_migration_architecture_plan_veto_and_review_bootstrap_are_preserved() -
         "verifier.unapproved_environment_bootstrap"
     )
     assert process["correction"]["status"] == "corrected_fresh_attempt"
-    assert "uv, pip and environment bootstrap" in process["correction"][
-        "prevention_control"
-    ]
+    assert (
+        "uv, pip and environment bootstrap"
+        in process["correction"]["prevention_control"]
+    )
+
+
+def test_migration_architecture_recovery_review_path_enumeration_is_contained() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0053"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "attempt_rejected_and_escalated"
+    assert incident["recurrence_signature"] == (
+        "verifier.forbidden_repository_path_enumeration"
+    )
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert "no Git discovery command" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "contained"
+
+
+def test_migration_architecture_recovery_broad_search_is_contained() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0054"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "attempt_rejected_and_escalated"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.overbroad_repository_content_search"
+    )
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert (
+        "explicit exact-path read allowlist"
+        in incident["correction"]["prevention_control"]
+    )
+    assert incident["status"] == "contained"
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -797,16 +833,16 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 52
+    assert report["incident_count"] == 54
     assert report["open_incident_ids"] == ["AER-0051"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 40,
+        "agent_behavior": 42,
         "harness": 3,
         "repository": 2,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 7,
+        "command_scope_violation": 9,
         "evidence_misreport": 5,
         "harness_failure": 3,
         "output_contract_violation": 17,
@@ -817,7 +853,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 41,
+        "canonical_unchanged": 43,
         "untrusted_partial_worktree": 9,
     }
     assert report["recurring_patterns"] == [

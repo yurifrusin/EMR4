@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.command-scope-failure.v1",
+  "status": "contained",
+  "observed_on": "2026-08-06",
+  "attempt_id": "raisa-context-fabric-durability-migration-transaction-architecture-recovery-6-postgres-target-read-001",
+  "origin": "agent_behavior",
+  "role": "orchestrator",
+  "command_class": "overbroad_repository_content_search",
+  "intended_fact": "local PostgreSQL target major version",
+  "observed_output_scope": "one existing PostgreSQL 16 environment line from the immutable handover archive",
+  "protected_content_returned": false,
+  "candidate_files_changed": false,
+  "provider_or_model_calls": 0,
+  "database_or_runtime_contact": 0,
+  "protected_ref_movement": false,
+  "containment": "No further broad repository or documentation search is permitted in this recovery. All subsequent reads use explicit paths already named by the active plan or exact source contract."
+}

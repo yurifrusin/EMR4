@@ -1,112 +1,325 @@
 {
-  "schema_version": "raisa.context_fabric.durability_migration_transaction_architecture.v1",
+  "schema_version": "raisa.context_fabric.durability_migration_transaction_architecture.v2",
   "status": "architecture_only_unmounted",
   "source_contract": "diary.appointment_rescheduled.v1",
   "evidence_mode": "repository_authored_schema_metadata",
-  "relation_catalogue": {
-    "count": 18,
-    "names": [
-      "context_observation_stream_head",
-      "diary_context_aggregate_aliases_v1",
-      "diary_context_observation_outbox_v1",
-      "context_proofread_observation_admission",
-      "context_generation_registry_barrier",
-      "context_observer_generation",
-      "context_durability_checkpoint",
-      "context_recovery_anchor",
-      "context_classified_observation_receipt",
-      "context_frame_generation",
-      "context_invalidation_watermark",
-      "context_reassembly_obligation",
-      "context_durability_lifecycle",
-      "context_durability_audit",
-      "context_observation_key_interval",
-      "context_recovery_pin",
-      "context_service_practice_binding",
-      "context_retention_policy"
-    ]
+  "contract_sha256": "sha256:1346e7d0a00e0c89231791f62a92daefcc4b001c4e2bf1c6f3e04a71bad64956",
+  "postgresql_target": {
+    "major": 16,
+    "producer_isolation": "READ COMMITTED",
+    "coordinator_isolation": "SERIALIZABLE",
+    "retention_isolation": "SERIALIZABLE",
+    "top_level_xid32_expression": "((((pg_current_xact_id()::text)::bigint & 4294967295)::text)::xid)",
+    "tuple_provenance_predicate": "xmin = ((((pg_current_xact_id()::text)::bigint & 4294967295)::text)::xid)",
+    "savepoints_allowed": false,
+    "subtransactions_allowed": false,
+    "caller_supplied_xid": false,
+    "stored_xid": false,
+    "retained_xid": false,
+    "xid_is_durability_position": false,
+    "wrap_freeze_policy": "active_top_level_only_zero_legacy_no_committed_in_progress"
   },
   "existing_model_contract": {
+    "appointment_table": "appointments",
+    "appointment_practice_key": ["practice_id", "id"],
+    "temporal_transition_columns": ["start_time", "duration_minutes"],
+    "temporal_obligation_sql": "OLD.start_time IS DISTINCT FROM NEW.start_time OR OLD.duration_minutes IS DISTINCT FROM NEW.duration_minutes",
     "idempotency_table": "appointment_command_idempotency",
     "operation_id": "confirmAppointmentUpdateProposal",
     "route_family": "update-confirm",
     "in_progress_state": "in_progress",
+    "completed_state": "completed",
     "target_binding_field": "target_appointment_id",
     "audit_binding_field": "audit_log_id",
+    "claim_created_at_field": "created_at",
+    "claim_created_at_default": "now()",
+    "audit_table": "appointment_audit_log",
+    "audit_practice_command_key": ["practice_id", "command_id"],
     "event_table": "diary_committed_events",
-    "event_command_foreign_key": ["practice_id", "command_id"],
+    "event_command_foreign_key": {
+      "columns": ["practice_id", "command_id"],
+      "references_table": "appointment_command_idempotency",
+      "references_columns": ["practice_id", "id"]
+    },
+    "event_appointment_foreign_key": {
+      "columns": ["practice_id", "appointment_id"],
+      "references_table": "appointments",
+      "references_columns": ["practice_id", "id"]
+    },
+    "event_audit_foreign_key": {
+      "columns": ["practice_id", "audit_log_id"],
+      "references_table": "appointment_audit_log",
+      "references_columns": ["practice_id", "id"]
+    },
     "event_unique_fields": ["command_id", "audit_log_id"],
     "event_type": "diary.appointment_rescheduled",
-    "event_schema_version": "diary.appointment_rescheduled.v1"
-  },
-  "producer_transaction": {
-    "isolation": "READ COMMITTED",
-    "one_physical_connection": true,
-    "one_transaction": true,
-    "one_logical_capability": true,
-    "one_session_user": true,
-    "caller_supplied_event_id": false,
-    "transaction_provenance": {
-      "database_xid_function": "pg_current_xact_id()",
-      "tuple_system_column": "xmin",
-      "required_current_transaction_tuples": [
-        "idempotency_claim",
-        "appointment_current_tuple",
-        "appointment_audit",
-        "diary_committed_event"
-      ],
-      "claim_inserted_in_current_transaction": true,
-      "immutable_claim_created_at_equals_transaction_timestamp": true,
-      "caller_supplied": false,
-      "stored_in_user_column": false,
-      "retained_after_commit": false,
-      "durability_position_authority": false
-    },
-    "deferred_commit_fence": {
-      "constraint_mode": "DEFERRABLE INITIALLY DEFERRED",
-      "owner_only_trigger_function": true,
-      "runtime_execute": false,
-      "bidirectional": true,
-      "required_atomic_members": [
-        "appointment_mutation",
-        "appointment_audit",
-        "diary_committed_event",
-        "first_alias_if_needed",
-        "stream_head_advance",
-        "payload_free_outbox",
-        "idempotency_completion"
-      ],
-      "event_requires_completed_claim_and_outbox": true,
-      "outbox_requires_event_and_completed_claim": true,
-      "first_alias_requires_same_transaction_outbox": true,
-      "in_progress_event_commit_forbidden": true,
-      "in_progress_claim_commit_forbidden": true,
-      "prior_transaction_claim_adoption_forbidden": true
-    }
-  },
-  "alias_bridge": {
-    "relation": "diary_context_aggregate_aliases_v1",
-    "forward_key": [
-      "practice_id",
-      "source_contract_id",
-      "product_appointment_uuid"
+    "event_schema_version": "diary.appointment_rescheduled.v1",
+    "route_call_order": [
+      "claim_appointment_command",
+      "appointment_for_update",
+      "confirm_update_proposal_commit_false",
+      "load_update_audit_by_practice_and_command",
+      "complete_appointment_command",
+      "session_commit"
     ],
-    "reverse_unique_key": [
-      "practice_id",
-      "source_contract_id",
-      "opaque_aggregate_alias"
-    ],
-    "owner_generated": true,
-    "caller_selectable": false,
-    "runtime_direct_dml": false,
-    "update_allowed": false,
-    "delete_allowed": false,
-    "alias_reuse_allowed": false,
-    "same_appointment_race": "reload_existing",
-    "cross_appointment_collision": "rollback_command"
+    "one_sqlalchemy_session": true,
+    "nested_transaction_calls_allowed": false
   },
+  "relation_catalogue": {
+    "count": 18,
+    "relations": [
+      {
+        "name": "context_observation_stream_head",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "last_position:bigint:not_null", "updated_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id"],
+        "unique_keys": [],
+        "foreign_keys": [],
+        "checks": ["stream_epoch = 1", "last_position >= 0", "last_position < 9223372036854775807"],
+        "rls": "forced_practice_source_binding",
+        "mutation": "producer_entry_point_monotonic_only",
+        "retention_family": "none"
+      },
+      {
+        "name": "diary_context_aggregate_aliases_v1",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "product_appointment_uuid:uuid:not_null", "opaque_aggregate_alias:uuid:not_null", "created_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "product_appointment_uuid"],
+        "unique_keys": [["practice_id", "source_contract_id", "opaque_aggregate_alias"]],
+        "foreign_keys": ["practice_id,product_appointment_uuid->appointments.practice_id,id:RESTRICT"],
+        "checks": ["source_contract_id = diary.appointment_rescheduled.v1"],
+        "rls": "owner_private_no_runtime_select",
+        "mutation": "insert_only_no_update_no_delete",
+        "retention_family": "none"
+      },
+      {
+        "name": "diary_context_observation_outbox_v1",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "transaction_position:bigint:not_null", "predecessor_position:bigint:not_null", "raw_event_uuid:uuid:not_null", "opaque_aggregate_alias:uuid:not_null", "aggregate_revision:bigint:not_null", "source_contract_digest:digest_sha256:not_null", "transaction_authored_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "transaction_position"],
+        "unique_keys": [["practice_id", "source_contract_id", "raw_event_uuid"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id->context_observation_stream_head.practice_id,source_contract_id,stream_id:RESTRICT", "practice_id,source_contract_id,opaque_aggregate_alias->diary_context_aggregate_aliases_v1.practice_id,source_contract_id,opaque_aggregate_alias:RESTRICT", "practice_id,raw_event_uuid->diary_committed_events.practice_id,id:RESTRICT"],
+        "checks": ["stream_epoch = 1", "transaction_position > 0", "predecessor_position = transaction_position - 1", "aggregate_revision > 0"],
+        "rls": "observer_exact_projection_select_only",
+        "mutation": "insert_only_no_update_no_delete",
+        "retention_family": "source"
+      },
+      {
+        "name": "context_proofread_observation_admission",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "source_position:bigint:not_null", "entry_kind:admission_entry_kind:not_null", "observer_binding_revision:bigint:not_null", "key_id:key_id:not_null", "source_membership_digest:digest_sha256:not_null", "admission_digest:digest_sha256:not_null", "observation_digest:digest_sha256:nullable", "decision:observation_decision:nullable", "reason_code:observation_reason:nullable", "affected_frame_mask:frame_mask:nullable", "checkpoint_disposition:checkpoint_disposition:nullable", "attempted_admission_digest:digest_sha256:nullable", "conflict_reason:admission_conflict_reason:nullable", "admitted_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "source_position", "entry_kind"],
+        "unique_keys": [["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "observation_digest", "entry_kind=PRIMARY"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation->context_observer_generation.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation:RESTRICT"],
+        "checks": ["PRIMARY requires observation_digest,decision,reason_code,affected_frame_mask,checkpoint_disposition and forbids attempted_admission_digest,conflict_reason", "CONFLICT requires attempted_admission_digest,conflict_reason and forbids observation_digest,decision,reason_code,affected_frame_mask,checkpoint_disposition", "source_position > 0"],
+        "rls": "receiver_entry_point_only",
+        "mutation": "insert_only_max_one_primary_one_conflict",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_generation_registry_barrier",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "barrier_revision:bigint:not_null", "updated_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id"],
+        "unique_keys": [],
+        "foreign_keys": [],
+        "checks": ["barrier_revision >= 0"],
+        "rls": "lifecycle_retention_entry_points_only",
+        "mutation": "monotonic_entry_point_only",
+        "retention_family": "none"
+      },
+      {
+        "name": "context_observer_generation",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "lifecycle_state:generation_state:not_null", "policy_digest:digest_sha256:not_null", "principal_digest:digest_sha256:not_null", "binding_digest:digest_sha256:not_null", "source_digest:digest_sha256:not_null", "registry_digest:digest_sha256:not_null", "impact_digest:digest_sha256:not_null", "key_schedule_digest:digest_sha256:not_null", "created_at:timestamptz:not_null", "consumed_at:timestamptz:nullable"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation"],
+        "unique_keys": [],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id->context_generation_registry_barrier.practice_id,source_contract_id,stream_id:RESTRICT"],
+        "checks": ["stream_epoch = 1", "observer_generation > 0", "consumed_at iff lifecycle_state = CONSUMED"],
+        "rls": "lifecycle_entry_point_only",
+        "mutation": "one_way_lifecycle_entry_point_only",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_durability_checkpoint",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "checkpoint_state:checkpoint_state:not_null", "last_contiguous_position:bigint:not_null", "last_observation_digest:digest_sha256:nullable", "lifecycle_revision:bigint:not_null", "audit_head_digest:digest_sha256:not_null", "checkpoint_integrity_digest:digest_sha256:not_null", "updated_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation"],
+        "unique_keys": [],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation->context_observer_generation.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation:RESTRICT"],
+        "checks": ["last_contiguous_position >= 0", "lifecycle_revision >= 0", "position zero iff last_observation_digest is null"],
+        "rls": "coordinator_lifecycle_entry_points_only",
+        "mutation": "locked_monotonic_or_terminal_entry_point_only",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_recovery_anchor",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "lifecycle_revision:bigint:not_null", "checkpoint_state:checkpoint_state:not_null", "last_contiguous_position:bigint:not_null", "last_observation_digest:digest_sha256:nullable", "policy_digest:digest_sha256:not_null", "principal_digest:digest_sha256:not_null", "binding_digest:digest_sha256:not_null", "source_digest:digest_sha256:not_null", "registry_digest:digest_sha256:not_null", "impact_digest:digest_sha256:not_null", "key_schedule_digest:digest_sha256:not_null", "checkpoint_integrity_digest:digest_sha256:not_null", "anchor_digest:digest_sha256:not_null", "created_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "lifecycle_revision"],
+        "unique_keys": [["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "anchor_digest"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation->context_observer_generation.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation:RESTRICT"],
+        "checks": ["lifecycle_revision >= 0", "last_contiguous_position >= 0"],
+        "rls": "lifecycle_entry_point_only",
+        "mutation": "insert_only_no_update_no_delete",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_classified_observation_receipt",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "source_position:bigint:not_null", "admission_entry_kind:admission_entry_kind:not_null", "observation_digest:digest_sha256:not_null", "decision:observation_decision:not_null", "reason_code:observation_reason:not_null", "affected_frame_mask:frame_mask:not_null", "checkpoint_disposition:checkpoint_disposition:not_null", "lifecycle_revision:bigint:not_null", "receipt_digest:digest_sha256:not_null", "created_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "source_position"],
+        "unique_keys": [["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "observation_digest"], ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "lifecycle_revision"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,source_position,admission_entry_kind->context_proofread_observation_admission.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,source_position,entry_kind:RESTRICT", "practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,lifecycle_revision->context_durability_lifecycle.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,lifecycle_revision:RESTRICT"],
+        "checks": ["source_position > 0", "lifecycle_revision > 0", "admission_entry_kind = PRIMARY"],
+        "rls": "coordinator_exact_receipt_select",
+        "mutation": "insert_only_no_update_no_delete",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_frame_generation",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "frame_generation_id:uuid:not_null", "frame_type:frame_type:not_null", "assembled_through_position:bigint:not_null", "lifecycle_state:frame_lifecycle:not_null", "created_at:timestamptz:not_null", "retired_at:timestamptz:nullable"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "frame_generation_id"],
+        "unique_keys": [["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "frame_type", "lifecycle_state=CURRENT"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation->context_observer_generation.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation:RESTRICT"],
+        "checks": ["assembled_through_position >= 0", "retired_at iff lifecycle_state = RETIRED", "RETIRED cannot transition to CURRENT"],
+        "rls": "coordinator_application_metadata_select",
+        "mutation": "insert_then_one_way_retire",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_invalidation_watermark",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "frame_type:frame_type:not_null", "watermark_position:bigint:not_null", "updated_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "frame_type"],
+        "unique_keys": [],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation->context_durability_checkpoint.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation:RESTRICT"],
+        "checks": ["watermark_position >= 0", "watermark_position <= checkpoint.last_contiguous_position"],
+        "rls": "coordinator_application_metadata_select",
+        "mutation": "monotonic_entry_point_only",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_reassembly_obligation",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "frame_generation_id:uuid:not_null", "earliest_position:bigint:not_null", "latest_position:bigint:not_null", "rolling_cause_digest:digest_sha256:not_null", "count_bucket:obligation_count_bucket:not_null", "obligation_state:obligation_state:not_null", "created_at:timestamptz:not_null", "updated_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "frame_generation_id"],
+        "unique_keys": [["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "frame_generation_id", "obligation_state=PENDING"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,frame_generation_id->context_frame_generation.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,frame_generation_id:RESTRICT"],
+        "checks": ["earliest_position > 0", "latest_position >= earliest_position", "count_bucket derived from canonical admitted audit history"],
+        "rls": "coordinator_application_metadata_select",
+        "mutation": "coordinator_coalesce_or_complete_only",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_durability_lifecycle",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "lifecycle_revision:bigint:not_null", "entry_kind:lifecycle_entry_kind:not_null", "source_position:bigint:nullable", "key_interval_start:bigint:nullable", "key_interval_end:bigint:nullable", "prior_lifecycle_digest:digest_sha256:not_null", "lifecycle_digest:digest_sha256:not_null", "created_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "lifecycle_revision"],
+        "unique_keys": [["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "lifecycle_digest"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation->context_observer_generation.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation:RESTRICT"],
+        "checks": ["lifecycle_revision > 0 and gap_free", "DECISION requires source_position and forbids key interval", "KEY_ROTATION requires key_interval_start,key_interval_end and forbids source_position"],
+        "rls": "coordinator_lifecycle_entry_points_only",
+        "mutation": "insert_only_no_update_no_delete",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_durability_audit",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "lifecycle_revision:bigint:not_null", "decision:observation_decision:not_null", "reason_code:observation_reason:not_null", "affected_frame_mask:frame_mask:not_null", "prior_audit_digest:digest_sha256:not_null", "audit_head_digest:digest_sha256:not_null", "created_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "lifecycle_revision"],
+        "unique_keys": [["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "audit_head_digest"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,lifecycle_revision->context_durability_lifecycle.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,lifecycle_revision:RESTRICT"],
+        "checks": ["linked lifecycle entry_kind = DECISION", "audit revisions exactly equal DECISION lifecycle revisions"],
+        "rls": "coordinator_lifecycle_exact_audit_select",
+        "mutation": "insert_only_no_update_no_delete",
+        "retention_family": "audit"
+      },
+      {
+        "name": "context_observation_key_interval",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "stream_id:uuid:not_null", "stream_epoch:bigint:not_null", "observer_id:uuid:not_null", "observer_generation:bigint:not_null", "interval_start:bigint:not_null", "interval_end:bigint:not_null", "key_id:key_id:not_null", "availability_attestation_digest:digest_sha256:not_null", "created_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "interval_start"],
+        "unique_keys": [["practice_id", "source_contract_id", "stream_id", "stream_epoch", "observer_id", "observer_generation", "key_id"]],
+        "foreign_keys": ["practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation->context_observer_generation.practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation:RESTRICT"],
+        "checks": ["interval_start >= 1", "interval_end > interval_start", "ordered gap_free non_overlapping complete partition", "rotation future_fenced", "no key bytes"],
+        "rls": "receiver_coordinator_lifecycle_metadata_only",
+        "mutation": "insert_only_future_interval_no_historical_edit",
+        "retention_family": "receipt_checkpoint"
+      },
+      {
+        "name": "context_recovery_pin",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "pin_id:uuid:not_null", "retention_family:retention_family:not_null", "stream_id:uuid:not_null", "observer_id:uuid:nullable", "observer_generation:bigint:nullable", "position_or_revision:bigint:nullable", "reason_code:recovery_pin_reason:not_null", "pin_state:recovery_pin_state:not_null", "created_at:timestamptz:not_null", "released_at:timestamptz:nullable"],
+        "primary_key": ["practice_id", "source_contract_id", "pin_id"],
+        "unique_keys": [],
+        "foreign_keys": [],
+        "checks": ["released_at iff pin_state = RELEASED", "typed scope matches retention_family"],
+        "rls": "independent_recovery_authority_only",
+        "mutation": "insert_then_one_way_release",
+        "retention_family": "none"
+      },
+      {
+        "name": "context_service_practice_binding",
+        "columns": ["database_login:name:not_null", "logical_capability:logical_capability:not_null", "practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "binding_revision:bigint:not_null", "credential_epoch:bigint:not_null", "active_from:timestamptz:not_null", "active_until:timestamptz:nullable"],
+        "primary_key": ["database_login", "logical_capability", "binding_revision"],
+        "unique_keys": [["database_login", "active_until IS NULL"]],
+        "foreign_keys": [],
+        "checks": ["binding_revision > 0", "credential_epoch > 0", "one active capability practice source epoch per login"],
+        "rls": "owner_entry_points_exact_binding_lookup",
+        "mutation": "owner_append_then_close_only",
+        "retention_family": "none"
+      },
+      {
+        "name": "context_retention_policy",
+        "columns": ["practice_id:uuid:not_null", "source_contract_id:source_contract_code:not_null", "policy_revision:bigint:not_null", "source_grace_seconds:bigint:not_null", "receipt_checkpoint_grace_seconds:bigint:not_null", "audit_grace_seconds:bigint:not_null", "key_overlap_seconds:bigint:not_null", "retention_execution_enabled:boolean:not_null", "effective_at:timestamptz:not_null"],
+        "primary_key": ["practice_id", "source_contract_id", "policy_revision"],
+        "unique_keys": [],
+        "foreign_keys": [],
+        "checks": ["all durations >= 0", "retention_execution_enabled = false in this architecture"],
+        "rls": "retention_lifecycle_policy_select",
+        "mutation": "append_only_owner_policy",
+        "retention_family": "none"
+      }
+    ]
+  },
+  "role_matrix": [
+    {"role": "context_schema_owner", "login": false, "noinherit": true, "nobypassrls": true, "owns_objects": true, "direct_table_select": [], "direct_table_dml": [], "execute_entry_points": []},
+    {"role": "context_producer", "login": true, "noinherit": true, "nobypassrls": true, "owns_objects": false, "direct_table_select": [], "direct_table_dml": [], "execute_entry_points": ["project_update_confirm_reschedule_v1"]},
+    {"role": "context_observer", "login": true, "noinherit": true, "nobypassrls": true, "owns_objects": false, "direct_table_select": ["diary_context_observation_outbox_v1"], "direct_table_dml": [], "execute_entry_points": ["admit_proofread_observation_v1"]},
+    {"role": "context_admission_receiver", "login": false, "noinherit": true, "nobypassrls": true, "owns_objects": false, "direct_table_select": [], "direct_table_dml": [], "execute_entry_points": []},
+    {"role": "context_coordinator", "login": true, "noinherit": true, "nobypassrls": true, "owns_objects": false, "direct_table_select": [], "direct_table_dml": [], "execute_entry_points": ["apply_durability_transition_v1"]},
+    {"role": "context_lifecycle", "login": true, "noinherit": true, "nobypassrls": true, "owns_objects": false, "direct_table_select": [], "direct_table_dml": [], "execute_entry_points": ["register_observer_generation_v1", "append_recovery_anchor_v1", "rotate_observation_key_v1", "consume_observer_generation_v1"]},
+    {"role": "context_retention", "login": true, "noinherit": true, "nobypassrls": true, "owns_objects": false, "direct_table_select": [], "direct_table_dml": [], "execute_entry_points": ["evaluate_source_retention_v1", "purge_source_rows_v1"]},
+    {"role": "context_application_read", "login": true, "noinherit": true, "nobypassrls": true, "owns_objects": false, "direct_table_select": ["context_frame_generation", "context_invalidation_watermark", "context_reassembly_obligation"], "direct_table_dml": [], "execute_entry_points": []}
+  ],
+  "entry_points": [
+    {"name": "project_update_confirm_reschedule_v1", "executor_role": "context_producer", "owner": "context_schema_owner", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["command_id:uuid"], "authority_source": "session_user_binding", "effect": "validate exact current top-level command and append alias head outbox"},
+    {"name": "admit_proofread_observation_v1", "executor_role": "context_observer", "owner": "context_admission_receiver", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["generation_locator:typed", "source_position:bigint", "proofread_packet:closed_typed"], "authority_source": "session_user_binding_and_source_reselection", "effect": "append or return bounded PRIMARY CONFLICT admission"},
+    {"name": "apply_durability_transition_v1", "executor_role": "context_coordinator", "owner": "context_schema_owner", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["admission_locator:typed"], "authority_source": "session_user_binding_and_stored_admission", "effect": "atomic receipt watermark retirement obligation lifecycle audit checkpoint"},
+    {"name": "register_observer_generation_v1", "executor_role": "context_lifecycle", "owner": "context_schema_owner", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["generation_registration:closed_typed"], "authority_source": "session_user_binding", "effect": "registry checkpoint schedule baseline anchor"},
+    {"name": "append_recovery_anchor_v1", "executor_role": "context_lifecycle", "owner": "context_schema_owner", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["generation_locator:typed", "lifecycle_revision:bigint"], "authority_source": "session_user_binding_and_complete_state_reverification", "effect": "append exact independent anchor"},
+    {"name": "rotate_observation_key_v1", "executor_role": "context_lifecycle", "owner": "context_schema_owner", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["generation_locator:typed", "future_interval:closed_typed"], "authority_source": "session_user_binding_and_current_anchor", "effect": "future interval lifecycle checkpoint"},
+    {"name": "consume_observer_generation_v1", "executor_role": "context_lifecycle", "owner": "context_schema_owner", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["generation_locator:typed", "closed_reason:generation_terminal_reason"], "authority_source": "session_user_binding", "effect": "one way generation consumption"},
+    {"name": "evaluate_source_retention_v1", "executor_role": "context_retention", "owner": "context_schema_owner", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["practice_source_stream:typed"], "authority_source": "session_user_binding_and_complete_database_census", "effect": "return inert eligibility only"},
+    {"name": "purge_source_rows_v1", "executor_role": "context_retention", "owner": "context_schema_owner", "security_definer": true, "fixed_search_path": true, "dynamic_sql": false, "public_execute": false, "input": ["practice_source_stream:typed", "through_position:bigint"], "authority_source": "session_user_binding_complete_census_and_enabled_policy", "effect": "delete source family only"}
+  ],
+  "trigger_surface": [
+    {"table": "appointment_command_idempotency", "timing": "BEFORE", "events": ["UPDATE", "DELETE"], "deferrable": false, "purpose": "forbid prior tuple adoption state reversion and creation-transaction delete"},
+    {"table": "appointment_command_idempotency", "timing": "AFTER", "events": ["INSERT", "UPDATE", "DELETE"], "deferrable": true, "initially_deferred": true, "purpose": "claim completion and bidirectional transaction completeness"},
+    {"table": "appointments", "timing": "AFTER", "events": ["UPDATE OF start_time,duration_minutes"], "deferrable": true, "initially_deferred": true, "purpose": "database derived temporal obligation and non-temporal projection absence"},
+    {"table": "appointment_audit_log", "timing": "BEFORE", "events": ["UPDATE", "DELETE"], "deferrable": false, "purpose": "exact command audit immutability"},
+    {"table": "appointment_audit_log", "timing": "AFTER", "events": ["INSERT", "UPDATE", "DELETE"], "deferrable": true, "initially_deferred": true, "purpose": "audit claim appointment event completeness"},
+    {"table": "diary_committed_events", "timing": "BEFORE", "events": ["UPDATE", "DELETE"], "deferrable": false, "purpose": "exact reschedule event immutability"},
+    {"table": "diary_committed_events", "timing": "AFTER", "events": ["INSERT", "UPDATE", "DELETE"], "deferrable": true, "initially_deferred": true, "purpose": "event temporal claim audit outbox completeness"},
+    {"table": "diary_context_aggregate_aliases_v1", "timing": "BEFORE", "events": ["UPDATE", "DELETE"], "deferrable": false, "purpose": "alias immutability and nonreuse"},
+    {"table": "diary_context_aggregate_aliases_v1", "timing": "AFTER", "events": ["INSERT", "UPDATE", "DELETE"], "deferrable": true, "initially_deferred": true, "purpose": "first alias requires same transaction outbox"},
+    {"table": "context_observation_stream_head", "timing": "BEFORE", "events": ["UPDATE", "DELETE"], "deferrable": false, "purpose": "monotonic one-step head and no delete"},
+    {"table": "context_observation_stream_head", "timing": "AFTER", "events": ["INSERT", "UPDATE", "DELETE"], "deferrable": true, "initially_deferred": true, "purpose": "head advance requires exact outbox predecessor"},
+    {"table": "diary_context_observation_outbox_v1", "timing": "BEFORE", "events": ["UPDATE", "DELETE"], "deferrable": false, "purpose": "outbox immutability"},
+    {"table": "diary_context_observation_outbox_v1", "timing": "AFTER", "events": ["INSERT", "UPDATE", "DELETE"], "deferrable": true, "initially_deferred": true, "purpose": "outbox event claim alias head completeness"}
+  ],
+  "cross_relation_invariants": [
+    "tenant keys include non-null practice_id and full source generation coordinate",
+    "all foreign-key delete actions are RESTRICT or NO ACTION and never CASCADE",
+    "one PRIMARY plus at most one CONFLICT per generation position",
+    "coordinator input is an admission locator and never a decision packet",
+    "receipt redelivery loads retained admission and conflict before optional source",
+    "baseline and every decision or rotation revision require a lifecycle-owned anchor before next transition",
+    "lifecycle revisions are gap-free and partition exactly into DECISION and KEY_ROTATION",
+    "key intervals are generation-local gap-free non-overlapping and future-fenced",
+    "source receipt_checkpoint and audit retention families are independent",
+    "source purge locks the same registry barrier as generation registration and derives complete non-consumed census",
+    "retention execution is false by default",
+    "events invalidate only and never grant fresh read or command authority"
+  ],
   "artifact_boundary": {
-    "owned_artifacts": [
+    "core_owned_artifacts": [
       "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
       "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-design.md",
       "docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md",
@@ -115,15 +328,12 @@
       "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
       "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"
     ],
-    "forbidden_prefixes": [
-      "app/",
-      "alembic/",
-      "docs/diary/",
-      "docs/api-spine/"
-    ],
+    "evidence_artifact_prefixes": ["docs/ariadne-agent-error-correction-register-revision-", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-", "orchestration/continuity/ariadne-agent-error-register/", "tests/test_ariadne_agent_error_register.py"],
+    "forbidden_prefixes": ["app/", "alembic/", "docs/diary/", "docs/api-spine/", "docs/branding/"],
     "executable_ddl": false,
     "database_contact": false,
     "provider_contact": false,
-    "runtime_wiring": false
+    "runtime_wiring": false,
+    "product_data_processed": false
   }
 }

@@ -470,7 +470,15 @@ generation rehearsal. The architecture-only provider-free default-off
   same-transaction provenance and the phrase-only static tests. The active
   recovery adds ephemeral current-XID/immutable-claim checks, before/deferred
   fail-commit guards, a closed JSON contract/schema, model-constraint parsing
-  and adversarial contract mutations. Only a fresh acceptance of the complete
+  and adversarial contract mutations. An ineligible diagnostic then exposed
+  unresolved xid/xid8/subtransaction rendering, temporal no-event/delete paths
+  and an under-specified machine catalogue. The sixth recovery freezes the
+  exact PostgreSQL-16 low-XID expression with a no-subtransaction rule, derives
+  the event obligation from appointment `OLD`/`NEW` start-duration values,
+  covers claim/appointment/audit/event/alias/head/outbox INSERT/UPDATE/DELETE
+  guards, and expands the normative contract to exact columns, keys, delete
+  actions, roles, RLS, entry points, triggers, admission, lifecycle, anchor,
+  key and retention surfaces. Only a fresh acceptance of the complete
   corrected plan may admit an inert DDL rehearsal. No applied migration, live
   implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
