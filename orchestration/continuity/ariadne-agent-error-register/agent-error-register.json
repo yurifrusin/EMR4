@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 44,
+  "register_revision": 45,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1900,6 +1900,43 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0050",
+      "attempt_id": "raisa-context-fabric-durability-state-machine-candidate-veto-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-durability-state-machine-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "An integrity-sealed durability state must reject reordered or reused receipt identity, forged or reordered audit chains and broken receipt/audit links, while retention must compare the complete generation census with a separately typed backend-authored authority that the candidate cannot self-echo.",
+      "observed_error": "The first implementation candidate accepted resealed receipt reordering, cross-position digest reuse, reordered and forged audit identity/chaining/linkage, and allowed an omitted slow generation to authorize retention by supplying replacement expected census and registry digests derived from the incomplete candidate census.",
+      "detection_method": "A fresh exact-head native independent veto used bounded authored-synthetic resealing and self-echoed retention inputs against candidate 2054500a44fbea21d87ecd65b7e7ed5a83492394 and returned two P1 findings before acceptance.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-independent-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-45.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.durability_resealed_crosslinks_and_retention_anchor_undervalidated",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Sol preserved and rejected the first candidate, invoked the plan's recovery lease, added canonical receipt and audit invariants with exact audit-chain and receipt-link validation, introduced a separately typed backend-authored retention anchor with exact expected generation membership, and added direct resealed and self-echo adversarial tests. Fresh exact-head acceptance remains pending.",
+        "prevention_control": "Before accepting an integrity-sealed state machine, independently mutate every ordered collection, unique identity, digest chain and cross-record link after resealing; for deletion or retention decisions, also attempt to self-authorize an incomplete population using replacement expected digests and require a non-candidate-owned authority boundary.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-independent-veto.md",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py"
+        ]
+      },
+      "status": "open"
     }
   ]
 }

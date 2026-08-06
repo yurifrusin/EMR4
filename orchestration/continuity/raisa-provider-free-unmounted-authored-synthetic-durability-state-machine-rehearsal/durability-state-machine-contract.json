@@ -43,9 +43,11 @@
   },
   "retention": {
     "complete_state_census_required": true,
+    "separately_typed_backend_anchor_required": true,
     "independent_census_and_registry_digest_required": true,
     "minimum_non_consumed_checkpoint_controls": true,
     "omission_or_duplication_denied": true,
+    "candidate_self_echo_anchor_accepted": false,
     "wall_clock_or_event_ttl_used": false,
     "deletion_effect": false
   },

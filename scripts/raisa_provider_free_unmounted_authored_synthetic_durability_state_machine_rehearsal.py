@@ -285,6 +285,14 @@ class RetentionResult:
     deletion_executed: Literal[False] = False
 
 
+@dataclass(frozen=True)
+class RetentionAnchor:
+    authority_kind: Literal["BACKEND_AUTHORED_RETENTION_CENSUS_ANCHOR"]
+    registry_digest: str
+    census_digest: str
+    expected_observer_generations: tuple[int, ...]
+
+
 def _census_body(census: GenerationCensus) -> dict[str, Any]:
     return {
         "registry_digest": census.registry_digest,
@@ -312,6 +320,30 @@ def verify_census(census: GenerationCensus) -> bool:
         and member.state in GENERATION_STATES
         for member in census.members
     )
+
+
+_AUTHORITATIVE_REGISTRY_DIGEST = synthetic_digest("registry:v1")
+_AUTHORITATIVE_CENSUS = seal_census(
+    GenerationCensus(
+        registry_digest=_AUTHORITATIVE_REGISTRY_DIGEST,
+        members=(
+            GenerationCensusMember(1, 0, "ACTIVE"),
+            GenerationCensusMember(2, 4, "ACTIVE"),
+        ),
+        census_digest="",
+    )
+)
+_AUTHORITATIVE_RETENTION_ANCHOR = RetentionAnchor(
+    authority_kind="BACKEND_AUTHORED_RETENTION_CENSUS_ANCHOR",
+    registry_digest=_AUTHORITATIVE_REGISTRY_DIGEST,
+    census_digest=_AUTHORITATIVE_CENSUS.census_digest,
+    expected_observer_generations=(1, 2),
+)
+
+
+def authoritative_retention_anchor() -> RetentionAnchor:
+    """Return the sole backend-authored anchor in this closed synthetic rehearsal."""
+    return _AUTHORITATIVE_RETENTION_ANCHOR
 
 
 def _state_body(state: DurabilityState) -> dict[str, Any]:
@@ -367,7 +399,17 @@ def verify_state(state: DurabilityState) -> bool:
         return False
     if len({item.frame_generation_id for item in state.obligations}) != len(state.obligations):
         return False
-    if len({item.position for item in state.receipts}) != len(state.receipts):
+    receipt_positions = [item.position for item in state.receipts]
+    receipt_digests = [item.observation_digest for item in state.receipts]
+    if len(set(receipt_positions)) != len(state.receipts):
+        return False
+    if receipt_positions != sorted(receipt_positions):
+        return False
+    if receipt_positions and receipt_positions != list(
+        range(receipt_positions[0], receipt_positions[-1] + 1)
+    ):
+        return False
+    if len(set(receipt_digests)) != len(receipt_digests):
         return False
     if not validate_key_schedule(state.key_schedule):
         return False
@@ -456,7 +498,71 @@ def verify_state(state: DurabilityState) -> bool:
         or census_current[0].state != state.checkpoint_state
     ):
         return False
-    return all(_audit_valid(item, state) for item in state.audits)
+    if not all(_audit_valid(item, state) for item in state.audits):
+        return False
+    audit_ids = [item.opaque_audit_id for item in state.audits]
+    if len(audit_ids) != len(set(audit_ids)):
+        return False
+    audit_positions = [item.position for item in state.audits]
+    if len(audit_positions) != len(set(audit_positions)):
+        return False
+    audit_order = [(item.lifecycle_revision, item.position) for item in state.audits]
+    if audit_order != sorted(audit_order) or len(audit_order) != len(set(audit_order)):
+        return False
+    receipts_by_position = {item.position: item for item in state.receipts}
+    previous_audit: AuditRecord | None = None
+    for audit in state.audits:
+        expected_prior = (
+            synthetic_digest("audit:genesis")
+            if previous_audit is None
+            else digest_value(asdict(previous_audit))
+        )
+        if not hmac.compare_digest(audit.prior_audit_digest, expected_prior):
+            return False
+        expected_audit_id = (
+            "audit:"
+            + digest_value(
+                [state.observer_generation, audit.position, audit.observation_digest]
+            )[7:31]
+        )
+        if audit.opaque_audit_id != expected_audit_id:
+            return False
+        receipt = receipts_by_position.get(audit.position)
+        if receipt is not None:
+            if audit.decision not in DECISIONS or (
+                receipt.observation_digest != audit.observation_digest
+                or receipt.decision != audit.decision
+                or receipt.reason != audit.reason
+                or receipt.affected_frame_types != audit.affected_frame_types
+                or receipt.checkpoint_disposition != audit.checkpoint_disposition
+            ):
+                return False
+        elif audit.decision in DECISIONS:
+            return False
+        elif (
+            audit.decision != "FULL_INVALIDATION_REQUIRED"
+            or audit.reason
+            not in (
+                "SAME_POSITION_IDENTITY_MISMATCH",
+                "OBSERVATION_DIGEST_REUSED",
+                "COVERAGE_GAP",
+                "RESTART_CONTINUITY_UNCERTAIN",
+                "KEY_SCHEDULE_UNVERIFIABLE",
+            )
+            or audit.affected_frame_types != FRAME_TYPES
+            or audit.checkpoint_disposition != "HOLD_AND_REBASE"
+        ):
+            return False
+        previous_audit = audit
+    if state.audits and state.receipts:
+        first_audited_position = min(item.position for item in state.audits)
+        for receipt in state.receipts:
+            if receipt.position >= first_audited_position and not any(
+                audit.position == receipt.position and audit.decision in DECISIONS
+                for audit in state.audits
+            ):
+                return False
+    return True
 
 
 def _audit_valid(audit: AuditRecord, state: DurabilityState) -> bool:
@@ -465,7 +571,11 @@ def _audit_valid(audit: AuditRecord, state: DurabilityState) -> bool:
         and _opaque(audit.opaque_audit_id)
         and audit.practice_binding_digest == state.practice_binding_digest
         and audit.principal_digest == state.principal_digest
+        and audit.policy_digest == state.policy_digest
+        and audit.observer_binding_digest == state.observer_binding_digest
         and audit.source_contract_digest == state.source_contract_digest
+        and audit.registry_digest == state.registry_digest
+        and audit.impact_policy_digest == state.impact_policy_digest
         and audit.observer_id == state.observer_id
         and audit.observer_generation == state.observer_generation
         and audit.stream_id == state.stream_id
@@ -505,6 +615,7 @@ def _audit_valid(audit: AuditRecord, state: DurabilityState) -> bool:
         and audit.coalesced_count_bucket in ("ZERO", *COUNT_BUCKETS)
         and type(audit.lifecycle_revision) is int
         and audit.lifecycle_revision >= 1
+        and audit.lifecycle_revision <= state.lifecycle_revision
     )
 
 
@@ -1047,8 +1158,7 @@ def retention_eligibility(
     state: DurabilityState,
     *,
     source_row_position: int,
-    expected_census_digest: str,
-    expected_registry_digest: str,
+    anchor: RetentionAnchor,
     recovery_pin: bool,
     audit_pin: bool,
     key_overlap_closed: bool,
@@ -1060,10 +1170,29 @@ def retention_eligibility(
         reasons.append("SOURCE_ROW_POSITION_INVALID")
     if not verify_state(state) or not verify_census(census):
         reasons.append("STATE_OR_CENSUS_INTEGRITY_INVALID")
-    if not hmac.compare_digest(census.census_digest, expected_census_digest):
+    anchor_valid = (
+        anchor is _AUTHORITATIVE_RETENTION_ANCHOR
+        and anchor.authority_kind == "BACKEND_AUTHORED_RETENTION_CENSUS_ANCHOR"
+        and _is_digest(anchor.registry_digest)
+        and _is_digest(anchor.census_digest)
+        and anchor.expected_observer_generations
+        == tuple(sorted(set(anchor.expected_observer_generations)))
+        and all(
+            type(generation) is int and generation > 0
+            for generation in anchor.expected_observer_generations
+        )
+    )
+    if not anchor_valid:
+        reasons.append("RETENTION_ANCHOR_INVALID")
+    if not hmac.compare_digest(census.census_digest, anchor.census_digest):
         reasons.append("COMPLETE_CENSUS_DIGEST_MISMATCH")
-    if not hmac.compare_digest(census.registry_digest, expected_registry_digest):
+    if not hmac.compare_digest(census.registry_digest, anchor.registry_digest):
         reasons.append("REGISTRY_DIGEST_MISMATCH")
+    observed_generations = tuple(
+        member.observer_generation for member in census.members
+    )
+    if observed_generations != anchor.expected_observer_generations:
+        reasons.append("AUTHORITATIVE_GENERATION_MEMBERSHIP_MISMATCH")
     active = [member for member in census.members if member.state != "CONSUMED"]
     if not active:
         reasons.append("NO_NON_CONSUMED_GENERATION")
@@ -1084,18 +1213,9 @@ def retention_eligibility(
 
 
 def build_initial_state() -> DurabilityState:
-    registry = synthetic_digest("registry:v1")
+    registry = _AUTHORITATIVE_REGISTRY_DIGEST
     schedule = (KeyInterval("key:alpha", 0, None),)
-    census = seal_census(
-        GenerationCensus(
-            registry_digest=registry,
-            members=(
-                GenerationCensusMember(1, 0, "ACTIVE"),
-                GenerationCensusMember(2, 4, "ACTIVE"),
-            ),
-            census_digest="",
-        )
-    )
+    census = _AUTHORITATIVE_CENSUS
     state = DurabilityState(
         practice_binding_digest=synthetic_digest("practice:synthetic"),
         source_contract_digest=synthetic_digest("source-contract:v1"),
@@ -1210,10 +1330,12 @@ __all__ = [
     "RecoveryAnchor",
     "RestartResult",
     "RetainedRow",
+    "RetentionAnchor",
     "RotationResult",
     "SCHEMA_VERSION",
     "TransitionResult",
     "apply_key_rotation",
+    "authoritative_retention_anchor",
     "build_initial_state",
     "candidate_for",
     "canonical_bytes",

@@ -3,7 +3,7 @@
   "evidence_label": "provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal",
   "result": "raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass",
   "data_class": "newly_authored_synthetic_opaque_control_metadata",
-  "contract_digest": "sha256:e5e3c9f727233b147d75bcdd36593aa3c2c9fc665ae31eae608dd9ae61780b60",
+  "contract_digest": "sha256:8190189b097d279941be37305c66f85aa58edce4b133b3305d6b01f66c303ad2",
   "case_count": 33,
   "passed_case_count": 33,
   "cases": [
@@ -319,7 +319,8 @@
       "mutation_committed": false,
       "proof_codes": [
         "CENSUS_DIGEST_MISMATCH",
-        "OMISSION_REJECTED"
+        "OMISSION_REJECTED",
+        "SELF_ECHO_ANCHOR_REJECTED"
       ]
     },
     {

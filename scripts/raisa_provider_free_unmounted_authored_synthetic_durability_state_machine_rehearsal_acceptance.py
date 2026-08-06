@@ -26,7 +26,9 @@ from scripts.raisa_provider_free_unmounted_authored_synthetic_durability_state_m
     KeyInterval,
     KeyScheduleTransition,
     RetainedRow,
+    RetentionAnchor,
     apply_key_rotation,
+    authoritative_retention_anchor,
     build_initial_state,
     candidate_for,
     digest_value,
@@ -77,7 +79,7 @@ CASE_SPECS = (
     ("key_schedule_history_change", "REBASE_REQUIRED", ("HISTORY_CHANGE_REJECTED", "FULL_INVALIDATION")),
     ("retention_eligible", "ELIGIBLE", ("COMPLETE_CENSUS", "MINIMUM_CHECKPOINT", "INERT_DECISION")),
     ("retention_minimum_checkpoint", "DENIED", ("SLOWEST_GENERATION_CONTROLS", "INERT_DECISION")),
-    ("retention_omitted_generation", "DENIED", ("CENSUS_DIGEST_MISMATCH", "OMISSION_REJECTED")),
+    ("retention_omitted_generation", "DENIED", ("CENSUS_DIGEST_MISMATCH", "OMISSION_REJECTED", "SELF_ECHO_ANCHOR_REJECTED")),
     ("retention_duplicate_generation", "DENIED", ("CENSUS_INTEGRITY_FAILED", "DUPLICATE_REJECTED")),
     ("retention_recovery_pin", "DENIED", ("RECOVERY_PIN", "INERT_DECISION")),
     ("retention_audit_pin", "DENIED", ("AUDIT_PIN", "INERT_DECISION")),
@@ -116,9 +118,11 @@ def build_contract() -> dict[str, Any]:
         },
         "retention": {
             "complete_state_census_required": True,
+            "separately_typed_backend_anchor_required": True,
             "independent_census_and_registry_digest_required": True,
             "minimum_non_consumed_checkpoint_controls": True,
             "omission_or_duplication_denied": True,
+            "candidate_self_echo_anchor_accepted": False,
             "wall_clock_or_event_ttl_used": False,
             "deletion_effect": False,
         },
@@ -219,8 +223,7 @@ def build_evidence(contract: dict[str, Any] | None = None) -> dict[str, Any]:
 
     retention_args = {
         "source_row_position": 0,
-        "expected_census_digest": initial.generation_census.census_digest,
-        "expected_registry_digest": initial.registry_digest,
+        "anchor": authoritative_retention_anchor(),
         "recovery_pin": False,
         "audit_pin": False,
         "key_overlap_closed": True,
@@ -234,10 +237,20 @@ def build_evidence(contract: dict[str, Any] | None = None) -> dict[str, Any]:
     omitted = seal_census(replace(initial.generation_census, members=initial.generation_census.members[1:], census_digest=""))
     omitted_state = seal_state(replace(initial, generation_census=omitted, integrity_digest=""))
     omitted_result = retention_eligibility(omitted_state, **retention_args)
-    cases.append(_case("retention_omitted_generation", omitted_result.disposition, "COMPLETE_CENSUS_DIGEST_MISMATCH" in omitted_result.reasons, omitted_state.integrity_digest, False))
+    echoed_anchor = RetentionAnchor(
+        "BACKEND_AUTHORED_RETENTION_CENSUS_ANCHOR",
+        omitted.registry_digest,
+        omitted.census_digest,
+        (2,),
+    )
+    echoed_result = retention_eligibility(
+        omitted_state,
+        **(retention_args | {"anchor": echoed_anchor}),
+    )
+    cases.append(_case("retention_omitted_generation", omitted_result.disposition, "COMPLETE_CENSUS_DIGEST_MISMATCH" in omitted_result.reasons and "RETENTION_ANCHOR_INVALID" in echoed_result.reasons and echoed_result.disposition == "DENIED", omitted_state.integrity_digest, False))
     duplicate = seal_census(GenerationCensus(initial.registry_digest, (initial.generation_census.members[0],) * 2, ""))
     duplicate_state = seal_state(replace(initial, generation_census=duplicate, integrity_digest=""))
-    duplicate_result = retention_eligibility(duplicate_state, **(retention_args | {"expected_census_digest": duplicate.census_digest}))
+    duplicate_result = retention_eligibility(duplicate_state, **retention_args)
     cases.append(_case("retention_duplicate_generation", duplicate_result.disposition, "STATE_OR_CENSUS_INTEGRITY_INVALID" in duplicate_result.reasons, duplicate_state.integrity_digest, False))
     for case_id, change, proof_reason in (
         ("retention_recovery_pin", {"recovery_pin": True}, "RECOVERY_PIN_PRESENT"),

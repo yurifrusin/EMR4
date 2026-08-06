@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_durability_state_machine_integrity_and_retention_anchor_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The first implementation candidate at 2054500a was rejected by two preserved P1 findings. The recovery now enforces canonical receipt/audit structure, exact audit-chain and receipt linkage, and a separately typed backend-authored retention anchor that rejects candidate self-echo. Thirty-three deterministic evidence cases and the exact expanded seven-file packet of 195 serial checks pass; AER-0050 remains open pending fresh review.",
+    "current_authority_allocation": "GPT Sol owns the named recovery lease, explicit-path candidate commit and fresh exact-head acceptance dispatch. The prior reviewer retains no write or integration authority, and no external provider worker is authorised.",
+    "git_refs_and_worktree": "Task HEAD is 2054500a44fbea21d87ecd65b7e7ed5a83492394 on codex/ariadne-bernie-davida-parallel-seam; origin task remains 9e26c0b87f8b37e761ec12da8f0fc090e7b8dec0. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit recovery paths will be staged; docs/branding and all unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "The live baton authorises uninterrupted progress through the accepted provider-free unmounted authored-synthetic durability rehearsal while all app, database/source, product-data, provider, command, runtime, deployment, Pages and protected-ref surfaces remain closed.",
+    "protected_evidence_boundaries": "The recovery commit is limited to the pure durability module/generator/test, three regenerated continuity artifacts, the preserved veto, AER revision 45 register/report/test and this receipt pair. No branding or unrelated untracked receipt/state/evidence file may be staged, and no app, migration, Diary, API route, database/source, product-data, provider, command, runtime, deployment, Pages or protected-ref surface may be opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

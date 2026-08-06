@@ -179,14 +179,19 @@
           "additionalProperties": false,
           "required": [
             "complete_state_census_required",
+            "separately_typed_backend_anchor_required",
             "independent_census_and_registry_digest_required",
             "minimum_non_consumed_checkpoint_controls",
             "omission_or_duplication_denied",
+            "candidate_self_echo_anchor_accepted",
             "wall_clock_or_event_ttl_used",
             "deletion_effect"
           ],
           "properties": {
             "complete_state_census_required": {
+              "const": true
+            },
+            "separately_typed_backend_anchor_required": {
               "const": true
             },
             "independent_census_and_registry_digest_required": {
@@ -197,6 +202,9 @@
             },
             "omission_or_duplication_denied": {
               "const": true
+            },
+            "candidate_self_echo_anchor_accepted": {
+              "const": false
             },
             "wall_clock_or_event_ttl_used": {
               "const": false
@@ -428,7 +436,7 @@
           "const": "newly_authored_synthetic_opaque_control_metadata"
         },
         "contract_digest": {
-          "const": "sha256:e5e3c9f727233b147d75bcdd36593aa3c2c9fc665ae31eae608dd9ae61780b60"
+          "const": "sha256:8190189b097d279941be37305c66f85aa58edce4b133b3305d6b01f66c303ad2"
         },
         "case_count": {
           "const": 33
@@ -1642,14 +1650,17 @@
                 },
                 "proof_codes": {
                   "type": "array",
-                  "minItems": 2,
-                  "maxItems": 2,
+                  "minItems": 3,
+                  "maxItems": 3,
                   "prefixItems": [
                     {
                       "const": "CENSUS_DIGEST_MISMATCH"
                     },
                     {
                       "const": "OMISSION_REJECTED"
+                    },
+                    {
+                      "const": "SELF_ECHO_ANCHOR_REJECTED"
                     }
                   ],
                   "items": false

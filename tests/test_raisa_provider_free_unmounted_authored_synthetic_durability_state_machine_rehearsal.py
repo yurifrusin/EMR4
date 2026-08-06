@@ -26,7 +26,9 @@ from scripts.raisa_provider_free_unmounted_authored_synthetic_durability_state_m
     KeyInterval,
     KeyScheduleTransition,
     RetainedRow,
+    RetentionAnchor,
     apply_key_rotation,
+    authoritative_retention_anchor,
     build_initial_state,
     candidate_for,
     digest_value,
@@ -206,6 +208,106 @@ def test_resealed_state_mutations_fail_cross_link_and_lifecycle_validation() -> 
     assert not verify_state(resealed_census)
 
 
+def test_resealed_receipt_order_and_digest_reuse_are_rejected() -> None:
+    state = build_initial_state()
+    state = transition(state, candidate_for(state, position=5)).state
+    state = transition(state, candidate_for(state, position=6)).state
+
+    reordered = seal_state(
+        replace(
+            state,
+            receipts=(state.receipts[0], state.receipts[2], state.receipts[1]),
+            integrity_digest="",
+        )
+    )
+    assert not verify_state(reordered)
+
+    reused_digest = replace(
+        state.receipts[2],
+        observation_digest=state.receipts[1].observation_digest,
+    )
+    duplicated = seal_state(
+        replace(
+            state,
+            receipts=(state.receipts[0], state.receipts[1], reused_digest),
+            integrity_digest="",
+        )
+    )
+    assert not verify_state(duplicated)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        "reorder",
+        "duplicate_id",
+        "prior_chain",
+        "receipt_link",
+        "decision_detach",
+        "state_control",
+        "future_revision",
+    ),
+)
+def test_resealed_audit_chain_and_receipt_links_are_rejected(mutation: str) -> None:
+    state = build_initial_state()
+    state = transition(state, candidate_for(state, position=5)).state
+    state = transition(state, candidate_for(state, position=6)).state
+    first, second = state.audits
+
+    if mutation == "reorder":
+        audits = (second, first)
+    elif mutation == "duplicate_id":
+        audits = (first, replace(second, opaque_audit_id=first.opaque_audit_id))
+    elif mutation == "prior_chain":
+        audits = (
+            first,
+            replace(second, prior_audit_digest=synthetic_digest("forged-prior")),
+        )
+    elif mutation == "receipt_link":
+        forged_digest = synthetic_digest("unlinked-observation")
+        audits = (
+            first,
+            replace(
+                second,
+                observation_digest=forged_digest,
+                opaque_audit_id=(
+                    "audit:"
+                    + digest_value(
+                        [state.observer_generation, second.position, forged_digest]
+                    )[7:31]
+                ),
+            ),
+        )
+    elif mutation == "decision_detach":
+        forged_first = replace(
+            first,
+            decision="FULL_INVALIDATION_REQUIRED",
+            reason="COVERAGE_GAP",
+            affected_frame_types=FRAME_TYPES,
+            checkpoint_disposition="HOLD_AND_REBASE",
+        )
+        audits = (
+            forged_first,
+            replace(second, prior_audit_digest=digest_value(asdict(forged_first))),
+        )
+    elif mutation == "state_control":
+        forged_first = replace(
+            first,
+            policy_digest=synthetic_digest("detached-policy"),
+        )
+        audits = (
+            forged_first,
+            replace(second, prior_audit_digest=digest_value(asdict(forged_first))),
+        )
+    else:
+        audits = (
+            first,
+            replace(second, lifecycle_revision=state.lifecycle_revision + 1),
+        )
+    resealed = seal_state(replace(state, audits=audits, integrity_digest=""))
+    assert not verify_state(resealed)
+
+
 def test_restart_requires_integrity_anchor_exact_next_row_and_sole_key() -> None:
     state = transition(build_initial_state(), candidate_for(build_initial_state(), position=5)).state
     anchor = recovery_anchor(state)
@@ -297,8 +399,7 @@ def test_retention_uses_complete_integrity_bound_census_and_is_inert() -> None:
     state = build_initial_state()
     common = {
         "source_row_position": 0,
-        "expected_census_digest": state.generation_census.census_digest,
-        "expected_registry_digest": state.registry_digest,
+        "anchor": authoritative_retention_anchor(),
         "recovery_pin": False,
         "audit_pin": False,
         "key_overlap_closed": True,
@@ -324,7 +425,7 @@ def test_retention_uses_complete_integrity_bound_census_and_is_inert() -> None:
 
 def test_omitted_or_duplicate_generation_census_cannot_authorize_retention() -> None:
     state = build_initial_state()
-    original_digest = state.generation_census.census_digest
+    anchor = authoritative_retention_anchor()
     omitted_census = seal_census(
         replace(
             state.generation_census,
@@ -338,8 +439,7 @@ def test_omitted_or_duplicate_generation_census_cannot_authorize_retention() -> 
     denied = retention_eligibility(
         omitted_state,
         source_row_position=4,
-        expected_census_digest=original_digest,
-        expected_registry_digest=state.registry_digest,
+        anchor=anchor,
         recovery_pin=False,
         audit_pin=False,
         key_overlap_closed=True,
@@ -360,8 +460,7 @@ def test_omitted_or_duplicate_generation_census_cannot_authorize_retention() -> 
     denied = retention_eligibility(
         duplicate_state,
         source_row_position=0,
-        expected_census_digest=duplicate.census_digest,
-        expected_registry_digest=state.registry_digest,
+        anchor=anchor,
         recovery_pin=False,
         audit_pin=False,
         key_overlap_closed=True,
@@ -369,6 +468,24 @@ def test_omitted_or_duplicate_generation_census_cannot_authorize_retention() -> 
     )
     assert denied.disposition == "DENIED"
     assert "STATE_OR_CENSUS_INTEGRITY_INVALID" in denied.reasons
+
+    self_echoed_anchor = RetentionAnchor(
+        authority_kind="BACKEND_AUTHORED_RETENTION_CENSUS_ANCHOR",
+        registry_digest=omitted_census.registry_digest,
+        census_digest=omitted_census.census_digest,
+        expected_observer_generations=(2,),
+    )
+    denied = retention_eligibility(
+        omitted_state,
+        source_row_position=4,
+        anchor=self_echoed_anchor,
+        recovery_pin=False,
+        audit_pin=False,
+        key_overlap_closed=True,
+        safety_grace_elapsed=True,
+    )
+    assert denied.disposition == "DENIED"
+    assert "RETENTION_ANCHOR_INVALID" in denied.reasons
 
 
 def test_audit_is_minimized_and_all_effect_ceilings_are_false() -> None:

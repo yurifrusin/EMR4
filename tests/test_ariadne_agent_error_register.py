@@ -38,14 +38,14 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 44
+    assert register["register_revision"] == 45
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 50)
+        f"AER-{index:04d}" for index in range(1, 51)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == []
+    ] == ["AER-0050"]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 37
+    assert len(agent_incidents) == 38
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -134,6 +134,18 @@ def test_durability_state_plan_veto_requires_complete_recovery_semantics() -> No
         "predecessor",
     ):
         assert phrase in joined
+
+
+def test_durability_state_candidate_veto_remains_open_pending_fresh_review() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0050"
+    )
+    assert incident["status"] == "open"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -756,10 +768,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 49
-    assert report["open_incident_ids"] == []
+    assert report["incident_count"] == 50
+    assert report["open_incident_ids"] == ["AER-0050"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 37,
+        "agent_behavior": 38,
         "harness": 3,
         "repository": 2,
         "transport": 7,
@@ -768,7 +780,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 6,
         "evidence_misreport": 5,
         "harness_failure": 3,
-        "output_contract_violation": 16,
+        "output_contract_violation": 17,
         "read_only_violation": 2,
         "reasoning_claim_error": 8,
         "repository_defect": 2,
@@ -776,7 +788,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 38,
+        "canonical_unchanged": 39,
         "untrusted_partial_worktree": 9,
     }
     assert report["recurring_patterns"] == [
