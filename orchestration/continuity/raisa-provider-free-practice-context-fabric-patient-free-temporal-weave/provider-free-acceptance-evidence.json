@@ -1,0 +1,74 @@
+{
+  "api_spine_checks": {
+    "event_signal_remains_non_command": true,
+    "new_graphql_resolvers": 0,
+    "new_graphql_roots": 0,
+    "new_rest_commands": 0,
+    "new_subscriptions": 0
+  },
+  "artifact_hashes": {
+    "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-design.md": "288a214768221f2064aebcd6beb9390e3ea9da1cf1cf3ef4bbc5c1c48a71aca5",
+    "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md": "7f972ef8c21cf11c6ea74860305ca476cfa42bcca2e1714324b7f152b19ab0bd",
+    "docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md": "3ccaa210e1bfac8f41d1c6501d52c1bbb47255c68f5302ceac6029b195a86ea9",
+    "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json": "c4f277a5ba8122dfa6beec5583aaf0c90cd820d18a22279ec0817b986ca399a8",
+    "scripts/raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py": "279f1226340a30330317ead252b978534d9ab938ae3e73f52d3f08b0f8bd2d73",
+    "scripts/raisa_provider_free_practice_context_fabric_patient_free_temporal_weave_acceptance.py": "aebc71c0237b47dddc174b6bf2f29608f4728c6f23dc960a9924241290ac21ed",
+    "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py": "c1e5aa73a663b2e8b664c15a989b1f59285ba48e448ecca77a50c938a9447c36"
+  },
+  "artifact_set_digest": "sha256:b168c9ee9a71f5963acec3ea7f1dcaa424a93de8533d8bd2d4cfb58c9705eb78",
+  "authority_and_side_effects": {
+    "command_operations": 0,
+    "database_operations": 0,
+    "deployment_operations": 0,
+    "event_listener_operations": 0,
+    "filesystem_write_operations_by_engine": 0,
+    "network_operations": 0,
+    "product_runtime_operations": 0,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "source_read_operations": 0,
+    "subprocess_operations_by_engine": 0
+  },
+  "claim_boundary": "Pure provider-free authored-synthetic invalidation, reassembly and bitemporal-query semantics only; no live watcher, event transport, database, persistence, retention choice, patient/product data, provider retrieval, command, deployment or protected-ref claim.",
+  "deterministic_checks": {
+    "closed_objects": true,
+    "coverage_gap_explicit": true,
+    "current_exact_reassembly_admissible": true,
+    "cursor_gap_disposition": "CURSOR_GAP",
+    "delivery_ttl_is_not_retention": true,
+    "event_payload_is_not_truth": true,
+    "first_relevant_signal_invalidates": true,
+    "immutable_parent_frame_set": true,
+    "irrelevant_signal_silent": true,
+    "known_then_and_corrected_later_distinct": [
+      2,
+      3
+    ],
+    "later_relevant_signal_coalesces": true,
+    "manifest_parent_bound": true,
+    "observation_decision_checkpoint_transition_atomic": true,
+    "same_packet_proofreader_release": true,
+    "schema_valid": true,
+    "stale_reassembly_rejected": true,
+    "state_rollback_tamper_blocked": true,
+    "valid_and_transaction_time_selected": true,
+    "watch_lease_only_narrows": true
+  },
+  "evidence_label": "provider_free_authored_synthetic_patient_free_temporal_weave",
+  "passed": true,
+  "result": "raisa_provider_free_practice_context_fabric_patient_free_temporal_weave_pass",
+  "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave_acceptance.v1",
+  "source_binding": {
+    "artifact_count": 7,
+    "checkout_line_endings_normalized": true,
+    "git_head_self_reference_forbidden": true,
+    "mode": "canonical_lf_artifact_hashes_with_external_exact_head_receipt"
+  },
+  "static_checks": {
+    "api_surface_changes": 0,
+    "application_imports": 0,
+    "caller_clocked": true,
+    "forbidden_calls": [],
+    "forbidden_imports": []
+  }
+}

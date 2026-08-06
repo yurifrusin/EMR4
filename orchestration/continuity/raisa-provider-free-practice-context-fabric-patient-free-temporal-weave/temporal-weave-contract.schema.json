@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/practice-context-fabric-patient-free-temporal-weave.v1.json",
+  "title": "EMR4 Practice Context Fabric patient-free temporal weave",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evidence_label", "parent_binding", "dependency_manifest", "watch_lease", "signals", "invalidation_decisions", "watcher_transitions", "committed_checkpoint", "frame_set_state", "reassembly_requirement", "stale_reassembly_decision", "historical_policy", "historical_candidates", "historical_snapshots", "historical_results", "temporal_trace", "proofreader_trace"],
+  "properties": {
+    "schema_version": {"const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_patient_free_temporal_weave"},
+    "parent_binding": {"$ref": "#/$defs/ParentBinding"},
+    "dependency_manifest": {"$ref": "#/$defs/Manifest"},
+    "watch_lease": {"$ref": "#/$defs/Lease"},
+    "signals": {"type": "array", "minItems": 1, "maxItems": 20, "items": {"$ref": "#/$defs/Signal"}},
+    "invalidation_decisions": {"type": "array", "minItems": 1, "maxItems": 20, "items": {"$ref": "#/$defs/Decision"}},
+    "watcher_transitions": {"type": "array", "minItems": 1, "maxItems": 20, "items": {"$ref": "#/$defs/WatcherTransition"}},
+    "committed_checkpoint": {"$ref": "#/$defs/CommittedCheckpoint"},
+    "frame_set_state": {"$ref": "#/$defs/FrameSetState"},
+    "reassembly_requirement": {"$ref": "#/$defs/ReassemblyRequirement"},
+    "stale_reassembly_decision": {"$ref": "#/$defs/ReassemblyDecision"},
+    "historical_policy": {"$ref": "#/$defs/HistoricalPolicy"},
+    "historical_candidates": {"type": "array", "minItems": 1, "maxItems": 4, "items": {"$ref": "#/$defs/HistoricalCandidate"}},
+    "historical_snapshots": {"type": "array", "minItems": 1, "maxItems": 20, "items": {"$ref": "#/$defs/HistoricalSnapshot"}},
+    "historical_results": {"type": "array", "minItems": 1, "maxItems": 4, "items": {"$ref": "#/$defs/HistoricalResult"}},
+    "temporal_trace": {"$ref": "#/$defs/TemporalTrace"},
+    "proofreader_trace": {"$ref": "#/$defs/ProofreaderTrace"}
+  },
+  "$defs": {
+    "Digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "Ref": {"type": "string", "minLength": 1, "maxLength": 200},
+    "Revision": {"type": "string", "minLength": 1, "maxLength": 200},
+    "Instant": {"type": "string", "format": "date-time"},
+    "SchemaVersion": {"const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1"},
+    "RefArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}},
+    "DigestArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/Digest"}},
+    "Interval": {
+      "type": "object", "additionalProperties": false,
+      "required": ["starts_at", "ends_at"],
+      "properties": {"starts_at": {"$ref": "#/$defs/Instant"}, "ends_at": {"oneOf": [{"$ref": "#/$defs/Instant"}, {"type": "null"}]}}
+    },
+    "HighWatermark": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_ref", "aggregate_revision"],
+      "properties": {"aggregate_ref": {"$ref": "#/$defs/Ref"}, "aggregate_revision": {"type": "integer", "minimum": 0}}
+    },
+    "CheckpointBase": {
+      "type": "object", "additionalProperties": false,
+      "required": ["stream_id", "transaction_position", "observed_cursor", "baseline_established"],
+      "properties": {
+        "stream_id": {"$ref": "#/$defs/Ref"}, "transaction_position": {"type": "integer", "minimum": 0},
+        "observed_cursor": {"$ref": "#/$defs/Ref"}, "baseline_established": {"type": "boolean"}
+      }
+    },
+    "ParentBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "parent_schema_version", "parent_frame_set_id", "parent_frame_set_digest", "parent_frame_set_bytes_digest", "parent_need_digest", "parent_grant_digest", "parent_authority_binding_digest", "parent_source_trace_digest", "practice_binding_digest", "session_binding_digest", "session_generation", "policy_version", "assembled_at", "expires_at", "read_only", "command_authority", "parent_binding_record_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "parent_schema_version": {"$ref": "#/$defs/Revision"},
+        "parent_frame_set_id": {"$ref": "#/$defs/Ref"}, "parent_frame_set_digest": {"$ref": "#/$defs/Digest"},
+        "parent_frame_set_bytes_digest": {"$ref": "#/$defs/Digest"}, "parent_need_digest": {"$ref": "#/$defs/Digest"},
+        "parent_grant_digest": {"$ref": "#/$defs/Digest"}, "parent_authority_binding_digest": {"$ref": "#/$defs/Digest"},
+        "parent_source_trace_digest": {"$ref": "#/$defs/Digest"}, "practice_binding_digest": {"$ref": "#/$defs/Digest"},
+        "session_binding_digest": {"$ref": "#/$defs/Digest"}, "session_generation": {"type": "integer", "minimum": 1},
+        "policy_version": {"$ref": "#/$defs/Revision"}, "assembled_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"}, "read_only": {"const": true}, "command_authority": {"const": false},
+        "parent_binding_record_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Dependency": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "dependency_id", "frame_id", "frame_digest", "frame_type", "source_class", "source_contract_id", "source_revision", "source_digest", "appointment_refs", "practitioner_refs", "location_refs", "event_types", "expires_at", "read_only", "command_authority", "dependency_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "dependency_id": {"$ref": "#/$defs/Ref"},
+        "frame_id": {"$ref": "#/$defs/Ref"}, "frame_digest": {"$ref": "#/$defs/Digest"},
+        "frame_type": {"enum": ["current_diary_projection", "current_waiting_room_projection", "active_practitioner_directory", "private_application_session_state"]},
+        "source_class": {"enum": ["current_diary", "current_waiting_room", "practitioner_directory", "private_session_state"]},
+        "source_contract_id": {"$ref": "#/$defs/Ref"}, "source_revision": {"$ref": "#/$defs/Revision"},
+        "source_digest": {"$ref": "#/$defs/Digest"}, "appointment_refs": {"$ref": "#/$defs/RefArray"},
+        "practitioner_refs": {"$ref": "#/$defs/RefArray"}, "location_refs": {"$ref": "#/$defs/RefArray"},
+        "event_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["diary.appointment_rescheduled", "diary.waiting_state_changed", "practice.practitioner_directory_changed", "session.application_state_changed"]}},
+        "expires_at": {"$ref": "#/$defs/Instant"}, "read_only": {"const": true}, "command_authority": {"const": false},
+        "dependency_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Manifest": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "manifest_id", "parent_frame_set_id", "parent_frame_set_digest", "parent_need_digest", "parent_grant_digest", "parent_binding_digest", "parent_source_trace_digest", "practice_binding_digest", "session_binding_digest", "session_generation", "policy_version", "dependencies", "accepted_event_types", "aggregate_high_watermarks", "starting_checkpoint", "issued_at", "expires_at", "handling_policy", "read_only", "command_authority", "manifest_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "manifest_id": {"$ref": "#/$defs/Ref"},
+        "parent_frame_set_id": {"$ref": "#/$defs/Ref"}, "parent_frame_set_digest": {"$ref": "#/$defs/Digest"},
+        "parent_need_digest": {"$ref": "#/$defs/Digest"}, "parent_grant_digest": {"$ref": "#/$defs/Digest"},
+        "parent_binding_digest": {"$ref": "#/$defs/Digest"}, "parent_source_trace_digest": {"$ref": "#/$defs/Digest"},
+        "practice_binding_digest": {"$ref": "#/$defs/Digest"}, "session_binding_digest": {"$ref": "#/$defs/Digest"},
+        "session_generation": {"type": "integer", "minimum": 1}, "policy_version": {"$ref": "#/$defs/Revision"},
+        "dependencies": {"type": "array", "minItems": 1, "maxItems": 4, "items": {"$ref": "#/$defs/Dependency"}},
+        "accepted_event_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}},
+        "aggregate_high_watermarks": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/HighWatermark"}},
+        "starting_checkpoint": {"$ref": "#/$defs/CheckpointBase"}, "issued_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"}, "handling_policy": {"const": "REASSEMBLE_AT_BOUNDARY"},
+        "read_only": {"const": true}, "command_authority": {"const": false}, "manifest_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Lease": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "lease_id", "manifest_id", "manifest_digest", "parent_frame_set_digest", "parent_grant_digest", "parent_binding_digest", "practice_binding_digest", "session_binding_digest", "session_generation", "policy_version", "accepted_event_types", "allowed_dependency_ids", "allowed_location_refs", "starting_checkpoint", "maximum_signals", "sensitivity_ceiling", "handling_policy", "issued_at", "expires_at", "revoked", "execution_enabled", "returns_data", "read_only", "command_authority", "lease_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "lease_id": {"$ref": "#/$defs/Ref"}, "manifest_id": {"$ref": "#/$defs/Ref"},
+        "manifest_digest": {"$ref": "#/$defs/Digest"}, "parent_frame_set_digest": {"$ref": "#/$defs/Digest"},
+        "parent_grant_digest": {"$ref": "#/$defs/Digest"}, "parent_binding_digest": {"$ref": "#/$defs/Digest"},
+        "practice_binding_digest": {"$ref": "#/$defs/Digest"}, "session_binding_digest": {"$ref": "#/$defs/Digest"},
+        "session_generation": {"type": "integer", "minimum": 1}, "policy_version": {"$ref": "#/$defs/Revision"},
+        "accepted_event_types": {"$ref": "#/$defs/RefArray"}, "allowed_dependency_ids": {"$ref": "#/$defs/RefArray"},
+        "allowed_location_refs": {"$ref": "#/$defs/RefArray"}, "starting_checkpoint": {"$ref": "#/$defs/CheckpointBase"},
+        "maximum_signals": {"type": "integer", "minimum": 1, "maximum": 20}, "sensitivity_ceiling": {"const": "INTERNAL_OPERATIONAL"},
+        "handling_policy": {"const": "REASSEMBLE_AT_BOUNDARY"}, "issued_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"}, "revoked": {"type": "boolean"}, "execution_enabled": {"const": false},
+        "returns_data": {"const": false}, "read_only": {"const": true}, "command_authority": {"const": false},
+        "lease_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Signal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "signal_id", "event_type", "event_schema_version", "commit_state", "practice_binding_digest", "aggregate_class", "aggregate_ref", "aggregate_revision", "affected_location_refs", "affected_practitioner_refs", "affected_frame_types", "occurred_at", "received_at", "expires_at", "previous_transaction_position", "transaction_position", "observed_cursor", "baseline_established", "sensitivity", "evidence_label", "data_class", "read_only", "command_authority", "signal_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "signal_id": {"$ref": "#/$defs/Ref"},
+        "event_type": {"enum": ["diary.appointment_rescheduled", "diary.waiting_state_changed", "practice.practitioner_directory_changed", "session.application_state_changed"]},
+        "event_schema_version": {"$ref": "#/$defs/Revision"}, "commit_state": {"const": "COMMITTED"},
+        "practice_binding_digest": {"$ref": "#/$defs/Digest"}, "aggregate_class": {"enum": ["APPOINTMENT", "PRACTITIONER_DIRECTORY", "APPLICATION_SESSION"]},
+        "aggregate_ref": {"$ref": "#/$defs/Ref"}, "aggregate_revision": {"type": "integer", "minimum": 1},
+        "affected_location_refs": {"$ref": "#/$defs/RefArray"}, "affected_practitioner_refs": {"$ref": "#/$defs/RefArray"},
+        "affected_frame_types": {"$ref": "#/$defs/RefArray"}, "occurred_at": {"$ref": "#/$defs/Instant"},
+        "received_at": {"$ref": "#/$defs/Instant"}, "expires_at": {"$ref": "#/$defs/Instant"},
+        "previous_transaction_position": {"type": "integer", "minimum": 0}, "transaction_position": {"type": "integer", "minimum": 0},
+        "observed_cursor": {"$ref": "#/$defs/Ref"}, "baseline_established": {"type": "boolean"},
+        "sensitivity": {"const": "INTERNAL_OPERATIONAL"}, "evidence_label": {"const": "provider_free_authored_synthetic_patient_free_temporal_weave"},
+        "data_class": {"const": "authored_synthetic_patient_free_operational_metadata"}, "read_only": {"const": true},
+        "command_authority": {"const": false}, "signal_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "Decision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "signal_id", "signal_digest", "decision", "reason_codes", "affected_dependency_ids", "affected_frame_ids", "replacement_context_included", "command_authority", "decision_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "signal_id": {"$ref": "#/$defs/Ref"}, "signal_digest": {"$ref": "#/$defs/Digest"},
+        "decision": {"enum": ["IRRELEVANT", "SUPPRESSED", "REASSEMBLY_REQUIRED", "COALESCED", "CURSOR_GAP", "REVISION_GAP", "ORDERING_UNCERTAIN", "EXPIRED", "REVOKED"]},
+        "reason_codes": {"$ref": "#/$defs/RefArray"}, "affected_dependency_ids": {"$ref": "#/$defs/RefArray"}, "affected_frame_ids": {"$ref": "#/$defs/RefArray"},
+        "replacement_context_included": {"const": false}, "command_authority": {"const": false}, "decision_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "ObservedCursor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["stream_id", "previous_transaction_position", "transaction_position", "cursor", "baseline_established"],
+      "properties": {
+        "stream_id": {"$ref": "#/$defs/Ref"}, "previous_transaction_position": {"type": "integer", "minimum": 0},
+        "transaction_position": {"type": "integer", "minimum": 0}, "cursor": {"$ref": "#/$defs/Ref"}, "baseline_established": {"type": "boolean"}
+      }
+    },
+    "WatcherTransition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "signal_digest", "observed_cursor", "decision_digest", "decision", "state_after", "next_checkpoint", "reassembly_requirement_emitted", "fresh_read_executed", "command_authority", "transition_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "signal_digest": {"$ref": "#/$defs/Digest"},
+        "observed_cursor": {"$ref": "#/$defs/ObservedCursor"}, "decision_digest": {"$ref": "#/$defs/Digest"},
+        "decision": {"enum": ["IRRELEVANT", "SUPPRESSED", "REASSEMBLY_REQUIRED", "COALESCED", "CURSOR_GAP", "REVISION_GAP", "ORDERING_UNCERTAIN", "EXPIRED", "REVOKED"]},
+        "state_after": {"enum": ["CURRENT", "REASSEMBLY_REQUIRED", "EXPIRED", "REVOKED"]}, "next_checkpoint": {"$ref": "#/$defs/CheckpointBase"},
+        "reassembly_requirement_emitted": {"type": "boolean"}, "fresh_read_executed": {"const": false}, "command_authority": {"const": false},
+        "transition_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "CommittedCheckpoint": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "stream_id", "transaction_position", "observed_cursor", "baseline_established", "seen_signal_ids", "aggregate_high_watermarks", "classified_at", "checkpoint_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "stream_id": {"$ref": "#/$defs/Ref"}, "transaction_position": {"type": "integer", "minimum": 0},
+        "observed_cursor": {"$ref": "#/$defs/Ref"}, "baseline_established": {"type": "boolean"}, "seen_signal_ids": {"$ref": "#/$defs/RefArray"},
+        "aggregate_high_watermarks": {"type": "array", "items": {"$ref": "#/$defs/HighWatermark"}}, "classified_at": {"$ref": "#/$defs/Instant"},
+        "checkpoint_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "FrameSetState": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "parent_frame_set_id", "parent_frame_set_digest", "state", "cause_signal_digests", "usable_for_new_reasoning", "frames_mutated", "recorded_at", "state_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "parent_frame_set_id": {"$ref": "#/$defs/Ref"}, "parent_frame_set_digest": {"$ref": "#/$defs/Digest"},
+        "state": {"enum": ["CURRENT", "REASSEMBLY_REQUIRED", "EXPIRED", "REVOKED"]}, "cause_signal_digests": {"$ref": "#/$defs/DigestArray"},
+        "usable_for_new_reasoning": {"type": "boolean"}, "frames_mutated": {"const": false}, "recorded_at": {"$ref": "#/$defs/Instant"},
+        "state_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "ReassemblyRequirement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "requirement_id", "superseded_frame_set_id", "superseded_frame_set_digest", "manifest_digest", "lease_digest", "grant_digest", "binding_digest", "session_generation", "request_revision", "required_dependency_ids", "cause_signal_digests", "issued_at", "expires_at", "execution_enabled", "returns_data", "read_only", "command_authority", "requirement_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "requirement_id": {"$ref": "#/$defs/Ref"}, "superseded_frame_set_id": {"$ref": "#/$defs/Ref"},
+        "superseded_frame_set_digest": {"$ref": "#/$defs/Digest"}, "manifest_digest": {"$ref": "#/$defs/Digest"}, "lease_digest": {"$ref": "#/$defs/Digest"},
+        "grant_digest": {"$ref": "#/$defs/Digest"}, "binding_digest": {"$ref": "#/$defs/Digest"}, "session_generation": {"type": "integer", "minimum": 1},
+        "request_revision": {"type": "integer", "minimum": 1}, "required_dependency_ids": {"$ref": "#/$defs/RefArray"}, "cause_signal_digests": {"$ref": "#/$defs/DigestArray"},
+        "issued_at": {"$ref": "#/$defs/Instant"}, "expires_at": {"$ref": "#/$defs/Instant"}, "execution_enabled": {"const": false},
+        "returns_data": {"const": false}, "read_only": {"const": true}, "command_authority": {"const": false}, "requirement_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "ReassemblyDecision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "requirement_digest", "result_session_generation", "result_request_revision", "current_session_generation", "current_request_revision", "decision", "old_frame_set_restored", "command_authority", "reassembly_decision_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "requirement_digest": {"$ref": "#/$defs/Digest"},
+        "result_session_generation": {"type": "integer", "minimum": 1}, "result_request_revision": {"type": "integer", "minimum": 1},
+        "current_session_generation": {"type": "integer", "minimum": 1}, "current_request_revision": {"type": "integer", "minimum": 1},
+        "decision": {"enum": ["REJECT_STALE_GENERATION", "REJECT_SUPERSEDED_REQUEST", "REJECT_REQUIREMENT_MISMATCH", "ADMIT_NEW_GENERATION"]},
+        "old_frame_set_restored": {"const": false}, "command_authority": {"const": false}, "reassembly_decision_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "HistoricalPolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "policy_id", "practice_binding_digest", "allowed_bureaus", "allowed_purposes", "allowed_source_classes", "allowed_location_refs", "allowed_retention_classes", "allowed_fields", "maximum_results", "maximum_lookback_seconds", "issued_at", "expires_at", "read_only", "command_authority", "historical_policy_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "policy_id": {"$ref": "#/$defs/Ref"}, "practice_binding_digest": {"$ref": "#/$defs/Digest"},
+        "allowed_bureaus": {"$ref": "#/$defs/RefArray"}, "allowed_purposes": {"$ref": "#/$defs/RefArray"}, "allowed_source_classes": {"$ref": "#/$defs/RefArray"},
+        "allowed_location_refs": {"$ref": "#/$defs/RefArray"}, "allowed_retention_classes": {"$ref": "#/$defs/RefArray"}, "allowed_fields": {"$ref": "#/$defs/RefArray"},
+        "maximum_results": {"type": "integer", "minimum": 1, "maximum": 20}, "maximum_lookback_seconds": {"type": "integer", "minimum": 1},
+        "issued_at": {"$ref": "#/$defs/Instant"}, "expires_at": {"$ref": "#/$defs/Instant"}, "read_only": {"const": true}, "command_authority": {"const": false},
+        "historical_policy_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "HistoricalCandidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "query_id", "requesting_bureau", "purpose_code", "requested_source_classes", "requested_location_refs", "valid_at", "known_at", "maximum_results", "requested_fields", "read_only", "command_authority", "candidate_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "query_id": {"$ref": "#/$defs/Ref"}, "requesting_bureau": {"enum": ["BERNIE", "RAYLEEN", "DAVIDA"]},
+        "purpose_code": {"const": "TEMPORAL_OPERATIONAL_RECALL"}, "requested_source_classes": {"$ref": "#/$defs/RefArray"}, "requested_location_refs": {"$ref": "#/$defs/RefArray"},
+        "valid_at": {"$ref": "#/$defs/Instant"}, "known_at": {"$ref": "#/$defs/Instant"}, "maximum_results": {"type": "integer", "minimum": 1, "maximum": 20},
+        "requested_fields": {"$ref": "#/$defs/RefArray"}, "read_only": {"const": true}, "command_authority": {"const": false}, "candidate_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "HistoricalContent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["appointment_count", "waiting_count", "status_codes"],
+      "properties": {"appointment_count": {"type": "integer", "minimum": 0}, "waiting_count": {"type": "integer", "minimum": 0}, "status_codes": {"$ref": "#/$defs/RefArray"}}
+    },
+    "HistoricalSelectedContent": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {"appointment_count": {"type": "integer", "minimum": 0}, "waiting_count": {"type": "integer", "minimum": 0}, "status_codes": {"$ref": "#/$defs/RefArray"}}
+    },
+    "HistoricalSnapshot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "snapshot_id", "frame_type", "source_class", "source_contract_id", "source_revision", "source_digest", "practice_binding_digest", "location_ref", "subject_selector", "purpose_code", "valid_time", "transaction_time", "coverage_state", "retention_class", "correction_of", "superseded_by", "content", "current_truth_authority", "read_only", "command_authority", "snapshot_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "snapshot_id": {"$ref": "#/$defs/Ref"}, "frame_type": {"const": "historical_waiting_room_projection"},
+        "source_class": {"const": "historical_operational_state"}, "source_contract_id": {"const": "emr4.historical_waiting_room_snapshot.v1"}, "source_revision": {"$ref": "#/$defs/Revision"},
+        "source_digest": {"$ref": "#/$defs/Digest"}, "practice_binding_digest": {"$ref": "#/$defs/Digest"}, "location_ref": {"$ref": "#/$defs/Ref"},
+        "subject_selector": {"$ref": "#/$defs/Ref"}, "purpose_code": {"const": "TEMPORAL_OPERATIONAL_RECALL"}, "valid_time": {"$ref": "#/$defs/Interval"},
+        "transaction_time": {"$ref": "#/$defs/Interval"}, "coverage_state": {"enum": ["COMPLETE", "GAP"]}, "retention_class": {"const": "SHORT_OPERATIONAL_RECALL"},
+        "correction_of": {"oneOf": [{"$ref": "#/$defs/Ref"}, {"type": "null"}]}, "superseded_by": {"oneOf": [{"$ref": "#/$defs/Ref"}, {"type": "null"}]},
+        "content": {"$ref": "#/$defs/HistoricalContent"}, "current_truth_authority": {"const": false}, "read_only": {"const": true}, "command_authority": {"const": false},
+        "snapshot_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "HistoricalFrame": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "snapshot_id", "snapshot_digest", "valid_time", "transaction_time", "coverage_state", "content", "current_truth_authority", "read_only", "command_authority", "historical_frame_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "snapshot_id": {"$ref": "#/$defs/Ref"}, "snapshot_digest": {"$ref": "#/$defs/Digest"},
+        "valid_time": {"$ref": "#/$defs/Interval"}, "transaction_time": {"$ref": "#/$defs/Interval"}, "coverage_state": {"const": "COMPLETE"},
+        "content": {"$ref": "#/$defs/HistoricalSelectedContent"}, "current_truth_authority": {"const": false}, "read_only": {"const": true}, "command_authority": {"const": false},
+        "historical_frame_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "HistoricalResult": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "query_id", "candidate_digest", "historical_policy_digest", "valid_at", "known_at", "disposition", "frames", "missing_coverage_is_not_absence_evidence", "event_delivery_ttl_controls_retention", "current_truth_authority", "command_authority", "historical_result_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "query_id": {"$ref": "#/$defs/Ref"}, "candidate_digest": {"$ref": "#/$defs/Digest"},
+        "historical_policy_digest": {"$ref": "#/$defs/Digest"}, "valid_at": {"$ref": "#/$defs/Instant"}, "known_at": {"$ref": "#/$defs/Instant"},
+        "disposition": {"enum": ["ADMIT", "NOT_AVAILABLE", "NO_COVERAGE"]}, "frames": {"type": "array", "maxItems": 20, "items": {"$ref": "#/$defs/HistoricalFrame"}},
+        "missing_coverage_is_not_absence_evidence": {"const": true}, "event_delivery_ttl_controls_retention": {"const": false},
+        "current_truth_authority": {"const": false}, "command_authority": {"const": false}, "historical_result_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "TemporalTrace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "parent_frame_set_digest", "parent_frame_set_bytes_before", "parent_frame_set_bytes_after", "parent_frame_set_unchanged", "decision_digests", "transition_digests", "checkpoint_digest", "state_digest", "requirement_digest", "event_payload_used_as_truth", "source_read_executed", "command_executed", "temporal_trace_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "parent_frame_set_digest": {"$ref": "#/$defs/Digest"}, "parent_frame_set_bytes_before": {"$ref": "#/$defs/Digest"},
+        "parent_frame_set_bytes_after": {"$ref": "#/$defs/Digest"}, "parent_frame_set_unchanged": {"const": true}, "decision_digests": {"$ref": "#/$defs/DigestArray"},
+        "transition_digests": {"$ref": "#/$defs/DigestArray"},
+        "checkpoint_digest": {"$ref": "#/$defs/Digest"}, "state_digest": {"$ref": "#/$defs/Digest"}, "requirement_digest": {"oneOf": [{"$ref": "#/$defs/Digest"}, {"type": "null"}]},
+        "event_payload_used_as_truth": {"const": false}, "source_read_executed": {"const": false}, "command_executed": {"const": false}, "temporal_trace_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "ProofreaderTrace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "packet_digest", "checked_at", "reason_codes", "release_decision", "read_only", "command_authority", "proofreader_trace_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"}, "packet_digest": {"$ref": "#/$defs/Digest"}, "checked_at": {"$ref": "#/$defs/Instant"},
+        "reason_codes": {"$ref": "#/$defs/RefArray"}, "release_decision": {"enum": ["RELEASE", "BLOCK"]}, "read_only": {"const": true}, "command_authority": {"const": false},
+        "proofreader_trace_digest": {"$ref": "#/$defs/Digest"}
+      }
+    }
+  }
+}

@@ -1,0 +1,902 @@
+{
+  "committed_checkpoint": {
+    "aggregate_high_watermarks": [
+      {
+        "aggregate_ref": "synthetic:appointment:one",
+        "aggregate_revision": 13
+      },
+      {
+        "aggregate_ref": "synthetic:appointment:outside-scope",
+        "aggregate_revision": 1
+      },
+      {
+        "aggregate_ref": "synthetic:appointment:two",
+        "aggregate_revision": 11
+      },
+      {
+        "aggregate_ref": "synthetic:directory:active",
+        "aggregate_revision": 5
+      },
+      {
+        "aggregate_ref": "synthetic:session:active",
+        "aggregate_revision": 19
+      }
+    ],
+    "baseline_established": false,
+    "checkpoint_digest": "sha256:957879f0461f5dc7ad6de16ee7e94977f48aded0f98a6ca8f1c8ecf7fa1b74da",
+    "classified_at": "2026-08-06T03:01:00Z",
+    "observed_cursor": "synthetic:cursor:103",
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "seen_signal_ids": [
+      "synthetic:signal:reschedule-101",
+      "synthetic:signal:unrelated-103",
+      "synthetic:signal:waiting-102"
+    ],
+    "stream_id": "synthetic:practice-event-stream:001",
+    "transaction_position": 103
+  },
+  "dependency_manifest": {
+    "accepted_event_types": [
+      "diary.appointment_rescheduled",
+      "diary.waiting_state_changed",
+      "practice.practitioner_directory_changed",
+      "session.application_state_changed"
+    ],
+    "aggregate_high_watermarks": [
+      {
+        "aggregate_ref": "synthetic:appointment:one",
+        "aggregate_revision": 11
+      },
+      {
+        "aggregate_ref": "synthetic:appointment:two",
+        "aggregate_revision": 11
+      },
+      {
+        "aggregate_ref": "synthetic:directory:active",
+        "aggregate_revision": 5
+      },
+      {
+        "aggregate_ref": "synthetic:session:active",
+        "aggregate_revision": 19
+      }
+    ],
+    "command_authority": false,
+    "dependencies": [
+      {
+        "appointment_refs": [
+          "synthetic:appointment:one",
+          "synthetic:appointment:two"
+        ],
+        "command_authority": false,
+        "dependency_digest": "sha256:df7ba9e85d8afedecd6dff33049925bc6dcf9fedb39ef2799483dd5f7524077f",
+        "dependency_id": "synthetic:dependency:current_diary_projection",
+        "event_types": [
+          "diary.appointment_rescheduled",
+          "diary.waiting_state_changed",
+          "practice.practitioner_directory_changed"
+        ],
+        "expires_at": "2026-08-06T03:02:00Z",
+        "frame_digest": "sha256:2e85dfa32468bb0c2387d5b5db12928b6a25a599d12b4d5ef3dd4047e10527cc",
+        "frame_id": "frame:synthetic:source:diary-001",
+        "frame_type": "current_diary_projection",
+        "location_refs": [
+          "synthetic:location:brisbane-one"
+        ],
+        "practitioner_refs": [
+          "synthetic:practitioner:one",
+          "synthetic:practitioner:two"
+        ],
+        "read_only": true,
+        "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+        "source_class": "current_diary",
+        "source_contract_id": "api_spine.appointment_diary_read.v1",
+        "source_digest": "sha256:9eeb73bdc46f685389eecec1d8f6f6b566d0c17c356d04ca5f025befb31996e1",
+        "source_revision": "synthetic:diary-revision:11"
+      },
+      {
+        "appointment_refs": [
+          "synthetic:appointment:one"
+        ],
+        "command_authority": false,
+        "dependency_digest": "sha256:e1df855a6e99380b52a79b7d3a5b17465a028853e36b81342923369ff1b05cb8",
+        "dependency_id": "synthetic:dependency:current_waiting_room_projection",
+        "event_types": [
+          "diary.appointment_rescheduled",
+          "diary.waiting_state_changed",
+          "practice.practitioner_directory_changed"
+        ],
+        "expires_at": "2026-08-06T03:02:00Z",
+        "frame_digest": "sha256:e0d8a2276a5db1a3cd959c197aa05cb0b52c3e651ed1dd1573b2b367feba1237",
+        "frame_id": "frame:synthetic:source:waiting-001",
+        "frame_type": "current_waiting_room_projection",
+        "location_refs": [
+          "synthetic:location:brisbane-one"
+        ],
+        "practitioner_refs": [
+          "synthetic:practitioner:one"
+        ],
+        "read_only": true,
+        "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+        "source_class": "current_waiting_room",
+        "source_contract_id": "emr4.waiting_room_context_frame.v1",
+        "source_digest": "sha256:bfab3deb6063acfe4095e2e0dd29c249dbf2c66a2a94b9ab4b1ab1263496f1ac",
+        "source_revision": "synthetic:waiting-revision:7"
+      },
+      {
+        "appointment_refs": [],
+        "command_authority": false,
+        "dependency_digest": "sha256:b58f437d4816c4459401ed0b0c96ab871559a85c681fe03f7136537fa26e7f19",
+        "dependency_id": "synthetic:dependency:active_practitioner_directory",
+        "event_types": [
+          "practice.practitioner_directory_changed"
+        ],
+        "expires_at": "2026-08-06T03:02:00Z",
+        "frame_digest": "sha256:b543dd838d5d834121ce9a0ff641ee458233f723ff4d1295b55dc44bdceed783",
+        "frame_id": "frame:synthetic:source:directory-001",
+        "frame_type": "active_practitioner_directory",
+        "location_refs": [
+          "synthetic:location:brisbane-one"
+        ],
+        "practitioner_refs": [
+          "synthetic:practitioner:one",
+          "synthetic:practitioner:two"
+        ],
+        "read_only": true,
+        "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+        "source_class": "practitioner_directory",
+        "source_contract_id": "practice-practitioner-directory-read.v1",
+        "source_digest": "sha256:1b37100a9da1a997d4a7f4b29fd91efb2017b27d0eb4fba0c6a38d53551bda6c",
+        "source_revision": "synthetic:directory-revision:5"
+      },
+      {
+        "appointment_refs": [
+          "synthetic:appointment:one"
+        ],
+        "command_authority": false,
+        "dependency_digest": "sha256:a663e7ddae7299cbf8019ef933c64e847d8e19c4ffd53221e92367801e1669ef",
+        "dependency_id": "synthetic:dependency:private_application_session_state",
+        "event_types": [
+          "diary.appointment_rescheduled",
+          "session.application_state_changed"
+        ],
+        "expires_at": "2026-08-06T03:02:00Z",
+        "frame_digest": "sha256:f7fd3615c93fe966fb7bb9af4a39330ba87f67885343deca4a1c26a3cd0c4103",
+        "frame_id": "frame:synthetic:source:session-001",
+        "frame_type": "private_application_session_state",
+        "location_refs": [
+          "synthetic:location:brisbane-one"
+        ],
+        "practitioner_refs": [
+          "synthetic:practitioner:one"
+        ],
+        "read_only": true,
+        "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+        "source_class": "private_session_state",
+        "source_contract_id": "emr4.native_diary_application_session_state.v1",
+        "source_digest": "sha256:f90ecbd55d14615bfedddb7e2702ab4b3467af038c676d8cc8c17c3d807481ad",
+        "source_revision": "synthetic:session-revision:19"
+      }
+    ],
+    "expires_at": "2026-08-06T03:02:00Z",
+    "handling_policy": "REASSEMBLE_AT_BOUNDARY",
+    "issued_at": "2026-08-06T03:00:01Z",
+    "manifest_digest": "sha256:476a07fb53b1beb803c5721fb450645810e71ff388ece1a32fd1e46d2ac966d3",
+    "manifest_id": "synthetic:temporal-manifest:001",
+    "parent_binding_digest": "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+    "parent_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "parent_frame_set_id": "operational-weave:synthetic:need:current-operational-weave-001",
+    "parent_grant_digest": "sha256:bf6da241ee287e3929315b61cb8f822d74ab1dcdcd9fed50eb2075fd3b1464c3",
+    "parent_need_digest": "sha256:8f3f6312ccbf81d1fcc7c7c36de2463466c8f7261a76c5ff3490b03cf1af660f",
+    "parent_source_trace_digest": "sha256:50ce0ab2e6d8d5e2173b085ef13ad4afb113725e44f63ef2cb2b26e440ba81dd",
+    "policy_version": "context-fabric-current-operational-weave.v1",
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "read_only": true,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "session_binding_digest": "sha256:b5cf6112bb4396b94847534563f45251922c9fed159776df1624ffec93919cde",
+    "session_generation": 7,
+    "starting_checkpoint": {
+      "baseline_established": true,
+      "observed_cursor": "synthetic:cursor:100",
+      "stream_id": "synthetic:practice-event-stream:001",
+      "transaction_position": 100
+    }
+  },
+  "evidence_label": "provider_free_authored_synthetic_patient_free_temporal_weave",
+  "frame_set_state": {
+    "cause_signal_digests": [
+      "sha256:a3b1a25d102847282c09cd859b68c36aeca2e3442055f21426c37c84708fc232",
+      "sha256:c9cdfe07ee0e35a34488e5524669241e7c537bc8d964140633d5c7eeaf99f735"
+    ],
+    "frames_mutated": false,
+    "parent_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "parent_frame_set_id": "operational-weave:synthetic:need:current-operational-weave-001",
+    "recorded_at": "2026-08-06T03:01:00Z",
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "state": "REASSEMBLY_REQUIRED",
+    "state_digest": "sha256:7b65f93d2f3577caa9894c8e29dd612e9abea28e352e29c31c80af3c83693bdd",
+    "usable_for_new_reasoning": false
+  },
+  "historical_candidates": [
+    {
+      "candidate_digest": "sha256:906b86e7b601a7208b130a07c87a5963e95817583f38ac02e459427e891d0093",
+      "command_authority": false,
+      "known_at": "2026-08-06T01:00:00Z",
+      "maximum_results": 4,
+      "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+      "query_id": "synthetic:historical-query:2026-08-06T01:00:00Z",
+      "read_only": true,
+      "requested_fields": [
+        "appointment_count",
+        "waiting_count",
+        "status_codes"
+      ],
+      "requested_location_refs": [
+        "synthetic:location:brisbane-one"
+      ],
+      "requested_source_classes": [
+        "historical_operational_state"
+      ],
+      "requesting_bureau": "RAYLEEN",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "valid_at": "2026-08-06T00:30:00Z"
+    },
+    {
+      "candidate_digest": "sha256:c06d2901c7e4e59e1d5f8b10a5e23f735722361e944e63477fe38a180d3a3be0",
+      "command_authority": false,
+      "known_at": "2026-08-06T02:30:00Z",
+      "maximum_results": 4,
+      "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+      "query_id": "synthetic:historical-query:2026-08-06T02:30:00Z",
+      "read_only": true,
+      "requested_fields": [
+        "appointment_count",
+        "waiting_count",
+        "status_codes"
+      ],
+      "requested_location_refs": [
+        "synthetic:location:brisbane-one"
+      ],
+      "requested_source_classes": [
+        "historical_operational_state"
+      ],
+      "requesting_bureau": "RAYLEEN",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "valid_at": "2026-08-06T00:30:00Z"
+    }
+  ],
+  "historical_policy": {
+    "allowed_bureaus": [
+      "RAYLEEN"
+    ],
+    "allowed_fields": [
+      "appointment_count",
+      "waiting_count",
+      "status_codes"
+    ],
+    "allowed_location_refs": [
+      "synthetic:location:brisbane-one"
+    ],
+    "allowed_purposes": [
+      "TEMPORAL_OPERATIONAL_RECALL"
+    ],
+    "allowed_retention_classes": [
+      "SHORT_OPERATIONAL_RECALL"
+    ],
+    "allowed_source_classes": [
+      "historical_operational_state"
+    ],
+    "command_authority": false,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "historical_policy_digest": "sha256:22263c9fe7527771d8b28bbe742abe497996a3983e7a87316196ee0af3dc69ad",
+    "issued_at": "2026-08-06T03:00:01Z",
+    "maximum_lookback_seconds": 86400,
+    "maximum_results": 4,
+    "policy_id": "synthetic:historical-policy:001",
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "read_only": true,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1"
+  },
+  "historical_results": [
+    {
+      "candidate_digest": "sha256:906b86e7b601a7208b130a07c87a5963e95817583f38ac02e459427e891d0093",
+      "command_authority": false,
+      "current_truth_authority": false,
+      "disposition": "ADMIT",
+      "event_delivery_ttl_controls_retention": false,
+      "frames": [
+        {
+          "command_authority": false,
+          "content": {
+            "appointment_count": 3,
+            "status_codes": [
+              "ARRIVED",
+              "IN_CONSULT"
+            ],
+            "waiting_count": 2
+          },
+          "coverage_state": "COMPLETE",
+          "current_truth_authority": false,
+          "historical_frame_digest": "sha256:fb98abade255cdc8b32b92edc2f1f2438aab1f844b8bb5aa0cfa082221ee03da",
+          "read_only": true,
+          "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "snapshot_digest": "sha256:fc442c7c703f307655ef2cb8c87b6d8989d8fcd0769c861933af822a69b1e3b2",
+          "snapshot_id": "synthetic:snapshot:waiting-original",
+          "transaction_time": {
+            "ends_at": "2026-08-06T02:00:00Z",
+            "starts_at": "2026-08-06T00:05:00Z"
+          },
+          "valid_time": {
+            "ends_at": "2026-08-06T01:00:00Z",
+            "starts_at": "2026-08-06T00:00:00Z"
+          }
+        }
+      ],
+      "historical_policy_digest": "sha256:22263c9fe7527771d8b28bbe742abe497996a3983e7a87316196ee0af3dc69ad",
+      "historical_result_digest": "sha256:21b83a710a6d556ce4da7e78092d070b281be2a892cbc110852c703ef57bac25",
+      "known_at": "2026-08-06T01:00:00Z",
+      "missing_coverage_is_not_absence_evidence": true,
+      "query_id": "synthetic:historical-query:2026-08-06T01:00:00Z",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "valid_at": "2026-08-06T00:30:00Z"
+    },
+    {
+      "candidate_digest": "sha256:c06d2901c7e4e59e1d5f8b10a5e23f735722361e944e63477fe38a180d3a3be0",
+      "command_authority": false,
+      "current_truth_authority": false,
+      "disposition": "ADMIT",
+      "event_delivery_ttl_controls_retention": false,
+      "frames": [
+        {
+          "command_authority": false,
+          "content": {
+            "appointment_count": 3,
+            "status_codes": [
+              "ARRIVED",
+              "IN_CONSULT"
+            ],
+            "waiting_count": 3
+          },
+          "coverage_state": "COMPLETE",
+          "current_truth_authority": false,
+          "historical_frame_digest": "sha256:800e2ce81ee5a5e2c55e58345dbc5e12e8bfbded837cb407695ff7dbcc142070",
+          "read_only": true,
+          "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "snapshot_digest": "sha256:32ffb8a6da0ee7aa671e68e9f558713594bfa16df47682ea848e13f2bc980249",
+          "snapshot_id": "synthetic:snapshot:waiting-corrected",
+          "transaction_time": {
+            "ends_at": null,
+            "starts_at": "2026-08-06T02:00:00Z"
+          },
+          "valid_time": {
+            "ends_at": "2026-08-06T01:00:00Z",
+            "starts_at": "2026-08-06T00:00:00Z"
+          }
+        }
+      ],
+      "historical_policy_digest": "sha256:22263c9fe7527771d8b28bbe742abe497996a3983e7a87316196ee0af3dc69ad",
+      "historical_result_digest": "sha256:b409aa5ee01992e804b19a07dc06c8198598acddd56892725d803b6e73f7e03d",
+      "known_at": "2026-08-06T02:30:00Z",
+      "missing_coverage_is_not_absence_evidence": true,
+      "query_id": "synthetic:historical-query:2026-08-06T02:30:00Z",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "valid_at": "2026-08-06T00:30:00Z"
+    }
+  ],
+  "historical_snapshots": [
+    {
+      "command_authority": false,
+      "content": {
+        "appointment_count": 3,
+        "status_codes": [
+          "ARRIVED",
+          "IN_CONSULT"
+        ],
+        "waiting_count": 2
+      },
+      "correction_of": null,
+      "coverage_state": "COMPLETE",
+      "current_truth_authority": false,
+      "frame_type": "historical_waiting_room_projection",
+      "location_ref": "synthetic:location:brisbane-one",
+      "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+      "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+      "read_only": true,
+      "retention_class": "SHORT_OPERATIONAL_RECALL",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "snapshot_digest": "sha256:fc442c7c703f307655ef2cb8c87b6d8989d8fcd0769c861933af822a69b1e3b2",
+      "snapshot_id": "synthetic:snapshot:waiting-original",
+      "source_class": "historical_operational_state",
+      "source_contract_id": "emr4.historical_waiting_room_snapshot.v1",
+      "source_digest": "sha256:903e8b52e5d4998cf435d212f9d4841af44588191d701f244c2776d2e2f37c30",
+      "source_revision": "synthetic:waiting-history:1",
+      "subject_selector": "synthetic:waiting-room:location",
+      "superseded_by": "synthetic:snapshot:waiting-corrected",
+      "transaction_time": {
+        "ends_at": "2026-08-06T02:00:00Z",
+        "starts_at": "2026-08-06T00:05:00Z"
+      },
+      "valid_time": {
+        "ends_at": "2026-08-06T01:00:00Z",
+        "starts_at": "2026-08-06T00:00:00Z"
+      }
+    },
+    {
+      "command_authority": false,
+      "content": {
+        "appointment_count": 3,
+        "status_codes": [
+          "ARRIVED",
+          "IN_CONSULT"
+        ],
+        "waiting_count": 3
+      },
+      "correction_of": "synthetic:snapshot:waiting-original",
+      "coverage_state": "COMPLETE",
+      "current_truth_authority": false,
+      "frame_type": "historical_waiting_room_projection",
+      "location_ref": "synthetic:location:brisbane-one",
+      "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+      "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+      "read_only": true,
+      "retention_class": "SHORT_OPERATIONAL_RECALL",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "snapshot_digest": "sha256:32ffb8a6da0ee7aa671e68e9f558713594bfa16df47682ea848e13f2bc980249",
+      "snapshot_id": "synthetic:snapshot:waiting-corrected",
+      "source_class": "historical_operational_state",
+      "source_contract_id": "emr4.historical_waiting_room_snapshot.v1",
+      "source_digest": "sha256:aebba3b69ae591b5c3398f036f4cfe7f58f77207f99011633880b7f35396fd6d",
+      "source_revision": "synthetic:waiting-history:2",
+      "subject_selector": "synthetic:waiting-room:location",
+      "superseded_by": null,
+      "transaction_time": {
+        "ends_at": null,
+        "starts_at": "2026-08-06T02:00:00Z"
+      },
+      "valid_time": {
+        "ends_at": "2026-08-06T01:00:00Z",
+        "starts_at": "2026-08-06T00:00:00Z"
+      }
+    },
+    {
+      "command_authority": false,
+      "content": {
+        "appointment_count": 3,
+        "status_codes": [
+          "ARRIVED",
+          "IN_CONSULT"
+        ],
+        "waiting_count": 1
+      },
+      "correction_of": null,
+      "coverage_state": "COMPLETE",
+      "current_truth_authority": false,
+      "frame_type": "historical_waiting_room_projection",
+      "location_ref": "synthetic:location:brisbane-one",
+      "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+      "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+      "read_only": true,
+      "retention_class": "SHORT_OPERATIONAL_RECALL",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "snapshot_digest": "sha256:aa7b6c2725349c4eae31a6ed4dacb54c61f2affaf57510caf4f423db79fc9d8f",
+      "snapshot_id": "synthetic:snapshot:waiting-successor",
+      "source_class": "historical_operational_state",
+      "source_contract_id": "emr4.historical_waiting_room_snapshot.v1",
+      "source_digest": "sha256:f10996b5f0d0d5742dcce753ea29114a5d0dc82794dce215d07adb7356e41752",
+      "source_revision": "synthetic:waiting-history:3",
+      "subject_selector": "synthetic:waiting-room:location",
+      "superseded_by": null,
+      "transaction_time": {
+        "ends_at": null,
+        "starts_at": "2026-08-06T01:02:00Z"
+      },
+      "valid_time": {
+        "ends_at": "2026-08-06T02:00:00Z",
+        "starts_at": "2026-08-06T01:00:00Z"
+      }
+    },
+    {
+      "command_authority": false,
+      "content": {
+        "appointment_count": 3,
+        "status_codes": [
+          "ARRIVED",
+          "IN_CONSULT"
+        ],
+        "waiting_count": 0
+      },
+      "correction_of": null,
+      "coverage_state": "GAP",
+      "current_truth_authority": false,
+      "frame_type": "historical_waiting_room_projection",
+      "location_ref": "synthetic:location:brisbane-one",
+      "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+      "purpose_code": "TEMPORAL_OPERATIONAL_RECALL",
+      "read_only": true,
+      "retention_class": "SHORT_OPERATIONAL_RECALL",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "snapshot_digest": "sha256:df6c8767f75652e121f1c9e500dce600124c0a38821933eaf82f250eddce3178",
+      "snapshot_id": "synthetic:snapshot:explicit-gap",
+      "source_class": "historical_operational_state",
+      "source_contract_id": "emr4.historical_waiting_room_snapshot.v1",
+      "source_digest": "sha256:5310648180c4a3e12a7bc0b3d7bdd16b96e87bedaa307e3a0746fb53662d5dac",
+      "source_revision": "synthetic:waiting-history:gap-1",
+      "subject_selector": "synthetic:waiting-room:location",
+      "superseded_by": null,
+      "transaction_time": {
+        "ends_at": null,
+        "starts_at": "2026-08-06T02:05:00Z"
+      },
+      "valid_time": {
+        "ends_at": "2026-08-06T02:30:00Z",
+        "starts_at": "2026-08-06T02:00:00Z"
+      }
+    }
+  ],
+  "invalidation_decisions": [
+    {
+      "affected_dependency_ids": [
+        "synthetic:dependency:current_diary_projection",
+        "synthetic:dependency:current_waiting_room_projection",
+        "synthetic:dependency:private_application_session_state"
+      ],
+      "affected_frame_ids": [
+        "frame:synthetic:source:diary-001",
+        "frame:synthetic:source:session-001",
+        "frame:synthetic:source:waiting-001"
+      ],
+      "command_authority": false,
+      "decision": "REASSEMBLY_REQUIRED",
+      "decision_digest": "sha256:41074f3822f6114510825ef2aa6ca0641024122021caacbbcb41ccd4f4620455",
+      "reason_codes": [
+        "DEPENDENCY_MAY_BE_STALE"
+      ],
+      "replacement_context_included": false,
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "signal_digest": "sha256:a3b1a25d102847282c09cd859b68c36aeca2e3442055f21426c37c84708fc232",
+      "signal_id": "synthetic:signal:reschedule-101"
+    },
+    {
+      "affected_dependency_ids": [
+        "synthetic:dependency:current_diary_projection",
+        "synthetic:dependency:current_waiting_room_projection"
+      ],
+      "affected_frame_ids": [
+        "frame:synthetic:source:diary-001",
+        "frame:synthetic:source:waiting-001"
+      ],
+      "command_authority": false,
+      "decision": "COALESCED",
+      "decision_digest": "sha256:fd4ffcf53179a928ad161eea5907aa8d101fe763a5e9410c4bbe50b9b5378e0b",
+      "reason_codes": [
+        "REASSEMBLY_ALREADY_REQUIRED"
+      ],
+      "replacement_context_included": false,
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "signal_digest": "sha256:c9cdfe07ee0e35a34488e5524669241e7c537bc8d964140633d5c7eeaf99f735",
+      "signal_id": "synthetic:signal:waiting-102"
+    },
+    {
+      "affected_dependency_ids": [],
+      "affected_frame_ids": [],
+      "command_authority": false,
+      "decision": "IRRELEVANT",
+      "decision_digest": "sha256:4bcc3ef99eb2809a41bd0088e39b1961d32368d4e10bb020ba36725a046f2f5e",
+      "reason_codes": [
+        "NO_DEPENDENCY_INTERSECTION"
+      ],
+      "replacement_context_included": false,
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "signal_digest": "sha256:1c7cc9c30c0426dc158ef772f7d26b00147fd02eddcee63e616dd6e198877492",
+      "signal_id": "synthetic:signal:unrelated-103"
+    }
+  ],
+  "parent_binding": {
+    "assembled_at": "2026-08-06T03:00:00Z",
+    "command_authority": false,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "parent_authority_binding_digest": "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+    "parent_binding_record_digest": "sha256:04c23e7a85bc7b685145a236c05ad95888670dfd562fb56e7436be6327446e2a",
+    "parent_frame_set_bytes_digest": "sha256:7b8defca2c05c9a8a27d183fdca37db54f40b6f38c04fce07e08829faa65e98f",
+    "parent_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "parent_frame_set_id": "operational-weave:synthetic:need:current-operational-weave-001",
+    "parent_grant_digest": "sha256:bf6da241ee287e3929315b61cb8f822d74ab1dcdcd9fed50eb2075fd3b1464c3",
+    "parent_need_digest": "sha256:8f3f6312ccbf81d1fcc7c7c36de2463466c8f7261a76c5ff3490b03cf1af660f",
+    "parent_schema_version": "emr4.practice_context_fabric_current_operational_weave.v1",
+    "parent_source_trace_digest": "sha256:50ce0ab2e6d8d5e2173b085ef13ad4afb113725e44f63ef2cb2b26e440ba81dd",
+    "policy_version": "context-fabric-current-operational-weave.v1",
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "read_only": true,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "session_binding_digest": "sha256:b5cf6112bb4396b94847534563f45251922c9fed159776df1624ffec93919cde",
+    "session_generation": 7
+  },
+  "proofreader_trace": {
+    "checked_at": "2026-08-06T03:01:01Z",
+    "command_authority": false,
+    "packet_digest": "sha256:ad778cc1121d64088694fbe34779270ec6f4b1e468686511ad6f5bd452bf0795",
+    "proofreader_trace_digest": "sha256:76c1662c56cdbb7d0fbe0dced1f385e45d3edbca6dbdb0bf4134b2dbe29419cf",
+    "read_only": true,
+    "reason_codes": [
+      "ALL_CHECKS_PASSED"
+    ],
+    "release_decision": "RELEASE",
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1"
+  },
+  "reassembly_requirement": {
+    "binding_digest": "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+    "cause_signal_digests": [
+      "sha256:a3b1a25d102847282c09cd859b68c36aeca2e3442055f21426c37c84708fc232",
+      "sha256:c9cdfe07ee0e35a34488e5524669241e7c537bc8d964140633d5c7eeaf99f735"
+    ],
+    "command_authority": false,
+    "execution_enabled": false,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "grant_digest": "sha256:bf6da241ee287e3929315b61cb8f822d74ab1dcdcd9fed50eb2075fd3b1464c3",
+    "issued_at": "2026-08-06T03:01:00Z",
+    "lease_digest": "sha256:1df5571827f5fcce12dfda1582b5fdfcf70642c29ab228912e778c779fe79799",
+    "manifest_digest": "sha256:476a07fb53b1beb803c5721fb450645810e71ff388ece1a32fd1e46d2ac966d3",
+    "read_only": true,
+    "request_revision": 1,
+    "required_dependency_ids": [
+      "synthetic:dependency:current_diary_projection",
+      "synthetic:dependency:current_waiting_room_projection",
+      "synthetic:dependency:private_application_session_state"
+    ],
+    "requirement_digest": "sha256:e0f7fdf21644467303adeb06a6782f79a2f5f391b34e278bf5cf812cccfc6ff1",
+    "requirement_id": "synthetic:reassembly-requirement:001",
+    "returns_data": false,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "session_generation": 7,
+    "superseded_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "superseded_frame_set_id": "operational-weave:synthetic:need:current-operational-weave-001"
+  },
+  "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+  "signals": [
+    {
+      "affected_frame_types": [],
+      "affected_location_refs": [
+        "synthetic:location:brisbane-one"
+      ],
+      "affected_practitioner_refs": [
+        "synthetic:practitioner:one"
+      ],
+      "aggregate_class": "APPOINTMENT",
+      "aggregate_ref": "synthetic:appointment:one",
+      "aggregate_revision": 12,
+      "baseline_established": false,
+      "command_authority": false,
+      "commit_state": "COMMITTED",
+      "data_class": "authored_synthetic_patient_free_operational_metadata",
+      "event_schema_version": "emr4.diary.appointment_rescheduled.v1",
+      "event_type": "diary.appointment_rescheduled",
+      "evidence_label": "provider_free_authored_synthetic_patient_free_temporal_weave",
+      "expires_at": "2026-08-06T04:00:00Z",
+      "observed_cursor": "synthetic:cursor:101",
+      "occurred_at": "2026-08-06T03:00:10Z",
+      "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+      "previous_transaction_position": 100,
+      "read_only": true,
+      "received_at": "2026-08-06T03:00:11Z",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "sensitivity": "INTERNAL_OPERATIONAL",
+      "signal_digest": "sha256:a3b1a25d102847282c09cd859b68c36aeca2e3442055f21426c37c84708fc232",
+      "signal_id": "synthetic:signal:reschedule-101",
+      "transaction_position": 101
+    },
+    {
+      "affected_frame_types": [],
+      "affected_location_refs": [
+        "synthetic:location:brisbane-one"
+      ],
+      "affected_practitioner_refs": [
+        "synthetic:practitioner:one"
+      ],
+      "aggregate_class": "APPOINTMENT",
+      "aggregate_ref": "synthetic:appointment:one",
+      "aggregate_revision": 13,
+      "baseline_established": false,
+      "command_authority": false,
+      "commit_state": "COMMITTED",
+      "data_class": "authored_synthetic_patient_free_operational_metadata",
+      "event_schema_version": "emr4.diary.waiting_state_changed.v1",
+      "event_type": "diary.waiting_state_changed",
+      "evidence_label": "provider_free_authored_synthetic_patient_free_temporal_weave",
+      "expires_at": "2026-08-06T04:00:00Z",
+      "observed_cursor": "synthetic:cursor:102",
+      "occurred_at": "2026-08-06T03:00:20Z",
+      "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+      "previous_transaction_position": 101,
+      "read_only": true,
+      "received_at": "2026-08-06T03:00:21Z",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "sensitivity": "INTERNAL_OPERATIONAL",
+      "signal_digest": "sha256:c9cdfe07ee0e35a34488e5524669241e7c537bc8d964140633d5c7eeaf99f735",
+      "signal_id": "synthetic:signal:waiting-102",
+      "transaction_position": 102
+    },
+    {
+      "affected_frame_types": [],
+      "affected_location_refs": [
+        "synthetic:location:outside-scope"
+      ],
+      "affected_practitioner_refs": [],
+      "aggregate_class": "APPOINTMENT",
+      "aggregate_ref": "synthetic:appointment:outside-scope",
+      "aggregate_revision": 1,
+      "baseline_established": false,
+      "command_authority": false,
+      "commit_state": "COMMITTED",
+      "data_class": "authored_synthetic_patient_free_operational_metadata",
+      "event_schema_version": "emr4.diary.appointment_rescheduled.v1",
+      "event_type": "diary.appointment_rescheduled",
+      "evidence_label": "provider_free_authored_synthetic_patient_free_temporal_weave",
+      "expires_at": "2026-08-06T04:00:00Z",
+      "observed_cursor": "synthetic:cursor:103",
+      "occurred_at": "2026-08-06T03:00:30Z",
+      "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+      "previous_transaction_position": 102,
+      "read_only": true,
+      "received_at": "2026-08-06T03:00:31Z",
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "sensitivity": "INTERNAL_OPERATIONAL",
+      "signal_digest": "sha256:1c7cc9c30c0426dc158ef772f7d26b00147fd02eddcee63e616dd6e198877492",
+      "signal_id": "synthetic:signal:unrelated-103",
+      "transaction_position": 103
+    }
+  ],
+  "stale_reassembly_decision": {
+    "command_authority": false,
+    "current_request_revision": 2,
+    "current_session_generation": 7,
+    "decision": "REJECT_SUPERSEDED_REQUEST",
+    "old_frame_set_restored": false,
+    "reassembly_decision_digest": "sha256:54b74c82e632a9b43e54618f4bfa412996f784c2bb69cdb5b21ef6734df3204a",
+    "requirement_digest": "sha256:e0f7fdf21644467303adeb06a6782f79a2f5f391b34e278bf5cf812cccfc6ff1",
+    "result_request_revision": 1,
+    "result_session_generation": 7,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1"
+  },
+  "temporal_trace": {
+    "checkpoint_digest": "sha256:957879f0461f5dc7ad6de16ee7e94977f48aded0f98a6ca8f1c8ecf7fa1b74da",
+    "command_executed": false,
+    "decision_digests": [
+      "sha256:41074f3822f6114510825ef2aa6ca0641024122021caacbbcb41ccd4f4620455",
+      "sha256:fd4ffcf53179a928ad161eea5907aa8d101fe763a5e9410c4bbe50b9b5378e0b",
+      "sha256:4bcc3ef99eb2809a41bd0088e39b1961d32368d4e10bb020ba36725a046f2f5e"
+    ],
+    "event_payload_used_as_truth": false,
+    "parent_frame_set_bytes_after": "sha256:7b8defca2c05c9a8a27d183fdca37db54f40b6f38c04fce07e08829faa65e98f",
+    "parent_frame_set_bytes_before": "sha256:7b8defca2c05c9a8a27d183fdca37db54f40b6f38c04fce07e08829faa65e98f",
+    "parent_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "parent_frame_set_unchanged": true,
+    "requirement_digest": "sha256:e0f7fdf21644467303adeb06a6782f79a2f5f391b34e278bf5cf812cccfc6ff1",
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "source_read_executed": false,
+    "state_digest": "sha256:7b65f93d2f3577caa9894c8e29dd612e9abea28e352e29c31c80af3c83693bdd",
+    "temporal_trace_digest": "sha256:07b27cef9f94f6bd7cb3398c5a2bb9b985b639cff1ff37092d60ecc5c841bb08",
+    "transition_digests": [
+      "sha256:18d98d3a2be32cbca5fe8f774c9c244384570c01592fd386f19e92bb3168f0f6",
+      "sha256:b6a563f53fee38d1be20fccd21125ff4cda38a26e86485d8d7c087cc5876951e",
+      "sha256:42b348a0bb37f16a0564f3e72eb68c492f3ec96a883259574c2003858deeb9c1"
+    ]
+  },
+  "watch_lease": {
+    "accepted_event_types": [
+      "diary.appointment_rescheduled",
+      "diary.waiting_state_changed",
+      "practice.practitioner_directory_changed",
+      "session.application_state_changed"
+    ],
+    "allowed_dependency_ids": [
+      "synthetic:dependency:current_diary_projection",
+      "synthetic:dependency:current_waiting_room_projection",
+      "synthetic:dependency:active_practitioner_directory",
+      "synthetic:dependency:private_application_session_state"
+    ],
+    "allowed_location_refs": [
+      "synthetic:location:brisbane-one"
+    ],
+    "command_authority": false,
+    "execution_enabled": false,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "handling_policy": "REASSEMBLE_AT_BOUNDARY",
+    "issued_at": "2026-08-06T03:00:01Z",
+    "lease_digest": "sha256:1df5571827f5fcce12dfda1582b5fdfcf70642c29ab228912e778c779fe79799",
+    "lease_id": "synthetic:temporal-watch-lease:001",
+    "manifest_digest": "sha256:476a07fb53b1beb803c5721fb450645810e71ff388ece1a32fd1e46d2ac966d3",
+    "manifest_id": "synthetic:temporal-manifest:001",
+    "maximum_signals": 20,
+    "parent_binding_digest": "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+    "parent_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "parent_grant_digest": "sha256:bf6da241ee287e3929315b61cb8f822d74ab1dcdcd9fed50eb2075fd3b1464c3",
+    "policy_version": "context-fabric-current-operational-weave.v1",
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "read_only": true,
+    "returns_data": false,
+    "revoked": false,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "sensitivity_ceiling": "INTERNAL_OPERATIONAL",
+    "session_binding_digest": "sha256:b5cf6112bb4396b94847534563f45251922c9fed159776df1624ffec93919cde",
+    "session_generation": 7,
+    "starting_checkpoint": {
+      "baseline_established": true,
+      "observed_cursor": "synthetic:cursor:100",
+      "stream_id": "synthetic:practice-event-stream:001",
+      "transaction_position": 100
+    }
+  },
+  "watcher_transitions": [
+    {
+      "command_authority": false,
+      "decision": "REASSEMBLY_REQUIRED",
+      "decision_digest": "sha256:41074f3822f6114510825ef2aa6ca0641024122021caacbbcb41ccd4f4620455",
+      "fresh_read_executed": false,
+      "next_checkpoint": {
+        "baseline_established": false,
+        "observed_cursor": "synthetic:cursor:101",
+        "stream_id": "synthetic:practice-event-stream:001",
+        "transaction_position": 101
+      },
+      "observed_cursor": {
+        "baseline_established": false,
+        "cursor": "synthetic:cursor:101",
+        "previous_transaction_position": 100,
+        "stream_id": "synthetic:practice-event-stream:001",
+        "transaction_position": 101
+      },
+      "reassembly_requirement_emitted": true,
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "signal_digest": "sha256:a3b1a25d102847282c09cd859b68c36aeca2e3442055f21426c37c84708fc232",
+      "state_after": "REASSEMBLY_REQUIRED",
+      "transition_digest": "sha256:18d98d3a2be32cbca5fe8f774c9c244384570c01592fd386f19e92bb3168f0f6"
+    },
+    {
+      "command_authority": false,
+      "decision": "COALESCED",
+      "decision_digest": "sha256:fd4ffcf53179a928ad161eea5907aa8d101fe763a5e9410c4bbe50b9b5378e0b",
+      "fresh_read_executed": false,
+      "next_checkpoint": {
+        "baseline_established": false,
+        "observed_cursor": "synthetic:cursor:102",
+        "stream_id": "synthetic:practice-event-stream:001",
+        "transaction_position": 102
+      },
+      "observed_cursor": {
+        "baseline_established": false,
+        "cursor": "synthetic:cursor:102",
+        "previous_transaction_position": 101,
+        "stream_id": "synthetic:practice-event-stream:001",
+        "transaction_position": 102
+      },
+      "reassembly_requirement_emitted": false,
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "signal_digest": "sha256:c9cdfe07ee0e35a34488e5524669241e7c537bc8d964140633d5c7eeaf99f735",
+      "state_after": "REASSEMBLY_REQUIRED",
+      "transition_digest": "sha256:b6a563f53fee38d1be20fccd21125ff4cda38a26e86485d8d7c087cc5876951e"
+    },
+    {
+      "command_authority": false,
+      "decision": "IRRELEVANT",
+      "decision_digest": "sha256:4bcc3ef99eb2809a41bd0088e39b1961d32368d4e10bb020ba36725a046f2f5e",
+      "fresh_read_executed": false,
+      "next_checkpoint": {
+        "baseline_established": false,
+        "observed_cursor": "synthetic:cursor:103",
+        "stream_id": "synthetic:practice-event-stream:001",
+        "transaction_position": 103
+      },
+      "observed_cursor": {
+        "baseline_established": false,
+        "cursor": "synthetic:cursor:103",
+        "previous_transaction_position": 102,
+        "stream_id": "synthetic:practice-event-stream:001",
+        "transaction_position": 103
+      },
+      "reassembly_requirement_emitted": false,
+      "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+      "signal_digest": "sha256:1c7cc9c30c0426dc158ef772f7d26b00147fd02eddcee63e616dd6e198877492",
+      "state_after": "REASSEMBLY_REQUIRED",
+      "transition_digest": "sha256:42b348a0bb37f16a0564f3e72eb68c492f3ec96a883259574c2003858deeb9c1"
+    }
+  ]
+}
