@@ -1,0 +1,296 @@
+{
+  "acceptance_cases": [
+    {
+      "case": "closed_shapes",
+      "decision": "pass"
+    },
+    {
+      "case": "closed_nested_shapes",
+      "decision": "pass"
+    },
+    {
+      "case": "bool_not_integer",
+      "decision": "pass"
+    },
+    {
+      "case": "bounded_integers",
+      "decision": "pass"
+    },
+    {
+      "case": "canonical_utc_instants",
+      "decision": "pass"
+    },
+    {
+      "case": "digest_grammar",
+      "decision": "pass"
+    },
+    {
+      "case": "alias_grammar",
+      "decision": "pass"
+    },
+    {
+      "case": "raw_event_id_grammar",
+      "decision": "pass"
+    },
+    {
+      "case": "domain_separation",
+      "decision": "pass"
+    },
+    {
+      "case": "practice_bound_observation_identity",
+      "decision": "pass"
+    },
+    {
+      "case": "source_system_bound_observation_identity",
+      "decision": "pass"
+    },
+    {
+      "case": "source_contract_digest_bound_observation_identity",
+      "decision": "pass"
+    },
+    {
+      "case": "observer_generation_bound_observation_identity",
+      "decision": "pass"
+    },
+    {
+      "case": "raw_event_id_not_released",
+      "decision": "pass"
+    },
+    {
+      "case": "hmac_key_not_released",
+      "decision": "pass"
+    },
+    {
+      "case": "policy_default_off",
+      "decision": "pass"
+    },
+    {
+      "case": "policy_remains_disabled",
+      "decision": "pass"
+    },
+    {
+      "case": "synthetic_activation_exact",
+      "decision": "pass"
+    },
+    {
+      "case": "synthetic_activation_expiring",
+      "decision": "pass"
+    },
+    {
+      "case": "live_activation_ineligible",
+      "decision": "pass"
+    },
+    {
+      "case": "all_activation_effects_false",
+      "decision": "pass"
+    },
+    {
+      "case": "observer_binding_expiring",
+      "decision": "pass"
+    },
+    {
+      "case": "observer_binding_revocable",
+      "decision": "pass"
+    },
+    {
+      "case": "all_binding_authorities_false",
+      "decision": "pass"
+    },
+    {
+      "case": "foreign_scope_blocked",
+      "decision": "pass"
+    },
+    {
+      "case": "schema_policy_mismatch_blocked",
+      "decision": "pass"
+    },
+    {
+      "case": "expired_or_revoked_blocked",
+      "decision": "pass"
+    },
+    {
+      "case": "duplicate_suppressed",
+      "decision": "pass"
+    },
+    {
+      "case": "replay_suppressed",
+      "decision": "pass"
+    },
+    {
+      "case": "baseline_uncertainty_full_invalidation",
+      "decision": "pass"
+    },
+    {
+      "case": "position_gap_full_invalidation",
+      "decision": "pass"
+    },
+    {
+      "case": "revision_gap_full_invalidation",
+      "decision": "pass"
+    },
+    {
+      "case": "overflow_full_invalidation",
+      "decision": "pass"
+    },
+    {
+      "case": "unknown_alias_full_invalidation",
+      "decision": "pass"
+    },
+    {
+      "case": "unknown_impact_full_invalidation",
+      "decision": "pass"
+    },
+    {
+      "case": "source_selector_absent",
+      "decision": "pass"
+    },
+    {
+      "case": "backend_impact_floor_nonempty",
+      "decision": "pass"
+    },
+    {
+      "case": "impact_floor_preserved",
+      "decision": "pass"
+    },
+    {
+      "case": "backend_alias_resolution",
+      "decision": "pass"
+    },
+    {
+      "case": "only_admit_emits_signal",
+      "decision": "pass"
+    },
+    {
+      "case": "exactly_one_temporal_signal",
+      "decision": "pass"
+    },
+    {
+      "case": "accepted_make_signal_handoff",
+      "decision": "pass"
+    },
+    {
+      "case": "accepted_process_signals_handoff",
+      "decision": "pass"
+    },
+    {
+      "case": "old_frame_set_retired",
+      "decision": "pass"
+    },
+    {
+      "case": "old_frame_bytes_unchanged",
+      "decision": "pass"
+    },
+    {
+      "case": "inert_reassembly_requirement_only",
+      "decision": "pass"
+    },
+    {
+      "case": "same_packet_reconstruction",
+      "decision": "pass"
+    },
+    {
+      "case": "same_packet_proofreader_release",
+      "decision": "pass"
+    },
+    {
+      "case": "resealed_substitution_blocked",
+      "decision": "pass"
+    },
+    {
+      "case": "authority_widening_blocked",
+      "decision": "pass"
+    },
+    {
+      "case": "no_source_read",
+      "decision": "pass"
+    },
+    {
+      "case": "no_provider_call",
+      "decision": "pass"
+    },
+    {
+      "case": "no_command_or_write",
+      "decision": "pass"
+    },
+    {
+      "case": "no_checkpoint_persistence",
+      "decision": "pass"
+    },
+    {
+      "case": "no_runtime_mount",
+      "decision": "pass"
+    },
+    {
+      "case": "no_api_or_app_surface",
+      "decision": "pass"
+    },
+    {
+      "case": "provider_free_evidence_label",
+      "decision": "pass"
+    }
+  ],
+  "artifact_hashes": {
+    "acceptance_generator": "sha256:8df09964e01fb86a3677d7483cf7ff74503266dc09bfb9337f01cbb71fc168b1",
+    "accepted_temporal_module": "sha256:279f1226340a30330317ead252b978534d9ab938ae3e73f52d3f08b0f8bd2d73",
+    "contract_schema": "sha256:370ea8e0420dfec37645c79aac6edbba22aa7dd3772299e71e4c3b755a84b37c",
+    "frozen_design": "sha256:9dd45043a97e947a0d04a544e10e7543d933633ef403db9917b2c952c530c634",
+    "frozen_plan": "sha256:e7454715145f51645bdcb0e7af23db6e28b18fb4fdedc46ee0dbae6855947a21",
+    "frozen_threat_delta": "sha256:fd1710ceebd9c29270cbf16077069a6420cb483622b5acacf13968829a84c0e7",
+    "pure_rehearsal_module": "sha256:e04a6446c5ff024e2a1b91a780377662095c1acda33c7f708e6f425ec8dbfe62"
+  },
+  "authority_and_side_effect_counts": {
+    "checkpoint_writes": 0,
+    "command_authority": 0,
+    "commands_or_writes": 0,
+    "credential_acquisitions": 0,
+    "database_calls": 0,
+    "filesystem_effects_from_pure_module": 0,
+    "fresh_reads": 0,
+    "listener_mounts": 0,
+    "network_calls": 0,
+    "persistence_authority": 0,
+    "provider_authority": 0,
+    "provider_calls": 0,
+    "read_authority": 0,
+    "returns_data": 0,
+    "runtime_mounts": 0,
+    "source_connections": 0,
+    "source_reads": 0,
+    "subprocess_calls": 0
+  },
+  "case_count": 57,
+  "claim_boundary": "Pure provider-free unmounted authored-synthetic observation admission and compatibility with the accepted temporal signal processor only; no live delivery, source authentication, database/outbox/feed/watcher/listener, durable checkpoint, product read, patient privacy, provider, command, deployment, release, Pages, production, or protected-ref claim.",
+  "evidence_label": "provider_free_authored_synthetic_unmounted_observation_to_temporal_signal_rehearsal",
+  "hmac_key_released": false,
+  "mapping_trace_digest": "sha256:89edf46145de510c7060faaa2a468cc8529f13ee6eb2ec5584d972b57204d9f5",
+  "observation_digest": "sha256:56223e066d96eff12ad442aeb14ec22c991479bfbef93b29490f4a99201b2af5",
+  "packet_digest": "sha256:1839ccf70343c56b114309d6a8cf60d2779f2744498d18ccaceab9c9507961a4",
+  "passed": true,
+  "passed_case_count": 57,
+  "proofreader_decision": "RELEASE",
+  "raw_source_event_id_released": false,
+  "result": "raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_pass",
+  "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+  "signal_digest": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+  "source_binding": {
+    "accepted_temporal_api_imported_without_modification": true,
+    "authored_synthetic": true,
+    "frozen_source_head": "7bf42d536214154084c900f0051cc3dd6eb00c78",
+    "provider_free": true,
+    "unmounted": true
+  },
+  "static_surface_counts": {
+    "api_routes_added": 0,
+    "app_files_added": 0,
+    "command_surfaces_added": 0,
+    "database_surfaces_added": 0,
+    "deployment_or_pages_surfaces_added": 0,
+    "forbidden_imports": 0,
+    "forbidden_runtime_calls": 0,
+    "listener_or_watcher_surfaces_added": 0,
+    "protected_ref_actions": 0,
+    "provider_surfaces_added": 0
+  },
+  "temporal_decision": "REASSEMBLY_REQUIRED",
+  "temporal_requirement_execution_enabled": false
+}

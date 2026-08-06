@@ -1,0 +1,2731 @@
+{
+  "$defs": {
+    "CommittedChangeObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "aggregate_alias": {
+          "const": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+          "type": "string"
+        },
+        "aggregate_class": {
+          "const": "APPOINTMENT",
+          "type": "string"
+        },
+        "aggregate_revision": {
+          "const": 12,
+          "type": "integer"
+        },
+        "alias_registry_digest": {
+          "const": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "binding_digest": {
+          "const": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "committed": {
+          "const": true,
+          "type": "boolean"
+        },
+        "event_schema_version": {
+          "const": "diary.appointment_rescheduled.v1",
+          "type": "string"
+        },
+        "event_type": {
+          "const": "diary.appointment_rescheduled",
+          "type": "string"
+        },
+        "evidence_mode": {
+          "const": "AUTHORED_SYNTHETIC",
+          "type": "string"
+        },
+        "expected_predecessor_position": {
+          "const": 100,
+          "type": "integer"
+        },
+        "expires_at": {
+          "const": "2026-08-06T03:02:00Z",
+          "type": "string"
+        },
+        "impact_policy_digest": {
+          "const": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observation_digest": {
+          "const": "sha256:56223e066d96eff12ad442aeb14ec22c991479bfbef93b29490f4a99201b2af5",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observation_id": {
+          "const": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observed_at": {
+          "const": "2026-08-06T03:00:11Z",
+          "type": "string"
+        },
+        "observer_generation": {
+          "const": 1,
+          "type": "integer"
+        },
+        "observer_id": {
+          "const": "synthetic:observer:001",
+          "type": "string"
+        },
+        "policy_digest": {
+          "const": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "practice_binding_digest": {
+          "const": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "sensitivity": {
+          "const": "PATIENT_FREE_CONTROL_METADATA",
+          "type": "string"
+        },
+        "source_contract_digest": {
+          "const": "sha256:49343ff46575d8ebebe9761b811fdeee4d22a95b3a1f01db125329a2e63bee6a",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "source_contract_id": {
+          "const": "emr4.synthetic_committed_change_control_metadata.v1",
+          "type": "string"
+        },
+        "source_system_id": {
+          "const": "AUTHORED_SYNTHETIC_SOURCE_HARNESS",
+          "type": "string"
+        },
+        "source_transaction_committed_at": {
+          "const": "2026-08-06T03:00:10Z",
+          "type": "string"
+        },
+        "stream_alias": {
+          "const": "syn/v1/stream/d0e1f2a3b4c5d6e7",
+          "type": "string"
+        },
+        "transaction_position": {
+          "const": 101,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "aggregate_alias",
+        "aggregate_class",
+        "aggregate_revision",
+        "alias_registry_digest",
+        "binding_digest",
+        "committed",
+        "event_schema_version",
+        "event_type",
+        "evidence_mode",
+        "expected_predecessor_position",
+        "expires_at",
+        "impact_policy_digest",
+        "observation_digest",
+        "observation_id",
+        "observed_at",
+        "observer_generation",
+        "observer_id",
+        "policy_digest",
+        "practice_binding_digest",
+        "schema_version",
+        "sensitivity",
+        "source_contract_digest",
+        "source_contract_id",
+        "source_system_id",
+        "source_transaction_committed_at",
+        "stream_alias",
+        "transaction_position"
+      ],
+      "type": "object"
+    },
+    "LiveSourceObservationPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "alias_registry_digest": {
+          "const": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "allowed_aggregate_classes": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "APPOINTMENT",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "allowed_event_schema_versions": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "diary.appointment_rescheduled.v1",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "allowed_event_types": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "diary.appointment_rescheduled",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "allowed_sensitivities": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "PATIENT_FREE_CONTROL_METADATA",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "continuity_mode": {
+          "const": "MONOTONIC_POSITION_AND_AGGREGATE_REVISION",
+          "type": "string"
+        },
+        "enabled": {
+          "const": false,
+          "type": "boolean"
+        },
+        "enabled_by_default": {
+          "const": false,
+          "type": "boolean"
+        },
+        "expires_at": {
+          "const": "2026-08-06T03:02:00Z",
+          "type": "string"
+        },
+        "impact_policy_digest": {
+          "const": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "impact_policy_id": {
+          "const": "synthetic:observation-impact-policy:001",
+          "type": "string"
+        },
+        "issued_at": {
+          "const": "2026-08-06T03:00:00Z",
+          "type": "string"
+        },
+        "maximum_batch_size": {
+          "const": 1,
+          "type": "integer"
+        },
+        "maximum_clock_skew_seconds": {
+          "const": 120,
+          "type": "integer"
+        },
+        "maximum_events_per_minute": {
+          "const": 20,
+          "type": "integer"
+        },
+        "payload_allowed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "persistence_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "policy_digest": {
+          "const": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "policy_id": {
+          "const": "synthetic:live-source-observation-policy:001",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "practice_binding_digest": {
+          "const": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "required_authentication_kinds": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "SYNTHETIC_INTEGRATION_PRINCIPAL",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "source_contract_digest": {
+          "const": "sha256:49343ff46575d8ebebe9761b811fdeee4d22a95b3a1f01db125329a2e63bee6a",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "source_contract_id": {
+          "const": "emr4.synthetic_committed_change_control_metadata.v1",
+          "type": "string"
+        },
+        "source_system_id": {
+          "const": "AUTHORED_SYNTHETIC_SOURCE_HARNESS",
+          "type": "string"
+        }
+      },
+      "required": [
+        "alias_registry_digest",
+        "allowed_aggregate_classes",
+        "allowed_event_schema_versions",
+        "allowed_event_types",
+        "allowed_sensitivities",
+        "continuity_mode",
+        "enabled",
+        "enabled_by_default",
+        "expires_at",
+        "impact_policy_digest",
+        "impact_policy_id",
+        "issued_at",
+        "maximum_batch_size",
+        "maximum_clock_skew_seconds",
+        "maximum_events_per_minute",
+        "payload_allowed",
+        "persistence_authority",
+        "policy_digest",
+        "policy_id",
+        "policy_version",
+        "practice_binding_digest",
+        "required_authentication_kinds",
+        "schema_version",
+        "source_contract_digest",
+        "source_contract_id",
+        "source_system_id"
+      ],
+      "type": "object"
+    },
+    "LiveSourceObserverBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "alias_registry_digest": {
+          "const": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "allowed_aggregate_classes": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "APPOINTMENT",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "allowed_event_schema_versions": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "diary.appointment_rescheduled.v1",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "allowed_event_types": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "diary.appointment_rescheduled",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "authentication_kind": {
+          "const": "SYNTHETIC_INTEGRATION_PRINCIPAL",
+          "type": "string"
+        },
+        "binding_digest": {
+          "const": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "binding_id": {
+          "const": "synthetic:live-source-observer-binding:001",
+          "type": "string"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "expires_at": {
+          "const": "2026-08-06T03:02:00Z",
+          "type": "string"
+        },
+        "impact_policy_digest": {
+          "const": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "integration_principal_digest": {
+          "const": "sha256:2d161e9b05e5e67583a6ab2d7f8bcc6190e2a68c0177e0a2daa2b49871b3f675",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "issued_at": {
+          "const": "2026-08-06T03:00:00Z",
+          "type": "string"
+        },
+        "not_before": {
+          "const": "2026-08-06T03:00:00Z",
+          "type": "string"
+        },
+        "observer_generation": {
+          "const": 1,
+          "type": "integer"
+        },
+        "observer_id": {
+          "const": "synthetic:observer:001",
+          "type": "string"
+        },
+        "persistence_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "policy_digest": {
+          "const": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "practice_binding_digest": {
+          "const": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "provider_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "read_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "returns_data": {
+          "const": false,
+          "type": "boolean"
+        },
+        "revoked": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "source_contract_digest": {
+          "const": "sha256:49343ff46575d8ebebe9761b811fdeee4d22a95b3a1f01db125329a2e63bee6a",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "source_contract_id": {
+          "const": "emr4.synthetic_committed_change_control_metadata.v1",
+          "type": "string"
+        },
+        "source_system_id": {
+          "const": "AUTHORED_SYNTHETIC_SOURCE_HARNESS",
+          "type": "string"
+        }
+      },
+      "required": [
+        "alias_registry_digest",
+        "allowed_aggregate_classes",
+        "allowed_event_schema_versions",
+        "allowed_event_types",
+        "authentication_kind",
+        "binding_digest",
+        "binding_id",
+        "command_authority",
+        "expires_at",
+        "impact_policy_digest",
+        "integration_principal_digest",
+        "issued_at",
+        "not_before",
+        "observer_generation",
+        "observer_id",
+        "persistence_authority",
+        "policy_digest",
+        "policy_version",
+        "practice_binding_digest",
+        "provider_authority",
+        "read_authority",
+        "returns_data",
+        "revoked",
+        "schema_version",
+        "source_contract_digest",
+        "source_contract_id",
+        "source_system_id"
+      ],
+      "type": "object"
+    },
+    "ObservationAdmissionDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "admission_digest": {
+          "const": "sha256:f33e8e9f4b80af395b6d2ca6f5bf81a35b75e0d660cb43a216bb41a05f8f36df",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "alias_registry_digest": {
+          "const": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "authority_renewed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "binding_digest": {
+          "const": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "checkpoint_advanced": {
+          "const": false,
+          "type": "boolean"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "conservative_impact_frame_types": {
+          "items": false,
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "const": "current_diary_projection",
+              "type": "string"
+            },
+            {
+              "const": "current_waiting_room_projection",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "decision": {
+          "const": "ADMIT_SIGNAL",
+          "type": "string"
+        },
+        "durable_handoff_implemented": {
+          "const": false,
+          "type": "boolean"
+        },
+        "impact_policy_digest": {
+          "const": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observation_digest": {
+          "const": "sha256:56223e066d96eff12ad442aeb14ec22c991479bfbef93b29490f4a99201b2af5",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "ordinary_temporal_signal_emitted": {
+          "const": true,
+          "type": "boolean"
+        },
+        "persistence_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "policy_digest": {
+          "const": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "prior_coordinate_digest": {
+          "const": "sha256:7d23ecc25e92e37030584dae21ffa9c05a2e27e26c3012b6c1090e5100369268",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "provider_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "read_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "reason_codes": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "ADMISSION_CHECKS_PASSED",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "returns_data": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "signal_digest": {
+          "const": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "admission_digest",
+        "alias_registry_digest",
+        "authority_renewed",
+        "binding_digest",
+        "checkpoint_advanced",
+        "command_authority",
+        "conservative_impact_frame_types",
+        "decision",
+        "durable_handoff_implemented",
+        "impact_policy_digest",
+        "observation_digest",
+        "ordinary_temporal_signal_emitted",
+        "persistence_authority",
+        "policy_digest",
+        "prior_coordinate_digest",
+        "provider_authority",
+        "read_authority",
+        "reason_codes",
+        "returns_data",
+        "schema_version",
+        "signal_digest"
+      ],
+      "type": "object"
+    },
+    "ObservationAliasRegistry": {
+      "additionalProperties": false,
+      "properties": {
+        "aggregate_class": {
+          "const": "APPOINTMENT",
+          "type": "string"
+        },
+        "alias_registry_digest": {
+          "const": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "backend_issued_only": {
+          "const": true,
+          "type": "boolean"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "entries": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "additional_frame_types": {
+                  "maxItems": 0,
+                  "type": "array"
+                },
+                "aggregate_alias": {
+                  "const": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+                  "type": "string"
+                },
+                "aggregate_ref": {
+                  "const": "synthetic:appointment:one",
+                  "type": "string"
+                },
+                "location_aliases": {
+                  "items": false,
+                  "maxItems": 1,
+                  "minItems": 1,
+                  "prefixItems": [
+                    {
+                      "const": "syn/v1/location/b0c1d2e3f4a5b6c7",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "array"
+                },
+                "location_refs": {
+                  "items": false,
+                  "maxItems": 1,
+                  "minItems": 1,
+                  "prefixItems": [
+                    {
+                      "const": "synthetic:location:brisbane-one",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "array"
+                },
+                "practitioner_aliases": {
+                  "items": false,
+                  "maxItems": 1,
+                  "minItems": 1,
+                  "prefixItems": [
+                    {
+                      "const": "syn/v1/practitioner/c0d1e2f3a4b5c6d7",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "array"
+                },
+                "practitioner_refs": {
+                  "items": false,
+                  "maxItems": 1,
+                  "minItems": 1,
+                  "prefixItems": [
+                    {
+                      "const": "synthetic:practitioner:one",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "array"
+                }
+              },
+              "required": [
+                "additional_frame_types",
+                "aggregate_alias",
+                "aggregate_ref",
+                "location_aliases",
+                "location_refs",
+                "practitioner_aliases",
+                "practitioner_refs"
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "array"
+        },
+        "practice_binding_digest": {
+          "const": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "read_only": {
+          "const": true,
+          "type": "boolean"
+        },
+        "registry_id": {
+          "const": "synthetic:observation-alias-registry:001",
+          "type": "string"
+        },
+        "registry_version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "source_contract_id": {
+          "const": "emr4.synthetic_committed_change_control_metadata.v1",
+          "type": "string"
+        },
+        "source_system_id": {
+          "const": "AUTHORED_SYNTHETIC_SOURCE_HARNESS",
+          "type": "string"
+        },
+        "stream_entries": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "stream_alias": {
+                  "const": "syn/v1/stream/d0e1f2a3b4c5d6e7",
+                  "type": "string"
+                },
+                "stream_ref": {
+                  "const": "synthetic:practice-event-stream:001",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "stream_alias",
+                "stream_ref"
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "array"
+        }
+      },
+      "required": [
+        "aggregate_class",
+        "alias_registry_digest",
+        "backend_issued_only",
+        "command_authority",
+        "entries",
+        "practice_binding_digest",
+        "read_only",
+        "registry_id",
+        "registry_version",
+        "schema_version",
+        "source_contract_id",
+        "source_system_id",
+        "stream_entries"
+      ],
+      "type": "object"
+    },
+    "ObservationContinuityRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint_persisted": {
+          "const": false,
+          "type": "boolean"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "continuity_requirement_digest": {
+          "const": "sha256:4f8c53a8555d2951e213113c91ae6e1c38d69198564a4cbd0e08d244e66bc9c5",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "credential_acquisition": {
+          "const": false,
+          "type": "boolean"
+        },
+        "cursor_advanced": {
+          "const": false,
+          "type": "boolean"
+        },
+        "cursor_observed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "decision_persisted": {
+          "const": false,
+          "type": "boolean"
+        },
+        "invalidation_persisted": {
+          "const": false,
+          "type": "boolean"
+        },
+        "listener_mounted": {
+          "const": false,
+          "type": "boolean"
+        },
+        "no_loss_claimed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "persistence_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "provider_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "read_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "required_future_mechanisms": {
+          "items": false,
+          "maxItems": 6,
+          "minItems": 6,
+          "prefixItems": [
+            {
+              "const": "ATOMIC_DECISION_INVALIDATION_CHECKPOINT_PERSISTENCE",
+              "type": "string"
+            },
+            {
+              "const": "AUTHENTICATED_INTEGRATION_PRINCIPAL",
+              "type": "string"
+            },
+            {
+              "const": "DURABLE_CLASSIFIED_CHECKPOINT",
+              "type": "string"
+            },
+            {
+              "const": "MONOTONIC_TRANSACTION_OR_OUTBOX_POSITION",
+              "type": "string"
+            },
+            {
+              "const": "RESTART_GAP_OVERFLOW_RETENTION_HANDLING",
+              "type": "string"
+            },
+            {
+              "const": "STABLE_EVENT_IDENTITY_AND_AGGREGATE_REVISION",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "requirement_id": {
+          "const": "synthetic:observation-continuity-requirement:001",
+          "type": "string"
+        },
+        "returns_data": {
+          "const": false,
+          "type": "boolean"
+        },
+        "runtime_implemented": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "source_connection": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "checkpoint_persisted",
+        "command_authority",
+        "continuity_requirement_digest",
+        "credential_acquisition",
+        "cursor_advanced",
+        "cursor_observed",
+        "decision_persisted",
+        "invalidation_persisted",
+        "listener_mounted",
+        "no_loss_claimed",
+        "persistence_authority",
+        "provider_authority",
+        "read_authority",
+        "required_future_mechanisms",
+        "requirement_id",
+        "returns_data",
+        "runtime_implemented",
+        "schema_version",
+        "source_connection"
+      ],
+      "type": "object"
+    },
+    "ObservationImpactPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "impact_policy_digest": {
+          "const": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "impact_policy_id": {
+          "const": "synthetic:observation-impact-policy:001",
+          "type": "string"
+        },
+        "impact_policy_version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "read_only": {
+          "const": true,
+          "type": "boolean"
+        },
+        "routes": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "aggregate_class": {
+                  "const": "APPOINTMENT",
+                  "type": "string"
+                },
+                "bounded_full_invalidation_frame_types": {
+                  "items": false,
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "current_diary_projection",
+                      "type": "string"
+                    },
+                    {
+                      "const": "current_waiting_room_projection",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "array"
+                },
+                "event_type": {
+                  "const": "diary.appointment_rescheduled",
+                  "type": "string"
+                },
+                "mandatory_frame_type_floor": {
+                  "items": false,
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "prefixItems": [
+                    {
+                      "const": "current_diary_projection",
+                      "type": "string"
+                    },
+                    {
+                      "const": "current_waiting_room_projection",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "array"
+                },
+                "source_event_schema_version": {
+                  "const": "diary.appointment_rescheduled.v1",
+                  "type": "string"
+                },
+                "temporal_event_schema_version": {
+                  "const": "emr4.diary.appointment_rescheduled.v1",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "aggregate_class",
+                "bounded_full_invalidation_frame_types",
+                "event_type",
+                "mandatory_frame_type_floor",
+                "source_event_schema_version",
+                "temporal_event_schema_version"
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "source_may_supply_impact": {
+          "const": false,
+          "type": "boolean"
+        },
+        "unknown_impact_decision": {
+          "const": "FULL_INVALIDATION_REQUIRED",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command_authority",
+        "impact_policy_digest",
+        "impact_policy_id",
+        "impact_policy_version",
+        "read_only",
+        "routes",
+        "schema_version",
+        "source_may_supply_impact",
+        "unknown_impact_decision"
+      ],
+      "type": "object"
+    },
+    "ObservationPriorCoordinate": {
+      "additionalProperties": false,
+      "properties": {
+        "aggregate_revisions": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "aggregate_alias": {
+                  "const": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+                  "type": "string"
+                },
+                "aggregate_revision": {
+                  "const": 11,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "aggregate_alias",
+                "aggregate_revision"
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "array"
+        },
+        "alias_registry_digest": {
+          "const": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "baseline_established": {
+          "const": true,
+          "type": "boolean"
+        },
+        "binding_digest": {
+          "const": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "checkpoint_persisted": {
+          "const": false,
+          "type": "boolean"
+        },
+        "coordinate_digest": {
+          "const": "sha256:7d23ecc25e92e37030584dae21ffa9c05a2e27e26c3012b6c1090e5100369268",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "impact_policy_digest": {
+          "const": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "last_transaction_position": {
+          "const": 100,
+          "type": "integer"
+        },
+        "observer_generation": {
+          "const": 1,
+          "type": "integer"
+        },
+        "observer_id": {
+          "const": "synthetic:observer:001",
+          "type": "string"
+        },
+        "overflow_detected": {
+          "const": false,
+          "type": "boolean"
+        },
+        "policy_digest": {
+          "const": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "practice_binding_digest": {
+          "const": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "restart_uncertain": {
+          "const": false,
+          "type": "boolean"
+        },
+        "runtime_checkpoint": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "seen_observation_ids": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "source_contract_digest": {
+          "const": "sha256:49343ff46575d8ebebe9761b811fdeee4d22a95b3a1f01db125329a2e63bee6a",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "source_contract_id": {
+          "const": "emr4.synthetic_committed_change_control_metadata.v1",
+          "type": "string"
+        },
+        "source_system_id": {
+          "const": "AUTHORED_SYNTHETIC_SOURCE_HARNESS",
+          "type": "string"
+        },
+        "stream_alias": {
+          "const": "syn/v1/stream/d0e1f2a3b4c5d6e7",
+          "type": "string"
+        }
+      },
+      "required": [
+        "aggregate_revisions",
+        "alias_registry_digest",
+        "baseline_established",
+        "binding_digest",
+        "checkpoint_persisted",
+        "coordinate_digest",
+        "impact_policy_digest",
+        "last_transaction_position",
+        "observer_generation",
+        "observer_id",
+        "overflow_detected",
+        "policy_digest",
+        "practice_binding_digest",
+        "restart_uncertain",
+        "runtime_checkpoint",
+        "schema_version",
+        "seen_observation_ids",
+        "source_contract_digest",
+        "source_contract_id",
+        "source_system_id",
+        "stream_alias"
+      ],
+      "type": "object"
+    },
+    "ObservationToTemporalSignalTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "admission_digest": {
+          "const": "sha256:f33e8e9f4b80af395b6d2ca6f5bf81a35b75e0d660cb43a216bb41a05f8f36df",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "aggregate_alias": {
+          "const": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+          "type": "string"
+        },
+        "aggregate_class": {
+          "const": "APPOINTMENT",
+          "type": "string"
+        },
+        "aggregate_revision": {
+          "const": 12,
+          "type": "integer"
+        },
+        "alias_registry_digest": {
+          "const": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "binding_digest": {
+          "const": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "checkpoint_persisted": {
+          "const": false,
+          "type": "boolean"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "command_executed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "event_type": {
+          "const": "diary.appointment_rescheduled",
+          "type": "string"
+        },
+        "expected_predecessor_position": {
+          "const": 100,
+          "type": "integer"
+        },
+        "expires_at": {
+          "const": "2026-08-06T03:02:00Z",
+          "type": "string"
+        },
+        "fresh_read_executed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "impact_floor_preserved": {
+          "const": true,
+          "type": "boolean"
+        },
+        "impact_policy_digest": {
+          "const": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "mandatory_frame_type_floor": {
+          "items": false,
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "const": "current_diary_projection",
+              "type": "string"
+            },
+            {
+              "const": "current_waiting_room_projection",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "observation_digest": {
+          "const": "sha256:56223e066d96eff12ad442aeb14ec22c991479bfbef93b29490f4a99201b2af5",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observation_id": {
+          "const": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observed_at": {
+          "const": "2026-08-06T03:00:11Z",
+          "type": "string"
+        },
+        "observer_generation": {
+          "const": 1,
+          "type": "integer"
+        },
+        "observer_id": {
+          "const": "synthetic:observer:001",
+          "type": "string"
+        },
+        "persistence_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "policy_digest": {
+          "const": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "practice_binding_digest": {
+          "const": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "provider_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "provider_called": {
+          "const": false,
+          "type": "boolean"
+        },
+        "read_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "resolved_aggregate_ref_digest": {
+          "const": "sha256:233b1a0b453a565850e5959d6fb8655fc787c664b3ea00a39033f9987c4db00c",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "resolved_frame_types": {
+          "items": false,
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "const": "current_diary_projection",
+              "type": "string"
+            },
+            {
+              "const": "current_waiting_room_projection",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "resolved_stream_ref_digest": {
+          "const": "sha256:bd7537fc033a0ade0eae88b29dd63bd9bda5fb5cb3880dea615000be2bb062b9",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "returns_data": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "sensitivity": {
+          "const": "PATIENT_FREE_CONTROL_METADATA",
+          "type": "string"
+        },
+        "signal_digest": {
+          "const": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "signal_id": {
+          "const": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "source_event_schema_version": {
+          "const": "diary.appointment_rescheduled.v1",
+          "type": "string"
+        },
+        "source_payload_used_as_truth": {
+          "const": false,
+          "type": "boolean"
+        },
+        "source_read_executed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "source_selector_used": {
+          "const": false,
+          "type": "boolean"
+        },
+        "source_transaction_committed_at": {
+          "const": "2026-08-06T03:00:10Z",
+          "type": "string"
+        },
+        "stream_alias": {
+          "const": "syn/v1/stream/d0e1f2a3b4c5d6e7",
+          "type": "string"
+        },
+        "temporal_event_schema_version": {
+          "const": "emr4.diary.appointment_rescheduled.v1",
+          "type": "string"
+        },
+        "trace_digest": {
+          "const": "sha256:89edf46145de510c7060faaa2a468cc8529f13ee6eb2ec5584d972b57204d9f5",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "transaction_position": {
+          "const": 101,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "admission_digest",
+        "aggregate_alias",
+        "aggregate_class",
+        "aggregate_revision",
+        "alias_registry_digest",
+        "binding_digest",
+        "checkpoint_persisted",
+        "command_authority",
+        "command_executed",
+        "event_type",
+        "expected_predecessor_position",
+        "expires_at",
+        "fresh_read_executed",
+        "impact_floor_preserved",
+        "impact_policy_digest",
+        "mandatory_frame_type_floor",
+        "observation_digest",
+        "observation_id",
+        "observed_at",
+        "observer_generation",
+        "observer_id",
+        "persistence_authority",
+        "policy_digest",
+        "practice_binding_digest",
+        "provider_authority",
+        "provider_called",
+        "read_authority",
+        "resolved_aggregate_ref_digest",
+        "resolved_frame_types",
+        "resolved_stream_ref_digest",
+        "returns_data",
+        "schema_version",
+        "sensitivity",
+        "signal_digest",
+        "signal_id",
+        "source_event_schema_version",
+        "source_payload_used_as_truth",
+        "source_read_executed",
+        "source_selector_used",
+        "source_transaction_committed_at",
+        "stream_alias",
+        "temporal_event_schema_version",
+        "trace_digest",
+        "transaction_position"
+      ],
+      "type": "object"
+    },
+    "SamePacketProofreaderDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "checked_at": {
+          "const": "2026-08-06T03:01:01Z",
+          "type": "string"
+        },
+        "checkpoint_persisted": {
+          "const": false,
+          "type": "boolean"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "command_executed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "hmac_key_released": {
+          "const": false,
+          "type": "boolean"
+        },
+        "packet_digest": {
+          "const": "sha256:aecb2812a98e30595fe6d47db9aaf6d697dc96b68a107808452be837455a4c0b",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "persistence_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "proofreader_trace_digest": {
+          "const": "sha256:e39badd32f65887dce54383d321531bdc6042d29152396746ab1b249e25b1e85",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "provider_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "provider_called": {
+          "const": false,
+          "type": "boolean"
+        },
+        "raw_source_event_id_released": {
+          "const": false,
+          "type": "boolean"
+        },
+        "read_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "reason_codes": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "ALL_CHECKS_PASSED",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "release_decision": {
+          "const": "RELEASE",
+          "type": "string"
+        },
+        "returns_data": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "source_payload_used_as_truth": {
+          "const": false,
+          "type": "boolean"
+        },
+        "source_read_executed": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "checked_at",
+        "checkpoint_persisted",
+        "command_authority",
+        "command_executed",
+        "hmac_key_released",
+        "packet_digest",
+        "persistence_authority",
+        "proofreader_trace_digest",
+        "provider_authority",
+        "provider_called",
+        "raw_source_event_id_released",
+        "read_authority",
+        "reason_codes",
+        "release_decision",
+        "returns_data",
+        "schema_version",
+        "source_payload_used_as_truth",
+        "source_read_executed"
+      ],
+      "type": "object"
+    },
+    "SyntheticObservationClassificationActivation": {
+      "additionalProperties": false,
+      "properties": {
+        "activation_digest": {
+          "const": "sha256:8082cd562589dc88a3c03651f56b936bcba687ad68eb264bfc7a19a343f45cd2",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "activation_id": {
+          "const": "synthetic:observation-classification-activation:001",
+          "type": "string"
+        },
+        "activation_mode": {
+          "const": "AUTHORED_SYNTHETIC_REHEARSAL",
+          "type": "string"
+        },
+        "binding_digest": {
+          "const": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "credential_acquisition": {
+          "const": false,
+          "type": "boolean"
+        },
+        "cursor_persistence": {
+          "const": false,
+          "type": "boolean"
+        },
+        "evidence_mode": {
+          "const": "AUTHORED_SYNTHETIC",
+          "type": "string"
+        },
+        "expires_at": {
+          "const": "2026-08-06T03:02:00Z",
+          "type": "string"
+        },
+        "fixture_digest": {
+          "const": "sha256:ab56a55289128b5538fa02c380495b3aa2df4db81f95a4dc19c9453c33b8ca86",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "not_before": {
+          "const": "2026-08-06T03:00:00Z",
+          "type": "string"
+        },
+        "persistence_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "plan_version": {
+          "const": "2026-08-06.frozen.v1",
+          "type": "string"
+        },
+        "policy_digest": {
+          "const": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "provider_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "read_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "returns_data": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+          "type": "string"
+        },
+        "source_connection": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "activation_digest",
+        "activation_id",
+        "activation_mode",
+        "binding_digest",
+        "command_authority",
+        "credential_acquisition",
+        "cursor_persistence",
+        "evidence_mode",
+        "expires_at",
+        "fixture_digest",
+        "not_before",
+        "persistence_authority",
+        "plan_version",
+        "policy_digest",
+        "provider_authority",
+        "read_authority",
+        "returns_data",
+        "schema_version",
+        "source_connection"
+      ],
+      "type": "object"
+    },
+    "TemporalSignalEnvelope": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_frame_types": {
+          "items": false,
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "const": "current_diary_projection",
+              "type": "string"
+            },
+            {
+              "const": "current_waiting_room_projection",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "affected_location_refs": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "synthetic:location:brisbane-one",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "affected_practitioner_refs": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "synthetic:practitioner:one",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "aggregate_class": {
+          "const": "APPOINTMENT",
+          "type": "string"
+        },
+        "aggregate_ref": {
+          "const": "synthetic:appointment:one",
+          "type": "string"
+        },
+        "aggregate_revision": {
+          "const": 12,
+          "type": "integer"
+        },
+        "baseline_established": {
+          "const": false,
+          "type": "boolean"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "commit_state": {
+          "const": "COMMITTED",
+          "type": "string"
+        },
+        "data_class": {
+          "const": "authored_synthetic_patient_free_operational_metadata",
+          "type": "string"
+        },
+        "event_schema_version": {
+          "const": "emr4.diary.appointment_rescheduled.v1",
+          "type": "string"
+        },
+        "event_type": {
+          "const": "diary.appointment_rescheduled",
+          "type": "string"
+        },
+        "evidence_label": {
+          "const": "provider_free_authored_synthetic_patient_free_temporal_weave",
+          "type": "string"
+        },
+        "expires_at": {
+          "const": "2026-08-06T03:02:00Z",
+          "type": "string"
+        },
+        "observed_cursor": {
+          "const": "synthetic:cursor:101",
+          "type": "string"
+        },
+        "occurred_at": {
+          "const": "2026-08-06T03:00:10Z",
+          "type": "string"
+        },
+        "practice_binding_digest": {
+          "const": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "previous_transaction_position": {
+          "const": 100,
+          "type": "integer"
+        },
+        "read_only": {
+          "const": true,
+          "type": "boolean"
+        },
+        "received_at": {
+          "const": "2026-08-06T03:00:11Z",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "type": "string"
+        },
+        "sensitivity": {
+          "const": "INTERNAL_OPERATIONAL",
+          "type": "string"
+        },
+        "signal_digest": {
+          "const": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "signal_id": {
+          "const": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "transaction_position": {
+          "const": 101,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "affected_frame_types",
+        "affected_location_refs",
+        "affected_practitioner_refs",
+        "aggregate_class",
+        "aggregate_ref",
+        "aggregate_revision",
+        "baseline_established",
+        "command_authority",
+        "commit_state",
+        "data_class",
+        "event_schema_version",
+        "event_type",
+        "evidence_label",
+        "expires_at",
+        "observed_cursor",
+        "occurred_at",
+        "practice_binding_digest",
+        "previous_transaction_position",
+        "read_only",
+        "received_at",
+        "schema_version",
+        "sensitivity",
+        "signal_digest",
+        "signal_id",
+        "transaction_position"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://emr4.local/schemas/practice-context-fabric/observation-to-temporal-signal-rehearsal.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "admission_decision": {
+      "$ref": "#/$defs/ObservationAdmissionDecision"
+    },
+    "alias_registry": {
+      "$ref": "#/$defs/ObservationAliasRegistry"
+    },
+    "checkpoint_persisted": {
+      "const": false,
+      "type": "boolean"
+    },
+    "command_authority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "command_executed": {
+      "const": false,
+      "type": "boolean"
+    },
+    "credential_acquisition": {
+      "const": false,
+      "type": "boolean"
+    },
+    "data_class": {
+      "const": "authored_synthetic_payload_free_control_metadata",
+      "type": "string"
+    },
+    "database_effects": {
+      "const": false,
+      "type": "boolean"
+    },
+    "evidence_label": {
+      "const": "provider_free_authored_synthetic_unmounted_observation_to_temporal_signal_rehearsal",
+      "type": "string"
+    },
+    "filesystem_effects": {
+      "const": false,
+      "type": "boolean"
+    },
+    "fresh_read_executed": {
+      "const": false,
+      "type": "boolean"
+    },
+    "impact_policy": {
+      "$ref": "#/$defs/ObservationImpactPolicy"
+    },
+    "listener_mounted": {
+      "const": false,
+      "type": "boolean"
+    },
+    "network_effects": {
+      "const": false,
+      "type": "boolean"
+    },
+    "observation": {
+      "$ref": "#/$defs/CommittedChangeObservation"
+    },
+    "observation_continuity_requirement": {
+      "$ref": "#/$defs/ObservationContinuityRequirement"
+    },
+    "observation_prior_coordinate": {
+      "$ref": "#/$defs/ObservationPriorCoordinate"
+    },
+    "observation_to_signal_trace": {
+      "$ref": "#/$defs/ObservationToTemporalSignalTrace"
+    },
+    "observer_binding": {
+      "$ref": "#/$defs/LiveSourceObserverBinding"
+    },
+    "old_frame_set_bytes_unchanged": {
+      "const": true,
+      "type": "boolean"
+    },
+    "persistence_authority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "policy": {
+      "$ref": "#/$defs/LiveSourceObservationPolicy"
+    },
+    "proofreader_trace": {
+      "$ref": "#/$defs/SamePacketProofreaderDecision"
+    },
+    "provider_authority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "provider_called": {
+      "const": false,
+      "type": "boolean"
+    },
+    "read_authority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "read_only": {
+      "const": true,
+      "type": "boolean"
+    },
+    "result": {
+      "const": "raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_pass",
+      "type": "string"
+    },
+    "returns_data": {
+      "const": false,
+      "type": "boolean"
+    },
+    "runtime_state_mounted": {
+      "const": false,
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+      "type": "string"
+    },
+    "source_connection": {
+      "const": false,
+      "type": "boolean"
+    },
+    "source_read_executed": {
+      "const": false,
+      "type": "boolean"
+    },
+    "subprocess_effects": {
+      "const": false,
+      "type": "boolean"
+    },
+    "synthetic_activation": {
+      "$ref": "#/$defs/SyntheticObservationClassificationActivation"
+    },
+    "temporal_checkpoint_ephemeral": {
+      "additionalProperties": false,
+      "properties": {
+        "aggregate_high_watermarks": {
+          "items": false,
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "aggregate_ref": {
+                  "const": "synthetic:appointment:one",
+                  "type": "string"
+                },
+                "aggregate_revision": {
+                  "const": 12,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "aggregate_ref",
+                "aggregate_revision"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "aggregate_ref": {
+                  "const": "synthetic:appointment:two",
+                  "type": "string"
+                },
+                "aggregate_revision": {
+                  "const": 11,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "aggregate_ref",
+                "aggregate_revision"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "aggregate_ref": {
+                  "const": "synthetic:directory:active",
+                  "type": "string"
+                },
+                "aggregate_revision": {
+                  "const": 5,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "aggregate_ref",
+                "aggregate_revision"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "aggregate_ref": {
+                  "const": "synthetic:session:active",
+                  "type": "string"
+                },
+                "aggregate_revision": {
+                  "const": 19,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "aggregate_ref",
+                "aggregate_revision"
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "array"
+        },
+        "baseline_established": {
+          "const": false,
+          "type": "boolean"
+        },
+        "checkpoint_digest": {
+          "const": "sha256:555927628a03f6497df1ff6e99b1cdc5fe8d8b1755d9f91e4db50cc340818609",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "classified_at": {
+          "const": "2026-08-06T03:01:00Z",
+          "type": "string"
+        },
+        "observed_cursor": {
+          "const": "synthetic:cursor:101",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "type": "string"
+        },
+        "seen_signal_ids": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "stream_id": {
+          "const": "synthetic:practice-event-stream:001",
+          "type": "string"
+        },
+        "transaction_position": {
+          "const": 101,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "aggregate_high_watermarks",
+        "baseline_established",
+        "checkpoint_digest",
+        "classified_at",
+        "observed_cursor",
+        "schema_version",
+        "seen_signal_ids",
+        "stream_id",
+        "transaction_position"
+      ],
+      "type": "object"
+    },
+    "temporal_frame_set_state": {
+      "additionalProperties": false,
+      "properties": {
+        "cause_signal_digests": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "frames_mutated": {
+          "const": false,
+          "type": "boolean"
+        },
+        "parent_frame_set_digest": {
+          "const": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "parent_frame_set_id": {
+          "const": "operational-weave:synthetic:need:current-operational-weave-001",
+          "type": "string"
+        },
+        "recorded_at": {
+          "const": "2026-08-06T03:01:00Z",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "type": "string"
+        },
+        "state": {
+          "const": "REASSEMBLY_REQUIRED",
+          "type": "string"
+        },
+        "state_digest": {
+          "const": "sha256:130559dba3d97c738c2677b5b2ff312e2bd039352ca487874f751bbfe69473d7",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "usable_for_new_reasoning": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "cause_signal_digests",
+        "frames_mutated",
+        "parent_frame_set_digest",
+        "parent_frame_set_id",
+        "recorded_at",
+        "schema_version",
+        "state",
+        "state_digest",
+        "usable_for_new_reasoning"
+      ],
+      "type": "object"
+    },
+    "temporal_invalidation_decision": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_dependency_ids": {
+          "items": false,
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "const": "synthetic:dependency:current_diary_projection",
+              "type": "string"
+            },
+            {
+              "const": "synthetic:dependency:current_waiting_room_projection",
+              "type": "string"
+            },
+            {
+              "const": "synthetic:dependency:private_application_session_state",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "affected_frame_ids": {
+          "items": false,
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "const": "frame:synthetic:source:diary-001",
+              "type": "string"
+            },
+            {
+              "const": "frame:synthetic:source:session-001",
+              "type": "string"
+            },
+            {
+              "const": "frame:synthetic:source:waiting-001",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "decision": {
+          "const": "REASSEMBLY_REQUIRED",
+          "type": "string"
+        },
+        "decision_digest": {
+          "const": "sha256:08ce0086752b72420ee672932a0938f8ea970f4d2c38ec8b3c665f773dd462d7",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "reason_codes": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "DEPENDENCY_MAY_BE_STALE",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "replacement_context_included": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "type": "string"
+        },
+        "signal_digest": {
+          "const": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "signal_id": {
+          "const": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "affected_dependency_ids",
+        "affected_frame_ids",
+        "command_authority",
+        "decision",
+        "decision_digest",
+        "reason_codes",
+        "replacement_context_included",
+        "schema_version",
+        "signal_digest",
+        "signal_id"
+      ],
+      "type": "object"
+    },
+    "temporal_lease_digest": {
+      "const": "sha256:1df5571827f5fcce12dfda1582b5fdfcf70642c29ab228912e778c779fe79799",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "temporal_manifest_digest": {
+      "const": "sha256:476a07fb53b1beb803c5721fb450645810e71ff388ece1a32fd1e46d2ac966d3",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "temporal_reassembly_requirement": {
+      "additionalProperties": false,
+      "properties": {
+        "binding_digest": {
+          "const": "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "cause_signal_digests": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "execution_enabled": {
+          "const": false,
+          "type": "boolean"
+        },
+        "expires_at": {
+          "const": "2026-08-06T03:02:00Z",
+          "type": "string"
+        },
+        "grant_digest": {
+          "const": "sha256:bf6da241ee287e3929315b61cb8f822d74ab1dcdcd9fed50eb2075fd3b1464c3",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "issued_at": {
+          "const": "2026-08-06T03:01:00Z",
+          "type": "string"
+        },
+        "lease_digest": {
+          "const": "sha256:1df5571827f5fcce12dfda1582b5fdfcf70642c29ab228912e778c779fe79799",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "manifest_digest": {
+          "const": "sha256:476a07fb53b1beb803c5721fb450645810e71ff388ece1a32fd1e46d2ac966d3",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "read_only": {
+          "const": true,
+          "type": "boolean"
+        },
+        "request_revision": {
+          "const": 1,
+          "type": "integer"
+        },
+        "required_dependency_ids": {
+          "items": false,
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "const": "synthetic:dependency:current_diary_projection",
+              "type": "string"
+            },
+            {
+              "const": "synthetic:dependency:current_waiting_room_projection",
+              "type": "string"
+            },
+            {
+              "const": "synthetic:dependency:private_application_session_state",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "requirement_digest": {
+          "const": "sha256:d8f15f61d45d8804aaa6e12bb11e95cdfe85bc83a57f2013300a20721196f9c6",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "requirement_id": {
+          "const": "synthetic:reassembly-requirement:001",
+          "type": "string"
+        },
+        "returns_data": {
+          "const": false,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "type": "string"
+        },
+        "session_generation": {
+          "const": 7,
+          "type": "integer"
+        },
+        "superseded_frame_set_digest": {
+          "const": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "superseded_frame_set_id": {
+          "const": "operational-weave:synthetic:need:current-operational-weave-001",
+          "type": "string"
+        }
+      },
+      "required": [
+        "binding_digest",
+        "cause_signal_digests",
+        "command_authority",
+        "execution_enabled",
+        "expires_at",
+        "grant_digest",
+        "issued_at",
+        "lease_digest",
+        "manifest_digest",
+        "read_only",
+        "request_revision",
+        "required_dependency_ids",
+        "requirement_digest",
+        "requirement_id",
+        "returns_data",
+        "schema_version",
+        "session_generation",
+        "superseded_frame_set_digest",
+        "superseded_frame_set_id"
+      ],
+      "type": "object"
+    },
+    "temporal_signal": {
+      "$ref": "#/$defs/TemporalSignalEnvelope"
+    },
+    "temporal_trace": {
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint_digest": {
+          "const": "sha256:555927628a03f6497df1ff6e99b1cdc5fe8d8b1755d9f91e4db50cc340818609",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "command_executed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "decision_digests": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "sha256:08ce0086752b72420ee672932a0938f8ea970f4d2c38ec8b3c665f773dd462d7",
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        },
+        "event_payload_used_as_truth": {
+          "const": false,
+          "type": "boolean"
+        },
+        "parent_frame_set_bytes_after": {
+          "const": "sha256:7b8defca2c05c9a8a27d183fdca37db54f40b6f38c04fce07e08829faa65e98f",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "parent_frame_set_bytes_before": {
+          "const": "sha256:7b8defca2c05c9a8a27d183fdca37db54f40b6f38c04fce07e08829faa65e98f",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "parent_frame_set_digest": {
+          "const": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "parent_frame_set_unchanged": {
+          "const": true,
+          "type": "boolean"
+        },
+        "requirement_digest": {
+          "const": "sha256:d8f15f61d45d8804aaa6e12bb11e95cdfe85bc83a57f2013300a20721196f9c6",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "type": "string"
+        },
+        "source_read_executed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "state_digest": {
+          "const": "sha256:130559dba3d97c738c2677b5b2ff312e2bd039352ca487874f751bbfe69473d7",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "temporal_trace_digest": {
+          "const": "sha256:ed13550ac908c9ddc8aac3196f55d46188853e18f596c99b2580230e4c305a02",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "transition_digests": {
+          "items": false,
+          "maxItems": 1,
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "const": "sha256:8c78818e0d4f30da533ae8f5234baf21c9b13935074db691693561e0bea62201",
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            }
+          ],
+          "type": "array"
+        }
+      },
+      "required": [
+        "checkpoint_digest",
+        "command_executed",
+        "decision_digests",
+        "event_payload_used_as_truth",
+        "parent_frame_set_bytes_after",
+        "parent_frame_set_bytes_before",
+        "parent_frame_set_digest",
+        "parent_frame_set_unchanged",
+        "requirement_digest",
+        "schema_version",
+        "source_read_executed",
+        "state_digest",
+        "temporal_trace_digest",
+        "transition_digests"
+      ],
+      "type": "object"
+    },
+    "temporal_transition": {
+      "additionalProperties": false,
+      "properties": {
+        "command_authority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "decision": {
+          "const": "REASSEMBLY_REQUIRED",
+          "type": "string"
+        },
+        "decision_digest": {
+          "const": "sha256:08ce0086752b72420ee672932a0938f8ea970f4d2c38ec8b3c665f773dd462d7",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "fresh_read_executed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "next_checkpoint": {
+          "additionalProperties": false,
+          "properties": {
+            "baseline_established": {
+              "const": false,
+              "type": "boolean"
+            },
+            "observed_cursor": {
+              "const": "synthetic:cursor:101",
+              "type": "string"
+            },
+            "stream_id": {
+              "const": "synthetic:practice-event-stream:001",
+              "type": "string"
+            },
+            "transaction_position": {
+              "const": 101,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "baseline_established",
+            "observed_cursor",
+            "stream_id",
+            "transaction_position"
+          ],
+          "type": "object"
+        },
+        "observed_cursor": {
+          "additionalProperties": false,
+          "properties": {
+            "baseline_established": {
+              "const": false,
+              "type": "boolean"
+            },
+            "cursor": {
+              "const": "synthetic:cursor:101",
+              "type": "string"
+            },
+            "previous_transaction_position": {
+              "const": 100,
+              "type": "integer"
+            },
+            "stream_id": {
+              "const": "synthetic:practice-event-stream:001",
+              "type": "string"
+            },
+            "transaction_position": {
+              "const": 101,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "baseline_established",
+            "cursor",
+            "previous_transaction_position",
+            "stream_id",
+            "transaction_position"
+          ],
+          "type": "object"
+        },
+        "reassembly_requirement_emitted": {
+          "const": true,
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+          "type": "string"
+        },
+        "signal_digest": {
+          "const": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "state_after": {
+          "const": "REASSEMBLY_REQUIRED",
+          "type": "string"
+        },
+        "transition_digest": {
+          "const": "sha256:8c78818e0d4f30da533ae8f5234baf21c9b13935074db691693561e0bea62201",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command_authority",
+        "decision",
+        "decision_digest",
+        "fresh_read_executed",
+        "next_checkpoint",
+        "observed_cursor",
+        "reassembly_requirement_emitted",
+        "schema_version",
+        "signal_digest",
+        "state_after",
+        "transition_digest"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "admission_decision",
+    "alias_registry",
+    "checkpoint_persisted",
+    "command_authority",
+    "command_executed",
+    "credential_acquisition",
+    "data_class",
+    "database_effects",
+    "evidence_label",
+    "filesystem_effects",
+    "fresh_read_executed",
+    "impact_policy",
+    "listener_mounted",
+    "network_effects",
+    "observation",
+    "observation_continuity_requirement",
+    "observation_prior_coordinate",
+    "observation_to_signal_trace",
+    "observer_binding",
+    "old_frame_set_bytes_unchanged",
+    "persistence_authority",
+    "policy",
+    "proofreader_trace",
+    "provider_authority",
+    "provider_called",
+    "read_authority",
+    "read_only",
+    "result",
+    "returns_data",
+    "runtime_state_mounted",
+    "schema_version",
+    "source_connection",
+    "source_read_executed",
+    "subprocess_effects",
+    "synthetic_activation",
+    "temporal_checkpoint_ephemeral",
+    "temporal_frame_set_state",
+    "temporal_invalidation_decision",
+    "temporal_lease_digest",
+    "temporal_manifest_digest",
+    "temporal_reassembly_requirement",
+    "temporal_signal",
+    "temporal_trace",
+    "temporal_transition"
+  ],
+  "title": "Unmounted authored-synthetic observation-to-temporal-signal packet",
+  "type": "object"
+}

@@ -1,0 +1,545 @@
+{
+  "admission_decision": {
+    "admission_digest": "sha256:f33e8e9f4b80af395b6d2ca6f5bf81a35b75e0d660cb43a216bb41a05f8f36df",
+    "alias_registry_digest": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+    "authority_renewed": false,
+    "binding_digest": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+    "checkpoint_advanced": false,
+    "command_authority": false,
+    "conservative_impact_frame_types": [
+      "current_diary_projection",
+      "current_waiting_room_projection"
+    ],
+    "decision": "ADMIT_SIGNAL",
+    "durable_handoff_implemented": false,
+    "impact_policy_digest": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+    "observation_digest": "sha256:56223e066d96eff12ad442aeb14ec22c991479bfbef93b29490f4a99201b2af5",
+    "ordinary_temporal_signal_emitted": true,
+    "persistence_authority": false,
+    "policy_digest": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+    "prior_coordinate_digest": "sha256:7d23ecc25e92e37030584dae21ffa9c05a2e27e26c3012b6c1090e5100369268",
+    "provider_authority": false,
+    "read_authority": false,
+    "reason_codes": [
+      "ADMISSION_CHECKS_PASSED"
+    ],
+    "returns_data": false,
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "signal_digest": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8"
+  },
+  "alias_registry": {
+    "aggregate_class": "APPOINTMENT",
+    "alias_registry_digest": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+    "backend_issued_only": true,
+    "command_authority": false,
+    "entries": [
+      {
+        "additional_frame_types": [],
+        "aggregate_alias": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+        "aggregate_ref": "synthetic:appointment:one",
+        "location_aliases": [
+          "syn/v1/location/b0c1d2e3f4a5b6c7"
+        ],
+        "location_refs": [
+          "synthetic:location:brisbane-one"
+        ],
+        "practitioner_aliases": [
+          "syn/v1/practitioner/c0d1e2f3a4b5c6d7"
+        ],
+        "practitioner_refs": [
+          "synthetic:practitioner:one"
+        ]
+      }
+    ],
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "read_only": true,
+    "registry_id": "synthetic:observation-alias-registry:001",
+    "registry_version": 1,
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "source_contract_id": "emr4.synthetic_committed_change_control_metadata.v1",
+    "source_system_id": "AUTHORED_SYNTHETIC_SOURCE_HARNESS",
+    "stream_entries": [
+      {
+        "stream_alias": "syn/v1/stream/d0e1f2a3b4c5d6e7",
+        "stream_ref": "synthetic:practice-event-stream:001"
+      }
+    ]
+  },
+  "checkpoint_persisted": false,
+  "command_authority": false,
+  "command_executed": false,
+  "credential_acquisition": false,
+  "data_class": "authored_synthetic_payload_free_control_metadata",
+  "database_effects": false,
+  "evidence_label": "provider_free_authored_synthetic_unmounted_observation_to_temporal_signal_rehearsal",
+  "filesystem_effects": false,
+  "fresh_read_executed": false,
+  "impact_policy": {
+    "command_authority": false,
+    "impact_policy_digest": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+    "impact_policy_id": "synthetic:observation-impact-policy:001",
+    "impact_policy_version": 1,
+    "read_only": true,
+    "routes": [
+      {
+        "aggregate_class": "APPOINTMENT",
+        "bounded_full_invalidation_frame_types": [
+          "current_diary_projection",
+          "current_waiting_room_projection"
+        ],
+        "event_type": "diary.appointment_rescheduled",
+        "mandatory_frame_type_floor": [
+          "current_diary_projection",
+          "current_waiting_room_projection"
+        ],
+        "source_event_schema_version": "diary.appointment_rescheduled.v1",
+        "temporal_event_schema_version": "emr4.diary.appointment_rescheduled.v1"
+      }
+    ],
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "source_may_supply_impact": false,
+    "unknown_impact_decision": "FULL_INVALIDATION_REQUIRED"
+  },
+  "listener_mounted": false,
+  "network_effects": false,
+  "observation": {
+    "aggregate_alias": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+    "aggregate_class": "APPOINTMENT",
+    "aggregate_revision": 12,
+    "alias_registry_digest": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+    "binding_digest": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+    "committed": true,
+    "event_schema_version": "diary.appointment_rescheduled.v1",
+    "event_type": "diary.appointment_rescheduled",
+    "evidence_mode": "AUTHORED_SYNTHETIC",
+    "expected_predecessor_position": 100,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "impact_policy_digest": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+    "observation_digest": "sha256:56223e066d96eff12ad442aeb14ec22c991479bfbef93b29490f4a99201b2af5",
+    "observation_id": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+    "observed_at": "2026-08-06T03:00:11Z",
+    "observer_generation": 1,
+    "observer_id": "synthetic:observer:001",
+    "policy_digest": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "sensitivity": "PATIENT_FREE_CONTROL_METADATA",
+    "source_contract_digest": "sha256:49343ff46575d8ebebe9761b811fdeee4d22a95b3a1f01db125329a2e63bee6a",
+    "source_contract_id": "emr4.synthetic_committed_change_control_metadata.v1",
+    "source_system_id": "AUTHORED_SYNTHETIC_SOURCE_HARNESS",
+    "source_transaction_committed_at": "2026-08-06T03:00:10Z",
+    "stream_alias": "syn/v1/stream/d0e1f2a3b4c5d6e7",
+    "transaction_position": 101
+  },
+  "observation_continuity_requirement": {
+    "checkpoint_persisted": false,
+    "command_authority": false,
+    "continuity_requirement_digest": "sha256:4f8c53a8555d2951e213113c91ae6e1c38d69198564a4cbd0e08d244e66bc9c5",
+    "credential_acquisition": false,
+    "cursor_advanced": false,
+    "cursor_observed": false,
+    "decision_persisted": false,
+    "invalidation_persisted": false,
+    "listener_mounted": false,
+    "no_loss_claimed": false,
+    "persistence_authority": false,
+    "provider_authority": false,
+    "read_authority": false,
+    "required_future_mechanisms": [
+      "ATOMIC_DECISION_INVALIDATION_CHECKPOINT_PERSISTENCE",
+      "AUTHENTICATED_INTEGRATION_PRINCIPAL",
+      "DURABLE_CLASSIFIED_CHECKPOINT",
+      "MONOTONIC_TRANSACTION_OR_OUTBOX_POSITION",
+      "RESTART_GAP_OVERFLOW_RETENTION_HANDLING",
+      "STABLE_EVENT_IDENTITY_AND_AGGREGATE_REVISION"
+    ],
+    "requirement_id": "synthetic:observation-continuity-requirement:001",
+    "returns_data": false,
+    "runtime_implemented": false,
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "source_connection": false
+  },
+  "observation_prior_coordinate": {
+    "aggregate_revisions": [
+      {
+        "aggregate_alias": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+        "aggregate_revision": 11
+      }
+    ],
+    "alias_registry_digest": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+    "baseline_established": true,
+    "binding_digest": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+    "checkpoint_persisted": false,
+    "coordinate_digest": "sha256:7d23ecc25e92e37030584dae21ffa9c05a2e27e26c3012b6c1090e5100369268",
+    "impact_policy_digest": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+    "last_transaction_position": 100,
+    "observer_generation": 1,
+    "observer_id": "synthetic:observer:001",
+    "overflow_detected": false,
+    "policy_digest": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "restart_uncertain": false,
+    "runtime_checkpoint": false,
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "seen_observation_ids": [
+      "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "source_contract_digest": "sha256:49343ff46575d8ebebe9761b811fdeee4d22a95b3a1f01db125329a2e63bee6a",
+    "source_contract_id": "emr4.synthetic_committed_change_control_metadata.v1",
+    "source_system_id": "AUTHORED_SYNTHETIC_SOURCE_HARNESS",
+    "stream_alias": "syn/v1/stream/d0e1f2a3b4c5d6e7"
+  },
+  "observation_to_signal_trace": {
+    "admission_digest": "sha256:f33e8e9f4b80af395b6d2ca6f5bf81a35b75e0d660cb43a216bb41a05f8f36df",
+    "aggregate_alias": "syn/v1/aggregate/a0b1c2d3e4f5a6b7",
+    "aggregate_class": "APPOINTMENT",
+    "aggregate_revision": 12,
+    "alias_registry_digest": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+    "binding_digest": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+    "checkpoint_persisted": false,
+    "command_authority": false,
+    "command_executed": false,
+    "event_type": "diary.appointment_rescheduled",
+    "expected_predecessor_position": 100,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "fresh_read_executed": false,
+    "impact_floor_preserved": true,
+    "impact_policy_digest": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+    "mandatory_frame_type_floor": [
+      "current_diary_projection",
+      "current_waiting_room_projection"
+    ],
+    "observation_digest": "sha256:56223e066d96eff12ad442aeb14ec22c991479bfbef93b29490f4a99201b2af5",
+    "observation_id": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+    "observed_at": "2026-08-06T03:00:11Z",
+    "observer_generation": 1,
+    "observer_id": "synthetic:observer:001",
+    "persistence_authority": false,
+    "policy_digest": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "provider_authority": false,
+    "provider_called": false,
+    "read_authority": false,
+    "resolved_aggregate_ref_digest": "sha256:233b1a0b453a565850e5959d6fb8655fc787c664b3ea00a39033f9987c4db00c",
+    "resolved_frame_types": [
+      "current_diary_projection",
+      "current_waiting_room_projection"
+    ],
+    "resolved_stream_ref_digest": "sha256:bd7537fc033a0ade0eae88b29dd63bd9bda5fb5cb3880dea615000be2bb062b9",
+    "returns_data": false,
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "sensitivity": "PATIENT_FREE_CONTROL_METADATA",
+    "signal_digest": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+    "signal_id": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+    "source_event_schema_version": "diary.appointment_rescheduled.v1",
+    "source_payload_used_as_truth": false,
+    "source_read_executed": false,
+    "source_selector_used": false,
+    "source_transaction_committed_at": "2026-08-06T03:00:10Z",
+    "stream_alias": "syn/v1/stream/d0e1f2a3b4c5d6e7",
+    "temporal_event_schema_version": "emr4.diary.appointment_rescheduled.v1",
+    "trace_digest": "sha256:89edf46145de510c7060faaa2a468cc8529f13ee6eb2ec5584d972b57204d9f5",
+    "transaction_position": 101
+  },
+  "observer_binding": {
+    "alias_registry_digest": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+    "allowed_aggregate_classes": [
+      "APPOINTMENT"
+    ],
+    "allowed_event_schema_versions": [
+      "diary.appointment_rescheduled.v1"
+    ],
+    "allowed_event_types": [
+      "diary.appointment_rescheduled"
+    ],
+    "authentication_kind": "SYNTHETIC_INTEGRATION_PRINCIPAL",
+    "binding_digest": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+    "binding_id": "synthetic:live-source-observer-binding:001",
+    "command_authority": false,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "impact_policy_digest": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+    "integration_principal_digest": "sha256:2d161e9b05e5e67583a6ab2d7f8bcc6190e2a68c0177e0a2daa2b49871b3f675",
+    "issued_at": "2026-08-06T03:00:00Z",
+    "not_before": "2026-08-06T03:00:00Z",
+    "observer_generation": 1,
+    "observer_id": "synthetic:observer:001",
+    "persistence_authority": false,
+    "policy_digest": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+    "policy_version": 1,
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "provider_authority": false,
+    "read_authority": false,
+    "returns_data": false,
+    "revoked": false,
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "source_contract_digest": "sha256:49343ff46575d8ebebe9761b811fdeee4d22a95b3a1f01db125329a2e63bee6a",
+    "source_contract_id": "emr4.synthetic_committed_change_control_metadata.v1",
+    "source_system_id": "AUTHORED_SYNTHETIC_SOURCE_HARNESS"
+  },
+  "old_frame_set_bytes_unchanged": true,
+  "persistence_authority": false,
+  "policy": {
+    "alias_registry_digest": "sha256:d5d82224aab715559d2358490a0a69801e5d078b4806f4b1669e959bd3df4fb1",
+    "allowed_aggregate_classes": [
+      "APPOINTMENT"
+    ],
+    "allowed_event_schema_versions": [
+      "diary.appointment_rescheduled.v1"
+    ],
+    "allowed_event_types": [
+      "diary.appointment_rescheduled"
+    ],
+    "allowed_sensitivities": [
+      "PATIENT_FREE_CONTROL_METADATA"
+    ],
+    "continuity_mode": "MONOTONIC_POSITION_AND_AGGREGATE_REVISION",
+    "enabled": false,
+    "enabled_by_default": false,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "impact_policy_digest": "sha256:81c5ab7bd02758893b3bdd6afa7b683b1108ba02e28b4a76f5849103ac21209e",
+    "impact_policy_id": "synthetic:observation-impact-policy:001",
+    "issued_at": "2026-08-06T03:00:00Z",
+    "maximum_batch_size": 1,
+    "maximum_clock_skew_seconds": 120,
+    "maximum_events_per_minute": 20,
+    "payload_allowed": false,
+    "persistence_authority": false,
+    "policy_digest": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+    "policy_id": "synthetic:live-source-observation-policy:001",
+    "policy_version": 1,
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "required_authentication_kinds": [
+      "SYNTHETIC_INTEGRATION_PRINCIPAL"
+    ],
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "source_contract_digest": "sha256:49343ff46575d8ebebe9761b811fdeee4d22a95b3a1f01db125329a2e63bee6a",
+    "source_contract_id": "emr4.synthetic_committed_change_control_metadata.v1",
+    "source_system_id": "AUTHORED_SYNTHETIC_SOURCE_HARNESS"
+  },
+  "proofreader_trace": {
+    "checked_at": "2026-08-06T03:01:01Z",
+    "checkpoint_persisted": false,
+    "command_authority": false,
+    "command_executed": false,
+    "hmac_key_released": false,
+    "packet_digest": "sha256:aecb2812a98e30595fe6d47db9aaf6d697dc96b68a107808452be837455a4c0b",
+    "persistence_authority": false,
+    "proofreader_trace_digest": "sha256:e39badd32f65887dce54383d321531bdc6042d29152396746ab1b249e25b1e85",
+    "provider_authority": false,
+    "provider_called": false,
+    "raw_source_event_id_released": false,
+    "read_authority": false,
+    "reason_codes": [
+      "ALL_CHECKS_PASSED"
+    ],
+    "release_decision": "RELEASE",
+    "returns_data": false,
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "source_payload_used_as_truth": false,
+    "source_read_executed": false
+  },
+  "provider_authority": false,
+  "provider_called": false,
+  "read_authority": false,
+  "read_only": true,
+  "result": "raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal_pass",
+  "returns_data": false,
+  "runtime_state_mounted": false,
+  "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+  "source_connection": false,
+  "source_read_executed": false,
+  "subprocess_effects": false,
+  "synthetic_activation": {
+    "activation_digest": "sha256:8082cd562589dc88a3c03651f56b936bcba687ad68eb264bfc7a19a343f45cd2",
+    "activation_id": "synthetic:observation-classification-activation:001",
+    "activation_mode": "AUTHORED_SYNTHETIC_REHEARSAL",
+    "binding_digest": "sha256:45d347439e7b98b7ee8beeabfa46813b51a857c8a1f39b2065ff1894b25b9b58",
+    "command_authority": false,
+    "credential_acquisition": false,
+    "cursor_persistence": false,
+    "evidence_mode": "AUTHORED_SYNTHETIC",
+    "expires_at": "2026-08-06T03:02:00Z",
+    "fixture_digest": "sha256:ab56a55289128b5538fa02c380495b3aa2df4db81f95a4dc19c9453c33b8ca86",
+    "not_before": "2026-08-06T03:00:00Z",
+    "persistence_authority": false,
+    "plan_version": "2026-08-06.frozen.v1",
+    "policy_digest": "sha256:47b64886eb5797855dceae8337bb96fbe134985d6ecd0483fa33507115d98208",
+    "provider_authority": false,
+    "read_authority": false,
+    "returns_data": false,
+    "schema_version": "emr4.practice_context_fabric_observation_to_temporal_signal_rehearsal.v1",
+    "source_connection": false
+  },
+  "temporal_checkpoint_ephemeral": {
+    "aggregate_high_watermarks": [
+      {
+        "aggregate_ref": "synthetic:appointment:one",
+        "aggregate_revision": 12
+      },
+      {
+        "aggregate_ref": "synthetic:appointment:two",
+        "aggregate_revision": 11
+      },
+      {
+        "aggregate_ref": "synthetic:directory:active",
+        "aggregate_revision": 5
+      },
+      {
+        "aggregate_ref": "synthetic:session:active",
+        "aggregate_revision": 19
+      }
+    ],
+    "baseline_established": false,
+    "checkpoint_digest": "sha256:555927628a03f6497df1ff6e99b1cdc5fe8d8b1755d9f91e4db50cc340818609",
+    "classified_at": "2026-08-06T03:01:00Z",
+    "observed_cursor": "synthetic:cursor:101",
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "seen_signal_ids": [
+      "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996"
+    ],
+    "stream_id": "synthetic:practice-event-stream:001",
+    "transaction_position": 101
+  },
+  "temporal_frame_set_state": {
+    "cause_signal_digests": [
+      "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8"
+    ],
+    "frames_mutated": false,
+    "parent_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "parent_frame_set_id": "operational-weave:synthetic:need:current-operational-weave-001",
+    "recorded_at": "2026-08-06T03:01:00Z",
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "state": "REASSEMBLY_REQUIRED",
+    "state_digest": "sha256:130559dba3d97c738c2677b5b2ff312e2bd039352ca487874f751bbfe69473d7",
+    "usable_for_new_reasoning": false
+  },
+  "temporal_invalidation_decision": {
+    "affected_dependency_ids": [
+      "synthetic:dependency:current_diary_projection",
+      "synthetic:dependency:current_waiting_room_projection",
+      "synthetic:dependency:private_application_session_state"
+    ],
+    "affected_frame_ids": [
+      "frame:synthetic:source:diary-001",
+      "frame:synthetic:source:session-001",
+      "frame:synthetic:source:waiting-001"
+    ],
+    "command_authority": false,
+    "decision": "REASSEMBLY_REQUIRED",
+    "decision_digest": "sha256:08ce0086752b72420ee672932a0938f8ea970f4d2c38ec8b3c665f773dd462d7",
+    "reason_codes": [
+      "DEPENDENCY_MAY_BE_STALE"
+    ],
+    "replacement_context_included": false,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "signal_digest": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+    "signal_id": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996"
+  },
+  "temporal_lease_digest": "sha256:1df5571827f5fcce12dfda1582b5fdfcf70642c29ab228912e778c779fe79799",
+  "temporal_manifest_digest": "sha256:476a07fb53b1beb803c5721fb450645810e71ff388ece1a32fd1e46d2ac966d3",
+  "temporal_reassembly_requirement": {
+    "binding_digest": "sha256:48671cd544ba92223e772d3ce56503016858e98ceea57198a19f9e76a22f5ffc",
+    "cause_signal_digests": [
+      "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8"
+    ],
+    "command_authority": false,
+    "execution_enabled": false,
+    "expires_at": "2026-08-06T03:02:00Z",
+    "grant_digest": "sha256:bf6da241ee287e3929315b61cb8f822d74ab1dcdcd9fed50eb2075fd3b1464c3",
+    "issued_at": "2026-08-06T03:01:00Z",
+    "lease_digest": "sha256:1df5571827f5fcce12dfda1582b5fdfcf70642c29ab228912e778c779fe79799",
+    "manifest_digest": "sha256:476a07fb53b1beb803c5721fb450645810e71ff388ece1a32fd1e46d2ac966d3",
+    "read_only": true,
+    "request_revision": 1,
+    "required_dependency_ids": [
+      "synthetic:dependency:current_diary_projection",
+      "synthetic:dependency:current_waiting_room_projection",
+      "synthetic:dependency:private_application_session_state"
+    ],
+    "requirement_digest": "sha256:d8f15f61d45d8804aaa6e12bb11e95cdfe85bc83a57f2013300a20721196f9c6",
+    "requirement_id": "synthetic:reassembly-requirement:001",
+    "returns_data": false,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "session_generation": 7,
+    "superseded_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "superseded_frame_set_id": "operational-weave:synthetic:need:current-operational-weave-001"
+  },
+  "temporal_signal": {
+    "affected_frame_types": [
+      "current_diary_projection",
+      "current_waiting_room_projection"
+    ],
+    "affected_location_refs": [
+      "synthetic:location:brisbane-one"
+    ],
+    "affected_practitioner_refs": [
+      "synthetic:practitioner:one"
+    ],
+    "aggregate_class": "APPOINTMENT",
+    "aggregate_ref": "synthetic:appointment:one",
+    "aggregate_revision": 12,
+    "baseline_established": false,
+    "command_authority": false,
+    "commit_state": "COMMITTED",
+    "data_class": "authored_synthetic_patient_free_operational_metadata",
+    "event_schema_version": "emr4.diary.appointment_rescheduled.v1",
+    "event_type": "diary.appointment_rescheduled",
+    "evidence_label": "provider_free_authored_synthetic_patient_free_temporal_weave",
+    "expires_at": "2026-08-06T03:02:00Z",
+    "observed_cursor": "synthetic:cursor:101",
+    "occurred_at": "2026-08-06T03:00:10Z",
+    "practice_binding_digest": "sha256:a449f3ab492889debf8379179bc83a7a577edba4c61aca87984924941fbeb468",
+    "previous_transaction_position": 100,
+    "read_only": true,
+    "received_at": "2026-08-06T03:00:11Z",
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "sensitivity": "INTERNAL_OPERATIONAL",
+    "signal_digest": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+    "signal_id": "sha256:69c57ea1d94f5e443d7cee3f04a79ce47d480c8de1d6f042a25612e01701b996",
+    "transaction_position": 101
+  },
+  "temporal_trace": {
+    "checkpoint_digest": "sha256:555927628a03f6497df1ff6e99b1cdc5fe8d8b1755d9f91e4db50cc340818609",
+    "command_executed": false,
+    "decision_digests": [
+      "sha256:08ce0086752b72420ee672932a0938f8ea970f4d2c38ec8b3c665f773dd462d7"
+    ],
+    "event_payload_used_as_truth": false,
+    "parent_frame_set_bytes_after": "sha256:7b8defca2c05c9a8a27d183fdca37db54f40b6f38c04fce07e08829faa65e98f",
+    "parent_frame_set_bytes_before": "sha256:7b8defca2c05c9a8a27d183fdca37db54f40b6f38c04fce07e08829faa65e98f",
+    "parent_frame_set_digest": "sha256:3276bec7485c959dd498ef449e6faadf0ab4b6623d68d32616d29b12d63d4dcd",
+    "parent_frame_set_unchanged": true,
+    "requirement_digest": "sha256:d8f15f61d45d8804aaa6e12bb11e95cdfe85bc83a57f2013300a20721196f9c6",
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "source_read_executed": false,
+    "state_digest": "sha256:130559dba3d97c738c2677b5b2ff312e2bd039352ca487874f751bbfe69473d7",
+    "temporal_trace_digest": "sha256:ed13550ac908c9ddc8aac3196f55d46188853e18f596c99b2580230e4c305a02",
+    "transition_digests": [
+      "sha256:8c78818e0d4f30da533ae8f5234baf21c9b13935074db691693561e0bea62201"
+    ]
+  },
+  "temporal_transition": {
+    "command_authority": false,
+    "decision": "REASSEMBLY_REQUIRED",
+    "decision_digest": "sha256:08ce0086752b72420ee672932a0938f8ea970f4d2c38ec8b3c665f773dd462d7",
+    "fresh_read_executed": false,
+    "next_checkpoint": {
+      "baseline_established": false,
+      "observed_cursor": "synthetic:cursor:101",
+      "stream_id": "synthetic:practice-event-stream:001",
+      "transaction_position": 101
+    },
+    "observed_cursor": {
+      "baseline_established": false,
+      "cursor": "synthetic:cursor:101",
+      "previous_transaction_position": 100,
+      "stream_id": "synthetic:practice-event-stream:001",
+      "transaction_position": 101
+    },
+    "reassembly_requirement_emitted": true,
+    "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
+    "signal_digest": "sha256:9749f14c3384b3d217ed33c2a1819a398765dca15fcb9b376f4f767a174cb5c8",
+    "state_after": "REASSEMBLY_REQUIRED",
+    "transition_digest": "sha256:8c78818e0d4f30da533ae8f5234baf21c9b13935074db691693561e0bea62201"
+  }
+}
