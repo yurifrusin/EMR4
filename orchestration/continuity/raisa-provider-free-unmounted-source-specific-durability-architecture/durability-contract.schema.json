@@ -157,11 +157,14 @@
         "next_position_rule": {"const": "last_position_plus_one"},
         "predecessor_rule": {"const": "equals_last_position"},
         "producer_transaction_members": {
-          "type": "array",
-          "minItems": 6,
-          "maxItems": 6,
-          "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1, "maxLength": 64}
+          "const": [
+            "appointment_truth",
+            "appointment_audit",
+            "idempotency_completion",
+            "existing_committed_event",
+            "stream_head_update",
+            "payload_free_control_row"
+          ]
         },
         "rollback_reuses_position": {"const": true},
         "postgres_sequence_or_identity_allowed": {"const": false},
@@ -173,7 +176,47 @@
       }
     },
     "payload_free_projection": {
-      "$ref": "#/$defs/closed_field_lists"
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_fields", "prohibited_fields"],
+      "properties": {
+        "allowed_fields": {
+          "const": [
+            "source_contract_digest",
+            "source_system",
+            "event_type",
+            "event_schema_version",
+            "aggregate_class",
+            "raw_nonsemantic_event_uuid",
+            "backend_aggregate_alias",
+            "aggregate_revision",
+            "stream_id",
+            "stream_epoch",
+            "predecessor_position",
+            "transaction_position",
+            "source_recorded_at",
+            "policy_version"
+          ]
+        },
+        "prohibited_fields": {
+          "const": [
+            "event_payload",
+            "appointment_id",
+            "practitioner_id",
+            "location_id",
+            "start_time",
+            "end_time",
+            "actor_user_id",
+            "actor_role",
+            "command_id",
+            "audit_log_id",
+            "correlation_id",
+            "reason_text",
+            "patient_or_clinical_data",
+            "provider_material"
+          ]
+        }
+      }
     },
     "checkpoint": {
       "type": "object",
@@ -188,11 +231,13 @@
       ],
       "properties": {
         "key_fields": {
-          "type": "array",
-          "minItems": 5,
-          "maxItems": 5,
-          "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1, "maxLength": 64}
+          "const": [
+            "practice_binding_digest",
+            "stream_id",
+            "source_contract_digest",
+            "observer_id",
+            "observer_generation"
+          ]
         },
         "states": {
           "const": ["ACTIVE", "REBASE_REQUIRED", "CONSUMED", "REVOKED"]
@@ -247,11 +292,13 @@
       "properties": {
         "lock_checkpoint_first": {"const": true},
         "commit_members": {
-          "type": "array",
-          "minItems": 5,
-          "maxItems": 5,
-          "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1, "maxLength": 64}
+          "const": [
+            "classified_observation_receipt",
+            "monotonic_invalidation_watermark",
+            "coalesced_reassembly_obligation",
+            "privacy_safe_audit",
+            "positive_checkpoint_advance_or_hold"
+          ]
         },
         "all_or_nothing": {"const": true},
         "one_obligation_per_frame_generation": {"const": true},
@@ -346,18 +393,39 @@
       ],
       "properties": {
         "allowed_fields": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 32,
-          "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1, "maxLength": 96}
+          "const": [
+            "audit_schema_version",
+            "opaque_audit_id",
+            "practice_binding_digest",
+            "principal_digest",
+            "policy_and_binding_digests",
+            "source_registry_impact_and_key_schedule_digests",
+            "observer_id_and_generation",
+            "stream_id_epoch_position_and_predecessor",
+            "aggregate_class_and_revision",
+            "observation_digest_and_key_id",
+            "closed_decision_and_reason_codes",
+            "affected_frame_types",
+            "retired_coalesced_and_backlog_count_buckets",
+            "checkpoint_disposition",
+            "lifecycle_revision_and_recorded_at",
+            "prior_audit_record_digest"
+          ]
         },
         "prohibited_fields": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 32,
-          "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1, "maxLength": 96}
+          "const": [
+            "raw_event_id",
+            "key_material",
+            "event_payload",
+            "aggregate_alias_or_resolved_id",
+            "appointment_practitioner_location_or_time",
+            "patient_or_clinical_data",
+            "producer_actor_or_correlation",
+            "active_session_inventory",
+            "frame_content",
+            "provider_output",
+            "free_text"
+          ]
         },
         "bureau_memory_or_context_authority": {"const": false},
         "read_or_command_evidence": {"const": false}
@@ -396,29 +464,6 @@
         ]
       },
       "additionalProperties": {"const": false}
-    }
-  },
-  "$defs": {
-    "closed_field_lists": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["allowed_fields", "prohibited_fields"],
-      "properties": {
-        "allowed_fields": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 32,
-          "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1, "maxLength": 96}
-        },
-        "prohibited_fields": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 32,
-          "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1, "maxLength": 96}
-        }
-      }
     }
   }
 }

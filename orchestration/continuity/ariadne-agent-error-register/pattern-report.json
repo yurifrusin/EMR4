@@ -1,37 +1,37 @@
 {
-  "canonical_register_sha256": "80bc14d21c3afd4eff1d332624699e8baa9f65720625e5a1a3c2fef9a6d0d627",
+  "canonical_register_sha256": "38200de1e508784042b12dc26e273c1b6f795a0743a26a93761ec002100dba8f",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 36,
+      "canonical_unchanged": 37,
       "untrusted_partial_worktree": 9
     },
     "by_category": {
       "command_scope_violation": 6,
       "evidence_misreport": 5,
       "harness_failure": 3,
-      "output_contract_violation": 15,
+      "output_contract_violation": 16,
       "read_only_violation": 2,
       "reasoning_claim_error": 7,
       "repository_defect": 2,
       "transport_timeout": 7
     },
     "by_origin": {
-      "agent_behavior": 35,
+      "agent_behavior": 36,
       "harness": 3,
       "repository": 2,
       "transport": 7
     },
     "by_process_severity": {
       "low": 10,
-      "material": 14,
+      "material": 15,
       "moderate": 23
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 17,
       "codex-native-independent-reviewer::verifier": 2,
       "codex-native-parallel-worker::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 14,
+      "codex-primary-orchestrator::orchestrator": 15,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -44,14 +44,16 @@
     },
     "by_role": {
       "implementer": 9,
-      "orchestrator": 19,
+      "orchestrator": 20,
       "verifier": 19
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 47,
+  "incident_count": 48,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
-  "open_incident_ids": [],
+  "open_incident_ids": [
+    "AER-0048"
+  ],
   "recurring_patterns": [
     {
       "categories": [
@@ -258,7 +260,7 @@
       ]
     }
   ],
-  "register_revision": 40,
+  "register_revision": 41,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-06"
 }

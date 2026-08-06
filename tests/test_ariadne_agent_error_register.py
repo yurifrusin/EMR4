@@ -32,20 +32,20 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_register_is_valid_during_observation_signal_recovery() -> None:
+def test_register_is_valid_during_durability_schema_recovery() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 40
+    assert register["register_revision"] == 41
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 48)
+        f"AER-{index:04d}" for index in range(1, 49)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == []
+    ] == ["AER-0048"]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 35
+    assert len(agent_incidents) == 36
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -97,6 +97,22 @@ def test_observation_signal_sol_recovery_requires_two_sided_clock_veto() -> None
     assert rows["AER-0046"]["related_incident_ids"] == []
     assert incident["correction"]["status"] == "recovery_lease_applied"
     assert incident["status"] == "corrected"
+
+
+def test_durability_schema_veto_requires_exact_list_recovery() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0048"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "open"
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -147,7 +163,10 @@ def test_invalidation_reassembly_orchestration_failures_are_contained() -> None:
 
     assert rows["AER-0043"]["category"] == "command_scope_violation"
     assert rows["AER-0043"]["status"] == "corrected"
-    assert dispatch["containment"]["worker_interrupted_before_candidate_acceptance"] is True
+    assert (
+        dispatch["containment"]["worker_interrupted_before_candidate_acceptance"]
+        is True
+    )
     assert dispatch["containment"]["worker_source_adopted"] is False
     assert rows["AER-0044"]["category"] == "command_scope_violation"
     assert rows["AER-0044"]["status"] == "contained"
@@ -175,9 +194,9 @@ def test_operational_weave_review_count_is_reconciled_at_exact_head() -> None:
     assert receipt["authoritative_reproduced_test_count"] == 155
     assert sum(receipt["collection_breakdown"].values()) == 155
     assert receipt["reproduction"]["execution_status"] == "passed"
-    assert receipt["reproduction"]["head_before"] == receipt["reproduction"][
-        "head_after"
-    ]
+    assert (
+        receipt["reproduction"]["head_before"] == receipt["reproduction"]["head_after"]
+    )
     assert receipt["reproduction"]["dirty_after"] is False
     assert receipt["additional_provider_calls"] == 0
 
@@ -228,13 +247,14 @@ def test_temporal_weave_review_evidence_is_reconciled_at_exact_head() -> None:
     assert receipt["authoritative_reproduced_test_count"] == 120
     assert sum(receipt["collection_breakdown"].values()) == 120
     assert receipt["reproduction"]["passed"] == 120
-    assert receipt["reproduction"]["head_before"] == receipt["reproduction"][
-        "head_after"
-    ]
+    assert (
+        receipt["reproduction"]["head_before"] == receipt["reproduction"]["head_after"]
+    )
     assert receipt["reproduction"]["dirty_after"] is False
-    assert receipt["review_claimed_failure_receipt_path"] != receipt[
-        "authoritative_failure_receipt_path"
-    ]
+    assert (
+        receipt["review_claimed_failure_receipt_path"]
+        != receipt["authoritative_failure_receipt_path"]
+    )
     assert receipt["additional_provider_calls"] == 0
 
 
@@ -341,7 +361,9 @@ def test_source_adapter_protected_path_enumeration_attempt_is_rejected() -> None
     assert receipt["incident"]["patient_or_product_data_accessed"] is False
     assert receipt["candidate"]["candidate_changed"] is False
     assert receipt["candidate"]["tracked_clean_after_containment"] is True
-    assert receipt["correction"]["next_attempt_requires_exact_allowlisted_paths"] is True
+    assert (
+        receipt["correction"]["next_attempt_requires_exact_allowlisted_paths"] is True
+    )
 
 
 def test_source_adapter_review_packet_count_is_exactly_reconciled() -> None:
@@ -537,7 +559,9 @@ def test_c4_worker_self_pass_is_corrected_only_through_sol_recovery() -> None:
     assert verifier["dirty_after"] is False
 
 
-def test_c4_bounded_repair_self_pass_is_corrected_by_exact_transactional_controls() -> None:
+def test_c4_bounded_repair_self_pass_is_corrected_by_exact_transactional_controls() -> (
+    None
+):
     incident = next(
         row for row in _register()["incidents"] if row["incident_id"] == "AER-0026"
     )
@@ -598,9 +622,9 @@ def test_c5_worker_self_pass_remains_rejected_after_sol_recovery() -> None:
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
     assert incident["correction"]["status"] == "recovery_lease_applied"
     assert incident["status"] == "corrected"
-    assert "d82de54ba59071d231adbf45a3aae1bbc0642ff4" in incident["correction"][
-        "action"
-    ]
+    assert (
+        "d82de54ba59071d231adbf45a3aae1bbc0642ff4" in incident["correction"]["action"]
+    )
     assert receipt["model"] == "deepseek-v4-flash"
     assert "DECISION: pass" in receipt["result"]
     assert "execution is not bound" in audit
@@ -609,7 +633,9 @@ def test_c5_worker_self_pass_remains_rejected_after_sol_recovery() -> None:
     assert "Disposition: `revision_required`" in audit
 
 
-def test_c5_windows_teardown_repository_defect_is_corrected_by_endpoint_ownership() -> None:
+def test_c5_windows_teardown_repository_defect_is_corrected_by_endpoint_ownership() -> (
+    None
+):
     incident = next(
         row for row in _register()["incidents"] if row["incident_id"] == "AER-0028"
     )
@@ -629,7 +655,9 @@ def test_c5_windows_teardown_repository_defect_is_corrected_by_endpoint_ownershi
     assert incident["status"] == "corrected"
     assert diagnostic["original_failure"]["provider_calls"] == 0
     assert diagnostic["bounded_diagnosis"]["exact_port_reacquisition_succeeded"]
-    assert diagnostic["bounded_diagnosis"]["windows_exclusive_address_use_set_before_bind"]
+    assert diagnostic["bounded_diagnosis"][
+        "windows_exclusive_address_use_set_before_bind"
+    ]
     assert diagnostic["bounded_diagnosis"]["so_reuseaddr_used"] is False
     lifecycle = diagnostic["repaired_provider_free_lifecycle"]
     assert lifecycle["attempt_result"] == "live_development_recovery_verified"
@@ -707,10 +735,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 47
-    assert report["open_incident_ids"] == []
+    assert report["incident_count"] == 48
+    assert report["open_incident_ids"] == ["AER-0048"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 35,
+        "agent_behavior": 36,
         "harness": 3,
         "repository": 2,
         "transport": 7,
@@ -719,7 +747,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 6,
         "evidence_misreport": 5,
         "harness_failure": 3,
-        "output_contract_violation": 15,
+        "output_contract_violation": 16,
         "read_only_violation": 2,
         "reasoning_claim_error": 7,
         "repository_defect": 2,
@@ -727,7 +755,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 36,
+        "canonical_unchanged": 37,
         "untrusted_partial_worktree": 9,
     }
     assert report["recurring_patterns"] == [

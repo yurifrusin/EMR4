@@ -25,6 +25,15 @@ CONTRACT_DIR = (
 )
 CONTRACT = CONTRACT_DIR / "durability-contract.json"
 SCHEMA = CONTRACT_DIR / "durability-contract.schema.json"
+CRITICAL_LIST_PATHS = (
+    ("source_coordinate", "producer_transaction_members"),
+    ("payload_free_projection", "allowed_fields"),
+    ("payload_free_projection", "prohibited_fields"),
+    ("checkpoint", "key_fields"),
+    ("atomic_transaction", "commit_members"),
+    ("audit", "allowed_fields"),
+    ("audit", "prohibited_fields"),
+)
 
 
 def _json(path: Path) -> dict:
@@ -339,6 +348,27 @@ def test_schema_rejects_unknown_fields(
 ) -> None:
     candidate = copy.deepcopy(contract)
     candidate["source_profile"]["cursor"] = "not-allowed"
+    assert list(validator.iter_errors(candidate))
+
+
+@pytest.mark.parametrize("path", CRITICAL_LIST_PATHS)
+@pytest.mark.parametrize("operation", ("append", "remove", "replace", "reorder"))
+def test_schema_rejects_every_critical_list_mutation(
+    contract: dict,
+    validator: Draft202012Validator,
+    path: tuple[str, str],
+    operation: str,
+) -> None:
+    candidate = copy.deepcopy(contract)
+    values = candidate[path[0]][path[1]]
+    if operation == "append":
+        values.append("patient_id")
+    elif operation == "remove":
+        values.pop()
+    elif operation == "replace":
+        values[0] = "patient_id"
+    else:
+        values.reverse()
     assert list(validator.iter_errors(candidate))
 
 
