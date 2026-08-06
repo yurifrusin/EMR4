@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 25,
+  "register_revision": 28,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1201,15 +1201,94 @@
       "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "The failed transport is preserved without raw OAuth material and no reviewer decision is inferred. A fresh attempt is withheld until human Antigravity authentication is restored, after which exact HEAD, clean status and five-source dispatch authority must be reverified.",
+        "status": "corrected_fresh_attempt",
+        "action": "The failed transport remains preserved without raw OAuth material. Yuri completed fresh browser consent, the exact-head five-source check passed, and the next Antigravity process reached Gemini without any ADC, gcloud, IAM or cloud-configuration mutation. That separate review response was rejected for duplicate terminal decisions and is tracked independently as AER-0032.",
         "prevention_control": "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance.",
         "evidence_paths": [
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-auth-timeout-failure-receipt.json",
-          "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-gemini-review-packet.md"
+          "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-postcompaction-auth-check-receipt.json"
         ]
       },
-      "status": "open"
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0032",
+      "attempt_id": "raisa-context-fabric-bureau-memory-review-002",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-bureau-memory-contract",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh exact-head verifier must finish all commands and notifications, emit exactly one terminal pass or revision_required line, then terminate without any follow-up response.",
+      "observed_error": "After authentication succeeded and the packet reached Gemini, the verifier emitted two exact terminal decision markers. The deterministic wrapper rejected the entire response, wrote no ordinary worker receipt and admitted no review decision while the exact candidate remained clean and unchanged.",
+      "detection_method": "The Antigravity wrapper counted two exact terminal markers and failed closed. Independent Git postflight confirmed the bound branch and exact source HEAD were unchanged and the worktree remained clean.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-duplicate-decision-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-gemini-review-packet.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.multiple_terminal_decisions",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The duplicate output remains rejected and preserved only as sanitized cardinality evidence. One genuinely fresh exact-head review tested the strengthened packet, but still emitted three markers and was separately registered as AER-0033. Packet-only same-lane correction is therefore closed and recovery moves to schema-constrained launcher egress.",
+        "prevention_control": "Verifier packets must require all commands and notifications to settle before exactly one terminal line, and the wrapper must continue rejecting every zero-or-duplicate result before candidate acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-duplicate-decision-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-gemini-review-packet.md",
+          "tests/test_ariadne_antigravity.py"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0033",
+      "attempt_id": "raisa-context-fabric-bureau-memory-review-003",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-bureau-memory-contract",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The one bounded packet-corrected fresh retry must emit exactly one terminal marker after all work settles, or packet-only correction ends and a stronger deterministic egress mechanism becomes mandatory.",
+      "observed_error": "The packet-corrected retry emitted three exact terminal markers. The wrapper rejected the response, wrote no ordinary worker receipt and admitted no decision while the candidate remained clean and unchanged.",
+      "detection_method": "The legacy text wrapper counted three terminal markers and failed closed. Git postflight independently confirmed the exact branch, source HEAD and clean worktree.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-duplicate-decision-retry-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-bureau-memory-gemini-review-packet.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.multiple_terminal_decisions",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Packet-only retry remains closed. The Antigravity launcher defaulted to CLI-supported schema-constrained JSON with a closed decision/review object, and one fresh exact-head review returned exactly one admissible revision_required envelope while leaving the candidate clean and unchanged. The material evidence-reproducibility finding is a separate ordinary candidate defect now under repair, not an egress failure.",
+        "prevention_control": "New Antigravity reviews must use one closed schema-constrained JSON decision object; deterministic parsing deduplicates identical wrapper mirrors, rejects missing or conflicting envelopes and forbids legacy terminal markers inside review text.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-duplicate-decision-retry-failure-receipt.json",
+          "scripts/ariadne_antigravity.py",
+          "tests/test_ariadne_antigravity.py",
+          "orchestration/harness_settings/verifier_execution_policy.yaml",
+          "docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-review-receipt.json"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

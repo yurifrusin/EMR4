@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_context_fabric_veto_with_schema_constrained_antigravity_egress",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The provider-free contract plan, design, threat delta, Context Fabric direction, implementation sequence, verifier allocation, AER revision 27 and corrected packet were reread. The candidate deterministic result remains passed but acceptance is withheld. Fifty-nine focused harness, register, policy and allocation tests plus Ruff pass. The corrected packet sha256 is 0649bae7f172984d6ce5226671ed72c8b04d646d62c3d9d298afac56ae34bd82.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project owns independent veto only. GPT Sol retains architecture, recovery, acceptance and integration. The launcher uses plan mode, a closed JSON decision envelope and an exact read-only non-protected worktree; no silent model fallback or implementation ownership is permitted.",
+    "git_refs_and_worktree": "The active task branch and origin remain aligned at 0ea34b195c3966c14c01d7b381bfe9782b1a5167. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The clean non-protected review worktree C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-bureau-memory-review is on codex/review-context-fabric-bureau-memory-1289f9b8 at exact HEAD 1289f9b822c571341b224ab9c6b5caaeefaf0c71; fresh worktree preflight sha256 is 771317ddb68dc9abeb57a15641efa3b5e71187743174145faf1defeb84b5edb2.",
+    "live_handover_current_baton": "AGENTS.md was reread and updated after the bounded egress recovery. It names the exact Context Fabric source candidate, restored Antigravity authentication, rejected duplicate free-text attempts and schema-constrained JSON review as the current next action.",
+    "protected_evidence_boundaries": "Review is repository-local and provider-free. No protected holdout, historical PHI, patient/clinical/product data, raw audit, database, external retrieval, product runtime, command/write, deployment, production, release, Pages or protected-ref action. No OAuth, credential, token, raw thought or rejected free-text response is retained. docs/branding/ remains forbidden."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

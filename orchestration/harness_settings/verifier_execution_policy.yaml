@@ -39,6 +39,9 @@ external_verifier:
   decision_contract:
     allowed: [pass, revision_required]
     exact_terminal_decision_count: 1
+    envelope_format: schema_constrained_json
+    additional_properties: forbidden
+    legacy_terminal_line_default: false
   postcondition:
     candidate_head: unchanged
     candidate_worktree: clean

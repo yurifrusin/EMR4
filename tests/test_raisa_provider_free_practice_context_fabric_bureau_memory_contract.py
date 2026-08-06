@@ -67,6 +67,18 @@ def test_evidence_passes_and_all_engine_side_effects_are_zero() -> None:
     evidence = build_evidence()
     assert evidence["result"] == RESULT
     assert evidence["passed"] is True
+    assert evidence["schema_version"].endswith(".v2")
+    assert "source_head" not in evidence
+    assert evidence["source_binding"] == {
+        "mode": "canonical_lf_artifact_hashes_with_external_exact_head_receipt",
+        "artifact_count": 8,
+        "git_head_self_reference_forbidden": True,
+        "checkout_line_endings_normalized": True,
+    }
+    assert {
+        "scripts/raisa_provider_free_practice_context_fabric_bureau_memory_acceptance.py",
+        "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py",
+    }.issubset(evidence["artifact_hashes"])
     assert set(evidence["authority_and_side_effects"].values()) == {0}
     committed = _load(EVIDENCE_PATH)
     assert committed == evidence

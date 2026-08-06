@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_context_fabric_gemini_veto_after_duplicate_egress_correction",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md and the live Current Baton were read completely after compaction. The provider-free Context Fabric and Bureau Memory Bank contract candidate remains pending one admissible exact-head independent veto.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project owns independent veto only. GPT Sol retains architecture, recovery, acceptance and integration; the verifier may read and run provider-free tests but may not edit, accept itself, call product/provider surfaces, deploy, release or move refs.",
+    "active_plan_and_acceptance": "Exact source commit 1289f9b822c571341b224ab9c6b5caaeefaf0c71 retains its deterministic pass. AER-0031 is corrected by successful human Antigravity authentication. AER-0032 rejects the authenticated review's duplicate terminal markers. The packet now requires all commands and notifications to settle before one final marker and has sha256 4fbf877f13a2c186c503f0feb9a773ff14a029e1b20208858627ca8a9564f607.",
+    "protected_evidence_boundaries": "Review remains repository-local and provider-free. No protected holdout, PHI, patient/clinical/product data, raw audit, database, external retrieval, product runtime, command/write, deployment, production, release, Pages or protected-ref action. No OAuth, credential or token material may be retained. docs/branding/ is expressly forbidden.",
+    "git_refs_and_worktree": "The active task branch and origin are aligned at 0ea34b195c3966c14c01d7b381bfe9782b1a5167. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The clean non-protected review worktree C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-bureau-memory-review remains on codex/review-context-fabric-bureau-memory-1289f9b8 at exact HEAD 1289f9b822c571341b224ab9c6b5caaeefaf0c71."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_bureau_memory_pre_verifier_dispatch_2_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved both failed envelopes, strengthened only the verifier egress instruction and reverified exact refs and clean candidate state."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The preceding fresh Antigravity process authenticated and reached Gemini; its response was rejected solely at deterministic duplicate-decision admission."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker is active during independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude CLI is not independently selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is active or assigned to this serial veto."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -80,7 +80,9 @@ rebuild Pages or move any Git ref.
 ## Decision contract
 
 Report concise evidence and every material finding with file and line. If any
-material uncertainty remains, require revision. End with exactly one terminal
-decision line using only `DECISION: pass` or
-`DECISION: revision_required`. Do not emit a second decision line or any later
-follow-up.
+material uncertainty remains, require revision. Complete and synchronously wait
+for every command, test and background notification before returning the final
+object. Put the complete evidence and findings in the `review` string and set
+`decision` exactly once to `pass` or `revision_required`. Return only the closed
+schema-constrained object. Do not write a `DECISION:` marker, provisional verdict,
+post-final status or background-completion follow-up inside `review`.

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_context_fabric_evidence_portability_repair_and_schema_constrained_verifier_egress_to_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the exact Context Fabric candidate, restored Antigravity authentication, rejected duplicate outputs, proved schema-constrained egress, admitted revision-required finding and bounded evidence-portability repair as the current baton state.",
+    "current_authority_allocation": "GPT Sol owns the bounded repair, acceptance and task-branch commit. Gemini 3.6 Flash/high supplied independent veto only. No worker accepts itself; protected integration, deployment, release and Pages remain closed.",
+    "active_plan_and_acceptance": "The admitted exact-head review verified authority, scope, proofreader, GraphQL and isolation controls but rejected stale self-referential and checkout-specific evidence. The repair removes Git-HEAD self-reference, canonicalizes LF/CRLF text hashes, binds eight exact artifacts including generator and focused test, and retains external exact-HEAD receipt binding. The repaired evidence digest is sha256:9ec8724ebcca37b99f690ccfae23cbd58d7b794b6c39e2588e12e72c3fb1c6d7; 157 combined tests, Ruff, compile, Bandit review and diff checks pass. Fresh independent acceptance remains pending after commit.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/clinical/product data, raw audit, real database, provider call by the candidate, product runtime, command/write, deployment, production, release, Pages or protected-ref action. No OAuth, credential, token or rejected raw free-text response is retained. docs/branding/ and unrelated untracked evidence remain preserved and unstaged.",
+    "git_refs_and_worktree": "Current task and origin task remain at 0ea34b195c3966c14c01d7b381bfe9782b1a5167 before commit with only intentional tracked repair/harness changes plus explicit new receipts selected for staging. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The existing review worktree remains clean at the prior exact source 1289f9b822c571341b224ab9c6b5caaeefaf0c71 and will be advanced only to the new non-protected repair commit after commit."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_bureau_memory_evidence_repair_precommit_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol inspected the admitted finding, repaired its self-reference and checkout-portability causes, and completed deterministic gates."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Schema-constrained Gemini review returned one admissible revision-required decision and left the exact candidate unchanged; fresh repaired-head veto remains next."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker is active during this tightly coupled repair."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude CLI is not independently selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is active or assigned to this serial evidence repair."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -6,8 +6,6 @@ import argparse
 import ast
 import hashlib
 import json
-# The harness performs one fixed local Git metadata read; the engine performs none.
-import subprocess  # nosec B404
 import sys
 from copy import deepcopy
 from pathlib import Path
@@ -39,6 +37,8 @@ PLAN_PATH = ROOT / "docs/raisa-provider-free-practice-context-fabric-bureau-memo
 DESIGN_PATH = ROOT / "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-design.md"
 THREAT_PATH = ROOT / "docs/security/raisa-provider-free-practice-context-fabric-bureau-memory-contract-threat-model-delta.md"
 ENGINE_PATH = ROOT / "scripts/raisa_provider_free_practice_context_fabric_bureau_memory_contract.py"
+ACCEPTANCE_PATH = Path(__file__).resolve()
+TEST_PATH = ROOT / "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py"
 RESULT = "raisa_provider_free_practice_context_fabric_bureau_memory_contract_pass"
 
 
@@ -48,18 +48,8 @@ def _write_json(path: Path, value: dict[str, Any]) -> None:
 
 
 def _sha(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def _source_head() -> str:
-    # Fixed argv and cwd, no untrusted input, and shell remains disabled.
-    return subprocess.run(  # nosec B603 B607
-        ["git", "rev-parse", "HEAD"],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
+    data = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def authored_synthetic_inputs() -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
@@ -253,13 +243,27 @@ def build_evidence() -> dict[str, Any]:
     if not tamper_blocked:
         raise ValueError("tampered packet was not blocked")
 
-    artifacts = [SCHEMA_PATH, GRAPHQL_PATH, PLAN_PATH, DESIGN_PATH, THREAT_PATH, ENGINE_PATH]
+    artifacts = [
+        SCHEMA_PATH,
+        GRAPHQL_PATH,
+        PLAN_PATH,
+        DESIGN_PATH,
+        THREAT_PATH,
+        ENGINE_PATH,
+        ACCEPTANCE_PATH,
+        TEST_PATH,
+    ]
     artifact_hashes = {path.relative_to(ROOT).as_posix(): _sha(path) for path in artifacts}
     return {
-        "schema_version": "emr4.practice_context_fabric_bureau_memory_acceptance.v1",
+        "schema_version": "emr4.practice_context_fabric_bureau_memory_acceptance.v2",
         "result": RESULT,
         "passed": True,
-        "source_head": _source_head(),
+        "source_binding": {
+            "mode": "canonical_lf_artifact_hashes_with_external_exact_head_receipt",
+            "artifact_count": len(artifact_hashes),
+            "git_head_self_reference_forbidden": True,
+            "checkout_line_endings_normalized": True,
+        },
         "evidence_label": "provider_free_authored_synthetic_contract",
         "artifact_hashes": artifact_hashes,
         "artifact_set_digest": canonical_sha256(artifact_hashes),

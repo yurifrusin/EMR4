@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -30,7 +31,12 @@ def test_command_always_binds_a_fresh_project_and_exact_worktree():
     assert command[command.index("--model") + 1] == "gemini-3.6-flash-high"
     assert command[command.index("--effort") + 1] == "high"
     assert command[command.index("--mode") + 1] == "plan"
+    assert command[command.index("--output-format") + 1] == "json"
+    schema = json.loads(command[command.index("--json-schema") + 1])
+    assert schema["additionalProperties"] is False
+    assert schema["required"] == ["decision", "review"]
     assert "BOUND BRANCH: antigravity/bounded" in command[2]
+    assert "STRUCTURED OUTPUT OVERRIDE" in command[2]
     assert "--sandbox" not in command
 
 
@@ -89,7 +95,17 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
         ariadne_antigravity.subprocess,
         "run",
         lambda *_args, **_kwargs: SimpleNamespace(
-            returncode=0, stdout="DECISION: pass", stderr=""
+            returncode=0,
+            stdout=json.dumps(
+                {
+                    "result": {
+                        "decision": "pass",
+                        "review": "No material findings; focused checks passed.",
+                    },
+                    "usage": {"input_tokens": 10, "output_tokens": 8},
+                }
+            ),
+            stderr="",
         ),
     )
 
@@ -104,6 +120,11 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
     assert receipt["model"] == "gemini-3.6-flash-high"
     assert receipt["reasoning_effort"] == "high"
     assert receipt["decision"] == "pass"
+    assert receipt["decision_contract"] == "schema_constrained_json_v1"
+    assert receipt["decision_envelope"] == {
+        "decision": "pass",
+        "review": "No material findings; focused checks passed.",
+    }
     assert receipt["transport"] == (
         "antigravity_new_project_bound_readonly_worktree"
     )
@@ -138,7 +159,11 @@ def test_run_worker_fails_if_verifier_modifies_candidate(
         ariadne_antigravity.subprocess,
         "run",
         lambda *_args, **_kwargs: SimpleNamespace(
-            returncode=0, stdout="DECISION: pass", stderr=""
+            returncode=0,
+            stdout=json.dumps(
+                {"decision": "pass", "review": "Candidate remained unchanged."}
+            ),
+            stderr="",
         ),
     )
 
@@ -200,6 +225,87 @@ def test_run_worker_rejects_missing_or_duplicate_terminal_decision(
             output_path=output,
             model="gemini-3.6-flash-high",
             os_sandbox=False,
+            structured_decision=False,
         )
 
     assert not output.exists()
+
+
+@pytest.mark.parametrize(
+    "stdout, envelope_count",
+    [
+        (json.dumps({"result": "not structured"}), 0),
+        (
+            json.dumps(
+                {
+                    "structured_output": {
+                        "decision": "pass",
+                        "review": "First result.",
+                    },
+                    "result": {
+                        "decision": "revision_required",
+                        "review": "Conflicting result.",
+                    },
+                }
+            ),
+            2,
+        ),
+    ],
+)
+def test_run_worker_rejects_missing_or_conflicting_structured_decision(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    stdout: str,
+    envelope_count: int,
+):
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "receipt.json"
+    state = WorktreeState(
+        root=tmp_path,
+        branch="codex/verifier-candidate",
+        head="abc123",
+        dirty=False,
+    )
+    states = iter([state, state])
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: next(states),
+    )
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        lambda *_args, **_kwargs: SimpleNamespace(
+            returncode=0, stdout=stdout, stderr=""
+        ),
+    )
+
+    with pytest.raises(
+        RuntimeError,
+        match=(
+            "exactly one schema-valid decision envelope; "
+            f"observed {envelope_count}"
+        ),
+    ):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=tmp_path,
+            output_path=output,
+            model="gemini-3.6-flash-high",
+            os_sandbox=False,
+        )
+
+    assert not output.exists()
+
+
+def test_structured_decision_rejects_embedded_legacy_terminal_marker() -> None:
+    stdout = json.dumps(
+        {
+            "decision": "pass",
+            "review": "Review complete.\nDECISION: pass",
+        }
+    )
+
+    with pytest.raises(RuntimeError, match="observed 0"):
+        ariadne_antigravity.parse_structured_decision(stdout)

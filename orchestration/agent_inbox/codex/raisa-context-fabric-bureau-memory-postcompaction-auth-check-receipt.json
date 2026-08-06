@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verify_antigravity_authentication_and_resume_exact_head_context_fabric_veto_if_ready",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen provider-free contract plan, design, threat delta, Context Fabric direction, implementation-plan sequence, verifier allocation, AER revision 25 and exact review packet were reread. The deterministic candidate result remains raisa_provider_free_practice_context_fabric_bureau_memory_contract_pass, but final acceptance remains withheld until exactly one fresh Gemini decision is admitted.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project owns independent veto only. GPT Sol retains architecture, recovery, acceptance and integration. Yuri has completed the human Google consent action and authorised checking whether the matching CLI session completed; no credential or IAM mutation is authorised.",
+    "git_refs_and_worktree": "The active task branch and origin are aligned at 0ea34b195c3966c14c01d7b381bfe9782b1a5167. Local/origin master and handoff/current are all exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The non-protected review worktree C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-bureau-memory-review is clean on codex/review-context-fabric-bureau-memory-1289f9b8 at exact source HEAD 1289f9b822c571341b224ab9c6b5caaeefaf0c71. User-owned untracked files are present only in the active worktree and remain untouched.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The exact current baton keeps the provider-free Context Fabric and Bureau Memory Bank candidate at source commit 1289f9b822c571341b224ab9c6b5caaeefaf0c71 pending one fresh exact-head independent veto after human Antigravity authentication restoration.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/clinical/product data, raw audit, real database, product runtime, command/write, provider call by the candidate, deployment, production, release, Pages or protected-ref action is permitted. Authentication verification must retain no OAuth URL, code, challenge, state, credential or token. docs/branding/ and all unrelated untracked evidence remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

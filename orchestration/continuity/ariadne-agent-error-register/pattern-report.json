@@ -1,23 +1,23 @@
 {
-  "canonical_register_sha256": "e6bfdc914b5fd0f5d7f2e2d5e8d46704a6528115b379a1ad7923ff8dac13dfcf",
+  "canonical_register_sha256": "3fce61c4cf68cf1fd493cd7e0253368456ce8ba0da0f420cf0b73fee9b9f9f5e",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 23,
+      "canonical_unchanged": 25,
       "untrusted_partial_worktree": 6
     },
     "by_category": {
       "command_scope_violation": 3,
       "evidence_misreport": 2,
       "harness_failure": 3,
-      "output_contract_violation": 12,
+      "output_contract_violation": 14,
       "read_only_violation": 1,
       "reasoning_claim_error": 5,
       "repository_defect": 2,
       "transport_timeout": 3
     },
     "by_origin": {
-      "agent_behavior": 23,
+      "agent_behavior": 25,
       "harness": 3,
       "repository": 2,
       "transport": 3
@@ -25,10 +25,10 @@
     "by_process_severity": {
       "low": 8,
       "material": 9,
-      "moderate": 14
+      "moderate": 16
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 11,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 13,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-orchestrator::orchestrator": 8,
@@ -44,15 +44,13 @@
     "by_role": {
       "implementer": 6,
       "orchestrator": 13,
-      "verifier": 12
+      "verifier": 14
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 31,
+  "incident_count": 33,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
-  "open_incident_ids": [
-    "AER-0031"
-  ],
+  "open_incident_ids": [],
   "recurring_patterns": [
     {
       "categories": [
@@ -130,21 +128,25 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 4,
+      "incident_count": 6,
       "incident_ids": [
         "AER-0004",
         "AER-0006",
         "AER-0018",
-        "AER-0020"
+        "AER-0020",
+        "AER-0032",
+        "AER-0033"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
+        "New Antigravity reviews must use one closed schema-constrained JSON decision object; deterministic parsing deduplicates identical wrapper mirrors, rejects missing or conflicting envelopes and forbids legacy terminal markers inside review text.",
         "The verifier wrapper admits exactly one terminal decision and rejects zero or duplicate terminal envelopes before acceptance.",
         "The verifier wrapper must continue exact-single-decision admission; duplicate output never becomes a verdict, and bounded recovery uses a fresh project/worktree without changing candidate scope.",
         "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions.",
-        "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory."
+        "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory.",
+        "Verifier packets must require all commands and notifications to settle before exactly one terminal line, and the wrapper must continue rejecting every zero-or-duplicate result before candidate acceptance."
       ],
       "recurrence_signature": "verifier.multiple_terminal_decisions",
       "resource_ids": [
@@ -203,7 +205,7 @@
       ]
     }
   ],
-  "register_revision": 25,
+  "register_revision": 28,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-06"
 }

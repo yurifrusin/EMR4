@@ -81,3 +81,10 @@ This contract can prove deterministic provider-free component behavior only.
 It does not prove a model-required Bureau turn, product data retrieval,
 real-world identity matching, privacy policy adequacy, persistence, retention,
 clinical reasoning, runtime wiring, commands, deployment or production.
+
+Acceptance evidence binds the exact contract, API document, plan, design,
+threat delta, engine, acceptance generator and focused test by canonical-LF
+byte hash, so Windows checkout line endings cannot change the result. It
+does not embed the containing Git commit as a self-reference: the independent
+review receipt binds the final exact HEAD after commit, while the evidence file
+remains reproducible before and after that commit.
