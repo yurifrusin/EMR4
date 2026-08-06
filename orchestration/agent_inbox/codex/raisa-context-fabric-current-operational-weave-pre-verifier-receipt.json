@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_current_operational_weave_gemini_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate d8bc059212e65a6ed2d7ac8d57734096d14b9139 passes 155 tests across the new weave, accepted parent contract, direction, API Spine, context frames, orchestrator, acceptance index and error register. Review packet SHA-256 is b7dcedbadfd40afec9c900c91d7c1651b1b9698372f29954185a28dd3d6dbb3f.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project owns read-only exact-HEAD independent veto. GPT Sol retains architecture, repair, acceptance, integration and publication. The reviewer has no edit, self-acceptance, command, deployment, protected-ref or additional-provider authority.",
+    "git_refs_and_worktree": "Fresh clean non-protected worktree C:/Users/sarashera/EMR4-worktrees/cow-r1 is on codex/review-context-fabric-current-operational-weave-d8bc059 at exact HEAD d8bc059212e65a6ed2d7ac8d57734096d14b9139. Worktree preflight SHA-256 is 12acbd4fbebd7016d96207f6ddafc1dbaace45d7d14ffef8fd9272d62265765a. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md names the accepted Context Fabric Bureau Memory contract and provider-free Current operational weave dependency, under Yuri's standing sequence authority and mandatory exact-head independent veto boundary.",
+    "protected_evidence_boundaries": "The review is bounded to repository-local authored-synthetic artifacts plus the authorised Antigravity verifier transport. No patient, clinical, product-derived, protected or historical-PHI data; raw audit; database; runtime; command; deployment; release; Pages; protected ref; or docs/branding access is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

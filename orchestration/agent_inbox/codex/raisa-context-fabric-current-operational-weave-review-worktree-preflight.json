@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/cow-r1",
+  "branch": "codex/review-context-fabric-current-operational-weave-d8bc059",
+  "head": "d8bc059212e65a6ed2d7ac8d57734096d14b9139",
+  "expected_head": "d8bc059212e65a6ed2d7ac8d57734096d14b9139",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

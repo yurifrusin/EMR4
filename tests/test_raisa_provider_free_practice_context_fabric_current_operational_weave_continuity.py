@@ -3,27 +3,28 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-NODE_ID = "raisa-provider-free-practice-context-fabric-bureau-memory-contract"
-SOURCE_HEAD = "cb1b0a712f8ee5340e73d8adde19103af0d9ed97"
+NODE_ID = "raisa-provider-free-practice-context-fabric-current-operational-weave"
+SOURCE_HEAD = "d8bc059212e65a6ed2d7ac8d57734096d14b9139"
 
 
 def load(path):
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_context_fabric_contract_continuity_and_compass_are_current():
+def test_current_operational_weave_continuity_and_compass_are_current():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
-    node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
-    assert graph["graph_revision"] >= 217
-    assert node["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] >= 199
-    assert compass["source_graph_revision"] >= 217
-    assert "Context Fabric" in compass["orientation_statement"]
+    assert graph["graph_revision"] == 218
+    assert graph["nodes"][-1]["id"] == NODE_ID
+    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] == 200
+    assert compass["source_graph_revision"] == 218
+    assert compass["current_position"]["node_id"] == NODE_ID
+    assert "Current operational weave" in compass["orientation_statement"]
     assert "patient-free temporal weave" in compass["orientation_statement"]
 
 
-def test_context_fabric_horizon_is_active_and_bound_to_acceptance():
+def test_context_fabric_horizon_records_acceptance_and_next_dependency():
     compass = load("orchestration/continuity/emr4-compass.json")
     horizon = next(
         item
@@ -36,27 +37,28 @@ def test_context_fabric_horizon_is_active_and_bound_to_acceptance():
         "current operational weave",
         "patient-free temporal weave",
         "provider-free-acceptance-evidence.json",
-        "repair-review-receipt.json",
-        "contract-closeout.md",
+        "review-1-receipt.json",
+        "review-count-reconciliation-receipt.json",
+        "operational-weave-closeout.md",
     ):
         assert phrase in joined
 
 
-def test_next_descendant_keeps_closed_boundaries_closed():
+def test_temporal_descendant_keeps_closed_boundaries_closed():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
-    node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
+    node = graph["nodes"][-1]
     opening = node["authority"]["authorized_openings"][0]
-    assert opening["boundary"] == "api-change"
-    assert "existing authorised" in opening["scope"]
-    assert "no new product route or source" in opening["scope"]
+    assert "patient-free" in opening["scope"]
+    assert "no real event transport" in opening["scope"]
     unresolved = " ".join(node["unresolved_gates"]).lower()
     for phrase in (
         "patient",
         "clinical",
         "product-derived",
         "real databases",
+        "event transport",
         "persistence",
-        "retention",
+        "operational retention",
         "provider calls",
         "external retrieval",
         "commands",

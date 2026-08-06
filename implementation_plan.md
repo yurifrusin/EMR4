@@ -54,11 +54,15 @@ generation 2 passed fresh process-plus-HTTP readback, the ledger closed after
 one call and cleanup proved zero reusable runtime capability. This does not
 open a product service, database, patient-data path, general repair agent,
 production, deployment or release action. The first provider-free Practice
-Context Fabric and Bureau Memory Bank contract now passes at exact independently
-reviewed source HEAD `cb1b0a712f8ee5340e73d8adde19103af0d9ed97`. The next
-dependency-satisfied action is the provider-free Current operational weave,
-composing existing authorised Diary, waiting-room, directory and session reads
-without a new product route or data source.
+Context Fabric and Bureau Memory Bank contract passes at exact independently
+reviewed source HEAD `cb1b0a712f8ee5340e73d8adde19103af0d9ed97`.
+The provider-free Current operational weave now also passes at exact
+independently reviewed source HEAD
+`d8bc059212e65a6ed2d7ac8d57734096d14b9139`: four existing authorised Diary,
+waiting-room, directory and private-session read shapes compose into one typed,
+expiring and same-packet-proofread bundle without a new product route or data
+source. The next dependency-satisfied action is the separately bounded
+patient-free temporal weave.
 
 Raisa's accepted longer-range integration direction is the backend-owned
 **Practice Context Fabric** described in
@@ -66,10 +70,11 @@ Raisa's accepted longer-range integration direction is the backend-owned
 It will knit the Bureaus together by assembling query-shaped, permissioned,
 typed and expiring context frames from authoritative current, event, temporal,
 session and later clinical/evidence sources. It is not provider-model memory or
-a broad practice-data dump. The direction and first unmounted provider-free
-contract are accepted; the Current operational weave is next. No product/patient
-data, provider call, historical-state retention, runtime route, command,
-deployment or production authority follows from this blueprint entry.
+a broad practice-data dump. The direction, first unmounted provider-free
+contract and Current operational weave are accepted; the patient-free temporal
+weave is next. No product/patient data, provider call, real historical-state
+retention, runtime route, command, deployment or production authority follows
+from this blueprint entry.
 
 ### 1.1 Business & Licensing Model
 
@@ -325,16 +330,16 @@ location, source availability, freshness and the maximum authorised lookback.
 The effective interval is always an intersection and this first contract sets
 no production retention period.
 
-Implementation proceeds from provider-free authored-synthetic contracts for
+Implementation proceeds from the accepted provider-free authored-synthetic contracts for
 `ContextNeedCandidate`, backend `ContextAuthorityBinding`, `ContextNeed`,
 `ContextScopeGrant`, `BureauMemorySelector`, `BureauMemoryItem`, `ContextFrame`,
 `ContextFrameSet`, selector/weave trace and same-packet proofreader trace, to
-composition of existing current read models, to a patient-free temporal weave,
-then to intent-shaped retrieval rehearsals and separately gated real-product and
-clinical descendants. GraphQL/query services remain read-only; mutations remain
-backend REST/OpenAPI commands with fresh authorization, human gates where
-required, idempotency, audit and deterministic readback. The controlling
-direction is
+the now-accepted composition of four existing current read shapes. The next
+descendant is a separately bounded patient-free temporal weave, followed by
+intent-shaped retrieval rehearsals and separately gated real-product and
+clinical descendants. GraphQL/query services remain read-only; mutations
+remain backend REST/OpenAPI commands with fresh authorization, human gates
+where required, idempotency, audit and deterministic readback. The controlling direction is
 [`docs/raisa-practice-context-fabric-direction.md`](docs/raisa-practice-context-fabric-direction.md).
 
 ---

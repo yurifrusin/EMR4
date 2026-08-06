@@ -22,10 +22,10 @@
     "Raisa Practice Context Fabric direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 144875,
-  "ledger_line_count": 125,
+  "ledger_byte_count": 146053,
+  "ledger_line_count": 126,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "ecc196ad26663db7cc118f268d430c0fcffb2a48141c57b34140a39e442d4b0a",
+  "ledger_sha256": "d58409243e779a565eeb6acac0510a28b05fb6c197c9d67cabb38cc2dc292a1e",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -135,14 +135,15 @@
     "Model-required Bureau A3/B3 terminal-reconciliation acceptance",
     "Model-required Bureau A3/B3 request-contract recovery acceptance",
     "Model-required Bureau A4 product-read/UI acceptance",
-    "Model-required Bureau A5.1/B4.1 command runtime acceptance"
+    "Model-required Bureau A5.1/B4.1 command runtime acceptance",
+    "Provider-free Practice Context Fabric Current operational weave acceptance"
   ],
-  "moved_row_count": 109,
+  "moved_row_count": 110,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 54874,
-  "source_agents_git_blob_sha1": "118ab7837c300e2ad281b666000512f97ad53063",
-  "source_agents_line_count": 462,
+  "source_agents_byte_count": 56354,
+  "source_agents_git_blob_sha1": "72648231c78fe41959ff1389fa3bd38a8c16ca94",
+  "source_agents_line_count": 463,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "e06f1be94b42d13c5a77394d739db1bc3d1039775f4905ec8709362ba45987dd",
-  "source_git_head": "cb1b0a712f8ee5340e73d8adde19103af0d9ed97"
+  "source_agents_sha256": "dcd9f60f44f1b6c57ad754ba9902b05e3beaa004fab2371cb4c012d396da0f88",
+  "source_git_head": "d8bc059212e65a6ed2d7ac8d57734096d14b9139"
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 28,
+  "register_revision": 29,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1286,6 +1286,80 @@
           "orchestration/harness_settings/verifier_execution_policy.yaml",
           "docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md",
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-review-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0034",
+      "attempt_id": "raisa-context-fabric-current-operational-weave-review-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-current-operational-weave",
+      "origin": "transport",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh exact-HEAD Antigravity verifier transport must authenticate, return one non-transferable review receipt or fail with sanitized explicit containment while leaving the candidate unchanged.",
+      "observed_error": "The first Current operational weave veto waited for Google OAuth consent and timed out after 60 seconds before model admission, producing no reviewer decision while the exact candidate remained clean and unchanged.",
+      "detection_method": "The launcher timed out awaiting browser consent. Sol preserved a sanitized zero-call transport receipt and independently verified the exact HEAD and clean worktree before recovery.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-auth-timeout-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-worktree-preflight.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed transport remains preserved without any raw OAuth value. Yuri completed the browser consent boundary, and the same authorised exact-head review then returned one schema-constrained pass without an intervening provider call or candidate change.",
+        "prevention_control": "Treat Antigravity OAuth as a human-restored transport boundary distinct from ADC and gcloud stores; preserve every sanitized timeout and require exact-head plus clean-worktree readback before a fresh-project recovery result is admitted.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-auth-timeout-failure-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0035",
+      "attempt_id": "raisa-context-fabric-current-operational-weave-review-002",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-current-operational-weave",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree_interactive_auth_recovery",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "A verifier's numerical test evidence must agree with the exact collected and executed packet in its bound unchanged worktree.",
+      "observed_error": "The schema-constrained review correctly returned pass and named the exact eight test files, but its prose reported 71 passing tests although those exact files reproducibly collect and pass 155 tests.",
+      "detection_method": "Sol summed the per-file collection reported by pytest and reran the same eight-file packet in the exact clean reviewer worktree: 155 tests collected and all passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.exact_packet_test_count_underreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The review's architectural pass remains admissible, but its numerical count is marked non-authoritative. Sol's exact collection and execution at the same unchanged clean HEAD establish the corrected 155-test evidence without another provider call.",
+        "prevention_control": "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json",
+          "tests/test_ariadne_agent_error_register.py"
         ]
       },
       "status": "corrected"

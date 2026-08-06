@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_context_fabric_is_durable_and_current_weave_is_next() -> None:
+def test_context_fabric_is_durable_and_temporal_weave_is_next() -> None:
     direction = (ROOT / "docs/raisa-practice-context-fabric-direction.md").read_text(
         encoding="utf-8"
     )
@@ -18,7 +18,7 @@ def test_context_fabric_is_durable_and_current_weave_is_next() -> None:
     handover = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 
     assert (
-        "Status: accepted direction and first provider-free contract; Current operational weave next"
+        "Status: accepted direction, first contract and Current operational weave; patient-free temporal weave next"
         in direction
     )
     assert "ContextNeed" in direction
@@ -47,8 +47,8 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
         if row["id"] == "raisa-practice-context-fabric"
     )
 
-    assert compass["map_revision"] == 199
-    assert compass["source_graph_revision"] == 217
+    assert compass["map_revision"] == 200
+    assert compass["source_graph_revision"] == 218
     assert item["status"] == "active"
     assert item["boundary_changes"] == []
     assert "docs/raisa-practice-context-fabric-direction.md" in item["evidence"]
@@ -56,4 +56,4 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
 
     rendered = (ROOT / "docs/ariadne-compass-current.md").read_text(encoding="utf-8")
     assert "### Raisa Practice Context Fabric — active" in rendered
-    assert "_Compass map revision 199; continuity graph revision 217._" in rendered
+    assert "_Compass map revision 200; continuity graph revision 218._" in rendered

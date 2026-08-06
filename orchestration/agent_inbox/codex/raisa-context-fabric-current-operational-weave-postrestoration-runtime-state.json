@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "reconcile_and_accept_current_operational_weave_then_continue_to_patient_free_temporal_weave",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted Bureau Memory contract, the provider-free Current operational weave as the active descendant, Yuri's standing uninterrupted-development authority, and the separately bounded patient-free temporal weave as the next planned descendant after acceptance.",
+    "current_authority_allocation": "GPT Sol retains architecture, evidence reconciliation, acceptance, task-branch publication and continuity ownership. Gemini 3.6 Flash/high completed the fresh exact-HEAD read-only veto. No worker or verifier has integration, command, deployment, protected-ref or self-acceptance authority.",
+    "active_plan_and_acceptance": "The frozen Current operational weave plan, design and threat delta limit the candidate to pure provider-free authored-synthetic composition of four existing read shapes. Candidate d8bc059212e65a6ed2d7ac8d57734096d14b9139 passed 155 exact-packet tests locally and in its clean review worktree; the schema-constrained Gemini veto returned pass at the same HEAD. The verifier's textual 71-test count is pending explicit Sol reconciliation against the reproducible 155-test collection before acceptance.",
+    "protected_evidence_boundaries": "No patient, clinical, product-derived, protected or historical-PHI data; raw audit; real database or session; persistence or temporal retention; provider or external retrieval beyond the completed authorised verifier call; product runtime; command or write; deployment, production, release, Pages; protected evidence; protected-ref movement; or docs/branding access is permitted.",
+    "git_refs_and_worktree": "The active task branch codex/ariadne-bernie-davida-parallel-seam is at d8bc059212e65a6ed2d7ac8d57734096d14b9139, one commit ahead of origin/codex/ariadne-bernie-davida-parallel-seam at 619dbc3b9d7ce5610c75031f76c14a4ebbd7fa5f. Local and remote master plus handoff/current are verified at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing unrelated untracked files, including docs/branding/, remain preserved and excluded; the exact reviewer worktree is clean at the candidate HEAD."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "postrestoration_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the mandatory post-restoration five-source readback and exact local/remote ref verification."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "The completed authenticated Gemini 3.6 Flash/high review returned a schema-constrained pass at the exact unchanged clean candidate HEAD."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No DeepSeek implementation worker is active during evidence reconciliation and acceptance."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Claude CLI is not selected independently."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent holds acceptance, integration, baton or protected-ref authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

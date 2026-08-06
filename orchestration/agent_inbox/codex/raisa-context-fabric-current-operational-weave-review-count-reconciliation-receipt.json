@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.verifier-evidence-reconciliation.v1",
+  "status": "reconciled",
+  "observed_on": "2026-08-06",
+  "tranche": "raisa-context-fabric-current-operational-weave",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json",
+  "review_decision": "pass",
+  "review_claimed_test_count": 71,
+  "authoritative_reproduced_test_count": 155,
+  "test_files": [
+    "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py",
+    "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py",
+    "tests/test_raisa_practice_context_fabric_direction.py",
+    "tests/test_api_spine_artifacts.py",
+    "tests/test_bernie_context_frames.py",
+    "tests/test_ariadne_orchestrator_preflight.py",
+    "tests/test_agents_acceptance_index.py",
+    "tests/test_ariadne_agent_error_register.py"
+  ],
+  "collection_breakdown": {
+    "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py": 21,
+    "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py": 31,
+    "tests/test_raisa_practice_context_fabric_direction.py": 2,
+    "tests/test_api_spine_artifacts.py": 36,
+    "tests/test_bernie_context_frames.py": 9,
+    "tests/test_ariadne_orchestrator_preflight.py": 17,
+    "tests/test_agents_acceptance_index.py": 3,
+    "tests/test_ariadne_agent_error_register.py": 36
+  },
+  "reproduction": {
+    "worktree": "C:/Users/sarashera/EMR4-worktrees/cow-r1",
+    "branch": "codex/review-context-fabric-current-operational-weave-d8bc059",
+    "head_before": "d8bc059212e65a6ed2d7ac8d57734096d14b9139",
+    "head_after": "d8bc059212e65a6ed2d7ac8d57734096d14b9139",
+    "dirty_after": false,
+    "collect_only_status": "passed",
+    "execution_status": "passed",
+    "warnings_only": [
+      "Starlette httpx TestClient deprecation",
+      "google.genai Python 3.17 deprecation"
+    ]
+  },
+  "disposition": "The numerical undercount is non-authoritative and corrected by exact collection plus execution in the bound clean worktree. It does not contradict the verifier's architectural findings or pass decision, so no second provider review is warranted.",
+  "candidate_unchanged": true,
+  "additional_provider_calls": 0
+}

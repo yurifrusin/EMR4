@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 217,
+  "graph_revision": 218,
   "harvests": [],
   "nodes": [
     {
@@ -12746,9 +12746,115 @@
         "Persistence, retention, provider calls, external retrieval, product runtime and new routes remain closed.",
         "Commands, writes, deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-practice-context-fabric-current-operational-weave",
+      "title": "Provider-free Practice Context Fabric Current operational weave",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T03:54:05Z",
+      "updated_at": "2026-08-06T03:54:05Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "d8bc059212e65a6ed2d7ac8d57734096d14b9139",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-practice-context-fabric-bureau-memory-contract",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-closeout.md",
+            "scope": "Define the narrow provider-free authored-synthetic patient-free temporal weave for bounded committed-event index and historical-snapshot semantics; no real event transport, database, persistence, product route or command."
+          }
+        ],
+        "notes": [
+          "The accepted weave is a pure function over four sealed synthetic read shapes.",
+          "The four source families remain distinct and command authority remains false.",
+          "The review's test-count underreport is reconciled to 155 exact passing tests.",
+          "The next descendant remains patient-free, provider-free and unmounted."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-practice-context-fabric-current-operational-weave",
+          "source": "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact scope narrowing, four-source composition, cross-source coherence and atomic same-packet proofreading."
+        }
+      ],
+      "claim_scope": [
+        "Four authored-synthetic existing read shapes compose into one typed expiring frame set.",
+        "Source identity, practice/session/location scope, field minimisation and freshness remain fail closed.",
+        "The same-packet proofreader independently recomputes need, grant, source, weave and frame-set digests.",
+        "No patient, product, provider, database, persistence, runtime, command, deployment or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "orchestration/continuity/raisa-provider-free-practice-context-fabric-current-operational-weave/provider-free-acceptance-evidence.json"
+          ],
+          "note": "The weave consumes read shapes only and does not alter the accepted combined-intent proposal or command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_reception_one_availability_reconciliation.py",
+            "orchestration/continuity/raisa-provider-free-practice-context-fabric-current-operational-weave/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-closeout.md"
+          ],
+          "note": "Current source revisions remain bounded reads; no context frame or event becomes current truth or command authority."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-plan.md",
+          "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-design.md",
+          "docs/security/raisa-provider-free-practice-context-fabric-current-operational-weave-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-current-operational-weave/operational-weave-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-current-operational-weave/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json"
+        ],
+        "tests": [
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py",
+          "tests/test_raisa_practice_context_fabric_direction.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The patient-free temporal weave may use only authored-synthetic committed-event and historical-snapshot shapes under a separately frozen contract.",
+        "Patient, clinical, product-derived, protected and production data; real databases, event transport and ordinary services remain closed.",
+        "Persistence, operational retention, provider calls, external retrieval, product runtime and new routes remain closed.",
+        "Commands, writes, deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T03:30:00Z"
+  "updated_at": "2026-08-06T03:54:05Z"
 }

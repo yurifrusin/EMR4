@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction and first provider-free contract; Current operational weave next
+Status: accepted direction, first contract and Current operational weave; patient-free temporal weave next
 
 ## Purpose
 
@@ -234,10 +234,12 @@ large “memory” feature:
    and same-packet proofreader trace, aligned with the API Spine and existing
    Bureau frame contracts. The GraphQL surface remains documentation-only and
    unmounted.
-2. **Current operational weave** — compose existing authorised Diary,
-   waiting-room, directory and session read projections without adding a new
-   product route or data source.
-3. **Patient-free temporal weave** — add bounded committed-event indexing and
+2. **Current operational weave** — **accepted** at exact independently reviewed
+   source HEAD `d8bc059212e65a6ed2d7ac8d57734096d14b9139`; four existing
+   authorised Diary, waiting-room, directory and private-session read shapes
+   compose into one typed expiring bundle without a new product route or data
+   source.
+3. **Patient-free temporal weave** — **next**; add bounded committed-event indexing and
    historical operational snapshots with explicit retention, tenancy and
    replay/supersession semantics.
 4. **Intent-shaped retrieval rehearsal** — use authored-synthetic requests to

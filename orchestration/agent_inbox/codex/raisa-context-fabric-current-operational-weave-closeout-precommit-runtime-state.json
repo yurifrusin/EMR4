@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_current_operational_weave_acceptance_and_continuity_to_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now names raisa_provider_free_practice_context_fabric_current_operational_weave_pass at exact reviewed source d8bc059212e65a6ed2d7ac8d57734096d14b9139, Continuity 218 / Compass 200, and the separately bounded patient-free temporal weave as next under standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol owns evidence reconciliation, acceptance, continuity and task-branch commit/push. Gemini 3.6 Flash/high completed one exact-head read-only veto and owns no integration or self-acceptance. No worker or verifier may move protected refs.",
+    "active_plan_and_acceptance": "The frozen plan's pure four-source authored-synthetic weave passes deterministic generation, API Spine/static checks, one schema-constrained Gemini pass at the unchanged clean candidate, exact 155-test reviewer-packet reproduction, and a 173-test closeout regression. AER-0034 and AER-0035 preserve and correct the sanitized OAuth timeout and verifier count underreport without candidate change or an extra provider call.",
+    "protected_evidence_boundaries": "No patient, clinical, product-derived, protected or historical-PHI data; raw audit; real database/session; real event transport; persistence/retention; provider/external retrieval beyond the completed review; runtime; command/write; deployment, production, release, Pages; protected evidence/ref; or docs/branding access is authorised.",
+    "git_refs_and_worktree": "The task branch remains based on exact candidate d8bc059212e65a6ed2d7ac8d57734096d14b9139 and is one commit ahead of origin before closeout. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit acceptance/continuity paths will be staged; every unrelated untracked file, especially docs/branding/, remains preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "current_operational_weave_closeout_precommit_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol accepted the exact reviewed candidate and completed deterministic closeout checks without moving a protected ref."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "The completed Gemini review returned one schema-constrained pass; no further provider review is needed for commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No implementation worker is active during the tightly coupled acceptance commit."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Claude CLI is not selected independently."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent holds acceptance, commit, baton or protected-ref authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
