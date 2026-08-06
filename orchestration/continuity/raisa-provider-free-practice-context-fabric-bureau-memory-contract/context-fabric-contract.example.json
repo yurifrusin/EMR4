@@ -1,0 +1,471 @@
+{
+  "authority_binding": {
+    "allowed_action_families": [
+      "waiting_room_read",
+      "appointment_read"
+    ],
+    "allowed_actor_relations": [
+      "same_practice_staff",
+      "self"
+    ],
+    "allowed_bureaus": [
+      "rayleen",
+      "bernie"
+    ],
+    "allowed_fields": [
+      "request_label_code"
+    ],
+    "allowed_frame_types": [
+      "bureau_memory_item_set"
+    ],
+    "allowed_outcome_codes": [
+      "completed"
+    ],
+    "allowed_purposes": [
+      "recent_practice_work"
+    ],
+    "allowed_source_classes": [
+      "recent_collective_work"
+    ],
+    "authorized_time_window": {
+      "ends_at": "2026-08-06T09:00:00Z",
+      "starts_at": "2026-08-06T07:00:00Z"
+    },
+    "binding_digest": "sha256:7e4f187e4d2d1c8660f105fbfe005b9679159400c508b630cede5dbaa25811bc",
+    "binding_id": "binding:staff-session-001",
+    "consent_codes": [],
+    "expires_at": "2026-08-06T08:10:00Z",
+    "issued_at": "2026-08-06T07:55:00Z",
+    "location_refs": [
+      "location:synthetic-main"
+    ],
+    "maximum_bytes": 8192,
+    "maximum_freshness_seconds": 120,
+    "maximum_results": 2,
+    "policy_version": "context-policy.v1",
+    "practice_ref": "practice:synthetic-001",
+    "principal_ref": "principal:synthetic-staff-001",
+    "role_codes": [
+      "receptionist"
+    ],
+    "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+    "session_ref": "session:synthetic-001"
+  },
+  "authority_ceiling": "read_context_only",
+  "available_memory_items": [
+    {
+      "action_family": "waiting_room_read",
+      "authority_ceiling": "read_context_only",
+      "completed_at": "2026-08-06T08:01:00Z",
+      "initiator_relation": "same_practice_staff",
+      "memory_item_digest": "sha256:42bc9118ee6425ec61fe8b52526db32a62bb92c0d56f3b3b9a5816be53edecb0",
+      "memory_item_id": "memory:rayleen-001",
+      "opaque_target_ref": null,
+      "originating_bureau": "rayleen",
+      "outcome_code": "completed",
+      "relevance_reason_codes": [
+        "PURPOSE_MATCH",
+        "TIME_MATCH"
+      ],
+      "request_kind": "read_projection",
+      "request_label_code": "recent_operational_read",
+      "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+      "source_digest": "sha256:8f38e34de1574f217eaa1cc76b7ada4b8036355e7eab7142fd5aed0ae94681b6",
+      "source_receipt_ref": "receipt:rayleen-001",
+      "source_revision": "synthetic-revision-1",
+      "started_at": "2026-08-06T08:01:00Z",
+      "supersession_state": "CURRENT",
+      "target_kind": "waiting_room"
+    },
+    {
+      "action_family": "appointment_read",
+      "authority_ceiling": "read_context_only",
+      "completed_at": "2026-08-06T08:00:00Z",
+      "initiator_relation": "same_practice_staff",
+      "memory_item_digest": "sha256:29b4e8a3d2512c7780bfb95c13fd0b69304d3f7fce2295e4a7536ada55b1b20a",
+      "memory_item_id": "memory:bernie-001",
+      "opaque_target_ref": null,
+      "originating_bureau": "bernie",
+      "outcome_code": "completed",
+      "relevance_reason_codes": [
+        "PURPOSE_MATCH",
+        "TIME_MATCH"
+      ],
+      "request_kind": "read_projection",
+      "request_label_code": "recent_operational_read",
+      "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+      "source_digest": "sha256:929fa8d6d8c45e98968b579816e34b5db211cce6e206b93e83b7c771b0d651c5",
+      "source_receipt_ref": "receipt:bernie-001",
+      "source_revision": "synthetic-revision-1",
+      "started_at": "2026-08-06T08:00:00Z",
+      "supersession_state": "CURRENT",
+      "target_kind": "appointment"
+    },
+    {
+      "action_family": "waiting_room_read",
+      "authority_ceiling": "read_context_only",
+      "completed_at": "2026-08-06T06:00:00Z",
+      "initiator_relation": "same_practice_staff",
+      "memory_item_digest": "sha256:3ad923841c0ec20d98cb4b15a1b11aec0ac3d7100d9303eaa8d5383b530be944",
+      "memory_item_id": "memory:old-001",
+      "opaque_target_ref": null,
+      "originating_bureau": "rayleen",
+      "outcome_code": "completed",
+      "relevance_reason_codes": [
+        "PURPOSE_MATCH",
+        "TIME_MATCH"
+      ],
+      "request_kind": "read_projection",
+      "request_label_code": "recent_operational_read",
+      "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+      "source_digest": "sha256:660b901b2828bee8aca1e7187cd8f9c3ee5bf69f7b47e4197c71fb62fcf71fef",
+      "source_receipt_ref": "receipt:old-001",
+      "source_revision": "synthetic-revision-1",
+      "started_at": "2026-08-06T06:00:00Z",
+      "supersession_state": "CURRENT",
+      "target_kind": "waiting_room"
+    },
+    {
+      "action_family": "waiting_room_read",
+      "authority_ceiling": "read_context_only",
+      "completed_at": "2026-08-06T08:02:00Z",
+      "initiator_relation": "same_practice_staff",
+      "memory_item_digest": "sha256:38c239c492d79251590c04dc2bd1ed2fc6d99b2bbe4193646aea2101c7a87f88",
+      "memory_item_id": "memory:superseded-001",
+      "opaque_target_ref": null,
+      "originating_bureau": "rayleen",
+      "outcome_code": "completed",
+      "relevance_reason_codes": [
+        "PURPOSE_MATCH",
+        "TIME_MATCH"
+      ],
+      "request_kind": "read_projection",
+      "request_label_code": "recent_operational_read",
+      "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+      "source_digest": "sha256:30eefcc93312de25a0c9a1d45e9791a7f22ea58468192b88abf7c7648863d4bf",
+      "source_receipt_ref": "receipt:superseded-001",
+      "source_revision": "synthetic-revision-1",
+      "started_at": "2026-08-06T08:02:00Z",
+      "supersession_state": "SUPERSEDED",
+      "target_kind": "waiting_room"
+    }
+  ],
+  "blocked_boundaries": [
+    "raw_audit",
+    "provider",
+    "database",
+    "persistence",
+    "product_runtime",
+    "command",
+    "write",
+    "deployment",
+    "production",
+    "release",
+    "protected_evidence",
+    "protected_refs"
+  ],
+  "candidate": {
+    "bureau_memory_selector": {
+      "action_families": [
+        "waiting_room_read",
+        "appointment_read"
+      ],
+      "actor_relations": [
+        "same_practice_staff",
+        "self"
+      ],
+      "maximum_results": 3,
+      "originating_bureaus": [
+        "rayleen",
+        "bernie"
+      ],
+      "outcome_codes": [
+        "completed"
+      ],
+      "selector_digest": "sha256:3dd861fa83634747f62643dc6bca73e21cf522b2e5ccc2ec9be91c9f882ebb2b",
+      "temporal_hint": "current_practice_day"
+    },
+    "candidate_digest": "sha256:c104fb555570ea17e4ba1833fbfaacb51d1a680d9d45eae164b7e838b3a19616",
+    "command_authority": false,
+    "entity_features": [],
+    "freshness_seconds": 300,
+    "historical_state_required": false,
+    "issued_at": "2026-08-06T08:00:00Z",
+    "maximum_results": 5,
+    "need_id": "need:recent-practice-work-001",
+    "purpose_code": "recent_practice_work",
+    "requested_fields": [
+      "request_label_code",
+      "opaque_target_ref"
+    ],
+    "requested_frame_types": [
+      "bureau_memory_item_set"
+    ],
+    "requested_time_window": {
+      "ends_at": "2026-08-06T10:00:00Z",
+      "starts_at": "2026-08-06T00:00:00Z"
+    },
+    "requesting_bureau": "rayleen",
+    "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+    "source_classes": [
+      "recent_collective_work"
+    ],
+    "temporal_hint": "current_practice_day"
+  },
+  "context_need": {
+    "assembled_at": "2026-08-06T08:02:00Z",
+    "binding_digest": "sha256:7e4f187e4d2d1c8660f105fbfe005b9679159400c508b630cede5dbaa25811bc",
+    "candidate_digest": "sha256:c104fb555570ea17e4ba1833fbfaacb51d1a680d9d45eae164b7e838b3a19616",
+    "command_authority": false,
+    "need_digest": "sha256:41a1e4a4c7b3fd9c619fd19d4fba83502c4ae4f6a513880095114a03359129a7",
+    "need_id": "need:recent-practice-work-001",
+    "read_only": true,
+    "schema_version": "emr4.practice_context_fabric_bureau_memory.v1"
+  },
+  "contract_digest": "sha256:8e0f75ee34b402452f21c3952939d207d71549d1f3b9a89805182a32fd5935b6",
+  "evidence_label": "provider_free_authored_synthetic_context_fabric_contract",
+  "frame_set": {
+    "ambiguity_state": "NONE",
+    "assembled_at": "2026-08-06T08:02:00Z",
+    "binding_digest": "sha256:7e4f187e4d2d1c8660f105fbfe005b9679159400c508b630cede5dbaa25811bc",
+    "command_authority": false,
+    "expires_at": "2026-08-06T08:04:00Z",
+    "frame_set_digest": "sha256:2dfc760def26aa68ba7a015c6e896b10f1608642f197bfefbcd1c50f5fcd8aa8",
+    "frame_set_id": "frame-set:need:recent-practice-work-001",
+    "frames": [
+      {
+        "assembled_at": "2026-08-06T08:02:00Z",
+        "command_authority": false,
+        "content_digest": "sha256:027395700450ef96803cd708725026bbda1a55624d313341e7df384a5b0dd3be",
+        "coverage_complete": false,
+        "evidence_mode": "authored_synthetic",
+        "expires_at": "2026-08-06T08:04:00Z",
+        "frame_id": "frame:need:recent-practice-work-001",
+        "frame_type": "bureau_memory_item_set",
+        "freshness_deadline": "2026-08-06T08:04:00Z",
+        "items": [
+          {
+            "action_family": "waiting_room_read",
+            "authority_ceiling": "read_context_only",
+            "completed_at": "2026-08-06T08:01:00Z",
+            "initiator_relation": "same_practice_staff",
+            "memory_item_digest": "sha256:b0b7cbf35adb40f8e6a5fb997f1913b974adf545cdf93fafebcc7415eab1825d",
+            "memory_item_id": "memory:rayleen-001",
+            "originating_bureau": "rayleen",
+            "outcome_code": "completed",
+            "relevance_reason_codes": [
+              "PURPOSE_MATCH",
+              "TIME_MATCH"
+            ],
+            "request_kind": "read_projection",
+            "request_label_code": "recent_operational_read",
+            "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+            "source_digest": "sha256:8f38e34de1574f217eaa1cc76b7ada4b8036355e7eab7142fd5aed0ae94681b6",
+            "source_receipt_ref": "receipt:rayleen-001",
+            "source_revision": "synthetic-revision-1",
+            "started_at": "2026-08-06T08:01:00Z",
+            "supersession_state": "CURRENT",
+            "target_kind": "waiting_room"
+          },
+          {
+            "action_family": "appointment_read",
+            "authority_ceiling": "read_context_only",
+            "completed_at": "2026-08-06T08:00:00Z",
+            "initiator_relation": "same_practice_staff",
+            "memory_item_digest": "sha256:00b48fd2277bc6b807f60784963fa9ddec345e7fee8d50d998764d889b34efca",
+            "memory_item_id": "memory:bernie-001",
+            "originating_bureau": "bernie",
+            "outcome_code": "completed",
+            "relevance_reason_codes": [
+              "PURPOSE_MATCH",
+              "TIME_MATCH"
+            ],
+            "request_kind": "read_projection",
+            "request_label_code": "recent_operational_read",
+            "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+            "source_digest": "sha256:929fa8d6d8c45e98968b579816e34b5db211cce6e206b93e83b7c771b0d651c5",
+            "source_receipt_ref": "receipt:bernie-001",
+            "source_revision": "synthetic-revision-1",
+            "started_at": "2026-08-06T08:00:00Z",
+            "supersession_state": "CURRENT",
+            "target_kind": "appointment"
+          }
+        ],
+        "observed_at": "2026-08-06T08:02:00Z",
+        "omission_codes": [
+          "ITEM_NOT_ADMITTED"
+        ],
+        "practice_binding_digest": "sha256:7e4f187e4d2d1c8660f105fbfe005b9679159400c508b630cede5dbaa25811bc",
+        "purpose_code": "recent_practice_work",
+        "read_only": true,
+        "redaction_disposition": "minimal_allowlist_only",
+        "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+        "source_class": "recent_collective_work",
+        "source_refs": [
+          "receipt:rayleen-001",
+          "receipt:bernie-001"
+        ],
+        "source_revision": "authored-synthetic-source-1",
+        "supersession_state": "CURRENT"
+      }
+    ],
+    "grant_digest": "sha256:d733978b1bad31c3b4152d56e014ebcb5b112c6bb91c6846393ef70f38aaca4e",
+    "maximum_disclosure": 2,
+    "need_digest": "sha256:41a1e4a4c7b3fd9c619fd19d4fba83502c4ae4f6a513880095114a03359129a7",
+    "omission_codes": [
+      "ITEM_NOT_ADMITTED"
+    ],
+    "read_only": true,
+    "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+    "selector_digest": "sha256:3dd861fa83634747f62643dc6bca73e21cf522b2e5ccc2ec9be91c9f882ebb2b",
+    "source_revisions": [
+      "authored-synthetic-source-1"
+    ]
+  },
+  "memory_selector": {
+    "action_families": [
+      "waiting_room_read",
+      "appointment_read"
+    ],
+    "actor_relations": [
+      "same_practice_staff",
+      "self"
+    ],
+    "maximum_results": 3,
+    "originating_bureaus": [
+      "rayleen",
+      "bernie"
+    ],
+    "outcome_codes": [
+      "completed"
+    ],
+    "selector_digest": "sha256:3dd861fa83634747f62643dc6bca73e21cf522b2e5ccc2ec9be91c9f882ebb2b",
+    "temporal_hint": "current_practice_day"
+  },
+  "proofreader_trace": {
+    "checks": [
+      "tenant_and_binding",
+      "purpose_and_scope",
+      "source_and_fields",
+      "freshness_and_expiry",
+      "minimisation_and_provenance",
+      "supersession_and_authority",
+      "same_packet_digest"
+    ],
+    "frame_set_digest": "sha256:2dfc760def26aa68ba7a015c6e896b10f1608642f197bfefbcd1c50f5fcd8aa8",
+    "grant_digest": "sha256:d733978b1bad31c3b4152d56e014ebcb5b112c6bb91c6846393ef70f38aaca4e",
+    "need_digest": "sha256:41a1e4a4c7b3fd9c619fd19d4fba83502c4ae4f6a513880095114a03359129a7",
+    "proofread_at": "2026-08-06T08:02:01Z",
+    "proofreader_version": "context-proofreader.v1",
+    "reason_codes": [],
+    "release_decision": "RELEASE",
+    "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+    "selector_digest": "sha256:3dd861fa83634747f62643dc6bca73e21cf522b2e5ccc2ec9be91c9f882ebb2b",
+    "selector_trace_digest": "sha256:d16e6c21a01aec24e4c2644ea0d15507481eafcf2f27afa64e539e088b87d8d0",
+    "trace_digest": "sha256:d3f919d67b7e489b5c8a263bf471c19f112b390b4e7e954174e7097435c06012",
+    "weave_trace_digest": "sha256:12e7d2bc38db9751563dfa07fcc0bd38c35f4e4246449f538fc80d904a90e694"
+  },
+  "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+  "scope_grant": {
+    "action_families": [
+      "waiting_room_read",
+      "appointment_read"
+    ],
+    "actor_relations": [
+      "same_practice_staff",
+      "self"
+    ],
+    "allowed_fields": [
+      "request_label_code"
+    ],
+    "allowed_frame_types": [
+      "bureau_memory_item_set"
+    ],
+    "allowed_source_classes": [
+      "recent_collective_work"
+    ],
+    "binding_digest": "sha256:7e4f187e4d2d1c8660f105fbfe005b9679159400c508b630cede5dbaa25811bc",
+    "command_authority": false,
+    "decision": "ADMIT",
+    "effective_time_window": {
+      "ends_at": "2026-08-06T09:00:00Z",
+      "starts_at": "2026-08-06T07:00:00Z"
+    },
+    "expires_at": "2026-08-06T08:04:00Z",
+    "freshness_deadline": "2026-08-06T08:04:00Z",
+    "grant_digest": "sha256:d733978b1bad31c3b4152d56e014ebcb5b112c6bb91c6846393ef70f38aaca4e",
+    "grant_id": "grant:need:recent-practice-work-001",
+    "issued_at": "2026-08-06T08:02:00Z",
+    "maximum_bytes": 8192,
+    "maximum_results": 2,
+    "need_digest": "sha256:41a1e4a4c7b3fd9c619fd19d4fba83502c4ae4f6a513880095114a03359129a7",
+    "originating_bureaus": [
+      "rayleen",
+      "bernie"
+    ],
+    "outcome_codes": [
+      "completed"
+    ],
+    "policy_version": "context-policy.v1",
+    "provider_authority": false,
+    "purpose_code": "recent_practice_work",
+    "read_only": true,
+    "reduction_reason_codes": [
+      "FIELDS_NARROWED",
+      "TIME_WINDOW_NARROWED",
+      "RESULT_LIMIT_NARROWED"
+    ],
+    "requesting_bureau": "rayleen",
+    "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+    "selector_digest": "sha256:3dd861fa83634747f62643dc6bca73e21cf522b2e5ccc2ec9be91c9f882ebb2b"
+  },
+  "selector_trace": {
+    "candidate_item_digests": [
+      "sha256:29b4e8a3d2512c7780bfb95c13fd0b69304d3f7fce2295e4a7536ada55b1b20a",
+      "sha256:38c239c492d79251590c04dc2bd1ed2fc6d99b2bbe4193646aea2101c7a87f88",
+      "sha256:3ad923841c0ec20d98cb4b15a1b11aec0ac3d7100d9303eaa8d5383b530be944",
+      "sha256:42bc9118ee6425ec61fe8b52526db32a62bb92c0d56f3b3b9a5816be53edecb0"
+    ],
+    "exclusion_reason_codes": [
+      "ITEM_NOT_ADMITTED"
+    ],
+    "grant_digest": "sha256:d733978b1bad31c3b4152d56e014ebcb5b112c6bb91c6846393ef70f38aaca4e",
+    "rule_steps": [
+      "scope_intersection",
+      "half_open_time_filter",
+      "supersession_filter",
+      "canonical_order",
+      "result_cap"
+    ],
+    "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+    "selected_item_ids": [
+      "memory:rayleen-001",
+      "memory:bernie-001"
+    ],
+    "selector_digest": "sha256:3dd861fa83634747f62643dc6bca73e21cf522b2e5ccc2ec9be91c9f882ebb2b",
+    "selector_version": "context-memory-selector.v1",
+    "trace_digest": "sha256:d16e6c21a01aec24e4c2644ea0d15507481eafcf2f27afa64e539e088b87d8d0"
+  },
+  "weave_trace": {
+    "frame_set_digest": "sha256:2dfc760def26aa68ba7a015c6e896b10f1608642f197bfefbcd1c50f5fcd8aa8",
+    "grant_digest": "sha256:d733978b1bad31c3b4152d56e014ebcb5b112c6bb91c6846393ef70f38aaca4e",
+    "need_digest": "sha256:41a1e4a4c7b3fd9c619fd19d4fba83502c4ae4f6a513880095114a03359129a7",
+    "raw_audit_accessed": false,
+    "released_frame_ids": [
+      "frame:need:recent-practice-work-001"
+    ],
+    "schema_version": "emr4.practice_context_fabric_bureau_memory.v1",
+    "scope_reduction_codes": [
+      "FIELDS_NARROWED",
+      "TIME_WINDOW_NARROWED",
+      "RESULT_LIMIT_NARROWED"
+    ],
+    "selector_digest": "sha256:3dd861fa83634747f62643dc6bca73e21cf522b2e5ccc2ec9be91c9f882ebb2b",
+    "selector_trace_digest": "sha256:d16e6c21a01aec24e4c2644ea0d15507481eafcf2f27afa64e539e088b87d8d0",
+    "source_classes_queried": [
+      "recent_collective_work"
+    ],
+    "trace_digest": "sha256:12e7d2bc38db9751563dfa07fcc0bd38c35f4e4246449f538fc80d904a90e694",
+    "weave_version": "context-weave.v1"
+  }
+}

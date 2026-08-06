@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_context_fabric_is_durable_but_unimplemented_direction() -> None:
+def test_context_fabric_is_durable_and_first_contract_is_next() -> None:
     direction = (ROOT / "docs/raisa-practice-context-fabric-direction.md").read_text(
         encoding="utf-8"
     )
@@ -17,11 +17,16 @@ def test_context_fabric_is_durable_but_unimplemented_direction() -> None:
     ).read_text(encoding="utf-8")
     handover = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 
-    assert "Status: accepted strategic architecture direction; implementation unstarted" in direction
+    assert (
+        "Status: accepted strategic architecture direction; first provider-free contract next"
+        in direction
+    )
     assert "ContextNeed" in direction
     assert "ContextScopeGrant" in direction
     assert "ContextFrameSet" in direction
     assert "ContextWeaveTrace" in direction
+    assert "Bureau Memory Bank" in direction
+    assert "never queries or receives raw audit records" in direction
     assert "command_authority: false" in direction
     assert "not a single prompt, vector store, global transcript or" in direction
     assert "No patient, product, provider, historical-PHI, clinical" in direction
@@ -42,8 +47,8 @@ def test_context_fabric_compass_horizon_is_candidate_without_boundary_opening() 
         if row["id"] == "raisa-practice-context-fabric"
     )
 
-    assert compass["map_revision"] == 196
-    assert compass["source_graph_revision"] == 214
+    assert compass["map_revision"] == 198
+    assert compass["source_graph_revision"] == 216
     assert item["status"] == "candidate"
     assert item["boundary_changes"] == []
     assert "docs/raisa-practice-context-fabric-direction.md" in item["evidence"]
@@ -51,4 +56,4 @@ def test_context_fabric_compass_horizon_is_candidate_without_boundary_opening() 
 
     rendered = (ROOT / "docs/ariadne-compass-current.md").read_text(encoding="utf-8")
     assert "### Raisa Practice Context Fabric — candidate" in rendered
-    assert "_Compass map revision 196; continuity graph revision 214._" in rendered
+    assert "_Compass map revision 198; continuity graph revision 216._" in rendered

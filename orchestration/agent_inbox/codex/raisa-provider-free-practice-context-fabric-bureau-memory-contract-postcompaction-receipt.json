@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "continue_provider_free_context_fabric_contract_implementation_and_deterministic_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete Context Fabric direction, implementation plan, Bernie interaction model, C5 closeout and Sol acceptance, and the frozen provider-free contract plan/design/threat delta were read. The bounded descendant contains closed contracts, pure in-memory scope/selection/weave/proofreading, authored-synthetic evidence and an unmounted candidate-only GraphQL read document.",
+    "current_authority_allocation": "Standing uninterrupted-development authority applies. GPT Sol retains architecture, acceptance and Git integration; the completed native documentation and engine lanes returned no-edit closeouts, and no worker, provider or external runtime is active.",
+    "git_refs_and_worktree": "Task and origin task refs align at 8812d584721df3f96981e218e74433004f683bce. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The task worktree contains only bounded intentional Context Fabric changes plus preserved unrelated untracked files; protected refs are unchanged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after restoration at task HEAD 8812d584721df3f96981e218e74433004f683bce. C5 is accepted and the first provider-free Practice Context Fabric and Bureau Memory Bank contract remains the exact next implementation.",
+    "protected_evidence_boundaries": "No protected holdout, PHI, patient/clinical/product data, raw audit, database, persistence, production retention, provider/external retrieval, runtime route/resolver, command/write, deployment, production, release, Pages or protected-ref action. Preserve docs/branding/ exactly and every unrelated untracked receipt/state/evidence file; explicit-path staging only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

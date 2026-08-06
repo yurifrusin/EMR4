@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/practice-context-fabric-bureau-memory-contract.v1.json",
+  "title": "Provider-free Practice Context Fabric and Bureau Memory Bank packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evidence_label", "candidate", "authority_binding", "context_need", "scope_grant", "memory_selector", "available_memory_items", "selector_trace", "frame_set", "weave_trace", "proofreader_trace", "authority_ceiling", "blocked_boundaries", "contract_digest"],
+  "properties": {
+    "schema_version": {"const": "emr4.practice_context_fabric_bureau_memory.v1"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_context_fabric_contract"},
+    "candidate": {"$ref": "#/$defs/context_need_candidate"},
+    "authority_binding": {"$ref": "#/$defs/context_authority_binding"},
+    "context_need": {"$ref": "#/$defs/context_need"},
+    "scope_grant": {"$ref": "#/$defs/context_scope_grant"},
+    "memory_selector": {"$ref": "#/$defs/bureau_memory_selector"},
+    "available_memory_items": {"type": "array", "maxItems": 16, "items": {"$ref": "#/$defs/bureau_memory_item"}},
+    "selector_trace": {"$ref": "#/$defs/context_selector_trace"},
+    "frame_set": {"$ref": "#/$defs/context_frame_set"},
+    "weave_trace": {"$ref": "#/$defs/context_weave_trace"},
+    "proofreader_trace": {"$ref": "#/$defs/context_proofreader_trace"},
+    "authority_ceiling": {"const": "read_context_only"},
+    "blocked_boundaries": {"type": "array", "minItems": 12, "uniqueItems": true, "items": {"enum": ["raw_audit", "provider", "database", "persistence", "product_runtime", "command", "write", "deployment", "production", "release", "protected_evidence", "protected_refs"]}},
+    "contract_digest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "schema_version": {"const": "emr4.practice_context_fabric_bureau_memory.v1"},
+    "bureau": {"enum": ["bernie", "rayleen", "davida", "consultant"]},
+    "purpose": {"const": "recent_practice_work"},
+    "frame_type": {"const": "bureau_memory_item_set"},
+    "source_class": {"const": "recent_collective_work"},
+    "context_field": {"enum": ["request_label_code", "opaque_target_ref"]},
+    "action_family": {"enum": ["appointment_read", "waiting_room_read", "practice_administration_read"]},
+    "actor_relation": {"enum": ["self", "same_practice_staff", "system"]},
+    "outcome_code": {"enum": ["completed", "not_available", "blocked"]},
+    "temporal_hint": {"enum": ["current_turn", "current_session", "current_practice_day", "previous_practice_day", "recent_operational", "explicit_interval", "durable_thread_link"]},
+    "target_kind": {"enum": ["appointment", "waiting_room", "practice_setting"]},
+    "string_list": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 96}},
+    "time_window": {
+      "type": "object", "additionalProperties": false,
+      "required": ["starts_at", "ends_at"],
+      "properties": {"starts_at": {"$ref": "#/$defs/timestamp"}, "ends_at": {"$ref": "#/$defs/timestamp"}}
+    },
+    "entity_feature": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "value_code"],
+      "properties": {"kind": {"enum": ["target_kind", "request_label"]}, "value_code": {"type": "string", "pattern": "^[a-z0-9_.:-]{1,64}$"}}
+    },
+    "bureau_memory_selector": {
+      "type": "object", "additionalProperties": false,
+      "required": ["originating_bureaus", "action_families", "actor_relations", "outcome_codes", "temporal_hint", "maximum_results", "selector_digest"],
+      "properties": {
+        "originating_bureaus": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/bureau"}},
+        "action_families": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/action_family"}},
+        "actor_relations": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/actor_relation"}},
+        "outcome_codes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/outcome_code"}},
+        "temporal_hint": {"$ref": "#/$defs/temporal_hint"},
+        "maximum_results": {"type": "integer", "minimum": 1, "maximum": 10},
+        "selector_digest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "context_need_candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "need_id", "requesting_bureau", "purpose_code", "requested_frame_types", "entity_features", "temporal_hint", "requested_time_window", "source_classes", "requested_fields", "maximum_results", "freshness_seconds", "historical_state_required", "command_authority", "issued_at", "bureau_memory_selector", "candidate_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/schema_version"},
+        "need_id": {"type": "string", "pattern": "^need:[a-z0-9-]{1,64}$"},
+        "requesting_bureau": {"$ref": "#/$defs/bureau"},
+        "purpose_code": {"$ref": "#/$defs/purpose"},
+        "requested_frame_types": {"type": "array", "minItems": 1, "maxItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/frame_type"}},
+        "entity_features": {"type": "array", "maxItems": 8, "items": {"$ref": "#/$defs/entity_feature"}},
+        "temporal_hint": {"$ref": "#/$defs/temporal_hint"},
+        "requested_time_window": {"$ref": "#/$defs/time_window"},
+        "source_classes": {"type": "array", "minItems": 1, "maxItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/source_class"}},
+        "requested_fields": {"type": "array", "minItems": 1, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/context_field"}},
+        "maximum_results": {"type": "integer", "minimum": 1, "maximum": 10},
+        "freshness_seconds": {"type": "integer", "minimum": 1, "maximum": 900},
+        "historical_state_required": {"const": false},
+        "command_authority": {"const": false},
+        "issued_at": {"$ref": "#/$defs/timestamp"},
+        "bureau_memory_selector": {"$ref": "#/$defs/bureau_memory_selector"},
+        "candidate_digest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "context_authority_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "binding_id", "principal_ref", "role_codes", "practice_ref", "location_refs", "session_ref", "consent_codes", "policy_version", "allowed_bureaus", "allowed_purposes", "allowed_frame_types", "allowed_source_classes", "allowed_fields", "allowed_action_families", "allowed_actor_relations", "allowed_outcome_codes", "maximum_results", "maximum_bytes", "maximum_freshness_seconds", "authorized_time_window", "issued_at", "expires_at", "binding_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/schema_version"},
+        "binding_id": {"type": "string", "pattern": "^binding:[a-z0-9-]{1,64}$"},
+        "principal_ref": {"type": "string", "pattern": "^principal:[a-z0-9-]{1,64}$"},
+        "role_codes": {"$ref": "#/$defs/string_list"},
+        "practice_ref": {"type": "string", "pattern": "^practice:[a-z0-9-]{1,64}$"},
+        "location_refs": {"$ref": "#/$defs/string_list"},
+        "session_ref": {"type": "string", "pattern": "^session:[a-z0-9-]{1,64}$"},
+        "consent_codes": {"type": "array", "maxItems": 8, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "policy_version": {"const": "context-policy.v1"},
+        "allowed_bureaus": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/bureau"}},
+        "allowed_purposes": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/purpose"}},
+        "allowed_frame_types": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/frame_type"}},
+        "allowed_source_classes": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/source_class"}},
+        "allowed_fields": {"type": "array", "minItems": 1, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/context_field"}},
+        "allowed_action_families": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/action_family"}},
+        "allowed_actor_relations": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/actor_relation"}},
+        "allowed_outcome_codes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/outcome_code"}},
+        "maximum_results": {"type": "integer", "minimum": 1, "maximum": 10},
+        "maximum_bytes": {"type": "integer", "minimum": 256, "maximum": 32768},
+        "maximum_freshness_seconds": {"type": "integer", "minimum": 1, "maximum": 900},
+        "authorized_time_window": {"$ref": "#/$defs/time_window"},
+        "issued_at": {"$ref": "#/$defs/timestamp"},
+        "expires_at": {"$ref": "#/$defs/timestamp"},
+        "binding_digest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "context_need": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "need_id", "candidate_digest", "binding_digest", "assembled_at", "read_only", "command_authority", "need_digest"],
+      "properties": {"schema_version": {"$ref": "#/$defs/schema_version"}, "need_id": {"type": "string"}, "candidate_digest": {"$ref": "#/$defs/digest"}, "binding_digest": {"$ref": "#/$defs/digest"}, "assembled_at": {"$ref": "#/$defs/timestamp"}, "read_only": {"const": true}, "command_authority": {"const": false}, "need_digest": {"$ref": "#/$defs/digest"}}
+    },
+    "context_scope_grant": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "grant_id", "need_digest", "binding_digest", "selector_digest", "policy_version", "decision", "requesting_bureau", "purpose_code", "allowed_frame_types", "allowed_source_classes", "allowed_fields", "originating_bureaus", "action_families", "actor_relations", "outcome_codes", "effective_time_window", "maximum_results", "maximum_bytes", "freshness_deadline", "reduction_reason_codes", "issued_at", "expires_at", "read_only", "command_authority", "provider_authority", "grant_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/schema_version"}, "grant_id": {"type": "string"}, "need_digest": {"$ref": "#/$defs/digest"}, "binding_digest": {"$ref": "#/$defs/digest"}, "selector_digest": {"$ref": "#/$defs/digest"}, "policy_version": {"const": "context-policy.v1"}, "decision": {"enum": ["ADMIT", "NOT_AVAILABLE"]}, "requesting_bureau": {"enum": ["bernie", "rayleen", "davida", "consultant", "NOT_AVAILABLE"]}, "purpose_code": {"enum": ["recent_practice_work", "NOT_AVAILABLE"]},
+        "allowed_frame_types": {"type": "array", "maxItems": 1, "items": {"$ref": "#/$defs/frame_type"}}, "allowed_source_classes": {"type": "array", "maxItems": 1, "items": {"$ref": "#/$defs/source_class"}}, "allowed_fields": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/context_field"}}, "originating_bureaus": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/bureau"}}, "action_families": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/action_family"}}, "actor_relations": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/actor_relation"}}, "outcome_codes": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/outcome_code"}}, "effective_time_window": {"anyOf": [{"$ref": "#/$defs/time_window"}, {"type": "null"}]}, "maximum_results": {"type": "integer", "minimum": 0, "maximum": 10}, "maximum_bytes": {"type": "integer", "minimum": 256, "maximum": 32768}, "freshness_deadline": {"$ref": "#/$defs/timestamp"}, "reduction_reason_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "issued_at": {"$ref": "#/$defs/timestamp"}, "expires_at": {"$ref": "#/$defs/timestamp"}, "read_only": {"const": true}, "command_authority": {"const": false}, "provider_authority": {"const": false}, "grant_digest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "bureau_memory_item": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "memory_item_id", "originating_bureau", "request_kind", "request_label_code", "action_family", "outcome_code", "initiator_relation", "target_kind", "started_at", "completed_at", "source_receipt_ref", "source_revision", "source_digest", "supersession_state", "relevance_reason_codes", "authority_ceiling", "memory_item_digest"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/schema_version"}, "memory_item_id": {"type": "string", "pattern": "^memory:[a-z0-9-]{1,64}$"}, "originating_bureau": {"$ref": "#/$defs/bureau"}, "request_kind": {"enum": ["read_projection", "advisory"]}, "request_label_code": {"type": "string", "pattern": "^[a-z0-9_.:-]{1,64}$"}, "action_family": {"$ref": "#/$defs/action_family"}, "outcome_code": {"$ref": "#/$defs/outcome_code"}, "initiator_relation": {"$ref": "#/$defs/actor_relation"}, "target_kind": {"$ref": "#/$defs/target_kind"}, "opaque_target_ref": {"type": ["string", "null"], "pattern": "^opaque:[a-z0-9-]{1,64}$"}, "started_at": {"$ref": "#/$defs/timestamp"}, "completed_at": {"$ref": "#/$defs/timestamp"}, "source_receipt_ref": {"type": "string", "pattern": "^receipt:[a-z0-9-]{1,64}$"}, "source_revision": {"type": "string", "minLength": 1, "maxLength": 64}, "source_digest": {"$ref": "#/$defs/digest"}, "supersession_state": {"enum": ["CURRENT", "SUPERSEDED"]}, "relevance_reason_codes": {"$ref": "#/$defs/string_list"}, "authority_ceiling": {"const": "read_context_only"}, "memory_item_digest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "context_frame": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "frame_id", "frame_type", "source_class", "source_refs", "practice_binding_digest", "purpose_code", "items", "coverage_complete", "omission_codes", "observed_at", "assembled_at", "freshness_deadline", "expires_at", "source_revision", "evidence_mode", "redaction_disposition", "supersession_state", "read_only", "command_authority", "content_digest"],
+      "properties": {"schema_version": {"$ref": "#/$defs/schema_version"}, "frame_id": {"type": "string"}, "frame_type": {"$ref": "#/$defs/frame_type"}, "source_class": {"$ref": "#/$defs/source_class"}, "source_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "practice_binding_digest": {"$ref": "#/$defs/digest"}, "purpose_code": {"$ref": "#/$defs/purpose"}, "items": {"type": "array", "maxItems": 10, "items": {"$ref": "#/$defs/bureau_memory_item"}}, "coverage_complete": {"const": false}, "omission_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "observed_at": {"$ref": "#/$defs/timestamp"}, "assembled_at": {"$ref": "#/$defs/timestamp"}, "freshness_deadline": {"$ref": "#/$defs/timestamp"}, "expires_at": {"$ref": "#/$defs/timestamp"}, "source_revision": {"type": "string"}, "evidence_mode": {"const": "authored_synthetic"}, "redaction_disposition": {"const": "minimal_allowlist_only"}, "supersession_state": {"const": "CURRENT"}, "read_only": {"const": true}, "command_authority": {"const": false}, "content_digest": {"$ref": "#/$defs/digest"}}
+    },
+    "context_frame_set": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "frame_set_id", "need_digest", "grant_digest", "binding_digest", "selector_digest", "frames", "source_revisions", "omission_codes", "ambiguity_state", "maximum_disclosure", "assembled_at", "expires_at", "read_only", "command_authority", "frame_set_digest"],
+      "properties": {"schema_version": {"$ref": "#/$defs/schema_version"}, "frame_set_id": {"type": "string"}, "need_digest": {"$ref": "#/$defs/digest"}, "grant_digest": {"$ref": "#/$defs/digest"}, "binding_digest": {"$ref": "#/$defs/digest"}, "selector_digest": {"$ref": "#/$defs/digest"}, "frames": {"type": "array", "maxItems": 1, "items": {"$ref": "#/$defs/context_frame"}}, "source_revisions": {"type": "array", "maxItems": 1, "items": {"type": "string"}}, "omission_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "ambiguity_state": {"enum": ["NONE", "ALTERNATIVES"]}, "maximum_disclosure": {"type": "integer", "minimum": 0, "maximum": 10}, "assembled_at": {"$ref": "#/$defs/timestamp"}, "expires_at": {"$ref": "#/$defs/timestamp"}, "read_only": {"const": true}, "command_authority": {"const": false}, "frame_set_digest": {"$ref": "#/$defs/digest"}}
+    },
+    "context_selector_trace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "selector_version", "selector_digest", "grant_digest", "candidate_item_digests", "selected_item_ids", "rule_steps", "exclusion_reason_codes", "trace_digest"],
+      "properties": {"schema_version": {"$ref": "#/$defs/schema_version"}, "selector_version": {"const": "context-memory-selector.v1"}, "selector_digest": {"$ref": "#/$defs/digest"}, "grant_digest": {"$ref": "#/$defs/digest"}, "candidate_item_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/digest"}}, "selected_item_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "rule_steps": {"$ref": "#/$defs/string_list"}, "exclusion_reason_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "trace_digest": {"$ref": "#/$defs/digest"}}
+    },
+    "context_weave_trace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "weave_version", "need_digest", "grant_digest", "selector_digest", "selector_trace_digest", "frame_set_digest", "source_classes_queried", "scope_reduction_codes", "released_frame_ids", "raw_audit_accessed", "trace_digest"],
+      "properties": {"schema_version": {"$ref": "#/$defs/schema_version"}, "weave_version": {"const": "context-weave.v1"}, "need_digest": {"$ref": "#/$defs/digest"}, "grant_digest": {"$ref": "#/$defs/digest"}, "selector_digest": {"$ref": "#/$defs/digest"}, "selector_trace_digest": {"$ref": "#/$defs/digest"}, "frame_set_digest": {"$ref": "#/$defs/digest"}, "source_classes_queried": {"type": "array", "maxItems": 1, "items": {"$ref": "#/$defs/source_class"}}, "scope_reduction_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "released_frame_ids": {"type": "array", "maxItems": 1, "items": {"type": "string"}}, "raw_audit_accessed": {"const": false}, "trace_digest": {"$ref": "#/$defs/digest"}}
+    },
+    "context_proofreader_trace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "proofreader_version", "need_digest", "grant_digest", "selector_digest", "frame_set_digest", "selector_trace_digest", "weave_trace_digest", "checks", "release_decision", "reason_codes", "proofread_at", "trace_digest"],
+      "properties": {"schema_version": {"$ref": "#/$defs/schema_version"}, "proofreader_version": {"const": "context-proofreader.v1"}, "need_digest": {"$ref": "#/$defs/digest"}, "grant_digest": {"$ref": "#/$defs/digest"}, "selector_digest": {"$ref": "#/$defs/digest"}, "frame_set_digest": {"$ref": "#/$defs/digest"}, "selector_trace_digest": {"$ref": "#/$defs/digest"}, "weave_trace_digest": {"$ref": "#/$defs/digest"}, "checks": {"$ref": "#/$defs/string_list"}, "release_decision": {"enum": ["RELEASE", "BLOCK"]}, "reason_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "proofread_at": {"$ref": "#/$defs/timestamp"}, "trace_digest": {"$ref": "#/$defs/digest"}}
+    }
+  }
+}

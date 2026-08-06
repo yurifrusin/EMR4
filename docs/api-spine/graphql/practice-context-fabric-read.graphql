@@ -1,0 +1,167 @@
+# Provider-free Practice Context Fabric contract prototype.
+#
+# This is an unmounted documentation-only read extension. Authenticated backend
+# context supplies principal, roles, practice, location, session and authority.
+# It grants no provider invocation, raw audit access, persistence or command.
+
+extend type Query {
+  "Request one purpose-scoped, expiring read bundle from a non-authoritative candidate."
+  practiceContextFabric(candidate: ContextNeedCandidateInput!): ContextFrameSet!
+}
+
+input ContextNeedCandidateInput {
+  needId: ID!
+  requestingBureau: ContextBureau!
+  purposeCode: ContextPurpose!
+  requestedFrameTypes: [ContextFrameType!]!
+  sourceClasses: [ContextSourceClass!]!
+  entityFeatures: [ContextEntityFeatureInput!]!
+  temporalHint: ContextTemporalHint!
+  requestedWindow: ContextTimeWindowInput!
+  requestedFields: [ContextField!]!
+  maximumResults: Int!
+  freshnessSeconds: Int!
+  bureauMemorySelector: BureauMemorySelectorInput!
+}
+
+input ContextEntityFeatureInput {
+  kind: ContextEntityFeatureKind!
+  valueCode: String!
+}
+
+input ContextTimeWindowInput {
+  startsAt: DateTime!
+  endsAt: DateTime!
+}
+
+input BureauMemorySelectorInput {
+  originatingBureaus: [ContextBureau!]!
+  actionFamilies: [ContextActionFamily!]!
+  actorRelations: [ContextActorRelation!]!
+  outcomeCodes: [ContextOutcomeCode!]!
+  temporalHint: ContextTemporalHint!
+  maximumResults: Int!
+}
+
+type ContextNeedCandidate {
+  needId: ID!
+  requestingBureau: ContextBureau!
+  purposeCode: ContextPurpose!
+  commandAuthority: Boolean!
+  candidateDigest: String!
+}
+
+type ContextAuthorityBinding {
+  bindingId: ID!
+  bindingDigest: String!
+  expiresAt: DateTime!
+}
+
+type ContextNeed {
+  needDigest: String!
+  candidateDigest: String!
+  bindingDigest: String!
+}
+
+type ContextScopeGrant {
+  grantId: ID!
+  decision: ContextGrantDecision!
+  selectorDigest: String!
+  allowedFrameTypes: [ContextFrameType!]!
+  allowedSourceClasses: [ContextSourceClass!]!
+  effectiveTimeWindow: ContextTimeWindow!
+  maximumResults: Int!
+  readOnly: Boolean!
+  commandAuthority: Boolean!
+  providerAuthority: Boolean!
+  grantDigest: String!
+  expiresAt: DateTime!
+}
+
+type BureauMemorySelector {
+  originatingBureaus: [ContextBureau!]!
+  actionFamilies: [ContextActionFamily!]!
+  actorRelations: [ContextActorRelation!]!
+  outcomeCodes: [ContextOutcomeCode!]!
+  temporalHint: ContextTemporalHint!
+  maximumResults: Int!
+  selectorDigest: String!
+}
+
+type BureauMemoryItem {
+  memoryItemId: ID!
+  originatingBureau: ContextBureau!
+  requestLabelCode: String!
+  actionFamily: ContextActionFamily!
+  outcomeCode: ContextOutcomeCode!
+  initiatorRelation: ContextActorRelation!
+  targetKind: ContextTargetKind!
+  opaqueTargetRef: String
+  startedAt: DateTime!
+  completedAt: DateTime!
+  sourceReceiptRef: String!
+  sourceRevision: String!
+  sourceDigest: String!
+  supersessionState: ContextSupersessionState!
+  relevanceReasonCodes: [String!]!
+  authorityCeiling: ContextAuthorityCeiling!
+}
+
+type ContextFabricFrame {
+  frameId: ID!
+  frameType: ContextFrameType!
+  sourceClass: ContextSourceClass!
+  practiceBindingDigest: String!
+  purposeCode: ContextPurpose!
+  items: [BureauMemoryItem!]!
+  observedAt: DateTime!
+  assembledAt: DateTime!
+  freshnessDeadline: DateTime!
+  expiresAt: DateTime!
+  sourceRevision: String!
+  contentDigest: String!
+  readOnly: Boolean!
+  commandAuthority: Boolean!
+}
+
+type ContextFrameSet {
+  frameSetId: ID!
+  needDigest: String!
+  grantDigest: String!
+  bindingDigest: String!
+  selectorDigest: String!
+  frames: [ContextFabricFrame!]!
+  omissionCodes: [String!]!
+  ambiguityState: ContextAmbiguityState!
+  assembledAt: DateTime!
+  expiresAt: DateTime!
+  readOnly: Boolean!
+  commandAuthority: Boolean!
+  frameSetDigest: String!
+}
+
+type ContextSelectorTrace { selectorDigest: String!, traceDigest: String!, selectedItemIds: [ID!]! }
+type ContextWeaveTrace { selectorDigest: String!, traceDigest: String!, frameSetDigest: String! }
+type ContextProofreaderTrace { releaseDecision: ContextReleaseDecision!, selectorDigest: String!, frameSetDigest: String!, traceDigest: String! }
+type ContextTimeWindow { startsAt: DateTime!, endsAt: DateTime! }
+
+enum ContextBureau { BERNIE RAYLEEN DAVIDA CONSULTANT }
+enum ContextPurpose { RECENT_PRACTICE_WORK }
+enum ContextFrameType { BUREAU_MEMORY_ITEM_SET }
+enum ContextSourceClass { RECENT_COLLECTIVE_WORK }
+enum ContextField { REQUEST_LABEL_CODE OPAQUE_TARGET_REF }
+enum ContextEntityFeatureKind { TARGET_KIND REQUEST_LABEL }
+enum ContextTemporalHint { CURRENT_TURN CURRENT_SESSION CURRENT_PRACTICE_DAY PREVIOUS_PRACTICE_DAY RECENT_OPERATIONAL EXPLICIT_INTERVAL DURABLE_THREAD_LINK }
+enum ContextActionFamily { APPOINTMENT_READ WAITING_ROOM_READ PRACTICE_ADMINISTRATION_READ }
+enum ContextActorRelation { SELF SAME_PRACTICE_STAFF SYSTEM }
+enum ContextOutcomeCode { COMPLETED NOT_AVAILABLE BLOCKED }
+enum ContextTargetKind { APPOINTMENT WAITING_ROOM PRACTICE_SETTING }
+enum ContextAuthorityCeiling { READ_CONTEXT_ONLY }
+enum ContextSupersessionState { CURRENT SUPERSEDED }
+enum ContextGrantDecision { ADMIT NOT_AVAILABLE }
+enum ContextAmbiguityState { NONE ALTERNATIVES }
+enum ContextReleaseDecision { RELEASE BLOCK }
+
+# Deliberate exclusions: no principal, role, practice, location, consent or
+# authority-bearing input; no standalone memory/audit search; no command,
+# provider, raw prompt/response, mutation, subscription, resolver or route.

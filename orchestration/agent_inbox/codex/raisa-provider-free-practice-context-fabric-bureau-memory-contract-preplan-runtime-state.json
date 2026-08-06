@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_and_implement_provider_free_authored_synthetic_context_fabric_bureau_memory_contract",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at 462 lines, 54131 bytes and SHA-256 836f2fa65fe6b0bacd9752a34dadcf316bf36037e1267a6160e970ae6b5dd471. C5 is accepted and the provider-free authored-synthetic Practice Context Fabric and Bureau Memory Bank contract is the exact next implementation.",
+    "current_authority_allocation": "Yuri's standing uninterrupted-development authority covers derivation, planning, bounded dispatch, implementation, deterministic tests, independent review, recovery, acceptance and task-branch publication for this planned descendant. GPT Sol retains architecture and acceptance. Bounded workers may own separable authored-synthetic artifacts only; no worker receives integration, provider, product, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "The accepted Context Fabric direction and implementation plan require closed ContextNeedCandidate, backend ContextAuthorityBinding, ContextNeed, deterministic ContextScopeGrant, BureauMemorySelector, BureauMemoryItem, ContextFrame, ContextFrameSet, selector/weave and same-packet proofreader traces. Bureau memory is recent_collective_work only: derived, lossy, minimal, purpose-filtered, expiring and rebuildable, never raw audit access, current truth, identity proof, command evidence or provider-model memory. The first descendant is provider-free, authored-synthetic, in-memory and documentation-only with an unmounted read-only GraphQL surface.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, patient or clinical data, product data, real practice databases, raw audit, persistence, production retention, provider or external retrieval, ordinary services, product routes/resolvers, commands, writes, deployment, production, release, Pages, protected evidence and protected refs remain closed. docs/branding/ and all unrelated untracked receipt/state/evidence files must be preserved and excluded; explicit-path staging only.",
+    "git_refs_and_worktree": "The task worktree is codex/ariadne-bernie-davida-parallel-seam at HEAD 8812d584721df3f96981e218e74433004f683bce, aligned with its origin task ref. Local and origin master plus handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean and only preserved untracked files exist before this new runtime state; no protected ref will move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_bureau_memory_preplan_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the exact-head five-source readback and API Spine boundary classification."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini remains reserved for a fresh independent exact-head veto after deterministic gates."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek V4 Flash/high remains available for bounded separable implementation artifacts under an exact packet."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused and is not the selected transport."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Claude CLI is not selected independently; Claude Code bare is only the DeepSeek transport."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A native read-only scout identified the narrow file set and reusable contract patterns without edits or capability calls."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

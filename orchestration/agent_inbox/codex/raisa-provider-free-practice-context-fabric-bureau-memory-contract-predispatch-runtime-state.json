@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_bounded_context_fabric_documentation_and_contract_engine_lanes",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at exact task HEAD 8812d584721df3f96981e218e74433004f683bce; C5 passes and the provider-free Practice Context Fabric and Bureau Memory Bank contract is next.",
+    "current_authority_allocation": "Standing authority permits bounded parallel implementation. GPT Sol retains architecture, acceptance and Git integration; workers receive explicit file ownership only and no self-acceptance, provider, product, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "The frozen descendant contains closed typed schemas, deterministic in-memory selector/weave/proofreader logic, authored-synthetic fixtures and an unmounted GraphQL read document. Bureau memory is recent_collective_work only and cannot expose raw audit or supply current truth, identity, authority or command evidence.",
+    "protected_evidence_boundaries": "No protected holdout, PHI, patient/clinical/product data, raw audit, database, persistence, retention decision, provider/external retrieval, runtime route/resolver, command/write, deployment, production, release, Pages or protected-ref action. Preserve docs/branding/ and every unrelated untracked file; explicit-path staging only.",
+    "git_refs_and_worktree": "Task and origin task refs align at 8812d584721df3f96981e218e74433004f683bce. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Bounded lanes own distinct new files in the shared task worktree and may not run Git."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_bureau_memory_predispatch_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol froze the exact bounded work packets."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Gemini is reserved for later fresh independent veto."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Preferred external implementation transport remains available but is not required for these native file-separated lanes."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code remains unused."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Claude CLI is not selected independently."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native bounded lanes may edit only their enumerated new files and cannot accept or integrate."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

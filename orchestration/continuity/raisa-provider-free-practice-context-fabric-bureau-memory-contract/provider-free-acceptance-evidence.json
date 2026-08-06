@@ -1,0 +1,49 @@
+{
+  "artifact_hashes": {
+    "docs/api-spine/graphql/practice-context-fabric-read.graphql": "c1e6d304253bd112fb8cee34f480568918f0159da129e78a6245998a4d19adc2",
+    "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-design.md": "49ac70964d1353067a0806669c374ae8aafb85c90ae5c004c3b68ea95f5ffd0c",
+    "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-plan.md": "a324b06f150256123181659e6390235630628853ecdce8d8e590715438fe576a",
+    "docs/security/raisa-provider-free-practice-context-fabric-bureau-memory-contract-threat-model-delta.md": "8ce7f5b7bc00df8d1a4dd4d1724c4b18d76e2396d4c674c92d4a5c0f811f99fa",
+    "orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/context-fabric-contract.schema.json": "78980d3dbf84ce6bf6efba7fb43a880cc7d9437162ec3919c582378cf3b52cfd",
+    "scripts/raisa_provider_free_practice_context_fabric_bureau_memory_contract.py": "e80f96b1205613e076e77537ef1cd4759eb9682f3c7d4ea2e533fdad067ad318"
+  },
+  "artifact_set_digest": "sha256:6de5f5878378001d48fc960365309063a1fcbf501fc49c2c3f8b25e5e8da075e",
+  "authority_and_side_effects": {
+    "command_operations": 0,
+    "database_operations": 0,
+    "deployment_operations": 0,
+    "filesystem_write_operations_by_engine": 0,
+    "network_operations": 0,
+    "product_runtime_operations": 0,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "subprocess_operations_by_engine": 0
+  },
+  "claim_boundary": "Strict provider-free authored-synthetic contract behavior only; no product data, runtime, persistence, provider, command, deployment or production claim.",
+  "deterministic_checks": {
+    "digest_tamper_blocked": true,
+    "effective_interval_half_open": true,
+    "out_of_window_excluded": true,
+    "raw_audit_accessed": false,
+    "same_packet_proofreader_release": true,
+    "schema_valid": true,
+    "scope_only_narrows": true,
+    "selected_memory_item_count": 2,
+    "superseded_excluded": true
+  },
+  "evidence_label": "provider_free_authored_synthetic_contract",
+  "graphql_checks": {
+    "composition_valid": true,
+    "forbidden_hits": [],
+    "root_field_count": 1
+  },
+  "passed": true,
+  "result": "raisa_provider_free_practice_context_fabric_bureau_memory_contract_pass",
+  "schema_version": "emr4.practice_context_fabric_bureau_memory_acceptance.v1",
+  "source_head": "8812d584721df3f96981e218e74433004f683bce",
+  "static_checks": {
+    "caller_clocked": true,
+    "forbidden_calls": [],
+    "forbidden_imports": []
+  }
+}

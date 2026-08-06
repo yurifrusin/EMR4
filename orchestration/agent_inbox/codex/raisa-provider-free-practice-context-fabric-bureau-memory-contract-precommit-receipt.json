@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_commit_provider_free_context_fabric_contract_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, design and threat delta now have a strict Draft 2020-12 packet, pure caller-clocked selector/weave/proofreader engine, authored-synthetic example/evidence, candidate-only unmounted GraphQL extension and 134 passing focused/broader tests. Selector identity is digest-bound end to end, disclosure fields are closed and narrowed, and independently resealed out-of-scope content is blocked.",
+    "current_authority_allocation": "Standing uninterrupted-development authority permits bounded task-branch commit and later independent veto. GPT Sol retains acceptance and integration; the completed native lanes returned no-edit closeouts and no external worker or provider is active.",
+    "git_refs_and_worktree": "Task and origin task refs align at 8812d584721df3f96981e218e74433004f683bce. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the enumerated Context Fabric artifacts and receipts will be staged; no broad Git command is permitted.",
+    "live_handover_current_baton": "AGENTS.md was read completely after restoration at exact task HEAD 8812d584721df3f96981e218e74433004f683bce. The current baton names this provider-free Context Fabric and Bureau Memory Bank contract as the dependency-satisfied successor to accepted C5.",
+    "protected_evidence_boundaries": "No protected holdout, PHI, patient/clinical/product data, raw audit, database, persistence, production retention, provider/external retrieval, runtime resolver/route, command/write, deployment, production, release, Pages or protected-ref action. Preserve docs/branding/ and all unrelated untracked receipts/states/evidence; use explicit-path staging only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

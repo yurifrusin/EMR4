@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_commit_provider_free_context_fabric_contract_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after restoration at exact task HEAD 8812d584721df3f96981e218e74433004f683bce. The current baton names this provider-free Context Fabric and Bureau Memory Bank contract as the dependency-satisfied successor to accepted C5.",
+    "current_authority_allocation": "Standing uninterrupted-development authority permits bounded task-branch commit and later independent veto. GPT Sol retains acceptance and integration; the completed native lanes returned no-edit closeouts and no external worker or provider is active.",
+    "active_plan_and_acceptance": "The frozen plan, design and threat delta now have a strict Draft 2020-12 packet, pure caller-clocked selector/weave/proofreader engine, authored-synthetic example/evidence, candidate-only unmounted GraphQL extension and 134 passing focused/broader tests. Selector identity is digest-bound end to end, disclosure fields are closed and narrowed, and independently resealed out-of-scope content is blocked.",
+    "protected_evidence_boundaries": "No protected holdout, PHI, patient/clinical/product data, raw audit, database, persistence, production retention, provider/external retrieval, runtime resolver/route, command/write, deployment, production, release, Pages or protected-ref action. Preserve docs/branding/ and all unrelated untracked receipts/states/evidence; use explicit-path staging only.",
+    "git_refs_and_worktree": "Task and origin task refs align at 8812d584721df3f96981e218e74433004f683bce. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the enumerated Context Fabric artifacts and receipts will be staged; no broad Git command is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_bureau_memory_precommit_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reviewed and tightened the complete bounded candidate and all deterministic gates pass."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Gemini 3.6 Flash/high remains reserved for a fresh exact-head veto after this candidate commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No DeepSeek worker is active; the tightly coupled completion remained Sol-owned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude CLI is not selected independently."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Both earlier native lanes closed without edits or retained authority; neither requested authentication."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
