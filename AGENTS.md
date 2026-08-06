@@ -28,7 +28,7 @@ Use a fresh chat context for each named tranche by default. The new context must
 | Baton ref | `handoff/current` |
 | Active development worktree | `C:\Users\sarashera\emr4` on `codex/ariadne-bernie-davida-parallel-seam`; protected integration remains closed and single-track through `master` |
 | Worker worktree root | `C:\Users\sarashera\EMR4-worktrees\` |
-| Required Git relation | The accepted source-specific durability architecture source is task HEAD `14e8d3257b9531601260bef094c73e08a9c7b92d`; bounded tracked closeout and next-plan changes are permitted before task-branch push. Origin task remains at prior closeout `64439484e124848a542d0db9d0603d1c37d520d2` until that push. Local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`; user-owned untracked `docs/branding/` remains preserved and excluded |
+| Required Git relation | The accepted source-specific durability architecture source is `14e8d3257b9531601260bef094c73e08a9c7b92d`; task HEAD and `origin/codex/ariadne-bernie-davida-parallel-seam` align at closeout `9e26c0b87f8b37e761ec12da8f0fc090e7b8dec0`. Bounded tracked next-plan changes are permitted. Local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`; user-owned untracked `docs/branding/` remains preserved and excluded |
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.6 Flash/high through a fresh Antigravity project |
