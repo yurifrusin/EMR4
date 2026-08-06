@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_native_read_only_durability_migration_transaction_architecture_plan_challenge",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan specifies 16 closed normalized relations, exact one-login/one-practice-capability-source-epoch binding, non-multiplexed pools, rollback-safe READ COMMITTED producer positions, SERIALIZABLE coordinator/key/retention transactions, lifecycle-owned recovery anchors, total-order decision/rotation journaling, complete-census retention and 18 future database-backed authored-synthetic attacks. Review must challenge whether those semantics preserve the accepted state machine and API Spine before inert DDL design begins.",
+    "current_authority_allocation": "GPT Sol retains architecture meaning, recovery, acceptance, integration and baton authority. One fresh native reviewer may challenge only the exact allowlisted non-protected source at bea7d7193503c9176acea24395d3b7727f617454 and return findings; it receives no mutation, implementation, self-acceptance, provider, database/runtime, protected-ref or push authority.",
+    "git_refs_and_worktree": "Task HEAD is bea7d7193503c9176acea24395d3b7727f617454. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The reviewer uses C:/Users/sarashera/EMR4-worktrees/r23 on codex/review-durability-migration-transaction-plan-bea7d719 at exact clean HEAD and must leave branch, HEAD and tracked state unchanged.",
+    "live_handover_current_baton": "The live handover accepts the provider-free durability state-machine rehearsal and names the migration/transaction architecture as the next closed descendant. The exact frozen architecture-plan candidate is bea7d7193503c9176acea24395d3b7727f617454.",
+    "protected_evidence_boundaries": "The reviewer may inspect AGENTS.md; the exact plan/design/threat/test/implementation-plan change; accepted source-specific durability and state-machine plan/design/threat/contract/schema/closeout; API Spine ADR/programme and exact async/event/GraphQL contracts; and AER current state. It must not enumerate/search/open protected holdouts, historical Diary, branding, unrelated receipts/evidence, app/database/runtime/provider surfaces, or mutate any file/ref."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

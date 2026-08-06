@@ -38,14 +38,14 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 48
+    assert register["register_revision"] == 49
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 51)
+        f"AER-{index:04d}" for index in range(1, 53)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == []
+    ] == ["AER-0051"]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 38
+    assert len(agent_incidents) == 40
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -144,6 +144,29 @@ def test_durability_state_candidate_veto_is_closed_by_fresh_review() -> None:
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["correction"]["status"] == "recovery_lease_applied"
+
+
+def test_migration_architecture_plan_veto_and_review_bootstrap_are_preserved() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    plan = incidents["AER-0051"]
+    assert plan["status"] == "open"
+    assert plan["workflow_disposition"] == "recovery_lease_invoked"
+    assert plan["category"] == "reasoning_claim_error"
+    assert plan["correction"]["status"] == "control_implemented_pending_acceptance"
+    assert "authenticated immutable observation-admission" in plan["correction"]["action"]
+
+    process = incidents["AER-0052"]
+    assert process["status"] == "corrected"
+    assert process["workflow_disposition"] == "attempt_rejected_and_escalated"
+    assert process["category"] == "command_scope_violation"
+    assert process["recurrence_signature"] == (
+        "verifier.unapproved_environment_bootstrap"
+    )
+    assert process["correction"]["status"] == "corrected_fresh_attempt"
+    assert "uv, pip and environment bootstrap" in process["correction"][
+        "prevention_control"
+    ]
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -766,27 +789,27 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 50
-    assert report["open_incident_ids"] == []
+    assert report["incident_count"] == 52
+    assert report["open_incident_ids"] == ["AER-0051"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 38,
+        "agent_behavior": 40,
         "harness": 3,
         "repository": 2,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 6,
+        "command_scope_violation": 7,
         "evidence_misreport": 5,
         "harness_failure": 3,
         "output_contract_violation": 17,
         "read_only_violation": 2,
-        "reasoning_claim_error": 8,
+        "reasoning_claim_error": 9,
         "repository_defect": 2,
         "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 39,
+        "canonical_unchanged": 41,
         "untrusted_partial_worktree": 9,
     }
     assert report["recurring_patterns"] == [

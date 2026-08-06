@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 48,
+  "register_revision": 49,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1944,6 +1944,82 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-final-independent-review.md",
           "docs/ariadne-agent-error-correction-register-revision-48.md",
           "tests/test_raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0051",
+      "attempt_id": "raisa-context-fabric-durability-migration-transaction-architecture-plan-veto-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-durability-migration-transaction-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation to an authenticated immutable admission, preserve exact redelivery independently of source retention, represent an independent current recovery anchor, include lifecycle in atomic decision effects and define one exact key-schedule/rotation scope.",
+      "observed_error": "Candidate bea7d719 accepted an unauthenticated coordinator decision packet, selected the source row before redelivery despite independent source retention, stored only an immutable baseline-like anchor coordinate while checkpoints advanced, omitted lifecycle from the authoritative coordinator staging list and left key intervals ambiguous between stream-global and generation-local scope.",
+      "detection_method": "A fresh exact-head native adversarial plan veto reconciled the parent durability contract, plan transaction order, retention families, anchor representation and key lifecycle and returned five P1 contradictions before implementation admission.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
+        "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-49.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.durability_database_admission_anchor_redelivery_rotation_underfrozen",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Sol preserved and rejected the vetoed plan, added an authenticated immutable observation-admission relation and receiver, made redelivery receipt/admission-first and source-independent, added append-only lifecycle-owned anchors with an anchor-before-next-transition fence, made DECISION lifecycle append atomic and scoped key intervals/rotation to one exact observer generation. Fresh exact-head acceptance remains pending.",
+        "prevention_control": "Before accepting a database realization of an asynchronous state machine, trace authority and retention across every inter-principal handoff, prove redelivery after each independently eligible purge, map every evolving independent anchor to an append-only relation/fence, enumerate every atomic member and choose one exact scope for every shared-looking schedule.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
+          "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"
+        ]
+      },
+      "status": "open"
+    },
+    {
+      "incident_id": "AER-0052",
+      "attempt_id": "raisa-context-fabric-durability-migration-transaction-architecture-plan-veto-process-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-durability-migration-transaction-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_native_subagent",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A read-only exact-head reviewer packet must never direct an environment-bootstrap-capable command inside the review worktree and must stop on a missing already-installed dependency without creating ignored files.",
+      "observed_error": "The orchestrator packet recommended uv run --frozen in a clean disposable review worktree. Despite offline/no-sync/no-bytecode/no-cache controls, uv created an ignored .venv before pytest failed on missing authlib, breaching the filesystem read-only constraint.",
+      "detection_method": "The native reviewer immediately self-reported the unexpected .venv; the conductor resolved and inspected the exact target, verified its parent was only the disposable r23 worktree and confirmed the failed import occurred before collection.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-49.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "verifier.unapproved_environment_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The conductor previewed an exact ignored-path cleanup that named only .venv/, removed only C:/Users/sarashera/EMR4-worktrees/r23/.venv, re-established a clean exact HEAD and prohibited further writing-capable checks. The replacement veto must use a known existing interpreter or no-conftest static checks and must never invoke uv/pip/environment bootstrap in the review worktree.",
+        "prevention_control": "Every read-only review packet must forbid uv, pip and environment bootstrap explicitly, name an already-present absolute interpreter when one is proven, and otherwise require stop-and-report or non-importing static inspection; an ignored virtual environment is still a filesystem write.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
+          "docs/ariadne-agent-error-correction-register-revision-49.md"
         ]
       },
       "status": "corrected"

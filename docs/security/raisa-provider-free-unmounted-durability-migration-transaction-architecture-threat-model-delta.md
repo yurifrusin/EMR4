@@ -2,13 +2,14 @@
 
 Date: 2026-08-06
 
-Status: architecture candidate
+Status: recovered architecture candidate pending fresh independent veto
 
 ## Trust boundaries and assets
 
 Newly specified future boundaries are the producer transaction, payload-free
-outbox, observer login/projection, coordinator transaction, lifecycle/anchor
-authority, database binding registry, key-interval metadata and retention
+outbox, observer login/projection, authenticated admission receiver, immutable
+admission, coordinator transaction, append-only lifecycle/anchor authority,
+database binding registry, generation-local key-interval metadata and retention
 barrier. None is implemented by this tranche.
 
 Protected assets are practice isolation, appointment/source confidentiality,
@@ -26,20 +27,25 @@ and the separation between invalidation and current truth/commands.
 | Aggregate revision is treated as continuity | It is anomaly/freshness metadata only; only transaction position/predecessor determine continuity. |
 | Outbox leaks product or patient data | Closed columns only; no JSON/text/payload/product identifiers; raw event UUID is non-semantic, normalized and discarded. |
 | Observer reads base/product tables | Exact projection privilege only; direct base-table access denied. |
-| Coordinator becomes generic writer | One typed entry point; no direct table DML, source/product read, API or command authority. |
+| Observer packet is altered or forged at the coordinator | Receiver rederives observer `session_user`, reselects exact source membership and appends one immutable packet/source/binding admission; coordinator accepts only stored admission meaning. |
+| Observer gains persistence authority through admission | Observer has no DML/checkpoint privilege; receiver-owned function admits only the exact closed packet and receiver has no durability-effect authority. |
+| Coordinator becomes generic writer | One typed entry point; no direct table DML, raw source/product read, admission creation, API or command authority. |
 | Caller forges `app.current_practice_id` | Authority derives from authenticated `session_user` binding; caller GUC/packet/argument is never sufficient. |
 | Pool reuses one broad login across practices/capabilities | Exactly one active practice/capability/source/epoch binding per credential-bearing login; duplicate binding and cross-boundary pool reuse fail closed. |
 | RLS is bypassed through owner/inheritance/SET ROLE | Forced RLS, non-login owner, NOINHERIT/NOBYPASSRLS roles, public/default revoke and negative privilege matrix. |
 | Unsafe security-definer resolves attacker objects | Fixed empty/schema-qualified search path, no dynamic SQL, owner non-login, public execute revoked. |
 | Partial coordinator effects survive | SERIALIZABLE transaction and exact checkpoint lock; receipt/watermark/retirement/obligation/lifecycle/audit/checkpoint are atomic. |
 | `ON CONFLICT DO NOTHING` hides corruption | Exact redelivery comparison; mismatch, reuse or gap atomically rebase. |
+| Safe source purge breaks exact redelivery | Receipt and immutable admission are consulted before new-position work and retained together; redelivery never requires the source row. |
 | Rotation revision is rewritten as audit | One total-order lifecycle journal with one-to-one decision audit details. |
 | Obligation count drifts | Bucket rederived from canonical admitted history under checkpoint lock; no caller or convenience counter authority. |
-| Coordinator self-anchors restart | Immutable anchor created by separate lifecycle authority; exact anchor/state/next-row agreement required. |
-| Key interval is retroactively edited or key tried by fallback | Exact gap-free future-fenced partition; no historical change, key bytes or try-every-key behavior; failure consumes generation. |
+| Coordinator self-anchors restart | Append-only anchor per checkpoint lifecycle revision is created by separate lifecycle authority; next transition is fenced until exact anchor/state agreement. |
+| Crash occurs after checkpoint commit but before anchor | No next transition; lifecycle authority independently verifies the complete committed state before appending the pending anchor, otherwise a new generation is required. |
+| Key rotation silently diverges across generations | Each partition and rotation is keyed to one exact generation; its schedule/lifecycle/checkpoint transaction changes no other generation. |
+| Key interval is retroactively edited or key tried by fallback | Exact generation-local gap-free future-fenced partition; no historical change, key bytes or try-every-key behavior; failure consumes that generation. |
 | Fast consumer/self-supplied census authorizes purge | SERIALIZABLE registry barrier and complete backend-derived non-consumed census; caller supplies no retention authority. |
 | Concurrent generation is omitted during purge | Registration/rebaseline and purge lock the same barrier. |
-| Source purge erases receipt/audit evidence | Three separate retention families and no cascade. |
+| Source purge erases admission/anchor/receipt/audit evidence | Three separate retention families, admissions/anchors in the receipt/checkpoint family, and no cascade. |
 | Capacity pressure silently drops continuity | Block/retry or consume/rebaseline under later policy; never discard unseen rows. |
 | Disabled/default state acquires credentials or moves data | No runtime binding and retention executor disabled; later gate proves zero capability. |
 | Event starts a fresh read or command | Event may invalidate and create inert obligation only; later read requires application principal and new grant. |

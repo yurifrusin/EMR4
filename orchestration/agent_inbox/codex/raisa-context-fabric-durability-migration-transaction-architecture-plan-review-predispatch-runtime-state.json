@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_native_read_only_durability_migration_transaction_architecture_plan_challenge",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover accepts the provider-free durability state-machine rehearsal and names the migration/transaction architecture as the next closed descendant. The exact frozen architecture-plan candidate is bea7d7193503c9176acea24395d3b7727f617454.",
+    "current_authority_allocation": "GPT Sol retains architecture meaning, recovery, acceptance, integration and baton authority. One fresh native reviewer may challenge only the exact allowlisted non-protected source at bea7d7193503c9176acea24395d3b7727f617454 and return findings; it receives no mutation, implementation, self-acceptance, provider, database/runtime, protected-ref or push authority.",
+    "active_plan_and_acceptance": "The frozen plan specifies 16 closed normalized relations, exact one-login/one-practice-capability-source-epoch binding, non-multiplexed pools, rollback-safe READ COMMITTED producer positions, SERIALIZABLE coordinator/key/retention transactions, lifecycle-owned recovery anchors, total-order decision/rotation journaling, complete-census retention and 18 future database-backed authored-synthetic attacks. Review must challenge whether those semantics preserve the accepted state machine and API Spine before inert DDL design begins.",
+    "protected_evidence_boundaries": "The reviewer may inspect AGENTS.md; the exact plan/design/threat/test/implementation-plan change; accepted source-specific durability and state-machine plan/design/threat/contract/schema/closeout; API Spine ADR/programme and exact async/event/GraphQL contracts; and AER current state. It must not enumerate/search/open protected holdouts, historical Diary, branding, unrelated receipts/evidence, app/database/runtime/provider surfaces, or mutate any file/ref.",
+    "git_refs_and_worktree": "Task HEAD is bea7d7193503c9176acea24395d3b7727f617454. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The reviewer uses C:/Users/sarashera/EMR4-worktrees/r23 on codex/review-durability-migration-transaction-plan-bea7d719 at exact clean HEAD and must leave branch, HEAD and tracked state unchanged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_plan_review_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol froze the declarative plan after five static tests, Ruff, diff validation and a passed pre-commit receipt."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["One fresh native exact-head adversarial plan reviewer is available and warranted by the transaction, tenancy and retention safety surface."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["No external model/provider verifier call is authorised for this tranche."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is selected before plan acceptance."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-codex-durability-migration-transaction-plan-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

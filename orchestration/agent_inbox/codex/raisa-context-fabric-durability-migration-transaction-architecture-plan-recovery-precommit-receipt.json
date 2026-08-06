@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_durability_migration_transaction_architecture_plan_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The recovered plan freezes 18 closed relations including immutable authenticated admission and append-only recovery anchors; observer submission is receiver-mediated with no direct DML; coordinator redelivery is admission/receipt-first and source-independent; DECISION lifecycle is atomic; anchors fence every next transition; key intervals and rotation are generation-local; and 22 future database attacks cover the repairs. AER-0051 remains open pending fresh acceptance and AER-0052 is corrected after exact owned review-worktree cleanup.",
+    "current_authority_allocation": "GPT Sol owns recovery, plan meaning and acceptance. The first native veto was findings-only and is rejected as a final acceptance attempt after a read-only process breach; its material semantic findings are preserved. A genuinely fresh read-only exact-head veto will be required after recovery commit.",
+    "git_refs_and_worktree": "Task HEAD is bea7d7193503c9176acea24395d3b7727f617454 before the recovery commit; origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review worktree r23 was restored clean at bea7d719 after removing only its attempt-owned ignored .venv.",
+    "live_handover_current_baton": "The live baton accepts the pure durability state machine and permits the migration/transaction architecture descendant only within its provider-free unmounted declarative boundary. The first frozen plan bea7d719 is rejected; no implementation admission exists.",
+    "protected_evidence_boundaries": "No app/Alembic/Diary/API Spine/runtime source changed. No executable DDL, migration, database/source/network/provider contact, patient/product/protected data, command/write authority, operational credential, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

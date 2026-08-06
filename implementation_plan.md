@@ -125,7 +125,15 @@ restart anchoring, future-fenced rotation and complete-census retention after
 three preserved rejections and a fresh 29-attack/207-check veto. None of these
 acceptances gives the observer truth, returned-data, read, provider,
 persistence or command authority. Migration-and-transaction architecture is
-next; no migration, database/source or runtime is opened.
+next; no migration, database/source or runtime is opened. Its first frozen plan
+at `bea7d7193503c9176acea24395d3b7727f617454` was correctly rejected before
+implementation because proofread admission was unauthenticated, redelivery
+depended on independently purgeable source, evolving checkpoints lacked
+representable independent anchors, lifecycle append was omitted from atomic
+effects and key-schedule scope was ambiguous. The recovered plan adds an exact
+receiver-owned immutable admission, source-independent redelivery, append-only
+lifecycle-owned anchor fencing, atomic lifecycle append and generation-local
+key rotation; fresh exact-head veto acceptance remains pending.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -441,9 +449,12 @@ generation rehearsal. The architecture-only provider-free default-off
   retention/key/audit contracts. The pure authored-synthetic durability state-
   machine rehearsal is accepted at exact reviewed HEAD
   `95a2ed5e960c58686262b5e82ce2e89354a3860a`, with 33 evidence cases and a fresh
-  29-attack/207-check veto. The next step freezes provider-free unmounted
-  migration-and-transaction architecture before any inert DDL rehearsal,
-  applied migration, live implementation, real-product or clinical descendant.
+  29-attack/207-check veto. The migration-and-transaction plan is now in bounded
+  recovery after its first exact-head veto; only a fresh acceptance of the
+  authenticated admission, source-independent redelivery, append-only anchor
+  fence, atomic lifecycle and generation-local key corrections may admit an
+  inert DDL rehearsal. No applied migration, live implementation, real-product
+  or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

@@ -42,9 +42,11 @@ def test_future_relation_catalogue_is_exact_and_closed() -> None:
         "context_observation_stream_head",
         "diary_context_aggregate_aliases_v1",
         "diary_context_observation_outbox_v1",
+        "context_proofread_observation_admission",
         "context_generation_registry_barrier",
         "context_observer_generation",
         "context_durability_checkpoint",
+        "context_recovery_anchor",
         "context_classified_observation_receipt",
         "context_frame_generation",
         "context_invalidation_watermark",
@@ -94,7 +96,11 @@ def test_authority_binding_and_transactions_are_fail_closed() -> None:
         "rebase_required",
         "retention_execution_enabled: false",
         "producer neither holds the observer key",
-        "without returning the raw uuid or alias",
+        "only this admitted row",
+        "never accepts a caller-supplied decision packet",
+        "source-membership digest",
+        "next lifecycle transition",
+        "exact anchor",
     ):
         assert phrase in joined
 
@@ -113,6 +119,8 @@ def test_continuity_and_retention_reject_unsafe_shortcuts() -> None:
         "one immutable total-order journal",
         "decision` and `key_rotation`",
         "bucket from canonical admitted audit history",
+        "generation-local metadata",
+        "changes no other generation",
     ):
         assert phrase in joined
 
@@ -125,6 +133,9 @@ def test_database_backed_acceptance_is_future_and_adversarial() -> None:
         "rollback after every producer member",
         "concurrent same-stream producers",
         "concurrent coordinators",
+        "after authorized source-row",
+        "post-decision and post-rotation anchors",
+        "lifecycle append",
         "cross-practice reads",
         "caller-set practice guc",
         "incomplete/filtered census",

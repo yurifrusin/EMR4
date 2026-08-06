@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: design candidate bound to the frozen plan
+Status: recovered design candidate pending fresh independent veto
 
 ## Purpose
 
@@ -11,22 +11,24 @@ PostgreSQL shape without creating or contacting PostgreSQL. The design makes
 transactional position, tenant binding, coordinator atomicity, recovery and
 retention mechanically expressible before inert DDL or a migration is allowed.
 
-## Four trust planes
+## Trust planes
 
 ```mermaid
 flowchart LR
     P["Existing signed update-confirm producer"] -->|"same transaction"| O["Payload-free control outbox"]
     O -->|"exact scoped read"| B["Observation membrane + proofreader"]
-    B -->|"closed decision packet"| C["Durability coordinator entry point"]
-    C --> D["Receipt + watermark + retirement + obligation + audit + checkpoint"]
-    A["Lifecycle/anchor authority"] --> D
+    B -->|"authenticated exact submit"| X["Immutable proofread admission"]
+    X -->|"locator only"| C["Durability coordinator entry point"]
+    C --> D["Receipt + watermark + retirement + obligation + lifecycle + audit + checkpoint"]
+    D -->|"independent verify"| A["Append-only lifecycle anchor"]
+    A -->|"fences next transition"| C
     R["Serialized retention authority"] --> O
     D -. "invalidation only" .-> F["Later fresh application read"]
 ```
 
-The producer, observer, coordinator, lifecycle/anchor, retention and later
-application-read principals are not aliases. None inherits authority from an
-event, checkpoint, frame or another plane.
+The producer, observer, admission receiver, coordinator, lifecycle/anchor,
+retention and later application-read principals are not aliases. None inherits
+authority from an event, checkpoint, frame or another plane.
 
 ## Source transaction
 
@@ -63,33 +65,67 @@ role and have no direct durability-table DML. Security-definer code, if later
 selected, has a non-login owner, fixed empty/schema-qualified search path, no
 dynamic SQL and no `PUBLIC` execute. Every tenant key includes `practice_id`.
 
+## Authenticated proofread admission
+
+The observer does not send a free-standing decision packet to the coordinator.
+It may execute one receiver-owned admission function. That function rederives
+the actual observer `session_user`, reselects the exact payload-free source row,
+validates coordinate/predecessor/aggregate revision and generation-local key
+interval, then appends one immutable closed admission. Its digest binds the
+authenticated observer/binding, source-membership digest and proofread packet.
+Raw UUID and alias values cross neither the receiver boundary nor the admission
+row.
+
+The observer has no direct DML or durability-state privilege; the admission
+receiver has no checkpoint/effect authority. The coordinator can identify an
+admission but cannot invent or replace one. Exact duplicate submission is
+inert; mismatch and digest reuse become corruption inputs. Operational database
+transport/channel and credential proof remain later gates.
+
 ## Coordinator transaction
 
 At `SERIALIZABLE`, the coordinator rederives binding, locks the generation
-registry barrier and exact checkpoint, validates immutable source-row
-membership without returning its raw UUID or alias, and consumes the already
-proofread HMAC-normalized observation/key-interval proof. It then derives all
-effects. Receipt, monotonic
-watermarks, one-way frame retirement, one coalesced obligation, lifecycle/
-audit and checkpoint disposition commit together.
+registry barrier and exact checkpoint, and verifies that the newest independent
+anchor equals that checkpoint. It then checks retained receipt/admission state
+before any new-position work. Exact redelivery uses those retained rows and
+therefore remains valid after independent source purge. For a new transition it
+reloads the immutable authenticated admission and generation-local key proof;
+it accepts no copied decision values and never reads raw source UUID/alias.
+
+Receipt, monotonic watermarks, one-way frame retirement, one coalesced
+obligation, the `DECISION` lifecycle row, audit and checkpoint disposition
+commit together.
 
 The lifecycle journal orders both decision and key-rotation entries. Decision
 audit is a one-to-one detail, so lifecycle revisions cannot be reassigned from
 rotation to audit. Obligation buckets are derived from canonical admitted
 history; no mutable exact cause counter or caller bucket becomes authority.
 
-Exact redelivery is inert. Any identity mismatch, digest reuse, gap, wrong
-predecessor/epoch, missing retained row or unverifiable key holds the last
-contiguous checkpoint, fully invalidates and atomically requires rebase.
+Exact redelivery is inert. Any identity mismatch, digest reuse, demonstrated
+admission gap, wrong predecessor/epoch, missing required admission or
+unverifiable key holds the last contiguous checkpoint, fully invalidates and
+atomically requires rebase. An event not yet admitted is ordinary waiting.
 
 ## Restart and anchors
 
-Lifecycle authority creates immutable recovery anchors independently of the
-coordinator. A candidate checkpoint is never its own authority. Resume requires
-exact agreement among the anchor, verified durability state and next retained
-source coordinate. Corrupt or missing state/anchor requires a new generation;
-verified continuity loss requires rebase. Neither path reconstructs current
-truth from an event or restores a retired frame.
+Lifecycle authority appends a distinct immutable recovery anchor for the
+baseline and every committed decision/rotation checkpoint. A candidate
+checkpoint is never its own authority, and the next lifecycle transition is
+blocked until the latest anchor exactly matches it. After a crash in the
+commit-to-anchor window, lifecycle authority may complete the pending anchor
+only by independently re-verifying the entire committed state; otherwise a new
+generation is required. Resume requires exact agreement among the anchor,
+verified durability state and next retained admission/source continuity.
+Neither path reconstructs current truth or restores a retired frame.
+
+## Generation-local key rotation
+
+Each interval partition belongs to one exact observer generation. One
+`SERIALIZABLE` routine rotation locks that generation's barrier, checkpoint,
+current anchor and schedule; preserves history and predecessor overlap; appends
+one `KEY_ROTATION` lifecycle row; and advances the schedule digest/checkpoint
+lifecycle revision. It changes no other generation. A matching independent
+anchor must exist before the next decision.
 
 ## Retention barrier
 
@@ -100,9 +136,11 @@ uses the slowest checkpoint, independent pins, key overlap and safety grace.
 The caller supplies none of that authority.
 
 Source, receipt/checkpoint and audit retention are independent; no cascade
-links them. Execution is disabled by default. Production duration, capacity
-and key-store selection remain later operational choices. Capacity pressure
-never legitimizes silent loss.
+links them. Admissions and anchors remain in the receipt/checkpoint family for
+as long as their receipt/restart/redelivery meaning is retained. Execution is
+disabled by default. Production duration, capacity and key-store selection
+remain later operational choices. Capacity pressure never legitimizes silent
+loss.
 
 ## Expand and rollback
 

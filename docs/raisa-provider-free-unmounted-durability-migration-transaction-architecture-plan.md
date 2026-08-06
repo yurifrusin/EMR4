@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: frozen bounded architecture plan candidate
+Status: recovered architecture plan candidate pending fresh independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
@@ -103,64 +103,83 @@ relations and no generic work queue or event store:
    observation digest and is then discarded; it never reaches receipt or audit.
    The predecessor is zero only at position one and otherwise exactly position
    minus one. Stream epoch is fixed to `1` for this source-contract version.
-4. `context_generation_registry_barrier` — one lock/barrier row per exact
+4. `context_proofread_observation_admission` — immutable, receiver-owned rows
+   keyed by the full observer-generation coordinate plus source position. One
+   hardened admission entry point rederives the actual observer `session_user`,
+   reselects the exact payload-free source row, validates its coordinate,
+   predecessor, aggregate revision and generation-local key interval, and binds
+   those facts to the closed proofread packet and its admission digest. The
+   row stores no raw event UUID, aggregate alias, payload, free text or product
+   identifier. The observer receives no direct DML and the coordinator may use
+   only this admitted row, never a caller-supplied decision packet.
+5. `context_generation_registry_barrier` — one lock/barrier row per exact
    practice/source/stream. Generation registration/rebaseline and later source
    retention must serialize on it.
-5. `context_observer_generation` — backend-complete generation registry keyed
-   by practice/source/stream/epoch/observer/generation, with closed lifecycle,
-   immutable recovery-anchor coordinates and controlling policy, principal,
-   binding, source, registry, impact and key-schedule digests. The lifecycle
-   role, not the coordinator, creates or consumes a generation.
-6. `context_durability_checkpoint` — exactly one state row per observer
+6. `context_observer_generation` — backend-complete generation registry keyed
+   by practice/source/stream/epoch/observer/generation, with closed lifecycle
+   and controlling policy, principal, binding, source, registry, impact and
+   generation-local key-schedule digests. The lifecycle role, not the
+   coordinator, creates or consumes a generation.
+7. `context_durability_checkpoint` — exactly one state row per observer
    generation, carrying `ACTIVE`, `REBASE_REQUIRED`, `REVOKED` or `CONSUMED`,
    the last contiguous classified position/digest, lifecycle revision, audit
    head digest and integrity metadata.
-7. `context_classified_observation_receipt` — immutable receipt keyed by the
+8. `context_recovery_anchor` — append-only lifecycle-owned rows keyed by the
+   full generation coordinate plus lifecycle revision. Each freezes the exact
+   committed checkpoint/state digest, last contiguous position/digest and all
+   controlling digests. Baseline and every later decision/rotation checkpoint
+   require their own anchor. The coordinator cannot create, rewrite or delete
+   one, and it cannot process the next lifecycle transition until an exact
+   anchor matches the current checkpoint.
+9. `context_classified_observation_receipt` — immutable receipt keyed by the
    full generation coordinate plus position, with observation digest,
    decision, reason, affected-frame mask, checkpoint disposition and lifecycle
    revision. Observation digest is unique within the generation so reuse at a
    different position is corruption.
-8. `context_frame_generation` — opaque generation id, exact closed frame type,
+10. `context_frame_generation` — opaque generation id, exact closed frame type,
    assembled-through position and one-way `CURRENT`/`RETIRED` lifecycle. A
    retired frame cannot become current.
-9. `context_invalidation_watermark` — one row per generation and closed frame
+11. `context_invalidation_watermark` — one row per generation and closed frame
    type; its position is monotonic and cannot exceed the classified
    checkpoint. It never stores replacement facts.
-10. `context_reassembly_obligation` — at most one pending obligation per frame
+12. `context_reassembly_obligation` — at most one pending obligation per frame
    generation, with earliest/latest positions, bounded rolling cause digest,
    and closed public count bucket. The coordinator derives the exact count and
    bucket from canonical admitted audit history under the checkpoint lock;
    callers cannot supply either and no convenience counter is persisted.
-11. `context_durability_lifecycle` — one immutable total-order journal for both
-    `DECISION` and `KEY_ROTATION` entries. Its revisions cover exactly every
-    lifecycle revision after the baseline without gaps or reuse, removing any
-    ambiguity between audit and rotation chronology.
-12. `context_durability_audit` — immutable minimized typed rows keyed by full
-    generation coordinate plus lifecycle revision, with prior/head digest and
-    one-to-one linkage to `DECISION` lifecycle entries and only the accepted
-    closed metadata. It is not Context Fabric content,
-    Bureau Memory, current truth, command evidence or cryptographic proof.
-13. `context_observation_key_interval` — metadata-only, ordered, gap-free,
-    non-overlapping inclusive-start/exclusive-end position intervals and opaque
-    key ids. Row checks alone are insufficient: one deferred exact constraint or
-    the owner transaction entry point must prove the complete interval partition.
-    No key bytes, cloud key resource or credential is stored.
-14. `context_recovery_pin` — independently owned closed pins over source,
-    receipt/checkpoint or audit retention families. Pins have typed reason and
-    lifecycle codes, never free text or product identity.
-15. `context_service_practice_binding` — exact authenticated database login,
-    logical capability, practice, source family, binding revision and active
-    interval. It contains no secret and is authoritative only when read inside
-    a hardened database entry point from the actual authenticated session.
-16. `context_retention_policy` — versioned safety constraints and disabled-by-
-    default executor state for the three independent retention families.
+13. `context_durability_lifecycle` — one immutable total-order journal for both
+     `DECISION` and `KEY_ROTATION` entries. Its revisions cover exactly every
+     lifecycle revision after the baseline without gaps or reuse, removing any
+     ambiguity between audit and rotation chronology.
+14. `context_durability_audit` — immutable minimized typed rows keyed by full
+     generation coordinate plus lifecycle revision, with prior/head digest and
+     one-to-one linkage to `DECISION` lifecycle entries and only the accepted
+     closed metadata. It is not Context Fabric content,
+     Bureau Memory, current truth, command evidence or cryptographic proof.
+15. `context_observation_key_interval` — generation-local metadata keyed by the
+     full observer-generation coordinate, with ordered, gap-free, non-overlapping
+     inclusive-start/exclusive-end position intervals and opaque key ids. One
+     deferred exact constraint or owner transaction entry point must prove the
+     complete partition for that generation. No key bytes, cloud key resource
+     or credential is stored.
+16. `context_recovery_pin` — independently owned closed pins over source,
+     receipt/checkpoint or audit retention families. Pins have typed reason and
+     lifecycle codes, never free text or product identity.
+17. `context_service_practice_binding` — exact authenticated database login,
+     logical capability, practice, source family, binding revision and active
+     interval. It contains no secret and is authoritative only when read inside
+     a hardened database entry point from the actual authenticated session.
+18. `context_retention_policy` — versioned safety constraints and disabled-by-
+     default executor state for the three independent retention families.
     Production durations, capacity and key-store selection remain later
     operational decisions.
 
 Every primary, unique and foreign key of a tenant-bearing relation includes
 non-null `practice_id` and the full necessary source/generation coordinate.
 Cross-practice foreign keys are impossible. Source-row deletion never cascades
-to receipt/checkpoint, audit, generation, pin or key-schedule state.
+to admission, anchor, receipt/checkpoint, audit, generation, pin or key-schedule
+state. Admission rows share the receipt/checkpoint retention family and cannot
+be removed while their receipt or redelivery comparison remains retained.
 
 ## Ownership, role and binding model
 
@@ -171,6 +190,8 @@ The future design must separate these logical planes:
   signed command transaction;
 - observer: exact practice/source scoped read of the closed payload-free
   projection only;
+- observation admission receiver: one authenticated, source-revalidated,
+  immutable proofread-packet admission only; the observer has no direct DML;
 - durability coordinator: one typed atomic durability transition only;
 - generation lifecycle/anchor authority: generation and independent recovery
   anchor creation/consumption only;
@@ -198,10 +219,12 @@ separation mechanically.
 Any later security-definer entry point must be owned by a non-login role, have
 a fixed schema-qualified search path, use no dynamic SQL, derive session
 identity before acting, revoke `PUBLIC` execute and expose no generic table or
-SQL operation. Direct table DML is denied to observer, coordinator, lifecycle
-and retention logins except for the exact capability mediated by their entry
-point. Static acceptance must prove that a forged `app.current_practice_id`
-cannot widen scope.
+SQL operation. Direct table DML is denied to observer, admission receiver,
+coordinator, lifecycle and retention logins except for the exact capability
+mediated by their entry point. The observer may execute only the receiver's
+closed admission function; this is candidate submission, not generic
+persistence or durability-state authority. Static acceptance must prove that a
+forged `app.current_practice_id` cannot widen scope.
 
 ## Producer transaction and position allocation
 
@@ -232,36 +255,69 @@ PostgreSQL sequences/identities, UUID/time ordering, `xmin`, transaction id,
 commit timestamp, WAL LSN, the existing `(occurred_at,event_id)` cursor and
 `aggregate_revision` are all ineligible as the durability position.
 
+## Authenticated admission transaction
+
+The observer never hands an unauthenticated packet to the coordinator. Through
+one narrow receiver-owned entry point at `READ COMMITTED`, the actual observer
+`session_user` is resolved to exactly one active observer/practice/source/epoch
+binding. The receiver then reselects the exact immutable source row, validates
+its coordinate, predecessor and aggregate revision, verifies the packet's
+generation-local key id/interval and closed schema, and appends one immutable
+`context_proofread_observation_admission` row. The admission digest binds the
+observer principal/binding, complete generation coordinate, source-membership
+digest and proofread decision packet. Raw UUID/alias values are discarded at
+the receiver boundary and never enter the admission.
+
+The observer has no table DML, coordinator function or checkpoint privilege.
+The receiver has no decision-effect, checkpoint, fresh-read or command
+authority. Exact resubmission returns the existing admission; same-position
+mismatch or observation-digest reuse is a typed corruption input for the
+coordinator and cannot overwrite the immutable row. Database transport
+authentication/channel protection and credential provisioning remain a later
+operational gate; this architecture does not claim they have been implemented
+or cryptographically proven.
+
 ## Coordinator transaction, isolation and lock order
 
 The future coordinator operates at `SERIALIZABLE` through one narrow typed
-entry point. It takes coordinates and a proofread closed decision packet but
-does not trust copied source or authority values. Inside the transaction it:
+entry point. A caller may provide only an admission locator; all decision and
+authority values are reloaded from the immutable admitted row. Inside the
+transaction it:
 
 1. rederives session binding;
 2. locks the exact generation registry barrier in the common global order;
 3. locks the exact generation/checkpoint row `FOR UPDATE`;
-4. selects and verifies the immutable payload-free control row internally by
-   its full coordinate, predecessor, aggregate revision and raw source
-   membership without returning the raw UUID or alias; the observer/proofreader
-   remains solely responsible for the HMAC-normalized observation digest and
-   key-interval proof;
-5. derives redelivery, contiguity, corruption and all canonical effects;
-6. stages receipt, watermarks, one-way retirement, coalesced obligation,
-   minimized audit and checkpoint disposition; and
-7. commits all members together or rolls all back.
+4. verifies that the latest lifecycle-owned recovery anchor exactly matches the
+   current checkpoint; an absent/pending/mismatched anchor permits no next
+   transition;
+5. loads an existing receipt and its retained admission first. Exact coordinate,
+   admission and observation digest equality returns the receipt without source
+   access or mutation; mismatch or digest reuse is corruption;
+6. when no receipt exists, loads and verifies the exact immutable admitted row,
+   its authenticated observer/binding, source-membership digest, key interval
+   and full coordinate; it never accepts a caller-supplied decision packet or
+   reads the raw source UUID/alias;
+7. derives contiguity, corruption and every canonical effect;
+8. stages receipt, watermarks, one-way retirement, coalesced obligation,
+   `DECISION` lifecycle row, minimized audit and checkpoint disposition; and
+9. commits all members together or rolls all back.
 
 The lock order is binding check, registry barrier, observer generation/
-checkpoint, then dependent rows in stable primary-key order. Producer and
-coordinator never acquire each other's head/checkpoint locks in reverse order.
+checkpoint, current recovery anchor, retained admission/receipt, key intervals,
+then dependent rows in stable primary-key order. Producer, admission receiver
+and coordinator never acquire each other's head/checkpoint locks in reverse
+order.
 Different practices and different observer generations do not share a global
 lock.
 
-Exact same-position/same-digest redelivery returns the stored receipt and makes
-no change. `ON CONFLICT DO NOTHING` alone is forbidden. Same-position mismatch,
-digest reuse, wrong predecessor/epoch, missing retained row, unknown key or a
-gap holds the last contiguous checkpoint, fully invalidates and moves the
-generation to `REBASE_REQUIRED` atomically.
+Exact same-position/same-admission/same-digest redelivery returns the stored
+receipt and makes no change even after the independently eligible source row is
+purged. `ON CONFLICT DO NOTHING` alone is forbidden. Same-position mismatch,
+digest reuse, wrong predecessor/epoch, missing required admission, unknown key
+or a demonstrated admitted-position gap holds the last contiguous checkpoint,
+fully invalidates and moves the generation to `REBASE_REQUIRED` atomically. A
+source row that simply has not yet produced an admission is ordinary waiting,
+not a fabricated gap.
 
 Deadlock and serialization retries are permitted only for exact PostgreSQL
 retryable SQLSTATEs, over the complete transaction, with the same idempotency
@@ -272,11 +328,22 @@ coordinator retry is safe only because exact redelivery is inert.
 
 ## Independent recovery anchors
 
-Generation anchors are immutable lifecycle-owned rows, not coordinator input
-or copied checkpoint state. An anchor binds practice/source/stream/epoch,
-observer generation, baseline and last trusted contiguous coordinate plus all
-controlling digests. Restart may resume only when the candidate durability
-state, exact anchor and exact next retained control row agree.
+Generation anchors are append-only immutable lifecycle-owned rows, not
+coordinator input or fields copied into the generation registry. An anchor
+binds practice/source/stream/epoch, observer generation, lifecycle revision,
+checkpoint integrity/state digest, baseline and last trusted contiguous
+coordinate plus all controlling digests. Lifecycle authority creates the
+baseline anchor before activation and a new anchor only after independently
+verifying each fully committed decision or rotation state. The coordinator
+cannot process the next lifecycle transition until the newest checkpoint has
+one exact anchor.
+
+A crash after a coordinator/rotation commit but before its independent anchor
+cannot skip ahead. The lifecycle authority may complete the pending anchor only
+after re-verifying the entire committed receipt/lifecycle/audit/checkpoint state;
+otherwise restart returns `NEW_GENERATION_REQUIRED`. A temporarily pending
+anchor merely blocks more admission processing; it is never inferred from the
+coordinator's candidate state.
 
 Missing, stale, rewritten or mismatched anchors return
 `NEW_GENERATION_REQUIRED`; verified states with missing/retained-row or key
@@ -291,11 +358,16 @@ login. The database stores only key ids, immutable position intervals and
 availability attestations from the separately bound key authority. It never
 stores key bytes or tries every key.
 
-Routine rotation runs as one `SERIALIZABLE` transaction, is future-fenced,
-changes no historical interval and retains
-the predecessor key through all dependent source/receipt/audit rows plus the
-safety overlap. Gap, overlap, retroactive edit, missing key, insufficient
-overlap or emergency revocation consumes the generation. Credential/key
+Each key schedule belongs to exactly one observer generation. Routine rotation
+runs as one `SERIALIZABLE` transaction over that generation's registry barrier,
+checkpoint, current recovery anchor and interval partition. It is future-
+fenced, changes no historical interval, appends exactly one `KEY_ROTATION`
+lifecycle row, advances the checkpoint's schedule digest/lifecycle revision and
+retains the predecessor key through all dependent source/admission/receipt/audit
+rows plus the safety overlap. It changes no other generation. The next decision
+is blocked until lifecycle authority appends the matching independent recovery
+anchor. Gap, overlap, retroactive edit, missing key, insufficient overlap or
+emergency revocation consumes that exact generation. Credential/key
 creation, cloud resource selection and secret administration remain later
 operational gates.
 
@@ -332,10 +404,14 @@ The later implementation must be expand-first and default-off:
 2. install narrow entry points and prove static/database acceptance while the
    producer and consumers remain disabled;
 3. bind exact operational identities only under a separate credential gate;
-4. establish one explicit practice/source baseline and stream epoch;
-5. enable the producer atomically for that exact boundary; and
-6. enable observer/coordinator only after source rows and recovery anchors are
-   admitted by database-backed authored-synthetic acceptance.
+4. establish one explicit practice/source/generation baseline, stream epoch and
+   lifecycle-owned baseline anchor;
+5. enable the producer atomically for that exact boundary;
+6. enable the observer and admission receiver for that exact binding only after
+   source/admission acceptance passes; then
+7. enable the coordinator only after immutable admissions and baseline/post-
+   transition anchors are admitted by database-backed authored-synthetic
+   acceptance.
 
 Before first production row, rollback may remove unused objects under a later
 authorized migration. After first row, rollback is non-destructive forward-fix;
@@ -353,30 +429,43 @@ authored synthetic opaque coordinates only. At minimum it must prove:
    different practices share no counter;
 3. duplicate idempotency yields one mutation/control row and altered reuse
    conflicts;
-4. concurrent coordinators serialize and exact redelivery is inert;
-5. same-position mismatch, digest reuse, gap, wrong predecessor/epoch, missing
-   row and key loss hold checkpoint and require rebase;
-6. aggregate-revision jumps, duplicates and reversals never act as position;
-7. failure after each coordinator member rolls back every durability effect;
-8. cross-practice reads, writes, foreign keys and claimed scope fail;
-9. every logical role fails every forbidden operation, including inheritance,
+4. only the exactly bound observer login can invoke admission; the receiver
+   revalidates source membership and a coordinator-supplied decision packet is
+   rejected;
+5. exact admission resubmission is inert, while same-position packet mismatch
+   and digest reuse cannot replace an admitted row and force rebase;
+6. concurrent coordinators serialize and exact redelivery is inert;
+7. exact receipt/admission redelivery still succeeds after authorized source-row
+   purge and performs no source access;
+8. same-position mismatch, digest reuse, demonstrated admitted-position gap,
+   wrong predecessor/epoch, missing required admission and key loss hold the
+   checkpoint and require rebase;
+9. aggregate-revision jumps, duplicates and reversals never act as position;
+10. failure after each coordinator member, including lifecycle append, rolls
+    back every durability effect;
+11. cross-practice reads, writes, foreign keys and claimed scope fail;
+12. every logical role fails every forbidden operation, including inheritance,
    `SET ROLE`, `BYPASSRLS`, owner and unsafe security-definer paths;
-10. caller-set practice GUC, packet practice and direct function argument cannot
+13. caller-set practice GUC, packet practice and direct function argument cannot
     widen the authenticated binding;
-11. JSON/text/direct identifier/raw UUID/correlation/session/payload smuggling
+14. JSON/text/direct identifier/raw UUID/correlation/session/payload smuggling
     fails at schema and entry-point boundaries;
-12. stale/tampered/missing recovery anchors and rewritten key schedules cannot
-    resume;
-13. incomplete/filtered census, fast checkpoint, active pin, unfinished key
+15. baseline, post-decision and post-rotation anchors are append-only and
+    lifecycle-owned; pending/crash/tampered/missing anchors block the next
+    transition and cannot resume unverified state;
+16. one generation's future-fenced rotation changes no other generation and its
+    `KEY_ROTATION` lifecycle/checkpoint effects are atomic;
+17. incomplete/filtered census, fast checkpoint, active pin, unfinished key
     overlap/grace and concurrent generation registration deny purge;
-14. source eligibility/execution cannot cascade to checkpoint/receipt/audit;
-15. disabled mode performs zero connection, credential acquisition or state
+18. source eligibility/execution cannot cascade to admission/anchor/checkpoint/
+    receipt/audit;
+19. disabled mode performs zero connection, credential acquisition or state
     movement;
-16. the existing staff route/cursor cannot satisfy observer/checkpoint
+20. the existing staff route/cursor cannot satisfy observer/checkpoint
     authority;
-17. no GraphQL mutation/subscription, REST command/route, acknowledgement or
+21. no GraphQL mutation/subscription, REST command/route, acknowledgement or
     event-triggered fresh read appears; and
-18. database constraints and digest chains are described only as integrity and
+22. database constraints and digest chains are described only as integrity and
     tamper-evidence controls, never cryptographic authenticity.
 
 This architecture tranche itself performs none of those database operations;
@@ -416,20 +505,21 @@ production, release, Pages or protected-ref movement. Preserve and exclude
    excluded.
 4. Producer positions are per-practice/stream, row-locked and rollback-safe in
    the existing mutation transaction; all ineligible coordinates are explicit.
-5. Distinct producer, observer, coordinator, lifecycle, retention and
-   application principals have non-overlapping ceilings.
+5. Distinct producer, observer, admission receiver, coordinator, lifecycle,
+   retention and application principals have non-overlapping ceilings.
 6. Forced RLS and binding derive authority from authenticated session identity,
    not caller GUC/packet/argument claims.
 7. Narrow entry points are fixed-search-path, no-dynamic-SQL, public-revoked and
-   generic-table-DML-free.
-8. Coordinator lock order, exact internal source revalidation and all-or-
-   nothing durability effects are frozen.
-9. Redelivery is inert; mismatch/reuse/gap/key/retention uncertainty fails
-   closed without checkpoint skipping.
-10. Recovery anchors and generation lifecycle are independent of coordinator
-    candidate state.
-11. Key metadata and availability are separate from secrets; unsafe rotation
-    consumes the generation.
+   generic-table-DML-free; observer submission does not grant direct DML.
+8. Authenticated source-revalidated admission, coordinator lock order and all-
+   or-nothing receipt/watermark/retirement/obligation/lifecycle/audit/checkpoint
+   effects are frozen.
+9. Redelivery is inert and source-row-independent; mismatch/reuse/demonstrated
+   admission gap/key/retention uncertainty fails closed without skipping.
+10. Append-only recovery anchors and generation lifecycle are independent of
+    coordinator candidate state and fence every next transition.
+11. Key metadata and availability are separate from secrets and scoped to one
+    exact generation; unsafe rotation consumes only that generation.
 12. Retention uses the complete serialized backend registry and three separate
     retention families, with execution disabled by default.
 13. Expand/enable/rollback and producer-availability behavior preserve no-loss
