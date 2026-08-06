@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 216 / Compass 198. The bounded C5 occupied authored-synthetic live rehearsal passes with one admitted Sydney Vertex call, generation-2 readback and complete cleanup. The provider-free Practice Context Fabric and Bureau Memory Bank contract is now next.
+> EMR4 is at Continuity 217 / Compass 199. The first provider-free Practice Context Fabric and Bureau Memory Bank contract passes at an exact independently reviewed HEAD. The Current operational weave is next.
 
 ## North star
 
@@ -206,32 +206,34 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    C5 source gates pass; the distinct serial pre-execution gate is next. Lineage parent: `model-required-bureau-c4-allowlisted-actuator-simulator`.
 95. **Bounded occupied model-required recovery proof — C5 Occupied Authored-Synthetic Live Rehearsal**
    C5 passes one source-bound authored-synthetic diagnosis, one-use recovery, generation-2 readback and complete cleanup loop. Lineage parent: `model-required-bureau-c5-provider-free-implementation-readiness`.
+96. **First executable Context Fabric grammar — Provider-free Practice Context Fabric and Bureau Memory Bank contract**
+   The provider-free authored-synthetic authority, scope, Memory Bank, weave and same-packet proofreader contract passes. Lineage parent: `model-required-bureau-c5-occupied-live-rehearsal`.
 
 ## Current position
 
-**C5 live proof accepted; Context Fabric contract is next — C5 Occupied Authored-Synthetic Live Rehearsal**
+**Context Fabric contract accepted; Current operational weave next — Provider-free Practice Context Fabric and Bureau Memory Bank contract**
 
-**Why this proof came next:** Provider-free source gates, Windows endpoint ownership, active-interpreter binding, fresh independent veto and the exact occupied run all pass.
+**Why this proof came next:** Closed schemas, deterministic narrowing, portable evidence and a fresh exact-head independent veto all pass.
 
-One bounded authored-synthetic model-required recovery loop passed with fresh readback, closed accounting and complete cleanup.
+The first unmounted provider-free Fabric and Memory Bank contract is accepted without opening data, runtime or command surfaces.
 
 ### What this unlocks
 
-- Begin the provider-free Practice Context Fabric and Bureau Memory Bank contract descendant.
-- Keep product routes, persistence, real data, provider retrieval and commands separately gated.
+- Compose existing Diary, waiting-room, directory and session read projections in the provider-free Current operational weave.
+- Retain the API Spine read/command separation and same-packet proofreader boundary.
 
 ### What it does not solve
 
-- General autonomous repair, production operations or arbitrary model correctness.
-- Patient, clinical, product, database, ordinary-service or provider-memory access.
-- Context Fabric runtime, persistence, commands, deployment, release, Pages or protected actions.
+- Patient, clinical or product-data access, historical retention or external evidence retrieval.
+- Provider-model memory, product runtime, persistence, commands, deployment or production.
+- Release, Pages, protected evidence or protected-ref movement.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
 - Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
 - Contract `committed-reschedule-availability-reconciliation`: **satisfied**
-- Bounded opening `api-change`: Define the first provider-free, authored-synthetic, unmounted Practice Context Fabric and Bureau Memory Bank read contract; no product route, persistence or runtime.
+- Bounded opening `api-change`: Compose existing authorised Diary, waiting-room, practitioner-directory and application-session read projections in a provider-free authored-synthetic Current operational weave; no new product route or source.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -286,7 +288,7 @@ Prerequisites:
 - A fresh Yuri decision naming the exact existing local feed adapter and a runtime threat model before any connection or persistent mailbox.
 - Explicit authentication, durable deduplication, persistence, failure, dead-letter and retention decisions while preserving separation from the development Continuity graph.
 
-### Raisa Practice Context Fabric — candidate
+### Raisa Practice Context Fabric — active
 
 How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?
 
@@ -294,9 +296,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Freeze a provider-free authored-synthetic architecture contract for ContextNeed, ContextScopeGrant, ContextFrameSet, weave trace, source classes, practice and principal scope, purpose, provenance, freshness, retention and per-Bureau projection.
-- Reuse the existing API Spine capability charters and typed context-frame contracts before defining any new envelope or temporal store.
-- Separately gate every patient, clinical or product-data projection, provider or external retrieval, historical-state retention, runtime persistence or wiring, command or write path, deployment, production or release descendant.
+- The first provider-free authored-synthetic Fabric and Memory Bank contract is accepted at exact reviewed source HEAD.
+- The Current operational weave may compose only existing authorised read projections without a new product route or source.
+- Separately gate patient, clinical or product data, persistence or retention, provider or external retrieval, product runtime, commands, deployment, production and release.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -485,6 +487,7 @@ Prerequisites:
 
 ## Map limits
 
+- Context Fabric contract acceptance proves an unmounted provider-free authored-synthetic grammar only; it creates no product, data, persistence, provider, command, deployment or protected authority.
 - C5 occupied acceptance proves one disposable authored-synthetic development loop only; it does not establish production repair, product/runtime/data authority, provider-model memory or Context Fabric implementation.
 - C5 implementation readiness proves provider-free source controls only; it does not prove a live target, provider diagnosis, recovery, cleanup, product runtime, Context Fabric, deployment, production or release.
 - C4 proves one in-memory authored-synthetic technical transition only; it does not prove a live model diagnosis, real target, database, external actuator, development recovery, deployment, production or release.
@@ -790,6 +793,9 @@ Prerequisites:
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md`
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md`
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md`
+- `docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-closeout.md`
+- `docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-design.md`
+- `docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-plan.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
@@ -863,6 +869,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-binding-admission-grant-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-practice-context-fabric-bureau-memory-contract-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
@@ -890,6 +897,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
@@ -939,6 +947,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-bureau-memory-contract-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-sol-acceptance.md`
@@ -1136,6 +1145,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-binding-admission-grant-boundary/live-local-http-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json`
+- `orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/context-fabric-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
@@ -1471,4 +1482,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 198; continuity graph revision 216._
+_Compass map revision 199; continuity graph revision 217._

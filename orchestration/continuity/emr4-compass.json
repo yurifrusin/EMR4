@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 198,
-  "updated_at": "2026-08-06T00:25:00Z",
-  "source_graph_revision": 216,
-  "orientation_statement": "EMR4 is at Continuity 216 / Compass 198. The bounded C5 occupied authored-synthetic live rehearsal passes with one admitted Sydney Vertex call, generation-2 readback and complete cleanup. The provider-free Practice Context Fabric and Bureau Memory Bank contract is now next.",
+  "map_revision": 199,
+  "updated_at": "2026-08-06T03:30:00Z",
+  "source_graph_revision": 217,
+  "orientation_statement": "EMR4 is at Continuity 217 / Compass 199. The first provider-free Practice Context Fabric and Bureau Memory Bank contract passes at an exact independently reviewed HEAD. The Current operational weave is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1630,32 +1630,47 @@
         "docs/emr4-model-required-bureau-c5-occupied-live-rehearsal-closeout.md",
         "orchestration/agent_inbox/codex/model-required-bureau-c5-occupied-live-rehearsal-sol-acceptance.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-practice-context-fabric-bureau-memory-contract",
+      "lineage_parent": "model-required-bureau-c5-occupied-live-rehearsal",
+      "strategic_role": "First executable Context Fabric grammar",
+      "outcome": "The provider-free authored-synthetic authority, scope, Memory Bank, weave and same-packet proofreader contract passes.",
+      "evidence": [
+        "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-plan.md",
+        "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-design.md",
+        "docs/security/raisa-provider-free-practice-context-fabric-bureau-memory-contract-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/context-fabric-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/provider-free-acceptance-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json",
+        "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-bureau-memory-contract-sol-acceptance.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "model-required-bureau-c5-occupied-live-rehearsal",
-    "strategic_role": "C5 live proof accepted; Context Fabric contract is next",
-    "why_now": "Provider-free source gates, Windows endpoint ownership, active-interpreter binding, fresh independent veto and the exact occupied run all pass.",
-    "outcome": "One bounded authored-synthetic model-required recovery loop passed with fresh readback, closed accounting and complete cleanup.",
+    "node_id": "raisa-provider-free-practice-context-fabric-bureau-memory-contract",
+    "strategic_role": "Context Fabric contract accepted; Current operational weave next",
+    "why_now": "Closed schemas, deterministic narrowing, portable evidence and a fresh exact-head independent veto all pass.",
+    "outcome": "The first unmounted provider-free Fabric and Memory Bank contract is accepted without opening data, runtime or command surfaces.",
     "unlocks": [
-      "Begin the provider-free Practice Context Fabric and Bureau Memory Bank contract descendant.",
-      "Keep product routes, persistence, real data, provider retrieval and commands separately gated."
+      "Compose existing Diary, waiting-room, directory and session read projections in the provider-free Current operational weave.",
+      "Retain the API Spine read/command separation and same-packet proofreader boundary."
     ],
     "does_not_solve": [
-      "General autonomous repair, production operations or arbitrary model correctness.",
-      "Patient, clinical, product, database, ordinary-service or provider-memory access.",
-      "Context Fabric runtime, persistence, commands, deployment, release, Pages or protected actions."
+      "Patient, clinical or product-data access, historical retention or external evidence retrieval.",
+      "Provider-model memory, product runtime, persistence, commands, deployment or production.",
+      "Release, Pages, protected evidence or protected-ref movement."
     ],
     "evidence": [
-      "docs/emr4-model-required-bureau-c5-disposable-live-development-recovery-plan.md",
-      "docs/emr4-model-required-bureau-c5-live-preexecution-orchestration-boundary.md",
-      "docs/security/emr4-model-required-bureau-c5-disposable-live-development-recovery-threat-model-delta.md",
-      "docs/security/emr4-model-required-bureau-c5-live-preexecution-orchestration-threat-model-delta.md",
-      "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-interpreter-binding-evidence.json",
-      "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/occupied-rehearsal-interpreter-binding-cost-ledger.json",
-      "orchestration/agent_inbox/antigravity/model-required-bureau-c5-interpreter-binding-review-receipt.json",
-      "docs/emr4-model-required-bureau-c5-occupied-live-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/model-required-bureau-c5-occupied-live-rehearsal-sol-acceptance.md"
+      "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-plan.md",
+      "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-design.md",
+      "docs/security/raisa-provider-free-practice-context-fabric-bureau-memory-contract-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/context-fabric-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/provider-free-acceptance-evidence.json",
+      "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json",
+      "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-bureau-memory-contract-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
@@ -1747,20 +1762,27 @@
     {
       "id": "raisa-practice-context-fabric",
       "title": "Raisa Practice Context Fabric",
-      "status": "candidate",
+      "status": "active",
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Freeze a provider-free authored-synthetic architecture contract for ContextNeed, ContextScopeGrant, ContextFrameSet, weave trace, source classes, practice and principal scope, purpose, provenance, freshness, retention and per-Bureau projection.",
-        "Reuse the existing API Spine capability charters and typed context-frame contracts before defining any new envelope or temporal store.",
-        "Separately gate every patient, clinical or product-data projection, provider or external retrieval, historical-state retention, runtime persistence or wiring, command or write path, deployment, production or release descendant."
+        "The first provider-free authored-synthetic Fabric and Memory Bank contract is accepted at exact reviewed source HEAD.",
+        "The Current operational weave may compose only existing authorised read projections without a new product route or source.",
+        "Separately gate patient, clinical or product data, persistence or retention, provider or external retrieval, product runtime, commands, deployment, production and release."
       ],
       "boundary_changes": [],
       "evidence": [
         "docs/raisa-practice-context-fabric-direction.md",
         "implementation_plan.md",
         "orchestration/bernie_interaction_model.md",
-        "docs/api-spine/manifests/agent-capability-charters.yaml"
+        "docs/api-spine/manifests/agent-capability-charters.yaml",
+        "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-plan.md",
+        "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-design.md",
+        "docs/security/raisa-provider-free-practice-context-fabric-bureau-memory-contract-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/provider-free-acceptance-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json",
+        "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-bureau-memory-contract-sol-acceptance.md"
       ]
     },
     {
@@ -2605,6 +2627,7 @@
     }
   ],
   "map_limits": [
+    "Context Fabric contract acceptance proves an unmounted provider-free authored-synthetic grammar only; it creates no product, data, persistence, provider, command, deployment or protected authority.",
     "C5 occupied acceptance proves one disposable authored-synthetic development loop only; it does not establish production repair, product/runtime/data authority, provider-model memory or Context Fabric implementation.",
     "C5 implementation readiness proves provider-free source controls only; it does not prove a live target, provider diagnosis, recovery, cleanup, product runtime, Context Fabric, deployment, production or release.",
     "C4 proves one in-memory authored-synthetic technical transition only; it does not prove a live model diagnosis, real target, database, external actuator, development recovery, deployment, production or release.",

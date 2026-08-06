@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-bureau-memory-review",
+  "branch": "codex/review-context-fabric-bureau-memory-1289f9b8",
+  "head": "cb1b0a712f8ee5340e73d8adde19103af0d9ed97",
+  "expected_head": "cb1b0a712f8ee5340e73d8adde19103af0d9ed97",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

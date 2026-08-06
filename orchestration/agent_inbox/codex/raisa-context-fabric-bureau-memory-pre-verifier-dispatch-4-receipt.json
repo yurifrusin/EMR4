@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_repaired_head_context_fabric_schema_constrained_gemini_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Repair commit cb1b0a712f8ee5340e73d8adde19103af0d9ed97 removes the impossible containing-commit self-reference, canonicalizes LF/CRLF hashes and binds eight source/test artifacts. The exact 157-test packet suite passes inside the independent review checkout. The prior admissible revision-required receipt remains preserved. Corrected packet sha256 is bdf5f0fa45efc2d29c913093bf05994c2d6aa355ebf6d30ef0f992daf9a5b3d3.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project owns independent veto only. GPT Sol retains architecture, recovery, acceptance and integration. Schema-constrained plan-mode review has exact read-only access to one non-protected worktree and no silent fallback.",
+    "git_refs_and_worktree": "Task HEAD is cb1b0a712f8ee5340e73d8adde19103af0d9ed97 while origin task remains 0ea34b195c3966c14c01d7b381bfe9782b1a5167 before later task-only push. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The clean non-protected review worktree is on codex/review-context-fabric-bureau-memory-1289f9b8 at exact repaired HEAD cb1b0a712f8ee5340e73d8adde19103af0d9ed97; fresh preflight sha256 is d40fdaa8812c5f19b41a884cfc68f454f428641f2c6791aa235ee1e8352c543f.",
+    "live_handover_current_baton": "AGENTS.md records the admitted Context Fabric revision-required review and the bounded evidence-portability repair as the active next action; the original implementation boundary remains unchanged.",
+    "protected_evidence_boundaries": "Review remains repository-local and provider-free. No protected holdout, historical PHI, patient/clinical/product data, raw audit, real database, external retrieval, product runtime, command/write, deployment, production, release, Pages or protected-ref action. No OAuth, credential, token or raw thought is retained. docs/branding/ remains forbidden."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

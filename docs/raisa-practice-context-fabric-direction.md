@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted strategic architecture direction; first provider-free contract next
+Status: accepted direction and first provider-free contract; Current operational weave next
 
 ## Purpose
 
@@ -225,8 +225,10 @@ not an informal transcript transfer.
 The direction should be implemented through narrow descendants rather than one
 large “memory” feature:
 
-1. **Fabric and Memory Bank contract** — provider-free authored-synthetic
-   schemas for `ContextNeedCandidate`, backend `ContextAuthorityBinding`,
+1. **Fabric and Memory Bank contract** — **accepted** at exact independently
+   reviewed source HEAD `cb1b0a712f8ee5340e73d8adde19103af0d9ed97`;
+   provider-free authored-synthetic schemas for `ContextNeedCandidate`, backend
+   `ContextAuthorityBinding`,
    `ContextNeed`, deterministic `ContextScopeGrant`, `BureauMemorySelector`,
    `BureauMemoryItem`, `ContextFrame`, `ContextFrameSet`, selector/weave trace
    and same-packet proofreader trace, aligned with the API Spine and existing

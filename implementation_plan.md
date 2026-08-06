@@ -53,8 +53,12 @@ Sydney Vertex `gemini-2.5-flash` diagnosis was deterministically admitted,
 generation 2 passed fresh process-plus-HTTP readback, the ledger closed after
 one call and cleanup proved zero reusable runtime capability. This does not
 open a product service, database, patient-data path, general repair agent,
-production, deployment or release action. The next dependency-satisfied action
-is the provider-free Practice Context Fabric and Bureau Memory Bank contract.
+production, deployment or release action. The first provider-free Practice
+Context Fabric and Bureau Memory Bank contract now passes at exact independently
+reviewed source HEAD `cb1b0a712f8ee5340e73d8adde19103af0d9ed97`. The next
+dependency-satisfied action is the provider-free Current operational weave,
+composing existing authorised Diary, waiting-room, directory and session reads
+without a new product route or data source.
 
 Raisa's accepted longer-range integration direction is the backend-owned
 **Practice Context Fabric** described in
@@ -62,10 +66,10 @@ Raisa's accepted longer-range integration direction is the backend-owned
 It will knit the Bureaus together by assembling query-shaped, permissioned,
 typed and expiring context frames from authoritative current, event, temporal,
 session and later clinical/evidence sources. It is not provider-model memory or
-a broad practice-data dump. The direction is accepted and its implementation
-sequence is planned, but no product/patient data, provider call, historical
-state, runtime route, command, deployment or production authority follows from
-this blueprint entry.
+a broad practice-data dump. The direction and first unmounted provider-free
+contract are accepted; the Current operational weave is next. No product/patient
+data, provider call, historical-state retention, runtime route, command,
+deployment or production authority follows from this blueprint entry.
 
 ### 1.1 Business & Licensing Model
 

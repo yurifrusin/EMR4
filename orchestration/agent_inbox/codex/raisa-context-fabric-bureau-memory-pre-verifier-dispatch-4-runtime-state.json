@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_repaired_head_context_fabric_schema_constrained_gemini_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the admitted Context Fabric revision-required review and the bounded evidence-portability repair as the active next action; the original implementation boundary remains unchanged.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project owns independent veto only. GPT Sol retains architecture, recovery, acceptance and integration. Schema-constrained plan-mode review has exact read-only access to one non-protected worktree and no silent fallback.",
+    "active_plan_and_acceptance": "Repair commit cb1b0a712f8ee5340e73d8adde19103af0d9ed97 removes the impossible containing-commit self-reference, canonicalizes LF/CRLF hashes and binds eight source/test artifacts. The exact 157-test packet suite passes inside the independent review checkout. The prior admissible revision-required receipt remains preserved. Corrected packet sha256 is bdf5f0fa45efc2d29c913093bf05994c2d6aa355ebf6d30ef0f992daf9a5b3d3.",
+    "protected_evidence_boundaries": "Review remains repository-local and provider-free. No protected holdout, historical PHI, patient/clinical/product data, raw audit, real database, external retrieval, product runtime, command/write, deployment, production, release, Pages or protected-ref action. No OAuth, credential, token or raw thought is retained. docs/branding/ remains forbidden.",
+    "git_refs_and_worktree": "Task HEAD is cb1b0a712f8ee5340e73d8adde19103af0d9ed97 while origin task remains 0ea34b195c3966c14c01d7b381bfe9782b1a5167 before later task-only push. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The clean non-protected review worktree is on codex/review-context-fabric-bureau-memory-1289f9b8 at exact repaired HEAD cb1b0a712f8ee5340e73d8adde19103af0d9ed97; fresh preflight sha256 is d40fdaa8812c5f19b41a884cfc68f454f428641f2c6791aa235ee1e8352c543f."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_bureau_memory_pre_verifier_dispatch_4_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed the bounded repair, fast-forwarded only the non-protected review branch and reproduced the exact suite in that checkout."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Authentication and the schema-constrained single-decision transport are both proved; this attempt is a fresh repaired-head candidate veto."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker is active during independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude CLI is not independently selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is active or assigned to this serial veto."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

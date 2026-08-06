@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_accepted_context_fabric_bureau_memory_contract_closeout_and_continuity",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen contract plan and design, repaired v2 evidence, fresh schema-constrained Gemini pass, closeout and Sol acceptance bind the exact provider-free result. The reviewer passed 132 tests; the expanded local regression packet passes after a separate 157-test independent-worktree reproduction.",
+    "current_authority_allocation": "GPT Sol owns acceptance, continuity and task-branch commit. Gemini 3.6 Flash/high completed independent veto only. No worker is active and no protected integration, deployment, release or Pages authority is open.",
+    "git_refs_and_worktree": "Task HEAD is cb1b0a712f8ee5340e73d8adde19103af0d9ed97 and origin task is 0ea34b195c3966c14c01d7b381bfe9782b1a5167 before bounded task-only push. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit accepted contract closeout, receipt, continuity, handover and supporting test paths may be staged.",
+    "live_handover_current_baton": "AGENTS.md records raisa_provider_free_practice_context_fabric_bureau_memory_contract_pass at exact reviewed source cb1b0a712f8ee5340e73d8adde19103af0d9ed97 and names the provider-free Current operational weave as next under standing planned-gate authority.",
+    "protected_evidence_boundaries": "No protected holdout, patient, clinical, product-derived or production data; raw audit; real database; persistence or retention; provider or external retrieval; product route/runtime; command/write; deployment, production, release, Pages, protected evidence or protected-ref action. docs/branding/ and unrelated receipt/state/evidence/cost-ledger files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

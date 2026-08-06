@@ -10,7 +10,7 @@ repair.
 
 - Worktree: `C:\Users\sarashera\EMR4-worktrees\raisa-context-fabric-bureau-memory-review`
 - Branch: `codex/review-context-fabric-bureau-memory-1289f9b8`
-- Required HEAD: `1289f9b822c571341b224ab9c6b5caaeefaf0c71`
+- Required HEAD: `cb1b0a712f8ee5340e73d8adde19103af0d9ed97`
 - Candidate branch is non-protected and must remain clean and unchanged.
 - Accepted C5 ancestor and task-branch base:
   `8812d584721df3f96981e218e74433004f683bce`.
