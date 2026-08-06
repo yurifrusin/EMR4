@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: fourth recovered architecture plan candidate pending fresh independent veto
+Status: fifth recovered architecture plan candidate pending fresh independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
@@ -273,10 +273,11 @@ The future producer remains the existing signed appointment update-confirm
 transaction. At `READ COMMITTED`, its fixed lock/effect order is:
 
 1. claim/read the existing idempotency result under its accepted contract; a
-   new command holds one exact `IN_PROGRESS` row for
+   new command inserts one exact `IN_PROGRESS` row in this transaction for
    `confirmAppointmentUpdateProposal` / `update-confirm`, bound to the practice,
    actor, idempotency-key digest and immutable request-body digest of the signed
-   confirmation envelope;
+   confirmation envelope. Replay, conflict, stale or any previously committed
+   `IN_PROGRESS` row is ineligible to produce;
 2. lock, authorize and update the exact appointment aggregate;
 3. append the existing appointment audit and committed event, populate the
    claim's existing `target_appointment_id` and `audit_log_id` while it remains
@@ -289,14 +290,18 @@ transaction. At `READ COMMITTED`, its fixed lock/effect order is:
    revalidates the exact `IN_PROGRESS` operation/route/request-digest claim,
    loads the sole `DiaryCommittedEvent` row through that binding, and
    verifies its exact reschedule type/schema, appointment, audit and aggregate
-   revision against the claim and locked product state. A completed, absent,
-   duplicate, foreign, mismatched or caller-substituted context fails before
-   any bridge/head/outbox effect;
+   revision against the claim and locked product state. It also compares the
+   claim, current appointment tuple version, audit and event `xmin` values with
+   the internally derived `pg_current_xact_id()` and verifies the immutable
+   claim `created_at` equals this transaction's start. A completed, previously
+   committed, absent, duplicate, foreign, mismatched or caller-substituted
+   context fails before any bridge/head/outbox effect;
 5. inside that same entry point, create or return the immutable bijective alias,
    lock the exact `(practice_id, stream_id)` head row `FOR UPDATE`, compute
    `position = last_position + 1` and `predecessor = last_position`, append the
    payload-free control row and advance the stream head; and
-6. complete the existing idempotency result before one transaction commit.
+6. complete the existing idempotency result, then satisfy the deferred commit
+   fence described below before one transaction commit.
 
 The alias operation is an owner-private subroutine of that single projection
 entry point; it has no separately grantable runtime execute path. The command
@@ -313,6 +318,43 @@ already owns the signed command transaction, but only the opaque alias crosses
 into the control projection or any observer/coordinator surface.
 After any emitted row, migration rollback is forward-fix and data-preserving;
 no downgrade may drop, truncate or silently stop the projection.
+
+### Transaction-local provenance and deferred commit fence
+
+`xmin` and `pg_current_xact_id()` are permitted only as an ephemeral same-
+transaction provenance comparison inside the narrow producer entry point and
+deferred constraint functions. The XID is derived by the database, never
+caller-supplied, stored in a user column, copied into a digest or outbox,
+retained after the transaction, exposed to an observer, or used as the durable
+position. The immutable claim `created_at = transaction_timestamp()` condition
+distinguishes a newly inserted claim from a previously committed row that was
+merely updated and therefore acquired a new tuple `xmin`.
+
+Owner-only fixed-search-path `DEFERRABLE INITIALLY DEFERRED` constraint
+triggers make the transaction fail at commit unless all of these bidirectional
+invariants hold for the exact reschedule family:
+
+- an event inserted in the transaction has the exact completed idempotency
+  claim, target appointment and audit, exactly one payload-free outbox row and
+  the matching stream-head advance;
+- an outbox row has that exact event and command result, and any alias first
+  inserted in the transaction is referenced by that outbox row;
+- no exact update-confirm claim can itself commit in `IN_PROGRESS`, even when
+  no temporal event was produced; a scoped before-update guard also forbids
+  target/audit/completion adoption when the prior claim tuple was not created
+  in the current transaction;
+- no eligible event can commit while its claim is failed, absent or bound to a
+  different target/audit; and
+- appointment mutation, audit, event, first alias, head advance, outbox and
+  idempotency completion therefore all commit once or all roll back.
+
+The producer cannot disable or defer the fence beyond transaction end, invoke
+the private trigger functions, supply an XID, or convert a previously committed
+claim/event into current provenance. Trigger functions use the same non-login
+owner, fixed schema-qualified search path, no dynamic SQL and no `PUBLIC`
+execute. A transaction-local comparison is evidence of atomic co-authorship,
+not durable ordering, cryptographic signature verification or authority beyond
+the already authenticated REST command.
 
 PostgreSQL sequences/identities, UUID/time ordering, `xmin`, transaction id,
 commit timestamp, WAL LSN, the existing `(occurred_at,event_id)` cursor and
@@ -484,7 +526,9 @@ The later implementation must be expand-first and default-off:
 1. create closed types/relations/constraints/RLS/owners with public/default
    privileges revoked and no runtime login binding;
 2. install narrow entry points and prove static/database acceptance while the
-   producer and consumers remain disabled;
+   producer and consumers remain disabled, including a zero census of legacy
+   committed exact update-confirm `IN_PROGRESS` rows before the transaction
+   guard can be enabled;
 3. bind exact operational identities only under a separate credential gate;
 4. establish one explicit practice/source/generation baseline, stream epoch and
    lifecycle-owned baseline anchor;
@@ -512,7 +556,10 @@ authored synthetic opaque coordinates only. At minimum it must prove:
    the sole unique-command event matching the locked appointment/revision is
    rejected with zero bridge/head/outbox effect; the command and projection are
    also proven to use one logical capability and one `session_user` without a
-   second login, role switch or transaction;
+   second login, role switch or transaction; a previously committed or merely
+   updated `IN_PROGRESS` claim/event fails the current-XID/immutable-created-at
+   check, and every event/outbox/alias/claim partial combination fails the
+   deferred commit fence with no durable effect;
 2. concurrent same-stream producers yield contiguous unique positions and
    different practices share no counter;
 3. duplicate idempotency yields one mutation, one immutable alias and one
@@ -640,8 +687,13 @@ production, release, Pages or protected-ref movement. Preserve and exclude
     semantics.
 14. Database-backed authored-synthetic positive and adversarial cases are exact
     and include disabled-mode zero-capability proof.
-15. Static tests prove that no application, migration, database/runtime/API,
-    provider, data, deployment or protected surface changed.
+15. Static tests validate the closed machine contract against its JSON Schema,
+    parse the existing idempotency/event constraints, mechanically reconcile
+    the exact 18 relations and owned artifact allowlist, and reject adversarial
+    relation, transaction-provenance, commit-fence, alias-key/lifecycle and
+    authority mutations; they also prove that no application, migration,
+    database/runtime/API, provider, data, deployment or protected surface
+    changed.
 16. The claim remains architecture-only and does not claim cryptographic
     authenticity or operational safety.
 

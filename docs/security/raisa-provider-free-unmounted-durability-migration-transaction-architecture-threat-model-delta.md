@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: fourth recovered architecture candidate pending fresh independent veto
+Status: fifth recovered architecture candidate pending fresh independent veto
 
 ## Trust boundaries and assets
 
@@ -30,6 +30,8 @@ and the separation between invalidation and current truth/commands.
 | Producer invokes alias creation outside the signed command | There is no separately executable alias helper. The sole producer projection entry point rederives `session_user` and requires the exact `IN_PROGRESS` update-confirm claim, matching locked appointment/revision and just-authored bound event before any alias/head/outbox effect. |
 | Atomic command is split across identities, capabilities or transactions | The signed update-confirm and projection use one physical connection, one transaction, one logical capability and one `session_user`; no second login, `SET ROLE` or transaction hand-off is permitted. |
 | Caller substitutes a claim, event or revision | The entry point locks the exact operation/route/request-digest claim, loads the sole event through its existing practice-scoped `(practice_id, command_id)` foreign key plus unique `command_id` constraint and verifies event type/schema, target appointment, audit and aggregate revision against the claim and locked product state. |
+| Same login reuses committed in-progress rows in a later transaction | Claim, appointment tuple version, audit and event must have database-derived `xmin = pg_current_xact_id()` and the immutable claim creation time must equal transaction start; XID is ephemeral, non-caller-supplied, non-retained and never a durability position. |
+| Producer call passes but a partial combination commits | Owner-only fixed-search-path before/deferred constraint triggers forbid prior-transaction claim adoption and any committed exact-operation `IN_PROGRESS` row, then fail commit unless event, completed claim, target/audit, outbox/head and any first alias are bidirectionally complete in the same transaction. |
 | Two product appointments share one alias or delete/recreate changes identity | Forward and reverse practice/source uniqueness make the mapping bijective; rows and aliases are immutable and non-deletable for the v1 epoch, same-appointment races return the winner and collision rolls back the command. |
 | Durability retention deletes or uses the product alias bridge as purge authority | The bridge is outside all three durability retention families, update/delete are prohibited for v1 and any future erasure/non-reuse scheme requires a new reviewed contract/epoch; it never cascades or rewrites retained opaque evidence. |
 | Alias-only failure survives command rollback | Appointment truth, audit, event, alias, head, outbox and idempotency result share one transaction; standalone/mismatched invocation fails before effect and every member rolls back together. |

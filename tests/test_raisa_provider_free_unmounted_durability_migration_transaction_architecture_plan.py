@@ -1,4 +1,10 @@
+import ast
+import copy
+import json
 from pathlib import Path
+
+import pytest
+from jsonschema import Draft202012Validator, ValidationError
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,10 +16,39 @@ DESIGN = PLAN.parent / PLAN.name.replace("-plan.md", "-design.md")
 THREAT = ROOT / "docs/security" / PLAN.name.replace(
     "-plan.md", "-threat-model-delta.md"
 )
+CONTRACT_DIR = ROOT / (
+    "orchestration/continuity/raisa-provider-free-unmounted-durability-"
+    "migration-transaction-architecture"
+)
+CONTRACT = CONTRACT_DIR / "migration-transaction-architecture-contract.json"
+CONTRACT_SCHEMA = CONTRACT_DIR / (
+    "migration-transaction-architecture-contract.schema.json"
+)
 
 
 def text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
+
+
+def data(path: Path) -> dict:
+    return json.loads(text(path))
+
+
+def class_node(path: Path, name: str) -> ast.ClassDef:
+    module = ast.parse(text(path))
+    return next(
+        node
+        for node in module.body
+        if isinstance(node, ast.ClassDef) and node.name == name
+    )
+
+
+def call_name(call: ast.Call) -> str | None:
+    if isinstance(call.func, ast.Name):
+        return call.func.id
+    if isinstance(call.func, ast.Attribute):
+        return call.func.attr
+    return None
 
 
 def test_architecture_plan_has_exact_api_and_non_authority_boundary() -> None:
@@ -193,3 +228,162 @@ def test_database_backed_acceptance_is_future_and_adversarial() -> None:
         "authored-synthetic migration/ddl rehearsal",
     ):
         assert phrase in plan
+
+
+def test_machine_contract_validates_and_has_exact_artifact_surface() -> None:
+    contract = data(CONTRACT)
+    schema = data(CONTRACT_SCHEMA)
+    Draft202012Validator.check_schema(schema)
+    Draft202012Validator(schema).validate(contract)
+
+    assert contract["relation_catalogue"]["count"] == 18
+    assert len(contract["relation_catalogue"]["names"]) == 18
+    assert len(set(contract["relation_catalogue"]["names"])) == 18
+
+    boundary = contract["artifact_boundary"]
+    for artifact in boundary["owned_artifacts"]:
+        assert (ROOT / artifact).exists()
+        assert not any(
+            artifact.startswith(prefix) for prefix in boundary["forbidden_prefixes"]
+        )
+    assert boundary["executable_ddl"] is False
+    assert boundary["database_contact"] is False
+    assert boundary["provider_contact"] is False
+    assert boundary["runtime_wiring"] is False
+
+
+def test_existing_idempotency_and_event_constraints_match_machine_contract() -> None:
+    contract = data(CONTRACT)["existing_model_contract"]
+    appointment_model = ROOT / "app/models/appointments.py"
+    event_model = ROOT / "app/models/diary_events.py"
+    idem = class_node(appointment_model, "AppointmentCommandIdempotency")
+    event = class_node(event_model, "DiaryCommittedEvent")
+
+    idem_assignments = {
+        target.id: node.value
+        for node in idem.body
+        if isinstance(node, ast.Assign)
+        and len(node.targets) == 1
+        and isinstance((target := node.targets[0]), ast.Name)
+    }
+    for field in (contract["target_binding_field"], contract["audit_binding_field"]):
+        call = idem_assignments[field]
+        assert isinstance(call, ast.Call)
+        assert call_name(call) == "Column"
+        nullable = next(keyword for keyword in call.keywords if keyword.arg == "nullable")
+        assert isinstance(nullable.value, ast.Constant)
+        assert nullable.value.value is True
+
+    event_calls = [node for node in ast.walk(event) if isinstance(node, ast.Call)]
+    unique_fields = {
+        tuple(
+            arg.value
+            for arg in call.args
+            if isinstance(arg, ast.Constant) and isinstance(arg.value, str)
+        )
+        for call in event_calls
+        if call_name(call) == "UniqueConstraint"
+    }
+    assert ("command_id",) in unique_fields
+    assert ("audit_log_id",) in unique_fields
+
+    foreign_keys = [
+        call for call in event_calls if call_name(call) == "ForeignKeyConstraint"
+    ]
+    assert any(
+        isinstance(call.args[0], (ast.List, ast.Tuple))
+        and [item.value for item in call.args[0].elts]
+        == contract["event_command_foreign_key"]
+        for call in foreign_keys
+    )
+
+    router = text(ROOT / "app/routers/appointments.py")
+    assert f'_UPDATE_CONFIRM_OPERATION_ID = "{contract["operation_id"]}"' in router
+    assert f'_UPDATE_CONFIRM_ROUTE_FAMILY = "{contract["route_family"]}"' in router
+    service = text(ROOT / "app/services/appointment_idempotency.py")
+    assert "record.target_appointment_id = target_appointment_id" in service
+    assert "record.audit_log_id = audit_log_id" in service
+
+
+def test_transaction_provenance_and_commit_fence_are_machine_closed() -> None:
+    producer = data(CONTRACT)["producer_transaction"]
+    provenance = producer["transaction_provenance"]
+    assert provenance == {
+        "database_xid_function": "pg_current_xact_id()",
+        "tuple_system_column": "xmin",
+        "required_current_transaction_tuples": [
+            "idempotency_claim",
+            "appointment_current_tuple",
+            "appointment_audit",
+            "diary_committed_event",
+        ],
+        "claim_inserted_in_current_transaction": True,
+        "immutable_claim_created_at_equals_transaction_timestamp": True,
+        "caller_supplied": False,
+        "stored_in_user_column": False,
+        "retained_after_commit": False,
+        "durability_position_authority": False,
+    }
+    fence = producer["deferred_commit_fence"]
+    assert fence["constraint_mode"] == "DEFERRABLE INITIALLY DEFERRED"
+    assert fence["bidirectional"] is True
+    assert fence["runtime_execute"] is False
+    assert fence["in_progress_event_commit_forbidden"] is True
+    assert fence["in_progress_claim_commit_forbidden"] is True
+    assert fence["prior_transaction_claim_adoption_forbidden"] is True
+    assert fence["required_atomic_members"] == [
+        "appointment_mutation",
+        "appointment_audit",
+        "diary_committed_event",
+        "first_alias_if_needed",
+        "stream_head_advance",
+        "payload_free_outbox",
+        "idempotency_completion",
+    ]
+
+
+def test_machine_contract_rejects_adversarial_architecture_mutations() -> None:
+    contract = data(CONTRACT)
+    validator = Draft202012Validator(data(CONTRACT_SCHEMA))
+    mutations: list[dict] = []
+
+    candidate = copy.deepcopy(contract)
+    candidate["relation_catalogue"]["names"].append("generic_work_queue")
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["relation_catalogue"]["names"].pop()
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["existing_model_contract"]["operation_id"] = "genericUpdate"
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["producer_transaction"]["transaction_provenance"]["caller_supplied"] = True
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["producer_transaction"]["transaction_provenance"]["retained_after_commit"] = True
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["producer_transaction"]["transaction_provenance"]["required_current_transaction_tuples"].pop()
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["producer_transaction"]["deferred_commit_fence"]["bidirectional"] = False
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["producer_transaction"]["deferred_commit_fence"]["in_progress_claim_commit_forbidden"] = False
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["producer_transaction"]["deferred_commit_fence"]["required_atomic_members"].pop()
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["alias_bridge"]["reverse_unique_key"].pop()
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["alias_bridge"]["delete_allowed"] = True
+    mutations.append(candidate)
+    candidate = copy.deepcopy(contract)
+    candidate["artifact_boundary"]["owned_artifacts"][0] = "app/runtime.py"
+    mutations.append(candidate)
+
+    for candidate in mutations:
+        with pytest.raises(ValidationError):
+            validator.validate(candidate)

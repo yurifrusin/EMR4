@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_read_only_durability_migration_transaction_architecture_recovery_4_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The fourth recovery binds projection to the exact in-progress update-confirm claim, existing practice-scoped command foreign key and unique command-id event constraint, one connection/transaction/capability/session identity, and an immutable non-reusable practice/source alias bijection. Fifty-eight focused and ninety-eight parent/source/API Spine checks pass. The fresh reviewer must attack this command coupling plus every earlier admission, conflict, anchor, key, retention, tenant and API-boundary repair; AER-0051 remains open.",
+    "current_authority_allocation": "GPT Sol owns architecture acceptance. One genuinely fresh native reviewer receives only read-only exact-allowlist veto authority in clean r27; it cannot edit, implement, accept, integrate, move the baton or touch protected refs. No external provider/model call is permitted.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r27 is clean on codex/review-durability-migration-transaction-plan-recovery-4-77ba83d5 at exact candidate 77ba83d5f1695ac58eddd0e96f6ec8003247e339. The main task branch is at the same HEAD. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. docs/branding and unrelated untracked files remain preserved and excluded.",
+    "live_handover_current_baton": "The live handover accepts the pure provider-free unmounted durability state-machine rehearsal at source 95a2ed5e960c58686262b5e82ce2e89354a3860a and authorises the declarative migration-and-transaction architecture descendant. Candidate 77ba83d5f1695ac58eddd0e96f6ec8003247e339 remains revision_required until a fresh independent veto passes; no DDL or implementation authority exists.",
+    "protected_evidence_boundaries": "The reviewer may read only the exact named architecture, parent acceptance, API Steward/API Spine, existing idempotency/event model and focused test allowlist. It may not open prior review artifacts, AER files, protected evidence or historical PHI; write any file; create caches/bytecode; run repository conftest; contact network/provider/database/source/runtime; or touch patient/product data, commands, deployment, Pages or protected refs."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

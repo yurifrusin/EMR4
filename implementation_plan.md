@@ -466,7 +466,11 @@ generation rehearsal. The architecture-only provider-free default-off
   and revision against locked product state, and keeps command plus projection
   on one connection/transaction/logical capability/session identity. It adds
   forward and reverse tenant/source uniqueness and prohibits update, deletion
-  and alias reuse for v1. Only a fresh acceptance of the complete
+  and alias reuse for v1. A fifth veto then rejected row equality as proof of
+  same-transaction provenance and the phrase-only static tests. The active
+  recovery adds ephemeral current-XID/immutable-claim checks, before/deferred
+  fail-commit guards, a closed JSON contract/schema, model-constraint parsing
+  and adversarial contract mutations. Only a fresh acceptance of the complete
   corrected plan may admit an inert DDL rehearsal. No applied migration, live
   implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 52,
+  "register_revision": 53,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1963,8 +1963,8 @@
       "category": "reasoning_claim_error",
       "process_severity": "material",
       "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation and bounded conflict attempt to authenticated immutable receiver-owned evidence, preserve source-independent redelivery, use independent current anchors, atomic lifecycle effects and exact key scope, and make every product-identifier exception database-coupled to the signed command with narrow privilege, immutable bijection and non-reuse/retention treatment.",
-      "observed_error": "Candidate bea7d719 underfroze authenticated admission, redelivery, anchors, lifecycle and key scope. Recovery 5de1ba51 could not store admission conflict and overblocked receiver admission. Recovery 917dff6f contradicted its product-id ceiling with an unbounded alias bridge. Recovery 62c78cba bounded bridge visibility but left alias creation independently invocable without database proof of the signed command and did not freeze reverse alias uniqueness, immutable non-reuse or delete/recreate identity.",
-      "detection_method": "Four fresh exact-head native adversarial vetoes reconciled the parent durability contract, authenticated handoff, admission representation, transaction/retention/anchor/key/API boundaries, data ceiling and alias command/identity semantics. They returned five initial P1 contradictions, two conflict/anchor defects, the product-id exception contradiction, then the independent-helper and non-bijective/non-reuse defects before implementation admission.",
+      "observed_error": "Candidate bea7d719 underfroze admission, redelivery, anchors, lifecycle and key scope. Recoveries 5de1ba51 and 917dff6f left conflict/anchor and product-id contradictions. Recovery 62c78cba left alias creation independently invocable and non-bijective. Recovery 77ba83d5 added command/event/bijection checks but treated coherent row state as same-transaction proof and retained phrase-only tests that could not detect the defect.",
+      "detection_method": "Five fresh exact-head native adversarial vetoes reconciled the parent contract, admission, transaction/retention/anchor/key/API and alias semantics. They found the initial five P1s, conflict/anchor defects, product-id contradiction, independent-helper/bijection defects, then missing transaction-local provenance plus underpowered static acceptance before DDL admission.",
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
@@ -1974,7 +1974,9 @@
         "docs/ariadne-agent-error-correction-register-revision-49.md",
         "docs/ariadne-agent-error-correction-register-revision-50.md",
         "docs/ariadne-agent-error-correction-register-revision-51.md",
-        "docs/ariadne-agent-error-correction-register-revision-52.md"
+        "docs/ariadne-agent-error-correction-register-revision-52.md",
+        "docs/ariadne-agent-error-correction-register-revision-53.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-4-independent-veto.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
@@ -1983,14 +1985,16 @@
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_implemented_pending_acceptance",
-        "action": "Sol preserved and rejected all four candidates. Recovery bounds each position to at most one immutable PRIMARY plus one immutable CONFLICT, compares safely before or after source purge and separates admission from anchor-fenced consumption. diary_context_aggregate_aliases_v1 remains the sole owner-private product-identifier exception. The fourth recovery removes every alias-only helper. One projection entry point revalidates the exact IN_PROGRESS update-confirm claim and practice-scoped command foreign key plus unique command id event binding, then checks appointment, audit and revision against locked product state. Command and projection use one connection, transaction, capability and session identity. Forward/reverse practice/source uniqueness make the mapping bijective; aliases are owner-generated, immutable and non-deletable/non-reusable for v1, and failure rolls back the whole command. Fresh exact-head acceptance remains pending.",
+        "action": "Sol preserved and rejected all five candidates. Earlier controls retain bounded PRIMARY/CONFLICT admission, purge-safe comparison, anchor fencing and the sole owner-private immutable alias bijection. The fifth recovery requires claim/appointment/audit/event xmin to equal database-derived pg_current_xact_id(), forbids any committed exact-operation IN_PROGRESS claim and prior-transaction claim adoption, and uses bidirectional deferred commit fences for event/claim/alias/head/outbox atomicity. XID is ephemeral and never a position. A closed JSON contract/schema, existing-model parsing, exact artifact manifest and adversarial mutations replace phrase-only proof. Fresh exact-head acceptance remains pending.",
         "prevention_control": "Before accepting a database realization, trace valid/duplicate/conflicting inputs into bounded receiver evidence; prove purge-safe redelivery and independent anchor fences; enumerate atomic members and key scope; reconcile every data prohibition against catalogue columns; attack every private helper by standalone invocation; require database evidence for command coupling; and prove forward/reverse identity uniqueness, concurrency, rollback and delete/recreate non-reuse for every pseudonymous mapping.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-2-independent-veto.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-3-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-4-independent-veto.md",
           "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
           "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"
         ]
       },

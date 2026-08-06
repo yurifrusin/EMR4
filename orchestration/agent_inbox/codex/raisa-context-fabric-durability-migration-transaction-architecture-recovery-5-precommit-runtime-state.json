@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_fifth_durability_migration_transaction_architecture_recovery_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted migration-and-transaction architecture descendant for the accepted durability state machine under Yuri's standing uninterrupted-development authority. The fifth recovered candidate remains revision_required until a fresh exact-head veto passes, so this commit preserves a reviewable candidate rather than claiming acceptance.",
+    "current_authority_allocation": "GPT Sol owns architecture recovery and may commit a bounded accurately labelled task-branch candidate after deterministic checks. A fresh native independent reviewer may veto the exact committed descendant but receives no implementation, acceptance, integration, baton, push or protected-ref authority. No provider or external worker is active.",
+    "active_plan_and_acceptance": "The fifth recovery closes the fourth veto with database-derived current-XID tuple provenance, immutable claim-start evidence, scoped before-update and bidirectional deferred commit guards, a closed JSON contract/schema, actual-model AST constraint checks and adversarial mutations. Focused architecture/register tests pass 62 of 62; parent/source/API Spine regression tests pass 98 of 98; Ruff and git diff check pass. AER-0051 remains open pending a fresh veto.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI was opened. No app, Alembic, Diary or API Spine artifact changed; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, new command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost artifact remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "After a fresh fetch, the active task branch remains at candidate parent 77ba83d5f1695ac58eddd0e96f6ec8003247e339 before this commit, five commits ahead of origin task 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked diff is limited to the exact fifth-recovery plan/design/threat/implementation-plan/register/test files, with new contract/schema, revision 53, preserved fourth-veto evidence and current receipts; r27 remains clean at the rejected fourth-recovery HEAD."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_recovery_5_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed deterministic fifth-recovery verification: 62 focused tests, 98 parent/API Spine tests, Ruff and diff checks all passed."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "unknown",
+      "evidence": ["Fresh independent review is deliberately after this exact candidate commit and a distinct pre-dispatch receipt."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model call is authorised or active."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

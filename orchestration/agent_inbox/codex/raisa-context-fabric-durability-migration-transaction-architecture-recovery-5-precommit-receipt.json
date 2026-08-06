@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_fifth_durability_migration_transaction_architecture_recovery_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The fifth recovery closes the fourth veto with database-derived current-XID tuple provenance, immutable claim-start evidence, scoped before-update and bidirectional deferred commit guards, a closed JSON contract/schema, actual-model AST constraint checks and adversarial mutations. Focused architecture/register tests pass 62 of 62; parent/source/API Spine regression tests pass 98 of 98; Ruff and git diff check pass. AER-0051 remains open pending a fresh veto.",
+    "current_authority_allocation": "GPT Sol owns architecture recovery and may commit a bounded accurately labelled task-branch candidate after deterministic checks. A fresh native independent reviewer may veto the exact committed descendant but receives no implementation, acceptance, integration, baton, push or protected-ref authority. No provider or external worker is active.",
+    "git_refs_and_worktree": "After a fresh fetch, the active task branch remains at candidate parent 77ba83d5f1695ac58eddd0e96f6ec8003247e339 before this commit, five commits ahead of origin task 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked diff is limited to the exact fifth-recovery plan/design/threat/implementation-plan/register/test files, with new contract/schema, revision 53, preserved fourth-veto evidence and current receipts; r27 remains clean at the rejected fourth-recovery HEAD.",
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted migration-and-transaction architecture descendant for the accepted durability state machine under Yuri's standing uninterrupted-development authority. The fifth recovered candidate remains revision_required until a fresh exact-head veto passes, so this commit preserves a reviewable candidate rather than claiming acceptance.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI was opened. No app, Alembic, Diary or API Spine artifact changed; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, new command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost artifact remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

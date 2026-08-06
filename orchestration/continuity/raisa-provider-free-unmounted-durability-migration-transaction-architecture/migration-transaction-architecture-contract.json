@@ -1,0 +1,129 @@
+{
+  "schema_version": "raisa.context_fabric.durability_migration_transaction_architecture.v1",
+  "status": "architecture_only_unmounted",
+  "source_contract": "diary.appointment_rescheduled.v1",
+  "evidence_mode": "repository_authored_schema_metadata",
+  "relation_catalogue": {
+    "count": 18,
+    "names": [
+      "context_observation_stream_head",
+      "diary_context_aggregate_aliases_v1",
+      "diary_context_observation_outbox_v1",
+      "context_proofread_observation_admission",
+      "context_generation_registry_barrier",
+      "context_observer_generation",
+      "context_durability_checkpoint",
+      "context_recovery_anchor",
+      "context_classified_observation_receipt",
+      "context_frame_generation",
+      "context_invalidation_watermark",
+      "context_reassembly_obligation",
+      "context_durability_lifecycle",
+      "context_durability_audit",
+      "context_observation_key_interval",
+      "context_recovery_pin",
+      "context_service_practice_binding",
+      "context_retention_policy"
+    ]
+  },
+  "existing_model_contract": {
+    "idempotency_table": "appointment_command_idempotency",
+    "operation_id": "confirmAppointmentUpdateProposal",
+    "route_family": "update-confirm",
+    "in_progress_state": "in_progress",
+    "target_binding_field": "target_appointment_id",
+    "audit_binding_field": "audit_log_id",
+    "event_table": "diary_committed_events",
+    "event_command_foreign_key": ["practice_id", "command_id"],
+    "event_unique_fields": ["command_id", "audit_log_id"],
+    "event_type": "diary.appointment_rescheduled",
+    "event_schema_version": "diary.appointment_rescheduled.v1"
+  },
+  "producer_transaction": {
+    "isolation": "READ COMMITTED",
+    "one_physical_connection": true,
+    "one_transaction": true,
+    "one_logical_capability": true,
+    "one_session_user": true,
+    "caller_supplied_event_id": false,
+    "transaction_provenance": {
+      "database_xid_function": "pg_current_xact_id()",
+      "tuple_system_column": "xmin",
+      "required_current_transaction_tuples": [
+        "idempotency_claim",
+        "appointment_current_tuple",
+        "appointment_audit",
+        "diary_committed_event"
+      ],
+      "claim_inserted_in_current_transaction": true,
+      "immutable_claim_created_at_equals_transaction_timestamp": true,
+      "caller_supplied": false,
+      "stored_in_user_column": false,
+      "retained_after_commit": false,
+      "durability_position_authority": false
+    },
+    "deferred_commit_fence": {
+      "constraint_mode": "DEFERRABLE INITIALLY DEFERRED",
+      "owner_only_trigger_function": true,
+      "runtime_execute": false,
+      "bidirectional": true,
+      "required_atomic_members": [
+        "appointment_mutation",
+        "appointment_audit",
+        "diary_committed_event",
+        "first_alias_if_needed",
+        "stream_head_advance",
+        "payload_free_outbox",
+        "idempotency_completion"
+      ],
+      "event_requires_completed_claim_and_outbox": true,
+      "outbox_requires_event_and_completed_claim": true,
+      "first_alias_requires_same_transaction_outbox": true,
+      "in_progress_event_commit_forbidden": true,
+      "in_progress_claim_commit_forbidden": true,
+      "prior_transaction_claim_adoption_forbidden": true
+    }
+  },
+  "alias_bridge": {
+    "relation": "diary_context_aggregate_aliases_v1",
+    "forward_key": [
+      "practice_id",
+      "source_contract_id",
+      "product_appointment_uuid"
+    ],
+    "reverse_unique_key": [
+      "practice_id",
+      "source_contract_id",
+      "opaque_aggregate_alias"
+    ],
+    "owner_generated": true,
+    "caller_selectable": false,
+    "runtime_direct_dml": false,
+    "update_allowed": false,
+    "delete_allowed": false,
+    "alias_reuse_allowed": false,
+    "same_appointment_race": "reload_existing",
+    "cross_appointment_collision": "rollback_command"
+  },
+  "artifact_boundary": {
+    "owned_artifacts": [
+      "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
+      "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-design.md",
+      "docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md",
+      "implementation_plan.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+      "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"
+    ],
+    "forbidden_prefixes": [
+      "app/",
+      "alembic/",
+      "docs/diary/",
+      "docs/api-spine/"
+    ],
+    "executable_ddl": false,
+    "database_contact": false,
+    "provider_contact": false,
+    "runtime_wiring": false
+  }
+}

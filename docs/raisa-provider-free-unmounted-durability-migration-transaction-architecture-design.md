@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: fourth recovered design candidate pending fresh independent veto
+Status: fifth recovered design candidate pending fresh independent veto
 
 ## Purpose
 
@@ -53,6 +53,27 @@ capability and one `session_user` throughout that transaction. There is no
 second login, `SET ROLE`, alias-only capability or transaction hand-off whose
 identity or commit outcome could be substituted between the command and
 projection.
+
+The entry point additionally requires the idempotency claim, current
+appointment tuple version, audit and event to have database-derived `xmin`
+equal to `pg_current_xact_id()`, while the claim's immutable `created_at`
+matches `transaction_timestamp()`. This use is ephemeral transaction
+provenance only: no XID is accepted from the caller, stored in a user column,
+retained, exposed or treated as a durability coordinate. A committed stale
+claim cannot become eligible merely by being updated in a later transaction.
+
+Owner-only `DEFERRABLE INITIALLY DEFERRED` constraint triggers then fail the
+commit unless no exact update-confirm claim remains `IN_PROGRESS`, each exact
+reschedule event has its completed matching
+idempotency target/audit, one outbox row and stream-head advance; every outbox
+has that event/result; and a first alias insertion is referenced by that
+outbox. These bidirectional commit-time checks close the interval after the
+projection call: no event may commit with an in-progress claim and no alias,
+head or outbox partial may survive. The fixed-search-path trigger functions are
+not directly executable by a runtime role. A scoped before-update guard rejects
+target/audit/completion adoption when the old claim tuple was not created in
+the current transaction. Default-off enablement first requires a zero census of
+legacy committed exact-operation in-progress rows.
 
 This deliberately makes durability availability part of the enabled command's
 atomic contract. A failed append or head lock fails the command; it cannot be
