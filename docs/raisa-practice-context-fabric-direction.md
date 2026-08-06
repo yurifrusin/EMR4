@@ -288,14 +288,21 @@ large “memory” feature:
    independent waiting-field grant subsets before the unchanged parent
    projection. The controlling plan is
    `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`.
-7. **Provider-free invalidation/reassembly seam** — bind the accepted Rayleen
-   adapter and immutable parent frame set to the accepted temporal protocol;
-   typed payload-free authored-synthetic signals may retire the old set and
-   emit one inert fresh-reassembly requirement, but cannot patch context,
-   watch a live source, persist state, read product data or execute a command.
-8. **Real product read descendants** — open one source and one role/purpose at a
+7. **Provider-free invalidation/reassembly seam** — **accepted** at exact
+   independently reviewed source HEAD
+   `72b5f46146393c644ee8fbfa1bb9ee0869d8d994`; the accepted Rayleen adapter,
+   immutable parent frame set and temporal protocol compose so that one typed
+   payload-free authored-synthetic signal retires the old set and emits one
+   inert fresh-reassembly requirement/instruction. It patches nothing, performs
+   no fresh read and admits no replacement frame set.
+8. **Provider-free fresh-generation rehearsal** — consume the inert
+   requirement using a second newly authored synthetic authority/read-shaped
+   input, rerun adapter/assembler/same-packet proofreading and reject an older
+   result against the newer frame-set generation, without a live source,
+   watcher, persistence, provider or command.
+9. **Real product read descendants** — open one source and one role/purpose at a
    time with privacy, identity, audit, retention and database acceptance.
-9. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+10. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 

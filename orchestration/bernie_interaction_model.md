@@ -211,9 +211,14 @@ changes, mounting a route or accessing real product data. Its corrected
 accepted boundary separates closed result/evidence schemas, recomputes the complete
 expected result from authoritative inputs at one deep-copy handoff and
 supports independently granted waiting fields before the unchanged parent
-projection. The next safe descendant is a provider-free unmounted seam that
-retires the old frame set on a typed payload-free authored-synthetic signal and
-emits one inert reassembly requirement; it does not open a live watcher.
+projection. The provider-free unmounted invalidation/reassembly seam now also
+passes at exact independently reviewed source HEAD
+`72b5f46146393c644ee8fbfa1bb9ee0869d8d994`: one typed payload-free authored-
+synthetic signal retires the unchanged immutable old frame set and emits one
+inert reassembly requirement/instruction without a fresh read or replacement
+frame. The next safe descendant is a provider-free unmounted fresh-generation
+rehearsal using a second newly authored synthetic input and rejecting an older
+result against the newer frame-set generation; it does not open a live watcher.
 Real event transport,
 historical persistence, patient/product data, product retrieval, runtime and
 command authority remain separately closed.

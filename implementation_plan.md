@@ -94,12 +94,18 @@ deep-copy handoff, and supports every independent waiting-field grant subset
 before parent projection. The controlling plan is
 [`docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`](docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md).
 
-The next safe descendant is a provider-free unmounted Rayleen
-invalidation/reassembly seam. It may connect the accepted adapter to the
-accepted temporal dependency/invalidation protocol using only payload-free
-authored-synthetic signals, retire the immutable old set and emit an inert
-fresh-reassembly requirement. It may not open a live watcher/feed, patch
-context, persist state, read product data, call a provider or execute a command.
+The provider-free unmounted Rayleen invalidation/reassembly seam now passes at
+exact independently reviewed source HEAD
+`72b5f46146393c644ee8fbfa1bb9ee0869d8d994`. It reconstructs the accepted
+adapter-built Current weave and temporal manifest/lease, lets one payload-free
+authored-synthetic signal retire the byte-identical immutable old set and emits
+only one inert fresh-reassembly requirement/instruction. It performs no fresh
+read and admits no replacement frame set. The next safe descendant is a
+separately frozen provider-free unmounted fresh-generation rehearsal using a
+second newly authored synthetic input and proving that an older asynchronous
+result cannot supersede the newer frame-set generation. It may not open a live
+watcher/feed, persist state, read product data, call a provider or execute a
+command.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -395,10 +401,11 @@ Implementation proceeds from the accepted provider-free authored-synthetic contr
 the accepted composition of four existing current read shapes and the accepted
 patient-free temporal invalidation/bitemporal contract, the accepted provider-
 free intent-shaped temporal retrieval rehearsal and the accepted authored-
-synthetic model-required intent-shaping descendant and the exact independently
-reviewed unmounted provider-free Rayleen A4 waiting-room source adapter. The
-next step is its provider-free authored-synthetic invalidation/reassembly seam
-before separately gated live watcher, real-product and clinical descendants.
+synthetic model-required intent-shaping descendant, the exact independently
+reviewed unmounted provider-free Rayleen A4 waiting-room source adapter and its
+provider-free authored-synthetic invalidation/reassembly seam. The next step is
+a provider-free unmounted fresh-generation rehearsal before separately gated
+live watcher, real-product and clinical descendants.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

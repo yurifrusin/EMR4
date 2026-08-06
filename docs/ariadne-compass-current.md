@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 222 / Compass 204. The provider-free unmounted Rayleen A4 waiting-room Context Fabric source adapter passes at exact reviewed HEAD. A provider-free invalidation/reassembly seam is next; live watchers and real data remain closed.
+> EMR4 is at Continuity 223 / Compass 205. The provider-free unmounted Rayleen invalidation/reassembly seam passes at exact reviewed HEAD. A provider-free fresh-generation rehearsal is next; live watchers, source reads and real data remain closed.
 
 ## North star
 
@@ -218,24 +218,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One source-reviewed Sydney Vertex call proposed the exact closed synthetic comparison intent; deterministic Context Fabric code alone rebuilt and admitted the parent retrieval packet. Lineage parent: `raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval`.
 101. **Concrete unmounted Current-source adapter — Unmounted Rayleen waiting-room Context Fabric source adapter**
    One serialized A4 waiting-room frame now reaches the unchanged Current weave through an externally anchored, minimized and opaque provider-free adapter. Lineage parent: `raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping`.
+102. **First concrete Current-source temporal lifecycle seam — Unmounted Rayleen Context Fabric invalidation/reassembly seam**
+   One adapter-built Rayleen Current frame set is deterministically retired by a payload-free signal and yields only an inert fresh-generation requirement. Lineage parent: `raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter`.
 
 ## Current position
 
-**Unmounted Rayleen Current-source adapter accepted; provider-free invalidation/reassembly seam is the next safe candidate — Unmounted Rayleen waiting-room Context Fabric source adapter**
+**Rayleen Current invalidation/reassembly seam accepted; provider-free fresh-generation rehearsal is the next safe candidate — Unmounted Rayleen Context Fabric invalidation/reassembly seam**
 
-**Why this proof came next:** A concrete source now composes safely, so the accepted temporal retire-and-reassemble protocol can be bound to it without opening a live watcher.
+**Why this proof came next:** Retirement and the inert requirement are proven, so a wholly new authored-synthetic generation can now be rehearsed without a live source.
 
-The exact externally anchored adapter passed 18/18 evidence cases and a fresh allowlisted independent veto.
+The exact reconstruction passed 32/32 evidence cases, 22 focused and 212 inherited tests plus a fresh no-finding veto.
 
 ### What this unlocks
 
-- Freeze a provider-free unmounted Rayleen invalidation/reassembly seam over authored-synthetic signals.
-- Keep live database/event transport and product reads closed until their separate descendants.
+- Freeze a provider-free unmounted fresh-generation rehearsal over newly authored synthetic source input.
+- Prove older asynchronous results cannot supersede the newer frame-set generation.
 
 ### What it does not solve
 
-- Real patient/product data access or live waiting-room integration.
-- Database/event watchers, persistence, retention or asynchronous runtime delivery.
+- Real patient/product data access, a live source read or waiting-room integration.
+- Database/event watchers, transport, persistence, restart recovery or operational retention.
 - Provider cognition, cross-Bureau clinical sources, commands, deployment or production.
 - Release, Pages, protected evidence or protected-ref movement.
 
@@ -306,8 +308,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- The Fabric/Memory contract, Current and temporal weaves, intent-shaped retrieval, model-required intent shaping and unmounted Rayleen A4 source adapter are accepted at exact reviewed HEADs.
-- The next safe candidate is a provider-free unmounted invalidation/reassembly seam over the accepted Rayleen adapter and temporal protocol.
+- The Fabric/Memory contract, Current and temporal weaves, intent-shaped retrieval, model-required intent shaping, unmounted Rayleen source adapter and its inert invalidation/reassembly seam are accepted at exact reviewed HEADs.
+- The next safe candidate is a provider-free unmounted fresh-generation rehearsal consuming the inert requirement and rejecting an older result.
 - Separately gate every live product source, database watcher/feed, persistence/retention, cross-Bureau clinical source, command, deployment, production and release boundary.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -497,6 +499,7 @@ Prerequisites:
 
 ## Map limits
 
+- Invalidation-seam acceptance proves one authored-synthetic unmounted retire-and-require handoff only; it creates no live-source, watcher, persistence, provider, command, deployment or protected authority.
 - Source-adapter acceptance proves one authored-synthetic unmounted read/context mapping only; it creates no live-source, database-watcher, real-data, persistence, provider, command, deployment or protected authority.
 - Occupied intent-shaping acceptance proves one authored-synthetic closed model proposal only; it creates no real-source, patient, product, live-watcher, persistence, runtime, command, clinical, deployment or protected authority.
 - Intent-shaped retrieval acceptance proves pure provider-free authored-synthetic context selection only; it creates no natural-language, provider, patient, product, live-source, persistence, runtime, command, deployment or protected authority.
@@ -827,6 +830,9 @@ Prerequisites:
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
+- `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-closeout.md`
+- `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-design.md`
+- `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-plan.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-closeout.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-design.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`
@@ -906,6 +912,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
@@ -990,6 +997,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-deepseek-timeout-failure-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-review-evidence-reconciliation-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-independent-review.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-register-search-scope-failure-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-worker-predispatch-ordering-failure-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-protected-path-enumeration-failure-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-provenance-repair-independent-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-review-packet-count-reconciliation-receipt.json`
@@ -999,6 +1010,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
@@ -1213,6 +1225,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly/acceptance-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly/authored-synthetic-seam-packet.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly/seam-packet.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/acceptance-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/adapter-result.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/authored-synthetic-waiting-room-frame.json`
@@ -1551,4 +1567,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 204; continuity graph revision 222._
+_Compass map revision 205; continuity graph revision 223._
