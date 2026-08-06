@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_accepted_context_fabric_model_intent_shaping_task_branch_without_protected_ref_movement",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the accepted one-call model-required Context Fabric intent result, consumed provider authority, next provider-free unmounted adapter candidate and all remaining closed boundaries.",
+    "current_authority_allocation": "GPT Sol may push only codex/ariadne-bernie-davida-parallel-seam. No worker, provider call, protected integration or deployment is allocated.",
+    "active_plan_and_acceptance": "Commit 5f1783a0ae9be67fe1e9c6560f7f87d76c19deb5 contains the accepted occupied evidence, closeout, Sol acceptance and Continuity 221 / Compass 203. The exact source-reviewed implementation remains 44f341481b55f99a18a47838da0f2b7e43a2f73e. Focused/continuity and API/preservation suites pass 67 and 62 tests respectively.",
+    "protected_evidence_boundaries": "Push is task-branch-only. It may not move master or handoff/current, deploy, release, rebuild Pages, mutate protected evidence, stage docs/branding or unrelated receipts/evidence, call a provider, access data or open runtime/command authority.",
+    "git_refs_and_worktree": "Task branch is tracked-clean at 5f1783a0ae9be67fe1e9c6560f7f87d76c19deb5 and five commits ahead of its origin. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All unrelated untracked files remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_model_intent_shaping_prepush_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified exact task HEAD, tracked cleanliness, preserved untracked files and unchanged protected refs before push."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The completed source veto is committed; no verifier is active."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Worker receipts are committed and no worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is unselected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is inactive."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-flash-reviewers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

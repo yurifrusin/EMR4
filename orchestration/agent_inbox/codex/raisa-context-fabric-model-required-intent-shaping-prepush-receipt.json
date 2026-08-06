@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_accepted_context_fabric_model_intent_shaping_task_branch_without_protected_ref_movement",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 5f1783a0ae9be67fe1e9c6560f7f87d76c19deb5 contains the accepted occupied evidence, closeout, Sol acceptance and Continuity 221 / Compass 203. The exact source-reviewed implementation remains 44f341481b55f99a18a47838da0f2b7e43a2f73e. Focused/continuity and API/preservation suites pass 67 and 62 tests respectively.",
+    "current_authority_allocation": "GPT Sol may push only codex/ariadne-bernie-davida-parallel-seam. No worker, provider call, protected integration or deployment is allocated.",
+    "git_refs_and_worktree": "Task branch is tracked-clean at 5f1783a0ae9be67fe1e9c6560f7f87d76c19deb5 and five commits ahead of its origin. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md records the accepted one-call model-required Context Fabric intent result, consumed provider authority, next provider-free unmounted adapter candidate and all remaining closed boundaries.",
+    "protected_evidence_boundaries": "Push is task-branch-only. It may not move master or handoff/current, deploy, release, rebuild Pages, mutate protected evidence, stage docs/branding or unrelated receipts/evidence, call a provider, access data or open runtime/command authority."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
