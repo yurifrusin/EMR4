@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_transport_failure.v1",
+  "status": "failed_closed",
+  "tranche": "raisa_context_fabric_patient_free_temporal_weave",
+  "worker": {
+    "resource_id": "deepseek-flash-workers",
+    "transport": "claude_code_bare_deepseek",
+    "model": "deepseek-v4-flash",
+    "effort": "high"
+  },
+  "required_parent_head": "bad4b2b686806a06befec0e4ca57703e4b7c9464",
+  "worker_branch": "codex/context-fabric-temporal-worker",
+  "started_at": "2026-08-06T04:17:14Z",
+  "terminated_at": "2026-08-06T04:33:01Z",
+  "failure_class": "upstream_response_wait_timeout",
+  "failure_summary": "The occupied worker remained connected after its preliminary read and test probes but produced no owned implementation artifact or final response within the bounded observation window.",
+  "provider_call_occurred": true,
+  "provider_billed_cost_usd": null,
+  "adapter_cost_estimate_usd": null,
+  "secrets_recorded": false,
+  "owned_files_created": [],
+  "out_of_scope_change_admitted": false,
+  "candidate_commit": null,
+  "protected_refs_moved": false,
+  "product_or_patient_data_used": false,
+  "provider_output_released_to_product": false,
+  "recovery": {
+    "disposition": "continue_same_frozen_tranche_with_local_codex_implementation",
+    "scope_changed": false,
+    "user_decision_required": false
+  }
+}

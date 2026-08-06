@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 29,
+  "register_revision": 30,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1363,6 +1363,43 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0036",
+      "attempt_id": "raisa-context-fabric-patient-free-temporal-weave-worker-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-patient-free-temporal-weave",
+      "origin": "transport",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded occupied DeepSeek implementation call must produce owned artifacts and a structured terminal receipt, or be stopped with sanitized containment while preserving the unchanged candidate boundary.",
+      "observed_error": "After preliminary repository reads and test probes, the occupied worker remained connected without creating any owned implementation artifact or returning a final response during the bounded observation window.",
+      "detection_method": "Sol monitored the exact isolated worktree, confirmed that no owned path or candidate commit appeared, stopped only the identified worker and wrapper processes, and preserved a sanitized failure receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-deepseek-timeout-failure-receipt.json",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The disposable call was stopped without admitting its preliminary lockfile activity or any provider output. The same frozen six-file packet continued through the declared Codex fallback and passed focused and inherited deterministic verification.",
+        "prevention_control": "Occupied development workers require a bounded no-artifact/no-terminal observation window, exact process and worktree readback, a sanitized failure receipt, and a declared fallback that cannot broaden the frozen packet or protected authority.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-deepseek-timeout-failure-receipt.json",
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }
