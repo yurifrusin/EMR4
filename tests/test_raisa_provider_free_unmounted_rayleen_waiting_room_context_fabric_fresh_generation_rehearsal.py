@@ -110,6 +110,16 @@ def test_distinct_request_revalidates_binding_and_never_widens_grant() -> None:
     } == set(trace["scope_dimensions_checked"])
 
 
+def test_predecessor_requirement_and_instruction_must_still_be_current() -> None:
+    packet = build_authored_synthetic_fresh_generation_packet()
+    validity = packet["predecessor_validity_trace"]
+
+    assert validity["requirement_current"] is True
+    assert validity["instruction_current"] is True
+    assert validity["execution_authority_created"] is False
+    _blocked(packet, checked_at=validity["requirement_expires_at"])
+
+
 def test_every_requirement_dependency_is_refreshed_independently() -> None:
     trace = build_authored_synthetic_fresh_generation_packet()[
         "required_dependency_refresh_trace"
@@ -408,7 +418,7 @@ def test_committed_packet_and_evidence_reproduce_exactly() -> None:
     assert evidence == _json(
         CONTINUITY_DIR / "provider-free-acceptance-evidence.json"
     )
-    assert evidence["case_count"] == evidence["passed_case_count"] == 42
+    assert evidence["case_count"] == evidence["passed_case_count"] == 45
     evidence_schema = _json(CONTINUITY_DIR / "acceptance-evidence.schema.json")
     assert list(Draft202012Validator(evidence_schema).iter_errors(evidence)) == []
     assert (

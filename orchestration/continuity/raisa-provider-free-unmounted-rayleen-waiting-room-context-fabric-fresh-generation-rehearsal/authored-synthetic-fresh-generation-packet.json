@@ -5,6 +5,21 @@
   "predecessor_packet_digest": "sha256:753f2b3931ae75bfe8f0a3bea92f7eb67ab478fab16d35c7cf4b98f5f796640e",
   "predecessor_requirement_digest": "sha256:722335c2bf14dff1e4308b846c7389c1301ef9036857a20da90b81050c7e7c69",
   "predecessor_instruction_digest": "sha256:90fefc090c578f25c005077b27ea0b9b80a04d7e5d3f97f3a90d88837e80f384",
+  "predecessor_validity_trace": {
+    "schema_version": "emr4.practice_context_fabric_rayleen_waiting_room_fresh_generation.v1",
+    "requirement_digest": "sha256:722335c2bf14dff1e4308b846c7389c1301ef9036857a20da90b81050c7e7c69",
+    "instruction_digest": "sha256:90fefc090c578f25c005077b27ea0b9b80a04d7e5d3f97f3a90d88837e80f384",
+    "requirement_expires_at": "2026-08-06T03:01:30Z",
+    "instruction_expires_at": "2026-08-06T03:01:30Z",
+    "checked_at": "2026-08-06T03:00:47Z",
+    "requirement_current": true,
+    "instruction_current": true,
+    "execution_authority_created": false,
+    "read_only": true,
+    "command_authority": false,
+    "provider_authority": false,
+    "predecessor_validity_trace_digest": "sha256:bcf5bf26ef9384fdc04865b7d73a7ea84e23d65c5ae97a34b34433c7ed3534d6"
+  },
   "authority_trace": {
     "schema_version": "emr4.practice_context_fabric_rayleen_waiting_room_fresh_generation.v1",
     "requirement_digest": "sha256:722335c2bf14dff1e4308b846c7389c1301ef9036857a20da90b81050c7e7c69",
@@ -665,6 +680,7 @@
     "schema_version": "emr4.practice_context_fabric_rayleen_waiting_room_fresh_generation.v1",
     "admission_id": "synthetic:fresh-generation-admission:002",
     "requirement_digest": "sha256:722335c2bf14dff1e4308b846c7389c1301ef9036857a20da90b81050c7e7c69",
+    "predecessor_validity_trace_digest": "sha256:bcf5bf26ef9384fdc04865b7d73a7ea84e23d65c5ae97a34b34433c7ed3534d6",
     "generation_request_digest": "sha256:d581c1f4518e7a270eda2f7604d1f200bd3cb7a4a558766298d762b7192b446e",
     "authority_trace_digest": "sha256:ec156d10e5d565290a2a6e2657b50674f0fe905562b1de7fdb2bad404fd7ae4a",
     "refresh_trace_digest": "sha256:7cffc40bbffc913ac812f1980ee921ac7199bf7a76794086030c1bac4a47f608",
@@ -685,7 +701,7 @@
     "read_only": true,
     "command_authority": false,
     "provider_authority": false,
-    "admission_digest": "sha256:a0a35f167526923c2c55b0f7eff92340ef3c324a6db17c45bc03e8c9b85edf32"
+    "admission_digest": "sha256:f020a46e5c39e4dd1c1cf99e6b3587c94b2199b78e87a0fdf0b5478ebc4911ed"
   },
   "older_result_rejection": {
     "schema_version": "emr4.practice_context_fabric_patient_free_temporal_weave.v1",
@@ -704,21 +720,21 @@
       "schema_version": "emr4.practice_context_fabric_rayleen_waiting_room_fresh_generation.v1",
       "completion_order": "OLDER_THEN_NEWER",
       "older_result_decision_digest": "sha256:08a430508f03e0b97f17c243e419f3d6394487b819bb24e40badb3d2eb5148a2",
-      "new_admission_digest": "sha256:a0a35f167526923c2c55b0f7eff92340ef3c324a6db17c45bc03e8c9b85edf32",
+      "new_admission_digest": "sha256:f020a46e5c39e4dd1c1cf99e6b3587c94b2199b78e87a0fdf0b5478ebc4911ed",
       "final_frame_set_digest": "sha256:6e74ac9bbe747c3c8e57aaf3d19ebe55b9ceb4e68c3360ddbd2bc13399a150ee",
       "rollback_occurred": false,
       "old_frame_set_restored": false,
-      "ordering_trace_digest": "sha256:c89a87811f000913bf0e87137b19eaa3bc237dd43b02ba7591291e746ef1056e"
+      "ordering_trace_digest": "sha256:a0b8de9208558b77b126e56a998483c161e78ae6c6ba10ecad37eb470e5d3cca"
     },
     {
       "schema_version": "emr4.practice_context_fabric_rayleen_waiting_room_fresh_generation.v1",
       "completion_order": "NEWER_THEN_OLDER",
       "older_result_decision_digest": "sha256:08a430508f03e0b97f17c243e419f3d6394487b819bb24e40badb3d2eb5148a2",
-      "new_admission_digest": "sha256:a0a35f167526923c2c55b0f7eff92340ef3c324a6db17c45bc03e8c9b85edf32",
+      "new_admission_digest": "sha256:f020a46e5c39e4dd1c1cf99e6b3587c94b2199b78e87a0fdf0b5478ebc4911ed",
       "final_frame_set_digest": "sha256:6e74ac9bbe747c3c8e57aaf3d19ebe55b9ceb4e68c3360ddbd2bc13399a150ee",
       "rollback_occurred": false,
       "old_frame_set_restored": false,
-      "ordering_trace_digest": "sha256:f085af94e34bee6fb939e89fe7b288c144418e797119c3cf85a0b61a375cffb9"
+      "ordering_trace_digest": "sha256:41744b78f33124ce2dda89d276e91138227719b7e1b933df5f002f9bcb151e64"
     }
   ],
   "old_generation_immutability_trace": {
@@ -752,8 +768,8 @@
   "provider_called": false,
   "proofreader_trace": {
     "schema_version": "emr4.practice_context_fabric_rayleen_waiting_room_fresh_generation.v1",
-    "candidate_digest": "sha256:0c9bd05d20eedd25545b438fe1164119525e16430ee3ac12fec3e7fb2d4218ae",
-    "trusted_reconstruction_digest": "sha256:0c9bd05d20eedd25545b438fe1164119525e16430ee3ac12fec3e7fb2d4218ae",
+    "candidate_digest": "sha256:92d88a5ab26e2d825ea4efc5cca2fa1fec7abd67a2d4d6344575fa39f7e44526",
+    "trusted_reconstruction_digest": "sha256:92d88a5ab26e2d825ea4efc5cca2fa1fec7abd67a2d4d6344575fa39f7e44526",
     "checked_at": "2026-08-06T03:00:47Z",
     "reason_codes": [
       "ALL_CHECKS_PASSED"
@@ -770,6 +786,6 @@
     "read_only": true,
     "command_authority": false,
     "provider_authority": false,
-    "proofreader_trace_digest": "sha256:b72c9caba714a5912505ad2e9b38bd1a91bf14e524d74855251d5a197eac7fb3"
+    "proofreader_trace_digest": "sha256:8d1ad5f85c00f17648c26998b729c146fce4143b2ff2b8b4682d7c107506f7e5"
   }
 }

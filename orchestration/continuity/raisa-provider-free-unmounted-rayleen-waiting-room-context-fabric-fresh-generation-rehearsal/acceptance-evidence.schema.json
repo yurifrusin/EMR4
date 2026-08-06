@@ -12,6 +12,7 @@
     "predecessor_packet_digest",
     "requirement_digest",
     "instruction_digest",
+    "predecessor_validity_trace_digest",
     "authority_trace_digest",
     "refresh_trace_digest",
     "carry_forward_trace_digest",
@@ -43,6 +44,7 @@
     "predecessor_packet_digest": {"$ref": "#/$defs/digest"},
     "requirement_digest": {"$ref": "#/$defs/digest"},
     "instruction_digest": {"$ref": "#/$defs/digest"},
+    "predecessor_validity_trace_digest": {"$ref": "#/$defs/digest"},
     "authority_trace_digest": {"$ref": "#/$defs/digest"},
     "refresh_trace_digest": {"$ref": "#/$defs/digest"},
     "carry_forward_trace_digest": {"$ref": "#/$defs/digest"},
@@ -64,6 +66,7 @@
       "additionalProperties": false,
       "required": [
         "predecessor_reconstructed",
+        "predecessor_requirement_and_instruction_current",
         "requirement_refresh_coverage_exact",
         "event_metadata_not_used_as_truth",
         "authority_no_wider",
@@ -80,6 +83,7 @@
       ],
       "properties": {
         "predecessor_reconstructed": {"const": true},
+        "predecessor_requirement_and_instruction_current": {"const": true},
         "requirement_refresh_coverage_exact": {"const": true},
         "event_metadata_not_used_as_truth": {"const": true},
         "authority_no_wider": {"const": true},

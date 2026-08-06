@@ -74,6 +74,9 @@ def _mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
     def authority_widened(packet: dict[str, Any]) -> None:
         packet["authority_trace"]["grant_no_wider"] = False
 
+    def predecessor_validity_reversed(packet: dict[str, Any]) -> None:
+        packet["predecessor_validity_trace"]["requirement_current"] = False
+
     def request_not_distinct(packet: dict[str, Any]) -> None:
         packet["authority_trace"]["distinct_need"] = False
 
@@ -171,6 +174,7 @@ def _mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
         ("unknown_top_level", unknown_top_level),
         ("bool_request_revision", bool_request_revision),
         ("authority_widened", authority_widened),
+        ("predecessor_validity_reversed", predecessor_validity_reversed),
         ("request_not_distinct", request_not_distinct),
         ("diary_refresh_missing", diary_refresh_missing),
         ("event_used_as_truth", event_used_as_truth),
@@ -211,6 +215,21 @@ def _negative_reason_codes(packet: dict[str, Any]) -> list[str]:
     if expired["release_decision"] != "BLOCK" or expired["released_packet"] is not None:
         raise AssertionError("expired packet unexpectedly released")
     results.append(f"expired_packet:{expired['reason_codes'][0]}")
+    predecessor_expired = proofread_fresh_generation_packet(
+        deepcopy(packet),
+        checked_at=packet["predecessor_validity_trace"][
+            "requirement_expires_at"
+        ],
+    )
+    if (
+        predecessor_expired["release_decision"] != "BLOCK"
+        or predecessor_expired["released_packet"] is not None
+    ):
+        raise AssertionError("expired predecessor requirement unexpectedly released")
+    results.append(
+        "expired_predecessor_requirement:"
+        + predecessor_expired["reason_codes"][0]
+    )
     return sorted(results)
 
 
@@ -235,6 +254,14 @@ def build_acceptance_evidence() -> tuple[dict[str, Any], dict[str, Any]]:
     positive_invariants = {
         "predecessor_reconstructed": packet["predecessor_packet_digest"].startswith(
             "sha256:"
+        ),
+        "predecessor_requirement_and_instruction_current": (
+            packet["predecessor_validity_trace"]["requirement_current"] is True
+            and packet["predecessor_validity_trace"]["instruction_current"] is True
+            and packet["predecessor_validity_trace"][
+                "execution_authority_created"
+            ]
+            is False
         ),
         "requirement_refresh_coverage_exact": (
             refresh["required_dependency_ids"] == refresh["refreshed_dependency_ids"]
@@ -312,6 +339,9 @@ def build_acceptance_evidence() -> tuple[dict[str, Any], dict[str, Any]]:
         "predecessor_packet_digest": packet["predecessor_packet_digest"],
         "requirement_digest": packet["predecessor_requirement_digest"],
         "instruction_digest": packet["predecessor_instruction_digest"],
+        "predecessor_validity_trace_digest": packet[
+            "predecessor_validity_trace"
+        ]["predecessor_validity_trace_digest"],
         "authority_trace_digest": authority["authority_trace_digest"],
         "refresh_trace_digest": refresh["refresh_trace_digest"],
         "carry_forward_trace_digest": carry["carry_forward_trace_digest"],

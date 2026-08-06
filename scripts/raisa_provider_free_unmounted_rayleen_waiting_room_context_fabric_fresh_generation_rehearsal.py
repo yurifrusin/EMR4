@@ -553,6 +553,30 @@ def _build_sources_and_traces(
 def _build_candidate_packet() -> dict[str, Any]:
     old, predecessor, requirement, instruction = _reconstruct_predecessor()
     old_bytes = canonical_json(old["frame_set"])
+    predecessor_validity_trace = seal(
+        {
+            "schema_version": SCHEMA_VERSION,
+            "requirement_digest": requirement["requirement_digest"],
+            "instruction_digest": instruction["instruction_digest"],
+            "requirement_expires_at": requirement["expires_at"],
+            "instruction_expires_at": instruction["expires_at"],
+            "checked_at": CHECKED_AT,
+            "requirement_current": _instant(CHECKED_AT)
+            < _instant(requirement["expires_at"]),
+            "instruction_current": _instant(CHECKED_AT)
+            < _instant(instruction["expires_at"]),
+            "execution_authority_created": False,
+            "read_only": True,
+            "command_authority": False,
+            "provider_authority": False,
+        },
+        "predecessor_validity_trace_digest",
+    )
+    if not (
+        predecessor_validity_trace["requirement_current"]
+        and predecessor_validity_trace["instruction_current"]
+    ):
+        raise FreshGenerationViolation("predecessor_authority_expired")
     candidate, need, grant, authority_trace = _build_new_request_and_authority(
         old, requirement
     )
@@ -610,6 +634,9 @@ def _build_candidate_packet() -> dict[str, Any]:
             "schema_version": SCHEMA_VERSION,
             "admission_id": "synthetic:fresh-generation-admission:002",
             "requirement_digest": requirement["requirement_digest"],
+            "predecessor_validity_trace_digest": predecessor_validity_trace[
+                "predecessor_validity_trace_digest"
+            ],
             "generation_request_digest": authority_trace[
                 "generation_request_digest"
             ],
@@ -689,6 +716,7 @@ def _build_candidate_packet() -> dict[str, Any]:
         "predecessor_packet_digest": canonical_sha256(predecessor),
         "predecessor_requirement_digest": requirement["requirement_digest"],
         "predecessor_instruction_digest": instruction["instruction_digest"],
+        "predecessor_validity_trace": predecessor_validity_trace,
         "authority_trace": authority_trace,
         "required_dependency_refresh_trace": refresh_trace,
         "carry_forward_trace": carry_trace,
@@ -769,6 +797,14 @@ def _release_candidate(
             reasons.append("NEW_FRAME_SET_EXPIRED")
         if _instant(checked_at) >= _instant(expected["new_watch_lease"]["expires_at"]):
             reasons.append("NEW_WATCH_LEASE_EXPIRED")
+        if _instant(checked_at) >= _instant(
+            expected["predecessor_validity_trace"]["requirement_expires_at"]
+        ):
+            reasons.append("PREDECESSOR_REQUIREMENT_EXPIRED")
+        if _instant(checked_at) >= _instant(
+            expected["predecessor_validity_trace"]["instruction_expires_at"]
+        ):
+            reasons.append("PREDECESSOR_INSTRUCTION_EXPIRED")
         if expected["current_proofreader_trace"]["release_decision"] != "RELEASE":
             reasons.append("CURRENT_PROOFREADER_BLOCKED")
         if expected["fresh_generation_admission"]["admission_decision"] != (
@@ -848,6 +884,10 @@ def validate_fresh_generation_packet(packet: dict[str, Any]) -> None:
         raise FreshGenerationViolation("released_packet_reconstruction_mismatch")
     for value, field in (
         (packet["authority_trace"], "authority_trace_digest"),
+        (
+            packet["predecessor_validity_trace"],
+            "predecessor_validity_trace_digest",
+        ),
         (packet["required_dependency_refresh_trace"], "refresh_trace_digest"),
         (packet["carry_forward_trace"], "carry_forward_trace_digest"),
         (packet["new_source_trace"], "source_trace_digest"),
@@ -884,6 +924,14 @@ def proofread_fresh_generation_packet(
             reasons.append("NEW_FRAME_SET_EXPIRED")
         if _instant(checked_at) >= _instant(expected["new_watch_lease"]["expires_at"]):
             reasons.append("NEW_WATCH_LEASE_EXPIRED")
+        if _instant(checked_at) >= _instant(
+            expected["predecessor_validity_trace"]["requirement_expires_at"]
+        ):
+            reasons.append("PREDECESSOR_REQUIREMENT_EXPIRED")
+        if _instant(checked_at) >= _instant(
+            expected["predecessor_validity_trace"]["instruction_expires_at"]
+        ):
+            reasons.append("PREDECESSOR_INSTRUCTION_EXPIRED")
     except (KeyError, TypeError, ValueError, ContractViolation) as error:
         reasons.append(f"PACKET_INVALID:{type(error).__name__}")
     if not reasons and expected is not None:
