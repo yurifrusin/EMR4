@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 30,
+  "register_revision": 31,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1400,6 +1400,43 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0037",
+      "attempt_id": "raisa-context-fabric-patient-free-temporal-weave-review-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-patient-free-temporal-weave",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "A verifier's numerical test and evidence-path claims must agree with exact machine collection and repository paths in its unchanged bound worktree.",
+      "observed_error": "The schema-constrained review correctly returned pass but reported 67 tests across seven files that reproducibly collect and pass 120, and its prose cited the contained DeepSeek failure receipt under a nonexistent deepseek inbox path instead of the committed codex inbox path.",
+      "detection_method": "Sol collected and executed the exact seven files in the unchanged clean review worktree, verified 120 passing tests, and resolved the committed receipt path directly from the candidate tree.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-review-evidence-reconciliation-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.exact_packet_test_count_underreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The review's architectural pass remains admissible while its numerical and path prose is marked non-authoritative. Sol's exact unchanged-worktree collection/execution establishes 120 passing tests and the reconciliation receipt records the correct committed failure path without another provider call.",
+        "prevention_control": "Acceptance must machine-reconcile every verifier test-count and repository-path claim against exact collection output and the candidate tree; prose discrepancies are preserved and never copied as authoritative evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-review-evidence-reconciliation-receipt.json",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

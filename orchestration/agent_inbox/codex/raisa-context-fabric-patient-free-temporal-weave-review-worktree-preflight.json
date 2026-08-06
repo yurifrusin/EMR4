@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/context-fabric-temporal-review",
+  "branch": "codex/review-context-fabric-temporal",
+  "head": "f32004a2f39ac769ba746afe2663813f7c422d8a",
+  "expected_head": "f32004a2f39ac769ba746afe2663813f7c422d8a",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

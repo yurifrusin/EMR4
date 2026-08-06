@@ -38,10 +38,10 @@ def test_committed_register_is_semantically_valid_after_temporal_weave_recovery(
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 30
+    assert register["register_revision"] == 31
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 37)
+        f"AER-{index:04d}" for index in range(1, 38)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 26
+    assert len(agent_incidents) == 27
     assert len(transport_incidents) == 5
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -146,6 +146,38 @@ def test_temporal_weave_deepseek_timeout_is_sanitized_and_contained() -> None:
     assert failure["candidate_commit"] is None
     assert failure["protected_refs_moved"] is False
     assert failure["recovery"]["scope_changed"] is False
+
+
+def test_temporal_weave_review_evidence_is_reconciled_at_exact_head() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0037"
+    )
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-patient-free-temporal-weave-review-evidence-reconciliation-receipt.json"
+    )
+
+    assert incident["category"] == "evidence_misreport"
+    assert incident["status"] == "corrected"
+    assert incident["recurrence_signature"] == (
+        "verifier.exact_packet_test_count_underreport"
+    )
+    assert receipt["review_decision"] == "pass"
+    assert receipt["review_claimed_test_count"] == 67
+    assert receipt["authoritative_reproduced_test_count"] == 120
+    assert sum(receipt["collection_breakdown"].values()) == 120
+    assert receipt["reproduction"]["passed"] == 120
+    assert receipt["reproduction"]["head_before"] == receipt["reproduction"][
+        "head_after"
+    ]
+    assert receipt["reproduction"]["dirty_after"] is False
+    assert receipt["review_claimed_failure_receipt_path"] != receipt[
+        "authoritative_failure_receipt_path"
+    ]
+    assert receipt["additional_provider_calls"] == 0
 
 
 def test_a5_worker_scope_breach_closes_only_through_recovery_lease() -> None:
@@ -484,17 +516,17 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 36
+    assert report["incident_count"] == 37
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 26,
+        "agent_behavior": 27,
         "harness": 3,
         "repository": 2,
         "transport": 5,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 3,
-        "evidence_misreport": 3,
+        "evidence_misreport": 4,
         "harness_failure": 3,
         "output_contract_violation": 14,
         "read_only_violation": 1,
@@ -504,10 +536,23 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 28,
+        "canonical_unchanged": 29,
         "untrusted_partial_worktree": 6,
     }
     assert report["recurring_patterns"] == [
+        {
+            "recurrence_signature": "verifier.exact_packet_test_count_underreport",
+            "incident_count": 2,
+            "incident_ids": ["AER-0035", "AER-0037"],
+            "origins": ["agent_behavior"],
+            "categories": ["evidence_misreport"],
+            "roles": ["verifier"],
+            "resource_ids": ["antigravity-gemini-flash-3-6-high-verifier"],
+            "prevention_controls": [
+                "Acceptance must machine-reconcile every verifier test-count and repository-path claim against exact collection output and the candidate tree; prose discrepancies are preserved and never copied as authoritative evidence.",
+                "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence.",
+            ],
+        },
         {
             "recurrence_signature": "orchestrator.detached_verifier_branch",
             "incident_count": 2,

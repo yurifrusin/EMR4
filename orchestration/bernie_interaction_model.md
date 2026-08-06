@@ -186,14 +186,18 @@ retention policy, per-user session state remains separate from shared recent
 practice context, and a cross-Bureau handoff is a new typed scope decision—not
 an informal transcript transfer.
 
-The first provider-free Fabric/Memory contract and the Current operational
-weave are accepted. The latter composes exact authored-synthetic Diary,
+The first provider-free Fabric/Memory contract, Current operational weave and
+patient-free temporal weave are accepted. The Current weave composes exact authored-synthetic Diary,
 waiting-room, active-practitioner-directory and private application-session
 read shapes into one expiring same-packet-proofread bundle without adding a
-product route or source. The next planned descendant is the patient-free
-temporal weave; real event transport, historical persistence, patient/product
-data, provider retrieval, runtime and command authority remain separately
-closed.
+product route or source. The temporal weave proves that relevant sealed event
+metadata retires rather than patches that immutable bundle, preserves the
+committed invalidation checkpoint, rejects continuity gaps and stale
+reassembly, and keeps bitemporal snapshots outside current-truth authority.
+The next planned descendant is the provider-free patient-free unmounted
+intent-shaped temporal retrieval rehearsal; real event transport, historical
+persistence, patient/product data, provider retrieval, runtime and command
+authority remain separately closed.
 
 ### Date Context Resolution
 

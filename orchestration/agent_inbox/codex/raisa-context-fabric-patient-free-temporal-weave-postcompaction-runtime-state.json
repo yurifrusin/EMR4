@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "closeout_and_continuity_acceptance",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction at 462 lines and 55176 bytes. It names the accepted Current operational weave as the parent, the provider-free patient-free temporal weave as the current planned descendant, the standing uninterrupted-development authority, and protected master/handoff/current at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "current_authority_allocation": "GPT Sol owns architecture, acceptance, recovery, task-branch integration and baton continuity. DeepSeek V4 Flash/high remains a bounded implementation/test worker and Gemini 3.6 Flash/high a fresh independent veto reviewer only; neither has self-acceptance, integration or protected-ref authority. The bounded DeepSeek transport failure and fresh Gemini pass are already preserved for this tranche.",
+    "active_plan_and_acceptance": "The accepted Current operational weave closeout and Sol acceptance, the frozen patient-free temporal-weave plan, design and threat delta, the complete Practice Context Fabric direction, implementation_plan.md and orchestration/bernie_interaction_model.md were reread. The candidate at f32004a2f39ac769ba746afe2663813f7c422d8a proves immutable frame-set invalidation, inert reassembly requirements, fail-closed cursor/revision gaps and purpose-scoped bitemporal snapshots. The fresh Gemini architectural pass remains admissible; its exact-packet test-count and failure-receipt-path prose errors are corrected by deterministic reconciliation and AER-0037.",
+    "protected_evidence_boundaries": "No patient, clinical, product-derived, protected or historical-PHI data; raw audit; real database, session, feed, watcher, listener or service; persistence or operational retention; provider or external retrieval; GraphQL/REST product route; command/write; deployment, production, release, Pages; protected evidence or protected-ref movement is open. docs/branding and all unrelated untracked receipt, state, evidence and cost-ledger files remain preserved and excluded; explicit-path staging only is mandatory.",
+    "git_refs_and_worktree": "After a fresh origin fetch, task HEAD and local codex/ariadne-bernie-davida-parallel-seam are f32004a2f39ac769ba746afe2663813f7c422d8a, five commits ahead of origin task e1cfdcf7b1a7e98fe6a0db164dc8cdfcfa925d59. Local/origin master and local/origin handoff/current are all unchanged at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are only the intended error-register reconciliation; intended temporal review/closeout artifacts are untracked alongside preserved unrelated untracked files, including untouched docs/branding/."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_patient_free_temporal_weave_postcompaction_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the post-compaction five-source reconstruction and will finish deterministic acceptance, continuity and task-branch publication without widening the tranche."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "The already-completed fresh Gemini 3.6 Flash/high review returned one schema-constrained architectural pass at the exact clean candidate; no new provider call is planned."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unreachable",
+      "evidence": [
+        "The bounded worker transport timed out without a candidate and is closed as AER-0036; Sol recovered locally under the preserved tranche boundary."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude CLI is not selected independently."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A bounded read-only scout completed earlier; no worker or subagent holds acceptance, integration or protected authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

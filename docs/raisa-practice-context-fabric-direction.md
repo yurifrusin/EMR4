@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction, first contract and Current operational weave; patient-free temporal weave next
+Status: accepted direction through patient-free temporal weave; intent-shaped temporal retrieval rehearsal next
 
 ## Purpose
 
@@ -250,10 +250,14 @@ large “memory” feature:
    authorised Diary, waiting-room, directory and private-session read shapes
    compose into one typed expiring bundle without a new product route or data
    source.
-3. **Patient-free temporal weave** — **next**; add bounded committed-event indexing and
-   historical operational snapshots with explicit retention, tenancy and
-   replay/supersession semantics.
-4. **Intent-shaped retrieval rehearsal** — use authored-synthetic requests to
+3. **Patient-free temporal weave** — **accepted** at exact independently
+   reviewed source HEAD `f32004a2f39ac769ba746afe2663813f7c422d8a`;
+   immutable parent-bound frame sets are invalidated rather than patched,
+   sealed watcher transitions preserve their committed checkpoint before any
+   later read, continuity gaps fail closed, and purpose-scoped bitemporal
+   snapshots remain historical context rather than current truth. This proves
+   no live watcher, persistence or production retention.
+4. **Intent-shaped retrieval rehearsal** — **next**; use authored-synthetic requests to
    prove scope narrowing, minimal disclosure, ambiguity handling, stale-frame
    rejection and same-packet proofreading, first provider-free and then, under
    an exact separate occupied envelope, model-required.

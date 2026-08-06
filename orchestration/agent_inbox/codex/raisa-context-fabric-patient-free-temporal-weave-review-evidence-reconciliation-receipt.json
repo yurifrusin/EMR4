@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.verifier_evidence_reconciliation.v1",
+  "status": "corrected_without_additional_provider_call",
+  "candidate_head": "f32004a2f39ac769ba746afe2663813f7c422d8a",
+  "review_decision": "pass",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json",
+  "review_claimed_test_count": 67,
+  "authoritative_reproduced_test_count": 120,
+  "collection_breakdown": {
+    "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py": 20,
+    "tests/test_raisa_practice_context_fabric_direction.py": 3,
+    "tests/test_ariadne_agent_error_register.py": 39,
+    "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py": 21,
+    "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave_continuity.py": 3,
+    "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py": 31,
+    "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_continuity.py": 3
+  },
+  "reproduction": {
+    "execution_status": "passed",
+    "passed": 120,
+    "failed": 0,
+    "head_before": "f32004a2f39ac769ba746afe2663813f7c422d8a",
+    "head_after": "f32004a2f39ac769ba746afe2663813f7c422d8a",
+    "dirty_after": false
+  },
+  "review_claimed_failure_receipt_path": "orchestration/agent_inbox/deepseek/raisa-patient-free-temporal-weave-deepseek-timeout-failure-receipt.json",
+  "authoritative_failure_receipt_path": "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-deepseek-timeout-failure-receipt.json",
+  "path_claim_disposition": "reviewer_prose_non_authoritative_wrong_path",
+  "architectural_findings_disposition": "pass_remains_admissible",
+  "additional_provider_calls": 0,
+  "protected_refs_moved": false,
+  "product_or_patient_data_used": false
+}

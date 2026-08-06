@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_accepted_patient_free_temporal_weave_closeout_and_continuity",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, design and threat delta, exact candidate evidence, closeout, Sol acceptance, review receipt, reconciliation receipt, AER revision 31 and continuity update agree on immutable frame-set invalidation, inert reassembly, monotonic checkpointing, fail-closed gaps and non-current bitemporal history. The final 13-file packet collected and passed 199 tests; acceptance generation, Ruff, compileall, JSON parsing and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns final deterministic acceptance, explicit-path task-branch commit and push. The bounded DeepSeek implementation transport is contained as AER-0036; the fresh Gemini 3.6 Flash/high schema-constrained architectural pass is reconciled by Sol and has no integration or protected authority.",
+    "git_refs_and_worktree": "Task HEAD is f32004a2f39ac769ba746afe2663813f7c422d8a before closeout commit and remains five commits ahead of origin task e1cfdcf7b1a7e98fe6a0db164dc8cdfcfa925d59. Local/origin master and handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the enumerated temporal closeout, continuity, compass, handover, architecture-direction, review and AER artifacts are eligible for explicit staging; every unrelated untracked file is preserved.",
+    "live_handover_current_baton": "AGENTS.md now names raisa_provider_free_practice_context_fabric_patient_free_temporal_weave_pass at reviewed source f32004a2f39ac769ba746afe2663813f7c422d8a, Continuity 219 / Compass 201 and the provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal as next.",
+    "protected_evidence_boundaries": "No patient, clinical, product-derived, protected or historical-PHI data; real watcher/feed/database/session; persistence or retention; provider/external retrieval; product route/runtime; command/write; deployment, production, release, Pages; protected evidence or protected-ref movement is open. docs/branding and unrelated untracked receipt/state/evidence/cost-ledger files remain untouched and excluded. Staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

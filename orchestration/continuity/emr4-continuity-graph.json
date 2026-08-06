@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 218,
+  "graph_revision": 219,
   "harvests": [],
   "nodes": [
     {
@@ -12852,9 +12852,121 @@
         "Persistence, operational retention, provider calls, external retrieval, product runtime and new routes remain closed.",
         "Commands, writes, deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-practice-context-fabric-patient-free-temporal-weave",
+      "title": "Provider-free Practice Context Fabric patient-free temporal weave",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T05:17:04Z",
+      "updated_at": "2026-08-06T05:17:04Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f32004a2f39ac769ba746afe2663813f7c422d8a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-practice-context-fabric-current-operational-weave",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md",
+            "scope": "Define a provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal over closed authored-synthetic frames; no patient/product data, real source, persistence, provider call, product route, runtime or command."
+          }
+        ],
+        "notes": [
+          "The accepted watcher classifies sealed patient-free metadata only and executes no read.",
+          "A relevant signal retires an immutable frame set and emits one inert reassembly requirement.",
+          "Bitemporal snapshots are selected as historical context and never current truth.",
+          "Reception One and Clinician One are branded workspace families; atomic Bureau grants remain backend-owned."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-practice-context-fabric-patient-free-temporal-weave",
+          "source": "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact parent-bound invalidation, monotonic checkpointing, fail-closed continuity gaps, stale-result rejection and purpose-scoped bitemporal selection."
+        }
+      ],
+      "claim_scope": [
+        "One pure provider-free watcher contract invalidates but never patches an immutable ContextFrameSet.",
+        "Observed cursors, decisions, state-after and committed checkpoints are sealed before any later read.",
+        "Historical snapshots preserve valid time, transaction time, correction lineage and explicit coverage gaps.",
+        "No live watcher, database/feed, patient/product data, persistence, provider, runtime, command, deployment or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json"
+          ],
+          "note": "The temporal control plane invalidates read context only and does not alter the accepted combined-intent proposal or command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_reception_one_availability_reconciliation.py",
+            "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md"
+          ],
+          "note": "Committed events remain invalidation signals for a later fresh authorised read and never become current truth."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md",
+          "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-design.md",
+          "docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json",
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-31.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-deepseek-timeout-failure-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-review-evidence-reconciliation-receipt.json"
+        ],
+        "tests": [
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py",
+          "tests/test_raisa_practice_context_fabric_direction.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_synaptic_event_router.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The intent-shaped retrieval rehearsal may use only closed authored-synthetic patient-free frames under a separately frozen contract.",
+        "Patient, clinical, product-derived, protected and production data; real databases, event transport, watchers and ordinary services remain closed.",
+        "Persistence, operational retention, provider calls, external retrieval, product runtime and new routes remain closed.",
+        "Commands, writes, deployment, production, release, Pages, protected refs and protected evidence remain closed.",
+        "Requests/referrals, prescribing/medicines, billing/claims and other future Bureau implementations remain separately closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T03:54:05Z"
+  "updated_at": "2026-08-06T05:17:04Z"
 }

@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "b12261a365408e96c4d928a44624fa6e5497062d35b0af7fd59dac46cd81e5c9",
+  "canonical_register_sha256": "1509381f1e78192bc37146b926e44bd7e651ad295acb2879bfeab2b7ec1ef3b3",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 28,
+      "canonical_unchanged": 29,
       "untrusted_partial_worktree": 6
     },
     "by_category": {
       "command_scope_violation": 3,
-      "evidence_misreport": 3,
+      "evidence_misreport": 4,
       "harness_failure": 3,
       "output_contract_violation": 14,
       "read_only_violation": 1,
@@ -17,18 +17,18 @@
       "transport_timeout": 5
     },
     "by_origin": {
-      "agent_behavior": 26,
+      "agent_behavior": 27,
       "harness": 3,
       "repository": 2,
       "transport": 5
     },
     "by_process_severity": {
-      "low": 9,
+      "low": 10,
       "material": 9,
       "moderate": 18
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 15,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 16,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-orchestrator::orchestrator": 8,
@@ -44,14 +44,38 @@
     "by_role": {
       "implementer": 7,
       "orchestrator": 13,
-      "verifier": 16
+      "verifier": 17
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 36,
+  "incident_count": 37,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
+    {
+      "categories": [
+        "evidence_misreport"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0035",
+        "AER-0037"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Acceptance must machine-reconcile every verifier test-count and repository-path claim against exact collection output and the candidate tree; prose discrepancies are preserved and never copied as authoritative evidence.",
+        "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence."
+      ],
+      "recurrence_signature": "verifier.exact_packet_test_count_underreport",
+      "resource_ids": [
+        "antigravity-gemini-flash-3-6-high-verifier"
+      ],
+      "roles": [
+        "verifier"
+      ]
+    },
     {
       "categories": [
         "output_contract_violation"
@@ -207,7 +231,7 @@
       ]
     }
   ],
-  "register_revision": 30,
+  "register_revision": 31,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-06"
 }

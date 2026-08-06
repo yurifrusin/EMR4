@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_dispatch",
+  "planned_action": "independent_gemini_36_flash_high_veto_of_patient_free_temporal_weave",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the provider-free patient-free temporal weave as the next dependency-satisfied Context Fabric descendant after the accepted Current operational weave.",
+    "current_authority_allocation": "GPT Sol retains plan, integration and acceptance authority. Gemini 3.6 Flash/high receives one fresh read-only exact-HEAD veto. No verifier receives edit, command, integration or protected authority.",
+    "active_plan_and_acceptance": "The frozen temporal plan requires immutable invalidation, inert fresh-reassembly requirements, monotonic checkpoint/gap handling, stale-result rejection and distinct bitemporal snapshots; candidate HEAD f32004a2f39ac769ba746afe2663813f7c422d8a passes deterministic gates.",
+    "protected_evidence_boundaries": "The verifier may inspect repository-authored synthetic artifacts only. Patient, clinical, product-derived, protected/historical-PHI, product runtime, database/feed/listener, persistence, provider retrieval, command, deploy, release, Pages and protected-ref surfaces remain closed; docs/branding is excluded.",
+    "git_refs_and_worktree": "Read-only review branch codex/review-context-fabric-temporal is clean at exact candidate f32004a2f39ac769ba746afe2663813f7c422d8a. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "temporal_weave_pre_verifier_complete_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "assigned_agent_ids": ["antigravity-gemini-flash-3-6-high-verifier"],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": ["raisa-context-fabric-temporal-review-001"],
+      "stale_instance_ids": []
+    }
+  ]
+}
