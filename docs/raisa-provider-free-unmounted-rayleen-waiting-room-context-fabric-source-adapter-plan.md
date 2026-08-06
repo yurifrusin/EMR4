@@ -172,6 +172,23 @@ Current weave byte-unchanged while:
 No parent patch, mounted route, live source, watcher or authority expansion is
 permitted by this repair.
 
+The next exact-head veto returned a second `revision_required`: duplicated
+digest fields could be changed together and fully resealed without anchoring
+them to the authoritative frame/binding/grant inputs, and the local semantic
+validator unnecessarily coupled the independently requestable elapsed and
+threshold fields. The corrected handoff must therefore:
+
+- receive the same authoritative frame, binding, grant and alias manifest;
+- deterministically recompute the complete expected adapter result through the
+  pure adapter, require canonical equality with the supplied result, and
+  release only the recomputed envelope copy;
+- retain direct digest-derived envelope-id/revision consistency checks; and
+- prove all sixteen subsets of practitioner/status/elapsed/threshold grants,
+  including elapsed-only and threshold-only cases.
+
+This is a stricter proof of the same frozen boundary, not a new source,
+authority or runtime surface.
+
 ## Claim boundary
 
 Passing proves only that one authored-synthetic serialized A4 waiting-room

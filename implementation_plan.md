@@ -85,10 +85,12 @@ independent-veto repair around Rayleen A4's existing authorised
 authored-synthetic frame, validates and minimizes it, applies backend-issued
 request-scoped aliases and emits one Current source envelope; it cannot invoke
 or refresh the source, watch changes, mount a route, call a provider or execute
-against real product data. The first veto exposed and the repair closes a
-misnamed evidence-only result schema by separating recursively closed result
-and evidence schemas, validating one deep-copy handoff and minimizing optional
-waiting fields before parent projection. The controlling plan is
+against real product data. Two useful vetoes exposed first a misnamed
+evidence-only result schema and then fully resealed provenance detachment. The
+current repair separates recursively closed result/evidence schemas,
+recomputes the complete expected result from authoritative inputs at one
+deep-copy handoff, and supports every independent waiting-field grant subset
+before parent projection. The controlling plan is
 [`docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`](docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md).
 
 The longer clinical/practice Bureau programme must not collapse into one

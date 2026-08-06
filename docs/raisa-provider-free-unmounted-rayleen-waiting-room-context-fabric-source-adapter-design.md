@@ -69,15 +69,21 @@ shape, while a scope that requests it releases nothing.
 
 The result has its own recursively closed JSON Schema, distinct from the
 acceptance-evidence schema. A public validation function checks that schema,
-all result/envelope/trace seals, cross-linked digests and identifiers, counts,
-time/TTL relationships, unique appointment references and closed
-wait/threshold/exception semantics. The only parent handoff function repeats
-that validation and returns a deep copy of the source envelope. Direct nested
-dictionary access is not the admitted adapter-to-assembler interface.
+all result/envelope/trace seals, internal cross-linked digests and identifiers,
+counts, time/TTL relationships, unique appointment references and closed
+wait/threshold/exception semantics. The only parent handoff function then
+receives the authoritative frame, binding, grant and alias manifest,
+deterministically recomputes the complete expected adapter result and requires
+canonical equality. It returns a deep copy of the recomputed envelope, not the
+caller-supplied nested dictionary. Direct nested dictionary access is not the
+admitted adapter-to-assembler interface.
 
 Entry construction intersects optional waiting fields with the effective
 grant before sealing. The parent projection remains a second minimisation
 layer, not the first place at which disallowed source fields disappear.
+Elapsed and threshold remain independently requestable; when both exist their
+relationship is checked, while an externally anchored elapsed-only or
+threshold-only result remains valid.
 
 ## Validation order
 
@@ -94,8 +100,9 @@ layer, not the first place at which disallowed source fields disappear.
 8. Seal the source envelope, trace and result, validate their recursively
    closed schema and cross-links, and enforce cardinality/canonical-byte
    limits.
-9. Revalidate and deep-copy the envelope through the sole handoff extractor,
-   then pass it to the unchanged assembler/proofreader in the acceptance proof.
+9. Revalidate, recompute from the authoritative inputs, require canonical
+   equality and deep-copy only the recomputed envelope through the sole handoff
+   extractor, then pass it to the unchanged assembler/proofreader.
 
 No failure returns a partial entry or partially sealed envelope.
 

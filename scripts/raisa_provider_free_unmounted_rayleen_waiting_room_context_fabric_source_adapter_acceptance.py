@@ -78,7 +78,14 @@ def _replacement_packet() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any
         manifest,
         assembled_at=ASSEMBLED_AT,
     )
-    waiting_envelope = extract_waiting_room_source_envelope(adapter_result)
+    waiting_envelope = extract_waiting_room_source_envelope(
+        adapter_result,
+        frame,
+        parent["authority_binding"],
+        parent["scope_grant"],
+        manifest,
+        assembled_at=ASSEMBLED_AT,
+    )
     sources = [
         waiting_envelope
         if item["frame_type"] == "current_waiting_room_projection"
@@ -244,7 +251,14 @@ def _negative_results() -> list[str]:
         _reseal(result["adapter_trace"], "adapter_trace_digest")
         _reseal(result, "adapter_result_digest")
         try:
-            extract_waiting_room_source_envelope(result)
+            extract_waiting_room_source_envelope(
+                result,
+                frame,
+                parent["authority_binding"],
+                parent["scope_grant"],
+                manifest,
+                assembled_at=ASSEMBLED_AT,
+            )
         except WaitingRoomSourceAdapterViolation as error:
             return str(error)
         raise AssertionError("mutated adapter result unexpectedly crossed handoff")
@@ -263,6 +277,38 @@ def _negative_results() -> list[str]:
             ].__setitem__("unexpected", True)
         )
     )
+
+    results.append(
+        result_block(
+            lambda result: result["adapter_trace"].__setitem__(
+                "binding_digest", "sha256:" + "1" * 64
+            )
+        )
+    )
+    results.append(
+        result_block(
+            lambda result: result["adapter_trace"].__setitem__(
+                "grant_digest", "sha256:" + "1" * 64
+            )
+        )
+    )
+
+    def detach_source_provenance(result: dict[str, Any]) -> None:
+        detached_digest = "sha256:" + "1" * 64
+        suffix = detached_digest[-12:]
+        result["source_frame_digest"] = detached_digest
+        result["source_envelope"]["source_envelope_id"] = (
+            "synthetic:source:waiting-adapter-" + suffix
+        )
+        result["source_envelope"]["source_revision"] = (
+            "synthetic:waiting-revision:7:" + suffix
+        )
+        result["adapter_trace"]["source_frame_digest"] = detached_digest
+        result["adapter_trace"]["source_envelope_id"] = result[
+            "source_envelope"
+        ]["source_envelope_id"]
+
+    results.append(result_block(detach_source_provenance))
     return results
 
 

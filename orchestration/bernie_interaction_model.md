@@ -207,8 +207,9 @@ a completed authored-synthetic `emr4.waiting_room_context_frame.v1`, applies
 the accepted binding/grant and backend-issued opaque aliases, and emits one
 Current source envelope without invoking or refreshing the read, watching
 changes, mounting a route or accessing real product data. Its corrected
-boundary separates closed result/evidence schemas, revalidates one deep-copy
-handoff and minimizes waiting fields before the unchanged parent projection.
+boundary separates closed result/evidence schemas, recomputes the complete
+expected result from authoritative inputs at one deep-copy handoff and
+supports independently granted waiting fields before the unchanged parent projection.
 Real event transport,
 historical persistence, patient/product data, product retrieval, runtime and
 command authority remain separately closed.

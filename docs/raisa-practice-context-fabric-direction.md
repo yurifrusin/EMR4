@@ -280,11 +280,12 @@ large “memory” feature:
    opaque-reference manifest and emits one unmounted
    `current_waiting_room_projection` source envelope. It cannot invoke or
    refresh the source, watch changes, mount a route, call a provider or execute
-   against real product data. Its first veto found that the nominal result
-   schema described only evidence; the repaired candidate separates closed
-   result/evidence schemas, revalidates one deep-copy handoff and minimizes
-   optional waiting fields before the unchanged parent projection. The
-   controlling plan is
+   against real product data. Two vetoes found the nominal evidence-only result
+   schema and then fully resealed provenance detachment. The current candidate
+   separates closed result/evidence schemas, recomputes the entire expected
+   result from authoritative inputs at the deep-copy handoff and supports all
+   independent waiting-field grant subsets before the unchanged parent
+   projection. The controlling plan is
    `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`.
 7. **Real product read descendants** — open one source and one role/purpose at a
    time with privacy, identity, audit, retention and database acceptance.

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 import hashlib
+from itertools import combinations
 import json
 from pathlib import Path
 
@@ -43,6 +44,17 @@ ARTIFACT_ROOT = (
     / "continuity"
     / "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter"
 )
+WAITING_FIELDS = (
+    "waiting_practitioner_ref",
+    "waiting_status",
+    "waiting_elapsed_minutes",
+    "waiting_threshold_code",
+)
+WAITING_FIELD_SUBSETS = [
+    frozenset(items)
+    for size in range(len(WAITING_FIELDS) + 1)
+    for items in combinations(WAITING_FIELDS, size)
+]
 
 
 def _json(path: Path) -> dict:
@@ -140,9 +152,27 @@ def test_adapter_output_contains_no_source_identity_or_patient_token() -> None:
 
 def test_adapter_source_replaces_only_waiting_envelope_and_parent_proofreader_releases() -> None:
     packet = build_authored_synthetic_packet()
-    result = _adapt()
+    frame = build_authored_synthetic_waiting_room_frame()
+    manifest = build_authored_synthetic_alias_manifest(
+        frame, packet["authority_binding"], packet["scope_grant"]
+    )
+    result = adapt_waiting_room_source(
+        frame,
+        packet["authority_binding"],
+        packet["scope_grant"],
+        manifest,
+        assembled_at=ASSEMBLED_AT,
+    )
     sources = _replace_waiting_source(
-        packet, extract_waiting_room_source_envelope(result)
+        packet,
+        extract_waiting_room_source_envelope(
+            result,
+            frame,
+            packet["authority_binding"],
+            packet["scope_grant"],
+            manifest,
+            assembled_at=ASSEMBLED_AT,
+        ),
     )
     frame_set, source_trace, weave_trace = assemble_current_operational_weave(
         packet["candidate"],
@@ -218,7 +248,15 @@ def test_missing_arrival_remains_explicit_and_optional_values_are_not_invented()
     assert "threshold_code" not in entry
 
     sources = _replace_waiting_source(
-        packet, extract_waiting_room_source_envelope(result)
+        packet,
+        extract_waiting_room_source_envelope(
+            result,
+            frame,
+            binding,
+            grant,
+            manifest,
+            assembled_at=ASSEMBLED_AT,
+        ),
     )
     frame_set, source_trace, weave_trace = assemble_current_operational_weave(
         candidate,
@@ -345,7 +383,10 @@ def test_alias_manifest_schema_is_recursively_closed() -> None:
     ],
 )
 def test_resealed_adapter_output_additions_fail_before_parent_handoff(mutator) -> None:
-    result = _adapt()
+    frame, binding, grant, manifest = _inputs()
+    result = adapt_waiting_room_source(
+        frame, binding, grant, manifest, assembled_at=ASSEMBLED_AT
+    )
     mutator(result)
     _reseal(result["source_envelope"], "source_digest")
     result["adapter_trace"]["source_digest"] = result["source_envelope"][
@@ -357,21 +398,91 @@ def test_resealed_adapter_output_additions_fail_before_parent_handoff(mutator) -
     with pytest.raises(
         WaitingRoomSourceAdapterViolation, match="adapter_result_schema_invalid"
     ):
-        extract_waiting_room_source_envelope(result)
+        extract_waiting_room_source_envelope(
+            result,
+            frame,
+            binding,
+            grant,
+            manifest,
+            assembled_at=ASSEMBLED_AT,
+        )
 
 
-def test_adapter_output_is_minimized_to_the_narrow_waiting_field_grant() -> None:
+@pytest.mark.parametrize("trace_field", ["binding_digest", "grant_digest"])
+def test_fully_resealed_trace_provenance_detachment_fails_handoff(
+    trace_field: str,
+) -> None:
+    frame, binding, grant, manifest = _inputs()
+    result = adapt_waiting_room_source(
+        frame, binding, grant, manifest, assembled_at=ASSEMBLED_AT
+    )
+    result["adapter_trace"][trace_field] = "sha256:" + "1" * 64
+    _reseal(result["adapter_trace"], "adapter_trace_digest")
+    _reseal(result, "adapter_result_digest")
+
+    with pytest.raises(
+        WaitingRoomSourceAdapterViolation,
+        match="adapter_result_provenance_mismatch",
+    ):
+        extract_waiting_room_source_envelope(
+            result,
+            frame,
+            binding,
+            grant,
+            manifest,
+            assembled_at=ASSEMBLED_AT,
+        )
+
+
+def test_fully_resealed_source_digest_and_id_detachment_fails_handoff() -> None:
+    frame, binding, grant, manifest = _inputs()
+    result = adapt_waiting_room_source(
+        frame, binding, grant, manifest, assembled_at=ASSEMBLED_AT
+    )
+    detached_digest = "sha256:" + "1" * 64
+    suffix = detached_digest[-12:]
+    result["source_frame_digest"] = detached_digest
+    result["source_envelope"]["source_envelope_id"] = (
+        "synthetic:source:waiting-adapter-" + suffix
+    )
+    result["source_envelope"]["source_revision"] = (
+        "synthetic:waiting-revision:7:" + suffix
+    )
+    _reseal(result["source_envelope"], "source_digest")
+    result["adapter_trace"]["source_frame_digest"] = detached_digest
+    result["adapter_trace"]["source_envelope_id"] = result["source_envelope"][
+        "source_envelope_id"
+    ]
+    result["adapter_trace"]["source_digest"] = result["source_envelope"][
+        "source_digest"
+    ]
+    _reseal(result["adapter_trace"], "adapter_trace_digest")
+    _reseal(result, "adapter_result_digest")
+
+    with pytest.raises(
+        WaitingRoomSourceAdapterViolation,
+        match="adapter_result_provenance_mismatch",
+    ):
+        extract_waiting_room_source_envelope(
+            result,
+            frame,
+            binding,
+            grant,
+            manifest,
+            assembled_at=ASSEMBLED_AT,
+        )
+
+
+@pytest.mark.parametrize("selected_waiting_fields", WAITING_FIELD_SUBSETS)
+def test_adapter_output_is_minimized_for_every_waiting_field_grant_subset(
+    selected_waiting_fields: frozenset[str],
+) -> None:
     packet = build_authored_synthetic_packet()
     candidate = deepcopy(packet["candidate"])
     candidate["requested_fields"] = [
         field
         for field in candidate["requested_fields"]
-        if field
-        not in {
-            "waiting_practitioner_ref",
-            "waiting_elapsed_minutes",
-            "waiting_threshold_code",
-        }
+        if field not in WAITING_FIELDS or field in selected_waiting_fields
     ]
     _reseal(candidate, "candidate_digest")
     context_need = build_operational_context_need(
@@ -395,13 +506,27 @@ def test_adapter_output_is_minimized_to_the_narrow_waiting_field_grant() -> None
         assembled_at=ASSEMBLED_AT,
     )
 
-    assert result["source_envelope"]["payload"]["entries"] == [
-        {
-            "appointment_ref": "synthetic:appointment:one",
-            "status": "ARRIVED",
-        }
-    ]
+    expected_entry = {"appointment_ref": "synthetic:appointment:one"}
+    if "waiting_practitioner_ref" in selected_waiting_fields:
+        expected_entry["practitioner_ref"] = "synthetic:practitioner:one"
+    if "waiting_status" in selected_waiting_fields:
+        expected_entry["status"] = "ARRIVED"
+    if "waiting_elapsed_minutes" in selected_waiting_fields:
+        expected_entry["elapsed_wait_minutes"] = 10
+        expected_entry["longest_wait_rank"] = 1
+    if "waiting_threshold_code" in selected_waiting_fields:
+        expected_entry["threshold_code"] = "UNDER_15_MINUTES"
+
+    assert result["source_envelope"]["payload"]["entries"] == [expected_entry]
     validate_waiting_room_source_adapter_result(result)
+    assert extract_waiting_room_source_envelope(
+        result,
+        frame,
+        packet["authority_binding"],
+        grant,
+        manifest,
+        assembled_at=ASSEMBLED_AT,
+    ) == result["source_envelope"]
 
 
 def test_output_expiry_is_minimum_and_byte_limit_is_enforced() -> None:
@@ -442,7 +567,7 @@ def test_committed_fixture_and_acceptance_evidence_are_reproducible_and_closed()
             evidence
         )
     )
-    assert evidence["case_count"] == evidence["passed_case_count"] == 15
+    assert evidence["case_count"] == evidence["passed_case_count"] == 18
     assert all(value == 0 for value in evidence["zero_action_posture"].values())
     fixture_digest = "sha256:" + hashlib.sha256(
         (ARTIFACT_ROOT / "authored-synthetic-waiting-room-frame.json").read_bytes()

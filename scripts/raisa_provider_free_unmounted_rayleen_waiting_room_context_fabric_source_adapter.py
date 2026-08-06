@@ -276,6 +276,16 @@ def validate_waiting_room_source_adapter_result(result: dict[str, Any]) -> None:
     )
     if any(left != right for left, right in expected_pairs):
         raise WaitingRoomSourceAdapterViolation("adapter_result_linkage_invalid")
+    source_suffix = result["source_frame_digest"][-12:]
+    if envelope["source_envelope_id"] != (
+        "synthetic:source:waiting-adapter-" + source_suffix
+    ):
+        raise WaitingRoomSourceAdapterViolation("adapter_result_provenance_invalid")
+    if envelope["source_revision"] != (
+        f"synthetic:waiting-revision:{envelope['payload']['context_revision']}:"
+        f"{source_suffix}"
+    ):
+        raise WaitingRoomSourceAdapterViolation("adapter_result_provenance_invalid")
     if trace["source_entry_count"] != trace["released_entry_count"]:
         raise WaitingRoomSourceAdapterViolation("adapter_result_count_mismatch")
     entries = envelope["payload"]["entries"]
@@ -297,9 +307,11 @@ def validate_waiting_room_source_adapter_result(result: dict[str, Any]) -> None:
         threshold = entry.get("threshold_code")
         rank = entry.get("longest_wait_rank")
         exception = entry.get("flow_exception_code")
-        if (elapsed is None) != (threshold is None):
-            raise WaitingRoomSourceAdapterViolation("adapter_result_wait_pair_invalid")
-        if elapsed is not None and threshold != _threshold_code(elapsed):
+        if (
+            elapsed is not None
+            and threshold is not None
+            and threshold != _threshold_code(elapsed)
+        ):
             raise WaitingRoomSourceAdapterViolation("adapter_result_threshold_invalid")
         if rank is not None and elapsed is None:
             raise WaitingRoomSourceAdapterViolation("adapter_result_rank_invalid")
@@ -309,11 +321,30 @@ def validate_waiting_room_source_adapter_result(result: dict[str, Any]) -> None:
             raise WaitingRoomSourceAdapterViolation("adapter_result_exception_invalid")
 
 
-def extract_waiting_room_source_envelope(result: dict[str, Any]) -> dict[str, Any]:
-    """Return only a revalidated immutable-copy handoff to the parent assembler."""
+def extract_waiting_room_source_envelope(
+    result: dict[str, Any],
+    frame: dict[str, Any],
+    authority_binding: dict[str, Any],
+    scope_grant: dict[str, Any],
+    alias_manifest: dict[str, Any],
+    *,
+    assembled_at: str,
+) -> dict[str, Any]:
+    """Recompute and anchor the exact result before its parent handoff."""
 
     validate_waiting_room_source_adapter_result(result)
-    return deepcopy(result["source_envelope"])
+    expected = adapt_waiting_room_source(
+        frame,
+        authority_binding,
+        scope_grant,
+        alias_manifest,
+        assembled_at=assembled_at,
+    )
+    if canonical_json(result) != canonical_json(expected):
+        raise WaitingRoomSourceAdapterViolation(
+            "adapter_result_provenance_mismatch"
+        )
+    return deepcopy(expected["source_envelope"])
 
 
 def _expected_signal_values(frame: dict[str, Any]) -> list[dict[str, Any]]:

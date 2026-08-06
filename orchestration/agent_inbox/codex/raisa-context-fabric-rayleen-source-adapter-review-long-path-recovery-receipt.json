@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.review-worktree-setup-recovery.v1",
+  "status": "recovered_short_path",
+  "observed_on": "2026-08-06",
+  "candidate_head": "1663d6d1cc79ebc8f2cb15446d6fa61196bd4fe8",
+  "branch": "codex/review-context-fabric-rayleen-source-adapter-1663d6d1",
+  "failed_path": "C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-review-2",
+  "failure_class": "windows_checkout_filename_too_long",
+  "failed_checkout_completed": false,
+  "failed_path_exists_after": false,
+  "candidate_or_protected_ref_changed": false,
+  "recovery_path": "C:/Users/sarashera/EMR4-worktrees/r2",
+  "recovery_head": "1663d6d1cc79ebc8f2cb15446d6fa61196bd4fe8",
+  "recovery_worktree_clean": true,
+  "provider_or_model_calls": 0,
+  "protected_ref_updates": 0,
+  "prevention_control": "Use bounded short leaf names under the configured worker-worktree root for repositories containing deep continuity paths, then require exact-head clean-worktree preflight before dispatch."
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_rayleen_source_adapter_provenance_anchor_repair_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The current repair deterministically recomputes the entire expected adapter result from the authoritative frame, binding, grant and alias manifest at the sole handoff, requires canonical equality, retains digest-derived id/revision checks, supports all sixteen waiting-field subsets, records 18/18 acceptance cases and passes 36 focused tests. The unchanged inherited packet is expected to collect 195 after those added parameter cases.",
+    "current_authority_allocation": "GPT Sol owns the bounded repair, deterministic verification, candidate commit and later acceptance. The fresh independent x-high GPT Sol context supplied read-only veto only and completed at unchanged 1663d6d1. Antigravity remained zero-call unavailable at OAuth; no worker owns integration or protected refs.",
+    "git_refs_and_worktree": "Primary task branch is at rejected review source 1663d6d1cc79ebc8f2cb15446d6fa61196bd4fe8 with only named provenance-repair/governance paths intended for commit. The r2 review worktree remains clean and unchanged at that source. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md records both independent revision_required findings and names the externally anchored provider-free unmounted Rayleen source-adapter repair as active. Fresh exact-head review remains required after commit.",
+    "protected_evidence_boundaries": "The repair remains pure, unmounted and authored-synthetic. It changes no Current-weave parent, app, route, GraphQL/REST command, database, watcher, provider, event transport, deployment, Pages or protected ref. Patient/product/protected data and docs/branding remain untouched; unrelated untracked files remain excluded and staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_rayleen_source_adapter_provenance_anchor_repair_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records both independent revision_required findings and names the externally anchored provider-free unmounted Rayleen source-adapter repair as active. Fresh exact-head review remains required after commit.",
+    "current_authority_allocation": "GPT Sol owns the bounded repair, deterministic verification, candidate commit and later acceptance. The fresh independent x-high GPT Sol context supplied read-only veto only and completed at unchanged 1663d6d1. Antigravity remained zero-call unavailable at OAuth; no worker owns integration or protected refs.",
+    "active_plan_and_acceptance": "The current repair deterministically recomputes the entire expected adapter result from the authoritative frame, binding, grant and alias manifest at the sole handoff, requires canonical equality, retains digest-derived id/revision checks, supports all sixteen waiting-field subsets, records 18/18 acceptance cases and passes 36 focused tests. The unchanged inherited packet is expected to collect 195 after those added parameter cases.",
+    "protected_evidence_boundaries": "The repair remains pure, unmounted and authored-synthetic. It changes no Current-weave parent, app, route, GraphQL/REST command, database, watcher, provider, event transport, deployment, Pages or protected ref. Patient/product/protected data and docs/branding remain untouched; unrelated untracked files remain excluded and staging is explicit-path only.",
+    "git_refs_and_worktree": "Primary task branch is at rejected review source 1663d6d1cc79ebc8f2cb15446d6fa61196bd4fe8 with only named provenance-repair/governance paths intended for commit. The r2 review worktree remains clean and unchanged at that source. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "rayleen_source_adapter_provenance_repair_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol implemented only the two exact veto repairs and generated deterministic authored-synthetic evidence."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["The independent veto completed revision_required with exact clean-head evidence and no edits."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "unreachable", "evidence": ["AER-0039 preserves the exhausted zero-call OAuth timeout; no Gemini result exists."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unreachable", "evidence": ["AER-0038 remains contained and no worker source is adopted."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
