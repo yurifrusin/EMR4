@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_native_read_only_durability_migration_transaction_architecture_plan_recovery_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton accepts the pure durability state machine and permits only declarative migration/transaction architecture next. Candidate bea7d719 is rejected; recovered exact candidate is 5de1ba511910335ea2ee73f12877ee886639c836 and AER-0051 remains open.",
+    "current_authority_allocation": "GPT Sol retains recovery, plan meaning, acceptance, integration and baton authority. One genuinely fresh native reviewer receives read-only findings authority at exact recovered HEAD only; no mutation, implementation, self-acceptance, provider, database/runtime, protected-ref or push authority.",
+    "active_plan_and_acceptance": "The recovered plan has 18 closed relations and 22 future adversarial cases. It adds authenticated receiver-owned immutable admission, admission/receipt-first source-independent redelivery, append-only lifecycle-owned anchors fencing the next transition, atomic DECISION lifecycle append and exact generation-local key schedule/rotation. The veto must reattack all five original findings and the new admission/anchor state machine.",
+    "protected_evidence_boundaries": "Review is allowlist-only. No protected holdout, historical Diary, branding, unrelated receipt/evidence, app/database/runtime/provider surface may be enumerated or read. No uv, pip, package/environment bootstrap, pytest cache, bytecode or filesystem mutation is permitted. The only executable test path is the already-installed absolute system pytest with --noconftest, -p no:cacheprovider and PYTHONDONTWRITEBYTECODE=1; otherwise stop and report.",
+    "git_refs_and_worktree": "Recovered task HEAD is 5de1ba511910335ea2ee73f12877ee886639c836 and origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Fresh worktree C:/Users/sarashera/EMR4-worktrees/r24 is clean on codex/review-durability-migration-transaction-plan-recovery-5de1ba51 at exact recovered HEAD."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_plan_recovery_veto_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed the five-finding recovery after 119 checks, Ruff, diff validation and a passed pre-commit receipt."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["A genuinely fresh native reviewer is available; its packet explicitly prevents the prior environment bootstrap recurrence."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["No external model/provider call is authorised."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is active before plan acceptance."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-codex-durability-migration-transaction-plan-recovery-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

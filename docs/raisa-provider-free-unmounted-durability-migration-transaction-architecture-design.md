@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: recovered design candidate pending fresh independent veto
+Status: second recovered design candidate pending fresh independent veto
 
 ## Purpose
 
@@ -69,28 +69,45 @@ dynamic SQL and no `PUBLIC` execute. Every tenant key includes `practice_id`.
 
 The observer does not send a free-standing decision packet to the coordinator.
 It may execute one receiver-owned admission function. That function rederives
-the actual observer `session_user`, reselects the exact payload-free source row,
-validates coordinate/predecessor/aggregate revision and generation-local key
-interval, then appends one immutable closed admission. Its digest binds the
-authenticated observer/binding, source-membership digest and proofread packet.
-Raw UUID and alias values cross neither the receiver boundary nor the admission
-row.
+the actual observer `session_user` and first locks and loads the complete
+retained admission set and receipt for the exact locator. At most one immutable
+`PRIMARY` plus one immutable `CONFLICT` sentinel may exist per position. An
+exact duplicate returns the primary without source access. A different
+authenticated attempted digest appends or returns the sole closed conflict
+sentinel, including after source purge, and cannot overwrite the primary.
+
+Only a first primary requires the receiver to reselect the exact payload-free
+source row, validate coordinate/predecessor/aggregate revision and the
+generation-local key interval, and bind the authenticated observer/binding,
+source-membership digest and proofread packet into the primary digest.
+Observation-digest reuse at another position similarly persists one conflict-
+only sentinel after authenticated source validation. A sentinel contains only
+the binding/source coordinate, attempted admission digest and closed reason;
+raw UUID, alias and copied packet values cross neither the receiver boundary nor
+the stored admission set.
 
 The observer has no direct DML or durability-state privilege; the admission
 receiver has no checkpoint/effect authority. The coordinator can identify an
-admission but cannot invent or replace one. Exact duplicate submission is
-inert; mismatch and digest reuse become corruption inputs. Operational database
-transport/channel and credential proof remain later gates.
+admission set but cannot invent or replace one. Exact duplicate submission is
+inert; the first mismatch or digest reuse becomes durable receiver-authored
+corruption evidence and all later conflicts are storage-bounded by the same
+sentinel. Primary and conflict rows are retained together with receipt/
+checkpoint evidence. Operational database transport/channel and credential
+proof remain later gates. Concurrent first-attempt uniqueness races reload the
+winner: exact equality is inert, while inequality appends or returns the sole
+conflict sentinel rather than disappearing behind `ON CONFLICT DO NOTHING`.
 
 ## Coordinator transaction
 
 At `SERIALIZABLE`, the coordinator rederives binding, locks the generation
 registry barrier and exact checkpoint, and verifies that the newest independent
-anchor equals that checkpoint. It then checks retained receipt/admission state
-before any new-position work. Exact redelivery uses those retained rows and
-therefore remains valid after independent source purge. For a new transition it
-reloads the immutable authenticated admission and generation-local key proof;
-it accepts no copied decision values and never reads raw source UUID/alias.
+anchor equals that checkpoint. It then loads the complete stored admission set
+and retained receipt by locator before any new-position work. Any conflict
+sentinel forces the atomic rebase path before redelivery can succeed. Otherwise
+exact primary/receipt redelivery uses those retained rows and remains valid
+after independent source purge. For a new transition it reloads the immutable
+authenticated primary and generation-local key proof; it accepts no copied
+decision values and never reads raw source UUID/alias.
 
 Receipt, monotonic watermarks, one-way frame retirement, one coalesced
 obligation, the `DECISION` lifecycle row, audit and checkpoint disposition
@@ -101,19 +118,23 @@ audit is a one-to-one detail, so lifecycle revisions cannot be reassigned from
 rotation to audit. Obligation buckets are derived from canonical admitted
 history; no mutable exact cause counter or caller bucket becomes authority.
 
-Exact redelivery is inert. Any identity mismatch, digest reuse, demonstrated
-admission gap, wrong predecessor/epoch, missing required admission or
-unverifiable key holds the last contiguous checkpoint, fully invalidates and
-atomically requires rebase. An event not yet admitted is ordinary waiting.
+Exact redelivery is inert only when the retained set contains a matching primary
+and no conflict. Any receiver-authored conflict sentinel, identity mismatch,
+digest reuse, demonstrated admission gap, wrong predecessor/epoch, missing
+required primary or unverifiable key holds the last contiguous checkpoint,
+fully invalidates and atomically requires rebase. An event not yet admitted is
+ordinary waiting.
 
 ## Restart and anchors
 
 Lifecycle authority appends a distinct immutable recovery anchor for the
 baseline and every committed decision/rotation checkpoint. A candidate
-checkpoint is never its own authority, and the next lifecycle transition is
-blocked until the latest anchor exactly matches it. After a crash in the
-commit-to-anchor window, lifecycle authority may complete the pending anchor
-only by independently re-verifying the entire committed state; otherwise a new
+checkpoint is never its own authority, and coordinator consumption plus the
+next decision or rotation lifecycle transition is blocked until the latest
+anchor exactly matches it. Receiver-owned bounded primary/conflict admission
+appends may continue while that anchor is pending. After a crash in the commit-
+to-anchor window, lifecycle authority may complete the pending anchor only by
+independently re-verifying the entire committed state; otherwise a new
 generation is required. Resume requires exact agreement among the anchor,
 verified durability state and next retained admission/source continuity.
 Neither path reconstructs current truth or restores a retired frame.

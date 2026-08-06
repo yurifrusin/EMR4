@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_durability_migration_transaction_architecture_admission_conflict_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover accepts the pure provider-free unmounted durability state-machine rehearsal and authorises only the declarative migration-and-transaction architecture descendant. Candidate 5de1ba511910335ea2ee73f12877ee886639c836 remains rejected; this recovery is not yet accepted and grants no implementation authority.",
+    "current_authority_allocation": "GPT Sol owns the second architecture recovery and task-branch commit. A genuinely fresh exact-head native veto must independently review the committed correction before acceptance. No external implementation/provider worker, integration authority or protected-ref authority is active.",
+    "active_plan_and_acceptance": "The second recovery preserves the exact 18-relation architecture while defining at most one immutable PRIMARY and one immutable CONFLICT sentinel per generation/position, retained-evidence-first source-independent comparison, bounded uniqueness-race convergence, stored-locator-only coordinator rebase and receiver admission continuity during a pending independent anchor. AER-0051 remains open. Fifty-seven focused plan/register checks and ninety-eight parent/source/API Spine checks pass, with Ruff and diff validation.",
+    "protected_evidence_boundaries": "No protected evidence or historical PHI was opened. No app, Alembic, Diary, API Spine or runtime source changed; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, command/write authority, credential, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and all unrelated untracked receipt/state/evidence/cost files remain preserved and excluded.",
+    "git_refs_and_worktree": "Before this explicit-path commit the active task branch remains at 5de1ba511910335ea2ee73f12877ee886639c836 and origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named recovery documents, AER artifacts, tests and orchestration receipts will be staged; docs/branding and unrelated untracked files remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_recovery_2_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol applied the bounded second recovery and all 155 serially executed focused/parent/API checks passed."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The completed r24 veto is preserved; a distinct fresh exact-head veto will follow the recovery commit."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model reviewer is active for this commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

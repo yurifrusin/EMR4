@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: recovered architecture plan candidate pending fresh independent veto
+Status: second recovered architecture plan candidate pending fresh independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
@@ -103,15 +103,21 @@ relations and no generic work queue or event store:
    observation digest and is then discarded; it never reaches receipt or audit.
    The predecessor is zero only at position one and otherwise exactly position
    minus one. Stream epoch is fixed to `1` for this source-contract version.
-4. `context_proofread_observation_admission` — immutable, receiver-owned rows
-   keyed by the full observer-generation coordinate plus source position. One
-   hardened admission entry point rederives the actual observer `session_user`,
-   reselects the exact payload-free source row, validates its coordinate,
-   predecessor, aggregate revision and generation-local key interval, and binds
-   those facts to the closed proofread packet and its admission digest. The
-   row stores no raw event UUID, aggregate alias, payload, free text or product
-   identifier. The observer receives no direct DML and the coordinator may use
-   only this admitted row, never a caller-supplied decision packet.
+4. `context_proofread_observation_admission` — immutable, receiver-owned,
+   bounded attempt rows keyed by the full observer-generation coordinate,
+   source position and closed entry kind. The relation permits at most one
+   `PRIMARY` plus at most one `CONFLICT` sentinel for that position. One
+   hardened admission entry point rederives the actual observer `session_user`.
+   For a first `PRIMARY` it reselects the exact payload-free source row,
+   validates its coordinate, predecessor, aggregate revision and generation-
+   local key interval, and binds those facts to the closed proofread packet and
+   its admission digest. A `CONFLICT` stores only the authenticated binding and
+   source coordinate, attempted admission digest and a closed conflict reason;
+   it contains no copied packet. Neither entry kind stores a raw event UUID,
+   aggregate alias, payload, free text or product identifier. The observer
+   receives no direct DML and the coordinator may use only the complete stored
+   admission set, never a caller-supplied decision packet. A `CONFLICT` grants
+   no positive decision meaning and is sufficient only for fail-closed rebase.
 5. `context_generation_registry_barrier` — one lock/barrier row per exact
    practice/source/stream. Generation registration/rebaseline and later source
    retention must serialize on it.
@@ -178,8 +184,10 @@ Every primary, unique and foreign key of a tenant-bearing relation includes
 non-null `practice_id` and the full necessary source/generation coordinate.
 Cross-practice foreign keys are impossible. Source-row deletion never cascades
 to admission, anchor, receipt/checkpoint, audit, generation, pin or key-schedule
-state. Admission rows share the receipt/checkpoint retention family and cannot
-be removed while their receipt or redelivery comparison remains retained.
+state. A position's `PRIMARY` and `CONFLICT` admission rows share the receipt/
+checkpoint retention family and are retained together. Neither can be removed
+while its receipt, checkpoint, restart, redelivery or conflict meaning remains
+retained.
 
 ## Ownership, role and binding model
 
@@ -260,19 +268,33 @@ commit timestamp, WAL LSN, the existing `(occurred_at,event_id)` cursor and
 The observer never hands an unauthenticated packet to the coordinator. Through
 one narrow receiver-owned entry point at `READ COMMITTED`, the actual observer
 `session_user` is resolved to exactly one active observer/practice/source/epoch
-binding. The receiver then reselects the exact immutable source row, validates
-its coordinate, predecessor and aggregate revision, verifies the packet's
-generation-local key id/interval and closed schema, and appends one immutable
-`context_proofread_observation_admission` row. The admission digest binds the
-observer principal/binding, complete generation coordinate, source-membership
-digest and proofread decision packet. Raw UUID/alias values are discarded at
-the receiver boundary and never enter the admission.
+binding. The receiver first locks and loads the complete retained admission set
+and receipt for the exact generation and position. This retained-evidence-first
+comparison is deliberately before source selection. If a `PRIMARY` already
+exists, an exact authenticated admission-digest resubmission returns it without
+source access; a mismatch appends or returns the sole bounded `CONFLICT`
+sentinel even after an independently authorised source purge.
+
+Only when no `PRIMARY` or `CONFLICT` exists does the receiver reselect the exact
+immutable source row, validate its coordinate, predecessor and aggregate
+revision, verify the packet's generation-local key id/interval and closed
+schema, and append the `PRIMARY`. Its admission digest binds the observer
+principal/binding, complete generation coordinate, source-membership digest and
+proofread decision packet. Observation-digest reuse at a different position
+appends a conflict-only sentinel at the attempted coordinate after the same
+authenticated source-membership checks. Raw UUID/alias values are discarded at
+the receiver boundary and never enter either entry kind.
 
 The observer has no table DML, coordinator function or checkpoint privilege.
 The receiver has no decision-effect, checkpoint, fresh-read or command
-authority. Exact resubmission returns the existing admission; same-position
-mismatch or observation-digest reuse is a typed corruption input for the
-coordinator and cannot overwrite the immutable row. Database transport
+authority. The unique key and closed entry kind allow at most one `PRIMARY` and
+one `CONFLICT` per position: exact duplicates are inert, the first mismatch or
+digest reuse becomes durable receiver-authored conflict evidence, and later
+conflicting attempts cannot grow storage without bound. No attempt overwrites
+an immutable row. If concurrent first attempts race on the unique `PRIMARY` or
+generation-local observation-digest constraint, the receiver reloads the
+committed winner: equality is inert and inequality appends or returns the sole
+`CONFLICT`; `ON CONFLICT DO NOTHING` is not an outcome. Database transport
 authentication/channel protection and credential provisioning remain a later
 operational gate; this architecture does not claim they have been implemented
 or cryptographically proven.
@@ -290,13 +312,15 @@ transaction it:
 4. verifies that the latest lifecycle-owned recovery anchor exactly matches the
    current checkpoint; an absent/pending/mismatched anchor permits no next
    transition;
-5. loads an existing receipt and its retained admission first. Exact coordinate,
-   admission and observation digest equality returns the receipt without source
-   access or mutation; mismatch or digest reuse is corruption;
-6. when no receipt exists, loads and verifies the exact immutable admitted row,
-   its authenticated observer/binding, source-membership digest, key interval
-   and full coordinate; it never accepts a caller-supplied decision packet or
-   reads the raw source UUID/alias;
+5. loads the complete stored admission set and any existing receipt by locator.
+   Any retained `CONFLICT` sentinel is durable corruption evidence and forces
+   the atomic rebase path before exact-redelivery success. Otherwise exact
+   receipt/`PRIMARY`/observation-digest equality returns the receipt without
+   source access or mutation;
+6. when no receipt exists and no conflict exists, loads and verifies the exact
+   immutable `PRIMARY`, its authenticated observer/binding, source-membership
+   digest, key interval and full coordinate; it never accepts a caller-supplied
+   decision packet or reads the raw source UUID/alias;
 7. derives contiguity, corruption and every canonical effect;
 8. stages receipt, watermarks, one-way retirement, coalesced obligation,
    `DECISION` lifecycle row, minimized audit and checkpoint disposition; and
@@ -312,12 +336,13 @@ lock.
 
 Exact same-position/same-admission/same-digest redelivery returns the stored
 receipt and makes no change even after the independently eligible source row is
-purged. `ON CONFLICT DO NOTHING` alone is forbidden. Same-position mismatch,
-digest reuse, wrong predecessor/epoch, missing required admission, unknown key
-or a demonstrated admitted-position gap holds the last contiguous checkpoint,
-fully invalidates and moves the generation to `REBASE_REQUIRED` atomically. A
-source row that simply has not yet produced an admission is ordinary waiting,
-not a fabricated gap.
+purged, provided no conflict sentinel exists. `ON CONFLICT DO NOTHING` alone is
+forbidden. A stored same-position mismatch or digest-reuse sentinel, wrong
+predecessor/epoch, missing required primary admission, unknown key or a
+demonstrated admitted-position gap holds the last contiguous checkpoint, fully
+invalidates and moves the generation to `REBASE_REQUIRED` atomically. A source
+row that simply has not yet produced an admission is ordinary waiting, not a
+fabricated gap.
 
 Deadlock and serialization retries are permitted only for exact PostgreSQL
 retryable SQLSTATEs, over the complete transaction, with the same idempotency
@@ -341,8 +366,10 @@ one exact anchor.
 A crash after a coordinator/rotation commit but before its independent anchor
 cannot skip ahead. The lifecycle authority may complete the pending anchor only
 after re-verifying the entire committed receipt/lifecycle/audit/checkpoint state;
-otherwise restart returns `NEW_GENERATION_REQUIRED`. A temporarily pending
-anchor merely blocks more admission processing; it is never inferred from the
+otherwise restart returns `NEW_GENERATION_REQUIRED`. While an anchor is pending,
+receiver-owned immutable `PRIMARY` or `CONFLICT` admission appends may continue,
+but the coordinator cannot consume the next admission and no next decision or
+rotation lifecycle transition may begin. The anchor is never inferred from the
 coordinator's candidate state.
 
 Missing, stale, rewritten or mismatched anchors return
@@ -432,11 +459,16 @@ authored synthetic opaque coordinates only. At minimum it must prove:
 4. only the exactly bound observer login can invoke admission; the receiver
    revalidates source membership and a coordinator-supplied decision packet is
    rejected;
-5. exact admission resubmission is inert, while same-position packet mismatch
-   and digest reuse cannot replace an admitted row and force rebase;
+5. exact admission resubmission is inert before and after source purge, while a
+   same-position packet mismatch or observation-digest reuse appends one
+   durable receiver-authored conflict sentinel, never replaces the primary,
+   remains visible after source purge and bounds the position to at most two
+   admission rows; concurrent first-primary and first-conflict races converge
+   on the same bounded set without suppressing a mismatch;
 6. concurrent coordinators serialize and exact redelivery is inert;
-7. exact receipt/admission redelivery still succeeds after authorized source-row
-   purge and performs no source access;
+7. exact receipt/primary redelivery still succeeds after authorized source-row
+   purge and performs no source access, while any retained conflict sentinel is
+   loaded through the same locator and forces rebase before redelivery success;
 8. same-position mismatch, digest reuse, demonstrated admitted-position gap,
    wrong predecessor/epoch, missing required admission and key loss hold the
    checkpoint and require rebase;
@@ -451,8 +483,10 @@ authored synthetic opaque coordinates only. At minimum it must prove:
 14. JSON/text/direct identifier/raw UUID/correlation/session/payload smuggling
     fails at schema and entry-point boundaries;
 15. baseline, post-decision and post-rotation anchors are append-only and
-    lifecycle-owned; pending/crash/tampered/missing anchors block the next
-    transition and cannot resume unverified state;
+    lifecycle-owned; pending/crash/tampered/missing anchors block coordinator
+    consumption and every next decision/rotation transition without blocking
+    bounded receiver-owned admission appends, and cannot resume unverified
+    state;
 16. one generation's future-fenced rotation changes no other generation and its
     `KEY_ROTATION` lifecycle/checkpoint effects are atomic;
 17. incomplete/filtered census, fast checkpoint, active pin, unfinished key
@@ -511,13 +545,18 @@ production, release, Pages or protected-ref movement. Preserve and exclude
    not caller GUC/packet/argument claims.
 7. Narrow entry points are fixed-search-path, no-dynamic-SQL, public-revoked and
    generic-table-DML-free; observer submission does not grant direct DML.
-8. Authenticated source-revalidated admission, coordinator lock order and all-
+8. Authenticated source-revalidated bounded primary/conflict admission,
+   coordinator stored-locator-only input, lock order and all-
    or-nothing receipt/watermark/retirement/obligation/lifecycle/audit/checkpoint
    effects are frozen.
-9. Redelivery is inert and source-row-independent; mismatch/reuse/demonstrated
-   admission gap/key/retention uncertainty fails closed without skipping.
+9. Redelivery is inert and source-row-independent; a receiver-authored conflict
+   sentinel remains visible before and after source purge, is storage-bounded
+   and makes mismatch/reuse/demonstrated admission gap/key/retention uncertainty
+   fail closed without skipping.
 10. Append-only recovery anchors and generation lifecycle are independent of
-    coordinator candidate state and fence every next transition.
+    coordinator candidate state and fence coordinator consumption plus every
+    next decision/rotation transition while allowing bounded receiver-owned
+    admission appends.
 11. Key metadata and availability are separate from secrets and scoped to one
     exact generation; unsafe rotation consumes only that generation.
 12. Retention uses the complete serialized backend registry and three separate

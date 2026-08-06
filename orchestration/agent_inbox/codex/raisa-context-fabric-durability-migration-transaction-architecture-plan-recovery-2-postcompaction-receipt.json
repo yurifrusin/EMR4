@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "recover_durability_migration_transaction_architecture_admission_conflict_seam",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The parent durability state machine remains accepted. The recovered migration/transaction plan freezes 18 future relations, authenticated admission, independent anchors, generation-local keys and 22 future database attacks. Fresh review found one unresolved durable admission-conflict representation seam and one pending-anchor wording ambiguity; AER-0051 remains open until a fresh exact-head veto passes the corrected candidate.",
+    "current_authority_allocation": "GPT Sol owns architecture recovery and acceptance. Fresh independent review is required after the material repair. External implementation/provider lanes are inactive; no worker receives integration, baton or protected-ref authority.",
+    "git_refs_and_worktree": "The active task branch and HEAD are codex/ariadne-bernie-davida-parallel-seam at 5de1ba511910335ea2ee73f12877ee886639c836; origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; user-owned untracked files including docs/branding are preserved. Fresh review worktree r24 remained clean at exact candidate HEAD.",
+    "live_handover_current_baton": "The live handover accepts the pure provider-free unmounted durability state-machine rehearsal at source 95a2ed5e960c58686262b5e82ce2e89354a3860a and authorises the declarative migration-and-transaction architecture descendant on codex/ariadne-bernie-davida-parallel-seam. The current plan candidate at 5de1ba511910335ea2ee73f12877ee886639c836 remains revision_required; no architecture acceptance or implementation authority exists yet.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI may be opened. No app, Alembic, Diary, API Spine or runtime source may change; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, command/write authority, credential, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost artifact remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

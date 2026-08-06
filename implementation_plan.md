@@ -449,12 +449,15 @@ generation rehearsal. The architecture-only provider-free default-off
   retention/key/audit contracts. The pure authored-synthetic durability state-
   machine rehearsal is accepted at exact reviewed HEAD
   `95a2ed5e960c58686262b5e82ce2e89354a3860a`, with 33 evidence cases and a fresh
-  29-attack/207-check veto. The migration-and-transaction plan is now in bounded
-  recovery after its first exact-head veto; only a fresh acceptance of the
-  authenticated admission, source-independent redelivery, append-only anchor
-  fence, atomic lifecycle and generation-local key corrections may admit an
-  inert DDL rehearsal. No applied migration, live implementation, real-product
-  or clinical descendant is opened.
+  29-attack/207-check veto. The migration-and-transaction plan remains in
+  bounded recovery after two exact-head vetoes. The first five architecture
+  defects are repaired; the second recovery adds a bounded receiver-authored
+  primary/conflict admission model that remains visible after source purge and
+  clarifies that a pending independent anchor fences coordinator consumption
+  and decision/rotation transitions without blocking admission append. Only a
+  fresh acceptance of the complete corrected plan may admit an inert DDL
+  rehearsal. No applied migration, live implementation, real-product or
+  clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

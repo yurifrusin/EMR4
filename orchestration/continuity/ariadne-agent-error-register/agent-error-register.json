@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 49,
+  "register_revision": 50,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1962,13 +1962,15 @@
       "stage": "independent_review",
       "category": "reasoning_claim_error",
       "process_severity": "material",
-      "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation to an authenticated immutable admission, preserve exact redelivery independently of source retention, represent an independent current recovery anchor, include lifecycle in atomic decision effects and define one exact key-schedule/rotation scope.",
-      "observed_error": "Candidate bea7d719 accepted an unauthenticated coordinator decision packet, selected the source row before redelivery despite independent source retention, stored only an immutable baseline-like anchor coordinate while checkpoints advanced, omitted lifecycle from the authoritative coordinator staging list and left key intervals ambiguous between stream-global and generation-local scope.",
-      "detection_method": "A fresh exact-head native adversarial plan veto reconciled the parent durability contract, plan transaction order, retention families, anchor representation and key lifecycle and returned five P1 contradictions before implementation admission.",
+      "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation and bounded conflict attempt to authenticated immutable receiver-owned evidence, preserve conflict visibility and exact redelivery independently of source retention, represent an independent current recovery anchor without blocking receiver admission, include lifecycle in atomic decision effects and define one exact key-schedule/rotation scope.",
+      "observed_error": "Candidate bea7d719 accepted an unauthenticated coordinator decision packet, selected the source row before redelivery despite independent source retention, stored only an immutable baseline-like anchor coordinate while checkpoints advanced, omitted lifecycle from the authoritative coordinator staging list and left key intervals ambiguous between stream-global and generation-local scope. Recovery candidate 5de1ba51 repaired those five defects but still could not durably represent a conflicting same-position or digest-reuse attempt without overwriting its sole admission row, and its pending-anchor wording ambiguously blocked receiver admission rather than only coordinator consumption and next lifecycle transitions.",
+      "detection_method": "Two fresh exact-head native adversarial vetoes reconciled the parent durability contract, authenticated handoff, admission attempt representation, plan transaction order, retention families, anchor representation and key lifecycle. They returned the original five P1 contradictions and then the two residual P1 conflict-evidence/anchor-wording defects before implementation admission.",
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
         "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
-        "docs/ariadne-agent-error-correction-register-revision-49.md"
+        "docs/ariadne-agent-error-correction-register-revision-49.md",
+        "docs/ariadne-agent-error-correction-register-revision-50.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
@@ -1977,10 +1979,11 @@
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_implemented_pending_acceptance",
-        "action": "Sol preserved and rejected the vetoed plan, added an authenticated immutable observation-admission relation and receiver, made redelivery receipt/admission-first and source-independent, added append-only lifecycle-owned anchors with an anchor-before-next-transition fence, made DECISION lifecycle append atomic and scoped key intervals/rotation to one exact observer generation. Fresh exact-head acceptance remains pending.",
-        "prevention_control": "Before accepting a database realization of an asynchronous state machine, trace authority and retention across every inter-principal handoff, prove redelivery after each independently eligible purge, map every evolving independent anchor to an append-only relation/fence, enumerate every atomic member and choose one exact scope for every shared-looking schedule.",
+        "action": "Sol preserved and rejected both vetoed candidates, added authenticated receiver-owned admission, source-independent redelivery, append-only lifecycle-owned anchors, atomic DECISION lifecycle and generation-local keys, then recovered the residual seam with at most one immutable PRIMARY plus one immutable CONFLICT sentinel per position. Retained-evidence-first receiver comparison makes exact duplicate inert and conflict durable before or after source purge; the coordinator loads only the complete stored set, and a pending anchor now permits bounded receiver admission while fencing coordinator consumption and next decision/rotation transitions. Fresh exact-head acceptance remains pending.",
+        "prevention_control": "Before accepting a database realization of an asynchronous state machine, trace every valid, duplicate and conflicting inter-principal input into bounded durable receiver-owned representation; prove clean redelivery and conflict visibility after each independently eligible purge; distinguish ingestion availability from lifecycle-consumption fences; map every evolving independent anchor to an append-only relation/fence; enumerate every atomic member and choose one exact scope for every shared-looking schedule.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
           "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
           "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"
         ]

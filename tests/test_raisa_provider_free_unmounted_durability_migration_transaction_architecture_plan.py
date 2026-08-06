@@ -72,7 +72,7 @@ def test_future_relation_catalogue_is_exact_and_closed() -> None:
 
 
 def test_authority_binding_and_transactions_are_fail_closed() -> None:
-    joined = "\n".join((text(PLAN), text(DESIGN))).lower()
+    joined = " ".join("\n".join((text(PLAN), text(DESIGN))).lower().split())
     for phrase in (
         "session_user",
         "exactly one active",
@@ -96,11 +96,20 @@ def test_authority_binding_and_transactions_are_fail_closed() -> None:
         "rebase_required",
         "retention_execution_enabled: false",
         "producer neither holds the observer key",
-        "only this admitted row",
+        "only the complete stored admission set",
         "never accepts a caller-supplied decision packet",
         "source-membership digest",
+        "at most one `primary` plus at most one `conflict`",
+        "complete stored admission set",
+        "any retained `conflict` sentinel",
+        "later conflicting attempts cannot grow storage without bound",
+        "concurrent first attempts race",
+        "`on conflict do nothing` is not an outcome",
+        "sufficient only for fail-closed rebase",
         "next lifecycle transition",
         "exact anchor",
+        "receiver-owned immutable `primary` or `conflict` admission appends may continue",
+        "coordinator cannot consume the next admission",
     ):
         assert phrase in joined
 
@@ -126,7 +135,7 @@ def test_continuity_and_retention_reject_unsafe_shortcuts() -> None:
 
 
 def test_database_backed_acceptance_is_future_and_adversarial() -> None:
-    plan = text(PLAN).lower()
+    plan = " ".join(text(PLAN).lower().split())
     for phrase in (
         "disposable local database",
         "authored synthetic opaque coordinates only",
@@ -134,6 +143,9 @@ def test_database_backed_acceptance_is_future_and_adversarial() -> None:
         "concurrent same-stream producers",
         "concurrent coordinators",
         "after authorized source-row",
+        "remains visible after source purge",
+        "bounds the position to at most two admission rows",
+        "without blocking bounded receiver-owned admission appends",
         "post-decision and post-rotation anchors",
         "lifecycle append",
         "cross-practice reads",

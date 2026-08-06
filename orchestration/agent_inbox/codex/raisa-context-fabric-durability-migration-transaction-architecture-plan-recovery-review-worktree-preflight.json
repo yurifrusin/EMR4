@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r24",
+  "branch": "codex/review-durability-migration-transaction-plan-recovery-5de1ba51",
+  "head": "5de1ba511910335ea2ee73f12877ee886639c836",
+  "expected_head": "5de1ba511910335ea2ee73f12877ee886639c836",
+  "clean": true,
+  "branch_prefix": "codex/review-durability-migration-transaction-plan-recovery-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
