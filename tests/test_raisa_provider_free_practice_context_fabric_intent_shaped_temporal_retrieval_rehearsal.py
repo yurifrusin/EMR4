@@ -277,6 +277,17 @@ def test_catalog_is_bound_to_backend_authority_and_resealed_substitution_fails()
     ]
 
 
+def test_catalog_recomputes_upstream_proofreader_before_projecting_facts() -> None:
+    sources = build_authored_synthetic_sources()
+    sources["current_packet"]["source_envelopes"][0]["payload"]["appointments"][0][
+        "status"
+    ] = "COMPLETED"
+    with pytest.raises(
+        IntentRetrievalViolation, match="current_upstream_not_released"
+    ):
+        build_source_catalog(sources)
+
+
 def test_bitemporal_known_then_and_corrected_later_are_distinct() -> None:
     old = _packet(
         "HISTORICAL_OPERATIONAL_STATE", known_at="2026-08-06T01:00:00Z"

@@ -10,17 +10,20 @@ from scripts.raisa_provider_free_practice_context_fabric_bureau_memory_contract 
     build_contract_packet,
     canonical_json,
     canonical_sha256,
+    proofread_same_packet,
     seal,
     verify_seal,
 )
 from scripts.raisa_provider_free_practice_context_fabric_current_operational_weave import (
     build_authored_synthetic_packet as build_current_packet,
+    proofread_current_operational_weave,
 )
 from scripts.raisa_provider_free_practice_context_fabric_patient_free_temporal_weave import (
     build_authored_synthetic_temporal_packet,
     derive_dependency_manifest,
     derive_watch_lease,
     process_signals,
+    proofread_temporal_packet,
 )
 
 
@@ -595,11 +598,50 @@ def build_source_catalog(sources: dict[str, Any]) -> dict[str, Any]:
     memory = sources["memory_packet"]
     temporal = sources["temporal_packet"]
     state = sources["current_state"]
-    if current["proofreader_trace"]["release_decision"] != "RELEASE":
+    expected_current_proofreader = proofread_current_operational_weave(
+        current["candidate"],
+        current["context_need"],
+        current["authority_binding"],
+        current["scope_grant"],
+        current["source_envelopes"],
+        current["frame_set"],
+        current["source_trace"],
+        current["weave_trace"],
+        assembled_at=current["frame_set"]["assembled_at"],
+        proofread_at=current["proofreader_trace"]["checked_at"],
+    )
+    if (
+        current["proofreader_trace"]["release_decision"] != "RELEASE"
+        or current["proofreader_trace"] != expected_current_proofreader
+    ):
         raise IntentRetrievalViolation("current_upstream_not_released")
-    if memory["proofreader_trace"]["release_decision"] != "RELEASE":
+    verify_seal(memory, "contract_digest")
+    expected_memory_proofreader = proofread_same_packet(
+        memory["context_need"],
+        memory["scope_grant"],
+        memory["memory_selector"],
+        memory["frame_set"],
+        memory["selector_trace"],
+        memory["weave_trace"],
+        proofread_at=memory["proofreader_trace"]["proofread_at"],
+    )
+    if (
+        memory["proofreader_trace"]["release_decision"] != "RELEASE"
+        or memory["proofreader_trace"] != expected_memory_proofreader
+    ):
         raise IntentRetrievalViolation("memory_upstream_not_released")
-    if temporal["proofreader_trace"]["release_decision"] != "RELEASE":
+    temporal_without_proofreader = {
+        key: value for key, value in temporal.items() if key != "proofreader_trace"
+    }
+    expected_temporal_proofreader = proofread_temporal_packet(
+        current,
+        temporal_without_proofreader,
+        checked_at=temporal["proofreader_trace"]["checked_at"],
+    )
+    if (
+        temporal["proofreader_trace"]["release_decision"] != "RELEASE"
+        or temporal["proofreader_trace"] != expected_temporal_proofreader
+    ):
         raise IntentRetrievalViolation("temporal_upstream_not_released")
     verify_seal(state, "state_digest")
     if state["parent_frame_set_digest"] != current["frame_set"]["frame_set_digest"]:
