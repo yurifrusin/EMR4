@@ -65,8 +65,16 @@ temporal descendant now also passes at exact independently reviewed source HEAD
 `f32004a2f39ac769ba746afe2663813f7c422d8a`: relevant sealed event metadata
 retires an immutable frame set and emits an inert reassembly requirement,
 continuity gaps fail closed, and bitemporal snapshots remain historical context
-rather than current truth. The next dependency-satisfied action is the
-provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal.
+rather than current truth. The provider-free patient-free unmounted intent-
+shaped temporal retrieval rehearsal now also passes at exact independently
+reviewed source HEAD `b24b56bda296f3713b5e2c0e52545c749e71540a`: five closed
+intents select only minimum granted Current, recent-work and bitemporal
+Historical components, private session remains same-Bureau, bilateral Memory
+sharing is explicit, ambiguous opaque references are not resolved as identity,
+invalidated Current state fails closed, and every upstream plus same-packet
+proofreader is recomputed. The next dependency-satisfied action is a separately
+frozen authored-synthetic model-required intent-shaping rehearsal over that
+exact deterministic contract.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -94,11 +102,12 @@ It will knit the Bureaus together by assembling query-shaped, permissioned,
 typed and expiring context frames from authoritative current, event, temporal,
 session and later clinical/evidence sources. It is not provider-model memory or
 a broad practice-data dump. The direction, first unmounted provider-free
-contract, Current operational weave and patient-free temporal weave are
-accepted; the provider-free patient-free unmounted intent-shaped temporal
-retrieval rehearsal is next. No product/patient data, provider call, real historical-state
-retention, runtime route, command, deployment or production authority follows
-from this blueprint entry.
+contract, Current operational weave, patient-free temporal weave and provider-
+free intent-shaped retrieval rehearsal are accepted; a separately frozen
+authored-synthetic occupied model-required intent-shaping envelope is next. No
+product/patient data, provider call outside that later exact envelope, real
+historical-state retention, runtime route, command, deployment or production
+authority follows from this blueprint entry.
 
 ### 1.1 Business & Licensing Model
 

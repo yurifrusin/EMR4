@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 201,
-  "updated_at": "2026-08-06T05:17:04Z",
-  "source_graph_revision": 219,
-  "orientation_statement": "EMR4 is at Continuity 219 / Compass 201. The provider-free Practice Context Fabric patient-free temporal weave passes at an exact independently reviewed HEAD. The provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal is next.",
+  "map_revision": 202,
+  "updated_at": "2026-08-06T06:08:42Z",
+  "source_graph_revision": 220,
+  "orientation_statement": "EMR4 is at Continuity 220 / Compass 202. The provider-free Practice Context Fabric intent-shaped temporal retrieval rehearsal passes at an exact independently reviewed HEAD. A separately frozen authored-synthetic model-required intent-shaping rehearsal is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1683,36 +1683,50 @@
         "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md",
         "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval",
+      "lineage_parent": "raisa-provider-free-practice-context-fabric-patient-free-temporal-weave",
+      "strategic_role": "Intent-shaped minimum Context Fabric retrieval",
+      "outcome": "One provider-free authored-synthetic selector converts closed intent codes into minimum granted Current, recent-work and historical components with safe ambiguity and same-packet proofreading.",
+      "evidence": [
+        "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-plan.md",
+        "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-design.md",
+        "docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.example.json",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/provider-free-acceptance-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json",
+        "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-practice-context-fabric-patient-free-temporal-weave",
-    "strategic_role": "Patient-free temporal weave accepted; intent-shaped retrieval rehearsal next",
-    "why_now": "Immutable invalidation, monotonic checkpointing, fail-closed gaps, stale-result rejection and bitemporal selection passed deterministic and independent review.",
-    "outcome": "The first temporal Context Fabric control plane is accepted without opening a live watcher, persistence, product data, runtime or commands.",
+    "node_id": "raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval",
+    "strategic_role": "Provider-free intent-shaped retrieval accepted; occupied authored-synthetic intent shaping next",
+    "why_now": "Closed intent mapping, minimum component disclosure, bilateral Bureau scope, temporal rejection, ambiguity and proofreader bindings passed deterministic and independent review.",
+    "outcome": "The first request-shaped retrieval layer is accepted without opening a provider call, live source, patient data, runtime or command.",
     "unlocks": [
-      "Freeze the provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal.",
-      "Prove minimal current, recent-work and historical frame selection with explicit ambiguity and provenance."
+      "Freeze the exact authored-synthetic model-required intent-shaping envelope.",
+      "Test whether the selected model proposes only the closed non-authoritative intent candidate accepted by the deterministic layer."
     ],
     "does_not_solve": [
-      "Patient, clinical or product-data access, live event watching, real historical retention or external evidence retrieval.",
-      "Provider-model memory, product runtime, persistence, commands, deployment or production.",
-      "Requests/referrals, prescribing/medicines or billing/claims implementation authority.",
+      "Patient, clinical or product-data access; live retrieval/watching; real historical retention or external evidence.",
+      "Product runtime, persistence, clinical or administrative commands, deployment or production.",
+      "Consultant, requests/referrals, medicines/prescribing or billing/claims implementation authority.",
       "Release, Pages, protected evidence or protected-ref movement."
     ],
     "evidence": [
-      "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md",
-      "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-design.md",
-      "docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json",
-      "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json",
-      "orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-deepseek-timeout-failure-receipt.json",
-      "orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-review-evidence-reconciliation-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-31.md",
-      "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md"
+      "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-plan.md",
+      "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-design.md",
+      "docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.example.json",
+      "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/provider-free-acceptance-evidence.json",
+      "orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json",
+      "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
@@ -1808,9 +1822,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "The provider-free Fabric/Memory contract, Current operational weave and patient-free temporal weave are accepted at exact independently reviewed source HEADs.",
-        "The next provider-free patient-free unmounted intent-shaped retrieval rehearsal must prove minimum disclosure, ambiguity, provenance and stale-frame rejection without opening real sources or runtime.",
-        "Separately gate patient, clinical or product data, real event transport and watchers, persistence and retention, provider or external retrieval, commands, deployment, production and release."
+        "The provider-free Fabric/Memory contract, Current operational weave, patient-free temporal weave and intent-shaped retrieval rehearsal are accepted at exact independently reviewed source HEADs.",
+        "The next authored-synthetic model-required intent-shaping rehearsal must freeze exact gemini-2.5-flash Sydney Vertex transport, thinking, schema, proofreader, call/cost and no-fallback boundaries before one occupied sequence.",
+        "Separately gate patient, clinical or product data, real sources/watchers, persistence/retention, external evidence, commands, deployment, production and release."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -1845,7 +1859,16 @@
         "orchestration/agent_inbox/codex/raisa-context-fabric-patient-free-temporal-weave-review-evidence-reconciliation-receipt.json",
         "docs/ariadne-agent-error-correction-register-revision-31.md",
         "docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md",
-        "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md"
+        "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md",
+        "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-plan.md",
+        "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-design.md",
+        "docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.example.json",
+        "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/provider-free-acceptance-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json",
+        "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md"
       ]
     },
     {
@@ -2690,6 +2713,7 @@
     }
   ],
   "map_limits": [
+    "Intent-shaped retrieval acceptance proves pure provider-free authored-synthetic context selection only; it creates no natural-language, provider, patient, product, live-source, persistence, runtime, command, deployment or protected authority.",
     "Patient-free temporal-weave acceptance proves pure provider-free authored-synthetic invalidation and bitemporal selection only; it creates no live watcher, patient, product, persistence, provider, runtime, command, deployment or protected authority.",
     "Current operational weave acceptance proves pure provider-free authored-synthetic composition only; it creates no patient, product, persistence, provider, runtime, command, deployment or protected authority.",
     "Context Fabric contract acceptance proves an unmounted provider-free authored-synthetic grammar only; it creates no product, data, persistence, provider, command, deployment or protected authority.",

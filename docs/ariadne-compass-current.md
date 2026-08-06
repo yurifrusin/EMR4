@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 219 / Compass 201. The provider-free Practice Context Fabric patient-free temporal weave passes at an exact independently reviewed HEAD. The provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal is next.
+> EMR4 is at Continuity 220 / Compass 202. The provider-free Practice Context Fabric intent-shaped temporal retrieval rehearsal passes at an exact independently reviewed HEAD. A separately frozen authored-synthetic model-required intent-shaping rehearsal is next.
 
 ## North star
 
@@ -212,25 +212,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Four provider-free authored-synthetic current read families compose into one scoped, expiring and same-packet-proofread frame set. Lineage parent: `raisa-provider-free-practice-context-fabric-bureau-memory-contract`.
 98. **Temporal freshness and historical-context protocol — Provider-free Practice Context Fabric patient-free temporal weave**
    One provider-free authored-synthetic control plane retires stale frame sets, preserves checkpoint causes and selects explicit bitemporal historical context without executing a read. Lineage parent: `raisa-provider-free-practice-context-fabric-current-operational-weave`.
+99. **Intent-shaped minimum Context Fabric retrieval — Provider-free Practice Context Fabric intent-shaped temporal retrieval**
+   One provider-free authored-synthetic selector converts closed intent codes into minimum granted Current, recent-work and historical components with safe ambiguity and same-packet proofreading. Lineage parent: `raisa-provider-free-practice-context-fabric-patient-free-temporal-weave`.
 
 ## Current position
 
-**Patient-free temporal weave accepted; intent-shaped retrieval rehearsal next — Provider-free Practice Context Fabric patient-free temporal weave**
+**Provider-free intent-shaped retrieval accepted; occupied authored-synthetic intent shaping next — Provider-free Practice Context Fabric intent-shaped temporal retrieval**
 
-**Why this proof came next:** Immutable invalidation, monotonic checkpointing, fail-closed gaps, stale-result rejection and bitemporal selection passed deterministic and independent review.
+**Why this proof came next:** Closed intent mapping, minimum component disclosure, bilateral Bureau scope, temporal rejection, ambiguity and proofreader bindings passed deterministic and independent review.
 
-The first temporal Context Fabric control plane is accepted without opening a live watcher, persistence, product data, runtime or commands.
+The first request-shaped retrieval layer is accepted without opening a provider call, live source, patient data, runtime or command.
 
 ### What this unlocks
 
-- Freeze the provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal.
-- Prove minimal current, recent-work and historical frame selection with explicit ambiguity and provenance.
+- Freeze the exact authored-synthetic model-required intent-shaping envelope.
+- Test whether the selected model proposes only the closed non-authoritative intent candidate accepted by the deterministic layer.
 
 ### What it does not solve
 
-- Patient, clinical or product-data access, live event watching, real historical retention or external evidence retrieval.
-- Provider-model memory, product runtime, persistence, commands, deployment or production.
-- Requests/referrals, prescribing/medicines or billing/claims implementation authority.
+- Patient, clinical or product-data access; live retrieval/watching; real historical retention or external evidence.
+- Product runtime, persistence, clinical or administrative commands, deployment or production.
+- Consultant, requests/referrals, medicines/prescribing or billing/claims implementation authority.
 - Release, Pages, protected evidence or protected-ref movement.
 
 ## Continuity and authority
@@ -238,8 +240,8 @@ The first temporal Context Fabric control plane is accepted without opening a li
 - Current-node audit: **passed**
 - Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
 - Contract `committed-reschedule-availability-reconciliation`: **satisfied**
-- Bounded opening `api-change`: Define a provider-free patient-free unmounted intent-shaped temporal retrieval rehearsal over closed authored-synthetic frames; no patient/product data, real source, persistence, provider call, product route, runtime or command.
-- All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
+- Bounded opening `provider-call`: Derive and freeze one authored-synthetic model-required intent-shaping rehearsal using exact gemini-2.5-flash, the Bernie Vertex development project, australia-southeast1, a positive thinking budget, closed schema, deterministic proofreader, exact call/cost ledger and no fallback; execute no call before that envelope is frozen and use no patient/product/runtime/command data or authority.
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -301,9 +303,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- The provider-free Fabric/Memory contract, Current operational weave and patient-free temporal weave are accepted at exact independently reviewed source HEADs.
-- The next provider-free patient-free unmounted intent-shaped retrieval rehearsal must prove minimum disclosure, ambiguity, provenance and stale-frame rejection without opening real sources or runtime.
-- Separately gate patient, clinical or product data, real event transport and watchers, persistence and retention, provider or external retrieval, commands, deployment, production and release.
+- The provider-free Fabric/Memory contract, Current operational weave, patient-free temporal weave and intent-shaped retrieval rehearsal are accepted at exact independently reviewed source HEADs.
+- The next authored-synthetic model-required intent-shaping rehearsal must freeze exact gemini-2.5-flash Sydney Vertex transport, thinking, schema, proofreader, call/cost and no-fallback boundaries before one occupied sequence.
+- Separately gate patient, clinical or product data, real sources/watchers, persistence/retention, external evidence, commands, deployment, production and release.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -492,6 +494,7 @@ Prerequisites:
 
 ## Map limits
 
+- Intent-shaped retrieval acceptance proves pure provider-free authored-synthetic context selection only; it creates no natural-language, provider, patient, product, live-source, persistence, runtime, command, deployment or protected authority.
 - Patient-free temporal-weave acceptance proves pure provider-free authored-synthetic invalidation and bitemporal selection only; it creates no live watcher, patient, product, persistence, provider, runtime, command, deployment or protected authority.
 - Current operational weave acceptance proves pure provider-free authored-synthetic composition only; it creates no patient, product, persistence, provider, runtime, command, deployment or protected authority.
 - Context Fabric contract acceptance proves an unmounted provider-free authored-synthetic grammar only; it creates no product, data, persistence, provider, command, deployment or protected authority.
@@ -807,6 +810,9 @@ Prerequisites:
 - `docs/raisa-provider-free-practice-context-fabric-current-operational-weave-closeout.md`
 - `docs/raisa-provider-free-practice-context-fabric-current-operational-weave-design.md`
 - `docs/raisa-provider-free-practice-context-fabric-current-operational-weave-plan.md`
+- `docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md`
+- `docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-design.md`
+- `docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-plan.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-design.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md`
@@ -885,6 +891,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-bureau-memory-contract-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-current-operational-weave-threat-model-delta.md`
+- `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
@@ -915,6 +922,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
@@ -970,6 +978,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-bureau-memory-contract-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
@@ -1172,6 +1181,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-current-operational-weave/operational-weave-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-current-operational-weave/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.example.json`
+- `orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
@@ -1510,4 +1522,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 201; continuity graph revision 219._
+_Compass map revision 202; continuity graph revision 220._

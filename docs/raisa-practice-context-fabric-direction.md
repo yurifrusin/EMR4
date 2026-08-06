@@ -2,7 +2,7 @@
 
 Date: 2026-08-05
 
-Status: accepted direction through patient-free temporal weave; intent-shaped temporal retrieval rehearsal next
+Status: accepted direction through provider-free intent-shaped temporal retrieval; occupied authored-synthetic intent shaping next
 
 ## Purpose
 
@@ -257,13 +257,20 @@ large “memory” feature:
    later read, continuity gaps fail closed, and purpose-scoped bitemporal
    snapshots remain historical context rather than current truth. This proves
    no live watcher, persistence or production retention.
-4. **Intent-shaped retrieval rehearsal** — **next**; use authored-synthetic requests to
-   prove scope narrowing, minimal disclosure, ambiguity handling, stale-frame
-   rejection and same-packet proofreading, first provider-free and then, under
-   an exact separate occupied envelope, model-required.
-5. **Real product read descendants** — open one source and one role/purpose at a
+4. **Intent-shaped retrieval rehearsal** — **accepted** at exact independently
+   reviewed source HEAD `b24b56bda296f3713b5e2c0e52545c749e71540a`;
+   five closed authored-synthetic intents deterministically select the minimum
+   Current, recent-work and historical components, preserve the four-source
+   Current coherence packet, require bilateral Memory sharing, return bounded
+   opaque alternatives instead of guessed identity, reject invalidated Current
+   state and recompute every upstream and same-packet proofreader.
+5. **Occupied model-required intent shaping** — **next**; under one separately
+   derived and frozen authored-synthetic envelope, prove that the selected
+   provider model can propose only the closed non-authoritative intent candidate
+   which the accepted deterministic retrieval contract may narrow or reject.
+6. **Real product read descendants** — open one source and one role/purpose at a
    time with privacy, identity, audit, retention and database acceptance.
-6. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+7. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    clinical, data and provider gates.
 

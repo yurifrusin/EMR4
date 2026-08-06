@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_context_fabric_is_durable_and_intent_shaped_rehearsal_is_next() -> None:
+def test_context_fabric_is_durable_and_occupied_intent_shaping_is_next() -> None:
     direction = (ROOT / "docs/raisa-practice-context-fabric-direction.md").read_text(
         encoding="utf-8"
     )
@@ -18,7 +18,7 @@ def test_context_fabric_is_durable_and_intent_shaped_rehearsal_is_next() -> None
     handover = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 
     assert (
-        "Status: accepted direction through patient-free temporal weave; intent-shaped temporal retrieval rehearsal next"
+        "Status: accepted direction through provider-free intent-shaped temporal retrieval; occupied authored-synthetic intent shaping next"
         in direction
     )
     assert "ContextNeed" in direction
@@ -47,8 +47,8 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
         if row["id"] == "raisa-practice-context-fabric"
     )
 
-    assert compass["map_revision"] == 201
-    assert compass["source_graph_revision"] == 219
+    assert compass["map_revision"] == 202
+    assert compass["source_graph_revision"] == 220
     assert item["status"] == "active"
     assert item["boundary_changes"] == []
     assert "docs/raisa-practice-context-fabric-direction.md" in item["evidence"]
@@ -56,7 +56,7 @@ def test_context_fabric_compass_horizon_is_active_without_boundary_opening() -> 
 
     rendered = (ROOT / "docs/ariadne-compass-current.md").read_text(encoding="utf-8")
     assert "### Raisa Practice Context Fabric — active" in rendered
-    assert "_Compass map revision 201; continuity graph revision 219._" in rendered
+    assert "_Compass map revision 202; continuity graph revision 220._" in rendered
 
 
 def test_branded_workspaces_do_not_become_authority_boundaries() -> None:
@@ -71,12 +71,13 @@ def test_branded_workspaces_do_not_become_authority_boundaries() -> None:
     ).read_text(encoding="utf-8")
 
     for text in (direction, implementation_plan, bureau_architecture):
-        assert "Clinician One" in text
-        assert "requests" in text
-        assert "referral" in text
-        assert "prescri" in text
-        assert "billing" in text
-        assert "command" in text
+        lowered = text.lower()
+        assert "clinician one" in lowered
+        assert "requests" in lowered
+        assert "referral" in lowered
+        assert "prescri" in lowered
+        assert "billing" in lowered
+        assert "command" in lowered
 
     assert "not authorisation domains" in direction
     assert "Atomic backend capability grants" in implementation_plan

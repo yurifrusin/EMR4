@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 219,
+  "graph_revision": 220,
   "harvests": [],
   "nodes": [
     {
@@ -12964,9 +12964,119 @@
         "Commands, writes, deployment, production, release, Pages, protected refs and protected evidence remain closed.",
         "Requests/referrals, prescribing/medicines, billing/claims and other future Bureau implementations remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval",
+      "title": "Provider-free Practice Context Fabric intent-shaped temporal retrieval",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-06T06:08:42Z",
+      "updated_at": "2026-08-06T06:08:42Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b24b56bda296f3713b5e2c0e52545c749e71540a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-practice-context-fabric-patient-free-temporal-weave",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "provider-call",
+            "source": "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md",
+            "scope": "Derive and freeze one authored-synthetic model-required intent-shaping rehearsal using exact gemini-2.5-flash, the Bernie Vertex development project, australia-southeast1, a positive thinking budget, closed schema, deterministic proofreader, exact call/cost ledger and no fallback; execute no call before that envelope is frozen and use no patient/product/runtime/command data or authority."
+          }
+        ],
+        "notes": [
+          "Reception One and Clinician One are branded workspace families; atomic Bureau grants remain backend-owned.",
+          "The Current component stays four-source atomic and private-session bound.",
+          "Bureau Memory crosses only through an exact bilateral purpose grant.",
+          "Consultant, requests/referrals, medicines/prescribing and billing/claims retain separate professional and command gates."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-practice-context-fabric-intent-shaped-temporal-retrieval",
+          "source": "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept closed intent mapping, minimal component selection, upstream proofreader recomputation, exact catalog binding, bilateral sharing, bitemporal selection, safe ambiguity and same-packet proofreading."
+        }
+      ],
+      "claim_scope": [
+        "Five closed intents select only minimum authorised Current, Bureau Memory and Historical components.",
+        "Invalidated Current state, missing historical coverage and cross-Bureau private session fail closed.",
+        "Ambiguous opaque references return alternatives without asserting identity.",
+        "No natural-language/provider behaviour, patient/product data, live source, persistence, runtime, command, deployment or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_reception_one_availability_reconciliation.py",
+            "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md"
+          ],
+          "note": "The retrieval layer refuses a Current component whose temporal state requires reassembly and executes no read."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md"
+          ],
+          "note": "Intent-shaped context remains read-only and cannot bypass the accepted proposal or command path."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-plan.md",
+          "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-design.md",
+          "docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/intent-shaped-temporal-retrieval-contract.example.json",
+          "orchestration/continuity/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_intent_shaped_temporal_retrieval_rehearsal.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_patient_free_temporal_weave.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_bureau_memory_contract.py",
+          "tests/test_raisa_practice_context_fabric_direction.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_raisa_provider_free_practice_context_fabric_intent_shaped_temporal_retrieval_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The model-required intent-shaping descendant must freeze its exact authored-synthetic provider, model, region, identity, thinking, schema, proofreader, call and cost envelope before any occupied call.",
+        "Patient, clinical, product-derived, protected and financial data; real sources, databases, event transport, watchers and ordinary services remain closed.",
+        "Persistence, operational retention, external evidence retrieval, product runtime and new routes remain closed.",
+        "Clinical, prescribing, referral, billing and all other commands and writes remain separately closed.",
+        "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-06T05:17:04Z"
+  "updated_at": "2026-08-06T06:08:42Z"
 }
