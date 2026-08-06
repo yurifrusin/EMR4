@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted model-required intent-shaping plan, closeout and Sol acceptance were re-read together with the complete Context Fabric direction, model-required Bureau architecture and the controlling Context Fabric sections of implementation_plan.md and orchestration/bernie_interaction_model.md. They identify an unmounted provider-free one-source adapter as next. Rayleen's existing A4 emr4.waiting_room_context_frame.v1 read shape is selected because the Current operational weave already recognises it as an authorised freshness-bound Current source.",
+    "current_authority_allocation": "GPT Sol owns architecture, acceptance, recovery and task-branch integration. DeepSeek V4 Flash/high through Claude Code --bare may implement a bounded separable packet if dispatch provides leverage; Gemini 3.6 Flash/high through a fresh Antigravity project may provide independent read-only veto review. No worker receives acceptance, integration, protected-ref or product authority.",
+    "git_refs_and_worktree": "Task branch HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at bcd5f57842d1ba010064214634859a3ba650bb3d. Local/origin master and local/origin handoff/current are aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked index and worktree were clean before this receipt; the listed user-owned and historical untracked files remain unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after context restoration. Its Current result accepts the authored-synthetic model-required Context Fabric intent-shaping rehearsal at independently reviewed source 44f341481b55f99a18a47838da0f2b7e43a2f73e and names a provider-free unmounted adapter over exactly one already authorised current operational read shape as the next dependency-satisfied descendant.",
+    "protected_evidence_boundaries": "This descendant may use only newly authored patient-free synthetic values and static repository contracts. It may adapt but not execute, mount, subscribe to, refresh, persist or widen the existing waiting-room read. Patient, clinical, product-derived, financial, protected and historical-PHI data; real database/session/feed/watcher access; provider calls; new GraphQL or REST routes; runtime wiring; commands/writes; deployment, production, release, Pages, protected evidence and protected-ref movement remain closed. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger file remain preserved and excluded; Git staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

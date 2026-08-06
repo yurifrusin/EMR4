@@ -201,8 +201,12 @@ vocabulary mapping, bilateral Bureau scope, ambiguity and upstream/same-packet
 proofreading. The authored-synthetic model-required intent-shaping descendant
 now also passes after one source-reviewed Sydney Vertex primary proposed the
 exact closed comparison intent and deterministic code rebuilt and admitted the
-parent retrieval packet. A provider-free unmounted adapter around one existing
-authorised current read shape is the next safe candidate. Real event transport,
+parent retrieval packet. The provider-free unmounted Rayleen A4 waiting-room
+source-adapter plan is now frozen for bounded implementation. It consumes only
+a completed authored-synthetic `emr4.waiting_room_context_frame.v1`, applies
+the accepted binding/grant and backend-issued opaque aliases, and emits one
+Current source envelope without invoking or refreshing the read, watching
+changes, mounting a route or accessing real product data. Real event transport,
 historical persistence, patient/product data, product retrieval, runtime and
 command authority remain separately closed.
 

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_frozen_provider_free_unmounted_rayleen_waiting_room_source_adapter_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The new plan, design and threat delta bind exactly one completed authored-synthetic emr4.waiting_room_context_frame.v1 to the accepted Current operational-weave binding/grant and source triple. implementation_plan.md, orchestration/bernie_interaction_model.md and the Context Fabric direction now name this exact adapter boundary.",
+    "current_authority_allocation": "GPT Sol froze architecture and owns acceptance/integration. DeepSeek V4 Flash/high may receive only the bounded adapter implementation/test packet after this plan commit; Gemini 3.6 Flash/high remains an independent read-only veto. No worker owns acceptance, integration or protected refs.",
+    "git_refs_and_worktree": "Before plan edits, task HEAD and origin task were aligned at bcd5f57842d1ba010064214634859a3ba650bb3d; local/origin master and handoff/current were protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named plan/compass/handover files and fresh orchestrator receipt/state are intended for this commit; pre-existing untracked files remain unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely and now records the exact provider-free unmounted Rayleen A4 waiting-room Context Fabric source-adapter plan as the active implementation descendant after the accepted model-required intent-shaping result.",
+    "protected_evidence_boundaries": "The plan owns documentation and receipts only. The implementation may later use static newly authored patient-free synthetic material and a pure unmounted module, but no live product/database/watcher, provider, route, command, write, deployment, production, release, Pages, protected evidence or protected-ref action. docs/branding and unrelated untracked artifacts remain preserved and excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
