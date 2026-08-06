@@ -1642,14 +1642,16 @@ def _map_observation_to_temporal_signal(
         != observation["expected_predecessor_position"] + 1
     ):
         raise ObservationToSignalViolation("observation_position_sequence_invalid")
+    source_committed_at = _instant(observation["source_transaction_committed_at"])
     observed_at = _instant(observation["observed_at"])
     expires_at = _instant(observation["expires_at"])
-    if not (
-        _instant(observation["source_transaction_committed_at"])
-        <= observed_at
-        < expires_at
-    ):
+    if observed_at >= expires_at:
         raise ObservationToSignalViolation("observation_time_window_invalid")
+    if (
+        abs((observed_at - source_committed_at).total_seconds())
+        > policy["maximum_clock_skew_seconds"]
+    ):
+        raise ObservationToSignalViolation("observation_clock_skew_invalid")
     expected_admission_fields = {
         "schema_version": SCHEMA_VERSION,
         "decision": "ADMIT_SIGNAL",

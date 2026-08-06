@@ -55,3 +55,14 @@ and diff checks. The independent veto must be preserved in the agent-error
 register before acceptance, and a genuinely fresh read-only exact-head veto
 must return one terminal `pass`. The failed worker receipts and first veto are
 never rewritten.
+
+## Fresh-veto continuation
+
+The first Sol recovery commit
+`d3ce636a6ed12828a45eb0d17a2d5b8251e1a511` remained untrusted after a fresh
+exact-head veto found that mapping enforced one-sided timestamp ordering while
+admission deliberately permits absolute clock skew in either direction. This
+is inside recovery item 2 above, so the same lease remains active. Sol must
+make mapping mirror the exact two-sided admission bound, add positive-skew
+coverage and obtain another genuinely fresh exact-head veto. No scope or
+authority boundary is widened.

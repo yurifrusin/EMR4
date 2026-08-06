@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 38,
+  "register_revision": 39,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1772,6 +1772,44 @@
         "prevention_control": "For each mapper behind a deterministic egress gate, test at least one non-canonical valid value for every contract-varying coordinate and mechanically assert that all pre-proofreader signal-producing functions are absent from the public export surface.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-lease.md",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py"
+        ]
+      },
+      "status": "open"
+    },
+    {
+      "incident_id": "AER-0047",
+      "attempt_id": "raisa-context-fabric-observation-to-signal-sol-recovery-veto-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-observation-to-temporal-signal-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A recovery claiming the admitted backend-clock contract must make mapping mirror admission's exact absolute-skew rule across both timestamp orderings and must test each side of the bounded domain before fresh review.",
+      "observed_error": "Sol changed mapping to accept alternate timestamps but retained a one-sided source-committed-at no-later-than observed-at condition even though admission accepts absolute skew in either direction. The added alternate-clock test covered only source time before observation time.",
+      "detection_method": "A second genuinely fresh exact-head native veto passed all 221 deterministic checks, then independently supplied a source timestamp nine seconds ahead of the observation clock. Admission returned ADMIT_SIGNAL and mapping raised observation_time_window_invalid.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-independent-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-lease.md",
+        "docs/ariadne-agent-error-correction-register-revision-39.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.clock_skew_domain_one_sided_recovery",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Sol kept the recovery lease active, replaced the one-sided mapping predicate with the same exact absolute-skew ceiling used by admission, retained the independent expiry condition, and added a positive-skew admission-to-mapping test. Another genuinely fresh exact-head veto remains mandatory.",
+        "prevention_control": "When a validator admits a symmetric or multi-branch domain, recovery tests and verifier instructions must exercise every boundary direction rather than one representative non-canonical value.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-observation-to-temporal-signal-sol-recovery-independent-veto.md",
           "tests/test_raisa_provider_free_unmounted_authored_synthetic_observation_to_temporal_signal_rehearsal.py"
         ]
       },

@@ -236,6 +236,58 @@ def test_alternate_valid_backend_clock_values_admit_and_map_internally() -> None
     assert trace["observed_at"] == "2026-08-06T03:00:21Z"
 
 
+def test_valid_positive_backend_clock_skew_admits_and_maps_internally() -> None:
+    values = _inputs()
+    values["source"]["source_transaction_committed_at"] = "2026-08-06T03:00:20Z"
+    _activate(values)
+
+    observation, admission = _admit(
+        values,
+        observed_at="2026-08-06T03:00:11Z",
+        expires_at="2026-08-06T03:01:59Z",
+    )
+
+    assert observation is not None
+    assert admission["decision"] == "ADMIT_SIGNAL"
+    signal, trace = _map(values, observation, admission)
+    assert signal["occurred_at"] == "2026-08-06T03:00:20Z"
+    assert signal["received_at"] == "2026-08-06T03:00:11Z"
+    assert trace["source_transaction_committed_at"] == "2026-08-06T03:00:20Z"
+
+
+@pytest.mark.parametrize(
+    ("source_committed_at", "expected_decision"),
+    [
+        ("2026-08-06T02:58:11Z", "ADMIT_SIGNAL"),
+        ("2026-08-06T03:02:11Z", "ADMIT_SIGNAL"),
+        ("2026-08-06T02:58:10Z", "BLOCK_SCHEMA_OR_POLICY"),
+        ("2026-08-06T03:02:12Z", "BLOCK_SCHEMA_OR_POLICY"),
+    ],
+)
+def test_two_sided_clock_skew_boundaries_are_exact(
+    source_committed_at: str, expected_decision: str
+) -> None:
+    values = _inputs()
+    values["source"]["source_transaction_committed_at"] = source_committed_at
+    _activate(values)
+
+    observation, admission = _admit(
+        values,
+        observed_at="2026-08-06T03:00:11Z",
+        expires_at="2026-08-06T03:03:00Z",
+    )
+
+    assert admission["decision"] == expected_decision
+    if expected_decision == "ADMIT_SIGNAL":
+        assert observation is not None
+        signal, trace = _map(values, observation, admission)
+        assert signal["occurred_at"] == source_committed_at
+        assert trace["source_transaction_committed_at"] == source_committed_at
+    else:
+        assert observation is None
+        assert admission["reason_codes"] == ["SCHEMA_POLICY_OR_CONTRACT_MISMATCH"]
+
+
 def test_alternate_valid_prior_seen_set_admits_and_maps_internally() -> None:
     values = _inputs()
     values["prior"]["seen_observation_ids"] = ["sha256:" + "9" * 64]

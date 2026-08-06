@@ -236,7 +236,7 @@
     "frozen_design": "sha256:9dd45043a97e947a0d04a544e10e7543d933633ef403db9917b2c952c530c634",
     "frozen_plan": "sha256:e7454715145f51645bdcb0e7af23db6e28b18fb4fdedc46ee0dbae6855947a21",
     "frozen_threat_delta": "sha256:fd1710ceebd9c29270cbf16077069a6420cb483622b5acacf13968829a84c0e7",
-    "pure_rehearsal_module": "sha256:7e9921f3732acc2ae629c84212253e29fcf6567ddba34f41b2328c8a985792c4"
+    "pure_rehearsal_module": "sha256:e918da97f58df7902e6ae62430ad28beddd4c450e7c55e93400fafe1f78e2961"
   },
   "authority_and_side_effect_counts": {
     "checkpoint_writes": 0,

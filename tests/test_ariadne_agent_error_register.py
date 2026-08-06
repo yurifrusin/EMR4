@@ -38,14 +38,14 @@ def test_register_is_valid_during_observation_signal_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 38
+    assert register["register_revision"] == 39
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 47)
+        f"AER-{index:04d}" for index in range(1, 48)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == ["AER-0046"]
+    ] == ["AER-0046", "AER-0047"]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 34
+    assert len(agent_incidents) == 35
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -80,6 +80,23 @@ def test_observation_signal_worker_veto_requires_fresh_acceptance() -> None:
     assert incident["category"] == "output_contract_violation"
     assert incident["candidate_state"] == "untrusted_partial_worktree"
     assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "open"
+
+
+def test_observation_signal_sol_recovery_requires_two_sided_clock_veto() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0047"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["related_incident_ids"] == []
+    assert rows["AER-0046"]["related_incident_ids"] == []
     assert incident["correction"]["status"] == (
         "control_implemented_pending_acceptance"
     )
@@ -694,10 +711,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 46
-    assert report["open_incident_ids"] == ["AER-0046"]
+    assert report["incident_count"] == 47
+    assert report["open_incident_ids"] == ["AER-0046", "AER-0047"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 34,
+        "agent_behavior": 35,
         "harness": 3,
         "repository": 2,
         "transport": 7,
@@ -708,14 +725,14 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "harness_failure": 3,
         "output_contract_violation": 15,
         "read_only_violation": 2,
-        "reasoning_claim_error": 6,
+        "reasoning_claim_error": 7,
         "repository_defect": 2,
         "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
         "canonical_unchanged": 36,
-        "untrusted_partial_worktree": 8,
+        "untrusted_partial_worktree": 9,
     }
     assert report["recurring_patterns"] == [
         {
