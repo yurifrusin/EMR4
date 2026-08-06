@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_gemini_36_flash_high_rayleen_source_adapter_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the frozen provider-free unmounted Rayleen A4 waiting-room source adapter as current implementation. The Sol candidate is committed but not yet independently accepted.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance, recovery and integration. Gemini 3.6 Flash/high through a fresh Antigravity project receives read-only veto authority only. The failed DeepSeek worktree is quarantined and no worker source was adopted.",
+    "active_plan_and_acceptance": "Exact candidate 3edbe828fa1f261e59b8478db79d80e4c291cbbc contains the frozen adapter, closed schema/fixture/evidence, 14 focused tests, AER-0038 containment and Sol recovery. The 173-test A4/Context Fabric suite passed and the accepted Current-weave historical evidence stayed byte-identical.",
+    "protected_evidence_boundaries": "Reviewer may read only committed authored-synthetic repository material and run provider-free tests. It may not edit, access ADC/cloud, call a provider, inspect patient/product/protected data or docs/branding, open product/API/database/watcher/command authority, deploy, release, rebuild Pages or move refs.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-review is tracked-clean on codex/review-context-fabric-rayleen-source-adapter at exact 3edbe828fa1f261e59b8478db79d80e4c291cbbc. Primary task HEAD matches. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "rayleen_source_adapter_pre_verifier_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol committed and verified the exact candidate and clean review worktree."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The allocated fresh-project Gemini 3.6 Flash/high verifier transport is selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unreachable", "evidence": ["AER-0038 is contained; no same-lane retry or source adoption is open."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-flash-reviewers", "active_instance_ids": ["gemini-rayleen-source-adapter-review-001"], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "gemini-rayleen-source-adapter-review-001",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\context-fabric-rayleen-source-adapter-review",
+      "branch": "codex/review-context-fabric-rayleen-source-adapter",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-06T20:10:00+10:00",
+      "source_head": "1f008abf806c27c7e37251384f846a4a513dbad5",
+      "candidate_head": "3edbe828fa1f261e59b8478db79d80e4c291cbbc"
+    }
+  ],
+  "assigned_agent_ids": ["gemini-rayleen-source-adapter-review-001"]
+}

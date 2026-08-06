@@ -31,6 +31,7 @@ from scripts.raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_s
     adapt_waiting_room_source,
     build_authored_synthetic_alias_manifest,
     build_authored_synthetic_waiting_room_frame,
+    extract_waiting_room_source_envelope,
 )
 
 
@@ -40,7 +41,8 @@ CONTINUITY_DIR = (
     / "continuity"
     / "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter"
 )
-EVIDENCE_SCHEMA_PATH = CONTINUITY_DIR / "adapter-result.schema.json"
+ADAPTER_RESULT_SCHEMA_PATH = CONTINUITY_DIR / "adapter-result.schema.json"
+EVIDENCE_SCHEMA_PATH = CONTINUITY_DIR / "acceptance-evidence.schema.json"
 DEFAULT_FIXTURE_PATH = CONTINUITY_DIR / "authored-synthetic-waiting-room-frame.json"
 DEFAULT_EVIDENCE_PATH = CONTINUITY_DIR / "provider-free-acceptance-evidence.json"
 ASSEMBLED_AT = "2026-08-06T03:00:00Z"
@@ -57,8 +59,8 @@ def _sha256_file(path: Path) -> str:
 def _write_json(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(
-        json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    temporary.write_bytes(
+        (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
     )
     temporary.replace(path)
 
@@ -76,8 +78,9 @@ def _replacement_packet() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any
         manifest,
         assembled_at=ASSEMBLED_AT,
     )
+    waiting_envelope = extract_waiting_room_source_envelope(adapter_result)
     sources = [
-        adapter_result["source_envelope"]
+        waiting_envelope
         if item["frame_type"] == "current_waiting_room_projection"
         else item
         for item in parent["source_envelopes"]
@@ -219,6 +222,47 @@ def _negative_results() -> list[str]:
         )
 
     results.append(_expect_block(label_tamper))
+
+    def result_block(mutator: Callable[[dict[str, Any]], None]) -> str:
+        parent = build_authored_synthetic_packet()
+        frame = build_authored_synthetic_waiting_room_frame()
+        manifest = build_authored_synthetic_alias_manifest(
+            frame, parent["authority_binding"], parent["scope_grant"]
+        )
+        result = adapt_waiting_room_source(
+            frame,
+            parent["authority_binding"],
+            parent["scope_grant"],
+            manifest,
+            assembled_at=ASSEMBLED_AT,
+        )
+        mutator(result)
+        _reseal(result["source_envelope"], "source_digest")
+        result["adapter_trace"]["source_digest"] = result["source_envelope"][
+            "source_digest"
+        ]
+        _reseal(result["adapter_trace"], "adapter_trace_digest")
+        _reseal(result, "adapter_result_digest")
+        try:
+            extract_waiting_room_source_envelope(result)
+        except WaitingRoomSourceAdapterViolation as error:
+            return str(error)
+        raise AssertionError("mutated adapter result unexpectedly crossed handoff")
+
+    results.append(
+        result_block(
+            lambda result: result["source_envelope"].__setitem__(
+                "patient_display_token", "synthetic:patient:must-not-cross"
+            )
+        )
+    )
+    results.append(
+        result_block(
+            lambda result: result["source_envelope"]["payload"]["entries"][
+                0
+            ].__setitem__("unexpected", True)
+        )
+    )
     return results
 
 
@@ -266,6 +310,8 @@ def build_acceptance_evidence() -> tuple[dict[str, Any], dict[str, Any]]:
                 / "scripts"
                 / "raisa_provider_free_practice_context_fabric_current_operational_weave.py"
             ),
+            "adapter_result_schema": _sha256_file(ADAPTER_RESULT_SCHEMA_PATH),
+            "acceptance_evidence_schema": _sha256_file(EVIDENCE_SCHEMA_PATH),
         },
         "claim_boundary": "Provider-free authored-synthetic unmounted source-adapter evidence only; no real data, live source, watcher, provider, runtime, command, deployment or production claim.",
     }

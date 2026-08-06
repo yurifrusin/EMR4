@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: frozen provider-free authored-synthetic design
+Status: revised provider-free authored-synthetic candidate after independent veto
 
 ## Placement
 
@@ -67,6 +67,18 @@ The accepted Current-weave implementation is not patched: deterministic scope
 must omit an unavailable derived field before assembling that exceptional
 shape, while a scope that requests it releases nothing.
 
+The result has its own recursively closed JSON Schema, distinct from the
+acceptance-evidence schema. A public validation function checks that schema,
+all result/envelope/trace seals, cross-linked digests and identifiers, counts,
+time/TTL relationships, unique appointment references and closed
+wait/threshold/exception semantics. The only parent handoff function repeats
+that validation and returns a deep copy of the source envelope. Direct nested
+dictionary access is not the admitted adapter-to-assembler interface.
+
+Entry construction intersects optional waiting fields with the effective
+grant before sealing. The parent projection remains a second minimisation
+layer, not the first place at which disallowed source fields disappear.
+
 ## Validation order
 
 1. Validate all outer shapes and seals without reading source payload content.
@@ -79,9 +91,11 @@ shape, while a scope that requests it releases nothing.
 6. Build minimized entries through the complete alias map.
 7. Scan the canonical output for every raw source UUID, patient display token
    and source label id; any occurrence blocks release.
-8. Seal the source envelope and trace, enforce cardinality/canonical-byte
-   limits, then pass the envelope to the existing assembler/proofreader in the
-   acceptance proof.
+8. Seal the source envelope, trace and result, validate their recursively
+   closed schema and cross-links, and enforce cardinality/canonical-byte
+   limits.
+9. Revalidate and deep-copy the envelope through the sole handoff extractor,
+   then pass it to the unchanged assembler/proofreader in the acceptance proof.
 
 No failure returns a partial entry or partially sealed envelope.
 

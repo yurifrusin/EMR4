@@ -1,87 +1,176 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://emr4.local/schemas/practice-context-fabric-source-adapter-acceptance.v1.json",
+  "$id": "https://emr4.local/schemas/practice-context-fabric-rayleen-waiting-room-source-adapter-result.v1.json",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schema_version",
-    "result",
     "evidence_label",
-    "case_count",
-    "passed_case_count",
-    "source_frame_file_digest",
+    "data_class",
     "source_frame_digest",
     "alias_manifest_digest",
-    "source_envelope_digest",
-    "adapter_trace_digest",
-    "adapter_result_digest",
-    "parent_frame_set_digest",
-    "parent_proofreader_trace_digest",
-    "parent_proofreader_decision",
-    "negative_reason_codes",
-    "zero_action_posture",
-    "artifact_hashes",
-    "claim_boundary"
+    "source_envelope",
+    "adapter_trace",
+    "read_only",
+    "command_authority",
+    "provider_authority",
+    "release_decision",
+    "adapter_result_digest"
   ],
   "properties": {
-    "schema_version": {"const": "emr4.practice_context_fabric_source_adapter_acceptance.v1"},
-    "result": {"const": "raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_pass"},
+    "schema_version": {"const": "emr4.practice_context_fabric_rayleen_waiting_room_source_adapter.v1"},
     "evidence_label": {"const": "provider_free_authored_synthetic_unmounted_rayleen_waiting_room_source_adapter"},
-    "case_count": {"type": "integer", "minimum": 10},
-    "passed_case_count": {"type": "integer", "minimum": 10},
-    "source_frame_file_digest": {"$ref": "#/$defs/digest"},
+    "data_class": {"const": "authored_synthetic_no_product_data"},
     "source_frame_digest": {"$ref": "#/$defs/digest"},
     "alias_manifest_digest": {"$ref": "#/$defs/digest"},
-    "source_envelope_digest": {"$ref": "#/$defs/digest"},
-    "adapter_trace_digest": {"$ref": "#/$defs/digest"},
-    "adapter_result_digest": {"$ref": "#/$defs/digest"},
-    "parent_frame_set_digest": {"$ref": "#/$defs/digest"},
-    "parent_proofreader_trace_digest": {"$ref": "#/$defs/digest"},
-    "parent_proofreader_decision": {"const": "RELEASE"},
-    "negative_reason_codes": {
-      "type": "array",
-      "minItems": 8,
-      "uniqueItems": true,
-      "items": {"type": "string", "minLength": 1}
+    "source_envelope": {"$ref": "#/$defs/source_envelope"},
+    "adapter_trace": {"$ref": "#/$defs/adapter_trace"},
+    "read_only": {"const": true},
+    "command_authority": {"const": false},
+    "provider_authority": {"const": false},
+    "release_decision": {"const": "RELEASE"},
+    "adapter_result_digest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "opaque_practice_ref": {"type": "string", "pattern": "^synthetic:practice:[a-z0-9-]+$"},
+    "opaque_location_ref": {"type": "string", "pattern": "^synthetic:location:[a-z0-9-]+$"},
+    "opaque_appointment_ref": {"type": "string", "pattern": "^synthetic:appointment:[a-z0-9-]+$"},
+    "opaque_practitioner_ref": {"type": "string", "pattern": "^synthetic:practitioner:[a-z0-9-]+$"},
+    "waiting_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["appointment_ref"],
+      "properties": {
+        "appointment_ref": {"$ref": "#/$defs/opaque_appointment_ref"},
+        "practitioner_ref": {"$ref": "#/$defs/opaque_practitioner_ref"},
+        "status": {"enum": ["BOOKED", "CONFIRMED", "ARRIVED", "IN_CONSULT"]},
+        "elapsed_wait_minutes": {"type": "integer", "minimum": 0},
+        "threshold_code": {"enum": ["UNDER_15_MINUTES", "15_TO_29_MINUTES", "30_MINUTES_OR_MORE"]},
+        "flow_exception_code": {"enum": ["MISSING_ARRIVAL_TIMESTAMP", "EXPECTED_ARRIVAL_OVERDUE"]},
+        "longest_wait_rank": {"type": "integer", "minimum": 1, "maximum": 6}
+      }
     },
-    "zero_action_posture": {
+    "source_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["location_ref", "context_revision", "entries"],
+      "properties": {
+        "location_ref": {"$ref": "#/$defs/opaque_location_ref"},
+        "context_revision": {"type": "integer", "minimum": 1},
+        "entries": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {"$ref": "#/$defs/waiting_entry"}
+        }
+      }
+    },
+    "source_envelope": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "provider_calls",
-        "network_calls",
-        "database_calls",
-        "product_api_calls",
-        "commands_or_writes",
-        "watcher_or_event_subscriptions",
-        "deployments_or_releases",
-        "protected_actions"
+        "schema_version",
+        "source_envelope_id",
+        "frame_type",
+        "source_class",
+        "source_contract_id",
+        "source_revision",
+        "practice_id",
+        "session_binding_digest",
+        "location_refs",
+        "observed_at",
+        "expires_at",
+        "evidence_label",
+        "data_class",
+        "read_only",
+        "command_authority",
+        "provider_authority",
+        "supersession_state",
+        "payload",
+        "source_digest"
       ],
       "properties": {
-        "provider_calls": {"const": 0},
-        "network_calls": {"const": 0},
-        "database_calls": {"const": 0},
-        "product_api_calls": {"const": 0},
-        "commands_or_writes": {"const": 0},
-        "watcher_or_event_subscriptions": {"const": 0},
-        "deployments_or_releases": {"const": 0},
-        "protected_actions": {"const": 0}
+        "schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"},
+        "source_envelope_id": {"type": "string", "pattern": "^synthetic:source:waiting-adapter-[0-9a-f]{12}$"},
+        "frame_type": {"const": "current_waiting_room_projection"},
+        "source_class": {"const": "current_waiting_room"},
+        "source_contract_id": {"const": "emr4.waiting_room_context_frame.v1"},
+        "source_revision": {"type": "string", "pattern": "^synthetic:waiting-revision:[1-9][0-9]*:[0-9a-f]{12}$"},
+        "practice_id": {"$ref": "#/$defs/opaque_practice_ref"},
+        "session_binding_digest": {"$ref": "#/$defs/digest"},
+        "location_refs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/opaque_location_ref"}
+        },
+        "observed_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time"},
+        "evidence_label": {"const": "provider_free_authored_synthetic_current_operational_weave"},
+        "data_class": {"const": "authored_synthetic_no_product_data"},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "provider_authority": {"const": false},
+        "supersession_state": {"const": "CURRENT"},
+        "payload": {"$ref": "#/$defs/source_payload"},
+        "source_digest": {"$ref": "#/$defs/digest"}
       }
     },
-    "artifact_hashes": {
+    "adapter_trace": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["adapter_module", "current_weave_module"],
+      "required": [
+        "schema_version",
+        "source_frame_digest",
+        "alias_manifest_digest",
+        "binding_digest",
+        "grant_digest",
+        "session_binding_digest",
+        "source_envelope_id",
+        "source_digest",
+        "source_entry_count",
+        "released_entry_count",
+        "omitted_field_codes",
+        "assembled_at",
+        "expires_at",
+        "read_only",
+        "command_authority",
+        "provider_authority",
+        "release_decision",
+        "adapter_trace_digest"
+      ],
       "properties": {
-        "adapter_module": {"$ref": "#/$defs/digest"},
-        "current_weave_module": {"$ref": "#/$defs/digest"}
+        "schema_version": {"const": "emr4.practice_context_fabric_rayleen_waiting_room_source_adapter.v1"},
+        "source_frame_digest": {"$ref": "#/$defs/digest"},
+        "alias_manifest_digest": {"$ref": "#/$defs/digest"},
+        "binding_digest": {"$ref": "#/$defs/digest"},
+        "grant_digest": {"$ref": "#/$defs/digest"},
+        "session_binding_digest": {"$ref": "#/$defs/digest"},
+        "source_envelope_id": {"type": "string", "pattern": "^synthetic:source:waiting-adapter-[0-9a-f]{12}$"},
+        "source_digest": {"$ref": "#/$defs/digest"},
+        "source_entry_count": {"type": "integer", "minimum": 0, "maximum": 6},
+        "released_entry_count": {"type": "integer", "minimum": 0, "maximum": 6},
+        "omitted_field_codes": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {"const": "PATIENT_DISPLAY_TOKEN_OMITTED"},
+            {"const": "RAW_SOURCE_IDENTIFIERS_OMITTED"},
+            {"const": "SOURCE_TIMESTAMPS_MINIMIZED"},
+            {"const": "EXCLUDED_FIELD_CLASSES_OMITTED"}
+          ],
+          "items": false
+        },
+        "assembled_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time"},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "provider_authority": {"const": false},
+        "release_decision": {"const": "RELEASE"},
+        "adapter_trace_digest": {"$ref": "#/$defs/digest"}
       }
-    },
-    "claim_boundary": {
-      "const": "Provider-free authored-synthetic unmounted source-adapter evidence only; no real data, live source, watcher, provider, runtime, command, deployment or production claim."
     }
-  },
-  "$defs": {
-    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
   }
 }

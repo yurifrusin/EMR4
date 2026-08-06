@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-review",
+  "branch": "codex/review-context-fabric-rayleen-source-adapter",
+  "head": "3edbe828fa1f261e59b8478db79d80e4c291cbbc",
+  "expected_head": "3edbe828fa1f261e59b8478db79d80e4c291cbbc",
+  "clean": true,
+  "branch_prefix": "codex/review",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

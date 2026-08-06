@@ -273,14 +273,18 @@ large “memory” feature:
    provider/credential material was retained and owned cleanup completed. The
    controlling frozen plan is
    `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`.
-6. **One-source provider-free adapter** — **frozen and in implementation**;
+6. **One-source provider-free adapter** — **in independent-veto repair**;
    the first descendant consumes only a completed authored-synthetic instance
    of Rayleen A4's `emr4.waiting_room_context_frame.v1`, validates and minimizes
    it behind the accepted binding/grant, applies a complete backend-authored
    opaque-reference manifest and emits one unmounted
    `current_waiting_room_projection` source envelope. It cannot invoke or
    refresh the source, watch changes, mount a route, call a provider or execute
-   against real product data. The controlling plan is
+   against real product data. Its first veto found that the nominal result
+   schema described only evidence; the repaired candidate separates closed
+   result/evidence schemas, revalidates one deep-copy handoff and minimizes
+   optional waiting fields before the unchanged parent projection. The
+   controlling plan is
    `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`.
 7. **Real product read descendants** — open one source and one role/purpose at a
    time with privacy, identity, audit, retention and database acceptance.

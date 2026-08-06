@@ -19,6 +19,8 @@ Current operational weave. This delta opens no product route or live source.
 | Cross-practice, cross-location or unrelated aliases are mixed | Exact source UUID and Fabric-ref set equality, binding/grant/session digest checks | `alias_scope_mismatch` |
 | Duplicate facts or aliases create ambiguous identity | Enforce unique source and opaque references and bounded cardinality | `duplicate_reference` |
 | A partial adapter result is used after failure | Atomic result construction; no envelope returned on exception | no release |
+| A caller adds an unknown outer or nested field and recomputes the non-cryptographic seals | Recursively closed result/envelope/payload/entry/trace schema plus full revalidation in the sole deep-copy handoff extractor | `adapter_result_schema_invalid` |
+| A narrow grant relies on the parent projector to discard ungranted waiting fields | Adapter entry construction intersects optional waiting fields with the effective grant before sealing; parent projection remains a second minimisation layer | focused narrow-grant exact-shape test |
 | The adapter becomes a watcher, database client or command tunnel | Pure module, static fixture, no app-service import, network, database, subprocess, route or command dependency | deterministic/API Spine regression failure |
 | A sealed source envelope is treated as present authority or action proof | All-false authority ceiling; future commands must re-authorize and re-read | proofreader blocks command-shaped use |
 

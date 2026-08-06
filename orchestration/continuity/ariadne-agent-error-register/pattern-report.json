@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "cb7a9c0a5c23fe74b0478bc889923a13cd1245cd6b34945c082f40fe66bcd6bd",
+  "canonical_register_sha256": "287b087a0085d6d5d8abf159c9ef3025ca5d3af9b6d268ad9b5426280416f3f7",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 29,
+      "canonical_unchanged": 31,
       "untrusted_partial_worktree": 7
     },
     "by_category": {
@@ -11,27 +11,27 @@
       "evidence_misreport": 4,
       "harness_failure": 3,
       "output_contract_violation": 14,
-      "read_only_violation": 1,
+      "read_only_violation": 2,
       "reasoning_claim_error": 5,
       "repository_defect": 2,
-      "transport_timeout": 6
+      "transport_timeout": 7
     },
     "by_origin": {
-      "agent_behavior": 27,
+      "agent_behavior": 28,
       "harness": 3,
       "repository": 2,
-      "transport": 6
+      "transport": 7
     },
     "by_process_severity": {
       "low": 10,
       "material": 9,
-      "moderate": 19
+      "moderate": 21
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 16,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 17,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 8,
+      "codex-primary-orchestrator::orchestrator": 9,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -43,12 +43,12 @@
     },
     "by_role": {
       "implementer": 8,
-      "orchestrator": 13,
-      "verifier": 17
+      "orchestrator": 14,
+      "verifier": 18
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 38,
+  "incident_count": 40,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -232,16 +232,18 @@
       "categories": [
         "transport_timeout"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0022",
         "AER-0031",
-        "AER-0034"
+        "AER-0034",
+        "AER-0039"
       ],
       "origins": [
         "transport"
       ],
       "prevention_controls": [
+        "After one bounded fresh-project authentication retry, preserve a sanitized zero-call receipt and use the configured authentication-or-transport fallback against the same exact clean HEAD instead of repeatedly interrupting the programme for ceremonial reauthentication.",
         "Authentication failures remain transport incidents with no inferred reviewer decision; preserve a sanitized failure, require human credential restoration, then use a fresh process and reverify exact HEAD, clean status and single-decision admission.",
         "Treat Antigravity OAuth as a human-restored transport boundary distinct from ADC and gcloud stores; preserve every sanitized timeout and require exact-head plus clean-worktree readback before a fresh-project recovery result is admitted.",
         "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance."
@@ -255,7 +257,7 @@
       ]
     }
   ],
-  "register_revision": 32,
+  "register_revision": 33,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-06"
 }

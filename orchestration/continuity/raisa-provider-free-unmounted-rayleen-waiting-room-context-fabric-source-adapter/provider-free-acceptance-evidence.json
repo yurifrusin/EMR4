@@ -2,8 +2,8 @@
   "schema_version": "emr4.practice_context_fabric_source_adapter_acceptance.v1",
   "result": "raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_pass",
   "evidence_label": "provider_free_authored_synthetic_unmounted_rayleen_waiting_room_source_adapter",
-  "case_count": 13,
-  "passed_case_count": 13,
+  "case_count": 15,
+  "passed_case_count": 15,
   "source_frame_file_digest": "sha256:be4a592c3acbe6b080a8af1720bb3744d135fd1c0a910c31ff996655452d5fe2",
   "source_frame_digest": "sha256:2ad043ade3384d5ab18e7deb70353f13b355c4472cd643a3fbbc988ac198acba",
   "alias_manifest_digest": "sha256:cbef3ec45c416504bd1075cdfa0c4bdfbd8089ff95e378b2342397e57ad9d72c",
@@ -15,6 +15,7 @@
   "parent_proofreader_decision": "RELEASE",
   "negative_reason_codes": [
     "adapter_authority_invalid",
+    "adapter_result_schema_invalid",
     "alias_location_not_admitted",
     "alias_manifest_digest_invalid",
     "alias_manifest_not_complete",
@@ -38,8 +39,10 @@
     "protected_actions": 0
   },
   "artifact_hashes": {
-    "adapter_module": "sha256:d58e846e32a357ebbbd48cadf436c18e52f8bf5fa18351e57b592503a18d2532",
-    "current_weave_module": "sha256:9f1881c3acb232da6608f85bf05dee9c898319ced02a3ae3a6ba126cea400772"
+    "adapter_module": "sha256:db4cd0da630905c5dd1bb37cfe4c137171843f51daa98151201534b7ab10f256",
+    "current_weave_module": "sha256:9f1881c3acb232da6608f85bf05dee9c898319ced02a3ae3a6ba126cea400772",
+    "adapter_result_schema": "sha256:f4bc24cb971157e61062966a9048ffcea796bb9d0e99d577a1a17450c69a9e51",
+    "acceptance_evidence_schema": "sha256:3340b294ea0e09f54c5ffb006801efe286499f4f1af3c37e1724fdda4262e916"
   },
   "claim_boundary": "Provider-free authored-synthetic unmounted source-adapter evidence only; no real data, live source, watcher, provider, runtime, command, deployment or production claim."
 }

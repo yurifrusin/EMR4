@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/practice-context-fabric-source-adapter-acceptance.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "case_count",
+    "passed_case_count",
+    "source_frame_file_digest",
+    "source_frame_digest",
+    "alias_manifest_digest",
+    "source_envelope_digest",
+    "adapter_trace_digest",
+    "adapter_result_digest",
+    "parent_frame_set_digest",
+    "parent_proofreader_trace_digest",
+    "parent_proofreader_decision",
+    "negative_reason_codes",
+    "zero_action_posture",
+    "artifact_hashes",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.practice_context_fabric_source_adapter_acceptance.v1"},
+    "result": {"const": "raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_pass"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_unmounted_rayleen_waiting_room_source_adapter"},
+    "case_count": {"type": "integer", "minimum": 15},
+    "passed_case_count": {"type": "integer", "minimum": 15},
+    "source_frame_file_digest": {"$ref": "#/$defs/digest"},
+    "source_frame_digest": {"$ref": "#/$defs/digest"},
+    "alias_manifest_digest": {"$ref": "#/$defs/digest"},
+    "source_envelope_digest": {"$ref": "#/$defs/digest"},
+    "adapter_trace_digest": {"$ref": "#/$defs/digest"},
+    "adapter_result_digest": {"$ref": "#/$defs/digest"},
+    "parent_frame_set_digest": {"$ref": "#/$defs/digest"},
+    "parent_proofreader_trace_digest": {"$ref": "#/$defs/digest"},
+    "parent_proofreader_decision": {"const": "RELEASE"},
+    "negative_reason_codes": {
+      "type": "array",
+      "minItems": 10,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "zero_action_posture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_calls",
+        "network_calls",
+        "database_calls",
+        "product_api_calls",
+        "commands_or_writes",
+        "watcher_or_event_subscriptions",
+        "deployments_or_releases",
+        "protected_actions"
+      ],
+      "properties": {
+        "provider_calls": {"const": 0},
+        "network_calls": {"const": 0},
+        "database_calls": {"const": 0},
+        "product_api_calls": {"const": 0},
+        "commands_or_writes": {"const": 0},
+        "watcher_or_event_subscriptions": {"const": 0},
+        "deployments_or_releases": {"const": 0},
+        "protected_actions": {"const": 0}
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter_module",
+        "current_weave_module",
+        "adapter_result_schema",
+        "acceptance_evidence_schema"
+      ],
+      "properties": {
+        "adapter_module": {"$ref": "#/$defs/digest"},
+        "current_weave_module": {"$ref": "#/$defs/digest"},
+        "adapter_result_schema": {"$ref": "#/$defs/digest"},
+        "acceptance_evidence_schema": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "claim_boundary": {
+      "const": "Provider-free authored-synthetic unmounted source-adapter evidence only; no real data, live source, watcher, provider, runtime, command, deployment or production claim."
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

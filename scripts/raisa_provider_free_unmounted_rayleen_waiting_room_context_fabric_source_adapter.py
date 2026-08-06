@@ -37,6 +37,13 @@ A4_FRAME_SCHEMA_PATH = (
     / "model-required-bureau-provider-free-successor-lanes"
     / "waiting-room-context-frame.schema.json"
 )
+RESULT_SCHEMA_PATH = (
+    ROOT
+    / "orchestration"
+    / "continuity"
+    / "raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter"
+    / "adapter-result.schema.json"
+)
 
 SCHEMA_VERSION = (
     "emr4.practice_context_fabric_rayleen_waiting_room_source_adapter.v1"
@@ -90,6 +97,7 @@ def _load_json(path: Path) -> dict[str, Any]:
 
 
 A4_FRAME_SCHEMA = _load_json(A4_FRAME_SCHEMA_PATH)
+ADAPTER_RESULT_SCHEMA = _load_json(RESULT_SCHEMA_PATH)
 
 
 ALIAS_MANIFEST_SCHEMA: dict[str, Any] = {
@@ -237,6 +245,75 @@ def _threshold_band(wait_minutes: int) -> str:
     if wait_minutes < 30:
         return "15_to_29_minutes"
     return "30_minutes_or_more"
+
+
+def _threshold_code(wait_minutes: int) -> str:
+    return THRESHOLD_CODES[_threshold_band(wait_minutes)]
+
+
+def validate_waiting_room_source_adapter_result(result: dict[str, Any]) -> None:
+    """Validate the complete sealed adapter result at the assembler handoff."""
+
+    _validate_json_schema(
+        result,
+        ADAPTER_RESULT_SCHEMA,
+        "adapter_result_schema_invalid",
+    )
+    envelope = result["source_envelope"]
+    trace = result["adapter_trace"]
+    _verify(envelope, "source_digest", "source_envelope_digest_invalid")
+    _verify(trace, "adapter_trace_digest", "adapter_trace_digest_invalid")
+    _verify(result, "adapter_result_digest", "adapter_result_digest_invalid")
+
+    expected_pairs = (
+        (result["source_frame_digest"], trace["source_frame_digest"]),
+        (result["alias_manifest_digest"], trace["alias_manifest_digest"]),
+        (envelope["source_envelope_id"], trace["source_envelope_id"]),
+        (envelope["source_digest"], trace["source_digest"]),
+        (envelope["session_binding_digest"], trace["session_binding_digest"]),
+        (envelope["expires_at"], trace["expires_at"]),
+        (envelope["location_refs"][0], envelope["payload"]["location_ref"]),
+    )
+    if any(left != right for left, right in expected_pairs):
+        raise WaitingRoomSourceAdapterViolation("adapter_result_linkage_invalid")
+    if trace["source_entry_count"] != trace["released_entry_count"]:
+        raise WaitingRoomSourceAdapterViolation("adapter_result_count_mismatch")
+    entries = envelope["payload"]["entries"]
+    if trace["released_entry_count"] != len(entries):
+        raise WaitingRoomSourceAdapterViolation("adapter_result_count_mismatch")
+    if len({entry["appointment_ref"] for entry in entries}) != len(entries):
+        raise WaitingRoomSourceAdapterViolation("adapter_result_duplicate_entry")
+
+    observed = _instant(envelope["observed_at"])
+    assembled = _instant(trace["assembled_at"])
+    expires = _instant(envelope["expires_at"])
+    if not observed <= assembled < expires:
+        raise WaitingRoomSourceAdapterViolation("adapter_result_time_invalid")
+    if (expires - observed).total_seconds() > MAX_SOURCE_TTL_SECONDS:
+        raise WaitingRoomSourceAdapterViolation("adapter_result_ttl_invalid")
+
+    for entry in entries:
+        elapsed = entry.get("elapsed_wait_minutes")
+        threshold = entry.get("threshold_code")
+        rank = entry.get("longest_wait_rank")
+        exception = entry.get("flow_exception_code")
+        if (elapsed is None) != (threshold is None):
+            raise WaitingRoomSourceAdapterViolation("adapter_result_wait_pair_invalid")
+        if elapsed is not None and threshold != _threshold_code(elapsed):
+            raise WaitingRoomSourceAdapterViolation("adapter_result_threshold_invalid")
+        if rank is not None and elapsed is None:
+            raise WaitingRoomSourceAdapterViolation("adapter_result_rank_invalid")
+        if exception is not None and any(
+            value is not None for value in (elapsed, threshold, rank)
+        ):
+            raise WaitingRoomSourceAdapterViolation("adapter_result_exception_invalid")
+
+
+def extract_waiting_room_source_envelope(result: dict[str, Any]) -> dict[str, Any]:
+    """Return only a revalidated immutable-copy handoff to the parent assembler."""
+
+    validate_waiting_room_source_adapter_result(result)
+    return deepcopy(result["source_envelope"])
 
 
 def _expected_signal_values(frame: dict[str, Any]) -> list[dict[str, Any]]:
@@ -486,6 +563,7 @@ def _build_entries(
     frame: dict[str, Any],
     appointment_map: dict[str, str],
     practitioner_map: dict[str, str],
+    allowed_fields: set[str],
 ) -> list[dict[str, Any]]:
     signals: dict[str, dict[str, Any]] = {}
     for signal in frame["derived_signals"]:
@@ -496,19 +574,27 @@ def _build_entries(
     for fact in frame["backend_facts"]:
         entry: dict[str, Any] = {
             "appointment_ref": appointment_map[fact["appointment_id"]],
-            "practitioner_ref": practitioner_map[fact["practitioner_id"]],
-            "status": STATUS_CODES[fact["status"]],
         }
+        if "waiting_practitioner_ref" in allowed_fields:
+            entry["practitioner_ref"] = practitioner_map[fact["practitioner_id"]]
+        if "waiting_status" in allowed_fields:
+            entry["status"] = STATUS_CODES[fact["status"]]
         values = signals.get(fact["appointment_id"], {})
-        if "elapsed_wait_minutes" in values:
+        if (
+            "waiting_elapsed_minutes" in allowed_fields
+            and "elapsed_wait_minutes" in values
+        ):
             entry["elapsed_wait_minutes"] = values["elapsed_wait_minutes"]
-        if "threshold_band" in values:
+        if "waiting_threshold_code" in allowed_fields and "threshold_band" in values:
             entry["threshold_code"] = THRESHOLD_CODES[values["threshold_band"]]
         if "flow_exception" in values:
             entry["flow_exception_code"] = FLOW_EXCEPTION_CODES[
                 values["flow_exception"]
             ]
-        if "longest_wait_rank" in values:
+        if (
+            "waiting_elapsed_minutes" in allowed_fields
+            and "longest_wait_rank" in values
+        ):
             entry["longest_wait_rank"] = values["longest_wait_rank"]
         entries.append(entry)
     return entries
@@ -542,7 +628,12 @@ def adapt_waiting_room_source(
             _instant(alias_manifest["expires_at"]),
         )
     )
-    entries = _build_entries(frame, appointment_map, practitioner_map)
+    entries = _build_entries(
+        frame,
+        appointment_map,
+        practitioner_map,
+        set(scope_grant["allowed_fields"]),
+    )
     envelope_base = {
         "schema_version": CURRENT_WEAVE_SCHEMA_VERSION,
         "source_envelope_id": (
@@ -616,6 +707,7 @@ def adapt_waiting_room_source(
         },
         "adapter_result_digest",
     )
+    validate_waiting_room_source_adapter_result(result)
     forbidden_values = {
         frame["practice_id"],
         frame["location_id"],
@@ -757,6 +849,7 @@ def build_authored_synthetic_alias_manifest(
 
 
 __all__ = [
+    "ADAPTER_RESULT_SCHEMA",
     "ALIAS_MANIFEST_SCHEMA",
     "ALIAS_SCHEMA_VERSION",
     "EVIDENCE_LABEL",
@@ -768,4 +861,6 @@ __all__ = [
     "adapt_waiting_room_source",
     "build_authored_synthetic_alias_manifest",
     "build_authored_synthetic_waiting_room_frame",
+    "extract_waiting_room_source_envelope",
+    "validate_waiting_room_source_adapter_result",
 ]

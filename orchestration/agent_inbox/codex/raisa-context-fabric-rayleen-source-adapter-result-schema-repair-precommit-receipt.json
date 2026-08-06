@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_rayleen_source_adapter_independent_veto_repair_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The repaired candidate separates recursively closed adapter-result and evidence schemas, validates nested envelope/payload/entry/trace shapes, all seals and cross-links through one deep-copy handoff, minimizes optional waiting fields against the effective grant, records 15/15 acceptance cases with parent RELEASE, passes 18 focused tests and passes the exact 177-test inherited A4/Context Fabric suite.",
+    "current_authority_allocation": "GPT Sol owns bounded repair, deterministic verification, candidate commit and later acceptance. The fresh independent GPT Sol context supplied read-only fallback veto only and has completed. Gemini Antigravity reached no model because OAuth timed out; DeepSeek partial state remains quarantined. No worker owns integration or protected refs.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam remains at pre-repair candidate 3edbe828fa1f261e59b8478db79d80e4c291cbbc with only the named repair/governance paths intended for commit. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The restored review worktree is still clean at 3edbe828fa1f261e59b8478db79d80e4c291cbbc.",
+    "live_handover_current_baton": "AGENTS.md identifies the provider-free unmounted Rayleen A4 waiting-room source adapter as active and records the first independent revision_required result plus its exact result-schema repair. No live source, watcher or broader authority is open.",
+    "protected_evidence_boundaries": "The repair is pure, unmounted and authored-synthetic. It changes no app, route, GraphQL/REST command, Current-weave parent, database, provider, watcher, event transport, deployment, Pages or protected ref. Patient/product/protected data and docs/branding remain untouched; unrelated untracked files remain excluded and staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

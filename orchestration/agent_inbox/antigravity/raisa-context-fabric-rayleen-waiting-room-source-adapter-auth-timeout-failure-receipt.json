@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.worker-transport-failure.v1",
+  "status": "transport_failed",
+  "observed_on": "2026-08-06",
+  "attempt_id": "raisa-context-fabric-rayleen-source-adapter-review-001",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "requested_model": "gemini-3.6-flash-high",
+  "requested_reasoning_effort": "high",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-review",
+  "branch": "codex/review-context-fabric-rayleen-source-adapter",
+  "head_before": "3edbe828fa1f261e59b8478db79d80e4c291cbbc",
+  "head_after": "3edbe828fa1f261e59b8478db79d80e4c291cbbc",
+  "dirty_after": false,
+  "failure_class": "authentication_required_timeout",
+  "packet_delivered_to_model": false,
+  "terminal_decision_observed": false,
+  "provider_or_model_calls": 0,
+  "credentials_or_oauth_values_retained": false,
+  "candidate_unchanged": true,
+  "bounded_retry_exhausted": true,
+  "fallback_basis": "authentication_or_transport_unavailable_triggers_fallback",
+  "next_action": "Preserve the zero-call failure and use a fresh read-only GPT Sol independent-context fallback verifier against the same exact clean candidate."
+}

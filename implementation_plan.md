@@ -79,13 +79,16 @@ rehearsal now also passes at exact independently reviewed source HEAD
 trusted code rebuilt and admitted the unchanged parent retrieval packet. The
 controlling plan is
 [`docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`](docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md).
-The first provider-free unmounted one-source adapter is now frozen for bounded
-implementation around Rayleen A4's existing authorised
+The first provider-free unmounted one-source adapter is now in exact-head
+independent-veto repair around Rayleen A4's existing authorised
 `emr4.waiting_room_context_frame.v1` shape. It consumes only a completed
 authored-synthetic frame, validates and minimizes it, applies backend-issued
 request-scoped aliases and emits one Current source envelope; it cannot invoke
 or refresh the source, watch changes, mount a route, call a provider or execute
-against real product data. The controlling plan is
+against real product data. The first veto exposed and the repair closes a
+misnamed evidence-only result schema by separating recursively closed result
+and evidence schemas, validating one deep-copy handoff and minimizing optional
+waiting fields before parent projection. The controlling plan is
 [`docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md`](docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-plan.md).
 
 The longer clinical/practice Bureau programme must not collapse into one
@@ -382,9 +385,10 @@ Implementation proceeds from the accepted provider-free authored-synthetic contr
 the accepted composition of four existing current read shapes and the accepted
 patient-free temporal invalidation/bitemporal contract, the accepted provider-
 free intent-shaped temporal retrieval rehearsal and the accepted authored-
-synthetic model-required intent-shaping descendant. The next step is the frozen
-bounded implementation of the unmounted provider-free Rayleen A4 waiting-room
-source adapter before separately gated real-product and clinical descendants.
+synthetic model-required intent-shaping descendant. The next step is the fresh
+exact-head independent veto of the repaired unmounted provider-free Rayleen A4
+waiting-room source adapter before separately gated real-product and clinical
+descendants.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 
@@ -19,12 +20,15 @@ from scripts.raisa_provider_free_practice_context_fabric_current_operational_wea
     proofread_current_operational_weave,
 )
 from scripts.raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter import (
+    ADAPTER_RESULT_SCHEMA,
     ALIAS_MANIFEST_SCHEMA,
     EVIDENCE_LABEL,
     WaitingRoomSourceAdapterViolation,
     adapt_waiting_room_source,
     build_authored_synthetic_alias_manifest,
     build_authored_synthetic_waiting_room_frame,
+    extract_waiting_room_source_envelope,
+    validate_waiting_room_source_adapter_result,
 )
 from scripts.raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter_acceptance import (
     ASSEMBLED_AT,
@@ -137,7 +141,9 @@ def test_adapter_output_contains_no_source_identity_or_patient_token() -> None:
 def test_adapter_source_replaces_only_waiting_envelope_and_parent_proofreader_releases() -> None:
     packet = build_authored_synthetic_packet()
     result = _adapt()
-    sources = _replace_waiting_source(packet, result["source_envelope"])
+    sources = _replace_waiting_source(
+        packet, extract_waiting_room_source_envelope(result)
+    )
     frame_set, source_trace, weave_trace = assemble_current_operational_weave(
         packet["candidate"],
         packet["context_need"],
@@ -211,7 +217,9 @@ def test_missing_arrival_remains_explicit_and_optional_values_are_not_invented()
     assert "elapsed_wait_minutes" not in entry
     assert "threshold_code" not in entry
 
-    sources = _replace_waiting_source(packet, result["source_envelope"])
+    sources = _replace_waiting_source(
+        packet, extract_waiting_room_source_envelope(result)
+    )
     frame_set, source_trace, weave_trace = assemble_current_operational_weave(
         candidate,
         context_need,
@@ -322,6 +330,80 @@ def test_alias_manifest_schema_is_recursively_closed() -> None:
         )
 
 
+@pytest.mark.parametrize(
+    "mutator",
+    [
+        lambda result: result["source_envelope"].__setitem__(
+            "patient_display_token", "synthetic:patient:must-not-cross"
+        ),
+        lambda result: result["source_envelope"]["payload"]["entries"][0].__setitem__(
+            "unexpected", True
+        ),
+        lambda result: result["source_envelope"]["payload"].__setitem__(
+            "context_revision", True
+        ),
+    ],
+)
+def test_resealed_adapter_output_additions_fail_before_parent_handoff(mutator) -> None:
+    result = _adapt()
+    mutator(result)
+    _reseal(result["source_envelope"], "source_digest")
+    result["adapter_trace"]["source_digest"] = result["source_envelope"][
+        "source_digest"
+    ]
+    _reseal(result["adapter_trace"], "adapter_trace_digest")
+    _reseal(result, "adapter_result_digest")
+
+    with pytest.raises(
+        WaitingRoomSourceAdapterViolation, match="adapter_result_schema_invalid"
+    ):
+        extract_waiting_room_source_envelope(result)
+
+
+def test_adapter_output_is_minimized_to_the_narrow_waiting_field_grant() -> None:
+    packet = build_authored_synthetic_packet()
+    candidate = deepcopy(packet["candidate"])
+    candidate["requested_fields"] = [
+        field
+        for field in candidate["requested_fields"]
+        if field
+        not in {
+            "waiting_practitioner_ref",
+            "waiting_elapsed_minutes",
+            "waiting_threshold_code",
+        }
+    ]
+    _reseal(candidate, "candidate_digest")
+    context_need = build_operational_context_need(
+        candidate, packet["authority_binding"], assembled_at=ASSEMBLED_AT
+    )
+    grant = intersect_operational_scope(
+        candidate,
+        context_need,
+        packet["authority_binding"],
+        assembled_at=ASSEMBLED_AT,
+    )
+    frame = build_authored_synthetic_waiting_room_frame()
+    manifest = build_authored_synthetic_alias_manifest(
+        frame, packet["authority_binding"], grant
+    )
+    result = adapt_waiting_room_source(
+        frame,
+        packet["authority_binding"],
+        grant,
+        manifest,
+        assembled_at=ASSEMBLED_AT,
+    )
+
+    assert result["source_envelope"]["payload"]["entries"] == [
+        {
+            "appointment_ref": "synthetic:appointment:one",
+            "status": "ARRIVED",
+        }
+    ]
+    validate_waiting_room_source_adapter_result(result)
+
+
 def test_output_expiry_is_minimum_and_byte_limit_is_enforced() -> None:
     frame, binding, grant, manifest = _inputs()
     manifest["expires_at"] = "2026-08-06T03:00:30Z"
@@ -347,14 +429,25 @@ def test_committed_fixture_and_acceptance_evidence_are_reproducible_and_closed()
     frame, evidence = build_acceptance_evidence()
     assert _json(ARTIFACT_ROOT / "authored-synthetic-waiting-room-frame.json") == frame
     assert _json(ARTIFACT_ROOT / "provider-free-acceptance-evidence.json") == evidence
-    schema = _json(ARTIFACT_ROOT / "adapter-result.schema.json")
+    result = _adapt()
+    assert not list(
+        Draft202012Validator(
+            ADAPTER_RESULT_SCHEMA, format_checker=FormatChecker()
+        ).iter_errors(result)
+    )
+    validate_waiting_room_source_adapter_result(result)
+    schema = _json(ARTIFACT_ROOT / "acceptance-evidence.schema.json")
     assert not list(
         Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(
             evidence
         )
     )
-    assert evidence["case_count"] == evidence["passed_case_count"] == 13
+    assert evidence["case_count"] == evidence["passed_case_count"] == 15
     assert all(value == 0 for value in evidence["zero_action_posture"].values())
+    fixture_digest = "sha256:" + hashlib.sha256(
+        (ARTIFACT_ROOT / "authored-synthetic-waiting-room-frame.json").read_bytes()
+    ).hexdigest()
+    assert fixture_digest == evidence["source_frame_file_digest"]
 
 
 def test_adapter_has_no_product_runtime_or_provider_dependency() -> None:

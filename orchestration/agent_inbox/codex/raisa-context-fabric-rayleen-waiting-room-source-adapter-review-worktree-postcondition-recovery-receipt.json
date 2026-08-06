@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.review-worktree-postcondition-recovery.v1",
+  "status": "restored_exact_committed_state",
+  "observed_on": "2026-08-06",
+  "attempt_id": "raisa-context-fabric-rayleen-source-adapter-sol-reconciliation-001",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/context-fabric-rayleen-source-adapter-review",
+  "branch": "codex/review-context-fabric-rayleen-source-adapter",
+  "required_head": "3edbe828fa1f261e59b8478db79d80e4c291cbbc",
+  "head_before": "3edbe828fa1f261e59b8478db79d80e4c291cbbc",
+  "head_after": "3edbe828fa1f261e59b8478db79d80e4c291cbbc",
+  "trigger": "The orchestrator ran the deterministic acceptance generator in the otherwise read-only review worktree after the exact 122-test packet passed.",
+  "observed_mutations": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/authored-synthetic-waiting-room-frame.json",
+      "restored_blob": "cfaaea633b80f2ef1e8df6b3a06d98a221f90a3e"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/provider-free-acceptance-evidence.json",
+      "restored_blob": "e26db4164a4e9627e6d7f6863c282b8673e73401"
+    }
+  ],
+  "source_or_test_code_changed": false,
+  "candidate_commit_changed": false,
+  "candidate_worktree_clean_after": true,
+  "provider_or_model_calls": 0,
+  "product_or_database_reads": 0,
+  "protected_ref_updates": 0,
+  "prevention_control": "Review worktrees may run non-regenerative tests and static checks only. Acceptance generators run in the primary candidate worktree before review and their committed evidence is verified by hashes and tests, not regenerated in the verifier worktree."
+}

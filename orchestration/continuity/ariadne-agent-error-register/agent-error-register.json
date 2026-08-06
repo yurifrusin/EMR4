@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 32,
+  "register_revision": 33,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1474,6 +1474,81 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0039",
+      "attempt_id": "raisa-context-fabric-rayleen-source-adapter-review-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-rayleen-waiting-room-source-adapter",
+      "origin": "transport",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh exact-HEAD Antigravity veto must authenticate and return one non-transferable review receipt, or fail with sanitized containment and leave the candidate unchanged before an allowed transport fallback.",
+      "observed_error": "The bounded verifier retry required fresh Google OAuth consent and timed out before model admission. It produced no terminal decision or ordinary worker receipt while the exact candidate remained clean and unchanged.",
+      "detection_method": "The launcher returned authentication_required and timed out after sixty seconds. Sol retained no OAuth value, confirmed zero provider/model calls and re-read the exact review HEAD and clean worktree.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-rayleen-waiting-room-source-adapter-auth-timeout-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-review-worktree-preflight.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The zero-call timeout is preserved without OAuth material. Repository fallback policy transferred the same immutable read-only packet to a fresh independent GPT Sol context; it did not transfer acceptance or integration authority and did not broaden the candidate.",
+        "prevention_control": "After one bounded fresh-project authentication retry, preserve a sanitized zero-call receipt and use the configured authentication-or-transport fallback against the same exact clean HEAD instead of repeatedly interrupting the programme for ceremonial reauthentication.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-rayleen-waiting-room-source-adapter-auth-timeout-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-independent-sol-fallback-review.md",
+          "orchestration/harness_settings/cost_controls.yaml"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0040",
+      "attempt_id": "raisa-context-fabric-rayleen-source-adapter-sol-reconciliation-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-rayleen-waiting-room-source-adapter",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "read_only_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The independent-review worktree must remain at the exact committed HEAD and tracked-clean throughout all verifier and reconciliation checks.",
+      "observed_error": "After the exact five-file test packet passed, the orchestrator ran the acceptance generator in the read-only review worktree. Its timestamped evidence regeneration modified two committed fixture/evidence paths without changing source, tests or HEAD.",
+      "detection_method": "The mandatory post-command Git readback reported exactly two modified paths. Sol restored both from the exact HEAD and verified their Git blob identities and an empty worktree status before any review could be admitted.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-review-worktree-postcondition-recovery-receipt.json",
+        "tests/test_raisa_provider_free_unmounted_rayleen_waiting_room_context_fabric_source_adapter.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "orchestrator.generative_acceptance_in_read_only_review_worktree",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The two generated files were restored from exact committed blobs before reviewer admission. The review HEAD remained unchanged, the worktree returned tracked-clean, and the independent fallback reviewer received only the restored candidate.",
+        "prevention_control": "Review-worktree reconciliation runs only non-regenerative tests and static checks. Acceptance generators run before candidate freeze in the primary worktree; review verifies committed evidence through hashes and focused tests rather than regeneration.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-waiting-room-source-adapter-review-worktree-postcondition-recovery-receipt.json",
+          "orchestration/harness_settings/verifier_execution_policy.yaml"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

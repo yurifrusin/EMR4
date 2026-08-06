@@ -150,6 +150,28 @@ Gemini 3.6 Flash/high read-only veto in a clean non-protected worktree. The
 reviewer receives authored-synthetic repository material only and gains no
 implementation, acceptance, integration or protected-ref authority.
 
+## Independent-veto repair
+
+The first exact-head independent fallback veto returned `revision_required`:
+the file named as the adapter-result schema described only the acceptance
+summary, so a resealed unknown nested source property was not rejected at the
+adapter-to-assembler handoff. The corrected candidate must keep the parent
+Current weave byte-unchanged while:
+
+- separating the closed `WaitingRoomSourceAdapterResult` schema from the
+  acceptance-evidence schema;
+- validating the result, nested source envelope, payload entries and trace,
+  all three seals and every cross-link immediately before handoff;
+- handing the parent assembler only a deep-copied envelope extracted through
+  that validation boundary;
+- minimizing waiting-entry fields against the effective grant before
+  projection; and
+- proving unknown outer/nested properties and Python boolean-as-integer
+  mutations release nothing even after all affected seals are recomputed.
+
+No parent patch, mounted route, live source, watcher or authority expansion is
+permitted by this repair.
+
 ## Claim boundary
 
 Passing proves only that one authored-synthetic serialized A4 waiting-room

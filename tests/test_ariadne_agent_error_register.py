@@ -38,10 +38,10 @@ def test_committed_register_is_semantically_valid_after_source_adapter_recovery(
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 32
+    assert register["register_revision"] == 33
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 39)
+        f"AER-{index:04d}" for index in range(1, 41)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,8 +53,8 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 27
-    assert len(transport_incidents) == 6
+    assert len(agent_incidents) == 28
+    assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
@@ -62,6 +62,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
         "AER-0034",
         "AER-0036",
         "AER-0038",
+        "AER-0039",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -206,6 +207,57 @@ def test_source_adapter_deepseek_timeout_is_sanitized_and_contained() -> None:
     assert failure["containment"]["provider_call_made"] is False
     assert failure["containment"]["product_or_database_accessed"] is False
     assert failure["containment"]["protected_ref_moved"] is False
+
+
+def test_source_adapter_antigravity_timeout_is_sanitized_and_falls_back() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0039"
+    )
+    failure = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "raisa-context-fabric-rayleen-waiting-room-source-adapter-auth-timeout-failure-receipt.json"
+    )
+
+    assert incident["origin"] == "transport"
+    assert incident["role"] == "verifier"
+    assert incident["status"] == "contained"
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert failure["status"] == "transport_failed"
+    assert failure["packet_delivered_to_model"] is False
+    assert failure["provider_or_model_calls"] == 0
+    assert failure["credentials_or_oauth_values_retained"] is False
+    assert failure["bounded_retry_exhausted"] is True
+    assert failure["candidate_unchanged"] is True
+    assert failure["head_before"] == failure["head_after"]
+
+
+def test_source_adapter_review_worktree_regeneration_is_restored() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0040"
+    )
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-rayleen-waiting-room-source-adapter-review-worktree-postcondition-recovery-receipt.json"
+    )
+
+    assert incident["category"] == "read_only_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["status"] == "corrected"
+    assert receipt["status"] == "restored_exact_committed_state"
+    assert len(receipt["observed_mutations"]) == 2
+    assert receipt["head_before"] == receipt["head_after"] == receipt["required_head"]
+    assert receipt["source_or_test_code_changed"] is False
+    assert receipt["candidate_commit_changed"] is False
+    assert receipt["candidate_worktree_clean_after"] is True
+    assert receipt["provider_or_model_calls"] == 0
+    assert receipt["product_or_database_reads"] == 0
+    assert receipt["protected_ref_updates"] == 0
 
 
 def test_a5_worker_scope_breach_closes_only_through_recovery_lease() -> None:
@@ -544,27 +596,27 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 38
+    assert report["incident_count"] == 40
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 27,
+        "agent_behavior": 28,
         "harness": 3,
         "repository": 2,
-        "transport": 6,
+        "transport": 7,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 3,
         "evidence_misreport": 4,
         "harness_failure": 3,
         "output_contract_violation": 14,
-        "read_only_violation": 1,
+        "read_only_violation": 2,
         "reasoning_claim_error": 5,
         "repository_defect": 2,
-        "transport_timeout": 6,
+        "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 29,
+        "canonical_unchanged": 31,
         "untrusted_partial_worktree": 7,
     }
     assert report["recurring_patterns"] == [
@@ -672,13 +724,14 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
-            "incident_count": 3,
-            "incident_ids": ["AER-0022", "AER-0031", "AER-0034"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0022", "AER-0031", "AER-0034", "AER-0039"],
             "origins": ["transport"],
             "categories": ["transport_timeout"],
             "roles": ["verifier"],
             "resource_ids": ["antigravity-gemini-flash-3-6-high-verifier"],
             "prevention_controls": [
+                "After one bounded fresh-project authentication retry, preserve a sanitized zero-call receipt and use the configured authentication-or-transport fallback against the same exact clean HEAD instead of repeatedly interrupting the programme for ceremonial reauthentication.",
                 "Authentication failures remain transport incidents with no inferred reviewer decision; preserve a sanitized failure, require human credential restoration, then use a fresh process and reverify exact HEAD, clean status and single-decision admission.",
                 "Treat Antigravity OAuth as a human-restored transport boundary distinct from ADC and gcloud stores; preserve every sanitized timeout and require exact-head plus clean-worktree readback before a fresh-project recovery result is admitted.",
                 "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance.",
