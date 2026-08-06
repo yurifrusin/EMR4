@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_provider_free_patient_free_temporal_weave_and_invalidation_watcher_contract",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted Current operational weave at exact source d8bc059212e65a6ed2d7ac8d57734096d14b9139 and the provider-free patient-free temporal weave as the next dependency-satisfied descendant under Yuri's standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol owns the new tranche boundary, architecture, acceptance and task-branch integration. DeepSeek V4 Flash/high may receive a later bounded implementation/test packet if economical; Gemini 3.6 Flash/high remains fresh independent veto only after deterministic gates. No worker receives self-acceptance or protected authority.",
+    "active_plan_and_acceptance": "The accepted Context Fabric direction requires committed events to remain signals for fresh authorised reads, historical state to keep valid-time and transaction-time semantics, and stale frame sets to be reassembled rather than patched. Yuri's watcher question selects the architecture-strengthening in-sequence design: a scoped dependency watcher invalidates or supersedes an immutable active set and emits an inert reassembly requirement; it never edits frames or treats an event payload as truth.",
+    "protected_evidence_boundaries": "This first temporal descendant is newly authored synthetic and provider-free. No patient, clinical, product-derived, protected or historical-PHI data; real event feed/database/session; persistence or operational retention; provider/external retrieval; product route/runtime; command/write; deployment, production, release, Pages; protected evidence/ref; or docs/branding access is open.",
+    "git_refs_and_worktree": "Task HEAD and origin task ref are aligned at e1cfdcf7b1a7e98fe6a0db164dc8cdfcfa925d59 after Current operational weave publication. Local/origin/remote master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree has only preserved unrelated untracked files, including untouched docs/branding/."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "patient_free_temporal_weave_preplan_complete_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the fresh-tranche five-source rehydration and is freezing a provider-free authored-synthetic contract only."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No verifier dispatch or provider call occurs during pre-planning."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Implementation allocation follows only after the exact contract and worker packet are frozen."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Claude CLI is not selected independently."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A later bounded read-only scout may map reusable event/reconciliation contracts but cannot plan, edit or accept the tranche."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
