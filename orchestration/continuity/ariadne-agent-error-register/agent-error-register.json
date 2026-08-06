@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 35,
+  "register_revision": 36,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1625,6 +1625,80 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0043",
+      "attempt_id": "raisa-context-fabric-rayleen-invalidation-reassembly-native-worker-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-rayleen-invalidation-reassembly",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every worker lease must begin only after a distinct passed pre_worker_dispatch Ariadne receipt names all five rehydration sources against the exact frozen plan and worktree.",
+      "observed_error": "Sol spawned the bounded two-file native implementation worker after a passed pre_sprint_planning receipt but before generating the separately named pre_worker_dispatch receipt.",
+      "detection_method": "Immediately after the plan commit, Sol checked the continuation-event requirements and identified that worker dispatch had occurred out of order.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-worker-predispatch-ordering-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-36.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The worker was interrupted before candidate acceptance. Sol records the failure and requires a new passed pre_worker_dispatch receipt before resuming the unchanged exact two-file lease.",
+        "prevention_control": "Treat pre_sprint_planning and pre_worker_dispatch as distinct ordered events; the dispatch command may be issued only after the latter receipt is generated and read back as passed.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-worker-predispatch-ordering-failure-receipt.json",
+          "orchestration/harness_settings/orchestrator_requirements.yaml"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0044",
+      "attempt_id": "raisa-context-fabric-rayleen-invalidation-reassembly-register-schema-read-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-rayleen-invalidation-reassembly",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "Protected-safe register maintenance must read only the exact named register/schema paths and must never fall back to broad repository search or discovery.",
+      "observed_error": "An intended exact register-schema rg query returned broad repository search output rather than the single-file result, exceeding the permitted command scope.",
+      "detection_method": "The command result itself reported millions of tokens and ordinary repository paths, so Sol rejected the output without using it for candidate analysis and switched to explicit LiteralPath line reads.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-register-search-scope-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-36.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.exact_file_search_observed_as_broad_repository_scope",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Sol rejected and did not reuse the broad output. All follow-up register/schema inspection uses only explicit Get-Content -LiteralPath commands with bounded line ranges.",
+        "prevention_control": "For protected-safe schema/register maintenance, prohibit rg even with a supplied file argument; use literal-path reads and exact line ranges only.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-invalidation-reassembly-register-search-scope-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-36.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

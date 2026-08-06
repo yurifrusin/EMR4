@@ -38,10 +38,10 @@ def test_committed_register_is_semantically_valid_after_source_adapter_recovery(
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 35
+    assert register["register_revision"] == 36
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 43)
+        f"AER-{index:04d}" for index in range(1, 45)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 30
+    assert len(agent_incidents) == 32
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -97,6 +97,33 @@ def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
     assert review["decision"] == "pass"
     assert review["head_before"] == review["head_after"] == failure["head_before"]
     assert review["dirty_after"] is False
+
+
+def test_invalidation_reassembly_orchestration_failures_are_contained() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    dispatch = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-rayleen-invalidation-reassembly-worker-predispatch-ordering-failure-receipt.json"
+    )
+    search = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-rayleen-invalidation-reassembly-register-search-scope-failure-receipt.json"
+    )
+
+    assert rows["AER-0043"]["category"] == "command_scope_violation"
+    assert rows["AER-0043"]["status"] == "corrected"
+    assert dispatch["containment"]["worker_interrupted_before_candidate_acceptance"] is True
+    assert dispatch["containment"]["worker_source_adopted"] is False
+    assert rows["AER-0044"]["category"] == "command_scope_violation"
+    assert rows["AER-0044"]["status"] == "contained"
+    assert search["containment"]["broad_output_used_for_candidate_analysis"] is False
+    assert search["containment"]["literal_path_chunked_read_substituted"] is True
 
 
 def test_operational_weave_review_count_is_reconciled_at_exact_head() -> None:
@@ -651,16 +678,16 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 42
+    assert report["incident_count"] == 44
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 30,
+        "agent_behavior": 32,
         "harness": 3,
         "repository": 2,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 4,
+        "command_scope_violation": 6,
         "evidence_misreport": 5,
         "harness_failure": 3,
         "output_contract_violation": 14,
@@ -671,7 +698,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 33,
+        "canonical_unchanged": 35,
         "untrusted_partial_worktree": 7,
     }
     assert report["recurring_patterns"] == [

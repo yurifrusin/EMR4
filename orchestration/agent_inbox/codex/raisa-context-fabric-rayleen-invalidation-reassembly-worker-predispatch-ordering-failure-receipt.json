@@ -1,0 +1,21 @@
+{
+  "schema_version": "emr4.ariadne.contained_orchestration_failure.v1",
+  "incident_id": "AER-0043",
+  "attempt_id": "raisa-context-fabric-rayleen-invalidation-reassembly-native-worker-001",
+  "observed_on": "2026-08-06",
+  "origin": "agent_behavior",
+  "role": "orchestrator",
+  "stage": "dispatch",
+  "failure": "worker_started_after_preplanning_receipt_but_before_distinct_pre_worker_dispatch_receipt",
+  "candidate_state": "canonical_unchanged",
+  "containment": {
+    "worker_interrupted_before_candidate_acceptance": true,
+    "worker_source_adopted": false,
+    "worker_decision_admitted": false,
+    "protected_ref_changed": false,
+    "provider_or_external_call": false,
+    "patient_product_or_protected_data_used": false
+  },
+  "correction": "Record the ordering error, generate a passed five-source pre_worker_dispatch receipt against the exact frozen plan and current task HEAD, then resume the same bounded two-file lease without changing its authority.",
+  "claim_boundary": "This receipt contains the orchestration ordering failure only. It grants no implementation, review, integration, protected-ref, provider, runtime or command authority."
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "emr4.ariadne.contained_orchestration_failure.v1",
+  "incident_id": "AER-0044",
+  "attempt_id": "raisa-context-fabric-rayleen-invalidation-reassembly-register-schema-read-001",
+  "observed_on": "2026-08-06",
+  "origin": "agent_behavior",
+  "role": "orchestrator",
+  "stage": "deterministic_verification",
+  "failure": "intended_exact_register_schema_search_returned_broad_repository_search_output",
+  "candidate_state": "canonical_unchanged",
+  "containment": {
+    "broad_output_used_for_candidate_analysis": false,
+    "protected_content_intentionally_opened": false,
+    "followup_repository_search_performed": false,
+    "literal_path_chunked_read_substituted": true,
+    "protected_ref_changed": false,
+    "provider_or_external_call": false,
+    "patient_product_or_protected_data_used": false
+  },
+  "correction": "Treat the observed broad scope as a command-scope breach, do not inspect or reuse the broad output, and use only Get-Content -LiteralPath with explicit line ranges for register/schema work.",
+  "claim_boundary": "This receipt does not claim that protected content was read or exposed. It records that the observed command output exceeded its intended single-file scope and therefore cannot be admitted."
+}
