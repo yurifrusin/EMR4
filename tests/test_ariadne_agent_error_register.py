@@ -38,7 +38,7 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 51
+    assert register["register_revision"] == 52
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 53)
@@ -161,6 +161,14 @@ def test_migration_architecture_plan_veto_and_review_bootstrap_are_preserved() -
     assert "sole owner-private product-identifier exception" in plan["correction"][
         "action"
     ]
+    assert "exact IN_PROGRESS update-confirm claim" in plan["correction"]["action"]
+    assert "practice-scoped command foreign key plus unique command id event binding" in plan[
+        "correction"
+    ]["action"]
+    assert "one connection, transaction, capability and session identity" in plan[
+        "correction"
+    ]["action"]
+    assert "make the mapping bijective" in plan["correction"]["action"]
 
     process = incidents["AER-0052"]
     assert process["status"] == "corrected"

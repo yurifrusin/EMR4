@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_native_read_only_durability_migration_transaction_architecture_plan_recovery_3_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The third recovery makes diary_context_aggregate_aliases_v1 the sole owner-private product-identifier exception with exact producer execute-only access, total non-producer denial, opaque-alias-only egress, disabled separate bridge deletion and no cascade or durability purge authority. It preserves the already reconciled bounded PRIMARY/CONFLICT, source-purge, anchor, transaction, role, key, retention and API Spine repairs. The veto must attack the bridge exception and recheck the entire catalogue for data-ceiling contradictions.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery, acceptance, integration and baton authority. One genuinely fresh native reviewer receives read-only findings authority at exact recovery HEAD only; no mutation, implementation, self-acceptance, provider, database/runtime, protected-ref or push authority.",
+    "git_refs_and_worktree": "Recovered task HEAD is 62c78cba72c99b00a0087738b771d05f0adf2c06 and origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Fresh worktree C:/Users/sarashera/EMR4-worktrees/r26 is clean on codex/review-durability-migration-transaction-plan-recovery-3-62c78cba at exact recovered HEAD.",
+    "live_handover_current_baton": "The live baton accepts only the parent pure durability state machine and permits the declarative migration/transaction architecture descendant. All three prior candidates are rejected; exact third recovery candidate 62c78cba72c99b00a0087738b771d05f0adf2c06 remains unaccepted and AER-0051 is open.",
+    "protected_evidence_boundaries": "Review is exact-path allowlist only. No protected holdout, historical Diary, branding, unrelated receipt/evidence, app/database/runtime/provider surface may be enumerated or read. No uv, pip, package/environment bootstrap, pytest cache, bytecode or filesystem mutation is permitted. The only executable test path is the proven absolute system pytest with --noconftest, -p no:cacheprovider and PYTHONDONTWRITEBYTECODE=1; otherwise stop and report."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: third recovered design candidate pending fresh independent veto
+Status: fourth recovered design candidate pending fresh independent veto
 
 ## Purpose
 
@@ -33,10 +33,26 @@ authority from an event, checkpoint, frame or another plane.
 ## Source transaction
 
 The source head is an ordinary row keyed by practice and the exact reschedule
-stream. The producer locks the existing idempotency and appointment rows, the
-opaque alias row and then the stream head. Its `n -> n + 1` update and the
+stream. The command first holds the exact `IN_PROGRESS`
+`confirmAppointmentUpdateProposal` / `update-confirm` idempotency row with its
+immutable signed-request digest, locks and updates the appointment, appends its
+audit/event and populates the row's existing target-appointment and audit
+bindings. The event's existing practice-scoped `(practice_id, command_id)`
+foreign key plus unique `command_id` constraint binds the sole event to that
+claim; no fictitious event-id or revision field is added to the idempotency
+row. One owner-mediated producer projection entry
+point then rederives the producer login/binding, locks the in-progress row,
+loads the sole event by command id and verifies event type/schema, appointment,
+audit and aggregate revision against the claim and locked product state before
+it may lock the immutable alias row and stream head. Its `n -> n + 1` update and
 outbox append occur in the same existing command transaction as appointment
 truth, appointment audit, committed event and idempotency completion.
+
+The signed command and projection use one physical connection, one logical
+capability and one `session_user` throughout that transaction. There is no
+second login, `SET ROLE`, alias-only capability or transaction hand-off whose
+identity or commit outcome could be substituted between the command and
+projection.
 
 This deliberately makes durability availability part of the enabled command's
 atomic contract. A failed append or head lock fails the command; it cannot be
@@ -52,22 +68,29 @@ the durability packet, receipt or audit.
 ## Owner-private alias bridge
 
 `diary_context_aggregate_aliases_v1` is the sole product-identifier exception
-inside the future schema. It stores exactly the practice-bound product
+inside the future schema. It stores exactly the practice/source-bound product
 appointment UUID needed to return one stable opaque alias across producer
-transactions. This is a producer/product bridge, not control projection
-content. The existing signed-command producer may execute one owner-mediated
-create-or-return entry point inside its transaction, but it has no direct bridge
-table privilege. Observer, admission receiver, coordinator, lifecycle,
-retention and application-read principals have no `SELECT`, DML or function
-path to the product UUID. Only the opaque alias enters the outbox.
+transactions. Its forward key includes practice, exact source contract and
+appointment UUID; its reverse unique key includes practice, source contract and
+opaque alias. Both values are immutable, the caller cannot choose the alias,
+same-appointment races return the existing mapping and cross-appointment alias
+collisions roll back the command.
+
+This is an owner-private producer subroutine, not a separately executable
+function or control-projection surface. The producer may execute only the one
+projection entry point above, after its database-enforced command-context
+revalidation, and has no direct bridge/head/outbox table privilege. Observer,
+admission receiver, coordinator, lifecycle, retention and application-read
+principals have no `SELECT`, DML or function path to the product UUID. Only the
+opaque alias enters the outbox.
 
 The bridge does not join the source, receipt/checkpoint or audit retention
-families and supplies no purge authority. Deletion is disabled by default. A
-later distinct owner-mediated product-lifecycle policy may delete a mapping only
-after the appointment can no longer emit a source row. Deletion never cascades
-to or rewrites retained outbox, admission, receipt, checkpoint, anchor or audit
-evidence. No actual product identifier is present or processed in this
-architecture-only tranche.
+families and supplies no purge authority. Update and deletion are prohibited
+for this v1 source-contract epoch, preventing delete/recreate identity changes
+and alias reuse. Any future erasure/non-reuse design requires a new reviewed
+contract and source epoch. The bridge never cascades to or rewrites retained
+outbox, admission, receipt, checkpoint, anchor or audit evidence. No actual
+product identifier is present or processed in this architecture-only tranche.
 
 ## Tenant binding
 

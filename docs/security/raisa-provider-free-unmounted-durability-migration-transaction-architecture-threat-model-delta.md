@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: third recovered architecture candidate pending fresh independent veto
+Status: fourth recovered architecture candidate pending fresh independent veto
 
 ## Trust boundaries and assets
 
@@ -27,7 +27,12 @@ and the separation between invalidation and current truth/commands.
 | Aggregate revision is treated as continuity | It is anomaly/freshness metadata only; only transaction position/predecessor determine continuity. |
 | Outbox leaks product or patient data | Closed columns only; no JSON/text/payload/product identifiers; raw event UUID is non-semantic, normalized and discarded. |
 | Alias bridge contradicts the product-identifier ceiling or leaks appointment identity | `diary_context_aggregate_aliases_v1` is the sole closed exception; only an owner-mediated producer entry point can create/return an alias, all other principals have no SELECT/DML/function path, and only the opaque alias enters durability evidence. |
-| Durability retention deletes or uses the product alias bridge as purge authority | The bridge is outside all three durability retention families, deletion is disabled by default and later requires a distinct product-lifecycle policy; it never cascades or rewrites retained opaque evidence. |
+| Producer invokes alias creation outside the signed command | There is no separately executable alias helper. The sole producer projection entry point rederives `session_user` and requires the exact `IN_PROGRESS` update-confirm claim, matching locked appointment/revision and just-authored bound event before any alias/head/outbox effect. |
+| Atomic command is split across identities, capabilities or transactions | The signed update-confirm and projection use one physical connection, one transaction, one logical capability and one `session_user`; no second login, `SET ROLE` or transaction hand-off is permitted. |
+| Caller substitutes a claim, event or revision | The entry point locks the exact operation/route/request-digest claim, loads the sole event through its existing practice-scoped `(practice_id, command_id)` foreign key plus unique `command_id` constraint and verifies event type/schema, target appointment, audit and aggregate revision against the claim and locked product state. |
+| Two product appointments share one alias or delete/recreate changes identity | Forward and reverse practice/source uniqueness make the mapping bijective; rows and aliases are immutable and non-deletable for the v1 epoch, same-appointment races return the winner and collision rolls back the command. |
+| Durability retention deletes or uses the product alias bridge as purge authority | The bridge is outside all three durability retention families, update/delete are prohibited for v1 and any future erasure/non-reuse scheme requires a new reviewed contract/epoch; it never cascades or rewrites retained opaque evidence. |
+| Alias-only failure survives command rollback | Appointment truth, audit, event, alias, head, outbox and idempotency result share one transaction; standalone/mismatched invocation fails before effect and every member rolls back together. |
 | Observer reads base/product tables | Exact projection privilege only; direct base-table access denied. |
 | Observer packet is altered or forged at the coordinator | Receiver rederives observer `session_user`, reselects exact source membership and appends one immutable packet/source/binding admission; coordinator accepts only stored admission meaning. |
 | Observer gains persistence authority through admission | Observer has no DML/checkpoint privilege; receiver-owned function admits only the exact closed packet and receiver has no durability-effect authority. |

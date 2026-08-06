@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_fourth_durability_migration_transaction_architecture_recovery_and_fresh_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The parent durability state machine remains accepted at 95a2ed5e960c58686262b5e82ce2e89354a3860a. The fourth recovered plan candidate freezes 18 future relations and 22 future database-backed acceptance groups. Three earlier recovery commits remain preserved; the latest veto requires database-enforced coupling of the owner-private alias bridge to the exact signed update-confirm transaction and an immutable practice/source bijection. AER-0051 remains open until the complete corrected candidate passes a fresh exact-head veto.",
+    "current_authority_allocation": "GPT Sol owns architecture recovery and acceptance. The bounded fresh independent veto is a permitted read-only worker surface after deterministic checks; no worker receives implementation, integration, baton or protected-ref authority. Provider, product-data, runtime and deployment lanes remain inactive.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the active branch is codex/ariadne-bernie-davida-parallel-seam at HEAD 62c78cba72c99b00a0087738b771d05f0adf2c06, four commits ahead of origin task 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree contains only the bounded fourth-recovery plan/design/threat/implementation-plan/register/test edits; user-owned untracked files including docs/branding and unrelated receipts/evidence remain preserved and excluded.",
+    "live_handover_current_baton": "The live handover accepts the pure provider-free unmounted durability state-machine rehearsal at source 95a2ed5e960c58686262b5e82ce2e89354a3860a and directs the declarative migration-and-transaction architecture descendant on codex/ariadne-bernie-davida-parallel-seam under Yuri's standing uninterrupted-gate authority. The architecture remains revision_required pending completion of the fourth recovery and a fresh independent veto; no DDL or implementation authority exists yet.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI may be opened. No app, Alembic, Diary or API Spine artifact may change; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, new command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost artifact remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

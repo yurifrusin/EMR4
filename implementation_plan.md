@@ -458,10 +458,17 @@ generation rehearsal. The architecture-only provider-free default-off
   exact-head veto accepted those repairs but exposed a data-ceiling contradiction
   around the appointment-id-to-opaque-alias mapping. The active recovery makes
   that mapping the sole owner-private product-identifier exception, denies every
-  non-producer principal access and separates its disabled product-lifecycle
-  deletion from the three durability retention families. Only a fresh acceptance
-  of the complete corrected plan may admit an inert DDL rehearsal. No applied
-  migration, live implementation, real-product or clinical descendant is opened.
+  non-producer principal access. A fourth veto then required database-enforced
+  command coupling and stable bijection: the active recovery makes alias creation
+  an owner-private subroutine of the single producer projection entry point,
+  requires the exact in-progress update-confirm claim, loads the sole event by
+  its existing unique practice/command binding, verifies its appointment, audit
+  and revision against locked product state, and keeps command plus projection
+  on one connection/transaction/logical capability/session identity. It adds
+  forward and reverse tenant/source uniqueness and prohibits update, deletion
+  and alias reuse for v1. Only a fresh acceptance of the complete
+  corrected plan may admit an inert DDL rehearsal. No applied migration, live
+  implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: third recovered architecture plan candidate pending fresh independent veto
+Status: fourth recovered architecture plan candidate pending fresh independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
@@ -100,19 +100,28 @@ relations and no generic work queue or event store:
    64-bit integer; overflow fails the producer transaction and consumes the
    epoch. No sequence or identity default is allowed.
 2. `diary_context_aggregate_aliases_v1` — the sole product-identifier exception:
-   an owner-private mapping keyed by `(practice_id, product_appointment_uuid)`
-   to one practice/source-scoped opaque aggregate alias. A narrow producer
-   entry point may create or return the alias inside the existing command
-   transaction; no runtime principal receives direct table DML. Observer,
-   admission receiver, coordinator, lifecycle, retention and application-read
-   principals receive neither `SELECT` nor the product id. The product UUID is
-   never copied into the outbox, admission, receipt, checkpoint, anchor, audit,
-   key or retention relations.
+   an immutable owner-private mapping keyed by
+   `(practice_id, source_contract_id, product_appointment_uuid)` to one opaque
+   aggregate alias, with reverse uniqueness on
+   `(practice_id, source_contract_id, opaque_aggregate_alias)`. The source
+   contract is exactly `diary.appointment_rescheduled.v1`; the caller cannot
+   supply the alias. The owner generates it inside the single producer
+   projection entry point described below. Rows permit neither update nor
+   deletion for this contract epoch. A concurrent same-appointment create must
+   reload and return the exact existing alias; a cross-appointment collision
+   fails the entire command transaction. No separately executable alias helper
+   is granted to a runtime principal and no runtime principal receives direct
+   table DML. Observer, admission receiver, coordinator, lifecycle, retention
+   and application-read principals receive neither `SELECT` nor the product
+   id. The product UUID is never copied into the outbox, admission, receipt,
+   checkpoint, anchor, audit, key or retention relations.
 3. `diary_context_observation_outbox_v1` — immutable payload-free source rows keyed by
    `(practice_id, stream_id, stream_epoch, transaction_position)`, with exact
    predecessor, one non-semantic raw event UUID, opaque aggregate alias/revision,
    source-contract digest and transaction-authored instant. The raw event UUID
-   is visible only to the narrow observer, is domain-separated into the accepted
+   is also unique within the exact practice/source contract, so one committed
+   command event cannot allocate two positions. It is visible only to the narrow
+   observer, is domain-separated into the accepted
    observation digest and is then discarded; it never reaches receipt or audit.
    The predecessor is zero only at position one and otherwise exactly position
    minus one. Stream epoch is fixed to `1` for this source-contract version.
@@ -202,19 +211,24 @@ checkpoint retention family and are retained together. Neither can be removed
 while its receipt, checkpoint, restart, redelivery or conflict meaning remains
 retained. The owner-private alias bridge is not governed by the three
 durability retention families and is never an input to their purge decision.
-Its deletion is disabled by default and may later occur only through a distinct
-owner-mediated product-lifecycle policy after the appointment can no longer
-emit a source row. Bridge deletion never cascades and cannot remove or rewrite
-an opaque alias already present in retained durability evidence.
+Update and deletion are prohibited for this v1 source-contract epoch, so a
+product UUID cannot be deleted and recreated with a different alias and an
+opaque alias cannot be reused. Any future erasure/non-reuse design requires a
+new separately reviewed migration/contract descendant and source epoch. The
+bridge never cascades and cannot remove or rewrite an opaque alias already
+present in retained durability evidence.
 
 ## Ownership, role and binding model
 
 The future design must separate these logical planes:
 
 - schema/table owner: `NOLOGIN`, not a runtime role and not `BYPASSRLS`;
-- producer: exact stream-head/control-row effect only inside the existing
-  signed command transaction, plus execute-only use of the exact owner-private
-  alias bridge entry point with no direct bridge-table privilege;
+- producer: one future database capability bound exclusively to the existing
+  signed appointment update-confirm command path. The command and its one exact
+  owner-mediated projection entry point use one physical connection, one
+  transaction, one logical capability and one `session_user`; there is no
+  second login, role switch, separately executable alias helper or direct
+  bridge/head/outbox table privilege;
 - observer: exact practice/source scoped read of the closed payload-free
   projection only;
 - observation admission receiver: one authenticated, source-revalidated,
@@ -258,27 +272,45 @@ forged `app.current_practice_id` cannot widen scope.
 The future producer remains the existing signed appointment update-confirm
 transaction. At `READ COMMITTED`, its fixed lock/effect order is:
 
-1. claim/read the existing idempotency result under its accepted contract;
-2. lock and validate the exact appointment aggregate under existing command
-   authorization;
-3. lock or create the exact aggregate-alias row under owner-mediated logic;
-4. lock the exact `(practice_id, stream_id)` head row `FOR UPDATE`;
-5. compute `position = last_position + 1` and `predecessor = last_position`;
-6. append the existing appointment audit, existing committed event and exact
-   payload-free control row, then advance the stream head; and
-7. complete the existing idempotency result before one transaction commit.
+1. claim/read the existing idempotency result under its accepted contract; a
+   new command holds one exact `IN_PROGRESS` row for
+   `confirmAppointmentUpdateProposal` / `update-confirm`, bound to the practice,
+   actor, idempotency-key digest and immutable request-body digest of the signed
+   confirmation envelope;
+2. lock, authorize and update the exact appointment aggregate;
+3. append the existing appointment audit and committed event, populate the
+   claim's existing `target_appointment_id` and `audit_log_id` while it remains
+   `IN_PROGRESS`, and rely on the event's existing practice-scoped
+   `(practice_id, command_id)` foreign key plus unique `command_id` constraint
+   to bind the sole event to that claim. No invented event-id or aggregate-
+   revision column is added to the idempotency row;
+4. invoke one exact owner-mediated producer projection entry point. It rederives
+   the actual producer `session_user` and practice/source binding, locks and
+   revalidates the exact `IN_PROGRESS` operation/route/request-digest claim,
+   loads the sole `DiaryCommittedEvent` row through that binding, and
+   verifies its exact reschedule type/schema, appointment, audit and aggregate
+   revision against the claim and locked product state. A completed, absent,
+   duplicate, foreign, mismatched or caller-substituted context fails before
+   any bridge/head/outbox effect;
+5. inside that same entry point, create or return the immutable bijective alias,
+   lock the exact `(practice_id, stream_id)` head row `FOR UPDATE`, compute
+   `position = last_position + 1` and `predecessor = last_position`, append the
+   payload-free control row and advance the stream head; and
+6. complete the existing idempotency result before one transaction commit.
 
-Appointment truth, command audit, idempotency completion, existing committed
-event, payload-free control row and stream-head advance commit or roll back
-together. Failure or lock timeout in the control projection fails the whole
-command safely; there is no silent bypass. Disabling an already-producing
-contract consumes its observer generations; re-enable requires a new explicit
-source-contract epoch/version rather than silently incrementing this version's
-fixed epoch.
-The producer may know the appointment UUID because it already owns the signed
-command transaction, but the bridge entry point returns only the opaque alias;
-the UUID never crosses into the control projection or any observer/coordinator
-surface.
+The alias operation is an owner-private subroutine of that single projection
+entry point; it has no separately grantable runtime execute path. The command
+does not open a second connection, change login, `SET ROLE` or cross a second
+capability boundary before projection. Appointment truth, command audit,
+idempotency completion, committed event, alias creation, payload-free control
+row and stream-head advance commit or roll back together.
+Failure, collision or lock timeout in any member fails the whole command safely;
+there is no silent bypass or persistent alias-only effect. Disabling an already-
+producing contract consumes its observer generations; re-enable requires a new
+explicit source-contract epoch/version rather than silently incrementing this
+version's fixed epoch. The producer may know the appointment UUID because it
+already owns the signed command transaction, but only the opaque alias crosses
+into the control projection or any observer/coordinator surface.
 After any emitted row, migration rollback is forward-fix and data-preserving;
 no downgrade may drop, truncate or silently stop the projection.
 
@@ -473,12 +505,21 @@ appointment command to commit without its required control row.
 The later implementation gate must use a disposable local database and newly
 authored synthetic opaque coordinates only. At minimum it must prove:
 
-1. rollback after every producer member leaves no appointment change,
-   success-idempotency result, event, control row or consumed position;
+1. rollback after every producer member, including alias insertion/collision,
+   leaves no appointment change, success-idempotency result, event, alias row,
+   control row or consumed position; direct projection invocation without the
+   exact bound `IN_PROGRESS` update-confirm claim, its target/audit bindings and
+   the sole unique-command event matching the locked appointment/revision is
+   rejected with zero bridge/head/outbox effect; the command and projection are
+   also proven to use one logical capability and one `session_user` without a
+   second login, role switch or transaction;
 2. concurrent same-stream producers yield contiguous unique positions and
    different practices share no counter;
-3. duplicate idempotency yields one mutation/control row and altered reuse
-   conflicts;
+3. duplicate idempotency yields one mutation, one immutable alias and one
+   control row; concurrent same-appointment alias creation converges on that
+   exact alias, different appointments cannot share one practice/source alias,
+   collision rolls back, caller alias selection fails, update/delete/recreate
+   fails and altered idempotency reuse conflicts;
 4. only the exactly bound observer login can invoke admission; the receiver
    revalidates source membership and a coordinator-supplied decision packet is
    rejected;
@@ -500,7 +541,8 @@ authored synthetic opaque coordinates only. At minimum it must prove:
     back every durability effect;
 11. cross-practice reads, writes, foreign keys and claimed scope fail;
 12. every logical role fails every forbidden operation, including inheritance,
-   `SET ROLE`, `BYPASSRLS`, owner and unsafe security-definer paths;
+   `SET ROLE`, `BYPASSRLS`, owner and unsafe security-definer paths; the producer
+   cannot execute an alias-only helper or directly mutate bridge/head/outbox;
 13. caller-set practice GUC, packet practice and direct function argument cannot
     widen the authenticated binding;
 14. JSON/text/direct identifier/raw UUID/correlation/session/payload smuggling
@@ -517,9 +559,8 @@ authored synthetic opaque coordinates only. At minimum it must prove:
 17. incomplete/filtered census, fast checkpoint, active pin, unfinished key
     overlap/grace and concurrent generation registration deny purge;
 18. source eligibility/execution cannot cascade to admission/anchor/checkpoint/
-    receipt/audit or the owner-private alias bridge; bridge deletion is a
-    separately disabled product-lifecycle action and cannot alter retained
-    opaque evidence;
+    receipt/audit or the owner-private alias bridge; v1 bridge update/deletion
+    is prohibited and cannot alter retained opaque evidence;
 19. disabled mode performs zero connection, credential acquisition or state
     movement;
 20. the existing staff route/cursor cannot satisfy observer/checkpoint
@@ -564,9 +605,15 @@ production, release, Pages or protected-ref movement. Preserve and exclude
 2. The closed future schema catalogue and tenant-composite keys are exact.
 3. Payload/direct-identifier/free-text/JSON/array fields are structurally
    excluded except for the exact owner-private appointment-UUID alias bridge,
-   whose field, privilege and non-cascading lifecycle are closed explicitly.
-4. Producer positions are per-practice/stream, row-locked and rollback-safe in
-   the existing mutation transaction; all ineligible coordinates are explicit.
+   whose immutable bijective key, field, privilege, non-reuse and non-cascading
+   lifecycle are closed explicitly.
+4. Producer positions and immutable aliases are per-practice/source, generated
+   only inside the database-revalidated in-progress update-confirm transaction
+   whose sole event is bound by the existing practice-scoped command foreign
+   key plus unique `command_id` constraint, and
+   use one transaction/session/capability; they are row-locked, bijective and
+   rollback-safe, and standalone invocation plus every ineligible coordinate
+   is rejected.
 5. Distinct producer, observer, admission receiver, coordinator, lifecycle,
    retention and application principals have non-overlapping ceilings.
 6. Forced RLS and binding derive authority from authenticated session identity,
