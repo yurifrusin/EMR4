@@ -118,10 +118,14 @@ architecture is now accepted at exact independently reviewed repaired source
 HEAD `14e8d3257b9531601260bef094c73e08a9c7b92d`: distinct observer/coordinator
 principals, rollback-safe transaction positions, atomic durability state,
 durable invalidation watermarks, source-head fences and fail-closed lifecycle
-contracts are exact. None of these acceptances gives the observer truth,
-returned-data, read, provider, persistence or command authority. The next safe
-descendant is a pure in-memory authored-synthetic durability state-machine
-rehearsal, not live source or runtime wiring.
+contracts are exact. Its pure provider-free unmounted state-machine rehearsal
+is accepted at exact independently reviewed source HEAD
+`95a2ed5e960c58686262b5e82ce2e89354a3860a`: 33 cases prove atomic transitions,
+restart anchoring, future-fenced rotation and complete-census retention after
+three preserved rejections and a fresh 29-attack/207-check veto. None of these
+acceptances gives the observer truth, returned-data, read, provider,
+persistence or command authority. Migration-and-transaction architecture is
+next; no migration, database/source or runtime is opened.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -434,9 +438,12 @@ generation rehearsal. The architecture-only provider-free default-off
   `14e8d3257b9531601260bef094c73e08a9c7b92d`, with distinct principals, a
   rollback-safe transaction position, atomic durability state, durable
   invalidation watermarks, source-head fencing and fail-closed restart/gap/
-  retention/key/audit contracts. The next step is a pure in-memory authored-
-  synthetic durability state-machine rehearsal before separately gated live
-  implementation, real-product and clinical descendants.
+  retention/key/audit contracts. The pure authored-synthetic durability state-
+  machine rehearsal is accepted at exact reviewed HEAD
+  `95a2ed5e960c58686262b5e82ce2e89354a3860a`, with 33 evidence cases and a fresh
+  29-attack/207-check veto. The next step freezes provider-free unmounted
+  migration-and-transaction architecture before any inert DDL rehearsal,
+  applied migration, live implementation, real-product or clinical descendant.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

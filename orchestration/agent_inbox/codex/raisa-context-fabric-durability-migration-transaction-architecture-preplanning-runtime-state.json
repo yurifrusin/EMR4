@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_provider_free_unmounted_durability_migration_transaction_architecture",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton accepts the pure durability state-machine rehearsal and names provider-free unmounted migration-and-transaction architecture as the next planned descendant under standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol owns material architecture, plan freezing, acceptance and task-branch integration. Bounded native lanes may provide read-only PostgreSQL and API/security analysis only; they receive no implementation, write, self-acceptance, baton, provider, database/source/runtime or protected-ref authority.",
+    "active_plan_and_acceptance": "The exact accepted source 95a2ed5e proves 33 pure transitions after four fresh vetoes, including atomic durability effects, restart anchoring, future-fenced key rotation and complete-census retention. Closeout 6862572e and Continuity 228/Compass 210 permit only architecture for a future database realization, not its implementation.",
+    "protected_evidence_boundaries": "The plan may freeze future PostgreSQL schema, isolation/locking, producer transaction/rollback, RLS/roles, credential binding, operational retention and database-backed authored-synthetic acceptance. It may not change app or Alembic, create/contact a database/source/outbox/feed/watcher/listener, persist state, read product/patient data, add a route, call a provider, carry command/write authority, wire runtime, deploy, release, rebuild Pages, open protected evidence or move protected refs. docs/branding and unrelated untracked artifacts remain preserved and excluded.",
+    "git_refs_and_worktree": "Task and origin codex/ariadne-bernie-davida-parallel-seam align tracked-clean at 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing untracked files, including docs/branding and the just-generated prior-tranche prepush receipt/state, remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_preplanning_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the fresh full AGENTS and active-acceptance rehydration after the prior closeout push."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Two bounded read-only architecture analysis lanes are available after receipt admission."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["No external provider/model call is authorised for architecture planning."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is selected before the plan is frozen."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-codex-architecture-analysis",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

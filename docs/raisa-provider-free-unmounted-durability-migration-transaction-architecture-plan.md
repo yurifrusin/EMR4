@@ -1,0 +1,466 @@
+# Provider-free unmounted durability migration-and-transaction architecture plan
+
+Date: 2026-08-06
+
+Status: frozen bounded architecture plan candidate
+
+Parent result:
+`raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
+
+## Objective
+
+Freeze the narrowest future PostgreSQL realization of the accepted pure
+durability state machine for the patient-free
+`diary.appointment_rescheduled.v1` control family. This tranche specifies the
+future schema catalogue, tenant and principal boundaries, transaction and lock
+semantics, rollback and recovery behavior, key/credential binding constraints,
+retention safety relation and database-backed authored-synthetic acceptance.
+
+The intended result is
+`raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`.
+
+This tranche is declarative, provider-free and unmounted. It creates no
+migration, database object, SQL role, credential, source connection, runtime or
+product data path.
+
+## API Spine classification
+
+This is internal async durability architecture only:
+
+- GraphQL remains read-only and unchanged;
+- REST/OpenAPI remains the only command plane and gains no operation;
+- the existing signed appointment update-confirm command remains the only
+  mutation that may later produce this exact control family;
+- the existing staff committed-event GET route, time/event cursor and
+  appointment-bearing response remain unchanged and are ineligible as the
+  observer source or durability checkpoint;
+- the future payload-free control row is an atomic side effect of the existing
+  producer transaction, not a new command, API, truth source or success proof;
+- no subscription, acknowledgement, generic database procedure, retention
+  endpoint, event-triggered command or event-triggered fresh read is added; and
+- every later fresh product read remains a new application-principal decision
+  under a current no-wider `ContextScopeGrant`.
+
+The authoritative API references are `orchestration/api_spine_adr.md`,
+`orchestration/api_spine_programme.md`,
+`docs/api-spine/async/integration-events.yaml`,
+`docs/api-spine/openapi/diary-committed-events.yaml` and
+`docs/api-spine/graphql/practice-context-fabric-read.graphql`. No nonexistent
+API Spine README may be claimed as evidence.
+
+## Frozen architecture surface
+
+This tranche may add only:
+
+- this plan, one design and one threat-model delta;
+- one closed declarative architecture contract and JSON Schema under a new
+  `orchestration/continuity/` directory;
+- static and schema-focused tests;
+- bounded read-only analysis/review artifacts; and
+- later closeout, acceptance and Continuity/Compass artifacts.
+
+No `app/**`, `alembic/**`, `docs/diary/**`, API Spine contract, runtime
+configuration, existing database model or existing source adapter may change.
+The architecture contract is not executable DDL or a deployment manifest.
+
+## Non-inheritance and data ceiling
+
+Only the exact patient-free control projection already accepted by the parent
+may be represented. It may contain closed practice/source/stream/generation
+coordinates, exact positions and predecessors, opaque backend aliases and
+digests, aggregate revision metadata, closed decision/reason/frame codes,
+key ids and integrity metadata.
+
+It may not contain appointment, patient, practitioner, location, time-slot,
+actor, session, correlation, command, audit-correlation, provider, payload,
+free-text, raw product UUID or current-truth values. JSON/JSONB, unbounded text,
+arrays and arbitrary key/value metadata are forbidden in the future durability
+relations. Exact closed codes use enum/domain/check constraints. A compact
+affected-frame mask may encode only none, Diary, waiting room or both.
+
+## Exact future schema catalogue
+
+The later migration may create one dedicated schema owned by a non-login,
+non-runtime owner. The architecture contract must freeze the following logical
+relations and no generic work queue or event store:
+
+1. `context_observation_stream_head` — one row per `(practice_id, stream_id)`;
+   exact stream epoch and last committed position. It carries no observer HMAC
+   digest: the producer neither holds the observer key nor manufactures a
+   classified observation.
+   Epoch is fixed to `1` for this source-contract version. Position zero is the
+   empty baseline. The position is a checked signed
+   64-bit integer; overflow fails the producer transaction and consumes the
+   epoch. No sequence or identity default is allowed.
+2. `diary_context_aggregate_aliases_v1` — owner-only mapping from the product
+   appointment id to one practice/source-scoped opaque aggregate alias. Neither
+   observer nor coordinator receives access to the product id.
+3. `diary_context_observation_outbox_v1` — immutable payload-free source rows keyed by
+   `(practice_id, stream_id, stream_epoch, transaction_position)`, with exact
+   predecessor, one non-semantic raw event UUID, opaque aggregate alias/revision,
+   source-contract digest and transaction-authored instant. The raw event UUID
+   is visible only to the narrow observer, is domain-separated into the accepted
+   observation digest and is then discarded; it never reaches receipt or audit.
+   The predecessor is zero only at position one and otherwise exactly position
+   minus one. Stream epoch is fixed to `1` for this source-contract version.
+4. `context_generation_registry_barrier` — one lock/barrier row per exact
+   practice/source/stream. Generation registration/rebaseline and later source
+   retention must serialize on it.
+5. `context_observer_generation` — backend-complete generation registry keyed
+   by practice/source/stream/epoch/observer/generation, with closed lifecycle,
+   immutable recovery-anchor coordinates and controlling policy, principal,
+   binding, source, registry, impact and key-schedule digests. The lifecycle
+   role, not the coordinator, creates or consumes a generation.
+6. `context_durability_checkpoint` — exactly one state row per observer
+   generation, carrying `ACTIVE`, `REBASE_REQUIRED`, `REVOKED` or `CONSUMED`,
+   the last contiguous classified position/digest, lifecycle revision, audit
+   head digest and integrity metadata.
+7. `context_classified_observation_receipt` — immutable receipt keyed by the
+   full generation coordinate plus position, with observation digest,
+   decision, reason, affected-frame mask, checkpoint disposition and lifecycle
+   revision. Observation digest is unique within the generation so reuse at a
+   different position is corruption.
+8. `context_frame_generation` — opaque generation id, exact closed frame type,
+   assembled-through position and one-way `CURRENT`/`RETIRED` lifecycle. A
+   retired frame cannot become current.
+9. `context_invalidation_watermark` — one row per generation and closed frame
+   type; its position is monotonic and cannot exceed the classified
+   checkpoint. It never stores replacement facts.
+10. `context_reassembly_obligation` — at most one pending obligation per frame
+   generation, with earliest/latest positions, bounded rolling cause digest,
+   and closed public count bucket. The coordinator derives the exact count and
+   bucket from canonical admitted audit history under the checkpoint lock;
+   callers cannot supply either and no convenience counter is persisted.
+11. `context_durability_lifecycle` — one immutable total-order journal for both
+    `DECISION` and `KEY_ROTATION` entries. Its revisions cover exactly every
+    lifecycle revision after the baseline without gaps or reuse, removing any
+    ambiguity between audit and rotation chronology.
+12. `context_durability_audit` — immutable minimized typed rows keyed by full
+    generation coordinate plus lifecycle revision, with prior/head digest and
+    one-to-one linkage to `DECISION` lifecycle entries and only the accepted
+    closed metadata. It is not Context Fabric content,
+    Bureau Memory, current truth, command evidence or cryptographic proof.
+13. `context_observation_key_interval` — metadata-only, ordered, gap-free,
+    non-overlapping inclusive-start/exclusive-end position intervals and opaque
+    key ids. Row checks alone are insufficient: one deferred exact constraint or
+    the owner transaction entry point must prove the complete interval partition.
+    No key bytes, cloud key resource or credential is stored.
+14. `context_recovery_pin` — independently owned closed pins over source,
+    receipt/checkpoint or audit retention families. Pins have typed reason and
+    lifecycle codes, never free text or product identity.
+15. `context_service_practice_binding` — exact authenticated database login,
+    logical capability, practice, source family, binding revision and active
+    interval. It contains no secret and is authoritative only when read inside
+    a hardened database entry point from the actual authenticated session.
+16. `context_retention_policy` — versioned safety constraints and disabled-by-
+    default executor state for the three independent retention families.
+    Production durations, capacity and key-store selection remain later
+    operational decisions.
+
+Every primary, unique and foreign key of a tenant-bearing relation includes
+non-null `practice_id` and the full necessary source/generation coordinate.
+Cross-practice foreign keys are impossible. Source-row deletion never cascades
+to receipt/checkpoint, audit, generation, pin or key-schedule state.
+
+## Ownership, role and binding model
+
+The future design must separate these logical planes:
+
+- schema/table owner: `NOLOGIN`, not a runtime role and not `BYPASSRLS`;
+- producer: exact stream-head/control-row effect only inside the existing
+  signed command transaction;
+- observer: exact practice/source scoped read of the closed payload-free
+  projection only;
+- durability coordinator: one typed atomic durability transition only;
+- generation lifecycle/anchor authority: generation and independent recovery
+  anchor creation/consumption only;
+- retention evaluator/executor: database-derived eligibility and a separately
+  gated source-row purge only; disabled by default; and
+- application read principal: separate current-truth reads only under existing
+  application authorization.
+
+Runtime roles are `NOINHERIT`, cannot `SET ROLE` into another plane, do not own
+objects, are explicitly `NOBYPASSRLS`, do not have `CREATEROLE`, schema create or generic SQL
+authority, and inherit no public/default privileges. `PUBLIC` receives no
+schema use, function execute or table privilege.
+
+All tenant relations enable and force RLS, but RLS must not trust a caller-set
+custom GUC or packet `practice_id` alone. A resource-locator `practice_id`
+argument grants no authority. Exact connection login/capability/practice/source
+binding is rederived from `session_user` against the backend binding registry
+inside each narrow entry point. One credential-bearing login has exactly one
+active logical capability/practice/source/credential-epoch binding. An absent,
+inactive, duplicate, ambiguous or mismatched binding denies the operation.
+Connection pooling may not multiplex different practices, capabilities or
+credential epochs through one bound login, and reset/reuse must preserve this
+separation mechanically.
+
+Any later security-definer entry point must be owned by a non-login role, have
+a fixed schema-qualified search path, use no dynamic SQL, derive session
+identity before acting, revoke `PUBLIC` execute and expose no generic table or
+SQL operation. Direct table DML is denied to observer, coordinator, lifecycle
+and retention logins except for the exact capability mediated by their entry
+point. Static acceptance must prove that a forged `app.current_practice_id`
+cannot widen scope.
+
+## Producer transaction and position allocation
+
+The future producer remains the existing signed appointment update-confirm
+transaction. At `READ COMMITTED`, its fixed lock/effect order is:
+
+1. claim/read the existing idempotency result under its accepted contract;
+2. lock and validate the exact appointment aggregate under existing command
+   authorization;
+3. lock or create the exact aggregate-alias row under owner-mediated logic;
+4. lock the exact `(practice_id, stream_id)` head row `FOR UPDATE`;
+5. compute `position = last_position + 1` and `predecessor = last_position`;
+6. append the existing appointment audit, existing committed event and exact
+   payload-free control row, then advance the stream head; and
+7. complete the existing idempotency result before one transaction commit.
+
+Appointment truth, command audit, idempotency completion, existing committed
+event, payload-free control row and stream-head advance commit or roll back
+together. Failure or lock timeout in the control projection fails the whole
+command safely; there is no silent bypass. Disabling an already-producing
+contract consumes its observer generations; re-enable requires a new explicit
+source-contract epoch/version rather than silently incrementing this version's
+fixed epoch.
+After any emitted row, migration rollback is forward-fix and data-preserving;
+no downgrade may drop, truncate or silently stop the projection.
+
+PostgreSQL sequences/identities, UUID/time ordering, `xmin`, transaction id,
+commit timestamp, WAL LSN, the existing `(occurred_at,event_id)` cursor and
+`aggregate_revision` are all ineligible as the durability position.
+
+## Coordinator transaction, isolation and lock order
+
+The future coordinator operates at `SERIALIZABLE` through one narrow typed
+entry point. It takes coordinates and a proofread closed decision packet but
+does not trust copied source or authority values. Inside the transaction it:
+
+1. rederives session binding;
+2. locks the exact generation registry barrier in the common global order;
+3. locks the exact generation/checkpoint row `FOR UPDATE`;
+4. selects and verifies the immutable payload-free control row internally by
+   its full coordinate, predecessor, aggregate revision and raw source
+   membership without returning the raw UUID or alias; the observer/proofreader
+   remains solely responsible for the HMAC-normalized observation digest and
+   key-interval proof;
+5. derives redelivery, contiguity, corruption and all canonical effects;
+6. stages receipt, watermarks, one-way retirement, coalesced obligation,
+   minimized audit and checkpoint disposition; and
+7. commits all members together or rolls all back.
+
+The lock order is binding check, registry barrier, observer generation/
+checkpoint, then dependent rows in stable primary-key order. Producer and
+coordinator never acquire each other's head/checkpoint locks in reverse order.
+Different practices and different observer generations do not share a global
+lock.
+
+Exact same-position/same-digest redelivery returns the stored receipt and makes
+no change. `ON CONFLICT DO NOTHING` alone is forbidden. Same-position mismatch,
+digest reuse, wrong predecessor/epoch, missing retained row, unknown key or a
+gap holds the last contiguous checkpoint, fully invalidates and moves the
+generation to `REBASE_REQUIRED` atomically.
+
+Deadlock and serialization retries are permitted only for exact PostgreSQL
+retryable SQLSTATEs, over the complete transaction, with the same idempotency
+key/coordinates and at most three attempts with bounded jitter outside any
+transaction. An unknown producer commit outcome is
+resolved through existing idempotency readback, never blind replay. A
+coordinator retry is safe only because exact redelivery is inert.
+
+## Independent recovery anchors
+
+Generation anchors are immutable lifecycle-owned rows, not coordinator input
+or copied checkpoint state. An anchor binds practice/source/stream/epoch,
+observer generation, baseline and last trusted contiguous coordinate plus all
+controlling digests. Restart may resume only when the candidate durability
+state, exact anchor and exact next retained control row agree.
+
+Missing, stale, rewritten or mismatched anchors return
+`NEW_GENERATION_REQUIRED`; verified states with missing/retained-row or key
+continuity failure return `REBASE_REQUIRED`. No path adopts a coordinate from
+untrusted state or an older frame as current.
+
+## Key and credential boundary
+
+Observation identity uses a dedicated domain-separated key family, never the
+application secret, authentication credential, provider credential or database
+login. The database stores only key ids, immutable position intervals and
+availability attestations from the separately bound key authority. It never
+stores key bytes or tries every key.
+
+Routine rotation runs as one `SERIALIZABLE` transaction, is future-fenced,
+changes no historical interval and retains
+the predecessor key through all dependent source/receipt/audit rows plus the
+safety overlap. Gap, overlap, retroactive edit, missing key, insufficient
+overlap or emergency revocation consumes the generation. Credential/key
+creation, cloud resource selection and secret administration remain later
+operational gates.
+
+## Retention safety and backpressure
+
+Source rows, receipts/checkpoints and minimized audit are three independent
+retention families. The existing 24-hour event expiry and a fast consumer have
+no durability meaning.
+
+Any later source eligibility/execution transaction runs at `SERIALIZABLE` and
+must lock the exact
+generation registry barrier also used by registration/rebaseline, then derive
+the complete non-consumed generation census inside the database. Eligibility
+requires the slowest checkpoint at or beyond the position, no relevant
+recovery/audit pin, closed predecessor-key dependency/overlap and elapsed
+policy grace. The caller cannot supply/filter the census, expected digest,
+minimum checkpoint, pin state, key state or clock result.
+
+Registration concurrent with purge therefore cannot be omitted. Missing,
+duplicate, ambiguous, inactive-authority or unverifiable state denies purge.
+No cascade couples the three retention families. The architecture freezes
+`retention_execution_enabled: false`; a later gate must choose production
+duration/capacity, prove key-store availability and separately authorize the
+executor. Capacity pressure never silently drops rows: it blocks/retries the
+producer or consumes affected generations and requires rebaseline under a
+later accepted operational policy.
+
+## Migration, enablement and rollback sequence
+
+The later implementation must be expand-first and default-off:
+
+1. create closed types/relations/constraints/RLS/owners with public/default
+   privileges revoked and no runtime login binding;
+2. install narrow entry points and prove static/database acceptance while the
+   producer and consumers remain disabled;
+3. bind exact operational identities only under a separate credential gate;
+4. establish one explicit practice/source baseline and stream epoch;
+5. enable the producer atomically for that exact boundary; and
+6. enable observer/coordinator only after source rows and recovery anchors are
+   admitted by database-backed authored-synthetic acceptance.
+
+Before first production row, rollback may remove unused objects under a later
+authorized migration. After first row, rollback is non-destructive forward-fix;
+disabling production consumes the epoch. No code rollback may allow the
+appointment command to commit without its required control row.
+
+## Database-backed authored-synthetic acceptance design
+
+The later implementation gate must use a disposable local database and newly
+authored synthetic opaque coordinates only. At minimum it must prove:
+
+1. rollback after every producer member leaves no appointment change,
+   success-idempotency result, event, control row or consumed position;
+2. concurrent same-stream producers yield contiguous unique positions and
+   different practices share no counter;
+3. duplicate idempotency yields one mutation/control row and altered reuse
+   conflicts;
+4. concurrent coordinators serialize and exact redelivery is inert;
+5. same-position mismatch, digest reuse, gap, wrong predecessor/epoch, missing
+   row and key loss hold checkpoint and require rebase;
+6. aggregate-revision jumps, duplicates and reversals never act as position;
+7. failure after each coordinator member rolls back every durability effect;
+8. cross-practice reads, writes, foreign keys and claimed scope fail;
+9. every logical role fails every forbidden operation, including inheritance,
+   `SET ROLE`, `BYPASSRLS`, owner and unsafe security-definer paths;
+10. caller-set practice GUC, packet practice and direct function argument cannot
+    widen the authenticated binding;
+11. JSON/text/direct identifier/raw UUID/correlation/session/payload smuggling
+    fails at schema and entry-point boundaries;
+12. stale/tampered/missing recovery anchors and rewritten key schedules cannot
+    resume;
+13. incomplete/filtered census, fast checkpoint, active pin, unfinished key
+    overlap/grace and concurrent generation registration deny purge;
+14. source eligibility/execution cannot cascade to checkpoint/receipt/audit;
+15. disabled mode performs zero connection, credential acquisition or state
+    movement;
+16. the existing staff route/cursor cannot satisfy observer/checkpoint
+    authority;
+17. no GraphQL mutation/subscription, REST command/route, acknowledgement or
+    event-triggered fresh read appears; and
+18. database constraints and digest chains are described only as integrity and
+    tamper-evidence controls, never cryptographic authenticity.
+
+This architecture tranche itself performs none of those database operations;
+it freezes their future acceptance contract.
+
+## Data, provider, cost and licence posture
+
+- Data: repository-authored schema metadata and opaque synthetic examples only.
+- Patient/product/protected/historical-PHI data: none.
+- Provider/model/external retrieval: none.
+- Database/source/network/browser contact: none.
+- Cost: zero provider/cloud cost.
+- Licence: no external content or corpus.
+
+## Allowed side effects
+
+Repository writes are limited to the frozen architecture documents, contract,
+tests, review/acceptance evidence and later continuity artifacts. Tests may
+create ordinary interpreter/cache files only.
+
+## Forbidden surfaces
+
+No `app/**`, `alembic/**`, `docs/diary/**` or API Spine change. No executable
+DDL, migration, database/table/view/function/trigger/sequence/role/credential,
+source/outbox/feed/watcher/listener connection, operational checkpoint,
+product/source read, patient/product/protected data, provider/model call,
+GraphQL/REST operation, command/write authority, runtime wiring, deployment,
+production, release, Pages or protected-ref movement. Preserve and exclude
+`docs/branding/` and every unrelated untracked artifact.
+
+## Acceptance
+
+1. API classification remains internal async architecture with no API or
+   command-plane change.
+2. The closed future schema catalogue and tenant-composite keys are exact.
+3. Payload/direct-identifier/free-text/JSON/array fields are structurally
+   excluded.
+4. Producer positions are per-practice/stream, row-locked and rollback-safe in
+   the existing mutation transaction; all ineligible coordinates are explicit.
+5. Distinct producer, observer, coordinator, lifecycle, retention and
+   application principals have non-overlapping ceilings.
+6. Forced RLS and binding derive authority from authenticated session identity,
+   not caller GUC/packet/argument claims.
+7. Narrow entry points are fixed-search-path, no-dynamic-SQL, public-revoked and
+   generic-table-DML-free.
+8. Coordinator lock order, exact internal source revalidation and all-or-
+   nothing durability effects are frozen.
+9. Redelivery is inert; mismatch/reuse/gap/key/retention uncertainty fails
+   closed without checkpoint skipping.
+10. Recovery anchors and generation lifecycle are independent of coordinator
+    candidate state.
+11. Key metadata and availability are separate from secrets; unsafe rotation
+    consumes the generation.
+12. Retention uses the complete serialized backend registry and three separate
+    retention families, with execution disabled by default.
+13. Expand/enable/rollback and producer-availability behavior preserve no-loss
+    semantics.
+14. Database-backed authored-synthetic positive and adversarial cases are exact
+    and include disabled-mode zero-capability proof.
+15. Static tests prove that no application, migration, database/runtime/API,
+    provider, data, deployment or protected surface changed.
+16. The claim remains architecture-only and does not claim cryptographic
+    authenticity or operational safety.
+
+## Recovery and stop
+
+A deterministic document/schema/test defect may receive one bounded correction.
+A conceptual defect in tenant binding, principal separation, rollback
+atomicity, coordinator effects, recovery anchors, key lifecycle, retention
+census or API classification invokes Sol's recovery lease and a fresh
+independent veto before acceptance. No rejected architecture may be silently
+admitted.
+
+## Claim boundary and next dependency
+
+Passing this tranche will prove only an exact declarative PostgreSQL migration-
+and-transaction architecture. It will not create or validate a migration,
+database object, role, credential, source row, producer hook, coordinator,
+retention executor, crash recovery, monitoring, capacity, product read,
+patient-data path, provider, command, runtime, deployment or production safety.
+
+After acceptance, the next safe descendant will be a provider-free unmounted
+authored-synthetic migration/DDL rehearsal that renders the exact schema and
+privilege plan into inert SQL artifacts and statically/adversarially validates
+them without applying a migration or contacting a database. Any applied local
+migration, database-backed execution, operational credential or live source
+remains a later separately bounded gate.

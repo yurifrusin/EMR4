@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_durability_migration_transaction_architecture_plan_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The plan candidate preserves exact parent source semantics and freezes 16 logical relations, one active practice/capability/source/epoch binding per authenticated login with non-multiplexed pools, non-overlapping roles, a stream head without observer HMAC material, rollback-safe producer position, SERIALIZABLE coordinator/key/retention transactions, independent anchors, total-order lifecycle, complete-census retention and 18 future adversarial database cases. Five static plan tests, Ruff and diff validation pass.",
+    "current_authority_allocation": "GPT Sol owns material architecture and plan freezing. Two completed native lanes supplied read-only PostgreSQL and API/security analysis only; neither had write, acceptance, integration, provider, database/source/runtime or protected-ref authority.",
+    "git_refs_and_worktree": "Task and origin branch align at 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa before the bounded plan commit. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named plan/design/threat/analysis/test/implementation-plan and orchestration receipts are selected through explicit-path staging.",
+    "live_handover_current_baton": "The live baton accepts the pure durability state machine and directs uninterrupted architecture-only migration/transaction planning next. The new plan remains inside that closed descendant and opens no implementation surface.",
+    "protected_evidence_boundaries": "No app/Alembic/Diary/API Spine/runtime file changed. No executable DDL, migration, database/source/network/provider contact, product/patient/protected data, command/write authority, credential, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked artifacts remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

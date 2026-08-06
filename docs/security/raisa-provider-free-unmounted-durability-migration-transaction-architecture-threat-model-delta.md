@@ -1,0 +1,62 @@
+# Threat-model delta: durability migration-and-transaction architecture
+
+Date: 2026-08-06
+
+Status: architecture candidate
+
+## Trust boundaries and assets
+
+Newly specified future boundaries are the producer transaction, payload-free
+outbox, observer login/projection, coordinator transaction, lifecycle/anchor
+authority, database binding registry, key-interval metadata and retention
+barrier. None is implemented by this tranche.
+
+Protected assets are practice isolation, appointment/source confidentiality,
+gap-free source order, the last contiguous checkpoint, permanent retirement,
+complete generation census, recovery anchors, key continuity, minimized audit
+and the separation between invalidation and current truth/commands.
+
+## Threats and controls
+
+| Threat | Frozen control |
+|---|---|
+| Existing feed/cursor is relabelled durable | Exact distinct outbox; staff route, expiry and `(occurred_at,event_id)` cursor remain ineligible. |
+| Sequence/identity rollback creates apparent gap | Ordinary row-locked per-practice stream head; head and outbox roll back with the producer transaction. |
+| Appointment commits without control row | Enabled producer is in the same transaction; no best-effort after-commit append or bypass. |
+| Aggregate revision is treated as continuity | It is anomaly/freshness metadata only; only transaction position/predecessor determine continuity. |
+| Outbox leaks product or patient data | Closed columns only; no JSON/text/payload/product identifiers; raw event UUID is non-semantic, normalized and discarded. |
+| Observer reads base/product tables | Exact projection privilege only; direct base-table access denied. |
+| Coordinator becomes generic writer | One typed entry point; no direct table DML, source/product read, API or command authority. |
+| Caller forges `app.current_practice_id` | Authority derives from authenticated `session_user` binding; caller GUC/packet/argument is never sufficient. |
+| Pool reuses one broad login across practices/capabilities | Exactly one active practice/capability/source/epoch binding per credential-bearing login; duplicate binding and cross-boundary pool reuse fail closed. |
+| RLS is bypassed through owner/inheritance/SET ROLE | Forced RLS, non-login owner, NOINHERIT/NOBYPASSRLS roles, public/default revoke and negative privilege matrix. |
+| Unsafe security-definer resolves attacker objects | Fixed empty/schema-qualified search path, no dynamic SQL, owner non-login, public execute revoked. |
+| Partial coordinator effects survive | SERIALIZABLE transaction and exact checkpoint lock; receipt/watermark/retirement/obligation/lifecycle/audit/checkpoint are atomic. |
+| `ON CONFLICT DO NOTHING` hides corruption | Exact redelivery comparison; mismatch, reuse or gap atomically rebase. |
+| Rotation revision is rewritten as audit | One total-order lifecycle journal with one-to-one decision audit details. |
+| Obligation count drifts | Bucket rederived from canonical admitted history under checkpoint lock; no caller or convenience counter authority. |
+| Coordinator self-anchors restart | Immutable anchor created by separate lifecycle authority; exact anchor/state/next-row agreement required. |
+| Key interval is retroactively edited or key tried by fallback | Exact gap-free future-fenced partition; no historical change, key bytes or try-every-key behavior; failure consumes generation. |
+| Fast consumer/self-supplied census authorizes purge | SERIALIZABLE registry barrier and complete backend-derived non-consumed census; caller supplies no retention authority. |
+| Concurrent generation is omitted during purge | Registration/rebaseline and purge lock the same barrier. |
+| Source purge erases receipt/audit evidence | Three separate retention families and no cascade. |
+| Capacity pressure silently drops continuity | Block/retry or consume/rebaseline under later policy; never discard unseen rows. |
+| Disabled/default state acquires credentials or moves data | No runtime binding and retention executor disabled; later gate proves zero capability. |
+| Event starts a fresh read or command | Event may invalidate and create inert obligation only; later read requires application principal and new grant. |
+| Digest chain is claimed cryptographically authentic | Explicit tamper-evidence/integrity label; no MAC or compromised-owner claim. |
+| Architecture artifacts execute SQL | Static boundary tests forbid migrations, app/API/runtime/database changes. |
+
+## Residual risks deliberately deferred
+
+Executable DDL correctness, actual PostgreSQL version behavior, migration locks,
+connection pooling/session identity, operational credentials and key store,
+real crash recovery, monitoring/alerting, production retention duration and
+capacity, privacy assessment, live source load, deployment and incident
+response remain later gates.
+
+## Forbidden openings
+
+No protected evidence or historical PHI. No app/Alembic/API change, executable
+SQL, database/source/network/provider contact, table/role/credential creation,
+product/patient data, command/write authority, runtime wiring, deployment,
+production, release, Pages or protected-ref movement.
