@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_task_branch_only_after_intent_shaped_temporal_retrieval_acceptance",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted provider-free intent-shaped temporal retrieval result at exact reviewed source b24b56bda296f3713b5e2c0e52545c749e71540a, Continuity 220 / Compass 202, and a separately frozen authored-synthetic model-required intent-shaping rehearsal as next under Yuri's standing uninterrupted planned-gate authority.",
+    "current_authority_allocation": "GPT Sol may publish only the accepted bounded task branch. Gemini supplied an independent read-only veto at the exact clean candidate and cannot push, integrate or move protected refs. No worker holds an active lease.",
+    "active_plan_and_acceptance": "Task HEAD 1af341d5ddfbbe52cd60e3d15d7a06401a5d298d contains the frozen plan, reviewed implementation, hardening, verifier dispatch, accepted closeout, Sol acceptance and Continuity 220 / Compass 202. Gemini returned pass and ran 199/199 named provider-free tests; Sol's final 11-file suite, Ruff, compileall, JSON and diff checks passed.",
+    "protected_evidence_boundaries": "The push target is only origin/codex/ariadne-bernie-davida-parallel-seam. No local or origin master or handoff/current movement, Pages, deployment, production or release is authorised. No patient/product/protected data, live source/database/watcher, persistence, provider call, API/runtime or clinical/administrative command is opened. docs/branding and all unrelated untracked receipt/state/evidence/cost-ledger files remain preserved and unstaged.",
+    "git_refs_and_worktree": "After a fresh origin fetch, task HEAD is 1af341d5ddfbbe52cd60e3d15d7a06401a5d298d and is five commits ahead of origin task 0bcb8e9c8183830bdf301465a9ff47df2d6b6588. Local/origin master and local/origin handoff/current are all exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index and tracked worktree are clean; only preserved unrelated untracked files remain."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_intent_shaped_temporal_retrieval_prepush_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol will push the task branch only and then verify task and protected refs."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "The exact-head verifier pass is consumed for acceptance; no new reviewer or provider call is part of this push."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek is not selected for publication and has no active lease."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude CLI is not selected independently."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent holds an active lease."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
