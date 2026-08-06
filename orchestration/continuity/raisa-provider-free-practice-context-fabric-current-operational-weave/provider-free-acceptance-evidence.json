@@ -1,0 +1,68 @@
+{
+  "api_spine_checks": {
+    "new_graphql_resolvers": 0,
+    "new_graphql_roots": 0,
+    "new_rest_commands": 0,
+    "new_subscriptions": 0,
+    "source_shapes_only": true
+  },
+  "artifact_hashes": {
+    "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-design.md": "fdaf93c09450e327592f17f42c78c1296d8e4858032988c304cce8070a2c5fb6",
+    "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-plan.md": "380a511e1f058167ef682fbdb85483435088d6b6347bd4e09a2cf0681114a819",
+    "docs/security/raisa-provider-free-practice-context-fabric-current-operational-weave-threat-model-delta.md": "55160a948fa3ac323ee97a6aee00ba8f2357df281e701766bc25c269b48a541f",
+    "orchestration/continuity/raisa-provider-free-practice-context-fabric-current-operational-weave/operational-weave-contract.schema.json": "bda58f4ee6914be0330c9b812d4740b4e4b2503395ec9445ccd04c89e53bace5",
+    "scripts/raisa_provider_free_practice_context_fabric_current_operational_weave.py": "9f1881c3acb232da6608f85bf05dee9c898319ced02a3ae3a6ba126cea400772",
+    "scripts/raisa_provider_free_practice_context_fabric_current_operational_weave_acceptance.py": "35e5f7fe520731c8ce09e2db14325af6978dd09294d5e7d091d6cba4ea7f83a4",
+    "tests/test_raisa_provider_free_practice_context_fabric_current_operational_weave.py": "ff518fad65a06856a367959cf20c651501bef0a8832408e7fdc0c8943cf5f0db"
+  },
+  "artifact_set_digest": "sha256:f174cd575e74d3832e3a7c2297a53e6db4f2b5d59a89e435b55fd89fa9c944d0",
+  "authority_and_side_effects": {
+    "command_operations": 0,
+    "database_operations": 0,
+    "deployment_operations": 0,
+    "filesystem_write_operations_by_engine": 0,
+    "network_operations": 0,
+    "product_runtime_operations": 0,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "subprocess_operations_by_engine": 0
+  },
+  "claim_boundary": "Strict provider-free authored-synthetic pure composition only; no patient or product data, retrieval, runtime, persistence, provider, command, deployment, production or protected-ref claim.",
+  "deterministic_checks": {
+    "canonical_frame_order": [
+      "current_diary_projection",
+      "current_waiting_room_projection",
+      "active_practitioner_directory",
+      "private_application_session_state"
+    ],
+    "closed_objects": true,
+    "cross_source_coherence": true,
+    "cross_source_incoherence_blocked": true,
+    "digest_tamper_blocked": true,
+    "field_level_minimisation": true,
+    "freshness_and_supersession_fail_closed": true,
+    "practice_session_location_bound": true,
+    "required_source_set_complete": true,
+    "same_packet_proofreader_release": true,
+    "schema_valid": true,
+    "scope_only_narrows": true,
+    "source_contract_pairing_exact": true
+  },
+  "evidence_label": "provider_free_authored_synthetic_current_operational_weave",
+  "passed": true,
+  "result": "raisa_provider_free_practice_context_fabric_current_operational_weave_pass",
+  "schema_version": "emr4.practice_context_fabric_current_operational_weave_acceptance.v1",
+  "source_binding": {
+    "artifact_count": 7,
+    "checkout_line_endings_normalized": true,
+    "git_head_self_reference_forbidden": true,
+    "mode": "canonical_lf_artifact_hashes_with_external_exact_head_receipt"
+  },
+  "static_checks": {
+    "api_surface_changes": 0,
+    "application_imports": 0,
+    "caller_clocked": true,
+    "forbidden_calls": [],
+    "forbidden_imports": []
+  }
+}

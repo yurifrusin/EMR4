@@ -1,0 +1,422 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/practice-context-fabric-current-operational-weave.v1.json",
+  "title": "EMR4 Practice Context Fabric Current operational weave",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_label",
+    "candidate",
+    "authority_binding",
+    "context_need",
+    "scope_grant",
+    "source_envelopes",
+    "source_trace",
+    "frame_set",
+    "weave_trace",
+    "proofreader_trace"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_current_operational_weave"},
+    "candidate": {"$ref": "#/$defs/Candidate"},
+    "authority_binding": {"$ref": "#/$defs/AuthorityBinding"},
+    "context_need": {"$ref": "#/$defs/ContextNeed"},
+    "scope_grant": {"$ref": "#/$defs/ScopeGrant"},
+    "source_envelopes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/SourceEnvelope"}
+    },
+    "source_trace": {"$ref": "#/$defs/SourceTrace"},
+    "frame_set": {"$ref": "#/$defs/FrameSet"},
+    "weave_trace": {"$ref": "#/$defs/WeaveTrace"},
+    "proofreader_trace": {"$ref": "#/$defs/ProofreaderTrace"}
+  },
+  "$defs": {
+    "Digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "Ref": {"type": "string", "minLength": 1, "maxLength": 160},
+    "Revision": {"type": "string", "minLength": 1, "maxLength": 160},
+    "Instant": {"type": "string", "format": "date-time"},
+    "Date": {"type": "string", "format": "date"},
+    "Bureau": {"enum": ["BERNIE", "RAYLEEN", "DAVIDA"]},
+    "Purpose": {"const": "CURRENT_OPERATIONAL_AWARENESS"},
+    "FrameType": {
+      "enum": [
+        "current_diary_projection",
+        "current_waiting_room_projection",
+        "active_practitioner_directory",
+        "private_application_session_state"
+      ]
+    },
+    "SourceClass": {
+      "enum": [
+        "current_diary",
+        "current_waiting_room",
+        "practitioner_directory",
+        "private_session_state"
+      ]
+    },
+    "Field": {
+      "enum": [
+        "diary_practitioner_ref",
+        "diary_time",
+        "diary_status",
+        "waiting_practitioner_ref",
+        "waiting_status",
+        "waiting_elapsed_minutes",
+        "waiting_threshold_code",
+        "directory_display_label",
+        "directory_role_label",
+        "directory_default_location_ref",
+        "session_visible_diary",
+        "session_active_practitioner_ref",
+        "session_focus_appointment_ref",
+        "session_proposal_state"
+      ]
+    },
+    "TimeWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["starts_at", "ends_at"],
+      "properties": {
+        "starts_at": {"$ref": "#/$defs/Instant"},
+        "ends_at": {"$ref": "#/$defs/Instant"}
+      }
+    },
+    "Candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "need_id", "requesting_bureau", "purpose_code",
+        "requested_frame_types", "source_classes", "required_source_classes",
+        "requested_fields", "requested_location_refs", "requested_time_window",
+        "maximum_frames", "maximum_items_per_frame", "maximum_total_bytes",
+        "freshness_seconds", "issued_at", "read_only", "command_authority",
+        "provider_authority", "candidate_digest"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"},
+        "need_id": {"$ref": "#/$defs/Ref"},
+        "requesting_bureau": {"$ref": "#/$defs/Bureau"},
+        "purpose_code": {"$ref": "#/$defs/Purpose"},
+        "requested_frame_types": {"type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/FrameType"}},
+        "source_classes": {"type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/SourceClass"}},
+        "required_source_classes": {"type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/SourceClass"}},
+        "requested_fields": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/Field"}},
+        "requested_location_refs": {"type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}},
+        "requested_time_window": {"$ref": "#/$defs/TimeWindow"},
+        "maximum_frames": {"type": "integer", "minimum": 1, "maximum": 4},
+        "maximum_items_per_frame": {"type": "integer", "minimum": 1, "maximum": 50},
+        "maximum_total_bytes": {"type": "integer", "minimum": 1024, "maximum": 65536},
+        "freshness_seconds": {"type": "integer", "minimum": 1, "maximum": 600},
+        "issued_at": {"$ref": "#/$defs/Instant"},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "provider_authority": {"const": false},
+        "candidate_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "AuthorityBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "binding_id", "principal_ref", "roles", "practice_id",
+        "session_id", "session_generation", "session_binding_digest",
+        "allowed_bureaus", "allowed_purposes", "allowed_frame_types",
+        "allowed_source_classes", "allowed_required_source_classes", "allowed_fields",
+        "allowed_location_refs", "authorized_time_window", "maximum_frames",
+        "maximum_items_per_frame", "maximum_total_bytes", "maximum_freshness_seconds",
+        "policy_version", "issued_at", "expires_at", "binding_digest"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"},
+        "binding_id": {"$ref": "#/$defs/Ref"},
+        "principal_ref": {"$ref": "#/$defs/Ref"},
+        "roles": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["RECEPTIONIST", "PRACTICE_MANAGER", "GP", "NURSE", "ADMIN"]}},
+        "practice_id": {"$ref": "#/$defs/Ref"},
+        "session_id": {"$ref": "#/$defs/Ref"},
+        "session_generation": {"type": "integer", "minimum": 1},
+        "session_binding_digest": {"$ref": "#/$defs/Digest"},
+        "allowed_bureaus": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/Bureau"}},
+        "allowed_purposes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/Purpose"}},
+        "allowed_frame_types": {"type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/FrameType"}},
+        "allowed_source_classes": {"type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/SourceClass"}},
+        "allowed_required_source_classes": {"type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/SourceClass"}},
+        "allowed_fields": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/Field"}},
+        "allowed_location_refs": {"type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}},
+        "authorized_time_window": {"$ref": "#/$defs/TimeWindow"},
+        "maximum_frames": {"type": "integer", "minimum": 1, "maximum": 4},
+        "maximum_items_per_frame": {"type": "integer", "minimum": 1, "maximum": 50},
+        "maximum_total_bytes": {"type": "integer", "minimum": 1024, "maximum": 65536},
+        "maximum_freshness_seconds": {"type": "integer", "minimum": 1, "maximum": 600},
+        "policy_version": {"$ref": "#/$defs/Revision"},
+        "issued_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"},
+        "binding_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "ContextNeed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "need_id", "candidate_digest", "binding_digest", "assembled_at", "read_only", "command_authority", "provider_authority", "need_digest"],
+      "properties": {
+        "schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"},
+        "need_id": {"$ref": "#/$defs/Ref"},
+        "candidate_digest": {"$ref": "#/$defs/Digest"},
+        "binding_digest": {"$ref": "#/$defs/Digest"},
+        "assembled_at": {"$ref": "#/$defs/Instant"},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "provider_authority": {"const": false},
+        "need_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "ScopeGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "grant_id", "decision", "need_digest", "binding_digest",
+        "session_binding_digest", "requesting_bureau", "purpose_code",
+        "allowed_frame_types", "allowed_source_classes", "required_source_classes",
+        "allowed_fields", "allowed_location_refs", "effective_time_window",
+        "maximum_frames", "maximum_items_per_frame", "maximum_total_bytes",
+        "freshness_seconds", "scope_reduction_codes", "issued_at", "expires_at",
+        "read_only", "command_authority", "provider_authority", "grant_digest"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"},
+        "grant_id": {"$ref": "#/$defs/Ref"},
+        "decision": {"enum": ["ADMIT", "NOT_AVAILABLE"]},
+        "need_digest": {"$ref": "#/$defs/Digest"},
+        "binding_digest": {"$ref": "#/$defs/Digest"},
+        "session_binding_digest": {"$ref": "#/$defs/Digest"},
+        "requesting_bureau": {"oneOf": [{"$ref": "#/$defs/Bureau"}, {"const": "NOT_AVAILABLE"}]},
+        "purpose_code": {"enum": ["CURRENT_OPERATIONAL_AWARENESS", "NOT_AVAILABLE"]},
+        "allowed_frame_types": {"type": "array", "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/FrameType"}},
+        "allowed_source_classes": {"type": "array", "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/SourceClass"}},
+        "required_source_classes": {"type": "array", "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/SourceClass"}},
+        "allowed_fields": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/Field"}},
+        "allowed_location_refs": {"type": "array", "maxItems": 8, "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}},
+        "effective_time_window": {"$ref": "#/$defs/TimeWindow"},
+        "maximum_frames": {"type": "integer", "minimum": 0, "maximum": 4},
+        "maximum_items_per_frame": {"type": "integer", "minimum": 0, "maximum": 50},
+        "maximum_total_bytes": {"type": "integer", "minimum": 0, "maximum": 65536},
+        "freshness_seconds": {"type": "integer", "minimum": 0, "maximum": 600},
+        "scope_reduction_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 80}},
+        "issued_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "provider_authority": {"const": false},
+        "grant_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "SourceEnvelopeCommon": {
+      "type": "object",
+      "required": [
+        "schema_version", "source_envelope_id", "frame_type", "source_class",
+        "source_contract_id", "practice_id", "session_binding_digest",
+        "location_refs", "observed_at", "expires_at", "source_revision", "payload",
+        "evidence_label", "data_class", "read_only", "command_authority",
+        "provider_authority", "supersession_state", "source_digest"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"},
+        "source_envelope_id": {"$ref": "#/$defs/Ref"},
+        "frame_type": {"$ref": "#/$defs/FrameType"},
+        "source_class": {"$ref": "#/$defs/SourceClass"},
+        "source_contract_id": {"enum": ["api_spine.appointment_diary_read.v1", "emr4.waiting_room_context_frame.v1", "practice-practitioner-directory-read.v1", "emr4.native_diary_application_session_state.v1"]},
+        "practice_id": {"$ref": "#/$defs/Ref"},
+        "session_binding_digest": {"$ref": "#/$defs/Digest"},
+        "location_refs": {"type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}},
+        "observed_at": {"$ref": "#/$defs/Instant"},
+        "expires_at": {"$ref": "#/$defs/Instant"},
+        "source_revision": {"$ref": "#/$defs/Revision"},
+        "evidence_label": {"const": "provider_free_authored_synthetic_current_operational_weave"},
+        "data_class": {"const": "authored_synthetic_no_product_data"},
+        "read_only": {"const": true},
+        "command_authority": {"const": false},
+        "provider_authority": {"const": false},
+        "supersession_state": {"const": "CURRENT"},
+        "source_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "AppointmentSourceItem": {
+      "type": "object", "additionalProperties": false,
+      "required": ["appointment_ref", "practitioner_ref", "starts_at", "ends_at", "status"],
+      "properties": {
+        "appointment_ref": {"$ref": "#/$defs/Ref"},
+        "practitioner_ref": {"$ref": "#/$defs/Ref"},
+        "starts_at": {"$ref": "#/$defs/Instant"},
+        "ends_at": {"$ref": "#/$defs/Instant"},
+        "status": {"enum": ["BOOKED", "CONFIRMED", "ARRIVED", "IN_CONSULT", "COMPLETED", "CANCELLED", "DID_NOT_ATTEND"]}
+      }
+    },
+    "DiarySourcePayload": {
+      "type": "object", "additionalProperties": false,
+      "required": ["diary_date", "location_ref", "context_revision", "appointments"],
+      "properties": {
+        "diary_date": {"$ref": "#/$defs/Date"},
+        "location_ref": {"$ref": "#/$defs/Ref"},
+        "context_revision": {"type": "integer", "minimum": 1},
+        "appointments": {"type": "array", "maxItems": 50, "uniqueItems": true, "items": {"$ref": "#/$defs/AppointmentSourceItem"}}
+      }
+    },
+    "WaitingSourceItem": {
+      "type": "object", "additionalProperties": false,
+      "required": ["appointment_ref", "practitioner_ref", "status", "elapsed_wait_minutes", "threshold_code"],
+      "properties": {
+        "appointment_ref": {"$ref": "#/$defs/Ref"},
+        "practitioner_ref": {"$ref": "#/$defs/Ref"},
+        "status": {"enum": ["BOOKED", "CONFIRMED", "ARRIVED", "IN_CONSULT"]},
+        "elapsed_wait_minutes": {"type": ["integer", "null"], "minimum": 0},
+        "threshold_code": {"enum": ["NOT_WAITING", "UNDER_15_MINUTES", "MINUTES_15_TO_29", "MINUTES_30_OR_MORE"]}
+      }
+    },
+    "WaitingSourcePayload": {
+      "type": "object", "additionalProperties": false,
+      "required": ["location_ref", "context_revision", "entries"],
+      "properties": {
+        "location_ref": {"$ref": "#/$defs/Ref"},
+        "context_revision": {"type": "integer", "minimum": 1},
+        "entries": {"type": "array", "maxItems": 50, "uniqueItems": true, "items": {"$ref": "#/$defs/WaitingSourceItem"}}
+      }
+    },
+    "PractitionerSourceItem": {
+      "type": "object", "additionalProperties": false,
+      "required": ["practitioner_ref", "display_label", "role_label", "active", "default_location_ref"],
+      "properties": {
+        "practitioner_ref": {"$ref": "#/$defs/Ref"},
+        "display_label": {"type": "string", "minLength": 1, "maxLength": 120},
+        "role_label": {"type": ["string", "null"], "maxLength": 120},
+        "active": {"const": true},
+        "default_location_ref": {"oneOf": [{"$ref": "#/$defs/Ref"}, {"type": "null"}]}
+      }
+    },
+    "DirectorySourcePayload": {
+      "type": "object", "additionalProperties": false,
+      "required": ["directory_revision", "active_only", "practitioners"],
+      "properties": {
+        "directory_revision": {"type": "integer", "minimum": 1},
+        "active_only": {"const": true},
+        "practitioners": {"type": "array", "maxItems": 50, "uniqueItems": true, "items": {"$ref": "#/$defs/PractitionerSourceItem"}}
+      }
+    },
+    "SessionSourcePayload": {
+      "type": "object", "additionalProperties": false,
+      "required": ["session_generation", "request_revision", "visible_diary_date", "visible_location_ref", "active_practitioner_ref", "focus_appointment_ref", "proposal_state", "supersession_state"],
+      "properties": {
+        "session_generation": {"type": "integer", "minimum": 1},
+        "request_revision": {"type": "integer", "minimum": 1},
+        "visible_diary_date": {"$ref": "#/$defs/Date"},
+        "visible_location_ref": {"$ref": "#/$defs/Ref"},
+        "active_practitioner_ref": {"oneOf": [{"$ref": "#/$defs/Ref"}, {"type": "null"}]},
+        "focus_appointment_ref": {"oneOf": [{"$ref": "#/$defs/Ref"}, {"type": "null"}]},
+        "proposal_state": {"enum": ["NONE", "CANDIDATES", "PROPOSAL_FRESH", "PROPOSAL_STALE"]},
+        "supersession_state": {"const": "CURRENT"}
+      }
+    },
+    "DiarySourceEnvelope": {
+      "allOf": [
+        {"$ref": "#/$defs/SourceEnvelopeCommon"},
+        {"type": "object", "properties": {"frame_type": {"const": "current_diary_projection"}, "source_class": {"const": "current_diary"}, "source_contract_id": {"const": "api_spine.appointment_diary_read.v1"}, "payload": {"$ref": "#/$defs/DiarySourcePayload"}}}
+      ],
+      "unevaluatedProperties": false
+    },
+    "WaitingSourceEnvelope": {
+      "allOf": [
+        {"$ref": "#/$defs/SourceEnvelopeCommon"},
+        {"type": "object", "properties": {"frame_type": {"const": "current_waiting_room_projection"}, "source_class": {"const": "current_waiting_room"}, "source_contract_id": {"const": "emr4.waiting_room_context_frame.v1"}, "payload": {"$ref": "#/$defs/WaitingSourcePayload"}}}
+      ],
+      "unevaluatedProperties": false
+    },
+    "DirectorySourceEnvelope": {
+      "allOf": [
+        {"$ref": "#/$defs/SourceEnvelopeCommon"},
+        {"type": "object", "properties": {"frame_type": {"const": "active_practitioner_directory"}, "source_class": {"const": "practitioner_directory"}, "source_contract_id": {"const": "practice-practitioner-directory-read.v1"}, "payload": {"$ref": "#/$defs/DirectorySourcePayload"}}}
+      ],
+      "unevaluatedProperties": false
+    },
+    "SessionSourceEnvelope": {
+      "allOf": [
+        {"$ref": "#/$defs/SourceEnvelopeCommon"},
+        {"type": "object", "properties": {"frame_type": {"const": "private_application_session_state"}, "source_class": {"const": "private_session_state"}, "source_contract_id": {"const": "emr4.native_diary_application_session_state.v1"}, "payload": {"$ref": "#/$defs/SessionSourcePayload"}}}
+      ],
+      "unevaluatedProperties": false
+    },
+    "SourceEnvelope": {"oneOf": [{"$ref": "#/$defs/DiarySourceEnvelope"}, {"$ref": "#/$defs/WaitingSourceEnvelope"}, {"$ref": "#/$defs/DirectorySourceEnvelope"}, {"$ref": "#/$defs/SessionSourceEnvelope"}]},
+    "ProjectedAppointment": {
+      "type": "object", "additionalProperties": false, "required": ["appointment_ref"],
+      "properties": {"appointment_ref": {"$ref": "#/$defs/Ref"}, "practitioner_ref": {"$ref": "#/$defs/Ref"}, "starts_at": {"$ref": "#/$defs/Instant"}, "ends_at": {"$ref": "#/$defs/Instant"}, "status": {"type": "string"}}
+    },
+    "ProjectedWaiting": {
+      "type": "object", "additionalProperties": false, "required": ["appointment_ref"],
+      "properties": {"appointment_ref": {"$ref": "#/$defs/Ref"}, "practitioner_ref": {"$ref": "#/$defs/Ref"}, "status": {"type": "string"}, "elapsed_wait_minutes": {"type": ["integer", "null"], "minimum": 0}, "threshold_code": {"type": "string"}}
+    },
+    "ProjectedPractitioner": {
+      "type": "object", "additionalProperties": false, "required": ["practitioner_ref", "active"],
+      "properties": {"practitioner_ref": {"$ref": "#/$defs/Ref"}, "active": {"const": true}, "display_label": {"type": "string"}, "role_label": {"type": ["string", "null"]}, "default_location_ref": {"oneOf": [{"$ref": "#/$defs/Ref"}, {"type": "null"}]}}
+    },
+    "DiaryFrameContent": {
+      "type": "object", "additionalProperties": false, "required": ["diary_date", "location_ref", "context_revision", "appointments"],
+      "properties": {"diary_date": {"$ref": "#/$defs/Date"}, "location_ref": {"$ref": "#/$defs/Ref"}, "context_revision": {"type": "integer"}, "appointments": {"type": "array", "items": {"$ref": "#/$defs/ProjectedAppointment"}}}
+    },
+    "WaitingFrameContent": {
+      "type": "object", "additionalProperties": false, "required": ["location_ref", "context_revision", "entries"],
+      "properties": {"location_ref": {"$ref": "#/$defs/Ref"}, "context_revision": {"type": "integer"}, "entries": {"type": "array", "items": {"$ref": "#/$defs/ProjectedWaiting"}}}
+    },
+    "DirectoryFrameContent": {
+      "type": "object", "additionalProperties": false, "required": ["directory_revision", "active_only", "practitioners"],
+      "properties": {"directory_revision": {"type": "integer"}, "active_only": {"const": true}, "practitioners": {"type": "array", "items": {"$ref": "#/$defs/ProjectedPractitioner"}}}
+    },
+    "SessionFrameContent": {
+      "type": "object", "additionalProperties": false, "required": ["session_generation", "request_revision", "supersession_state"],
+      "properties": {"session_generation": {"type": "integer"}, "request_revision": {"type": "integer"}, "supersession_state": {"const": "CURRENT"}, "visible_diary_date": {"$ref": "#/$defs/Date"}, "visible_location_ref": {"$ref": "#/$defs/Ref"}, "active_practitioner_ref": {"oneOf": [{"$ref": "#/$defs/Ref"}, {"type": "null"}]}, "focus_appointment_ref": {"oneOf": [{"$ref": "#/$defs/Ref"}, {"type": "null"}]}, "proposal_state": {"type": "string"}}
+    },
+    "FrameCommon": {
+      "type": "object",
+      "required": ["schema_version", "frame_id", "frame_type", "source_class", "source_contract_id", "practice_binding_digest", "session_binding_digest", "location_refs", "content", "observed_at", "assembled_at", "expires_at", "source_revision", "source_digest", "disclosure_fields", "evidence_label", "data_class", "read_only", "command_authority", "provider_authority", "supersession_state", "content_digest", "frame_digest"],
+      "properties": {
+        "schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"},
+        "frame_id": {"$ref": "#/$defs/Ref"}, "frame_type": {"$ref": "#/$defs/FrameType"}, "source_class": {"$ref": "#/$defs/SourceClass"},
+        "source_contract_id": {"type": "string"}, "practice_binding_digest": {"$ref": "#/$defs/Digest"}, "session_binding_digest": {"$ref": "#/$defs/Digest"},
+        "location_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}},
+        "observed_at": {"$ref": "#/$defs/Instant"}, "assembled_at": {"$ref": "#/$defs/Instant"}, "expires_at": {"$ref": "#/$defs/Instant"},
+        "source_revision": {"$ref": "#/$defs/Revision"}, "source_digest": {"$ref": "#/$defs/Digest"},
+        "disclosure_fields": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/Field"}},
+        "evidence_label": {"const": "provider_free_authored_synthetic_current_operational_weave"}, "data_class": {"const": "authored_synthetic_no_product_data"},
+        "read_only": {"const": true}, "command_authority": {"const": false}, "provider_authority": {"const": false}, "supersession_state": {"const": "CURRENT"},
+        "content_digest": {"$ref": "#/$defs/Digest"}, "frame_digest": {"$ref": "#/$defs/Digest"}
+      }
+    },
+    "DiaryFrame": {"allOf": [{"$ref": "#/$defs/FrameCommon"}, {"type": "object", "properties": {"frame_type": {"const": "current_diary_projection"}, "source_class": {"const": "current_diary"}, "source_contract_id": {"const": "api_spine.appointment_diary_read.v1"}, "content": {"$ref": "#/$defs/DiaryFrameContent"}}}], "unevaluatedProperties": false},
+    "WaitingFrame": {"allOf": [{"$ref": "#/$defs/FrameCommon"}, {"type": "object", "properties": {"frame_type": {"const": "current_waiting_room_projection"}, "source_class": {"const": "current_waiting_room"}, "source_contract_id": {"const": "emr4.waiting_room_context_frame.v1"}, "content": {"$ref": "#/$defs/WaitingFrameContent"}}}], "unevaluatedProperties": false},
+    "DirectoryFrame": {"allOf": [{"$ref": "#/$defs/FrameCommon"}, {"type": "object", "properties": {"frame_type": {"const": "active_practitioner_directory"}, "source_class": {"const": "practitioner_directory"}, "source_contract_id": {"const": "practice-practitioner-directory-read.v1"}, "content": {"$ref": "#/$defs/DirectoryFrameContent"}}}], "unevaluatedProperties": false},
+    "SessionFrame": {"allOf": [{"$ref": "#/$defs/FrameCommon"}, {"type": "object", "properties": {"frame_type": {"const": "private_application_session_state"}, "source_class": {"const": "private_session_state"}, "source_contract_id": {"const": "emr4.native_diary_application_session_state.v1"}, "content": {"$ref": "#/$defs/SessionFrameContent"}}}], "unevaluatedProperties": false},
+    "OperationalFrame": {"oneOf": [{"$ref": "#/$defs/DiaryFrame"}, {"$ref": "#/$defs/WaitingFrame"}, {"$ref": "#/$defs/DirectoryFrame"}, {"$ref": "#/$defs/SessionFrame"}]},
+    "SourceTrace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "need_digest", "grant_digest", "source_envelope_ids", "source_digests", "coherence_check_codes", "omission_codes", "source_trace_digest"],
+      "properties": {"schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"}, "need_digest": {"$ref": "#/$defs/Digest"}, "grant_digest": {"$ref": "#/$defs/Digest"}, "source_envelope_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}}, "source_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/Digest"}}, "coherence_check_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "omission_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "source_trace_digest": {"$ref": "#/$defs/Digest"}}
+    },
+    "FrameSet": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "frame_set_id", "need_digest", "grant_digest", "binding_digest", "source_trace_digest", "frames", "omission_codes", "ambiguity_state", "assembled_at", "expires_at", "maximum_disclosure_bytes", "read_only", "command_authority", "provider_authority", "frame_set_digest"],
+      "properties": {"schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"}, "frame_set_id": {"$ref": "#/$defs/Ref"}, "need_digest": {"$ref": "#/$defs/Digest"}, "grant_digest": {"$ref": "#/$defs/Digest"}, "binding_digest": {"$ref": "#/$defs/Digest"}, "source_trace_digest": {"$ref": "#/$defs/Digest"}, "frames": {"type": "array", "minItems": 1, "maxItems": 4, "items": {"$ref": "#/$defs/OperationalFrame"}}, "omission_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "ambiguity_state": {"enum": ["NONE", "ALTERNATIVES"]}, "assembled_at": {"$ref": "#/$defs/Instant"}, "expires_at": {"$ref": "#/$defs/Instant"}, "maximum_disclosure_bytes": {"type": "integer"}, "read_only": {"const": true}, "command_authority": {"const": false}, "provider_authority": {"const": false}, "frame_set_digest": {"$ref": "#/$defs/Digest"}}
+    },
+    "WeaveTrace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "need_digest", "grant_digest", "source_trace_digest", "released_frame_ids", "released_frame_digests", "frame_set_digest", "read_only", "command_authority", "weave_trace_digest"],
+      "properties": {"schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"}, "need_digest": {"$ref": "#/$defs/Digest"}, "grant_digest": {"$ref": "#/$defs/Digest"}, "source_trace_digest": {"$ref": "#/$defs/Digest"}, "released_frame_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/Ref"}}, "released_frame_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/Digest"}}, "frame_set_digest": {"$ref": "#/$defs/Digest"}, "read_only": {"const": true}, "command_authority": {"const": false}, "weave_trace_digest": {"$ref": "#/$defs/Digest"}}
+    },
+    "ProofreaderTrace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "need_digest", "grant_digest", "source_trace_digest", "weave_trace_digest", "frame_set_digest", "checked_at", "reason_codes", "release_decision", "proofreader_trace_digest"],
+      "properties": {"schema_version": {"const": "emr4.practice_context_fabric_current_operational_weave.v1"}, "need_digest": {"type": "string"}, "grant_digest": {"type": "string"}, "source_trace_digest": {"type": "string"}, "weave_trace_digest": {"type": "string"}, "frame_set_digest": {"type": "string"}, "checked_at": {"$ref": "#/$defs/Instant"}, "reason_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "release_decision": {"enum": ["RELEASE", "BLOCK"]}, "proofreader_trace_digest": {"$ref": "#/$defs/Digest"}}
+    }
+  }
+}

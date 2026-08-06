@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_provider_free_context_fabric_current_operational_weave_candidate_for_exact_head_independent_review",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records raisa_provider_free_practice_context_fabric_bureau_memory_contract_pass and the provider-free Current operational weave as the next dependency-satisfied descendant under Yuri's standing continuation authority.",
+    "current_authority_allocation": "GPT Sol completed the serial architecture, implementation, repair and deterministic gate. A fresh Gemini 3.6 Flash/high Antigravity project owns the exact-HEAD independent veto only after this candidate commit; it receives no write, integration, command or protected authority.",
+    "active_plan_and_acceptance": "The frozen Current operational weave plan/design/threat delta admits only four repository-authored synthetic sealed source shapes. The closed schema, pure assembler and independently recomputing proofreader pass the focused and inherited eight-module packet, including API Spine invariance, with no new product API or runtime surface.",
+    "protected_evidence_boundaries": "No patient, clinical, product-derived, protected or historical-PHI data; no raw audit, provider, external retrieval, database, persistence, product runtime, command, deployment, release, Pages or protected-ref action. docs/branding/ and every unrelated untracked receipt/state/evidence/cost-ledger artifact remain preserved and explicitly excluded.",
+    "git_refs_and_worktree": "Before candidate staging, the task branch and origin task ref are aligned at 619dbc3b9d7ce5610c75031f76c14a4ebbd7fa5f. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging is limited to the Current operational weave plan, design, threat delta, schema, example, evidence, pure engine, acceptance generator, focused tests and its four preplan/precommit receipt-state files; docs/branding/ and all unrelated untracked artifacts are excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_current_operational_weave_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reproduced the expanded provider-free regression packet and retained sole candidate-integration authority."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Authentication and structured review transport remain available; dispatch is deferred until an exact clean candidate commit and verifier-worktree preflight exist."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No implementation worker was allocated because this tightly coupled schema/engine/evidence descendant remained serial."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains unused."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Claude CLI is not independently selected for this serial tranche."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent is active or assigned to this tranche."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

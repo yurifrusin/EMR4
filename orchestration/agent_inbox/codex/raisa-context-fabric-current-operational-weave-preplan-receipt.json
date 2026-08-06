@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_provider_free_context_fabric_current_operational_weave_descendant",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted Context Fabric direction and exact reviewed first contract permit a provider-free authored-synthetic descendant that composes only existing authorised Diary, waiting-room, active-practitioner-directory and application-session state/read projections. API Spine GraphQL remains read-only and documentation-only; no new product route or source is allowed.",
+    "current_authority_allocation": "GPT Sol owns architecture, plan, implementation, recovery and acceptance. The work is serial and tightly coupled, so no implementation worker is allocated. A fresh Gemini 3.6 Flash/high exact-head veto remains the independent acceptance surface after deterministic gates pass.",
+    "git_refs_and_worktree": "Task and origin task are aligned at 619dbc3b9d7ce5610c75031f76c14a4ebbd7fa5f. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree state is clean; only preserved unrelated untracked files exist.",
+    "live_handover_current_baton": "AGENTS.md records raisa_provider_free_practice_context_fabric_bureau_memory_contract_pass and names the provider-free Current operational weave as the next dependency-satisfied planned descendant under standing authority.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/clinical/product-derived data, raw audit, real database, persistence/retention, provider/external retrieval, ordinary service, product runtime, command/write, deployment, production, release, Pages or protected-ref action. docs/branding/ and unrelated untracked receipt/state/evidence/cost-ledger files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
