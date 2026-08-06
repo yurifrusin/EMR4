@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: second recovered architecture candidate pending fresh independent veto
+Status: third recovered architecture candidate pending fresh independent veto
 
 ## Trust boundaries and assets
 
@@ -26,6 +26,8 @@ and the separation between invalidation and current truth/commands.
 | Appointment commits without control row | Enabled producer is in the same transaction; no best-effort after-commit append or bypass. |
 | Aggregate revision is treated as continuity | It is anomaly/freshness metadata only; only transaction position/predecessor determine continuity. |
 | Outbox leaks product or patient data | Closed columns only; no JSON/text/payload/product identifiers; raw event UUID is non-semantic, normalized and discarded. |
+| Alias bridge contradicts the product-identifier ceiling or leaks appointment identity | `diary_context_aggregate_aliases_v1` is the sole closed exception; only an owner-mediated producer entry point can create/return an alias, all other principals have no SELECT/DML/function path, and only the opaque alias enters durability evidence. |
+| Durability retention deletes or uses the product alias bridge as purge authority | The bridge is outside all three durability retention families, deletion is disabled by default and later requires a distinct product-lifecycle policy; it never cascades or rewrites retained opaque evidence. |
 | Observer reads base/product tables | Exact projection privilege only; direct base-table access denied. |
 | Observer packet is altered or forged at the coordinator | Receiver rederives observer `session_user`, reselects exact source membership and appends one immutable packet/source/binding admission; coordinator accepts only stored admission meaning. |
 | Observer gains persistence authority through admission | Observer has no DML/checkpoint privilege; receiver-owned function admits only the exact closed packet and receiver has no durability-effect authority. |

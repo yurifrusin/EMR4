@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 50,
+  "register_revision": 51,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1962,15 +1962,17 @@
       "stage": "independent_review",
       "category": "reasoning_claim_error",
       "process_severity": "material",
-      "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation and bounded conflict attempt to authenticated immutable receiver-owned evidence, preserve conflict visibility and exact redelivery independently of source retention, represent an independent current recovery anchor without blocking receiver admission, include lifecycle in atomic decision effects and define one exact key-schedule/rotation scope.",
-      "observed_error": "Candidate bea7d719 accepted an unauthenticated coordinator decision packet, selected the source row before redelivery despite independent source retention, stored only an immutable baseline-like anchor coordinate while checkpoints advanced, omitted lifecycle from the authoritative coordinator staging list and left key intervals ambiguous between stream-global and generation-local scope. Recovery candidate 5de1ba51 repaired those five defects but still could not durably represent a conflicting same-position or digest-reuse attempt without overwriting its sole admission row, and its pending-anchor wording ambiguously blocked receiver admission rather than only coordinator consumption and next lifecycle transitions.",
-      "detection_method": "Two fresh exact-head native adversarial vetoes reconciled the parent durability contract, authenticated handoff, admission attempt representation, plan transaction order, retention families, anchor representation and key lifecycle. They returned the original five P1 contradictions and then the two residual P1 conflict-evidence/anchor-wording defects before implementation admission.",
+      "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation and bounded conflict attempt to authenticated immutable receiver-owned evidence, preserve conflict visibility and exact redelivery independently of source retention, represent an independent current recovery anchor without blocking receiver admission, include lifecycle in atomic decision effects, define one exact key-schedule/rotation scope and make every raw product-identifier exception explicit with narrow privilege and retention treatment.",
+      "observed_error": "Candidate bea7d719 underfroze authenticated admission, source-independent redelivery, per-revision anchors, atomic DECISION lifecycle and generation-local key scope. Recovery 5de1ba51 repaired those five defects but its sole immutable admission could not store a conflict and its anchor wording blocked receiver admission. Recovery 917dff6f repaired both residual defects but globally prohibited appointment identifiers while relation 2 stored the product appointment UUID without an explicit bounded exception, privilege ceiling or retention lifecycle.",
+      "detection_method": "Three fresh exact-head native adversarial vetoes reconciled the parent durability contract, authenticated handoff, admission attempt representation, plan transaction order, retention families, anchor representation, key lifecycle, API appointment-id type and the declared data ceiling. They returned the original five P1 contradictions, the two residual conflict-evidence/anchor-wording defects and then the owner-private alias-bridge contradiction before implementation admission.",
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-2-independent-veto.md",
         "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
         "docs/ariadne-agent-error-correction-register-revision-49.md",
-        "docs/ariadne-agent-error-correction-register-revision-50.md"
+        "docs/ariadne-agent-error-correction-register-revision-50.md",
+        "docs/ariadne-agent-error-correction-register-revision-51.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
@@ -1979,11 +1981,12 @@
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_implemented_pending_acceptance",
-        "action": "Sol preserved and rejected both vetoed candidates, added authenticated receiver-owned admission, source-independent redelivery, append-only lifecycle-owned anchors, atomic DECISION lifecycle and generation-local keys, then recovered the residual seam with at most one immutable PRIMARY plus one immutable CONFLICT sentinel per position. Retained-evidence-first receiver comparison makes exact duplicate inert and conflict durable before or after source purge; the coordinator loads only the complete stored set, and a pending anchor now permits bounded receiver admission while fencing coordinator consumption and next decision/rotation transitions. Fresh exact-head acceptance remains pending.",
-        "prevention_control": "Before accepting a database realization of an asynchronous state machine, trace every valid, duplicate and conflicting inter-principal input into bounded durable receiver-owned representation; prove clean redelivery and conflict visibility after each independently eligible purge; distinguish ingestion availability from lifecycle-consumption fences; map every evolving independent anchor to an append-only relation/fence; enumerate every atomic member and choose one exact scope for every shared-looking schedule.",
+        "action": "Sol preserved and rejected all three candidates. It repaired authenticated handoff, redelivery, anchors, lifecycle and key scope, then bounded each position to at most one immutable PRIMARY plus one immutable CONFLICT. Retained-evidence-first comparison is safe before or after source purge; the coordinator loads the stored set and pending anchors fence consumption, not receiver admission. The third recovery names diary_context_aggregate_aliases_v1 as the sole owner-private product-identifier exception, denies every non-producer access path, copies only the opaque alias into durability evidence and keeps disabled bridge deletion outside all three durability retention families. Fresh exact-head acceptance remains pending.",
+        "prevention_control": "Before accepting a database realization of an asynchronous state machine, trace every valid, duplicate and conflicting inter-principal input into bounded durable receiver-owned representation; prove clean redelivery and conflict visibility after each independently eligible purge; distinguish ingestion availability from lifecycle-consumption fences; map every evolving independent anchor to an append-only relation/fence; enumerate every atomic member and exact schedule scope; and mechanically reconcile each global data prohibition against every catalogue column, with explicit privilege and retention treatment for any sole exception.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-2-independent-veto.md",
           "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
           "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"
         ]

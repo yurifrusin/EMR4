@@ -454,10 +454,14 @@ generation rehearsal. The architecture-only provider-free default-off
   defects are repaired; the second recovery adds a bounded receiver-authored
   primary/conflict admission model that remains visible after source purge and
   clarifies that a pending independent anchor fences coordinator consumption
-  and decision/rotation transitions without blocking admission append. Only a
-  fresh acceptance of the complete corrected plan may admit an inert DDL
-  rehearsal. No applied migration, live implementation, real-product or
-  clinical descendant is opened.
+  and decision/rotation transitions without blocking admission append. A third
+  exact-head veto accepted those repairs but exposed a data-ceiling contradiction
+  around the appointment-id-to-opaque-alias mapping. The active recovery makes
+  that mapping the sole owner-private product-identifier exception, denies every
+  non-producer principal access and separates its disabled product-lifecycle
+  deletion from the three durability retention families. Only a fresh acceptance
+  of the complete corrected plan may admit an inert DDL rehearsal. No applied
+  migration, live implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

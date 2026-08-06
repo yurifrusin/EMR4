@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: second recovered design candidate pending fresh independent veto
+Status: third recovered design candidate pending fresh independent veto
 
 ## Purpose
 
@@ -48,6 +48,26 @@ The outbox contains the accepted non-semantic raw event UUID and opaque alias,
 but no product payload. The observer alone may read it. The raw event UUID is
 domain-separated into the accepted observation digest and discarded before
 the durability packet, receipt or audit.
+
+## Owner-private alias bridge
+
+`diary_context_aggregate_aliases_v1` is the sole product-identifier exception
+inside the future schema. It stores exactly the practice-bound product
+appointment UUID needed to return one stable opaque alias across producer
+transactions. This is a producer/product bridge, not control projection
+content. The existing signed-command producer may execute one owner-mediated
+create-or-return entry point inside its transaction, but it has no direct bridge
+table privilege. Observer, admission receiver, coordinator, lifecycle,
+retention and application-read principals have no `SELECT`, DML or function
+path to the product UUID. Only the opaque alias enters the outbox.
+
+The bridge does not join the source, receipt/checkpoint or audit retention
+families and supplies no purge authority. Deletion is disabled by default. A
+later distinct owner-mediated product-lifecycle policy may delete a mapping only
+after the appointment can no longer emit a source row. Deletion never cascades
+to or rewrites retained outbox, admission, receipt, checkpoint, anchor or audit
+evidence. No actual product identifier is present or processed in this
+architecture-only tranche.
 
 ## Tenant binding
 

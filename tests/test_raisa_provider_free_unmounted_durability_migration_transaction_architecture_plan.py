@@ -71,6 +71,26 @@ def test_future_relation_catalogue_is_exact_and_closed() -> None:
         assert phrase in plan.lower()
 
 
+def test_owner_private_alias_bridge_is_the_only_product_identifier_exception() -> None:
+    joined = " ".join(
+        "\n".join((text(PLAN), text(DESIGN), text(THREAT))).lower().split()
+    )
+    assert "sole product-identifier exception" in joined
+    for phrase in (
+        "(practice_id, product_appointment_uuid)",
+        "no runtime principal receives direct table dml",
+        "receive neither `select` nor the product id",
+        "never copied into the outbox",
+        "not governed by the three durability retention families",
+        "deletion is disabled by default",
+        "never cascades",
+        "only the opaque alias enters the outbox",
+        "no actual product identifier is present or processed in this "
+        "architecture-only tranche",
+    ):
+        assert phrase in joined
+
+
 def test_authority_binding_and_transactions_are_fail_closed() -> None:
     joined = " ".join("\n".join((text(PLAN), text(DESIGN))).lower().split())
     for phrase in (
@@ -150,6 +170,8 @@ def test_database_backed_acceptance_is_future_and_adversarial() -> None:
         "lifecycle append",
         "cross-practice reads",
         "caller-set practice guc",
+        "every non-producer principal and every durability output",
+        "separately disabled product-lifecycle action",
         "incomplete/filtered census",
         "disabled mode performs zero connection",
         "this architecture tranche itself performs none",

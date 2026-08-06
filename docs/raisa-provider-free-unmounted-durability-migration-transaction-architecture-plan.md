@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: second recovered architecture plan candidate pending fresh independent veto
+Status: third recovered architecture plan candidate pending fresh independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
@@ -71,12 +71,19 @@ coordinates, exact positions and predecessors, opaque backend aliases and
 digests, aggregate revision metadata, closed decision/reason/frame codes,
 key ids and integrity metadata.
 
-It may not contain appointment, patient, practitioner, location, time-slot,
-actor, session, correlation, command, audit-correlation, provider, payload,
-free-text, raw product UUID or current-truth values. JSON/JSONB, unbounded text,
-arrays and arbitrary key/value metadata are forbidden in the future durability
-relations. Exact closed codes use enum/domain/check constraints. A compact
-affected-frame mask may encode only none, Diary, waiting room or both.
+The sole product-identifier exception is the owner-private
+`diary_context_aggregate_aliases_v1` bridge described as relation 2 below. It
+contains exactly one practice-bound product appointment UUID solely to maintain
+one stable opaque aggregate alias across producer transactions. That UUID is
+not control projection content and is never selectable by the observer,
+admission receiver, coordinator, lifecycle, retention or application-read
+principals. No other future relation may contain an appointment, patient,
+practitioner, location, time-slot, actor, session, correlation, command, audit-
+correlation, provider, payload, free-text, raw product UUID or current-truth
+value. JSON/JSONB, unbounded text, arrays and arbitrary key/value metadata are
+forbidden in every future relation. Exact closed codes use enum/domain/check
+constraints. A compact affected-frame mask may encode only none, Diary, waiting
+room or both.
 
 ## Exact future schema catalogue
 
@@ -92,9 +99,15 @@ relations and no generic work queue or event store:
    empty baseline. The position is a checked signed
    64-bit integer; overflow fails the producer transaction and consumes the
    epoch. No sequence or identity default is allowed.
-2. `diary_context_aggregate_aliases_v1` — owner-only mapping from the product
-   appointment id to one practice/source-scoped opaque aggregate alias. Neither
-   observer nor coordinator receives access to the product id.
+2. `diary_context_aggregate_aliases_v1` — the sole product-identifier exception:
+   an owner-private mapping keyed by `(practice_id, product_appointment_uuid)`
+   to one practice/source-scoped opaque aggregate alias. A narrow producer
+   entry point may create or return the alias inside the existing command
+   transaction; no runtime principal receives direct table DML. Observer,
+   admission receiver, coordinator, lifecycle, retention and application-read
+   principals receive neither `SELECT` nor the product id. The product UUID is
+   never copied into the outbox, admission, receipt, checkpoint, anchor, audit,
+   key or retention relations.
 3. `diary_context_observation_outbox_v1` — immutable payload-free source rows keyed by
    `(practice_id, stream_id, stream_epoch, transaction_position)`, with exact
    predecessor, one non-semantic raw event UUID, opaque aggregate alias/revision,
@@ -187,7 +200,12 @@ to admission, anchor, receipt/checkpoint, audit, generation, pin or key-schedule
 state. A position's `PRIMARY` and `CONFLICT` admission rows share the receipt/
 checkpoint retention family and are retained together. Neither can be removed
 while its receipt, checkpoint, restart, redelivery or conflict meaning remains
-retained.
+retained. The owner-private alias bridge is not governed by the three
+durability retention families and is never an input to their purge decision.
+Its deletion is disabled by default and may later occur only through a distinct
+owner-mediated product-lifecycle policy after the appointment can no longer
+emit a source row. Bridge deletion never cascades and cannot remove or rewrite
+an opaque alias already present in retained durability evidence.
 
 ## Ownership, role and binding model
 
@@ -195,7 +213,8 @@ The future design must separate these logical planes:
 
 - schema/table owner: `NOLOGIN`, not a runtime role and not `BYPASSRLS`;
 - producer: exact stream-head/control-row effect only inside the existing
-  signed command transaction;
+  signed command transaction, plus execute-only use of the exact owner-private
+  alias bridge entry point with no direct bridge-table privilege;
 - observer: exact practice/source scoped read of the closed payload-free
   projection only;
 - observation admission receiver: one authenticated, source-revalidated,
@@ -256,6 +275,10 @@ command safely; there is no silent bypass. Disabling an already-producing
 contract consumes its observer generations; re-enable requires a new explicit
 source-contract epoch/version rather than silently incrementing this version's
 fixed epoch.
+The producer may know the appointment UUID because it already owns the signed
+command transaction, but the bridge entry point returns only the opaque alias;
+the UUID never crosses into the control projection or any observer/coordinator
+surface.
 After any emitted row, migration rollback is forward-fix and data-preserving;
 no downgrade may drop, truncate or silently stop the projection.
 
@@ -481,7 +504,9 @@ authored synthetic opaque coordinates only. At minimum it must prove:
 13. caller-set practice GUC, packet practice and direct function argument cannot
     widen the authenticated binding;
 14. JSON/text/direct identifier/raw UUID/correlation/session/payload smuggling
-    fails at schema and entry-point boundaries;
+    fails at schema and entry-point boundaries outside the exact owner-private
+    alias bridge; every non-producer principal and every durability output is
+    denied the bridge UUID;
 15. baseline, post-decision and post-rotation anchors are append-only and
     lifecycle-owned; pending/crash/tampered/missing anchors block coordinator
     consumption and every next decision/rotation transition without blocking
@@ -492,7 +517,9 @@ authored synthetic opaque coordinates only. At minimum it must prove:
 17. incomplete/filtered census, fast checkpoint, active pin, unfinished key
     overlap/grace and concurrent generation registration deny purge;
 18. source eligibility/execution cannot cascade to admission/anchor/checkpoint/
-    receipt/audit;
+    receipt/audit or the owner-private alias bridge; bridge deletion is a
+    separately disabled product-lifecycle action and cannot alter retained
+    opaque evidence;
 19. disabled mode performs zero connection, credential acquisition or state
     movement;
 20. the existing staff route/cursor cannot satisfy observer/checkpoint
@@ -536,7 +563,8 @@ production, release, Pages or protected-ref movement. Preserve and exclude
    command-plane change.
 2. The closed future schema catalogue and tenant-composite keys are exact.
 3. Payload/direct-identifier/free-text/JSON/array fields are structurally
-   excluded.
+   excluded except for the exact owner-private appointment-UUID alias bridge,
+   whose field, privilege and non-cascading lifecycle are closed explicitly.
 4. Producer positions are per-practice/stream, row-locked and rollback-safe in
    the existing mutation transaction; all ineligible coordinates are explicit.
 5. Distinct producer, observer, admission receiver, coordinator, lifecycle,
