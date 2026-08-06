@@ -105,10 +105,15 @@ from independently authored synthetic completed-read-shaped inputs, reruns the
 accepted adapter/Current proofreader, admits one distinct new frame set with a
 new manifest/lease and rejects an older result in both completion orders. It
 performs no product read and mounts no observer, watcher, feed or persistence.
-The next safe descendant is an architecture-only provider-free plan for a
-default-off live-source observation boundary; it may define payload-free
-invalidation and a separately authorised fresh-read request but may not
-implement the live boundary.
+The architecture-only provider-free default-off live-source observation
+boundary is now frozen for independent acceptance. It separates integration-
+principal observation, payload-free temporal classification and a separately
+authorised fresh-read plane; requires exact non-wildcard policy/binding,
+monotonic transaction positioning, baseline-before-frame binding, fail-closed
+gap/overflow/restart handling and one coalesced pending requirement; and gives
+the observer no truth, returned-data, read, provider, persistence or command
+authority. Its next safe descendant is an unmounted authored-synthetic
+observation-to-temporal-signal contract rehearsal, not a live boundary.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -407,9 +412,13 @@ free intent-shaped temporal retrieval rehearsal and the accepted authored-
 synthetic model-required intent-shaping descendant, the exact independently
 reviewed unmounted provider-free Rayleen A4 waiting-room source adapter and its
 provider-free authored-synthetic invalidation/reassembly seam and fresh-
-generation rehearsal. The next step is an architecture-only provider-free
-default-off live-source observation boundary before separately gated live
-implementation, real-product and clinical descendants.
+generation rehearsal. The architecture-only provider-free default-off
+live-source observation boundary is now frozen: authenticated integration
+metadata may only be admitted into a backend-constructed payload-free temporal
+signal, while any later source read starts from current application-principal
+authority and a new no-wider grant. The next step is a pure unmounted authored-
+synthetic observation-to-signal rehearsal before separately gated source-
+specific live implementation, real-product and clinical descendants.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

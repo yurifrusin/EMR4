@@ -303,11 +303,18 @@ large “memory” feature:
    independently authored synthetic completed-read-shaped input, and the new
    frame set, manifest and lease survive both older-result completion orders.
    This proves no live source, watcher, persistence, provider or command.
-9. **Default-off live-source observation architecture** — freeze how an
-   authenticated practice-scoped observation may emit only payload-free
-   invalidation and request a separately authorised fresh read. The observer
-   is not truth, returns no data and has no command authority. Architecture
-   acceptance must precede any database/feed/watcher implementation.
+9. **Default-off live-source observation architecture** — **frozen for
+   independent acceptance** in
+   `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`.
+   Integration-principal observation, payload-free temporal classification and
+   application-principal fresh read are separate planes. Exact non-wildcard
+   policy/binding, monotonic source position, baseline-before-frame binding,
+   fail-closed gap/overflow/restart handling and coalesced pending requirements
+   are mandatory. The observer is not truth, returns no data and has no read,
+   provider, persistence or command authority. After acceptance, the next safe
+   descendant is a pure unmounted authored-synthetic observation-to-signal
+   rehearsal; architecture acceptance must precede any database/feed/watcher
+   implementation.
 10. **Real product read descendants** — open one source and one role/purpose at
    a time with privacy, identity, audit, retention and database acceptance.
 11. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
