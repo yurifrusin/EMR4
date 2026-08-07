@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_typed_ir_function_trigger_body_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton authorises the provider-free unmounted durability function-and-trigger-body architecture under the standing uninterrupted-development authority. The candidate remains architecture-only and opens no later SQL, DDL, migration, database, runtime, source, provider or deployment gate.",
+    "current_authority_allocation": "GPT Sol owns reconciliation, candidate commit and later acceptance. Three bounded native cohorts produced the independent validator/schema, eight non-producer entry programs and thirteen trigger programs; none may self-accept, integrate, stage, commit, push or move protected refs. All cohort turns are complete or contained.",
+    "active_plan_and_acceptance": "The from-zero v3 candidate binds exactly nine entry points and thirteen triggers to closed typed operands. Its independent validator rederives effects and graph, its structural schema validates with zero errors, nineteen hostile mutation classes fail closed and 126 focused tests collect; the complete focused run plus corrected 59-test AER run, Ruff and diff checks pass. Contract digest is sha256:631773f9112e7804f5e2ea15b04d4cd4cb4c699502d3491b516d57d14e6f35d5.",
+    "protected_evidence_boundaries": "The commit is limited to explicit architecture plan/recovery/design/threat documents, the builder/body/validator/schema scripts, generated contract/schema, focused tests, four preserved AER incidents and this receipt pair. No app, API Spine, Diary, migration, SQL/DDL, database/source, runtime, provider, patient/product/clinical data, deployment, release, Pages, protected-ref, branding or unrelated untracked artifact may be staged.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD d2ed77c177f1f1dbb217984caea904732903df9c, four commits ahead of origin task 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Candidate paths are unstaged; docs/branding and all unrelated untracked files remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "function_trigger_body_candidate_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the complete generated candidate, structural schema, semantic derivation, hostile packet and AER revision before candidate commit."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The bounded entry, trigger and validator/schema cohorts are complete or interrupted after owned artifacts were reconciled; no worker retains authority."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "No provider or external model call is authorised or used in this candidate commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker is active or required."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

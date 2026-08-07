@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 62
+    assert register["register_revision"] == 63
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 59)
+        f"AER-{index:04d}" for index in range(1, 63)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 46
+    assert len(agent_incidents) == 50
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -280,6 +280,26 @@ def test_continuity_updater_uses_package_module_invocation() -> None:
     assert "python -m scripts" in incident["correction"]["prevention_control"]
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert incident["status"] == "corrected"
+
+
+def test_function_trigger_body_recovery_incidents_are_preserved_and_corrected() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    assert incidents["AER-0059"]["recurrence_signature"] == (
+        "implementer.semantic_labels_without_executable_operands"
+    )
+    assert incidents["AER-0060"]["recurrence_signature"] == (
+        "implementer.typed_ir_systemic_relation_and_source_misbinding"
+    )
+    assert incidents["AER-0061"]["recurrence_signature"] == (
+        "orchestrator.dispatch_before_exact_postcommit_receipt"
+    )
+    assert incidents["AER-0062"]["recurrence_signature"] == (
+        "orchestrator.receipt_head_evidence_not_git_verified"
+    )
+    assert all(incidents[incident_id]["status"] == "corrected" for incident_id in (
+        "AER-0059", "AER-0060", "AER-0061", "AER-0062"
+    ))
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -902,28 +922,28 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 58
+    assert report["incident_count"] == 62
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 46,
+        "agent_behavior": 50,
         "harness": 3,
         "repository": 2,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 10,
-        "evidence_misreport": 5,
+        "evidence_misreport": 6,
         "harness_failure": 3,
-        "output_contract_violation": 20,
+        "output_contract_violation": 21,
         "read_only_violation": 2,
-        "reasoning_claim_error": 9,
+        "reasoning_claim_error": 11,
         "repository_defect": 2,
         "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 47,
-        "untrusted_partial_worktree": 9,
+        "canonical_unchanged": 49,
+        "untrusted_partial_worktree": 11,
     }
     assert report["recurring_patterns"] == [
         {

@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_typed_ir_validator_and_read_only_body_spec_cohorts",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton directs the provider-free unmounted function-and-trigger-body architecture, and commit d2ed77c1 freezes the normative typed-IR replacement after two uncommitted candidate rejections. Standing uninterrupted-development authority permits bounded cohort work without opening any later DDL/runtime gate.",
+    "current_authority_allocation": "GPT Sol owns the replacement builder, reconciliation and acceptance. One native implementation lane may edit only the offline semantic validator and its unit test; two native read-only lanes may return entry-point and trigger manifest specifications without edits. Aristotle remains reserved for a later exact-candidate veto. No lane may self-accept, stage, commit, integrate, push or access protected surfaces.",
+    "active_plan_and_acceptance": "The original plan, structural recovery, implementation recovery and typed-IR replacement recovery require explicit source columns and typed expressions, no opaque profiles or authored effects, CFG/type/row-image validation, cohort ordering and a final fresh candidate-independent veto. The validator API and replacement field names are frozen in the dispatch packet; body-spec lanes provide analysis only.",
+    "protected_evidence_boundaries": "Owned work is limited to one offline validator script, its unit tests and read-only repository-authored body specifications. No SQL/DDL/migration, database/source/feed/watcher/listener, provider/model, patient/product/protected data, app/API/Diary/runtime, command/write, operational credential/persistence, deployment, release, Pages or protected-ref action is authorised. docs/branding and unrelated untracked artifacts remain untouched.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at d2ed77c177f1f1dbb217984caea904732903df9c, four commits ahead of origin task 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked index/worktree are clean; rejected candidate and unrelated artifacts remain untracked. The three native lanes were paused before task work when Sol detected the missing exact dispatch receipt; no owned file had changed."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "function_trigger_body_typed_ir_cohort_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol froze and committed the replacement recovery and paused all three lanes before owned task work pending this exact receipt."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The validator and two read-only specification lanes are available for corrected bounded dispatch after this receipt passes."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider/model transport is authorised or required."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation transport is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -146,7 +146,13 @@ def test_typed_ir_recovery_replaces_misbound_candidate_with_derived_semantics() 
         "No local effect field exists on an instruction node",
         "definite symbol assignment and use",
         "per-`TG_OP` legal `OLD`/`NEW` access",
+        "Admission lock feasibility correction",
+        "receives no `UPDATE` privilege",
         "Construction cohorts",
+        "`COMPOSITE_CONSTRUCT` binds every field",
+        "bounded affected-row count",
+        "typed `MIN_FIELD`",
+        "`SELECT_SET` assigns `<qualified-relation>[]`",
         "outbox insert retargeted to the alias relation",
         "creates no SQL, DDL, migration",
     ):

@@ -79,14 +79,23 @@ meaning:
 - typed row/composite/trigger return; and
 - value-free raise plus propagate-only `40001`/`40P01` behavior.
 
+Composite results are never opaque constants. `COMPOSITE_CONSTRUCT` binds every
+field, in the catalogue's exact order, to a typed operand expression. The sole
+`DELETE_SOURCE` also assigns its bounded affected-row count as
+`pg_catalog.bigint`, so the purge result is mechanically constructed from the
+actual delete effect rather than authored summary text.
+
 Expression leaves are only typed input/local/row-column/trigger-column/system
 references or typed constants. Every row-column reference identifies symbol,
 qualified relation, column and type. Exact operators close equality/order/null,
 Boolean composition, `IS DISTINCT FROM`, arithmetic, timestamp interval,
 fixed-key JSON extraction/cast, current-XID32/`xmin`, count, canonical digest,
-UUID generation and closed case expressions. Each operator has fixed arity and
-result typing. Complex outcomes are expressed as nested typed expressions and
-branches, never named profiles.
+UUID generation, closed composite construction, closed case expressions and a
+typed `MIN_FIELD` over one already selected complete relation set. A
+`SELECT_SET` assigns `<qualified-relation>[]`; `MIN_FIELD` identifies one of
+that set's selected columns and returns exactly its catalogued type. Each
+operator has fixed arity and result typing. Complex outcomes are expressed as
+nested typed expressions and branches, never named profiles.
 
 ## Non-authorable derived evidence
 
@@ -123,6 +132,18 @@ Replacement generation is admitted only in this order:
 
 Each cohort must pass the semantic validator before the next is generated. A
 cohort failure cannot be concealed by regenerating a schema constant or digest.
+
+### Admission lock feasibility correction
+
+The earlier plan wording requiring the admission receiver to lock retained
+admission and receipt rows is superseded. PostgreSQL row-locking selection
+requires target-table update privilege, which would contradict the frozen
+receiver ceiling of exact reads plus admission `INSERT`. Admission therefore
+performs retained-first exact `SELECT_SET`/`SELECT_EXACT`, then relies on the
+accepted unique coordinates and `INSERT_OR_RELOAD_COMPARE` with full immutable
+winner comparison for concurrency. It acquires no admission or receipt row
+lock and receives no `UPDATE` privilege. The coordinator, under its distinct
+security-definer owner and role boundary, retains its separately ordered locks.
 
 ## Mandatory reproduced attacks
 

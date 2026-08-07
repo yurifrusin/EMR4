@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.orchestration-incident-receipt.v1",
+  "recorded_on": "2026-08-07",
+  "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+  "candidate_head": "d2ed77c177f1f1dbb217984caea904732903df9c",
+  "incidents": [
+    {
+      "incident_id": "AER-0059",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-first-candidate-001",
+      "observation": "The first body candidate encoded named semantic labels and authored effect claims without an executable closed operand grammar. Sol rejected it before admission and preserved the rejection record.",
+      "candidate_effect": "rejected_before_acceptance"
+    },
+    {
+      "incident_id": "AER-0060",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-typed-candidate-001",
+      "observation": "The replacement typed candidate remained systemically misbound: producer writes targeted the wrong relation, effects could be empty, trigger row images crossed relations, derivations omitted sources and closed profiles concealed rather than expressed semantics. Sol rejected it before admission.",
+      "candidate_effect": "rejected_before_acceptance"
+    },
+    {
+      "incident_id": "AER-0061",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-dispatch-001",
+      "observation": "Three bounded cohort agents were spawned before the exact post-commit pre-worker-dispatch receipt was generated. Sol immediately paused all three before task work; no owned file changed until the corrected receipt passed.",
+      "candidate_effect": "canonical_unchanged_before_corrected_dispatch"
+    },
+    {
+      "incident_id": "AER-0062",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-receipt-001",
+      "observation": "The first post-commit runtime state named an incorrect full candidate SHA. Its evidence string was not independently checked against Git, so the receipt passed. Sol corrected the state to d2ed77c177f1f1dbb217984caea904732903df9c and reran the receipt before resuming the paused agents.",
+      "candidate_effect": "canonical_unchanged_before_corrected_receipt"
+    }
+  ],
+  "protected_refs_moved": false,
+  "provider_or_database_contact": false,
+  "patient_product_or_clinical_data": false
+}

@@ -151,6 +151,11 @@ generic execute, recursion, exception swallowing, autonomous retry, transaction
 control, savepoints, DDL, role change, configuration mutation, notification,
 network/file access or extension calls.
 
+Closed composite construction must expose every catalogue field and typed value
+operand in exact field order. The source-row purge must expose its bounded
+affected-row count as a typed `pg_catalog.bigint` local so its returned result
+is derived from the delete rather than asserted as prose.
+
 The finite vocabulary must additionally close, rather than imply, exact
 trigger context assertions; legal `OLD`/`NEW` access; `session_user`;
 transaction isolation and transaction timestamp; PostgreSQL-16 current-XID32
@@ -160,6 +165,12 @@ domain-separated canonical digests; `gen_random_uuid()` as the only opaque UUID
 generator; unique-insert winner reload/compare; and typed
 `RETURN_NEW`/`RETURN_OLD`/`RETURN_NULL`. These are named closed primitives, not
 generic function calls or free-form expressions.
+
+Complete-set reads have the explicit type `<qualified-relation>[]`. The closed
+`MIN_FIELD` primitive may derive the minimum of one selected, catalogued column
+from such a complete set; it cannot name a new relation or column. Retention
+eligibility and purge use that operand-derived minimum rather than a fixed or
+authored through-position.
 
 Every identifier is selected from the parent type/relation/column/function
 catalogue or the exact read-only existing-model fields parsed from
@@ -215,11 +226,14 @@ The body programs must freeze at least these non-negotiable effects:
   timestamp; create-or-reload one immutable bijective opaque alias; lock one
   practice/stream head; append one payload-free outbox row; advance the head;
   and return that row. No effect precedes complete command-context proof.
-- **Admission:** compare retained admission/receipt before source access; make
+- **Admission:** compare retained admission/receipt through exact reads before
+  source access, without acquiring an update-requiring row lock; make
   exact primary redelivery inert; append or return one bounded conflict
   sentinel for mismatch or digest reuse; reselect and authenticate source only
   for first primary/conflict membership; handle uniqueness races by reloading
-  and comparing the winner, never `ON CONFLICT DO NOTHING`.
+  and comparing the winner, never `ON CONFLICT DO NOTHING`. The unique
+  insertion/winner protocol, not broadened receiver privilege, serializes
+  admission races.
 - **Coordinator:** rederive binding; lock barrier, generation/checkpoint,
   current anchor, admission/receipt and dependent rows in the accepted order;
   make clean exact redelivery source-independent and inert; force conflict,

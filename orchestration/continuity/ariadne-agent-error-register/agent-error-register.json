@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 62,
+  "register_revision": 63,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-06",
+    "source_cutoff_on": "2026-08-07",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -2288,6 +2288,168 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-continuity-invocation-failure-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-62.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0059",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-first-candidate-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "codex-primary-implementer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "Every normative function and trigger body must use a closed executable operand grammar from which an independent validator can derive reads, locks, writes, calls, failures, terminals and outputs without trusting semantic labels.",
+      "observed_error": "The first candidate encoded named semantic steps and authored effect claims but did not provide mechanically executable typed operands. Its apparent closure therefore exceeded what its representation could prove.",
+      "detection_method": "Sol challenged the candidate against the plan's renderer and effect-rederivation requirements, preserved the rejection and prohibited it from becoming an implementation source.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-first-candidate-sol-rejection.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-recovery-incidents-receipt.json",
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-typed-ir-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-63.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.semantic_labels_without_executable_operands",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The label-only candidate was rejected and replaced from zero by a deterministic builder, closed typed instruction and expression grammar, independently authored semantic validator, structural schema and hostile-mutation suite.",
+        "prevention_control": "A body candidate cannot be admitted unless effects and call edges are rederived from typed operands and remain equal to stored evidence; labels, profiles and authored effect fields are forbidden.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-typed-ir-recovery.md",
+          "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_validator.py",
+          "tests/test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py",
+          "docs/ariadne-agent-error-correction-register-revision-63.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0060",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-typed-candidate-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "codex-primary-implementer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A typed replacement must bind every read and write to its true relation and source columns, keep trigger images local to their declared relation and make every derivation and terminal path mechanically executable.",
+      "observed_error": "The second candidate was syntactically typed but systemically misbound: the producer targeted an alias relation for an outbox operation, update effects could be empty, trigger row images crossed relations, derivations omitted sources and closed profile names concealed rather than expressed computation.",
+      "detection_method": "Sol parsed and structurally validated the artifact, then performed an operand-level audit with two bounded independent read-only analyses. The candidate was rejected before sealing or staging.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-typed-candidate-sol-rejection.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-recovery-incidents-receipt.json",
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-typed-ir-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-63.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.typed_ir_systemic_relation_and_source_misbinding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The misbound candidate was preserved only as negative evidence. A fresh builder now emits all twenty-two programs from closed operands, and the validator plus nineteen-class hostile packet rejects wrong targets, omitted effects, illegal row images, unproduced values and opaque operations.",
+        "prevention_control": "Typed syntax is insufficient: acceptance rederives effects and graphs, compares the exact body AST envelope and runs relation-, source-, trigger-, lock- and authority-mutation attacks after resealing evidence.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder.py",
+          "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_validator.py",
+          "tests/test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py",
+          "docs/ariadne-agent-error-correction-register-revision-63.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0061",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-dispatch-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The exact post-commit five-source pre-worker-dispatch receipt must pass before any cohort worker begins task work.",
+      "observed_error": "Sol spawned three bounded cohort agents before generating the exact post-commit dispatch receipt. Sol immediately paused all three before task work and no owned file changed until the corrected receipt passed.",
+      "detection_method": "The orchestrator recognized the ordering error at dispatch time, paused every worker and verified the shared workspace remained unchanged before constructing the receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-recovery-incidents-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-predispatch-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-63.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.dispatch_before_exact_postcommit_receipt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The agents remained paused while a fresh five-source receipt was generated and corrected; only its passing successor authorised resumption.",
+        "prevention_control": "Generate and inspect the exact-head pre-worker-dispatch receipt before calling the agent spawn primitive; pause and audit immediately if ordering is violated.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-recovery-incidents-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-63.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0062",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-receipt-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "A receipt's expected task HEAD must be copied from the exact forty-character git rev-parse result and independently compared with Git rather than trusted as a self-reported evidence string.",
+      "observed_error": "The first corrected runtime state named an incorrect full candidate SHA, yet the receipt passed because that evidence string was not Git-verified. Sol detected the mismatch before resuming workers and replaced it with d2ed77c177f1f1dbb217984caea904732903df9c.",
+      "detection_method": "Sol compared the receipt text with a fresh git rev-parse HEAD, found the discrepancy and reran the receipt after correcting the runtime state.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-recovery-incidents-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-predispatch-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-63.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.receipt_head_evidence_not_git_verified",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The same candidate remained unchanged. The runtime state was corrected to the exact Git HEAD, the five-source receipt reran and passed, and only then were workers resumed.",
+        "prevention_control": "Every dispatch receipt must independently resolve and compare Git HEAD; an expected-head evidence string cannot establish its own truth.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-predispatch-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-recovery-incidents-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-63.md"
         ]
       },
       "status": "corrected"
