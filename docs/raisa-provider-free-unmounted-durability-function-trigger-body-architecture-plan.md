@@ -5,7 +5,8 @@ Date: 2026-08-07
 Status: initial plan superseded by bounded structural-feasibility recovery;
 first label-only and second misbound typed implementation candidates rejected;
 third and fourth exact-HEAD candidates rejected by independent veto; second
-exact-veto Sol recovery frozen before replacement implementation
+exact-veto Sol recovery implemented with deterministic acceptance passing;
+replacement candidate pending fresh exact-HEAD independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -30,6 +31,9 @@ Normative exact-veto recovery:
 
 Normative second exact-veto recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md`
+
+Current replacement candidate contract pending fresh independent veto:
+`sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
 
 ## Objective
 

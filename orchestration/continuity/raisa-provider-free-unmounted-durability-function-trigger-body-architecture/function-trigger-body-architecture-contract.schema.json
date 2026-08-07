@@ -11,7 +11,7 @@
       "type": "string"
     },
     "contract_sha256": {
-      "const": "sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde"
+      "const": "sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a"
     },
     "parent_binding": {
       "type": "object",
@@ -7494,8 +7494,8 @@
         },
         "expression_opcodes": {
           "type": "array",
-          "minItems": 32,
-          "maxItems": 32,
+          "minItems": 34,
+          "maxItems": 34,
           "items": false,
           "prefixItems": [
             {
@@ -7578,6 +7578,12 @@
             },
             {
               "const": "SESSION_USER"
+            },
+            {
+              "const": "SET_CONTAINS_KEY"
+            },
+            {
+              "const": "SET_COVERS_KEYS"
             },
             {
               "const": "SUBTRACT"
@@ -13069,6 +13075,169 @@
             "op",
             "source",
             "keys",
+            "type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "SET_CONTAINS_KEY"
+            },
+            "set": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "LOCAL"
+                },
+                "symbol": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z_][A-Za-z0-9_.:-]*$"
+                },
+                "type": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^(?:pg_catalog|public|emr4_context_fabric)\\.[a-z][a-z0-9_]*(?:\\[\\])?$"
+                }
+              },
+              "required": [
+                "kind",
+                "symbol",
+                "type"
+              ],
+              "additionalProperties": false
+            },
+            "source_relation": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?:pg_catalog|public|emr4_context_fabric)\\.[a-z][a-z0-9_]*(?:\\[\\])?$"
+            },
+            "key_pairs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_column": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                  },
+                  "set_column": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                  }
+                },
+                "required": [
+                  "source_column",
+                  "set_column"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "type": {
+              "const": "pg_catalog.boolean"
+            }
+          },
+          "required": [
+            "op",
+            "set",
+            "source_relation",
+            "key_pairs",
+            "type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "SET_COVERS_KEYS"
+            },
+            "required": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "LOCAL"
+                },
+                "symbol": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z_][A-Za-z0-9_.:-]*$"
+                },
+                "type": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^(?:pg_catalog|public|emr4_context_fabric)\\.[a-z][a-z0-9_]*(?:\\[\\])?$"
+                }
+              },
+              "required": [
+                "kind",
+                "symbol",
+                "type"
+              ],
+              "additionalProperties": false
+            },
+            "evidence": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "LOCAL"
+                },
+                "symbol": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z_][A-Za-z0-9_.:-]*$"
+                },
+                "type": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^(?:pg_catalog|public|emr4_context_fabric)\\.[a-z][a-z0-9_]*(?:\\[\\])?$"
+                }
+              },
+              "required": [
+                "kind",
+                "symbol",
+                "type"
+              ],
+              "additionalProperties": false
+            },
+            "key_pairs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "required_column": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                  },
+                  "evidence_column": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                  }
+                },
+                "required": [
+                  "required_column",
+                  "evidence_column"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "type": {
+              "const": "pg_catalog.boolean"
+            }
+          },
+          "required": [
+            "op",
+            "required",
+            "evidence",
+            "key_pairs",
             "type"
           ],
           "additionalProperties": false

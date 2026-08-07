@@ -161,6 +161,14 @@ def _expression_defs() -> dict[str, Any]:
     relation = _string(pattern=_QUALIFIED)
     column = _string(pattern=r"^[a-z][a-z0-9_]*$")
 
+    local_set_reference = _closed_object(
+        {
+            "kind": {"const": "LOCAL"},
+            "symbol": symbol,
+            "type": type_name,
+        }
+    )
+
     ref_branches = [
         _closed_object(
             {
@@ -380,6 +388,40 @@ def _expression_defs() -> dict[str, Any]:
                     "op": {"const": "JSON_KEYS_EXACT"},
                     "source": _ref("expression"),
                     "keys": _array(column, min_items=1, unique=True),
+                    "type": {"const": "pg_catalog.boolean"},
+                }
+            ),
+            _closed_object(
+                {
+                    "op": {"const": "SET_CONTAINS_KEY"},
+                    "set": local_set_reference,
+                    "source_relation": relation,
+                    "key_pairs": _array(
+                        _closed_object(
+                            {
+                                "source_column": column,
+                                "set_column": column,
+                            }
+                        ),
+                        min_items=1,
+                    ),
+                    "type": {"const": "pg_catalog.boolean"},
+                }
+            ),
+            _closed_object(
+                {
+                    "op": {"const": "SET_COVERS_KEYS"},
+                    "required": local_set_reference,
+                    "evidence": local_set_reference,
+                    "key_pairs": _array(
+                        _closed_object(
+                            {
+                                "required_column": column,
+                                "evidence_column": column,
+                            }
+                        ),
+                        min_items=1,
+                    ),
                     "type": {"const": "pg_catalog.boolean"},
                 }
             ),

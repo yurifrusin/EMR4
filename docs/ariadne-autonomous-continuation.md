@@ -79,3 +79,10 @@ or redirects, or the host platform has an unrecoverable interruption and a
 durable automatic-resume checkpoint has been written. That checkpoint names the
 active sprint, completed and next executable stages, retry counters, and
 settings fingerprint.
+
+Every successful tranche closeout is followed by a concise lay summary naming
+the practical capability gained, the surfaces that remain deliberately closed,
+and any issue exposed or resolved by the work. The summary is delivered before
+the next tranche starts, but it is not a request for acknowledgement or fresh
+authority. When no user-attention condition is active, the orchestrator begins
+the next dependency-satisfied planned tranche immediately after reporting it.

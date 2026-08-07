@@ -168,6 +168,58 @@ def any_of(*args: dict[str, Any]) -> dict[str, Any]:
     return nary("OR", list(args))
 
 
+def set_contains_key(
+    set_symbol: str,
+    set_relation: str,
+    source_relation: str,
+    key_pairs: list[tuple[str, str]],
+) -> dict[str, Any]:
+    return {
+        "op": "SET_CONTAINS_KEY",
+        "set": {
+            "kind": "LOCAL",
+            "symbol": set_symbol,
+            "type": set_relation + "[]",
+        },
+        "source_relation": source_relation,
+        "key_pairs": [
+            {"source_column": source_column, "set_column": set_column}
+            for source_column, set_column in key_pairs
+        ],
+        "type": f"{PG}boolean",
+    }
+
+
+def set_covers_keys(
+    required_symbol: str,
+    required_relation: str,
+    evidence_symbol: str,
+    evidence_relation: str,
+    key_pairs: list[tuple[str, str]],
+) -> dict[str, Any]:
+    return {
+        "op": "SET_COVERS_KEYS",
+        "required": {
+            "kind": "LOCAL",
+            "symbol": required_symbol,
+            "type": required_relation + "[]",
+        },
+        "evidence": {
+            "kind": "LOCAL",
+            "symbol": evidence_symbol,
+            "type": evidence_relation + "[]",
+        },
+        "key_pairs": [
+            {
+                "required_column": required_column,
+                "evidence_column": evidence_column,
+            }
+            for required_column, evidence_column in key_pairs
+        ],
+        "type": f"{PG}boolean",
+    }
+
+
 def eq(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
     return binary("EQ", left, right)
 

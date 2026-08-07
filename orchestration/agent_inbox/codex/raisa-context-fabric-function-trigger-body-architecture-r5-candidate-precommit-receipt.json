@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_second_veto_recovery_candidate_for_fresh_independent_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The second exact-veto recovery R5A-R5D is implemented in candidate contract sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a. Builder generation and check pass; 71/71 focused R5 plus continuation tests, 128/128 predecessor architecture/API Spine tests and 75/75 AER plus continuation tests pass. Ruff and git diff check pass. The candidate remains pending fresh exact-HEAD independent veto.",
+    "current_authority_allocation": "GPT Sol owns integration, acceptance and task-branch Git. Three bounded native workers completed disjoint state-retention, validator and structural-schema artifacts with no staging, commit, push or self-acceptance authority; a fresh independent reviewer remains required.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at pre-candidate HEAD 22e4ce818442fa9ea1aa8d5bd169c3b33166334f with only explicitly named candidate, policy and receipt artifacts intended for staging. Local/origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881.",
+    "live_handover_current_baton": "The live baton requires the provider-free unmounted function-and-trigger-body architecture to pass before inert DDL rehearsal and requires uninterrupted recovery without protected-ref, product, runtime or Pages movement.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL/DDL execution or rendering, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and all unrelated untracked artifacts remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

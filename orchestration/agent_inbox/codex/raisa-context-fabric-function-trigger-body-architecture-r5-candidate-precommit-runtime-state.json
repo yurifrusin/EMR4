@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_second_veto_recovery_candidate_for_fresh_independent_review",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton requires the provider-free unmounted function-and-trigger-body architecture to pass before inert DDL rehearsal and requires uninterrupted recovery without protected-ref, product, runtime or Pages movement.",
+    "current_authority_allocation": "GPT Sol owns integration, acceptance and task-branch Git. Three bounded native workers completed disjoint state-retention, validator and structural-schema artifacts with no staging, commit, push or self-acceptance authority; a fresh independent reviewer remains required.",
+    "active_plan_and_acceptance": "The second exact-veto recovery R5A-R5D is implemented in candidate contract sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a. Builder generation and check pass; 71/71 focused R5 plus continuation tests, 128/128 predecessor architecture/API Spine tests and 75/75 AER plus continuation tests pass. Ruff and git diff check pass. The candidate remains pending fresh exact-HEAD independent veto.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL/DDL execution or rendering, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and all unrelated untracked artifacts remain preserved and excluded.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at pre-candidate HEAD 22e4ce818442fa9ea1aa8d5bd169c3b33166334f with only explicitly named candidate, policy and receipt artifacts intended for staging. Local/origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "r5_candidate_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the three disjoint R5 lanes and regenerated the exact canonical artifacts."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "All three bounded implementation workers returned candidate_ready and are complete."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider/model call is authorised or used in candidate construction."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external DeepSeek transport is used in this recovery."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-r5-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: exact candidate rejected by fresh independent veto; second exact-veto
-recovery pending replacement implementation
+Status: second exact-veto recovery implemented; deterministic acceptance
+passes and the replacement candidate awaits fresh exact-HEAD independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -31,6 +31,9 @@ Rejected deterministic typed-IR candidate:
 
 Normative second exact-veto recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md`
+
+Current replacement candidate pending fresh independent veto:
+`sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
 
 ## Purpose and derivation
 

@@ -58,6 +58,1030 @@ EXACT_TRIGGER_FUNCTIONS = (
 
 EXACT_SUPPORT_FUNCTION = "emr4_context_fabric.session_binding_allows_v1"
 
+EXACT_SIGNATURE_FIELD_MAP: tuple[Mapping[str, Any], ...] = tuple(
+    json.loads(
+        r"""
+[
+    {
+        "group":  "support",
+        "position":  0,
+        "id":  "emr4_context_fabric.session_binding_allows_v1",
+        "inputs":  [
+                       {
+                           "name":  "authenticated_login",
+                           "mode":  "IN",
+                           "type":  "pg_catalog.name"
+                       },
+                       {
+                           "name":  "allowed_capabilities",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.logical_capability[]"
+                       },
+                       {
+                           "name":  "requested_practice_id",
+                           "mode":  "IN",
+                           "type":  "pg_catalog.uuid"
+                       },
+                       {
+                           "name":  "requested_source_contract_id",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.source_contract_code"
+                       },
+                       {
+                           "name":  "requested_stream_id",
+                           "mode":  "IN",
+                           "type":  "pg_catalog.uuid"
+                       },
+                       {
+                           "name":  "observed_at",
+                           "mode":  "IN",
+                           "type":  "pg_catalog.timestamptz"
+                       }
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.boolean",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor_roles",
+        "executor":  [
+                         "emr4_context_fabric.context_schema_owner",
+                         "emr4_context_fabric.context_admission_receiver",
+                         "emr4_context_fabric.context_observer",
+                         "emr4_context_fabric.context_producer",
+                         "emr4_context_fabric.context_coordinator",
+                         "emr4_context_fabric.context_lifecycle",
+                         "emr4_context_fabric.context_retention",
+                         "emr4_context_fabric.context_application_read"
+                     ],
+        "language":  "sql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "STABLE",
+        "parallel_safety":  "RESTRICTED",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  0,
+        "id":  "emr4_context_fabric.project_update_confirm_reschedule_v1",
+        "inputs":  [
+                       {
+                           "name":  "command_id",
+                           "mode":  "IN",
+                           "type":  "pg_catalog.uuid"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.diary_context_observation_outbox_v1",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_producer",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1",
+                              "producer_temporal_bijection_v1",
+                              "event_outbox_transaction_binding_v1",
+                              "alias_immutable_bijection_v1",
+                              "producer_stream_head_monotonic_v1"
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  1,
+        "id":  "emr4_context_fabric.admit_proofread_observation_v1",
+        "inputs":  [
+                       {
+                           "name":  "generation_locator",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.generation_locator_v1"
+                       },
+                       {
+                           "name":  "source_position",
+                           "mode":  "IN",
+                           "type":  "pg_catalog.bigint"
+                       },
+                       {
+                           "name":  "proofread_packet",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.proofread_packet_v1"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.context_proofread_observation_admission",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_observer",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_admission_receiver",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "admission_bounded_immutable_v1",
+                              "binding_one_active_v1"
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  2,
+        "id":  "emr4_context_fabric.apply_durability_transition_v1",
+        "inputs":  [
+                       {
+                           "name":  "admission_locator",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.admission_locator_v1"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.durability_transition_result_v1",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_coordinator",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "admission_primary_receipt_binding_v1",
+                              "anchor_fences_next_transition_v1",
+                              "checkpoint_monotonic_terminal_v1",
+                              "watermark_monotonic_bounded_v1",
+                              "frame_one_way_retirement_v1",
+                              "obligation_coalesced_derived_v1",
+                              "lifecycle_gap_free_append_only_v1",
+                              "audit_decision_only_append_v1"
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  3,
+        "id":  "emr4_context_fabric.register_observer_generation_v1",
+        "inputs":  [
+                       {
+                           "name":  "registration",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.generation_registration_v1"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.context_observer_generation",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_lifecycle",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "registry_barrier_serialization_v1",
+                              "generation_lifecycle_one_way_v1",
+                              "key_partition_future_fenced_v1",
+                              "anchor_append_only_v1"
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  4,
+        "id":  "emr4_context_fabric.append_recovery_anchor_v1",
+        "inputs":  [
+                       {
+                           "name":  "generation_locator",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.generation_locator_v1"
+                       },
+                       {
+                           "name":  "lifecycle_revision",
+                           "mode":  "IN",
+                           "type":  "pg_catalog.bigint"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.context_recovery_anchor",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_lifecycle",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "anchor_append_only_v1",
+                              "anchor_fences_next_transition_v1"
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  5,
+        "id":  "emr4_context_fabric.rotate_observation_key_v1",
+        "inputs":  [
+                       {
+                           "name":  "generation_locator",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.generation_locator_v1"
+                       },
+                       {
+                           "name":  "future_interval",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.future_key_interval_v1"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.context_observation_key_interval",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_lifecycle",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "anchor_fences_next_transition_v1",
+                              "key_partition_future_fenced_v1",
+                              "lifecycle_gap_free_append_only_v1"
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  6,
+        "id":  "emr4_context_fabric.consume_observer_generation_v1",
+        "inputs":  [
+                       {
+                           "name":  "generation_locator",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.generation_locator_v1"
+                       },
+                       {
+                           "name":  "closed_reason",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.generation_terminal_reason"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.context_observer_generation",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_lifecycle",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "generation_lifecycle_one_way_v1"
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  7,
+        "id":  "emr4_context_fabric.evaluate_source_retention_v1",
+        "inputs":  [
+                       {
+                           "name":  "practice_source_stream",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.practice_source_stream_v1"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.context_source_retention_eligibility_v1",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_retention",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "registry_barrier_serialization_v1",
+                              "retention_complete_census_v1"
+                          ]
+    },
+    {
+        "group":  "entry_points",
+        "position":  8,
+        "id":  "emr4_context_fabric.purge_source_rows_v1",
+        "inputs":  [
+                       {
+                           "name":  "practice_source_stream",
+                           "mode":  "IN",
+                           "type":  "emr4_context_fabric.practice_source_stream_v1"
+                       },
+                       {
+                           "name":  "through_position",
+                           "mode":  "IN",
+                           "type":  "pg_catalog.bigint"
+                       }
+                   ],
+        "output":  {
+                       "type":  "emr4_context_fabric.context_source_purge_result_v1",
+                       "cardinality":  "EXACTLY_ONE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "emr4_context_fabric.context_retention",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  true,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "registry_barrier_serialization_v1",
+                              "retention_complete_census_v1",
+                              "event_retention_independence_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  0,
+        "id":  "emr4_context_fabric.cf_guard_claim_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  1,
+        "id":  "emr4_context_fabric.cf_fence_claim_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1",
+                              "producer_temporal_bijection_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  2,
+        "id":  "emr4_context_fabric.cf_fence_appointment_update_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  3,
+        "id":  "emr4_context_fabric.cf_guard_audit_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  4,
+        "id":  "emr4_context_fabric.cf_fence_audit_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  5,
+        "id":  "emr4_context_fabric.cf_guard_event_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1",
+                              "event_retention_independence_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  6,
+        "id":  "emr4_context_fabric.cf_fence_event_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1",
+                              "event_outbox_transaction_binding_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  7,
+        "id":  "emr4_context_fabric.cf_guard_alias_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "alias_immutable_bijection_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  8,
+        "id":  "emr4_context_fabric.cf_fence_alias_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  9,
+        "id":  "emr4_context_fabric.cf_guard_stream_head_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "producer_stream_head_monotonic_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  10,
+        "id":  "emr4_context_fabric.cf_fence_stream_head_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1",
+                              "producer_stream_head_monotonic_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  11,
+        "id":  "emr4_context_fabric.cf_guard_outbox_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "outbox_immutable_v1"
+                          ]
+    },
+    {
+        "group":  "trigger_functions",
+        "position":  12,
+        "id":  "emr4_context_fabric.cf_fence_outbox_v1",
+        "inputs":  [
+
+                   ],
+        "output":  {
+                       "type":  "pg_catalog.trigger",
+                       "cardinality":  "EXACTLY_ONE_OR_RAISE"
+                   },
+        "executor_field":  "executor",
+        "executor":  "OWNER_INTERNAL",
+        "language":  "plpgsql",
+        "owner":  "emr4_context_fabric.context_schema_owner",
+        "strict":  false,
+        "volatility":  "VOLATILE",
+        "parallel_safety":  "UNSAFE",
+        "security_definer":  true,
+        "search_path":  [
+                            "pg_catalog",
+                            "emr4_context_fabric"
+                        ],
+        "public_execute":  false,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1",
+                              "event_outbox_transaction_binding_v1"
+                          ]
+    }
+]
+"""
+    )
+)
+
+EXACT_TRIGGER_DECLARATION_FIELD_MAP: tuple[Mapping[str, Any], ...] = tuple(
+    json.loads(
+        r"""
+[
+    {
+        "position":  0,
+        "id":  "trg_cf_claim_guard",
+        "function":  "emr4_context_fabric.cf_guard_claim_v1",
+        "relation":  "public.appointment_command_idempotency",
+        "timing":  "BEFORE",
+        "row_level":  true,
+        "events":  [
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  false,
+        "initially_deferred":  false,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1"
+                          ]
+    },
+    {
+        "position":  1,
+        "id":  "trg_cf_claim_fence",
+        "function":  "emr4_context_fabric.cf_fence_claim_v1",
+        "relation":  "public.appointment_command_idempotency",
+        "timing":  "AFTER",
+        "row_level":  true,
+        "events":  [
+                       "INSERT",
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  true,
+        "initially_deferred":  true,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1",
+                              "producer_temporal_bijection_v1"
+                          ]
+    },
+    {
+        "position":  2,
+        "id":  "trg_cf_appointment_fence",
+        "function":  "emr4_context_fabric.cf_fence_appointment_update_v1",
+        "relation":  "public.appointments",
+        "timing":  "AFTER",
+        "row_level":  true,
+        "events":  [
+                       "UPDATE"
+                   ],
+        "deferrable":  true,
+        "initially_deferred":  true,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1"
+                          ]
+    },
+    {
+        "position":  3,
+        "id":  "trg_cf_audit_guard",
+        "function":  "emr4_context_fabric.cf_guard_audit_v1",
+        "relation":  "public.appointment_audit_log",
+        "timing":  "BEFORE",
+        "row_level":  true,
+        "events":  [
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  false,
+        "initially_deferred":  false,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1"
+                          ]
+    },
+    {
+        "position":  4,
+        "id":  "trg_cf_audit_fence",
+        "function":  "emr4_context_fabric.cf_fence_audit_v1",
+        "relation":  "public.appointment_audit_log",
+        "timing":  "AFTER",
+        "row_level":  true,
+        "events":  [
+                       "INSERT",
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  true,
+        "initially_deferred":  true,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1"
+                          ]
+    },
+    {
+        "position":  5,
+        "id":  "trg_cf_event_guard",
+        "function":  "emr4_context_fabric.cf_guard_event_v1",
+        "relation":  "public.diary_committed_events",
+        "timing":  "BEFORE",
+        "row_level":  true,
+        "events":  [
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  false,
+        "initially_deferred":  false,
+        "invariant_ids":  [
+                              "current_xid_provenance_v1",
+                              "event_retention_independence_v1"
+                          ]
+    },
+    {
+        "position":  6,
+        "id":  "trg_cf_event_fence",
+        "function":  "emr4_context_fabric.cf_fence_event_v1",
+        "relation":  "public.diary_committed_events",
+        "timing":  "AFTER",
+        "row_level":  true,
+        "events":  [
+                       "INSERT",
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  true,
+        "initially_deferred":  true,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1",
+                              "event_outbox_transaction_binding_v1"
+                          ]
+    },
+    {
+        "position":  7,
+        "id":  "trg_cf_alias_guard",
+        "function":  "emr4_context_fabric.cf_guard_alias_v1",
+        "relation":  "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+        "timing":  "BEFORE",
+        "row_level":  true,
+        "events":  [
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  false,
+        "initially_deferred":  false,
+        "invariant_ids":  [
+                              "alias_immutable_bijection_v1"
+                          ]
+    },
+    {
+        "position":  8,
+        "id":  "trg_cf_alias_fence",
+        "function":  "emr4_context_fabric.cf_fence_alias_v1",
+        "relation":  "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+        "timing":  "AFTER",
+        "row_level":  true,
+        "events":  [
+                       "INSERT",
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  true,
+        "initially_deferred":  true,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1"
+                          ]
+    },
+    {
+        "position":  9,
+        "id":  "trg_cf_head_guard",
+        "function":  "emr4_context_fabric.cf_guard_stream_head_v1",
+        "relation":  "emr4_context_fabric.context_observation_stream_head",
+        "timing":  "BEFORE",
+        "row_level":  true,
+        "events":  [
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  false,
+        "initially_deferred":  false,
+        "invariant_ids":  [
+                              "producer_stream_head_monotonic_v1"
+                          ]
+    },
+    {
+        "position":  10,
+        "id":  "trg_cf_head_fence",
+        "function":  "emr4_context_fabric.cf_fence_stream_head_v1",
+        "relation":  "emr4_context_fabric.context_observation_stream_head",
+        "timing":  "AFTER",
+        "row_level":  true,
+        "events":  [
+                       "INSERT",
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  true,
+        "initially_deferred":  true,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1",
+                              "producer_stream_head_monotonic_v1"
+                          ]
+    },
+    {
+        "position":  11,
+        "id":  "trg_cf_outbox_guard",
+        "function":  "emr4_context_fabric.cf_guard_outbox_v1",
+        "relation":  "emr4_context_fabric.diary_context_observation_outbox_v1",
+        "timing":  "BEFORE",
+        "row_level":  true,
+        "events":  [
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  false,
+        "initially_deferred":  false,
+        "invariant_ids":  [
+                              "outbox_immutable_v1"
+                          ]
+    },
+    {
+        "position":  12,
+        "id":  "trg_cf_outbox_fence",
+        "function":  "emr4_context_fabric.cf_fence_outbox_v1",
+        "relation":  "emr4_context_fabric.diary_context_observation_outbox_v1",
+        "timing":  "AFTER",
+        "row_level":  true,
+        "events":  [
+                       "INSERT",
+                       "UPDATE",
+                       "DELETE"
+                   ],
+        "deferrable":  true,
+        "initially_deferred":  true,
+        "invariant_ids":  [
+                              "producer_temporal_bijection_v1",
+                              "event_outbox_transaction_binding_v1"
+                          ]
+    }
+]
+"""
+    )
+)
+
+
 EXACT_PARENT_BINDING = {
     "path": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-"
@@ -181,7 +1205,7 @@ EXACT_NORMATIVE_SECTION_SHA256 = {
         "e2d0dda1b69f16e5f1b5fe84e3ce236e6daf4ec00fd83d39871ca2b1a7dc5a5c"
     ),
     "typed_ir_contract": (
-        "786594c3e590aaabbaf53557bd0e1cb383d34bdb0dc91402701db4b786bb280b"
+        "8fe96965938bb91a34720a0b65672488d308c3b6df8267f368939c4ee8d7b3ff"
     ),
     "trigger_applicability_return_matrix": (
         "03a9f8aacbdbf7ed9eabc3b58d5f90beea5fe8fb64e6b36b1c373672a3735906"
@@ -247,6 +1271,8 @@ EXPRESSION_OPCODES = frozenset(
         "IS_NOT_NULL",
         "COUNT",
         "MIN_FIELD",
+        "SET_CONTAINS_KEY",
+        "SET_COVERS_KEYS",
         "EQ",
         "NE",
         "LT",
@@ -316,6 +1342,46 @@ _INTEGER_TYPES = frozenset(
 _TIMESTAMP_TYPE = "pg_catalog.timestamptz"
 _UUID_TYPE = "pg_catalog.uuid"
 _XID_TYPE = "pg_catalog.xid"
+
+_GENERATION_SET_RELATION = "emr4_context_fabric.context_observer_generation"
+_GENERATION_COORDINATE_PAIRS = (
+    ("practice_id", "practice_id"),
+    ("source_contract_id", "source_contract_id"),
+    ("stream_id", "stream_id"),
+    ("stream_epoch", "stream_epoch"),
+    ("observer_id", "observer_id"),
+    ("observer_generation", "observer_generation"),
+)
+_PIN_GENERATION_COORDINATE_PAIRS = (
+    ("practice_id", "practice_id"),
+    ("source_contract_id", "source_contract_id"),
+    ("stream_id", "stream_id"),
+    ("observer_id", "observer_id"),
+    ("observer_generation", "observer_generation"),
+)
+_EXACT_SET_CONTAINS_KEY_PAIRS = {
+    "emr4_context_fabric.context_durability_checkpoint": (
+        _GENERATION_COORDINATE_PAIRS
+    ),
+    "emr4_context_fabric.context_recovery_anchor": (
+        _GENERATION_COORDINATE_PAIRS
+    ),
+    "emr4_context_fabric.context_observation_key_interval": (
+        _GENERATION_COORDINATE_PAIRS
+    ),
+    "emr4_context_fabric.context_classified_observation_receipt": (
+        _GENERATION_COORDINATE_PAIRS
+    ),
+    "emr4_context_fabric.context_durability_audit": (
+        _GENERATION_COORDINATE_PAIRS
+    ),
+    "emr4_context_fabric.context_recovery_pin": (
+        _PIN_GENERATION_COORDINATE_PAIRS
+    ),
+}
+_COVERAGE_EVIDENCE_RELATION = (
+    "emr4_context_fabric.context_observation_key_interval"
+)
 
 _SQL_TEXT = re.compile(
     r"(?:;|\$\$|--|/\*|\b(?:CREATE|ALTER|DROP|GRANT|REVOKE|EXECUTE|"
@@ -874,6 +1940,8 @@ class _SemanticValidator:
                 "effective signatures must be an object",
             )
             return
+        if self._has_normative_envelope():
+            self._validate_exact_signature_fields(signatures)
         support = signatures.get("support")
         support_items = [support] if isinstance(support, Mapping) else support
         if not isinstance(support_items, list):
@@ -909,6 +1977,78 @@ class _SemanticValidator:
                 "support_population",
                 "the stream-scoped existing support helper is the only support function",
             )
+
+    def _validate_exact_signature_fields(
+        self, signatures: Mapping[str, Any]
+    ) -> None:
+        """Compare every R5D signature field with literal validator authority."""
+
+        for expected in EXACT_SIGNATURE_FIELD_MAP:
+            group = expected["group"]
+            position = expected["position"]
+            group_value = signatures.get(group)
+            if group == "support":
+                candidate = group_value
+                path = "$.effective_parent_summary.effective_signatures.support"
+            else:
+                rows = group_value if isinstance(group_value, list) else []
+                candidate = rows[position] if position < len(rows) else None
+                path = (
+                    "$.effective_parent_summary.effective_signatures."
+                    f"{group}[{position}]"
+                )
+            if not isinstance(candidate, Mapping):
+                self.issue(
+                    path,
+                    "signature_position_mismatch",
+                    "the exact signature must occupy this frozen position",
+                )
+                continue
+
+            comparisons = (
+                ("id", "signature_id_mismatch"),
+                ("inputs", "signature_inputs_mismatch"),
+                ("language", "signature_language_mismatch"),
+                ("owner", "signature_owner_mismatch"),
+                ("strict", "signature_strictness_mismatch"),
+                ("volatility", "signature_volatility_mismatch"),
+                ("parallel_safety", "signature_parallel_safety_mismatch"),
+                ("security_definer", "signature_security_definer_mismatch"),
+                ("search_path", "signature_search_path_mismatch"),
+                ("public_execute", "signature_public_execute_mismatch"),
+                ("invariant_ids", "signature_invariant_ids_mismatch"),
+            )
+            for field_name, issue_code in comparisons:
+                if candidate.get(field_name) != expected[field_name]:
+                    self.issue(
+                        f"{path}.{field_name}",
+                        issue_code,
+                        f"{field_name} must equal its frozen R5D value",
+                    )
+
+            output = candidate.get("output")
+            expected_output = expected["output"]
+            output = output if isinstance(output, Mapping) else {}
+            if output.get("type") != expected_output["type"]:
+                self.issue(
+                    f"{path}.output.type",
+                    "signature_output_type_mismatch",
+                    "output type must equal its frozen R5D value",
+                )
+            if output.get("cardinality") != expected_output["cardinality"]:
+                self.issue(
+                    f"{path}.output.cardinality",
+                    "signature_output_cardinality_mismatch",
+                    "output cardinality must equal its frozen R5D value",
+                )
+
+            executor_field = expected["executor_field"]
+            if candidate.get(executor_field) != expected["executor"]:
+                self.issue(
+                    f"{path}.{executor_field}",
+                    "signature_executor_mismatch",
+                    "executor authority must equal its frozen R5D value",
+                )
 
     def _add_signatures(
         self,
@@ -980,6 +2120,8 @@ class _SemanticValidator:
                 "trigger declarations must be an array",
             )
             declarations = []
+        if self._has_normative_envelope():
+            self._validate_exact_trigger_declaration_fields(declarations)
         for index, declaration in enumerate(declarations):
             path = f"$.effective_parent_summary.trigger_declarations[{index}]"
             if not isinstance(declaration, Mapping):
@@ -1050,6 +2192,49 @@ class _SemanticValidator:
                 "trigger_matrix_population",
                 "every frozen trigger needs one return-matrix row",
             )
+
+    def _validate_exact_trigger_declaration_fields(
+        self, declarations: Sequence[Any]
+    ) -> None:
+        """Compare each R5D trigger declaration field at its frozen position."""
+
+        comparisons = (
+            ("id", "trigger_declaration_id_mismatch"),
+            ("function", "trigger_declaration_function_mismatch"),
+            ("relation", "trigger_declaration_relation_mismatch"),
+            ("timing", "trigger_declaration_timing_mismatch"),
+            ("row_level", "trigger_declaration_row_level_mismatch"),
+            ("events", "trigger_declaration_events_mismatch"),
+            ("deferrable", "trigger_declaration_deferrable_mismatch"),
+            (
+                "initially_deferred",
+                "trigger_declaration_initially_deferred_mismatch",
+            ),
+            ("invariant_ids", "trigger_declaration_invariant_ids_mismatch"),
+        )
+        for expected in EXACT_TRIGGER_DECLARATION_FIELD_MAP:
+            position = expected["position"]
+            path = (
+                "$.effective_parent_summary.trigger_declarations"
+                f"[{position}]"
+            )
+            candidate = (
+                declarations[position] if position < len(declarations) else None
+            )
+            if not isinstance(candidate, Mapping):
+                self.issue(
+                    path,
+                    "trigger_declaration_position_mismatch",
+                    "the exact trigger declaration must occupy this frozen position",
+                )
+                continue
+            for field_name, issue_code in comparisons:
+                if candidate.get(field_name) != expected[field_name]:
+                    self.issue(
+                        f"{path}.{field_name}",
+                        issue_code,
+                        f"{field_name} must equal its frozen R5D value",
+                    )
 
     def _validate_typed_ir_declarations(self) -> None:
         typed_ir = self.contract.get("typed_ir_contract")
@@ -1491,7 +2676,14 @@ class _SemanticValidator:
             relation = operands.get("relation")
             columns = self._columns(relation, operands.get("columns"), path)
             predicate = self._expression(
-                operands.get("predicate"), state, symbols, path, expected=_BOOLEAN_TYPE
+                operands.get("predicate"),
+                state,
+                symbols,
+                path,
+                expected=_BOOLEAN_TYPE,
+                selection_relation=(
+                    relation if isinstance(relation, str) else None
+                ),
             )
             self._merge_expression_effects(state.effects, predicate)
             order_columns = self._order_by(relation, operands.get("order_by"), path)
@@ -2030,6 +3222,7 @@ class _SemanticValidator:
         path: str,
         *,
         expected: str | None = None,
+        selection_relation: str | None = None,
     ) -> _ExprResult:
         expression_path = f"{path}.expression"
         if not isinstance(expression, Mapping):
@@ -2052,7 +3245,13 @@ class _SemanticValidator:
                 "opaque expression fields are forbidden",
             )
 
-        result = self._expression_inner(expression, state, symbols, expression_path)
+        result = self._expression_inner(
+            expression,
+            state,
+            symbols,
+            expression_path,
+            selection_relation=selection_relation,
+        )
         if expected is not None and result.type_name != expected:
             self.issue(
                 expression_path,
@@ -2067,6 +3266,8 @@ class _SemanticValidator:
         state: _FlowState,
         symbols: Mapping[str, Mapping[str, Any]],
         path: str,
+        *,
+        selection_relation: str | None,
     ) -> _ExprResult:
         op = expression.get("op")
         if op == "REF":
@@ -2229,7 +3430,13 @@ class _SemanticValidator:
 
         if op == "FIELD":
             self._expression_keys(expression, {"op", "source", "field", "type"}, path)
-            source = self._expression(expression.get("source"), state, symbols, path)
+            source = self._expression(
+                expression.get("source"),
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
             field_name = expression.get("field")
             declared_type = expression.get("type")
             fields = self.composite_fields.get(str(source.type_name))
@@ -2262,7 +3469,13 @@ class _SemanticValidator:
         if op == "MIN_FIELD":
             self._expression_keys(expression, {"op", "source", "field", "type"}, path)
             source_expression = expression.get("source")
-            source = self._expression(source_expression, state, symbols, path)
+            source = self._expression(
+                source_expression,
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
             field_name = expression.get("field")
             result_type = expression.get("type")
             symbol: Any = None
@@ -2307,6 +3520,232 @@ class _SemanticValidator:
                     )
             return _ExprResult(result_type, source.source_reads, source.row_images)
 
+        if op == "SET_CONTAINS_KEY":
+            self._expression_keys(
+                expression,
+                {"op", "set", "source_relation", "key_pairs", "type"},
+                path,
+            )
+            set_relation, selected_columns = self._set_operand(
+                expression.get("set"), state, symbols, f"{path}.set"
+            )
+            source_relation = expression.get("source_relation")
+            self._relation(source_relation, f"{path}.source_relation")
+            if source_relation != selection_relation:
+                self.issue(
+                    f"{path}.source_relation",
+                    "set_contains_source_relation_mismatch",
+                    "source_relation must equal the current typed selection source",
+                )
+
+            pairs = expression.get("key_pairs")
+            reads: set[tuple[str, str]] = set()
+            seen_pairs: set[tuple[str, str]] = set()
+            actual_pairs: list[tuple[Any, Any]] = []
+            if not isinstance(pairs, list) or not pairs:
+                self.issue(
+                    f"{path}.key_pairs",
+                    "set_key_pairs_empty",
+                    "SET_CONTAINS_KEY requires a non-empty ordered key-pair array",
+                )
+                pairs = []
+            for index, pair in enumerate(pairs):
+                pair_path = f"{path}.key_pairs[{index}]"
+                if not isinstance(pair, Mapping) or set(pair) != {
+                    "source_column",
+                    "set_column",
+                }:
+                    self.issue(
+                        pair_path,
+                        "set_key_pair_shape",
+                        "contains key pairs admit exactly source_column and set_column",
+                    )
+                    continue
+                source_column = pair.get("source_column")
+                set_column = pair.get("set_column")
+                actual_pairs.append((source_column, set_column))
+                pair_key = (str(source_column), str(set_column))
+                if pair_key in seen_pairs:
+                    self.issue(
+                        pair_path,
+                        "set_key_pair_duplicate",
+                        "set key pairs must be duplicate-free",
+                    )
+                seen_pairs.add(pair_key)
+                source_type = self.column_types.get(str(source_relation), {}).get(
+                    str(source_column)
+                )
+                set_type = self.column_types.get(str(set_relation), {}).get(
+                    str(set_column)
+                )
+                if source_type is None:
+                    self.issue(
+                        pair_path,
+                        "set_source_column_unknown",
+                        "source key column must exist in source_relation",
+                    )
+                elif isinstance(source_relation, str) and isinstance(
+                    source_column, str
+                ):
+                    reads.add((source_relation, source_column))
+                if set_type is None:
+                    self.issue(
+                        pair_path,
+                        "set_member_column_unknown",
+                        "set key column must exist in the complete-set relation",
+                    )
+                elif set_column not in selected_columns:
+                    self.issue(
+                        pair_path,
+                        "set_member_column_not_selected",
+                        "set key column must be bound by the prior complete-set read",
+                    )
+                if source_type is not None and set_type is not None and (
+                    source_type != set_type
+                ):
+                    self.issue(
+                        pair_path,
+                        "set_key_pair_type_mismatch",
+                        "paired source and set key columns must have identical types",
+                    )
+            if set_relation != _GENERATION_SET_RELATION:
+                self.issue(
+                    f"{path}.set.type",
+                    "set_contains_member_relation_mismatch",
+                    "SET_CONTAINS_KEY requires the frozen generation complete set",
+                )
+            expected_pairs = _EXACT_SET_CONTAINS_KEY_PAIRS.get(
+                str(source_relation)
+            )
+            if expected_pairs is None or tuple(actual_pairs) != expected_pairs:
+                self.issue(
+                    f"{path}.key_pairs",
+                    "set_contains_generation_identity_mismatch",
+                    "key pairs must equal the exact ordered generation identity",
+                )
+            if expression.get("type") != _BOOLEAN_TYPE:
+                self.issue(
+                    f"{path}.type",
+                    "set_operator_result_type",
+                    "SET_CONTAINS_KEY returns pg_catalog.boolean",
+                )
+            return _ExprResult(_BOOLEAN_TYPE, tuple(sorted(reads)))
+
+        if op == "SET_COVERS_KEYS":
+            self._expression_keys(
+                expression,
+                {"op", "required", "evidence", "key_pairs", "type"},
+                path,
+            )
+            required_relation, required_columns = self._set_operand(
+                expression.get("required"),
+                state,
+                symbols,
+                f"{path}.required",
+            )
+            evidence_relation, evidence_columns = self._set_operand(
+                expression.get("evidence"),
+                state,
+                symbols,
+                f"{path}.evidence",
+            )
+            pairs = expression.get("key_pairs")
+            seen_pairs: set[tuple[str, str]] = set()
+            actual_pairs: list[tuple[Any, Any]] = []
+            if not isinstance(pairs, list) or not pairs:
+                self.issue(
+                    f"{path}.key_pairs",
+                    "set_key_pairs_empty",
+                    "SET_COVERS_KEYS requires a non-empty ordered key-pair array",
+                )
+                pairs = []
+            for index, pair in enumerate(pairs):
+                pair_path = f"{path}.key_pairs[{index}]"
+                if not isinstance(pair, Mapping) or set(pair) != {
+                    "required_column",
+                    "evidence_column",
+                }:
+                    self.issue(
+                        pair_path,
+                        "set_key_pair_shape",
+                        "coverage key pairs admit required_column and evidence_column",
+                    )
+                    continue
+                required_column = pair.get("required_column")
+                evidence_column = pair.get("evidence_column")
+                actual_pairs.append((required_column, evidence_column))
+                pair_key = (str(required_column), str(evidence_column))
+                if pair_key in seen_pairs:
+                    self.issue(
+                        pair_path,
+                        "set_key_pair_duplicate",
+                        "set key pairs must be duplicate-free",
+                    )
+                seen_pairs.add(pair_key)
+                required_type = self.column_types.get(
+                    str(required_relation), {}
+                ).get(str(required_column))
+                evidence_type = self.column_types.get(
+                    str(evidence_relation), {}
+                ).get(str(evidence_column))
+                if required_type is None:
+                    self.issue(
+                        pair_path,
+                        "set_required_column_unknown",
+                        "required key column must exist in its complete-set relation",
+                    )
+                elif required_column not in required_columns:
+                    self.issue(
+                        pair_path,
+                        "set_required_column_not_selected",
+                        "required key column must be bound by its complete-set read",
+                    )
+                if evidence_type is None:
+                    self.issue(
+                        pair_path,
+                        "set_evidence_column_unknown",
+                        "evidence key column must exist in its complete-set relation",
+                    )
+                elif evidence_column not in evidence_columns:
+                    self.issue(
+                        pair_path,
+                        "set_evidence_column_not_selected",
+                        "evidence key column must be bound by its complete-set read",
+                    )
+                if required_type is not None and evidence_type is not None and (
+                    required_type != evidence_type
+                ):
+                    self.issue(
+                        pair_path,
+                        "set_key_pair_type_mismatch",
+                        "paired required and evidence key columns must have identical types",
+                    )
+            if required_relation != _GENERATION_SET_RELATION:
+                self.issue(
+                    f"{path}.required.type",
+                    "set_coverage_required_relation_mismatch",
+                    "coverage requires the frozen generation complete set",
+                )
+            if evidence_relation != _COVERAGE_EVIDENCE_RELATION:
+                self.issue(
+                    f"{path}.evidence.type",
+                    "set_coverage_evidence_relation_mismatch",
+                    "coverage evidence must be the frozen key-interval complete set",
+                )
+            if tuple(actual_pairs) != _GENERATION_COORDINATE_PAIRS:
+                self.issue(
+                    f"{path}.key_pairs",
+                    "set_coverage_generation_identity_mismatch",
+                    "coverage pairs must equal exact ordered generation coordinates",
+                )
+            if expression.get("type") != _BOOLEAN_TYPE:
+                self.issue(
+                    f"{path}.type",
+                    "set_operator_result_type",
+                    "SET_COVERS_KEYS returns pg_catalog.boolean",
+                )
+            return _ExprResult(_BOOLEAN_TYPE)
+
         if op == "COMPOSITE_CONSTRUCT":
             self._expression_keys(expression, {"op", "type", "fields"}, path)
             composite_type = expression.get("type")
@@ -2344,7 +3783,11 @@ class _SemanticValidator:
                 if isinstance(field_name, str):
                     actual_names.append(field_name)
                 value = self._expression(
-                    binding.get("value"), state, symbols, binding_path
+                    binding.get("value"),
+                    state,
+                    symbols,
+                    binding_path,
+                    selection_relation=selection_relation,
                 )
                 results.append(value)
                 expected_type = fields.get(str(field_name))
@@ -2382,7 +3825,13 @@ class _SemanticValidator:
 
         if op == "SYSTEM_XMIN":
             self._expression_keys(expression, {"op", "row", "type"}, path)
-            row = self._expression(expression.get("row"), state, symbols, path)
+            row = self._expression(
+                expression.get("row"),
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
             if row.type_name not in self.relations:
                 self.issue(
                     path, "xmin_row", "SYSTEM_XMIN requires an assigned relation row"
@@ -2393,7 +3842,13 @@ class _SemanticValidator:
 
         if op in {"NOT", "IS_NULL", "IS_NOT_NULL", "COUNT"}:
             self._expression_keys(expression, {"op", "operand", "type"}, path)
-            operand = self._expression(expression.get("operand"), state, symbols, path)
+            operand = self._expression(
+                expression.get("operand"),
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
             result_type = expression.get("type")
             if op == "NOT" and (
                 operand.type_name != _BOOLEAN_TYPE or result_type != _BOOLEAN_TYPE
@@ -2419,8 +3874,20 @@ class _SemanticValidator:
             "TIMESTAMP_ADD_SECONDS",
         }:
             self._expression_keys(expression, {"op", "left", "right", "type"}, path)
-            left = self._expression(expression.get("left"), state, symbols, path)
-            right = self._expression(expression.get("right"), state, symbols, path)
+            left = self._expression(
+                expression.get("left"),
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
+            right = self._expression(
+                expression.get("right"),
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
             result_type = expression.get("type")
             if op in {"EQ", "NE", "LT", "LTE", "GT", "GTE", "IS_DISTINCT_FROM"}:
                 if left.type_name != right.type_name or result_type != _BOOLEAN_TYPE:
@@ -2459,7 +3926,13 @@ class _SemanticValidator:
                 self.issue(path, "boolean_arity", f"{op} needs at least two operands")
                 operands = []
             results = [
-                self._expression(item, state, symbols, f"{path}.operands[{index}]")
+                self._expression(
+                    item,
+                    state,
+                    symbols,
+                    f"{path}.operands[{index}]",
+                    selection_relation=selection_relation,
+                )
                 for index, item in enumerate(operands)
             ]
             if expression.get("type") != _BOOLEAN_TYPE or any(
@@ -2472,7 +3945,13 @@ class _SemanticValidator:
             self._expression_keys(
                 expression, {"op", "source", "key", "target_type", "type"}, path
             )
-            source = self._expression(expression.get("source"), state, symbols, path)
+            source = self._expression(
+                expression.get("source"),
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
             target = expression.get("target_type")
             if source.type_name not in {"pg_catalog.json", "pg_catalog.jsonb"}:
                 self.issue(
@@ -2492,7 +3971,13 @@ class _SemanticValidator:
 
         if op == "JSON_KEYS_EXACT":
             self._expression_keys(expression, {"op", "source", "keys", "type"}, path)
-            source = self._expression(expression.get("source"), state, symbols, path)
+            source = self._expression(
+                expression.get("source"),
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
             keys = expression.get("keys")
             if source.type_name not in {"pg_catalog.json", "pg_catalog.jsonb"}:
                 self.issue(
@@ -2544,7 +4029,13 @@ class _SemanticValidator:
                 )
                 operands = []
             results = [
-                self._expression(item, state, symbols, f"{path}.operands[{index}]")
+                self._expression(
+                    item,
+                    state,
+                    symbols,
+                    f"{path}.operands[{index}]",
+                    selection_relation=selection_relation,
+                )
                 for index, item in enumerate(operands)
             ]
             result_type = expression.get("type")
@@ -2568,13 +4059,30 @@ class _SemanticValidator:
                     self.issue(arm_path, "case_arm", "CASE arm admits when and then")
                     continue
                 condition = self._expression(
-                    arm.get("when"), state, symbols, arm_path, expected=_BOOLEAN_TYPE
+                    arm.get("when"),
+                    state,
+                    symbols,
+                    arm_path,
+                    expected=_BOOLEAN_TYPE,
+                    selection_relation=selection_relation,
                 )
-                value = self._expression(arm.get("then"), state, symbols, arm_path)
+                value = self._expression(
+                    arm.get("then"),
+                    state,
+                    symbols,
+                    arm_path,
+                    selection_relation=selection_relation,
+                )
                 if value.type_name != result_type:
                     self.issue(arm_path, "case_type", "CASE arm type must match result")
                 results.extend((condition, value))
-            else_result = self._expression(expression.get("else"), state, symbols, path)
+            else_result = self._expression(
+                expression.get("else"),
+                state,
+                symbols,
+                path,
+                selection_relation=selection_relation,
+            )
             if else_result.type_name != result_type:
                 self.issue(path, "case_else_type", "CASE else type must match result")
             results.append(else_result)
@@ -2870,6 +4378,87 @@ class _SemanticValidator:
                 f"expression fields must equal {sorted(expected)}",
             )
 
+    def _set_operand(
+        self,
+        operand: Any,
+        state: _FlowState,
+        symbols: Mapping[str, Mapping[str, Any]],
+        path: str,
+    ) -> tuple[str | None, set[str]]:
+        """Bind one closed set operand to a prior definitely assigned SELECT_SET."""
+
+        if not isinstance(operand, Mapping) or set(operand) != {
+            "kind",
+            "symbol",
+            "type",
+        }:
+            self.issue(
+                path,
+                "set_operand_shape",
+                "set operands admit exactly kind, symbol and type",
+            )
+            return None, set()
+        if operand.get("kind") != "LOCAL":
+            self.issue(
+                path,
+                "set_operand_kind",
+                "set operands must reference a declared LOCAL",
+            )
+        symbol_id = operand.get("symbol")
+        symbol = symbols.get(str(symbol_id))
+        if not isinstance(symbol, Mapping):
+            self.issue(
+                path,
+                "set_operand_symbol",
+                "set operand symbol must be declared",
+            )
+            return None, set()
+        source = symbol.get("source")
+        if not isinstance(source, Mapping) or source.get("kind") != "LOCAL":
+            self.issue(
+                path,
+                "set_operand_symbol_source",
+                "set operand symbol must be declared as LOCAL",
+            )
+        if symbol_id not in state.assigned:
+            self.issue(
+                path,
+                "set_operand_unassigned",
+                "set operand LOCAL must be definitely assigned on this path",
+            )
+
+        operand_type = operand.get("type")
+        declared_type = symbol.get("type")
+        relation: str | None = None
+        if (
+            not isinstance(operand_type, str)
+            or not operand_type.endswith("[]")
+            or operand_type[:-2] not in self.relations
+        ):
+            self.issue(
+                path,
+                "set_operand_relation_array_type",
+                "set operand type must be exactly a catalogued qualified relation array",
+            )
+        else:
+            relation = operand_type[:-2]
+        if declared_type != operand_type:
+            self.issue(
+                path,
+                "set_operand_type_mismatch",
+                "set operand type must equal the LOCAL's declared type",
+            )
+
+        selected = state.row_columns.get(str(symbol_id))
+        if selected is None or relation is None or selected[0] != relation:
+            self.issue(
+                path,
+                "set_operand_not_complete_set",
+                "set operand must bind a previously selected complete relation set",
+            )
+            return relation, set()
+        return relation, set(selected[1])
+
     def _relation(self, relation: Any, path: str) -> bool:
         if not isinstance(relation, str) or not self._qualified(relation):
             self.issue(
@@ -3082,6 +4671,12 @@ class _SemanticValidator:
         if type_name.endswith("[]") and type_name[:-2] in self.types:
             return True
         return False
+
+    def _has_normative_envelope(self) -> bool:
+        return (
+            "parent_binding" in self.contract
+            or "structural_feasibility_recovery_v1" in self.contract
+        )
 
     @staticmethod
     def _qualified(identifier: str) -> bool:

@@ -56,6 +56,18 @@ def test_user_pause_surface_is_narrow() -> None:
 def test_internal_checkpoint_cannot_end_the_task() -> None:
     policy = load_policy()
     lifecycle = policy["task_lifecycle"]
+    closeout_report = lifecycle["successful_tranche_closeout_report"]
+    assert closeout_report == {
+        "timing": "before_immediate_next_tranche_start",
+        "audience_style": "concise_lay_terms",
+        "must_name": [
+            "capability_gained",
+            "deliberately_closed_surfaces",
+            "issues_exposed_or_resolved",
+        ],
+        "acknowledgement_required": False,
+        "permission_gate": False,
+    }
     assert (
         lifecycle["terminal_handback_prohibited_when_no_user_decision_required"] is True
     )

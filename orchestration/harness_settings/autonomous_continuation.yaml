@@ -100,6 +100,12 @@ evidence:
   final_closeout_includes_continuation_history: true
 task_lifecycle:
   internal_checkpoint_message_channel: commentary
+  successful_tranche_closeout_report:
+    timing: before_immediate_next_tranche_start
+    audience_style: concise_lay_terms
+    must_name: [capability_gained, deliberately_closed_surfaces, issues_exposed_or_resolved]
+    acknowledgement_required: false
+    permission_gate: false
   terminal_handback_prohibited_when_no_user_decision_required: true
   continue_tools_in_same_task: true
   terminal_handback_allowed_only_when:

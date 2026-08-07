@@ -2,7 +2,8 @@
 
 Date: 2026-08-07
 
-Status: normative Sol recovery frozen before replacement implementation
+Status: normative Sol recovery implemented; replacement candidate passed
+deterministic acceptance and awaits fresh exact-HEAD independent veto
 
 Rejected candidate source HEAD:
 `5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d`
