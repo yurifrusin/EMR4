@@ -685,7 +685,18 @@ def _build_fence_claim() -> dict[str, Any]:
 
 def _build_fence_appointment() -> dict[str, Any]:
     body_id = FABRIC + "cf_fence_appointment_update_v1"
-    symbols = [*_binding_symbols(), *_producer_membership_symbols(), dsl.node_symbol("binding_matches", BINDING + "[]"), dsl.node_symbol("final_appointment", APPOINTMENT), dsl.node_symbol("current_events", EVENT + "[]"), dsl.node_symbol("current_aliases", ALIAS + "[]"), dsl.node_symbol("current_outbox", OUTBOX + "[]")]
+    symbols = [
+        *_binding_symbols(),
+        *_producer_membership_symbols(),
+        dsl.node_symbol("binding_matches", BINDING + "[]"),
+        dsl.node_symbol("final_appointment", APPOINTMENT),
+        dsl.node_symbol("current_events", EVENT + "[]"),
+        dsl.node_symbol("current_event", EVENT),
+        dsl.node_symbol("current_aliases", ALIAS + "[]"),
+        dsl.node_symbol("appointment_alias", ALIAS),
+        dsl.node_symbol("current_outbox", OUTBOX),
+        dsl.node_symbol("current_head", HEAD),
+    ]
     practice = _t("NEW", APPOINTMENT, "practice_id", f"{PG}uuid")
     appointment_id = _t("NEW", APPOINTMENT, "id", f"{PG}uuid")
     temporal = dsl.any_of(dsl.is_distinct(_t("OLD", APPOINTMENT, "start_time", f"{PG}timestamptz"), _t("NEW", APPOINTMENT, "start_time", f"{PG}timestamptz")), dsl.is_distinct(_t("OLD", APPOINTMENT, "duration_minutes", f"{PG}integer"), _t("NEW", APPOINTMENT, "duration_minutes", f"{PG}integer")))
@@ -699,12 +710,260 @@ def _build_fence_appointment() -> dict[str, Any]:
     ]
     positive = [*_producer_membership_nodes(prefix + ".positive", practice, appointment_id=appointment_id), _return(prefix + ".positive.return", "RETURN_NULL")]
     stream = _r("binding", BINDING, "stream_id", f"{PG}uuid")
-    absence_reads = [
-        dsl.select_node(prefix + ".absence.events", relation=EVENT, columns=["id"], predicate=dsl.all_of(dsl.eq(dsl.source_column(EVENT, "practice_id", f"{PG}uuid"), practice), dsl.eq(dsl.source_column(EVENT, "appointment_id", f"{PG}uuid"), appointment_id), dsl.eq(dsl.source_column(EVENT, "event_type", f"{PG}text"), dsl.const(f"{PG}text", EVENT_TYPE)), dsl.eq(dsl.source_column(EVENT, "schema_version", f"{PG}text"), dsl.const(f"{PG}text", EVENT_SCHEMA)), dsl.xmin_equals_current(dsl.source_column(EVENT, "xmin", f"{PG}xid"))), cardinality="COMPLETE_SET", output_symbol="current_events", order_by=["id"], set_read=True),
-        dsl.select_node(prefix + ".absence.aliases", relation=ALIAS, columns=["opaque_aggregate_alias"], predicate=dsl.all_of(dsl.eq(dsl.source_column(ALIAS, "practice_id", f"{PG}uuid"), practice), dsl.eq(dsl.source_column(ALIAS, "stream_id", f"{PG}uuid"), stream), dsl.eq(dsl.source_column(ALIAS, "product_appointment_uuid", f"{PG}uuid"), appointment_id)), cardinality="COMPLETE_SET", output_symbol="current_aliases", order_by=["opaque_aggregate_alias"], set_read=True),
-        dsl.select_node(prefix + ".absence.outbox", relation=OUTBOX, columns=["transaction_position"], predicate=dsl.all_of(dsl.eq(dsl.source_column(OUTBOX, "practice_id", f"{PG}uuid"), practice), dsl.eq(dsl.source_column(OUTBOX, "stream_id", f"{PG}uuid"), stream)), cardinality="COMPLETE_SET", output_symbol="current_outbox", order_by=["transaction_position"], set_read=True),
-        dsl.assert_node(prefix + ".absence.assert", dsl.all_of(*[dsl.eq({"op": "COUNT", "operand": dsl.local_ref(symbol, relation + "[]"), "type": f"{PG}bigint"}, dsl.const(f"{PG}bigint", 0)) for symbol, relation in [("current_events", EVENT), ("current_aliases", ALIAS), ("current_outbox", OUTBOX)]]), "F_TEMPORAL_BIJECTION"),
+    current_event_predicate = dsl.all_of(
+        dsl.eq(
+            dsl.source_column(EVENT, "practice_id", f"{PG}uuid"), practice
+        ),
+        dsl.eq(
+            dsl.source_column(EVENT, "appointment_id", f"{PG}uuid"),
+            appointment_id,
+        ),
+        dsl.eq(
+            dsl.source_column(EVENT, "event_type", f"{PG}text"),
+            dsl.const(f"{PG}text", EVENT_TYPE),
+        ),
+        dsl.eq(
+            dsl.source_column(EVENT, "schema_version", f"{PG}text"),
+            dsl.const(f"{PG}text", EVENT_SCHEMA),
+        ),
+        dsl.xmin_equals_current(
+            dsl.source_column(EVENT, "xmin", f"{PG}xid")
+        ),
+    )
+    current_alias_predicate = dsl.all_of(
+        dsl.eq(
+            dsl.source_column(ALIAS, "practice_id", f"{PG}uuid"), practice
+        ),
+        dsl.eq(
+            dsl.source_column(
+                ALIAS, "source_contract_id", f"{FABRIC}source_contract_code"
+            ),
+            dsl.const(f"{FABRIC}source_contract_code", SOURCE_CONTRACT),
+        ),
+        dsl.eq(dsl.source_column(ALIAS, "stream_id", f"{PG}uuid"), stream),
+        dsl.eq(
+            dsl.source_column(ALIAS, "product_appointment_uuid", f"{PG}uuid"),
+            appointment_id,
+        ),
+        dsl.xmin_equals_current(
+            dsl.source_column(ALIAS, "xmin", f"{PG}xid")
+        ),
+    )
+    exact_alias_predicate = dsl.all_of(
+        dsl.eq(
+            dsl.source_column(ALIAS, "practice_id", f"{PG}uuid"), practice
+        ),
+        dsl.eq(
+            dsl.source_column(
+                ALIAS, "source_contract_id", f"{FABRIC}source_contract_code"
+            ),
+            dsl.const(f"{FABRIC}source_contract_code", SOURCE_CONTRACT),
+        ),
+        dsl.eq(dsl.source_column(ALIAS, "stream_id", f"{PG}uuid"), stream),
+        dsl.eq(
+            dsl.source_column(ALIAS, "product_appointment_uuid", f"{PG}uuid"),
+            appointment_id,
+        ),
+    )
+    current_effect = [
+        dsl.select_node(
+            prefix + ".absence.current-event",
+            relation=EVENT,
+            columns=[
+                "id",
+                "practice_id",
+                "appointment_id",
+                "event_type",
+                "schema_version",
+                "aggregate_revision",
+                "xmin",
+            ],
+            predicate=current_event_predicate,
+            cardinality="EXACTLY_ONE",
+            output_symbol="current_event",
+            order_by=["practice_id", "id"],
+        ),
+        dsl.select_node(
+            prefix + ".absence.exact-alias",
+            relation=ALIAS,
+            columns=ALIAS_COLUMNS,
+            predicate=exact_alias_predicate,
+            cardinality="EXACTLY_ONE",
+            output_symbol="appointment_alias",
+            order_by=[
+                "practice_id",
+                "source_contract_id",
+                "stream_id",
+                "product_appointment_uuid",
+            ],
+        ),
+        dsl.select_node(
+            prefix + ".absence.current-outbox",
+            relation=OUTBOX,
+            columns=OUTBOX_COLUMNS,
+            predicate=dsl.all_of(
+                dsl.eq(
+                    dsl.source_column(OUTBOX, "practice_id", f"{PG}uuid"),
+                    practice,
+                ),
+                dsl.eq(
+                    dsl.source_column(
+                        OUTBOX,
+                        "source_contract_id",
+                        f"{FABRIC}source_contract_code",
+                    ),
+                    dsl.const(
+                        f"{FABRIC}source_contract_code", SOURCE_CONTRACT
+                    ),
+                ),
+                dsl.eq(
+                    dsl.source_column(OUTBOX, "stream_id", f"{PG}uuid"),
+                    stream,
+                ),
+                dsl.eq(
+                    dsl.source_column(OUTBOX, "raw_event_uuid", f"{PG}uuid"),
+                    _r("current_event", EVENT, "id", f"{PG}uuid"),
+                ),
+                dsl.eq(
+                    dsl.source_column(
+                        OUTBOX, "opaque_aggregate_alias", f"{PG}uuid"
+                    ),
+                    _r(
+                        "appointment_alias",
+                        ALIAS,
+                        "opaque_aggregate_alias",
+                        f"{PG}uuid",
+                    ),
+                ),
+                dsl.eq(
+                    dsl.source_column(
+                        OUTBOX, "aggregate_revision", f"{PG}bigint"
+                    ),
+                    _r(
+                        "current_event",
+                        EVENT,
+                        "aggregate_revision",
+                        f"{PG}bigint",
+                    ),
+                ),
+                dsl.eq(
+                    dsl.source_column(
+                        OUTBOX, "predecessor_position", f"{PG}bigint"
+                    ),
+                    dsl.add(
+                        dsl.source_column(
+                            OUTBOX, "transaction_position", f"{PG}bigint"
+                        ),
+                        dsl.const(f"{PG}bigint", -1),
+                        f"{PG}bigint",
+                    ),
+                ),
+                dsl.xmin_equals_current(
+                    dsl.source_column(OUTBOX, "xmin", f"{PG}xid")
+                ),
+            ),
+            cardinality="EXACTLY_ONE",
+            output_symbol="current_outbox",
+            order_by=[
+                "practice_id",
+                "source_contract_id",
+                "stream_id",
+                "stream_epoch",
+                "transaction_position",
+            ],
+        ),
+        dsl.select_node(
+            prefix + ".absence.current-head",
+            relation=HEAD,
+            columns=HEAD_COLUMNS,
+            predicate=dsl.all_of(
+                dsl.eq(
+                    dsl.source_column(HEAD, "practice_id", f"{PG}uuid"),
+                    practice,
+                ),
+                dsl.eq(
+                    dsl.source_column(
+                        HEAD,
+                        "source_contract_id",
+                        f"{FABRIC}source_contract_code",
+                    ),
+                    dsl.const(
+                        f"{FABRIC}source_contract_code", SOURCE_CONTRACT
+                    ),
+                ),
+                dsl.eq(
+                    dsl.source_column(HEAD, "stream_id", f"{PG}uuid"), stream
+                ),
+                dsl.eq(
+                    dsl.source_column(HEAD, "stream_epoch", f"{PG}bigint"),
+                    _r(
+                        "current_outbox", OUTBOX, "stream_epoch", f"{PG}bigint"
+                    ),
+                ),
+                dsl.eq(
+                    dsl.source_column(HEAD, "last_position", f"{PG}bigint"),
+                    _r(
+                        "current_outbox",
+                        OUTBOX,
+                        "transaction_position",
+                        f"{PG}bigint",
+                    ),
+                ),
+                dsl.eq(
+                    dsl.source_column(HEAD, "updated_at", f"{PG}timestamptz"),
+                    dsl.transaction_timestamp(),
+                ),
+                dsl.xmin_equals_current(
+                    dsl.source_column(HEAD, "xmin", f"{PG}xid")
+                ),
+            ),
+            cardinality="EXACTLY_ONE",
+            output_symbol="current_head",
+            order_by=["practice_id", "source_contract_id", "stream_id"],
+        ),
+        _raise(prefix + ".absence.current-effect", "F_TEMPORAL_BIJECTION"),
+    ]
+    no_current_event = [
+        dsl.select_node(
+            prefix + ".absence.aliases",
+            relation=ALIAS,
+            columns=["opaque_aggregate_alias", "xmin"],
+            predicate=current_alias_predicate,
+            cardinality="COMPLETE_SET",
+            output_symbol="current_aliases",
+            order_by=["opaque_aggregate_alias"],
+            set_read=True,
+        ),
+        dsl.assert_node(
+            prefix + ".absence.alias-count",
+            dsl.eq(
+                _count("current_aliases", ALIAS),
+                dsl.const(f"{PG}bigint", 0),
+            ),
+            "F_TEMPORAL_BIJECTION",
+        ),
         _return(prefix + ".absence.return", "RETURN_NULL"),
+    ]
+    absence_reads = [
+        dsl.select_node(
+            prefix + ".absence.events",
+            relation=EVENT,
+            columns=["id", "xmin"],
+            predicate=current_event_predicate,
+            cardinality="COMPLETE_SET",
+            output_symbol="current_events",
+            order_by=["id"],
+            set_read=True,
+        ),
+        _if(
+            prefix + ".absence.event-count",
+            dsl.eq(
+                _count("current_events", EVENT),
+                dsl.const(f"{PG}bigint", 0),
+            ),
+            no_current_event,
+            current_effect,
+        ),
     ]
     common.append(_if(prefix + ".temporal", temporal, positive, absence_reads))
     update = [

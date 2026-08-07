@@ -66,6 +66,9 @@ derived from one internally consistent census:
   checkpoint set, with exact one-per-generation coverage;
 - source, receipt/checkpoint and audit grace compare the exact policy intervals
   to `transaction_timestamp()` and the derived through-position; and
+- seconds-valued policy intervals use the closed typed
+  `TIMESTAMP_ADD_SECONDS` operation; they are never interpreted as minutes or
+  rounded through a unit conversion; and
 - key coverage proves an actual overlapping interval for every retained
   generation/position that remains required, not merely a non-empty key set.
 

@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.local-command-failure-receipt.v1",
+  "observed_on": "2026-08-07",
+  "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+  "operation": "generate_contract_and_schema_artifacts",
+  "failed_command_shape": "python scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder.py",
+  "exit_status": "nonzero",
+  "reason_code": "python_package_module_invoked_by_path",
+  "sanitized_error": "ModuleNotFoundError: No module named scripts",
+  "failure_point": "schema_module_import_before_artifact_open_or_write",
+  "candidate_changed": false,
+  "generated_artifact_changed_by_failed_attempt": false,
+  "worker_dispatch_changed": false,
+  "provider_call_count": 0,
+  "database_contact": false,
+  "protected_ref_changed": false,
+  "correction": {
+    "command_shape": "python -m scripts.raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder",
+    "result": "contract_and_schema_generated",
+    "exit_status": "zero"
+  }
+}

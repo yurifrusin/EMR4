@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 66
+    assert register["register_revision"] == 69
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 66)
+        f"AER-{index:04d}" for index in range(1, 69)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 52
+    assert len(agent_incidents) == 54
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -412,6 +412,92 @@ def test_function_trigger_body_recovery_receipt_preserves_empty_required_pool() 
     }
     assert inventories["deepseek-flash-workers"] == ([], [])
     assert incident["status"] == "corrected"
+
+
+def test_function_trigger_schema_module_path_failure_reuses_package_control() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0066"
+    ]
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-schema-direct-invocation-failure-receipt.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.python_package_script_path_invocation"
+    )
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert receipt["reason_code"] == "python_package_module_invoked_by_path"
+    assert receipt["candidate_changed"] is False
+    assert receipt["correction"]["result"] == "module_import_pass"
+    assert incident["status"] == "corrected"
+
+
+def test_function_trigger_builder_path_failure_tightens_package_control() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0067"
+    ]
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-builder-direct-invocation-failure-receipt.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.python_package_script_path_invocation"
+    )
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert receipt["failure_point"] == (
+        "schema_module_import_before_artifact_open_or_write"
+    )
+    assert receipt["generated_artifact_changed_by_failed_attempt"] is False
+    assert receipt["correction"]["result"] == "contract_and_schema_generated"
+    assert incident["status"] == "corrected"
+
+
+def test_function_trigger_api_spine_baseline_drift_is_contained() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0068"
+    ]
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-api-spine-baseline-failure-receipt.json"
+    )
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["recurrence_signature"] == (
+        "repository.api_spine_historical_expectation_drift"
+    )
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert receipt["remaining_cohort"] == {
+        "file_count": 57,
+        "collected_test_count": 535,
+        "passed_test_count": 530,
+        "failed_test_count": 5,
+        "failed_paths": [
+            "tests/test_api_spine_update_confirm_idempotency_preflight.py",
+            "tests/test_api_spine_status_confirm_idempotency_preflight.py",
+            "tests/test_api_spine_practitioner_directory_security_audit_preflight.py",
+            "tests/test_api_spine_idempotency_continuity_index.py",
+            "tests/test_api_spine_external_read_model_gap_inventory.py",
+        ],
+        "failure_class": "historical_preflight_or_inventory_expectation_drift",
+    }
+    assert receipt["implicated_paths_changed_since_source_head"] is False
+    assert incident["status"] == "contained"
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -1034,30 +1120,44 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 65
+    assert report["incident_count"] == 68
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 52,
+        "agent_behavior": 54,
         "harness": 4,
-        "repository": 2,
+        "repository": 3,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 10,
+        "command_scope_violation": 12,
         "evidence_misreport": 6,
         "harness_failure": 4,
         "output_contract_violation": 22,
         "read_only_violation": 2,
         "reasoning_claim_error": 12,
-        "repository_defect": 2,
+        "repository_defect": 3,
         "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 51,
+        "canonical_unchanged": 54,
         "untrusted_partial_worktree": 12,
     }
     assert report["recurring_patterns"] == [
+        {
+            "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+            "incident_count": 3,
+            "incident_ids": ["AER-0058", "AER-0066", "AER-0067"],
+            "origins": ["agent_behavior"],
+            "categories": ["command_scope_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
+                "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
+                "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path.",
+            ],
+        },
         {
             "recurrence_signature": "verifier.exact_packet_test_count_underreport",
             "incident_count": 2,

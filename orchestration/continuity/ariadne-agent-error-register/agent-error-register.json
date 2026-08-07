@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 66,
+  "register_revision": 69,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-07",
@@ -2571,6 +2571,117 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0066",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-schema-cli-inspection-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A repository module that imports the scripts package must be invoked or imported with the repository root on Python's module path, following the existing AER-0058 prevention control.",
+      "observed_error": "While inspecting generator command interfaces, Sol invoked the schema module by filesystem path. It failed closed at import with ModuleNotFoundError before executing a generator, reading a candidate or writing any artifact.",
+      "detection_method": "The command returned a non-zero status and exact import error inline; Git state remained unchanged and the distinct correction imported the module through the repository package path successfully.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-schema-direct-invocation-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-67.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed invocation is preserved. Sol imported the schema module through the repository package path, confirmed build_schema was available and made no repository write.",
+        "prevention_control": "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-schema-direct-invocation-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-67.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0067",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-artifact-build-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "After the recurrent package-path failure AER-0066, the import-dependent artifact builder must be invoked through python -m from the repository root.",
+      "observed_error": "Sol again invoked an import-dependent scripts module by filesystem path. The builder completed only its in-memory contract step, then failed closed while importing the schema module before either generated artifact was opened or written.",
+      "detection_method": "The command returned ModuleNotFoundError inline. The distinct repository-root package-module invocation then wrote both generated artifacts and exited successfully.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-builder-direct-invocation-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-68.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed command is preserved. Sol invoked the builder as python -m scripts.raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder from the repository root; the validated contract and schema were then generated successfully.",
+        "prevention_control": "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-builder-direct-invocation-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-68.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0068",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-api-spine-regression-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "api-spine-historical-regression-suite",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The historical API Spine regression cohort should collect and pass on the recovery source HEAD before it is used as corroborating evidence for an unrelated unmounted architecture descendant.",
+      "observed_error": "One API Spine integration module could not collect because it imports the removed _BERNIE_SESSION_STORE. After that file was explicitly isolated, 535 tests collected and 530 passed; five stale preflight or inventory assertions disagreed with already-present idempotency headers, GraphQL resolvers, OpenAPI command paths and SDL inventory.",
+      "detection_method": "Sol ran all fifty-eight API Spine test files serially, preserved the collection traceback, reran the remaining fifty-seven files, collected the exact 535-test population and verified every implicated app, API-document and test path was byte-unchanged from recovery source HEAD 7ad40bd337ac6433bd6cc84653dd5883679ed13b.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-api-spine-baseline-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-69.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.api_spine_historical_expectation_drift",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The baseline defect is contained as non-candidate evidence. This tranche makes no app, router, OpenAPI, GraphQL SDL, idempotency-index or historical-test repair and relies on its passing architecture-specific suites plus scoped API Spine invariants.",
+        "prevention_control": "Future cross-programme regression gates must run a source-HEAD baseline preflight and separate pre-existing collection or expectation drift from candidate-caused regressions before using the suite as acceptance evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-api-spine-baseline-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-69.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

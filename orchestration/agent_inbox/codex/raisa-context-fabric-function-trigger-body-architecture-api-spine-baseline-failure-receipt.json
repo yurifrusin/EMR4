@@ -1,0 +1,34 @@
+{
+  "schema_version": "ariadne.local-test-baseline-failure-receipt.v1",
+  "observed_on": "2026-08-07",
+  "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+  "source_head": "7ad40bd337ac6433bd6cc84653dd5883679ed13b",
+  "scope": "all_test_api_spine_python_files",
+  "file_count": 58,
+  "collection_failure": {
+    "path": "tests/test_api_spine_confirmation_family_idempotency_integration.py",
+    "reason": "ImportError: cannot import name _BERNIE_SESSION_STORE from app.routers.appointments",
+    "current_router_store": "DatabaseBernieSessionStore via _bernie_session_store"
+  },
+  "remaining_cohort": {
+    "file_count": 57,
+    "collected_test_count": 535,
+    "passed_test_count": 530,
+    "failed_test_count": 5,
+    "failed_paths": [
+      "tests/test_api_spine_update_confirm_idempotency_preflight.py",
+      "tests/test_api_spine_status_confirm_idempotency_preflight.py",
+      "tests/test_api_spine_practitioner_directory_security_audit_preflight.py",
+      "tests/test_api_spine_idempotency_continuity_index.py",
+      "tests/test_api_spine_external_read_model_gap_inventory.py"
+    ],
+    "failure_class": "historical_preflight_or_inventory_expectation_drift"
+  },
+  "implicated_paths_changed_since_source_head": false,
+  "candidate_caused_regression_claimed": false,
+  "candidate_architecture_test_status": "passed",
+  "provider_call_count": 0,
+  "database_mutation_outside_test_fixture": false,
+  "protected_ref_changed": false,
+  "disposition": "contained_out_of_scope_baseline_evidence"
+}

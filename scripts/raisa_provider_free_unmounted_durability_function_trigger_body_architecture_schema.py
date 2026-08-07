@@ -13,8 +13,10 @@ from typing import Any, Mapping, Sequence
 
 from scripts.raisa_provider_free_unmounted_durability_function_trigger_body_architecture_validator import (
     EXACT_ENTRY_POINTS,
+    EXACT_ENUM_VALUES,
     EXACT_SUPPORT_FUNCTION,
     EXACT_TRIGGER_FUNCTIONS,
+    assert_normative_envelope,
 )
 
 
@@ -66,13 +68,15 @@ def _ref(name: str) -> dict[str, str]:
 
 
 def _position_array(items: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    return {
+    schema: dict[str, Any] = {
         "type": "array",
-        "prefixItems": [dict(item) for item in items],
         "minItems": len(items),
         "maxItems": len(items),
         "items": False,
     }
+    if items:
+        schema["prefixItems"] = [dict(item) for item in items]
+    return schema
 
 
 def _overlay_id(base: Mapping[str, Any], **constants: str) -> dict[str, Any]:
@@ -137,6 +141,18 @@ def _structural_shape(value: Any) -> dict[str, Any]:
         item_schema = schemas[0] if len(schemas) == 1 else {"oneOf": schemas}
         return _array(item_schema)
     raise TypeError(f"unsupported JSON value {type(value)!r}")
+
+
+def _normative_shape(value: Any) -> dict[str, Any]:
+    """Freeze scalar meaning and ordered populations without complex consts."""
+
+    if isinstance(value, Mapping):
+        return _closed_object(
+            {str(key): _normative_shape(item) for key, item in value.items()}
+        )
+    if isinstance(value, list):
+        return _position_array([_normative_shape(item) for item in value])
+    return {"const": value}
 
 
 def _expression_defs() -> dict[str, Any]:
@@ -207,22 +223,62 @@ def _expression_defs() -> dict[str, Any]:
         ]
     )
 
-    expression_branches: list[dict[str, Any]] = [
-        {"oneOf": ref_branches},
+    enum_types = sorted(EXACT_ENUM_VALUES)
+    enum_array_types = [f"{enum_type}[]" for enum_type in enum_types]
+    non_enum_type = {
+        "allOf": [
+            type_name,
+            {"not": {"enum": [*enum_types, *enum_array_types]}},
+        ]
+    }
+    const_branches = [
         _closed_object(
             {
                 "op": {"const": "CONST"},
-                "type": type_name,
+                "type": {"const": enum_type},
+                "value": {
+                    "anyOf": [
+                        {"type": "null"},
+                        {"enum": list(values)},
+                    ]
+                },
+            }
+        )
+        for enum_type, values in sorted(EXACT_ENUM_VALUES.items())
+    ]
+    const_branches.append(
+        _closed_object(
+            {
+                "op": {"const": "CONST"},
+                "type": non_enum_type,
                 "value": _ref("json_value"),
             }
-        ),
+        )
+    )
+    array_const_branches = [
         _closed_object(
             {
                 "op": {"const": "ARRAY_CONST"},
-                "type": type_name,
+                "type": {"const": f"{enum_type}[]"},
+                "values": _array({"enum": list(values)}),
+            }
+        )
+        for enum_type, values in sorted(EXACT_ENUM_VALUES.items())
+    ]
+    array_const_branches.append(
+        _closed_object(
+            {
+                "op": {"const": "ARRAY_CONST"},
+                "type": non_enum_type,
                 "values": _array(_ref("json_value")),
             }
-        ),
+        )
+    )
+
+    expression_branches: list[dict[str, Any]] = [
+        {"oneOf": ref_branches},
+        {"oneOf": const_branches},
+        {"oneOf": array_const_branches},
         _closed_object(
             {
                 "op": {"const": "FIELD"},
@@ -286,6 +342,7 @@ def _expression_defs() -> dict[str, Any]:
         "ADD",
         "SUBTRACT",
         "TIMESTAMP_ADD_MINUTES",
+        "TIMESTAMP_ADD_SECONDS",
     ):
         expression_branches.append(
             _closed_object(
@@ -743,6 +800,12 @@ def build_schema(contract: Mapping[str, Any]) -> dict[str, Any]:
 
     if not isinstance(contract, Mapping):
         raise TypeError("contract must be an object")
+    normative_envelope_present = (
+        "parent_binding" in contract
+        or "structural_feasibility_recovery_v1" in contract
+    )
+    if normative_envelope_present:
+        assert_normative_envelope(contract)
     signatures = _extract_signature_groups(contract)
     entry_signatures = signatures.get("entry_points")
     trigger_signatures = signatures.get("trigger_functions")
@@ -876,6 +939,19 @@ def build_schema(contract: Mapping[str, Any]) -> dict[str, Any]:
             ]
         )
     top_properties["effective_parent_summary"] = parent_schema
+    if normative_envelope_present:
+        for normative_section in (
+            "parent_binding",
+            "structural_feasibility_recovery_v1",
+            "effective_parent_summary",
+            "typed_ir_contract",
+            "trigger_applicability_return_matrix",
+            "renderer_order",
+            "artifact_boundary",
+        ):
+            top_properties[normative_section] = _normative_shape(
+                contract[normative_section]
+            )
 
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",

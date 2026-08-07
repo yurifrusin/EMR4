@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_three_disjoint_exact_veto_recovery_lanes",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The active plan plus structural, implementation, typed-IR and exact-veto recoveries require exactly nine entry and thirteen trigger bodies. Recovery commit 7ad40bd337ac6433bd6cc84653dd5883679ed13b adds the four binding corrections: complete coordinator state/effects, complete non-consumed retention/grace/key proof, current-XID-only non-temporal effects and independent recovery/signature/privilege/enum/proof closure. Three exact worker packets bind owned paths, checks and result format.",
+    "current_authority_allocation": "GPT Sol is conductor, recovery and acceptance owner. Three native workers receive only disjoint coordinator/retention, transaction-fence and normative-validator/schema implementation paths. They may not accept, integrate, stage, commit, push, move refs or broaden scope. A different fresh exact-head reviewer remains mandatory after deterministic integration.",
+    "git_refs_and_worktree": "After recovery commit, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 7ad40bd337ac6433bd6cc84653dd5883679ed13b; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The only new untracked tranche files are the three exact worker packets; docs/branding and all unrelated untracked files remain untouched.",
+    "live_handover_current_baton": "AGENTS.md names the provider-free unmounted function-and-trigger-body architecture as the active planned descendant and Yuri's standing authority requires recovery to continue without a ceremonial pause. Rejected candidate f51f5b65 remains negative evidence; recovery commit 7ad40bd3 freezes the next exact boundary.",
+    "protected_evidence_boundaries": "Only repository-authored provider-free unmounted architecture code/tests and named worker receipts may change. Protected holdouts, historical diary PHI, patient/product/clinical data, SQL/DDL execution, database/source/feed/watcher/listener, provider/network, app/API/Diary/runtime, command/write, credentials, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked artifacts remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

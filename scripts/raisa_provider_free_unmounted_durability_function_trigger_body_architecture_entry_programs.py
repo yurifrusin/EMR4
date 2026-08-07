@@ -142,6 +142,22 @@ def _if(node_id: str, condition: dict[str, Any], then: list[dict[str, Any]], oth
     return dsl.node(node_id, "IF", condition=condition, then=then, **{"else": otherwise}, convergence="ALL_TERMINAL")
 
 
+def _if_rejoin(
+    node_id: str,
+    condition: dict[str, Any],
+    then: list[dict[str, Any]],
+    otherwise: list[dict[str, Any]],
+) -> dict[str, Any]:
+    return dsl.node(
+        node_id,
+        "IF",
+        condition=condition,
+        then=then,
+        **{"else": otherwise},
+        convergence="REJOIN",
+    )
+
+
 def _composite(type_name: str, fields: list[tuple[str, dict[str, Any]]]) -> dict[str, Any]:
     return {"op": "COMPOSITE_CONSTRUCT", "type": type_name, "fields": [{"field": name, "value": value} for name, value in fields]}
 
@@ -242,7 +258,7 @@ def build_admission_body() -> dict[str, Any]:
     binding_revision = _col("binding", BINDING, "binding_revision")
     primary_bindings = _admission_bindings(loc, position, packet, binding_revision, kind="PRIMARY", attempted=attempted, conflict=None)
     mismatch_bindings = _admission_bindings(loc, position, packet, binding_revision, kind="CONFLICT", attempted=attempted, conflict="POSITION_DIGEST_MISMATCH")
-    reuse_bindings = _admission_bindings(loc, position, packet, binding_revision, kind="CONFLICT", attempted=attempted, conflict="DIGEST_REUSE")
+    reuse_bindings = _admission_bindings(loc, position, packet, binding_revision, kind="CONFLICT", attempted=attempted, conflict="OBSERVATION_DIGEST_REUSE")
 
     retained_primary = [
         dsl.select_node(f"{body_id}.retained_primary", relation=ADMISSION, columns=COLUMNS[ADMISSION], predicate=primary_pred, cardinality="EXACTLY_ONE", output_symbol="retained_primary", order_by=COORDS+["source_position", "entry_kind"]),
@@ -356,21 +372,175 @@ def build_coordinator_body() -> dict[str, Any]:
     binding_nodes, binding_symbols = _binding(body_id, "COORDINATOR", loc)
     scope = {key: loc[key] for key in ("practice_id", "source_contract_id", "stream_id")}
     coordinate = {**loc, "source_position": position}
-    primary_pred = dsl.all_of(_predicate(ADMISSION, coordinate), dsl.eq(_src(ADMISSION, "entry_kind"), dsl.const(F+"admission_entry_kind", "PRIMARY")))
+    primary_pred = dsl.all_of(
+        _predicate(ADMISSION, coordinate),
+        dsl.eq(
+            _src(ADMISSION, "entry_kind"),
+            dsl.const(F + "admission_entry_kind", "PRIMARY"),
+        ),
+    )
+    conflict_pred = dsl.all_of(
+        _predicate(ADMISSION, coordinate),
+        dsl.eq(
+            _src(ADMISSION, "entry_kind"),
+            dsl.const(F + "admission_entry_kind", "CONFLICT"),
+        ),
+    )
     receipt_pred = _predicate(RECEIPT, coordinate)
+    source_position_pred = _predicate(
+        SOURCE,
+        {
+            **scope,
+            "transaction_position": position,
+        },
+    )
+    current_frame_pred = dsl.all_of(
+        _predicate(FRAME, loc),
+        dsl.eq(
+            _src(FRAME, "lifecycle_state"),
+            dsl.const(F + "frame_lifecycle", "CURRENT"),
+        ),
+    )
+    watermark_pred = _predicate(WATERMARK, loc)
+    pending_obligation_pred = dsl.all_of(
+        _predicate(OBLIGATION, loc),
+        dsl.eq(
+            _src(OBLIGATION, "obligation_state"),
+            dsl.const(F + "obligation_state", "PENDING"),
+        ),
+    )
+    current_anchor_pred = _predicate(
+        ANCHOR,
+        {
+            **loc,
+            "lifecycle_revision": _col(
+                "checkpoint", CHECKPOINT, "lifecycle_revision"
+            ),
+        },
+    )
     next_revision = dsl.add(_col("checkpoint", CHECKPOINT, "lifecycle_revision"), dsl.const(PG+"bigint", 1), PG+"bigint")
     rebase_integrity = dsl.digest(F+"checkpoint_rebase_digest_v1", [*loc.values(), position, next_revision])
     applied_integrity = dsl.digest(F+"checkpoint_apply_digest_v1", [*loc.values(), position, _col("primary", ADMISSION, "admission_digest"), next_revision])
 
+    terminal_disposition = dsl.case(
+        F + "checkpoint_disposition",
+        [
+            {
+                "when": dsl.eq(
+                    _col("checkpoint", CHECKPOINT, "checkpoint_state"),
+                    dsl.const(F + "checkpoint_state", "REBASE_REQUIRED"),
+                ),
+                "then": dsl.const(
+                    F + "checkpoint_disposition", "HOLD_REBASE"
+                ),
+            }
+        ],
+        dsl.const(F + "checkpoint_disposition", "STOP_GENERATION"),
+    )
     terminal_result = _transition_result(
-        kind="TERMINAL_REPLAYED", checkpoint_symbol="checkpoint", source_position=position,
-        decision=dsl.const(F+"observation_decision", "HOLD_REBASE"),
-        reason=dsl.const(F+"observation_reason", "GENERATION_TERMINAL"),
-        disposition=dsl.const(F+"checkpoint_disposition", "UNCHANGED"),
+        kind="TERMINAL_REPLAYED",
+        checkpoint_symbol="checkpoint",
+        source_position=_col("terminal_lifecycle", LIFECYCLE, "source_position"),
+        decision=_col("terminal_audit", AUDIT, "decision"),
+        reason=_col("terminal_audit", AUDIT, "reason_code"),
+        disposition=terminal_disposition,
         revision=_col("checkpoint", CHECKPOINT, "lifecycle_revision"),
         evidence=_col("checkpoint", CHECKPOINT, "checkpoint_integrity_digest"),
     )
     terminal_branch = [
+        dsl.lock_node(
+            f"{body_id}.lock_terminal_lifecycle",
+            relation=LIFECYCLE,
+            predicate=_predicate(
+                LIFECYCLE,
+                {
+                    **loc,
+                    "lifecycle_revision": _col(
+                        "checkpoint", CHECKPOINT, "lifecycle_revision"
+                    ),
+                },
+            ),
+            key_columns=COORDS + ["lifecycle_revision"],
+            mode="FOR_SHARE",
+            order=4,
+            output_symbol="terminal_lifecycle",
+            columns=COLUMNS[LIFECYCLE],
+        ),
+        dsl.lock_node(
+            f"{body_id}.lock_terminal_audit",
+            relation=AUDIT,
+            predicate=_predicate(
+                AUDIT,
+                {
+                    **loc,
+                    "lifecycle_revision": _col(
+                        "checkpoint", CHECKPOINT, "lifecycle_revision"
+                    ),
+                },
+            ),
+            key_columns=COORDS + ["lifecycle_revision"],
+            mode="FOR_SHARE",
+            order=5,
+            output_symbol="terminal_audit",
+            columns=COLUMNS[AUDIT],
+        ),
+        dsl.assert_node(
+            f"{body_id}.terminal_integrity",
+            dsl.all_of(
+                dsl.binary(
+                    "NE",
+                    _col("generation", GENERATION, "lifecycle_state"),
+                    dsl.const(F + "generation_state", "ACTIVE"),
+                ),
+                dsl.any_of(
+                    dsl.all_of(
+                        dsl.eq(
+                            _col("checkpoint", CHECKPOINT, "checkpoint_state"),
+                            dsl.const(
+                                F + "checkpoint_state", "REBASE_REQUIRED"
+                            ),
+                        ),
+                        dsl.eq(
+                            _col("generation", GENERATION, "lifecycle_state"),
+                            dsl.const(
+                                F + "generation_state", "REBASE_REQUIRED"
+                            ),
+                        ),
+                    ),
+                    dsl.all_of(
+                        dsl.eq(
+                            _col("checkpoint", CHECKPOINT, "checkpoint_state"),
+                            dsl.const(F + "checkpoint_state", "REVOKED"),
+                        ),
+                        dsl.eq(
+                            _col("generation", GENERATION, "lifecycle_state"),
+                            dsl.const(F + "generation_state", "REVOKED"),
+                        ),
+                    ),
+                    dsl.all_of(
+                        dsl.eq(
+                            _col("checkpoint", CHECKPOINT, "checkpoint_state"),
+                            dsl.const(F + "checkpoint_state", "CONSUMED"),
+                        ),
+                        dsl.eq(
+                            _col("generation", GENERATION, "lifecycle_state"),
+                            dsl.const(F + "generation_state", "CONSUMED"),
+                        ),
+                    ),
+                ),
+                dsl.eq(
+                    _col("terminal_lifecycle", LIFECYCLE, "lifecycle_digest"),
+                    _col(
+                        "checkpoint", CHECKPOINT, "checkpoint_integrity_digest"
+                    ),
+                ),
+                dsl.eq(
+                    _col("terminal_audit", AUDIT, "audit_head_digest"),
+                    _col("checkpoint", CHECKPOINT, "audit_head_digest"),
+                ),
+            ),
+            "F_STATE",
+        ),
         dsl.let_node(f"{body_id}.terminal_result", "terminal_result", result_type, terminal_result),
         _retry_or_return(body_id, "terminal", "terminal_result", result_type, composite=True),
     ]
@@ -386,51 +556,175 @@ def build_coordinator_body() -> dict[str, Any]:
         ("evidence_digest", _col("stored_receipt", RECEIPT, "receipt_digest")),
     ])
     receipt_replay = [
-        dsl.lock_node(f"{body_id}.lock_receipt", relation=RECEIPT, predicate=receipt_pred, key_columns=COORDS+["source_position"], mode="FOR_UPDATE", order=5, output_symbol="stored_receipt", columns=COLUMNS[RECEIPT]),
-        dsl.assert_node(f"{body_id}.receipt_primary", dsl.eq(_col("stored_receipt", RECEIPT, "admission_entry_kind"), dsl.const(F+"admission_entry_kind", "PRIMARY")), "F_STATE"),
+        dsl.lock_node(f"{body_id}.lock_receipt", relation=RECEIPT, predicate=receipt_pred, key_columns=COORDS+["source_position"], mode="FOR_UPDATE", order=4, output_symbol="stored_receipt", columns=COLUMNS[RECEIPT]),
+        dsl.lock_node(f"{body_id}.lock_replay_primary", relation=ADMISSION, predicate=primary_pred, key_columns=COORDS+["source_position", "entry_kind"], mode="FOR_SHARE", order=5, output_symbol="replay_primary", columns=COLUMNS[ADMISSION]),
+        dsl.assert_node(
+            f"{body_id}.receipt_integrity",
+            dsl.all_of(
+                dsl.eq(
+                    _col("stored_receipt", RECEIPT, "admission_entry_kind"),
+                    dsl.const(F + "admission_entry_kind", "PRIMARY"),
+                ),
+                dsl.eq(
+                    _col("stored_receipt", RECEIPT, "observation_digest"),
+                    _col("replay_primary", ADMISSION, "observation_digest"),
+                ),
+                dsl.eq(
+                    _col("stored_receipt", RECEIPT, "decision"),
+                    _col("replay_primary", ADMISSION, "decision"),
+                ),
+                dsl.eq(
+                    _col("stored_receipt", RECEIPT, "reason_code"),
+                    _col("replay_primary", ADMISSION, "reason_code"),
+                ),
+                dsl.eq(
+                    _col("stored_receipt", RECEIPT, "affected_frame_mask"),
+                    _col("replay_primary", ADMISSION, "affected_frame_mask"),
+                ),
+                dsl.eq(
+                    _col("stored_receipt", RECEIPT, "checkpoint_disposition"),
+                    _col("replay_primary", ADMISSION, "checkpoint_disposition"),
+                ),
+                dsl.eq(
+                    _col("stored_receipt", RECEIPT, "lifecycle_revision"),
+                    _col("checkpoint", CHECKPOINT, "lifecycle_revision"),
+                ),
+            ),
+            "F_STATE",
+        ),
         dsl.let_node(f"{body_id}.replay_result", "replay_result", result_type, replay_result),
         _retry_or_return(body_id, "receipt_replay", "replay_result", result_type, composite=True),
     ]
 
-    rebase_lifecycle_bindings = [(name, loc[name]) for name in COORDS] + [
-        ("lifecycle_revision", next_revision),
-        ("entry_kind", dsl.const(F+"lifecycle_entry_kind", "REBASE")),
-        ("source_position", position),
-        ("key_interval_start", dsl.const(PG+"bigint", None)),
-        ("key_interval_end", dsl.const(PG+"bigint", None)),
-        ("prior_lifecycle_digest", _col("anchor", ANCHOR, "anchor_digest")),
-        ("lifecycle_digest", rebase_integrity),
-        ("created_at", dsl.transaction_timestamp()),
-    ]
-    rebase_audit_bindings = [(name, loc[name]) for name in COORDS] + [
-        ("lifecycle_revision", next_revision),
-        ("decision", dsl.const(F+"observation_decision", "HOLD_REBASE")),
-        ("reason_code", dsl.const(F+"observation_reason", "MISSING_ADMISSION")),
-        ("affected_frame_mask", dsl.const(F+"frame_mask", "NONE")),
-        ("prior_audit_digest", _col("checkpoint", CHECKPOINT, "audit_head_digest")),
-        ("audit_head_digest", rebase_integrity),
-        ("created_at", dsl.transaction_timestamp()),
-    ]
-    rebase_branch = [
-        dsl.insert_node(f"{body_id}.rebase_lifecycle", relation=LIFECYCLE, bindings=rebase_lifecycle_bindings, output_symbol="rebase_lifecycle", returning_columns=COLUMNS[LIFECYCLE]),
-        dsl.insert_node(f"{body_id}.rebase_audit", relation=AUDIT, bindings=rebase_audit_bindings, output_symbol="rebase_audit", returning_columns=COLUMNS[AUDIT]),
-        dsl.update_node(f"{body_id}.rebase_checkpoint", relation=CHECKPOINT, predicate=_predicate(CHECKPOINT, loc), key_columns=COORDS, bindings=[
-            ("checkpoint_state", dsl.const(F+"checkpoint_state", "REBASING")),
+    rebase_symbols: list[tuple[str, str]] = []
+
+    def rebase_branch(tag: str, reason: dict[str, Any]) -> list[dict[str, Any]]:
+        lifecycle_symbol = f"rebase_lifecycle_{tag}"
+        audit_symbol = f"rebase_audit_{tag}"
+        generation_symbol = f"rebased_generation_{tag}"
+        checkpoint_symbol = f"rebased_checkpoint_{tag}"
+        result_symbol = f"rebase_result_{tag}"
+        rebase_symbols.extend(
+            [
+                (lifecycle_symbol, LIFECYCLE),
+                (audit_symbol, AUDIT),
+                (generation_symbol, GENERATION),
+                (checkpoint_symbol, CHECKPOINT),
+                (result_symbol, result_type),
+            ]
+        )
+        lifecycle_bindings = [(name, loc[name]) for name in COORDS] + [
             ("lifecycle_revision", next_revision),
+            ("entry_kind", dsl.const(F + "lifecycle_entry_kind", "DECISION")),
+            ("source_position", position),
+            ("key_interval_start", dsl.const(PG + "bigint", None)),
+            ("key_interval_end", dsl.const(PG + "bigint", None)),
+            (
+                "prior_lifecycle_digest",
+                _col("checkpoint", CHECKPOINT, "checkpoint_integrity_digest"),
+            ),
+            ("lifecycle_digest", rebase_integrity),
+            ("created_at", dsl.transaction_timestamp()),
+        ]
+        audit_bindings = [(name, loc[name]) for name in COORDS] + [
+            ("lifecycle_revision", next_revision),
+            (
+                "decision",
+                dsl.const(F + "observation_decision", "REBASE_REQUIRED"),
+            ),
+            ("reason_code", reason),
+            ("affected_frame_mask", dsl.const(F + "frame_mask", 0)),
+            (
+                "prior_audit_digest",
+                _col("checkpoint", CHECKPOINT, "audit_head_digest"),
+            ),
             ("audit_head_digest", rebase_integrity),
-            ("checkpoint_integrity_digest", rebase_integrity),
-            ("updated_at", dsl.transaction_timestamp()),
-        ], output_symbol="rebased_checkpoint", returning_columns=COLUMNS[CHECKPOINT]),
-        dsl.let_node(f"{body_id}.rebase_result", "rebase_result", result_type, _transition_result(
-            kind="REBASE_APPLIED", checkpoint_symbol="rebased_checkpoint", source_position=position,
-            decision=dsl.const(F+"observation_decision", "HOLD_REBASE"),
-            reason=dsl.const(F+"observation_reason", "MISSING_ADMISSION"),
-            disposition=dsl.const(F+"checkpoint_disposition", "REBASE"),
-            revision=_col("rebased_checkpoint", CHECKPOINT, "lifecycle_revision"),
-            evidence=_col("rebased_checkpoint", CHECKPOINT, "checkpoint_integrity_digest"),
-        )),
-        _retry_or_return(body_id, "rebase", "rebase_result", result_type, composite=True),
-    ]
+            ("created_at", dsl.transaction_timestamp()),
+        ]
+        return [
+            dsl.insert_node(
+                f"{body_id}.rebase_lifecycle.{tag}",
+                relation=LIFECYCLE,
+                bindings=lifecycle_bindings,
+                output_symbol=lifecycle_symbol,
+                returning_columns=COLUMNS[LIFECYCLE],
+            ),
+            dsl.insert_node(
+                f"{body_id}.rebase_audit.{tag}",
+                relation=AUDIT,
+                bindings=audit_bindings,
+                output_symbol=audit_symbol,
+                returning_columns=COLUMNS[AUDIT],
+            ),
+            dsl.update_node(
+                f"{body_id}.rebase_generation.{tag}",
+                relation=GENERATION,
+                predicate=_predicate(GENERATION, loc),
+                key_columns=COORDS,
+                bindings=[
+                    (
+                        "lifecycle_state",
+                        dsl.const(F + "generation_state", "REBASE_REQUIRED"),
+                    ),
+                    (
+                        "terminal_reason",
+                        dsl.const(F + "generation_terminal_reason", None),
+                    ),
+                ],
+                output_symbol=generation_symbol,
+                returning_columns=COLUMNS[GENERATION],
+            ),
+            dsl.update_node(
+                f"{body_id}.rebase_checkpoint.{tag}",
+                relation=CHECKPOINT,
+                predicate=_predicate(CHECKPOINT, loc),
+                key_columns=COORDS,
+                bindings=[
+                    (
+                        "checkpoint_state",
+                        dsl.const(F + "checkpoint_state", "REBASE_REQUIRED"),
+                    ),
+                    ("lifecycle_revision", next_revision),
+                    ("audit_head_digest", rebase_integrity),
+                    ("checkpoint_integrity_digest", rebase_integrity),
+                    ("updated_at", dsl.transaction_timestamp()),
+                ],
+                output_symbol=checkpoint_symbol,
+                returning_columns=COLUMNS[CHECKPOINT],
+            ),
+            dsl.let_node(
+                f"{body_id}.rebase_result.{tag}",
+                result_symbol,
+                result_type,
+                _transition_result(
+                    kind="REBASE_APPLIED",
+                    checkpoint_symbol=checkpoint_symbol,
+                    source_position=position,
+                    decision=dsl.const(
+                        F + "observation_decision", "REBASE_REQUIRED"
+                    ),
+                    reason=reason,
+                    disposition=dsl.const(
+                        F + "checkpoint_disposition", "HOLD_REBASE"
+                    ),
+                    revision=_col(
+                        checkpoint_symbol, CHECKPOINT, "lifecycle_revision"
+                    ),
+                    evidence=_col(
+                        checkpoint_symbol,
+                        CHECKPOINT,
+                        "checkpoint_integrity_digest",
+                    ),
+                ),
+            ),
+            _retry_or_return(
+                body_id,
+                f"rebase_{tag}",
+                result_symbol,
+                result_type,
+                composite=True,
+            ),
+        ]
 
     receipt_digest = dsl.digest(F+"classified_receipt_digest_v1", [*loc.values(), position, _col("primary", ADMISSION, "admission_digest"), next_revision])
     receipt_bindings = [(name, loc[name]) for name in COORDS] + [
@@ -457,13 +751,313 @@ def build_coordinator_body() -> dict[str, Any]:
         ("prior_audit_digest", _col("checkpoint", CHECKPOINT, "audit_head_digest")), ("audit_head_digest", applied_integrity),
         ("created_at", dsl.transaction_timestamp()),
     ]
+    dependent_symbols: list[tuple[str, str]] = []
+
+    def dependent_effects(
+        tag: str,
+        frame_symbol: str,
+        watermark_symbol: str,
+        frame_type: str,
+    ) -> list[dict[str, Any]]:
+        obligation_set_symbol = f"{tag}_obligation_set"
+        obligation_symbol = f"{tag}_obligation"
+        coalesced_symbol = f"{tag}_coalesced_obligation"
+        inserted_symbol = f"{tag}_inserted_obligation"
+        retired_symbol = f"{tag}_retired_frame"
+        advanced_symbol = f"{tag}_advanced_watermark"
+        dependent_symbols.extend(
+            [
+                (obligation_set_symbol, OBLIGATION + "[]"),
+                (obligation_symbol, OBLIGATION),
+                (coalesced_symbol, OBLIGATION),
+                (inserted_symbol, OBLIGATION),
+                (retired_symbol, FRAME),
+                (advanced_symbol, WATERMARK),
+            ]
+        )
+        frame_id = _col(frame_symbol, FRAME, "frame_generation_id")
+        obligation_coordinate = {**loc, "frame_generation_id": frame_id}
+        obligation_predicate = dsl.all_of(
+            _predicate(OBLIGATION, obligation_coordinate),
+            dsl.eq(
+                _src(OBLIGATION, "obligation_state"),
+                dsl.const(F + "obligation_state", "PENDING"),
+            ),
+        )
+        coalesced_digest = dsl.digest(
+            F + "coalesced_reassembly_obligation_digest_v1",
+            [
+                _col(obligation_symbol, OBLIGATION, "rolling_cause_digest"),
+                position,
+                _col("primary", ADMISSION, "observation_digest"),
+            ],
+        )
+        existing_branch = [
+            dsl.select_node(
+                f"{body_id}.reload_{tag}_obligation",
+                relation=OBLIGATION,
+                columns=COLUMNS[OBLIGATION],
+                predicate=obligation_predicate,
+                cardinality="EXACTLY_ONE",
+                output_symbol=obligation_symbol,
+                order_by=COORDS + ["frame_generation_id"],
+            ),
+            dsl.update_node(
+                f"{body_id}.coalesce_{tag}_obligation",
+                relation=OBLIGATION,
+                predicate=obligation_predicate,
+                key_columns=COORDS + ["frame_generation_id"],
+                bindings=[
+                    (
+                        "earliest_position",
+                        dsl.case(
+                            PG + "bigint",
+                            [
+                                {
+                                    "when": dsl.binary(
+                                        "LTE",
+                                        _col(
+                                            obligation_symbol,
+                                            OBLIGATION,
+                                            "earliest_position",
+                                        ),
+                                        position,
+                                    ),
+                                    "then": _col(
+                                        obligation_symbol,
+                                        OBLIGATION,
+                                        "earliest_position",
+                                    ),
+                                }
+                            ],
+                            position,
+                        ),
+                    ),
+                    (
+                        "latest_position",
+                        dsl.case(
+                            PG + "bigint",
+                            [
+                                {
+                                    "when": dsl.binary(
+                                        "GTE",
+                                        _col(
+                                            obligation_symbol,
+                                            OBLIGATION,
+                                            "latest_position",
+                                        ),
+                                        position,
+                                    ),
+                                    "then": _col(
+                                        obligation_symbol,
+                                        OBLIGATION,
+                                        "latest_position",
+                                    ),
+                                }
+                            ],
+                            position,
+                        ),
+                    ),
+                    ("rolling_cause_digest", coalesced_digest),
+                    (
+                        "count_bucket",
+                        dsl.case(
+                            F + "obligation_count_bucket",
+                            [
+                                {
+                                    "when": dsl.eq(
+                                        _col(
+                                            obligation_symbol,
+                                            OBLIGATION,
+                                            "count_bucket",
+                                        ),
+                                        dsl.const(
+                                            F + "obligation_count_bucket", "ONE"
+                                        ),
+                                    ),
+                                    "then": dsl.const(
+                                        F + "obligation_count_bucket",
+                                        "TWO_TO_FOUR",
+                                    ),
+                                }
+                            ],
+                            dsl.const(
+                                F + "obligation_count_bucket", "FIVE_PLUS"
+                            ),
+                        ),
+                    ),
+                    ("updated_at", dsl.transaction_timestamp()),
+                ],
+                output_symbol=coalesced_symbol,
+                returning_columns=COLUMNS[OBLIGATION],
+            ),
+        ]
+        initial_digest = dsl.digest(
+            F + "reassembly_obligation_digest_v1",
+            [frame_id, position, _col("primary", ADMISSION, "observation_digest")],
+        )
+        obligation_bindings = [(name, loc[name]) for name in COORDS] + [
+            ("frame_generation_id", frame_id),
+            ("earliest_position", position),
+            ("latest_position", position),
+            ("rolling_cause_digest", initial_digest),
+            (
+                "count_bucket",
+                dsl.const(F + "obligation_count_bucket", "ONE"),
+            ),
+            ("obligation_state", dsl.const(F + "obligation_state", "PENDING")),
+            ("created_at", dsl.transaction_timestamp()),
+            ("updated_at", dsl.transaction_timestamp()),
+        ]
+        return [
+            dsl.select_node(
+                f"{body_id}.{tag}_obligation_set",
+                relation=OBLIGATION,
+                columns=COLUMNS[OBLIGATION],
+                predicate=obligation_predicate,
+                cardinality="COMPLETE_SET",
+                output_symbol=obligation_set_symbol,
+                order_by=COORDS + ["frame_generation_id"],
+                set_read=True,
+            ),
+            dsl.assert_node(
+                f"{body_id}.{tag}_obligation_cardinality",
+                dsl.binary(
+                    "LTE",
+                    _count(obligation_set_symbol, OBLIGATION),
+                    dsl.const(PG + "bigint", 1),
+                ),
+                "F_STATE",
+            ),
+            _if_rejoin(
+                f"{body_id}.{tag}_obligation_exists",
+                dsl.eq(
+                    _count(obligation_set_symbol, OBLIGATION),
+                    dsl.const(PG + "bigint", 1),
+                ),
+                existing_branch,
+                [
+                    _insert_reload(
+                        f"{body_id}.insert_{tag}_obligation",
+                        OBLIGATION,
+                        obligation_bindings,
+                        inserted_symbol,
+                        COORDS + ["frame_generation_id"],
+                    )
+                ],
+            ),
+            dsl.update_node(
+                f"{body_id}.retire_{tag}_frame",
+                relation=FRAME,
+                predicate=_predicate(
+                    FRAME,
+                    {
+                        **loc,
+                        "frame_generation_id": frame_id,
+                        "frame_type": dsl.const(F + "frame_type", frame_type),
+                        "lifecycle_state": dsl.const(
+                            F + "frame_lifecycle", "CURRENT"
+                        ),
+                    },
+                ),
+                key_columns=COORDS + ["frame_generation_id"],
+                bindings=[
+                    (
+                        "lifecycle_state",
+                        dsl.const(F + "frame_lifecycle", "RETIRED"),
+                    ),
+                    ("retired_at", dsl.transaction_timestamp()),
+                ],
+                output_symbol=retired_symbol,
+                returning_columns=COLUMNS[FRAME],
+            ),
+            dsl.update_node(
+                f"{body_id}.advance_{tag}_watermark",
+                relation=WATERMARK,
+                predicate=_predicate(
+                    WATERMARK,
+                    {
+                        **loc,
+                        "frame_type": dsl.const(F + "frame_type", frame_type),
+                    },
+                ),
+                key_columns=COORDS + ["frame_type"],
+                bindings=[
+                    ("watermark_position", position),
+                    ("updated_at", dsl.transaction_timestamp()),
+                ],
+                output_symbol=advanced_symbol,
+                returning_columns=COLUMNS[WATERMARK],
+            ),
+        ]
+
+    diary_effects = dependent_effects(
+        "diary_only",
+        "diary_frame",
+        "diary_watermark",
+        "CURRENT_DIARY_PROJECTION",
+    )
+    waiting_effects = dependent_effects(
+        "waiting_only",
+        "waiting_frame",
+        "waiting_watermark",
+        "CURRENT_WAITING_ROOM_PROJECTION",
+    )
+    diary_both_effects = dependent_effects(
+        "diary_both",
+        "diary_frame",
+        "diary_watermark",
+        "CURRENT_DIARY_PROJECTION",
+    )
+    waiting_both_effects = dependent_effects(
+        "waiting_both",
+        "waiting_frame",
+        "waiting_watermark",
+        "CURRENT_WAITING_ROOM_PROJECTION",
+    )
+    mask = _col("primary", ADMISSION, "affected_frame_mask")
+    dependent_branch = [
+        _if_rejoin(
+            f"{body_id}.mask_diary",
+            dsl.eq(mask, dsl.const(F + "frame_mask", 1)),
+            diary_effects,
+            [
+                _if_rejoin(
+                    f"{body_id}.mask_waiting",
+                    dsl.eq(mask, dsl.const(F + "frame_mask", 2)),
+                    waiting_effects,
+                    [
+                        _if_rejoin(
+                            f"{body_id}.mask_both",
+                            dsl.eq(mask, dsl.const(F + "frame_mask", 3)),
+                            [*diary_both_effects, *waiting_both_effects],
+                            [
+                                dsl.assert_node(
+                                    f"{body_id}.mask_none",
+                                    dsl.eq(
+                                        mask, dsl.const(F + "frame_mask", 0)
+                                    ),
+                                    "F_STATE",
+                                )
+                            ],
+                        )
+                    ],
+                )
+            ],
+        )
+    ]
+
     apply_branch = [
-        dsl.lock_node(f"{body_id}.lock_primary", relation=ADMISSION, predicate=primary_pred, key_columns=COORDS+["source_position", "entry_kind"], mode="FOR_UPDATE", order=5, output_symbol="primary", columns=COLUMNS[ADMISSION]),
+        dsl.lock_node(f"{body_id}.lock_diary_frame", relation=FRAME, predicate=dsl.all_of(current_frame_pred, dsl.eq(_src(FRAME, "frame_type"), dsl.const(F+"frame_type", "CURRENT_DIARY_PROJECTION"))), key_columns=COORDS+["frame_generation_id"], mode="FOR_UPDATE", order=6, output_symbol="diary_frame", columns=COLUMNS[FRAME]),
+        dsl.lock_node(f"{body_id}.lock_waiting_frame", relation=FRAME, predicate=dsl.all_of(current_frame_pred, dsl.eq(_src(FRAME, "frame_type"), dsl.const(F+"frame_type", "CURRENT_WAITING_ROOM_PROJECTION"))), key_columns=COORDS+["frame_generation_id"], mode="FOR_UPDATE", order=7, output_symbol="waiting_frame", columns=COLUMNS[FRAME]),
+        dsl.lock_node(f"{body_id}.lock_diary_watermark", relation=WATERMARK, predicate=dsl.all_of(watermark_pred, dsl.eq(_src(WATERMARK, "frame_type"), dsl.const(F+"frame_type", "CURRENT_DIARY_PROJECTION"))), key_columns=COORDS+["frame_type"], mode="FOR_UPDATE", order=8, output_symbol="diary_watermark", columns=COLUMNS[WATERMARK]),
+        dsl.lock_node(f"{body_id}.lock_waiting_watermark", relation=WATERMARK, predicate=dsl.all_of(watermark_pred, dsl.eq(_src(WATERMARK, "frame_type"), dsl.const(F+"frame_type", "CURRENT_WAITING_ROOM_PROJECTION"))), key_columns=COORDS+["frame_type"], mode="FOR_UPDATE", order=9, output_symbol="waiting_watermark", columns=COLUMNS[WATERMARK]),
         dsl.insert_node(f"{body_id}.lifecycle", relation=LIFECYCLE, bindings=applied_lifecycle_bindings, output_symbol="applied_lifecycle", returning_columns=COLUMNS[LIFECYCLE]),
         dsl.insert_node(f"{body_id}.audit", relation=AUDIT, bindings=applied_audit_bindings, output_symbol="applied_audit", returning_columns=COLUMNS[AUDIT]),
         _insert_reload(f"{body_id}.receipt_insert", RECEIPT, receipt_bindings, "inserted_receipt", COORDS+["source_position"]),
+        *dependent_branch,
         dsl.update_node(f"{body_id}.checkpoint_update", relation=CHECKPOINT, predicate=_predicate(CHECKPOINT, loc), key_columns=COORDS, bindings=[
-            ("checkpoint_state", dsl.const(F+"checkpoint_state", "CURRENT")), ("last_contiguous_position", position),
+            ("checkpoint_state", dsl.const(F+"checkpoint_state", "ACTIVE")), ("last_contiguous_position", position),
             ("last_observation_digest", _col("primary", ADMISSION, "observation_digest")), ("lifecycle_revision", next_revision),
             ("audit_head_digest", applied_integrity), ("checkpoint_integrity_digest", applied_integrity), ("updated_at", dsl.transaction_timestamp()),
         ], output_symbol="applied_checkpoint", returning_columns=COLUMNS[CHECKPOINT]),
@@ -476,26 +1070,333 @@ def build_coordinator_body() -> dict[str, Any]:
         _retry_or_return(body_id, "applied", "applied_result", result_type, composite=True),
     ]
 
-    active_branch = [
-        dsl.select_node(f"{body_id}.receipt_set", relation=RECEIPT, columns=COLUMNS[RECEIPT], predicate=receipt_pred, cardinality="COMPLETE_SET", output_symbol="receipt_set", order_by=COORDS+["source_position"], set_read=True),
-        _if(f"{body_id}.has_receipt", dsl.eq(_count("receipt_set", RECEIPT), dsl.const(PG+"bigint", 1)), receipt_replay, [
-            dsl.select_node(f"{body_id}.primary_set", relation=ADMISSION, columns=COLUMNS[ADMISSION], predicate=primary_pred, cardinality="COMPLETE_SET", output_symbol="primary_set", order_by=COORDS+["source_position", "entry_kind"], set_read=True),
-            _if(f"{body_id}.has_primary", dsl.eq(_count("primary_set", ADMISSION), dsl.const(PG+"bigint", 1)), apply_branch, rebase_branch),
-        ]),
+    key_membership_pred = dsl.all_of(
+        _predicate(KEY, loc),
+        dsl.eq(_src(KEY, "key_id"), _col("primary", ADMISSION, "key_id")),
+        dsl.binary("LTE", _src(KEY, "interval_start"), position),
+        dsl.binary("GTE", _src(KEY, "interval_end"), position),
+    )
+    expected_position = dsl.add(
+        _col("checkpoint", CHECKPOINT, "last_contiguous_position"),
+        dsl.const(PG + "bigint", 1),
+        PG + "bigint",
+    )
+    anchor_integrity = dsl.all_of(
+        dsl.eq(
+            _col("anchor", ANCHOR, "checkpoint_state"),
+            _col("checkpoint", CHECKPOINT, "checkpoint_state"),
+        ),
+        dsl.eq(
+            _col("anchor", ANCHOR, "last_contiguous_position"),
+            _col("checkpoint", CHECKPOINT, "last_contiguous_position"),
+        ),
+        dsl.eq(
+            _col("anchor", ANCHOR, "checkpoint_integrity_digest"),
+            _col("checkpoint", CHECKPOINT, "checkpoint_integrity_digest"),
+        ),
+    )
+    dependent_state_exact = dsl.all_of(
+        dsl.eq(_count("current_frame_set", FRAME), dsl.const(PG + "bigint", 2)),
+        dsl.eq(
+            _count("watermark_set", WATERMARK), dsl.const(PG + "bigint", 2)
+        ),
+        dsl.binary(
+            "LTE",
+            _count("pending_obligation_set", OBLIGATION),
+            dsl.const(PG + "bigint", 2),
+        ),
+    )
+    apply_state_branch = [
+        dsl.select_node(
+            f"{body_id}.key_membership_set",
+            relation=KEY,
+            columns=COLUMNS[KEY],
+            predicate=key_membership_pred,
+            cardinality="COMPLETE_SET",
+            output_symbol="key_membership_set",
+            order_by=COORDS + ["interval_start"],
+            set_read=True,
+        ),
+        _if(
+            f"{body_id}.epoch_matches",
+            dsl.eq(
+                _col("source_at_position", SOURCE, "stream_epoch"),
+                loc["stream_epoch"],
+            ),
+            [
+                _if(
+                    f"{body_id}.gap",
+                    dsl.binary("GT", position, expected_position),
+                    rebase_branch(
+                        "gap",
+                        dsl.const(F + "observation_reason", "COVERAGE_GAP"),
+                    ),
+                    [
+                        _if(
+                            f"{body_id}.predecessor_matches",
+                            dsl.all_of(
+                                dsl.eq(position, expected_position),
+                                dsl.eq(
+                                    _col(
+                                        "source_at_position",
+                                        SOURCE,
+                                        "predecessor_position",
+                                    ),
+                                    _col(
+                                        "checkpoint",
+                                        CHECKPOINT,
+                                        "last_contiguous_position",
+                                    ),
+                                ),
+                            ),
+                            [
+                                _if(
+                                    f"{body_id}.key_membership_exact",
+                                    dsl.eq(
+                                        _count("key_membership_set", KEY),
+                                        dsl.const(PG + "bigint", 1),
+                                    ),
+                                    [
+                                        _if(
+                                            f"{body_id}.anchor_present",
+                                            dsl.eq(
+                                                _count(
+                                                    "current_anchor_set", ANCHOR
+                                                ),
+                                                dsl.const(PG + "bigint", 1),
+                                            ),
+                                            [
+                                                dsl.lock_node(
+                                                    f"{body_id}.lock_anchor_for_proof",
+                                                    relation=ANCHOR,
+                                                    predicate=current_anchor_pred,
+                                                    key_columns=COORDS
+                                                    + ["lifecycle_revision"],
+                                                    mode="FOR_SHARE",
+                                                    order=5,
+                                                    output_symbol="anchor",
+                                                    columns=COLUMNS[ANCHOR],
+                                                ),
+                                                _if(
+                                                    f"{body_id}.anchor_fence_exact",
+                                                    anchor_integrity,
+                                                    [
+                                                        _if(
+                                                            f"{body_id}.dependent_state_exact",
+                                                            dependent_state_exact,
+                                                            apply_branch,
+                                                            rebase_branch(
+                                                                "dependent_state",
+                                                                dsl.const(
+                                                                    F
+                                                                    + "observation_reason",
+                                                                    "MALFORMED_OR_FOREIGN",
+                                                                ),
+                                                            ),
+                                                        )
+                                                    ],
+                                                    rebase_branch(
+                                                        "anchor_integrity",
+                                                        dsl.const(
+                                                            F
+                                                            + "observation_reason",
+                                                            "MALFORMED_OR_FOREIGN",
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                            rebase_branch(
+                                                "anchor_missing",
+                                                dsl.const(
+                                                    F + "observation_reason",
+                                                    "MALFORMED_OR_FOREIGN",
+                                                ),
+                                            ),
+                                        )
+                                    ],
+                                    rebase_branch(
+                                        "key",
+                                        dsl.const(
+                                            F + "observation_reason", "KEY_UNAVAILABLE"
+                                        ),
+                                    ),
+                                )
+                            ],
+                            rebase_branch(
+                                "predecessor",
+                                dsl.const(
+                                    F + "observation_reason", "WRONG_PREDECESSOR"
+                                ),
+                            ),
+                        )
+                    ],
+                )
+            ],
+            rebase_branch(
+                "epoch",
+                dsl.const(F + "observation_reason", "WRONG_EPOCH"),
+            ),
+        ),
     ]
+    primary_branch = [
+        dsl.lock_node(f"{body_id}.lock_primary", relation=ADMISSION, predicate=primary_pred, key_columns=COORDS+["source_position", "entry_kind"], mode="FOR_UPDATE", order=4, output_symbol="primary", columns=COLUMNS[ADMISSION]),
+        dsl.select_node(
+            f"{body_id}.source_at_position",
+            relation=SOURCE,
+            columns=COLUMNS[SOURCE],
+            predicate=source_position_pred,
+            cardinality="EXACTLY_ONE",
+            output_symbol="source_at_position",
+            order_by=[
+                "practice_id",
+                "source_contract_id",
+                "stream_id",
+                "stream_epoch",
+                "transaction_position",
+            ],
+        ),
+        *apply_state_branch,
+    ]
+    conflict_reason = dsl.case(
+        F + "observation_reason",
+        [
+            {
+                "when": dsl.eq(
+                    _col("conflict", ADMISSION, "conflict_reason"),
+                    dsl.const(
+                        F + "admission_conflict_reason",
+                        "POSITION_DIGEST_MISMATCH",
+                    ),
+                ),
+                "then": dsl.const(
+                    F + "observation_reason", "SAME_POSITION_MISMATCH"
+                ),
+            }
+        ],
+        dsl.const(F + "observation_reason", "DIGEST_REUSE"),
+    )
+    conflict_branch = [
+        dsl.lock_node(
+            f"{body_id}.lock_conflict",
+            relation=ADMISSION,
+            predicate=conflict_pred,
+            key_columns=COORDS + ["source_position", "entry_kind"],
+            mode="FOR_UPDATE",
+            order=4,
+            output_symbol="conflict",
+            columns=COLUMNS[ADMISSION],
+        ),
+        *rebase_branch("conflict", conflict_reason),
+    ]
+    admission_state = _if(
+        f"{body_id}.admission_ambiguous",
+        dsl.any_of(
+            dsl.binary(
+                "GT",
+                _count("primary_set", ADMISSION),
+                dsl.const(PG + "bigint", 1),
+            ),
+            dsl.binary(
+                "GT",
+                _count("conflict_set", ADMISSION),
+                dsl.const(PG + "bigint", 1),
+            ),
+            dsl.all_of(
+                dsl.eq(
+                    _count("primary_set", ADMISSION), dsl.const(PG + "bigint", 1)
+                ),
+                dsl.eq(
+                    _count("conflict_set", ADMISSION),
+                    dsl.const(PG + "bigint", 1),
+                ),
+            ),
+        ),
+        rebase_branch(
+            "ambiguous_admission",
+            dsl.const(F + "observation_reason", "MALFORMED_OR_FOREIGN"),
+        ),
+        [
+            _if(
+                f"{body_id}.has_conflict",
+                dsl.eq(
+                    _count("conflict_set", ADMISSION),
+                    dsl.const(PG + "bigint", 1),
+                ),
+                conflict_branch,
+                [
+                    _if(
+                        f"{body_id}.has_primary",
+                        dsl.eq(
+                            _count("primary_set", ADMISSION),
+                            dsl.const(PG + "bigint", 1),
+                        ),
+                        [
+                            _if(
+                                f"{body_id}.source_position_exact",
+                                dsl.eq(
+                                    _count("source_position_set", SOURCE),
+                                    dsl.const(PG + "bigint", 1),
+                                ),
+                                primary_branch,
+                                rebase_branch(
+                                    "source_ambiguous",
+                                    dsl.const(
+                                        F + "observation_reason",
+                                        "MALFORMED_OR_FOREIGN",
+                                    ),
+                                ),
+                            )
+                        ],
+                        rebase_branch(
+                            "missing_admission",
+                            dsl.const(
+                                F + "observation_reason", "MISSING_ADMISSION"
+                            ),
+                        ),
+                    )
+                ],
+            )
+        ],
+    )
     nodes = [
         _isolation(body_id, "SERIALIZABLE"), *binding_nodes,
         dsl.lock_node(f"{body_id}.lock_barrier", relation=BARRIER, predicate=_predicate(BARRIER, scope), key_columns=["practice_id", "source_contract_id", "stream_id"], mode="FOR_UPDATE", order=1, output_symbol="barrier", columns=COLUMNS[BARRIER]),
         dsl.lock_node(f"{body_id}.lock_generation", relation=GENERATION, predicate=_predicate(GENERATION, loc), key_columns=COORDS, mode="FOR_UPDATE", order=2, output_symbol="generation", columns=COLUMNS[GENERATION]),
         dsl.lock_node(f"{body_id}.lock_checkpoint", relation=CHECKPOINT, predicate=_predicate(CHECKPOINT, loc), key_columns=COORDS, mode="FOR_UPDATE", order=3, output_symbol="checkpoint", columns=COLUMNS[CHECKPOINT]),
-        dsl.lock_node(f"{body_id}.lock_anchor", relation=ANCHOR, predicate=_predicate(ANCHOR, {**loc, "lifecycle_revision": _col("checkpoint", CHECKPOINT, "lifecycle_revision")}), key_columns=COORDS+["lifecycle_revision"], mode="FOR_SHARE", order=4, output_symbol="anchor", columns=COLUMNS[ANCHOR]),
-        _if(f"{body_id}.terminal", dsl.binary("NE", _col("generation", GENERATION, "lifecycle_state"), dsl.const(F+"generation_state", "ACTIVE")), terminal_branch, active_branch),
+        dsl.select_node(f"{body_id}.receipt_set", relation=RECEIPT, columns=COLUMNS[RECEIPT], predicate=receipt_pred, cardinality="COMPLETE_SET", output_symbol="receipt_set", order_by=COORDS+["source_position"], set_read=True),
+        dsl.select_node(f"{body_id}.primary_set", relation=ADMISSION, columns=COLUMNS[ADMISSION], predicate=primary_pred, cardinality="COMPLETE_SET", output_symbol="primary_set", order_by=COORDS+["source_position", "entry_kind"], set_read=True),
+        dsl.select_node(f"{body_id}.conflict_set", relation=ADMISSION, columns=COLUMNS[ADMISSION], predicate=conflict_pred, cardinality="COMPLETE_SET", output_symbol="conflict_set", order_by=COORDS+["source_position", "entry_kind"], set_read=True),
+        dsl.select_node(f"{body_id}.source_position_set", relation=SOURCE, columns=COLUMNS[SOURCE], predicate=source_position_pred, cardinality="COMPLETE_SET", output_symbol="source_position_set", order_by=["practice_id", "source_contract_id", "stream_id", "stream_epoch", "transaction_position"], set_read=True),
+        dsl.select_node(f"{body_id}.current_anchor_set", relation=ANCHOR, columns=COLUMNS[ANCHOR], predicate=current_anchor_pred, cardinality="COMPLETE_SET", output_symbol="current_anchor_set", order_by=COORDS+["lifecycle_revision"], set_read=True),
+        dsl.select_node(f"{body_id}.current_frame_set", relation=FRAME, columns=COLUMNS[FRAME], predicate=current_frame_pred, cardinality="COMPLETE_SET", output_symbol="current_frame_set", order_by=COORDS+["frame_type", "frame_generation_id"], set_read=True),
+        dsl.select_node(f"{body_id}.watermark_set", relation=WATERMARK, columns=COLUMNS[WATERMARK], predicate=watermark_pred, cardinality="COMPLETE_SET", output_symbol="watermark_set", order_by=COORDS+["frame_type"], set_read=True),
+        dsl.select_node(f"{body_id}.pending_obligation_set", relation=OBLIGATION, columns=COLUMNS[OBLIGATION], predicate=pending_obligation_pred, cardinality="COMPLETE_SET", output_symbol="pending_obligation_set", order_by=COORDS+["frame_generation_id"], set_read=True),
+        _if(
+            f"{body_id}.has_receipt",
+            dsl.eq(_count("receipt_set", RECEIPT), dsl.const(PG+"bigint", 1)),
+            receipt_replay,
+            [
+                _if(
+                    f"{body_id}.terminal",
+                    dsl.binary("NE", _col("generation", GENERATION, "lifecycle_state"), dsl.const(F+"generation_state", "ACTIVE")),
+                    terminal_branch,
+                    [admission_state],
+                )
+            ],
+        ),
     ]
     locals_ = [(row["id"], row["type"]) for row in binding_symbols] + [
         ("barrier", BARRIER), ("generation", GENERATION), ("checkpoint", CHECKPOINT), ("anchor", ANCHOR),
-        ("terminal_result", result_type), ("receipt_set", RECEIPT+"[]"), ("stored_receipt", RECEIPT), ("replay_result", result_type),
-        ("primary_set", ADMISSION+"[]"), ("primary", ADMISSION), ("rebase_lifecycle", LIFECYCLE), ("rebase_audit", AUDIT),
-        ("rebased_checkpoint", CHECKPOINT), ("rebase_result", result_type), ("applied_lifecycle", LIFECYCLE), ("applied_audit", AUDIT),
+        ("terminal_lifecycle", LIFECYCLE), ("terminal_audit", AUDIT), ("terminal_result", result_type),
+        ("receipt_set", RECEIPT+"[]"), ("stored_receipt", RECEIPT), ("replay_primary", ADMISSION), ("replay_result", result_type),
+        ("primary_set", ADMISSION+"[]"), ("conflict_set", ADMISSION+"[]"), ("conflict", ADMISSION),
+        ("source_position_set", SOURCE+"[]"), ("source_at_position", SOURCE), ("key_membership_set", KEY+"[]"),
+        ("current_anchor_set", ANCHOR+"[]"), ("current_frame_set", FRAME+"[]"), ("watermark_set", WATERMARK+"[]"),
+        ("pending_obligation_set", OBLIGATION+"[]"), ("primary", ADMISSION),
+        ("diary_frame", FRAME), ("waiting_frame", FRAME), ("diary_watermark", WATERMARK), ("waiting_watermark", WATERMARK),
+        *rebase_symbols,
+        *dependent_symbols,
+        ("applied_lifecycle", LIFECYCLE), ("applied_audit", AUDIT),
         ("inserted_receipt", RECEIPT), ("applied_checkpoint", CHECKPOINT), ("applied_result", result_type),
     ]
     return dsl.body(body_id, "ENTRY_POINT", body_id, _symbols([("admission_locator", ADMISSION_LOC)], locals_), nodes)
@@ -536,7 +1437,7 @@ def build_registration_body() -> dict[str, Any]:
         ("terminal_reason", dsl.const(F+"generation_terminal_reason", None)),
     ]
     checkpoint_bindings = [(name, loc[name]) for name in COORDS] + [
-        ("checkpoint_state", dsl.const(F+"checkpoint_state", "CURRENT")),
+        ("checkpoint_state", dsl.const(F+"checkpoint_state", "ACTIVE")),
         ("last_contiguous_position", _col("head", HEAD, "last_position")),
         ("last_observation_digest", dsl.case(F+"digest_sha256", [{"when": dsl.eq(_col("head", HEAD, "last_position"), dsl.const(PG+"bigint", 0)), "then": dsl.const(F+"digest_sha256", None)}], controlling["source_digest"])),
         ("lifecycle_revision", dsl.const(PG+"bigint", 0)),
@@ -558,13 +1459,8 @@ def build_registration_body() -> dict[str, Any]:
         ("interval_start", initial_start), ("interval_end", initial_end), ("key_id", initial_key_id),
         ("availability_attestation_digest", initial_attestation), ("created_at", dsl.transaction_timestamp()),
     ]
-    lifecycle_bindings = [(name, loc[name]) for name in COORDS] + [
-        ("lifecycle_revision", dsl.const(PG+"bigint", 0)), ("entry_kind", dsl.const(F+"lifecycle_entry_kind", "REGISTERED")),
-        ("source_position", _col("head", HEAD, "last_position")), ("key_interval_start", initial_start), ("key_interval_end", initial_end),
-        ("prior_lifecycle_digest", dsl.const(F+"digest_sha256", None)), ("lifecycle_digest", baseline_digest), ("created_at", dsl.transaction_timestamp()),
-    ]
     anchor_bindings = [(name, loc[name]) for name in COORDS] + [
-        ("lifecycle_revision", dsl.const(PG+"bigint", 0)), ("checkpoint_state", dsl.const(F+"checkpoint_state", "CURRENT")),
+        ("lifecycle_revision", dsl.const(PG+"bigint", 0)), ("checkpoint_state", dsl.const(F+"checkpoint_state", "ACTIVE")),
         ("last_contiguous_position", _col("head", HEAD, "last_position")),
         ("last_observation_digest", dsl.case(F+"digest_sha256", [{"when": dsl.eq(_col("head", HEAD, "last_position"), dsl.const(PG+"bigint", 0)), "then": dsl.const(F+"digest_sha256", None)}], controlling["source_digest"])),
         *controlling.items(), ("checkpoint_integrity_digest", baseline_digest), ("anchor_digest", baseline_digest), ("created_at", dsl.transaction_timestamp()),
@@ -576,12 +1472,11 @@ def build_registration_body() -> dict[str, Any]:
         _insert_reload(f"{body_id}.checkpoint_insert", CHECKPOINT, checkpoint_bindings, "inserted_checkpoint", COORDS),
         dsl.let_node(f"{body_id}.diary_frame_id", "diary_frame_id", PG+"uuid", dsl.uuid_v4()),
         dsl.let_node(f"{body_id}.waiting_frame_id", "waiting_frame_id", PG+"uuid", dsl.uuid_v4()),
-        _insert_reload(f"{body_id}.diary_frame", FRAME, frame_bindings("DIARY", dsl.local_ref("diary_frame_id", PG+"uuid")), "diary_frame", COORDS+["frame_generation_id"]),
-        _insert_reload(f"{body_id}.waiting_frame", FRAME, frame_bindings("WAITING_ROOM", dsl.local_ref("waiting_frame_id", PG+"uuid")), "waiting_frame", COORDS+["frame_generation_id"]),
-        _insert_reload(f"{body_id}.diary_watermark", WATERMARK, watermark_bindings("DIARY"), "diary_watermark", COORDS+["frame_type"]),
-        _insert_reload(f"{body_id}.waiting_watermark", WATERMARK, watermark_bindings("WAITING_ROOM"), "waiting_watermark", COORDS+["frame_type"]),
+        _insert_reload(f"{body_id}.diary_frame", FRAME, frame_bindings("CURRENT_DIARY_PROJECTION", dsl.local_ref("diary_frame_id", PG+"uuid")), "diary_frame", COORDS+["frame_generation_id"]),
+        _insert_reload(f"{body_id}.waiting_frame", FRAME, frame_bindings("CURRENT_WAITING_ROOM_PROJECTION", dsl.local_ref("waiting_frame_id", PG+"uuid")), "waiting_frame", COORDS+["frame_generation_id"]),
+        _insert_reload(f"{body_id}.diary_watermark", WATERMARK, watermark_bindings("CURRENT_DIARY_PROJECTION"), "diary_watermark", COORDS+["frame_type"]),
+        _insert_reload(f"{body_id}.waiting_watermark", WATERMARK, watermark_bindings("CURRENT_WAITING_ROOM_PROJECTION"), "waiting_watermark", COORDS+["frame_type"]),
         _insert_reload(f"{body_id}.initial_key", KEY, key_bindings, "initial_key", COORDS+["interval_start"]),
-        _insert_reload(f"{body_id}.genesis_lifecycle", LIFECYCLE, lifecycle_bindings, "genesis_lifecycle", COORDS+["lifecycle_revision"]),
         _insert_reload(f"{body_id}.baseline_anchor", ANCHOR, anchor_bindings, "baseline_anchor", COORDS+["lifecycle_revision"]),
         dsl.update_node(f"{body_id}.barrier_update", relation=BARRIER, predicate=_predicate(BARRIER, scope), key_columns=["practice_id", "source_contract_id", "stream_id"], bindings=[
             ("barrier_revision", dsl.add(_col("barrier", BARRIER, "barrier_revision"), dsl.const(PG+"bigint", 1), PG+"bigint")),
@@ -600,7 +1495,7 @@ def build_registration_body() -> dict[str, Any]:
         ("barrier", BARRIER), ("head", HEAD), ("existing_set", GENERATION+"[]"), ("existing_generation", GENERATION),
         ("inserted_generation", GENERATION), ("inserted_checkpoint", CHECKPOINT), ("diary_frame_id", PG+"uuid"), ("waiting_frame_id", PG+"uuid"),
         ("diary_frame", FRAME), ("waiting_frame", FRAME), ("diary_watermark", WATERMARK), ("waiting_watermark", WATERMARK),
-        ("initial_key", KEY), ("genesis_lifecycle", LIFECYCLE), ("baseline_anchor", ANCHOR), ("updated_barrier", BARRIER),
+        ("initial_key", KEY), ("baseline_anchor", ANCHOR), ("updated_barrier", BARRIER),
     ]
     return dsl.body(body_id, "ENTRY_POINT", body_id, _symbols([("registration", REGISTRATION)], locals_), nodes)
 
@@ -753,7 +1648,11 @@ def build_consumption_body() -> dict[str, Any]:
 def _retention_census_nodes(body_id: str, scope: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     generation_pred = dsl.all_of(
         _predicate(GENERATION, scope),
-        dsl.eq(_src(GENERATION, "lifecycle_state"), dsl.const(F+"generation_state", "ACTIVE")),
+        dsl.binary(
+            "NE",
+            _src(GENERATION, "lifecycle_state"),
+            dsl.const(F + "generation_state", "CONSUMED"),
+        ),
     )
     policy_pred = dsl.all_of(
         _predicate(POLICY, scope),
@@ -772,6 +1671,196 @@ def _retention_census_nodes(body_id: str, scope: dict[str, dict[str, Any]]) -> l
         dsl.select_node(f"{body_id}.pins", relation=PIN, columns=COLUMNS[PIN], predicate=pin_pred, cardinality="COMPLETE_SET", output_symbol="pin_set", order_by=["practice_id", "source_contract_id", "stream_id", "pin_id"], set_read=True),
         dsl.select_node(f"{body_id}.keys", relation=KEY, columns=COLUMNS[KEY], predicate=_predicate(KEY, scope), cardinality="COMPLETE_SET", output_symbol="key_set", order_by=COORDS+["interval_start"], set_read=True),
         dsl.select_node(f"{body_id}.source_rows", relation=SOURCE, columns=COLUMNS[SOURCE], predicate=_predicate(SOURCE, scope), cardinality="COMPLETE_SET", output_symbol="source_set", order_by=["practice_id", "source_contract_id", "stream_id", "stream_epoch", "transaction_position"], set_read=True),
+        dsl.select_node(f"{body_id}.receipts", relation=RECEIPT, columns=COLUMNS[RECEIPT], predicate=_predicate(RECEIPT, scope), cardinality="COMPLETE_SET", output_symbol="retention_receipt_set", order_by=COORDS+["source_position"], set_read=True),
+        dsl.select_node(f"{body_id}.audits", relation=AUDIT, columns=COLUMNS[AUDIT], predicate=_predicate(AUDIT, scope), cardinality="COMPLETE_SET", output_symbol="retention_audit_set", order_by=COORDS+["lifecycle_revision"], set_read=True),
+    ]
+
+
+def _generation_row_scope(
+    *,
+    include_epoch: bool = True,
+) -> dict[str, dict[str, Any]]:
+    names = ["practice_id", "source_contract_id", "stream_id"]
+    if include_epoch:
+        names.append("stream_epoch")
+    names.extend(["observer_id", "observer_generation"])
+    return {
+        name: _col("census_generation", GENERATION, name)
+        for name in names
+    }
+def _retention_proof_nodes(
+    body_id: str,
+    scope: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    through = dsl.local_ref("slowest_checkpoint_position", PG + "bigint")
+    now = dsl.transaction_timestamp()
+    required_source_pred = dsl.all_of(
+        _predicate(SOURCE, scope),
+        dsl.binary("LTE", _src(SOURCE, "transaction_position"), through),
+    )
+    mature_source_pred = dsl.all_of(
+        required_source_pred,
+        dsl.binary(
+            "LTE",
+            dsl.binary(
+                "TIMESTAMP_ADD_SECONDS",
+                _src(SOURCE, "transaction_authored_at"),
+                _col("retention_policy", POLICY, "source_grace_seconds"),
+                PG + "timestamptz",
+            ),
+            now,
+        ),
+    )
+    mature_checkpoint_pred = dsl.all_of(
+        _predicate(CHECKPOINT, scope),
+        dsl.binary(
+            "LTE",
+            dsl.binary(
+                "TIMESTAMP_ADD_SECONDS",
+                _src(CHECKPOINT, "updated_at"),
+                _col(
+                    "retention_policy",
+                    POLICY,
+                    "receipt_checkpoint_grace_seconds",
+                ),
+                PG + "timestamptz",
+            ),
+            now,
+        ),
+    )
+    mature_receipt_pred = dsl.all_of(
+        _predicate(RECEIPT, scope),
+        dsl.binary(
+            "LTE",
+            dsl.binary(
+                "TIMESTAMP_ADD_SECONDS",
+                _src(RECEIPT, "created_at"),
+                _col(
+                    "retention_policy",
+                    POLICY,
+                    "receipt_checkpoint_grace_seconds",
+                ),
+                PG + "timestamptz",
+            ),
+            now,
+        ),
+    )
+    mature_audit_pred = dsl.all_of(
+        _predicate(AUDIT, scope),
+        dsl.binary(
+            "LTE",
+            dsl.binary(
+                "TIMESTAMP_ADD_SECONDS",
+                _src(AUDIT, "created_at"),
+                _col("retention_policy", POLICY, "audit_grace_seconds"),
+                PG + "timestamptz",
+            ),
+            now,
+        ),
+    )
+    overlapping_key_pred = dsl.all_of(
+        _predicate(KEY, scope),
+        dsl.binary("LTE", _src(KEY, "interval_start"), through),
+        dsl.binary("GTE", _src(KEY, "interval_end"), through),
+        dsl.binary(
+            "LTE",
+            dsl.binary(
+                "TIMESTAMP_ADD_SECONDS",
+                _src(KEY, "created_at"),
+                _col("retention_policy", POLICY, "key_overlap_seconds"),
+                PG + "timestamptz",
+            ),
+            now,
+        ),
+    )
+    generation_checkpoint_pred = _predicate(CHECKPOINT, _generation_row_scope())
+    generation_anchor_pred = _predicate(
+        ANCHOR,
+        {
+            **_generation_row_scope(),
+            "lifecycle_revision": _col(
+                "census_checkpoint", CHECKPOINT, "lifecycle_revision"
+            ),
+        },
+    )
+    generation_key_pred = dsl.all_of(
+        _predicate(KEY, _generation_row_scope()),
+        dsl.binary("LTE", _src(KEY, "interval_start"), through),
+        dsl.binary("GTE", _src(KEY, "interval_end"), through),
+    )
+    generation_pin_pred = dsl.all_of(
+        _predicate(PIN, _generation_row_scope(include_epoch=False)),
+        dsl.eq(
+            _src(PIN, "pin_state"),
+            dsl.const(F + "recovery_pin_state", "ACTIVE"),
+        ),
+    )
+    generation_loop = dsl.node(
+        f"{body_id}.generation_census_proof",
+        "FOR_EACH",
+        set_symbol="generation_set",
+        row_symbol="census_generation",
+        nodes=[
+            dsl.select_node(
+                f"{body_id}.generation_checkpoint",
+                relation=CHECKPOINT,
+                columns=COLUMNS[CHECKPOINT],
+                predicate=generation_checkpoint_pred,
+                cardinality="EXACTLY_ONE",
+                output_symbol="census_checkpoint",
+                order_by=COORDS,
+            ),
+            dsl.select_node(
+                f"{body_id}.generation_anchor",
+                relation=ANCHOR,
+                columns=COLUMNS[ANCHOR],
+                predicate=generation_anchor_pred,
+                cardinality="EXACTLY_ONE",
+                output_symbol="census_anchor",
+                order_by=COORDS + ["lifecycle_revision"],
+            ),
+            dsl.select_node(
+                f"{body_id}.generation_keys",
+                relation=KEY,
+                columns=COLUMNS[KEY],
+                predicate=generation_key_pred,
+                cardinality="COMPLETE_SET",
+                output_symbol="census_generation_key_set",
+                order_by=COORDS + ["interval_start"],
+                set_read=True,
+            ),
+            dsl.select_node(
+                f"{body_id}.generation_pins",
+                relation=PIN,
+                columns=COLUMNS[PIN],
+                predicate=generation_pin_pred,
+                cardinality="COMPLETE_SET",
+                output_symbol="census_generation_pin_set",
+                order_by=[
+                    "practice_id",
+                    "source_contract_id",
+                    "stream_id",
+                    "observer_id",
+                    "observer_generation",
+                    "pin_id",
+                ],
+                set_read=True,
+            ),
+        ],
+        complete_set=True,
+        order_by=[
+            {"column": column, "direction": "ASC"} for column in COORDS
+        ],
+        convergence="REJOIN",
+    )
+    return [
+        dsl.select_node(f"{body_id}.required_source_rows", relation=SOURCE, columns=COLUMNS[SOURCE], predicate=required_source_pred, cardinality="COMPLETE_SET", output_symbol="required_source_set", order_by=["practice_id", "source_contract_id", "stream_id", "stream_epoch", "transaction_position"], set_read=True),
+        dsl.select_node(f"{body_id}.mature_source_rows", relation=SOURCE, columns=COLUMNS[SOURCE], predicate=mature_source_pred, cardinality="COMPLETE_SET", output_symbol="mature_source_set", order_by=["practice_id", "source_contract_id", "stream_id", "stream_epoch", "transaction_position"], set_read=True),
+        dsl.select_node(f"{body_id}.mature_checkpoints", relation=CHECKPOINT, columns=COLUMNS[CHECKPOINT], predicate=mature_checkpoint_pred, cardinality="COMPLETE_SET", output_symbol="mature_checkpoint_set", order_by=COORDS, set_read=True),
+        dsl.select_node(f"{body_id}.mature_receipts", relation=RECEIPT, columns=COLUMNS[RECEIPT], predicate=mature_receipt_pred, cardinality="COMPLETE_SET", output_symbol="mature_receipt_set", order_by=COORDS+["source_position"], set_read=True),
+        dsl.select_node(f"{body_id}.mature_audits", relation=AUDIT, columns=COLUMNS[AUDIT], predicate=mature_audit_pred, cardinality="COMPLETE_SET", output_symbol="mature_audit_set", order_by=COORDS+["lifecycle_revision"], set_read=True),
+        dsl.select_node(f"{body_id}.overlapping_keys", relation=KEY, columns=COLUMNS[KEY], predicate=overlapping_key_pred, cardinality="COMPLETE_SET", output_symbol="overlapping_key_set", order_by=COORDS+["interval_start"], set_read=True),
+        generation_loop,
     ]
 
 
@@ -779,6 +1868,7 @@ def _retention_census_digest() -> dict[str, Any]:
     return dsl.digest(F+"source_retention_census_digest_v1", [
         _count("policy_set", POLICY), _count("generation_set", GENERATION), _count("checkpoint_set", CHECKPOINT),
         _count("anchor_set", ANCHOR), _count("pin_set", PIN), _count("key_set", KEY), _count("source_set", SOURCE),
+        _count("retention_receipt_set", RECEIPT), _count("retention_audit_set", AUDIT),
         _col("retention_head", HEAD, "stream_epoch"), _col("retention_head", HEAD, "last_position"),
     ])
 
@@ -798,14 +1888,32 @@ def _slowest_checkpoint_position() -> dict[str, Any]:
 
 
 def _retention_reason() -> dict[str, Any]:
+    census_complete = dsl.all_of(
+        dsl.eq(_count("checkpoint_set", CHECKPOINT), _count("generation_set", GENERATION)),
+        dsl.binary("GTE", _count("anchor_set", ANCHOR), _count("generation_set", GENERATION)),
+    )
+    checkpoint_current = dsl.eq(
+        dsl.local_ref("slowest_checkpoint_position", PG + "bigint"),
+        _col("retention_head", HEAD, "last_position"),
+    )
+    key_overlap = dsl.eq(
+        _count("overlapping_key_set", KEY), _count("generation_set", GENERATION)
+    )
+    grace_elapsed = dsl.all_of(
+        dsl.eq(_count("mature_source_set", SOURCE), _count("required_source_set", SOURCE)),
+        dsl.eq(_count("mature_checkpoint_set", CHECKPOINT), _count("checkpoint_set", CHECKPOINT)),
+        dsl.eq(_count("mature_receipt_set", RECEIPT), _count("retention_receipt_set", RECEIPT)),
+        dsl.eq(_count("mature_audit_set", AUDIT), _count("retention_audit_set", AUDIT)),
+    )
     return dsl.case(
         F+"source_retention_reason",
         [
-            {"when": dsl.binary("NE", _count("policy_set", POLICY), dsl.const(PG+"bigint", 1)), "then": dsl.const(F+"source_retention_reason", "STATE_AMBIGUOUS")},
             {"when": dsl.eq(_count("generation_set", GENERATION), dsl.const(PG+"bigint", 0)), "then": dsl.const(F+"source_retention_reason", "NO_NON_CONSUMED_GENERATION")},
-            {"when": dsl.binary("NE", _count("checkpoint_set", CHECKPOINT), _count("generation_set", GENERATION)), "then": dsl.const(F+"source_retention_reason", "CHECKPOINT_LAG")},
-            {"when": dsl.binary("GT", _count("pin_set", PIN), dsl.const(PG+"bigint", 0)), "then": dsl.const(F+"source_retention_reason", "ACTIVE_RECOVERY_PIN")},
-            {"when": dsl.eq(_count("key_set", KEY), dsl.const(PG+"bigint", 0)), "then": dsl.const(F+"source_retention_reason", "KEY_OVERLAP_UNPROVEN")},
+            {"when": dsl.unary("NOT", census_complete), "then": dsl.const(F+"source_retention_reason", "AMBIGUOUS_CENSUS")},
+            {"when": dsl.unary("NOT", checkpoint_current), "then": dsl.const(F+"source_retention_reason", "CHECKPOINT_LAG")},
+            {"when": dsl.binary("GT", _count("pin_set", PIN), dsl.const(PG+"bigint", 0)), "then": dsl.const(F+"source_retention_reason", "ACTIVE_PIN")},
+            {"when": dsl.unary("NOT", key_overlap), "then": dsl.const(F+"source_retention_reason", "KEY_OVERLAP")},
+            {"when": dsl.unary("NOT", grace_elapsed), "then": dsl.const(F+"source_retention_reason", "GRACE_PENDING")},
             {"when": dsl.eq(_col("retention_policy", POLICY, "retention_execution_enabled"), dsl.const(PG+"boolean", False)), "then": dsl.const(F+"source_retention_reason", "EXECUTION_DISABLED")},
         ],
         dsl.const(F+"source_retention_reason", "ELIGIBLE"),
@@ -814,12 +1922,16 @@ def _retention_reason() -> dict[str, Any]:
 
 def _retention_eligible() -> dict[str, Any]:
     return dsl.all_of(
-        dsl.eq(_count("policy_set", POLICY), dsl.const(PG+"bigint", 1)),
         dsl.binary("GT", _count("generation_set", GENERATION), dsl.const(PG+"bigint", 0)),
         dsl.eq(_count("checkpoint_set", CHECKPOINT), _count("generation_set", GENERATION)),
-        dsl.eq(_count("anchor_set", ANCHOR), _count("generation_set", GENERATION)),
+        dsl.binary("GTE", _count("anchor_set", ANCHOR), _count("generation_set", GENERATION)),
+        dsl.eq(dsl.local_ref("slowest_checkpoint_position", PG+"bigint"), _col("retention_head", HEAD, "last_position")),
         dsl.eq(_count("pin_set", PIN), dsl.const(PG+"bigint", 0)),
-        dsl.binary("GT", _count("key_set", KEY), dsl.const(PG+"bigint", 0)),
+        dsl.eq(_count("overlapping_key_set", KEY), _count("generation_set", GENERATION)),
+        dsl.eq(_count("mature_source_set", SOURCE), _count("required_source_set", SOURCE)),
+        dsl.eq(_count("mature_checkpoint_set", CHECKPOINT), _count("checkpoint_set", CHECKPOINT)),
+        dsl.eq(_count("mature_receipt_set", RECEIPT), _count("retention_receipt_set", RECEIPT)),
+        dsl.eq(_count("mature_audit_set", AUDIT), _count("retention_audit_set", AUDIT)),
         _col("retention_policy", POLICY, "retention_execution_enabled"),
     )
 
@@ -828,8 +1940,14 @@ def _retention_locals() -> list[tuple[str, str]]:
     return [
         ("barrier", BARRIER), ("retention_head", HEAD), ("policy_set", POLICY+"[]"), ("generation_set", GENERATION+"[]"),
         ("checkpoint_set", CHECKPOINT+"[]"), ("anchor_set", ANCHOR+"[]"), ("pin_set", PIN+"[]"), ("key_set", KEY+"[]"),
-        ("source_set", SOURCE+"[]"), ("retention_policy", POLICY), ("census_digest", F+"digest_sha256"),
+        ("source_set", SOURCE+"[]"), ("retention_receipt_set", RECEIPT+"[]"), ("retention_audit_set", AUDIT+"[]"),
+        ("retention_policy", POLICY), ("census_digest", F+"digest_sha256"),
         ("slowest_checkpoint_position", PG+"bigint"),
+        ("required_source_set", SOURCE+"[]"), ("mature_source_set", SOURCE+"[]"),
+        ("mature_checkpoint_set", CHECKPOINT+"[]"), ("mature_receipt_set", RECEIPT+"[]"),
+        ("mature_audit_set", AUDIT+"[]"), ("overlapping_key_set", KEY+"[]"),
+        ("census_generation", GENERATION), ("census_checkpoint", CHECKPOINT), ("census_anchor", ANCHOR),
+        ("census_generation_key_set", KEY+"[]"), ("census_generation_pin_set", PIN+"[]"),
     ]
 
 
@@ -843,18 +1961,39 @@ def build_retention_evaluation_body() -> dict[str, Any]:
         ("eligible", _retention_eligible()), ("through_position", dsl.local_ref("slowest_checkpoint_position", PG+"bigint")),
         ("census_digest", dsl.local_ref("census_digest", F+"digest_sha256")), ("reason_code", _retention_reason()),
     ])
+    ambiguous_result = _composite(output_type, [
+        ("eligible", dsl.const(PG+"boolean", False)),
+        ("through_position", dsl.const(PG+"bigint", 0)),
+        ("census_digest", dsl.local_ref("census_digest", F+"digest_sha256")),
+        ("reason_code", dsl.const(F+"source_retention_reason", "AMBIGUOUS_CENSUS")),
+    ])
+    exact_policy_branch = [
+        dsl.select_node(f"{body_id}.policy", relation=POLICY, columns=COLUMNS[POLICY], predicate=dsl.all_of(_predicate(POLICY, scope), dsl.binary("LTE", _src(POLICY, "effective_at"), dsl.transaction_timestamp())), cardinality="EXACTLY_ONE", output_symbol="retention_policy", order_by=["practice_id", "source_contract_id", "stream_id", "policy_revision"]),
+        dsl.let_node(f"{body_id}.slowest_checkpoint", "slowest_checkpoint_position", PG+"bigint", _slowest_checkpoint_position()),
+        *_retention_proof_nodes(body_id, scope),
+        dsl.let_node(f"{body_id}.result", "retention_result", output_type, result),
+        _retry_or_return(body_id, "eligibility", "retention_result", output_type, composite=True),
+    ]
+    ambiguous_policy_branch = [
+        dsl.let_node(f"{body_id}.ambiguous_result", "ambiguous_retention_result", output_type, ambiguous_result),
+        _retry_or_return(body_id, "ambiguous_policy", "ambiguous_retention_result", output_type, composite=True),
+    ]
     nodes = [
         _isolation(body_id, "SERIALIZABLE"), *binding_nodes,
         dsl.lock_node(f"{body_id}.lock_barrier", relation=BARRIER, predicate=_predicate(BARRIER, scope), key_columns=["practice_id", "source_contract_id", "stream_id"], mode="FOR_SHARE", order=1, output_symbol="barrier", columns=COLUMNS[BARRIER]),
         *_retention_census_nodes(body_id, scope),
-        dsl.assert_node(f"{body_id}.one_policy", dsl.eq(_count("policy_set", POLICY), dsl.const(PG+"bigint", 1)), "F_RETENTION_CENSUS"),
-        dsl.select_node(f"{body_id}.policy", relation=POLICY, columns=COLUMNS[POLICY], predicate=dsl.all_of(_predicate(POLICY, scope), dsl.binary("LTE", _src(POLICY, "effective_at"), dsl.transaction_timestamp())), cardinality="EXACTLY_ONE", output_symbol="retention_policy", order_by=["practice_id", "source_contract_id", "stream_id", "policy_revision"]),
         dsl.let_node(f"{body_id}.census_digest", "census_digest", F+"digest_sha256", _retention_census_digest()),
-        dsl.let_node(f"{body_id}.slowest_checkpoint", "slowest_checkpoint_position", PG+"bigint", _slowest_checkpoint_position()),
-        dsl.let_node(f"{body_id}.result", "retention_result", output_type, result),
-        _retry_or_return(body_id, "eligibility", "retention_result", output_type, composite=True),
+        _if(
+            f"{body_id}.policy_exact",
+            dsl.eq(_count("policy_set", POLICY), dsl.const(PG+"bigint", 1)),
+            exact_policy_branch,
+            ambiguous_policy_branch,
+        ),
     ]
-    locals_ = [(row["id"], row["type"]) for row in binding_symbols] + _retention_locals() + [("retention_result", output_type)]
+    locals_ = [(row["id"], row["type"]) for row in binding_symbols] + _retention_locals() + [
+        ("retention_result", output_type),
+        ("ambiguous_retention_result", output_type),
+    ]
     return dsl.body(body_id, "ENTRY_POINT", body_id, _symbols([("practice_source_stream", SCOPE)], locals_), nodes)
 
 
@@ -893,14 +2032,30 @@ def build_purge_body() -> dict[str, Any]:
         dsl.select_node(f"{body_id}.policy", relation=POLICY, columns=COLUMNS[POLICY], predicate=dsl.all_of(_predicate(POLICY, scope), dsl.binary("LTE", _src(POLICY, "effective_at"), dsl.transaction_timestamp())), cardinality="EXACTLY_ONE", output_symbol="retention_policy", order_by=["practice_id", "source_contract_id", "stream_id", "policy_revision"]),
         dsl.let_node(f"{body_id}.census_digest", "census_digest", F+"digest_sha256", _retention_census_digest()),
         dsl.let_node(f"{body_id}.slowest_checkpoint", "slowest_checkpoint_position", PG+"bigint", _slowest_checkpoint_position()),
-        dsl.assert_node(f"{body_id}.eligible", _retention_eligible(), "F_RETENTION_DISABLED"),
+        *_retention_proof_nodes(body_id, scope),
+        dsl.let_node(
+            f"{body_id}.retention_reason",
+            "retention_reason",
+            F+"source_retention_reason",
+            _retention_reason(),
+        ),
+        dsl.assert_node(
+            f"{body_id}.eligible",
+            dsl.eq(
+                dsl.local_ref("retention_reason", F+"source_retention_reason"),
+                dsl.const(F+"source_retention_reason", "ELIGIBLE"),
+            ),
+            "F_RETENTION_DISABLED",
+        ),
         dsl.assert_node(f"{body_id}.exact_through", dsl.eq(requested_through, dsl.local_ref("slowest_checkpoint_position", PG+"bigint")), "F_RETENTION_CENSUS"),
         delete_node,
         dsl.let_node(f"{body_id}.result", "purge_result", output_type, purge_result),
         _retry_or_return(body_id, "purge", "purge_result", output_type, composite=True),
     ]
     locals_ = [(row["id"], row["type"]) for row in binding_symbols] + _retention_locals() + [
-        ("purged_row_count", PG+"bigint"), ("purge_result", output_type),
+        ("retention_reason", F+"source_retention_reason"),
+        ("purged_row_count", PG+"bigint"),
+        ("purge_result", output_type),
     ]
     return dsl.body(body_id, "ENTRY_POINT", body_id, _symbols([("practice_source_stream", SCOPE), ("through_position", PG+"bigint")], locals_), nodes)
 

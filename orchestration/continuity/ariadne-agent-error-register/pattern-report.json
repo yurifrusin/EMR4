@@ -1,38 +1,39 @@
 {
-  "canonical_register_sha256": "583122bc4cf5717e7a1058f65a5768c0da608c94a00cc9525338369d76521a5c",
+  "canonical_register_sha256": "0496e346a966f6a16b0fb9da4cf9b582eb3868f6eb50f27028d4951e5ca63e62",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 51,
+      "canonical_unchanged": 54,
       "untrusted_partial_worktree": 12
     },
     "by_category": {
-      "command_scope_violation": 10,
+      "command_scope_violation": 12,
       "evidence_misreport": 6,
       "harness_failure": 4,
       "output_contract_violation": 22,
       "read_only_violation": 2,
       "reasoning_claim_error": 12,
-      "repository_defect": 2,
+      "repository_defect": 3,
       "transport_timeout": 7
     },
     "by_origin": {
-      "agent_behavior": 52,
+      "agent_behavior": 54,
       "harness": 4,
-      "repository": 2,
+      "repository": 3,
       "transport": 7
     },
     "by_process_severity": {
-      "low": 17,
+      "low": 19,
       "material": 21,
-      "moderate": 27
+      "moderate": 28
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 17,
+      "api-spine-historical-regression-suite::orchestrator": 1,
       "codex-native-independent-reviewer::verifier": 3,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 27,
+      "codex-primary-orchestrator::orchestrator": 29,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -46,15 +47,41 @@
     },
     "by_role": {
       "implementer": 12,
-      "orchestrator": 33,
+      "orchestrator": 36,
       "verifier": 20
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 65,
+  "incident_count": 68,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 3,
+      "incident_ids": [
+        "AER-0058",
+        "AER-0066",
+        "AER-0067"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
+        "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
+        "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path."
+      ],
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
     {
       "categories": [
         "evidence_misreport"
@@ -262,7 +289,7 @@
       ]
     }
   ],
-  "register_revision": 66,
+  "register_revision": 69,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-07"
 }

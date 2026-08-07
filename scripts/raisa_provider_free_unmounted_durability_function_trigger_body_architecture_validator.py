@@ -22,6 +22,8 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass, field
+import hashlib
+import json
 import re
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -55,6 +57,151 @@ EXACT_TRIGGER_FUNCTIONS = (
 )
 
 EXACT_SUPPORT_FUNCTION = "emr4_context_fabric.session_binding_allows_v1"
+
+EXACT_PARENT_BINDING = {
+    "path": (
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-"
+        "migration-transaction-architecture/migration-transaction-architecture-"
+        "contract.json"
+    ),
+    "contract_sha256": (
+        "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8"
+    ),
+    "relation_signature_trigger_and_role_authority": (
+        "RETAINED_EXCEPT_EXPLICIT_RECOVERY_OPERATIONS"
+    ),
+}
+
+EXACT_ENUM_VALUES: dict[str, tuple[str, ...]] = {
+    "emr4_context_fabric.admission_entry_kind": ("PRIMARY", "CONFLICT"),
+    "emr4_context_fabric.observation_decision": (
+        "ADMIT_SELECTIVE",
+        "ADMIT_NO_INTERSECTION",
+        "ADMIT_FULL_INVALIDATION",
+        "REBASE_REQUIRED",
+    ),
+    "emr4_context_fabric.observation_reason": (
+        "RELEVANT_INTERSECTION",
+        "NO_INTERSECTION",
+        "FULL_SCOPE",
+        "COVERAGE_GAP",
+        "SAME_POSITION_MISMATCH",
+        "DIGEST_REUSE",
+        "WRONG_PREDECESSOR",
+        "WRONG_EPOCH",
+        "MISSING_ADMISSION",
+        "KEY_UNAVAILABLE",
+        "MALFORMED_OR_FOREIGN",
+    ),
+    "emr4_context_fabric.checkpoint_disposition": (
+        "ADVANCE",
+        "HOLD_REBASE",
+        "STOP_GENERATION",
+    ),
+    "emr4_context_fabric.admission_conflict_reason": (
+        "POSITION_DIGEST_MISMATCH",
+        "OBSERVATION_DIGEST_REUSE",
+    ),
+    "emr4_context_fabric.generation_state": (
+        "ACTIVE",
+        "REBASE_REQUIRED",
+        "REVOKED",
+        "CONSUMED",
+    ),
+    "emr4_context_fabric.checkpoint_state": (
+        "ACTIVE",
+        "REBASE_REQUIRED",
+        "REVOKED",
+        "CONSUMED",
+    ),
+    "emr4_context_fabric.frame_type": (
+        "CURRENT_DIARY_PROJECTION",
+        "CURRENT_WAITING_ROOM_PROJECTION",
+    ),
+    "emr4_context_fabric.frame_lifecycle": ("CURRENT", "RETIRED"),
+    "emr4_context_fabric.obligation_count_bucket": (
+        "ONE",
+        "TWO_TO_FOUR",
+        "FIVE_PLUS",
+    ),
+    "emr4_context_fabric.obligation_state": ("PENDING", "COMPLETED"),
+    "emr4_context_fabric.lifecycle_entry_kind": ("DECISION", "KEY_ROTATION"),
+    "emr4_context_fabric.retention_family": (
+        "SOURCE",
+        "RECEIPT_CHECKPOINT",
+        "AUDIT",
+    ),
+    "emr4_context_fabric.recovery_pin_reason": (
+        "RECOVERY",
+        "AUDIT_REVIEW",
+        "KEY_OVERLAP",
+        "LEGAL_HOLD",
+    ),
+    "emr4_context_fabric.recovery_pin_state": ("ACTIVE", "RELEASED"),
+    "emr4_context_fabric.logical_capability": (
+        "PRODUCER",
+        "OBSERVER",
+        "COORDINATOR",
+        "LIFECYCLE",
+        "RETENTION",
+        "APPLICATION_READ",
+    ),
+    "emr4_context_fabric.generation_terminal_reason": (
+        "REVOKED",
+        "CONTINUITY_LOSS",
+        "KEY_LOSS",
+        "DISABLED",
+    ),
+    "emr4_context_fabric.durability_transition_result_kind": (
+        "RECEIPT_APPLIED",
+        "RECEIPT_REPLAYED",
+        "REBASE_APPLIED",
+        "TERMINAL_REPLAYED",
+    ),
+    "emr4_context_fabric.source_retention_reason": (
+        "ELIGIBLE",
+        "EXECUTION_DISABLED",
+        "CHECKPOINT_LAG",
+        "ACTIVE_PIN",
+        "KEY_OVERLAP",
+        "GRACE_PENDING",
+        "AMBIGUOUS_CENSUS",
+        "NO_NON_CONSUMED_GENERATION",
+    ),
+}
+
+EXACT_NORMATIVE_SECTION_SHA256 = {
+    "structural_feasibility_recovery_v1": (
+        "46b228799ed3aa07bad5011f9e3bf5c6c5b772b2984fa1531a0a9655b2a8793e"
+    ),
+    "effective_parent_summary": (
+        "f60fdeefb4a6ffd14baa3a5f2ad8398d6dd492715b8967cae580c884c5fa317e"
+    ),
+    "qualified_identifier_catalogue": (
+        "e2d0dda1b69f16e5f1b5fe84e3ce236e6daf4ec00fd83d39871ca2b1a7dc5a5c"
+    ),
+    "typed_ir_contract": (
+        "786594c3e590aaabbaf53557bd0e1cb383d34bdb0dc91402701db4b786bb280b"
+    ),
+    "trigger_applicability_return_matrix": (
+        "03a9f8aacbdbf7ed9eabc3b58d5f90beea5fe8fb64e6b36b1c373672a3735906"
+    ),
+    "renderer_order": (
+        "ee78010dfee3a56bcf19f7d0348b4f52ac1e534b5a48098ca9cfb441915954cd"
+    ),
+    "artifact_boundary": (
+        "0b313c144ebef5c90f804acb3b10bedc6ef5643c7857887cc4785ae3d21d9a1d"
+    ),
+}
+
+_EXACT_PRODUCER_EVENT_PROOF_SHA256 = (
+    "b0f5cb5144b5a1d03457a4eafcc536a67440ceeede0a1dd343c4b094d0ea2867"
+)
+
+
+def _canonical_sha256(value: Any) -> str:
+    encoded = json.dumps(value, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 INSTRUCTION_OPCODES = frozenset(
     {
@@ -110,6 +257,7 @@ EXPRESSION_OPCODES = frozenset(
         "ADD",
         "SUBTRACT",
         "TIMESTAMP_ADD_MINUTES",
+        "TIMESTAMP_ADD_SECONDS",
         "AND",
         "OR",
         "JSON_GET_CAST",
@@ -313,6 +461,7 @@ class _SemanticValidator:
         if not isinstance(self.contract, Mapping):
             self.issue("$", "contract_type", "contract must be an object")
             return self.report()
+        self._validate_normative_envelope()
         self._load_catalogue()
         self._load_failures()
         self._load_signatures()
@@ -322,6 +471,184 @@ class _SemanticValidator:
         self._validate_programs()
         self._validate_graph()
         return self.report()
+
+    def _validate_normative_envelope(self) -> None:
+        """Bind R4 normative authority without whole-candidate byte equality."""
+
+        if (
+            "parent_binding" not in self.contract
+            and "structural_feasibility_recovery_v1" not in self.contract
+        ):
+            return
+        if self.contract.get("schema_version") != (
+            "raisa.context_fabric.function_trigger_body_architecture.v3"
+        ):
+            self.issue(
+                "$.schema_version",
+                "normative_schema_version",
+                "the exact v3 typed-body schema version is required",
+            )
+        if self.contract.get("status") != "architecture_only_unmounted_typed_ir":
+            self.issue(
+                "$.status",
+                "normative_status",
+                "the exact unmounted architecture-only status is required",
+            )
+        if self.contract.get("parent_binding") != EXACT_PARENT_BINDING:
+            self.issue(
+                "$.parent_binding",
+                "parent_binding_mismatch",
+                "parent path, immutable digest, and retained-authority rule must be exact",
+            )
+        for section, expected_digest in EXACT_NORMATIVE_SECTION_SHA256.items():
+            actual_digest = _canonical_sha256(self.contract.get(section))
+            if actual_digest != expected_digest:
+                self.issue(
+                    f"$.{section}",
+                    "normative_section_mismatch",
+                    f"{section} differs from its independently frozen scalar envelope",
+                )
+
+        recovery = self.contract.get("structural_feasibility_recovery_v1")
+        operations = recovery.get("operations") if isinstance(recovery, Mapping) else None
+        expected_ids = [f"REC{index:02d}" for index in range(1, 27)]
+        if not isinstance(operations, list) or [
+            operation.get("id") if isinstance(operation, Mapping) else None
+            for operation in operations
+        ] != expected_ids:
+            self.issue(
+                "$.structural_feasibility_recovery_v1.operations",
+                "recovery_operation_order",
+                "recovery must contain exact ordered REC01 through REC26",
+            )
+        elif operations[18] != {
+            "id": "REC19",
+            "kind": "ADD_ENUM",
+            "target": "emr4_context_fabric.source_retention_reason",
+            "values": list(EXACT_ENUM_VALUES["emr4_context_fabric.source_retention_reason"]),
+        }:
+            self.issue(
+                "$.structural_feasibility_recovery_v1.operations[18]",
+                "retention_reason_vocabulary",
+                "REC19 must equal the exact ordered retention-reason vocabulary",
+            )
+
+        parent = self.contract.get("effective_parent_summary")
+        signatures = (
+            parent.get("effective_signatures") if isinstance(parent, Mapping) else None
+        )
+        signature_rows: list[Any] = []
+        if isinstance(signatures, Mapping):
+            signature_rows.append(signatures.get("support"))
+            for group in ("entry_points", "trigger_functions"):
+                rows = signatures.get(group)
+                if isinstance(rows, list):
+                    signature_rows.extend(rows)
+        if len(signature_rows) != 23 or any(
+            not isinstance(row, Mapping) or row.get("public_execute") is not False
+            for row in signature_rows
+        ):
+            self.issue(
+                "$.effective_parent_summary.effective_signatures",
+                "public_execute_denial",
+                "support and all twenty-two full signatures must deny PUBLIC execute",
+            )
+
+        roles = parent.get("effective_roles") if isinstance(parent, Mapping) else None
+        if not isinstance(roles, list):
+            self.issue(
+                "$.effective_parent_summary.effective_roles",
+                "effective_roles",
+                "the exact effective role matrix is required",
+            )
+        else:
+            outbox = (
+                "emr4_context_fabric.diary_context_observation_outbox_v1"
+            )
+            product_prefix = "public."
+            trigger_ids = set(EXACT_TRIGGER_FUNCTIONS)
+            for index, role in enumerate(roles):
+                if not isinstance(role, Mapping):
+                    continue
+                role_path = f"$.effective_parent_summary.effective_roles[{index}]"
+                for grant in role.get("direct_table_dml", []):
+                    if not isinstance(grant, Mapping):
+                        continue
+                    privileges = grant.get("privileges")
+                    relation = grant.get("relation")
+                    if relation == outbox and isinstance(privileges, list) and (
+                        "DELETE" in privileges
+                    ):
+                        self.issue(
+                            role_path,
+                            "outbox_delete_privilege",
+                            "no effective role receives direct outbox DELETE",
+                        )
+                    if (
+                        isinstance(relation, str)
+                        and relation.startswith(product_prefix)
+                        and privileges
+                    ):
+                        self.issue(
+                            role_path,
+                            "product_dml_privilege",
+                            "no effective role receives product DML",
+                        )
+                if role.get("runtime_role") is True:
+                    direct_select = role.get("direct_table_select")
+                    if isinstance(direct_select, list) and any(
+                        isinstance(relation, str)
+                        and relation.startswith(product_prefix)
+                        for relation in direct_select
+                    ):
+                        self.issue(
+                            role_path,
+                            "runtime_product_read",
+                            "runtime roles receive no direct product-table read",
+                        )
+                    execute = role.get("execute_entry_points")
+                    if isinstance(execute, list) and trigger_ids.intersection(execute):
+                        self.issue(
+                            role_path,
+                            "runtime_trigger_execute",
+                            "runtime roles receive no trigger-function execute authority",
+                        )
+
+        programs = self.contract.get("body_programs")
+        producer = None
+        if isinstance(programs, list):
+            producer = next(
+                (
+                    program
+                    for program in programs
+                    if isinstance(program, Mapping)
+                    and program.get("id") == EXACT_ENTRY_POINTS[0]
+                ),
+                None,
+            )
+        ast = producer.get("ast") if isinstance(producer, Mapping) else None
+        nodes = ast.get("nodes") if isinstance(ast, Mapping) else None
+        event_proof = None
+        if isinstance(nodes, list):
+            event_proof = next(
+                (
+                    node
+                    for node in nodes
+                    if isinstance(node, Mapping)
+                    and node.get("node_id")
+                    == (
+                        "emr4_context_fabric."
+                        "project_update_confirm_reschedule_v1.p12"
+                    )
+                ),
+                None,
+            )
+        if _canonical_sha256(event_proof) != _EXACT_PRODUCER_EVENT_PROOF_SHA256:
+            self.issue(
+                "$.body_programs[0].ast.nodes",
+                "producer_event_membership_proof",
+                "the exact central producer event-membership assertion is required",
+            )
 
     def report(self) -> ValidationReport:
         issues = tuple(sorted(set(self.issues)))
@@ -1877,6 +2204,27 @@ class _SemanticValidator:
                         self.issue(
                             path, "raw_sql_text", "SQL/DDL/control text is forbidden"
                         )
+            enum_type = (
+                type_name.removesuffix("[]")
+                if isinstance(type_name, str) and type_name.endswith("[]")
+                else type_name
+            )
+            allowed_enum_values = EXACT_ENUM_VALUES.get(str(enum_type))
+            if allowed_enum_values is not None:
+                if op == "CONST":
+                    enum_values = [expression.get("value")]
+                else:
+                    enum_values = values if isinstance(values, list) else []
+                for value in enum_values:
+                    # A typed SQL NULL is not an enum label.  Nullable enum
+                    # fields use it legitimately, while every non-null scalar
+                    # remains closed against the effective catalogue.
+                    if value is not None and value not in allowed_enum_values:
+                        self.issue(
+                            path,
+                            "enum_constant_membership",
+                            f"{value!r} is not a member of {enum_type}",
+                        )
             return _ExprResult(type_name)
 
         if op == "FIELD":
@@ -2068,6 +2416,7 @@ class _SemanticValidator:
             "ADD",
             "SUBTRACT",
             "TIMESTAMP_ADD_MINUTES",
+            "TIMESTAMP_ADD_SECONDS",
         }:
             self._expression_keys(expression, {"op", "left", "right", "type"}, path)
             left = self._expression(expression.get("left"), state, symbols, path)
@@ -2098,8 +2447,8 @@ class _SemanticValidator:
             ):
                 self.issue(
                     path,
-                    "timestamp_minutes_type",
-                    "TIMESTAMP_ADD_MINUTES accepts timestamptz and integer minutes",
+                    "timestamp_interval_type",
+                    f"{op} accepts timestamptz and an integer interval",
                 )
             return self._combine_expr(result_type, left, right)
 
@@ -2774,6 +3123,19 @@ class _SemanticValidator:
         return {token}
 
 
+def assert_normative_envelope(
+    contract: Mapping[str, Any],
+) -> tuple[ValidationIssue, ...]:
+    """Reject drift in the independent R4 authority/scalar envelope."""
+
+    validator = _SemanticValidator(contract, compare_stored=False)
+    validator._validate_normative_envelope()
+    issues = tuple(sorted(set(validator.issues)))
+    if issues:
+        raise ContractValidationError(issues)
+    return issues
+
+
 def derive_contract_semantics(contract: Mapping[str, Any]) -> dict[str, Any]:
     """Derive canonical body summaries and call graph without trusting storage.
 
@@ -2822,6 +3184,9 @@ __all__ = [
     "BodyAnalysis",
     "ContractValidationError",
     "EXACT_ENTRY_POINTS",
+    "EXACT_ENUM_VALUES",
+    "EXACT_NORMATIVE_SECTION_SHA256",
+    "EXACT_PARENT_BINDING",
     "EXACT_SUPPORT_FUNCTION",
     "EXACT_TRIGGER_FUNCTIONS",
     "EXPRESSION_OPCODES",
@@ -2829,6 +3194,7 @@ __all__ = [
     "ValidationIssue",
     "ValidationReport",
     "assert_contract_valid",
+    "assert_normative_envelope",
     "derive_contract_semantics",
     "validate_contract",
 ]
