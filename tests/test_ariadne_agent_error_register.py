@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 86
+    assert register["register_revision"] == 87
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 94)
+        f"AER-{index:04d}" for index in range(1, 95)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -1370,26 +1370,44 @@ def test_disposable_postgresql_plan_review_underreport_is_contained() -> None:
         "verifier.postgresql_cluster_scope_and_psql_atomicity_underreport"
     )
     assert incident["related_incident_ids"] == []
-    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert "--file=-" in incident["correction"]["action"]
-    assert incident["status"] == "contained"
+    assert incident["status"] == "corrected"
+
+
+def test_disposable_postgresql_long_review_path_is_recovered() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0094"
+    ]
+
+    assert incident["origin"] == "harness"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "harness_failure"
+    assert incident["process_severity"] == "low"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "harness.windows_verifier_worktree_destination_path_too_long"
+    )
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "r41" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
 
 
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 93
+    assert report["incident_count"] == 94
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 75,
-        "harness": 5,
+        "harness": 6,
         "repository": 5,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
         "evidence_misreport": 11,
-        "harness_failure": 5,
+        "harness_failure": 6,
         "output_contract_violation": 30,
         "read_only_violation": 2,
         "reasoning_claim_error": 17,
@@ -1398,7 +1416,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 71,
+        "canonical_unchanged": 72,
         "untrusted_partial_worktree": 20,
     }
     assert report["recurring_patterns"] == [
@@ -1536,13 +1554,14 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "harness.windows_verifier_worktree_destination_path_too_long",
-            "incident_count": 2,
-            "incident_ids": ["AER-0063", "AER-0078"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0063", "AER-0078", "AER-0094"],
             "origins": ["harness"],
             "categories": ["harness_failure"],
             "roles": ["orchestrator"],
             "resource_ids": ["git-worktree-windows-path-layout"],
             "prevention_controls": [
+                "All Windows verifier worktrees use the next short rNN path by default; descriptive tranche identity belongs only in branch, packet and receipt metadata.",
                 "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
                 "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination.",
             ],

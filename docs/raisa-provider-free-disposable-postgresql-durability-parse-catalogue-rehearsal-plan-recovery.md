@@ -2,7 +2,8 @@
 
 Date: 2026-08-07
 
-Status: Sol-owned candidate recovery pending a fresh exact-HEAD veto
+Status: accepted after fresh exact-HEAD replacement veto at
+`009395ac28eb7ac05017fe5fbd1ae1439ecf948d`
 
 ## Rejected review
 

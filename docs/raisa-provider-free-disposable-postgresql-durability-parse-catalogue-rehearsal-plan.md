@@ -2,9 +2,9 @@
 
 Date: 2026-08-07
 
-Status: candidate Sol recovery after the first independent veto was rejected;
-no Docker or PostgreSQL execution is admitted until deterministic recovery
-checks and a genuinely fresh exact-HEAD replacement veto pass
+Status: accepted after Sol recovery and a genuinely fresh exact-HEAD
+replacement veto at `009395ac28eb7ac05017fe5fbd1ae1439ecf948d`;
+implementation remains bounded by this plan
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`

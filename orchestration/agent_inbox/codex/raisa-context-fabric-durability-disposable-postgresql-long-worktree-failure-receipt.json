@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.worktree-failure.v1",
+  "status": "contained_and_recovered",
+  "attempt_id": "raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-worktree-001",
+  "candidate_head": "009395ac28eb7ac05017fe5fbd1ae1439ecf948d",
+  "failed_destination": "C:/Users/sarashera/EMR4-worktrees/disposable-pg-plan-recovery-review-009395ac",
+  "failure": "Windows filename too long during git worktree checkout; Git could not reset the index.",
+  "failed_destination_exists_after": false,
+  "failed_destination_registered_after": false,
+  "provider_or_model_calls": 0,
+  "docker_or_database_calls": 0,
+  "candidate_changed": false,
+  "recovery_destination": "C:/Users/sarashera/EMR4-worktrees/r41",
+  "recovery_preflight": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-worktree-preflight.json",
+  "replacement_review": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-receipt.json",
+  "replacement_decision": "pass",
+  "authority_boundary": "local_worktree_failure_only_no_runtime_or_acceptance_authority"
+}

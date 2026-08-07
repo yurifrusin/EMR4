@@ -1,15 +1,15 @@
 {
-  "canonical_register_sha256": "870c0f057d9d8d57df143134261de405be8c591c96f45e7d72e6a8a8c2552fc4",
+  "canonical_register_sha256": "be91ef917ce610762fbcd0c2f873938ce82d934ccf78f983615e8b613d1f3ebc",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 71,
+      "canonical_unchanged": 72,
       "untrusted_partial_worktree": 20
     },
     "by_category": {
       "command_scope_violation": 15,
       "evidence_misreport": 11,
-      "harness_failure": 5,
+      "harness_failure": 6,
       "output_contract_violation": 30,
       "read_only_violation": 2,
       "reasoning_claim_error": 17,
@@ -18,12 +18,12 @@
     },
     "by_origin": {
       "agent_behavior": 75,
-      "harness": 5,
+      "harness": 6,
       "repository": 5,
       "transport": 8
     },
     "by_process_severity": {
-      "low": 31,
+      "low": 32,
       "material": 30,
       "moderate": 32
     },
@@ -41,7 +41,7 @@
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
       "deepseek-v4-flash-implementation-worker::implementer": 2,
-      "git-worktree-windows-path-layout::orchestrator": 2,
+      "git-worktree-windows-path-layout::orchestrator": 3,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,
@@ -50,12 +50,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 53,
+      "orchestrator": 54,
       "verifier": 26
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 93,
+  "incident_count": 94,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -291,15 +291,17 @@
       "categories": [
         "harness_failure"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0063",
-        "AER-0078"
+        "AER-0078",
+        "AER-0094"
       ],
       "origins": [
         "harness"
       ],
       "prevention_controls": [
+        "All Windows verifier worktrees use the next short rNN path by default; descriptive tranche identity belongs only in branch, packet and receipt metadata.",
         "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
         "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination."
       ],
@@ -364,7 +366,7 @@
       ]
     }
   ],
-  "register_revision": 86,
+  "register_revision": 87,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-08"
 }

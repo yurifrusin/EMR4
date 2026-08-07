@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: candidate Sol recovery; runtime remains closed until replacement veto
+Status: accepted for the bounded disposable rehearsal only
 
 ## Scope and assets
 

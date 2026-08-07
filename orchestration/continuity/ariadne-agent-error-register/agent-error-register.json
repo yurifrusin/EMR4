@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 86,
+  "register_revision": 87,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3646,16 +3646,59 @@
       "recurrence_signature": "verifier.postgresql_cluster_scope_and_psql_atomicity_underreport",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "The pass is preserved but not admitted. Sol recovered the plan so the invalid transaction runs first while roles are absent and every artifact stream uses --file=- with --single-transaction; a fresh exact-HEAD replacement veto is mandatory before runtime.",
+        "status": "corrected_fresh_attempt",
+        "action": "The pass is preserved but not admitted. Sol recovered the plan so the invalid transaction runs first while roles are absent and every artifact stream uses --file=- with --single-transaction. A genuinely fresh exact-HEAD replacement veto passed the unchanged recovered commit with no P0-P3 finding.",
         "prevention_control": "Database-plan veto acceptance must independently reconcile object scope across database versus cluster catalogues and the exact CLI preconditions of every claimed transaction control, even when the verifier reports pass.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-review-sol-rejection-receipt.json",
           "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
-          "docs/ariadne-agent-error-correction-register-revision-86.md"
+          "docs/ariadne-agent-error-correction-register-revision-86.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-87.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0094",
+      "attempt_id": "raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-worktree-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-disposable-postgresql-parse-catalogue-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "git-worktree-windows-path-layout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_worktree_checkout",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "A replacement-verifier checkout must use the established short rNN destination so every versioned repository path fits on Windows and clean exact-HEAD preflight can complete before dispatch.",
+      "observed_error": "Sol initially used the descriptive destination disposable-pg-plan-recovery-review-009395ac. Git reported Filename too long for four versioned evidence paths and could not reset the index; the destination did not remain present or registered.",
+      "detection_method": "The git worktree command failed before verifier dispatch. Sol verified the requested destination was absent and unregistered, preserved the failure receipt, then checked out the unchanged exact commit at r41 and passed preflight before a fresh review call.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-long-worktree-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-worktree-preflight.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-87.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.windows_verifier_worktree_destination_path_too_long",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed destination remained absent and unregistered. The unchanged full candidate SHA was checked out at the short r41 destination, passed clean exact-HEAD preflight and received the required fresh replacement veto.",
+        "prevention_control": "All Windows verifier worktrees use the next short rNN path by default; descriptive tranche identity belongs only in branch, packet and receipt metadata.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-long-worktree-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-87.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

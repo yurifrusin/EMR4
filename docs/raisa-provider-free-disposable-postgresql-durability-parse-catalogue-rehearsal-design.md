@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: candidate Sol recovery; no runtime authority before replacement veto
+Status: accepted after Sol recovery and fresh exact-HEAD replacement veto
 
 ## Components
 

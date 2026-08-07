@@ -531,8 +531,8 @@ generation rehearsal. The architecture-only provider-free default-off
   checks with no P0-P3 finding and unchanged clean postflight at
   `a93d07405ad35d7d6c0603065625c17ec14ab23e`. The body architecture and its
   recovered inert DDL lowering are accepted. The next bounded candidate is the
-  provider-free disposable PostgreSQL-16 parse-and-catalogue rehearsal frozen
-  in
+  provider-free disposable PostgreSQL-16 parse-and-catalogue rehearsal accepted
+  after Sol recovery and fresh exact-HEAD replacement veto in
   `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan.md`.
   Applied migration, application behavior, operational database/source access
   and every real-product or clinical descendant remain closed.
