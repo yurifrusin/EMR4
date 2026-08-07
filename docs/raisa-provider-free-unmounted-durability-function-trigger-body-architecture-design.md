@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: fifth candidate rejected; third exact-veto recovery frozen and
-correction implementation not yet accepted
+Status: fifth candidate rejected; corrected third exact-veto replacement built
+with deterministic and independent acceptance pending
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -37,6 +37,9 @@ Normative third exact-veto recovery:
 
 Latest rejected candidate:
 `sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
+
+Rejected uncommitted R6 worktree candidate:
+`sha256:49db11e74a46d1056e694614a970037cf021e174d71114f5262e950b9075b01f`
 
 ## Purpose and derivation
 
@@ -311,6 +314,12 @@ intervals, then dependent rows in stable primary-key order. Producer uses claim,
 existing appointment/audit/event proof, alias, then stream head/outbox; admission
 uses retained admissions/receipt before source/key. No body acquires another
 plane's locks in reverse order.
+
+Within the coordinator, each reachable route acquires a contiguous lock
+sequence exactly once. Primary and conflict routes hold the current recovery
+anchor before their retained admission row and pass that anchor into any
+rebase descendant. Admission-missing rebase routes take one local anchor lock;
+receipt and terminal replay routes do not read or lock the anchor.
 
 Recovery-pin mutation remains absent and ungrantable. Evaluation conservatively
 honours any valid pin rows, but no current entry point claims pin creation or

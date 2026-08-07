@@ -428,6 +428,21 @@ The third exact-veto recovery is now binding for path-local source-independent
 coordinator replay, independently derived complete recovery anchors and
 structurally duplicate-free set key pairs.
 
+Its first uncommitted worktree implementation generated contract
+`sha256:49db11e74a46d1056e694614a970037cf021e174d71114f5262e950b9075b01f`
+but is rejected: a read-only challenger reproduced that the immutable parent
+requires `KEY_ROTATION` lifecycle `source_position IS NULL`, while the producer
+and anchor proof used checkpoint position. The corrected third recovery also
+closes latest-prior-audit proof across intervening rotations before any new
+candidate may be admitted.
+
+The first combined R6 coordinator build was also rejected before commit on
+duplicate and non-contiguous lock ordinals. The corrected candidate
+`sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b`
+uses one current-anchor lock before primary/conflict admission and reuses it in
+every descendant rebase branch. Deterministic and independent acceptance remain
+pending.
+
 ## Claim boundary and next dependency
 
 Passing this tranche will prove only an exact provider-free unmounted

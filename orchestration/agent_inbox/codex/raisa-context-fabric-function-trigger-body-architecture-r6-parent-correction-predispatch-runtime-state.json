@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_r6_parent_constraint_and_audit_chain_correction",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton keeps the provider-free unmounted body architecture active and requires uninterrupted bounded recovery before any inert DDL rehearsal.",
+    "current_authority_allocation": "GPT Sol retains architecture, integration, generation, tests, acceptance and Git. One existing native entry-program worker receives only the corrected R6B owned source/test/result paths and cannot self-accept or open external surfaces.",
+    "active_plan_and_acceptance": "The uncommitted worktree contract sha256:49db11e74a46d1056e694614a970037cf021e174d71114f5262e950b9075b01f is rejected because KEY_ROTATION contradicted the immutable parent's NULL source-position branch. Corrected R6B also freezes latest-prior-audit proof across rotations and checkpoint timestamp closure. AER revision 74 records the rejection and nonterminal challenge.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL/DDL rendering or execution, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked artifacts remain preserved and excluded.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at recovery-control HEAD 2b3798f8 with only bounded R6 candidate/control changes in the tracked worktree. Local/origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "r6_parent_correction_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reproduced the exact immutable-parent contradiction and froze the bounded correction."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The prior entry worker is complete and available for one bounded corrected follow-up."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model call is authorised or used."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external DeepSeek transport is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

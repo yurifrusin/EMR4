@@ -404,6 +404,7 @@ def _expression_defs() -> dict[str, Any]:
                             }
                         ),
                         min_items=1,
+                        unique=True,
                     ),
                     "type": {"const": "pg_catalog.boolean"},
                 }
@@ -421,6 +422,7 @@ def _expression_defs() -> dict[str, Any]:
                             }
                         ),
                         min_items=1,
+                        unique=True,
                     ),
                     "type": {"const": "pg_catalog.boolean"},
                 }

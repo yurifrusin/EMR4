@@ -11,7 +11,7 @@
       "type": "string"
     },
     "contract_sha256": {
-      "const": "sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a"
+      "const": "sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b"
     },
     "parent_binding": {
       "type": "object",
@@ -13136,7 +13136,8 @@
                 ],
                 "additionalProperties": false
               },
-              "minItems": 1
+              "minItems": 1,
+              "uniqueItems": true
             },
             "type": {
               "const": "pg_catalog.boolean"
@@ -13227,7 +13228,8 @@
                 ],
                 "additionalProperties": false
               },
-              "minItems": 1
+              "minItems": 1,
+              "uniqueItems": true
             },
             "type": {
               "const": "pg_catalog.boolean"

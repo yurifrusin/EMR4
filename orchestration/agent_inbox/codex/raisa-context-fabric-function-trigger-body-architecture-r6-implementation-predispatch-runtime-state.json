@@ -1,0 +1,102 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_three_disjoint_third_veto_recovery_lanes",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully reread baton keeps the provider-free unmounted function-and-trigger-body architecture active before inert DDL rehearsal and authorises uninterrupted bounded recovery after a failed exact gate.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery, shared reconciliation, generated artifacts, tests, acceptance and Git authority. Three fresh native lanes receive read-only anchor challenge, coordinator/anchor implementation or structural-schema implementation scopes. They cannot self-accept, stage, commit, push or open external/data/runtime surfaces.",
+    "active_plan_and_acceptance": "Recovery-control source HEAD 2b3798f8 freezes R6A branch-local source-independent replay, R6B independently derived complete recovery-anchor proof and R6C structurally duplicate-free set key pairs. AER revision 72 and the focused recovery controls pass; the three lane packets have disjoint write ownership.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL/DDL rendering or execution, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and all unrelated untracked artifacts remain preserved and excluded.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at recovery-control HEAD 2b3798f8. Only the three exact worker packets and this receipt pair are untracked. Local/origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "third_veto_recovery_three_lane_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol froze exact recovery semantics and disjoint lane ownership before dispatch."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Three fresh native lane slots are available; earlier lanes and reviewer are complete."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider/model call is authorised or used."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "External DeepSeek transport is not used; bounded native lanes perform repository-local work."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-r6-anchor-challenger",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-r6-entry-worker",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-r6-schema-worker",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

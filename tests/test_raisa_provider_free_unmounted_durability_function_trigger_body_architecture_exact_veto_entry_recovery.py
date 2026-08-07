@@ -126,8 +126,7 @@ def assert_coordinator_recovery(program: dict[str, Any]) -> None:
     assert (entry.ADMISSION, 5) in lock_pairs
     assert (entry.LIFECYCLE, 4) in lock_pairs
     assert (entry.AUDIT, 5) in lock_pairs
-    assert (entry.ADMISSION, 4) in lock_pairs
-    assert (entry.ANCHOR, 5) in lock_pairs
+    assert (entry.ANCHOR, 4) in lock_pairs
     assert (entry.FRAME, 6) in lock_pairs
     assert (entry.FRAME, 7) in lock_pairs
     assert (entry.WATERMARK, 8) in lock_pairs

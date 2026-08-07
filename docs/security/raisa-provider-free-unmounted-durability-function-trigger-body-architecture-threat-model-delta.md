@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: fifth candidate rejected; third exact-veto recovery frozen and
-correction implementation not yet accepted
+Status: fifth candidate rejected; corrected third exact-veto replacement built
+with deterministic and independent acceptance pending
 
 Normative implementation recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-implementation-recovery.md`
@@ -16,6 +16,9 @@ Normative third exact-veto recovery:
 
 Latest rejected candidate:
 `sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
+
+Rejected uncommitted R6 worktree candidate:
+`sha256:49db11e74a46d1056e694614a970037cf021e174d71114f5262e950b9075b01f`
 
 ## Scope and assets
 
@@ -83,6 +86,7 @@ survive as runtime authority.
 | Producer or arbitrary principal deletes outbox | Outbox delete is accepted only for an older row, exact retention binding, enabled policy and sole path through `purge_source_rows_v1`; producer/current/other deletion fails. Current policy disables execution. | Later enablement requires a separate operational gate. |
 | Fabricated receipt on rebase, gap or missing primary | Coordinator returns closed `durability_transition_result_v1`; only receipt kinds carry stored receipt digest. Rebase/terminal kinds carry checkpoint integrity digest and never fabricate `PRIMARY` or receipt. | Consumer handling of the composite is not implemented here. |
 | Coordinator terminal replay depends on an unavailable caller reason | The coordinator has no terminal-reason input. `TERMINAL_REPLAYED` is derived only from stored terminal generation, checkpoint and result-integrity state. Same-reason comparison belongs exclusively to `consume_observer_generation_v1`, which has the typed `closed_reason` input. | Runtime consumer behavior remains unimplemented. |
+| Coordinator rebase reacquires or reorders the current anchor around admission | Path-sensitive validation requires one contiguous lock sequence per terminal route. Primary/conflict routes lock one current anchor before admission and reuse that symbol in every descendant rebase; admission-missing rebase takes one branch-local anchor; receipt/terminal replay stays anchor-free. | PostgreSQL deadlock and concurrency behaviour remain unproved until a later executable rehearsal. |
 | Observer guesses binding revision from a Boolean helper | Admission receiver has exact binding-table read, derives the active row/revision atomically and stores it. The Boolean helper remains an RLS/allow check, not revision evidence. | Credential issuance and channel authentication remain later gates. |
 | Missing initial key material, missing stream head or missing baseline anchor | Registration takes typed `initial_key_interval`, requires start at checkpoint plus one, creates/reloads position-zero head and atomically creates checkpoint/frames/watermarks/key plus independently lifecycle-authored baseline anchor. Replay compares the complete baseline. | Real key-store availability and anchor execution are unproved. |
 | Registration falsely gains recovery-pin authority | Pin relation remains ungrantable and mutation-inert; no body creates/releases pins. Retention only honours valid existing rows. | Pin lifecycle requires a separately accepted future gate. |

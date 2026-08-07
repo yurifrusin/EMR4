@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 72,
+  "register_revision": 75,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-07",
@@ -2868,6 +2868,158 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-independent-veto.md",
           "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-72.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0074",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r6-predispatch-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every pre-worker-dispatch runtime state must inventory the complete managed worker-slot set from orchestrator_requirements.yaml, including deepseek-flash-workers even when no external DeepSeek transport is selected.",
+      "observed_error": "The first R6 implementation predispatch state listed three descriptive native lane resources but omitted the required managed deepseek-flash-workers inventory. The preflight correctly returned revision_required and prohibited dispatch.",
+      "detection_method": "scripts.ariadne_orchestrator_preflight emitted worker_slot_inventory_missing:deepseek-flash-workers before any worker was dispatched. Sol added the empty required inventory and a distinct v2 receipt passed with worker_dispatch_permitted true.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-implementation-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-implementation-predispatch-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-73.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_managed_inventory_omission",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "No dispatch followed the failed receipt. The corrected runtime state inventories deepseek-flash-workers with no active or stale instance and the distinct v2 predispatch receipt passes.",
+        "prevention_control": "Every dispatch runtime state starts with every managed_resource_id copied verbatim from orchestrator_requirements.yaml before any descriptive native-lane inventory is added.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-implementation-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-implementation-predispatch-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-73.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0075",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r6-worktree-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "The body architecture and every recovery must preserve the immutable parent's lifecycle branch constraint: DECISION has a non-null source position and null key interval, while KEY_ROTATION has null source position and a present ordered key interval.",
+      "observed_error": "The first R6 worktree candidate and the initial R6B recovery wording treated KEY_ROTATION lifecycle source_position as the unchanged checkpoint position. The generated candidate therefore contradicted the parent's exact KEY_ROTATION source_position IS NULL branch even though the checkpoint position itself should remain unchanged.",
+      "detection_method": "The bounded read-only anchor challenger identified the mismatch. Sol independently reproduced it at the immutable parent contract's exact lifecycle branch constraint and rejected uncommitted candidate digest sha256:49db11e74a46d1056e694614a970037cf021e174d71114f5262e950b9075b01f before acceptance or commit.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-anchor-challenger-interrupted.md",
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-74.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.child_body_parent_constraint_branch_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The candidate remains rejected. The corrected third recovery requires the rotation producer and anchor proof to use NULL lifecycle source position, prove unchanged checkpoint position from the preceding anchor and validate latest-prior-audit continuity across rotations.",
+        "prevention_control": "Every child body branch must be mechanically compared with every immutable parent check-constraint branch, not only with prose and digest formulas, before generation or exact-veto dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-anchor-challenger-interrupted.md",
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-74.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0076",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r6-anchor-challenge-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "codex-native-architecture-challenger",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_subagent_observation",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A bounded read-only architecture challenger must finish with exactly one requested terminal RESULT after preserving its smallest confirmed finding.",
+      "observed_error": "The challenger delivered the material KEY_ROTATION parent-constraint finding but did not return a terminal result after repeated bounded conclusion requests. Sol interrupted it twice and did not attribute acceptance authority or a fabricated terminal decision.",
+      "detection_method": "The collaboration harness continued to report the challenger as running after its finding and after explicit conclude-now messages. Sol preserved only the exact delivered finding and independently reproduced it against the parent contract.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-anchor-challenger-interrupted.md",
+        "docs/ariadne-agent-error-correction-register-revision-74.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "verifier.bounded_terminal_noncompletion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The nonterminal challenge was stopped. Its confirmed finding is preserved without overclaim, Sol reproduced it independently, and a later fresh exact-HEAD veto remains mandatory for acceptance.",
+        "prevention_control": "Read-only challenge packets use a short fixed evidence budget and must emit the terminal result immediately after the first material parent-contract contradiction is reproduced; additional hardening questions return as nonblocking notes.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-anchor-challenger-interrupted.md",
+          "docs/ariadne-agent-error-correction-register-revision-74.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0077",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r6-integration-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "Every terminal coordinator control-flow path must acquire each required lock exactly once in a contiguous strictly increasing ordinal sequence while preserving replay-local reads and current-anchor proof.",
+      "observed_error": "The first integrated R6 coordinator candidate acquired a new current-anchor lock after an existing primary lock and then reacquired the anchor inside rebase descendants. The deterministic builder rejected the uncommitted candidate with lock_ordinal_duplicate and lock_ordinal_sequence before it could be treated as evidence.",
+      "detection_method": "The source-generated contract validator traced every terminal path during the first post-integration build and failed closed on both lock invariants. Sol rejected that worktree state, moved the single current-anchor lock ahead of primary or conflict admission and made every descendant rebase reuse the already-held anchor.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-75.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.path_local_lock_order_integration_defect",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The rejected state was not committed. Primary and conflict routes now lock the current anchor at ordinal four and their admission row at ordinal five; rebase descendants reuse that held anchor, while admission-missing paths take one branch-local anchor lock and replay-only paths remain anchor-free.",
+        "prevention_control": "Every coordinator repair must rebuild through the path-sensitive validator before tests, and hostile tests must assert both branch-local relation reads and exact lock ordinals for primary, conflict, rebase, receipt-replay and terminal-replay paths.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-75.md"
         ]
       },
       "status": "contained"

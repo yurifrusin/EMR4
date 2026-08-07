@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_r6_corrected_function_trigger_body_architecture_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The binding third exact-veto recovery requires path-local source-independent replay, independently derived complete recovery anchors, duplicate-free set key pairs and one contiguous single-anchor lock sequence. The corrected generated candidate is sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b. Its complete 305-test packet, post-document 7-test plan packet, Ruff, builder check and diff check pass.",
+    "current_authority_allocation": "GPT Sol owns integration and acceptance. The completed native schema and entry-program lanes supplied candidate work only; the interrupted challenger supplied one preserved finding and no acceptance. A fresh independent reviewer remains mandatory after commit.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at 2b3798f8884cb74a4454572e2f247131cd7a7fb5 before this candidate commit; origin task is 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree contains the explicit R6 candidate plus preserved unrelated untracked files.",
+    "live_handover_current_baton": "The live baton authorises uninterrupted planned provider-free unmounted Context Fabric architecture work while every provider, patient/product data, database/source, runtime, command, deployment, Pages and protected-ref surface remains closed.",
+    "protected_evidence_boundaries": "Commit only the explicit R6 recovery, worker/incident evidence, source, generated contract/schema and focused test paths. Preserve docs/branding exactly and exclude every unrelated untracked receipt, state, evidence and cost ledger. No broad Git staging is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: normative Sol recovery frozen; correction implementation not yet
-accepted
+Status: corrected replacement candidate built; deterministic and independent
+acceptance pending
 
 Rejected candidate source HEAD:
 `5a3c5b5118f80153d545bf30ae9db99acb187cd7`
@@ -68,6 +68,11 @@ Missing, duplicate, wrong-kind or mismatched evidence fails `F_ANCHOR`.
 For a `DECISION` lifecycle row:
 
 - load the exact durability-audit row at that revision;
+- prove `source_position` is present and positive and both key-interval fields
+  are absent;
+- independently prove `prior_audit_digest` names the latest earlier audit head,
+  with no intervening audit revision, or the revision-zero registration
+  baseline anchor when no earlier audit exists;
 - for a rebase decision, prove zero classified receipt rows, independently
   recompute `checkpoint_rebase_digest_v1` from the exact locator, lifecycle
   source position and revision, and compare lifecycle, audit and checkpoint
@@ -82,13 +87,25 @@ For a `DECISION` lifecycle row:
 For a `KEY_ROTATION` lifecycle row:
 
 - prove zero durability-audit and classified-receipt rows at that revision;
+- prove lifecycle `source_position` is absent, both key-interval fields are
+  present with end strictly greater than start, and the producer body writes exactly that parent-bound
+  NULL branch shape;
 - load the exact key interval named by the lifecycle row and the immediately
   preceding immutable anchor;
 - independently recompute `key_rotation_digest_v1` from the exact locator, key
   interval, key identifier, availability attestation, previous anchor digest
   and requested revision;
 - compare that digest with lifecycle, generation key-schedule and checkpoint
-  integrity evidence, and compare lifecycle position with checkpoint position.
+  integrity evidence; prove checkpoint position and observation digest remain
+  equal to the immediately preceding anchor rather than comparing them with the
+  necessarily NULL lifecycle source position;
+- independently prove the checkpoint audit head is the latest earlier audit
+  head, or the registration baseline anchor when no audit exists, so an
+  intervening rotation cannot rewrite or roll back the audit chain.
+
+For every non-zero lifecycle kind, prove checkpoint `updated_at` equals the
+committed lifecycle timestamp. This closes the final checkpoint field without
+making time a caller input.
 
 Only after the applicable branch has derived one trusted committed integrity
 digest may the body derive `recovery_anchor_digest_v1` from the complete
@@ -96,9 +113,10 @@ verified state. Exact replay compares every stored anchor field, not only its
 digest. It never repairs partial state or advances a checkpoint.
 
 Focused acceptance must reject omitted lifecycle, audit, receipt, PRIMARY,
-conflict, key or prior-anchor evidence; copied rather than rederived controlling
-digests; wrong branch/cardinality; revision-zero append; and replay field
-substitution after resealing.
+conflict, key, previous-anchor, baseline-anchor or latest-audit evidence; copied
+rather than rederived controlling digests; a non-NULL rotation source position;
+wrong branch/cardinality; revision-zero append; checkpoint timestamp mismatch;
+audit rollback across a rotation; and replay field substitution after resealing.
 
 ## R6C — structurally duplicate-free set key pairs
 
@@ -106,6 +124,25 @@ The exact structural-schema branches for both `SET_CONTAINS_KEY.key_pairs` and
 `SET_COVERS_KEYS.key_pairs` must carry `uniqueItems: true` in addition to their
 existing non-empty tuple shape. A duplicate otherwise-valid pair must fail
 Draft 2020-12 structural validation even if semantic validation is not run.
+
+## R6D — single-anchor path-local lock order
+
+The first integrated R6 worktree state was rejected before commit because its
+coordinator acquired and then reacquired the current anchor around an existing
+admission lock. Every primary or conflict path now locks exactly one current
+anchor at ordinal four, then its admission row at ordinal five, and passes the
+held anchor symbol into descendant rebase branches. Admission-missing rebase
+paths take exactly one branch-local anchor lock. Receipt replay and
+already-terminal replay remain anchor-free and source-independent.
+
+The path-sensitive validator now rejects duplicate, non-contiguous or
+out-of-order lock ordinals before generation. Focused tests additionally assert
+the exact primary/conflict ordinals and hostile branch-local read hoisting.
+
+The corrected generated candidate is
+`sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b`.
+That digest is candidate evidence only until the full packet and a fresh
+exact-HEAD independent veto pass.
 
 ## Lane allocation
 
@@ -125,7 +162,7 @@ generation or external tools unless their later packet expressly says so.
 ## Acceptance and unchanged boundary
 
 The replacement must pass every preceding plan/recovery test plus focused
-R6A-R6C hostile proofs, the AER packet, scoped API Spine checks, Ruff, builder
+R6A-R6D hostile proofs, the AER packet, scoped API Spine checks, Ruff, builder
 `--check`, `git diff --check`, explicit-path worktree guards and a fresh clean
 exact-HEAD independent veto. Candidate
 `5a3c5b5118f80153d545bf30ae9db99acb187cd7` cannot become accepted source.
