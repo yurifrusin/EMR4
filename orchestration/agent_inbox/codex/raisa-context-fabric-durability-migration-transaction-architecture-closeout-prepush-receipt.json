@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push_task_branch_durability_migration_transaction_architecture_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Accepted source candidate c55d25d6c9704ae4612ef2d123158f71302ab411 and closeout commit 973c87a6694aa923238910fc32472e9f5fda8319 bind canonical contract sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8, ninth-veto pass, 212/212 candidate lineage, 155/155 reviewer reconciliation, 217/217 continuity closeout, Continuity 229, Compass 211 and AER revision 62.",
+    "current_authority_allocation": "GPT Sol may push only codex/ariadne-bernie-davida-parallel-seam. No integration, protected-ref, deployment, release or Pages authority is exercised. Independent reviewers remain read-only and inactive.",
+    "git_refs_and_worktree": "After fresh fetch, task HEAD is 973c87a6694aa923238910fc32472e9f5fda8319 and origin task is 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree is clean; docs/branding remains untracked and preserved.",
+    "live_handover_current_baton": "The accepted architecture and closeout are committed on the task branch. Yuri's standing uninterrupted-gate authority permits the normal task-branch push; the requested pause begins after push and no next tranche will be opened.",
+    "protected_evidence_boundaries": "Push is task-branch-only. No master/handoff movement, integration, SQL/DDL, migration, database/source, persistence, patient/product data, provider, command, runtime, deployment, production, release or Pages action is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger remain unstaged and uncommitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

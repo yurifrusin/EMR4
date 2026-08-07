@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_task_branch_durability_migration_transaction_architecture_closeout",
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted architecture and closeout are committed on the task branch. Yuri's standing uninterrupted-gate authority permits the normal task-branch push; the requested pause begins after push and no next tranche will be opened.",
+    "current_authority_allocation": "GPT Sol may push only codex/ariadne-bernie-davida-parallel-seam. No integration, protected-ref, deployment, release or Pages authority is exercised. Independent reviewers remain read-only and inactive.",
+    "active_plan_and_acceptance": "Accepted source candidate c55d25d6c9704ae4612ef2d123158f71302ab411 and closeout commit 973c87a6694aa923238910fc32472e9f5fda8319 bind canonical contract sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8, ninth-veto pass, 212/212 candidate lineage, 155/155 reviewer reconciliation, 217/217 continuity closeout, Continuity 229, Compass 211 and AER revision 62.",
+    "protected_evidence_boundaries": "Push is task-branch-only. No master/handoff movement, integration, SQL/DDL, migration, database/source, persistence, patient/product data, provider, command, runtime, deployment, production, release or Pages action is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger remain unstaged and uncommitted.",
+    "git_refs_and_worktree": "After fresh fetch, task HEAD is 973c87a6694aa923238910fc32472e9f5fda8319 and origin task is 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree is clean; docs/branding remains untracked and preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_closeout_prepush_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed only the explicit closeout allowlist and fetched exact remote refs before push."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Independent veto evidence is committed; no reviewer remains active for this closed tranche."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model call is authorised or required."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
