@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: eighth recovered architecture plan candidate pending independent veto
+Status: ninth recovered architecture plan candidate pending independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`

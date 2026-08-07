@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 58,
+  "register_revision": 60,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1963,8 +1963,8 @@
       "category": "reasoning_claim_error",
       "process_severity": "material",
       "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation and bounded conflict attempt to authenticated immutable receiver-owned evidence, preserve source-independent redelivery, use independent current anchors, atomic lifecycle effects and exact key scope, and make every product-identifier exception database-coupled to the signed command with narrow privilege, immutable bijection and non-reuse/retention treatment.",
-      "observed_error": "Seven rejected candidates successively underfroze authenticated admission, purge-safe redelivery, independent anchors, lifecycle/key scope, the owner-private alias exception, command coupling, stable bijection and exact same-transaction provenance. Recovery a0ffc10a fixed PostgreSQL-16 XID rendering and expanded the catalogue, but its veto found temporal, renderer, privilege, mutation, savepoint and retention gaps. Recovery b9de77ce closed those six defects, yet its candidate-independent exact-head veto found that the claimed renderer would still have to invent nine entry-point and thirteen trigger-function bodies and that the semantic privilege gate accepted admission-owner read widening.",
-      "detection_method": "Seven exact-head native adversarial vetoes reconciled the parent contract, admission, transaction/retention/anchor/key/API and alias semantics. They found the initial five P1s, conflict/anchor defects, product-id contradiction, independent-helper/bijection defects, missing transaction-local provenance, underpowered static acceptance, six renderer/temporal/ownership/test/claim/retention defects and finally a function-body scope overclaim plus non-exact admission-owner privilege validation before DDL admission. A separately preserved but procedurally ineligible exact-head diagnostic sharpened earlier xid, subtransaction, temporal-event and catalogue defects but supplied challenges only and no reviewer decision.",
+      "observed_error": "Eight rejected candidates successively underfroze authenticated admission, purge-safe redelivery, independent anchors, lifecycle/key scope, the owner-private alias exception, command coupling, stable bijection and exact same-transaction provenance. Recovery b9de77ce closed six temporal/renderer/privilege/test/savepoint/retention defects, yet its veto found a function-body renderer overclaim and privilege-widening test gap. Recovery 194d5f32 narrowed the renderer and closed exact privilege validation, but its veto found that the machine boundary did not separately require omission of catalogued trigger declarations and execute grants.",
+      "detection_method": "Eight exact-head native adversarial vetoes reconciled the parent contract, admission, transaction/retention/anchor/key/API and alias semantics. They found the initial five P1s, conflict/anchor defects, product-id contradiction, independent-helper/bijection defects, missing transaction-local provenance, underpowered static acceptance, six renderer/temporal/ownership/test/claim/retention defects, a function-body scope overclaim plus non-exact privilege validation, and finally incomplete machine omission of trigger declarations and execute grants before DDL admission. A separately preserved but procedurally ineligible diagnostic supplied challenges only and no reviewer decision.",
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
@@ -1981,7 +1981,9 @@
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-6-independent-veto.md",
         "docs/ariadne-agent-error-correction-register-revision-56.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-independent-veto.md",
-        "docs/ariadne-agent-error-correction-register-revision-58.md"
+        "docs/ariadne-agent-error-correction-register-revision-58.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-independent-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-60.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
@@ -1990,7 +1992,7 @@
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_implemented_pending_acceptance",
-        "action": "The eighth recovery retains bounded PRIMARY/CONFLICT admission, purge-safe comparison, the sole owner-private immutable alias bijection, exact low-XID32 provenance, the all-UPDATE appointment constraint trigger, the rule that no-write savepoints not database-observable do not weaken tuple evidence, removal of the persistent outbox-to-product-event foreign key, 44 executable RLS policies and the digest-resealed semantic validator. It removes the renderer-body overclaim: version 3 declares entry-point and trigger bodies absent, forces a structural renderer to omit those functions, triggers and execute grants, blocks DDL rehearsal and inserts a separately reviewed function-and-trigger-body architecture as the next gate. The admission receiver's ownership, six direct reads, sole admission INSERT and empty execute list are exact; digest-resealed mutations that add appointments SELECT, product UPDATE or body-rendering authority fail independently. Exact-head acceptance remains pending.",
+        "action": "Recovery 9 retains bounded PRIMARY/CONFLICT admission, purge-safe comparison, the sole owner-private immutable alias bijection, exact low-XID32 provenance, the all-UPDATE appointment constraint trigger, the rule that no-write savepoints not database-observable do not weaken tuple evidence, removal of the persistent outbox-to-product-event foreign key, 44 executable RLS policies and the digest-resealed semantic validator. It declares entry-point and trigger bodies absent and requires a structural renderer to omit entry-point functions, trigger functions, trigger declarations and execute grants; resealed mutations flip each prohibition. DDL remains blocked behind a reviewed function-and-trigger-body architecture. The admission receiver's ownership, six reads, sole INSERT and empty execute list are exact; appointments SELECT and product UPDATE widening fail. Acceptance remains pending.",
         "prevention_control": "Before accepting a database realization, trace valid/duplicate/conflicting inputs into bounded receiver evidence; prove purge-safe redelivery and independent anchor fences; enumerate atomic members and key scope; reconcile every data prohibition against exact catalogue columns, types, keys, delete actions, privileges and triggers; attack every private helper by standalone invocation; render XID and subtransaction semantics for the target PostgreSQL version; derive positive and negative event obligations from database transitions; require database evidence for command coupling; and prove forward/reverse identity uniqueness, concurrency, rollback and delete/recreate non-reuse for every pseudonymous mapping.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
@@ -2006,7 +2008,9 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-6-independent-veto.md",
           "docs/ariadne-agent-error-correction-register-revision-56.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-independent-veto.md",
-          "docs/ariadne-agent-error-correction-register-revision-58.md"
+          "docs/ariadne-agent-error-correction-register-revision-58.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-independent-veto.md",
+          "docs/ariadne-agent-error-correction-register-revision-60.md"
         ]
       },
       "status": "open"
@@ -2162,6 +2166,83 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-recovery-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-recovery-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-57.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0056",
+      "attempt_id": "raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-preflight-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-durability-migration-transaction-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Verifier worktree preflight must compare the exact full 40-character candidate HEAD copied from git rev-parse HEAD; abbreviated hashes are labels only and cannot establish exact-head equality.",
+      "observed_error": "Sol passed the abbreviated 194d5f32 value to --expected-head for the clean r31 review worktree. The verifier gate compared it with full HEAD 194d5f329e8f84ae411e5cd6492076ae6a21a894 and returned revision_required before dispatch.",
+      "detection_method": "scripts/ariadne_verifier_worktree_preflight.py failed closed with an exact HEAD mismatch; the distinct successor invocation supplied the full SHA and passed with the same clean worktree and branch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-worktree-preflight-failure.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-worktree-preflight-recovery.json",
+        "docs/ariadne-agent-error-correction-register-revision-59.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.verifier_expected_head_not_full_sha",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed preflight is preserved. A distinct preflight copied the complete 194d5f329e8f84ae411e5cd6492076ae6a21a894 candidate SHA and passed on the unchanged clean r31 worktree before reviewer dispatch.",
+        "prevention_control": "Every verifier preflight must receive the complete git rev-parse HEAD output as expected_head; abbreviated hashes are permitted only in human-facing worktree and branch labels.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-worktree-preflight-failure.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-worktree-preflight-recovery.json",
+          "docs/ariadne-agent-error-correction-register-revision-59.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0057",
+      "attempt_id": "raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-packet-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-durability-migration-transaction-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every exact path named in a read-only reviewer allowlist must be preflighted as an existing intended artifact; absent descriptive paths must be omitted rather than delegated for discovery or substitution.",
+      "observed_error": "The recovery-8 packet named two absent descriptive API overview paths. The reviewer reported them missing, substituted nothing, stayed within the remaining exact allowlist and completed the authoritative API artifact tests.",
+      "detection_method": "The reviewer reported both exact missing paths during the bounded turn; Sol independently confirmed Test-Path false and preserved the candidate, remaining API artifacts and passing 155-test result.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-packet-missing-paths-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-independent-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-60.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.review_packet_missing_allowlisted_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The missing paths are preserved as a packet error and are omitted from successor packets. The reviewer performed no discovery or substitution, and the next packet must contain only exact preflighted authoritative paths.",
+        "prevention_control": "Before reviewer dispatch, Test-Path every exact allowlisted file from the target worktree; reject the packet if any path is absent and never ask the reviewer to discover or substitute a replacement.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-packet-missing-paths-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-60.md"
         ]
       },
       "status": "corrected"

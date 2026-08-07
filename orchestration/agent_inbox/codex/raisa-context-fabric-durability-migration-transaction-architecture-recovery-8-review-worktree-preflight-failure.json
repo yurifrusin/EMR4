@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight-failure.v1",
+  "observed_on": "2026-08-06",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r31",
+  "branch": "codex/review-durability-migration-transaction-plan-recovery-8-194d5f32",
+  "supplied_expected_head": "194d5f32",
+  "actual_head": "194d5f329e8f84ae411e5cd6492076ae6a21a894",
+  "status": "revision_required",
+  "reason": "verifier worktree HEAD mismatch: abbreviated expected HEAD is not accepted",
+  "reviewer_started": false,
+  "candidate_changed": false,
+  "authority_change": false
+}

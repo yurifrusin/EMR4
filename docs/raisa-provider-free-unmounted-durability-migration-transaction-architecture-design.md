@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: eighth recovered design candidate pending independent veto
+Status: ninth recovered design candidate pending independent veto
 
 ## Purpose
 

@@ -3,7 +3,7 @@
   "status": "architecture_only_unmounted",
   "source_contract": "diary.appointment_rescheduled.v1",
   "evidence_mode": "repository_authored_schema_metadata",
-  "contract_sha256": "sha256:0ab8421e1e43191ad9a906be2745267f3cb5980d3a0dea67eb0f4aa6911c8d61",
+  "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",
   "postgresql_target": {
     "major": 16,
     "producer_isolation": "READ COMMITTED",
@@ -3384,6 +3384,8 @@
     "trigger_function_body_sql_present": false,
     "structural_renderer_must_omit_entry_points": true,
     "structural_renderer_must_omit_trigger_functions": true,
+    "structural_renderer_must_omit_trigger_declarations": true,
+    "structural_renderer_must_omit_execute_grants": true,
     "execute_grants_effective_before_body_gate": false,
     "support_function_exception": "session_binding_allows_v1",
     "support_function_may_render_only_with_no_runtime_bindings": true,

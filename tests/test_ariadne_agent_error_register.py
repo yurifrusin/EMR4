@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 58
+    assert register["register_revision"] == 60
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 56)
+        f"AER-{index:04d}" for index in range(1, 58)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 43
+    assert len(agent_incidents) == 45
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -233,6 +233,37 @@ def test_migration_architecture_recovery_dispatch_receipt_failed_closed() -> Non
     )
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert "pre_worker_dispatch" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_migration_architecture_reviewer_preflight_requires_full_head() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0056"]
+
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.verifier_expected_head_not_full_sha"
+    )
+    assert "complete git rev-parse HEAD" in incident["correction"]["prevention_control"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_migration_architecture_review_packet_paths_are_preflighted() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0057"]
+
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.review_packet_missing_allowlisted_path"
+    )
+    assert (
+        "Test-Path every exact allowlisted file"
+        in incident["correction"]["prevention_control"]
+    )
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert incident["status"] == "corrected"
 
 
@@ -856,10 +887,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 55
+    assert report["incident_count"] == 57
     assert report["open_incident_ids"] == ["AER-0051"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 43,
+        "agent_behavior": 45,
         "harness": 3,
         "repository": 2,
         "transport": 7,
@@ -868,7 +899,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 9,
         "evidence_misreport": 5,
         "harness_failure": 3,
-        "output_contract_violation": 18,
+        "output_contract_violation": 20,
         "read_only_violation": 2,
         "reasoning_claim_error": 9,
         "repository_defect": 2,
@@ -876,7 +907,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 44,
+        "canonical_unchanged": 46,
         "untrusted_partial_worktree": 9,
     }
     assert report["recurring_patterns"] == [

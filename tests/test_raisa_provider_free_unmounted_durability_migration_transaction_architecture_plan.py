@@ -384,6 +384,8 @@ def validate_renderer_semantics(contract: dict) -> None:
         "trigger_function_body_sql_present": False,
         "structural_renderer_must_omit_entry_points": True,
         "structural_renderer_must_omit_trigger_functions": True,
+        "structural_renderer_must_omit_trigger_declarations": True,
+        "structural_renderer_must_omit_execute_grants": True,
         "execute_grants_effective_before_body_gate": False,
         "support_function_exception": "session_binding_allows_v1",
         "support_function_may_render_only_with_no_runtime_bindings": True,
@@ -711,6 +713,17 @@ def test_semantic_validator_rejects_resealed_unsafe_variants() -> None:
         False,
     )
     mutated(
+        (
+            "function_body_boundary",
+            "structural_renderer_must_omit_trigger_declarations",
+        ),
+        False,
+    )
+    mutated(
+        ("function_body_boundary", "structural_renderer_must_omit_execute_grants"),
+        False,
+    )
+    mutated(
         ("trigger_surface", 2, "events"),
         ["UPDATE OF start_time,duration_minutes"],
     )
@@ -725,7 +738,7 @@ def test_semantic_validator_rejects_resealed_unsafe_variants() -> None:
     candidate["cross_relation_invariants"][0] = "nonexistent_invariant"
     candidates.append(reseal_contract(candidate))
 
-    assert len(candidates) == 15
+    assert len(candidates) == 17
     for candidate in candidates:
         with pytest.raises(AssertionError):
             validate_renderer_semantics(candidate)

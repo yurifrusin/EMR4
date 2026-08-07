@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.review-packet-missing-paths.v1",
+  "observed_on": "2026-08-06",
+  "candidate_head": "194d5f329e8f84ae411e5cd6492076ae6a21a894",
+  "missing_allowlisted_paths": [
+    "docs/api-spine/adr/ADR-001-api-spine.md",
+    "docs/api-spine/API_SPINE_PROGRAMME.md"
+  ],
+  "reviewer_substituted_paths": false,
+  "remaining_api_artifacts_used": [
+    "docs/api-spine/async/integration-events.yaml",
+    "docs/api-spine/openapi/diary-committed-events.yaml",
+    "docs/api-spine/graphql/practice-context-fabric-read.graphql",
+    "tests/test_api_spine_artifacts.py"
+  ],
+  "test_result": "155_passed",
+  "candidate_changed": false,
+  "authority_change": false,
+  "correction": "future packets omit unverified descriptive paths and name only exact preflighted authoritative paths"
+}

@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: eighth recovered architecture candidate pending independent veto
+Status: ninth recovered architecture candidate pending independent veto
 
 ## Trust boundaries and assets
 

@@ -498,7 +498,12 @@ generation rehearsal. The architecture-only provider-free default-off
   execute grants, makes the admission-owner privilege lists exact, and inserts
   a separate function-and-trigger-body architecture before any DDL rehearsal.
   Only independent acceptance of this corrected scope may admit that body-
-  architecture descendant. No applied migration, live
+  architecture descendant. A recovery-8 veto then found one remaining machine-
+  boundary asymmetry: prose omitted trigger declarations and execute grants,
+  while the contract named only entry-point and trigger-function omission plus
+  non-effective grants. Recovery 9 adds exact positive omission fields for
+  trigger declarations and execute grants with independent digest-resealed
+  mutations. No applied migration, live
   implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
