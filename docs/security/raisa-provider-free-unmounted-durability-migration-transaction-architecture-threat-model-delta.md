@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: seventh recovered architecture candidate pending fresh independent veto
+Status: eighth recovered architecture candidate pending independent veto
 
 ## Trust boundaries and assets
 
@@ -65,6 +65,8 @@ and the separation between invalidation and current truth/commands.
 | Event starts a fresh read or command | Event may invalidate and create inert obligation only; later read requires application principal and new grant. |
 | Digest chain is claimed cryptographically authentic | Explicit tamper-evidence/integrity label; no MAC or compromised-owner claim. |
 | Machine schema lists relations but leaves unsafe columns/keys/roles/triggers unconstrained | The normative v3 contract closes builtins/domains/enums/composites, every structured column/nullability/default, named key/index/FK/check, exact forced-RLS `USING`/`WITH CHECK` policy, role/function ownership and internal grant, entry-point input/output, trigger-function signature/event and cross-invariant enforcement reference. The schema is a whole-contract constant, while digest-resealed semantic variants are tested independently of that hash. |
+| Structural renderer invents security-critical PL/pgSQL from prose | The contract marks entry-point and trigger bodies absent, requires the structural renderer to omit those functions/triggers and their execute grants, and blocks DDL rehearsal until a separately reviewed function-and-trigger-body architecture closes them. |
+| Admission function owner gains product read or broader DML | Renderer semantics require exact closed ownership, read, INSERT and execute lists and digest-resealed tests add product SELECT and UPDATE authority independently; any widening fails. |
 | Architecture artifacts execute SQL | Static boundary tests and exact Git pre/postflight forbid migrations, app/API/runtime/database changes. |
 
 ## Residual risks deliberately deferred

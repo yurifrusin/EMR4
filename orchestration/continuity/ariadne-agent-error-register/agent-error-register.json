@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 56,
+  "register_revision": 58,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1963,8 +1963,8 @@
       "category": "reasoning_claim_error",
       "process_severity": "material",
       "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation and bounded conflict attempt to authenticated immutable receiver-owned evidence, preserve source-independent redelivery, use independent current anchors, atomic lifecycle effects and exact key scope, and make every product-identifier exception database-coupled to the signed command with narrow privilege, immutable bijection and non-reuse/retention treatment.",
-      "observed_error": "Six rejected candidates successively underfroze authenticated admission, purge-safe redelivery, independent anchors, lifecycle/key scope, the owner-private alias exception, command coupling, stable bijection and exact same-transaction provenance. Recovery a0ffc10a fixed the PostgreSQL-16 XID rendering and expanded the catalogue, but its fresh eligible veto still found a non-temporal all-update trigger gap, non-renderable type/RLS/function/trigger/default and cross-invariant surfaces, an admission owner without effect privilege, hash-short-circuited mutation tests, a no-write-savepoint detection overclaim and an outbox foreign key that silently pinned product-event retention.",
-      "detection_method": "Six fresh exact-head native adversarial vetoes reconciled the parent contract, admission, transaction/retention/anchor/key/API and alias semantics. They found the initial five P1s, conflict/anchor defects, product-id contradiction, independent-helper/bijection defects, missing transaction-local provenance, underpowered static acceptance and finally six renderer/temporal/ownership/test/claim/retention defects before DDL admission. A separately preserved but procedurally ineligible exact-head diagnostic sharpened the xid, subtransaction, temporal-event and catalogue defects but supplied challenges only and no reviewer decision.",
+      "observed_error": "Seven rejected candidates successively underfroze authenticated admission, purge-safe redelivery, independent anchors, lifecycle/key scope, the owner-private alias exception, command coupling, stable bijection and exact same-transaction provenance. Recovery a0ffc10a fixed PostgreSQL-16 XID rendering and expanded the catalogue, but its veto found temporal, renderer, privilege, mutation, savepoint and retention gaps. Recovery b9de77ce closed those six defects, yet its candidate-independent exact-head veto found that the claimed renderer would still have to invent nine entry-point and thirteen trigger-function bodies and that the semantic privilege gate accepted admission-owner read widening.",
+      "detection_method": "Seven exact-head native adversarial vetoes reconciled the parent contract, admission, transaction/retention/anchor/key/API and alias semantics. They found the initial five P1s, conflict/anchor defects, product-id contradiction, independent-helper/bijection defects, missing transaction-local provenance, underpowered static acceptance, six renderer/temporal/ownership/test/claim/retention defects and finally a function-body scope overclaim plus non-exact admission-owner privilege validation before DDL admission. A separately preserved but procedurally ineligible exact-head diagnostic sharpened earlier xid, subtransaction, temporal-event and catalogue defects but supplied challenges only and no reviewer decision.",
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
@@ -1979,7 +1979,9 @@
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-4-independent-veto.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-5-untrusted-diagnostic.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-6-independent-veto.md",
-        "docs/ariadne-agent-error-correction-register-revision-56.md"
+        "docs/ariadne-agent-error-correction-register-revision-56.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-independent-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-58.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
@@ -1988,7 +1990,7 @@
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_implemented_pending_acceptance",
-        "action": "The seventh recovery retains bounded PRIMARY/CONFLICT admission, purge-safe comparison, anchor fencing, exact low-XID32 provenance and the sole owner-private immutable alias bijection. It adds an all-UPDATE appointment constraint trigger, rejects relevant subtransaction-authored tuples while declaring no-write savepoints not database-observable, removes the persistent outbox-to-product-event foreign key and gives the non-login admission owner exact internal reads plus admission INSERT only. Version 3 closes types, structured no-default columns, named constraints, 44 executable RLS policies, nine entry-point signatures, 13 trigger-function signatures/triggers and 25 enforcement mappings. Its whole-contract schema and digest-resealed semantic validator no longer confuse hash drift with semantic rejection. Fresh exact-head acceptance remains pending.",
+        "action": "The eighth recovery retains bounded PRIMARY/CONFLICT admission, purge-safe comparison, the sole owner-private immutable alias bijection, exact low-XID32 provenance, the all-UPDATE appointment constraint trigger, the rule that no-write savepoints not database-observable do not weaken tuple evidence, removal of the persistent outbox-to-product-event foreign key, 44 executable RLS policies and the digest-resealed semantic validator. It removes the renderer-body overclaim: version 3 declares entry-point and trigger bodies absent, forces a structural renderer to omit those functions, triggers and execute grants, blocks DDL rehearsal and inserts a separately reviewed function-and-trigger-body architecture as the next gate. The admission receiver's ownership, six direct reads, sole admission INSERT and empty execute list are exact; digest-resealed mutations that add appointments SELECT, product UPDATE or body-rendering authority fail independently. Exact-head acceptance remains pending.",
         "prevention_control": "Before accepting a database realization, trace valid/duplicate/conflicting inputs into bounded receiver evidence; prove purge-safe redelivery and independent anchor fences; enumerate atomic members and key scope; reconcile every data prohibition against exact catalogue columns, types, keys, delete actions, privileges and triggers; attack every private helper by standalone invocation; render XID and subtransaction semantics for the target PostgreSQL version; derive positive and negative event obligations from database transitions; require database evidence for command coupling; and prove forward/reverse identity uniqueness, concurrency, rollback and delete/recreate non-reuse for every pseudonymous mapping.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
@@ -2002,7 +2004,9 @@
           "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-5-untrusted-diagnostic.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-6-independent-veto.md",
-          "docs/ariadne-agent-error-correction-register-revision-56.md"
+          "docs/ariadne-agent-error-correction-register-revision-56.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-independent-veto.md",
+          "docs/ariadne-agent-error-correction-register-revision-58.md"
         ]
       },
       "status": "open"
@@ -2118,6 +2122,49 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0055",
+      "attempt_id": "raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-durability-migration-transaction-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A pre-worker-dispatch receipt must select an exact approved continuation_event and must not claim an assigned worker without the matching field-complete workspace receipt required by the live orchestrator protocol.",
+      "observed_error": "The first recovery-7 veto predispatch state used the invented continuation event pre_dispatch and named fresh-native-recovery-7-veto as assigned without a matching required workspace receipt. The receipt failed closed before any reviewer was spawned or candidate state changed.",
+      "detection_method": "The deterministic Ariadne receipt returned revision_required with continuation_event_missing_or_unapproved and workspace_receipt_missing:fresh-native-recovery-7-veto, set rehydrated_from_receipt false and denied worker dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-receipt.json",
+        "orchestration/harness_settings/orchestrator_requirements.yaml",
+        "docs/ariadne-agent-error-correction-register-revision-57.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed receipt is preserved. A distinct recovery state copies the approved pre_worker_dispatch event, assigns no worker before native spawn, and records the already-passed exact r30 clean-worktree evidence using the same native-review workspace shape that passed the sixth-recovery dispatch gate.",
+        "prevention_control": "Before every dispatch receipt, copy the continuation_event verbatim from orchestrator_requirements.yaml, keep assigned_agent_ids empty until the native reviewer exists, and mirror a previously admitted native-review workspace receipt rather than inventing event labels or assignment identities.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-receipt.json",
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-recovery-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-veto-predispatch-recovery-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-57.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

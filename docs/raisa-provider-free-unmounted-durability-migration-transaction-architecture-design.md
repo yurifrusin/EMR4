@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: seventh recovered design candidate pending fresh independent veto
+Status: eighth recovered design candidate pending independent veto
 
 ## Purpose
 
@@ -264,7 +264,7 @@ integrity and tamper-evidence controls. They are not a cryptographic MAC and do
 not make a database owner or compromised credential trustworthy. Operational
 key storage, credentials, monitoring and incident response remain later gates.
 
-## Machine-closed catalogue
+## Machine-closed structural catalogue
 
 The version-3 JSON contract is normative where this prose summarizes. It
 enumerates exact builtin/domain/enum/composite definitions; every structured
@@ -274,13 +274,21 @@ RLS command policies with executable `USING`/`WITH CHECK` predicates; complete
 role/function ownership and the admission owner's closed internal grants; nine
 entry-point input/output signatures; the binding helper signature and SQL body;
 13 trigger-function signatures; 13 named immediate/deferred triggers; and 25
-cross-relation invariants mapped to concrete constraints, functions or sole-
-path entry points. The JSON Schema is a whole-contract constant.
+cross-relation invariants mapped to concrete constraints, function signatures
+or sole-path entry points. The JSON Schema is a whole-contract constant.
 
 Semantic acceptance separately relaxes the canonical-digest field, reseals
 hostile variants and rejects them through catalogue/reference/ownership/
-retention semantics. The next inert DDL gate may render these values but may
-not invent or omit one.
+retention semantics, including exact rejection of any admission-owner
+privilege widening.
+
+The contract intentionally supplies no executable SQL body for any of the nine
+entry points or thirteen trigger functions. A structural renderer must omit
+them, their triggers and their `EXECUTE` grants; it may not translate invariant
+prose into PL/pgSQL. Only the closed binding helper body is present, and it may
+be rendered only before runtime bindings exist. A separate function-and-
+trigger-body architecture is the next safe gate and must pass before inert DDL
+may include those executable surfaces.
 
 ## Non-authority statement
 

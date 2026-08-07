@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_eighth_durability_migration_transaction_architecture_scope_recovery_candidate_for_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The eighth candidate closes the recovery-7 findings without inventing security-critical SQL: the v3 contract is structural/signature-only, forces omission of nine entry points, thirteen trigger functions, triggers and execute grants, blocks DDL rehearsal, and makes a separately vetoed body-architecture descendant mandatory. Admission-owner ownership, six reads, sole admission INSERT and empty execute authority are exact; digest-resealed widening mutations fail. Contract hash is sha256:0ab8421e1e43191ad9a906be2745267f3cb5980d3a0dea67eb0f4aa6911c8d61. All 210 exact API Spine, register, parent state-machine, source-specific durability and current architecture tests pass; Ruff, formatting, canonical hash and reviewer postflight pass. AER-0051 remains open pending independent veto.",
+    "current_authority_allocation": "GPT Sol owns the bounded architecture recovery, exact-path task-branch commit and acceptance reconciliation. A candidate-independent native reviewer may later receive only the exact corrected architecture and lineage packet. No worker or reviewer receives edit, provider, database/source, patient/product-data, command, runtime, integration, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Before the eighth commit, task branch codex/ariadne-bernie-davida-parallel-seam is at rejected candidate b9de77ce09ab36edc61e43aa5294a78180460660 and origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The r30 reviewer worktree passed postflight clean at b9de77ce; docs/branding remains user-owned, untracked and excluded.",
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted migration-and-transaction architecture descendant under standing uninterrupted-development authority. Candidate b9de77ce was correctly rejected for two P1 findings; the eighth recovery remains pending independent acceptance and admits neither function bodies nor DDL rehearsal.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI was opened, listed, searched or inferred. No app, Alembic, Diary or API Spine artifact changed; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement occurred. docs/branding and every unrelated untracked artifact remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "a248210f47a5616d4fb81249fd1959a3d0fffae5972cb732851ff40c5d3e857b",
+  "canonical_register_sha256": "3a386bec9a0d3172dc781a33ec8e5dfcb027cf8d2c40d3f4bf8486d1dc7c27f5",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 43,
+      "canonical_unchanged": 44,
       "untrusted_partial_worktree": 9
     },
     "by_category": {
       "command_scope_violation": 9,
       "evidence_misreport": 5,
       "harness_failure": 3,
-      "output_contract_violation": 17,
+      "output_contract_violation": 18,
       "read_only_violation": 2,
       "reasoning_claim_error": 9,
       "repository_defect": 2,
       "transport_timeout": 7
     },
     "by_origin": {
-      "agent_behavior": 42,
+      "agent_behavior": 43,
       "harness": 3,
       "repository": 2,
       "transport": 7
     },
     "by_process_severity": {
-      "low": 10,
+      "low": 11,
       "material": 18,
       "moderate": 26
     },
@@ -31,7 +31,7 @@
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 17,
       "codex-native-independent-reviewer::verifier": 3,
       "codex-native-parallel-worker::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 20,
+      "codex-primary-orchestrator::orchestrator": 21,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -44,12 +44,12 @@
     },
     "by_role": {
       "implementer": 9,
-      "orchestrator": 25,
+      "orchestrator": 26,
       "verifier": 20
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 54,
+  "incident_count": 55,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [
     "AER-0051"
@@ -131,15 +131,17 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0024",
-        "AER-0030"
+        "AER-0030",
+        "AER-0055"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
+        "Before every dispatch receipt, copy the continuation_event verbatim from orchestrator_requirements.yaml, keep assigned_agent_ids empty until the native reviewer exists, and mirror a previously admitted native-review workspace receipt rather than inventing event labels or assignment identities.",
         "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
         "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field."
       ],
@@ -260,7 +262,7 @@
       ]
     }
   ],
-  "register_revision": 56,
+  "register_revision": 58,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-06"
 }

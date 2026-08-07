@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_candidate_independent_exact_path_read_only_veto_after_native_thread_cap",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate b9de77ce closes the six sixth-veto findings and passed all 209 deterministic checks. Its contract hash is sha256:78df5cb30be1d4d11d268592165c545212bade73a8a6068dbb479c46d44b56bd. AER-0051 remains open pending independent veto; AER-0055 and the two pre-review thread-cap failures are preserved, and no failed attempt created a reviewer decision or changed the candidate.",
+    "current_authority_allocation": "GPT Sol retains architecture and acceptance ownership. The fixed native thread tree refused both a new root child and a new descendant before either reviewer started. The bounded fallback is a new exact-path turn on the existing candidate-independent native reviewer /root/rayleen_result_veto, which has never inspected this durability tranche or any of its candidates. It receives no Git-command, edit, provider, database/source, patient/product-data, command, runtime, acceptance, integration, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Fresh worktree C:/Users/sarashera/EMR4-worktrees/r30 remains the preflighted clean candidate surface on codex/review-durability-migration-transaction-plan-recovery-7-b9de77ce at exact HEAD b9de77ce09ab36edc61e43aa5294a78180460660. The main task branch is at the same candidate. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; user-owned docs/branding remains preserved outside the reviewer worktree.",
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted migration-and-transaction architecture descendant. Exact candidate b9de77ce09ab36edc61e43aa5294a78180460660 remains pending and cannot admit the inert DDL rehearsal unless an independent exact-head veto returns one pass with no P0-P2 finding.",
+    "protected_evidence_boundaries": "The candidate-independent reviewer may not run Git commands or discover, list, enumerate, search, open, hash or infer any protected holdout, prior unrelated review/evidence directory or unlisted path. No edit, executable DDL, database/source/network/provider contact, patient/product/protected data, API/command, credential, runtime, deployment, Pages or protected-ref action is permitted. Exact-path static source inspection and the named provider-free pytest command are the only executable surfaces."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

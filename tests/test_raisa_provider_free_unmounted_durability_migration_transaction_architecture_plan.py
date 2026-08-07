@@ -357,17 +357,42 @@ def validate_renderer_semantics(contract: dict) -> None:
             assert role["direct_table_dml"] == []
     admission_owner = roles["context_admission_receiver"]
     assert admission_owner["login"] is False
+    assert admission_owner["runtime_role"] is False
+    assert admission_owner["owns_relations"] == []
     assert admission_owner["owns_functions"] == ["admit_proofread_observation_v1"]
+    assert admission_owner["owner_inherent_relation_privileges"] is False
+    assert admission_owner["direct_table_select"] == [
+        "diary_context_observation_outbox_v1",
+        "context_proofread_observation_admission",
+        "context_observer_generation",
+        "context_durability_checkpoint",
+        "context_classified_observation_receipt",
+        "context_observation_key_interval",
+    ]
     assert admission_owner["direct_table_dml"] == [
         {
             "relation": "context_proofread_observation_admission",
             "privileges": ["INSERT"],
         }
     ]
-    assert (
-        "context_proofread_observation_admission"
-        in (admission_owner["direct_table_select"])
-    )
+    assert admission_owner["execute_entry_points"] == []
+
+    body_boundary = contract["function_body_boundary"]
+    assert body_boundary == {
+        "catalogue_mode": "SIGNATURE_AND_INVARIANT_BINDING_ONLY",
+        "entry_point_body_sql_present": False,
+        "trigger_function_body_sql_present": False,
+        "structural_renderer_must_omit_entry_points": True,
+        "structural_renderer_must_omit_trigger_functions": True,
+        "execute_grants_effective_before_body_gate": False,
+        "support_function_exception": "session_binding_allows_v1",
+        "support_function_may_render_only_with_no_runtime_bindings": True,
+        "next_required_gate": (
+            "provider_free_unmounted_function_and_trigger_body_architecture"
+        ),
+        "ddl_rehearsal_blocked_until_next_gate_passes": True,
+        "renderer_invention_forbidden": True,
+    }
 
     entry_points = {entry["name"]: entry for entry in contract["entry_points"]}
     support = {function["name"]: function for function in contract["support_functions"]}
@@ -390,11 +415,13 @@ def validate_renderer_semantics(contract: dict) -> None:
             assert argument["mode"] == "IN"
             assert base_type(argument["data_type"]) in known_types
         assert entry["invariant_ids"]
+        assert "body_sql" not in entry
 
     helper = support["session_binding_allows_v1"]
     assert helper["output"] == {"data_type": "boolean", "cardinality": "ONE"}
     assert "count(*) = 1" in helper["body_sql"]
     assert "binding.database_login = session_user" in helper["body_sql"]
+    assert set(support) == {body_boundary["support_function_exception"]}
 
     triggers = contract["trigger_surface"]
     appointment_trigger = next(
@@ -409,6 +436,7 @@ def validate_renderer_semantics(contract: dict) -> None:
         assert trigger["function"] in trigger_functions
         assert trigger_functions[trigger["function"]]["returns"] == "trigger"
         assert trigger["invariant_ids"]
+        assert "body_sql" not in trigger_functions[trigger["function"]]
 
     invariants = {
         item["id"]: item for item in contract["invariant_enforcement_catalogue"]
@@ -504,7 +532,7 @@ def test_postgresql_16_provenance_savepoint_claim_and_temporal_rule_are_exact() 
         assert phrase in joined
 
 
-def test_relation_catalogue_is_renderer_ready_and_semantically_closed() -> None:
+def test_structural_catalogue_is_closed_and_function_body_rendering_is_denied() -> None:
     validate_renderer_semantics(data(CONTRACT))
 
 
@@ -513,13 +541,25 @@ def test_admission_owner_has_exact_internal_privileges() -> None:
     roles = {row["role"]: row for row in contract["role_matrix"]}
     owner = roles["context_admission_receiver"]
     assert owner["login"] is False
+    assert owner["runtime_role"] is False
+    assert owner["owns_relations"] == []
     assert owner["owns_functions"] == ["admit_proofread_observation_v1"]
+    assert owner["owner_inherent_relation_privileges"] is False
+    assert owner["direct_table_select"] == [
+        "diary_context_observation_outbox_v1",
+        "context_proofread_observation_admission",
+        "context_observer_generation",
+        "context_durability_checkpoint",
+        "context_classified_observation_receipt",
+        "context_observation_key_interval",
+    ]
     assert owner["direct_table_dml"] == [
         {
             "relation": "context_proofread_observation_admission",
             "privileges": ["INSERT"],
         }
     ]
+    assert owner["execute_entry_points"] == []
     entry = next(
         item
         for item in contract["entry_points"]
@@ -592,6 +632,10 @@ def test_exact_schema_and_canonical_digest_pass() -> None:
         schema["properties"]["rls_policy_catalogue"]["const"]
         == (contract["rls_policy_catalogue"])
     )
+    assert (
+        schema["properties"]["function_body_boundary"]["const"]
+        == contract["function_body_boundary"]
+    )
 
 
 def test_exact_schema_rejects_resealed_non_hash_mutation() -> None:
@@ -654,6 +698,18 @@ def test_semantic_validator_rejects_resealed_unsafe_variants() -> None:
         ("role_matrix", 3, "direct_table_dml"),
         [],
     )
+    candidate = copy.deepcopy(contract)
+    candidate["role_matrix"][3]["direct_table_select"].append("appointments")
+    candidates.append(reseal_contract(candidate))
+    candidate = copy.deepcopy(contract)
+    candidate["role_matrix"][3]["direct_table_dml"].append(
+        {"relation": "appointments", "privileges": ["UPDATE"]}
+    )
+    candidates.append(reseal_contract(candidate))
+    mutated(
+        ("function_body_boundary", "structural_renderer_must_omit_entry_points"),
+        False,
+    )
     mutated(
         ("trigger_surface", 2, "events"),
         ["UPDATE OF start_time,duration_minutes"],
@@ -669,7 +725,7 @@ def test_semantic_validator_rejects_resealed_unsafe_variants() -> None:
     candidate["cross_relation_invariants"][0] = "nonexistent_invariant"
     candidates.append(reseal_contract(candidate))
 
-    assert len(candidates) == 12
+    assert len(candidates) == 15
     for candidate in candidates:
         with pytest.raises(AssertionError):
             validate_renderer_semantics(candidate)
@@ -817,7 +873,8 @@ def test_artifact_boundary_remains_static_and_unmounted() -> None:
     for phrase in (
         "disposable local database",
         "this architecture tranche itself performs none",
-        "provider-free unmounted authored-synthetic migration/ddl rehearsal",
+        "provider-free unmounted function-and-trigger-body architecture",
+        "authored-synthetic migration/ddl rehearsal",
         "no applied migration",
         "no executable ddl",
     ):

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://emr4.local/schemas/raisa-context-fabric-durability-migration-transaction-architecture-v3.json",
-  "title": "Exact EMR4 Context Fabric durability migration/transaction architecture v3",
-  "description": "Whole-contract constant. Every renderer input is closed; the architecture remains unmounted and non-executable.",
+  "title": "Exact EMR4 Context Fabric structural durability migration/transaction architecture v3",
+  "description": "Whole-contract constant. Structural renderer inputs are closed; entry-point and trigger bodies remain a separately closed gate and the architecture remains unmounted and non-executable.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -19,6 +19,7 @@
     "trigger_surface",
     "cross_relation_invariants",
     "artifact_boundary",
+    "function_body_boundary",
     "type_catalogue",
     "rls_policy_catalogue",
     "trigger_function_catalogue",
@@ -39,7 +40,7 @@
       "const": "repository_authored_schema_metadata"
     },
     "contract_sha256": {
-      "const": "sha256:78df5cb30be1d4d11d268592165c545212bade73a8a6068dbb479c46d44b56bd"
+      "const": "sha256:0ab8421e1e43191ad9a906be2745267f3cb5980d3a0dea67eb0f4aa6911c8d61"
     },
     "postgresql_target": {
       "const": {
@@ -3429,6 +3430,21 @@
         "provider_contact": false,
         "runtime_wiring": false,
         "product_data_processed": false
+      }
+    },
+    "function_body_boundary": {
+      "const": {
+        "catalogue_mode": "SIGNATURE_AND_INVARIANT_BINDING_ONLY",
+        "entry_point_body_sql_present": false,
+        "trigger_function_body_sql_present": false,
+        "structural_renderer_must_omit_entry_points": true,
+        "structural_renderer_must_omit_trigger_functions": true,
+        "execute_grants_effective_before_body_gate": false,
+        "support_function_exception": "session_binding_allows_v1",
+        "support_function_may_render_only_with_no_runtime_bindings": true,
+        "next_required_gate": "provider_free_unmounted_function_and_trigger_body_architecture",
+        "ddl_rehearsal_blocked_until_next_gate_passes": true,
+        "renderer_invention_forbidden": true
       }
     },
     "type_catalogue": {

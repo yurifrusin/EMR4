@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.native-review-capacity-failure.v1",
+  "observed_on": "2026-08-06",
+  "candidate_head": "b9de77ce09ab36edc61e43aa5294a78180460660",
+  "attempts": [
+    {
+      "surface": "root_direct_child",
+      "result": "agent_thread_limit_reached",
+      "reviewer_started": false
+    },
+    {
+      "surface": "existing_dispatcher_fresh_child",
+      "result": "agent_thread_limit_reached",
+      "reviewer_started": false
+    }
+  ],
+  "candidate_changed": false,
+  "review_decision_exists": false,
+  "fallback": "new exact-path turn on an existing candidate-independent native reviewer that has never reviewed this durability tranche",
+  "authority_change": false
+}

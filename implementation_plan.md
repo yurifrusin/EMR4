@@ -490,8 +490,15 @@ generation rehearsal. The architecture-only provider-free default-off
   named constraints, RLS predicates, input/output and trigger signatures plus
   cross-invariant enforcement in a whole-contract-constant v3 schema. Its
   hostile semantic variants are digest-resealed before independent validation.
-  Only a fresh acceptance of this complete corrected plan may admit an inert
-  DDL rehearsal. No applied migration, live
+  A candidate-independent seventh veto then found that the claimed inert
+  renderer would still have to invent nine entry-point and thirteen trigger
+  bodies, and that the semantic validator did not reject added admission-owner
+  reads. The eighth recovery removes that overclaim: the contract is explicitly
+  structural/signature-only, forbids rendering unclosed functions, triggers or
+  execute grants, makes the admission-owner privilege lists exact, and inserts
+  a separate function-and-trigger-body architecture before any DDL rehearsal.
+  Only independent acceptance of this corrected scope may admit that body-
+  architecture descendant. No applied migration, live
   implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates

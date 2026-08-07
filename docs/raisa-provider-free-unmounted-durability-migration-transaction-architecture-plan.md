@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: seventh recovered architecture plan candidate pending fresh independent veto
+Status: eighth recovered architecture plan candidate pending independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
@@ -284,16 +284,16 @@ coordinator, lifecycle, retention, product-read or command privilege. This
 closed internal grant is what makes the `SECURITY DEFINER` effect executable;
 the observer still receives no direct table DML.
 
-## Renderer-closed PostgreSQL catalogue
+## Renderer-closed structural PostgreSQL catalogue
 
-The version-3 machine contract is normative for the next inert renderer. It
-contains all 18 relations as structured column/type/nullability/default
+The version-3 machine contract is normative for a future inert structural
+renderer only. It contains all 18 relations as structured column/type/nullability/default
 records, named primary/unique/partial-unique/foreign/check constraints, exact
 delete actions, forced-RLS assignments and retention families. Every unlisted
 column default means `NO DEFAULT`; a renderer may not infer timestamps, UUIDs,
 sequences or identities.
 
-It also closes:
+It also closes the structural and signature surfaces:
 
 - every builtin, domain, enum and composite type plus every enum value and
   domain predicate;
@@ -307,6 +307,17 @@ It also closes:
 - 25 named cross-relation invariants, each linked to concrete constraints,
   trigger functions or sole-path entry points rather than descriptive pseudo-
   checks.
+
+It deliberately does **not** contain executable bodies for the nine entry
+points or thirteen trigger functions. Those bodies are security-critical and
+may not be invented by a renderer from prose or invariant names. The machine
+boundary therefore requires a structural renderer to omit those functions,
+triggers and every corresponding `EXECUTE` grant. The one exact binding helper
+body is the sole exception and may be rendered only with no runtime identity
+binding. A separate provider-free unmounted function-and-trigger-body
+architecture must close every body and pass its own independent veto before any
+DDL rehearsal can render an entry point or trigger. This scope is fail-closed,
+not a claim that the bodies have been implemented.
 
 The Draft 2020-12 schema is a whole-contract constant. Separate semantic tests
 relax the canonical-digest field, reseal hostile variants and still reject them
@@ -811,7 +822,10 @@ production, release, Pages or protected-ref movement. Preserve and exclude
     composite, relation column/type/nullability/default, named key/partial
     index/foreign-key/check and delete action, role ownership and internal
     privilege, entry-point input/output signature, executable RLS predicate,
-    trigger function/event and cross-invariant enforcement reference; parse the
+    trigger function/event and cross-invariant enforcement reference; require
+    exact admission-owner read/write/ownership/execute lists; prohibit a
+    structural renderer from creating unclosed entry-point/trigger bodies or
+    grants; parse the
     existing idempotency/event constraints and exact update-confirm flow; and
     reject digest-resealed semantic mutations across every one of those
     surfaces. Explicit Git
@@ -839,8 +853,10 @@ retention executor, crash recovery, monitoring, capacity, product read,
 patient-data path, provider, command, runtime, deployment or production safety.
 
 After acceptance, the next safe descendant will be a provider-free unmounted
-authored-synthetic migration/DDL rehearsal that renders the exact schema and
-privilege plan into inert SQL artifacts and statically/adversarially validates
-them without applying a migration or contacting a database. Any applied local
-migration, database-backed execution, operational credential or live source
-remains a later separately bounded gate.
+function-and-trigger-body architecture. It must specify every security-definer
+entry-point and trigger-function body, exact referenced relation/column,
+failure SQLSTATE, privilege effect and renderer ordering without executing SQL.
+Only after that descendant passes may an authored-synthetic migration/DDL
+rehearsal render inert SQL artifacts. Any applied local migration,
+database-backed execution, operational credential or live source remains a
+later separately bounded gate.

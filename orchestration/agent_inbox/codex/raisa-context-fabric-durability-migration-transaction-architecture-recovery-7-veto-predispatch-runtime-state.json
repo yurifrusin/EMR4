@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_read_only_veto_for_seventh_durability_migration_transaction_architecture_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted migration-and-transaction architecture descendant. Exact candidate b9de77ce09ab36edc61e43aa5294a78180460660 is pending and cannot admit the inert DDL rehearsal unless a genuinely fresh exact-head veto returns one pass with no P0-P2 finding.",
+    "current_authority_allocation": "GPT Sol retains architecture and acceptance ownership. One fresh native reviewer may inspect only the exact allowlisted candidate, parent/API/source files and run one exact no-bytecode/no-cache five-module pytest packet from the clean r30 worktree. The reviewer has no Git-command, edit, provider, database/source, patient/product-data, command, runtime, acceptance, integration, protected-ref, deployment or release authority.",
+    "active_plan_and_acceptance": "Candidate b9de77ce closes the six sixth-veto findings: all-UPDATE temporal absence/presence fencing, renderer-closed v3 types/defaults/constraints/RLS/signatures/enforcement, executable non-login admission ownership, digest-resealed semantic tests, calibrated savepoint detectability and event/outbox retention independence. Its contract hash is sha256:78df5cb30be1d4d11d268592165c545212bade73a8a6068dbb479c46d44b56bd and all 209 deterministic checks pass. AER-0051 remains open pending this veto.",
+    "protected_evidence_boundaries": "The reviewer may not run Git commands or discover, list, enumerate, search, open, hash or infer any protected holdout, prior unrelated review/evidence directory or unlisted path. No edit, executable DDL, database/source/network/provider contact, patient/product/protected data, API/command, credential, runtime, deployment, Pages or protected-ref action is permitted. Exact-path static source inspection and the named provider-free pytest command are the only executable surfaces.",
+    "git_refs_and_worktree": "Fresh worktree C:/Users/sarashera/EMR4-worktrees/r30 is clean on codex/review-durability-migration-transaction-plan-recovery-7-b9de77ce at exact HEAD b9de77ce09ab36edc61e43aa5294a78180460660 and its official preflight passed. The main task branch is at the same candidate. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; user-owned docs/branding remains preserved outside the reviewer worktree."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_recovery_7_veto_predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed and preflighted exact seventh-recovery candidate b9de77ce after the complete 209-check deterministic gate passed."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["One fresh native read-only veto slot is available and will be bound to r30 at exact b9de77ce with no Git commands."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model review or candidate-runtime provider call is authorised."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "workspace_id": "durability-migration-transaction-recovery-7-review-r30",
+      "path": "C:/Users/sarashera/EMR4-worktrees/r30",
+      "branch": "codex/review-durability-migration-transaction-plan-recovery-7-b9de77ce",
+      "head": "b9de77ce09ab36edc61e43aa5294a78180460660",
+      "status": "clean_exact_head_preflight_passed",
+      "artifact": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-review-worktree-preflight.json"
+    }
+  ],
+  "assigned_agent_ids": ["fresh-native-recovery-7-veto"]
+}
