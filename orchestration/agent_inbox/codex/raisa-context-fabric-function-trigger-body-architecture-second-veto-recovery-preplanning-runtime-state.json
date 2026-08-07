@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_second_exact_veto_recovery_for_durability_body_architecture",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully reread live baton still directs the provider-free unmounted function-and-trigger-body architecture and forbids any move to inert DDL rehearsal until exact body acceptance. Standing uninterrupted-development authority requires recovery without a ceremonial pause.",
+    "current_authority_allocation": "GPT Sol owns conceptual recovery, lane allocation and acceptance. Exact candidate 5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d was reviewed by a fresh native read-only veto reviewer, which owns no implementation or acceptance. New bounded disjoint workers may implement only frozen corrections after a distinct dispatch receipt.",
+    "active_plan_and_acceptance": "The fresh 28-path review preserved 128/128 passing tests but returned revision_required on four substantive gaps: receipt replay ignores retained conflict and does not rederive receipt integrity; registration neither creates a missing head nor compares the complete replay baseline; retention aggregate sets and key coverage are not tied to exact non-consumed generation identities; and critical signature/trigger fields still rely on a canonical section hash. R3 current-XID fencing passed. A second Sol recovery must close only these findings and obtain another fresh exact-HEAD veto.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL rendering/execution, DDL, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked artifact remain preserved and excluded.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam remains at rejected exact candidate 5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d with only new review-control artifacts untracked. The fresh review worktree was verified clean at that exact HEAD and removed. Local/origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "second_function_trigger_body_veto_recovery_preplanning_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol preserved the exact veto and is preparing a bounded replacement recovery."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The veto reviewer completed and all authoring/review slots are inactive before replanning."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider/model call is authorised or used."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation transport is active before reallocation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

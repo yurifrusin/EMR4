@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 70,
+  "register_revision": 71,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-07",
@@ -2716,6 +2716,82 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-current-digest-correction-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-70.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0070",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-exact-veto-002",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A passing replacement must make receipt replay conflict-safe and integrity-rederived, registration create or reload its head and compare the complete baseline, retention join every aggregate proof to the exact non-consumed generation census, and critical signature and trigger fields fail independently of canonical section equality.",
+      "observed_error": "The fresh exact-HEAD veto found three P1 gaps and one P2 gap despite 128/128 passing tests: receipt replay ignored retained conflicts and did not rederive the receipt digest; registration had no head insert and compared only the generation row on replay; retention aggregate sets and key count were not generation-identity complete; and owner, security-definer, volatility, timing and deferrability mutations emitted only normative_section_mismatch.",
+      "detection_method": "A fresh read-only reviewer inspected exactly twenty-eight allowlisted paths at 5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d, ran the complete passing packet, challenged R1 through R4 directly and returned one revision_required decision with exact unchanged HEAD and clean worktree postflight.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-rebuilt-candidate-exact-veto.md",
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-71.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.typed_ir_exact_veto_second_underclosure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The exact candidate remains rejected. Sol froze R5A conflict-safe receipt replay, R5B complete registration head/baseline semantics, R5C identity-joined set and per-generation key coverage, and R5D field-independent signature/declaration validation before replacement implementation.",
+        "prevention_control": "No body candidate advances on passing generated tests alone. Fresh veto must directly challenge replay conflict and digest derivation, every registration baseline member, consumed and duplicate-key retention counterexamples, and field-specific signature/trigger mutations after resealing.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-rebuilt-candidate-exact-veto.md",
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-71.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0071",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-review-ruff-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "codex-native-independent-reviewer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_subagent_observation",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Reviewer environment controls must use valid tool-specific Boolean spellings while preserving the exact read-only command and worktree boundary.",
+      "observed_error": "The reviewer set RUFF_NO_CACHE=1. Ruff rejected the invalid Boolean spelling before analysis and made no repository change.",
+      "detection_method": "The reviewer preserved the rejected invocation in its terminal report, reran with RUFF_NO_CACHE=true, obtained a passing result and verified exact unchanged HEAD plus empty git status.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-rebuilt-candidate-exact-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-71.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "verifier.invalid_boolean_environment_value",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The invalid invocation was discarded. The reviewer reran the exact Ruff path set with RUFF_NO_CACHE=true, passed, and completed clean exact-HEAD postflight.",
+        "prevention_control": "Reviewer packets and follow-up commands use literal supported Boolean values true or false for Ruff environment controls; numeric truthy spellings are not used.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-rebuilt-candidate-exact-veto.md",
+          "docs/ariadne-agent-error-correction-register-revision-71.md"
         ]
       },
       "status": "corrected"

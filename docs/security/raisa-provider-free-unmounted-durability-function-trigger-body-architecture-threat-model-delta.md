@@ -2,11 +2,14 @@
 
 Date: 2026-08-07
 
-Status: deterministic builder, schema and hostile-packet candidate pass;
-pending exact-head independent veto
+Status: exact candidate rejected by fresh independent veto; second exact-veto
+recovery pending replacement implementation
 
 Normative implementation recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-implementation-recovery.md`
+
+Normative second exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md`
 
 ## Scope and assets
 

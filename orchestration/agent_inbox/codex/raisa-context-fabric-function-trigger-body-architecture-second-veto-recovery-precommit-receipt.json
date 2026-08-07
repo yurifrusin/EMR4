@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_second_exact_veto_rejection_and_normative_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate 5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d remains rejected despite 128/128 tests. The second exact-veto recovery freezes R5A conflict-safe digest-rederived replay, R5B create-or-reload head and complete registration baseline, R5C SET_CONTAINS_KEY and SET_COVERS_KEYS identity proof, and R5D field-specific signature/declaration semantics. AER revision 71 and the plan packet pass.",
+    "current_authority_allocation": "GPT Sol owns recovery, lane allocation, commit and acceptance. The fresh reviewer supplied veto evidence only and the review worktree is clean and removed. No worker is active before the recovery commit.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam remains at rejected candidate 5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d before this recovery-control commit. Local/origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Only explicit recovery, veto, AER and receipt paths will be staged.",
+    "live_handover_current_baton": "The fully reread live baton requires this function-and-trigger-body architecture to pass before inert DDL rehearsal and authorises continuous bounded recovery without a routine permission pause.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL/DDL, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked artifact remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

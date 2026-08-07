@@ -1,0 +1,94 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_native_exact_head_read_only_durability_body_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully reread live baton directs only the pure provider-free unmounted function-and-trigger-body architecture and requires fresh independent acceptance before the later inert DDL rehearsal. Standing authority permits this planned review without a ceremonial pause.",
+    "current_authority_allocation": "GPT Sol remains conductor, recovery and acceptance owner. The new native reviewer receives only a fresh exact-HEAD read-only veto because the external Gemini allocation would require a provider call that is not opened here. The reviewer owns no files, implementation, acceptance, integration, protected-ref, provider, data, runtime, deployment or release authority.",
+    "active_plan_and_acceptance": "Candidate 5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d binds rebuilt R1 coordinator effects, R2 retention census/grace/key semantics, R3 current-XID non-temporal fencing and R4 independent normative closure at contract sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde. The six-suite architecture packet, 80-test AER packet, builder check, Ruff and diff checks pass; the exact recovery requires this fresh veto.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL rendering/execution, DDL, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. The reviewer may read only the 28 packet paths. docs/branding and unrelated untracked artifacts remain excluded.",
+    "git_refs_and_worktree": "After the bounded provenance correction commit, task HEAD is 5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d. Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r35 is clean on non-protected branch codex/review-durability-function-trigger-body-r5 at that exact HEAD and passed the verifier worktree preflight. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "rebuilt_function_trigger_body_exact_veto_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol prepared the exact packet and retained all acceptance and integration authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A fresh native reviewer slot is available; no prior reviewer identity will be reused."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider/model call is authorised or used for this native veto."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation transport is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-rebuilt-candidate-exact-veto-worktree-preflight.json"
+  ],
+  "assigned_agent_ids": []
+}

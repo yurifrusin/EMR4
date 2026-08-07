@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: deterministic builder, schema and hostile-packet candidate pass;
-pending exact-head independent veto
+Status: exact candidate rejected by fresh independent veto; second exact-veto
+recovery pending replacement implementation
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -26,8 +26,11 @@ Rejected label-only candidate:
 Rejected typed-but-misbound candidate:
 `sha256:f8afd0ce97169b0fae926dbe7999b9961d9be7506f711de579a3c035f75b2064`
 
-Current deterministic typed-IR candidate:
+Rejected deterministic typed-IR candidate:
 `sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde`
+
+Normative second exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md`
 
 ## Purpose and derivation
 

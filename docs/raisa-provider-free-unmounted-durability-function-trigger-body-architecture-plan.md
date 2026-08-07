@@ -4,9 +4,8 @@ Date: 2026-08-07
 
 Status: initial plan superseded by bounded structural-feasibility recovery;
 first label-only and second misbound typed implementation candidates rejected;
-third exact-HEAD candidate rejected by independent veto; rebuilt Sol
-exact-veto recovery candidate passes deterministic acceptance and awaits a
-fresh exact-HEAD independent veto
+third and fourth exact-HEAD candidates rejected by independent veto; second
+exact-veto Sol recovery frozen before replacement implementation
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -28,6 +27,9 @@ Normative typed-IR replacement recovery:
 
 Normative exact-veto recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-exact-veto-recovery.md`
+
+Normative second exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md`
 
 ## Objective
 
@@ -408,6 +410,12 @@ totality, current-XID/temporal fencing, admission conflict handling,
 coordinator atomicity, anchor/key lifecycle, retention census or API
 classification invokes Sol's recovery lease and a fresh candidate-independent
 veto. No rejected body contract may be silently admitted.
+
+Fresh review of exact rebuilt candidate
+`5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d` invoked that lease again. The
+second exact-veto recovery is now binding for conflict-safe receipt replay,
+complete registration/head baseline, identity-joined retention/key coverage
+and field-independent signature/trigger semantics.
 
 ## Claim boundary and next dependency
 
