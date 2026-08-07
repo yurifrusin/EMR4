@@ -1,0 +1,1057 @@
+"""Focused acceptance tests for the provider-free inert DDL rehearsal renderer.
+
+These tests exercise the sixteen acceptance clauses of the accepted inert-DDL
+plan using only authored-synthetic static mutations.  No SQL is executed and no
+database, network, provider or external parser is contacted.
+"""
+
+from __future__ import annotations
+
+import copy
+import json
+import re
+from pathlib import Path
+from typing import Any
+
+import pytest
+from jsonschema import Draft202012Validator
+
+from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import (
+    BODY_DIGEST,
+    BODY_PATH,
+    LOWERING_CONTRACT_PATH,
+    LOWERING_SCHEMA_PATH,
+    MANIFEST_PATH,
+    PARENT_DIGEST,
+    RECOVERY_SPEC,
+    SQL_INERT_PATH,
+    STRUCTURAL_PATH,
+    _derive_conflict_constraint,
+    _emit_lock_exact,
+    _verify_trigger_terminals,
+    _walk_program_nodes,
+    build_lowering_contract,
+    build_lowering_schema,
+    canonical_digest,
+    check_artifacts,
+    derive_effective_catalogue,
+    derive_effective_body,
+    digest_preimage,
+    load_and_bind_parents,
+    recognize_inert_sql,
+    render_inert,
+)
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def _load(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _parents() -> dict[str, Any]:
+    return load_and_bind_parents()
+
+
+def _base_render() -> dict[str, Any]:
+    return render_inert()
+
+
+# ---------------------------------------------------------------------------
+# Clause 1 -- exact parent immutability/hashes, recovery population and the
+# effective catalogue.
+# ---------------------------------------------------------------------------
+
+
+def test_parent_hashes_are_exact_and_immutable() -> None:
+    structural = _load(STRUCTURAL_PATH)
+    body = _load(BODY_PATH)
+    assert structural["contract_sha256"] == PARENT_DIGEST
+    assert body["contract_sha256"] == BODY_DIGEST
+    assert body["parent_binding"]["contract_sha256"] == PARENT_DIGEST
+    assert canonical_digest(structural) == PARENT_DIGEST
+    assert canonical_digest(body) == BODY_DIGEST
+    parents = _parents()
+    assert parents["structural"]["contract_sha256"] == PARENT_DIGEST
+    assert parents["body"]["contract_sha256"] == BODY_DIGEST
+
+
+def test_recovery_population_and_effective_catalogue_reconcile() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    recovery_ids = [op["id"] for op in effective["recovery_operations"]]
+    assert recovery_ids == [f"REC{idx:02d}" for idx in range(1, 27)]
+    body = parents["body"]
+    assert effective["relations"] == body["qualified_identifier_catalogue"]["relations"]
+    assert effective["roles"] == body["effective_parent_summary"]["effective_roles"]
+    assert (
+        effective["trigger_declarations"]
+        == body["effective_parent_summary"]["trigger_declarations"]
+    )
+    fabric_relations = [
+        r for r in effective["relations"] if r.startswith("emr4_context_fabric.")
+    ]
+    assert len(effective["relations"]) == 22
+    assert len(fabric_relations) == 18
+    assert len(effective["roles"]) == 8
+    assert len(effective["rls_policies"]) == 44
+
+
+def test_recovered_effective_body_population_is_exact() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    body, recovered = derive_effective_body(parents["body"], effective)
+
+    assert len(parents["body"]["body_programs"]) == 22
+    assert len(body["body_programs"]) == 23
+    assert len(recovered["signatures"]["entry_points"]) == 9
+    assert len(recovered["signatures"]["trigger_functions"]) == 14
+    assert len(recovered["trigger_declarations"]) == 14
+    assert body["postgresql_16_representability_recovery_v1"] == RECOVERY_SPEC
+
+
+def test_recovery_operations_are_position_closed_and_fragment_sealed() -> None:
+    operations = RECOVERY_SPEC["operations"]
+    assert [row["id"] for row in operations] == RECOVERY_SPEC["operation_order"]
+    assert len(operations) == 8
+    for operation in operations:
+        assert operation["affected_ids"]
+        assert operation["old_fragment_sha256"].startswith("sha256:")
+        assert operation["new_fragment_sha256"].startswith("sha256:")
+    reselect = operations[4]
+    assert len(reselect["sites"]) == 4
+    for site in reselect["sites"]:
+        assert site["source_node_id"]
+        assert site["effective_node_id"]
+        assert site["reselect_node_id"]
+        assert site["old_expression_sha256"].startswith("sha256:")
+        assert site["new_expression_sha256"].startswith("sha256:")
+        assert site["new_reselect_sha256"].startswith("sha256:")
+
+
+def test_recovery_fragment_seal_drift_fails_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    candidate = copy.deepcopy(RECOVERY_SPEC["operations"])
+    candidate[0]["new_fragment_sha256"] = "sha256:" + "0" * 64
+    monkeypatch.setitem(RECOVERY_SPEC, "operations", candidate)
+    parents = _parents()
+    with pytest.raises(ValueError, match="fragment-seal drift"):
+        derive_effective_body(parents["body"], derive_effective_catalogue(parents))
+
+
+def test_wrong_parent_hash_fails_closed() -> None:
+    parents = _parents()
+    structural = copy.deepcopy(parents["structural"])
+    structural["contract_sha256"] = "sha256:" + "0" * 64
+    parents["structural"] = structural
+    with pytest.raises((ValueError, AssertionError)):
+        derive_effective_catalogue(parents)
+
+
+# ---------------------------------------------------------------------------
+# Clause 2 -- whole lowering-contract JSON Schema validation and hostile
+# unknown fields.
+# ---------------------------------------------------------------------------
+
+
+def test_lowering_contract_schema_accepts_contract() -> None:
+    contract = build_lowering_contract()
+    schema = build_lowering_schema()
+    Draft202012Validator.check_schema(schema)
+    assert list(Draft202012Validator(schema).iter_errors(contract)) == []
+    assert contract["postgresql_target"]["major"] == 16
+    assert (
+        contract["opcode_populations"]["absent_instruction_opcode"] == "DERIVE_BINDING"
+    )
+    assert contract["opcode_populations"]["declared_instruction_opcodes"] == 22
+    assert contract["opcode_populations"]["observed_instruction_opcodes"] == 21
+    assert contract["opcode_populations"]["declared_expression_opcodes"] == 34
+    assert contract["opcode_populations"]["observed_expression_opcodes"] == 34
+
+
+def test_lowering_contract_hostile_unknown_field_rejected() -> None:
+    contract = build_lowering_contract()
+    schema = build_lowering_schema()
+    candidate = copy.deepcopy(contract)
+    candidate["invented_authority"] = True
+    assert list(Draft202012Validator(schema).iter_errors(candidate))
+
+
+def test_canonical_lowering_contract_files_validate() -> None:
+    contract = _load(LOWERING_CONTRACT_PATH)
+    schema = _load(LOWERING_SCHEMA_PATH)
+    Draft202012Validator.check_schema(schema)
+    assert list(Draft202012Validator(schema).iter_errors(contract)) == []
+    assert contract == build_lowering_contract()
+    assert schema == build_lowering_schema()
+
+
+# ---------------------------------------------------------------------------
+# Clause 3 -- two isolated byte-identical renders and exact canonical
+# regeneration.
+# ---------------------------------------------------------------------------
+
+
+def test_isolated_renders_are_byte_identical() -> None:
+    first = render_inert()
+    second = render_inert()
+    assert first["sql_text"] == second["sql_text"]
+    assert first["manifest"] == second["manifest"]
+    assert first["sql_text"].endswith("\n")
+
+
+def test_canonical_artifacts_regenerate_exactly() -> None:
+    outcome = check_artifacts()
+    assert outcome["valid"], outcome["issues"]
+    result = _base_render()
+    assert SQL_INERT_PATH.read_text(encoding="utf-8") == result["sql_text"]
+    assert _load(MANIFEST_PATH) == result["manifest"]
+
+
+# ---------------------------------------------------------------------------
+# Clause 4 -- all six phases and every required population/count/order.
+# ---------------------------------------------------------------------------
+
+
+def test_six_phases_in_exact_order() -> None:
+    sql = _base_render()["sql_text"]
+    phases = re.findall(r"^-- PHASE (\d) --", sql, flags=re.MULTILINE)
+    assert phases == ["1", "2", "3", "4", "5", "6"]
+    ends = re.findall(r"^-- END PHASE (\d) --", sql, flags=re.MULTILINE)
+    assert ends == ["1", "2", "3", "4", "5", "6"]
+
+
+def test_phase_populations_and_counts() -> None:
+    sql = _base_render()["sql_text"]
+    assert sql.count("CREATE ROLE ") == 8
+    assert sql.count("CREATE SCHEMA ") == 1
+    assert sql.count("CREATE DOMAIN ") == 4
+    assert sql.count("CREATE TYPE ") == 28  # 19 enums + 9 composites
+    assert sql.count("CREATE TABLE emr4_context_fabric.") == 18
+    assert sql.count("CREATE POLICY ") == 44
+    assert sql.count("CREATE TRIGGER ") == 7
+    assert sql.count("CREATE CONSTRAINT TRIGGER ") == 7
+    assert sql.count("CREATE FUNCTION emr4_context_fabric.") == 24
+    assert sql.count("ENABLE ROW LEVEL SECURITY") == 18
+    assert sql.count("FORCE ROW LEVEL SECURITY") == 18
+
+
+def test_renderer_order_is_preserved() -> None:
+    manifest = _base_render()["manifest"]
+    parents = _parents()
+    body, _ = derive_effective_body(
+        parents["body"], derive_effective_catalogue(parents)
+    )
+    expected = body["renderer_order"]
+    entry_ids = [
+        item["identifier"]
+        for item in manifest["ordered_nodes"]
+        if item["kind"] == "ENTRY_POINT"
+    ]
+    trigger_ids = [
+        item["identifier"]
+        for item in manifest["ordered_nodes"]
+        if item["kind"] == "TRIGGER_FUNCTION"
+    ]
+    assert entry_ids == expected[:9]
+    assert trigger_ids == expected[9:]
+
+
+def _walk_ioc_nodes(body: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
+    out: list[tuple[str, dict[str, Any]]] = []
+    for program in body["body_programs"]:
+        for node in _walk_program_nodes(program):
+            if node["op"] == "INSERT_OR_RELOAD_COMPARE":
+                out.append((program["id"], node))
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Clause 5 -- immutable-parent and recovered effective-program accounting.
+# ---------------------------------------------------------------------------
+
+
+def test_all_effective_programs_accounted_and_expression_ceiling() -> None:
+    manifest = _base_render()["manifest"]
+    accounting = manifest["body_program_accounting"]
+    assert manifest["immutable_parent_program_count"] == 22
+    assert manifest["effective_program_count"] == 23
+    assert len(accounting) == 23
+    assert sum(row["node_count"] for row in accounting) == 756
+    assert sum(row["expression_count"] for row in accounting) == 14488
+    for row in accounting:
+        assert sum(row["instruction_counts"].values()) == row["node_count"]
+    parents = _parents()
+    body, _ = derive_effective_body(
+        parents["body"], derive_effective_catalogue(parents)
+    )
+    program_ids = {program["id"] for program in body["body_programs"]}
+    assert {row["id"] for row in accounting} == program_ids
+    assert manifest["catalogue_assertions"]["insert_or_reload_compare"] == 21
+    assert manifest["catalogue_assertions"]["derive_binding_occurrences"] == 0
+    assert manifest["opcode_populations"] == {
+        "declared_instruction_opcodes": 22,
+        "observed_instruction_opcodes": 21,
+        "declared_expression_opcodes": 34,
+        "observed_expression_opcodes": 34,
+        "absent_instruction_opcode": "DERIVE_BINDING",
+    }
+
+
+# ---------------------------------------------------------------------------
+# Clause 6 -- all 21 unique mappings plus wrong-constraint, zero/multiple-
+# winner and broad handler hostile mutations.
+# ---------------------------------------------------------------------------
+
+
+def test_all_21_insert_or_reload_compare_unique_mappings() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    result = _base_render()
+    ioc_nodes = _walk_ioc_nodes(parents["body"])
+    assert len(ioc_nodes) == 21
+    for program_id, node in ioc_nodes:
+        ops = node["operands"]
+        name = _derive_conflict_constraint(
+            effective, ops["relation"], ops["conflict_key_columns"]
+        )
+        assert re.search(
+            r"cf_constraint_name = '" + re.escape(name) + r"'", result["sql_text"]
+        )
+        assert "WHEN unique_violation THEN" in result["sql_text"]
+
+
+def test_conflict_derivation_rejects_multiple_winners() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    node = _walk_ioc_nodes(parents["body"])[0][1]
+    ops = node["operands"]
+    effective["constraints"][ops["relation"]].append(
+        {
+            "kind": "PRIMARY_KEY",
+            "name": "pk_duplicate",
+            "columns": list(ops["conflict_key_columns"]),
+        }
+    )
+    with pytest.raises(ValueError):
+        _derive_conflict_constraint(
+            effective, ops["relation"], ops["conflict_key_columns"]
+        )
+
+
+def test_conflict_derivation_rejects_zero_winners() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    node = _walk_ioc_nodes(parents["body"])[0][1]
+    ops = node["operands"]
+    relation = ops["relation"]
+    effective["constraints"][relation] = [
+        row
+        for row in effective["constraints"][relation]
+        if row["columns"] != list(ops["conflict_key_columns"])
+    ]
+    with pytest.raises(ValueError):
+        _derive_conflict_constraint(effective, relation, ops["conflict_key_columns"])
+
+
+def test_broad_handler_mutation_is_rejected() -> None:
+    result = _base_render()
+    mutated = result["sql_text"].replace(
+        "WHEN unique_violation THEN", "WHEN OTHERS THEN"
+    )
+    report = recognize_inert_sql(mutated, result["manifest"], result["effective"])
+    assert not report.valid
+    assert any(issue.code == "when_others" for issue in report.issues)
+
+
+def test_wrong_constraint_name_mutation_is_rejected() -> None:
+    result = _base_render()
+    mutated = result["sql_text"].replace(
+        "cf_constraint_name = 'pk_cf_02'", "cf_constraint_name = 'pk_bogus'"
+    )
+    report = recognize_inert_sql(mutated, result["manifest"], result["effective"])
+    assert not report.valid
+    assert any(issue.code == "wrong_constraint" for issue in report.issues)
+
+
+# ---------------------------------------------------------------------------
+# Clause 7 -- digest delimiter/null/type/order/time-zone hostile vectors.
+# ---------------------------------------------------------------------------
+
+
+def test_digest_null_and_empty_text_cannot_collide() -> None:
+    null_pre = digest_preimage("edge", ["pg_catalog.text"], [None])
+    empty_pre = digest_preimage("edge", ["pg_catalog.text"], [""])
+    assert null_pre != empty_pre
+    assert null_pre.endswith(":-1")
+    assert empty_pre.endswith(":0:")
+
+
+def test_digest_operand_reorder_changes_preimage() -> None:
+    a = digest_preimage("edge", ["pg_catalog.text", "pg_catalog.bigint"], ["x", 7])
+    b = digest_preimage("edge", ["pg_catalog.bigint", "pg_catalog.text"], [7, "x"])
+    assert a != b
+
+
+def test_digest_type_change_changes_preimage() -> None:
+    a = digest_preimage("edge", ["pg_catalog.text"], ["7"])
+    b = digest_preimage("edge", ["pg_catalog.bigint"], [7])
+    assert a != b
+
+
+def test_digest_vectors_are_recorded_and_sql_uses_unit_separator() -> None:
+    result = _base_render()
+    assert len(result["manifest"]["digest_vectors"]) >= 4
+    assert len(result["manifest"]["digest_profiles"]) == 12
+    assert "pg_catalog.chr(31)" in result["sql_text"]
+    for vector in result["manifest"]["digest_vectors"]:
+        assert vector["preimage"] == digest_preimage(
+            vector["profile"], vector["operand_types"], vector["values"]
+        )
+
+
+def test_digest_time_zone_is_utc_six_fractional_digits() -> None:
+    # The timestamptz canonical text must render UTC with six fractional digits
+    # and a literal terminal Z in both the SQL and the Python reference.
+    result = _base_render()
+    assert "AT TIME ZONE 'UTC'" in result["sql_text"]
+    assert 'HH24:MI:SS.US"Z"' in result["sql_text"]
+    assert re.search(r'HH24:MI:SS\.US(?!")', result["sql_text"]) is None
+    import datetime as _dt
+
+    sample = _dt.datetime(2026, 8, 8, 12, 34, 56, 123456, tzinfo=_dt.timezone.utc)
+    pre = digest_preimage("edge.ts", ["pg_catalog.timestamptz"], [sample])
+    assert pre.endswith(":2026-08-08T12:34:56.123456Z")
+    assert "Z" in pre
+
+
+# ---------------------------------------------------------------------------
+# Clause 8 -- independent recognizer rejection of hostile mutations.
+# ---------------------------------------------------------------------------
+
+
+def test_recognizer_rejects_hostile_mutations() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    manifest = result["manifest"]
+    effective = result["effective"]
+
+    def rejected(mutated: str, code: str | None = None) -> None:
+        report = recognize_inert_sql(mutated, manifest, effective)
+        assert not report.valid
+        if code is not None:
+            assert any(issue.code == code for issue in report.issues)
+
+    rejected(sql + "\nSELECT 1;", "top_level_dml")
+    rejected(sql + "\nBEGIN;", "transaction_control")
+    rejected(
+        sql + "\nDELETE FROM emr4_context_fabric.context_retention_policy;",
+        "top_level_dml",
+    )
+    rejected(sql + "\n\\dt", "psql_meta")
+    rejected(sql + "\nCREATE EXTENSION pgcrypto;", "extension")
+    rejected(
+        sql + "\nCOPY emr4_context_fabric.context_retention_policy FROM PROGRAM 'x';",
+        "file_network",
+    )
+    rejected(
+        sql
+        + "\nCREATE FUNCTION emr4_context_fabric.helper_v1() RETURNS void AS $$ BEGIN NULL; END; $$ LANGUAGE plpgsql;",
+        "helper_overload",
+    )
+    rejected(
+        sql.replace(
+            "CREATE TABLE emr4_context_fabric.context_observation_stream_head",
+            "CREATE TABLE context_observation_stream_head",
+            1,
+        ),
+        "unqualified_identifier",
+    )
+    rejected(
+        sql.replace(
+            "SET search_path = pg_catalog, emr4_context_fabric",
+            "SET search_path = public, pg_catalog",
+            1,
+        ),
+        "search_path",
+    )
+    rejected(sql.replace("SECURITY DEFINER", "SECURITY INVOKER", 1), "security_invoker")
+    rejected(
+        sql.replace("REVOKE ALL ON SCHEMA emr4_context_fabric FROM PUBLIC;", "", 1),
+        "missing_revoke",
+    )
+    rejected(
+        sql
+        + "\nGRANT EXECUTE ON FUNCTION emr4_context_fabric.cf_guard_claim_v1() TO context_producer;",
+        "trigger_grant",
+    )
+    rejected(
+        sql + "\nINSERT INTO public.appointments (id) VALUES (NULL);", "application_dml"
+    )
+    rejected(sql + "\n-- C:\\temp\\escape\nSELECT 1;", "path_escape")
+
+
+def test_recognizer_rejects_malformed_quotes_and_dollar_bodies() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    manifest = result["manifest"]
+    effective = result["effective"]
+    malformed_quote = sql.replace(
+        "'in_progress'::pg_catalog.text", "'in_progress''::pg_catalog.text", 1
+    )
+    report = recognize_inert_sql(malformed_quote, manifest, effective)
+    assert not report.valid
+    malformed_dollar = sql.replace(
+        "$durability_inert$\nLANGUAGE", "$durability_inert\nLANGUAGE", 1
+    )
+    report = recognize_inert_sql(malformed_dollar, manifest, effective)
+    assert not report.valid
+
+
+def test_recognizer_rejects_missing_and_swapped_statements() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    manifest = result["manifest"]
+    effective = result["effective"]
+    missing = sql.replace(
+        "CREATE POLICY pol_cf_18_insert", "CREATE POLICY pol_cf_18_insert_x", 1
+    )
+    missing = missing.replace(
+        "CREATE POLICY pol_cf_18_insert_x ON emr4_context_fabric.context_retention_policy",
+        "",
+        1,
+    )
+    report = recognize_inert_sql(missing, manifest, effective)
+    assert not report.valid
+    swapped = sql.replace(
+        "CREATE ROLE context_producer", "CREATE ROLE context_observer", 1
+    )
+    report = recognize_inert_sql(swapped, manifest, effective)
+    assert not report.valid
+
+
+# ---------------------------------------------------------------------------
+# Clause 9 -- no dependency/process/socket/database/provider/environment/
+# Alembic reachability.
+# ---------------------------------------------------------------------------
+
+
+def test_module_imports_are_stdlib_only() -> None:
+    source = (
+        ROOT / "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py"
+    ).read_text(encoding="utf-8")
+    forbidden_imports = [
+        "import subprocess",
+        "from subprocess",
+        "import socket",
+        "from socket",
+        "import http",
+        "from http",
+        "import sqlalchemy",
+        "from sqlalchemy",
+        "import psycopg",
+        "from psycopg",
+        "import alembic",
+        "from alembic",
+        "import requests",
+        "from requests",
+        "import urllib",
+        "from urllib",
+    ]
+    for token in forbidden_imports:
+        assert token not in source, token
+    assert "os.environ" not in source
+    assert "os.system" not in source
+
+
+def test_monkeypatched_sentinel_surfaces_are_never_touched(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def boom(*args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("forbidden surface touched")
+
+    monkeypatch.setattr("socket.socket", boom)
+    monkeypatch.setattr("subprocess.Popen", boom)
+    result = render_inert()
+    assert result["sql_text"]
+    assert result["manifest"]["statement_count"] > 0
+
+
+def test_unknown_lock_mode_fails_before_emission() -> None:
+    node = {
+        "node_id": "hostile.unknown-lock",
+        "op": "LOCK_EXACT",
+        "operands": {
+            "relation": "public.appointments",
+            "columns": ["id"],
+            "predicate": {
+                "op": "CONST",
+                "type": "pg_catalog.boolean",
+                "value": True,
+            },
+            "output_symbol": "appointment",
+            "mode": "RAW_CALLER_SELECTED_LOCK",
+        },
+    }
+    with pytest.raises(ValueError, match="unknown lock mode"):
+        _emit_lock_exact(node, {}, 0)
+
+
+# ---------------------------------------------------------------------------
+# Clause 10 -- DERIVE_BINDING occurrence, wrong SQLSTATE, wrong OLD/NEW,
+# omitted trigger/policy/constraint and arbitrary retry elimination all fail
+# closed.
+# ---------------------------------------------------------------------------
+
+
+def _mutated_loaded_with_derive_binding() -> dict[str, Any]:
+    parents = _parents()
+    body = copy.deepcopy(parents["body"])
+    program = body["body_programs"][0]
+    program["ast"]["nodes"].insert(
+        1,
+        {
+            "node_id": program["id"] + ".injected.derive",
+            "op": "DERIVE_BINDING",
+            "operands": {},
+        },
+    )
+    parents["body"] = body
+    return parents
+
+
+def test_derive_binding_occurrence_fails_closed() -> None:
+    loaded = _mutated_loaded_with_derive_binding()
+    with pytest.raises((ValueError, AssertionError)):
+        render_inert(loaded=loaded)
+
+
+def test_wrong_sqlstate_mutation_is_rejected() -> None:
+    result = _base_render()
+    mutated = result["sql_text"].replace(
+        "ERRCODE = 'CF004', MESSAGE = 'required_row_missing_or_ambiguous'",
+        "ERRCODE = 'P0001', MESSAGE = 'required_row_missing_or_ambiguous'",
+        1,
+    )
+    report = recognize_inert_sql(mutated, result["manifest"], result["effective"])
+    assert not report.valid
+    assert any(issue.code == "wrong_sqlstate" for issue in report.issues)
+
+
+def test_wrong_old_new_terminal_fails_closed() -> None:
+    parents = _parents()
+    body = copy.deepcopy(parents["body"])
+    guard = next(
+        program
+        for program in body["body_programs"]
+        if program["id"].endswith("cf_guard_claim_v1")
+    )
+    switch = guard["ast"]["nodes"][1]["operands"]
+    update_arm = next(arm for arm in switch["arms"] if arm["tg_op"] == "UPDATE")
+    for node in _walk_program_nodes({"ast": {"nodes": update_arm["nodes"]}}):
+        if node["op"] == "RETURN_NEW":
+            node["op"] = "RETURN_OLD"
+            break
+    with pytest.raises((ValueError, AssertionError)):
+        _verify_trigger_terminals(body)
+
+
+def test_omitted_policy_fails_closed() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    removed = effective["rls_policies"].pop()
+    assert removed["id"]
+    mutated = render_inert(effective=effective, loaded=parents)
+    # The original canonical manifest no longer matches the reduced artifact.
+    original = _base_render()
+    report = recognize_inert_sql(mutated["sql_text"], original["manifest"], effective)
+    assert not report.valid
+
+
+def test_arbitrary_retry_marker_fails_closed() -> None:
+    parents = _parents()
+    body = copy.deepcopy(parents["body"])
+
+    def find_marker(nodes: list[dict[str, Any]]) -> dict[str, Any] | None:
+        for node in nodes:
+            if node["op"] == "IF" and node["operands"]["then"]:
+                first = node["operands"]["then"][0]
+                if first["op"] == "PROPAGATE_RETRYABLE":
+                    return first["operands"]
+            for child in _walk_program_nodes({"ast": {"nodes": nodes}}):
+                if child["op"] == "IF" and child["operands"]["then"]:
+                    first = child["operands"]["then"][0]
+                    if first["op"] == "PROPAGATE_RETRYABLE":
+                        return first["operands"]
+        return None
+
+    marker = None
+    for program in body["body_programs"]:
+        marker = find_marker(program["ast"]["nodes"])
+        if marker is not None:
+            break
+    assert marker is not None
+    marker["internal_retry"] = True
+    parents["body"] = body
+    with pytest.raises((ValueError, AssertionError)):
+        render_inert(loaded=parents)
+
+
+def test_manifest_records_parent_hashes_and_effective_digest() -> None:
+    manifest = _base_render()["manifest"]
+    assert manifest["structural_parent"]["contract_sha256"] == PARENT_DIGEST
+    assert manifest["body_parent"]["contract_sha256"] == BODY_DIGEST
+    assert manifest["postgresql_major"] == 16
+    assert manifest["effective_catalogue_digest"].startswith("sha256:")
+    assert manifest["sql_sha256"].startswith("sha256:")
+    assert manifest["artifact"] == (
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-"
+        "inert-ddl-rehearsal/durability-schema.sql.inert"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Same-lane correction 1 -- exact cardinality, isolation assertions, bounded
+# source delete, PostgreSQL syntax/types and canonical values.
+# ---------------------------------------------------------------------------
+
+
+def test_renderer_exact_cardinality_maps_zero_and_multiple_to_cf004() -> None:
+    sql = _base_render()["sql_text"]
+    assert sql.count("WHEN NO_DATA_FOUND THEN") >= 1
+    assert sql.count("WHEN TOO_MANY_ROWS THEN") >= 1
+    assert sql.count("INTO STRICT ") >= 100
+    # Both zero and non-unique map only to CF004 with the stable reason code.
+    cf004 = "RAISE EXCEPTION USING ERRCODE = 'CF004', MESSAGE = 'required_row_missing_or_ambiguous'"
+    assert sql.count(cf004) >= 100
+    # No P0001/P0002/P0003 or class-42 substitution is permitted.
+    for leaked in ("'P0001'", "'P0002'", "'P0003'", "ERRCODE = '42"):
+        assert leaked not in sql, leaked
+
+
+def test_renderer_key_bounded_delete_uses_exact_key_cte() -> None:
+    sql = _base_render()["sql_text"]
+    assert "WITH selected_keys AS (" in sql
+    assert (
+        "DELETE FROM emr4_context_fabric.diary_context_observation_outbox_v1 AS d USING selected_keys AS s"
+        in sql
+    )
+    assert "LIMIT 1000" in sql
+    assert "SELECT pg_catalog.count(*) INTO purged_row_count FROM deleted;" in sql
+    # No DELETE ... ORDER BY ... LIMIT form remains anywhere.
+    assert re.search(r"DELETE\s+FROM\b[^;]*\bORDER\s+BY\b", sql) is None
+    assert re.search(r"DELETE\s+FROM\b[^;]*\bLIMIT\b", sql) is None
+
+
+def test_renderer_typed_complete_sets_construct_full_rows() -> None:
+    sql = _base_render()["sql_text"]
+    # Partial projection (audit log id only) is built into a full typed row.
+    assert (
+        "array_agg((ROW(public.appointment_audit_log.id, NULL::pg_catalog.uuid" in sql
+    )
+    # The two system-xmin set projections stay honest: only the accepted user
+    # projected value plus explicitly typed nulls, never a composite xmin member.
+    assert (
+        "array_agg((ROW(public.diary_committed_events.id, NULL::pg_catalog.uuid" in sql
+    )
+    assert (
+        "array_agg((ROW(NULL::pg_catalog.uuid, NULL::emr4_context_fabric.source_contract_code, NULL::pg_catalog.uuid, emr4_context_fabric.diary_context_aggregate_aliases_v1.opaque_aggregate_alias"
+        in sql
+    )
+    # No anonymous-record aggregation and no pg_catalog grammar misuse.
+    assert "array_agg(sub" not in sql
+    assert "pg_catalog.ARRAY" not in sql
+    assert "pg_catalog.ROW" not in sql
+
+
+def test_renderer_system_xmin_uses_record_local() -> None:
+    sql = _base_render()["sql_text"]
+    # xmin-carrying exact reads use a record local so (var).xmin is valid.
+    assert "claim record;" in sql
+    assert "event record;" in sql
+    assert "(claim).xmin" in sql
+    assert "(event).xmin" in sql
+    assert "old_appointment record;" in sql
+    assert "(old_appointment).xmin" in sql
+    assert "OLD.xmin" not in sql
+    assert "NEW.xmin" not in sql
+    # SELECT_SET arrays that only count rows remain typed composite arrays.
+    assert "current_events public.diary_committed_events[];" in sql
+
+
+def test_recovery_manifest_closes_owners_dependencies_and_applicability() -> None:
+    manifest = _base_render()["manifest"]
+
+    assert manifest["catalogue_assertions"]["schema_owner"] == "context_schema_owner"
+    assert manifest["catalogue_assertions"]["fabric_type_owner_count"] == 32
+    assert manifest["catalogue_assertions"]["fabric_relation_owner_count"] == 18
+    assert manifest["catalogue_assertions"]["application_owner_changes"] == 0
+    assert manifest["catalogue_assertions"]["runtime_schema_create_grants"] == 0
+    assert manifest["dependency_assertions"] == {
+        "support_helper_precedes_all_rls_policies": True,
+        "paired_guard_dependencies": RECOVERY_SPEC["paired_guard_dependencies"],
+    }
+    applicability = manifest["postgresql_16_representability_recovery_v1"][
+        "appointment_applicability"
+    ]
+    assert applicability == {
+        "source": "single_complete_set_read",
+        "zero": "inert",
+        "one": "proof_required",
+        "multiple": {"failure_id": "F_CARDINALITY", "sqlstate": "CF004"},
+        "arbitrary_stream_selection": False,
+    }
+
+
+def test_renderer_isolation_assertions_are_read_only() -> None:
+    sql = _base_render()["sql_text"]
+    assert sql.count("pg_catalog.current_setting('transaction_isolation')") == 9
+    assert sql.count("'read committed'") == 2
+    assert sql.count("'serializable'") == 7
+    # A comment is not an assertion.
+    assert "-- assert_isolation" not in sql
+
+
+def test_renderer_unique_race_reload_proves_exact_cardinality() -> None:
+    sql = _base_render()["sql_text"]
+    # Insert-success arm proves exactly one row returned.
+    assert (
+        sql.count(
+            "RETURNING practice_id, source_contract_id, stream_id, product_appointment_uuid, "
+            "opaque_aggregate_alias, created_at INTO alias;\n"
+            "        IF NOT FOUND THEN"
+        )
+        >= 1
+    )
+    # Winner reload is a strict exact read mapping zero/multiple to CF004.
+    assert "INTO STRICT alias\n" in sql
+    assert "WHEN NO_DATA_FOUND THEN" in sql
+    assert "WHEN TOO_MANY_ROWS THEN" in sql
+    # The expected-constraint fence and nonmatching RAISE remain exact.
+    assert "GET STACKED DIAGNOSTICS cf_constraint_name = CONSTRAINT_NAME;" in sql
+    assert re.search(r"ELSE\n\s+RAISE;\n\s+END IF;", sql) is not None
+
+
+def test_renderer_digest_profile_frame_is_component_zero() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    # Profile is component zero using the same type-byte-length rule: the type
+    # name is the literal "profile" (7 bytes), the value is the profile string.
+    assert re.search(
+        r"\(7 \|\| ':' \|\| 'profile' \|\| ':' \|\| 39 \|\| ':' \|\| 'emr4_context_fabric\.admission_digest_v1'\)",
+        sql,
+    )
+    first_vector = result["manifest"]["digest_vectors"][0]
+    assert first_vector["preimage"].startswith("7:profile:")
+    # Python reference and SQL agree on the profile frame bytes.
+    assert digest_preimage(
+        first_vector["profile"], first_vector["operand_types"], first_vector["values"]
+    ).startswith("7:profile:")
+
+
+# ---------------------------------------------------------------------------
+# Same-lane correction 2 -- recognizer hostile tests for the first bytes.
+# ---------------------------------------------------------------------------
+
+
+def test_recognizer_rejects_invalid_first_candidate_patterns() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    manifest = result["manifest"]
+    effective = result["effective"]
+
+    def rejected(mutated: str, code: str) -> None:
+        report = recognize_inert_sql(mutated, manifest, effective)
+        assert not report.valid
+        assert any(issue.code == code for issue in report.issues), (
+            code,
+            [issue.code for issue in report.issues],
+        )
+
+    # pg_catalog.ARRAY / pg_catalog.ROW grammar misuse.
+    rejected(
+        sql.replace(
+            "ARRAY['appointment_time_changed'::pg_catalog.text]",
+            "pg_catalog.ARRAY['appointment_time_changed'::pg_catalog.text]",
+            1,
+        ),
+        "pg_catalog_array",
+    )
+    rejected(sql.replace("(ROW(", "(pg_catalog.ROW(", 1), "pg_catalog_row")
+    # Comment-only isolation is not an assertion.
+    rejected(
+        sql.replace(
+            "IF NOT (pg_catalog.current_setting('transaction_isolation') = 'read committed') THEN",
+            "-- assert_isolation READ_COMMITTED",
+            1,
+        ),
+        "comment_only_isolation",
+    )
+    # Non-strict exact read.
+    rejected(sql.replace("INTO STRICT ", "INTO ", 1), "non_strict_exact")
+    # Invalid bounded delete syntax.
+    m = re.search(
+        r"    WITH selected_keys AS \(\n(?:.*?\n)*?"
+        r"    SELECT pg_catalog\.count\(\*\) INTO purged_row_count FROM deleted;",
+        sql,
+    )
+    assert m is not None
+    invalid_delete = (
+        "    DELETE FROM emr4_context_fabric.diary_context_observation_outbox_v1\n"
+        "        WHERE practice_id = practice_source_stream.practice_id\n"
+        "        ORDER BY practice_id\n"
+        "        LIMIT 1000\n"
+        "        RETURNING pg_catalog.count(*) INTO purged_row_count;"
+    )
+    rejected(sql.replace(m.group(0), invalid_delete, 1), "delete_order_limit")
+    # Anonymous-record set aggregation.
+    agg = re.search(
+        r"pg_catalog\.array_agg\(\(ROW\(.*?\)\)::[a-zA-Z0-9_\.]+ ORDER BY [^)]*\)",
+        sql,
+        flags=re.DOTALL,
+    )
+    assert agg is not None
+    rejected(
+        sql.replace(agg.group(0), "pg_catalog.array_agg(sub)", 1),
+        "anonymous_record_set",
+    )
+    # Schema-qualified owner role.
+    rejected(
+        sql.replace(
+            "OWNER TO context_schema_owner",
+            "OWNER TO emr4_context_fabric.context_schema_owner",
+            1,
+        ),
+        "schema_qualified_owner",
+    )
+    # Missing support function owner.
+    support_owner = re.search(
+        r"ALTER FUNCTION emr4_context_fabric\.session_binding_allows_v1\([^;]*OWNER TO [a-z_]+;",
+        sql,
+    )
+    assert support_owner is not None
+    rejected(sql.replace(support_owner.group(0) + "\n", "", 1), "missing_owner")
+    # UTC digest text without the literal terminal Z.
+    rejected(sql.replace('HH24:MI:SS.US"Z"', "HH24:MI:SS.US", 1), "digest_utc_z")
+
+
+def test_renderer_fails_closed_on_null_constants() -> None:
+    sql = _base_render()["sql_text"]
+    # None must never be quoted as Python text or an identifier.
+    assert "None::" not in sql
+    assert "'None'::" not in sql
+    assert "NULL::pg_catalog.bigint" in sql
+    assert "NULL::pg_catalog.timestamptz" in sql
+
+
+# ---------------------------------------------------------------------------
+# PostgreSQL-16 representability recovery -- hostile static byte mutations.
+# ---------------------------------------------------------------------------
+
+
+def test_recovery_recognizer_rejects_nullable_count_and_trigger_row_xmin() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+
+    nullable = sql.replace(
+        "pg_catalog.coalesce(pg_catalog.array_length(producer_bindings, 1), 0)",
+        "pg_catalog.array_length(producer_bindings, 1)",
+        1,
+    )
+    nullable_report = recognize_inert_sql(
+        nullable, result["manifest"], result["effective"]
+    )
+    assert not nullable_report.valid
+    assert any(issue.code == "nullable_count" for issue in nullable_report.issues)
+
+    trigger_xmin = sql.replace("(old_appointment).xmin", "OLD.xmin", 1)
+    xmin_report = recognize_inert_sql(
+        trigger_xmin, result["manifest"], result["effective"]
+    )
+    assert not xmin_report.valid
+    assert any(issue.code == "trigger_row_xmin" for issue in xmin_report.issues)
+
+
+def test_recovery_recognizer_rejects_trigger_kind_and_missing_guard() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+
+    wrong_kind = sql.replace(
+        "CREATE CONSTRAINT TRIGGER trg_cf_claim_fence",
+        "CREATE TRIGGER trg_cf_claim_fence",
+        1,
+    )
+    wrong_kind_report = recognize_inert_sql(
+        wrong_kind, result["manifest"], result["effective"]
+    )
+    assert not wrong_kind_report.valid
+    assert any(
+        issue.code == "ordinary_trigger_deferrable"
+        for issue in wrong_kind_report.issues
+    )
+
+    guard_pattern = re.compile(
+        r"CREATE TRIGGER trg_cf_appointment_guard BEFORE UPDATE ON "
+        r"public\.appointments\n"
+        r"    FOR EACH ROW\n"
+        r"    EXECUTE FUNCTION "
+        r"emr4_context_fabric\.cf_guard_appointment_update_v1\(\);\n"
+    )
+    missing_guard, replacements = guard_pattern.subn("", sql, count=1)
+    assert replacements == 1
+    missing_guard_report = recognize_inert_sql(
+        missing_guard, result["manifest"], result["effective"]
+    )
+    assert not missing_guard_report.valid
+    assert any(
+        issue.code == "trigger_population" for issue in missing_guard_report.issues
+    )
+
+
+def test_recovery_recognizer_rejects_dependency_and_owner_regressions() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+
+    helper_missing = sql.replace(
+        "CREATE FUNCTION emr4_context_fabric.session_binding_allows_v1",
+        "CREATE FUNCTION emr4_context_fabric.session_binding_denies_v1",
+        1,
+    )
+    helper_report = recognize_inert_sql(
+        helper_missing, result["manifest"], result["effective"]
+    )
+    assert not helper_report.valid
+    assert any(issue.code == "dependency_order" for issue in helper_report.issues)
+
+    owner_missing = sql.replace(
+        "ALTER DOMAIN emr4_context_fabric.source_contract_code "
+        "OWNER TO context_schema_owner;\n",
+        "",
+        1,
+    )
+    owner_report = recognize_inert_sql(
+        owner_missing, result["manifest"], result["effective"]
+    )
+    assert not owner_report.valid
+    assert any(issue.code == "object_owner" for issue in owner_report.issues)
+
+    schema_owner = sql.replace(
+        "CREATE SCHEMA emr4_context_fabric AUTHORIZATION context_schema_owner;",
+        "CREATE SCHEMA emr4_context_fabric;",
+        1,
+    )
+    schema_report = recognize_inert_sql(
+        schema_owner, result["manifest"], result["effective"]
+    )
+    assert not schema_report.valid
+    assert any(issue.code == "schema_owner" for issue in schema_report.issues)
+
+    application_owner = (
+        sql + "\nALTER TABLE public.appointments OWNER TO context_schema_owner;\n"
+    )
+    application_report = recognize_inert_sql(
+        application_owner, result["manifest"], result["effective"]
+    )
+    assert not application_report.valid
+    assert any(issue.code == "application_ddl" for issue in application_report.issues)

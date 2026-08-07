@@ -1,0 +1,2763 @@
+{
+  "artifact": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+  "body_parent": {
+    "contract_sha256": "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3",
+    "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
+    "source_head": "a93d07405ad35d7d6c0603065625c17ec14ab23e"
+  },
+  "body_program_accounting": [
+    {
+      "expression_count": 260,
+      "id": "emr4_context_fabric.project_update_confirm_reschedule_v1",
+      "instruction_counts": {
+        "ASSERT": 7,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "IF": 1,
+        "INSERT": 1,
+        "INSERT_OR_RELOAD_COMPARE": 1,
+        "LET": 4,
+        "LOCK_EXACT": 2,
+        "PROPAGATE_RETRYABLE": 1,
+        "RETURN_ROW": 1,
+        "SELECT_EXACT": 6,
+        "SELECT_SET": 1,
+        "UPDATE": 1
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 28
+    },
+    {
+      "expression_count": 1051,
+      "id": "emr4_context_fabric.admit_proofread_observation_v1",
+      "instruction_counts": {
+        "ASSERT": 5,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "IF": 9,
+        "INSERT_OR_RELOAD_COMPARE": 3,
+        "LET": 1,
+        "PROPAGATE_RETRYABLE": 5,
+        "RETURN_ROW": 5,
+        "SELECT_EXACT": 5,
+        "SELECT_SET": 4
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 39
+    },
+    {
+      "expression_count": 5452,
+      "id": "emr4_context_fabric.apply_durability_transition_v1",
+      "instruction_counts": {
+        "ASSERT": 20,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "IF": 33,
+        "INSERT": 22,
+        "INSERT_OR_RELOAD_COMPARE": 5,
+        "LET": 14,
+        "LOCK_EXACT": 17,
+        "PROPAGATE_RETRYABLE": 13,
+        "RAISE": 1,
+        "RETURN_COMPOSITE": 13,
+        "SELECT_EXACT": 6,
+        "SELECT_SET": 13,
+        "UPDATE": 33
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 192
+    },
+    {
+      "expression_count": 1960,
+      "id": "emr4_context_fabric.register_observer_generation_v1",
+      "instruction_counts": {
+        "ASSERT": 6,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "IF": 4,
+        "INSERT_OR_RELOAD_COMPARE": 9,
+        "LET": 2,
+        "LOCK_EXACT": 2,
+        "PROPAGATE_RETRYABLE": 2,
+        "RETURN_ROW": 2,
+        "SELECT_EXACT": 9,
+        "SELECT_SET": 4,
+        "UPDATE": 1
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 43
+    },
+    {
+      "expression_count": 1450,
+      "id": "emr4_context_fabric.append_recovery_anchor_v1",
+      "instruction_counts": {
+        "ASSERT": 21,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "IF": 8,
+        "INSERT_OR_RELOAD_COMPARE": 1,
+        "LET": 8,
+        "LOCK_EXACT": 3,
+        "PROPAGATE_RETRYABLE": 2,
+        "RAISE": 1,
+        "RETURN_ROW": 2,
+        "SELECT_EXACT": 12,
+        "SELECT_SET": 13
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 73
+    },
+    {
+      "expression_count": 571,
+      "id": "emr4_context_fabric.rotate_observation_key_v1",
+      "instruction_counts": {
+        "ASSERT": 5,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "IF": 3,
+        "INSERT_OR_RELOAD_COMPARE": 2,
+        "LOCK_EXACT": 5,
+        "PROPAGATE_RETRYABLE": 2,
+        "RETURN_ROW": 2,
+        "SELECT_EXACT": 2,
+        "SELECT_SET": 1,
+        "UPDATE": 2
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 26
+    },
+    {
+      "expression_count": 135,
+      "id": "emr4_context_fabric.consume_observer_generation_v1",
+      "instruction_counts": {
+        "ASSERT": 2,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "IF": 3,
+        "LOCK_EXACT": 2,
+        "PROPAGATE_RETRYABLE": 2,
+        "RETURN_ROW": 2,
+        "SELECT_EXACT": 1,
+        "UPDATE": 2
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 16
+    },
+    {
+      "expression_count": 578,
+      "id": "emr4_context_fabric.evaluate_source_retention_v1",
+      "instruction_counts": {
+        "ASSERT": 1,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "FOR_EACH": 1,
+        "IF": 3,
+        "LET": 5,
+        "LOCK_EXACT": 1,
+        "PROPAGATE_RETRYABLE": 2,
+        "RETURN_COMPOSITE": 2,
+        "SELECT_EXACT": 5,
+        "SELECT_SET": 17
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 39
+    },
+    {
+      "expression_count": 552,
+      "id": "emr4_context_fabric.purge_source_rows_v1",
+      "instruction_counts": {
+        "ASSERT": 4,
+        "ASSERT_ISOLATION": 1,
+        "CALL_SUPPORT": 1,
+        "DELETE_SOURCE": 1,
+        "FOR_EACH": 1,
+        "IF": 1,
+        "LET": 5,
+        "LOCK_EXACT": 1,
+        "PROPAGATE_RETRYABLE": 1,
+        "RETURN_COMPOSITE": 1,
+        "SELECT_EXACT": 5,
+        "SELECT_SET": 17
+      },
+      "kind": "ENTRY_POINT",
+      "node_count": 39
+    },
+    {
+      "expression_count": 123,
+      "id": "emr4_context_fabric.cf_guard_claim_v1",
+      "instruction_counts": {
+        "ASSERT": 4,
+        "IF": 3,
+        "RAISE": 3,
+        "RETURN_NEW": 2,
+        "RETURN_OLD": 1,
+        "SELECT_EXACT": 1,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 15
+    },
+    {
+      "expression_count": 489,
+      "id": "emr4_context_fabric.cf_fence_claim_v1",
+      "instruction_counts": {
+        "ASSERT": 5,
+        "CALL_SUPPORT": 2,
+        "IF": 4,
+        "LET": 2,
+        "RAISE": 3,
+        "RETURN_NULL": 5,
+        "SELECT_EXACT": 16,
+        "SELECT_SET": 2,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 40
+    },
+    {
+      "expression_count": 64,
+      "id": "emr4_context_fabric.cf_guard_appointment_update_v1",
+      "instruction_counts": {
+        "ASSERT": 4,
+        "CALL_SUPPORT": 1,
+        "IF": 1,
+        "LET": 1,
+        "RAISE": 1,
+        "RETURN_NEW": 2,
+        "SELECT_EXACT": 1,
+        "SELECT_SET": 1,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 13
+    },
+    {
+      "expression_count": 408,
+      "id": "emr4_context_fabric.cf_fence_appointment_update_v1",
+      "instruction_counts": {
+        "ASSERT": 7,
+        "CALL_SUPPORT": 1,
+        "IF": 3,
+        "LET": 2,
+        "RAISE": 2,
+        "RETURN_NULL": 3,
+        "SELECT_EXACT": 12,
+        "SELECT_SET": 4,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 35
+    },
+    {
+      "expression_count": 65,
+      "id": "emr4_context_fabric.cf_guard_audit_v1",
+      "instruction_counts": {
+        "ASSERT": 1,
+        "IF": 2,
+        "RAISE": 3,
+        "RETURN_NEW": 1,
+        "RETURN_OLD": 1,
+        "SELECT_SET": 3,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 12
+    },
+    {
+      "expression_count": 297,
+      "id": "emr4_context_fabric.cf_fence_audit_v1",
+      "instruction_counts": {
+        "ASSERT": 3,
+        "CALL_SUPPORT": 1,
+        "IF": 3,
+        "LET": 1,
+        "RAISE": 3,
+        "RETURN_NULL": 4,
+        "SELECT_EXACT": 8,
+        "SELECT_SET": 5,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 29
+    },
+    {
+      "expression_count": 46,
+      "id": "emr4_context_fabric.cf_guard_event_v1",
+      "instruction_counts": {
+        "ASSERT": 1,
+        "IF": 3,
+        "RAISE": 3,
+        "RETURN_NEW": 1,
+        "RETURN_OLD": 2,
+        "SELECT_EXACT": 1,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 12
+    },
+    {
+      "expression_count": 257,
+      "id": "emr4_context_fabric.cf_fence_event_v1",
+      "instruction_counts": {
+        "ASSERT": 3,
+        "CALL_SUPPORT": 1,
+        "IF": 3,
+        "LET": 1,
+        "RAISE": 2,
+        "RETURN_NULL": 5,
+        "SELECT_EXACT": 8,
+        "SELECT_SET": 1,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 25
+    },
+    {
+      "expression_count": 13,
+      "id": "emr4_context_fabric.cf_guard_alias_v1",
+      "instruction_counts": {
+        "ASSERT": 1,
+        "RAISE": 3,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 5
+    },
+    {
+      "expression_count": 80,
+      "id": "emr4_context_fabric.cf_fence_alias_v1",
+      "instruction_counts": {
+        "ASSERT": 4,
+        "CALL_SUPPORT": 1,
+        "RAISE": 3,
+        "RETURN_NULL": 1,
+        "SELECT_EXACT": 3,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 13
+    },
+    {
+      "expression_count": 73,
+      "id": "emr4_context_fabric.cf_guard_stream_head_v1",
+      "instruction_counts": {
+        "ASSERT": 3,
+        "CALL_SUPPORT": 1,
+        "RAISE": 2,
+        "RETURN_NEW": 1,
+        "SELECT_EXACT": 1,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 9
+    },
+    {
+      "expression_count": 147,
+      "id": "emr4_context_fabric.cf_fence_stream_head_v1",
+      "instruction_counts": {
+        "ASSERT": 5,
+        "CALL_SUPPORT": 2,
+        "RAISE": 2,
+        "RETURN_NULL": 2,
+        "SELECT_EXACT": 6,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 18
+    },
+    {
+      "expression_count": 84,
+      "id": "emr4_context_fabric.cf_guard_outbox_v1",
+      "instruction_counts": {
+        "ASSERT": 1,
+        "IF": 1,
+        "RAISE": 3,
+        "RETURN_OLD": 1,
+        "SELECT_EXACT": 1,
+        "SELECT_SET": 2,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 10
+    },
+    {
+      "expression_count": 333,
+      "id": "emr4_context_fabric.cf_fence_outbox_v1",
+      "instruction_counts": {
+        "ASSERT": 4,
+        "CALL_SUPPORT": 1,
+        "IF": 1,
+        "LET": 1,
+        "RAISE": 3,
+        "RETURN_NULL": 2,
+        "SELECT_EXACT": 9,
+        "SELECT_SET": 3,
+        "SWITCH_TG_OP": 1
+      },
+      "kind": "TRIGGER_FUNCTION",
+      "node_count": 25
+    }
+  ],
+  "catalogue_assertions": {
+    "application_owner_changes": 0,
+    "application_relations_reference_only": 4,
+    "derive_binding_occurrences": 0,
+    "entry_points": 9,
+    "fabric_relation_owner_count": 18,
+    "fabric_relations": 18,
+    "fabric_type_owner_count": 32,
+    "insert_or_reload_compare": 21,
+    "rls_policies": 44,
+    "roles": 8,
+    "runtime_schema_create_grants": 0,
+    "schema_owner": "context_schema_owner",
+    "support_functions": 1,
+    "trigger_declarations": 14,
+    "trigger_function_runtime_execute": 0,
+    "trigger_functions": 14
+  },
+  "dependency_assertions": {
+    "paired_guard_dependencies": [
+      {
+        "discharged_fact": "old_row_xmin_not_current_xid_before_update",
+        "fence": "emr4_context_fabric.cf_fence_appointment_update_v1",
+        "guard": "emr4_context_fabric.cf_guard_appointment_update_v1"
+      },
+      {
+        "discharged_fact": "deleted_event_xmin_not_current_xid",
+        "fence": "emr4_context_fabric.cf_fence_event_v1",
+        "guard": "emr4_context_fabric.cf_guard_event_v1"
+      },
+      {
+        "discharged_fact": "deleted_outbox_xmin_not_current_xid",
+        "fence": "emr4_context_fabric.cf_fence_outbox_v1",
+        "guard": "emr4_context_fabric.cf_guard_outbox_v1"
+      }
+    ],
+    "support_helper_precedes_all_rls_policies": true
+  },
+  "digest_profiles": [
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.observation_decision",
+        "emr4_context_fabric.observation_reason",
+        "emr4_context_fabric.frame_mask",
+        "emr4_context_fabric.checkpoint_disposition",
+        "emr4_context_fabric.key_id",
+        "emr4_context_fabric.digest_sha256"
+      ],
+      "profile": "emr4_context_fabric.admission_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256",
+        "pg_catalog.bigint"
+      ],
+      "profile": "emr4_context_fabric.checkpoint_apply_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint"
+      ],
+      "profile": "emr4_context_fabric.checkpoint_rebase_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256",
+        "pg_catalog.bigint"
+      ],
+      "profile": "emr4_context_fabric.classified_receipt_digest_v1"
+    },
+    {
+      "operand_types": [
+        "emr4_context_fabric.digest_sha256",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256"
+      ],
+      "profile": "emr4_context_fabric.coalesced_reassembly_obligation_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.key_id",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "pg_catalog.bigint"
+      ],
+      "profile": "emr4_context_fabric.key_rotation_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256"
+      ],
+      "profile": "emr4_context_fabric.reassembly_obligation_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.checkpoint_state",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256"
+      ],
+      "profile": "emr4_context_fabric.recovery_anchor_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.digest_sha256",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.key_id",
+        "emr4_context_fabric.digest_sha256"
+      ],
+      "profile": "emr4_context_fabric.registration_baseline_digest_v1"
+    },
+    {
+      "operand_types": [
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.text",
+        "pg_catalog.text"
+      ],
+      "profile": "emr4_context_fabric.source_contract_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256",
+        "pg_catalog.timestamptz"
+      ],
+      "profile": "emr4_context_fabric.source_membership_digest_v1"
+    },
+    {
+      "operand_types": [
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint"
+      ],
+      "profile": "emr4_context_fabric.source_retention_census_digest_v1"
+    }
+  ],
+  "digest_vectors": [
+    {
+      "operand_types": [
+        "pg_catalog.uuid",
+        "emr4_context_fabric.source_contract_code",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.uuid",
+        "pg_catalog.bigint",
+        "pg_catalog.bigint",
+        "emr4_context_fabric.digest_sha256",
+        "emr4_context_fabric.observation_decision",
+        "emr4_context_fabric.observation_reason",
+        "emr4_context_fabric.frame_mask",
+        "emr4_context_fabric.checkpoint_disposition",
+        "emr4_context_fabric.key_id",
+        "emr4_context_fabric.digest_sha256"
+      ],
+      "preimage": "7:profile:39:emr4_context_fabric.admission_digest_v1\u001f15:pg_catalog.uuid:-1\u001f40:emr4_context_fabric.source_contract_code:-1\u001f15:pg_catalog.uuid:-1\u001f17:pg_catalog.bigint:-1\u001f15:pg_catalog.uuid:-1\u001f17:pg_catalog.bigint:-1\u001f17:pg_catalog.bigint:-1\u001f33:emr4_context_fabric.digest_sha256:-1\u001f40:emr4_context_fabric.observation_decision:-1\u001f38:emr4_context_fabric.observation_reason:-1\u001f30:emr4_context_fabric.frame_mask:-1\u001f42:emr4_context_fabric.checkpoint_disposition:-1\u001f26:emr4_context_fabric.key_id:-1\u001f33:emr4_context_fabric.digest_sha256:-1",
+      "profile": "emr4_context_fabric.admission_digest_v1",
+      "values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "operand_types": [
+        "pg_catalog.text"
+      ],
+      "preimage": "7:profile:18:edge.null_vs_empty\u001f15:pg_catalog.text:-1",
+      "profile": "edge.null_vs_empty",
+      "values": [
+        null
+      ]
+    },
+    {
+      "operand_types": [
+        "pg_catalog.text"
+      ],
+      "preimage": "7:profile:15:edge.empty_text\u001f15:pg_catalog.text:0:",
+      "profile": "edge.empty_text",
+      "values": [
+        ""
+      ]
+    },
+    {
+      "operand_types": [
+        "pg_catalog.uuid"
+      ],
+      "preimage": "7:profile:14:edge.uuid_case\u001f15:pg_catalog.uuid:36:a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      "profile": "edge.uuid_case",
+      "values": [
+        "A0EEBC99-9C0B-4EF8-BB6D-6BB9BD380A11"
+      ]
+    },
+    {
+      "operand_types": [
+        "pg_catalog.boolean"
+      ],
+      "preimage": "7:profile:12:edge.boolean\u001f18:pg_catalog.boolean:4:true",
+      "profile": "edge.boolean",
+      "values": [
+        true
+      ]
+    }
+  ],
+  "effective_catalogue_digest": "sha256:9ca710cae1810ec7f623d432378e78aef44cba9655f4d2fcb37ac14418a529e4",
+  "effective_program_count": 23,
+  "immutable_parent_program_count": 22,
+  "opcode_populations": {
+    "absent_instruction_opcode": "DERIVE_BINDING",
+    "declared_expression_opcodes": 34,
+    "declared_instruction_opcodes": 22,
+    "observed_expression_opcodes": 34,
+    "observed_instruction_opcodes": 21
+  },
+  "ordered_nodes": [
+    {
+      "identifier": "context_schema_owner",
+      "kind": "ROLE"
+    },
+    {
+      "identifier": "context_producer",
+      "kind": "ROLE"
+    },
+    {
+      "identifier": "context_observer",
+      "kind": "ROLE"
+    },
+    {
+      "identifier": "context_admission_receiver",
+      "kind": "ROLE"
+    },
+    {
+      "identifier": "context_coordinator",
+      "kind": "ROLE"
+    },
+    {
+      "identifier": "context_lifecycle",
+      "kind": "ROLE"
+    },
+    {
+      "identifier": "context_retention",
+      "kind": "ROLE"
+    },
+    {
+      "identifier": "context_application_read",
+      "kind": "ROLE"
+    },
+    {
+      "identifier": "emr4_context_fabric",
+      "kind": "SCHEMA"
+    },
+    {
+      "identifier": "emr4_context_fabric.source_contract_code",
+      "kind": "DOMAIN"
+    },
+    {
+      "identifier": "emr4_context_fabric.digest_sha256",
+      "kind": "DOMAIN"
+    },
+    {
+      "identifier": "emr4_context_fabric.key_id",
+      "kind": "DOMAIN"
+    },
+    {
+      "identifier": "emr4_context_fabric.frame_mask",
+      "kind": "DOMAIN"
+    },
+    {
+      "identifier": "emr4_context_fabric.admission_entry_kind",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.observation_decision",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.observation_reason",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.checkpoint_disposition",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.admission_conflict_reason",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.generation_state",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.checkpoint_state",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.frame_type",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.frame_lifecycle",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.obligation_count_bucket",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.obligation_state",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.lifecycle_entry_kind",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.retention_family",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.recovery_pin_reason",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.recovery_pin_state",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.logical_capability",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.generation_terminal_reason",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.durability_transition_result_kind",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.source_retention_reason",
+      "kind": "ENUM"
+    },
+    {
+      "identifier": "emr4_context_fabric.generation_locator_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.proofread_packet_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.admission_locator_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.generation_registration_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.future_key_interval_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.practice_source_stream_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_source_retention_eligibility_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_source_purge_result_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.durability_transition_result_v1",
+      "kind": "COMPOSITE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_stream_head",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_stream_head.pk_cf_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_stream_head.ck_cf_01_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_stream_head.ck_cf_01_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_stream_head.ck_cf_01_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.pk_cf_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.uq_cf_02_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.fk_cf_02_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.ck_cf_02_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.pk_cf_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.uq_cf_03_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.fk_cf_03_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.fk_cf_03_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.ck_cf_03_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.ck_cf_03_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.ck_cf_03_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.ck_cf_03_04",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission.pk_cf_04",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "uq_cf_04_01",
+      "kind": "UNIQUE_INDEX"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission.fk_cf_04_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission.ck_cf_04_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission.ck_cf_04_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_generation_registry_barrier",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_generation_registry_barrier.pk_cf_05",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_generation_registry_barrier.ck_cf_05_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation.pk_cf_06",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation.fk_cf_06_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation.ck_cf_06_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation.ck_cf_06_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation.ck_cf_06_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint.pk_cf_07",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint.fk_cf_07_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint.ck_cf_07_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint.ck_cf_07_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint.ck_cf_07_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor.pk_cf_08",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor.uq_cf_08_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor.fk_cf_08_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor.ck_cf_08_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor.ck_cf_08_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.pk_cf_09",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.uq_cf_09_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.uq_cf_09_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.fk_cf_09_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.fk_cf_09_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.ck_cf_09_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.ck_cf_09_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.ck_cf_09_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation.pk_cf_10",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "uq_cf_10_01",
+      "kind": "UNIQUE_INDEX"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation.fk_cf_10_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation.ck_cf_10_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation.ck_cf_10_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark.pk_cf_11",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark.fk_cf_11_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark.ck_cf_11_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation.pk_cf_12",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "uq_cf_12_01",
+      "kind": "UNIQUE_INDEX"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation.fk_cf_12_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation.ck_cf_12_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation.ck_cf_12_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle.pk_cf_13",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle.uq_cf_13_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle.fk_cf_13_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle.ck_cf_13_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle.ck_cf_13_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit.pk_cf_14",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit.uq_cf_14_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit.fk_cf_14_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval.pk_cf_15",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval.uq_cf_15_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval.fk_cf_15_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval.ck_cf_15_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval.ck_cf_15_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_pin",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_pin.pk_cf_16",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_pin.ck_cf_16_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding.pk_cf_17",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "uq_cf_17_01",
+      "kind": "UNIQUE_INDEX"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding.ck_cf_17_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding.ck_cf_17_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding.ck_cf_17_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy.pk_cf_18",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy.ck_cf_18_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy.ck_cf_18_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy.ck_cf_18_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy.ck_cf_18_04",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy.ck_cf_18_05",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.session_binding_allows_v1",
+      "kind": "SUPPORT_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_stream_head",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_stream_head",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_generation_registry_barrier",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_generation_registry_barrier",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_pin",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_pin",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy",
+      "kind": "RLS_ENABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy",
+      "kind": "RLS_FORCE"
+    },
+    {
+      "identifier": "pol_cf_01_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_01_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_01_update",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_02_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_02_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_03_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_03_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_03_delete",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_04_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_04_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_05_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_05_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_05_update",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_06_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_06_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_06_update",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_07_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_07_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_07_update",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_08_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_08_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_09_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_09_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_10_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_10_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_10_update",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_11_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_11_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_11_update",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_12_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_12_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_12_update",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_13_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_13_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_14_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_14_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_15_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_15_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_16_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_16_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_16_update",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_17_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_18_select",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_18_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "emr4_context_fabric.source_contract_code",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.digest_sha256",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.key_id",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.frame_mask",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.admission_entry_kind",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.observation_decision",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.observation_reason",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.checkpoint_disposition",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.admission_conflict_reason",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.generation_state",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.checkpoint_state",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.frame_type",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.frame_lifecycle",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.obligation_count_bucket",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.obligation_state",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.lifecycle_entry_kind",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.retention_family",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.recovery_pin_reason",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.recovery_pin_state",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.logical_capability",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.generation_terminal_reason",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.durability_transition_result_kind",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.source_retention_reason",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.generation_locator_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.proofread_packet_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.admission_locator_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.generation_registration_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.future_key_interval_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.practice_source_stream_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_source_retention_eligibility_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_source_purge_result_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.durability_transition_result_v1",
+      "kind": "TYPE_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_stream_head",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_generation_registry_barrier",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_pin",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy",
+      "kind": "RELATION_OWNER"
+    },
+    {
+      "identifier": "emr4_context_fabric.project_update_confirm_reschedule_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.admit_proofread_observation_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.apply_durability_transition_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.register_observer_generation_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.append_recovery_anchor_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.rotate_observation_key_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.consume_observer_generation_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.evaluate_source_retention_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.purge_source_rows_v1",
+      "kind": "ENTRY_POINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_guard_claim_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_fence_claim_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_guard_appointment_update_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_fence_appointment_update_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_guard_audit_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_fence_audit_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_guard_event_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_fence_event_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_guard_alias_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_fence_alias_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_guard_stream_head_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_fence_stream_head_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_guard_outbox_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "emr4_context_fabric.cf_fence_outbox_v1",
+      "kind": "TRIGGER_FUNCTION"
+    },
+    {
+      "identifier": "trg_cf_claim_guard",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_claim_fence",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_appointment_guard",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_appointment_fence",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_audit_guard",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_audit_fence",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_event_guard",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_event_fence",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_alias_guard",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_alias_fence",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_head_guard",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_head_fence",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_outbox_guard",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "trg_cf_outbox_fence",
+      "kind": "TRIGGER_DECLARATION"
+    },
+    {
+      "identifier": "REVOKE ALL ON SCHEMA emr4_context_fabric FROM PUBLIC;",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_classified_o",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_durability_a",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_durability_c",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_durability_l",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_frame_genera",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_generation_r",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_invalidation",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_observation_",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_observation_",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_observer_gen",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_proofread_ob",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_reassembly_o",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_recovery_anc",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_recovery_pin",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_retention_po",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.context_service_prac",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.diary_context_aggreg",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON TABLE emr4_context_fabric.diary_context_observ",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.session_binding_a",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.project_update_co",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.admit_proofread_o",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.apply_durability_",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.register_observer",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.append_recovery_a",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.rotate_observatio",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.consume_observer_",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.evaluate_source_r",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.purge_source_rows",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_guard_claim_v1",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_fence_claim_v1",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_guard_appointm",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_fence_appointm",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_guard_audit_v1",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_fence_audit_v1",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_guard_event_v1",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_fence_event_v1",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_guard_alias_v1",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_fence_alias_v1",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_guard_stream_h",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_fence_stream_h",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_guard_outbox_v",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "REVOKE ALL ON FUNCTION emr4_context_fabric.cf_fence_outbox_v",
+      "kind": "REVOKE"
+    },
+    {
+      "identifier": "GRANT USAGE ON SCHEMA emr4_context_fabric TO context_schema_",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE public.appointment_command_idempotency",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE public.appointments TO context_schema_",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE public.appointment_audit_log TO contex",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE public.diary_committed_events TO conte",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT USAGE ON SCHEMA emr4_context_fabric TO context_produce",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.project_update",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT USAGE ON SCHEMA emr4_context_fabric TO context_observe",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.diary_context_obse",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.admit_proofrea",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT USAGE ON SCHEMA emr4_context_fabric TO context_admissi",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.diary_context_obse",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_proofread_",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_observer_g",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_durability",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_classified",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_observatio",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_service_pr",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT INSERT ON TABLE emr4_context_fabric.context_proofread_",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT USAGE ON SCHEMA emr4_context_fabric TO context_coordin",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.apply_durabili",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT USAGE ON SCHEMA emr4_context_fabric TO context_lifecyc",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.register_obser",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.append_recover",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.rotate_observa",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.consume_observ",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT USAGE ON SCHEMA emr4_context_fabric TO context_retenti",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.evaluate_sourc",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.purge_source_r",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT USAGE ON SCHEMA emr4_context_fabric TO context_applica",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_frame_gene",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_invalidati",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_reassembly",
+      "kind": "GRANT"
+    }
+  ],
+  "owner_assertions": {
+    "application_relation_owner_changes": [],
+    "relations": [
+      {
+        "id": "emr4_context_fabric.context_observation_stream_head",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.diary_context_observation_outbox_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_proofread_observation_admission",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_generation_registry_barrier",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_observer_generation",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_durability_checkpoint",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_recovery_anchor",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_classified_observation_receipt",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_frame_generation",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_invalidation_watermark",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_reassembly_obligation",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_durability_lifecycle",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_durability_audit",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_observation_key_interval",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_recovery_pin",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_service_practice_binding",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_retention_policy",
+        "owner": "context_schema_owner"
+      }
+    ],
+    "runtime_schema_create_grants": [],
+    "schema": {
+      "emr4_context_fabric": "context_schema_owner"
+    },
+    "types": [
+      {
+        "id": "emr4_context_fabric.source_contract_code",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.digest_sha256",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.key_id",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.frame_mask",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.admission_entry_kind",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.observation_decision",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.observation_reason",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.checkpoint_disposition",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.admission_conflict_reason",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.generation_state",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.checkpoint_state",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.frame_type",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.frame_lifecycle",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.obligation_count_bucket",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.obligation_state",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.lifecycle_entry_kind",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.retention_family",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.recovery_pin_reason",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.recovery_pin_state",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.logical_capability",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.generation_terminal_reason",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.durability_transition_result_kind",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.source_retention_reason",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.generation_locator_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.proofread_packet_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.admission_locator_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.generation_registration_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.future_key_interval_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.practice_source_stream_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_source_retention_eligibility_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.context_source_purge_result_v1",
+        "owner": "context_schema_owner"
+      },
+      {
+        "id": "emr4_context_fabric.durability_transition_result_v1",
+        "owner": "context_schema_owner"
+      }
+    ]
+  },
+  "phase_spans": {
+    "1": {
+      "end": 659,
+      "start": 7
+    },
+    "2": {
+      "end": 3289,
+      "start": 662
+    },
+    "3": {
+      "end": 4468,
+      "start": 3292
+    },
+    "4": {
+      "end": 4522,
+      "start": 4471
+    },
+    "5": {
+      "end": 4603,
+      "start": 4525
+    },
+    "6": {
+      "end": 4624,
+      "start": 4606
+    }
+  },
+  "phases": [
+    {
+      "header": "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS catalogue and the sole support helper",
+      "phase": 1,
+      "span": {}
+    },
+    {
+      "header": "PHASE 2 -- the nine entry-point functions in accepted renderer order",
+      "phase": 2,
+      "span": {}
+    },
+    {
+      "header": "PHASE 3 -- the fourteen effective trigger functions in recovered renderer order",
+      "phase": 3,
+      "span": {}
+    },
+    {
+      "header": "PHASE 4 -- the fourteen effective trigger declarations in recovered order",
+      "phase": 4,
+      "span": {}
+    },
+    {
+      "header": "PHASE 5 -- PUBLIC revocation followed by the exact owner, receiver and runtime grants",
+      "phase": 5,
+      "span": {}
+    },
+    {
+      "header": "PHASE 6 -- non-executed catalogue and privilege expectation comments",
+      "phase": 6,
+      "span": {}
+    }
+  ],
+  "postgresql_16_representability_recovery_v1": {
+    "appointment_applicability": {
+      "arbitrary_stream_selection": false,
+      "multiple": {
+        "failure_id": "F_CARDINALITY",
+        "sqlstate": "CF004"
+      },
+      "one": "proof_required",
+      "source": "single_complete_set_read",
+      "zero": "inert"
+    },
+    "database_contact": false,
+    "effective_population": {
+      "entry_points": 9,
+      "programs": 23,
+      "trigger_declarations": 14,
+      "trigger_functions": 14
+    },
+    "executable_ddl": false,
+    "id": "postgresql_16_representability_recovery_v1",
+    "immutable_body_parent_sha256": "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3",
+    "keyed_xmin_reselects": [
+      {
+        "cardinality_failure": {
+          "id": "F_CARDINALITY",
+          "sqlstate": "CF004"
+        },
+        "function": "emr4_context_fabric.cf_guard_claim_v1",
+        "key_columns": [
+          "practice_id",
+          "id"
+        ],
+        "relation": "public.appointment_command_idempotency",
+        "timing": "BEFORE"
+      },
+      {
+        "cardinality_failure": {
+          "id": "F_CARDINALITY",
+          "sqlstate": "CF004"
+        },
+        "function": "emr4_context_fabric.cf_guard_appointment_update_v1",
+        "key_columns": [
+          "practice_id",
+          "id"
+        ],
+        "relation": "public.appointments",
+        "timing": "BEFORE"
+      },
+      {
+        "cardinality_failure": {
+          "id": "F_CARDINALITY",
+          "sqlstate": "CF004"
+        },
+        "function": "emr4_context_fabric.cf_guard_event_v1",
+        "key_columns": [
+          "practice_id",
+          "id"
+        ],
+        "relation": "public.diary_committed_events",
+        "timing": "BEFORE"
+      },
+      {
+        "cardinality_failure": {
+          "id": "F_CARDINALITY",
+          "sqlstate": "CF004"
+        },
+        "function": "emr4_context_fabric.cf_guard_outbox_v1",
+        "key_columns": [
+          "practice_id",
+          "source_contract_id",
+          "stream_id",
+          "stream_epoch",
+          "transaction_position"
+        ],
+        "relation": "emr4_context_fabric.diary_context_observation_outbox_v1",
+        "timing": "BEFORE"
+      }
+    ],
+    "operation_order": [
+      "ADD_APPOINTMENT_GUARD_SIGNATURE",
+      "ADD_APPOINTMENT_GUARD_PROGRAM",
+      "ADD_APPOINTMENT_GUARD_DECLARATION",
+      "ADD_APPOINTMENT_PRODUCER_APPLICABILITY",
+      "RESELECT_BEFORE_TRIGGER_OLD_XMIN",
+      "REMOVE_DEFERRED_APPOINTMENT_OLD_XMIN",
+      "REMOVE_DEFERRED_EVENT_DELETE_OLD_XMIN",
+      "REMOVE_DEFERRED_OUTBOX_DELETE_OLD_XMIN"
+    ],
+    "operations": [
+      {
+        "affected_ids": [
+          "emr4_context_fabric.cf_guard_appointment_update_v1"
+        ],
+        "id": "ADD_APPOINTMENT_GUARD_SIGNATURE",
+        "new_fragment_sha256": "sha256:07f2b92081c159d265f57b9e24369151eecb341c22018698dd0853d5aa6591e6",
+        "old_fragment_sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.cf_guard_appointment_update_v1"
+        ],
+        "id": "ADD_APPOINTMENT_GUARD_PROGRAM",
+        "new_fragment_sha256": "sha256:9d9aadbbf363b793a3fb3aaeb8a32516c8b8f0409fa21b566fa068d911ff8b6f",
+        "old_fragment_sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "affected_ids": [
+          "trg_cf_appointment_guard"
+        ],
+        "id": "ADD_APPOINTMENT_GUARD_DECLARATION",
+        "new_fragment_sha256": "sha256:35aa5965d38becd6b83d2920b479411ae6a2c7b7e96971d9c9c3d20f9574a2bf",
+        "old_fragment_sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.cf_guard_appointment_update_v1.update.applicability",
+          "emr4_context_fabric.cf_fence_appointment_update_v1.update.applicability"
+        ],
+        "id": "ADD_APPOINTMENT_PRODUCER_APPLICABILITY",
+        "new_fragment_sha256": "sha256:d5e4c7e4ed8eea56b4acc8d963a58f8e8273f4ea12f71db8914b89b534548cbe",
+        "old_fragment_sha256": "sha256:5c132efa9b410a034994d3cd6dc0cf43f6b1c40dd9f3307bf9e5ac8ef9c07220"
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.cf_guard_claim_v1",
+          "emr4_context_fabric.cf_guard_appointment_update_v1",
+          "emr4_context_fabric.cf_guard_event_v1",
+          "emr4_context_fabric.cf_guard_outbox_v1"
+        ],
+        "id": "RESELECT_BEFORE_TRIGGER_OLD_XMIN",
+        "new_fragment_sha256": "sha256:6ccd3839cd4ddc205890c768069d77852e2c3c6bd9c6f31fb01ec0439520c401",
+        "old_fragment_sha256": "sha256:e649dbd6f6ea492b364e56f46fcb450a18b267bcb9a708754608a1b03dfba629",
+        "sites": [
+          {
+            "effective_node_id": "emr4_context_fabric.cf_guard_claim_v1.update.provenance",
+            "function": "emr4_context_fabric.cf_guard_claim_v1",
+            "new_expression_sha256": "sha256:941586a95cdd549b1a7f0b6b75c041b426ae22dc382f1b9a24d02b52dda4ad37",
+            "new_reselect_sha256": "sha256:bc00c1f9a5c8eecd30a41dd993c82c09b6ec2cadbf345670efca986127042d60",
+            "old_expression_sha256": "sha256:08fd97bb6b7b9996026ecc8ba334ca0d55ec1bbeeac4f88062ff87d20a51cda8",
+            "reselect_node_id": "emr4_context_fabric.cf_guard_claim_v1.recovery.old-xmin",
+            "source_node_id": "emr4_context_fabric.cf_guard_claim_v1.update.provenance"
+          },
+          {
+            "effective_node_id": "emr4_context_fabric.cf_guard_appointment_update_v1.update.second",
+            "function": "emr4_context_fabric.cf_guard_appointment_update_v1",
+            "new_expression_sha256": "sha256:56d5bc359c78cefe48a03967a73075cda836a4bdc7395acd678542a6677b74d4",
+            "new_reselect_sha256": "sha256:22bb81f4fca7a939006244195d0a3403ed0a395bdd9c3e799f3e82b7d7ee248c",
+            "old_expression_sha256": "sha256:d97a5294f62ca12ef02025de4f592201a98d3f8c2542b212bae6d647d992f3f0",
+            "reselect_node_id": "emr4_context_fabric.cf_guard_appointment_update_v1.update.old-xmin",
+            "source_function": "emr4_context_fabric.cf_fence_appointment_update_v1",
+            "source_node_id": "emr4_context_fabric.cf_fence_appointment_update_v1.update.second"
+          },
+          {
+            "effective_node_id": "emr4_context_fabric.cf_guard_event_v1.delete.current",
+            "function": "emr4_context_fabric.cf_guard_event_v1",
+            "new_expression_sha256": "sha256:8cf18bb1b0eeaae8b9ba12187bd50b0601e8b27d6a65a80c5af9f64933b08622",
+            "new_reselect_sha256": "sha256:c1db20b40e5e4f6750eafe4dd92ababa811a86c2f4c9630beac0ba07a46aa6b6",
+            "old_expression_sha256": "sha256:8343e25ea71d2f2263b638fb812116883c73ffac1a0f81f171902b05afa81847",
+            "reselect_node_id": "emr4_context_fabric.cf_guard_event_v1.recovery.old-xmin",
+            "source_node_id": "emr4_context_fabric.cf_guard_event_v1.delete.current"
+          },
+          {
+            "effective_node_id": "emr4_context_fabric.cf_guard_outbox_v1.delete.authorized",
+            "function": "emr4_context_fabric.cf_guard_outbox_v1",
+            "new_expression_sha256": "sha256:07fa6a39ca79c58d49dc1ed68d3e938e291154a7d61c610a712f262a5660755b",
+            "new_reselect_sha256": "sha256:d6b228f826a81b20003c5aa71f4c4d028b3c930d23dae6ad644bc44f51307902",
+            "old_expression_sha256": "sha256:74b4174d9d93aa858c0721ef8bb993f182c623ce25040c236278aa89674bba28",
+            "reselect_node_id": "emr4_context_fabric.cf_guard_outbox_v1.recovery.old-xmin",
+            "source_node_id": "emr4_context_fabric.cf_guard_outbox_v1.delete.authorized"
+          }
+        ]
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.cf_fence_appointment_update_v1",
+          "emr4_context_fabric.cf_fence_appointment_update_v1.update.second"
+        ],
+        "id": "REMOVE_DEFERRED_APPOINTMENT_OLD_XMIN",
+        "new_fragment_sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "old_fragment_sha256": "sha256:39f4c39f8454896e9c6c1104a3155e803bb390b9de0cf7afccdbef93adfcbd09",
+        "paired_guard_dependency_sha256": "sha256:dd33cc1c3d0c405096216e535e4ee69266f4405e6e0895bd38db03eb0283214b"
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.cf_fence_event_v1",
+          "emr4_context_fabric.cf_fence_event_v1.delete.current"
+        ],
+        "id": "REMOVE_DEFERRED_EVENT_DELETE_OLD_XMIN",
+        "new_fragment_sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "old_fragment_sha256": "sha256:961274faab2a843556892479e5d835ab1e00c0f0eacafb10dceeb6e43fcae477",
+        "paired_guard_dependency_sha256": "sha256:30138f0dcf56d193caefbbd99bbef3a3f93f7430b517ee6e6bcccf6ff7df5a2f"
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.cf_fence_outbox_v1",
+          "emr4_context_fabric.cf_fence_outbox_v1.delete.authorized"
+        ],
+        "id": "REMOVE_DEFERRED_OUTBOX_DELETE_OLD_XMIN",
+        "new_fragment_sha256": "sha256:1acea17412e0736832a7721bda825b255df8841b8bdaf0e0c97c11071340b317",
+        "old_fragment_sha256": "sha256:18406df993fe586ff09922a61e66def24aa4180dbb16256b1851b149d2c174fa",
+        "paired_guard_dependency_sha256": "sha256:95a448af9d0c77c2dbbaef75d09dde878163511996dba501d5513b33a8b10943"
+      }
+    ],
+    "paired_guard_dependencies": [
+      {
+        "discharged_fact": "old_row_xmin_not_current_xid_before_update",
+        "fence": "emr4_context_fabric.cf_fence_appointment_update_v1",
+        "guard": "emr4_context_fabric.cf_guard_appointment_update_v1"
+      },
+      {
+        "discharged_fact": "deleted_event_xmin_not_current_xid",
+        "fence": "emr4_context_fabric.cf_fence_event_v1",
+        "guard": "emr4_context_fabric.cf_guard_event_v1"
+      },
+      {
+        "discharged_fact": "deleted_outbox_xmin_not_current_xid",
+        "fence": "emr4_context_fabric.cf_fence_outbox_v1",
+        "guard": "emr4_context_fabric.cf_guard_outbox_v1"
+      }
+    ]
+  },
+  "postgresql_major": 16,
+  "renderer_version": "2.0.0",
+  "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
+  "sql_byte_count": 1405495,
+  "sql_sha256": "sha256:92d234f8f57d5492e0c4215f9c0d3c54efe9e9ec9cbdaa9b4321a5120b983012",
+  "statement_count": 412,
+  "structural_parent": {
+    "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",
+    "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+    "source_head": "c55d25d6c9704ae4612ef2d123158f71302ab411"
+  }
+}
