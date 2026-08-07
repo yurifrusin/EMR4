@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 229 / Compass 211. The provider-free unmounted durability migration-and-transaction structural architecture passes at exact reviewed HEAD. Function-and-trigger-body architecture is next; DDL and every live or real-data boundary remain closed.
+> EMR4 is at Continuity 230 / Compass 212. The provider-free unmounted durability function-and-trigger-body architecture passes at exact reviewed HEAD. Inert DDL rehearsal is next; SQL execution and every live or real-data boundary remain closed.
 
 ## North star
 
@@ -232,24 +232,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The pure state machine passes exact atomic, restart, rotation and retention transitions under fresh adversarial veto. Lineage parent: `raisa-provider-free-unmounted-source-specific-durability-architecture`.
 108. **Freeze future durability structure before executable bodies — Unmounted durability migration-and-transaction architecture**
    The structural/signature architecture passes while all unreviewed function bodies, triggers, grants and DDL remain omitted. Lineage parent: `raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal`.
+109. **Freeze exact durability bodies before inert DDL lowering — Unmounted durability function-and-trigger-body architecture**
+   The nine entry-point and thirteen trigger-function body programs pass while SQL lowering and every executable/live boundary remain closed. Lineage parent: `raisa-provider-free-unmounted-durability-migration-transaction-architecture`.
 
 ## Current position
 
-**Durability structure accepted; function-and-trigger-body architecture is next — Unmounted durability migration-and-transaction architecture**
+**Exact durability bodies accepted; inert DDL rehearsal is next — Unmounted durability function-and-trigger-body architecture**
 
-**Why this proof came next:** Executable semantics must be independently frozen before any inert DDL renderer or rehearsal can safely exist.
+**Why this proof came next:** The accepted typed body programmes can now be mechanically lowered and statically checked without applying or executing them.
 
-The complete packet passes 212 checks and the final independent veto finds no P0-P2 issue.
+The complete packet passes 339 checks and a fresh focused independent veto passes 44 checks with no P0-P3 issue.
 
 ### What this unlocks
 
-- Specify exact security-definer and trigger-function bodies as repository-local authored-synthetic metadata.
-- Bind exact relations, columns, SQLSTATE failures, privilege effects and renderer ordering without rendering SQL.
+- Freeze a mechanical PostgreSQL-16 renderer for the exact accepted parent and child contracts.
+- Generate inert repository-local SQL artifacts and static grammar, ordering, catalogue and privilege assertions without execution.
 
 ### What it does not solve
 
-- Executable bodies, trigger declarations, execute grants, SQL/DDL, migrations or database objects.
-- Live database/outbox/feed/watcher/listener/source access, credentials or operational persistence.
+- SQL/DDL execution, an applied migration, live database objects or operational privileges.
+- Database/outbox/feed/watcher/listener/source access, credentials or operational persistence.
 - Application/runtime implementation, product reads, patient/product data, providers, routes or commands.
 - Deployment, production, release, Pages or protected-ref movement.
 
@@ -320,9 +322,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- The durability state machine and structural migration/transaction architecture are accepted at exact reviewed HEADs.
-- The next safe candidate is a function-and-trigger-body architecture that still renders or executes no SQL.
-- Separately gate DDL rehearsal, live database/source access, credentials, implementation, product reads, clinical data, commands, deployment and release.
+- Durability structure/signatures and exact function/trigger bodies are accepted at fresh reviewed HEADs.
+- The next safe candidate is a provider-free unmounted inert DDL rehearsal with no execution or database contact.
+- Separately gate applied migration, live database/source access, credentials, implementation, product reads, clinical data, commands, deployment and release.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -511,6 +513,7 @@ Prerequisites:
 
 ## Map limits
 
+- Durability body-architecture acceptance proves exact typed programmes and static hostile-mutation resistance, not rendered or executable SQL/DDL, an applied migration, database/source contact, persistence, product-read, provider, command, runtime or deployment safety.
 - Durability migration/transaction acceptance proves declarative structure and transaction semantics, not executable bodies, SQL/DDL, a migration, database/source contact, persistence, product-read, provider, command, runtime or deployment safety.
 - Durability state-machine acceptance proves deterministic pure transitions, not cryptographic authenticity, a migration, live database/source, persistence, product-read, provider, command, runtime or deployment safety.
 - Source-specific durability architecture acceptance proves only exact provider-free unmounted contracts; it creates no migration, live source, database, persistence, product-read, provider, command, runtime, deployment or protected authority.
@@ -857,6 +860,10 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-closeout.md`
+- `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-design.md`
+- `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md`
+- `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-design.md`
 - `docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md`
@@ -951,6 +958,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-threat-model-delta.md`
@@ -984,6 +992,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-function-trigger-body-architecture-r7-final-review-retry-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
@@ -1040,6 +1049,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-9-independent-veto.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-final-independent-review.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-repair-independent-review.md`
@@ -1637,4 +1647,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 211; continuity graph revision 229._
+_Compass map revision 212; continuity graph revision 230._

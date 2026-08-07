@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_stage_and_commit_the_accepted_r7_body_architecture_closeout_continuity_and_corrected_baseline_evidence_on_the_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton now records the provider-free unmounted durability function-and-trigger-body architecture as passing at exact independently reviewed source HEAD a93d07405ad35d7d6c0603065625c17ec14ab23e with canonical contract sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3. The next safe descendant is a separately frozen inert DDL rehearsal.",
+    "current_authority_allocation": "GPT Sol owns acceptance, explicit-path task-branch commit and continuation under Yuri's standing authority. The completed Gemini verifier supplied read-only veto evidence only. No worker, reviewer or receipt may move protected refs, deploy, release or self-accept.",
+    "active_plan_and_acceptance": "Sol's 339-test packet and the fresh verifier's 44-test focused packet pass. The closeout, Sol acceptance, Continuity 230, Compass 212 and AER revision 81 bind the exact result. The continuity-bound full run completed with three closeout-layer failures; the exact affected plan, schema, Compass, AER and continuity suites now pass after preserving and correcting AER-0082/0083, while the accepted body source and contract remain unchanged.",
+    "protected_evidence_boundaries": "Commit scope contains only the R7 review/transport/receipt evidence, closeout and acceptance, body plan/design/threat status, AER revisions 79-81, Continuity/Compass updater and tests, the optional safe artifact-path schema correction, master plan and live handover. SQL/DDL execution, migrations, database/source/feed/watcher/listener, product/patient/protected data, provider product paths, commands/writes, runtime, credentials, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file are excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "The active task worktree is on codex/ariadne-bernie-davida-parallel-seam at a93d07405ad35d7d6c0603065625c17ec14ab23e with intentional closeout/governance changes. Review worktree r35 remains clean at the exact accepted HEAD. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "r7_closeout_precommit_five_source_rehydration_and_explicit_path_inventory",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled exact review, tests, AER, Continuity/Compass, Git refs and the explicit intended path inventory before commit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No worker owns acceptance or commit; completed bounded lane results remain evidence only."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The admitted fresh reviewer receipt contains one pass and unchanged clean exact-HEAD postflight."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek transport participates in closeout commit."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

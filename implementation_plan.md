@@ -133,7 +133,9 @@ representable independent anchors, lifecycle append was omitted from atomic
 effects and key-schedule scope was ambiguous. The recovered plan adds an exact
 receiver-owned immutable admission, source-independent redelivery, append-only
 lifecycle-owned anchor fencing, atomic lifecycle append and generation-local
-key rotation; fresh exact-head veto acceptance remains pending.
+key rotation. The migration/transaction architecture and its exact function-
+and-trigger-body descendant now pass fresh exact-head acceptance; inert DDL
+rehearsal is next while execution and live database/source access remain closed.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -518,9 +520,13 @@ generation rehearsal. The architecture-only provider-free default-off
   earlier source-independent replay, recovery-anchor, set-uniqueness and
   lock-order repairs. Its replacement contract
   `sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3`
-  passes the complete 339-test inherited-plus-R7 deterministic packet and is
-  pending a fresh clean exact-HEAD independent veto. DDL remains blocked. No applied migration, live
-  implementation, real-product or clinical descendant is opened.
+  passes the complete 339-test inherited-plus-R7 deterministic packet. One
+  distinct fresh Gemini 3.6 Flash/high exact-HEAD veto passes 44/44 focused
+  checks with no P0-P3 finding and unchanged clean postflight at
+  `a93d07405ad35d7d6c0603065625c17ec14ab23e`. The body architecture is accepted;
+  a separate inert DDL rehearsal is next. SQL execution, an applied migration,
+  live implementation, database/source access and every real-product or
+  clinical descendant remain closed.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_gemini_36_flash_high_antigravity_read_only_r7_exact_head_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The baton requires a fresh exact-HEAD independent veto before body-architecture acceptance. Candidate a93d07405ad35d7d6c0603065625c17ec14ab23e carries contract sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3 and has complete deterministic acceptance only.",
+    "current_authority_allocation": "GPT Sol retains acceptance, recovery, integration and Git authority. Gemini 3.6 Flash/high through a fresh Antigravity project receives repository-code-only read-only veto authority and cannot edit, self-accept, integrate, move refs or access product/runtime/data surfaces.",
+    "active_plan_and_acceptance": "The candidate passes 339/339 inherited-plus-R7 tests, including 34 focused attacks, builder self-check, Ruff and diff checks. Review must independently challenge the exact eleven-equality F_ANCHOR position, replay inertness and non-regression of R6A-R6D before one terminal pass or revision_required decision.",
+    "protected_evidence_boundaries": "Review is restricted to clean short worktree r35 at exact HEAD and the packet's read-only paths/commands. Main untracked files, docs/branding, prior reviewer conclusions, SQL/DDL or database/source/feed/watcher/listener access, product/patient/protected data, runtime/credentials, commands/writes, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Candidate HEAD a93d07405ad35d7d6c0603065625c17ec14ab23e is checked out cleanly in C:/Users/sarashera/EMR4-worktrees/r35 on codex/review-durability-function-trigger-body-r7-a93d0740 and passed independent worktree preflight. Main task branch is at the same candidate. origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881; local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "r7_final_veto_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed the exact candidate only after complete deterministic acceptance."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Native lanes are not used for the required fresh Gemini veto."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The configured fresh-project Gemini 3.6 Flash/high verifier transport is selected for this exact repository-code review."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek transport is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

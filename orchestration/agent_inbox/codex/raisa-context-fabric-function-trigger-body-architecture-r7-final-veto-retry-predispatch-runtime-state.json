@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_project_focused_gemini_36_flash_high_r7_exact_head_veto_retry_after_contained_no_decision_transport_failure",
+  "source_evidence": {
+    "live_handover_current_baton": "Candidate a93d07405ad35d7d6c0603065625c17ec14ab23e remains unaccepted and requires one fresh exact-HEAD veto. Its contract and 339-test Sol evidence are unchanged; the first Antigravity attempt returned no decision and has been contained as transport evidence.",
+    "current_authority_allocation": "GPT Sol retains acceptance, recovery, integration and Git. One new Gemini 3.6 Flash/high Antigravity project receives focused read-only veto authority only. No conclusion or state transfers from the failed project.",
+    "active_plan_and_acceptance": "AER-0081/revision 79 preserves the first no-decision transport exit and permits one fresh-project retry on the same immutable candidate using the completed 339-test packet as deterministic evidence plus focused R7 tests and independent semantic counterexamples. A pass still requires exact clean postflight and one structured decision.",
+    "protected_evidence_boundaries": "Retry is restricted to clean r35 and the packet's exact read-only paths/commands. Main untracked files, prior review conclusions, database/source/feed/watcher/listener, SQL/DDL, product/patient/protected data, runtime/credentials, commands/writes, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "C:/Users/sarashera/EMR4-worktrees/r35 remains clean on codex/review-durability-function-trigger-body-r7-a93d0740 at exact candidate a93d07405ad35d7d6c0603065625c17ec14ab23e after the failed process. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "r7_focused_retry_five_source_rehydration_after_contained_transport_failure",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved the failed transport, updated AER revision 79 and verified unchanged exact candidate/postflight before retry."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native fallback is dispatched before the one bounded fresh Antigravity retry."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A distinct new-project process may make the one bounded focused retry; the previous process is absent."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek transport is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

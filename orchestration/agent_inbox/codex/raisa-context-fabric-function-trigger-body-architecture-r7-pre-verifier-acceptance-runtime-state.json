@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "admit_the_fresh_focused_gemini_36_flash_high_r7_pass_and_close_the_provider_free_unmounted_function_trigger_body_architecture",
+  "source_evidence": {
+    "live_handover_current_baton": "Candidate a93d07405ad35d7d6c0603065625c17ec14ab23e is the active fourth-recovery replacement for the provider-free unmounted function-and-trigger-body architecture. Its exact contract sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3 passed Sol's complete 339-test packet and now has one fresh focused exact-HEAD independent pass.",
+    "current_authority_allocation": "GPT Sol owns acceptance and closeout. Gemini 3.6 Flash/high supplied one read-only independent veto only and left the candidate unchanged; it has no implementation, self-acceptance, integration, Git, protected-ref, deployment or release authority.",
+    "active_plan_and_acceptance": "The fourth recovery requires exactly one eleven-EQ F_ANCHOR assertion after current-anchor lock and before prior-key lock, digest use or effect, while preserving inert identical-key replay and R6A-R6D. The fresh retry receipt reports one schema-constrained pass, 44/44 focused tests, exact builder digest, Ruff and diff checks, no P0-P3 finding, exact head_before/head_after a93d07405ad35d7d6c0603065625c17ec14ab23e and dirty_after false. Sol separately completed 339/339 deterministic tests before dispatch.",
+    "protected_evidence_boundaries": "Acceptance is architecture-only. It opens no SQL/DDL lowering or execution, migration, database object/contact, source/feed/watcher/listener, product/patient/protected/historical-PHI data, further provider path, command/write, application/API/Diary change, operational credentials/persistence, runtime wiring, deployment, production, release, Pages or protected-ref movement. docs/branding and unrelated untracked files remain preserved and excluded; explicit-path staging only.",
+    "git_refs_and_worktree": "The review worktree C:/Users/sarashera/EMR4-worktrees/r35 is clean on codex/review-durability-function-trigger-body-r7-a93d0740 at exact a93d07405ad35d7d6c0603065625c17ec14ab23e after review. The active task worktree is at the same candidate HEAD with intentional closeout/AER governance changes and preserved unrelated untracked files. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "r7_exact_head_pre_verifier_acceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled the review receipt against exact postflight and protected refs before accepting the verifier decision."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native fallback is required because the bounded fresh-project retry returned one admissible pass."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The exact allocated verifier returned one schema-constrained pass with unchanged clean postflight and no P0-P3 finding."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek transport participates in verifier acceptance."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

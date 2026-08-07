@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: sixth candidate rejected; fourth exact-veto replacement built with
-deterministic acceptance complete and fresh exact-HEAD veto pending
+Status: accepted after six rejected candidates; fourth exact-veto replacement
+passes complete deterministic and fresh exact-HEAD independent acceptance
 
 Normative implementation recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-implementation-recovery.md`

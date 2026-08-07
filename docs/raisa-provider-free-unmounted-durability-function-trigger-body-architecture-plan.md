@@ -2,9 +2,9 @@
 
 Date: 2026-08-07
 
-Status: initial plan superseded by bounded structural-feasibility recovery;
-six implementation candidates rejected; fourth exact-veto replacement built
-with complete deterministic acceptance and fresh exact-HEAD veto pending
+Status: accepted after bounded structural-feasibility recovery; six
+implementation candidates remain rejected and the fourth exact-veto replacement
+passes complete deterministic and fresh exact-HEAD independent acceptance
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -456,17 +456,19 @@ locked checkpoint and generation before using its digest. The fourth exact-veto
 recovery is now binding and requires that complete rotation-entry anchor fence
 before any effect. R6A–R6D otherwise survived independent challenge.
 
-The fourth-recovery replacement implements exactly that eleven-equality
+The accepted fourth-recovery replacement implements exactly that eleven-equality
 `F_ANCHOR` fence immediately after the current-anchor lock. The rebuilt
 contract is
 `sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3`;
 the complete inherited-plus-R7 packet passes 339/339, including 34 focused
-candidate-independent anchor-fence attacks. Fresh clean exact-HEAD veto remains
-mandatory before acceptance.
+candidate-independent anchor-fence attacks. A distinct fresh clean exact-HEAD
+Gemini 3.6 Flash/high veto passes 44/44 focused tests with no P0-P3 finding and
+unchanged clean postflight at
+`a93d07405ad35d7d6c0603065625c17ec14ab23e`.
 
 ## Claim boundary and next dependency
 
-Passing this tranche will prove only an exact provider-free unmounted
+Passing this tranche proves only an exact provider-free unmounted
 machine-readable body architecture. It will not create, render, parse through
 PostgreSQL, execute or validate SQL; create a function/trigger/grant/migration
 or database object; contact a source/database/provider; process patient/product
@@ -475,6 +477,7 @@ safety.
 
 Only after independent acceptance may a separate provider-free unmounted inert
 DDL rehearsal mechanically lower the exact parent signatures and child body
-programs into repository-local SQL artifacts. Applied local migration,
+programs into repository-local SQL artifacts. That acceptance now exists;
+the rehearsal remains a distinct gate. Applied local migration,
 database-backed execution, operational credentials and live source/product
 access remain later separately bounded gates.

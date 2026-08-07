@@ -70,7 +70,8 @@
         "receipts": { "$ref": "#/$defs/repoPaths" },
         "tests": { "$ref": "#/$defs/repoPaths" },
         "closeouts": { "$ref": "#/$defs/repoPaths" },
-        "findings": { "$ref": "#/$defs/repoPaths" }
+        "findings": { "$ref": "#/$defs/repoPaths" },
+        "artifacts": { "$ref": "#/$defs/repoPaths" }
       }
     },
     "repoPaths": {

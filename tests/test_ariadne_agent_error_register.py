@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 78
+    assert register["register_revision"] == 81
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 81)
+        f"AER-{index:04d}" for index in range(1, 84)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -54,7 +54,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
     assert len(agent_incidents) == 65
-    assert len(transport_incidents) == 7
+    assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
@@ -63,11 +63,36 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
         "AER-0036",
         "AER-0038",
         "AER-0039",
+        "AER-0081",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
         "observation_only"
     }
+
+    r7_transport = next(
+        row for row in transport_incidents if row["incident_id"] == "AER-0081"
+    )
+    assert r7_transport["status"] == "corrected"
+    assert r7_transport["correction"]["status"] == "corrected_fresh_attempt"
+    assert any(
+        path.endswith("r7-final-review-retry-receipt.json")
+        for path in r7_transport["correction"]["evidence_paths"]
+    )
+
+
+def test_r7_continuity_baseline_repository_defects_are_corrected() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    for incident_id in ("AER-0082", "AER-0083"):
+        incident = incidents[incident_id]
+        assert incident["origin"] == "repository"
+        assert incident["category"] == "repository_defect"
+        assert incident["candidate_state"] == "canonical_unchanged"
+        assert incident["status"] == "corrected"
+        assert incident["correction"]["status"] == "control_added"
+    assert incidents["AER-0082"]["related_incident_ids"] == ["AER-0083"]
+    assert incidents["AER-0083"]["related_incident_ids"] == ["AER-0082"]
 
 
 def test_observation_signal_worker_veto_requires_fresh_acceptance() -> None:
@@ -1328,13 +1353,13 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 80
+    assert report["incident_count"] == 83
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 65,
         "harness": 5,
-        "repository": 3,
-        "transport": 7,
+        "repository": 5,
+        "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 14,
@@ -1343,12 +1368,12 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "output_contract_violation": 25,
         "read_only_violation": 2,
         "reasoning_claim_error": 17,
-        "repository_defect": 3,
-        "transport_timeout": 7,
+        "repository_defect": 5,
+        "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 60,
+        "canonical_unchanged": 63,
         "untrusted_partial_worktree": 18,
     }
     assert report["recurring_patterns"] == [

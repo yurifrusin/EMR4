@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 78,
+  "register_revision": 81,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3135,6 +3135,127 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r7-worker-predispatch-receipt.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r7-worker-predispatch-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-78.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0081",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r7-final-review-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "transport",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh exact-HEAD Antigravity verifier must return one schema-constrained pass or revision_required receipt, or fail with explicit contained evidence while leaving the candidate unchanged.",
+      "observed_error": "The first R7 final-veto process ran a long CPU-active local test subprocess, then agy exited with status 1, empty stderr and no structured verifier output or ordinary review receipt. No review decision exists.",
+      "detection_method": "The wrapper raised Antigravity transport failed (1). Two read-only liveness checks had observed the same child test process increase from 779.78125 to 1608.953125 CPU seconds; postflight proved exact HEAD and a clean worktree, and the expected output receipt was absent.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-function-trigger-body-architecture-r7-final-review-transport-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r7-review-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r7-final-veto-predispatch-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-79.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.antigravity_post_test_exit_without_decision",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed attempt remains preserved without a fabricated verdict. One distinct fresh project reviewed the same immutable candidate using the already-completed 339-test Sol packet, a bounded 44-test R7A command set and independent counterexamples; it returned one schema-constrained pass with no P0-P3 finding and unchanged clean exact-HEAD postflight.",
+        "prevention_control": "Keep complete deterministic acceptance under Sol, then give external exact-HEAD vetoes a focused risk-derived command packet and independent semantic challenges; do not make a long duplicate full-suite child process the only path to a verifier decision.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-function-trigger-body-architecture-r7-final-review-transport-failure-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-function-trigger-body-architecture-r7-final-review-retry-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-79.md",
+          "docs/ariadne-agent-error-correction-register-revision-80.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0082",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r7-continuity-closeout-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-continuity-closeout-suite",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The canonical Continuity graph and its closed JSON Schema must agree on every evidence property already emitted by accepted continuity updaters.",
+      "observed_error": "The canonical graph already carried optional artifacts arrays on eight accepted nodes, but the evidence schema forbade the artifacts property, so full JSON Schema validation failed when the R7 node used the same established updater shape.",
+      "detection_method": "The completed continuity-bound packet failed tests/test_ariadne_continuity_engine.py and reported artifacts as the exact unexpected evidence property; read-only baseline inspection proved eight pre-R7 canonical nodes already contained that property while the schema contained no matching definition.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-continuity-baseline-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-81.md"
+      ],
+      "related_incident_ids": [
+        "AER-0083"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.continuity_schema_omits_emitted_optional_artifact_paths",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The closed evidence schema now permits an optional artifacts array using the existing safe repository-path definition. Required inherited contract evidence classes remain unchanged, and the complete canonical graph passes JSON Schema validation.",
+        "prevention_control": "Every continuity updater property must be represented in the closed graph schema and the canonical full-graph JSON Schema test must run in each continuity closeout packet.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-continuity-graph.schema.json",
+          "tests/test_ariadne_continuity_engine.py",
+          "docs/ariadne-agent-error-correction-register-revision-81.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0083",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r7-continuity-closeout-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-continuity-closeout-suite",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The general Compass report test must track the canonical current accepted terminal node rather than a superseded historical current-position literal.",
+      "observed_error": "The general Compass test still expected the durability state-machine rehearsal even though the pre-R7 canonical Compass had already advanced to the migration-and-transaction architecture, so it rejected the new valid body-architecture terminal node.",
+      "detection_method": "The completed continuity-bound packet failed tests/test_ariadne_compass.py at the exact current-position assertion; baseline readback showed the assertion was already stale relative to the pre-R7 canonical map.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-continuity-baseline-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-81.md"
+      ],
+      "related_incident_ids": [
+        "AER-0082"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.compass_general_current_position_expectation_drift",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The general Compass report test now binds the accepted function-and-trigger-body terminal node, while the tranche-specific continuity test independently fixes exact graph and map revisions and the current node.",
+        "prevention_control": "Every Compass advancement must run both the general report suite and a tranche-specific exact current-position test so stale historical literals fail and are corrected in the same closeout.",
+        "evidence_paths": [
+          "tests/test_ariadne_compass.py",
+          "tests/test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-81.md"
         ]
       },
       "status": "corrected"

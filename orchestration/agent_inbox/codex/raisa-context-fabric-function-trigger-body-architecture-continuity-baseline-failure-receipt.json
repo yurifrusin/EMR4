@@ -1,0 +1,44 @@
+{
+  "schema_version": "emr4.deterministic_failure_receipt.v1",
+  "status": "revision_required_and_contained",
+  "observed_on": "2026-08-08",
+  "tranche": "raisa-context-fabric-function-trigger-body-architecture-closeout",
+  "candidate_head": "a93d07405ad35d7d6c0603065625c17ec14ab23e",
+  "candidate_contract": "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3",
+  "deterministic_result": {
+    "suite_completed": true,
+    "failure_count": 3,
+    "candidate_body_failure_count": 0,
+    "failures": [
+      {
+        "path": "tests/test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture_plan.py",
+        "classification": "closeout_wording_expectation_drift",
+        "detail": "Acceptance wording replaced a still-binding exact claim-boundary sentence expected by the plan test."
+      },
+      {
+        "path": "orchestration/continuity/ariadne-continuity-graph.schema.json",
+        "classification": "continuity_schema_artifact_pointer_omission",
+        "detail": "The canonical graph already contained optional artifact pointer arrays on eight accepted nodes, while the closed evidence schema omitted the artifacts property."
+      },
+      {
+        "path": "tests/test_ariadne_compass.py",
+        "classification": "current_position_historical_expectation_drift",
+        "detail": "The general current-position test still expected the durability state-machine node although the pre-R7 canonical Compass was already at the accepted migration/transaction node."
+      }
+    ]
+  },
+  "containment": {
+    "candidate_source_changed": false,
+    "contract_changed": false,
+    "sql_or_ddl_rendered_or_executed": false,
+    "database_source_or_runtime_opened": false,
+    "patient_product_or_protected_data_accessed": false,
+    "protected_refs_moved": false
+  },
+  "correction_boundary": {
+    "restore_binding_plan_sentence": true,
+    "allow_optional_safe_repo_path_artifact_arrays_in_continuity_schema": true,
+    "advance_the_general_compass_current_position_expectation": true,
+    "body_program_or_contract_change_forbidden": true
+  }
+}

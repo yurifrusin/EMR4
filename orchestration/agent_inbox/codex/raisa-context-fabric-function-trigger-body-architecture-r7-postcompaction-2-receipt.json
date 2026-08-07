@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_the_one_bounded_fresh_project_focused_gemini_36_flash_high_r7_exact_head_veto_retry_after_complete_five_source_rehydration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The body-architecture plan, design, threat delta, third and fourth exact-veto recoveries, R6 veto, AER-0081 revision 79 and focused retry packet remain controlling. The candidate must preserve every inherited recovery and place one F_ANCHOR assertion immediately after the current-anchor lock, comparing four checkpoint fields and seven controlling generation digests before the prior-key lock, digest use or any effect. Sol's 339-test packet, builder check, Ruff and diff check passed; a single structured pass or revision_required verdict and unchanged clean r35 postflight are still mandatory.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery, acceptance, integration and Git authority under Yuri's standing uninterrupted-development policy. Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only focused independent-veto authority only; it cannot implement, self-accept, integrate, move protected refs, deploy or release. No conclusion transfers from the failed project.",
+    "git_refs_and_worktree": "The active worktree C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at candidate HEAD a93d07405ad35d7d6c0603065625c17ec14ab23e with intentional AER and review-governance changes plus preserved unrelated untracked files; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. The review worktree C:/Users/sarashera/EMR4-worktrees/r35 is clean on codex/review-durability-function-trigger-body-r7-a93d0740 at exact a93d07405ad35d7d6c0603065625c17ec14ab23e. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The live baton keeps the provider-free unmounted function-and-trigger-body architecture as the active safe descendant. Candidate a93d07405ad35d7d6c0603065625c17ec14ab23e with contract sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3 has passed the complete 339-test inherited-plus-R7 deterministic packet but remains unaccepted pending a fresh clean exact-HEAD independent veto. The first Antigravity review process returned no decision and is preserved as transport-failure evidence.",
+    "protected_evidence_boundaries": "Only repository code, diffs, contracts and authored-synthetic static/adversarial evidence listed in the focused packet are open. SQL or DDL rendering/execution, migrations, database objects/contact, source/feed/watcher/listener access, product/patient/protected/historical-PHI data, provider use beyond the allocated repository-code-only verifier, commands/writes, application/API/Diary changes, operational credentials/persistence, runtime wiring, deployment, production, release, Pages and protected-ref movement remain closed. docs/branding and all unrelated untracked receipt/state/evidence/cost-ledger files remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

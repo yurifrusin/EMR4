@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.transport_failure_receipt.v1",
+  "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r7-final-review-001",
+  "observed_on": "2026-08-08",
+  "status": "contained_no_decision",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "requested_model": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "candidate_head": "a93d07405ad35d7d6c0603065625c17ec14ab23e",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r35",
+  "branch": "codex/review-durability-function-trigger-body-r7-a93d0740",
+  "observed_failure": "agy exited with status 1 after a long active local test subprocess; stdout contained no reviewer result, stderr was empty and no structured review receipt was created",
+  "liveness_evidence": {
+    "test_subprocess_cpu_seconds_first_check": 779.78125,
+    "test_subprocess_cpu_seconds_second_check": 1608.953125,
+    "receipt_created": false
+  },
+  "postflight": {
+    "head": "a93d07405ad35d7d6c0603065625c17ec14ab23e",
+    "clean": true,
+    "protected_refs": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  },
+  "decision": null,
+  "candidate_disposition": "unchanged_unaccepted",
+  "authority_boundary": "transport_failure_evidence_only_no_acceptance_or_retry_authority"
+}
