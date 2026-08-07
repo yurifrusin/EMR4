@@ -2,8 +2,7 @@
 
 Date: 2026-08-07
 
-Status: fifth candidate rejected; corrected third exact-veto replacement built
-with deterministic and independent acceptance pending
+Status: sixth candidate rejected; fourth exact-veto recovery frozen
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -35,11 +34,17 @@ Normative second exact-veto recovery:
 Normative third exact-veto recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md`
 
+Normative fourth exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md`
+
 Latest rejected candidate:
 `sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
 
 Rejected uncommitted R6 worktree candidate:
 `sha256:49db11e74a46d1056e694614a970037cf021e174d71114f5262e950b9075b01f`
+
+Latest rejected committed candidate:
+`sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b`
 
 ## Purpose and derivation
 

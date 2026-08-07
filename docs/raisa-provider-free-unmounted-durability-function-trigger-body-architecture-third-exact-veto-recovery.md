@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: corrected replacement candidate built; deterministic and independent
-acceptance pending
+Status: superseded for acceptance by the fourth exact-veto recovery; candidate
+`0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d` rejected
 
 Rejected candidate source HEAD:
 `5a3c5b5118f80153d545bf30ae9db99acb187cd7`

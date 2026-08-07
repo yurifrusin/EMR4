@@ -2,8 +2,7 @@
 
 Date: 2026-08-07
 
-Status: fifth candidate rejected; corrected third exact-veto replacement built
-with deterministic and independent acceptance pending
+Status: sixth candidate rejected; fourth exact-veto recovery frozen
 
 Normative implementation recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-implementation-recovery.md`
@@ -14,11 +13,17 @@ Normative second exact-veto recovery:
 Normative third exact-veto recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md`
 
+Normative fourth exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md`
+
 Latest rejected candidate:
 `sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
 
 Rejected uncommitted R6 worktree candidate:
 `sha256:49db11e74a46d1056e694614a970037cf021e174d71114f5262e950b9075b01f`
+
+Latest rejected committed candidate:
+`sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b`
 
 ## Scope and assets
 
@@ -92,6 +97,7 @@ survive as runtime authority.
 | Registration falsely gains recovery-pin authority | Pin relation remains ungrantable and mutation-inert; no body creates/releases pins. Retention only honours valid existing rows. | Pin lifecycle requires a separately accepted future gate. |
 | Key, anchor or rotation replay rewrites history | Rows are immutable; anchor append independently reverifies full committed state. Rotation checks exact replay before the new-effect anchor fence, rejects mismatch, permits only future-fenced gap-free generation-local intervals and advances one lifecycle revision. | Cryptographic key bytes and external key custody are outside scope. |
 | Key rotation in one generation affects another | All rotation locators, locks, schedules and effects include exact generation and stream; cross-generation effects are not in the effect allowlist. | Concurrency/performance needs database-backed testing. |
+| Key rotation trusts a stale anchor at the right revision | Before any new-rotation effect, the body must field-by-field compare anchor checkpoint state, position, observation and integrity plus all seven controlling generation digests against the locked checkpoint/generation; locator or anchor digest alone is insufficient. | Actual PostgreSQL concurrency remains deferred to an executable rehearsal. |
 | Filtered or caller-supplied retention census authorizes purge | At `SERIALIZABLE`, evaluation/purge lock the common registry barrier and derive the complete non-consumed-generation set, slowest checkpoint, pins, key overlap and grace from qualified relations. Caller cannot supply filters, minima, count, time result or digest. Ambiguity fails. | Operational retention duration/capacity decisions remain open. |
 | Concurrent registration is omitted from purge | Registration/rebaseline and retention acquire the same practice/source/stream registry barrier in the same order. Purge rederives eligibility inside its own transaction. | Lock behavior is architectural until live PostgreSQL rehearsal. |
 | Trigger firing order becomes an invariant | Every deferred fence is read-only, lock-free, sibling-call-free and independently validates final transaction state. No fence consumes another fence's result or mutates state. | Later renderer must preserve constraint-trigger timing exactly. |

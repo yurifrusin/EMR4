@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "record_and_execute_the_fourth_exact_veto_recovery_for_the_provider_free_unmounted_durability_function_and_trigger_body_architecture",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The active body-architecture plan, design, threat delta, third recovery, fourth recovery and final R6 veto preserve every inherited requirement and add one exact R7A rotation-entry anchor fence: after locking the current anchor and before the prior key or any effect, F_ANCHOR must compare four checkpoint fields and seven controlling generation digests field-by-field. The accepted parent remains c55d25d6c9704ae4612ef2d123158f71302ab411 with contract sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8.",
+    "current_authority_allocation": "GPT Sol retains planning, recovery, acceptance, integration and task-ref authority under Yuri's standing uninterrupted-development authority. Bounded workers may implement or challenge separable artifacts, but no worker may self-accept, integrate or move protected refs; fresh independent exact-HEAD veto remains mandatory before acceptance.",
+    "git_refs_and_worktree": "The active task worktree is on codex/ariadne-bernie-davida-parallel-seam at rejected candidate HEAD 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d with intentional unstaged recovery and continuity artifacts plus preserved unrelated untracked files. origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local and origin master plus handoff/current are aligned and protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The rejected-candidate review worktree C:/Users/sarashera/EMR4-worktrees/r34 remains clean evidence at 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d.",
+    "live_handover_current_baton": "The live baton keeps the provider-free unmounted function-and-trigger-body architecture as the active safe descendant of the accepted durability migration-and-transaction architecture. Exact candidate 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d is immutable rejected evidence; the fourth exact-veto recovery now controls the replacement.",
+    "protected_evidence_boundaries": "Only repository-authored provider-free unmounted architecture metadata and authored-synthetic static/adversarial tests are open. SQL/DDL rendering or execution, migrations, database objects or contact, source/feed/watcher/listener access, product/patient/protected/historical-PHI data, provider calls, commands or writes, application/API/Diary changes, operational credentials or persistence, runtime wiring, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked receipt, state, evidence and cost-ledger files remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

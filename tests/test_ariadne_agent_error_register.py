@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 75
+    assert register["register_revision"] == 77
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 78)
+        f"AER-{index:04d}" for index in range(1, 80)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 63
+    assert len(agent_incidents) == 64
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1328,28 +1328,28 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 77
+    assert report["incident_count"] == 79
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 63,
-        "harness": 4,
+        "agent_behavior": 64,
+        "harness": 5,
         "repository": 3,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 14,
         "evidence_misreport": 7,
-        "harness_failure": 4,
+        "harness_failure": 5,
         "output_contract_violation": 24,
         "read_only_violation": 2,
-        "reasoning_claim_error": 16,
+        "reasoning_claim_error": 17,
         "repository_defect": 3,
         "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 58,
-        "untrusted_partial_worktree": 17,
+        "canonical_unchanged": 59,
+        "untrusted_partial_worktree": 18,
     }
     assert report["recurring_patterns"] == [
         {
@@ -1454,6 +1454,19 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
             "prevention_controls": [
                 "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
                 "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness.",
+            ],
+        },
+        {
+            "recurrence_signature": "harness.windows_verifier_worktree_destination_path_too_long",
+            "incident_count": 2,
+            "incident_ids": ["AER-0063", "AER-0078"],
+            "origins": ["harness"],
+            "categories": ["harness_failure"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["git-worktree-windows-path-layout"],
+            "prevention_controls": [
+                "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
+                "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination.",
             ],
         },
         {

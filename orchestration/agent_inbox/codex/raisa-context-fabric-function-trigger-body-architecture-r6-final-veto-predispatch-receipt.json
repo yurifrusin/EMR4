@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_native_read_only_r6_function_trigger_body_exact_head_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d carries contract sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b and passed the complete 305-test packet, the post-document 7-test plan packet, Ruff, builder check and diff check. The review must independently challenge R6A path-local replay, R6B complete anchor proof, R6C duplicate structural keys and R6D single-anchor lock order.",
+    "current_authority_allocation": "GPT Sol retains acceptance, recovery, integration and Git authority. One fresh native reviewer receives read-only exact-HEAD veto authority only and cannot edit, self-accept, integrate, push, call a provider or open a live surface.",
+    "git_refs_and_worktree": "The task branch candidate HEAD is 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d. Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r34 is clean on codex/review-durability-function-trigger-body-r6-0bfd3e75 at that exact HEAD. Origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881; local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The live baton authorises uninterrupted planned provider-free unmounted Context Fabric architecture work and requires independent review before acceptance; provider, data, database/source, runtime, command, deployment, Pages and protected-ref gates remain closed.",
+    "protected_evidence_boundaries": "Review is restricted to the clean r34 exact-HEAD worktree and the packet's allowlisted read-only paths and commands. The dirty main worktree, docs/branding, unrelated receipts/evidence, patient/product/protected data, database/source/provider/network/runtime/DDL/command/deployment surfaces and all ref mutation are forbidden."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

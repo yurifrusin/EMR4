@@ -3,7 +3,7 @@
 Date: 2026-08-07
 
 Status: initial plan superseded by bounded structural-feasibility recovery;
-five implementation candidates rejected; third exact-veto Sol recovery frozen
+six implementation candidates rejected; fourth exact-veto Sol recovery frozen
 after the latest exact-HEAD veto; correction implementation not yet accepted
 
 Parent result:
@@ -33,8 +33,11 @@ Normative second exact-veto recovery:
 Normative third exact-veto recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md`
 
+Normative fourth exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md`
+
 Latest rejected candidate contract:
-`sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
+`sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b`
 
 ## Objective
 
@@ -442,6 +445,13 @@ duplicate and non-contiguous lock ordinals. The corrected candidate
 uses one current-anchor lock before primary/conflict admission and reuses it in
 every descendant rebase branch. Deterministic and independent acceptance remain
 pending.
+
+Fresh exact-HEAD review then rejected committed candidate
+`0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d` with one P1: the key-rotation body
+locked the current anchor but did not field-by-field reverify it against the
+locked checkpoint and generation before using its digest. The fourth exact-veto
+recovery is now binding and requires that complete rotation-entry anchor fence
+before any effect. R6A–R6D otherwise survived independent challenge.
 
 ## Claim boundary and next dependency
 

@@ -1,30 +1,30 @@
 {
-  "canonical_register_sha256": "f97b47750a2bc329e0d8cf696ae2e63a50ae4be285288a21e3382b80b864b3bb",
+  "canonical_register_sha256": "9e6f090da11f9c64f3a415ab569b2d1c511bec8240d3875284df6380e692d6ca",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 58,
-      "untrusted_partial_worktree": 17
+      "canonical_unchanged": 59,
+      "untrusted_partial_worktree": 18
     },
     "by_category": {
       "command_scope_violation": 14,
       "evidence_misreport": 7,
-      "harness_failure": 4,
+      "harness_failure": 5,
       "output_contract_violation": 24,
       "read_only_violation": 2,
-      "reasoning_claim_error": 16,
+      "reasoning_claim_error": 17,
       "repository_defect": 3,
       "transport_timeout": 7
     },
     "by_origin": {
-      "agent_behavior": 63,
-      "harness": 4,
+      "agent_behavior": 64,
+      "harness": 5,
       "repository": 3,
       "transport": 7
     },
     "by_process_severity": {
-      "low": 24,
-      "material": 25,
+      "low": 25,
+      "material": 26,
       "moderate": 28
     },
     "by_resource_and_role": {
@@ -34,12 +34,12 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 35,
+      "codex-primary-orchestrator::orchestrator": 36,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
-      "git-worktree-windows-path-layout::orchestrator": 1,
+      "git-worktree-windows-path-layout::orchestrator": 2,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,
@@ -48,12 +48,12 @@
     },
     "by_role": {
       "implementer": 12,
-      "orchestrator": 42,
+      "orchestrator": 44,
       "verifier": 23
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 77,
+  "incident_count": 79,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -239,6 +239,30 @@
     },
     {
       "categories": [
+        "harness_failure"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0063",
+        "AER-0078"
+      ],
+      "origins": [
+        "harness"
+      ],
+      "prevention_controls": [
+        "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
+        "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination."
+      ],
+      "recurrence_signature": "harness.windows_verifier_worktree_destination_path_too_long",
+      "resource_ids": [
+        "git-worktree-windows-path-layout"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
         "transport_timeout"
       ],
       "incident_count": 2,
@@ -290,7 +314,7 @@
       ]
     }
   ],
-  "register_revision": 75,
+  "register_revision": 77,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-07"
+  "source_cutoff_on": "2026-08-08"
 }

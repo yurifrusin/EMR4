@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_fourth_exact_veto_recovery_governance_and_preserved_r6_review_evidence_before_r7a_implementation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The updated implementation plan, body plan, design, threat delta, fourth recovery, final independent veto and AER revisions 76-77 consistently freeze the same 11-equality anchor fence before the prior-key lock or any effect. The focused AER and active-plan packet passes, Ruff passes and git diff --check passes; implementation and fresh veto remain pending.",
+    "current_authority_allocation": "GPT Sol owns recovery, acceptance, explicit-path commit and continuation under Yuri's standing authority. This governance commit admits no candidate and grants no worker self-acceptance, protected integration or external/runtime authority.",
+    "git_refs_and_worktree": "The active branch remains codex/ariadne-bernie-davida-parallel-seam at rejected candidate HEAD 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the enumerated recovery/evidence paths will be staged explicitly; rejected review worktree r34 remains clean evidence.",
+    "live_handover_current_baton": "AGENTS.md now records exact candidate 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d as immutable rejected evidence and identifies the fourth exact-veto recovery's field-complete rotation-entry F_ANCHOR assertion as the next safe implementation.",
+    "protected_evidence_boundaries": "This commit is limited to plan/recovery/threat/handover/error-register/test and exact R6/R7 receipt/review evidence paths. docs/branding and all unrelated untracked receipts, runtime states, evidence and cost ledgers are excluded. No SQL/DDL, database/source/feed/watcher/listener, provider, product/patient/protected data, command/write, application/API/Diary, runtime, deployment, production, release, Pages or protected-ref action is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

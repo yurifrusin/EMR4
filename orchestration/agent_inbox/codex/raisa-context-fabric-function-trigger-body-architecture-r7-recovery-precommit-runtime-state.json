@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_fourth_exact_veto_recovery_governance_and_preserved_r6_review_evidence_before_r7a_implementation",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records exact candidate 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d as immutable rejected evidence and identifies the fourth exact-veto recovery's field-complete rotation-entry F_ANCHOR assertion as the next safe implementation.",
+    "current_authority_allocation": "GPT Sol owns recovery, acceptance, explicit-path commit and continuation under Yuri's standing authority. This governance commit admits no candidate and grants no worker self-acceptance, protected integration or external/runtime authority.",
+    "active_plan_and_acceptance": "The updated implementation plan, body plan, design, threat delta, fourth recovery, final independent veto and AER revisions 76-77 consistently freeze the same 11-equality anchor fence before the prior-key lock or any effect. The focused AER and active-plan packet passes, Ruff passes and git diff --check passes; implementation and fresh veto remain pending.",
+    "protected_evidence_boundaries": "This commit is limited to plan/recovery/threat/handover/error-register/test and exact R6/R7 receipt/review evidence paths. docs/branding and all unrelated untracked receipts, runtime states, evidence and cost ledgers are excluded. No SQL/DDL, database/source/feed/watcher/listener, provider, product/patient/protected data, command/write, application/API/Diary, runtime, deployment, production, release, Pages or protected-ref action is permitted.",
+    "git_refs_and_worktree": "The active branch remains codex/ariadne-bernie-davida-parallel-seam at rejected candidate HEAD 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the enumerated recovery/evidence paths will be staged explicitly; rejected review worktree r34 remains clean evidence."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "precommit_five_source_rehydration_for_fourth_exact_veto_recovery",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol has reconciled the final veto and frozen the narrow fourth recovery."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No worker dispatch is part of this governance commit."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["No external provider/model call is opened."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external worker transport is invoked."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

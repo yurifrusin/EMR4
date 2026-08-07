@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.local-worktree-failure-receipt.v1",
+  "observed_on": "2026-08-08",
+  "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r6-review-worktree-001",
+  "candidate_head": "0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d",
+  "requested_destination": "C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-function-trigger-r6-final-review",
+  "failure": "Windows checkout reported Filename too long and could not reset the index.",
+  "containment": {
+    "requested_destination_exists_after_failure": false,
+    "requested_destination_registered_after_failure": false,
+    "candidate_head_changed": false,
+    "protected_ref_changed": false,
+    "review_dispatched_from_failed_attempt": false
+  },
+  "correction": {
+    "destination": "C:/Users/sarashera/EMR4-worktrees/r34",
+    "branch": "codex/review-durability-function-trigger-body-r6-0bfd3e75",
+    "head": "0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d",
+    "worktree_preflight": "passed",
+    "tracked_clean": true
+  },
+  "authority_boundary": "local_worktree_checkout_only_no_provider_data_runtime_deployment_or_protected_ref_authority"
+}

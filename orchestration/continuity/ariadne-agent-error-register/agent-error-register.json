@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 75,
+  "register_revision": 77,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-07",
+    "source_cutoff_on": "2026-08-08",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -3020,6 +3020,82 @@
         "evidence_paths": [
           "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-75.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0078",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r6-review-worktree-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "git-worktree-windows-path-layout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_worktree_checkout",
+      "stage": "independent_review",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "Windows verifier worktrees for this repository must use the established short rNN destination so every versioned path can be checked out before exact-HEAD preflight and review dispatch.",
+      "observed_error": "The first R6 final-review checkout repeated the known descriptive-destination error. Several already-versioned paths exceeded the Windows path limit and Git could not reset the index; no usable worktree was registered at that destination.",
+      "detection_method": "The worktree command returned Filename too long before dispatch. Sol verified that the requested destination was absent and unregistered, retained the unchanged candidate branch, then checked it out at short destination r34 and passed exact-HEAD clean-worktree preflight.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-long-worktree-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-76.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.windows_verifier_worktree_destination_path_too_long",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "No review followed the failed checkout. The same exact candidate branch was checked out at r34, where independent preflight proved the full expected HEAD, codex/review branch prefix and tracked-clean state before reviewer dispatch.",
+        "prevention_control": "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-long-worktree-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-76.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0079",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r6-final-veto-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "Immutable parent invariant anchor_fences_next_transition_v1 requires that no key rotation begin until the latest independently reverified recovery anchor exactly matches the locked checkpoint and generation.",
+      "observed_error": "Committed candidate 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d locked the current recovery anchor but did not compare its checkpoint state, contiguous position, observation digest, checkpoint-integrity digest or seven controlling digests with the locked checkpoint and generation before using its anchor digest to author the next rotation revision.",
+      "detection_method": "Fresh exact-HEAD independent veto constructed a stale-anchor counterexample at the correct locator and revision: checkpoint position 10, stale anchor position 9, prior key ending at 10 and proposed interval 11-12 satisfied the existing assertions and allowed the stale anchor digest to seed the rotation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-final-independent-veto.md",
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-77.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.typed_ir_exact_veto_fourth_rotation_anchor_underclosure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Candidate 0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d remains immutable rejected evidence. The fourth recovery freezes one F_ANCHOR assertion immediately after the anchor lock and before the prior-key lock or any effect, comparing all four checkpoint fields and seven controlling generation digests.",
+        "prevention_control": "For every body named by a parent invariant, candidate-independent hostile tests must prove each required field-level equality and its execution order rather than accepting locator, row lock or aggregate digest presence as equivalent evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-final-independent-veto.md",
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-77.md"
         ]
       },
       "status": "contained"

@@ -509,10 +509,14 @@ generation rehearsal. The architecture-only provider-free default-off
   reviewer's output capture ended before its terminal count. The accepted
   result is structural/signature architecture only. The active safe descendant
   is the provider-free unmounted function-and-trigger-body architecture. Its
-  fifth exact candidate was rejected after a passing static packet because
-  source-independent replay, complete recovery-anchor evidence and structural
-  set-key uniqueness remained under-closed; the third exact-veto recovery is
-  now binding. DDL remains blocked. No applied migration, live
+  sixth exact candidate at `0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d`
+  remains rejected despite a complete 305-test Sol packet: fresh independent
+  review found that key rotation locked the current recovery anchor but did not
+  field-by-field reverify its four checkpoint fields and seven controlling
+  generation digests before using the anchor digest. The fourth exact-veto
+  recovery now binds one exact pre-effect `F_ANCHOR` fence while preserving all
+  earlier source-independent replay, recovery-anchor, set-uniqueness and
+  lock-order repairs. DDL remains blocked. No applied migration, live
   implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
