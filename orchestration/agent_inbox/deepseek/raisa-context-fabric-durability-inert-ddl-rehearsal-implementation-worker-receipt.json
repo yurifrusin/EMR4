@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "The implementation is complete. Here is the concise account.\n\n## Changed files (exactly the six owned paths)\n\n1. **`scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py`** \u2014 pure standard-library-only renderer/static recognizer with fixed-path `check`/`regenerate` CLI. Imports only stdlib plus the accepted body builder surfaces.\n2. **`orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/lowering-contract.json`** \u2014 closed Draft-2020-12 lowering contract.\n3. **`.../lowering-contract.schema.json`** \u2014 whole-contract Schema (const-binds PG 16, parent hashes, output paths, opcode populations).\n4. **`.../durability-schema.sql.inert`** \u2014 canonical 6-phase PostgreSQL 16 inert artifact (1,373,863 bytes, UTF-8/LF, one terminal newline).\n5. **`.../render-manifest.json`** \u2014 closed typed manifest (parent/effective/artifact hashes, byte+statement counts, 317 ordered nodes, per-phase spans, 22-program accounting, digest vectors).\n6. **`tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py`** \u2014 33 authored-synthetic focused tests.\n\n## Exact test/Ruff/diff results\n\n- `pytest` (plan + focused): **41 passed** (8 plan + 33 focused) \u2014 no SQL execution/database/network contact.\n- `ruff check` (both files): **All checks passed!**\n- `git diff --check`: **clean**\n- `git status --short`: only the six owned paths (untracked); no cache/temp/receipt files remain.\n- CLI `check`: **ok** (canonical files byte-identical to fresh render, recognizer accepts).\n\n## What the implementation does\n\n- Verifies both fixed parent paths + `contract_sha256` bindings before output, applies REC01\u2013REC26 to a deep copy, proves parent bytes unchanged, reconciles the effective catalogue against the child summaries.\n- Emits exactly six phases (roles/schema/types/relations/constraints/indexes/RLS/helper; 9 entry points; 13 trigger functions; 13 trigger declarations; revokes+grants; comments).\n- Reconciles 22 declared/21 observed instruction opcodes (`DERIVE_BINDING` absent) and 34/34 expression opcodes; lowers all 22 programs (742 nodes / 14,418 expressions) exactly once; maps every `EXACTLY_ONE` failure to `F_CARDINALITY`/`CF004`; derives one enforcing constraint per all 21 `INSERT_OR_RELOAD_COMPARE` nodes, catches only SQLSTATE 23505, inspects `CONSTRAINT_NAME`, rethrows non-matches, reloads by key+`winner_predicate`, never uses `ON CONFLICT DO NOTHING`/`WHEN OTHERS`; erases only the canonical constant-false retry marker.\n- Independent recognizer tokenizes emitted bytes separately and rejects extra/missing/swapped statements, malformed quotes/dollar bodies, unqualified identifiers, search-path widening, `SECURITY INVOKER`, missing revokes, added trigger grants, application DML, top-level DML/transaction control, psql meta-commands, extension/file/network ops, helper/overload, wrong SQLSTATE/constraint, and output-path escape.\n\n## Known limitations\n\n- The `.sql.inert` artifact proves conformance to the renderer's closed static PostgreSQL-16 subset only; it is explicitly **not** a server-parse/catalogue-equivalence claim (a later separately bounded PostgreSQL gate).\n- Clause 16 (fresh exact-HEAD independent Gemini veto) is an external Sol/verifier step, not executable by this worker; the in-repo clauses 1\u201315 are fully exercised.\n\nRESULT: candidate_ready",
+  "usage": {
+    "input_tokens": 217088,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 72714240,
+    "output_tokens": 190409,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 42.21687499999999,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

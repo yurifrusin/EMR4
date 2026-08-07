@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_accepted_inert_ddl_closeout_continuity_error_register_and_exact_review_evidence_on_the_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "The completely reread live baton now records the inert PostgreSQL-16 DDL rehearsal as the current accepted result and the separately bounded disposable local parse-and-catalogue rehearsal as next under standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol owns recovery, acceptance, explicit-path integration and task-branch publication. DeepSeek's two candidate_ready results remain rejected evidence. One fresh Gemini 3.6 Flash/high exact-HEAD read-only veto passed and has no integration or self-acceptance authority.",
+    "active_plan_and_acceptance": "The recovered fixed-path renderer and static recognizer consume the exact immutable parent hashes, apply eight position-sealed representability operations, emit the canonical 412-statement .sql.inert artifact and pass the complete combined acceptance suite, Ruff, regeneration and diff checks. Continuity 231, Compass 213 and Sol acceptance bind the no-execution claim.",
+    "protected_evidence_boundaries": "No SQL was executed and no database, source, outbox, feed, watcher, listener, product/patient data, migration, application/API/Diary runtime, command/write, provider product path, deployment, production, release, Pages or protected ref was opened. Explicit-path staging excludes every unrelated untracked file and preserves docs/branding exactly.",
+    "git_refs_and_worktree": "Task HEAD is exactly 46e16622471a192353cb82a33acf301dc2cfb7aa and origin task is c3eed9a56a2dc3c875ecccbc216e59577f154bf6. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary worktree contains only intentional tracked closeout changes plus preserved unrelated untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_rehydration_plus_exact_candidate_review_closeout_and_combined_acceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol recovery, closeout and the combined acceptance packet pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native Codex worker is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The exact-HEAD Gemini implementation veto passed and its worktree remained unchanged."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Both rejected implementation candidates and their receipts are preserved."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude model lane is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

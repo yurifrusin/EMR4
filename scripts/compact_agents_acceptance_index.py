@@ -38,6 +38,7 @@ ACTIVE_LABELS = (
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
     "Model-required Bureau C5 plan and recovery state",
+    "Provider-free unmounted durability inert DDL rehearsal acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",

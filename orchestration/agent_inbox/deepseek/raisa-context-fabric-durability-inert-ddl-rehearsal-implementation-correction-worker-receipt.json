@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All required checks pass. Here is the bounded same-lane correction report.\n\n## Candidate status: `candidate_ready`\n\n### Changed files (exactly the six authorized paths, nothing else)\n1. `scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py` \u2014 corrected renderer + static recognizer\n2. `orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/lowering-contract.json` \u2014 regenerated\n3. `orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/lowering-contract.schema.json` \u2014 regenerated\n4. `orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert` \u2014 regenerated\n5. `orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json` \u2014 regenerated\n6. `tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py` \u2014 hostile + direct renderer regression tests added\n\n### Corrections applied\n- **Exact cardinality:** `SELECT_EXACT`/`LOCK_EXACT`/`UPDATE` now use `INTO STRICT` with `EXCEPTION WHEN NO_DATA_FOUND/TOO_MANY_ROWS`, both mapped only to `F_CARDINALITY`/`CF004`/`required_row_missing_or_ambiguous`. `INSERT` and the `INSERT_OR_RELOAD_COMPARE` insert-success arm add an `IF NOT FOUND THEN CF004` proof; the winner-reload arm uses a nested strict exact block. No `P0001/P0002/P0003/42xxx` leaks.\n- **Isolation:** every `ASSERT_ISOLATION` is now a real read-only `current_setting('transaction_isolation')` check (`read committed` / `serializable`), failing via the existing `F_STATE`/`CF303`/`durability_state_ambiguous`; no comment-only assertions, no new SQLSTATE/setting/transaction control.\n- **Bounded delete:** `DELETE_SOURCE` now uses `WITH selected_keys AS (SELECT \u2026 ORDER BY \u2026 LIMIT max_rows), deleted AS (DELETE \u2026 USING selected_keys \u2026 RETURNING \u2026) SELECT count(*) INTO \u2026`.\n- **PG16 syntax/types:** removed every `pg_catalog.ARRAY`/`pg_catalog.ROW`; `SELECT_SET` builds full typed rows (projected values + explicitly typed nulls, `xmin` honestly excluded from composite SET rows), deterministically ordered with typed empty arrays; xmin-carrying exact reads use `record` locals so every `(var).xmin` is valid; owners use unqualified role names and the support function now gets its owner; removed the stray `# test marker`.\n- **Canonical values:** `timestamptz` canonicalized as UTC with six fractional digits + literal terminal `Z` in both SQL and the Python reference; profile fixed as component zero (`7:profile:<len>:<value>`); array constants have explicit exact array casts (including typed empty); JSON exact-key comparison uses a typed array plus `COALESCE(\u2026, ARRAY[]::text[])`; `_literal` fails closed on `None` (\u2192 `NULL::type`) and raises on list values.\n- **Recognizer/regression:** added static checks and hostile tests for non-strict exact reads, comment-only isolation, `pg_catalog.ARRAY/ROW`, `DELETE\u2026ORDER BY\u2026LIMIT`, anonymous-record set aggregation, schema-qualified owners, missing support owner, and UTC digest text without `Z`; added direct renderer tests for zero/multiple mapping, key-bounded delete, typed complete/partial rows, system `xmin`, isolation levels, and unique-race reload.\n\n### Required checks (all pass, no cache created)\n- Plan test `test_\u2026_inert_ddl_rehearsal_plan.py`: 8 passed\n- Focused test `test_\u2026_inert_ddl_rehearsal.py`: 50 passed\n- `ruff check` on renderer + focused test: all checks passed\n- Renderer fixed-path `check`: `ok`\n- `git diff --check`: ok\n- `git status --short`: only the three untracked candidate paths (`?? orchestration/\u2026/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/`, `?? scripts/\u2026rehearsal.py`, `?? tests/\u2026rehearsal.py`)\n\n### Evidence from the generated manifest (not memory)\n- `sql_byte_count`: **1,387,413**\n- `statement_count`: **358**\n- `sql_sha256`: `sha256:5d9d1394cd4d8891cb6d8904eb7a72fde8f759698c1fbd28a98542f01aa6f266`\n- programs: **22** (9 entry points, 13 trigger functions)\n- render nodes: **742** total; instruction opcodes 22 declared / 21 observed (`DERIVE_BINDING` absent)\n- expressions: **14,418** total; expression opcodes 34 declared / 34 observed\n- catalogue assertions: 18 fabric relations, 44 RLS policies, 8 roles, 21 `INSERT_OR_RELOAD_COMPARE`, 0 `DERIVE_BINDING` occurrences\n\nNo blockers and no immutable contract contradiction found; server parse/catalogue equivalence remains a later closed gate, as required.",
+  "usage": {
+    "input_tokens": 135547,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 23684352,
+    "output_tokens": 114724,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 15.408110999999996,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

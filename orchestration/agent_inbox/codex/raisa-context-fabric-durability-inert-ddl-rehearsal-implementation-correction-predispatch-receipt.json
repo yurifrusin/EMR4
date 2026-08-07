@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_bounded_same_lane_deepseek_v4_flash_high_correction_for_the_inert_ddl_renderer_in_existing_worktree_r38",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The recovered inert DDL plan remains accepted at task HEAD 4a1cf9ce. Sol independently reproduced the first candidate's 41 local test passes but rejected its bytes for non-exact reads, comment-only isolation, invalid bounded DELETE and ARRAY/ROW grammar, typed-set/xmin/owner defects, and incomplete timestamp canonicalization. The accepted one-correction lease is now invoked without widening the plan.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery, acceptance, integration and Git authority. DeepSeek V4 Flash/high through Claude Code bare receives only one correction attempt over the same six uncommitted r38 artifacts; it has no self-acceptance, commit, push, SQL/database, runtime, deployment or protected-ref authority. Gemini remains reserved for a fresh exact-commit final veto.",
+    "git_refs_and_worktree": "Task HEAD is 4a1cf9ce811a60aab6eac28cb17a72fa8a7aec09; origin task is c3eed9a56a2dc3c875ecccbc216e59577f154bf6. Existing r38 is at exact tracked HEAD 4a1cf9ce with only the six owned candidate paths untracked. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The fully reread live baton and standing continuation protocol make the provider-free unmounted inert durability descendant current. The accepted plan permits one bounded same-lane mechanical correction after deterministic review rejects the first candidate.",
+    "protected_evidence_boundaries": "Only six named inert renderer/contract/schema/SQL/manifest/test paths in r38 may change. No SQL execution or database/source/outbox/feed/watcher/listener contact, dependency installation, patient/product/protected data, application/API/Diary/runtime write, provider fallback, deployment, release, Pages rebuild, or protected-ref movement is authorized. All unrelated untracked files including docs/branding remain untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

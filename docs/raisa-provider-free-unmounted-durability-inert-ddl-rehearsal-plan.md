@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: PostgreSQL-representability recovery active after the first
-implementation and its one bounded worker correction were rejected
+Status: accepted after PostgreSQL-representability recovery and fresh
+exact-HEAD independent veto
 
 Normative PostgreSQL-representability recovery:
 `docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md`

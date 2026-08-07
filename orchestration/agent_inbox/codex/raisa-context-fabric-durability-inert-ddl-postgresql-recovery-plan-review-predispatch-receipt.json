@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_commit_challenge_of_the_postgresql_representability_recovery_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The committed plan at d7757e19153a1e635520da059bd67c7f9dac2c3f defines one 9/14/14/23 effective-body recovery: a new appointment guard, four exact pre-effect xmin reselections, three paired-guard dependencies, producer applicability, null-safe COUNT, helper-before-policy order, constraint-trigger grammar, explicit final ownership and fail-closed lock modes. Twelve focused tests and Ruff pass.",
+    "current_authority_allocation": "GPT Sol retains architecture, implementation, acceptance, integration and Git. Gemini 3.6 Flash/high receives one fresh read-only exact-commit veto in r39 and may not edit, self-accept, integrate, push, move refs or broaden the gate. The DeepSeek correction lane is closed as rejected evidence.",
+    "git_refs_and_worktree": "Candidate task HEAD is d7757e19153a1e635520da059bd67c7f9dac2c3f. Fresh r39 branch codex/review-durability-inert-ddl-postgresql-recovery-d7757e19 is clean and exactly bound by the passed verifier preflight. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains c3eed9a56a2dc3c875ecccbc216e59577f154bf6.",
+    "live_handover_current_baton": "The fully reread baton keeps the inert DDL descendant current and authorises uninterrupted architecture recovery. The recovered plan is committed at a clean exact task descendant for independent challenge before implementation.",
+    "protected_evidence_boundaries": "The reviewer may read only the exact packet allowlist and run read-only Git/focused no-cache tests. No edits/caches, SQL parse/execution, database/source/outbox/feed/watcher/listener, patient/product/protected data, application/API/Diary/runtime write, deployment, release, Pages or protected refs are authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

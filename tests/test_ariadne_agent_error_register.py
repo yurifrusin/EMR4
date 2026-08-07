@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 83
+    assert register["register_revision"] == 84
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 87)
+        f"AER-{index:04d}" for index in range(1, 92)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 68
+    assert len(agent_incidents) == 73
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -346,15 +346,14 @@ def test_function_trigger_body_recovery_incidents_are_preserved_and_corrected() 
     assert incidents["AER-0062"]["recurrence_signature"] == (
         "orchestrator.receipt_head_evidence_not_git_verified"
     )
-    assert all(incidents[incident_id]["status"] == "corrected" for incident_id in (
-        "AER-0059", "AER-0060", "AER-0061", "AER-0062"
-    ))
+    assert all(
+        incidents[incident_id]["status"] == "corrected"
+        for incident_id in ("AER-0059", "AER-0060", "AER-0061", "AER-0062")
+    )
 
 
 def test_function_trigger_body_verifier_path_failure_uses_short_recovery() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0063"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0063"]
     receipt = _json(
         ROOT
         / "orchestration"
@@ -369,9 +368,7 @@ def test_function_trigger_body_verifier_path_failure_uses_short_recovery() -> No
     assert incident["recurrence_signature"] == (
         "harness.windows_verifier_worktree_destination_path_too_long"
     )
-    assert receipt["candidate_head"] == (
-        "f51f5b65dd77d9282e5325a5e4f17edd872d14df"
-    )
+    assert receipt["candidate_head"] == ("f51f5b65dd77d9282e5325a5e4f17edd872d14df")
     assert receipt["postcondition"] == {
         "destination_exists": False,
         "worktree_registered": False,
@@ -384,10 +381,10 @@ def test_function_trigger_body_verifier_path_failure_uses_short_recovery() -> No
     assert incident["status"] == "corrected"
 
 
-def test_function_trigger_body_exact_veto_is_contained_pending_fresh_acceptance() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0064"
-    ]
+def test_function_trigger_body_exact_veto_is_contained_pending_fresh_acceptance() -> (
+    None
+):
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0064"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "independent_review"
@@ -421,9 +418,7 @@ def test_function_trigger_body_exact_veto_is_contained_pending_fresh_acceptance(
 
 
 def test_function_trigger_body_recovery_receipt_preserves_empty_required_pool() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0065"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0065"]
     failed = _json(
         ROOT
         / "orchestration"
@@ -450,9 +445,7 @@ def test_function_trigger_body_recovery_receipt_preserves_empty_required_pool() 
     assert incident["category"] == "output_contract_violation"
     assert incident["candidate_state"] == "canonical_unchanged"
     assert failed["status"] == "revision_required"
-    assert failed["reasons"] == [
-        "worker_slot_inventory_missing:deepseek-flash-workers"
-    ]
+    assert failed["reasons"] == ["worker_slot_inventory_missing:deepseek-flash-workers"]
     assert corrected["status"] == "passed"
     assert corrected["reasons"] == []
     inventories = {
@@ -464,9 +457,7 @@ def test_function_trigger_body_recovery_receipt_preserves_empty_required_pool() 
 
 
 def test_function_trigger_schema_module_path_failure_reuses_package_control() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0066"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0066"]
     receipt = _json(
         ROOT
         / "orchestration"
@@ -488,9 +479,7 @@ def test_function_trigger_schema_module_path_failure_reuses_package_control() ->
 
 
 def test_function_trigger_builder_path_failure_tightens_package_control() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0067"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0067"]
     receipt = _json(
         ROOT
         / "orchestration"
@@ -514,9 +503,7 @@ def test_function_trigger_builder_path_failure_tightens_package_control() -> Non
 
 
 def test_function_trigger_api_spine_baseline_drift_is_contained() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0068"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0068"]
     receipt = _json(
         ROOT
         / "orchestration"
@@ -549,10 +536,10 @@ def test_function_trigger_api_spine_baseline_drift_is_contained() -> None:
     assert incident["status"] == "contained"
 
 
-def test_function_trigger_current_digest_provenance_is_corrected_before_review() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0069"
-    ]
+def test_function_trigger_current_digest_provenance_is_corrected_before_review() -> (
+    None
+):
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0069"]
     receipt = _json(
         ROOT
         / "orchestration"
@@ -579,10 +566,10 @@ def test_function_trigger_current_digest_provenance_is_corrected_before_review()
     assert receipt["correction"]["contract_or_schema_changed"] is False
 
 
-def test_function_trigger_second_exact_veto_remains_contained_for_fresh_recovery() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0070"
-    ]
+def test_function_trigger_second_exact_veto_remains_contained_for_fresh_recovery() -> (
+    None
+):
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0070"]
     review = (
         ROOT
         / "orchestration"
@@ -616,9 +603,7 @@ def test_function_trigger_second_exact_veto_remains_contained_for_fresh_recovery
 
 
 def test_function_trigger_reviewer_ruff_boolean_failure_is_corrected_cleanly() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0071"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0071"]
     review = (
         ROOT
         / "orchestration"
@@ -637,10 +622,10 @@ def test_function_trigger_reviewer_ruff_boolean_failure_is_corrected_cleanly() -
     assert "Final `git status --short`: empty" in review
 
 
-def test_function_trigger_reviewer_path_transcription_failure_is_corrected_cleanly() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0072"
-    ]
+def test_function_trigger_reviewer_path_transcription_failure_is_corrected_cleanly() -> (
+    None
+):
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0072"]
     review = (
         ROOT
         / "orchestration"
@@ -659,10 +644,10 @@ def test_function_trigger_reviewer_path_transcription_failure_is_corrected_clean
     assert "Exact HEAD was clean before and after review" in review
 
 
-def test_function_trigger_third_exact_veto_remains_contained_for_fresh_recovery() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0073"
-    ]
+def test_function_trigger_third_exact_veto_remains_contained_for_fresh_recovery() -> (
+    None
+):
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0073"]
     review = (
         ROOT
         / "orchestration"
@@ -696,9 +681,7 @@ def test_function_trigger_third_exact_veto_remains_contained_for_fresh_recovery(
 
 
 def test_function_trigger_r6_predispatch_managed_inventory_is_corrected() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0074"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0074"]
     failed = _json(
         ROOT
         / "orchestration"
@@ -720,9 +703,7 @@ def test_function_trigger_r6_predispatch_managed_inventory_is_corrected() -> Non
     assert incident["status"] == "corrected"
     assert failed["status"] == "revision_required"
     assert failed["worker_dispatch_permitted"] is False
-    assert failed["reasons"] == [
-        "worker_slot_inventory_missing:deepseek-flash-workers"
-    ]
+    assert failed["reasons"] == ["worker_slot_inventory_missing:deepseek-flash-workers"]
     assert corrected["status"] == "passed"
     assert corrected["worker_dispatch_permitted"] is True
 
@@ -1377,19 +1358,19 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 86
+    assert report["incident_count"] == 91
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 68,
+        "agent_behavior": 73,
         "harness": 5,
         "repository": 5,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 14,
-        "evidence_misreport": 8,
+        "evidence_misreport": 10,
         "harness_failure": 5,
-        "output_contract_violation": 27,
+        "output_contract_violation": 30,
         "read_only_violation": 2,
         "reasoning_claim_error": 17,
         "repository_defect": 5,
@@ -1397,8 +1378,8 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 66,
-        "untrusted_partial_worktree": 18,
+        "canonical_unchanged": 69,
+        "untrusted_partial_worktree": 20,
     }
     assert report["recurring_patterns"] == [
         {
@@ -1452,6 +1433,21 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
             "prevention_controls": [
                 "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml and preserve any fail-closed envelope before issuing a corrected distinct receipt.",
                 "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "orchestrator.verifier_preflight_expected_head_not_read_from_git"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0090", "AER-0091"],
+            "origins": ["agent_behavior"],
+            "categories": ["output_contract_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Populate verifier expected_head only from the literal output of git rev-parse HEAD in the target worktree.",
+                "The closeout protocol now requires a standalone git rev-parse HEAD read immediately before every verifier preflight and forbids manually completing abbreviated hashes.",
             ],
         },
         {

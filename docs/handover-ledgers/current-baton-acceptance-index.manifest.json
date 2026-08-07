@@ -16,6 +16,7 @@
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
     "Model-required Bureau C5 plan and recovery state",
+    "Provider-free unmounted durability inert DDL rehearsal acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -25,7 +26,7 @@
   "ledger_byte_count": 160322,
   "ledger_line_count": 135,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "1940f762146f8d1bf0688403377b468008b3da4db3b1c5c50295a8e4e8a6fdd0",
+  "ledger_sha256": "f7158be54586c3e34c06ca84f05959182e5ed1b6c1692b9f5555adea81af5642",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -149,10 +150,10 @@
   ],
   "moved_row_count": 119,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 72167,
-  "source_agents_git_blob_sha1": "af6c7f4b3d863b2382bebcaf6eced5b3003c6500",
-  "source_agents_line_count": 485,
+  "source_agents_byte_count": 60862,
+  "source_agents_git_blob_sha1": "b15e6948ae5b3e1ea695aa1aa397bc912ae25dd5",
+  "source_agents_line_count": 486,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "204be79c0daf688666dca4ddf95b7719daf778ccdf205df24300b4b5ab73970f",
-  "source_git_head": "95a2ed5e960c58686262b5e82ce2e89354a3860a"
+  "source_agents_sha256": "3011b6a753d8552d7c804dbb45086d90089ddd458763fef1a8af6e2310b53aa9",
+  "source_git_head": "46e16622471a192353cb82a33acf301dc2cfb7aa"
 }

@@ -1,30 +1,30 @@
 {
-  "canonical_register_sha256": "1b349948b05ffb9ea7aad89b16fab73399ea078c5a0acda9a227cf669f0a7aba",
+  "canonical_register_sha256": "54838c8459af6385f67b05db16dcb6afec8323bcdb1b5c8a35da38a756d33e04",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 66,
-      "untrusted_partial_worktree": 18
+      "canonical_unchanged": 69,
+      "untrusted_partial_worktree": 20
     },
     "by_category": {
       "command_scope_violation": 14,
-      "evidence_misreport": 8,
+      "evidence_misreport": 10,
       "harness_failure": 5,
-      "output_contract_violation": 27,
+      "output_contract_violation": 30,
       "read_only_violation": 2,
       "reasoning_claim_error": 17,
       "repository_defect": 5,
       "transport_timeout": 8
     },
     "by_origin": {
-      "agent_behavior": 68,
+      "agent_behavior": 73,
       "harness": 5,
       "repository": 5,
       "transport": 8
     },
     "by_process_severity": {
-      "low": 28,
-      "material": 27,
+      "low": 31,
+      "material": 29,
       "moderate": 31
     },
     "by_resource_and_role": {
@@ -35,11 +35,12 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 39,
+      "codex-primary-orchestrator::orchestrator": 42,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
+      "deepseek-v4-flash-implementation-worker::implementer": 2,
       "git-worktree-windows-path-layout::orchestrator": 2,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
@@ -48,13 +49,13 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 12,
-      "orchestrator": 49,
+      "implementer": 14,
+      "orchestrator": 52,
       "verifier": 25
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 86,
+  "incident_count": 91,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -149,6 +150,30 @@
         "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt."
       ],
       "recurrence_signature": "orchestrator.unapproved_continuation_event",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0090",
+        "AER-0091"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Populate verifier expected_head only from the literal output of git rev-parse HEAD in the target worktree.",
+        "The closeout protocol now requires a standalone git rev-parse HEAD read immediately before every verifier preflight and forbids manually completing abbreviated hashes."
+      ],
+      "recurrence_signature": "orchestrator.verifier_preflight_expected_head_not_read_from_git",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -315,7 +340,7 @@
       ]
     }
   ],
-  "register_revision": 83,
+  "register_revision": 84,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-08"
 }

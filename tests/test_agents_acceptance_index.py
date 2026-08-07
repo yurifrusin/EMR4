@@ -12,10 +12,7 @@ from scripts import compact_agents_acceptance_index
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = (
-    ROOT
-    / "docs"
-    / "handover-ledgers"
-    / "current-baton-acceptance-index.manifest.json"
+    ROOT / "docs" / "handover-ledgers" / "current-baton-acceptance-index.manifest.json"
 )
 
 
@@ -35,18 +32,15 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
     payload = ledger_path.read_bytes()
 
     assert (
-        manifest["schema_version"]
-        == "emr4.current_baton_acceptance_index_manifest.v1"
+        manifest["schema_version"] == "emr4.current_baton_acceptance_index_manifest.v1"
     )
     assert manifest["source_agents_path"] == "AGENTS.md"
-    assert manifest["source_git_head"] == (
-        "95a2ed5e960c58686262b5e82ce2e89354a3860a"
-    )
+    assert manifest["source_git_head"] == ("46e16622471a192353cb82a33acf301dc2cfb7aa")
     assert manifest["source_agents_sha256"] == (
-        "204be79c0daf688666dca4ddf95b7719daf778ccdf205df24300b4b5ab73970f"
+        "3011b6a753d8552d7c804dbb45086d90089ddd458763fef1a8af6e2310b53aa9"
     )
-    assert manifest["source_agents_byte_count"] == 72167
-    assert manifest["source_agents_line_count"] == 485
+    assert manifest["source_agents_byte_count"] == 60862
+    assert manifest["source_agents_line_count"] == 486
     assert len(payload) == manifest["ledger_byte_count"]
     assert len(payload.decode("utf-8").splitlines()) == manifest["ledger_line_count"]
     assert hashlib.sha256(payload).hexdigest() == manifest["ledger_sha256"]
@@ -85,8 +79,7 @@ def test_compaction_check_rejects_an_unclassified_new_live_row(
     live = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     live = live.replace(
         "### Compact historical evaluation",
-        "| Unexpected future row | unclassified |\n"
-        "### Compact historical evaluation",
+        "| Unexpected future row | unclassified |\n### Compact historical evaluation",
         1,
     )
     live_path.write_text(live, encoding="utf-8")

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 83,
+  "register_revision": 84,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3378,6 +3378,204 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-veto-predispatch-receipt.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-veto-predispatch-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-83.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0087",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-implementation-predispatch-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-inert-ddl-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A worker predispatch state must use the configured adapter probe method for every selected transport and pass Ariadne preflight before launch.",
+      "observed_error": "The first DeepSeek implementation predispatch state used an invalid probe method for deepseek_via_claude_code_bare. Ariadne returned revision_required with adapter_probe_method_invalid and prohibited dispatch.",
+      "detection_method": "The generic orchestrator preflight rejected the state before any DeepSeek process was launched; a distinct corrected state used the configured method and passed before dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-implementation-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-implementation-predispatch-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-84.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.selected_adapter_probe_method_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "No worker followed the rejected receipt. The v2 state used the configured deepseek_claude_cli_observation method and passed the five-source preflight before launch.",
+        "prevention_control": "Copy adapter method identifiers from transport_adapters.yaml or a current passing receipt; never infer them from the adapter ID.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-implementation-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-implementation-predispatch-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-84.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0088",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-implementation-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-inert-ddl-rehearsal",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-implementation-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A candidate_ready worker result must satisfy the accepted inert-renderer clauses and must not describe invalid PostgreSQL lowering as complete merely because its authored tests pass.",
+      "observed_error": "The worker returned candidate_ready after 41 tests, but Sol review found non-exact cardinality handling, comment-only isolation assertions, invalid bounded DELETE syntax, invalid or dishonest ARRAY/ROW and complete-set lowering, and incomplete owner, digest and recognizer closure.",
+      "detection_method": "Sol inspected the six owned files and rendered bytes against the accepted plan rather than accepting the worker test summary; the concrete defects were reproduced and supplied to one bounded same-lane correction.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-context-fabric-durability-inert-ddl-rehearsal-implementation-worker-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-sol-rejection-analysis-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-84.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.candidate_ready_despite_invalid_lowering",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The first candidate was not committed or accepted. One bounded correction repaired the exact defects and added hostile regressions before the candidate was reassessed.",
+        "prevention_control": "Candidate-ready admission requires source and rendered-byte review against every acceptance clause; worker-owned tests are evidence but never self-acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/deepseek/raisa-context-fabric-durability-inert-ddl-rehearsal-implementation-correction-worker-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-sol-rejection-analysis-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-84.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0089",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-implementation-correction-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-inert-ddl-rehearsal",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-implementation-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A corrected candidate_ready result must remain subject to independent PostgreSQL-representability review and must not claim no blocker while emitting known-invalid dependency, trigger, ownership or row-image forms.",
+      "observed_error": "The corrected worker returned candidate_ready and no blockers after 58 focused tests, but Sol found nullable empty-set counts, policies before their helper, invalid deferrable trigger grammar, unclosed object owners, six unrepresentable OLD.xmin references, non-producer appointment rejection and a raw unknown-lock fallback.",
+      "detection_method": "Sol performed a source and rendered-byte audit against PostgreSQL-16 semantics and the ordinary-writer boundary; every defect was reproduced despite the passing worker suite, so the bounded correction was rejected.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-context-fabric-durability-inert-ddl-rehearsal-implementation-correction-worker-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-sol-rejection-analysis-receipt.json",
+        "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-84.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.corrected_candidate_ready_without_postgresql_representability",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "The DeepSeek lane was closed without another correction. Sol froze one exact recovery, obtained a fresh plan veto, implemented eight fragment-sealed transforms, passed 62 merged tests and obtained a fresh exact-commit Gemini pass with no P0-P3 finding.",
+        "prevention_control": "Before candidate admission, mechanically test PostgreSQL null, dependency, trigger-grammar, system-column and ownership semantics in addition to the renderer's internal contract tests.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-plan-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-84.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0090",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-postgresql-recovery-plan-review-preflight-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-inert-ddl-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The verifier worktree preflight expected_head must be the exact full git rev-parse identity, never a display abbreviation.",
+      "observed_error": "The recovery-plan review preflight received d7757e19 instead of the full candidate identity and correctly returned revision_required for an exact-HEAD mismatch.",
+      "detection_method": "The local preflight rejected the short hash before any provider or model call; rerunning with the full Git identity produced the preserved passing receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-plan-review-worktree-preflight-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-plan-review-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-84.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_preflight_expected_head_not_read_from_git",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "No review followed the failed check. The exact full HEAD was read and the canonical preflight passed before dispatch.",
+        "prevention_control": "Populate verifier expected_head only from the literal output of git rev-parse HEAD in the target worktree.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-plan-review-worktree-preflight-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-plan-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-84.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0091",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-preflight-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-inert-ddl-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The verifier worktree preflight expected_head must be copied from exact git output and must never be guessed from a short commit prefix.",
+      "observed_error": "The implementation review preflight was given a fabricated full hash sharing the 46e16622 prefix rather than the actual 46e16622471a192353cb82a33acf301dc2cfb7aa, and correctly returned revision_required.",
+      "detection_method": "The local preflight emitted the exact mismatch before any Gemini call. Sol then read git rev-parse HEAD, reran successfully and dispatched only from the passing receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-worktree-preflight-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-84.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_preflight_expected_head_not_read_from_git",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "No review followed the rejected preflight. The exact full Git identity produced a passing check and the subsequent independent veto completed on the unchanged clean commit.",
+        "prevention_control": "The closeout protocol now requires a standalone git rev-parse HEAD read immediately before every verifier preflight and forbids manually completing abbreviated hashes.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-worktree-preflight-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-84.md"
         ]
       },
       "status": "corrected"

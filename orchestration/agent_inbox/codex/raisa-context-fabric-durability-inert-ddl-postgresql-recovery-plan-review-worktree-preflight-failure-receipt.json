@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.verifier_worktree_preflight_failure.v1",
+  "status": "corrected_before_dispatch",
+  "attempt_id": "raisa-context-fabric-durability-inert-ddl-postgresql-recovery-plan-review-preflight-001",
+  "observed_on": "2026-08-07",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r39",
+  "actual_head": "d7757e19153a1e635520da059bd67c7f9dac2c3f",
+  "invalid_expected_head": "d7757e19",
+  "reason": "A short display hash was passed where the preflight requires the exact full commit identity.",
+  "provider_or_model_calls_before_correction": 0,
+  "correction": "Rerun with the full git rev-parse HEAD value; the preserved canonical preflight then passed before Gemini dispatch.",
+  "canonical_passing_receipt": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-plan-review-worktree-preflight.json"
+}

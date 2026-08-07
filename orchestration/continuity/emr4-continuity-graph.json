@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 230,
+  "graph_revision": 231,
   "harvests": [],
   "nodes": [
     {
@@ -14188,9 +14188,118 @@
         "Operational persistence, product reads, providers and every route or command/write remain closed.",
         "Deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-durability-inert-ddl-rehearsal",
+      "title": "Unmounted durability inert DDL rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-07T00:00:00Z",
+      "updated_at": "2026-08-07T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "46e16622471a192353cb82a33acf301dc2cfb7aa",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-durability-function-trigger-body-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted PostgreSQL-16 text has a non-runnable .sql.inert suffix and was never sent to a database.",
+          "The fixed-path standard-library renderer and recognizer add no migration, driver, connection or runtime.",
+          "No database/source, product read, provider product path, command, deployment or protected capability is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-durability-inert-ddl-rehearsal",
+          "source": "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact byte-stable inert PostgreSQL-16 lowering after representability recovery, without execution or database contact."
+        }
+      ],
+      "claim_scope": [
+        "The complete deterministic packet passes 62 tests at the accepted source HEAD.",
+        "A fresh Gemini 3.6 Flash/high exact-HEAD veto reports no P0-P3 finding.",
+        "The artifact contains 412 statements and the exact 9/14/14/23 recovered program and trigger populations.",
+        "No SQL execution, migration, database/source contact, persistence, product read, command, runtime or protected capability is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan.md",
+            "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-design.md",
+            "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md",
+            "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-receipt.json",
+            "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+            "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-closeout.md"
+          ],
+          "note": "The inert artifact preserves the exact patient-free durability contracts and opens no live event, read or command path."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-design.md",
+            "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-receipt.json",
+            "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_plan.py",
+            "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-closeout.md"
+          ],
+          "note": "The rendered evidence contains no patient or appointment payload."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan.md",
+          "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-design.md",
+          "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md",
+          "docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-sol-rejection-analysis-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-84.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-predispatch-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_postgresql_representability_recovery.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_continuity_engine.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal",
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
+        "PostgreSQL execution, server parse/catalogue acceptance, an applied migration and operational credentials remain separate gates.",
+        "Database/outbox/feed/watcher/listener/source access, persistence, product reads and every route or command/write remain closed.",
+        "Deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-08T00:00:00Z"
+  "updated_at": "2026-08-07T00:00:00Z"
 }

@@ -124,8 +124,8 @@ is accepted at exact independently reviewed source HEAD
 restart anchoring, future-fenced rotation and complete-census retention after
 three preserved rejections and a fresh 29-attack/207-check veto. None of these
 acceptances gives the observer truth, returned-data, read, provider,
-persistence or command authority. Migration-and-transaction architecture is
-next; no migration, database/source or runtime is opened. Its first frozen plan
+persistence or command authority. No migration, database/source or runtime is
+opened. The first frozen migration-and-transaction plan
 at `bea7d7193503c9176acea24395d3b7727f617454` was correctly rejected before
 implementation because proofread admission was unauthenticated, redelivery
 depended on independently purgeable source, evolving checkpoints lacked
@@ -134,8 +134,14 @@ effects and key-schedule scope was ambiguous. The recovered plan adds an exact
 receiver-owned immutable admission, source-independent redelivery, append-only
 lifecycle-owned anchor fencing, atomic lifecycle append and generation-local
 key rotation. The migration/transaction architecture and its exact function-
-and-trigger-body descendant now pass fresh exact-head acceptance; inert DDL
-rehearsal is next while execution and live database/source access remain closed.
+and-trigger-body descendant pass fresh exact-head acceptance. Their recovered
+inert DDL lowering also passes at exact independently reviewed source HEAD
+`46e16622471a192353cb82a33acf301dc2cfb7aa`: one byte-stable PostgreSQL-16
+artifact statically closes the exact catalogue, trigger, owner and privilege
+inventory without execution. A separately bounded disposable local
+PostgreSQL-16 parse-and-catalogue rehearsal is next. Applied migration,
+application behavior, operational database/source access and runtime remain
+closed.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,

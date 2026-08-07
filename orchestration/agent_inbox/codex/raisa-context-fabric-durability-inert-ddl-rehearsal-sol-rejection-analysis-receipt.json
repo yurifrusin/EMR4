@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.sol_candidate_rejection_analysis.v1",
+  "status": "closed_by_recovered_candidate",
+  "tranche": "raisa-context-fabric-durability-inert-ddl-rehearsal",
+  "first_attempt": {
+    "attempt_id": "raisa-context-fabric-durability-inert-ddl-implementation-001",
+    "worker_decision": "candidate_ready",
+    "sol_decision": "revision_required",
+    "material_findings": [
+      "exact cardinality reads did not consistently map zero and ambiguous outcomes to F_CARDINALITY/CF004",
+      "accepted isolation assertions were emitted as comments rather than executable read-only assertions",
+      "bounded source deletion used invalid DELETE ordering and limiting syntax",
+      "typed complete-set and PostgreSQL ARRAY/ROW lowering contained invalid or dishonest shapes",
+      "owner, digest-canonicalization and recognizer coverage were incomplete"
+    ],
+    "disposition": "one bounded same-lane correction"
+  },
+  "correction_attempt": {
+    "attempt_id": "raisa-context-fabric-durability-inert-ddl-implementation-correction-001",
+    "worker_decision": "candidate_ready",
+    "sol_decision": "rejected_and_recovery_lease_invoked",
+    "deterministic_worker_result": "58 focused tests plus Ruff, renderer check and diff check passed",
+    "material_findings": [
+      "bare array_length made empty complete-set COUNT branches nullable",
+      "RLS policies were emitted before their sole support helper existed",
+      "deferrable fences used invalid ordinary CREATE TRIGGER grammar",
+      "schema, fabric type and eighteen fabric relation owners were not closed",
+      "six trigger-row OLD.xmin expressions were not PostgreSQL-representable",
+      "appointment exact binding admission rejected ordinary non-producer updates instead of remaining inert",
+      "unknown lock modes retained a raw fallback rather than failing before emission"
+    ],
+    "disposition": "DeepSeek lane closed; Sol specified, independently challenged and implemented the sole sealed PostgreSQL-16 representability recovery"
+  },
+  "recovered_candidate": {
+    "task_head": "46e16622471a192353cb82a33acf301dc2cfb7aa",
+    "decision": "pass",
+    "deterministic_acceptance": "62 passed",
+    "independent_veto": "gemini-3.6-flash-high pass with no P0-P3 finding",
+    "database_or_runtime_contact": false
+  },
+  "authority_boundary": "repository_local_inert_evidence_only_no_sql_execution_database_runtime_product_or_protected_ref_authority"
+}
