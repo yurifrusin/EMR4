@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 71
+    assert register["register_revision"] == 72
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 72)
+        f"AER-{index:04d}" for index in range(1, 74)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 57
+    assert len(agent_incidents) == 59
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -586,6 +586,64 @@ def test_function_trigger_reviewer_ruff_boolean_failure_is_corrected_cleanly() -
     assert "RUFF_NO_CACHE=1" in review
     assert "RUFF_NO_CACHE=true" in review
     assert "Final `git status --short`: empty" in review
+
+
+def test_function_trigger_reviewer_path_transcription_failure_is_corrected_cleanly() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0072"
+    ]
+    review = (
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-r6-independent-veto.md"
+    ).read_text(encoding="utf-8")
+
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+    assert "hyphenated filename" in review
+    assert "exact prescribed Ruff rerun passed" in review
+    assert "Exact HEAD was clean before and after review" in review
+
+
+def test_function_trigger_third_exact_veto_remains_contained_for_fresh_recovery() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0073"
+    ]
+    review = (
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-r6-independent-veto.md"
+    ).read_text(encoding="utf-8")
+    recovery = (
+        ROOT
+        / "docs"
+        / "raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md"
+    ).read_text(encoding="utf-8")
+
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "contained"
+    assert "passed 192/192" in review
+    assert "DECISION: revision_required" in review
+    for phrase in (
+        "source-independent replay",
+        "complete recovery anchors",
+        "checkpoint_rebase_digest_v1",
+        "key_rotation_digest_v1",
+        "uniqueItems: true",
+    ):
+        assert phrase in recovery
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -1208,28 +1266,28 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 71
+    assert report["incident_count"] == 73
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 57,
+        "agent_behavior": 59,
         "harness": 4,
         "repository": 3,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 13,
+        "command_scope_violation": 14,
         "evidence_misreport": 7,
         "harness_failure": 4,
         "output_contract_violation": 22,
         "read_only_violation": 2,
-        "reasoning_claim_error": 13,
+        "reasoning_claim_error": 14,
         "repository_defect": 3,
         "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 55,
-        "untrusted_partial_worktree": 14,
+        "canonical_unchanged": 56,
+        "untrusted_partial_worktree": 15,
     }
     assert report["recurring_patterns"] == [
         {

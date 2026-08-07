@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 71,
+  "register_revision": 72,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-07",
@@ -2795,6 +2795,82 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0072",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-review-ruff-002",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "codex-native-independent-reviewer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_subagent_observation",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A reviewer must transcribe every allowlisted Ruff path exactly so the prescribed read-only check runs against the complete intended candidate surface.",
+      "observed_error": "The reviewer first transcribed one underscore-delimited Python filename with hyphens. Ruff returned E902 because that nonexistent path could not be opened; no candidate file was analysed or changed by that failed invocation.",
+      "detection_method": "The reviewer preserved the E902 result, corrected the path to the packet's exact filename, reran the complete Ruff path set successfully, and verified unchanged exact HEAD plus an empty worktree status.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-independent-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-72.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "verifier.allowlisted_path_transcription_error",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The invalid invocation was discarded and the complete exact packet path set passed on a fresh invocation without changing HEAD or worktree state.",
+        "prevention_control": "Reviewer commands must be copied from the exact packet or programmatically checked for path existence before tool execution; manually transformed path spelling is forbidden.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-independent-veto.md",
+          "docs/ariadne-agent-error-correction-register-revision-72.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0073",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-exact-veto-003",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A passing candidate must keep retained receipt and terminal replay source-independent on every control-flow path, independently prove the complete committed lifecycle packet before appending or replaying a recovery anchor, and make duplicate set-key pairs structurally invalid.",
+      "observed_error": "The fresh exact-HEAD veto found two P1 gaps and one P2 gap despite 192/192 passing tests: coordinator replay inherited an unconditional source outbox read; recovery-anchor append/replay copied generation/checkpoint fields without lifecycle, receipt, audit or key proof; and the two set-key-pair schema branches lacked uniqueItems true.",
+      "detection_method": "A fresh read-only reviewer inspected the exact allowlisted candidate at 5a3c5b5118f80153d545bf30ae9db99acb187cd7, ran the complete passing packet, directly challenged source-independent control-flow effects, anchor evidence derivation and duplicate structural key pairs, then returned revision_required with exact unchanged HEAD and clean worktree postflight.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-independent-veto.md",
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-72.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.typed_ir_exact_veto_third_underclosure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The exact candidate remains rejected. Sol froze R6A path-local source-independent replay, R6B complete independently derived recovery-anchor proof and R6C structural key-pair uniqueness before replacement implementation.",
+        "prevention_control": "No replacement advances on passing generated tests alone. Focused hostile tests and fresh veto must trace per-path relation effects, substitute or omit every anchor evidence class and independently validate duplicate key pairs against the generated Draft 2020-12 schema.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r6-independent-veto.md",
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-72.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

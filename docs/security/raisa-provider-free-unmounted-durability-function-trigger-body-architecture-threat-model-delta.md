@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: second exact-veto recovery implemented; deterministic acceptance
-passes and the replacement candidate awaits fresh exact-HEAD independent veto
+Status: fifth candidate rejected; third exact-veto recovery frozen and
+correction implementation not yet accepted
 
 Normative implementation recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-implementation-recovery.md`
@@ -11,7 +11,10 @@ Normative implementation recovery:
 Normative second exact-veto recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md`
 
-Current replacement candidate pending fresh independent veto:
+Normative third exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md`
+
+Latest rejected candidate:
 `sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
 
 ## Scope and assets

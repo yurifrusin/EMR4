@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_third_exact_veto_rejection_and_normative_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully reread live baton keeps the provider-free unmounted function-and-trigger-body architecture as the active safe descendant before inert DDL rehearsal and carries Yuri's standing uninterrupted-gate and tranche-summary authority.",
+    "current_authority_allocation": "GPT Sol owns recovery, dispatch, integration, commit and acceptance. The fresh native reviewer supplied read-only veto evidence only; its exact review worktree was verified clean and removed. No implementation worker is active before this recovery-control commit.",
+    "active_plan_and_acceptance": "Exact candidate 5a3c5b5118f80153d545bf30ae9db99acb187cd7 remains rejected despite 192/192 tests. The third exact-veto recovery freezes R6A branch-local source-independent replay, R6B independently derived complete recovery-anchor proof and R6C structural key-pair uniqueness. AER revision 72 and focused plan/policy tests pass.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL/DDL rendering or execution, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked artifact remain preserved and excluded.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam remains at rejected candidate 5a3c5b5118f80153d545bf30ae9db99acb187cd7 before this recovery-control commit. Local/origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Only explicit recovery, veto, AER, plan and receipt paths will be staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "third_function_trigger_body_veto_recovery_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reproduced the three decisive gaps, froze the minimal recovery and validated the incident/plan packet."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh reviewer completed one terminal decision; no reviewer or implementation worker remains active."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider/model call is authorised or used."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation transport is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

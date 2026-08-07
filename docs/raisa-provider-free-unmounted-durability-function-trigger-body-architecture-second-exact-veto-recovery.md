@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: normative Sol recovery implemented; replacement candidate passed
-deterministic acceptance and awaits fresh exact-HEAD independent veto
+Status: normative Sol recovery preserved; its replacement candidate was
+rejected by a later exact-HEAD veto and the third recovery now controls
 
 Rejected candidate source HEAD:
 `5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d`
@@ -167,6 +167,10 @@ proofs for R5A–R5D, the AER packet, scoped API Spine checks, Ruff, builder
 `--check`, `git diff --check`, explicit-path worktree guards and a new fresh
 exact-HEAD independent veto. Candidate
 `5ea59e14184b26dfa0b8d3a6ebaf28b39c04fb9d` cannot become accepted source.
+
+Its replacement at `5a3c5b5118f80153d545bf30ae9db99acb187cd7`
+also remains rejected. The binding continuation is
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md`.
 
 This remains pure, provider-free, unmounted and repository-local. It renders or
 executes no SQL/DDL; creates no migration, database object or operational state;

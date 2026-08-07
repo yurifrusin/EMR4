@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_head_candidate_independent_second_recovery_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate contract sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a implements R5A-R5D. Builder check, 71/71 focused R5 plus continuation tests, 128/128 predecessor architecture/API Spine tests, 75/75 AER plus continuation tests, Ruff and diff checks pass. Candidate commit 5a3c5b5118f80153d545bf30ae9db99acb187cd7 remains pending the fresh veto.",
+    "current_authority_allocation": "GPT Sol retains acceptance and Git authority. A fresh native reviewer receives only read-only exact-path veto authority over exact candidate HEAD 5a3c5b5118f80153d545bf30ae9db99acb187cd7; it cannot edit, self-accept, stage, commit, push or open any external/data/runtime boundary.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r36 is clean on codex/review-durability-function-trigger-body-r6 at exact candidate 5a3c5b5118f80153d545bf30ae9db99acb187cd7 and its verifier preflight passes. The development worktree remains on codex/ariadne-bernie-davida-parallel-seam at the same candidate. Local/origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881.",
+    "live_handover_current_baton": "The live baton requires the provider-free unmounted function-and-trigger-body architecture to pass a fresh independent veto before inert DDL rehearsal and preserves uninterrupted bounded recovery.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener/network/browser contact, SQL/DDL rendering or execution, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. Reviewer paths explicitly exclude inbox, AER, branding and protected evidence."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

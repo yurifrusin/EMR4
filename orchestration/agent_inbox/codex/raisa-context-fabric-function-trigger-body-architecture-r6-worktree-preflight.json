@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r36",
+  "branch": "codex/review-durability-function-trigger-body-r6",
+  "head": "5a3c5b5118f80153d545bf30ae9db99acb187cd7",
+  "expected_head": "5a3c5b5118f80153d545bf30ae9db99acb187cd7",
+  "clean": true,
+  "branch_prefix": "codex/review-durability-function-trigger-body-r6",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

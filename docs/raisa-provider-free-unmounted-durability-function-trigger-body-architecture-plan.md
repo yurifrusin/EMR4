@@ -3,10 +3,8 @@
 Date: 2026-08-07
 
 Status: initial plan superseded by bounded structural-feasibility recovery;
-first label-only and second misbound typed implementation candidates rejected;
-third and fourth exact-HEAD candidates rejected by independent veto; second
-exact-veto Sol recovery implemented with deterministic acceptance passing;
-replacement candidate pending fresh exact-HEAD independent veto
+five implementation candidates rejected; third exact-veto Sol recovery frozen
+after the latest exact-HEAD veto; correction implementation not yet accepted
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -32,7 +30,10 @@ Normative exact-veto recovery:
 Normative second exact-veto recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-second-exact-veto-recovery.md`
 
-Current replacement candidate contract pending fresh independent veto:
+Normative third exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-third-exact-veto-recovery.md`
+
+Latest rejected candidate contract:
 `sha256:78db131b6da9482e7092a3530d747030010cf027c582f54f49b959827f4bff8a`
 
 ## Objective
@@ -420,6 +421,12 @@ Fresh review of exact rebuilt candidate
 second exact-veto recovery is now binding for conflict-safe receipt replay,
 complete registration/head baseline, identity-joined retention/key coverage
 and field-independent signature/trigger semantics.
+
+Fresh review of exact replacement candidate
+`5a3c5b5118f80153d545bf30ae9db99acb187cd7` invoked the lease a third time.
+The third exact-veto recovery is now binding for path-local source-independent
+coordinator replay, independently derived complete recovery anchors and
+structurally duplicate-free set key pairs.
 
 ## Claim boundary and next dependency
 
