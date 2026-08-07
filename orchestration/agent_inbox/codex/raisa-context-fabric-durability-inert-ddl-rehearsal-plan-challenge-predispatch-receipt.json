@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_challenge_of_the_inert_ddl_rehearsal_plan_before_any_implementation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Six plan admission tests, Ruff and diff checks pass. The review must challenge the exact parent binding, effective-catalogue derivation, PostgreSQL-16 core digest primitives and canonical encoding, total IR lowering, uniqueness translation, retry-marker elimination, six-phase security/privilege order, static-recognizer claim and inert output boundary before implementation.",
+    "current_authority_allocation": "GPT Sol retains plan meaning, recovery and acceptance. The fresh Gemini 3.6 Flash/high reviewer receives only read-only veto authority in one exact non-protected worktree; it may not edit, self-accept, integrate, push, move refs, access runtime/data or broaden scope.",
+    "git_refs_and_worktree": "Candidate task HEAD is 57bb84a33a69e8a5471f8768c3c25783b11559ea. A new r36 review worktree and branch will be bound to that exact commit and must be clean before/after. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains c3eed9a56a2dc3c875ecccbc216e59577f154bf6 until later task-branch publication.",
+    "live_handover_current_baton": "The live baton names the inert DDL rehearsal as the next safe planned descendant after accepted R7. The plan candidate is now committed at exact task HEAD 57bb84a33a69e8a5471f8768c3c25783b11559ea for clean review.",
+    "protected_evidence_boundaries": "The reviewer may read only the exact allowlisted plan/design/threat/test, accepted parent contracts and named parent acceptance artifacts. It may run only read-only Git, focused pytest/Ruff and in-memory analysis. No edits/caches, protected evidence, app/product/patient data, database/source/network/provider product path, SQL execution, migration, credentials, runtime, deployment, Pages or protected refs."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

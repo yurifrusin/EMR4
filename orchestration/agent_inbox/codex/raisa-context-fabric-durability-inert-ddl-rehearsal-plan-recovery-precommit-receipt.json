@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_stage_and_commit_only_the_inert_ddl_plan_recovery_review_evidence_error_register_update_and_five_source_receipt_pair_before_replacement_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The recovery preserves both immutable parent hashes, records 22 declared/21 observed instruction opcodes with only DERIVE_BINDING absent, 34 declared/34 observed expressions, binds every implicit exact-cardinality failure to value-free F_CARDINALITY/CF004, fences unique handling by exact CONSTRAINT_NAME, and closes the parent omission activation delta. Eight plan tests plus the 74-case error-register packet, Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns recovery meaning, commit and later acceptance. The first Gemini review is evidence only and its pass is not admitted. No implementation worker has authority before one fresh exact-HEAD replacement challenge passes; no agent has integration, protected-ref, runtime, database, deployment or release authority.",
+    "git_refs_and_worktree": "The task branch is at 57bb84a33a69e8a5471f8768c3c25783b11559ea and origin task remains c3eed9a56a2dc3c875ecccbc216e59577f154bf6 before this recovery commit. Local/origin master and local/origin handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicitly named recovery and evidence files will be staged.",
+    "live_handover_current_baton": "The fully reread live baton records the R7 body architecture as accepted and the provider-free unmounted inert DDL rehearsal as the next safe planned descendant under standing continuation authority.",
+    "protected_evidence_boundaries": "The commit contains only plan/design/threat/test recovery, first-review control evidence, Ariadne incident registration and this receipt pair. It contains no renderer or SQL artifact, SQL/database/source/outbox/feed/watcher/listener contact, dependency, migration, product read/write, provider product call, patient/product/protected data, application/API/Diary/runtime change, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -11,6 +11,10 @@ THREAT = (
     ROOT
     / "docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md"
 )
+RECOVERY = (
+    ROOT
+    / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan-recovery.md"
+)
 STRUCTURAL_PARENT = (
     ROOT
     / "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture"
@@ -67,7 +71,7 @@ def test_plan_freezes_inert_fixed_outputs_and_no_external_parser() -> None:
 
 
 def test_plan_closes_digest_race_retry_and_privilege_lowering() -> None:
-    plan = _flat(_text(PLAN))
+    plan = _flat("\n".join((_text(PLAN), _text(RECOVERY))))
 
     for required in (
         "type-tagged, byte-length-prefixed value",
@@ -75,6 +79,8 @@ def test_plan_closes_digest_race_retry_and_privilege_lowering() -> None:
         "UTC with six fractional digits",
         "INSERT_OR_RELOAD_COMPARE",
         "must not use `ON CONFLICT DO NOTHING`",
+        "`F_CARDINALITY`, SQLSTATE `CF004`",
+        "handler reads `CONSTRAINT_NAME`",
         "PROPAGATE_RETRYABLE",
         "not an exception handler",
         "`PUBLIC` execute is revoked before any exact runtime execute grant",
@@ -82,6 +88,29 @@ def test_plan_closes_digest_race_retry_and_privilege_lowering() -> None:
         "may not emit application DDL or DML",
     ):
         assert required in plan
+
+
+def test_recovery_reconciles_declared_and_observed_opcode_populations() -> None:
+    combined = _flat("\n".join((_text(PLAN), _text(DESIGN), _text(RECOVERY))))
+
+    for required in (
+        "22 declared/21 observed instruction opcodes",
+        "`DERIVE_BINDING` as the sole unobserved form",
+        "34 declared/34 observed expression opcodes",
+        "replacement independent challenge",
+    ):
+        assert required in combined
+
+
+def test_recovery_closes_parent_omission_activation_boundary() -> None:
+    combined = _flat("\n".join((_text(PLAN), _text(DESIGN), _text(RECOVERY))))
+
+    for required in (
+        "supersede only those two omission flags",
+        "fixed-path inert rendering",
+        "does not activate execution, migration, runtime or product authority",
+    ):
+        assert required in combined
 
 
 def test_six_phase_order_and_population_are_explicit() -> None:

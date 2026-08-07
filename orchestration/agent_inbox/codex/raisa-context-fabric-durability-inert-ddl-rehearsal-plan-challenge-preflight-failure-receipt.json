@@ -1,0 +1,15 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_challenge_of_the_inert_ddl_rehearsal_plan_before_any_implementation",
+  "reasons": [
+    "continuation_event_missing_or_unapproved"
+  ],
+  "rehydrated_from_receipt": false,
+  "rehydration_sources": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {},
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

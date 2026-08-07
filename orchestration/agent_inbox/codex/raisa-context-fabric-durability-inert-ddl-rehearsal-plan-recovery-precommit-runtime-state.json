@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_stage_and_commit_only_the_inert_ddl_plan_recovery_review_evidence_error_register_update_and_five_source_receipt_pair_before_replacement_review",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully reread live baton records the R7 body architecture as accepted and the provider-free unmounted inert DDL rehearsal as the next safe planned descendant under standing continuation authority.",
+    "current_authority_allocation": "GPT Sol owns recovery meaning, commit and later acceptance. The first Gemini review is evidence only and its pass is not admitted. No implementation worker has authority before one fresh exact-HEAD replacement challenge passes; no agent has integration, protected-ref, runtime, database, deployment or release authority.",
+    "active_plan_and_acceptance": "The recovery preserves both immutable parent hashes, records 22 declared/21 observed instruction opcodes with only DERIVE_BINDING absent, 34 declared/34 observed expressions, binds every implicit exact-cardinality failure to value-free F_CARDINALITY/CF004, fences unique handling by exact CONSTRAINT_NAME, and closes the parent omission activation delta. Eight plan tests plus the 74-case error-register packet, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "The commit contains only plan/design/threat/test recovery, first-review control evidence, Ariadne incident registration and this receipt pair. It contains no renderer or SQL artifact, SQL/database/source/outbox/feed/watcher/listener contact, dependency, migration, product read/write, provider product call, patient/product/protected data, application/API/Diary/runtime change, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "The task branch is at 57bb84a33a69e8a5471f8768c3c25783b11559ea and origin task remains c3eed9a56a2dc3c875ecccbc216e59577f154bf6 before this recovery commit. Local/origin master and local/origin handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicitly named recovery and evidence files will be staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "inert_ddl_plan_recovery_five_source_readback_machine_contract_reconciliation_and_explicit_path_inventory",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol rejected the inconsistent verifier pass, reconciled the immutable contract and applied the bounded plan recovery."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker was dispatched from the rejected review."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The first review completed but is preserved as non-admitted evidence; one fresh replacement project remains pending after the recovery commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek implementation remains closed until replacement plan-challenge admission."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is reserved only as the later exact DeepSeek transport."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

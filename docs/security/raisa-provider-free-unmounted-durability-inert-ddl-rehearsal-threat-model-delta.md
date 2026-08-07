@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: draft delta pending independent plan challenge
+Status: recovered delta pending replacement independent plan challenge
 
 ## Scope and assets
 
@@ -38,6 +38,9 @@ runtime credential.
 | Canonical digest is ambiguous or environment-dependent | Exact profile/type tuples; UTF-8 type-tagged byte-length framing; distinct null marker; locale-free scalars; UTC microsecond timestamps; fully qualified core SHA-256 functions. | Cross-language/server execution vectors require a later database-backed gate. |
 | Digest helper widens body/call authority | Digest expression is inlined; no helper, extension or new callable surface is introduced. | Inlining increases artifact size and review burden. |
 | Unique race is swallowed or changes a row | Only `INSERT_OR_RELOAD_COMPARE` admits exact `unique_violation` translation; expected winner is reloaded and compared; no `DO NOTHING`, no-op update or broad exception handler. | Real concurrent behavior remains unproved. |
+| Unique handler catches the wrong constraint or invents an error | The renderer proves one effective-catalogue unique constraint exactly matches the ordered conflict columns, checks PostgreSQL `CONSTRAINT_NAME`, rethrows every other violation and maps a missing/mismatching winner only to registered value-free `F_CARDINALITY`/`CF004`. | Actual concurrent catalogue behavior remains for the disposable database gate. |
+| Declared and observed opcode populations are conflated | Admission fixes 22 declared/21 observed instruction opcodes with only `DERIVE_BINDING` absent, and 34 declared/34 observed expression opcodes; any drift or encountered unobserved form fails before emission. | A later parent revision requires a new descendant rather than compatibility lowering. |
+| Parent omission flags are treated as broad implementation authority | An exact descendant activation delta requires both immutable hashes and all 22 accepted programs, and opens only fixed-path inert rendering; neither parent is mutated and execution remains closed. | Any later migration/application requires fresh separately bounded authority. |
 | Retry marker becomes internal retry/catch | Exact constant-false marker shape and SQLSTATE set are verified then erased; renderer emits no retry loop or catch. | Caller retry behavior remains a later integration gate. |
 | Security-definer resolves attacker objects | Qualified identifiers, fixed search path, no dynamic SQL, non-login owners and exact public revocation. Static recognizer rejects search-path drift. | Actual `proconfig`, ownership and RLS behavior require catalogue readback later. |
 | Application product DML or object DDL is introduced | `public.*` is reference-only; typed statement inventory forbids application create/alter/DML and grants owner only exact accepted SELECT. | Existing application schema compatibility requires later parse/catalogue rehearsal. |

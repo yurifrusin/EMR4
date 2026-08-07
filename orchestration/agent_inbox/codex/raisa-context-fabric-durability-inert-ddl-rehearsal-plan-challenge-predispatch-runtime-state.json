@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_challenge_of_the_inert_ddl_rehearsal_plan_before_any_implementation",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton names the inert DDL rehearsal as the next safe planned descendant after accepted R7. The plan candidate is now committed at exact task HEAD 57bb84a33a69e8a5471f8768c3c25783b11559ea for clean review.",
+    "current_authority_allocation": "GPT Sol retains plan meaning, recovery and acceptance. The fresh Gemini 3.6 Flash/high reviewer receives only read-only veto authority in one exact non-protected worktree; it may not edit, self-accept, integrate, push, move refs, access runtime/data or broaden scope.",
+    "active_plan_and_acceptance": "Six plan admission tests, Ruff and diff checks pass. The review must challenge the exact parent binding, effective-catalogue derivation, PostgreSQL-16 core digest primitives and canonical encoding, total IR lowering, uniqueness translation, retry-marker elimination, six-phase security/privilege order, static-recognizer claim and inert output boundary before implementation.",
+    "protected_evidence_boundaries": "The reviewer may read only the exact allowlisted plan/design/threat/test, accepted parent contracts and named parent acceptance artifacts. It may run only read-only Git, focused pytest/Ruff and in-memory analysis. No edits/caches, protected evidence, app/product/patient data, database/source/network/provider product path, SQL execution, migration, credentials, runtime, deployment, Pages or protected refs.",
+    "git_refs_and_worktree": "Candidate task HEAD is 57bb84a33a69e8a5471f8768c3c25783b11559ea. A new r36 review worktree and branch will be bound to that exact commit and must be clean before/after. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains c3eed9a56a2dc3c875ecccbc216e59577f154bf6 until later task-branch publication."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "inert_ddl_plan_challenge_predispatch_exact_candidate_and_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed the plan-only candidate and froze an exact read-only challenge packet before dispatch."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker is active; the single review lane is independent and read-only."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The configured exact gemini-3.6-flash-high/high fresh-project lane is selected for plan veto."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek remains undispatched until plan admission."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not part of the review transport."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

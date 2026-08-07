@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: draft frozen boundary pending independent plan challenge
+Status: recovered frozen boundary pending replacement independent plan challenge
 
 Structural parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -64,6 +64,14 @@ directories, builders, schemas, validators and tests are immutable inputs. The
 new lowering contract binds their repository paths, source HEADs, hashes,
 PostgreSQL major 16, exact observed opcode populations and exact output paths.
 
+The accepted structural parent deliberately omitted executable function and
+trigger bodies, while the accepted body child deliberately emitted no renderer
+or DDL. This descendant may supersede only those two omission flags, and only
+after both immutable hashes and the complete child body contract pass. The
+supersession permits rendering the already accepted definitions solely into the
+fixed inert evidence artifact. It does not alter either parent, create a
+migration or grant execution/application authority.
+
 ## Allowed artifacts
 
 This tranche may add only:
@@ -115,9 +123,14 @@ phase; it may not emit application DDL or DML.
 ## Closed lowering contract
 
 The renderer is a total closed lowering over the accepted candidate, not a
-general SQL generator. It must provide explicit, type-aware lowering rules for
-the exact observed instruction and expression populations. Unknown, unused-but-
-newly-introduced, malformed or differently typed nodes fail.
+general SQL generator. The accepted vocabulary declares 22 instruction opcodes
+and 34 expression opcodes. The immutable body population actually uses 21 of
+the instruction opcodes and all 34 expression opcodes; `DERIVE_BINDING` is the
+sole declared but unobserved instruction. The renderer must explicitly
+reconcile those exact populations before lowering. It implements the 21
+observed instruction forms and all 34 expression forms; an encountered
+`DERIVE_BINDING`, unknown, newly introduced, malformed or differently typed
+node fails because the parent hash-bound programs contain no such occurrence.
 
 ### Identifiers and literals
 
@@ -157,10 +170,18 @@ choice may change the preimage.
 - Each accepted instruction opcode has one PL/pgSQL statement template.
   Select/lock cardinality, ordering and output shapes are preserved. Complete
   sets have deterministic ordering and a typed empty representation.
+- Every `EXACTLY_ONE` read, lock, write or reload has one implicit value-free
+  failure mapping: zero or non-unique cardinality raises registered
+  `F_CARDINALITY`, SQLSTATE `CF004`, with its stable reason code and no row
+  value. PostgreSQL's default `NO_DATA_FOUND`, `TOO_MANY_ROWS`, `P0002`,
+  `P0003`, `P0001` or class `42` errors are not accepted substitutes.
 - `INSERT_OR_RELOAD_COMPARE` may translate only exact `unique_violation` for
-  its named conflict key by reloading and comparing the immutable winner. It
-  must not use `ON CONFLICT DO NOTHING`, perform a no-op update, swallow any
-  other error or hide a missing/mismatching winner.
+  the one effective-catalogue unique constraint whose ordered columns equal its
+  named conflict key. The handler reads `CONSTRAINT_NAME`, rethrows every other
+  violation unchanged, and reloads the expected winner using both the conflict
+  key and accepted `winner_predicate`. A missing or mismatching winner raises
+  `F_CARDINALITY`/`CF004`. It must not use `ON CONFLICT DO NOTHING`, perform a
+  no-op update, swallow any other error or hide a missing/mismatching winner.
 - `PROPAGATE_RETRYABLE` is an inert control assertion, not an exception handler.
   The renderer may eliminate only the accepted canonical constant-false retry
   marker wrapper after proving its exact `40001`/`40P01` set and

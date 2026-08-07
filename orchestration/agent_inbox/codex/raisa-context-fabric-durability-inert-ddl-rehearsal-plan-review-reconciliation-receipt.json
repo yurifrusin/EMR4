@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.evidence-reconciliation-receipt.v1",
+  "status": "revision_required",
+  "candidate_head": "57bb84a33a69e8a5471f8768c3c25783b11559ea",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-challenge-review-receipt.json",
+  "review_decision": "pass_not_admitted",
+  "machine_reconciliation": {
+    "instruction_opcodes_claimed_declared": 21,
+    "instruction_opcodes_authoritative_declared": 22,
+    "instruction_opcodes_authoritative_observed": 21,
+    "sole_declared_unobserved_instruction": "DERIVE_BINDING",
+    "expression_opcodes_claimed_declared": 33,
+    "expression_opcodes_authoritative_declared": 34,
+    "expression_opcodes_authoritative_observed": 34
+  },
+  "failure_reconciliation": {
+    "review_claimed_sqlstates": ["42000", "P0001"],
+    "claimed_values_present_in_failure_registry": false,
+    "recovered_implicit_cardinality_failure_id": "F_CARDINALITY",
+    "recovered_implicit_cardinality_sqlstate": "CF004",
+    "recovered_reason_code": "required_row_missing_or_ambiguous"
+  },
+  "official_postgresql_16_primitive_check": {
+    "status": "confirmed",
+    "functions": [
+      "sha256(bytea)",
+      "convert_to(text,name)",
+      "encode(bytea,text)",
+      "octet_length(text)"
+    ],
+    "source": "https://www.postgresql.org/docs/16/functions-binarystring.html"
+  },
+  "candidate_changed_by_review": false,
+  "provider_or_database_contact": false,
+  "disposition": "preserve_first_review_as_non_admitted_evidence_recover_plan_then_run_one_fresh_exact_head_challenge"
+}

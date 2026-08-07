@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: draft design pending independent plan challenge
+Status: recovered design pending replacement independent plan challenge
 
 ## Purpose
 
@@ -31,6 +31,13 @@ The accepted JSON contracts are authority. Prose cannot supply a missing
 operand or branch. The lowering contract may define syntax for an already typed
 operation but cannot introduce a relation, column, helper, effect, privilege or
 failure.
+
+The renderer activation is an exact descendant delta. The structural parent's
+omitted function/trigger-body surface and the body child's `renderer_present:
+false`/`executable_ddl:false` evidence are not edited or reinterpreted. Only an
+exact match of both immutable parents admits their already accepted catalogue
+and all 22 programs into the fixed `.sql.inert` output. Every other input state
+fails before emission.
 
 ## Components
 
@@ -93,9 +100,13 @@ Statements use exact templates:
 - `LET`, `ASSERT`, `IF`, `SWITCH_TG_OP` and `FOR_EACH` preserve the closed flow
   tree and terminal convergence;
 - `INSERT`, `UPDATE` and `DELETE_SOURCE` emit only operand-derived columns and
-  exact cardinality checks;
+  exact cardinality checks; every implicit `EXACTLY_ONE` failure maps to the
+  value-free registered `F_CARDINALITY`/`CF004` outcome;
 - `INSERT_OR_RELOAD_COMPARE` has one tightly scoped `unique_violation`
-  translation followed by exact winner reload and comparison;
+  translation. It derives one exact unique-constraint name from the effective
+  catalogue, inspects `CONSTRAINT_NAME`, rethrows every non-matching violation,
+  then reloads by conflict key plus `winner_predicate`; a missing or mismatching
+  winner raises `F_CARDINALITY`/`CF004`;
 - `CALL_SUPPORT` may name only `session_binding_allows_v1`;
 - `RETURN_*` and `RAISE` are terminal and type/value closed; and
 - the canonical unreachable retry marker is verified and erased, never turned
@@ -105,6 +116,12 @@ Locals are declared once in accepted symbol order. Input symbols bind exact
 function parameters; trigger system symbols are never redeclared. Row symbols
 use the exact qualified row type, set symbols use its array type and composites
 use explicit typed `ROW(...)` construction.
+
+The vocabulary reconciliation is exact: 22 instruction opcodes are declared,
+21 occur in the immutable programs, and `DERIVE_BINDING` is the sole declared
+but unobserved form. All 34 declared expression opcodes occur. The emitter has
+no compatibility fallback for the unobserved instruction; seeing it means the
+hash-bound input or population proof failed.
 
 ## Digest preimage
 
