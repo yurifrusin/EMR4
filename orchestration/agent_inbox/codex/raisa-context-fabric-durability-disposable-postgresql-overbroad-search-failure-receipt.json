@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.failure_receipt.v1",
+  "status": "contained",
+  "attempt_id": "raisa-context-fabric-durability-disposable-postgresql-environment-read-001",
+  "observed_on": "2026-08-07",
+  "origin": "agent_behavior",
+  "role": "orchestrator",
+  "resource_id": "codex-primary-orchestrator",
+  "stage": "planning",
+  "failure": "overbroad_repository_content_search",
+  "expected_invariant": "Environment discovery under protected-evidence containment must use exact named paths and exact executable probes only.",
+  "observed_error": "A single rg command searched broad scripts, tests, docs and orchestration roots while looking for PostgreSQL harness examples. The output contained only ordinary repository paths and no protected material, but the directory-wide search scope repeated AER-0054.",
+  "effect": {
+    "protected_content_returned": false,
+    "candidate_changed": false,
+    "database_contacted": false,
+    "sql_executed": false,
+    "runtime_started": false,
+    "network_or_provider_contacted": false
+  },
+  "disposition": "The broad-search result supplies no architectural authority. Planning continues only from AGENTS, the active accepted documents, exact known paths and exact executable probes. No further recursive repository or documentation search is permitted in this tranche.",
+  "recurrence_signature": "orchestrator.overbroad_repository_content_search"
+}

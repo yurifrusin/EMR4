@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 84,
+  "register_revision": 85,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3579,6 +3579,43 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0092",
+      "attempt_id": "raisa-context-fabric-durability-disposable-postgresql-environment-read-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-disposable-postgresql-parse-catalogue-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Protected-evidence containment requires exact-path reads only; repository-wide or directory-wide content search is forbidden during environment discovery.",
+      "observed_error": "While orienting the disposable PostgreSQL plan, Sol issued one rg command over broad scripts, tests, docs and orchestration roots. It returned only ordinary repository paths and no protected content, but repeated AER-0054's prohibited search scope.",
+      "detection_method": "Sol recognized the command-scope recurrence from the issued directory roots, preserved a sanitized failure receipt and excluded every broad-search result from architectural authority.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-overbroad-search-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-85.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.overbroad_repository_content_search",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The search supplies no architecture authority. Planning continues only from the active named sources, exact known paths and exact executable probes; no recursive repository or documentation search is permitted.",
+        "prevention_control": "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-overbroad-search-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-85.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

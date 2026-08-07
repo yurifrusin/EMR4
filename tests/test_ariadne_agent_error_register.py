@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 84
+    assert register["register_revision"] == 85
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 92)
+        f"AER-{index:04d}" for index in range(1, 93)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 73
+    assert len(agent_incidents) == 74
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1358,16 +1358,16 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 91
+    assert report["incident_count"] == 92
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 73,
+        "agent_behavior": 74,
         "harness": 5,
         "repository": 5,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 14,
+        "command_scope_violation": 15,
         "evidence_misreport": 10,
         "harness_failure": 5,
         "output_contract_violation": 30,
@@ -1378,10 +1378,23 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 69,
+        "canonical_unchanged": 70,
         "untrusted_partial_worktree": 20,
     }
     assert report["recurring_patterns"] == [
+        {
+            "recurrence_signature": "orchestrator.overbroad_repository_content_search",
+            "incident_count": 2,
+            "incident_ids": ["AER-0054", "AER-0092"],
+            "origins": ["agent_behavior"],
+            "categories": ["command_scope_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Architecture recovery packets and Sol self-checks must carry an explicit exact-path read allowlist. Environment facts are read from one named configuration or handover path; broad rg, recursive content search and wildcard discovery are prohibited under protected-evidence containment.",
+                "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search.",
+            ],
+        },
         {
             "recurrence_signature": "orchestrator.python_package_script_path_invocation",
             "incident_count": 3,

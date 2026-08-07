@@ -1,13 +1,13 @@
 {
-  "canonical_register_sha256": "54838c8459af6385f67b05db16dcb6afec8323bcdb1b5c8a35da38a756d33e04",
+  "canonical_register_sha256": "65e4917a31562f17bf4f713a973eaf71a7c2a8ac91d3f78b6fb1f54cf12d9f33",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 2,
-      "canonical_unchanged": 69,
+      "canonical_unchanged": 70,
       "untrusted_partial_worktree": 20
     },
     "by_category": {
-      "command_scope_violation": 14,
+      "command_scope_violation": 15,
       "evidence_misreport": 10,
       "harness_failure": 5,
       "output_contract_violation": 30,
@@ -17,7 +17,7 @@
       "transport_timeout": 8
     },
     "by_origin": {
-      "agent_behavior": 73,
+      "agent_behavior": 74,
       "harness": 5,
       "repository": 5,
       "transport": 8
@@ -25,7 +25,7 @@
     "by_process_severity": {
       "low": 31,
       "material": 29,
-      "moderate": 31
+      "moderate": 32
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 19,
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 42,
+      "codex-primary-orchestrator::orchestrator": 43,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -50,15 +50,39 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 52,
+      "orchestrator": 53,
       "verifier": 25
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 91,
+  "incident_count": 92,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0054",
+        "AER-0092"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Architecture recovery packets and Sol self-checks must carry an explicit exact-path read allowlist. Environment facts are read from one named configuration or handover path; broad rg, recursive content search and wildcard discovery are prohibited under protected-evidence containment.",
+        "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search."
+      ],
+      "recurrence_signature": "orchestrator.overbroad_repository_content_search",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
     {
       "categories": [
         "command_scope_violation"
@@ -340,7 +364,7 @@
       ]
     }
   ],
-  "register_revision": 84,
+  "register_revision": 85,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-08"
 }

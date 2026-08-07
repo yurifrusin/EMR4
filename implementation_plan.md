@@ -529,10 +529,13 @@ generation rehearsal. The architecture-only provider-free default-off
   passes the complete 339-test inherited-plus-R7 deterministic packet. One
   distinct fresh Gemini 3.6 Flash/high exact-HEAD veto passes 44/44 focused
   checks with no P0-P3 finding and unchanged clean postflight at
-  `a93d07405ad35d7d6c0603065625c17ec14ab23e`. The body architecture is accepted;
-  a separate inert DDL rehearsal is next. SQL execution, an applied migration,
-  live implementation, database/source access and every real-product or
-  clinical descendant remain closed.
+  `a93d07405ad35d7d6c0603065625c17ec14ab23e`. The body architecture and its
+  recovered inert DDL lowering are accepted. The next bounded candidate is the
+  provider-free disposable PostgreSQL-16 parse-and-catalogue rehearsal frozen
+  in
+  `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan.md`.
+  Applied migration, application behavior, operational database/source access
+  and every real-product or clinical descendant remain closed.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

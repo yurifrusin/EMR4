@@ -9,8 +9,8 @@ verbatim from the Current Baton table. It has artifact lookup authority only.
 Live authority, protected boundaries, active acceptance and next work remain
 controlled by `AGENTS.md`; this ledger cannot override them.
 
-Source HEAD: `46e16622471a192353cb82a33acf301dc2cfb7aa`
-Source `AGENTS.md` SHA-256: `3011b6a753d8552d7c804dbb45086d90089ddd458763fef1a8af6e2310b53aa9`
+Source HEAD: `253230a25ab172b90bc5f44772670c7df89b3052`
+Source `AGENTS.md` SHA-256: `6c63722009e2a59dd2c22f8bd2ab23d5355e3be733851c23ad401da6f30bb551`
 
 | Item | Indexed acceptance artifacts |
 |---|---|
