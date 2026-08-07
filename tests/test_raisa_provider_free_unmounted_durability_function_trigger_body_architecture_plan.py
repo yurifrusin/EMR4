@@ -15,6 +15,10 @@ IMPLEMENTATION_RECOVERY = ROOT / (
     "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
     "architecture-implementation-recovery.md"
 )
+TYPED_IR_RECOVERY = ROOT / (
+    "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
+    "architecture-typed-ir-recovery.md"
+)
 PARENT = ROOT / (
     "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-"
     "transaction-architecture/migration-transaction-architecture-contract.json"
@@ -36,6 +40,10 @@ def _recovery() -> str:
 
 def _implementation_recovery() -> str:
     return IMPLEMENTATION_RECOVERY.read_text(encoding="utf-8")
+
+
+def _typed_ir_recovery() -> str:
+    return TYPED_IR_RECOVERY.read_text(encoding="utf-8")
 
 
 def test_plan_binds_exact_parent_and_complete_body_population() -> None:
@@ -124,6 +132,23 @@ def test_implementation_recovery_requires_genuinely_lowerable_typed_bodies() -> 
         "structured `{from,to}` objects",
         "ordered `prefixItems` or body-specific `const` definitions",
         "candidate-independent exact-head veto",
+    ):
+        assert phrase in recovery
+
+
+def test_typed_ir_recovery_replaces_misbound_candidate_with_derived_semantics() -> None:
+    recovery = " ".join(_typed_ir_recovery().split())
+    for phrase in (
+        "Rejected typed candidate content digest",
+        "Predicates, derivation profiles, body programs, effects and call graph are rebuilt from zero",
+        "one deterministic offline contract builder under `scripts/`",
+        "no `PROFILE_EVAL`, `DERIVE_COLUMN_VALUE`, unproduced control fact",
+        "No local effect field exists on an instruction node",
+        "definite symbol assignment and use",
+        "per-`TG_OP` legal `OLD`/`NEW` access",
+        "Construction cohorts",
+        "outbox insert retargeted to the alias relation",
+        "creates no SQL, DDL, migration",
     ):
         assert phrase in recovery
 

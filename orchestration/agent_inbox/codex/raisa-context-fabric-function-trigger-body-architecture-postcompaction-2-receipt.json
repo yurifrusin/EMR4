@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "audit_and_complete_typed_function_trigger_body_recovery_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete child plan, normative structural-feasibility recovery, normative implementation recovery, recovered design and threat-model delta were reread together with the accepted parent closeout and Sol acceptance. Commit 75c7ed14f9c3ad189a55268867060e6b15e57c06 preserves rejection of the label-only candidate; the current typed candidate must prove discriminated instruction/expression AST closure, twenty-two exact signatures, thirteen trigger declarations, derived column-minimal effects and the four frozen semantic corrections before exact-head veto.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture, recovery and acceptance owner. The completed bounded native authoring lanes supplied only untrusted candidate artifacts; Aristotle remains reserved for a later read-only exact-candidate veto. No worker may self-accept, integrate, push protected refs or open provider, patient/product-data, database/source, runtime, command, deployment or release authority.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at 75c7ed14f9c3ad189a55268867060e6b15e57c06, three commits ahead of origin task 7d42c1ed6628352fa9fe3ca5c7f516431607c881. The index and tracked worktree are clean; the bounded typed candidate and unrelated artifacts remain untracked. Local/origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was completely reread after the latest conversation compaction. The live Current Result accepts the immutable migration/transaction structural parent at c55d25d6c9704ae4612ef2d123158f71302ab411 with canonical digest sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8, and the live Next Implementation directs this exact provider-free unmounted function-and-trigger-body architecture under Yuri's standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/outbox/feed/watcher/listener/source contact, executable or rendered SQL/DDL, migration/database object, app/API/Diary change, operational persistence or credential, command/write expansion, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

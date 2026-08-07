@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_typed_ir_replacement_recovery_boundary",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton directs this provider-free unmounted function-and-trigger-body architecture. The second uncommitted typed candidate failed deterministic admission, and Yuri's standing uninterrupted-development authority directs the narrowest architecture-strengthening Sol recovery without a ceremonial pause.",
+    "current_authority_allocation": "GPT Sol owns conceptual recovery, architecture and acceptance. Godel and Raman performed bounded read-only systemic audits only; Aristotle remains excluded from recovery authoring for later exact-candidate veto. No worker owns self-acceptance, commit, integration, push or protected-ref authority.",
+    "active_plan_and_acceptance": "The original plan, structural-feasibility recovery and implementation recovery remain binding. The new typed-IR recovery preserves the misbound candidate rejection, rebuilds all predicates/bodies/effects/graph from zero, permits one offline deterministic builder plus semantic validator, removes authored effects and opaque derivation labels, and requires cohort validation plus fresh candidate-independent veto.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener contact, rendered or executable SQL/DDL, migration/database object, app/API/Diary change, operational credential/persistence, command/write expansion, runtime wiring, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked artifacts remain untouched and unstaged.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at 75c7ed14f9c3ad189a55268867060e6b15e57c06, three commits ahead of origin task 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean; only explicit recovery-owned files and preserved unrelated untracked artifacts are present."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "function_trigger_body_typed_ir_recovery_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled two bounded systemic audits and froze the replacement boundary before commit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Two native auditors returned read-only systemic reports; neither changed files or owns acceptance."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model call is authorised or required for this recovery commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation transport is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewer",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
