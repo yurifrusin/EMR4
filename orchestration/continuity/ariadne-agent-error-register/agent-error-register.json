@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 60,
+  "register_revision": 62,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1983,7 +1983,11 @@
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-independent-veto.md",
         "docs/ariadne-agent-error-correction-register-revision-58.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-independent-veto.md",
-        "docs/ariadne-agent-error-correction-register-revision-60.md"
+        "docs/ariadne-agent-error-correction-register-revision-60.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-9-independent-veto.md",
+        "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-sol-acceptance.md",
+        "docs/ariadne-agent-error-correction-register-revision-61.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
@@ -1991,8 +1995,8 @@
       "recurrence_signature": "orchestrator.durability_database_admission_anchor_redelivery_rotation_underfrozen",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Recovery 9 retains bounded PRIMARY/CONFLICT admission, purge-safe comparison, the sole owner-private immutable alias bijection, exact low-XID32 provenance, the all-UPDATE appointment constraint trigger, the rule that no-write savepoints not database-observable do not weaken tuple evidence, removal of the persistent outbox-to-product-event foreign key, 44 executable RLS policies and the digest-resealed semantic validator. It declares entry-point and trigger bodies absent and requires a structural renderer to omit entry-point functions, trigger functions, trigger declarations and execute grants; resealed mutations flip each prohibition. DDL remains blocked behind a reviewed function-and-trigger-body architecture. The admission receiver's ownership, six reads, sole INSERT and empty execute list are exact; appointments SELECT and product UPDATE widening fail. Acceptance remains pending.",
+        "status": "recovery_lease_applied",
+        "action": "Recovery 9 retains bounded PRIMARY/CONFLICT admission, purge-safe comparison, the sole owner-private immutable alias bijection, exact low-XID32 provenance, the all-UPDATE appointment constraint trigger, the rule that no-write savepoints not database-observable do not weaken tuple evidence, removal of the persistent outbox-to-product-event foreign key, 44 executable RLS policies and the digest-resealed semantic validator. It declares entry-point and trigger bodies absent and requires a structural renderer to omit entry-point functions, trigger functions, trigger declarations and execute grants; resealed mutations flip each prohibition. DDL remains blocked behind a reviewed function-and-trigger-body architecture. Admission ownership and privileges are exact; appointments SELECT and product UPDATE widening fail. Independent veto and exact test reconciliation passed at c55d25d6c9704ae4612ef2d123158f71302ab411.",
         "prevention_control": "Before accepting a database realization, trace valid/duplicate/conflicting inputs into bounded receiver evidence; prove purge-safe redelivery and independent anchor fences; enumerate atomic members and key scope; reconcile every data prohibition against exact catalogue columns, types, keys, delete actions, privileges and triggers; attack every private helper by standalone invocation; render XID and subtransaction semantics for the target PostgreSQL version; derive positive and negative event obligations from database transitions; require database evidence for command coupling; and prove forward/reverse identity uniqueness, concurrency, rollback and delete/recreate non-reuse for every pseudonymous mapping.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
@@ -2010,10 +2014,14 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-7-independent-veto.md",
           "docs/ariadne-agent-error-correction-register-revision-58.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-independent-veto.md",
-          "docs/ariadne-agent-error-correction-register-revision-60.md"
+          "docs/ariadne-agent-error-correction-register-revision-60.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-9-independent-veto.md",
+          "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-sol-acceptance.md",
+          "docs/ariadne-agent-error-correction-register-revision-61.md"
         ]
       },
-      "status": "open"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0052",
@@ -2243,6 +2251,43 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-8-review-packet-missing-paths-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-60.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0058",
+      "attempt_id": "raisa-context-fabric-durability-migration-transaction-architecture-continuity-update-001",
+      "observed_on": "2026-08-06",
+      "tranche": "raisa-context-fabric-durability-migration-transaction-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Repository continuity updaters that import the scripts package must be invoked as Python modules from the repository root so the package import path is deterministic.",
+      "observed_error": "Sol first invoked the new continuity updater by filesystem path. Python failed closed at import with ModuleNotFoundError before the updater could write Continuity, Compass or the report.",
+      "detection_method": "The command exited non-zero with ModuleNotFoundError: No module named scripts; inspection confirmed the updater had made no continuity write.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-continuity-invocation-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-62.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed invocation is preserved. The distinct successor invokes python -m scripts.raisa_provider_free_unmounted_durability_migration_transaction_architecture_continuity_update from the repository root, then verifies revisions and continuity tests.",
+        "prevention_control": "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-continuity-invocation-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-62.md"
         ]
       },
       "status": "corrected"

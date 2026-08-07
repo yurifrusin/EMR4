@@ -1,0 +1,82 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_provider_free_unmounted_durability_migration_transaction_architecture",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton and Yuri's standing uninterrupted-gate authority permit acceptance of this pure provider-free unmounted structural/signature architecture after a fresh exact-head independent veto. The next tranche is function-and-trigger-body architecture, but this requested pause prevents opening it now.",
+    "current_authority_allocation": "GPT Sol owns acceptance, continuity, explicit-path task-branch integration and closeout. Candidate-independent native reviewers held read-only veto authority only. No worker or reviewer could write, self-accept, push, move protected refs or open provider, database/source, runtime, product-data or command authority.",
+    "active_plan_and_acceptance": "Exact candidate c55d25d6c9704ae4612ef2d123158f71302ab411 and canonical contract sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8 pass after eight preserved rejections and the ninth independent no-P0-P2 veto. The candidate packet passed 212/212, the frozen reviewer packet passed 155/155, and the final continuity-bound packet passed 217/217. Continuity is revision 229, Compass 211 and AER revision 62 has no open incident.",
+    "protected_evidence_boundaries": "Acceptance is declarative architecture only. Nine entry-point bodies, thirteen trigger-function bodies, all trigger declarations and execute grants remain machine-omitted. No executable SQL/DDL, migration, database/outbox/feed/watcher/listener/source, persistence, credentials, patient/product/protected data, provider, route, command/write, runtime, deployment, production, release, Pages or protected-ref action is authorised. docs/branding and all unrelated untracked artifacts remain preserved and excluded.",
+    "git_refs_and_worktree": "The task branch codex/ariadne-bernie-davida-parallel-seam remains at exact accepted source HEAD c55d25d6c9704ae4612ef2d123158f71302ab411 before closeout commit, with bounded closeout changes plus preserved untracked files. Review worktree C:/Users/sarashera/EMR4-worktrees/r32 passed clean postflight at the exact source HEAD. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_pre_verifier_acceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled the exact passing veto, the frozen reviewer packet, the complete deterministic lineage packet and continuity closeout."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The ninth candidate-independent exact-head reviewer completed read-only with no P0-P2 finding."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model review or runtime provider call is authorised or required."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-9-review-worktree-postflight.json"
+  ],
+  "assigned_agent_ids": []
+}

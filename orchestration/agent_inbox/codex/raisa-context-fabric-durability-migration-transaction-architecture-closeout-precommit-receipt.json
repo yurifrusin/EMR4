@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_explicit_path_durability_migration_transaction_architecture_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The canonical contract remains sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8. Candidate lineage passed 212/212, frozen reviewer reconciliation passed 155/155, final continuity-bound closeout passed 217/217, Ruff and formatting passed, Continuity is 229, Compass 211, and AER revision 62 has no open incident.",
+    "current_authority_allocation": "GPT Sol alone owns closeout acceptance and explicit-path task-branch commit/push. The ninth candidate-independent reviewer returned pass with no P0-P2 finding and held no write, acceptance, integration, provider, database/source, runtime, command or protected-ref authority.",
+    "git_refs_and_worktree": "The task branch is at accepted source HEAD c55d25d6c9704ae4612ef2d123158f71302ab411 before the closeout commit; origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local/origin master and handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. git diff --check passed. Review worktree r32 postflight is clean at the exact source HEAD.",
+    "live_handover_current_baton": "The live baton now records the accepted durability migration/transaction structural architecture at c55d25d6c9704ae4612ef2d123158f71302ab411 and directs a function-and-trigger-body architecture next. Yuri requested a pause and architectural summary after this tranche, so this action closes and commits only the accepted tranche.",
+    "protected_evidence_boundaries": "The explicit staging allowlist contains only this tranche's plan/design/threat, accepted closeout, review and Ariadne receipts, continuity/Compass, correction-register, updater and tests. docs/branding and every unrelated receipt/state/evidence/cost-ledger remain untracked and unstaged. No SQL/DDL, migration, database/source, product/patient data, provider, command, runtime, deployment, release, Pages or protected-ref action is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

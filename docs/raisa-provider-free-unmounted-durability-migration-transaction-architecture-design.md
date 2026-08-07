@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: ninth recovered design candidate pending independent veto
+Status: accepted architecture design
 
 ## Purpose
 

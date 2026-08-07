@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_candidate_independent_exact_path_read_only_veto_for_ninth_durability_architecture_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate c55d25d6 closes the recovery-8 machine asymmetry with exact true fields requiring omission of trigger declarations and execute grants in addition to entry-point and trigger-function omission. Independent digest-resealed mutations flip both new fields. Contract hash is sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8 and all 212 complete lineage tests pass. AER-0051 remains open pending this veto; AER-0056 and AER-0057 are corrected process evidence outside reviewer scope.",
+    "current_authority_allocation": "GPT Sol retains architecture and acceptance ownership. Because the fixed four-thread tree cannot create a new chat, the bounded fallback is a new exact-path turn on /root/durability_migration_recovery6_veto. That reviewer last inspected recovery 6, did not inspect or author recoveries 7-9, and receives no prior-review or AER files. It has no Git-command, edit, provider, database/source, patient/product-data, command, runtime, acceptance, integration, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r32 is clean on codex/review-durability-migration-transaction-plan-recovery-9-c55d25d6 at exact full HEAD c55d25d6c9704ae4612ef2d123158f71302ab411; its worktree preflight and all twenty exact-path existence checks passed. The main task branch is at the same candidate with post-candidate review evidence pending. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; user-owned docs/branding remains preserved outside the reviewer worktree.",
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted migration-and-transaction architecture descendant. Exact recovery-9 candidate c55d25d6c9704ae4612ef2d123158f71302ab411 is pending and cannot admit the function-and-trigger-body architecture unless an independent exact-head veto returns one pass with no P0-P2 finding.",
+    "protected_evidence_boundaries": "Reviewer access is limited to twenty exact preflighted candidate, API Spine and parent/source durability lineage paths. No AGENTS, implementation history, prior review, AER, inbox, protected holdout, unrelated file, Git discovery, provider/model call, database/source/network contact, write/cache, app execution, DDL/migration, patient/product data, deployment, Pages or protected-ref action is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

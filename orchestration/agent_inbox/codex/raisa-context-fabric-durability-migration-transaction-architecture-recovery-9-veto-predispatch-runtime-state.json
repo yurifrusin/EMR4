@@ -1,0 +1,89 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_candidate_independent_exact_path_read_only_veto_for_ninth_durability_architecture_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover directs the provider-free unmounted migration-and-transaction architecture descendant. Exact recovery-9 candidate c55d25d6c9704ae4612ef2d123158f71302ab411 is pending and cannot admit the function-and-trigger-body architecture unless an independent exact-head veto returns one pass with no P0-P2 finding.",
+    "current_authority_allocation": "GPT Sol retains architecture and acceptance ownership. Because the fixed four-thread tree cannot create a new chat, the bounded fallback is a new exact-path turn on /root/durability_migration_recovery6_veto. That reviewer last inspected recovery 6, did not inspect or author recoveries 7-9, and receives no prior-review or AER files. It has no Git-command, edit, provider, database/source, patient/product-data, command, runtime, acceptance, integration, protected-ref, deployment or release authority.",
+    "active_plan_and_acceptance": "Candidate c55d25d6 closes the recovery-8 machine asymmetry with exact true fields requiring omission of trigger declarations and execute grants in addition to entry-point and trigger-function omission. Independent digest-resealed mutations flip both new fields. Contract hash is sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8 and all 212 complete lineage tests pass. AER-0051 remains open pending this veto; AER-0056 and AER-0057 are corrected process evidence outside reviewer scope.",
+    "protected_evidence_boundaries": "Reviewer access is limited to twenty exact preflighted candidate, API Spine and parent/source durability lineage paths. No AGENTS, implementation history, prior review, AER, inbox, protected holdout, unrelated file, Git discovery, provider/model call, database/source/network contact, write/cache, app execution, DDL/migration, patient/product data, deployment, Pages or protected-ref action is permitted.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r32 is clean on codex/review-durability-migration-transaction-plan-recovery-9-c55d25d6 at exact full HEAD c55d25d6c9704ae4612ef2d123158f71302ab411; its worktree preflight and all twenty exact-path existence checks passed. The main task branch is at the same candidate with post-candidate review evidence pending. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; user-owned docs/branding remains preserved outside the reviewer worktree."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "durability_migration_transaction_architecture_recovery_9_veto_predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed exact recovery-9 candidate c55d25d6 after the complete 212-test deterministic gate and preflighted full SHA plus all twenty packet paths."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The fixed thread tree permits a new exact-path turn on an idle candidate-independent reviewer but no new child thread."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model review or candidate-runtime provider call is authorised."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "workspace_id": "durability-migration-transaction-recovery-9-review-r32",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/r32",
+      "branch": "codex/review-durability-migration-transaction-plan-recovery-9-c55d25d6",
+      "head": "c55d25d6c9704ae4612ef2d123158f71302ab411",
+      "clean": true,
+      "artifact": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-9-review-worktree-preflight.json"
+    }
+  ],
+  "assigned_agent_ids": []
+}

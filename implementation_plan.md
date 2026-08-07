@@ -503,7 +503,13 @@ generation rehearsal. The architecture-only provider-free default-off
   while the contract named only entry-point and trigger-function omission plus
   non-effective grants. Recovery 9 adds exact positive omission fields for
   trigger declarations and execute grants with independent digest-resealed
-  mutations. No applied migration, live
+  mutations. Exact candidate `c55d25d6c9704ae4612ef2d123158f71302ab411`
+  then passed an independent no-P0-P2 veto; Sol reconciled the review worktree
+  clean and separately completed the exact 155-test reviewer packet after the
+  reviewer's output capture ended before its terminal count. The accepted
+  result is structural/signature architecture only. The next safe descendant
+  is the provider-free unmounted function-and-trigger-body architecture; DDL
+  remains blocked. No applied migration, live
   implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates

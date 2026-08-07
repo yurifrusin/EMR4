@@ -1,0 +1,16 @@
+{
+  "schema_version": "emr4.agent_error_receipt.v1",
+  "incident_id": "AER-0058",
+  "observed_on": "2026-08-06",
+  "stage": "continuity_update",
+  "status": "failed_closed",
+  "command_intent": "Advance Continuity and Compass using the accepted migration/transaction architecture updater.",
+  "observed_error": "Direct filesystem-path invocation failed before import with ModuleNotFoundError: No module named scripts.",
+  "continuity_written": false,
+  "compass_written": false,
+  "candidate_changed": false,
+  "provider_or_model_calls": 0,
+  "database_or_source_contacts": 0,
+  "protected_refs_moved": false,
+  "correction": "Invoke the updater as a repository package module and verify the resulting revisions and tests."
+}

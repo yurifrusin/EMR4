@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: ninth recovered architecture candidate pending independent veto
+Status: accepted architecture threat-model delta
 
 ## Trust boundaries and assets
 
