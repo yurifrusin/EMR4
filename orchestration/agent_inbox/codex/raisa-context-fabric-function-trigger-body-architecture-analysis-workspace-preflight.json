@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.workspace_preflight.v1",
+  "purpose": "read_only_function_trigger_body_architecture_analysis",
+  "worktree": "C:\\Users\\sarashera\\emr4",
+  "branch": "codex/ariadne-bernie-davida-parallel-seam",
+  "head": "f1de5fbb903e304ca4923bb17cbee00e5f955bd7",
+  "origin_task_head_before_dispatch": "7d42c1ed6628352fa9fe3ca5c7f516431607c881",
+  "tracked_worktree_clean": true,
+  "tracked_index_clean": true,
+  "protected_refs": {
+    "master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  },
+  "owned_files": [],
+  "write_authority": "none",
+  "provider_calls_authorized": 0,
+  "database_connections_authorized": 0,
+  "preserved_untracked_boundaries": [
+    "docs/branding/",
+    "all unrelated untracked files"
+  ]
+}

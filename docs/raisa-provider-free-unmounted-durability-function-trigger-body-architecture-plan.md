@@ -2,7 +2,8 @@
 
 Date: 2026-08-07
 
-Status: frozen plan pending independent challenge and implementation
+Status: initial plan superseded by bounded structural-feasibility recovery;
+corrected plan frozen pending implementation
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -13,6 +14,9 @@ Parent source HEAD:
 Parent contract:
 `sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8`
 
+Normative recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-recovery.md`
+
 ## Objective
 
 Freeze the exact machine-readable bodies for the nine security-definer entry
@@ -20,7 +24,10 @@ points and thirteen trigger functions deliberately omitted by the accepted
 durability migration/transaction structural architecture. The child contract
 must make control flow, relation and column references, lock order, database
 effects, failure SQLSTATEs, trigger return behavior, privilege effects and the
-later renderer order deterministic without rendering or executing SQL.
+later renderer order deterministic without rendering or executing SQL. It must
+preserve the accepted parent artifact byte-for-byte, bind its hash, apply only
+the closed normative recovery delta, and mechanically derive one effective
+parent before body validation.
 
 The intended result is
 `raisa_provider_free_unmounted_durability_function_trigger_body_architecture_pass`.
@@ -55,15 +62,18 @@ The governing sources are `orchestration/api_spine_adr.md`,
 
 This tranche may add only:
 
-- this plan, one design and one threat-model delta;
+- this plan, its normative recovery, one design and one threat-model delta;
 - one child contract and whole-contract JSON Schema under a new
   `orchestration/continuity/` directory;
 - static and authored-synthetic adversarial tests;
 - bounded read-only analysis and independent-veto artifacts; and
 - closeout, acceptance, error-register and Continuity/Compass artifacts.
 
-The parent contract and every application/API artifact are immutable inputs.
-No `app/**`, `alembic/**`, `docs/diary/**`, `docs/api-spine/**`, runtime
+The accepted parent contract and every application/API artifact are immutable
+inputs. The child may contain one closed
+`structural_feasibility_recovery_v1` delta exactly matching the normative
+recovery; no other override is legal. No `app/**`, `alembic/**`,
+`docs/diary/**`, `docs/api-spine/**`, runtime
 configuration, existing model, source adapter or parent contract may change.
 Preserve and exclude `docs/branding/` and every unrelated untracked
 receipt/state/evidence/cost-ledger artifact.
@@ -99,7 +109,10 @@ It must also bind exactly these thirteen trigger functions:
 13. `cf_fence_outbox_v1`.
 
 No helper, overload, generic procedure or unlisted body may be introduced. The
-accepted `session_binding_allows_v1` support-function body remains unchanged.
+effective-parent delta may change only the existing
+`session_binding_allows_v1` signature/body to add exact stream scoping; it does
+not add a support function. The child still contains exactly nine entry-point
+and thirteen trigger body programs.
 
 ## Normative body-program representation
 
@@ -131,12 +144,26 @@ generic execute, recursion, exception swallowing, autonomous retry, transaction
 control, savepoints, DDL, role change, configuration mutation, notification,
 network/file access or extension calls.
 
+The finite vocabulary must additionally close, rather than imply, exact
+trigger context assertions; legal `OLD`/`NEW` access; `session_user`;
+transaction isolation and transaction timestamp; PostgreSQL-16 current-XID32
+derivation and system `xmin`; exact-cardinality loads; fixed JSON-key
+extraction and typed casts; `IS DISTINCT FROM`; timestamp-plus-minutes;
+domain-separated canonical digests; `gen_random_uuid()` as the only opaque UUID
+generator; unique-insert winner reload/compare; and typed
+`RETURN_NEW`/`RETURN_OLD`/`RETURN_NULL`. These are named closed primitives, not
+generic function calls or free-form expressions.
+
 Every identifier is selected from the parent type/relation/column/function
 catalogue or the exact read-only existing-model fields parsed from
 `app/models/appointments.py`, `app/models/diary_events.py`,
-`app/routers/appointments.py` and
-`app/services/appointment_idempotency.py`. Those application files are
-evidence-only and may not change.
+`app/routers/appointments.py`, `app/services/appointment_idempotency.py`,
+`app/services/diary_committed_events.py` and
+`app/schemas/diary_events.py`. Those application files are evidence-only and
+may not change. Application relations are identified as `public.<relation>`;
+fabric relations and types are identified as
+`emr4_context_fabric.<identifier>`. The body contract may not use an
+unqualified relation or type.
 
 ## Body effect and authority closure
 
@@ -154,20 +181,28 @@ The effect summary must be mechanically rederived from the body program and
 must equal the declared exact value. A widened read, DML effect, lock, call,
 return or error surface fails even when the contract digest is resealed.
 
-The parent privilege matrix remains a ceiling. The admission receiver retains
-only its exact source/generation/checkpoint/receipt/key/binding reads plus
-admission `INSERT`. The producer can reach the owner-private alias bridge only
-through `project_update_confirm_reschedule_v1`. Observer, coordinator,
-lifecycle, retention and application-read principals receive no product UUID
-path. Trigger functions are owner-internal and receive no runtime execute
-grant.
+The effective-parent privilege matrix after the closed recovery delta is the
+ceiling. The non-login schema owner receives exact `SELECT` only on the four
+qualified application tables needed by the producer and fences; it receives no
+application-table `INSERT`, `UPDATE` or `DELETE`. Existing route-owned product
+locks remain held by the same top-level transaction, and the projection body
+reselects and proves those rows without acquiring or inventing a product DML
+privilege. The admission receiver gains the exact active binding read required
+to record `observer_binding_revision`, plus its already accepted source,
+generation, checkpoint, receipt and key reads and admission `INSERT`. No
+runtime role gains direct product-table access. Migration-only trigger
+installation authority is not runtime authority and must not survive as a
+runtime grant. The producer can reach the owner-private alias bridge only
+through `project_update_confirm_reschedule_v1`. Trigger functions are
+owner-internal and receive no runtime execute grant.
 
 ## Entry-point semantic closure
 
 The body programs must freeze at least these non-negotiable effects:
 
-- **Producer projection:** rederive the exact producer binding; lock and prove
-  the current top-level transaction's eligible `IN_PROGRESS` update-confirm
+- **Producer projection:** rederive the exact producer binding including its
+  one stream; reselect under the existing route-held transaction locks and
+  prove the current top-level transaction's eligible `IN_PROGRESS` update-confirm
   claim, appointment tuple, audit and sole committed reschedule event; enforce
   the exact PostgreSQL-16 low-XID32 comparison and immutable transaction-start
   timestamp; create-or-reload one immutable bijective opaque alias; lock one
@@ -182,19 +217,34 @@ The body programs must freeze at least these non-negotiable effects:
   current anchor, admission/receipt and dependent rows in the accepted order;
   make clean exact redelivery source-independent and inert; force conflict,
   demonstrated gap, predecessor/epoch, key or admission uncertainty to an
-  atomic rebase; and atomically write receipt, watermarks, one-way retirement,
-  coalesced obligation, decision lifecycle, minimized audit and checkpoint.
+  atomic rebase; atomically write receipt where a PRIMARY exists, watermarks,
+  one-way retirement, coalesced obligation, decision lifecycle, minimized audit
+  and checkpoint; and return the closed effective-parent
+  `durability_transition_result_v1`, which truthfully distinguishes receipt
+  apply/replay from rebase/terminal apply/replay without fabricating a PRIMARY.
 - **Registration/anchor/rotation/consumption:** keep lifecycle authority
-  separate; establish exact baseline state and key partition; independently
+  separate; establish the stream head when absent, exact checkpoint, frames,
+  watermarks, initial key interval and baseline anchor; independently
   reverify before an anchor append; future-fence a generation-local rotation;
-  and permit only one-way terminal generation transitions.
-- **Retention:** lock the shared registry barrier; derive the complete
+  and permit only one-way terminal generation transitions with a durably
+  stored exact terminal reason. Exact rotation replay is detected before the
+  new-effect anchor fence; a different replay fails.
+- **Retention:** assert `SERIALIZABLE`, lock the shared registry barrier;
+  derive the complete
   non-consumed-generation census, slowest checkpoint, pins, key overlap and
   policy grace in the database; return eligibility without caller authority;
   and permit deletion only from the payload-free source relation, only through
   the exact admitted position, only when execution is enabled and the same
   eligibility is rederived in the purge transaction. No cascade or product
   event/alias/admission/anchor/receipt/checkpoint/audit deletion is permitted.
+  Eligibility uses its dedicated closed retention-reason vocabulary, not an
+  observation-decision reason.
+
+Registration accepts one typed `initial_key_interval`; its start must equal
+the newly established checkpoint plus one. Recovery pins remain inert and
+ungrantable in this descendant: their later create/release authority requires
+a separately accepted lifecycle gate, while retention conservatively honours
+any valid rows. No current entry point falsely claims to enforce pin mutation.
 
 The body contract must preserve the exact retry boundary: `40001` and `40P01`
 propagate to the caller for a complete-transaction retry outside the function;
@@ -221,6 +271,15 @@ Trigger bodies may not grant direct runtime execute, read product state outside
 their exact parent invariant, mutate business truth, generate a replacement
 ContextFrameSet or catch and downgrade an error.
 
+The exact per-trigger applicability, row-image, shared-table escape/adoption,
+check-in exclusion, alias-reuse, stream-head baseline and retention-delete
+matrix in the normative recovery is binding. Every deferred fence is read-only,
+lock-free, sibling-call-free and independently valid against final transaction
+state; no fence relies on cross-table trigger firing order. For the exact
+producer appointment, a second same-top-level-transaction update is rejected
+by detecting current-XID provenance in `OLD`, so queued temporal and
+non-temporal obligations cannot conflict.
+
 ## Failure contract
 
 The child contract must define one exact closed failure registry. Every custom
@@ -239,12 +298,14 @@ propagate and roll back.
 
 The child contract must freeze the only admissible later inert renderer order:
 
-1. parent schema/types/relations/constraints/RLS and unchanged support helper;
+1. the mechanically derived effective-parent schema/types/relations,
+   constraints/RLS and stream-scoped existing support helper;
 2. the nine entry-point signatures plus mechanically lowered body programs;
 3. the thirteen trigger-function signatures plus mechanically lowered body
    programs;
 4. the thirteen parent trigger declarations;
-5. `PUBLIC` revocation and the exact parent execute grants; and
+5. `PUBLIC` revocation, exact effective-parent non-login/receiver grants,
+   migration-only trigger installation and exact runtime execute grants; and
 6. static catalogue and privilege assertions.
 
 This tranche does not perform that lowering. It emits no `CREATE`, `ALTER`,
@@ -256,10 +317,13 @@ review.
 
 Acceptance must mechanically prove:
 
-1. exact parent hash/schema/body-boundary binding and unchanged parent files;
+1. exact parent hash/schema/body-boundary binding, byte-unchanged parent files,
+   exact recovery delta and deterministic effective-parent derivation;
 2. exactly nine entry-point and thirteen trigger bodies, with no overload or
    helper drift;
-3. every parent signature, owner, invariant and trigger mapping is preserved;
+3. every parent signature, owner, invariant and trigger mapping is preserved
+   except the closed typed coordinator result and stream-scoped helper changes
+   explicitly authorized by the recovery delta;
 4. every body program validates against the whole-contract child schema;
 5. every instruction, expression, identifier, relation, column, function call,
    `TG_OP`, row image, return and SQLSTATE belongs to the exact allowlist;
@@ -285,7 +349,12 @@ Acceptance must mechanically prove:
     SQLSTATE/return, incomplete `TG_OP`, non-temporal publication, source read
     on redelivery, direct alias access, internal retry, dynamic/raw SQL,
     transaction control, DDL/grant text, product-event retention pin, cascade,
-    filtered census, body omission, extra body and call cycle; and
+    filtered census, body omission, extra body, call cycle, unqualified
+    application relation, `current_user` substitution, stream omission,
+    alias-current-XID overreach, check-in capture, prior-event retention
+    rejection, unauthorised outbox deletion, wrong `OLD`/`NEW` image,
+    same-transaction second appointment update, order-dependent fence, missing
+    initial key, fabricated receipt result or ambiguous retention reason; and
 17. explicit Git pre/postflight proves that no application, migration, API,
     Diary, parent contract, database/runtime, provider/data, deployment or
     protected artifact changed.
@@ -305,8 +374,10 @@ database privileges, migration locks, performance or operational safety.
 
 ## Recovery and stop
 
-A deterministic schema/test defect may receive one bounded correction. A
-conceptual defect in body completeness, privilege/effect closure, trigger
+A deterministic schema/test defect may receive one bounded correction. The
+initial plan at `f1de5fbb903e304ca4923bb17cbee00e5f955bd7` invoked this
+recovery before body authoring; it is evidence, not an implementation source.
+Any conceptual defect in body completeness, privilege/effect closure, trigger
 totality, current-XID/temporal fencing, admission conflict handling,
 coordinator atomicity, anchor/key lifecycle, retention census or API
 classification invokes Sol's recovery lease and a fresh candidate-independent

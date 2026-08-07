@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_read_only_entry_point_and_trigger_body_architecture_analyses",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan binds the accepted parent hash, requires all twenty-two bodies to use the closed body_program_v1 instruction representation, exact effect rederivation, finite failure semantics, trigger totality and a later deterministic renderer order. The focused plan/API test set passed 40 tests before commit.",
+    "current_authority_allocation": "GPT Sol retains plan, architecture, implementation-allocation, recovery and acceptance authority. Godel receives a read-only nine-entry-point analysis and Raman receives a read-only thirteen-trigger-function analysis. They own no files, may not edit or commit, and provide advisory findings rather than terminal acceptance. Aristotle remains reserved for an exact later candidate veto.",
+    "git_refs_and_worktree": "Exact analysis source is task commit f1de5fbb903e304ca4923bb17cbee00e5f955bd7 in C:\\Users\\sarashera\\emr4. The tracked worktree and index are clean. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881 until the bounded task branch is later pushed. The workspace receipt is raisa-context-fabric-function-trigger-body-architecture-analysis-workspace-preflight.json.",
+    "live_handover_current_baton": "The task-branch plan at f1de5fbb903e304ca4923bb17cbee00e5f955bd7 is the exact next descendant: provider-free unmounted function-and-trigger-body architecture. Two analytical lanes may challenge it before any child contract is authored; the final independent veto lane remains unused.",
+    "protected_evidence_boundaries": "Analysis is repository-local and read-only. No app, Alembic, API Spine, Diary or parent contract mutation; no rendered or executable SQL/DDL; no database/source/network/provider call; no patient/product/protected data; no runtime, command/write expansion, deployment, release, Pages or protected-ref movement. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

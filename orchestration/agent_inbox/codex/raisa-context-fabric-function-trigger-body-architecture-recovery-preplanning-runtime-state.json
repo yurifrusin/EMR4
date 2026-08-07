@@ -1,0 +1,82 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "recover_function_trigger_body_architecture_structural_feasibility",
+  "source_evidence": {
+    "live_handover_current_baton": "The provider-free unmounted function-and-trigger-body architecture remains the live descendant. The initial frozen plan at f1de5fbb903e304ca4923bb17cbee00e5f955bd7 is superseded as an implementation source by a bounded recovery because its read-only semantic analyses found structural infeasibilities before any body contract was authored.",
+    "current_authority_allocation": "GPT Sol owns the recovery architecture, corrected plan and acceptance. Godel and Raman completed advisory entry-point and trigger analyses with no writes or acceptance authority. Aristotle remains unused and candidate-independent for the eventual exact-head veto. No external provider worker is active.",
+    "active_plan_and_acceptance": "Recovery must preserve the accepted parent artifact immutably and add one explicit effective-parent delta covering exact non-runtime privileges, stream binding, typed coordinator outcome, registration key baseline, terminal reason, retention reasons, stream-head baseline writer, alias reuse, trigger applicability, exact namespaces, aggregate-revision derivation and the finite body AST. The corrected plan must retain exactly nine entry points and thirteen trigger functions and keep all SQL/DDL unrendered.",
+    "protected_evidence_boundaries": "This remains repository-local architecture metadata and tests only. No application, Alembic, API Spine, Diary or accepted parent artifact may change; no rendered/executable SQL or DDL; no database/source/network/provider call; no patient/product/protected data; no runtime, command/write expansion, deployment, release, Pages or protected-ref movement. docs/branding and all unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "Task HEAD is f1de5fbb903e304ca4923bb17cbee00e5f955bd7 on codex/ariadne-bernie-davida-parallel-seam. The tracked index/worktree are clean; only the current analysis state/receipt/workspace files and pre-existing user-owned artifacts are untracked. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "function_trigger_body_architecture_recovery_preplanning_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol received both completed advisory analyses and is invoking the bounded architecture recovery lease."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Two advisory analysts completed without writes; the independent veto agent remains unused."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model call is authorized or required for recovery planning."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-analysis",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-analysis-workspace-preflight.json"
+  ],
+  "assigned_agent_ids": []
+}

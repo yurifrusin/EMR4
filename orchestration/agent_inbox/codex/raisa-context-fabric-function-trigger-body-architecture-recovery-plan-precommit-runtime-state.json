@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_corrected_function_trigger_body_architecture_recovery_plan",
+  "source_evidence": {
+    "live_handover_current_baton": "The provider-free unmounted body architecture remains next. The initial f1de5fb plan was challenged before body authoring and is now corrected by a normative structural-feasibility recovery while the accepted parent stays byte-immutable.",
+    "current_authority_allocation": "GPT Sol authored and owns the recovery. Godel and Raman supplied read-only advisory entry-point and trigger analyses with no writes or terminal acceptance. Aristotle remains candidate-independent for the later implementation veto.",
+    "active_plan_and_acceptance": "The corrected plan and normative recovery freeze an effective-parent delta for stream scoping, exact non-login privileges, typed coordinator outcome, initial key baseline, terminal and retention reasons, aggregate-revision derivation, alias reuse, stream-head baseline, shared-table trigger applicability and a finite PostgreSQL/trigger AST. Five focused plan tests pass; Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "Commit contains only corrected architecture planning/tests and this tranche's Ariadne analysis/recovery state/receipt files. The accepted parent and all app, Alembic, API Spine and Diary files remain unchanged. No SQL/DDL, database/source/provider/data/runtime/command/deployment/Pages/protected-ref action. docs/branding and all unrelated untracked artifacts remain excluded.",
+    "git_refs_and_worktree": "Before recovery-plan commit, task HEAD is f1de5fbb903e304ca4923bb17cbee00e5f955bd7; origin task is 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are limited to the child plan/test; the recovery document and current Ariadne artifacts are untracked inside the exact commit allowlist."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "function_trigger_body_architecture_recovery_plan_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol incorporated both completed advisory analyses into one closed normative recovery."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No worker receives implementation authority before corrected plan commit and a distinct implementation predispatch receipt."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider/model call occurred."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-analysis",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

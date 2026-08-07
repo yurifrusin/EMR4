@@ -7,6 +7,10 @@ PLAN = ROOT / (
     "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
     "architecture-plan.md"
 )
+RECOVERY = ROOT / (
+    "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
+    "architecture-recovery.md"
+)
 PARENT = ROOT / (
     "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-"
     "transaction-architecture/migration-transaction-architecture-contract.json"
@@ -20,6 +24,10 @@ def _plan() -> str:
 
 def _parent() -> dict:
     return json.loads(PARENT.read_text(encoding="utf-8"))
+
+
+def _recovery() -> str:
+    return RECOVERY.read_text(encoding="utf-8")
 
 
 def test_plan_binds_exact_parent_and_complete_body_population() -> None:
@@ -39,7 +47,7 @@ def test_plan_binds_exact_parent_and_complete_body_population() -> None:
 
 
 def test_plan_uses_closed_programs_and_exact_effect_rederivation() -> None:
-    plan = _plan().lower()
+    plan = "\n".join((_plan(), _recovery())).lower()
     for phrase in (
         "body_program_v1",
         "pl/pgsql prose",
@@ -50,12 +58,16 @@ def test_plan_uses_closed_programs_and_exact_effect_rederivation() -> None:
         "no dynamic/generic execution path",
         "standard retryable postgresql sqlstates remain unaltered",
         "does not perform that lowering",
+        "trigger context",
+        "system `xmin`",
+        "return_new`/`return_old`/`return_null",
+        "unique insert followed by winner reload/compare",
     ):
         assert phrase in plan
 
 
 def test_plan_preserves_api_spine_and_data_authority_boundaries() -> None:
-    plan = _plan()
+    plan = " ".join(_plan().split())
     for phrase in (
         "GraphQL remains read-only and unchanged",
         "REST/OpenAPI remains the only command plane and gains no operation",
@@ -67,6 +79,28 @@ def test_plan_preserves_api_spine_and_data_authority_boundaries() -> None:
         "docs/branding",
     ):
         assert phrase in plan
+
+
+def test_recovery_closes_effective_parent_and_trigger_feasibility() -> None:
+    recovery = " ".join(_recovery().split())
+    for phrase in (
+        "`structural_feasibility_recovery_v1`",
+        "It does not rewrite the accepted parent artifact",
+        "One stream per active service binding",
+        "`public.appointment_command_idempotency`",
+        "`context_admission_receiver` adds exact `SELECT`",
+        "`durability_transition_result_v1`",
+        "`initial_key_interval future_key_interval_v1`",
+        "`terminal_reason generation_terminal_reason`",
+        "`source_retention_reason`",
+        "No locked product revision is invented",
+        "a reused alias is an older immutable exact",
+        "Exact trigger applicability and return matrix",
+        "check-in remains outside",
+        "Every deferred fence is read-only, lock-free, sibling-call-free",
+        "second same-transaction appointment update",
+    ):
+        assert phrase in recovery
 
 
 def test_plan_keeps_ddl_and_database_execution_in_later_gates() -> None:
