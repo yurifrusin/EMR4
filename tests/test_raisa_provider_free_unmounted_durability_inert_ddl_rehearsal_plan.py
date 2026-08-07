@@ -120,8 +120,8 @@ def test_six_phase_order_and_population_are_explicit() -> None:
     positions = [
         plan.index("1. exact role/schema/type/relation/constraint/index/forced-RLS"),
         plan.index("2. the nine entry-point functions"),
-        plan.index("3. the thirteen trigger functions"),
-        plan.index("4. the thirteen trigger declarations"),
+        plan.index("3. the fourteen effective trigger functions"),
+        plan.index("4. the fourteen effective trigger declarations"),
         plan.index("5. `PUBLIC` revocation"),
         plan.index("6. non-executed catalogue and privilege expectation comments"),
     ]

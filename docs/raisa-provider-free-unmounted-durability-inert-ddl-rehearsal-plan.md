@@ -2,7 +2,11 @@
 
 Date: 2026-08-07
 
-Status: recovered frozen boundary accepted for bounded implementation
+Status: PostgreSQL-representability recovery active after the first
+implementation and its one bounded worker correction were rejected
+
+Normative PostgreSQL-representability recovery:
+`docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md`
 
 Structural parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -99,7 +103,7 @@ must reconcile the result against the child's effective signatures, roles,
 trigger declarations and qualified identifier catalogue. A missing, additional,
 reordered-with-effect or unknown recovery operation fails before output.
 
-The effective catalogue contains exactly:
+The immutable parent catalogue contains exactly:
 
 - PostgreSQL major 16 and the accepted isolation/XID rules;
 - one `emr4_context_fabric` schema;
@@ -192,10 +196,18 @@ choice may change the preimage.
 - Trigger programs receive only exact legal `TG_OP`, `OLD` and `NEW` row-image
   access and the accepted `RETURN NEW`, `RETURN OLD` or `RETURN NULL` terminal.
 
-The renderer must prove all 22 programs are consumed exactly once and every
+The renderer must prove all 22 immutable parent programs are consumed exactly once and every
 node/expression is lowered exactly once or is the one formally eliminated
 constant-false retry marker. No prose, derived-effect summary or invariant
 label supplies executable semantics.
+
+The normative PostgreSQL-representability recovery is the sole permitted
+effective-body delta. It adds one typed immediate appointment guard, making
+the effective population nine entry points, fourteen trigger functions,
+fourteen trigger declarations and twenty-three programs. It also replaces six
+unrenderable trigger-row `xmin` references with exact keyed pre-effect
+reselections or a recorded paired-guard dependency. Neither the immutable body
+parent nor its historical thirteen-function population is edited.
 
 ## Canonical render phases
 
@@ -204,8 +216,8 @@ The `.sql.inert` artifact has exactly six ordered phases:
 1. exact role/schema/type/relation/constraint/index/forced-RLS catalogue and the
    sole support helper;
 2. the nine entry-point functions in accepted renderer order;
-3. the thirteen trigger functions in accepted renderer order;
-4. the thirteen trigger declarations in accepted parent order;
+3. the fourteen effective trigger functions in recovered renderer order;
+4. the fourteen effective trigger declarations in recovered order;
 5. `PUBLIC` revocation followed by the exact owner, receiver and runtime grants,
    with migration-only trigger-install authority absent from runtime grants;
 6. non-executed catalogue and privilege expectation comments whose exact facts
@@ -260,11 +272,13 @@ Acceptance requires all of the following:
 6. all exact types, eighteen fabric relations, constraints/indexes, forty-four
    RLS policies, roles and the sole support helper reconcile with the effective
    catalogue, while no `public.*` object is created or altered;
-7. exactly nine entry-point and thirteen trigger-function bodies are emitted in
-   accepted order, every body node is accounted for and no helper/overload is
+7. exactly nine entry-point and fourteen effective trigger-function bodies are
+   emitted in recovered order, every immutable and recovered body node is
+   accounted for and no helper/overload beyond the one recovery-owned guard is
    introduced;
-8. exactly thirteen trigger declarations bind the accepted table/timing/level/
-   events/deferrability/function tuple;
+8. exactly fourteen effective trigger declarations bind the accepted or
+   recovered table/timing/level/events/deferrability/function tuple, including
+   the one immediate appointment guard;
 9. every function header, owner, security mode, strictness, volatility,
    parallel safety and fixed search path matches the accepted signature;
 10. revocations and grants match the exact effective role matrix, with no

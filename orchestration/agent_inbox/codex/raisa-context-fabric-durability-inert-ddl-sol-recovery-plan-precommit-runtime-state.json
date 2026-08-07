@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_frozen_postgresql_representability_recovery_plan_and_focused_static_plan_tests",
+  "source_evidence": {
+    "live_handover_current_baton": "The completely reread live baton keeps the inert durability DDL rehearsal current and makes routine architecture-strengthening recovery an uninterrupted Sol responsibility rather than a Yuri gate.",
+    "current_authority_allocation": "GPT Sol owns the recovery plan, acceptance, integration and explicit-path Git action. The consumed DeepSeek correction remains rejected evidence. Gemini 3.6 Flash/high is reserved for a fresh read-only exact-commit plan challenge and cannot self-accept or integrate.",
+    "active_plan_and_acceptance": "The recovery plan now position-closes the one additional immediate appointment guard, exact keyed pre-effect xmin reselections, same-table paired-guard dependencies, producer applicability, empty-set COUNT, helper-before-policy order, constraint-trigger grammar, final owner assertions and fail-closed lock modes. Twelve focused inherited-plus-recovery tests and Ruff pass; no candidate renderer is admitted.",
+    "protected_evidence_boundaries": "This commit contains only named recovery plan/design/threat/test and Ariadne receipt paths. No SQL execution/parser/database/source/outbox/feed/watcher/listener, patient/product data, application/API/Diary/runtime write, deployment, release, Pages or protected ref is opened. All unrelated untracked files, especially docs/branding, remain excluded through explicit-path staging.",
+    "git_refs_and_worktree": "Task HEAD is 4a1cf9ce811a60aab6eac28cb17a72fa8a7aec09 and origin task is c3eed9a56a2dc3c875ecccbc216e59577f154bf6. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary tracked changes are limited to the named recovery plan paths; r38 remains untouched at tracked HEAD 4a1cf9ce with its six rejected candidate paths untracked."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_rehydration_plus_recovery_plan_and_focused_static_test_review",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol plan recovery and all focused checks passed."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini plan challenge follows the exact commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["The correction lane is closed and its evidence is preserved."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

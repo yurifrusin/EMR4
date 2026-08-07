@@ -2,7 +2,11 @@
 
 Date: 2026-08-07
 
-Status: recovered delta accepted for bounded implementation
+Status: PostgreSQL-representability recovery active after rejected worker
+implementation
+
+Normative PostgreSQL-representability recovery:
+`docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md`
 
 ## Scope and assets
 
@@ -52,6 +56,12 @@ runtime credential.
 | Manifest/hash is trusted instead of semantics | Independent recognizer and digest-resealed hostile plan/text mutations test structure after evidence refresh. | Exhaustiveness of adversarial tests remains reviewable. |
 | Render order creates transient broad authority | Objects/bodies/triggers precede revocations/grants; `PUBLIC` revocation precedes exact runtime grants; migration-only installation authority is not a runtime grant. | A real migration needs transaction/rollback and lock planning in a later gate. |
 | Static success is overclaimed as PostgreSQL validity | Evidence and result labels explicitly say closed-subset static rehearsal only. PostgreSQL parse/catalogue/behavior are separate gates. | Server-specific grammar or semantic failures may still be found later. |
+| Empty complete sets are miscounted | `COUNT` lowers to `coalesce(array_length(set, 1), 0)::bigint`; hostile tests require zero for a typed empty array and forbid bare `array_length`. | Server execution remains for the later disposable database gate. |
+| Policy creation references a missing helper | Relations precede the support helper and the helper precedes every dependent RLS policy; manifest dependency edges and statement order are exact. | Live dependency resolution is not yet executed. |
+| Deferred trigger syntax is only superficially trigger-shaped | Every deferrable row fence emits PostgreSQL-16 `CREATE CONSTRAINT TRIGGER` order; immediate guards emit ordinary `CREATE TRIGGER`. Static hostile tests reject swapped forms and deferrability placement. | PostgreSQL parse remains a later gate. |
+| Trigger row images are treated as if they contain `xmin` | Immediate guards reselect system `xmin` by exact primary key before effect. The appointment gets a new immediate guard. Deferred delete fences record only the narrow same-table guard dependency because deleted-row `xmin` cannot be recovered from `OLD`. No emitted body contains `OLD.xmin` or `NEW.xmin`. | The paired-trigger behavior still requires later database-backed rehearsal. |
+| Appointment durability blocks unrelated appointment writers | Both appointment triggers use the same exact producer applicability classifier: zero bindings is inert, one is applicable, duplicate is fail-closed. | Operational binding lifecycle remains deferred. |
+| Fabric objects retain the migration executor as owner | Schema authorization, exact fabric type/relation owner transfers, signature-specific function owners and typed catalogue assertions are mandatory. Application owners remain unchanged and runtime principals receive no ownership or schema `CREATE`. | A future migration executor must have separately reviewed installation authority. |
 
 ## Residual risks deliberately deferred
 

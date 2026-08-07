@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "recover_the_rejected_inert_ddl_candidate_into_a_postgresql_16_representable_parent_contract_and_static_renderer_without_execution",
+  "source_evidence": {
+    "live_handover_current_baton": "The live AGENTS.md baton was reread completely after restoration. It keeps the provider-free unmounted durability inert DDL rehearsal as the active descendant and preserves the standing continuation rule: routine plan revision, worker failure and architecture-strengthening recovery are not Yuri gates.",
+    "current_authority_allocation": "GPT Sol owns architecture, recovery, acceptance, integration and Git. The single permitted DeepSeek correction was consumed and rejected, so the Ariadne orchestrator recovery lease now transfers implementation repair to Sol while preserving both worker receipts as non-transferable evidence. A fresh Gemini 3.6 Flash/high exact-commit veto remains required before acceptance.",
+    "active_plan_and_acceptance": "The accepted recovered inert-DDL plan at task HEAD 4a1cf9ce remains the closed scope. The corrected uncommitted r38 candidate passes 58 local checks but is rejected because empty-array COUNT semantics, support-function dependency order, deferred-trigger grammar, object ownership assertions and trigger OLD.xmin representability do not satisfy PostgreSQL 16. The body parent and DDL descendant require a new explicit recovery rather than silent admission.",
+    "protected_evidence_boundaries": "Only repository-local plan, contract, renderer, inert .sql.inert, manifest, authored-synthetic tests, bounded review receipts, error register and continuity artifacts may change. No SQL may be parsed by or sent to PostgreSQL; no database/source/outbox/feed/watcher/listener, patient/product/protected data, application/API/Diary/runtime command or write, provider product path, deployment, release, Pages rebuild or protected-ref movement is authorised. Preserve every unrelated untracked file and exclude docs/branding exactly; stage only explicit paths.",
+    "git_refs_and_worktree": "Task HEAD and local task ref are 4a1cf9ce811a60aab6eac28cb17a72fa8a7aec09; origin task is c3eed9a56a2dc3c875ecccbc216e59577f154bf6. Local/origin master and handoff/current are all protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary tracked worktree is clean apart from preserved untracked evidence; r38 remains at tracked HEAD 4a1cf9ce with only its six candidate paths untracked."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_agents_handover_active_plan_parent_acceptance_recovery_lease_and_exact_git_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol recovery lease is active after the bounded worker correction failed material architecture review."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned; Sol is the recovery owner."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini remains inactive until one exact recovered commit is ready for read-only veto."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["The allocated correction has ended and its rejected receipt remains immutable evidence."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

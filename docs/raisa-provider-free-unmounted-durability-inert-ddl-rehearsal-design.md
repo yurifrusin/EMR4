@@ -2,7 +2,11 @@
 
 Date: 2026-08-07
 
-Status: recovered design accepted for bounded implementation
+Status: PostgreSQL-representability recovery active after rejected worker
+implementation
+
+Normative PostgreSQL-representability recovery:
+`docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md`
 
 ## Purpose
 
@@ -41,16 +45,19 @@ fails before emission.
 
 ## Components
 
-The implementation separates five pure components:
+The recovered implementation separates six pure components:
 
 1. `load_and_bind_parents()` reads fixed paths and verifies canonical hashes;
 2. `derive_effective_catalogue()` applies the exact closed recovery and
    reconciles every child summary;
-3. `lower_contract()` converts the exact effective catalogue and 22 body ASTs
-   into a typed `RenderPlanV1` statement sequence;
-4. `emit_inert_sql()` writes canonical UTF-8/LF text only to the fixed
+3. `derive_effective_body()` applies only the closed PostgreSQL-16
+   representability recovery while preserving and accounting for all 22
+   immutable parent programs;
+4. `lower_contract()` converts the exact effective catalogue and 23 effective
+   body ASTs into a typed `RenderPlanV1` statement sequence;
+5. `emit_inert_sql()` writes canonical UTF-8/LF text only to the fixed
    `.sql.inert` path and builds its typed manifest; and
-5. `recognize_inert_sql()` independently tokenizes and checks the generated
+6. `recognize_inert_sql()` independently tokenizes and checks the generated
    subset against that manifest.
 
 The module imports only Python's standard library and the accepted pure body
@@ -80,12 +87,30 @@ object and bytes are hash-checked again after rendering. The derived catalogue
 must equal the body child's effective signatures, roles, trigger declarations,
 relations/columns/types and privilege ceilings before any render node is built.
 
-The renderer never creates the four referenced `public.*` application tables.
+The renderer never creates, alters or transfers ownership of the four
+referenced `public.*` application tables.
 Those identifiers are allowed only in exact body reads/trigger declarations
 and accepted owner `SELECT` grants. Any application `CREATE`, `ALTER`, DML,
 ownership or broader grant is structurally impossible.
 
 ## Body lowering
+
+PostgreSQL trigger row images are table-row records and do not expose system
+columns such as `xmin`. For the three existing immediate guards that need
+old-row provenance, the recovered effective body performs one exact keyed
+pre-effect reselection of the physical row's `xmin`; the new appointment guard
+does the same. An impossible missing or ambiguous row maps to
+`F_CARDINALITY`/`CF004`. Deferred event and outbox delete fences record a
+narrow dependency on their mandatory same-table immediate guards; they do not
+pretend to recover a deleted row's old `xmin`. Appointment updates gain one
+immediate guard so same-top-level-transaction second-update provenance is
+checked before either row replacement. The deferred appointment fence retains
+final-state temporal/non-temporal proof but no longer reads `OLD.xmin`.
+
+Both appointment triggers first classify the exact producer scope. Zero
+matching active producer bindings is inert, exactly one is applicable and
+duplicate bindings fail closed. This preserves ordinary appointment writers
+while keeping the durability obligation on the exact producer transaction.
 
 Expressions are rendered recursively with a precedence-independent fully
 parenthesized form. References use generated local aliases bound to typed
@@ -148,6 +173,16 @@ matrix. Runtime roles receive execute only on their exact entry points; trigger
 functions remain owner-internal. The owner receives exact product-table
 `SELECT`, never product DML. Admission receiver and every other principal stay
 inside their exact closed internal grants.
+
+The inert phase creates the schema with exact authorization, creates the
+support helper after its referenced relations but before all policies, and
+then transfers every fabric domain, enum, composite and all eighteen fabric
+relations to `context_schema_owner`. Function ownership remains signature
+specific, including the admission receiver exception. The manifest asserts
+each final owner and asserts that no runtime or receiver role gains schema
+`CREATE`; application-object ownership is never touched. These statements
+describe the required final catalogue under a separately privileged future
+migration executor and grant that executor no runtime role.
 
 ## Static recognizer
 
