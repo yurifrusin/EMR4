@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.workspace_failure_receipt.v1",
+  "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-exact-veto-worktree-001",
+  "observed_on": "2026-08-07",
+  "candidate_head": "f51f5b65dd77d9282e5325a5e4f17edd872d14df",
+  "requested_destination": "C:/Users/sarashera/EMR4-worktrees/function-trigger-body-exact-veto-f51f5b65",
+  "failure": {
+    "stage": "git_worktree_checkout",
+    "reason": "windows_filename_too_long",
+    "git_terminal": "Could not reset index file to revision HEAD"
+  },
+  "postcondition": {
+    "destination_exists": false,
+    "worktree_registered": false,
+    "reviewer_dispatched": false,
+    "candidate_changed": false,
+    "protected_ref_changed": false
+  },
+  "correction": {
+    "status": "corrected_fresh_attempt",
+    "next_destination": "C:/Users/sarashera/EMR4-worktrees/r33",
+    "required_preflight": "exact_full_sha_clean_detached_worktree"
+  }
+}

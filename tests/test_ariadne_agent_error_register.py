@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 63
+    assert register["register_revision"] == 66
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 63)
+        f"AER-{index:04d}" for index in range(1, 66)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 50
+    assert len(agent_incidents) == 52
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -300,6 +300,118 @@ def test_function_trigger_body_recovery_incidents_are_preserved_and_corrected() 
     assert all(incidents[incident_id]["status"] == "corrected" for incident_id in (
         "AER-0059", "AER-0060", "AER-0061", "AER-0062"
     ))
+
+
+def test_function_trigger_body_verifier_path_failure_uses_short_recovery() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0063"
+    ]
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-long-worktree-failure-receipt.json"
+    )
+
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "harness.windows_verifier_worktree_destination_path_too_long"
+    )
+    assert receipt["candidate_head"] == (
+        "f51f5b65dd77d9282e5325a5e4f17edd872d14df"
+    )
+    assert receipt["postcondition"] == {
+        "destination_exists": False,
+        "worktree_registered": False,
+        "reviewer_dispatched": False,
+        "candidate_changed": False,
+        "protected_ref_changed": False,
+    }
+    assert receipt["correction"]["next_destination"].endswith("/r33")
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_function_trigger_body_exact_veto_is_contained_pending_fresh_acceptance() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0064"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["stage"] == "independent_review"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["recurrence_signature"] == (
+        "implementer.typed_ir_structurally_valid_but_normatively_underclosed"
+    )
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "contained"
+
+    review = (
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-exact-veto.md"
+    ).read_text(encoding="utf-8")
+    recovery = (
+        ROOT
+        / "docs"
+        / "raisa-provider-free-unmounted-durability-function-trigger-body-architecture-exact-veto-recovery.md"
+    ).read_text(encoding="utf-8")
+    assert "DECISION: revision_required" in review
+    assert "absence of effects caused by this exact" in recovery
+    assert "top-level" in recovery
+    assert "regenerated-baseline byte equality" in recovery
+
+
+def test_function_trigger_body_recovery_receipt_preserves_empty_required_pool() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0065"
+    ]
+    failed = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v2-receipt.json"
+    )
+    corrected = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v3-receipt.json"
+    )
+    corrected_state = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v3-runtime-state.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert failed["status"] == "revision_required"
+    assert failed["reasons"] == [
+        "worker_slot_inventory_missing:deepseek-flash-workers"
+    ]
+    assert corrected["status"] == "passed"
+    assert corrected["reasons"] == []
+    inventories = {
+        row["resource_id"]: (row["active_instance_ids"], row["stale_instance_ids"])
+        for row in corrected_state["worker_slots"]
+    }
+    assert inventories["deepseek-flash-workers"] == ([], [])
+    assert incident["status"] == "corrected"
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -922,28 +1034,28 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 62
+    assert report["incident_count"] == 65
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 50,
-        "harness": 3,
+        "agent_behavior": 52,
+        "harness": 4,
         "repository": 2,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 10,
         "evidence_misreport": 6,
-        "harness_failure": 3,
-        "output_contract_violation": 21,
+        "harness_failure": 4,
+        "output_contract_violation": 22,
         "read_only_violation": 2,
-        "reasoning_claim_error": 11,
+        "reasoning_claim_error": 12,
         "repository_defect": 2,
         "transport_timeout": 7,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 49,
-        "untrusted_partial_worktree": 11,
+        "canonical_unchanged": 51,
+        "untrusted_partial_worktree": 12,
     }
     assert report["recurring_patterns"] == [
         {

@@ -1,0 +1,89 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_native_exact_head_read_only_function_trigger_body_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton authorises the provider-free unmounted function-and-trigger-body architecture and requires candidate-independent exact-head veto before acceptance. No later DDL, database, runtime, source or provider gate is opened.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery and acceptance ownership. One fresh native reviewer receives only a read-only exact-path veto packet at exact candidate f51f5b65dd77d9282e5325a5e4f17edd872d14df and no edit, self-acceptance, integration, commit, push, provider, product-data, runtime, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "Exact candidate f51f5b65 binds nine entry points and thirteen trigger functions with closed typed operands, operand-derived effects and graph, a structural positional schema and nineteen hostile mutation classes. The four-file focused packet has 126 nodes and passes at the committed HEAD; the API Spine artifact suite and Ruff also pass. Contract digest is sha256:631773f9112e7804f5e2ea15b04d4cd4cb4c699502d3491b516d57d14e6f35d5.",
+    "protected_evidence_boundaries": "Reviewer access is limited to twenty-four exact candidate, parent and API Spine paths. No prior review/rejection/AER/inbox, protected holdout, branding, unrelated file, repository enumeration, provider/model call, database/source/network/browser contact, writes/caches, app execution, SQL/DDL/migration, patient/product data, deployment, Pages or protected-ref action is permitted.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r33 is clean on codex/review-durability-function-trigger-body-f51f5b65 at exact full HEAD f51f5b65dd77d9282e5325a5e4f17edd872d14df and passed the exact verifier preflight. Main task HEAD is the same candidate with only contained AER-0063/review-control changes pending. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "function_trigger_body_exact_veto_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed and replayed exact candidate f51f5b65, recorded the failed long-path worktree attempt as corrected AER-0063 and passed the short-path verifier preflight."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh native candidate-independent reviewer is available for the exact-path read-only veto."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model review is authorised in this provider-free tranche; native review supplies the required independence."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "workspace_id": "function-trigger-body-exact-veto-r33",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/r33",
+      "branch": "codex/review-durability-function-trigger-body-f51f5b65",
+      "head": "f51f5b65dd77d9282e5325a5e4f17edd872d14df",
+      "clean": true,
+      "artifact": "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto-worktree-preflight.json"
+    }
+  ],
+  "assigned_agent_ids": []
+}

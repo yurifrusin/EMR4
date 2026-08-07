@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 63,
+  "register_revision": 66,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-07",
@@ -2450,6 +2450,124 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-typed-ir-cohort-predispatch-receipt.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-recovery-incidents-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-63.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0063",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-exact-veto-worktree-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "git-worktree-windows-path-layout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_worktree_checkout",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "A detached exact-head verifier checkout must use a destination short enough for every versioned path, complete successfully and pass the clean-worktree preflight before reviewer dispatch.",
+      "observed_error": "The first attempt used a descriptive review-worktree destination that made an already-versioned evidence filename exceed the Windows path limit. Git reported Filename too long and could not reset the index; no usable or registered worktree remained.",
+      "detection_method": "The git worktree command failed before dispatch; Sol then verified that the requested destination did not exist, the path was not registered and the immutable candidate HEAD remained unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-long-worktree-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-64.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.windows_verifier_worktree_destination_path_too_long",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed destination remained absent and unregistered. The distinct successor uses the established short rNN destination while binding the same full candidate SHA and reruns the clean-worktree preflight before dispatch.",
+        "prevention_control": "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-long-worktree-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-64.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0064",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-exact-veto-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "codex-primary-implementer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "The replacement body architecture must independently prove the complete coordinator transition state machine, one internally consistent non-consumed retention census, current-transaction-only non-temporal effects and exact recovery/signature/privilege/enum closure without relying on a self-generated baseline equality check.",
+      "observed_error": "The committed candidate passed its local suite but the fresh exact-head veto found four under-closed semantic surfaces. Resealed owner privilege widening, retention enum widening, producer owner substitution and removal of the producer event-membership assertion were admitted by both semantic and structural validation.",
+      "detection_method": "A fresh read-only independent reviewer inspected the exact twenty-four-path packet at f51f5b65dd77d9282e5325a5e4f17edd872d14df, ran the prescribed passing checks, challenged semantic closure with four independently resealed mutations and returned one revision_required decision while leaving the candidate unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto.md",
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-exact-veto-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-65.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.typed_ir_structurally_valid_but_normatively_underclosed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The exact candidate remains rejected. Sol froze a four-part replacement contract covering coordinator and retention semantics, current-XID transaction fencing, independent scalar and privilege closure, and hostile tests that do not depend on regenerated-baseline equality.",
+        "prevention_control": "A body-architecture candidate cannot be accepted until a fresh exact-head veto independently demonstrates semantic rejection of resealed privilege, enum, signature, proof-removal, coordinator, retention and transaction-scope mutations after all deterministic checks pass.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-exact-veto-recovery.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto.md",
+          "docs/ariadne-agent-error-correction-register-revision-65.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0065",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-receipt-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every orchestrator runtime state must enumerate every worker-pool resource required by the active Ariadne settings, including a required pool with zero active or stale instances.",
+      "observed_error": "The first exact-veto recovery precommit runtime state listed only the native recovery pool and omitted the configured deepseek-flash-workers inventory. The preflight failed closed with worker_slot_inventory_missing before staging or commit.",
+      "detection_method": "The generated receipt returned revision_required with the exact missing worker-slot reason; Sol preserved it, added the required zero-instance inventory in a distinct v3 runtime state and obtained a passing receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v2-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v3-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v3-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-66.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.required_zero_instance_worker_pool_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed receipt remains immutable. The distinct v3 runtime state includes both the required deepseek-flash-workers inventory and native recovery inventory with empty active/stale lists and produces one passing five-source receipt.",
+        "prevention_control": "Copy the complete configured worker-slot inventory into every runtime state even when a required pool has zero instances; treat zero inventory as evidence rather than omission.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v2-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v3-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-exact-veto-recovery-precommit-v3-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-66.md"
         ]
       },
       "status": "corrected"

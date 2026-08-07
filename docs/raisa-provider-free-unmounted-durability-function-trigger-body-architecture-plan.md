@@ -4,7 +4,8 @@ Date: 2026-08-07
 
 Status: initial plan superseded by bounded structural-feasibility recovery;
 first label-only and second misbound typed implementation candidates rejected;
-normative Sol implementation recovery active
+third exact-HEAD candidate rejected by independent veto; normative Sol
+exact-veto recovery active
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -23,6 +24,9 @@ Normative implementation recovery:
 
 Normative typed-IR replacement recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-typed-ir-recovery.md`
+
+Normative exact-veto recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-exact-veto-recovery.md`
 
 ## Objective
 

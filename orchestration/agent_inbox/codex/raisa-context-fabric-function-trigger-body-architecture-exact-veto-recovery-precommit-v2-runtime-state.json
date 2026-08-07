@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_veto_rejection_and_freeze_four_part_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the provider-free unmounted durability function-and-trigger-body architecture as the next planned descendant under Yuri's standing uninterrupted-development authority. Candidate f51f5b65 is now preserved as independently rejected and the baton permits bounded recovery without opening a new user decision fork.",
+    "current_authority_allocation": "GPT Sol remains conductor, recovery, architecture and acceptance owner. Bounded native lanes may implement disjoint recovery artifacts only after a fresh passing pre-worker-dispatch receipt; no worker receives acceptance, integration, push, protected-ref or scope-expansion authority. A new independent reviewer remains mandatory for the replacement candidate.",
+    "active_plan_and_acceptance": "The active plan, structural-feasibility recovery, implementation recovery, typed-IR recovery, design, threat delta and exact-veto recovery bind exactly nine entry and thirteen trigger bodies. The four new mandatory corrections are complete coordinator effects, complete non-consumed retention/grace/key proof, current-XID-only non-temporal effects and independent recovery/signature/privilege/enum/proof closure.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical diary PHI, patient/product/clinical data, provider calls, live database/source/feed/watcher/listener access, SQL/DDL execution, runtime wiring, commands, deployment, production, release, Pages and protected-ref movement remain closed. docs/branding and all unrelated untracked receipt/state/evidence/cost-ledger files remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "After fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at rejected candidate HEAD f51f5b65dd77d9282e5325a5e4f17edd872d14df; origin task is 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only named recovery-control/AER paths are intended for this commit; docs/branding and unrelated untracked artifacts remain untouched."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_exact_veto_recovery_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reread AGENTS.md completely, all active plan/recovery/design/threat sources, the API Spine boundaries and fresh Git refs before freezing this recovery."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No agent is active or assigned at this precommit checkpoint; recovery dispatch remains contingent on a distinct postcommit receipt."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider/model call is authorised at this deterministic control checkpoint."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation transport is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is not active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "native-recovery-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

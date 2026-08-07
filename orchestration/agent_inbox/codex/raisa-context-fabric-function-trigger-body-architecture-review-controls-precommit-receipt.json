@@ -1,0 +1,27 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_head_review_controls_and_corrected_worktree_failure_record",
+  "reasons": [
+    "workspace_receipt_missing:typed_body_exact_veto"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate f51f5b65 passed its exact-head deterministic packet. The long descriptive worktree attempt failed before dispatch and is corrected as AER-0063; register revision 64, its deterministic pattern report and the 60-test AER suite pass. The short r33 worktree preflight and five-source predispatch receipt pass, and the exact 24-path reviewer is running.",
+    "current_authority_allocation": "GPT Sol owns the review-control commit. The fresh native reviewer is read-only in r33 and has no edit, acceptance, integration, commit, push or protected-ref authority.",
+    "git_refs_and_worktree": "Main task branch is at f51f5b65dd77d9282e5325a5e4f17edd872d14df with review-control changes only. Review r33 is clean at the same exact candidate. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881.",
+    "live_handover_current_baton": "The live baton authorises completion and independent review of the provider-free unmounted function-and-trigger-body architecture. Review-control evidence and AER correction are within the active plan and open no later gate.",
+    "protected_evidence_boundaries": "This commit contains only the new postcompaction receipt, corrected AER-0063 record, exact review packet, short-worktree preflight and predispatch/precommit controls. It excludes candidate source, app/API/Diary/migration paths, docs/branding, unrelated untracked files, protected evidence, database/source/provider/runtime/data/deployment surfaces and protected refs."
+  },
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}
