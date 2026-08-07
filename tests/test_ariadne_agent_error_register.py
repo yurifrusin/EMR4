@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 82
+    assert register["register_revision"] == 83
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 86)
+        f"AER-{index:04d}" for index in range(1, 87)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 67
+    assert len(agent_incidents) == 68
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -108,9 +108,15 @@ def test_inert_ddl_plan_challenge_incidents_are_preserved_and_contained() -> Non
     assert verifier["category"] == "evidence_misreport"
     assert verifier["process_severity"] == "material"
     assert verifier["workflow_disposition"] == "review_rejected"
-    assert verifier["status"] == "contained"
-    assert verifier["correction"]["status"] == "contained_then_escalated"
+    assert verifier["status"] == "corrected"
+    assert verifier["correction"]["status"] == "corrected_fresh_attempt"
     assert "F_CARDINALITY/CF004" in verifier["correction"]["action"]
+
+    inventory = incidents["AER-0086"]
+    assert inventory["category"] == "output_contract_violation"
+    assert inventory["status"] == "corrected"
+    assert inventory["correction"]["status"] == "corrected_fresh_attempt"
+    assert "deepseek-flash-workers" in inventory["correction"]["action"]
 
 
 def test_observation_signal_worker_veto_requires_fresh_acceptance() -> None:
@@ -1371,10 +1377,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 85
+    assert report["incident_count"] == 86
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 67,
+        "agent_behavior": 68,
         "harness": 5,
         "repository": 5,
         "transport": 8,
@@ -1383,7 +1389,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 14,
         "evidence_misreport": 8,
         "harness_failure": 5,
-        "output_contract_violation": 26,
+        "output_contract_violation": 27,
         "read_only_violation": 2,
         "reasoning_claim_error": 17,
         "repository_defect": 5,
@@ -1391,7 +1397,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 65,
+        "canonical_unchanged": 66,
         "untrusted_partial_worktree": 18,
     }
     assert report["recurring_patterns"] == [

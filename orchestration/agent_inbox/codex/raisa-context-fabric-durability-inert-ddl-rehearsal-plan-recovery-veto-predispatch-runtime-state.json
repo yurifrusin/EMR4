@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "launch_one_fresh_read_only_gemini_36_high_replacement_veto_of_the_recovered_inert_ddl_plan_at_exact_head_e00d5d01",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully reread live baton records R7 accepted and the inert DDL rehearsal as the next safe descendant. Standing continuation authority permits this planned provider-free read-only plan challenge without a user pause.",
+    "current_authority_allocation": "GPT Sol owns recovery meaning and acceptance. One fresh Gemini 3.6 Flash/high Antigravity project receives read-only exact-worktree veto authority only. It has no edit, implementation, acceptance, integration, push, protected-ref, SQL/database, runtime, deployment or release authority.",
+    "active_plan_and_acceptance": "Candidate e00d5d01 recovers the plan with exact 22-declared/21-observed instruction and 34/34 expression populations, universal value-free F_CARDINALITY/CF004 handling, exact constraint-name unique-race fencing and a narrow parent-omission activation delta. Eight plan tests, 74 error-register tests, Ruff and diff checks pass. The first inconsistent review is not admitted.",
+    "protected_evidence_boundaries": "The reviewer is confined to the exact allowlist and clean r37 worktree. It may not read the first review conclusion, write, contact a database/source/provider/product surface, execute SQL, access patient/product/protected data, alter application/API/Diary/runtime, deploy, release, rebuild Pages or move protected refs. docs/branding and unrelated untracked files remain outside r37 and untouched.",
+    "git_refs_and_worktree": "Main task HEAD is e00d5d01d534a9e005cd6deea5c82bb41ec73120 and origin task remains c3eed9a56a2dc3c875ecccbc216e59577f154bf6. Review branch codex/review-durability-inert-ddl-plan-recovery-e00d5d01 at r37 is exact e00d5d01 and tracked clean. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "recovered_inert_ddl_plan_five_source_readback_exact_head_tests_and_reviewer_packet",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed the recovered candidate and prepared a distinct exact-HEAD reviewer worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No implementation worker is active or assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["One fresh replacement Gemini 3.6 Flash/high verifier project is ready for bounded launch."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Implementation remains closed until the replacement veto passes."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is reserved only for a later DeepSeek implementation transport."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

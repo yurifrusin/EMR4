@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: Sol recovery applied; replacement independent challenge required
+Status: Sol recovery accepted after replacement independent challenge
 
 ## Reason for recovery
 
@@ -47,6 +47,8 @@ that security-relevant behavior.
 
 The original plan commit remains preserved evidence. The plan, design, threat
 delta and tests carry this recovery at a new descendant HEAD. One fresh
-independent exact-HEAD challenge must verify the corrected populations,
-failure mapping, expected-constraint fence and activation delta before any
-implementation worker is dispatched.
+independent exact-HEAD challenge verified the corrected populations, failure
+mapping, expected-constraint fence and activation delta with no P0-P3 finding.
+The bounded implementation worker may now be dispatched under the plan's
+existing closed authority; SQL execution, database contact and every later gate
+remain closed.

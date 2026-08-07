@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_stage_and_commit_only_the_recovered_plan_acceptance_replacement_review_evidence_and_incident_closeout_before_bounded_implementation_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully reread live baton makes the provider-free unmounted inert DDL rehearsal the next safe descendant after accepted R7 and permits uninterrupted planned-gate continuation unless user judgment is genuinely needed.",
+    "current_authority_allocation": "GPT Sol owns plan acceptance and this commit. The fresh Gemini 3.6 Flash/high project had read-only veto authority and returned pass; it has no continuing authority. DeepSeek implementation remains undispatched until this accepted exact HEAD is committed and freshly preflighted.",
+    "active_plan_and_acceptance": "Recovered candidate e00d5d01 passed one fresh exact-HEAD replacement review. The verifier reproduced 22 declared/21 observed instruction opcodes, 34/34 expressions, F_CARDINALITY/CF004 handling and all 21 unique-key mappings, ran 8 focused tests and returned no P0-P3 finding. The combined local 82-test packet, Ruff and diff checks pass; AER-0085 is corrected and AER-0086 records the prelaunch slot-inventory correction.",
+    "protected_evidence_boundaries": "The commit is documentation, deterministic tests, review/preflight receipts and incident records only. No renderer or SQL artifact, database/source/outbox/feed/watcher/listener contact, dependency, migration, patient/product/protected data, provider/product call, application/API/Diary/runtime wiring, command/write, deployment, release, Pages or protected-ref movement is included. docs/branding and all unrelated untracked files remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "Main task HEAD is e00d5d01d534a9e005cd6deea5c82bb41ec73120 and origin task remains c3eed9a56a2dc3c875ecccbc216e59577f154bf6 before this acceptance commit. Review r37 stayed clean at exact e00d5d01. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "replacement_review_readback_five_source_rehydration_exact_head_postflight_and_82_test_acceptance_packet",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled and admitted the replacement review after exact readback."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No implementation worker is active before this acceptance commit."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The fresh replacement project completed with pass and unchanged clean exact-HEAD postflight."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["DeepSeek remains reserved for the next bounded implementation dispatch."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code is reserved only as the later exact DeepSeek transport."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

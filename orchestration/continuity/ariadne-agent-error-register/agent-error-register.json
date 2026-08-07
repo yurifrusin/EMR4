@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 82,
+  "register_revision": 83,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3328,16 +3328,59 @@
       "recurrence_signature": "verifier.exact_contract_population_and_failure_registry_misreport",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "The pass is preserved but not admitted. Sol invoked the plan recovery lease, froze exact opcode populations and F_CARDINALITY/CF004 handling, and requires one fresh exact-HEAD replacement challenge before implementation dispatch.",
+        "status": "corrected_fresh_attempt",
+        "action": "The first pass remains preserved but not admitted. Sol invoked the plan recovery lease, froze exact opcode populations and F_CARDINALITY/CF004 handling, and one fresh exact-HEAD replacement challenge reproduced the corrected contract facts and returned pass with no P0-P3 finding.",
         "prevention_control": "Critical verifier population and registry claims must be mechanically reconciled against the immutable JSON before acceptance; a discrepancy touching the challenged mechanism invalidates the verdict rather than being treated as harmless prose.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-review-reconciliation-receipt.json",
           "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan-recovery.md",
-          "docs/ariadne-agent-error-correction-register-revision-82.md"
+          "docs/ariadne-agent-error-correction-register-revision-82.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-83.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0086",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-plan-recovery-veto-predispatch-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-inert-ddl-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every pre_worker_dispatch state must inventory all required configured worker resource IDs, including inactive reserved implementation capacity, before any verifier or worker launch.",
+      "observed_error": "The first replacement-veto predispatch state inventoried the Gemini verifier slot but omitted the required deepseek-flash-workers slot. Ariadne preflight returned revision_required with worker_slot_inventory_missing:deepseek-flash-workers.",
+      "detection_method": "The generic orchestrator preflight rejected the state before Antigravity launch. Sol preserved the failed state and receipt, added the required inactive slot and obtained a distinct passing v2 receipt before launching the replacement review.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-veto-predispatch-failure-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-veto-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-veto-predispatch-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-83.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.required_worker_slot_inventory_omission",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "No review launched from the rejected state. The corrected runtime state inventories both deepseek-flash-workers and gemini-verifier with empty instance lists and produced a passing receipt before the successful fresh review.",
+        "prevention_control": "Generate predispatch worker_slots from the configured required resource inventory, including inactive reserved lanes, rather than only the resource selected for the immediate launch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-veto-predispatch-failure-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-veto-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-plan-recovery-veto-predispatch-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-83.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

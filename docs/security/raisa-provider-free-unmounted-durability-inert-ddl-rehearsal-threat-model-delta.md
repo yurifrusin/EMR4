@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: recovered delta pending replacement independent plan challenge
+Status: recovered delta accepted for bounded implementation
 
 ## Scope and assets
 
