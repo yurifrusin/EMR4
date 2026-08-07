@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 55,
+  "register_revision": 56,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-06",
@@ -1963,8 +1963,8 @@
       "category": "reasoning_claim_error",
       "process_severity": "material",
       "expected_invariant": "A frozen durability migration/transaction plan must bind every proofread observation and bounded conflict attempt to authenticated immutable receiver-owned evidence, preserve source-independent redelivery, use independent current anchors, atomic lifecycle effects and exact key scope, and make every product-identifier exception database-coupled to the signed command with narrow privilege, immutable bijection and non-reuse/retention treatment.",
-      "observed_error": "Candidate bea7d719 underfroze admission, redelivery, anchors, lifecycle and key scope. Recoveries 5de1ba51 and 917dff6f left conflict/anchor and product-id contradictions. Recovery 62c78cba left alias creation independently invocable and non-bijective. Recovery 77ba83d5 added command/event/bijection checks but treated coherent row state as same-transaction proof and retained phrase-only tests that could not detect the defect. Recovery eda1039b added transaction provenance but left xid/xid8 rendering, subtransaction policy, temporal no-event/delete obligations and the full relational/security catalogue insufficiently machine-closed.",
-      "detection_method": "Five fresh exact-head native adversarial vetoes reconciled the parent contract, admission, transaction/retention/anchor/key/API and alias semantics. They found the initial five P1s, conflict/anchor defects, product-id contradiction, independent-helper/bijection defects, then missing transaction-local provenance plus underpowered static acceptance before DDL admission. A separately preserved but procedurally ineligible exact-head diagnostic then sharpened the remaining xid, subtransaction, temporal-event and catalogue defects; it supplied challenges only and no reviewer decision.",
+      "observed_error": "Six rejected candidates successively underfroze authenticated admission, purge-safe redelivery, independent anchors, lifecycle/key scope, the owner-private alias exception, command coupling, stable bijection and exact same-transaction provenance. Recovery a0ffc10a fixed the PostgreSQL-16 XID rendering and expanded the catalogue, but its fresh eligible veto still found a non-temporal all-update trigger gap, non-renderable type/RLS/function/trigger/default and cross-invariant surfaces, an admission owner without effect privilege, hash-short-circuited mutation tests, a no-write-savepoint detection overclaim and an outbox foreign key that silently pinned product-event retention.",
+      "detection_method": "Six fresh exact-head native adversarial vetoes reconciled the parent contract, admission, transaction/retention/anchor/key/API and alias semantics. They found the initial five P1s, conflict/anchor defects, product-id contradiction, independent-helper/bijection defects, missing transaction-local provenance, underpowered static acceptance and finally six renderer/temporal/ownership/test/claim/retention defects before DDL admission. A separately preserved but procedurally ineligible exact-head diagnostic sharpened the xid, subtransaction, temporal-event and catalogue defects but supplied challenges only and no reviewer decision.",
       "evidence_paths": [
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-recovery-independent-veto.md",
@@ -1977,7 +1977,9 @@
         "docs/ariadne-agent-error-correction-register-revision-52.md",
         "docs/ariadne-agent-error-correction-register-revision-53.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-4-independent-veto.md",
-        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-5-untrusted-diagnostic.md"
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-5-untrusted-diagnostic.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-6-independent-veto.md",
+        "docs/ariadne-agent-error-correction-register-revision-56.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
@@ -1986,7 +1988,7 @@
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_implemented_pending_acceptance",
-        "action": "Sol preserved five rejected candidates; the recovery-5 review remains ineligible and diagnostic-only after its scope breach. The sixth recovery retains bounded PRIMARY/CONFLICT admission, purge-safe comparison, anchor fencing and the sole owner-private immutable alias bijection. It freezes PostgreSQL 16's exact xid8-to-low-XID32 expression around pg_current_xact_id(), forbids savepoints/subtransactions and prior-transaction claim adoption, and derives the reschedule obligation from appointment OLD/NEW start-time or duration. Its bidirectional deferred commit fences cover claim, appointment, audit, event, alias, head and outbox INSERT/UPDATE/DELETE. A closed JSON contract/schema enumerates every column/type/key/FK/delete action, role, RLS policy, entry point, trigger, admission, lifecycle, anchor, key and retention surface, including a real composite receipt-to-PRIMARY-admission foreign key. Deterministic gates pass; fresh exact-head acceptance remains pending.",
+        "action": "The seventh recovery retains bounded PRIMARY/CONFLICT admission, purge-safe comparison, anchor fencing, exact low-XID32 provenance and the sole owner-private immutable alias bijection. It adds an all-UPDATE appointment constraint trigger, rejects relevant subtransaction-authored tuples while declaring no-write savepoints not database-observable, removes the persistent outbox-to-product-event foreign key and gives the non-login admission owner exact internal reads plus admission INSERT only. Version 3 closes types, structured no-default columns, named constraints, 44 executable RLS policies, nine entry-point signatures, 13 trigger-function signatures/triggers and 25 enforcement mappings. Its whole-contract schema and digest-resealed semantic validator no longer confuse hash drift with semantic rejection. Fresh exact-head acceptance remains pending.",
         "prevention_control": "Before accepting a database realization, trace valid/duplicate/conflicting inputs into bounded receiver evidence; prove purge-safe redelivery and independent anchor fences; enumerate atomic members and key scope; reconcile every data prohibition against exact catalogue columns, types, keys, delete actions, privileges and triggers; attack every private helper by standalone invocation; render XID and subtransaction semantics for the target PostgreSQL version; derive positive and negative event obligations from database transitions; require database evidence for command coupling; and prove forward/reverse identity uniqueness, concurrency, rollback and delete/recreate non-reuse for every pseudonymous mapping.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-plan-independent-veto.md",
@@ -1996,8 +1998,11 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-4-independent-veto.md",
           "docs/raisa-provider-free-unmounted-durability-migration-transaction-architecture-plan.md",
           "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
           "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
-          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-5-untrusted-diagnostic.md"
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-5-untrusted-diagnostic.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-6-independent-veto.md",
+          "docs/ariadne-agent-error-correction-register-revision-56.md"
         ]
       },
       "status": "open"

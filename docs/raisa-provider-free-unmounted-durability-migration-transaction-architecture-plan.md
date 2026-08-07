@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: sixth recovered architecture plan candidate pending fresh independent veto
+Status: seventh recovered architecture plan candidate pending fresh independent veto
 
 Parent result:
 `raisa_provider_free_unmounted_authored_synthetic_durability_state_machine_rehearsal_pass`
@@ -125,6 +125,12 @@ relations and no generic work queue or event store:
    command event cannot allocate two positions. It is visible only to the narrow
    observer, is domain-separated into the accepted
    observation digest and is then discarded; it never reaches receipt or audit.
+   The raw event UUID is transaction-locally checked against exactly one
+   just-authored committed event by the deferred producer fence, but no durable
+   foreign key points back to `diary_committed_events`. The outbox therefore
+   survives that product row's feed expiry or any later separately authorised
+   product-retention deletion. Event retention supplies no source-purge
+   authority, and the outbox does not prolong product-bearing event storage.
    The predecessor is zero only at position one and otherwise exactly position
    minus one. Stream epoch is fixed to `1` for this source-contract version.
 4. `context_proofread_observation_admission` — immutable, receiver-owned,
@@ -269,6 +275,44 @@ closed admission function; this is candidate submission, not generic
 persistence or durability-state authority. Static acceptance must prove that a
 forged `app.current_practice_id` cannot widen scope.
 
+The admission receiver is a distinct non-login function owner, not a runtime
+login. It owns exactly `admit_proofread_observation_v1`, has the exact internal
+`SELECT` grants required to revalidate source, generation, checkpoint, receipt,
+key and binding state, and has exactly `INSERT` on the immutable admission
+relation. It owns no other function or relation and has no update/delete,
+coordinator, lifecycle, retention, product-read or command privilege. This
+closed internal grant is what makes the `SECURITY DEFINER` effect executable;
+the observer still receives no direct table DML.
+
+## Renderer-closed PostgreSQL catalogue
+
+The version-3 machine contract is normative for the next inert renderer. It
+contains all 18 relations as structured column/type/nullability/default
+records, named primary/unique/partial-unique/foreign/check constraints, exact
+delete actions, forced-RLS assignments and retention families. Every unlisted
+column default means `NO DEFAULT`; a renderer may not infer timestamps, UUIDs,
+sequences or identities.
+
+It also closes:
+
+- every builtin, domain, enum and composite type plus every enum value and
+  domain predicate;
+- all 44 relation/command RLS policies with executable `USING` and/or
+  `WITH CHECK` SQL derived from authenticated `session_user` binding;
+- the binding helper's complete input/output signature and exact SQL body;
+- all nine entry-point input and output signatures, owners, language,
+  volatility, parallel safety, search path and invariant membership;
+- all 13 trigger-function signatures and all 13 named immediate/deferred
+  trigger declarations; and
+- 25 named cross-relation invariants, each linked to concrete constraints,
+  trigger functions or sole-path entry points rather than descriptive pseudo-
+  checks.
+
+The Draft 2020-12 schema is a whole-contract constant. Separate semantic tests
+relax the canonical-digest field, reseal hostile variants and still reject them
+through renderer semantics, so mutation evidence is not an unchanged-hash
+shortcut.
+
 ## Producer transaction and position allocation
 
 The future producer remains the existing signed appointment update-confirm
@@ -295,9 +339,13 @@ transaction. At `READ COMMITTED`, its fixed lock/effect order is:
    revision against the claim and locked product state. It also compares the
    claim, current appointment tuple version, audit and event `xmin` values with
    the PostgreSQL-16 top-level XID32 expression frozen below and verifies the
-   immutable claim `created_at` equals this transaction's start. Savepoints,
-   nested transactions and subtransaction-authored members are forbidden from
-   claim insertion until outer commit. A completed, previously
+   immutable claim `created_at` equals this transaction's start. Application
+   savepoints, nested transactions and subtransaction-authored members are
+   forbidden from claim insertion until outer commit. The database rejects
+   every relevant tuple authored by a subtransaction. A savepoint that creates
+   no relevant tuple is not database-observable and is not claimed as such; the
+   exact application route is separately proven to contain no savepoint or
+   nested-transaction call. A completed, previously
    committed, absent, duplicate, foreign, mismatched or caller-substituted
    context fails before any bridge/head/outbox effect;
 5. inside that same entry point, create or return the immutable bijective alias,
@@ -339,10 +387,12 @@ only together with all of these facts: the exact claim was inserted in this
 transaction, its server-default `created_at` equals `transaction_timestamp()`,
 the pre-enable census contains zero committed exact-operation `IN_PROGRESS`
 rows, state cannot transition back to `IN_PROGRESS`, and no exact-operation
-`IN_PROGRESS` row can commit. Savepoints, `Session.begin_nested()`, explicit
+`IN_PROGRESS` row can commit. `Session.begin_nested()`, explicit
 `SAVEPOINT`/`ROLLBACK TO` and any subtransaction around claim, appointment,
-audit, event, projection or completion are forbidden; a subtransaction-
-authored tuple is rejected rather than normalized. Wrap/freeze cannot authorize
+audit, event, projection or completion are forbidden by the application
+transaction contract; a subtransaction-authored relevant tuple is rejected
+rather than normalized. A no-write savepoint is not database-observable and
+does not weaken any tuple or commit-fence invariant. Wrap/freeze cannot authorize
 an old row because no committed eligible row survives and the comparison is
 neither stored nor used after commit.
 
@@ -368,11 +418,17 @@ DEFERRED` constraint triggers cover the exact event surface:
 - `appointment_command_idempotency`: immediate `BEFORE UPDATE OR DELETE`
   state/provenance guard plus deferred `AFTER INSERT OR UPDATE OR DELETE`
   completeness;
-- `appointments`: deferred `AFTER UPDATE OF start_time, duration_minutes`
-  temporal-obligation check with `OLD`/`NEW` transition values;
-- `appointment_audit_log` and `diary_committed_events`: immediate `BEFORE
-  UPDATE OR DELETE` immutability plus deferred `AFTER INSERT OR UPDATE OR
-  DELETE` completeness;
+- `appointments`: deferred row-level `AFTER UPDATE` for every appointment
+  update, with the exact temporal predicate computed from `OLD`/`NEW`; this
+  all-`UPDATE` trigger requires the event/projection set when true and its
+  complete absence when false;
+- `appointment_audit_log`: immediate `BEFORE UPDATE OR DELETE` immutability plus
+  deferred `AFTER INSERT OR UPDATE OR DELETE` completeness;
+- `diary_committed_events`: immediate `BEFORE UPDATE OR DELETE` guard and
+  deferred `AFTER INSERT OR UPDATE OR DELETE` completeness. Update is rejected;
+  delete is rejected when the row is current-top-level-transaction-authored,
+  while later product-retention deletion remains outside this contract and
+  cannot affect the independent outbox;
 - `diary_context_aggregate_aliases_v1` and
   `diary_context_observation_outbox_v1`: immediate `BEFORE UPDATE OR DELETE`
   immutability plus deferred `AFTER INSERT OR UPDATE OR DELETE` completeness;
@@ -551,8 +607,12 @@ operational gates.
 ## Retention safety and backpressure
 
 Source rows, receipts/checkpoints and minimized audit are three independent
-retention families. The existing 24-hour event expiry and a fast consumer have
-no durability meaning.
+retention families. The existing product-bearing `diary_committed_events`
+relation belongs to none of them. Its 24-hour feed expiry, physical retention
+or later deletion has no durability meaning, is not prolonged by a foreign key
+from the outbox, and supplies no purge authority. Transaction-local trigger
+checks prove co-authorship before commit; the resulting payload-free outbox is
+then independently durable.
 
 Any later source eligibility/execution transaction runs at `SERIALIZABLE` and
 must lock the exact
@@ -611,7 +671,8 @@ authored synthetic opaque coordinates only. At minimum it must prove:
    also proven to use one logical capability and one `session_user` without a
    second login, role switch or transaction; a previously committed or merely
    updated `IN_PROGRESS` claim/event fails the current-XID/immutable-created-at
-   check, every savepoint/subtransaction attempt is rejected, and every event/
+   check, every relevant subtransaction-authored tuple is rejected, the exact
+   application path contains no savepoint/nested-transaction call, and every event/
    outbox/alias/claim partial or insert-then-delete combination fails the
    immediate/deferred fence with no durable effect; a temporal start/duration
    transition without event/projection fails while a non-temporal exact update-
@@ -738,17 +799,22 @@ production, release, Pages or protected-ref movement. Preserve and exclude
 11. Key metadata and availability are separate from secrets and scoped to one
     exact generation; unsafe rotation consumes only that generation.
 12. Retention uses the complete serialized backend registry and three separate
-    retention families, with execution disabled by default.
+    retention families, with execution disabled by default; the existing
+    product event is not in those families, is not pinned by an outbox foreign
+    key and may expire independently without weakening retained outbox meaning.
 13. Expand/enable/rollback and producer-availability behavior preserve no-loss
     semantics.
 14. Database-backed authored-synthetic positive and adversarial cases are exact
     and include disabled-mode zero-capability proof.
-15. Static tests validate the closed machine contract against its JSON Schema;
-    mechanically reconcile every exact relation column/type/key/foreign-key/
-    delete action, role, entry point, RLS policy, trigger event, admission,
-    lifecycle/anchor, key interval and retention family; parse the existing
-    idempotency/event constraints and exact update-confirm flow; and reject
-    adversarial mutations across every one of those surfaces. Explicit Git
+15. Static tests validate the whole-contract-constant machine contract against
+    its JSON Schema; mechanically reconcile every exact builtin/domain/enum/
+    composite, relation column/type/nullability/default, named key/partial
+    index/foreign-key/check and delete action, role ownership and internal
+    privilege, entry-point input/output signature, executable RLS predicate,
+    trigger function/event and cross-invariant enforcement reference; parse the
+    existing idempotency/event constraints and exact update-confirm flow; and
+    reject digest-resealed semantic mutations across every one of those
+    surfaces. Explicit Git
     preflight/postflight—not the schema alone—proves that no application,
     migration, database/runtime/API, provider, data, deployment or protected
     artifact changed.

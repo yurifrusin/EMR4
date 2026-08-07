@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_exact_path_read_only_sixth_recovery_durability_architecture_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate a0ffc10a freezes PostgreSQL 16's exact xid8-to-low-XID32 provenance, forbids savepoints/subtransactions in the update-confirm producer, derives the temporal event obligation from appointment OLD/NEW time or duration, closes claim/appointment/audit/event/alias/head/outbox trigger operations, and normatively enumerates all 18 relation/security/lifecycle surfaces in a canonical schema-validated contract. All 208 focused, register, parent durability and API Spine tests pass with Ruff, format, canonical hash and diff checks. AER-0051 remains open pending this fresh veto.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery and acceptance authority. A fresh native read-only reviewer is selected as a permitted independent veto surface because Yuri authorised worker lanes and the live policy permits native review where independence has leverage. The reviewer receives no Git commands, edits, implementation, acceptance, integration, baton, push or protected-ref authority and may emit only one terminal pass or revision_required decision.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r29 is clean on codex/review-durability-migration-transaction-plan-recovery-6-a0ffc10a at exact HEAD a0ffc10a97cec23399724e56e6479932f029ab00. The main task branch is at the same candidate; local/origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602, origin task remains 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa, and user untracked docs/branding remains preserved outside the reviewer worktree.",
+    "live_handover_current_baton": "The live handover directs the pure provider-free unmounted durability migration-and-transaction architecture descendant under standing uninterrupted-development authority. Candidate a0ffc10a97cec23399724e56e6479932f029ab00 is explicitly pending acceptance until a genuinely fresh exact-head veto passes; no inert DDL rehearsal is admitted yet.",
+    "protected_evidence_boundaries": "Reviewer access is limited to the exact candidate architecture plan, design, threat delta, contract, schema and test; the exact API Spine ADR/programme/event/read artifacts and checklist; and the exact current appointment model, idempotency service and update-confirm router files. AGENTS content, implementation-plan history, prior reviews, AER content, protected holdouts, historical PHI, unrelated files, every Git command, provider/model calls, database/source/network contact, writes, caches, app execution, migration/DDL application, deployment and protected refs are forbidden."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

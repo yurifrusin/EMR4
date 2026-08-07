@@ -478,8 +478,20 @@ generation rehearsal. The architecture-only provider-free default-off
   covers claim/appointment/audit/event/alias/head/outbox INSERT/UPDATE/DELETE
   guards, and expands the normative contract to exact columns, keys, delete
   actions, roles, RLS, entry points, triggers, admission, lifecycle, anchor,
-  key and retention surfaces. Only a fresh acceptance of the complete
-  corrected plan may admit an inert DDL rehearsal. No applied migration, live
+  key and retention surfaces. A fresh sixth veto confirmed the exact XID and
+  API boundaries but rejected the non-temporal trigger gap, pseudo-renderable
+  catalogue, incoherent admission-function ownership, hash-short-circuited
+  mutation tests, savepoint-detection overclaim and outbox foreign key that
+  silently pinned the product event. The seventh recovery now uses a deferred
+  row-level all-`UPDATE` appointment trigger; distinguishes the application
+  no-savepoint contract from database-detectable subtransaction-authored
+  tuples; removes persistent event dependence; gives the non-login admission
+  owner exact internal read/insert privileges; and closes types, defaults,
+  named constraints, RLS predicates, input/output and trigger signatures plus
+  cross-invariant enforcement in a whole-contract-constant v3 schema. Its
+  hostile semantic variants are digest-resealed before independent validation.
+  Only a fresh acceptance of this complete corrected plan may admit an inert
+  DDL rehearsal. No applied migration, live
   implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates

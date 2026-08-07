@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-Status: sixth recovered design candidate pending fresh independent veto
+Status: seventh recovered design candidate pending fresh independent veto
 
 ## Purpose
 
@@ -59,17 +59,21 @@ appointment tuple version, audit and event to have database-derived `xmin`
 equal to the PostgreSQL-16 top-level XID32 expression
 `((((pg_current_xact_id()::text)::bigint & 4294967295)::text)::xid)`, while the
 claim's immutable server-default `created_at` matches
-`transaction_timestamp()`. Savepoints and subtransactions are forbidden from
-claim insertion through outer commit; a subtransaction-authored tuple fails.
+`transaction_timestamp()`. Savepoints and subtransactions are forbidden by the
+application transaction contract from claim insertion through outer commit;
+a subtransaction-authored relevant tuple fails. A no-write savepoint is not
+database-observable and no such detection is claimed; the exact application
+route is instead statically proven to contain no nested/savepoint call.
 This use is ephemeral provenance only: no XID is caller-supplied, stored,
 retained, exposed or treated as a durability coordinate. The zero legacy
 in-progress census, no-reversion guard and no-`IN_PROGRESS`-at-commit constraint
 remove old-row and wrap/freeze ambiguity.
 
 The database-derived event obligation is the existing `OLD`/`NEW`
-`start_time` or `duration_minutes` transition. A deferred appointment trigger
-therefore requires event/outbox/head only for that transition and requires
-their absence for a non-temporal update. Immediate immutable-member guards plus
+`start_time` or `duration_minutes` transition. A deferred row-level all-
+`UPDATE` appointment trigger therefore executes for every appointment update,
+requires event/outbox/head only for that transition and requires their absence
+for a non-temporal update. Immediate immutable-member guards plus
 deferred claim, appointment, audit, event, alias, head and outbox triggers cover
 INSERT, UPDATE and DELETE, so insert-delete cannot erase an obligation. They
 also fail commit unless no exact claim remains or returns to `IN_PROGRESS`,
@@ -88,8 +92,12 @@ their rollback/ordering semantics cannot prove gap-free publication.
 
 The outbox contains the accepted non-semantic raw event UUID and opaque alias,
 but no product payload. The observer alone may read it. The raw event UUID is
-domain-separated into the accepted observation digest and discarded before
-the durability packet, receipt or audit.
+transaction-locally checked against the just-authored committed event before
+commit, then domain-separated into the accepted observation digest and
+discarded before the durability packet, receipt or audit. There is deliberately
+no persistent outbox foreign key to `diary_committed_events`: product-event
+expiry or later separately authorised physical deletion neither removes nor
+invalidates the independent outbox and supplies no source-retention authority.
 
 ## Owner-private alias bridge
 
@@ -133,6 +141,13 @@ Runtime roles own nothing, inherit nothing, cannot bypass RLS or set another
 role and have no direct durability-table DML. Security-definer code, if later
 selected, has a non-login owner, fixed empty/schema-qualified search path, no
 dynamic SQL and no `PUBLIC` execute. Every tenant key includes `practice_id`.
+
+The admission function is owned by a distinct non-login receiver owner. Its
+closed internal privilege list is exact: the required source/generation/
+checkpoint/receipt/key/binding `SELECT` set and `INSERT` on admission only. It
+has no update, delete, coordinator, lifecycle, retention, product or command
+privilege. This makes the `SECURITY DEFINER` insert coherent without granting
+the observer direct DML.
 
 ## Authenticated proofread admission
 
@@ -226,11 +241,12 @@ uses the slowest checkpoint, independent pins, key overlap and safety grace.
 The caller supplies none of that authority.
 
 Source, receipt/checkpoint and audit retention are independent; no cascade
-links them. Admissions and anchors remain in the receipt/checkpoint family for
-as long as their receipt/restart/redelivery meaning is retained. Execution is
-disabled by default. Production duration, capacity and key-store selection
-remain later operational choices. Capacity pressure never legitimizes silent
-loss.
+links them. The existing product-bearing event relation is in none of those
+families and is not pinned by an outbox foreign key. Admissions and anchors
+remain in the receipt/checkpoint family for as long as their receipt/restart/
+redelivery meaning is retained. Execution is disabled by default. Production
+duration, capacity and key-store selection remain later operational choices.
+Capacity pressure never legitimizes silent loss.
 
 ## Expand and rollback
 
@@ -250,14 +266,21 @@ key storage, credentials, monitoring and incident response remain later gates.
 
 ## Machine-closed catalogue
 
-The JSON contract is normative where this prose summarizes. It enumerates every
-column and logical PostgreSQL type, ordered primary/unique key, composite
-foreign-key target and delete action for all 18 relations; the complete role/
-entry-point/RLS matrix; exact immediate and deferred trigger events; admission,
-anchor, lifecycle and key-partition invariants; retention-family membership;
-and the exact core artifact surface. Its JSON Schema accepts only that complete
-contract. The next inert DDL gate may render those values but may not invent or
-omit one.
+The version-3 JSON contract is normative where this prose summarizes. It
+enumerates exact builtin/domain/enum/composite definitions; every structured
+column, nullability and explicit no-default; named primary, unique, partial-
+unique, foreign and row-check constraints for all 18 relations; all 44 forced-
+RLS command policies with executable `USING`/`WITH CHECK` predicates; complete
+role/function ownership and the admission owner's closed internal grants; nine
+entry-point input/output signatures; the binding helper signature and SQL body;
+13 trigger-function signatures; 13 named immediate/deferred triggers; and 25
+cross-relation invariants mapped to concrete constraints, functions or sole-
+path entry points. The JSON Schema is a whole-contract constant.
+
+Semantic acceptance separately relaxes the canonical-digest field, reseals
+hostile variants and rejects them through catalogue/reference/ownership/
+retention semantics. The next inert DDL gate may render these values but may
+not invent or omit one.
 
 ## Non-authority statement
 

@@ -26,6 +26,86 @@ CONTRACT_SCHEMA = CONTRACT_DIR / (
     "migration-transaction-architecture-contract.schema.json"
 )
 
+EXPECTED_RELATIONS = [
+    "context_observation_stream_head",
+    "diary_context_aggregate_aliases_v1",
+    "diary_context_observation_outbox_v1",
+    "context_proofread_observation_admission",
+    "context_generation_registry_barrier",
+    "context_observer_generation",
+    "context_durability_checkpoint",
+    "context_recovery_anchor",
+    "context_classified_observation_receipt",
+    "context_frame_generation",
+    "context_invalidation_watermark",
+    "context_reassembly_obligation",
+    "context_durability_lifecycle",
+    "context_durability_audit",
+    "context_observation_key_interval",
+    "context_recovery_pin",
+    "context_service_practice_binding",
+    "context_retention_policy",
+]
+EXPECTED_ENUMS = {
+    "admission_entry_kind": ["PRIMARY", "CONFLICT"],
+    "observation_decision": [
+        "ADMIT_SELECTIVE",
+        "ADMIT_NO_INTERSECTION",
+        "ADMIT_FULL_INVALIDATION",
+        "REBASE_REQUIRED",
+    ],
+    "observation_reason": [
+        "RELEVANT_INTERSECTION",
+        "NO_INTERSECTION",
+        "FULL_SCOPE",
+        "COVERAGE_GAP",
+        "SAME_POSITION_MISMATCH",
+        "DIGEST_REUSE",
+        "WRONG_PREDECESSOR",
+        "WRONG_EPOCH",
+        "MISSING_ADMISSION",
+        "KEY_UNAVAILABLE",
+        "MALFORMED_OR_FOREIGN",
+    ],
+    "checkpoint_disposition": ["ADVANCE", "HOLD_REBASE", "STOP_GENERATION"],
+    "admission_conflict_reason": [
+        "POSITION_DIGEST_MISMATCH",
+        "OBSERVATION_DIGEST_REUSE",
+    ],
+    "generation_state": ["ACTIVE", "REBASE_REQUIRED", "REVOKED", "CONSUMED"],
+    "checkpoint_state": ["ACTIVE", "REBASE_REQUIRED", "REVOKED", "CONSUMED"],
+    "frame_type": [
+        "CURRENT_DIARY_PROJECTION",
+        "CURRENT_WAITING_ROOM_PROJECTION",
+    ],
+    "frame_lifecycle": ["CURRENT", "RETIRED"],
+    "obligation_count_bucket": ["ONE", "TWO_TO_FOUR", "FIVE_PLUS"],
+    "obligation_state": ["PENDING", "COMPLETED"],
+    "lifecycle_entry_kind": ["DECISION", "KEY_ROTATION"],
+    "retention_family": ["SOURCE", "RECEIPT_CHECKPOINT", "AUDIT"],
+    "recovery_pin_reason": [
+        "RECOVERY",
+        "AUDIT_REVIEW",
+        "KEY_OVERLAP",
+        "LEGAL_HOLD",
+    ],
+    "recovery_pin_state": ["ACTIVE", "RELEASED"],
+    "logical_capability": [
+        "PRODUCER",
+        "OBSERVER",
+        "COORDINATOR",
+        "LIFECYCLE",
+        "RETENTION",
+        "APPLICATION_READ",
+    ],
+    "generation_terminal_reason": [
+        "REVOKED",
+        "CONTINUITY_LOSS",
+        "KEY_LOSS",
+        "DISABLED",
+    ],
+}
+
 
 def text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
@@ -68,10 +148,9 @@ def canonical_contract_digest(contract: dict) -> str:
     return "sha256:" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def validate_machine_contract(contract: dict) -> None:
-    schema = data(CONTRACT_SCHEMA)
-    Draft202012Validator(schema).validate(contract)
-    assert contract["contract_sha256"] == canonical_contract_digest(contract)
+def reseal_contract(contract: dict) -> dict:
+    contract["contract_sha256"] = canonical_contract_digest(contract)
+    return contract
 
 
 def relation_map(contract: dict) -> dict[str, dict]:
@@ -82,7 +161,288 @@ def relation_map(contract: dict) -> dict[str, dict]:
 
 
 def column_names(relation: dict) -> set[str]:
-    return {column.split(":", 1)[0] for column in relation["columns"]}
+    return {column["name"] for column in relation["columns"]}
+
+
+def declared_type_names(contract: dict) -> set[str]:
+    catalogue = contract["type_catalogue"]
+    return {
+        *catalogue["builtins"],
+        *(item["name"] for item in catalogue["domains"]),
+        *(item["name"] for item in catalogue["enums"]),
+        *(item["name"] for item in catalogue["composites"]),
+    }
+
+
+def base_type(type_name: str) -> str:
+    return type_name.removesuffix("[]")
+
+
+def validate_renderer_semantics(contract: dict) -> None:
+    assert contract["schema_version"].endswith(".v3")
+    target = contract["postgresql_target"]
+    assert target["major"] == 16
+    assert target["savepoint_application_contract"] == "FORBIDDEN"
+    assert target["savepoint_without_relevant_tuple_database_detectable"] is False
+    assert target["subtransaction_authored_relevant_tuple_database_detectable"] is True
+    assert target["subtransactions_allowed"] is False
+    assert target["stored_xid"] is False
+    assert target["xid_is_durability_position"] is False
+
+    catalogue = contract["type_catalogue"]
+    assert catalogue["schema_name"] == "emr4_context_fabric"
+    assert {item["name"]: item["values"] for item in catalogue["enums"]} == (
+        EXPECTED_ENUMS
+    )
+    assert all(item["check_sql"] for item in catalogue["domains"])
+    known_types = declared_type_names(contract)
+
+    relations = contract["relation_catalogue"]["relations"]
+    assert contract["relation_catalogue"]["count"] == 18
+    assert contract["relation_catalogue"]["all_unlisted_column_defaults"] == (
+        "NO DEFAULT"
+    )
+    assert [relation["name"] for relation in relations] == EXPECTED_RELATIONS
+    mapped = relation_map(contract)
+    relation_names = set(mapped)
+
+    constraint_names: set[str] = set()
+    for relation in relations:
+        columns = relation["columns"]
+        assert columns
+        assert all(
+            set(column) == {"name", "data_type", "nullable", "default_sql"}
+            for column in columns
+        )
+        assert len({column["name"] for column in columns}) == len(columns)
+        assert all(column["default_sql"] is None for column in columns)
+        assert all(base_type(column["data_type"]) in known_types for column in columns)
+        names = column_names(relation)
+        assert "practice_id" in names
+
+        primary = relation["primary_key"]
+        assert primary["name"] not in constraint_names
+        constraint_names.add(primary["name"])
+        assert primary["columns"]
+        assert set(primary["columns"]).issubset(names)
+        assert "practice_id" in primary["columns"] or relation["name"] == (
+            "context_service_practice_binding"
+        )
+
+        for unique in relation["unique_constraints"]:
+            assert unique["name"] not in constraint_names
+            constraint_names.add(unique["name"])
+            assert unique["kind"] in {"UNIQUE_CONSTRAINT", "UNIQUE_INDEX"}
+            assert unique["columns"]
+            assert set(unique["columns"]).issubset(names)
+            if unique["kind"] == "UNIQUE_INDEX":
+                assert unique["predicate_sql"]
+            else:
+                assert unique["predicate_sql"] is None
+
+        for foreign_key in relation["foreign_keys"]:
+            assert foreign_key["name"] not in constraint_names
+            constraint_names.add(foreign_key["name"])
+            assert set(foreign_key["columns"]).issubset(names)
+            assert foreign_key["on_delete"] in {"RESTRICT", "NO ACTION"}
+            assert foreign_key["on_delete"] != "CASCADE"
+            target_relation = foreign_key["references_relation"]
+            assert target_relation in relation_names or target_relation in {
+                "appointments",
+                "appointment_command_idempotency",
+                "appointment_audit_log",
+            }
+            if target_relation in relation_names:
+                assert set(foreign_key["references_columns"]).issubset(
+                    column_names(mapped[target_relation])
+                )
+
+        for check in relation["check_constraints"]:
+            assert check["name"] not in constraint_names
+            constraint_names.add(check["name"])
+            sql = check["expression_sql"]
+            assert sql
+            assert not any(
+                phrase in sql.lower()
+                for phrase in (
+                    " requires ",
+                    " iff ",
+                    " derived ",
+                    "gap_free",
+                    "linked lifecycle",
+                )
+            )
+
+        assert relation["rls_enabled"] is True
+        assert relation["rls_forced"] is True
+        assert relation["rls_policy_ids"]
+        assert relation["invariant_enforcement_ids"]
+        assert relation["retention_family"] in {
+            "source",
+            "receipt_checkpoint",
+            "audit",
+            "none",
+        }
+
+    outbox = mapped["diary_context_observation_outbox_v1"]
+    assert all(
+        foreign_key["references_relation"] != "diary_committed_events"
+        for foreign_key in outbox["foreign_keys"]
+    )
+    assert (
+        contract["existing_model_contract"]["event_row_persistent_dependency_allowed"]
+        is False
+    )
+    assert (
+        contract["existing_model_contract"][
+            "event_physical_retention_owned_by_this_contract"
+        ]
+        is False
+    )
+    assert (
+        contract["existing_model_contract"][
+            "outbox_survives_event_expiry_or_later_authorized_deletion"
+        ]
+        is True
+    )
+
+    policies = {
+        policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
+    }
+    assert len(policies) == len(contract["rls_policy_catalogue"]["policies"])
+    for relation in relations:
+        assert set(relation["rls_policy_ids"]).issubset(policies)
+        for policy_id in relation["rls_policy_ids"]:
+            policy = policies[policy_id]
+            assert policy["relation"] == relation["name"]
+            assert policy["command"] in {"SELECT", "INSERT", "UPDATE", "DELETE"}
+            assert policy["roles"] == ["PUBLIC"]
+            assert policy["permissive"] is True
+            predicates = [
+                item
+                for item in (policy["using_sql"], policy["with_check_sql"])
+                if item is not None
+            ]
+            assert predicates
+            if relation["name"] == "context_service_practice_binding":
+                assert "database_login = session_user" in predicates[0]
+            else:
+                assert all(
+                    "session_binding_allows_v1(session_user" in item
+                    and "practice_id" in item
+                    and "source_contract_id" in item
+                    for item in predicates
+                )
+    assert contract["rls_policy_catalogue"]["deny_when_no_applicable_policy"] is True
+    assert contract["rls_policy_catalogue"]["public_privileges_revoked"] is True
+
+    roles = {role["role"]: role for role in contract["role_matrix"]}
+    assert set(roles) == {
+        "context_schema_owner",
+        "context_producer",
+        "context_observer",
+        "context_admission_receiver",
+        "context_coordinator",
+        "context_lifecycle",
+        "context_retention",
+        "context_application_read",
+    }
+    for role in roles.values():
+        assert role["noinherit"] is True
+        assert role["nobypassrls"] is True
+        assert role["createrole"] is False
+        assert role["createdb"] is False
+        assert role["replication"] is False
+        if role["runtime_role"]:
+            assert role["direct_table_dml"] == []
+    admission_owner = roles["context_admission_receiver"]
+    assert admission_owner["login"] is False
+    assert admission_owner["owns_functions"] == ["admit_proofread_observation_v1"]
+    assert admission_owner["direct_table_dml"] == [
+        {
+            "relation": "context_proofread_observation_admission",
+            "privileges": ["INSERT"],
+        }
+    ]
+    assert (
+        "context_proofread_observation_admission"
+        in (admission_owner["direct_table_select"])
+    )
+
+    entry_points = {entry["name"]: entry for entry in contract["entry_points"]}
+    support = {function["name"]: function for function in contract["support_functions"]}
+    trigger_functions = {
+        function["name"]: function
+        for function in contract["trigger_function_catalogue"]
+    }
+    function_names = {*entry_points, *support, *trigger_functions}
+    for entry in entry_points.values():
+        owner = roles[entry["owner"]]
+        assert entry["name"] in owner["owns_functions"]
+        assert entry["security_definer"] is True
+        assert entry["search_path_sql"] == "pg_catalog, emr4_context_fabric"
+        assert entry["dynamic_sql"] is False
+        assert entry["public_execute"] is False
+        assert entry["language"] == "plpgsql"
+        assert entry["output"]["cardinality"] == "ONE"
+        assert base_type(entry["output"]["data_type"]) in (known_types | relation_names)
+        for argument in entry["inputs"]:
+            assert argument["mode"] == "IN"
+            assert base_type(argument["data_type"]) in known_types
+        assert entry["invariant_ids"]
+
+    helper = support["session_binding_allows_v1"]
+    assert helper["output"] == {"data_type": "boolean", "cardinality": "ONE"}
+    assert "count(*) = 1" in helper["body_sql"]
+    assert "binding.database_login = session_user" in helper["body_sql"]
+
+    triggers = contract["trigger_surface"]
+    appointment_trigger = next(
+        trigger for trigger in triggers if trigger["table"] == "appointments"
+    )
+    assert appointment_trigger["events"] == ["UPDATE"]
+    assert appointment_trigger["deferrable"] is True
+    assert appointment_trigger["initially_deferred"] is True
+    assert appointment_trigger["function"] == "cf_fence_appointment_update_v1"
+    for trigger in triggers:
+        assert trigger["row_level"] is True
+        assert trigger["function"] in trigger_functions
+        assert trigger_functions[trigger["function"]]["returns"] == "trigger"
+        assert trigger["invariant_ids"]
+
+    invariants = {
+        item["id"]: item for item in contract["invariant_enforcement_catalogue"]
+    }
+    assert len(invariants) == len(contract["invariant_enforcement_catalogue"])
+    assert contract["cross_relation_invariants"] == list(invariants)
+    valid_enforcers = function_names | constraint_names | set(invariants)
+    for relation in relations:
+        assert set(relation["invariant_enforcement_ids"]).issubset(invariants)
+    for item in invariants.values():
+        assert item["predicate"]
+        assert item["enforced_by"]
+        assert set(item["enforced_by"]).issubset(valid_enforcers)
+    assert "event_retention_independence_v1" in invariants
+    assert "producer_temporal_bijection_v1" in invariants
+    assert "savepoint with no relevant tuple is not observable" in (
+        invariants["current_xid_provenance_v1"]["predicate"].lower()
+    )
+
+
+def validate_machine_contract(contract: dict) -> None:
+    schema = data(CONTRACT_SCHEMA)
+    Draft202012Validator(schema).validate(contract)
+    validate_renderer_semantics(contract)
+    assert contract["contract_sha256"] == canonical_contract_digest(contract)
+
+
+def semantic_schema_without_digest_const() -> dict:
+    schema = copy.deepcopy(data(CONTRACT_SCHEMA))
+    schema["properties"]["contract_sha256"] = {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$",
+    }
+    return schema
 
 
 def test_architecture_plan_has_exact_api_and_non_authority_boundary() -> None:
@@ -105,34 +465,23 @@ def test_architecture_plan_has_exact_api_and_non_authority_boundary() -> None:
         assert phrase in joined
 
 
-def test_postgresql_16_provenance_and_temporal_obligation_are_exact() -> None:
+def test_postgresql_16_provenance_savepoint_claim_and_temporal_rule_are_exact() -> None:
     contract = data(CONTRACT)
     target = contract["postgresql_target"]
     expected_expression = (
         "((((pg_current_xact_id()::text)::bigint & 4294967295)::text)::xid)"
     )
-    assert target == {
-        "major": 16,
-        "producer_isolation": "READ COMMITTED",
-        "coordinator_isolation": "SERIALIZABLE",
-        "retention_isolation": "SERIALIZABLE",
-        "top_level_xid32_expression": expected_expression,
-        "tuple_provenance_predicate": f"xmin = {expected_expression}",
-        "savepoints_allowed": False,
-        "subtransactions_allowed": False,
-        "caller_supplied_xid": False,
-        "stored_xid": False,
-        "retained_xid": False,
-        "xid_is_durability_position": False,
-        "wrap_freeze_policy": (
-            "active_top_level_only_zero_legacy_no_committed_in_progress"
-        ),
-    }
+    assert target["top_level_xid32_expression"] == expected_expression
+    assert target["tuple_provenance_predicate"] == f"xmin = {expected_expression}"
+    assert target["savepoint_application_contract"] == "FORBIDDEN"
+    assert target["savepoint_without_relevant_tuple_database_detectable"] is False
+    assert target["subtransaction_authored_relevant_tuple_database_detectable"] is True
     model = contract["existing_model_contract"]
     assert model["temporal_transition_columns"] == [
         "start_time",
         "duration_minutes",
     ]
+    assert model["appointment_trigger_event"] == "UPDATE"
     assert model["temporal_obligation_sql"] == (
         "OLD.start_time IS DISTINCT FROM NEW.start_time OR "
         "OLD.duration_minutes IS DISTINCT FROM NEW.duration_minutes"
@@ -141,255 +490,89 @@ def test_postgresql_16_provenance_and_temporal_obligation_are_exact() -> None:
 
     joined = " ".join("\n".join((text(PLAN), text(DESIGN))).lower().split())
     for phrase in (
-        "savepoints",
         "session.begin_nested()",
-        "subtransaction",
+        "subtransaction-authored",
+        "no-write savepoint",
+        "not database-observable",
         "text-to-`xid` cast",
         "old.start_time is distinct from new.start_time",
         "old.duration_minutes is distinct from new.duration_minutes",
+        "all-`update`",
         "non-temporal update-confirm",
         "insert-then-delete",
     ):
         assert phrase in joined
 
 
-def test_relation_catalogue_has_exact_names_columns_keys_rls_and_retention() -> None:
-    contract = data(CONTRACT)
-    relations = contract["relation_catalogue"]["relations"]
-    expected_names = [
-        "context_observation_stream_head",
-        "diary_context_aggregate_aliases_v1",
-        "diary_context_observation_outbox_v1",
-        "context_proofread_observation_admission",
-        "context_generation_registry_barrier",
-        "context_observer_generation",
-        "context_durability_checkpoint",
-        "context_recovery_anchor",
-        "context_classified_observation_receipt",
-        "context_frame_generation",
-        "context_invalidation_watermark",
-        "context_reassembly_obligation",
-        "context_durability_lifecycle",
-        "context_durability_audit",
-        "context_observation_key_interval",
-        "context_recovery_pin",
-        "context_service_practice_binding",
-        "context_retention_policy",
-    ]
-    assert contract["relation_catalogue"]["count"] == 18
-    assert [relation["name"] for relation in relations] == expected_names
+def test_relation_catalogue_is_renderer_ready_and_semantically_closed() -> None:
+    validate_renderer_semantics(data(CONTRACT))
 
-    for relation in relations:
-        columns = column_names(relation)
-        assert "practice_id" in columns
-        assert relation["primary_key"]
-        assert set(relation["primary_key"]).issubset(columns)
-        assert len(relation["columns"]) == len(columns)
-        assert relation["rls"]
-        assert relation["mutation"]
-        assert relation["retention_family"] in {
-            "source",
-            "receipt_checkpoint",
-            "audit",
-            "none",
+
+def test_admission_owner_has_exact_internal_privileges() -> None:
+    contract = data(CONTRACT)
+    roles = {row["role"]: row for row in contract["role_matrix"]}
+    owner = roles["context_admission_receiver"]
+    assert owner["login"] is False
+    assert owner["owns_functions"] == ["admit_proofread_observation_v1"]
+    assert owner["direct_table_dml"] == [
+        {
+            "relation": "context_proofread_observation_admission",
+            "privileges": ["INSERT"],
         }
-        assert all("CASCADE" not in fk for fk in relation["foreign_keys"])
-
-    expected_retention = {
-        "diary_context_observation_outbox_v1": "source",
-        "context_proofread_observation_admission": "receipt_checkpoint",
-        "context_observer_generation": "receipt_checkpoint",
-        "context_durability_checkpoint": "receipt_checkpoint",
-        "context_recovery_anchor": "receipt_checkpoint",
-        "context_classified_observation_receipt": "receipt_checkpoint",
-        "context_frame_generation": "receipt_checkpoint",
-        "context_invalidation_watermark": "receipt_checkpoint",
-        "context_reassembly_obligation": "receipt_checkpoint",
-        "context_durability_lifecycle": "receipt_checkpoint",
-        "context_durability_audit": "audit",
-        "context_observation_key_interval": "receipt_checkpoint",
-    }
-    mapped = relation_map(contract)
-    assert {
-        name: mapped[name]["retention_family"] for name in expected_retention
-    } == expected_retention
-
-
-def test_admission_alias_anchor_key_and_retention_contracts_are_structural() -> None:
-    mapped = relation_map(data(CONTRACT))
-    alias = mapped["diary_context_aggregate_aliases_v1"]
-    assert alias["primary_key"] == [
-        "practice_id",
-        "source_contract_id",
-        "product_appointment_uuid",
     ]
-    assert alias["unique_keys"] == [
-        [
-            "practice_id",
-            "source_contract_id",
-            "opaque_aggregate_alias",
-        ]
-    ]
-    assert alias["mutation"] == "insert_only_no_update_no_delete"
-    assert alias["retention_family"] == "none"
-
-    admission = mapped["context_proofread_observation_admission"]
-    assert admission["primary_key"][-2:] == ["source_position", "entry_kind"]
-    assert admission["mutation"] == "insert_only_max_one_primary_one_conflict"
-    assert any("PRIMARY requires" in item for item in admission["checks"])
-    assert any("CONFLICT requires" in item for item in admission["checks"])
-
-    anchor = mapped["context_recovery_anchor"]
-    assert anchor["mutation"] == "insert_only_no_update_no_delete"
-    assert "checkpoint_integrity_digest" in column_names(anchor)
-    assert "anchor_digest" in column_names(anchor)
-
-    interval = mapped["context_observation_key_interval"]
-    assert any("gap_free" in item for item in interval["checks"])
-    assert any("future_fenced" in item for item in interval["checks"])
-    assert interval["mutation"] == ("insert_only_future_interval_no_historical_edit")
-
-    policy = mapped["context_retention_policy"]
-    assert any(
-        "retention_execution_enabled = false" in item for item in policy["checks"]
+    entry = next(
+        item
+        for item in contract["entry_points"]
+        if item["name"] == "admit_proofread_observation_v1"
     )
+    assert entry["owner"] == "context_admission_receiver"
+    assert entry["output"]["data_type"] == ("context_proofread_observation_admission")
+    assert [item["data_type"] for item in entry["inputs"]] == [
+        "generation_locator_v1",
+        "bigint",
+        "proofread_packet_v1",
+    ]
 
 
-def test_role_entry_point_and_rls_matrix_is_closed() -> None:
+def test_all_update_trigger_enforces_positive_and_negative_temporal_obligation() -> (
+    None
+):
     contract = data(CONTRACT)
-    roles = contract["role_matrix"]
-    assert [row["role"] for row in roles] == [
-        "context_schema_owner",
-        "context_producer",
-        "context_observer",
-        "context_admission_receiver",
-        "context_coordinator",
-        "context_lifecycle",
-        "context_retention",
-        "context_application_read",
-    ]
-    assert roles[0]["login"] is False
-    assert roles[0]["owns_objects"] is True
-    for row in roles:
-        assert row["noinherit"] is True
-        assert row["nobypassrls"] is True
-        assert row["direct_table_dml"] == []
-        if row["role"] != "context_schema_owner":
-            assert row["owns_objects"] is False
-
-    entry_points = contract["entry_points"]
-    assert [entry["name"] for entry in entry_points] == [
-        "project_update_confirm_reschedule_v1",
-        "admit_proofread_observation_v1",
-        "apply_durability_transition_v1",
-        "register_observer_generation_v1",
-        "append_recovery_anchor_v1",
-        "rotate_observation_key_v1",
-        "consume_observer_generation_v1",
-        "evaluate_source_retention_v1",
-        "purge_source_rows_v1",
-    ]
-    for entry in entry_points:
-        assert entry["security_definer"] is True
-        assert entry["fixed_search_path"] is True
-        assert entry["dynamic_sql"] is False
-        assert entry["public_execute"] is False
-        assert entry["authority_source"]
-
-    producer = next(row for row in roles if row["role"] == "context_producer")
-    assert producer["execute_entry_points"] == ["project_update_confirm_reschedule_v1"]
-    assert producer["direct_table_select"] == []
-
-
-def test_trigger_surface_closes_insert_update_delete_and_no_event_paths() -> None:
-    trigger_surface = data(CONTRACT)["trigger_surface"]
-    actual = [
-        (
-            trigger["table"],
-            trigger["timing"],
-            tuple(trigger["events"]),
-            trigger["deferrable"],
-            trigger.get("initially_deferred"),
-        )
-        for trigger in trigger_surface
-    ]
-    assert actual == [
-        (
-            "appointment_command_idempotency",
-            "BEFORE",
-            ("UPDATE", "DELETE"),
-            False,
-            None,
-        ),
-        (
-            "appointment_command_idempotency",
-            "AFTER",
-            ("INSERT", "UPDATE", "DELETE"),
-            True,
-            True,
-        ),
-        (
-            "appointments",
-            "AFTER",
-            ("UPDATE OF start_time,duration_minutes",),
-            True,
-            True,
-        ),
-        ("appointment_audit_log", "BEFORE", ("UPDATE", "DELETE"), False, None),
-        ("appointment_audit_log", "AFTER", ("INSERT", "UPDATE", "DELETE"), True, True),
-        ("diary_committed_events", "BEFORE", ("UPDATE", "DELETE"), False, None),
-        ("diary_committed_events", "AFTER", ("INSERT", "UPDATE", "DELETE"), True, True),
-        (
-            "diary_context_aggregate_aliases_v1",
-            "BEFORE",
-            ("UPDATE", "DELETE"),
-            False,
-            None,
-        ),
-        (
-            "diary_context_aggregate_aliases_v1",
-            "AFTER",
-            ("INSERT", "UPDATE", "DELETE"),
-            True,
-            True,
-        ),
-        (
-            "context_observation_stream_head",
-            "BEFORE",
-            ("UPDATE", "DELETE"),
-            False,
-            None,
-        ),
-        (
-            "context_observation_stream_head",
-            "AFTER",
-            ("INSERT", "UPDATE", "DELETE"),
-            True,
-            True,
-        ),
-        (
-            "diary_context_observation_outbox_v1",
-            "BEFORE",
-            ("UPDATE", "DELETE"),
-            False,
-            None,
-        ),
-        (
-            "diary_context_observation_outbox_v1",
-            "AFTER",
-            ("INSERT", "UPDATE", "DELETE"),
-            True,
-            True,
-        ),
-    ]
-    assert any(
-        trigger["table"] == "appointments"
-        and "non-temporal projection absence" in trigger["purpose"]
-        for trigger in trigger_surface
+    trigger = next(
+        item
+        for item in contract["trigger_surface"]
+        if item["name"] == "trg_cf_appointment_fence"
     )
+    assert trigger["events"] == ["UPDATE"]
+    assert trigger["function"] == "cf_fence_appointment_update_v1"
+    invariant = next(
+        item
+        for item in contract["invariant_enforcement_catalogue"]
+        if item["id"] == "producer_temporal_bijection_v1"
+    )
+    assert "OLD.start_time IS DISTINCT FROM NEW.start_time" in invariant["predicate"]
+    assert "false requires their absence" in invariant["predicate"]
+    assert trigger["function"] in invariant["enforced_by"]
 
 
-def test_machine_contract_schema_and_canonical_digest_are_exact() -> None:
+def test_outbox_is_transaction_bound_but_physically_event_independent() -> None:
+    contract = data(CONTRACT)
+    outbox = relation_map(contract)["diary_context_observation_outbox_v1"]
+    assert "raw_event_uuid" in column_names(outbox)
+    assert all(
+        key["references_relation"] != "diary_committed_events"
+        for key in outbox["foreign_keys"]
+    )
+    invariant = next(
+        item
+        for item in contract["invariant_enforcement_catalogue"]
+        if item["id"] == "event_retention_independence_v1"
+    )
+    assert "no persistent foreign key" in invariant["predicate"]
+    assert "later product-event expiry" in invariant["predicate"]
+
+
+def test_exact_schema_and_canonical_digest_pass() -> None:
     contract = data(CONTRACT)
     schema = data(CONTRACT_SCHEMA)
     Draft202012Validator.check_schema(schema)
@@ -398,18 +581,98 @@ def test_machine_contract_schema_and_canonical_digest_are_exact() -> None:
         schema["properties"]["contract_sha256"]["const"]
         == (contract["contract_sha256"])
     )
+    assert (
+        schema["properties"]["relation_catalogue"]["const"]
+        == (contract["relation_catalogue"])
+    )
+    assert (
+        schema["properties"]["type_catalogue"]["const"] == (contract["type_catalogue"])
+    )
+    assert (
+        schema["properties"]["rls_policy_catalogue"]["const"]
+        == (contract["rls_policy_catalogue"])
+    )
 
-    boundary = contract["artifact_boundary"]
-    for artifact in boundary["core_owned_artifacts"]:
-        assert (ROOT / artifact).exists()
-        assert not any(
-            artifact.startswith(prefix) for prefix in boundary["forbidden_prefixes"]
-        )
-    assert boundary["executable_ddl"] is False
-    assert boundary["database_contact"] is False
-    assert boundary["provider_contact"] is False
-    assert boundary["runtime_wiring"] is False
-    assert boundary["product_data_processed"] is False
+
+def test_exact_schema_rejects_resealed_non_hash_mutation() -> None:
+    contract = data(CONTRACT)
+    candidate = copy.deepcopy(contract)
+    candidate["invariant_enforcement_catalogue"][0]["predicate"] += " unsafe"
+    reseal_contract(candidate)
+    with pytest.raises(ValidationError):
+        Draft202012Validator(semantic_schema_without_digest_const()).validate(candidate)
+
+
+def test_semantic_validator_rejects_resealed_unsafe_variants() -> None:
+    contract = data(CONTRACT)
+    candidates: list[dict] = []
+
+    def mutated(path: tuple[object, ...], value: object) -> None:
+        candidate = copy.deepcopy(contract)
+        target: object = candidate
+        for part in path[:-1]:
+            target = target[part]  # type: ignore[index]
+        target[path[-1]] = value  # type: ignore[index]
+        candidates.append(reseal_contract(candidate))
+
+    mutated(
+        ("postgresql_target", "savepoint_without_relevant_tuple_database_detectable"),
+        True,
+    )
+    mutated(
+        ("type_catalogue", "enums", 0, "values"),
+        ["PRIMARY", "CONFLICT", "UNBOUNDED"],
+    )
+    mutated(
+        ("relation_catalogue", "relations", 0, "columns", 0, "default_sql"),
+        "now()",
+    )
+    mutated(
+        ("relation_catalogue", "relations", 1, "primary_key", "columns"),
+        ["product_appointment_uuid"],
+    )
+    event_fk = {
+        "name": "fk_unsafe_event",
+        "columns": ["practice_id", "raw_event_uuid"],
+        "references_relation": "diary_committed_events",
+        "references_columns": ["practice_id", "id"],
+        "on_delete": "RESTRICT",
+        "deferrable": False,
+    }
+    candidate = copy.deepcopy(contract)
+    candidate["relation_catalogue"]["relations"][2]["foreign_keys"].append(event_fk)
+    candidates.append(reseal_contract(candidate))
+    mutated(
+        ("rls_policy_catalogue", "policies", 0, "using_sql"),
+        "TRUE",
+    )
+    mutated(
+        ("entry_points", 1, "output", "data_type"),
+        "jsonb",
+    )
+    mutated(
+        ("role_matrix", 3, "direct_table_dml"),
+        [],
+    )
+    mutated(
+        ("trigger_surface", 2, "events"),
+        ["UPDATE OF start_time,duration_minutes"],
+    )
+    mutated(
+        ("trigger_function_catalogue", 2, "returns"),
+        "text",
+    )
+    candidate = copy.deepcopy(contract)
+    candidate["invariant_enforcement_catalogue"].pop()
+    candidates.append(reseal_contract(candidate))
+    candidate = copy.deepcopy(contract)
+    candidate["cross_relation_invariants"][0] = "nonexistent_invariant"
+    candidates.append(reseal_contract(candidate))
+
+    assert len(candidates) == 12
+    for candidate in candidates:
+        with pytest.raises(AssertionError):
+            validate_renderer_semantics(candidate)
 
 
 def test_existing_models_match_exact_foreign_keys_checks_and_defaults() -> None:
@@ -536,98 +799,19 @@ def test_update_confirm_source_flow_is_one_session_ordered_and_not_nested() -> N
     assert "record.audit_log_id = audit_log_id" in combined
 
 
-def test_machine_contract_rejects_adversarial_architecture_mutations() -> None:
+def test_artifact_boundary_remains_static_and_unmounted() -> None:
     contract = data(CONTRACT)
-    mutations: list[dict] = []
-
-    def mutate(path: tuple[object, ...], value: object) -> None:
-        candidate = copy.deepcopy(contract)
-        target: object = candidate
-        for part in path[:-1]:
-            target = target[part]  # type: ignore[index]
-        target[path[-1]] = value  # type: ignore[index]
-        mutations.append(candidate)
-
-    candidate = copy.deepcopy(contract)
-    candidate["relation_catalogue"]["relations"].append(
-        copy.deepcopy(candidate["relation_catalogue"]["relations"][-1])
-    )
-    mutations.append(candidate)
-    candidate = copy.deepcopy(contract)
-    candidate["relation_catalogue"]["relations"].pop()
-    mutations.append(candidate)
-    mutate(("postgresql_target", "major"), 17)
-    mutate(("postgresql_target", "top_level_xid32_expression"), "xmin")
-    mutate(("postgresql_target", "savepoints_allowed"), True)
-    mutate(("postgresql_target", "stored_xid"), True)
-    mutate(
-        ("existing_model_contract", "temporal_transition_columns"),
-        ["start_time", "duration_minutes", "practitioner_id"],
-    )
-    mutate(
-        ("existing_model_contract", "route_call_order"),
-        list(reversed(contract["existing_model_contract"]["route_call_order"])),
-    )
-    mutate(
-        ("relation_catalogue", "relations", 0, "columns", 0),
-        "practice_id:text:not_null",
-    )
-    mutate(
-        ("relation_catalogue", "relations", 1, "primary_key"),
-        ["product_appointment_uuid"],
-    )
-    mutate(("relation_catalogue", "relations", 1, "unique_keys"), [])
-    mutate(("relation_catalogue", "relations", 1, "mutation"), "delete_allowed")
-    mutate(
-        ("relation_catalogue", "relations", 2, "foreign_keys"),
-        ["raw_event_uuid->diary_committed_events.id:CASCADE"],
-    )
-    mutate(("relation_catalogue", "relations", 3, "checks"), ["PRIMARY only"])
-    mutate(("relation_catalogue", "relations", 7, "mutation"), "update_allowed")
-    mutate(
-        ("relation_catalogue", "relations", 14, "checks"),
-        ["interval_end > interval_start"],
-    )
-    mutate(("relation_catalogue", "relations", 17, "checks"), ["all durations >= 0"])
-    mutate(("role_matrix", 1, "direct_table_dml"), ["INSERT"])
-    mutate(("role_matrix", 4, "nobypassrls"), False)
-    mutate(("entry_points", 0, "public_execute"), True)
-    mutate(("entry_points", 1, "dynamic_sql"), True)
-    mutate(("entry_points", 2, "input"), ["decision_packet:jsonb"])
-    mutate(("trigger_surface", 2, "events"), ["UPDATE"])
-    mutate(("trigger_surface", 5, "events"), ["UPDATE"])
-    mutate(("trigger_surface", 12, "deferrable"), False)
-    candidate = copy.deepcopy(contract)
-    candidate["cross_relation_invariants"].pop()
-    mutations.append(candidate)
-    mutate(("artifact_boundary", "forbidden_prefixes"), ["alembic/"])
-    mutate(("artifact_boundary", "core_owned_artifacts", 0), "app/runtime.py")
-    mutate(("artifact_boundary", "database_contact"), True)
-    mutate(("artifact_boundary", "product_data_processed"), True)
-
-    for candidate in mutations:
-        with pytest.raises((ValidationError, AssertionError)):
-            validate_machine_contract(candidate)
-
-
-def test_cross_relation_invariants_and_claim_boundary_remain_fail_closed() -> None:
-    contract = data(CONTRACT)
-    joined = " ".join(contract["cross_relation_invariants"]).lower()
-    for phrase in (
-        "non-null practice_id",
-        "never cascade",
-        "one primary",
-        "admission locator",
-        "before optional source",
-        "lifecycle-owned anchor",
-        "gap-free",
-        "generation-local",
-        "retention families are independent",
-        "complete non-consumed census",
-        "false by default",
-        "never grant fresh read or command authority",
-    ):
-        assert phrase in joined
+    boundary = contract["artifact_boundary"]
+    for artifact in boundary["core_owned_artifacts"]:
+        assert (ROOT / artifact).exists()
+        assert not any(
+            artifact.startswith(prefix) for prefix in boundary["forbidden_prefixes"]
+        )
+    assert boundary["executable_ddl"] is False
+    assert boundary["database_contact"] is False
+    assert boundary["provider_contact"] is False
+    assert boundary["runtime_wiring"] is False
+    assert boundary["product_data_processed"] is False
 
     plan = " ".join(text(PLAN).lower().split())
     for phrase in (

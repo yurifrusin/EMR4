@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_seventh_durability_migration_transaction_architecture_recovery_candidate_for_fresh_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The seventh candidate closes the six eligible-veto findings with an all-UPDATE temporal obligation guard, a renderer-closed v3 catalogue and whole-contract schema, coherent non-login admission-owner privileges, digest-resealed semantic mutation testing, calibrated no-write-savepoint language and persistent event-retention independence. Contract hash is sha256:78df5cb30be1d4d11d268592165c545212bade73a8a6068dbb479c46d44b56bd. All 209 exact API Spine, register, parent state-machine, source-specific durability and current architecture checks pass; Ruff, formatting, canonical hash and exact-path diff checks pass. AER-0051 remains open pending fresh veto.",
+    "current_authority_allocation": "GPT Sol owns architecture recovery, acceptance and exact-path task-branch commit. After commit, one genuinely fresh bounded read-only native reviewer may receive exact allowlisted paths and one no-bytecode/no-cache test command; it receives no Git-command, edit, provider, database, product-data, acceptance, integration, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Before the seventh commit, the task branch codex/ariadne-bernie-davida-parallel-seam remains at a0ffc10a97cec23399724e56e6479932f029ab00, seven commits ahead of origin task 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The rejected r29 review worktree passed postflight clean at a0ffc10a; docs/branding remains user-owned, untracked and excluded.",
+    "live_handover_current_baton": "The live handover directs the pure provider-free unmounted migration-and-transaction architecture descendant for the accepted durability state machine under standing uninterrupted-development authority. The sixth candidate a0ffc10a was correctly rejected; this seventh candidate remains pending until a fresh exact-head veto passes and admits no inert DDL rehearsal yet.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI was opened, listed, searched or inferred. No app, Alembic, Diary or API Spine artifact changed; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement occurred. docs/branding and all unrelated untracked artifacts remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

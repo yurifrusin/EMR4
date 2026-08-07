@@ -38,7 +38,7 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 55
+    assert register["register_revision"] == 56
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 55)
@@ -159,10 +159,14 @@ def test_migration_architecture_plan_veto_and_review_bootstrap_are_preserved() -
     assert (
         "sole owner-private immutable alias bijection" in plan["correction"]["action"]
     )
-    assert "pg_current_xact_id()" in plan["correction"]["action"]
-    assert "prior-transaction claim adoption" in plan["correction"]["action"]
-    assert "bidirectional deferred commit fences" in plan["correction"]["action"]
-    assert "closed JSON contract/schema" in plan["correction"]["action"]
+    assert "exact low-XID32 provenance" in plan["correction"]["action"]
+    assert "all-UPDATE appointment constraint trigger" in plan["correction"]["action"]
+    assert "no-write savepoints not database-observable" in plan["correction"]["action"]
+    assert (
+        "persistent outbox-to-product-event foreign key" in plan["correction"]["action"]
+    )
+    assert "44 executable RLS policies" in plan["correction"]["action"]
+    assert "digest-resealed semantic validator" in plan["correction"]["action"]
 
     process = incidents["AER-0052"]
     assert process["status"] == "corrected"

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_seventh_durability_migration_transaction_architecture_recovery_and_fresh_veto_then_pause_for_user_summary",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The seventh recovery must add an all-UPDATE appointment obligation guard, fully renderable closed PostgreSQL type/domain/enum/composite/default/key/FK/check/RLS/function/trigger/enforcement catalogues, coherent non-login function ownership, semantic mutation tests that remain meaningful after digest resealing, accurate savepoint/subtransaction claims and event-retention independence. The accepted parent state machine and API Spine remain unchanged. AER-0051 remains open pending a fresh exact-head passing veto.",
+    "current_authority_allocation": "GPT Sol owns the architecture recovery, acceptance and task-branch integration. A genuinely fresh bounded read-only native veto is permitted only after deterministic checks and a distinct pre-dispatch receipt; the reviewer receives exact paths and no Git-command authority. No worker receives acceptance, protected-ref, provider, patient/product-data, runtime, deployment or release authority.",
+    "git_refs_and_worktree": "The active task branch is codex/ariadne-bernie-davida-parallel-seam at a0ffc10a97cec23399724e56e6479932f029ab00, seven commits ahead of origin task 6862572e3bca3a1f1e4b999c6c66cef30b7b61fa. The rejected review worktree r29 passed postflight clean and unchanged at that exact candidate. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. User-owned untracked docs/branding and unrelated artifacts remain preserved and excluded.",
+    "live_handover_current_baton": "The complete live handover accepts the provider-free unmounted durability state-machine rehearsal at 95a2ed5e960c58686262b5e82ce2e89354a3860a and directs the declarative migration-and-transaction architecture descendant on codex/ariadne-bernie-davida-parallel-seam under Yuri's standing uninterrupted-development authority. Candidate a0ffc10a is revision_required after its procedurally eligible sixth-recovery veto; the seventh recovery must close those exact findings before any inert DDL rehearsal can be admitted.",
+    "protected_evidence_boundaries": "No protected holdout or historical PHI may be opened, listed, searched or inferred. No app, Alembic, Diary or API Spine artifact may change; no executable DDL, migration, database/source/network/provider contact, patient/product/protected data, new command/write authority, credential, runtime wiring, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and all unrelated untracked receipts, evidence and cost ledgers remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
