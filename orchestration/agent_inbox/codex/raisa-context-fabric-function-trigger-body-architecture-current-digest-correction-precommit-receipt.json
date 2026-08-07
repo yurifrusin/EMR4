@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_current_candidate_digest_provenance_correction_before_fresh_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and four normative recoveries require the design, generated contract and structural schema to agree on the current candidate digest. The contract/schema remain sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde; only the stale design label was corrected. The six-suite architecture packet and 80-test AER packet pass after correction.",
+    "current_authority_allocation": "GPT Sol owns deterministic reconciliation, error registration, candidate commit and later acceptance. All authoring lanes are complete and no reviewer is active; no worker or reviewer has integration, protected-ref, provider, data, runtime or deployment authority.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at 3c5b1609423de96294af889f2475d4145ab8c4e5 before this bounded correction commit. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Only explicit correction/register/receipt paths will be staged.",
+    "live_handover_current_baton": "The fully reread live baton keeps this tranche pure, provider-free, unmounted and architecture-only; the rebuilt function-and-trigger-body candidate still requires fresh exact-HEAD independent veto before acceptance.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener contact, SQL/DDL, migration/object, app/API/Diary change, operational state/credential, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked artifact remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

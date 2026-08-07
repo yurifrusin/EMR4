@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 69
+    assert register["register_revision"] == 70
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 69)
+        f"AER-{index:04d}" for index in range(1, 70)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 54
+    assert len(agent_incidents) == 55
     assert len(transport_incidents) == 7
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -498,6 +498,36 @@ def test_function_trigger_api_spine_baseline_drift_is_contained() -> None:
     }
     assert receipt["implicated_paths_changed_since_source_head"] is False
     assert incident["status"] == "contained"
+
+
+def test_function_trigger_current_digest_provenance_is_corrected_before_review() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0069"
+    ]
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-function-trigger-body-architecture-current-digest-correction-receipt.json"
+    )
+    design = (
+        ROOT
+        / "docs"
+        / "raisa-provider-free-unmounted-durability-function-trigger-body-architecture-design.md"
+    ).read_text(encoding="utf-8")
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.current_candidate_digest_provenance_mismatch"
+    )
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+    assert receipt["status"] == "corrected_before_independent_review"
+    assert receipt["expected_digest"] in design
+    assert receipt["correction"]["contract_or_schema_changed"] is False
 
 
 def test_operational_weave_auth_timeout_is_sanitized_and_recovered() -> None:
@@ -1120,17 +1150,17 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 68
+    assert report["incident_count"] == 69
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 54,
+        "agent_behavior": 55,
         "harness": 4,
         "repository": 3,
         "transport": 7,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 12,
-        "evidence_misreport": 6,
+        "evidence_misreport": 7,
         "harness_failure": 4,
         "output_contract_violation": 22,
         "read_only_violation": 2,
@@ -1141,7 +1171,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
         "canonical_unchanged": 54,
-        "untrusted_partial_worktree": 12,
+        "untrusted_partial_worktree": 13,
     }
     assert report["recurring_patterns"] == [
         {

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 69,
+  "register_revision": 70,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-07",
@@ -2682,6 +2682,43 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0069",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-current-digest-preflight-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every design label naming the current deterministic candidate digest must equal the builder-derived contract and generated schema digest before exact-HEAD reviewer admission.",
+      "observed_error": "The rebuilt contract and schema bound digest sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde while the design still labelled rejected predecessor digest sha256:631773f9112e7804f5e2ea15b04d4cd4cb4c699502d3491b516d57d14e6f35d5 as current.",
+      "detection_method": "Sol compared the successful builder module --check output, generated contract and schema digest with the design before dispatching the fresh reviewer; the mismatch was corrected before the prepared review worktree was used.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-current-digest-correction-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-70.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_candidate_digest_provenance_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The design now names the builder-derived rebuilt contract digest. The unused review worktree must be replaced by a fresh exact-HEAD worktree after the correction is committed.",
+        "prevention_control": "Before reviewer worktree creation, compare every current-candidate digest label against the builder --check output and generated contract/schema digest values.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-current-digest-correction-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-70.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

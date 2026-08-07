@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "admit_rebuilt_function_trigger_body_candidate_to_fresh_exact_head_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete function-and-trigger-body plan; structural-feasibility, implementation, typed-IR and exact-veto recoveries; recovered design; threat-model delta; accepted parent closeout and Sol acceptance were reread. Rebuilt candidate 3c5b1609423de96294af889f2475d4145ab8c4e5 passes the frozen deterministic builder, schema, semantic, hostile, Ruff and scoped API Spine gates and now requires one fresh candidate-independent exact-HEAD veto before acceptance.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture/recovery owner and sole acceptance owner. The completed bounded native implementation lanes supplied candidate artifacts only. A fresh native read-only reviewer may now perform the candidate-independent exact-HEAD veto because no external provider/model call is authorised or required; no reviewer may self-accept, integrate, push, or expand authority.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at tracked-clean candidate 3c5b1609423de96294af889f2475d4145ab8c4e5, seven commits ahead of origin task 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Preserved unrelated untracked files, including docs/branding, are unchanged.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after restoration. The live Current Result accepts only the immutable provider-free unmounted migration/transaction structural parent at c55d25d6c9704ae4612ef2d123158f71302ab411, and Next Implementation authorises only this repository-local function-and-trigger-body architecture before any inert DDL rehearsal.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/outbox/feed/watcher/listener/source contact, SQL rendering or execution, DDL, migration/database object, app/API/Diary change, operational persistence or credential, command/write expansion, deployment, production, release, Pages rebuild or protected-ref movement is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger artifact remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

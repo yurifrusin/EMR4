@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.function-trigger-body-current-digest-correction.v1",
+  "observed_on": "2026-08-07",
+  "candidate_head_before_correction": "3c5b1609423de96294af889f2475d4145ab8c4e5",
+  "status": "corrected_before_independent_review",
+  "reason_code": "current_candidate_digest_provenance_mismatch",
+  "expected_digest": "sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde",
+  "stale_digest": "sha256:631773f9112e7804f5e2ea15b04d4cd4cb4c699502d3491b516d57d14e6f35d5",
+  "detection": {
+    "builder_module_check": "passed",
+    "generated_contract_digest": "sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde",
+    "generated_schema_digest_const": "sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde",
+    "design_current_candidate_label_before_correction": "sha256:631773f9112e7804f5e2ea15b04d4cd4cb4c699502d3491b516d57d14e6f35d5"
+  },
+  "correction": {
+    "action": "Updated only the design's current deterministic candidate digest to the builder-derived generated contract digest before fresh reviewer admission.",
+    "prevention_control": "Candidate pre-dispatch must compare every current-candidate digest label with the builder --check output and generated contract/schema values before creating the exact review worktree.",
+    "contract_or_schema_changed": false,
+    "provider_or_model_calls": 0,
+    "database_or_runtime_contact": false
+  },
+  "protected_boundaries": {
+    "protected_refs_changed": false,
+    "branding_touched": false,
+    "unrelated_untracked_files_touched": false
+  }
+}

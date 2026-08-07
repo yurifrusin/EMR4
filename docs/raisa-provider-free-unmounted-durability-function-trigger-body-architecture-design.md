@@ -27,7 +27,7 @@ Rejected typed-but-misbound candidate:
 `sha256:f8afd0ce97169b0fae926dbe7999b9961d9be7506f711de579a3c035f75b2064`
 
 Current deterministic typed-IR candidate:
-`sha256:631773f9112e7804f5e2ea15b04d4cd4cb4c699502d3491b516d57d14e6f35d5`
+`sha256:8871663b121dedff089b7517406f8223a3df2153bce66716d624b2f321e20dde`
 
 ## Purpose and derivation
 
