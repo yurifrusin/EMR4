@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.sol-review-reconciliation.v1",
+  "status": "revision_required",
+  "candidate_head": "009395ac28eb7ac05017fe5fbd1ae1439ecf948d",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-receipt.json",
+  "review_decision": "pass",
+  "admitted": false,
+  "provider_or_model_calls_after_review": 0,
+  "database_or_docker_calls": 0,
+  "finding": {
+    "severity": "P1",
+    "id": "exact_type_population_subdivision_mismatch",
+    "detail": "The plan stated 4 domains, 17 enums and 11 composites. The exact accepted render manifest ordered nodes contain 4 domains, 19 enums and 9 composites. The total 32 was correct, but exact catalogue readback would be mis-specified."
+  },
+  "recovery": "Bind the exact 4/19/9/32 subdivision in plan, design and tests and obtain a fresh exact-HEAD catalogue-delta veto before implementation.",
+  "authority_boundary": "rejected_review_preserved_no_runtime_or_acceptance_authority"
+}

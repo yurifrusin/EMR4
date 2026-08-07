@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 87
+    assert register["register_revision"] == 88
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 95)
+        f"AER-{index:04d}" for index in range(1, 96)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 75
+    assert len(agent_incidents) == 76
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1393,20 +1393,38 @@ def test_disposable_postgresql_long_review_path_is_recovered() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_disposable_postgresql_catalogue_split_underreport_is_contained() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0095"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["process_severity"] == "material"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["recurrence_signature"] == (
+        "verifier.exact_catalogue_kind_population_underreport"
+    )
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert "4/19/9/32" in incident["correction"]["action"]
+    assert incident["status"] == "contained"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 94
+    assert report["incident_count"] == 95
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 75,
+        "agent_behavior": 76,
         "harness": 6,
         "repository": 5,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
-        "evidence_misreport": 11,
+        "evidence_misreport": 12,
         "harness_failure": 6,
         "output_contract_violation": 30,
         "read_only_violation": 2,
@@ -1416,7 +1434,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 2,
-        "canonical_unchanged": 72,
+        "canonical_unchanged": 73,
         "untrusted_partial_worktree": 20,
     }
     assert report["recurring_patterns"] == [

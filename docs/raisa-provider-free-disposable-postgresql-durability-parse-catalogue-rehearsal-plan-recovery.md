@@ -2,8 +2,9 @@
 
 Date: 2026-08-07
 
-Status: accepted after fresh exact-HEAD replacement veto at
-`009395ac28eb7ac05017fe5fbd1ae1439ecf948d`
+Status: recovery mechanics passed review at
+`009395ac28eb7ac05017fe5fbd1ae1439ecf948d`, but plan acceptance is withheld
+pending a fresh exact-catalogue population-delta veto
 
 ## Rejected review
 
@@ -43,6 +44,19 @@ synthetic-only, exact-ownership and cleanup boundary remains unchanged.
 
 The corrected plan requires deterministic recovery checks and a genuinely
 fresh exact-HEAD independent veto before any Docker or SQL action.
+
+## Exact-catalogue population correction
+
+Sol's final manifest reconciliation after the replacement review found that
+the total owned type/domain population `32` was correct but the plan's split
+was transposed. The accepted render manifest contains exactly four `DOMAIN`,
+nineteen `ENUM` and nine `COMPOSITE` nodes, not four/seventeen/eleven. The
+replacement reviewer reported only the correct total and did not challenge the
+incorrect subdivision despite its catalogue-completeness assignment.
+
+The plan and design now bind exact `4/19/9/32`. No runtime action had occurred.
+A fresh exact-HEAD veto of this corrected catalogue delta is mandatory before
+implementation or Docker preflight.
 
 ## Claim boundary
 

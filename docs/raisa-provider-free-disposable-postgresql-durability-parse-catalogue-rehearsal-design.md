@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: accepted after Sol recovery and fresh exact-HEAD replacement veto
+Status: candidate exact-catalogue population correction pending fresh veto
 
 ## Components
 
@@ -92,7 +92,8 @@ keys. Expressions returned by PostgreSQL are normalized using PostgreSQL's own
 identity/deparse functions named in the contract; the harness does not invent
 semantic equivalence.
 
-Comparisons are exact for object identities, counts, owners, role attributes,
+Comparisons are exact for all four domains, nineteen enums, nine composites,
+object identities, counts, owners, role attributes,
 RLS flags, policy roles/commands/expressions, constraint/index definitions,
 function identity arguments and attributes, `proconfig`, trigger properties,
 ACL facts and dependency targets. The evidence stores closed expected/observed

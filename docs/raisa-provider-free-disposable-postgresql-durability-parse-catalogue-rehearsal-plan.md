@@ -2,9 +2,9 @@
 
 Date: 2026-08-07
 
-Status: accepted after Sol recovery and a genuinely fresh exact-HEAD
-replacement veto at `009395ac28eb7ac05017fe5fbd1ae1439ecf948d`;
-implementation remains bounded by this plan
+Status: candidate exact-catalogue population correction after Sol rejected the
+replacement veto's acceptance; no Docker/PostgreSQL execution before a fresh
+exact-HEAD catalogue-delta veto
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`
@@ -147,7 +147,7 @@ manifest and closed rehearsal contract. It verifies at least:
 
 - server major version `16`, database identity and empty application tables;
 - one `emr4_context_fabric` schema and its exact owner;
-- exact four domains, seventeen enums, eleven composites and the total
+- exact four domains, nineteen enums, nine composites and the total
   thirty-two owned fabric types/domains;
 - exact eighteen fabric relations, their columns, defaults, constraints,
   indexes, forced-RLS flags and owners;

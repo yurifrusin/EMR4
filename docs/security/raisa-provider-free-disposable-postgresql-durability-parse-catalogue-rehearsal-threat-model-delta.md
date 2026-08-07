@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: accepted for the bounded disposable rehearsal only
+Status: candidate exact-catalogue population correction pending fresh veto
 
 ## Scope and assets
 

@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "finish_the_exact_catalogue_population_correction_and_obtain_a_fresh_exact_head_veto_before_any_disposable_postgresql_or_docker_action",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. The current baton names the disposable PostgreSQL-16 parse-and-catalogue rehearsal as the next dependency-satisfied descendant, but withholds plan acceptance until the corrected 4-domain, 19-enum, 9-composite population receives a fresh exact-HEAD veto.",
+    "current_authority_allocation": "GPT Sol owns planning, correction, acceptance, implementation and the serial disposable runtime. Gemini 3.6 Flash/high through a fresh Antigravity project may perform only the read-only exact-HEAD veto. No external worker receives runtime, acceptance, integration, push or protected-ref authority.",
+    "active_plan_and_acceptance": "The active plan, design, recovery and threat delta bind the accepted parent 412-statement artifact at sha256:92d234f8f57d5492e0c4215f9c0d3c54efe9e9ec9cbdaa9b4321a5120b983012, rollback-first cluster-role proof, psql --file=- single-transaction admission and exact 4/19/9/32 catalogue population. The prior Sol acceptance is revision_required_exact_catalogue_population; implementation and Docker preflight remain withheld pending a fresh corrected-HEAD veto.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, patient/product data, operational databases and credentials, live sources/watchers/listeners, provider product routes, application/API/Diary runtime, commands and writes, Alembic, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked receipt/state file remain preserved and excluded. The later runtime, if admitted, is limited to one owned local networkless no-pull no-port no-mount tmpfs PostgreSQL-16 container and exact-ID cleanup.",
+    "git_refs_and_worktree": "The active branch is codex/ariadne-bernie-davida-parallel-seam at 4dd69c76d9dbce7c0b52794642122162485f32a6 with only the bounded catalogue correction and preserved unrelated untracked files present. origin task remains 253230a25ab172b90bc5f44772670c7df89b3052. Local/origin master and handoff/current are all exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_AGENTS_active_plan_acceptance_and_exact_git_ref_rehydration_after_compaction",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol is reconciling the bounded plan correction; no Docker or PostgreSQL action has occurred."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native Codex worker is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A fresh Gemini 3.6 Flash/high corrected-HEAD veto is the next external action after deterministic admission."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No DeepSeek worker is assigned to this serial stateful correction."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude model lane is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

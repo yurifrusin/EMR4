@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 87,
+  "register_revision": 88,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3699,6 +3699,46 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0095",
+      "attempt_id": "raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-disposable-postgresql-parse-catalogue-rehearsal",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A verifier assigned complete catalogue reconciliation must compare every exact manifest kind population, not merely the aggregate owned-type total, before returning pass.",
+      "observed_error": "The replacement review returned pass and reported only the aggregate 32 fabric types/domains while the plan incorrectly stated 4 domains, 17 enums and 11 composites. The accepted render manifest has 4 domains, 19 enums and 9 composites.",
+      "detection_method": "Before implementation, Sol grouped the exact render-manifest ordered_nodes by kind and reproduced DOMAIN=4, ENUM=19 and COMPOSITE=9. No Docker or database command had occurred.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-sol-rejection-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-88.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.exact_catalogue_kind_population_underreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The pass is preserved but not admitted. Plan, design and tests now bind the exact 4/19/9/32 population and require a fresh exact-HEAD catalogue-delta veto before implementation.",
+        "prevention_control": "Exact-catalogue reviews must mechanically group the manifest node inventory by every claimed kind and compare each count and identifier population; aggregate totals cannot substitute for the requested subdivision.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-sol-rejection-receipt.json",
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-88.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

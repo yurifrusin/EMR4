@@ -121,6 +121,7 @@ def test_catalogue_readback_closes_expected_inventory_and_privileges() -> None:
     combined = _flat(PLAN, DESIGN)
 
     for required in (
+        "exact four domains, nineteen enums, nine composites",
         "thirty-two owned fabric types/domains",
         "exact eighteen fabric relations",
         "exact forty-four policies",
