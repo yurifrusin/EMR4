@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 85,
+  "register_revision": 86,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3613,6 +3613,46 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-overbroad-search-failure-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-85.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0093",
+      "attempt_id": "raisa-context-fabric-durability-disposable-postgresql-plan-review-001",
+      "observed_on": "2026-08-07",
+      "tranche": "raisa-context-fabric-durability-disposable-postgresql-parse-catalogue-rehearsal",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A verifier explicitly challenging PostgreSQL atomic admission and rollback must account for cluster-scoped roles and must bind psql --single-transaction to a supported -c/-f input mode before returning pass.",
+      "observed_error": "The exact-HEAD review returned pass while endorsing a failed-copy rehearsal after a successful installation in another database in the same cluster and plain streamed stdin with --single-transaction. It missed that accepted roles from success are cluster-wide and that psql requires -c/-f for --single-transaction.",
+      "detection_method": "Sol's acceptance reconciliation compared the review claims with PostgreSQL 16 psql semantics and the cluster scope of pg_authid/roles before any Docker or database action. The candidate review was rejected despite its pass envelope.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-plan-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-review-sol-rejection-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-86.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.postgresql_cluster_scope_and_psql_atomicity_underreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The pass is preserved but not admitted. Sol recovered the plan so the invalid transaction runs first while roles are absent and every artifact stream uses --file=- with --single-transaction; a fresh exact-HEAD replacement veto is mandatory before runtime.",
+        "prevention_control": "Database-plan veto acceptance must independently reconcile object scope across database versus cluster catalogues and the exact CLI preconditions of every claimed transaction control, even when the verifier reports pass.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-review-sol-rejection-receipt.json",
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-86.md"
         ]
       },
       "status": "contained"

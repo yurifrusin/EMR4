@@ -104,9 +104,12 @@ def test_sql_admission_is_atomic_and_behavior_execution_remains_closed() -> None
     for required in (
         "`ON_ERROR_STOP=1`",
         "`--single-transaction`",
-        "streamed unchanged on standard input",
+        "`--file=-`",
+        "plain implicit stdin is forbidden",
         "fixed synthetic invalid top-level statement",
-        "no `emr4_context_fabric` schema or accepted role survives",
+        "rollback case must run first",
+        "roles are cluster-scoped rather than database-scoped",
+        "cluster-wide accepted-role absence",
         "does not execute any function or trigger behavior",
         "never invokes a function with `SELECT`/`CALL`",
         "PostgreSQL function creation does not prove every embedded SQL branch",
@@ -169,3 +172,20 @@ def test_standing_continuation_and_worker_allocation_are_recorded() -> None:
     assert "Sol owns planning, implementation, the serial disposable runtime" in combined
     assert "fresh Gemini 3.6 Flash/high Antigravity context" in combined
     assert "immediately enters the next dependency-satisfied planned gate" in combined
+
+
+def test_rollback_precedes_success_and_psql_file_stdin_is_mandatory() -> None:
+    plan = _text(PLAN)
+    flat_plan = " ".join(plan.split())
+    design = _text(DESIGN)
+
+    assert flat_plan.index("rollback case must run first") < flat_plan.index(
+        "Only after that proof may it install prerequisites in the success"
+    )
+    states = (
+        "rollback_database_ready ->\nrollback_prerequisites_installed -> "
+        "rollback_case_matched ->\nsuccess_database_ready"
+    )
+    assert states in design
+    assert "`--file=-`" in plan
+    assert "single-\ntransaction mode applies only with `-c`/`-f`" in plan

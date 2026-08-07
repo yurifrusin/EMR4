@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: candidate; runtime remains closed until plan admission
+Status: candidate Sol recovery; runtime remains closed until replacement veto
 
 ## Scope and assets
 
@@ -35,7 +35,8 @@ network.
 | Broad cleanup removes user resources | Only exact captured-ID removal is callable; list, prune, prefix and label-query deletion are forbidden and hostile-tested. | Manual activity outside the harness is out of scope. |
 | SQL artifact or manifest drifts | Exact path, accepted parent HEAD, planning baseline, canonical UTF-8/LF SHA-256, byte count, statement count and manifest assertions are verified before daemon contact. Git-managed Windows CRLF is the sole permitted normalization; lone CR or any other drift rejects. | Repository/Git compromise remains a higher-level control. |
 | Prerequisite stubs overclaim application compatibility | Closed empty four-table contract with exact referenced columns/types and minimum keys; claim explicitly excludes full migration compatibility. | ORM/default/index differences remain for later integration. |
-| Artifact partially installs after an error | `ON_ERROR_STOP=1` plus psql single transaction; fixed invalid-copy case verifies no fabric schema or accepted role survives. | Nontransactional future DDL would require a new plan and must fail this contract. |
+| Artifact partially installs after an error | Fixed invalid-copy runs first through psql `--file=-`, `ON_ERROR_STOP=1` and single transaction; it verifies database-local fabric absence and cluster-wide role absence before success is eligible. Plain stdin is forbidden because psql single-transaction mode requires `-c`/`-f`. | Nontransactional future DDL would require a new plan and must fail this contract. |
+| A successful database masks rollback because roles are cluster-wide | Rollback database runs before success while accepted roles are absent; role absence is read from the cluster catalogue, not inferred from database-local schema absence. | The whole cluster is disposable and is removed after the succeeding catalogue rehearsal. |
 | Function creation is mistaken for body correctness | Claim is parse/catalogue only; no function/trigger behavior is invoked and closeout must preserve that limitation. | Deferred PL/pgSQL statement planning may reveal errors in behavior rehearsal. |
 | Catalogue normalization hides a privilege or expression difference | Exact fixed pg_catalog queries, stable ordered fields, PostgreSQL identity/deparse functions, counts and digests; mismatch pointers fail closed. | Server deparse stability is tied to PostgreSQL major 16. |
 | Security-definer or RLS posture is widened | Exact owner, `prosecdef`, `proconfig`, role attributes, ACLs, forced-RLS and policy readback against manifest; unexpected objects fail. | Runtime `SET ROLE`/policy enforcement remains unproved. |

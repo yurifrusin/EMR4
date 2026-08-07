@@ -2,8 +2,9 @@
 
 Date: 2026-08-07
 
-Status: candidate plan; no Docker or PostgreSQL execution is admitted until
-deterministic plan checks and a fresh exact-HEAD independent veto pass
+Status: candidate Sol recovery after the first independent veto was rejected;
+no Docker or PostgreSQL execution is admitted until deterministic recovery
+checks and a genuinely fresh exact-HEAD replacement veto pass
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`
@@ -117,17 +118,29 @@ policies, grants or application behavior in the prerequisites. Their owners
 are captured before the accepted artifact is applied and must remain unchanged
 afterwards.
 
-Prerequisites are installed in one explicit transaction. The accepted inert
-artifact's manifest-bound canonical UTF-8/LF bytes are then streamed unchanged
-on standard input to one in-container `psql` invocation with `ON_ERROR_STOP=1`
-and `--single-transaction`. The artifact has already proved that it contains no
-transaction control; a failure must roll back its entire fabric-definition
-transaction. No `.sql.inert` file is renamed, copied into a migration directory
-or mounted into the container.
+The harness creates two fixed empty synthetic databases inside the one owned
+cluster: a rollback database and a success database. Because PostgreSQL roles
+are cluster-scoped rather than database-scoped, the rollback case must run
+first while the accepted roles are absent. It installs the four prerequisite
+shapes in the rollback database, streams the fixed invalid canonical copy,
+then proves both database-local fabric absence and cluster-wide accepted-role
+absence. Only after that proof may it install prerequisites in the success
+database and admit the canonical artifact.
+
+Each prerequisite set is installed in one explicit transaction. Each artifact
+stream is passed as manifest-bound canonical UTF-8/LF bytes on standard input
+to in-container `psql` with `--file=-`, `ON_ERROR_STOP=1` and
+`--single-transaction`. `--file=-` is mandatory because psql's single-
+transaction mode applies only with `-c`/`-f`; plain implicit stdin is forbidden.
+The artifact has already proved that it contains no transaction control; a
+failure must roll back its entire fabric-definition transaction. No
+`.sql.inert` file is renamed, copied into a migration directory or mounted
+into the container.
 
 ## Catalogue readback
 
-After successful application the harness issues only a fixed read-only
+After the rollback case passes and the canonical artifact succeeds in the
+success database, the harness issues only a fixed read-only
 catalogue script using `pg_catalog`-qualified relations and functions. The
 script emits canonical JSON/TSV facts for exact comparison with the accepted
 manifest and closed rehearsal contract. It verifies at least:
@@ -166,13 +179,14 @@ network or port options, mounts/volumes, caller arguments, broad Docker
 enumeration, trust authentication, non-owned cleanup and incomplete catalogue
 claims.
 
-One disposable server run additionally performs a separately created
-mutation copy in memory: a fixed synthetic invalid top-level statement is
-appended after the accepted bytes and streamed through the same single-
-transaction admission path into a second fresh synthetic database inside the
-same owned container. The expected SQLSTATE is recorded and catalogue readback
-must show that no `emr4_context_fabric` schema or accepted role survives that
-failed artifact transaction. The canonical artifact is never modified.
+Before successful admission, the disposable server run performs a mutation
+copy in memory: one fixed synthetic invalid top-level statement is appended
+after the accepted bytes and streamed through `--file=-` and the same single-
+transaction admission path into the rollback database. The expected syntax
+SQLSTATE is recorded. Database-local catalogue readback must show no
+`emr4_context_fabric` schema or object, and cluster-wide role readback must show
+no accepted role. Only then may the success database receive the canonical
+artifact. The canonical artifact is never modified.
 
 This negative case proves transaction rollback for installation failure only.
 It does not execute any function or trigger behavior.
@@ -231,13 +245,16 @@ Acceptance requires all of the following:
    profile before any SQL is sent;
 6. prerequisite DDL creates exactly four empty synthetic application shapes
    and never creates `xmin` or application behavior;
-7. PostgreSQL 16 admits the exact parent bytes atomically with
-   `ON_ERROR_STOP=1` and `--single-transaction`;
+7. PostgreSQL 16 first rejects the fixed invalid copy through
+   `--file=-`, `ON_ERROR_STOP=1` and `--single-transaction`, leaving no
+   database-local fabric object or cluster-wide accepted role, and only then
+   admits the exact parent bytes through the same atomic file-input mode;
 8. canonical catalogue readback matches every closed type, object, relation,
    policy, role, function, trigger, owner, privilege and search-path assertion;
 9. application relation owners and empty row counts remain unchanged;
-10. the fixed invalid-copy case fails and leaves no fabric schema or accepted
-    role in its fresh synthetic database;
+10. the fixed invalid-copy case runs before success and leaves no fabric schema
+    in its rollback database and no accepted role anywhere in the disposable
+    cluster;
 11. no entry function, trigger function, trigger, policy or application
     command is behaviorally invoked;
 12. evidence records exact parent/run/image/config/catalogue/rollback/cleanup

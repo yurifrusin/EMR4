@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: candidate companion design; no runtime authority before plan admission
+Status: candidate Sol recovery; no runtime authority before replacement veto
 
 ## Components
 
@@ -26,9 +26,10 @@ Docker CLI is the sole process boundary.
 The only legal forward states are:
 
 `parent_verified -> environment_verified -> container_created ->
-container_owned -> postgres_ready -> prerequisites_installed ->
-artifact_admitted -> catalogue_matched -> rollback_case_matched ->
-cleanup_verified -> passed`
+container_owned -> postgres_ready -> rollback_database_ready ->
+rollback_prerequisites_installed -> rollback_case_matched ->
+success_database_ready -> success_prerequisites_installed ->
+artifact_admitted -> catalogue_matched -> cleanup_verified -> passed`
 
 Any failure after creation enters `cleanup_pending`. Only a reverified exact
 ID may enter `cleanup_authorised`. Successful removal and exact-ID absence
@@ -63,15 +64,21 @@ SQL is supplied as bytes over subprocess standard input. No workspace path is
 made visible inside the container. Every `psql` call fixes database, user,
 Unix-socket host, `--no-psqlrc`, `--quiet`, `ON_ERROR_STOP=1` and output mode.
 
-The prerequisite transaction and canonical artifact transaction are separate.
-This makes the synthetic dependency shapes available while keeping the fabric
-installation atomic. The accepted artifact is decoded as UTF-8, permits only
-working-tree CRLF-to-LF normalization, and must then match the manifest's
-canonical hash and byte count. Those canonical bytes are streamed byte-for-byte
-with no wrapper edit; psql supplies its outer single transaction. The negative
-case uses a fresh synthetic database and an in-memory invalid suffix after the
-canonical bytes, then verifies absence of fabric objects and accepted roles
-after rollback.
+The harness creates fixed rollback and success databases inside the owned
+cluster. The rollback path always precedes the success path because role
+catalogue entries are cluster-wide. Prerequisite and artifact transactions are
+separate in each database, making synthetic dependency shapes available while
+keeping each fabric installation atomic. The accepted artifact is decoded as
+UTF-8, permits only working-tree CRLF-to-LF normalization, and must then match
+the manifest's canonical hash and byte count.
+
+Those canonical bytes are streamed byte-for-byte with no wrapper edit through
+psql `--file=-`; `--single-transaction` and `ON_ERROR_STOP=1` are present on
+the same argv. Plain implicit stdin with `--single-transaction` is structurally
+forbidden. The rollback path appends its fixed invalid suffix in memory, then
+verifies database-local fabric absence and cluster-wide role absence. The
+success path becomes eligible only after that proof and receives unmodified
+canonical bytes.
 
 The harness never invokes a function with `SELECT`/`CALL`, never writes an
 application row and never disables a trigger or policy. Catalogue queries set

@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.sol-review-reconciliation.v1",
+  "status": "revision_required",
+  "candidate_head": "d202b310318496fb7a414d97916bbac54e6ec349",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-plan-review-receipt.json",
+  "review_decision": "pass",
+  "admitted": false,
+  "provider_or_model_calls_after_review": 0,
+  "database_or_docker_calls": 0,
+  "findings": [
+    {
+      "severity": "P1",
+      "id": "cluster_scoped_roles_invalidate_post_success_rollback_case",
+      "detail": "The candidate ran successful installation before the invalid copy in another database in the same cluster. Accepted roles are cluster-wide, so they would already survive and duplicate CREATE ROLE would preempt the intended rollback proof."
+    },
+    {
+      "severity": "P1",
+      "id": "psql_single_transaction_not_bound_to_file_or_command_input",
+      "detail": "The candidate paired --single-transaction with plain implicit stdin even though PostgreSQL 16 permits that option only with one or more -c/-f inputs."
+    }
+  ],
+  "recovery": "Run the invalid copy first while roles are absent, prove database-local fabric and cluster-wide role absence, then run success; bind every artifact stream to --file=- plus --single-transaction and ON_ERROR_STOP=1.",
+  "authority_boundary": "rejected_review_preserved_no_runtime_or_acceptance_authority"
+}
