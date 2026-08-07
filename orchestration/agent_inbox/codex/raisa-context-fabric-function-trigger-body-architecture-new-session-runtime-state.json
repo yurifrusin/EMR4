@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "new_session",
+  "planned_action": "derive_and_freeze_provider_free_unmounted_function_and_trigger_body_architecture",
+  "source_evidence": {
+    "live_handover_current_baton": "The live Current Result accepts the provider-free unmounted durability migration/transaction structural architecture at c55d25d6c9704ae4612ef2d123158f71302ab411 with canonical contract sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8. The live Next Implementation explicitly directs the pure provider-free unmounted function-and-trigger-body architecture under Yuri's standing authority. One older Required Git relation sentence still names the prior state-machine source; it is stale against the later Current Result, closeout, Continuity 229 / Compass 211 and task-branch closeout and will be repaired without changing acceptance.",
+    "current_authority_allocation": "GPT Sol owns planning, architecture, recovery and acceptance. Bounded separable native implementation or analysis workers may be used under exact-path packets; candidate-independent reviewers receive read-only veto authority only. No worker may self-accept, integrate, push protected refs or open provider, patient/product-data, database/source, runtime, command, deployment or release authority. Preferred external provider transports are not required for this provider-free repository architecture tranche.",
+    "active_plan_and_acceptance": "The accepted migration/transaction plan, design, threat delta and closeout deliberately omit nine entry-point bodies, thirteen trigger-function bodies, all trigger declarations and execute grants. The next descendant may freeze exact security-definer and trigger bodies, referenced relations/columns, failure SQLSTATEs, privilege effects, renderer order and static/adversarial acceptance as repository-local metadata. API Spine remains GraphQL read-only, REST command-only for mutation and async observation-only; DDL rehearsal remains blocked until this body architecture independently passes.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/outbox/feed/watcher/listener/source contact, executable or rendered SQL/DDL, migration/database object, app/API/Diary change, operational persistence or credential, command/write expansion, deployment, production, release, Pages or protected-ref movement is authorised. Only exact accepted architecture/API artifacts and newly authored repository-local synthetic metadata may be read or written. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger remain preserved and excluded.",
+    "git_refs_and_worktree": "After fresh fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at HEAD 7d42c1ed6628352fa9fe3ca5c7f516431607c881, exactly aligned with origin task. Tracked files and index are clean. Local/origin master and handoff/current are all exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. There are 201 preserved untracked artifacts and docs/branding remains untracked."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "function_trigger_body_architecture_new_session_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol read AGENTS completely, the accepted parent plan/design/threat/closeout, Context Fabric direction, the master implementation blueprint, API Spine ADR/programme/checklist/contracts and the exact accepted body/signature catalogues before planning."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The existing fixed native thread tree is available for bounded exact-path analysis or veto turns after distinct pre-dispatch receipts."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model call is authorised or needed at rehydration."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker has been launched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

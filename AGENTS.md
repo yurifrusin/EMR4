@@ -28,7 +28,7 @@ Use a fresh chat context for each named tranche by default. The new context must
 | Baton ref | `handoff/current` |
 | Active development worktree | `C:\Users\sarashera\emr4` on `codex/ariadne-bernie-davida-parallel-seam`; protected integration remains closed and single-track through `master` |
 | Worker worktree root | `C:\Users\sarashera\EMR4-worktrees\` |
-| Required Git relation | The accepted durability state-machine source is `95a2ed5e960c58686262b5e82ce2e89354a3860a`; bounded tracked closeout and next-architecture changes are permitted on `codex/ariadne-bernie-davida-parallel-seam`. Local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`; user-owned untracked `docs/branding/` remains preserved and excluded. |
+| Required Git relation | The accepted durability migration/transaction structural source is `c55d25d6c9704ae4612ef2d123158f71302ab411`; its closeout is published on `codex/ariadne-bernie-davida-parallel-seam` at `7d42c1ed6628352fa9fe3ca5c7f516431607c881`, and bounded tracked function/trigger-body architecture changes are permitted on that task branch. Local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`; user-owned untracked `docs/branding/` remains preserved and excluded. |
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.6 Flash/high through a fresh Antigravity project |
@@ -352,7 +352,7 @@ new result supersedes the historical no-repeat pause for its completed
   the unmounted Rayleen A4 source adapter and provider-free
   invalidation/reassembly seam and fresh-generation rehearsal also pass. The
   architecture-only default-off live-source observation boundary, its provider-free unmounted authored-synthetic observation-to-signal rehearsal, source-specific durability architecture and pure durability state-machine rehearsal also pass.
-  Migration-and-transaction architecture is next under standing authority. Later planned boundaries follow through exact
+  Migration-and-transaction architecture passes; function-and-trigger-body architecture is next under standing authority. Later planned boundaries follow through exact
   derive-freeze-execute descendants rather than fresh-permission pauses.
 Dependabot alerts 5 and 8-15 and CodeQL alerts 295, 272 and 268 have exact evidence-backed dismissed readback matching the durable register under Yuri's consumed disposition authority. Dependabot alert 17 was created after that snapshot: it is registered as `SF-0020`, statically `not_actionable`, and remains native-open/`needs_review`; no dismissal is authorised. PR 70 CodeQL warning 543 and high alert 544 are fixed by source changes and fresh native readback without dismissal; alert 544 is registered as remediated `SF-0021`. The affected development-only dependency resolutions remain in the lockfile; do not force dependency overrides, erase instance history or broaden any disposition without a new register revision and current evidence.
 

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_function_trigger_body_architecture_plan_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate binds the exact parent hash and all nine entry points plus thirteen trigger functions. It selects a finite machine-readable body_program_v1 rather than prose or rendered SQL, exact effect rederivation, failure registry, trigger totality and later renderer order. Four plan tests plus 36 API Spine tests pass; Ruff, formatting and diff checks pass.",
+    "current_authority_allocation": "GPT Sol authored and owns the plan and acceptance semantics. The plan is committed only to create one exact task-branch source for bounded native entry-point, trigger and adversarial analyses; those agents receive no write, acceptance, integration or protected authority.",
+    "git_refs_and_worktree": "Before this plan commit, task HEAD and origin task are 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are limited to AGENTS and the new plan; the new test and Ariadne receipt files are untracked within the exact allowlist.",
+    "live_handover_current_baton": "The live next implementation is the provider-free unmounted function-and-trigger-body architecture. This plan candidate derives that exact descendant and repairs the stale Required Git relation without changing the accepted parent result or protected authority.",
+    "protected_evidence_boundaries": "Commit allowlist is AGENTS bookkeeping, the new plan/test and six new-session/preplanning/precommit Ariadne files only. No app, Alembic, API Spine, Diary, parent contract, database/source/provider/data/runtime/command/deployment/Pages/protected-ref surface is changed. docs/branding and all unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

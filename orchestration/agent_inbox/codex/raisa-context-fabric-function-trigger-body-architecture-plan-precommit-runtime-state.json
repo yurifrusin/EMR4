@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_function_trigger_body_architecture_plan_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "The live next implementation is the provider-free unmounted function-and-trigger-body architecture. This plan candidate derives that exact descendant and repairs the stale Required Git relation without changing the accepted parent result or protected authority.",
+    "current_authority_allocation": "GPT Sol authored and owns the plan and acceptance semantics. The plan is committed only to create one exact task-branch source for bounded native entry-point, trigger and adversarial analyses; those agents receive no write, acceptance, integration or protected authority.",
+    "active_plan_and_acceptance": "The candidate binds the exact parent hash and all nine entry points plus thirteen trigger functions. It selects a finite machine-readable body_program_v1 rather than prose or rendered SQL, exact effect rederivation, failure registry, trigger totality and later renderer order. Four plan tests plus 36 API Spine tests pass; Ruff, formatting and diff checks pass.",
+    "protected_evidence_boundaries": "Commit allowlist is AGENTS bookkeeping, the new plan/test and six new-session/preplanning/precommit Ariadne files only. No app, Alembic, API Spine, Diary, parent contract, database/source/provider/data/runtime/command/deployment/Pages/protected-ref surface is changed. docs/branding and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Before this plan commit, task HEAD and origin task are 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are limited to AGENTS and the new plan; the new test and Ariadne receipt files are untracked within the exact allowlist."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "function_trigger_body_architecture_plan_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the required source pass, froze the plan and passed its deterministic/API tests."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No worker has been dispatched before the exact plan commit and distinct pre-dispatch receipt."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external provider/model call occurred."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "native-read-only-reviewers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
