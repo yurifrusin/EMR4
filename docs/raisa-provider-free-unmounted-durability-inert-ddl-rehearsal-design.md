@@ -1,0 +1,169 @@
+# Provider-free unmounted durability inert DDL rehearsal design
+
+Date: 2026-08-07
+
+Status: draft design pending independent plan challenge
+
+## Purpose
+
+This design defines a one-way compiler from the accepted structural durability
+catalogue plus accepted closed body IR into inert PostgreSQL-16 text. The
+compiler has no database adapter, general SQL entry point or caller-selected
+path. It produces evidence; it does not install anything.
+
+## Trust boundary
+
+```mermaid
+flowchart LR
+    P["Immutable structural contract"] --> E["Exact effective-catalogue derivation"]
+    B["Immutable typed-body contract"] --> E
+    E --> L["Closed lowering contract"]
+    L --> R["Deterministic emitter"]
+    R --> S["durability-schema.sql.inert"]
+    R --> M["typed render manifest"]
+    S --> V["independent static recognizer"]
+    M --> V
+    V --> A["repository-local acceptance evidence"]
+    A -. "no connection or execution" .-> X["later disposable PostgreSQL gate"]
+```
+
+The accepted JSON contracts are authority. Prose cannot supply a missing
+operand or branch. The lowering contract may define syntax for an already typed
+operation but cannot introduce a relation, column, helper, effect, privilege or
+failure.
+
+## Components
+
+The implementation separates five pure components:
+
+1. `load_and_bind_parents()` reads fixed paths and verifies canonical hashes;
+2. `derive_effective_catalogue()` applies the exact closed recovery and
+   reconciles every child summary;
+3. `lower_contract()` converts the exact effective catalogue and 22 body ASTs
+   into a typed `RenderPlanV1` statement sequence;
+4. `emit_inert_sql()` writes canonical UTF-8/LF text only to the fixed
+   `.sql.inert` path and builds its typed manifest; and
+5. `recognize_inert_sql()` independently tokenizes and checks the generated
+   subset against that manifest.
+
+The module imports only Python's standard library and the accepted pure body
+validator/builder surfaces. It has no `subprocess`, `socket`, `os.system`,
+database/ORM, HTTP, provider, browser or Alembic import. Output paths are module
+constants resolved beneath the exact new continuity directory.
+
+## RenderPlanV1
+
+Before text exists, every statement is one closed typed render node. Each node
+contains phase, ordinal, statement kind, authoritative contract pointer,
+defined/referenced objects, required owner and privilege facts, and a closed
+payload specific to that kind. The node family includes only role, schema,
+domain, enum, composite, table, named constraint/index, RLS enable/force/policy,
+support function, entry function, trigger function, trigger declaration,
+revoke, grant and assertion-comment nodes.
+
+No node contains caller-provided SQL. The text emitter is exhaustive over this
+node union; an unknown node fails. The manifest stores the exact ordered node
+inventory, SQL byte spans and SHA-256 so the static recognizer can compare text
+to plan without trusting comments.
+
+## Effective-parent reconciliation
+
+Recovery is applied to a deep copy of the structural parent. The original
+object and bytes are hash-checked again after rendering. The derived catalogue
+must equal the body child's effective signatures, roles, trigger declarations,
+relations/columns/types and privilege ceilings before any render node is built.
+
+The renderer never creates the four referenced `public.*` application tables.
+Those identifiers are allowed only in exact body reads/trigger declarations
+and accepted owner `SELECT` grants. Any application `CREATE`, `ALTER`, DML,
+ownership or broader grant is structurally impossible.
+
+## Body lowering
+
+Expressions are rendered recursively with a precedence-independent fully
+parenthesized form. References use generated local aliases bound to typed
+symbols; fields and trigger images are position-checked. Every literal carries
+an explicit qualified cast. Complete row sets are ordered arrays, not
+unordered query results.
+
+Statements use exact templates:
+
+- `SELECT_EXACT`, `SELECT_SET` and `LOCK_EXACT` preserve predicate, exact
+  columns, cardinality, stable order and lock mode;
+- `LET`, `ASSERT`, `IF`, `SWITCH_TG_OP` and `FOR_EACH` preserve the closed flow
+  tree and terminal convergence;
+- `INSERT`, `UPDATE` and `DELETE_SOURCE` emit only operand-derived columns and
+  exact cardinality checks;
+- `INSERT_OR_RELOAD_COMPARE` has one tightly scoped `unique_violation`
+  translation followed by exact winner reload and comparison;
+- `CALL_SUPPORT` may name only `session_binding_allows_v1`;
+- `RETURN_*` and `RAISE` are terminal and type/value closed; and
+- the canonical unreachable retry marker is verified and erased, never turned
+  into a retry or catch.
+
+Locals are declared once in accepted symbol order. Input symbols bind exact
+function parameters; trigger system symbols are never redeclared. Row symbols
+use the exact qualified row type, set symbols use its array type and composites
+use explicit typed `ROW(...)` construction.
+
+## Digest preimage
+
+For each digest profile the lowering contract fixes one ordered typed tuple.
+Each component becomes:
+
+`type-byte-length:type-name:value-byte-length:value`
+
+and the profile is encoded by the same rule as component zero. A null uses
+`value-byte-length = -1` and no value bytes, which cannot collide with empty
+text. Components are joined by a fixed ASCII unit separator after their lengths
+are computed in UTF-8. The final PostgreSQL expression is fully qualified and
+uses core SHA-256 only. The manifest retains every profile, operand type tuple
+and a repository-authored edge-case vector so Python reference encoding and
+rendered SQL construction can be compared statically without executing SQL.
+
+## Security-definer and privileges
+
+Every emitted body is `SECURITY DEFINER`, owned by its exact non-login owner and
+uses only the exact fixed search path. No body changes role/configuration or
+resolves an unqualified application/fabric identifier. The output revokes
+`PUBLIC` schema/object/function rights before granting only the effective role
+matrix. Runtime roles receive execute only on their exact entry points; trigger
+functions remain owner-internal. The owner receives exact product-table
+`SELECT`, never product DML. Admission receiver and every other principal stay
+inside their exact closed internal grants.
+
+## Static recognizer
+
+The recognizer does not call the emitter. It implements a small lexer for the
+emitted subset, tracks normal/string/quoted-identifier/dollar-body states,
+balances delimiters and identifies top-level statements. It then checks exact
+phase and statement fingerprints, function headers, body boundaries, object
+references, revokes and grants against the manifest.
+
+Hostile tests mutate both the typed render plan and emitted bytes after
+resealing evidence. Acceptance therefore does not depend on the canonical file
+hash alone. The recognizer deliberately claims only the closed generated
+subset; PostgreSQL's own parser and catalogues remain later evidence.
+
+## Determinism and failure
+
+All collections are explicitly ordered from the accepted contracts. JSON is
+canonical UTF-8/LF with sorted object keys where order is not normative. SQL is
+UTF-8/LF with fixed indentation and one terminal newline. No wall clock,
+environment value, absolute path, random UUID or Git metadata enters the
+artifact. Rendering twice in fresh temporary directories must produce the same
+bytes.
+
+Any parent mismatch, unknown node/type, unresolved identifier, effect/privilege
+widening, unsupported canonicalization, manifest disagreement or recognizer
+failure raises a value-free local exception and writes no admitted artifact.
+Temporary candidate bytes are written only beneath a test-owned temporary
+directory; the fixed canonical files are replaced only after complete local
+validation.
+
+## Non-authority statement
+
+This design adds no migration, database connection, schema/object/role,
+credential, source read, operational persistence, patient/product data, API,
+command, provider product call, runtime, deployment, production, release,
+Pages or protected-ref authority.

@@ -1,0 +1,131 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+PLAN = ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan.md"
+DESIGN = ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-design.md"
+THREAT = (
+    ROOT
+    / "docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md"
+)
+STRUCTURAL_PARENT = (
+    ROOT
+    / "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture"
+    / "migration-transaction-architecture-contract.json"
+)
+BODY_PARENT = (
+    ROOT
+    / "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture"
+    / "function-trigger-body-architecture-contract.json"
+)
+
+STRUCTURAL_DIGEST = "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8"
+BODY_DIGEST = "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3"
+
+
+def _text(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def _flat(value: str) -> str:
+    return " ".join(value.split())
+
+
+def test_plan_binds_both_exact_accepted_parents_and_postgresql_16() -> None:
+    plan = _text(PLAN)
+    structural = json.loads(STRUCTURAL_PARENT.read_text(encoding="utf-8"))
+    body = json.loads(BODY_PARENT.read_text(encoding="utf-8"))
+
+    assert structural["contract_sha256"] == STRUCTURAL_DIGEST
+    assert body["contract_sha256"] == BODY_DIGEST
+    assert structural["postgresql_target"]["major"] == 16
+    assert STRUCTURAL_DIGEST in plan
+    assert BODY_DIGEST in plan
+    assert "c55d25d6c9704ae4612ef2d123158f71302ab411" in plan
+    assert "a93d07405ad35d7d6c0603065625c17ec14ab23e" in plan
+
+
+def test_plan_freezes_inert_fixed_outputs_and_no_external_parser() -> None:
+    plan = _flat(_text(PLAN))
+    design = _flat(_text(DESIGN))
+
+    for required in (
+        "durability-schema.sql.inert",
+        "one closed JSON render manifest",
+        "No new dependency, package download, external parser",
+        "no caller-selected contract or output path",
+        "standard-library-only",
+        "two isolated renders produce byte-identical SQL and manifest artifacts",
+    ):
+        assert required in plan
+
+    assert "The module imports only Python's standard library" in design
+    assert "It has no `subprocess`, `socket`, `os.system`" in design
+
+
+def test_plan_closes_digest_race_retry_and_privilege_lowering() -> None:
+    plan = _flat(_text(PLAN))
+
+    for required in (
+        "type-tagged, byte-length-prefixed value",
+        "Null has one distinct marker",
+        "UTC with six fractional digits",
+        "INSERT_OR_RELOAD_COMPARE",
+        "must not use `ON CONFLICT DO NOTHING`",
+        "PROPAGATE_RETRYABLE",
+        "not an exception handler",
+        "`PUBLIC` execute is revoked before any exact runtime execute grant",
+        "Trigger functions have no runtime execute grant",
+        "may not emit application DDL or DML",
+    ):
+        assert required in plan
+
+
+def test_six_phase_order_and_population_are_explicit() -> None:
+    plan = _text(PLAN)
+
+    assert "exactly six ordered phases" in plan
+    positions = [
+        plan.index("1. exact role/schema/type/relation/constraint/index/forced-RLS"),
+        plan.index("2. the nine entry-point functions"),
+        plan.index("3. the thirteen trigger functions"),
+        plan.index("4. the thirteen trigger declarations"),
+        plan.index("5. `PUBLIC` revocation"),
+        plan.index("6. non-executed catalogue and privilege expectation comments"),
+    ]
+    assert positions == sorted(positions)
+    assert "forty-four forced-RLS policies" in plan
+    assert "twenty-five invariant-enforcement bindings" in plan
+
+
+def test_static_claim_is_calibrated_and_next_database_gate_is_separate() -> None:
+    combined = _flat("\n".join((_text(PLAN), _text(DESIGN), _text(THREAT))))
+
+    for required in (
+        "not equivalence to a PostgreSQL server parse",
+        "does not prove that PostgreSQL parses or accepts it",
+        "provider-free disposable local PostgreSQL parse/catalogue rehearsal",
+        "No database or external SQL parser is used",
+        "no SQL execution/application, Alembic migration",
+        "no database adapter",
+    ):
+        assert required in combined
+
+
+def test_forbidden_product_runtime_and_protected_surfaces_are_explicit() -> None:
+    combined = _flat("\n".join((_text(PLAN), _text(DESIGN), _text(THREAT))))
+
+    for required in (
+        "Patient/product/protected/historical-PHI data: none",
+        "application/API/Diary",
+        "provider product",
+        "runtime wiring",
+        "deployment",
+        "Pages",
+        "protected-ref",
+        "`docs/branding/`",
+    ):
+        assert required in combined

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_stage_and_commit_only_the_inert_ddl_rehearsal_plan_design_threat_delta_plan_tests_and_five_source_receipts_for_exact_head_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The new plan/design/threat delta bind immutable structural contract sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8 and body contract sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3. Six plan tests, Ruff and diff checks pass. The candidate freezes fixed .sql.inert/manifest outputs, closed PostgreSQL-16 lowering, canonical digest framing, exact race/retry handling, six-phase privilege order, static recognition and calibrated no-server-parse claims.",
+    "current_authority_allocation": "GPT Sol owns the plan commit and later acceptance. No worker has implementation, acceptance, integration, push, protected-ref, runtime or deployment authority. A fresh Gemini plan challenge may receive read-only exact-path review after this candidate is committed.",
+    "git_refs_and_worktree": "The task branch and origin task are aligned at c3eed9a56a2dc3c875ecccbc216e59577f154bf6 before the plan commit. Local/origin master and local/origin handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicitly named new plan files will be staged.",
+    "live_handover_current_baton": "The fully reread live baton records R7 accepted and the provider-free unmounted inert DDL rehearsal as the next safe planned descendant under standing continuation authority.",
+    "protected_evidence_boundaries": "Commit scope is documentation, plan tests and the two five-source receipt pairs only. No renderer, SQL artifact, database/source/provider contact, dependency, migration, application/API/Diary change, patient/product/protected data, runtime, command/write, deployment, release, Pages or protected-ref movement is included. docs/branding and every unrelated untracked file remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_provider_free_unmounted_inert_postgresql_16_ddl_rehearsal_boundary_from_the_two_accepted_durability_contracts_without_execution_or_database_contact",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely at 486 lines after R7 closeout. It records the function-and-trigger-body architecture pass at source a93d07405ad35d7d6c0603065625c17ec14ab23e and contract sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3, with the provider-free unmounted inert DDL rehearsal as the next safe descendant.",
+    "current_authority_allocation": "GPT Sol owns plan meaning, architecture, acceptance, recovery and task-branch publication. DeepSeek V4 Flash/high through Claude Code --bare is eligible only for a later frozen separable mechanical implementation packet; Gemini 3.6 Flash/high through a fresh Antigravity project is eligible only for fresh independent veto. Neither receives acceptance, integration, protected-ref, runtime or deployment authority.",
+    "active_plan_and_acceptance": "The full accepted body plan/design/threat delta/closeout/Sol acceptance and the controlling Context Fabric portions of implementation_plan.md were reread. The immutable structural parent is c55d25d6c9704ae4612ef2d123158f71302ab411 with contract sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8; the accepted body child is a93d07405ad35d7d6c0603065625c17ec14ab23e with contract sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3. Together they permit only a mechanical repository-local PostgreSQL-16 lowering rehearsal with static grammar, exact renderer order, catalogue and privilege assertions.",
+    "protected_evidence_boundaries": "Planning may define repository-local inert SQL artifacts and static validators only. It may not execute, apply or connect SQL; create or run Alembic or any migration; contact a database, source, outbox, feed, watcher, listener, network service or provider product path; inspect patient/product/protected data; alter app, API Spine or Diary surfaces; persist operational state; gain credentials; wire runtime; command or write product truth; deploy, release, rebuild Pages or move protected refs. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger file remain preserved and excluded.",
+    "git_refs_and_worktree": "The task branch and origin task are aligned at R7 closeout commit c3eed9a56a2dc3c875ecccbc216e59577f154bf6 with no tracked worktree change. Local/origin master and local/origin handoff/current all remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. User-owned untracked files remain present and untouched."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "inert_ddl_preplanning_full_live_handover_active_acceptance_authority_boundary_and_git_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the fresh five-source readback and exact Git verification before planning."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No new worker has been dispatched before the plan boundary is frozen."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini is reserved for a later fresh read-only veto after deterministic admission."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek is only a prospective later bounded implementation worker; no transport is opened during planning."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is not selected except as the frozen future DeepSeek transport adapter."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
