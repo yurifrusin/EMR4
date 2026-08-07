@@ -11,6 +11,10 @@ RECOVERY = ROOT / (
     "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
     "architecture-recovery.md"
 )
+IMPLEMENTATION_RECOVERY = ROOT / (
+    "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
+    "architecture-implementation-recovery.md"
+)
 PARENT = ROOT / (
     "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-"
     "transaction-architecture/migration-transaction-architecture-contract.json"
@@ -28,6 +32,10 @@ def _parent() -> dict:
 
 def _recovery() -> str:
     return RECOVERY.read_text(encoding="utf-8")
+
+
+def _implementation_recovery() -> str:
+    return IMPLEMENTATION_RECOVERY.read_text(encoding="utf-8")
 
 
 def test_plan_binds_exact_parent_and_complete_body_population() -> None:
@@ -99,6 +107,23 @@ def test_recovery_closes_effective_parent_and_trigger_feasibility() -> None:
         "check-in remains outside",
         "Every deferred fence is read-only, lock-free, sibling-call-free",
         "second same-transaction appointment update",
+    ):
+        assert phrase in recovery
+
+
+def test_implementation_recovery_requires_genuinely_lowerable_typed_bodies() -> None:
+    recovery = " ".join(_implementation_recovery().split())
+    for phrase in (
+        "Rejected uncommitted candidate digest",
+        "machine-lowerable bodies",
+        "discriminated `instruction_node_v1` objects",
+        "Expressions are discriminated nodes, never free strings",
+        "full ordered signature objects",
+        "`pg_catalog.trigger`",
+        "column-minimal reads, locks and writes",
+        "structured `{from,to}` objects",
+        "ordered `prefixItems` or body-specific `const` definitions",
+        "candidate-independent exact-head veto",
     ):
         assert phrase in recovery
 

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_corrected_body_contract_and_design_implementation_lanes",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Implementation must bind the accepted parent digest, represent only the exact structural_feasibility_recovery_v1, derive an effective parent, encode exactly twenty-two closed body_program_v1 programs, freeze qualified identifiers, exact effects/failures/lock order/trigger returns and remain free of raw/rendered SQL. Design/threat must explain the same machine surface without expanding it.",
+    "current_authority_allocation": "GPT Sol retains architecture, validator/test, recovery and acceptance ownership. Godel owns only the two new machine contract/schema files. Raman owns only the new design and threat-delta files. Neither lane may stage, commit, push, accept, touch another lane, or open any capability gate. Aristotle remains unused for final independent veto.",
+    "git_refs_and_worktree": "Both lanes use C:\\Users\\sarashera\\emr4 on exact clean tracked HEAD 17654e39be5bb6a64c5b39ab674d7c272aafa4ac. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 7d42c1ed6628352fa9fe3ca5c7f516431607c881. The exact owned-path and preservation receipt is raisa-context-fabric-function-trigger-body-architecture-implementation-workspace-preflight.json.",
+    "live_handover_current_baton": "The exact corrected implementation source is commit 17654e39be5bb6a64c5b39ab674d7c272aafa4ac. It keeps the accepted parent immutable and freezes the one legal effective-parent recovery plus the exact nine-entry-point and thirteen-trigger body architecture.",
+    "protected_evidence_boundaries": "No parent, app, Alembic, API Spine or Diary file may change. No SQL/DDL renderer, database/source/network/provider call, patient/product/protected data, runtime, route, command/write expansion, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked artifact remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

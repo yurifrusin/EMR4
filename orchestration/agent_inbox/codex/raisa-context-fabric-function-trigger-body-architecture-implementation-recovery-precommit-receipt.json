@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_function_trigger_body_implementation_recovery_boundary",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The original child plan and structural-feasibility recovery remain controlling, now supplemented by the normative implementation recovery that requires discriminated typed instruction/expression nodes, full signatures and trigger declarations, column-minimal derived effects, structured derived call graphs and four exact semantic corrections. This commit preserves the rejection and freezes only that corrected boundary before implementation.",
+    "current_authority_allocation": "GPT Sol owns conceptual recovery, architecture and acceptance. The two implementation-lane auditors were read-only and have no self-acceptance, commit, integration, push or protected-ref authority. The final candidate-independent reviewer remains outside recovery authoring.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at 17654e39be5bb6a64c5b39ab674d7c272aafa4ac, two commits ahead of origin task 7d42c1ed6628352fa9fe3ca5c7f516431607c881. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean; only explicit recovery-owned tracked/untracked files and preserved unrelated untracked artifacts are present.",
+    "live_handover_current_baton": "The live baton directs the provider-free unmounted function-and-trigger-body architecture after the accepted structural parent. The first uncommitted implementation candidate was correctly rejected before candidate admission because it was not mechanically lowerable; standing authority directs bounded Sol recovery without a user pause.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/source/feed/watcher/listener contact, rendered or executable SQL/DDL, migration/database object, app/API/Diary change, operational credential/persistence, command/write expansion, runtime wiring, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked artifacts remain untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

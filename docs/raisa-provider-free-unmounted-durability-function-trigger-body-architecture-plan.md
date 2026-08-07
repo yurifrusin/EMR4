@@ -3,7 +3,8 @@
 Date: 2026-08-07
 
 Status: initial plan superseded by bounded structural-feasibility recovery;
-corrected plan frozen pending implementation
+first implementation candidate rejected; normative implementation recovery
+frozen
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -16,6 +17,9 @@ Parent contract:
 
 Normative recovery:
 `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-recovery.md`
+
+Normative implementation recovery:
+`docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-implementation-recovery.md`
 
 ## Objective
 

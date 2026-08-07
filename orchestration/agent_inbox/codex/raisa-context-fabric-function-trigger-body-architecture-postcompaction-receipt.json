@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_provider_free_unmounted_function_and_trigger_body_architecture_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7481f97b3e1720592586156a8c1e63378c4d7cd625b808019d880b12bf9806ae",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted parent closeout and Sol acceptance plus the complete child plan and normative structural-feasibility recovery were reread. Commits f1de5fbb903e304ca4923bb17cbee00e5f955bd7 and 17654e39be5bb6a64c5b39ab674d7c272aafa4ac freeze a pure machine-readable body architecture for exactly nine entry points and thirteen trigger functions, with one closed effective-parent recovery, no rendered or executable SQL/DDL and a later independent veto before acceptance.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture, recovery and acceptance owner. The already-dispatched bounded native lanes own only their exact separable artifacts; the reserved candidate-independent reviewer owns read-only exact-head veto only. No worker may self-accept, integrate, push protected refs or open provider, patient/product-data, database/source, runtime, command, deployment or release authority.",
+    "git_refs_and_worktree": "After a fresh exact origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at 17654e39be5bb6a64c5b39ab674d7c272aafa4ac, two commits ahead of origin task 7d42c1ed6628352fa9fe3ca5c7f516431607c881. The index and tracked worktree are clean. Local/origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. There are 204 preserved untracked status entries, including docs/branding and this bounded candidate's unstaged files.",
+    "live_handover_current_baton": "AGENTS.md was completely reread after conversation compaction. The live Current Result accepts the immutable migration/transaction structural parent at c55d25d6c9704ae4612ef2d123158f71302ab411 with canonical digest sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8, and the live Next Implementation directs this exact provider-free unmounted function-and-trigger-body architecture under Yuri's standing uninterrupted-gate authority.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/product data, provider/model call, database/outbox/feed/watcher/listener/source contact, executable or rendered SQL/DDL, migration/database object, app/API/Diary change, operational persistence or credential, command/write expansion, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked receipt/state/evidence/cost-ledger remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
