@@ -3,8 +3,8 @@
 Date: 2026-08-07
 
 Status: initial plan superseded by bounded structural-feasibility recovery;
-six implementation candidates rejected; fourth exact-veto Sol recovery frozen
-after the latest exact-HEAD veto; correction implementation not yet accepted
+six implementation candidates rejected; fourth exact-veto replacement built
+with complete deterministic acceptance and fresh exact-HEAD veto pending
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -38,6 +38,9 @@ Normative fourth exact-veto recovery:
 
 Latest rejected candidate contract:
 `sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b`
+
+Fourth-recovery replacement candidate contract:
+`sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3`
 
 ## Objective
 
@@ -452,6 +455,14 @@ locked the current anchor but did not field-by-field reverify it against the
 locked checkpoint and generation before using its digest. The fourth exact-veto
 recovery is now binding and requires that complete rotation-entry anchor fence
 before any effect. R6A–R6D otherwise survived independent challenge.
+
+The fourth-recovery replacement implements exactly that eleven-equality
+`F_ANCHOR` fence immediately after the current-anchor lock. The rebuilt
+contract is
+`sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3`;
+the complete inherited-plus-R7 packet passes 339/339, including 34 focused
+candidate-independent anchor-fence attacks. Fresh clean exact-HEAD veto remains
+mandatory before acceptance.
 
 ## Claim boundary and next dependency
 

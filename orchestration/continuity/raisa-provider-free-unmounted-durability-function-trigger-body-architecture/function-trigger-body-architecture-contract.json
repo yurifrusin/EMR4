@@ -1,7 +1,7 @@
 {
   "schema_version": "raisa.context_fabric.function_trigger_body_architecture.v3",
   "status": "architecture_only_unmounted_typed_ir",
-  "contract_sha256": "sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b",
+  "contract_sha256": "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3",
   "parent_binding": {
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
     "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",
@@ -75583,6 +75583,239 @@
                   }
                 },
                 {
+                  "node_id": "emr4_context_fabric.rotate_observation_key_v1.anchor_fence_exact",
+                  "op": "ASSERT",
+                  "operands": {
+                    "predicate": {
+                      "op": "AND",
+                      "operands": [
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "checkpoint_state",
+                            "type": "emr4_context_fabric.checkpoint_state"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "checkpoint",
+                            "relation": "emr4_context_fabric.context_durability_checkpoint",
+                            "column": "checkpoint_state",
+                            "type": "emr4_context_fabric.checkpoint_state"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "last_contiguous_position",
+                            "type": "pg_catalog.bigint"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "checkpoint",
+                            "relation": "emr4_context_fabric.context_durability_checkpoint",
+                            "column": "last_contiguous_position",
+                            "type": "pg_catalog.bigint"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "last_observation_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "checkpoint",
+                            "relation": "emr4_context_fabric.context_durability_checkpoint",
+                            "column": "last_observation_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "checkpoint_integrity_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "checkpoint",
+                            "relation": "emr4_context_fabric.context_durability_checkpoint",
+                            "column": "checkpoint_integrity_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "policy_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "generation",
+                            "relation": "emr4_context_fabric.context_observer_generation",
+                            "column": "policy_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "principal_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "generation",
+                            "relation": "emr4_context_fabric.context_observer_generation",
+                            "column": "principal_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "binding_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "generation",
+                            "relation": "emr4_context_fabric.context_observer_generation",
+                            "column": "binding_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "source_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "generation",
+                            "relation": "emr4_context_fabric.context_observer_generation",
+                            "column": "source_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "registry_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "generation",
+                            "relation": "emr4_context_fabric.context_observer_generation",
+                            "column": "registry_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "impact_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "generation",
+                            "relation": "emr4_context_fabric.context_observer_generation",
+                            "column": "impact_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        },
+                        {
+                          "op": "EQ",
+                          "left": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "anchor",
+                            "relation": "emr4_context_fabric.context_recovery_anchor",
+                            "column": "key_schedule_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "right": {
+                            "op": "REF",
+                            "kind": "ROW_COLUMN",
+                            "symbol": "generation",
+                            "relation": "emr4_context_fabric.context_observer_generation",
+                            "column": "key_schedule_digest",
+                            "type": "emr4_context_fabric.digest_sha256"
+                          },
+                          "type": "pg_catalog.boolean"
+                        }
+                      ],
+                      "type": "pg_catalog.boolean"
+                    },
+                    "failure_id": "F_ANCHOR"
+                  }
+                },
+                {
                   "node_id": "emr4_context_fabric.rotate_observation_key_v1.lock_prior_key",
                   "op": "LOCK_EXACT",
                   "operands": {
@@ -78038,6 +78271,7 @@
           }
         ],
         "failures": [
+          "F_ANCHOR",
           "F_BINDING_DENIED",
           "F_KEY_PARTITION"
         ],

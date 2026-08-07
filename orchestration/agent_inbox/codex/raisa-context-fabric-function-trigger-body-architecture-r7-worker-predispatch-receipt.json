@@ -1,0 +1,16 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_dispatch",
+  "planned_action": "dispatch_one_bounded_native_implementation_lane_for_the_exact_r7a_rotation_anchor_fence_and_focused_hostile_tests",
+  "reasons": [
+    "continuation_event_missing_or_unapproved",
+    "workspace_receipt_missing:durability_r5_validator"
+  ],
+  "rehydrated_from_receipt": false,
+  "rehydration_sources": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {},
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

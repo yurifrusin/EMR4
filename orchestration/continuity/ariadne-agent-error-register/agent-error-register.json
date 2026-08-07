@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 77,
+  "register_revision": 78,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3099,6 +3099,45 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0080",
+      "attempt_id": "raisa-context-fabric-function-trigger-body-architecture-r7-worker-predispatch-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-function-trigger-body-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A native worker predispatch runtime state must use the approved pre_worker_dispatch continuation event and must not declare an assigned agent without a corresponding workspace receipt.",
+      "observed_error": "The first R7 worker predispatch state used the unapproved continuation event pre_dispatch and listed durability_r5_validator in assigned_agent_ids without a workspace receipt. The preflight returned revision_required and prohibited dispatch.",
+      "detection_method": "scripts.ariadne_orchestrator_preflight returned continuation_event_missing_or_unapproved and workspace_receipt_missing:durability_r5_validator before any follow-up task was sent. Sol preserved the failed envelope and generated a distinct v2 state with pre_worker_dispatch, empty assigned_agent_ids and complete worker-slot inventory.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r7-worker-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r7-worker-predispatch-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-78.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_continuation_event_and_assignment_envelope",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "No worker dispatch followed the failed receipt. The distinct v2 runtime state uses pre_worker_dispatch, leaves assigned_agent_ids empty before assignment, inventories the managed and native slots and produced a passing receipt before the follow-up task was sent.",
+        "prevention_control": "Copy the approved continuation event from a passing native-worker predispatch receipt and leave assigned_agent_ids empty unless an actual workspace receipt is already present; descriptive lane availability belongs in adapter evidence and worker_slots.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r7-worker-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-r7-worker-predispatch-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-78.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

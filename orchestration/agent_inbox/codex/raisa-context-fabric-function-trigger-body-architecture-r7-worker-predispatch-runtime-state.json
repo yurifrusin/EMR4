@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_dispatch",
+  "planned_action": "dispatch_one_bounded_native_implementation_lane_for_the_exact_r7a_rotation_anchor_fence_and_focused_hostile_tests",
+  "source_evidence": {
+    "live_handover_current_baton": "At exact source HEAD 4533ff3505827f8fa44b1c1972e4e2b4b00d9234 the live baton identifies only the fourth exact-veto recovery's field-complete rotation-entry anchor fence as the next safe implementation.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery, test execution, generation, acceptance, integration and Git authority. The native implementation lane owns only two explicitly named files and cannot self-accept, run Git/pytest/generation or broaden scope.",
+    "active_plan_and_acceptance": "The frozen R7A packet requires one F_ANCHOR assertion after lock_anchor and before lock_prior_key/effects, with exactly four checkpoint-field and seven generation-digest equalities plus candidate-independent hostile mutations. All earlier recovery requirements and the exact replay path remain unchanged.",
+    "protected_evidence_boundaries": "The worker may edit only the entry-program builder and one new authored-synthetic focused test. No SQL/DDL, database/source/feed/watcher/listener, provider, product/patient/protected data, command/write, application/API/Diary, runtime, credential, deployment, production, release, Pages or protected-ref surface is open. docs/branding and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "The shared active task worktree is tracked-clean at 4533ff3505827f8fa44b1c1972e4e2b4b00d9234 on codex/ariadne-bernie-davida-parallel-seam before dispatch, ignoring preserved untracked files. origin task is 7d42c1ed6628352fa9fe3ca5c7f516431607c881; local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "predispatch_five_source_rehydration_for_r7a_worker",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol is ready to supervise and integrate the exact two-file worker result."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The completed durability_r5_validator lane is available for a bounded follow-up implementation task."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["External provider/model review is not part of implementation dispatch."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external DeepSeek transport is selected for this two-file native lane."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": ["durability_r5_validator"]
+}

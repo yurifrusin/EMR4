@@ -516,7 +516,10 @@ generation rehearsal. The architecture-only provider-free default-off
   generation digests before using the anchor digest. The fourth exact-veto
   recovery now binds one exact pre-effect `F_ANCHOR` fence while preserving all
   earlier source-independent replay, recovery-anchor, set-uniqueness and
-  lock-order repairs. DDL remains blocked. No applied migration, live
+  lock-order repairs. Its replacement contract
+  `sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3`
+  passes the complete 339-test inherited-plus-R7 deterministic packet and is
+  pending a fresh clean exact-HEAD independent veto. DDL remains blocked. No applied migration, live
   implementation, real-product or clinical descendant is opened.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates

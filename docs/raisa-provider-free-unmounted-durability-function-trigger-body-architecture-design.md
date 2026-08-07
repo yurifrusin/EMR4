@@ -2,7 +2,8 @@
 
 Date: 2026-08-07
 
-Status: sixth candidate rejected; fourth exact-veto recovery frozen
+Status: sixth candidate rejected; fourth exact-veto replacement built with
+deterministic acceptance complete and fresh exact-HEAD veto pending
 
 Parent result:
 `raisa_provider_free_unmounted_durability_migration_transaction_architecture_pass`
@@ -45,6 +46,9 @@ Rejected uncommitted R6 worktree candidate:
 
 Latest rejected committed candidate:
 `sha256:c8d27c85def134056598be7ef12cda3ae7b509b3d06b16a536459baea51bc24b`
+
+Fourth-recovery replacement candidate:
+`sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3`
 
 ## Purpose and derivation
 

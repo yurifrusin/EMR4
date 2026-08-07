@@ -2694,8 +2694,22 @@ def build_rotation_body() -> dict[str, Any]:
         ("source_position", dsl.const(PG+"bigint", None)), ("key_interval_start", start), ("key_interval_end", end),
         ("prior_lifecycle_digest", _col("anchor", ANCHOR, "anchor_digest")), ("lifecycle_digest", rotation_digest), ("created_at", dsl.transaction_timestamp()),
     ]
+    anchor_fence_exact = dsl.all_of(
+        dsl.eq(_col("anchor", ANCHOR, "checkpoint_state"), _col("checkpoint", CHECKPOINT, "checkpoint_state")),
+        dsl.eq(_col("anchor", ANCHOR, "last_contiguous_position"), _col("checkpoint", CHECKPOINT, "last_contiguous_position")),
+        dsl.eq(_col("anchor", ANCHOR, "last_observation_digest"), _col("checkpoint", CHECKPOINT, "last_observation_digest")),
+        dsl.eq(_col("anchor", ANCHOR, "checkpoint_integrity_digest"), _col("checkpoint", CHECKPOINT, "checkpoint_integrity_digest")),
+        dsl.eq(_col("anchor", ANCHOR, "policy_digest"), _col("generation", GENERATION, "policy_digest")),
+        dsl.eq(_col("anchor", ANCHOR, "principal_digest"), _col("generation", GENERATION, "principal_digest")),
+        dsl.eq(_col("anchor", ANCHOR, "binding_digest"), _col("generation", GENERATION, "binding_digest")),
+        dsl.eq(_col("anchor", ANCHOR, "source_digest"), _col("generation", GENERATION, "source_digest")),
+        dsl.eq(_col("anchor", ANCHOR, "registry_digest"), _col("generation", GENERATION, "registry_digest")),
+        dsl.eq(_col("anchor", ANCHOR, "impact_digest"), _col("generation", GENERATION, "impact_digest")),
+        dsl.eq(_col("anchor", ANCHOR, "key_schedule_digest"), _col("generation", GENERATION, "key_schedule_digest")),
+    )
     new_branch = [
         dsl.lock_node(f"{body_id}.lock_anchor", relation=ANCHOR, predicate=_predicate(ANCHOR, {**loc, "lifecycle_revision": _col("checkpoint", CHECKPOINT, "lifecycle_revision")}), key_columns=COORDS+["lifecycle_revision"], mode="FOR_SHARE", order=4, output_symbol="anchor", columns=COLUMNS[ANCHOR]),
+        dsl.assert_node(f"{body_id}.anchor_fence_exact", anchor_fence_exact, "F_ANCHOR"),
         dsl.lock_node(f"{body_id}.lock_prior_key", relation=KEY, predicate=dsl.all_of(_predicate(KEY, loc), dsl.eq(dsl.add(_src(KEY, "interval_end"), dsl.const(PG+"bigint", 1), PG+"bigint"), start)), key_columns=COORDS+["interval_start"], mode="FOR_UPDATE", order=5, output_symbol="prior_key", columns=COLUMNS[KEY]),
         dsl.assert_node(f"{body_id}.future_fence", dsl.binary("GT", start, _col("checkpoint", CHECKPOINT, "last_contiguous_position")), "F_KEY_PARTITION"),
         dsl.assert_node(f"{body_id}.interval_order", dsl.binary("GT", end, start), "F_KEY_PARTITION"),

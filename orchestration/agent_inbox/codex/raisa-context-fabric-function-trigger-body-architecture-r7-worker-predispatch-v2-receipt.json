@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_bounded_native_implementation_lane_for_the_exact_r7a_rotation_anchor_fence_and_focused_hostile_tests",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen R7A packet requires one F_ANCHOR assertion after lock_anchor and before lock_prior_key/effects, with exactly four checkpoint-field and seven generation-digest equalities plus candidate-independent hostile mutations. All earlier recovery requirements and the exact replay path remain unchanged.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery, test execution, generation, acceptance, integration and Git authority. The native implementation lane owns only two explicitly named files and cannot self-accept, run Git/pytest/generation or broaden scope.",
+    "git_refs_and_worktree": "The shared active task worktree is tracked-clean at 4533ff3505827f8fa44b1c1972e4e2b4b00d9234 before the packet/receipt files, on codex/ariadne-bernie-davida-parallel-seam. origin task is 7d42c1ed6628352fa9fe3ca5c7f516431607c881; local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "At exact source HEAD 4533ff3505827f8fa44b1c1972e4e2b4b00d9234 the live baton identifies only the fourth exact-veto recovery's field-complete rotation-entry anchor fence as the next safe implementation.",
+    "protected_evidence_boundaries": "The worker may edit only the entry-program builder and one new authored-synthetic focused test. No SQL/DDL, database/source/feed/watcher/listener, provider, product/patient/protected data, command/write, application/API/Diary, runtime, credential, deployment, production, release, Pages or protected-ref surface is open. docs/branding and all unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

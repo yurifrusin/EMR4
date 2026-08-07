@@ -2,7 +2,8 @@
 
 Date: 2026-08-08
 
-Status: normative Sol recovery frozen; replacement implementation pending
+Status: replacement built with 339-test deterministic acceptance complete;
+fresh clean exact-HEAD independent veto pending
 
 Rejected candidate HEAD:
 `0bfd3e7545dfa1a7431f856b5eaf2aac32a9292d`
@@ -15,6 +16,9 @@ Independent veto:
 
 Immutable parent contract:
 `sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8`
+
+Replacement candidate contract:
+`sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3`
 
 ## Recovery classification
 
