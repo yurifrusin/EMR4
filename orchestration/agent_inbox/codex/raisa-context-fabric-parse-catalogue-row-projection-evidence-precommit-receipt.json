@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_corrected_artifact_parse_catalogue_runtime_evidence_and_closeout_candidate_for_fresh_exact_head_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The reviewed rebind at 32bc625debf82726123c95cfe0cd37531f3f22ac ran once and returned raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass. Evidence binds corrected inert SQL SHA-256 83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5, contract SHA-256 4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b, 1,404,420 LF bytes, 412 statements, all exact catalogue digests, exact image identity, pull_attempted false, stable readiness and exact cleanup. Container e44443027e9ad46d4217c48ca042b13326f422b5bc7a88258eeaadb853769e0c is absent. The rebound packet now passes 113 focused tests, Ruff and diff check. Final acceptance remains closed pending a fresh committed-evidence veto.",
+    "current_authority_allocation": "GPT Sol owns serial runtime evidence, candidate commit and final acceptance. Fresh Gemini 3.6 Flash/high r96 independently accepted the pre-runtime rebind only; a distinct fresh exact-HEAD review will veto the committed runtime evidence. No worker/reviewer owns self-acceptance, integration, task push, protected refs, provider/product activity, deployment or release.",
+    "git_refs_and_worktree": "Primary worktree is at parent HEAD 32bc625debf82726123c95cfe0cd37531f3f22ac with only exact evidence/closeout/review-receipt changes selected for candidate commit. Fresh r96 remained clean and unchanged at that pre-runtime source. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df. The existing mutable behavior evidence and docs/branding remain untracked and unstaged.",
+    "live_handover_current_baton": "AGENTS.md requires a newly hash-bound corrected-artifact disposable parse/catalogue pass before the behavior contract and twenty scenarios may be rebound. The Agent Execution Surface and Containment Gate remains a later programme prerequisite and no occupied Bureau authority is involved.",
+    "protected_evidence_boundaries": "This commit contains only the minimized authored-synthetic parse/catalogue evidence, closeout/rebind documentation, exact deterministic assertions and Ariadne review/execution receipts. Behavior scenarios, application migration/runtime, operational database or persistent storage, watcher/listener/feed, patient/clinical/product/protected data, provider/model call, tool, command or product write, deployment, production, release, Pages and protected-ref movement remain closed. docs/branding and all unrelated untracked files remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

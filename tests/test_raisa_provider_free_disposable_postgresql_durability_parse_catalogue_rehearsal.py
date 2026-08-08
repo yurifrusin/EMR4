@@ -75,6 +75,11 @@ PRE_ROW_PROJECTION_RECOVERY_EVIDENCE = json.loads(
         encoding="utf-8"
     )
 )
+ROW_PROJECTION_RECOVERY_EVIDENCE = json.loads(
+    (DIR / "provider-free-disposable-postgresql-evidence.json").read_text(
+        encoding="utf-8"
+    )
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -452,6 +457,13 @@ def test_pre_row_projection_recovery_parse_catalogue_pass_is_preserved() -> None
     evidence = PRE_ROW_PROJECTION_RECOVERY_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
 
+    assert rehearsal._bytes_sha(  # noqa: SLF001
+        (
+            DIR
+            / "provider-free-disposable-postgresql-evidence-pre-row-composite-projection-order-recovery.json"
+        ).read_bytes()
+    ) == "3ef47b7a14b2581b6c7bf1732594b1e1c322a90e07ec7d43e2e5b5006b1a3281"
+
     assert evidence["result"] == (
         "raisa_provider_free_disposable_postgresql_durability_"
         "parse_catalogue_rehearsal_pass"
@@ -469,6 +481,53 @@ def test_pre_row_projection_recovery_parse_catalogue_pass_is_preserved() -> None
     )
     assert evidence["cleanup"]["removed"] is True
     assert evidence["cleanup"]["absence_verified"] is True
+
+
+def test_row_projection_recovery_parse_catalogue_evidence_is_exact_pass() -> None:
+    evidence = ROW_PROJECTION_RECOVERY_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_404_420,
+        "artifact_sha256": (
+            "sha256:83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5"
+        ),
+        "contract_sha256": (
+            "sha256:4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    for query_id, digest in CONTRACT["catalogue_expectation"][
+        "expected_query_digests"
+    ].items():
+        assert evidence["catalogue"]["query_digests"][query_id] == digest
+    assert evidence["environment"]["image"] == {
+        "id": (
+            "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"
+        ),
+        "pull_attempted": False,
+        "reference": "postgres:16-bookworm",
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "e44443027e9ad46d4217c48ca042b13326f422b5bc7a88258eeaadb853769e0c"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
 
 
 def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:

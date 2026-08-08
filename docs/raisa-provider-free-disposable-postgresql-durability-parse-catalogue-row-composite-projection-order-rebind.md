@@ -2,8 +2,8 @@
 
 Date: 2026-08-08
 
-Status: provider-free corrected-artifact rebind candidate; PostgreSQL execution
-remains closed pending deterministic checks and fresh exact-HEAD veto
+Status: provider-free corrected-artifact parse/catalogue runtime passed; final
+evidence acceptance remains pending a fresh exact-HEAD veto
 
 ## Parent recovery
 
@@ -43,10 +43,12 @@ container run, the predecessor evidence must be preserved under an explicit
 historical filename, the rebound contract and tests must pass, and a fresh
 read-only exact-HEAD Gemini 3.6 Flash/high veto must accept the candidate.
 
-Only then may one newly owned `postgres:16-bookworm` container run the exact
-rollback and success sequence. A mismatch produces new immutable failure
-evidence and exact cleanup; it cannot weaken catalogue expectations or change
-the parent SQL.
+After the exact candidate passed its deterministic packet and a fresh r96
+Gemini 3.6 Flash/high veto, one newly owned `postgres:16-bookworm` container ran
+the exact rollback and success sequence. PostgreSQL admitted the corrected
+artifact, all exact catalogue digests matched, and the exact captured container
+ID was removed with absence verified. The runtime evidence is not final until
+its exact committed evidence packet receives a separate fresh veto.
 
 ## Closed boundary
 

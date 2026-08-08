@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_new_owned_pull_never_networkless_corrected_artifact_postgresql_16_parse_catalogue_rehearsal_then_exact_id_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md makes the corrected-artifact disposable parse/catalogue proof the next required step before the separately rebound twenty-scenario behavior runtime. The future Agent Execution Surface and Containment Gate remains after this provider-free durability sequence.",
+    "current_authority_allocation": "GPT Sol owns this one serial database run, minimized evidence, diagnosis if needed, exact cleanup and acceptance. Fresh Gemini 3.6 Flash/high r96 veto passed the exact candidate and has no runtime authority. No implementation worker, provider model or product surface is involved.",
+    "active_plan_and_acceptance": "Exact candidate HEAD 32bc625debf82726123c95cfe0cd37531f3f22ac passed 112 focused tests, Ruff, diff check and one fresh clean independent veto. It binds corrected source 0931f3e658f06e02e7de4c5ea02238184da9e767, inert SQL SHA-256 83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5, 1,404,420 LF bytes, 412 statements, canonical contract SHA-256 4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b and unchanged exact catalogue digests. The reviewed predecessor pass is separately preserved and cannot prove this run.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no published/exposed port, no bind/named/workspace/Docker-socket mount, container-local tmpfs, fixed synthetic empty prerequisites, rollback-before-success admission, minimized evidence and exact-ID cleanup. No behavior scenario, applied migration, operational database or credential, durable volume, watcher/listener/feed, application/API/Diary, patient/clinical/product/protected data, provider/model call, tool, command or product write, deployment, production, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "Primary worktree is at exact HEAD 32bc625debf82726123c95cfe0cd37531f3f22ac with no tracked change before execution. Exact local image postgres:16-bookworm is present as sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Review worktree r96 is clean at the same HEAD. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "parse_catalogue_row_projection_rebind_preexecution_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified exact image identity, candidate HEAD, tracked cleanliness, protected refs and accepted verifier receipt immediately before execution."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for the serial disposable database run."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh r96 Gemini 3.6 Flash/high exact-HEAD veto passed with a clean unchanged postcondition."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation transport is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

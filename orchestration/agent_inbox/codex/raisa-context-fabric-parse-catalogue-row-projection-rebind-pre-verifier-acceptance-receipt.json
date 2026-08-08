@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_fresh_exact_head_corrected_artifact_parse_catalogue_rebind_veto_and_open_one_networkless_disposable_parse_catalogue_run",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The fresh reviewer verified candidate 32bc625debf82726123c95cfe0cd37531f3f22ac at unchanged clean HEAD, exact parent source 0931f3e658f06e02e7de4c5ea02238184da9e767, corrected inert SQL SHA-256 83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5, 1,404,420 LF bytes, 412 statements and canonical contract SHA-256 4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b. It proved the predecessor pass byte-identical at SHA-256 3ef47b7a14b2581b6c7bf1732594b1e1c322a90e07ec7d43e2e5b5006b1a3281, all 15 catalogue digests and containment unchanged, and reproduced 112 passed tests, Ruff and diff checks. Its one terminal decision is pass with no P0-P3 finding.",
+    "current_authority_allocation": "GPT Sol owns verifier acceptance, the serial disposable PostgreSQL run, exact cleanup and evidence admission. Gemini 3.6 Flash/high through fresh Antigravity worktree r96 owned read-only veto only and returned one pass. No reviewer owns runtime, self-acceptance, integration, baton, task push, protected refs, provider/product activity, deployment or release.",
+    "git_refs_and_worktree": "Task worktree C:/Users/sarashera/emr4 is at exact candidate HEAD 32bc625debf82726123c95cfe0cd37531f3f22ac with only bounded review/receipt artifacts and the existing untracked mutable behavior evidence outside the candidate. Review worktree r96 is clean and unchanged at the same exact HEAD. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "AGENTS.md keeps the corrected Context Fabric durability proof chain active. A fresh hash-bound parse/catalogue pass is the required predecessor to the separately rebound behavior runtime. The future Agent Execution Surface and Containment Gate remains later and no occupied Bureau or product-read authority is involved.",
+    "protected_evidence_boundaries": "Acceptance opens exactly one newly owned local postgres:16-bookworm container using --pull=never, --network=none, no host port, no bind/named/workspace/Docker-socket mount, container-local tmpfs, fixed rollback-before-success SQL admission, repository-authored synthetic empty prerequisites, minimized evidence and exact-ID cleanup. It does not open behavior scenarios, applied migration, operational database, persistent volume, watcher/listener/feed, application/API/Diary, patient/clinical/product/protected data, provider/model call, tool, command or product write, deployment, production, release, Pages or protected refs. docs/branding and unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
