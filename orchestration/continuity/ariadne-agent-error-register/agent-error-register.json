@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 109,
+  "register_revision": 110,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5088,6 +5088,50 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-snapshot-query-id-schema-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-109.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0133",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-011",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "An unexpected rejection of an expected-success scenario must release its fixed contract scenario id and one safe SQLSTATE when available without releasing stderr or scenario values.",
+      "observed_error": "Attempt 011 passed the repaired snapshot and reached the scenario gate, but its first expected-success transaction was rejected while the failure envelope retained only unexpected_rejection and the empty-detail digest, with zero admitted scenarios.",
+      "detection_method": "The lifecycle reached fixtures_closed after a successful snapshot, scenario reconciliation remained zero, and the detail digest exactly matched empty bytes; fixed contract ordering identifies BTR-E01 as the only attempted scenario.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-011.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-expected-success-diagnostic-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-110.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.expected_success_scenario_rejection_site_not_released",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Expected-success rejection now releases only the current fixed contract scenario id, one unambiguous valid SQLSTATE when available and their closed metadata digest.",
+        "prevention_control": "Every expected-success runtime branch must carry its fixed scenario identifier into bounded failure handling and safely extract SQLSTATE before its first execution.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-expected-success-diagnostic-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-110.md"
         ]
       },
       "status": "corrected"

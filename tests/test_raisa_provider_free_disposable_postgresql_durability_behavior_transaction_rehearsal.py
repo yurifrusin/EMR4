@@ -80,6 +80,11 @@ FAILURE_EVIDENCE_010 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_011 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-011.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -854,15 +859,45 @@ def test_relation_delta_reconciliation_rejects_hidden_or_unexpected_effects() ->
 
 def test_sqlstate_admission_is_exact_and_never_uses_error_text() -> None:
     accepted = rehearsal.parent.ProcessResult(0, b"", b"")
-    assert rehearsal._bounded_outcome(accepted, None)[0] is None
+    assert rehearsal._bounded_outcome(accepted, None, "BTR-E01")[0] is None
     rejected = rehearsal.parent.ProcessResult(
         3, b"", b"psql:<stdin>:4: ERROR:  CF603: synthetic detail\n"
     )
-    observed, bounded = rehearsal._bounded_outcome(rejected, "CF603")
+    observed, bounded = rehearsal._bounded_outcome(rejected, "CF603", "BTR-T01")
     assert observed == "CF603"
     assert set(bounded) == {"psql_exit", "stderr_digest"}
     with pytest.raises(rehearsal.BehaviorFailure, match="sqlstate_mismatch"):
-        rehearsal._bounded_outcome(rejected, "CF601")
+        rehearsal._bounded_outcome(rejected, "CF601", "BTR-T02")
+
+
+def test_expected_success_rejection_releases_only_scenario_and_sqlstate() -> None:
+    rejected = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        b"psql:<stdin>:4: ERROR:  42883: synthetic detail\n",
+    )
+
+    with pytest.raises(rehearsal.BehaviorFailure) as caught:
+        rehearsal._bounded_outcome(rejected, None, "BTR-E01")
+
+    assert caught.value.stage == "scenario"
+    assert caught.value.code == "unexpected_rejection"
+    assert caught.value.detail == {"scenario_id": "BTR-E01", "sqlstate": "42883"}
+
+
+def test_first_scenario_rejection_is_preserved_and_cleaned_up() -> None:
+    evidence = FAILURE_EVIDENCE_011
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+    assert evidence["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": "sha256:"
+        + "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stage": "scenario",
+    }
+    assert evidence["lifecycle"][-2:] == ["fixtures_closed", "cleanup_verified"]
+    assert evidence["scenario_reconciliation"]["observed"] == 0
+    assert evidence["cleanup"]["absence_verified"] is True
 
 
 def test_passing_evidence_rejects_missing_duplicate_or_raw_scenario_material() -> None:

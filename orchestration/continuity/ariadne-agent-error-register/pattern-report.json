@@ -1,15 +1,15 @@
 {
-  "canonical_register_sha256": "e639b0888822337d872bf03201982b2d8ad23293a5778a602018354b817706c9",
+  "canonical_register_sha256": "45c985cc8f6780510c346ab58df8c47a81302e31bf6165bab0326df30c285556",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 26,
+      "accepted_candidate_changed": 27,
       "canonical_unchanged": 84,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 15,
       "evidence_misreport": 19,
-      "harness_failure": 14,
+      "harness_failure": 15,
       "output_contract_violation": 39,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
@@ -18,14 +18,14 @@
     },
     "by_origin": {
       "agent_behavior": 99,
-      "harness": 14,
+      "harness": 15,
       "repository": 11,
       "transport": 8
     },
     "by_process_severity": {
       "low": 41,
       "material": 46,
-      "moderate": 45
+      "moderate": 46
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 31,
@@ -42,7 +42,7 @@
       "deepseek-v4-flash-c5-worker::implementer": 1,
       "deepseek-v4-flash-implementation-worker::implementer": 2,
       "docker-desktop-windows::orchestrator": 1,
-      "emr4-disposable-postgresql-harness::orchestrator": 10,
+      "emr4-disposable-postgresql-harness::orchestrator": 11,
       "emr4-durability-ddl-renderer::orchestrator": 3,
       "git-worktree-windows-path-layout::orchestrator": 3,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
@@ -53,12 +53,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 81,
+      "orchestrator": 82,
       "verifier": 37
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 132,
+  "incident_count": 133,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -375,7 +375,7 @@
       ]
     }
   ],
-  "register_revision": 109,
+  "register_revision": 110,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-08"
 }

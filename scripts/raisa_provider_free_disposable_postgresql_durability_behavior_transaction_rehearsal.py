@@ -1908,7 +1908,7 @@ def _probe(
 
 
 def _bounded_outcome(
-    result: parent.ProcessResult, expected_sqlstate: str | None
+    result: parent.ProcessResult, expected_sqlstate: str | None, scenario_id: str
 ) -> tuple[str | None, dict[str, Any]]:
     bounded = parent._bounded_psql_rejection(  # noqa: SLF001
         result, max_error_line=1000, max_error_position=131072
@@ -1916,7 +1916,11 @@ def _bounded_outcome(
     observed = bounded["observed_sqlstates"]
     if expected_sqlstate is None:
         if result.returncode != 0 or observed:
-            raise BehaviorFailure("scenario", "unexpected_rejection")
+            detail = {"scenario_id": scenario_id}
+            sqlstate = _safe_sqlstate(result)
+            if sqlstate is not None:
+                detail["sqlstate"] = sqlstate
+            raise BehaviorFailure("scenario", "unexpected_rejection", detail)
         return None, {
             "psql_exit": result.returncode,
             "stderr_digest": bounded["stderr"],
@@ -2028,7 +2032,7 @@ def _run_scenarios(
             if scenario_id == "BTR-R01":
                 _assert_rls_payload(result)
             observed_sqlstate, transport = _bounded_outcome(
-                result, scenario["expected_sqlstate"]
+                result, scenario["expected_sqlstate"], scenario_id
             )
         after = _snapshot(runner, docker, container_id, profile)
         _assert_delta(scenario_id, before, after)
@@ -2359,6 +2363,7 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
                 "relation",
                 "column",
                 "query_id",
+                "scenario_id",
             ):
                 if isinstance(detail.get(name), str):
                     failure_evidence[name] = detail[name]

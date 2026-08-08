@@ -82,6 +82,14 @@
             "code": {"type": "string", "minLength": 1},
             "detail_digest": {"$ref": "#/$defs/digest"},
             "query_id": {"const": "scenario_snapshot"},
+            "scenario_id": {
+              "enum": [
+                "BTR-E01", "BTR-E02", "BTR-E03", "BTR-I01", "BTR-E04",
+                "BTR-I03", "BTR-E05", "BTR-E06", "BTR-I02", "BTR-I04",
+                "BTR-T01", "BTR-T02", "BTR-T03", "BTR-T04", "BTR-R01",
+                "BTR-R02", "BTR-R03", "BTR-B01", "BTR-B02", "BTR-B03"
+              ]
+            },
             "sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"},
             "coordinate_status": {
               "enum": [
