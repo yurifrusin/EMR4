@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "sol_accepts_the_single_fresh_gemini_36_flash_high_read_only_veto_and_opens_only_one_new_owned_behavior_attempt_after_sealing_review_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability gate requires independent acceptance before a new behavior run. The complete system-xmin typed repair, exact parse evidence and parent-only behavior rebind candidate now has one fresh terminal Gemini pass.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied read-only review evidence only. GPT Sol retains sole verifier acceptance, runtime, cleanup and continuity authority. No native subagent, implementation worker or provider runtime is active.",
+    "active_plan_and_acceptance": "The r102 receipt reports one schema-constrained terminal pass, exact candidate HEAD 971c251903ea30ed0b62361062a7a76fdc54ba3f before/after, dirty_after false, all 390 focused tests passed, Ruff and diff checks passed, exact failure/diagnosis and parse evidence hashes reconciled, all fourteen system-xmin sites repaired and validator-covered, 412 statements, 1,403,184 LF bytes at SHA-256 0379b35f, all twenty scenarios unchanged at 6/4/3/4/3 and behavior SHA-256 b8855abe. Sol independently confirmed exact HEAD, clean worktree and protected refs after review.",
+    "protected_evidence_boundaries": "Acceptance opens only eligibility for one new owned pull-never networkless fixed-fixture behavior attempt after a fresh preexecution receipt. No product/provider call, patient/clinical/product/protected data, application migration/runtime, watcher/listener/feed, operational credential/database, command/write, deployment, production, release, Pages or protected ref is opened.",
+    "git_refs_and_worktree": "Review worktree r102 remains clean on codex/review-context-fabric-system-xmin-971c251 at exact HEAD 971c251903ea30ed0b62361062a7a76fdc54ba3f. Primary is at the same HEAD with only bounded review-orchestration files and preserved pre-existing untracked files. Local and origin master plus handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rehydration_and_exact_verifier_result_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled the exact receipt, HEAD, cleanliness, tests and protected refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is active."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One fresh Gemini 3.6 Flash/high receipt returned a schema-constrained terminal pass."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

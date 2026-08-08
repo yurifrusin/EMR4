@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_exact_head_veto_for_the_system_xmin_behavior_rebind_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton remain fully rehydrated. The active descendant is the provider-free system-xmin durability repair candidate awaiting its required fresh independent veto.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only review authority over exact clean candidate 971c2519 only. GPT Sol retains all acceptance, runtime, cleanup, continuity and integration authority. No native subagent or implementation worker is assigned.",
+    "active_plan_and_acceptance": "Candidate 971c251903ea30ed0b62361062a7a76fdc54ba3f binds the typed system-xmin repair, 1,403,184-byte artifact SHA-256 0379b35f, exact parse pass SHA-256 b3eab7e0 and unchanged twenty-scenario behavior contract SHA-256 b8855abe. The 390-test focused packet, Ruff and diff checks pass. Worktree preflight passed at exact clean r102.",
+    "protected_evidence_boundaries": "Review is local, read-only and packet-bounded. It must not inspect branding, holdouts, Diary history, patient/product/protected data or unrelated paths; start Docker or either harness; edit, commit or push; contact providers/products; deploy, release, rebuild Pages or move protected refs.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r102 is clean on codex/review-context-fabric-system-xmin-971c251 at exact candidate 971c251903ea30ed0b62361062a7a76fdc54ba3f. Primary tracked worktree is clean at the same HEAD with preserved untracked files. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rehydration_complete_deterministic_packet_and_exact_clean_verifier_worktree_preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed exact candidate reconciliation and review-worktree preflight."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One fresh Gemini 3.6 Flash/high schema-constrained veto is ready for dispatch."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

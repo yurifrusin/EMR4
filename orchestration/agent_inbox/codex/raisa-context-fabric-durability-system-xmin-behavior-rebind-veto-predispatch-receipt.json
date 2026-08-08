@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_exact_head_veto_for_the_system_xmin_behavior_rebind_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 971c251903ea30ed0b62361062a7a76fdc54ba3f binds the typed system-xmin repair, 1,403,184-byte artifact SHA-256 0379b35f, exact parse pass SHA-256 b3eab7e0 and unchanged twenty-scenario behavior contract SHA-256 b8855abe. The 390-test focused packet, Ruff and diff checks pass. Worktree preflight passed at exact clean r102.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only review authority over exact clean candidate 971c2519 only. GPT Sol retains all acceptance, runtime, cleanup, continuity and integration authority. No native subagent or implementation worker is assigned.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r102 is clean on codex/review-context-fabric-system-xmin-971c251 at exact candidate 971c251903ea30ed0b62361062a7a76fdc54ba3f. Primary tracked worktree is clean at the same HEAD with preserved untracked files. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton remain fully rehydrated. The active descendant is the provider-free system-xmin durability repair candidate awaiting its required fresh independent veto.",
+    "protected_evidence_boundaries": "Review is local, read-only and packet-bounded. It must not inspect branding, holdouts, Diary history, patient/product/protected data or unrelated paths; start Docker or either harness; edit, commit or push; contact providers/products; deploy, release, rebuild Pages or move protected refs."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
