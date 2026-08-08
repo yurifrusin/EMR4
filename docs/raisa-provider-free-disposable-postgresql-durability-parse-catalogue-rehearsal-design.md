@@ -2,8 +2,9 @@
 
 Date: 2026-08-07
 
-Status: accepted after exact-catalogue correction and fresh exact-HEAD veto at
-`c5f0960a240b7f162b1b34e1b09fb166d12fd42e`
+Status: accepted base with composite-dependency recovery bound to corrected
+parent source `4911cba926cb69b4f7f945a77d744ff07ab2d3d4`; fresh descendant veto is
+required before another runtime attempt
 
 ## Components
 

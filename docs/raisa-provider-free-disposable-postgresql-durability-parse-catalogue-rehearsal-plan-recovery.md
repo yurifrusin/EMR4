@@ -120,6 +120,13 @@ descendant disposable contract must bind the corrected source HEAD, artifact
 hash and byte count. Static regeneration, hostile ordering tests and a fresh
 exact-HEAD veto precede any further Docker or PostgreSQL action.
 
+The corrected compiler/artifact source is
+`4911cba926cb69b4f7f945a77d744ff07ab2d3d4`. It preserves 412 statements and
+1,405,495 canonical LF bytes while changing the artifact SHA-256 to
+`5e23fce2a805b02ec903c8dd93e25836224e2fc098f19e6ab011a8f2341b299f`.
+The descendant rehearsal contract binds that exact source and artifact; it
+remains in non-passing `characterization_only` mode pending fresh veto.
+
 The expected PostgreSQL-16 deparse digests cannot safely be guessed from the
 source spelling. The repaired contract therefore begins in
 `characterization_only`: one fresh-vetoed, exact-artifact disposable run may

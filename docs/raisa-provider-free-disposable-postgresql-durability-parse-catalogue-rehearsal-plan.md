@@ -2,15 +2,15 @@
 
 Date: 2026-08-07
 
-Status: accepted for bounded implementation after exact-catalogue correction
-and fresh exact-HEAD veto at
-`c5f0960a240b7f162b1b34e1b09fb166d12fd42e`
+Status: bounded composite-dependency recovery candidate; corrected parent
+artifact source is `4911cba926cb69b4f7f945a77d744ff07ab2d3d4`,
+with fresh exact-HEAD descendant veto required before another runtime attempt
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`
 
-Accepted parent source HEAD:
-`46e16622471a192353cb82a33acf301dc2cfb7aa`
+Accepted corrected parent source HEAD:
+`4911cba926cb69b4f7f945a77d744ff07ab2d3d4`
 
 Planning baseline HEAD:
 `253230a25ab172b90bc5f44772670c7df89b3052`
@@ -19,7 +19,7 @@ Parent inert SQL artifact:
 `orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert`
 
 Parent inert SQL SHA-256:
-`sha256:92d234f8f57d5492e0c4215f9c0d3c54efe9e9ec9cbdaa9b4321a5120b983012`
+`sha256:5e23fce2a805b02ec903c8dd93e25836224e2fc098f19e6ab011a8f2341b299f`
 
 ## Objective
 
@@ -225,8 +225,11 @@ This tranche may add only:
 - bounded review packets and receipts; and
 - closeout, acceptance, error-register and Continuity/Compass artifacts.
 
-No parent artifact, Alembic file, application source, API, Diary code, runtime
-configuration or dependency declaration may change.
+No further parent artifact, Alembic file, application source, API, Diary code,
+runtime configuration or dependency declaration may change. The exact
+composite-ordering parent correction and its immutable failed evidence are
+position-closed in
+`docs/raisa-provider-free-unmounted-durability-inert-ddl-composite-dependency-ordering-recovery.md`.
 
 ## Acceptance
 
