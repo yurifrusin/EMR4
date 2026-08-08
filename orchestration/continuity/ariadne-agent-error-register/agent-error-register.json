@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 96,
+  "register_revision": 97,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4433,6 +4433,87 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-96.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0117",
+      "attempt_id": "raisa-context-fabric-durability-behavior-fixture-review-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A verifier must distinguish a plausible static diagnosis from an established first-effective runtime cause and must not claim sole causation without a discriminating SQLSTATE or equivalent bounded observation.",
+      "observed_error": "The fixture-repair veto stated that the omitted foreign-key parents solely caused fixture/bootstrap_failed. The next exact-head run still failed at the same generic bootstrap boundary, showing that the foreign-key repair may have been necessary but sole causation was not established by failure evidence 002.",
+      "detection_method": "Failure evidence 003 records the same fixture/bootstrap_failed boundary after the accepted dependency-chain repair, with zero scenarios and verified cleanup. This directly falsifies the verifier's sole-cause wording while leaving its static topology observations intact.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-behavior-transaction-fixture-repair-review-receipt.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-003.json",
+        "docs/ariadne-agent-error-correction-register-revision-97.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.static_diagnosis_presented_as_sole_runtime_cause",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The topology repair remains as a valid structural correction, but the sole-cause claim is rejected. The next review must label static root-cause analysis as inference until a safe exact SQLSTATE or equivalent bounded runtime discriminator confirms it.",
+        "prevention_control": "Independent runtime-repair reviews must reserve causal language for evidence with a discriminating observed branch; generic stage/code evidence permits only a plausible-contributor inference and requires diagnostic strengthening before another causal claim.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-003.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-97.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0118",
+      "attempt_id": "raisa-context-fabric-durability-behavior-bootstrap-telemetry-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "A fail-closed database harness may discard SQL text and messages, but it must retain the single safe five-character PostgreSQL SQLSTATE needed to discriminate repeated first-effective failure boundaries.",
+      "observed_error": "Three bootstrap attempts emitted only fixture/bootstrap_failed with an empty-detail digest. The harness captured psql stdout and stderr in memory but discarded the safe SQLSTATE together with prohibited raw diagnostic text, preventing deterministic differentiation of the remaining fixture defect.",
+      "detection_method": "Failure evidence 001-003 all preserve cleanup and bounded stage/code facts, while evidence 003 proves that static repair alone did not distinguish the recurring boundary. Source inspection confirmed that the ProcessResult was reduced to a generic BehaviorFailure before evidence construction.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-003.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-97.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.bootstrap_failure_discards_safe_sqlstate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The harness now admits only one unambiguous SQLSTATE from a tightly anchored verbose psql ERROR line, releases it in the closed failure object, and continues to discard all SQL and message text. Zero or multiple matches release no SQLSTATE. The diagnostic candidate remains runtime-closed pending tests and a fresh exact-HEAD veto.",
+        "prevention_control": "Every database failure boundary must explicitly classify which protocol metadata is safe and necessary for diagnosis; retain allowlisted codes such as SQLSTATE while hashing or discarding raw statements, rows and messages.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-97.md"
         ]
       },
       "status": "corrected"

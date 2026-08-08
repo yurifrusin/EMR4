@@ -80,7 +80,8 @@
           "properties": {
             "stage": {"type": "string", "minLength": 1},
             "code": {"type": "string", "minLength": 1},
-            "detail_digest": {"$ref": "#/$defs/digest"}
+            "detail_digest": {"$ref": "#/$defs/digest"},
+            "sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"}
           }
         },
         "elapsed_ms": {"type": "integer", "minimum": 0}

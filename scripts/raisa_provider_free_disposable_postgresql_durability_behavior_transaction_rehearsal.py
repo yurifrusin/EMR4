@@ -71,6 +71,10 @@ UUID = re.compile(
 )
 DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
 IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]*$")
+SQLSTATE = re.compile(r"^[0-9A-Z]{5}$")
+PSQL_SQLSTATE_LINE = re.compile(
+    rb"(?m)^(?:psql:[^\r\n]{1,160}:\s*)?ERROR:\s+([0-9A-Z]{5}):"
+)
 
 APPLICATION_RELATIONS = (
     "appointments",
@@ -163,6 +167,14 @@ STABLE_REASONS = {
 
 class BehaviorFailure(parent.RehearsalFailure):
     """Closed failure raised by the behavior harness."""
+
+
+def _safe_sqlstate(result: parent.ProcessResult) -> str | None:
+    matches = set(PSQL_SQLSTATE_LINE.findall(result.stdout + b"\n" + result.stderr))
+    if len(matches) != 1:
+        return None
+    value = next(iter(matches)).decode("ascii")
+    return value if SQLSTATE.fullmatch(value) else None
 
 
 def _canonical_bytes(path: Path) -> bytes:
@@ -2020,7 +2032,9 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
             runner, docker, container_id, profile, render_bootstrap_sql(contract)
         )
         if bootstrap.returncode != 0:
-            raise BehaviorFailure("fixture", "bootstrap_failed")
+            raise BehaviorFailure(
+                "fixture", "bootstrap_failed", _safe_sqlstate(bootstrap) or ""
+            )
         fixture_catalogue = parent._read_catalogue(  # noqa: SLF001
             runner, docker, container_id, profile["postgres_database"], profile
         )
@@ -2093,11 +2107,14 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
         "claim_boundary": CLAIM_BOUNDARY,
     }
     if failure is not None:
-        evidence["environment"]["failure"] = {
+        failure_evidence = {
             "stage": failure.stage,
             "code": failure.code,
             "detail_digest": _sha256(str(failure.detail).encode("utf-8")),
         }
+        if SQLSTATE.fullmatch(str(failure.detail)):
+            failure_evidence["sqlstate"] = str(failure.detail)
+        evidence["environment"]["failure"] = failure_evidence
     evidence["environment"]["elapsed_ms"] = int((time.monotonic() - started) * 1000)
     return evidence
 

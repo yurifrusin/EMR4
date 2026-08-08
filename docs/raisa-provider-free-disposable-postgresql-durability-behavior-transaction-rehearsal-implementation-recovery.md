@@ -86,3 +86,20 @@ the entire beta fixture an explicit CTE dependency chain from barrier through
 generation, checkpoint, frame, watermark and obligation. No application or
 Fabric production DDL changed. AER-0116 records the failure, and a third run is
 closed until the repaired exact HEAD receives a fresh independent veto.
+
+## Third runtime failure and diagnostic strengthening
+
+The dependency-chain candidate still failed at the generic fixture/bootstrap
+boundary, before any scenario, with verified cleanup. Failure evidence 003 is
+preserved. This means the foreign-key omissions were real structural defects
+but were not established as the sole runtime cause; AER-0117 corrects that
+overclaim.
+
+The harness had captured verbose psql output but intentionally discarded it in
+order to prevent SQL or messages from leaving the container. It also discarded
+the safe SQLSTATE needed to distinguish this recurring boundary. The next
+bounded candidate releases only one unambiguous five-character SQLSTATE from a
+tightly anchored psql error line, hashes the otherwise empty safe detail and
+continues to release no SQL, rows or error prose. AER-0118 records that harness
+gap. The diagnostic run remains closed until fresh deterministic and
+independent acceptance.

@@ -40,6 +40,11 @@ FAILURE_EVIDENCE_002 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_003 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-003.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -151,6 +156,53 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
     )
     assert FAILURE_EVIDENCE_002["scenario_reconciliation"]["observed"] == 0
     assert FAILURE_EVIDENCE_002["cleanup"]["absence_verified"] is True
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_003)
+    assert FAILURE_EVIDENCE_003["environment"]["failure"]["stage"] == "fixture"
+    assert FAILURE_EVIDENCE_003["environment"]["failure"]["code"] == (
+        "bootstrap_failed"
+    )
+    assert FAILURE_EVIDENCE_003["scenario_reconciliation"]["observed"] == 0
+    assert FAILURE_EVIDENCE_003["cleanup"]["absence_verified"] is True
+
+
+def test_bootstrap_failure_telemetry_releases_only_one_safe_sqlstate() -> None:
+    result = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        b"psql:<stdin>:19: ERROR:  23503: synthetic detail must not escape\n",
+    )
+    assert rehearsal._safe_sqlstate(result) == "23503"
+
+    ambiguous = rehearsal.parent.ProcessResult(
+        3,
+        b"ERROR:  23503: first\n",
+        b"ERROR:  42501: second\n",
+    )
+    assert rehearsal._safe_sqlstate(ambiguous) is None
+    assert (
+        rehearsal._safe_sqlstate(
+            rehearsal.parent.ProcessResult(3, b"patient-shaped prose", b"")
+        )
+        is None
+    )
+
+    evidence = _passing_evidence()
+    evidence["result"] = "rehearsal_failed"
+    evidence["environment"]["failure"] = {
+        "stage": "fixture",
+        "code": "bootstrap_failed",
+        "detail_digest": "sha256:" + "0" * 64,
+        "sqlstate": "23503",
+    }
+    evidence["lifecycle"] = ["cleanup_verified"]
+    evidence["preconditions"] = []
+    evidence["scenarios"] = []
+    evidence["scenario_reconciliation"] = {
+        "expected": 20,
+        "observed": 0,
+        "passed": 0,
+    }
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
 
 
 def test_parent_catalogue_reuse_preserves_descendant_database_binding(
