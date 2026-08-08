@@ -12,13 +12,28 @@ from jsonschema import Draft202012Validator
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PLAN = ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md"
-DESIGN = ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md"
-THREAT = ROOT / "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md"
-BASE = ROOT / "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal"
+PLAN = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md"
+)
+DESIGN = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md"
+)
+THREAT = (
+    ROOT
+    / "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md"
+)
+BASE = (
+    ROOT
+    / "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal"
+)
 CONTRACT = BASE / "behavior-transaction-rehearsal-contract.json"
 SCHEMA = BASE / "behavior-transaction-rehearsal-contract.schema.json"
-BODY_CONTRACT = ROOT / "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json"
+BODY_CONTRACT = (
+    ROOT
+    / "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -52,19 +67,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-closeout.md",
-        "c3ca2515b9f2c4b20cb7230364de7417f48eab54",
-        "15ab6f0112d89720152560d34fd81458b32fa6295d1c6864e3aa0a245940619a",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery-closeout.md",
+        "06b8f55837457518b39de0bdbea71b60a2c6f921",
+        "9d5d4e4e53cc722e0db7b3f5a5618805b27f2841a61e2d58c1561b90825b4a47",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "c3ca2515b9f2c4b20cb7230364de7417f48eab54",
-        "a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36",
+        "580c1d05ed150cdfd63549f1a35e61c72a41cb20",
+        "9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "c3ca2515b9f2c4b20cb7230364de7417f48eab54",
-        "c469293a753776c5b9c3c73adf8d470b141a2525a536ba5e9e82fa5151721931",
+        "580c1d05ed150cdfd63549f1a35e61c72a41cb20",
+        "79cbf926512a559e2a42e65236d7b87abf595284a09508251446b1e2ae669e2f",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
@@ -93,7 +108,9 @@ def _contract() -> dict[str, Any]:
 
 
 def _flat(*paths: Path) -> str:
-    return " ".join("\n".join(path.read_text(encoding="utf-8") for path in paths).split())
+    return " ".join(
+        "\n".join(path.read_text(encoding="utf-8") for path in paths).split()
+    )
 
 
 def _assert_semantics(candidate: dict[str, Any]) -> None:
@@ -182,7 +199,11 @@ def test_contract_and_schema_are_valid_and_semantically_closed() -> None:
 def test_all_parent_paths_heads_and_hashes_are_exact() -> None:
     bindings = {item["id"]: item for item in _contract()["parent_bindings"]}
     assert set(bindings) == set(EXPECTED_PARENT_BINDINGS)
-    for binding_id, (relative_path, source_head, digest) in EXPECTED_PARENT_BINDINGS.items():
+    for binding_id, (
+        relative_path,
+        source_head,
+        digest,
+    ) in EXPECTED_PARENT_BINDINGS.items():
         binding = bindings[binding_id]
         assert binding["path"] == relative_path
         assert binding["source_head"] == source_head
@@ -210,12 +231,25 @@ def test_custom_failures_bind_the_accepted_failure_registry() -> None:
     }
     for scenario in _contract()["scenarios"]:
         if scenario["expected_failure_id"] is not None:
-            assert failures[scenario["expected_failure_id"]] == scenario["expected_sqlstate"]
+            assert (
+                failures[scenario["expected_failure_id"]]
+                == scenario["expected_sqlstate"]
+            )
 
 
-def test_fixture_namespace_is_opaque_and_contains_no_patient_or_narrative_field() -> None:
+def test_fixture_namespace_is_opaque_and_contains_no_patient_or_narrative_field() -> (
+    None
+):
     fixture = _contract()["fixture_namespace"]
-    forbidden_terms = {"patient", "name", "address", "phone", "email", "reason_text", "note"}
+    forbidden_terms = {
+        "patient",
+        "name",
+        "address",
+        "phone",
+        "email",
+        "reason_text",
+        "note",
+    }
     assert not any(term in key.lower() for key in fixture for term in forbidden_terms)
     uuid_values = [
         value
@@ -239,8 +273,12 @@ def test_fixture_namespace_is_opaque_and_contains_no_patient_or_narrative_field(
     ]
     assert len(uuid_values) == len(set(uuid_values))
     assert all(len(value) == 36 and value.count("-") == 4 for value in uuid_values)
-    digest_values = [value for key, value in fixture.items() if key.startswith("digest_")]
-    assert all(value.startswith("sha256:") and len(value) == 71 for value in digest_values)
+    digest_values = [
+        value for key, value in fixture.items() if key.startswith("digest_")
+    ]
+    assert all(
+        value.startswith("sha256:") and len(value) == 71 for value in digest_values
+    )
 
 
 def test_runtime_profile_and_cleanup_are_fail_closed() -> None:
@@ -305,7 +343,10 @@ def test_selected_claim_is_serial_and_does_not_overclaim_later_behaviors() -> No
 def test_role_and_fixture_grants_do_not_change_fabric_privileges() -> None:
     privileges = _contract()["fixture_privileges"]
     assert privileges["fabric_direct_grant_changes"] == []
-    assert privileges["scenario_identity_method"] == "set_session_authorization_once_before_begin_on_fresh_connection"
+    assert (
+        privileges["scenario_identity_method"]
+        == "set_session_authorization_once_before_begin_on_fresh_connection"
+    )
     assert set(privileges["forbidden"]) >= {
         "role_passwords",
         "operational_credentials",
@@ -315,7 +356,9 @@ def test_role_and_fixture_grants_do_not_change_fabric_privileges() -> None:
         "fabric_table_dml_grant",
         "trigger_function_execute_grant",
     }
-    assert all(":practice_alpha:stream_alpha" in row for row in privileges["binding_rows"])
+    assert all(
+        ":practice_alpha:stream_alpha" in row for row in privileges["binding_rows"]
+    )
 
 
 @pytest.mark.parametrize(
@@ -325,13 +368,21 @@ def test_role_and_fixture_grants_do_not_change_fabric_privileges() -> None:
         (("runtime_profile", "pull_policy"), "always"),
         (("runtime_profile", "mounts"), 1),
         (("runtime_profile", "shell"), True),
-        (("fixture_privileges", "fabric_direct_grant_changes"), ["context_producer:INSERT"]),
-        (("fixture_privileges", "scenario_identity_method"), "set_role_inside_transaction"),
+        (
+            ("fixture_privileges", "fabric_direct_grant_changes"),
+            ["context_producer:INSERT"],
+        ),
+        (
+            ("fixture_privileges", "scenario_identity_method"),
+            "set_role_inside_transaction",
+        ),
         (("category_coverage", "TRIGGER"), 3),
         (("closed_surfaces",), ["app"]),
     ],
 )
-def test_hostile_top_level_mutations_are_rejected(path: tuple[str, ...], value: Any) -> None:
+def test_hostile_top_level_mutations_are_rejected(
+    path: tuple[str, ...], value: Any
+) -> None:
     candidate = copy.deepcopy(_contract())
     target: Any = candidate
     for key in path[:-1]:
@@ -353,20 +404,31 @@ def test_hostile_top_level_mutations_are_rejected(path: tuple[str, ...], value: 
         ("BTR-B03", "readback", ["receipt_absent"]),
     ],
 )
-def test_hostile_scenario_mutations_are_rejected(scenario_id: str, field: str, value: Any) -> None:
+def test_hostile_scenario_mutations_are_rejected(
+    scenario_id: str, field: str, value: Any
+) -> None:
     candidate = copy.deepcopy(_contract())
-    scenario = next(item for item in candidate["scenarios"] if item["id"] == scenario_id)
+    scenario = next(
+        item for item in candidate["scenarios"] if item["id"] == scenario_id
+    )
     scenario[field] = value
     with pytest.raises(Exception):
         _assert_semantics(candidate)
 
 
-def test_plan_records_standing_continuation_but_current_user_pause_after_closeout() -> None:
+def test_plan_records_standing_continuation_but_current_user_pause_after_closeout() -> (
+    None
+):
     plan = PLAN.read_text(encoding="utf-8")
     flat_plan = " ".join(plan.split())
     assert "standing uninterrupted- development authority" in flat_plan
-    assert "Pause for Yuri only if recovery exposes a genuinely non-inferable" in flat_plan
-    assert "`docs/branding/` plus every unrelated untracked path remains unstaged" in flat_plan
+    assert (
+        "Pause for Yuri only if recovery exposes a genuinely non-inferable" in flat_plan
+    )
+    assert (
+        "`docs/branding/` plus every unrelated untracked path remains unstaged"
+        in flat_plan
+    )
 
 
 def test_planning_artifact_allowlist_excludes_runtime_and_product_files() -> None:

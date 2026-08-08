@@ -6,21 +6,21 @@
   "parent_bindings": [
     {
       "id": "accepted_runtime_source",
-      "path": "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-closeout.md",
-      "source_head": "c3ca2515b9f2c4b20cb7230364de7417f48eab54",
-      "sha256": "sha256:15ab6f0112d89720152560d34fd81458b32fa6295d1c6864e3aa0a245940619a"
+      "path": "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery-closeout.md",
+      "source_head": "06b8f55837457518b39de0bdbea71b60a2c6f921",
+      "sha256": "sha256:9d5d4e4e53cc722e0db7b3f5a5618805b27f2841a61e2d58c1561b90825b4a47"
     },
     {
       "id": "inert_sql",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-      "source_head": "c3ca2515b9f2c4b20cb7230364de7417f48eab54",
-      "sha256": "sha256:a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36"
+      "source_head": "580c1d05ed150cdfd63549f1a35e61c72a41cb20",
+      "sha256": "sha256:9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65"
     },
     {
       "id": "render_manifest",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-      "source_head": "c3ca2515b9f2c4b20cb7230364de7417f48eab54",
-      "sha256": "sha256:c469293a753776c5b9c3c73adf8d470b141a2525a536ba5e9e82fa5151721931"
+      "source_head": "580c1d05ed150cdfd63549f1a35e61c72a41cb20",
+      "sha256": "sha256:79cbf926512a559e2a42e65236d7b87abf595284a09508251446b1e2ae669e2f"
     },
     {
       "id": "structural_contract",

@@ -425,6 +425,27 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "body_contract",
         "parse_prerequisite_contract",
     }
+    bindings = {row["id"]: row for row in contract["parent_bindings"]}
+    assert bindings["accepted_runtime_source"] == {
+        "id": "accepted_runtime_source",
+        "path": (
+            "docs/raisa-provider-free-disposable-postgresql-durability-"
+            "parse-catalogue-digest-nullability-recovery-closeout.md"
+        ),
+        "source_head": "06b8f55837457518b39de0bdbea71b60a2c6f921",
+        "sha256": (
+            "sha256:9d5d4e4e53cc722e0db7b3f5a5618805b27f2841a61e2d58c1561b90825b4a47"
+        ),
+    }
+    assert bindings["inert_sql"]["source_head"] == (
+        "580c1d05ed150cdfd63549f1a35e61c72a41cb20"
+    )
+    assert bindings["inert_sql"]["sha256"] == (
+        "sha256:9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65"
+    )
+    assert bindings["render_manifest"]["sha256"] == (
+        "sha256:79cbf926512a559e2a42e65236d7b87abf595284a09508251446b1e2ae669e2f"
+    )
 
 
 def test_contract_mutation_fails_before_any_runtime(
