@@ -19,11 +19,20 @@ TYPED_IR_RECOVERY = ROOT / (
     "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
     "architecture-typed-ir-recovery.md"
 )
+REGISTRATION_RLS_REBIND = ROOT / (
+    "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
+    "registration-rls-parent-rebind.md"
+)
 PARENT = ROOT / (
     "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-"
     "transaction-architecture/migration-transaction-architecture-contract.json"
 )
-PARENT_HASH = "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8"
+PLAN_PARENT_HASH = (
+    "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8"
+)
+CURRENT_PARENT_HASH = (
+    "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6"
+)
 
 
 def _plan() -> str:
@@ -50,8 +59,9 @@ def test_plan_binds_exact_parent_and_complete_body_population() -> None:
     plan = _plan()
     parent = _parent()
 
-    assert PARENT_HASH in plan
-    assert parent["contract_sha256"] == PARENT_HASH
+    assert PLAN_PARENT_HASH in plan
+    assert CURRENT_PARENT_HASH in REGISTRATION_RLS_REBIND.read_text(encoding="utf-8")
+    assert parent["contract_sha256"] == CURRENT_PARENT_HASH
     for body in parent["entry_points"] + parent["trigger_function_catalogue"]:
         assert f"`{body['name']}`" in plan
     assert len(parent["entry_points"]) == 9

@@ -15,6 +15,10 @@ RECOVERY = (
     ROOT
     / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan-recovery.md"
 )
+REGISTRATION_RLS_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-unmounted-durability-function-trigger-body-registration-rls-parent-rebind.md"
+)
 STRUCTURAL_PARENT = (
     ROOT
     / "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture"
@@ -26,8 +30,18 @@ BODY_PARENT = (
     / "function-trigger-body-architecture-contract.json"
 )
 
-STRUCTURAL_DIGEST = "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8"
-BODY_DIGEST = "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1"
+PLAN_STRUCTURAL_DIGEST = (
+    "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8"
+)
+PLAN_BODY_DIGEST = (
+    "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1"
+)
+CURRENT_STRUCTURAL_DIGEST = (
+    "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6"
+)
+CURRENT_BODY_DIGEST = (
+    "sha256:422b7cd5203893ecd2269c9b2dbf4018ed359661d5ebe962de55afffb03c340c"
+)
 
 
 def _text(path: Path) -> str:
@@ -43,11 +57,14 @@ def test_plan_binds_both_exact_accepted_parents_and_postgresql_16() -> None:
     structural = json.loads(STRUCTURAL_PARENT.read_text(encoding="utf-8"))
     body = json.loads(BODY_PARENT.read_text(encoding="utf-8"))
 
-    assert structural["contract_sha256"] == STRUCTURAL_DIGEST
-    assert body["contract_sha256"] == BODY_DIGEST
+    assert structural["contract_sha256"] == CURRENT_STRUCTURAL_DIGEST
+    assert body["contract_sha256"] == CURRENT_BODY_DIGEST
     assert structural["postgresql_target"]["major"] == 16
-    assert STRUCTURAL_DIGEST in plan
-    assert BODY_DIGEST in plan
+    assert PLAN_STRUCTURAL_DIGEST in plan
+    assert PLAN_BODY_DIGEST in plan
+    rebind = _text(REGISTRATION_RLS_REBIND)
+    assert CURRENT_STRUCTURAL_DIGEST in rebind
+    assert CURRENT_BODY_DIGEST in rebind
     assert "c55d25d6c9704ae4612ef2d123158f71302ab411" in plan
     assert "a93d07405ad35d7d6c0603065625c17ec14ab23e" in plan
 

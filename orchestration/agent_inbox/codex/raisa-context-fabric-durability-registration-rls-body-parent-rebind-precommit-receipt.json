@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_parent_only_typed_body_rebind_to_the_corrected_registration_rls_structural_contract_on_the_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The corrected structural contract is sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6. Rebuilding the typed body changes only its parent binding and canonical seal to sha256:422b7cd5203893ecd2269c9b2dbf4018ed359661d5ebe962de55afffb03c340c; every body program, effect, signature, failure, trigger and order remains unchanged. Focused plan tests and the in-memory body builder pass.",
+    "current_authority_allocation": "GPT Sol owns this parent-only deterministic rebind and task-branch commit. No external implementation worker, native subagent, provider or product surface is used; Gemini remains reserved for one fresh review after the complete artifact and descendant chain is rebuilt.",
+    "git_refs_and_worktree": "Task HEAD is 9fb107ab598fba418b42be6d233c4960a6f29840. Only explicit body-builder, validator, contract/schema, plan-regression, rebind-document and receipt paths will be staged. The mutable behavior evidence, docs/branding/ and unrelated untracked files remain excluded. Local and origin master plus handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active provider-free behavior gate is recovering from attempt 018. Structural RLS correction commit 9fb107ab598fba418b42be6d233c4960a6f29840 is accepted as the exact next parent; no database rerun is eligible yet.",
+    "protected_evidence_boundaries": "No executable artifact, database, application migration, operational source or credential, watcher/listener/feed, application/API/Diary change, patient/clinical/product/protected data, provider/model call, command/write, deployment, production, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
