@@ -39,6 +39,12 @@ EXPECTED_PREREQUISITE_PATH = (
     "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
+EXPECTED_CONTRACT_SHA256 = (
+    "sha256:560a1e5a31f9200442680245a67783551af723b3e668ac857be4fff5a13603cb"
+)
+EXPECTED_PREREQUISITE_SHA256 = (
+    "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
+)
 
 FABRIC_SCHEMA = "emr4_context_fabric"
 IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]*$")
@@ -93,7 +99,7 @@ class ProcessResult:
     stderr: bytes
 
 
-Runner = Callable[[list[str], bytes | None, int, int], ProcessResult]
+Runner = Callable[[list[str], bytes | None, float, int], ProcessResult]
 
 
 def _json(path: Path) -> dict[str, Any]:
@@ -163,6 +169,10 @@ def _validate_contracts() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any
         raise RehearsalFailure("contract", "prerequisite_path_drift")
     contract = _json(CONTRACT_PATH)
     prerequisite = _json(PREREQUISITE_PATH)
+    if _canonical_sha(contract) != EXPECTED_CONTRACT_SHA256:
+        raise RehearsalFailure("contract", "rehearsal_contract_sha256")
+    if _canonical_sha(prerequisite) != EXPECTED_PREREQUISITE_SHA256:
+        raise RehearsalFailure("contract", "prerequisite_contract_sha256")
     if contract.get("schema_version") != (
         "emr4.disposable-postgresql-durability-rehearsal-contract.v1"
     ):
@@ -198,6 +208,26 @@ def _validate_contracts() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any
         raise RehearsalFailure("parent", "manifest_kind_counts")
     if manifest.get("catalogue_assertions") != contract["catalogue_assertions"]:
         raise RehearsalFailure("parent", "catalogue_assertions")
+    expected_digest_ids = set(contract["catalogue_query_ids"]) - {
+        "server",
+        "extensions",
+    }
+    expectation = contract.get("catalogue_expectation", {})
+    mode = expectation.get("mode")
+    expected_digests = expectation.get("expected_query_digests")
+    if mode not in {"characterization_only", "exact_digest_bound"} or not isinstance(
+        expected_digests, dict
+    ):
+        raise RehearsalFailure("contract", "catalogue_expectation")
+    if mode == "characterization_only" and expected_digests:
+        raise RehearsalFailure("contract", "characterization_digest_population")
+    if mode == "exact_digest_bound":
+        if set(expected_digests) != expected_digest_ids or any(
+            not isinstance(value, str)
+            or not re.fullmatch(r"sha256:[0-9a-f]{64}", value)
+            for value in expected_digests.values()
+        ):
+            raise RehearsalFailure("contract", "expected_catalogue_digests")
     decoded = artifact.decode("utf-8")
     top_level = _outside_dollar_quoted(decoded)
     if FORBIDDEN_ARTIFACT_TX.search(top_level):
@@ -283,7 +313,7 @@ def render_prerequisite_sql(contract: dict[str, Any]) -> bytes:
 
 
 def _subprocess_runner(
-    argv: list[str], stdin: bytes | None, timeout: int, cap: int
+    argv: list[str], stdin: bytes | None, timeout: float, cap: int
 ) -> ProcessResult:
     if not argv or Path(argv[0]).name.lower() != "docker.exe":
         raise RehearsalFailure("process", "executable_not_docker_exe")
@@ -306,6 +336,20 @@ def _subprocess_runner(
     if len(stdout) > cap or len(stderr) > cap:
         raise RehearsalFailure("process", "output_cap_exceeded")
     return ProcessResult(process.returncode, stdout, stderr)
+
+
+def _with_total_deadline(runner: Runner, deadline: float) -> Runner:
+    """Cap every non-cleanup call by one absolute monotonic deadline."""
+
+    def bounded(
+        argv: list[str], stdin: bytes | None, timeout: float, cap: int
+    ) -> ProcessResult:
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise RehearsalFailure("process", "total_timeout")
+        return runner(argv, stdin, min(float(timeout), remaining), cap)
+
+    return bounded
 
 
 def docker_argv(
@@ -549,7 +593,7 @@ SELECT pg_catalog.json_build_object(
 )::text
 """,
     "roles": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (
   SELECT rolname AS name, rolcanlogin AS login, rolinherit AS inherit,
          rolcreatedb AS createdb, rolcreaterole AS createrole,
@@ -560,7 +604,7 @@ FROM (
 ) AS q
 """,
     "schema": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (
   SELECT n.nspname AS name, pg_catalog.pg_get_userbyid(n.nspowner) AS owner,
          COALESCE(n.nspacl::text, '') AS acl
@@ -569,10 +613,42 @@ FROM (
 ) AS q
 """,
     "types": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (
   SELECT n.nspname || '.' || t.typname AS name, t.typtype AS type_kind,
-         pg_catalog.pg_get_userbyid(t.typowner) AS owner
+         pg_catalog.pg_get_userbyid(t.typowner) AS owner,
+         CASE WHEN t.typtype = 'd'
+              THEN pg_catalog.format_type(t.typbasetype, t.typtypmod)
+              ELSE '' END AS domain_base_type,
+         CASE WHEN t.typtype = 'd' THEN t.typnotnull ELSE false END AS domain_not_null,
+         CASE WHEN t.typtype = 'd' THEN COALESCE(t.typdefault, '') ELSE '' END AS domain_default_sql,
+         CASE WHEN t.typtype = 'd' THEN COALESCE((
+           SELECT pg_catalog.json_agg(
+             pg_catalog.json_build_object(
+               'name', con.conname,
+               'definition', pg_catalog.pg_get_constraintdef(con.oid, true)
+             ) ORDER BY con.conname
+           )
+           FROM pg_catalog.pg_constraint AS con
+           WHERE con.contypid = t.oid
+         ), '[]'::json) ELSE '[]'::json END AS domain_constraints,
+         CASE WHEN t.typtype = 'e' THEN COALESCE((
+           SELECT pg_catalog.json_agg(e.enumlabel ORDER BY e.enumsortorder)
+           FROM pg_catalog.pg_enum AS e
+           WHERE e.enumtypid = t.oid
+         ), '[]'::json) ELSE '[]'::json END AS enum_labels,
+         CASE WHEN t.typtype = 'c' THEN COALESCE((
+           SELECT pg_catalog.json_agg(
+             pg_catalog.json_build_object(
+               'position', a.attnum,
+               'name', a.attname,
+               'data_type', pg_catalog.format_type(a.atttypid, a.atttypmod)
+             ) ORDER BY a.attnum
+           )
+           FROM pg_catalog.pg_attribute AS a
+           WHERE a.attrelid = t.typrelid
+             AND a.attnum > 0 AND NOT a.attisdropped
+         ), '[]'::json) ELSE '[]'::json END AS composite_attributes
   FROM pg_catalog.pg_type AS t
   JOIN pg_catalog.pg_namespace AS n ON n.oid = t.typnamespace
   LEFT JOIN pg_catalog.pg_class AS c ON c.oid = t.typrelid
@@ -581,7 +657,7 @@ FROM (
 ) AS q
 """,
     "relations": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (
   SELECT n.nspname || '.' || c.relname AS name, c.relkind AS relation_kind,
          pg_catalog.pg_get_userbyid(c.relowner) AS owner,
@@ -593,7 +669,7 @@ FROM (
 ) AS q
 """,
     "columns": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.relation, q.position), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.relation, q.position), '[]'::json)::text
 FROM (
   SELECT n.nspname || '.' || c.relname AS relation, a.attnum AS position,
          a.attname AS name, pg_catalog.format_type(a.atttypid, a.atttypmod) AS data_type,
@@ -611,7 +687,7 @@ FROM (
 ) AS q
 """,
     "constraints": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.identifier), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.identifier), '[]'::json)::text
 FROM (
   SELECT n.nspname || '.' || c.relname || '.' || con.conname AS identifier,
          con.contype AS constraint_kind, con.condeferrable AS deferrable,
@@ -624,7 +700,7 @@ FROM (
 ) AS q
 """,
     "indexes": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (
   SELECT ic.relname AS name, n.nspname || '.' || tc.relname AS relation,
          i.indisunique AS unique_index, pg_catalog.pg_get_indexdef(i.indexrelid) AS definition
@@ -637,10 +713,16 @@ FROM (
 ) AS q
 """,
     "policies": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (
   SELECT p.polname AS name, c.relname AS relation, p.polcmd AS command,
          p.polpermissive AS permissive,
+         ARRAY(
+           SELECT CASE WHEN role_oid = 0 THEN 'PUBLIC'
+                       ELSE pg_catalog.pg_get_userbyid(role_oid) END
+           FROM pg_catalog.unnest(p.polroles) AS role_ids(role_oid)
+           ORDER BY 1
+         ) AS roles,
          COALESCE(pg_catalog.pg_get_expr(p.polqual, p.polrelid), '') AS qualification,
          COALESCE(pg_catalog.pg_get_expr(p.polwithcheck, p.polrelid), '') AS with_check
   FROM pg_catalog.pg_policy AS p
@@ -650,12 +732,14 @@ FROM (
 ) AS q
 """,
     "functions": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name, q.identity_arguments), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name, q.identity_arguments), '[]'::json)::text
 FROM (
   SELECT n.nspname || '.' || p.proname AS name,
          pg_catalog.pg_get_function_identity_arguments(p.oid) AS identity_arguments,
+         pg_catalog.pg_get_function_result(p.oid) AS result_type,
          pg_catalog.pg_get_userbyid(p.proowner) AS owner, l.lanname AS language,
-         p.prosecdef AS security_definer, p.provolatile AS volatility,
+         p.prokind AS function_kind, p.prosecdef AS security_definer,
+         p.provolatile AS volatility,
          p.proisstrict AS strict, p.proparallel AS parallel_safety,
          COALESCE(p.proconfig::text, '') AS configuration,
          COALESCE(p.proacl::text, '') AS acl
@@ -666,11 +750,19 @@ FROM (
 ) AS q
 """,
     "triggers": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (
   SELECT t.tgname AS name, n.nspname || '.' || c.relname AS relation,
          pn.nspname || '.' || p.proname AS function, t.tgenabled AS enabled,
          t.tgdeferrable AS deferrable, t.tginitdeferred AS initially_deferred,
+         CASE WHEN (t.tgtype & 2) <> 0 THEN 'BEFORE'
+              WHEN (t.tgtype & 64) <> 0 THEN 'INSTEAD OF'
+              ELSE 'AFTER' END AS timing,
+         CASE WHEN (t.tgtype & 1) <> 0 THEN 'ROW' ELSE 'STATEMENT' END AS level,
+         (t.tgtype & 4) <> 0 AS fires_insert,
+         (t.tgtype & 8) <> 0 AS fires_delete,
+         (t.tgtype & 16) <> 0 AS fires_update,
+         (t.tgtype & 32) <> 0 AS fires_truncate,
          pg_catalog.pg_get_triggerdef(t.oid, true) AS definition
   FROM pg_catalog.pg_trigger AS t
   JOIN pg_catalog.pg_class AS c ON c.oid = t.tgrelid
@@ -686,7 +778,7 @@ FROM (
 ) AS q
 """,
     "rls": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (
   SELECT n.nspname || '.' || c.relname AS name,
          c.relrowsecurity AS enabled, c.relforcerowsecurity AS forced
@@ -696,44 +788,47 @@ FROM (
 ) AS q
 """,
     "schema_acl": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.grantee, q.privilege), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.grantee, q.privilege), '[]'::json)::text
 FROM (
   SELECT CASE WHEN x.grantee = 0 THEN 'PUBLIC' ELSE pg_catalog.pg_get_userbyid(x.grantee) END AS grantee,
          x.privilege_type AS privilege, x.is_grantable AS grantable
   FROM pg_catalog.pg_namespace AS n
-  CROSS JOIN LATERAL pg_catalog.aclexplode(COALESCE(n.nspacl, acldefault('n', n.nspowner))) AS x
-  WHERE n.nspname = 'emr4_context_fabric'
+  CROSS JOIN LATERAL pg_catalog.aclexplode(COALESCE(n.nspacl, pg_catalog.acldefault('n', n.nspowner))) AS x
+  WHERE n.nspname = 'emr4_context_fabric' AND x.grantee <> n.nspowner
 ) AS q
 """,
     "relation_acl": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.relation, q.grantee, q.privilege), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.relation, q.grantee, q.privilege), '[]'::json)::text
 FROM (
   SELECT n.nspname || '.' || c.relname AS relation,
          CASE WHEN x.grantee = 0 THEN 'PUBLIC' ELSE pg_catalog.pg_get_userbyid(x.grantee) END AS grantee,
          x.privilege_type AS privilege, x.is_grantable AS grantable
   FROM pg_catalog.pg_class AS c
   JOIN pg_catalog.pg_namespace AS n ON n.oid = c.relnamespace
-  CROSS JOIN LATERAL pg_catalog.aclexplode(COALESCE(c.relacl, acldefault('r', c.relowner))) AS x
-  WHERE (n.nspname = 'emr4_context_fabric' AND c.relkind = 'r')
-     OR (n.nspname = 'public' AND c.relname IN (
-       'appointments', 'appointment_command_idempotency',
-       'appointment_audit_log', 'diary_committed_events'))
+  CROSS JOIN LATERAL pg_catalog.aclexplode(COALESCE(c.relacl, pg_catalog.acldefault('r', c.relowner))) AS x
+  WHERE (
+      (n.nspname = 'emr4_context_fabric' AND c.relkind = 'r')
+      OR (n.nspname = 'public' AND c.relname IN (
+        'appointments', 'appointment_command_idempotency',
+        'appointment_audit_log', 'diary_committed_events'))
+    )
+    AND x.grantee <> c.relowner
 ) AS q
 """,
     "function_acl": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q."function", q.grantee, q.privilege), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q."function", q.grantee, q.privilege), '[]'::json)::text
 FROM (
   SELECT n.nspname || '.' || p.proname AS "function",
          CASE WHEN x.grantee = 0 THEN 'PUBLIC' ELSE pg_catalog.pg_get_userbyid(x.grantee) END AS grantee,
          x.privilege_type AS privilege, x.is_grantable AS grantable
   FROM pg_catalog.pg_proc AS p
   JOIN pg_catalog.pg_namespace AS n ON n.oid = p.pronamespace
-  CROSS JOIN LATERAL pg_catalog.aclexplode(COALESCE(p.proacl, acldefault('f', p.proowner))) AS x
-  WHERE n.nspname = 'emr4_context_fabric'
+  CROSS JOIN LATERAL pg_catalog.aclexplode(COALESCE(p.proacl, pg_catalog.acldefault('f', p.proowner))) AS x
+  WHERE n.nspname = 'emr4_context_fabric' AND x.grantee <> p.proowner
 ) AS q
 """,
     "application_relations": """
-SELECT pg_catalog.json_agg(row_to_json(q) ORDER BY q.name)::text
+SELECT pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name)::text
 FROM (
   SELECT n.nspname || '.' || c.relname AS name,
          pg_catalog.pg_get_userbyid(c.relowner) AS owner,
@@ -751,7 +846,7 @@ FROM (
 ) AS q
 """,
     "extensions": """
-SELECT COALESCE(pg_catalog.json_agg(row_to_json(q) ORDER BY q.name), '[]'::json)::text
+SELECT COALESCE(pg_catalog.json_agg(pg_catalog.row_to_json(q) ORDER BY q.name), '[]'::json)::text
 FROM (SELECT extname AS name, extversion AS version FROM pg_catalog.pg_extension) AS q
 """,
 }
@@ -798,7 +893,10 @@ def _read_catalogue(
 
 
 def _assert_catalogue(
-    facts: dict[str, Any], manifest: dict[str, Any], prerequisite: dict[str, Any]
+    facts: dict[str, Any],
+    manifest: dict[str, Any],
+    prerequisite: dict[str, Any],
+    contract: dict[str, Any],
 ) -> dict[str, Any]:
     expected = _expected_sets(manifest)
     server = facts["server"]
@@ -949,7 +1047,20 @@ def _assert_catalogue(
     }
     if fabric_relations_with_columns != expected["TABLE"]:
         raise RehearsalFailure("catalogue", "fabric_column_relation_population")
+    query_digests = {key: _facts_digest(value) for key, value in facts.items()}
+    expectation = contract["catalogue_expectation"]
+    digest_ids = set(contract["catalogue_query_ids"]) - {"server", "extensions"}
+    if expectation["mode"] == "exact_digest_bound":
+        actual = {key: query_digests[key] for key in sorted(digest_ids)}
+        if actual != expectation["expected_query_digests"]:
+            mismatch = next(
+                key
+                for key in sorted(digest_ids)
+                if actual.get(key) != expectation["expected_query_digests"].get(key)
+            )
+            raise RehearsalFailure("catalogue", "exact_query_digest", mismatch)
     return {
+        "expectation_mode": expectation["mode"],
         "query_ids": sorted(facts),
         "kind_counts": {
             "roles": len(roles),
@@ -962,7 +1073,7 @@ def _assert_catalogue(
             "functions": len(functions),
             "triggers": len(facts["triggers"]),
         },
-        "query_digests": {key: _facts_digest(value) for key, value in facts.items()},
+        "query_digests": query_digests,
     }
 
 
@@ -1027,24 +1138,52 @@ def _container_owned(
     image_id: str,
     profile: dict[str, Any],
 ) -> bool:
-    labels = inspect.get("Config", {}).get("Labels") or {}
-    mounts = inspect.get("Mounts") or []
+    config = inspect.get("Config")
+    host = inspect.get("HostConfig")
+    mounts = inspect.get("Mounts")
+    if not isinstance(config, dict) or not isinstance(host, dict):
+        return False
+    if not isinstance(mounts, list) or any(
+        not isinstance(row, dict) for row in mounts
+    ):
+        return False
+    labels = config.get("Labels") or {}
+    environment = config.get("Env") or []
+    if not isinstance(labels, dict) or not isinstance(environment, list):
+        return False
     forbidden_mount = any(row.get("Type") in {"bind", "volume"} for row in mounts)
-    host = inspect.get("HostConfig", {})
     expected_labels = profile["ownership_labels"]
+    tmpfs_path, tmpfs_options = profile["tmpfs"].split(":", 1)
+    tmpfs_mounts = [
+        row
+        for row in mounts
+        if row.get("Type") == "tmpfs" and row.get("Destination") == tmpfs_path
+    ]
+    expected_environment = {
+        f'POSTGRES_USER={profile["postgres_user"]}',
+        f'POSTGRES_PASSWORD={profile["postgres_password"]}',
+        f'POSTGRES_DB={profile["postgres_database"]}',
+        f'PGDATA={profile["pgdata"]}',
+    }
     return bool(
         inspect.get("Id") == container_id
         and inspect.get("Name") == "/" + name
         and inspect.get("Image") == image_id
-        and inspect.get("Config", {}).get("Image") == profile["image_reference"]
+        and config.get("Image") == profile["image_reference"]
         and labels.get("com.emr4.harness") == expected_labels["com.emr4.harness"]
         and labels.get("com.emr4.cleanup-nonce") == nonce
         and host.get("NetworkMode") == "none"
         and not forbidden_mount
         and not host.get("Binds")
         and not host.get("Privileged")
+        and not host.get("PortBindings")
+        and host.get("Memory") == 768 * 1024 * 1024
+        and host.get("NanoCpus") == 1_000_000_000
+        and host.get("PidsLimit") == profile["pids_limit"]
         and host.get("RestartPolicy", {}).get("Name") in {"", "no"}
-        and profile["tmpfs"].split(":", 1)[0] in (host.get("Tmpfs") or {})
+        and (host.get("Tmpfs") or {}) == {tmpfs_path: tmpfs_options}
+        and len(mounts) == len(tmpfs_mounts) == 1
+        and expected_environment.issubset(environment)
     )
 
 
@@ -1143,9 +1282,15 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
     contract: dict[str, Any] = {}
     parent_evidence: dict[str, Any] = {}
     result = "rehearsal_failed"
+    cleanup_runner = runner
     try:
         contract, prerequisite, manifest, artifact = _validate_contracts()
         profile = contract["docker_profile"]
+        cleanup_reserve = 3 * profile["cleanup_timeout_seconds"]
+        execution_seconds = profile["total_timeout_seconds"] - cleanup_reserve
+        if execution_seconds <= profile["artifact_timeout_seconds"]:
+            raise RehearsalFailure("contract", "total_timeout_budget")
+        runner = _with_total_deadline(runner, started + execution_seconds)
         prerequisite_sql = render_prerequisite_sql(prerequisite)
         lifecycle.append("parent_verified")
         parent_evidence = {
@@ -1361,12 +1506,20 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                     raise RehearsalFailure("catalogue", "query_population")
                 if facts["extensions"] != baseline_extensions:
                     raise RehearsalFailure("catalogue", "extension_population_changed")
-                catalogue = {
-                    "status": "matched",
-                    **_assert_catalogue(facts, manifest, prerequisite),
-                }
-                lifecycle.append("catalogue_matched")
-        result = PASS_RESULT
+                assertion = _assert_catalogue(
+                    facts, manifest, prerequisite, contract
+                )
+                if contract["catalogue_expectation"]["mode"] == "characterization_only":
+                    catalogue = {"status": "characterized", **assertion}
+                    lifecycle.append("catalogue_characterized")
+                else:
+                    catalogue = {"status": "matched", **assertion}
+                    lifecycle.append("catalogue_matched")
+        result = (
+            "catalogue_characterization_required"
+            if contract["catalogue_expectation"]["mode"] == "characterization_only"
+            else PASS_RESULT
+        )
     except RehearsalFailure as error:
         failure = error
         if error.stage == "environment":
@@ -1375,7 +1528,7 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
         if container_id:
             try:
                 cleanup = _cleanup(
-                    runner,
+                    cleanup_runner,
                     docker,
                     container_id,
                     name,

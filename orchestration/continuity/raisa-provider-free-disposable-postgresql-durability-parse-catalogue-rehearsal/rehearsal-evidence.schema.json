@@ -6,7 +6,7 @@
   "required": ["schema_version", "result", "evidence_mode", "attempt_id", "parent", "environment", "lifecycle", "rollback", "catalogue", "cleanup", "claim_boundary"],
   "properties": {
     "schema_version": {"const": "emr4.disposable-postgresql-durability-rehearsal-evidence.v1"},
-    "result": {"enum": ["raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass", "environment_unavailable", "rehearsal_failed", "cleanup_ownership_unverified"]},
+    "result": {"enum": ["raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass", "catalogue_characterization_required", "environment_unavailable", "rehearsal_failed", "cleanup_ownership_unverified"]},
     "evidence_mode": {"const": "provider_free_disposable_local_postgresql_authored_synthetic"},
     "attempt_id": {"type": "string"},
     "parent": {"type": "object"},

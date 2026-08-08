@@ -14,6 +14,7 @@
     "manifest_kind_counts",
     "catalogue_assertions",
     "catalogue_query_ids",
+    "catalogue_expectation",
     "evidence",
     "claim_boundary",
     "closed_surfaces"
@@ -38,6 +39,7 @@
     "manifest_kind_counts": {"$ref": "#/$defs/nonnegative_integer_map"},
     "catalogue_assertions": {"$ref": "#/$defs/scalar_map"},
     "catalogue_query_ids": {"type": "array", "minItems": 17, "maxItems": 17, "uniqueItems": true, "items": {"type": "string"}},
+    "catalogue_expectation": {"$ref": "#/$defs/catalogue_expectation"},
     "evidence": {"$ref": "#/$defs/evidence"},
     "claim_boundary": {"const": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only"},
     "closed_surfaces": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"type": "string"}}
@@ -106,6 +108,19 @@
     },
     "nonnegative_integer_map": {"type": "object", "minProperties": 19, "additionalProperties": {"type": "integer", "minimum": 0}},
     "scalar_map": {"type": "object", "minProperties": 14, "additionalProperties": {"type": ["integer", "string"]}},
+    "catalogue_expectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "expected_query_digests"],
+      "properties": {
+        "mode": {"enum": ["characterization_only", "exact_digest_bound"]},
+        "expected_query_digests": {
+          "type": "object",
+          "propertyNames": {"type": "string"},
+          "additionalProperties": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+        }
+      }
+    },
     "evidence": {
       "type": "object",
       "additionalProperties": false,

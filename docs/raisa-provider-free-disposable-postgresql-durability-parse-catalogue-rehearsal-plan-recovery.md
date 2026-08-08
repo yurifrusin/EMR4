@@ -2,9 +2,8 @@
 
 Date: 2026-08-07
 
-Status: accepted after mechanics recovery and exact-catalogue correction; the
-fresh exact-HEAD catalogue-delta veto passed at
-`c5f0960a240b7f162b1b34e1b09fb166d12fd42e`
+Status: mechanics and population corrections accepted; exact-definition
+implementation recovery is in progress before any Docker or PostgreSQL action
 
 ## Rejected review
 
@@ -60,9 +59,39 @@ mechanically reproduced all 388 ordered nodes, every exact type identifier and
 the 4/19/9/32 population, passed 9/9 focused checks and left its worktree clean.
 Sol independently reproduced the same counts and one-to-one type-owner set.
 
+## Exact-definition implementation correction
+
+The first implementation veto returned `pass` at
+`1fd3445aea5839b7aa889fc962faa8ad2be0c95e`, but Sol did not admit it. The
+harness compared exact object populations while accepting arbitrary same-name
+column/default, constraint/index, policy-expression, function-attribute,
+trigger-definition and non-owner ACL details. The review described these
+surfaces as exact without mechanically mutating them. Sol found the gap before
+Docker resolution, daemon contact or SQL execution.
+
+Recovery expands the fixed PostgreSQL catalogue projections so their digests
+cover domain definitions, enum labels, composite attributes, every fabric and
+prerequisite column, constraint/index definitions, policy roles and
+expressions, function identities/results/attributes/search paths, trigger
+timing/level/event masks/deferrability and every explicit non-owner
+schema/relation/function privilege. Resource readback now includes exact
+memory, CPU, PID, tmpfs, port and synthetic environment facts, and an absolute
+execution deadline reserves bounded time for exact-ID cleanup.
+
+The expected PostgreSQL-16 deparse digests cannot safely be guessed from the
+source spelling. The repaired contract therefore begins in
+`characterization_only`: one fresh-vetoed, exact-artifact disposable run may
+record only bounded canonical query digests, can never emit the pass result,
+and must still prove rollback and exact cleanup. Those digests may then be
+position-closed into `exact_digest_bound`, with the whole contract hash updated
+and a fresh exact-HEAD veto before the terminal rerun. This is a bootstrap of
+expected metadata, not acceptance by observation; the terminal run remains a
+separate newly owned container and must match every frozen digest.
+
 ## Claim boundary
 
-This recovery grants no database execution until the replacement veto passes,
+This recovery grants no database execution until the repaired characterization
+candidate receives a fresh replacement veto,
 and no application behavior, RLS/trigger execution, Alembic integration,
 operational persistence/credential/source, patient/product data, API/Diary,
 provider product path, deployment, production, release, Pages or protected-ref

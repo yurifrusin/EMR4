@@ -220,6 +220,11 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert len(artifact) == 1_405_495
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 388
+    assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
+    assert (  # noqa: SLF001
+        rehearsal._canonical_sha(PREREQUISITE)
+        == rehearsal.EXPECTED_PREREQUISITE_SHA256
+    )
 
 
 def test_exact_catalogue_kind_population_is_frozen() -> None:
@@ -380,6 +385,27 @@ def test_subprocess_boundary_is_argv_only_and_shell_false() -> None:
     assert "subprocess.run(" not in source
 
 
+def test_absolute_execution_deadline_caps_calls_and_fails_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    observed: list[float] = []
+
+    def runner(
+        argv: list[str], stdin: bytes | None, timeout: float, cap: int
+    ) -> rehearsal.ProcessResult:
+        del argv, stdin, cap
+        observed.append(timeout)
+        return rehearsal.ProcessResult(0, b"", b"")
+
+    monkeypatch.setattr(rehearsal.time, "monotonic", lambda: 10.0)
+    bounded = rehearsal._with_total_deadline(runner, 12.5)  # noqa: SLF001
+    bounded(["docker.exe"], None, 30, 1024)
+    assert observed == [2.5]
+    monkeypatch.setattr(rehearsal.time, "monotonic", lambda: 12.5)
+    with pytest.raises(rehearsal.RehearsalFailure, match="total_timeout"):
+        bounded(["docker.exe"], None, 30, 1024)
+
+
 def test_module_has_no_database_cloud_http_or_environment_input_import() -> None:
     tree = ast.parse(Path(rehearsal.__file__).read_text(encoding="utf-8"))
     imports = {
@@ -419,7 +445,9 @@ def test_query_transport_sets_read_only_and_uses_file_stdin() -> None:
 
 
 def test_catalogue_projection_matches_every_frozen_population() -> None:
-    result = rehearsal._assert_catalogue(_valid_facts(), MANIFEST, PREREQUISITE)  # noqa: SLF001
+    result = rehearsal._assert_catalogue(  # noqa: SLF001
+        _valid_facts(), MANIFEST, PREREQUISITE, CONTRACT
+    )
     assert result["kind_counts"] == {
         "roles": 8,
         "types": 32,
@@ -432,6 +460,141 @@ def test_catalogue_projection_matches_every_frozen_population() -> None:
         "triggers": 14,
     }
     assert set(result["query_ids"]) == set(CONTRACT["catalogue_query_ids"])
+
+
+def test_catalogue_queries_project_every_definition_and_authority_surface() -> None:
+    types_sql = rehearsal.CATALOGUE_SQL["types"]
+    policies_sql = rehearsal.CATALOGUE_SQL["policies"]
+    functions_sql = rehearsal.CATALOGUE_SQL["functions"]
+    triggers_sql = rehearsal.CATALOGUE_SQL["triggers"]
+    assert all(
+        field in types_sql
+        for field in (
+            "domain_base_type",
+            "domain_not_null",
+            "domain_default_sql",
+            "domain_constraints",
+            "enum_labels",
+            "composite_attributes",
+        )
+    )
+    assert "polroles" in policies_sql and "AS roles" in policies_sql
+    assert "pg_get_function_identity_arguments" in functions_sql
+    assert "pg_get_function_result" in functions_sql
+    assert "proconfig" in functions_sql and "prosecdef" in functions_sql
+    assert all(
+        field in triggers_sql
+        for field in (
+            "timing",
+            "level",
+            "fires_insert",
+            "fires_delete",
+            "fires_update",
+            "fires_truncate",
+            "pg_get_triggerdef",
+        )
+    )
+
+
+def test_characterization_cannot_pass_and_exact_digests_reject_definition_drift() -> None:
+    facts = _valid_facts()
+    characterized = rehearsal._assert_catalogue(  # noqa: SLF001
+        facts, MANIFEST, PREREQUISITE, CONTRACT
+    )
+    assert characterized["expectation_mode"] == "characterization_only"
+    bound = copy.deepcopy(CONTRACT)
+    bound["catalogue_expectation"] = {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": {
+            key: characterized["query_digests"][key]
+            for key in CONTRACT["catalogue_query_ids"]
+            if key not in {"server", "extensions"}
+        },
+    }
+    exact = rehearsal._assert_catalogue(  # noqa: SLF001
+        facts, MANIFEST, PREREQUISITE, bound
+    )
+    assert exact["expectation_mode"] == "exact_digest_bound"
+    hostile = copy.deepcopy(facts)
+    hostile["constraints"][0]["definition"] = "CHECK (false)"
+    with pytest.raises(rehearsal.RehearsalFailure, match="exact_query_digest"):
+        rehearsal._assert_catalogue(  # noqa: SLF001
+            hostile, MANIFEST, PREREQUISITE, bound
+        )
+
+
+@pytest.mark.parametrize(
+    "surface",
+    [
+        "schema_acl_text",
+        "domain_definition",
+        "relation_acl_text",
+        "fabric_column",
+        "index_definition",
+        "policy_expression",
+        "function_attribute",
+        "trigger_definition",
+        "relation_grant",
+        "function_grant",
+    ],
+)
+def test_exact_digest_binding_rejects_same_population_drift(surface: str) -> None:
+    facts = _valid_facts()
+    digests = {
+        key: rehearsal._facts_digest(value)  # noqa: SLF001
+        for key, value in facts.items()
+        if key not in {"server", "extensions"}
+    }
+    bound = copy.deepcopy(CONTRACT)
+    bound["catalogue_expectation"] = {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": digests,
+    }
+    if surface == "schema_acl_text":
+        facts["schema"][0]["acl"] = "hostile"
+    elif surface == "domain_definition":
+        facts["types"][0]["domain_constraints"] = [
+            {"name": "same_name", "definition": "CHECK (false)"}
+        ]
+    elif surface == "relation_acl_text":
+        facts["relations"][0]["acl"] = "hostile"
+    elif surface == "fabric_column":
+        fabric = next(
+            row
+            for row in facts["columns"]
+            if row["relation"].startswith("emr4_context_fabric.")
+        )
+        fabric["default_sql"] = "hostile"
+    elif surface == "index_definition":
+        facts["indexes"][0]["definition"] = "CREATE UNIQUE INDEX same_name ON hostile"
+    elif surface == "policy_expression":
+        facts["policies"][0]["qualification"] = "false"
+    elif surface == "function_attribute":
+        facts["functions"][0]["security_definer"] = False
+    elif surface == "trigger_definition":
+        facts["triggers"][0]["definition"] = "CREATE TRIGGER same_name hostile"
+    elif surface == "relation_grant":
+        facts["relation_acl"].append(
+            {
+                "relation": "emr4_context_fabric.context_frame_generation",
+                "grantee": "context_observer",
+                "privilege": "SELECT",
+                "grantable": False,
+            }
+        )
+    elif surface == "function_grant":
+        facts["function_acl"].append(
+            {
+                "function": "emr4_context_fabric.apply_durability_transition_v1",
+                "grantee": "context_observer",
+                "privilege": "EXECUTE",
+                "grantable": False,
+            }
+        )
+    with pytest.raises(rehearsal.RehearsalFailure, match="exact_query_digest"):
+        rehearsal._assert_catalogue(  # noqa: SLF001
+            facts, MANIFEST, PREREQUISITE, bound
+        )
 
 
 @pytest.mark.parametrize(
@@ -452,18 +615,24 @@ def test_catalogue_population_mutations_fail_closed(field: str, code: str) -> No
     facts = _valid_facts()
     facts[field] = facts[field][1:]
     with pytest.raises(rehearsal.RehearsalFailure, match=code):
-        rehearsal._assert_catalogue(facts, MANIFEST, PREREQUISITE)  # noqa: SLF001
+        rehearsal._assert_catalogue(  # noqa: SLF001
+            facts, MANIFEST, PREREQUISITE, CONTRACT
+        )
 
 
 def test_public_acl_and_runtime_schema_create_fail_closed() -> None:
     facts = _valid_facts()
     facts["schema_acl"] = [{"grantee": "PUBLIC", "privilege": "USAGE", "grantable": False}]
     with pytest.raises(rehearsal.RehearsalFailure, match="public_acl"):
-        rehearsal._assert_catalogue(facts, MANIFEST, PREREQUISITE)  # noqa: SLF001
+        rehearsal._assert_catalogue(  # noqa: SLF001
+            facts, MANIFEST, PREREQUISITE, CONTRACT
+        )
     facts = _valid_facts()
     facts["schema_acl"] = [{"grantee": "context_producer", "privilege": "CREATE", "grantable": False}]
     with pytest.raises(rehearsal.RehearsalFailure, match="runtime_schema_create_acl"):
-        rehearsal._assert_catalogue(facts, MANIFEST, PREREQUISITE)  # noqa: SLF001
+        rehearsal._assert_catalogue(  # noqa: SLF001
+            facts, MANIFEST, PREREQUISITE, CONTRACT
+        )
 
 
 def test_application_owner_rows_and_column_shape_fail_closed() -> None:
@@ -476,7 +645,9 @@ def test_application_owner_rows_and_column_shape_fail_closed() -> None:
         else:
             facts["columns"] = facts["columns"][1:]
         with pytest.raises(rehearsal.RehearsalFailure):
-            rehearsal._assert_catalogue(facts, MANIFEST, PREREQUISITE)  # noqa: SLF001
+            rehearsal._assert_catalogue(  # noqa: SLF001
+                facts, MANIFEST, PREREQUISITE, CONTRACT
+            )
 
 
 def _owned_inspect() -> dict[str, Any]:
@@ -487,6 +658,12 @@ def _owned_inspect() -> dict[str, Any]:
         "Image": "sha256:" + "b" * 64,
         "Config": {
             "Image": profile["image_reference"],
+            "Env": [
+                f'POSTGRES_USER={profile["postgres_user"]}',
+                f'POSTGRES_PASSWORD={profile["postgres_password"]}',
+                f'POSTGRES_DB={profile["postgres_database"]}',
+                f'PGDATA={profile["pgdata"]}',
+            ],
             "Labels": {
                 "com.emr4.harness": profile["ownership_labels"]["com.emr4.harness"],
                 "com.emr4.cleanup-nonce": "0" * 32,
@@ -495,7 +672,11 @@ def _owned_inspect() -> dict[str, Any]:
         "HostConfig": {
             "NetworkMode": "none",
             "Binds": None,
+            "PortBindings": {},
             "Privileged": False,
+            "Memory": 768 * 1024 * 1024,
+            "NanoCpus": 1_000_000_000,
+            "PidsLimit": 192,
             "RestartPolicy": {"Name": "no"},
             "Tmpfs": {"/var/lib/postgresql/data": "rw,noexec,nosuid,size=536870912"},
         },
@@ -513,7 +694,21 @@ def test_cleanup_ownership_requires_every_exact_fact() -> None:
         "profile": profile,
     }
     assert rehearsal._container_owned(_owned_inspect(), **kwargs)  # noqa: SLF001
-    for mutate in ("id", "name", "label", "image", "network", "mount", "privileged"):
+    for mutate in (
+        "id",
+        "name",
+        "label",
+        "image",
+        "network",
+        "mount",
+        "privileged",
+        "memory",
+        "cpu",
+        "pids",
+        "tmpfs",
+        "port",
+        "environment",
+    ):
         payload = _owned_inspect()
         if mutate == "id":
             payload["Id"] = "c" * 64
@@ -529,7 +724,28 @@ def test_cleanup_ownership_requires_every_exact_fact() -> None:
             payload["Mounts"].append({"Type": "bind", "Destination": "/workspace"})
         elif mutate == "privileged":
             payload["HostConfig"]["Privileged"] = True
+        elif mutate == "memory":
+            payload["HostConfig"]["Memory"] = 0
+        elif mutate == "cpu":
+            payload["HostConfig"]["NanoCpus"] = 0
+        elif mutate == "pids":
+            payload["HostConfig"]["PidsLimit"] = 0
+        elif mutate == "tmpfs":
+            payload["HostConfig"]["Tmpfs"] = {
+                "/var/lib/postgresql/data": "rw,size=536870912"
+            }
+        elif mutate == "port":
+            payload["HostConfig"]["PortBindings"] = {"5432/tcp": [{"HostPort": "5432"}]}
+        elif mutate == "environment":
+            payload["Config"]["Env"] = []
         assert not rehearsal._container_owned(payload, **kwargs)  # noqa: SLF001
+    for malformed in (
+        {"Config": None, "HostConfig": {}, "Mounts": []},
+        {"Config": {}, "HostConfig": None, "Mounts": []},
+        {"Config": {}, "HostConfig": {}, "Mounts": None},
+        {"Config": {"Labels": []}, "HostConfig": {}, "Mounts": []},
+    ):
+        assert not rehearsal._container_owned(malformed, **kwargs)  # noqa: SLF001
 
 
 def test_exact_absence_requires_documented_no_such_object() -> None:
