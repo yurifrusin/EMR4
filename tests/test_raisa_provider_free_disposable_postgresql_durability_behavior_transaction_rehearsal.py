@@ -703,21 +703,21 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "id": "accepted_runtime_source",
         "path": (
             "docs/raisa-provider-free-disposable-postgresql-durability-"
-            "parse-catalogue-system-xmin-accepted-source.md"
+            "parse-catalogue-system-xmin-explicit-alias-accepted-source.md"
         ),
-        "source_head": "bfb20a43a30c8f46a65f2383a127a4257e2473c6",
+        "source_head": "1057b0d6e49384f8b7ab00bd501dcc868fba909b",
         "sha256": (
-            "sha256:d29089a2d0aa6dce18b2eeb53c08176f1d68b80d9114cbfc85939c78dba3acf8"
+            "sha256:a6e9a652995ba4daa7a3c1c28812305f1fd6d3664e33e84fc5b9111263b52741"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "3949a61d60e2a704635b922755670f071569d4f3"
+        "1e5e9840dcbf14d2c1766a63149417f6912dc915"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:0379b35fe34eb5cc7f78a45d55a54b3b429e5f85af591e1c5bdf4080e3a15c7c"
+        "sha256:45c90b927a6e5a9b5b367ddf6ca76dfde0491ddb04d74214383cbca68419b7f6"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:0452f699b96eae5095ace6b99ced2820429db5d547b862b604ebc152aaac8bda"
+        "sha256:8893d0a21ce004bf5b57ad89deec75b8f4ae9a6a2f9705f9c6e6d598ec2da164"
     )
     assert bindings["body_contract"] == {
         "id": "body_contract",

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_explicit_path_stages_and_commits_only_the_renderer_208_accepted_source_ledger_and_parent_only_frozen_behavior_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate binds accepted parse source 1057b0d6, inert/manifest source 1e5e9840 and unchanged body/structural contracts. All twenty scenarios and 6/4/3/4/3 coverage remain byte-identical. Behavior contract SHA-256 is 58e8508b. All 392 focused tests, Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns exact-path staging, candidate commit and review preparation. Gemini later receives read-only veto authority only; no worker has runtime authority.",
+    "git_refs_and_worktree": "Primary HEAD is 1057b0d6e49384f8b7ab00bd501dcc868fba909b with bounded behavior rebind changes and preserved untracked files. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only.",
+    "live_handover_current_baton": "The active descendant is the deterministic renderer-2.0.8 behavior parent rebind awaiting a fresh independent veto; AGENTS.md sections 2-7 remain rehydrated.",
+    "protected_evidence_boundaries": "Stage only accepted-source/rebind docs, behavior contract/harness/tests and these five-source receipts. Exclude docs/branding, unrelated untracked files and mutable provider-free-behavior-transaction-evidence.json. No provider/data/runtime/deployment/Pages/protected ref opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

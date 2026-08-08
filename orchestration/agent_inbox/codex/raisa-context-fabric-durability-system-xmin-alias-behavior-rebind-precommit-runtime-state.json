@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_explicit_path_stages_and_commits_only_the_renderer_208_accepted_source_ledger_and_parent_only_frozen_behavior_rebind",
+  "source_evidence": {
+    "live_handover_current_baton": "The active descendant is the deterministic renderer-2.0.8 behavior parent rebind awaiting a fresh independent veto; AGENTS.md sections 2-7 remain rehydrated.",
+    "current_authority_allocation": "GPT Sol owns exact-path staging, candidate commit and review preparation. Gemini later receives read-only veto authority only; no worker has runtime authority.",
+    "active_plan_and_acceptance": "The candidate binds accepted parse source 1057b0d6, inert/manifest source 1e5e9840 and unchanged body/structural contracts. All twenty scenarios and 6/4/3/4/3 coverage remain byte-identical. Behavior contract SHA-256 is 58e8508b. All 392 focused tests, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "Stage only accepted-source/rebind docs, behavior contract/harness/tests and these five-source receipts. Exclude docs/branding, unrelated untracked files and mutable provider-free-behavior-transaction-evidence.json. No provider/data/runtime/deployment/Pages/protected ref opens.",
+    "git_refs_and_worktree": "Primary HEAD is 1057b0d6e49384f8b7ab00bd501dcc868fba909b with bounded behavior rebind changes and preserved untracked files. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_rehydration_accepted_parse_parent_and_complete_392_test_packet", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol uses explicit-path staging only."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One fresh exact-HEAD veto is next."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
