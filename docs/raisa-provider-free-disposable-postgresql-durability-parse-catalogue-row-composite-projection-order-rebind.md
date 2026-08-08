@@ -2,8 +2,8 @@
 
 Date: 2026-08-08
 
-Status: provider-free corrected-artifact parse/catalogue runtime passed; final
-evidence acceptance remains pending a fresh exact-HEAD veto
+Status: accepted provider-free corrected-artifact parse/catalogue pass after
+fresh exact-HEAD evidence veto
 
 ## Parent recovery
 
@@ -47,8 +47,10 @@ After the exact candidate passed its deterministic packet and a fresh r96
 Gemini 3.6 Flash/high veto, one newly owned `postgres:16-bookworm` container ran
 the exact rollback and success sequence. PostgreSQL admitted the corrected
 artifact, all exact catalogue digests matched, and the exact captured container
-ID was removed with absence verified. The runtime evidence is not final until
-its exact committed evidence packet receives a separate fresh veto.
+ID was removed with absence verified. Fresh r97 then accepted the exact
+committed evidence packet at
+`2f0047cd90a8448ec4e738483a7237fbf2860bcb` with 113/113 focused checks, zero
+P0-P3 and an unchanged clean postcondition.
 
 ## Closed boundary
 

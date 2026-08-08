@@ -2,8 +2,7 @@
 
 Date: 2026-08-08
 
-Status: runtime pass candidate; fresh exact-HEAD evidence veto required before
-final acceptance
+Status: accepted after fresh exact-HEAD evidence veto
 
 Result candidate:
 `raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`
@@ -54,9 +53,17 @@ It remains historical evidence only.
 ## Evidence gate
 
 The exact evidence, closeout, rebound contract, historical separation and
-deterministic tests must be committed and reviewed from a fresh clean
-Gemini 3.6 Flash/high worktree. Final acceptance requires one terminal pass,
-exact test reconciliation and an unchanged reviewer postcondition.
+deterministic tests were committed at
+`2f0047cd90a8448ec4e738483a7237fbf2860bcb`. Fresh r97 Gemini 3.6 Flash/high
+independently validated every binding, reproduced 113/113 focused tests, Ruff
+and diff checks, reported zero P0-P3 findings and returned one terminal pass.
+Its worktree stayed clean and unchanged at the exact candidate HEAD.
+
+A broader behavior-plan test remains deliberately fail-closed because its
+six-parent contract still names the predecessor SQL digest. That is the next
+dependency to repair and prevents attempt 016 from running against an
+unreviewed parent set; it does not weaken or contradict this accepted
+parse/catalogue result.
 
 ## Claim boundary and next work
 

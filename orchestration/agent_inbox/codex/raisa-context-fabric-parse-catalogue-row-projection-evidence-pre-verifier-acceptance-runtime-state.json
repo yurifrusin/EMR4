@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_fresh_exact_head_corrected_artifact_parse_catalogue_runtime_evidence_veto_and_close_that_proof_gate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md requires the corrected-artifact parse/catalogue proof before the behavior contract may be rebound. The committed runtime evidence is the active acceptance surface; the future Agent Execution Surface and Containment Gate remains later and does not alter this provider-free proof.",
+    "current_authority_allocation": "GPT Sol owns final evidence acceptance, closeout, handover update and the next behavior rebind. Gemini 3.6 Flash/high through fresh Antigravity worktree r97 owned final read-only evidence veto only and returned one pass. No reviewer owns self-acceptance, integration, task push, protected refs, provider/product runtime, deployment or release.",
+    "active_plan_and_acceptance": "Fresh r97 at exact evidence HEAD 2f0047cd90a8448ec4e738483a7237fbf2860bcb validated the evidence schema, exact 14-step pass lifecycle, corrected inert artifact SHA-256 83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5, contract SHA-256 4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b, 1,404,420 bytes, 412 statements, all fifteen contract-bound catalogue digests, exact image/no-pull/readiness facts, captured container ID e44443027e9ad46d4217c48ca042b13326f422b5bc7a88258eeaadb853769e0c and cleanup absence. It independently reproduced current evidence SHA-256 ff127b4061bd9fe904c4929e8fff5ab0d06ef72b37710edc3dbd271bec5155d4, predecessor SHA-256 3ef47b7a14b2581b6c7bf1732594b1e1c322a90e07ec7d43e2e5b5006b1a3281, 113/113 tests, Ruff and diff check, with zero P0-P3 and an unchanged clean postcondition.",
+    "protected_evidence_boundaries": "Final acceptance proves only PostgreSQL 16 parse, atomic rollback/success installation, exact catalogue/privilege shape and exact cleanup for the corrected authored-synthetic artifact. Function, trigger, RLS and transaction behavior remains unproved until the separately rebound twenty-scenario rehearsal. Application migration/runtime, operational persistence, watcher/listener/feed, patient/clinical/product/protected data, provider/model call, tool, command or product write, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "Task worktree is at exact evidence HEAD 2f0047cd90a8448ec4e738483a7237fbf2860bcb with only final review-orchestration artifacts untracked. Review worktree r97 is clean and unchanged at that same exact HEAD. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "parse_catalogue_row_projection_evidence_pre_verifier_acceptance_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the exact runtime evidence, closeout claims, complete 113-test count and unchanged reviewer postcondition before acceptance."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was used for this serial database evidence gate."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh r97 Gemini 3.6 Flash/high final evidence review returned one pass with zero P0-P3 at exact unchanged HEAD."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation transport is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

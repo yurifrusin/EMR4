@@ -149,11 +149,19 @@ corrected two unreachable trigger drafts without adding privilege: `BTR-T02`
 now binds the immediate committed-event immutability `CF601`, and `BTR-T03`
 uses the producer-reachable committed-event update guard rather than forbidden
 direct Fabric DML. The disposable cluster uses passwordless local peer
-authentication, rejected host authentication and Unix-socket-only access. A
-fresh exact-HEAD independent veto remains mandatory before the one authorized
-twenty-scenario run. No behavior runtime has begun. Applied migration,
-application behavior, operational database/source access and runtime remain
-closed.
+authentication, rejected host authentication and Unix-socket-only access.
+Fifteen fail-closed behavior attempts subsequently exposed bounded harness and
+source defects without admitting a scenario. Attempt 015 finally localized
+`BTR-E01` / `22P02` to positional assignment of a complete row projection whose
+field order differed from its physical table composite. The source-wide
+correction and renderer invariant pass, and the corrected 1,404,420-byte,
+412-statement artifact now passes a newly rebound PostgreSQL-16 parse/catalogue
+proof at exact independently reviewed evidence HEAD
+`2f0047cd90a8448ec4e738483a7237fbf2860bcb`, reproducing all fifteen exact
+catalogue digests with complete exact-ID cleanup. The next step is a separate
+behavior-contract rebind and fresh exact-HEAD veto before attempt 016. Applied
+migration, application behavior, operational database/source access and
+runtime remain closed.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -559,21 +567,23 @@ generation rehearsal. The architecture-only provider-free default-off
   checks with no P0-P3 finding and unchanged clean postflight at
   `a93d07405ad35d7d6c0603065625c17ec14ab23e`. The body architecture and its
   recovered inert DDL lowering are accepted. The provider-free disposable
-  PostgreSQL-16 parse-and-catalogue rehearsal now also passes at exact
-  independently reviewed runtime source HEAD
-  `c3ca2515b9f2c4b20cb7230364de7417f48eab54`: the exact 412-statement artifact
-  installs atomically, the fixed failed copy rolls back without surviving
-  Fabric objects or roles, all fifteen value-bearing catalogue digests match,
-  and exact-ID cleanup proves absence. This proves server admission and metadata
-  shape only. The provider-free database-backed authored-synthetic behavior/
+  PostgreSQL-16 parse-and-catalogue rehearsal now also passes for the corrected
+  row-composite projection artifact at exact independently reviewed evidence
+  source HEAD `2f0047cd90a8448ec4e738483a7237fbf2860bcb`: the exact 412-statement,
+  1,404,420-byte artifact installs atomically, the fixed failed copy rolls back
+  without surviving Fabric objects or roles, all fifteen value-bearing
+  catalogue digests match, and exact-ID cleanup proves absence. This proves
+  server admission and metadata shape only. The provider-free database-backed authored-synthetic behavior/
   transaction rehearsal plan now also passes at exact independently reviewed
   planning source `07e8750548ed69aba5a19f693a72397121a340e5`. Its exact
   twenty-scenario population covers selected entry-point, trigger, RLS,
   idempotency and outer-rollback paths with fixed principals, fixtures,
   SQLSTATEs, readback and container containment. It proves planning
-  completeness, not database behavior; the fixed harness and runtime remain
-  unstarted. Applied migration, application wiring, operational database/source
-  access and every real-product or clinical descendant remain closed.
+  completeness, not database behavior. Attempts 001-015 remain immutable
+  fail-closed evidence; the corrected artifact must now be rebound into the
+  behavior contract and pass a fresh exact-HEAD veto before attempt 016.
+  Applied migration, application wiring, operational database/source access
+  and every real-product or clinical descendant remain closed.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

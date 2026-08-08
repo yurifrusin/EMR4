@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_read_only_gemini_36_flash_high_final_veto_for_corrected_artifact_parse_catalogue_runtime_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md requires a fresh corrected-artifact parse/catalogue proof before behavior rebinding. Exact runtime evidence is now committed for final veto, while the Agent Execution Surface and Containment Gate remains a later prerequisite unrelated to this provider-free database evidence review.",
+    "current_authority_allocation": "GPT Sol retains evidence acceptance, closeout, behavior-rebind planning and all task/protected Git authority. Gemini 3.6 Flash/high through a fresh Antigravity project owns only the final exact read-only evidence veto in r97. It may not edit, execute, self-accept, integrate, push, contact product/provider surfaces beyond review transport, deploy, release or move refs.",
+    "active_plan_and_acceptance": "Evidence candidate 2f0047cd90a8448ec4e738483a7237fbf2860bcb records an exact parse/catalogue pass for corrected inert SQL SHA-256 83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5, contract SHA-256 4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b, 1,404,420 bytes and 412 statements. It binds every exact catalogue digest, image ID, no-pull/stable-readiness facts, exact cleanup and current evidence SHA-256 ff127b4061bd9fe904c4929e8fff5ab0d06ef72b37710edc3dbd271bec5155d4 while preserving predecessor evidence SHA-256 3ef47b7a14b2581b6c7bf1732594b1e1c322a90e07ec7d43e2e5b5006b1a3281. The exact 113-test packet, Ruff and diff check passed before dispatch.",
+    "protected_evidence_boundaries": "Review is limited to the exact committed diff, minimized authored-synthetic evidence, contract, harness, tests, closeout and receipts. It must not start Docker/PostgreSQL, run the harness, access protected holdouts, historical diary, branding, patient/clinical/product-derived data or unrelated untracked paths. Behavior, application migration/runtime, operational persistence, watcher/listener/feed, provider/model tools, commands/writes, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r97 is clean at exact candidate HEAD 2f0047cd90a8448ec4e738483a7237fbf2860bcb on codex/review-context-fabric-parse-evidence-2f0047cd. Primary task worktree is at the same HEAD with only bounded review-orchestration artifacts untracked. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "parse_catalogue_row_projection_evidence_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified the exact committed evidence candidate, deterministic packet and clean fresh r97 preflight before dispatch."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this serial evidence veto."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The configured exact Gemini 3.6 Flash/high Antigravity verifier is eligible for one fresh read-only final evidence veto."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation transport is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

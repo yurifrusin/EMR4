@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_final_corrected_artifact_parse_catalogue_acceptance_and_advance_live_baton_to_behavior_contract_rebind",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover is being advanced from the corrected-artifact parse/catalogue proof to the separately required behavior-contract rebind. The future Agent Execution Surface and Containment Gate remains after provider-free durability and before occupied product-read or executable Bureau authority.",
+    "current_authority_allocation": "GPT Sol owns final acceptance, live baton, task-branch commit and next rebind. Fresh Gemini 3.6 Flash/high r97 supplied final read-only evidence veto only. No worker or reviewer owns integration, task push, protected refs, provider/product runtime, deployment or release.",
+    "active_plan_and_acceptance": "Exact evidence candidate 2f0047cd90a8448ec4e738483a7237fbf2860bcb passes as raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass. Fresh r97 verified all artifact/contract/catalogue/evidence/cleanup bindings, 113/113 focused tests, Ruff and diff checks with zero P0-P3 and a clean unchanged postcondition. The final acceptance packet also passes the parse and handover/index suites. The broader behavior-plan test intentionally remains fail-closed on the predecessor SQL hash, establishing the next required behavior rebind rather than contradicting parse acceptance.",
+    "protected_evidence_boundaries": "Final acceptance proves only parse, atomic installation, exact catalogue/privilege shape and exact cleanup. Function, trigger, RLS and transaction behavior, application migration/runtime, operational persistence, watcher/listener/feed, patient/clinical/product/protected data, provider/model call, tool, command or product write, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "Primary task worktree is at parent HEAD 2f0047cd90a8448ec4e738483a7237fbf2860bcb with only exact final review, acceptance, handover and implementation-plan paths intended for commit. Review worktree r97 remains clean and unchanged at the exact evidence source. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df. docs/branding and the current mutable behavior evidence remain untracked and unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "parse_catalogue_row_projection_closeout_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled final review, exact claim boundary, passing parse/handover suites and the intentional stale behavior-parent rejection before explicit-path staging."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was used for this serial database gate."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh r97 Gemini 3.6 Flash/high final evidence review returned one pass with zero P0-P3 at exact unchanged HEAD."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation transport is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
