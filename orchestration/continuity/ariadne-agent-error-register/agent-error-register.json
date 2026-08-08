@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 101,
+  "register_revision": 102,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4719,6 +4719,46 @@
           "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
           "docs/security/raisa-context-fabric-digest-domain-nullability-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-101.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0124",
+      "attempt_id": "raisa-context-fabric-parse-digest-rebind-review-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_shell",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every touched Python file named in an independent review packet must pass the identical Ruff format command locally before dispatch.",
+      "observed_error": "The exact-head parse-rebind review passed 169 tests and every substantive binding and containment check but returned revision_required because tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py would be reformatted.",
+      "detection_method": "Fresh Gemini 3.6 Flash/high exact-head review ran the prescribed Ruff format command and returned exit code 1 with exactly one would-reformat path.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-parse-digest-rebind-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-parse-digest-rebind-gemini-review-packet.md",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-102.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.touched_python_format_preflight_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The omitted test was mechanically formatted and the exact reviewer Ruff format command now passes locally before a fresh descendant review.",
+        "prevention_control": "Derive local Ruff check and format targets from every touched Python path in the candidate and run the exact packet commands after the final formatting pass, not a hand-selected subset.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-102.md"
         ]
       },
       "status": "corrected"

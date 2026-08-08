@@ -46,14 +46,18 @@ CHARACTERIZATION_EVIDENCE = json.loads(
         / "provider-free-disposable-postgresql-evidence-catalogue-characterization.json"
     ).read_text(encoding="utf-8")
 )
-MANIFEST = json.loads((ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8"))
+MANIFEST = json.loads(
+    (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
+)
 ARTIFACT = rehearsal._canonical_artifact(  # noqa: SLF001 - exact acceptance surface
     (ROOT / CONTRACT["parent"]["artifact_path"]).read_bytes()
 )
 
 
 def _manifest_ids(kind: str) -> list[str]:
-    return [row["identifier"] for row in MANIFEST["ordered_nodes"] if row["kind"] == kind]
+    return [
+        row["identifier"] for row in MANIFEST["ordered_nodes"] if row["kind"] == kind
+    ]
 
 
 def _valid_facts() -> dict[str, Any]:
@@ -165,7 +169,9 @@ def _valid_facts() -> dict[str, Any]:
     facts: dict[str, Any] = {
         "server": {"server_version_num": 160010, "database": "emr4_synthetic_success"},
         "roles": roles,
-        "schema": [{"name": "emr4_context_fabric", "owner": "context_schema_owner", "acl": ""}],
+        "schema": [
+            {"name": "emr4_context_fabric", "owner": "context_schema_owner", "acl": ""}
+        ],
         "types": types,
         "relations": relations,
         "columns": sorted(
@@ -183,7 +189,12 @@ def _valid_facts() -> dict[str, Any]:
             for name in _manifest_ids("CONSTRAINT")
         ],
         "indexes": [
-            {"name": name, "relation": "fixed", "unique_index": True, "definition": "fixed"}
+            {
+                "name": name,
+                "relation": "fixed",
+                "unique_index": True,
+                "definition": "fixed",
+            }
             for name in _manifest_ids("UNIQUE_INDEX")
         ],
         "rls": [
@@ -207,7 +218,11 @@ def _valid_facts() -> dict[str, Any]:
         "relation_acl": [],
         "function_acl": [],
         "application_relations": [
-            {"name": "public." + table["name"], "owner": PREREQUISITE["owner"], "row_count": 0}
+            {
+                "name": "public." + table["name"],
+                "owner": PREREQUISITE["owner"],
+                "row_count": 0,
+            }
             for table in PREREQUISITE["tables"]
         ],
         "extensions": [{"name": "plpgsql", "version": "1.0"}],
@@ -265,8 +280,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert len(manifest["ordered_nodes"]) == 388
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
     assert (  # noqa: SLF001
-        rehearsal._canonical_sha(PREREQUISITE)
-        == rehearsal.EXPECTED_PREREQUISITE_SHA256
+        rehearsal._canonical_sha(PREREQUISITE) == rehearsal.EXPECTED_PREREQUISITE_SHA256
     )
 
 
@@ -295,7 +309,9 @@ def test_exact_catalogue_kind_population_is_frozen() -> None:
 
 
 def test_type_owner_population_is_exact_one_to_one() -> None:
-    typed = set(_manifest_ids("DOMAIN") + _manifest_ids("ENUM") + _manifest_ids("COMPOSITE"))
+    typed = set(
+        _manifest_ids("DOMAIN") + _manifest_ids("ENUM") + _manifest_ids("COMPOSITE")
+    )
     owners = set(_manifest_ids("TYPE_OWNER"))
     assert len(typed) == len(owners) == 32
     assert typed == owners
@@ -308,7 +324,10 @@ def test_prerequisite_contract_is_exactly_four_empty_minimum_shapes() -> None:
         "appointment_audit_log",
         "diary_committed_events",
     ]
-    assert all("xmin" not in [column["name"] for column in table["columns"]] for table in PREREQUISITE["tables"])
+    assert all(
+        "xmin" not in [column["name"] for column in table["columns"]]
+        for table in PREREQUISITE["tables"]
+    )
     assert set(PREREQUISITE["forbidden"]) >= {
         "rows",
         "patient_identifiers",
@@ -409,7 +428,24 @@ def test_ready_sql_argv_is_noninteractive_and_connection_bounded() -> None:
 
 @pytest.mark.parametrize(
     "token",
-    ["pull", "build", "login", "compose", "ps", "images", "system", "prune", "ls", "list", "--privileged", "--network=host", "-p", "--publish", "--volume", "-v"],
+    [
+        "pull",
+        "build",
+        "login",
+        "compose",
+        "ps",
+        "images",
+        "system",
+        "prune",
+        "ls",
+        "list",
+        "--privileged",
+        "--network=host",
+        "-p",
+        "--publish",
+        "--volume",
+        "-v",
+    ],
 )
 def test_hostile_docker_tokens_are_rejected(token: str) -> None:
     with pytest.raises(rehearsal.RehearsalFailure, match="forbidden_token"):
@@ -470,7 +506,9 @@ def test_subprocess_output_is_bounded_during_pipe_read(
         def poll(self) -> int:
             return self.returncode
 
-    monkeypatch.setattr(rehearsal.subprocess, "Popen", lambda *args, **kwargs: FakeProcess())
+    monkeypatch.setattr(
+        rehearsal.subprocess, "Popen", lambda *args, **kwargs: FakeProcess()
+    )
     with pytest.raises(rehearsal.RehearsalFailure, match="output_cap_exceeded"):
         rehearsal._subprocess_runner(  # noqa: SLF001
             [r"C:\Docker\docker.exe", "container", "inspect", "fixed"],
@@ -730,14 +768,25 @@ def test_module_has_no_database_cloud_http_or_environment_input_import() -> None
         if isinstance(node, ast.ImportFrom) and node.module
     }
     assert not imports.intersection(
-        {"sqlalchemy", "psycopg", "requests", "httpx", "socket", "google", "boto3", "alembic"}
+        {
+            "sqlalchemy",
+            "psycopg",
+            "requests",
+            "httpx",
+            "socket",
+            "google",
+            "boto3",
+            "alembic",
+        }
     )
 
 
 def test_query_transport_sets_read_only_and_uses_file_stdin() -> None:
     captured: dict[str, Any] = {}
 
-    def runner(argv: list[str], stdin: bytes | None, timeout: int, cap: int) -> rehearsal.ProcessResult:
+    def runner(
+        argv: list[str], stdin: bytes | None, timeout: int, cap: int
+    ) -> rehearsal.ProcessResult:
         captured.update(argv=argv, stdin=stdin, timeout=timeout, cap=cap)
         return rehearsal.ProcessResult(0, b"[]\n", b"")
 
@@ -812,7 +861,9 @@ def test_catalogue_queries_project_every_definition_and_authority_surface() -> N
     )
 
 
-def test_characterization_cannot_pass_and_exact_digests_reject_definition_drift() -> None:
+def test_characterization_cannot_pass_and_exact_digests_reject_definition_drift() -> (
+    None
+):
     facts = _valid_facts()
     characterized = rehearsal._assert_catalogue(  # noqa: SLF001
         facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
@@ -1007,13 +1058,17 @@ def test_function_owner_exception_is_exact_and_position_closed() -> None:
 
 def test_public_acl_and_runtime_schema_create_fail_closed() -> None:
     facts = _valid_facts()
-    facts["schema_acl"] = [{"grantee": "PUBLIC", "privilege": "USAGE", "grantable": False}]
+    facts["schema_acl"] = [
+        {"grantee": "PUBLIC", "privilege": "USAGE", "grantable": False}
+    ]
     with pytest.raises(rehearsal.RehearsalFailure, match="public_acl"):
         rehearsal._assert_catalogue(  # noqa: SLF001
             facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
         )
     facts = _valid_facts()
-    facts["schema_acl"] = [{"grantee": "context_producer", "privilege": "CREATE", "grantable": False}]
+    facts["schema_acl"] = [
+        {"grantee": "context_producer", "privilege": "CREATE", "grantable": False}
+    ]
     with pytest.raises(rehearsal.RehearsalFailure, match="runtime_schema_create_acl"):
         rehearsal._assert_catalogue(  # noqa: SLF001
             facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
@@ -1044,10 +1099,10 @@ def _owned_inspect() -> dict[str, Any]:
         "Config": {
             "Image": profile["image_reference"],
             "Env": [
-                f'POSTGRES_USER={profile["postgres_user"]}',
-                f'POSTGRES_PASSWORD={profile["postgres_password"]}',
-                f'POSTGRES_DB={profile["postgres_database"]}',
-                f'PGDATA={profile["pgdata"]}',
+                f"POSTGRES_USER={profile['postgres_user']}",
+                f"POSTGRES_PASSWORD={profile['postgres_password']}",
+                f"POSTGRES_DB={profile['postgres_database']}",
+                f"PGDATA={profile['pgdata']}",
             ],
             "Labels": {
                 "com.emr4.harness": profile["ownership_labels"]["com.emr4.harness"],
@@ -1175,7 +1230,9 @@ def test_exact_owned_cleanup_uses_only_captured_id() -> None:
         rehearsal.ProcessResult(1, b"", b"Error: No such object: " + b"a" * 64),
     ]
 
-    def runner(argv: list[str], stdin: bytes | None, timeout: int, cap: int) -> rehearsal.ProcessResult:
+    def runner(
+        argv: list[str], stdin: bytes | None, timeout: int, cap: int
+    ) -> rehearsal.ProcessResult:
         del stdin, timeout, cap
         calls.append(argv)
         return responses.pop(0)
@@ -1226,7 +1283,9 @@ def test_evidence_schema_accepts_bounded_environment_stop() -> None:
         "evidence_mode": rehearsal.EVIDENCE_MODE,
         "attempt_id": "authored-synthetic",
         "parent": {},
-        "environment": {"failure": {"stage": "environment", "code": "docker_client_missing"}},
+        "environment": {
+            "failure": {"stage": "environment", "code": "docker_client_missing"}
+        },
         "lifecycle": ["parent_verified"],
         "rollback": {"status": "not_started"},
         "catalogue": {"status": "not_started"},
@@ -1236,6 +1295,8 @@ def test_evidence_schema_accepts_bounded_environment_stop() -> None:
     Draft202012Validator(EVIDENCE_SCHEMA).validate(payload)
 
 
-def test_main_rejects_all_caller_selected_arguments(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_main_rejects_all_caller_selected_arguments(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.setattr(rehearsal.sys, "argv", ["harness", "--image", "other"])
     assert rehearsal.main() == 2
