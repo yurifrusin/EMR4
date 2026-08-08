@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_failed_and_corrected_antigravity_adapter_method_receipts_with_aer_0136",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The first pre-dispatch receipt failed closed on an unregistered Antigravity method identifier. The immutable failed receipt, distinct passing registered-method receipt, AER-0136, revision 113, pattern report and tests now reconcile; the function-coordinate code itself remains unchanged from 3c170e0073de7b6496d8bb7d9981790316041df9.",
+    "current_authority_allocation": "GPT Sol owns receipt correction, register maintenance and task-branch commit. Gemini 3.6 Flash/high remains a later read-only veto reviewer only; no verifier call has occurred and no other worker is active.",
+    "git_refs_and_worktree": "The active task branch is at 3c170e0073de7b6496d8bb7d9981790316041df9 before this evidence commit. Local and remotely observed master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref will move and staging remains explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md keeps the provider-free behavior/transaction rehearsal active and the future Agent Execution Surface gate recorded after the current durability sequence.",
+    "protected_evidence_boundaries": "This commit is receipt/register evidence only. Docker/PostgreSQL runtime, application/runtime wiring, operational credentials, patient/clinical/product/protected data, provider product calls, commands/writes, deployment, production, release, Pages and protected refs remain closed. The review packet, worktree preflight, canonical current failure, docs/branding and all unrelated untracked files remain unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

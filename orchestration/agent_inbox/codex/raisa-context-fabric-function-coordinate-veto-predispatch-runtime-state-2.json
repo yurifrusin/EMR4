@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "validate_registered_antigravity_observation_method_before_function_coordinate_veto_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the disposable PostgreSQL behavior/transaction rehearsal active and requires a fresh exact-HEAD independent veto before each repaired runtime attempt.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project has read-only veto authority only; GPT Sol retains implementation, runtime, acceptance and ref authority. No native or DeepSeek worker is active.",
+    "active_plan_and_acceptance": "The function-coordinate code candidate remains 3c170e0073de7b6496d8bb7d9981790316041df9. The preceding dispatch receipt failed solely because its Antigravity observation method identifier was not registered; no verifier call occurred and the code candidate is unchanged.",
+    "protected_evidence_boundaries": "Review remains exact-path, repository-authored synthetic and read-only. Docker/PostgreSQL runtime, application wiring, operational credentials, patient/clinical/product/protected data, provider product calls, commands/writes, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Verifier worktree C:/Users/sarashera/EMR4-worktrees/r93 is clean at 3c170e0073de7b6496d8bb7d9981790316041df9. Local and remotely observed master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref will move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_function_coordinate_veto_predispatch_registered_method_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol preserved the rejected receipt and copied the registered Antigravity method before re-evaluation."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "One fresh exact-HEAD read-only Gemini 3.6 Flash/high veto is selected after final candidate-head reconciliation."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

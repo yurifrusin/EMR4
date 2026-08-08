@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "validate_registered_antigravity_observation_method_before_function_coordinate_veto_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The function-coordinate code candidate remains 3c170e0073de7b6496d8bb7d9981790316041df9. The preceding dispatch receipt failed solely because its Antigravity observation method identifier was not registered; no verifier call occurred and the code candidate is unchanged.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project has read-only veto authority only; GPT Sol retains implementation, runtime, acceptance and ref authority. No native or DeepSeek worker is active.",
+    "git_refs_and_worktree": "Verifier worktree C:/Users/sarashera/EMR4-worktrees/r93 is clean at 3c170e0073de7b6496d8bb7d9981790316041df9. Local and remotely observed master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref will move.",
+    "live_handover_current_baton": "AGENTS.md keeps the disposable PostgreSQL behavior/transaction rehearsal active and requires a fresh exact-HEAD independent veto before each repaired runtime attempt.",
+    "protected_evidence_boundaries": "Review remains exact-path, repository-authored synthetic and read-only. Docker/PostgreSQL runtime, application wiring, operational credentials, patient/clinical/product/protected data, provider product calls, commands/writes, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

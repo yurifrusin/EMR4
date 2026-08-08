@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 112
+    assert register["register_revision"] == 113
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 136)
+        f"AER-{index:04d}" for index in range(1, 137)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 99
+    assert len(agent_incidents) == 100
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1759,13 +1759,23 @@ def test_aer_0135_adds_safe_plpgsql_function_coordinate() -> None:
     assert "scenario-bound coordinate" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0136_rejects_unregistered_adapter_observation_method() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0136"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert "operator_selected_transport" in incident["observed_error"]
+    assert "verbatim" in incident["correction"]["prevention_control"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 135
+    assert report["incident_count"] == 136
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 99,
+        "agent_behavior": 100,
         "harness": 16,
         "repository": 12,
         "transport": 8,
@@ -1774,7 +1784,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 15,
         "evidence_misreport": 19,
         "harness_failure": 16,
-        "output_contract_violation": 39,
+        "output_contract_violation": 40,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
         "repository_defect": 12,
@@ -1782,7 +1792,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 29,
-        "canonical_unchanged": 84,
+        "canonical_unchanged": 85,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [

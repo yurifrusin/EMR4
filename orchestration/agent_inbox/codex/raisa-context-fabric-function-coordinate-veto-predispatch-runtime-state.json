@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_gemini_36_flash_high_read_only_veto_for_bounded_plpgsql_coordinate_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the disposable PostgreSQL behavior/transaction rehearsal active and requires a fresh exact-HEAD independent veto before each repaired runtime attempt. The Agent Execution Surface gate remains a later programme prerequisite and is not implemented here.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project receives independent read-only veto authority only. GPT Sol retains implementation, runtime, diagnosis, acceptance, integration and baton authority. No native or DeepSeek worker is active and the verifier cannot edit, self-accept, run Docker, push or move refs.",
+    "active_plan_and_acceptance": "Candidate 3c170e0073de7b6496d8bb7d9981790316041df9 preserves attempt 013 and adds only the schema-closed scenario-allowlisted PL/pgSQL function coordinate. Deterministic tests, Ruff, inert-artifact check, pattern report and diff check pass. A verifier pass can authorize exactly one newly owned networkless disposable diagnosis attempt, not a product claim.",
+    "protected_evidence_boundaries": "The reviewer may read only the packet's exact repository-authored synthetic files and diff and run only its listed provider-free checks. Docker/PostgreSQL execution, application/runtime wiring, operational persistence or credentials, watcher/listener/feed access, patient/clinical/product/protected data, providers other than this verifier transport, commands/writes, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Fresh verifier worktree C:/Users/sarashera/EMR4-worktrees/r93 is clean on codex/review-context-fabric-function-coordinate-3c170e00 at exact candidate 3c170e0073de7b6496d8bb7d9981790316041df9 and passed the dedicated preflight. Local and remotely observed master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The main task worktree remains on codex/ariadne-bernie-davida-parallel-seam; no protected ref will move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_function_coordinate_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled candidate HEAD, packet, exact-path scope and fresh clean verifier preflight."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "operator_selected_transport",
+      "reachability": "reachable",
+      "evidence": [
+        "The exact Gemini 3.6 Flash/high verifier lane is selected for one fresh read-only project."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

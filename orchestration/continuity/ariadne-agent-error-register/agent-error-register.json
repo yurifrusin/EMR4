@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 112,
+  "register_revision": 113,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5221,6 +5221,49 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-function-coordinate-diagnostic-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-112.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0136",
+      "attempt_id": "raisa-context-fabric-function-coordinate-veto-predispatch-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every adapter observation in a pre-worker-dispatch runtime state must use the exact registered method identifier accepted by the active orchestrator settings before dispatch can be permitted.",
+      "observed_error": "The first function-coordinate verifier runtime state described the Antigravity selection with method operator_selected_transport instead of the registered agy_cli_observation method. Ariadne returned revision_required and worker_dispatch_permitted false before any verifier call.",
+      "detection_method": "The deterministic orchestrator receipt builder rejected the adapter observation as adapter_probe_method_invalid:antigravity_cli_print before Antigravity launch, worktree mutation, model output, runtime execution or ref movement.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-coordinate-veto-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-coordinate-veto-predispatch-receipt.json",
+        "orchestration/harness_settings/orchestrator_requirements.yaml",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-coordinate-veto-predispatch-runtime-state-2.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-function-coordinate-veto-predispatch-receipt-2.json",
+        "docs/ariadne-agent-error-correction-register-revision-113.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.invalid_adapter_observation_method",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed state and receipt remain immutable. A distinct pre-dispatch state copies agy_cli_observation from a passing current Antigravity receipt pattern and must pass before the verifier is launched.",
+        "prevention_control": "Pre-dispatch runtime states must copy adapter method identifiers verbatim from the active schema or a current passing same-adapter receipt; descriptive transport prose belongs only in evidence text.",
+        "evidence_paths": [
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-coordinate-veto-predispatch-runtime-state-2.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-function-coordinate-veto-predispatch-receipt-2.json",
+          "docs/ariadne-agent-error-correction-register-revision-113.md"
         ]
       },
       "status": "corrected"
