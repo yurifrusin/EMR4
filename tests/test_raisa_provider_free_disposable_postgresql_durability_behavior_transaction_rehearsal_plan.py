@@ -42,6 +42,10 @@ REGISTRATION_RLS_REBIND = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-registration-rls-parent-rebind.md"
 )
+SYSTEM_XMIN_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-system-xmin-parent-rebind.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -75,19 +79,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-registration-rls-accepted-source.md",
-        "14d145f02971e56f5751670969cb4153d49c1fb8",
-        "ea6d65de45d15c5dbba3af388402a141757b1acfda01d7416deea202b35a65dd",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-system-xmin-accepted-source.md",
+        "bfb20a43a30c8f46a65f2383a127a4257e2473c6",
+        "d29089a2d0aa6dce18b2eeb53c08176f1d68b80d9114cbfc85939c78dba3acf8",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "2c22d6f56d0081ebfae5a5585088381e1219d7f8",
-        "34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760",
+        "3949a61d60e2a704635b922755670f071569d4f3",
+        "0379b35fe34eb5cc7f78a45d55a54b3b429e5f85af591e1c5bdf4080e3a15c7c",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "2c22d6f56d0081ebfae5a5585088381e1219d7f8",
-        "4ac9b851796f6460fd55844d4d3634eba62f4302bd68ce80b62b63f69cd541ea",
+        "3949a61d60e2a704635b922755670f071569d4f3",
+        "0452f699b96eae5095ace6b99ced2820429db5d547b862b604ebc152aaac8bda",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
@@ -96,12 +100,12 @@ EXPECTED_PARENT_BINDINGS = {
     ),
     "body_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-        "6ae8f2c7bf3df1fe9f89b760e9d3641384848545",
-        "39a841d357388ca8cb0d1e40c73218af3e59e78090f882169e000b3ef16fa2eb",
+        "73322f3d86d44f997c054331e06c3017831b345f",
+        "a4d270536f11ee143dbe947afe212de6906c2615063722845e6ff15d3f80c381",
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "14d145f02971e56f5751670969cb4153d49c1fb8",
+        "bfb20a43a30c8f46a65f2383a127a4257e2473c6",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
@@ -255,6 +259,22 @@ def test_registration_rls_rebind_preserves_twenty_scenarios_and_closure() -> Non
         "docs/branding/",
         "no applied migration",
         "patient/product/protected data",
+    ):
+        assert required in combined
+
+
+def test_system_xmin_rebind_preserves_twenty_scenarios_and_closure() -> None:
+    combined = _flat(SYSTEM_XMIN_REBIND, PLAN, DESIGN).lower()
+
+    for required in (
+        "attempt 019",
+        "exactly twenty ordered",
+        "6/4/3/4/3",
+        "byte-for-byte unchanged",
+        "gemini 3.6 flash/high",
+        "docs/branding/",
+        "no applied migration",
+        "patient, product or protected data",
     ):
         assert required in combined
 

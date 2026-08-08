@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_explicit_path_stages_and_commits_only_the_system_xmin_accepted_source_ledger_and_parent_only_frozen_behavior_rebind",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton remain fully rehydrated. The active descendant is the deterministic provider-free system-xmin behavior parent rebind awaiting a fresh independent veto.",
+    "current_authority_allocation": "GPT Sol owns exact-path staging, candidate commit, review-worktree preparation and later runtime acceptance. Gemini 3.6 Flash/high receives only read-only veto authority after the commit. No worker receives runtime authority.",
+    "active_plan_and_acceptance": "The candidate binds accepted parse source bfb20a43, inert source 3949a61d, body source 73322f3d and unchanged structural/prerequisite contracts. All twenty scenarios, their SQL, expected outcomes and 6/4/3/4/3 coverage remain unchanged. The canonical behavior contract SHA-256 is b8855abe. The complete 390-test deterministic packet, Ruff and diff check pass.",
+    "protected_evidence_boundaries": "Stage only the accepted-source ledger, system-xmin behavior-rebind note, behavior contract/harness/tests and these new five-source receipts. Do not stage docs/branding, unrelated untracked files or mutable provider-free-behavior-transaction-evidence.json. No provider, patient/product/protected data, application runtime, migration application, deployment, release, Pages or protected ref is opened.",
+    "git_refs_and_worktree": "Primary task branch HEAD is bfb20a43a30c8f46a65f2383a127a4257e2473c6 with only explicit behavior-rebind candidate paths modified or added plus preserved pre-existing untracked files. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only; git add dot and git add -A are forbidden."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rehydration_accepted_parse_parent_and_complete_390_test_deterministic_packet",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol will use explicit-path staging only."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One fresh exact-HEAD Gemini veto is the next eligible action."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
