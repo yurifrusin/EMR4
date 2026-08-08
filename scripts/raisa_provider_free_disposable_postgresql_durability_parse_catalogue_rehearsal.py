@@ -694,6 +694,16 @@ def _observed_sqlstates(stderr: bytes) -> list[str]:
     )
 
 
+def _bounded_psql_rejection(result: ProcessResult) -> dict[str, Any]:
+    """Retain only closed SQLSTATE identifiers and an opaque stderr digest."""
+    return {
+        "status": "rejected",
+        "psql_exit": result.returncode,
+        "observed_sqlstates": _observed_sqlstates(result.stderr),
+        "stderr": _bounded_digest(result.stderr),
+    }
+
+
 def _wait_for_stable_postgres(
     runner: Runner,
     docker: str,
@@ -1776,6 +1786,10 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                     runner, docker, container_id, database, profile, artifact
                 )
                 if admitted.returncode != 0:
+                    catalogue = {
+                        "status": "not_started",
+                        "artifact_admission": _bounded_psql_rejection(admitted),
+                    }
                     raise RehearsalFailure(
                         "artifact", "postgresql_rejected", str(admitted.returncode)
                     )

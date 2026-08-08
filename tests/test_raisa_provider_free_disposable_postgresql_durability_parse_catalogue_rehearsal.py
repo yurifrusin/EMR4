@@ -599,6 +599,26 @@ def test_observed_sqlstates_are_closed_sorted_and_deduplicated() -> None:
     assert rehearsal._observed_sqlstates(stderr) == ["28000", "42P01"]  # noqa: SLF001
 
 
+def test_artifact_rejection_evidence_is_bounded_and_value_free() -> None:
+    raw = (
+        b"psql:<stdin>:500: ERROR:  42883: raw authored-synthetic detail\n"
+        b"LOCATION: private implementation detail\n"
+    )
+    bounded = rehearsal._bounded_psql_rejection(  # noqa: SLF001
+        rehearsal.ProcessResult(3, b"ignored stdout", raw)
+    )
+
+    assert bounded == {
+        "status": "rejected",
+        "psql_exit": 3,
+        "observed_sqlstates": ["42883"],
+        "stderr": rehearsal._bounded_digest(raw),  # noqa: SLF001
+    }
+    rendered = json.dumps(bounded)
+    assert "authored-synthetic detail" not in rendered
+    assert "implementation detail" not in rendered
+
+
 def test_postgres_readiness_caps_each_probe_to_startup_deadline() -> None:
     profile = copy.deepcopy(CONTRACT["docker_profile"])
     profile["startup_timeout_seconds"] = 1

@@ -261,3 +261,20 @@ Parent recovery commit `f86ed6ce6d004f29b39148e024b6229b5a622291`
 binds the reordered 412-statement artifact at unchanged `1403432` LF bytes and
 SHA-256 `fd640d16d51a63557220cc8a59b75ddfadee86a745da11919bad2c101d4a896d`.
 The descendant must bind those exact bytes before replacement review or run.
+
+## Success-side artifact rejection observability
+
+Attempt `0a68f3e19d21d929fd3fd103` proved the entire rollback-first atomicity case:
+expected SQLSTATE `42601` matched, and readback proved zero surviving fabric
+schema objects and zero cluster roles. It then created the success database,
+installed all four empty prerequisites and reached full artifact installation.
+That installation returned psql exit 3, but the old evidence reduced the result
+to generic `artifact/postgresql_rejected`. Exact container
+`39e8f71273b5aebc164b6838b976379c61335a36d03cc4f62676a3dde59fcf2f`
+was removed and absence verified; catalogue work did not start.
+
+Recovery records the success-side psql exit, sorted unique five-character
+verbose SQLSTATE identifiers and opaque stderr byte-count/SHA-256 only. Raw
+stderr, stdout and database values remain absent. This changes no SQL,
+contract, retry, runtime scope or authority; it only makes the next contained
+artifact rejection diagnostically classifiable.

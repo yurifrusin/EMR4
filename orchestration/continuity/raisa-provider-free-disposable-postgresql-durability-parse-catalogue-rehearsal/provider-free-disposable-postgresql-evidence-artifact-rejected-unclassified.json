@@ -1,0 +1,19 @@
+{
+  "attempt_id": "0a68f3e19d21d929fd3fd103",
+  "catalogue": {"status": "not_started"},
+  "claim_boundary": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only",
+  "cleanup": {"absence_verified": true, "container_id": "39e8f71273b5aebc164b6838b976379c61335a36d03cc4f62676a3dde59fcf2f", "removed": true, "status": "cleanup_verified"},
+  "environment": {
+    "docker_client": "resolved_exact_docker_exe",
+    "elapsed_ms": 6725,
+    "failure": {"code": "postgresql_rejected", "detail_digest": "sha256:4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce", "stage": "artifact"},
+    "image": {"id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8", "pull_attempted": false, "reference": "postgres:16-bookworm"},
+    "readiness": {"continuous_success_ms": 3192, "last_pg_isready_exit": 0, "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "last_sql_failure_class": "none", "last_sql_probe_exit": 0, "last_sql_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "last_sql_stdout_digest": "sha256:cc290b35686ba5625a414ce876721a541897e6f17a00d4aa8e2ea5c436c31be8", "pg_isready_attempts": 9, "pg_isready_successes": 8, "sql_probe_attempts": 8, "sql_probe_successes": 7, "status": "stable"}
+  },
+  "evidence_mode": "provider_free_disposable_local_postgresql_authored_synthetic",
+  "lifecycle": ["parent_verified", "environment_verified", "container_created", "container_owned", "postgres_ready", "rollback_database_ready", "rollback_prerequisites_installed", "rollback_case_matched", "success_database_ready", "success_prerequisites_installed", "cleanup_verified"],
+  "parent": {"artifact_byte_count": 1403432, "artifact_sha256": "sha256:fd640d16d51a63557220cc8a59b75ddfadee86a745da11919bad2c101d4a896d", "contract_sha256": "sha256:ae3adbcb6dbee930d5202c2c72389fdf526b5e66ed470433b30534f643ddd59e", "prerequisite_contract_sha256": "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11", "prerequisite_sql_sha256": "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38", "statement_count": 412},
+  "result": "rehearsal_failed",
+  "rollback": {"cluster_role_count": 0, "database_local_schema_count": 0, "expected_sqlstate": "42601", "expected_sqlstate_seen": true, "observed_sqlstates": ["42601"], "psql_exit": 3, "status": "matched", "stderr": {"byte_count": 250, "sha256": "sha256:8b45c479ce74d3bc5b575c84b68398d3c82c4eeea75df535019fffbf942588d2"}},
+  "schema_version": "emr4.disposable-postgresql-durability-rehearsal-evidence.v1"
+}
