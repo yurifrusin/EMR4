@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "sol_accepts_the_distinct_fresh_corrected_gemini_veto_after_exact_packet_candidate_and_receipt_reconciliation_and_opens_only_one_new_behavior_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The r104 receipt at SHA-256 edd644e8434efc647535665dd85c27a03b91f24ab5b316205750ecab49f79a0f reports terminal pass at exact unchanged HEAD 7727d1c61426a846a6b68bc7d855733c45aef78b, dirty_after false, 394/394 focused tests, Ruff and diff checks passed, all corrected full hashes and cleanup IDs reconciled, all 62 explicit xmin aliases present, typed semantic hashes unchanged, 412 statements, all twenty behavior scenarios unchanged at digest 7c8709c2966814c123ad4312cfeb2296f1bdcbe9c05bd0826882917371346820 and category counts 6/4/3/4/3. It also correctly preserves and rejects the first inadmissible pass. Sol independently confirmed exact HEAD, clean worktree, protected refs and mutable attempt-020 evidence SHA-256 a07e340ad9383cceb2a48f2c8230829daace833711b6d442af513022a767f8ac.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied read-only review evidence only. GPT Sol retains sole verifier acceptance, database rehearsal, cleanup, continuity and task-branch authority. No native subagent, worker or product/provider runtime is active.",
+    "git_refs_and_worktree": "r104 remains clean on codex/review-context-fabric-system-xmin-alias-7727d1c at exact 7727d1c61426a846a6b68bc7d855733c45aef78b. Primary is at the same HEAD with only bounded corrected-review orchestration files and preserved pre-existing untracked files. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active provider-free durability behavior gate required an admissible independent veto before one new attempt. The first review remains rejected; one distinct fresh corrected veto now has a clean schema-constrained terminal pass.",
+    "protected_evidence_boundaries": "Acceptance opens only eligibility for one new owned pull-never networkless fixed-fixture behavior attempt after a fresh preexecution receipt. No product/provider call, patient/clinical/product/protected data, operational database/credential, application migration/runtime, watcher/listener/feed, deployment, production, release, Pages or protected ref is opened. The current mutable behavior evidence remains unstaged until a successful accepted run replaces it."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_distinct_fresh_read_only_gemini_36_flash_high_veto_for_the_mechanically_corrected_system_xmin_alias_candidate_and_first_review_rejection_controls",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 7727d1c61426a846a6b68bc7d855733c45aef78b contains the unchanged renderer 2.0.8 recovery, exact artifact/parse/behavior bindings, and the preserved rejection of the first inadmissible pass. The corrected packet mechanically names structural SHA d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6 and cleanup IDs e10340911ad8afef2f33da41319a1b52994584c2fc958c40b9c7219f5055c63e and 253f1b17c19af1a898ea3f593293865bacd1fd474686703b77acbb42ae3c3af8. AER revision 121 validates with 145 incidents and zero open; exact mechanical collection totals 394 tests.",
+    "current_authority_allocation": "GPT Sol retains planning, verifier acceptance, database rehearsal, cleanup, task-branch and baton ownership. One distinct fresh Gemini 3.6 Flash/high Antigravity project owns only the corrected read-only veto in r104; it receives no edit, Docker/runtime, self-acceptance, integration, push, product/provider execution, deployment, release or protected-ref authority. No native subagent or DeepSeek lease is active.",
+    "git_refs_and_worktree": "Fresh r104 is clean on codex/review-context-fabric-system-xmin-alias-7727d1c at exact candidate 7727d1c61426a846a6b68bc7d855733c45aef78b. Primary is at the same HEAD with only bounded corrected-review orchestration files plus preserved pre-existing untracked files. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active provider-free durability behavior gate remains closed until one admissible fresh exact-head veto passes. The first veto was rejected before runtime; the future Agent Execution Surface and Containment Gate remains recorded outside this tranche.",
+    "protected_evidence_boundaries": "Review is limited to the exact committed diff and allowlisted authored-synthetic contracts, evidence, tests, harnesses and review-control ledgers. It must not start Docker/PostgreSQL, run runtime harnesses, open protected holdouts, historical Diary, branding, patient/clinical/product-derived data or unrelated paths. Mutable current behavior evidence remains failed attempt 020 and is not accepted or stageable. Application runtime, watcher/listener/feed, provider/product surfaces beyond verifier transport, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
