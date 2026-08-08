@@ -186,6 +186,18 @@ expected-SQLSTATE presence and only sorted unique five-character SQLSTATE codes
 from verbose stderr before failing closed; no raw message or SQL value is
 retained.
 
+Attempt `6ea7c4ed9d5c79df86e9f73c` reproduced stable readiness and returned bounded
+SQLSTATE `42704`; rollback stderr was exactly 116 bytes with SHA-256
+`1bac1a987ff9446ef3724201b06318fb8f9fc16a9aea12df020e16d005e27601`.
+A bounded reconstruction of PostgreSQL's verbose error for artifact line 29,
+`pg_catalog.smallint` missing at `typenameType` in `parse_type.c:270`, has the
+identical byte count and digest. This mechanically identifies the first
+failure: the renderer schema-qualified SQL aliases (`smallint`, `integer`,
+`bigint`, `boolean`) rather than their physical catalog names (`int2`, `int4`,
+`int8`, `bool`). The parent renderer now preserves logical contract type names
+but emits only physical names into SQL, including hard-coded xid/count and
+boolean literal paths. No application type or semantic digest preimage changes.
+
 ## Claim boundary
 
 This recovery grants no further database execution until the corrected parent

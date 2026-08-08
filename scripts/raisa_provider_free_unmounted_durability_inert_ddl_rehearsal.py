@@ -333,13 +333,19 @@ def _ident(identifier: str) -> str:
 
 def _type_sql(type_name: str) -> str:
     """Normalize a qualified type to PostgreSQL SQL type text."""
+    physical_catalog_types = {
+        "pg_catalog.boolean": "pg_catalog.bool",
+        "pg_catalog.bigint": "pg_catalog.int8",
+        "pg_catalog.integer": "pg_catalog.int4",
+        "pg_catalog.smallint": "pg_catalog.int2",
+    }
     if type_name == "pg_catalog.trigger":
         return "trigger"
     if type_name.endswith("[]"):
         base = _type_sql(type_name[:-2])
         return base + "[]"
     if type_name.startswith("pg_catalog."):
-        return type_name
+        return physical_catalog_types.get(type_name, type_name)
     if type_name.startswith("public."):
         return type_name
     if type_name.startswith(FABRIC):
@@ -358,7 +364,8 @@ def _type_sql(type_name: str) -> str:
         "trigger",
     }
     if type_name in builtins:
-        return PG + type_name
+        qualified = PG + type_name
+        return physical_catalog_types.get(qualified, qualified)
     if type_name in APPLICATION_RELATIONS:
         return "public." + type_name
     return FABRIC + type_name
@@ -1431,7 +1438,7 @@ def derive_effective_body(
 # ---------------------------------------------------------------------------
 
 CURRENT_XID32_SQL = (
-    "((((pg_catalog.pg_current_xact_id()::pg_catalog.text)::pg_catalog.bigint "
+    "((((pg_catalog.pg_current_xact_id()::pg_catalog.text)::pg_catalog.int8 "
     "& 4294967295)::pg_catalog.text)::pg_catalog.xid)"
 )
 
@@ -1487,7 +1494,7 @@ def _literal(value: Any, type_name: str) -> str:
         return "NULL::" + _type_sql(type_name)
     text = _literal_text(value)
     if base == "pg_catalog.boolean":
-        return ("TRUE" if value else "FALSE") + "::pg_catalog.boolean"
+        return ("TRUE" if value else "FALSE") + "::" + _type_sql(base)
     if base in ("pg_catalog.bigint", "pg_catalog.integer", "pg_catalog.smallint"):
         return str(value) + "::" + _type_sql(base)
     return text + "::" + _type_sql(base)
@@ -1739,7 +1746,9 @@ def render_expr(expr: dict[str, Any]) -> str:
         return (
             "(pg_catalog.coalesce(pg_catalog.array_length("
             + render_expr(expr["operand"])
-            + ", 1), 0)::pg_catalog.bigint)"
+            + ", 1), 0)::"
+            + _type_sql("pg_catalog.bigint")
+            + ")"
         )
     if op == "ARRAY_CONST":
         return _render_array_const(expr)
@@ -2947,7 +2956,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.0"
+RENDERER_VERSION = "2.0.1"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

@@ -29,6 +29,7 @@ from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import
     _derive_conflict_constraint,
     _emit_lock_exact,
     _ordered_composites,
+    _type_sql,
     _verify_trigger_terminals,
     _walk_program_nodes,
     build_lowering_contract,
@@ -200,6 +201,26 @@ def test_isolated_renders_are_byte_identical() -> None:
     assert first["sql_text"] == second["sql_text"]
     assert first["manifest"] == second["manifest"]
     assert first["sql_text"].endswith("\n")
+
+
+def test_renderer_uses_physical_pg_catalog_type_names() -> None:
+    sql = _base_render()["sql_text"]
+    assert _type_sql("pg_catalog.boolean") == "pg_catalog.bool"
+    assert _type_sql("pg_catalog.bigint") == "pg_catalog.int8"
+    assert _type_sql("pg_catalog.integer") == "pg_catalog.int4"
+    assert _type_sql("pg_catalog.smallint") == "pg_catalog.int2"
+    assert _type_sql("pg_catalog.bigint[]") == "pg_catalog.int8[]"
+
+    # Logical type labels remain in quoted semantic-digest preimages, while
+    # executable casts and declarations use PostgreSQL's physical catalog
+    # names so a schema-qualified parse cannot resolve the wrong object kind.
+    assert "'pg_catalog.bigint'" in sql
+    for alias in ("boolean", "bigint", "integer", "smallint"):
+        assert f"::pg_catalog.{alias}" not in sql
+    assert "CREATE DOMAIN emr4_context_fabric.frame_mask AS pg_catalog.int2" in sql
+    assert "    eligible pg_catalog.bool," in sql
+    assert "    stream_epoch pg_catalog.int8," in sql
+    assert "0::pg_catalog.int4" in sql
 
 
 def test_canonical_artifacts_regenerate_exactly() -> None:
@@ -999,7 +1020,7 @@ def test_renderer_fails_closed_on_null_constants() -> None:
     # None must never be quoted as Python text or an identifier.
     assert "None::" not in sql
     assert "'None'::" not in sql
-    assert "NULL::pg_catalog.bigint" in sql
+    assert "NULL::pg_catalog.int8" in sql
     assert "NULL::pg_catalog.timestamptz" in sql
 
 

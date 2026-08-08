@@ -2750,10 +2750,10 @@
     ]
   },
   "postgresql_major": 16,
-  "renderer_version": "2.0.0",
+  "renderer_version": "2.0.1",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
-  "sql_byte_count": 1405495,
-  "sql_sha256": "sha256:5e23fce2a805b02ec903c8dd93e25836224e2fc098f19e6ab011a8f2341b299f",
+  "sql_byte_count": 1404044,
+  "sql_sha256": "sha256:e478cc60a02196bce72e2ea219f792d2f2ba0fe01e076754b0ebbdfd80ef7b18",
   "statement_count": 412,
   "structural_parent": {
     "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",
