@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 97,
+  "register_revision": 98,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4514,6 +4514,48 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-97.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0119",
+      "attempt_id": "raisa-context-fabric-durability-behavior-bootstrap-telemetry-002",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Safe database diagnostics must be sufficient to identify a fixed synthetic fixture defect without releasing raw error text or relying on speculative static repair cycles.",
+      "observed_error": "The SQLSTATE diagnostic correctly exposed 23502 but a not-null violation still spans multiple fixed bootstrap relations and columns. SQLSTATE alone classified the error but did not identify the exact allowlisted synthetic schema coordinate needed for a bounded repair.",
+      "detection_method": "Failure evidence 004 contains the newly admitted SQLSTATE 23502, zero scenarios and verified cleanup. Static comparison of all bootstrap INSERT columns showed that several relations remain possible without the verbose protocol's schema/table/column fields.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-004.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-98.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.bootstrap_sqlstate_without_allowlisted_coordinate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The harness now admits schema, relation and column only when verbose psql supplies exactly one of each and the resulting schema-qualified relation plus column belongs to the fixed bootstrap allowlist. Ambiguous or unlisted coordinates release only the SQLSTATE. Raw messages remain discarded.",
+        "prevention_control": "For fixed synthetic database rehearsals, define an explicit per-relation diagnostic-coordinate allowlist before runtime; release only the minimum protocol coordinate that is both non-data and necessary to resolve a failure class.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-98.md"
         ]
       },
       "status": "corrected"

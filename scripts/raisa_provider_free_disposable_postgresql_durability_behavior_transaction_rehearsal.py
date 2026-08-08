@@ -75,6 +75,113 @@ SQLSTATE = re.compile(r"^[0-9A-Z]{5}$")
 PSQL_SQLSTATE_LINE = re.compile(
     rb"(?m)^(?:psql:[^\r\n]{1,160}:\s*)?ERROR:\s+([0-9A-Z]{5}):"
 )
+PSQL_DIAGNOSTIC_LINE = re.compile(
+    rb"(?m)^(SCHEMA NAME|TABLE NAME|COLUMN NAME):\s+([a-z][a-z0-9_]*)\s*$"
+)
+
+SAFE_BOOTSTRAP_COLUMNS = {
+    "public.appointments": {
+        "id",
+        "practice_id",
+        "practitioner_id",
+        "location_id",
+        "start_time",
+        "duration_minutes",
+    },
+    "emr4_context_fabric.context_service_practice_binding": {
+        "database_login",
+        "logical_capability",
+        "practice_id",
+        "source_contract_id",
+        "binding_revision",
+        "credential_epoch",
+        "active_from",
+        "active_until",
+        "stream_id",
+    },
+    "emr4_context_fabric.context_generation_registry_barrier": {
+        "practice_id",
+        "source_contract_id",
+        "stream_id",
+        "barrier_revision",
+        "updated_at",
+    },
+    "emr4_context_fabric.context_observer_generation": {
+        "practice_id",
+        "source_contract_id",
+        "stream_id",
+        "stream_epoch",
+        "observer_id",
+        "observer_generation",
+        "lifecycle_state",
+        "policy_digest",
+        "principal_digest",
+        "binding_digest",
+        "source_digest",
+        "registry_digest",
+        "impact_digest",
+        "key_schedule_digest",
+        "created_at",
+        "consumed_at",
+        "terminal_reason",
+    },
+    "emr4_context_fabric.context_durability_checkpoint": {
+        "practice_id",
+        "source_contract_id",
+        "stream_id",
+        "stream_epoch",
+        "observer_id",
+        "observer_generation",
+        "checkpoint_state",
+        "last_contiguous_position",
+        "last_observation_digest",
+        "lifecycle_revision",
+        "audit_head_digest",
+        "checkpoint_integrity_digest",
+        "updated_at",
+    },
+    "emr4_context_fabric.context_frame_generation": {
+        "practice_id",
+        "source_contract_id",
+        "stream_id",
+        "stream_epoch",
+        "observer_id",
+        "observer_generation",
+        "frame_generation_id",
+        "frame_type",
+        "assembled_through_position",
+        "lifecycle_state",
+        "created_at",
+        "retired_at",
+    },
+    "emr4_context_fabric.context_invalidation_watermark": {
+        "practice_id",
+        "source_contract_id",
+        "stream_id",
+        "stream_epoch",
+        "observer_id",
+        "observer_generation",
+        "frame_type",
+        "watermark_position",
+        "updated_at",
+    },
+    "emr4_context_fabric.context_reassembly_obligation": {
+        "practice_id",
+        "source_contract_id",
+        "stream_id",
+        "stream_epoch",
+        "observer_id",
+        "observer_generation",
+        "frame_generation_id",
+        "earliest_position",
+        "latest_position",
+        "rolling_cause_digest",
+        "count_bucket",
+        "obligation_state",
+        "created_at",
+        "updated_at",
+    },
+}
 
 APPLICATION_RELATIONS = (
     "appointments",
@@ -175,6 +282,36 @@ def _safe_sqlstate(result: parent.ProcessResult) -> str | None:
         return None
     value = next(iter(matches)).decode("ascii")
     return value if SQLSTATE.fullmatch(value) else None
+
+
+def _safe_bootstrap_failure_metadata(
+    result: parent.ProcessResult,
+) -> dict[str, str]:
+    metadata: dict[str, str] = {}
+    sqlstate = _safe_sqlstate(result)
+    if sqlstate is not None:
+        metadata["sqlstate"] = sqlstate
+
+    raw = result.stdout + b"\n" + result.stderr
+    fields: dict[bytes, set[bytes]] = {}
+    for name, value in PSQL_DIAGNOSTIC_LINE.findall(raw):
+        fields.setdefault(name, set()).add(value)
+    if any(
+        len(fields.get(name, set())) != 1
+        for name in (b"SCHEMA NAME", b"TABLE NAME", b"COLUMN NAME")
+    ):
+        return metadata
+
+    schema = next(iter(fields[b"SCHEMA NAME"])).decode("ascii")
+    table = next(iter(fields[b"TABLE NAME"])).decode("ascii")
+    column = next(iter(fields[b"COLUMN NAME"])).decode("ascii")
+    relation = f"{schema}.{table}"
+    if (
+        relation in SAFE_BOOTSTRAP_COLUMNS
+        and column in SAFE_BOOTSTRAP_COLUMNS[relation]
+    ):
+        metadata.update(relation=relation, column=column)
+    return metadata
 
 
 def _canonical_bytes(path: Path) -> bytes:
@@ -2033,7 +2170,9 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
         )
         if bootstrap.returncode != 0:
             raise BehaviorFailure(
-                "fixture", "bootstrap_failed", _safe_sqlstate(bootstrap) or ""
+                "fixture",
+                "bootstrap_failed",
+                _safe_bootstrap_failure_metadata(bootstrap),
             )
         fixture_catalogue = parent._read_catalogue(  # noqa: SLF001
             runner, docker, container_id, profile["postgres_database"], profile
@@ -2107,13 +2246,23 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
         "claim_boundary": CLAIM_BOUNDARY,
     }
     if failure is not None:
+        detail = failure.detail
+        detail_bytes = (
+            json.dumps(detail, sort_keys=True, separators=(",", ":")).encode("utf-8")
+            if isinstance(detail, dict)
+            else str(detail).encode("utf-8")
+        )
         failure_evidence = {
             "stage": failure.stage,
             "code": failure.code,
-            "detail_digest": _sha256(str(failure.detail).encode("utf-8")),
+            "detail_digest": _sha256(detail_bytes),
         }
-        if SQLSTATE.fullmatch(str(failure.detail)):
-            failure_evidence["sqlstate"] = str(failure.detail)
+        if isinstance(detail, dict):
+            for name in ("sqlstate", "relation", "column"):
+                if isinstance(detail.get(name), str):
+                    failure_evidence[name] = detail[name]
+        elif SQLSTATE.fullmatch(str(detail)):
+            failure_evidence["sqlstate"] = str(detail)
         evidence["environment"]["failure"] = failure_evidence
     evidence["environment"]["elapsed_ms"] = int((time.monotonic() - started) * 1000)
     return evidence

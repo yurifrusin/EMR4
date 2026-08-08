@@ -45,6 +45,11 @@ FAILURE_EVIDENCE_003 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_004 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-004.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -163,6 +168,17 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
     )
     assert FAILURE_EVIDENCE_003["scenario_reconciliation"]["observed"] == 0
     assert FAILURE_EVIDENCE_003["cleanup"]["absence_verified"] is True
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_004)
+    assert FAILURE_EVIDENCE_004["environment"]["failure"] == {
+        "code": "bootstrap_failed",
+        "detail_digest": FAILURE_EVIDENCE_004["environment"]["failure"][
+            "detail_digest"
+        ],
+        "sqlstate": "23502",
+        "stage": "fixture",
+    }
+    assert FAILURE_EVIDENCE_004["scenario_reconciliation"]["observed"] == 0
+    assert FAILURE_EVIDENCE_004["cleanup"]["absence_verified"] is True
 
 
 def test_bootstrap_failure_telemetry_releases_only_one_safe_sqlstate() -> None:
@@ -203,6 +219,47 @@ def test_bootstrap_failure_telemetry_releases_only_one_safe_sqlstate() -> None:
         "passed": 0,
     }
     jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+
+def test_bootstrap_diagnostic_metadata_is_exactly_allowlisted() -> None:
+    accepted = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        (
+            b"psql:<stdin>:19: ERROR:  23502: prohibited message\n"
+            b"SCHEMA NAME:  emr4_context_fabric\n"
+            b"TABLE NAME:  context_durability_checkpoint\n"
+            b"COLUMN NAME:  audit_head_digest\n"
+        ),
+    )
+    assert rehearsal._safe_bootstrap_failure_metadata(accepted) == {
+        "sqlstate": "23502",
+        "relation": "emr4_context_fabric.context_durability_checkpoint",
+        "column": "audit_head_digest",
+    }
+
+    unlisted = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        (
+            b"ERROR:  23502: prohibited message\n"
+            b"SCHEMA NAME:  private\nTABLE NAME:  patient\nCOLUMN NAME:  name\n"
+        ),
+    )
+    assert rehearsal._safe_bootstrap_failure_metadata(unlisted) == {"sqlstate": "23502"}
+
+    ambiguous = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        (
+            b"ERROR:  23502: prohibited message\n"
+            b"SCHEMA NAME:  public\nSCHEMA NAME:  emr4_context_fabric\n"
+            b"TABLE NAME:  appointments\nCOLUMN NAME:  id\n"
+        ),
+    )
+    assert rehearsal._safe_bootstrap_failure_metadata(ambiguous) == {
+        "sqlstate": "23502"
+    }
 
 
 def test_parent_catalogue_reuse_preserves_descendant_database_binding(

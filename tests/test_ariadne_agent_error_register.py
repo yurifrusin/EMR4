@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 97
+    assert register["register_revision"] == 98
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 119)
+        f"AER-{index:04d}" for index in range(1, 120)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -1571,21 +1571,32 @@ def test_aer_0117_and_0118_correct_causal_overclaim_and_safe_telemetry() -> None
     assert "SQLSTATE" in telemetry["correction"]["prevention_control"]
 
 
+def test_aer_0119_adds_only_an_allowlisted_bootstrap_coordinate() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0119"]
+
+    assert incident["origin"] == "harness"
+    assert incident["related_incident_ids"] == []
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "per-relation" in incident["correction"]["prevention_control"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 118
+    assert report["incident_count"] == 119
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 93,
-        "harness": 10,
+        "harness": 11,
         "repository": 7,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
         "evidence_misreport": 16,
-        "harness_failure": 10,
+        "harness_failure": 11,
         "output_contract_violation": 36,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
@@ -1593,7 +1604,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 15,
+        "accepted_candidate_changed": 16,
         "canonical_unchanged": 81,
         "untrusted_partial_worktree": 22,
     }

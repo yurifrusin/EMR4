@@ -81,7 +81,20 @@
             "stage": {"type": "string", "minLength": 1},
             "code": {"type": "string", "minLength": 1},
             "detail_digest": {"$ref": "#/$defs/digest"},
-            "sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"}
+            "sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"},
+            "relation": {
+              "enum": [
+                "public.appointments",
+                "emr4_context_fabric.context_service_practice_binding",
+                "emr4_context_fabric.context_generation_registry_barrier",
+                "emr4_context_fabric.context_observer_generation",
+                "emr4_context_fabric.context_durability_checkpoint",
+                "emr4_context_fabric.context_frame_generation",
+                "emr4_context_fabric.context_invalidation_watermark",
+                "emr4_context_fabric.context_reassembly_obligation"
+              ]
+            },
+            "column": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}
           }
         },
         "elapsed_ms": {"type": "integer", "minimum": 0}

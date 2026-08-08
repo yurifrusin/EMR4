@@ -103,3 +103,17 @@ tightly anchored psql error line, hashes the otherwise empty safe detail and
 continues to release no SQL, rows or error prose. AER-0118 records that harness
 gap. The diagnostic run remains closed until fresh deterministic and
 independent acceptance.
+
+## Fourth runtime failure and coordinate strengthening
+
+Failure evidence 004 proves that the remaining bootstrap error is PostgreSQL
+`23502` (not-null violation), still before all scenarios, with verified cleanup.
+The SQLSTATE-only boundary worked but could not distinguish the fixed candidate
+columns without speculation.
+
+The next diagnostic admits a schema-qualified relation and column only if
+verbose psql supplies exactly one of each and that exact pair belongs to the
+hard-coded bootstrap allowlist. Ambiguous or unlisted metadata releases only
+SQLSTATE; raw errors, SQL and values remain discarded. AER-0119 records this
+minimal extension. Another diagnostic run remains closed until fresh
+deterministic and independent acceptance.
