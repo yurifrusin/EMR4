@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 232,
+  "graph_revision": 233,
   "harvests": [],
   "nodes": [
     {
@@ -14409,6 +14409,113 @@
       "unresolved_gates": [
         "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
         "Function/trigger/RLS behavior, concurrency, application rollback and idempotency remain separate gates.",
+        "Applied migration, operational database/outbox/feed/watcher/listener/source access, persistence and credentials remain closed.",
+        "Product reads, providers, routes, commands, deployment, production, release, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan",
+      "title": "Disposable PostgreSQL durability behavior/transaction rehearsal plan",
+      "kind": "concept",
+      "status": "accepted",
+      "created_at": "2026-08-08T00:00:00Z",
+      "updated_at": "2026-08-08T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "07e8750548ed69aba5a19f693a72397121a340e5",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted result freezes twenty authored-synthetic serial scenarios but proves no database behavior.",
+          "A future implementation remains limited to one owned networkless tmpfs-only local PostgreSQL 16 container with exact-ID cleanup.",
+          "No applied migration, operational database/source, product read, provider product path, command, deployment or protected capability is opened.",
+          "Yuri explicitly requested a pause after this planning closeout, so runtime implementation has not begun."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-disposable-postgresql-durability-behavior-transaction-rehearsal-plan",
+          "source": "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the exact twenty-scenario behavior/transaction experiment specification while keeping all runtime and operational authority closed."
+        }
+      ],
+      "claim_scope": [
+        "Exactly twenty ordered scenarios cover 6 entry-point, 4 trigger, 3 RLS/privilege, 4 idempotency and 3 rollback cases.",
+        "All six text parents are canonical UTF-8/LF SHA-256 bound without changing a parent artifact.",
+        "Fresh r74 passes 124/124 admitted planning tests and 79/79 AER tests with zero P0-P3 findings.",
+        "The result proves planning completeness only; no Docker/PostgreSQL behavior run occurred."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
+            "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-correction-review-receipt.json",
+            "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md"
+          ],
+          "note": "The plan freezes one synthetic update-confirm projection thread without opening a product command or event runtime."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
+            "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md"
+          ],
+          "note": "Every fixture is opaque and authored-synthetic; no patient identity, name, reason or clinical value is admitted."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-correction-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-92.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-correction-veto-predispatch-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_continuity_engine.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.schema.json",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
+        "The fixed harness, fresh implementation veto and twenty-scenario disposable PostgreSQL run remain unstarted.",
+        "Concurrency, key rotation, retention execution and unknown-commit recovery remain later finite gates.",
         "Applied migration, operational database/outbox/feed/watcher/listener/source access, persistence and credentials remain closed.",
         "Product reads, providers, routes, commands, deployment, production, release, Pages and protected refs remain closed."
       ]

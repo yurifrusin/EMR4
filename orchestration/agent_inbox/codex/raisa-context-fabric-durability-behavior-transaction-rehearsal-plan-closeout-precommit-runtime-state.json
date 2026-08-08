@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_accepted_behavior_transaction_rehearsal_plan_closeout_and_pause",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records the accepted twenty-scenario behavior/transaction planning result at exact reviewed source 07e8750548ed69aba5a19f693a72397121a340e5 and Yuri's explicit pause before runtime implementation.",
+    "current_authority_allocation": "GPT Sol owns planning acceptance, closeout and task-branch publication. The fresh Gemini 3.6 Flash/high r74 veto supplied independent read-only review only. No implementation worker or database runtime is active.",
+    "active_plan_and_acceptance": "The plan, design, threat delta, whole-document contract/schema and 27 plan tests freeze exactly twenty serial scenarios. Fresh r74 passes all 124 admitted planning tests and 79 AER tests with zero P0-P3; the final closeout packet passes 142 checks and advances Continuity 233 / Compass 215.",
+    "protected_evidence_boundaries": "The accepted result proves planning completeness only. Docker/PostgreSQL behavior execution, applied migration, application/API/Diary wiring, operational credentials/persistence/source access, patient/product/protected data, providers, commands, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked paths remain preserved and excluded.",
+    "git_refs_and_worktree": "The closeout descends from exact independently reviewed task commit 07e8750548ed69aba5a19f693a72397121a340e5. Review worktree r74 remains clean at that HEAD. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; explicit-path staging will include only the closeout, review, Continuity/Compass and acceptance artifacts."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_transaction_plan_closeout_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed exact closeout verification and the requested pause boundary is durable."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was used for this tightly coupled planning closeout."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh r74 Gemini 3.6 Flash/high returned pass with exact counts and a clean unchanged postflight."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease was opened."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

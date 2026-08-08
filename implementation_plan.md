@@ -138,8 +138,12 @@ and-trigger-body descendant pass fresh exact-head acceptance. Their recovered
 inert DDL lowering also passes at exact independently reviewed source HEAD
 `46e16622471a192353cb82a33acf301dc2cfb7aa`: one byte-stable PostgreSQL-16
 artifact statically closes the exact catalogue, trigger, owner and privilege
-inventory without execution. A separately bounded disposable local
-PostgreSQL-16 parse-and-catalogue rehearsal is next. Applied migration,
+inventory without execution. The disposable local PostgreSQL-16 parse-and-
+catalogue rehearsal now passes, and its next provider-free database-backed
+behavior/transaction experiment is completely frozen at exact independently
+reviewed planning source `07e8750548ed69aba5a19f693a72397121a340e5` as
+twenty serial authored-synthetic entry-point, trigger, RLS, idempotency and
+rollback scenarios. No behavior runtime has begun. Applied migration,
 application behavior, operational database/source access and runtime remain
 closed.
 
@@ -537,10 +541,15 @@ generation rehearsal. The architecture-only provider-free default-off
   installs atomically, the fixed failed copy rolls back without surviving
   Fabric objects or roles, all fifteen value-bearing catalogue digests match,
   and exact-ID cleanup proves absence. This proves server admission and metadata
-  shape only. The next bounded descendant is a separately frozen provider-free
-  database-backed authored-synthetic behavior/transaction rehearsal. Applied
-  migration, application wiring, operational database/source access and every
-  real-product or clinical descendant remain closed.
+  shape only. The provider-free database-backed authored-synthetic behavior/
+  transaction rehearsal plan now also passes at exact independently reviewed
+  planning source `07e8750548ed69aba5a19f693a72397121a340e5`. Its exact
+  twenty-scenario population covers selected entry-point, trigger, RLS,
+  idempotency and outer-rollback paths with fixed principals, fixtures,
+  SQLSTATEs, readback and container containment. It proves planning
+  completeness, not database behavior; the fixed harness and runtime remain
+  unstarted. Applied migration, application wiring, operational database/source
+  access and every real-product or clinical descendant remain closed.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

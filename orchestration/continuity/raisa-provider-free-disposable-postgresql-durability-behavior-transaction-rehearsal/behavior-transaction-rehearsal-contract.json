@@ -1,6 +1,6 @@
 {
   "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-behavior-transaction-rehearsal.v1",
-  "status": "candidate_pending_independent_veto",
+  "status": "accepted_plan_runtime_closed",
   "planning_baseline_head": "bc0120f574ff4a9fb34a5d463537542f906c5916",
   "evidence_label": "provider_free_disposable_postgresql_authored_synthetic_behavior_transaction",
   "parent_bindings": [

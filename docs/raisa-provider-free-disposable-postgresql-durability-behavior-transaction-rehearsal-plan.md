@@ -2,8 +2,10 @@
 
 Date: 2026-08-08
 
-Status: candidate pending deterministic plan gate and fresh exact-HEAD
-independent veto; runtime remains closed
+Status: accepted as
+`raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan_pass`
+at exact independently reviewed planning source
+`07e8750548ed69aba5a19f693a72397121a340e5`; runtime remains closed
 
 Parent result:
 `raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`
