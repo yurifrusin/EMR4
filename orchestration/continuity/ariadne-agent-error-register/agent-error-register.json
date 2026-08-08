@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 95,
+  "register_revision": 96,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4391,6 +4391,48 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-95.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0116",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-002",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "Every authored-synthetic fixture row must be ordered after all foreign-key parents required by the accepted PostgreSQL catalogue, including rows used only to prove cross-practice application-read isolation.",
+      "observed_error": "The second admitted runtime passed catalogue reconciliation but failed closed during fixture bootstrap with zero scenarios. Static foreign-key tracing found that the practice-beta observer generation was inserted without its required generation-registry barrier and its invalidation watermark was inserted without its required durability checkpoint.",
+      "detection_method": "Failure evidence 002 established the new first-effective boundary as fixture/bootstrap_failed after successful catalogue reconciliation, with no scenario execution and verified cleanup. Sol then traced the beta-only projection fixture through fk_cf_06_01 and fk_cf_11_01 in the exact admitted SQL catalogue.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-002.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-96.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.synthetic_fixture_foreign_key_topology_gap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed evidence is preserved. The beta seed is now one explicit dependency chain: generation-registry barrier, observer generation, durability checkpoint, frame generation, invalidation watermark and reassembly obligation. A static test freezes that CTE order and the exact parent references. The repair remains runtime-closed pending deterministic checks and a fresh exact-HEAD veto.",
+        "prevention_control": "Before any synthetic PostgreSQL fixture is admitted, mechanically derive a relation dependency DAG from the accepted foreign-key catalogue and require the rendered bootstrap to reference every parent CTE before each child; projection-only isolation rows are not exempt.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-002.json",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-96.md"
         ]
       },
       "status": "corrected"

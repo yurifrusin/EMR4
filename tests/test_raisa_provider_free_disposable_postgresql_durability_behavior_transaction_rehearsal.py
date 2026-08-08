@@ -35,6 +35,11 @@ FAILURE_EVIDENCE = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_002 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-002.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -139,6 +144,13 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
         "removed": True,
         "status": "cleanup_verified",
     }
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_002)
+    assert FAILURE_EVIDENCE_002["environment"]["failure"]["stage"] == "fixture"
+    assert FAILURE_EVIDENCE_002["environment"]["failure"]["code"] == (
+        "bootstrap_failed"
+    )
+    assert FAILURE_EVIDENCE_002["scenario_reconciliation"]["observed"] == 0
+    assert FAILURE_EVIDENCE_002["cleanup"]["absence_verified"] is True
 
 
 def test_parent_catalogue_reuse_preserves_descendant_database_binding(
@@ -193,6 +205,25 @@ def test_parent_catalogue_reuse_preserves_descendant_database_binding(
         "catalogue",
         "server_or_database",
     )
+
+
+def test_bootstrap_closes_beta_projection_foreign_key_topology() -> None:
+    sql = rehearsal.render_bootstrap_sql(CONTRACT).decode("utf-8")
+
+    ctes = [
+        "WITH beta_barrier AS (",
+        "), beta_generation AS (",
+        "), beta_checkpoint AS (",
+        "), beta_frame AS (",
+        "), beta_watermark AS (",
+        "), beta_obligation AS (",
+    ]
+    offsets = [sql.index(cte) for cte in ctes]
+    assert offsets == sorted(offsets)
+    assert "FROM beta_barrier" in sql
+    assert sql.count("FROM beta_checkpoint") == 2
+    assert "FROM beta_frame" in sql
+    assert "last_contiguous_position,last_observation_digest,lifecycle_revision" in sql
 
 
 def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:

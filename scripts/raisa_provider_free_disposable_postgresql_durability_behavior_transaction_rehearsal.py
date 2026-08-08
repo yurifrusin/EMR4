@@ -916,15 +916,31 @@ INSERT INTO public.appointments
 (id,practice_id,practitioner_id,location_id,start_time,duration_minutes)
 VALUES
 {appointment_rows};
-WITH beta_generation AS (
+WITH beta_barrier AS (
+  INSERT INTO emr4_context_fabric.context_generation_registry_barrier
+  (practice_id,source_contract_id,stream_id,barrier_revision,updated_at)
+  VALUES ({_lit(f["practice_beta"])}::pg_catalog.uuid,{_lit(f["source_contract_id"])},
+          {_lit(f["stream_beta"])}::pg_catalog.uuid,0,pg_catalog.transaction_timestamp())
+  RETURNING practice_id,source_contract_id,stream_id
+), beta_generation AS (
   INSERT INTO emr4_context_fabric.context_observer_generation
   (practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,lifecycle_state,
    policy_digest,principal_digest,binding_digest,source_digest,registry_digest,impact_digest,key_schedule_digest,created_at)
-  VALUES ({_lit(f["practice_beta"])}::pg_catalog.uuid,{_lit(f["source_contract_id"])},
-          {_lit(f["stream_beta"])}::pg_catalog.uuid,1,{_lit(f["observer_happy"])}::pg_catalog.uuid,1,'ACTIVE',
-          {_lit(f["digest_policy"])},{_lit(f["digest_principal"])},{_lit(f["digest_binding"])},
-          {_lit(f["digest_source"])},{_lit(f["digest_registry"])},{_lit(f["digest_impact"])},
-          {_lit(f["digest_key_schedule"])},pg_catalog.transaction_timestamp())
+  SELECT practice_id,source_contract_id,stream_id,1,{_lit(f["observer_happy"])}::pg_catalog.uuid,1,'ACTIVE',
+         {_lit(f["digest_policy"])},{_lit(f["digest_principal"])},{_lit(f["digest_binding"])},
+         {_lit(f["digest_source"])},{_lit(f["digest_registry"])},{_lit(f["digest_impact"])},
+         {_lit(f["digest_key_schedule"])},pg_catalog.transaction_timestamp()
+  FROM beta_barrier
+  RETURNING practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation
+), beta_checkpoint AS (
+  INSERT INTO emr4_context_fabric.context_durability_checkpoint
+  (practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,
+   checkpoint_state,last_contiguous_position,last_observation_digest,lifecycle_revision,
+   audit_head_digest,checkpoint_integrity_digest,updated_at)
+  SELECT practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,
+         'ACTIVE',0,NULL,0,{_lit(f["digest_observation_primary"])},
+         {_lit(f["digest_key_attestation"])},pg_catalog.transaction_timestamp()
+  FROM beta_generation
   RETURNING practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation
 ), beta_frame AS (
   INSERT INTO emr4_context_fabric.context_frame_generation
@@ -932,13 +948,13 @@ WITH beta_generation AS (
    frame_type,assembled_through_position,lifecycle_state,created_at,retired_at)
   SELECT practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,
          pg_catalog.gen_random_uuid(),'CURRENT_DIARY_PROJECTION',0,'CURRENT',pg_catalog.transaction_timestamp(),NULL
-  FROM beta_generation
+  FROM beta_checkpoint
   RETURNING practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,frame_generation_id
 ), beta_watermark AS (
   INSERT INTO emr4_context_fabric.context_invalidation_watermark
   (practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,frame_type,watermark_position,updated_at)
   SELECT practice_id,source_contract_id,stream_id,stream_epoch,observer_id,observer_generation,
-         'CURRENT_DIARY_PROJECTION',0,pg_catalog.transaction_timestamp() FROM beta_frame
+         'CURRENT_DIARY_PROJECTION',0,pg_catalog.transaction_timestamp() FROM beta_checkpoint
   RETURNING practice_id
 ), beta_obligation AS (
   INSERT INTO emr4_context_fabric.context_reassembly_obligation

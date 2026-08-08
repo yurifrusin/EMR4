@@ -70,3 +70,19 @@ private sentinel, and then invokes the unchanged parent structural assertion.
 AER-0115 records the error and prevention control. No second run is eligible
 until the repair receives deterministic acceptance and a fresh exact-HEAD
 independent veto.
+
+## Second runtime failure and bounded repair
+
+The corrected database-binding run passed catalogue reconciliation and then
+failed closed during fixture bootstrap, again before any behavior scenario.
+The immutable second failure is preserved as
+`provider-free-behavior-transaction-failure-evidence-002.json`; exact container
+cleanup and absence were verified.
+
+Foreign-key tracing found that the beta-practice isolation fixture omitted the
+generation-registry barrier required by its observer generation and the
+durability checkpoint required by its invalidation watermark. The repair makes
+the entire beta fixture an explicit CTE dependency chain from barrier through
+generation, checkpoint, frame, watermark and obligation. No application or
+Fabric production DDL changed. AER-0116 records the failure, and a third run is
+closed until the repaired exact HEAD receives a fresh independent veto.
