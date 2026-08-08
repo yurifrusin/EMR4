@@ -2,15 +2,15 @@
 
 Date: 2026-08-07
 
-Status: bounded composite-dependency recovery candidate; corrected parent
-artifact source is `4911cba926cb69b4f7f945a77d744ff07ab2d3d4`,
+Status: bounded physical-catalog-type recovery candidate; corrected parent
+artifact source is `79e490d204e3383ecc14a41c9a5de94429da65f5`,
 with fresh exact-HEAD descendant veto required before another runtime attempt
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`
 
 Accepted corrected parent source HEAD:
-`4911cba926cb69b4f7f945a77d744ff07ab2d3d4`
+`79e490d204e3383ecc14a41c9a5de94429da65f5`
 
 Planning baseline HEAD:
 `253230a25ab172b90bc5f44772670c7df89b3052`
@@ -19,7 +19,7 @@ Parent inert SQL artifact:
 `orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert`
 
 Parent inert SQL SHA-256:
-`sha256:5e23fce2a805b02ec903c8dd93e25836224e2fc098f19e6ab011a8f2341b299f`
+`sha256:e478cc60a02196bce72e2ea219f792d2f2ba0fe01e076754b0ebbdfd80ef7b18`
 
 ## Objective
 
@@ -60,7 +60,7 @@ only fixed repository paths for:
 4. its own fixed catalogue-query and evidence-schema definitions.
 
 Before daemon contact it verifies the accepted parent source binding, planning
-baseline, canonical artifact hash, canonical UTF-8/LF byte count `1405495`,
+baseline, canonical artifact hash, canonical UTF-8/LF byte count `1404044`,
 statement count `412`, PostgreSQL major `16`, six ordered phases and exact
 accepted catalogue assertions. The checked-out file may contain Git-managed
 CRLF line endings on Windows; the harness permits only mechanical CRLF-to-LF

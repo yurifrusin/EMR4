@@ -207,3 +207,13 @@ and no application behavior, RLS/trigger execution, Alembic integration,
 operational persistence/credential/source, patient/product data, API/Diary,
 provider product path, deployment, production, release, Pages or protected-ref
 authority.
+
+## Descendant binding after physical type recovery
+
+Parent recovery commit `79e490d204e3383ecc14a41c9a5de94429da65f5`
+binds the corrected 412-statement artifact at canonical UTF-8/LF SHA-256
+`e478cc60a02196bce72e2ea219f792d2f2ba0fe01e076754b0ebbdfd80ef7b18`
+and `1404044` bytes. The disposable descendant may admit only those exact bytes.
+Its characterization-only result remains incapable of passing, and any fresh
+database contact still requires exact-HEAD independent veto and a separately
+owned throwaway container.
