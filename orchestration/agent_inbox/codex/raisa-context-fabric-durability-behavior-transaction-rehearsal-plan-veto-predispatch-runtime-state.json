@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_gemini_36_high_exact_head_behavior_transaction_plan_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the finite provider-free database-backed behavior/transaction rehearsal plan as the next safe descendant and requires a fresh exact-HEAD independent veto before runtime.",
+    "current_authority_allocation": "GPT Sol retains planning, acceptance, recovery, integration and protected authority. Gemini 3.6 Flash/high through a fresh Antigravity project receives read-only independent veto authority over the exact bounded packet only.",
+    "active_plan_and_acceptance": "Candidate commit 1f21a3cca4b6a855fe8992f26023fee1750fd0df freezes twenty serial scenarios and passes the deterministic candidate packet. One pre-existing API Spine index node is reproduced at untouched baseline and explicitly excluded; the candidate changes no API Spine file.",
+    "protected_evidence_boundaries": "The verifier may inspect only the exact candidate diff, six named parents and eight named test files in clean r73. It may not edit, start Docker/PostgreSQL, inspect protected evidence, access product/patient data, call provider/product runtime, deploy, rebuild Pages, fetch, push or move refs.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r73 is bound to branch codex/review-context-fabric-durability-behavior-plan-1f21a3cc at exact candidate HEAD 1f21a3cca4b6a855fe8992f26023fee1750fd0df. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary tracked state is clean and preserved untracked paths remain unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_transaction_plan_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed deterministic predispatch review at exact candidate commit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The immediately preceding r72 Gemini 3.6 Flash/high review completed through the configured Antigravity transport; fresh r73 eligibility still depends on exact preflight and no silent fallback."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

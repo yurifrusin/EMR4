@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 91,
+  "register_revision": 92,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4204,6 +4204,68 @@
         "action": "The r70 pass was preserved but not admitted. Fresh r71 at the same exact clean HEAD explicitly collected and passed 100/9/4/77/14/10/3 tests, 217/217 total, reported zero P0-P3 findings and left its worktree unchanged.",
         "prevention_control": "Final closeout acceptance must bind each required test path to exact per-file collection and pass counts; any missing path or arithmetic mismatch rejects the review even when its terminal decision says pass.",
         "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-retry-worktree-postflight.json", "docs/ariadne-agent-error-correction-register-revision-91.md", "tests/test_ariadne_agent_error_register.py"]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0111",
+      "attempt_id": "raisa-context-fabric-durability-behavior-plan-parent-hash-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-plan",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "Every text parent hash in a cross-worktree planning contract must use one explicit canonical byte rule that survives Git CRLF checkout without weakening content identity.",
+      "observed_error": "Candidate 1f21a3c bound raw checkout bytes for the function/trigger body contract and its test hashed raw bytes, so the exact parent check failed in the fresh Windows review worktree.",
+      "detection_method": "The r73 Gemini veto returned revision_required after reproducing the focused parent-hash test failure. Sol then computed raw and canonical hashes for all six parents and found the body contract was the sole divergent text parent.",
+      "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json", "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json", "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py", "docs/ariadne-agent-error-correction-register-revision-92.md"],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.cross_worktree_parent_hash_without_canonical_text_rule",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The plan now position-closes canonical UTF-8/LF hashing for all six text parents, rejects lone carriage returns, binds the canonical body-contract hash and verifies the complete parent set under that rule.",
+        "prevention_control": "Any future cross-worktree text binding must declare and test one canonical newline rule across every bound text parent rather than special-casing only the principal SQL artifact.",
+        "evidence_paths": ["docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json", "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py", "docs/ariadne-agent-error-correction-register-revision-92.md"]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0112",
+      "attempt_id": "raisa-context-fabric-durability-behavior-plan-review-test-accounting-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-plan",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "The independent plan receipt must reconcile the exact per-file collection counts frozen in its packet before reporting a test total.",
+      "observed_error": "The r73 receipt reported 118 total, 117 admitted and 116 passed although exact independent collection in that clean worktree yielded 27/9/12/7/36/4/7/22 = 124 admitted plus the one named baseline deselection.",
+      "detection_method": "Sol compared the receipt narrative with the packet's frozen per-file arithmetic and independently reran exact per-file collection; the valid P2 finding remained admitted but the count narrative was rejected.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-packet.md", "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json", "docs/ariadne-agent-error-correction-register-revision-92.md"],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.exact_packet_test_count_underreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The valid cross-worktree hash finding was preserved, but the incorrect count narrative receives no acceptance weight. The replacement veto must print and reconcile each of the eight exact per-file counts before a terminal decision.",
+        "prevention_control": "Fresh replacement review admission requires exact per-file collect-only and pass arithmetic, not an aggregate progress-line estimate.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-packet.md", "docs/ariadne-agent-error-correction-register-revision-92.md", "tests/test_ariadne_agent_error_register.py"]
       },
       "status": "corrected"
     }

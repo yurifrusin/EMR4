@@ -32,7 +32,7 @@
       "id": "body_contract",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
       "source_head": "a93d07405ad35d7d6c0603065625c17ec14ab23e",
-      "sha256": "sha256:53fbba53c6f4dd84918df56e1b6532bf506915f73285c4adb03ded3998c7547c"
+      "sha256": "sha256:634dbc5c1a5294c1ac2de6a913671cd968a9838aa763d4c2a4d229bbcd9c0271"
     },
     {
       "id": "parse_prerequisite_contract",

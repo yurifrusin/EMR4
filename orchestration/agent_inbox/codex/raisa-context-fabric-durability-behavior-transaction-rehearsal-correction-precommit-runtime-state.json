@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_behavior_transaction_planning_canonical_hash_and_review_accounting_correction",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the accepted parse/catalogue runtime as the current result and the separately bounded behavior/transaction planning descendant as next. Yuri has explicitly asked Sol to pause after this planning closeout.",
+    "current_authority_allocation": "GPT Sol owns the planning correction and acceptance. Gemini 3.6 Flash/high may perform only a fresh exact-HEAD veto after this commit. No implementation or runtime worker is active.",
+    "active_plan_and_acceptance": "The candidate still freezes exactly twenty serial entry-point, trigger, RLS, idempotency and rollback scenarios. The r73 P2 is corrected by canonical UTF-8/LF hashing across all six text parents; focused 27 tests, the 124-test admitted inherited packet and AER revision 92 checks pass. Runtime remains closed.",
+    "protected_evidence_boundaries": "No Docker/PostgreSQL behavior run, application/Alembic/API/Diary change, operational source or credential, patient/product/protected data, provider, deployment, Pages, release, production or protected-ref action is permitted. Explicit-path staging excludes docs/branding and all unrelated untracked files.",
+    "git_refs_and_worktree": "The staged correction descends from candidate 1f21a3cca4b6a855fe8992f26023fee1750fd0df on the task branch. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicit correction, preserved review evidence, post-restoration receipt and AER revision 92 artifacts are staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_transaction_rehearsal_correction_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol validated and staged the bounded correction by explicit path."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is active for this correction."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["A new independent veto remains pending after the exact correction commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

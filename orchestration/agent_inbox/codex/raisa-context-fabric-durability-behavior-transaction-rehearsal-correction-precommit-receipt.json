@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_behavior_transaction_planning_canonical_hash_and_review_accounting_correction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate still freezes exactly twenty serial entry-point, trigger, RLS, idempotency and rollback scenarios. The r73 P2 is corrected by canonical UTF-8/LF hashing across all six text parents; focused 27 tests, the 124-test admitted inherited packet and AER revision 92 checks pass. Runtime remains closed.",
+    "current_authority_allocation": "GPT Sol owns the planning correction and acceptance. Gemini 3.6 Flash/high may perform only a fresh exact-HEAD veto after this commit. No implementation or runtime worker is active.",
+    "git_refs_and_worktree": "The staged correction descends from candidate 1f21a3cca4b6a855fe8992f26023fee1750fd0df on the task branch. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicit correction, preserved review evidence, post-restoration receipt and AER revision 92 artifacts are staged.",
+    "live_handover_current_baton": "AGENTS.md keeps the accepted parse/catalogue runtime as the current result and the separately bounded behavior/transaction planning descendant as next. Yuri has explicitly asked Sol to pause after this planning closeout.",
+    "protected_evidence_boundaries": "No Docker/PostgreSQL behavior run, application/Alembic/API/Diary change, operational source or credential, patient/product/protected data, provider, deployment, Pages, release, production or protected-ref action is permitted. Explicit-path staging excludes docs/branding and all unrelated untracked files."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

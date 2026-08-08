@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 91
+    assert register["register_revision"] == 92
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 111)
+        f"AER-{index:04d}" for index in range(1, 113)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 86
+    assert len(agent_incidents) == 88
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1453,30 +1453,62 @@ def test_disposable_postgresql_closeout_count_underreport_requires_replacement()
     assert incident["status"] == "corrected"
 
 
+def test_behavior_transaction_plan_review_incidents_are_preserved() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json"
+    )
+
+    parent_hash = rows["AER-0111"]
+    assert parent_hash["role"] == "orchestrator"
+    assert parent_hash["category"] == "output_contract_violation"
+    assert parent_hash["candidate_state"] == "accepted_candidate_changed"
+    assert parent_hash["workflow_disposition"] == "revision_required"
+    assert parent_hash["correction"]["status"] == "control_added"
+    assert "canonical UTF-8/LF" in parent_hash["correction"]["action"]
+
+    accounting = rows["AER-0112"]
+    assert accounting["role"] == "verifier"
+    assert accounting["category"] == "evidence_misreport"
+    assert accounting["candidate_state"] == "canonical_unchanged"
+    assert accounting["workflow_disposition"] == "review_rejected"
+    assert accounting["recurrence_signature"] == (
+        "verifier.exact_packet_test_count_underreport"
+    )
+    assert receipt["decision"] == "revision_required"
+    assert "118 total tests" in receipt["result"]
+    assert "Finding P2-01" in receipt["result"]
+    assert parent_hash["status"] == accounting["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 110
+    assert report["incident_count"] == 112
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 86,
+        "agent_behavior": 88,
         "harness": 9,
         "repository": 7,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
-        "evidence_misreport": 15,
+        "evidence_misreport": 16,
         "harness_failure": 9,
-        "output_contract_violation": 34,
+        "output_contract_violation": 35,
         "read_only_violation": 3,
         "reasoning_claim_error": 19,
         "repository_defect": 7,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 9,
-        "canonical_unchanged": 79,
+        "accepted_candidate_changed": 10,
+        "canonical_unchanged": 80,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -1509,8 +1541,8 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "verifier.exact_packet_test_count_underreport",
-            "incident_count": 3,
-            "incident_ids": ["AER-0035", "AER-0037", "AER-0110"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0035", "AER-0037", "AER-0110", "AER-0112"],
             "origins": ["agent_behavior"],
             "categories": ["evidence_misreport"],
             "roles": ["verifier"],
@@ -1519,6 +1551,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
                 "Acceptance must machine-reconcile every verifier test-count and repository-path claim against exact collection output and the candidate tree; prose discrepancies are preserved and never copied as authoritative evidence.",
                 "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence.",
                 "Final closeout acceptance must bind each required test path to exact per-file collection and pass counts; any missing path or arithmetic mismatch rejects the review even when its terminal decision says pass.",
+                "Fresh replacement review admission requires exact per-file collect-only and pass arithmetic, not an aggregate progress-line estimate.",
             ],
         },
         {

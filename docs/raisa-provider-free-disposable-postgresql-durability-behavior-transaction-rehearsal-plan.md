@@ -60,11 +60,14 @@ The machine contract binds six parent surfaces:
 6. the accepted empty synthetic prerequisite-table contract.
 
 Every value-bearing parent is SHA-256 bound in
-`behavior-transaction-rehearsal-contract.json`. The later harness must refuse
-parent, path, source-HEAD, byte, manifest, function, trigger, role, privilege or
-scenario drift before Docker contact. Mechanical Git CRLF-to-LF normalization
-is the only permitted SQL byte normalization, exactly as in the accepted
-parse/catalogue harness.
+`behavior-transaction-rehearsal-contract.json`. All six text-parent hashes use
+canonical UTF-8/LF bytes: a checkout may receive only mechanical CRLF-to-LF
+normalization, lone carriage returns are rejected, and every other byte must
+remain exact. The later harness must refuse parent, path, source-HEAD, byte,
+manifest, function, trigger, role, privilege or scenario drift before Docker
+contact. The SQL path retains the accepted parse/catalogue artifact's exact
+canonical byte and statement-count checks in addition to this common text-hash
+rule.
 
 ## Planning gate and runtime separation
 

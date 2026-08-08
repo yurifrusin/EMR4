@@ -74,7 +74,7 @@ EXPECTED_PARENT_BINDINGS = {
     "body_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
         "a93d07405ad35d7d6c0603065625c17ec14ab23e",
-        "53fbba53c6f4dd84918df56e1b6532bf506915f73285c4adb03ded3998c7547c",
+        "634dbc5c1a5294c1ac2de6a913671cd968a9838aa763d4c2a4d229bbcd9c0271",
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
@@ -187,7 +187,10 @@ def test_all_parent_paths_heads_and_hashes_are_exact() -> None:
         assert binding["path"] == relative_path
         assert binding["source_head"] == source_head
         assert binding["sha256"] == f"sha256:{digest}"
-        assert hashlib.sha256((ROOT / relative_path).read_bytes()).hexdigest() == digest
+        raw = (ROOT / relative_path).read_bytes()
+        assert b"\r" not in raw.replace(b"\r\n", b"")
+        canonical = raw.replace(b"\r\n", b"\n")
+        assert hashlib.sha256(canonical).hexdigest() == digest
 
 
 def test_scenario_population_is_exact_and_all_five_categories_are_present() -> None:
