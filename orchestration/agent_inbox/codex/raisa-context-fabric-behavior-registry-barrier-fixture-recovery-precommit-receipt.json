@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_attempt_016_registry_barrier_fixture_recovery_candidate_for_fresh_independent_veto_before_attempt_017",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate preserves attempt 016 exactly at SHA-256 f5b7a272d52586ec1772f4906a6f7a26f58620efea944f61199b99c3ab4215ef and records AER-0139/register revision 116 with 139 closed incidents. It seeds one alpha barrier at revision zero under bootstrap authority, changes BTR-E01 barrier row delta from one to zero while retaining digest-change admission, and requires the sole barrier to reach revision three after three registrations. Accepted SQL, body contract, behavior contract digest and all twenty scenario objects are unchanged. The combined behavior, parse/catalogue and error-register packet passes 287 tests; Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns this explicit-path candidate commit and retains runtime, diagnosis, verifier acceptance, task-branch and closeout authority. Gemini 3.6 Flash/high through a fresh Antigravity worktree will own only the next read-only exact-HEAD veto. No native subagent or DeepSeek lease is active; no reviewer receives edit, runtime, integration, self-acceptance, push, provider/product, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "Primary task worktree is on codex/ariadne-bernie-davida-parallel-seam at parent HEAD 17fe1ea650d5353712bd1dbcef6d9d25b9f137e6. Local and origin master plus handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. r98 remains clean at 17fe1ea650d5353712bd1dbcef6d9d25b9f137e6. The intended explicit commit set is the immutable attempt-016 evidence, recovery code/tests/ledgers, register artifacts and this bounded review/receipt chain only; current mutable evidence, docs/branding and unrelated untracked files remain unstaged.",
+    "live_handover_current_baton": "AGENTS.md keeps the provider-free Context Fabric behavior/transaction proof as the active durability gate. Attempt 016 is preserved and its bounded harness correction is ready for exact candidate review. The future Agent Execution Surface and Containment Gate remains after durability and before any occupied executable Bureau runtime.",
+    "protected_evidence_boundaries": "The candidate contains only authored-synthetic failure evidence, bounded bootstrap/probe correction, tests, security/diagnosis/AER ledgers and exact Ariadne review/runtime provenance. The mutable current attempt-016 evidence remains unstaged. No Docker run after attempt 016, application migration/runtime, operational database, watcher/listener/feed, patient/clinical/product/protected data, provider/model inference beyond the already consumed read-only r98 veto, external retrieval, tool or product command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and every unrelated untracked file remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

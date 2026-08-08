@@ -100,6 +100,16 @@ FAILURE_EVIDENCE_014 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_015 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-015.json").read_text(
+        encoding="utf-8"
+    )
+)
+FAILURE_EVIDENCE_016 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-016.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -314,6 +324,42 @@ def test_snapshot_query_failure_releases_only_bounded_site_and_sqlstate() -> Non
     }
     assert captured["stdin"].startswith(b"SET TRANSACTION READ ONLY;\n")
     assert "--file=-" in captured["argv"]
+
+
+def test_attempt_015_and_016_evidence_is_preserved_and_coordinate_closed() -> None:
+    validator = jsonschema.Draft202012Validator(EVIDENCE_SCHEMA)
+    validator.validate(FAILURE_EVIDENCE_015)
+    validator.validate(FAILURE_EVIDENCE_016)
+
+    assert FAILURE_EVIDENCE_015["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": FAILURE_EVIDENCE_015["environment"]["failure"][
+            "detail_digest"
+        ],
+        "function_id": "emr4_context_fabric.register_observer_generation_v1",
+        "function_line": 36,
+        "scenario_id": "BTR-E01",
+        "sqlstate": "22P02",
+        "stage": "scenario",
+    }
+    assert FAILURE_EVIDENCE_016["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": FAILURE_EVIDENCE_016["environment"]["failure"][
+            "detail_digest"
+        ],
+        "function_id": "emr4_context_fabric.register_observer_generation_v1",
+        "function_line": 51,
+        "scenario_id": "BTR-E01",
+        "sqlstate": "CF004",
+        "stage": "scenario",
+    }
+    for evidence in (FAILURE_EVIDENCE_015, FAILURE_EVIDENCE_016):
+        assert evidence["scenario_reconciliation"] == {
+            "expected": 20,
+            "observed": 0,
+            "passed": 0,
+        }
+        assert evidence["cleanup"]["absence_verified"] is True
 
 
 def test_snapshot_query_uses_unqualified_postgresql_special_form() -> None:
@@ -573,6 +619,29 @@ def test_bootstrap_closes_beta_projection_foreign_key_topology() -> None:
     assert sql.count("FROM beta_checkpoint") == 2
     assert "FROM beta_frame" in sql
     assert "last_contiguous_position,last_observation_digest,lifecycle_revision" in sql
+
+
+def test_bootstrap_seeds_exact_alpha_registry_barrier_outside_role_behavior() -> None:
+    sql = rehearsal.render_bootstrap_sql(CONTRACT).decode("utf-8")
+    alpha_prefix = sql[: sql.index("WITH beta_barrier AS (")]
+    relation = "emr4_context_fabric.context_generation_registry_barrier"
+
+    assert alpha_prefix.count(f"INSERT INTO {relation}") == 1
+    assert CONTRACT["fixture_namespace"]["practice_alpha"] in alpha_prefix
+    assert CONTRACT["fixture_namespace"]["stream_alpha"] in alpha_prefix
+    assert "barrier_revision,updated_at" in alpha_prefix
+    assert ",0,pg_catalog.transaction_timestamp());" in alpha_prefix
+    assert rehearsal.EXPECTED_DELTAS["BTR-E01"][relation] == 0
+    assert relation in rehearsal.ALLOWED_DIGEST_CHANGES["BTR-E01"]
+
+
+def test_registration_probe_requires_one_barrier_advanced_exactly_three_times() -> None:
+    sql = rehearsal._probe_sql(CONTRACT, "BTR-E01")  # noqa: SLF001
+
+    assert "context_generation_registry_barrier" in sql
+    assert "count(*)=1" in sql
+    assert "min(barrier_revision)=3" in sql
+    assert "max(barrier_revision)=3" in sql
 
 
 def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 115,
+  "register_revision": 116,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5354,6 +5354,50 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-row-composite-projection-order-recovery.md",
           "docs/security/raisa-context-fabric-row-composite-projection-order-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-115.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0139",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-016",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The authored-synthetic bootstrap must establish every prerequisite row explicitly required by an accepted entry point before behavior measurement begins, while relation deltas must attribute only effects the entry point is authorised to produce.",
+      "observed_error": "Attempt 016 passed corrected artifact admission and reached BTR-E01, then returned CF004 at internal line 51 of register_observer_generation_v1 with zero admitted scenarios and verified cleanup. That coordinate is the accepted exact lock of the shared registry barrier. The bootstrap seeded a beta barrier but omitted the alpha barrier, while its delta table incorrectly expected registration to create a barrier the accepted body can only lock and update.",
+      "detection_method": "The bounded function coordinate was mapped to the immutable rendered body and reconciled with the typed LOCK_EXACT node, accepted design statement, behavior bootstrap SQL and expected relation deltas. The accepted body has no barrier insert effect; bootstrap authority is explicitly outside the claimed behavior boundary.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-016.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-registry-barrier-fixture-recovery.md",
+        "docs/security/raisa-context-fabric-durability-behavior-registry-barrier-fixture-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-116.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.required_shared_barrier_fixture_omitted_and_effect_misattributed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The bootstrap now creates exactly one alpha practice/source/stream barrier at revision zero before scenarios, BTR-E01 expects no barrier row-count increase but permits its digest to change, and the private probe requires that exact row to reach revision three after the three serial registrations.",
+        "prevention_control": "Every behavior fixture must be mechanically reconciled against each called body's pre-effect exact reads and derived insert/update summary; prerequisite rows belong to bootstrap, and per-relation deltas must distinguish row creation from mutation before runtime eligibility.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-registry-barrier-fixture-recovery.md",
+          "docs/security/raisa-context-fabric-durability-behavior-registry-barrier-fixture-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-116.md"
         ]
       },
       "status": "corrected"

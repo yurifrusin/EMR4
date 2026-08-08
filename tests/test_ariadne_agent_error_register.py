@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 115
+    assert register["register_revision"] == 116
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 139)
+        f"AER-{index:04d}" for index in range(1, 140)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -1789,21 +1789,31 @@ def test_aer_0138_closes_positional_row_projection_order() -> None:
     assert "hostile order swap" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0139_requires_shared_barrier_fixture_before_behavior() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0139"]
+
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert "CF004" in incident["observed_error"]
+    assert "pre-effect exact reads" in incident["correction"]["prevention_control"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 138
+    assert report["incident_count"] == 139
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 100,
-        "harness": 17,
+        "harness": 18,
         "repository": 13,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
         "evidence_misreport": 19,
-        "harness_failure": 17,
+        "harness_failure": 18,
         "output_contract_violation": 40,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
@@ -1811,7 +1821,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 31,
+        "accepted_candidate_changed": 32,
         "canonical_unchanged": 85,
         "untrusted_partial_worktree": 22,
     }

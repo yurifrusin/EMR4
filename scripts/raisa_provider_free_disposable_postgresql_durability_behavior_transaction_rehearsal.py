@@ -243,7 +243,7 @@ SERIALIZABLE_SCENARIOS = frozenset({"BTR-E01", "BTR-E04", "BTR-I03", "BTR-B03"})
 EXPECTED_DELTAS: dict[str, dict[str, int]] = {
     "BTR-E01": {
         "emr4_context_fabric.context_observation_stream_head": 1,
-        "emr4_context_fabric.context_generation_registry_barrier": 1,
+        "emr4_context_fabric.context_generation_registry_barrier": 0,
         "emr4_context_fabric.context_observer_generation": 3,
         "emr4_context_fabric.context_durability_checkpoint": 3,
         "emr4_context_fabric.context_recovery_anchor": 3,
@@ -1150,6 +1150,10 @@ INSERT INTO public.appointments
 (id,practice_id,practitioner_id,location_id,start_time,duration_minutes)
 VALUES
 {appointment_rows};
+INSERT INTO emr4_context_fabric.context_generation_registry_barrier
+(practice_id,source_contract_id,stream_id,barrier_revision,updated_at)
+VALUES ({_lit(f["practice_alpha"])}::pg_catalog.uuid,{_lit(f["source_contract_id"])},
+        {_lit(f["stream_alpha"])}::pg_catalog.uuid,0,pg_catalog.transaction_timestamp());
 WITH beta_barrier AS (
   INSERT INTO emr4_context_fabric.context_generation_registry_barrier
   (practice_id,source_contract_id,stream_id,barrier_revision,updated_at)
@@ -1874,6 +1878,7 @@ def _probe_sql(contract: dict[str, Any], scenario_id: str) -> str:
     s = _lit(f["stream_alpha"]) + "::pg_catalog.uuid"
     probes: dict[str, list[str]] = {
         "BTR-E01": [
+            f"(SELECT count(*)=1 AND min(barrier_revision)=3 AND max(barrier_revision)=3 FROM emr4_context_fabric.context_generation_registry_barrier WHERE practice_id={p} AND stream_id={s})",
             f"(SELECT count(*)=3 FROM emr4_context_fabric.context_observer_generation WHERE practice_id={p} AND stream_id={s})",
             f"(SELECT count(*)=3 AND min(last_contiguous_position)=0 AND max(last_contiguous_position)=0 FROM emr4_context_fabric.context_durability_checkpoint WHERE practice_id={p} AND stream_id={s})",
             f"(SELECT count(*)=1 AND min(last_position)=0 AND max(last_position)=0 FROM emr4_context_fabric.context_observation_stream_head WHERE practice_id={p} AND stream_id={s})",

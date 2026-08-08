@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_exact_gemini_36_flash_high_behavior_contract_rebind_veto_and_open_attempt_016_preexecution_checks",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The structured Antigravity receipt reports completed/pass at exact HEAD 17fe1ea650d5353712bd1dbcef6d9d25b9f137e6, unchanged before/after, clean postcondition and Gemini 3.6 Flash/high. It independently reconciles all six parents and canonical digest sha256:0ac09578c56aeb6528f5a05dc1e32f5b71d953dfd43ab6d8b5030cab202e7d03, proves scenario identity after excluding only parent_bindings, confirms category counts 6/4/3/4/3, isolates attempt-015 evidence, reports 180 tests passed, Ruff passed and diff check passed, and identifies no P0-P2 finding or boundary widening.",
+    "current_authority_allocation": "GPT Sol alone owns verifier acceptance, attempt-016 execution, diagnosis, exact cleanup and task-branch closeout. Gemini 3.6 Flash/high completed only the read-only r98 veto and receives no self-acceptance, runtime, integration, push, product/provider, deployment, release or protected-ref authority. No native subagent or DeepSeek lease is active.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r98 remains clean at exact candidate HEAD 17fe1ea650d5353712bd1dbcef6d9d25b9f137e6 on codex/review-context-fabric-behavior-rebind-17fe1ea6. Primary task worktree remains at the same HEAD with only bounded review-orchestration artifacts and preserved pre-existing files untracked. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "AGENTS.md requires independent veto of the corrected behavior-contract rebind before behavior attempt 016. The future Agent Execution Surface and Containment Gate remains planned after this provider-free durability tranche and before any executable occupied Bureau runtime.",
+    "protected_evidence_boundaries": "Accepting the veto opens only deterministic attempt-016 preexecution checks. A later execution receipt may permit one newly owned networkless disposable local PostgreSQL 16 container with pull disabled, no ports or mounts, tmpfs data and exact-ID cleanup. Patient/clinical/product/protected data, provider/model inference, external retrieval, application migration/runtime, operational persistence, watcher/listener/feed, commands or product writes, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

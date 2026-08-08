@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "diagnose_and_repair_attempt_016_alpha_registry_barrier_fixture_omission_without_changing_accepted_sql_or_twenty_scenarios",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 016 reached BTR-E01 under the corrected artifact and serializable boundary, then returned CF004 at register_observer_generation_v1 line 51 with zero admitted scenarios and exact cleanup. That coordinate is the accepted LOCK_EXACT read of context_generation_registry_barrier. The body contract and design require that shared barrier to pre-exist; bootstrap authority is outside claimed behavior. The harness seeded a beta barrier only while expecting BTR-E01 to create one alpha barrier, contradicting the accepted entry point. The bounded recovery is to seed exactly one alpha barrier at revision 0 during bootstrap, expect zero row-count delta but an allowed digest change, and prove one barrier reaches revision 3 after three registrations. The accepted SQL, contract digest and all twenty scenarios remain unchanged.",
+    "current_authority_allocation": "GPT Sol owns the serial diagnosis, bounded harness repair, deterministic verification, exact cleanup and acceptance. A fresh Gemini 3.6 Flash/high Antigravity worktree will own independent veto only after a new exact candidate commit. No native subagent or DeepSeek lease is active; no reviewer receives runtime, integration, self-acceptance, push, product/provider, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "Primary worktree is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 17fe1ea650d5353712bd1dbcef6d9d25b9f137e6. Local and origin master plus handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Review worktree r98 remains clean at 17fe1ea650d5353712bd1dbcef6d9d25b9f137e6. The current mutable attempt-016 evidence, docs/branding and unrelated pre-existing files remain unstaged; explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md makes the corrected provider-free Context Fabric behavior/transaction proof the active durability gate. Attempt 016 is a newly preserved failure inside that authorised diagnose-repair-rerun sequence. The future Agent Execution Surface and Containment Gate remains after this durability tranche and before any occupied executable Bureau runtime.",
+    "protected_evidence_boundaries": "Attempt 016 is preserved byte-for-byte as provider-free-behavior-transaction-failure-evidence-016.json with SHA-256 f5b7a272d52586ec1772f4906a6f7a26f58620efea944f61199b99c3ab4215ef; its container c6ee08840cbfc448a1329c0134efda4ea424e5476ff7e6369136aef81225070b was removed and absence verified. Recovery may change only authored-synthetic bootstrap/probe expectations, tests, threat/diagnosis/AER provenance and receipt files. No parent SQL/body/contract scenario, application migration/runtime, operational database, watcher/listener/feed, patient/clinical/product/protected data, provider/model inference, tool or product command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
