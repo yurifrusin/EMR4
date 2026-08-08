@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 104
+    assert register["register_revision"] == 105
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 127)
+        f"AER-{index:04d}" for index in range(1, 128)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 97
+    assert len(agent_incidents) == 98
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1653,20 +1653,35 @@ def test_aer_0126_requires_full_projection_digest_reconstruction() -> None:
     )
 
 
+def test_aer_0127_rejects_internally_inconsistent_verifier_digest_claim() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0127"]
+
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert "internally contradictory" in incident["detection_method"]
+    assert (
+        "never copied into a parent binding"
+        in incident["correction"]["prevention_control"]
+    )
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 126
+    assert report["incident_count"] == 127
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 97,
+        "agent_behavior": 98,
         "harness": 13,
         "repository": 8,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
-        "evidence_misreport": 17,
+        "evidence_misreport": 18,
         "harness_failure": 13,
         "output_contract_violation": 39,
         "read_only_violation": 3,
@@ -1676,7 +1691,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 22,
-        "canonical_unchanged": 82,
+        "canonical_unchanged": 83,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [

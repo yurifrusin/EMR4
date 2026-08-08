@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r86",
+  "branch": "codex/review-context-fabric-full-types-06b8f558",
+  "head": "06b8f55837457518b39de0bdbea71b60a2c6f921",
+  "expected_head": "06b8f55837457518b39de0bdbea71b60a2c6f921",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

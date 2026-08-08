@@ -1,5 +1,5 @@
 {
-  "attempt_id": "dc5c5c403031b2add34c2feb",
+  "attempt_id": "02c203b477a0ff1006d08665",
   "catalogue": {
     "expectation_mode": "exact_digest_bound",
     "kind_counts": {
@@ -30,7 +30,7 @@
       "schema_acl": "sha256:63129f4571ab70a6191f118b6c752cc72c18d1dfbc6f654d5280e710b488aba2",
       "server": "sha256:be48d3bda78c55db6cf13c993284337b503d51be35106910b45e2a3449649bd9",
       "triggers": "sha256:f8952068cbd262f70bcd8d040fbdf5596fcba8dcfedebf73e592d0f017e4d91a",
-      "types": "sha256:099effe28c033aeec242bcd7b68f0703af558ebedfc4e37875a15ac6f05594f8"
+      "types": "sha256:8ec5eddfcb4cd14d62f783bfcfeb02004204630510b8913ce769a1c49a2135af"
     },
     "query_ids": [
       "application_relations",
@@ -56,20 +56,20 @@
   "claim_boundary": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only",
   "cleanup": {
     "absence_verified": true,
-    "container_id": "254ea3c3a1d1776b2199f2773c938686dbf98a1d73c69264b65e6865b2dd9bc3",
+    "container_id": "ff4d0fabee78a3070bb6caa5c95e5d726050bda02764979a22e25ef178ea5530",
     "removed": true,
     "status": "cleanup_verified"
   },
   "environment": {
     "docker_client": "resolved_exact_docker_exe",
-    "elapsed_ms": 10083,
+    "elapsed_ms": 9301,
     "image": {
       "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
       "pull_attempted": false,
       "reference": "postgres:16-bookworm"
     },
     "readiness": {
-      "continuous_success_ms": 3402,
+      "continuous_success_ms": 3169,
       "last_pg_isready_exit": 0,
       "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "last_sql_failure_class": "none",
@@ -101,9 +101,9 @@
     "passed"
   ],
   "parent": {
-    "artifact_byte_count": 1404433,
-    "artifact_sha256": "sha256:a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36",
-    "contract_sha256": "sha256:22713616e6410f41d8d1a591c8c804e6881d52ac9f547330bad7a9c0855d062e",
+    "artifact_byte_count": 1404420,
+    "artifact_sha256": "sha256:9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65",
+    "contract_sha256": "sha256:b1900c96779ff4225be286b51e0c8ecd0b6034177f08deff9d415e9a10c822cb",
     "prerequisite_contract_sha256": "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11",
     "prerequisite_sql_sha256": "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38",
     "statement_count": 412
@@ -114,9 +114,9 @@
     "context_lines": [],
     "database_local_schema_count": 0,
     "error_lines": [
-      4608
+      4607
     ],
-    "expected_error_line": 4608,
+    "expected_error_line": 4607,
     "expected_error_line_seen": true,
     "expected_sqlstate": "42601",
     "expected_sqlstate_seen": true,
@@ -131,7 +131,7 @@
     "status": "matched",
     "stderr": {
       "byte_count": 175,
-      "sha256": "sha256:cfa28ef3adf3d57a8518c4a52d27f9171f9daf178a01eae83879e5b8f5f75bbf"
+      "sha256": "sha256:c9f239ddc43b17d45dbc25b72a452b29f5f38e5b93106184459f04e51a2877f3"
     }
   },
   "schema_version": "emr4.disposable-postgresql-durability-rehearsal-evidence.v1"

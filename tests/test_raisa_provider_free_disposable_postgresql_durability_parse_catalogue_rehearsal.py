@@ -67,6 +67,11 @@ TYPES_PROJECTION_RECONSTRUCTION_EVIDENCE = json.loads(
         / "provider-free-disposable-postgresql-evidence-types-projection-reconstruction.json"
     ).read_text(encoding="utf-8")
 )
+SUCCESS_EVIDENCE = json.loads(
+    (DIR / "provider-free-disposable-postgresql-evidence.json").read_text(
+        encoding="utf-8"
+    )
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -435,6 +440,29 @@ def test_incomplete_types_projection_retry_is_preserved_fail_closed() -> None:
     }
     assert evidence["parent"]["contract_sha256"] == (
         "sha256:3e4b5d6498a746723361d64e75a0cd0aacfcc816c60a63908e78e75a45ed3b2c"
+    )
+    assert evidence["cleanup"]["removed"] is True
+    assert evidence["cleanup"]["absence_verified"] is True
+
+
+def test_recovered_parse_catalogue_evidence_is_exact_pass() -> None:
+    evidence = SUCCESS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+    assert evidence["result"] == (
+        "raisa_provider_free_disposable_postgresql_durability_"
+        "parse_catalogue_rehearsal_pass"
+    )
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["catalogue"]["query_digests"]["types"] == (
+        "sha256:8ec5eddfcb4cd14d62f783bfcfeb02004204630510b8913ce769a1c49a2135af"
+    )
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:b1900c96779ff4225be286b51e0c8ecd0b6034177f08deff9d415e9a10c822cb"
     )
     assert evidence["cleanup"]["removed"] is True
     assert evidence["cleanup"]["absence_verified"] is True

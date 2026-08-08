@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 104,
+  "register_revision": 105,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4840,6 +4840,46 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
           "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-104.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0127",
+      "attempt_id": "raisa-context-fabric-full-types-reconstruction-review-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "An exact-HEAD verifier receipt must report one internally consistent artifact digest copied from the reviewed contract, manifest and evidence.",
+      "observed_error": "The pass receipt correctly named the recovered artifact digest in its attempt evidence, but a later non-types invariance sentence repeated the obsolete predecessor artifact digest. The candidate, prescribed checks and successful runtime evidence remained unchanged.",
+      "detection_method": "Post-runtime Sol reconciliation compared every receipt digest claim with the candidate contract, render manifest and schema-validated successful evidence and found the single internally contradictory sentence.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-full-types-reconstruction-review-receipt.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery-closeout.md",
+        "docs/ariadne-agent-error-correction-register-revision-105.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.internal_artifact_digest_misreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The inconsistent receipt sentence is preserved but rejected as authoritative evidence; parse acceptance uses the canonical contract, schema-validated successful evidence and deterministic readback, and the descendant parent-binding veto must recompute every digest.",
+        "prevention_control": "Machine-reconcile every repeated verifier artifact digest claim against the candidate contract and evidence before acceptance; any internal contradiction is explicitly rejected and never copied into a parent binding.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-105.md"
         ]
       },
       "status": "corrected"
