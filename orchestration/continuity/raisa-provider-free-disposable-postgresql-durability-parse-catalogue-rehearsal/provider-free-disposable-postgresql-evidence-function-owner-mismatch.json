@@ -1,0 +1,76 @@
+{
+  "attempt_id": "fad4339deb34df34b63618af",
+  "catalogue": {"status": "not_started"},
+  "claim_boundary": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only",
+  "cleanup": {
+    "absence_verified": true,
+    "container_id": "8849513d4496af511c41cf1b10f07fccd3893c7ee9d06bca90f9677f5efd0dba",
+    "removed": true,
+    "status": "cleanup_verified"
+  },
+  "environment": {
+    "docker_client": "resolved_exact_docker_exe",
+    "elapsed_ms": 8904,
+    "failure": {
+      "code": "function_attributes",
+      "detail_digest": "sha256:8447d26397bc29852fe4a797c997861957cba993a12636f314cfab515bf3223d",
+      "stage": "catalogue"
+    },
+    "image": {
+      "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "pull_attempted": false,
+      "reference": "postgres:16-bookworm"
+    },
+    "readiness": {
+      "continuous_success_ms": 3098,
+      "last_pg_isready_exit": 0,
+      "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "last_sql_failure_class": "none",
+      "last_sql_probe_exit": 0,
+      "last_sql_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "last_sql_stdout_digest": "sha256:cc290b35686ba5625a414ce876721a541897e6f17a00d4aa8e2ea5c436c31be8",
+      "pg_isready_attempts": 9,
+      "pg_isready_successes": 8,
+      "sql_probe_attempts": 8,
+      "sql_probe_successes": 7,
+      "status": "stable"
+    }
+  },
+  "evidence_mode": "provider_free_disposable_local_postgresql_authored_synthetic",
+  "lifecycle": [
+    "parent_verified", "environment_verified", "container_created",
+    "container_owned", "postgres_ready", "rollback_database_ready",
+    "rollback_prerequisites_installed", "rollback_case_matched",
+    "success_database_ready", "success_prerequisites_installed",
+    "artifact_admitted", "cleanup_verified"
+  ],
+  "parent": {
+    "artifact_byte_count": 1404433,
+    "artifact_sha256": "sha256:a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36",
+    "contract_sha256": "sha256:0283abb17666ce5abdacd506666ec3d5130a3cc74f45e18324a9ee23f8ceb00b",
+    "prerequisite_contract_sha256": "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11",
+    "prerequisite_sql_sha256": "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38",
+    "statement_count": 412
+  },
+  "result": "rehearsal_failed",
+  "rollback": {
+    "cluster_role_count": 0,
+    "context_lines": [],
+    "database_local_schema_count": 0,
+    "error_lines": [4608],
+    "expected_error_line": 4608,
+    "expected_error_line_seen": true,
+    "expected_sqlstate": "42601",
+    "expected_sqlstate_seen": true,
+    "observed_sqlstates": ["42601"],
+    "positions": [],
+    "psql_exit": 3,
+    "statement_lines": [1],
+    "status": "matched",
+    "stderr": {
+      "byte_count": 175,
+      "sha256": "sha256:cfa28ef3adf3d57a8518c4a52d27f9171f9daf178a01eae83879e5b8f5f75bbf"
+    }
+  },
+  "schema_version": "emr4.disposable-postgresql-durability-rehearsal-evidence.v1"
+}

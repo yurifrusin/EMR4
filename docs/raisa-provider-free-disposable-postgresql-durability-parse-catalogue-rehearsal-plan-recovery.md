@@ -386,3 +386,26 @@ population- and definition-checked.
 Artifact SQL, contracts, manifest, assertions, commands, cleanup, runtime and
 authority remain unchanged. A fresh exact-HEAD veto is required before one new
 owned characterization run.
+
+## Admission-function owner recovery
+
+Attempt `fad4339deb34df34b63618af` proved the constraint-trigger exclusion and
+again admitted all 412 artifact statements, then stopped at
+`function_attributes`. Its opaque detail digest maps uniquely to the accepted
+entry point `admit_proofread_observation_v1`. Exact container
+`8849513d4496af511c41cf1b10f07fccd3893c7ee9d06bca90f9677f5efd0dba`
+was removed and absence verified.
+
+The harness incorrectly required every function owner to be
+`context_schema_owner`. The immutable migration and function-body contracts,
+and the emitted artifact itself, assign exactly the admission function to
+`context_admission_receiver`; this is the deliberate SECURITY DEFINER
+admission boundary. Every other support, entry and trigger function remains
+owned by `context_schema_owner`.
+
+Recovery position-closes that sole owner exception and rejects both a changed
+admission owner and any attempt to transfer another function to the exception
+role. Function language sanity and later exact query-digest binding remain
+unchanged. No artifact, contract, query, function definition, grant, runtime or
+authority changes. A fresh exact-HEAD veto is required before another owned
+characterization run.

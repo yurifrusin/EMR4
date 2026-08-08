@@ -86,6 +86,11 @@ EVIDENCE_MODE = "provider_free_disposable_local_postgresql_authored_synthetic"
 CLAIM_BOUNDARY = (
     "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only"
 )
+FUNCTION_OWNER_OVERRIDES = {
+    "emr4_context_fabric.admit_proofread_observation_v1": (
+        "context_admission_receiver"
+    )
+}
 
 
 class DockerOperation(str, Enum):
@@ -1343,7 +1348,10 @@ def _assert_catalogue(
     if actual_function_names != expected_function_names or len(functions) != 24:
         raise RehearsalFailure("catalogue", "function_population")
     for row in functions:
-        if row["owner"] != "context_schema_owner" or row["language"] not in {
+        expected_owner = FUNCTION_OWNER_OVERRIDES.get(
+            row["name"], "context_schema_owner"
+        )
+        if row["owner"] != expected_owner or row["language"] not in {
             "sql",
             "plpgsql",
         }:

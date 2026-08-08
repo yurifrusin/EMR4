@@ -126,7 +126,9 @@ def _valid_facts() -> dict[str, Any]:
         {
             "name": name,
             "identity_arguments": "",
-            "owner": "context_schema_owner",
+            "owner": rehearsal.FUNCTION_OWNER_OVERRIDES.get(
+                name, "context_schema_owner"
+            ),
             "language": "plpgsql",
             "security_definer": True,
             "volatility": "v",
@@ -928,6 +930,35 @@ def test_constraint_population_diagnostic_is_value_free_and_exact() -> None:
     assert removed["identifier"] not in rendered
     assert unexpected_identifier not in rendered
     assert "private definition" not in rendered
+
+
+def test_function_owner_exception_is_exact_and_position_closed() -> None:
+    facts = _valid_facts()
+    admission = next(
+        row
+        for row in facts["functions"]
+        if row["name"] == "emr4_context_fabric.admit_proofread_observation_v1"
+    )
+    assert admission["owner"] == "context_admission_receiver"
+    rehearsal._assert_catalogue(facts, MANIFEST, PREREQUISITE, CONTRACT)  # noqa: SLF001
+
+    admission["owner"] = "context_schema_owner"
+    with pytest.raises(rehearsal.RehearsalFailure, match="function_attributes"):
+        rehearsal._assert_catalogue(  # noqa: SLF001
+            facts, MANIFEST, PREREQUISITE, CONTRACT
+        )
+
+    facts = _valid_facts()
+    ordinary = next(
+        row
+        for row in facts["functions"]
+        if row["name"] != "emr4_context_fabric.admit_proofread_observation_v1"
+    )
+    ordinary["owner"] = "context_admission_receiver"
+    with pytest.raises(rehearsal.RehearsalFailure, match="function_attributes"):
+        rehearsal._assert_catalogue(  # noqa: SLF001
+            facts, MANIFEST, PREREQUISITE, CONTRACT
+        )
 
 
 def test_public_acl_and_runtime_schema_create_fail_closed() -> None:
