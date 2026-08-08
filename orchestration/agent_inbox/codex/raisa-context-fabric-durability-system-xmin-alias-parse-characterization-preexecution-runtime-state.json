@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_executes_exactly_one_owned_local_networkless_no_pull_system_xmin_explicit_alias_catalogue_characterization_only_postgresql_16_run_then_verifies_exact_id_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton remain rehydrated. The active descendant is the provider-free parse/catalogue rebind for renderer 2.0.8 explicit system-xmin aliases.",
+    "current_authority_allocation": "GPT Sol exclusively owns this one serial local characterization, exact-ID cleanup and bounded digest inspection. No worker or verifier receives Docker/database authority.",
+    "active_plan_and_acceptance": "Repair commit 1e5e9840 binds renderer 2.0.8, all 62 explicit AS xmin projections, 412 statements and 1,403,680 LF bytes at SHA-256 45c90b92. Focused inert/AER tests, Ruff and diff checks pass. The fixed characterization-only parse contract validates at SHA-256 4ca8ad69 and cannot return a pass.",
+    "protected_evidence_boundaries": "Only repository-authored SQL metadata and four empty authored-synthetic prerequisite shapes are admitted. Patient/product/protected data, providers, operational sources/credentials/databases, application runtime, migration application, deployment, release, Pages and protected refs remain closed. The container is pull-never, network-none, no-port, no-mount and tmpfs-only; docs/branding and unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "Primary branch HEAD is 1e5e9840dcbf14d2c1766a63149417f6912dc915 with only explicit parse-rebind candidate paths modified or added plus preserved untracked files. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The harness writes only its fixed parse evidence path and removes only its exact owned random-ID container."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_rehydration_renderer_208_repair_and_fixed_characterization_contract", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is ready for one fixed characterization."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Independent verification remains downstream."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

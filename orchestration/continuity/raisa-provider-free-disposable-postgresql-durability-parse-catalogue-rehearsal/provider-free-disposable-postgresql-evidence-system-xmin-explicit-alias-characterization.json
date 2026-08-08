@@ -1,7 +1,7 @@
 {
-  "attempt_id": "aca47b2047ba21dc55a184fb",
+  "attempt_id": "b53d5416aa9fbb20bc91f99c",
   "catalogue": {
-    "expectation_mode": "exact_digest_bound",
+    "expectation_mode": "characterization_only",
     "kind_counts": {
       "columns": 252,
       "constraints": 81,
@@ -51,25 +51,25 @@
       "triggers",
       "types"
     ],
-    "status": "matched"
+    "status": "characterized"
   },
   "claim_boundary": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only",
   "cleanup": {
     "absence_verified": true,
-    "container_id": "253f1b17c19af1a898ea3f593293865bacd1fd474686703b77acbb42ae3c3af8",
+    "container_id": "e10340911ad8afef2f33da41319a1b52994584c2fc958c40b9c7219f5055c63e",
     "removed": true,
     "status": "cleanup_verified"
   },
   "environment": {
     "docker_client": "resolved_exact_docker_exe",
-    "elapsed_ms": 8758,
+    "elapsed_ms": 8853,
     "image": {
       "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
       "pull_attempted": false,
       "reference": "postgres:16-bookworm"
     },
     "readiness": {
-      "continuous_success_ms": 3066,
+      "continuous_success_ms": 3151,
       "last_pg_isready_exit": 0,
       "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "last_sql_failure_class": "none",
@@ -96,19 +96,18 @@
     "success_database_ready",
     "success_prerequisites_installed",
     "artifact_admitted",
-    "catalogue_matched",
-    "cleanup_verified",
-    "passed"
+    "catalogue_characterized",
+    "cleanup_verified"
   ],
   "parent": {
     "artifact_byte_count": 1403680,
     "artifact_sha256": "sha256:45c90b927a6e5a9b5b367ddf6ca76dfde0491ddb04d74214383cbca68419b7f6",
-    "contract_sha256": "sha256:d89dbc031649fdbe11eba5a1290c0d117e8b4958f884b74bd1e13c05c6eb30de",
+    "contract_sha256": "sha256:4ca8ad69b17dfd03b720dba2761b2b48c39696aa907861bead6468931e613387",
     "prerequisite_contract_sha256": "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11",
     "prerequisite_sql_sha256": "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38",
     "statement_count": 412
   },
-  "result": "raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass",
+  "result": "catalogue_characterization_required",
   "rollback": {
     "cluster_role_count": 0,
     "context_lines": [],
