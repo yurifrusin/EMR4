@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_parse_catalogue_contract_rebind_to_the_review_pending_body_special_form_parent_with_explicit_paths_before_one_disposable_postgresql_16_run",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The parse contract now binds source cf51e3a8de270869f4f4da3e36f6b5167b0c502a, artifact SHA-256 afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14, 1,402,341 LF bytes, 412 statements, unchanged structural/catalogue expectations and canonical contract SHA-256 ebdfcb665a9ef9dc682f249b73b30916725fc76555928dff71527a5c525d7c29. All 113 parse-plan and harness tests pass.",
+    "current_authority_allocation": "GPT Sol owns the serial provider-free parse rehearsal, exact cleanup, evidence acceptance and descendant rebinding. Gemini 3.6 Flash/high remains reserved for a later complete exact-candidate veto; no worker or provider runtime is assigned.",
+    "git_refs_and_worktree": "Primary is at exact HEAD cf51e3a8de270869f4f4da3e36f6b5167b0c502a with only the bounded parse contract, schema, guard, tests, rebind note and this receipt pair intended for commit. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The corrected inert SQL at source commit cf51e3a8de270869f4f4da3e36f6b5167b0c502a is the new candidate parent. Exact PostgreSQL parse, atomic installation and catalogue reconciliation must pass before the unchanged behavior contract may be rebound or run.",
+    "protected_evidence_boundaries": "One later pull-never, networkless, tmpfs-only PostgreSQL 16 container may prove parse, atomic rollback/install and exact catalogue shape using authored-synthetic empty prerequisites. Function/trigger behavior, operational database or credentials, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, command/write, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

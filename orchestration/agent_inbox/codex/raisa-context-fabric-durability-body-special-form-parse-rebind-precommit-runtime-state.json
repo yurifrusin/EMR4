@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_parse_catalogue_contract_rebind_to_the_review_pending_body_special_form_parent_with_explicit_paths_before_one_disposable_postgresql_16_run",
+  "source_evidence": {
+    "live_handover_current_baton": "The corrected inert SQL at source commit cf51e3a8de270869f4f4da3e36f6b5167b0c502a is the new candidate parent. Exact PostgreSQL parse, atomic installation and catalogue reconciliation must pass before the unchanged behavior contract may be rebound or run.",
+    "current_authority_allocation": "GPT Sol owns the serial provider-free parse rehearsal, exact cleanup, evidence acceptance and descendant rebinding. Gemini 3.6 Flash/high remains reserved for a later complete exact-candidate veto; no worker or provider runtime is assigned.",
+    "active_plan_and_acceptance": "The parse contract now binds source cf51e3a8de270869f4f4da3e36f6b5167b0c502a, artifact SHA-256 afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14, 1,402,341 LF bytes, 412 statements, unchanged structural/catalogue expectations and canonical contract SHA-256 ebdfcb665a9ef9dc682f249b73b30916725fc76555928dff71527a5c525d7c29. All 113 parse-plan and harness tests pass.",
+    "protected_evidence_boundaries": "One later pull-never, networkless, tmpfs-only PostgreSQL 16 container may prove parse, atomic rollback/install and exact catalogue shape using authored-synthetic empty prerequisites. Function/trigger behavior, operational database or credentials, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, command/write, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Primary is at exact HEAD cf51e3a8de270869f4f4da3e36f6b5167b0c502a with only the bounded parse contract, schema, guard, tests, rebind note and this receipt pair intended for commit. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rehydration_corrected_parent_and_exact_parse_contract_rebind",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled the exact parent bytes, manifest, contract hash and frozen catalogue expectations."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Independent veto follows the complete descendant candidate."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

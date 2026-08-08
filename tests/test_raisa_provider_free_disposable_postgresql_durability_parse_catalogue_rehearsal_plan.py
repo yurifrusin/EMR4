@@ -32,10 +32,14 @@ ROW_PROJECTION_RECOVERY = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-row-composite-projection-order-rebind.md"
 )
+SPECIAL_FORM_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-body-special-form-rebind.md"
+)
 
-PARENT_HEAD = "0931f3e658f06e02e7de4c5ea02238184da9e767"
+PARENT_HEAD = "cf51e3a8de270869f4f4da3e36f6b5167b0c502a"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5"
+PARENT_DIGEST = "afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14"
 
 
 def _text(path: Path) -> str:
@@ -47,7 +51,7 @@ def _flat(*paths: Path) -> str:
 
 
 def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
-    plan = _flat(PLAN, RECOVERY, ROW_PROJECTION_RECOVERY)
+    plan = _flat(PLAN, RECOVERY, ROW_PROJECTION_RECOVERY, SPECIAL_FORM_REBIND)
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
     raw = PARENT_SQL.read_bytes()
@@ -55,14 +59,14 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_404_420
+    assert manifest["sql_byte_count"] == 1_402_341
     assert manifest["statement_count"] == 412
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "1,404,420 bytes" in plan
+    assert "1,402,341 LF bytes" in plan
     assert "statement count `412`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
 
