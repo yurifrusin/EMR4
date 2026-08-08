@@ -333,3 +333,11 @@ trigger, policy, privilege, application relation or authority changes. The
 canonical parent artifact and manifest must be regenerated, focused hostile
 tests and a fresh exact-HEAD veto must pass, and the descendant must bind the
 resulting parent commit and exact bytes before another disposable run.
+
+Parent recovery commit `e8d07a35727cbbca2d377eae40160b33ef955b4e`
+binds the resulting 412-statement canonical artifact at `1404433` LF bytes and
+SHA-256 `a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36`.
+The parent packet passed 71/71 focused checks, renderer self-recognition and a
+fresh Gemini 3.6 Flash/high exact-HEAD veto with zero P0-P3 findings. The
+disposable child remains in non-passing characterization mode and must bind
+this exact parent before another run.

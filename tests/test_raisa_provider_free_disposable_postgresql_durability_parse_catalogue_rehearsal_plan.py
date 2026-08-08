@@ -25,9 +25,9 @@ PARENT_SQL = (
 )
 PARENT_MANIFEST = PARENT_SQL.with_name("render-manifest.json")
 
-PARENT_HEAD = "f86ed6ce6d004f29b39148e024b6229b5a622291"
+PARENT_HEAD = "e8d07a35727cbbca2d377eae40160b33ef955b4e"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "fd640d16d51a63557220cc8a59b75ddfadee86a745da11919bad2c101d4a896d"
+PARENT_DIGEST = "a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36"
 
 
 def _text(path: Path) -> str:
@@ -47,14 +47,14 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_403_432
+    assert manifest["sql_byte_count"] == 1_404_433
     assert manifest["statement_count"] == 412
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "canonical UTF-8/LF byte count `1403432`" in plan
+    assert "canonical UTF-8/LF byte count `1404433`" in plan
     assert "statement count `412`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
 
