@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_twenty_scenario_behavior_parent_rebind_tests_and_closed_acceptance_documents_before_fresh_independent_review",
+  "source_evidence": {
+    "live_handover_current_baton": "The active durability behavior gate now has an accepted corrected parse parent at commit 14d145f02971e56f5751670969cb4153d49c1fb8. The next dependency is to seal the unchanged twenty-scenario parent rebind at a clean exact HEAD for fresh independent veto before attempt 019.",
+    "current_authority_allocation": "GPT Sol owns the bounded parent rebind and task-branch commit. Gemini 3.6 Flash/high remains fresh read-only independent veto-only after this deterministic commit. No native subagent or implementation worker is assigned.",
+    "active_plan_and_acceptance": "The behavior contract remains exactly twenty ordered scenarios with category counts 6/4/3/4/3 and canonical SHA-256 7d58d870444274e7bfa11be32585acb0164901b79cbc95c9542721f54d4867df. It binds accepted parse source 14d145f02971e56f5751670969cb4153d49c1fb8, corrected inert source 2c22d6f56d0081ebfae5a5585088381e1219d7f8, corrected structural source 9fb107ab598fba418b42be6d233c4960a6f29840, corrected body source 6ae8f2c7bf3df1fe9f89b760e9d3641384848545 and the unchanged prerequisite. The 386-check active packet, Ruff and diff checks pass. The frozen historical continuity equality module is explicitly excluded because it binds obsolete Continuity 230/AER 81 artifacts and is not regenerated.",
+    "protected_evidence_boundaries": "Attempts 001-018 remain immutable and the mutable current behavior evidence remains untracked and unstaged. This commit grants no behavior run yet, applied migration, operational database or credential, watcher/listener/feed, real context, patient/product/protected data, provider, application/API/Diary, tool, command, deployment, production, release, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "Task branch source HEAD is 14d145f02971e56f5751670969cb4153d49c1fb8 before this commit. Tracked edits are limited to the behavior contract, harness constant and focused tests; two exact rebind ledgers and this receipt are intentional new files. All unrelated untracked paths, mutable behavior evidence and docs/branding/ remain preserved and unstaged. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "registration_rls_behavior_rebind_precommit_five_source_receipt",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol validated the exact parent chain and complete 386-check active packet."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh verifier dispatch follows only after this clean exact candidate commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

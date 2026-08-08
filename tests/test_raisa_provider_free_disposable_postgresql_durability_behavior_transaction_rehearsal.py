@@ -115,6 +115,11 @@ FAILURE_EVIDENCE_017 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_018 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-018.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -331,11 +336,12 @@ def test_snapshot_query_failure_releases_only_bounded_site_and_sqlstate() -> Non
     assert "--file=-" in captured["argv"]
 
 
-def test_attempt_015_through_017_evidence_is_preserved_and_coordinate_closed() -> None:
+def test_attempt_015_through_018_evidence_is_preserved_and_coordinate_closed() -> None:
     validator = jsonschema.Draft202012Validator(EVIDENCE_SCHEMA)
     validator.validate(FAILURE_EVIDENCE_015)
     validator.validate(FAILURE_EVIDENCE_016)
     validator.validate(FAILURE_EVIDENCE_017)
+    validator.validate(FAILURE_EVIDENCE_018)
 
     assert FAILURE_EVIDENCE_015["environment"]["failure"] == {
         "code": "unexpected_rejection",
@@ -370,10 +376,23 @@ def test_attempt_015_through_017_evidence_is_preserved_and_coordinate_closed() -
         "sqlstate": "42883",
         "stage": "scenario",
     }
+    assert FAILURE_EVIDENCE_018["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": FAILURE_EVIDENCE_018["environment"]["failure"][
+            "detail_digest"
+        ],
+        "scenario_id": "BTR-E01",
+        "sqlstate": "42501",
+        "stage": "scenario",
+    }
+    assert rehearsal.parent._bytes_sha(  # noqa: SLF001
+        (DIR / "provider-free-behavior-transaction-failure-evidence-018.json").read_bytes()
+    ) == "aeb88e2f404adb62300c0c0574b114c4254ccceb047140e75dd55eac6de61bc7"
     for evidence in (
         FAILURE_EVIDENCE_015,
         FAILURE_EVIDENCE_016,
         FAILURE_EVIDENCE_017,
+        FAILURE_EVIDENCE_018,
     ):
         assert evidence["scenario_reconciliation"] == {
             "expected": 20,
@@ -684,21 +703,21 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "id": "accepted_runtime_source",
         "path": (
             "docs/raisa-provider-free-disposable-postgresql-durability-"
-            "parse-catalogue-body-special-form-rebind-closeout.md"
+            "parse-catalogue-registration-rls-accepted-source.md"
         ),
-        "source_head": "436318e26959da4544f38ebcdb75cd9b08482b6f",
+        "source_head": "14d145f02971e56f5751670969cb4153d49c1fb8",
         "sha256": (
-            "sha256:1cff5cbb443d2bf9a4eb7b5c0ab2e3201cbd5e71cc63a95bfe7e591272213bd5"
+            "sha256:ea6d65de45d15c5dbba3af388402a141757b1acfda01d7416deea202b35a65dd"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "cf51e3a8de270869f4f4da3e36f6b5167b0c502a"
+        "2c22d6f56d0081ebfae5a5585088381e1219d7f8"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14"
+        "sha256:34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:a003277cd48d8609a14255cca4d2a715e6d81fb1f3e24368261c4b854a32aa96"
+        "sha256:4ac9b851796f6460fd55844d4d3634eba62f4302bd68ce80b62b63f69cd541ea"
     )
 
 
