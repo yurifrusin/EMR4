@@ -23,9 +23,9 @@ def test_behavior_transaction_plan_continuity_is_current() -> None:
     assert compass["map_revision"] == 215
     assert compass["source_graph_revision"] == 233
     assert compass["current_position"]["node_id"] == NODE_ID
-    assert "runtime implementation is paused" in compass[
-        "orientation_statement"
-    ].lower()
+    assert (
+        "runtime implementation is paused" in compass["orientation_statement"].lower()
+    )
 
 
 def test_plan_acceptance_opens_no_runtime_authority() -> None:
@@ -99,8 +99,8 @@ def test_exact_review_and_error_register_bind_plan_result() -> None:
     assert review["dirty_after"] is False
     assert "124` admitted, 124 passed" in review["result"]
     assert "79 collected, 79 passed" in review["result"]
-    assert register["register_revision"] == 99
-    assert [row["incident_id"] for row in register["incidents"][-11:]] == [
+    assert register["register_revision"] == 100
+    assert [row["incident_id"] for row in register["incidents"][-12:]] == [
         "AER-0111",
         "AER-0112",
         "AER-0113",
@@ -112,5 +112,6 @@ def test_exact_review_and_error_register_bind_plan_result() -> None:
         "AER-0119",
         "AER-0120",
         "AER-0121",
+        "AER-0122",
     ]
     assert not [item for item in register["incidents"] if item["status"] == "open"]

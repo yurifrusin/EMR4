@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 99,
+  "register_revision": 100,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4637,6 +4637,46 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-99.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0122",
+      "attempt_id": "raisa-context-fabric-durability-behavior-coordinate-status-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The fixed PostgreSQL client format used by a diagnostic parser must be empirically characterized; an unavailable verbose-field shape must fall back to an equally closed, allowlisted protocol form rather than trigger another speculative repair.",
+      "observed_error": "Failure evidence 006 reported coordinate_status=missing with SQLSTATE 23502. The PostgreSQL client emitted the safe SQLSTATE header but did not emit the separately labelled SCHEMA NAME, TABLE NAME and COLUMN NAME lines assumed by the first coordinate parser.",
+      "detection_method": "The independently accepted branch-status candidate ran once and deterministically selected its missing branch, proving that neither ambiguous nor unlisted coordinate logic was reached.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-006.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-100.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.psql_verbose_coordinate_shape_unavailable",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "When labelled fields are absent, the parser now accepts only the exact English PostgreSQL 23502 header shape, captures its lowercase quoted table and column tokens, and releases them only through the existing relation/column allowlist. Every other header remains missing or unlisted with no identifier release.",
+        "prevention_control": "Before depending on a client diagnostic field layout, preserve a fixed-format characterization test and a minimal allowlisted fallback for the exact observed protocol header; never generalize to free-text parsing.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-100.md"
         ]
       },
       "status": "corrected"

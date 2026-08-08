@@ -55,6 +55,11 @@ FAILURE_EVIDENCE_005 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_006 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-006.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -189,6 +194,13 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
     assert "coordinate_status" not in FAILURE_EVIDENCE_005["environment"]["failure"]
     assert FAILURE_EVIDENCE_005["scenario_reconciliation"]["observed"] == 0
     assert FAILURE_EVIDENCE_005["cleanup"]["absence_verified"] is True
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_006)
+    assert FAILURE_EVIDENCE_006["environment"]["failure"]["sqlstate"] == "23502"
+    assert FAILURE_EVIDENCE_006["environment"]["failure"]["coordinate_status"] == (
+        "missing"
+    )
+    assert FAILURE_EVIDENCE_006["scenario_reconciliation"]["observed"] == 0
+    assert FAILURE_EVIDENCE_006["cleanup"]["absence_verified"] is True
 
 
 def test_bootstrap_failure_telemetry_releases_only_one_safe_sqlstate() -> None:
@@ -282,6 +294,35 @@ def test_bootstrap_diagnostic_metadata_is_exactly_allowlisted() -> None:
     assert rehearsal._safe_bootstrap_failure_metadata(missing) == {
         "sqlstate": "23502",
         "coordinate_status": "missing",
+    }
+
+    header_only = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        (
+            b"psql:<stdin>:19: ERROR:  23502: null value in column "
+            b'"audit_head_digest" of relation "context_durability_checkpoint" '
+            b"violates not-null constraint\n"
+        ),
+    )
+    assert rehearsal._safe_bootstrap_failure_metadata(header_only) == {
+        "sqlstate": "23502",
+        "coordinate_status": "released",
+        "relation": "emr4_context_fabric.context_durability_checkpoint",
+        "column": "audit_head_digest",
+    }
+
+    header_unlisted = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        (
+            b'ERROR:  23502: null value in column "name" of relation '
+            b'"patient" violates not-null constraint\n'
+        ),
+    )
+    assert rehearsal._safe_bootstrap_failure_metadata(header_unlisted) == {
+        "sqlstate": "23502",
+        "coordinate_status": "unlisted_relation",
     }
 
 

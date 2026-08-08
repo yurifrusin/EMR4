@@ -131,3 +131,15 @@ corrects the preceding verifier receipt's nonexistent `_bootstrap_sql()` name;
 the actual reviewed renderer is `render_bootstrap_sql()`. Another diagnostic
 run remains closed until the exact candidate passes deterministic checks and a
 fresh independent veto.
+
+## Sixth runtime failure and fixed-header fallback
+
+Failure evidence 006 selected `coordinate_status=missing`: this psql path did
+not emit separate labelled schema/table/column lines. It still emitted the
+fixed `23502` error header.
+
+The parser now has one non-general fallback for that exact not-null header. It
+extracts the lowercase quoted table/column tokens but releases them only through
+the existing bootstrap allowlist. Any other English text, identifier, error
+class or shape remains sealed. AER-0122 records the empirically missing protocol
+fields. Another run is closed until deterministic and independent acceptance.

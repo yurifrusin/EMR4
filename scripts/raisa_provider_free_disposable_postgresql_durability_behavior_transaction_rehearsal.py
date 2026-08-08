@@ -78,6 +78,11 @@ PSQL_SQLSTATE_LINE = re.compile(
 PSQL_DIAGNOSTIC_LINE = re.compile(
     rb"(?m)^(SCHEMA NAME|TABLE NAME|COLUMN NAME):\s+([a-z][a-z0-9_]*)\s*$"
 )
+PSQL_NOT_NULL_LINE = re.compile(
+    rb"(?m)^(?:psql:[^\r\n]{1,160}:\s*)?ERROR:\s+23502:\s+"
+    rb'null value in column "([a-z][a-z0-9_]*)" of relation '
+    rb'"([a-z][a-z0-9_]*)" violates not-null constraint\s*$'
+)
 
 SAFE_BOOTSTRAP_COLUMNS = {
     "public.appointments": {
@@ -298,6 +303,29 @@ def _safe_bootstrap_failure_metadata(
         fields.setdefault(name, set()).add(value)
     required = (b"SCHEMA NAME", b"TABLE NAME", b"COLUMN NAME")
     if any(len(fields.get(name, set())) == 0 for name in required):
+        header_matches = set(PSQL_NOT_NULL_LINE.findall(raw))
+        if len(header_matches) == 1:
+            column_raw, table_raw = next(iter(header_matches))
+            column = column_raw.decode("ascii")
+            table = table_raw.decode("ascii")
+            relations = [
+                relation
+                for relation in SAFE_BOOTSTRAP_COLUMNS
+                if relation.rsplit(".", 1)[1] == table
+            ]
+            if len(relations) == 1:
+                relation = relations[0]
+                if column in SAFE_BOOTSTRAP_COLUMNS[relation]:
+                    metadata.update(
+                        coordinate_status="released",
+                        relation=relation,
+                        column=column,
+                    )
+                    return metadata
+                metadata["coordinate_status"] = "unlisted_column"
+                return metadata
+            metadata["coordinate_status"] = "unlisted_relation"
+            return metadata
         metadata["coordinate_status"] = "missing"
         return metadata
     if any(len(fields[name]) != 1 for name in required):
