@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_executes_exactly_one_new_owned_local_networkless_no_pull_exact_digest_bound_system_xmin_parse_catalogue_postgresql_16_run_then_verifies_exact_id_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton remain fully rehydrated. The active descendant is the provider-free disposable PostgreSQL durability parse/catalogue exact-pass rebind after successful bounded characterization; it is not application or operational runtime.",
+    "current_authority_allocation": "GPT Sol exclusively owns this one serial local exact-digest parse invocation, exact-ID cleanup and bounded evidence acceptance. No worker or verifier receives Docker or database authority.",
+    "active_plan_and_acceptance": "The accepted plan permits a fresh exact-digest reproduction only after characterization cleanup. Characterization cb72c624 returned catalogue_characterization_required, reproduced all 15 frozen digests, retained only bounded metadata, and removed exact container ffab67da with absence verified. The exact-bound contract validates at SHA-256 7a73b224 over parent 3949a61d, 1,403,184 LF bytes, SHA-256 0379b35f, 412 statements.",
+    "protected_evidence_boundaries": "Only repository-authored SQL metadata and four empty authored-synthetic prerequisite shapes are admitted. Patient, product and protected data; operational sources, databases or credentials; providers; application, API or Diary runtime; commands, writes, migration application, deployment, release, Pages and protected refs remain closed. Missing Docker, daemon or image stops without pull, install or fallback. docs/branding and every unrelated untracked file remain preserved.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 3949a61d60e2a704635b922755670f071569d4f3 with only explicit parse-rebind candidate paths modified or added plus preserved pre-existing untracked files. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. The harness writes only its fixed parse evidence path and may remove only the exact random-ID container it creates after ownership re-verification."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_rehydration_exact_ref_verification_and_completed_characterization_cleanup",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is ready for one exact-digest parse reproduction."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Independent verification is reserved for the later behavior candidate."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

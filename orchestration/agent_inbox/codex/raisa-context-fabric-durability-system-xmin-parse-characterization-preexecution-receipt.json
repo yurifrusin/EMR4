@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_executes_exactly_one_owned_local_networkless_no_pull_system_xmin_function_catalogue_characterization_only_postgresql_16_run_then_verifies_exact_id_cleanup_and_freezes_no_claim",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted plan permits one locally present postgres:16-bookworm no-pull, network-none, no-port, no-mount, tmpfs-only characterization. The exact 3949a61d parent is 1,403,184 LF bytes, SHA-256 0379b35f, 412 statements; 113 focused plan/core tests passed before the explicit characterization-only transition and the fixed contract now validates at SHA-256 5703a3c3.",
+    "current_authority_allocation": "GPT Sol exclusively owns this one serial local characterization invocation, exact-ID cleanup, bounded evidence inspection and deterministic digest binding. No worker or verifier receives Docker or database authority.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 3949a61d60e2a704635b922755670f071569d4f3 with only the explicit parse-rebind candidate paths modified or added plus preserved pre-existing untracked files. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. The harness writes only its fixed parse evidence path and may remove only the exact random-ID container it creates after ownership re-verification.",
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton were fully rehydrated after compaction. The active descendant is the provider-free disposable PostgreSQL durability parse/catalogue rebind after the typed system-xmin record-projection repair; it is not application or operational runtime.",
+    "protected_evidence_boundaries": "Only repository-authored SQL metadata and four empty authored-synthetic prerequisite shapes are admitted. Patient, product and protected data; operational sources, databases or credentials; providers; application, API or Diary runtime; commands, writes, migration application, deployment, release, Pages and protected refs remain closed. Missing Docker, daemon or image stops without pull, install or fallback. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
