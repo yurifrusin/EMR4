@@ -2570,6 +2570,39 @@ def _render_roles(effective: dict[str, Any]) -> list[str]:
     return lines
 
 
+def _ordered_composites(composites: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Return the stable dependency-safe PostgreSQL composite CREATE order."""
+    by_name = {row["name"]: row for row in composites}
+    if len(by_name) != len(composites):
+        raise ValueError("duplicate composite type")
+    dependencies: dict[str, set[str]] = {}
+    for row in composites:
+        refs: set[str] = set()
+        for field in row["fields"]:
+            data_type = field["data_type"]
+            while data_type.endswith("[]"):
+                data_type = data_type[:-2]
+            candidate = _unqualified(data_type)
+            if candidate in by_name:
+                refs.add(candidate)
+        dependencies[row["name"]] = refs
+
+    remaining = list(composites)
+    emitted: set[str] = set()
+    ordered: list[dict[str, Any]] = []
+    while remaining:
+        for index, row in enumerate(remaining):
+            if dependencies[row["name"]].issubset(emitted):
+                ordered.append(row)
+                emitted.add(row["name"])
+                remaining.pop(index)
+                break
+        else:
+            blocked = ",".join(row["name"] for row in remaining)
+            raise ValueError("composite dependency cycle: " + blocked)
+    return ordered
+
+
 def _render_types(effective: dict[str, Any]) -> list[str]:
     lines: list[str] = []
     type_cat = effective["effective_structural"]["type_catalogue"]
@@ -2602,7 +2635,7 @@ def _render_types(effective: dict[str, Any]) -> list[str]:
             + values
             + ");"
         )
-    for composite in type_cat["composites"]:
+    for composite in _ordered_composites(type_cat["composites"]):
         fields = ",\n    ".join(
             _ident(item["name"]) + " " + _type_sql(item["data_type"])
             for item in composite["fields"]
@@ -4466,6 +4499,33 @@ def recognize_inert_sql(
                 "dependency_order", "support helper must precede every RLS policy"
             )
         )
+    composite_rows = (
+        effective.get("effective_structural", {})
+        .get("type_catalogue", {})
+        .get("composites", [])
+    )
+    if isinstance(composite_rows, list) and composite_rows:
+        try:
+            expected_composites = [
+                row["name"] for row in _ordered_composites(composite_rows)
+            ]
+        except (KeyError, TypeError, ValueError):
+            expected_composites = []
+        actual_composites: list[str] = []
+        for statement in statements:
+            match = re.match(
+                r"\s*CREATE TYPE emr4_context_fabric\.([a-zA-Z0-9_]+) AS \(",
+                statement,
+            )
+            if match:
+                actual_composites.append(match.group(1))
+        if actual_composites != expected_composites:
+            issues.append(
+                RecognitionIssue(
+                    "composite_dependency_order",
+                    "composite CREATE order must be stable and dependency-safe",
+                )
+            )
     ordinary_triggers = sum(
         1 for stmt in statements if stmt.lstrip().upper().startswith("CREATE TRIGGER")
     )

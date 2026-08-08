@@ -67,6 +67,12 @@ CREATE TYPE emr4_context_fabric.admission_locator_v1 AS (
     generation_locator emr4_context_fabric.generation_locator_v1,
     source_position pg_catalog.bigint
 );
+CREATE TYPE emr4_context_fabric.future_key_interval_v1 AS (
+    interval_start pg_catalog.bigint,
+    interval_end pg_catalog.bigint,
+    key_id emr4_context_fabric.key_id,
+    availability_attestation_digest emr4_context_fabric.digest_sha256
+);
 CREATE TYPE emr4_context_fabric.generation_registration_v1 AS (
     generation_locator emr4_context_fabric.generation_locator_v1,
     policy_digest emr4_context_fabric.digest_sha256,
@@ -77,12 +83,6 @@ CREATE TYPE emr4_context_fabric.generation_registration_v1 AS (
     impact_digest emr4_context_fabric.digest_sha256,
     key_schedule_digest emr4_context_fabric.digest_sha256,
     initial_key_interval emr4_context_fabric.future_key_interval_v1
-);
-CREATE TYPE emr4_context_fabric.future_key_interval_v1 AS (
-    interval_start pg_catalog.bigint,
-    interval_end pg_catalog.bigint,
-    key_id emr4_context_fabric.key_id,
-    availability_attestation_digest emr4_context_fabric.digest_sha256
 );
 CREATE TYPE emr4_context_fabric.practice_source_stream_v1 AS (
     practice_id pg_catalog.uuid,

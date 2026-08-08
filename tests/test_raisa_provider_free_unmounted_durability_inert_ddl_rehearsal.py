@@ -28,6 +28,7 @@ from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import
     STRUCTURAL_PATH,
     _derive_conflict_constraint,
     _emit_lock_exact,
+    _ordered_composites,
     _verify_trigger_terminals,
     _walk_program_nodes,
     build_lowering_contract,
@@ -235,6 +236,63 @@ def test_phase_populations_and_counts() -> None:
     assert sql.count("CREATE FUNCTION emr4_context_fabric.") == 24
     assert sql.count("ENABLE ROW LEVEL SECURITY") == 18
     assert sql.count("FORCE ROW LEVEL SECURITY") == 18
+
+
+def test_composite_create_order_is_stable_and_dependency_safe() -> None:
+    result = _base_render()
+    composites = result["effective"]["effective_structural"]["type_catalogue"][
+        "composites"
+    ]
+    expected = [
+        "emr4_context_fabric." + row["name"]
+        for row in _ordered_composites(composites)
+    ]
+    actual = [
+        row["identifier"]
+        for row in result["manifest"]["ordered_nodes"]
+        if row["kind"] == "COMPOSITE"
+    ]
+    assert actual == expected
+    assert actual.index("emr4_context_fabric.future_key_interval_v1") < actual.index(
+        "emr4_context_fabric.generation_registration_v1"
+    )
+
+
+def test_composite_dependency_cycle_fails_closed() -> None:
+    hostile = [
+        {"name": "first_v1", "fields": [{"name": "second", "data_type": "second_v1"}]},
+        {"name": "second_v1", "fields": [{"name": "first", "data_type": "first_v1"}]},
+    ]
+    with pytest.raises(ValueError, match="composite dependency cycle"):
+        _ordered_composites(hostile)
+
+
+def test_recognizer_rejects_composite_dependency_order_regression() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    future = re.search(
+        r"CREATE TYPE emr4_context_fabric\.future_key_interval_v1 AS \(\n.*?\n\);",
+        sql,
+        flags=re.DOTALL,
+    )
+    registration = re.search(
+        r"CREATE TYPE emr4_context_fabric\.generation_registration_v1 AS \(\n.*?\n\);",
+        sql,
+        flags=re.DOTALL,
+    )
+    assert future is not None and registration is not None
+    assert future.start() < registration.start()
+    sentinel = "__EMR4_FUTURE_KEY_INTERVAL_COMPOSITE__"
+    mutated = sql.replace(future.group(0), sentinel, 1)
+    mutated = mutated.replace(registration.group(0), future.group(0), 1)
+    mutated = mutated.replace(sentinel, registration.group(0), 1)
+    report = recognize_inert_sql(
+        mutated, result["manifest"], result["effective"]
+    )
+    assert not report.valid
+    assert any(
+        issue.code == "composite_dependency_order" for issue in report.issues
+    )
 
 
 def test_renderer_order_is_preserved() -> None:

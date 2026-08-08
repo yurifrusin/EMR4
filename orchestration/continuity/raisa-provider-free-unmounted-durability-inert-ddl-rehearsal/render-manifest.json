@@ -847,11 +847,11 @@
       "kind": "COMPOSITE"
     },
     {
-      "identifier": "emr4_context_fabric.generation_registration_v1",
+      "identifier": "emr4_context_fabric.future_key_interval_v1",
       "kind": "COMPOSITE"
     },
     {
-      "identifier": "emr4_context_fabric.future_key_interval_v1",
+      "identifier": "emr4_context_fabric.generation_registration_v1",
       "kind": "COMPOSITE"
     },
     {
@@ -2753,7 +2753,7 @@
   "renderer_version": "2.0.0",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
   "sql_byte_count": 1405495,
-  "sql_sha256": "sha256:92d234f8f57d5492e0c4215f9c0d3c54efe9e9ec9cbdaa9b4321a5120b983012",
+  "sql_sha256": "sha256:5e23fce2a805b02ec903c8dd93e25836224e2fc098f19e6ab011a8f2341b299f",
   "statement_count": 412,
   "structural_parent": {
     "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",
