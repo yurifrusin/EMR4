@@ -1,0 +1,35 @@
+{
+  "schema_version": "emr4.disposable-postgresql-manual-cleanup.v1",
+  "date": "2026-08-08",
+  "attempt_id": "b36115915ef60e8cddc46d04",
+  "container_id": "87b1add2374f1de0674b54e967cc6b1a46ffc16e5ffb99d6e66677cc8b6216f8",
+  "pre_removal_exact_id_inspection": {
+    "id_exact": true,
+    "closed_random_name": "emr4-cf-pg16-catalogue-88179f9372ec1c98",
+    "harness_label_exact": true,
+    "cleanup_nonce_present": true,
+    "image_id_exact": true,
+    "image_reference_exact": true,
+    "network_mode_none": true,
+    "binds_absent": true,
+    "privileged_false": true,
+    "port_bindings_empty": true,
+    "memory_bytes": 805306368,
+    "nano_cpus": 1000000000,
+    "pids_limit": 192,
+    "restart_policy": "no",
+    "host_config_tmpfs": {
+      "/var/lib/postgresql/data": "rw,noexec,nosuid,size=536870912"
+    },
+    "normalized_mounts": []
+  },
+  "diagnosis": "docker_desktop_hostconfig_tmpfs_exact_normalized_mounts_empty",
+  "removal_target": "exact_captured_owned_container_id_only",
+  "remove_exit_code": 0,
+  "post_removal_exact_id_inspect_exit_code": 1,
+  "post_removal_absence_phrase": "No such container",
+  "absence_verified": true,
+  "sql_sent": false,
+  "other_container_or_docker_object_inspected_or_removed": false,
+  "authority_boundary": "manual_exact_ID_cleanup_after_fail_closed_harness_ownership_result"
+}

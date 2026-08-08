@@ -741,6 +741,7 @@ def test_cleanup_ownership_requires_every_exact_fact() -> None:
         "tmpfs",
         "port",
         "environment",
+        "unexpected_mount",
     ):
         payload = _owned_inspect()
         if mutate == "id":
@@ -771,6 +772,8 @@ def test_cleanup_ownership_requires_every_exact_fact() -> None:
             payload["HostConfig"]["PortBindings"] = {"5432/tcp": [{"HostPort": "5432"}]}
         elif mutate == "environment":
             payload["Config"]["Env"] = []
+        elif mutate == "unexpected_mount":
+            payload["Mounts"] = [{"Type": "npipe", "Destination": "/other"}]
         assert not rehearsal._container_owned(payload, **kwargs)  # noqa: SLF001
     for malformed in (
         {"Config": None, "HostConfig": {}, "Mounts": []},
@@ -779,6 +782,20 @@ def test_cleanup_ownership_requires_every_exact_fact() -> None:
         {"Config": {"Labels": []}, "HostConfig": {}, "Mounts": []},
     ):
         assert not rehearsal._container_owned(malformed, **kwargs)  # noqa: SLF001
+
+
+def test_cleanup_ownership_accepts_docker_desktop_empty_mounts_projection() -> None:
+    profile = CONTRACT["docker_profile"]
+    payload = _owned_inspect()
+    payload["Mounts"] = []
+    assert rehearsal._container_owned(  # noqa: SLF001
+        payload,
+        container_id="a" * 64,
+        name="emr4-cf-pg16-catalogue-0123456789abcdef",
+        nonce="0" * 32,
+        image_id="sha256:" + "b" * 64,
+        profile=profile,
+    )
 
 
 def test_exact_absence_requires_documented_no_such_object() -> None:

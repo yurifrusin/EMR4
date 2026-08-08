@@ -90,6 +90,17 @@ The failed evidence is preserved. Recovery accepts only those two documented
 nonzero exact-inspect absence phrases; success, daemon failure and every other
 response remain non-absence and cannot authorize creation or cleanup.
 
+The next newly owned attempt reached exact-ID containment verification and
+failed closed before readiness or SQL because Docker Desktop position-closes a
+`--tmpfs` declaration in `HostConfig.Tmpfs` while leaving its normalized
+`Mounts` projection empty. Exact manual inspection reproduced every ownership
+label, nonce, ID, name, image, network, resource, port, restart and tmpfs
+`HostConfig` fact; Sol then removed only that exact verified ID and exact-ID
+inspection proved absence. The failed evidence and manual-cleanup receipt are
+preserved. Recovery continues to require the exact `HostConfig.Tmpfs` path and
+options and rejects every other mount, but accepts either Docker Engine's one
+matching normalized tmpfs row or Docker Desktop's empty normalized projection.
+
 The expected PostgreSQL-16 deparse digests cannot safely be guessed from the
 source spelling. The repaired contract therefore begins in
 `characterization_only`: one fresh-vetoed, exact-artifact disposable run may

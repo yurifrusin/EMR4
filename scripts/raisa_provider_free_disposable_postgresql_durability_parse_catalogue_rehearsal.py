@@ -1246,6 +1246,14 @@ def _container_owned(
         for row in mounts
         if row.get("Type") == "tmpfs" and row.get("Destination") == tmpfs_path
     ]
+    # Docker Desktop can position-close a --tmpfs mount only in
+    # HostConfig.Tmpfs while leaving the normalized Mounts projection empty.
+    # Linux Engine may additionally expose one matching Mounts row.  The exact
+    # HostConfig declaration remains mandatory in both representations, and
+    # any other normalized mount remains forbidden.
+    normalized_tmpfs_closed = not mounts or (
+        len(mounts) == len(tmpfs_mounts) == 1
+    )
     expected_environment = {
         f'POSTGRES_USER={profile["postgres_user"]}',
         f'POSTGRES_PASSWORD={profile["postgres_password"]}',
@@ -1269,7 +1277,7 @@ def _container_owned(
         and host.get("PidsLimit") == profile["pids_limit"]
         and host.get("RestartPolicy", {}).get("Name") in {"", "no"}
         and (host.get("Tmpfs") or {}) == {tmpfs_path: tmpfs_options}
-        and len(mounts) == len(tmpfs_mounts) == 1
+        and normalized_tmpfs_closed
         and expected_environment.issubset(environment)
     )
 
