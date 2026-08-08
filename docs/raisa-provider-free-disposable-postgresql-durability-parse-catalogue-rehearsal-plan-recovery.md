@@ -357,3 +357,31 @@ closed constraint-kind counts and canonical SHA-256 digests of the sorted
 missing/unexpected identifier sets. It retains no identifier, definition, SQL
 or server error text and cannot influence a query, command, cleanup target or
 retry. SQL, contracts, catalogue assertions and authority remain unchanged.
+
+## Constraint-trigger catalogue filtering recovery
+
+Attempt `88a9e0ec0f11f30d0ab38bb8` again passed stable readiness, the exact
+late-suffix rollback case, success prerequisites and all 412 artifact
+statements. The new diagnostic proved all 81 expected table constraints were
+present, with zero missing, while PostgreSQL returned exactly three additional
+`other` constraint rows. Exact container
+`d66da237fc0585a68b975ed823cf9bf2e7d338bd41baf9c819157214a7dbaec9`
+was removed and absence verified.
+
+The fixed constraint query scoped `pg_constraint` only by the fabric relation
+namespace. PostgreSQL also represents constraint triggers there with
+`contype='t'`: exactly three of the seven authored deferred constraint triggers
+target fabric-schema relations, while the other four target the deliberately
+separate `public` prerequisites. The canonical digest of those three authored
+fabric trigger-constraint identifiers exactly matches the unexpected-set
+digest retained by the run. The separate trigger query already verifies all
+fourteen trigger declarations, including all seven deferred constraint
+triggers.
+
+Recovery narrows only the read-only table-constraint catalogue query to the
+accepted `c/f/p/u` kinds. It does not hide an unknown kind: any unexpected
+table constraint of an admitted kind still changes the exact identifier set,
+and every trigger remains independently population- and definition-checked.
+Artifact SQL, contracts, manifest, assertions, commands, cleanup, runtime and
+authority remain unchanged. A fresh exact-HEAD veto is required before one new
+owned characterization run.

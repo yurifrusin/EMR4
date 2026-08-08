@@ -1028,6 +1028,7 @@ FROM (
   JOIN pg_catalog.pg_class AS c ON c.oid = con.conrelid
   JOIN pg_catalog.pg_namespace AS n ON n.oid = c.relnamespace
   WHERE n.nspname = 'emr4_context_fabric'
+    AND con.contype IN ('c', 'f', 'p', 'u')
 ) AS q
 """,
     "indexes": """
