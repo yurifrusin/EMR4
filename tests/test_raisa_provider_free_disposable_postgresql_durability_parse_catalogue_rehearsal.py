@@ -218,7 +218,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_404_044
+    assert len(artifact) == 1_403_432
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 388
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001

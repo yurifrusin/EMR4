@@ -41,7 +41,7 @@ EXPECTED_PREREQUISITE_PATH = (
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:aa95a58ff94f9dc2b614ee294a2a85dcb91071d0a1252d248c7c06b57357102c"
+    "sha256:45e97b888104a0fab76b077daa836860ae4480f1306455682f242cb66e6320da"
 )
 EXPECTED_PREREQUISITE_SHA256 = (
     "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"

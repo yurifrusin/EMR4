@@ -234,3 +234,9 @@ still required for typed provenance analysis, but the renderer must omit it
 from all eighteen physical `CREATE TABLE` column lists and fail closed if its
 accepted modeled shape drifts. This recovery changes no logical relation,
 provenance expression, constraint, function, trigger, RLS policy or authority.
+
+Parent recovery commit `b9ffa0cbac24e08d130a8dcb9653678f81fa4268`
+binds the resulting 412-statement canonical artifact at `1403432` LF bytes and
+SHA-256 `931b0eab6438dfcaf1b1836861972aa25a7f8619e3eaae7edfa3e941cb5f70d2`.
+The descendant contract must bind these exact values before any replacement
+review or runtime.
