@@ -51,6 +51,7 @@ FABRIC_SCHEMA = "emr4_context_fabric"
 IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 POSTGRES_16_VERSION_NUM = re.compile(rb"^16[0-9]{4}$")
+VERBOSE_SQLSTATE = re.compile(rb"(?:ERROR|FATAL):\s+([0-9A-Z]{5}):")
 ROLE_LINE = re.compile(
     r"^CREATE ROLE ([a-z][a-z0-9_]*) (NO)?LOGIN (NO)?INHERIT "
     r"NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;$",
@@ -684,6 +685,13 @@ def _is_postgres_16_version_output(stdout: bytes) -> bool:
     elif value.endswith(b"\n"):
         value = value[:-1]
     return POSTGRES_16_VERSION_NUM.fullmatch(value) is not None
+
+
+def _observed_sqlstates(stderr: bytes) -> list[str]:
+    """Extract only closed five-character SQLSTATE identifiers from stderr."""
+    return sorted(
+        {match.decode("ascii") for match in VERBOSE_SQLSTATE.findall(stderr)}
+    )
 
 
 def _wait_for_stable_postgres(
@@ -1709,10 +1717,19 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                     artifact + contract["psql_admission"]["invalid_suffix"].encode("utf-8"),
                 )
                 stderr = invalid.stderr
+                expected_sqlstate = contract["psql_admission"]["expected_sqlstate"]
+                observed_sqlstates = _observed_sqlstates(stderr)
+                rollback = {
+                    "status": "invalid_case_observed",
+                    "psql_exit": invalid.returncode,
+                    "expected_sqlstate": expected_sqlstate,
+                    "expected_sqlstate_seen": expected_sqlstate in observed_sqlstates,
+                    "observed_sqlstates": observed_sqlstates,
+                    "stderr": _bounded_digest(stderr),
+                }
                 if (
                     invalid.returncode != contract["psql_admission"]["expected_psql_exit"]
-                    or contract["psql_admission"]["expected_sqlstate"].encode("ascii")
-                    not in stderr
+                    or not rollback["expected_sqlstate_seen"]
                 ):
                     raise RehearsalFailure(
                         "rollback", "unexpected_failure_shape", str(invalid.returncode)
@@ -1733,14 +1750,13 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                 )
                 if absence != {"schema_count": 0, "role_count": 0}:
                     raise RehearsalFailure("rollback", "objects_survived")
-                rollback = {
-                    "status": "matched",
-                    "database_local_schema_count": 0,
-                    "cluster_role_count": 0,
-                    "psql_exit": invalid.returncode,
-                    "sqlstate": contract["psql_admission"]["expected_sqlstate"],
-                    "stderr": _bounded_digest(stderr),
-                }
+                rollback.update(
+                    {
+                        "status": "matched",
+                        "database_local_schema_count": 0,
+                        "cluster_role_count": 0,
+                    }
+                )
                 lifecycle.append("rollback_case_matched")
             else:
                 lifecycle.append("success_database_ready")

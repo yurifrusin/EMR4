@@ -588,6 +588,17 @@ def test_postgres_16_version_output_is_exact(stdout: bytes, expected: bool) -> N
     assert rehearsal._is_postgres_16_version_output(stdout) is expected  # noqa: SLF001
 
 
+def test_observed_sqlstates_are_closed_sorted_and_deduplicated() -> None:
+    stderr = (
+        b"psql:<stdin>:8: ERROR:  42P01: relation missing\n"
+        b"DETAIL: raw authored synthetic detail\n"
+        b"psql:<stdin>:9: FATAL:  28000: role rejected\n"
+        b"psql:<stdin>:10: ERROR:  42P01: repeated\n"
+        b"ERROR:  not-a-code: ignored\n"
+    )
+    assert rehearsal._observed_sqlstates(stderr) == ["28000", "42P01"]  # noqa: SLF001
+
+
 def test_postgres_readiness_caps_each_probe_to_startup_deadline() -> None:
     profile = copy.deepcopy(CONTRACT["docker_profile"])
     profile["startup_timeout_seconds"] = 1

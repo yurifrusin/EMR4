@@ -173,6 +173,19 @@ removing unnecessary SQL casts. A fixed value-free classifier records only a
 closed diagnostic category if any SQL probe still fails; raw stderr remains
 digest-only.
 
+The direct-query attempt `ea70edf697e7afc979f01d9a` then passed stable
+authenticated readiness, created the rollback database and installed all four
+empty prerequisite relations. The streamed invalid installation returned the
+expected psql exit 3 but did not expose expected SQLSTATE `42601` to the old
+checker, so the run stopped before rollback absence readback or the success
+database. Exact-ID cleanup removed
+`4d9f9a40341b6f9e117f4c50c2f898ac3859f33e044e898e527aa458332e0a4a`
+and proved absence. This is consistent with an earlier artifact rejection but
+does not establish its error. Recovery now records psql exit, stderr digest,
+expected-SQLSTATE presence and only sorted unique five-character SQLSTATE codes
+from verbose stderr before failing closed; no raw message or SQL value is
+retained.
+
 ## Claim boundary
 
 This recovery grants no further database execution until the corrected parent
