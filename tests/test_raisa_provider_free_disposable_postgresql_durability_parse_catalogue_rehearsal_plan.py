@@ -24,10 +24,14 @@ PARENT_SQL = (
     / "durability-schema.sql.inert"
 )
 PARENT_MANIFEST = PARENT_SQL.with_name("render-manifest.json")
+RECOVERY = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery.md"
+)
 
-PARENT_HEAD = "e8d07a35727cbbca2d377eae40160b33ef955b4e"
+PARENT_HEAD = "580c1d05ed150cdfd63549f1a35e61c72a41cb20"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36"
+PARENT_DIGEST = "9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65"
 
 
 def _text(path: Path) -> str:
@@ -39,7 +43,7 @@ def _flat(*paths: Path) -> str:
 
 
 def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
-    plan = _text(PLAN)
+    plan = _flat(PLAN, RECOVERY)
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
     raw = PARENT_SQL.read_bytes()
@@ -47,14 +51,14 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_404_433
+    assert manifest["sql_byte_count"] == 1_404_420
     assert manifest["statement_count"] == 412
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "canonical UTF-8/LF byte count `1404433`" in plan
+    assert "1,404,420 bytes" in plan
     assert "statement count `412`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
 
@@ -170,7 +174,9 @@ def test_claim_boundary_and_forbidden_surfaces_are_explicit() -> None:
 def test_standing_continuation_and_worker_allocation_are_recorded() -> None:
     combined = _flat(PLAN, DESIGN)
 
-    assert "Sol owns planning, implementation, the serial disposable runtime" in combined
+    assert (
+        "Sol owns planning, implementation, the serial disposable runtime" in combined
+    )
     assert "fresh Gemini 3.6 Flash/high Antigravity context" in combined
     assert "immediately enters the next dependency-satisfied planned gate" in combined
 

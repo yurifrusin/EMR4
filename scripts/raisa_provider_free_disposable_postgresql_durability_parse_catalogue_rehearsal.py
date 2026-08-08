@@ -41,7 +41,7 @@ EXPECTED_PREREQUISITE_PATH = (
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:22713616e6410f41d8d1a591c8c804e6881d52ac9f547330bad7a9c0855d062e"
+    "sha256:c53d45e2caf9d3ab6e1424f209a165503346294ad6afa8836850b981351291b6"
 )
 EXPECTED_PREREQUISITE_SHA256 = (
     "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
@@ -52,9 +52,7 @@ IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 POSTGRES_16_VERSION_NUM = re.compile(rb"^16[0-9]{4}$")
 VERBOSE_SQLSTATE = re.compile(rb"(?:ERROR|FATAL):\s+([0-9A-Z]{5}):")
-VERBOSE_PSQL_ERROR_LINE = re.compile(
-    rb"psql:<stdin>:([1-9][0-9]*):\s+(?:ERROR|FATAL):"
-)
+VERBOSE_PSQL_ERROR_LINE = re.compile(rb"psql:<stdin>:([1-9][0-9]*):\s+(?:ERROR|FATAL):")
 VERBOSE_STATEMENT_LINE = re.compile(rb"(?:^|\n)LINE\s+([1-9][0-9]*):", re.MULTILINE)
 VERBOSE_POSITION = re.compile(
     rb"(?:^|\n)(?:POSITION|INTERNAL POSITION):\s+([1-9][0-9]*)",
@@ -87,9 +85,7 @@ CLAIM_BOUNDARY = (
     "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only"
 )
 FUNCTION_OWNER_OVERRIDES = {
-    "emr4_context_fabric.admit_proofread_observation_v1": (
-        "context_admission_receiver"
-    )
+    "emr4_context_fabric.admit_proofread_observation_v1": ("context_admission_receiver")
 }
 
 
@@ -155,7 +151,9 @@ def _canonical_artifact(raw: bytes) -> bytes:
     try:
         raw.decode("utf-8")
     except UnicodeDecodeError as error:
-        raise RehearsalFailure("parent", "artifact_not_utf8", str(error.start)) from error
+        raise RehearsalFailure(
+            "parent", "artifact_not_utf8", str(error.start)
+        ) from error
     return raw
 
 
@@ -184,7 +182,9 @@ def _outside_dollar_quoted(sql: str) -> str:
     return "".join(output)
 
 
-def _validate_contracts() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes]:
+def _validate_contracts() -> tuple[
+    dict[str, Any], dict[str, Any], dict[str, Any], bytes
+]:
     if CONTRACT_PATH.relative_to(ROOT).as_posix() != EXPECTED_CONTRACT_PATH:
         raise RehearsalFailure("contract", "rehearsal_path_drift")
     if PREREQUISITE_PATH.relative_to(ROOT).as_posix() != EXPECTED_PREREQUISITE_PATH:
@@ -257,9 +257,7 @@ def _validate_contracts() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any
     if FORBIDDEN_META.search(top_level):
         raise RehearsalFailure("parent", "psql_meta_command_present")
     expected_roles = {
-        row["identifier"]
-        for row in manifest["ordered_nodes"]
-        if row["kind"] == "ROLE"
+        row["identifier"] for row in manifest["ordered_nodes"] if row["kind"] == "ROLE"
     }
     parsed_roles = {match.group(1) for match in ROLE_LINE.finditer(decoded)}
     if parsed_roles != expected_roles:
@@ -324,12 +322,10 @@ def render_prerequisite_sql(contract: dict[str, Any]) -> bytes:
             columns = ", ".join(f'"{name}"' for name in constraint["columns"])
             members.append(
                 f'    CONSTRAINT "{constraint["name"]}" '
-                f'{constraint["kind"]} ({columns})'
+                f"{constraint['kind']} ({columns})"
             )
         statements.append(
-            f'CREATE TABLE public."{table["name"]}" (\n'
-            + ",\n".join(members)
-            + "\n);"
+            f'CREATE TABLE public."{table["name"]}" (\n' + ",\n".join(members) + "\n);"
         )
     return ("\n\n".join(statements) + "\n").encode("utf-8")
 
@@ -495,7 +491,7 @@ def docker_argv(
             "--name",
             name,
             "--label",
-            f'com.emr4.harness={labels["com.emr4.harness"]}',
+            f"com.emr4.harness={labels['com.emr4.harness']}",
             "--label",
             f"com.emr4.cleanup-nonce={nonce}",
             "--pull=never",
@@ -511,13 +507,13 @@ def docker_argv(
             "--restart",
             profile["restart"],
             "--env",
-            f'POSTGRES_USER={profile["postgres_user"]}',
+            f"POSTGRES_USER={profile['postgres_user']}",
             "--env",
-            f'POSTGRES_PASSWORD={profile["postgres_password"]}',
+            f"POSTGRES_PASSWORD={profile['postgres_password']}",
             "--env",
-            f'POSTGRES_DB={profile["postgres_database"]}',
+            f"POSTGRES_DB={profile['postgres_database']}",
             "--env",
-            f'PGDATA={profile["pgdata"]}',
+            f"PGDATA={profile['pgdata']}",
             image,
         ]
     if operation is DockerOperation.READY:
@@ -707,9 +703,7 @@ def _is_postgres_16_version_output(stdout: bytes) -> bool:
 
 def _observed_sqlstates(stderr: bytes) -> list[str]:
     """Extract only closed five-character SQLSTATE identifiers from stderr."""
-    return sorted(
-        {match.decode("ascii") for match in VERBOSE_SQLSTATE.findall(stderr)}
-    )
+    return sorted({match.decode("ascii") for match in VERBOSE_SQLSTATE.findall(stderr)})
 
 
 def _bounded_psql_rejection(
@@ -844,18 +838,11 @@ def _wait_for_stable_postgres(
                     ) from error
                 raise
             state["last_sql_probe_exit"] = sql_probe.returncode
-            state["last_sql_stdout_digest"] = "sha256:" + _bytes_sha(
+            state["last_sql_stdout_digest"] = "sha256:" + _bytes_sha(sql_probe.stdout)
+            state["last_sql_stderr_digest"] = "sha256:" + _bytes_sha(sql_probe.stderr)
+            state["last_sql_failure_class"] = _readiness_failure_class(sql_probe.stderr)
+            sql_ready = sql_probe.returncode == 0 and _is_postgres_16_version_output(
                 sql_probe.stdout
-            )
-            state["last_sql_stderr_digest"] = "sha256:" + _bytes_sha(
-                sql_probe.stderr
-            )
-            state["last_sql_failure_class"] = _readiness_failure_class(
-                sql_probe.stderr
-            )
-            sql_ready = (
-                sql_probe.returncode == 0
-                and _is_postgres_16_version_output(sql_probe.stdout)
             )
             if sql_ready:
                 state["sql_probe_successes"] += 1
@@ -893,9 +880,7 @@ def _query_json(
     sql: str,
 ) -> Any:
     wrapped = (
-        "SET TRANSACTION READ ONLY;\n"
-        + sql.rstrip().rstrip(";")
-        + ";\n"
+        "SET TRANSACTION READ ONLY;\n" + sql.rstrip().rstrip(";") + ";\n"
     ).encode("utf-8")
     argv = docker_argv(
         DockerOperation.PSQL_FILE,
@@ -1205,7 +1190,11 @@ def _constraint_population_diagnostic(
     for identifier in expected_identifiers:
         name = identifier.rsplit(".", 1)[-1]
         kind = next(
-            (value for prefix, value in prefix_kinds.items() if name.startswith(prefix)),
+            (
+                value
+                for prefix, value in prefix_kinds.items()
+                if name.startswith(prefix)
+            ),
             "other",
         )
         expected_kind_counts[kind] = expected_kind_counts.get(kind, 0) + 1
@@ -1258,9 +1247,7 @@ def _read_catalogue(
     profile: dict[str, Any],
 ) -> dict[str, Any]:
     return {
-        query_id: _query_json(
-            runner, docker, container_id, database, profile, sql
-        )
+        query_id: _query_json(runner, docker, container_id, database, profile, sql)
         for query_id, sql in CATALOGUE_SQL.items()
     }
 
@@ -1285,7 +1272,9 @@ def _assert_catalogue(
     role_login = {
         match.group(1): match.group(2) is None
         for match in ROLE_LINE.finditer(
-            _canonical_artifact((ROOT / _json(CONTRACT_PATH)["parent"]["artifact_path"]).read_bytes()).decode("utf-8")
+            _canonical_artifact(
+                (ROOT / _json(CONTRACT_PATH)["parent"]["artifact_path"]).read_bytes()
+            ).decode("utf-8")
         )
     }
     for role in roles:
@@ -1477,7 +1466,9 @@ def _install_prerequisites(
         cap=profile["stdout_stderr_cap_bytes"],
     )
     if result.returncode != 0:
-        raise RehearsalFailure("prerequisite", "installation_failed", str(result.returncode))
+        raise RehearsalFailure(
+            "prerequisite", "installation_failed", str(result.returncode)
+        )
 
 
 def _stream_artifact(
@@ -1519,9 +1510,7 @@ def _container_owned(
     mounts = inspect.get("Mounts")
     if not isinstance(config, dict) or not isinstance(host, dict):
         return False
-    if not isinstance(mounts, list) or any(
-        not isinstance(row, dict) for row in mounts
-    ):
+    if not isinstance(mounts, list) or any(not isinstance(row, dict) for row in mounts):
         return False
     labels = config.get("Labels") or {}
     environment = config.get("Env") or []
@@ -1540,14 +1529,12 @@ def _container_owned(
     # Linux Engine may additionally expose one matching Mounts row.  The exact
     # HostConfig declaration remains mandatory in both representations, and
     # any other normalized mount remains forbidden.
-    normalized_tmpfs_closed = not mounts or (
-        len(mounts) == len(tmpfs_mounts) == 1
-    )
+    normalized_tmpfs_closed = not mounts or (len(mounts) == len(tmpfs_mounts) == 1)
     expected_environment = {
-        f'POSTGRES_USER={profile["postgres_user"]}',
-        f'POSTGRES_PASSWORD={profile["postgres_password"]}',
-        f'POSTGRES_DB={profile["postgres_database"]}',
-        f'PGDATA={profile["pgdata"]}',
+        f"POSTGRES_USER={profile['postgres_user']}",
+        f"POSTGRES_PASSWORD={profile['postgres_password']}",
+        f"POSTGRES_DB={profile['postgres_database']}",
+        f"PGDATA={profile['pgdata']}",
     }
     return bool(
         inspect.get("Id") == container_id
@@ -1657,7 +1644,10 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
         "removed": False,
         "absence_verified": False,
     }
-    environment: dict[str, Any] = {"docker_client": "unresolved", "image": "uninspected"}
+    environment: dict[str, Any] = {
+        "docker_client": "unresolved",
+        "image": "uninspected",
+    }
     failure: RehearsalFailure | None = None
     container_id = ""
     image_id = ""
@@ -1744,7 +1734,9 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
             cap=profile["stdout_stderr_cap_bytes"],
         )
         if created.returncode != 0:
-            raise RehearsalFailure("container", "create_failed", str(created.returncode))
+            raise RehearsalFailure(
+                "container", "create_failed", str(created.returncode)
+            )
         container_id = created.stdout.decode("ascii").strip()
         if not re.fullmatch(r"[0-9a-f]{12,64}", container_id):
             raise RehearsalFailure("container", "created_id_invalid")
@@ -1814,7 +1806,8 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                     container_id,
                     database,
                     profile,
-                    artifact + contract["psql_admission"]["invalid_suffix"].encode("utf-8"),
+                    artifact
+                    + contract["psql_admission"]["invalid_suffix"].encode("utf-8"),
                 )
                 stderr = invalid.stderr
                 expected_sqlstate = contract["psql_admission"]["expected_sqlstate"]
@@ -1842,7 +1835,8 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                     "stderr": bounded_rejection["stderr"],
                 }
                 if (
-                    invalid.returncode != contract["psql_admission"]["expected_psql_exit"]
+                    invalid.returncode
+                    != contract["psql_admission"]["expected_psql_exit"]
                     or not rollback["expected_sqlstate_seen"]
                     or not rollback["expected_error_line_seen"]
                 ):
@@ -1903,9 +1897,7 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                         "artifact", "postgresql_rejected", str(admitted.returncode)
                     )
                 lifecycle.append("artifact_admitted")
-                facts = _read_catalogue(
-                    runner, docker, container_id, database, profile
-                )
+                facts = _read_catalogue(runner, docker, container_id, database, profile)
                 if set(facts) != set(contract["catalogue_query_ids"]):
                     raise RehearsalFailure("catalogue", "query_population")
                 if facts["extensions"] != baseline_extensions:
@@ -1921,9 +1913,7 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                         ),
                     }
                     raise RehearsalFailure("catalogue", "constraint_population")
-                assertion = _assert_catalogue(
-                    facts, manifest, prerequisite, contract
-                )
+                assertion = _assert_catalogue(facts, manifest, prerequisite, contract)
                 if contract["catalogue_expectation"]["mode"] == "characterization_only":
                     catalogue = {"status": "characterized", **assertion}
                     lifecycle.append("catalogue_characterized")

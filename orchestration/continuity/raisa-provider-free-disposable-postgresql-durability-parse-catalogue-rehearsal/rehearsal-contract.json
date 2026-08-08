@@ -2,13 +2,13 @@
   "schema_version": "emr4.disposable-postgresql-durability-rehearsal-contract.v1",
   "status": "accepted_for_bounded_implementation",
   "parent": {
-    "accepted_source_head": "e8d07a35727cbbca2d377eae40160b33ef955b4e",
+    "accepted_source_head": "580c1d05ed150cdfd63549f1a35e61c72a41cb20",
     "planning_baseline_head": "253230a25ab172b90bc5f44772670c7df89b3052",
     "accepted_plan_head": "c5f0960a240b7f162b1b34e1b09fb166d12fd42e",
     "artifact_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
     "manifest_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-    "artifact_sha256": "a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36",
-    "artifact_byte_count": 1404433,
+    "artifact_sha256": "9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65",
+    "artifact_byte_count": 1404420,
     "statement_count": 412,
     "postgresql_major": 16,
     "phase_count": 6
