@@ -256,6 +256,37 @@ def test_renderer_rejects_modeled_system_xmin_shape_drift() -> None:
         _render_relations(effective)
 
 
+def test_renderer_stages_relation_dependencies_by_statement_family() -> None:
+    sql = _base_render()["sql_text"]
+    tables = [match.start() for match in re.finditer(r"^CREATE TABLE ", sql, re.MULTILINE)]
+    keys = [
+        match.start()
+        for match in re.finditer(
+            r"^(?:ALTER TABLE .* ADD CONSTRAINT (?:pk|uq)_|CREATE UNIQUE INDEX uq_)",
+            sql,
+            re.MULTILINE,
+        )
+    ]
+    foreign_keys = [
+        match.start()
+        for match in re.finditer(
+            r"^ALTER TABLE .* ADD CONSTRAINT fk_", sql, re.MULTILINE
+        )
+    ]
+    checks = [
+        match.start()
+        for match in re.finditer(
+            r"^ALTER TABLE .* ADD CONSTRAINT ck_", sql, re.MULTILINE
+        )
+    ]
+
+    assert len(tables) == 18
+    assert tables and keys and foreign_keys and checks
+    assert max(tables) < min(keys)
+    assert max(keys) < min(foreign_keys)
+    assert max(foreign_keys) < min(checks)
+
+
 def test_canonical_artifacts_regenerate_exactly() -> None:
     outcome = check_artifacts()
     assert outcome["valid"], outcome["issues"]

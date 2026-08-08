@@ -240,3 +240,19 @@ binds the resulting 412-statement canonical artifact at `1403432` LF bytes and
 SHA-256 `931b0eab6438dfcaf1b1836861972aa25a7f8619e3eaae7edfa3e941cb5f70d2`.
 The descendant contract must bind these exact values before any replacement
 review or runtime.
+
+## Relation dependency-family recovery
+
+Attempt `375b7a28c8ddf543486145e7` passed stable authenticated readiness,
+rollback-database creation and all four empty prerequisites, proving the
+system-column correction. The artifact then stopped with bounded SQLSTATE
+`42P01`, retained only a 160-byte stderr digest and removed exact container
+`57c529683ee441a226b8190ba097ca2b445b0dc9a047807f6d6dc4042102132e`,
+with absence verified. Success-database and catalogue work did not start.
+
+The renderer interleaved each table with its constraints, so the first forward
+foreign key could name `context_observer_generation` before that relation was
+created. The recovery preserves accepted relation order within four physical
+statement families: create all tables; establish every primary/unique key;
+add every foreign key; then add every check. This handles forward references
+and relation cycles without changing any object, field, constraint or policy.

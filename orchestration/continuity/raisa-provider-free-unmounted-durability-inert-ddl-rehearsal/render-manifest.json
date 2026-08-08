@@ -875,7 +875,251 @@
       "kind": "TABLE"
     },
     {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_generation_registry_barrier",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_pin",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding",
+      "kind": "TABLE"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy",
+      "kind": "TABLE"
+    },
+    {
       "identifier": "emr4_context_fabric.context_observation_stream_head.pk_cf_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.pk_cf_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.uq_cf_02_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.pk_cf_03",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.uq_cf_03_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission.pk_cf_04",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "uq_cf_04_01",
+      "kind": "UNIQUE_INDEX"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_generation_registry_barrier.pk_cf_05",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation.pk_cf_06",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint.pk_cf_07",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor.pk_cf_08",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor.uq_cf_08_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.pk_cf_09",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.uq_cf_09_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.uq_cf_09_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation.pk_cf_10",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "uq_cf_10_01",
+      "kind": "UNIQUE_INDEX"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark.pk_cf_11",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation.pk_cf_12",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "uq_cf_12_01",
+      "kind": "UNIQUE_INDEX"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle.pk_cf_13",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle.uq_cf_13_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit.pk_cf_14",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit.uq_cf_14_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval.pk_cf_15",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval.uq_cf_15_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_pin.pk_cf_16",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_service_practice_binding.pk_cf_17",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "uq_cf_17_01",
+      "kind": "UNIQUE_INDEX"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_retention_policy.pk_cf_18",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.fk_cf_02_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.fk_cf_03_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.fk_cf_03_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_proofread_observation_admission.fk_cf_04_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observer_generation.fk_cf_06_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_checkpoint.fk_cf_07_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_recovery_anchor.fk_cf_08_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.fk_cf_09_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_classified_observation_receipt.fk_cf_09_02",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_frame_generation.fk_cf_10_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_invalidation_watermark.fk_cf_11_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_reassembly_obligation.fk_cf_12_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_lifecycle.fk_cf_13_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_durability_audit.fk_cf_14_01",
+      "kind": "CONSTRAINT"
+    },
+    {
+      "identifier": "emr4_context_fabric.context_observation_key_interval.fk_cf_15_01",
       "kind": "CONSTRAINT"
     },
     {
@@ -891,43 +1135,7 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.pk_cf_02",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.uq_cf_02_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.fk_cf_02_01",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.diary_context_aggregate_aliases_v1.ck_cf_02_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.pk_cf_03",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.uq_cf_03_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.fk_cf_03_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.diary_context_observation_outbox_v1.fk_cf_03_02",
       "kind": "CONSTRAINT"
     },
     {
@@ -947,22 +1155,6 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.context_proofread_observation_admission",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_proofread_observation_admission.pk_cf_04",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "uq_cf_04_01",
-      "kind": "UNIQUE_INDEX"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_proofread_observation_admission.fk_cf_04_01",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.context_proofread_observation_admission.ck_cf_04_01",
       "kind": "CONSTRAINT"
     },
@@ -971,27 +1163,7 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.context_generation_registry_barrier",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_generation_registry_barrier.pk_cf_05",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.context_generation_registry_barrier.ck_cf_05_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_observer_generation",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_observer_generation.pk_cf_06",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_observer_generation.fk_cf_06_01",
       "kind": "CONSTRAINT"
     },
     {
@@ -1007,18 +1179,6 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.context_durability_checkpoint",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_checkpoint.pk_cf_07",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_checkpoint.fk_cf_07_01",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.context_durability_checkpoint.ck_cf_07_01",
       "kind": "CONSTRAINT"
     },
@@ -1031,51 +1191,11 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.context_recovery_anchor",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_recovery_anchor.pk_cf_08",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_recovery_anchor.uq_cf_08_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_recovery_anchor.fk_cf_08_01",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.context_recovery_anchor.ck_cf_08_01",
       "kind": "CONSTRAINT"
     },
     {
       "identifier": "emr4_context_fabric.context_recovery_anchor.ck_cf_08_02",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_classified_observation_receipt",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_classified_observation_receipt.pk_cf_09",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_classified_observation_receipt.uq_cf_09_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_classified_observation_receipt.uq_cf_09_02",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_classified_observation_receipt.fk_cf_09_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_classified_observation_receipt.fk_cf_09_02",
       "kind": "CONSTRAINT"
     },
     {
@@ -1091,22 +1211,6 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.context_frame_generation",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_frame_generation.pk_cf_10",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "uq_cf_10_01",
-      "kind": "UNIQUE_INDEX"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_frame_generation.fk_cf_10_01",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.context_frame_generation.ck_cf_10_01",
       "kind": "CONSTRAINT"
     },
@@ -1115,35 +1219,7 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.context_invalidation_watermark",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_invalidation_watermark.pk_cf_11",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_invalidation_watermark.fk_cf_11_01",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.context_invalidation_watermark.ck_cf_11_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_reassembly_obligation",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_reassembly_obligation.pk_cf_12",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "uq_cf_12_01",
-      "kind": "UNIQUE_INDEX"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_reassembly_obligation.fk_cf_12_01",
       "kind": "CONSTRAINT"
     },
     {
@@ -1155,59 +1231,11 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.context_durability_lifecycle",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_lifecycle.pk_cf_13",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_lifecycle.uq_cf_13_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_lifecycle.fk_cf_13_01",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.context_durability_lifecycle.ck_cf_13_01",
       "kind": "CONSTRAINT"
     },
     {
       "identifier": "emr4_context_fabric.context_durability_lifecycle.ck_cf_13_02",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_audit",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_audit.pk_cf_14",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_audit.uq_cf_14_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_durability_audit.fk_cf_14_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_observation_key_interval",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_observation_key_interval.pk_cf_15",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_observation_key_interval.uq_cf_15_01",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_observation_key_interval.fk_cf_15_01",
       "kind": "CONSTRAINT"
     },
     {
@@ -1219,28 +1247,8 @@
       "kind": "CONSTRAINT"
     },
     {
-      "identifier": "emr4_context_fabric.context_recovery_pin",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_recovery_pin.pk_cf_16",
-      "kind": "CONSTRAINT"
-    },
-    {
       "identifier": "emr4_context_fabric.context_recovery_pin.ck_cf_16_01",
       "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_service_practice_binding",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_service_practice_binding.pk_cf_17",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "uq_cf_17_01",
-      "kind": "UNIQUE_INDEX"
     },
     {
       "identifier": "emr4_context_fabric.context_service_practice_binding.ck_cf_17_01",
@@ -1252,14 +1260,6 @@
     },
     {
       "identifier": "emr4_context_fabric.context_service_practice_binding.ck_cf_17_03",
-      "kind": "CONSTRAINT"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_retention_policy",
-      "kind": "TABLE"
-    },
-    {
-      "identifier": "emr4_context_fabric.context_retention_policy.pk_cf_18",
       "kind": "CONSTRAINT"
     },
     {
@@ -2750,10 +2750,10 @@
     ]
   },
   "postgresql_major": 16,
-  "renderer_version": "2.0.2",
+  "renderer_version": "2.0.3",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
   "sql_byte_count": 1403432,
-  "sql_sha256": "sha256:931b0eab6438dfcaf1b1836861972aa25a7f8619e3eaae7edfa3e941cb5f70d2",
+  "sql_sha256": "sha256:fd640d16d51a63557220cc8a59b75ddfadee86a745da11919bad2c101d4a896d",
   "statement_count": 412,
   "structural_parent": {
     "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",

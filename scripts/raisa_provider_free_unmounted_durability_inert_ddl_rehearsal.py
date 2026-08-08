@@ -2663,7 +2663,12 @@ def _render_types(effective: dict[str, Any]) -> list[str]:
 
 def _render_relations(effective: dict[str, Any]) -> list[str]:
     lines: list[str] = []
-    for rel in effective["effective_structural"]["relation_catalogue"]["relations"]:
+    relations = effective["effective_structural"]["relation_catalogue"]["relations"]
+
+    # Establish every relation before any constraint can name another one.
+    # This is cycle-safe and keeps the accepted catalogue order within each
+    # statement family.
+    for rel in relations:
         rid = _fabric(rel["name"])
         column_types = effective["column_types"][rid]
         col_lines = []
@@ -2690,7 +2695,10 @@ def _render_relations(effective: dict[str, Any]) -> list[str]:
         lines.append("CREATE TABLE " + rid + " (")
         lines.append(",\n".join(col_lines))
         lines.append(");")
-        # Primary key
+
+    # Referenced keys must all exist before any foreign key is admitted.
+    for rel in relations:
+        rid = _fabric(rel["name"])
         pk = rel.get("primary_key")
         if pk and pk.get("columns"):
             cols = ", ".join(_ident(c) for c in pk["columns"])
@@ -2730,6 +2738,9 @@ def _render_relations(effective: dict[str, Any]) -> list[str]:
                     + cols
                     + ");"
                 )
+
+    for rel in relations:
+        rid = _fabric(rel["name"])
         for fk in rel.get("foreign_keys", []):
             cols = ", ".join(_ident(c) for c in fk["columns"])
             refs = ", ".join(_ident(c) for c in fk["references_columns"])
@@ -2753,6 +2764,9 @@ def _render_relations(effective: dict[str, Any]) -> list[str]:
                 + deferrable
                 + ";"
             )
+
+    for rel in relations:
+        rid = _fabric(rel["name"])
         for check in rel.get("check_constraints", []):
             lines.append(
                 "ALTER TABLE "
@@ -2967,7 +2981,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.2"
+RENDERER_VERSION = "2.0.3"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "
