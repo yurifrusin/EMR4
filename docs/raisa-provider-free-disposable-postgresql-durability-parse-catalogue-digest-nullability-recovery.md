@@ -16,6 +16,15 @@ and a fresh exact-HEAD veto, exactly one contained parse/catalogue rehearsal may
 run with the existing fixed `postgres:16-bookworm`, pull-never, network-none,
 no-port, no-mount, tmpfs-only and exact-cleanup profile.
 
+The first re-bound run admitted the revised artifact and reached catalogue
+comparison, then failed closed because the frozen `types` query digest still
+encoded the old domain-level not-null flag. Its mismatch detail digest is
+exactly the digest of query id `types`; all other catalogue expectations remain
+unchanged. The repaired contract binds the deterministically derived `types`
+digest `sha256:864bc5fb6d068f01c6e44c6ca95b3c188b7b74c10839ffd83f2e64b48e172243`.
+Another run remains closed until fresh deterministic and exact-HEAD independent
+acceptance.
+
 A pass establishes PostgreSQL 16 parse, atomic installation and catalogue shape
 for this revised inert artifact only. It grants no application migration,
 behavior acceptance, product database, provider, patient/clinical data, runtime

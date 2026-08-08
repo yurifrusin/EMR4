@@ -46,6 +46,18 @@ CHARACTERIZATION_EVIDENCE = json.loads(
         / "provider-free-disposable-postgresql-evidence-catalogue-characterization.json"
     ).read_text(encoding="utf-8")
 )
+DIGEST_NULLABILITY_QUERY_DRIFT_EVIDENCE = json.loads(
+    (
+        DIR
+        / "provider-free-disposable-postgresql-evidence-digest-nullability-query-drift.json"
+    ).read_text(encoding="utf-8")
+)
+PRE_DIGEST_NULLABILITY_RECOVERY_EVIDENCE = json.loads(
+    (
+        DIR
+        / "provider-free-disposable-postgresql-evidence-pre-digest-nullability-recovery.json"
+    ).read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -242,7 +254,7 @@ def test_contract_schemas_are_whole_document_valid() -> None:
     Draft202012Validator(EVIDENCE_SCHEMA).validate(CHARACTERIZATION_EVIDENCE)
 
 
-def test_exact_catalogue_digests_are_bound_to_immutable_characterization() -> None:
+def test_exact_catalogue_digests_change_only_for_revised_types_projection() -> None:
     expected = {
         key: digest
         for key, digest in CHARACTERIZATION_EVIDENCE["catalogue"][
@@ -250,10 +262,17 @@ def test_exact_catalogue_digests_are_bound_to_immutable_characterization() -> No
         ].items()
         if key not in {"server", "extensions"}
     }
+    prior_types_digest = expected["types"]
+    expected["types"] = (
+        "sha256:864bc5fb6d068f01c6e44c6ca95b3c188b7b74c10839ffd83f2e64b48e172243"
+    )
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
         "expected_query_digests": expected,
     }
+    assert prior_types_digest == (
+        "sha256:099effe28c033aeec242bcd7b68f0703af558ebedfc4e37875a15ac6f05594f8"
+    )
     assert set(expected) == set(CONTRACT["catalogue_query_ids"]) - {
         "server",
         "extensions",
@@ -268,6 +287,27 @@ def test_exact_catalogue_digests_are_bound_to_immutable_characterization() -> No
         "removed": True,
         "status": "cleanup_verified",
     }
+
+
+def test_digest_nullability_query_drift_is_preserved_fail_closed() -> None:
+    evidence = DIGEST_NULLABILITY_QUERY_DRIFT_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(
+        PRE_DIGEST_NULLABILITY_RECOVERY_EVIDENCE
+    )
+
+    assert evidence["result"] == "rehearsal_failed"
+    assert evidence["lifecycle"][-2:] == ["artifact_admitted", "cleanup_verified"]
+    assert evidence["environment"]["failure"] == {
+        "code": "exact_query_digest",
+        "detail_digest": "sha256:" + rehearsal._bytes_sha(b"types"),  # noqa: SLF001
+        "stage": "catalogue",
+    }
+    assert evidence["parent"]["artifact_sha256"] == (
+        "sha256:9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65"
+    )
+    assert evidence["cleanup"]["removed"] is True
+    assert evidence["cleanup"]["absence_verified"] is True
 
 
 def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 102,
+  "register_revision": 103,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4759,6 +4759,46 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-102.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0125",
+      "attempt_id": "raisa-context-fabric-parse-digest-nullability-runtime-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "When an accepted artifact revision intentionally changes one catalogue fact, every exact derived catalogue digest affected by that fact must be rebound before the revised artifact is executed.",
+      "observed_error": "The revised artifact parsed and installed atomically, but exact catalogue admission failed because expected_query_digests.types still encoded digest_sha256.domain_not_null=true. The bounded failure detail digest is exactly sha256(types).",
+      "detection_method": "The contained parse run reached artifact_admitted and failed exact_query_digest. Its detail digest matched the digest of query id types, and deterministic authored-synthetic catalogue facts produced the sole revised types digest.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-digest-nullability-query-drift.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/rehearsal-contract.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-103.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.changed_catalogue_fact_without_dependent_digest_rebind",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The contract now replaces only expected_query_digests.types with the deterministic digest of the revised manifest-derived type facts and binds a new canonical contract digest.",
+        "prevention_control": "Before executing a contract-bound catalogue revision, derive every exact query digest from the revised authored-synthetic expectation set and compare the full digest map, even when only one source fact is intended to change.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/rehearsal-contract.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-103.md"
         ]
       },
       "status": "corrected"
