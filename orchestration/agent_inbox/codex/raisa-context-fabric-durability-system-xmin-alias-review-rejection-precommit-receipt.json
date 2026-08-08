@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_commit_the_rejected_first_veto_its_machine_reconciliation_and_aer_0144_0145_before_constructing_a_fresh_corrected_review_descendant",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate renderer, artifact, exact parse evidence and unchanged behavior contract remain correct at e8d897ce4bbc25874e0d9dc8b94c7bdc693e7f91. Sol found that the first packet mistyped the full structural SHA and two cleanup container IDs, while the Gemini receipt reported the candidate-correct values but incorrectly returned pass despite the packet contradiction. AER revision 121 records AER-0144 and AER-0145; the register now validates with 145 incidents and zero open, its focused tests pass, and the successor action is a mechanically corrected packet in a distinct fresh worktree/project.",
+    "current_authority_allocation": "GPT Sol owns review acceptance, rejection, exact-path commit, successor review and later database rehearsal. The first Gemini project has ended and its pass has no acceptance authority. No worker, verifier, native subagent or provider receives write, runtime, integration or protected-ref authority.",
+    "git_refs_and_worktree": "Primary remains on codex/ariadne-bernie-davida-parallel-seam at e8d897ce4bbc25874e0d9dc8b94c7bdc693e7f91 with bounded review-control files plus preserved pre-existing untracked files. r103 remains clean and exact at the same HEAD. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only; git add dot and git add -A remain forbidden.",
+    "live_handover_current_baton": "The active provider-free durability behavior gate remains closed pending one admissible fresh exact-head independent veto. The first explicit-xmin-alias review result was rejected during mandatory Sol reconciliation before any runtime admission. The future Agent Execution Surface and Containment Gate remains planned outside this tranche.",
+    "protected_evidence_boundaries": "Stage only the exact first-review packet, predispatch state/receipt, r103 pre/postflight, first Gemini receipt, rejection receipt, AER register/report/revision/test and this precommit pair. Do not stage docs/branding, unrelated untracked files or mutable provider-free-behavior-transaction-evidence.json. No Docker/PostgreSQL, product/provider runtime, patient/clinical/product/protected data, application runtime, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

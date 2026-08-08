@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 120
+    assert register["register_revision"] == 121
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 144)
+        f"AER-{index:04d}" for index in range(1, 146)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 100
+    assert len(agent_incidents) == 102
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1852,20 +1852,46 @@ def test_aer_0143_binds_system_xmin_record_field_to_explicit_alias() -> None:
     assert ".xmin INTO STRICT" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0144_rejects_mistyped_full_packet_identifiers() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0144"]
+
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["related_incident_ids"] == []
+    assert (
+        "prefix agreement is insufficient"
+        in incident["correction"]["prevention_control"]
+    )
+
+
+def test_aer_0145_rejects_pass_that_contradicts_its_packet() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0145"]
+
+    assert incident["role"] == "verifier"
+    assert incident["model"] == "gemini-3.6-flash-high"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["related_incident_ids"] == []
+    assert "contradiction" in incident["correction"]["prevention_control"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 143
+    assert report["incident_count"] == 145
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 100,
+        "agent_behavior": 102,
         "harness": 18,
         "repository": 17,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
-        "evidence_misreport": 19,
+        "evidence_misreport": 21,
         "harness_failure": 18,
         "output_contract_violation": 40,
         "read_only_violation": 3,
@@ -1875,7 +1901,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 36,
-        "canonical_unchanged": 85,
+        "canonical_unchanged": 87,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [

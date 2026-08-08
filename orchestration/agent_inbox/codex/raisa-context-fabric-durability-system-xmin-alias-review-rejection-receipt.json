@@ -1,0 +1,34 @@
+{
+  "schema_version": "ariadne.verifier_acceptance_rejection.v1",
+  "status": "review_rejected",
+  "observed_on": "2026-08-09",
+  "candidate_head": "e8d897ce4bbc25874e0d9dc8b94c7bdc693e7f91",
+  "review_receipt_sha256": "sha256:6a485769d62821b27d6d357d177ad75338eb8a1ff7227f82b2485a9241fd2843",
+  "rejected_decision": "pass",
+  "reason": "The receipt reported three candidate-exact identifiers that contradicted the packet's frozen expected values, while the packet required fail for any such mismatch.",
+  "packet_mismatches": [
+    {
+      "field": "structural_contract_sha256",
+      "packet_value": "d481b9913e5ce0889bb57224076b31764c2e0e0e93f22508a3533a5404db6bbd",
+      "candidate_value": "d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6"
+    },
+    {
+      "field": "characterization_cleanup_container_id",
+      "packet_value": "e1034091c7b044bc79ceecedeb16513398039a6bfeb09e96c4740f10d114807e",
+      "candidate_value": "e10340911ad8afef2f33da41319a1b52994584c2fc958c40b9c7219f5055c63e"
+    },
+    {
+      "field": "parse_cleanup_container_id",
+      "packet_value": "253f1b17bda2d0cabdc8bf12770c9c3d7832e4fa573b3972001351f9dac53d57",
+      "candidate_value": "253f1b17c19af1a898ea3f593293865bacd1fd474686703b77acbb42ae3c3af8"
+    }
+  ],
+  "candidate_changed": false,
+  "runtime_admitted": false,
+  "protected_refs_changed": false,
+  "required_successor": "fresh_exact_head_gemini_36_flash_high_veto_with_corrected_mechanically_reconciled_packet",
+  "related_incident_ids": [
+    "AER-0144",
+    "AER-0145"
+  ]
+}

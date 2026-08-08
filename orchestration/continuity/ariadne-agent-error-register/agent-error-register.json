@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 120,
+  "register_revision": 121,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -5581,6 +5581,86 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-explicit-alias-recovery.md",
           "docs/security/raisa-context-fabric-durability-system-xmin-explicit-alias-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-120.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0144",
+      "attempt_id": "raisa-context-fabric-system-xmin-alias-review-packet-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-sol-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Every exact cryptographic or cleanup identifier in an independent veto packet must be copied mechanically from the candidate artifact or evidence before dispatch, and any mismatch must make the packet ineligible.",
+      "observed_error": "The first system-xmin explicit-alias veto packet carried correct prefixes but incorrect full values for the structural contract SHA and two disposable-container cleanup IDs. The candidate remained correct, but the packet's exact decision rule could not support acceptance.",
+      "detection_method": "Sol's mandatory post-review machine reconciliation compared the packet, verifier prose and exact candidate JSON. It found structural SHA d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6 and cleanup IDs e10340911ad8afef2f33da41319a1b52994584c2fc958c40b9c7219f5055c63e and 253f1b17c19af1a898ea3f593293865bacd1fd474686703b77acbb42ae3c3af8 rather than the packet's three full values, before any runtime admission.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-alias-behavior-rebind-gemini-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-system-xmin-alias-behavior-rebind-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-alias-review-rejection-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-121.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "orchestrator.review_packet_full_identifier_misreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The first packet and pass are preserved as rejected evidence. A corrected successor packet mechanically copies all three full values from exact candidate JSON and requires a distinct fresh verifier decision.",
+        "prevention_control": "Before dispatch, mechanically extract and compare every full SHA-256 and disposable-container ID named by a veto packet; prefix agreement is insufficient, and post-review reconciliation remains mandatory before acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-alias-review-rejection-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-121.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0145",
+      "attempt_id": "raisa-context-fabric-system-xmin-alias-review-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A terminal pass must satisfy its packet's exact decision rule; when candidate readback contradicts an expected full hash or cleanup identifier, the verifier must return fail even if the candidate value itself is coherent.",
+      "observed_error": "The first verifier receipt reported the candidate's three correct full values, yet returned pass even though each contradicted the corresponding exact value frozen in its packet and the packet required fail for any wrong evidence hash or coordinate.",
+      "detection_method": "Sol compared the schema-constrained terminal decision and receipt narrative against the exact packet immediately after review. The worktree stayed clean and exact, but the decision was internally inadmissible and was rejected before database execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-alias-behavior-rebind-gemini-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-system-xmin-alias-behavior-rebind-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-alias-review-rejection-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-121.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.packet_candidate_identifier_contradiction_not_vetoed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The pass receipt is retained but has no acceptance authority. A distinct fresh Gemini project must review a corrected exact-head packet and return a new decision before runtime eligibility.",
+        "prevention_control": "Sol must machine-reconcile every verifier-reported exact identifier against both candidate and packet before accepting the decision; agreement with the candidate cannot cure contradiction of a packet's frozen expected value.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-alias-review-rejection-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-121.md",
+          "tests/test_ariadne_agent_error_register.py"
         ]
       },
       "status": "corrected"
