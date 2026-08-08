@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_passed_postgresql_16_parse_catalogue_evidence_closeout_and_preexecution_receipts_with_explicit_paths_before_behavior_descendant_rebinding",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The passed evidence binds artifact SHA-256 afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14, canonical contract SHA-256 ebdfcb665a9ef9dc682f249b73b30916725fc76555928dff71527a5c525d7c29, 1,402,341 bytes and 412 statements. The deliberate SQLSTATE 42601 rollback left zero role/schema residue, all 17 catalogue digests match, container a03f07be13b829ea5c2fc96961968f3e68b69c39d314cbcd85a6de5a461b2135 was removed with absence verified, evidence SHA-256 is 012044e60c2e5dfb53b005891003dee28db81a0dc9b16e9cd92c68d1a649920d, and all 113 parse tests plus Ruff and diff check pass.",
+    "current_authority_allocation": "GPT Sol owns evidence acceptance and exact behavior descendant rebinding. Fresh Gemini 3.6 Flash/high later reviews the complete behavior candidate; no worker or provider runtime is active.",
+    "git_refs_and_worktree": "Primary is at exact HEAD 8d6eed684336053fd4f799e2e7533663021ba5f6 with only the named evidence, closeout, test and receipt artifacts intended for commit. No owned parse container remains. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The corrected body-special-form parent passed its required disposable PostgreSQL 16 parse, rollback, atomic installation and exact catalogue prerequisite. Behavior proof remains the next closed descendant.",
+    "protected_evidence_boundaries": "Acceptance proves parse, atomic installation and catalogue shape only. Function/trigger/RLS behavior, application migration/runtime, operational data/source/database/credential, watcher/listener/feed, patient/clinical/product/protected data, provider/model call, command/write, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

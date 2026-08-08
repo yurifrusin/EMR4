@@ -2,7 +2,7 @@
 
 Date: 2026-08-08
 
-Status: bounded parse/catalogue candidate
+Status: exact PostgreSQL 16 parse/catalogue rehearsal passed
 
 The exact parse/catalogue rehearsal is rebound to source commit
 `cf51e3a8de270869f4f4da3e36f6b5167b0c502a`, whose canonical inert SQL is
@@ -14,7 +14,7 @@ unqualified `COALESCE(...)` special forms. The structural and typed body
 contracts, 412-statement population, exact catalogue expectations, authored-
 synthetic prerequisites, containment profile and claim boundary are unchanged.
 
-This rebind authorises one fresh pull-never, networkless, disposable PostgreSQL
-16 parse/atomic-install/catalogue rehearsal. It does not claim function or
-trigger behavior and opens no application migration, runtime wiring, product
-data, provider call, deployment, release, Pages or protected-ref authority.
+The one fresh pull-never, networkless, disposable PostgreSQL 16 rehearsal
+passed and completed exact-ID cleanup. It does not claim function or trigger
+behavior and opens no application migration, runtime wiring, product data,
+provider call, deployment, release, Pages or protected-ref authority.

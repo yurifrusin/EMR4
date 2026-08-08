@@ -1,5 +1,5 @@
 {
-  "attempt_id": "feeae5dd3401c08bdd897e7c",
+  "attempt_id": "7808f2ddaf675f76da5b7512",
   "catalogue": {
     "expectation_mode": "exact_digest_bound",
     "kind_counts": {
@@ -56,20 +56,20 @@
   "claim_boundary": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only",
   "cleanup": {
     "absence_verified": true,
-    "container_id": "e44443027e9ad46d4217c48ca042b13326f422b5bc7a88258eeaadb853769e0c",
+    "container_id": "a03f07be13b829ea5c2fc96961968f3e68b69c39d314cbcd85a6de5a461b2135",
     "removed": true,
     "status": "cleanup_verified"
   },
   "environment": {
     "docker_client": "resolved_exact_docker_exe",
-    "elapsed_ms": 9016,
+    "elapsed_ms": 8928,
     "image": {
       "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
       "pull_attempted": false,
       "reference": "postgres:16-bookworm"
     },
     "readiness": {
-      "continuous_success_ms": 3150,
+      "continuous_success_ms": 3167,
       "last_pg_isready_exit": 0,
       "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "last_sql_failure_class": "none",
@@ -101,9 +101,9 @@
     "passed"
   ],
   "parent": {
-    "artifact_byte_count": 1404420,
-    "artifact_sha256": "sha256:83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5",
-    "contract_sha256": "sha256:4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b",
+    "artifact_byte_count": 1402341,
+    "artifact_sha256": "sha256:afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14",
+    "contract_sha256": "sha256:ebdfcb665a9ef9dc682f249b73b30916725fc76555928dff71527a5c525d7c29",
     "prerequisite_contract_sha256": "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11",
     "prerequisite_sql_sha256": "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38",
     "statement_count": 412

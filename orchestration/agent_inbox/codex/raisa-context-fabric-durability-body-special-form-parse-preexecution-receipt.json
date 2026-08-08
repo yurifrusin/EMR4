@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_owned_pull_never_networkless_postgresql_16_exact_parse_atomic_install_and_catalogue_rehearsal_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The run is fixed to source cf51e3a8de270869f4f4da3e36f6b5167b0c502a, artifact SHA-256 afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14, 1,402,341 LF bytes, 412 statements, canonical parse contract SHA-256 ebdfcb665a9ef9dc682f249b73b30916725fc76555928dff71527a5c525d7c29 and unchanged exact catalogue digests. All 113 pre-runtime tests pass.",
+    "current_authority_allocation": "GPT Sol owns this single serial provider-free parse rehearsal and exact cleanup. No worker, native subagent, provider model or product surface is involved; Gemini review remains later.",
+    "git_refs_and_worktree": "Primary is tracked-clean at exact HEAD 8d6eed684336053fd4f799e2e7533663021ba5f6. Local postgres:16-bookworm exists at exact image ID sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8 and no owned parse-catalogue container exists. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The corrected renderer parent and exact parse contract are committed at candidate HEAD 8d6eed684336053fd4f799e2e7533663021ba5f6. Exact parse, rollback, installation and catalogue reconciliation is the next required gate before behavior descendant rebinding.",
+    "protected_evidence_boundaries": "Exactly one uniquely named owned postgres:16-bookworm container may run with --pull=never, --network=none, no published/exposed port, no bind/named/workspace/Docker-socket mount, tmpfs data, authored-synthetic empty prerequisites, minimized evidence and exact-ID cleanup. Function/trigger behavior, application migration/runtime, operational database/credential, watcher/listener/feed, patient/clinical/product/protected data, provider/model call, command/write, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

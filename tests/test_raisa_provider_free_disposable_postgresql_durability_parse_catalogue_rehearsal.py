@@ -483,7 +483,7 @@ def test_pre_row_projection_recovery_parse_catalogue_pass_is_preserved() -> None
     assert evidence["cleanup"]["absence_verified"] is True
 
 
-def test_row_projection_recovery_parse_catalogue_evidence_is_exact_pass() -> None:
+def test_body_special_form_recovery_parse_catalogue_evidence_is_exact_pass() -> None:
     evidence = ROW_PROJECTION_RECOVERY_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
 
@@ -494,12 +494,12 @@ def test_row_projection_recovery_parse_catalogue_evidence_is_exact_pass() -> Non
         "passed",
     ]
     assert evidence["parent"] == {
-        "artifact_byte_count": 1_404_420,
+        "artifact_byte_count": 1_402_341,
         "artifact_sha256": (
-            "sha256:83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5"
+            "sha256:afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14"
         ),
         "contract_sha256": (
-            "sha256:4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b"
+            "sha256:ebdfcb665a9ef9dc682f249b73b30916725fc76555928dff71527a5c525d7c29"
         ),
         "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
         "prerequisite_sql_sha256": (
@@ -523,7 +523,7 @@ def test_row_projection_recovery_parse_catalogue_evidence_is_exact_pass() -> Non
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
-            "e44443027e9ad46d4217c48ca042b13326f422b5bc7a88258eeaadb853769e0c"
+            "a03f07be13b829ea5c2fc96961968f3e68b69c39d314cbcd85a6de5a461b2135"
         ),
         "removed": True,
         "status": "cleanup_verified",
