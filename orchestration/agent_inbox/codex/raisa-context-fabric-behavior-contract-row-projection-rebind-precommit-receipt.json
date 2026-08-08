@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_behavior_contract_row_composite_projection_order_rebind_candidate_for_fresh_independent_veto_before_attempt_016",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate rebinds exactly six parents to corrected accepted sources and canonical hashes, including inert SQL sha256:83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5 and accepted parse evidence source 2f0047cd90a8448ec4e738483a7237fbf2860bcb. The canonical behavior-contract digest is sha256:0ac09578c56aeb6528f5a05dc1e32f5b71d953dfd43ab6d8b5030cab202e7d03. All twenty ordered scenarios and category counts 6/4/3/4/3 are unchanged. The full behavior-plus-parse deterministic packet and Ruff pass; attempt 016 remains closed pending exact-HEAD review.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled provider-free contract rebind, explicit-path commit, later runtime diagnosis and acceptance. Gemini 3.6 Flash/high through a fresh Antigravity worktree owns independent veto after this candidate commit. No native subagent or DeepSeek worker is assigned; no reviewer receives runtime, integration, self-acceptance, push, protected-ref, provider/product, deployment or release authority.",
+    "git_refs_and_worktree": "Primary worktree C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at parent HEAD bec71540424a2a4bcdb21434129f051945aedd40. Local and origin master plus handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. The intended explicit commit set is the rebind ledger, behavior contract, harness digest update, two behavior tests and this tranche's Ariadne receipt/state files only. Protected and unrelated untracked files remain unstaged.",
+    "live_handover_current_baton": "AGENTS.md records the independently accepted corrected PostgreSQL parse/catalogue proof at bec71540424a2a4bcdb21434129f051945aedd40 and names the behavior-contract rebind followed by fresh exact-HEAD veto as the next gate. The future Agent Execution Surface and Containment Gate remains planned after provider-free Context Fabric durability and before any occupied executable Bureau descendant.",
+    "protected_evidence_boundaries": "Only authored-synthetic contract, ledger and deterministic test changes are in this candidate. Attempts 001-015 and the current attempt-015 mutable evidence remain predecessor evidence, preserved and unstaged. No Docker runtime, application migration, operational database, persistence, watcher/listener/feed, patient/clinical/product/protected data, provider/model call, tool or command execution, product write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked file remain excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

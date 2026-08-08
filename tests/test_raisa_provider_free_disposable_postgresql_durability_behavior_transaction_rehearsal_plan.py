@@ -34,6 +34,10 @@ BODY_CONTRACT = (
     ROOT
     / "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json"
 )
+ROW_PROJECTION_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-row-composite-projection-order-rebind.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -67,19 +71,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery-closeout.md",
-        "06b8f55837457518b39de0bdbea71b60a2c6f921",
-        "9d5d4e4e53cc722e0db7b3f5a5618805b27f2841a61e2d58c1561b90825b4a47",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-row-composite-projection-order-rebind-closeout.md",
+        "2f0047cd90a8448ec4e738483a7237fbf2860bcb",
+        "b78536969ce420332974a9ac2a404b1560d9cdb6da233185691987916c7a9940",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "580c1d05ed150cdfd63549f1a35e61c72a41cb20",
-        "9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65",
+        "0931f3e658f06e02e7de4c5ea02238184da9e767",
+        "83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "580c1d05ed150cdfd63549f1a35e61c72a41cb20",
-        "79cbf926512a559e2a42e65236d7b87abf595284a09508251446b1e2ae669e2f",
+        "0931f3e658f06e02e7de4c5ea02238184da9e767",
+        "66c103adac8c9ba52440077e25d2f3fc58ed6d30005576034bb42115c746dd71",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
@@ -88,12 +92,12 @@ EXPECTED_PARENT_BINDINGS = {
     ),
     "body_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-        "a93d07405ad35d7d6c0603065625c17ec14ab23e",
-        "634dbc5c1a5294c1ac2de6a913671cd968a9838aa763d4c2a4d229bbcd9c0271",
+        "0931f3e658f06e02e7de4c5ea02238184da9e767",
+        "4338082445261a8a4aeaaa09d9aa615812d1585fa47b44a05abc716a1df84242",
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "c3ca2515b9f2c4b20cb7230364de7417f48eab54",
+        "2f0047cd90a8448ec4e738483a7237fbf2860bcb",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
@@ -219,6 +223,20 @@ def test_all_parent_paths_heads_and_hashes_are_exact() -> None:
         assert b"\r" not in raw.replace(b"\r\n", b"")
         canonical = raw.replace(b"\r\n", b"\n")
         assert hashlib.sha256(canonical).hexdigest() == digest
+
+
+def test_row_projection_rebind_preserves_scenarios_and_runtime_closure() -> None:
+    combined = _flat(ROW_PROJECTION_REBIND, PLAN, DESIGN).lower()
+
+    for required in (
+        "attempt 015",
+        "all twenty scenarios remain byte-for-byte unchanged",
+        "attempt 016",
+        "fresh exact-head",
+        "docs/branding/",
+        "no patient, clinical, product-derived or protected data",
+    ):
+        assert required in combined
 
 
 def test_scenario_population_is_exact_and_all_five_categories_are_present() -> None:

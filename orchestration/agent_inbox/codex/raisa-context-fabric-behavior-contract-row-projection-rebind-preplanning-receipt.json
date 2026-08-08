@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_implement_exact_behavior_contract_rebind_to_accepted_corrected_artifact_and_parse_catalogue_evidence_before_attempt_016",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty ordered serial authored-synthetic scenarios with category counts 6/4/3/4/3 and no scenario weakening. Attempts 001-015 remain immutable behavior failure evidence. The accepted corrected parse proof binds inert SQL SHA-256 83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5, 1,404,420 LF bytes, 412 statements and exact parse evidence source 2f0047cd90a8448ec4e738483a7237fbf2860bcb. The next candidate must rebind all corrected body, manifest, SQL, parse-closeout and source-head parents, recompute canonical contract/tests, preserve the current mutable attempt-015 evidence unstaged, and remain runtime-closed until fresh exact-HEAD veto.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled six-parent behavior-contract rebind, deterministic packet, runtime diagnosis, exact cleanup and acceptance. Gemini 3.6 Flash/high through a fresh Antigravity worktree owns independent veto only after deterministic success. Native subagents and DeepSeek are not selected for this serial stateful proof-chain correction; no reviewer receives runtime, self-acceptance, integration, baton, push, provider/product, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "Primary worktree C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD bec71540424a2a4bcdb21434129f051945aedd40 with no tracked changes after parse closeout. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df. docs/branding and the current mutable behavior evidence remain untracked and unstaged; no protected ref will move.",
+    "live_handover_current_baton": "AGENTS.md now records the corrected-artifact parse/catalogue pass at independently reviewed evidence source 2f0047cd90a8448ec4e738483a7237fbf2860bcb and names the behavior-contract rebind plus attempt-016 gate as the next implementation. The future Agent Execution Surface and Containment Gate remains after provider-free durability and before occupied real-product-read or executable Bureau descendants.",
+    "protected_evidence_boundaries": "Only repository-authored synthetic contracts, exact corrected parents, deterministic tests and bounded read-only review are open during rebind. A later passing candidate may run attempt 016 in one newly owned networkless disposable local PostgreSQL 16 container under the frozen no-pull/no-port/no-mount/tmpfs/exact-ID cleanup profile. Application migration/runtime, operational persistence or credentials, watcher/listener/feed, patient/clinical/product/protected data, provider/model call, tool, command or product write, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
