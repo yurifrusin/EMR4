@@ -1452,6 +1452,35 @@ def _catalogue_digests(facts: dict[str, Any]) -> dict[str, str]:
     }  # noqa: SLF001
 
 
+def _assert_bound_parent_catalogue(
+    facts: dict[str, Any],
+    manifest: dict[str, Any],
+    prerequisite: dict[str, Any],
+    contract: dict[str, Any],
+    *,
+    expected_database: str,
+) -> dict[str, Any]:
+    """Reuse the accepted parent checks after proving this database binding."""
+
+    server = facts.get("server")
+    if not isinstance(server, dict):
+        raise BehaviorFailure("catalogue", "server_or_database")
+    try:
+        server_version = int(server.get("server_version_num", 0))
+    except (TypeError, ValueError) as error:
+        raise BehaviorFailure("catalogue", "server_or_database") from error
+    if server.get("database") != expected_database or not (
+        160000 <= server_version < 170000
+    ):
+        raise BehaviorFailure("catalogue", "server_or_database")
+
+    parent_facts = copy.deepcopy(facts)
+    parent_facts["server"]["database"] = "emr4_synthetic_success"
+    return parent._assert_catalogue(  # noqa: SLF001
+        parent_facts, manifest, prerequisite, contract
+    )
+
+
 def _assert_fixture_catalogue_delta(
     before: dict[str, Any], after: dict[str, Any]
 ) -> dict[str, str]:
@@ -1963,7 +1992,13 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
             runner, docker, container_id, profile["postgres_database"], profile
         )
         parent_contract = _json(PARENT_REHEARSAL_CONTRACT_PATH)
-        parent._assert_catalogue(catalogue, manifest, prerequisite, parent_contract)  # noqa: SLF001
+        _assert_bound_parent_catalogue(
+            catalogue,
+            manifest,
+            prerequisite,
+            parent_contract,
+            expected_database=profile["postgres_database"],
+        )
         lifecycle.append("catalogue_reconciled")
         bootstrap = _scenario_call(
             runner, docker, container_id, profile, render_bootstrap_sql(contract)

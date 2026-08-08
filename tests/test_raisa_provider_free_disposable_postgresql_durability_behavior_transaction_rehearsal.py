@@ -30,6 +30,11 @@ EVIDENCE_SCHEMA = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-001.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -115,6 +120,79 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
     jsonschema.Draft202012Validator(CONTRACT_SCHEMA).validate(CONTRACT)
     jsonschema.Draft202012Validator.check_schema(EVIDENCE_SCHEMA)
     jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(_passing_evidence())
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE)
+    assert FAILURE_EVIDENCE["result"] == "rehearsal_failed"
+    assert FAILURE_EVIDENCE["environment"]["failure"] == {
+        "code": "server_or_database",
+        "detail_digest": "sha256:"
+        + "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stage": "catalogue",
+    }
+    assert FAILURE_EVIDENCE["scenario_reconciliation"] == {
+        "expected": 20,
+        "observed": 0,
+        "passed": 0,
+    }
+    assert FAILURE_EVIDENCE["cleanup"] == {
+        "absence_verified": True,
+        "container_id": FAILURE_EVIDENCE["cleanup"]["container_id"],
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_parent_catalogue_reuse_preserves_descendant_database_binding(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: dict[str, object] = {}
+
+    def fake_parent_assertion(
+        facts: dict[str, object],
+        manifest: dict[str, object],
+        prerequisite: dict[str, object],
+        contract: dict[str, object],
+    ) -> dict[str, object]:
+        captured.update(
+            facts=facts,
+            manifest=manifest,
+            prerequisite=prerequisite,
+            contract=contract,
+        )
+        return {"status": "passed"}
+
+    monkeypatch.setattr(rehearsal.parent, "_assert_catalogue", fake_parent_assertion)
+    facts = {
+        "server": {
+            "server_version_num": 160011,
+            "database": "emr4_synthetic_behavior",
+        }
+    }
+    manifest = {"manifest": True}
+    prerequisite = {"prerequisite": True}
+    contract = {"contract": True}
+
+    assert rehearsal._assert_bound_parent_catalogue(
+        facts,
+        manifest,
+        prerequisite,
+        contract,
+        expected_database="emr4_synthetic_behavior",
+    ) == {"status": "passed"}
+    assert facts["server"]["database"] == "emr4_synthetic_behavior"
+    assert captured["facts"]["server"]["database"] == "emr4_synthetic_success"
+
+    with pytest.raises(rehearsal.BehaviorFailure) as failure:
+        rehearsal._assert_bound_parent_catalogue(
+            facts,
+            manifest,
+            prerequisite,
+            contract,
+            expected_database="wrong_database",
+        )
+    assert (failure.value.stage, failure.value.code) == (
+        "catalogue",
+        "server_or_database",
+    )
 
 
 def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:

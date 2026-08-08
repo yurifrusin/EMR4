@@ -53,3 +53,20 @@ The contract hash and exact implementation packet must be recomputed, all
 deterministic and hostile tests must pass, and a fresh read-only exact-HEAD
 Gemini 3.6 Flash/high veto must accept the corrected packet before the one
 authorized disposable PostgreSQL run can begin.
+
+## First runtime failure and bounded repair
+
+After deterministic acceptance and an exact-HEAD independent pass, the first
+authorised disposable run failed closed at `catalogue/server_or_database`
+before all 20 scenarios. The container was removed and absence was verified.
+The immutable failure evidence is
+`provider-free-behavior-transaction-failure-evidence-001.json`.
+
+The descendant had reused a parent catalogue assertion whose otherwise useful
+structural checks include the parent's distinct disposable database-name
+sentinel. The bounded repair now proves `emr4_synthetic_behavior` and
+PostgreSQL 16 independently, normalizes only a deep copy to the parent's
+private sentinel, and then invokes the unchanged parent structural assertion.
+AER-0115 records the error and prevention control. No second run is eligible
+until the repair receives deterministic acceptance and a fresh exact-HEAD
+independent veto.

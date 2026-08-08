@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 94,
+  "register_revision": 95,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4350,6 +4350,47 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-94.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0115",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A descendant that reuses the accepted parent catalogue assertion must preserve both the parent's structural checks and the descendant's distinct fixed disposable database identity.",
+      "observed_error": "The first admitted runtime failed closed immediately after artifact admission with catalogue/server_or_database and zero scenarios executed. The behavior harness passed the descendant database facts directly to the accepted parent assertion, whose deliberately frozen parent database sentinel is emr4_synthetic_success rather than the descendant's emr4_synthetic_behavior.",
+      "detection_method": "The structured failure evidence recorded a stable PostgreSQL 16 readiness result, artifact admission, zero scenarios, catalogue/server_or_database, empty database stderr and verified owned cleanup. Direct inspection then located the parent's exact database-name sentinel at the first failing assertion.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-001.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-95.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descendant_reused_parent_database_sentinel",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed evidence is preserved. A bounded adapter now first proves the exact descendant database name and PostgreSQL 16 major version, deep-copies the catalogue facts, substitutes only the accepted parent's private sentinel in that copy, and then invokes the unchanged parent structural assertion. The repair remains runtime-closed pending deterministic checks and a fresh exact-HEAD veto.",
+        "prevention_control": "Every reused parent assertion with environment-specific sentinels must have a descendant adapter test that proves the descendant binding independently, proves the original facts remain unchanged, and permits normalization only in a private copy passed to the unchanged structural assertion.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-001.json",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-95.md"
         ]
       },
       "status": "corrected"
