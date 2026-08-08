@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 110,
+  "register_revision": 111,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5132,6 +5132,51 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-expected-success-diagnostic-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-110.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0134",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-012",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The behavior plan and renderer must preserve the accepted parent entry points' fail-closed transaction-isolation preconditions instead of flattening every scenario to one weaker isolation level.",
+      "observed_error": "Attempt 012 identified BTR-E01 and SQLSTATE CF303; exact parent-SQL readback showed register_observer_generation_v1 requires serializable while the behavior design, contract and renderer incorrectly forced that lifecycle call to read committed.",
+      "detection_method": "The bounded scenario and SQLSTATE evidence was reconciled with the exact accepted entry-point guard and the rendered BEGIN statement, proving one direct isolation contradiction without relying on error prose.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-012.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-isolation-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-111.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.behavior_plan_isolation_contradicts_parent_entry_point",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The registration and coordinator apply/replay/rollback scenarios now render serializable transactions, while every producer, observer, trigger and RLS scenario retains its accepted read-committed shape.",
+        "prevention_control": "Behavior-plan isolation must be derived per entry point from exact accepted SQL guards and asserted in contract, renderer and evidence tests before the first scenario executes.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-111.md"
         ]
       },
       "status": "corrected"

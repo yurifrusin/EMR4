@@ -125,6 +125,13 @@ def _assert_semantics(candidate: dict[str, Any]) -> None:
     assert {**counts, "total": len(scenarios)} == EXPECTED_COVERAGE
     assert candidate["category_coverage"] == EXPECTED_COVERAGE
 
+    serializable_ids = {
+        scenario["id"]
+        for scenario in scenarios
+        if "serializable" in scenario["transaction_shape"]
+    }
+    assert serializable_ids == {"BTR-E01", "BTR-E04", "BTR-I03", "BTR-B03"}
+
     failures = {
         item["id"]: item["sqlstate"]
         for item in _json(BODY_CONTRACT)["failure_registry"]
@@ -222,6 +229,18 @@ def test_scenario_population_is_exact_and_all_five_categories_are_present() -> N
     assert Counter(s["category"] for s in contract["scenarios"]) == Counter(
         {key: value for key, value in EXPECTED_COVERAGE.items() if key != "total"}
     )
+
+
+def test_isolation_shapes_preserve_parent_entry_point_requirements() -> None:
+    scenarios = {row["id"]: row for row in _contract()["scenarios"]}
+    assert {
+        scenario_id
+        for scenario_id, scenario in scenarios.items()
+        if "serializable" in scenario["transaction_shape"]
+    } == {"BTR-E01", "BTR-E04", "BTR-I03", "BTR-B03"}
+    combined = _flat(PLAN, DESIGN).lower()
+    assert "entry-point-specific" in combined
+    assert "accepted lifecycle/coordinator" in combined
 
 
 def test_custom_failures_bind_the_accepted_failure_registry() -> None:

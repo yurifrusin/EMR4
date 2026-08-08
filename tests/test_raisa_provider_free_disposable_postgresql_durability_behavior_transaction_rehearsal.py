@@ -85,6 +85,11 @@ FAILURE_EVIDENCE_011 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_012 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-012.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -114,7 +119,11 @@ def _passing_evidence() -> dict[str, Any]:
                 "stable_reason": "accepted",
                 "session_user": scenario["principal"],
                 "current_user": scenario["principal"],
-                "isolation": "read committed",
+                "isolation": (
+                    "serializable"
+                    if scenario["id"] in rehearsal.SERIALIZABLE_SCENARIOS
+                    else "read committed"
+                ),
                 "read_only": scenario["id"] == "BTR-R01",
                 "before": snapshot,
                 "after": snapshot,
@@ -639,11 +648,45 @@ def test_twenty_scenario_renderers_have_one_pre_begin_identity_and_fixed_order()
 
 
 def test_multi_transaction_scenarios_are_exactly_three_top_level_transactions() -> None:
-    for scenario_id in ("BTR-E01", "BTR-I02"):
-        sql = rehearsal.render_scenario_sql(CONTRACT, scenario_id).decode("utf-8")
-        assert sql.count("BEGIN ISOLATION LEVEL READ COMMITTED;") == 3
+    registration = rehearsal.render_scenario_sql(CONTRACT, "BTR-E01").decode("utf-8")
+    conflict = rehearsal.render_scenario_sql(CONTRACT, "BTR-I02").decode("utf-8")
+
+    assert registration.count("BEGIN ISOLATION LEVEL SERIALIZABLE;") == 3
+    assert conflict.count("BEGIN ISOLATION LEVEL READ COMMITTED;") == 3
+    for sql in (registration, conflict):
         assert sql.count("COMMIT;") == 3
         assert sql.count("SET SESSION AUTHORIZATION") == 1
+
+
+def test_entry_point_isolation_matches_parent_fail_closed_guards() -> None:
+    for scenario in CONTRACT["scenarios"]:
+        if scenario["id"] == "BTR-R03":
+            continue
+        sql = rehearsal.render_scenario_sql(CONTRACT, scenario["id"]).decode("utf-8")
+        expected = (
+            "SERIALIZABLE"
+            if scenario["id"] in rehearsal.SERIALIZABLE_SCENARIOS
+            else "READ COMMITTED"
+        )
+        assert f"BEGIN ISOLATION LEVEL {expected}" in sql
+        assert ("serializable" in scenario["transaction_shape"]) == (
+            scenario["id"] in rehearsal.SERIALIZABLE_SCENARIOS
+        )
+
+
+def test_isolation_mismatch_failure_is_preserved_and_cleaned_up() -> None:
+    evidence = FAILURE_EVIDENCE_012
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+    assert evidence["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": "sha256:a2e676f192b59e7ba720d3544883451fbbd0034f0ccde3787dbbe71c0c5dad31",
+        "scenario_id": "BTR-E01",
+        "sqlstate": "CF303",
+        "stage": "scenario",
+    }
+    assert evidence["scenario_reconciliation"]["observed"] == 0
+    assert evidence["cleanup"]["absence_verified"] is True
 
 
 def test_trigger_scenarios_bind_the_first_reachable_producer_boundary() -> None:

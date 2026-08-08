@@ -163,7 +163,9 @@ required categories:
 `BTR-E01` registers three isolated observer generations against one exact
 practice/source/stream and establishes one stream head at position zero. The
 registrations create exact checkpoints, baseline anchors, initial key
-intervals and frame generations under the lifecycle principal.
+intervals and frame generations under the lifecycle principal. Each of its
+three transactions uses `SERIALIZABLE`, matching the accepted lifecycle
+entry-point precondition.
 
 `BTR-E02` uses a single read-committed top-level producer transaction. It
 inserts the exact `IN_PROGRESS` update-confirm claim, updates one pre-existing
@@ -271,6 +273,14 @@ All scenarios run serially in the one behavior database. Success cases use
 closed isolated appointment, command, observer-generation and source-position
 partitions. Expected-failure cases run in top-level transactions whose only
 acceptable terminal state is rollback. No failed connection is reused.
+
+Isolation is entry-point-specific rather than globally flattened. `BTR-E01`,
+`BTR-E04`, `BTR-I03` and `BTR-B03` use `SERIALIZABLE` because the accepted
+lifecycle/coordinator functions fail closed at any weaker isolation. The
+remaining producer, observer, trigger, RLS and rollback scenarios use
+`READ COMMITTED`; `BTR-R01` is additionally read-only. This remains a
+single-session serial proof and makes no claim about concurrent serializable
+anomalies or retry policy.
 
 Before and after each scenario, a fixed superuser readback script emits only:
 

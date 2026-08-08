@@ -65,11 +65,13 @@ the transaction begins. Evidence records both `session_user` and
 `current_user`; the scenario must observe the expected accepted login and the
 security-definer owner only while inside the accepted function.
 
-All behavior-changing scenarios use `READ COMMITTED`, one top-level
-transaction, no savepoint, no role switch and no retry. Read-only RLS evidence
-sets the transaction read-only. Standard retryable `40001` or `40P01` is not
-absorbed or reclassified; either would fail this serial tranche and require
-diagnosis.
+Producer, observer, trigger and RLS scenarios use `READ COMMITTED`. The three
+registration transactions and the coordinator apply/replay/rollback scenarios
+use `SERIALIZABLE`, exactly as required by the accepted entry-point guards.
+Every transaction remains top-level, with no savepoint, role switch or retry.
+Read-only RLS evidence sets the transaction read-only. Standard retryable
+`40001` or `40P01` is not absorbed or reclassified; either would fail this
+single-session serial tranche and require diagnosis.
 
 Expected custom failures and the fixed injected `P0001` abort terminate the
 connection with the transaction uncommitted. Readback occurs through a new

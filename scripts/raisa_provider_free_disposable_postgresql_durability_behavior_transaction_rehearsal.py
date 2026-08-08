@@ -51,7 +51,7 @@ EXPECTED_CONTRACT_PATH = (
     "behavior-transaction-rehearsal-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:32d0608e6e930c743d5fa231e442bf7675ce31606ce02c8d7697e326a54c8e9e"
+    "sha256:ec9e96e42fdbc2883614f55e7629dabed0045f01d74ba573cd076fff0f0d79cc"
 )
 PASS_RESULT = (
     "raisa_provider_free_disposable_postgresql_durability_"
@@ -221,6 +221,7 @@ FABRIC_RELATIONS = (
 SNAPSHOT_RELATIONS = tuple(f"public.{name}" for name in APPLICATION_RELATIONS) + tuple(
     f"emr4_context_fabric.{name}" for name in FABRIC_RELATIONS
 )
+SERIALIZABLE_SCENARIOS = frozenset({"BTR-E01", "BTR-E04", "BTR-I03", "BTR-B03"})
 
 EXPECTED_DELTAS: dict[str, dict[str, int]] = {
     "BTR-E01": {
@@ -913,14 +914,19 @@ def _identity_select(principal: str) -> str:
     )
 
 
-def _script(principal: str, statements: list[str], *, read_only: bool = False) -> bytes:
+def _script(
+    principal: str,
+    statements: list[str],
+    *,
+    read_only: bool = False,
+    isolation: str = "read committed",
+) -> bytes:
     if not IDENTIFIER.fullmatch(principal):
         raise BehaviorFailure("render", "unsafe_principal")
-    begin = (
-        "BEGIN ISOLATION LEVEL READ COMMITTED READ ONLY;"
-        if read_only
-        else "BEGIN ISOLATION LEVEL READ COMMITTED;"
-    )
+    if isolation not in {"read committed", "serializable"}:
+        raise BehaviorFailure("render", "unsafe_isolation")
+    begin = f"BEGIN ISOLATION LEVEL {isolation.upper()}"
+    begin += " READ ONLY;" if read_only else ";"
     lines = [
         f"SET SESSION AUTHORIZATION {principal};",
         begin,
@@ -940,12 +946,16 @@ def _script(principal: str, statements: list[str], *, read_only: bool = False) -
     return rendered.encode("utf-8")
 
 
-def _multi_transaction_script(principal: str, transactions: list[list[str]]) -> bytes:
+def _multi_transaction_script(
+    principal: str, transactions: list[list[str]], *, isolation: str = "read committed"
+) -> bytes:
     if not IDENTIFIER.fullmatch(principal) or len(transactions) < 2:
         raise BehaviorFailure("render", "unsafe_multi_transaction_shape")
+    if isolation not in {"read committed", "serializable"}:
+        raise BehaviorFailure("render", "unsafe_isolation")
     lines = [f"SET SESSION AUTHORIZATION {principal};"]
     for index, statements in enumerate(transactions):
-        lines.append("BEGIN ISOLATION LEVEL READ COMMITTED;")
+        lines.append(f"BEGIN ISOLATION LEVEL {isolation.upper()};")
         if index == 0:
             lines.append(_identity_select(principal))
         lines.extend([*statements, "COMMIT;"])
@@ -1180,6 +1190,7 @@ def render_scenario_sql(contract: dict[str, Any], scenario_id: str) -> bytes:
                     "observer_rollback",
                 )
             ],
+            isolation="serializable",
         )
     if scenario_id == "BTR-I02":
         return _multi_transaction_script(
@@ -1423,7 +1434,10 @@ def render_scenario_sql(contract: dict[str, Any], scenario_id: str) -> bytes:
     if scenario_id not in scripts:
         raise BehaviorFailure("render", "unknown_scenario", scenario_id)
     principal, statements, read_only = scripts[scenario_id]
-    return _script(principal, statements, read_only=read_only)
+    isolation = (
+        "serializable" if scenario_id in SERIALIZABLE_SCENARIOS else "read committed"
+    )
+    return _script(principal, statements, read_only=read_only, isolation=isolation)
 
 
 def render_position_two_precondition(contract: dict[str, Any]) -> bytes:
@@ -1542,6 +1556,7 @@ def _identity_from_stdout(
     principal: str,
     *,
     expected_read_only: bool | None = None,
+    expected_isolation: str = "read committed",
 ) -> dict[str, Any]:
     identities: list[dict[str, Any]] = []
     for line in result.stdout.decode("utf-8", errors="strict").splitlines():
@@ -1566,7 +1581,7 @@ def _identity_from_stdout(
         "expected_principal": principal,
         "session_user": principal,
         "current_user": principal,
-        "isolation": "read committed",
+        "isolation": expected_isolation,
         "read_only": expected_read_only,
     }
     if not identities or any(row != expected for row in identities):
@@ -1574,7 +1589,7 @@ def _identity_from_stdout(
     return {
         "session_user": principal,
         "current_user": principal,
-        "isolation": "read committed",
+        "isolation": expected_isolation,
         "read_only": expected_read_only,
     }
 
@@ -2028,7 +2043,16 @@ def _run_scenarios(
                 profile,
                 render_scenario_sql(contract, scenario_id),
             )
-            identity = _identity_from_stdout(result, scenario["principal"])
+            expected_isolation = (
+                "serializable"
+                if scenario_id in SERIALIZABLE_SCENARIOS
+                else "read committed"
+            )
+            identity = _identity_from_stdout(
+                result,
+                scenario["principal"],
+                expected_isolation=expected_isolation,
+            )
             if scenario_id == "BTR-R01":
                 _assert_rls_payload(result)
             observed_sqlstate, transport = _bounded_outcome(
