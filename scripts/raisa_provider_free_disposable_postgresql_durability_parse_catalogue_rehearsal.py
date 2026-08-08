@@ -41,7 +41,7 @@ EXPECTED_PREREQUISITE_PATH = (
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:6ca2ef534899c932b2962dd816c075d189820e9ecc946993d0fbbe40c24a594e"
+    "sha256:8d767511b5c2295d9aecbe3be49dfe8e271c30228a57816b11d4d1a37ff9e641"
 )
 EXPECTED_PREREQUISITE_SHA256 = (
     "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
@@ -50,6 +50,7 @@ EXPECTED_PREREQUISITE_SHA256 = (
 FABRIC_SCHEMA = "emr4_context_fabric"
 IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
+POSTGRES_16_VERSION_NUM = re.compile(rb"^16[0-9]{4}$")
 ROLE_LINE = re.compile(
     r"^CREATE ROLE ([a-z][a-z0-9_]*) (NO)?LOGIN (NO)?INHERIT "
     r"NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;$",
@@ -529,8 +530,7 @@ def docker_argv(
             "--tuples-only",
             "--no-align",
             "--command",
-            "SELECT (pg_catalog.current_setting('server_version_num')::"
-            "pg_catalog.integer / 10000)::pg_catalog.text;",
+            "SELECT pg_catalog.current_setting('server_version_num');",
         ]
     if operation is DockerOperation.PSQL_COMMAND:
         return _psql_base(docker, container_id, database, profile) + [
@@ -655,6 +655,27 @@ def _is_exact_absence(result: ProcessResult) -> bool:
     return b"no such object" in bounded or b"no such container" in bounded
 
 
+def _readiness_failure_class(stderr: bytes) -> str:
+    """Map fixed local psql diagnostics to a closed, value-free evidence class."""
+    lowered = stderr.lower()
+    patterns = (
+        (b"syntax error", "sql_syntax"),
+        (b"role ", "role_missing"),
+        (b"database ", "database_missing"),
+        (b"password authentication failed", "password_authentication_failed"),
+        (b"peer authentication failed", "peer_authentication_failed"),
+        (b"no password supplied", "password_missing"),
+        (b"connection refused", "connection_refused"),
+        (b"no such file or directory", "socket_missing"),
+        (b"server closed the connection unexpectedly", "server_handoff"),
+        (b"executable file not found", "command_unavailable"),
+    )
+    for fragment, classification in patterns:
+        if fragment in lowered:
+            return classification
+    return "unclassified"
+
+
 def _wait_for_stable_postgres(
     runner: Runner,
     docker: str,
@@ -670,7 +691,6 @@ def _wait_for_stable_postgres(
     stability = float(profile["readiness_stability_seconds"])
     interval = float(profile["readiness_probe_interval_seconds"])
     stable_since: float | None = None
-    expected_major = b"16"
     state = observation if observation is not None else {}
     state.clear()
     state.update(
@@ -686,6 +706,7 @@ def _wait_for_stable_postgres(
     while True:
         remaining = deadline - clock()
         if remaining <= 0:
+            state["status"] = "timeout"
             raise RehearsalFailure("postgres", "readiness_timeout")
         state["pg_isready_attempts"] += 1
         try:
@@ -718,6 +739,7 @@ def _wait_for_stable_postgres(
         if ready.returncode == 0:
             remaining = deadline - clock()
             if remaining <= 0:
+                state["status"] = "timeout"
                 raise RehearsalFailure("postgres", "readiness_timeout")
             state["sql_probe_attempts"] += 1
             try:
@@ -751,12 +773,17 @@ def _wait_for_stable_postgres(
             state["last_sql_stderr_digest"] = "sha256:" + _bytes_sha(
                 sql_probe.stderr
             )
+            state["last_sql_failure_class"] = _readiness_failure_class(
+                sql_probe.stderr
+            )
             sql_ready = (
                 sql_probe.returncode == 0
-                and sql_probe.stdout.strip() == expected_major
+                and POSTGRES_16_VERSION_NUM.fullmatch(sql_probe.stdout.strip())
+                is not None
             )
             if sql_ready:
                 state["sql_probe_successes"] += 1
+                state["last_sql_failure_class"] = "none"
         now = clock()
         if ready.returncode == 0 and sql_ready:
             if stable_since is None:
@@ -769,6 +796,7 @@ def _wait_for_stable_postgres(
             stable_since = None
             state["continuous_success_ms"] = 0
         if now >= deadline:
+            state["status"] = "timeout"
             raise RehearsalFailure("postgres", "readiness_timeout")
         sleeper(interval)
 

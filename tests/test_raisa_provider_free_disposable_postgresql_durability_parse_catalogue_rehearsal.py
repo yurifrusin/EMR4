@@ -360,8 +360,9 @@ def test_ready_sql_argv_is_noninteractive_and_connection_bounded() -> None:
         "env",
     ]
     assert "-i" not in argv
-    assert "PGCONNECT_TIMEOUT=1" in argv
-    assert "current_setting('server_version_num')" in argv[-1]
+    assert "PGCONNECT_TIMEOUT=2" in argv
+    assert argv[-1] == "SELECT pg_catalog.current_setting('server_version_num');"
+    assert "::" not in argv[-1]
 
 
 @pytest.mark.parametrize(
@@ -489,7 +490,7 @@ def test_postgres_readiness_requires_continuous_authenticated_sql() -> None:
             return rehearsal.ProcessResult(0, b"accepting connections\n", b"")
         assert "current_setting('server_version_num')" in argv[-1]
         sql_attempts += 1
-        return rehearsal.ProcessResult(0, b"16\n", b"")
+        return rehearsal.ProcessResult(0, b"160010\n", b"")
 
     rehearsal._wait_for_stable_postgres(  # noqa: SLF001
         runner,
@@ -510,6 +511,7 @@ def test_postgres_readiness_requires_continuous_authenticated_sql() -> None:
     assert observation["sql_probe_attempts"] == 4
     assert observation["sql_probe_successes"] == 4
     assert observation["continuous_success_ms"] == 500
+    assert observation["last_sql_failure_class"] == "none"
 
 
 def test_postgres_readiness_translates_sql_probe_process_timeout() -> None:
@@ -543,6 +545,26 @@ def test_postgres_readiness_translates_sql_probe_process_timeout() -> None:
     assert observation["sql_probe_successes"] == 0
 
 
+@pytest.mark.parametrize(
+    ("stderr", "expected"),
+    [
+        (b"ERROR: syntax error at or near cast", "sql_syntax"),
+        (b'FATAL: role "synthetic" does not exist', "role_missing"),
+        (b'FATAL: database "synthetic" does not exist', "database_missing"),
+        (b"FATAL: password authentication failed", "password_authentication_failed"),
+        (b"FATAL: Peer authentication failed", "peer_authentication_failed"),
+        (b"fe_sendauth: no password supplied", "password_missing"),
+        (b"connection refused", "connection_refused"),
+        (b"No such file or directory", "socket_missing"),
+        (b"server closed the connection unexpectedly", "server_handoff"),
+        (b"executable file not found", "command_unavailable"),
+        (b"authored synthetic unknown", "unclassified"),
+    ],
+)
+def test_readiness_failure_classifier_is_closed(stderr: bytes, expected: str) -> None:
+    assert rehearsal._readiness_failure_class(stderr) == expected  # noqa: SLF001
+
+
 def test_postgres_readiness_caps_each_probe_to_startup_deadline() -> None:
     profile = copy.deepcopy(CONTRACT["docker_profile"])
     profile["startup_timeout_seconds"] = 1
@@ -562,7 +584,7 @@ def test_postgres_readiness_caps_each_probe_to_startup_deadline() -> None:
         if "pg_isready" in argv:
             current = 0.75
             return rehearsal.ProcessResult(0, b"accepting connections\n", b"")
-        return rehearsal.ProcessResult(0, b"16\n", b"")
+        return rehearsal.ProcessResult(0, b"160010\n", b"")
 
     rehearsal._wait_for_stable_postgres(  # noqa: SLF001
         runner,

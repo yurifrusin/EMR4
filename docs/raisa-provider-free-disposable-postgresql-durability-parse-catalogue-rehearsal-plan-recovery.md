@@ -155,10 +155,23 @@ container `1abe609a746022bd2855f78e1677d2c7e3bdf428dc861bc0c86bfc4b1c196d8f`
 and proved absence. The failure record could identify only a generic process
 timeout, so it could not distinguish a socket rejection from an authenticated
 probe handoff. Recovery gives only the fixed read-only readiness `psql` command
-a one-second `PGCONNECT_TIMEOUT`, removes its unused interactive-stdin flag,
+a bounded `PGCONNECT_TIMEOUT`, removes its unused interactive-stdin flag,
 translates host probe timeout into an exact readiness operation, and records
 only bounded counts, exit codes and output digests. It adds no write retry and
 does not retain raw logs or values.
+
+Attempt `8e60fe0d1df3ec3aec09b364` then proved the connection-timeout hypothesis
+wrong: 82 of 83 `pg_isready` calls succeeded, while all 82 authenticated SQL
+probes returned exit 1 with one stable stderr digest and no stdout. No database
+create, prerequisite, artifact or catalogue step began, and exact-ID cleanup
+removed `8194e86caee7d2db2380e44761dcfc50ad861fc7ff0b67b0a323e6912d38836f`
+and proved absence. PostgreSQL 16 documents that a connect timeout of one is
+interpreted as its minimum two seconds, so the contract and prose now state two
+seconds. The server-major query now returns the documented six-digit
+`server_version_num` text directly and validates it locally as PostgreSQL 16,
+removing unnecessary SQL casts. A fixed value-free classifier records only a
+closed diagnostic category if any SQL probe still fails; raw stderr remains
+digest-only.
 
 ## Claim boundary
 
