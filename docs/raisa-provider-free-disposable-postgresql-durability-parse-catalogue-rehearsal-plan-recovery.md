@@ -430,3 +430,24 @@ or positions on those tables, so every unexpected table-column change remains
 visible and fail-closed. Artifact SQL, contracts, manifests, assertions,
 commands, cleanup, runtime and authority remain unchanged. A fresh exact-HEAD
 veto is required before another owned characterization run.
+
+## Exact catalogue-digest binding
+
+Attempt `54c5452686c2156a6c2514de` passed every structural assertion: stable
+readiness, exact rollback, all 412 artifact statements, the exact 8/32/18/252/
+81/4/44/24/14 role/type/relation/column/constraint/index/policy/function/trigger
+populations, application emptiness and authority ceilings. It recorded the
+closed canonical digest for each of the fifteen value-bearing catalogue
+queries, returned only `catalogue_characterization_required`, and could not
+emit the pass result. Exact container
+`a60e76c4608f929b674dcda2140f89155c85b7f806785ba53ae002452eb3a392`
+was removed and absence verified.
+
+The contract now moves from `characterization_only` to
+`exact_digest_bound` with exactly those fifteen observed digests. Server and
+extension digests remain environmental evidence rather than fixed contract
+preimages, as already frozen by the plan. This is a position-closed metadata
+bootstrap, not acceptance by observation: a separate newly owned container
+must reproduce every digest after a fresh exact-HEAD veto. Artifact SQL,
+queries, catalogue assertions, container profile, cleanup and authority remain
+unchanged.

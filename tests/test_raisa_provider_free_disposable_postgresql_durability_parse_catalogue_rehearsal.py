@@ -23,6 +23,11 @@ DIR = ROOT / (
     "durability-parse-catalogue-rehearsal"
 )
 CONTRACT = json.loads((DIR / "rehearsal-contract.json").read_text(encoding="utf-8"))
+CHARACTERIZATION_CONTRACT = copy.deepcopy(CONTRACT)
+CHARACTERIZATION_CONTRACT["catalogue_expectation"] = {
+    "mode": "characterization_only",
+    "expected_query_digests": {},
+}
 CONTRACT_SCHEMA = json.loads(
     (DIR / "rehearsal-contract.schema.json").read_text(encoding="utf-8")
 )
@@ -34,6 +39,12 @@ PREREQUISITE_SCHEMA = json.loads(
 )
 EVIDENCE_SCHEMA = json.loads(
     (DIR / "rehearsal-evidence.schema.json").read_text(encoding="utf-8")
+)
+CHARACTERIZATION_EVIDENCE = json.loads(
+    (
+        DIR
+        / "provider-free-disposable-postgresql-evidence-catalogue-characterization.json"
+    ).read_text(encoding="utf-8")
 )
 MANIFEST = json.loads((ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8"))
 ARTIFACT = rehearsal._canonical_artifact(  # noqa: SLF001 - exact acceptance surface
@@ -213,6 +224,35 @@ def test_contract_schemas_are_whole_document_valid() -> None:
         Draft202012Validator.check_schema(schema)
         Draft202012Validator(schema).validate(payload)
     Draft202012Validator.check_schema(EVIDENCE_SCHEMA)
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(CHARACTERIZATION_EVIDENCE)
+
+
+def test_exact_catalogue_digests_are_bound_to_immutable_characterization() -> None:
+    expected = {
+        key: digest
+        for key, digest in CHARACTERIZATION_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
+    assert CONTRACT["catalogue_expectation"] == {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": expected,
+    }
+    assert set(expected) == set(CONTRACT["catalogue_query_ids"]) - {
+        "server",
+        "extensions",
+    }
+    assert CHARACTERIZATION_EVIDENCE["result"] == "catalogue_characterization_required"
+    assert CHARACTERIZATION_EVIDENCE["catalogue"]["expectation_mode"] == (
+        "characterization_only"
+    )
+    assert CHARACTERIZATION_EVIDENCE["cleanup"] == {
+        "absence_verified": True,
+        "container_id": "a60e76c4608f929b674dcda2140f89155c85b7f806785ba53ae002452eb3a392",
+        "removed": True,
+        "status": "cleanup_verified",
+    }
 
 
 def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
@@ -717,7 +757,7 @@ def test_query_transport_sets_read_only_and_uses_file_stdin() -> None:
 
 def test_catalogue_projection_matches_every_frozen_population() -> None:
     result = rehearsal._assert_catalogue(  # noqa: SLF001
-        _valid_facts(), MANIFEST, PREREQUISITE, CONTRACT
+        _valid_facts(), MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
     )
     assert result["kind_counts"] == {
         "roles": 8,
@@ -775,7 +815,7 @@ def test_catalogue_queries_project_every_definition_and_authority_surface() -> N
 def test_characterization_cannot_pass_and_exact_digests_reject_definition_drift() -> None:
     facts = _valid_facts()
     characterized = rehearsal._assert_catalogue(  # noqa: SLF001
-        facts, MANIFEST, PREREQUISITE, CONTRACT
+        facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
     )
     assert characterized["expectation_mode"] == "characterization_only"
     bound = copy.deepcopy(CONTRACT)
@@ -892,7 +932,7 @@ def test_catalogue_population_mutations_fail_closed(field: str, code: str) -> No
     facts[field] = facts[field][1:]
     with pytest.raises(rehearsal.RehearsalFailure, match=code):
         rehearsal._assert_catalogue(  # noqa: SLF001
-            facts, MANIFEST, PREREQUISITE, CONTRACT
+            facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
         )
 
 
@@ -942,12 +982,14 @@ def test_function_owner_exception_is_exact_and_position_closed() -> None:
         if row["name"] == "emr4_context_fabric.admit_proofread_observation_v1"
     )
     assert admission["owner"] == "context_admission_receiver"
-    rehearsal._assert_catalogue(facts, MANIFEST, PREREQUISITE, CONTRACT)  # noqa: SLF001
+    rehearsal._assert_catalogue(  # noqa: SLF001
+        facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
+    )
 
     admission["owner"] = "context_schema_owner"
     with pytest.raises(rehearsal.RehearsalFailure, match="function_attributes"):
         rehearsal._assert_catalogue(  # noqa: SLF001
-            facts, MANIFEST, PREREQUISITE, CONTRACT
+            facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
         )
 
     facts = _valid_facts()
@@ -959,7 +1001,7 @@ def test_function_owner_exception_is_exact_and_position_closed() -> None:
     ordinary["owner"] = "context_admission_receiver"
     with pytest.raises(rehearsal.RehearsalFailure, match="function_attributes"):
         rehearsal._assert_catalogue(  # noqa: SLF001
-            facts, MANIFEST, PREREQUISITE, CONTRACT
+            facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
         )
 
 
@@ -968,13 +1010,13 @@ def test_public_acl_and_runtime_schema_create_fail_closed() -> None:
     facts["schema_acl"] = [{"grantee": "PUBLIC", "privilege": "USAGE", "grantable": False}]
     with pytest.raises(rehearsal.RehearsalFailure, match="public_acl"):
         rehearsal._assert_catalogue(  # noqa: SLF001
-            facts, MANIFEST, PREREQUISITE, CONTRACT
+            facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
         )
     facts = _valid_facts()
     facts["schema_acl"] = [{"grantee": "context_producer", "privilege": "CREATE", "grantable": False}]
     with pytest.raises(rehearsal.RehearsalFailure, match="runtime_schema_create_acl"):
         rehearsal._assert_catalogue(  # noqa: SLF001
-            facts, MANIFEST, PREREQUISITE, CONTRACT
+            facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
         )
 
 
@@ -989,7 +1031,7 @@ def test_application_owner_rows_and_column_shape_fail_closed() -> None:
             facts["columns"] = facts["columns"][1:]
         with pytest.raises(rehearsal.RehearsalFailure):
             rehearsal._assert_catalogue(  # noqa: SLF001
-                facts, MANIFEST, PREREQUISITE, CONTRACT
+                facts, MANIFEST, PREREQUISITE, CHARACTERIZATION_CONTRACT
             )
 
 

@@ -2,9 +2,9 @@
 
 Date: 2026-08-07
 
-Status: bounded PL/pgSQL reserved-symbol recovery candidate; corrected parent
-artifact source is `e8d07a35727cbbca2d377eae40160b33ef955b4e`, with fresh exact-HEAD
-descendant veto required before another runtime attempt
+Status: exact PostgreSQL-16 catalogue digests characterized and position-closed;
+corrected parent artifact source is `e8d07a35727cbbca2d377eae40160b33ef955b4e`,
+with fresh exact-HEAD descendant veto required before the terminal runtime
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`
