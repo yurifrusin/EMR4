@@ -50,6 +50,11 @@ FAILURE_EVIDENCE_004 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_005 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-005.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -179,6 +184,11 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
     }
     assert FAILURE_EVIDENCE_004["scenario_reconciliation"]["observed"] == 0
     assert FAILURE_EVIDENCE_004["cleanup"]["absence_verified"] is True
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_005)
+    assert FAILURE_EVIDENCE_005["environment"]["failure"]["sqlstate"] == "23502"
+    assert "coordinate_status" not in FAILURE_EVIDENCE_005["environment"]["failure"]
+    assert FAILURE_EVIDENCE_005["scenario_reconciliation"]["observed"] == 0
+    assert FAILURE_EVIDENCE_005["cleanup"]["absence_verified"] is True
 
 
 def test_bootstrap_failure_telemetry_releases_only_one_safe_sqlstate() -> None:
@@ -234,6 +244,7 @@ def test_bootstrap_diagnostic_metadata_is_exactly_allowlisted() -> None:
     )
     assert rehearsal._safe_bootstrap_failure_metadata(accepted) == {
         "sqlstate": "23502",
+        "coordinate_status": "released",
         "relation": "emr4_context_fabric.context_durability_checkpoint",
         "column": "audit_head_digest",
     }
@@ -246,7 +257,10 @@ def test_bootstrap_diagnostic_metadata_is_exactly_allowlisted() -> None:
             b"SCHEMA NAME:  private\nTABLE NAME:  patient\nCOLUMN NAME:  name\n"
         ),
     )
-    assert rehearsal._safe_bootstrap_failure_metadata(unlisted) == {"sqlstate": "23502"}
+    assert rehearsal._safe_bootstrap_failure_metadata(unlisted) == {
+        "sqlstate": "23502",
+        "coordinate_status": "unlisted_relation",
+    }
 
     ambiguous = rehearsal.parent.ProcessResult(
         3,
@@ -258,7 +272,16 @@ def test_bootstrap_diagnostic_metadata_is_exactly_allowlisted() -> None:
         ),
     )
     assert rehearsal._safe_bootstrap_failure_metadata(ambiguous) == {
-        "sqlstate": "23502"
+        "sqlstate": "23502",
+        "coordinate_status": "ambiguous",
+    }
+
+    missing = rehearsal.parent.ProcessResult(
+        3, b"", b"ERROR:  23502: prohibited message\n"
+    )
+    assert rehearsal._safe_bootstrap_failure_metadata(missing) == {
+        "sqlstate": "23502",
+        "coordinate_status": "missing",
     }
 
 

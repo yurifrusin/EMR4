@@ -117,3 +117,17 @@ hard-coded bootstrap allowlist. Ambiguous or unlisted metadata releases only
 SQLSTATE; raw errors, SQL and values remain discarded. AER-0119 records this
 minimal extension. Another diagnostic run remains closed until fresh
 deterministic and independent acceptance.
+
+## Fifth runtime failure and branch-status strengthening
+
+Failure evidence 005 again retained `23502` but no coordinate. Because the
+parser had one identical safe return shape for missing, ambiguous, unlisted
+relation and unlisted column branches, that absence could not safely select a
+repair.
+
+The evidence now emits one enumerated `coordinate_status` while keeping every
+rejected identifier sealed. AER-0121 records the gap. AER-0120 separately
+corrects the preceding verifier receipt's nonexistent `_bootstrap_sql()` name;
+the actual reviewed renderer is `render_bootstrap_sql()`. Another diagnostic
+run remains closed until the exact candidate passes deterministic checks and a
+fresh independent veto.

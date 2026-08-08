@@ -82,6 +82,15 @@
             "code": {"type": "string", "minLength": 1},
             "detail_digest": {"$ref": "#/$defs/digest"},
             "sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"},
+            "coordinate_status": {
+              "enum": [
+                "missing",
+                "ambiguous",
+                "unlisted_relation",
+                "unlisted_column",
+                "released"
+              ]
+            },
             "relation": {
               "enum": [
                 "public.appointments",

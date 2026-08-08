@@ -296,21 +296,24 @@ def _safe_bootstrap_failure_metadata(
     fields: dict[bytes, set[bytes]] = {}
     for name, value in PSQL_DIAGNOSTIC_LINE.findall(raw):
         fields.setdefault(name, set()).add(value)
-    if any(
-        len(fields.get(name, set())) != 1
-        for name in (b"SCHEMA NAME", b"TABLE NAME", b"COLUMN NAME")
-    ):
+    required = (b"SCHEMA NAME", b"TABLE NAME", b"COLUMN NAME")
+    if any(len(fields.get(name, set())) == 0 for name in required):
+        metadata["coordinate_status"] = "missing"
+        return metadata
+    if any(len(fields[name]) != 1 for name in required):
+        metadata["coordinate_status"] = "ambiguous"
         return metadata
 
     schema = next(iter(fields[b"SCHEMA NAME"])).decode("ascii")
     table = next(iter(fields[b"TABLE NAME"])).decode("ascii")
     column = next(iter(fields[b"COLUMN NAME"])).decode("ascii")
     relation = f"{schema}.{table}"
-    if (
-        relation in SAFE_BOOTSTRAP_COLUMNS
-        and column in SAFE_BOOTSTRAP_COLUMNS[relation]
-    ):
-        metadata.update(relation=relation, column=column)
+    if relation not in SAFE_BOOTSTRAP_COLUMNS:
+        metadata["coordinate_status"] = "unlisted_relation"
+    elif column not in SAFE_BOOTSTRAP_COLUMNS[relation]:
+        metadata["coordinate_status"] = "unlisted_column"
+    else:
+        metadata.update(coordinate_status="released", relation=relation, column=column)
     return metadata
 
 
@@ -2258,7 +2261,7 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
             "detail_digest": _sha256(detail_bytes),
         }
         if isinstance(detail, dict):
-            for name in ("sqlstate", "relation", "column"):
+            for name in ("sqlstate", "coordinate_status", "relation", "column"):
                 if isinstance(detail.get(name), str):
                     failure_evidence[name] = detail[name]
         elif SQLSTATE.fullmatch(str(detail)):

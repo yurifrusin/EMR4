@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 98
+    assert register["register_revision"] == 99
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 120)
+        f"AER-{index:04d}" for index in range(1, 122)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 93
+    assert len(agent_incidents) == 94
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1582,21 +1582,37 @@ def test_aer_0119_adds_only_an_allowlisted_bootstrap_coordinate() -> None:
     assert "per-relation" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0120_and_0121_correct_symbol_and_closed_rejection_branch() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    symbol = rows["AER-0120"]
+    assert symbol["role"] == "verifier"
+    assert symbol["category"] == "evidence_misreport"
+    assert symbol["candidate_state"] == "canonical_unchanged"
+    assert "symbol" in symbol["correction"]["prevention_control"]
+
+    branch = rows["AER-0121"]
+    assert branch["origin"] == "harness"
+    assert branch["category"] == "harness_failure"
+    assert branch["candidate_state"] == "accepted_candidate_changed"
+    assert "reason code" in branch["correction"]["prevention_control"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 119
+    assert report["incident_count"] == 121
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 93,
-        "harness": 11,
+        "agent_behavior": 94,
+        "harness": 12,
         "repository": 7,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
-        "evidence_misreport": 16,
-        "harness_failure": 11,
+        "evidence_misreport": 17,
+        "harness_failure": 12,
         "output_contract_violation": 36,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
@@ -1604,8 +1620,8 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 16,
-        "canonical_unchanged": 81,
+        "accepted_candidate_changed": 17,
+        "canonical_unchanged": 82,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [

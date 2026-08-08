@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 98,
+  "register_revision": 99,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4556,6 +4556,87 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-98.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0120",
+      "attempt_id": "raisa-context-fabric-durability-behavior-coordinate-review-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "An independent receipt must name the exact reviewed implementation symbol when making a source-path claim.",
+      "observed_error": "The coordinate review reported that all allowlisted relations were written by _bootstrap_sql(), but no such symbol exists; the reviewed renderer is render_bootstrap_sql(). The allowlist conclusion remains independently reproducible, but the symbol-name claim is rejected.",
+      "detection_method": "Sol reconciled the receipt narrative with the exact candidate source after admission and found render_bootstrap_sql as the only bootstrap renderer.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-behavior-coordinate-diagnostic-review-receipt.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-99.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.reviewed_symbol_name_misreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The nonexistent symbol receives no acceptance weight. The allowlist was rechecked against render_bootstrap_sql and remains valid.",
+        "prevention_control": "Before accepting a source-symbol claim in a verifier receipt, mechanically resolve the exact symbol in the candidate tree; narrative aliases are not authoritative evidence.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-99.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0121",
+      "attempt_id": "raisa-context-fabric-durability-behavior-coordinate-diagnostic-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "When a closed diagnostic coordinate is not released, the evidence must distinguish absent, ambiguous, unlisted-relation and unlisted-column branches without exposing the rejected identifier.",
+      "observed_error": "Failure evidence 005 again exposed SQLSTATE 23502 but no coordinate, while the parser returned the same empty-coordinate shape for four materially different fail-closed branches. The result could not distinguish parser-format drift from a correctly rejected allowlist coordinate.",
+      "detection_method": "The independently accepted coordinate parser ran once and failure evidence 005 contained neither relation nor column. Source inspection showed every rejection branch returning only the SQLSTATE metadata.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-005.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-99.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.coordinate_rejection_branch_not_observable",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The safe failure object now emits exactly one enumerated coordinate_status: missing, ambiguous, unlisted_relation, unlisted_column or released. Rejected identifiers remain absent. The diagnostic remains runtime-closed pending deterministic checks and a fresh exact-HEAD veto.",
+        "prevention_control": "Every privacy-preserving parser rejection must expose a closed reason code when distinct rejection branches require different safe repairs; the rejected value itself remains sealed.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-99.md"
         ]
       },
       "status": "corrected"
