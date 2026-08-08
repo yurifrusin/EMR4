@@ -65,6 +65,11 @@ FAILURE_EVIDENCE_007 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_008 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-008.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -213,6 +218,53 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
     )
     assert FAILURE_EVIDENCE_007["scenario_reconciliation"]["observed"] == 0
     assert FAILURE_EVIDENCE_007["cleanup"]["absence_verified"] is True
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_008)
+    assert FAILURE_EVIDENCE_008["environment"]["failure"] == {
+        "code": "catalogue_delta",
+        "detail_digest": rehearsal._sha256(  # noqa: SLF001
+            b"application_relations,relation_acl"
+        ),
+        "stage": "fixture",
+    }
+    assert FAILURE_EVIDENCE_008["lifecycle"][-1] == "cleanup_verified"
+    assert FAILURE_EVIDENCE_008["scenario_reconciliation"] == {
+        "expected": 20,
+        "observed": 0,
+        "passed": 0,
+    }
+    assert FAILURE_EVIDENCE_008["cleanup"]["absence_verified"] is True
+
+
+def test_catalogue_deltas_separate_fixture_rows_from_structural_drift() -> None:
+    before = {
+        "application_relations": [{"name": "public.appointments", "row_count": 0}],
+        "relation_acl": [],
+        "types": [{"name": "synthetic", "domain_not_null": False}],
+    }
+    fixture = copy.deepcopy(before)
+    fixture["application_relations"][0]["row_count"] = 1
+    fixture["relation_acl"] = [{"relation": "public.appointments"}]
+
+    fixture_digests = rehearsal._assert_fixture_catalogue_delta(  # noqa: SLF001
+        before, fixture
+    )
+    assert rehearsal.EXPECTED_FIXTURE_CATALOGUE_CHANGES == {
+        "application_relations",
+        "relation_acl",
+    }
+
+    final = copy.deepcopy(fixture)
+    final["application_relations"][0]["row_count"] = 2
+    rehearsal._assert_post_behavior_catalogue_stability(  # noqa: SLF001
+        fixture_digests, final
+    )
+
+    hostile = copy.deepcopy(final)
+    hostile["types"][0]["domain_not_null"] = True
+    with pytest.raises(rehearsal.BehaviorFailure, match="post_behavior_drift"):
+        rehearsal._assert_post_behavior_catalogue_stability(  # noqa: SLF001
+            fixture_digests, hostile
+        )
 
 
 def test_bootstrap_failure_telemetry_releases_only_one_safe_sqlstate() -> None:

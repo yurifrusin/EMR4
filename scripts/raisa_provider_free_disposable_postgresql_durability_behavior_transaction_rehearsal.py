@@ -64,6 +64,10 @@ CLAIM_BOUNDARY = (
     "selected_serial_entry_point_trigger_rls_idempotency_and_outer_rollback_"
     "behavior_only"
 )
+EXPECTED_FIXTURE_CATALOGUE_CHANGES = frozenset(
+    {"application_relations", "relation_acl"}
+)
+EXPECTED_POST_BEHAVIOR_CATALOGUE_CHANGES = frozenset({"application_relations"})
 
 Runner = Callable[[list[str], bytes | None, float, int], parent.ProcessResult]
 UUID = re.compile(
@@ -1687,9 +1691,24 @@ def _assert_fixture_catalogue_delta(
     changed = {
         name for name in before_digests if before_digests[name] != after_digests[name]
     }
-    if changed != {"relation_acl"}:
+    if changed != EXPECTED_FIXTURE_CATALOGUE_CHANGES:
         raise BehaviorFailure("fixture", "catalogue_delta", ",".join(sorted(changed)))
     return after_digests
+
+
+def _assert_post_behavior_catalogue_stability(
+    before_digests: dict[str, str], after: dict[str, Any]
+) -> None:
+    after_digests = _catalogue_digests(after)
+    if set(before_digests) != set(after_digests):
+        raise BehaviorFailure("catalogue", "post_behavior_population")
+    changed = {
+        name for name in before_digests if before_digests[name] != after_digests[name]
+    }
+    if changed != EXPECTED_POST_BEHAVIOR_CATALOGUE_CHANGES:
+        raise BehaviorFailure(
+            "catalogue", "post_behavior_drift", ",".join(sorted(changed))
+        )
 
 
 def _assert_fixture_privileges(
@@ -2223,8 +2242,9 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
         final_catalogue = parent._read_catalogue(  # noqa: SLF001
             runner, docker, container_id, profile["postgres_database"], profile
         )
-        if _catalogue_digests(final_catalogue) != fixture_catalogue_digests:
-            raise BehaviorFailure("catalogue", "post_behavior_drift")
+        _assert_post_behavior_catalogue_stability(
+            fixture_catalogue_digests, final_catalogue
+        )
         lifecycle.extend(
             ["twenty_scenarios_matched", "catalogue_reconciled_after_behavior"]
         )

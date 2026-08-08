@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 105
+    assert register["register_revision"] == 106
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 128)
+        f"AER-{index:04d}" for index in range(1, 130)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 98
+    assert len(agent_incidents) == 99
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1668,30 +1668,54 @@ def test_aer_0127_rejects_internally_inconsistent_verifier_digest_claim() -> Non
     )
 
 
+def test_aer_0128_rejects_nonexistent_verifier_evidence_path() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0128"]
+
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert "nonexistent" in incident["observed_error"]
+
+
+def test_aer_0129_separates_application_rows_from_structural_catalogue() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0129"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert "application_relations,relation_acl" in incident["observed_error"]
+    assert (
+        "transaction snapshot invariants"
+        in incident["correction"]["prevention_control"]
+    )
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 127
+    assert report["incident_count"] == 129
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 98,
+        "agent_behavior": 99,
         "harness": 13,
-        "repository": 8,
+        "repository": 9,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
-        "evidence_misreport": 18,
+        "evidence_misreport": 19,
         "harness_failure": 13,
         "output_contract_violation": 39,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 8,
+        "repository_defect": 9,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 22,
-        "canonical_unchanged": 83,
+        "accepted_candidate_changed": 23,
+        "canonical_unchanged": 84,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [

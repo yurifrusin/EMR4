@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 105,
+  "register_revision": 106,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4880,6 +4880,88 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
           "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery-closeout.md",
           "docs/ariadne-agent-error-correction-register-revision-105.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0128",
+      "attempt_id": "raisa-context-fabric-behavior-parent-rebind-review-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "A verifier rehydration receipt must name only repository paths that exist at the exact reviewed HEAD.",
+      "observed_error": "The otherwise passing exact-HEAD rebind receipt named a nonexistent docs/handover-ledgers parent-rebind path instead of the reviewed docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-parent-rebind.md path.",
+      "detection_method": "Sol post-review exact-path readback returned false for the receipt path and true for the candidate path used by the review packet and diff.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-behavior-parent-rebind-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-behavior-parent-rebind-gemini-review-packet.md",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-parent-rebind.md",
+        "docs/ariadne-agent-error-correction-register-revision-106.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.nonexistent_repository_evidence_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The nonexistent path claim is preserved but rejected; the actual candidate path and exact diff remain the only parent-rebind documentary source.",
+        "prevention_control": "Machine-check every verifier-named repository path at the reviewed HEAD before accepting its prose evidence; nonexistent paths are rejected and never propagated.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-parent-rebind.md",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-106.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0129",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-008",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The fixture catalogue guard must distinguish structural or privilege drift from the authored-synthetic application row-count changes that the fixture and scenarios intentionally create.",
+      "observed_error": "The recovered artifact installed and reconciled, but the fixture guard allowed only relation_acl to change even though bootstrap intentionally inserted application rows, so the exact changed set application_relations,relation_acl failed before all scenarios.",
+      "detection_method": "The bounded failure digest was reversed over the closed catalogue query-id set to the unique value application_relations,relation_acl, then reconciled against the bootstrap SQL and application snapshot coverage.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-008.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-fixture-catalogue-delta-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-106.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.catalogue_guard_conflates_application_rows_with_structure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Bootstrap now admits exactly relation_acl and application_relations; post-scenario catalogue stability admits only application_relations while exact scenario snapshots retain row-count and content-digest enforcement.",
+        "prevention_control": "Catalogue stability checks must classify data-bearing projections separately from schema/security projections and pair every allowed data projection change with stricter transaction snapshot invariants.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-fixture-catalogue-delta-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-106.md"
         ]
       },
       "status": "corrected"
