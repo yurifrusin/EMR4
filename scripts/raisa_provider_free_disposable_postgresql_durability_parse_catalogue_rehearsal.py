@@ -655,6 +655,9 @@ def _wait_for_stable_postgres(
     stable_since: float | None = None
     expected_major = b"16"
     while True:
+        remaining = deadline - clock()
+        if remaining <= 0:
+            raise RehearsalFailure("postgres", "readiness_timeout")
         ready = _call(
             runner,
             docker_argv(
@@ -665,11 +668,14 @@ def _wait_for_stable_postgres(
             ),
             operation=DockerOperation.READY,
             stdin=None,
-            timeout=profile["command_timeout_seconds"],
+            timeout=min(float(profile["command_timeout_seconds"]), remaining),
             cap=profile["stdout_stderr_cap_bytes"],
         )
         sql_ready = False
         if ready.returncode == 0:
+            remaining = deadline - clock()
+            if remaining <= 0:
+                raise RehearsalFailure("postgres", "readiness_timeout")
             sql_probe = _call(
                 runner,
                 docker_argv(
@@ -680,7 +686,7 @@ def _wait_for_stable_postgres(
                 ),
                 operation=DockerOperation.READY_SQL,
                 stdin=None,
-                timeout=profile["command_timeout_seconds"],
+                timeout=min(float(profile["command_timeout_seconds"]), remaining),
                 cap=profile["stdout_stderr_cap_bytes"],
             )
             sql_ready = (

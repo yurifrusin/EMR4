@@ -485,6 +485,38 @@ def test_postgres_readiness_requires_continuous_authenticated_sql() -> None:
     assert all("CREATE" not in " ".join(call) for call in calls)
 
 
+def test_postgres_readiness_caps_each_probe_to_startup_deadline() -> None:
+    profile = copy.deepcopy(CONTRACT["docker_profile"])
+    profile["startup_timeout_seconds"] = 1
+    profile["readiness_stability_seconds"] = 0
+    current = 0.0
+    observed_timeouts: list[float] = []
+
+    def clock() -> float:
+        return current
+
+    def runner(
+        argv: list[str], stdin: bytes | None, timeout: float, cap: int
+    ) -> rehearsal.ProcessResult:
+        nonlocal current
+        del stdin, cap
+        observed_timeouts.append(timeout)
+        if "pg_isready" in argv:
+            current = 0.75
+            return rehearsal.ProcessResult(0, b"accepting connections\n", b"")
+        return rehearsal.ProcessResult(0, b"16\n", b"")
+
+    rehearsal._wait_for_stable_postgres(  # noqa: SLF001
+        runner,
+        r"C:\Docker\docker.exe",
+        "a" * 64,
+        profile,
+        clock=clock,
+        sleeper=lambda _delay: None,
+    )
+    assert observed_timeouts == [1.0, 0.25]
+
+
 def test_module_has_no_database_cloud_http_or_environment_input_import() -> None:
     tree = ast.parse(Path(rehearsal.__file__).read_text(encoding="utf-8"))
     imports = {
