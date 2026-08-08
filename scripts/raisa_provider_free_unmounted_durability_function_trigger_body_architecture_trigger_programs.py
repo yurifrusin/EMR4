@@ -55,17 +55,17 @@ EVENT_COLUMNS = [
 ]
 ALIAS_COLUMNS = [
     "practice_id", "source_contract_id", "product_appointment_uuid",
-    "opaque_aggregate_alias", "created_at", "stream_id",
+    "opaque_aggregate_alias", "created_at", "stream_id", "xmin",
 ]
 HEAD_COLUMNS = [
     "practice_id", "source_contract_id", "stream_id", "stream_epoch",
-    "last_position", "updated_at",
+    "last_position", "updated_at", "xmin",
 ]
 OUTBOX_COLUMNS = [
     "practice_id", "source_contract_id", "stream_id", "stream_epoch",
     "transaction_position", "predecessor_position", "raw_event_uuid",
     "opaque_aggregate_alias", "aggregate_revision", "source_contract_digest",
-    "transaction_authored_at",
+    "transaction_authored_at", "xmin",
 ]
 
 

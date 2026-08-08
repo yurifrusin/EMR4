@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "sol_accepts_the_single_fresh_gemini_3_6_flash_high_read_only_veto_after_exact_machine_reconciliation_and_opens_only_behavior_attempt_019",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The r101 receipt at SHA-256 feaba3f6d648d960593479c9a221252bfc7f7de29a82a86bc37343c535df2b2f reports one schema-constrained terminal pass, exact candidate ae5b33c1e5d1f9b12d6f10cefb1c9e577e72189c before/after, dirty_after false, exactly 386 tests passed, Ruff and diff checks passed, exact failure/characterization/parse evidence hashes reconciled, only six least-privilege policies changed, structural/body program meaning preserved, 412 statements and all twenty scenarios unchanged at category counts 6/4/3/4/3 and behavior contract SHA-256 7d58d870444274e7bfa11be32585acb0164901b79cbc95c9542721f54d4867df. Sol independently confirmed the receipt, exact HEAD, clean worktree and protected refs.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied read-only review evidence only. GPT Sol retains sole verifier acceptance, runtime, cleanup, recovery, task-branch and continuity authority. No native subagent, implementation worker or provider runtime is active.",
+    "git_refs_and_worktree": "Review worktree r101 remains clean on codex/review-context-fabric-registration-rls-ae5b33 at exact HEAD ae5b33c1e5d1f9b12d6f10cefb1c9e577e72189c. Primary is tracked-clean at the same HEAD with only bounded untracked review-orchestration files plus preserved pre-existing untracked files including docs/branding/ and mutable behavior evidence. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active provider-free durability gate requires fresh independent acceptance before behavior can resume. The corrected lifecycle-registration RLS chain, exact parse evidence and unchanged twenty-scenario rebind now have one fresh terminal Gemini pass.",
+    "protected_evidence_boundaries": "Acceptance opens only eligibility for attempt 019 in one new owned pull-never networkless fixed-fixture PostgreSQL 16 container after a fresh preexecution receipt. No product/provider call, patient/clinical/product/protected data, application migration/runtime, watcher/listener/feed, operational credential/database, real context, tool, command/write, deployment, production, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

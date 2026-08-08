@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "diagnose_and_repair_the_exact_BTR_E01_undefined_column_failure_from_behavior_attempt_019_then_rerun_the_frozen_twenty_scenarios_in_a_fresh_disposable_container",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover retains the frozen provider-free disposable PostgreSQL durability behavior and transaction rehearsal as the active gate and places the future Agent Execution Surface and Containment Gate after this durability sequence. Exact current task HEAD ae5b33c1e5d1f9b12d6f10cefb1c9e577e72189c contains the accepted corrected lifecycle-registration RLS catalogue proof and the behavior-parent rebind. Attempt 019 advanced beyond the prior 42501 policy denial and stopped safely at BTR-E01 with SQLSTATE 42703 before any scenario passed, so exact undefined-column diagnosis and bounded repair are the next dependency.",
+    "current_authority_allocation": "GPT Sol owns this serial stateful PostgreSQL diagnosis, bounded repair, deterministic verification, fresh disposable execution, cleanup and acceptance. Gemini 3.6 Flash/high through one fresh Antigravity project remains independent veto-only after the complete deterministic packet passes. No native subagent, DeepSeek implementation worker, provider model, product surface or protected integrator is assigned.",
+    "active_plan_and_acceptance": "The accepted plan freezes exactly twenty ordered authored-synthetic scenarios with category counts 6/4/3/4/3, fixed principals, transaction shapes, SQLSTATEs, effect sets and claim ceilings; no scenario or expected meaning may be weakened. The current behavior contract semantic SHA-256 is sha256:7d58d870444274e7bfa11be32585acb0164901b79cbc95c9542721f54d4867df and binds accepted parse source 14d145f02971e56f5751670969cb4153d49c1fb8, inert SQL sha256:34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760, render manifest sha256:4ac9b851796f6460fd55844d4d3634eba62f4302bd68ce80b62b63f69cd541ea, structural source 9fb107ab598fba418b42be6d233c4960a6f29840, body source 6ae8f2c7bf3df1fe9f89b760e9d3641384848545 and the unchanged synthetic prerequisite contract. Attempt 019 failure evidence SHA-256 is sha256:57784ad383ff8eef4f3b8439af324585bebf1ee93856a247e328423ae05e8ced.",
+    "protected_evidence_boundaries": "Preserve attempts 001-019 immutably, including numbered failure evidence 019, and keep the mutable current failure evidence unstaged and outside acceptance until a passing run replaces it. Work remains repository-local, provider-free and authored-synthetic, with behavior execution confined to one newly owned networkless disposable PostgreSQL 16 container per eligible attempt. No applied migration, operational database or credential, durable volume, watcher/listener/feed, application/API/Diary wiring, real context, patient/clinical/product/protected data, provider/model call, external retrieval, executable tool or command authority, deployment, production, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Primary worktree C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact tracked-clean HEAD ae5b33c1e5d1f9b12d6f10cefb1c9e577e72189c with all existing untracked files and docs/branding/ preserved. Local and origin master plus handoff/current are exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Review worktree r101 is clean at ae5b33c1e5d1f9b12d6f10cefb1c9e577e72189c. Only explicit-path staging is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_postcompaction_rehydration_for_behavior_attempt_019_recovery",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completely reread AGENTS.md, the active plan/design/threat/acceptance documents and the full behavior contract/schema, then verified exact refs and tracked-clean primary and review worktrees before diagnosis."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native Codex worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The preceding exact-HEAD rebind veto passed; no further verifier is dispatched until a material repair and complete deterministic packet are eligible."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["No DeepSeek worker is assigned to the tightly coupled disposable-database recovery."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane is selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

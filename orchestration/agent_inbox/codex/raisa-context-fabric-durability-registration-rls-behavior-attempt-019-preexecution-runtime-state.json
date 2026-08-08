@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_provider_free_behavior_attempt_019_once_in_one_new_owned_pull_never_networkless_postgresql_16_container_then_exact_id_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability behavior gate has passed corrected structural/body/artifact parents, exact PostgreSQL parse/catalogue proof, the unchanged twenty-scenario parent rebind and one fresh exact-HEAD independent veto. Attempt 019 is the next eligible behavior run.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial behavior run, minimized evidence, evidence-backed diagnosis if needed, exact cleanup and acceptance. Gemini 3.6 Flash/high completed read-only review only; no worker, native subagent, provider model or product surface is involved.",
+    "active_plan_and_acceptance": "Exact candidate HEAD ae5b33c1e5d1f9b12d6f10cefb1c9e577e72189c passed 386 active tests, Ruff, diff checks and a fresh schema-constrained Gemini pass. It binds inert SQL SHA-256 34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760, exact passed parse evidence SHA-256 44f4ba03cc25abfc437ca3385b7f8e0c335477dec0724d3726058f78d37170bc, canonical behavior contract SHA-256 7d58d870444274e7bfa11be32585acb0164901b79cbc95c9542721f54d4867df and exactly twenty ordered scenarios with category counts 6/4/3/4/3. Attempts 001-018 remain immutable predecessor evidence and cannot prove this run.",
+    "protected_evidence_boundaries": "Attempt 019 uses only fixed repository-authored synthetic fixtures in one pull-never, network-none, portless, mountless, tmpfs-backed local PostgreSQL 16 container with exact-ID cleanup. No applied migration, operational database or credential, watcher/listener/feed, real context, patient/clinical/product/protected data, provider/model call, external retrieval, application/API/Diary integration, tool, command/write, deployment, production, release, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at exact HEAD ae5b33c1e5d1f9b12d6f10cefb1c9e577e72189c with bounded untracked review/receipt files, preserved docs/branding/ and mutable current behavior evidence. Review worktree r101 remains exact and clean at the same HEAD. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "registration_rls_attempt_019_preexecution_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled deterministic admission, verifier acceptance, exact candidate and protected refs before attempt 019."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The exact read-only veto completed pass; no verifier remains active."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek transport is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

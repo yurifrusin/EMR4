@@ -1,7 +1,7 @@
 {
   "schema_version": "raisa.context_fabric.function_trigger_body_architecture.v3",
   "status": "architecture_only_unmounted_typed_ir",
-  "contract_sha256": "sha256:422b7cd5203893ecd2269c9b2dbf4018ed359661d5ebe962de55afffb03c340c",
+  "contract_sha256": "sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18",
   "parent_binding": {
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
     "contract_sha256": "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6",
@@ -91731,7 +91731,8 @@
                                 "product_appointment_uuid",
                                 "opaque_aggregate_alias",
                                 "created_at",
-                                "stream_id"
+                                "stream_id",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -91845,7 +91846,8 @@
                                 "stream_id",
                                 "stream_epoch",
                                 "last_position",
-                                "updated_at"
+                                "updated_at",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -91941,7 +91943,8 @@
                                 "opaque_aggregate_alias",
                                 "aggregate_revision",
                                 "source_contract_digest",
-                                "transaction_authored_at"
+                                "transaction_authored_at",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -93550,7 +93553,8 @@
                                       "product_appointment_uuid",
                                       "opaque_aggregate_alias",
                                       "created_at",
-                                      "stream_id"
+                                      "stream_id",
+                                      "xmin"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -93664,7 +93668,8 @@
                                       "stream_id",
                                       "stream_epoch",
                                       "last_position",
-                                      "updated_at"
+                                      "updated_at",
+                                      "xmin"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -93760,7 +93765,8 @@
                                       "opaque_aggregate_alias",
                                       "aggregate_revision",
                                       "source_contract_digest",
-                                      "transaction_authored_at"
+                                      "transaction_authored_at",
+                                      "xmin"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -94598,7 +94604,8 @@
               "source_contract_id",
               "stream_epoch",
               "stream_id",
-              "updated_at"
+              "updated_at",
+              "xmin"
             ]
           },
           {
@@ -94623,7 +94630,8 @@
               "practice_id",
               "product_appointment_uuid",
               "source_contract_id",
-              "stream_id"
+              "stream_id",
+              "xmin"
             ]
           },
           {
@@ -94639,7 +94647,8 @@
               "stream_epoch",
               "stream_id",
               "transaction_authored_at",
-              "transaction_position"
+              "transaction_position",
+              "xmin"
             ]
           },
           {
@@ -96226,7 +96235,8 @@
                                       "product_appointment_uuid",
                                       "opaque_aggregate_alias",
                                       "created_at",
-                                      "stream_id"
+                                      "stream_id",
+                                      "xmin"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -96340,7 +96350,8 @@
                                       "stream_id",
                                       "stream_epoch",
                                       "last_position",
-                                      "updated_at"
+                                      "updated_at",
+                                      "xmin"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -96436,7 +96447,8 @@
                                       "opaque_aggregate_alias",
                                       "aggregate_revision",
                                       "source_contract_digest",
-                                      "transaction_authored_at"
+                                      "transaction_authored_at",
+                                      "xmin"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -97574,7 +97586,8 @@
                                             "product_appointment_uuid",
                                             "opaque_aggregate_alias",
                                             "created_at",
-                                            "stream_id"
+                                            "stream_id",
+                                            "xmin"
                                           ],
                                           "predicate": {
                                             "op": "AND",
@@ -97693,7 +97706,8 @@
                                             "opaque_aggregate_alias",
                                             "aggregate_revision",
                                             "source_contract_digest",
-                                            "transaction_authored_at"
+                                            "transaction_authored_at",
+                                            "xmin"
                                           ],
                                           "predicate": {
                                             "op": "AND",
@@ -97891,7 +97905,8 @@
                                             "stream_id",
                                             "stream_epoch",
                                             "last_position",
-                                            "updated_at"
+                                            "updated_at",
+                                            "xmin"
                                           ],
                                           "predicate": {
                                             "op": "AND",
@@ -99825,7 +99840,8 @@
                                 "product_appointment_uuid",
                                 "opaque_aggregate_alias",
                                 "created_at",
-                                "stream_id"
+                                "stream_id",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -99939,7 +99955,8 @@
                                 "stream_id",
                                 "stream_epoch",
                                 "last_position",
-                                "updated_at"
+                                "updated_at",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -100035,7 +100052,8 @@
                                 "opaque_aggregate_alias",
                                 "aggregate_revision",
                                 "source_contract_digest",
-                                "transaction_authored_at"
+                                "transaction_authored_at",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -101221,7 +101239,8 @@
               "source_contract_id",
               "stream_epoch",
               "stream_id",
-              "updated_at"
+              "updated_at",
+              "xmin"
             ]
           },
           {
@@ -101246,7 +101265,8 @@
               "practice_id",
               "product_appointment_uuid",
               "source_contract_id",
-              "stream_id"
+              "stream_id",
+              "xmin"
             ]
           },
           {
@@ -101262,7 +101282,8 @@
               "stream_epoch",
               "stream_id",
               "transaction_authored_at",
-              "transaction_position"
+              "transaction_position",
+              "xmin"
             ]
           },
           {
@@ -102635,7 +102656,8 @@
                                 "product_appointment_uuid",
                                 "opaque_aggregate_alias",
                                 "created_at",
-                                "stream_id"
+                                "stream_id",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -102749,7 +102771,8 @@
                                 "stream_id",
                                 "stream_epoch",
                                 "last_position",
-                                "updated_at"
+                                "updated_at",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -102845,7 +102868,8 @@
                                 "opaque_aggregate_alias",
                                 "aggregate_revision",
                                 "source_contract_digest",
-                                "transaction_authored_at"
+                                "transaction_authored_at",
+                                "xmin"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -103823,7 +103847,8 @@
               "source_contract_id",
               "stream_epoch",
               "stream_id",
-              "updated_at"
+              "updated_at",
+              "xmin"
             ]
           },
           {
@@ -103848,7 +103873,8 @@
               "practice_id",
               "product_appointment_uuid",
               "source_contract_id",
-              "stream_id"
+              "stream_id",
+              "xmin"
             ]
           },
           {
@@ -103864,7 +103890,8 @@
               "stream_epoch",
               "stream_id",
               "transaction_authored_at",
-              "transaction_position"
+              "transaction_position",
+              "xmin"
             ]
           },
           {
@@ -104528,7 +104555,8 @@
                           "product_appointment_uuid",
                           "opaque_aggregate_alias",
                           "created_at",
-                          "stream_id"
+                          "stream_id",
+                          "xmin"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -104650,7 +104678,8 @@
                           "opaque_aggregate_alias",
                           "aggregate_revision",
                           "source_contract_digest",
-                          "transaction_authored_at"
+                          "transaction_authored_at",
+                          "xmin"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -104860,7 +104889,8 @@
               "practice_id",
               "product_appointment_uuid",
               "source_contract_id",
-              "stream_id"
+              "stream_id",
+              "xmin"
             ]
           },
           {
@@ -104876,7 +104906,8 @@
               "stream_epoch",
               "stream_id",
               "transaction_authored_at",
-              "transaction_position"
+              "transaction_position",
+              "xmin"
             ]
           }
         ],
@@ -105910,7 +105941,8 @@
                           "stream_id",
                           "stream_epoch",
                           "last_position",
-                          "updated_at"
+                          "updated_at",
+                          "xmin"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -106317,7 +106349,8 @@
                           "stream_id",
                           "stream_epoch",
                           "last_position",
-                          "updated_at"
+                          "updated_at",
+                          "xmin"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -106416,7 +106449,8 @@
                           "opaque_aggregate_alias",
                           "aggregate_revision",
                           "source_contract_digest",
-                          "transaction_authored_at"
+                          "transaction_authored_at",
+                          "xmin"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -106749,7 +106783,8 @@
               "source_contract_id",
               "stream_epoch",
               "stream_id",
-              "updated_at"
+              "updated_at",
+              "xmin"
             ]
           },
           {
@@ -106779,7 +106814,8 @@
               "stream_epoch",
               "stream_id",
               "transaction_authored_at",
-              "transaction_position"
+              "transaction_position",
+              "xmin"
             ]
           },
           {
@@ -108397,7 +108433,8 @@
                           "product_appointment_uuid",
                           "opaque_aggregate_alias",
                           "created_at",
-                          "stream_id"
+                          "stream_id",
+                          "xmin"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -108511,7 +108548,8 @@
                           "stream_id",
                           "stream_epoch",
                           "last_position",
-                          "updated_at"
+                          "updated_at",
+                          "xmin"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -108607,7 +108645,8 @@
                           "opaque_aggregate_alias",
                           "aggregate_revision",
                           "source_contract_digest",
-                          "transaction_authored_at"
+                          "transaction_authored_at",
+                          "xmin"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -110044,7 +110083,8 @@
               "source_contract_id",
               "stream_epoch",
               "stream_id",
-              "updated_at"
+              "updated_at",
+              "xmin"
             ]
           },
           {
@@ -110080,7 +110120,8 @@
               "practice_id",
               "product_appointment_uuid",
               "source_contract_id",
-              "stream_id"
+              "stream_id",
+              "xmin"
             ]
           },
           {
@@ -110096,7 +110137,8 @@
               "stream_epoch",
               "stream_id",
               "transaction_authored_at",
-              "transaction_position"
+              "transaction_position",
+              "xmin"
             ]
           },
           {

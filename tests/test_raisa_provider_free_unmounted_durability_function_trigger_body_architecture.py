@@ -510,3 +510,22 @@ def test_stored_effect_or_graph_tampering_is_rejected(contract: dict[str, Any]) 
     report = validate_contract(candidate)
     assert not report.valid
     assert "call_graph_mismatch" in {issue.code for issue in report.issues}
+
+
+def test_local_system_xmin_requires_an_explicit_exact_read_projection(
+    contract: dict[str, Any],
+) -> None:
+    candidate = copy.deepcopy(contract)
+    fence = programs(candidate)[PREFIX + "cf_fence_stream_head_v1"]
+    reload = next(
+        node
+        for node in nodes(fence)
+        if node["node_id"]
+        == PREFIX + "cf_fence_stream_head_v1.insert.reload"
+    )
+    reload["operands"]["columns"].remove("xmin")
+
+    report = validate_contract(candidate)
+
+    assert not report.valid
+    assert "xmin_not_selected" in {issue.code for issue in report.issues}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-diagnosis-receipt.v1",
+  "date": "2026-08-09",
+  "status": "diagnosis_complete_cleanup_verified",
+  "source_head": "ae5b33c1e5d1f9b12d6f10cefb1c9e577e72189c",
+  "parent_attempt": "raisa-context-fabric-durability-behavior-runtime-019",
+  "characterization_id": "raisa-context-fabric-durability-behavior-runtime-019a",
+  "failure": {
+    "scenario_id": "BTR-E01",
+    "sqlstate": "42703",
+    "function_id": "emr4_context_fabric.cf_fence_stream_head_v1",
+    "function_line": 33,
+    "coordinate_status": "released_from_ephemeral_authored_synthetic_psql_verbose_diagnostic",
+    "relation_type": "emr4_context_fabric.context_observation_stream_head",
+    "column": "xmin"
+  },
+  "root_cause": "A SYSTEM_XMIN expression consumed a LOCAL named table-composite symbol whose exact SELECT projection omitted PostgreSQL system column xmin. Named table composites contain user columns only, so the rendered (final_head).xmin reference is undefined. Static whole-contract reconciliation found fourteen such LOCAL SYSTEM_XMIN consumers across alias, stream-head and outbox reads.",
+  "recovery_boundary": "Add xmin to the three shared exact projection lists, require validator proof that every LOCAL SYSTEM_XMIN consumer was assigned by an exact read projecting xmin, render those symbols as record locals, regenerate the typed body and inert artifact, and preserve all twenty behavior scenarios unchanged.",
+  "diagnosis_evidence": {
+    "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-019a.json",
+    "sha256": "sha256:ef164d9713e8e8d55433a1d01eb95452d8f4c8e40e4fbef286589210db3162fb",
+    "raw_error_persisted": false,
+    "cleanup_absence_verified": true
+  },
+  "authority_boundary": "provider_free_authored_synthetic_disposable_postgresql_diagnosis_only_no_product_provider_command_deployment_or_protected_ref_authority"
+}

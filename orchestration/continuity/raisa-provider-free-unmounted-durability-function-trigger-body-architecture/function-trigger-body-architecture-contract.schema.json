@@ -11,7 +11,7 @@
       "type": "string"
     },
     "contract_sha256": {
-      "const": "sha256:422b7cd5203893ecd2269c9b2dbf4018ed359661d5ebe962de55afffb03c340c"
+      "const": "sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18"
     },
     "parent_binding": {
       "type": "object",

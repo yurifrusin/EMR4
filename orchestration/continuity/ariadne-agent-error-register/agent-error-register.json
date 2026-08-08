@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 118,
+  "register_revision": 119,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-08",
+    "source_cutoff_on": "2026-08-09",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -5486,6 +5486,56 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-registration-rls-recovery.md",
           "docs/security/raisa-context-fabric-durability-registration-rls-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-118.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0142",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-019",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-typed-body-renderer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every SYSTEM_XMIN expression over a definitely assigned LOCAL row must be backed by an exact keyed read that explicitly projects PostgreSQL system xmin into a record-shaped local; a named table composite must never be treated as carrying system columns.",
+      "observed_error": "Attempt 019 admitted the corrected RLS artifact and reached BTR-E01, then returned SQLSTATE 42703 with zero admitted scenarios and verified cleanup. One fresh diagnosis-only container located the failure at cf_fence_stream_head_v1 line 33, where (final_head).xmin was read from a named context_observation_stream_head composite. Whole-contract reconciliation found fourteen LOCAL SYSTEM_XMIN consumers across alias, stream-head and outbox reads whose exact projections omitted xmin.",
+      "detection_method": "The bounded SQLSTATE was reproduced in a fresh networkless disposable PostgreSQL 16 container. Ephemeral verbose diagnostics released only the allowlisted function/line/relation/column coordinate, after which a typed-AST traversal reconciled every LOCAL SYSTEM_XMIN consumer against its definitely assigned SELECT_EXACT projection.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-019.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-019a.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-projection-diagnosis-receipt.json",
+        "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_trigger_programs.py",
+        "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_validator.py",
+        "tests/test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-record-projection-recovery.md",
+        "docs/security/raisa-context-fabric-durability-system-xmin-record-projection-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-119.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.local_system_xmin_without_exact_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The three shared alias, stream-head and outbox exact projection lists now include xmin, causing the renderer to use record locals for all fourteen consumers. The body validator independently rejects any LOCAL SYSTEM_XMIN consumer whose definitely assigned exact read omitted xmin.",
+        "prevention_control": "Every typed body validation must trace each LOCAL SYSTEM_XMIN operand to its path-specific assigned row columns and fail as xmin_not_selected unless the exact read explicitly projects xmin; renderer regression tests must require record locals for the complete affected symbol set.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_trigger_programs.py",
+          "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_validator.py",
+          "tests/test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-record-projection-recovery.md",
+          "docs/security/raisa-context-fabric-durability-system-xmin-record-projection-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-119.md"
         ]
       },
       "status": "corrected"

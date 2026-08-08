@@ -1045,6 +1045,16 @@ def test_renderer_system_xmin_uses_record_local() -> None:
     assert "(event).xmin" in sql
     assert "old_appointment record;" in sql
     assert "(old_appointment).xmin" in sql
+    for symbol in (
+        "head",
+        "outbox",
+        "final_alias",
+        "alias_outbox",
+        "final_head",
+        "head_outbox",
+    ):
+        assert f"{symbol} record;" in sql
+        assert f"({symbol}).xmin" in sql
     assert "OLD.xmin" not in sql
     assert "NEW.xmin" not in sql
     # SELECT_SET arrays that only count rows remain typed composite arrays.

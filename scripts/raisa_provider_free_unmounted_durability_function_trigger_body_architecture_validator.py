@@ -3825,8 +3825,9 @@ class _SemanticValidator:
 
         if op == "SYSTEM_XMIN":
             self._expression_keys(expression, {"op", "row", "type"}, path)
+            row_expression = expression.get("row")
             row = self._expression(
-                expression.get("row"),
+                row_expression,
                 state,
                 symbols,
                 path,
@@ -3836,6 +3837,19 @@ class _SemanticValidator:
                 self.issue(
                     path, "xmin_row", "SYSTEM_XMIN requires an assigned relation row"
                 )
+            if (
+                isinstance(row_expression, Mapping)
+                and row_expression.get("op") == "REF"
+                and row_expression.get("kind") == "LOCAL"
+            ):
+                symbol = row_expression.get("symbol")
+                selected = state.row_columns.get(symbol) if isinstance(symbol, str) else None
+                if selected is None or "xmin" not in selected[1]:
+                    self.issue(
+                        path,
+                        "xmin_not_selected",
+                        "SYSTEM_XMIN on a LOCAL row requires an exact read that projects xmin",
+                    )
             if expression.get("type") != _XID_TYPE:
                 self.issue(path, "xmin_type", "SYSTEM_XMIN returns pg_catalog.xid")
             return _ExprResult(_XID_TYPE, row.source_reads, row.row_images)
