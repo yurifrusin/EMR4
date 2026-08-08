@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_stage_and_commit_aer_0110_final_closeout_test_accounting_correction_then_fresh_exact_head_read_only_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted plan and claim boundary permit review-evidence reconciliation without another database run. AER revision 91 records r70's 214-of-217 misreport, its Sol rejection and fresh r71's same-HEAD 217/217 pass. The corrected integrated packet now collects and passes exactly 218 tests: 100 + 9 + 4 + 78 + 14 + 10 + 3.",
+    "current_authority_allocation": "GPT Sol owns the bounded closeout correction, explicit-path commit, acceptance and task-branch push. Gemini 3.6 Flash/high retains only a fresh exact-HEAD read-only correction veto after commit. No implementation worker or native subagent is selected.",
+    "git_refs_and_worktree": "HEAD and task branch remain 889ad7a48df44ff42c53e39125869b07228bdea4 before the correction commit; origin task remains 253230a25ab172b90bc5f44772670c7df89b3052. Local/origin master and handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named closeout/AER/Continuity/test/receipt paths are intentional; docs/branding/ is still untracked and excluded.",
+    "live_handover_current_baton": "The accepted PostgreSQL 16 parse/catalogue rehearsal and exact runtime result remain unchanged; the current closeout correction preserves rejected r70, admits fresh r71's exact 217/217 replacement evidence and advances the register to revision 91 through AER-0110 before task-branch publication.",
+    "protected_evidence_boundaries": "No runtime, Docker creation, provider, patient, clinical, product, application, command, deployment, release, Pages or protected-ref action is in this commit. Exact inspection reconfirms the terminal container absent. All unrelated untracked paths, especially docs/branding/, remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

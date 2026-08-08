@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "87e0a6c99cc02480546893db7d71ae056200291000eff654a71a1e179295024f",
+  "canonical_register_sha256": "7d8bae8e6f0be273a36de489b46a4630b3623da47c10e31d77f345bf2f5c0f8e",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 9,
-      "canonical_unchanged": 78,
+      "canonical_unchanged": 79,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 15,
-      "evidence_misreport": 14,
+      "evidence_misreport": 15,
       "harness_failure": 9,
       "output_contract_violation": 34,
       "read_only_violation": 3,
@@ -17,18 +17,18 @@
       "transport_timeout": 8
     },
     "by_origin": {
-      "agent_behavior": 85,
+      "agent_behavior": 86,
       "harness": 9,
       "repository": 7,
       "transport": 8
     },
     "by_process_severity": {
       "low": 36,
-      "material": 37,
+      "material": 38,
       "moderate": 36
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 25,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 26,
       "api-spine-historical-regression-suite::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "codex-native-architecture-challenger::verifier": 1,
@@ -54,11 +54,11 @@
     "by_role": {
       "implementer": 14,
       "orchestrator": 64,
-      "verifier": 31
+      "verifier": 32
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 109,
+  "incident_count": 110,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -116,17 +116,19 @@
       "categories": [
         "evidence_misreport"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0035",
-        "AER-0037"
+        "AER-0037",
+        "AER-0110"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Acceptance must machine-reconcile every verifier test-count and repository-path claim against exact collection output and the candidate tree; prose discrepancies are preserved and never copied as authoritative evidence.",
-        "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence."
+        "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence.",
+        "Final closeout acceptance must bind each required test path to exact per-file collection and pass counts; any missing path or arithmetic mismatch rejects the review even when its terminal decision says pass."
       ],
       "recurrence_signature": "verifier.exact_packet_test_count_underreport",
       "resource_ids": [
@@ -369,7 +371,7 @@
       ]
     }
   ],
-  "register_revision": 90,
+  "register_revision": 91,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-08"
 }

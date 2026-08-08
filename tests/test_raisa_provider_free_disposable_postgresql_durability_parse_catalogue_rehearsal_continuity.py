@@ -85,6 +85,14 @@ def test_terminal_evidence_review_and_error_register_bind_result() -> None:
         "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-"
         "exact-catalogue-binding-review-receipt.json"
     )
+    closeout_review = load(
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-"
+        "parse-catalogue-closeout-retry-review-receipt.json"
+    )
+    rejected_closeout_review = load(
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-"
+        "catalogue-closeout-review-sol-rejection.json"
+    )
     register = load(
         "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
     )
@@ -103,6 +111,12 @@ def test_terminal_evidence_review_and_error_register_bind_result() -> None:
     } == characterization["catalogue"]["query_digests"]
     assert review["decision"] == "pass"
     assert review["dirty_after"] is False
-    assert register["register_revision"] >= 90
-    assert register["incidents"][-1]["incident_id"] == "AER-0109"
+    assert rejected_closeout_review["admitted"] is False
+    assert rejected_closeout_review["review_decision"] == "pass"
+    assert closeout_review["decision"] == "pass"
+    assert "**Total** | **217** | **217** | **217** | **PASSED**" in closeout_review[
+        "result"
+    ]
+    assert register["register_revision"] >= 91
+    assert register["incidents"][-1]["incident_id"] == "AER-0110"
     assert not [item for item in register["incidents"] if item["status"] == "open"]

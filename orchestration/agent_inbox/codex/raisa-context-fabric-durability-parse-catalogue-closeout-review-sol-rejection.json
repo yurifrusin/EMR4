@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.sol-review-reconciliation.v1",
+  "status": "revision_required",
+  "candidate_head": "889ad7a48df44ff42c53e39125869b07228bdea4",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-review-receipt.json",
+  "review_decision": "pass",
+  "admitted": false,
+  "finding": {
+    "severity": "P3",
+    "id": "complete_closeout_test_packet_not_executed",
+    "detail": "The review packet required 217 tests across seven exact files. The receipt reports 214 passed. Exact r70 collection independently proves 217 = 100 + 9 + 4 + 77 + 14 + 10 + 3; the missing three are exactly tests/test_agents_acceptance_index.py."
+  },
+  "runtime_or_provider_action_after_review": false,
+  "recovery": "Preserve but reject the pass. Dispatch one genuinely fresh exact-HEAD replacement veto in a new clean worktree with all seven paths and exact per-file counts; admit only a receipt reporting 217/217 and clean postflight.",
+  "authority_boundary": "rejected_review_preserved_no_push_acceptance_or_next_tranche_authority"
+}

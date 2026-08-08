@@ -18,6 +18,13 @@ with zero P0-P3 findings and a clean unchanged postflight. Sol independently
 validated the terminal evidence schema, exact digest equality, local image
 identity, cleanup absence and protected-ref invariants.
 
+The first final closeout review at exact clean HEAD
+`889ad7a48df44ff42c53e39125869b07228bdea4` was not admitted because it
+reported 214 of the required 217 tests. Fresh r71 at that same exact clean HEAD
+explicitly collected and passed all seven files, 217/217 total, with zero
+P0-P3 findings and a clean unchanged postflight. AER revision 91 preserves the
+rejected review and its corrected replacement as AER-0110.
+
 Acceptance is limited to disposable PostgreSQL-16 parse, atomic installation
 and catalogue shape. It grants no behavioral, application migration/runtime,
 operational database/source, patient/product data, command, provider,

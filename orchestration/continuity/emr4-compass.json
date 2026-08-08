@@ -1903,6 +1903,9 @@
         "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
         "docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md",
         "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json",
+        "docs/ariadne-agent-error-correction-register-revision-91.md",
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-catalogue-characterization.json",
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
         "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-closeout.md",
@@ -1914,7 +1917,7 @@
     "node_id": "raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal",
     "strategic_role": "Durability catalogue admission accepted; bounded behavior planning is next",
     "why_now": "The exact artifact now parses and installs atomically with a closed catalogue, so selected behavior can be isolated as a later finite gate.",
-    "outcome": "All fifteen exact value-bearing catalogue digests, rollback proof and owned cleanup pass with 109 tests and a zero-defect fresh veto.",
+    "outcome": "All fifteen exact value-bearing catalogue digests, rollback proof and owned cleanup pass with 109 runtime checks; the corrected final closeout veto passes all 217 tests with zero P0-P3 findings.",
     "unlocks": [
       "Freeze the smallest database-backed authored-synthetic behavior/transaction rehearsal plan.",
       "Select finite entry-point, trigger, RLS and rollback scenarios without application wiring or operational data."
@@ -1931,6 +1934,9 @@
       "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
       "docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md",
       "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json",
+      "docs/ariadne-agent-error-correction-register-revision-91.md",
       "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-catalogue-characterization.json",
       "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
       "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-closeout.md",
@@ -2188,7 +2194,10 @@
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-catalogue-characterization.json",
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
         "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-closeout.md",
-        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-sol-acceptance.md"
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-sol-acceptance.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json",
+        "docs/ariadne-agent-error-correction-register-revision-91.md"
       ]
     },
     {

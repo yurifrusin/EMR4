@@ -14337,6 +14337,7 @@
         "The terminal exact-bound attempt reproduces all fifteen value-bearing catalogue digests.",
         "The exact 1,404,433-byte 412-statement artifact and fixed late-suffix rollback proof pass.",
         "The complete focused packet passes 109 tests and a fresh Gemini 3.6 Flash/high exact-HEAD veto reports zero P0-P3 findings.",
+        "The first final closeout review was rejected for reporting 214 tests; fresh r71 at the same exact clean HEAD passed the complete 217-test closeout packet with zero P0-P3 findings.",
         "The owned networkless container is removed by exact ID and exact inspection proves absence.",
         "No behavioral, migration, operational source, product, command, deployment or protected capability is established."
       ],
@@ -14376,9 +14377,11 @@
         ],
         "findings": [
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json",
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-catalogue-characterization.json",
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
-          "docs/ariadne-agent-error-correction-register-revision-90.md"
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json",
+          "docs/ariadne-agent-error-correction-register-revision-91.md"
         ],
         "closeouts": [
           "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-closeout.md"
@@ -14395,6 +14398,7 @@
           "tests/test_ariadne_agent_error_register.py",
           "tests/test_ariadne_continuity_engine.py",
           "tests/test_ariadne_compass.py",
+          "tests/test_agents_acceptance_index.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity.py"
         ],
         "artifacts": [

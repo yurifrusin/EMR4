@@ -37,6 +37,15 @@ REVIEW = (
     "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-"
     "exact-catalogue-binding-review-receipt.json"
 )
+CLOSEOUT_REVIEW = (
+    "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-"
+    "parse-catalogue-closeout-retry-review-receipt.json"
+)
+REJECTED_CLOSEOUT_REVIEW = (
+    "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-"
+    "catalogue-closeout-review-sol-rejection.json"
+)
+AER_REVISION = "docs/ariadne-agent-error-correction-register-revision-91.md"
 EVIDENCE = CONTRACT_DIR + "/provider-free-disposable-postgresql-evidence.json"
 CHARACTERIZATION = (
     CONTRACT_DIR
@@ -103,6 +112,7 @@ def _node() -> dict[str, Any]:
             "The terminal exact-bound attempt reproduces all fifteen value-bearing catalogue digests.",
             "The exact 1,404,433-byte 412-statement artifact and fixed late-suffix rollback proof pass.",
             "The complete focused packet passes 109 tests and a fresh Gemini 3.6 Flash/high exact-HEAD veto reports zero P0-P3 findings.",
+            "The first final closeout review was rejected for reporting 214 tests; fresh r71 at the same exact clean HEAD passed the complete 217-test closeout packet with zero P0-P3 findings.",
             "The owned networkless container is removed by exact ID and exact inspection proves absence.",
             "No behavioral, migration, operational source, product, command, deployment or protected capability is established.",
         ],
@@ -135,9 +145,11 @@ def _node() -> dict[str, Any]:
             "plans": [PLAN, DESIGN, RECOVERY, THREAT],
             "findings": [
                 REVIEW,
+                CLOSEOUT_REVIEW,
                 CHARACTERIZATION,
                 EVIDENCE,
-                "docs/ariadne-agent-error-correction-register-revision-90.md",
+                REJECTED_CLOSEOUT_REVIEW,
+                AER_REVISION,
             ],
             "closeouts": [CLOSEOUT],
             "acceptances": [ACCEPTANCE],
@@ -150,6 +162,7 @@ def _node() -> dict[str, Any]:
                 "tests/test_ariadne_agent_error_register.py",
                 "tests/test_ariadne_continuity_engine.py",
                 "tests/test_ariadne_compass.py",
+                "tests/test_agents_acceptance_index.py",
                 CONTINUITY_TEST,
             ],
             "artifacts": [CONTRACT_DIR + "/rehearsal-contract.json", UPDATER],
@@ -190,6 +203,9 @@ def main() -> int:
             RECOVERY,
             THREAT,
             REVIEW,
+            CLOSEOUT_REVIEW,
+            REJECTED_CLOSEOUT_REVIEW,
+            AER_REVISION,
             CHARACTERIZATION,
             EVIDENCE,
             CLOSEOUT,
@@ -235,7 +251,8 @@ def main() -> int:
         ),
         "outcome": (
             "All fifteen exact value-bearing catalogue digests, rollback proof and "
-            "owned cleanup pass with 109 tests and a zero-defect fresh veto."
+            "owned cleanup pass with 109 runtime checks; the corrected final closeout "
+            "veto passes all 217 tests with zero P0-P3 findings."
         ),
         "unlocks": [
             "Freeze the smallest database-backed authored-synthetic behavior/transaction rehearsal plan.",

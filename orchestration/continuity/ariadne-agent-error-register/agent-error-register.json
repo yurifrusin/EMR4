@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 90,
+  "register_revision": 91,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4173,6 +4173,37 @@
         "action": "The updater is invoked with python -m, links terminal evidence under typed node findings, includes the implementation test in contract evidence and now passes idempotently at Continuity 232 / Compass 214.",
         "prevention_control": "Continuity closeout requires module invocation plus a successful rendered Compass validation before commit or acceptance.",
         "evidence_paths": ["scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity_update.py", "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity.py", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0110",
+      "attempt_id": "raisa-context-fabric-durability-closeout-review-test-accounting-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-disposable-postgresql-parse-catalogue-rehearsal",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "The final independent closeout receipt must report the exact collected and passed total for all seven test files named by its review packet.",
+      "observed_error": "The r70 receipt returned pass but reported 214 tests, omitting exactly the three tests in tests/test_agents_acceptance_index.py from the required 217-test packet.",
+      "detection_method": "Sol rejected the narrative count after exact r70 collection proved 217 = 100 + 9 + 4 + 77 + 14 + 10 + 3, then required a fresh same-HEAD replacement review.",
+      "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-review-receipt.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json", "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json", "docs/ariadne-agent-error-correction-register-revision-91.md"],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.exact_packet_test_count_underreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The r70 pass was preserved but not admitted. Fresh r71 at the same exact clean HEAD explicitly collected and passed 100/9/4/77/14/10/3 tests, 217/217 total, reported zero P0-P3 findings and left its worktree unchanged.",
+        "prevention_control": "Final closeout acceptance must bind each required test path to exact per-file collection and pass counts; any missing path or arithmetic mismatch rejects the review even when its terminal decision says pass.",
+        "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-retry-worktree-postflight.json", "docs/ariadne-agent-error-correction-register-revision-91.md", "tests/test_ariadne_agent_error_register.py"]
       },
       "status": "corrected"
     }

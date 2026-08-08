@@ -67,8 +67,16 @@ fifteen evidence bindings and canonical contract hash, verified that
 characterization could not emit pass, ran the same 109-test packet, reported
 zero P0-P3 findings and left r69 clean and unchanged.
 
-AER revision 90 preserves fourteen bounded incident families through
-AER-0109. All are corrected; none is open. Protected local/origin `master` and
+The first final closeout review at exact clean HEAD
+`889ad7a48df44ff42c53e39125869b07228bdea4` returned `pass` but reported 214
+instead of the required 217 tests, omitting the three acceptance-index tests.
+Sol preserved and rejected that receipt. A fresh r71 replacement at the same
+exact clean HEAD explicitly collected and passed the complete
+`100 + 9 + 4 + 77 + 14 + 10 + 3 = 217` packet, reported zero P0-P3 findings
+and completed a clean unchanged postflight.
+
+AER revision 91 preserves fifteen bounded closeout incident records through
+AER-0110. All are corrected; none is open. Protected local/origin `master` and
 `handoff/current` remained fixed at
 `2e34bdad732fdab32fbf778280b3d3c70d66d602`, and `docs/branding/` remained
 untracked and excluded.

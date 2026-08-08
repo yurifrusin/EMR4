@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 90
+    assert register["register_revision"] == 91
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 110)
+        f"AER-{index:04d}" for index in range(1, 111)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 85
+    assert len(agent_incidents) == 86
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1412,20 +1412,61 @@ def test_disposable_postgresql_catalogue_split_underreport_is_corrected() -> Non
     assert incident["status"] == "corrected"
 
 
+def test_disposable_postgresql_closeout_count_underreport_requires_replacement() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0110"
+    ]
+    rejected = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json"
+    )
+    replacement = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["process_severity"] == "material"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["recurrence_signature"] == (
+        "verifier.exact_packet_test_count_underreport"
+    )
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert rejected["review_decision"] == "pass"
+    assert rejected["admitted"] is False
+    assert rejected["finding"]["detail"].endswith(
+        "the missing three are exactly tests/test_agents_acceptance_index.py."
+    )
+    assert replacement["decision"] == "pass"
+    assert "**Total** | **217** | **217** | **217** | **PASSED**" in replacement[
+        "result"
+    ]
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 109
+    assert report["incident_count"] == 110
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 85,
+        "agent_behavior": 86,
         "harness": 9,
         "repository": 7,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
-        "evidence_misreport": 14,
+        "evidence_misreport": 15,
         "harness_failure": 9,
         "output_contract_violation": 34,
         "read_only_violation": 3,
@@ -1435,7 +1476,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 9,
-        "canonical_unchanged": 78,
+        "canonical_unchanged": 79,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -1468,8 +1509,8 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "verifier.exact_packet_test_count_underreport",
-            "incident_count": 2,
-            "incident_ids": ["AER-0035", "AER-0037"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0035", "AER-0037", "AER-0110"],
             "origins": ["agent_behavior"],
             "categories": ["evidence_misreport"],
             "roles": ["verifier"],
@@ -1477,6 +1518,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
             "prevention_controls": [
                 "Acceptance must machine-reconcile every verifier test-count and repository-path claim against exact collection output and the candidate tree; prose discrepancies are preserved and never copied as authoritative evidence.",
                 "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence.",
+                "Final closeout acceptance must bind each required test path to exact per-file collection and pass counts; any missing path or arithmetic mismatch rejects the review even when its terminal decision says pass.",
             ],
         },
         {

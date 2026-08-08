@@ -245,7 +245,7 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 
 **Why this proof came next:** The exact artifact now parses and installs atomically with a closed catalogue, so selected behavior can be isolated as a later finite gate.
 
-All fifteen exact value-bearing catalogue digests, rollback proof and owned cleanup pass with 109 tests and a zero-defect fresh veto.
+All fifteen exact value-bearing catalogue digests, rollback proof and owned cleanup pass with 109 runtime checks; the corrected final closeout veto passes all 217 tests with zero P0-P3 findings.
 
 ### What this unlocks
 
@@ -650,6 +650,7 @@ Prerequisites:
 - `docs/api-spine/openapi/technical-control-simulator-commands.yaml`
 - `docs/ariadne-agent-error-correction-register-revision-23.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
+- `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-autonomous-continuation.md`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
 - `docs/ariadne-compass-increment2-plan.md`
@@ -1010,6 +1011,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-function-trigger-body-architecture-r7-final-review-retry-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
@@ -1067,6 +1069,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-9-independent-veto.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-final-independent-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-sol-acceptance.md`

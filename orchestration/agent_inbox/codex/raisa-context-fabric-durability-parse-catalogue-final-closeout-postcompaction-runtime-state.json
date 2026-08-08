@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "reconcile_rejected_r70_test_count_misreport_accept_exact_217_test_r71_replacement_close_parse_catalogue_task_branch_then_begin_behavior_transaction_plan",
+  "source_evidence": {
+    "live_handover_current_baton": "The disposable PostgreSQL 16 durability parse/catalogue rehearsal is accepted at runtime source c3ca2515b9f2c4b20cb7230364de7417f48eab54 and tracked closeout HEAD 889ad7a48df44ff42c53e39125869b07228bdea4; the next dependency-satisfied successor is the separately bounded provider-free database-backed authored-synthetic behavior/transaction rehearsal plan.",
+    "current_authority_allocation": "GPT Sol owns closeout reconciliation, planning, acceptance and task-branch publication; Gemini 3.6 Flash/high through a fresh Antigravity project is the exact-HEAD read-only veto reviewer; tightly coupled stateful database planning and execution stay Sol-owned unless a later separable worker packet has clear leverage.",
+    "active_plan_and_acceptance": "The accepted parse/catalogue plan, recovery, threat delta, closeout and Sol acceptance prove only PostgreSQL 16 parse, atomic installation rollback, exact catalogue shape and exact-ID cleanup. The fresh r71 replacement veto at 889ad7a48df44ff42c53e39125869b07228bdea4 reports the exact 100+9+4+77+14+10+3=217 tests, zero P0-P3 findings and a clean unchanged worktree. The earlier r70 narrative misreported 214 and is rejected pending durable AER reconciliation.",
+    "protected_evidence_boundaries": "Protected holdouts and historical PHI remain unopened; no patient, clinical, product-derived or provider data is permitted. No application or Diary wiring, operational source, command/write, deployment, production, release, Pages rebuild or protected-ref movement is authorised. All untracked files, especially docs/branding/, remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "After explicit origin fetch, HEAD and task branch are 889ad7a48df44ff42c53e39125869b07228bdea4 on codex/ariadne-bernie-davida-parallel-seam; origin task is 253230a25ab172b90bc5f44772670c7df89b3052; local/origin master and handoff/current are all protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean; 446 untracked paths including docs/branding/ are preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Full five-source post-compaction rehydration completed before closeout correction."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent selected for the tightly coupled closeout correction."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh r71 Gemini 3.6 Flash/high replacement veto passed exact 217/217 tests and clean postflight."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Not selected for this serial closeout correction."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
