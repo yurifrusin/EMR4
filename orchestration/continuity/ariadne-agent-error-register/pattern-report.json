@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "2e8c2b15e84a642d09f1128c681c8a9f1e94193a3b6787f8c89c871f9c078691",
+  "canonical_register_sha256": "9f648ec58f0c915b249abf11bee9a3d35b1613bc8f9ae8e0afceb6803ee4678c",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 33,
+      "accepted_candidate_changed": 34,
       "canonical_unchanged": 85,
       "untrusted_partial_worktree": 22
     },
@@ -13,18 +13,18 @@
       "output_contract_violation": 40,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
-      "repository_defect": 14,
+      "repository_defect": 15,
       "transport_timeout": 8
     },
     "by_origin": {
       "agent_behavior": 100,
       "harness": 18,
-      "repository": 14,
+      "repository": 15,
       "transport": 8
     },
     "by_process_severity": {
       "low": 42,
-      "material": 48,
+      "material": 49,
       "moderate": 50
     },
     "by_resource_and_role": {
@@ -43,6 +43,7 @@
       "deepseek-v4-flash-implementation-worker::implementer": 2,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-context-fabric-durability-body-contract::orchestrator": 1,
+      "emr4-context-fabric-durability-structural-contract::orchestrator": 1,
       "emr4-disposable-postgresql-harness::orchestrator": 16,
       "emr4-durability-ddl-renderer::orchestrator": 3,
       "git-worktree-windows-path-layout::orchestrator": 3,
@@ -54,12 +55,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 89,
+      "orchestrator": 90,
       "verifier": 37
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 140,
+  "incident_count": 141,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -400,7 +401,7 @@
       ]
     }
   ],
-  "register_revision": 117,
+  "register_revision": 118,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-08"
 }

@@ -640,6 +640,32 @@ def test_exact_schema_and_canonical_digest_pass() -> None:
     )
 
 
+def test_generation_registration_rls_covers_only_its_initial_projection_effects() -> None:
+    contract = data(CONTRACT)
+    policies = {
+        policy["id"]: policy
+        for policy in contract["rls_policy_catalogue"]["policies"]
+    }
+    lifecycle = "'LIFECYCLE'::emr4_context_fabric.logical_capability"
+
+    expected_lifecycle_predicates = {
+        "pol_cf_01_select": "using_sql",
+        "pol_cf_01_insert": "with_check_sql",
+        "pol_cf_10_select": "using_sql",
+        "pol_cf_10_insert": "with_check_sql",
+        "pol_cf_11_select": "using_sql",
+        "pol_cf_11_insert": "with_check_sql",
+    }
+    for policy_id, predicate_field in expected_lifecycle_predicates.items():
+        assert lifecycle in policies[policy_id][predicate_field]
+
+    # Registration creates the initial head, frames and watermarks. It never
+    # receives the producer/coordinator authority to update those rows later.
+    for policy_id in ("pol_cf_01_update", "pol_cf_10_update", "pol_cf_11_update"):
+        assert lifecycle not in policies[policy_id]["using_sql"]
+        assert lifecycle not in policies[policy_id]["with_check_sql"]
+
+
 def test_exact_schema_rejects_resealed_non_hash_mutation() -> None:
     contract = data(CONTRACT)
     candidate = copy.deepcopy(contract)

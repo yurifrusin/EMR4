@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_provider_free_registration_forced_rls_architecture_correction_and_preserved_attempt_018_evidence_on_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The correction preserves all twenty scenarios and adds LIFECYCLE to exactly six forced-RLS SELECT/INSERT predicates required by generation registration while leaving all corresponding UPDATE predicates and every direct privilege unchanged. The corrected structural contract seals as sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6. The focused structural and AER packet passes, Ruff passes and diff checks pass. AER revision 118 records AER-0141 with zero open incidents.",
+    "current_authority_allocation": "GPT Sol owns the serial diagnosis, correction, deterministic checks, task-branch commit and descendant recovery. Gemini 3.6 Flash/high remains independent veto-only after the full corrected descendant packet passes. No native subagent, implementation worker, provider or product surface is assigned.",
+    "git_refs_and_worktree": "Task HEAD before this commit is ee894c9d8796ab6f656bf341141e167a58554e4d. Only explicit intended architecture, test, diagnosis, AER, receipt and immutable failure-evidence paths will be staged; docs/branding/ and all unrelated untracked files remain excluded. Local and origin master plus handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active baton remains the frozen twenty-scenario provider-free PostgreSQL behavior rehearsal. Attempt 018 stopped safely at BTR-E01 with SQLSTATE 42501, zero admitted scenarios and exact cleanup; the next required action is the narrow structural policy correction and descendant rebinding, not another runtime attempt.",
+    "protected_evidence_boundaries": "Attempt 018 failure evidence is preserved byte-identically at sha256:aeb88e2f404adb62300c0c0574b114c4254ccceb047140e75dd55eac6de61bc7; the mutable current evidence remains unstaged. No runtime call, applied migration, operational database/credential, watcher/listener/feed, application/API/Diary change, patient/clinical/product/protected data, provider/model call, command/write, deployment, production, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

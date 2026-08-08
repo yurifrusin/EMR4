@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 117,
+  "register_revision": 118,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5442,6 +5442,50 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-body-special-form-recovery.md",
           "docs/security/raisa-context-fabric-durability-body-special-form-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-117.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0141",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-018",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-structural-contract",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every security-definer entry point operating under forced row-level security must have exact session-bound policy coverage for each relation operation in its accepted effect and replay surface, without gaining any unrelated operation or direct table privilege.",
+      "observed_error": "Attempt 018 admitted the corrected artifact and reached BTR-E01, then returned SQLSTATE 42501 with zero admitted scenarios and verified cleanup. Static effect-to-policy reconciliation showed that register_observer_generation_v1 must select and insert the initial stream head, frame generations and invalidation watermarks for a LIFECYCLE session, while those six forced-RLS predicates admitted only PRODUCER or COORDINATOR.",
+      "detection_method": "The exact SQLSTATE and zero-effect evidence were reconciled with the immutable registration body, forced-RLS catalogue, stable session_user authority source and bootstrap fixture. The first denied head operation and the two later registration-owned initial projection families share the same missing lifecycle policy capability, while their update policies are not registration effects.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-018.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+        "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-registration-rls-recovery.md",
+        "docs/security/raisa-context-fabric-durability-registration-rls-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-118.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.entry_point_effect_missing_forced_rls_capability",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The structural contract adds LIFECYCLE to exactly the stream-head, frame-generation and invalidation-watermark SELECT/INSERT predicates required by registration and leaves their UPDATE predicates plus every direct grant unchanged.",
+        "prevention_control": "Every entry-point architecture or body change must mechanically compare its complete relation operation summary with forced-RLS capability predicates for the stable session_user, including replay reads and trigger readback, and hostile-test that no non-effect operation is added.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-registration-rls-recovery.md",
+          "docs/security/raisa-context-fabric-durability-registration-rls-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-118.md"
         ]
       },
       "status": "corrected"

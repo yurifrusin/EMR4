@@ -3,7 +3,7 @@
   "status": "architecture_only_unmounted",
   "source_contract": "diary.appointment_rescheduled.v1",
   "evidence_mode": "repository_authored_schema_metadata",
-  "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",
+  "contract_sha256": "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6",
   "postgresql_target": {
     "major": 16,
     "producer_isolation": "READ COMMITTED",
@@ -3779,7 +3779,7 @@
           "PUBLIC"
         ],
         "permissive": true,
-        "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
+        "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
         "with_check_sql": null
       },
       {
@@ -3791,7 +3791,7 @@
         ],
         "permissive": true,
         "using_sql": null,
-        "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
+        "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
       },
       {
         "id": "pol_cf_01_update",
@@ -4032,7 +4032,7 @@
           "PUBLIC"
         ],
         "permissive": true,
-        "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
+        "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
         "with_check_sql": null
       },
       {
@@ -4044,7 +4044,7 @@
         ],
         "permissive": true,
         "using_sql": null,
-        "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
+        "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
       },
       {
         "id": "pol_cf_10_update",
@@ -4065,7 +4065,7 @@
           "PUBLIC"
         ],
         "permissive": true,
-        "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
+        "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
         "with_check_sql": null
       },
       {
@@ -4077,7 +4077,7 @@
         ],
         "permissive": true,
         "using_sql": null,
-        "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
+        "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
       },
       {
         "id": "pol_cf_11_update",
