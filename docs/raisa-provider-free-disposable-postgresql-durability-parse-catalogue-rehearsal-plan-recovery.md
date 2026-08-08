@@ -2,9 +2,9 @@
 
 Date: 2026-08-07
 
-Status: recovery mechanics passed review at
-`009395ac28eb7ac05017fe5fbd1ae1439ecf948d`, but plan acceptance is withheld
-pending a fresh exact-catalogue population-delta veto
+Status: accepted after mechanics recovery and exact-catalogue correction; the
+fresh exact-HEAD catalogue-delta veto passed at
+`c5f0960a240b7f162b1b34e1b09fb166d12fd42e`
 
 ## Rejected review
 
@@ -55,8 +55,10 @@ replacement reviewer reported only the correct total and did not challenge the
 incorrect subdivision despite its catalogue-completeness assignment.
 
 The plan and design now bind exact `4/19/9/32`. No runtime action had occurred.
-A fresh exact-HEAD veto of this corrected catalogue delta is mandatory before
-implementation or Docker preflight.
+A fresh exact-HEAD veto at `c5f0960a240b7f162b1b34e1b09fb166d12fd42e`
+mechanically reproduced all 388 ordered nodes, every exact type identifier and
+the 4/19/9/32 population, passed 9/9 focused checks and left its worktree clean.
+Sol independently reproduced the same counts and one-to-one type-owner set.
 
 ## Claim boundary
 

@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.sol-review-reconciliation.v1",
+  "status": "accepted",
+  "candidate_head": "c5f0960a240b7f162b1b34e1b09fb166d12fd42e",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-catalogue-correction-review-receipt.json",
+  "review_decision": "pass",
+  "admitted": true,
+  "provider_or_model_calls_after_review": 0,
+  "database_or_docker_calls": 0,
+  "sol_reproduction": {
+    "ordered_node_count": 388,
+    "domain_count": 4,
+    "enum_count": 19,
+    "composite_count": 9,
+    "type_owner_count": 32,
+    "typed_identifier_unique_count": 32,
+    "owner_identifier_unique_count": 32,
+    "typed_only_count": 0,
+    "owner_only_count": 0
+  },
+  "deterministic_checks": {
+    "focused_register_index_tests": 89,
+    "review_focused_tests": 9,
+    "acceptance_index_check": "passed",
+    "ruff": "passed",
+    "diff_check": "passed",
+    "review_worktree_clean": true
+  },
+  "authority_boundary": "plan_acceptance_only_implementation_must_pass_before_any_docker_or_postgresql_contact"
+}

@@ -2,7 +2,8 @@
 
 Date: 2026-08-07
 
-Status: candidate exact-catalogue population correction pending fresh veto
+Status: accepted after exact-catalogue correction and fresh exact-HEAD veto at
+`c5f0960a240b7f162b1b34e1b09fb166d12fd42e`
 
 ## Components
 

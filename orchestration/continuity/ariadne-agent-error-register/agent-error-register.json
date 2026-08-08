@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 88,
+  "register_revision": 89,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -3729,16 +3729,18 @@
       "recurrence_signature": "verifier.exact_catalogue_kind_population_underreport",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "The pass is preserved but not admitted. Plan, design and tests now bind the exact 4/19/9/32 population and require a fresh exact-HEAD catalogue-delta veto before implementation.",
+        "status": "corrected_fresh_attempt",
+        "action": "The pass is preserved but not admitted. Plan, design and tests now bind the exact 4/19/9/32 population. A genuinely fresh exact-HEAD catalogue-delta veto mechanically reproduced every exact type identifier and all 388 ordered-node kind counts, passed 9/9 focused checks and left its worktree clean; Sol independently reproduced the same one-to-one type-owner set.",
         "prevention_control": "Exact-catalogue reviews must mechanically group the manifest node inventory by every claimed kind and compare each count and identifier population; aggregate totals cannot substitute for the requested subdivision.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-plan-recovery-review-sol-rejection-receipt.json",
           "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
-          "docs/ariadne-agent-error-correction-register-revision-88.md"
+          "docs/ariadne-agent-error-correction-register-revision-88.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-catalogue-correction-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-89.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     }
   ]
 }

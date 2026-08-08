@@ -2,9 +2,9 @@
 
 Date: 2026-08-07
 
-Status: candidate exact-catalogue population correction after Sol rejected the
-replacement veto's acceptance; no Docker/PostgreSQL execution before a fresh
-exact-HEAD catalogue-delta veto
+Status: accepted for bounded implementation after exact-catalogue correction
+and fresh exact-HEAD veto at
+`c5f0960a240b7f162b1b34e1b09fb166d12fd42e`
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`

@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_catalogue_delta_veto_without_docker_or_database_contact",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton requires a fresh exact-HEAD veto of the corrected 4-domain, 19-enum, 9-composite, 32-type population before implementation or Docker preflight.",
+    "current_authority_allocation": "GPT Sol retains all planning, implementation, runtime, recovery and acceptance authority. The fresh Gemini 3.6 Flash/high Antigravity context receives only a bounded read-only independent-veto role in exact worktree r42.",
+    "active_plan_and_acceptance": "Candidate c5f0960a240b7f162b1b34e1b09fb166d12fd42e passed 89 focused/register/index checks, acceptance-index integrity, Ruff and diff checks. Its packet requires mechanical grouping and identity comparison of every exact domain, enum, composite and whole ordered-node kind population. Prior reviewer acceptance remains rejected and no runtime is admitted.",
+    "protected_evidence_boundaries": "The verifier is restricted to exact allowlisted repository paths and read-only commands. Protected fixtures, PHI, product/patient data, credentials, Docker/database state, SQL execution, migration, application/API/Diary runtime, providers, commands/writes, deployment, production, release, Pages and protected refs are forbidden.",
+    "git_refs_and_worktree": "The candidate branch is codex/ariadne-bernie-davida-parallel-seam at exact c5f0960a240b7f162b1b34e1b09fb166d12fd42e. Review worktree C:/Users/sarashera/EMR4-worktrees/r42 is clean at the same exact HEAD on codex/review-disposable-pg-catalogue-c5f0960a. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding and unrelated untracked files remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_postcompaction_five_source_receipt_plus_exact_head_review_worktree_preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed deterministic candidate admission and retained runtime closure."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native Codex worker is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "One fresh Gemini 3.6 Flash/high independent review is ready for dispatch."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No DeepSeek worker is assigned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude model lane is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

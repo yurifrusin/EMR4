@@ -2,7 +2,7 @@
 
 Date: 2026-08-07
 
-Status: candidate exact-catalogue population correction pending fresh veto
+Status: accepted for bounded implementation after fresh exact-catalogue veto
 
 ## Scope and assets
 

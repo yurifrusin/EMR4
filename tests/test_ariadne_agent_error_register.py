@@ -38,7 +38,7 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 88
+    assert register["register_revision"] == 89
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 96)
@@ -1393,7 +1393,7 @@ def test_disposable_postgresql_long_review_path_is_recovered() -> None:
     assert incident["status"] == "corrected"
 
 
-def test_disposable_postgresql_catalogue_split_underreport_is_contained() -> None:
+def test_disposable_postgresql_catalogue_split_underreport_is_corrected() -> None:
     incident = {row["incident_id"]: row for row in _register()["incidents"]}[
         "AER-0095"
     ]
@@ -1406,9 +1406,10 @@ def test_disposable_postgresql_catalogue_split_underreport_is_contained() -> Non
     assert incident["recurrence_signature"] == (
         "verifier.exact_catalogue_kind_population_underreport"
     )
-    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert "4/19/9/32" in incident["correction"]["action"]
-    assert incident["status"] == "contained"
+    assert "all 388 ordered-node kind counts" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
 
 
 def test_pattern_report_detects_recurring_control_signals() -> None:
