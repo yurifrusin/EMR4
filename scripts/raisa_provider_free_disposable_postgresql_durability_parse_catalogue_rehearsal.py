@@ -52,6 +52,9 @@ IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 POSTGRES_16_VERSION_NUM = re.compile(rb"^16[0-9]{4}$")
 VERBOSE_SQLSTATE = re.compile(rb"(?:ERROR|FATAL):\s+([0-9A-Z]{5}):")
+VERBOSE_PSQL_ERROR_LINE = re.compile(
+    rb"psql:<stdin>:([1-9][0-9]*):\s+(?:ERROR|FATAL):"
+)
 ROLE_LINE = re.compile(
     r"^CREATE ROLE ([a-z][a-z0-9_]*) (NO)?LOGIN (NO)?INHERIT "
     r"NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;$",
@@ -694,12 +697,22 @@ def _observed_sqlstates(stderr: bytes) -> list[str]:
     )
 
 
-def _bounded_psql_rejection(result: ProcessResult) -> dict[str, Any]:
+def _bounded_psql_rejection(
+    result: ProcessResult, *, max_error_line: int
+) -> dict[str, Any]:
     """Retain only closed SQLSTATE identifiers and an opaque stderr digest."""
+    error_lines = sorted(
+        {
+            int(match)
+            for match in VERBOSE_PSQL_ERROR_LINE.findall(result.stderr)
+            if int(match) <= max_error_line
+        }
+    )
     return {
         "status": "rejected",
         "psql_exit": result.returncode,
         "observed_sqlstates": _observed_sqlstates(result.stderr),
+        "error_lines": error_lines,
         "stderr": _bounded_digest(result.stderr),
     }
 
@@ -1587,6 +1600,7 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
             raise RehearsalFailure("contract", "total_timeout_budget")
         runner = _with_total_deadline(runner, started + execution_seconds)
         prerequisite_sql = render_prerequisite_sql(prerequisite)
+        artifact_line_count = artifact.count(b"\n")
         lifecycle.append("parent_verified")
         parent_evidence = {
             "artifact_sha256": "sha256:" + _bytes_sha(artifact),
@@ -1728,18 +1742,27 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                 )
                 stderr = invalid.stderr
                 expected_sqlstate = contract["psql_admission"]["expected_sqlstate"]
-                observed_sqlstates = _observed_sqlstates(stderr)
+                expected_error_line = artifact_line_count + 2
+                bounded_rejection = _bounded_psql_rejection(
+                    invalid, max_error_line=expected_error_line
+                )
+                observed_sqlstates = bounded_rejection["observed_sqlstates"]
                 rollback = {
                     "status": "invalid_case_observed",
                     "psql_exit": invalid.returncode,
                     "expected_sqlstate": expected_sqlstate,
                     "expected_sqlstate_seen": expected_sqlstate in observed_sqlstates,
+                    "expected_error_line": expected_error_line,
+                    "expected_error_line_seen": bounded_rejection["error_lines"]
+                    == [expected_error_line],
                     "observed_sqlstates": observed_sqlstates,
-                    "stderr": _bounded_digest(stderr),
+                    "error_lines": bounded_rejection["error_lines"],
+                    "stderr": bounded_rejection["stderr"],
                 }
                 if (
                     invalid.returncode != contract["psql_admission"]["expected_psql_exit"]
                     or not rollback["expected_sqlstate_seen"]
+                    or not rollback["expected_error_line_seen"]
                 ):
                     raise RehearsalFailure(
                         "rollback", "unexpected_failure_shape", str(invalid.returncode)
@@ -1788,7 +1811,9 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                 if admitted.returncode != 0:
                     catalogue = {
                         "status": "not_started",
-                        "artifact_admission": _bounded_psql_rejection(admitted),
+                        "artifact_admission": _bounded_psql_rejection(
+                            admitted, max_error_line=artifact_line_count
+                        ),
                     }
                     raise RehearsalFailure(
                         "artifact", "postgresql_rejected", str(admitted.returncode)

@@ -605,18 +605,32 @@ def test_artifact_rejection_evidence_is_bounded_and_value_free() -> None:
         b"LOCATION: private implementation detail\n"
     )
     bounded = rehearsal._bounded_psql_rejection(  # noqa: SLF001
-        rehearsal.ProcessResult(3, b"ignored stdout", raw)
+        rehearsal.ProcessResult(3, b"ignored stdout", raw), max_error_line=1000
     )
 
     assert bounded == {
         "status": "rejected",
         "psql_exit": 3,
         "observed_sqlstates": ["42883"],
+        "error_lines": [500],
         "stderr": rehearsal._bounded_digest(raw),  # noqa: SLF001
     }
     rendered = json.dumps(bounded)
     assert "authored-synthetic detail" not in rendered
     assert "implementation detail" not in rendered
+
+
+def test_artifact_rejection_line_evidence_is_closed_to_authored_input() -> None:
+    raw = (
+        b"psql:<stdin>:41: ERROR:  42601: bounded\n"
+        b"psql:<stdin>:5000: ERROR:  42P01: outside authored input\n"
+        b"psql:other.sql:20: ERROR:  42883: wrong source\n"
+    )
+    bounded = rehearsal._bounded_psql_rejection(  # noqa: SLF001
+        rehearsal.ProcessResult(3, b"", raw), max_error_line=100
+    )
+    assert bounded["error_lines"] == [41]
+    assert bounded["observed_sqlstates"] == ["42601", "42883", "42P01"]
 
 
 def test_postgres_readiness_caps_each_probe_to_startup_deadline() -> None:

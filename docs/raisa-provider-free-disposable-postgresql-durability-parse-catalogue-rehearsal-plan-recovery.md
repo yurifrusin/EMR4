@@ -278,3 +278,20 @@ verbose SQLSTATE identifiers and opaque stderr byte-count/SHA-256 only. Raw
 stderr, stdout and database values remain absent. This changes no SQL,
 contract, retry, runtime scope or authority; it only makes the next contained
 artifact rejection diagnostically classifiable.
+
+## Rollback suffix-provenance correction
+
+Attempt `9a918eb3e9726c3a64116417` reproduced the same 250-byte stderr SHA-256
+`8b45c479ce74d3bc5b575c84b68398d3c82c4eeea75df535019fffbf942588d2`
+and SQLSTATE `42601` in both the rollback and success installations. Therefore
+the artifact itself contains a syntax error and the earlier rollback result did
+not prove the fixed invalid suffix was reached. Exact container
+`ccd2b6d44c90fe72226ae6a410240e64c15e993d3e9d87aa7f7285a8f85a4645`
+was removed and absence verified.
+
+Recovery now retains only sorted unique psql `<stdin>` error line numbers
+bounded to the authored input. The rollback case requires its sole error line
+to equal the exact fixed suffix line (`artifact LF line count + 2`) as well as
+matching exit 3 and SQLSTATE `42601`. Success-side rejection lines are bounded
+to the artifact. Raw messages and values remain absent. This closes the false
+attribution without changing SQL, retries, container scope or authority.
