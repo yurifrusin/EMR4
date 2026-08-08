@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_explicit_path_stages_and_commits_only_attempt_020_evidence_diagnosis_renderer_208_alias_repair_regenerated_inert_artifact_and_aer_0143",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton remain fully rehydrated. The active descendant is the provider-free system-xmin explicit-alias renderer repair after attempt 020 and diagnosis 020a.",
+    "current_authority_allocation": "GPT Sol owns exact-path staging, candidate commit, downstream parse/behavior rebind and later runtime acceptance. No worker, verifier or provider receives write or runtime authority from this receipt.",
+    "active_plan_and_acceptance": "Attempt 020 failure evidence is byte-identical at SHA-256 a07e340a and proves BTR-E01 SQLSTATE 42703, zero scenarios and cleanup. Diagnosis 020a located an unnamed system-xmin record field with exact cleanup and no persisted raw stderr. Renderer 2.0.8 emits explicit AS xmin for all 62 accepted exact-read sites, no unaliased form remains, the inert artifact is 1,403,680 LF bytes at SHA-256 45c90b92 with 412 statements, and focused inert/AER tests plus Ruff/diff checks pass. AER revision 120 contains 143 bounded incidents and zero open incidents.",
+    "protected_evidence_boundaries": "Stage only named attempt-020 receipts/evidence, diagnosis/recovery/threat/AER files, renderer/test and regenerated inert SQL/manifest. Do not stage docs/branding, unrelated untracked files or the mutable provider-free-behavior-transaction-evidence.json. No provider, patient/product/protected data, application runtime, migration application, deployment, release, Pages or protected ref is opened.",
+    "git_refs_and_worktree": "Primary branch HEAD is e9fcbe4a7f1a85c71ce164a88c639e2a8910d18c with only explicit recovery candidate paths tracked-modified plus preserved untracked files. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only; git add dot and git add -A are forbidden."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "five_source_rehydration_attempt_020_diagnosis_renderer_repair_artifact_and_aer_reconciliation",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol will use explicit-path staging only."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["A fresh independent veto remains required only after parse and behavior rebind."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

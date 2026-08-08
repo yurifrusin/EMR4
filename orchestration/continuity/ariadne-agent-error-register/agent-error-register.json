@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 119,
+  "register_revision": 120,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -5536,6 +5536,51 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-record-projection-recovery.md",
           "docs/security/raisa-context-fabric-durability-system-xmin-record-projection-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-119.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0143",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-020",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-inert-ddl-renderer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every PostgreSQL system xmin value selected into a PL/pgSQL record local must have both typed projection provenance and an explicit stable output-field alias before any later (record).xmin lookup.",
+      "observed_error": "Attempt 020 admitted the record-local repair and reached BTR-E01, then returned SQLSTATE 42703 with zero admitted scenarios and verified cleanup. One fresh diagnosis-only container showed that cf_fence_stream_head_v1 line 33 still could not identify column xmin in record final_head: the exact read selected relation.xmin but did not explicitly alias the output field.",
+      "detection_method": "The bounded SQLSTATE was reproduced in one fresh networkless disposable PostgreSQL 16 diagnosis container. Ephemeral verbose diagnostics released only the allowlisted function, line, record-symbol and column coordinate; raw stderr was not persisted and exact-ID cleanup was verified.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-020.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-explicit-alias-diagnosis-receipt.json",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-explicit-alias-recovery.md",
+        "docs/security/raisa-context-fabric-durability-system-xmin-explicit-alias-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-120.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.system_xmin_record_field_without_explicit_alias",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Renderer 2.0.8 emits relation.xmin AS xmin for every selected system-column projection while preserving record locals and every non-system expression.",
+        "prevention_control": "Renderer acceptance must reject any unaliased .xmin INTO STRICT occurrence, bind the exact complete explicit-alias population, and retain the independent typed xmin_not_selected proof for every local consumer before parse or behavior eligibility.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-explicit-alias-recovery.md",
+          "docs/security/raisa-context-fabric-durability-system-xmin-explicit-alias-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-120.md"
         ]
       },
       "status": "corrected"

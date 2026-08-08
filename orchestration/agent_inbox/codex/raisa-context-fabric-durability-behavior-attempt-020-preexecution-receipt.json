@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_executes_exactly_one_new_owned_local_networkless_no_pull_fixed_twenty_scenario_behavior_attempt_020_then_verifies_exact_id_cleanup_and_stops_on_any_failure",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate behavior source 971c2519 and its review seal e9fcbe4a bind body semantic SHA-256 8ede994b, inert SQL SHA-256 0379b35f, accepted parse evidence SHA-256 b3eab7e0 and unchanged behavior contract SHA-256 b8855abe. The complete 390-test packet, Ruff and diff checks passed locally and independently in clean r102. One fresh Gemini 3.6 Flash/high review returned schema-constrained pass with unchanged HEAD and clean postflight. Attempt 020 must execute exactly the frozen twenty scenarios in 6/4/3/4/3 order or fail closed.",
+    "current_authority_allocation": "GPT Sol exclusively owns the one serial fixed behavior invocation, exact-ID cleanup, bounded evidence inspection and any further diagnosis. Gemini's completed pass is read-only evidence with no runtime authority. No native subagent, implementation worker or provider is active.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at e9fcbe4a7f1a85c71ce164a88c639e2a8910d18c with preserved pre-existing untracked files. The mutable fixed behavior evidence remains unstaged at immutable attempt-019a SHA-256 ef164d97 before execution. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. The harness writes only the fixed behavior evidence path and may remove only the exact random-ID container it creates after ownership re-verification.",
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton remain fully rehydrated. The active descendant is one provider-free disposable PostgreSQL durability behavior attempt after accepted system-xmin repair, parse proof and independent veto.",
+    "protected_evidence_boundaries": "Only repository-authored fixed synthetic fixtures are admitted to one locally present postgres:16-bookworm container with pull never, network none, no port, no mount and tmpfs data. Patient, product or protected data; operational sources, databases or credentials; providers; application/API/Diary runtime; migration application; watcher/listener/feed; external commands/writes; deployment, release, Pages and protected refs remain closed. Missing Docker, daemon or image stops without pull, install or fallback. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_executes_exactly_one_new_owned_local_networkless_no_pull_diagnosis_only_reproduction_of_attempt_020_and_reads_ephemeral_verbose_postgresql_coordinate_then_verifies_exact_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "The active descendant is bounded diagnosis of provider-free behavior attempt 020 after its exact SQLSTATE 42703 rejection and verified cleanup. AGENTS.md sections 2-7 and the Current Baton remain rehydrated.",
+    "current_authority_allocation": "GPT Sol alone owns one diagnosis-only disposable PostgreSQL invocation, ephemeral verbose stderr inspection, allowlisted coordinate extraction and exact-ID cleanup. No worker, verifier or provider has runtime authority.",
+    "active_plan_and_acceptance": "Attempt 020 bound the accepted repaired parents, admitted the artifact, reconciled catalogue and fixtures, then stopped at BTR-E01 with SQLSTATE 42703, zero observed scenarios and exact cleanup. Its immutable evidence SHA-256 is a07e340a. The existing repair eliminated the diagnosed table-composite omission structurally, so one fresh bounded coordinate is required before any further source change.",
+    "protected_evidence_boundaries": "The diagnostic uses the same fixed authored-synthetic fixtures in one pull-never, network-none, no-port, no-mount, tmpfs-only local container. Raw stderr may be observed ephemerally but must not be persisted; only an allowlisted function, line, relation/type, column and SQLSTATE coordinate may be recorded. Patient/product/protected data, providers, operational sources/credentials/databases, application runtime, migration application, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Primary branch is tracked-clean at e9fcbe4a7f1a85c71ce164a88c639e2a8910d18c with preserved untracked evidence/provenance and pre-existing files. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The diagnosis writes no fixed evidence file and may remove only its exact owned random-ID container after ownership re-verification."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rehydration_attempt_020_bounded_failure_and_exact_cleanup_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is ready for one diagnosis-only reproduction and exact cleanup verification."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The completed Gemini veto has no diagnosis runtime authority."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

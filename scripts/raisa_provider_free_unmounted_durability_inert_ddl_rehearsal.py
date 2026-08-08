@@ -1913,7 +1913,13 @@ def _order_sql(order_by: list[dict[str, Any]] | None, relation: str) -> str:
 
 def _select_columns(relation: str, columns: list[str]) -> str:
     rel = _fabric(relation)
-    return ", ".join(rel + "." + _ident(col) for col in columns)
+    return ", ".join(
+        rel
+        + "."
+        + _ident(col)
+        + (" AS " + _ident(col) if col == "xmin" else "")
+        for col in columns
+    )
 
 
 def _relation_user_columns(ctx: dict[str, Any], relation: str) -> list[str]:
@@ -3060,7 +3066,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.7"
+RENDERER_VERSION = "2.0.8"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

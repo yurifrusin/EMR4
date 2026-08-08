@@ -1,0 +1,31 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-diagnosis-receipt.v1",
+  "date": "2026-08-09",
+  "status": "diagnosis_complete_cleanup_verified",
+  "source_head": "e9fcbe4a7f1a85c71ce164a88c639e2a8910d18c",
+  "parent_attempt": "raisa-context-fabric-durability-behavior-runtime-020",
+  "characterization_id": "raisa-context-fabric-durability-behavior-runtime-020a",
+  "failure": {
+    "scenario_id": "BTR-E01",
+    "sqlstate": "42703",
+    "function_id": "emr4_context_fabric.cf_fence_stream_head_v1",
+    "function_line": 33,
+    "coordinate_status": "released_from_ephemeral_authored_synthetic_psql_verbose_diagnostic",
+    "record_symbol": "final_head",
+    "column": "xmin",
+    "postgresql_message_class": "could_not_identify_column_in_record_data_type"
+  },
+  "root_cause": "Attempt 019's repair correctly selected the system xmin value into a record local, but the SELECT projection emitted relation.xmin without an explicit output alias. PostgreSQL therefore did not establish a record field named xmin for the later (final_head).xmin lookup. The failure coordinate remained exact because the record shape, rather than the source value, was incomplete.",
+  "recovery_boundary": "Renderer 2.0.8 must lower every selected system xmin expression as relation.xmin AS xmin, while preserving record locals, the typed projection requirement, all non-system projections and all twenty behavior scenarios. A renderer test must reject every unaliased .xmin INTO STRICT occurrence and bind the complete accepted count before artifact regeneration, parse proof and a fresh independent veto.",
+  "parent_failure_evidence": {
+    "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-020.json",
+    "sha256": "sha256:a07e340ad9383cceb2a48f2c8230829daace833711b6d442af513022a767f8ac"
+  },
+  "diagnosis_runtime": {
+    "attempt_id": "9ad1280dd8ef7fb89b2b3dbf",
+    "raw_error_persisted": false,
+    "container_id": "a4872c6c456d293e3b6934971c5e568e40b719c100c6659e785a254a92d60815",
+    "cleanup_absence_verified": true
+  },
+  "authority_boundary": "provider_free_authored_synthetic_disposable_postgresql_diagnosis_only_no_product_provider_command_deployment_or_protected_ref_authority"
+}

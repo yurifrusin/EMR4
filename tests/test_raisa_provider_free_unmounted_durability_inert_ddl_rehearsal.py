@@ -30,6 +30,7 @@ from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import
     _emit_lock_exact,
     _ordered_composites,
     _render_relations,
+    _select_columns,
     _symbol_ident,
     _type_sql,
     _verify_positional_row_projections,
@@ -1038,7 +1039,8 @@ def test_renderer_typed_complete_sets_construct_full_rows() -> None:
 
 def test_renderer_system_xmin_uses_record_local() -> None:
     sql = _base_render()["sql_text"]
-    # xmin-carrying exact reads use a record local so (var).xmin is valid.
+    # xmin-carrying exact reads use a record local and explicitly name the
+    # system-column output field so every later (var).xmin lookup is valid.
     assert "claim record;" in sql
     assert "event record;" in sql
     assert "(claim).xmin" in sql
@@ -1057,6 +1059,16 @@ def test_renderer_system_xmin_uses_record_local() -> None:
         assert f"({symbol}).xmin" in sql
     assert "OLD.xmin" not in sql
     assert "NEW.xmin" not in sql
+    assert ".xmin INTO STRICT" not in sql
+    assert sql.count(".xmin AS xmin INTO STRICT") == 62
+    assert (
+        _select_columns(
+            "emr4_context_fabric.context_observation_stream_head",
+            ["practice_id", "xmin"],
+        )
+        == "emr4_context_fabric.context_observation_stream_head.practice_id, "
+        "emr4_context_fabric.context_observation_stream_head.xmin AS xmin"
+    )
     # SELECT_SET arrays that only count rows remain typed composite arrays.
     assert "current_events public.diary_committed_events[];" in sql
 

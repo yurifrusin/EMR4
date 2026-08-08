@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_executes_exactly_one_new_owned_local_networkless_no_pull_fixed_twenty_scenario_behavior_attempt_020_then_verifies_exact_id_cleanup_and_stops_on_any_failure",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-7 and the Current Baton remain fully rehydrated. The active descendant is one provider-free disposable PostgreSQL durability behavior attempt after accepted system-xmin repair, parse proof and independent veto.",
+    "current_authority_allocation": "GPT Sol exclusively owns the one serial fixed behavior invocation, exact-ID cleanup, bounded evidence inspection and any further diagnosis. Gemini's completed pass is read-only evidence with no runtime authority. No native subagent, implementation worker or provider is active.",
+    "active_plan_and_acceptance": "Candidate behavior source 971c2519 and its review seal e9fcbe4a bind body semantic SHA-256 8ede994b, inert SQL SHA-256 0379b35f, accepted parse evidence SHA-256 b3eab7e0 and unchanged behavior contract SHA-256 b8855abe. The complete 390-test packet, Ruff and diff checks passed locally and independently in clean r102. One fresh Gemini 3.6 Flash/high review returned schema-constrained pass with unchanged HEAD and clean postflight. Attempt 020 must execute exactly the frozen twenty scenarios in 6/4/3/4/3 order or fail closed.",
+    "protected_evidence_boundaries": "Only repository-authored fixed synthetic fixtures are admitted to one locally present postgres:16-bookworm container with pull never, network none, no port, no mount and tmpfs data. Patient, product or protected data; operational sources, databases or credentials; providers; application/API/Diary runtime; migration application; watcher/listener/feed; external commands/writes; deployment, release, Pages and protected refs remain closed. Missing Docker, daemon or image stops without pull, install or fallback. docs/branding and every unrelated untracked file remain preserved.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at e9fcbe4a7f1a85c71ce164a88c639e2a8910d18c with preserved pre-existing untracked files. The mutable fixed behavior evidence remains unstaged at immutable attempt-019a SHA-256 ef164d97 before execution. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. The harness writes only the fixed behavior evidence path and may remove only the exact random-ID container it creates after ownership re-verification."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rehydration_complete_deterministic_packet_exact_gemini_veto_and_sealed_review_evidence",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is ready for exactly one fixed serial behavior attempt and exact cleanup verification."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh exact-candidate Gemini 3.6 Flash/high veto passed and is sealed."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
