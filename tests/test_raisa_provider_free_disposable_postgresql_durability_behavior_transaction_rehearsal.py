@@ -70,6 +70,11 @@ FAILURE_EVIDENCE_008 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_009 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-009.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -233,6 +238,53 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
         "passed": 0,
     }
     assert FAILURE_EVIDENCE_008["cleanup"]["absence_verified"] is True
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_009)
+    assert FAILURE_EVIDENCE_009["environment"]["failure"] == {
+        "code": "query_failed",
+        "detail_digest": rehearsal._sha256(b"3"),  # noqa: SLF001
+        "stage": "catalogue",
+    }
+    assert FAILURE_EVIDENCE_009["lifecycle"][-2:] == [
+        "fixtures_closed",
+        "cleanup_verified",
+    ]
+    assert FAILURE_EVIDENCE_009["scenario_reconciliation"]["observed"] == 0
+    assert FAILURE_EVIDENCE_009["cleanup"]["absence_verified"] is True
+
+
+def test_snapshot_query_failure_releases_only_bounded_site_and_sqlstate() -> None:
+    captured: dict[str, Any] = {}
+
+    def runner(
+        argv: list[str], stdin: bytes | None, timeout: float, cap: int
+    ) -> rehearsal.parent.ProcessResult:
+        captured.update(argv=argv, stdin=stdin, timeout=timeout, cap=cap)
+        return rehearsal.parent.ProcessResult(
+            3,
+            b"",
+            b"psql:<stdin>:2: ERROR:  42883: prohibited detail\n",
+        )
+
+    profile = rehearsal._profile()  # noqa: SLF001
+    with pytest.raises(rehearsal.BehaviorFailure) as raised:
+        rehearsal._query_json_bounded(  # noqa: SLF001
+            runner,
+            r"C:\Docker\docker.exe",
+            "a" * 64,
+            profile["postgres_database"],
+            profile,
+            "SELECT '{}'::json::text",
+            query_id="scenario_snapshot",
+        )
+
+    assert raised.value.stage == "readback"
+    assert raised.value.code == "query_failed"
+    assert raised.value.detail == {
+        "query_id": "scenario_snapshot",
+        "sqlstate": "42883",
+    }
+    assert captured["stdin"].startswith(b"SET TRANSACTION READ ONLY;\n")
+    assert "--file=-" in captured["argv"]
 
 
 def test_catalogue_deltas_separate_fixture_rows_from_structural_drift() -> None:

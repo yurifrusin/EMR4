@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 106,
+  "register_revision": 107,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4962,6 +4962,48 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-fixture-catalogue-delta-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-106.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0130",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-009",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded database query failure must identify its fixed closed query site and one safe SQLSTATE when available without releasing stderr or query values.",
+      "observed_error": "Attempt 009 closed the fixture gate but failed before the first scenario. The inherited generic catalogue helper emitted only query_failed with detail digest sha256(3), leaving the bounded snapshot query site and SQLSTATE unobservable.",
+      "detection_method": "Lifecycle ended at fixtures_closed with zero scenarios, and the failure detail digest exactly matched raw psql exit code 3; static call ordering identified the first scenario snapshot as the only next query.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-009.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-snapshot-query-diagnostic-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-107.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.database_query_failure_site_not_released",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The fixed scenario snapshot now uses a behavior-local read-only query helper that releases only its closed query id, one unambiguous valid SQLSTATE and their metadata digest on failure.",
+        "prevention_control": "Every bounded runtime query family must carry a fixed non-caller-selectable query id and safe SQLSTATE extraction before its first execution; generic exit-code-only errors are insufficient for contained diagnosis.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-snapshot-query-diagnostic-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-107.md"
         ]
       },
       "status": "corrected"

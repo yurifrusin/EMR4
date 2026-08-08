@@ -1624,13 +1624,14 @@ def _snapshot_sql() -> str:
 def _snapshot(
     runner: Runner, docker: str, container_id: str, profile: dict[str, Any]
 ) -> dict[str, dict[str, Any]]:
-    value = parent._query_json(  # noqa: SLF001
+    value = _query_json_bounded(
         runner,
         docker,
         container_id,
         profile["postgres_database"],
         profile,
         _snapshot_sql(),
+        query_id="scenario_snapshot",
     )
     if not isinstance(value, dict) or set(value) != set(SNAPSHOT_RELATIONS):
         raise BehaviorFailure("readback", "snapshot_population")
@@ -1644,6 +1645,49 @@ def _snapshot(
         ):
             raise BehaviorFailure("readback", "snapshot_shape", relation)
     return value
+
+
+def _query_json_bounded(
+    runner: Runner,
+    docker: str,
+    container_id: str,
+    database: str,
+    profile: dict[str, Any],
+    sql: str,
+    *,
+    query_id: str,
+) -> Any:
+    if not IDENTIFIER.fullmatch(query_id):
+        raise BehaviorFailure("render", "query_id")
+    wrapped = (
+        "SET TRANSACTION READ ONLY;\n" + sql.rstrip().rstrip(";") + ";\n"
+    ).encode("utf-8")
+    argv = parent.docker_argv(
+        parent.DockerOperation.PSQL_FILE,
+        docker=docker,
+        profile=profile,
+        container_id=container_id,
+        database=database,
+    )
+    result = parent._call(  # noqa: SLF001
+        runner,
+        argv,
+        operation=parent.DockerOperation.PSQL_FILE,
+        stdin=wrapped,
+        timeout=profile["command_timeout_seconds"],
+        cap=profile["stdout_stderr_cap_bytes"],
+    )
+    if result.returncode != 0:
+        detail = {"query_id": query_id}
+        sqlstate = _safe_sqlstate(result)
+        if sqlstate is not None:
+            detail["sqlstate"] = sqlstate
+        raise BehaviorFailure("readback", "query_failed", detail)
+    text = result.stdout.decode("utf-8").strip()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as error:
+        raise BehaviorFailure("readback", "query_not_json", query_id) from error
 
 
 def _catalogue_digests(facts: dict[str, Any]) -> dict[str, str]:
@@ -2309,7 +2353,13 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
             "detail_digest": _sha256(detail_bytes),
         }
         if isinstance(detail, dict):
-            for name in ("sqlstate", "coordinate_status", "relation", "column"):
+            for name in (
+                "sqlstate",
+                "coordinate_status",
+                "relation",
+                "column",
+                "query_id",
+            ):
                 if isinstance(detail.get(name), str):
                     failure_evidence[name] = detail[name]
         elif SQLSTATE.fullmatch(str(detail)):
