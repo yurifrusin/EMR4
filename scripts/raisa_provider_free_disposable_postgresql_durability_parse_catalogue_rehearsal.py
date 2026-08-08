@@ -676,6 +676,16 @@ def _readiness_failure_class(stderr: bytes) -> str:
     return "unclassified"
 
 
+def _is_postgres_16_version_output(stdout: bytes) -> bool:
+    """Admit one exact six-digit version row with at most its line ending."""
+    value = stdout
+    if value.endswith(b"\r\n"):
+        value = value[:-2]
+    elif value.endswith(b"\n"):
+        value = value[:-1]
+    return POSTGRES_16_VERSION_NUM.fullmatch(value) is not None
+
+
 def _wait_for_stable_postgres(
     runner: Runner,
     docker: str,
@@ -778,8 +788,7 @@ def _wait_for_stable_postgres(
             )
             sql_ready = (
                 sql_probe.returncode == 0
-                and POSTGRES_16_VERSION_NUM.fullmatch(sql_probe.stdout.strip())
-                is not None
+                and _is_postgres_16_version_output(sql_probe.stdout)
             )
             if sql_ready:
                 state["sql_probe_successes"] += 1

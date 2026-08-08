@@ -565,6 +565,29 @@ def test_readiness_failure_classifier_is_closed(stderr: bytes, expected: str) ->
     assert rehearsal._readiness_failure_class(stderr) == expected  # noqa: SLF001
 
 
+@pytest.mark.parametrize(
+    ("stdout", "expected"),
+    [
+        (b"160000", True),
+        (b"160010\n", True),
+        (b"169999\r\n", True),
+        (b"150010\n", False),
+        (b"170001\n", False),
+        (b"16000\n", False),
+        (b"1600000\n", False),
+        (b" 160010\n", False),
+        (b"160010 \n", False),
+        (b"160010\n\n", False),
+        (b"160010\n160010\n", False),
+        (b"server_version_num\n160010\n", False),
+        (b"16a010\n", False),
+        (b"", False),
+    ],
+)
+def test_postgres_16_version_output_is_exact(stdout: bytes, expected: bool) -> None:
+    assert rehearsal._is_postgres_16_version_output(stdout) is expected  # noqa: SLF001
+
+
 def test_postgres_readiness_caps_each_probe_to_startup_deadline() -> None:
     profile = copy.deepcopy(CONTRACT["docker_profile"])
     profile["startup_timeout_seconds"] = 1
