@@ -2,7 +2,7 @@
 
 Date: 2026-08-08
 
-Status: bounded register correction candidate
+Status: accepted register correction; attempt 017 reached a separate deeper defect
 
 Revision 116 adds AER-0139 and brings the register to 139 bounded incidents.
 

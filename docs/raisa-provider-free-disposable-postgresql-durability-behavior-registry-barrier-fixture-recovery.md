@@ -2,7 +2,7 @@
 
 Date: 2026-08-08
 
-Status: provider-free recovery candidate; runtime closed pending fresh veto
+Status: accepted fixture recovery; attempt 017 passed this barrier and exposed a separate deeper defect
 
 ## Trigger and exact evidence
 

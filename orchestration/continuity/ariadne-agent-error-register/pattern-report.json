@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "1a13010c218aa61d5237b08f7a4cdc811b102309467d144e388f76802ba27e40",
+  "canonical_register_sha256": "2e8c2b15e84a642d09f1128c681c8a9f1e94193a3b6787f8c89c871f9c078691",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 32,
+      "accepted_candidate_changed": 33,
       "canonical_unchanged": 85,
       "untrusted_partial_worktree": 22
     },
@@ -13,18 +13,18 @@
       "output_contract_violation": 40,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
-      "repository_defect": 13,
+      "repository_defect": 14,
       "transport_timeout": 8
     },
     "by_origin": {
       "agent_behavior": 100,
       "harness": 18,
-      "repository": 13,
+      "repository": 14,
       "transport": 8
     },
     "by_process_severity": {
       "low": 42,
-      "material": 47,
+      "material": 48,
       "moderate": 50
     },
     "by_resource_and_role": {
@@ -43,7 +43,7 @@
       "deepseek-v4-flash-implementation-worker::implementer": 2,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-context-fabric-durability-body-contract::orchestrator": 1,
-      "emr4-disposable-postgresql-harness::orchestrator": 15,
+      "emr4-disposable-postgresql-harness::orchestrator": 16,
       "emr4-durability-ddl-renderer::orchestrator": 3,
       "git-worktree-windows-path-layout::orchestrator": 3,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
@@ -54,12 +54,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 88,
+      "orchestrator": 89,
       "verifier": 37
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 139,
+  "incident_count": 140,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -325,6 +325,30 @@
     },
     {
       "categories": [
+        "repository_defect"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0131",
+        "AER-0140"
+      ],
+      "origins": [
+        "repository"
+      ],
+      "prevention_controls": [
+        "Generated PostgreSQL SQL must distinguish special syntactic forms from callable functions, and exact renderer tests must forbid schema-qualified special forms before runtime review.",
+        "Generated PostgreSQL SQL must maintain an artifact-wide census of non-callable special forms, forbid namespace qualification for each form, and hostile-test the full accepted renderer independently of any downstream harness query generator."
+      ],
+      "recurrence_signature": "repository.schema_qualified_postgresql_special_form",
+      "resource_ids": [
+        "emr4-disposable-postgresql-harness"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
         "transport_timeout"
       ],
       "incident_count": 2,
@@ -376,7 +400,7 @@
       ]
     }
   ],
-  "register_revision": 116,
+  "register_revision": 117,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-08"
 }

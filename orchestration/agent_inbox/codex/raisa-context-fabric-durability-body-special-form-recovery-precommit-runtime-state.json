@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_attempt_017_failure_evidence_and_the_artifact_wide_postgresql_special_form_renderer_recovery_with_explicit_paths_before_exact_parse_catalogue_rebinding",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free disposable PostgreSQL durability gate permits evidence-backed diagnose-repair-rerun cycles. Attempt 017 admitted the prior reviewed artifact, reached BTR-E01, returned SQLSTATE 42883 at register_observer_generation_v1 line 58, admitted zero scenarios and completed exact cleanup.",
+    "current_authority_allocation": "GPT Sol owns the bounded renderer recovery, exact parent-artifact regeneration, deterministic verification, serial parse and behavior rehearsals, explicit-path commits and acceptance. Fresh Gemini 3.6 Flash/high independent veto follows a complete exact candidate; no native subagent, DeepSeek worker or provider runtime is assigned.",
+    "active_plan_and_acceptance": "Renderer 2.0.6 removes only invalid pg_catalog qualification from the COALESCE special form across count and JSON-key lowering, adds an artifact-wide hostile recognizer guard, preserves the typed body contract and 412-statement population, and regenerates 1,402,341 canonical LF bytes at SHA-256 afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14 with manifest file SHA-256 a003277cd48d8609a14255cca4d2a715e6d81fb1f3e24368261c4b854a32aa96. The 168 renderer and AER tests, Ruff, canonical check, register validation and diff check pass. Attempt 017 is preserved byte-identically at SHA-256 7b40801e883898005ce11003041f87eeccb8bcf852d5aca9cdb495148b41c99d.",
+    "protected_evidence_boundaries": "No relation or body-contract semantics, application migration, operational database or credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, external retrieval, product command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and all unrelated untracked files remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Primary task worktree is at exact HEAD 552a6139aafd92fae193867f5eb5d3be8824c150 with only the bounded tracked recovery plus named new evidence/docs/receipt files intended for this commit. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The previous artifact remains recoverable through Git and all unrelated untracked files are excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rehydration_attempt_017_bounded_failure_and_artifact_wide_special_form_recovery",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol mapped the bounded runtime coordinate to the first invalid generated count expression and implemented the complete renderer correction."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native Codex worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh exact-candidate Gemini 3.6 Flash/high veto follows parse and descendant rebinding."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["No DeepSeek worker is assigned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane is selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

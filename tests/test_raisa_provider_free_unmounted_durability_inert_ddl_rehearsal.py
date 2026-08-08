@@ -1195,6 +1195,28 @@ def test_renderer_fails_closed_on_null_constants() -> None:
     assert "NULL::pg_catalog.timestamptz" in sql
 
 
+def test_renderer_keeps_postgresql_special_forms_unqualified() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+
+    assert "pg_catalog.coalesce(" not in sql.lower()
+    assert "COALESCE(pg_catalog.array_length(" in sql
+
+    qualified = sql.replace(
+        "COALESCE(pg_catalog.array_length(producer_bindings, 1), 0)",
+        "pg_catalog.coalesce(pg_catalog.array_length(producer_bindings, 1), 0)",
+        1,
+    )
+    assert qualified != sql
+    qualified_report = recognize_inert_sql(
+        qualified, result["manifest"], result["effective"]
+    )
+    assert not qualified_report.valid
+    assert any(
+        issue.code == "pg_catalog_coalesce" for issue in qualified_report.issues
+    )
+
+
 # ---------------------------------------------------------------------------
 # PostgreSQL-16 representability recovery -- hostile static byte mutations.
 # ---------------------------------------------------------------------------
@@ -1205,7 +1227,7 @@ def test_recovery_recognizer_rejects_nullable_count_and_trigger_row_xmin() -> No
     sql = result["sql_text"]
 
     nullable = sql.replace(
-        "pg_catalog.coalesce(pg_catalog.array_length(producer_bindings, 1), 0)",
+        "COALESCE(pg_catalog.array_length(producer_bindings, 1), 0)",
         "pg_catalog.array_length(producer_bindings, 1)",
         1,
     )

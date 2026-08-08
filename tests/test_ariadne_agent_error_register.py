@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 116
+    assert register["register_revision"] == 117
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 140)
+        f"AER-{index:04d}" for index in range(1, 141)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -1799,15 +1799,28 @@ def test_aer_0139_requires_shared_barrier_fixture_before_behavior() -> None:
     assert "pre-effect exact reads" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0140_closes_artifact_wide_special_form_recurrence() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0140"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert "42883" in incident["observed_error"]
+    assert incident["recurrence_signature"] == (
+        "repository.schema_qualified_postgresql_special_form"
+    )
+    assert "artifact-wide census" in incident["correction"]["prevention_control"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 139
+    assert report["incident_count"] == 140
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 100,
         "harness": 18,
-        "repository": 13,
+        "repository": 14,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
@@ -1817,11 +1830,11 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "output_contract_violation": 40,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 13,
+        "repository_defect": 14,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 32,
+        "accepted_candidate_changed": 33,
         "canonical_unchanged": 85,
         "untrusted_partial_worktree": 22,
     }
@@ -1973,6 +1986,21 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
                 "All Windows verifier worktrees use the next short rNN path by default; descriptive tranche identity belongs only in branch, packet and receipt metadata.",
                 "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
                 "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "repository.schema_qualified_postgresql_special_form"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0131", "AER-0140"],
+            "origins": ["repository"],
+            "categories": ["repository_defect"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["emr4-disposable-postgresql-harness"],
+            "prevention_controls": [
+                "Generated PostgreSQL SQL must distinguish special syntactic forms from callable functions, and exact renderer tests must forbid schema-qualified special forms before runtime review.",
+                "Generated PostgreSQL SQL must maintain an artifact-wide census of non-callable special forms, forbid namespace qualification for each form, and hostile-test the full accepted renderer independently of any downstream harness query generator.",
             ],
         },
         {

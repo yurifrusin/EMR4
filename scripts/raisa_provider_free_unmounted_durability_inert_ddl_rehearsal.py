@@ -1660,7 +1660,7 @@ def _render_json_keys_exact(expr: dict[str, Any]) -> str:
     return (
         "(("
         + source
-        + " IS NOT NULL) AND (pg_catalog.coalesce("
+        + " IS NOT NULL) AND (COALESCE("
         + actual
         + ", ARRAY[]::pg_catalog.text[]) = "
         + keys_sql
@@ -1789,7 +1789,7 @@ def render_expr(expr: dict[str, Any]) -> str:
         return "(" + left + " " + operator + " " + right + ")"
     if op == "COUNT":
         return (
-            "(pg_catalog.coalesce(pg_catalog.array_length("
+            "(COALESCE(pg_catalog.array_length("
             + render_expr(expr["operand"])
             + ", 1), 0)::"
             + _type_sql("pg_catalog.bigint")
@@ -3060,7 +3060,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.5"
+RENDERER_VERSION = "2.0.6"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "
@@ -4328,6 +4328,13 @@ def _statement_issues(
         issues.append(
             RecognitionIssue("pg_catalog_row", "pg_catalog.ROW grammar misuse")
         )
+    if "pg_catalog.coalesce(" in statement.lower():
+        issues.append(
+            RecognitionIssue(
+                "pg_catalog_coalesce",
+                "COALESCE special form cannot be schema-qualified",
+            )
+        )
     if re.search(r"\b(?:OLD|NEW)\s*\.\s*\"?xmin\"?", statement, re.IGNORECASE):
         issues.append(
             RecognitionIssue(
@@ -4336,7 +4343,7 @@ def _statement_issues(
             )
         )
     if statement.count("pg_catalog.array_length(") != statement.count(
-        "pg_catalog.coalesce(pg_catalog.array_length("
+        "COALESCE(pg_catalog.array_length("
     ):
         issues.append(
             RecognitionIssue("nullable_count", "bare array_length count lowering")

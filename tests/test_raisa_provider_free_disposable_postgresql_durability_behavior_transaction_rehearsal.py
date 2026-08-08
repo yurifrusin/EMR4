@@ -110,6 +110,11 @@ FAILURE_EVIDENCE_016 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_017 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-017.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -326,10 +331,11 @@ def test_snapshot_query_failure_releases_only_bounded_site_and_sqlstate() -> Non
     assert "--file=-" in captured["argv"]
 
 
-def test_attempt_015_and_016_evidence_is_preserved_and_coordinate_closed() -> None:
+def test_attempt_015_through_017_evidence_is_preserved_and_coordinate_closed() -> None:
     validator = jsonschema.Draft202012Validator(EVIDENCE_SCHEMA)
     validator.validate(FAILURE_EVIDENCE_015)
     validator.validate(FAILURE_EVIDENCE_016)
+    validator.validate(FAILURE_EVIDENCE_017)
 
     assert FAILURE_EVIDENCE_015["environment"]["failure"] == {
         "code": "unexpected_rejection",
@@ -353,7 +359,22 @@ def test_attempt_015_and_016_evidence_is_preserved_and_coordinate_closed() -> No
         "sqlstate": "CF004",
         "stage": "scenario",
     }
-    for evidence in (FAILURE_EVIDENCE_015, FAILURE_EVIDENCE_016):
+    assert FAILURE_EVIDENCE_017["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": FAILURE_EVIDENCE_017["environment"]["failure"][
+            "detail_digest"
+        ],
+        "function_id": "emr4_context_fabric.register_observer_generation_v1",
+        "function_line": 58,
+        "scenario_id": "BTR-E01",
+        "sqlstate": "42883",
+        "stage": "scenario",
+    }
+    for evidence in (
+        FAILURE_EVIDENCE_015,
+        FAILURE_EVIDENCE_016,
+        FAILURE_EVIDENCE_017,
+    ):
         assert evidence["scenario_reconciliation"] == {
             "expected": 20,
             "observed": 0,

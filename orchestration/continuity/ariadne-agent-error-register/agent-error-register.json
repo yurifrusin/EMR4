@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 116,
+  "register_revision": 117,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5398,6 +5398,50 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-registry-barrier-fixture-recovery.md",
           "docs/security/raisa-context-fabric-durability-behavior-registry-barrier-fixture-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-116.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0140",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-017",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every PostgreSQL special syntactic form emitted by any deterministic SQL generator must retain valid unqualified grammar, and the prevention control must cover the complete accepted artifact rather than one independently generated query family.",
+      "observed_error": "Attempt 017 admitted the corrected artifact and reached BTR-E01, then returned SQLSTATE 42883 at internal line 58 of register_observer_generation_v1 with zero admitted scenarios and verified cleanup. The coordinate maps to the first renderer-generated count expression, which emitted pg_catalog.coalesce even though COALESCE is PostgreSQL special syntax and not a namespace-callable function.",
+      "detection_method": "The bounded function coordinate and SQLSTATE were mapped to the immutable rendered body. An artifact-wide static census found the same invalid lowering across count and JSON-key expressions and established that AER-0131 had corrected only the separate behavior snapshot generator.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-017.json",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-body-special-form-recovery.md",
+        "docs/security/raisa-context-fabric-durability-body-special-form-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-117.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.schema_qualified_postgresql_special_form",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Renderer 2.0.6 emits unqualified COALESCE for count and exact JSON-key lowering and the artifact recognizer rejects every schema-qualified occurrence before acceptance.",
+        "prevention_control": "Generated PostgreSQL SQL must maintain an artifact-wide census of non-callable special forms, forbid namespace qualification for each form, and hostile-test the full accepted renderer independently of any downstream harness query generator.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-body-special-form-recovery.md",
+          "docs/security/raisa-context-fabric-durability-body-special-form-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-117.md"
         ]
       },
       "status": "corrected"
