@@ -1,6 +1,6 @@
 -- -- durability-schema.sql.inert -- inert evidence artifact; never execute or apply
 -- generated_by: raisa_provider_free_unmounted_durability_inert_ddl_rehearsal
--- renderer_version: 2.0.3
+-- renderer_version: 2.0.4
 -- do_not_execute: true
 
 -- ==========================================================================
@@ -19,7 +19,6 @@ CREATE DOMAIN emr4_context_fabric.source_contract_code AS pg_catalog.text
     NOT NULL
     CONSTRAINT source_contract_code_check CHECK (VALUE = 'diary.appointment_rescheduled.v1');
 CREATE DOMAIN emr4_context_fabric.digest_sha256 AS pg_catalog.text
-    NOT NULL
     CONSTRAINT digest_sha256_check CHECK (VALUE ~ '^sha256:[0-9a-f]{64}$');
 CREATE DOMAIN emr4_context_fabric.key_id AS pg_catalog.text
     NOT NULL

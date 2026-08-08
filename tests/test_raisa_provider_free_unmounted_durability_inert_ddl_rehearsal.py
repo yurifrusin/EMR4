@@ -99,6 +99,12 @@ def test_recovery_population_and_effective_catalogue_reconcile() -> None:
     assert len(fabric_relations) == 18
     assert len(effective["roles"]) == 8
     assert len(effective["rls_policies"]) == 44
+    digest_domain = next(
+        row
+        for row in effective["effective_structural"]["type_catalogue"]["domains"]
+        if row["name"] == "digest_sha256"
+    )
+    assert digest_domain["not_null_values"] is False
 
 
 def test_recovered_effective_body_population_is_exact() -> None:
@@ -117,12 +123,15 @@ def test_recovered_effective_body_population_is_exact() -> None:
 def test_recovery_operations_are_position_closed_and_fragment_sealed() -> None:
     operations = RECOVERY_SPEC["operations"]
     assert [row["id"] for row in operations] == RECOVERY_SPEC["operation_order"]
-    assert len(operations) == 8
+    assert len(operations) == 9
     for operation in operations:
         assert operation["affected_ids"]
         assert operation["old_fragment_sha256"].startswith("sha256:")
         assert operation["new_fragment_sha256"].startswith("sha256:")
-    reselect = operations[4]
+    nullability = operations[0]
+    assert nullability["id"] == "RELAX_DIGEST_DOMAIN_NULLABILITY"
+    assert nullability["affected_ids"] == ["emr4_context_fabric.digest_sha256"]
+    reselect = operations[5]
     assert len(reselect["sites"]) == 4
     for site in reselect["sites"]:
         assert site["source_node_id"]
@@ -131,6 +140,19 @@ def test_recovery_operations_are_position_closed_and_fragment_sealed() -> None:
         assert site["old_expression_sha256"].startswith("sha256:")
         assert site["new_expression_sha256"].startswith("sha256:")
         assert site["new_reselect_sha256"].startswith("sha256:")
+
+
+def test_digest_domain_defers_presence_to_nullable_and_required_columns() -> None:
+    sql = _base_render()["sql_text"]
+
+    assert (
+        "CREATE DOMAIN emr4_context_fabric.digest_sha256 AS pg_catalog.text\n"
+        "    CONSTRAINT digest_sha256_check"
+    ) in sql
+    assert ("last_observation_digest emr4_context_fabric.digest_sha256,") in sql
+    assert ("audit_head_digest emr4_context_fabric.digest_sha256 NOT NULL,") in sql
+    assert ("last_contiguous_position = 0 AND last_observation_digest IS NULL") in sql
+    assert "NULL::emr4_context_fabric.digest_sha256" in sql
 
 
 def test_recovery_fragment_seal_drift_fails_closed(
@@ -307,7 +329,9 @@ def test_renderer_rejects_modeled_system_xmin_shape_drift() -> None:
 
 def test_renderer_stages_relation_dependencies_by_statement_family() -> None:
     sql = _base_render()["sql_text"]
-    tables = [match.start() for match in re.finditer(r"^CREATE TABLE ", sql, re.MULTILINE)]
+    tables = [
+        match.start() for match in re.finditer(r"^CREATE TABLE ", sql, re.MULTILINE)
+    ]
     keys = [
         match.start()
         for match in re.finditer(
@@ -378,8 +402,7 @@ def test_composite_create_order_is_stable_and_dependency_safe() -> None:
         "composites"
     ]
     expected = [
-        "emr4_context_fabric." + row["name"]
-        for row in _ordered_composites(composites)
+        "emr4_context_fabric." + row["name"] for row in _ordered_composites(composites)
     ]
     actual = [
         row["identifier"]
@@ -420,13 +443,9 @@ def test_recognizer_rejects_composite_dependency_order_regression() -> None:
     mutated = sql.replace(future.group(0), sentinel, 1)
     mutated = mutated.replace(registration.group(0), future.group(0), 1)
     mutated = mutated.replace(sentinel, registration.group(0), 1)
-    report = recognize_inert_sql(
-        mutated, result["manifest"], result["effective"]
-    )
+    report = recognize_inert_sql(mutated, result["manifest"], result["effective"])
     assert not report.valid
-    assert any(
-        issue.code == "composite_dependency_order" for issue in report.issues
-    )
+    assert any(issue.code == "composite_dependency_order" for issue in report.issues)
 
 
 def test_renderer_order_is_preserved() -> None:

@@ -60,6 +60,11 @@ FAILURE_EVIDENCE_006 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_007 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-007.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -201,6 +206,13 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
     )
     assert FAILURE_EVIDENCE_006["scenario_reconciliation"]["observed"] == 0
     assert FAILURE_EVIDENCE_006["cleanup"]["absence_verified"] is True
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_007)
+    assert FAILURE_EVIDENCE_007["environment"]["failure"]["sqlstate"] == "23502"
+    assert FAILURE_EVIDENCE_007["environment"]["failure"]["coordinate_status"] == (
+        "missing"
+    )
+    assert FAILURE_EVIDENCE_007["scenario_reconciliation"]["observed"] == 0
+    assert FAILURE_EVIDENCE_007["cleanup"]["absence_verified"] is True
 
 
 def test_bootstrap_failure_telemetry_releases_only_one_safe_sqlstate() -> None:

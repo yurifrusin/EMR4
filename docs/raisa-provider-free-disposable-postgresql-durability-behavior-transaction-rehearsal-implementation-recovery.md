@@ -143,3 +143,23 @@ extracts the lowercase quoted table/column tokens but releases them only through
 the existing bootstrap allowlist. Any other English text, identifier, error
 class or shape remains sealed. AER-0122 records the empirically missing protocol
 fields. Another run is closed until deterministic and independent acceptance.
+
+## Seventh runtime failure and schema-level root cause
+
+Failure evidence 007 again retained SQLSTATE `23502`, selected
+`coordinate_status=missing`, observed zero scenarios and verified cleanup. The
+independently accepted fixed table-column header parser therefore did not match.
+
+Static reconciliation then found the actual PostgreSQL contradiction. The
+accepted `digest_sha256` domain was globally `NOT NULL`, while the checkpoint
+relation and registration function intentionally require a typed null digest at
+position zero. This is a domain-level error, so PostgreSQL provides neither the
+table/column diagnostics nor the table-column message the two bounded parsers
+were designed for.
+
+The recovery is recorded in
+`docs/raisa-context-fabric-digest-domain-nullability-recovery.md`. It changes
+only effective digest-domain nullability, retains every required column-level
+`NOT NULL` and the explicit checkpoint bijection, and requires fresh renderer,
+independent, parse/catalogue and behavior acceptance. AER-0123 records the
+accepted-artifact contradiction.

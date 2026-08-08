@@ -81,6 +81,7 @@ APPOINTMENT = "public.appointments"
 EVENT = "public.diary_committed_events"
 BINDING = FABRIC + "context_service_practice_binding"
 OUTBOX = FABRIC + "diary_context_observation_outbox_v1"
+DIGEST_DOMAIN_NAME = "digest_sha256"
 
 RECOVERY_SPEC: dict[str, Any] = {
     "id": "postgresql_16_representability_recovery_v1",
@@ -92,6 +93,7 @@ RECOVERY_SPEC: dict[str, Any] = {
         "programs": 23,
     },
     "operation_order": [
+        "RELAX_DIGEST_DOMAIN_NULLABILITY",
         "ADD_APPOINTMENT_GUARD_SIGNATURE",
         "ADD_APPOINTMENT_GUARD_PROGRAM",
         "ADD_APPOINTMENT_GUARD_DECLARATION",
@@ -102,6 +104,12 @@ RECOVERY_SPEC: dict[str, Any] = {
         "REMOVE_DEFERRED_OUTBOX_DELETE_OLD_XMIN",
     ],
     "operations": [
+        {
+            "id": "RELAX_DIGEST_DOMAIN_NULLABILITY",
+            "affected_ids": [FABRIC + DIGEST_DOMAIN_NAME],
+            "old_fragment_sha256": "sha256:5f00a27475a8b38a8168fda1a91f371c25c5666fd7028ef334873b3a7f24db89",
+            "new_fragment_sha256": "sha256:7c5c7e3bee71b953863b744de868b797439498fbea56b6e8f13ac969fd598e6c",
+        },
         {
             "id": "ADD_APPOINTMENT_GUARD_SIGNATURE",
             "affected_ids": [APPOINTMENT_GUARD_ID],
@@ -671,6 +679,14 @@ def derive_effective_catalogue(
     if recovery_ids != [f"REC{idx:02d}" for idx in range(1, 27)]:
         raise ValueError("unexpected recovery operation catalogue")
     effective = apply_recovery(structural)
+    digest_domains = [
+        domain
+        for domain in effective["type_catalogue"]["domains"]
+        if domain["name"] == DIGEST_DOMAIN_NAME
+    ]
+    if len(digest_domains) != 1 or digest_domains[0].get("not_null_values") is not True:
+        raise ValueError("digest domain nullability source drift")
+    digest_domains[0]["not_null_values"] = False
 
     catalogue = build_catalogue(structural)
     signatures = build_signatures(structural)
@@ -1139,7 +1155,22 @@ def _recovery_operation_evidence(
             }
         )
 
+    digest_domain = next(
+        domain
+        for domain in recovered_effective["effective_structural"]["type_catalogue"][
+            "domains"
+        ]
+        if domain["name"] == DIGEST_DOMAIN_NAME
+    )
+    source_digest_domain = copy.deepcopy(digest_domain)
+    source_digest_domain["not_null_values"] = True
     operations = [
+        {
+            "id": "RELAX_DIGEST_DOMAIN_NULLABILITY",
+            "affected_ids": [FABRIC + DIGEST_DOMAIN_NAME],
+            "old_fragment_sha256": _json_seal(source_digest_domain),
+            "new_fragment_sha256": _json_seal(digest_domain),
+        },
         {
             "id": "ADD_APPOINTMENT_GUARD_SIGNATURE",
             "affected_ids": [APPOINTMENT_GUARD_ID],
@@ -2063,12 +2094,7 @@ def _emit_return_row(
     node: dict[str, Any], ctx: dict[str, Any], indent: int
 ) -> list[str]:
     pad = "    " * indent
-    return [
-        pad
-        + "RETURN "
-        + _symbol_ident(node["operands"]["source_symbol"])
-        + ";"
-    ]
+    return [pad + "RETURN " + _symbol_ident(node["operands"]["source_symbol"]) + ";"]
 
 
 def _emit_return_terminal(
@@ -2459,8 +2485,7 @@ def _split_qualified(identifier: str) -> tuple[str, str]:
 
 def _render_signature_args(inputs: list[dict[str, Any]]) -> str:
     return ", ".join(
-        _symbol_ident(item["name"]) + " " + _type_sql(item["type"])
-        for item in inputs
+        _symbol_ident(item["name"]) + " " + _type_sql(item["type"]) for item in inputs
     )
 
 
@@ -2491,9 +2516,7 @@ def _render_function_body(program: dict[str, Any], ctx: dict[str, Any]) -> str:
             # preserves product/system-column projections for SYSTEM_XMIN reads.
             decls.append(_symbol_ident(sym["id"]) + " record;")
         else:
-            decls.append(
-                _symbol_ident(sym["id"]) + " " + _type_sql(sym["type"]) + ";"
-            )
+            decls.append(_symbol_ident(sym["id"]) + " " + _type_sql(sym["type"]) + ";")
     has_ioc = any(
         node["op"] == "INSERT_OR_RELOAD_COMPARE"
         for node in _walk_program_nodes(program)
@@ -3006,7 +3029,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.3"
+RENDERER_VERSION = "2.0.4"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

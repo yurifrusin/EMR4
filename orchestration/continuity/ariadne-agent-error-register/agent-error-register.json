@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 100,
+  "register_revision": 101,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4677,6 +4677,48 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-100.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0123",
+      "attempt_id": "raisa-context-fabric-durability-behavior-not-null-header-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-durability-ddl-renderer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "A PostgreSQL domain must not globally forbid NULL when accepted relation invariants and entry-point bodies require a typed null of that domain for a valid zero-position state.",
+      "observed_error": "Failure evidence 007 retained SQLSTATE 23502 without table or column coordinates. Static reconciliation found digest_sha256 declared domain-level NOT NULL while ck_cf_07_03 and register_observer_generation_v1 require last_observation_digest to be NULL at position zero.",
+      "detection_method": "After the exact table-column header fallback remained missing, Sol reconciled the rendered domain, checkpoint column, ck_cf_07_03 and the registration INSERT, identifying a domain-level not-null violation that exactly explains the diagnostic shape.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-007.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-context-fabric-digest-domain-nullability-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-101.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.domain_not_null_contradicts_nullable_relation_state",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Renderer 2.0.4 adds one fragment-sealed effective recovery that makes digest_sha256 domain-nullable while preserving its format check, all mandatory column-level NOT NULL constraints and the zero-versus-positive checkpoint invariant.",
+        "prevention_control": "For every domain with a domain-level NOT NULL constraint, mechanically prove that no accepted column, composite field, CASE expression or entry-point body requires a typed null; otherwise enforce presence at the consuming column instead.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/security/raisa-context-fabric-digest-domain-nullability-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-101.md"
         ]
       },
       "status": "corrected"

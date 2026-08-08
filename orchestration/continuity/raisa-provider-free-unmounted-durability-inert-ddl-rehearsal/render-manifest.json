@@ -695,7 +695,7 @@
       ]
     }
   ],
-  "effective_catalogue_digest": "sha256:9ca710cae1810ec7f623d432378e78aef44cba9655f4d2fcb37ac14418a529e4",
+  "effective_catalogue_digest": "sha256:380f200e6a73f675848ccbbe1c9a796c18b37aafbf9207d309cef7362a13a100",
   "effective_program_count": 23,
   "immutable_parent_program_count": 22,
   "opcode_populations": {
@@ -2472,28 +2472,28 @@
   },
   "phase_spans": {
     "1": {
-      "end": 641,
+      "end": 640,
       "start": 7
     },
     "2": {
-      "end": 3271,
-      "start": 644
+      "end": 3270,
+      "start": 643
     },
     "3": {
-      "end": 4450,
-      "start": 3274
+      "end": 4449,
+      "start": 3273
     },
     "4": {
-      "end": 4504,
-      "start": 4453
+      "end": 4503,
+      "start": 4452
     },
     "5": {
-      "end": 4585,
-      "start": 4507
+      "end": 4584,
+      "start": 4506
     },
     "6": {
-      "end": 4606,
-      "start": 4588
+      "end": 4605,
+      "start": 4587
     }
   },
   "phases": [
@@ -2607,6 +2607,7 @@
       }
     ],
     "operation_order": [
+      "RELAX_DIGEST_DOMAIN_NULLABILITY",
       "ADD_APPOINTMENT_GUARD_SIGNATURE",
       "ADD_APPOINTMENT_GUARD_PROGRAM",
       "ADD_APPOINTMENT_GUARD_DECLARATION",
@@ -2617,6 +2618,14 @@
       "REMOVE_DEFERRED_OUTBOX_DELETE_OLD_XMIN"
     ],
     "operations": [
+      {
+        "affected_ids": [
+          "emr4_context_fabric.digest_sha256"
+        ],
+        "id": "RELAX_DIGEST_DOMAIN_NULLABILITY",
+        "new_fragment_sha256": "sha256:7c5c7e3bee71b953863b744de868b797439498fbea56b6e8f13ac969fd598e6c",
+        "old_fragment_sha256": "sha256:5f00a27475a8b38a8168fda1a91f371c25c5666fd7028ef334873b3a7f24db89"
+      },
       {
         "affected_ids": [
           "emr4_context_fabric.cf_guard_appointment_update_v1"
@@ -2750,10 +2759,10 @@
     ]
   },
   "postgresql_major": 16,
-  "renderer_version": "2.0.3",
+  "renderer_version": "2.0.4",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
-  "sql_byte_count": 1404433,
-  "sql_sha256": "sha256:a33baca6f622835b62fc84c378f05a49c2936cf28925db6fb5fe4a4fb4d50a36",
+  "sql_byte_count": 1404420,
+  "sql_sha256": "sha256:9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65",
   "statement_count": 412,
   "structural_parent": {
     "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",
