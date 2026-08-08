@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 111,
+  "register_revision": 112,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5177,6 +5177,50 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
           "docs/ariadne-agent-error-correction-register-revision-111.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0135",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-013",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "An unexpected rejection inside an allowlisted PL/pgSQL entry point must expose the fixed scenario id, safe SQLSTATE and one bounded allowlisted function coordinate when PostgreSQL supplies it uniquely, without releasing SQL, values or error prose.",
+      "observed_error": "Attempt 013 proved that the serializable correction removed CF303, but BTR-E01 then stopped at SQLSTATE 22P02 inside a large accepted lifecycle entry point; scenario and SQLSTATE alone could not identify the exact internal statement without speculation.",
+      "detection_method": "The bounded attempt-013 evidence was reconciled with the accepted BTR-E01 renderer and function inventory after exact cleanup; PostgreSQL verbose mode was already captured but the harness released no safe function identifier or internal line coordinate.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-013.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-function-coordinate-diagnostic-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-112.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.scenario_failure_plpgsql_coordinate_not_released",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Expected-success failure handling now admits only one uniquely parsed scenario-allowlisted PL/pgSQL function identifier and bounded internal line number, alongside the existing scenario id and safe SQLSTATE.",
+        "prevention_control": "Before a large accepted PL/pgSQL entry point is executed, unexpected-failure evidence must have a schema-closed, scenario-bound coordinate path that never releases SQL text, values, unrestricted identifiers or error prose.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-function-coordinate-diagnostic-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-112.md"
         ]
       },
       "status": "corrected"

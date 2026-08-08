@@ -90,6 +90,19 @@
                 "BTR-R02", "BTR-R03", "BTR-B01", "BTR-B02", "BTR-B03"
               ]
             },
+            "function_id": {
+              "enum": [
+                "emr4_context_fabric.register_observer_generation_v1",
+                "emr4_context_fabric.project_update_confirm_reschedule_v1",
+                "emr4_context_fabric.admit_proofread_observation_v1",
+                "emr4_context_fabric.apply_durability_transition_v1"
+              ]
+            },
+            "function_line": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
             "sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"},
             "coordinate_status": {
               "enum": [

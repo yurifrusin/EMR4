@@ -87,6 +87,23 @@ PSQL_NOT_NULL_LINE = re.compile(
     rb'null value in column "([a-z][a-z0-9_]*)" of relation '
     rb'"([a-z][a-z0-9_]*)" violates not-null constraint\s*$'
 )
+PSQL_PLPGSQL_CONTEXT_LINE = re.compile(
+    rb"(?m)^CONTEXT:\s+PL/pgSQL function emr4_context_fabric\."
+    rb"([a-z][a-z0-9_]*)\([^\r\n]{0,500}\) line "
+    rb"([1-9][0-9]{0,5}) at [^\r\n]{1,160}\s*$"
+)
+
+SAFE_SCENARIO_FUNCTIONS = {
+    "BTR-E01": frozenset({"register_observer_generation_v1"}),
+    "BTR-E02": frozenset({"project_update_confirm_reschedule_v1"}),
+    "BTR-E03": frozenset({"admit_proofread_observation_v1"}),
+    "BTR-I01": frozenset({"admit_proofread_observation_v1"}),
+    "BTR-E04": frozenset({"apply_durability_transition_v1"}),
+    "BTR-I03": frozenset({"apply_durability_transition_v1"}),
+    "BTR-I02": frozenset(
+        {"project_update_confirm_reschedule_v1", "admit_proofread_observation_v1"}
+    ),
+}
 
 SAFE_BOOTSTRAP_COLUMNS = {
     "public.appointments": {
@@ -292,6 +309,29 @@ def _safe_sqlstate(result: parent.ProcessResult) -> str | None:
         return None
     value = next(iter(matches)).decode("ascii")
     return value if SQLSTATE.fullmatch(value) else None
+
+
+def _safe_plpgsql_coordinate(
+    result: parent.ProcessResult, scenario_id: str
+) -> dict[str, Any]:
+    allowed = SAFE_SCENARIO_FUNCTIONS.get(scenario_id)
+    if not allowed:
+        return {}
+    raw = result.stdout + b"\n" + result.stderr
+    matches = set(PSQL_PLPGSQL_CONTEXT_LINE.findall(raw))
+    if len(matches) != 1:
+        return {}
+    function_raw, line_raw = next(iter(matches))
+    function_name = function_raw.decode("ascii")
+    if function_name not in allowed:
+        return {}
+    function_line = int(line_raw.decode("ascii"))
+    if not 1 <= function_line <= 100000:
+        return {}
+    return {
+        "function_id": f"emr4_context_fabric.{function_name}",
+        "function_line": function_line,
+    }
 
 
 def _safe_bootstrap_failure_metadata(
@@ -1935,6 +1975,7 @@ def _bounded_outcome(
             sqlstate = _safe_sqlstate(result)
             if sqlstate is not None:
                 detail["sqlstate"] = sqlstate
+            detail.update(_safe_plpgsql_coordinate(result, scenario_id))
             raise BehaviorFailure("scenario", "unexpected_rejection", detail)
         return None, {
             "psql_exit": result.returncode,
@@ -2388,9 +2429,16 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
                 "column",
                 "query_id",
                 "scenario_id",
+                "function_id",
             ):
                 if isinstance(detail.get(name), str):
                     failure_evidence[name] = detail[name]
+            if (
+                isinstance(detail.get("function_line"), int)
+                and not isinstance(detail.get("function_line"), bool)
+                and 1 <= detail["function_line"] <= 100000
+            ):
+                failure_evidence["function_line"] = detail["function_line"]
         elif SQLSTATE.fullmatch(str(detail)):
             failure_evidence["sqlstate"] = str(detail)
         evidence["environment"]["failure"] = failure_evidence

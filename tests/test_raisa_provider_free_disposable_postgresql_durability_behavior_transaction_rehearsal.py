@@ -90,6 +90,11 @@ FAILURE_EVIDENCE_012 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_013 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-013.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -926,6 +931,78 @@ def test_expected_success_rejection_releases_only_scenario_and_sqlstate() -> Non
     assert caught.value.stage == "scenario"
     assert caught.value.code == "unexpected_rejection"
     assert caught.value.detail == {"scenario_id": "BTR-E01", "sqlstate": "42883"}
+
+
+def test_expected_success_rejection_releases_one_allowlisted_function_coordinate() -> (
+    None
+):
+    rejected = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        (
+            b"psql:<stdin>:4: ERROR:  22P02: prohibited detail\n"
+            b"CONTEXT:  PL/pgSQL function "
+            b"emr4_context_fabric.register_observer_generation_v1("
+            b"emr4_context_fabric.generation_registration_v1) line 62 "
+            b"at assignment\n"
+        ),
+    )
+
+    with pytest.raises(rehearsal.BehaviorFailure) as caught:
+        rehearsal._bounded_outcome(rejected, None, "BTR-E01")
+
+    assert caught.value.detail == {
+        "scenario_id": "BTR-E01",
+        "sqlstate": "22P02",
+        "function_id": ("emr4_context_fabric.register_observer_generation_v1"),
+        "function_line": 62,
+    }
+
+    assert rehearsal._safe_plpgsql_coordinate(rejected, "BTR-E02") == {}
+    ambiguous = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        rejected.stderr
+        + (
+            b"CONTEXT:  PL/pgSQL function "
+            b"emr4_context_fabric.register_observer_generation_v1("
+            b"emr4_context_fabric.generation_registration_v1) line 63 "
+            b"at SQL statement\n"
+        ),
+    )
+    assert rehearsal._safe_plpgsql_coordinate(ambiguous, "BTR-E01") == {}
+
+
+def test_failure_013_and_function_coordinate_schema_are_closed() -> None:
+    validator = jsonschema.Draft202012Validator(EVIDENCE_SCHEMA)
+    validator.validate(FAILURE_EVIDENCE_013)
+    assert FAILURE_EVIDENCE_013["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": "sha256:4d59e386927664a7cd53f6c2343d5addb718bc35958d1d531eaa775b45fba17b",
+        "scenario_id": "BTR-E01",
+        "sqlstate": "22P02",
+        "stage": "scenario",
+    }
+    assert FAILURE_EVIDENCE_013["cleanup"]["absence_verified"] is True
+
+    admitted = copy.deepcopy(FAILURE_EVIDENCE_013)
+    admitted["environment"]["failure"].update(
+        function_id="emr4_context_fabric.register_observer_generation_v1",
+        function_line=62,
+    )
+    validator.validate(admitted)
+
+    hostile = copy.deepcopy(admitted)
+    hostile["environment"]["failure"]["function_id"] = (
+        "emr4_context_fabric.caller_selected_function"
+    )
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(hostile)
+
+    hostile = copy.deepcopy(admitted)
+    hostile["environment"]["failure"]["function_line"] = "62; SELECT secret"
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(hostile)
 
 
 def test_first_scenario_rejection_is_preserved_and_cleaned_up() -> None:

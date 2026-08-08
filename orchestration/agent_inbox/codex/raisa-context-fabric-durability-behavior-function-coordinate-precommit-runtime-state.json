@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_bounded_plpgsql_function_coordinate_diagnostic_candidate_before_fresh_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the provider-free disposable PostgreSQL durability behavior/transaction rehearsal as the active Context Fabric tranche and places the future Agent Execution Surface and Containment Gate after this provider-free durability sequence.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled serial harness correction and commit. Gemini 3.6 Flash/high owns only the later fresh exact-HEAD independent veto. No implementation worker, native subagent, runtime reviewer, protected integrator or self-certifying agent is active.",
+    "active_plan_and_acceptance": "Attempt 013 is preserved with BTR-E01, SQLSTATE 22P02, zero admitted scenarios and verified cleanup. The candidate adds only one uniquely parsed scenario-allowlisted PL/pgSQL function identifier and bounded internal line number, closed schema/tests and AER-0135; focused tests, Ruff, inert-artifact check and diff check pass. Runtime remains closed until a fresh exact-HEAD veto.",
+    "protected_evidence_boundaries": "The commit contains only bounded authored-synthetic diagnostic, immutable failure, receipt, review-provenance and agent-error-register artifacts. The canonical current failure file remains unstaged. Application/API/Diary wiring, operational database or credentials, watcher/listener/feed access, patient/clinical/product/protected data, providers, model runtime, commands/writes, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "The active task branch started this correction at a9ca5fa6b8ab80207e17b2eec96ac3d185b64fcd. Local and remotely observed master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; the remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Only explicit listed task paths may be staged; no protected ref will move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_function_coordinate_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the bounded candidate, focused tests and explicit path set before commit."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The candidate must be committed before its fresh exact-HEAD verifier worktree is created."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -163,3 +163,18 @@ only effective digest-domain nullability, retains every required column-level
 `NOT NULL` and the explicit checkpoint bijection, and requires fresh renderer,
 independent, parse/catalogue and behavior acceptance. AER-0123 records the
 accepted-artifact contradiction.
+
+## Thirteenth runtime failure and function-coordinate strengthening
+
+After the nullability, catalogue, snapshot, evidence-envelope and transaction-
+isolation recoveries, attempt 013 passed fixture closure and the corrected
+serializable guard, then stopped at `BTR-E01` with SQLSTATE `22P02`. It admitted
+no scenario and exact cleanup again proved owned-container absence. The
+immutable evidence is
+`provider-free-behavior-transaction-failure-evidence-013.json`.
+
+The next candidate releases only one uniquely parsed, scenario-allowlisted
+PL/pgSQL function identifier and bounded internal line number from PostgreSQL's
+already captured verbose context. Raw SQL, values, error prose and unrestricted
+identifiers remain sealed. AER-0135 records the diagnostic gap; another runtime
+attempt remains closed until deterministic checks and a fresh exact-HEAD veto.

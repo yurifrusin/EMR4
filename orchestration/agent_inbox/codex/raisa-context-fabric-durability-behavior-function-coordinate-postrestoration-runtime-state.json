@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "diagnose_repair_review_and_rerun_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the provider-free disposable PostgreSQL durability behavior/transaction rehearsal as the active dependency-satisfied Context Fabric tranche. The future Agent Execution Surface and Containment Gate is recorded after this provider-free durability sequence and before any occupied real-product-read or executable Bureau descendant.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial disposable-database implementation, diagnosis, recovery and acceptance. Gemini 3.6 Flash/high through a fresh exact-HEAD Antigravity worktree owns independent veto review only. Native subagents and DeepSeek are not selected for this serial stateful correction, and no worker receives runtime, integration, baton, protected-ref or self-certification authority.",
+    "active_plan_and_acceptance": "The accepted behavior/transaction plan freezes exactly twenty serial authored-synthetic scenarios and permits evidence-backed newly owned container diagnose-repair-rerun cycles without weakening scenarios or parent SQL. Attempts 001-013 remain immutable failure evidence. Attempt 013 advanced through the repaired SERIALIZABLE entry-point boundary and stopped at BTR-E01 with SQLSTATE 22P02; the next bounded candidate may release only an allowlisted PL/pgSQL function identifier and internal line number when uniquely parseable before a fresh independent veto and newly owned rerun.",
+    "protected_evidence_boundaries": "Only repository-authored synthetic fixtures, the exact accepted SQL parents, one newly owned networkless disposable local PostgreSQL 16 container per reviewed attempt and minimized evidence are open. Applied Alembic migration, application/API/Diary wiring, operational persistence or credentials, source watcher/listener/feed access, patient/clinical/product/protected data, providers, model calls, tools, commands or writes, deployment, production, release, Pages and protected-ref movement remain closed. docs/branding and all unrelated untracked files remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "The active worktree is C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam at a9ca5fa6b8ab80207e17b2eec96ac3d185b64fcd with no tracked changes before this receipt and preserved untracked files. Local and remotely observed master plus handoff/current are exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The remotely observed task branch is 324d37f086a51a60b260d02b38772594b6c205df; no protected ref will move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_transaction_function_coordinate_postrestoration_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the full five-source post-restoration rehydration before modifying the bounded diagnostic candidate."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this tightly coupled serial database recovery."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "A fresh exact-HEAD Gemini 3.6 Flash/high veto follows only after deterministic correction gates pass."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is opened for the stateful harness diagnostic."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
