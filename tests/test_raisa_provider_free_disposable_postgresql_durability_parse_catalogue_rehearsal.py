@@ -49,6 +49,12 @@ CHARACTERIZATION_EVIDENCE = json.loads(
         / "provider-free-disposable-postgresql-evidence-catalogue-characterization.json"
     ).read_text(encoding="utf-8")
 )
+REGISTRATION_RLS_CHARACTERIZATION_EVIDENCE = json.loads(
+    (
+        DIR
+        / "provider-free-disposable-postgresql-evidence-registration-rls-characterization.json"
+    ).read_text(encoding="utf-8")
+)
 DIGEST_NULLABILITY_QUERY_DRIFT_EVIDENCE = json.loads(
     (
         DIR
@@ -362,7 +368,7 @@ def test_contract_schemas_are_whole_document_valid() -> None:
     Draft202012Validator(EVIDENCE_SCHEMA).validate(CHARACTERIZATION_EVIDENCE)
 
 
-def test_exact_catalogue_digests_change_only_for_revised_types_projection() -> None:
+def test_exact_catalogue_digests_bind_revised_types_and_registration_rls() -> None:
     expected = {
         key: digest
         for key, digest in CHARACTERIZATION_EVIDENCE["catalogue"][
@@ -374,6 +380,9 @@ def test_exact_catalogue_digests_change_only_for_revised_types_projection() -> N
     original_type_facts = _reconstructed_type_facts(digest_domain_not_null=True)
     revised_type_facts = _reconstructed_type_facts(digest_domain_not_null=False)
     expected["types"] = rehearsal._facts_digest(revised_type_facts)  # noqa: SLF001
+    expected["policies"] = REGISTRATION_RLS_CHARACTERIZATION_EVIDENCE[
+        "catalogue"
+    ]["query_digests"]["policies"]
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
         "expected_query_digests": expected,
@@ -409,6 +418,32 @@ def test_exact_catalogue_digests_change_only_for_revised_types_projection() -> N
     assert CHARACTERIZATION_EVIDENCE["cleanup"] == {
         "absence_verified": True,
         "container_id": "a60e76c4608f929b674dcda2140f89155c85b7f806785ba53ae002452eb3a392",
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    revised = {
+        key: digest
+        for key, digest in REGISTRATION_RLS_CHARACTERIZATION_EVIDENCE[
+            "catalogue"
+        ]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    assert revised == expected
+    assert REGISTRATION_RLS_CHARACTERIZATION_EVIDENCE["result"] == (
+        "catalogue_characterization_required"
+    )
+    assert REGISTRATION_RLS_CHARACTERIZATION_EVIDENCE["catalogue"][
+        "expectation_mode"
+    ] == "characterization_only"
+    assert rehearsal._bytes_sha(  # noqa: SLF001
+        (
+            DIR
+            / "provider-free-disposable-postgresql-evidence-registration-rls-characterization.json"
+        ).read_bytes()
+    ) == "d46af8f0ae45f0b79b0ca81a8a09728b046747486399c8ac0646772073657726"
+    assert REGISTRATION_RLS_CHARACTERIZATION_EVIDENCE["cleanup"] == {
+        "absence_verified": True,
+        "container_id": "9047bffc9931cb24b46f7d03ace6a7f1d17bde12aadbbb3a2f06b70fcfbb3689",
         "removed": True,
         "status": "cleanup_verified",
     }
@@ -483,9 +518,12 @@ def test_pre_row_projection_recovery_parse_catalogue_pass_is_preserved() -> None
     assert evidence["cleanup"]["absence_verified"] is True
 
 
-def test_body_special_form_recovery_parse_catalogue_evidence_is_exact_pass() -> None:
+def test_registration_rls_recovery_parse_catalogue_evidence_is_exact_pass() -> None:
     evidence = ROW_PROJECTION_RECOVERY_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert rehearsal._bytes_sha(  # noqa: SLF001
+        (DIR / "provider-free-disposable-postgresql-evidence.json").read_bytes()
+    ) == "44f4ba03cc25abfc437ca3385b7f8e0c335477dec0724d3726058f78d37170bc"
 
     assert evidence["result"] == rehearsal.PASS_RESULT
     assert evidence["lifecycle"][-3:] == [
@@ -494,12 +532,12 @@ def test_body_special_form_recovery_parse_catalogue_evidence_is_exact_pass() -> 
         "passed",
     ]
     assert evidence["parent"] == {
-        "artifact_byte_count": 1_402_341,
+        "artifact_byte_count": 1_402_659,
         "artifact_sha256": (
-            "sha256:afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14"
+            "sha256:34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760"
         ),
         "contract_sha256": (
-            "sha256:ebdfcb665a9ef9dc682f249b73b30916725fc76555928dff71527a5c525d7c29"
+            "sha256:b88de787d50869b2a8366d0f3d02c387cbbcf7462102e5c70def8dad80992aa9"
         ),
         "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
         "prerequisite_sql_sha256": (
@@ -523,7 +561,7 @@ def test_body_special_form_recovery_parse_catalogue_evidence_is_exact_pass() -> 
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
-            "a03f07be13b829ea5c2fc96961968f3e68b69c39d314cbcd85a6de5a461b2135"
+            "de30bd80353622d7dec006867d8ebf98a7fbc8bc889d4f98e5b91210e3126892"
         ),
         "removed": True,
         "status": "cleanup_verified",
@@ -535,7 +573,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_402_341
+    assert len(artifact) == 1_402_659
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 388
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001

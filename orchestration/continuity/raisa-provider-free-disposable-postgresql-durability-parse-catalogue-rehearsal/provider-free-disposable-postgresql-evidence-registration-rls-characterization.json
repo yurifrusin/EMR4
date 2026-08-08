@@ -1,7 +1,7 @@
 {
-  "attempt_id": "4db3da29d6eb38deee4f383a",
+  "attempt_id": "11663fe399543662a1cddaae",
   "catalogue": {
-    "expectation_mode": "exact_digest_bound",
+    "expectation_mode": "characterization_only",
     "kind_counts": {
       "columns": 252,
       "constraints": 81,
@@ -51,25 +51,25 @@
       "triggers",
       "types"
     ],
-    "status": "matched"
+    "status": "characterized"
   },
   "claim_boundary": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only",
   "cleanup": {
     "absence_verified": true,
-    "container_id": "de30bd80353622d7dec006867d8ebf98a7fbc8bc889d4f98e5b91210e3126892",
+    "container_id": "9047bffc9931cb24b46f7d03ace6a7f1d17bde12aadbbb3a2f06b70fcfbb3689",
     "removed": true,
     "status": "cleanup_verified"
   },
   "environment": {
     "docker_client": "resolved_exact_docker_exe",
-    "elapsed_ms": 8683,
+    "elapsed_ms": 8865,
     "image": {
       "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
       "pull_attempted": false,
       "reference": "postgres:16-bookworm"
     },
     "readiness": {
-      "continuous_success_ms": 3126,
+      "continuous_success_ms": 3121,
       "last_pg_isready_exit": 0,
       "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "last_sql_failure_class": "none",
@@ -77,8 +77,8 @@
       "last_sql_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "last_sql_stdout_digest": "sha256:cc290b35686ba5625a414ce876721a541897e6f17a00d4aa8e2ea5c436c31be8",
       "pg_isready_attempts": 9,
-      "pg_isready_successes": 7,
-      "sql_probe_attempts": 7,
+      "pg_isready_successes": 8,
+      "sql_probe_attempts": 8,
       "sql_probe_successes": 7,
       "status": "stable"
     }
@@ -96,19 +96,18 @@
     "success_database_ready",
     "success_prerequisites_installed",
     "artifact_admitted",
-    "catalogue_matched",
-    "cleanup_verified",
-    "passed"
+    "catalogue_characterized",
+    "cleanup_verified"
   ],
   "parent": {
     "artifact_byte_count": 1402659,
     "artifact_sha256": "sha256:34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760",
-    "contract_sha256": "sha256:b88de787d50869b2a8366d0f3d02c387cbbcf7462102e5c70def8dad80992aa9",
+    "contract_sha256": "sha256:c4b5a0619e8c3ab863ee783ca4ad60aa7066f20c3b545c9b0f7ebc34501a4637",
     "prerequisite_contract_sha256": "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11",
     "prerequisite_sql_sha256": "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38",
     "statement_count": 412
   },
-  "result": "raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass",
+  "result": "catalogue_characterization_required",
   "rollback": {
     "cluster_role_count": 0,
     "context_lines": [],

@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_registration_rls_parse_catalogue_rebind_characterization_pass_tests_and_acceptance_artifacts_on_the_task_branch",
+  "source_evidence": {
+    "live_handover_current_baton": "The active behavior gate now has a corrected exact parse/catalogue parent. This commit seals only that parent so the unchanged twenty-scenario behavior contract can bind an immutable source commit next.",
+    "current_authority_allocation": "GPT Sol owns task-branch acceptance and explicit-path commit. Gemini remains reserved for the later fresh exact-HEAD behavior descendant veto. No worker or protected integrator is active.",
+    "active_plan_and_acceptance": "Exact pass evidence sha256:44f4ba03cc25abfc437ca3385b7f8e0c335477dec0724d3726058f78d37170bc binds contract sha256:b88de787d50869b2a8366d0f3d02c387cbbcf7462102e5c70def8dad80992aa9 and inert SQL sha256:34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760. Characterization evidence sha256:d46af8f0ae45f0b79b0ca81a8a09728b046747486399c8ac0646772073657726 proves only the policy digest changed and exact cleanup completed. The full parse and plan-test packet, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "Commit includes repository-authored provider-free parse/catalogue evidence only and grants no behavior, applied migration, operational persistence or credential, watcher/listener, real context, patient/product data, provider, application/API/Diary, tool, command, deployment, release, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "Task branch remains at source HEAD 2c22d6f56d0081ebfae5a5585088381e1219d7f8 before this commit. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only will include the named parse files and newly generated Ariadne receipts; every unrelated untracked path, mutable behavior evidence and docs/branding/ remains unstaged and preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "registration_rls_parse_catalogue_precommit_five_source_receipt",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified the exact pass evidence and complete focused deterministic packet."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["No external review is admitted until the later combined behavior packet passes."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

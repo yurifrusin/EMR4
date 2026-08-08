@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "rebind_and_rerun_the_provider_free_disposable_postgresql_parse_catalogue_gate_for_the_corrected_lifecycle_registration_rls_artifact_before_behavior_attempt_019",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover keeps the frozen twenty-scenario provider-free disposable PostgreSQL durability behavior/transaction rehearsal as the active gate and places the future Agent Execution Surface and Containment Gate after this Context Fabric durability sequence. Attempt 018 stopped safely at BTR-E01 with SQLSTATE 42501; the exact six-policy lifecycle-registration RLS repair, body-parent rebind and regenerated inert artifact now pass deterministic source checks, so parse/catalogue proof is the next dependency.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial PostgreSQL diagnosis, bounded repair, deterministic verification, disposable execution, cleanup and acceptance. Gemini 3.6 Flash/high through a fresh Antigravity project remains independent veto-only after the complete deterministic packet passes. No native subagent, DeepSeek implementation worker, provider model or product surface is assigned.",
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty ordered authored-synthetic scenarios with category counts 6/4/3/4/3 and forbids weakening or omission. Exact current HEAD 2c22d6f56d0081ebfae5a5585088381e1219d7f8 binds structural contract sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6, body contract sha256:422b7cd5203893ecd2269c9b2dbf4018ed359661d5ebe962de55afffb03c340c and regenerated 412-statement inert SQL sha256:34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760. Parse/catalogue rebinding and acceptance must precede behavior-contract rebinding, deterministic veto and attempt 019.",
+    "protected_evidence_boundaries": "Preserve attempts 001-018 immutably and keep the mutable current behavior evidence unstaged and outside acceptance until success. Work remains repository-local, provider-free, authored-synthetic and confined to one newly owned networkless disposable PostgreSQL 16 container when execution is eligible. No applied migration, operational database or credential, durable volume, watcher/listener/feed, application/API/Diary wiring, real context, patient/clinical/product/protected data, provider/model call, external retrieval, executable tool or command authority, deployment, production, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Primary branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean at exact HEAD 2c22d6f56d0081ebfae5a5585088381e1219d7f8 with all existing untracked evidence and docs/branding/ preserved. Local and origin master plus handoff/current are exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Only explicit-path staging is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_postcompaction_rehydration_for_registration_rls_parse_catalogue_rebind",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the full AGENTS.md and active behavior-plan rehydration and verified exact refs and tracked-clean worktree before parse/catalogue rebinding."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native Codex worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["No verifier is dispatched until the deterministic descendant packet passes."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["No DeepSeek worker is assigned to the serial disposable-database recovery."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane is selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

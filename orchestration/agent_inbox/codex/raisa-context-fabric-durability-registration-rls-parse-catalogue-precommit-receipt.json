@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_registration_rls_parse_catalogue_rebind_characterization_pass_tests_and_acceptance_artifacts_on_the_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact pass evidence sha256:44f4ba03cc25abfc437ca3385b7f8e0c335477dec0724d3726058f78d37170bc binds contract sha256:b88de787d50869b2a8366d0f3d02c387cbbcf7462102e5c70def8dad80992aa9 and inert SQL sha256:34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760. Characterization evidence sha256:d46af8f0ae45f0b79b0ca81a8a09728b046747486399c8ac0646772073657726 proves only the policy digest changed and exact cleanup completed. The full parse and plan-test packet, Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns task-branch acceptance and explicit-path commit. Gemini remains reserved for the later fresh exact-HEAD behavior descendant veto. No worker or protected integrator is active.",
+    "git_refs_and_worktree": "Task branch remains at source HEAD 2c22d6f56d0081ebfae5a5585088381e1219d7f8 before this commit. Local/origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only will include the named parse files and newly generated Ariadne receipts; every unrelated untracked path, mutable behavior evidence and docs/branding/ remains unstaged and preserved.",
+    "live_handover_current_baton": "The active behavior gate now has a corrected exact parse/catalogue parent. This commit seals only that parent so the unchanged twenty-scenario behavior contract can bind an immutable source commit next.",
+    "protected_evidence_boundaries": "Commit includes repository-authored provider-free parse/catalogue evidence only and grants no behavior, applied migration, operational persistence or credential, watcher/listener, real context, patient/product data, provider, application/API/Diary, tool, command, deployment, release, Pages or protected-ref authority."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
