@@ -178,3 +178,15 @@ PL/pgSQL function identifier and bounded internal line number from PostgreSQL's
 already captured verbose context. Raw SQL, values, error prose and unrestricted
 identifiers remain sealed. AER-0135 records the diagnostic gap; another runtime
 attempt remains closed until deterministic checks and a fresh exact-HEAD veto.
+
+## Fourteenth runtime failure and alternate function-name form
+
+Attempt 014 repeated `BTR-E01` / `22P02`, admitted no scenario and again proved
+exact cleanup, but the reviewed parser released no coordinate. The evidence
+does not establish whether PostgreSQL omitted context or used its standard
+unqualified function display. The next candidate therefore admits only the
+exact allowlisted function name with either the explicit
+`emr4_context_fabric` prefix or no prefix, normalizing both to the same closed
+schema-qualified identifier. Every other schema or function remains sealed.
+AER-0137 records this bounded format recovery; runtime remains closed pending
+fresh deterministic and independent acceptance.

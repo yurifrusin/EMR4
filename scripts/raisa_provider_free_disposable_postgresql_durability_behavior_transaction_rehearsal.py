@@ -88,7 +88,7 @@ PSQL_NOT_NULL_LINE = re.compile(
     rb'"([a-z][a-z0-9_]*)" violates not-null constraint\s*$'
 )
 PSQL_PLPGSQL_CONTEXT_LINE = re.compile(
-    rb"(?m)^CONTEXT:\s+PL/pgSQL function emr4_context_fabric\."
+    rb"(?m)^CONTEXT:\s+PL/pgSQL function (?:emr4_context_fabric\.)?"
     rb"([a-z][a-z0-9_]*)\([^\r\n]{0,500}\) line "
     rb"([1-9][0-9]{0,5}) at [^\r\n]{1,160}\s*$"
 )

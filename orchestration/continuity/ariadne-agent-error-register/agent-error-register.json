@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 113,
+  "register_revision": 114,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5264,6 +5264,48 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-function-coordinate-veto-predispatch-runtime-state-2.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-function-coordinate-veto-predispatch-receipt-2.json",
           "docs/ariadne-agent-error-correction-register-revision-113.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0137",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-014",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The bounded PL/pgSQL coordinate parser must admit PostgreSQL's exact allowlisted function-context name whether the server displays the already known emr4_context_fabric schema prefix or omits that prefix, while rejecting every other schema and function.",
+      "observed_error": "Attempt 014 repeated BTR-E01 and SQLSTATE 22P02 with zero admitted scenarios and verified cleanup, but the reviewed parser released no coordinate. Its regex required an explicit emr4_context_fabric prefix even though PostgreSQL function context may display the called function name without a schema qualifier.",
+      "detection_method": "The attempt-014 failure detail digest exactly matched the prior scenario-plus-SQLSTATE envelope despite the reviewed coordinate parser. Static parser reconciliation identified the schema prefix as its only name-form restriction; the evidence does not claim which context form PostgreSQL actually supplied.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-014.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-function-name-form-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-114.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.plpgsql_coordinate_alternate_name_form_not_admitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The parser now admits only the exact scenario-allowlisted function name with either the explicit emr4_context_fabric prefix or no prefix and normalizes both to the same schema-qualified evidence identifier.",
+        "prevention_control": "Closed diagnostic parsers for PostgreSQL-rendered identifiers must enumerate and hostile-test every accepted server display form separately from the normalized evidence identity, without admitting arbitrary qualifiers.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-function-name-form-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-114.md"
         ]
       },
       "status": "corrected"

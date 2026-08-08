@@ -95,6 +95,11 @@ FAILURE_EVIDENCE_013 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_014 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-014.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -959,6 +964,28 @@ def test_expected_success_rejection_releases_one_allowlisted_function_coordinate
     }
 
     assert rehearsal._safe_plpgsql_coordinate(rejected, "BTR-E02") == {}
+    unqualified = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        (
+            b"psql:<stdin>:4: ERROR:  22P02: prohibited detail\n"
+            b"CONTEXT:  PL/pgSQL function register_observer_generation_v1("
+            b"generation_registration_v1) line 62 at assignment\n"
+        ),
+    )
+    assert rehearsal._safe_plpgsql_coordinate(unqualified, "BTR-E01") == {
+        "function_id": "emr4_context_fabric.register_observer_generation_v1",
+        "function_line": 62,
+    }
+    foreign_schema = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        rejected.stderr.replace(
+            b"emr4_context_fabric.register_observer_generation_v1",
+            b"other_schema.register_observer_generation_v1",
+        ),
+    )
+    assert rehearsal._safe_plpgsql_coordinate(foreign_schema, "BTR-E01") == {}
     ambiguous = rehearsal.parent.ProcessResult(
         3,
         b"",
@@ -984,6 +1011,15 @@ def test_failure_013_and_function_coordinate_schema_are_closed() -> None:
         "stage": "scenario",
     }
     assert FAILURE_EVIDENCE_013["cleanup"]["absence_verified"] is True
+    validator.validate(FAILURE_EVIDENCE_014)
+    assert FAILURE_EVIDENCE_014["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": "sha256:4d59e386927664a7cd53f6c2343d5addb718bc35958d1d531eaa775b45fba17b",
+        "scenario_id": "BTR-E01",
+        "sqlstate": "22P02",
+        "stage": "scenario",
+    }
+    assert FAILURE_EVIDENCE_014["cleanup"]["absence_verified"] is True
 
     admitted = copy.deepcopy(FAILURE_EVIDENCE_013)
     admitted["environment"]["failure"].update(

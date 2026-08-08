@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_attempt_014_and_bounded_unqualified_plpgsql_function_name_form_candidate_before_fresh_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 014 is archived byte-for-byte with BTR-E01, SQLSTATE 22P02, zero admitted scenarios and exact cleanup. The candidate changes only the coordinate regex to admit the exact allowlisted function name with either the known emr4_context_fabric prefix or no prefix, normalizing both to the same evidence identity. Foreign schemas, functions and ambiguous shapes remain rejected; focused tests, Ruff and AER revision 114 pass.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled parser correction, evidence preservation and commit. Gemini 3.6 Flash/high owns only the next fresh exact-HEAD veto. No other worker or runtime authority is active.",
+    "git_refs_and_worktree": "The active task branch is at d9cca5f9375f6db85fe56e42500287d7b8b00938 before this correction commit. Local and remotely observed master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Staging is explicit-path only and no protected ref will move.",
+    "live_handover_current_baton": "AGENTS.md keeps the disposable PostgreSQL behavior/transaction rehearsal active and permits bounded evidence-backed recovery; the future Agent Execution Surface gate remains later and unopened.",
+    "protected_evidence_boundaries": "The commit contains only authored-synthetic diagnostic recovery, immutable attempt evidence, r93 read-only review provenance, receipts and register artifacts. Parent SQL, scenarios, runtime profile, application/API/Diary, operational persistence/credentials, patient/clinical/product/protected data, providers/product calls, commands/writes, deployment, production, release, Pages and protected refs remain closed. The mutable current evidence, docs/branding and unrelated untracked files remain unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
