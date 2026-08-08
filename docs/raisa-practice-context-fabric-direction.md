@@ -1,8 +1,10 @@
 # Raisa Practice Context Fabric
 
-Date: 2026-08-05
+Date: 2026-08-08
 
-Status: accepted direction through the unmounted durability state-machine rehearsal
+Status: accepted direction through the runtime-closed behavior/transaction
+implementation candidate, with the future Agent Execution Surface and
+Containment Gate position fixed
 
 ## Purpose
 
@@ -343,15 +345,43 @@ large “memory” feature:
    rejected candidates are preserved; the fourth fresh veto passed 29 attacks
    and 207 serial checks. This is deterministic integrity evidence, not a MAC,
    and mounts no source, database or runtime.
-13. **Migration-and-transaction architecture** — freeze the future PostgreSQL
-   schema, isolation/locking, producer rollback, RLS/roles, credential binding,
-   operational retention and database-backed authored-synthetic acceptance
-   design without creating a migration, database object, source or persistence.
-14. **Real product read descendants** — open one source and one role/purpose at
-   a time with privacy, identity, audit, retention and database acceptance.
-15. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+13. **Migration-and-transaction architecture** — **accepted** at exact
+   independently reviewed source HEAD
+   `c55d25d6c9704ae4612ef2d123158f71302ab411`; the future PostgreSQL schema,
+   transaction, RLS/role, admission, anchor, key and retention boundaries are
+   structurally closed without creating a migration or database object.
+14. **Function-and-trigger-body architecture** — **accepted** at exact
+   independently reviewed source HEAD
+   `a93d07405ad35d7d6c0603065625c17ec14ab23e`; every function/trigger program,
+   lock order and recovery-anchor fence is exact without execution.
+15. **Inert PostgreSQL DDL and disposable parse/catalogue rehearsal** —
+   **accepted** through runtime source
+   `c3ca2515b9f2c4b20cb7230364de7417f48eab54`; one byte-stable PostgreSQL 16
+   artifact installs and catalogues correctly in an isolated disposable
+   container, proving no behavior or operational migration.
+16. **Disposable behavior/transaction rehearsal** — planning is **accepted**
+   at exact independently reviewed source
+   `07e8750548ed69aba5a19f693a72397121a340e5`. The fixed harness, evidence
+   schema and hostile tests are now a runtime-closed implementation candidate.
+   Pre-runtime first-effective-boundary tracing corrected `BTR-T02/T03`
+   without adding privilege, and the container lifecycle now uses local peer
+   authentication with host authentication rejected and no password. A fresh
+   exact-HEAD veto remains mandatory before one run of twenty serial
+   authored-synthetic entry-point, trigger, RLS, idempotency and rollback
+   scenarios.
+17. **Agent Execution Surface and Containment Gate** — required after the
+   provider-free durability sequence and before any real-product-read or
+   executable occupied Bureau descendant. The selected external capability
+   broker, immutable generation manifest, no-ambient-credential, exact-egress,
+   cumulative-budget, revocation and kill-switch design is recorded in
+   `docs/raisa-agent-execution-surface-containment-gate-plan.md`. It does not
+   block the database-only rehearsal and grants no current runtime authority.
+18. **Real product read descendants** — open one source and one role/purpose at
+   a time only after the containment gate and their own privacy, identity,
+   audit, retention and database acceptance.
+19. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
-   clinical, data and provider gates.
+   containment, clinical, data and provider gates.
 
 Each descendant must preserve GraphQL/query services as read-only, use REST or
 OpenAPI command paths for mutations, revalidate fresh authority at execution,

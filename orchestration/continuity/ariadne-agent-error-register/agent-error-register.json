@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 92,
+  "register_revision": 94,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4266,6 +4266,91 @@
         "action": "The valid cross-worktree hash finding was preserved, but the incorrect count narrative receives no acceptance weight. The replacement veto must print and reconcile each of the eight exact per-file counts before a terminal decision.",
         "prevention_control": "Fresh replacement review admission requires exact per-file collect-only and pass arithmetic, not an aggregate progress-line estimate.",
         "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-packet.md", "docs/ariadne-agent-error-correction-register-revision-92.md", "tests/test_ariadne_agent_error_register.py"]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0113",
+      "attempt_id": "raisa-agent-execution-containment-behavior-preplanning-receipt-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-agent-execution-surface-containment-and-behavior-transaction-continuation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every pre-planning receipt must copy one exact continuation_event from the active orchestrator requirements before it may claim five-source rehydration or permit planning.",
+      "observed_error": "The first post-pause runtime state used the descriptive event user_resumed_planned_sequence_after_explicit_pause instead of the approved pre_sprint_planning enum. Ariadne preflight returned revision_required, emitted no rehydration sources and prohibited dispatch.",
+      "detection_method": "The deterministic local receipt builder failed closed before architecture edits, worker dispatch, model/provider use, database runtime, staging, commit or ref movement.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-agent-execution-containment-behavior-transaction-postpause-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-agent-execution-containment-behavior-transaction-postpause-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-agent-execution-containment-behavior-transaction-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-agent-execution-containment-behavior-transaction-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-93.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unapproved_continuation_event",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed state and receipt remain immutable. A distinct runtime state copied pre_sprint_planning from orchestrator_requirements.yaml, repeated all five named sources and received a passed receipt before planning continued.",
+        "prevention_control": "Before constructing any receipt, copy continuation_event verbatim from orchestration/harness_settings/orchestrator_requirements.yaml; descriptive lifecycle detail belongs in planned_action and source evidence, never in the enum field.",
+        "evidence_paths": [
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "orchestration/agent_inbox/codex/raisa-agent-execution-containment-behavior-transaction-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-agent-execution-containment-behavior-transaction-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-93.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0114",
+      "attempt_id": "raisa-context-fabric-durability-behavior-implementation-reachability-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "Every frozen behavior scenario must be reachable under its exact principal and grants, and its expected SQLSTATE must match the first effective PostgreSQL privilege or trigger boundary in the accepted body.",
+      "observed_error": "Pre-runtime implementation reconciliation found two unreachable trigger claims in the accepted planning packet. BTR-T03 assigned a direct Fabric alias update to context_producer even though that role correctly has no Fabric DML, so PostgreSQL would return 42501 before the alias trigger. BTR-T02 expected deferred CF603 after deleting a same-transaction reschedule event, but cf_guard_event_v1 intentionally rejects that deletion immediately as F_IMMUTABLE/CF601.",
+      "detection_method": "Sol traced each rendered scenario from role grants through native PostgreSQL privilege ordering and the exact accepted trigger body before Docker or database execution. The contradictions were reproduced directly from the immutable grant and trigger declarations and the candidate remained runtime-closed.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-implementation-recovery.md",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-94.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.behavior_scenario_first_effective_boundary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "BTR-T03 now tests the producer-reachable committed-event immutable guard without adding Fabric privilege. BTR-T02 now expects its actual immediate F_IMMUTABLE/CF601 guard, while BTR-T01 remains the separate deferred F_TEMPORAL_BIJECTION/CF603 proof. The corrected packet remains closed pending deterministic checks and a fresh exact-HEAD veto.",
+        "prevention_control": "Before freezing any database behavior scenario, mechanically trace the exact principal through relation privileges, RLS, function ownership and trigger ordering to the first effective boundary; expected SQLSTATEs must bind that first reachable boundary rather than a later intended branch.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-implementation-recovery.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-94.md"
+        ]
       },
       "status": "corrected"
     }

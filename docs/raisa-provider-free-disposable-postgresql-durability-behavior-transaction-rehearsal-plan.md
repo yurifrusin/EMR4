@@ -204,18 +204,24 @@ no new alias, outbox or consumed position.
 
 ### Trigger negatives
 
-`BTR-T01` performs a temporal appointment update with a current claim and audit
-but no committed event or projection. Deferred commit must fail exact
+`BTR-T01` performs a temporal appointment update without a current claim,
+audit, committed event or projection. Deferred commit must fail exact
 `F_TEMPORAL_BIJECTION` / `CF603`, restoring the appointment and leaving no
 claim, audit or Fabric effect.
 
 `BTR-T02` inserts and then deletes the required reschedule event before commit.
-Queued trigger work must not permit member erasure; commit must fail `CF603`
-and consume no position.
+The immediate immutable-member guard must prevent same-transaction member
+erasure with exact `F_IMMUTABLE` / `CF601`; the outer transaction rolls back
+and consumes no position. `BTR-T01` remains the separate deferred `CF603`
+temporal-bijection proof.
 
-`BTR-T03` attempts to change the already committed opaque alias. The immediate
-guard must fail exact `F_IMMUTABLE` / `CF601`; the row digest and all relation
-counts remain unchanged.
+`BTR-T03` attempts to change the already committed authored-synthetic event
+through the producer's accepted application-table grant. The immediate guard
+must fail exact `F_IMMUTABLE` / `CF601`; the row digest and all relation counts
+remain unchanged. This reachable event path replaces the pre-implementation
+alias-update draft, which would correctly have stopped at table privilege
+`42501` before the alias trigger and therefore could not prove the intended
+trigger behavior.
 
 `BTR-T04` updates the same appointment twice in one top-level transaction. The
 second update must fail exact `F_SECOND_UPDATE` / `CF604`, rolling back the

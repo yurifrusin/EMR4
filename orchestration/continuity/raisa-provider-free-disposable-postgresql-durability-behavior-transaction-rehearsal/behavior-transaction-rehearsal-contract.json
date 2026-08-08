@@ -299,8 +299,8 @@
       "action": "insert_then_delete_required_event_before_commit",
       "transaction_shape": "one_read_committed_top_level_transaction_no_savepoint",
       "expected_outcome": "ROLLBACK_EXPECTED_SQLSTATE",
-      "expected_failure_id": "F_TEMPORAL_BIJECTION",
-      "expected_sqlstate": "CF603",
+      "expected_failure_id": "F_IMMUTABLE",
+      "expected_sqlstate": "CF601",
       "readback": ["application_rows_unchanged", "stream_head_unchanged", "outbox_count_unchanged"],
       "forbidden_effects": ["erased_required_member_commit", "position_consumption"]
     },
@@ -308,13 +308,13 @@
       "id": "BTR-T03",
       "category": "TRIGGER",
       "principal": "context_producer",
-      "action": "update_committed_alias",
+      "action": "update_committed_event",
       "transaction_shape": "one_read_committed_transaction",
       "expected_outcome": "ROLLBACK_EXPECTED_SQLSTATE",
       "expected_failure_id": "F_IMMUTABLE",
       "expected_sqlstate": "CF601",
-      "readback": ["alias_row_byte_equivalent", "all_other_counts_unchanged"],
-      "forbidden_effects": ["alias_reuse", "alias_mutation", "alias_delete_recreate"]
+      "readback": ["committed_event_row_byte_equivalent", "all_other_counts_unchanged"],
+      "forbidden_effects": ["committed_event_mutation", "event_delete_recreate"]
     },
     {
       "id": "BTR-T04",

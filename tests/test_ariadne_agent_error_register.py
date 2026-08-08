@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 92
+    assert register["register_revision"] == 94
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 113)
+        f"AER-{index:04d}" for index in range(1, 115)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 88
+    assert len(agent_incidents) == 90
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1356,9 +1356,7 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 
 
 def test_disposable_postgresql_plan_review_underreport_is_contained() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0093"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0093"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["role"] == "verifier"
@@ -1376,9 +1374,7 @@ def test_disposable_postgresql_plan_review_underreport_is_contained() -> None:
 
 
 def test_disposable_postgresql_long_review_path_is_recovered() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0094"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0094"]
 
     assert incident["origin"] == "harness"
     assert incident["role"] == "orchestrator"
@@ -1394,9 +1390,7 @@ def test_disposable_postgresql_long_review_path_is_recovered() -> None:
 
 
 def test_disposable_postgresql_catalogue_split_underreport_is_corrected() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0095"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0095"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["role"] == "verifier"
@@ -1412,10 +1406,10 @@ def test_disposable_postgresql_catalogue_split_underreport_is_corrected() -> Non
     assert incident["status"] == "corrected"
 
 
-def test_disposable_postgresql_closeout_count_underreport_requires_replacement() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0110"
-    ]
+def test_disposable_postgresql_closeout_count_underreport_requires_replacement() -> (
+    None
+):
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0110"]
     rejected = _json(
         ROOT
         / "orchestration"
@@ -1447,9 +1441,9 @@ def test_disposable_postgresql_closeout_count_underreport_requires_replacement()
         "the missing three are exactly tests/test_agents_acceptance_index.py."
     )
     assert replacement["decision"] == "pass"
-    assert "**Total** | **217** | **217** | **217** | **PASSED**" in replacement[
-        "result"
-    ]
+    assert (
+        "**Total** | **217** | **217** | **217** | **PASSED**" in replacement["result"]
+    )
     assert incident["status"] == "corrected"
 
 
@@ -1485,13 +1479,62 @@ def test_behavior_transaction_plan_review_incidents_are_preserved() -> None:
     assert parent_hash["status"] == accounting["status"] == "corrected"
 
 
+def test_agent_execution_containment_preplanning_receipt_failure_is_preserved() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    failed = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-agent-execution-containment-behavior-transaction-postpause-receipt.json"
+    )
+    corrected = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-agent-execution-containment-behavior-transaction-preplanning-receipt.json"
+    )
+
+    incident = rows["AER-0113"]
+    assert incident["recurrence_signature"] == (
+        "orchestrator.unapproved_continuation_event"
+    )
+    assert incident["related_incident_ids"] == []
+    assert failed["status"] == "revision_required"
+    assert failed["reasons"] == ["continuation_event_missing_or_unapproved"]
+    assert failed["rehydration_sources"] == []
+    assert corrected["status"] == "passed"
+    assert corrected["continuation_event"] == "pre_sprint_planning"
+    assert corrected["rehydrated_from_receipt"] is True
+    assert incident["status"] == "corrected"
+
+
+def test_behavior_rehearsal_first_effective_boundary_recovery_is_preserved() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0114"]
+
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["stage"] == "implementation"
+    assert incident["process_severity"] == "material"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.behavior_scenario_first_effective_boundary_mismatch"
+    )
+    assert "BTR-T03" in incident["observed_error"]
+    assert "BTR-T02" in incident["observed_error"]
+    assert "first effective boundary" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 112
+    assert report["incident_count"] == 114
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 88,
+        "agent_behavior": 90,
         "harness": 9,
         "repository": 7,
         "transport": 8,
@@ -1500,15 +1543,15 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 15,
         "evidence_misreport": 16,
         "harness_failure": 9,
-        "output_contract_violation": 35,
+        "output_contract_violation": 36,
         "read_only_violation": 3,
-        "reasoning_claim_error": 19,
+        "reasoning_claim_error": 20,
         "repository_defect": 7,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 10,
-        "canonical_unchanged": 80,
+        "accepted_candidate_changed": 11,
+        "canonical_unchanged": 81,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -1569,13 +1612,14 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "orchestrator.unapproved_continuation_event",
-            "incident_count": 2,
-            "incident_ids": ["AER-0013", "AER-0023"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0013", "AER-0023", "AER-0113"],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
+                "Before constructing any receipt, copy continuation_event verbatim from orchestration/harness_settings/orchestrator_requirements.yaml; descriptive lifecycle detail belongs in planned_action and source evidence, never in the enum field.",
                 "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml and preserve any fail-closed envelope before issuing a corrected distinct receipt.",
                 "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt.",
             ],

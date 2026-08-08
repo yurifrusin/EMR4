@@ -143,9 +143,33 @@ catalogue rehearsal now passes, and its next provider-free database-backed
 behavior/transaction experiment is completely frozen at exact independently
 reviewed planning source `07e8750548ed69aba5a19f693a72397121a340e5` as
 twenty serial authored-synthetic entry-point, trigger, RLS, idempotency and
-rollback scenarios. No behavior runtime has begun. Applied migration,
+rollback scenarios. Its fixed harness, evidence schema and hostile tests are a
+runtime-closed implementation candidate. First-effective-boundary tracing
+corrected two unreachable trigger drafts without adding privilege: `BTR-T02`
+now binds the immediate committed-event immutability `CF601`, and `BTR-T03`
+uses the producer-reachable committed-event update guard rather than forbidden
+direct Fabric DML. The disposable cluster uses passwordless local peer
+authentication, rejected host authentication and Unix-socket-only access. A
+fresh exact-HEAD independent veto remains mandatory before the one authorized
+twenty-scenario run. No behavior runtime has begun. Applied migration,
 application behavior, operational database/source access and runtime remain
 closed.
+
+Before any later Context Fabric descendant supplies real product-derived
+context to an occupied Bureau, or gives a model an executable tool, filesystem,
+database, network, credential, provider-executed tool or command-adjacent
+capability, Raisa must pass the **Agent Execution Surface and Containment Gate**
+in
+[`docs/raisa-agent-execution-surface-containment-gate-plan.md`](docs/raisa-agent-execution-surface-containment-gate-plan.md).
+It selects an external capability broker plus immutable per-generation
+manifests, no ambient credentials or metadata access, exact egress, cumulative
+action budgets, generation revocation, inert Context Fabric data and an
+externally owned kill switch. Reasoning, information, egress and action budgets
+remain independent. The gate is deliberately placed after the current
+provider-free durability work and before real-product-read or executable Bureau
+runtime, so it does not delay the networkless database-only rehearsal and
+cannot be mistaken for current provider, product-data, tool or command
+authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -554,6 +578,38 @@ GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is
 [`docs/raisa-practice-context-fabric-direction.md`](docs/raisa-practice-context-fabric-direction.md).
+
+### 2.12 Agent Execution Surface and Containment Gate
+
+The Bureau proofreader controls semantic release, but it cannot contain a
+process that can reach software vulnerabilities, ambient credentials or an
+over-broad network path. Before a Bureau work cell receives real product data
+or any executable capability, an external deterministic authority kernel must
+stand between model output and every provider, read, tool or command adapter.
+
+The selected design is a central capability broker governed by one immutable
+manifest per work-cell generation. The manifest fixes the exact capability,
+destination, method, audience, source/field scope, bytes, calls, denied probes,
+expiry and stop conditions. The work cell receives typed context and emits a
+typed candidate; it never receives a reusable credential, cloud metadata
+route, database connection, arbitrary URL client, executable selector, SQL,
+command token or cleanup target.
+
+The gate is implemented in provider-free architecture, admission, broker-
+simulator and hostile-rehearsal descendants before any separately authorised
+occupied authored-synthetic proof. Hostile cases cover local-file references,
+template/deserialisation execution, metadata and credential probing, arbitrary
+or encoded egress, cumulative attempts, stale leases and cross-generation
+replay. GraphQL remains read-only, events remain signals, and product mutations
+remain human-gated REST/OpenAPI commands with current authorization,
+idempotency, audit and readback.
+
+The controlling plan is
+[`docs/raisa-agent-execution-surface-containment-gate-plan.md`](docs/raisa-agent-execution-surface-containment-gate-plan.md)
+and its threat-model delta is
+[`docs/security/raisa-agent-execution-surface-containment-gate-threat-model-delta.md`](docs/security/raisa-agent-execution-surface-containment-gate-threat-model-delta.md).
+This entry grants no broker implementation, provider call, real context,
+credential flow, tool, command, deployment or production authority.
 
 ---
 

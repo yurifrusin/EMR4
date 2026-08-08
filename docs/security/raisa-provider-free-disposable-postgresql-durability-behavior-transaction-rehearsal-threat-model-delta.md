@@ -53,7 +53,7 @@ role/RLS behavior evidence.
 | Forged practice/stream locator widens authority | Session-bound exact binding rederivation, forced RLS and beta-locator attack | `BTR-R01/R02` prove invisibility/denial and zero effect |
 | Another role executes a foreign entry point or trigger function | Exact execute grants, `PUBLIC` revocation, no inheritance/role membership/bypass | `BTR-R03` observes `42501`/false for every cell |
 | Partial update-confirm produces an outbox or partial application commit | Immediate/deferred fences plus one top-level transaction | `BTR-T01/T02/T04` roll back all application/Fabric members |
-| Alias or source position is caller-chosen/reused | Owner-private generated alias, locked stream head and immutable guards | Positive readback plus `BTR-T03/I04` zero-delta failures |
+| Committed event or source position is caller-mutated/reused | Producer-reachable event immutability guard, owner-private generated alias and locked stream head | Positive readback plus `BTR-T03/I04` zero-delta failures |
 | Replay duplicates admission or coordinator effects | Retained-evidence-first comparison and exact stored-locator replay | `BTR-I01/I03` preserve exact counts/digests |
 | Mismatch overwrites primary or grows without bound | Receiver-authored PRIMARY plus at most one CONFLICT | `BTR-I02` proves stable two-row set and immutable primary |
 | Entry-point success leaks after outer transaction abort | Fixed `P0001` before commit and fresh-connection readback | `BTR-B01/B02/B03` prove complete selected-set rollback |

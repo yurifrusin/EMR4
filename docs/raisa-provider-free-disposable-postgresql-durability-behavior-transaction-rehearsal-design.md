@@ -155,8 +155,10 @@ while every coordinator effect remains absent.
 The selected trigger set is chosen for transaction-integrity leverage:
 
 - missing event/projection tests the deferred bidirectional temporal set;
-- insert-then-delete tests that queued events cannot erase an obligation;
-- alias update tests immediate immutable-member rejection; and
+- insert-then-delete tests that the immediate immutable guard prevents a
+  same-transaction event from erasing the queued obligation;
+- committed-event update tests reachable immediate immutable-member rejection;
+  the producer retains no direct Fabric alias update grant; and
 - a second appointment update tests current-XID provenance and ambiguity
   rejection.
 
