@@ -28,10 +28,14 @@ RECOVERY = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery.md"
 )
+ROW_PROJECTION_RECOVERY = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-row-composite-projection-order-rebind.md"
+)
 
-PARENT_HEAD = "580c1d05ed150cdfd63549f1a35e61c72a41cb20"
+PARENT_HEAD = "0931f3e658f06e02e7de4c5ea02238184da9e767"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65"
+PARENT_DIGEST = "83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5"
 
 
 def _text(path: Path) -> str:
@@ -43,7 +47,7 @@ def _flat(*paths: Path) -> str:
 
 
 def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
-    plan = _flat(PLAN, RECOVERY)
+    plan = _flat(PLAN, RECOVERY, ROW_PROJECTION_RECOVERY)
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
     raw = PARENT_SQL.read_bytes()

@@ -67,8 +67,11 @@ TYPES_PROJECTION_RECONSTRUCTION_EVIDENCE = json.loads(
         / "provider-free-disposable-postgresql-evidence-types-projection-reconstruction.json"
     ).read_text(encoding="utf-8")
 )
-SUCCESS_EVIDENCE = json.loads(
-    (DIR / "provider-free-disposable-postgresql-evidence.json").read_text(
+PRE_ROW_PROJECTION_RECOVERY_EVIDENCE = json.loads(
+    (
+        DIR
+        / "provider-free-disposable-postgresql-evidence-pre-row-composite-projection-order-recovery.json"
+    ).read_text(
         encoding="utf-8"
     )
 )
@@ -445,8 +448,8 @@ def test_incomplete_types_projection_retry_is_preserved_fail_closed() -> None:
     assert evidence["cleanup"]["absence_verified"] is True
 
 
-def test_recovered_parse_catalogue_evidence_is_exact_pass() -> None:
-    evidence = SUCCESS_EVIDENCE
+def test_pre_row_projection_recovery_parse_catalogue_pass_is_preserved() -> None:
+    evidence = PRE_ROW_PROJECTION_RECOVERY_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
 
     assert evidence["result"] == (

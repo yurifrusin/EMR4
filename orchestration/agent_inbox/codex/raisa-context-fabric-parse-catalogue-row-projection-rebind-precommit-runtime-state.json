@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_reviewed_row_projection_recovery_provenance_and_corrected_artifact_parse_catalogue_rebind_candidate_on_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the provider-free disposable PostgreSQL durability behavior/transaction sequence as current work and requires the corrected row-projection artifact to pass fresh parse/catalogue proof before behavior can resume. The future Agent Execution Surface and Containment Gate is durably placed later and does not alter this provider-free database-only candidate.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled serial rebind and task-branch commit. Gemini 3.6 Flash/high supplied the accepted read-only exact-HEAD row-projection veto and will receive a separate fresh worktree for the rebind veto after commit. No worker or reviewer receives runtime, self-acceptance, integration, baton, push, provider, product, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "The exact row-projection recovery at 0931f3e658f06e02e7de4c5ea02238184da9e767 passed 241 reviewer tests plus builder, inert, Ruff and diff checks. The parse contract now binds that exact source, corrected inert SQL SHA-256 83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5, unchanged 1,404,420 LF bytes and 412 statements, with canonical contract SHA-256 4dc142f8dd357474739fbc79b4964352b8ccd723459ae91f52633ddd1ab4093b. The predecessor pass is preserved byte-for-byte under an explicit historical filename. The rebound focused deterministic packet and Ruff pass; PostgreSQL execution remains closed until a fresh exact-HEAD rebind veto.",
+    "protected_evidence_boundaries": "This commit contains only repository-authored recovery documentation, exact contract/script/test rebinding, immutable predecessor evidence and bounded Ariadne review/receipt provenance. It opens no Docker run, behavior scenario, applied migration, operational database, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider call, tool, command or product write, deployment, production, release, Pages or protected-ref movement. docs/branding and all unrelated untracked files remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "The active task worktree is C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam at parent HEAD 0931f3e658f06e02e7de4c5ea02238184da9e767 with only the explicit intended rebind/provenance paths selected for commit. Review worktree r95 remains clean at the exact row-projection candidate. Local and origin master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df. No protected ref will move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "parse_catalogue_row_projection_rebind_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified the rebound canonical contract, exact predecessor archive, 112 focused tests, Ruff and diff check before explicit-path staging."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this serial stateful rebind."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The exact 0931f3e6 row-projection recovery received one fresh r95 pass; the parse rebind will receive a distinct fresh review after commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

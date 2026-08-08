@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_gemini_36_flash_high_read_only_veto_for_row_composite_projection_order_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 0931f3e658f06e02e7de4c5ea02238184da9e767 archives attempt 015, corrects the two complete positional projection catalogues, adds the renderer-wide physical-order invariant and hostile mutation, regenerates the body and inert artifact chain, and records AER revision 115. The complete inherited source/renderer packet, Ruff, deterministic builder and renderer checks pass. r95 is clean at the exact candidate. A pass admits only the next parse/catalogue rebind and proof.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only veto authority only. GPT Sol retains implementation, runtime, acceptance and ref authority; no native subagent or other worker is active.",
+    "git_refs_and_worktree": "Fresh reviewer worktree C:/Users/sarashera/EMR4-worktrees/r95 is on codex/review-context-fabric-row-projection-0931f3e6 at exact candidate 0931f3e658f06e02e7de4c5ea02238184da9e767 and must pass clean preflight before dispatch. Local and remotely observed master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref will move.",
+    "live_handover_current_baton": "AGENTS.md keeps the provider-free disposable PostgreSQL behavior/transaction rehearsal active and requires a fresh exact-HEAD veto before the corrected artifact can be rebound to a new parse/catalogue proof.",
+    "protected_evidence_boundaries": "Review is exact-path, repository-authored synthetic and read-only. Docker/PostgreSQL, parse or behavior runtime, application wiring, operational credentials, patient/clinical/product/protected data, product/provider calls, command/write surfaces, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_fresh_exact_head_row_composite_projection_order_recovery_veto_and_open_only_corrected_artifact_parse_catalogue_rebind",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the provider-free disposable PostgreSQL durability behavior/transaction sequence active. Attempt 015 is the current immutable failure and the row-composite projection-order recovery is its bounded source correction. The future Agent Execution Surface and Containment Gate remains later, before occupied real-product-read or executable Bureau authority.",
+    "current_authority_allocation": "GPT Sol owns correction acceptance and the serial corrected-artifact proof chain. Gemini 3.6 Flash/high through Antigravity owns fresh read-only veto only. No reviewer or worker owns runtime, self-acceptance, integration, baton, push, provider, product, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "The exact r95 reviewer reconciled attempt 015 BTR-E01 SQLSTATE 22P02 at register_observer_generation_v1 line 36, the positional UUID-to-bigint mismatch, the two corrected complete projection catalogues, renderer 2.0.5's derived physical-order invariant and hostile swap rejection. It reproduced the body digest b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1, corrected inert SQL digest 83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5, 1,404,420 LF bytes, 412 statements and render-manifest digest 66c103adac8c9ba52440077e25d2f3fc58ed6d30005576034bb42115c746dd71. It passed 241 focused tests, Ruff, builder check, inert check and diff check, with one terminal pass and no candidate modification. Acceptance opens only the corrected-artifact parse/catalogue rebind and proof.",
+    "protected_evidence_boundaries": "Historical parse/catalogue and behavior evidence remains immutable predecessor evidence. Only repository-authored synthetic metadata and one newly owned networkless disposable local PostgreSQL 16 parse/catalogue container are opened by the next descendant after its own deterministic and independent gates. Behavior runtime remains separately closed until a later rebind and veto. Applied migration, product database, application/API/Diary wiring, watcher/listener/feed, operational credentials or persistence, patient/clinical/product/protected data, provider calls, tools, commands or product writes, deployment, production, release, Pages and protected-ref movement remain closed. docs/branding and unrelated untracked files remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "The task worktree is at exact HEAD 0931f3e658f06e02e7de4c5ea02238184da9e767 with no tracked changes before this receipt and preserved untracked files. Review worktree C:/Users/sarashera/EMR4-worktrees/r95 is clean and unchanged at the same exact HEAD on codex/review-context-fabric-row-projection-0931f3e6. Local and origin master plus handoff/current remain aligned and protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remotely observed task branch remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "row_composite_projection_order_pre_verifier_acceptance_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the immutable failure, exact source correction, deterministic packet, clean reviewer postcondition and one terminal pass before acceptance."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was used for this serial stateful correction."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh Gemini 3.6 Flash/high r95 review returned one pass at exact unchanged HEAD 0931f3e658f06e02e7de4c5ea02238184da9e767."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation transport is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
