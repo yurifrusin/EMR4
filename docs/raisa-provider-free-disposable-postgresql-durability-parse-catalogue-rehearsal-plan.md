@@ -2,9 +2,10 @@
 
 Date: 2026-08-07
 
-Status: exact PostgreSQL-16 catalogue digests characterized and position-closed;
-corrected parent artifact source is `e8d07a35727cbbca2d377eae40160b33ef955b4e`,
-with fresh exact-HEAD descendant veto required before the terminal runtime
+Status: accepted as
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`
+at exact independently reviewed runtime source
+`c3ca2515b9f2c4b20cb7230364de7417f48eab54`
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`

@@ -2,8 +2,8 @@
 
 Date: 2026-08-07
 
-Status: mechanics and population corrections accepted; exact-definition
-implementation recovery is in progress before any Docker or PostgreSQL action
+Status: all bounded recovery descendants accepted; terminal exact-bound
+PostgreSQL-16 parse/catalogue rehearsal passed with cleanup verified
 
 ## Rejected review
 

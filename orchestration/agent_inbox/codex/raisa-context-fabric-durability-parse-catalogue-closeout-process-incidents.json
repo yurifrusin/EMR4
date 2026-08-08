@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.closeout-process-incidents.v1",
+  "tranche": "raisa-context-fabric-durability-disposable-postgresql-parse-catalogue-rehearsal",
+  "observed_on": "2026-08-08",
+  "incidents": [
+    {
+      "id": "postcompaction-runtime-state-json-trailing-comma",
+      "disposition": "corrected before the receipt passed and before task action"
+    },
+    {
+      "id": "r61-review-test-total-misreport",
+      "disposition": "review narrative corrected by Sol collection evidence; decision did not depend on the count"
+    },
+    {
+      "id": "r64-review-test-file-distribution-misreport",
+      "disposition": "review reported 83/24 while Sol and later exact review established the actual focused distribution"
+    },
+    {
+      "id": "constraint-filter-first-patch-wrong-query",
+      "disposition": "caught before tests, commit, review or runtime and corrected"
+    },
+    {
+      "id": "constraint-filter-unsafe-kind-allowlist",
+      "disposition": "caught before review or runtime and replaced by trigger-only exclusion"
+    },
+    {
+      "id": "r68-invented-full-head",
+      "disposition": "preflight rejected it; literal git rev-parse HEAD was used before dispatch"
+    },
+    {
+      "id": "r68-receipt-and-verifier-command-chained",
+      "disposition": "the receipt passed, but chaining was rejected as a workflow control breach and never repeated"
+    },
+    {
+      "id": "closeout-nonexistent-continuity-test-path",
+      "disposition": "the command failed without file mutation; the exact existing plan-test path then passed"
+    },
+    {
+      "id": "terminal-predispatch-event-name-invalid",
+      "disposition": "the receipt returned revision_required; the state was corrected to pre_worker_dispatch and passed before runtime"
+    },
+    {
+      "id": "continuity-updater-direct-script-import-failure",
+      "disposition": "direct invocation failed before updater execution; the repository module invocation was used"
+    },
+    {
+      "id": "continuity-updater-incomplete-contract-evidence-linkage",
+      "disposition": "Compass validation rejected two incomplete node-evidence links; the updater was repaired and then passed idempotently"
+    }
+  ],
+  "authority_boundary": "workflow-correction-evidence-only_no-provider_product_data_runtime_or-protected-ref-authority"
+}

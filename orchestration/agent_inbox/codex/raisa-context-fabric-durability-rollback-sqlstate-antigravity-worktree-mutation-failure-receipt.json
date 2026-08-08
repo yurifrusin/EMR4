@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.detached_branch_failure.v1",
+  "status": "revision_required",
+  "candidate_head": "2da1a85f3778273a358bc00abae995b19f7d199a",
+  "failed_worktree": "C:/Users/sarashera/EMR4-worktrees/r54",
+  "failed_branch": "codex/review-disposable-pg-sqlstate-2da1a85f",
+  "transport_result": "Antigravity verifier modified its read-only candidate worktree",
+  "unauthorized_change": {
+    "path": "uv.lock",
+    "old": "requires-python = \">=3.14\"",
+    "new": "requires-python = \">=3.12\""
+  },
+  "acceptance_authority": false,
+  "runtime_authority": false,
+  "disposition": "Leave r54 isolated as failure evidence; use a fresh exact-HEAD r55 and explicitly fixed primary-venv commands without uv."
+}

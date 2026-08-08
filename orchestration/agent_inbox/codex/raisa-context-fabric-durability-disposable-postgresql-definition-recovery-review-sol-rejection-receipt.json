@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.sol-review-reconciliation.v1",
+  "status": "revision_required",
+  "candidate_head": "b51e766ea62b5ca0efcc23ca843bf75fa51b1036",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-definition-recovery-review-receipt.json",
+  "review_decision": "pass",
+  "admitted": false,
+  "provider_or_model_calls_after_review": 0,
+  "database_or_docker_calls": 0,
+  "findings": [
+    {
+      "severity": "P1",
+      "id": "output_cap_was_post_collection_not_bounded_capture",
+      "detail": "The candidate used Popen.communicate() and tested stdout/stderr length only after each stream had been accumulated in memory. The reviewer reported this as capped collection, but an abnormal child could emit unbounded bytes before the retrospective rejection."
+    }
+  ],
+  "recovery": "Replace communicate() with concurrent hard-capped stdout/stderr readers and an independent stdin writer; terminate at the byte cap, preserve process timeout and bounded digests, hostile-test the live read cap, then obtain another fresh exact-HEAD veto before any Docker/database contact.",
+  "authority_boundary": "rejected_review_preserved_no_runtime_or_acceptance_authority"
+}

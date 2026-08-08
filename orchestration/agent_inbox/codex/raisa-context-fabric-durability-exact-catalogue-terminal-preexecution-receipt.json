@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_separate_terminal_exact_digest_bound_pull_never_networkless_postgresql_16_rehearsal_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted next action is one separate terminal exact_digest_bound rehearsal that must reproduce all fifteen digests and every structural assertion before the harness may emit raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial terminal runtime and cleanup; Gemini 3.6 Flash/high independently passed r69 at exact HEAD with zero P0-P3 and clean postflight.",
+    "git_refs_and_worktree": "Primary tracked and index trees are clean at exact c3ca2515b9f2c4b20cb7230364de7417f48eab54; r69 postflight is clean; exact image is sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8; characterization container a60e76c4608f929b674dcda2140f89155c85b7f806785ba53ae002452eb3a392 is absent; protected refs remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and docs/branding/ remains untracked and excluded.",
+    "live_handover_current_baton": "The characterization-only run position-closed all fifteen value-bearing catalogue digests without pass; exact-bound candidate c3ca2515b9f2c4b20cb7230364de7417f48eab54 now has a fresh independent zero-defect veto.",
+    "protected_evidence_boundaries": "One exact local postgres:16-bookworm --pull=never --network=none tmpfs-only container using repository-authored synthetic empty prerequisite shapes; no behavioral function/trigger/RLS exercise, application runtime, patient/product data, provider call, command authority, deployment, release, Pages or protected refs."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

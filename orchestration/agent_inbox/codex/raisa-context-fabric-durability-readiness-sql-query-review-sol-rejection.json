@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.sol_review_acceptance.v1",
+  "status": "revision_required",
+  "candidate_head": "4abd6382caf0d737a62af32ae5101c1b9b800046",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-readiness-sql-query-review-receipt.json",
+  "worker_decision": "pass",
+  "sol_decision": "revision_required",
+  "findings": [
+    {
+      "severity": "P3",
+      "summary": "PostgreSQL-16 version-output rejection boundaries lack direct unit coverage.",
+      "disposition": "Add direct PG15, PG17, wrong-length, whitespace, multiple-row and extra-output tests before runtime."
+    }
+  ],
+  "precision_correction": "bytes.strip() would admit surrounding spaces even though the review claimed extra output was rejected; normalization should remove at most the psql line ending.",
+  "runtime_permitted": false
+}

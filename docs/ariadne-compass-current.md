@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 231 / Compass 213. The provider-free unmounted durability inert DDL rehearsal passes at exact reviewed HEAD. A separately bounded disposable PostgreSQL-16 parse-and-catalogue rehearsal is next; applied migration and every operational boundary remain closed.
+> EMR4 is at Continuity 232 / Compass 214. The provider-free disposable PostgreSQL-16 durability parse/catalogue rehearsal passes at exact reviewed runtime source HEAD. A separately bounded database-backed authored-synthetic behavior/transaction rehearsal is next; application and operational boundaries remain closed.
 
 ## North star
 
@@ -236,24 +236,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The nine entry-point and thirteen trigger-function body programs pass while SQL lowering and every executable/live boundary remain closed. Lineage parent: `raisa-provider-free-unmounted-durability-migration-transaction-architecture`.
 110. **Lower exact durability contracts into inert PostgreSQL-16 evidence — Unmounted durability inert DDL rehearsal**
    The recovered byte-stable DDL artifact passes static admission while database execution and every operational boundary remain closed. Lineage parent: `raisa-provider-free-unmounted-durability-function-trigger-body-architecture`.
+111. **Prove exact durability DDL against an isolated PostgreSQL 16 server — Disposable PostgreSQL durability parse/catalogue rehearsal**
+   Atomic admission, rollback, exact catalogue shape and exact-ID cleanup pass while every behavioral and operational boundary remains closed. Lineage parent: `raisa-provider-free-unmounted-durability-inert-ddl-rehearsal`.
 
 ## Current position
 
-**Inert durability DDL accepted; disposable PostgreSQL planning is next — Unmounted durability inert DDL rehearsal**
+**Durability catalogue admission accepted; bounded behavior planning is next — Disposable PostgreSQL durability parse/catalogue rehearsal**
 
-**Why this proof came next:** The exact renderer and static recognizer now close the translation boundary, so server parsing can be isolated as its own disposable gate.
+**Why this proof came next:** The exact artifact now parses and installs atomically with a closed catalogue, so selected behavior can be isolated as a later finite gate.
 
-The 412-statement artifact passes 62 tests and a fresh independent veto with no P0-P3 issue.
+All fifteen exact value-bearing catalogue digests, rollback proof and owned cleanup pass with 109 tests and a zero-defect fresh veto.
 
 ### What this unlocks
 
-- Freeze the smallest disposable PostgreSQL-16 parse-and-catalogue rehearsal plan.
-- Use only the accepted inert artifact and synthetic prerequisite stubs with owned cleanup and no application migration.
+- Freeze the smallest database-backed authored-synthetic behavior/transaction rehearsal plan.
+- Select finite entry-point, trigger, RLS and rollback scenarios without application wiring or operational data.
 
 ### What it does not solve
 
-- PostgreSQL execution or catalogue acceptance, trigger/RLS behavior, concurrency or migration safety.
-- Operational database/outbox/feed/watcher/listener/source access, credentials or persistence.
+- Function/trigger/RLS behavior, concurrency, idempotency or application transaction safety.
+- Applied migration, operational database/outbox/feed/watcher/listener/source access, credentials or persistence.
 - Application/runtime implementation, product reads, patient/product data, providers, routes or commands.
 - Deployment, production, release, Pages or protected-ref movement.
 
@@ -324,9 +326,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Exact durability structure, bodies and inert PostgreSQL-16 lowering are accepted at fresh reviewed HEADs.
-- The next safe descendant is a separately bounded provider-free disposable local PostgreSQL parse-and-catalogue rehearsal.
-- Separately gate applied migration, application behavior, concurrency, live sources, product/patient data, commands, deployment and production.
+- Exact durability structure, bodies, inert lowering and isolated PostgreSQL-16 catalogue admission are accepted at fresh reviewed HEADs.
+- The next safe descendant is a separately bounded provider-free database-backed authored-synthetic behavior/transaction rehearsal.
+- Separately gate applied migration, application wiring, operational sources, product/patient data, commands, deployment and production.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -515,6 +517,7 @@ Prerequisites:
 
 ## Map limits
 
+- Disposable PostgreSQL catalogue acceptance proves exact parse, atomic installation/rollback and metadata shape only; it does not prove function, trigger or RLS behavior, concurrency, applied migration, application runtime, operational source access, persistence, command or deployment safety.
 - Inert DDL acceptance proves deterministic closed-subset PostgreSQL-16 text, not server parse, catalogue creation, trigger/RLS behavior, an applied migration, database/source access, persistence, command, runtime or deployment safety.
 - Durability body-architecture acceptance proves exact typed programmes and static hostile-mutation resistance, not rendered or executable SQL/DDL, an applied migration, database/source contact, persistence, product-read, provider, command, runtime or deployment safety.
 - Durability migration/transaction acceptance proves declarative structure and transaction semantics, not executable bodies, SQL/DDL, a migration, database/source contact, persistence, product-read, provider, command, runtime or deployment safety.
@@ -822,6 +825,10 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`
 - `docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md`
 - `docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md`
+- `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-closeout.md`
+- `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-design.md`
+- `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md`
+- `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md`
 - `docs/raisa-provider-free-office-lifecycle-observability-closeout.md`
@@ -953,6 +960,7 @@ Prerequisites:
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md`
@@ -1000,6 +1008,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-function-trigger-body-architecture-r7-final-review-retry-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
@@ -1058,6 +1067,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-9-independent-veto.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-state-machine-rehearsal-final-independent-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-function-trigger-body-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-live-source-observation-architecture-analysis.md`
@@ -1295,6 +1305,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-catalogue-characterization.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
@@ -1657,4 +1669,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 213; continuity graph revision 231._
+_Compass map revision 214; continuity graph revision 232._

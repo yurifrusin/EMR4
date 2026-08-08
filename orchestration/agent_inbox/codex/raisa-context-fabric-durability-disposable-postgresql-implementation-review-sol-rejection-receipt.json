@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.sol-review-reconciliation.v1",
+  "status": "revision_required",
+  "candidate_head": "1fd3445aea5839b7aa889fc962faa8ad2be0c95e",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-disposable-postgresql-implementation-review-receipt.json",
+  "review_decision": "pass",
+  "admitted": false,
+  "provider_or_model_calls_after_review": 0,
+  "database_or_docker_calls": 0,
+  "findings": [
+    {
+      "severity": "P1",
+      "id": "same_name_catalogue_definition_drift_not_rejected",
+      "detail": "The harness fixed object populations but did not compare fabric column/default details, constraint/index definitions, policy roles/expressions, complete function attributes/search paths, complete trigger properties or exact non-owner ACL populations. Same-name definition drift could therefore be released as an exact catalogue match."
+    },
+    {
+      "severity": "P1",
+      "id": "container_resource_and_tmpfs_readback_underchecked",
+      "detail": "Containment admission checked only tmpfs destination presence and omitted exact memory, CPU, PID, tmpfs option, port-binding and synthetic environment readback despite the plan requiring exact configuration facts."
+    },
+    {
+      "severity": "P2",
+      "id": "total_execution_deadline_not_enforced",
+      "detail": "Individual operations were bounded but docker_profile.total_timeout_seconds was not applied to the aggregate non-cleanup execution path."
+    }
+  ],
+  "recovery": "Expand fixed catalogue projections, freeze exact PostgreSQL-16 query digests through a fresh-vetoed characterization-only run that cannot pass, enforce complete containment readback and an absolute execution deadline with cleanup reserve, then bind the observed digests and obtain another fresh exact-HEAD veto before the terminal run.",
+  "authority_boundary": "rejected_review_preserved_no_runtime_or_acceptance_authority"
+}
