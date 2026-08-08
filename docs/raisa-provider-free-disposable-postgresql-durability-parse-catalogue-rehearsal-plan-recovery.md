@@ -76,7 +76,12 @@ expressions, function identities/results/attributes/search paths, trigger
 timing/level/event masks/deferrability and every explicit non-owner
 schema/relation/function privilege. Resource readback now includes exact
 memory, CPU, PID, tmpfs, port and synthetic environment facts, and an absolute
-execution deadline reserves bounded time for exact-ID cleanup.
+execution deadline reserves bounded time for exact-ID cleanup. A subsequent
+Sol post-veto check also found that output was rejected only after
+`communicate()` had accumulated it; the repaired runner now drains stdout and
+stderr concurrently into hard byte-capped buffers and terminates the child at
+the cap, so rejection is a real memory boundary rather than a retrospective
+size check.
 
 The expected PostgreSQL-16 deparse digests cannot safely be guessed from the
 source spelling. The repaired contract therefore begins in

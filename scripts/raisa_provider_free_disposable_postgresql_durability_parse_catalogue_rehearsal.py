@@ -16,6 +16,7 @@ import secrets
 import shutil
 import subprocess
 import sys
+import threading
 import time
 from dataclasses import dataclass
 from enum import Enum
@@ -317,25 +318,111 @@ def _subprocess_runner(
 ) -> ProcessResult:
     if not argv or Path(argv[0]).name.lower() != "docker.exe":
         raise RehearsalFailure("process", "executable_not_docker_exe")
-    process = subprocess.Popen(
-        argv,
-        stdin=subprocess.PIPE if stdin is not None else subprocess.DEVNULL,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        shell=False,
-        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
-    )
     try:
-        stdout, stderr = process.communicate(input=stdin, timeout=timeout)
-    except subprocess.TimeoutExpired as error:
+        process = subprocess.Popen(
+            argv,
+            stdin=subprocess.PIPE if stdin is not None else subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=False,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+        )
+    except OSError as error:
+        raise RehearsalFailure("process", "start_failed", str(error.errno)) from error
+    if process.stdout is None or process.stderr is None:
         process.kill()
-        stdout, stderr = process.communicate()
+        raise RehearsalFailure("process", "capture_pipe_missing")
+    stdout_buffer = bytearray()
+    stderr_buffer = bytearray()
+    overflow = threading.Event()
+    io_errors: list[str] = []
+    error_lock = threading.Lock()
+
+    def record_io_error(name: str) -> None:
+        with error_lock:
+            io_errors.append(name)
+
+    def read_bounded(stream: Any, buffer: bytearray, name: str) -> None:
+        try:
+            while True:
+                chunk = stream.read(8192)
+                if not chunk:
+                    break
+                remaining = cap - len(buffer)
+                if remaining > 0:
+                    buffer.extend(chunk[:remaining])
+                if len(chunk) > remaining:
+                    overflow.set()
+                    try:
+                        process.kill()
+                    except OSError:
+                        pass
+                    break
+        except (OSError, ValueError):
+            record_io_error(name)
+        finally:
+            try:
+                stream.close()
+            except (OSError, ValueError):
+                pass
+
+    def write_input() -> None:
+        if process.stdin is None or stdin is None:
+            return
+        try:
+            process.stdin.write(stdin)
+            process.stdin.flush()
+        except (BrokenPipeError, OSError, ValueError):
+            if process.poll() is None:
+                record_io_error("stdin")
+        finally:
+            try:
+                process.stdin.close()
+            except (OSError, ValueError):
+                pass
+
+    threads = [
+        threading.Thread(
+            target=read_bounded,
+            args=(process.stdout, stdout_buffer, "stdout"),
+            daemon=True,
+        ),
+        threading.Thread(
+            target=read_bounded,
+            args=(process.stderr, stderr_buffer, "stderr"),
+            daemon=True,
+        ),
+    ]
+    if stdin is not None:
+        threads.append(threading.Thread(target=write_input, daemon=True))
+    for thread in threads:
+        thread.start()
+    timed_out = False
+    try:
+        process.wait(timeout=timeout)
+    except subprocess.TimeoutExpired as error:
+        timed_out = True
+        process.kill()
+        process.wait()
+        for thread in threads:
+            thread.join()
         raise RehearsalFailure(
-            "process", "timeout", _bytes_sha((stdout + stderr)[:cap])
+            "process",
+            "timeout",
+            _bytes_sha(bytes(stdout_buffer) + bytes(stderr_buffer)),
         ) from error
-    if len(stdout) > cap or len(stderr) > cap:
+    finally:
+        if timed_out and process.poll() is None:
+            process.kill()
+    for thread in threads:
+        thread.join()
+    if overflow.is_set():
         raise RehearsalFailure("process", "output_cap_exceeded")
-    return ProcessResult(process.returncode, stdout, stderr)
+    if io_errors:
+        raise RehearsalFailure("process", "pipe_io_failure", sorted(io_errors)[0])
+    return ProcessResult(
+        int(process.returncode), bytes(stdout_buffer), bytes(stderr_buffer)
+    )
 
 
 def _with_total_deadline(runner: Runner, deadline: float) -> Runner:

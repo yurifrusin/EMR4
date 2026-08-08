@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import ast
 import copy
+import io
 import inspect
 import json
 from pathlib import Path
@@ -383,6 +384,38 @@ def test_subprocess_boundary_is_argv_only_and_shell_false() -> None:
     assert "CREATE_NO_WINDOW" in source
     assert "os.system" not in source
     assert "subprocess.run(" not in source
+    assert ".communicate(" not in source
+    assert "threading.Thread" in source
+
+
+def test_subprocess_output_is_bounded_during_pipe_read(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class FakeProcess:
+        def __init__(self) -> None:
+            self.stdin = None
+            self.stdout = io.BytesIO(b"x" * 2049)
+            self.stderr = io.BytesIO(b"")
+            self.returncode = 0
+
+        def wait(self, timeout: float | None = None) -> int:
+            del timeout
+            return self.returncode
+
+        def kill(self) -> None:
+            self.returncode = -9
+
+        def poll(self) -> int:
+            return self.returncode
+
+    monkeypatch.setattr(rehearsal.subprocess, "Popen", lambda *args, **kwargs: FakeProcess())
+    with pytest.raises(rehearsal.RehearsalFailure, match="output_cap_exceeded"):
+        rehearsal._subprocess_runner(  # noqa: SLF001
+            [r"C:\Docker\docker.exe", "container", "inspect", "fixed"],
+            None,
+            1.0,
+            1024,
+        )
 
 
 def test_absolute_execution_deadline_caps_calls_and_fails_closed(
