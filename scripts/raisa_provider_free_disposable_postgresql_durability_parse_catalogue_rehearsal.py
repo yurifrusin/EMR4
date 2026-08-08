@@ -1187,6 +1187,41 @@ def _facts_digest(value: Any) -> str:
     return _canonical_sha(value)
 
 
+def _constraint_population_diagnostic(
+    rows: list[dict[str, Any]], expected_identifiers: set[str]
+) -> dict[str, Any]:
+    """Return value-free counts/digests for a constraint population mismatch."""
+    actual_identifiers = {row["identifier"] for row in rows}
+    closed_kinds = ("c", "f", "other", "p", "u")
+    expected_kind_counts = {kind: 0 for kind in closed_kinds}
+    prefix_kinds = {"ck_": "c", "fk_": "f", "pk_": "p", "uq_": "u"}
+    for identifier in expected_identifiers:
+        name = identifier.rsplit(".", 1)[-1]
+        kind = next(
+            (value for prefix, value in prefix_kinds.items() if name.startswith(prefix)),
+            "other",
+        )
+        expected_kind_counts[kind] = expected_kind_counts.get(kind, 0) + 1
+    actual_kind_counts = {kind: 0 for kind in closed_kinds}
+    for row in rows:
+        kind = row.get("constraint_kind", "other")
+        if kind not in {"c", "f", "p", "u"}:
+            kind = "other"
+        actual_kind_counts[kind] += 1
+    missing = sorted(expected_identifiers - actual_identifiers)
+    unexpected = sorted(actual_identifiers - expected_identifiers)
+    return {
+        "expected_count": len(expected_identifiers),
+        "actual_count": len(actual_identifiers),
+        "missing_count": len(missing),
+        "unexpected_count": len(unexpected),
+        "expected_kind_counts": dict(sorted(expected_kind_counts.items())),
+        "actual_kind_counts": dict(sorted(actual_kind_counts.items())),
+        "missing_identifiers_sha256": _facts_digest(missing),
+        "unexpected_identifiers_sha256": _facts_digest(unexpected),
+    }
+
+
 def _normalized_catalogue_type(value: str) -> str:
     return {
         "timestamp with time zone": "timestamptz",
@@ -1865,6 +1900,17 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                     raise RehearsalFailure("catalogue", "query_population")
                 if facts["extensions"] != baseline_extensions:
                     raise RehearsalFailure("catalogue", "extension_population_changed")
+                expected_constraints = _expected_sets(manifest)["CONSTRAINT"]
+                if {
+                    row["identifier"] for row in facts["constraints"]
+                } != expected_constraints:
+                    catalogue = {
+                        "status": "population_mismatch",
+                        "constraint_population": _constraint_population_diagnostic(
+                            facts["constraints"], expected_constraints
+                        ),
+                    }
+                    raise RehearsalFailure("catalogue", "constraint_population")
                 assertion = _assert_catalogue(
                     facts, manifest, prerequisite, contract
                 )

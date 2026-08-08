@@ -341,3 +341,19 @@ The parent packet passed 71/71 focused checks, renderer self-recognition and a
 fresh Gemini 3.6 Flash/high exact-HEAD veto with zero P0-P3 findings. The
 disposable child remains in non-passing characterization mode and must bind
 this exact parent before another run.
+
+## Constraint-population observability
+
+Attempt `c13e4138f320183faed91c87` passed stable readiness, the exact late-suffix
+rollback case, success-database prerequisites and full admission of the exact
+412-statement parent artifact. It reached catalogue readback for the first
+time and stopped at `constraint_population`. Exact container
+`7ada3d758cf8563df13fa69de5fe0b9794f71ad5c9f215d1870643bb11561a56`
+was removed and absence verified.
+
+The existing failure evidence retained no catalogue discriminator. The next
+bounded diagnostic records only expected/actual/missing/unexpected counts,
+closed constraint-kind counts and canonical SHA-256 digests of the sorted
+missing/unexpected identifier sets. It retains no identifier, definition, SQL
+or server error text and cannot influence a query, command, cleanup target or
+retry. SQL, contracts, catalogue assertions and authority remain unchanged.

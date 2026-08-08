@@ -889,6 +889,44 @@ def test_catalogue_population_mutations_fail_closed(field: str, code: str) -> No
         )
 
 
+def test_constraint_population_diagnostic_is_value_free_and_exact() -> None:
+    expected = rehearsal._expected_sets(MANIFEST)["CONSTRAINT"]  # noqa: SLF001
+    rows = _valid_facts()["constraints"]
+    removed = rows.pop()
+    unexpected_identifier = "emr4_context_fabric.synthetic.unexpected_constraint"
+    rows.append(
+        {
+            "identifier": unexpected_identifier,
+            "constraint_kind": "z",
+            "deferrable": False,
+            "initially_deferred": False,
+            "definition": "private definition",
+        }
+    )
+
+    diagnostic = rehearsal._constraint_population_diagnostic(  # noqa: SLF001
+        rows, expected
+    )
+    assert diagnostic["expected_count"] == len(expected)
+    assert diagnostic["actual_count"] == len(expected)
+    assert diagnostic["missing_count"] == 1
+    assert diagnostic["unexpected_count"] == 1
+    assert diagnostic["missing_identifiers_sha256"] == rehearsal._facts_digest(  # noqa: SLF001
+        [removed["identifier"]]
+    )
+    assert diagnostic["unexpected_identifiers_sha256"] == rehearsal._facts_digest(  # noqa: SLF001
+        [unexpected_identifier]
+    )
+    assert set(diagnostic["expected_kind_counts"]) == {"c", "f", "other", "p", "u"}
+    assert set(diagnostic["actual_kind_counts"]) == {"c", "f", "other", "p", "u"}
+    assert diagnostic["expected_kind_counts"]["other"] == 0
+    assert diagnostic["actual_kind_counts"]["other"] == 1
+    rendered = json.dumps(diagnostic)
+    assert removed["identifier"] not in rendered
+    assert unexpected_identifier not in rendered
+    assert "private definition" not in rendered
+
+
 def test_public_acl_and_runtime_schema_create_fail_closed() -> None:
     facts = _valid_facts()
     facts["schema_acl"] = [{"grantee": "PUBLIC", "privilege": "USAGE", "grantable": False}]
