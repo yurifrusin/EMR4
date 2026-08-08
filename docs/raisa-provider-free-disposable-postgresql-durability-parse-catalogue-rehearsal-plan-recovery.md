@@ -308,3 +308,28 @@ The next bounded diagnostic adds only numeric statement-relative `LINE`, error
 `POSITION`/`INTERNAL POSITION`, and PL/pgSQL context-line coordinates, each
 range-limited to the authored artifact. Error text, tokens and values remain
 absent. This is evidence-only and changes no SQL, contract, retry or authority.
+
+## PL/pgSQL reserved-symbol recovery
+
+Attempt `6427452426e6a7f5945fd8e5` reproduced the exact artifact SQLSTATE `42601`
+at artifact line `1980` and added the bounded statement-relative coordinate
+`352`. No position or context value was emitted. Exact container
+`b141e1b8f8568c63b46d66afd420c30bd7de52062be6ff3c3bf63d4e4d064972`
+was removed and absence verified.
+
+The function statement begins at artifact line `992`, so statement line `352`
+maps exactly to artifact line `1343`. That line is the first embedded-SQL
+qualified use of the logical local `primary`, in `primary.key_id`. PostgreSQL's
+PL/pgSQL declaration grammar admitted the local name, but the embedded SQL
+grammar reserves `PRIMARY`; the same logical symbol would affect its later
+qualified references.
+
+The parent renderer therefore keeps the immutable logical symbol and body
+contract unchanged while lowering `primary` to the physical function-local
+identifier `cf_primary_admission` at every declaration, input/output and
+expression reference. Physical aliases are checked for collision before body
+rendering. No type, object, statement, expression meaning, function identity,
+trigger, policy, privilege, application relation or authority changes. The
+canonical parent artifact and manifest must be regenerated, focused hostile
+tests and a fresh exact-HEAD veto must pass, and the descendant must bind the
+resulting parent commit and exact bytes before another disposable run.

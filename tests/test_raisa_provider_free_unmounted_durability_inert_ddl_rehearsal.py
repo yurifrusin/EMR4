@@ -30,6 +30,7 @@ from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import
     _emit_lock_exact,
     _ordered_composites,
     _render_relations,
+    _symbol_ident,
     _type_sql,
     _verify_trigger_terminals,
     _walk_program_nodes,
@@ -222,6 +223,54 @@ def test_renderer_uses_physical_pg_catalog_type_names() -> None:
     assert "    eligible pg_catalog.bool," in sql
     assert "    stream_epoch pg_catalog.int8," in sql
     assert "0::pg_catalog.int4" in sql
+
+
+def test_renderer_aliases_reserved_primary_local_without_contract_drift() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    body = result["loaded"]["body"]
+    apply_program = next(
+        program
+        for program in body["body_programs"]
+        if program["id"] == "emr4_context_fabric.apply_durability_transition_v1"
+    )
+
+    assert _symbol_ident("primary") == "cf_primary_admission"
+    assert any(symbol["id"] == "primary" for symbol in apply_program["symbols"])
+    assert (
+        "cf_primary_admission "
+        "emr4_context_fabric.context_proofread_observation_admission;"
+    ) in sql
+    assert "cf_primary_admission.key_id" in sql
+    assert re.search(r"\bprimary\.[a-zA-Z_]", sql) is None
+    assert "INTO STRICT primary" not in sql
+
+
+def test_renderer_rejects_physical_symbol_alias_collision() -> None:
+    rendered = _base_render()
+    body = copy.deepcopy(rendered["loaded"]["body"])
+    effective = rendered["effective"]
+    program = next(
+        item
+        for item in body["body_programs"]
+        if item["id"] == "emr4_context_fabric.apply_durability_transition_v1"
+    )
+    primary = next(symbol for symbol in program["symbols"] if symbol["id"] == "primary")
+    collision = copy.deepcopy(primary)
+    collision["id"] = "cf_primary_admission"
+    program["symbols"].append(collision)
+
+    signature = next(
+        item
+        for item in effective["signatures"]["entry_points"]
+        if item["id"] == program["id"]
+    )
+    with pytest.raises(ValueError, match="physical PL/pgSQL symbol alias collision"):
+        from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import (  # noqa: PLC0415
+            _render_program_function,
+        )
+
+        _render_program_function(program, signature, {"effective": effective})
 
 
 def test_renderer_omits_modeled_system_xmin_from_create_tables() -> None:

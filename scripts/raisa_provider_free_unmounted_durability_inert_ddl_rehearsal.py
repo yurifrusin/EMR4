@@ -331,6 +331,20 @@ def _ident(identifier: str) -> str:
     return identifier
 
 
+PLPGSQL_SYMBOL_ALIASES = {
+    # PRIMARY is accepted as a PL/pgSQL declaration name but is reserved when
+    # the embedded SQL parser reaches a qualified record-field reference.
+    # Preserve the accepted logical contract name and lower only its physical
+    # function-local spelling.
+    "primary": "cf_primary_admission",
+}
+
+
+def _symbol_ident(identifier: str) -> str:
+    """Emit one physical PL/pgSQL symbol without changing logical contract IDs."""
+    return _ident(PLPGSQL_SYMBOL_ALIASES.get(identifier, identifier))
+
+
 def _type_sql(type_name: str) -> str:
     """Normalize a qualified type to PostgreSQL SQL type text."""
     physical_catalog_types = {
@@ -1628,9 +1642,9 @@ def _render_ref_like(ref: dict[str, Any]) -> str:
         return render_expr(ref)
     kind = ref["kind"]
     if kind == "LOCAL":
-        return _ident(ref["symbol"])
+        return _symbol_ident(ref["symbol"])
     if kind == "INPUT":
-        return _ident(ref["symbol"])
+        return _symbol_ident(ref["symbol"])
     raise ValueError("unknown bare symbol kind " + kind)
 
 
@@ -1686,9 +1700,9 @@ def _render_ref(expr: dict[str, Any]) -> str:
             return "session_user"
         return field
     if kind == "ROW_COLUMN":
-        return _ident(expr["symbol"]) + "." + _ident(expr["column"])
+        return _symbol_ident(expr["symbol"]) + "." + _ident(expr["column"])
     if kind in ("LOCAL", "INPUT"):
-        return _ident(expr["symbol"])
+        return _symbol_ident(expr["symbol"])
     if kind == "TRIGGER_COLUMN":
         return _ident(expr["image"]) + "." + _ident(expr["column"])
     raise ValueError("unknown REF kind " + kind)
@@ -1914,7 +1928,7 @@ def _emit_select_exact(
     rel = _fabric(ops["relation"])
     cols = _select_columns(ops["relation"], ops["columns"])
     pred = render_expr(ops["predicate"]) if "predicate" in ops else "TRUE"
-    out = _ident(ops["output_symbol"])
+    out = _symbol_ident(ops["output_symbol"])
     order = _order_sql(ops.get("order_by"), ops["relation"])
     order_clause = " ORDER BY " + order if order else ""
     body = (
@@ -1939,7 +1953,7 @@ def _emit_lock_exact(
     rel = _fabric(ops["relation"])
     cols = _select_columns(ops["relation"], ops["columns"])
     pred = render_expr(ops["predicate"]) if "predicate" in ops else "TRUE"
-    out = _ident(ops["output_symbol"])
+    out = _symbol_ident(ops["output_symbol"])
     if ops["mode"] not in _LOCK_MODE_SQL:
         raise ValueError("unknown lock mode " + str(ops["mode"]))
     lock_sql = _LOCK_MODE_SQL[ops["mode"]]
@@ -1967,7 +1981,7 @@ def _emit_select_set(
     out_type = _type_sql(ctx["symbol_types"].get(ops["output_symbol"], "text"))
     row_type = out_type[:-2] if out_type.endswith("[]") else out_type
     pred = render_expr(ops["predicate"]) if "predicate" in ops else "TRUE"
-    out = _ident(ops["output_symbol"])
+    out = _symbol_ident(ops["output_symbol"])
     projected = set(ops.get("columns", []))
     column_types = ctx["effective"]["column_types"].get(rel, {})
     row_items: list[str] = []
@@ -2007,7 +2021,7 @@ def _emit_let(node: dict[str, Any], ctx: dict[str, Any], indent: int) -> list[st
     pad = "    " * indent
     return [
         pad
-        + _ident(ops["output_symbol"])
+        + _symbol_ident(ops["output_symbol"])
         + " := "
         + render_expr(ops["expression"])
         + ";"
@@ -2049,7 +2063,12 @@ def _emit_return_row(
     node: dict[str, Any], ctx: dict[str, Any], indent: int
 ) -> list[str]:
     pad = "    " * indent
-    return [pad + "RETURN " + _ident(node["operands"]["source_symbol"]) + ";"]
+    return [
+        pad
+        + "RETURN "
+        + _symbol_ident(node["operands"]["source_symbol"])
+        + ";"
+    ]
 
 
 def _emit_return_terminal(
@@ -2069,7 +2088,7 @@ def _emit_call_support(
     args = ", ".join(render_expr(arg) for arg in ops["arguments"])
     return [
         pad
-        + _ident(ops["output_symbol"])
+        + _symbol_ident(ops["output_symbol"])
         + " := "
         + _fabric(ops["function"])
         + "("
@@ -2125,7 +2144,7 @@ def _emit_insert(node: dict[str, Any], ctx: dict[str, Any], indent: int) -> list
         + "    RETURNING "
         + returning
         + " INTO "
-        + _ident(ops["output_symbol"])
+        + _symbol_ident(ops["output_symbol"])
         + ";",
         pad + "IF NOT FOUND THEN",
         pad + "    " + CARDINALITY_FAILURE + ";",
@@ -2152,7 +2171,7 @@ def _emit_update(node: dict[str, Any], ctx: dict[str, Any], indent: int) -> list
         + " RETURNING "
         + returning
         + " INTO STRICT "
-        + _ident(ops["output_symbol"])
+        + _symbol_ident(ops["output_symbol"])
         + ";"
     )
     return [_exactly_one_block(body, indent) + ";"]
@@ -2168,7 +2187,7 @@ def _emit_delete_source(
     order = ", ".join(rel + "." + _ident(col) for col in keys)
     key_list = ", ".join(rel + "." + _ident(col) for col in keys)
     key_eq = " AND ".join("d." + _ident(col) + " = s." + _ident(col) for col in keys)
-    out = _ident(ops["output_symbol"])
+    out = _symbol_ident(ops["output_symbol"])
     pad = "    " * indent
     return [
         pad + "WITH selected_keys AS (",
@@ -2242,7 +2261,7 @@ def _emit_insert_or_reload_compare(
         + "        RETURNING "
         + returning
         + " INTO "
-        + _ident(ops["output_symbol"])
+        + _symbol_ident(ops["output_symbol"])
         + ";",
         pad + "    IF NOT FOUND THEN",
         pad + "        " + CARDINALITY_FAILURE + ";",
@@ -2256,7 +2275,7 @@ def _emit_insert_or_reload_compare(
         + "                SELECT "
         + winner_cols
         + " INTO STRICT "
-        + _ident(ops["output_symbol"])
+        + _symbol_ident(ops["output_symbol"])
         + "\n"
         + pad
         + "                FROM "
@@ -2440,7 +2459,8 @@ def _split_qualified(identifier: str) -> tuple[str, str]:
 
 def _render_signature_args(inputs: list[dict[str, Any]]) -> str:
     return ", ".join(
-        _ident(item["name"]) + " " + _type_sql(item["type"]) for item in inputs
+        _symbol_ident(item["name"]) + " " + _type_sql(item["type"])
+        for item in inputs
     )
 
 
@@ -2457,6 +2477,9 @@ def _xmin_read_symbols(program: dict[str, Any]) -> set[str]:
 
 def _render_function_body(program: dict[str, Any], ctx: dict[str, Any]) -> str:
     symbols = program["symbols"]
+    physical_symbols = [_symbol_ident(sym["id"]) for sym in symbols]
+    if len(set(physical_symbols)) != len(physical_symbols):
+        raise ValueError("physical PL/pgSQL symbol alias collision")
     ctx["symbol_types"] = {sym["id"]: sym["type"] for sym in symbols}
     xmin_syms = _xmin_read_symbols(program)
     decls: list[str] = []
@@ -2466,9 +2489,11 @@ def _render_function_body(program: dict[str, Any], ctx: dict[str, Any]) -> str:
         if sym["id"] in xmin_syms:
             # System xmin is not a member of a table composite; a record local
             # preserves product/system-column projections for SYSTEM_XMIN reads.
-            decls.append(_ident(sym["id"]) + " record;")
+            decls.append(_symbol_ident(sym["id"]) + " record;")
         else:
-            decls.append(_ident(sym["id"]) + " " + _type_sql(sym["type"]) + ";")
+            decls.append(
+                _symbol_ident(sym["id"]) + " " + _type_sql(sym["type"]) + ";"
+            )
     has_ioc = any(
         node["op"] == "INSERT_OR_RELOAD_COMPARE"
         for node in _walk_program_nodes(program)
