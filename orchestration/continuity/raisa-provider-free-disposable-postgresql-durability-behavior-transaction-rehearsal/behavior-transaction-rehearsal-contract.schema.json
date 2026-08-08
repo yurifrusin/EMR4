@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-disposable-postgresql-behavior-transaction-rehearsal.v1.json",
+  "title": "Raisa Context Fabric disposable PostgreSQL behavior/transaction rehearsal contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline_head",
+    "evidence_label",
+    "parent_bindings",
+    "runtime_profile",
+    "fixture_namespace",
+    "fixture_privileges",
+    "scenario_order",
+    "scenarios",
+    "category_coverage",
+    "evidence_contract",
+    "claim_boundary",
+    "closed_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.raisa-context-fabric-disposable-postgresql-behavior-transaction-rehearsal.v1"},
+    "status": {"enum": ["candidate_pending_independent_veto", "accepted_plan_runtime_closed", "rejected"]},
+    "planning_baseline_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "evidence_label": {"const": "provider_free_disposable_postgresql_authored_synthetic_behavior_transaction"},
+    "parent_bindings": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/parentBinding"}
+    },
+    "runtime_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["postgresql_major", "image", "pull_policy", "network_mode", "published_ports", "mounts", "storage", "database_count", "container_count", "shell", "caller_selected_inputs", "cleanup"],
+      "properties": {
+        "postgresql_major": {"const": 16},
+        "image": {"const": "postgres:16-bookworm"},
+        "pull_policy": {"const": "never"},
+        "network_mode": {"const": "none"},
+        "published_ports": {"const": 0},
+        "mounts": {"const": 0},
+        "storage": {"const": "container_local_tmpfs"},
+        "database_count": {"const": 1},
+        "container_count": {"const": 1},
+        "shell": {"const": false},
+        "caller_selected_inputs": {"const": false},
+        "cleanup": {"const": "exact_captured_container_id_after_ownership_reverification"}
+      }
+    },
+    "fixture_namespace": {"$ref": "#/$defs/fixtureNamespace"},
+    "fixture_privileges": {"$ref": "#/$defs/fixturePrivileges"},
+    "scenario_order": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^BTR-[ETIRB][0-9]{2}$"}
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "items": {"$ref": "#/$defs/scenario"}
+    },
+    "category_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ENTRY_POINT", "TRIGGER", "RLS", "IDEMPOTENCY", "ROLLBACK", "total"],
+      "properties": {
+        "ENTRY_POINT": {"const": 6},
+        "TRIGGER": {"const": 4},
+        "RLS": {"const": 3},
+        "IDEMPOTENCY": {"const": 4},
+        "ROLLBACK": {"const": 3},
+        "total": {"const": 20}
+      }
+    },
+    "evidence_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_exact_sqlstate", "record_stable_reason_only", "record_before_after_relation_counts", "record_allowlisted_row_digests", "record_session_user_and_current_user", "record_container_id_and_image_id", "record_exact_cleanup_absence", "forbidden"],
+      "properties": {
+        "record_exact_sqlstate": {"const": true},
+        "record_stable_reason_only": {"const": true},
+        "record_before_after_relation_counts": {"const": true},
+        "record_allowlisted_row_digests": {"const": true},
+        "record_session_user_and_current_user": {"const": true},
+        "record_container_id_and_image_id": {"const": true},
+        "record_exact_cleanup_absence": {"const": true},
+        "forbidden": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proves", "does_not_prove"],
+      "properties": {
+        "proves": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "does_not_prove": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "closed_surfaces": {"type": "array", "minItems": 12, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "parentBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "source_head", "sha256"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "sha256": {"type": ["string", "null"], "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "fixtureNamespace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_contract_id", "stream_epoch", "practice_alpha", "practice_beta", "stream_alpha", "stream_beta", "appointment_temporal", "appointment_non_temporal", "appointment_negative", "appointment_beta", "observer_happy", "observer_conflict", "observer_rollback", "actor", "practitioner", "location_alpha", "location_beta", "command_position_one", "command_position_two", "command_negative_missing_member", "command_negative_insert_delete", "command_negative_second_update", "command_rollback", "audit_position_one", "audit_position_two", "audit_negative_missing_member", "audit_negative_insert_delete", "audit_negative_second_update", "audit_rollback", "event_position_one", "event_position_two", "event_negative_insert_delete", "event_negative_second_update", "event_rollback", "initial_start", "rescheduled_start", "duration_minutes", "key_id", "key_interval_start", "key_interval_end", "digest_policy", "digest_principal", "digest_binding", "digest_source", "digest_registry", "digest_impact", "digest_key_schedule", "digest_key_attestation", "digest_observation_primary", "digest_observation_conflict", "source_membership_digest_rule"],
+      "properties": {
+        "source_contract_id": {"const": "diary.appointment_rescheduled.v1"},
+        "stream_epoch": {"const": 1},
+        "practice_alpha": {"$ref": "#/$defs/uuid"},
+        "practice_beta": {"$ref": "#/$defs/uuid"},
+        "stream_alpha": {"$ref": "#/$defs/uuid"},
+        "stream_beta": {"$ref": "#/$defs/uuid"},
+        "appointment_temporal": {"$ref": "#/$defs/uuid"},
+        "appointment_non_temporal": {"$ref": "#/$defs/uuid"},
+        "appointment_negative": {"$ref": "#/$defs/uuid"},
+        "appointment_beta": {"$ref": "#/$defs/uuid"},
+        "observer_happy": {"$ref": "#/$defs/uuid"},
+        "observer_conflict": {"$ref": "#/$defs/uuid"},
+        "observer_rollback": {"$ref": "#/$defs/uuid"},
+        "actor": {"$ref": "#/$defs/uuid"},
+        "practitioner": {"$ref": "#/$defs/uuid"},
+        "location_alpha": {"$ref": "#/$defs/uuid"},
+        "location_beta": {"$ref": "#/$defs/uuid"},
+        "command_position_one": {"$ref": "#/$defs/uuid"},
+        "command_position_two": {"$ref": "#/$defs/uuid"},
+        "command_negative_missing_member": {"$ref": "#/$defs/uuid"},
+        "command_negative_insert_delete": {"$ref": "#/$defs/uuid"},
+        "command_negative_second_update": {"$ref": "#/$defs/uuid"},
+        "command_rollback": {"$ref": "#/$defs/uuid"},
+        "audit_position_one": {"$ref": "#/$defs/uuid"},
+        "audit_position_two": {"$ref": "#/$defs/uuid"},
+        "audit_negative_missing_member": {"$ref": "#/$defs/uuid"},
+        "audit_negative_insert_delete": {"$ref": "#/$defs/uuid"},
+        "audit_negative_second_update": {"$ref": "#/$defs/uuid"},
+        "audit_rollback": {"$ref": "#/$defs/uuid"},
+        "event_position_one": {"$ref": "#/$defs/uuid"},
+        "event_position_two": {"$ref": "#/$defs/uuid"},
+        "event_negative_insert_delete": {"$ref": "#/$defs/uuid"},
+        "event_negative_second_update": {"$ref": "#/$defs/uuid"},
+        "event_rollback": {"$ref": "#/$defs/uuid"},
+        "initial_start": {"type": "string", "format": "date-time"},
+        "rescheduled_start": {"type": "string", "format": "date-time"},
+        "duration_minutes": {"type": "integer", "minimum": 1, "maximum": 1440},
+        "key_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,126}$"},
+        "key_interval_start": {"const": 1},
+        "key_interval_end": {"type": "integer", "minimum": 2},
+        "digest_policy": {"$ref": "#/$defs/digest"},
+        "digest_principal": {"$ref": "#/$defs/digest"},
+        "digest_binding": {"$ref": "#/$defs/digest"},
+        "digest_source": {"$ref": "#/$defs/digest"},
+        "digest_registry": {"$ref": "#/$defs/digest"},
+        "digest_impact": {"$ref": "#/$defs/digest"},
+        "digest_key_schedule": {"$ref": "#/$defs/digest"},
+        "digest_key_attestation": {"$ref": "#/$defs/digest"},
+        "digest_observation_primary": {"$ref": "#/$defs/digest"},
+        "digest_observation_conflict": {"$ref": "#/$defs/digest"},
+        "source_membership_digest_rule": {"const": "read_exact_outbox_source_contract_digest_for_same_locator"}
+      }
+    },
+    "fixturePrivileges": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bootstrap_principal", "scenario_identity_method", "producer_application_table_grants", "fabric_direct_grant_changes", "binding_rows", "forbidden"],
+      "properties": {
+        "bootstrap_principal": {"const": "container_initialization_superuser_only_before_scenarios"},
+        "scenario_identity_method": {"const": "set_session_authorization_once_before_begin_on_fresh_connection"},
+        "producer_application_table_grants": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "fabric_direct_grant_changes": {"type": "array", "maxItems": 0},
+        "binding_rows": {"type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "forbidden": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "principal", "action", "transaction_shape", "expected_outcome", "expected_failure_id", "expected_sqlstate", "readback", "forbidden_effects"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BTR-[ETIRB][0-9]{2}$"},
+        "category": {"enum": ["ENTRY_POINT", "TRIGGER", "RLS", "IDEMPOTENCY", "ROLLBACK"]},
+        "principal": {"type": "string", "minLength": 1},
+        "action": {"type": "string", "minLength": 1},
+        "transaction_shape": {"type": "string", "minLength": 1},
+        "expected_outcome": {"enum": ["COMMIT_PASS", "COMMIT_NO_EFFECT", "COMMIT_IDEMPOTENT_REPLAY", "ROLLBACK_EXPECTED_SQLSTATE", "ROLLBACK_INJECTED", "DENIED_STANDARD_PRIVILEGE"]},
+        "expected_failure_id": {"type": ["string", "null"], "pattern": "^F_[A-Z_]+$"},
+        "expected_sqlstate": {"type": ["string", "null"], "pattern": "^[0-9A-Z]{5}$"},
+        "readback": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "forbidden_effects": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "uuid": {"type": "string", "format": "uuid"},
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

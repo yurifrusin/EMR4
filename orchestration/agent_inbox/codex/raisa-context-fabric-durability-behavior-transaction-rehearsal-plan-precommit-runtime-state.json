@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_explicit_path_behavior_transaction_rehearsal_plan_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the finite provider-free database-backed authored-synthetic behavior/transaction rehearsal plan as the next dependency-satisfied action under standing authority.",
+    "current_authority_allocation": "GPT Sol owns planning, tightly coupled transaction architecture and task-branch commit. Gemini 3.6 Flash/high receives only a later fresh exact-HEAD veto; no worker has acceptance, integration, baton or protected-ref authority.",
+    "active_plan_and_acceptance": "The candidate freezes exactly twenty serial scenarios with 6 entry-point, 4 trigger, 3 RLS, 4 idempotency and 3 rollback cases. Twenty-seven focused tests and the broader 124-node admitted packet pass; one exact pre-existing API Spine index node is clean-baseline reproduced, preserved and excluded without API changes.",
+    "protected_evidence_boundaries": "The candidate changes planning documents, closed contracts/schema, one plan test and bounded receipt state only. It starts no Docker/PostgreSQL runtime and changes no application, Alembic, API Spine, Diary, provider, product/patient data, deployment, Pages or protected surface. docs/branding and unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "Before explicit-path staging, task HEAD and origin remain bc0120f574ff4a9fb34a5d463537542f906c5916; local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. No tracked file outside the candidate allowlist is modified."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_transaction_plan_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol authored and deterministically checked the exact bounded planning packet."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Independent veto dispatch remains closed until the exact candidate commit exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is economical for the tightly coupled plan."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

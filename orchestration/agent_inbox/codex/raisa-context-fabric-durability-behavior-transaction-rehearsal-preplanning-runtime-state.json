@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the disposable PostgreSQL 16 parse/catalogue pass and names the separately bounded provider-free database-backed authored-synthetic behavior/transaction rehearsal plan as the next dependency-satisfied action under Yuri's standing uninterrupted-gate authority.",
+    "current_authority_allocation": "GPT Sol owns material planning, architecture, tightly coupled disposable-database execution, recovery and acceptance. Gemini 3.6 Flash/high through a fresh Antigravity project owns only the later exact-HEAD independent veto. No worker receives runtime, acceptance, integration, baton, protected-ref or self-certification authority.",
+    "active_plan_and_acceptance": "The accepted parse/catalogue plan, closeout and Sol acceptance prove exact PostgreSQL 16 parsing, atomic installation rollback and catalogue shape only. They admit planning for a finite entry-point, trigger, RLS, idempotency and rollback scenario set, but no behavior runtime until the new plan, threat delta, contracts, hostile tests and fresh veto pass.",
+    "protected_evidence_boundaries": "Planning may use only repository-authored synthetic contracts and metadata. Applied Alembic migration, application/API/Diary changes, operational credentials or persistence, outbox/feed/watcher/listener/source access, patient/product/protected data, providers, commands or writes, deployment, production, release, Pages and protected-ref movement remain closed. docs/branding and every unrelated untracked artifact remain preserved and excluded.",
+    "git_refs_and_worktree": "The active task branch and origin are aligned at bc0120f574ff4a9fb34a5d463537542f906c5916. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean and preserved untracked files remain unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_transaction_rehearsal_preplanning_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the fresh five-source rehydration and API Spine review before planning."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this tightly coupled planning tranche."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No independent verifier dispatch occurs before the planning packet and deterministic gate are complete."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is opened for the tightly coupled planning and disposable-database boundary."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
