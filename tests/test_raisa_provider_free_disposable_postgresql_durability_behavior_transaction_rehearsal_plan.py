@@ -71,19 +71,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-row-composite-projection-order-rebind-closeout.md",
-        "2f0047cd90a8448ec4e738483a7237fbf2860bcb",
-        "b78536969ce420332974a9ac2a404b1560d9cdb6da233185691987916c7a9940",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-body-special-form-rebind-closeout.md",
+        "436318e26959da4544f38ebcdb75cd9b08482b6f",
+        "1cff5cbb443d2bf9a4eb7b5c0ab2e3201cbd5e71cc63a95bfe7e591272213bd5",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "0931f3e658f06e02e7de4c5ea02238184da9e767",
-        "83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5",
+        "cf51e3a8de270869f4f4da3e36f6b5167b0c502a",
+        "afe131084e8a433fe87c56b48c21abef941fb04450efb252fbed10a287053b14",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "0931f3e658f06e02e7de4c5ea02238184da9e767",
-        "66c103adac8c9ba52440077e25d2f3fc58ed6d30005576034bb42115c746dd71",
+        "cf51e3a8de270869f4f4da3e36f6b5167b0c502a",
+        "a003277cd48d8609a14255cca4d2a715e6d81fb1f3e24368261c4b854a32aa96",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",

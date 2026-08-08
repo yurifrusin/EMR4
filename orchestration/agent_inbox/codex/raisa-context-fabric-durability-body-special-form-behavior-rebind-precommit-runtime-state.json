@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_parent_only_behavior_contract_rebind_and_frozen_twenty_scenario_proof_with_explicit_paths_before_fresh_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The corrected SQL passed exact PostgreSQL parse/catalogue proof at evidence commit 436318e26959da4544f38ebcdb75cd9b08482b6f. The next required gate is a parent-only behavior-contract rebind and fresh independent veto before any new behavior run.",
+    "current_authority_allocation": "GPT Sol owns the deterministic descendant rebind and acceptance. Gemini 3.6 Flash/high owns one fresh read-only exact-HEAD veto after commit; no native subagent, DeepSeek worker or provider runtime is assigned.",
+    "active_plan_and_acceptance": "Only accepted_runtime_source, inert_sql and render_manifest parent bindings change. All twenty scenario objects, order, category counts 6/4/3/4/3, fixtures, isolation set, deltas, probes, privilege and cleanup contracts remain unchanged. The canonical behavior contract becomes SHA-256 c0508158663b7e9e72cdd05f5bb14157b72a41dd893c649d25821bce55a51708. All 237 combined behavior-plan, behavior-harness, exact-parse and renderer tests pass, plus Ruff and diff check.",
+    "protected_evidence_boundaries": "This commit changes only exact parent bindings and supporting ledgers/tests. Runtime remains closed until fresh independent veto. No operational database/credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, external retrieval, command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Primary is at exact HEAD 436318e26959da4544f38ebcdb75cd9b08482b6f with only the bounded behavior rebind files and this receipt pair intended for commit. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_rehydration_parse_acceptance_and_frozen_behavior_rebind", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol machine-reconciled scenario identity and all six exact parent bindings."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh exact-HEAD Gemini 3.6 Flash/high veto follows this commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

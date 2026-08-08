@@ -47,20 +47,22 @@ The recovery:
   attempt-016 function coordinates and cleanup facts.
 
 No behavior-contract scenario, order, principal, SQLSTATE, transaction shape,
-readback name, forbidden effect or category count changes. The canonical
-behavior contract remains
-`sha256:0ac09578c56aeb6528f5a05dc1e32f5b71d953dfd43ab6d8b5030cab202e7d03`.
+readback name, forbidden effect or category count changes. The scenario content
+remains identical after its later parent-only rebind; the new canonical
+contract SHA-256 is
+`sha256:c0508158663b7e9e72cdd05f5bb14157b72a41dd893c649d25821bce55a51708`.
 The accepted body contract, rendered SQL, parse/catalogue evidence, Docker
 profile and authority boundary remain unchanged.
 
 ## Runtime gate
 
-Attempt 017 remains closed until the corrected harness and evidence packet
-pass deterministic tests, Ruff and diff checks and one fresh exact-HEAD Gemini
-3.6 Flash/high read-only veto from a clean worktree. A later eligible run is
-still limited to one newly owned, pull-never, networkless, portless,
-mountless, tmpfs-backed disposable PostgreSQL 16 container with exact-ID
-cleanup.
+Attempt 017 passed this fixture boundary and exposed the separate special-form
+defect now corrected in the rebound parent. The next behavior attempt remains
+closed until the complete rebound candidate passes deterministic tests, Ruff,
+diff checks and one fresh exact-HEAD Gemini 3.6 Flash/high read-only veto from a
+clean worktree. A later eligible run is still limited to one newly owned,
+pull-never, networkless, portless, mountless, tmpfs-backed disposable
+PostgreSQL 16 container with exact-ID cleanup.
 
 There is no patient, clinical, product-derived or protected data; no provider
 or external retrieval; no application/API/Diary wiring, operational database,

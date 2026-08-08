@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_parent_only_behavior_contract_rebind_and_frozen_twenty_scenario_proof_with_explicit_paths_before_fresh_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Only accepted_runtime_source, inert_sql and render_manifest parent bindings change. All twenty scenario objects, order, category counts 6/4/3/4/3, fixtures, isolation set, deltas, probes, privilege and cleanup contracts remain unchanged. The canonical behavior contract becomes SHA-256 c0508158663b7e9e72cdd05f5bb14157b72a41dd893c649d25821bce55a51708. All 237 combined behavior-plan, behavior-harness, exact-parse and renderer tests pass, plus Ruff and diff check.",
+    "current_authority_allocation": "GPT Sol owns the deterministic descendant rebind and acceptance. Gemini 3.6 Flash/high owns one fresh read-only exact-HEAD veto after commit; no native subagent, DeepSeek worker or provider runtime is assigned.",
+    "git_refs_and_worktree": "Primary is at exact HEAD 436318e26959da4544f38ebcdb75cd9b08482b6f with only the bounded behavior rebind files and this receipt pair intended for commit. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The corrected SQL passed exact PostgreSQL parse/catalogue proof at evidence commit 436318e26959da4544f38ebcdb75cd9b08482b6f. The next required gate is a parent-only behavior-contract rebind and fresh independent veto before any new behavior run.",
+    "protected_evidence_boundaries": "This commit changes only exact parent bindings and supporting ledgers/tests. Runtime remains closed until fresh independent veto. No operational database/credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, external retrieval, command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

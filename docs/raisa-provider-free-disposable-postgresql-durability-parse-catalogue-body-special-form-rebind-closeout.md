@@ -22,6 +22,9 @@ has SHA-256
 Container `a03f07be13b829ea5c2fc96961968f3e68b69c39d314cbcd85a6de5a461b2135`
 was removed and absence was verified.
 
+The exact evidence, closeout and acceptance receipts were committed at
+`436318e26959da4544f38ebcdb75cd9b08482b6f`.
+
 This accepts exact PostgreSQL parse, atomic installation and catalogue shape
 only. Function/trigger behavior, RLS behavior, application migration/runtime,
 operational data, provider calls, commands, deployment, release, Pages and
