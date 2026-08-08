@@ -15,9 +15,9 @@ RECOVERY = (
     ROOT
     / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan-recovery.md"
 )
-REGISTRATION_RLS_REBIND = (
+CURRENT_BODY_REBIND = (
     ROOT
-    / "docs/raisa-provider-free-unmounted-durability-function-trigger-body-registration-rls-parent-rebind.md"
+    / "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-record-projection-recovery.md"
 )
 STRUCTURAL_PARENT = (
     ROOT
@@ -40,7 +40,7 @@ CURRENT_STRUCTURAL_DIGEST = (
     "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6"
 )
 CURRENT_BODY_DIGEST = (
-    "sha256:422b7cd5203893ecd2269c9b2dbf4018ed359661d5ebe962de55afffb03c340c"
+    "sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18"
 )
 
 
@@ -62,7 +62,7 @@ def test_plan_binds_both_exact_accepted_parents_and_postgresql_16() -> None:
     assert structural["postgresql_target"]["major"] == 16
     assert PLAN_STRUCTURAL_DIGEST in plan
     assert PLAN_BODY_DIGEST in plan
-    rebind = _text(REGISTRATION_RLS_REBIND)
+    rebind = _text(CURRENT_BODY_REBIND)
     assert CURRENT_STRUCTURAL_DIGEST in rebind
     assert CURRENT_BODY_DIGEST in rebind
     assert "c55d25d6c9704ae4612ef2d123158f71302ab411" in plan

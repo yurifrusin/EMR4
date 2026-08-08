@@ -30,7 +30,7 @@ def test_recovery_preserves_parent_and_closes_effective_population() -> None:
     body = json.loads(BODY.read_text(encoding="utf-8"))
     recovery = _flat(RECOVERY)
 
-    assert body["contract_sha256"] == "sha256:422b7cd5203893ecd2269c9b2dbf4018ed359661d5ebe962de55afffb03c340c"
+    assert body["contract_sha256"] == "sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18"
     assert len(body["body_programs"]) == 22
     for required in (
         "nine entry points, fourteen trigger functions, fourteen trigger declarations and twenty-three programs",

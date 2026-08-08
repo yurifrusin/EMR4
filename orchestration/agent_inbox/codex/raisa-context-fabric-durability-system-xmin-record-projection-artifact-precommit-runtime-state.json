@@ -1,0 +1,34 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_regenerated_inert_SQL_manifest_lowering_contract_and_exact_body_parent_rebind_for_the_system_xmin_record_projection_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "The frozen behavior tranche remains the active gate. Attempt 019 and diagnosis 019a are preserved; typed body recovery source 73322f3d86d44f997c054331e06c3017831b345f now closes all fourteen unprojected LOCAL SYSTEM_XMIN consumers. The next dependency is a stable exact inert artifact source before parse/catalogue rebinding.",
+    "current_authority_allocation": "GPT Sol owns deterministic artifact regeneration, exact source binding and explicit-path commit. Gemini 3.6 Flash/high remains independent veto-only after the complete parse and behavior descendant packet is clean. No worker, provider, product runtime or protected integrator is assigned.",
+    "active_plan_and_acceptance": "The regenerated artifact binds body contract sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18 at source 73322f3d86d44f997c054331e06c3017831b345f and unchanged structural contract sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6. It remains exactly 412 statements and 1403184 LF bytes with SQL sha256:0379b35fe34eb5cc7f78a45d55a54b3b429e5f85af591e1c5bdf4080e3a15c7c. Manifest file SHA-256 is 0452f699b96eae5095ace6b99ced2820429db5d547b862b604ebc152aaac8bda and lowering-contract file SHA-256 is 1590ce29251458b369c995bb914f2c980c02681bc6549f338e46a171c032ff3f. Regenerate/check, all 76 focused inert/plan/recovery cases including the corrected documentation binding, Ruff and diff check pass.",
+    "protected_evidence_boundaries": "This artifact is inert repository evidence and is never executed or applied by this commit. No database/container run, migration, operational database or credential, watcher/listener/feed, application/API/Diary wiring, real context, patient/clinical/product/protected data, provider/model call, executable tool or command, deployment, production, release, Pages or protected-ref movement is authorized.",
+    "git_refs_and_worktree": "Primary branch codex/ariadne-bernie-davida-parallel-seam is at exact HEAD 73322f3d86d44f997c054331e06c3017831b345f with tracked changes limited to the inert renderer constants and fragment seals, four regenerated inert artifacts, two focused tests and the current recovery note. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding/, the mutable behavior evidence and every unrelated untracked file remain unstaged. Only explicit-path staging is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "five_source_rehydration_committed_typed_body_parent_and_deterministic_inert_artifact_regeneration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol regenerated and byte-checked the exact inert descendant from the committed typed body parent."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["No verifier is dispatched before parse and behavior descendant deterministic eligibility."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

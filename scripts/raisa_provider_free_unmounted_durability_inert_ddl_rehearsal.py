@@ -63,9 +63,9 @@ LOWERING_SCHEMA_PATH = OUTPUT_DIR / "lowering-contract.schema.json"
 SQL_INERT_PATH = OUTPUT_DIR / "durability-schema.sql.inert"
 MANIFEST_PATH = OUTPUT_DIR / "render-manifest.json"
 
-BODY_DIGEST = "sha256:422b7cd5203893ecd2269c9b2dbf4018ed359661d5ebe962de55afffb03c340c"
+BODY_DIGEST = "sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18"
 STRUCTURAL_SOURCE_HEAD = "9fb107ab598fba418b42be6d233c4960a6f29840"
-BODY_SOURCE_HEAD = "6ae8f2c7bf3df1fe9f89b760e9d3641384848545"
+BODY_SOURCE_HEAD = "73322f3d86d44f997c054331e06c3017831b345f"
 
 SCHEMA_NAME = "emr4_context_fabric"
 HEADER_LINE = (
@@ -134,8 +134,8 @@ RECOVERY_SPEC: dict[str, Any] = {
                 APPOINTMENT_GUARD_ID + ".update.applicability",
                 FABRIC + "cf_fence_appointment_update_v1.update.applicability",
             ],
-            "old_fragment_sha256": "sha256:a13da3698d4a8979e6c8bec08e5daa263b39a11ec51e7c28107b3adb9fd2ff86",
-            "new_fragment_sha256": "sha256:f062c783fe6eb39fe65e06656f00e743f7c1f896356362338670e2f677969c90",
+            "old_fragment_sha256": "sha256:e4c2ddc0124055547cc36e8052814d397f8f2a0cb713abfa185496e052e2b790",
+            "new_fragment_sha256": "sha256:ba2a1310e5e1ff91137c31136810aea0eb4dd88cc9634ce7d5e1f4b8ef0a33c1",
         },
         {
             "id": "RESELECT_BEFORE_TRIGGER_OLD_XMIN",

@@ -51,6 +51,12 @@ The typed trigger programme now:
 4. adds a validator invariant: a `SYSTEM_XMIN` expression over a `LOCAL` row
    is invalid unless the definitely assigned exact read projected `xmin`.
 
+The regenerated typed body contract is
+`sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18`
+at exact source HEAD `73322f3d86d44f997c054331e06c3017831b345f`.
+Its unchanged corrected structural parent remains
+`sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6`.
+
 The validator rule closes the class of defect at the architecture boundary.
 It does not rely on a later SQL string check. A hostile test removes `xmin`
 from one exact reload and requires `xmin_not_selected`; renderer tests require
