@@ -96,7 +96,9 @@ The closed runtime profile is:
 Before any database-create command, socket-level `pg_isready` and one fixed
 authenticated read-only PostgreSQL-major probe must both succeed continuously
 for three seconds. Any bootstrap-to-final-server handoff resets that interval;
-a single accepting socket is not readiness evidence.
+a single accepting socket is not readiness evidence. The authenticated probe
+also fixes a one-second connection timeout, while the host subprocess remains
+bounded by the smaller of its command ceiling and remaining startup budget.
 
 The harness may inspect only the exact image reference, the exact closed
 container name, and the exact captured container ID. It must not list global

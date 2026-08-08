@@ -45,9 +45,9 @@ out-of-order transitions. A pass is impossible without cleanup verification.
 
 Each subprocess call is built from an enum-backed operation, not a free-form
 list. Permitted operations are exact-image inspect, exact-name absence inspect,
-bounded `run --detach`, exact-ID inspect, exact-ID `exec -i` for one fixed
-`pg_isready` or `psql` operation, exact-ID removal after ownership proof, and
-exact-ID absence inspect.
+bounded `run --detach`, exact-ID inspect, exact-ID `exec` for one fixed
+`pg_isready` or `psql` operation (`-i` only for stdin-fed SQL), exact-ID removal
+after ownership proof, and exact-ID absence inspect.
 
 The create/run vector fixes image, name, labels, no-pull, no-network, tmpfs,
 resource bounds, restart disabled and authored-synthetic initialization

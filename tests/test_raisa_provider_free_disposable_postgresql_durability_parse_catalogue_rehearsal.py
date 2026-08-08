@@ -345,6 +345,25 @@ def test_psql_file_argv_binds_atomic_stdin_mode() -> None:
     assert "--command" not in argv
 
 
+def test_ready_sql_argv_is_noninteractive_and_connection_bounded() -> None:
+    argv = rehearsal.docker_argv(
+        rehearsal.DockerOperation.READY_SQL,
+        docker=r"C:\Docker\docker.exe",
+        profile=CONTRACT["docker_profile"],
+        container_id="a" * 64,
+    )
+    rehearsal.assert_closed_argv(argv, rehearsal.DockerOperation.READY_SQL)
+    assert argv[:4] == [
+        r"C:\Docker\docker.exe",
+        "exec",
+        "a" * 64,
+        "env",
+    ]
+    assert "-i" not in argv
+    assert "PGCONNECT_TIMEOUT=1" in argv
+    assert "current_setting('server_version_num')" in argv[-1]
+
+
 @pytest.mark.parametrize(
     "token",
     ["pull", "build", "login", "compose", "ps", "images", "system", "prune", "ls", "list", "--privileged", "--network=host", "-p", "--publish", "--volume", "-v"],
@@ -448,6 +467,7 @@ def test_postgres_readiness_requires_continuous_authenticated_sql() -> None:
     ready_attempts = 0
     sql_attempts = 0
     calls: list[list[str]] = []
+    observation: dict[str, Any] = {}
 
     def clock() -> float:
         return current
@@ -476,6 +496,7 @@ def test_postgres_readiness_requires_continuous_authenticated_sql() -> None:
         r"C:\Docker\docker.exe",
         "a" * 64,
         profile,
+        observation=observation,
         clock=clock,
         sleeper=sleeper,
     )
@@ -483,6 +504,43 @@ def test_postgres_readiness_requires_continuous_authenticated_sql() -> None:
     assert sql_attempts == 4
     assert current == 1.0
     assert all("CREATE" not in " ".join(call) for call in calls)
+    assert observation["status"] == "stable"
+    assert observation["pg_isready_attempts"] == 5
+    assert observation["pg_isready_successes"] == 4
+    assert observation["sql_probe_attempts"] == 4
+    assert observation["sql_probe_successes"] == 4
+    assert observation["continuous_success_ms"] == 500
+
+
+def test_postgres_readiness_translates_sql_probe_process_timeout() -> None:
+    profile = copy.deepcopy(CONTRACT["docker_profile"])
+    observation: dict[str, Any] = {}
+
+    def runner(
+        argv: list[str], stdin: bytes | None, timeout: float, cap: int
+    ) -> rehearsal.ProcessResult:
+        del stdin, timeout, cap
+        if "pg_isready" in argv:
+            return rehearsal.ProcessResult(0, b"accepting connections\n", b"")
+        raise rehearsal.RehearsalFailure("process", "timeout", "synthetic")
+
+    with pytest.raises(rehearsal.RehearsalFailure) as captured:
+        rehearsal._wait_for_stable_postgres(  # noqa: SLF001
+            runner,
+            r"C:\Docker\docker.exe",
+            "a" * 64,
+            profile,
+            observation=observation,
+        )
+    assert captured.value.stage == "postgres"
+    assert captured.value.code == "readiness_probe_timeout"
+    assert captured.value.detail == "ready_sql"
+    assert observation["status"] == "probe_timeout"
+    assert observation["timed_out_operation"] == "ready_sql"
+    assert observation["pg_isready_attempts"] == 1
+    assert observation["pg_isready_successes"] == 1
+    assert observation["sql_probe_attempts"] == 1
+    assert observation["sql_probe_successes"] == 0
 
 
 def test_postgres_readiness_caps_each_probe_to_startup_deadline() -> None:

@@ -35,6 +35,7 @@
     "startup_timeout_seconds": 45,
     "readiness_stability_seconds": 3,
     "readiness_probe_interval_seconds": 0.25,
+    "readiness_connect_timeout_seconds": 1,
     "command_timeout_seconds": 30,
     "artifact_timeout_seconds": 120,
     "cleanup_timeout_seconds": 30,

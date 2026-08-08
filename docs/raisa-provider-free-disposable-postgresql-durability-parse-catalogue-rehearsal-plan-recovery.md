@@ -148,6 +148,18 @@ and a fresh exact-HEAD veto before the terminal rerun. This is a bootstrap of
 expected metadata, not acceptance by observation; the terminal run remains a
 separate newly owned container and must match every frozen digest.
 
+The first readiness-stability attempt `e2654735548d0ba3588ef372` then remained
+inside readiness until its 45-second startup budget was exhausted. It performed
+no database create, rollback or catalogue action, and exact-ID cleanup removed
+container `1abe609a746022bd2855f78e1677d2c7e3bdf428dc861bc0c86bfc4b1c196d8f`
+and proved absence. The failure record could identify only a generic process
+timeout, so it could not distinguish a socket rejection from an authenticated
+probe handoff. Recovery gives only the fixed read-only readiness `psql` command
+a one-second `PGCONNECT_TIMEOUT`, removes its unused interactive-stdin flag,
+translates host probe timeout into an exact readiness operation, and records
+only bounded counts, exit codes and output digests. It adds no write retry and
+does not retain raw logs or values.
+
 ## Claim boundary
 
 This recovery grants no further database execution until the corrected parent

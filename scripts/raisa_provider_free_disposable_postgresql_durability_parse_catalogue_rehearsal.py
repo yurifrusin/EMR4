@@ -41,7 +41,7 @@ EXPECTED_PREREQUISITE_PATH = (
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:3a4670412970c821e55eaf8b6ef2d38e0a4460d11c4328a335403fc55fa3257c"
+    "sha256:6ca2ef534899c932b2962dd816c075d189820e9ecc946993d0fbbe40c24a594e"
 )
 EXPECTED_PREREQUISITE_SHA256 = (
     "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
@@ -519,7 +519,12 @@ def docker_argv(
         ]
     if operation is DockerOperation.READY_SQL:
         return _psql_base(
-            docker, container_id, profile["postgres_database"], profile
+            docker,
+            container_id,
+            profile["postgres_database"],
+            profile,
+            stdin_enabled=False,
+            connect_timeout_seconds=profile["readiness_connect_timeout_seconds"],
         ) + [
             "--tuples-only",
             "--no-align",
@@ -547,13 +552,24 @@ def docker_argv(
 
 
 def _psql_base(
-    docker: str, container_id: str, database: str, profile: dict[str, Any]
+    docker: str,
+    container_id: str,
+    database: str,
+    profile: dict[str, Any],
+    *,
+    stdin_enabled: bool = True,
+    connect_timeout_seconds: int | None = None,
 ) -> list[str]:
-    return [
+    argv = [
         docker,
         "exec",
-        "-i",
-        container_id,
+    ]
+    if stdin_enabled:
+        argv.append("-i")
+    argv.append(container_id)
+    if connect_timeout_seconds is not None:
+        argv.extend(["env", f"PGCONNECT_TIMEOUT={connect_timeout_seconds}"])
+    return argv + [
         "psql",
         "--host",
         "/var/run/postgresql",
@@ -645,6 +661,7 @@ def _wait_for_stable_postgres(
     container_id: str,
     profile: dict[str, Any],
     *,
+    observation: dict[str, Any] | None = None,
     clock: Callable[[], float] = time.monotonic,
     sleeper: Callable[[float], None] = time.sleep,
 ) -> None:
@@ -654,53 +671,103 @@ def _wait_for_stable_postgres(
     interval = float(profile["readiness_probe_interval_seconds"])
     stable_since: float | None = None
     expected_major = b"16"
+    state = observation if observation is not None else {}
+    state.clear()
+    state.update(
+        {
+            "status": "probing",
+            "pg_isready_attempts": 0,
+            "pg_isready_successes": 0,
+            "sql_probe_attempts": 0,
+            "sql_probe_successes": 0,
+            "continuous_success_ms": 0,
+        }
+    )
     while True:
         remaining = deadline - clock()
         if remaining <= 0:
             raise RehearsalFailure("postgres", "readiness_timeout")
-        ready = _call(
-            runner,
-            docker_argv(
-                DockerOperation.READY,
-                docker=docker,
-                profile=profile,
-                container_id=container_id,
-            ),
-            operation=DockerOperation.READY,
-            stdin=None,
-            timeout=min(float(profile["command_timeout_seconds"]), remaining),
-            cap=profile["stdout_stderr_cap_bytes"],
-        )
+        state["pg_isready_attempts"] += 1
+        try:
+            ready = _call(
+                runner,
+                docker_argv(
+                    DockerOperation.READY,
+                    docker=docker,
+                    profile=profile,
+                    container_id=container_id,
+                ),
+                operation=DockerOperation.READY,
+                stdin=None,
+                timeout=min(float(profile["command_timeout_seconds"]), remaining),
+                cap=profile["stdout_stderr_cap_bytes"],
+            )
+        except RehearsalFailure as error:
+            if error.stage == "process" and error.code == "timeout":
+                state["status"] = "probe_timeout"
+                state["timed_out_operation"] = DockerOperation.READY.value
+                raise RehearsalFailure(
+                    "postgres", "readiness_probe_timeout", DockerOperation.READY.value
+                ) from error
+            raise
+        state["last_pg_isready_exit"] = ready.returncode
+        state["last_pg_isready_stderr_digest"] = "sha256:" + _bytes_sha(ready.stderr)
+        if ready.returncode == 0:
+            state["pg_isready_successes"] += 1
         sql_ready = False
         if ready.returncode == 0:
             remaining = deadline - clock()
             if remaining <= 0:
                 raise RehearsalFailure("postgres", "readiness_timeout")
-            sql_probe = _call(
-                runner,
-                docker_argv(
-                    DockerOperation.READY_SQL,
-                    docker=docker,
-                    profile=profile,
-                    container_id=container_id,
-                ),
-                operation=DockerOperation.READY_SQL,
-                stdin=None,
-                timeout=min(float(profile["command_timeout_seconds"]), remaining),
-                cap=profile["stdout_stderr_cap_bytes"],
+            state["sql_probe_attempts"] += 1
+            try:
+                sql_probe = _call(
+                    runner,
+                    docker_argv(
+                        DockerOperation.READY_SQL,
+                        docker=docker,
+                        profile=profile,
+                        container_id=container_id,
+                    ),
+                    operation=DockerOperation.READY_SQL,
+                    stdin=None,
+                    timeout=min(float(profile["command_timeout_seconds"]), remaining),
+                    cap=profile["stdout_stderr_cap_bytes"],
+                )
+            except RehearsalFailure as error:
+                if error.stage == "process" and error.code == "timeout":
+                    state["status"] = "probe_timeout"
+                    state["timed_out_operation"] = DockerOperation.READY_SQL.value
+                    raise RehearsalFailure(
+                        "postgres",
+                        "readiness_probe_timeout",
+                        DockerOperation.READY_SQL.value,
+                    ) from error
+                raise
+            state["last_sql_probe_exit"] = sql_probe.returncode
+            state["last_sql_stdout_digest"] = "sha256:" + _bytes_sha(
+                sql_probe.stdout
+            )
+            state["last_sql_stderr_digest"] = "sha256:" + _bytes_sha(
+                sql_probe.stderr
             )
             sql_ready = (
                 sql_probe.returncode == 0
                 and sql_probe.stdout.strip() == expected_major
             )
+            if sql_ready:
+                state["sql_probe_successes"] += 1
         now = clock()
         if ready.returncode == 0 and sql_ready:
             if stable_since is None:
                 stable_since = now
+            state["continuous_success_ms"] = int((now - stable_since) * 1000)
             if now - stable_since >= stability:
+                state["status"] = "stable"
                 return
         else:
             stable_since = None
+            state["continuous_success_ms"] = 0
         if now >= deadline:
             raise RehearsalFailure("postgres", "readiness_timeout")
         sleeper(interval)
@@ -1563,7 +1630,14 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
         ):
             raise RehearsalFailure("container", "containment_mismatch")
         lifecycle.append("container_owned")
-        _wait_for_stable_postgres(runner, docker, container_id, profile)
+        environment["readiness"] = {}
+        _wait_for_stable_postgres(
+            runner,
+            docker,
+            container_id,
+            profile,
+            observation=environment["readiness"],
+        )
         lifecycle.append("postgres_ready")
         for database in contract["database_sequence"]:
             create = _call(

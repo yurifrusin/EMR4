@@ -65,7 +65,7 @@
     "docker_profile": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["executable", "image_reference", "pull_policy", "network_mode", "container_name_prefix", "ownership_labels", "tmpfs", "memory", "cpus", "pids_limit", "restart", "postgres_user", "postgres_password", "postgres_database", "pgdata", "startup_timeout_seconds", "readiness_stability_seconds", "readiness_probe_interval_seconds", "command_timeout_seconds", "artifact_timeout_seconds", "cleanup_timeout_seconds", "total_timeout_seconds", "stdout_stderr_cap_bytes"],
+      "required": ["executable", "image_reference", "pull_policy", "network_mode", "container_name_prefix", "ownership_labels", "tmpfs", "memory", "cpus", "pids_limit", "restart", "postgres_user", "postgres_password", "postgres_database", "pgdata", "startup_timeout_seconds", "readiness_stability_seconds", "readiness_probe_interval_seconds", "readiness_connect_timeout_seconds", "command_timeout_seconds", "artifact_timeout_seconds", "cleanup_timeout_seconds", "total_timeout_seconds", "stdout_stderr_cap_bytes"],
       "properties": {
         "executable": {"const": "docker.exe"},
         "image_reference": {"const": "postgres:16-bookworm"},
@@ -85,6 +85,7 @@
         "startup_timeout_seconds": {"type": "integer", "minimum": 1},
         "readiness_stability_seconds": {"type": "integer", "minimum": 1, "maximum": 10},
         "readiness_probe_interval_seconds": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "readiness_connect_timeout_seconds": {"type": "integer", "minimum": 1, "maximum": 3},
         "command_timeout_seconds": {"type": "integer", "minimum": 1},
         "artifact_timeout_seconds": {"type": "integer", "minimum": 1},
         "cleanup_timeout_seconds": {"type": "integer", "minimum": 1},
