@@ -378,10 +378,11 @@ digest retained by the run. The separate trigger query already verifies all
 fourteen trigger declarations, including all seven deferred constraint
 triggers.
 
-Recovery narrows only the read-only table-constraint catalogue query to the
-accepted `c/f/p/u` kinds. It does not hide an unknown kind: any unexpected
-table constraint of an admitted kind still changes the exact identifier set,
-and every trigger remains independently population- and definition-checked.
+Recovery excludes only `contype='t'` from the read-only table-constraint
+catalogue query. It deliberately does not allowlist `c/f/p/u`: an exclusion
+constraint or any other unexpected non-trigger kind remains visible and still
+changes the exact identifier set. Every trigger remains independently
+population- and definition-checked.
 Artifact SQL, contracts, manifest, assertions, commands, cleanup, runtime and
 authority remain unchanged. A fresh exact-HEAD veto is required before one new
 owned characterization run.

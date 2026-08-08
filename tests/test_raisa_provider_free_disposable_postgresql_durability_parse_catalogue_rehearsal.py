@@ -748,8 +748,8 @@ def test_catalogue_queries_project_every_definition_and_authority_surface() -> N
             "composite_attributes",
         )
     )
-    assert "con.contype IN ('c', 'f', 'p', 'u')" in constraints_sql
-    assert "con.contype IN ('c', 'f', 'p', 't', 'u')" not in constraints_sql
+    assert "con.contype <> 't'" in constraints_sql
+    assert "con.contype IN" not in constraints_sql
     assert "polroles" in policies_sql and "AS roles" in policies_sql
     assert "pg_get_function_identity_arguments" in functions_sql
     assert "pg_get_function_result" in functions_sql
