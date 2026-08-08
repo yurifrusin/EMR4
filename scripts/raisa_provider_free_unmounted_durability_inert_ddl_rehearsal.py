@@ -2663,12 +2663,23 @@ def _render_types(effective: dict[str, Any]) -> list[str]:
 
 def _render_relations(effective: dict[str, Any]) -> list[str]:
     lines: list[str] = []
-    relation_rows = effective["relation_rows"]
     for rel in effective["effective_structural"]["relation_catalogue"]["relations"]:
         rid = _fabric(rel["name"])
         column_types = effective["column_types"][rid]
         col_lines = []
         for col in rel["columns"]:
+            if col["name"] == "xmin":
+                if col != {
+                    "name": "xmin",
+                    "data_type": "xid",
+                    "nullable": False,
+                    "default_sql": None,
+                }:
+                    raise ValueError("modeled system xmin shape drift")
+                # xmin is an implicitly defined PostgreSQL system column.  It
+                # remains in the typed model for provenance reads but must not
+                # be emitted as a user-defined CREATE TABLE column.
+                continue
             colname = _ident(col["name"])
             coltype = _type_sql(column_types[col["name"]])
             null_sql = "" if col["nullable"] else " NOT NULL"
@@ -2956,7 +2967,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.1"
+RENDERER_VERSION = "2.0.2"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

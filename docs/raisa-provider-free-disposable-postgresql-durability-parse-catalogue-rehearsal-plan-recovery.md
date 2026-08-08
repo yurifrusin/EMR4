@@ -217,3 +217,20 @@ and `1404044` bytes. The disposable descendant may admit only those exact bytes.
 Its characterization-only result remains incapable of passing, and any fresh
 database contact still requires exact-HEAD independent veto and a separately
 owned throwaway container.
+
+## PostgreSQL system-column recovery
+
+Attempt `42e97f89776a5652c02b631b` proved the physical catalog-type repair: the
+server passed stable authenticated readiness, created the rollback database,
+installed all four empty prerequisites and advanced to bounded SQLSTATE
+`42701`. It retained only a 136-byte stderr digest and removed exact container
+`2e22319964fdd46c1c875d56208283f0766031076925dcb9934d467ee4cdc1fa`,
+with absence verified. Catalogue and success-database work did not start.
+
+The first emitted fabric table declared `xmin pg_catalog.xid`. PostgreSQL
+defines `xmin` implicitly on every table and prohibits it as a user-defined
+column, including when quoted. The immutable model's synthetic `xmin` entry is
+still required for typed provenance analysis, but the renderer must omit it
+from all eighteen physical `CREATE TABLE` column lists and fail closed if its
+accepted modeled shape drifts. This recovery changes no logical relation,
+provenance expression, constraint, function, trigger, RLS policy or authority.

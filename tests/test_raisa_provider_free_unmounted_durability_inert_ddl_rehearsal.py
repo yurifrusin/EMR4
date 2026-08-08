@@ -29,6 +29,7 @@ from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import
     _derive_conflict_constraint,
     _emit_lock_exact,
     _ordered_composites,
+    _render_relations,
     _type_sql,
     _verify_trigger_terminals,
     _walk_program_nodes,
@@ -221,6 +222,38 @@ def test_renderer_uses_physical_pg_catalog_type_names() -> None:
     assert "    eligible pg_catalog.bool," in sql
     assert "    stream_epoch pg_catalog.int8," in sql
     assert "0::pg_catalog.int4" in sql
+
+
+def test_renderer_omits_modeled_system_xmin_from_create_tables() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    relations = result["effective"]["effective_structural"]["relation_catalogue"][
+        "relations"
+    ]
+
+    assert len(relations) == 18
+    assert sql.count("CREATE TABLE emr4_context_fabric.") == 18
+    assert "\n    xmin pg_catalog.xid" not in sql
+    for relation in relations:
+        xmin = [column for column in relation["columns"] if column["name"] == "xmin"]
+        assert xmin == [
+            {
+                "name": "xmin",
+                "data_type": "xid",
+                "nullable": False,
+                "default_sql": None,
+            }
+        ]
+
+
+def test_renderer_rejects_modeled_system_xmin_shape_drift() -> None:
+    effective = copy.deepcopy(_base_render()["effective"])
+    relation = effective["effective_structural"]["relation_catalogue"]["relations"][0]
+    xmin = next(column for column in relation["columns"] if column["name"] == "xmin")
+    xmin["nullable"] = True
+
+    with pytest.raises(ValueError, match="modeled system xmin shape drift"):
+        _render_relations(effective)
 
 
 def test_canonical_artifacts_regenerate_exactly() -> None:

@@ -1,6 +1,6 @@
 -- -- durability-schema.sql.inert -- inert evidence artifact; never execute or apply
 -- generated_by: raisa_provider_free_unmounted_durability_inert_ddl_rehearsal
--- renderer_version: 2.0.1
+-- renderer_version: 2.0.2
 -- do_not_execute: true
 
 -- ==========================================================================
@@ -116,8 +116,7 @@ CREATE TABLE emr4_context_fabric.context_observation_stream_head (
     stream_id pg_catalog.uuid NOT NULL,
     stream_epoch pg_catalog.int8 NOT NULL,
     last_position pg_catalog.int8 NOT NULL,
-    updated_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    updated_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_observation_stream_head ADD CONSTRAINT pk_cf_01 PRIMARY KEY (practice_id, source_contract_id, stream_id);
 ALTER TABLE emr4_context_fabric.context_observation_stream_head ADD CONSTRAINT ck_cf_01_01 CHECK (stream_epoch = 1);
@@ -129,8 +128,7 @@ CREATE TABLE emr4_context_fabric.diary_context_aggregate_aliases_v1 (
     product_appointment_uuid pg_catalog.uuid NOT NULL,
     opaque_aggregate_alias pg_catalog.uuid NOT NULL,
     created_at pg_catalog.timestamptz NOT NULL,
-    stream_id pg_catalog.uuid NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    stream_id pg_catalog.uuid NOT NULL
 );
 ALTER TABLE emr4_context_fabric.diary_context_aggregate_aliases_v1 ADD CONSTRAINT pk_cf_02 PRIMARY KEY (practice_id, source_contract_id, stream_id, product_appointment_uuid);
 ALTER TABLE emr4_context_fabric.diary_context_aggregate_aliases_v1 ADD CONSTRAINT uq_cf_02_01 UNIQUE (practice_id, source_contract_id, stream_id, opaque_aggregate_alias);
@@ -147,8 +145,7 @@ CREATE TABLE emr4_context_fabric.diary_context_observation_outbox_v1 (
     opaque_aggregate_alias pg_catalog.uuid NOT NULL,
     aggregate_revision pg_catalog.int8 NOT NULL,
     source_contract_digest emr4_context_fabric.digest_sha256 NOT NULL,
-    transaction_authored_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    transaction_authored_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.diary_context_observation_outbox_v1 ADD CONSTRAINT pk_cf_03 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, transaction_position);
 ALTER TABLE emr4_context_fabric.diary_context_observation_outbox_v1 ADD CONSTRAINT uq_cf_03_01 UNIQUE (practice_id, source_contract_id, stream_id, raw_event_uuid);
@@ -178,8 +175,7 @@ CREATE TABLE emr4_context_fabric.context_proofread_observation_admission (
     checkpoint_disposition emr4_context_fabric.checkpoint_disposition,
     attempted_admission_digest emr4_context_fabric.digest_sha256,
     conflict_reason emr4_context_fabric.admission_conflict_reason,
-    admitted_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    admitted_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_proofread_observation_admission ADD CONSTRAINT pk_cf_04 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, source_position, entry_kind);
 CREATE UNIQUE INDEX uq_cf_04_01 ON emr4_context_fabric.context_proofread_observation_admission (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, observation_digest) WHERE (entry_kind = 'PRIMARY'::emr4_context_fabric.admission_entry_kind);
@@ -191,8 +187,7 @@ CREATE TABLE emr4_context_fabric.context_generation_registry_barrier (
     source_contract_id emr4_context_fabric.source_contract_code NOT NULL,
     stream_id pg_catalog.uuid NOT NULL,
     barrier_revision pg_catalog.int8 NOT NULL,
-    updated_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    updated_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_generation_registry_barrier ADD CONSTRAINT pk_cf_05 PRIMARY KEY (practice_id, source_contract_id, stream_id);
 ALTER TABLE emr4_context_fabric.context_generation_registry_barrier ADD CONSTRAINT ck_cf_05_01 CHECK (barrier_revision >= 0);
@@ -213,8 +208,7 @@ CREATE TABLE emr4_context_fabric.context_observer_generation (
     key_schedule_digest emr4_context_fabric.digest_sha256 NOT NULL,
     created_at pg_catalog.timestamptz NOT NULL,
     consumed_at pg_catalog.timestamptz,
-    terminal_reason emr4_context_fabric.generation_terminal_reason,
-    xmin pg_catalog.xid NOT NULL
+    terminal_reason emr4_context_fabric.generation_terminal_reason
 );
 ALTER TABLE emr4_context_fabric.context_observer_generation ADD CONSTRAINT pk_cf_06 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation);
 ALTER TABLE emr4_context_fabric.context_observer_generation ADD CONSTRAINT fk_cf_06_01 FOREIGN KEY (practice_id, source_contract_id, stream_id) REFERENCES emr4_context_fabric.context_generation_registry_barrier (practice_id, source_contract_id, stream_id) ON DELETE RESTRICT;
@@ -234,8 +228,7 @@ CREATE TABLE emr4_context_fabric.context_durability_checkpoint (
     lifecycle_revision pg_catalog.int8 NOT NULL,
     audit_head_digest emr4_context_fabric.digest_sha256 NOT NULL,
     checkpoint_integrity_digest emr4_context_fabric.digest_sha256 NOT NULL,
-    updated_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    updated_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_durability_checkpoint ADD CONSTRAINT pk_cf_07 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation);
 ALTER TABLE emr4_context_fabric.context_durability_checkpoint ADD CONSTRAINT fk_cf_07_01 FOREIGN KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation) REFERENCES emr4_context_fabric.context_observer_generation (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation) ON DELETE RESTRICT;
@@ -262,8 +255,7 @@ CREATE TABLE emr4_context_fabric.context_recovery_anchor (
     key_schedule_digest emr4_context_fabric.digest_sha256 NOT NULL,
     checkpoint_integrity_digest emr4_context_fabric.digest_sha256 NOT NULL,
     anchor_digest emr4_context_fabric.digest_sha256 NOT NULL,
-    created_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    created_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_recovery_anchor ADD CONSTRAINT pk_cf_08 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, lifecycle_revision);
 ALTER TABLE emr4_context_fabric.context_recovery_anchor ADD CONSTRAINT uq_cf_08_01 UNIQUE (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, anchor_digest);
@@ -286,8 +278,7 @@ CREATE TABLE emr4_context_fabric.context_classified_observation_receipt (
     checkpoint_disposition emr4_context_fabric.checkpoint_disposition NOT NULL,
     lifecycle_revision pg_catalog.int8 NOT NULL,
     receipt_digest emr4_context_fabric.digest_sha256 NOT NULL,
-    created_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    created_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_classified_observation_receipt ADD CONSTRAINT pk_cf_09 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, source_position);
 ALTER TABLE emr4_context_fabric.context_classified_observation_receipt ADD CONSTRAINT uq_cf_09_01 UNIQUE (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, observation_digest);
@@ -309,8 +300,7 @@ CREATE TABLE emr4_context_fabric.context_frame_generation (
     assembled_through_position pg_catalog.int8 NOT NULL,
     lifecycle_state emr4_context_fabric.frame_lifecycle NOT NULL,
     created_at pg_catalog.timestamptz NOT NULL,
-    retired_at pg_catalog.timestamptz,
-    xmin pg_catalog.xid NOT NULL
+    retired_at pg_catalog.timestamptz
 );
 ALTER TABLE emr4_context_fabric.context_frame_generation ADD CONSTRAINT pk_cf_10 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, frame_generation_id);
 CREATE UNIQUE INDEX uq_cf_10_01 ON emr4_context_fabric.context_frame_generation (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, frame_type) WHERE (lifecycle_state = 'CURRENT'::emr4_context_fabric.frame_lifecycle);
@@ -326,8 +316,7 @@ CREATE TABLE emr4_context_fabric.context_invalidation_watermark (
     observer_generation pg_catalog.int8 NOT NULL,
     frame_type emr4_context_fabric.frame_type NOT NULL,
     watermark_position pg_catalog.int8 NOT NULL,
-    updated_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    updated_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_invalidation_watermark ADD CONSTRAINT pk_cf_11 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, frame_type);
 ALTER TABLE emr4_context_fabric.context_invalidation_watermark ADD CONSTRAINT fk_cf_11_01 FOREIGN KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation) REFERENCES emr4_context_fabric.context_durability_checkpoint (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation) ON DELETE RESTRICT;
@@ -346,8 +335,7 @@ CREATE TABLE emr4_context_fabric.context_reassembly_obligation (
     count_bucket emr4_context_fabric.obligation_count_bucket NOT NULL,
     obligation_state emr4_context_fabric.obligation_state NOT NULL,
     created_at pg_catalog.timestamptz NOT NULL,
-    updated_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    updated_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_reassembly_obligation ADD CONSTRAINT pk_cf_12 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, frame_generation_id);
 CREATE UNIQUE INDEX uq_cf_12_01 ON emr4_context_fabric.context_reassembly_obligation (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, frame_generation_id) WHERE (obligation_state = 'PENDING'::emr4_context_fabric.obligation_state);
@@ -368,8 +356,7 @@ CREATE TABLE emr4_context_fabric.context_durability_lifecycle (
     key_interval_end pg_catalog.int8,
     prior_lifecycle_digest emr4_context_fabric.digest_sha256 NOT NULL,
     lifecycle_digest emr4_context_fabric.digest_sha256 NOT NULL,
-    created_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    created_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_durability_lifecycle ADD CONSTRAINT pk_cf_13 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, lifecycle_revision);
 ALTER TABLE emr4_context_fabric.context_durability_lifecycle ADD CONSTRAINT uq_cf_13_01 UNIQUE (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, lifecycle_digest);
@@ -389,8 +376,7 @@ CREATE TABLE emr4_context_fabric.context_durability_audit (
     affected_frame_mask emr4_context_fabric.frame_mask NOT NULL,
     prior_audit_digest emr4_context_fabric.digest_sha256 NOT NULL,
     audit_head_digest emr4_context_fabric.digest_sha256 NOT NULL,
-    created_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    created_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_durability_audit ADD CONSTRAINT pk_cf_14 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, lifecycle_revision);
 ALTER TABLE emr4_context_fabric.context_durability_audit ADD CONSTRAINT uq_cf_14_01 UNIQUE (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, audit_head_digest);
@@ -406,8 +392,7 @@ CREATE TABLE emr4_context_fabric.context_observation_key_interval (
     interval_end pg_catalog.int8 NOT NULL,
     key_id emr4_context_fabric.key_id NOT NULL,
     availability_attestation_digest emr4_context_fabric.digest_sha256 NOT NULL,
-    created_at pg_catalog.timestamptz NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    created_at pg_catalog.timestamptz NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_observation_key_interval ADD CONSTRAINT pk_cf_15 PRIMARY KEY (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, interval_start);
 ALTER TABLE emr4_context_fabric.context_observation_key_interval ADD CONSTRAINT uq_cf_15_01 UNIQUE (practice_id, source_contract_id, stream_id, stream_epoch, observer_id, observer_generation, key_id);
@@ -426,8 +411,7 @@ CREATE TABLE emr4_context_fabric.context_recovery_pin (
     reason_code emr4_context_fabric.recovery_pin_reason NOT NULL,
     pin_state emr4_context_fabric.recovery_pin_state NOT NULL,
     created_at pg_catalog.timestamptz NOT NULL,
-    released_at pg_catalog.timestamptz,
-    xmin pg_catalog.xid NOT NULL
+    released_at pg_catalog.timestamptz
 );
 ALTER TABLE emr4_context_fabric.context_recovery_pin ADD CONSTRAINT pk_cf_16 PRIMARY KEY (practice_id, source_contract_id, pin_id);
 ALTER TABLE emr4_context_fabric.context_recovery_pin ADD CONSTRAINT ck_cf_16_01 CHECK (((pin_state = 'RELEASED'::emr4_context_fabric.recovery_pin_state AND released_at IS NOT NULL) OR (pin_state = 'ACTIVE'::emr4_context_fabric.recovery_pin_state AND released_at IS NULL)));
@@ -440,8 +424,7 @@ CREATE TABLE emr4_context_fabric.context_service_practice_binding (
     credential_epoch pg_catalog.int8 NOT NULL,
     active_from pg_catalog.timestamptz NOT NULL,
     active_until pg_catalog.timestamptz,
-    stream_id pg_catalog.uuid NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    stream_id pg_catalog.uuid NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_service_practice_binding ADD CONSTRAINT pk_cf_17 PRIMARY KEY (database_login, logical_capability, binding_revision);
 CREATE UNIQUE INDEX uq_cf_17_01 ON emr4_context_fabric.context_service_practice_binding (database_login) WHERE (active_until IS NULL);
@@ -458,8 +441,7 @@ CREATE TABLE emr4_context_fabric.context_retention_policy (
     key_overlap_seconds pg_catalog.int8 NOT NULL,
     retention_execution_enabled pg_catalog.bool NOT NULL,
     effective_at pg_catalog.timestamptz NOT NULL,
-    stream_id pg_catalog.uuid NOT NULL,
-    xmin pg_catalog.xid NOT NULL
+    stream_id pg_catalog.uuid NOT NULL
 );
 ALTER TABLE emr4_context_fabric.context_retention_policy ADD CONSTRAINT pk_cf_18 PRIMARY KEY (practice_id, source_contract_id, stream_id, policy_revision);
 ALTER TABLE emr4_context_fabric.context_retention_policy ADD CONSTRAINT ck_cf_18_01 CHECK (source_grace_seconds >= 0);
