@@ -256,3 +256,8 @@ created. The recovery preserves accepted relation order within four physical
 statement families: create all tables; establish every primary/unique key;
 add every foreign key; then add every check. This handles forward references
 and relation cycles without changing any object, field, constraint or policy.
+
+Parent recovery commit `f86ed6ce6d004f29b39148e024b6229b5a622291`
+binds the reordered 412-statement artifact at unchanged `1403432` LF bytes and
+SHA-256 `fd640d16d51a63557220cc8a59b75ddfadee86a745da11919bad2c101d4a896d`.
+The descendant must bind those exact bytes before replacement review or run.

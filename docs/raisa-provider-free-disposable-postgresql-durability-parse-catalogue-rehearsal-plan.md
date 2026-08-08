@@ -2,15 +2,15 @@
 
 Date: 2026-08-07
 
-Status: bounded PostgreSQL-system-column recovery candidate; corrected parent
-artifact source is `b9ffa0cbac24e08d130a8dcb9653678f81fa4268`,
+Status: bounded relation-dependency-family recovery candidate; corrected parent
+artifact source is `f86ed6ce6d004f29b39148e024b6229b5a622291`,
 with fresh exact-HEAD descendant veto required before another runtime attempt
 
 Parent result:
 `raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_pass`
 
 Accepted corrected parent source HEAD:
-`b9ffa0cbac24e08d130a8dcb9653678f81fa4268`
+`f86ed6ce6d004f29b39148e024b6229b5a622291`
 
 Planning baseline HEAD:
 `253230a25ab172b90bc5f44772670c7df89b3052`
@@ -19,7 +19,7 @@ Parent inert SQL artifact:
 `orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert`
 
 Parent inert SQL SHA-256:
-`sha256:931b0eab6438dfcaf1b1836861972aa25a7f8619e3eaae7edfa3e941cb5f70d2`
+`sha256:fd640d16d51a63557220cc8a59b75ddfadee86a745da11919bad2c101d4a896d`
 
 ## Objective
 
