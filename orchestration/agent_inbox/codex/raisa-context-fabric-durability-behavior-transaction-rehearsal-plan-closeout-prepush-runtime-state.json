@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "publish_accepted_behavior_transaction_rehearsal_plan_closeout_to_task_branch_and_pause",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the accepted behavior/transaction planning pass at reviewed source 07e8750548ed69aba5a19f693a72397121a340e5, Continuity 233 / Compass 215 and Yuri's explicit pause before runtime implementation.",
+    "current_authority_allocation": "GPT Sol owns task-branch publication and closeout notification. The independent verifier has finished with a clean pass; no worker, runtime or protected integration action remains active.",
+    "active_plan_and_acceptance": "The accepted twenty-scenario plan, closeout and Sol acceptance are committed at local task HEAD bc410dd62d4fd13c791a1185a5ab7adc48845fe8. The exact review passed 124 planning plus 79 AER tests; the final closeout packet passed 142 checks.",
+    "protected_evidence_boundaries": "Publication is limited to the non-protected task branch. Docker/PostgreSQL behavior runtime, applied migration, application/API/Diary wiring, operational source/database/credentials, patient/product/protected data, providers, commands, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "After a fresh origin fetch, local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task branch remains bc0120f574ff4a9fb34a5d463537542f906c5916 and local task HEAD is bc410dd62d4fd13c791a1185a5ab7adc48845fe8. The tracked task worktree is clean."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_transaction_plan_closeout_prepush_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed closeout, fresh origin verification and explicit-path commit checks."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh r74 exact-HEAD review completed pass and clean."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
