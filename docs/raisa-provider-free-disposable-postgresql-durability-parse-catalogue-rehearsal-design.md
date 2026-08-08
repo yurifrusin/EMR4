@@ -118,7 +118,10 @@ column/type catalogue.
 ## Resource and failure containment
 
 Container startup, readiness, each SQL phase, catalogue readback, removal and
-total execution have explicit deadlines. Output capture is byte-capped. On
+total execution have explicit deadlines. Readiness requires both the fixed
+socket-level `pg_isready` check and an authenticated read-only server-major SQL
+probe to succeed continuously for three seconds; any bootstrap-to-final-server
+handoff resets the interval. Output capture is byte-capped. On
 overflow, timeout, client failure, server error or unexpected state, the
 harness records a bounded value-free failure and enters cleanup.
 

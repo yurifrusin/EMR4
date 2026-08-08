@@ -439,6 +439,52 @@ def test_absolute_execution_deadline_caps_calls_and_fails_closed(
         bounded(["docker.exe"], None, 30, 1024)
 
 
+def test_postgres_readiness_requires_continuous_authenticated_sql() -> None:
+    profile = copy.deepcopy(CONTRACT["docker_profile"])
+    profile["startup_timeout_seconds"] = 5
+    profile["readiness_stability_seconds"] = 0.5
+    profile["readiness_probe_interval_seconds"] = 0.25
+    current = 0.0
+    ready_attempts = 0
+    sql_attempts = 0
+    calls: list[list[str]] = []
+
+    def clock() -> float:
+        return current
+
+    def sleeper(delay: float) -> None:
+        nonlocal current
+        current += delay
+
+    def runner(
+        argv: list[str], stdin: bytes | None, timeout: float, cap: int
+    ) -> rehearsal.ProcessResult:
+        nonlocal ready_attempts, sql_attempts
+        del stdin, timeout, cap
+        calls.append(argv)
+        if "pg_isready" in argv:
+            ready_attempts += 1
+            if ready_attempts == 2:
+                return rehearsal.ProcessResult(1, b"", b"bootstrap handoff")
+            return rehearsal.ProcessResult(0, b"accepting connections\n", b"")
+        assert "current_setting('server_version_num')" in argv[-1]
+        sql_attempts += 1
+        return rehearsal.ProcessResult(0, b"16\n", b"")
+
+    rehearsal._wait_for_stable_postgres(  # noqa: SLF001
+        runner,
+        r"C:\Docker\docker.exe",
+        "a" * 64,
+        profile,
+        clock=clock,
+        sleeper=sleeper,
+    )
+    assert ready_attempts == 5
+    assert sql_attempts == 4
+    assert current == 1.0
+    assert all("CREATE" not in " ".join(call) for call in calls)
+
+
 def test_module_has_no_database_cloud_http_or_environment_input_import() -> None:
     tree = ast.parse(Path(rehearsal.__file__).read_text(encoding="utf-8"))
     imports = {

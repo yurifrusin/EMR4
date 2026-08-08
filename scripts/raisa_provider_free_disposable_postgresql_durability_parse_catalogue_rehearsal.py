@@ -41,7 +41,7 @@ EXPECTED_PREREQUISITE_PATH = (
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:c7967cdeaeeed1173c717ce2b794e93dddaad4ec640ca148b81d656792b7dad5"
+    "sha256:3a4670412970c821e55eaf8b6ef2d38e0a4460d11c4328a335403fc55fa3257c"
 )
 EXPECTED_PREREQUISITE_SHA256 = (
     "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
@@ -79,6 +79,7 @@ class DockerOperation(str, Enum):
     RUN = "run"
     ID_INSPECT = "id_inspect"
     READY = "ready"
+    READY_SQL = "ready_sql"
     PSQL_COMMAND = "psql_command"
     PSQL_FILE = "psql_file"
     REMOVE = "remove"
@@ -516,6 +517,16 @@ def docker_argv(
             "--timeout",
             "1",
         ]
+    if operation is DockerOperation.READY_SQL:
+        return _psql_base(
+            docker, container_id, profile["postgres_database"], profile
+        ) + [
+            "--tuples-only",
+            "--no-align",
+            "--command",
+            "SELECT (pg_catalog.current_setting('server_version_num')::"
+            "pg_catalog.integer / 10000)::pg_catalog.text;",
+        ]
     if operation is DockerOperation.PSQL_COMMAND:
         return _psql_base(docker, container_id, database, profile) + [
             "--command",
@@ -626,6 +637,67 @@ def _is_exact_absence(result: ProcessResult) -> bool:
         return False
     bounded = (result.stdout + result.stderr).lower()
     return b"no such object" in bounded or b"no such container" in bounded
+
+
+def _wait_for_stable_postgres(
+    runner: Runner,
+    docker: str,
+    container_id: str,
+    profile: dict[str, Any],
+    *,
+    clock: Callable[[], float] = time.monotonic,
+    sleeper: Callable[[float], None] = time.sleep,
+) -> None:
+    """Require a continuous authenticated SQL-ready interval after bootstrap."""
+    deadline = clock() + float(profile["startup_timeout_seconds"])
+    stability = float(profile["readiness_stability_seconds"])
+    interval = float(profile["readiness_probe_interval_seconds"])
+    stable_since: float | None = None
+    expected_major = b"16"
+    while True:
+        ready = _call(
+            runner,
+            docker_argv(
+                DockerOperation.READY,
+                docker=docker,
+                profile=profile,
+                container_id=container_id,
+            ),
+            operation=DockerOperation.READY,
+            stdin=None,
+            timeout=profile["command_timeout_seconds"],
+            cap=profile["stdout_stderr_cap_bytes"],
+        )
+        sql_ready = False
+        if ready.returncode == 0:
+            sql_probe = _call(
+                runner,
+                docker_argv(
+                    DockerOperation.READY_SQL,
+                    docker=docker,
+                    profile=profile,
+                    container_id=container_id,
+                ),
+                operation=DockerOperation.READY_SQL,
+                stdin=None,
+                timeout=profile["command_timeout_seconds"],
+                cap=profile["stdout_stderr_cap_bytes"],
+            )
+            sql_ready = (
+                sql_probe.returncode == 0
+                and sql_probe.stdout.strip() == expected_major
+            )
+        now = clock()
+        if ready.returncode == 0 and sql_ready:
+            if stable_since is None:
+                stable_since = now
+            if now - stable_since >= stability:
+                return
+        else:
+            stable_since = None
+        if now >= deadline:
+            raise RehearsalFailure("postgres", "readiness_timeout")
+        sleeper(interval)
 
 
 def _expected_sets(manifest: dict[str, Any]) -> dict[str, set[str]]:
@@ -1485,26 +1557,7 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
         ):
             raise RehearsalFailure("container", "containment_mismatch")
         lifecycle.append("container_owned")
-        readiness_deadline = time.monotonic() + profile["startup_timeout_seconds"]
-        while True:
-            ready = _call(
-                runner,
-                docker_argv(
-                    DockerOperation.READY,
-                    docker=docker,
-                    profile=profile,
-                    container_id=container_id,
-                ),
-                operation=DockerOperation.READY,
-                stdin=None,
-                timeout=profile["command_timeout_seconds"],
-                cap=profile["stdout_stderr_cap_bytes"],
-            )
-            if ready.returncode == 0:
-                break
-            if time.monotonic() >= readiness_deadline:
-                raise RehearsalFailure("postgres", "readiness_timeout")
-            time.sleep(0.25)
+        _wait_for_stable_postgres(runner, docker, container_id, profile)
         lifecycle.append("postgres_ready")
         for database in contract["database_sequence"]:
             create = _call(

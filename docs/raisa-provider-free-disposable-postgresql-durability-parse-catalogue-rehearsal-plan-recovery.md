@@ -127,6 +127,17 @@ The corrected compiler/artifact source is
 The descendant rehearsal contract binds that exact source and artifact; it
 remains in non-passing `characterization_only` mode pending fresh veto.
 
+The first corrected-artifact attempt then passed exact container ownership and
+a single `pg_isready` result but failed the immediately following first
+database-create command. It completed automatic exact-ID cleanup. This is the
+official image's bounded bootstrap-to-final-server handoff window: a socket
+handshake alone does not prove a stable authenticated SQL endpoint. Recovery
+therefore requires the fixed `pg_isready` probe and a fixed authenticated,
+read-only server-major SQL probe to succeed continuously for three seconds;
+any failure resets the stable interval. The probes expose no application row,
+invoke no fabric function and remain inside the existing 45-second startup and
+300-second total deadlines.
+
 The expected PostgreSQL-16 deparse digests cannot safely be guessed from the
 source spelling. The repaired contract therefore begins in
 `characterization_only`: one fresh-vetoed, exact-artifact disposable run may

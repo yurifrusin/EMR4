@@ -93,6 +93,11 @@ The closed runtime profile is:
   Unix-domain socket; and
 - bounded CPU, memory, process, startup, command and total-run time ceilings.
 
+Before any database-create command, socket-level `pg_isready` and one fixed
+authenticated read-only PostgreSQL-major probe must both succeed continuously
+for three seconds. Any bootstrap-to-final-server handoff resets that interval;
+a single accepting socket is not readiness evidence.
+
 The harness may inspect only the exact image reference, the exact closed
 container name, and the exact captured container ID. It must not list global
 containers, images, volumes or networks; prune; pull; build; login; start a

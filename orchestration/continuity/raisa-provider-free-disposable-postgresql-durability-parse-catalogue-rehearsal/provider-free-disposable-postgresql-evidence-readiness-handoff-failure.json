@@ -1,0 +1,49 @@
+{
+  "attempt_id": "98a501c33ad08bc1a0e5b353",
+  "catalogue": {
+    "status": "not_started"
+  },
+  "claim_boundary": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only",
+  "cleanup": {
+    "absence_verified": true,
+    "container_id": "0f4c47d28f7840ce30970a4527c5c16a80092419cf225c3a8d0ce0dc54d824b4",
+    "removed": true,
+    "status": "cleanup_verified"
+  },
+  "environment": {
+    "docker_client": "resolved_exact_docker_exe",
+    "elapsed_ms": 1524,
+    "failure": {
+      "code": "database_create_failed",
+      "detail_digest": "sha256:a380b72eb7d3b519540a150f7b30e64024d203a4e3c93c672b7ac2fcb18608c1",
+      "stage": "postgres"
+    },
+    "image": {
+      "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "pull_attempted": false,
+      "reference": "postgres:16-bookworm"
+    }
+  },
+  "evidence_mode": "provider_free_disposable_local_postgresql_authored_synthetic",
+  "lifecycle": [
+    "parent_verified",
+    "environment_verified",
+    "container_created",
+    "container_owned",
+    "postgres_ready",
+    "cleanup_verified"
+  ],
+  "parent": {
+    "artifact_byte_count": 1405495,
+    "artifact_sha256": "sha256:5e23fce2a805b02ec903c8dd93e25836224e2fc098f19e6ab011a8f2341b299f",
+    "contract_sha256": "sha256:c7967cdeaeeed1173c717ce2b794e93dddaad4ec640ca148b81d656792b7dad5",
+    "prerequisite_contract_sha256": "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11",
+    "prerequisite_sql_sha256": "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38",
+    "statement_count": 412
+  },
+  "result": "rehearsal_failed",
+  "rollback": {
+    "status": "not_started"
+  },
+  "schema_version": "emr4.disposable-postgresql-durability-rehearsal-evidence.v1"
+}
