@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_exact_head_function_name_form_veto_and_execute_one_contained_behavior_diagnostic_attempt",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the provider-free behavior/transaction rehearsal active and permits bounded diagnose-repair-rerun cycles; the future Agent Execution Surface gate remains later and unopened.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high completed independent read-only veto only. GPT Sol owns review acceptance, the serial disposable run, diagnosis and cleanup; no other worker is active.",
+    "active_plan_and_acceptance": "Fresh r94 review at exact HEAD 897835bc3fd0fe7a4af20cc4ecf91873057d3e6c returned one pass after 172 tests, Ruff, inert DDL and diff checks. It verified attempt 014 immutability, no context-form overclaim, closed qualified/unqualified admission, foreign-schema rejection and unchanged authority surfaces. The reviewer worktree is clean at the same HEAD. This admits one new contained diagnostic attempt.",
+    "protected_evidence_boundaries": "The run may use only the exact already-local postgres:16-bookworm image, one newly owned networkless no-port no-mount tmpfs container, accepted SQL and authored-synthetic fixtures, overwriting only the mutable current evidence after attempt 014 archival. Application/runtime wiring, operational credentials/persistence, patient/clinical/product/protected data, providers/models, commands/writes, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain untouched.",
+    "git_refs_and_worktree": "Main task worktree is on codex/ariadne-bernie-davida-parallel-seam at 897835bc3fd0fe7a4af20cc4ecf91873057d3e6c with preserved untracked evidence/review files. Reviewer r94 is clean at the identical HEAD. Local and remotely observed master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; no ref will move during runtime."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_function_name_form_pre_verifier_acceptance_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the exact review pass, candidate HEAD, clean postflight and one-attempt runtime boundary."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh Gemini 3.6 Flash/high r94 review completed with one pass at unchanged exact HEAD."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

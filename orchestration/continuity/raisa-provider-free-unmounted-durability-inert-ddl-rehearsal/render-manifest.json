@@ -1,7 +1,7 @@
 {
   "artifact": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
   "body_parent": {
-    "contract_sha256": "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3",
+    "contract_sha256": "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1",
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
     "source_head": "a93d07405ad35d7d6c0603065625c17ec14ab23e"
   },
@@ -695,7 +695,7 @@
       ]
     }
   ],
-  "effective_catalogue_digest": "sha256:380f200e6a73f675848ccbbe1c9a796c18b37aafbf9207d309cef7362a13a100",
+  "effective_catalogue_digest": "sha256:06d5da8285e57e4b2044f1e3f47d8fb587c0d378697f06f8d1b9c3d16c3a3541",
   "effective_program_count": 23,
   "immutable_parent_program_count": 22,
   "opcode_populations": {
@@ -2548,7 +2548,7 @@
     },
     "executable_ddl": false,
     "id": "postgresql_16_representability_recovery_v1",
-    "immutable_body_parent_sha256": "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3",
+    "immutable_body_parent_sha256": "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1",
     "keyed_xmin_reselects": [
       {
         "cardinality_failure": {
@@ -2639,7 +2639,7 @@
           "emr4_context_fabric.cf_guard_appointment_update_v1"
         ],
         "id": "ADD_APPOINTMENT_GUARD_PROGRAM",
-        "new_fragment_sha256": "sha256:9d9aadbbf363b793a3fb3aaeb8a32516c8b8f0409fa21b566fa068d911ff8b6f",
+        "new_fragment_sha256": "sha256:0a71713cc088aed4cde4f4b65b086bfba4115d5dcca6096db614e192d2e47d40",
         "old_fragment_sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
       },
       {
@@ -2656,8 +2656,8 @@
           "emr4_context_fabric.cf_fence_appointment_update_v1.update.applicability"
         ],
         "id": "ADD_APPOINTMENT_PRODUCER_APPLICABILITY",
-        "new_fragment_sha256": "sha256:d5e4c7e4ed8eea56b4acc8d963a58f8e8273f4ea12f71db8914b89b534548cbe",
-        "old_fragment_sha256": "sha256:5c132efa9b410a034994d3cd6dc0cf43f6b1c40dd9f3307bf9e5ac8ef9c07220"
+        "new_fragment_sha256": "sha256:f062c783fe6eb39fe65e06656f00e743f7c1f896356362338670e2f677969c90",
+        "old_fragment_sha256": "sha256:a13da3698d4a8979e6c8bec08e5daa263b39a11ec51e7c28107b3adb9fd2ff86"
       },
       {
         "affected_ids": [
@@ -2759,10 +2759,10 @@
     ]
   },
   "postgresql_major": 16,
-  "renderer_version": "2.0.4",
+  "renderer_version": "2.0.5",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
   "sql_byte_count": 1404420,
-  "sql_sha256": "sha256:9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65",
+  "sql_sha256": "sha256:83359fbc0cf2fb8f7d147b5dc820aa28910129428c9727daa1e1dc0259ce73f5",
   "statement_count": 412,
   "structural_parent": {
     "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",

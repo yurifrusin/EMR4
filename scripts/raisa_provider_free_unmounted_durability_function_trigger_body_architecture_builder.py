@@ -851,11 +851,11 @@ BINDING_COLUMNS = [
     "logical_capability",
     "practice_id",
     "source_contract_id",
-    "stream_id",
     "binding_revision",
     "credential_epoch",
     "active_from",
     "active_until",
+    "stream_id",
 ]
 
 
@@ -1221,10 +1221,10 @@ def build_producer_body() -> dict[str, Any]:
     alias_columns = [
         "practice_id",
         "source_contract_id",
-        "stream_id",
         "product_appointment_uuid",
         "opaque_aggregate_alias",
         "created_at",
+        "stream_id",
     ]
     alias_bindings = [
         ("practice_id", practice),

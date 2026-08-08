@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_attempt_015_row_composite_projection_order_source_recovery_and_regenerated_inert_artifact",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 015 is archived byte-for-byte with BTR-E01, SQLSTATE 22P02, the exact allowlisted register function at internal line 36, zero admitted scenarios and exact cleanup. Static reconciliation proves binding and aggregate-alias complete projections diverged from physical table-composite order. The typed lists are corrected; renderer 2.0.5 enforces an independently derived positional-row census and rejects a hostile swap. Body contract b3eaa041 and inert artifact 83359fbc regenerate deterministically at 412 statements and 1404420 bytes. AER revision 115 records the defect.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled source correction, evidence preservation, deterministic cascade and commit. Gemini 3.6 Flash/high owns only the next fresh clean exact-HEAD veto. No native worker, DeepSeek lease, provider call or product/runtime authority is active.",
+    "git_refs_and_worktree": "The active task branch is at 897835bc3fd0fe7a4af20cc4ecf91873057d3e6c before this recovery commit. Local and remotely observed master plus handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Staging is explicit-path only and no protected ref will move.",
+    "live_handover_current_baton": "AGENTS.md keeps the provider-free disposable PostgreSQL behavior and transaction rehearsal active. Evidence-backed diagnose-repair-rerun cycles are authorised without opening providers, product data, deployment or protected refs; the future Agent Execution Surface gate remains planned and unopened.",
+    "protected_evidence_boundaries": "Only authored-synthetic repository source, inert evidence, immutable attempt-015 failure evidence, deterministic tests, recovery/threat/register documents and prior read-only verifier provenance enter this commit. Historical evidence remains unchanged. The mutable current failure evidence, docs/branding and unrelated untracked files remain unstaged. No application/API/Diary change, model/provider call, product or patient data, migration application, runtime wiring, command/write capability, deployment, production, release, Pages or protected-ref movement is admitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -190,3 +190,20 @@ exact allowlisted function name with either the explicit
 schema-qualified identifier. Every other schema or function remains sealed.
 AER-0137 records this bounded format recovery; runtime remains closed pending
 fresh deterministic and independent acceptance.
+
+## Fifteenth runtime failure and positional row-composite repair
+
+Attempt 015 admitted the repaired function-name form and released the exact
+allowlisted coordinate `register_observer_generation_v1` internal line 36 for
+the continuing `BTR-E01` / `22P02` failure. It admitted zero scenarios and
+again proved exact owned-container cleanup.
+
+The coordinate maps to a complete binding row assignment whose typed
+projection placed `stream_id` before `binding_revision`, while the physical
+table composite stores `stream_id` last. PostgreSQL fills the row variable
+positionally. The same class of drift affected complete aggregate-alias
+projections. The source projection catalogues now match the physical relation
+order, and renderer `2.0.5` mechanically rejects any non-system positional row
+projection that differs from its complete table-composite order. AER-0138
+records the repository defect. Fresh renderer, independent, parse/catalogue
+and behavior proof is required before another behavior attempt.

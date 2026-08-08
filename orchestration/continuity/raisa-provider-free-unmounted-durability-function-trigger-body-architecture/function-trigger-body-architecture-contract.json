@@ -1,7 +1,7 @@
 {
   "schema_version": "raisa.context_fabric.function_trigger_body_architecture.v3",
   "status": "architecture_only_unmounted_typed_ir",
-  "contract_sha256": "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3",
+  "contract_sha256": "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1",
   "parent_binding": {
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
     "contract_sha256": "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8",
@@ -2656,11 +2656,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -3925,10 +3925,10 @@
               "returning_columns": [
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "product_appointment_uuid",
                 "opaque_aggregate_alias",
-                "created_at"
+                "created_at",
+                "stream_id"
               ],
               "conflict_key_columns": [
                 "practice_id",
@@ -3939,10 +3939,10 @@
               "winner_columns": [
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "product_appointment_uuid",
                 "opaque_aggregate_alias",
-                "created_at"
+                "created_at",
+                "stream_id"
               ],
               "winner_predicate": {
                 "op": "AND",
@@ -4128,10 +4128,10 @@
               "columns": [
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "product_appointment_uuid",
                 "opaque_aggregate_alias",
-                "created_at"
+                "created_at",
+                "stream_id"
               ]
             }
           },
@@ -5091,11 +5091,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -13014,11 +13014,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -50425,11 +50425,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -63399,11 +63399,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -74142,11 +74142,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -78369,11 +78369,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -79734,11 +79734,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -85055,11 +85055,11 @@
                 "logical_capability",
                 "practice_id",
                 "source_contract_id",
-                "stream_id",
                 "binding_revision",
                 "credential_epoch",
                 "active_from",
-                "active_until"
+                "active_until",
+                "stream_id"
               ],
               "predicate": {
                 "op": "AND",
@@ -91071,11 +91071,11 @@
                                 "logical_capability",
                                 "practice_id",
                                 "source_contract_id",
-                                "stream_id",
                                 "binding_revision",
                                 "credential_epoch",
                                 "active_from",
-                                "active_until"
+                                "active_until",
+                                "stream_id"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -91728,10 +91728,10 @@
                               "columns": [
                                 "practice_id",
                                 "source_contract_id",
-                                "stream_id",
                                 "product_appointment_uuid",
                                 "opaque_aggregate_alias",
-                                "created_at"
+                                "created_at",
+                                "stream_id"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -92890,11 +92890,11 @@
                                       "logical_capability",
                                       "practice_id",
                                       "source_contract_id",
-                                      "stream_id",
                                       "binding_revision",
                                       "credential_epoch",
                                       "active_from",
-                                      "active_until"
+                                      "active_until",
+                                      "stream_id"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -93547,10 +93547,10 @@
                                     "columns": [
                                       "practice_id",
                                       "source_contract_id",
-                                      "stream_id",
                                       "product_appointment_uuid",
                                       "opaque_aggregate_alias",
-                                      "created_at"
+                                      "created_at",
+                                      "stream_id"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -95001,11 +95001,11 @@
                           "logical_capability",
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "binding_revision",
                           "credential_epoch",
                           "active_from",
-                          "active_until"
+                          "active_until",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -95180,11 +95180,11 @@
                                 "logical_capability",
                                 "practice_id",
                                 "source_contract_id",
-                                "stream_id",
                                 "binding_revision",
                                 "credential_epoch",
                                 "active_from",
-                                "active_until"
+                                "active_until",
+                                "stream_id"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -96223,10 +96223,10 @@
                                     "columns": [
                                       "practice_id",
                                       "source_contract_id",
-                                      "stream_id",
                                       "product_appointment_uuid",
                                       "opaque_aggregate_alias",
-                                      "created_at"
+                                      "created_at",
+                                      "stream_id"
                                     ],
                                     "predicate": {
                                       "op": "AND",
@@ -97571,10 +97571,10 @@
                                           "columns": [
                                             "practice_id",
                                             "source_contract_id",
-                                            "stream_id",
                                             "product_appointment_uuid",
                                             "opaque_aggregate_alias",
-                                            "created_at"
+                                            "created_at",
+                                            "stream_id"
                                           ],
                                           "predicate": {
                                             "op": "AND",
@@ -99165,11 +99165,11 @@
                                 "logical_capability",
                                 "practice_id",
                                 "source_contract_id",
-                                "stream_id",
                                 "binding_revision",
                                 "credential_epoch",
                                 "active_from",
-                                "active_until"
+                                "active_until",
+                                "stream_id"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -99822,10 +99822,10 @@
                               "columns": [
                                 "practice_id",
                                 "source_contract_id",
-                                "stream_id",
                                 "product_appointment_uuid",
                                 "opaque_aggregate_alias",
-                                "created_at"
+                                "created_at",
+                                "stream_id"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -101975,11 +101975,11 @@
                                 "logical_capability",
                                 "practice_id",
                                 "source_contract_id",
-                                "stream_id",
                                 "binding_revision",
                                 "credential_epoch",
                                 "active_from",
-                                "active_until"
+                                "active_until",
+                                "stream_id"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -102632,10 +102632,10 @@
                               "columns": [
                                 "practice_id",
                                 "source_contract_id",
-                                "stream_id",
                                 "product_appointment_uuid",
                                 "opaque_aggregate_alias",
-                                "created_at"
+                                "created_at",
+                                "stream_id"
                               ],
                               "predicate": {
                                 "op": "AND",
@@ -104289,11 +104289,11 @@
                           "logical_capability",
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "binding_revision",
                           "credential_epoch",
                           "active_from",
-                          "active_until"
+                          "active_until",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -104525,10 +104525,10 @@
                         "columns": [
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "product_appointment_uuid",
                           "opaque_aggregate_alias",
-                          "created_at"
+                          "created_at",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -105034,11 +105034,11 @@
                           "logical_capability",
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "binding_revision",
                           "credential_epoch",
                           "active_from",
-                          "active_until"
+                          "active_until",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -105671,11 +105671,11 @@
                           "logical_capability",
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "binding_revision",
                           "credential_epoch",
                           "active_from",
-                          "active_until"
+                          "active_until",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -106078,11 +106078,11 @@
                           "logical_capability",
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "binding_revision",
                           "credential_epoch",
                           "active_from",
-                          "active_until"
+                          "active_until",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -106984,11 +106984,11 @@
                           "logical_capability",
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "binding_revision",
                           "credential_epoch",
                           "active_from",
-                          "active_until"
+                          "active_until",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -107640,11 +107640,11 @@
                           "logical_capability",
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "binding_revision",
                           "credential_epoch",
                           "active_from",
-                          "active_until"
+                          "active_until",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -108394,10 +108394,10 @@
                         "columns": [
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "product_appointment_uuid",
                           "opaque_aggregate_alias",
-                          "created_at"
+                          "created_at",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",
@@ -109637,11 +109637,11 @@
                           "logical_capability",
                           "practice_id",
                           "source_contract_id",
-                          "stream_id",
                           "binding_revision",
                           "credential_epoch",
                           "active_from",
-                          "active_until"
+                          "active_until",
+                          "stream_id"
                         ],
                         "predicate": {
                           "op": "AND",

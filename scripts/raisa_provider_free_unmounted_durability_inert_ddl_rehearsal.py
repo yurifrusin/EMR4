@@ -63,7 +63,7 @@ LOWERING_SCHEMA_PATH = OUTPUT_DIR / "lowering-contract.schema.json"
 SQL_INERT_PATH = OUTPUT_DIR / "durability-schema.sql.inert"
 MANIFEST_PATH = OUTPUT_DIR / "render-manifest.json"
 
-BODY_DIGEST = "sha256:f71287f266a3252d2a0736e511287600939a40bc70397710600c12581e24d4f3"
+BODY_DIGEST = "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1"
 STRUCTURAL_SOURCE_HEAD = "c55d25d6c9704ae4612ef2d123158f71302ab411"
 BODY_SOURCE_HEAD = "a93d07405ad35d7d6c0603065625c17ec14ab23e"
 
@@ -120,7 +120,7 @@ RECOVERY_SPEC: dict[str, Any] = {
             "id": "ADD_APPOINTMENT_GUARD_PROGRAM",
             "affected_ids": [APPOINTMENT_GUARD_ID],
             "old_fragment_sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
-            "new_fragment_sha256": "sha256:9d9aadbbf363b793a3fb3aaeb8a32516c8b8f0409fa21b566fa068d911ff8b6f",
+            "new_fragment_sha256": "sha256:0a71713cc088aed4cde4f4b65b086bfba4115d5dcca6096db614e192d2e47d40",
         },
         {
             "id": "ADD_APPOINTMENT_GUARD_DECLARATION",
@@ -134,8 +134,8 @@ RECOVERY_SPEC: dict[str, Any] = {
                 APPOINTMENT_GUARD_ID + ".update.applicability",
                 FABRIC + "cf_fence_appointment_update_v1.update.applicability",
             ],
-            "old_fragment_sha256": "sha256:5c132efa9b410a034994d3cd6dc0cf43f6b1c40dd9f3307bf9e5ac8ef9c07220",
-            "new_fragment_sha256": "sha256:d5e4c7e4ed8eea56b4acc8d963a58f8e8273f4ea12f71db8914b89b534548cbe",
+            "old_fragment_sha256": "sha256:a13da3698d4a8979e6c8bec08e5daa263b39a11ec51e7c28107b3adb9fd2ff86",
+            "new_fragment_sha256": "sha256:f062c783fe6eb39fe65e06656f00e743f7c1f896356362338670e2f677969c90",
         },
         {
             "id": "RESELECT_BEFORE_TRIGGER_OLD_XMIN",
@@ -1926,6 +1926,37 @@ def _relation_user_columns(ctx: dict[str, Any], relation: str) -> list[str]:
     return [name for name in col_types if name != "xmin"]
 
 
+def _verify_positional_row_projections(
+    body: dict[str, Any], effective: dict[str, Any]
+) -> None:
+    """Fail closed when a row-composite assignment can shift column values."""
+    ctx = {"effective": effective}
+    for program in body["body_programs"]:
+        for instruction in _walk_program_nodes(program):
+            op = instruction["op"]
+            operands = instruction["operands"]
+            columns: list[str] | None = None
+            if (
+                op in {"SELECT_EXACT", "LOCK_EXACT"}
+                and "output_symbol" in operands
+                and "xmin" not in operands.get("columns", [])
+            ):
+                columns = operands.get("columns")
+            elif (
+                op in {"INSERT", "INSERT_OR_RELOAD_COMPARE", "UPDATE"}
+                and "output_symbol" in operands
+            ):
+                columns = operands.get("returning_columns")
+            if columns is None:
+                continue
+            expected = _relation_user_columns(ctx, operands["relation"])
+            if columns != expected:
+                raise ValueError(
+                    "positional row projection order mismatch at "
+                    + instruction["node_id"]
+                )
+
+
 def _exactly_one_block(body: str, indent: int) -> str:
     pad = "    " * indent
     return (
@@ -3029,7 +3060,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.4"
+RENDERER_VERSION = "2.0.5"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "
@@ -3547,6 +3578,7 @@ def render_inert(
     _verify_trigger_terminals(immutable_body)
     body, effective = derive_effective_body(immutable_body, effective)
     _verify_trigger_terminals(body)
+    _verify_positional_row_projections(body, effective)
     ctx: dict[str, Any] = {
         "effective": effective,
         "failures": {f["id"]: f for f in body["failure_registry"]},

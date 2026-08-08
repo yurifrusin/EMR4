@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 114,
+  "register_revision": 115,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5306,6 +5306,54 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-function-name-form-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-114.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0138",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-015",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-body-contract",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every complete PostgreSQL row projection assigned into a relation-composite variable must follow the exact physical user-column order so no field value can be shifted into a different typed slot.",
+      "observed_error": "Attempt 015 reached BTR-E01 and released SQLSTATE 22P02 at internal line 36 of the exact allowlisted register_observer_generation_v1 function, with zero scenarios and verified cleanup. Static reconciliation mapped that coordinate to a binding SELECT INTO whose projection placed UUID stream_id in the positional slot occupied by bigint binding_revision; aggregate-alias projections carried the same ordering class.",
+      "detection_method": "The bounded runtime coordinate was mapped to the immutable rendered function, then the typed projection lists were compared mechanically with independently derived physical relation user-column order. An authored single-swap mutation reproduces the invariant rejection before SQL rendering.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-015.json",
+        "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder.py",
+        "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_trigger_programs.py",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-row-composite-projection-order-recovery.md",
+        "docs/security/raisa-context-fabric-row-composite-projection-order-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-115.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.positional_row_projection_order_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The authoritative binding and aggregate-alias complete projection catalogues now follow physical relation order, and renderer 2.0.5 rejects every non-system positional row assignment whose projection is not the complete physical user-column order.",
+        "prevention_control": "Every structural column recovery and typed body change must pass an independently derived positional row-projection census covering exact selects, locks and row-returning writes, including an authored hostile order swap, before an artifact can be rendered.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder.py",
+          "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_trigger_programs.py",
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-row-composite-projection-order-recovery.md",
+          "docs/security/raisa-context-fabric-row-composite-projection-order-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-115.md"
         ]
       },
       "status": "corrected"

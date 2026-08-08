@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_fresh_gemini_36_flash_high_read_only_veto_for_closed_plpgsql_function_name_forms",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md keeps the disposable PostgreSQL behavior/transaction rehearsal active and requires a fresh exact-HEAD veto before another repaired runtime attempt.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project receives read-only veto authority only. GPT Sol retains implementation, runtime, acceptance and ref authority; no other worker is active.",
+    "active_plan_and_acceptance": "Candidate 897835bc3fd0fe7a4af20cc4ecf91873057d3e6c preserves attempt 014 and adds only the exact optional known schema prefix for the already scenario-allowlisted function name. Focused tests, Ruff and AER revision 114 pass; r94 is clean at the exact candidate. A pass admits one contained diagnostic attempt only.",
+    "protected_evidence_boundaries": "Review is exact-path, repository-authored synthetic and read-only. Docker/PostgreSQL runtime, application wiring, operational credentials, patient/clinical/product/protected data, product/provider calls, commands/writes, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Fresh reviewer worktree C:/Users/sarashera/EMR4-worktrees/r94 is clean on codex/review-context-fabric-function-name-form-897835bc at exact HEAD 897835bc3fd0fe7a4af20cc4ecf91873057d3e6c and passed preflight. Local and remotely observed master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref will move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_function_name_form_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the exact candidate, packet, registered adapter method and clean reviewer preflight."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "One fresh exact-HEAD Gemini 3.6 Flash/high veto is selected for r94 with no silent fallback."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

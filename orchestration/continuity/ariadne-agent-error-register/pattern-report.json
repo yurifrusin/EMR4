@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "ebc7d4f1d8b35a44de194198d9497daf45c7c4d98f0c9812da8e9bfc21ca896a",
+  "canonical_register_sha256": "0367414b9463c3e796c8e26e765ccd55bd1e6d499767c1f1b3ca28c47c3c89e6",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 30,
+      "accepted_candidate_changed": 31,
       "canonical_unchanged": 85,
       "untrusted_partial_worktree": 22
     },
@@ -13,18 +13,18 @@
       "output_contract_violation": 40,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
-      "repository_defect": 12,
+      "repository_defect": 13,
       "transport_timeout": 8
     },
     "by_origin": {
       "agent_behavior": 100,
       "harness": 17,
-      "repository": 12,
+      "repository": 13,
       "transport": 8
     },
     "by_process_severity": {
       "low": 42,
-      "material": 46,
+      "material": 47,
       "moderate": 49
     },
     "by_resource_and_role": {
@@ -42,6 +42,7 @@
       "deepseek-v4-flash-c5-worker::implementer": 1,
       "deepseek-v4-flash-implementation-worker::implementer": 2,
       "docker-desktop-windows::orchestrator": 1,
+      "emr4-context-fabric-durability-body-contract::orchestrator": 1,
       "emr4-disposable-postgresql-harness::orchestrator": 14,
       "emr4-durability-ddl-renderer::orchestrator": 3,
       "git-worktree-windows-path-layout::orchestrator": 3,
@@ -53,12 +54,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 86,
+      "orchestrator": 87,
       "verifier": 37
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 137,
+  "incident_count": 138,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -375,7 +376,7 @@
       ]
     }
   ],
-  "register_revision": 114,
+  "register_revision": 115,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-08"
 }

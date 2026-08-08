@@ -32,6 +32,7 @@ from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import
     _render_relations,
     _symbol_ident,
     _type_sql,
+    _verify_positional_row_projections,
     _verify_trigger_terminals,
     _walk_program_nodes,
     build_lowering_contract,
@@ -118,6 +119,44 @@ def test_recovered_effective_body_population_is_exact() -> None:
     assert len(recovered["signatures"]["trigger_functions"]) == 14
     assert len(recovered["trigger_declarations"]) == 14
     assert body["postgresql_16_representability_recovery_v1"] == RECOVERY_SPEC
+
+
+def test_effective_relation_row_order_matches_typed_catalogue() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    typed_relations = parents["body"]["qualified_identifier_catalogue"]["relations"]
+    for relation in effective["effective_structural"]["relation_catalogue"][
+        "relations"
+    ]:
+        relation_id = "emr4_context_fabric." + relation["name"]
+        names = [
+            column["name"] for column in relation["columns"] if column["name"] != "xmin"
+        ]
+        expected = [name for name in typed_relations[relation_id] if name != "xmin"]
+        assert names == expected
+
+
+def test_positional_row_projection_order_is_mechanically_closed() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    body, recovered = derive_effective_body(parents["body"], effective)
+    _verify_positional_row_projections(body, recovered)
+
+    candidate = copy.deepcopy(body)
+    registration = next(
+        program
+        for program in candidate["body_programs"]
+        if program["id"] == "emr4_context_fabric.register_observer_generation_v1"
+    )
+    binding_read = next(
+        node
+        for node in _walk_program_nodes(registration)
+        if node["node_id"].endswith("binding.select")
+    )
+    columns = binding_read["operands"]["columns"]
+    columns[4], columns[8] = columns[8], columns[4]
+    with pytest.raises(ValueError, match="positional row projection order mismatch"):
+        _verify_positional_row_projections(candidate, recovered)
 
 
 def test_recovery_operations_are_position_closed_and_fragment_sealed() -> None:
@@ -1029,8 +1068,8 @@ def test_renderer_unique_race_reload_proves_exact_cardinality() -> None:
     # Insert-success arm proves exactly one row returned.
     assert (
         sql.count(
-            "RETURNING practice_id, source_contract_id, stream_id, product_appointment_uuid, "
-            "opaque_aggregate_alias, created_at INTO alias;\n"
+            "RETURNING practice_id, source_contract_id, product_appointment_uuid, "
+            "opaque_aggregate_alias, created_at, stream_id INTO alias;\n"
             "        IF NOT FOUND THEN"
         )
         >= 1

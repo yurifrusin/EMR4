@@ -54,8 +54,8 @@ EVENT_COLUMNS = [
     "audit_log_id", "payload", "created_at", "xmin",
 ]
 ALIAS_COLUMNS = [
-    "practice_id", "source_contract_id", "stream_id",
-    "product_appointment_uuid", "opaque_aggregate_alias", "created_at",
+    "practice_id", "source_contract_id", "product_appointment_uuid",
+    "opaque_aggregate_alias", "created_at", "stream_id",
 ]
 HEAD_COLUMNS = [
     "practice_id", "source_contract_id", "stream_id", "stream_epoch",

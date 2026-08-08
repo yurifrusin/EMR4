@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r94",
+  "branch": "codex/review-context-fabric-function-name-form-897835bc",
+  "head": "897835bc3fd0fe7a4af20cc4ecf91873057d3e6c",
+  "expected_head": "897835bc3fd0fe7a4af20cc4ecf91873057d3e6c",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-function-name-form-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
