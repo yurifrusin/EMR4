@@ -789,6 +789,13 @@ def test_exact_absence_requires_documented_no_such_object() -> None:
         rehearsal.ProcessResult(1, b"", b"daemon unavailable")
     )
     assert not rehearsal._is_exact_absence(rehearsal.ProcessResult(0, b"{}", b""))  # noqa: SLF001
+    assert rehearsal._is_exact_absence(  # noqa: SLF001
+        rehearsal.ProcessResult(
+            1,
+            b"",
+            b"Error response from daemon: No such container: exact-owned-name",
+        )
+    )
 
 
 def test_exact_owned_cleanup_uses_only_captured_id() -> None:

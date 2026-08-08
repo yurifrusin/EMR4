@@ -83,6 +83,13 @@ stderr concurrently into hard byte-capped buffers and terminates the child at
 the cap, so rejection is a real memory boundary rather than a retrospective
 size check.
 
+The first image-restored characterization attempt then stopped before container
+creation because Docker Desktop reports an absent container as `No such
+container`, while the exact-absence recognizer admitted only `No such object`.
+The failed evidence is preserved. Recovery accepts only those two documented
+nonzero exact-inspect absence phrases; success, daemon failure and every other
+response remain non-absence and cannot authorize creation or cleanup.
+
 The expected PostgreSQL-16 deparse digests cannot safely be guessed from the
 source spelling. The repaired contract therefore begins in
 `characterization_only`: one fresh-vetoed, exact-artifact disposable run may

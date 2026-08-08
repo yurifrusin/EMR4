@@ -625,7 +625,7 @@ def _is_exact_absence(result: ProcessResult) -> bool:
     if result.returncode == 0:
         return False
     bounded = (result.stdout + result.stderr).lower()
-    return b"no such object" in bounded
+    return b"no such object" in bounded or b"no such container" in bounded
 
 
 def _expected_sets(manifest: dict[str, Any]) -> dict[str, set[str]]:
