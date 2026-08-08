@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 107,
+  "register_revision": 109,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -5004,6 +5004,90 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-snapshot-query-diagnostic-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-107.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0131",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-010",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Generated PostgreSQL snapshot SQL must render SQL conditional special forms with valid PostgreSQL syntax rather than schema-qualifying them as callable functions.",
+      "observed_error": "Attempt 010 identified the fixed scenario_snapshot query and SQLSTATE 42883 before all scenarios; exact static readback found that the renderer emitted pg_catalog.coalesce even though COALESCE is PostgreSQL special syntax and cannot be schema-qualified.",
+      "detection_method": "The bounded query-id and SQLSTATE evidence was reconciled with the exact rendered snapshot SQL, uniquely identifying the invalid pg_catalog.coalesce spelling without exposing query values or stderr prose.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-010.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-snapshot-special-form-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-108.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.schema_qualified_postgresql_special_form",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The snapshot renderer now emits unqualified COALESCE while retaining every aggregate, row conversion, ordering expression, relation and digest unchanged.",
+        "prevention_control": "Generated PostgreSQL SQL must distinguish special syntactic forms from callable functions, and exact renderer tests must forbid schema-qualified special forms before runtime review.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-snapshot-special-form-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-108.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0132",
+      "attempt_id": "raisa-context-fabric-snapshot-special-form-deterministic-check-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A newly released bounded failure field must be admitted by the same closed evidence schema before the diagnostic harness can be accepted or executed again.",
+      "observed_error": "The exact failure-010 regression test found that the harness emitted the fixed query_id scenario_snapshot but the evidence schema still rejected query_id as an additional property.",
+      "detection_method": "Whole-document Draft 2020-12 validation of the preserved failure-010 evidence stopped deterministic verification before review or database execution.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-010.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-snapshot-query-id-schema-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-109.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.failure_evidence_schema_omits_bounded_diagnostic_field",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The closed evidence schema now admits query_id only as the literal scenario_snapshot and a negative regression rejects every other value.",
+        "prevention_control": "Any failure-envelope field change must update and whole-document-validate its closed evidence schema in the same candidate before a runtime veto is requested.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-snapshot-query-id-schema-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-109.md"
         ]
       },
       "status": "corrected"

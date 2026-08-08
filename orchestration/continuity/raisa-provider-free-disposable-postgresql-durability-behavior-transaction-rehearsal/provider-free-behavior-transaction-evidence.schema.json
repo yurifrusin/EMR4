@@ -81,6 +81,7 @@
             "stage": {"type": "string", "minLength": 1},
             "code": {"type": "string", "minLength": 1},
             "detail_digest": {"$ref": "#/$defs/digest"},
+            "query_id": {"const": "scenario_snapshot"},
             "sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"},
             "coordinate_status": {
               "enum": [

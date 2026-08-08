@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 107
+    assert register["register_revision"] == 109
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 131)
+        f"AER-{index:04d}" for index in range(1, 133)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -1704,15 +1704,40 @@ def test_aer_0130_adds_bounded_query_site_diagnostics() -> None:
     )
 
 
+def test_aer_0131_repairs_schema_qualified_postgresql_special_form() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0131"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert "SQLSTATE 42883" in incident["observed_error"]
+    assert "pg_catalog.coalesce" in incident["observed_error"]
+    assert (
+        "distinguish special syntactic forms"
+        in incident["correction"]["prevention_control"]
+    )
+
+
+def test_aer_0132_closes_snapshot_query_id_evidence_schema() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0132"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["related_incident_ids"] == []
+    assert "additional property" in incident["observed_error"]
+    assert "whole-document-validate" in incident["correction"]["prevention_control"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 130
+    assert report["incident_count"] == 132
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 99,
         "harness": 14,
-        "repository": 9,
+        "repository": 11,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
@@ -1722,11 +1747,11 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "output_contract_violation": 39,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 9,
+        "repository_defect": 11,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 24,
+        "accepted_candidate_changed": 26,
         "canonical_unchanged": 84,
         "untrusted_partial_worktree": 22,
     }

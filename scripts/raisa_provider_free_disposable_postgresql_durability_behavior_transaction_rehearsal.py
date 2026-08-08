@@ -1610,7 +1610,7 @@ def _snapshot_sql() -> str:
             _lit(relation) + ", (SELECT pg_catalog.json_build_object("
             "'count',pg_catalog.count(*),"
             "'digest','sha256:'||pg_catalog.encode(pg_catalog.sha256(pg_catalog.convert_to("
-            "pg_catalog.coalesce(pg_catalog.jsonb_agg(pg_catalog.to_jsonb(t) ORDER BY "
+            "COALESCE(pg_catalog.jsonb_agg(pg_catalog.to_jsonb(t) ORDER BY "
             "pg_catalog.to_jsonb(t)::pg_catalog.text)::pg_catalog.text,'[]'),'UTF8')),'hex')) "
             f"FROM {schema}.{table} AS t)"
         )

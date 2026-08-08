@@ -75,6 +75,11 @@ FAILURE_EVIDENCE_009 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_010 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-010.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -285,6 +290,37 @@ def test_snapshot_query_failure_releases_only_bounded_site_and_sqlstate() -> Non
     }
     assert captured["stdin"].startswith(b"SET TRANSACTION READ ONLY;\n")
     assert "--file=-" in captured["argv"]
+
+
+def test_snapshot_query_uses_unqualified_postgresql_special_form() -> None:
+    sql = rehearsal._snapshot_sql()  # noqa: SLF001
+
+    assert "pg_catalog.coalesce" not in sql.lower()
+    assert sql.count("COALESCE(") == len(rehearsal.SNAPSHOT_RELATIONS)
+
+
+def test_snapshot_undefined_function_failure_is_preserved_and_closed() -> None:
+    evidence = FAILURE_EVIDENCE_010
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+    assert evidence["environment"]["failure"] == {
+        "code": "query_failed",
+        "detail_digest": evidence["environment"]["failure"]["detail_digest"],
+        "query_id": "scenario_snapshot",
+        "sqlstate": "42883",
+        "stage": "readback",
+    }
+    assert evidence["lifecycle"][-2:] == ["fixtures_closed", "cleanup_verified"]
+    assert evidence["scenario_reconciliation"]["observed"] == 0
+    assert evidence["cleanup"]["absence_verified"] is True
+
+
+def test_snapshot_query_id_schema_rejects_every_other_value() -> None:
+    evidence = copy.deepcopy(FAILURE_EVIDENCE_010)
+    evidence["environment"]["failure"]["query_id"] = "caller_selected_query"
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
 
 
 def test_catalogue_deltas_separate_fixture_rows_from_structural_drift() -> None:
