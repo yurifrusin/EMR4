@@ -1,6 +1,6 @@
 -- -- durability-schema.sql.inert -- inert evidence artifact; never execute or apply
 -- generated_by: raisa_provider_free_unmounted_durability_inert_ddl_rehearsal
--- renderer_version: 2.0.6
+-- renderer_version: 2.0.7
 -- do_not_execute: true
 
 -- ==========================================================================
@@ -492,9 +492,9 @@ ALTER TABLE emr4_context_fabric.context_service_practice_binding FORCE ROW LEVEL
 ALTER TABLE emr4_context_fabric.context_retention_policy ENABLE ROW LEVEL SECURITY;
 ALTER TABLE emr4_context_fabric.context_retention_policy FORCE ROW LEVEL SECURITY;
 CREATE POLICY pol_cf_01_select ON emr4_context_fabric.context_observation_stream_head FOR SELECT TO PUBLIC
-    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_01_insert ON emr4_context_fabric.context_observation_stream_head FOR INSERT TO PUBLIC
-    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_01_update ON emr4_context_fabric.context_observation_stream_head FOR UPDATE TO PUBLIC
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
@@ -542,16 +542,16 @@ CREATE POLICY pol_cf_09_select ON emr4_context_fabric.context_classified_observa
 CREATE POLICY pol_cf_09_insert ON emr4_context_fabric.context_classified_observation_receipt FOR INSERT TO PUBLIC
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_10_select ON emr4_context_fabric.context_frame_generation FOR SELECT TO PUBLIC
-    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_10_insert ON emr4_context_fabric.context_frame_generation FOR INSERT TO PUBLIC
-    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_10_update ON emr4_context_fabric.context_frame_generation FOR UPDATE TO PUBLIC
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_11_select ON emr4_context_fabric.context_invalidation_watermark FOR SELECT TO PUBLIC
-    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_11_insert ON emr4_context_fabric.context_invalidation_watermark FOR INSERT TO PUBLIC
-    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_11_update ON emr4_context_fabric.context_invalidation_watermark FOR UPDATE TO PUBLIC
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));

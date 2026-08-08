@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_renderer_2_0_7_and_the_exact_inert_registration_rls_artifact_rebind_on_the_task_branch",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free behavior gate remains in evidence-backed recovery after attempt 018. The structural and typed-body parent corrections are committed; exact inert artifact regeneration is the next dependency before parse/catalogue and behavior review.",
+    "current_authority_allocation": "GPT Sol owns deterministic regeneration, tests and task-branch commit. No database run, external implementation worker, native subagent, provider or product surface is used; Gemini review remains deferred until the full descendant packet is complete.",
+    "active_plan_and_acceptance": "Renderer 2.0.7 binds structural source 9fb107ab598fba418b42be6d233c4960a6f29840 and body source 6ae8f2c7bf3df1fe9f89b760e9d3641384848545. The exact 412-statement, 1402659-LF-byte artifact is sha256:34d321adce220a94473e3cd74173f7b0ffc37441b2e4dd24699ca18b86c7e760 and render manifest file is sha256:4ac9b851796f6460fd55844d4d3634eba62f4302bd68ce80b62b63f69cd541ea. Only six policy predicates, parent hashes and renderer version differ; renderer check, focused tests, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "The artifact remains inert. No Docker or PostgreSQL run, application migration, operational database/credential, source watcher/listener/feed, application/API/Diary change, patient/clinical/product/protected data, provider/model call, command/write, deployment, production, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Task HEAD is 6ae8f2c7bf3df1fe9f89b760e9d3641384848545. Only explicit renderer, generated artifact/manifest/lowering, focused test, rebind-document and receipt paths will be staged. Mutable behavior evidence, docs/branding/ and unrelated untracked files remain excluded. Local and origin master plus handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_registration_rls_artifact_rebind_precommit", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact artifact bytes, manifest, policy scope and deterministic packet."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Independent review remains deferred until parse and behavior descendants are rebound."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is assigned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude model lane is selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -108,6 +108,27 @@ def test_recovery_population_and_effective_catalogue_reconcile() -> None:
     assert digest_domain["not_null_values"] is False
 
 
+def test_registration_initial_projection_policies_retain_narrow_lifecycle_access() -> None:
+    effective = derive_effective_catalogue(_parents())
+    policies = {policy["id"]: policy for policy in effective["rls_policies"]}
+    lifecycle = "'LIFECYCLE'::emr4_context_fabric.logical_capability"
+
+    required = {
+        "pol_cf_01_select": "using_sql",
+        "pol_cf_01_insert": "with_check_sql",
+        "pol_cf_10_select": "using_sql",
+        "pol_cf_10_insert": "with_check_sql",
+        "pol_cf_11_select": "using_sql",
+        "pol_cf_11_insert": "with_check_sql",
+    }
+    for policy_id, predicate_field in required.items():
+        assert lifecycle in policies[policy_id][predicate_field]
+
+    for policy_id in ("pol_cf_01_update", "pol_cf_10_update", "pol_cf_11_update"):
+        assert lifecycle not in policies[policy_id]["using_sql"]
+        assert lifecycle not in policies[policy_id]["with_check_sql"]
+
+
 def test_recovered_effective_body_population_is_exact() -> None:
     parents = _parents()
     effective = derive_effective_catalogue(parents)
