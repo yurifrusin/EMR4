@@ -295,3 +295,16 @@ to equal the exact fixed suffix line (`artifact LF line count + 2`) as well as
 matching exit 3 and SQLSTATE `42601`. Success-side rejection lines are bounded
 to the artifact. Raw messages and values remain absent. This closes the false
 attribution without changing SQL, retries, container scope or authority.
+
+Attempt `25c6b86979076a1dfedfbb5b` then correctly rejected the rollback claim:
+SQLSTATE `42601` occurred on artifact line `1980`, not fixed suffix line `4608`.
+Exact container
+`a9b76e4888a6c5447c66502b0036a3e6c43451b880a2ae471eeb0ff63734b150`
+was removed and absence verified. Line 1980 terminates the generated
+`apply_durability_transition_v1` function definition, proving a PL/pgSQL compile
+error inside that statement but not yet identifying the body coordinate.
+
+The next bounded diagnostic adds only numeric statement-relative `LINE`, error
+`POSITION`/`INTERNAL POSITION`, and PL/pgSQL context-line coordinates, each
+range-limited to the authored artifact. Error text, tokens and values remain
+absent. This is evidence-only and changes no SQL, contract, retry or authority.

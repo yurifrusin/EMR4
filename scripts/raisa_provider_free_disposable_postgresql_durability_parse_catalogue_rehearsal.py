@@ -55,6 +55,16 @@ VERBOSE_SQLSTATE = re.compile(rb"(?:ERROR|FATAL):\s+([0-9A-Z]{5}):")
 VERBOSE_PSQL_ERROR_LINE = re.compile(
     rb"psql:<stdin>:([1-9][0-9]*):\s+(?:ERROR|FATAL):"
 )
+VERBOSE_STATEMENT_LINE = re.compile(rb"(?:^|\n)LINE\s+([1-9][0-9]*):", re.MULTILINE)
+VERBOSE_POSITION = re.compile(
+    rb"(?:^|\n)(?:POSITION|INTERNAL POSITION):\s+([1-9][0-9]*)",
+    re.MULTILINE,
+)
+VERBOSE_CONTEXT_LINE = re.compile(
+    rb"(?:compilation of PL/pgSQL function[^\n]*?(?:near )?|PL/pgSQL function[^\n]*?)"
+    rb"line\s+([1-9][0-9]*)",
+    re.IGNORECASE,
+)
 ROLE_LINE = re.compile(
     r"^CREATE ROLE ([a-z][a-z0-9_]*) (NO)?LOGIN (NO)?INHERIT "
     r"NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;$",
@@ -698,7 +708,7 @@ def _observed_sqlstates(stderr: bytes) -> list[str]:
 
 
 def _bounded_psql_rejection(
-    result: ProcessResult, *, max_error_line: int
+    result: ProcessResult, *, max_error_line: int, max_error_position: int
 ) -> dict[str, Any]:
     """Retain only closed SQLSTATE identifiers and an opaque stderr digest."""
     error_lines = sorted(
@@ -713,6 +723,27 @@ def _bounded_psql_rejection(
         "psql_exit": result.returncode,
         "observed_sqlstates": _observed_sqlstates(result.stderr),
         "error_lines": error_lines,
+        "statement_lines": sorted(
+            {
+                int(match)
+                for match in VERBOSE_STATEMENT_LINE.findall(result.stderr)
+                if int(match) <= max_error_line
+            }
+        ),
+        "positions": sorted(
+            {
+                int(match)
+                for match in VERBOSE_POSITION.findall(result.stderr)
+                if int(match) <= max_error_position
+            }
+        ),
+        "context_lines": sorted(
+            {
+                int(match)
+                for match in VERBOSE_CONTEXT_LINE.findall(result.stderr)
+                if int(match) <= max_error_line
+            }
+        ),
         "stderr": _bounded_digest(result.stderr),
     }
 
@@ -1744,7 +1775,10 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                 expected_sqlstate = contract["psql_admission"]["expected_sqlstate"]
                 expected_error_line = artifact_line_count + 2
                 bounded_rejection = _bounded_psql_rejection(
-                    invalid, max_error_line=expected_error_line
+                    invalid,
+                    max_error_line=expected_error_line,
+                    max_error_position=len(artifact)
+                    + len(contract["psql_admission"]["invalid_suffix"].encode("utf-8")),
                 )
                 observed_sqlstates = bounded_rejection["observed_sqlstates"]
                 rollback = {
@@ -1757,6 +1791,9 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                     == [expected_error_line],
                     "observed_sqlstates": observed_sqlstates,
                     "error_lines": bounded_rejection["error_lines"],
+                    "statement_lines": bounded_rejection["statement_lines"],
+                    "positions": bounded_rejection["positions"],
+                    "context_lines": bounded_rejection["context_lines"],
                     "stderr": bounded_rejection["stderr"],
                 }
                 if (
@@ -1812,7 +1849,9 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
                     catalogue = {
                         "status": "not_started",
                         "artifact_admission": _bounded_psql_rejection(
-                            admitted, max_error_line=artifact_line_count
+                            admitted,
+                            max_error_line=artifact_line_count,
+                            max_error_position=len(artifact),
                         ),
                     }
                     raise RehearsalFailure(

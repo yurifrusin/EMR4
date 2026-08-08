@@ -602,10 +602,15 @@ def test_observed_sqlstates_are_closed_sorted_and_deduplicated() -> None:
 def test_artifact_rejection_evidence_is_bounded_and_value_free() -> None:
     raw = (
         b"psql:<stdin>:500: ERROR:  42883: raw authored-synthetic detail\n"
+        b"LINE 12: private authored SQL\n"
+        b"POSITION: 4321\n"
+        b"CONTEXT: compilation of PL/pgSQL function near line 7\n"
         b"LOCATION: private implementation detail\n"
     )
     bounded = rehearsal._bounded_psql_rejection(  # noqa: SLF001
-        rehearsal.ProcessResult(3, b"ignored stdout", raw), max_error_line=1000
+        rehearsal.ProcessResult(3, b"ignored stdout", raw),
+        max_error_line=1000,
+        max_error_position=5000,
     )
 
     assert bounded == {
@@ -613,6 +618,9 @@ def test_artifact_rejection_evidence_is_bounded_and_value_free() -> None:
         "psql_exit": 3,
         "observed_sqlstates": ["42883"],
         "error_lines": [500],
+        "statement_lines": [12],
+        "positions": [4321],
+        "context_lines": [7],
         "stderr": rehearsal._bounded_digest(raw),  # noqa: SLF001
     }
     rendered = json.dumps(bounded)
@@ -627,7 +635,9 @@ def test_artifact_rejection_line_evidence_is_closed_to_authored_input() -> None:
         b"psql:other.sql:20: ERROR:  42883: wrong source\n"
     )
     bounded = rehearsal._bounded_psql_rejection(  # noqa: SLF001
-        rehearsal.ProcessResult(3, b"", raw), max_error_line=100
+        rehearsal.ProcessResult(3, b"", raw),
+        max_error_line=100,
+        max_error_position=1000,
     )
     assert bounded["error_lines"] == [41]
     assert bounded["observed_sqlstates"] == ["42601", "42883", "42P01"]
