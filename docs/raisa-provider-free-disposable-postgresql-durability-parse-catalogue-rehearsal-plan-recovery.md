@@ -409,3 +409,24 @@ role. Function language sanity and later exact query-digest binding remain
 unchanged. No artifact, contract, query, function definition, grant, runtime or
 authority changes. A fresh exact-HEAD veto is required before another owned
 characterization run.
+
+## Composite backing-relation column recovery
+
+Attempt `d588cb699186213d75e30e33` passed the exact function-owner assertion and
+all preceding gates, then stopped at `fabric_column_relation_population`.
+Exact container
+`2c2b441689aec2491be3359fbf4a8d948e3caf6809f9163de198a12594b016e6`
+was removed and absence verified.
+
+The fixed column query selected every `pg_class` row in the Fabric namespace.
+PostgreSQL gives each of the nine accepted composite types a backing
+`pg_class` relation with `relkind='c'`, so their attributes were incorrectly
+mixed into the eighteen table-column projection. Composite attributes are
+already independently read and later digest-bound by the type query.
+
+Recovery restricts only the column projection to ordinary tables
+`relkind='r'`. It does not restrict column names, types, defaults, nullability
+or positions on those tables, so every unexpected table-column change remains
+visible and fail-closed. Artifact SQL, contracts, manifests, assertions,
+commands, cleanup, runtime and authority remain unchanged. A fresh exact-HEAD
+veto is required before another owned characterization run.

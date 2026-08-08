@@ -1016,6 +1016,7 @@ FROM (
   JOIN pg_catalog.pg_namespace AS n ON n.oid = c.relnamespace
   LEFT JOIN pg_catalog.pg_attrdef AS d ON d.adrelid = a.attrelid AND d.adnum = a.attnum
   WHERE n.nspname IN ('emr4_context_fabric', 'public')
+    AND c.relkind = 'r'
     AND (n.nspname = 'emr4_context_fabric' OR c.relname IN (
       'appointments', 'appointment_command_idempotency',
       'appointment_audit_log', 'diary_committed_events'))

@@ -735,6 +735,7 @@ def test_catalogue_projection_matches_every_frozen_population() -> None:
 
 def test_catalogue_queries_project_every_definition_and_authority_surface() -> None:
     types_sql = rehearsal.CATALOGUE_SQL["types"]
+    columns_sql = rehearsal.CATALOGUE_SQL["columns"]
     constraints_sql = rehearsal.CATALOGUE_SQL["constraints"]
     policies_sql = rehearsal.CATALOGUE_SQL["policies"]
     functions_sql = rehearsal.CATALOGUE_SQL["functions"]
@@ -750,6 +751,7 @@ def test_catalogue_queries_project_every_definition_and_authority_surface() -> N
             "composite_attributes",
         )
     )
+    assert "c.relkind = 'r'" in columns_sql
     assert "con.contype <> 't'" in constraints_sql
     assert "con.contype IN" not in constraints_sql
     assert "polroles" in policies_sql and "AS roles" in policies_sql
