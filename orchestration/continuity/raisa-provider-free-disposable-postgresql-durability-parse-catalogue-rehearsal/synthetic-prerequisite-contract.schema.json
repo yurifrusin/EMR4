@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/disposable-postgresql-synthetic-prerequisite-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "owner", "tables", "forbidden"],
+  "properties": {
+    "schema_version": {"const": "emr4.disposable-postgresql-synthetic-prerequisite-contract.v1"},
+    "status": {"const": "accepted_authored_synthetic_empty_shapes"},
+    "owner": {"const": "emr4_synthetic_bootstrap"},
+    "tables": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/table"}
+    },
+    "forbidden": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string"}}
+  },
+  "$defs": {
+    "table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "columns", "constraints"],
+      "properties": {
+        "name": {"enum": ["appointments", "appointment_command_idempotency", "appointment_audit_log", "diary_committed_events"]},
+        "columns": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"$ref": "#/$defs/column"}},
+        "constraints": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/constraint"}}
+      }
+    },
+    "column": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "nullable", "default_sql"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "type": {"enum": ["uuid", "text", "timestamptz", "integer", "bigint", "jsonb"]},
+        "nullable": {"type": "boolean"},
+        "default_sql": {"type": ["string", "null"]}
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "kind", "columns"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "kind": {"enum": ["PRIMARY KEY", "UNIQUE"]},
+        "columns": {"type": "array", "minItems": 1, "maxItems": 2, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}}
+      }
+    }
+  }
+}

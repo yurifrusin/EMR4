@@ -1,0 +1,87 @@
+{
+  "schema_version": "emr4.disposable-postgresql-synthetic-prerequisite-contract.v1",
+  "status": "accepted_authored_synthetic_empty_shapes",
+  "owner": "emr4_synthetic_bootstrap",
+  "tables": [
+    {
+      "name": "appointments",
+      "columns": [
+        {"name": "id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "practice_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "practitioner_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "location_id", "type": "uuid", "nullable": true, "default_sql": null},
+        {"name": "start_time", "type": "timestamptz", "nullable": false, "default_sql": null},
+        {"name": "duration_minutes", "type": "integer", "nullable": true, "default_sql": "15"}
+      ],
+      "constraints": [
+        {"name": "pk_synthetic_appointments", "kind": "PRIMARY KEY", "columns": ["id"]},
+        {"name": "uq_synthetic_appointments_practice_id_id", "kind": "UNIQUE", "columns": ["practice_id", "id"]}
+      ]
+    },
+    {
+      "name": "appointment_command_idempotency",
+      "columns": [
+        {"name": "id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "practice_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "actor_user_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "operation_id", "type": "text", "nullable": false, "default_sql": null},
+        {"name": "route_family", "type": "text", "nullable": false, "default_sql": null},
+        {"name": "request_body_hash", "type": "text", "nullable": false, "default_sql": null},
+        {"name": "state", "type": "text", "nullable": false, "default_sql": null},
+        {"name": "target_appointment_id", "type": "uuid", "nullable": true, "default_sql": null},
+        {"name": "audit_log_id", "type": "uuid", "nullable": true, "default_sql": null},
+        {"name": "created_at", "type": "timestamptz", "nullable": false, "default_sql": "pg_catalog.now()"}
+      ],
+      "constraints": [
+        {"name": "pk_synthetic_appointment_command_idempotency", "kind": "PRIMARY KEY", "columns": ["id"]},
+        {"name": "uq_synthetic_appointment_command_practice_id_id", "kind": "UNIQUE", "columns": ["practice_id", "id"]}
+      ]
+    },
+    {
+      "name": "appointment_audit_log",
+      "columns": [
+        {"name": "id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "practice_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "appointment_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "action", "type": "text", "nullable": false, "default_sql": null},
+        {"name": "command_id", "type": "uuid", "nullable": true, "default_sql": null},
+        {"name": "created_at", "type": "timestamptz", "nullable": false, "default_sql": "pg_catalog.now()"}
+      ],
+      "constraints": [
+        {"name": "pk_synthetic_appointment_audit_log", "kind": "PRIMARY KEY", "columns": ["id"]},
+        {"name": "uq_synthetic_appointment_audit_practice_id_id", "kind": "UNIQUE", "columns": ["practice_id", "id"]}
+      ]
+    },
+    {
+      "name": "diary_committed_events",
+      "columns": [
+        {"name": "id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "practice_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "event_type", "type": "text", "nullable": false, "default_sql": null},
+        {"name": "schema_version", "type": "text", "nullable": false, "default_sql": null},
+        {"name": "source_system", "type": "text", "nullable": false, "default_sql": null},
+        {"name": "appointment_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "aggregate_revision", "type": "bigint", "nullable": false, "default_sql": null},
+        {"name": "occurred_at", "type": "timestamptz", "nullable": false, "default_sql": null},
+        {"name": "command_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "audit_log_id", "type": "uuid", "nullable": false, "default_sql": null},
+        {"name": "payload", "type": "jsonb", "nullable": false, "default_sql": null},
+        {"name": "created_at", "type": "timestamptz", "nullable": false, "default_sql": "pg_catalog.now()"}
+      ],
+      "constraints": [
+        {"name": "pk_synthetic_diary_committed_events", "kind": "PRIMARY KEY", "columns": ["id"]},
+        {"name": "uq_synthetic_diary_events_practice_id_id", "kind": "UNIQUE", "columns": ["practice_id", "id"]}
+      ]
+    }
+  ],
+  "forbidden": [
+    "rows",
+    "patient_identifiers",
+    "product_values",
+    "xmin_column",
+    "triggers",
+    "policies",
+    "grants",
+    "application_behavior"
+  ]
+}

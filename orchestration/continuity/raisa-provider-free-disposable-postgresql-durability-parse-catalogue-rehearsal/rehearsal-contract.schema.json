@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/disposable-postgresql-durability-rehearsal-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "parent",
+    "docker_profile",
+    "database_sequence",
+    "psql_admission",
+    "lifecycle",
+    "manifest_kind_counts",
+    "catalogue_assertions",
+    "catalogue_query_ids",
+    "evidence",
+    "claim_boundary",
+    "closed_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.disposable-postgresql-durability-rehearsal-contract.v1"},
+    "status": {"const": "accepted_for_bounded_implementation"},
+    "parent": {"$ref": "#/$defs/parent"},
+    "docker_profile": {"$ref": "#/$defs/docker_profile"},
+    "database_sequence": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "emr4_synthetic_rollback"},
+        {"const": "emr4_synthetic_success"}
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "psql_admission": {"$ref": "#/$defs/psql_admission"},
+    "lifecycle": {"type": "array", "minItems": 14, "maxItems": 14, "uniqueItems": true, "items": {"type": "string"}},
+    "manifest_kind_counts": {"$ref": "#/$defs/nonnegative_integer_map"},
+    "catalogue_assertions": {"$ref": "#/$defs/scalar_map"},
+    "catalogue_query_ids": {"type": "array", "minItems": 17, "maxItems": 17, "uniqueItems": true, "items": {"type": "string"}},
+    "evidence": {"$ref": "#/$defs/evidence"},
+    "claim_boundary": {"const": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only"},
+    "closed_surfaces": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"type": "string"}}
+  },
+  "$defs": {
+    "parent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted_source_head", "planning_baseline_head", "accepted_plan_head", "artifact_path", "manifest_path", "artifact_sha256", "artifact_byte_count", "statement_count", "postgresql_major", "phase_count"],
+      "properties": {
+        "accepted_source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "planning_baseline_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "accepted_plan_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "artifact_path": {"type": "string"},
+        "manifest_path": {"type": "string"},
+        "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "artifact_byte_count": {"const": 1405495},
+        "statement_count": {"const": 412},
+        "postgresql_major": {"const": 16},
+        "phase_count": {"const": 6}
+      }
+    },
+    "docker_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executable", "image_reference", "pull_policy", "network_mode", "container_name_prefix", "ownership_labels", "tmpfs", "memory", "cpus", "pids_limit", "restart", "postgres_user", "postgres_password", "postgres_database", "pgdata", "startup_timeout_seconds", "command_timeout_seconds", "artifact_timeout_seconds", "cleanup_timeout_seconds", "total_timeout_seconds", "stdout_stderr_cap_bytes"],
+      "properties": {
+        "executable": {"const": "docker.exe"},
+        "image_reference": {"const": "postgres:16-bookworm"},
+        "pull_policy": {"const": "never"},
+        "network_mode": {"const": "none"},
+        "container_name_prefix": {"const": "emr4-cf-pg16-catalogue-"},
+        "ownership_labels": {"type": "object", "additionalProperties": false, "required": ["com.emr4.harness", "com.emr4.cleanup-nonce"], "properties": {"com.emr4.harness": {"const": "disposable-postgresql-durability-parse-catalogue-v1"}, "com.emr4.cleanup-nonce": {"const": "per_run_random_hex"}}},
+        "tmpfs": {"type": "string"},
+        "memory": {"const": "768m"},
+        "cpus": {"const": "1.0"},
+        "pids_limit": {"const": 192},
+        "restart": {"const": "no"},
+        "postgres_user": {"type": "string"},
+        "postgres_password": {"type": "string"},
+        "postgres_database": {"type": "string"},
+        "pgdata": {"type": "string"},
+        "startup_timeout_seconds": {"type": "integer", "minimum": 1},
+        "command_timeout_seconds": {"type": "integer", "minimum": 1},
+        "artifact_timeout_seconds": {"type": "integer", "minimum": 1},
+        "cleanup_timeout_seconds": {"type": "integer", "minimum": 1},
+        "total_timeout_seconds": {"type": "integer", "minimum": 1},
+        "stdout_stderr_cap_bytes": {"type": "integer", "minimum": 1024}
+      }
+    },
+    "psql_admission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file_argument", "single_transaction", "on_error_stop", "no_psqlrc", "quiet", "host", "invalid_suffix", "expected_sqlstate", "expected_psql_exit"],
+      "properties": {
+        "file_argument": {"const": "--file=-"},
+        "single_transaction": {"const": "--single-transaction"},
+        "on_error_stop": {"const": "ON_ERROR_STOP=1"},
+        "no_psqlrc": {"const": "--no-psqlrc"},
+        "quiet": {"const": "--quiet"},
+        "host": {"const": "/var/run/postgresql"},
+        "invalid_suffix": {"type": "string", "minLength": 10},
+        "expected_sqlstate": {"const": "42601"},
+        "expected_psql_exit": {"const": 3}
+      }
+    },
+    "nonnegative_integer_map": {"type": "object", "minProperties": 19, "additionalProperties": {"type": "integer", "minimum": 0}},
+    "scalar_map": {"type": "object", "minProperties": 14, "additionalProperties": {"type": ["integer", "string"]}},
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["output_path", "schema_path", "evidence_mode", "retain_full_catalogue_values", "retain_credentials", "retain_raw_logs"],
+      "properties": {
+        "output_path": {"type": "string"},
+        "schema_path": {"type": "string"},
+        "evidence_mode": {"const": "provider_free_disposable_local_postgresql_authored_synthetic"},
+        "retain_full_catalogue_values": {"const": false},
+        "retain_credentials": {"const": false},
+        "retain_raw_logs": {"const": false}
+      }
+    }
+  }
+}
