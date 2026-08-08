@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 103
+    assert register["register_revision"] == 104
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 126)
+        f"AER-{index:04d}" for index in range(1, 127)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 96
+    assert len(agent_incidents) == 97
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1639,13 +1639,27 @@ def test_aer_0125_rebinds_the_sole_changed_catalogue_digest() -> None:
     assert "full digest map" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0126_requires_full_projection_digest_reconstruction() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0126"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert "incomplete simplified projection" in incident["observed_error"]
+    assert incident["related_incident_ids"] == []
+    assert (
+        "reproduce the accepted predecessor digest"
+        in incident["correction"]["prevention_control"]
+    )
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 125
+    assert report["incident_count"] == 126
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 96,
+        "agent_behavior": 97,
         "harness": 13,
         "repository": 8,
         "transport": 8,
@@ -1654,14 +1668,14 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 15,
         "evidence_misreport": 17,
         "harness_failure": 13,
-        "output_contract_violation": 38,
+        "output_contract_violation": 39,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
         "repository_defect": 8,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 21,
+        "accepted_candidate_changed": 22,
         "canonical_unchanged": 82,
         "untrusted_partial_worktree": 22,
     }

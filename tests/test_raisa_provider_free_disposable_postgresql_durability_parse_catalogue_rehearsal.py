@@ -16,6 +16,9 @@ from jsonschema import Draft202012Validator
 from scripts import (
     raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal as rehearsal,
 )
+from scripts import (
+    raisa_provider_free_unmounted_durability_inert_ddl_rehearsal as ddl_rehearsal,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 DIR = ROOT / (
@@ -56,6 +59,12 @@ PRE_DIGEST_NULLABILITY_RECOVERY_EVIDENCE = json.loads(
     (
         DIR
         / "provider-free-disposable-postgresql-evidence-pre-digest-nullability-recovery.json"
+    ).read_text(encoding="utf-8")
+)
+TYPES_PROJECTION_RECONSTRUCTION_EVIDENCE = json.loads(
+    (
+        DIR
+        / "provider-free-disposable-postgresql-evidence-types-projection-reconstruction.json"
     ).read_text(encoding="utf-8")
 )
 MANIFEST = json.loads(
@@ -243,6 +252,92 @@ def _valid_facts() -> dict[str, Any]:
     return facts
 
 
+def _reconstructed_type_facts(*, digest_domain_not_null: bool) -> list[dict[str, Any]]:
+    type_catalogue = ddl_rehearsal.derive_effective_catalogue()["effective_structural"][
+        "type_catalogue"
+    ]
+    domain_definitions = {
+        "source_contract_code": (
+            "CHECK (VALUE = 'diary.appointment_rescheduled.v1'::text)"
+        ),
+        "digest_sha256": "CHECK (VALUE ~ '^sha256:[0-9a-f]{64}$'::text)",
+        "key_id": ("CHECK (VALUE ~ '^[A-Za-z0-9][A-Za-z0-9._:-]{0,126}$'::text)"),
+        "frame_mask": "CHECK (VALUE >= 0 AND VALUE <= 3)",
+    }
+    rows: list[dict[str, Any]] = []
+    for domain in type_catalogue["domains"]:
+        not_null = domain["not_null_values"]
+        if domain["name"] == "digest_sha256":
+            not_null = digest_domain_not_null
+        rows.append(
+            {
+                "name": "emr4_context_fabric." + domain["name"],
+                "type_kind": "d",
+                "owner": "context_schema_owner",
+                "domain_base_type": {
+                    "text": "text",
+                    "smallint": "smallint",
+                }[domain["base_type"]],
+                "domain_not_null": not_null,
+                "domain_default_sql": "",
+                "domain_constraints": [
+                    {
+                        "name": domain["name"] + "_check",
+                        "definition": domain_definitions[domain["name"]],
+                    }
+                ],
+                "enum_labels": [],
+                "composite_attributes": [],
+            }
+        )
+    for enum in type_catalogue["enums"]:
+        rows.append(
+            {
+                "name": "emr4_context_fabric." + enum["name"],
+                "type_kind": "e",
+                "owner": "context_schema_owner",
+                "domain_base_type": "",
+                "domain_not_null": False,
+                "domain_default_sql": "",
+                "domain_constraints": [],
+                "enum_labels": enum["values"],
+                "composite_attributes": [],
+            }
+        )
+    for composite in type_catalogue["composites"]:
+        attributes = []
+        for position, field in enumerate(composite["fields"], start=1):
+            data_type = {
+                "uuid": "uuid",
+                "bigint": "bigint",
+                "boolean": "boolean",
+            }.get(
+                field["data_type"],
+                "emr4_context_fabric." + field["data_type"],
+            )
+            attributes.append(
+                {
+                    "position": position,
+                    "name": field["name"],
+                    "data_type": data_type,
+                }
+            )
+        rows.append(
+            {
+                "name": "emr4_context_fabric." + composite["name"],
+                "type_kind": "c",
+                "owner": "context_schema_owner",
+                "domain_base_type": "",
+                "domain_not_null": False,
+                "domain_default_sql": "",
+                "domain_constraints": [],
+                "enum_labels": [],
+                "composite_attributes": attributes,
+            }
+        )
+    return sorted(rows, key=lambda row: row["name"])
+
+
 def test_contract_schemas_are_whole_document_valid() -> None:
     for schema, payload in (
         (CONTRACT_SCHEMA, CONTRACT),
@@ -263,9 +358,9 @@ def test_exact_catalogue_digests_change_only_for_revised_types_projection() -> N
         if key not in {"server", "extensions"}
     }
     prior_types_digest = expected["types"]
-    expected["types"] = (
-        "sha256:864bc5fb6d068f01c6e44c6ca95b3c188b7b74c10839ffd83f2e64b48e172243"
-    )
+    original_type_facts = _reconstructed_type_facts(digest_domain_not_null=True)
+    revised_type_facts = _reconstructed_type_facts(digest_domain_not_null=False)
+    expected["types"] = rehearsal._facts_digest(revised_type_facts)  # noqa: SLF001
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
         "expected_query_digests": expected,
@@ -273,6 +368,23 @@ def test_exact_catalogue_digests_change_only_for_revised_types_projection() -> N
     assert prior_types_digest == (
         "sha256:099effe28c033aeec242bcd7b68f0703af558ebedfc4e37875a15ac6f05594f8"
     )
+    assert rehearsal._facts_digest(original_type_facts) == prior_types_digest  # noqa: SLF001
+    assert expected["types"] == (
+        "sha256:8ec5eddfcb4cd14d62f783bfcfeb02004204630510b8913ce769a1c49a2135af"
+    )
+    assert [
+        (before["name"], key, before[key], after[key])
+        for before, after in zip(original_type_facts, revised_type_facts, strict=True)
+        for key in before
+        if before[key] != after[key]
+    ] == [
+        (
+            "emr4_context_fabric.digest_sha256",
+            "domain_not_null",
+            True,
+            False,
+        )
+    ]
     assert set(expected) == set(CONTRACT["catalogue_query_ids"]) - {
         "server",
         "extensions",
@@ -305,6 +417,24 @@ def test_digest_nullability_query_drift_is_preserved_fail_closed() -> None:
     }
     assert evidence["parent"]["artifact_sha256"] == (
         "sha256:9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65"
+    )
+    assert evidence["cleanup"]["removed"] is True
+    assert evidence["cleanup"]["absence_verified"] is True
+
+
+def test_incomplete_types_projection_retry_is_preserved_fail_closed() -> None:
+    evidence = TYPES_PROJECTION_RECONSTRUCTION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+    assert evidence["result"] == "rehearsal_failed"
+    assert evidence["lifecycle"][-2:] == ["artifact_admitted", "cleanup_verified"]
+    assert evidence["environment"]["failure"] == {
+        "code": "exact_query_digest",
+        "detail_digest": "sha256:" + rehearsal._bytes_sha(b"types"),  # noqa: SLF001
+        "stage": "catalogue",
+    }
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:3e4b5d6498a746723361d64e75a0cd0aacfcc816c60a63908e78e75a45ed3b2c"
     )
     assert evidence["cleanup"]["removed"] is True
     assert evidence["cleanup"]["absence_verified"] is True

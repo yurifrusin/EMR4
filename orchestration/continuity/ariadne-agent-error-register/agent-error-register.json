@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 103,
+  "register_revision": 104,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-08",
@@ -4799,6 +4799,47 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/rehearsal-contract.json",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-103.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0126",
+      "attempt_id": "raisa-context-fabric-types-projection-runtime-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A replacement exact catalogue digest must be derived from the complete PostgreSQL query projection and anchored by reproducing the accepted predecessor digest before a changed field is applied.",
+      "observed_error": "The first replacement types digest was computed from an incomplete simplified projection that omitted domain definitions, enum labels and composite attributes. The reviewed contained retry therefore failed closed at the same exact types comparison despite successful atomic artifact installation.",
+      "detection_method": "The retry reached artifact_admitted, returned the same sha256(types) mismatch marker and cleaned up exactly. A reconstructed 32-row projection reproduces the original accepted types digest byte-for-byte; flipping only digest_sha256.domain_not_null yields a different replacement digest.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-types-projection-reconstruction.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/rehearsal-contract.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-104.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.derived_digest_from_incomplete_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The replacement digest is now derived from all 32 complete PostgreSQL type projection rows after first proving that the same reconstruction with the predecessor domain flag exactly reproduces the accepted characterization digest.",
+        "prevention_control": "Never derive a cryptographic query binding from a reduced fixture. Reconstruct the full ordered query projection, reproduce the accepted predecessor digest exactly, apply only the intended field delta and assert the complete row-level difference before review.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/rehearsal-contract.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-digest-nullability-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-104.md"
         ]
       },
       "status": "corrected"

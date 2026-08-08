@@ -148,7 +148,7 @@
       "schema": "sha256:643038903e79d2608b200362062a0d2ee42e4195df4d4c6d42964cb8484ae4a6",
       "schema_acl": "sha256:63129f4571ab70a6191f118b6c752cc72c18d1dfbc6f654d5280e710b488aba2",
       "triggers": "sha256:f8952068cbd262f70bcd8d040fbdf5596fcba8dcfedebf73e592d0f017e4d91a",
-      "types": "sha256:864bc5fb6d068f01c6e44c6ca95b3c188b7b74c10839ffd83f2e64b48e172243"
+      "types": "sha256:8ec5eddfcb4cd14d62f783bfcfeb02004204630510b8913ce769a1c49a2135af"
     }
   },
   "evidence": {

@@ -25,6 +25,15 @@ digest `sha256:864bc5fb6d068f01c6e44c6ca95b3c188b7b74c10839ffd83f2e64b48e172243`
 Another run remains closed until fresh deterministic and exact-HEAD independent
 acceptance.
 
+That first replacement digest was derived from an incomplete simplified type
+projection and the resulting contained run failed closed at the same `types`
+comparison. A full reconstruction of all 32 PostgreSQL type rows now anchors
+itself by reproducing the original accepted characterization digest exactly;
+changing only `digest_sha256.domain_not_null` from `true` to `false` produces
+`sha256:8ec5eddfcb4cd14d62f783bfcfeb02004204630510b8913ce769a1c49a2135af`.
+The failed owned container was again removed and its absence verified. No
+further run is eligible before deterministic checks and a fresh exact-HEAD veto.
+
 A pass establishes PostgreSQL 16 parse, atomic installation and catalogue shape
 for this revised inert artifact only. It grants no application migration,
 behavior acceptance, product database, provider, patient/clinical data, runtime
