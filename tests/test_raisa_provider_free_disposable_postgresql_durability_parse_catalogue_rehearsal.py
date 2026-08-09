@@ -106,6 +106,12 @@ ROW_PROJECTION_RECOVERY_EVIDENCE = json.loads(
         / "provider-free-disposable-postgresql-evidence-top-level-xid-insert-reload-pass.json"
     ).read_text(encoding="utf-8")
 )
+RLS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH = (
+    DIR / "provider-free-disposable-postgresql-evidence.json"
+)
+RLS_LOCK_VISIBILITY_PASS_EVIDENCE = json.loads(
+    RLS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 TOP_LEVEL_XID_INSERT_RELOAD_CHARACTERIZATION_EVIDENCE_PATH = (
     DIR / "provider-free-disposable-postgresql-evidence-"
     "top-level-xid-insert-reload-characterization.json"
@@ -633,6 +639,52 @@ def test_rls_lock_visibility_characterization_changes_only_policy_digest() -> No
         "absence_verified": True,
         "container_id": (
             "765e0581b624ed61d48f9a6c12b407516cf543b3ce32d519c29d93bae44a48a3"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_rls_lock_visibility_parse_catalogue_evidence_is_exact_pass() -> None:
+    evidence = RLS_LOCK_VISIBILITY_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            RLS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "e417fc377e6b8e9ff723e21e88b40e41b9cfb2424d2fd6122e404c54bf068611"
+    )
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_391_506,
+        "artifact_sha256": (
+            "sha256:28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800"
+        ),
+        "contract_sha256": (
+            "sha256:2834249d755d83764abf974d524424b958a261f6d8c94808403d4d8bf3a5a1f1"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "3156fb7876f366dd36bbd52645706aa3d4158526e5e1bcfdaa72ff4c56c3c22f"
         ),
         "removed": True,
         "status": "cleanup_verified",

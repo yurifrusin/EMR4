@@ -49,3 +49,15 @@ Exact container
 `765e0581b624ed61d48f9a6c12b407516cf543b3ce32d519c29d93bae44a48a3`
 was removed and exact-ID absence was independently re-observed. The full
 fifteen-digest set is now eligible for one separate exact-bound rerun.
+
+## Exact-bound result
+
+The separate exact-bound run passed as
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`.
+Evidence SHA-256 is
+`sha256:e417fc377e6b8e9ff723e21e88b40e41b9cfb2424d2fd6122e404c54bf068611`.
+It reproduced the exact 412-statement artifact, fixed rollback proof, complete
+catalogue population, all fifteen frozen catalogue digests and unchanged
+application-owner/empty-shape boundary. Exact container
+`3156fb7876f366dd36bbd52645706aa3d4158526e5e1bcfdaa72ff4c56c3c22f`
+was removed and exact-ID absence was independently re-observed.

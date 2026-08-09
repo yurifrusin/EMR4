@@ -1,5 +1,5 @@
 {
-  "attempt_id": "8691e2df62f225e59e5726ef",
+  "attempt_id": "e16edfd0d47d6f3299cfaaa6",
   "catalogue": {
     "expectation_mode": "exact_digest_bound",
     "kind_counts": {
@@ -21,7 +21,7 @@
       "function_acl": "sha256:2124eb217e89781d329876100c320446be676c885cf8eeb41aeababd0409346d",
       "functions": "sha256:2f8f1f94bff6fc497aadfc80f88236bfe2661629d0360ca375a2899b698dd6cd",
       "indexes": "sha256:bf9960d578ec6c84e8b724d6375ec8ebecc6fce92b9b1f03fb64d78d91ff0aa3",
-      "policies": "sha256:7c847b9d0e153bb02101bc3704d33d72e8aefdf4cfc911e0b092149393cc1b37",
+      "policies": "sha256:3e3f043b4c3f103c8170805e0e0aff327c83916010dc0cef727665fa92c8ef03",
       "relation_acl": "sha256:7cacd542f2a5d16e2a6b40cb537fb78aaa6f34eac56c207f91f8c84977a1d66e",
       "relations": "sha256:2ce597e74361c8482530d4dc63a288de7302cab1e00dc816bac50567a37bacf6",
       "rls": "sha256:ed39859c920b8a95925ae76bc1e1fb7922f366bde41ec626b4aa8733b18c2e37",
@@ -56,20 +56,20 @@
   "claim_boundary": "postgresql_16_exact_artifact_parse_atomic_installation_and_catalogue_shape_only",
   "cleanup": {
     "absence_verified": true,
-    "container_id": "9aafcf3721ae6922a36478232aad8898b88d280b315dc2c7740fe2b7256e8d64",
+    "container_id": "3156fb7876f366dd36bbd52645706aa3d4158526e5e1bcfdaa72ff4c56c3c22f",
     "removed": true,
     "status": "cleanup_verified"
   },
   "environment": {
     "docker_client": "resolved_exact_docker_exe",
-    "elapsed_ms": 9222,
+    "elapsed_ms": 9562,
     "image": {
       "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
       "pull_attempted": false,
       "reference": "postgres:16-bookworm"
     },
     "readiness": {
-      "continuous_success_ms": 3224,
+      "continuous_success_ms": 3234,
       "last_pg_isready_exit": 0,
       "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "last_sql_failure_class": "none",
@@ -101,9 +101,9 @@
     "passed"
   ],
   "parent": {
-    "artifact_byte_count": 1391453,
-    "artifact_sha256": "sha256:25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb",
-    "contract_sha256": "sha256:d482ab2c4b96e3bfa854e4c723e9891c2b4b8ac9670db2f73729207ede345919",
+    "artifact_byte_count": 1391506,
+    "artifact_sha256": "sha256:28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800",
+    "contract_sha256": "sha256:2834249d755d83764abf974d524424b958a261f6d8c94808403d4d8bf3a5a1f1",
     "prerequisite_contract_sha256": "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11",
     "prerequisite_sql_sha256": "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38",
     "statement_count": 412

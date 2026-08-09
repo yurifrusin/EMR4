@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_rls_lock_visibility_postgresql_16_parse_catalogue_pass_and_complete_owned_cleanup_evidence_before_behavior_contract_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact pass evidence SHA-256 e417fc377e6b8e9ff723e21e88b40e41b9cfb2424d2fd6122e404c54bf068611 binds artifact SHA-256 28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800, 1391506 LF bytes, 412 statements and exact contract SHA-256 2834249d755d83764abf974d524424b958a261f6d8c94808403d4d8bf3a5a1f1. It reproduced fixed rollback, complete catalogue population and all fifteen frozen digests, then removed exact container 3156fb7876f366dd36bbd52645706aa3d4158526e5e1bcfdaa72ff4c56c3c22f with independent absence readback. The complete parse/plan modules, evidence-schema and hash assertions, Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns parse evidence acceptance and the downstream serial behavior recovery. No database container, implementation worker or external verifier is active. The codebase-health research subagent completed read-only without repository edits.",
+    "git_refs_and_worktree": "Task HEAD before this explicit-path parse-pass evidence commit is 6799adc1d644ad63f9b6e5e534c101e98cd24706; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remotely queried master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the exact pass evidence, its focused test/note and this precommit pair are eligible; docs/branding, unrelated untracked files and mutable behavior evidence remain excluded by explicit-path staging.",
+    "live_handover_current_baton": "The active provider-free durability behavior rehearsal remains in bounded attempt-023 recovery. The exact-digest parse source is committed at 6799adc1d644ad63f9b6e5e534c101e98cd24706 and its separate PostgreSQL 16 run passed. The next dependency after this evidence commit is exact behavior-contract rebind with the twenty scenarios unchanged.",
+    "protected_evidence_boundaries": "The pass proves PostgreSQL 16 parse, atomic installation, catalogue/privilege shape, fixed rollback and exact cleanup only. It invokes no function, trigger, policy behavior, application command or product route. Characterization evidence and all prior parse/behavior failures remain immutable; mutable failed behavior evidence remains untracked and unstaged. No patient, clinical, product-derived, protected or historical-PHI data; provider; operational database; application/API/Diary wiring; watcher/listener/feed; command/write; deployment; production; release; Pages; or protected-ref movement opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
