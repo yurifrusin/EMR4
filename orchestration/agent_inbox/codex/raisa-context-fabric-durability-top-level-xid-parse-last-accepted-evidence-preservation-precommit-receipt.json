@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_fixed_output_routing_that_preserves_the_last_accepted_parse_evidence_if_the_terminal_exact_rerun_fails",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "At exact HEAD c83c80732edd62579235cfb51ebef10e590f44d1 the last accepted parse evidence is still intact. The harness now routes only PASS_RESULT to the accepted evidence path; every non-pass routes to a distinct fixed top-level-XID exact-rerun failure path. A deterministic temporary-path test proves failure cannot overwrite accepted evidence and pass still targets the accepted path. All 106 parse tests, Ruff and format checks pass; exact contract SHA-256 remains d482ab2c4b96e3bfa854e4c723e9891c2b4b8ac9670db2f73729207ede345919.",
+    "current_authority_allocation": "GPT Sol owns this small fail-closed harness correction, its deterministic test and explicit-path commit before the serial exact PostgreSQL run. No worker or native subagent is selected.",
+    "git_refs_and_worktree": "Task HEAD is c83c80732edd62579235cfb51ebef10e590f44d1 before this explicit-path commit. Local and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Only the fixed parse harness, focused test and this precommit pair are eligible.",
+    "live_handover_current_baton": "The exact renderer 2.0.10 catalogue digest contract is bound and ready for a separate terminal reproduction. Behavior attempt 022 remains immutable and behavior runtime is still closed.",
+    "protected_evidence_boundaries": "The correction changes only repository evidence routing after a bounded run. It does not change SQL, Docker, database, catalogue, data or acceptance meaning. Failed behavior evidence and docs/branding remain untracked and excluded. No provider/product/patient/clinical/protected data, runtime wiring, command/write, deployment, release, Pages or protected refs open."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_fixed_output_routing_that_preserves_the_last_accepted_parse_evidence_if_the_terminal_exact_rerun_fails",
+  "source_evidence": {
+    "live_handover_current_baton": "The exact renderer 2.0.10 catalogue digest contract is bound and ready for a separate terminal reproduction. Behavior attempt 022 remains immutable and behavior runtime is still closed.",
+    "current_authority_allocation": "GPT Sol owns this small fail-closed harness correction, its deterministic test and explicit-path commit before the serial exact PostgreSQL run. No worker or native subagent is selected.",
+    "active_plan_and_acceptance": "At exact HEAD c83c80732edd62579235cfb51ebef10e590f44d1 the last accepted parse evidence is still intact. The harness now routes only PASS_RESULT to the accepted evidence path; every non-pass routes to a distinct fixed top-level-XID exact-rerun failure path. A deterministic temporary-path test proves failure cannot overwrite accepted evidence and pass still targets the accepted path. All 106 parse tests, Ruff and format checks pass; exact contract SHA-256 remains d482ab2c4b96e3bfa854e4c723e9891c2b4b8ac9670db2f73729207ede345919.",
+    "protected_evidence_boundaries": "The correction changes only repository evidence routing after a bounded run. It does not change SQL, Docker, database, catalogue, data or acceptance meaning. Failed behavior evidence and docs/branding remain untracked and excluded. No provider/product/patient/clinical/protected data, runtime wiring, command/write, deployment, release, Pages or protected refs open.",
+    "git_refs_and_worktree": "Task HEAD is c83c80732edd62579235cfb51ebef10e590f44d1 before this explicit-path commit. Local and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Only the fixed parse harness, focused test and this precommit pair are eligible."
+  },
+  "context_health": {
+    "agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_last_accepted_parse_evidence_preservation_precommit", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified fixed evidence routing and 106 deterministic parse checks."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Independent review remains deferred until behavior rebind."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

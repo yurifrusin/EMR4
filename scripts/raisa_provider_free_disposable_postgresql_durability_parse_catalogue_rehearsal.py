@@ -31,6 +31,10 @@ REHEARSAL_DIR = ROOT / (
 CONTRACT_PATH = REHEARSAL_DIR / "rehearsal-contract.json"
 PREREQUISITE_PATH = REHEARSAL_DIR / "synthetic-prerequisite-contract.json"
 EVIDENCE_PATH = REHEARSAL_DIR / "provider-free-disposable-postgresql-evidence.json"
+FAILURE_EVIDENCE_PATH = REHEARSAL_DIR / (
+    "provider-free-disposable-postgresql-evidence-"
+    "top-level-xid-insert-reload-exact-rerun-failure.json"
+)
 
 EXPECTED_CONTRACT_PATH = (
     "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
@@ -1983,9 +1987,13 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
     return evidence
 
 
-def write_evidence(payload: dict[str, Any]) -> None:
+def write_evidence(payload: dict[str, Any]) -> Path:
     rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    EVIDENCE_PATH.write_bytes(rendered.encode("utf-8"))
+    target = (
+        EVIDENCE_PATH if payload.get("result") == PASS_RESULT else FAILURE_EVIDENCE_PATH
+    )
+    target.write_bytes(rendered.encode("utf-8"))
+    return target
 
 
 def main() -> int:
@@ -1993,12 +2001,12 @@ def main() -> int:
         print("This fixed-path harness accepts no arguments.", file=sys.stderr)
         return 2
     evidence = run_rehearsal()
-    write_evidence(evidence)
+    evidence_path = write_evidence(evidence)
     print(
         json.dumps(
             {
                 "result": evidence["result"],
-                "evidence": EVIDENCE_PATH.relative_to(ROOT).as_posix(),
+                "evidence": evidence_path.relative_to(ROOT).as_posix(),
             },
             sort_keys=True,
         )

@@ -1726,6 +1726,29 @@ def test_environment_stop_never_calls_docker_or_writes_evidence(
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
 
 
+def test_failed_exact_rerun_cannot_overwrite_last_accepted_evidence(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    accepted = tmp_path / "accepted.json"
+    failed = tmp_path / "failed.json"
+    accepted.write_text("accepted-before\n", encoding="utf-8")
+    monkeypatch.setattr(rehearsal, "EVIDENCE_PATH", accepted)
+    monkeypatch.setattr(rehearsal, "FAILURE_EVIDENCE_PATH", failed)
+
+    failed_target = rehearsal.write_evidence({"result": "rehearsal_failed"})
+    assert failed_target == failed
+    assert accepted.read_text(encoding="utf-8") == "accepted-before\n"
+    assert json.loads(failed.read_text(encoding="utf-8")) == {
+        "result": "rehearsal_failed"
+    }
+
+    passed_target = rehearsal.write_evidence({"result": rehearsal.PASS_RESULT})
+    assert passed_target == accepted
+    assert json.loads(accepted.read_text(encoding="utf-8")) == {
+        "result": rehearsal.PASS_RESULT
+    }
+
+
 def test_evidence_schema_accepts_bounded_environment_stop() -> None:
     payload = {
         "schema_version": "emr4.disposable-postgresql-durability-rehearsal-evidence.v1",
