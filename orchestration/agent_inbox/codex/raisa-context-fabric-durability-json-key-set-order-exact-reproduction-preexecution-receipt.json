@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_distinct_new_owned_pull_never_networkless_postgresql_16_exact_digest_bound_json_key_set_order_catalogue_reproduction_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact-bound parse contract has canonical SHA-256 0037d3d2b11d25cb46b691e6962409b9bf025fe91b3aa1d928b0ac0a29ec0d74 and fixes the fifteen value-bearing digests characterized under distinct attempt 6033b191fdfb084894b58514. It binds renderer source f620f31e4576003855afe824a385a86badf77120, the 412-statement 1391670-byte LF artifact sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714 and the fixed prerequisite contract. Focused parse/plan tests pass 122 checks; Ruff check, format and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial exact-digest parse/catalogue reproduction, minimized evidence and exact-ID cleanup. No worker, native subagent, provider model or product surface is involved. The later behavior veto and runtime remain separate gates.",
+    "git_refs_and_worktree": "Primary task branch HEAD is tracked-clean 9efddf4b593c15ecd79f2fbbe8005072233a1db1 before this receipt. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. After fresh fetch, local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Characterization container ef4ca866ac143928bdc59e31f2013c2a57d1f9f4896052a1a42b223e945a8aad is absent. The mutable behavior failure evidence remains untracked and excluded.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability recovery. Renderer 2.0.13 and the non-accepting catalogue characterization are committed at 9efddf4b593c15ecd79f2fbbe8005072233a1db1. The next mandatory step is one independent exact-digest reproduction in a distinct newly owned container; behavior attempt 027 remains closed until that pass is committed and rebound.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one distinct uniquely named owned container with --pull=never, --network=none, no published/exposed host port, no bind/named/workspace/Docker-socket mount, container-local tmpfs, fixed empty authored-synthetic prerequisites, minimized catalogue digests and exact-ID cleanup. No function/trigger behavior, applied migration, operational database or credential, watcher/listener/feed/source access, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and all unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

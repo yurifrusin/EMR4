@@ -2,7 +2,8 @@
 
 Date: 2026-08-09
 
-Status: characterization preserved; exact-digest reproduction pending
+Status: characterization preserved and exact-digest reproduction passes;
+accepted-source binding pending
 
 ## Boundary
 
@@ -46,6 +47,24 @@ fresh five-source receipt must bind one distinct newly owned
 ports or mounts, container-local tmpfs and exact-ID cleanup. Only exact
 reproduction of all fifteen fixed digests may create a new parse/catalogue
 pass and become a behavior-contract parent.
+
+## Exact reproduction result
+
+Distinct attempt `40b24076b96417c14b150455` used exact-bound contract
+`sha256:0037d3d2b11d25cb46b691e6962409b9bf025fe91b3aa1d928b0ac0a29ec0d74`
+and returned
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`.
+All fifteen fixed value-bearing digests matched; the two environment-bound
+facts were also unchanged from characterization. The pass evidence file has
+SHA-256
+`sha256:97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec`.
+
+The distinct exact container
+`fabe8880296727bcd501f4fb7fe8918829b9695eb2f419950db9165bafefc1ad`
+was removed and exact-ID inspection independently returned the documented
+absent condition. The characterization and exact reproduction used different
+container IDs. An accepted-source ledger must bind the commit containing this
+pass before the behavior contract can treat it as a parent.
 
 ## Closed surfaces
 

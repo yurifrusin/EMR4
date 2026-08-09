@@ -2,8 +2,8 @@
 
 Date: 2026-08-09
 
-Status: deterministic renderer repair and non-accepting catalogue
-characterization pass; exact catalogue reproduction and behavior runtime closed
+Status: deterministic renderer repair, non-accepting characterization and
+distinct exact catalogue reproduction pass; behavior runtime closed
 
 ## Preserved failure
 
@@ -97,6 +97,15 @@ was removed and exact-ID absence was independently observed. This result does
 not accept the new artifact. A distinct newly owned networkless container must
 reproduce the exact digests before the parse prerequisite or behavior contract
 can be rebound.
+
+The distinct exact-bound reproduction then passed under attempt
+`40b24076b96417c14b150455`. Its minimized pass evidence has SHA-256
+`sha256:97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec`.
+Exact container
+`fabe8880296727bcd501f4fb7fe8918829b9695eb2f419950db9165bafefc1ad`
+was removed and exact-ID absence was independently observed. This proves only
+the fixed parse/catalogue prerequisite; the behavior contract must still be
+rebound and independently vetoed before attempt 027.
 
 ## Claim boundary
 

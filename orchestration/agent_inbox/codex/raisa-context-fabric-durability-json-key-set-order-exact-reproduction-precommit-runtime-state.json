@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_distinct_exact_digest_bound_json_key_set_order_parse_catalogue_pass_and_its_bounded_provenance",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. The non-accepting characterization and exact-bound contract are committed at 9efddf4b593c15ecd79f2fbbe8005072233a1db1. A distinct exact reproduction now passes; the next transition after this evidence commit is accepted-source ledger and behavior six-parent rebind, not behavior runtime.",
+    "current_authority_allocation": "GPT Sol owns the serial reproduction evidence, exact-path commit and later behavior rebind. No worker, native subagent, external provider or product surface is active. One fresh Gemini 3.6 Flash/high veto remains mandatory after the complete behavior-rebound candidate passes deterministic checks.",
+    "active_plan_and_acceptance": "Distinct attempt 40b24076b96417c14b150455 returned raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass for exact contract sha256:0037d3d2b11d25cb46b691e6962409b9bf025fe91b3aa1d928b0ac0a29ec0d74 and artifact sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714. All fifteen fixed value-bearing digests matched. Pass evidence sha256:97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec records exact cleanup. The focused parse/plan packet passes 123 tests; Ruff check, Ruff format and diff check pass.",
+    "protected_evidence_boundaries": "The commit contains only minimized authored-synthetic parse/catalogue evidence, bounded receipts, deterministic tests and recovery documentation. It grants no function/trigger behavior acceptance, applied migration, operational database or credentials, source access, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected-ref movement. Preserve all unrelated untracked files and never inspect or stage docs/branding.",
+    "git_refs_and_worktree": "Before this evidence commit, task branch committed HEAD remains 9efddf4b593c15ecd79f2fbbe8005072233a1db1. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Distinct exact container fabe8880296727bcd501f4fb7fe8918829b9695eb2f419950db9165bafefc1ad is absent. The index is clean before explicit-path staging; mutable behavior failure evidence and unrelated untracked files remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "json_key_set_order_exact_reproduction_complete_five_source_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified exact pass evidence hash, all fixed digest matches, distinct container identity, exact-ID absence and deterministic tests."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent is active for this serial evidence commit."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external verifier is active at this intermediate parse-evidence commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

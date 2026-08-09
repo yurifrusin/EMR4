@@ -166,6 +166,12 @@ JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE_PATH = (
 JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE = json.loads(
     JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+JSON_KEY_SET_ORDER_PASS_EVIDENCE_PATH = (
+    DIR / "provider-free-disposable-postgresql-evidence.json"
+)
+JSON_KEY_SET_ORDER_PASS_EVIDENCE = json.loads(
+    JSON_KEY_SET_ORDER_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -964,6 +970,61 @@ def test_json_key_set_order_characterization_is_nonaccepting_and_exactly_cleaned
         "removed": True,
         "status": "cleanup_verified",
     }
+
+
+def test_json_key_set_order_parse_catalogue_evidence_is_distinct_exact_pass() -> None:
+    evidence = JSON_KEY_SET_ORDER_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            JSON_KEY_SET_ORDER_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec"
+    )
+    assert evidence["attempt_id"] == "40b24076b96417c14b150455"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_391_670,
+        "artifact_sha256": (
+            "sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714"
+        ),
+        "contract_sha256": (
+            "sha256:0037d3d2b11d25cb46b691e6962409b9bf025fe91b3aa1d928b0ac0a29ec0d74"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["catalogue"]["status"] == "matched"
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == (JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE["catalogue"]["query_digests"])
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "fabe8880296727bcd501f4fb7fe8918829b9695eb2f419950db9165bafefc1ad"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert (
+        evidence["cleanup"]["container_id"]
+        != (JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE["cleanup"]["container_id"])
+    )
 
 
 def test_digest_nullability_query_drift_is_preserved_fail_closed() -> None:
