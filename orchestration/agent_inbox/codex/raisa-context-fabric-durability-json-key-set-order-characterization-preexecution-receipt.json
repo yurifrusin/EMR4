@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_new_owned_pull_never_networkless_postgresql_16_json_key_set_order_catalogue_characterization_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Committed renderer source f620f31e4576003855afe824a385a86badf77120 produces the 412-statement, 1391670-byte LF artifact at SHA-256 f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714 and manifest file SHA-256 d414fb3f0c9d5b8075e913f5608b6146b7b9ee43eb849c9272ccf48df3a2c706. The candidate parse contract has canonical SHA-256 c351ddf9d8f64141d3226b772114c7b2d74bc652268ec4ed12b248e05078da72, mode characterization_only and no expected digests. Focused parse, plan, renderer, diagnosis, register, Ruff, format and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial catalogue characterization run, minimized evidence and exact-ID cleanup. No worker, native subagent, provider model or product surface is involved, and the characterization cannot accept itself.",
+    "git_refs_and_worktree": "Primary task branch committed HEAD is f620f31e4576003855afe824a385a86badf77120 with only the explicit parse characterization candidate and receipt files tracked-modified/untracked; index is clean. Local postgres:16-bookworm is exact image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability recovery after attempt 026. Renderer 2.0.13 and its deterministic diagnosis checks pass. The next required step is characterization only; exact parse acceptance and behavior runtime remain closed.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no published/exposed host port, no bind/named/workspace/Docker-socket mount, container-local tmpfs, fixed authored-synthetic empty prerequisites, minimized catalogue digests and exact-ID cleanup. This run cannot be accepted. No function/trigger behavior, application migration, operational database/credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, command/write, deployment, production, release, Pages or protected ref is opened. docs/branding remains excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -68,10 +68,18 @@ UUID_MINIMUM_REBIND = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-uuid-minimum-rebind.md"
 )
+JSON_KEY_SET_ORDER_RECOVERY = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-json-key-set-order-recovery.md"
+)
+JSON_KEY_SET_ORDER_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-json-key-set-order-rebind.md"
+)
 
-PARENT_HEAD = "c97ea3eb935997ace3586aa2ff52cf33dabbfd6a"
+PARENT_HEAD = "f620f31e4576003855afe824a385a86badf77120"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8"
+PARENT_DIGEST = "f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714"
 
 
 def _text(path: Path) -> str:
@@ -96,6 +104,8 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         RLS_LOCK_VISIBILITY_REBIND,
         INTERVAL_CONSTRUCTION_REBIND,
         UUID_MINIMUM_REBIND,
+        JSON_KEY_SET_ORDER_RECOVERY,
+        JSON_KEY_SET_ORDER_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 

@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "inspect_and_immutably_preserve_the_completed_nonaccepting_json_key_set_order_catalogue_characterization_then_bind_and_reproduce_exact_catalogue_evidence_before_behavior_attempt_027",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction recovery. Attempt 026 failed closed at BTR-E02 because renderer 2.0.12 compared a sorted actual JSON key array with an unsorted fixed expected array. Renderer 2.0.13 and its deterministic diagnosis are committed at f620f31e4576003855afe824a385a86badf77120. A bounded characterization run has completed and its result must now be inspected without broadening acceptance.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled serial disposable-database recovery, evidence minimization, exact-ID cleanup, deterministic acceptance and task-branch closeout. One fresh Gemini 3.6 Flash/high Antigravity veto is required only after the complete candidate passes deterministic checks. No implementation worker or native subagent owns runtime, acceptance, integration, baton or protected refs.",
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty ordered authored-synthetic scenarios in counts 6/4/3/4/3 and requires a separately accepted parse/catalogue parent before another behavior run. Renderer source f620f31e4576003855afe824a385a86badf77120 produces the 412-statement, 1391670-byte LF artifact sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714 and manifest-file sha256:d414fb3f0c9d5b8075e913f5608b6146b7b9ee43eb849c9272ccf48df3a2c706. The current parse contract is characterization_only at canonical sha256:c351ddf9d8f64141d3226b772114c7b2d74bc652268ec4ed12b248e05078da72; characterization cannot accept itself and must be reproduced in a distinct exact-digest-bound container before behavior rebind and attempt 027.",
+    "protected_evidence_boundaries": "Protected holdouts and historical PHI remain completely closed. Only fixed repository-authored metadata and opaque authored-synthetic prerequisites may enter newly owned postgres:16-bookworm containers using --pull=never, --network=none, no ports or mounts, container-local tmpfs and exact-ID cleanup. No applied migration, operational database or credentials, watcher/listener/feed/source access, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected-ref movement is authorised. Preserve every untracked file; docs/branding is never inspected or broadly staged.",
+    "git_refs_and_worktree": "After fresh fetch, the active branch is codex/ariadne-bernie-davida-parallel-seam at committed HEAD f620f31e4576003855afe824a385a86badf77120, ahead of origin task branch 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean. Five explicit parse-recovery files are tracked-modified; characterization receipts/output and many preserved historical files are untracked. The mutable behavior failure evidence remains untracked and must not be staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "post_compaction_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reread AGENTS.md completely, the active behavior plan/design/threat delta, the parse plan, JSON-key recovery and relevant implementation-plan direction, then freshly fetched and verified exact refs and worktree state."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent is selected for the serial database recovery."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No verifier is active; a fresh exact-HEAD veto is deferred until deterministic admission."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

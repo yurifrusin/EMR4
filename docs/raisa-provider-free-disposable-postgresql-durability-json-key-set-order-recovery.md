@@ -2,7 +2,8 @@
 
 Date: 2026-08-09
 
-Status: bounded deterministic renderer recovery candidate; behavior runtime closed
+Status: deterministic renderer repair and non-accepting catalogue
+characterization pass; exact catalogue reproduction and behavior runtime closed
 
 ## Preserved failure
 
@@ -53,7 +54,9 @@ different declaration orders render identically, the expected literal is
 canonical, the predecessor ordering is absent, and exactly seven artifact
 guards receive the same semantic correction.
 
-The regenerated inert artifact remains 412 statements and 1,391,670 canonical
+The renderer source is bound at
+`f620f31e4576003855afe824a385a86badf77120`. The regenerated inert artifact
+remains 412 statements and 1,391,670 canonical
 LF bytes at SHA-256
 `sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714`.
 Its render-manifest file SHA-256 is
@@ -78,6 +81,22 @@ Before another behavior attempt:
 Any later rejection continues the same evidence-backed diagnose-repair-rerun
 sequence. It cannot authorize scenario deletion, key-set weakening, raw SQL,
 superuser substitution, RLS/trigger disablement or operational runtime.
+
+## Catalogue characterization result
+
+The required characterization completed as the non-accepting result
+`catalogue_characterization_required` under attempt
+`6033b191fdfb084894b58514`. Its immutable evidence file has SHA-256
+`sha256:9e5338986fb4dea8ad5c7f0f0a96e624a525c93e127d507f651e68ca2b5b02b0`.
+It recorded all seventeen allowlisted query digests, including fifteen
+value-bearing digests now fixed in the exact-bound descendant contract.
+
+Exact owned container
+`ef4ca866ac143928bdc59e31f2013c2a57d1f9f4896052a1a42b223e945a8aad`
+was removed and exact-ID absence was independently observed. This result does
+not accept the new artifact. A distinct newly owned networkless container must
+reproduce the exact digests before the parse prerequisite or behavior contract
+can be rebound.
 
 ## Claim boundary
 

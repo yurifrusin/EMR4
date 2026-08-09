@@ -149,10 +149,22 @@ UUID_MINIMUM_CHARACTERIZATION_EVIDENCE = json.loads(
     UUID_MINIMUM_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
 UUID_MINIMUM_PASS_EVIDENCE_PATH = (
-    DIR / "provider-free-disposable-postgresql-evidence.json"
+    DIR / "provider-free-disposable-postgresql-evidence-uuid-minimum-pass.json"
 )
 UUID_MINIMUM_PASS_EVIDENCE = json.loads(
     UUID_MINIMUM_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+UUID_MINIMUM_EXPECTED_DIGESTS = {
+    key: value
+    for key, value in UUID_MINIMUM_PASS_EVIDENCE["catalogue"]["query_digests"].items()
+    if key not in {"server", "extensions"}
+}
+JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-json-key-set-order-characterization.json"
+)
+JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE = json.loads(
+    JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
@@ -752,7 +764,7 @@ def test_interval_construction_characterization_is_nonaccepting_and_exactly_clea
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
     }
-    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert characterized == UUID_MINIMUM_EXPECTED_DIGESTS
     assert characterized == {
         key: value
         for key, value in RLS_LOCK_VISIBILITY_PASS_EVIDENCE["catalogue"][
@@ -805,7 +817,7 @@ def test_interval_construction_parse_catalogue_evidence_is_exact_pass() -> None:
         key: value
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
-    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    } == UUID_MINIMUM_EXPECTED_DIGESTS
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
@@ -846,7 +858,7 @@ def test_uuid_minimum_characterization_is_nonaccepting_and_exactly_cleaned_up() 
         key: value
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
-    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    } == UUID_MINIMUM_EXPECTED_DIGESTS
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
@@ -878,7 +890,9 @@ def test_uuid_minimum_parse_catalogue_evidence_is_exact_pass() -> None:
         "artifact_sha256": (
             "sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8"
         ),
-        "contract_sha256": rehearsal.EXPECTED_CONTRACT_SHA256,
+        "contract_sha256": (
+            "sha256:fd8256d4906e79367d280f5ba945c8b2ccb0f01f20790cb43ae68f47496dbdc4"
+        ),
         "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
         "prerequisite_sql_sha256": (
             "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
@@ -891,11 +905,61 @@ def test_uuid_minimum_parse_catalogue_evidence_is_exact_pass() -> None:
         key: value
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
-    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    } == UUID_MINIMUM_EXPECTED_DIGESTS
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
             "d1fa9e1501b07e5079e9bb6c9325e67399dd36ee922795e346fac07120bcc95b"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_json_key_set_order_characterization_is_nonaccepting_and_exactly_cleaned_up() -> (
+    None
+):
+    evidence = JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "9e5338986fb4dea8ad5c7f0f0a96e624a525c93e127d507f651e68ca2b5b02b0"
+    )
+    assert evidence["attempt_id"] == "6033b191fdfb084894b58514"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["lifecycle"][-2:] == [
+        "catalogue_characterized",
+        "cleanup_verified",
+    ]
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_391_670,
+        "artifact_sha256": (
+            "sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714"
+        ),
+        "contract_sha256": (
+            "sha256:c351ddf9d8f64141d3226b772114c7b2d74bc652268ec4ed12b248e05078da72"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    characterized = {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert characterized == UUID_MINIMUM_EXPECTED_DIGESTS
+    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "ef4ca866ac143928bdc59e31f2013c2a57d1f9f4896052a1a42b223e945a8aad"
         ),
         "removed": True,
         "status": "cleanup_verified",

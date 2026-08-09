@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_json_key_set_order_catalogue_characterization_provenance_and_exact_digest_bound_rehearsal_contract",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 6033b191fdfb084894b58514 returned catalogue_characterization_required for the 412-statement 1391670-byte artifact sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714. Immutable characterization sha256:9e5338986fb4dea8ad5c7f0f0a96e624a525c93e127d507f651e68ca2b5b02b0 records all seventeen allowlisted digests and verified cleanup. Fifteen non-environment digests are exact-bound in contract sha256:0037d3d2b11d25cb46b691e6962409b9bf025fe91b3aa1d928b0ac0a29ec0d74. The focused parse and plan packet passes 122 tests; Ruff check, Ruff format and diff check pass.",
+    "current_authority_allocation": "GPT Sol owns this serial evidence rebind and exact-path commit. No worker, native subagent, external provider or product surface is active. Characterization is non-accepting and the later exact reproduction must occur in a distinct container.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam remains at committed HEAD f620f31e4576003855afe824a385a86badf77120 before this commit. After fresh fetch, local and origin master plus handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch is 324d37f086a51a60b260d02b38772594b6c205df. The index is clean before explicit-path staging. The owned characterization container ef4ca866ac143928bdc59e31f2013c2a57d1f9f4896052a1a42b223e945a8aad is absent. The mutable behavior failure evidence and all unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability recovery after behavior attempt 026. The JSON key-set renderer repair is committed at f620f31e4576003855afe824a385a86badf77120. The next bounded transition is to preserve the non-accepting characterization and bind its exact digests before a distinct reproduction run; behavior runtime remains closed.",
+    "protected_evidence_boundaries": "The commit contains only repository-authored documentation, fixed contracts, minimized authored-synthetic evidence, the fixed-path harness and deterministic tests. No Docker run, applied migration, operational database, watcher/listener/feed, source or product access, patient/clinical/protected data, provider call, command/write, deployment, production, release, Pages or protected-ref movement is opened. Preserve all unrelated untracked files and never inspect or stage docs/branding."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
