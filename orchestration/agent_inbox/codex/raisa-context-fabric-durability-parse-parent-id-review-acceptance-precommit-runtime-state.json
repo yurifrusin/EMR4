@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_r150_review_packet_receipts_preflight_and_sol_acceptance_for_corrected_parse_parent_identity",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability parse dependency. Corrected candidate 8f0d7f90 received a fresh exact-parent Gemini pass after the r149 pass was rejected.",
+    "current_authority_allocation": "GPT Sol owns review admission and explicit-path commit. The r150 Gemini lease is complete. No worker or database runtime has authority in this commit.",
+    "active_plan_and_acceptance": "The review quotes exact git rev-parse and cat-file outputs, proves ancestry, 459 tests, twelve-file Ruff, unchanged characterization contract/SQL and clean postcondition. Sol acceptance opens only a separately gated non-accepting characterization run.",
+    "protected_evidence_boundaries": "Commit only the r150 packet, preflight, pre-verifier receipt/state, reviewer receipt, Sol acceptance and this receipt. Preserve all unrelated untracked files and docs/branding. No Docker/PostgreSQL, exact reproduction, behavior, data, command, deployment, Pages, release or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Task branch is exact 8f0d7f90aefd31d8ae060a099c937106e995c86c before this provenance commit; r150 is clean at the same HEAD. Local/origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "parse_parent_id_review_acceptance_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol independently reconciled the literal full-object evidence."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh r150 Gemini 3.6 Flash/high lease completed pass with clean postcondition."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    },
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Docker and PostgreSQL remain closed during provenance commit."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

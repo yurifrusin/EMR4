@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_exactly_one_fresh_read_only_gemini_3_6_flash_high_veto_in_clean_r150_for_corrected_full_parent_object_binding_8f0d7f90",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 8f0d7f90 binds exact git-resolved parent c8ab7602e16e24453dbf909597b4f702a2388416, characterization contract SHA-256 a34fb467, and adds a Git-resolution test. The 459-test, twelve-file Ruff, builder/inert and diff packets pass locally.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives one read-only verifier lease in clean r150. GPT Sol retains terminal acceptance and runtime/cleanup authority. The r149 lease is complete and rejected.",
+    "git_refs_and_worktree": "Review worktree r150 is clean at exact 8f0d7f90aefd31d8ae060a099c937106e995c86c. Git independently resolves c8ab7602 to c8ab7602e16e24453dbf909597b4f702a2388416. Local/origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability parse dependency. Candidate 2e59f606 and its pass are rejected; corrected descendant 8f0d7f90 binds the actual full parent object and requires a fresh veto before Docker contact.",
+    "protected_evidence_boundaries": "One exact Gemini review call only. No Docker/PostgreSQL, provider fallback, mutable evidence write, patient/product/clinical data, branding inspection, watcher/feed, operational database, behavior, app/API/Diary command, deployment, Pages, release or protected-ref movement is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

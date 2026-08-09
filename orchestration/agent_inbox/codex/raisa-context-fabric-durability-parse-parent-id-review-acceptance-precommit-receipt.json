@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_r150_review_packet_receipts_preflight_and_sol_acceptance_for_corrected_parse_parent_identity",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The review quotes exact git rev-parse and cat-file outputs, proves ancestry, 459 tests, twelve-file Ruff, unchanged characterization contract/SQL and clean postcondition. Sol acceptance opens only a separately gated non-accepting characterization run.",
+    "current_authority_allocation": "GPT Sol owns review admission and explicit-path commit. The r150 Gemini lease is complete. No worker or database runtime has authority in this commit.",
+    "git_refs_and_worktree": "Task branch is exact 8f0d7f90aefd31d8ae060a099c937106e995c86c before this provenance commit; r150 is clean at the same HEAD. Local/origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability parse dependency. Corrected candidate 8f0d7f90 received a fresh exact-parent Gemini pass after the r149 pass was rejected.",
+    "protected_evidence_boundaries": "Commit only the r150 packet, preflight, pre-verifier receipt/state, reviewer receipt, Sol acceptance and this receipt. Preserve all unrelated untracked files and docs/branding. No Docker/PostgreSQL, exact reproduction, behavior, data, command, deployment, Pages, release or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

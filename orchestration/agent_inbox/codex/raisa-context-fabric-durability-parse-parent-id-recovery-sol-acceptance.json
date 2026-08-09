@@ -1,0 +1,33 @@
+{
+  "schema_version": "emr4.ariadne-independent-review-acceptance.v1",
+  "accepted_on": "2026-08-10",
+  "status": "accepted",
+  "candidate_head": "8f0d7f90aefd31d8ae060a099c937106e995c86c",
+  "baseline_head": "2e59f606098b55e88bb2fbea0f0fdccaeb521193",
+  "reviewer": {
+    "transport": "antigravity_new_project_bound_readonly_worktree",
+    "model": "gemini-3.6-flash-high",
+    "reasoning_effort": "high",
+    "decision": "pass",
+    "decision_contract": "schema_constrained_json_v1",
+    "receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-parent-id-recovery-review-receipt.json"
+  },
+  "sol_checks": {
+    "exact_head_before_and_after": true,
+    "review_worktree_clean_after": true,
+    "five_source_rehydration_named": true,
+    "git_resolved_parent_head": "c8ab7602e16e24453dbf909597b4f702a2388416",
+    "git_parent_object_type": "commit",
+    "parent_is_candidate_ancestor": true,
+    "characterization_contract_sha256": "a34fb46701396f9626a11f94024e233637e381f15e50d10bbec3cba6f1c4a0fa",
+    "inert_sql_sha256": "ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb",
+    "test_count_passed": 459,
+    "ruff_file_count_passed": 12,
+    "protected_refs_unchanged": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "aer_register_revision": 167,
+    "aer_incident_count": 193,
+    "aer_open_incident_ids": [],
+    "p0_p2_findings": []
+  },
+  "acceptance": "The independent veto is admitted for exact candidate 8f0d7f90. It permits only one fresh non-accepting authored-synthetic provider-free parse/catalogue characterization after a passed pre_worker_dispatch receipt, external backup of protected mutable evidence and exact owned-container cleanup. It grants no parse acceptance, exact reproduction, behavior run, operational database, data, provider product call, command, deployment, release, Pages or protected-ref authority."
+}
