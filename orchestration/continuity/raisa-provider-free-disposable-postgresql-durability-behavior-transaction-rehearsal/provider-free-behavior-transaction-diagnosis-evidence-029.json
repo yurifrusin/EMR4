@@ -1,0 +1,50 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "authority_change": false,
+    "body_program_change": false,
+    "multiple_row_prevention": "renderer_verified_primary_or_unique_key",
+    "scenario_change": false,
+    "update_rendering": "direct_uniquely_keyed_update_returning_into_without_exception_subtransaction",
+    "zero_row_mapping": "found_check_to_cf004"
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "artifact_sha256": "sha256:b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc",
+    "body_contract_sha256": "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268",
+    "body_source_sha256": "sha256:b43ea059a3f424e268631228aa9606d30f1c9f082bc805e550788b01e7bd8e76",
+    "deferred_fence_requires_head_xmin_equal_top_level_xid": true,
+    "exception_block_forms_subtransaction": true,
+    "pg_current_xact_id_returns_top_level_xid": true,
+    "postgresql_primary_references": [
+      "https://www.postgresql.org/docs/16/plpgsql-structure.html",
+      "https://www.postgresql.org/docs/16/subxacts.html",
+      "https://www.postgresql.org/docs/16/functions-info.html",
+      "https://www.postgresql.org/docs/16/ddl-system-columns.html"
+    ],
+    "program_id": "emr4_context_fabric.project_update_confirm_reschedule_v1",
+    "raw_postgresql_error_persisted": false,
+    "relation": "emr4_context_fabric.context_observation_stream_head",
+    "renderer_source_sha256": "sha256:d4e52e333e70c58bbbd671851cf2014f0b2f34bca1cbf0d855a8a06c946a584a",
+    "row_version_xmin_records_writing_subxid": true,
+    "unique_key_columns": [
+      "practice_id",
+      "source_contract_id",
+      "stream_id"
+    ],
+    "update_node_id": "emr4_context_fabric.project_update_confirm_reschedule_v1.p20",
+    "write_inside_exception_block": true,
+    "writing_subtransaction_receives_subxid": true
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "completed_scenarios": 0,
+    "evidence_sha256": "sha256:09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b",
+    "internal_attempt_id": "fce9773c076f3ede41a4875c",
+    "run_sequence": 29,
+    "scenario_id": "BTR-E02",
+    "sqlstate": "CF603"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-029-subtransaction-xmin-diagnosis.v1",
+  "status": "deterministic_update_subtransaction_xmin_mismatch_proven_cleanup_verified"
+}

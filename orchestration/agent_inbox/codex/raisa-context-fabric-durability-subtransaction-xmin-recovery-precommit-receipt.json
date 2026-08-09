@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_bounded_renderer_2015_update_subtransaction_xmin_recovery_and_immutable_attempt_029_diagnosis_with_explicit_paths_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Renderer 2.0.15 emits all 39 typed UPDATE nodes outside PL/pgSQL EXCEPTION subtransactions, proves each declared key maps to exactly one primary or unique constraint, and maps zero rows to CF004 through FOUND. The regenerated 413-statement inert artifact is SHA-256 03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0; render manifest is SHA-256 bb91292d98fb34f576fa7bf6b5a196eccdcd42f087624b70b450933e36638597. Typed body programs and behavior scenarios are unchanged. The exact 223-test renderer, representability, plan, diagnosis and AER packet passes; Ruff check/format, artifact recognition and diff checks pass. AER revision 145 validates with 170 incidents and zero open.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled deterministic renderer recovery, explicit-path commit and subsequent parse/catalogue and behavior descendants under Yuri's standing planned-gate authority. No worker or native subagent is assigned. Gemini 3.6 Flash/high remains mandatory only for a fresh read-only veto after parse proof and behavior rebind create a reviewable candidate.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 09c3e445f6514293d1ee27011b687c402605bd47 before this explicit-path commit; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The candidate modifications are limited to the explicitly enumerated recovery files; docs/branding, mutable evidence and unrelated untracked files remain unstaged and staging is explicit-path only.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 029 is preserved as a safe BTR-E02 CF603 failure with zero completed scenarios and verified cleanup. Static diagnosis proves the stream-head UPDATE exception-subtransaction xmin mismatch; renderer 2.0.15 is the bounded recovery candidate. The future Agent Execution Surface and Containment Gate remains recorded after this durability sequence.",
+    "protected_evidence_boundaries": "This commit is repository-only authored-synthetic recovery evidence: renderer source, regenerated inert SQL/manifest, deterministic tests, immutable attempt-029 failure and diagnosis, recovery/threat documentation, AER controls and its own receipt. It applies no migration, opens no database or runtime and grants no product/provider call, patient/clinical/product/protected data, application/API/Diary wiring, source/watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref authority. Mutable behavior evidence, mutable parse evidence, docs/branding and all unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

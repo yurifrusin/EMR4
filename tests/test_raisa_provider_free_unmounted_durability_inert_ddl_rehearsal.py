@@ -737,6 +737,56 @@ def test_conflict_derivation_rejects_zero_winners() -> None:
         _derive_conflict_constraint(effective, relation, ops["conflict_key_columns"])
 
 
+def test_all_39_updates_are_uniquely_keyed_and_avoid_write_subtransactions() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    result = _base_render()
+    update_nodes = [
+        node
+        for program in parents["body"]["body_programs"]
+        for node in _walk_program_nodes(program)
+        if node["op"] == "UPDATE"
+    ]
+
+    assert len(update_nodes) == 39
+    for node in update_nodes:
+        ops = node["operands"]
+        assert _derive_conflict_constraint(
+            effective, ops["relation"], ops["key_columns"]
+        )
+
+    function_start = result["sql_text"].index(
+        "CREATE FUNCTION emr4_context_fabric.project_update_confirm_reschedule_v1"
+    )
+    function_end = result["sql_text"].index(
+        "$durability_inert$\nLANGUAGE", function_start
+    )
+    function_sql = result["sql_text"][function_start:function_end]
+    update_start = function_sql.index(
+        "UPDATE emr4_context_fabric.context_observation_stream_head SET"
+    )
+    update_end = function_sql.index("END IF;", update_start) + len("END IF;")
+    update_sql = function_sql[update_start:update_end]
+    assert " INTO updated_head;" in update_sql
+    assert "IF NOT FOUND THEN" in update_sql
+    assert "INTO STRICT updated_head" not in update_sql
+    assert "\n    EXCEPTION\n" not in update_sql
+
+
+def test_update_renderer_rejects_a_non_unique_declared_key() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    update = next(
+        node
+        for program in parents["body"]["body_programs"]
+        for node in _walk_program_nodes(program)
+        if node["op"] == "UPDATE"
+    )
+    ops = update["operands"]
+    with pytest.raises(ValueError, match="does not map to exactly one"):
+        _derive_conflict_constraint(effective, ops["relation"], ["practice_id"])
+
+
 def test_untargeted_conflict_mutation_is_rejected() -> None:
     result = _base_render()
     mutated = result["sql_text"].replace(
@@ -1108,9 +1158,12 @@ def test_renderer_exact_cardinality_maps_zero_and_multiple_to_cf004() -> None:
     assert sql.count("WHEN NO_DATA_FOUND THEN") >= 1
     assert sql.count("WHEN TOO_MANY_ROWS THEN") >= 1
     assert sql.count("INTO STRICT ") >= 100
-    # Both zero and non-unique map only to CF004 with the stable reason code.
+    # Exact reads map zero and non-unique results to CF004. Uniquely keyed
+    # UPDATEs map zero through FOUND; their renderer-time unique-key proof makes
+    # a multiple-row result structurally impossible without catalogue damage.
     cf004 = "RAISE EXCEPTION USING ERRCODE = 'CF004', MESSAGE = 'required_row_missing_or_ambiguous'"
     assert sql.count(cf004) >= 100
+    assert " INTO updated_head;\n    IF NOT FOUND THEN" in sql
     # No P0001/P0002/P0003 or class-42 substitution is permitted.
     for leaked in ("'P0001'", "'P0002'", "'P0003'", "ERRCODE = '42"):
         assert leaked not in sql, leaked
@@ -1332,6 +1385,15 @@ def test_recognizer_rejects_invalid_first_candidate_patterns() -> None:
     )
     # Non-strict exact read.
     rejected(sql.replace("INTO STRICT ", "INTO ", 1), "non_strict_exact")
+    # Direct uniquely keyed UPDATE must retain its immediate zero-row guard.
+    rejected(
+        sql.replace(
+            " INTO updated_head;\n    IF NOT FOUND THEN",
+            " INTO updated_head;\n    IF FOUND THEN",
+            1,
+        ),
+        "non_strict_exact",
+    )
     # Invalid bounded delete syntax.
     m = re.search(
         r"    WITH selected_keys AS \(\n(?:.*?\n)*?"

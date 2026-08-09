@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 144,
+  "register_revision": 145,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6721,6 +6721,55 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-dml-name-ambiguity-recovery.md",
           "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-dml-name-ambiguity-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-144.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0170",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-029",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-inert-ddl-renderer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "No provenance-bearing row version may be authored inside a PL/pgSQL exception subtransaction when its deferred fence requires xmin to equal the top-level transaction ID; every exact UPDATE must also be structurally bounded to one primary or unique key.",
+      "observed_error": "Behavior attempt 029 reached BTR-E02 and stopped safely with CF603, zero completed scenarios and verified exact-container cleanup. Static source mapping proved that renderer 2.0.14 wrapped the stream-head UPDATE RETURNING in an EXCEPTION block. PostgreSQL assigns a writing subtransaction its own subxid while pg_current_xact_id returns the top-level xid, so the deferred head.xmin provenance conjunct could not succeed.",
+      "detection_method": "The immutable bounded failure, typed update node p20, exact rendered function and renderer source were reconciled without another container run. PostgreSQL 16 official documentation independently establishes that EXCEPTION blocks form subtransactions, writes assign subxids, xmin records the row-version author and pg_current_xact_id reports the top-level xid.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-029.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-029.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_029_subtransaction_xmin_diagnosis.py",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_029_subtransaction_xmin_diagnosis.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-subtransaction-xmin-recovery.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-subtransaction-xmin-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-145.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.write_exception_subtransaction_breaks_top_level_xid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The renderer emits all thirty-nine typed UPDATE nodes directly outside exception subtransactions, first proving each exact key maps to one primary-key or unique constraint and then mapping a zero-row result to CF004 through FOUND. Body programs, predicates, output rows and top-level-XID fences remain unchanged.",
+        "prevention_control": "Renderer and hostile recognizer acceptance now prohibit write-bearing exception blocks across both INSERT_OR_RELOAD_COMPARE and UPDATE opcodes, require an enforcing unique-key mapping for every UPDATE, require its immediate CF004 NOT FOUND guard and preserve the exact top-level-XID fence before fresh parse, veto or behavior eligibility.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-subtransaction-xmin-recovery.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-subtransaction-xmin-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-145.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

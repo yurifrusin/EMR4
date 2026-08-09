@@ -2237,14 +2237,22 @@ def _emit_insert(node: dict[str, Any], ctx: dict[str, Any], indent: int) -> list
 def _emit_update(node: dict[str, Any], ctx: dict[str, Any], indent: int) -> list[str]:
     ops = node["operands"]
     rel = _fabric(ops["relation"])
+    # UPDATE must not execute inside a PL/pgSQL EXCEPTION block. Such a block
+    # is a subtransaction; a write there receives a subxid while
+    # pg_current_xact_id() deliberately reports the top-level xid. The body
+    # contract supplies an exact key, so prove it maps to one enforcing
+    # primary/unique constraint before using FOUND for the zero-row case.
+    _derive_conflict_constraint(ctx["effective"], ops["relation"], ops["key_columns"])
     sets = ", ".join(
         _ident(b["column"]) + " = " + render_expr(b["value"])
         for b in ops["set_bindings"]
     )
     pred = render_expr(ops["predicate"]) if "predicate" in ops else "TRUE"
     returning = ", ".join(rel + "." + _ident(c) for c in ops["returning_columns"])
-    body = (
-        "UPDATE "
+    pad = "    " * indent
+    return [
+        pad
+        + "UPDATE "
         + rel
         + " SET "
         + sets
@@ -2252,11 +2260,13 @@ def _emit_update(node: dict[str, Any], ctx: dict[str, Any], indent: int) -> list
         + pred
         + " RETURNING "
         + returning
-        + " INTO STRICT "
+        + " INTO "
         + _symbol_ident(ops["output_symbol"])
-        + ";"
-    )
-    return [_exactly_one_block(body, indent) + ";"]
+        + ";",
+        pad + "IF NOT FOUND THEN",
+        pad + "    " + CARDINALITY_FAILURE + ";",
+        pad + "END IF;",
+    ]
 
 
 def _emit_delete_source(
@@ -3079,7 +3089,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.14"
+RENDERER_VERSION = "2.0.15"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "
@@ -4409,11 +4419,12 @@ def _statement_issues(
         issues.append(
             RecognitionIssue("anonymous_record_set", "anonymous-record set aggregation")
         )
-    # Every exact read/write must use strict INTO, never a bare INTO.  The
-    # complete-set aggregation is the sole non-strict INTO; it always continues
-    # with a newline and the outer FROM (never a same-line FROM target).
+    # Every exact read must use strict INTO. The complete-set aggregation is
+    # the sole non-strict SELECT INTO; it continues with a newline and outer
+    # FROM. A uniquely keyed UPDATE deliberately uses non-strict INTO outside
+    # an EXCEPTION subtransaction and must immediately map NOT FOUND to CF004.
     if re.search(
-        r"\b(?:SELECT|UPDATE)\b[^;]*\bINTO\s+(?!STRICT\b)"
+        r"\bSELECT\b[^;]*\bINTO\s+(?!STRICT\b)"
         r"[a-zA-Z_][a-zA-Z0-9_]*+(?!\s*\n\s*FROM\b)",
         statement,
         flags=re.IGNORECASE,
@@ -4423,6 +4434,25 @@ def _statement_issues(
         issues.append(
             RecognitionIssue("non_strict_exact", "non-strict exact read/write")
         )
+    for match in re.finditer(
+        r"\bUPDATE\b[^;]*\bRETURNING\b[^;]*\bINTO\s+(?!STRICT\b)"
+        r"[a-zA-Z_][a-zA-Z0-9_]*;",
+        statement,
+        flags=re.IGNORECASE,
+    ):
+        found_guard = re.match(
+            r"\s*IF NOT FOUND THEN\s*"
+            + re.escape(CARDINALITY_FAILURE)
+            + r";\s*END IF;",
+            statement[match.end() :],
+            flags=re.IGNORECASE,
+        )
+        if found_guard is None:
+            issues.append(
+                RecognitionIssue(
+                    "non_strict_exact", "non-strict UPDATE lacks exact CF004 guard"
+                )
+            )
     # Role identifiers are cluster principals, never schema-qualified tokens.
     if re.search(
         r"\bOWNER\s+TO\s+[a-zA-Z_][a-zA-Z0-9_]*\.[a-zA-Z_][a-zA-Z0-9_]*", statement
