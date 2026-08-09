@@ -1,0 +1,38 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_unchanged_twenty_scenario_behavior_contract_rebound_to_the_accepted_renderer_209_parse_source_before_fresh_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The active task is the frozen twenty-scenario provider-free disposable PostgreSQL behavior/transaction rehearsal. Its repaired exact parse parent is now accepted at 579175e875fd34958e7bbe84e8aaa45c38e0478f, so the next required step is an exact parent-only behavior rebind followed by a fresh Gemini 3.6 Flash/high veto before runtime.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled contract rebind, deterministic admission, runtime, diagnosis and cleanup. Gemini 3.6 Flash/high through a fresh Antigravity project owns read-only exact-HEAD independent veto only. No native subagent or implementation worker is selected.",
+    "active_plan_and_acceptance": "The behavior contract now binds accepted parse source 579175e875fd34958e7bbe84e8aaa45c38e0478f, accepted-source file SHA-256 a12e6c17f40ff45cdcfe451f2c1b8bd873407b0683c9163501aca982e4e67eda, inert SQL SHA-256 42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112 and render manifest SHA-256 566edc7be1be850711920ca88e89a2d520faaa057da13a8ddee456a5e5f51b14. Canonical behavior contract SHA-256 is 8423c0b3f8ff47d4700b8cc42c3e313a756ecf86b7a6b6f2359e39be75ef3198. The scenario-array SHA-256 remains 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3 with exact order and 6/4/3/4/3 coverage unchanged. Seventy-three behavior tests and the previously completed 113 parse/plan, 30 body-semantic and 187 inert-DDL/AER checks pass; four frozen predecessor-continuity assertions remain explicitly excluded as historical evidence.",
+    "protected_evidence_boundaries": "This commit changes only parent bindings, exact harness/test constants and active rebind documentation. It does not run Docker or PostgreSQL and does not alter scenario meaning. The failed mutable behavior evidence remains unstaged. No protected evidence, patient/clinical/product-derived data, provider call, operational database/credential, application/API/Diary wiring, command/write, deployment, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "HEAD and local task ref are 579175e875fd34958e7bbe84e8aaa45c38e0478f; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging will include only the accepted-source ledger, behavior contract, harness, tests, active plan and this receipt pair; docs/branding, unrelated untracked files and failed behavior evidence remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_behavior_rebind_precommit_admission",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified all six parent bindings, unchanged scenario digest/order/coverage, deterministic tests, format, diff and protected refs."]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fresh independent veto follows the exact candidate commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek transport is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

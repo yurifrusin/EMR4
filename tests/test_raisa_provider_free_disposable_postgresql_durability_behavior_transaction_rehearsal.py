@@ -385,9 +385,14 @@ def test_attempt_015_through_018_evidence_is_preserved_and_coordinate_closed() -
         "sqlstate": "42501",
         "stage": "scenario",
     }
-    assert rehearsal.parent._bytes_sha(  # noqa: SLF001
-        (DIR / "provider-free-behavior-transaction-failure-evidence-018.json").read_bytes()
-    ) == "aeb88e2f404adb62300c0c0574b114c4254ccceb047140e75dd55eac6de61bc7"
+    assert (
+        rehearsal.parent._bytes_sha(  # noqa: SLF001
+            (
+                DIR / "provider-free-behavior-transaction-failure-evidence-018.json"
+            ).read_bytes()
+        )
+        == "aeb88e2f404adb62300c0c0574b114c4254ccceb047140e75dd55eac6de61bc7"
+    )
     for evidence in (
         FAILURE_EVIDENCE_015,
         FAILURE_EVIDENCE_016,
@@ -703,21 +708,24 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "id": "accepted_runtime_source",
         "path": (
             "docs/raisa-provider-free-disposable-postgresql-durability-"
-            "parse-catalogue-system-xmin-explicit-alias-accepted-source.md"
+            "parse-catalogue-system-xmin-record-access-accepted-source.md"
         ),
-        "source_head": "1057b0d6e49384f8b7ab00bd501dcc868fba909b",
+        "source_head": "579175e875fd34958e7bbe84e8aaa45c38e0478f",
         "sha256": (
-            "sha256:a6e9a652995ba4daa7a3c1c28812305f1fd6d3664e33e84fc5b9111263b52741"
+            "sha256:a12e6c17f40ff45cdcfe451f2c1b8bd873407b0683c9163501aca982e4e67eda"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "1e5e9840dcbf14d2c1766a63149417f6912dc915"
+        "cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:45c90b927a6e5a9b5b367ddf6ca76dfde0491ddb04d74214383cbca68419b7f6"
+        "sha256:42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112"
+    )
+    assert bindings["render_manifest"]["source_head"] == (
+        "cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:8893d0a21ce004bf5b57ad89deec75b8f4ae9a6a2f9705f9c6e6d598ec2da164"
+        "sha256:566edc7be1be850711920ca88e89a2d520faaa057da13a8ddee456a5e5f51b14"
     )
     assert bindings["body_contract"] == {
         "id": "body_contract",

@@ -11,18 +11,19 @@ Parent result:
 `raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`
 
 Accepted parent runtime source HEAD:
-`06b8f55837457518b39de0bdbea71b60a2c6f921`
+`579175e875fd34958e7bbe84e8aaa45c38e0478f`
 
 Planning baseline HEAD:
 `bc0120f574ff4a9fb34a5d463537542f906c5916`
 
 Canonical inert SQL SHA-256:
-`sha256:9407b8b641488b8c48ad51ef58c7ca2c3c15e83dca89da58de8f5726aef69f65`
+`sha256:42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112`
 
-Recovery note: the accepted digest-domain nullability recovery changed the
-inert artifact representation and parse/catalogue evidence without changing
-this rehearsal's frozen twenty-scenario set or authority ceiling. The exact
-six-parent binding is re-established before any behavior runtime.
+Recovery note: the accepted renderer 2.0.9 direct anonymous-record `xmin`
+access repair changed the inert artifact representation and parse/catalogue
+evidence without changing this rehearsal's frozen twenty-scenario set or
+authority ceiling. The exact six-parent binding is re-established before any
+behavior runtime.
 
 ## Objective
 
@@ -60,7 +61,7 @@ Diary truth. All Fabric outputs have `command_authority: false` by construction.
 The machine contract binds six parent surfaces:
 
 1. the accepted parse/catalogue closeout and exact runtime source HEAD;
-2. the exact 1,404,420 canonical LF-byte, 412-statement inert SQL artifact;
+2. the exact 1,403,578 canonical LF-byte, 412-statement inert SQL artifact;
 3. its exact render manifest;
 4. the accepted structural migration/transaction contract;
 5. the accepted function/trigger body contract; and
