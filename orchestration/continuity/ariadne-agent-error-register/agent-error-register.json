@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 146,
+  "register_revision": 147,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -6819,6 +6819,56 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-support-execute-grant-recovery.md",
           "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-support-execute-grant-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-146.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0172",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-031",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-structural-contract",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The accepted admission receiver's exact binding-table SELECT must remain visible through forced RLS only to the exact non-login function-owner pair while retaining the authenticated session-user and active-time fences.",
+      "observed_error": "Behavior attempt 031 reached BTR-E03 and stopped safely with CF004 in admit_proofread_observation_v1, zero completed scenarios and verified exact-container cleanup. The receiver had the accepted direct binding-table SELECT, but forced RLS admitted rows only when current_user was context_schema_owner. Because the SECURITY DEFINER admission function is deliberately owned by context_admission_receiver, its exact session-bound binding row was invisible and strict cardinality failed closed.",
+      "detection_method": "The immutable attempt-031 failure was mapped to the exact binding SELECT and CF004 cardinality handler in the inert artifact. The accepted body independently proved SELECT_EXACT, the receiver's non-login NOBYPASSRLS ownership and its exact table grant, while the structural contract independently proved forced RLS and the missing receiver current_user branch. No additional container run or raw PostgreSQL text persistence was needed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-031.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-031.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_031_admission_receiver_binding_rls_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_031_admission_receiver_binding_rls_diagnosis.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+        "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-admission-receiver-binding-rls-recovery.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-admission-receiver-binding-rls-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-147.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.security_definer_binding_owner_missing_from_forced_rls",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The binding SELECT policy admits exactly context_schema_owner or context_admission_receiver as current_user while retaining database_login = session_user, both active-time predicates, forced RLS, the existing table privileges and the distinct non-login admission owner. No role, membership, grant, BYPASSRLS, body program or scenario changes.",
+        "prevention_control": "Structural and hostile tests require the exact two-owner current_user predicate and reject a missing receiver, any third owner, loss of the authenticated session-user fence or loss of either active-time fence before body rebind, parse/catalogue proof, fresh review or another behavior attempt.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-admission-receiver-binding-rls-recovery.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-admission-receiver-binding-rls-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-147.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

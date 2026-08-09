@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_fixed_twenty_scenario_behavior_attempt_031_in_one_newly_owned_networkless_postgresql_16_container_then_preserve_immutable_outcome_restore_mutable_evidence_and_verify_exact_id_absence",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability behavior recovery. Renderer 2.0.16, exact parse/catalogue reproduction, six-parent behavior rebind and fresh independent veto all pass. The next dependency-satisfied action is exactly one newly eligible behavior attempt 031.",
+    "current_authority_allocation": "GPT Sol owns the single serial disposable-database run, exact evidence preservation, cleanup, diagnosis and later acceptance. No worker, verifier or subagent receives database, runtime or acceptance authority. The Gemini veto is consumed and grants no runtime control.",
+    "active_plan_and_acceptance": "Attempt 031 must execute the unchanged twenty scenarios in exact order and category counts 6/4/3/4/3 under behavior contract SHA-256 88650862f2dc654813d3b6c9832a7691e5b630187286f129eb1e8bd102d683bf and scenario population eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. Exact candidate 02673c8f6ed83f960b49ac8ba8dfbfd6d809c800 received a fresh Gemini 3.6 Flash/high pass with 534 tests and clean unchanged worktree; provenance is committed at 75160f4497798665f83c31ca08079a760aed1136. Any mismatch stops without weakening or skipping a scenario.",
+    "protected_evidence_boundaries": "The run uses only fixed authored-synthetic opaque fixtures in one newly owned pull-never networkless PostgreSQL 16 container with no ports or mounts and exact-ID cleanup. No applied migration, operational database/credential/persistence, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model/product call, application/API/Diary wiring, command/write outside the disposable fixture transaction, deployment, production, release, Pages or protected-ref movement is authorized. Never list or touch gp-pms-postgres; inspect and clean only the exact captured owned container ID. Preserve docs/branding and all unrelated untracked files.",
+    "git_refs_and_worktree": "Task HEAD is 75160f4497798665f83c31ca08079a760aed1136 and origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exact local image postgres:16-bookworm has immutable ID sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Mutable behavior evidence is preserved at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and will be restored after immutable attempt-031 packaging."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "support_execute_grant_behavior_attempt_031_complete_five_source_preexecution",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified exact current refs, restored mutable behavior evidence, exact local image identity and committed fresh veto provenance before opening attempt 031."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned to the serial database execution."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh verifier pass is committed and no further provider/model call is authorized or active."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

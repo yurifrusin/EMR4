@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_bounded_attempt_031_diagnosis_and_exact_two_owner_binding_rls_parent_repair_then_rebind_the_unchanged_body_and_generated_artifact_before_fresh_parse_catalogue_and_behavior_gates",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 031 failed closed at BTR-E03 CF004 with zero completed scenarios and verified exact-container cleanup. Deterministic source mapping now proves the accepted non-login admission receiver had its exact binding SELECT but was omitted from the forced-RLS current_user predicate. The bounded parent repair and hostile tests pass; another database run remains closed.",
+    "current_authority_allocation": "GPT Sol owns the serial diagnosis, minimum architecture-strengthening repair, deterministic verification, disposable PostgreSQL characterization/reproduction and behavior recovery under Yuri's standing planned-gate and diagnose-repair-rerun authority. Gemini 3.6 Flash/high remains independent veto only after a complete exact-HEAD repaired deterministic candidate; no provider call is currently eligible.",
+    "active_plan_and_acceptance": "The accepted behavior plan still freezes exactly twenty authored-synthetic scenarios at category counts 6/4/3/4/3. The repair changes only pol_cf_17_select so current_user is exactly context_schema_owner or context_admission_receiver while database_login=session_user, both active-time fences, forced RLS, existing privileges and the distinct SECURITY DEFINER owner remain unchanged. Structural hostile tests reject a missing receiver, any third owner and loss of session or time fencing. AER-0172 records the corrected repository defect.",
+    "protected_evidence_boundaries": "No protected holdout or branding content was opened, enumerated, staged or changed. Preserve all untracked files and use explicit-path staging only. Mutable accepted parse and behavior evidence remain byte-restored and unstaged. No applied migration, operational database or credential, source/watcher/listener/feed, patient/clinical/product/protected data, application/API/Diary route, provider/model/product call, command/write, deployment, production, release, Pages or protected-ref movement is authorized. No additional PostgreSQL container was opened for diagnosis or repair.",
+    "git_refs_and_worktree": "Freshly fetched refs remain task HEAD 75160f4497798665f83c31ca08079a760aed1136, origin task 324d37f086a51a60b260d02b38772594b6c205df and local/origin master plus handoff/current exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the exact diagnosis, structural contract/schema, hostile tests, recovery/threat documents, attempt-031 failure/preexecution evidence, postcompaction evidence and AER revision-147 paths are candidates for explicit staging. All unrelated untracked files remain preserved and docs/branding remains excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "attempt_031_diagnosis_and_structural_repair_complete_five_source_precommit_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The source-bound diagnosis passed, the structural repair and hostile tests passed, Ruff passed and the revised incident register validated with zero open incidents."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation subagent is active in this tightly coupled serial database recovery."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The predecessor veto is consumed; no new verifier call is active or eligible before the descendant rebind and complete deterministic packet."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

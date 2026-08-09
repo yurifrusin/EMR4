@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "diagnose_behavior_attempt_031_cf004_without_database_contact_then_repair_only_the_minimum_accepted_binding_rls_surface_before_fresh_deterministic_parse_catalogue_and_behavior_gates",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. The support-function execute-grant repair passed exact parse/catalogue reproduction and a fresh independent behavior veto. Behavior attempt 031 then failed closed at BTR-E03 with exact CF004 in admit_proofread_observation_v1 before any of the frozen twenty scenarios completed. The exact owned container was removed and verified absent. The next safe action is a provider-free static diagnosis of the admission owner's binding-table visibility before any repair or database rerun.",
+    "current_authority_allocation": "GPT Sol owns the serial diagnosis, minimum architecture-strengthening repair, deterministic verification, disposable PostgreSQL characterization/reproduction and behavior recovery under Yuri's standing planned-gate and diagnose-repair-rerun authority. The tightly coupled database work remains Sol-owned. Gemini 3.6 Flash/high is independent veto only after a complete repaired deterministic candidate; no provider call is currently eligible.",
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty authored-synthetic scenarios at category counts 6/4/3/4/3 and forbids weakening principals, SQLSTATEs, effects, RLS, grants, cleanup or claims. Attempt 031 proves the earlier 42501 support-function defect is removed and localizes the next fail-closed boundary to the admission function's strict session-bound lookup returning CF004. Recovery must preserve all scenarios and may only reconcile the accepted non-login admission owner with the exact session-bound binding visibility needed by its SECURITY DEFINER body.",
+    "protected_evidence_boundaries": "No protected holdout or branding content may be opened, enumerated, staged or changed. Preserve all untracked files and use explicit-path staging only. No applied migration, operational database or credential, source/watcher/listener/feed, patient/clinical/product/protected data, application/API/Diary route, provider/model/product call, command/write outside one disposable authored-synthetic database, deployment, production, release, Pages or protected-ref movement is authorized. Any future database run requires its own passed gate, one newly owned pull-never networkless PostgreSQL 16 container and exact-ID cleanup without listing or touching the unrelated gp-pms-postgres container.",
+    "git_refs_and_worktree": "Fresh fetch confirms task HEAD 75160f4497798665f83c31ca08079a760aed1136 and origin task 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree and index are clean; docs/branding and all unrelated untracked files remain preserved. Attempt-031 immutable failure evidence and its preexecution receipt/state remain untracked pending diagnosis packaging. Mutable parse and behavior evidence remain restored and unstaged at their accepted hashes. Exact attempt-031 container 9991a3c84a524a3365d845060832fec8ecdf4dc855c4113777c7bbe0ed607d6a is absent."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_attempt_031_complete_five_source_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol re-read AGENTS.md completely, the active behavior plan/design/threat/closeout and support-grant recovery/rebind sources, autonomous-continuation policy, Context Fabric direction, Bernie interaction model, API Spine steward sources and relevant implementation-plan sections, then freshly fetched and verified exact refs and tracked-worktree state."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No new subagent is selected for the tightly coupled serial database diagnosis."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The attempt-031 predecessor veto is consumed; no new verifier call is active or eligible before a repaired deterministic candidate."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

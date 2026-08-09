@@ -105,6 +105,13 @@ EXPECTED_ENUMS = {
         "DISABLED",
     ],
 }
+EXPECTED_BINDING_SELECT_POLICY = (
+    "(current_user = 'context_schema_owner'::name OR "
+    "current_user = 'context_admission_receiver'::name) AND "
+    "database_login = session_user AND "
+    "active_from <= transaction_timestamp() AND "
+    "(active_until IS NULL OR active_until > transaction_timestamp())"
+)
 
 
 def text(path: Path) -> str:
@@ -335,6 +342,15 @@ def validate_renderer_semantics(contract: dict) -> None:
                 )
     assert contract["rls_policy_catalogue"]["deny_when_no_applicable_policy"] is True
     assert contract["rls_policy_catalogue"]["public_privileges_revoked"] is True
+    assert policies["pol_cf_17_select"] == {
+        "id": "pol_cf_17_select",
+        "relation": "context_service_practice_binding",
+        "command": "SELECT",
+        "roles": ["PUBLIC"],
+        "permissive": True,
+        "using_sql": EXPECTED_BINDING_SELECT_POLICY,
+        "with_check_sql": None,
+    }
     lifecycle = "'LIFECYCLE'::emr4_context_fabric.logical_capability"
     assert lifecycle in policies["pol_cf_01_select"]["using_sql"]
     assert lifecycle in policies["pol_cf_01_insert"]["with_check_sql"]
@@ -592,6 +608,59 @@ def test_admission_owner_has_exact_internal_privileges() -> None:
         "bigint",
         "proofread_packet_v1",
     ]
+
+
+def test_binding_select_rls_retains_exact_owner_pair_and_session_time_fences() -> None:
+    contract = data(CONTRACT)
+    policies = {
+        policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
+    }
+    assert policies["pol_cf_17_select"]["using_sql"] == (
+        EXPECTED_BINDING_SELECT_POLICY
+    )
+
+    roles = {role["role"]: role for role in contract["role_matrix"]}
+    for owner in ("context_schema_owner", "context_admission_receiver"):
+        assert roles[owner]["login"] is False
+        assert roles[owner]["noinherit"] is True
+        assert roles[owner]["nobypassrls"] is True
+    assert roles["context_admission_receiver"]["owns_functions"] == [
+        "admit_proofread_observation_v1"
+    ]
+    assert "context_service_practice_binding" not in roles["context_observer"][
+        "direct_table_select"
+    ]
+
+    unsafe_predicates = (
+        EXPECTED_BINDING_SELECT_POLICY.replace(
+            " OR current_user = 'context_admission_receiver'::name", ""
+        ),
+        EXPECTED_BINDING_SELECT_POLICY.replace(
+            "current_user = 'context_admission_receiver'::name",
+            "(current_user = 'context_admission_receiver'::name OR "
+            "current_user = 'context_observer'::name)",
+        ),
+        EXPECTED_BINDING_SELECT_POLICY.replace(
+            "database_login = session_user AND ", ""
+        ),
+        EXPECTED_BINDING_SELECT_POLICY.replace(
+            "active_from <= transaction_timestamp() AND ", ""
+        ),
+        EXPECTED_BINDING_SELECT_POLICY.replace(
+            " AND (active_until IS NULL OR active_until > transaction_timestamp())",
+            "",
+        ),
+    )
+    for predicate in unsafe_predicates:
+        candidate = copy.deepcopy(contract)
+        policy = next(
+            item
+            for item in candidate["rls_policy_catalogue"]["policies"]
+            if item["id"] == "pol_cf_17_select"
+        )
+        policy["using_sql"] = predicate
+        with pytest.raises(AssertionError):
+            validate_renderer_semantics(reseal_contract(candidate))
 
 
 def test_all_update_trigger_enforces_positive_and_negative_temporal_obligation() -> (
