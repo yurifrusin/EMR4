@@ -1808,7 +1808,10 @@ def render_expr(expr: dict[str, Any]) -> str:
     if op == "CURRENT_XID32":
         return CURRENT_XID32_SQL
     if op == "SYSTEM_XMIN":
-        return "(" + render_expr(expr["row"]) + ").xmin"
+        row = expr["row"]
+        if row.get("op") != "REF" or row.get("kind") != "LOCAL":
+            raise ValueError("SYSTEM_XMIN requires a local exact-read record")
+        return render_expr(row) + ".xmin"
     if op == "TRANSACTION_TIMESTAMP":
         return "pg_catalog.transaction_timestamp()"
     if op == "JSON_GET_CAST":
@@ -1914,10 +1917,7 @@ def _order_sql(order_by: list[dict[str, Any]] | None, relation: str) -> str:
 def _select_columns(relation: str, columns: list[str]) -> str:
     rel = _fabric(relation)
     return ", ".join(
-        rel
-        + "."
-        + _ident(col)
-        + (" AS " + _ident(col) if col == "xmin" else "")
+        rel + "." + _ident(col) + (" AS " + _ident(col) if col == "xmin" else "")
         for col in columns
     )
 
@@ -3066,7 +3066,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.8"
+RENDERER_VERSION = "2.0.9"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "
@@ -4346,6 +4346,13 @@ def _statement_issues(
             RecognitionIssue(
                 "trigger_row_xmin",
                 "trigger row images cannot expose PostgreSQL system xmin",
+            )
+        )
+    if re.search(r"\([a-z][a-z0-9_]*\)\s*\.\s*\"?xmin\"?", statement, re.IGNORECASE):
+        issues.append(
+            RecognitionIssue(
+                "anonymous_record_xmin",
+                "anonymous PL/pgSQL record xmin must use direct record-field access",
             )
         )
     if statement.count("pg_catalog.array_length(") != statement.count(

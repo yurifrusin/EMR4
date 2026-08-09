@@ -109,7 +109,9 @@ def test_recovery_population_and_effective_catalogue_reconcile() -> None:
     assert digest_domain["not_null_values"] is False
 
 
-def test_registration_initial_projection_policies_retain_narrow_lifecycle_access() -> None:
+def test_registration_initial_projection_policies_retain_narrow_lifecycle_access() -> (
+    None
+):
     effective = derive_effective_catalogue(_parents())
     policies = {policy["id"]: policy for policy in effective["rls_policies"]}
     lifecycle = "'LIFECYCLE'::emr4_context_fabric.logical_capability"
@@ -1040,13 +1042,15 @@ def test_renderer_typed_complete_sets_construct_full_rows() -> None:
 def test_renderer_system_xmin_uses_record_local() -> None:
     sql = _base_render()["sql_text"]
     # xmin-carrying exact reads use a record local and explicitly name the
-    # system-column output field so every later (var).xmin lookup is valid.
+    # system-column output field. Direct var.xmin lookup preserves the runtime
+    # shape of an anonymous PL/pgSQL record; (var).xmin requires a fixed
+    # composite descriptor and is therefore forbidden.
     assert "claim record;" in sql
     assert "event record;" in sql
-    assert "(claim).xmin" in sql
-    assert "(event).xmin" in sql
+    assert "claim.xmin" in sql
+    assert "event.xmin" in sql
     assert "old_appointment record;" in sql
-    assert "(old_appointment).xmin" in sql
+    assert "old_appointment.xmin" in sql
     for symbol in (
         "head",
         "outbox",
@@ -1056,11 +1060,14 @@ def test_renderer_system_xmin_uses_record_local() -> None:
         "head_outbox",
     ):
         assert f"{symbol} record;" in sql
-        assert f"({symbol}).xmin" in sql
+        assert f"{symbol}.xmin" in sql
+        assert f"({symbol}).xmin" not in sql
     assert "OLD.xmin" not in sql
     assert "NEW.xmin" not in sql
+    assert ").xmin" not in sql
     assert ".xmin INTO STRICT" not in sql
     assert sql.count(".xmin AS xmin INTO STRICT") == 62
+    assert sql.count(".xmin") == 118
     assert (
         _select_columns(
             "emr4_context_fabric.context_observation_stream_head",
@@ -1255,9 +1262,7 @@ def test_renderer_keeps_postgresql_special_forms_unqualified() -> None:
         qualified, result["manifest"], result["effective"]
     )
     assert not qualified_report.valid
-    assert any(
-        issue.code == "pg_catalog_coalesce" for issue in qualified_report.issues
-    )
+    assert any(issue.code == "pg_catalog_coalesce" for issue in qualified_report.issues)
 
 
 # ---------------------------------------------------------------------------
@@ -1280,12 +1285,24 @@ def test_recovery_recognizer_rejects_nullable_count_and_trigger_row_xmin() -> No
     assert not nullable_report.valid
     assert any(issue.code == "nullable_count" for issue in nullable_report.issues)
 
-    trigger_xmin = sql.replace("(old_appointment).xmin", "OLD.xmin", 1)
+    trigger_xmin = sql.replace("old_appointment.xmin", "OLD.xmin", 1)
     xmin_report = recognize_inert_sql(
         trigger_xmin, result["manifest"], result["effective"]
     )
     assert not xmin_report.valid
     assert any(issue.code == "trigger_row_xmin" for issue in xmin_report.issues)
+
+    anonymous_record_xmin = sql.replace(
+        "old_appointment.xmin", "(old_appointment).xmin", 1
+    )
+    anonymous_record_report = recognize_inert_sql(
+        anonymous_record_xmin, result["manifest"], result["effective"]
+    )
+    assert not anonymous_record_report.valid
+    assert any(
+        issue.code == "anonymous_record_xmin"
+        for issue in anonymous_record_report.issues
+    )
 
 
 def test_recovery_recognizer_rejects_trigger_kind_and_missing_guard() -> None:

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_fresh_networkless_diagnosis_only_reproduction_of_attempt_021_and_release_only_allowlisted_sqlstate_function_line_record_and_column_coordinates_after_exact_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Immutable failure evidence 021 is byte-identical to the current mutable evidence at SHA-256 5c744ef559e438c7fc7de32ff26ea845a95f0d207363bd9bf60c10a718968ff2. It binds the reviewed artifact/behavior parents, records BTR-E01 SQLSTATE 42703, observed/passed zero of twenty, and cleanup of exact container f5ee01c6f5aa1788c99adab290ce75cd8338e4caca2c4108a16705c94c75741f. A diagnosis-only rerun may capture raw verbose psql output in memory, but must persist only allowlisted function, line, record-symbol and column coordinates and must not replace the mutable evidence file.",
+    "current_authority_allocation": "GPT Sol owns one fresh diagnosis-only disposable PostgreSQL run, in-memory raw diagnostic parsing, allowlisted coordinate release, exact cleanup and any later typed repair. No Gemini, worker, native subagent, provider model or product surface receives runtime or write authority.",
+    "git_refs_and_worktree": "Primary remains tracked-clean at fc3f6e5a7887ce6c2e9bb46f0f753f2e88332d82 with bounded untracked attempt-021 evidence/receipts plus preserved pre-existing untracked files. No owned emr4-cf-pg16-behavior container exists. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "Behavior attempt 021 failed safely at BTR-E01 with SQLSTATE 42703, zero scenarios and verified exact cleanup. The authorised evidence-backed diagnose-repair-rerun loop remains active; no user decision fork is present.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned --pull=never --network=none container with no port, mount, socket, external input or durable volume. Raw stdout/stderr must remain process-memory-only; persisted output is restricted to authored code coordinates, SQLSTATE, hashes, counts and exact cleanup. No product/provider, patient/clinical/product/protected data, application runtime, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

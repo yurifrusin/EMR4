@@ -1227,6 +1227,7 @@ def _canonical_sha256(value: Any) -> str:
     encoded = json.dumps(value, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
+
 INSTRUCTION_OPCODES = frozenset(
     {
         "ASSERT_ISOLATION",
@@ -1360,28 +1361,18 @@ _PIN_GENERATION_COORDINATE_PAIRS = (
     ("observer_generation", "observer_generation"),
 )
 _EXACT_SET_CONTAINS_KEY_PAIRS = {
-    "emr4_context_fabric.context_durability_checkpoint": (
-        _GENERATION_COORDINATE_PAIRS
-    ),
-    "emr4_context_fabric.context_recovery_anchor": (
-        _GENERATION_COORDINATE_PAIRS
-    ),
+    "emr4_context_fabric.context_durability_checkpoint": (_GENERATION_COORDINATE_PAIRS),
+    "emr4_context_fabric.context_recovery_anchor": (_GENERATION_COORDINATE_PAIRS),
     "emr4_context_fabric.context_observation_key_interval": (
         _GENERATION_COORDINATE_PAIRS
     ),
     "emr4_context_fabric.context_classified_observation_receipt": (
         _GENERATION_COORDINATE_PAIRS
     ),
-    "emr4_context_fabric.context_durability_audit": (
-        _GENERATION_COORDINATE_PAIRS
-    ),
-    "emr4_context_fabric.context_recovery_pin": (
-        _PIN_GENERATION_COORDINATE_PAIRS
-    ),
+    "emr4_context_fabric.context_durability_audit": (_GENERATION_COORDINATE_PAIRS),
+    "emr4_context_fabric.context_recovery_pin": (_PIN_GENERATION_COORDINATE_PAIRS),
 }
-_COVERAGE_EVIDENCE_RELATION = (
-    "emr4_context_fabric.context_observation_key_interval"
-)
+_COVERAGE_EVIDENCE_RELATION = "emr4_context_fabric.context_observation_key_interval"
 
 _SQL_TEXT = re.compile(
     r"(?:;|\$\$|--|/\*|\b(?:CREATE|ALTER|DROP|GRANT|REVOKE|EXECUTE|"
@@ -1576,12 +1567,18 @@ class _SemanticValidator:
                 )
 
         recovery = self.contract.get("structural_feasibility_recovery_v1")
-        operations = recovery.get("operations") if isinstance(recovery, Mapping) else None
+        operations = (
+            recovery.get("operations") if isinstance(recovery, Mapping) else None
+        )
         expected_ids = [f"REC{index:02d}" for index in range(1, 27)]
-        if not isinstance(operations, list) or [
-            operation.get("id") if isinstance(operation, Mapping) else None
-            for operation in operations
-        ] != expected_ids:
+        if (
+            not isinstance(operations, list)
+            or [
+                operation.get("id") if isinstance(operation, Mapping) else None
+                for operation in operations
+            ]
+            != expected_ids
+        ):
             self.issue(
                 "$.structural_feasibility_recovery_v1.operations",
                 "recovery_operation_order",
@@ -1591,7 +1588,9 @@ class _SemanticValidator:
             "id": "REC19",
             "kind": "ADD_ENUM",
             "target": "emr4_context_fabric.source_retention_reason",
-            "values": list(EXACT_ENUM_VALUES["emr4_context_fabric.source_retention_reason"]),
+            "values": list(
+                EXACT_ENUM_VALUES["emr4_context_fabric.source_retention_reason"]
+            ),
         }:
             self.issue(
                 "$.structural_feasibility_recovery_v1.operations[18]",
@@ -1628,9 +1627,7 @@ class _SemanticValidator:
                 "the exact effective role matrix is required",
             )
         else:
-            outbox = (
-                "emr4_context_fabric.diary_context_observation_outbox_v1"
-            )
+            outbox = "emr4_context_fabric.diary_context_observation_outbox_v1"
             product_prefix = "public."
             trigger_ids = set(EXACT_TRIGGER_FUNCTIONS)
             for index, role in enumerate(roles):
@@ -1642,8 +1639,10 @@ class _SemanticValidator:
                         continue
                     privileges = grant.get("privileges")
                     relation = grant.get("relation")
-                    if relation == outbox and isinstance(privileges, list) and (
-                        "DELETE" in privileges
+                    if (
+                        relation == outbox
+                        and isinstance(privileges, list)
+                        and ("DELETE" in privileges)
                     ):
                         self.issue(
                             role_path,
@@ -1702,10 +1701,7 @@ class _SemanticValidator:
                     for node in nodes
                     if isinstance(node, Mapping)
                     and node.get("node_id")
-                    == (
-                        "emr4_context_fabric."
-                        "project_update_confirm_reschedule_v1.p12"
-                    )
+                    == ("emr4_context_fabric.project_update_confirm_reschedule_v1.p12")
                 ),
                 None,
             )
@@ -1978,9 +1974,7 @@ class _SemanticValidator:
                 "the stream-scoped existing support helper is the only support function",
             )
 
-    def _validate_exact_signature_fields(
-        self, signatures: Mapping[str, Any]
-    ) -> None:
+    def _validate_exact_signature_fields(self, signatures: Mapping[str, Any]) -> None:
         """Compare every R5D signature field with literal validator authority."""
 
         for expected in EXACT_SIGNATURE_FIELD_MAP:
@@ -2214,13 +2208,8 @@ class _SemanticValidator:
         )
         for expected in EXACT_TRIGGER_DECLARATION_FIELD_MAP:
             position = expected["position"]
-            path = (
-                "$.effective_parent_summary.trigger_declarations"
-                f"[{position}]"
-            )
-            candidate = (
-                declarations[position] if position < len(declarations) else None
-            )
+            path = f"$.effective_parent_summary.trigger_declarations[{position}]"
+            candidate = declarations[position] if position < len(declarations) else None
             if not isinstance(candidate, Mapping):
                 self.issue(
                     path,
@@ -2681,9 +2670,7 @@ class _SemanticValidator:
                 symbols,
                 path,
                 expected=_BOOLEAN_TYPE,
-                selection_relation=(
-                    relation if isinstance(relation, str) else None
-                ),
+                selection_relation=(relation if isinstance(relation, str) else None),
             )
             self._merge_expression_effects(state.effects, predicate)
             order_columns = self._order_by(relation, operands.get("order_by"), path)
@@ -3505,7 +3492,10 @@ class _SemanticValidator:
                         "min_field_source_type",
                         "MIN_FIELD source type must be the selected relation array type",
                     )
-                if not isinstance(field_name, str) or field_name not in selected_columns:
+                if (
+                    not isinstance(field_name, str)
+                    or field_name not in selected_columns
+                ):
                     self.issue(
                         path,
                         "min_field_not_selected",
@@ -3600,8 +3590,10 @@ class _SemanticValidator:
                         "set_member_column_not_selected",
                         "set key column must be bound by the prior complete-set read",
                     )
-                if source_type is not None and set_type is not None and (
-                    source_type != set_type
+                if (
+                    source_type is not None
+                    and set_type is not None
+                    and (source_type != set_type)
                 ):
                     self.issue(
                         pair_path,
@@ -3614,9 +3606,7 @@ class _SemanticValidator:
                     "set_contains_member_relation_mismatch",
                     "SET_CONTAINS_KEY requires the frozen generation complete set",
                 )
-            expected_pairs = _EXACT_SET_CONTAINS_KEY_PAIRS.get(
-                str(source_relation)
-            )
+            expected_pairs = _EXACT_SET_CONTAINS_KEY_PAIRS.get(str(source_relation))
             if expected_pairs is None or tuple(actual_pairs) != expected_pairs:
                 self.issue(
                     f"{path}.key_pairs",
@@ -3682,12 +3672,12 @@ class _SemanticValidator:
                         "set key pairs must be duplicate-free",
                     )
                 seen_pairs.add(pair_key)
-                required_type = self.column_types.get(
-                    str(required_relation), {}
-                ).get(str(required_column))
-                evidence_type = self.column_types.get(
-                    str(evidence_relation), {}
-                ).get(str(evidence_column))
+                required_type = self.column_types.get(str(required_relation), {}).get(
+                    str(required_column)
+                )
+                evidence_type = self.column_types.get(str(evidence_relation), {}).get(
+                    str(evidence_column)
+                )
                 if required_type is None:
                     self.issue(
                         pair_path,
@@ -3712,8 +3702,10 @@ class _SemanticValidator:
                         "set_evidence_column_not_selected",
                         "evidence key column must be bound by its complete-set read",
                     )
-                if required_type is not None and evidence_type is not None and (
-                    required_type != evidence_type
+                if (
+                    required_type is not None
+                    and evidence_type is not None
+                    and (required_type != evidence_type)
                 ):
                     self.issue(
                         pair_path,
@@ -3837,13 +3829,22 @@ class _SemanticValidator:
                 self.issue(
                     path, "xmin_row", "SYSTEM_XMIN requires an assigned relation row"
                 )
-            if (
+            local_row = (
                 isinstance(row_expression, Mapping)
                 and row_expression.get("op") == "REF"
                 and row_expression.get("kind") == "LOCAL"
-            ):
+            )
+            if not local_row:
+                self.issue(
+                    path,
+                    "xmin_source",
+                    "SYSTEM_XMIN requires a LOCAL exact-read record source",
+                )
+            if local_row:
                 symbol = row_expression.get("symbol")
-                selected = state.row_columns.get(symbol) if isinstance(symbol, str) else None
+                selected = (
+                    state.row_columns.get(symbol) if isinstance(symbol, str) else None
+                )
                 if selected is None or "xmin" not in selected[1]:
                     self.issue(
                         path,

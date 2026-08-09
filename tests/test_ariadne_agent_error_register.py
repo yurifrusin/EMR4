@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 121
+    assert register["register_revision"] == 122
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 146)
+        f"AER-{index:04d}" for index in range(1, 147)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -1878,15 +1878,29 @@ def test_aer_0145_rejects_pass_that_contradicts_its_packet() -> None:
     assert "contradiction" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0146_requires_direct_anonymous_record_xmin_access() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0146"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["related_incident_ids"] == []
+    assert "42703" in incident["observed_error"]
+    assert incident["recurrence_signature"] == (
+        "repository.anonymous_record_xmin_composite_access"
+    )
+    assert "(record).xmin" in incident["correction"]["prevention_control"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 145
+    assert report["incident_count"] == 146
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 102,
         "harness": 18,
-        "repository": 17,
+        "repository": 18,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
@@ -1896,11 +1910,11 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "output_contract_violation": 40,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 17,
+        "repository_defect": 18,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 36,
+        "accepted_candidate_changed": 37,
         "canonical_unchanged": 87,
         "untrusted_partial_worktree": 22,
     }

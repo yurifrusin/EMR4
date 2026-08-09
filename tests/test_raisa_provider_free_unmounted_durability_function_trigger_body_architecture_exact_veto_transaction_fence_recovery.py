@@ -6,8 +6,7 @@ from collections.abc import Iterator, Mapping
 from typing import Any
 
 from scripts import (
-    raisa_provider_free_unmounted_durability_function_trigger_body_architecture_trigger_programs
-    as triggers,
+    raisa_provider_free_unmounted_durability_function_trigger_body_architecture_trigger_programs as triggers,
 )
 
 
@@ -81,7 +80,10 @@ def _has_constant_equality(
     for item in _walk(expression):
         if item.get("op") != "EQ":
             continue
-        sides = ((item.get("left"), item.get("right")), (item.get("right"), item.get("left")))
+        sides = (
+            (item.get("left"), item.get("right")),
+            (item.get("right"), item.get("left")),
+        )
         if any(
             _ref_value(reference) == ref
             and isinstance(constant, Mapping)
@@ -93,13 +95,14 @@ def _has_constant_equality(
     return False
 
 
-def _has_current_xid(
-    expression: Mapping[str, Any], relation: str
-) -> bool:
+def _has_current_xid(expression: Mapping[str, Any], relation: str) -> bool:
     for item in _walk(expression):
         if item.get("op") != "EQ":
             continue
-        sides = ((item.get("left"), item.get("right")), (item.get("right"), item.get("left")))
+        sides = (
+            (item.get("left"), item.get("right")),
+            (item.get("right"), item.get("left")),
+        )
         if any(
             _ref_value(reference) == _ref("SOURCE_COLUMN", relation, "xmin")
             and isinstance(current, Mapping)
@@ -154,7 +157,9 @@ def test_non_temporal_event_and_alias_sets_are_exact_current_xid_effects() -> No
     )
 
 
-def test_current_outbox_is_joined_to_exact_event_alias_revision_and_transaction() -> None:
+def test_current_outbox_is_joined_to_exact_event_alias_revision_and_transaction() -> (
+    None
+):
     program = _program("cf_fence_appointment_update_v1")
     exact_alias = _node(program, ".update.absence.exact-alias")["operands"]
     outbox = _node(program, ".update.absence.current-outbox")["operands"]
@@ -231,12 +236,13 @@ def test_head_effect_is_current_xid_and_bound_to_the_exact_outbox_position() -> 
         ),
     )
     assert any(
-        item.get("op") == "TRANSACTION_TIMESTAMP"
-        for item in _walk(head["predicate"])
+        item.get("op") == "TRANSACTION_TIMESTAMP" for item in _walk(head["predicate"])
     )
 
 
-def test_non_temporal_branch_ignores_unrelated_rows_and_preserves_trigger_rules() -> None:
+def test_non_temporal_branch_ignores_unrelated_rows_and_preserves_trigger_rules() -> (
+    None
+):
     program = _program("cf_fence_appointment_update_v1")
     event_count = _node(program, ".update.absence.event-count")
     no_event_ids = {
@@ -255,9 +261,7 @@ def test_non_temporal_branch_ignores_unrelated_rows_and_preserves_trigger_rules(
     assert _node(program, ".update.second")["op"] == "ASSERT"
 
     trigger_refs = [
-        item
-        for item in _walk(program["ast"])
-        if item.get("kind") == "TRIGGER_COLUMN"
+        item for item in _walk(program["ast"]) if item.get("kind") == "TRIGGER_COLUMN"
     ]
     assert trigger_refs
     assert {item["relation"] for item in trigger_refs} == {triggers.APPOINTMENT}
@@ -273,11 +277,14 @@ def test_head_guard_keeps_legal_old_new_position_change_proof() -> None:
     program = _program("cf_guard_stream_head_v1")
     proof = _node(program, ".update.proof")["operands"]["predicate"]
 
-    assert _has_equality(
-        proof,
-        _ref("TRIGGER_COLUMN", triggers.HEAD, "last_position"),
-        _ref("TRIGGER_COLUMN", triggers.HEAD, "last_position"),
-    ) is False
+    assert (
+        _has_equality(
+            proof,
+            _ref("TRIGGER_COLUMN", triggers.HEAD, "last_position"),
+            _ref("TRIGGER_COLUMN", triggers.HEAD, "last_position"),
+        )
+        is False
+    )
     position_eq = next(
         item
         for item in _walk(proof)

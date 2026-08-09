@@ -1,0 +1,32 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-diagnosis-receipt.v1",
+  "date": "2026-08-09",
+  "status": "diagnosis_complete_cleanup_verified",
+  "source_head": "fc3f6e5a7887ce6c2e9bb46f0f753f2e88332d82",
+  "parent_attempt": "raisa-context-fabric-durability-behavior-runtime-021",
+  "characterization_id": "raisa-context-fabric-durability-behavior-runtime-021a",
+  "failure": {
+    "scenario_id": "BTR-E01",
+    "sqlstate": "42703",
+    "function_id": "emr4_context_fabric.cf_fence_stream_head_v1",
+    "function_line": 33,
+    "coordinate_status": "released_from_ephemeral_authored_synthetic_psql_verbose_diagnostic",
+    "record_symbol": "final_head",
+    "column": "xmin",
+    "postgresql_message_class": "could_not_identify_column_in_record_data_type"
+  },
+  "root_cause": "Renderer 2.0.8 correctly emitted relation.xmin AS xmin into an anonymous PL/pgSQL record, but SYSTEM_XMIN still lowered the later access as (final_head).xmin. Parenthesised SQL composite access requires a fixed composite descriptor and cannot resolve the runtime field shape of that record. Direct PL/pgSQL final_head.xmin access is required.",
+  "recovery_boundary": "Renderer 2.0.9 must restrict SYSTEM_XMIN to a LOCAL exact-read record, emit direct record.xmin, reject every parenthesised anonymous-record xmin access artifact-wide, and preserve the existing typed exact-projection, explicit-alias, semantic-contract and twenty-scenario boundaries before fresh parse proof and veto.",
+  "parent_failure_evidence": {
+    "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-021.json",
+    "sha256": "sha256:5c744ef559e438c7fc7de32ff26ea845a95f0d207363bd9bf60c10a718968ff2"
+  },
+  "diagnosis_runtime": {
+    "attempt_id": "be3a152eb92c6b3a86bba82d",
+    "raw_diagnostic_sha256": "sha256:3e8c7ce2949d41472e6209420ecd3a6878f23be9866ef880a51abd1526babb75",
+    "raw_error_persisted": false,
+    "container_id": "bab6820d39bb7858fc25e0caaa0a15c428ba5bdb98e9f0efe8d759e36ae51950",
+    "cleanup_absence_verified": true
+  },
+  "authority_boundary": "provider_free_authored_synthetic_disposable_postgresql_diagnosis_only_no_product_provider_command_deployment_or_protected_ref_authority"
+}

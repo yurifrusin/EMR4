@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 121,
+  "register_revision": 122,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -5661,6 +5661,55 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-alias-review-rejection-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-121.md",
           "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0146",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-021",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-inert-ddl-renderer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "A typed SYSTEM_XMIN expression over an anonymous PL/pgSQL record must lower to direct record.xmin access after a definitely assigned exact read with an explicit xmin projection and alias; SQL composite syntax must never be used for that runtime-shaped record.",
+      "observed_error": "Attempt 021 admitted the explicit-alias artifact and fixtures, then BTR-E01 returned SQLSTATE 42703 with zero scenarios and verified cleanup. A fresh diagnosis-only container reproduced cf_fence_stream_head_v1 line 33: the field was explicitly projected but the renderer still emitted (final_head).xmin, which required a fixed composite descriptor for an anonymous record.",
+      "detection_method": "The bounded SQLSTATE was reproduced in one fresh networkless disposable PostgreSQL 16 diagnosis container. Raw verbose diagnostics stayed in process memory; only the allowlisted function, line, record symbol, column, raw digest and exact cleanup were persisted, then the rendered function body was mapped to the parenthesised SYSTEM_XMIN lowering.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-021.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-diagnosis-receipt.json",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_validator.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-record-access-recovery.md",
+        "docs/security/raisa-context-fabric-durability-system-xmin-record-access-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-122.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.anonymous_record_xmin_composite_access",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Renderer 2.0.9 restricts SYSTEM_XMIN to LOCAL exact-read records and emits direct record.xmin access while retaining explicit relation.xmin AS xmin projections.",
+        "prevention_control": "Typed validation rejects non-local SYSTEM_XMIN, renderer acceptance requires direct access for the complete population, and the artifact recognizer rejects every residual parenthesised (record).xmin form before parse or behavior eligibility.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_validator.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-record-access-recovery.md",
+          "docs/security/raisa-context-fabric-durability-system-xmin-record-access-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-122.md"
         ]
       },
       "status": "corrected"

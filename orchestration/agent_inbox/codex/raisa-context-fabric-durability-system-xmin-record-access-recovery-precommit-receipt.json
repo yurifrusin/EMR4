@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicit_path_commit_attempt_021_failure_and_diagnosis_renderer_209_direct_record_access_repair_regenerated_artifact_and_aer_0146_without_staging_mutable_behavior_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Immutable failure evidence 021 is exact at SHA-256 5c744ef559e438c7fc7de32ff26ea845a95f0d207363bd9bf60c10a718968ff2 and proves BTR-E01 SQLSTATE 42703, zero scenarios and exact cleanup. Diagnosis 021a released cf_fence_stream_head_v1 line 33, record final_head, column xmin with no raw error persisted and exact cleanup. Renderer 2.0.9 restricts SYSTEM_XMIN to LOCAL exact-read records, emits direct record.xmin, retains all 62 explicit aliases and rejects all parenthesised forms. The inert artifact remains 412 statements, exactly 1,403,578 LF bytes at SHA-256 42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112; manifest SHA-256 is 566edc7be1be850711920ca88e89a2d520faaa057da13a8ddee456a5e5f51b14; typed semantic parents are unchanged. The 210-test focused packet, five-test post-format check, Ruff, format, regeneration and diff checks pass. AER revision 122 validates with 146 incidents and zero open.",
+    "current_authority_allocation": "GPT Sol owns exact-path candidate staging/commit, downstream parse proof, behavior rebind, independent veto and later serial rerun. No worker, native subagent, Gemini project or provider/product runtime receives write or acceptance authority from this receipt.",
+    "git_refs_and_worktree": "Primary is at fc3f6e5a7887ce6c2e9bb46f0f753f2e88332d82 with only bounded direct-record recovery candidate paths plus preserved pre-existing untracked files. No owned diagnosis/behavior container exists. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only; git add dot and git add -A are forbidden.",
+    "live_handover_current_baton": "The active provider-free durability behavior gate remains in its authorised diagnose-repair-rerun loop. Attempt 021 failed safely; diagnosis 021a identified anonymous-record composite syntax; the next candidate is the bounded renderer 2.0.9 direct-access repair. The future Agent Execution Surface and Containment Gate remains outside this work.",
+    "protected_evidence_boundaries": "Stage only the named attempt-021 preexecution/failure/diagnosis receipts and immutable failure copy, diagnosis/recovery/threat/AER files, renderer/validator/tests and regenerated inert SQL/manifest. Do not stage docs/branding, unrelated untracked files or mutable provider-free-behavior-transaction-evidence.json. No provider, patient/product/protected data, application runtime, migration application, deployment, production, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

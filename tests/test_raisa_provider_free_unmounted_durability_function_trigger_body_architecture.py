@@ -106,17 +106,20 @@ def frozen_policy(candidate: dict[str, Any], baseline: dict[str, Any]) -> None:
     """Independent exact-body envelope used by the hostile-mutation packet."""
 
     assert_contract_valid(candidate)
-    assert candidate["structural_feasibility_recovery_v1"] == baseline[
-        "structural_feasibility_recovery_v1"
-    ]
+    assert (
+        candidate["structural_feasibility_recovery_v1"]
+        == baseline["structural_feasibility_recovery_v1"]
+    )
     assert candidate["effective_parent_summary"] == baseline["effective_parent_summary"]
-    assert candidate["qualified_identifier_catalogue"] == baseline[
-        "qualified_identifier_catalogue"
-    ]
+    assert (
+        candidate["qualified_identifier_catalogue"]
+        == baseline["qualified_identifier_catalogue"]
+    )
     assert candidate["failure_registry"] == baseline["failure_registry"]
-    assert candidate["trigger_applicability_return_matrix"] == baseline[
-        "trigger_applicability_return_matrix"
-    ]
+    assert (
+        candidate["trigger_applicability_return_matrix"]
+        == baseline["trigger_applicability_return_matrix"]
+    )
     assert candidate["artifact_boundary"] == baseline["artifact_boundary"]
     assert candidate["renderer_order"] == baseline["renderer_order"]
     for actual, expected in zip(
@@ -201,7 +204,7 @@ def test_schema_and_semantic_validator_accept_exact_candidate(
 
 
 def test_schema_is_structural_not_a_whole_program_or_effect_constant(
-    schema: dict[str, Any]
+    schema: dict[str, Any],
 ) -> None:
     body_schema = schema["$defs"]["body_program"]
     encoded = json.dumps(body_schema, sort_keys=True)
@@ -211,7 +214,9 @@ def test_schema_is_structural_not_a_whole_program_or_effect_constant(
     assert body_schema["additionalProperties"] is False
 
 
-def test_privilege_and_unmounted_boundaries_are_closed(contract: dict[str, Any]) -> None:
+def test_privilege_and_unmounted_boundaries_are_closed(
+    contract: dict[str, Any],
+) -> None:
     roles = {
         role["role"]: role
         for role in contract["effective_parent_summary"]["effective_roles"]
@@ -221,7 +226,9 @@ def test_privilege_and_unmounted_boundaries_are_closed(contract: dict[str, Any])
         {"relation": ADMISSION, "privileges": ["INSERT"]}
     ]
     assert RECEIPT in receiver["direct_table_select"]
-    assert all("UPDATE" not in grant["privileges"] for grant in receiver["direct_table_dml"])
+    assert all(
+        "UPDATE" not in grant["privileges"] for grant in receiver["direct_table_dml"]
+    )
     owner = roles[PREFIX + "context_schema_owner"]
     assert owner["direct_table_dml"] == []
     assert set(owner["direct_table_select"]) == {
@@ -244,7 +251,7 @@ def test_privilege_and_unmounted_boundaries_are_closed(contract: dict[str, Any])
 
 
 def test_producer_and_admission_freeze_the_required_concurrency_paths(
-    contract: dict[str, Any]
+    contract: dict[str, Any],
 ) -> None:
     by_id = programs(contract)
     producer = nodes(by_id[PREFIX + "project_update_confirm_reschedule_v1"])
@@ -265,9 +272,7 @@ def test_producer_and_admission_freeze_the_required_concurrency_paths(
     ]
 
     admission = nodes(by_id[PREFIX + "admit_proofread_observation_v1"])
-    retained_reads = [
-        node for node in admission if node["op"] == "SELECT_SET"
-    ]
+    retained_reads = [node for node in admission if node["op"] == "SELECT_SET"]
     assert [node["operands"]["relation"] for node in retained_reads[:3]] == [
         ADMISSION,
         ADMISSION,
@@ -283,13 +288,17 @@ def test_producer_and_admission_freeze_the_required_concurrency_paths(
 
 
 def test_retention_uses_real_complete_set_minimum_and_bounded_delete(
-    contract: dict[str, Any]
+    contract: dict[str, Any],
 ) -> None:
     by_id = programs(contract)
     evaluate = by_id[PREFIX + "evaluate_source_retention_v1"]
     purge = by_id[PREFIX + "purge_source_rows_v1"]
     for program in (evaluate, purge):
-        mins = [expr for expr in expressions(program["ast"]) if expr.get("op") == "MIN_FIELD"]
+        mins = [
+            expr
+            for expr in expressions(program["ast"])
+            if expr.get("op") == "MIN_FIELD"
+        ]
         assert len(mins) == 1
         assert mins[0]["field"] == "last_contiguous_position"
         assert mins[0]["type"] == "pg_catalog.bigint"
@@ -303,7 +312,7 @@ def test_retention_uses_real_complete_set_minimum_and_bounded_delete(
 
 
 def test_trigger_population_is_total_read_only_and_row_image_local(
-    contract: dict[str, Any]
+    contract: dict[str, Any],
 ) -> None:
     declarations = {
         row["function"]: row
@@ -325,8 +334,7 @@ def test_trigger_population_is_total_read_only_and_row_image_local(
         assert summary["deletes"] == []
         relation = declarations[program["id"]]["relation"]
         assert all(
-            access["relation"] == relation
-            for access in summary["row_image_access"]
+            access["relation"] == relation for access in summary["row_image_access"]
         )
 
 
@@ -350,7 +358,9 @@ def _mutate_remove_head_update(candidate: dict[str, Any]) -> None:
 
 
 def _mutate_unknown_derivation(candidate: dict[str, Any]) -> None:
-    node = next(node for node in nodes(candidate["body_programs"][0]) if node["op"] == "LET")
+    node = next(
+        node for node in nodes(candidate["body_programs"][0]) if node["op"] == "LET"
+    )
     node["operands"]["expression"]["op"] = "DERIVE_COLUMN_VALUE"
 
 
@@ -368,7 +378,9 @@ def _mutate_update_returns_old(candidate: dict[str, Any]) -> None:
     guard = programs(candidate)[PREFIX + "cf_guard_claim_v1"]
     switch = guard["ast"]["nodes"][1]["operands"]
     update = next(arm for arm in switch["arms"] if arm["tg_op"] == "UPDATE")
-    terminal = next(node for node in walk_nodes(update["nodes"]) if node["op"] == "RETURN_NEW")
+    terminal = next(
+        node for node in walk_nodes(update["nodes"]) if node["op"] == "RETURN_NEW"
+    )
     terminal["op"] = "RETURN_OLD"
 
 
@@ -379,7 +391,9 @@ def _mutate_incomplete_switch(candidate: dict[str, Any]) -> None:
 
 def _mutate_unassigned_result(candidate: dict[str, Any]) -> None:
     transition = programs(candidate)[PREFIX + "apply_durability_transition_v1"]
-    terminal = next(node for node in nodes(transition) if node["op"] == "RETURN_COMPOSITE")
+    terminal = next(
+        node for node in nodes(transition) if node["op"] == "RETURN_COMPOSITE"
+    )
     terminal["operands"]["source_symbol"] = "unproduced_result"
 
 
@@ -398,8 +412,7 @@ def _mutate_remove_audit_old_new_lookup(candidate: dict[str, Any]) -> None:
     first_select = next(
         index
         for index, node in enumerate(update["nodes"])
-        if node["op"] == "SELECT_SET"
-        and node["node_id"].endswith("old-command")
+        if node["op"] == "SELECT_SET" and node["node_id"].endswith("old-command")
     )
     update["nodes"].pop(first_select)
 
@@ -419,7 +432,9 @@ def _mutate_swap_bodies(candidate: dict[str, Any]) -> None:
 
 def _mutate_lock_order(candidate: dict[str, Any]) -> None:
     producer_locks = [
-        node for node in nodes(candidate["body_programs"][0]) if node["op"] == "LOCK_EXACT"
+        node
+        for node in nodes(candidate["body_programs"][0])
+        if node["op"] == "LOCK_EXACT"
     ]
     producer_locks[1]["operands"]["ordinal"] = 1
 
@@ -436,12 +451,18 @@ def _mutate_widen_product_read(candidate: dict[str, Any]) -> None:
 
 
 def _mutate_call_cycle(candidate: dict[str, Any]) -> None:
-    call = next(node for node in nodes(candidate["body_programs"][0]) if node["op"] == "CALL_SUPPORT")
+    call = next(
+        node
+        for node in nodes(candidate["body_programs"][0])
+        if node["op"] == "CALL_SUPPORT"
+    )
     call["operands"]["function"] = PREFIX + "apply_durability_transition_v1"
 
 
 def _mutate_signature_swap(candidate: dict[str, Any]) -> None:
-    entries = candidate["effective_parent_summary"]["effective_signatures"]["entry_points"]
+    entries = candidate["effective_parent_summary"]["effective_signatures"][
+        "entry_points"
+    ]
     entries[0], entries[1] = entries[1], entries[0]
 
 
@@ -520,8 +541,7 @@ def test_local_system_xmin_requires_an_explicit_exact_read_projection(
     reload = next(
         node
         for node in nodes(fence)
-        if node["node_id"]
-        == PREFIX + "cf_fence_stream_head_v1.insert.reload"
+        if node["node_id"] == PREFIX + "cf_fence_stream_head_v1.insert.reload"
     )
     reload["operands"]["columns"].remove("xmin")
 
@@ -529,3 +549,21 @@ def test_local_system_xmin_requires_an_explicit_exact_read_projection(
 
     assert not report.valid
     assert "xmin_not_selected" in {issue.code for issue in report.issues}
+
+
+def test_system_xmin_rejects_nonlocal_composite_access(
+    contract: dict[str, Any],
+) -> None:
+    candidate = copy.deepcopy(contract)
+    fence = programs(candidate)[PREFIX + "cf_fence_stream_head_v1"]
+    system_xmin = next(
+        expression
+        for expression in expressions(fence)
+        if expression.get("op") == "SYSTEM_XMIN"
+    )
+    system_xmin["row"]["kind"] = "INPUT"
+
+    report = validate_contract(candidate)
+
+    assert not report.valid
+    assert "xmin_source" in {issue.code for issue in report.issues}
