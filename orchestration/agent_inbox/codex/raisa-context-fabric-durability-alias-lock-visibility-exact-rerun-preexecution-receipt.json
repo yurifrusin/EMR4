@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_distinct_owned_pull_never_networkless_postgresql_16_alias_lock_visibility_exact_catalogue_reproduction_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Committed exact-reproduction candidate HEAD is 6032e1ef312e702f01c1a6b6fceea2e73234c9f1. Contract canonical SHA-256 is 554f70e0dc1e61fa0d831e6b9023bb35f57052323fea2513f6353c111d9a8178 and binds all fifteen value-bearing digests from characterized attempt 575003a3542e56595336dd59. Only the policy digest changed from the predecessor, to sha256:51f697aeb94a50f432f6683c9e9c93412eee38853617a113c1ab020216a57168. Focused parse and plan checks pass.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial exact catalogue reproduction, minimized evidence and exact-ID cleanup. No implementation worker, verifier, provider model or product surface is involved.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 6032e1ef312e702f01c1a6b6fceea2e73234c9f1 with tracked tree and index clean before this receipt pair. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Local postgres:16-bookworm remains exact image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Existing untracked files and docs/branding are preserved and excluded.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery after attempt 027. The alias lock-visibility structural repair is committed; its non-accepting catalogue characterization completed with cleanup. The next required step is one distinct exact catalogue reproduction; behavior runtime remains closed.",
+    "protected_evidence_boundaries": "One distinct exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no published or exposed host port, no bind, named, workspace or Docker-socket mount, container-local tmpfs, fixed authored-synthetic empty prerequisites, minimized catalogue digests and exact-ID cleanup. No function behavior, application migration, operational database or credential, watcher, listener, feed, application, API or Diary wiring, patient, clinical, product or protected data, provider or model call, command or write, deployment, production, release, Pages or protected ref is opened. docs/branding remains excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

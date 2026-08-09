@@ -181,6 +181,12 @@ ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE = json.loads(
         encoding="utf-8"
     )
 )
+ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH = (
+    DIR / "provider-free-disposable-postgresql-evidence-alias-lock-visibility-pass.json"
+)
+ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE = json.loads(
+    ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1061,6 +1067,34 @@ def test_alias_lock_visibility_characterization_is_nonaccepting_and_exact() -> N
             "sha256:3e3f043b4c3f103c8170805e0e0aff327c83916010dc0cef727665fa92c8ef03",
             "sha256:51f697aeb94a50f432f6683c9e9c93412eee38853617a113c1ab020216a57168",
         )
+    }
+
+
+def test_alias_lock_visibility_exact_reproduction_is_distinct_pass() -> None:
+    evidence = ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert rehearsal._bytes_sha(  # noqa: SLF001
+        ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH.read_bytes()
+    ) == "9f61fb3da219159491a9ac73125ec0d93bed0c72ed0f435182964169c7a6e027"
+    assert evidence["attempt_id"] == "c0deb58ac4fea820eec366ff"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["query_digests"] == (
+        ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE["catalogue"][
+            "query_digests"
+        ]
+    )
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:554f70e0dc1e61fa0d831e6b9023bb35f57052323fea2513f6353c111d9a8178"
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "209b8b6f2a4e862a1ceaa9fddca8cb8b7f9252d55594b19cee5a6b6be786cc89"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
     }
     assert (
         evidence["cleanup"]["container_id"]

@@ -26,6 +26,13 @@ and removed container `f3ed6c479e09672673c598e1d7095a3bfece136271c1dae1925f3c1a9
 with exact-ID absence verified. The contract now binds all fifteen
 value-bearing catalogue digests for one distinct exact reproduction.
 
+The distinct exact reproduction then passed as attempt
+`c0deb58ac4fea820eec366ff`. Its full catalogue digest set exactly matched the
+characterization, and container
+`209b8b6f2a4e862a1ceaa9fddca8cb8b7f9252d55594b19cee5a6b6be786cc89`
+was removed with exact-ID absence verified. This proves only exact PostgreSQL
+16 parse, atomic installation and catalogue shape for the inert artifact.
+
 No migration, operational database, product/patient data, provider, function
 behavior, application/API/Diary wiring, watcher/listener/feed, command,
 deployment, release or protected-ref surface is opened.
