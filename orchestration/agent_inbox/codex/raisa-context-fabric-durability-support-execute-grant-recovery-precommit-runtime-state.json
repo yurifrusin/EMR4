@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_closed_attempt_030_diagnosis_and_renderer_2_0_16_exact_support_execute_grant_repair_before_fresh_parse_catalogue_characterization",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 030 is preserved as a closed BTR-E03 SQLSTATE 42501 failure with exact cleanup; deterministic diagnosis proves the support execute-role field mismatch; renderer 2.0.16 and exact hostile controls are ready to seal before a fresh parse/catalogue gate.",
+    "current_authority_allocation": "GPT Sol owns this serial recovery, explicit-path task-branch commit and later parse/behavior proof. No implementation worker, runtime worker or protected integrator is active. Gemini 3.6 Flash/high remains a later fresh independent veto only after a complete deterministic packet.",
+    "active_plan_and_acceptance": "The frozen twenty-scenario behavior plan and category counts 6/4/3/4/3 are unchanged. Attempt 030 evidence SHA-256 deb7a568a80aee0b70264989fe362e214555573ed7a169d58cb32436ce490ec1 and deterministic diagnosis prove that the accepted eight-role executor_roles set was omitted because the renderer read execute_roles. Renderer 2.0.16 emits exactly those eight signature-qualified grants, keeps PUBLIC revoked and generates a 421-statement 1419518-byte inert artifact at SHA-256 934237c4525bf193999039aa1ad00ca815081152d32a6105f3cf730310695461. The 214-test renderer/diagnosis/AER packet and Ruff/diff gates pass; AER revision 146 records 171 closed incidents.",
+    "protected_evidence_boundaries": "This commit contains repository diagnosis, inert generated SQL, minimized synthetic failure evidence and tests only. No PostgreSQL runtime, migration application, operational database/credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model call, application/API/Diary wiring, command/write, deployment, production, release, Pages or protected-ref movement is opened. docs/branding and every unrelated untracked file remain uninspected and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "Candidate base HEAD is 8088b65be06c3a50fbc359012bc0f2f9eb45377f; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked diff is limited to the renderer, generated artifact/manifest, exact hostile tests and AER files; all new diagnosis/recovery/receipt paths will be staged explicitly. Mutable behavior evidence stays restored to attempt 029 and unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "support_execute_grant_recovery_complete_five_source_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed deterministic diagnosis, exact repair, 214 serial tests, Ruff and diff checks."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected for the tightly coupled recovery commit."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["No new verifier call is eligible before parse/catalogue proof and complete behavior rebind."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

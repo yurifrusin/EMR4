@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 145,
+  "register_revision": 146,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-09",
+    "source_cutoff_on": "2026-08-10",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -6770,6 +6770,55 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-subtransaction-xmin-recovery.md",
           "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-subtransaction-xmin-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-145.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0171",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-030",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-inert-ddl-renderer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The inert DDL renderer must emit the exact signature-qualified support-function EXECUTE grants fixed by the accepted effective signature while keeping PUBLIC revoked and adding no grantee.",
+      "observed_error": "Behavior attempt 030 reached BTR-E03 and stopped safely with SQLSTATE 42501, zero accepted scenarios and verified exact-container cleanup. Static source mapping proved that the effective support signature carries eight exact executor_roles while the renderer read the absent field execute_roles. PUBLIC execute was revoked and no replacement support-function grant was emitted, so the admission security-definer owner could not call the tenant-binding helper.",
+      "detection_method": "The immutable minimized failure, exact inert artifact, accepted function/body contract and renderer source were reconciled without another container run. The artifact proves the support-function PUBLIC revoke, the absence of every support-function grant, the BTR-E03 admission call and its context_admission_receiver owner; the renderer proves the sole field-name mismatch.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-030.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-030.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_030_support_execute_grant_diagnosis.py",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_030_support_execute_grant_diagnosis.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-support-execute-grant-recovery.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-support-execute-grant-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-146.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.effective_support_executor_role_field_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Renderer 2.0.16 reads the accepted support signature's executor_roles field and emits exactly one signature-qualified EXECUTE grant for each of its eight ordered roles. The structural contract, function body, RLS predicates, entry-point grants, scenarios and authority remain unchanged.",
+        "prevention_control": "Renderer and hostile recognizer acceptance now require equality between the accepted support executor_roles population and emitted signature-qualified grants, preserve the PUBLIC revoke, reject missing, duplicate or additional grantees and require fresh parse/catalogue proof before another behavior attempt.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-support-execute-grant-recovery.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-support-execute-grant-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-146.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

@@ -127,6 +127,52 @@ def test_recovery_population_and_effective_catalogue_reconcile() -> None:
     assert digest_domain["not_null_values"] is False
 
 
+def test_support_execute_grants_exactly_match_effective_contract() -> None:
+    effective = derive_effective_catalogue(_parents())
+    support = effective["signatures"]["support"]
+    sql = render_inert(effective=effective)["sql_text"]
+    support_grant = re.compile(
+        r"^GRANT EXECUTE ON FUNCTION "
+        r"emr4_context_fabric\.session_binding_allows_v1\([^\n]+\) TO "
+        r"(?P<role>[a-z0-9_]+);$"
+    )
+    observed_roles = [
+        match.group("role")
+        for line in sql.splitlines()
+        if (match := support_grant.fullmatch(line)) is not None
+    ]
+    expected_roles = [role.rsplit(".", 1)[-1] for role in support["executor_roles"]]
+
+    assert expected_roles == [
+        "context_schema_owner",
+        "context_admission_receiver",
+        "context_observer",
+        "context_producer",
+        "context_coordinator",
+        "context_lifecycle",
+        "context_retention",
+        "context_application_read",
+    ]
+    assert observed_roles == expected_roles
+    assert len(observed_roles) == len(set(observed_roles))
+    assert (
+        "REVOKE ALL ON FUNCTION emr4_context_fabric.session_binding_allows_v1(" in sql
+    )
+
+
+def test_support_execute_grant_population_drift_is_rejected() -> None:
+    effective = derive_effective_catalogue(_parents())
+    base = render_inert(effective=effective)
+    mutated = copy.deepcopy(effective)
+    mutated["signatures"]["support"]["executor_roles"].append(
+        "emr4_context_fabric.context_admission_receiver"
+    )
+    rendered = render_inert(effective=mutated)
+    report = recognize_inert_sql(rendered["sql_text"], base["manifest"], mutated)
+
+    assert not report.valid
+
+
 def test_registration_initial_projection_policies_retain_narrow_lifecycle_access() -> (
     None
 ):

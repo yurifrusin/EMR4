@@ -3004,7 +3004,7 @@ def _render_revokes_grants(effective: dict[str, Any], ctx: dict[str, Any]) -> li
                 + ";"
             )
     support = signatures["support"]
-    for role in support.get("execute_roles", []):
+    for role in support.get("executor_roles", []):
         name = _role_name(role)
         schema, fname = _split_qualified(support["id"])
         args = _render_signature_args(support["inputs"])
@@ -3089,7 +3089,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.15"
+RENDERER_VERSION = "2.0.16"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

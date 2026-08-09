@@ -1,0 +1,57 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "authority_change": false,
+    "body_program_change": false,
+    "exact_grantee_roles": [
+      "emr4_context_fabric.context_schema_owner",
+      "emr4_context_fabric.context_admission_receiver",
+      "emr4_context_fabric.context_observer",
+      "emr4_context_fabric.context_producer",
+      "emr4_context_fabric.context_coordinator",
+      "emr4_context_fabric.context_lifecycle",
+      "emr4_context_fabric.context_retention",
+      "emr4_context_fabric.context_application_read"
+    ],
+    "renderer_lookup_field": "executor_roles",
+    "scenario_change": false,
+    "structural_contract_change": false
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "admission_executor": "context_observer",
+    "admission_function_id": "emr4_context_fabric.admit_proofread_observation_v1",
+    "admission_owner": "context_admission_receiver",
+    "artifact_sha256": "sha256:03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0",
+    "body_contract_sha256": "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268",
+    "body_source_sha256": "sha256:b43ea059a3f424e268631228aa9606d30f1c9f082bc805e550788b01e7bd8e76",
+    "contract_executor_field": "executor_roles",
+    "contract_executor_roles": [
+      "emr4_context_fabric.context_schema_owner",
+      "emr4_context_fabric.context_admission_receiver",
+      "emr4_context_fabric.context_observer",
+      "emr4_context_fabric.context_producer",
+      "emr4_context_fabric.context_coordinator",
+      "emr4_context_fabric.context_lifecycle",
+      "emr4_context_fabric.context_retention",
+      "emr4_context_fabric.context_application_read"
+    ],
+    "public_execute_revoked": true,
+    "raw_postgresql_error_persisted": false,
+    "renderer_lookup_field": "execute_roles",
+    "renderer_source_sha256": "sha256:06a34953259c83be3e9d026e1a10115122be8fc5c35ea0c579d9b47eaade351f",
+    "support_execute_grants_emitted": 0,
+    "support_function_id": "emr4_context_fabric.session_binding_allows_v1"
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "completed_scenarios": 0,
+    "evidence_sha256": "sha256:deb7a568a80aee0b70264989fe362e214555573ed7a169d58cb32436ce490ec1",
+    "internal_attempt_id": "791808be5b7f1073da66fa76",
+    "run_sequence": 30,
+    "scenario_id": "BTR-E03",
+    "sqlstate": "42501"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-030-support-execute-grant-diagnosis.v1",
+  "status": "deterministic_support_execute_grant_omission_proven_cleanup_verified"
+}

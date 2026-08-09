@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_closed_attempt_030_diagnosis_and_renderer_2_0_16_exact_support_execute_grant_repair_before_fresh_parse_catalogue_characterization",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen twenty-scenario behavior plan and category counts 6/4/3/4/3 are unchanged. Attempt 030 evidence SHA-256 deb7a568a80aee0b70264989fe362e214555573ed7a169d58cb32436ce490ec1 and deterministic diagnosis prove that the accepted eight-role executor_roles set was omitted because the renderer read execute_roles. Renderer 2.0.16 emits exactly those eight signature-qualified grants, keeps PUBLIC revoked and generates a 421-statement 1419518-byte inert artifact at SHA-256 934237c4525bf193999039aa1ad00ca815081152d32a6105f3cf730310695461. The 214-test renderer/diagnosis/AER packet and Ruff/diff gates pass; AER revision 146 records 171 closed incidents.",
+    "current_authority_allocation": "GPT Sol owns this serial recovery, explicit-path task-branch commit and later parse/behavior proof. No implementation worker, runtime worker or protected integrator is active. Gemini 3.6 Flash/high remains a later fresh independent veto only after a complete deterministic packet.",
+    "git_refs_and_worktree": "Candidate base HEAD is 8088b65be06c3a50fbc359012bc0f2f9eb45377f; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked diff is limited to the renderer, generated artifact/manifest, exact hostile tests and AER files; all new diagnosis/recovery/receipt paths will be staged explicitly. Mutable behavior evidence stays restored to attempt 029 and unstaged.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 030 is preserved as a closed BTR-E03 SQLSTATE 42501 failure with exact cleanup; deterministic diagnosis proves the support execute-role field mismatch; renderer 2.0.16 and exact hostile controls are ready to seal before a fresh parse/catalogue gate.",
+    "protected_evidence_boundaries": "This commit contains repository diagnosis, inert generated SQL, minimized synthetic failure evidence and tests only. No PostgreSQL runtime, migration application, operational database/credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model call, application/API/Diary wiring, command/write, deployment, production, release, Pages or protected-ref movement is opened. docs/branding and every unrelated untracked file remain uninspected and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

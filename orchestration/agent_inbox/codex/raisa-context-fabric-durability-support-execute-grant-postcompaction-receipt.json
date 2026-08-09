@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "sol_records_attempt_030_then_repairs_the_exact_structurally_specified_support_function_execute_grants_and_repeats_parse_veto_behavior_gates_without_scope_expansion",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty scenarios at category counts 6/4/3/4/3 and forbids weakening scenarios, principals, SQLSTATEs, RLS, grants, cleanup or claims. Attempt 030 immutable evidence SHA-256 deb7a568a80aee0b70264989fe362e214555573ed7a169d58cb32436ce490ec1 records unexpected_rejection at BTR-E03 with SQLSTATE 42501 after BTR-E02 was repaired. Static source mapping indicates the renderer omitted support-function EXECUTE grants already required by the accepted structural contract's execute_roles set; this hypothesis must be proven before repair admission.",
+    "current_authority_allocation": "GPT Sol owns the serial diagnosis, exact mechanical renderer repair, deterministic tests, parse/catalogue characterization and reproduction, behavior rebind, fresh independent veto, and at most one newly eligible behavior attempt under Yuri's standing planned-gate and diagnose-repair-rerun authority. External workers receive no runtime or acceptance authority. Gemini 3.6 Flash/high remains independent review only after deterministic admission.",
+    "git_refs_and_worktree": "Fresh fetch confirms task HEAD 8088b65be06c3a50fbc359012bc0f2f9eb45377f and origin task 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked files are clean before this receipt; docs/branding and every unrelated untracked path remain preserved. Mutable behavior evidence remains restored to attempt 029 SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and mutable parse evidence remains restored and unstaged.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Renderer 2.0.15 and its exact parse/catalogue proof passed, the frozen twenty-scenario behavior contract was rebound, and fresh Gemini 3.6 Flash/high veto passed. Attempt 030 then progressed past BTR-E02 and failed closed at BTR-E03 with SQLSTATE 42501, zero accepted scenarios and exact owned-container cleanup. The next dependency-satisfied work is evidence-backed diagnosis and narrow repair before any further run.",
+    "protected_evidence_boundaries": "No protected holdout or branding content may be opened, enumerated, staged or changed. Preserve all untracked files and stage only explicit intended paths. No migration application, operational database or credential, source/watcher/listener/feed, patient/clinical/product/protected data, product provider/model call, application/API/Diary wiring, command/write outside a disposable authored-synthetic database, deployment, production, release, Pages or protected-ref movement is authorized. Any later database attempt must use one newly owned pull-never networkless PostgreSQL 16 container and exact-ID cleanup without listing or touching the unrelated gp-pms-postgres container."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

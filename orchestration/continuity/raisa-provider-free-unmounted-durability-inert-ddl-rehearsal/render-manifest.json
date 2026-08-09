@@ -2261,6 +2261,38 @@
     {
       "identifier": "GRANT SELECT ON TABLE emr4_context_fabric.context_reassembly",
       "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_bindin",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_bindin",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_bindin",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_bindin",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_bindin",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_bindin",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_bindin",
+      "kind": "GRANT"
+    },
+    {
+      "identifier": "GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_bindin",
+      "kind": "GRANT"
     }
   ],
   "owner_assertions": {
@@ -2492,12 +2524,12 @@
       "start": 4127
     },
     "5": {
-      "end": 4259,
+      "end": 4267,
       "start": 4181
     },
     "6": {
-      "end": 4280,
-      "start": 4262
+      "end": 4288,
+      "start": 4270
     }
   },
   "phases": [
@@ -2763,11 +2795,11 @@
     ]
   },
   "postgresql_major": 16,
-  "renderer_version": "2.0.15",
+  "renderer_version": "2.0.16",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
-  "sql_byte_count": 1416483,
-  "sql_sha256": "sha256:03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0",
-  "statement_count": 413,
+  "sql_byte_count": 1419518,
+  "sql_sha256": "sha256:934237c4525bf193999039aa1ad00ca815081152d32a6105f3cf730310695461",
+  "statement_count": 421,
   "structural_parent": {
     "contract_sha256": "sha256:00a4102ff0e884038e4a25f814dab84f5500b5e597058e30012b3a6d0be6514b",
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",

@@ -1,6 +1,6 @@
 -- -- durability-schema.sql.inert -- inert evidence artifact; never execute or apply
 -- generated_by: raisa_provider_free_unmounted_durability_inert_ddl_rehearsal
--- renderer_version: 2.0.15
+-- renderer_version: 2.0.16
 -- do_not_execute: true
 
 -- ==========================================================================
@@ -4256,6 +4256,14 @@ GRANT USAGE ON SCHEMA emr4_context_fabric TO context_application_read;
 GRANT SELECT ON TABLE emr4_context_fabric.context_frame_generation TO context_application_read;
 GRANT SELECT ON TABLE emr4_context_fabric.context_invalidation_watermark TO context_application_read;
 GRANT SELECT ON TABLE emr4_context_fabric.context_reassembly_obligation TO context_application_read;
+GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenticated_login pg_catalog.name, allowed_capabilities emr4_context_fabric.logical_capability[], requested_practice_id pg_catalog.uuid, requested_source_contract_id emr4_context_fabric.source_contract_code, requested_stream_id pg_catalog.uuid, observed_at pg_catalog.timestamptz) TO context_schema_owner;
+GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenticated_login pg_catalog.name, allowed_capabilities emr4_context_fabric.logical_capability[], requested_practice_id pg_catalog.uuid, requested_source_contract_id emr4_context_fabric.source_contract_code, requested_stream_id pg_catalog.uuid, observed_at pg_catalog.timestamptz) TO context_admission_receiver;
+GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenticated_login pg_catalog.name, allowed_capabilities emr4_context_fabric.logical_capability[], requested_practice_id pg_catalog.uuid, requested_source_contract_id emr4_context_fabric.source_contract_code, requested_stream_id pg_catalog.uuid, observed_at pg_catalog.timestamptz) TO context_observer;
+GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenticated_login pg_catalog.name, allowed_capabilities emr4_context_fabric.logical_capability[], requested_practice_id pg_catalog.uuid, requested_source_contract_id emr4_context_fabric.source_contract_code, requested_stream_id pg_catalog.uuid, observed_at pg_catalog.timestamptz) TO context_producer;
+GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenticated_login pg_catalog.name, allowed_capabilities emr4_context_fabric.logical_capability[], requested_practice_id pg_catalog.uuid, requested_source_contract_id emr4_context_fabric.source_contract_code, requested_stream_id pg_catalog.uuid, observed_at pg_catalog.timestamptz) TO context_coordinator;
+GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenticated_login pg_catalog.name, allowed_capabilities emr4_context_fabric.logical_capability[], requested_practice_id pg_catalog.uuid, requested_source_contract_id emr4_context_fabric.source_contract_code, requested_stream_id pg_catalog.uuid, observed_at pg_catalog.timestamptz) TO context_lifecycle;
+GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenticated_login pg_catalog.name, allowed_capabilities emr4_context_fabric.logical_capability[], requested_practice_id pg_catalog.uuid, requested_source_contract_id emr4_context_fabric.source_contract_code, requested_stream_id pg_catalog.uuid, observed_at pg_catalog.timestamptz) TO context_retention;
+GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenticated_login pg_catalog.name, allowed_capabilities emr4_context_fabric.logical_capability[], requested_practice_id pg_catalog.uuid, requested_source_contract_id emr4_context_fabric.source_contract_code, requested_stream_id pg_catalog.uuid, observed_at pg_catalog.timestamptz) TO context_application_read;
 -- END PHASE 5 -- PUBLIC revocation followed by the exact owner, receiver and runtime grants
 
 -- ==========================================================================

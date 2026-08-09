@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_exactly_one_new_owned_pull_never_networkless_postgresql_16_behavior_attempt_030_then_exact_id_cleanup_and_stops_on_terminal_result",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 029 failed safely at BTR-E02 CF603; renderer 2.0.15 repaired the exception-subtransaction xmin mismatch, exact parse/catalogue reproduction passed, the frozen behavior contract was rebound, and a fresh Gemini 3.6 Flash/high veto passed. Exactly one next behavior attempt is now the dependency-satisfied candidate.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial behavior attempt, minimized evidence, exact-ID cleanup and terminal acceptance/diagnosis under Yuri's standing planned-gate authority. No worker or verifier owns runtime. No provider/model/product surface or fallback is involved.",
+    "active_plan_and_acceptance": "Committed source 8088b65be06c3a50fbc359012bc0f2f9eb45377f binds behavior contract SHA-256 a7278f6d87a69e9c5c9daef0a5b3640bcd22d27a3aac597ee228584dcc06d740, 1416483-byte artifact SHA-256 03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0 and twenty unchanged scenarios. The expanded deterministic packet passed 525 tests; Ruff passed over 30 files. Fresh verifier receipt SHA-256 7726a890babf530f60ca11325e982edbf0944870150839c9bc7bba8ea540edde records pass, exact unchanged HEAD and no Docker execution. Static behavior-contract validation passes.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no published/exposed host port, no bind, named, workspace or Docker-socket mount, container-local tmpfs, fixed authored-synthetic fixtures, minimized allowlisted evidence and exact-ID cleanup. It may execute only the frozen twenty provider-free scenarios. No migration, operational database/credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model call, application/API/Diary wiring, command/write authority outside the disposable synthetic database, deployment, production, release, Pages or protected ref is opened. The unrelated gp-pms-postgres container must not be listed or touched. docs/branding, mutable parse evidence and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 8088b65be06c3a50fbc359012bc0f2f9eb45377f; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing mutable behavior evidence is preserved at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and must be restored byte-for-byte after the new result is preserved under a distinct immutable path. The index is clean; staging remains explicit-path only."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "subtransaction_xmin_behavior_attempt_030_complete_five_source_preexecution",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact committed parents, static admission, fresh veto, image identity and protected refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected for serial runtime."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The fresh veto passed; no additional verifier call is active."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
