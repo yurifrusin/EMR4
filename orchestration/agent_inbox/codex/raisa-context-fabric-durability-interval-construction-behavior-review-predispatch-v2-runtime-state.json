@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_gemini_36_flash_high_read_only_replacement_veto_after_machine_enforced_passing_receipt",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. Attempt 024 failed closed at BTR-E02; the bounded interval-construction repair has distinct characterization and exact parse proofs, an unchanged twenty-scenario behavior rebind, a 476-test deterministic pass and a machine-enforced verifier-dispatch guard at candidate edb488b06bf07a30647439114e6cfda8510276f9.",
+    "current_authority_allocation": "GPT Sol retains implementation, runtime, cleanup and final acceptance authority. One fresh Gemini 3.6 Flash/high Antigravity verifier may perform only the exact-HEAD read-only replacement veto in isolated worktree r135. It is an external verifier transport, not a predeclared native assigned worker. No implementation worker, product surface or protected integration is active.",
+    "active_plan_and_acceptance": "The candidate preserves renderer 2.0.11 source 8c307d28323c68744338e2290879994e4980b2dd, inert SQL sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51, manifest sha256:7a0c5d15e65a4631cf9b590f7c7af67f2103f69ebe05fb2dd9ad5f002e1d1b2d, exact parse source b0311480bb378553574b039ea536a003bd7ef382, behavior contract sha256:227d0bafe8d55cf935a2ebea9b8924e2d6b7d632f054950ddbff75fad45a66f6 and unchanged twenty-scenario digest eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. It also requires a passed five-source orchestrator receipt at launcher admission. The exact focused packet passes 476 tests.",
+    "protected_evidence_boundaries": "Attempts 001-024 and all parse characterization/exact evidence remain immutable. The first r134 review is preserved but inadmissible. Mutable behavior evidence stays untracked and unstaged until a successful later behavior run replaces it. The verifier must not start Docker/PostgreSQL, edit, commit, push, inspect docs/branding, access patient/product/protected data, contact any other provider, or widen API, runtime, watcher/listener, command/write, deployment, release, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "Primary task branch is exact tracked-clean HEAD edb488b06bf07a30647439114e6cfda8510276f9 before this untracked v2 dispatch provenance. Separate worktree receipt raisa-context-fabric-durability-interval-construction-behavior-review-worktree-preflight-2-receipt.json proves r135 is exact, clean and on codex/review-context-fabric-interval-behavior-edb488b0 at that candidate with zero calls. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_predispatch_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified exact refs, the clean r135 preflight, 476-test pass, guard tests and replacement-review containment."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent owns this external veto or acceptance."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["One fresh Gemini 3.6 Flash/high structured replacement veto is eligible only after this receipt passes and is supplied to the guarded launcher."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

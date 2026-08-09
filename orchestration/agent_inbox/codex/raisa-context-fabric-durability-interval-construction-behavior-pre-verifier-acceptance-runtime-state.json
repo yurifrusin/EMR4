@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_only_the_fresh_exact_head_clean_gemini_replacement_veto_and_make_one_later_disposable_behavior_attempt_025_eligible",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. The repaired interval artifact, exact parse proof, six-parent behavior rebind and machine-enforced dispatch guard have now received one fresh procedurally eligible Gemini 3.6 Flash/high pass at exact candidate edb488b06bf07a30647439114e6cfda8510276f9.",
+    "current_authority_allocation": "GPT Sol alone may admit the independent veto, issue the later serial behavior-attempt receipt, run the newly owned networkless container, verify exact cleanup and accept or reject its result. Gemini's completed role was read-only veto only. No worker, provider, product surface or protected integration is now active.",
+    "active_plan_and_acceptance": "The replacement verifier receipt records one schema-constrained pass, 476 passing tests, clean Ruff and diff checks, exact unchanged HEAD/worktree, zero Docker execution and all required interval, parse, parent, scenario, AER-0160 dispatch-control and API-boundary challenges. Its orchestrator_receipt_sha256 exactly matches the passed v2 predispatch receipt. This admission makes only one later behavior attempt 025 eligible; it does not pre-accept that runtime result.",
+    "protected_evidence_boundaries": "The first r134 review and its revision_required dispatch receipt remain immutable and inadmissible. Attempts 001-024 and parse evidence remain immutable. Mutable behavior evidence stays untracked and unstaged until a successful later run replaces it. No patient, product or protected data, provider call, operational database, applied migration, API/Diary wiring, watcher/listener, command/write, deployment, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Reviewed candidate is exact edb488b06bf07a30647439114e6cfda8510276f9. Review worktree r135 is exact, clean and unchanged before and after the eligible veto; its branch is codex/review-context-fabric-interval-behavior-edb488b0. Primary task branch is tracked-clean at the same HEAD before this untracked acceptance provenance. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_pre_verifier_acceptance_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled the terminal receipt, exact receipt hash, 476-test result and clean postflight."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent owns review admission or behavior execution."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh r135 Gemini 3.6 Flash/high receipt has one structured pass, exact unchanged HEAD and dirty_after false."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
