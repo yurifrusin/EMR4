@@ -82,6 +82,10 @@ ADMISSION_RECEIVER_BINDING_RLS_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
     "admission-receiver-binding-rls-parent-rebind.md"
 )
+INPUT_NAMESPACE_REBIND = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
+    "input-namespace-parent-rebind.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -115,19 +119,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-receiver-binding-rls-accepted-source.md",
-        "f842c023f4db16e8b0ffc381f653fb16e98280cc",
-        "19d45f59222b1bab0120f4c00d79f7845eec701703d0eaa181e0bfa1f1f26d8f",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-input-namespace-accepted-source.md",
+        "e8b902cf54d50d478912c5f01e38b719e380946d",
+        "3c6d7f0cdafc8103aec60fadf6034c57005fc4a29194c95dd4b31c0d40602de1",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "30ff6b01a54c339e3045977cda909628841fe57e",
-        "1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407",
+        "f64f3cd7ad8577953c51c66309151cb288440acb",
+        "8756f315a3f1112551550141c1fff83d047ff24103b357e97ddb17b0c805e470",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "30ff6b01a54c339e3045977cda909628841fe57e",
-        "2042eb8055cc55cd7cb4396093a897b4df5f86c5a1910dbca677a241c2d7325b",
+        "f64f3cd7ad8577953c51c66309151cb288440acb",
+        "0ada7c72af80ea60ee48bd07a3cf2bb35e0d350691d19650cf71d67db36eea1c",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
@@ -141,7 +145,7 @@ EXPECTED_PARENT_BINDINGS = {
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "f842c023f4db16e8b0ffc381f653fb16e98280cc",
+        "e8b902cf54d50d478912c5f01e38b719e380946d",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
@@ -557,6 +561,39 @@ def test_admission_receiver_binding_rls_rebind_preserves_scenarios_and_closure()
         "deterministic six-parent rebind",
         "f842c023f4db16e8b0ffc381f653fb16e98280cc",
         "30ff6b01a54c339e3045977cda909628841fe57e",
+        "a1a4a619222297b36fa6894a5cf5f12a179af48c",
+        "c0673fc755457756719959dcfc6aea04531d6627",
+        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19",
+        "6/4/3/4/3",
+        "gemini 3.6 flash/high",
+        "docs/branding/",
+        "no applied migration",
+        "product or patient data",
+    ):
+        assert required in combined
+    contract = _contract()
+    canonical = json.dumps(
+        {
+            "scenario_order": contract["scenario_order"],
+            "scenarios": contract["scenarios"],
+            "category_coverage": contract["category_coverage"],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    assert hashlib.sha256(canonical).hexdigest() == (
+        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+    )
+
+
+def test_input_namespace_rebind_preserves_scenarios_and_closed_runtime() -> None:
+    combined = _flat(INPUT_NAMESPACE_REBIND, PLAN, DESIGN).lower()
+
+    for required in (
+        "deterministic six-parent rebind",
+        "e8b902cf54d50d478912c5f01e38b719e380946d",
+        "f64f3cd7ad8577953c51c66309151cb288440acb",
         "a1a4a619222297b36fa6894a5cf5f12a179af48c",
         "c0673fc755457756719959dcfc6aea04531d6627",
         "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19",

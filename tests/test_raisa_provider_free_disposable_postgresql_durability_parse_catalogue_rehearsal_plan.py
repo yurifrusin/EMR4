@@ -96,10 +96,14 @@ BINDING_RLS_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
     "admission-receiver-binding-rls-rebind.md"
 )
+INPUT_NAMESPACE_REBIND = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-"
+    "parse-catalogue-input-namespace-rebind.md"
+)
 
-PARENT_HEAD = "30ff6b01a54c339e3045977cda909628841fe57e"
+PARENT_HEAD = "f64f3cd7ad8577953c51c66309151cb288440acb"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407"
+PARENT_DIGEST = "8756f315a3f1112551550141c1fff83d047ff24103b357e97ddb17b0c805e470"
 
 
 def _text(path: Path) -> str:
@@ -131,6 +135,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         SUBTRANSACTION_XMIN_REBIND,
         SUPPORT_EXECUTE_GRANT_REBIND,
         BINDING_RLS_REBIND,
+        INPUT_NAMESPACE_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
@@ -139,14 +144,14 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_419_573
+    assert manifest["sql_byte_count"] == 1_448_546
     assert manifest["statement_count"] == 421
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "1,419,573 canonical LF bytes" in plan
+    assert "1,448,546" in plan
     assert "statement count `421`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
     assert "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c" in plan
@@ -160,6 +165,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     assert "d9237e6db14e314de5e2981be1073575db2e512ed1eff44b1f9ebf8b044c17bc" in plan
     assert "41f065c805fdc3cc140ded68baf180bfd88ae3c34bbcd962cc140e9d359d814d" in plan
     assert "cf746ed8824ef8853677020e90083c2b4bfe1b4096a36ad7735cfeabf0eb4b91" in plan
+    assert "e783fedb13785672cad84c76984f39ec6ec0b7bb3787ca9b33fb61db1f59fc68" in plan
 
 
 def test_runtime_profile_is_no_pull_no_network_no_mount_and_exact_owned() -> None:

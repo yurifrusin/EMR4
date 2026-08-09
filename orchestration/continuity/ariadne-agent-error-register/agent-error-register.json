@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 158,
+  "register_revision": 159,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7371,6 +7371,47 @@
           "docs/ariadne-agent-error-correction-register-revision-158.md",
           "tests/test_raisa_context_fabric_durability_behavior_failure_032_input_column_ambiguity_diagnosis.py",
           "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0185",
+      "attempt_id": "raisa-context-fabric-durability-input-namespace-static-packet-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-parse-plan-parent-assertion",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The complete static packet must bind the live parse-plan acceptance test to the current accepted inert artifact and its newest rebind note before the candidate can be frozen for review.",
+      "observed_error": "The first complete input-namespace static packet had one failure: the parse-plan test still expected the preceding artifact SHA-256 1d53c7ac even though the current renderer artifact and manifest correctly carried SHA-256 8756f315.",
+      "detection_method": "The exact packet ran to completion with one named assertion failure and no runtime, Docker, database or provider action; the failing test compared current artifact bytes to one stale module constant.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_plan.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-input-namespace-rebind.md",
+        "docs/ariadne-agent-error-correction-register-revision-159.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_parent_acceptance_test_stale_after_rebind",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The live parse-plan test now includes the input-namespace rebind and binds exact source f64f3cd7, artifact SHA-256 8756f315, 1,448,546 bytes and exact parse contract e783fedb; the full packet must restart on these final bytes.",
+        "prevention_control": "Every parent rebind must update both runtime contract validation and the live plan-level parent assertion before the first complete packet; historical evidence tests remain separately byte-bound.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_plan.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-input-namespace-rebind.md",
+          "docs/ariadne-agent-error-correction-register-revision-159.md",
+          "tests/test_ariadne_agent_error_register.py"
         ]
       },
       "status": "corrected"
