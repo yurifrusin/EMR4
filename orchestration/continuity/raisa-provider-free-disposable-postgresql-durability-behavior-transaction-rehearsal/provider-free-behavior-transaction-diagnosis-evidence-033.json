@@ -1,0 +1,52 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "authority_change": false,
+    "body_program_change": false,
+    "contract_and_schema_rule_change": true,
+    "inert_artifact_change": false,
+    "packet_value": "canonical_digest_of_complete_same_locator_outbox_row",
+    "plan_and_design_correction": true,
+    "principal_or_sqlstate_change": false,
+    "readback": "admission_digest_equals_independent_same_locator_full_row_recomputation",
+    "scenario_population_change": false
+  },
+  "diagnosis": {
+    "accepted_body_digest_profile": "emr4_context_fabric.source_membership_digest_v1",
+    "accepted_body_source_fields": [
+      "practice_id",
+      "source_contract_id",
+      "stream_id",
+      "stream_epoch",
+      "transaction_position",
+      "predecessor_position",
+      "raw_event_uuid",
+      "opaque_aggregate_alias",
+      "aggregate_revision",
+      "source_contract_digest",
+      "transaction_authored_at"
+    ],
+    "accepted_body_source_relation": "emr4_context_fabric.diary_context_observation_outbox_v1",
+    "additional_container_runs": 0,
+    "behavior_contract_sha256": "sha256:65984c17f1d93ac44ad45059c1ea30a41131dec8844475c9801b5bb440dcc0a8",
+    "body_contract_sha256": "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e",
+    "body_source_sha256": "sha256:01f92356def997b96adb3115cfb4b82afc29a27e72cab5823c81a6b5f2e2a7f1",
+    "contract_rule": "read_exact_outbox_source_contract_digest_for_same_locator",
+    "fixture_readback_compared_value": "admission.source_membership_digest_equals_outbox.source_contract_digest",
+    "fixture_supplied_value": "same_locator_outbox.source_contract_digest",
+    "harness_source_sha256": "sha256:8f6c5ede1e701cd4bb474002603b66952f6edbb1de848bf1181c5b7d47dae2b9",
+    "raw_postgresql_error_persisted": false
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:5a6d5bcc18cd23f0fa528e5cdd33e53e9f0b90c0415a8f86ca326cf47980c8ad",
+    "function_id": "emr4_context_fabric.admit_proofread_observation_v1",
+    "function_line": 100,
+    "internal_attempt_id": "ca31e812992de9b2cba982cc",
+    "run_sequence": 33,
+    "scenario_id": "BTR-E03",
+    "sqlstate": "CF201"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-033-source-membership-fixture-diagnosis.v1",
+  "status": "deterministic_fixture_to_body_source_membership_contradiction_proven_cleanup_verified"
+}

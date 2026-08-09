@@ -86,6 +86,14 @@ INPUT_NAMESPACE_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
     "input-namespace-parent-rebind.md"
 )
+SOURCE_MEMBERSHIP_FIXTURE_RECOVERY = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
+    "source-membership-fixture-recovery.md"
+)
+SOURCE_MEMBERSHIP_FIXTURE_THREAT = (
+    ROOT / "docs/security/raisa-provider-free-disposable-postgresql-durability-"
+    "behavior-source-membership-fixture-recovery-threat-model-delta.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -605,6 +613,44 @@ def test_input_namespace_rebind_preserves_scenarios_and_closed_runtime() -> None
     ):
         assert required in combined
     contract = _contract()
+    canonical = json.dumps(
+        {
+            "scenario_order": contract["scenario_order"],
+            "scenarios": contract["scenarios"],
+            "category_coverage": contract["category_coverage"],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    assert hashlib.sha256(canonical).hexdigest() == (
+        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+    )
+
+
+def test_source_membership_fixture_recovery_preserves_scenarios_and_authority() -> None:
+    combined = _flat(
+        SOURCE_MEMBERSHIP_FIXTURE_RECOVERY,
+        SOURCE_MEMBERSHIP_FIXTURE_THREAT,
+        PLAN,
+        DESIGN,
+    ).lower()
+    for required in (
+        "source_membership_digest_v1",
+        "all eleven fields",
+        "same-locator",
+        "cf201",
+        "twenty scenario objects",
+        "no applied migration",
+        "product or patient data",
+        "provider call",
+        "protected-ref",
+    ):
+        assert required in combined
+    contract = _contract()
+    assert contract["fixture_namespace"]["source_membership_digest_rule"] == (
+        "canonical_digest_of_complete_same_locator_outbox_row"
+    )
     canonical = json.dumps(
         {
             "scenario_order": contract["scenario_order"],

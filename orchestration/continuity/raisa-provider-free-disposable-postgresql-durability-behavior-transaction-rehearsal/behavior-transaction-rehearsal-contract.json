@@ -106,7 +106,7 @@
     "digest_key_attestation": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
     "digest_observation_primary": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
     "digest_observation_conflict": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "source_membership_digest_rule": "read_exact_outbox_source_contract_digest_for_same_locator"
+    "source_membership_digest_rule": "canonical_digest_of_complete_same_locator_outbox_row"
   },
   "fixture_privileges": {
     "bootstrap_principal": "container_initialization_superuser_only_before_scenarios",

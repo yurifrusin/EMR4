@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 159
+    assert register["register_revision"] == 162
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 186)
+        f"AER-{index:04d}" for index in range(1, 189)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 117
+    assert len(agent_incidents) == 119
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2491,7 +2491,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 185
+    assert report["incident_count"] == 188
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2507,28 +2507,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 159
-    assert report["incident_count"] == 185
+    assert report["register_revision"] == 162
+    assert report["incident_count"] == 188
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 117,
+        "agent_behavior": 119,
         "harness": 21,
-        "repository": 39,
+        "repository": 40,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 19,
         "evidence_misreport": 22,
         "harness_failure": 21,
-        "output_contract_violation": 49,
+        "output_contract_violation": 51,
         "read_only_violation": 3,
         "reasoning_claim_error": 24,
-        "repository_defect": 39,
+        "repository_defect": 40,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 58,
-        "canonical_unchanged": 105,
+        "accepted_candidate_changed": 59,
+        "canonical_unchanged": 107,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -2589,7 +2589,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "orchestrator.unapproved_continuation_event",
-            "incident_count": 6,
+            "incident_count": 7,
             "incident_ids": [
                 "AER-0013",
                 "AER-0023",
@@ -2597,6 +2597,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0149",
                 "AER-0152",
                 "AER-0156",
+                "AER-0187",
             ],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
@@ -2604,6 +2605,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
                 "Before constructing any receipt, copy continuation_event verbatim from orchestration/harness_settings/orchestrator_requirements.yaml; descriptive lifecycle detail belongs in planned_action and source evidence, never in the enum field.",
+                "Before drafting any receipt state, copy both continuation_event and the complete adapter/managed-slot inventory directly from the active orchestrator requirements and a recent passing envelope; descriptive phase names belong only in planned_action.",
                 "Before every orchestrator receipt, copy continuation_event from orchestration/harness_settings/orchestrator_requirements.yaml and put task-specific phase language only in planned_action; a revision_required receipt forbids runtime until a distinct corrected state passes.",
                 "Copy continuation_event from orchestration/harness_settings/orchestrator_requirements.yaml before drafting each runtime state; never infer an event label from a filename or planned action, especially after the same recurrence has already been recorded.",
                 "Every Ariadne receipt state must copy continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml before planned_action is drafted; any unapproved event produces immutable revision_required evidence and a distinct corrected state.",
@@ -3078,6 +3080,93 @@ def test_aer_0185_updates_live_parent_assertion_before_packet_restart() -> None:
     assert incident["correction"]["status"] == (
         "control_implemented_pending_acceptance"
     )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0186_preserves_source_membership_fixture_defect() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0186"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "repository.behavior_fixture_component_digest_substituted_for_canonical_membership"
+    )
+    assert "all eleven ordered outbox fields" in incident["observed_error"]
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0187_preserves_rejected_recovery_receipt_and_corrected_v2() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0187"]
+    failed = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-durability-source-membership-fixture-recovery-preplanning-receipt.json"
+    )
+    corrected = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-durability-source-membership-fixture-recovery-preplanning-v2-receipt.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.unapproved_continuation_event"
+    )
+    assert failed["status"] == "revision_required"
+    assert "continuation_event_missing_or_unapproved" in failed["reasons"]
+    assert corrected["continuation_event"] == "pre_sprint_planning"
+    assert corrected["status"] == "passed"
+    assert corrected["rehydrated_from_receipt"] is True
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0188_rejects_nonreproducible_passed_receipt() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0188"]
+    original = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-durability-input-namespace-behavior-attempt-033-preexecution-receipt.json"
+    )
+    reproduction = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-durability-input-namespace-behavior-attempt-033-preexecution-reproduction-receipt.json"
+    )
+    rejection = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-durability-input-namespace-behavior-attempt-033-preexecution-sol-rejection.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.receipt_status_inconsistent_with_deterministic_builder"
+    )
+    assert original["status"] == "passed"
+    assert original["continuation_event"] == "pre_execution"
+    assert reproduction["status"] == "revision_required"
+    assert "continuation_event_missing_or_unapproved" in reproduction["reasons"]
+    assert rejection["decision"] == "revision_required"
+    assert rejection["original_receipt"]["accepted"] is False
+    assert rejection["additional_database_runs"] == 0
+    assert incident["correction"]["status"] == "control_added"
     assert incident["status"] == "corrected"
 
 

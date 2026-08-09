@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "diagnose_attempt_033_from_immutable_evidence_then_repair_only_the_closed_authored_synthetic_source_membership_fixture_and_its_acceptance_bindings_without_opening_another_database_run",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover still names the accepted twenty-scenario provider-free disposable PostgreSQL behavior rehearsal and its evidence-backed diagnose-repair-rerun cycle through success or bounded exhaustion. Its attempt-number summary lags the task branch and must be corrected at closeout; immutable attempt 033 at current HEAD is the controlling failure evidence for this recovery. The first recovery receipt used the non-admitted descriptive pre_plan event and remains revision_required; no database or provider action followed it.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial diagnosis, bounded fixture correction, deterministic gate, exact-head independent veto and later single disposable rerun. Gemini 3.6 Flash/high remains independent review only after a changed candidate passes deterministic checks; no implementation worker or product surface owns this repair.",
+    "active_plan_and_acceptance": "The accepted plan freezes twenty scenarios in counts 6/4/3/4/3 and expressly requires recovery without weakening SQLSTATEs, principals, RLS, effects or rollback. Attempt 033 preserved cleanup and failed at BTR-E03 with CF201 because the frozen fixture supplied the outbox source-contract digest while the accepted body requires the canonical source-membership digest over the complete same-locator outbox row. The narrow architecture-strengthening recovery is to align the fixture and its documentation with that accepted full-row membership proof, leaving the body and scenario population unchanged.",
+    "protected_evidence_boundaries": "Use only repository-authored synthetic evidence. Preserve immutable failure 033, mutable behavior evidence SHA-256 09907bf6, mutable accepted parse evidence SHA-256 97d1385c and protected parse failure evidence SHA-256 3bf66870. Do not open Docker/PostgreSQL during diagnosis or source repair; do not inspect docs/branding or protected holdouts; do not open operational databases, credentials, product/patient/clinical data, watchers, APIs, commands, providers, deployment, Pages, production, release or protected refs.",
+    "git_refs_and_worktree": "Current task HEAD is b980fe2d0b4dc9a318c820f388a0e9fad34cfa6f and origin task is 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master and handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree was clean before attempt 033 preservation and this receipt; all existing untracked files, including docs/branding, remain preserved and excluded from broad staging."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "failure_033_source_membership_fixture_corrected_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol preserved attempt 033, restored mutable evidence, verified exact owned-container absence and isolated the source-membership fixture contradiction."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this serial source repair."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The predecessor input-namespace candidate passed review; any changed fixture candidate requires a distinct fresh exact-head veto after deterministic gates."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "138dac5bc0e9bbd9abd9a66348005fbc27c610481c348a27c9de75637dd2130f",
+  "canonical_register_sha256": "f1a1e5f050bf6f6e953820e6781cd70c6db4c0376a0c97b7e3ee47c5b385b413",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 58,
-      "canonical_unchanged": 105,
+      "accepted_candidate_changed": 59,
+      "canonical_unchanged": 107,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 19,
       "evidence_misreport": 22,
       "harness_failure": 21,
-      "output_contract_violation": 49,
+      "output_contract_violation": 51,
       "read_only_violation": 3,
       "reasoning_claim_error": 24,
-      "repository_defect": 39,
+      "repository_defect": 40,
       "transport_timeout": 8
     },
     "by_origin": {
-      "agent_behavior": 117,
+      "agent_behavior": 119,
       "harness": 21,
-      "repository": 39,
+      "repository": 40,
       "transport": 8
     },
     "by_process_severity": {
-      "low": 61,
+      "low": 62,
       "material": 66,
-      "moderate": 58
+      "moderate": 60
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 35,
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 80,
+      "codex-primary-orchestrator::orchestrator": 82,
       "codex-sol-orchestrator::orchestrator": 1,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
@@ -52,6 +52,7 @@
       "emr4-context-fabric-durability-parse-parent-rebind::orchestrator": 1,
       "emr4-context-fabric-durability-parse-plan-parent-assertion::orchestrator": 1,
       "emr4-context-fabric-durability-representability-recovery-acceptance::orchestrator": 1,
+      "emr4-context-fabric-durability-source-membership-fixture::orchestrator": 1,
       "emr4-context-fabric-durability-structural-contract::orchestrator": 2,
       "emr4-context-fabric-durability-typed-body-renderer::orchestrator": 1,
       "emr4-disposable-postgresql-harness::orchestrator": 17,
@@ -65,12 +66,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 130,
+      "orchestrator": 133,
       "verifier": 41
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 185,
+  "incident_count": 188,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -180,20 +181,22 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 6,
+      "incident_count": 7,
       "incident_ids": [
         "AER-0013",
         "AER-0023",
         "AER-0113",
         "AER-0149",
         "AER-0152",
-        "AER-0156"
+        "AER-0156",
+        "AER-0187"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Before constructing any receipt, copy continuation_event verbatim from orchestration/harness_settings/orchestrator_requirements.yaml; descriptive lifecycle detail belongs in planned_action and source evidence, never in the enum field.",
+        "Before drafting any receipt state, copy both continuation_event and the complete adapter/managed-slot inventory directly from the active orchestrator requirements and a recent passing envelope; descriptive phase names belong only in planned_action.",
         "Before every orchestrator receipt, copy continuation_event from orchestration/harness_settings/orchestrator_requirements.yaml and put task-specific phase language only in planned_action; a revision_required receipt forbids runtime until a distinct corrected state passes.",
         "Copy continuation_event from orchestration/harness_settings/orchestrator_requirements.yaml before drafting each runtime state; never infer an event label from a filename or planned action, especially after the same recurrence has already been recorded.",
         "Every Ariadne receipt state must copy continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml before planned_action is drafted; any unapproved event produces immutable revision_required evidence and a distinct corrected state.",
@@ -475,7 +478,7 @@
       ]
     }
   ],
-  "register_revision": 159,
+  "register_revision": 162,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-10"
 }

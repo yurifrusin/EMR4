@@ -122,9 +122,12 @@ point. The appointment triggers must distinguish it using only the accepted
 ## Observer admission proof
 
 Admission receives an exact typed generation locator, source position and
-proofread packet. The packet's source-membership digest is copied only from the
-same-locator outbox row after the observer's RLS-filtered read. Every other
-packet value is fixed in the contract.
+proofread packet. The packet's source-membership digest is canonically derived
+only from every field of the same-locator outbox row, using the accepted
+`emr4_context_fabric.source_membership_digest_v1` profile after the observer's
+RLS-filtered read. It is not the outbox row's `source_contract_digest`, which
+is only one input to that full-row membership digest. Every other packet value
+is fixed in the contract.
 
 The first call returns PRIMARY. Exact replay must return the retained PRIMARY
 without requiring a new source effect. A different packet at the same conflict

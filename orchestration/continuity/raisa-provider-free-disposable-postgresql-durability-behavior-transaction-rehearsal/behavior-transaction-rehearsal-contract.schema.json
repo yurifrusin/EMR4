@@ -171,7 +171,7 @@
         "digest_key_attestation": {"$ref": "#/$defs/digest"},
         "digest_observation_primary": {"$ref": "#/$defs/digest"},
         "digest_observation_conflict": {"$ref": "#/$defs/digest"},
-        "source_membership_digest_rule": {"const": "read_exact_outbox_source_contract_digest_for_same_locator"}
+        "source_membership_digest_rule": {"const": "canonical_digest_of_complete_same_locator_outbox_row"}
       }
     },
     "fixturePrivileges": {

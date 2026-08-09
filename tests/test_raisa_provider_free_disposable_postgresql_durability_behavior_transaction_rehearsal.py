@@ -455,6 +455,99 @@ def test_failure_024_undefined_operator_is_preserved_and_closed() -> None:
     )
 
 
+def test_source_membership_fixture_uses_exact_accepted_full_row_digest() -> None:
+    fixture = CONTRACT["fixture_namespace"]
+    assert fixture["source_membership_digest_rule"] == (
+        "canonical_digest_of_complete_same_locator_outbox_row"
+    )
+    stale = copy.deepcopy(CONTRACT)
+    stale["fixture_namespace"]["source_membership_digest_rule"] = (
+        "read_exact_outbox_source_contract_digest_for_same_locator"
+    )
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(CONTRACT_SCHEMA).validate(stale)
+    expression = rehearsal._accepted_source_membership_digest_expression(  # noqa: SLF001
+        rehearsal._canonical_bytes(  # noqa: SLF001
+            rehearsal.ROOT
+            / next(
+                row["path"]
+                for row in CONTRACT["parent_bindings"]
+                if row["id"] == "inert_sql"
+            )
+        )
+    )
+    assert rehearsal.SOURCE_MEMBERSHIP_DIGEST_PROFILE in expression
+    assert (
+        tuple(
+            field
+            for field in rehearsal.SOURCE_MEMBERSHIP_FIELDS
+            if f"source.{field}" in expression
+        )
+        == rehearsal.SOURCE_MEMBERSHIP_FIELDS
+    )
+    packet = rehearsal._packet(fixture)  # noqa: SLF001
+    assert expression in packet
+    assert "SELECT source_contract_digest FROM" not in packet
+    assert "FROM emr4_context_fabric.diary_context_observation_outbox_v1 AS source" in (
+        packet
+    )
+    probe = rehearsal._probe_sql(CONTRACT, "BTR-E03")  # noqa: SLF001
+    assert expression in probe
+    assert "a.source_membership_digest=o.source_contract_digest" not in probe
+
+
+def test_source_membership_digest_profile_and_operand_drift_fail_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    original_json = rehearsal._json  # noqa: SLF001
+    original_body = original_json(rehearsal.BODY_CONTRACT_PATH)
+
+    def digest_node(body: dict[str, Any]) -> dict[str, Any]:
+        program = next(
+            row
+            for row in body["body_programs"]
+            if row["id"] == "emr4_context_fabric.admit_proofread_observation_v1"
+        )
+        return next(
+            node
+            for node in rehearsal._walk_nodes(program["ast"])  # noqa: SLF001
+            if node.get("op") == "CANONICAL_DIGEST"
+            and node.get("profile") == rehearsal.SOURCE_MEMBERSHIP_DIGEST_PROFILE
+        )
+
+    hostile_profile = copy.deepcopy(original_body)
+    digest_node(hostile_profile)["profile"] = "emr4_context_fabric.wrong_profile_v1"
+    hostile_missing_field = copy.deepcopy(original_body)
+    digest_node(hostile_missing_field)["operands"].pop()
+    hostile_relation = copy.deepcopy(original_body)
+    digest_node(hostile_relation)["operands"][0]["relation"] = (
+        "emr4_context_fabric.context_proofread_observation_admission"
+    )
+
+    for hostile_body, expected in (
+        (hostile_profile, "source_membership_digest_population"),
+        (hostile_missing_field, "source_membership_digest_definition"),
+        (hostile_relation, "source_membership_digest_definition"),
+    ):
+        monkeypatch.setattr(
+            rehearsal,
+            "_json",
+            lambda path, value=hostile_body: (
+                copy.deepcopy(value)
+                if path == rehearsal.BODY_CONTRACT_PATH
+                else original_json(path)
+            ),
+        )
+        with pytest.raises(rehearsal.BehaviorFailure, match=expected):
+            rehearsal._accepted_source_membership_digest_expression()  # noqa: SLF001
+
+    monkeypatch.setattr(rehearsal, "_json", original_json)
+    with pytest.raises(
+        rehearsal.BehaviorFailure, match="source_membership_digest_lowering"
+    ):
+        rehearsal._accepted_source_membership_digest_expression(b"")  # noqa: SLF001
+
+
 def test_snapshot_undefined_function_failure_is_preserved_and_closed() -> None:
     evidence = FAILURE_EVIDENCE_010
     jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)

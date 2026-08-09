@@ -1,0 +1,22 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_plan",
+  "planned_action": "diagnose_attempt_033_from_immutable_evidence_then_repair_only_the_closed_authored_synthetic_source_membership_fixture_and_its_acceptance_bindings_without_opening_another_database_run",
+  "reasons": [
+    "continuation_event_missing_or_unapproved",
+    "adapter_observation_missing:deepseek_via_claude_code_bare",
+    "adapter_observation_missing:deepcode_cli",
+    "adapter_observation_missing:claude_cli_print",
+    "adapter_observation_missing:antigravity_cli_print",
+    "adapter_observation_missing:codex_primary_session",
+    "adapter_observation_missing:codex_subagent_spawn",
+    "worker_slot_inventory_missing:deepseek-flash-workers"
+  ],
+  "rehydrated_from_receipt": false,
+  "rehydration_sources": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {},
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

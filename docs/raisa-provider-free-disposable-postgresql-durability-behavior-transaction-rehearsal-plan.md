@@ -178,9 +178,11 @@ one and one payload-free outbox row, with every application/Fabric member
 sharing the required current-XID transaction provenance.
 
 `BTR-E03` admits one exact proofread PRIMARY for position one under the observer
-binding. Its source membership digest is read only from the exact same outbox
-locator; no caller or external value may select it. `BTR-I01` repeats the exact
-packet and must return the same primary without a second row.
+binding. Its source membership digest is canonically derived from every field
+of the exact same-locator outbox row using the accepted
+`emr4_context_fabric.source_membership_digest_v1` profile; no caller or
+external value may select it. `BTR-I01` repeats the exact packet and must return
+the same primary without a second row.
 
 `BTR-E04` applies that stored admission locator under the coordinator binding.
 Commit must atomically create the exact receipt, checkpoint advance,
@@ -295,8 +297,8 @@ Before and after each scenario, a fixed superuser readback script emits only:
 Raw SQL error text, server logs, payload bodies, credentials and unrestricted
 rows are forbidden. A database value can never choose a later executable,
 path, role, SQL template, scenario or cleanup target. The sole bounded internal
-data flow is the same-locator outbox source-contract digest into the fixed
-proofread packet.
+data flow is the complete same-locator outbox row into the accepted canonical
+source-membership digest expression and then the fixed proofread packet.
 
 ## Cleanup and absence proof
 

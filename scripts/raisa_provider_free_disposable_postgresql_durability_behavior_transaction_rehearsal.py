@@ -28,6 +28,7 @@ if str(ROOT) not in sys.path:
 
 from scripts import (  # noqa: E402
     raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal as parent,
+    raisa_provider_free_unmounted_durability_inert_ddl_rehearsal as inert_renderer,
 )
 
 REHEARSAL_DIR = ROOT / (
@@ -44,6 +45,11 @@ PARENT_REHEARSAL_CONTRACT_PATH = ROOT / (
     "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
     "durability-parse-catalogue-rehearsal/rehearsal-contract.json"
 )
+BODY_CONTRACT_PATH = ROOT / (
+    "orchestration/continuity/raisa-provider-free-unmounted-durability-"
+    "function-trigger-body-architecture/function-trigger-body-architecture-"
+    "contract.json"
+)
 
 EXPECTED_CONTRACT_PATH = (
     "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
@@ -51,7 +57,7 @@ EXPECTED_CONTRACT_PATH = (
     "behavior-transaction-rehearsal-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:65984c17f1d93ac44ad45059c1ea30a41131dec8844475c9801b5bb440dcc0a8"
+    "sha256:d3355c4459042b97518cba6dcb54c8b861aaa502ab6cf7a096cd948fbaefcbc7"
 )
 PASS_RESULT = (
     "raisa_provider_free_disposable_postgresql_durability_"
@@ -91,6 +97,22 @@ PSQL_PLPGSQL_CONTEXT_LINE = re.compile(
     rb"(?m)^CONTEXT:\s+PL/pgSQL function (?:emr4_context_fabric\.)?"
     rb"([a-z][a-z0-9_]*)\([^\r\n]{0,500}\) line "
     rb"([1-9][0-9]{0,5}) at [^\r\n]{1,160}\s*$"
+)
+
+SOURCE_MEMBERSHIP_DIGEST_PROFILE = "emr4_context_fabric.source_membership_digest_v1"
+SOURCE_MEMBERSHIP_RELATION = "emr4_context_fabric.diary_context_observation_outbox_v1"
+SOURCE_MEMBERSHIP_FIELDS = (
+    "practice_id",
+    "source_contract_id",
+    "stream_id",
+    "stream_epoch",
+    "transaction_position",
+    "predecessor_position",
+    "raw_event_uuid",
+    "opaque_aggregate_alias",
+    "aggregate_revision",
+    "source_contract_digest",
+    "transaction_authored_at",
 )
 
 SAFE_SCENARIO_FUNCTIONS = {
@@ -833,6 +855,7 @@ def _validate_contract() -> tuple[
     )
     if manifest.get("sql_sha256") != _sha256(artifact):
         raise BehaviorFailure("parent", "manifest_artifact_digest")
+    _accepted_source_membership_digest_expression(artifact)
     profile = _profile()
     runtime = contract["runtime_profile"]
     expected_runtime = {
@@ -858,6 +881,68 @@ def _lit(value: str) -> str:
     if "'" in value or "\\" in value or "\x00" in value:
         raise BehaviorFailure("render", "unsafe_literal")
     return "'" + value + "'"
+
+
+def _walk_nodes(value: Any):
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _walk_nodes(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _walk_nodes(child)
+
+
+def _accepted_source_membership_digest_expression(artifact: bytes | None = None) -> str:
+    body = _json(BODY_CONTRACT_PATH)
+    programs = [
+        row
+        for row in body.get("body_programs", [])
+        if row.get("id") == "emr4_context_fabric.admit_proofread_observation_v1"
+    ]
+    if len(programs) != 1:
+        raise BehaviorFailure("contract", "admission_program_population")
+    matches = [
+        node
+        for node in _walk_nodes(programs[0].get("ast", {}))
+        if node.get("op") == "CANONICAL_DIGEST"
+        and node.get("profile") == SOURCE_MEMBERSHIP_DIGEST_PROFILE
+    ]
+    if len(matches) != 1:
+        raise BehaviorFailure("contract", "source_membership_digest_population")
+    operands = matches[0].get("operands", [])
+    if tuple(operand.get("column") for operand in operands) != (
+        SOURCE_MEMBERSHIP_FIELDS
+    ) or any(
+        operand.get("op") != "REF"
+        or operand.get("kind") != "ROW_COLUMN"
+        or operand.get("symbol") != "source"
+        or operand.get("relation") != SOURCE_MEMBERSHIP_RELATION
+        for operand in operands
+    ):
+        raise BehaviorFailure("contract", "source_membership_digest_definition")
+    expression = inert_renderer.render_expr(matches[0])
+    if artifact is not None and expression.encode("utf-8") not in artifact:
+        raise BehaviorFailure("parent", "source_membership_digest_lowering")
+    return expression
+
+
+def _source_membership_digest_subquery(f: dict[str, Any], source_position: str) -> str:
+    if not re.fullmatch(r"(?:[1-9][0-9]*|__POSITION__)", source_position):
+        raise BehaviorFailure("render", "source_position_token")
+    expression = _accepted_source_membership_digest_expression()
+    return (
+        "(SELECT "
+        + expression
+        + " FROM emr4_context_fabric.diary_context_observation_outbox_v1 AS source "
+        + f"WHERE source.practice_id={_lit(f['practice_alpha'])}::pg_catalog.uuid "
+        + "AND source.source_contract_id="
+        + _lit(f["source_contract_id"])
+        + "::emr4_context_fabric.source_contract_code "
+        + f"AND source.stream_id={_lit(f['stream_alpha'])}::pg_catalog.uuid "
+        + f"AND source.stream_epoch={f['stream_epoch']}::pg_catalog.int8 "
+        + f"AND source.transaction_position={source_position}::pg_catalog.int8)"
+    )
 
 
 def _locator(
@@ -933,12 +1018,8 @@ def _packet(f: dict[str, Any], *, conflict: bool = False) -> str:
         f"{mask}::emr4_context_fabric.frame_mask,"
         "'ADVANCE'::emr4_context_fabric.checkpoint_disposition,"
         f"{_lit(f['key_id'])}::emr4_context_fabric.key_id,"
-        "(SELECT source_contract_digest FROM "
-        "emr4_context_fabric.diary_context_observation_outbox_v1 "
-        f"WHERE practice_id={_lit(f['practice_alpha'])}::pg_catalog.uuid "
-        f"AND stream_id={_lit(f['stream_alpha'])}::pg_catalog.uuid "
-        "AND transaction_position=__POSITION__)"
-        ")::emr4_context_fabric.proofread_packet_v1"
+        + _source_membership_digest_subquery(f, "__POSITION__")
+        + ")::emr4_context_fabric.proofread_packet_v1"
     )
 
 
@@ -1897,7 +1978,7 @@ def _probe_sql(contract: dict[str, Any], scenario_id: str) -> str:
         "BTR-E03": [
             f"(SELECT count(*)=1 FROM emr4_context_fabric.context_proofread_observation_admission WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND source_position=1 AND entry_kind='PRIMARY')",
             f"(SELECT count(*)=0 FROM emr4_context_fabric.context_proofread_observation_admission WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND source_position=1 AND entry_kind='CONFLICT')",
-            f"(SELECT count(*)=1 FROM emr4_context_fabric.context_proofread_observation_admission a JOIN emr4_context_fabric.diary_context_observation_outbox_v1 o USING (practice_id,source_contract_id,stream_id,stream_epoch) WHERE a.observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND a.source_position=o.transaction_position AND a.source_membership_digest=o.source_contract_digest)",
+            f"(SELECT count(*)=1 FROM emr4_context_fabric.context_proofread_observation_admission a WHERE a.observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND a.source_position=1 AND a.source_membership_digest={_source_membership_digest_subquery(f, '1')})",
         ],
         "BTR-I01": [
             f"(SELECT count(*)=1 FROM emr4_context_fabric.context_proofread_observation_admission WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND source_position=1 AND entry_kind='PRIMARY')",

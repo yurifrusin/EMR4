@@ -1,0 +1,90 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_deterministically_verified_authored_synthetic_source_membership_fixture_recovery_and_its_immutable_failure_diagnosis_and_orchestration_correction_evidence_using_explicit_path_staging",
+  "source_evidence": {
+    "live_handover_current_baton": "The live handover authorises the accepted twenty-scenario provider-free disposable PostgreSQL behavior rehearsal and evidence-backed diagnose-repair-rerun cycles until success or bounded exhaustion. Attempt 033 is the current immutable behavior failure. This pre-commit gate does not execute PostgreSQL or a provider and does not change the baton result.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial repair, deterministic verification, exact-head independent Gemini 3.6 Flash/high veto and later single disposable rerun. This commit grants no worker, product, clinical, command, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "The accepted plan freezes twenty scenarios in counts 6/4/3/4/3. The repair aligns only the authored-synthetic BTR-E03 fixture and its acceptance bindings with the already accepted canonical digest of the complete same-locator outbox row. The body, SQLSTATEs, principals, RLS, effects, rollback rules and canonical scenario population remain unchanged. The exact 572-test packet passed, all 38 scoped Python files pass Ruff lint and format checks, and git diff --check passes.",
+    "protected_evidence_boundaries": "Preserve immutable failure 033 SHA-256 5a6d5bcc18cd23f0fa528e5cdd33e53e9f0b90c0415a8f86ca326cf47980c8ad. Preserve mutable behavior evidence SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b, mutable accepted parse evidence SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and protected parse failure evidence SHA-256 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c. Use explicit-path staging only. Exclude and do not inspect docs/branding and all unrelated untracked files. No Docker/PostgreSQL, provider, operational database, credentials, patient/product/clinical data, watcher, API, command, deployment, Pages, production, release or protected-ref action is authorised here.",
+    "git_refs_and_worktree": "The task branch and HEAD are codex/ariadne-bernie-davida-parallel-seam at b980fe2d0b4dc9a318c820f388a0e9fad34cfa6f; origin task is 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the enumerated repair, evidence and receipt paths may be staged; all other untracked files remain preserved and unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "failure_033_source_membership_fixture_recovery_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the bounded repair and its exact 572-test and 38-file Ruff gates."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this tightly coupled serial repair."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The changed exact-head candidate will receive one fresh independent Gemini veto only after this deterministic candidate commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-033.json",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-033.json"
+  ],
+  "assigned_agent_ids": []
+}
