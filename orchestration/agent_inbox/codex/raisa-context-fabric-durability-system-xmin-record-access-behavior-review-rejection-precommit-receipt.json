@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_preserved_predispatch_failure_rejected_first_verifier_pass_and_closed_aer_0147_0148_before_a_fresh_corrected_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Review receipt SHA-256 5879608682ba2512830f5882510300522125a37c01495b30cf79d92329cbde47 has correct candidate, parent, scenario, 73-test and clean-worktree facts but misreports the protected current failure as attempt 016. AER-0147 preserves the predispatch receipt-shape rejection before any call; AER-0148 preserves the verifier evidence misreport. Register revision 123 contains 148 closed incidents, the regenerated pattern report is exact and 113/113 register tests pass.",
+    "current_authority_allocation": "GPT Sol owns rejection, incident registration and candidate closeout. Gemini 3.6 Flash/high receives no acceptance or runtime authority; the first project's decision is consumed and rejected. A later distinct fresh project may review only the corrected exact-head packet.",
+    "git_refs_and_worktree": "Primary and r105 remain at clean exact candidate 3a5af27d48ab517c4ef8faf848f1d81a0b27a3a1. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging includes only the review controls, rejection, AER revision and this receipt pair; docs/branding, unrelated untracked files and failed mutable behavior evidence remain excluded.",
+    "live_handover_current_baton": "The exact behavior rebind remains technically unchanged and runtime-closed. The first fresh verifier pass is inadmissible because it twice reported current failed behavior attempt 016 instead of exact attempt 021. The failed predispatch receipt and rejected review must be preserved before a distinct corrected veto.",
+    "protected_evidence_boundaries": "No behavior runtime, Docker/PostgreSQL, product/provider call beyond the consumed verifier, protected evidence, PHI, patient/product data, credentials, application/API/Diary wiring, command/write, deployment, release, Pages or protected-ref movement is admitted. Mutable failed behavior evidence remains unstaged and attempt 021 remains exact."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_veto_after_correcting_the_orchestrator_receipt_shape",
+  "source_evidence": {
+    "live_handover_current_baton": "The frozen twenty-scenario provider-free behavior contract is rebound at exact candidate 3a5af27d48ab517c4ef8faf848f1d81a0b27a3a1 to the accepted renderer 2.0.9 parse source. A fresh exact-HEAD independent veto is mandatory before behavior runtime. The first predispatch receipt was revision_required before any verifier call because Sol used one invalid adapter method and misclassified the review worktree as a baton workspace; this corrected receipt preserves that failure and changes no candidate or authority.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only independent review authority only. GPT Sol retains runtime, acceptance, recovery, integration, baton and protected-ref authority. No implementation worker or native subagent is selected.",
+    "active_plan_and_acceptance": "Review packet SHA-256 87541cc75c98af2a8ea5d2514a94e848e71b4110e75d7c37cd97cf0fceb2092c binds exact candidate 3a5af27d48ab517c4ef8faf848f1d81a0b27a3a1, parent 579175e875fd34958e7bbe84e8aaa45c38e0478f, contract SHA-256 8423c0b3f8ff47d4700b8cc42c3e313a756ecf86b7a6b6f2359e39be75ef3198, unchanged scenario-array SHA-256 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3, exact order/coverage and 73 passing focused tests.",
+    "protected_evidence_boundaries": "Review is limited to the exact allowlisted repository files and diff, with no protected holdout, PHI, patient/product data, credentials, Docker/PostgreSQL, runtime, provider/product call beyond the verifier itself, write, deployment, release, Pages or ref movement. The verifier cannot repair or accept its own work and must leave the worktree unchanged.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r105 is clean at exact HEAD 3a5af27d48ab517c4ef8faf848f1d81a0b27a3a1 on codex/review-context-fabric-system-xmin-record-access-behavior-3a5af27d; its separate verifier preflight passed. Primary tracked files are clean at the same HEAD with only preserved untracked material. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "corrected_five_source_exact_head_gemini_veto_predispatch",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified candidate commit, exact packet, deterministic admission, clean fresh worktree, corrected receipt shape and protected refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Stable gemini-3.6-flash-high slug and explicit high effort are frozen with no fallback."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek transport is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

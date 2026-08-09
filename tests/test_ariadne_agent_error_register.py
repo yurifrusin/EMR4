@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 122
+    assert register["register_revision"] == 123
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 147)
+        f"AER-{index:04d}" for index in range(1, 149)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 102
+    assert len(agent_incidents) == 104
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -1892,22 +1892,49 @@ def test_aer_0146_requires_direct_anonymous_record_xmin_access() -> None:
     assert "(record).xmin" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0147_preserves_failed_dispatch_receipt_shape() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0147"]
+
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert "adapter_probe_method_invalid" in incident["observed_error"]
+    assert incident["recurrence_signature"] == (
+        "orchestrator.worker_dispatch_runtime_contract"
+    )
+
+
+def test_aer_0148_rejects_stale_behavior_attempt_identifier() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0148"]
+
+    assert incident["role"] == "verifier"
+    assert incident["model"] == "gemini-3.6-flash-high"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["related_incident_ids"] == []
+    assert "attempt 016" in incident["observed_error"]
+    assert "attempt 021" in incident["observed_error"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 146
+    assert report["incident_count"] == 148
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 102,
+        "agent_behavior": 104,
         "harness": 18,
         "repository": 18,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
-        "evidence_misreport": 21,
+        "evidence_misreport": 22,
         "harness_failure": 18,
-        "output_contract_violation": 40,
+        "output_contract_violation": 41,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
         "repository_defect": 18,
@@ -1915,7 +1942,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 37,
-        "canonical_unchanged": 87,
+        "canonical_unchanged": 89,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -2005,13 +2032,14 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
-            "incident_count": 3,
-            "incident_ids": ["AER-0024", "AER-0030", "AER-0055"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0024", "AER-0030", "AER-0055", "AER-0147"],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
+                "Before each verifier dispatch receipt, copy adapter methods from transport_adapters.yaml and use workspace_receipts only for handoff-aligned assigned worker contracts; a separately preflighted external review worktree belongs in source evidence rather than that structure.",
                 "Before every dispatch receipt, copy the continuation_event verbatim from orchestrator_requirements.yaml, keep assigned_agent_ids empty until the native reviewer exists, and mirror a previously admitted native-review workspace receipt rather than inventing event labels or assignment identities.",
                 "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
                 "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",

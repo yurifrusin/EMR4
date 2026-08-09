@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 122,
+  "register_revision": 123,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -5710,6 +5710,89 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-record-access-recovery.md",
           "docs/security/raisa-context-fabric-durability-system-xmin-record-access-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-122.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0147",
+      "attempt_id": "raisa-context-fabric-system-xmin-record-access-behavior-veto-predispatch-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every pre-worker-dispatch receipt must copy an admitted adapter observation method exactly and must not classify a fresh independent review worktree as a baton-aligned assigned-worker workspace receipt.",
+      "observed_error": "The first record-access behavior veto predispatch state used non-admitted method fresh_exact_project_dispatch_pending and added r105 as a workspace_receipt even though that structure is checked against handoff/current. The orchestrator preflight returned revision_required with adapter_probe_method_invalid and workspace_not_at_handoff before any verifier call.",
+      "detection_method": "scripts/ariadne_orchestrator_preflight.py deterministically rejected the first state and persisted both exact reasons. Sol preserved that receipt, copied agy_cli_observation from the admitted transport configuration and kept the separately verified external review worktree out of workspace_receipts; the corrected distinct receipt then passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-veto-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-veto-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-veto-predispatch-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-veto-predispatch-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-123.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed receipt remains immutable. A distinct corrected predispatch state uses exact admitted adapter methods and leaves workspace_receipts and assigned_agent_ids empty for the separately preflighted external verifier worktree.",
+        "prevention_control": "Before each verifier dispatch receipt, copy adapter methods from transport_adapters.yaml and use workspace_receipts only for handoff-aligned assigned worker contracts; a separately preflighted external review worktree belongs in source evidence rather than that structure.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-veto-predispatch-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-veto-predispatch-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-123.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0148",
+      "attempt_id": "raisa-context-fabric-system-xmin-record-access-behavior-rebind-review-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A terminal pass must identify the current protected mutable and immutable failure evidence by its exact attempt number; stale live-handover next-step prose cannot substitute for candidate and evidence readback.",
+      "observed_error": "The first fresh verifier receipt twice described the current failed behavior evidence as attempt 016 and returned pass. The protected mutable evidence and its immutable failure copy are attempt 021; candidate hashes, scenario digest, 73 tests and the unchanged r105 postflight were otherwise correctly reported.",
+      "detection_method": "Sol's mandatory post-review reconciliation compared the verifier narrative against the exact current behavior evidence, immutable failure-021 file and candidate state. The exact attempt mismatch was found before any behavior runtime, and the pass was preserved but rejected.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-gemini-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-review-worktree-postflight.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-review-rejection-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-123.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.current_evidence_attempt_identifier_misreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The first pass receipt remains immutable and has no acceptance authority. A corrected packet explicitly binds current failed attempt 021, prohibits attempt 016 as current evidence and requires a distinct fresh exact-head Gemini decision.",
+        "prevention_control": "Every behavior-runtime veto packet must mechanically name the current mutable and immutable failure attempt IDs and hashes; post-review acceptance must reject any stale attempt number even when all code, test and worktree facts pass.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-rebind-review-rejection-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-123.md",
+          "tests/test_ariadne_agent_error_register.py"
         ]
       },
       "status": "corrected"

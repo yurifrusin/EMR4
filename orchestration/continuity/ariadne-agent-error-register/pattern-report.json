@@ -1,41 +1,41 @@
 {
-  "canonical_register_sha256": "b283757adb7c701721940d625600dab281541c1b2611e27bb250fce06cba6e7a",
+  "canonical_register_sha256": "717d359c231c875130f3b9e26cad1fa93789e85c238b432dc777aa85b5430528",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 37,
-      "canonical_unchanged": 87,
+      "canonical_unchanged": 89,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 15,
-      "evidence_misreport": 21,
+      "evidence_misreport": 22,
       "harness_failure": 18,
-      "output_contract_violation": 40,
+      "output_contract_violation": 41,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
       "repository_defect": 18,
       "transport_timeout": 8
     },
     "by_origin": {
-      "agent_behavior": 102,
+      "agent_behavior": 104,
       "harness": 18,
       "repository": 18,
       "transport": 8
     },
     "by_process_severity": {
       "low": 42,
-      "material": 54,
-      "moderate": 50
+      "material": 55,
+      "moderate": 51
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 32,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 33,
       "api-spine-historical-regression-suite::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 57,
+      "codex-primary-orchestrator::orchestrator": 58,
       "codex-sol-orchestrator::orchestrator": 1,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
@@ -58,12 +58,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 94,
-      "verifier": 38
+      "orchestrator": 95,
+      "verifier": 39
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 146,
+  "incident_count": 148,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -223,16 +223,18 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0024",
         "AER-0030",
-        "AER-0055"
+        "AER-0055",
+        "AER-0147"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
+        "Before each verifier dispatch receipt, copy adapter methods from transport_adapters.yaml and use workspace_receipts only for handoff-aligned assigned worker contracts; a separately preflighted external review worktree belongs in source evidence rather than that structure.",
         "Before every dispatch receipt, copy the continuation_event verbatim from orchestrator_requirements.yaml, keep assigned_agent_ids empty until the native reviewer exists, and mirror a previously admitted native-review workspace receipt rather than inventing event labels or assignment identities.",
         "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
         "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field."
@@ -404,7 +406,7 @@
       ]
     }
   ],
-  "register_revision": 122,
+  "register_revision": 123,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-09"
 }
