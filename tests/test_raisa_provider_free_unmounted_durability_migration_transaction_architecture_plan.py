@@ -615,9 +615,7 @@ def test_binding_select_rls_retains_exact_owner_pair_and_session_time_fences() -
     policies = {
         policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
     }
-    assert policies["pol_cf_17_select"]["using_sql"] == (
-        EXPECTED_BINDING_SELECT_POLICY
-    )
+    assert policies["pol_cf_17_select"]["using_sql"] == (EXPECTED_BINDING_SELECT_POLICY)
 
     roles = {role["role"]: role for role in contract["role_matrix"]}
     for owner in ("context_schema_owner", "context_admission_receiver"):
@@ -627,9 +625,10 @@ def test_binding_select_rls_retains_exact_owner_pair_and_session_time_fences() -
     assert roles["context_admission_receiver"]["owns_functions"] == [
         "admit_proofread_observation_v1"
     ]
-    assert "context_service_practice_binding" not in roles["context_observer"][
-        "direct_table_select"
-    ]
+    assert (
+        "context_service_practice_binding"
+        not in roles["context_observer"]["direct_table_select"]
+    )
 
     unsafe_predicates = (
         EXPECTED_BINDING_SELECT_POLICY.replace(

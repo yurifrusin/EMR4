@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_historical_continuity_and_exact_format_recovery_then_create_one_fresh_exact_head_read_only_gemini_veto_worktree",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. Behavior six-parent candidate ce2db5de is sealed. The expanded final-byte packet now passes exactly 552 tests plus Ruff check and format over exactly 34 files after narrow historical-test and deterministic-format recovery.",
+    "current_authority_allocation": "GPT Sol owns the explicit-path recovery commit, review packet, independent-verifier admission and later runtime decision. Gemini 3.6 Flash/high may perform one fresh read-only exact-HEAD veto after commit. No implementation worker, provider or reviewer owns PostgreSQL execution or acceptance.",
+    "active_plan_and_acceptance": "The support-grant historical catalogue remains byte-exact while its test proves only the later policies digest differs from current live state. The behavior-plan continuity test validates exact historical AER-0160 through AER-0171 without freezing the live register. Four named files were deterministically Ruff-formatted. Error register revision 156 contains 182 corrected incidents and zero open. The complete 552-test and exact 34-file Ruff packet passes.",
+    "protected_evidence_boundaries": "No protected holdout or branding content was opened, enumerated, staged or changed. Preserve every untracked file and stage only the 17 exact intended paths. Mutable behavior, accepted parse and parse-failure evidence remain unstaged at SHA-256 09907bf6, 97d1385c and 3bf66870. No migration application, operational database or credential, watcher/listener/feed, patient/clinical/product data, application/API/Diary wiring, command/write, behavior runtime, deployment, production, release, Pages or protected-ref movement is authorized.",
+    "git_refs_and_worktree": "Task HEAD is ce2db5de8d0d34c0babae0bff1bc2d1b55c8c738 and origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are the historical-continuity repair, exact four-file formatting and closed error-register update; intended new files are three AER notes, three bounded failure receipts and this precommit state/receipt."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

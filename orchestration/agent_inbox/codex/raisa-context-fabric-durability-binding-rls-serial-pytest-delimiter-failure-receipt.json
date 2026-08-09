@@ -1,0 +1,21 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-binding-rls-serial-pytest-delimiter-failure.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-binding-rls-expanded-packet-001",
+  "status": "failed_closed_then_corrected_fresh_invocation",
+  "failure": {
+    "reason": "argparse_remainder_delimiter_omitted_before_pytest_options",
+    "wrapper_exit_code": 1,
+    "shared_lock_acquired": false,
+    "pytest_started": false,
+    "database_or_docker_contact": false,
+    "provider_contact": false,
+    "artifact_write": false
+  },
+  "correction": {
+    "explicit_double_dash_delimiter": true,
+    "shared_lock_acquired": true,
+    "expanded_packet_started": true
+  },
+  "authority_boundary": "repository_local_static_verification_only"
+}

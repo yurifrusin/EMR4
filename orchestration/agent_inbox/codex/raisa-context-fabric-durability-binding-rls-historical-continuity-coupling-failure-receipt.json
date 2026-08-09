@@ -1,0 +1,31 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-binding-rls-historical-continuity-coupling-failure.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-binding-rls-expanded-packet-002",
+  "status": "revision_required_then_corrected",
+  "failure_count": 2,
+  "failures": [
+    {
+      "test": "test_support_execute_grant_characterization_is_exact_and_narrow",
+      "reason": "historical_policies_digest_compared_to_current_live_contract",
+      "historical_digest": "sha256:51f697aeb94a50f432f6683c9e9c93412eee38853617a113c1ab020216a57168",
+      "current_digest": "sha256:5bd0a6629eaa4a734e01d786781ea62121e887581b38558b33677bd79c752a0f"
+    },
+    {
+      "test": "test_exact_review_and_error_register_bind_plan_result",
+      "reason": "historical_revision_and_tail_position_compared_to_current_live_register",
+      "historical_revision": 146,
+      "observed_live_revision": 153
+    }
+  ],
+  "durability_runtime_failure": false,
+  "docker_or_database_contact": false,
+  "provider_contact": false,
+  "correction": {
+    "historical_bytes_remain_exact": true,
+    "current_delta_is_explicit_and_narrow": true,
+    "historical_incident_cohort_found_by_exact_ids": true,
+    "later_closed_revisions_permitted": true
+  },
+  "authority_boundary": "repository_local_historical_test_design_repair_only"
+}

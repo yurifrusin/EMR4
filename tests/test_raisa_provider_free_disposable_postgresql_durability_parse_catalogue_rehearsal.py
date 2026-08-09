@@ -1360,7 +1360,21 @@ def test_support_execute_grant_characterization_is_exact_and_narrow() -> None:
     changed = {
         key for key, value in characterized.items() if previous.get(key) != value
     }
-    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    expected_at_support_repair = dict(
+        CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    )
+    expected_at_support_repair["policies"] = (
+        "sha256:51f697aeb94a50f432f6683c9e9c93412eee38853617a113c1ab020216a57168"
+    )
+    assert characterized == expected_at_support_repair
+    assert set(characterized) == set(
+        CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    )
+    assert {
+        key
+        for key, value in characterized.items()
+        if CONTRACT["catalogue_expectation"]["expected_query_digests"][key] != value
+    } == {"policies"}
     assert changed == {"function_acl", "functions"}
     assert characterized["function_acl"] == (
         "sha256:dba3aa331a66e608ac22e434b24637050e5f89f5e63fd653a51201df58a520f3"
@@ -1378,9 +1392,7 @@ def test_support_execute_grant_characterization_is_exact_and_narrow() -> None:
     }
 
 
-def test_admission_receiver_binding_rls_characterization_is_exact_and_narrow() -> (
-    None
-):
+def test_admission_receiver_binding_rls_characterization_is_exact_and_narrow() -> None:
     evidence = BINDING_RLS_CHARACTERIZATION_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
     assert (
@@ -1419,9 +1431,7 @@ def test_admission_receiver_binding_rls_characterization_is_exact_and_narrow() -
         ].items()
         if key not in {"server", "extensions"}
     }
-    assert characterized == CONTRACT["catalogue_expectation"][
-        "expected_query_digests"
-    ]
+    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
     assert {
         key for key, value in characterized.items() if predecessor.get(key) != value
     } == {"policies"}
@@ -1438,9 +1448,7 @@ def test_admission_receiver_binding_rls_characterization_is_exact_and_narrow() -
     }
 
 
-def test_admission_receiver_binding_rls_exact_reproduction_is_distinct_pass() -> (
-    None
-):
+def test_admission_receiver_binding_rls_exact_reproduction_is_distinct_pass() -> None:
     evidence = BINDING_RLS_PASS_EVIDENCE
     characterization = BINDING_RLS_CHARACTERIZATION_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)

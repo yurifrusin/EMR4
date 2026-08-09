@@ -548,7 +548,9 @@ def test_support_execute_grant_rebind_preserves_twenty_scenarios_and_closure() -
     )
 
 
-def test_admission_receiver_binding_rls_rebind_preserves_scenarios_and_closure() -> None:
+def test_admission_receiver_binding_rls_rebind_preserves_scenarios_and_closure() -> (
+    None
+):
     combined = _flat(ADMISSION_RECEIVER_BINDING_RLS_REBIND, PLAN, DESIGN).lower()
 
     for required in (

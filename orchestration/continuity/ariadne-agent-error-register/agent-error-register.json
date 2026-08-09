@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 153,
+  "register_revision": 156,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7148,6 +7148,135 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-binding-rls-register-count-drift-failure-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-153.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0180",
+      "attempt_id": "raisa-context-fabric-durability-binding-rls-expanded-packet-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-5.6-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "When pytest options precede positional test paths, the serial wrapper must receive its explicit argparse remainder delimiter before invocation.",
+      "observed_error": "The first expanded-packet command placed -q and -p immediately after ariadne_serial_pytest.py without --, so wrapper argparse rejected both options before acquiring the shared lock or starting pytest.",
+      "detection_method": "The wrapper returned exit 1 with an unrecognized-arguments usage message before any test, Docker, provider or evidence operation began.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-serial-pytest-delimiter-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-154.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.serial_pytest_option_delimiter_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The expanded packet was rerun with an explicit -- delimiter before all pytest options and acquired the repository shared PostgreSQL-schema lock.",
+        "prevention_control": "Every serial-pytest command whose first forwarded argument begins with a dash must use scripts/ariadne_serial_pytest.py -- before the pytest argument vector.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-serial-pytest-delimiter-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-154.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0181",
+      "attempt_id": "raisa-context-fabric-durability-binding-rls-expanded-packet-002",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-historical-continuity-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Historical acceptance tests must verify immutable historical bytes and their narrow relation to current state without requiring a historical catalogue digest or ledger revision to equal the evolving live head.",
+      "observed_error": "The expanded packet failed two assertions: the support-grant characterization required its historical policies digest to equal the newly repaired live catalogue digest, and the behavior-plan continuity test required the live error register to remain at historical revision 146 with AER-0160 through AER-0171 as its final rows.",
+      "detection_method": "The complete static packet passed all other checks and produced exact diffs of one historical policy digest versus the current policy digest and live register revision 153 versus historical revision 146.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-historical-continuity-coupling-failure-receipt.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-155.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.historical_continuity_test_bound_to_mutable_live_state",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The support-grant test now reconstructs its exact historical expected catalogue while proving only policies differs from current live state; the continuity test finds and validates the exact AER-0160 through AER-0171 historical cohort while allowing later closed revisions.",
+        "prevention_control": "Historical evidence tests must bind immutable file hashes and exact historical populations, then express current-state evolution as an explicit narrow delta or monotonic condition rather than equality to mutable head state.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-historical-continuity-coupling-failure-receipt.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-155.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0182",
+      "attempt_id": "raisa-context-fabric-durability-binding-rls-expanded-format-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-exact-review-format-gate",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_ruff_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every file in the exact independent-review set must pass Ruff format before the candidate is committed or dispatched.",
+      "observed_error": "Ruff check passed all 34 exact files, but format --check found four deterministic formatting drifts: the attempt-031 diagnosis script, the behavior plan test, the inert-DDL test and the migration-architecture plan test.",
+      "detection_method": "The exact 34-file Ruff format gate returned exit 1 and named only the four files; no semantic lint, test, runtime, database or provider failure occurred.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-exact-format-failure-receipt.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_031_admission_receiver_binding_rls_diagnosis.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+        "docs/ariadne-agent-error-correction-register-revision-156.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.exact_review_format_gate_drift",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Ruff formatted only the four named files; semantic changes remain limited to the separately reviewed historical-test corrections, and the exact lint, format and 552-test packet must all rerun.",
+        "prevention_control": "Run Ruff format --check over the final exact review set before the first complete pytest packet; if it identifies drift, format only named files and restart the full deterministic packet on the resulting bytes.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-exact-format-failure-receipt.json",
+          "scripts/raisa_context_fabric_durability_behavior_failure_031_admission_receiver_binding_rls_diagnosis.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-156.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

@@ -138,13 +138,13 @@ def diagnose() -> dict[str, Any]:
     if not (
         "INTO STRICT binding FROM " + BINDING_RELATION in function_lines[21]
         and function_lines[23].strip() == "WHEN NO_DATA_FOUND THEN"
-        and function_lines[24].strip().startswith(
-            "RAISE EXCEPTION USING ERRCODE = 'CF004'"
-        )
+        and function_lines[24]
+        .strip()
+        .startswith("RAISE EXCEPTION USING ERRCODE = 'CF004'")
         and function_lines[25].strip() == "WHEN TOO_MANY_ROWS THEN"
-        and function_lines[26].strip().startswith(
-            "RAISE EXCEPTION USING ERRCODE = 'CF004'"
-        )
+        and function_lines[26]
+        .strip()
+        .startswith("RAISE EXCEPTION USING ERRCODE = 'CF004'")
     ):
         raise RuntimeError("function_line_26_not_binding_cardinality_handler")
 
@@ -157,8 +157,10 @@ def diagnose() -> dict[str, Any]:
     )
     if policy_fragment not in artifact:
         raise RuntimeError("artifact_binding_policy_not_exact")
-    receiver_grant = "GRANT SELECT ON TABLE " + BINDING_RELATION + (
-        " TO context_admission_receiver;"
+    receiver_grant = (
+        "GRANT SELECT ON TABLE "
+        + BINDING_RELATION
+        + (" TO context_admission_receiver;")
     )
     if artifact.count(receiver_grant) != 1:
         raise RuntimeError("artifact_receiver_binding_grant_population")
@@ -268,8 +270,7 @@ def diagnose() -> dict[str, Any]:
             "artifact_sha256": "sha256:" + EXPECTED_ARTIFACT_SHA256,
             "body_source_sha256": "sha256:" + EXPECTED_BODY_SOURCE_SHA256,
             "body_contract_sha256": "sha256:" + EXPECTED_BODY_CONTRACT_SHA256,
-            "structural_source_sha256": "sha256:"
-            + EXPECTED_STRUCTURAL_SOURCE_SHA256,
+            "structural_source_sha256": "sha256:" + EXPECTED_STRUCTURAL_SOURCE_SHA256,
             "structural_contract_sha256": "sha256:"
             + EXPECTED_STRUCTURAL_CONTRACT_SHA256,
             "raw_postgresql_error_persisted": False,

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 153
+    assert register["register_revision"] == 156
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 180)
+        f"AER-{index:04d}" for index in range(1, 183)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 115
+    assert len(agent_incidents) == 116
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2352,9 +2352,7 @@ def test_aer_0173_corrects_missing_renderer_subcommand() -> None:
 
 
 def test_aer_0174_corrects_exact_pytest_node_selection() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0174"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0174"]
     assert incident["origin"] == "agent_behavior"
     assert incident["category"] == "command_scope_violation"
     assert incident["recurrence_signature"] == (
@@ -2366,9 +2364,7 @@ def test_aer_0174_corrects_exact_pytest_node_selection() -> None:
 
 
 def test_aer_0175_reconciles_all_exact_register_counts() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0175"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0175"]
     assert incident["origin"] == "repository"
     assert incident["category"] == "repository_defect"
     assert incident["recurrence_signature"] == (
@@ -2382,9 +2378,7 @@ def test_aer_0175_reconciles_all_exact_register_counts() -> None:
 
 
 def test_aer_0176_rebinds_representability_parent_digest() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0176"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0176"]
     assert incident["origin"] == "repository"
     assert incident["category"] == "repository_defect"
     assert incident["recurrence_signature"] == (
@@ -2398,9 +2392,7 @@ def test_aer_0176_rebinds_representability_parent_digest() -> None:
 
 
 def test_aer_0177_reconciles_parse_parent_expectations() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0177"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0177"]
     assert incident["origin"] == "repository"
     assert incident["category"] == "repository_defect"
     assert incident["recurrence_signature"] == (
@@ -2414,9 +2406,7 @@ def test_aer_0177_reconciles_parse_parent_expectations() -> None:
 
 
 def test_aer_0178_corrects_windows_shell_preflight_omission() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0178"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0178"]
     assert incident["origin"] == "agent_behavior"
     assert incident["category"] == "command_scope_violation"
     assert incident["recurrence_signature"] == (
@@ -2430,9 +2420,7 @@ def test_aer_0178_corrects_windows_shell_preflight_omission() -> None:
 
 
 def test_aer_0179_reconciles_final_register_population() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0179"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0179"]
     assert incident["origin"] == "repository"
     assert incident["category"] == "repository_defect"
     assert incident["recurrence_signature"] == (
@@ -2446,30 +2434,70 @@ def test_aer_0179_reconciles_final_register_population() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0180_corrects_serial_pytest_delimiter() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0180"]
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.serial_pytest_option_delimiter_omitted"
+    )
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0181_decouples_historical_tests_from_mutable_live_state() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0181"]
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["recurrence_signature"] == (
+        "repository.historical_continuity_test_bound_to_mutable_live_state"
+    )
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0182_corrects_exact_review_format_drift() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0182"]
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["recurrence_signature"] == (
+        "repository.exact_review_format_gate_drift"
+    )
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 179
+    assert report["incident_count"] == 182
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 115,
+        "agent_behavior": 116,
         "harness": 21,
-        "repository": 35,
+        "repository": 37,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 18,
+        "command_scope_violation": 19,
         "evidence_misreport": 22,
         "harness_failure": 21,
         "output_contract_violation": 49,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 35,
+        "repository_defect": 37,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 54,
-        "canonical_unchanged": 103,
+        "accepted_candidate_changed": 56,
+        "canonical_unchanged": 104,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [

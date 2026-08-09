@@ -1,0 +1,29 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-binding-rls-exact-format-failure.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-binding-rls-expanded-format-001",
+  "status": "revision_required_then_formatted",
+  "exact_file_count": 34,
+  "ruff_check": {
+    "status": "passed",
+    "file_count": 34
+  },
+  "ruff_format_check": {
+    "status": "revision_required",
+    "already_formatted": 30,
+    "drifted": 4,
+    "paths": [
+      "scripts/raisa_context_fabric_durability_behavior_failure_031_admission_receiver_binding_rls_diagnosis.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+      "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+      "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py"
+    ]
+  },
+  "correction": {
+    "formatted_only_named_paths": true,
+    "full_packet_rerun_required": true
+  },
+  "database_or_docker_contact": false,
+  "provider_contact": false,
+  "authority_boundary": "repository_local_exact_format_recovery_only"
+}

@@ -270,9 +270,7 @@ def test_rendered_binding_select_policy_preserves_exact_owner_session_time_fence
     )
 
     hostile_predicates = (
-        predicate.replace(
-            " OR current_user = 'context_admission_receiver'::name", ""
-        ),
+        predicate.replace(" OR current_user = 'context_admission_receiver'::name", ""),
         predicate.replace(
             "current_user = 'context_admission_receiver'::name",
             "(current_user = 'context_admission_receiver'::name OR "
