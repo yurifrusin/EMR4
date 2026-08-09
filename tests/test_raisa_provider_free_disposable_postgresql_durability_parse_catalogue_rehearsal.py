@@ -105,6 +105,15 @@ ROW_PROJECTION_RECOVERY_EVIDENCE = json.loads(
         encoding="utf-8"
     )
 )
+TOP_LEVEL_XID_INSERT_RELOAD_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR / "provider-free-disposable-postgresql-evidence-"
+    "top-level-xid-insert-reload-characterization.json"
+)
+TOP_LEVEL_XID_INSERT_RELOAD_CHARACTERIZATION_EVIDENCE = json.loads(
+    TOP_LEVEL_XID_INSERT_RELOAD_CHARACTERIZATION_EVIDENCE_PATH.read_text(
+        encoding="utf-8"
+    )
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -414,8 +423,8 @@ def test_exact_catalogue_digests_bind_revised_types_and_registration_rls() -> No
         "exact_digest_bound"
     )
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "characterization_only",
-        "expected_query_digests": {},
+        "mode": "exact_digest_bound",
+        "expected_query_digests": expected,
     }
     assert prior_types_digest == (
         "sha256:099effe28c033aeec242bcd7b68f0703af558ebedfc4e37875a15ac6f05594f8"
@@ -670,6 +679,41 @@ def test_system_xmin_record_access_recovery_parse_catalogue_evidence_is_exact_pa
         "absence_verified": True,
         "container_id": (
             "28d0699d81fa257d5421d322342961d523918d853022f0ae9b763951fea6b3ee"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_top_level_xid_insert_reload_characterization_is_exact_and_nonpassing() -> None:
+    evidence = TOP_LEVEL_XID_INSERT_RELOAD_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            TOP_LEVEL_XID_INSERT_RELOAD_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "3f09cfa15c305eea8279947d84e36901f574265cf599cc4d838b2441251c8979"
+    )
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["parent"]["artifact_sha256"] == (
+        "sha256:25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb"
+    )
+    assert evidence["parent"]["artifact_byte_count"] == 1_391_453
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:03b7a1a808f52ced4dff5e48740fff1bb1e83d0233e84fdb855f58a80bae2860"
+    )
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "71334f0c3cb06532cff801ee52f6b5fe163663046ce0417f3c7bab75ad3b6aaa"
         ),
         "removed": True,
         "status": "cleanup_verified",

@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_cleaned_characterization_exact_catalogue_digest_binding_and_closed_orchestrator_event_incident_before_the_terminal_parse_rerun",
+  "source_evidence": {
+    "live_handover_current_baton": "The corrected renderer 2.0.10 artifact has completed one nonpassing catalogue characterization. Behavior attempt 022 remains immutable and behavior retry stays blocked until a separate exact-digest parse run, behavior rebind and independent veto pass.",
+    "current_authority_allocation": "GPT Sol owns the serial two-stage PostgreSQL proof, evidence binding and explicit-path commits. No worker or native subagent is active. Gemini 3.6 Flash/high remains reserved for the later exact-head behavior-eligibility veto.",
+    "active_plan_and_acceptance": "Characterization attempt c245e527106f271ffcc6d27d admitted exact artifact SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb at 1,391,453 bytes and 412 statements, reproduced all structural counts and fifteen value-bearing catalogue digests, emitted only catalogue_characterization_required and removed exact container 71334f0c3cb06532cff801ee52f6b5fe163663046ce0417f3c7bab75ad3b6aaa with absence verified. Immutable evidence SHA-256 is 3f09cfa15c305eea8279947d84e36901f574265cf599cc4d838b2441251c8979. The exact-bound contract SHA-256 is d482ab2c4b96e3bfa854e4c723e9891c2b4b8ac9670db2f73729207ede345919. The combined 222 parse/AER tests, Ruff, format and diff checks pass. AER revision 127 contains 152 closed incidents and records the rejected descriptive continuation event before its passed corrected receipt.",
+    "protected_evidence_boundaries": "Characterization is observation for digest binding, not acceptance. The terminal pass requires a different newly owned networkless container to reproduce every frozen digest. Old exact parse evidence remains unchanged until successful replacement; failed mutable behavior evidence remains untracked. docs/branding and unrelated untracked files remain excluded. No product/provider/patient/clinical/protected data, runtime wiring, watcher/listener, command/write, deployment, production, release, Pages or protected-ref authority opens.",
+    "git_refs_and_worktree": "Task HEAD remains f3e9304dff1c41c28b36a1cce3c5386167ce90b2 before this explicit-path evidence-binding commit. Local and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Only exact parse contract/harness/test, immutable characterization evidence, AER revision 127/register/report and exact preexecution/precommit receipts are eligible."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_top_level_xid_parse_exact_binding_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled exact characterization result, digest binding, cleanup and 222 deterministic checks."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Independent review remains deferred until behavior-contract rebind."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

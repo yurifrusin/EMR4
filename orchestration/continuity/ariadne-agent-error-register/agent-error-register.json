@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 126,
+  "register_revision": 127,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -5922,6 +5922,48 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-top-level-xid-insert-reload-recovery.md",
           "docs/security/raisa-context-fabric-durability-top-level-xid-insert-reload-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-126.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0152",
+      "attempt_id": "raisa-context-fabric-top-level-xid-parse-characterization-preexecution-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every local execution preflight must copy one admitted continuation_event from the closed Ariadne requirements; descriptive execution phase names belong only in planned_action and source evidence.",
+      "observed_error": "The first top-level-XID parse characterization preexecution state reused descriptive continuation_event pre_execution. The deterministic preflight returned revision_required with continuation_event_missing_or_unapproved before Docker or PostgreSQL contact.",
+      "detection_method": "scripts/ariadne_orchestrator_preflight.py rejected the state, emitted no rehydration sources and granted no worker dispatch. Sol preserved that state and receipt, then created a distinct v2 envelope with admitted continuation_event pre_worker_dispatch and unchanged runtime boundaries.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-parse-characterization-preexecution-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-parse-characterization-preexecution-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-parse-characterization-preexecution-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-parse-characterization-preexecution-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-127.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unapproved_continuation_event",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed receipt remains immutable and authorizes no runtime. The distinct corrected state uses admitted pre_worker_dispatch while preserving the exact characterization action, five sources and every no-provider, no-product and exact-cleanup boundary.",
+        "prevention_control": "Every Ariadne receipt state must copy continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml before planned_action is drafted; any unapproved event produces immutable revision_required evidence and a distinct corrected state.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-parse-characterization-preexecution-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-parse-characterization-preexecution-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-127.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

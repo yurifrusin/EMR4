@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_nonpassing_networkless_postgresql_16_catalogue_characterization_for_the_renderer_210_artifact_and_cleanup_only_the_reverified_owned_container",
+  "source_evidence": {
+    "live_handover_current_baton": "Behavior attempt 022 remains failed and immutable. The next required evidence is a nonpassing parse/catalogue characterization of the corrected renderer 2.0.10 artifact before exact digest binding and any behavior retry.",
+    "current_authority_allocation": "GPT Sol exclusively owns this one serial disposable runtime, bounded evidence and exact-ID cleanup. No external worker, native subagent or independent reviewer executes the database run.",
+    "active_plan_and_acceptance": "Exact source HEAD f3e9304dff1c41c28b36a1cce3c5386167ce90b2 binds commit c5d55b72441524d42b9724815dfa4c1a778ac73a, artifact SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb, 1,391,453 LF bytes and 412 statements. Contract SHA-256 03b7a1a808f52ced4dff5e48740fff1bb1e83d0233e84fdb855f58a80bae2860 is characterization_only with empty expected digests and a distinct immutable evidence output. The focused 104-test packet, Ruff and format checks pass.",
+    "protected_evidence_boundaries": "The run may use only the already-local postgres:16-bookworm image with --pull=never, network none, no ports or host mounts, empty authored-synthetic prerequisite shapes and fixed catalogue reads. It cannot pass, and must preserve old parse evidence and failed behavior evidence. It opens no patient/product/protected data, provider, application/API/Diary runtime, command/write, deployment, production, release, Pages or protected-ref surface.",
+    "git_refs_and_worktree": "Task branch exact HEAD is f3e9304dff1c41c28b36a1cce3c5386167ce90b2. Local and remote master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. docs/branding, the mutable failed behavior evidence and unrelated untracked receipts remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_top_level_xid_parse_characterization_preexecution",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified the exact committed characterization source and frozen container/evidence boundary."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Independent review remains deferred until exact digest and behavior rebind."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

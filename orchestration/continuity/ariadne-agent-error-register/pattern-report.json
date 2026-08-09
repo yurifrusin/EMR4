@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "56c3d9026152fd27dda2a5a18fcab2926c09e5d852e59edf127917d9c6dcf3c8",
+  "canonical_register_sha256": "3d2dc9dcea35656d4c4f6d0e0b6434d0c509cacadfc67d4c67f6c54171ba4272",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 38,
-      "canonical_unchanged": 91,
+      "canonical_unchanged": 92,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 15,
       "evidence_misreport": 22,
       "harness_failure": 19,
-      "output_contract_violation": 42,
+      "output_contract_violation": 43,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
       "repository_defect": 19,
       "transport_timeout": 8
     },
     "by_origin": {
-      "agent_behavior": 105,
+      "agent_behavior": 106,
       "harness": 19,
       "repository": 19,
       "transport": 8
     },
     "by_process_severity": {
-      "low": 43,
+      "low": 44,
       "material": 56,
       "moderate": 52
     },
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 59,
+      "codex-primary-orchestrator::orchestrator": 60,
       "codex-sol-orchestrator::orchestrator": 1,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
@@ -58,12 +58,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 98,
+      "orchestrator": 99,
       "verifier": 39
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 151,
+  "incident_count": 152,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -173,12 +173,13 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0013",
         "AER-0023",
         "AER-0113",
-        "AER-0149"
+        "AER-0149",
+        "AER-0152"
       ],
       "origins": [
         "agent_behavior"
@@ -186,6 +187,7 @@
       "prevention_controls": [
         "Before constructing any receipt, copy continuation_event verbatim from orchestration/harness_settings/orchestrator_requirements.yaml; descriptive lifecycle detail belongs in planned_action and source evidence, never in the enum field.",
         "Before every orchestrator receipt, copy continuation_event from orchestration/harness_settings/orchestrator_requirements.yaml and put task-specific phase language only in planned_action; a revision_required receipt forbids runtime until a distinct corrected state passes.",
+        "Every Ariadne receipt state must copy continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml before planned_action is drafted; any unapproved event produces immutable revision_required evidence and a distinct corrected state.",
         "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml and preserve any fail-closed envelope before issuing a corrected distinct receipt.",
         "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt."
       ],
@@ -408,7 +410,7 @@
       ]
     }
   ],
-  "register_revision": 126,
+  "register_revision": 127,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-09"
 }
