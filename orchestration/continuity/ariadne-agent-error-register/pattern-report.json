@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "924533fdcb79ef53824f9ea4e61040e95774fb641013465e8dbda8beaaa1ffb1",
+  "canonical_register_sha256": "3542aec461bd58248bcc61cb55a9d41df051b088698afa6ee5bcf0986716dd93",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 41,
+      "accepted_candidate_changed": 42,
       "canonical_unchanged": 99,
       "untrusted_partial_worktree": 22
     },
@@ -13,22 +13,22 @@
       "output_contract_violation": 48,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
-      "repository_defect": 22,
+      "repository_defect": 23,
       "transport_timeout": 8
     },
     "by_origin": {
       "agent_behavior": 111,
       "harness": 21,
-      "repository": 22,
+      "repository": 23,
       "transport": 8
     },
     "by_process_severity": {
       "low": 50,
       "material": 60,
-      "moderate": 52
+      "moderate": 53
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 33,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 34,
       "api-spine-historical-regression-suite::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "codex-native-architecture-challenger::verifier": 1,
@@ -59,11 +59,11 @@
     "by_role": {
       "implementer": 14,
       "orchestrator": 109,
-      "verifier": 39
+      "verifier": 40
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 162,
+  "incident_count": 163,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -444,7 +444,7 @@
       ]
     }
   ],
-  "register_revision": 137,
+  "register_revision": 138,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-09"
 }

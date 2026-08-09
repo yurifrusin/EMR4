@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_rejected_uuid_review_provenance_clean_checkout_test_repair_and_aer_0163_using_only_explicit_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "AER-0163 preserves the r136 revision_required result and clean-worktree FileNotFoundError. The test now always verifies the tracked immutable attempt-025 evidence and compares optional mutable evidence only when present. The corrected exact packet collects and passes 485 tests; Ruff check, Ruff format and diff checks pass. No renderer, SQL, parse, behavior contract or scenario changed.",
+    "current_authority_allocation": "GPT Sol owns the narrow clean-checkout test repair, AER reconciliation and task-branch commit. The rejected Gemini result has no acceptance authority. A separate fresh Gemini 3.6 Flash high verifier may review only a later exact committed candidate in a newly created clean worktree.",
+    "git_refs_and_worktree": "Primary task branch is at tracked HEAD 6672c547fe46bf304e7dceddb0dd01704bf68064 before this explicit-path repair commit. Rejected review worktree r136 remains clean and unchanged at that candidate. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior and transaction rehearsal. The first UUID-minimum veto was rejected solely because one diagnosis test depended unconditionally on deliberately untracked mutable evidence. Behavior attempt 026 remains closed pending a fresh replacement veto.",
+    "protected_evidence_boundaries": "The rejected review receipt is immutable provenance and cannot be treated as a pass. Mutable behavior evidence remains untracked and unstaged. docs/branding and all unrelated untracked files remain untouched. No Docker, provider, product, patient/protected data, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref action is permitted by this commit."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
