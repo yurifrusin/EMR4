@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_and_commit_the_fresh_uuid_minimum_behavior_replacement_veto_provenance_without_opening_runtime",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior and transaction rehearsal. The fresh r137 replacement veto passed; this acceptance step preserves its result before any behavior runtime is opened.",
+    "current_authority_allocation": "Gemini 3.6 Flash high supplied a read-only independent veto only. GPT Sol independently owns acceptance of that evidence and the explicit-path provenance commit. No worker owns integration, runtime or protected refs.",
+    "active_plan_and_acceptance": "The replacement receipt at file SHA-256 8eb5f1abf61a2a91d41aee3aa8b7f9183ca2b040ab964bc04a9ae39ad59bd57b records decision pass, exact candidate 795a0872d78bb6174a1038e29f24a4ba76f4ce0e, 485 passing tests, clean pre/post state, all twenty-one challenges satisfied and no Docker execution. It correctly retains the r136 revision_required result as immutable predecessor provenance.",
+    "protected_evidence_boundaries": "Acceptance is limited to the committed UUID repair and six-parent behavior rebind. It does not accept behavior attempt 026 in advance. Mutable behavior evidence remains untracked and unstaged. docs/branding and unrelated untracked files remain untouched. No provider call, product or patient/protected data, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref action is authorized.",
+    "git_refs_and_worktree": "Primary task branch remains at 795a0872d78bb6174a1038e29f24a4ba76f4ce0e before the explicit-path provenance commit. Review worktree r137 remains clean at that exact commit. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_pre_verifier_acceptance_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol inspected the structured pass, receipt binding and clean reviewer postcondition."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent owns acceptance."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini completed one passed read-only veto; no further verifier call is active."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

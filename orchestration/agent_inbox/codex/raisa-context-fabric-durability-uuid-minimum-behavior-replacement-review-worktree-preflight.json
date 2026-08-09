@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r137",
+  "branch": "codex/review-context-fabric-uuid-minimum-behavior-795a0872",
+  "head": "795a0872d78bb6174a1038e29f24a4ba76f4ce0e",
+  "expected_head": "795a0872d78bb6174a1038e29f24a4ba76f4ce0e",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-uuid-minimum-behavior-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

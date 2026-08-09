@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_replacement_veto_against_exact_clean_candidate_795a0872",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The predecessor r136 result is immutably revision_required because a single test depended on absent mutable evidence. Candidate 795a0872 applies the narrow clean-checkout repair and records closed AER-0163. The replacement verifier must independently re-run all twenty-one substantive challenges and the corrected exact 485-test packet before returning pass or revision_required.",
+    "current_authority_allocation": "GPT Sol remains conductor and sole acceptance owner. One fresh Gemini 3.6 Flash high Antigravity verifier is allocated only a read-only veto of exact candidate 795a0872d78bb6174a1038e29f24a4ba76f4ce0e in clean worktree r137. It has no edit, commit, runtime, integration or acceptance authority.",
+    "git_refs_and_worktree": "Primary task branch is at 795a0872d78bb6174a1038e29f24a4ba76f4ce0e. Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r137 is clean on codex/review-context-fabric-uuid-minimum-behavior-795a0872 at the exact same commit and its local preflight passed. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior and transaction rehearsal. UUID parse is accepted and the behavior contract is rebound. Behavior attempt 026 remains closed until this fresh independent veto passes.",
+    "protected_evidence_boundaries": "No Docker or PostgreSQL runtime may start during review. Mutable behavior evidence remains untracked and inadmissible. docs/branding and all unrelated untracked files remain untouched. No provider other than the single allocated verifier, product, patient/protected data, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref action is authorized."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
