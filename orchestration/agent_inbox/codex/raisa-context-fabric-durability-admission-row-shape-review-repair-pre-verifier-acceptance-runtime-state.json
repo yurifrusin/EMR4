@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_exactly_one_fresh_read_only_gemini_3_6_flash_high_veto_in_clean_descendant_r148_for_replacement_candidate_fb2fd645",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability parent recovery. First candidate 09436890 is rejected solely for a clean-checkout diagnosis-test defect. Replacement fb2fd645 preserves the database repair, guards optional mutable evidence and records AER-0191; it requires a fresh independent veto before any database run.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives one fresh read-only verifier lease in clean descendant r148. GPT Sol retains terminal acceptance, runtime and cleanup authority. The prior r147 verifier lease is complete and cannot accept this new HEAD.",
+    "active_plan_and_acceptance": "Replacement fb2fd645 keeps canonical body and inert SQL byte-identical to 09436890. Builder and inert checks, 321 tests, nine-file Ruff lint/format and both diff checks pass locally. The exact review packet requires clean-checkout optionality without weakening mutable-evidence hash validation.",
+    "protected_evidence_boundaries": "One exact Gemini 3.6 Flash/high review call only, read-only and bound to clean r148 at fb2fd645. No Docker/PostgreSQL, provider fallback, patient/product/clinical or protected data, branding inspection, watcher/feed, operational database, app/API/Diary command, deployment, Pages, production, release or protected-ref movement is permitted.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r148 is clean on codex/review-context-fabric-admission-row-shape-fb2fd645 at exact fb2fd6451d13bedc93b2bf4b1ec102ba7ab9f9eb. Main task branch is the same HEAD with only new unstaged review-provenance files. Local/origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "admission_row_shape_review_repair_pre_verifier_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol retains terminal acceptance and will reject any boundary or artifact drift."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Antigravity Gemini 3.6 Flash/high is available for one fresh exact-head call in r148."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    },
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Docker and PostgreSQL are explicitly closed during review."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

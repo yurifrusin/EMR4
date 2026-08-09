@@ -1,0 +1,38 @@
+{
+  "schema_version": "emr4.ariadne-independent-review-acceptance.v1",
+  "accepted_on": "2026-08-10",
+  "status": "accepted",
+  "candidate_head": "fb2fd6451d13bedc93b2bf4b1ec102ba7ab9f9eb",
+  "baseline_head": "df5352fb6964cad6e15195cfe8c9e17346a061b4",
+  "rejected_candidate_head": "094368904acb79b214c68e8521f789709a832db6",
+  "reviewer": {
+    "transport": "antigravity_new_project_bound_readonly_worktree",
+    "model": "gemini-3.6-flash-high",
+    "reasoning_effort": "high",
+    "decision": "pass",
+    "decision_contract": "schema_constrained_json_v1",
+    "receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-admission-row-shape-review-repair-review-receipt.json"
+  },
+  "prior_veto": {
+    "decision": "revision_required",
+    "candidate_head": "094368904acb79b214c68e8521f789709a832db6",
+    "receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-admission-row-shape-parent-recovery-review-receipt.json",
+    "disposition": "preserved_and_repaired_in_fresh_descendant"
+  },
+  "sol_checks": {
+    "exact_head_before_and_after": true,
+    "review_worktree_clean_after": true,
+    "five_source_rehydration_named": true,
+    "body_contract_sha256": "d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3",
+    "inert_sql_sha256": "ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb",
+    "test_count_passed": 321,
+    "ruff_file_count_passed": 9,
+    "aer_register_revision": 165,
+    "aer_incident_count": 191,
+    "aer_open_incident_ids": [],
+    "protected_refs_unchanged": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "database_repair_unchanged_from_rejected_candidate": true,
+    "p0_p2_findings": []
+  },
+  "acceptance": "The fresh independent veto is admitted for exact candidate fb2fd645. It permits only the planned provider-free parse/catalogue parent rebind after a fresh passed pre_worker_dispatch receipt. It grants no behavior run, applied migration, operational database, credential, watcher/feed, patient/product/clinical data, application/API/Diary command, deployment, production, release, Pages, integration or protected-ref authority."
+}

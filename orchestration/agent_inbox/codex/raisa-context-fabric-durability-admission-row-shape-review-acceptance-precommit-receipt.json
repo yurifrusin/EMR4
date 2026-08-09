@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_fresh_descendant_review_packet_receipts_preflight_and_sol_acceptance_for_candidate_fb2fd645",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The admitted review verifies unchanged canonical body and inert SQL artifacts, 321/321 clean-checkout tests, nine-file Ruff, exact refs and clean postcondition. Sol acceptance opens only a separately gated parse/catalogue parent rebind.",
+    "current_authority_allocation": "GPT Sol owns admission and explicit-path commit of the completed review provenance. Both Gemini verifier leases are complete. No worker, database runtime or product surface has authority in this commit.",
+    "git_refs_and_worktree": "Task branch is exact fb2fd6451d13bedc93b2bf4b1ec102ba7ab9f9eb before this provenance commit. Review worktree r148 is clean at the same HEAD. Local/origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability parent recovery. Fresh descendant r148 returned a schema-constrained pass for exact replacement fb2fd645 after the rejected r147 candidate and its clean-checkout repair.",
+    "protected_evidence_boundaries": "Commit only the named r148 preflight, packet, verifier state/receipt, reviewer receipt and Sol acceptance. Preserve all unrelated untracked files and docs/branding. No Docker/PostgreSQL, further provider call, behavior run, operational database, watcher/feed, data, app/API/Diary command, deployment, Pages, release or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

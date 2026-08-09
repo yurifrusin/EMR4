@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r148",
+  "branch": "codex/review-context-fabric-admission-row-shape-fb2fd645",
+  "head": "fb2fd6451d13bedc93b2bf4b1ec102ba7ab9f9eb",
+  "expected_head": "fb2fd6451d13bedc93b2bf4b1ec102ba7ab9f9eb",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-admission-row-shape-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
