@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_nonaccepting_subtransaction_xmin_catalogue_characterization_and_exact_digest_rebind_with_explicit_paths_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Non-accepting attempt 25b98f1da5c8de4d06188a70 characterized all seventeen catalogue query digests, and all fifteen artifact-dependent digests are unchanged from the accepted predecessor. Exact owned container 8e351be5609f7d01eb18919321eb42ff02736ef64c68c8affa422356ed1eb9d9 was removed and exact-ID absence verified. Immutable evidence SHA-256 is 4d140704d33624e90737022e5f9d095559152bd56554514ccebc73222d845750. The exact-digest contract canonical SHA-256 is 3dc318e64b9c30817c0e2cdca650fc284ae3d2f35e93e697d0cac5368fecbd03. The 128-test parse/plan suite passes; Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns this immutable characterization checkpoint and explicit-path commit under Yuri's standing planned-gate authority. No worker, verifier, provider model or product surface is active. A distinct exact-digest reproduction is the next permitted serial step after commit.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 561f5c896c16f31dcf6057da37d6ece7134c0da6 before this explicit-path commit; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The predecessor mutable parse evidence was restored byte-for-byte at SHA-256 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c. The index is clean before explicit-path staging.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery after attempt 029. Renderer 2.0.15 is committed at 561f5c896c16f31dcf6057da37d6ece7134c0da6. One parse/catalogue characterization has now completed safely; exact reproduction and behavior runtime remain closed.",
+    "protected_evidence_boundaries": "This commit contains only repository-local authored-synthetic characterization evidence, exact contract/schema/harness bindings, documentation, focused tests and its receipt pairs. It applies no migration and opens no behavior execution, operational database/credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model call, command/write authority, application/API/Diary wiring, deployment, production, release, Pages or protected-ref movement. The unrelated gp-pms-postgres container was not listed or touched. docs/branding, mutable behavior evidence, restored mutable parse evidence and all unrelated untracked files remain unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

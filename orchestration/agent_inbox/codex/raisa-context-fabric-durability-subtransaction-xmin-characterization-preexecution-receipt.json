@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_new_owned_pull_never_networkless_postgresql_16_subtransaction_xmin_catalogue_characterization_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Committed renderer source 561f5c896c16f31dcf6057da37d6ece7134c0da6 produces the 413-statement, 1416483-byte canonical LF artifact at SHA-256 03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0 and manifest SHA-256 bb91292d98fb34f576fa7bf6b5a196eccdcd42f087624b70b450933e36638597. The candidate parse contract has canonical SHA-256 5c5a3093b7815bde2e14765ef37ba087fedebd326c0a3eaefa0f745f9b3cd254, mode characterization_only, unchanged catalogue populations and no expected digests. Static contract validation and four focused boundary tests pass.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial catalogue characterization run, minimized evidence and exact-ID cleanup under Yuri's standing planned-gate authority. No implementation worker, verifier, provider model or product surface is involved, and characterization cannot accept itself.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 561f5c896c16f31dcf6057da37d6ece7134c0da6 with only the explicit parse characterization candidate and this receipt pair tracked-modified or untracked; index is clean. Local postgres:16-bookworm is exact image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing untracked files and docs/branding are preserved and excluded; staging remains explicit-path only.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 029 failed safely at BTR-E02 CF603 because an UPDATE exception subtransaction gave the stream-head row a subxid while the fence compared its xmin with the top-level xid. Renderer 2.0.15 and immutable diagnosis are committed at 561f5c896c16f31dcf6057da37d6ece7134c0da6. The next required step is catalogue characterization only; exact parse acceptance and behavior runtime remain closed.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no published or exposed host port, no bind, named, workspace or Docker-socket mount, container-local tmpfs, fixed authored-synthetic empty prerequisites, minimized catalogue digests and exact-ID cleanup. This run cannot be accepted. No function behavior, application migration, operational database or credential, watcher, listener, feed, application, API or Diary wiring, patient, clinical, product or protected data, provider/model call, command/write, deployment, production, release, Pages or protected ref is opened. The existing unrelated gp-pms-postgres container must not be listed or touched. docs/branding, mutable behavior evidence, mutable parse evidence and all unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

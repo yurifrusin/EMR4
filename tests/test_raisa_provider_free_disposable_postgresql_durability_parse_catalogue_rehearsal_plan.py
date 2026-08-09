@@ -84,10 +84,14 @@ DML_NAME_AMBIGUITY_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
     "dml-name-ambiguity-rebind.md"
 )
+SUBTRANSACTION_XMIN_REBIND = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
+    "subtransaction-xmin-rebind.md"
+)
 
-PARENT_HEAD = "9513b1f8a845b29473a2ca402fcee2ac2b11eebe"
+PARENT_HEAD = "561f5c896c16f31dcf6057da37d6ece7134c0da6"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc"
+PARENT_DIGEST = "03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0"
 
 
 def _text(path: Path) -> str:
@@ -116,6 +120,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         JSON_KEY_SET_ORDER_REBIND,
         ALIAS_LOCK_VISIBILITY_REBIND,
         DML_NAME_AMBIGUITY_REBIND,
+        SUBTRANSACTION_XMIN_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
@@ -124,17 +129,19 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_427_373
+    assert manifest["sql_byte_count"] == 1_416_483
     assert manifest["statement_count"] == 413
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "1,427,373 canonical LF bytes" in plan
+    assert "1,416,483 canonical LF bytes" in plan
     assert "statement count `413`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
     assert "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c" in plan
+    assert "4d140704d33624e90737022e5f9d095559152bd56554514ccebc73222d845750" in plan
+    assert "3dc318e64b9c30817c0e2cdca650fc284ae3d2f35e93e697d0cac5368fecbd03" in plan
     assert "f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673" in plan
     assert "122d2db7ec577875c1477eee6a4fa0c51dc9117ce0c23bc3704aa43f4c791ca0" in plan
     assert "Distinct attempt `26f530dab9ed13ba20500267`" in plan
