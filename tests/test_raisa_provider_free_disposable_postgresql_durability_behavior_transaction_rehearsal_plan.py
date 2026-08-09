@@ -70,6 +70,10 @@ DML_NAME_AMBIGUITY_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
     "dml-name-ambiguity-parent-rebind.md"
 )
+SUBTRANSACTION_XMIN_REBIND = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
+    "subtransaction-xmin-parent-rebind.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -103,19 +107,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-dml-name-ambiguity-accepted-source.md",
-        "5d31d5cfd0a95a771f28cca2c6c7baf903ae97ed",
-        "a967b264d1fc2c7fdfad8f30ee6ff698158ef2cb808ff9257197703ba1e4f51e",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-subtransaction-xmin-accepted-source.md",
+        "426fd229a96b7a34787dd0d0610a926808fd9961",
+        "8273baa138a8302677ca76244bccdf6b4be511aa41400c12c0e7b625cce0e972",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "9513b1f8a845b29473a2ca402fcee2ac2b11eebe",
-        "b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc",
+        "561f5c896c16f31dcf6057da37d6ece7134c0da6",
+        "03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "9513b1f8a845b29473a2ca402fcee2ac2b11eebe",
-        "5282c1432171d16b039c321b03ef15be00902317186e4264e634b0667e58cfe4",
+        "561f5c896c16f31dcf6057da37d6ece7134c0da6",
+        "bb91292d98fb34f576fa7bf6b5a196eccdcd42f087624b70b450933e36638597",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
@@ -129,7 +133,7 @@ EXPECTED_PARENT_BINDINGS = {
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "5d31d5cfd0a95a771f28cca2c6c7baf903ae97ed",
+        "426fd229a96b7a34787dd0d0610a926808fd9961",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
@@ -448,6 +452,38 @@ def test_dml_name_ambiguity_rebind_preserves_twenty_scenarios_and_closure() -> N
         "9513b1f8a845b29473a2ca402fcee2ac2b11eebe",
         "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
         "aabab28c1087e91d2b6267e24d55fd60e28a9204621dc38699c5df9e8feb7b24",
+        "6/4/3/4/3",
+        "gemini 3.6 flash/high",
+        "docs/branding/",
+        "no applied migration",
+        "product or patient data",
+    ):
+        assert required in combined
+    contract = _contract()
+    canonical = json.dumps(
+        {
+            "scenario_order": contract["scenario_order"],
+            "scenarios": contract["scenarios"],
+            "category_coverage": contract["category_coverage"],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    assert hashlib.sha256(canonical).hexdigest() == (
+        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+    )
+
+
+def test_subtransaction_xmin_rebind_preserves_twenty_scenarios_and_closure() -> None:
+    combined = _flat(SUBTRANSACTION_XMIN_REBIND, PLAN, DESIGN).lower()
+
+    for required in (
+        "deterministic six-parent rebind",
+        "426fd229a96b7a34787dd0d0610a926808fd9961",
+        "561f5c896c16f31dcf6057da37d6ece7134c0da6",
+        "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+        "a7278f6d87a69e9c5c9daef0a5b3640bcd22d27a3aac597ee228584dcc06d740",
         "6/4/3/4/3",
         "gemini 3.6 flash/high",
         "docs/branding/",

@@ -99,19 +99,19 @@ def test_exact_review_and_error_register_bind_plan_result() -> None:
     assert review["dirty_after"] is False
     assert "124` admitted, 124 passed" in review["result"]
     assert "79 collected, 79 passed" in review["result"]
-    assert register["register_revision"] == 114
+    assert register["register_revision"] == 145
     assert [row["incident_id"] for row in register["incidents"][-12:]] == [
-        "AER-0126",
-        "AER-0127",
-        "AER-0128",
-        "AER-0129",
-        "AER-0130",
-        "AER-0131",
-        "AER-0132",
-        "AER-0133",
-        "AER-0134",
-        "AER-0135",
-        "AER-0136",
-        "AER-0137",
+        "AER-0159",
+        "AER-0160",
+        "AER-0161",
+        "AER-0162",
+        "AER-0163",
+        "AER-0164",
+        "AER-0165",
+        "AER-0166",
+        "AER-0167",
+        "AER-0168",
+        "AER-0169",
+        "AER-0170",
     ]
     assert not [item for item in register["incidents"] if item["status"] == "open"]

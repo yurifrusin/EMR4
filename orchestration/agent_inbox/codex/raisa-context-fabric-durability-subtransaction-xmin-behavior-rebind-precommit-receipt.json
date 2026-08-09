@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_six_parent_subtransaction_xmin_behavior_rebind_with_explicit_paths_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "All six parents validate exactly: accepted ledger and prerequisite at evidence source 426fd229a96b7a34787dd0d0610a926808fd9961; inert artifact and manifest at renderer source 561f5c896c16f31dcf6057da37d6ece7134c0da6; structural/body contracts unchanged at 958f8178c872854ab0f8e1c56dbb9fe46afbea22. Behavior contract canonical SHA-256 is a7278f6d87a69e9c5c9daef0a5b3640bcd22d27a3aac597ee228584dcc06d740. Twenty scenario objects/order and 6/4/3/4/3 coverage retain canonical SHA-256 eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. The expanded exact packet collected and passed 525 tests; Ruff check/format over 30 files and diff checks pass. The plan-continuity assertion now binds AER revision 145 and AER-0159 through AER-0170.",
+    "current_authority_allocation": "GPT Sol owns this deterministic six-parent rebind and explicit-path commit under Yuri's standing planned-gate authority. Gemini 3.6 Flash/high is mandatory only after this exact candidate is committed into a fresh read-only review worktree. No database or product/provider runtime is active.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 240908001f274325304877ad8dc2b42f923ea74e before this explicit-path commit; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Candidate changes are limited to the exact behavior contract/harness/rebind documentation/tests and this receipt pair; the index is clean before explicit-path staging.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery after attempt 029. Renderer 2.0.15 parse/catalogue proof is accepted and ledger-bound through 240908001f274325304877ad8dc2b42f923ea74e. The frozen behavior contract is now rebound to those accepted parents; independent veto and any new behavior runtime remain closed.",
+    "protected_evidence_boundaries": "This commit is repository-only authored-synthetic parent rebinding, documentation, deterministic tests and its receipt. It starts no Docker/PostgreSQL, applies no migration and opens no operational database/credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model call, application/API/Diary wiring, command/write authority, deployment, production, release, Pages or protected-ref movement. The unrelated gp-pms-postgres container is not listed or touched. docs/branding, mutable behavior evidence, mutable parse evidence and all unrelated untracked files remain unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
