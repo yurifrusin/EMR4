@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_parse_plan_test_binding_to_the_current_renderer_210_artifact_before_the_full_behavior_veto_packet_is_repeated",
+  "source_evidence": {
+    "live_handover_current_baton": "The behavior rebind candidate is committed, but the first broad deterministic packet found one stale parse-plan test constant for the predecessor artifact. External review remains forbidden until the corrected packet passes.",
+    "current_authority_allocation": "GPT Sol owns this mechanical current-parent test correction and explicit-path commit. No worker, native subagent or Gemini review is active.",
+    "active_plan_and_acceptance": "The parse-plan test now includes the bounded top-level-XID recovery document and binds exact renderer source c5d55b72441524d42b9724815dfa4c1a778ac73a, artifact SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb, 1,391,453 LF bytes and 412 statements. The recovery document records those same accepted facts. All 9 parse-plan tests, Ruff, format and diff checks pass. Behavior contract and all twenty scenarios are unchanged from committed candidate 49769804.",
+    "protected_evidence_boundaries": "This is a static planning-test and documentation correction only. It starts no Docker or PostgreSQL and changes no SQL, scenario, authority, product/provider/patient/clinical/protected data, runtime wiring, command/write, deployment, release, Pages or protected ref. Failed behavior evidence and docs/branding remain excluded.",
+    "git_refs_and_worktree": "Task HEAD is 4976980445399d055f16f8c11686f220d681cceb before this explicit-path commit. Protected local and remote master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the recovery document, parse-plan test and this precommit pair are eligible."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_parse_plan_current_parent_precommit", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reproduced the stale constant failure and verified the corrected 9-test packet."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini remains gated behind the repeated deterministic packet."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

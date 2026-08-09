@@ -3,6 +3,13 @@
 Date: 2026-08-09
 Status: bounded renderer recovery candidate; behavior runtime remains closed
 
+Accepted renderer source commit:
+`c5d55b72441524d42b9724815dfa4c1a778ac73a`
+
+Accepted regenerated artifact:
+`sha256:25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb`
+at exactly 1,391,453 LF bytes and statement count `412`.
+
 ## Observed failure
 
 Behavior attempt 022 admitted the exact reviewed PostgreSQL artifact and fixed
