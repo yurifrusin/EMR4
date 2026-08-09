@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_behavior_transaction_sequence_022_once_in_one_newly_owned_networkless_pull_never_postgresql_16_container_then_reconcile_exact_cleanup_and_all_twenty_scenarios",
+  "source_evidence": {
+    "live_handover_current_baton": "The provider-free disposable PostgreSQL durability behavior/transaction rehearsal is the next dependency-satisfied gate. The accepted rebind and distinct corrected exact-HEAD Gemini veto now pass at task HEAD 320888f1fcb336d3924771be77d59347aa639a90. Run sequence 022 is the sole next action; later containment, product, provider, watcher and operational runtime gates remain closed.",
+    "current_authority_allocation": "GPT Sol owns this one tightly coupled serial database run, evidence reconciliation, exact cleanup and evidence-backed recovery. No worker, native subagent or verifier is active. Gemini review authority is consumed for the accepted source and grants no runtime authority.",
+    "active_plan_and_acceptance": "The frozen contract retains canonical SHA-256 8423c0b3f8ff47d4700b8cc42c3e313a756ecf86b7a6b6f2359e39be75ef3198, scenario-array canonical SHA-256 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3, exact twenty-scenario order and 6/4/3/4/3 coverage. The accepted parse source is 579175e875fd34958e7bbe84e8aaa45c38e0478f and inert SQL SHA-256 is 42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112. Corrected review receipt SHA-256 c218e34adc7bf81bb02a7d13d30633366e4abf350756a954f0e2d0a5a288edfe passed with 186/186 focused tests and a clean exact-HEAD postflight.",
+    "protected_evidence_boundaries": "Run sequence 022 may create only one random closed-prefix owned postgres:16-bookworm container with --pull=never, --network=none, no ports or mounts, tmpfs-only data, fixed authored-synthetic fixtures, fixed SQL and exact-ID cleanup. Mutable failed run-021 evidence at SHA-256 5c744ef559e438c7fc7de32ff26ea845a95f0d207363bd9bf60c10a718968ff2 remains unstaged and may be replaced only by this new run's terminal evidence. No patient/clinical/product/protected data, provider call, operational credential/database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Primary HEAD and local task ref are 320888f1fcb336d3924771be77d59347aa639a90. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local exact image postgres:16-bookworm has immutable ID sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Prior run-021 and diagnosis exact container IDs f5ee01c6f5aa1788c99adab290ce75cd8338e4caca2c4108a16705c94c75741f and bab6820d39bb7858fc25e0caaa0a15c428ba5bdb98e9f0efe8d759e36ae51950 are absent, and no behavior harness Python process is active. Preserved untracked material and docs/branding remain excluded."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_exact_behavior_run_sequence_022_preexecution_reconciliation", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact HEAD, accepted review, contract/scenario hashes, local image ID, failed evidence hash, prior exact container absence, no active behavior process and protected refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The accepted corrected read-only verifier receipt is consumed; no verifier call occurs during execution."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek transport is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

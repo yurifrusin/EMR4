@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_failed_and_corrected_attempt_022_preexecution_receipts_plus_closed_aer_0149_before_runtime",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted behavior contract and corrected Gemini veto remain unchanged. AER revision 124 records 149 incidents with zero open; AER-0149 maps continuation_event pre_execution rejection to the admitted pre_worker_dispatch envelope. The corrected five-source receipt passed, the register pattern report was regenerated, and 114/114 focused register tests plus Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol alone owns the non-protected task-branch control commit and later serial database run. No worker, subagent, verifier, provider, product runtime, protected integration or deployment actor is active.",
+    "git_refs_and_worktree": "Primary HEAD and local task ref remain 320888f1fcb336d3924771be77d59347aa639a90. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Only the bounded control files are tracked-modified; preserved untracked files remain excluded by explicit-path staging.",
+    "live_handover_current_baton": "Run sequence 022 remains the next provider-free durability action, but the first descriptive preexecution receipt failed closed before runtime. This commit preserves that failure, the distinct corrected receipt and closed AER-0149 before any database container is created.",
+    "protected_evidence_boundaries": "The explicit-path commit includes only the two failed preexecution files, two corrected files, AER revision 124, register, pattern report, focused test and this precommit pair. Mutable failed behavior evidence, docs/branding and every unrelated untracked file remain unstaged. No Docker/PostgreSQL runtime, product/provider call, patient/product/protected data, deployment, Pages or protected-ref movement occurs."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
