@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r143",
+  "branch": "codex/review-context-fabric-binding-rls-06951c61",
+  "head": "06951c61c56ca760cccf30bda135ebd5f58a2d78",
+  "expected_head": "06951c61c56ca760cccf30bda135ebd5f58a2d78",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-binding-rls-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 156,
+  "register_revision": 157,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7277,6 +7277,49 @@
           "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
           "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
           "docs/ariadne-agent-error-correction-register-revision-156.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0183",
+      "attempt_id": "raisa-context-fabric-durability-binding-rls-veto-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The verifier must return revision_required whenever its observed exact packet count differs from the packet's required count, even when every observed test passes.",
+      "observed_error": "The packet required exactly 552 tests and explicitly made any count mismatch revision_required; the verifier correctly observed 553 passed but nevertheless returned pass.",
+      "detection_method": "Sol compared the admitted receipt's own exact static-packet accounting with the immutable review packet immediately after the wrapper admitted one clean schema-valid decision.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-binding-rls-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-review-count-mismatch-sol-rejection.json",
+        "docs/ariadne-agent-error-correction-register-revision-157.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.packet_exact_count_mismatch_wrong_terminal_decision",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The pass is rejected. The exact candidate is updated only with the preserved review incident and count contract; its now-final packet count is recollected and a fresh project must independently review the new exact HEAD.",
+        "prevention_control": "Before accepting any verifier pass, compare every verifier-reported test/file count to the immutable packet; a mismatch always rejects the verdict regardless of green command exits, and the corrected count must be derived after the final register test is added.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-review-packet.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-binding-rls-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-review-count-mismatch-sol-rejection.json",
+          "docs/ariadne-agent-error-correction-register-revision-157.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

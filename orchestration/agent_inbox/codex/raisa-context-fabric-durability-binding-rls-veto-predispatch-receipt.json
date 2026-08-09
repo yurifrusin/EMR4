@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "worker_dispatch",
+  "planned_action": "run_one_fresh_antigravity_gemini_36_flash_high_read_only_veto_on_exact_head_06951c61_then_accept_only_one_schema_valid_decision_and_clean_postflight",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. Candidate 06951c61 includes the accepted binding-RLS repair, exact parse reproduction, frozen behavior rebind and final static-packet recovery. No behavior runtime has followed attempt 031.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project is allocated exactly one read-only independent veto on worktree r143. GPT Sol retains acceptance and all later runtime authority. No implementer, database or product authority is delegated.",
+    "active_plan_and_acceptance": "Local exact packet passes 552 tests; Ruff check passes and all 34 files are formatted. Behavior contract SHA-256 is 678252f6 with unchanged 20-scenario population SHA-256 eec93b0d. Error register revision 156 has 182 corrected incidents and zero open. Verifier must challenge immutable attempt-031 evidence, exact RLS scope, parse reproduction, six parents, historical-test preservation and closed authority.",
+    "protected_evidence_boundaries": "Review only candidate repository bytes in r143. Do not inspect docs/branding, protected holdouts, patient/clinical/product data or mutable untracked evidence. Do not edit, commit, push, run Docker/PostgreSQL or either runtime harness, make any provider call beyond this one verifier invocation, wire application/API/Diary surfaces, deploy, release, rebuild Pages or move protected refs.",
+    "git_refs_and_worktree": "Verifier worktree C:/Users/sarashera/EMR4-worktrees/r143 is clean on branch codex/review-context-fabric-binding-rls-06951c61 at exact HEAD 06951c61c56ca760cccf30bda135ebd5f58a2d78. Preflight status passed with zero calls. Main task HEAD is the same. Origin task remains 324d37f0. Local/origin master and handoff/current remain protected exact 2e34bdad."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

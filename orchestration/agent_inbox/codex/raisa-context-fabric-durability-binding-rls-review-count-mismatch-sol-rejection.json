@@ -1,0 +1,25 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-binding-rls-review-rejection.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-binding-rls-veto-001",
+  "candidate_head": "06951c61c56ca760cccf30bda135ebd5f58a2d78",
+  "review_receipt_sha256": "562b0a9423d88a9d1d30d500c8e67e538d7e636db219f4d5e313b0d798cc7f69",
+  "wrapper_admission": {
+    "one_schema_valid_decision": true,
+    "decision": "pass",
+    "head_unchanged": true,
+    "worktree_clean": true
+  },
+  "sol_acceptance": "rejected",
+  "reason": "verifier_reported_553_passed_against_exact_552_required_but_returned_pass_instead_of_revision_required",
+  "candidate_semantic_finding": false,
+  "database_or_docker_contact": false,
+  "behavior_runtime_opened": false,
+  "correction": {
+    "recollect_after_final_register_test": true,
+    "fresh_exact_head_required": true,
+    "fresh_antigravity_project_required": true,
+    "previous_decision_not_inherited": true
+  },
+  "authority_boundary": "review_rejection_only_no_runtime_product_deployment_or_protected_ref_authority"
+}
