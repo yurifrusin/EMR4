@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_support_execute_grant_parse_catalogue_accepted_source_ledger_as_the_only_new_acceptance_surface_before_behavior_parent_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The ledger binds exact pass evidence SHA-256 51608c55dd7a491f7ca20d822881e7d06c2e594aa968aa7d99a754ca0100eca5, artifact 934237c4525bf193999039aa1ad00ca815081152d32a6105f3cf730310695461, manifest adca5f5af9ef86e572b22eb66ea8838d563b340e895b7026246fbd05c4fb5def and exact contract d9237e6db14e314de5e2981be1073575db2e512ed1eff44b1f9ebf8b044c17bc. Its claim is limited to parse, atomic installation, exact catalogue/privilege shape and cleanup.",
+    "current_authority_allocation": "GPT Sol owns the evidence-source ledger and later behavior rebind under standing authority. No worker, subagent, external model or database run is involved in this documentation-only commit.",
+    "git_refs_and_worktree": "Task HEAD is exact edc311f0471b7b2796ecc21527015e88981448d7 before the ledger commit; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Mutable parse evidence remains restored at 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and its preserved failure at 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c; neither is staged.",
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability behavior recovery. Exact parse/catalogue reproduction is accepted at evidence source edc311f0471b7b2796ecc21527015e88981448d7. The next dependency is a minimal accepted-source ledger that can be bound as one of the behavior contract's six parents.",
+    "protected_evidence_boundaries": "No runtime, database, provider, patient/product/protected data, application/API/Diary wiring, source/watcher/listener/feed, migration, command/write, deployment, production, release, Pages or protected-ref action is authorized. docs/branding and every unrelated untracked file remain preserved; only the ledger and this five-source precommit receipt are staged explicitly."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
