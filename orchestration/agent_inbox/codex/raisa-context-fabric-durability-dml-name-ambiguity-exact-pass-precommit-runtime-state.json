@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_distinct_exact_dml_name_ambiguity_parse_catalogue_pass_and_cleanup_proof",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 028 remains immutable fail-closed evidence; renderer 2.0.14 parse/catalogue characterization is committed at 56405a5ce93775b17176b0ed4eb8f67aa7aa713f and its distinct exact reproduction now passes.",
+    "current_authority_allocation": "GPT Sol owned the single serial exact reproduction, evidence preservation, cleanup verification and this commit. No implementation worker, verifier, provider model or product surface was involved. A later fresh Gemini 3.6 Flash/high veto remains required before another behavior runtime.",
+    "active_plan_and_acceptance": "Distinct attempt 26f530dab9ed13ba20500267 passed exact digest binding under contract SHA-256 f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673 and artifact SHA-256 b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc. Immutable pass evidence SHA-256 is 122d2db7ec577875c1477eee6a4fa0c51dc9117ce0c23bc3704aa43f4c791ca0. Exact owned container a26898ce851b1eab61039023466c2e9802227ae4b223faaa0d1cc48c58e0db76 was removed and separate exact-ID inspect proved absence. Focused parse and plan tests pass; the prior tracked generic evidence was restored unchanged.",
+    "protected_evidence_boundaries": "This pass proves only PostgreSQL 16 parse, fixed rollback, atomic installation, exact catalogue/privilege shape and exact-ID cleanup. It grants no function or trigger behavior, application migration, operational database or credential, source/watcher/listener/feed, patient, clinical, product or protected data, provider call, application/API/Diary wiring, command or write, deployment, production, release, Pages or protected-ref authority. docs/branding and all unrelated untracked files remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "Task HEAD remains 56405a5ce93775b17176b0ed4eb8f67aa7aa713f before this commit on codex/ariadne-bernie-davida-parallel-seam; origin task is 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean before explicit-path staging; the historical tracked generic parse evidence has zero diff."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_exact_pass_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the exact pass bytes, distinct attempt, catalogue equality, focused tests and exact container absence."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent was assigned to the serial runtime."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No verifier was active during the runtime reproduction."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker was active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane was selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

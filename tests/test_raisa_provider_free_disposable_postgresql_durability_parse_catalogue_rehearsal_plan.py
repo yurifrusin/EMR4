@@ -136,7 +136,8 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
     assert "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c" in plan
     assert "f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673" in plan
-    assert "distinct newly owned networkless container" in plan
+    assert "122d2db7ec577875c1477eee6a4fa0c51dc9117ce0c23bc3704aa43f4c791ca0" in plan
+    assert "Distinct attempt `26f530dab9ed13ba20500267`" in plan
 
 
 def test_runtime_profile_is_no_pull_no_network_no_mount_and_exact_owned() -> None:

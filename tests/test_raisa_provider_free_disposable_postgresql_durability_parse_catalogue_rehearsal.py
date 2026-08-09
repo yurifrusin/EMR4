@@ -192,6 +192,13 @@ DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE_PATH = (
 DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE = json.loads(
     DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+DML_NAME_AMBIGUITY_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-dml-name-ambiguity-exact-pass.json"
+)
+DML_NAME_AMBIGUITY_PASS_EVIDENCE = json.loads(
+    DML_NAME_AMBIGUITY_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1164,6 +1171,49 @@ def test_dml_name_ambiguity_characterization_is_exact_nonaccepting_parent() -> N
         "removed": True,
         "status": "cleanup_verified",
     }
+
+
+def test_dml_name_ambiguity_exact_reproduction_is_distinct_pass() -> None:
+    evidence = DML_NAME_AMBIGUITY_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            DML_NAME_AMBIGUITY_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "122d2db7ec577875c1477eee6a4fa0c51dc9117ce0c23bc3704aa43f4c791ca0"
+    )
+    assert evidence["attempt_id"] == "26f530dab9ed13ba20500267"
+    assert (
+        evidence["attempt_id"]
+        != DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE["attempt_id"]
+    )
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["catalogue"]["status"] == "matched"
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE["catalogue"]["query_digests"]
+    )
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673"
+    )
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "a26898ce851b1eab61039023466c2e9802227ae4b223faaa0d1cc48c58e0db76"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert (
+        evidence["cleanup"]["container_id"]
+        != (DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE["cleanup"]["container_id"])
+    )
 
 
 def test_digest_nullability_query_drift_is_preserved_fail_closed() -> None:

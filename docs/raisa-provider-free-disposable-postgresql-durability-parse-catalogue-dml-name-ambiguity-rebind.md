@@ -2,7 +2,7 @@
 
 Date: 2026-08-09
 
-Status: characterization preserved; exact reproduction remains required
+Status: exact parse/catalogue reproduction passed; behavior remains closed
 
 The disposable PostgreSQL parse/catalogue rehearsal now binds renderer 2.0.14
 source commit `9513b1f8a845b29473a2ca402fcee2ac2b11eebe` and its regenerated
@@ -23,12 +23,21 @@ is
 at SHA-256
 `3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c`.
 
-The contract is now rebound to those fifteen exact artifact-dependent digests
+The contract was rebound to those fifteen exact artifact-dependent digests
 at canonical SHA-256
 `f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673`.
-This characterization cannot accept itself. One distinct newly owned
-networkless container must reproduce the exact digest set and pass exact-ID
-cleanup before the parse prerequisite can be rebound into behavior recovery.
+The characterization did not accept itself. Distinct attempt
+`26f530dab9ed13ba20500267` then reproduced all seventeen catalogue digests
+exactly, passed the fixed rollback and atomic-installation checks and returned
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`.
+Its immutable evidence is
+`provider-free-disposable-postgresql-evidence-dml-name-ambiguity-exact-pass.json`
+at SHA-256
+`122d2db7ec577875c1477eee6a4fa0c51dc9117ce0c23bc3704aa43f4c791ca0`.
+Exact owned container
+`a26898ce851b1eab61039023466c2e9802227ae4b223faaa0d1cc48c58e0db76`
+was removed and exact-ID absence was separately verified. The parse prerequisite
+may now be ledger-bound and used to rebind the frozen behavior contract.
 
 This rebind opens no behavior proof, application migration, operational
 database, source, watcher/listener/feed, patient/product data, provider,

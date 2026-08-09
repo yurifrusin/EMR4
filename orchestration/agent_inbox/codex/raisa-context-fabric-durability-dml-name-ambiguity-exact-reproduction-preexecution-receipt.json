@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_distinct_newly_owned_pull_never_networkless_postgresql_16_exact_dml_name_ambiguity_catalogue_reproduction_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact-digest-bound contract at canonical SHA-256 f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673 binds renderer 2.0.14 artifact SHA-256 b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc, 1427373 canonical LF bytes, 413 statements and fifteen characterized catalogue digests. Characterization attempt 1dcabd0341a3770703633468 is immutable, non-accepting and cleaned up. Focused tests, Ruff and diff checks pass. This run must use a distinct container and attempt identity and may pass only after exact digest match plus cleanup.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial exact catalogue reproduction, minimized evidence and exact-ID cleanup. No implementation worker, verifier, provider model or product surface is involved. The run may accept only exact digest equality under the frozen contract.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at 56405a5ce93775b17176b0ed4eb8f67aa7aa713f before this receipt on codex/ariadne-bernie-davida-parallel-seam; origin task is 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing untracked files and docs/branding remain preserved and excluded.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 028 failed closed and is preserved; renderer 2.0.14 repaired only generated PL/pgSQL namespace spelling. The non-accepting catalogue characterization is committed at 56405a5ce93775b17176b0ed4eb8f67aa7aa713f, so one distinct exact reproduction is now the next prerequisite.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no host port, no bind, named, workspace or Docker-socket mount, container-local tmpfs, fixed authored-synthetic empty prerequisites, minimized catalogue evidence and exact-ID cleanup. No behavior, application migration, operational database or credential, source/watcher/listener/feed, patient, clinical, product or protected data, provider call, application/API/Diary wiring, command or write, deployment, production, release, Pages or protected ref is opened. docs/branding and all unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
