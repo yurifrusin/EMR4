@@ -77,8 +77,7 @@ JSON_KEY_SET_ORDER_REBIND = (
     / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-json-key-set-order-rebind.md"
 )
 ALIAS_LOCK_VISIBILITY_REBIND = (
-    ROOT
-    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
     "alias-lock-visibility-rebind.md"
 )
 

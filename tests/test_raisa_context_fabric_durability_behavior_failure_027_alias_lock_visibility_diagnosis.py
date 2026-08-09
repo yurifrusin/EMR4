@@ -20,7 +20,9 @@ def test_failure_027_is_preserved_byte_identically() -> None:
         diagnosis.EXPECTED_FAILURE_SHA256
     )
     failure = json.loads(failure_bytes)
-    mutable = diagnosis.BEHAVIOR_DIR / "provider-free-behavior-transaction-evidence.json"
+    mutable = (
+        diagnosis.BEHAVIOR_DIR / "provider-free-behavior-transaction-evidence.json"
+    )
     if mutable.exists():
         mutable_bytes = mutable.read_bytes()
         mutable_evidence = json.loads(mutable_bytes)

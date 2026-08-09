@@ -151,8 +151,7 @@ def diagnose() -> dict[str, Any]:
     lock = _exact(program["ast"]["nodes"], "node_id", LOCK_NODE_ID)
     if not (
         lock.get("op") == "LOCK_EXACT"
-        and lock["operands"].get("relation")
-        == "emr4_context_fabric." + ALIAS_RELATION
+        and lock["operands"].get("relation") == "emr4_context_fabric." + ALIAS_RELATION
         and lock["operands"].get("mode") == "FOR_KEY_SHARE"
         and lock["operands"].get("ordinal") == 1
     ):
@@ -206,8 +205,7 @@ def diagnose() -> dict[str, Any]:
             "artifact_sha256": "sha256:" + EXPECTED_ARTIFACT_SHA256,
             "body_source_sha256": "sha256:" + EXPECTED_BODY_SOURCE_SHA256,
             "body_contract_sha256": "sha256:" + EXPECTED_BODY_CONTRACT_SHA256,
-            "structural_source_sha256": "sha256:"
-            + EXPECTED_STRUCTURAL_SOURCE_SHA256,
+            "structural_source_sha256": "sha256:" + EXPECTED_STRUCTURAL_SOURCE_SHA256,
             "structural_contract_sha256": "sha256:"
             + EXPECTED_STRUCTURAL_CONTRACT_SHA256,
             "raw_postgresql_error_persisted": False,

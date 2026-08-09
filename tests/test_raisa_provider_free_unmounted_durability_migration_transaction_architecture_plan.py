@@ -727,8 +727,7 @@ def test_stream_head_lock_visibility_cannot_be_removed_or_widened_to_mutation() 
 def test_alias_lock_visibility_cannot_be_removed_or_widened_to_mutation() -> None:
     contract = data(CONTRACT)
     policies = {
-        policy["id"]: policy
-        for policy in contract["rls_policy_catalogue"]["policies"]
+        policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
     }
     alias = relation_map(contract)["diary_context_aggregate_aliases_v1"]
     assert alias["rls_policy_ids"] == [
@@ -736,9 +735,7 @@ def test_alias_lock_visibility_cannot_be_removed_or_widened_to_mutation() -> Non
         "pol_cf_02_insert",
         "pol_cf_02_update_lock",
     ]
-    assert policies["pol_cf_02_update_lock"]["with_check_sql"].endswith(
-        " AND FALSE"
-    )
+    assert policies["pol_cf_02_update_lock"]["with_check_sql"].endswith(" AND FALSE")
     roles = {role["role"]: role for role in contract["role_matrix"]}
     assert roles["context_producer"]["direct_table_dml"] == []
 
@@ -770,9 +767,9 @@ def test_alias_lock_visibility_cannot_be_removed_or_widened_to_mutation() -> Non
         policy["id"]: policy
         for policy in foreign_lock_visibility["rls_policy_catalogue"]["policies"]
     }
-    policies["pol_cf_02_update_lock"]["using_sql"] = policies[
-        "pol_cf_02_update_lock"
-    ]["using_sql"].replace("'PRODUCER'", "'OBSERVER'")
+    policies["pol_cf_02_update_lock"]["using_sql"] = policies["pol_cf_02_update_lock"][
+        "using_sql"
+    ].replace("'PRODUCER'", "'OBSERVER'")
     with pytest.raises(AssertionError):
         validate_renderer_semantics(reseal_contract(foreign_lock_visibility))
 

@@ -177,9 +177,7 @@ ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH = (
     / "provider-free-disposable-postgresql-evidence-alias-lock-visibility-characterization.json"
 )
 ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE = json.loads(
-    ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_text(
-        encoding="utf-8"
-    )
+    ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
 ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH = (
     DIR / "provider-free-disposable-postgresql-evidence-alias-lock-visibility-pass.json"
@@ -1041,9 +1039,12 @@ def test_json_key_set_order_parse_catalogue_evidence_is_distinct_exact_pass() ->
 def test_alias_lock_visibility_characterization_is_nonaccepting_and_exact() -> None:
     evidence = ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
-    assert rehearsal._bytes_sha(  # noqa: SLF001
-        ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
-    ) == "32dee447d4c180799ad4afd3b038d715dde9cb6796997dbc3379ceec82f2001a"
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "32dee447d4c180799ad4afd3b038d715dde9cb6796997dbc3379ceec82f2001a"
+    )
     assert evidence["attempt_id"] == "575003a3542e56595336dd59"
     assert evidence["result"] == "catalogue_characterization_required"
     assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
@@ -1073,17 +1074,23 @@ def test_alias_lock_visibility_characterization_is_nonaccepting_and_exact() -> N
 def test_alias_lock_visibility_exact_reproduction_is_distinct_pass() -> None:
     evidence = ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
-    assert rehearsal._bytes_sha(  # noqa: SLF001
-        ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH.read_bytes()
-    ) == "9f61fb3da219159491a9ac73125ec0d93bed0c72ed0f435182964169c7a6e027"
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "9f61fb3da219159491a9ac73125ec0d93bed0c72ed0f435182964169c7a6e027"
+    )
     assert evidence["attempt_id"] == "c0deb58ac4fea820eec366ff"
     assert evidence["result"] == rehearsal.PASS_RESULT
     assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
     assert evidence["catalogue"]["status"] == "matched"
-    assert evidence["catalogue"]["query_digests"] == (
-        ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE["catalogue"][
-            "query_digests"
-        ]
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == (
+            ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE["catalogue"][
+                "query_digests"
+            ]
+        )
     )
     assert evidence["parent"]["contract_sha256"] == (
         "sha256:554f70e0dc1e61fa0d831e6b9023bb35f57052323fea2513f6353c111d9a8178"

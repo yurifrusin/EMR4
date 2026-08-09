@@ -10,9 +10,7 @@ import pytest
 SPINE_DIR = Path("docs/api-spine")
 PERMISSION_MATRIX = SPINE_DIR / "security" / "permission-matrix.yaml"
 INTEGRATION_EVENTS = SPINE_DIR / "async" / "integration-events.yaml"
-AGENT_CAPABILITY_CHARTERS = (
-    SPINE_DIR / "manifests" / "agent-capability-charters.yaml"
-)
+AGENT_CAPABILITY_CHARTERS = SPINE_DIR / "manifests" / "agent-capability-charters.yaml"
 
 
 def _files_under(subdir, *suffixes):
@@ -36,33 +34,60 @@ def _all_files_under(subdir):
 
 
 # Forbidden field patterns (lowercase)
-BANNED = frozenset({
-    "provider prompt", "provider_response", "model_output",
-    "gemini", "llm", "raw_model", "ai_provider",
-    "historical_diary", "diary_trove", "h15_", "h_series",
-    "semantic_candidate", "local_data", "ignored_local",
-    "raw_phil", "raw_text", "phil_bearing",
-    "unrestricted_notes", "all_patient_notes", "raw_clinical",
-})
+BANNED = frozenset(
+    {
+        "provider prompt",
+        "provider_response",
+        "model_output",
+        "gemini",
+        "llm",
+        "raw_model",
+        "ai_provider",
+        "historical_diary",
+        "diary_trove",
+        "h15_",
+        "h_series",
+        "semantic_candidate",
+        "local_data",
+        "ignored_local",
+        "raw_phil",
+        "raw_text",
+        "phil_bearing",
+        "unrestricted_notes",
+        "all_patient_notes",
+        "raw_clinical",
+    }
+)
 
 # Section markers whose children declare exclusions.
-_ALLOW_SECTION_MARKERS = frozenset({
-    "must_not:", "blocked_gates:", "forbidden:",
-})
+_ALLOW_SECTION_MARKERS = frozenset(
+    {
+        "must_not:",
+        "blocked_gates:",
+        "forbidden:",
+    }
+)
 
 # Exact provider identity is permitted only as policy metadata inside the
 # separately authorised, default-off synthetic planner exception. This does
 # not permit prompts, responses, model output, provider clients, or provider
 # capability fields anywhere else in the manifests.
-_BOUNDED_PROVIDER_METADATA_SECTION_MARKERS = frozenset({
-    "bounded_synthetic_vertex_runtime_exception:",
-    "bounded_model_planner_authority:",
-})
+_BOUNDED_PROVIDER_METADATA_SECTION_MARKERS = frozenset(
+    {
+        "bounded_synthetic_vertex_runtime_exception:",
+        "bounded_model_planner_authority:",
+    }
+)
 
 # Terms on the same line that prove the line declares an exclusion.
-_SAME_LINE_EXCLUSION_TERMS = frozenset({
-    "blocked", "deny", "denied", "gate_closed",
-})
+_SAME_LINE_EXCLUSION_TERMS = frozenset(
+    {
+        "blocked",
+        "deny",
+        "denied",
+        "gate_closed",
+    }
+)
 
 
 def _is_under_blocking_section(lines, idx):
@@ -114,7 +139,7 @@ def _is_under_bounded_provider_metadata_section(lines, idx):
 def _strip_comments(text, lang="graphql"):
     tq = chr(34) * 3
     if lang == "graphql":
-        text = re.sub(tq + r'[^' + chr(34) + r']*' + tq, "", text, flags=re.DOTALL)
+        text = re.sub(tq + r"[^" + chr(34) + r"]*" + tq, "", text, flags=re.DOTALL)
         lines = [L for L in text.splitlines() if not L.strip().startswith("#")]
         return "\n".join(lines)
     if lang in ("yaml", "yml"):
@@ -168,7 +193,6 @@ def _load_yaml_file(path):
 
 
 class TestSpineDirectoryExists:
-
     def test_spine_root_is_directory(self):
         assert SPINE_DIR.is_dir(), f"Sprint 101 root {SPINE_DIR} missing."
 
@@ -180,7 +204,6 @@ class TestSpineDirectoryExists:
 
 
 class TestGraphQLArtifact:
-
     def _find_sdl(self):
         candidates = _files_under("graphql", ".graphql", ".gql", ".sdl", ".graphqls")
         assert candidates, "No GraphQL SDL under docs/api-spine/graphql/."
@@ -210,7 +233,6 @@ class TestGraphQLArtifact:
 
 
 class TestOpenAPICommandArtifact:
-
     OPENAPI_DIRS = ("openapi", "async")
 
     def _find_openapi(self):
@@ -235,8 +257,9 @@ class TestOpenAPICommandArtifact:
 
     def test_openapi_includes_idempotency_key(self):
         text = self._find_openapi().read_text(encoding="utf-8")
-        assert ("Idempotency-Key" in text or "idempotency-key" in text.lower()), \
+        assert "Idempotency-Key" in text or "idempotency-key" in text.lower(), (
             "Missing Idempotency-Key."
+        )
 
     def test_openapi_includes_confirm_and_proposal_paths(self):
         text = self._find_openapi().read_text(encoding="utf-8").lower()
@@ -251,15 +274,15 @@ class TestOpenAPICommandArtifact:
     def test_openapi_includes_audit_and_confirmer(self):
         text = self._find_openapi().read_text(encoding="utf-8").lower()
         assert "audit" in text, "Missing audit."
-        assert any(kw in text for kw in ("confirmer", "staff_confirmation", "confirming")), \
-            "Missing confirmer identity."
+        assert any(
+            kw in text for kw in ("confirmer", "staff_confirmation", "confirming")
+        ), "Missing confirmer identity."
 
     def test_openapi_no_forbidden_field_patterns(self):
         _check_no_forbidden(self._find_openapi(), lang="yaml")
 
 
 class TestYAMLManifests:
-
     def test_manifests_directory_has_files(self):
         files = _all_files_under("manifests")
         assert files, "No files under docs/api-spine/manifests/."
@@ -273,6 +296,7 @@ class TestYAMLManifests:
         files = _all_files_under("manifests")
         assert files, "No manifest files."
         import yaml
+
         found = False
         for f in files:
             try:
@@ -282,7 +306,9 @@ class TestYAMLManifests:
             if data is None:
                 continue
             t = str(data).lower()
-            if any(kw in t for kw in ("default-deny", "default_deny", "deny", "blocked")):
+            if any(
+                kw in t for kw in ("default-deny", "default_deny", "deny", "blocked")
+            ):
                 found = True
                 break
         assert found, (
@@ -295,6 +321,7 @@ class TestYAMLManifests:
         files = _all_files_under("manifests")
         assert files, "No manifest files."
         import yaml
+
         found = False
         for f in files:
             try:
@@ -319,7 +346,6 @@ class TestYAMLManifests:
 
 
 class TestAsyncEventContracts:
-
     def test_async_directory_has_files(self):
         files = _all_files_under("async")
         assert files, "No files under docs/api-spine/async/."
@@ -333,7 +359,6 @@ class TestAsyncEventContracts:
 
 
 class TestSecurityArtifacts:
-
     def test_security_directory_has_files(self):
         files = _all_files_under("security")
         assert files, "No files under docs/api-spine/security/."
@@ -343,6 +368,7 @@ class TestSecurityArtifacts:
         files = _all_files_under("security")
         assert files, "No security files."
         import yaml
+
         found = False
         for f in files:
             try:
@@ -366,7 +392,6 @@ class TestSecurityArtifacts:
 
 
 class TestBernieCommittedEventAwarenessDesign:
-
     @staticmethod
     def _diary_family():
         data = _load_yaml_file(INTEGRATION_EVENTS)
@@ -381,13 +406,13 @@ class TestBernieCommittedEventAwarenessDesign:
     @staticmethod
     def _bernie_charter():
         data = _load_yaml_file(AGENT_CAPABILITY_CHARTERS)
-        agents = [
-            agent for agent in data["agents"] if agent["agent_id"] == "bernie"
-        ]
+        agents = [agent for agent in data["agents"] if agent["agent_id"] == "bernie"]
         assert len(agents) == 1
         return data, agents[0]
 
-    def test_broader_proactive_diary_runtime_remains_blocked_around_exact_local_exception(self):
+    def test_broader_proactive_diary_runtime_remains_blocked_around_exact_local_exception(
+        self,
+    ):
         events, _ = self._diary_family()
         charters, bernie = self._bernie_charter()
 
@@ -404,7 +429,9 @@ class TestBernieCommittedEventAwarenessDesign:
             events["blocked_gates"]["proactive_diary_delivery_runtime"]
             == "blocked_except_reception_one_local_reschedule"
         )
-        assert charters["source_safety"]["proactive_diary_delivery_runtime"] == "blocked"
+        assert (
+            charters["source_safety"]["proactive_diary_delivery_runtime"] == "blocked"
+        )
         charter_exception = charters["source_safety"]["bounded_local_runtime_exception"]
         assert charter_exception["event_type"] == "diary.appointment_rescheduled"
         assert (
@@ -489,18 +516,23 @@ class TestBernieCommittedEventAwarenessDesign:
             runtime["relevance"]
             == "deterministic_appointment_membership_or_active_practitioner_availability"
         )
-        assert runtime["availability_reconciliation"] == "fresh_backend_candidate_comparison"
+        assert (
+            runtime["availability_reconciliation"]
+            == "fresh_backend_candidate_comparison"
+        )
         assert runtime["automatic_proposal_from_event"] is False
 
 
 class TestSecurityPermissionArtifacts:
-
     def test_permission_matrix_enterprise_auth_boundary_is_static_only(self):
         data = _load_yaml_file(PERMISSION_MATRIX)
 
         assert data["status"] == "prototype_only"
         assert data["artifact_kind"] == "non_invasive_permission_fixture_example"
-        assert data["source_safety"]["enterprise_auth_fga_boundary"] == "static_mapping_only"
+        assert (
+            data["source_safety"]["enterprise_auth_fga_boundary"]
+            == "static_mapping_only"
+        )
 
         blocked_source_flags = {
             "runtime_fga_clients",
@@ -534,7 +566,9 @@ class TestSecurityPermissionArtifacts:
         for gate in required_blocked_gates:
             assert data["blocked_gates"][gate]["decision"] == "deny"
 
-    def test_permission_matrix_allow_examples_do_not_enable_blocked_runtime_surfaces(self):
+    def test_permission_matrix_allow_examples_do_not_enable_blocked_runtime_surfaces(
+        self,
+    ):
         data = _load_yaml_file(PERMISSION_MATRIX)
 
         prohibited_fragments = {
@@ -570,13 +604,14 @@ class TestSecurityPermissionArtifacts:
 
 
 class TestEvidenceLabels:
-
     def _all_text(self):
         parts = []
         for f in SPINE_DIR.rglob("*"):
             if f.is_file():
                 try:
-                    parts.append(f.read_text(encoding="utf-8", errors="replace").lower())
+                    parts.append(
+                        f.read_text(encoding="utf-8", errors="replace").lower()
+                    )
                 except Exception:
                     continue
         return "\n".join(parts)
@@ -600,7 +635,10 @@ class TestEvidenceLabels:
             for f in SPINE_DIR.rglob("*"):
                 if f.is_file():
                     try:
-                        if label in f.read_text(encoding="utf-8", errors="replace").lower():
+                        if (
+                            label
+                            in f.read_text(encoding="utf-8", errors="replace").lower()
+                        ):
                             label_paths[label].append(f)
                     except Exception:
                         continue
