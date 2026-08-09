@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_new_owned_pull_never_networkless_postgresql_16_dml_name_ambiguity_catalogue_characterization_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Committed artifact source 9513b1f8a845b29473a2ca402fcee2ac2b11eebe produces the 413-statement, 1427373-byte LF artifact at SHA-256 b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc. The candidate parse contract has canonical SHA-256 ad1a34dd0f94ea72351fe14ec9c2221c9cb24656ed18a345d41c1ab78127975d, mode characterization_only, unchanged catalogue populations and no expected digests. Focused parse, plan, renderer, diagnosis and register checks pass.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial catalogue characterization run, minimized evidence and exact-ID cleanup. No implementation worker, verifier, provider model or product surface is involved, and characterization cannot accept itself.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 9513b1f8a845b29473a2ca402fcee2ac2b11eebe with only the explicit parse characterization candidate and this receipt pair tracked-modified or untracked; index is clean. Local postgres:16-bookworm is exact image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing untracked files and docs/branding are preserved and excluded.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery after attempt 028 failed closed at an ambiguous outbox INSERT. Deterministic diagnosis and renderer 2.0.14 namespace repair are committed at 9513b1f8a845b29473a2ca402fcee2ac2b11eebe. The next required step is catalogue characterization only; exact parse acceptance and behavior runtime remain closed.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no published or exposed host port, no bind, named, workspace or Docker-socket mount, container-local tmpfs, fixed authored-synthetic empty prerequisites, minimized catalogue digests and exact-ID cleanup. This run cannot be accepted. No function behavior, application migration, operational database or credential, watcher, listener, feed, application, API or Diary wiring, patient, clinical, product or protected data, provider or model call, command or write, deployment, production, release, Pages or protected ref is opened. docs/branding remains excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

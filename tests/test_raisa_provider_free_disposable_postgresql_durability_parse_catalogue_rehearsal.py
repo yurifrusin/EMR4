@@ -185,6 +185,13 @@ ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH = (
 ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE = json.loads(
     ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-dml-name-ambiguity-characterization.json"
+)
+DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE = json.loads(
+    DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1109,6 +1116,56 @@ def test_alias_lock_visibility_exact_reproduction_is_distinct_pass() -> None:
     )
 
 
+def test_dml_name_ambiguity_characterization_is_exact_nonaccepting_parent() -> None:
+    evidence = DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c"
+    )
+    assert evidence["attempt_id"] == "1dcabd0341a3770703633468"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_427_373,
+        "artifact_sha256": (
+            "sha256:b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc"
+        ),
+        "contract_sha256": (
+            "sha256:ad1a34dd0f94ea72351fe14ec9c2221c9cb24656ed18a345d41c1ab78127975d"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 413,
+    }
+    exact_digests = {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    assert exact_digests == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert exact_digests == {
+        key: value
+        for key, value in ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "a90453f42aa6c3fe2afd8dd2403f9f85bc60803d087ea2c0849116754897f339"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
 def test_digest_nullability_query_drift_is_preserved_fail_closed() -> None:
     evidence = DIGEST_NULLABILITY_QUERY_DRIFT_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
@@ -1293,7 +1350,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_392_201
+    assert len(artifact) == 1_427_373
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 389
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001

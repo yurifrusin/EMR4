@@ -80,10 +80,14 @@ ALIAS_LOCK_VISIBILITY_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
     "alias-lock-visibility-rebind.md"
 )
+DML_NAME_AMBIGUITY_REBIND = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
+    "dml-name-ambiguity-rebind.md"
+)
 
-PARENT_HEAD = "958f8178c872854ab0f8e1c56dbb9fe46afbea22"
+PARENT_HEAD = "9513b1f8a845b29473a2ca402fcee2ac2b11eebe"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "64cbc2b0e17276387c6815af02a2d0635fc538e3408995c1054ecbc708b5cbae"
+PARENT_DIGEST = "b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc"
 
 
 def _text(path: Path) -> str:
@@ -111,6 +115,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         JSON_KEY_SET_ORDER_RECOVERY,
         JSON_KEY_SET_ORDER_REBIND,
         ALIAS_LOCK_VISIBILITY_REBIND,
+        DML_NAME_AMBIGUITY_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
@@ -119,16 +124,19 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_392_201
+    assert manifest["sql_byte_count"] == 1_427_373
     assert manifest["statement_count"] == 413
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "1,392,201 canonical LF bytes" in plan
+    assert "1,427,373 canonical LF bytes" in plan
     assert "statement count `413`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
+    assert "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c" in plan
+    assert "f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673" in plan
+    assert "distinct newly owned networkless container" in plan
 
 
 def test_runtime_profile_is_no_pull_no_network_no_mount_and_exact_owned() -> None:
