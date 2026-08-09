@@ -1,0 +1,98 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "diagnose_attempt_034_from_immutable_evidence_then_derive_the_narrowest_fail_closed_parent_body_row_shape_and_null_safe_reload_recovery_before_any_further_database_or_provider_contact",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton authorises the frozen twenty-scenario provider-free disposable PostgreSQL Context Fabric behavior proof and evidence-backed diagnose-repair-rerun cycles until success or bounded exhaustion. Attempt 034 is the current immutable failure: BTR-E03 reached the admission insert and PostgreSQL rejected it with SQLSTATE 23514. Exact cleanup and mutable-evidence restoration passed.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled material parent-body diagnosis, recovery architecture, deterministic verification, catalogue rebind, exact-head veto, later serial database rerun, cleanup and acceptance. A bounded worker is not economical for this stateful recovery. Gemini 3.6 Flash/high is eligible only for a fresh read-only veto after the complete changed candidate passes deterministic gates.",
+    "active_plan_and_acceptance": "The accepted plan freezes all twenty scenarios, exact principals, SQLSTATEs, RLS, transaction and rollback meaning and expressly requires architecture-strengthening recovery rather than scenario weakening. Static reconciliation maps attempt-034 SQLSTATE 23514 to accepted check ck_cf_04_02: PRIMARY rows require attempted_admission_digest and conflict_reason null while CONFLICT rows require the five primary outcome fields null and attempted_admission_digest plus conflict_reason non-null. The accepted body generator currently populates the attempted digest and all outcome fields for both row kinds and generates ordinary equality against null in five insert-or-reload winner predicates. The recovery must make row projections kind-correct and reload comparison null-safe, then regenerate and rebind every changed parent before another behavior run.",
+    "protected_evidence_boundaries": "Preserve immutable failure 034 SHA-256 68d61a9c55c800ca1670c6e0e7cde3e720486a82e2125649f64375844c09262a, immutable failure 033 and diagnosis, mutable accepted behavior evidence SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b, accepted parse evidence SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and protected parse failure evidence SHA-256 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c. Do not open Docker/PostgreSQL during diagnosis or source repair. Do not inspect docs/branding or protected holdouts. Operational database/credentials/persistence, product/patient/clinical data, watcher/listener/feed, application/API/Diary command/write, providers before deterministic exact-head review, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at exact HEAD df5352fb6964cad6e15195cfe8c9e17346a061b4; origin task is 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean before this receipt; all existing untracked files, especially docs/branding, remain preserved and excluded from broad staging."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "attempt_034_admission_row_shape_recovery_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol preserved failure 034, restored mutable evidence, verified exact owned-container absence and reconciled the row-shape contradiction statically."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this tightly coupled parent-chain recovery."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The previous fixture candidate passed its consumed review; any changed body/DDL/catalogue/behavior candidate requires a fresh exact-head veto after deterministic gates."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    },
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "exact_attempt_034_result_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Attempt 034 used the exact accepted image, failed closed, removed its exact captured owned container and verified absence. No database container remains active for this recovery."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-034.json",
+    "orchestration/agent_inbox/codex/raisa-context-fabric-durability-source-membership-behavior-attempt-034-predispatch-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

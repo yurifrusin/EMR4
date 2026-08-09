@@ -779,7 +779,7 @@ def test_all_effective_programs_accounted_and_expression_ceiling() -> None:
     assert manifest["effective_program_count"] == 23
     assert len(accounting) == 23
     assert sum(row["node_count"] for row in accounting) == 756
-    assert sum(row["expression_count"] for row in accounting) == 14488
+    assert sum(row["expression_count"] for row in accounting) == 14397
     for row in accounting:
         assert sum(row["instruction_counts"].values()) == row["node_count"]
     parents = _parents()

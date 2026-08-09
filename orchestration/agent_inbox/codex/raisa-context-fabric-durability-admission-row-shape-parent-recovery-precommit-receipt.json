@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_provider_free_admission_row_shape_parent_recovery_paths_on_the_task_branch_without_moving_any_protected_ref",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The generator now emits exact kind-specific admission bindings and IS NULL for typed-null insert-or-reload predicates. Canonical body SHA-256 is d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3; inert SQL is 1435142 LF bytes with SHA-256 ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb and retains 421 statements. Builder check, inert check, 320 focused tests, nine-file Ruff lint/format and diff check pass.",
+    "current_authority_allocation": "GPT Sol alone owns deterministic diagnosis, parent repair, explicit-path commit and later serial parse/behavior recovery. No worker, operational database, product surface or command path has authority. A fresh independent verifier will be leased only after this exact committed parent candidate exists.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at df5352fb6964cad6e15195cfe8c9e17346a061b4 before this commit. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked changes and new files are the explicit parent-recovery candidate; all unrelated untracked files remain preserved and excluded.",
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior proof. Attempt 034 failed closed at BTR-E03 with SQLSTATE 23514 and zero admitted scenarios. Deterministic diagnosis proves a parent body defect in disjoint PRIMARY/CONFLICT row shapes and five typed-null winner comparisons; this commit preserves that failure and repairs only the parent generator and generated inert artifacts.",
+    "protected_evidence_boundaries": "Commit only explicitly named parent-recovery, immutable failure/diagnosis, Ariadne and test paths. Preserve every other untracked file and never stage docs/branding. Mutable accepted behavior evidence remains SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b; accepted parse evidence remains 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec; protected parse failure evidence remains 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c. No Docker run, provider call, watcher/feed, operational database, application/API/Diary write, patient/product/clinical data, deployment, Pages, production, release or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

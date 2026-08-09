@@ -1,7 +1,7 @@
 {
   "schema_version": "raisa.context_fabric.function_trigger_body_architecture.v3",
   "status": "architecture_only_unmounted_typed_ir",
-  "contract_sha256": "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e",
+  "contract_sha256": "sha256:d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3",
   "parent_binding": {
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
     "contract_sha256": "sha256:ff64b568d65d243ad5bb3dd8159063f47732b0b360efcc12f58d3b28ceb00d9a",
@@ -7090,71 +7090,41 @@
                             {
                               "column": "observation_digest",
                               "value": {
-                                "op": "FIELD",
-                                "source": {
-                                  "op": "REF",
-                                  "kind": "INPUT",
-                                  "symbol": "proofread_packet",
-                                  "type": "emr4_context_fabric.proofread_packet_v1"
-                                },
-                                "field": "observation_digest",
-                                "type": "emr4_context_fabric.digest_sha256"
+                                "op": "CONST",
+                                "type": "emr4_context_fabric.digest_sha256",
+                                "value": null
                               }
                             },
                             {
                               "column": "decision",
                               "value": {
-                                "op": "FIELD",
-                                "source": {
-                                  "op": "REF",
-                                  "kind": "INPUT",
-                                  "symbol": "proofread_packet",
-                                  "type": "emr4_context_fabric.proofread_packet_v1"
-                                },
-                                "field": "decision",
-                                "type": "emr4_context_fabric.observation_decision"
+                                "op": "CONST",
+                                "type": "emr4_context_fabric.observation_decision",
+                                "value": null
                               }
                             },
                             {
                               "column": "reason_code",
                               "value": {
-                                "op": "FIELD",
-                                "source": {
-                                  "op": "REF",
-                                  "kind": "INPUT",
-                                  "symbol": "proofread_packet",
-                                  "type": "emr4_context_fabric.proofread_packet_v1"
-                                },
-                                "field": "reason_code",
-                                "type": "emr4_context_fabric.observation_reason"
+                                "op": "CONST",
+                                "type": "emr4_context_fabric.observation_reason",
+                                "value": null
                               }
                             },
                             {
                               "column": "affected_frame_mask",
                               "value": {
-                                "op": "FIELD",
-                                "source": {
-                                  "op": "REF",
-                                  "kind": "INPUT",
-                                  "symbol": "proofread_packet",
-                                  "type": "emr4_context_fabric.proofread_packet_v1"
-                                },
-                                "field": "affected_frame_mask",
-                                "type": "emr4_context_fabric.frame_mask"
+                                "op": "CONST",
+                                "type": "emr4_context_fabric.frame_mask",
+                                "value": null
                               }
                             },
                             {
                               "column": "checkpoint_disposition",
                               "value": {
-                                "op": "FIELD",
-                                "source": {
-                                  "op": "REF",
-                                  "kind": "INPUT",
-                                  "symbol": "proofread_packet",
-                                  "type": "emr4_context_fabric.proofread_packet_v1"
-                                },
-                                "field": "checkpoint_disposition",
-                                "type": "emr4_context_fabric.checkpoint_disposition"
+                                "op": "CONST",
+                                "type": "emr4_context_fabric.checkpoint_disposition",
+                                "value": null
                               }
                             },
                             {
@@ -7786,111 +7756,56 @@
                                 "type": "pg_catalog.boolean"
                               },
                               {
-                                "op": "EQ",
-                                "left": {
+                                "op": "IS_NULL",
+                                "operand": {
                                   "op": "REF",
                                   "kind": "SOURCE_COLUMN",
                                   "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                   "column": "observation_digest",
                                   "type": "emr4_context_fabric.digest_sha256"
                                 },
-                                "right": {
-                                  "op": "FIELD",
-                                  "source": {
-                                    "op": "REF",
-                                    "kind": "INPUT",
-                                    "symbol": "proofread_packet",
-                                    "type": "emr4_context_fabric.proofread_packet_v1"
-                                  },
-                                  "field": "observation_digest",
-                                  "type": "emr4_context_fabric.digest_sha256"
-                                },
                                 "type": "pg_catalog.boolean"
                               },
                               {
-                                "op": "EQ",
-                                "left": {
+                                "op": "IS_NULL",
+                                "operand": {
                                   "op": "REF",
                                   "kind": "SOURCE_COLUMN",
                                   "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                   "column": "decision",
                                   "type": "emr4_context_fabric.observation_decision"
                                 },
-                                "right": {
-                                  "op": "FIELD",
-                                  "source": {
-                                    "op": "REF",
-                                    "kind": "INPUT",
-                                    "symbol": "proofread_packet",
-                                    "type": "emr4_context_fabric.proofread_packet_v1"
-                                  },
-                                  "field": "decision",
-                                  "type": "emr4_context_fabric.observation_decision"
-                                },
                                 "type": "pg_catalog.boolean"
                               },
                               {
-                                "op": "EQ",
-                                "left": {
+                                "op": "IS_NULL",
+                                "operand": {
                                   "op": "REF",
                                   "kind": "SOURCE_COLUMN",
                                   "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                   "column": "reason_code",
                                   "type": "emr4_context_fabric.observation_reason"
                                 },
-                                "right": {
-                                  "op": "FIELD",
-                                  "source": {
-                                    "op": "REF",
-                                    "kind": "INPUT",
-                                    "symbol": "proofread_packet",
-                                    "type": "emr4_context_fabric.proofread_packet_v1"
-                                  },
-                                  "field": "reason_code",
-                                  "type": "emr4_context_fabric.observation_reason"
-                                },
                                 "type": "pg_catalog.boolean"
                               },
                               {
-                                "op": "EQ",
-                                "left": {
+                                "op": "IS_NULL",
+                                "operand": {
                                   "op": "REF",
                                   "kind": "SOURCE_COLUMN",
                                   "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                   "column": "affected_frame_mask",
                                   "type": "emr4_context_fabric.frame_mask"
                                 },
-                                "right": {
-                                  "op": "FIELD",
-                                  "source": {
-                                    "op": "REF",
-                                    "kind": "INPUT",
-                                    "symbol": "proofread_packet",
-                                    "type": "emr4_context_fabric.proofread_packet_v1"
-                                  },
-                                  "field": "affected_frame_mask",
-                                  "type": "emr4_context_fabric.frame_mask"
-                                },
                                 "type": "pg_catalog.boolean"
                               },
                               {
-                                "op": "EQ",
-                                "left": {
+                                "op": "IS_NULL",
+                                "operand": {
                                   "op": "REF",
                                   "kind": "SOURCE_COLUMN",
                                   "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                   "column": "checkpoint_disposition",
-                                  "type": "emr4_context_fabric.checkpoint_disposition"
-                                },
-                                "right": {
-                                  "op": "FIELD",
-                                  "source": {
-                                    "op": "REF",
-                                    "kind": "INPUT",
-                                    "symbol": "proofread_packet",
-                                    "type": "emr4_context_fabric.proofread_packet_v1"
-                                  },
-                                  "field": "checkpoint_disposition",
                                   "type": "emr4_context_fabric.checkpoint_disposition"
                                 },
                                 "type": "pg_catalog.boolean"
@@ -9642,71 +9557,41 @@
                                   {
                                     "column": "observation_digest",
                                     "value": {
-                                      "op": "FIELD",
-                                      "source": {
-                                        "op": "REF",
-                                        "kind": "INPUT",
-                                        "symbol": "proofread_packet",
-                                        "type": "emr4_context_fabric.proofread_packet_v1"
-                                      },
-                                      "field": "observation_digest",
-                                      "type": "emr4_context_fabric.digest_sha256"
+                                      "op": "CONST",
+                                      "type": "emr4_context_fabric.digest_sha256",
+                                      "value": null
                                     }
                                   },
                                   {
                                     "column": "decision",
                                     "value": {
-                                      "op": "FIELD",
-                                      "source": {
-                                        "op": "REF",
-                                        "kind": "INPUT",
-                                        "symbol": "proofread_packet",
-                                        "type": "emr4_context_fabric.proofread_packet_v1"
-                                      },
-                                      "field": "decision",
-                                      "type": "emr4_context_fabric.observation_decision"
+                                      "op": "CONST",
+                                      "type": "emr4_context_fabric.observation_decision",
+                                      "value": null
                                     }
                                   },
                                   {
                                     "column": "reason_code",
                                     "value": {
-                                      "op": "FIELD",
-                                      "source": {
-                                        "op": "REF",
-                                        "kind": "INPUT",
-                                        "symbol": "proofread_packet",
-                                        "type": "emr4_context_fabric.proofread_packet_v1"
-                                      },
-                                      "field": "reason_code",
-                                      "type": "emr4_context_fabric.observation_reason"
+                                      "op": "CONST",
+                                      "type": "emr4_context_fabric.observation_reason",
+                                      "value": null
                                     }
                                   },
                                   {
                                     "column": "affected_frame_mask",
                                     "value": {
-                                      "op": "FIELD",
-                                      "source": {
-                                        "op": "REF",
-                                        "kind": "INPUT",
-                                        "symbol": "proofread_packet",
-                                        "type": "emr4_context_fabric.proofread_packet_v1"
-                                      },
-                                      "field": "affected_frame_mask",
-                                      "type": "emr4_context_fabric.frame_mask"
+                                      "op": "CONST",
+                                      "type": "emr4_context_fabric.frame_mask",
+                                      "value": null
                                     }
                                   },
                                   {
                                     "column": "checkpoint_disposition",
                                     "value": {
-                                      "op": "FIELD",
-                                      "source": {
-                                        "op": "REF",
-                                        "kind": "INPUT",
-                                        "symbol": "proofread_packet",
-                                        "type": "emr4_context_fabric.proofread_packet_v1"
-                                      },
-                                      "field": "checkpoint_disposition",
-                                      "type": "emr4_context_fabric.checkpoint_disposition"
+                                      "op": "CONST",
+                                      "type": "emr4_context_fabric.checkpoint_disposition",
+                                      "value": null
                                     }
                                   },
                                   {
@@ -10338,111 +10223,56 @@
                                       "type": "pg_catalog.boolean"
                                     },
                                     {
-                                      "op": "EQ",
-                                      "left": {
+                                      "op": "IS_NULL",
+                                      "operand": {
                                         "op": "REF",
                                         "kind": "SOURCE_COLUMN",
                                         "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                         "column": "observation_digest",
                                         "type": "emr4_context_fabric.digest_sha256"
                                       },
-                                      "right": {
-                                        "op": "FIELD",
-                                        "source": {
-                                          "op": "REF",
-                                          "kind": "INPUT",
-                                          "symbol": "proofread_packet",
-                                          "type": "emr4_context_fabric.proofread_packet_v1"
-                                        },
-                                        "field": "observation_digest",
-                                        "type": "emr4_context_fabric.digest_sha256"
-                                      },
                                       "type": "pg_catalog.boolean"
                                     },
                                     {
-                                      "op": "EQ",
-                                      "left": {
+                                      "op": "IS_NULL",
+                                      "operand": {
                                         "op": "REF",
                                         "kind": "SOURCE_COLUMN",
                                         "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                         "column": "decision",
                                         "type": "emr4_context_fabric.observation_decision"
                                       },
-                                      "right": {
-                                        "op": "FIELD",
-                                        "source": {
-                                          "op": "REF",
-                                          "kind": "INPUT",
-                                          "symbol": "proofread_packet",
-                                          "type": "emr4_context_fabric.proofread_packet_v1"
-                                        },
-                                        "field": "decision",
-                                        "type": "emr4_context_fabric.observation_decision"
-                                      },
                                       "type": "pg_catalog.boolean"
                                     },
                                     {
-                                      "op": "EQ",
-                                      "left": {
+                                      "op": "IS_NULL",
+                                      "operand": {
                                         "op": "REF",
                                         "kind": "SOURCE_COLUMN",
                                         "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                         "column": "reason_code",
                                         "type": "emr4_context_fabric.observation_reason"
                                       },
-                                      "right": {
-                                        "op": "FIELD",
-                                        "source": {
-                                          "op": "REF",
-                                          "kind": "INPUT",
-                                          "symbol": "proofread_packet",
-                                          "type": "emr4_context_fabric.proofread_packet_v1"
-                                        },
-                                        "field": "reason_code",
-                                        "type": "emr4_context_fabric.observation_reason"
-                                      },
                                       "type": "pg_catalog.boolean"
                                     },
                                     {
-                                      "op": "EQ",
-                                      "left": {
+                                      "op": "IS_NULL",
+                                      "operand": {
                                         "op": "REF",
                                         "kind": "SOURCE_COLUMN",
                                         "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                         "column": "affected_frame_mask",
                                         "type": "emr4_context_fabric.frame_mask"
                                       },
-                                      "right": {
-                                        "op": "FIELD",
-                                        "source": {
-                                          "op": "REF",
-                                          "kind": "INPUT",
-                                          "symbol": "proofread_packet",
-                                          "type": "emr4_context_fabric.proofread_packet_v1"
-                                        },
-                                        "field": "affected_frame_mask",
-                                        "type": "emr4_context_fabric.frame_mask"
-                                      },
                                       "type": "pg_catalog.boolean"
                                     },
                                     {
-                                      "op": "EQ",
-                                      "left": {
+                                      "op": "IS_NULL",
+                                      "operand": {
                                         "op": "REF",
                                         "kind": "SOURCE_COLUMN",
                                         "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                         "column": "checkpoint_disposition",
-                                        "type": "emr4_context_fabric.checkpoint_disposition"
-                                      },
-                                      "right": {
-                                        "op": "FIELD",
-                                        "source": {
-                                          "op": "REF",
-                                          "kind": "INPUT",
-                                          "symbol": "proofread_packet",
-                                          "type": "emr4_context_fabric.proofread_packet_v1"
-                                        },
-                                        "field": "checkpoint_disposition",
                                         "type": "emr4_context_fabric.checkpoint_disposition"
                                       },
                                       "type": "pg_catalog.boolean"
@@ -11067,160 +10897,9 @@
                                   {
                                     "column": "attempted_admission_digest",
                                     "value": {
-                                      "op": "CANONICAL_DIGEST",
-                                      "profile": "emr4_context_fabric.admission_digest_v1",
-                                      "operands": [
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "generation_locator",
-                                            "type": "emr4_context_fabric.generation_locator_v1"
-                                          },
-                                          "field": "practice_id",
-                                          "type": "pg_catalog.uuid"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "generation_locator",
-                                            "type": "emr4_context_fabric.generation_locator_v1"
-                                          },
-                                          "field": "source_contract_id",
-                                          "type": "emr4_context_fabric.source_contract_code"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "generation_locator",
-                                            "type": "emr4_context_fabric.generation_locator_v1"
-                                          },
-                                          "field": "stream_id",
-                                          "type": "pg_catalog.uuid"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "generation_locator",
-                                            "type": "emr4_context_fabric.generation_locator_v1"
-                                          },
-                                          "field": "stream_epoch",
-                                          "type": "pg_catalog.bigint"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "generation_locator",
-                                            "type": "emr4_context_fabric.generation_locator_v1"
-                                          },
-                                          "field": "observer_id",
-                                          "type": "pg_catalog.uuid"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "generation_locator",
-                                            "type": "emr4_context_fabric.generation_locator_v1"
-                                          },
-                                          "field": "observer_generation",
-                                          "type": "pg_catalog.bigint"
-                                        },
-                                        {
-                                          "op": "REF",
-                                          "kind": "INPUT",
-                                          "symbol": "source_position",
-                                          "type": "pg_catalog.bigint"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "proofread_packet",
-                                            "type": "emr4_context_fabric.proofread_packet_v1"
-                                          },
-                                          "field": "observation_digest",
-                                          "type": "emr4_context_fabric.digest_sha256"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "proofread_packet",
-                                            "type": "emr4_context_fabric.proofread_packet_v1"
-                                          },
-                                          "field": "decision",
-                                          "type": "emr4_context_fabric.observation_decision"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "proofread_packet",
-                                            "type": "emr4_context_fabric.proofread_packet_v1"
-                                          },
-                                          "field": "reason_code",
-                                          "type": "emr4_context_fabric.observation_reason"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "proofread_packet",
-                                            "type": "emr4_context_fabric.proofread_packet_v1"
-                                          },
-                                          "field": "affected_frame_mask",
-                                          "type": "emr4_context_fabric.frame_mask"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "proofread_packet",
-                                            "type": "emr4_context_fabric.proofread_packet_v1"
-                                          },
-                                          "field": "checkpoint_disposition",
-                                          "type": "emr4_context_fabric.checkpoint_disposition"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "proofread_packet",
-                                            "type": "emr4_context_fabric.proofread_packet_v1"
-                                          },
-                                          "field": "key_id",
-                                          "type": "emr4_context_fabric.key_id"
-                                        },
-                                        {
-                                          "op": "FIELD",
-                                          "source": {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "proofread_packet",
-                                            "type": "emr4_context_fabric.proofread_packet_v1"
-                                          },
-                                          "field": "source_membership_digest",
-                                          "type": "emr4_context_fabric.digest_sha256"
-                                        }
-                                      ],
-                                      "type": "emr4_context_fabric.digest_sha256"
+                                      "op": "CONST",
+                                      "type": "emr4_context_fabric.digest_sha256",
+                                      "value": null
                                     }
                                   },
                                   {
@@ -11803,185 +11482,24 @@
                                       "type": "pg_catalog.boolean"
                                     },
                                     {
-                                      "op": "EQ",
-                                      "left": {
+                                      "op": "IS_NULL",
+                                      "operand": {
                                         "op": "REF",
                                         "kind": "SOURCE_COLUMN",
                                         "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                         "column": "attempted_admission_digest",
                                         "type": "emr4_context_fabric.digest_sha256"
                                       },
-                                      "right": {
-                                        "op": "CANONICAL_DIGEST",
-                                        "profile": "emr4_context_fabric.admission_digest_v1",
-                                        "operands": [
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "generation_locator",
-                                              "type": "emr4_context_fabric.generation_locator_v1"
-                                            },
-                                            "field": "practice_id",
-                                            "type": "pg_catalog.uuid"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "generation_locator",
-                                              "type": "emr4_context_fabric.generation_locator_v1"
-                                            },
-                                            "field": "source_contract_id",
-                                            "type": "emr4_context_fabric.source_contract_code"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "generation_locator",
-                                              "type": "emr4_context_fabric.generation_locator_v1"
-                                            },
-                                            "field": "stream_id",
-                                            "type": "pg_catalog.uuid"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "generation_locator",
-                                              "type": "emr4_context_fabric.generation_locator_v1"
-                                            },
-                                            "field": "stream_epoch",
-                                            "type": "pg_catalog.bigint"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "generation_locator",
-                                              "type": "emr4_context_fabric.generation_locator_v1"
-                                            },
-                                            "field": "observer_id",
-                                            "type": "pg_catalog.uuid"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "generation_locator",
-                                              "type": "emr4_context_fabric.generation_locator_v1"
-                                            },
-                                            "field": "observer_generation",
-                                            "type": "pg_catalog.bigint"
-                                          },
-                                          {
-                                            "op": "REF",
-                                            "kind": "INPUT",
-                                            "symbol": "source_position",
-                                            "type": "pg_catalog.bigint"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "proofread_packet",
-                                              "type": "emr4_context_fabric.proofread_packet_v1"
-                                            },
-                                            "field": "observation_digest",
-                                            "type": "emr4_context_fabric.digest_sha256"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "proofread_packet",
-                                              "type": "emr4_context_fabric.proofread_packet_v1"
-                                            },
-                                            "field": "decision",
-                                            "type": "emr4_context_fabric.observation_decision"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "proofread_packet",
-                                              "type": "emr4_context_fabric.proofread_packet_v1"
-                                            },
-                                            "field": "reason_code",
-                                            "type": "emr4_context_fabric.observation_reason"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "proofread_packet",
-                                              "type": "emr4_context_fabric.proofread_packet_v1"
-                                            },
-                                            "field": "affected_frame_mask",
-                                            "type": "emr4_context_fabric.frame_mask"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "proofread_packet",
-                                              "type": "emr4_context_fabric.proofread_packet_v1"
-                                            },
-                                            "field": "checkpoint_disposition",
-                                            "type": "emr4_context_fabric.checkpoint_disposition"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "proofread_packet",
-                                              "type": "emr4_context_fabric.proofread_packet_v1"
-                                            },
-                                            "field": "key_id",
-                                            "type": "emr4_context_fabric.key_id"
-                                          },
-                                          {
-                                            "op": "FIELD",
-                                            "source": {
-                                              "op": "REF",
-                                              "kind": "INPUT",
-                                              "symbol": "proofread_packet",
-                                              "type": "emr4_context_fabric.proofread_packet_v1"
-                                            },
-                                            "field": "source_membership_digest",
-                                            "type": "emr4_context_fabric.digest_sha256"
-                                          }
-                                        ],
-                                        "type": "emr4_context_fabric.digest_sha256"
-                                      },
                                       "type": "pg_catalog.boolean"
                                     },
                                     {
-                                      "op": "EQ",
-                                      "left": {
+                                      "op": "IS_NULL",
+                                      "operand": {
                                         "op": "REF",
                                         "kind": "SOURCE_COLUMN",
                                         "relation": "emr4_context_fabric.context_proofread_observation_admission",
                                         "column": "conflict_reason",
                                         "type": "emr4_context_fabric.admission_conflict_reason"
-                                      },
-                                      "right": {
-                                        "op": "CONST",
-                                        "type": "emr4_context_fabric.admission_conflict_reason",
-                                        "value": null
                                       },
                                       "type": "pg_catalog.boolean"
                                     },
@@ -56853,34 +56371,24 @@
                           "type": "pg_catalog.boolean"
                         },
                         {
-                          "op": "EQ",
-                          "left": {
+                          "op": "IS_NULL",
+                          "operand": {
                             "op": "REF",
                             "kind": "SOURCE_COLUMN",
                             "relation": "emr4_context_fabric.context_observer_generation",
                             "column": "consumed_at",
                             "type": "pg_catalog.timestamptz"
                           },
-                          "right": {
-                            "op": "CONST",
-                            "type": "pg_catalog.timestamptz",
-                            "value": null
-                          },
                           "type": "pg_catalog.boolean"
                         },
                         {
-                          "op": "EQ",
-                          "left": {
+                          "op": "IS_NULL",
+                          "operand": {
                             "op": "REF",
                             "kind": "SOURCE_COLUMN",
                             "relation": "emr4_context_fabric.context_observer_generation",
                             "column": "terminal_reason",
                             "type": "emr4_context_fabric.generation_terminal_reason"
-                          },
-                          "right": {
-                            "op": "CONST",
-                            "type": "emr4_context_fabric.generation_terminal_reason",
-                            "value": null
                           },
                           "type": "pg_catalog.boolean"
                         }
@@ -58934,18 +58442,13 @@
                           "type": "pg_catalog.boolean"
                         },
                         {
-                          "op": "EQ",
-                          "left": {
+                          "op": "IS_NULL",
+                          "operand": {
                             "op": "REF",
                             "kind": "SOURCE_COLUMN",
                             "relation": "emr4_context_fabric.context_frame_generation",
                             "column": "retired_at",
                             "type": "pg_catalog.timestamptz"
-                          },
-                          "right": {
-                            "op": "CONST",
-                            "type": "pg_catalog.timestamptz",
-                            "value": null
                           },
                           "type": "pg_catalog.boolean"
                         }
@@ -59414,18 +58917,13 @@
                           "type": "pg_catalog.boolean"
                         },
                         {
-                          "op": "EQ",
-                          "left": {
+                          "op": "IS_NULL",
+                          "operand": {
                             "op": "REF",
                             "kind": "SOURCE_COLUMN",
                             "relation": "emr4_context_fabric.context_frame_generation",
                             "column": "retired_at",
                             "type": "pg_catalog.timestamptz"
-                          },
-                          "right": {
-                            "op": "CONST",
-                            "type": "pg_catalog.timestamptz",
-                            "value": null
                           },
                           "type": "pg_catalog.boolean"
                         }
@@ -77059,18 +76557,13 @@
                           "type": "pg_catalog.boolean"
                         },
                         {
-                          "op": "EQ",
-                          "left": {
+                          "op": "IS_NULL",
+                          "operand": {
                             "op": "REF",
                             "kind": "SOURCE_COLUMN",
                             "relation": "emr4_context_fabric.context_durability_lifecycle",
                             "column": "source_position",
                             "type": "pg_catalog.bigint"
-                          },
-                          "right": {
-                            "op": "CONST",
-                            "type": "pg_catalog.bigint",
-                            "value": null
                           },
                           "type": "pg_catalog.boolean"
                         },

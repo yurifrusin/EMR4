@@ -1,0 +1,56 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-034-admission-row-shape-diagnosis.v1",
+  "status": "deterministic_body_to_admission_check_contradiction_proven_cleanup_verified",
+  "parent_failure": {
+    "run_sequence": 34,
+    "internal_attempt_id": "ef5776640bc23a0ff88c9167",
+    "evidence_sha256": "sha256:68d61a9c55c800ca1670c6e0e7cde3e720486a82e2125649f64375844c09262a",
+    "scenario_id": "BTR-E03",
+    "sqlstate": "23514",
+    "cleanup_absence_verified": true
+  },
+  "diagnosis": {
+    "constraint": "ck_cf_04_02",
+    "primary_violation": "attempted_admission_digest_populated_but_must_be_null",
+    "latent_conflict_violation": "primary_outcome_fields_populated_but_must_be_null",
+    "latent_reload_violation": "ordinary_equality_used_against_null_in_five_winner_predicates",
+    "null_equality_winners": {
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_primary": [
+        "conflict_reason"
+      ],
+      "emr4_context_fabric.register_observer_generation_v1.diary_frame": [
+        "retired_at"
+      ],
+      "emr4_context_fabric.register_observer_generation_v1.generation_insert": [
+        "consumed_at",
+        "terminal_reason"
+      ],
+      "emr4_context_fabric.register_observer_generation_v1.waiting_frame": [
+        "retired_at"
+      ],
+      "emr4_context_fabric.rotate_observation_key_v1.lifecycle_insert": [
+        "source_position"
+      ]
+    },
+    "body_source_sha256": "sha256:01f92356def997b96adb3115cfb4b82afc29a27e72cab5823c81a6b5f2e2a7f1",
+    "body_contract_sha256": "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e",
+    "structural_source_sha256": "sha256:5b5e3bc3108dc1105017f57ceade03c4bce33b898d7b71f0ede0640ce0bc83c7",
+    "entry_programs_source_sha256": "sha256:81247961312f5d59965c67aa6ee2956de088675b531d1e5aa6a8d877b3b2ecf1",
+    "inert_sql_source_sha256": "sha256:8756f315a3f1112551550141c1fff83d047ff24103b357e97ddb17b0c805e470",
+    "raw_postgresql_error_persisted": false,
+    "additional_container_runs": 0
+  },
+  "bounded_repair": {
+    "primary_row_shape": "outcome_fields_present_attempted_digest_null_conflict_reason_null",
+    "conflict_row_shape": "outcome_fields_null_attempted_digest_present_conflict_reason_present",
+    "null_reload_comparison": "is_null_for_typed_null_bindings",
+    "body_program_change": true,
+    "inert_artifact_regeneration": true,
+    "parse_catalogue_rebind_required": true,
+    "behavior_parent_rebind_required": true,
+    "scenario_population_change": false,
+    "principal_or_sqlstate_change": false,
+    "authority_change": false
+  },
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority"
+}

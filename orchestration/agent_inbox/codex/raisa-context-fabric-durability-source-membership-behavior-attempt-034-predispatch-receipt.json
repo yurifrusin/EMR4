@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_fixed_path_provider_free_authored_synthetic_behavior_attempt_034_in_one_new_networkless_postgresql_16_container_then_preserve_the_result_restore_mutable_evidence_and_verify_exact_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Behavior contract canonical SHA-256 d3355c4459042b97518cba6dcb54c8b861aaa502ab6cf7a096cd948fbaefcbc7 binds the accepted parents and unchanged twenty scenarios in counts 6/4/3/4/3 with population SHA-256 eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. The exact 572-test and 38-file Ruff packets passed twice, including independent review. The local pull-never postgres:16-bookworm image resolves exactly to sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8.",
+    "current_authority_allocation": "GPT Sol alone owns this serial fixed-path behavior run, result classification, immutable evidence copy, mutable-evidence restoration and exact cleanup acceptance. No worker, verifier, product surface or operational database owns execution. The independent verifier lease is complete.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at exact HEAD df5352fb6964cad6e15195cfe8c9e17346a061b4. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree is clean before this receipt; all existing untracked files, especially docs/branding, remain preserved and excluded.",
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior proof. Attempt 033 failed closed at BTR-E03; its exact diagnosis, narrow full-row source-membership fixture recovery, 572-test deterministic packet and fresh Gemini 3.6 Flash/high veto are accepted through task HEAD df5352fb. Attempt 034 is the next dependency-satisfied action under the user's standing uninterrupted gate authority.",
+    "protected_evidence_boundaries": "Run the fixed no-argument behavior harness exactly once. It must use pull-never, network none, no ports, no mounts, container-local tmpfs and exact captured-ID cleanup. Inputs and outputs are authored-synthetic and bounded. Never list or touch unrelated containers. Mutable accepted behavior evidence was copied to exact external backup C:/Users/sarashera/AppData/Local/Temp/emr4-context-fabric-behavior-evidence-attempt034-df5352fb.json with matching SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and must be restored after the run result is copied to a new immutable attempt-034 path. No operational credential/database, product/patient/protected data, provider call, watcher/feed, application wiring, API/command, deployment, Pages, production, release or protected-ref action is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

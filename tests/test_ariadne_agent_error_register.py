@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 162
+    assert register["register_revision"] == 164
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 189)
+        f"AER-{index:04d}" for index in range(1, 191)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 119
+    assert len(agent_incidents) == 120
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2491,7 +2491,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 188
+    assert report["incident_count"] == 190
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2507,28 +2507,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 162
-    assert report["incident_count"] == 188
+    assert report["register_revision"] == 164
+    assert report["incident_count"] == 190
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 119,
+        "agent_behavior": 120,
         "harness": 21,
-        "repository": 40,
+        "repository": 41,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 19,
+        "command_scope_violation": 20,
         "evidence_misreport": 22,
         "harness_failure": 21,
         "output_contract_violation": 51,
         "read_only_violation": 3,
         "reasoning_claim_error": 24,
-        "repository_defect": 40,
+        "repository_defect": 41,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 59,
-        "canonical_unchanged": 107,
+        "accepted_candidate_changed": 60,
+        "canonical_unchanged": 108,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -3167,6 +3167,38 @@ def test_aer_0188_rejects_nonreproducible_passed_receipt() -> None:
     assert rejection["original_receipt"]["accepted"] is False
     assert rejection["additional_database_runs"] == 0
     assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0189_preserves_admission_row_shape_and_null_reload_defect() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0189"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "repository.generated_row_shape_contradicts_structural_check_and_null_reload_semantics"
+    )
+    assert "SQLSTATE 23514" in incident["observed_error"]
+    assert "five winner predicates" in incident["observed_error"]
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0190_preserves_masked_builder_failure_and_independent_rerun() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0190"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.sequential_required_command_failure_masked_by_later_exit"
+    )
+    assert "ModuleNotFoundError" in incident["observed_error"]
+    assert "python -m" in incident["correction"]["action"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert incident["status"] == "corrected"
 
 

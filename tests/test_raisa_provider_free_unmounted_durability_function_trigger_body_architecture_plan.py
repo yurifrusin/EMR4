@@ -1,5 +1,10 @@
 import json
 from pathlib import Path
+from typing import Any, Iterator
+
+from scripts.raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder import (
+    build_contract,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,6 +66,26 @@ def _implementation_recovery() -> str:
 
 def _typed_ir_recovery() -> str:
     return TYPED_IR_RECOVERY.read_text(encoding="utf-8")
+
+
+def _walk(value: Any) -> Iterator[dict[str, Any]]:
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _walk(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _walk(child)
+
+
+def _node(contract: dict[str, Any], node_id: str) -> dict[str, Any]:
+    matches = [node for node in _walk(contract) if node.get("node_id") == node_id]
+    assert len(matches) == 1
+    return matches[0]
+
+
+def _bindings(node: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {row["column"]: row["value"] for row in node["operands"]["bindings"]}
 
 
 def test_plan_binds_exact_parent_and_complete_body_population() -> None:
@@ -192,3 +217,62 @@ def test_plan_keeps_ddl_and_database_execution_in_later_gates() -> None:
         "live source/product",
     ):
         assert phrase in plan
+
+
+def test_admission_row_shapes_match_the_structural_check_constraint() -> None:
+    contract = build_contract()
+    prefix = "emr4_context_fabric.admit_proofread_observation_v1"
+    outcome_fields = {
+        "observation_digest",
+        "decision",
+        "reason_code",
+        "affected_frame_mask",
+        "checkpoint_disposition",
+    }
+
+    primary = _bindings(_node(contract, prefix + ".insert_primary"))
+    assert primary["entry_kind"]["value"] == "PRIMARY"
+    assert all(primary[field]["op"] == "FIELD" for field in outcome_fields)
+    assert primary["attempted_admission_digest"] == {
+        "op": "CONST",
+        "type": "emr4_context_fabric.digest_sha256",
+        "value": None,
+    }
+    assert primary["conflict_reason"]["value"] is None
+
+    for suffix in ("insert_mismatch", "insert_reuse"):
+        conflict = _bindings(_node(contract, prefix + "." + suffix))
+        assert conflict["entry_kind"]["value"] == "CONFLICT"
+        assert all(
+            conflict[field]["op"] == "CONST" and conflict[field]["value"] is None
+            for field in outcome_fields
+        )
+        assert conflict["attempted_admission_digest"]["op"] == "CANONICAL_DIGEST"
+        assert conflict["conflict_reason"]["value"] is not None
+
+
+def test_insert_reload_winner_predicates_use_is_null_for_typed_nulls() -> None:
+    contract = build_contract()
+    insert_nodes = [
+        node for node in _walk(contract) if node.get("op") == "INSERT_OR_RELOAD_COMPARE"
+    ]
+    assert insert_nodes
+
+    for insert in insert_nodes:
+        null_binding_columns = {
+            row["column"]
+            for row in insert["operands"]["bindings"]
+            if row["value"].get("op") == "CONST" and row["value"].get("value") is None
+        }
+        null_predicate_columns = {
+            predicate["operand"]["column"]
+            for predicate in _walk(insert["operands"]["winner_predicate"])
+            if predicate.get("op") == "IS_NULL"
+        }
+        assert null_predicate_columns == null_binding_columns
+        assert not any(
+            predicate.get("op") == "EQ"
+            and predicate.get("right", {}).get("op") == "CONST"
+            and predicate.get("right", {}).get("value") is None
+            for predicate in _walk(insert["operands"]["winner_predicate"])
+        )

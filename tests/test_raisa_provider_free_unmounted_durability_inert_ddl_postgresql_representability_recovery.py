@@ -45,7 +45,7 @@ def test_recovery_preserves_parent_and_closes_effective_population() -> None:
 
     assert (
         body["contract_sha256"]
-        == "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e"
+        == "sha256:d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3"
     )
     assert len(body["body_programs"]) == 22
     for required in (
