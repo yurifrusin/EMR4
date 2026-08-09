@@ -7,7 +7,7 @@
     "fabric_relations": 18,
     "fabric_type_owners": 32,
     "invariant_enforcement_bindings": 25,
-    "rls_policies": 44,
+    "rls_policies": 45,
     "roles": 8,
     "runtime_schema_create_grants": 0,
     "support_functions": 1,
@@ -210,13 +210,13 @@
   },
   "parents": {
     "body": {
-      "contract_sha256": "sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b",
+      "contract_sha256": "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
       "schema_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.schema.json",
       "source_head": "987f64a9f68c8dec2b99d5d39aa74e28411a82fa"
     },
     "structural": {
-      "contract_sha256": "sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e",
+      "contract_sha256": "sha256:00a4102ff0e884038e4a25f814dab84f5500b5e597058e30012b3a6d0be6514b",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
       "schema_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
       "source_head": "338c30ddb01561ce97a4b9837317e771b555c221"
@@ -268,7 +268,7 @@
     },
     "executable_ddl": false,
     "id": "postgresql_16_representability_recovery_v1",
-    "immutable_body_parent_sha256": "sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b",
+    "immutable_body_parent_sha256": "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268",
     "keyed_xmin_reselects": [
       {
         "cardinality_failure": {

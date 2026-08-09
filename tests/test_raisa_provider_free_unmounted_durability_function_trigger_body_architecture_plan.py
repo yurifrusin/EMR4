@@ -23,6 +23,10 @@ REGISTRATION_RLS_REBIND = ROOT / (
     "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
     "registration-rls-parent-rebind.md"
 )
+ALIAS_LOCK_POLICY_REBIND = ROOT / (
+    "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
+    "alias-lock-policy-parent-rebind.md"
+)
 PARENT = ROOT / (
     "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-"
     "transaction-architecture/migration-transaction-architecture-contract.json"
@@ -31,7 +35,7 @@ PLAN_PARENT_HASH = (
     "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8"
 )
 CURRENT_PARENT_HASH = (
-    "sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e"
+    "sha256:00a4102ff0e884038e4a25f814dab84f5500b5e597058e30012b3a6d0be6514b"
 )
 
 
@@ -60,7 +64,8 @@ def test_plan_binds_exact_parent_and_complete_body_population() -> None:
     parent = _parent()
 
     assert PLAN_PARENT_HASH in plan
-    assert CURRENT_PARENT_HASH in REGISTRATION_RLS_REBIND.read_text(encoding="utf-8")
+    assert "sha256:a79be259" in REGISTRATION_RLS_REBIND.read_text(encoding="utf-8")
+    assert CURRENT_PARENT_HASH in ALIAS_LOCK_POLICY_REBIND.read_text(encoding="utf-8")
     assert parent["contract_sha256"] == CURRENT_PARENT_HASH
     for body in parent["entry_points"] + parent["trigger_function_catalogue"]:
         assert f"`{body['name']}`" in plan

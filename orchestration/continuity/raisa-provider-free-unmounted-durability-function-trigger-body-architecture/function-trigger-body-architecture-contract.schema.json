@@ -11,7 +11,7 @@
       "type": "string"
     },
     "contract_sha256": {
-      "const": "sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b"
+      "const": "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268"
     },
     "parent_binding": {
       "type": "object",
@@ -20,7 +20,7 @@
           "const": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json"
         },
         "contract_sha256": {
-          "const": "sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e"
+          "const": "sha256:00a4102ff0e884038e4a25f814dab84f5500b5e597058e30012b3a6d0be6514b"
         },
         "relation_signature_trigger_and_role_authority": {
           "const": "RETAINED_EXCEPT_EXPLICIT_RECOVERY_OPERATIONS"

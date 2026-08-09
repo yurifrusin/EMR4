@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 141,
+  "register_revision": 142,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6584,6 +6584,53 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-behavior-veto-predispatch-2-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-review-worktree-preflight.json",
           "docs/ariadne-agent-error-correction-register-revision-141.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0167",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-027",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The producer projection entry point must retain the exact alias FOR KEY SHARE lock while forced RLS exposes that row only for the producer binding and makes every alias update impossible.",
+      "observed_error": "Behavior attempt 027 stopped at BTR-E02 CF004 in project_update_confirm_reschedule_v1 line 107 with zero scenarios and verified cleanup. Deterministic source diagnosis proved the line is the alias FOR KEY SHARE cardinality guard and the forced-RLS alias policy set contained SELECT and INSERT but no applicable UPDATE USING visibility policy.",
+      "detection_method": "The immutable failure bound the exact function and line; the accepted body AST independently bound LOCK_EXACT/FOR_KEY_SHARE on the alias table; and the accepted structural contract independently proved forced RLS with no alias UPDATE policy. The previously accepted PostgreSQL row-lock characterization establishes that locking SELECT applies SELECT plus UPDATE USING visibility. No additional container run or raw error persistence was needed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-027.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-027.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_027_alias_lock_visibility_diagnosis.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-alias-lock-visibility-recovery.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-alias-lock-visibility-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-142.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.alias_for_key_share_missing_update_using_visibility",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The structural contract now adds only pol_cf_02_update_lock: producer-bound UPDATE USING visibility for the existing row lock and the same binding conjoined with literal FALSE as WITH CHECK. No direct grant, immutable guard, body program, scenario or authority changes.",
+        "prevention_control": "Structural semantics and hostile tests must require the exact producer-bound alias UPDATE USING policy, require its WITH CHECK to remain permanently false, retain zero producer direct table DML and reject removal, foreign-capability widening or mutation authority before body rebind, artifact regeneration, parse proof, fresh veto or behavior eligibility.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-alias-lock-visibility-recovery.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-alias-lock-visibility-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-142.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

@@ -340,6 +340,16 @@ def validate_renderer_semantics(contract: dict) -> None:
     assert lifecycle in policies["pol_cf_01_insert"]["with_check_sql"]
     assert lifecycle in policies["pol_cf_01_update"]["using_sql"]
     assert lifecycle not in policies["pol_cf_01_update"]["with_check_sql"]
+    producer = (
+        "emr4_context_fabric.session_binding_allows_v1(session_user, "
+        "ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], "
+        "practice_id, source_contract_id, transaction_timestamp())"
+    )
+    assert "pol_cf_02_update_lock" in policies
+    alias_lock = policies["pol_cf_02_update_lock"]
+    assert alias_lock["command"] == "UPDATE"
+    assert alias_lock["using_sql"] == producer
+    assert alias_lock["with_check_sql"] == producer + " AND FALSE"
     for policy_id in ("pol_cf_10_update", "pol_cf_11_update"):
         assert lifecycle not in policies[policy_id]["using_sql"]
         assert lifecycle not in policies[policy_id]["with_check_sql"]
@@ -712,6 +722,59 @@ def test_stream_head_lock_visibility_cannot_be_removed_or_widened_to_mutation() 
     )
     with pytest.raises(AssertionError):
         validate_renderer_semantics(reseal_contract(widened_write_check))
+
+
+def test_alias_lock_visibility_cannot_be_removed_or_widened_to_mutation() -> None:
+    contract = data(CONTRACT)
+    policies = {
+        policy["id"]: policy
+        for policy in contract["rls_policy_catalogue"]["policies"]
+    }
+    alias = relation_map(contract)["diary_context_aggregate_aliases_v1"]
+    assert alias["rls_policy_ids"] == [
+        "pol_cf_02_select",
+        "pol_cf_02_insert",
+        "pol_cf_02_update_lock",
+    ]
+    assert policies["pol_cf_02_update_lock"]["with_check_sql"].endswith(
+        " AND FALSE"
+    )
+    roles = {role["role"]: role for role in contract["role_matrix"]}
+    assert roles["context_producer"]["direct_table_dml"] == []
+
+    missing_lock_visibility = copy.deepcopy(contract)
+    missing_lock_visibility["rls_policy_catalogue"]["policies"] = [
+        policy
+        for policy in missing_lock_visibility["rls_policy_catalogue"]["policies"]
+        if policy["id"] != "pol_cf_02_update_lock"
+    ]
+    relation_map(missing_lock_visibility)["diary_context_aggregate_aliases_v1"][
+        "rls_policy_ids"
+    ].remove("pol_cf_02_update_lock")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(missing_lock_visibility))
+
+    widened_write_check = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in widened_write_check["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_02_update_lock"]["with_check_sql"] = policies[
+        "pol_cf_02_update_lock"
+    ]["using_sql"]
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(widened_write_check))
+
+    foreign_lock_visibility = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in foreign_lock_visibility["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_02_update_lock"]["using_sql"] = policies[
+        "pol_cf_02_update_lock"
+    ]["using_sql"].replace("'PRODUCER'", "'OBSERVER'")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(foreign_lock_visibility))
 
 
 def test_exact_schema_rejects_resealed_non_hash_mutation() -> None:

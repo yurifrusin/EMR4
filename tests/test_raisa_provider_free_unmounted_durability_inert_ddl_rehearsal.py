@@ -118,7 +118,7 @@ def test_recovery_population_and_effective_catalogue_reconcile() -> None:
     assert len(effective["relations"]) == 22
     assert len(fabric_relations) == 18
     assert len(effective["roles"]) == 8
-    assert len(effective["rls_policies"]) == 44
+    assert len(effective["rls_policies"]) == 45
     digest_domain = next(
         row
         for row in effective["effective_structural"]["type_catalogue"]["domains"]
@@ -558,7 +558,7 @@ def test_phase_populations_and_counts() -> None:
     assert sql.count("CREATE DOMAIN ") == 4
     assert sql.count("CREATE TYPE ") == 28  # 19 enums + 9 composites
     assert sql.count("CREATE TABLE emr4_context_fabric.") == 18
-    assert sql.count("CREATE POLICY ") == 44
+    assert sql.count("CREATE POLICY ") == 45
     assert sql.count("CREATE TRIGGER ") == 7
     assert sql.count("CREATE CONSTRAINT TRIGGER ") == 7
     assert sql.count("CREATE FUNCTION emr4_context_fabric.") == 24

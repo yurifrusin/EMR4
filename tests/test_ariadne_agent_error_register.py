@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 141
+    assert register["register_revision"] == 142
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 167)
+        f"AER-{index:04d}" for index in range(1, 168)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2229,15 +2229,36 @@ def test_aer_0166_preserves_non_handoff_verifier_workspace_receipt() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0167_preserves_alias_lock_visibility_repository_defect() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0167"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["process_severity"] == "material"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert "FOR KEY SHARE" in incident["expected_invariant"]
+    assert "no applicable UPDATE USING" in incident["observed_error"]
+    assert incident["related_incident_ids"] == []
+    assert incident["recurrence_signature"] == (
+        "repository.alias_for_key_share_missing_update_using_visibility"
+    )
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 166
+    assert report["incident_count"] == 167
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 112,
         "harness": 21,
-        "repository": 25,
+        "repository": 26,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
@@ -2247,11 +2268,11 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "output_contract_violation": 49,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 25,
+        "repository_defect": 26,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 44,
+        "accepted_candidate_changed": 45,
         "canonical_unchanged": 100,
         "untrusted_partial_worktree": 22,
     }
