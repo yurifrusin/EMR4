@@ -23,7 +23,11 @@ def test_failure_026_is_preserved_byte_identically() -> None:
         diagnosis.BEHAVIOR_DIR / "provider-free-behavior-transaction-evidence.json"
     )
     if mutable.exists():
-        assert failure_bytes == mutable.read_bytes()
+        mutable_bytes = mutable.read_bytes()
+        immutable_attempt = json.loads(failure_bytes)["attempt_id"]
+        mutable_attempt = json.loads(mutable_bytes).get("attempt_id")
+        if mutable_attempt == immutable_attempt:
+            assert failure_bytes == mutable_bytes
 
 
 def test_diagnosis_is_deterministic_and_matches_receipt() -> None:

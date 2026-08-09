@@ -21,7 +21,11 @@ RECOVERY = (
 )
 CURRENT_PARENT_REBIND = (
     ROOT
-    / "docs/raisa-provider-free-unmounted-durability-inert-ddl-registration-rls-rebind.md"
+    / "docs/raisa-provider-free-unmounted-durability-inert-ddl-alias-lock-policy-rebind.md"
+)
+CURRENT_BODY_PARENT_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-unmounted-durability-function-trigger-body-alias-lock-policy-parent-rebind.md"
 )
 STRUCTURAL_PARENT = (
     ROOT
@@ -41,10 +45,10 @@ PLAN_BODY_DIGEST = (
     "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1"
 )
 CURRENT_STRUCTURAL_DIGEST = (
-    "sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e"
+    "sha256:00a4102ff0e884038e4a25f814dab84f5500b5e597058e30012b3a6d0be6514b"
 )
 CURRENT_BODY_DIGEST = (
-    "sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b"
+    "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268"
 )
 
 
@@ -66,7 +70,7 @@ def test_plan_binds_both_exact_accepted_parents_and_postgresql_16() -> None:
     assert structural["postgresql_target"]["major"] == 16
     assert PLAN_STRUCTURAL_DIGEST in plan
     assert PLAN_BODY_DIGEST in plan
-    rebind = _text(CURRENT_PARENT_REBIND)
+    rebind = _text(CURRENT_PARENT_REBIND) + _text(CURRENT_BODY_PARENT_REBIND)
     assert CURRENT_STRUCTURAL_DIGEST in rebind
     assert CURRENT_BODY_DIGEST in rebind
     assert "c55d25d6c9704ae4612ef2d123158f71302ab411" in plan
