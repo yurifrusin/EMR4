@@ -29,3 +29,27 @@ for this artifact, followed by behavior-contract rebinding and independent
 review. This artifact is still inert and opens no migration, operational
 database, product or patient data, provider call, command/write, deployment,
 production, release, Pages or protected-ref authority.
+
+## Current lifecycle lock-visibility parent rebind
+
+On 2026-08-09 renderer 2.0.10 was rebound to structural source
+`338c30ddb01561ce97a4b9837317e771b555c221`, body source
+`987f64a9f68c8dec2b99d5d39aa74e28411a82fa`, structural contract
+`sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e`
+and body contract
+`sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b`.
+
+The only structural semantic change is the accepted
+`pol_cf_01_update USING` visibility needed for the lifecycle entry point to
+retain `SELECT FOR UPDATE` access to an existing stream head. Its
+`WITH CHECK` remains producer-only, the other initial-projection update
+policies remain lifecycle-closed and `context_lifecycle` retains zero direct
+table DML or SELECT. Deterministic rendering and recognizer checks pass. The
+regenerated inert artifact remains exactly 412 statements and is 1,391,506
+canonical LF bytes with SHA-256
+`sha256:28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800`.
+The render-manifest file SHA-256 is
+`sha256:8ced08cb218b4a19cb1abbf41930db3dcec0ac1e60fa132d38e9fba8c813c49e`.
+The single SQL semantic diff is the accepted lifecycle capability in
+`pol_cf_01_update USING`; `WITH CHECK`, function bodies, trigger bodies,
+relations, grants and the other 411 statements remain unchanged.

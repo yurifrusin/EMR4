@@ -496,7 +496,7 @@ CREATE POLICY pol_cf_01_select ON emr4_context_fabric.context_observation_stream
 CREATE POLICY pol_cf_01_insert ON emr4_context_fabric.context_observation_stream_head FOR INSERT TO PUBLIC
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_01_update ON emr4_context_fabric.context_observation_stream_head FOR UPDATE TO PUBLIC
-    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
+    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_02_select ON emr4_context_fabric.diary_context_aggregate_aliases_v1 FOR SELECT TO PUBLIC
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));

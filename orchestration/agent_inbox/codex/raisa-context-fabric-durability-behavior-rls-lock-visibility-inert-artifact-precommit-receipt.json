@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_deterministic_inert_renderer_and_artifact_rebind_for_the_exact_stream_head_rls_lock_visibility_correction_before_any_disposable_postgresql_contact",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Renderer 2.0.10 now binds structural source 338c30ddb01561ce97a4b9837317e771b555c221 and contract SHA-256 a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e plus body source 987f64a9f68c8dec2b99d5d39aa74e28411a82fa and contract SHA-256 6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b. Regenerated inert SQL is exactly 412 statements, 1391506 canonical LF bytes and SHA-256 28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800; render-manifest file SHA-256 is 8ced08cb218b4a19cb1abbf41930db3dcec0ac1e60fa132d38e9fba8c813c49e. The single SQL semantic diff adds LIFECYCLE only to pol_cf_01_update USING; WITH CHECK stays producer-only. All three focused renderer/representability/plan modules, hostile lock-policy mutations, Ruff, artifact check and diff check pass.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled renderer, parse and behavior recovery sequence. The read-only codebase-health research subagent has completed without repository edits and no worker is active. A fresh Gemini 3.6 Flash/high veto remains deferred until the complete corrected behavior candidate passes deterministic gates.",
+    "git_refs_and_worktree": "Task HEAD before this explicit-path artifact commit is 987f64a9f68c8dec2b99d5d39aa74e28411a82fa. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remotely queried master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the renderer, four regenerated artifacts, three focused test modules, current rebind note, the passed postcompaction receipt pair and this precommit pair are eligible; staging is explicit-path only.",
+    "live_handover_current_baton": "The active provider-free durability behavior rehearsal remains in bounded recovery after immutable attempt 023. Structural lock visibility and the unchanged function/body rebind pass at current task HEAD 987f64a9f68c8dec2b99d5d39aa74e28411a82fa. The dependency-satisfied result now ready to seal is the deterministic inert renderer/artifact rebind; behavior runtime remains closed.",
+    "protected_evidence_boundaries": "This commit is an inert deterministic artifact rebind only: it executes no SQL and contacts no database, network, provider or product surface. Immutable behavior failures 001-023 remain preserved. Mutable provider-free-behavior-transaction-evidence.json remains the exact failure-023 SHA-256 de359f9acc731b0127517b6dc14accb9bfe7e9b5ae63b35213cf5d6e160649ee, untracked and unstaged. docs/branding and unrelated untracked files remain excluded. No patient, clinical, product-derived or protected data; operational migration/database; application/API/Diary wiring; watcher/listener/feed; command/write; deployment; production; release; Pages; or protected-ref movement opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

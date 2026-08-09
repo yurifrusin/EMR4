@@ -5,8 +5,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PLAN = ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan.md"
-DESIGN = ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-design.md"
+PLAN = (
+    ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan.md"
+)
+DESIGN = (
+    ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-design.md"
+)
 THREAT = (
     ROOT
     / "docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md"
@@ -15,9 +19,9 @@ RECOVERY = (
     ROOT
     / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan-recovery.md"
 )
-CURRENT_BODY_REBIND = (
+CURRENT_PARENT_REBIND = (
     ROOT
-    / "docs/raisa-provider-free-disposable-postgresql-durability-system-xmin-record-projection-recovery.md"
+    / "docs/raisa-provider-free-unmounted-durability-inert-ddl-registration-rls-rebind.md"
 )
 STRUCTURAL_PARENT = (
     ROOT
@@ -37,10 +41,10 @@ PLAN_BODY_DIGEST = (
     "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1"
 )
 CURRENT_STRUCTURAL_DIGEST = (
-    "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6"
+    "sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e"
 )
 CURRENT_BODY_DIGEST = (
-    "sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18"
+    "sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b"
 )
 
 
@@ -62,7 +66,7 @@ def test_plan_binds_both_exact_accepted_parents_and_postgresql_16() -> None:
     assert structural["postgresql_target"]["major"] == 16
     assert PLAN_STRUCTURAL_DIGEST in plan
     assert PLAN_BODY_DIGEST in plan
-    rebind = _text(CURRENT_BODY_REBIND)
+    rebind = _text(CURRENT_PARENT_REBIND)
     assert CURRENT_STRUCTURAL_DIGEST in rebind
     assert CURRENT_BODY_DIGEST in rebind
     assert "c55d25d6c9704ae4612ef2d123158f71302ab411" in plan

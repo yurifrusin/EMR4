@@ -5,11 +5,24 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RECOVERY = ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md"
-PLAN = ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan.md"
-DESIGN = ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-design.md"
-THREAT = ROOT / "docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md"
-BODY = ROOT / "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json"
+RECOVERY = (
+    ROOT
+    / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-postgresql-representability-recovery.md"
+)
+PLAN = (
+    ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-plan.md"
+)
+DESIGN = (
+    ROOT / "docs/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-design.md"
+)
+THREAT = (
+    ROOT
+    / "docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md"
+)
+BODY = (
+    ROOT
+    / "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json"
+)
 
 
 def _flat(path: Path) -> str:
@@ -30,7 +43,10 @@ def test_recovery_preserves_parent_and_closes_effective_population() -> None:
     body = json.loads(BODY.read_text(encoding="utf-8"))
     recovery = _flat(RECOVERY)
 
-    assert body["contract_sha256"] == "sha256:8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18"
+    assert (
+        body["contract_sha256"]
+        == "sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b"
+    )
     assert len(body["body_programs"]) == 22
     for required in (
         "nine entry points, fourteen trigger functions, fourteen trigger declarations and twenty-three programs",

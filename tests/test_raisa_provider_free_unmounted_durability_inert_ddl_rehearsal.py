@@ -127,9 +127,57 @@ def test_registration_initial_projection_policies_retain_narrow_lifecycle_access
     for policy_id, predicate_field in required.items():
         assert lifecycle in policies[policy_id][predicate_field]
 
-    for policy_id in ("pol_cf_01_update", "pol_cf_10_update", "pol_cf_11_update"):
+    # PostgreSQL combines SELECT and UPDATE USING policy visibility for
+    # SELECT FOR UPDATE. Lifecycle can therefore lock the existing stream
+    # head through its closed security-definer entry point, but it cannot
+    # author a replacement row or gain direct table authority.
+    assert lifecycle in policies["pol_cf_01_update"]["using_sql"]
+    assert lifecycle not in policies["pol_cf_01_update"]["with_check_sql"]
+    for policy_id in ("pol_cf_10_update", "pol_cf_11_update"):
         assert lifecycle not in policies[policy_id]["using_sql"]
         assert lifecycle not in policies[policy_id]["with_check_sql"]
+
+    roles = {
+        role["role"]: role for role in effective["effective_structural"]["role_matrix"]
+    }
+    lifecycle_role = roles["emr4_context_fabric.context_lifecycle"]
+    assert lifecycle_role["direct_table_dml"] == []
+    assert lifecycle_role["direct_table_select"] == []
+
+
+def test_rendered_stream_head_update_policy_preserves_lock_only_lifecycle_access() -> (
+    None
+):
+    rendered = _base_render()
+    sql = rendered["sql_text"]
+    match = re.search(
+        r"CREATE POLICY pol_cf_01_update\b.*?;",
+        sql,
+        flags=re.DOTALL,
+    )
+    assert match is not None
+    policy_sql = match.group(0)
+    lifecycle = "'LIFECYCLE'::emr4_context_fabric.logical_capability"
+    using_sql, with_check_sql = policy_sql.split("\n    WITH CHECK ", maxsplit=1)
+    assert lifecycle in using_sql
+    assert lifecycle not in with_check_sql
+
+    missing_lock = policy_sql.replace(", " + lifecycle, "", 1)
+    widened_check = policy_sql.replace(
+        "ARRAY['PRODUCER'::emr4_context_fabric.logical_capability]",
+        "ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, " + lifecycle + "]",
+        1,
+    )
+    assert missing_lock != policy_sql
+    assert widened_check != policy_sql
+    for hostile_policy in (missing_lock, widened_check):
+        hostile_sql = sql.replace(policy_sql, hostile_policy, 1)
+        report = recognize_inert_sql(
+            hostile_sql,
+            rendered["manifest"],
+            rendered["effective"],
+        )
+        assert not report.valid
 
 
 def test_recovered_effective_body_population_is_exact() -> None:
