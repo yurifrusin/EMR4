@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_path_exact_interval_construction_parse_catalogue_pass_and_its_bounded_evidence_before_creating_the_accepted_source_ledger",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Renderer 2.0.11 artifact sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51 at 1,391,614 canonical LF bytes and 412 statements passed the separate exact digest-bound PostgreSQL 16 run. Evidence sha256:3bb1c5dd63f6b12566869a95abdd1beeaf7a317b045845d5ee4cdcef0eeee4d9 reproduced all seventeen digests, rollback and atomic installation, and exact container 338fbb6a1a2294d5370879e226adf10ff83214523b7afc3a093bc74f701beb07 was removed with absence independently re-observed. Focused tests pass. This proves parse/catalogue shape only, not behavior.",
+    "current_authority_allocation": "GPT Sol owns the exact parse acceptance checkpoint, accepted-source ledger, behavior-parent rebind, deterministic verification, later fresh Gemini veto, disposable behavior attempt and cleanup. No worker, provider, product surface or protected integration is active at this commit.",
+    "git_refs_and_worktree": "Active task branch codex/ariadne-bernie-davida-parallel-seam is at tracked HEAD 530fe9aa628393f513bace0ba77043e6f52005f2 before this bounded task-branch evidence commit. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The commit excludes docs/branding, mutable behavior evidence and all unrelated untracked material.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. Characterization source 530fe9aa628393f513bace0ba77043e6f52005f2 is preserved. The separate exact-bound parse run has now passed and is ready for an explicit-path evidence checkpoint before its accepted-source ledger and behavior rebind.",
+    "protected_evidence_boundaries": "The prior RLS pass, interval characterization and behavior failures 001-024 remain immutable. Mutable behavior evidence stays untracked and unstaged. docs/branding and all unrelated untracked files remain untouched; explicit-path staging only is permitted. No patient, clinical, product or protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

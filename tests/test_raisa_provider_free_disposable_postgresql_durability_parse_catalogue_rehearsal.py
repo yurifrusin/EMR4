@@ -135,6 +135,12 @@ INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE_PATH = (
 INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE = json.loads(
     INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+INTERVAL_CONSTRUCTION_PASS_EVIDENCE_PATH = (
+    DIR / "provider-free-disposable-postgresql-evidence.json"
+)
+INTERVAL_CONSTRUCTION_PASS_EVIDENCE = json.loads(
+    INTERVAL_CONSTRUCTION_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -745,6 +751,52 @@ def test_interval_construction_characterization_is_nonaccepting_and_exactly_clea
         "absence_verified": True,
         "container_id": (
             "6b0f34cb1bdd7faa3c6482bbe300e2ecb5f7ed9109890a90f18e846625ce7c8d"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_interval_construction_parse_catalogue_evidence_is_exact_pass() -> None:
+    evidence = INTERVAL_CONSTRUCTION_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            INTERVAL_CONSTRUCTION_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "3bb1c5dd63f6b12566869a95abdd1beeaf7a317b045845d5ee4cdcef0eeee4d9"
+    )
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_391_614,
+        "artifact_sha256": (
+            "sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51"
+        ),
+        "contract_sha256": (
+            "sha256:e1c3b23bf2731f366a1eab342185a6f26eeb638a0a767fcdd391438b5e116e40"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "338fbb6a1a2294d5370879e226adf10ff83214523b7afc3a093bc74f701beb07"
         ),
         "removed": True,
         "status": "cleanup_verified",

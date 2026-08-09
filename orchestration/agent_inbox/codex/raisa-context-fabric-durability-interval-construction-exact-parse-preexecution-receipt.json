@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_exact_digest_bound_parse_catalogue_reproduction_in_one_separate_newly_owned_networkless_disposable_postgresql_16_container_then_verify_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact deterministic parent is renderer 2.0.11 artifact sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51 at 1,391,614 canonical LF bytes and 412 statements. Characterization evidence sha256:257daa83f9d45c9397a3666fa54ee906016fd3fa4924d58af2269f3316b65139 completed with exact cleanup. The exact-bound contract is canonical sha256:e1c3b23bf2731f366a1eab342185a6f26eeb638a0a767fcdd391438b5e116e40 and all focused tests, Ruff and diff checks pass. This separate run must reproduce every digest and cleanup or fail closed.",
+    "current_authority_allocation": "GPT Sol alone owns this tightly coupled serial exact-bound PostgreSQL run, exact-ID cleanup and evidence acceptance. No implementation worker, provider, product surface or protected integration is active. No external review is required for this deterministic reproduction; the later behavior candidate still requires a fresh Gemini 3.6 Flash/high veto after deterministic passage.",
+    "git_refs_and_worktree": "Active task branch codex/ariadne-bernie-davida-parallel-seam is at exact source checkpoint 530fe9aa628393f513bace0ba77043e6f52005f2. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The working tree retains only preserved unrelated untracked material plus this new preexecution evidence. No protected ref may move.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. Characterization checkpoint 530fe9aa628393f513bace0ba77043e6f52005f2 preserves the non-accepting interval-construction catalogue evidence and binds the complete observed digest set. The next dependency is exactly one separate exact-bound reproduction before behavior rebinding.",
+    "protected_evidence_boundaries": "The prior RLS pass and interval characterization are immutable. Behavior failures 001-024 and mutable behavior evidence remain preserved and unstaged. Only closed catalogue digests and bounded failure metadata may persist. docs/branding and unrelated untracked files remain untouched. No patient, clinical, product or protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

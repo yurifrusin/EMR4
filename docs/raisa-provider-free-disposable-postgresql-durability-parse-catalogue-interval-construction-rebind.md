@@ -2,8 +2,8 @@
 
 Date: 2026-08-09
 
-Status: bounded catalogue characterization candidate; behavior runtime remains
-closed
+Status: exact PostgreSQL 16 parse/catalogue reproduction passed; behavior
+runtime remains closed
 
 The deterministic parent at exact source
 `8c307d28323c68744338e2290879994e4980b2dd` is renderer 2.0.11's
@@ -52,3 +52,15 @@ accepted pass. Exact container
 `6b0f34cb1bdd7faa3c6482bbe300e2ecb5f7ed9109890a90f18e846625ce7c8d`
 was removed and exact-ID absence was verified. The complete digest set is now
 eligible for one separate exact-bound rerun.
+
+## Exact-bound result
+
+The separate exact-bound run passed as
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`.
+Evidence SHA-256 is
+`sha256:3bb1c5dd63f6b12566869a95abdd1beeaf7a317b045845d5ee4cdcef0eeee4d9`.
+It reproduced the exact artifact, fixed rollback proof, complete catalogue
+population, all seventeen frozen query digests and unchanged application-owner
+and empty-prerequisite boundary. Exact container
+`338fbb6a1a2294d5370879e226adf10ff83214523b7afc3a093bc74f701beb07`
+was removed and exact-ID absence was independently re-observed.
