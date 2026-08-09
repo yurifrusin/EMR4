@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_exact_subtransaction_xmin_parse_catalogue_accepted_source_ledger",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The ledger binds exact pass evidence SHA-256 cb439eefe9eb243eb4eccda144ac51218d9e26ba71c0dd14402ee066b7c1fb14, artifact SHA-256 03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0, render-manifest file SHA-256 bb91292d98fb34f576fa7bf6b5a196eccdcd42f087624b70b450933e36638597 and exact parse contract SHA-256 3dc318e64b9c30817c0e2cdca650fc284ae3d2f35e93e697d0cac5368fecbd03. Both runtime container IDs are recorded removed and independently absent. The ledger grants parse/catalogue prerequisite authority only.",
+    "current_authority_allocation": "GPT Sol owns the evidence-source ledger and explicit-path commit under Yuri's standing planned-gate authority. No worker, verifier, provider model, database runtime or product surface is active in this ledger-only step.",
+    "git_refs_and_worktree": "Task HEAD is 426fd229a96b7a34787dd0d0610a926808fd9961 before this ledger commit on codex/ariadne-bernie-davida-parallel-seam; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean before explicit-path staging.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Renderer 2.0.15 exact parse/catalogue reproduction has passed and is committed at evidence source 426fd229a96b7a34787dd0d0610a926808fd9961; this commit adds only its accepted-source ledger for behavior-parent binding.",
+    "protected_evidence_boundaries": "No database runtime occurs. Function, trigger, RLS or transaction behavior, applied migration, operational database/credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model call, application/API/Diary wiring, command/write authority, deployment, production, release, Pages and protected refs remain closed. docs/branding, mutable behavior evidence, mutable parse evidence and all unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
