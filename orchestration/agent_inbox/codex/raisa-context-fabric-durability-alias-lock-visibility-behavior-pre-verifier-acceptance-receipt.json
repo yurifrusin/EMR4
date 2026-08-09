@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_and_commit_the_fresh_alias_lock_visibility_behavior_veto_provenance_without_running_behavior_attempt_028",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Review receipt file SHA-256 aaa0ef177fb20062b82866367eb635ac7f73a729fafc938b61804163168441c7 records decision pass, exact candidate 939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa, 504 passing tests, all twenty-three substantive challenges, clean unchanged pre/post HEAD and no Docker execution. Register revision 143 contains 168 incidents with zero open. Local 504-test, Ruff, format and diff checks pass.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied one read-only independent veto only. GPT Sol independently owns acceptance, provenance, the next serial behavior runtime, cleanup and later closeout. No worker owns integration, runtime or protected refs.",
+    "git_refs_and_worktree": "Primary task branch remains at substantive candidate 939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa before the explicit-path provenance commit. Review worktree r139 remains clean at that exact commit by passed preflight and postflight. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. The primary index is clean before staging only the named provenance files.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. The fresh r139 veto passed exact candidate 939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa; this step preserves its result before behavior attempt 028 is opened through a separate preexecution receipt.",
+    "protected_evidence_boundaries": "Acceptance is limited to the alias lock-visibility recovery, exact parse proof and six-parent behavior rebind. It does not accept behavior attempt 028 in advance. Mutable attempt-027 behavior evidence remains untracked and unstaged. docs/branding and all unrelated untracked files remain untouched. No product or patient/protected data, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref action is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

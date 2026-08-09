@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r139",
+  "branch": "codex/review-context-fabric-alias-lock-visibility-939c929f",
+  "head": "939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa",
+  "expected_head": "939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-alias-lock-visibility",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

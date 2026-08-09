@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_3_6_flash_high_exact_HEAD_veto_over_the_alias_lock_visibility_recovery_and_behavior_rebind_without_Docker_or_runtime_harness_execution",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Candidate 939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa contains the immutable attempt-027 diagnosis, exact producer-bound alias lock-visibility repair, unchanged body-program rebind, regenerated inert artifact, distinct characterization and exact parse/catalogue proofs, exact six-parent behavior rebind, AER-0168 descendant-provenance repair and canonical formatting. Behavior attempt 028 remains closed.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance, runtime, cleanup, integration and protected-ref authority. Gemini 3.6 Flash/high via a fresh Antigravity project receives only read-only independent veto authority over the exact clean r139 checkout and bounded repository packet. It may not edit, self-accept, start Docker, run either runtime harness, access protected/product data, integrate, push or move refs. No fallback model is allowed. The exact review worktree is evidenced by a separate passed verifier-worktree preflight and is not a handoff-aligned workspace assignment.",
+    "active_plan_and_acceptance": "The candidate binds structural contract sha256:00a4102ff0e884038e4a25f814dab84f5500b5e597058e30012b3a6d0be6514b, body contract sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268, artifact sha256:64cbc2b0e17276387c6815af02a2d0635fc538e3408995c1054ecbc708b5cbae, exact parse pass evidence sha256:9f61fb3da219159491a9ac73125ec0d93bed0c72ed0f435182964169c7a6e027, behavior contract sha256:fa8631164d733728b738c41a372081bb5130fd446d1796dadc8ca5f49ae90063 and unchanged twenty-scenario population sha256:eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. The complete packet collects and passes exactly 504 tests; Ruff check, Ruff format and diff checks pass. Review packet freezes twenty-three substantive challenges and one structured terminal decision.",
+    "protected_evidence_boundaries": "The verifier may read only the candidate's ordinary repository code, contracts, authored-synthetic minimized evidence, exact diffs and named tests. Protected holdouts, historical PHI, docs/branding, patient/clinical/product-derived data, provider/product routes other than this verifier transport, Docker/PostgreSQL, runtime harnesses, application wiring, commands/writes, deployment, production, release, Pages and protected-ref movement remain forbidden.",
+    "git_refs_and_worktree": "Primary task branch and fresh review branch are exact candidate 939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa. Separate preflight orchestration/agent_inbox/codex/raisa-context-fabric-durability-alias-lock-visibility-review-worktree-preflight.json passes for clean r139 branch codex/review-context-fabric-alias-lock-visibility-939c929f. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Primary tracked worktree is clean; all unrelated untracked files remain excluded and preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "alias_lock_visibility_behavior_veto_complete_five_source_predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified the exact candidate, complete deterministic packet, clean fresh r139 preflight and unchanged protected refs."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The separate user-requested architecture-health research lane is complete; no native subagent is assigned to this independent veto."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini 3.6 Flash/high is allocated to one fresh project with no fallback and structured single-decision admission; no call for this candidate has occurred."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
