@@ -136,10 +136,23 @@ INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE = json.loads(
     INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
 INTERVAL_CONSTRUCTION_PASS_EVIDENCE_PATH = (
-    DIR / "provider-free-disposable-postgresql-evidence.json"
+    DIR / "provider-free-disposable-postgresql-evidence-interval-construction-pass.json"
 )
 INTERVAL_CONSTRUCTION_PASS_EVIDENCE = json.loads(
     INTERVAL_CONSTRUCTION_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+UUID_MINIMUM_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-uuid-minimum-characterization.json"
+)
+UUID_MINIMUM_CHARACTERIZATION_EVIDENCE = json.loads(
+    UUID_MINIMUM_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+UUID_MINIMUM_PASS_EVIDENCE_PATH = (
+    DIR / "provider-free-disposable-postgresql-evidence.json"
+)
+UUID_MINIMUM_PASS_EVIDENCE = json.loads(
+    UUID_MINIMUM_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
@@ -803,6 +816,94 @@ def test_interval_construction_parse_catalogue_evidence_is_exact_pass() -> None:
     }
 
 
+def test_uuid_minimum_characterization_is_nonaccepting_and_exactly_cleaned_up() -> (
+    None
+):
+    evidence = UUID_MINIMUM_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            UUID_MINIMUM_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "db86a77bc81f12a461161c807710ba8a42eabfa76080289704d5819dabee35ba"
+    )
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_391_670,
+        "artifact_sha256": (
+            "sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8"
+        ),
+        "contract_sha256": (
+            "sha256:988bddb52ede755bccb5a4151c65fc022b34c58785bc74c4aa1cc4fa65d82c37"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "2b6956ba924cb6a06d104f3ba8746a0c5b6a1aa815d1f864d9a87810237d1ef6"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_uuid_minimum_parse_catalogue_evidence_is_exact_pass() -> None:
+    evidence = UUID_MINIMUM_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            UUID_MINIMUM_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "f14c406ca460ba893e66fed3150e759f63d9631c976a95fbb03faae7f1f381c8"
+    )
+    assert evidence["attempt_id"] == "988bb667765158c33e219d8d"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_391_670,
+        "artifact_sha256": (
+            "sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8"
+        ),
+        "contract_sha256": rehearsal.EXPECTED_CONTRACT_SHA256,
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "d1fa9e1501b07e5079e9bb6c9325e67399dd36ee922795e346fac07120bcc95b"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
 def test_digest_nullability_query_drift_is_preserved_fail_closed() -> None:
     evidence = DIGEST_NULLABILITY_QUERY_DRIFT_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
@@ -987,7 +1088,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_391_614
+    assert len(artifact) == 1_391_670
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 388
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001

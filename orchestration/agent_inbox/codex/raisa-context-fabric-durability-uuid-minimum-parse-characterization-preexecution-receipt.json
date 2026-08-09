@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_nonaccepting_uuid_minimum_catalogue_characterization_in_a_newly_owned_networkless_postgresql_16_container",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The characterization contract canonical SHA-256 is 988bddb52ede755bccb5a4151c65fc022b34c58785bc74c4aa1cc4fa65d82c37 and binds exact renderer source c97ea3eb935997ace3586aa2ff52cf33dabbfd6a, artifact sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8, 1,391,670 bytes and 412 statements. Its result must be catalogue_characterization_required and cannot become an accepted parse source.",
+    "current_authority_allocation": "GPT Sol alone owns this one serial local characterization container, its exact cleanup and later digest assessment. No model, provider, worker, product surface or protected integration participates.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at c97ea3eb935997ace3586aa2ff52cf33dabbfd6a before untracked parse rebind/characterization provenance. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and unrelated untracked paths remain untouched.",
+    "live_handover_current_baton": "The active recovery is the UUID MIN_FIELD renderer defect found by behavior attempt 025. Renderer 2.0.12 produced a 412-statement, 1,391,670-byte artifact. The parse contract is temporarily characterization_only and exact parse acceptance remains closed.",
+    "protected_evidence_boundaries": "The prior interval exact pass is preserved byte-identically at sha256:3bb1c5dd63f6b12566869a95abdd1beeaf7a317b045845d5ee4cdcef0eeee4d9. Attempt 025 remains immutable; mutable behavior evidence remains untracked. Characterization uses --pull=never, --network=none, no mount, no port and authored-synthetic prerequisites only. No behavior execution, patient/product/protected data, provider, operational database, application wiring, deployment, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

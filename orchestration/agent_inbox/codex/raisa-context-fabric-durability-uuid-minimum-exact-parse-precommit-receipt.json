@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_exact_uuid_minimum_parse_rebind_characterization_and_exact_pass_artifacts_on_the_task_branch_using_explicit_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact pass attempt 988bb667765158c33e219d8d binds contract sha256:fd8256d4906e79367d280f5ba945c8b2ccb0f01f20790cb43ae68f47496dbdc4, SQL sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8, 1391670 canonical LF bytes, 412 statements and all fifteen characterized catalogue digests. Evidence SHA-256 is f14c406ca460ba893e66fed3150e759f63d9631c976a95fbb03faae7f1f381c8. Focused tests, Ruff and explicit-path diff checks pass; exact container removal and absence are verified.",
+    "current_authority_allocation": "GPT Sol owns exact parse evidence admission and this task-branch commit. No worker, verifier, provider, product surface or protected integrator is active. This commit grants no behavior acceptance and moves no protected ref.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is based at tracked HEAD c97ea3eb935997ace3586aa2ff52cf33dabbfd6a before this explicit-path commit and remains ahead of origin task branch 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602 and must not move.",
+    "live_handover_current_baton": "The active Context Fabric durability behavior baton remains unchanged. Renderer 2.0.12 UUID minimum recovery has now passed both its required non-accepting characterization and a separate exact-bound PostgreSQL 16 reproduction. Behavior attempt 025 remains immutable failure evidence and no behavior claim is made by this commit.",
+    "protected_evidence_boundaries": "Only explicit UUID parse-rebind paths may be staged. The mutable behavior evidence and docs/branding remain untracked and unstaged with all unrelated files preserved. Protected holdouts and historical PHI remain unopened. No application, API, Diary, operational database, watcher/listener/feed, provider, patient/product data, command/write, deployment, production, release, Pages or protected-ref action is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

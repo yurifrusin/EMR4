@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_exact_digest_bound_uuid_minimum_parse_catalogue_reproduction_in_one_newly_owned_networkless_postgresql_16_container_then_verify_exact_id_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior and transaction rehearsal. Behavior attempt 025 is immutable failure evidence. Renderer 2.0.12 at exact task HEAD c97ea3eb935997ace3586aa2ff52cf33dabbfd6a has completed its required non-accepting catalogue characterization. The next action is the separate exact-bound parse reproduction required before any behavior rebind.",
+    "current_authority_allocation": "GPT Sol alone owns the serial disposable PostgreSQL exact parse execution, cleanup and evidence admission. No worker or external verifier may start the container or accept the result. No provider, product surface or implementation worker is active.",
+    "active_plan_and_acceptance": "The exact-bound contract canonical SHA-256 is sha256:fd8256d4906e79367d280f5ba945c8b2ccb0f01f20790cb43ae68f47496dbdc4. It binds source c97ea3eb935997ace3586aa2ff52cf33dabbfd6a, inert SQL sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8, 1391670 canonical LF bytes, 412 statements and the fifteen characterized query digests. Focused parse and plan tests pass. One newly owned postgres:16-bookworm container must use pull-never, network none, no port or mount, tmpfs state and exact-ID cleanup.",
+    "protected_evidence_boundaries": "The UUID characterization and all prior parse and behavior evidence remain immutable. The mutable behavior evidence remains untracked and unstaged. docs/branding and all unrelated untracked files remain untouched. The exact parse run may use only repository-authored empty synthetic shapes in its owned networkless container. No patient, clinical, product, protected or historical data, provider, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref action is permitted.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at tracked HEAD c97ea3eb935997ace3586aa2ff52cf33dabbfd6a and ahead of origin task branch 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Intentional parse-rebind modifications are unstaged; protected refs must not move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_preexecution_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the exact deterministic parse packet before runtime eligibility."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native worker has execution or acceptance ownership."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "External review remains behavior-candidate deterministic-gate dependent and is not part of this database run."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -33,7 +33,7 @@ PREREQUISITE_PATH = REHEARSAL_DIR / "synthetic-prerequisite-contract.json"
 EVIDENCE_PATH = REHEARSAL_DIR / "provider-free-disposable-postgresql-evidence.json"
 FAILURE_EVIDENCE_PATH = REHEARSAL_DIR / (
     "provider-free-disposable-postgresql-evidence-"
-    "interval-construction-exact-rerun-failure.json"
+    "uuid-minimum-exact-rerun-failure.json"
 )
 
 EXPECTED_CONTRACT_PATH = (
@@ -45,7 +45,7 @@ EXPECTED_PREREQUISITE_PATH = (
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:e1c3b23bf2731f366a1eab342185a6f26eeb638a0a767fcdd391438b5e116e40"
+    "sha256:fd8256d4906e79367d280f5ba945c8b2ccb0f01f20790cb43ae68f47496dbdc4"
 )
 EXPECTED_PREREQUISITE_SHA256 = (
     "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"

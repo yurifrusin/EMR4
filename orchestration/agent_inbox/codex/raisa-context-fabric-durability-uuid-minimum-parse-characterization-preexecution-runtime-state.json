@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_nonaccepting_uuid_minimum_catalogue_characterization_in_a_newly_owned_networkless_postgresql_16_container",
+  "source_evidence": {
+    "live_handover_current_baton": "The active recovery is the UUID MIN_FIELD renderer defect found by behavior attempt 025. Renderer 2.0.12 produced a 412-statement, 1,391,670-byte artifact. The parse contract is temporarily characterization_only and exact parse acceptance remains closed.",
+    "current_authority_allocation": "GPT Sol alone owns this one serial local characterization container, its exact cleanup and later digest assessment. No model, provider, worker, product surface or protected integration participates.",
+    "active_plan_and_acceptance": "The characterization contract canonical SHA-256 is 988bddb52ede755bccb5a4151c65fc022b34c58785bc74c4aa1cc4fa65d82c37 and binds exact renderer source c97ea3eb935997ace3586aa2ff52cf33dabbfd6a, artifact sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8, 1,391,670 bytes and 412 statements. Its result must be catalogue_characterization_required and cannot become an accepted parse source.",
+    "protected_evidence_boundaries": "The prior interval exact pass is preserved byte-identically at sha256:3bb1c5dd63f6b12566869a95abdd1beeaf7a317b045845d5ee4cdcef0eeee4d9. Attempt 025 remains immutable; mutable behavior evidence remains untracked. Characterization uses --pull=never, --network=none, no mount, no port and authored-synthetic prerequisites only. No behavior execution, patient/product/protected data, provider, operational database, application wiring, deployment, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at c97ea3eb935997ace3586aa2ff52cf33dabbfd6a before untracked parse rebind/characterization provenance. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and unrelated untracked paths remain untouched."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_uuid_minimum_characterization_preexecution_reconciliation", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact characterization contract, artifact, prior evidence preservation and runtime containment."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent owns this serial characterization."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Independent veto remains future exact-candidate dependent."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -64,10 +64,14 @@ INTERVAL_CONSTRUCTION_REBIND = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-interval-construction-rebind.md"
 )
+UUID_MINIMUM_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-uuid-minimum-rebind.md"
+)
 
-PARENT_HEAD = "8c307d28323c68744338e2290879994e4980b2dd"
+PARENT_HEAD = "c97ea3eb935997ace3586aa2ff52cf33dabbfd6a"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51"
+PARENT_DIGEST = "eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8"
 
 
 def _text(path: Path) -> str:
@@ -91,6 +95,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         TOP_LEVEL_XID_INSERT_RELOAD_RECOVERY,
         RLS_LOCK_VISIBILITY_REBIND,
         INTERVAL_CONSTRUCTION_REBIND,
+        UUID_MINIMUM_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
@@ -99,14 +104,14 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_391_614
+    assert manifest["sql_byte_count"] == 1_391_670
     assert manifest["statement_count"] == 412
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "1,391,614 canonical LF bytes" in plan
+    assert "1,391,670 canonical LF bytes" in plan
     assert "statement count `412`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
 
