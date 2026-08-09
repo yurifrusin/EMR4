@@ -1,0 +1,23 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-parse-parent-rebind-expectation-drift.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-parse-parent-rebind-static-tests-001",
+  "status": "repository_expectation_drift_corrected",
+  "failures": [
+    {
+      "test": "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_plan.py::test_plan_binds_exact_accepted_parent_bytes_and_manifest",
+      "reason": "rebind_note_phrase_did_not_match_exact_acceptance_wording"
+    },
+    {
+      "test": "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py::test_parent_artifact_and_manifest_are_exact_before_docker",
+      "reason": "live_parent_byte_count_retained_predecessor_value"
+    }
+  ],
+  "other_selected_tests_passed": 12,
+  "correction": {
+    "canonical_lf_byte_count": 1419573,
+    "rebind_note_exact_phrase_present": true,
+    "database_or_provider_contact": false
+  },
+  "authority_boundary": "repository_local_parent_provenance_reconciliation_only_no_database_provider_product_deployment_or_protected_ref_authority"
+}

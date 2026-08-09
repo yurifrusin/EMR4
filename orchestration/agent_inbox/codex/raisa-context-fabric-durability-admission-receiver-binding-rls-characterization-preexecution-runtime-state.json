@@ -1,0 +1,34 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_exactly_one_nonaccepting_catalogue_characterization_for_renderer_2_0_17_in_one_new_owned_networkless_postgresql_16_container_then_exact_id_cleanup_and_byte_exact_mutable_evidence_restoration",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability behavior recovery. Renderer 2.0.17 is sealed at 30ff6b01a54c339e3045977cda909628841fe57e with exact 421-statement artifact 1d53c7ac. Static parse-parent, schema, prerequisite, nonaccepting-mode and AER tests pass. The next safe action is one deliberately nonaccepting catalogue characterization.",
+    "current_authority_allocation": "GPT Sol alone owns this serial disposable PostgreSQL characterization, exact minimized evidence capture, exact-ID cleanup and byte-exact restoration. No worker or verifier owns runtime. Gemini remains closed until a later complete deterministic behavior candidate.",
+    "active_plan_and_acceptance": "The characterization-only contract canonical SHA-256 is 8cb7862d66ce805d8af2d4aea96e8e46df92040cfc44a263da6d3245b5a3f02c. It binds source 30ff6b01a54c339e3045977cda909628841fe57e, artifact SHA-256 1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407, 1,419,573 canonical LF bytes, 421 statements and GRANT population 41. The required result is catalogue_characterization_required and cannot be acceptance.",
+    "protected_evidence_boundaries": "Exactly one already-local postgres:16-bookworm image at immutable ID sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8 may create one uniquely named owned container with --pull=never, --network=none, no ports or mounts, tmpfs data and exact-ID cleanup. Only inert SQL and four empty authored-synthetic prerequisite shapes may be installed. Do not list or touch unrelated containers. Preserve all untracked files and docs/branding. No behavior claim, migration application, operational database/credential, watcher/feed, product/patient/clinical data, provider call, application/API/Diary wiring, deployment, release, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Task HEAD is 30ff6b01a54c339e3045977cda909628841fe57e; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Mutable accepted parse evidence is 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec, preserved failure evidence is 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c and mutable behavior evidence is 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. They will be backed up outside the repository and restored byte-for-byte after the new immutable result is captured."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "binding_rls_catalogue_characterization_complete_five_source_preexecution_rehydration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Static characterization candidate and exact local PostgreSQL image identity verified."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No subagent is selected for serial disposable runtime."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["No verifier call is active or eligible during characterization."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

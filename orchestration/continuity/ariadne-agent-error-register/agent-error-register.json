@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 150,
+  "register_revision": 151,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7027,6 +7027,49 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-representability-parent-digest-drift-failure-receipt.json",
           "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_postgresql_representability_recovery.py",
           "docs/ariadne-agent-error-correction-register-revision-150.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0177",
+      "attempt_id": "raisa-context-fabric-durability-parse-parent-rebind-static-tests-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-parse-parent-rebind",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A parse/catalogue parent rebind must update every live exact artifact-byte assertion and preserve the fixed acceptance wording in its current rebind note before database eligibility.",
+      "observed_error": "The first static rebind packet passed 12 tests and failed two: the live parse test retained predecessor byte count 1,419,518, and the new note expressed the correct 1,419,573 count in a different word order than the frozen acceptance phrase.",
+      "detection_method": "Both failures were exact local assertions before Docker resolution. The manifest and canonical artifact independently prove 1,419,573 LF bytes.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-parent-rebind-expectation-drift-failure-receipt.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-receiver-binding-rls-rebind.md",
+        "docs/ariadne-agent-error-correction-register-revision-151.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.parse_parent_rebind_exact_expectations_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The live parse assertion and current rebind note now bind the exact 1,419,573 canonical-LF-byte parent while retaining 421 statements and artifact hash 1d53c7ac.",
+        "prevention_control": "Every parse parent rebind must run the scoped plan, parent, schema, kind-population, prerequisite and characterization-mode static packet before any Docker resolution.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-parent-rebind-expectation-drift-failure-receipt.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-receiver-binding-rls-rebind.md",
+          "docs/ariadne-agent-error-correction-register-revision-151.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_nonaccepting_binding_rls_catalogue_characterization_and_exact_digest_contract_then_run_one_distinct_exact_reproduction_before_behavior_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Characterization contract 8cb7862d produced immutable evidence 41f065c8 and policy digest 5bd0a662 while fourteen other acceptance digests remained unchanged. The resulting exact-digest contract canonical SHA-256 is cf746ed8824ef8853677020e90083c2b4bfe1b4096a36ad7735cfeabf0eb4b91. Exact reproduction must use a distinct attempt and container and match every fixed digest before acceptance.",
+    "current_authority_allocation": "GPT Sol owns the explicit-path commit, one-shot exact parse/catalogue reproduction, evidence restoration and later behavior rebind/review/runtime recovery. No worker, subagent or provider owns runtime or acceptance. Gemini remains independent review only after a complete behavior candidate.",
+    "git_refs_and_worktree": "Task HEAD is 30ff6b01a54c339e3045977cda909628841fe57e; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Characterization container a1d64af025b200578f73cb020e357befc8176969534fd8a006eb3dfe137952e4 is absent. Mutable accepted parse, parse failure and behavior evidence remain restored at exact hashes 97d1385c, 3bf66870 and 09907bf6 and unstaged.",
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. Renderer 2.0.17 is sealed at 30ff6b01. One nonaccepting parse/catalogue characterization passed as attempt bef2c8193761c8bcee4e5af2, changed only the policies digest and cleaned up its exact container. The next dependency-satisfied action is to commit this evidence and run one distinct exact reproduction.",
+    "protected_evidence_boundaries": "No protected holdout or branding content was opened, enumerated, staged or changed. Preserve all untracked files and stage only explicit intended paths. No migration application, operational database or credential, watcher/listener/feed, patient/clinical/product data, provider call, application/API/Diary wiring, command/write outside one disposable authored-synthetic database, deployment, production, release, Pages or protected-ref movement is authorized. Future runtime remains one new pull-never networkless PostgreSQL 16 container with exact-ID cleanup."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

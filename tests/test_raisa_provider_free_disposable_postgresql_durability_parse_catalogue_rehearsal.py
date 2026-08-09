@@ -227,6 +227,13 @@ SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE_PATH = (
 SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE = json.loads(
     SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+BINDING_RLS_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-admission-receiver-binding-rls-characterization.json"
+)
+BINDING_RLS_CHARACTERIZATION_EVIDENCE = json.loads(
+    BINDING_RLS_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1364,6 +1371,66 @@ def test_support_execute_grant_characterization_is_exact_and_narrow() -> None:
     }
 
 
+def test_admission_receiver_binding_rls_characterization_is_exact_and_narrow() -> (
+    None
+):
+    evidence = BINDING_RLS_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            BINDING_RLS_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "41f065c805fdc3cc140ded68baf180bfd88ae3c34bbcd962cc140e9d359d814d"
+    )
+    assert evidence["attempt_id"] == "bef2c8193761c8bcee4e5af2"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_419_573,
+        "artifact_sha256": (
+            "sha256:1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407"
+        ),
+        "contract_sha256": (
+            "sha256:8cb7862d66ce805d8af2d4aea96e8e46df92040cfc44a263da6d3245b5a3f02c"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 421,
+    }
+    characterized = {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    predecessor = {
+        key: value
+        for key, value in SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
+    assert characterized == CONTRACT["catalogue_expectation"][
+        "expected_query_digests"
+    ]
+    assert {
+        key for key, value in characterized.items() if predecessor.get(key) != value
+    } == {"policies"}
+    assert characterized["policies"] == (
+        "sha256:5bd0a6629eaa4a734e01d786781ea62121e887581b38558b33677bd79c752a0f"
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "a1d64af025b200578f73cb020e357befc8176969534fd8a006eb3dfe137952e4"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
 def test_support_execute_grant_exact_reproduction_is_distinct_pass() -> None:
     evidence = SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
@@ -1632,7 +1699,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_419_518
+    assert len(artifact) == 1_419_573
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 397
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
