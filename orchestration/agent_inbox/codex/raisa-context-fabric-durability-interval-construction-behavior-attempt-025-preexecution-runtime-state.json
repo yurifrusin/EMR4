@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_newly_owned_networkless_disposable_postgresql_behavior_attempt_025_after_accepted_interval_repair_and_fresh_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. Attempt 024 failed closed at BTR-E02. The interval-construction repair now has separate characterization and exact parse proofs, an unchanged twenty-scenario behavior rebind, 476 deterministic passing tests, one fresh admissible Gemini veto and a machine-enforced dispatch receipt control.",
+    "current_authority_allocation": "GPT Sol alone owns this one serial local authored-synthetic disposable PostgreSQL attempt, its exact container cleanup, failure preservation, diagnosis or acceptance. No model, provider, worker, product surface or protected integration is involved in the database run.",
+    "active_plan_and_acceptance": "Attempt 025 must admit the exact six behavior parents and canonical contract sha256:227d0bafe8d55cf935a2ebea9b8924e2d6b7d632f054950ddbff75fad45a66f6, install the 412-statement artifact sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51, execute all twenty ordered scenarios with digest eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19 and counts 6/4/3/4/3, then remove its exact newly owned container and verify absence. Any rejection remains fail-closed and starts another evidence-backed recovery cycle; only a full pass may replace mutable evidence.",
+    "protected_evidence_boundaries": "Behavior attempts 001-024 and all parse/review evidence are immutable. Before this run the mutable behavior evidence is byte-identical to immutable attempt 024 at sha256:bc2efc6fffea47e8104324c822bd6c1afde28f746b05b2a5bff925dbbfe7f57b and remains untracked/unstaged. The run is authored-synthetic, --pull=never, --network=none, no mount and no port. No patient, clinical, product or protected data, provider, operational database, applied migration, app/API/Diary wiring, watcher/listener, command/write, deployment, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at exact HEAD 9d8c0ad9c62da749ff7331ebd9cb94f07ed142e2 before this untracked preexecution provenance. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and all unrelated untracked files remain untouched and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_behavior_preexecution_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified exact HEAD, protected refs, accepted veto, unchanged mutable failure evidence and serial runtime scope."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent owns or overlaps this serial database run."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh verifier role is complete; no model call occurs in attempt 025."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

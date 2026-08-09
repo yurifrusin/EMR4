@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_corrected_bounded_repository_symbol_attempt_025_diagnostic_after_the_first_parser_failed_to_classify",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The corrected classifier first uses the prior closed allowlist, then may release exactly one function name only if that name occurs as a call in the exact BTR-E02 SQL or accepted inert artifact, or exactly one operator signature only if it contains safe PostgreSQL type words and operator glyphs. Raw text remains in memory and only its SHA-256 is durable. Eight local tests pass, including rejection of unrelated function names.",
+    "current_authority_allocation": "GPT Sol alone owns one corrected newly created networkless authored-synthetic diagnostic container, bounded symbol classification, exact cleanup and later diagnosis admission. No model, provider, worker, product surface or protected integration participates.",
+    "git_refs_and_worktree": "Primary task branch remains tracked-clean at exact HEAD 9d8c0ad9c62da749ff7331ebd9cb94f07ed142e2 before untracked failure/diagnostic artifacts. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and unrelated untracked paths remain untouched.",
+    "live_handover_current_baton": "Attempt 025 remains the active immutable BTR-E02 SQLSTATE 42883 failure. The first diagnostic replay completed behavior-harness cleanup but its fixed historical symbol allowlist rejected the remaining error before a receipt was emitted; no raw text or conclusion was released, and docker ps -a shows no remaining postgres:16-bookworm container.",
+    "protected_evidence_boundaries": "Attempt 025 and the failed first diagnostic observation remain non-accepting. Mutable failure evidence remains untracked and byte-identical to immutable attempt 025. Raw PostgreSQL text must not be persisted. The corrected run uses --pull=never, --network=none, no mount and no port, with no patient, product, protected, provider or operational access. It grants no behavior retry by itself."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

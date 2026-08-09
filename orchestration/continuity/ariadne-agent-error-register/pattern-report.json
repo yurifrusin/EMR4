@@ -1,30 +1,30 @@
 {
-  "canonical_register_sha256": "4eebd851167055de93fb0fd12df334e00af6b26c4a5e9ae8e9035e2b3a375a40",
+  "canonical_register_sha256": "924533fdcb79ef53824f9ea4e61040e95774fb641013465e8dbda8beaaa1ffb1",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 40,
-      "canonical_unchanged": 98,
+      "accepted_candidate_changed": 41,
+      "canonical_unchanged": 99,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 15,
       "evidence_misreport": 22,
-      "harness_failure": 20,
+      "harness_failure": 21,
       "output_contract_violation": 48,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
-      "repository_defect": 21,
+      "repository_defect": 22,
       "transport_timeout": 8
     },
     "by_origin": {
       "agent_behavior": 111,
-      "harness": 20,
-      "repository": 21,
+      "harness": 21,
+      "repository": 22,
       "transport": 8
     },
     "by_process_severity": {
-      "low": 49,
-      "material": 59,
+      "low": 50,
+      "material": 60,
       "moderate": 52
     },
     "by_resource_and_role": {
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 68,
+      "codex-primary-orchestrator::orchestrator": 70,
       "codex-sol-orchestrator::orchestrator": 1,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
@@ -58,12 +58,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 107,
+      "orchestrator": 109,
       "verifier": 39
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 160,
+  "incident_count": 162,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -321,6 +321,30 @@
       "categories": [
         "harness_failure"
       ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0158",
+        "AER-0161"
+      ],
+      "origins": [
+        "harness"
+      ],
+      "prevention_controls": [
+        "Database diagnostics should prefer typed catalogue-resolution probes over human-formatted error-text parsing; when text is used, an unrecognized format must emit a bounded unresolved classification rather than erase otherwise valid cleanup and observation evidence.",
+        "Undefined-symbol diagnostics must combine fixed catalogue probes with repository-bounded identifier admission; a historical failure allowlist may be the first classifier but never the sole classifier for a later execution path."
+      ],
+      "recurrence_signature": "diagnosis.undefined_symbol_parser_undercoverage",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "harness_failure"
+      ],
       "incident_count": 3,
       "incident_ids": [
         "AER-0063",
@@ -420,7 +444,7 @@
       ]
     }
   ],
-  "register_revision": 135,
+  "register_revision": 137,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-09"
 }

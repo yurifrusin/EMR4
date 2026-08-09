@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_explicit_path_attempt_025_failure_diagnosis_uuid_minimum_renderer_recovery_and_aer_provenance_before_fresh_parse_proof",
+  "source_evidence": {
+    "live_handover_current_baton": "Attempt 025 is preserved as a closed BTR-E02 SQLSTATE 42883 failure with zero scenarios and exact cleanup. Its corrected repository-bounded diagnosis identified pg_catalog.min after confirming the interval predecessor remained absent and unexecuted. Renderer 2.0.12 now has a type-directed UUID minimum repair and behavior runtime is closed pending fresh parse proof.",
+    "current_authority_allocation": "GPT Sol owns this explicit-path task-branch checkpoint and later parse characterization/exact proof, behavior rebind, fresh veto and attempt 026. No worker, model, provider, product surface or protected integration is active.",
+    "active_plan_and_acceptance": "The repaired artifact remains 412 statements, now 1,391,670 canonical LF bytes at sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8 with manifest sha256:4e3d80f2855bcf97f9e0fdce9630b42b9f2b67454df77e6954cbb79e8e3aac11. Two bigint MIN_FIELD uses retain pg_catalog.min, two UUID uses become ASC NULLS LAST LIMIT 1, other types are rejected, hostile recognition rejects UUID min regression, and focused tests pass. AER revision 137 contains 162 incidents and zero open incidents.",
+    "protected_evidence_boundaries": "Immutable attempt 025 remains byte-identical at sha256:b963933df05c418456fdc1e101a7254a617ba743a4cb4b03888caf0aac547ba2. Mutable behavior evidence remains untracked and unstaged. docs/branding and unrelated untracked files remain untouched; explicit-path staging only. No patient/product/protected data, provider, operational database, applied migration, API/Diary wiring, watcher/listener, command/write, deployment, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Primary task branch is at tracked HEAD 9d8c0ad9c62da749ff7331ebd9cb94f07ed142e2 before this explicit-path recovery checkpoint. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_uuid_minimum_recovery_precommit_reconciliation", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified failure bytes, diagnostic receipt, exact cleanup, repaired artifact hashes and focused tests."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent owns this commit or acceptance."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh verifier remains future deterministic-gate dependent."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

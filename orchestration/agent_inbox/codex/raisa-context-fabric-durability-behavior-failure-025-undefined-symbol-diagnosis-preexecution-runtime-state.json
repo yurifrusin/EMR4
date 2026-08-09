@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_bounded_fixed_shape_attempt_025_undefined_symbol_diagnostic_replay_with_raw_text_hash_only_and_exact_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "Behavior attempt 025 failed closed at BTR-E02 with SQLSTATE 42883, zero completed scenarios and verified removal/absence of exact owned container 43bf5d122670f424821cf00511d2ee21404f0b66c4d19ead9e0bdbf45ea833da. The immutable evidence copy is byte-identical at sha256:b963933df05c418456fdc1e101a7254a617ba743a4cb4b03888caf0aac547ba2.",
+    "current_authority_allocation": "GPT Sol alone owns one newly created networkless authored-synthetic diagnostic container, raw-output hashing, fixed safe-symbol classification, exact cleanup and later diagnosis admission. No model, provider, worker, product surface or protected integration participates.",
+    "active_plan_and_acceptance": "The diagnostic replays exact BTR-E01/BTR-E02 through the accepted behavior harness, captures the target result only in memory, requires the repaired integer-times-interval signature to remain absent but not executed, requires the other five fixed PostgreSQL symbols to resolve, and releases only one allowlisted raw-message symbol identifier, a raw digest and cleanup metadata. It changes no candidate behavior and grants no retry by itself.",
+    "protected_evidence_boundaries": "Attempt 025 and attempts 001-024 remain immutable. Mutable failure evidence remains untracked and byte-identical to attempt 025. Raw PostgreSQL text must not be persisted. The diagnostic uses --pull=never, --network=none, no mount and no port, and may access no patient, product, protected, provider or operational surface. No applied migration, application wiring, command/write, deployment, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Primary task branch remains tracked-clean at exact HEAD 9d8c0ad9c62da749ff7331ebd9cb94f07ed142e2 before untracked attempt-025 and diagnostic artifacts. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and all unrelated untracked paths remain untouched."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_failure_025_diagnosis_preexecution_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified immutable failure bytes, exact cleanup absence and five passing local diagnostic tests."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent owns this serial diagnosis."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Verifier work is complete; no model call occurs in diagnosis."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,6 +1,6 @@
 -- -- durability-schema.sql.inert -- inert evidence artifact; never execute or apply
 -- generated_by: raisa_provider_free_unmounted_durability_inert_ddl_rehearsal
--- renderer_version: 2.0.11
+-- renderer_version: 2.0.12
 -- do_not_execute: true
 
 -- ==========================================================================
@@ -3346,7 +3346,7 @@ BEGIN
             IF NOT (((COALESCE(pg_catalog.array_length(producer_bindings, 1), 0)::pg_catalog.int8) = 1::pg_catalog.int8)) THEN
                 RAISE EXCEPTION USING ERRCODE = 'CF004', MESSAGE = 'required_row_missing_or_ambiguous';
             END IF;
-            producer_stream := (SELECT pg_catalog.min(s.stream_id) FROM pg_catalog.unnest(producer_bindings) AS s);
+            producer_stream := (SELECT s.stream_id FROM pg_catalog.unnest(producer_bindings) AS s ORDER BY s.stream_id ASC NULLS LAST LIMIT 1);
             binding_allowed := emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability]::emr4_context_fabric.logical_capability[], NEW.practice_id, 'diary.appointment_rescheduled.v1'::emr4_context_fabric.source_contract_code, producer_stream, pg_catalog.transaction_timestamp());
             IF NOT (binding_allowed) THEN
                 RAISE EXCEPTION USING ERRCODE = 'CF001', MESSAGE = 'binding_denied';
@@ -3408,7 +3408,7 @@ BEGIN
             IF NOT (((COALESCE(pg_catalog.array_length(producer_bindings, 1), 0)::pg_catalog.int8) = 1::pg_catalog.int8)) THEN
                 RAISE EXCEPTION USING ERRCODE = 'CF004', MESSAGE = 'required_row_missing_or_ambiguous';
             END IF;
-            producer_stream := (SELECT pg_catalog.min(s.stream_id) FROM pg_catalog.unnest(producer_bindings) AS s);
+            producer_stream := (SELECT s.stream_id FROM pg_catalog.unnest(producer_bindings) AS s ORDER BY s.stream_id ASC NULLS LAST LIMIT 1);
             binding_allowed := emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability]::emr4_context_fabric.logical_capability[], NEW.practice_id, 'diary.appointment_rescheduled.v1'::emr4_context_fabric.source_contract_code, producer_stream, pg_catalog.transaction_timestamp());
             IF NOT (binding_allowed) THEN
                 RAISE EXCEPTION USING ERRCODE = 'CF001', MESSAGE = 'binding_denied';

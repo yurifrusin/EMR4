@@ -1831,6 +1831,19 @@ def render_expr(expr: dict[str, Any]) -> str:
     if op == "SET_COVERS_KEYS":
         return _render_set_covers_keys(expr)
     if op == "MIN_FIELD":
+        if expr["type"] == "pg_catalog.uuid":
+            field = _ident(expr["field"])
+            return (
+                "(SELECT s."
+                + field
+                + " FROM pg_catalog.unnest("
+                + render_expr(expr["source"])
+                + ") AS s ORDER BY s."
+                + field
+                + " ASC NULLS LAST LIMIT 1)"
+            )
+        if expr["type"] != "pg_catalog.bigint":
+            raise ValueError("MIN_FIELD has no admitted lowering for " + expr["type"])
         return (
             "(SELECT pg_catalog.min(s."
             + _ident(expr["field"])
@@ -3054,7 +3067,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.11"
+RENDERER_VERSION = "2.0.12"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "
@@ -4334,6 +4347,13 @@ def _statement_issues(
             RecognitionIssue(
                 "numeric_times_interval",
                 "numeric-times-interval lowering has no accepted PostgreSQL operator",
+            )
+        )
+    if "pg_catalog.min(s.stream_id)" in statement:
+        issues.append(
+            RecognitionIssue(
+                "uuid_min_aggregate",
+                "UUID minimum must use typed ordered selection, not pg_catalog.min",
             )
         )
     if re.search(r"\b(?:OLD|NEW)\s*\.\s*\"?xmin\"?", statement, re.IGNORECASE):

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 135,
+  "register_revision": 137,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6318,6 +6318,99 @@
           "scripts/ariadne_antigravity.py",
           "tests/test_ariadne_antigravity.py",
           "docs/ariadne-agent-error-correction-register-revision-135.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0161",
+      "attempt_id": "raisa-context-fabric-behavior-failure-025-undefined-symbol-diagnosis-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "A bounded undefined-symbol diagnostic must classify a remaining repository-authored function or safe type-operator signature without persisting raw PostgreSQL text, even when the symbol was not in the predecessor failure's fixed allowlist.",
+      "observed_error": "The first attempt-025 diagnostic replay reached the exact BTR-E02 SQLSTATE 42883 result and returned through behavior-harness cleanup, but its inherited fixed failure-024 allowlist raised single_allowlisted_undefined_symbol_missing before emitting a durable minimized diagnosis receipt.",
+      "detection_method": "The module exited nonzero with only its local parser exception and no raw PostgreSQL text. Docker readback showed no remaining postgres:16-bookworm container. Sol preserved the failed preexecution pair and replaced the closed historical allowlist fallback with a repository-bounded call-name classifier plus a safe PostgreSQL type/operator grammar.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-025-undefined-symbol-diagnosis-preexecution-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-025-undefined-symbol-diagnosis-preexecution-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-025-undefined-symbol-diagnosis-preexecution-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-025-undefined-symbol-diagnosis-preexecution-v2-receipt.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_025_undefined_symbol_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_025_undefined_symbol_diagnosis.py",
+        "docs/ariadne-agent-error-correction-register-revision-136.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "diagnosis.undefined_symbol_parser_undercoverage",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The corrected diagnostic retains the prior fixed allowlist first, then admits exactly one function name only when it occurs as a call in the exact BTR-E02 SQL or accepted inert artifact, or one safe type/operator signature. It still persists only the bounded identifier, raw digest and cleanup metadata.",
+        "prevention_control": "Undefined-symbol diagnostics must combine fixed catalogue probes with repository-bounded identifier admission; a historical failure allowlist may be the first classifier but never the sole classifier for a later execution path.",
+        "evidence_paths": [
+          "scripts/raisa_context_fabric_durability_behavior_failure_025_undefined_symbol_diagnosis.py",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_025_undefined_symbol_diagnosis.py",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-025-undefined-symbol-diagnosis-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-136.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0162",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-025",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every typed MIN_FIELD expression must lower to a PostgreSQL 16 operation admitted for its exact field type while preserving deterministic minimum and null semantics.",
+      "observed_error": "Behavior attempt 025 stopped at BTR-E02 with SQLSTATE 42883 after the interval repair. A repository-bounded diagnosis released pg_catalog.min as the missing function. Source reconciliation found two renderer-owned MIN_FIELD expressions over producer_bindings.stream_id typed pg_catalog.uuid, while the generic renderer emitted pg_catalog.min for UUID as well as bigint.",
+      "detection_method": "The corrected diagnostic required five fixed prerequisite symbols to resolve, confirmed the old integer-times-interval signature remained absent and unexecuted, released only repository_function::pg_catalog.min, hashed raw text and verified exact container cleanup. Static typed-expression reconciliation identified the UUID MIN_FIELD uses and retained the two valid bigint uses.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-025.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-025-undefined-symbol-diagnosis-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-uuid-minimum-recovery.md",
+        "docs/security/raisa-context-fabric-durability-uuid-minimum-recovery-threat-model-delta.md",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-137.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.uuid_min_aggregate_lowering",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Renderer 2.0.12 keeps pg_catalog.min for exact bigint MIN_FIELD, lowers UUID MIN_FIELD to deterministic ascending NULLS LAST LIMIT 1 selection, rejects every other result type and independently rejects reintroduction of pg_catalog.min(s.stream_id).",
+        "prevention_control": "Every polymorphic typed expression opcode must have an explicit admitted type-to-PostgreSQL lowering matrix plus at least one unsupported-type rejection and hostile recognizer mutation; syntax/catalogue installation cannot substitute for branch execution.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
+          "docs/raisa-provider-free-disposable-postgresql-durability-uuid-minimum-recovery.md",
+          "docs/security/raisa-context-fabric-durability-uuid-minimum-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-137.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

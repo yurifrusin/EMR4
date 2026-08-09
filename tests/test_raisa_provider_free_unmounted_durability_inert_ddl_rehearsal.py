@@ -46,6 +46,7 @@ from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import
     digest_preimage,
     load_and_bind_parents,
     recognize_inert_sql,
+    render_expr,
     render_inert,
 )
 
@@ -1363,6 +1364,46 @@ def test_renderer_lowers_integer_timestamp_offsets_without_numeric_times_interva
     assert any(
         issue.code == "numeric_times_interval" for issue in invalid_report.issues
     )
+
+
+def test_renderer_lowers_uuid_minimum_as_typed_ordered_selection() -> None:
+    result = _base_render()
+    sql = result["sql_text"]
+    ordered = (
+        "(SELECT s.stream_id FROM pg_catalog.unnest(producer_bindings) AS s "
+        "ORDER BY s.stream_id ASC NULLS LAST LIMIT 1)"
+    )
+
+    assert sql.count(ordered) == 2
+    assert "pg_catalog.min(s.stream_id)" not in sql
+    assert sql.count("pg_catalog.min(s.last_contiguous_position)") == 2
+
+    invalid = sql.replace(
+        ordered,
+        "(SELECT pg_catalog.min(s.stream_id) FROM "
+        "pg_catalog.unnest(producer_bindings) AS s)",
+        1,
+    )
+    invalid_report = recognize_inert_sql(
+        invalid, result["manifest"], result["effective"]
+    )
+    assert not invalid_report.valid
+    assert any(issue.code == "uuid_min_aggregate" for issue in invalid_report.issues)
+
+    with pytest.raises(ValueError, match="MIN_FIELD has no admitted lowering"):
+        render_expr(
+            {
+                "op": "MIN_FIELD",
+                "source": {
+                    "op": "REF",
+                    "kind": "LOCAL",
+                    "symbol": "unsupported_set",
+                    "type": "pg_catalog.text[]",
+                },
+                "field": "value",
+                "type": "pg_catalog.text",
+            }
+        )
 
 
 # ---------------------------------------------------------------------------
