@@ -58,6 +58,10 @@ INTERVAL_CONSTRUCTION_REBIND = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-interval-construction-parent-rebind.md"
 )
+UUID_MINIMUM_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-uuid-minimum-parent-rebind.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -91,19 +95,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-interval-construction-accepted-source.md",
-        "b0311480bb378553574b039ea536a003bd7ef382",
-        "65d98a18fd8d5e119d549f19027a6343f8d01784995924079855d6336b8926eb",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-uuid-minimum-accepted-source.md",
+        "718730875b9b5c590a08d0e5be842f8b180a73ce",
+        "3bc7276360e83e81e8a0de95294d1a27b8946476ddf184663ef1e34280bf3a9c",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "8c307d28323c68744338e2290879994e4980b2dd",
-        "c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51",
+        "c97ea3eb935997ace3586aa2ff52cf33dabbfd6a",
+        "eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "8c307d28323c68744338e2290879994e4980b2dd",
-        "7a0c5d15e65a4631cf9b590f7c7af67f2103f69ebe05fb2dd9ad5f002e1d1b2d",
+        "c97ea3eb935997ace3586aa2ff52cf33dabbfd6a",
+        "4e3d80f2855bcf97f9e0fdce9630b42b9f2b67454df77e6954cbb79e8e3aac11",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
@@ -117,7 +121,7 @@ EXPECTED_PARENT_BINDINGS = {
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "b0311480bb378553574b039ea536a003bd7ef382",
+        "718730875b9b5c590a08d0e5be842f8b180a73ce",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
@@ -345,6 +349,36 @@ def test_interval_construction_rebind_preserves_twenty_scenarios_and_closure() -
         "exactly twenty ordered",
         "6/4/3/4/3",
         "attempt 025",
+        "gemini 3.6 flash/high",
+        "docs/branding/",
+        "no applied migration",
+        "patient, product or protected data",
+    ):
+        assert required in combined
+    contract = _contract()
+    canonical = json.dumps(
+        {
+            "scenario_order": contract["scenario_order"],
+            "scenarios": contract["scenarios"],
+            "category_coverage": contract["category_coverage"],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    assert hashlib.sha256(canonical).hexdigest() == (
+        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+    )
+
+
+def test_uuid_minimum_rebind_preserves_twenty_scenarios_and_closure() -> None:
+    combined = _flat(UUID_MINIMUM_REBIND, PLAN, DESIGN).lower()
+
+    for required in (
+        "attempts 001-025 remain immutable",
+        "exactly twenty ordered",
+        "6/4/3/4/3",
+        "attempt 026",
         "gemini 3.6 flash/high",
         "docs/branding/",
         "no applied migration",

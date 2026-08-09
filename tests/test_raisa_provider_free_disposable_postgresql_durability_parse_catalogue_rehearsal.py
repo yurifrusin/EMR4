@@ -816,9 +816,7 @@ def test_interval_construction_parse_catalogue_evidence_is_exact_pass() -> None:
     }
 
 
-def test_uuid_minimum_characterization_is_nonaccepting_and_exactly_cleaned_up() -> (
-    None
-):
+def test_uuid_minimum_characterization_is_nonaccepting_and_exactly_cleaned_up() -> None:
     evidence = UUID_MINIMUM_CHARACTERIZATION_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
     assert (

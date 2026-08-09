@@ -32,8 +32,7 @@ CONTRACT_PATH = REHEARSAL_DIR / "rehearsal-contract.json"
 PREREQUISITE_PATH = REHEARSAL_DIR / "synthetic-prerequisite-contract.json"
 EVIDENCE_PATH = REHEARSAL_DIR / "provider-free-disposable-postgresql-evidence.json"
 FAILURE_EVIDENCE_PATH = REHEARSAL_DIR / (
-    "provider-free-disposable-postgresql-evidence-"
-    "uuid-minimum-exact-rerun-failure.json"
+    "provider-free-disposable-postgresql-evidence-uuid-minimum-exact-rerun-failure.json"
 )
 
 EXPECTED_CONTRACT_PATH = (

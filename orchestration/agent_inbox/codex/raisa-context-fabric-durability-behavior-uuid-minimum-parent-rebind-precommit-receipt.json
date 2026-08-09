@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_uuid_minimum_six_parent_behavior_rebind_and_final_deterministic_packet_on_the_task_branch_using_only_explicit_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The rebound behavior contract canonical SHA-256 is sha256:b6d8732b655d038de719f34f59854a2463f3ccfc89e589264f13a8dced435c57. Its accepted parse parent is commit 718730875b9b5c590a08d0e5be842f8b180a73ce and ledger sha256:3bc7276360e83e81e8a0de95294d1a27b8946476ddf184663ef1e34280bf3a9c. The twenty scenario population remains exact at sha256:eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19 with category counts 6/4/3/4/3. The complete final packet is 484 tests, all passing, with Ruff check, Ruff format and diff checks passing.",
+    "current_authority_allocation": "GPT Sol owns the six-parent behavior rebind and this task-branch commit. Gemini 3.6 Flash high may perform one later read-only veto only after this deterministic candidate is committed in a fresh non-protected worktree. No worker may execute Docker, accept the result, integrate or move protected refs.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at tracked HEAD 718730875b9b5c590a08d0e5be842f8b180a73ce before this explicit-path commit and is ahead of origin task branch 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602 and must not move.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior and transaction rehearsal. The UUID-minimum parse proof is accepted at source commit 718730875b9b5c590a08d0e5be842f8b180a73ce. The next dependency is the unchanged twenty-scenario behavior gate after a fresh exact-HEAD independent veto; no behavior run is accepted yet.",
+    "protected_evidence_boundaries": "Behavior failures 001 through 025 remain immutable; the mutable current behavior evidence remains untracked and unstaged. Only explicit parent-rebind files and the two mechanically formatted parse files may be committed. docs/branding and unrelated untracked files remain untouched. No patient/product/protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref authority is added."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
