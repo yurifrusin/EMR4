@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_json_key_set_order_accepted_parse_source_ledger_and_exact_six_parent_behavior_contract_rebind",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction recovery. The distinct exact parse/catalogue pass is committed at 19cc3fd6e79588605e3a315236cdd1e688433e17. The next candidate binds that accepted source and corrected artifact into the frozen behavior gate; behavior runtime remains closed pending complete deterministic checks and fresh independent veto.",
+    "current_authority_allocation": "GPT Sol owns this six-parent rebind, deterministic acceptance and exact-path commit. No implementation worker or native subagent is active. Gemini 3.6 Flash/high via a fresh Antigravity project owns only the later exact-HEAD independent veto and cannot edit, accept, integrate or move refs.",
+    "active_plan_and_acceptance": "The behavior contract now binds accepted parse source 19cc3fd6e79588605e3a315236cdd1e688433e17, renderer/artifact source f620f31e4576003855afe824a385a86badf77120 at artifact sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714 and manifest-file sha256:d414fb3f0c9d5b8075e913f5608b6146b7b9ee43eb849c9272ccf48df3a2c706, unchanged structural/body parents and the unchanged prerequisite contract source-bound to the accepted parse commit. Canonical behavior contract sha256 is 073f30dd7725bcc9a4ee0da53793535b843b16c05326cbb7e5ff16fcfd6836cc. Exactly twenty scenarios and counts 6/4/3/4/3 remain at population sha256:eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. Focused behavior tests pass 79 checks; Ruff check, Ruff format and diff check pass.",
+    "protected_evidence_boundaries": "This is a repository-only rebind. No Docker run, behavior acceptance, applied migration, operational database/credentials/persistence, watcher/listener/feed/source access, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected-ref movement is opened. Attempts 001-026 and the mutable attempt-026 evidence remain preserved; docs/branding and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Before this commit the task branch HEAD is 19cc3fd6e79588605e3a315236cdd1e688433e17. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. The exact parse containers are absent. The index is clean before explicit-path staging and no protected or branding path is in the intended file list."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "json_key_set_order_behavior_rebind_complete_five_source_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified all six canonical parent paths, source heads and hashes plus the unchanged twenty-scenario population."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent is active for the tightly coupled rebind."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fresh verifier dispatch is deferred until the complete deterministic packet passes at the committed candidate HEAD."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
