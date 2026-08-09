@@ -28,7 +28,7 @@ CONTRACT_PATH = OUTPUT_DIR / "function-trigger-body-architecture-contract.json"
 SCHEMA_PATH = OUTPUT_DIR / "function-trigger-body-architecture-contract.schema.json"
 
 PARENT_DIGEST = (
-    "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6"
+    "sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e"
 )
 FABRIC = "emr4_context_fabric."
 PG = "pg_catalog."
@@ -143,7 +143,9 @@ def const(type_name: str, value: Any) -> dict[str, Any]:
     return {"op": "CONST", "type": type_name, "value": value}
 
 
-def unary(op: str, arg: dict[str, Any], result_type: str = f"{PG}boolean") -> dict[str, Any]:
+def unary(
+    op: str, arg: dict[str, Any], result_type: str = f"{PG}boolean"
+) -> dict[str, Any]:
     return {"op": op, "operand": arg, "type": result_type}
 
 
@@ -228,9 +230,7 @@ def is_distinct(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
     return binary("IS_DISTINCT_FROM", left, right)
 
 
-def field(
-    composite: dict[str, Any], name: str, type_name: str
-) -> dict[str, Any]:
+def field(composite: dict[str, Any], name: str, type_name: str) -> dict[str, Any]:
     return {
         "op": "FIELD",
         "source": composite,
@@ -275,9 +275,7 @@ def uuid_v4() -> dict[str, Any]:
     return {"op": "GEN_RANDOM_UUID", "type": f"{PG}uuid"}
 
 
-def json_value(
-    source: dict[str, Any], key: str, output_type: str
-) -> dict[str, Any]:
+def json_value(source: dict[str, Any], key: str, output_type: str) -> dict[str, Any]:
     return {
         "op": "JSON_GET_CAST",
         "source": source,
@@ -468,32 +466,246 @@ def propagate_retryable(node_id: str) -> dict[str, Any]:
 
 
 RECOVERY_OPERATIONS: list[dict[str, Any]] = [
-    {"id": "REC01", "kind": "ADD_COLUMN", "target": f"{FABRIC}context_service_practice_binding.stream_id", "type": f"{PG}uuid", "nullable": False},
-    {"id": "REC02", "kind": "ADD_COLUMN", "target": f"{FABRIC}diary_context_aggregate_aliases_v1.stream_id", "type": f"{PG}uuid", "nullable": False},
-    {"id": "REC03", "kind": "ADD_COLUMN", "target": f"{FABRIC}context_retention_policy.stream_id", "type": f"{PG}uuid", "nullable": False},
-    {"id": "REC04", "kind": "REWRITE_COORDINATES", "targets": [f"{FABRIC}diary_context_aggregate_aliases_v1", f"{FABRIC}context_retention_policy", f"{FABRIC}diary_context_observation_outbox_v1"], "required_coordinate": "stream_id"},
-    {"id": "REC05", "kind": "CHANGE_SUPPORT_SIGNATURE", "target": f"{FABRIC}session_binding_allows_v1", "append_input": {"name": "requested_stream_id", "type": f"{PG}uuid"}, "predicate_addition": "BINDING_STREAM_EQUALS_REQUESTED_STREAM"},
-    {"id": "REC06", "kind": "REWRITE_STREAM_RLS", "target_set": "ALL_STREAM_BEARING_EFFECTIVE_RELATIONS", "binding_input": "ROW_OR_LOCATOR_STREAM_ID"},
-    {"id": "REC07", "kind": "ADD_OWNER_SELECT", "role": f"{FABRIC}context_schema_owner", "relations": ["public.appointment_command_idempotency", "public.appointments", "public.appointment_audit_log", "public.diary_committed_events"], "dml": []},
-    {"id": "REC08", "kind": "ADD_RECEIVER_SELECT", "role": f"{FABRIC}context_admission_receiver", "relations": [f"{FABRIC}context_service_practice_binding"], "dml": []},
-    {"id": "REC09", "kind": "DECLARE_INSTALLATION_PRECONDITION", "privilege": "TRIGGER", "relations": ["public.appointment_command_idempotency", "public.appointments", "public.appointment_audit_log", "public.diary_committed_events"], "runtime_grant": False},
-    {"id": "REC10", "kind": "ADD_ENUM", "target": f"{FABRIC}durability_transition_result_kind", "values": ["RECEIPT_APPLIED", "RECEIPT_REPLAYED", "REBASE_APPLIED", "TERMINAL_REPLAYED"]},
-    {"id": "REC11", "kind": "ADD_COMPOSITE", "target": f"{FABRIC}durability_transition_result_v1", "fields": [{"name": "result_kind", "type": f"{FABRIC}durability_transition_result_kind"}, {"name": "checkpoint_state", "type": f"{FABRIC}checkpoint_state"}, {"name": "source_position", "type": f"{PG}bigint"}, {"name": "decision", "type": f"{FABRIC}observation_decision"}, {"name": "reason_code", "type": f"{FABRIC}observation_reason"}, {"name": "checkpoint_disposition", "type": f"{FABRIC}checkpoint_disposition"}, {"name": "lifecycle_revision", "type": f"{PG}bigint"}, {"name": "evidence_digest", "type": f"{FABRIC}digest_sha256"}]},
-    {"id": "REC12", "kind": "CHANGE_OUTPUT", "target": f"{FABRIC}apply_durability_transition_v1", "from": f"{FABRIC}context_classified_observation_receipt", "to": f"{FABRIC}durability_transition_result_v1"},
-    {"id": "REC13", "kind": "APPEND_COMPOSITE_FIELD", "target": f"{FABRIC}generation_registration_v1", "field": {"name": "initial_key_interval", "type": f"{FABRIC}future_key_interval_v1"}},
-    {"id": "REC14", "kind": "FREEZE_REGISTRATION_BASELINE", "effects": ["STREAM_HEAD_ZERO_OR_RELOAD", "GENERATION", "CHECKPOINT_AT_HEAD", "DIARY_FRAME_CURRENT", "WAITING_ROOM_FRAME_CURRENT", "TWO_WATERMARKS_AT_HEAD", "INITIAL_KEY_START_CHECKPOINT_PLUS_ONE", "BASELINE_ANCHOR"]},
-    {"id": "REC15", "kind": "ADD_COLUMN", "target": f"{FABRIC}context_observer_generation.terminal_reason", "type": f"{FABRIC}generation_terminal_reason", "nullable": True},
-    {"id": "REC16", "kind": "ADD_STATE_CHECK", "target": f"{FABRIC}context_observer_generation", "predicate": "TERMINAL_REASON_EXACTLY_IFF_REVOKED_OR_CONSUMED"},
-    {"id": "REC17", "kind": "REMOVE_PIN_MUTATION_CLAIM", "target": "pin_one_way_release_v1", "entry_points": [], "pin_mutation_enabled": False},
-    {"id": "REC18", "kind": "FREEZE_ROTATION_REPLAY_ORDER", "order": ["EXACT_INTERVAL_REPLAY", "DIFFERING_INTERVAL_REJECT", "NEW_EFFECT_ANCHOR_FENCE"]},
-    {"id": "REC19", "kind": "ADD_ENUM", "target": f"{FABRIC}source_retention_reason", "values": ["ELIGIBLE", "EXECUTION_DISABLED", "CHECKPOINT_LAG", "ACTIVE_PIN", "KEY_OVERLAP", "GRACE_PENDING", "AMBIGUOUS_CENSUS", "NO_NON_CONSUMED_GENERATION"]},
-    {"id": "REC20", "kind": "CHANGE_COMPOSITE_FIELD_TYPE", "target": f"{FABRIC}context_source_retention_eligibility_v1.reason_code", "from": f"{FABRIC}observation_reason", "to": f"{FABRIC}source_retention_reason"},
-    {"id": "REC21", "kind": "FREEZE_AGGREGATE_REVISION", "source": "COUNT_PUBLIC_APPOINTMENT_AUDIT_LOG_ID_BY_PRACTICE_AND_APPOINTMENT", "appointment_field": False},
-    {"id": "REC22", "kind": "FREEZE_ALIAS_PROVENANCE", "new_alias_requires_current_xid": True, "reused_alias_requires_current_xid": False, "reuse_coordinate": ["practice_id", "source_contract_id", "stream_id", "product_appointment_uuid"]},
-    {"id": "REC23", "kind": "FREEZE_TRIGGER_MATRIX", "matrix_id": "TRIGGER_APPLICABILITY_RETURN_MATRIX_V1"},
-    {"id": "REC24", "kind": "FREEZE_SECOND_UPDATE_RULE", "target": "public.appointments", "predicate": "OLD_XMIN_IS_CURRENT_XID32", "outcome": "REJECT"},
-    {"id": "REC25", "kind": "FREEZE_FENCE_PROPERTIES", "properties": ["READ_ONLY", "LOCK_FREE", "SIBLING_CALL_FREE", "ORDER_INDEPENDENT", "FINAL_TRANSACTION_STATE"]},
-    {"id": "REC26", "kind": "FREEZE_SHARED_TABLE_RULES", "rules": ["BOTH_IMAGES_CLASSIFY_ADOPTION_ESCAPE", "CHECK_IN_EXCLUDED", "OLDER_EVENT_RETENTION_ALLOWED", "OUTBOX_RETENTION_ONLY_VIA_PURGE", "LIFECYCLE_HEAD_BASELINE_ALLOWED"]},
+    {
+        "id": "REC01",
+        "kind": "ADD_COLUMN",
+        "target": f"{FABRIC}context_service_practice_binding.stream_id",
+        "type": f"{PG}uuid",
+        "nullable": False,
+    },
+    {
+        "id": "REC02",
+        "kind": "ADD_COLUMN",
+        "target": f"{FABRIC}diary_context_aggregate_aliases_v1.stream_id",
+        "type": f"{PG}uuid",
+        "nullable": False,
+    },
+    {
+        "id": "REC03",
+        "kind": "ADD_COLUMN",
+        "target": f"{FABRIC}context_retention_policy.stream_id",
+        "type": f"{PG}uuid",
+        "nullable": False,
+    },
+    {
+        "id": "REC04",
+        "kind": "REWRITE_COORDINATES",
+        "targets": [
+            f"{FABRIC}diary_context_aggregate_aliases_v1",
+            f"{FABRIC}context_retention_policy",
+            f"{FABRIC}diary_context_observation_outbox_v1",
+        ],
+        "required_coordinate": "stream_id",
+    },
+    {
+        "id": "REC05",
+        "kind": "CHANGE_SUPPORT_SIGNATURE",
+        "target": f"{FABRIC}session_binding_allows_v1",
+        "append_input": {"name": "requested_stream_id", "type": f"{PG}uuid"},
+        "predicate_addition": "BINDING_STREAM_EQUALS_REQUESTED_STREAM",
+    },
+    {
+        "id": "REC06",
+        "kind": "REWRITE_STREAM_RLS",
+        "target_set": "ALL_STREAM_BEARING_EFFECTIVE_RELATIONS",
+        "binding_input": "ROW_OR_LOCATOR_STREAM_ID",
+    },
+    {
+        "id": "REC07",
+        "kind": "ADD_OWNER_SELECT",
+        "role": f"{FABRIC}context_schema_owner",
+        "relations": [
+            "public.appointment_command_idempotency",
+            "public.appointments",
+            "public.appointment_audit_log",
+            "public.diary_committed_events",
+        ],
+        "dml": [],
+    },
+    {
+        "id": "REC08",
+        "kind": "ADD_RECEIVER_SELECT",
+        "role": f"{FABRIC}context_admission_receiver",
+        "relations": [f"{FABRIC}context_service_practice_binding"],
+        "dml": [],
+    },
+    {
+        "id": "REC09",
+        "kind": "DECLARE_INSTALLATION_PRECONDITION",
+        "privilege": "TRIGGER",
+        "relations": [
+            "public.appointment_command_idempotency",
+            "public.appointments",
+            "public.appointment_audit_log",
+            "public.diary_committed_events",
+        ],
+        "runtime_grant": False,
+    },
+    {
+        "id": "REC10",
+        "kind": "ADD_ENUM",
+        "target": f"{FABRIC}durability_transition_result_kind",
+        "values": [
+            "RECEIPT_APPLIED",
+            "RECEIPT_REPLAYED",
+            "REBASE_APPLIED",
+            "TERMINAL_REPLAYED",
+        ],
+    },
+    {
+        "id": "REC11",
+        "kind": "ADD_COMPOSITE",
+        "target": f"{FABRIC}durability_transition_result_v1",
+        "fields": [
+            {
+                "name": "result_kind",
+                "type": f"{FABRIC}durability_transition_result_kind",
+            },
+            {"name": "checkpoint_state", "type": f"{FABRIC}checkpoint_state"},
+            {"name": "source_position", "type": f"{PG}bigint"},
+            {"name": "decision", "type": f"{FABRIC}observation_decision"},
+            {"name": "reason_code", "type": f"{FABRIC}observation_reason"},
+            {
+                "name": "checkpoint_disposition",
+                "type": f"{FABRIC}checkpoint_disposition",
+            },
+            {"name": "lifecycle_revision", "type": f"{PG}bigint"},
+            {"name": "evidence_digest", "type": f"{FABRIC}digest_sha256"},
+        ],
+    },
+    {
+        "id": "REC12",
+        "kind": "CHANGE_OUTPUT",
+        "target": f"{FABRIC}apply_durability_transition_v1",
+        "from": f"{FABRIC}context_classified_observation_receipt",
+        "to": f"{FABRIC}durability_transition_result_v1",
+    },
+    {
+        "id": "REC13",
+        "kind": "APPEND_COMPOSITE_FIELD",
+        "target": f"{FABRIC}generation_registration_v1",
+        "field": {
+            "name": "initial_key_interval",
+            "type": f"{FABRIC}future_key_interval_v1",
+        },
+    },
+    {
+        "id": "REC14",
+        "kind": "FREEZE_REGISTRATION_BASELINE",
+        "effects": [
+            "STREAM_HEAD_ZERO_OR_RELOAD",
+            "GENERATION",
+            "CHECKPOINT_AT_HEAD",
+            "DIARY_FRAME_CURRENT",
+            "WAITING_ROOM_FRAME_CURRENT",
+            "TWO_WATERMARKS_AT_HEAD",
+            "INITIAL_KEY_START_CHECKPOINT_PLUS_ONE",
+            "BASELINE_ANCHOR",
+        ],
+    },
+    {
+        "id": "REC15",
+        "kind": "ADD_COLUMN",
+        "target": f"{FABRIC}context_observer_generation.terminal_reason",
+        "type": f"{FABRIC}generation_terminal_reason",
+        "nullable": True,
+    },
+    {
+        "id": "REC16",
+        "kind": "ADD_STATE_CHECK",
+        "target": f"{FABRIC}context_observer_generation",
+        "predicate": "TERMINAL_REASON_EXACTLY_IFF_REVOKED_OR_CONSUMED",
+    },
+    {
+        "id": "REC17",
+        "kind": "REMOVE_PIN_MUTATION_CLAIM",
+        "target": "pin_one_way_release_v1",
+        "entry_points": [],
+        "pin_mutation_enabled": False,
+    },
+    {
+        "id": "REC18",
+        "kind": "FREEZE_ROTATION_REPLAY_ORDER",
+        "order": [
+            "EXACT_INTERVAL_REPLAY",
+            "DIFFERING_INTERVAL_REJECT",
+            "NEW_EFFECT_ANCHOR_FENCE",
+        ],
+    },
+    {
+        "id": "REC19",
+        "kind": "ADD_ENUM",
+        "target": f"{FABRIC}source_retention_reason",
+        "values": [
+            "ELIGIBLE",
+            "EXECUTION_DISABLED",
+            "CHECKPOINT_LAG",
+            "ACTIVE_PIN",
+            "KEY_OVERLAP",
+            "GRACE_PENDING",
+            "AMBIGUOUS_CENSUS",
+            "NO_NON_CONSUMED_GENERATION",
+        ],
+    },
+    {
+        "id": "REC20",
+        "kind": "CHANGE_COMPOSITE_FIELD_TYPE",
+        "target": f"{FABRIC}context_source_retention_eligibility_v1.reason_code",
+        "from": f"{FABRIC}observation_reason",
+        "to": f"{FABRIC}source_retention_reason",
+    },
+    {
+        "id": "REC21",
+        "kind": "FREEZE_AGGREGATE_REVISION",
+        "source": "COUNT_PUBLIC_APPOINTMENT_AUDIT_LOG_ID_BY_PRACTICE_AND_APPOINTMENT",
+        "appointment_field": False,
+    },
+    {
+        "id": "REC22",
+        "kind": "FREEZE_ALIAS_PROVENANCE",
+        "new_alias_requires_current_xid": True,
+        "reused_alias_requires_current_xid": False,
+        "reuse_coordinate": [
+            "practice_id",
+            "source_contract_id",
+            "stream_id",
+            "product_appointment_uuid",
+        ],
+    },
+    {
+        "id": "REC23",
+        "kind": "FREEZE_TRIGGER_MATRIX",
+        "matrix_id": "TRIGGER_APPLICABILITY_RETURN_MATRIX_V1",
+    },
+    {
+        "id": "REC24",
+        "kind": "FREEZE_SECOND_UPDATE_RULE",
+        "target": "public.appointments",
+        "predicate": "OLD_XMIN_IS_CURRENT_XID32",
+        "outcome": "REJECT",
+    },
+    {
+        "id": "REC25",
+        "kind": "FREEZE_FENCE_PROPERTIES",
+        "properties": [
+            "READ_ONLY",
+            "LOCK_FREE",
+            "SIBLING_CALL_FREE",
+            "ORDER_INDEPENDENT",
+            "FINAL_TRANSACTION_STATE",
+        ],
+    },
+    {
+        "id": "REC26",
+        "kind": "FREEZE_SHARED_TABLE_RULES",
+        "rules": [
+            "BOTH_IMAGES_CLASSIFY_ADOPTION_ESCAPE",
+            "CHECK_IN_EXCLUDED",
+            "OLDER_EVENT_RETENTION_ALLOWED",
+            "OUTBOX_RETENTION_ONLY_VIA_PURGE",
+            "LIFECYCLE_HEAD_BASELINE_ALLOWED",
+        ],
+    },
 ]
 
 
@@ -613,16 +825,13 @@ def build_catalogue(parent: dict[str, Any]) -> dict[str, Any]:
                 columns.append({"name": name, "data_type": type_name})
         relations[relation_id] = [row["name"] for row in columns]
         column_types[relation_id] = {
-            row["name"]: _qualify_type(parent, row["data_type"])
-            for row in columns
+            row["name"]: _qualify_type(parent, row["data_type"]) for row in columns
         }
     for relation_id, columns in APPLICATION_COLUMNS.items():
         relations[relation_id] = list(columns)
         column_types[relation_id] = dict(columns)
 
-    types = {
-        f"{PG}{name}" for name in parent["type_catalogue"]["builtins"]
-    }
+    types = {f"{PG}{name}" for name in parent["type_catalogue"]["builtins"]}
     types.update(
         {
             f"{PG}name",
@@ -796,26 +1005,57 @@ def build_effective_roles(parent: dict[str, Any]) -> list[dict[str, Any]]:
     receiver = next(
         row for row in roles if row["role"] == FABRIC + "context_admission_receiver"
     )
-    receiver["direct_table_select"].append(
-        FABRIC + "context_service_practice_binding"
-    )
+    receiver["direct_table_select"].append(FABRIC + "context_service_practice_binding")
     return roles
 
 
 TRIGGER_TERMINALS: dict[str, dict[str, str]] = {
-    "cf_guard_claim_v1": {"UPDATE": "RETURN_NEW_OR_RAISE", "DELETE": "RETURN_OLD_OR_RAISE"},
-    "cf_fence_claim_v1": {"INSERT": "RETURN_NULL_OR_RAISE", "UPDATE": "RETURN_NULL_OR_RAISE", "DELETE": "RETURN_NULL_OR_RAISE"},
+    "cf_guard_claim_v1": {
+        "UPDATE": "RETURN_NEW_OR_RAISE",
+        "DELETE": "RETURN_OLD_OR_RAISE",
+    },
+    "cf_fence_claim_v1": {
+        "INSERT": "RETURN_NULL_OR_RAISE",
+        "UPDATE": "RETURN_NULL_OR_RAISE",
+        "DELETE": "RETURN_NULL_OR_RAISE",
+    },
     "cf_fence_appointment_update_v1": {"UPDATE": "RETURN_NULL_OR_RAISE"},
-    "cf_guard_audit_v1": {"UPDATE": "RETURN_NEW_OR_RAISE", "DELETE": "RETURN_OLD_OR_RAISE"},
-    "cf_fence_audit_v1": {"INSERT": "RETURN_NULL_OR_RAISE", "UPDATE": "RETURN_NULL_OR_RAISE", "DELETE": "RETURN_NULL_OR_RAISE"},
-    "cf_guard_event_v1": {"UPDATE": "RETURN_NEW_OR_RAISE", "DELETE": "RETURN_OLD_OR_RAISE"},
-    "cf_fence_event_v1": {"INSERT": "RETURN_NULL_OR_RAISE", "UPDATE": "RETURN_NULL_OR_RAISE", "DELETE": "RETURN_NULL_OR_RAISE"},
+    "cf_guard_audit_v1": {
+        "UPDATE": "RETURN_NEW_OR_RAISE",
+        "DELETE": "RETURN_OLD_OR_RAISE",
+    },
+    "cf_fence_audit_v1": {
+        "INSERT": "RETURN_NULL_OR_RAISE",
+        "UPDATE": "RETURN_NULL_OR_RAISE",
+        "DELETE": "RETURN_NULL_OR_RAISE",
+    },
+    "cf_guard_event_v1": {
+        "UPDATE": "RETURN_NEW_OR_RAISE",
+        "DELETE": "RETURN_OLD_OR_RAISE",
+    },
+    "cf_fence_event_v1": {
+        "INSERT": "RETURN_NULL_OR_RAISE",
+        "UPDATE": "RETURN_NULL_OR_RAISE",
+        "DELETE": "RETURN_NULL_OR_RAISE",
+    },
     "cf_guard_alias_v1": {"UPDATE": "RAISE", "DELETE": "RAISE"},
-    "cf_fence_alias_v1": {"INSERT": "RETURN_NULL_OR_RAISE", "UPDATE": "RAISE", "DELETE": "RAISE"},
+    "cf_fence_alias_v1": {
+        "INSERT": "RETURN_NULL_OR_RAISE",
+        "UPDATE": "RAISE",
+        "DELETE": "RAISE",
+    },
     "cf_guard_stream_head_v1": {"UPDATE": "RETURN_NEW_OR_RAISE", "DELETE": "RAISE"},
-    "cf_fence_stream_head_v1": {"INSERT": "RETURN_NULL_OR_RAISE", "UPDATE": "RETURN_NULL_OR_RAISE", "DELETE": "RAISE"},
+    "cf_fence_stream_head_v1": {
+        "INSERT": "RETURN_NULL_OR_RAISE",
+        "UPDATE": "RETURN_NULL_OR_RAISE",
+        "DELETE": "RAISE",
+    },
     "cf_guard_outbox_v1": {"UPDATE": "RAISE", "DELETE": "RETURN_OLD_OR_RAISE"},
-    "cf_fence_outbox_v1": {"INSERT": "RETURN_NULL_OR_RAISE", "UPDATE": "RAISE", "DELETE": "RETURN_NULL_OR_RAISE"},
+    "cf_fence_outbox_v1": {
+        "INSERT": "RETURN_NULL_OR_RAISE",
+        "UPDATE": "RAISE",
+        "DELETE": "RETURN_NULL_OR_RAISE",
+    },
 }
 
 
@@ -874,7 +1114,9 @@ def binding_fragment(
             system_ref("SESSION_USER", f"{PG}name"),
         ),
         eq(
-            source_column(relation, "logical_capability", f"{FABRIC}logical_capability"),
+            source_column(
+                relation, "logical_capability", f"{FABRIC}logical_capability"
+            ),
             const(f"{FABRIC}logical_capability", capability),
         ),
         eq(
@@ -1007,7 +1249,10 @@ def build_producer_body() -> dict[str, Any]:
             relation=claim_relation,
             columns=claim_columns,
             predicate=all_of(
-                eq(source_column(claim_relation, "id", f"{PG}uuid"), input_ref("command_id", f"{PG}uuid")),
+                eq(
+                    source_column(claim_relation, "id", f"{PG}uuid"),
+                    input_ref("command_id", f"{PG}uuid"),
+                ),
                 eq(source_column(claim_relation, "practice_id", f"{PG}uuid"), practice),
             ),
             cardinality="EXACTLY_ONE",
@@ -1023,8 +1268,14 @@ def build_producer_body() -> dict[str, Any]:
         assert_node(
             f"{body_id}.p04",
             all_of(
-                eq(claim("operation_id", f"{PG}text"), const(f"{PG}text", "confirmAppointmentUpdateProposal")),
-                eq(claim("route_family", f"{PG}text"), const(f"{PG}text", "update-confirm")),
+                eq(
+                    claim("operation_id", f"{PG}text"),
+                    const(f"{PG}text", "confirmAppointmentUpdateProposal"),
+                ),
+                eq(
+                    claim("route_family", f"{PG}text"),
+                    const(f"{PG}text", "update-confirm"),
+                ),
                 eq(claim("state", f"{PG}text"), const(f"{PG}text", "in_progress")),
                 unary("IS_NOT_NULL", claim("request_body_hash", f"{PG}text")),
                 unary("IS_NOT_NULL", claim("target_appointment_id", f"{PG}uuid")),
@@ -1052,8 +1303,14 @@ def build_producer_body() -> dict[str, Any]:
             relation=appointment_relation,
             columns=appointment_columns,
             predicate=all_of(
-                eq(source_column(appointment_relation, "practice_id", f"{PG}uuid"), practice),
-                eq(source_column(appointment_relation, "id", f"{PG}uuid"), claim("target_appointment_id", f"{PG}uuid")),
+                eq(
+                    source_column(appointment_relation, "practice_id", f"{PG}uuid"),
+                    practice,
+                ),
+                eq(
+                    source_column(appointment_relation, "id", f"{PG}uuid"),
+                    claim("target_appointment_id", f"{PG}uuid"),
+                ),
             ),
             cardinality="EXACTLY_ONE",
             output_symbol="appointment",
@@ -1069,7 +1326,11 @@ def build_producer_body() -> dict[str, Any]:
             f"{body_id}.p06",
             all_of(
                 xmin_equals_current(local_ref("appointment", appointment_relation)),
-                binary("GT", appointment("duration_minutes", f"{PG}integer"), const(f"{PG}integer", 0)),
+                binary(
+                    "GT",
+                    appointment("duration_minutes", f"{PG}integer"),
+                    const(f"{PG}integer", 0),
+                ),
             ),
             "F_PROVENANCE",
         )
@@ -1092,7 +1353,10 @@ def build_producer_body() -> dict[str, Any]:
             columns=audit_columns,
             predicate=all_of(
                 eq(source_column(audit_relation, "practice_id", f"{PG}uuid"), practice),
-                eq(source_column(audit_relation, "id", f"{PG}uuid"), claim("audit_log_id", f"{PG}uuid")),
+                eq(
+                    source_column(audit_relation, "id", f"{PG}uuid"),
+                    claim("audit_log_id", f"{PG}uuid"),
+                ),
             ),
             cardinality="EXACTLY_ONE",
             output_symbol="audit",
@@ -1100,12 +1364,16 @@ def build_producer_body() -> dict[str, Any]:
         )
     )
     symbols.append(node_symbol("audit", audit_relation))
-    audit = lambda column, type_name: column_ref("audit", audit_relation, column, type_name)
+    audit = lambda column, type_name: column_ref(
+        "audit", audit_relation, column, type_name
+    )
     nodes.append(
         assert_node(
             f"{body_id}.p08",
             all_of(
-                eq(audit("appointment_id", f"{PG}uuid"), appointment("id", f"{PG}uuid")),
+                eq(
+                    audit("appointment_id", f"{PG}uuid"), appointment("id", f"{PG}uuid")
+                ),
                 eq(audit("command_id", f"{PG}uuid"), claim("id", f"{PG}uuid")),
                 eq(audit("action", f"{PG}text"), const(f"{PG}text", "update")),
                 xmin_equals_current(local_ref("audit", audit_relation)),
@@ -1122,7 +1390,10 @@ def build_producer_body() -> dict[str, Any]:
             columns=["id"],
             predicate=all_of(
                 eq(source_column(audit_relation, "practice_id", f"{PG}uuid"), practice),
-                eq(source_column(audit_relation, "appointment_id", f"{PG}uuid"), appointment("id", f"{PG}uuid")),
+                eq(
+                    source_column(audit_relation, "appointment_id", f"{PG}uuid"),
+                    appointment("id", f"{PG}uuid"),
+                ),
             ),
             cardinality="COMPLETE_SET",
             output_symbol="audit_ids",
@@ -1136,14 +1407,22 @@ def build_producer_body() -> dict[str, Any]:
             f"{body_id}.p10",
             "aggregate_revision",
             f"{PG}bigint",
-            {"op": "COUNT", "operand": local_ref("audit_ids", audit_relation + "[]"), "type": f"{PG}bigint"},
+            {
+                "op": "COUNT",
+                "operand": local_ref("audit_ids", audit_relation + "[]"),
+                "type": f"{PG}bigint",
+            },
         )
     )
     symbols.append(node_symbol("aggregate_revision", f"{PG}bigint"))
     nodes.append(
         assert_node(
             f"{body_id}.p10a",
-            binary("GT", local_ref("aggregate_revision", f"{PG}bigint"), const(f"{PG}bigint", 0)),
+            binary(
+                "GT",
+                local_ref("aggregate_revision", f"{PG}bigint"),
+                const(f"{PG}bigint", 0),
+            ),
             "F_MEMBERSHIP",
         )
     )
@@ -1171,7 +1450,10 @@ def build_producer_body() -> dict[str, Any]:
             columns=event_columns,
             predicate=all_of(
                 eq(source_column(event_relation, "practice_id", f"{PG}uuid"), practice),
-                eq(source_column(event_relation, "command_id", f"{PG}uuid"), claim("id", f"{PG}uuid")),
+                eq(
+                    source_column(event_relation, "command_id", f"{PG}uuid"),
+                    claim("id", f"{PG}uuid"),
+                ),
             ),
             cardinality="EXACTLY_ONE",
             output_symbol="event",
@@ -1179,7 +1461,9 @@ def build_producer_body() -> dict[str, Any]:
         )
     )
     symbols.append(node_symbol("event", event_relation))
-    event = lambda column, type_name: column_ref("event", event_relation, column, type_name)
+    event = lambda column, type_name: column_ref(
+        "event", event_relation, column, type_name
+    )
     payload = event("payload", f"{PG}jsonb")
     end_time = {
         "op": "TIMESTAMP_ADD_MINUTES",
@@ -1191,16 +1475,48 @@ def build_producer_body() -> dict[str, Any]:
         assert_node(
             f"{body_id}.p12",
             all_of(
-                eq(event("event_type", f"{PG}text"), const(f"{PG}text", "diary.appointment_rescheduled")),
-                eq(event("schema_version", f"{PG}text"), const(f"{PG}text", "diary.appointment_rescheduled.v1")),
-                eq(event("source_system", f"{PG}text"), const(f"{PG}text", "emr4-diary")),
-                eq(event("appointment_id", f"{PG}uuid"), appointment("id", f"{PG}uuid")),
+                eq(
+                    event("event_type", f"{PG}text"),
+                    const(f"{PG}text", "diary.appointment_rescheduled"),
+                ),
+                eq(
+                    event("schema_version", f"{PG}text"),
+                    const(f"{PG}text", "diary.appointment_rescheduled.v1"),
+                ),
+                eq(
+                    event("source_system", f"{PG}text"),
+                    const(f"{PG}text", "emr4-diary"),
+                ),
+                eq(
+                    event("appointment_id", f"{PG}uuid"), appointment("id", f"{PG}uuid")
+                ),
                 eq(event("audit_log_id", f"{PG}uuid"), audit("id", f"{PG}uuid")),
-                eq(event("aggregate_revision", f"{PG}bigint"), local_ref("aggregate_revision", f"{PG}bigint")),
+                eq(
+                    event("aggregate_revision", f"{PG}bigint"),
+                    local_ref("aggregate_revision", f"{PG}bigint"),
+                ),
                 xmin_equals_current(local_ref("event", event_relation)),
-                {"op": "JSON_KEYS_EXACT", "source": payload, "keys": ["appointment_id", "practitioner_id", "location_id", "start_time", "end_time", "reason_codes"], "type": f"{PG}boolean"},
-                eq(json_value(payload, "appointment_id", f"{PG}uuid"), appointment("id", f"{PG}uuid")),
-                eq(json_value(payload, "practitioner_id", f"{PG}uuid"), appointment("practitioner_id", f"{PG}uuid")),
+                {
+                    "op": "JSON_KEYS_EXACT",
+                    "source": payload,
+                    "keys": [
+                        "appointment_id",
+                        "practitioner_id",
+                        "location_id",
+                        "start_time",
+                        "end_time",
+                        "reason_codes",
+                    ],
+                    "type": f"{PG}boolean",
+                },
+                eq(
+                    json_value(payload, "appointment_id", f"{PG}uuid"),
+                    appointment("id", f"{PG}uuid"),
+                ),
+                eq(
+                    json_value(payload, "practitioner_id", f"{PG}uuid"),
+                    appointment("practitioner_id", f"{PG}uuid"),
+                ),
                 unary(
                     "NOT",
                     is_distinct(
@@ -1208,9 +1524,15 @@ def build_producer_body() -> dict[str, Any]:
                         appointment("location_id", f"{PG}uuid"),
                     ),
                 ),
-                eq(json_value(payload, "start_time", f"{PG}timestamptz"), appointment("start_time", f"{PG}timestamptz")),
+                eq(
+                    json_value(payload, "start_time", f"{PG}timestamptz"),
+                    appointment("start_time", f"{PG}timestamptz"),
+                ),
                 eq(json_value(payload, "end_time", f"{PG}timestamptz"), end_time),
-                eq(json_value(payload, "reason_codes", f"{PG}text[]"), array_const(f"{PG}text[]", ["appointment_time_changed"])),
+                eq(
+                    json_value(payload, "reason_codes", f"{PG}text[]"),
+                    array_const(f"{PG}text[]", ["appointment_time_changed"]),
+                ),
             ),
             "F_MEMBERSHIP",
         )
@@ -1236,9 +1558,17 @@ def build_producer_body() -> dict[str, Any]:
     ]
     alias_winner = all_of(
         eq(source_column(alias_relation, "practice_id", f"{PG}uuid"), practice),
-        eq(source_column(alias_relation, "source_contract_id", f"{FABRIC}source_contract_code"), source_contract),
+        eq(
+            source_column(
+                alias_relation, "source_contract_id", f"{FABRIC}source_contract_code"
+            ),
+            source_contract,
+        ),
         eq(source_column(alias_relation, "stream_id", f"{PG}uuid"), stream),
-        eq(source_column(alias_relation, "product_appointment_uuid", f"{PG}uuid"), appointment("id", f"{PG}uuid")),
+        eq(
+            source_column(alias_relation, "product_appointment_uuid", f"{PG}uuid"),
+            appointment("id", f"{PG}uuid"),
+        ),
     )
     nodes.append(
         insert_node(
@@ -1247,19 +1577,31 @@ def build_producer_body() -> dict[str, Any]:
             bindings=alias_bindings,
             output_symbol="alias",
             returning_columns=alias_columns,
-            reload_key=["practice_id", "source_contract_id", "stream_id", "product_appointment_uuid"],
+            reload_key=[
+                "practice_id",
+                "source_contract_id",
+                "stream_id",
+                "product_appointment_uuid",
+            ],
             winner_predicate=alias_winner,
         )
     )
     symbols.append(node_symbol("alias", alias_relation))
-    alias = lambda column, type_name: column_ref("alias", alias_relation, column, type_name)
+    alias = lambda column, type_name: column_ref(
+        "alias", alias_relation, column, type_name
+    )
     alias_lock_id = f"{body_id}.p15"
     nodes.append(
         lock_node(
             alias_lock_id,
             relation=alias_relation,
             predicate=alias_winner,
-            key_columns=["practice_id", "source_contract_id", "stream_id", "product_appointment_uuid"],
+            key_columns=[
+                "practice_id",
+                "source_contract_id",
+                "stream_id",
+                "product_appointment_uuid",
+            ],
             mode="FOR_KEY_SHARE",
             order=1,
             output_symbol="locked_alias",
@@ -1278,7 +1620,12 @@ def build_producer_body() -> dict[str, Any]:
     ]
     head_predicate = all_of(
         eq(source_column(head_relation, "practice_id", f"{PG}uuid"), practice),
-        eq(source_column(head_relation, "source_contract_id", f"{FABRIC}source_contract_code"), source_contract),
+        eq(
+            source_column(
+                head_relation, "source_contract_id", f"{FABRIC}source_contract_code"
+            ),
+            source_contract,
+        ),
         eq(source_column(head_relation, "stream_id", f"{PG}uuid"), stream),
     )
     nodes.append(
@@ -1294,13 +1641,19 @@ def build_producer_body() -> dict[str, Any]:
         )
     )
     symbols.append(node_symbol("head", head_relation))
-    head = lambda column, type_name: column_ref("head", head_relation, column, type_name)
+    head = lambda column, type_name: column_ref(
+        "head", head_relation, column, type_name
+    )
     nodes.append(
         assert_node(
             f"{body_id}.p16a",
             all_of(
                 eq(head("stream_epoch", f"{PG}bigint"), const(f"{PG}bigint", 1)),
-                binary("LT", head("last_position", f"{PG}bigint"), const(f"{PG}bigint", 9223372036854775807)),
+                binary(
+                    "LT",
+                    head("last_position", f"{PG}bigint"),
+                    const(f"{PG}bigint", 9223372036854775807),
+                ),
             ),
             "F_STREAM",
         )
@@ -1310,7 +1663,11 @@ def build_producer_body() -> dict[str, Any]:
             f"{body_id}.p17",
             "next_position",
             f"{PG}bigint",
-            add(head("last_position", f"{PG}bigint"), const(f"{PG}bigint", 1), f"{PG}bigint"),
+            add(
+                head("last_position", f"{PG}bigint"),
+                const(f"{PG}bigint", 1),
+                f"{PG}bigint",
+            ),
         )
     )
     symbols.append(node_symbol("next_position", f"{PG}bigint"))
@@ -1321,7 +1678,11 @@ def build_producer_body() -> dict[str, Any]:
             f"{FABRIC}digest_sha256",
             digest(
                 f"{FABRIC}source_contract_digest_v1",
-                [source_contract, event("event_type", f"{PG}text"), event("schema_version", f"{PG}text")],
+                [
+                    source_contract,
+                    event("event_type", f"{PG}text"),
+                    event("schema_version", f"{PG}text"),
+                ],
             ),
         )
     )
@@ -1349,7 +1710,10 @@ def build_producer_body() -> dict[str, Any]:
         ("raw_event_uuid", event("id", f"{PG}uuid")),
         ("opaque_aggregate_alias", alias("opaque_aggregate_alias", f"{PG}uuid")),
         ("aggregate_revision", local_ref("aggregate_revision", f"{PG}bigint")),
-        ("source_contract_digest", local_ref("source_contract_digest", f"{FABRIC}digest_sha256")),
+        (
+            "source_contract_digest",
+            local_ref("source_contract_digest", f"{FABRIC}digest_sha256"),
+        ),
         ("transaction_authored_at", tx),
     ]
     nodes.append(
@@ -1384,15 +1748,38 @@ def build_producer_body() -> dict[str, Any]:
             relation=outbox_relation,
             columns=outbox_columns,
             predicate=all_of(
-                eq(source_column(outbox_relation, "practice_id", f"{PG}uuid"), practice),
-                eq(source_column(outbox_relation, "source_contract_id", f"{FABRIC}source_contract_code"), source_contract),
+                eq(
+                    source_column(outbox_relation, "practice_id", f"{PG}uuid"), practice
+                ),
+                eq(
+                    source_column(
+                        outbox_relation,
+                        "source_contract_id",
+                        f"{FABRIC}source_contract_code",
+                    ),
+                    source_contract,
+                ),
                 eq(source_column(outbox_relation, "stream_id", f"{PG}uuid"), stream),
-                eq(source_column(outbox_relation, "stream_epoch", f"{PG}bigint"), head("stream_epoch", f"{PG}bigint")),
-                eq(source_column(outbox_relation, "transaction_position", f"{PG}bigint"), local_ref("next_position", f"{PG}bigint")),
+                eq(
+                    source_column(outbox_relation, "stream_epoch", f"{PG}bigint"),
+                    head("stream_epoch", f"{PG}bigint"),
+                ),
+                eq(
+                    source_column(
+                        outbox_relation, "transaction_position", f"{PG}bigint"
+                    ),
+                    local_ref("next_position", f"{PG}bigint"),
+                ),
             ),
             cardinality="EXACTLY_ONE",
             output_symbol="outbox",
-            order_by=["practice_id", "source_contract_id", "stream_id", "stream_epoch", "transaction_position"],
+            order_by=[
+                "practice_id",
+                "source_contract_id",
+                "stream_id",
+                "stream_epoch",
+                "transaction_position",
+            ],
         )
     )
     symbols.append(node_symbol("outbox", outbox_relation))
@@ -1403,11 +1790,7 @@ def build_producer_body() -> dict[str, Any]:
             condition=const(f"{PG}boolean", False),
             then=[propagate_retryable(f"{body_id}.retry")],
             convergence="ALL_TERMINAL",
-            **{
-                "else": [
-                    return_row(f"{body_id}.p22", "outbox", outbox_relation)
-                ]
-            },
+            **{"else": [return_row(f"{body_id}.p22", "outbox", outbox_relation)]},
         )
     )
     return body(body_id, "ENTRY_POINT", body_id, symbols, nodes)

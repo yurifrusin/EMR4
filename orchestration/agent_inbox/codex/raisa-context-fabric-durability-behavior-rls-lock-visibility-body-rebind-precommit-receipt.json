@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_function_trigger_body_parent_rebind_to_the_exact_stream_head_rls_lock_visibility_structural_source_without_changing_any_typed_body_program",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Structural parent SHA-256 is a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e. The regenerated body contract SHA-256 is 6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b. Diff reconciliation proves only the parent binding and contract seals changed across the contract/schema plus their exact builder/validator constants and parent-rebind note. The exhaustive 223-test body packet produced 222 semantic passes and one stale documentation-hash failure; after the note was appended with the exact current source/hash, the failed node and all 37 core body tests pass. Builder check, Ruff, format and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns this deterministic parent rebind and downstream renderer, parse and behavior recovery sequence. The read-only codebase-health research is complete. No implementation worker or external verifier is active; the fresh Gemini veto remains deferred until the complete exact candidate passes deterministic checks.",
+    "git_refs_and_worktree": "Task HEAD before this explicit-path body rebind commit is 338c30ddb01561ce97a4b9837317e771b555c221. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the builder, validator, body contract/schema, focused parent test, parent-rebind note and this precommit pair are eligible; docs/branding, research receipts, unrelated untracked files and mutable behavior evidence remain excluded.",
+    "live_handover_current_baton": "The stream-head RLS lock-visibility structural recovery is committed at 338c30ddb01561ce97a4b9837317e771b555c221. The next ordered dependency is the function/trigger body parent rebind before renderer/artifact regeneration; behavior runtime remains closed.",
+    "protected_evidence_boundaries": "This commit is an accurately labelled body-parent rebind only. Inert renderer constants/artifacts, parse evidence and the behavior contract remain stale and ineligible until their ordered descendants pass. Immutable failure 023 and its diagnosis remain preserved; mutable failed behavior evidence remains untracked and unstaged. No protected, patient, clinical or product data, provider, database runtime, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref boundary opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

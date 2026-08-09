@@ -20,3 +20,22 @@ parents, followed by exact parse/catalogue and behavior descendant rebinding.
 No database execution, application migration or wiring, operational source,
 patient/product data, provider/model call, command/write, deployment,
 production, release, Pages or protected-ref authority is opened.
+
+## 2026-08-09 stream-head lock-visibility rebind
+
+The bounded behavior failure-023 recovery changes only
+`pol_cf_01_update USING` in the structural parent so the lifecycle entry point
+can retain its existing `SELECT ... FOR UPDATE` lock. `WITH CHECK` remains
+producer-only and lifecycle retains zero direct table DML/SELECT.
+
+The corrected structural source is commit
+`338c30ddb01561ce97a4b9837317e771b555c221` with canonical contract SHA-256
+`sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e`.
+The body contract is rebound mechanically to that parent and resealed as
+`sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b`.
+
+All 22 typed body programs, signatures, effects, failure registry, trigger
+declarations, role grants, transaction fences and renderer order remain
+byte-equivalent after excluding the parent and contract seals. The prior
+parent-rebind record above remains historical provenance rather than current
+authority.

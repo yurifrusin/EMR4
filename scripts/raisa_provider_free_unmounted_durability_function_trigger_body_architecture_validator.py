@@ -1089,7 +1089,7 @@ EXACT_PARENT_BINDING = {
         "contract.json"
     ),
     "contract_sha256": (
-        "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6"
+        "sha256:a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e"
     ),
     "relation_signature_trigger_and_role_authority": (
         "RETAINED_EXCEPT_EXPLICIT_RECOVERY_OPERATIONS"
