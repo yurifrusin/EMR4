@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_distinct_support_execute_grant_exact_parse_catalogue_pass_and_its_five_source_execution_receipt_without_staging_mutable_or_unrelated_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. Renderer 2.0.16 has now passed both deliberately nonaccepting catalogue characterization and one distinct exact reproduction. The next dependency is an accepted-source ledger before the frozen twenty-scenario behavior contract is rebound.",
+    "current_authority_allocation": "GPT Sol owns exact-pass evidence acceptance, explicit-path task-branch commit and later behavior rebind. No worker, subagent or external model owns this runtime evidence or acceptance. Independent Gemini review remains gated behind the complete behavior packet.",
+    "active_plan_and_acceptance": "Exact reproduction attempt 044a7267b0e4b0f89d24b95c returned raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass under exact contract d9237e6db14e314de5e2981be1073575db2e512ed1eff44b1f9ebf8b044c17bc. Immutable evidence SHA-256 51608c55dd7a491f7ca20d822881e7d06c2e594aa968aa7d99a754ca0100eca5 matches all fifteen characterized digests, records exact cleanup and differs from characterization attempt/container. The complete parse/plan packet passes 131 tests plus Ruff and diff checks.",
+    "protected_evidence_boundaries": "This commit proves parse, atomic installation, exact catalogue and cleanup only. It proves no function, trigger, RLS or transaction behavior and opens no migration application, operational database/credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model/product call, application/API/Diary wiring, command/write, deployment, production, release, Pages or protected-ref authority. docs/branding and all unrelated untracked paths remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Task HEAD remains 312b4b8dbcfab2f2e5a6dc43ddc051af2bbb3190 before this commit; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exact reproduction container ab6b5d7b32023c184174fd10a653e05bf367c79fe6cd1ce5a79463802525cac4 is absent. Mutable parse evidence is restored at 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and preserved failure evidence at 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c; neither will be staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "support_execute_grant_exact_reproduction_complete_five_source_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol observed the one-shot pass, copied immutable evidence before restoring mutable paths, verified the exact owned container absent, and passed 131 deterministic tests plus Ruff and diff checks."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent participated in the serial database proof."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No external verifier call occurred at the parse reproduction gate."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker participated."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code was not used."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport was used."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

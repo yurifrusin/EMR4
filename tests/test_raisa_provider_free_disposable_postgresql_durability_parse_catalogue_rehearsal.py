@@ -220,6 +220,13 @@ SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE_PATH = (
 SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE = json.loads(
     SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-support-execute-grant-exact-pass.json"
+)
+SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE = json.loads(
+    SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1355,6 +1362,47 @@ def test_support_execute_grant_characterization_is_exact_and_narrow() -> None:
         "removed": True,
         "status": "cleanup_verified",
     }
+
+
+def test_support_execute_grant_exact_reproduction_is_distinct_pass() -> None:
+    evidence = SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            SUPPORT_EXECUTE_GRANT_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "51608c55dd7a491f7ca20d822881e7d06c2e594aa968aa7d99a754ca0100eca5"
+    )
+    characterization = SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE
+    assert evidence["attempt_id"] == "044a7267b0e4b0f89d24b95c"
+    assert evidence["attempt_id"] != characterization["attempt_id"]
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["catalogue"]["status"] == "matched"
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == characterization["catalogue"]["query_digests"]
+    )
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:d9237e6db14e314de5e2981be1073575db2e512ed1eff44b1f9ebf8b044c17bc"
+    )
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "ab6b5d7b32023c184174fd10a653e05bf367c79fe6cd1ce5a79463802525cac4"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert (
+        evidence["cleanup"]["container_id"]
+        != characterization["cleanup"]["container_id"]
+    )
 
 
 def test_dml_name_ambiguity_exact_reproduction_is_distinct_pass() -> None:

@@ -2,8 +2,7 @@
 
 Date: 2026-08-10
 
-Status: characterization passed as a deliberately nonaccepting result; exact
-reproduction remains required
+Status: exact parse/catalogue reproduction passed; behavior remains closed
 
 The disposable PostgreSQL parse/catalogue rehearsal is rebound to renderer
 2.0.16 source commit `01da1ecf50b25a0086dcf977e0468f9f3ccbe12f` and
@@ -33,10 +32,20 @@ digest changed.
 
 The resulting exact-digest contract canonical SHA-256 is
 `d9237e6db14e314de5e2981be1073575db2e512ed1eff44b1f9ebf8b044c17bc`.
-It remains nonaccepted until one distinct newly owned container reproduces all
-fifteen exact digests and verifies exact cleanup. Mutable accepted evidence and
-the preserved failure evidence were restored byte-for-byte after the
-characterization.
+Distinct exact reproduction attempt `044a7267b0e4b0f89d24b95c` then matched all
+fifteen digests under that exact contract and returned
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`.
+Its immutable evidence SHA-256 is
+`51608c55dd7a491f7ca20d822881e7d06c2e594aa968aa7d99a754ca0100eca5`.
+Exact newly owned container
+`ab6b5d7b32023c184174fd10a653e05bf367c79fe6cd1ce5a79463802525cac4`
+was removed and exact-ID absence was verified. The characterization and exact
+pass use distinct attempts and containers. Mutable accepted evidence and the
+preserved failure evidence were restored byte-for-byte after both runs.
+
+The next gate is a separately committed accepted-source ledger, followed by an
+exact six-parent rebind of the frozen twenty-scenario behavior contract and a
+fresh exact-HEAD independent veto before any further behavior attempt.
 
 This rebind proves no function, trigger, RLS or transaction behavior and opens
 no applied migration, operational database, source/watcher/listener/feed,
