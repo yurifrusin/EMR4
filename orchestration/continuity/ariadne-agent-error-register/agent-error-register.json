@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 143,
+  "register_revision": 144,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6674,6 +6674,53 @@
           "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal_plan.py",
           "tests/test_raisa_context_fabric_durability_behavior_failure_026_json_keys_order_diagnosis.py",
           "docs/ariadne-agent-error-correction-register-revision-143.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0169",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-028",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Generated PL/pgSQL must make scalar-local and DML target-column namespaces explicit so identical typed names cannot depend on PostgreSQL variable-conflict resolution.",
+      "observed_error": "Behavior attempt 028 stopped at BTR-E02 with SQLSTATE 42702 in project_update_confirm_reschedule_v1 line 124, zero completed scenarios and verified cleanup. Exact source diagnosis mapped the line to outbox insert p19 and proved aggregate_revision plus source_contract_digest were emitted as unqualified local values and unqualified returning columns despite matching target-column names.",
+      "detection_method": "The immutable minimized failure bound the exact function and line. The source-bound artifact mapped line 124 to the outbox insert, the typed body node independently proved the two exact value and returning collisions, and the renderer source independently proved both namespaces were emitted unqualified. No diagnostic container run or raw PostgreSQL error persistence was needed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-028.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-028.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_028_dml_name_ambiguity_diagnosis.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-dml-name-ambiguity-recovery.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-dml-name-ambiguity-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-144.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.plpgsql_dml_local_column_namespace_ambiguity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Renderer 2.0.14 labels generated outer PL/pgSQL blocks cf_body, qualifies every scalar LOCAL reference through that label, and qualifies INSERT/UPDATE return projections through their exact DML target. Body programs, symbols, typed values, predicates, scenarios and authority are unchanged.",
+        "prevention_control": "Renderer and hostile recognizer tests must require exact outer-block labels, block-qualified scalar locals, target-qualified DML returns and absence of any #variable_conflict override before artifact regeneration, fresh parse proof, behavior rebind, independent veto or runtime eligibility.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-dml-name-ambiguity-recovery.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-dml-name-ambiguity-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-144.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

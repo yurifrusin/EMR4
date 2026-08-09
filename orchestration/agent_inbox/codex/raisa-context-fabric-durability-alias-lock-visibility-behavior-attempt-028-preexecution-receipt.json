@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_behavior_attempt_028_exactly_once_in_one_new_owned_pull_never_networkless_postgresql_16_container_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Accepted provenance HEAD ec79e095165d08354c946eb3c3f6202f491f522a contains committed review receipt SHA-256 1cab8055294fc433978ff188584e550b00f78315ccf83d92a5ab158a8647bfb2. The behavior contract is exact sha256:fa8631164d733728b738c41a372081bb5130fd446d1796dadc8ca5f49ae90063; its twenty scenarios remain canonical sha256:eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19 in counts 6/4/3/4/3. Artifact sha256:64cbc2b0e17276387c6815af02a2d0635fc538e3408995c1054ecbc708b5cbae passed distinct exact PostgreSQL parse/catalogue evidence at source a2a40577fa618f833c67dedd5bec52083fdeb0bc. The complete packet passed 504 tests locally and independently, with Ruff/diff checks and clean reviewer postflight.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial behavior attempt, minimized evidence, exact-ID cleanup, diagnosis/recovery and acceptance. Gemini review authority is consumed by the pass at exact source 939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa. No worker, native subagent, provider model, product route or protected integrator is active.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at ec79e095165d08354c946eb3c3f6202f491f522a before this receipt. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Review worktree r139 remains clean at reviewed source 939c929f4b7b43b34aa1bb9bf3219e774b6b0cfa. The untracked mutable current behavior evidence contains preserved attempt 027 before this one authorised overwrite; its immutable byte-identical failure file remains tracked.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. Attempt 027 and all predecessors are immutably preserved. Producer-bound alias lock visibility, distinct exact parse proof, six-parent behavior rebind, complete deterministic packet and fresh independent veto now pass. Attempt 028 is the next and only newly eligible runtime action.",
+    "protected_evidence_boundaries": "Exactly one newly owned container may use only the locally present postgres:16-bookworm image with --pull=never, --network=none, no host ports, no bind/named/workspace/Docker-socket mounts, container-local tmpfs, fixed opaque authored-synthetic fixtures, exactly twenty serial scenarios, minimized allowlisted evidence and exact captured-ID cleanup. No applied migration, operational database/credentials/persistence, outbox/feed/watcher/listener/source access, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, command/product write, deployment, production, release, Pages or protected-ref movement is opened. docs/branding and every unrelated untracked file remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

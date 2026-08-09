@@ -1673,7 +1673,7 @@ def _render_ref_like(ref: dict[str, Any]) -> str:
         return render_expr(ref)
     kind = ref["kind"]
     if kind == "LOCAL":
-        return _symbol_ident(ref["symbol"])
+        return BODY_BLOCK_LABEL + "." + _symbol_ident(ref["symbol"])
     if kind == "INPUT":
         return _symbol_ident(ref["symbol"])
     raise ValueError("unknown bare symbol kind " + kind)
@@ -1732,7 +1732,9 @@ def _render_ref(expr: dict[str, Any]) -> str:
         return field
     if kind == "ROW_COLUMN":
         return _symbol_ident(expr["symbol"]) + "." + _ident(expr["column"])
-    if kind in ("LOCAL", "INPUT"):
+    if kind == "LOCAL":
+        return BODY_BLOCK_LABEL + "." + _symbol_ident(expr["symbol"])
+    if kind == "INPUT":
         return _symbol_ident(expr["symbol"])
     if kind == "TRIGGER_COLUMN":
         return _ident(expr["image"]) + "." + _ident(expr["column"])
@@ -2205,12 +2207,16 @@ def _emit_insert(node: dict[str, Any], ctx: dict[str, Any], indent: int) -> list
     rel = _fabric(ops["relation"])
     columns = ", ".join(_ident(b["column"]) for b in ops["bindings"])
     values = ", ".join(render_expr(b["value"]) for b in ops["bindings"])
-    returning = ", ".join(_ident(c) for c in ops["returning_columns"])
+    returning = ", ".join(
+        DML_TARGET_ALIAS + "." + _ident(c) for c in ops["returning_columns"]
+    )
     pad = "    " * indent
     return [
         pad
         + "INSERT INTO "
         + rel
+        + " AS "
+        + DML_TARGET_ALIAS
         + " ("
         + columns
         + ") VALUES ("
@@ -2236,7 +2242,7 @@ def _emit_update(node: dict[str, Any], ctx: dict[str, Any], indent: int) -> list
         for b in ops["set_bindings"]
     )
     pred = render_expr(ops["predicate"]) if "predicate" in ops else "TRUE"
-    returning = ", ".join(_ident(c) for c in ops["returning_columns"])
+    returning = ", ".join(rel + "." + _ident(c) for c in ops["returning_columns"])
     body = (
         "UPDATE "
         + rel
@@ -2309,7 +2315,9 @@ def _emit_insert_or_reload_compare(
     rel = _fabric(ops["relation"])
     columns = ", ".join(_ident(b["column"]) for b in ops["bindings"])
     values = ", ".join(render_expr(b["value"]) for b in ops["bindings"])
-    returning = ", ".join(_ident(c) for c in ops["returning_columns"])
+    returning = ", ".join(
+        DML_TARGET_ALIAS + "." + _ident(c) for c in ops["returning_columns"]
+    )
     constraint_name = _derive_conflict_constraint(
         ctx["effective"], ops["relation"], ops["conflict_key_columns"]
     )
@@ -2327,6 +2335,8 @@ def _emit_insert_or_reload_compare(
         pad
         + "INSERT INTO "
         + rel
+        + " AS "
+        + DML_TARGET_ALIAS
         + " ("
         + columns
         + ") VALUES ("
@@ -2521,6 +2531,8 @@ def _walk_program_expressions(program: dict[str, Any]) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 DOLLAR_TAG = "durability_inert"
+BODY_BLOCK_LABEL = "cf_body"
+DML_TARGET_ALIAS = "cf_target"
 
 
 def _split_qualified(identifier: str) -> tuple[str, str]:
@@ -2561,11 +2573,11 @@ def _render_function_body(program: dict[str, Any], ctx: dict[str, Any]) -> str:
             decls.append(_symbol_ident(sym["id"]) + " record;")
         else:
             decls.append(_symbol_ident(sym["id"]) + " " + _type_sql(sym["type"]) + ";")
-    lines = ["DECLARE"]
+    lines = ["<<" + BODY_BLOCK_LABEL + ">>", "DECLARE"]
     lines.extend("    " + item for item in decls)
     lines.append("BEGIN")
     lines.extend(emit_nodes(program["ast"]["nodes"], 1, ctx))
-    lines.append("END;")
+    lines.append("END " + BODY_BLOCK_LABEL + ";")
     return "\n".join(lines)
 
 
@@ -3067,7 +3079,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.13"
+RENDERER_VERSION = "2.0.14"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 143
+    assert register["register_revision"] == 144
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 169)
+        f"AER-{index:04d}" for index in range(1, 170)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2267,15 +2267,32 @@ def test_aer_0168_closes_descendant_provenance_assertion_drift() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0169_preserves_plpgsql_dml_namespace_ambiguity() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0169"]
+
+    assert incident["origin"] == "repository"
+    assert incident["stage"] == "acceptance"
+    assert incident["category"] == "repository_defect"
+    assert incident["recurrence_signature"] == (
+        "repository.plpgsql_dml_local_column_namespace_ambiguity"
+    )
+    assert incident["related_incident_ids"] == []
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 168
+    assert report["incident_count"] == 169
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 112,
         "harness": 21,
-        "repository": 27,
+        "repository": 28,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
@@ -2285,11 +2302,11 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "output_contract_violation": 49,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 27,
+        "repository_defect": 28,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 46,
+        "accepted_candidate_changed": 47,
         "canonical_unchanged": 100,
         "untrusted_partial_worktree": 22,
     }

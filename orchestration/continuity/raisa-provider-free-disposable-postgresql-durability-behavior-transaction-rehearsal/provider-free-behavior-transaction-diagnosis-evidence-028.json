@@ -1,0 +1,43 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "authority_change": false,
+    "body_program_change": false,
+    "dml_returning_rendering": "target_relation_qualified",
+    "local_reference_rendering": "block_qualified",
+    "outer_block_label": "cf_body",
+    "scenario_change": false
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "artifact_sha256": "sha256:64cbc2b0e17276387c6815af02a2d0635fc538e3408995c1054ecbc708b5cbae",
+    "body_contract_sha256": "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268",
+    "body_source_sha256": "sha256:b43ea059a3f424e268631228aa9606d30f1c9f082bc805e550788b01e7bd8e76",
+    "dml_returning_columns_target_qualified": false,
+    "insert_node_id": "emr4_context_fabric.project_update_confirm_reschedule_v1.p19",
+    "local_references_block_qualified": false,
+    "raw_postgresql_error_persisted": false,
+    "relation": "emr4_context_fabric.diary_context_observation_outbox_v1",
+    "renderer_source_sha256": "sha256:367654e4e8822685c610cecc9efdc0335200e2d5f40fe2261b7716585c45b9ef",
+    "returning_name_collisions": [
+      "aggregate_revision",
+      "source_contract_digest"
+    ],
+    "value_name_collisions": [
+      "aggregate_revision",
+      "source_contract_digest"
+    ]
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:45ff02e01f9a05e46916617a6845cf8ad143a71ff1fff4a97bfc440c98e3d76c",
+    "function_id": "emr4_context_fabric.project_update_confirm_reschedule_v1",
+    "function_line": 124,
+    "internal_attempt_id": "48867b40657f0f8327c3cf8e",
+    "run_sequence": 28,
+    "scenario_id": "BTR-E02",
+    "sqlstate": "42702"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-028-dml-name-ambiguity-diagnosis.v1",
+  "status": "deterministic_dml_local_column_ambiguity_proven_cleanup_verified"
+}

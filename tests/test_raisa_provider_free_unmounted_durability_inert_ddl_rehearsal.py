@@ -1231,8 +1231,9 @@ def test_renderer_unique_race_reload_proves_exact_cardinality() -> None:
     # target suppresses only the typed winner race.
     assert (
         sql.count(
-            "RETURNING practice_id, source_contract_id, product_appointment_uuid, "
-            "opaque_aggregate_alias, created_at, stream_id INTO alias;\n"
+            "RETURNING cf_target.practice_id, cf_target.source_contract_id, "
+            "cf_target.product_appointment_uuid, cf_target.opaque_aggregate_alias, "
+            "cf_target.created_at, cf_target.stream_id INTO alias;\n"
             "    IF NOT FOUND THEN"
         )
         >= 1
@@ -1247,6 +1248,31 @@ def test_renderer_unique_race_reload_proves_exact_cardinality() -> None:
     assert "WHEN unique_violation THEN" not in sql
     assert "GET STACKED DIAGNOSTICS cf_constraint_name" not in sql
     assert "cf_constraint_name pg_catalog.text" not in sql
+
+
+def test_renderer_disambiguates_local_values_and_dml_returning_columns() -> None:
+    sql = _base_render()["sql_text"]
+    program_count = _base_render()["manifest"]["effective_program_count"]
+
+    assert sql.count("<<cf_body>>\nDECLARE") == program_count
+    assert sql.count("END cf_body;\n$durability_inert$") == program_count
+    assert (
+        ", cf_body.aggregate_revision, cf_body.source_contract_digest, "
+        "pg_catalog.transaction_timestamp())"
+    ) in sql
+    assert (
+        "RETURNING cf_target.practice_id, cf_target.source_contract_id, "
+        "cf_target.stream_id, cf_target.stream_epoch, "
+        "cf_target.transaction_position, cf_target.predecessor_position, "
+        "cf_target.raw_event_uuid, cf_target.opaque_aggregate_alias, "
+        "cf_target.aggregate_revision, cf_target.source_contract_digest, "
+        "cf_target.transaction_authored_at INTO inserted_outbox;"
+    ) in sql
+    assert (
+        "RETURNING emr4_context_fabric.context_observation_stream_head.practice_id, "
+        "emr4_context_fabric.context_observation_stream_head.source_contract_id"
+    ) in sql
+    assert "#variable_conflict" not in sql
 
 
 def test_renderer_digest_profile_frame_is_component_zero() -> None:
@@ -1369,8 +1395,8 @@ def test_renderer_keeps_postgresql_special_forms_unqualified() -> None:
     assert "COALESCE(pg_catalog.array_length(" in sql
 
     qualified = sql.replace(
-        "COALESCE(pg_catalog.array_length(producer_bindings, 1), 0)",
-        "pg_catalog.coalesce(pg_catalog.array_length(producer_bindings, 1), 0)",
+        "COALESCE(pg_catalog.array_length(cf_body.producer_bindings, 1), 0)",
+        "pg_catalog.coalesce(pg_catalog.array_length(cf_body.producer_bindings, 1), 0)",
         1,
     )
     assert qualified != sql
@@ -1411,7 +1437,7 @@ def test_renderer_lowers_uuid_minimum_as_typed_ordered_selection() -> None:
     result = _base_render()
     sql = result["sql_text"]
     ordered = (
-        "(SELECT s.stream_id FROM pg_catalog.unnest(producer_bindings) AS s "
+        "(SELECT s.stream_id FROM pg_catalog.unnest(cf_body.producer_bindings) AS s "
         "ORDER BY s.stream_id ASC NULLS LAST LIMIT 1)"
     )
 
@@ -1422,7 +1448,7 @@ def test_renderer_lowers_uuid_minimum_as_typed_ordered_selection() -> None:
     invalid = sql.replace(
         ordered,
         "(SELECT pg_catalog.min(s.stream_id) FROM "
-        "pg_catalog.unnest(producer_bindings) AS s)",
+        "pg_catalog.unnest(cf_body.producer_bindings) AS s)",
         1,
     )
     invalid_report = recognize_inert_sql(
@@ -1457,8 +1483,8 @@ def test_recovery_recognizer_rejects_nullable_count_and_trigger_row_xmin() -> No
     sql = result["sql_text"]
 
     nullable = sql.replace(
-        "COALESCE(pg_catalog.array_length(producer_bindings, 1), 0)",
-        "pg_catalog.array_length(producer_bindings, 1)",
+        "COALESCE(pg_catalog.array_length(cf_body.producer_bindings, 1), 0)",
+        "pg_catalog.array_length(cf_body.producer_bindings, 1)",
         1,
     )
     nullable_report = recognize_inert_sql(
