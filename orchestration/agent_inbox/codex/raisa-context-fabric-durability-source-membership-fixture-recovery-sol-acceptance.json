@@ -1,0 +1,28 @@
+{
+  "schema_version": "emr4.ariadne-independent-review-acceptance.v1",
+  "accepted_on": "2026-08-10",
+  "status": "accepted",
+  "candidate_head": "5d8c460c1ff5bda22dccf2036f96f021eabf664f",
+  "baseline_head": "b980fe2d0b4dc9a318c820f388a0e9fad34cfa6f",
+  "reviewer": {
+    "transport": "antigravity_new_project_bound_readonly_worktree",
+    "model": "gemini-3.6-flash-high",
+    "reasoning_effort": "high",
+    "decision": "pass",
+    "decision_contract": "schema_constrained_json_v1",
+    "receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-source-membership-fixture-recovery-review-receipt.json"
+  },
+  "sol_checks": {
+    "exact_head_before_and_after": true,
+    "review_worktree_clean_after": true,
+    "five_source_rehydration_named": true,
+    "failure_033_sha256_verified": "5a6d5bcc18cd23f0fa528e5cdd33e53e9f0b90c0415a8f86ca326cf47980c8ad",
+    "diagnosis_033_sha256_verified": "08eaac2d10b3dd4488251056cdd6fd0d73ba674dd423d2205ff5bc245215110b",
+    "test_count_passed": 572,
+    "ruff_file_count_passed": 38,
+    "protected_refs_unchanged": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "accepted_body_sql_roles_rls_and_scenarios_unchanged": true,
+    "p0_p2_findings": []
+  },
+  "acceptance": "The independent veto is admitted for the exact candidate. It permits the already planned single authored-synthetic provider-free disposable PostgreSQL behavior rehearsal only after a fresh passed pre_worker_dispatch receipt. It grants no product, patient, clinical, operational database, credential, watcher, API, command, deployment, production, release, Pages, integration or protected-ref authority."
+}

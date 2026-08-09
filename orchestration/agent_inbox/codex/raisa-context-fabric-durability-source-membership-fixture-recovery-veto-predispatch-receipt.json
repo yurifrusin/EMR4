@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_veto_for_the_exact_source_membership_fixture_recovery_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 5d8c460c1ff5bda22dccf2036f96f021eabf664f preserves immutable attempt-033 failure SHA-256 5a6d5bcc18cd23f0fa528e5cdd33e53e9f0b90c0415a8f86ca326cf47980c8ad and diagnoses the BTR-E03 CF201 rejection as a component-digest fixture substitution. The candidate binds the fixture to the accepted full eleven-field same-locator source-membership digest and independently recomputes it in readback. Accepted body, SQL, roles, RLS and scenario population remain unchanged. The exact 572-test packet and all 38 scoped Ruff lint/format checks pass; register revision 162 has 188 corrected incidents and zero open IDs.",
+    "current_authority_allocation": "GPT Sol retains planning, verifier acceptance, runtime, cleanup, task-branch and baton ownership. Gemini 3.6 Flash/high through a fresh Antigravity project owns only this exact read-only veto in r146. It receives no edit, database/runtime, self-acceptance, integration, push, product/provider execution, deployment, release or protected-ref authority. No native subagent or DeepSeek lease is active.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r146 is clean on codex/review-context-fabric-source-membership-5d8c460c at exact candidate HEAD 5d8c460c1ff5bda22dccf2036f96f021eabf664f. The primary task worktree is at the same HEAD with only bounded review-orchestration artifacts and preserved pre-existing untracked files. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "AGENTS.md keeps the twenty-scenario provider-free disposable PostgreSQL Context Fabric behavior proof as the active durability gate, with evidence-backed diagnose-repair-rerun cycles authorised until success or bounded exhaustion. Attempt 033 and its narrow fixture recovery are committed for one fresh exact-head independent veto before any further database rehearsal.",
+    "protected_evidence_boundaries": "Review is limited to the exact committed diff and allowlisted authored-synthetic source, contracts, evidence, tests and ledgers. It must not start Docker/PostgreSQL or run the behavior harness; open protected holdouts, historical Diary, branding, patient/clinical/product-derived data or unrelated paths; or access product/provider surfaces beyond the review transport. Operational database, credentials, persistence, application migration/runtime, watcher/listener/feed, API/command, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

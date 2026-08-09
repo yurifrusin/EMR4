@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_fresh_exact_head_gemini_veto_packet_provenance_receipt_and_sol_acceptance_using_explicit_path_staging",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The verifier independently reproduced 572 passing tests, Ruff lint and format success on 38 scoped Python files, exact failure and diagnosis hashes, unchanged accepted database body/SQL/roles/RLS/scenario population, zero P0-P2 findings, and a clean unchanged exact HEAD. Sol independently rechecked the receipt envelope, candidate HEAD and worktree cleanliness and accepts the pass for the later planned attempt 034 pre-dispatch gate.",
+    "current_authority_allocation": "GPT Sol alone accepts and records the independent veto. Gemini 3.6 Flash/high held read-only review authority in fresh worktree r146 and has completed that lease. This commit records review provenance only and grants no runtime, database, product, clinical, command, integration, push, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is at exact candidate 5d8c460c1ff5bda22dccf2036f96f021eabf664f. Review worktree r146 remains clean at that exact HEAD. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master and handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only is permitted.",
+    "live_handover_current_baton": "The active Context Fabric durability baton requires independent veto after any changed deterministic candidate and before the next disposable behavior rehearsal. Candidate 5d8c460c1ff5bda22dccf2036f96f021eabf664f has now received one fresh exact-head Gemini 3.6 Flash/high pass; no database rehearsal followed it yet.",
+    "protected_evidence_boundaries": "Commit only the review packet, clean worktree preflight, passed five-source predispatch state and receipt, schema-constrained verifier receipt, Sol acceptance, and this five-source precommit provenance. Preserve mutable behavior evidence SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b, accepted parse evidence SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec, protected parse failure evidence SHA-256 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c, docs/branding and all unrelated untracked files unchanged and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
