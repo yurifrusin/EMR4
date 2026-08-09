@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_new_owned_pull_never_networkless_postgresql_16_parse_catalogue_characterization_for_the_renderer_209_direct_record_access_parent_then_exact_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability gate now requires two-stage parse/catalogue proof for renderer 2.0.9 before any behavior rebind or rerun. This is the first characterization-only stage; the future Agent Execution Surface and Containment Gate remains outside it.",
+    "current_authority_allocation": "GPT Sol owns exactly one characterization-only disposable PostgreSQL run, bounded digest admission, exact cleanup and later mechanical exact-digest rebind. No worker, native subagent, verifier, provider model or product surface is involved.",
+    "active_plan_and_acceptance": "Accepted parent repair commit cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2 contains renderer 2.0.9 artifact SHA-256 42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112 at 1,403,578 LF bytes and 412 statements, with unchanged body/structural semantic hashes. The characterization contract binds that exact parent at canonical SHA-256 8d8ba187efc79c59d18ec9bbb181316892ac814fccbf2fee6cac05d5cffcebaa, mode characterization_only and an empty expected-digest map. All 113 parse/plan tests, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no ports, no mounts or socket, tmpfs-only cluster, authored-synthetic prerequisites, bounded digests and exact-ID cleanup. Characterization cannot pass exact catalogue acceptance or behavior. No product/provider, patient/clinical/product/protected data, operational database/credential, application runtime, deployment, release, Pages or protected ref is opened.",
+    "git_refs_and_worktree": "Primary remains at cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2 with only bounded parse-characterization contract/harness/test/doc files plus preserved untracked files. No owned emr4-cf-pg16-catalogue container exists. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_rehydration_renderer_209_parse_characterization_preexecution", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact parent/contract hashes, deterministic tests, image identity, container absence and protected refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No verifier is active during runtime characterization."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek transport is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

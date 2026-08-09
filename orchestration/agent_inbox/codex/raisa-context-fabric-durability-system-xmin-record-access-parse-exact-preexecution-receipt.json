@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_new_owned_pull_never_networkless_postgresql_16_exact_parse_catalogue_reproduction_for_renderer_209_direct_record_access_then_exact_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Parent cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2 binds 412-statement inert SQL SHA-256 42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112 at 1,403,578 LF bytes. Characterization evidence SHA-256 ae39e8727abae894914839998f7e2d2a25a2720faa4952d3c7b69b7c822d9f45 reproduced all fifteen exact catalogue digests and exact cleanup. The exact-mode contract canonical SHA-256 is 06d79bd73122f71548cf85d0ba68b48549d3cdfb42a5a8e69147844e337e39e4. Twelve targeted whole-document, digest, parent and plan tests plus Ruff and format checks pass.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial exact-digest disposable PostgreSQL run, evidence admission and exact cleanup. No native subagent, implementation worker, external verifier, provider model or product surface is involved in this execution.",
+    "git_refs_and_worktree": "HEAD and local task ref remain cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. No container bearing the exact parse/catalogue harness ownership label exists. Only bounded parse-rebind files are modified, while docs/branding, unrelated untracked files and the failed mutable behavior evidence remain preserved and excluded.",
+    "live_handover_current_baton": "The active provider-free durability gate requires exact parse/catalogue reproduction for the renderer 2.0.9 direct anonymous-record system-xmin access repair before behavior rebind. The future Agent Execution Surface and Containment Gate remains recorded after this durability sequence and outside this run.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image at immutable image ID sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8 may create one uniquely named owned container with --pull=never, --network=none, zero ports/mounts, tmpfs-only cluster, authored-synthetic prerequisites, bounded catalogue digests and exact-ID cleanup. It may prove parse/catalogue identity only, not function, trigger, RLS or behavior. No product/provider, patient/clinical/product/protected data, operational database/credential, application runtime, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

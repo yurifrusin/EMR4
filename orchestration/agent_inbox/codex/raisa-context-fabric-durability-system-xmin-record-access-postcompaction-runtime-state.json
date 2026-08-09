@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_the_exact_system_xmin_record_access_parse_catalogue_reproduction_then_rebind_and_execute_the_frozen_twenty_scenario_behavior_transaction_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after restoration. The active task remains the provider-free disposable PostgreSQL Context Fabric durability sequence on codex/ariadne-bernie-davida-parallel-seam. The future Agent Execution Surface and Containment Gate is durably placed after this sequence and before any real-product-read or executable occupied Bureau descendant; it does not delay the current networkless database-only proof.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial parse and behavior runtime, diagnosis, exact cleanup and acceptance work. Gemini 3.6 Flash/high through a fresh Antigravity project is reserved for the required exact-HEAD independent veto after deterministic admission. No native subagent or implementation worker is selected, and no external worker receives runtime, integration, baton or protected-ref authority.",
+    "active_plan_and_acceptance": "The accepted behavior/transaction plan freezes exactly twenty ordered authored-synthetic scenarios with category counts 6/4/3/4/3 and no weakening. Renderer-repair parent cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2 binds canonical inert SQL SHA-256 42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112 at 1,403,578 LF bytes and 412 statements. The characterization evidence SHA-256 ae39e8727abae894914839998f7e2d2a25a2720faa4952d3c7b69b7c822d9f45 reproduced the predecessor catalogue digest set and exact cleanup. The contract is now rebound to exact mode at canonical SHA-256 06d79bd73122f71548cf85d0ba68b48549d3cdfb42a5a8e69147844e337e39e4; one new exact reproduction is the next action before behavior rebind.",
+    "protected_evidence_boundaries": "Only newly owned local postgres:16-bookworm containers may be used with --pull=never, --network=none, zero ports and mounts, tmpfs-only storage, closed authored-synthetic fixtures, minimized evidence and exact-ID cleanup. The failed current behavior evidence remains protected from staging until a successful accepted run replaces it. No protected holdout, historical PHI, patient/clinical/product-derived data, provider call, operational database or credential, application/API/Diary wiring, command/write, deployment, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "HEAD and local task ref are cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current are aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The working tree contains only the bounded in-progress parse rebind modifications plus numerous preserved untracked receipts/evidence and user-owned docs/branding; explicit-path staging only applies and the mutable failed behavior evidence is excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_AGENTS_and_active_plan_rehydration_after_restoration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reread the complete live handover and current plan, design, threat and rebind documents, verified exact refs and inspected the in-progress exact-contract binding."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this serial runtime."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini review is deferred until the later deterministic behavior packet passes."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation worker is selected."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_renderer_209_system_xmin_record_access_parse_catalogue_reproduction_as_the_immutable_behavior_rebind_parent",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact parse/catalogue evidence passed at file SHA-256 27d7e4ac43bea613c44afea53d20881822e1e9bbfbaec3211bd3b9a442026006, binding parent artifact SHA-256 42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112, 1,403,578 LF bytes, 412 statements and exact contract SHA-256 06d79bd73122f71548cf85d0ba68b48549d3cdfb42a5a8e69147844e337e39e4. All fifteen frozen catalogue digests, rollback SQLSTATE 42601 and exact cleanup passed. Current applicable regressions pass: 113 parse/plan, 30 body-semantic and 187 inert-DDL/AER checks. Four frozen predecessor-continuity assertions were explicitly excluded because they bind historical Continuity 230, AER 81 and obsolete next-step prose rather than current descendant acceptance.",
+    "current_authority_allocation": "GPT Sol owns this bounded task-branch evidence commit and subsequent serial behavior rebind. No worker, native subagent, provider model, product surface, integration action or protected ref is involved.",
+    "git_refs_and_worktree": "HEAD and local task ref are cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exact container 28d0699d81fa257d5421d322342961d523918d853022f0ae9b763951fea6b3ee is absent. Explicit-path staging will include only the bounded parse proof and its receipts; docs/branding, unrelated untracked files and failed behavior evidence remain excluded.",
+    "live_handover_current_baton": "The current provider-free Context Fabric durability sequence requires an accepted exact parse/catalogue parent before the frozen twenty-scenario behavior contract can be rebound. The future Agent Execution Surface and Containment Gate remains recorded after this sequence and outside this commit.",
+    "protected_evidence_boundaries": "This commit contains provider-free authored-synthetic parse/catalogue evidence and control files only. It proves no function, trigger, RLS, transaction or product behavior. The failed mutable behavior evidence remains unstaged. No protected holdout, historical PHI, patient/clinical/product-derived data, provider call, operational database/credential, application/API/Diary wiring, command/write, deployment, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
