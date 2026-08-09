@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_terminal_exact_digest_postgresql_16_parse_catalogue_reproduction_for_renderer_210_with_fail_closed_separate_failure_evidence_and_exact_owned_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact source HEAD a93f47d645e2c7835e2d4acfe3a259c4acf1408b binds artifact SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb, 1,391,453 LF bytes, 412 statements and exact contract SHA-256 d482ab2c4b96e3bfa854e4c723e9891c2b4b8ac9670db2f73729207ede345919. A separate prior container characterized all fifteen value-bearing digests and was removed. The harness now writes the accepted evidence path only for PASS_RESULT and routes any non-pass to a distinct fixed failure artifact, preserving the last accepted evidence. All 106 parse tests pass.",
+    "current_authority_allocation": "GPT Sol alone owns the serial disposable PostgreSQL execution, bounded evidence reconciliation and exact-ID cleanup. No worker, native subagent or reviewer executes this database run.",
+    "git_refs_and_worktree": "Task exact HEAD is a93f47d645e2c7835e2d4acfe3a259c4acf1408b. Local and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. docs/branding, failed mutable behavior evidence and unrelated untracked history remain preserved.",
+    "live_handover_current_baton": "The corrected renderer 2.0.10 artifact has a clean nonpassing characterization and exact frozen catalogue-digest binding. The terminal parse reproduction is the next dependency before behavior-contract rebind; behavior attempt 022 remains immutable and no behavior runtime is opened by this run.",
+    "protected_evidence_boundaries": "The run uses only already-local postgres:16-bookworm with --pull=never, network none, no ports or host mounts, empty authored-synthetic prerequisites, fixed SQL and fixed read-only catalogue projections. It may replace the accepted parse evidence only after exact pass. Failed behavior evidence and docs/branding remain excluded. No provider/product/patient/clinical/protected data, application/API/Diary runtime, watcher/listener, command/write, deployment, production, release, Pages or protected-ref authority opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

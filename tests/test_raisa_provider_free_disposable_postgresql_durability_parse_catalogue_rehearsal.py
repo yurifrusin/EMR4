@@ -639,7 +639,7 @@ def test_system_xmin_record_access_recovery_parse_catalogue_evidence_is_exact_pa
         rehearsal._bytes_sha(  # noqa: SLF001
             (DIR / "provider-free-disposable-postgresql-evidence.json").read_bytes()
         )
-        == "27d7e4ac43bea613c44afea53d20881822e1e9bbfbaec3211bd3b9a442026006"
+        == "83ea56186636b2ffb7dfce8c3d8d303bc489fce8d9e5301ccbe0e3b8cde0629a"
     )
 
     assert evidence["result"] == rehearsal.PASS_RESULT
@@ -649,12 +649,12 @@ def test_system_xmin_record_access_recovery_parse_catalogue_evidence_is_exact_pa
         "passed",
     ]
     assert evidence["parent"] == {
-        "artifact_byte_count": 1_403_578,
+        "artifact_byte_count": 1_391_453,
         "artifact_sha256": (
-            "sha256:42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112"
+            "sha256:25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb"
         ),
         "contract_sha256": (
-            "sha256:06d79bd73122f71548cf85d0ba68b48549d3cdfb42a5a8e69147844e337e39e4"
+            "sha256:d482ab2c4b96e3bfa854e4c723e9891c2b4b8ac9670db2f73729207ede345919"
         ),
         "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
         "prerequisite_sql_sha256": (
@@ -678,7 +678,7 @@ def test_system_xmin_record_access_recovery_parse_catalogue_evidence_is_exact_pa
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
-            "28d0699d81fa257d5421d322342961d523918d853022f0ae9b763951fea6b3ee"
+            "9aafcf3721ae6922a36478232aad8898b88d280b315dc2c7740fe2b7256e8d64"
         ),
         "removed": True,
         "status": "cleanup_verified",

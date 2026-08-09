@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_terminal_exact_postgresql_16_parse_catalogue_pass_and_cleanup_evidence_for_renderer_210_before_behavior_contract_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Terminal attempt 8691e2df62f225e59e5726ef reproduced the exact contract SHA-256 d482ab2c4b96e3bfa854e4c723e9891c2b4b8ac9670db2f73729207ede345919 and artifact SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb at 1,391,453 bytes and 412 statements. It matched all fifteen bound catalogue digests and exact structural populations, passed rollback-first atomic installation, and removed exact container 9aafcf3721ae6922a36478232aad8898b88d280b315dc2c7740fe2b7256e8d64 with absence verified. Accepted evidence SHA-256 is 83ea56186636b2ffb7dfce8c3d8d303bc489fce8d9e5301ccbe0e3b8cde0629a. All 106 focused parse tests, Ruff, format and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns the parse evidence reconciliation, explicit-path commit and following behavior-contract rebind. No worker or native subagent is active. Gemini 3.6 Flash/high remains mandatory for the exact-head behavior-eligibility veto.",
+    "git_refs_and_worktree": "Task HEAD remains a93f47d645e2c7835e2d4acfe3a259c4acf1408b before this explicit-path evidence commit. Local and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Only successful accepted parse evidence, its focused test update and exact preexecution/precommit receipt pairs are eligible.",
+    "live_handover_current_baton": "Renderer 2.0.10 now has a successful two-container parse/catalogue proof: one nonpassing characterization followed by a separate exact-digest reproduction. Behavior attempt 022 remains immutable, and behavior execution is still blocked pending exact parent rebind and fresh independent veto.",
+    "protected_evidence_boundaries": "This accepts exact parse, atomic installation, catalogue/privilege shape and cleanup only. It proves no function, trigger, RLS or transaction behavior and grants no application migration/runtime, operational database, watcher/listener, provider/product/patient/clinical/protected data, command/write, deployment, production, release, Pages or protected-ref authority. Failed mutable behavior evidence and docs/branding remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
