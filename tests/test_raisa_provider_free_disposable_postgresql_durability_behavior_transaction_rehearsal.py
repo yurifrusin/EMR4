@@ -120,6 +120,11 @@ FAILURE_EVIDENCE_018 = json.loads(
         encoding="utf-8"
     )
 )
+FAILURE_EVIDENCE_024 = json.loads(
+    (DIR / "provider-free-behavior-transaction-failure-evidence-024.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 def _snapshot() -> dict[str, dict[str, Any]]:
@@ -412,6 +417,42 @@ def test_snapshot_query_uses_unqualified_postgresql_special_form() -> None:
 
     assert "pg_catalog.coalesce" not in sql.lower()
     assert sql.count("COALESCE(") == len(rehearsal.SNAPSHOT_RELATIONS)
+
+
+def test_behavior_payload_uses_valid_named_interval_construction() -> None:
+    payload = rehearsal._payload(  # noqa: SLF001
+        CONTRACT["fixture_namespace"], "appointment_temporal"
+    )
+
+    assert " * pg_catalog.make_interval(" not in payload
+    assert "pg_catalog.make_interval(mins=>" in payload
+
+
+def test_failure_024_undefined_operator_is_preserved_and_closed() -> None:
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(FAILURE_EVIDENCE_024)
+
+    assert FAILURE_EVIDENCE_024["attempt_id"] == "556dc0541f0152f96bea4ba5"
+    assert FAILURE_EVIDENCE_024["environment"]["failure"] == {
+        "code": "unexpected_rejection",
+        "detail_digest": "sha256:7c02450d2309736e88b3191a8618f98fc5cad1a95ca672cb0f551d2cde529216",
+        "scenario_id": "BTR-E02",
+        "sqlstate": "42883",
+        "stage": "scenario",
+    }
+    assert FAILURE_EVIDENCE_024["scenario_reconciliation"] == {
+        "expected": 20,
+        "observed": 0,
+        "passed": 0,
+    }
+    assert FAILURE_EVIDENCE_024["cleanup"]["absence_verified"] is True
+    assert (
+        rehearsal.parent._bytes_sha(  # noqa: SLF001
+            (
+                DIR / "provider-free-behavior-transaction-failure-evidence-024.json"
+            ).read_bytes()
+        )
+        == "bc2efc6fffea47e8104324c822bd6c1afde28f746b05b2a5bff925dbbfe7f57b"
+    )
 
 
 def test_snapshot_undefined_function_failure_is_preserved_and_closed() -> None:

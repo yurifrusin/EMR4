@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_corrected_bounded_provider_free_networkless_disposable_postgresql_diagnosis_that_replays_exact_btr_e01_and_e02_and_releases_only_six_fixed_symbol_resolution_booleans_missing_identifiers_and_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The corrected wrapper reuses the exact fixed behavior harness and BTR-E02 bytes. Immediately before BTR-E02 it executes one fixed read-only json_build_object over to_regprocedure/to_regoperator for exactly six candidate symbols, requires exact closed boolean shape, then captures the unchanged 42883 result. It releases only those booleans, missing identifiers, an optional allowlisted raw-message identifier, the raw-output digest and exact cleanup. Parser and focused behavior tests pass, and AER revision 133 records 158 incidents with zero open once the corrected receipt exists.",
+    "current_authority_allocation": "GPT Sol owns the corrected diagnostic container, exact cleanup, classification and recovery. No worker, reviewer, provider or product runtime is active. The codebase-health research lane remains completed and separate.",
+    "git_refs_and_worktree": "Primary task branch remains at exact tracked HEAD b8bc7ca6af45f0eab2d3d1d07770dc34298b3117 with bounded untracked recovery files only. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "Behavior attempt 024 remains failed closed at BTR-E02 SQLSTATE 42883 with exact cleanup; mutable evidence SHA-256 bc2efc6fffea47e8104324c822bd6c1afde28f746b05b2a5bff925dbbfe7f57b remains unstaged. The first diagnostic parser emitted no conclusion and is preserved as AER-0158. The corrected next action is one distinct typed catalogue-resolution diagnosis, not behavior acceptance or scenario weakening.",
+    "protected_evidence_boundaries": "Raw PostgreSQL error text is hashed and not persisted. Only repository-authored opaque synthetic values are replayed. Immutable failures 001-023 and mutable failure 024 remain preserved; docs/branding and unrelated untracked files remain untouched. No patient/product/protected data, provider, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-024-undefined-symbol-diagnosis.v1",
+  "status": "undefined_symbol_diagnosis_complete_cleanup_verified",
+  "parent_failure": {
+    "run_sequence": 24,
+    "internal_attempt_id": "556dc0541f0152f96bea4ba5",
+    "evidence_sha256": "sha256:bc2efc6fffea47e8104324c822bd6c1afde28f746b05b2a5bff925dbbfe7f57b"
+  },
+  "diagnosis_runtime": {
+    "internal_attempt_id": "35ce7cbf4a117987fda645e1",
+    "raw_diagnostic_sha256": "sha256:8ce19d01f63a78cade4efbf1eb23a241f180922390f5b2c14892dc2bbbbee357",
+    "raw_error_persisted": false,
+    "container_id": "0d051d1af3e0be971b41c85b5129f375ebd54de93d16804184a97750675f6d88",
+    "cleanup_absence_verified": true
+  },
+  "observation": {
+    "scenario_id": "BTR-E02",
+    "sqlstate": "42883",
+    "resolution": {
+      "pg_catalog.sha256": true,
+      "emr4_context_fabric.project_update_confirm_reschedule_v1": true,
+      "pg_catalog.make_interval": true,
+      "pg_catalog.to_char_timestamptz": true,
+      "pg_catalog.int4_times_interval": false,
+      "pg_catalog.timestamptz_plus_interval": true
+    },
+    "missing_symbols": [
+      "pg_catalog.int4_times_interval"
+    ],
+    "raw_message_symbol_id": null
+  },
+  "authority_boundary": "provider_free_authored_synthetic_disposable_postgresql_diagnosis_only_no_product_provider_command_deployment_or_protected_ref_authority"
+}

@@ -11,6 +11,7 @@ import copy
 import json
 import re
 from pathlib import Path
+import subprocess
 from typing import Any
 
 import pytest
@@ -80,6 +81,22 @@ def test_parent_hashes_are_exact_and_immutable() -> None:
     parents = _parents()
     assert parents["structural"]["contract_sha256"] == PARENT_DIGEST
     assert parents["body"]["contract_sha256"] == BODY_DIGEST
+
+
+def test_canonical_inert_sql_checkout_is_forced_to_lf() -> None:
+    relative = SQL_INERT_PATH.relative_to(ROOT).as_posix()
+    attribute = subprocess.run(
+        ["git", "check-attr", "eol", "--", relative],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        shell=False,
+    )
+
+    assert attribute.stdout.strip().endswith(": eol: lf")
+    assert b"\r\n" not in SQL_INERT_PATH.read_bytes()
 
 
 def test_recovery_population_and_effective_catalogue_reconcile() -> None:
@@ -1320,6 +1337,32 @@ def test_renderer_keeps_postgresql_special_forms_unqualified() -> None:
     )
     assert not qualified_report.valid
     assert any(issue.code == "pg_catalog_coalesce" for issue in qualified_report.issues)
+
+
+def test_renderer_lowers_integer_timestamp_offsets_without_numeric_times_interval() -> (
+    None
+):
+    result = _base_render()
+    sql = result["sql_text"]
+
+    assert " * pg_catalog.make_interval(" not in sql
+    assert "pg_catalog.make_interval(mins => appointment.duration_minutes)" in sql
+    assert "pg_catalog.make_interval(secs => (" in sql
+    assert ")::pg_catalog.float8)" in sql
+
+    invalid = sql.replace(
+        "pg_catalog.make_interval(mins => appointment.duration_minutes)",
+        "appointment.duration_minutes * pg_catalog.make_interval(mins => 1)",
+        1,
+    )
+    assert invalid != sql
+    invalid_report = recognize_inert_sql(
+        invalid, result["manifest"], result["effective"]
+    )
+    assert not invalid_report.valid
+    assert any(
+        issue.code == "numeric_times_interval" for issue in invalid_report.issues
+    )
 
 
 # ---------------------------------------------------------------------------

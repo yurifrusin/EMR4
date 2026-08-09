@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 132,
+  "register_revision": 134,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6179,6 +6179,102 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-rls-lock-behavior-pre-verifier-acceptance-v2-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-rls-lock-behavior-pre-verifier-acceptance-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-132.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0158",
+      "attempt_id": "raisa-context-fabric-behavior-failure-024-undefined-symbol-diagnosis-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "A bounded diagnostic parser must classify the actual PostgreSQL error form or emit a closed unresolved observation after the owned runtime has cleaned up; it must not lose the entire diagnostic result after database execution.",
+      "observed_error": "The first failure-024 diagnostic replayed exact BTR-E01/E02 and the underlying behavior harness returned through its cleanup path, but the diagnostic's narrow error-line regex found no single allowlisted symbol and raised single_allowlisted_undefined_symbol_missing before emitting a durable minimized diagnosis receipt.",
+      "detection_method": "The module exited nonzero with only its local parser exception and no raw PostgreSQL error text. Sol preserved the failed command and replaced prose-format dependence with a fixed read-only to_regprocedure/to_regoperator availability probe executed immediately before exact BTR-E02 in a newly owned diagnostic run.",
+      "evidence_paths": [
+        "scripts/raisa_context_fabric_durability_behavior_failure_024_undefined_symbol_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_024_undefined_symbol_diagnosis.py",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-024-undefined-symbol-diagnosis-preexecution-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-024-undefined-symbol-diagnosis-preexecution-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-133.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "diagnosis.undefined_symbol_parser_undercoverage",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed diagnostic grants no conclusion or behavior retry. The corrected diagnostic runs a closed read-only catalogue-resolution probe for six exact candidate symbols, returns only booleans and missing identifiers, and treats the raw-message symbol parser as optional corroboration while retaining raw-output hashing and exact cleanup.",
+        "prevention_control": "Database diagnostics should prefer typed catalogue-resolution probes over human-formatted error-text parsing; when text is used, an unrecognized format must emit a bounded unresolved classification rather than erase otherwise valid cleanup and observation evidence.",
+        "evidence_paths": [
+          "scripts/raisa_context_fabric_durability_behavior_failure_024_undefined_symbol_diagnosis.py",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_024_undefined_symbol_diagnosis.py",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-024-undefined-symbol-diagnosis-preexecution-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-024-undefined-symbol-diagnosis-preexecution-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-133.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0159",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-024",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every typed timestamp-offset expression and the authored-synthetic behavior fixture that mirrors it must lower to a PostgreSQL-resolvable interval construction while preserving the declared minute or second unit.",
+      "observed_error": "Behavior attempt 024 passed BTR-E01, reached BTR-E02 and failed closed with SQLSTATE 42883. A bounded typed catalogue-resolution diagnosis proved the sole missing candidate signature was pg_catalog.*(integer,interval). Inspection then found the invalid numeric-times-interval shape in both renderer TIMESTAMP_ADD_MINUTES/TIMESTAMP_ADD_SECONDS output and the independent BTR-E02 synthetic payload builder.",
+      "detection_method": "The corrected diagnosis replayed exact BTR-E01/E02 in a newly owned networkless PostgreSQL 16 container, emitted six fixed to_regprocedure/to_regoperator booleans, identified only pg_catalog.int4_times_interval as absent, persisted no raw database text and verified exact-ID cleanup. Static source reconciliation then located both repository generation surfaces.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-024.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-024-undefined-symbol-diagnosis-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-interval-construction-recovery.md",
+        "docs/security/raisa-context-fabric-durability-interval-construction-recovery-threat-model-delta.md",
+        ".gitattributes",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-134.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.renderer_numeric_times_interval_and_fixture_duplicate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Renderer 2.0.11 lowers minute and second offsets through typed pg_catalog.make_interval named arguments, the BTR-E02 payload builder uses the same valid minute construction, and the independent recognizer rejects every predecessor numeric-times-make_interval spelling.",
+        "prevention_control": "Every generated PostgreSQL expression family that is duplicated in a fixed behavior fixture must have paired source and fixture tests plus one hostile recognizer mutation; parse/catalogue evidence alone may not be treated as execution proof for stored PL/pgSQL bodies.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          ".gitattributes",
+          "docs/raisa-provider-free-disposable-postgresql-durability-interval-construction-recovery.md",
+          "docs/security/raisa-context-fabric-durability-interval-construction-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-134.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

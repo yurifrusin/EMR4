@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_bounded_failure_024_diagnosis_renderer_and_fixture_interval_correction_regenerated_inert_artifact_and_prevention_controls_as_the_source_checkpoint_for_separate_parse_rebinding",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability behavior rehearsal remains in bounded attempt-024 recovery. Attempt 024 passed BTR-E01 then failed closed at BTR-E02 SQLSTATE 42883, admitted zero complete scenarios and verified exact cleanup. The corrected diagnosis proved the sole missing candidate signature was integer times interval. The exact next checkpoint is renderer 2.0.11 plus the matching authored-synthetic fixture correction; parse and behavior runtime remain closed until their separate descendants are rebound and proved.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial recovery, exact source checkpoint and later disposable PostgreSQL execution. No implementation worker, provider or product runtime is active. Gemini 3.6 Flash/high is reserved for a fresh exact-HEAD veto only after parse proof and the unchanged behavior contract are rebound. The codebase-health research is complete and will be recorded at final tranche closeout.",
+    "active_plan_and_acceptance": "The candidate preserves immutable failure-024 evidence at exact SHA-256 bc2efc6fffea47e8104324c822bd6c1afde28f746b05b2a5bff925dbbfe7f57b, records the minimized typed diagnosis, lowers TIMESTAMP_ADD_MINUTES and TIMESTAMP_ADD_SECONDS through named make_interval arguments, applies the same correction to the BTR-E02 synthetic payload, rejects predecessor numeric-times-interval SQL, forces the exact artifact to LF in fresh worktrees, and regenerates exactly 412 statements / 1391614 LF bytes / SHA-256 c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51 with manifest SHA-256 7a0c5d15e65a4631cf9b590f7c7af67f2103f69ebe05fb2dd9ad5f002e1d1b2d. Focused tests, AER revision 134 with 159 incidents and zero open, Ruff, format and diff checks pass. The two behavior nodes requiring the not-yet-rebound parent and a passing mutable evidence artifact are deliberately deferred to the next descendants.",
+    "protected_evidence_boundaries": "The immutable typed body and structural parents, twenty scenario objects, 6/4/3/4/3 coverage and authority ceiling are unchanged. The mutable failure-024 behavior evidence remains untracked and unstaged. docs/branding and every unrelated untracked path remain untouched; staging is explicit-path only. No protected holdout or historical PHI is opened. No patient, clinical, product or protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Active task branch remains at tracked parent b8bc7ca6af45f0eab2d3d1d07770dc34298b3117 before this explicit source checkpoint. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only exact named recovery, AER, diagnosis, source, artifact, test, LF-control and receipt paths are eligible for the commit; the mutable evidence, docs/branding and all unrelated untracked files are excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_interval_construction_recovery_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled exact failure/diagnosis evidence, both duplicate SQL construction surfaces, regenerated artifact hashes, checkout bytes, focused tests and the next separate parse dependency."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The separate user-requested codebase-health research is complete and made no repository implementation changes."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No verifier is active; independent veto is deferred until the exact behavior candidate is complete."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

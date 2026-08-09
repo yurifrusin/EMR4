@@ -1842,17 +1842,17 @@ def render_expr(expr: dict[str, Any]) -> str:
         return (
             "("
             + render_expr(expr["left"])
-            + " + ("
+            + " + pg_catalog.make_interval(mins => "
             + render_expr(expr["right"])
-            + " * pg_catalog.make_interval(mins => 1)))"
+            + "))"
         )
     if op == "TIMESTAMP_ADD_SECONDS":
         return (
             "("
             + render_expr(expr["left"])
-            + " + ("
+            + " + pg_catalog.make_interval(secs => ("
             + render_expr(expr["right"])
-            + " * pg_catalog.make_interval(secs => 1)))"
+            + ")::pg_catalog.float8))"
         )
     raise ValueError("unknown expression opcode " + op)
 
@@ -3054,7 +3054,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.10"
+RENDERER_VERSION = "2.0.11"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "
@@ -4327,6 +4327,13 @@ def _statement_issues(
             RecognitionIssue(
                 "pg_catalog_coalesce",
                 "COALESCE special form cannot be schema-qualified",
+            )
+        )
+    if re.search(r"\*\s*pg_catalog\.make_interval\s*\(", statement, re.IGNORECASE):
+        issues.append(
+            RecognitionIssue(
+                "numeric_times_interval",
+                "numeric-times-interval lowering has no accepted PostgreSQL operator",
             )
         )
     if re.search(r"\b(?:OLD|NEW)\s*\.\s*\"?xmin\"?", statement, re.IGNORECASE):

@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_bounded_provider_free_networkless_disposable_postgresql_diagnosis_that_replays_exact_btr_e01_and_e02_and_releases_only_one_allowlisted_undefined_symbol_identifier",
+  "source_evidence": {
+    "live_handover_current_baton": "Behavior attempt 024 failed closed at BTR-E02 with SQLSTATE 42883 after the corrected BTR-E01 path, admitted zero complete scenario records and removed exact owned container 61a367f04b85b89b35af3abd5fb5390e94a0a44a7d290022554f443ea8c5f86a with absence verified. Mutable evidence SHA-256 is bc2efc6fffea47e8104324c822bd6c1afde28f746b05b2a5bff925dbbfe7f57b and remains unstaged. The next action is a bounded undefined-symbol diagnosis, not acceptance or scenario weakening.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled diagnostic container, exact cleanup, classification and recovery. No worker, reviewer, provider or product runtime is active. The completed codebase-health research lane remains read-only and separate.",
+    "active_plan_and_acceptance": "The diagnostic wrapper reuses the exact fixed behavior harness and target BTR-E02 bytes, captures only that process result in memory, requires the same 42883 failure and cleanup, rejects unlisted or ambiguous error forms, and releases only one exact allowlisted symbol ID plus raw-output digest and container absence. Its parser and existing behavior tests pass 47 checks, Ruff and format. No artifact, contract, scenario, role or database behavior is changed by diagnosis.",
+    "protected_evidence_boundaries": "Raw PostgreSQL error text is hashed and not persisted. Only repository-authored opaque synthetic values are replayed. Immutable failures 001-023 and mutable failure 024 remain preserved; docs/branding and unrelated untracked files remain untouched. No patient/product/protected data, provider, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Primary task branch remains at exact tracked HEAD b8bc7ca6af45f0eab2d3d1d07770dc34298b3117 with only bounded untracked attempt-024 receipt, diagnosis script/test and mutable evidence changes outside tracked state. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_diagnosis_preexecution_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled the minimized failure, exact cleanup, bounded classifier and focused deterministic pass before diagnosis."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["The codebase-health research lane is complete and outside this runtime."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The prior exact candidate veto remains completed; no verifier is active."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

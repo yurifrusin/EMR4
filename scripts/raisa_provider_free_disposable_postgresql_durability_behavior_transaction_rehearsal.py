@@ -1025,7 +1025,7 @@ def _payload(
         f"'start_time',{_lit(start_value)},"
         "'end_time',pg_catalog.to_char("
         f"{_lit(start_value)}::pg_catalog.timestamptz + "
-        f"{f['duration_minutes']} * pg_catalog.make_interval(mins=>1),"
+        f"pg_catalog.make_interval(mins=>{f['duration_minutes']}),"
         '\'YYYY-MM-DD"T"HH24:MI:SS"Z"\'),'
         "'reason_codes','{appointment_time_changed}')"
     )

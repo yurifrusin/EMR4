@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "preserve_failure_024_then_correct_the_invalid_integer_times_interval_renderer_lowering_reprove_the_exact_inert_parse_and_unchanged_twenty_scenario_behavior_contract_and_run_one_fresh_networkless_attempt",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Exact reviewed task HEAD b8bc7ca6af45f0eab2d3d1d07770dc34298b3117 accepted the RLS lock-visibility parent rebind. Behavior attempt 024 then passed BTR-E01 but failed closed at BTR-E02 with SQLSTATE 42883, admitted zero complete scenarios and removed its exact owned container. A corrected read-only diagnosis resolved five candidate PostgreSQL symbols and proved the sole missing operator signature is integer times interval. The next dependency-satisfied action is the bounded renderer recovery, not product or runtime integration.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial renderer correction, deterministic verification, disposable parse and behavior execution, cleanup and acceptance. The user-requested whole-codebase architectural-health research is complete, read-only and separate; it will be recorded at successful tranche closeout. No implementation worker or provider is active. A fresh Gemini 3.6 Flash/high independent veto becomes eligible only after the corrected deterministic exact-HEAD candidate passes.",
+    "active_plan_and_acceptance": "The accepted plan freezes exactly twenty ordered scenarios with category counts 6/4/3/4/3, opaque repository-authored synthetic data, one newly owned networkless PostgreSQL 16 container per runtime attempt and exact-ID cleanup. Diagnosis 024 proves renderer lowering of ADD_INTERVAL_MINUTES as integer multiplied by interval is invalid PostgreSQL. Recovery must preserve the typed body and scenario meaning, lower the duration as the named make_interval argument, reject integer-times-interval output, regenerate the inert artifact, perform separate parse characterization and exact-bound passes, rebind the unchanged behavior contract, pass the complete deterministic and hostile packet plus one fresh exact-HEAD veto, then run one new behavior attempt without weakening any expected outcome.",
+    "protected_evidence_boundaries": "Immutable failures 001-023 and a new immutable copy of failure 024 must be preserved; the mutable failure-024 evidence remains untracked and unstaged until a successful behavior run replaces it. Raw PostgreSQL error text remains digest-only and unpersisted. docs/branding and all unrelated untracked files remain untouched and explicit-path staging only applies. Protected holdouts and historical PHI remain unopened. No patient, clinical, product or protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at exact tracked HEAD b8bc7ca6af45f0eab2d3d1d07770dc34298b3117 with the expected bounded AER-0158 diagnosis changes and preserved untracked material. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. No protected ref may move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reread AGENTS.md, the active behavior plan/design/threat and recovery chain, the API Spine sources and steward checklist, then reconciled exact Git refs and the diagnosis-024 result."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The user-requested codebase architectural-health research completed read-only and remains separate from runtime recovery."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The previous exact candidate veto is complete; no verifier is active."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 132
+    assert register["register_revision"] == 134
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 158)
+        f"AER-{index:04d}" for index in range(1, 160)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2050,8 +2050,9 @@ def test_aer_0157_rejects_invalid_antigravity_acceptance_method() -> None:
     assert incident["origin"] == "agent_behavior"
     assert incident["category"] == "output_contract_violation"
     assert incident["workflow_disposition"] == "revision_required"
-    assert "adapter_probe_method_invalid:antigravity_cli_print" in (
-        incident["observed_error"]
+    assert (
+        "adapter_probe_method_invalid:antigravity_cli_print"
+        in (incident["observed_error"])
     )
     assert incident["recurrence_signature"] == (
         "orchestrator.worker_dispatch_runtime_contract"
@@ -2061,30 +2062,63 @@ def test_aer_0157_rejects_invalid_antigravity_acceptance_method() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0158_preserves_diagnostic_parser_undercoverage() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0158"]
+
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert "single_allowlisted_undefined_symbol_missing" in (incident["observed_error"])
+    assert incident["recurrence_signature"] == (
+        "diagnosis.undefined_symbol_parser_undercoverage"
+    )
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0159_preserves_numeric_times_interval_repository_defect() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0159"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert "pg_catalog.*(integer,interval)" in incident["observed_error"]
+    assert incident["recurrence_signature"] == (
+        "repository.renderer_numeric_times_interval_and_fixture_duplicate"
+    )
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 157
+    assert report["incident_count"] == 159
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 110,
-        "harness": 19,
-        "repository": 20,
+        "harness": 20,
+        "repository": 21,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
         "evidence_misreport": 22,
-        "harness_failure": 19,
+        "harness_failure": 20,
         "output_contract_violation": 47,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 20,
+        "repository_defect": 21,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 39,
-        "canonical_unchanged": 96,
+        "accepted_candidate_changed": 40,
+        "canonical_unchanged": 97,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [

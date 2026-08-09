@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_sol_owned_behavior_attempt_024_in_one_newly_owned_pull_never_networkless_postgresql_16_container_with_twenty_frozen_scenarios_and_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 024 must use the fixed no-argument harness, exact postgres:16-bookworm image with pull never, network none, no ports or mounts, one captured exact owned container, authored-synthetic opaque fixtures, exact artifact sha256:28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800, accepted parse source a7a780f9735d3c41095703d464611752f89685d9 and behavior contract canonical sha256:af8f89a18c97663a458f314a34ba2f978392f681f38fa8641c0c9be3b19d9009. All twenty ordered scenarios and category counts 6/4/3/4/3 are immutable. Success requires twenty passes plus exact-ID removal and absence; any failure is preserved and continues diagnosis without scenario weakening.",
+    "current_authority_allocation": "GPT Sol alone owns the fixed-path serial disposable PostgreSQL execution, evidence, cleanup, diagnosis and acceptance. The Gemini verifier completed read-only work and its worktree is absent. The codebase-health research subagent completed read-only work and is outside this execution. No external worker, provider or product runtime is active.",
+    "git_refs_and_worktree": "Primary task branch is exact tracked-clean HEAD b8bc7ca6af45f0eab2d3d1d07770dc34298b3117 before execution. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remote master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only fixed evidence paths may change; explicit-path staging remains mandatory and docs/branding is excluded.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Attempts 001-023 remain immutable failure evidence. The lifecycle stream-head row-lock visibility correction and unchanged behavior contract have passed complete deterministic checks and one fresh exact-HEAD Gemini veto, committed at b8bc7ca6af45f0eab2d3d1d07770dc34298b3117. Exactly one new attempt 024 is now the next dependency-satisfied action.",
+    "protected_evidence_boundaries": "Immutable attempts 001-023 remain preserved. The mutable behavior evidence is untracked and may be replaced by this fixed harness but must remain unstaged until a successful terminal run is accepted. docs/branding and all unrelated untracked files remain untouched. No protected holdout, historical PHI, patient, clinical or product-derived data, provider, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
