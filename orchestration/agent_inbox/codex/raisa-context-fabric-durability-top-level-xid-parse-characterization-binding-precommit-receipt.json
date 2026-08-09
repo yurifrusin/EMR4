@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_nonpassing_characterization_binding_for_the_renderer_210_artifact_before_any_fresh_disposable_postgresql_contact",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit c5d55b72441524d42b9724815dfa4c1a778ac73a fixes all twenty-one write-bearing insert/reload lowerings. The parse contract now binds that exact source, artifact SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb, 1,391,453 LF bytes and 412 statements. It is characterization_only with no expected digests and writes only a new immutable top-level-XID characterization path. The 104-test parse packet, Ruff and format checks pass; the contract canonical SHA-256 is 03b7a1a808f52ced4dff5e48740fff1bb1e83d0233e84fdb855f58a80bae2860.",
+    "current_authority_allocation": "GPT Sol owns this serial characterization binding and the later disposable PostgreSQL lifecycle. No worker or native subagent is selected. Gemini 3.6 Flash/high remains reserved for the fresh exact-head behavior-eligibility veto after deterministic rebind.",
+    "git_refs_and_worktree": "Task branch HEAD is c5d55b72441524d42b9724815dfa4c1a778ac73a before this explicit-path commit. Local and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Only the parse contract/schema, fixed harness path, focused test and their receipts are eligible for this commit.",
+    "live_handover_current_baton": "The active behavior rehearsal remains blocked after immutable attempt 022 until renderer 2.0.10 is freshly parsed and catalogued, its exact normalized digests are rebound, the behavior contract is rebound and an independent veto passes.",
+    "protected_evidence_boundaries": "Characterization can never emit the pass result. It uses one newly owned networkless no-pull PostgreSQL 16 container, empty authored-synthetic prerequisite relations, fixed SQL and exact-ID cleanup. No old parse evidence or failed mutable behavior evidence is overwritten or staged. docs/branding and unrelated untracked files remain excluded. No product/provider/patient/clinical/protected data, application/API/Diary runtime, watcher/listener, command/write, deployment, release, Pages or protected-ref authority opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

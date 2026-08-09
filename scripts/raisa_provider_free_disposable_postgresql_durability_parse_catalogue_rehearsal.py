@@ -30,7 +30,10 @@ REHEARSAL_DIR = ROOT / (
 )
 CONTRACT_PATH = REHEARSAL_DIR / "rehearsal-contract.json"
 PREREQUISITE_PATH = REHEARSAL_DIR / "synthetic-prerequisite-contract.json"
-EVIDENCE_PATH = REHEARSAL_DIR / "provider-free-disposable-postgresql-evidence.json"
+EVIDENCE_PATH = REHEARSAL_DIR / (
+    "provider-free-disposable-postgresql-evidence-"
+    "top-level-xid-insert-reload-characterization.json"
+)
 
 EXPECTED_CONTRACT_PATH = (
     "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
@@ -41,7 +44,7 @@ EXPECTED_PREREQUISITE_PATH = (
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:06d79bd73122f71548cf85d0ba68b48549d3cdfb42a5a8e69147844e337e39e4"
+    "sha256:03b7a1a808f52ced4dff5e48740fff1bb1e83d0233e84fdb855f58a80bae2860"
 )
 EXPECTED_PREREQUISITE_SHA256 = (
     "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"

@@ -402,9 +402,20 @@ def test_exact_catalogue_digests_bind_revised_types_and_registration_rls() -> No
     expected["policies"] = REGISTRATION_RLS_CHARACTERIZATION_EVIDENCE["catalogue"][
         "query_digests"
     ]["policies"]
+    historical_digests = {
+        key: value
+        for key, value in ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
+    assert historical_digests == expected
+    assert ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"]["expectation_mode"] == (
+        "exact_digest_bound"
+    )
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "exact_digest_bound",
-        "expected_query_digests": expected,
+        "mode": "characterization_only",
+        "expected_query_digests": {},
     }
     assert prior_types_digest == (
         "sha256:099effe28c033aeec242bcd7b68f0703af558ebedfc4e37875a15ac6f05594f8"
@@ -670,7 +681,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_403_578
+    assert len(artifact) == 1_391_453
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 388
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
