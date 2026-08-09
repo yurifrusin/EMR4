@@ -1,0 +1,19 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-inert-ddl-test-selection-failure.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-inert-ddl-focused-tests-001",
+  "status": "failed_closed_then_corrected_fresh_invocation",
+  "failure": {
+    "requested_node": "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py::test_two_isolated_renders_are_byte_identical",
+    "reason": "pytest_node_not_found",
+    "tests_executed": 0,
+    "repository_changed": false,
+    "database_or_provider_contact": false
+  },
+  "correction": {
+    "resolved_node": "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py::test_isolated_renders_are_byte_identical",
+    "resolution_method": "exact_scoped_symbol_search",
+    "fresh_invocation_reached_tests": true
+  },
+  "authority_boundary": "repository_local_test_selection_only_no_database_provider_product_deployment_or_protected_ref_authority"
+}

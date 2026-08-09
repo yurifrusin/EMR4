@@ -1,0 +1,27 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-inert-ddl-cli-failure.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-inert-ddl-regeneration-017",
+  "status": "failed_closed_then_corrected_fresh_invocation",
+  "failed_command_shape": "python -m scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal",
+  "failure": {
+    "reason": "required_cli_subcommand_omitted",
+    "required_choices": ["check", "regenerate"],
+    "exit_code": 2,
+    "artifacts_opened_or_written": false,
+    "database_or_provider_contact": false
+  },
+  "correction": {
+    "command_shape": "python -m scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal regenerate",
+    "exit_code": 0,
+    "outputs_written": [
+      "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+      "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/lowering-contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/lowering-contract.schema.json"
+    ],
+    "artifact_sql_sha256": "sha256:1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407",
+    "renderer_version": "2.0.17"
+  },
+  "authority_boundary": "repository_local_inert_regeneration_only_no_database_provider_product_deployment_or_protected_ref_authority"
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_renderer_2_0_17_and_the_exact_421_statement_inert_artifact_then_open_one_fresh_provider_free_disposable_postgresql_characterization_followed_by_distinct_exact_reproduction_only_if_the_runtime_gate_passes",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. The exact RLS parent repair is committed at a1a4a619 and the unchanged typed body rebind at c0673fc7. Renderer 2.0.17 now emits inert artifact sha256:1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407 with 421 statements and the exact repaired binding policy. Database execution is still closed pending commit and a fresh parse gate.",
+    "current_authority_allocation": "GPT Sol owns the serial inert-artifact acceptance, disposable PostgreSQL parse/catalogue characterization and distinct exact reproduction, behavior-parent rebind and runtime recovery. Gemini 3.6 Flash/high remains independent veto only after a complete exact-HEAD deterministic candidate. No provider call is currently eligible.",
+    "active_plan_and_acceptance": "Renderer 2.0.17 binds structural digest ff64b568, body digest edbc7f23 and their exact committed source heads. Regeneration changes only pol_cf_17_select and deterministic provenance/digests. The policy retains forced RLS, the exact two non-login owner allowlist, database_login=session_user and both active-time fences. The full inert renderer, representability and register packet passes; 421 statements and every typed body program remain fixed.",
+    "protected_evidence_boundaries": "Preserve all untracked files; never inspect or stage docs/branding; stage exact paths only. Mutable accepted parse and behavior evidence remain byte-restored and unstaged. No applied migration, operational database or credential, watcher/listener/feed, product/patient/clinical data, application/API/Diary wiring, provider call, command/write, deployment, production, release, Pages or protected-ref movement is authorized. The next database eligibility, if opened, is limited to a newly owned pull-never networkless PostgreSQL 16 container with authored-synthetic schema metadata and exact-ID cleanup.",
+    "git_refs_and_worktree": "Task HEAD is c0673fc755457756719959dcfc6aea04531d6627. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602, and origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Only the renderer, four generated inert outputs, focused tests, rebind note, AER revisions 148-150 and exact failure/receipt/precommit paths are candidates for explicit staging. All unrelated untracked files remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "renderer_2_0_17_complete_five_source_precommit_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Renderer check and the complete 228-test inert-DDL, representability and AER packet passed; three bounded process/descendant failures were recorded and corrected."]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation subagent is active."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["No verifier call is active or yet eligible."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

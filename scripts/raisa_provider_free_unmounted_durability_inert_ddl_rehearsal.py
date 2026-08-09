@@ -63,9 +63,9 @@ LOWERING_SCHEMA_PATH = OUTPUT_DIR / "lowering-contract.schema.json"
 SQL_INERT_PATH = OUTPUT_DIR / "durability-schema.sql.inert"
 MANIFEST_PATH = OUTPUT_DIR / "render-manifest.json"
 
-BODY_DIGEST = "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268"
-STRUCTURAL_SOURCE_HEAD = "338c30ddb01561ce97a4b9837317e771b555c221"
-BODY_SOURCE_HEAD = "987f64a9f68c8dec2b99d5d39aa74e28411a82fa"
+BODY_DIGEST = "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e"
+STRUCTURAL_SOURCE_HEAD = "a1a4a619222297b36fa6894a5cf5f12a179af48c"
+BODY_SOURCE_HEAD = "c0673fc755457756719959dcfc6aea04531d6627"
 
 SCHEMA_NAME = "emr4_context_fabric"
 HEADER_LINE = (
@@ -3089,7 +3089,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.16"
+RENDERER_VERSION = "2.0.17"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

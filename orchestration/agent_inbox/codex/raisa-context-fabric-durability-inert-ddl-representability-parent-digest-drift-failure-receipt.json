@@ -1,0 +1,19 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-inert-ddl-representability-parent-drift.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-inert-ddl-full-tests-001",
+  "status": "repository_expectation_drift_corrected",
+  "failure": {
+    "test": "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_postgresql_representability_recovery.py::test_recovery_preserves_parent_and_closes_effective_population",
+    "expected_predecessor_body_digest": "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268",
+    "observed_current_body_digest": "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e",
+    "other_selected_tests_passed": 87,
+    "database_or_provider_contact": false
+  },
+  "diagnosis": "The representability recovery test retained the predecessor body-parent digest after the accepted policy-only structural rebind; its population assertions and the underlying body programs were unchanged.",
+  "correction": {
+    "expected_body_digest": "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e",
+    "body_program_change": false
+  },
+  "authority_boundary": "repository_local_descendant_provenance_reconciliation_only_no_database_provider_product_deployment_or_protected_ref_authority"
+}

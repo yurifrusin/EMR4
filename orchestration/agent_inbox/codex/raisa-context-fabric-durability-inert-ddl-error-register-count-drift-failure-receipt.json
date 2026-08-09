@@ -1,0 +1,19 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-inert-ddl-register-count-failure.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-inert-ddl-focused-tests-002",
+  "status": "repository_expectation_drift_corrected",
+  "failure": {
+    "test": "tests/test_ariadne_agent_error_register.py::test_seed_separates_agent_behavior_from_transport",
+    "expected_agent_behavior_count": 112,
+    "observed_agent_behavior_count": 113,
+    "other_selected_tests_passed_before_or_after_failure": true,
+    "database_or_provider_contact": false
+  },
+  "diagnosis": "AER-0173 incremented the agent_behavior population but the separate seed-count assertion remained at its predecessor value even though the aggregate pattern assertions had been updated.",
+  "correction": {
+    "final_agent_behavior_count_after_aer_0174": 114,
+    "all_exact_register_and_pattern_counts_reconciled": true
+  },
+  "authority_boundary": "repository_local_test_expectation_reconciliation_only_no_database_provider_product_deployment_or_protected_ref_authority"
+}

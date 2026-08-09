@@ -244,6 +244,57 @@ def test_rendered_stream_head_update_policy_preserves_lock_only_lifecycle_access
         assert not report.valid
 
 
+def test_rendered_binding_select_policy_preserves_exact_owner_session_time_fences() -> (
+    None
+):
+    rendered = _base_render()
+    sql = rendered["sql_text"]
+    match = re.search(
+        r"CREATE POLICY pol_cf_17_select\b.*?;",
+        sql,
+        flags=re.DOTALL,
+    )
+    assert match is not None
+    policy_sql = match.group(0)
+    predicate = (
+        "(current_user = 'context_schema_owner'::name OR "
+        "current_user = 'context_admission_receiver'::name) AND "
+        "database_login = session_user AND "
+        "active_from <= transaction_timestamp() AND "
+        "(active_until IS NULL OR active_until > transaction_timestamp())"
+    )
+    assert policy_sql == (
+        "CREATE POLICY pol_cf_17_select ON "
+        "emr4_context_fabric.context_service_practice_binding FOR SELECT TO PUBLIC\n"
+        f"    USING ({predicate});"
+    )
+
+    hostile_predicates = (
+        predicate.replace(
+            " OR current_user = 'context_admission_receiver'::name", ""
+        ),
+        predicate.replace(
+            "current_user = 'context_admission_receiver'::name",
+            "(current_user = 'context_admission_receiver'::name OR "
+            "current_user = 'context_observer'::name)",
+        ),
+        predicate.replace("database_login = session_user AND ", ""),
+        predicate.replace("active_from <= transaction_timestamp() AND ", ""),
+        predicate.replace(
+            " AND (active_until IS NULL OR active_until > transaction_timestamp())",
+            "",
+        ),
+    )
+    for hostile_predicate in hostile_predicates:
+        hostile_sql = sql.replace(predicate, hostile_predicate, 1)
+        report = recognize_inert_sql(
+            hostile_sql,
+            rendered["manifest"],
+            rendered["effective"],
+        )
+        assert not report.valid
+
+
 def test_recovered_effective_body_population_is_exact() -> None:
     parents = _parents()
     effective = derive_effective_catalogue(parents)

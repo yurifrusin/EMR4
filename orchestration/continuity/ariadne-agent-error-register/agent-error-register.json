@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 147,
+  "register_revision": 150,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -6869,6 +6869,164 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-admission-receiver-binding-rls-recovery.md",
           "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-admission-receiver-binding-rls-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-147.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0173",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-regeneration-017",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Before invoking a repository CLI, the orchestrator must inspect and supply its required fixed subcommand so the intended operation is explicit.",
+      "observed_error": "Sol invoked the inert DDL module without its required check or regenerate subcommand. Argparse returned exit code 2 before opening or writing any artifact and before any database or provider contact.",
+      "detection_method": "The command's inline usage error named the two allowed subcommands. The corrected fresh package-module invocation supplied regenerate, exited zero and wrote exactly the four fixed inert outputs.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-missing-subcommand-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-148.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.required_cli_subcommand_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Sol reran the same package module with the fixed regenerate subcommand; renderer 2.0.17 produced the four expected repository-local inert artifacts and no runtime contact occurred.",
+        "prevention_control": "Read the module's argparse choices or invoke --help before the first state-changing CLI call whenever the required command shape is not already bound in the active recovery plan.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-missing-subcommand-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-148.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0174",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-focused-tests-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "An exact pytest node selection must be resolved from the repository before invocation so the intended tests are actually collected.",
+      "observed_error": "Sol selected test_two_isolated_renders_are_byte_identical, but the repository symbol is test_isolated_renders_are_byte_identical. Pytest failed closed with node not found and executed no tests.",
+      "detection_method": "Pytest returned the unmatched node inline. An exact scoped symbol search found the sole intended test name and the fresh corrected invocation collected it.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-test-node-selection-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-149.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.exact_pytest_node_name_unverified",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Sol resolved the exact symbol with a scoped repository search and reran the focused packet using test_isolated_renders_are_byte_identical.",
+        "prevention_control": "Resolve every manually selected pytest node with an exact scoped symbol search before invoking the packet; prefer whole exact files where selection precision offers no material benefit.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-test-node-selection-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-149.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0175",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-focused-tests-002",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every incident-register revision must reconcile all exact seed, origin, category, candidate-state and total-count assertions in the same candidate.",
+      "observed_error": "After adding AER-0173, aggregate pattern expectations were updated but test_seed_separates_agent_behavior_from_transport still expected 112 agent-behavior incidents. The focused packet observed the correct intermediate population of 113 and failed one assertion.",
+      "detection_method": "The focused register packet passed the schema and aggregate pattern checks and failed only the separate exact agent-behavior seed count, directly identifying the missed assertion.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-error-register-count-drift-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-149.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The seed assertion and all aggregate counts are reconciled to the final revision-149 population, including AER-0174 and AER-0175.",
+        "prevention_control": "Every register edit must run the whole exact register test file after regenerating pattern-report.json; partial node selection cannot serve as final register acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-error-register-count-drift-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-149.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0176",
+      "attempt_id": "raisa-context-fabric-durability-inert-ddl-full-tests-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-representability-recovery-acceptance",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every exact inert-DDL descendant test must follow the accepted current body-parent digest while retaining its independent population and semantic assertions.",
+      "observed_error": "The full inert-DDL packet passed 87 tests and failed only the representability recovery test because it still expected predecessor body digest 9b57d9d2 after the policy-only body rebind produced edbc7f23.",
+      "detection_method": "The exact failure compared only the predecessor and current canonical body digests. Direct regenerated-contract inspection proves all typed body programs and effective population remain unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-representability-parent-digest-drift-failure-receipt.json",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_postgresql_representability_recovery.py",
+        "docs/ariadne-agent-error-correction-register-revision-150.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.inert_descendant_body_parent_digest_drift",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The representability recovery test now binds current body digest edbc7f23 while retaining every effective population and semantic assertion.",
+        "prevention_control": "Every body-parent rebind packet must search the exact inert-DDL descendant test cohort for the predecessor body digest and reconcile each live current-parent assertion before final execution eligibility.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-representability-parent-digest-drift-failure-receipt.json",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_postgresql_representability_recovery.py",
+          "docs/ariadne-agent-error-correction-register-revision-150.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

@@ -169,7 +169,7 @@
         },
         "executable_ddl": false,
         "id": "postgresql_16_representability_recovery_v1",
-        "immutable_body_parent_sha256": "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268",
+        "immutable_body_parent_sha256": "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e",
         "keyed_xmin_reselects": [
           {
             "cardinality_failure": {

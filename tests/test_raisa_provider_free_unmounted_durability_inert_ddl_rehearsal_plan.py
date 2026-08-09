@@ -21,11 +21,11 @@ RECOVERY = (
 )
 CURRENT_PARENT_REBIND = (
     ROOT
-    / "docs/raisa-provider-free-unmounted-durability-inert-ddl-alias-lock-policy-rebind.md"
+    / "docs/raisa-provider-free-unmounted-durability-inert-ddl-admission-receiver-binding-rls-rebind.md"
 )
 CURRENT_BODY_PARENT_REBIND = (
     ROOT
-    / "docs/raisa-provider-free-unmounted-durability-function-trigger-body-alias-lock-policy-parent-rebind.md"
+    / "docs/raisa-provider-free-unmounted-durability-function-trigger-body-admission-receiver-binding-rls-parent-rebind.md"
 )
 STRUCTURAL_PARENT = (
     ROOT
@@ -45,10 +45,10 @@ PLAN_BODY_DIGEST = (
     "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1"
 )
 CURRENT_STRUCTURAL_DIGEST = (
-    "sha256:00a4102ff0e884038e4a25f814dab84f5500b5e597058e30012b3a6d0be6514b"
+    "sha256:ff64b568d65d243ad5bb3dd8159063f47732b0b360efcc12f58d3b28ceb00d9a"
 )
 CURRENT_BODY_DIGEST = (
-    "sha256:9b57d9d28f216e494da91715fcf7dfc7f49c80bbbe836fe0c685cd1dd4929268"
+    "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e"
 )
 
 

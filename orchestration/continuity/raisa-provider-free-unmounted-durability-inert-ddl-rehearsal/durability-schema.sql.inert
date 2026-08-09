@@ -1,6 +1,6 @@
 -- -- durability-schema.sql.inert -- inert evidence artifact; never execute or apply
 -- generated_by: raisa_provider_free_unmounted_durability_inert_ddl_rehearsal
--- renderer_version: 2.0.16
+-- renderer_version: 2.0.17
 -- do_not_execute: true
 
 -- ==========================================================================
@@ -585,7 +585,7 @@ CREATE POLICY pol_cf_16_update ON emr4_context_fabric.context_recovery_pin FOR U
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_17_select ON emr4_context_fabric.context_service_practice_binding FOR SELECT TO PUBLIC
-    USING (current_user = 'context_schema_owner'::name AND database_login = session_user AND active_from <= transaction_timestamp() AND (active_until IS NULL OR active_until > transaction_timestamp()));
+    USING ((current_user = 'context_schema_owner'::name OR current_user = 'context_admission_receiver'::name) AND database_login = session_user AND active_from <= transaction_timestamp() AND (active_until IS NULL OR active_until > transaction_timestamp()));
 CREATE POLICY pol_cf_18_select ON emr4_context_fabric.context_retention_policy FOR SELECT TO PUBLIC
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['LIFECYCLE'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_18_insert ON emr4_context_fabric.context_retention_policy FOR INSERT TO PUBLIC
