@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_separate_newly_owned_networkless_postgresql_16_exact_digest_bound_parse_catalogue_rehearsal_for_the_rls_lock_visibility_artifact_then_remove_the_exact_verified_container",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability behavior rehearsal remains in bounded attempt-023 recovery. The inert artifact rebind is committed at 3644c951f9b0a446d802ed31ef04c23f139cb0d7 and the distinct characterization source is committed at 16cc23fce778c24415fbd1a492183220be01c3bf. The dependency-satisfied next action is one separate exact-digest-bound parse/catalogue run before behavior rebind.",
+    "current_authority_allocation": "GPT Sol alone owns the serial disposable PostgreSQL exact run, exact-ID cleanup and evidence reconciliation. No worker or external verifier may start the container. The codebase-health research subagent has completed read-only and no implementation worker is active.",
+    "active_plan_and_acceptance": "Characterization evidence SHA-256 1721544f7031856dc83f5c6e5e4a4921952d10758b055884b3c2189b07ad88ff returned catalogue_characterization_required, installed the exact 412-statement artifact, reproduced the closed population and removed exact container 765e0581b624ed61d48f9a6c12b407516cf543b3ce32d519c29d93bae44a48a3 with independent absence readback. All fifteen accepted catalogue digests are now frozen in exact contract SHA-256 2834249d755d83764abf974d524424b958a261f6d8c94808403d4d8bf3a5a1f1; only policies differs from the predecessor and is exact sha256:3e3f043b4c3f103c8170805e0e0aff327c83916010dc0cef727665fa92c8ef03. The full parse/plan deterministic and hostile modules, schema/parent admission, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "The exact run uses only the already-local postgres:16-bookworm image with --pull=never, --network=none, no ports or mounts, tmpfs storage, authored-synthetic empty prerequisite shapes, fixed SQL and exact-ID cleanup. Characterization evidence and prior accepted parse evidence are immutable and the exact-rerun failure target is distinct. The run invokes no function, trigger, policy behavior, application command or product route. Immutable behavior failures 001-023 and mutable failed behavior evidence remain preserved. No patient, clinical, product-derived, historical-PHI or protected data; provider; operational database; application/API/Diary wiring; watcher/listener/feed; command/write; deployment; production; release; Pages; or protected-ref movement opens.",
+    "git_refs_and_worktree": "Task HEAD before the explicit-path exact-rerun-source commit is 16cc23fce778c24415fbd1a492183220be01c3bf; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remotely queried master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the exact contract/harness, characterization evidence and test/note updates plus this preexecution pair are eligible; docs/branding, unrelated untracked files and mutable behavior evidence remain excluded by explicit-path staging."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rls_lock_visibility_parse_exact_rerun_preexecution",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled exact characterization evidence and cleanup, proved only the policy digest changed, froze the full exact digest set and passed the complete deterministic parse packet."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The separately authorised codebase-health research subagent completed read-only without repository changes."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No model review is eligible or needed for the serial exact parse run; the required fresh veto remains after complete behavior-candidate rebind."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker is active for the serial database run."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -36,3 +36,16 @@ opens no application migration, operational database, product or patient
 data, provider, application/API/Diary wiring, watcher/listener/feed,
 command/write, deployment, production, release, Pages or protected-ref
 authority.
+
+## Characterization result
+
+The separate characterization completed with the required nonpassing result
+`catalogue_characterization_required`. Evidence SHA-256 is
+`sha256:1721544f7031856dc83f5c6e5e4a4921952d10758b055884b3c2189b07ad88ff`.
+All catalogue query digests remained byte-identical to the preceding accepted
+pass except `policies`, whose PostgreSQL 16 deparse digest is now
+`sha256:3e3f043b4c3f103c8170805e0e0aff327c83916010dc0cef727665fa92c8ef03`.
+Exact container
+`765e0581b624ed61d48f9a6c12b407516cf543b3ce32d519c29d93bae44a48a3`
+was removed and exact-ID absence was independently re-observed. The full
+fifteen-digest set is now eligible for one separate exact-bound rerun.

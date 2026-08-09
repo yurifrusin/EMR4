@@ -115,6 +115,13 @@ TOP_LEVEL_XID_INSERT_RELOAD_CHARACTERIZATION_EVIDENCE = json.loads(
         encoding="utf-8"
     )
 )
+RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-rls-lock-visibility-characterization.json"
+)
+RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE = json.loads(
+    RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -574,6 +581,64 @@ def test_historical_exact_catalogue_digests_bind_revised_types_and_registration_
     }
 
 
+def test_rls_lock_visibility_characterization_changes_only_policy_digest() -> None:
+    evidence = RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "1721544f7031856dc83f5c6e5e4a4921952d10758b055884b3c2189b07ad88ff"
+    )
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_391_506,
+        "artifact_sha256": (
+            "sha256:28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800"
+        ),
+        "contract_sha256": (
+            "sha256:5e44a7625995ed188b257af067d167c8cafe96622179c285a494fcce8312ae0e"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    characterized = {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    historical = {
+        key: value
+        for key, value in ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
+    assert {key for key in characterized if characterized[key] != historical[key]} == {
+        "policies"
+    }
+    assert characterized["policies"] == (
+        "sha256:3e3f043b4c3f103c8170805e0e0aff327c83916010dc0cef727665fa92c8ef03"
+    )
+    assert CONTRACT["catalogue_expectation"] == {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": characterized,
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "765e0581b624ed61d48f9a6c12b407516cf543b3ce32d519c29d93bae44a48a3"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
 def test_digest_nullability_query_drift_is_preserved_fail_closed() -> None:
     evidence = DIGEST_NULLABILITY_QUERY_DRIFT_EVIDENCE
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
@@ -683,10 +748,18 @@ def test_system_xmin_record_access_recovery_parse_catalogue_evidence_is_exact_pa
     }
     assert evidence["catalogue"]["status"] == "matched"
     assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
-    for query_id, digest in CONTRACT["catalogue_expectation"][
-        "expected_query_digests"
-    ].items():
-        assert evidence["catalogue"]["query_digests"][query_id] == digest
+    historical_digests = {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    assert set(historical_digests) == set(CONTRACT["catalogue_query_ids"]) - {
+        "server",
+        "extensions",
+    }
+    assert historical_digests["policies"] == (
+        "sha256:7c847b9d0e153bb02101bc3704d33d72e8aefdf4cfc911e0b092149393cc1b37"
+    )
     assert evidence["environment"]["image"] == {
         "id": (
             "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"
