@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_and_commit_the_fresh_json_key_set_order_behavior_veto_and_zero_call_predispatch_correction_provenance_without_running_behavior",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Review receipt file SHA-256 8cf05c4e575f41cd5d59fb80971a71850e4de722d6e4469081357406ed32130a records decision pass, exact candidate e44740c0c626b9c5daccafbfbf9ce4994ad92f4e, 495 passing tests, all twenty-one substantive challenges, clean unchanged pre/post HEAD and no Docker execution. Register revision 141 preserves the earlier revision_required workspace-shape receipt as zero-call AER-0166 and contains 166 incidents with zero open. Focused register and Antigravity tests pass; changed-file Ruff and diff checks pass.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied one read-only independent veto only. GPT Sol independently owns acceptance, provenance, the next serial behavior runtime, cleanup and later closeout. No worker owns integration, runtime or protected refs. The first predispatch receipt reached no model and grants no additional allocation.",
+    "git_refs_and_worktree": "Primary task branch remains at substantive candidate e44740c0c626b9c5daccafbfbf9ce4994ad92f4e before the explicit-path provenance commit. Review worktree r138 remains clean at that exact commit by passed preflight and postflight. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. The primary index is clean before staging only the named provenance/register files.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. The fresh r138 veto passed exact candidate e44740c0c626b9c5daccafbfbf9ce4994ad92f4e; this step preserves its result and AER-0166 before behavior attempt 027 is opened through a separate preexecution receipt.",
+    "protected_evidence_boundaries": "Acceptance is limited to the committed renderer recovery, exact parse proof and six-parent behavior rebind. It does not accept behavior attempt 027 in advance. Mutable attempt-026 behavior evidence remains untracked and unstaged. docs/branding and all unrelated untracked files remain untouched. No product or patient/protected data, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref action is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

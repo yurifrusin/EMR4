@@ -66,6 +66,21 @@ The repaired complete inherited-plus-current packet collects and passes 495
 tests. Ruff check, Ruff format and Git diff checks also pass. This repair
 changes no SQL, contract, scenario or runtime behavior.
 
+## Independent veto
+
+Fresh Gemini 3.6 Flash/high review at exact clean source
+`e44740c0c626b9c5daccafbfbf9ce4994ad92f4e` passed all twenty-one substantive
+challenges and independently passed all 495 tests. Review receipt SHA-256 is
+`sha256:8cf05c4e575f41cd5d59fb80971a71850e4de722d6e4469081357406ed32130a`.
+The review worktree remained clean and unchanged before and after review, and
+no Docker or runtime harness was executed.
+
+The first predispatch receipt had already failed closed before any model call
+because Sol incorrectly used handoff-alignment fields for the non-protected
+review worktree. AER-0166 preserves that zero-call orchestration error. The
+replacement five-source receipt and separate exact-worktree preflight passed
+before the one accepted verifier launch.
+
 ## Closed surfaces
 
 No applied migration, operational credentials or persistence,

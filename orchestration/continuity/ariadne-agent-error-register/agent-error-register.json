@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 140,
+  "register_revision": 141,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6539,6 +6539,51 @@
         "evidence_paths": [
           "tests/test_raisa_context_fabric_durability_behavior_failure_025_undefined_symbol_diagnosis.py",
           "docs/ariadne-agent-error-correction-register-revision-140.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0166",
+      "attempt_id": "raisa-context-fabric-durability-json-key-set-order-behavior-veto-predispatch-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh non-protected verifier worktree must be evidenced by the exact five-source Git record and verifier-worktree preflight without being represented as a handoff-aligned workspace assignment.",
+      "observed_error": "The first JSON-key-order verifier predispatch state included the clean r138 candidate as a workspace_receipt and assigned_agent_id. The orchestrator preflight correctly returned revision_required with workspace_not_at_handoff because verifier branches intentionally do not equal protected handoff/current. The launcher guard stopped before any Antigravity or model call.",
+      "detection_method": "The generated predispatch receipt reported status revision_required, worker_dispatch_permitted false and the exact workspace_not_at_handoff reason. No Antigravity output receipt, agy process or model call existed. The corrected state retained exact r138 evidence in git_refs_and_worktree plus the separate passed verifier-worktree preflight and left workspace_receipts and assigned_agent_ids empty, matching prior verifier dispatches.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-behavior-veto-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-behavior-veto-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-behavior-veto-predispatch-2-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-behavior-veto-predispatch-2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-review-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-141.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.non_handoff_verifier_workspace_receipt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The corrected predispatch state leaves handoff workspace assignments empty and binds the exact non-protected reviewer branch and HEAD through the five-source Git evidence plus a separate passed verifier-worktree preflight. The corrected receipt passed before the single verifier launch.",
+        "prevention_control": "Use workspace_receipts and assigned_agent_ids only for workers whose active harness contract requires handoff alignment. Fresh read-only verifier worktrees remain candidate-bound through exact Git source evidence and the dedicated worktree preflight.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-behavior-veto-predispatch-2-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-behavior-veto-predispatch-2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-json-key-set-order-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-141.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

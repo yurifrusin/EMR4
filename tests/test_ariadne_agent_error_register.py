@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 140
+    assert register["register_revision"] == 141
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 166)
+        f"AER-{index:04d}" for index in range(1, 167)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 111
+    assert len(agent_incidents) == 112
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2208,13 +2208,34 @@ def test_aer_0165_preserves_historical_mutable_attempt_mismatch() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0166_preserves_non_handoff_verifier_workspace_receipt() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0166"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "dispatch"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert "workspace_not_at_handoff" in incident["observed_error"]
+    assert "before any Antigravity or model call" in incident["observed_error"]
+    assert incident["recurrence_signature"] == (
+        "orchestrator.non_handoff_verifier_workspace_receipt"
+    )
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 165
+    assert report["incident_count"] == 166
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 111,
+        "agent_behavior": 112,
         "harness": 21,
         "repository": 25,
         "transport": 8,
@@ -2223,7 +2244,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 15,
         "evidence_misreport": 22,
         "harness_failure": 21,
-        "output_contract_violation": 48,
+        "output_contract_violation": 49,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
         "repository_defect": 25,
@@ -2231,7 +2252,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 44,
-        "canonical_unchanged": 99,
+        "canonical_unchanged": 100,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
