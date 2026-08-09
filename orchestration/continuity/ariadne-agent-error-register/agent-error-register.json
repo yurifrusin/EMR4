@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 138,
+  "register_revision": 139,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6451,6 +6451,54 @@
           "tests/test_raisa_context_fabric_durability_behavior_failure_025_undefined_symbol_diagnosis.py",
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-uuid-minimum-behavior-review-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-138.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0164",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-026",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "JSON_KEYS_EXACT must compare the observed and fixed expected JSON object key sets in the same deterministic canonical order while retaining exact missing-key and extra-key rejection.",
+      "observed_error": "Behavior attempt 026 stopped at BTR-E02 with repository SQLSTATE CF103 in project_update_confirm_reschedule_v1 line 85. Deterministic source reconciliation mapped the coordinate to event-membership assertion p12: the renderer sorted observed jsonb_object_keys lexicographically but emitted the same six expected keys in unsorted body declaration order, so equal sets compared as unequal arrays.",
+      "detection_method": "The immutable attempt-026 evidence verified zero completed scenarios and exact container cleanup. A provider-free repository diagnosis bound the predecessor artifact and body source, mapped the reported coordinate to the sole JSON_KEYS_EXACT expression in p12, and proved the actual ordered key list differed only in order from the fixed expected list without another container run or raw error persistence.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-026.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-026.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_026_json_keys_order_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_026_json_keys_order_diagnosis.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-json-key-set-order-recovery.md",
+        "docs/security/raisa-context-fabric-durability-json-key-set-order-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-139.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.json_keys_exact_expected_order_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Renderer 2.0.13 lexicographically canonicalizes the already fixed unique expected key list before emitting the typed text array, matching the existing observed-key ORDER BY while retaining exact array equality and all admitted keys.",
+        "prevention_control": "Every set-valued renderer opcode expressed through ordered PostgreSQL arrays must canonicalize both sides with the same explicit ordering and include hostile tests for permuted declarations, missing members and extra members.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
+          "docs/raisa-provider-free-disposable-postgresql-durability-json-key-set-order-recovery.md",
+          "docs/security/raisa-context-fabric-durability-json-key-set-order-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-139.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 138
+    assert register["register_revision"] == 139
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 164)
+        f"AER-{index:04d}" for index in range(1, 165)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2167,15 +2167,35 @@ def test_aer_0163_preserves_clean_checkout_mutable_fixture_dependency() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0164_preserves_json_keys_exact_ordering_defect() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0164"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["role"] == "orchestrator"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert "JSON_KEYS_EXACT" in incident["expected_invariant"]
+    assert "CF103" in incident["observed_error"]
+    assert incident["recurrence_signature"] == (
+        "repository.json_keys_exact_expected_order_mismatch"
+    )
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 163
+    assert report["incident_count"] == 164
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 111,
         "harness": 21,
-        "repository": 23,
+        "repository": 24,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
@@ -2185,11 +2205,11 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "output_contract_violation": 48,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 23,
+        "repository_defect": 24,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 42,
+        "accepted_candidate_changed": 43,
         "canonical_unchanged": 99,
         "untrusted_partial_worktree": 22,
     }

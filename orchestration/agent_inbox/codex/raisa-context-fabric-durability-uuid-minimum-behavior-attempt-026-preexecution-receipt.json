@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_exactly_one_new_owned_pull_never_networkless_postgresql_16_behavior_attempt_026_then_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate HEAD 28fd2b149d99a2a5683fe65c67e33761be377611 includes accepted replacement veto provenance. The reviewed candidate binds inert artifact SHA-256 eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8, exact passed UUID parse evidence, canonical behavior contract SHA-256 b6d8732b655d038de719f34f59854a2463f3ccfc89e589264f13a8dced435c57 and exactly twenty ordered scenarios at canonical SHA-256 eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19 with category counts 6/4/3/4/3. Attempt 025 remains immutable failure evidence and the mutable file is byte-identical before this run.",
+    "current_authority_allocation": "GPT Sol owns exactly one serial behavior run, minimized evidence, exact-ID cleanup, evidence-backed diagnosis and bounded repair if needed, and later acceptance. Gemini completed read-only review only. No worker, native subagent, provider model or product surface is involved.",
+    "git_refs_and_worktree": "Primary is tracked-clean with a clean index at exact HEAD 28fd2b149d99a2a5683fe65c67e33761be377611. Local postgres:16-bookworm exists at exact image ID sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Review worktree r137 is clean at reviewed commit 795a0872d78bb6174a1038e29f24a4ba76f4ce0e. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active provider-free Context Fabric durability gate has passed UUID-minimum renderer recovery, separate exact parse proof, six-parent behavior rebinding and one fresh independent replacement veto. Attempt 026 is the next and only currently eligible behavior run.",
+    "protected_evidence_boundaries": "One exact locally present postgres:16-bookworm image may create one uniquely named owned container with --pull=never, --network=none, no published/exposed host port, no bind/named/workspace/Docker-socket mount, container-local tmpfs, fixed authored-synthetic fixtures, minimized evidence and exact-ID cleanup. No application migration, operational database/credential, durable volume, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, external retrieval, command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

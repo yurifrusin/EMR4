@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_attempt_026_failure_diagnosis_and_renderer_2013_json_key_set_order_repair_using_only_explicit_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior and transaction rehearsal. Attempt 026 failed safely at BTR-E02 with CF103, zero completed scenarios and exact cleanup. The deterministic JSON key-set ordering repair is the current bounded candidate; behavior runtime is closed.",
+    "current_authority_allocation": "GPT Sol owns failure preservation, deterministic repository diagnosis, renderer repair, tests, explicit-path commit and later proof sequencing. No implementation worker or provider verifier is active, and no agent owns protected integration.",
+    "active_plan_and_acceptance": "Immutable attempt-026 evidence is byte-identical to the failed mutable artifact at SHA-256 6365e2f52a08f45a564764a280b2fe83ac3cae8bd2dd0af31708a1696231c56a. The no-runtime diagnosis maps function line 85 to p12 JSON_KEYS_EXACT and proves observed keys were sorted while the same fixed expected set was not. Renderer 2.0.13 sorts only the expected fixed keys. The regenerated 412-statement, 1391670-byte LF artifact has SHA-256 f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714 and manifest file SHA-256 d414fb3f0c9d5b8075e913f5608b6146b7b9ee43eb849c9272ccf48df3a2c706. Focused diagnosis, renderer, register, Ruff, format and diff checks pass.",
+    "protected_evidence_boundaries": "This commit changes no immutable body program, structural contract, scenario, admitted JSON key, SQLSTATE, policy, role, trigger, entry point or product interface. Mutable behavior evidence remains untracked and unstaged. docs/branding and all unrelated untracked files remain untouched. No Docker, provider, product or patient/protected data, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref action is authorized.",
+    "git_refs_and_worktree": "Primary task branch is at tracked HEAD 28fd2b149d99a2a5683fe65c67e33761be377611 before this explicit-path repair commit. Review worktree r137 remains clean at 795a0872d78bb6174a1038e29f24a4ba76f4ce0e. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_json_key_set_order_repair_precommit_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol preserved attempt 026, proved the exact static root cause and applied the bounded renderer repair."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is active in the repair commit."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["No verifier call is active; fresh review remains later in the proof sequence."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

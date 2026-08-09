@@ -1,0 +1,50 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "authority_change": false,
+    "body_program_change": false,
+    "renderer_change": "canonicalize_fixed_expected_json_keys_to_lexicographic_order",
+    "scenario_change": false
+  },
+  "diagnosis": {
+    "actual_key_order_rule": "lexicographic_ascending",
+    "actual_ordered_keys": [
+      "appointment_id",
+      "end_time",
+      "location_id",
+      "practitioner_id",
+      "reason_codes",
+      "start_time"
+    ],
+    "additional_container_runs": 0,
+    "artifact_sha256": "sha256:eeabfc39bf0b0c1073f57e97835440b394391161bec3ddc62be6e186fd7af6d8",
+    "assert_node_id": "emr4_context_fabric.project_update_confirm_reschedule_v1.p12",
+    "body_contract_sha256": "sha256:6c4230c2d6c245087a789fbabb058dce4f6a42b747429ec8256ef0d994e5ad1b",
+    "body_source_sha256": "sha256:78721338810c87df825bdf3a9d1e010cb3cdd04dcb7898badd127b76fec174d2",
+    "declared_expected_keys": [
+      "appointment_id",
+      "practitioner_id",
+      "location_id",
+      "start_time",
+      "end_time",
+      "reason_codes"
+    ],
+    "expression_opcode": "JSON_KEYS_EXACT",
+    "failure_id": "F_MEMBERSHIP",
+    "orders_equal": false,
+    "raw_postgresql_error_persisted": false,
+    "renderer_version": "2.0.12"
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:6365e2f52a08f45a564764a280b2fe83ac3cae8bd2dd0af31708a1696231c56a",
+    "function_id": "emr4_context_fabric.project_update_confirm_reschedule_v1",
+    "function_line": 85,
+    "internal_attempt_id": "223b90d36d8934c637a24978",
+    "run_sequence": 26,
+    "scenario_id": "BTR-E02",
+    "sqlstate": "CF103"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-026-json-keys-order-diagnosis.v1",
+  "status": "deterministic_json_key_order_mismatch_proven_cleanup_verified"
+}

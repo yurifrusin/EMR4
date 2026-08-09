@@ -1651,7 +1651,7 @@ def _render_composite(expr: dict[str, Any]) -> str:
 
 def _render_json_keys_exact(expr: dict[str, Any]) -> str:
     source = render_expr(expr["source"])
-    keys = ", ".join(_literal_text(key) for key in expr["keys"])
+    keys = ", ".join(_literal_text(key) for key in sorted(expr["keys"]))
     keys_sql = "ARRAY[" + keys + "]::pg_catalog.text[]"
     actual = (
         "(SELECT pg_catalog.array_agg(k.k ORDER BY k.k) "
@@ -3067,7 +3067,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.12"
+RENDERER_VERSION = "2.0.13"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

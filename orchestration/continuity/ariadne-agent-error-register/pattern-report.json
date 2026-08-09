@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "3542aec461bd58248bcc61cb55a9d41df051b088698afa6ee5bcf0986716dd93",
+  "canonical_register_sha256": "3c12a386efb716efdfe53d546de1cc6c273c9c8fbb60a7d539847e14a518596c",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 42,
+      "accepted_candidate_changed": 43,
       "canonical_unchanged": 99,
       "untrusted_partial_worktree": 22
     },
@@ -13,18 +13,18 @@
       "output_contract_violation": 48,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
-      "repository_defect": 23,
+      "repository_defect": 24,
       "transport_timeout": 8
     },
     "by_origin": {
       "agent_behavior": 111,
       "harness": 21,
-      "repository": 23,
+      "repository": 24,
       "transport": 8
     },
     "by_process_severity": {
       "low": 50,
-      "material": 60,
+      "material": 61,
       "moderate": 53
     },
     "by_resource_and_role": {
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 70,
+      "codex-primary-orchestrator::orchestrator": 71,
       "codex-sol-orchestrator::orchestrator": 1,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
@@ -58,12 +58,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 109,
+      "orchestrator": 110,
       "verifier": 40
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 163,
+  "incident_count": 164,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -444,7 +444,7 @@
       ]
     }
   ],
-  "register_revision": 138,
+  "register_revision": 139,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-09"
 }

@@ -397,6 +397,47 @@ def test_renderer_aliases_reserved_primary_local_without_contract_drift() -> Non
     assert "INTO STRICT primary" not in sql
 
 
+def test_json_keys_exact_canonicalizes_expected_set_order() -> None:
+    source = {
+        "op": "REF",
+        "kind": "LOCAL",
+        "symbol": "payload",
+        "type": "pg_catalog.jsonb",
+    }
+    unsorted = {
+        "op": "JSON_KEYS_EXACT",
+        "source": source,
+        "keys": ["practitioner_id", "appointment_id", "end_time"],
+        "type": "pg_catalog.boolean",
+    }
+    canonical = copy.deepcopy(unsorted)
+    canonical["keys"] = ["appointment_id", "end_time", "practitioner_id"]
+
+    rendered = render_expr(unsorted)
+    assert rendered == render_expr(canonical)
+    assert "pg_catalog.array_agg(k.k ORDER BY k.k)" in rendered
+    assert (
+        "ARRAY['appointment_id', 'end_time', 'practitioner_id']"
+        "::pg_catalog.text[]" in rendered
+    )
+    assert "ARRAY['practitioner_id', 'appointment_id', 'end_time']" not in rendered
+
+
+def test_producer_json_membership_expected_keys_match_actual_sort_order() -> None:
+    sql = _base_render()["sql_text"]
+    expected = (
+        "ARRAY['appointment_id', 'end_time', 'location_id', "
+        "'practitioner_id', 'reason_codes', 'start_time']::pg_catalog.text[]"
+    )
+    predecessor = (
+        "ARRAY['appointment_id', 'practitioner_id', 'location_id', "
+        "'start_time', 'end_time', 'reason_codes']::pg_catalog.text[]"
+    )
+
+    assert sql.count(expected) == 7
+    assert predecessor not in sql
+
+
 def test_renderer_rejects_physical_symbol_alias_collision() -> None:
     rendered = _base_render()
     body = copy.deepcopy(rendered["loaded"]["body"])
