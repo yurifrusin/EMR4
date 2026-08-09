@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "recover_the_terminal_cross_layer_deterministic_packet_then_obtain_one_fresh_exact_head_gemini_veto_before_behavior_attempt_024",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Immutable attempts 001-023 remain failure evidence; attempt 023 stopped at BTR-E01 with CF004 and exact cleanup. The lifecycle row-lock visibility correction, regenerated inert artifact, separate characterization and exact parse/catalogue proof, and unchanged twenty-scenario behavior parent rebind are now committed through task HEAD 2b00922d2ffa1b22b116da91692c523172741a8a. The next dependency-satisfied action is to recover the terminal full deterministic packet, not to open a product or runtime integration gate.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial PostgreSQL recovery, deterministic verification, disposable behavior execution, cleanup and acceptance. The user-requested native subagent completed a bounded read-only whole-codebase architectural-health research lane, made no repository changes and holds no implementation, acceptance, integration, runtime or protected-ref authority. No implementation worker is active. A fresh Gemini 3.6 Flash/high Antigravity verifier is eligible only if the complete corrected deterministic candidate passes, and it receives read-only exact-HEAD veto authority only.",
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty ordered scenarios with category counts 6/4/3/4/3, repository-authored opaque synthetic data, one newly owned pull-never networkless PostgreSQL 16 container per behavior attempt and exact-ID cleanup. The RLS recovery changes only pol_cf_01_update USING to admit PRODUCER or LIFECYCLE, preserves producer-only WITH CHECK and zero lifecycle direct table DML/SELECT. Accepted parse source a7a780f9735d3c41095703d464611752f89685d9 binds artifact sha256:28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800 and all fifteen exact catalogue digests. Behavior contract sha256:af8f89a18c97663a458f314a34ba2f978392f681f38fa8641c0c9be3b19d900 retains scenario canonical digest sha256:eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. Required next proofs are the terminal complete deterministic and hostile packet, Ruff and diff checks, one fresh exact-HEAD independent veto, then one newly owned attempt 024 unless a genuine bounded recovery fork is exhausted.",
+    "protected_evidence_boundaries": "Immutable behavior failures 001-023, all prior parse evidence and the separate characterization result remain preserved. The mutable behavior evidence remains untracked and must not be staged until a successful behavior run replaces it. docs/branding and every unrelated untracked file remain untouched and excluded; staging is explicit-path only and broad git add commands are forbidden. No protected holdout, historical PHI, patient, clinical or product-derived data; provider; operational database; application/API/Diary wiring; watcher/listener/feed; command/write; deployment; production; release; Pages; or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at 2b00922d2ffa1b22b116da91692c523172741a8a with no tracked or staged change before this receipt. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remotely queried master plus handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. User-owned untracked files remain preserved; no protected ref, deployment or Pages action is authorized."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reread AGENTS.md completely, the behavior plan/design and threat delta, the RLS and top-level-XID recovery sources, the accepted parse source and behavior parent rebind, the EMR4 API Steward skill and checklist, relevant API Spine sources, and exact Git refs/worktree."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The user-requested codebase-health research subagent completed its read-only lane, returned a scenario-based whole-system review method and cadence recommendation, and made no repository changes."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No new verifier is dispatched until the full cross-layer deterministic packet has a terminal pass and the candidate is clean."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker is active for this tightly coupled serial recovery."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

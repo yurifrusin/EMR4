@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_fresh_postcompaction_rehydration_and_precommit_receipts_as_the_clean_exact_head_parent_for_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Attempts 001-023 remain immutable failure evidence. The accepted lifecycle row-lock visibility recovery and unchanged twenty-scenario behavior rebind are committed through 2b00922d2ffa1b22b116da91692c523172741a8a. The complete cross-layer deterministic packet reached 100 percent without failure, Ruff passed and the committed diff is clean; the next action is to bind this fresh rehydration receipt into an exact clean candidate before independent veto.",
+    "current_authority_allocation": "GPT Sol owns serial recovery, deterministic verification, commit, runtime execution, cleanup and acceptance. The codebase-health research subagent has completed read-only work with no repository edits or authority. No implementation worker is active. Gemini 3.6 Flash/high receives only a later fresh exact-HEAD read-only veto packet after this receipt-only commit.",
+    "active_plan_and_acceptance": "The frozen behavior acceptance remains exactly twenty ordered scenarios in 6/4/3/4/3 categories with unchanged canonical scenario digest sha256:eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. Accepted parse source a7a780f9735d3c41095703d464611752f89685d9 binds the exact artifact and all fifteen catalogue digests. Cross-layer deterministic and hostile tests completed without failure, Ruff passed and git diff check passed. The receipt-only commit changes no implementation, acceptance meaning or runtime eligibility; fresh exact-HEAD veto remains mandatory before attempt 024.",
+    "protected_evidence_boundaries": "Immutable failures and prior evidence remain untouched. Mutable behavior evidence remains untracked and unstaged until replaced by a successful behavior run. docs/branding and all unrelated untracked files remain preserved and excluded. This commit is explicit-path receipt evidence only and opens no protected evidence, product/patient data, provider, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at 2b00922d2ffa1b22b116da91692c523172741a8a with no tracked or staged changes. Only the fresh postcompaction runtime-state/receipt and this precommit pair are intended for explicit-path staging. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remote master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_precommit_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The full cross-layer deterministic packet completed without failure; Ruff and git diff checks passed; exact refs and clean tracked state were re-observed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The user-requested whole-codebase health research lane completed read-only with no edits or runtime authority."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fresh independent veto is planned only after this receipt-only commit creates an exact clean candidate."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
