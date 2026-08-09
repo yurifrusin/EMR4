@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 139,
+  "register_revision": 140,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6499,6 +6499,46 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-json-key-set-order-recovery.md",
           "docs/security/raisa-context-fabric-durability-json-key-set-order-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-139.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0165",
+      "attempt_id": "raisa-context-fabric-durability-json-key-set-order-sol-final-deterministic-packet-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A historical immutable behavior-failure test may compare an optional mutable current-evidence file only after both files are proven to identify the same runtime attempt.",
+      "observed_error": "The complete JSON-key-order deterministic packet reached one failure because the attempt-025 preservation test compared immutable attempt-025 bytes with the present mutable attempt-026 bytes solely because the optional current-evidence path existed. Both files were valid but intentionally represented different attempts.",
+      "detection_method": "The serial complete deterministic packet ran with the preserved untracked attempt-026 current evidence present and failed only test_failure_025_is_preserved_byte_identically. The byte mismatch began in the attempt identifier, proving a historical-to-current identity mismatch rather than corruption of either evidence file.",
+      "evidence_paths": [
+        "tests/test_raisa_context_fabric_durability_behavior_failure_025_undefined_symbol_diagnosis.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-025.json",
+        "docs/ariadne-agent-error-correction-register-revision-140.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.historical_mutable_fixture_attempt_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The test now parses the optional mutable evidence and requires matching attempt identity before asserting byte equality with immutable attempt 025; absent or newer current evidence cannot invalidate historical preservation.",
+        "prevention_control": "Any comparison between immutable historical evidence and a mutable current-evidence alias must first bind the exact attempt or generation identity. Existence alone is never a sufficient equality precondition.",
+        "evidence_paths": [
+          "tests/test_raisa_context_fabric_durability_behavior_failure_025_undefined_symbol_diagnosis.py",
+          "docs/ariadne-agent-error-correction-register-revision-140.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

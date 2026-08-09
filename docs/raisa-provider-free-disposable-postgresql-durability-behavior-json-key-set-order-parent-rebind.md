@@ -52,6 +52,20 @@ hostile packet plus one fresh exact-HEAD Gemini 3.6 Flash/high veto pass may
 attempt 027 run once in a newly owned `postgres:16-bookworm` container with
 `--pull=never`, `--network=none`, no ports or mounts and exact-ID cleanup.
 
+## Deterministic packet recovery
+
+The first complete packet correctly stopped on one repository test defect:
+the historical attempt-025 preservation test compared its immutable bytes to
+the optional mutable current-evidence path merely because that path existed.
+The mutable path correctly held newer attempt 026, so existence could not
+establish equality. AER-0165 preserves the failure. The test now parses the
+mutable evidence and compares bytes only when the exact attempt identity also
+matches.
+
+The repaired complete inherited-plus-current packet collects and passes 495
+tests. Ruff check, Ruff format and Git diff checks also pass. This repair
+changes no SQL, contract, scenario or runtime behavior.
+
 ## Closed surfaces
 
 No applied migration, operational credentials or persistence,

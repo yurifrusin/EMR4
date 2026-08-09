@@ -35,7 +35,10 @@ RECEIPT = (
 def test_failure_025_is_preserved_byte_identically() -> None:
     failure_bytes = FAILURE.read_bytes()
     if MUTABLE.exists():
-        assert failure_bytes == MUTABLE.read_bytes()
+        mutable_bytes = MUTABLE.read_bytes()
+        mutable_payload = json.loads(mutable_bytes)
+        if mutable_payload.get("attempt_id") == diagnosis.PARENT_ATTEMPT_ID:
+            assert failure_bytes == mutable_bytes
     assert hashlib.sha256(failure_bytes).hexdigest() == (
         diagnosis.PARENT_EVIDENCE_SHA256.removeprefix("sha256:")
     )

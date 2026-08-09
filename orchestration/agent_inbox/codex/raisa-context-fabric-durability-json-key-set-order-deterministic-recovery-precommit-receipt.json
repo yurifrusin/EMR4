@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_attempt_identity_guard_AER_0165_and_complete_495_test_deterministic_gate_before_fresh_verifier_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "AER-0165 records that optional mutable evidence existence cannot prove identity with immutable historical evidence. The repaired test compares bytes only after exact attempt_id equality. No SQL, renderer, parse evidence, behavior contract or scenario changed. The complete inherited-plus-current packet collects and passes exactly 495 tests. Ruff check, Ruff format and diff check pass. Register revision 140 contains 165 incidents, 25 repository defects and zero open incidents.",
+    "current_authority_allocation": "GPT Sol owns deterministic diagnosis, the narrow historical-evidence test repair, AER registration and exact-path commit. No implementation worker or native subagent is active. Gemini 3.6 Flash/high through a fresh Antigravity project may receive only the later clean exact-HEAD veto packet; it has no edit, acceptance, runtime, integration or protected-ref authority.",
+    "git_refs_and_worktree": "Before this commit, task branch HEAD is aa7a9cceaf0832cd9f6bcf44be7197bfdf54b299. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df. The index is clean before explicit-path staging. Exact parse containers remain absent and no database container was started by deterministic tests.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. The exact six-parent JSON-key-order behavior rebind is committed at aa7a9cceaf0832cd9f6bcf44be7197bfdf54b299. The first complete deterministic packet stopped only on a historical-test comparison between immutable attempt 025 and newer mutable attempt 026; the bounded identity guard is now the candidate recovery and behavior runtime remains closed.",
+    "protected_evidence_boundaries": "This commit contains only the bounded test guard, immutable incident register/pattern report, revision note, behavior rebind documentation and receipts. It opens no Docker run, behavior acceptance, applied migration, operational database/credentials/persistence, watcher/listener/feed/source access, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected-ref movement. Preserve attempt-026 mutable evidence and all other untracked files; never inspect or stage docs/branding."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
