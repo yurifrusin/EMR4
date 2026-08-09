@@ -1,0 +1,30 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-diagnosis-receipt.v1",
+  "date": "2026-08-09",
+  "status": "diagnosis_reproduced_cleanup_verified",
+  "source_head": "2fd461d2935004703d23af44a0a68fa13c21f8ee",
+  "parent_attempt": "raisa-context-fabric-durability-behavior-runtime-022",
+  "characterization_id": "raisa-context-fabric-durability-behavior-runtime-022a",
+  "failure": {
+    "scenario_id": "BTR-E01",
+    "sqlstate": "CF105",
+    "function_id": "emr4_context_fabric.cf_fence_stream_head_v1",
+    "function_line": 34,
+    "coordinate_status": "released_from_ephemeral_authored_synthetic_psql_verbose_diagnostic",
+    "postgresql_message_class": "stream_head_invalid_or_exhausted"
+  },
+  "finding": "The accepted direct record-field lowering parses and executes. Failure 022 reaches the explicit invariant at function-body line 34 after the row reload, where at least one of last_position = 0, stream_epoch = 1, or xmin = the current transaction low-32 XID evaluates false. The present evidence does not distinguish which conjunct failed, so no root-cause repair is yet admitted.",
+  "recovery_boundary": "One further bounded diagnosis-only disposable PostgreSQL reproduction may release only three boolean conjunct outcomes, the same function coordinate and digests; it must preserve the accepted artifact and behavior harness, persist no raw SQL error or row values, and verify exact container cleanup before any renderer or contract change.",
+  "parent_failure_evidence": {
+    "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-022.json",
+    "sha256": "sha256:6ae6ef74c6a44c8f022f54f54bbc31d6a867a6f9953b7ee52ca34e68bf71f224"
+  },
+  "diagnosis_runtime": {
+    "attempt_id": "1b55c8e4dc5211898106a346",
+    "raw_diagnostic_sha256": "sha256:7280e6a715d9f151e2338db793c286cecb0ab5ac0e2bcad1f7baddfeb1ffa7d6",
+    "raw_error_persisted": false,
+    "container_id": "b5bb4e717b391f97ed87ce4c9a5e99417ac325112ab62a15f3598f87b699b4f9",
+    "cleanup_absence_verified": true
+  },
+  "authority_boundary": "provider_free_authored_synthetic_disposable_postgresql_diagnosis_only_no_product_provider_command_deployment_or_protected_ref_authority"
+}

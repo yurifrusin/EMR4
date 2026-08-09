@@ -86,3 +86,12 @@ and any issue exposed or resolved by the work. The summary is delivered before
 the next tranche starts, but it is not a request for acknowledgement or fresh
 authority. When no user-attention condition is active, the orchestrator begins
 the next dependency-satisfied planned tranche immediately after reporting it.
+
+The same closeout must also be delivered to Yuri's durable repository mailbox
+at `orchestration/human_inbox/yuri/`. Its Markdown message contains paired lay
+and technical summaries, issues, deliberately closed surfaces, the work's place
+in the wider Raisa direction, and the planned next tranche with an explicit
+attention-required status. Mailbox delivery is committed on the task branch
+before publication and is linked from the conversation closeout. It is a
+durable reporting surface only: it cannot override the live baton, accepted
+plan, evidence boundary, user authority or Git state.

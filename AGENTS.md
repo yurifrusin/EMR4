@@ -273,6 +273,15 @@ or resolved. This report is a progress marker, not a handback or permission
 gate: when no user-attention condition above is active, begin the next planned
 tranche immediately after the report without waiting for acknowledgement.
 
+Yuri's durable tranche mailbox is `orchestration/human_inbox/yuri/`. Before
+each task-branch closeout commit and publication, write one dated Markdown
+message there with paired lay and technical summaries, issues, deliberately
+closed surfaces, the tranche's place in the overall Raisa direction, the
+planned next tranche and whether Yuri's attention is genuinely required. Link
+that message from the conversational closeout. The mailbox is a reporting
+surface only and never overrides this baton, an accepted plan, protected
+evidence, user authority or exact Git state.
+
 When an already-authorised in-scope choice exists, choose the path that
 strengthens the required architecture and occupied capability without a
 routine Yuri pause. Model-required cognitive cells default to an explicit
@@ -480,10 +489,11 @@ Before ending a material session:
 4. align and push `master` plus `handoff/current`; and
 5. verify origin refs and a clean integration worktree; and
 6. send the non-PHI Pushover closeout ping with `scripts/notify_sprint_closeout.py`, stating whether the sprint engine is continuing or paused and the concrete next work or pause reason. After a successful continuing closeout ping, immediately perform the next tranche's fresh five-source rehydration and begin that already-authorised work; do not yield or end solely because the preceding tranche closed. Yield only for a genuine user-attention gate or an unavoidable fresh-context handoff, and resume the authorised next tranche without asking Yuri to repeat permission. Also send one compact non-PHI Pushover alert whenever work pauses at a genuine user-attention gate; do not ping for routine progress. Report delivery failure explicitly in-thread.
-7. give Yuri the concise lay closeout summary (capability gained, deliberately
-   closed surfaces, and issues exposed or resolved), then immediately continue
-   to the next dependency-satisfied planned tranche unless his attention is
-   genuinely required.
+7. commit a dated message to `orchestration/human_inbox/yuri/` and give Yuri
+   the linked paired lay and technical closeout summary (capability gained,
+   issues, deliberately closed surfaces, place in the Raisa direction and
+   planned next tranche), then immediately continue to the next dependency-
+   satisfied planned tranche unless his attention is genuinely required.
 The user can say **"update the handover doc"** at any time to trigger a live baton refresh.
 ---
 *Compacted 2026-07-15 after LC4R8. Full predecessor integrity is enforced by `tests/test_agents_handover_archive.py`.*

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_new_owned_networkless_pull_never_diagnosis_only_reproduction_that_ephemerally_replaces_only_the_existing_cf105_message_and_releases_three_boolean_conjunct_results_then_exactly_cleans_up",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Immutable failure-022 evidence is exact at SHA-256 6ae6ef74c6a44c8f022f54f54bbc31d6a867a6f9953b7ee52ca34e68bf71f224, internal attempt_id c9288fb197ed96d136f6022b, BTR-E01, CF105 and zero scenarios. Diagnosis 022a released only cf_fence_stream_head_v1 line 34, persisted no raw error and cleaned exact container b5bb4e717b391f97ed87ce4c9a5e99417ac325112ab62a15f3598f87b699b4f9. The second wrapper derives a 13,846-byte ephemeral CREATE OR REPLACE function at SHA-256 8e63cd4f9899367d716cd5a6e61bf170d0cbe918619f06f12ecac70d67815cc4 from the accepted artifact in memory, altering only the existing CF105 message expression. It executes immediately before exact BTR-E01 and releases only last-position, stream-epoch and xmin equality truth values plus digests. Ruff, formatting, extraction and diff checks pass. Yuri's new durable tranche-mailbox protocol is recorded separately and does not affect this run.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled second diagnosis-only local database run, minimized boolean release and exact cleanup. No worker, native subagent, verifier, provider model or product surface is involved. Gemini 3.6 Flash/high remains reserved for a fresh exact-HEAD independent veto only after any deterministic repair candidate exists.",
+    "git_refs_and_worktree": "Primary HEAD and local task ref remain 2fd461d2935004703d23af44a0a68fa13c21f8ee with bounded failure-022 diagnosis and Yuri-mailbox work plus preserved untracked material. Local exact postgres image ID is sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8; exact failed and first-diagnosis containers fee2a57a1f0056667fadba326f441df301beade22a1e03391ee47fe8c7a33484 and b5bb4e717b391f97ed87ce4c9a5e99417ac325112ab62a15f3598f87b699b4f9 are absent. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Mutable failed behavior evidence remains unstaged; docs/branding and unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "Behavior run sequence 022 remains failed and unaccepted at BTR-E01 CF105 with zero admitted scenarios and exact cleanup. The first bounded diagnosis proves accepted direct record-field xmin access executes and reaches cf_fence_stream_head_v1 function-body line 34, the explicit three-conjunct stream-head assertion. No accepted SQL or behavior contract has changed.",
+    "protected_evidence_boundaries": "One new local postgres:16-bookworm container may be created with the accepted --pull=never, --network=none, no-port, no-mount, tmpfs-only profile and exact-ID cleanup. It uses only fixed authored-synthetic fixtures. The accepted artifact is admitted and catalogue-reconciled before one database-local ephemeral diagnostic function replacement; no repository artifact, fixture, contract or acceptance claim is mutated. Raw error and row values remain process-memory-only. No scenario pass, product/provider call, patient/clinical/product/protected data, application/API/Diary wiring, watcher/listener, operational credential/database, command/write, deployment, release, Pages or protected-ref authority is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

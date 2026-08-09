@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 124
+    assert register["register_revision"] == 125
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 150)
+        f"AER-{index:04d}" for index in range(1, 151)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -1934,21 +1934,34 @@ def test_aer_0149_rejects_unadmitted_preexecution_event_before_runtime() -> None
     assert incident["status"] == "corrected"
 
 
+def test_aer_0150_rejects_schema_qualified_postgresql_special_form() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0150"]
+
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert "pg_catalog.coalesce" in incident["observed_error"]
+    assert "without releasing a conjunct result" in incident["observed_error"]
+    assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 149
+    assert report["incident_count"] == 150
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 105,
-        "harness": 18,
+        "harness": 19,
         "repository": 18,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 15,
         "evidence_misreport": 22,
-        "harness_failure": 18,
+        "harness_failure": 19,
         "output_contract_violation": 42,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
@@ -1957,7 +1970,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 37,
-        "canonical_unchanged": 90,
+        "canonical_unchanged": 91,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [

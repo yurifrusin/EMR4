@@ -15,7 +15,7 @@ def load_policy() -> dict:
 
 def test_continuation_is_default_without_active_execution_limits() -> None:
     policy = load_policy()
-    assert policy["schema_version"] == "ariadne.autonomous_continuation.v3"
+    assert policy["schema_version"] == "ariadne.autonomous_continuation.v4"
     assert policy["default_posture"] == "continue_without_user_permission"
     assert policy["execution_limits"]["enforcement"] == "inactive"
     assert policy["execution_limits"]["wall_clock_deadlines"] == "inactive"
@@ -57,14 +57,25 @@ def test_internal_checkpoint_cannot_end_the_task() -> None:
     policy = load_policy()
     lifecycle = policy["task_lifecycle"]
     closeout_report = lifecycle["successful_tranche_closeout_report"]
+    assert closeout_report["durable_mailbox"] == "orchestration/human_inbox/yuri"
+    assert closeout_report["conversation_closeout_links_mailbox_message"] is True
+    assert closeout_report["mailbox_is_authority_source"] is False
     assert closeout_report == {
         "timing": "before_immediate_next_tranche_start",
-        "audience_style": "concise_lay_terms",
+        "audience_style": "paired_lay_and_technical_terms",
+        "durable_mailbox": "orchestration/human_inbox/yuri",
+        "filename_pattern": "YYYY-MM-DD--tranche-slug.md",
         "must_name": [
             "capability_gained",
+            "technical_result",
             "deliberately_closed_surfaces",
             "issues_exposed_or_resolved",
+            "place_in_raisa_direction",
+            "planned_next_tranche",
+            "user_attention_required",
         ],
+        "conversation_closeout_links_mailbox_message": True,
+        "mailbox_is_authority_source": False,
         "acknowledgement_required": False,
         "permission_gate": False,
     }
@@ -96,7 +107,10 @@ def test_standing_programme_authority_derives_exact_planned_boundaries() -> None
     )
     assert "accepted_descendant_plans" in standing["applies_to"]
     boundary_rule = standing["planned_gate_boundary_rule"]
-    assert boundary_rule["material_gate_classification_alone_is_never_a_pause_condition"] is True
+    assert (
+        boundary_rule["material_gate_classification_alone_is_never_a_pause_condition"]
+        is True
+    )
     assert boundary_rule["exact_descendant_plan_does_not_yet_exist"] == (
         "conductor_freezes_narrowest_fail_closed_boundary_then_executes"
     )

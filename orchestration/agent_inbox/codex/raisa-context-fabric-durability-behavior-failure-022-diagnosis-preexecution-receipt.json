@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_new_owned_networkless_pull_never_diagnosis_only_reproduction_of_failure_022_and_releases_only_allowlisted_plpgsql_coordinates_then_exactly_cleans_up",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Mutable and immutable failure-022 evidence are byte-identical at SHA-256 6ae6ef74c6a44c8f022f54f54bbc31d6a867a6f9953b7ee52ca34e68bf71f224, internal attempt_id c9288fb197ed96d136f6022b, BTR-E01, CF105, zero observed scenarios and cleaned exact container fee2a57a1f0056667fadba326f441df301beade22a1e03391ee47fe8c7a33484. The bounded diagnosis wrapper delegates the accepted harness unchanged, captures only exact BTR-E01 process output in memory, requires identical failure and cleanup, persists no raw error and releases only allowlisted register_observer_generation_v1 or cf_fence_stream_head_v1 coordinates plus a raw digest. Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled diagnosis-only local database run, minimized coordinate release and exact cleanup. No worker, native subagent, verifier, provider model or product surface is involved.",
+    "git_refs_and_worktree": "Primary HEAD and local task ref remain 2fd461d2935004703d23af44a0a68fa13c21f8ee with only bounded failure-022, diagnosis-wrapper and final preexecution files plus preserved untracked material. Local exact postgres image ID remains sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8 and exact failed container fee2a57a1f0056667fadba326f441df301beade22a1e03391ee47fe8c7a33484 is absent. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. docs/branding and unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "Behavior run sequence 022 failed closed at BTR-E01 with CF105 before any scenario was admitted and verified exact cleanup. Standing recovery authority opens one diagnosis-only reproduction to localize the exact existing CF105 branch without weakening or rerunning the twenty-scenario acceptance claim.",
+    "protected_evidence_boundaries": "One new local postgres:16-bookworm container may be created with the accepted --pull=never, --network=none, no-port, no-mount, tmpfs-only profile and exact-ID cleanup. It uses only fixed authored-synthetic fixtures and runs only until reproduced BTR-E01 CF105. Raw error text remains process-memory-only. No scenario pass, product/provider call, patient/clinical/product/protected data, application/API/Diary wiring, watcher/listener, operational credential/database, command/write, deployment, release, Pages or protected-ref authority is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

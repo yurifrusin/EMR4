@@ -1,4 +1,4 @@
-schema_version: ariadne.autonomous_continuation.v3
+schema_version: ariadne.autonomous_continuation.v4
 default_posture: continue_without_user_permission
 applies_when: [verified_sprint_is_active, failure_is_inside_existing_mandate, no_user_owned_decision_is_required]
 policy_decision:
@@ -102,8 +102,12 @@ task_lifecycle:
   internal_checkpoint_message_channel: commentary
   successful_tranche_closeout_report:
     timing: before_immediate_next_tranche_start
-    audience_style: concise_lay_terms
-    must_name: [capability_gained, deliberately_closed_surfaces, issues_exposed_or_resolved]
+    audience_style: paired_lay_and_technical_terms
+    durable_mailbox: orchestration/human_inbox/yuri
+    filename_pattern: YYYY-MM-DD--tranche-slug.md
+    must_name: [capability_gained, technical_result, deliberately_closed_surfaces, issues_exposed_or_resolved, place_in_raisa_direction, planned_next_tranche, user_attention_required]
+    conversation_closeout_links_mailbox_message: true
+    mailbox_is_authority_source: false
     acknowledgement_required: false
     permission_gate: false
   terminal_handback_prohibited_when_no_user_decision_required: true

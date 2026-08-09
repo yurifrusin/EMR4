@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 124,
+  "register_revision": 125,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -5834,6 +5834,48 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-attempt-022-preexecution-v2-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-system-xmin-record-access-behavior-attempt-022-preexecution-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-124.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0150",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-022b",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Every ephemeral diagnosis function must use valid PostgreSQL syntax, preserve the exact expected failure closure and release no result when its own closure assertions fail.",
+      "observed_error": "The first conjunct-level diagnosis wrapper emitted pg_catalog.coalesce even though COALESCE is PostgreSQL expression syntax rather than a schema-qualified callable function. The disposable run did not preserve the expected BTR-E01 CF105 closure, and the wrapper returned failure_022_conjunct_diagnosis_not_closed without releasing a conjunct result.",
+      "detection_method": "The wrapper's closure assertion rejected the run. Static inspection found the invalid schema-qualified special form. Docker daemon destroy evidence identified exact container a564b83a9b957a31a4f464c4d3e8fdc9158cf3a65f591c87fa22c0b797b0dee8; exact inspect proved absence and the owned container population was zero. Raw database error text was not persisted.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-022-conjunct-diagnosis-preexecution-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-022-conjunct-diagnosis-preexecution-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-022-conjunct-diagnosis-wrapper-failure-receipt.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_022_conjunct_diagnosis.py",
+        "docs/ariadne-agent-error-correction-register-revision-125.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.postgresql_special_form_schema_qualification",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The failed run remains immutable. The wrapper replaces only pg_catalog.coalesce with valid COALESCE syntax and asserts exactly three unqualified special-form occurrences with no schema-qualified residue before a fresh diagnosis can run.",
+        "prevention_control": "Every ephemeral PostgreSQL diagnostic body must be deterministically inspected for non-callable special forms before execution; its wrapper must continue to reject release unless exact expected failure and cleanup conditions hold.",
+        "evidence_paths": [
+          "scripts/raisa_context_fabric_durability_behavior_failure_022_conjunct_diagnosis.py",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-022-conjunct-diagnosis-wrapper-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-125.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

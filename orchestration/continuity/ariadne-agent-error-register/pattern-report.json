@@ -1,15 +1,15 @@
 {
-  "canonical_register_sha256": "2d68a55b1b3d169476e71f8e7d29ccd3fdc05247a78970a9d799af2904037266",
+  "canonical_register_sha256": "852f69a1c4e91cd91f0e6301b810fb811fa9ecfd3389c849e7247236352d4dd4",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 37,
-      "canonical_unchanged": 90,
+      "canonical_unchanged": 91,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 15,
       "evidence_misreport": 22,
-      "harness_failure": 18,
+      "harness_failure": 19,
       "output_contract_violation": 42,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
@@ -18,14 +18,14 @@
     },
     "by_origin": {
       "agent_behavior": 105,
-      "harness": 18,
+      "harness": 19,
       "repository": 18,
       "transport": 8
     },
     "by_process_severity": {
       "low": 43,
       "material": 55,
-      "moderate": 51
+      "moderate": 52
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 33,
@@ -47,7 +47,7 @@
       "emr4-context-fabric-durability-inert-ddl-renderer::orchestrator": 2,
       "emr4-context-fabric-durability-structural-contract::orchestrator": 1,
       "emr4-context-fabric-durability-typed-body-renderer::orchestrator": 1,
-      "emr4-disposable-postgresql-harness::orchestrator": 16,
+      "emr4-disposable-postgresql-harness::orchestrator": 17,
       "emr4-durability-ddl-renderer::orchestrator": 3,
       "git-worktree-windows-path-layout::orchestrator": 3,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
@@ -58,12 +58,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 96,
+      "orchestrator": 97,
       "verifier": 39
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 149,
+  "incident_count": 150,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -408,7 +408,7 @@
       ]
     }
   ],
-  "register_revision": 124,
+  "register_revision": 125,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-09"
 }
