@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_accepted_parse_source_ledger_then_rebind_the_unchanged_twenty_scenario_behavior_contract_to_that_ledger_and_current_artifact",
+  "source_evidence": {
+    "live_handover_current_baton": "Exact binding-RLS parse/catalogue reproduction is sealed at f842c023f4db16e8b0ffc381f653fb16e98280cc. The next safe action is a separate accepted-source ledger before behavior rebind.",
+    "current_authority_allocation": "GPT Sol owns ledger creation and behavior rebind. Gemini remains fresh independent veto only after the complete behavior candidate; no provider call is yet eligible.",
+    "active_plan_and_acceptance": "The ledger binds pass evidence bf842570, artifact 1d53c7ac, manifest 2042eb80, exact contract cf746ed8 and distinct cleaned containers. It proves parse/catalogue only and is eligible solely as the behavior accepted-runtime-source parent.",
+    "protected_evidence_boundaries": "Documentation and receipt only. Preserve all untracked files and docs/branding; explicit-path staging only. No database, provider, product, application, command, deployment, release, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "Task HEAD is f842c023f4db16e8b0ffc381f653fb16e98280cc. Protected refs remain exact 2e34bdad. Both owned containers are absent and mutable evidence remains restored and unstaged."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "binding_rls_accepted_source_complete_five_source_precommit_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Accepted-source ledger reconciled to committed exact evidence and artifact hashes."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No subagent selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["No verifier active yet."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No worker active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
