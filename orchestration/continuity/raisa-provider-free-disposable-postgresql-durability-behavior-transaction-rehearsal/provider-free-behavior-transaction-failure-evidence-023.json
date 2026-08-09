@@ -1,0 +1,70 @@
+{
+  "attempt_id": "67a7eab53961e8284fae1ac9",
+  "claim_boundary": "selected_serial_entry_point_trigger_rls_idempotency_and_outer_rollback_behavior_only",
+  "cleanup": {
+    "absence_verified": true,
+    "container_id": "3ff988eb00253bfe8d56512d33060b18b8495a920b66e00060f069dfcacead82",
+    "removed": true,
+    "status": "cleanup_verified"
+  },
+  "environment": {
+    "docker_client": "resolved_exact_docker_exe",
+    "elapsed_ms": 13753,
+    "failure": {
+      "code": "unexpected_rejection",
+      "detail_digest": "sha256:4c849e73be13432f86a721f92412d16a9038957123f0a07804ec808769827917",
+      "function_id": "emr4_context_fabric.register_observer_generation_v1",
+      "function_line": 81,
+      "scenario_id": "BTR-E01",
+      "sqlstate": "CF004",
+      "stage": "scenario"
+    },
+    "image": {
+      "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "pull_attempted": false,
+      "reference": "postgres:16-bookworm"
+    },
+    "readiness": {
+      "continuous_success_ms": 3199,
+      "last_pg_isready_exit": 0,
+      "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "last_sql_failure_class": "none",
+      "last_sql_probe_exit": 0,
+      "last_sql_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "last_sql_stdout_digest": "sha256:cc290b35686ba5625a414ce876721a541897e6f17a00d4aa8e2ea5c436c31be8",
+      "pg_isready_attempts": 7,
+      "pg_isready_successes": 7,
+      "sql_probe_attempts": 7,
+      "sql_probe_successes": 7,
+      "status": "stable"
+    }
+  },
+  "evidence_mode": "provider_free_disposable_postgresql_authored_synthetic_behavior_transaction",
+  "lifecycle": [
+    "five_parent_bindings_verified",
+    "container_owned",
+    "passwordless_peer_cluster_started",
+    "postgres_ready",
+    "behavior_database_ready",
+    "artifact_admitted",
+    "catalogue_reconciled",
+    "fixtures_closed",
+    "cleanup_verified"
+  ],
+  "parent": {
+    "artifact_sha256": "sha256:25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb",
+    "behavior_contract_sha256": "sha256:2fa4840da97439cbfe143be407a30de995244db2cfc5a69cfe54bb5580354358",
+    "manifest_sha256": "sha256:d597e0df4c30bd7c5e3745345a34bee712632fb8803df7afe2762ad53fef6e57",
+    "prerequisite_sha256": "sha256:313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
+    "statement_count": 412
+  },
+  "preconditions": [],
+  "result": "rehearsal_failed",
+  "scenario_reconciliation": {
+    "expected": 20,
+    "observed": 0,
+    "passed": 0
+  },
+  "scenarios": [],
+  "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-behavior-transaction-evidence.v1"
+}

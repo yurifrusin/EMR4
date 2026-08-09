@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_behavior_transaction_sequence_023_once_in_one_newly_owned_networkless_pull_never_postgresql_16_container_then_reconciles_exact_cleanup_and_all_twenty_scenarios",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen contract retains canonical SHA-256 2fa4840da97439cbfe143be407a30de995244db2cfc5a69cfe54bb5580354358, scenario-array canonical SHA-256 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3, exact twenty-scenario order and category counts 6/4/3/4/3. Accepted parse source 2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb binds inert SQL SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb. Fresh r107 review passed at exact source candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f with 404 tests and clean postflight. Sol committed review provenance and corrected AER-0153 at e7e7265efd7773e3bf1fabace7af46ceb7d63566; register revision 128 has 153 incidents and zero open incidents.",
+    "current_authority_allocation": "GPT Sol owns this one tightly coupled serial database run, evidence reconciliation, exact cleanup and evidence-backed recovery. No worker, native subagent or verifier is active. Gemini review authority is consumed for the accepted source and grants no runtime authority.",
+    "git_refs_and_worktree": "Primary tracked state is clean at task HEAD e7e7265efd7773e3bf1fabace7af46ceb7d63566 before this receipt. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local exact image postgres:16-bookworm has immutable ID sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. Prior exact behavior container fee2a57a1f0056667fadba326f441df301beade22a1e03391ee47fe8c7a33484 and terminal parse container 9aafcf3721ae6922a36478232aad8898b88d280b315dc2c7740fe2b7256e8d64 are absent. Preserved untracked material and docs/branding remain excluded.",
+    "live_handover_current_baton": "The provider-free disposable PostgreSQL durability behavior/transaction rehearsal remains the next dependency-satisfied gate. Renderer 2.0.10, its separate characterization and terminal exact parse proofs, the six-parent behavior rebind and the fresh exact-candidate Gemini veto all pass. Run sequence 023 is the sole next action.",
+    "protected_evidence_boundaries": "Run sequence 023 may create only one random closed-prefix owned postgres:16-bookworm container with --pull=never, --network=none, no ports or mounts, tmpfs-only data, fixed authored-synthetic fixtures, fixed SQL and exact-ID cleanup. Mutable failed attempt-022 evidence at SHA-256 6ae6ef74c6a44c8f022f54f54bbc31d6a867a6f9953b7ee52ca34e68bf71f224 remains unstaged and may be replaced only by this new run's terminal evidence. No patient/clinical/product/protected data, provider call, operational credential/database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

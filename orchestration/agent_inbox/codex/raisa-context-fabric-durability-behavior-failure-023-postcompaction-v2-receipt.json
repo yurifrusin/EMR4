@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "validate_the_bounded_failure_023_rls_select_for_update_diagnosis_without_overwriting_mutable_behavior_evidence_then_freeze_the_narrowest_architecture_preserving_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty ordered scenarios with category counts 6/4/3/4/3, repository-authored opaque synthetic data, one newly owned networkless PostgreSQL 16 container per runtime attempt and exact-ID cleanup. Attempt 023 binds inert SQL SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb, manifest SHA-256 d597e0df4c30bd7c5e3745345a34bee712632fb8803df7afe2762ad53fef6e57 and behavior contract SHA-256 2fa4840da97439cbfe143be407a30de995244db2cfc5a69cfe54bb5580354358. Failure 023 is consistent with PostgreSQL SELECT FOR UPDATE applying both SELECT and UPDATE RLS USING policy visibility; diagnosis must preserve lifecycle serialization, producer-owned mutation and the frozen scenario population.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial PostgreSQL diagnosis, recovery, deterministic verification, exact cleanup and acceptance. The already-consumed Gemini 3.6 Flash/high veto grants no runtime authority. One native subagent is separately performing the user-requested read-only codebase architectural-health research and has no workspace edit, implementation, acceptance, integration, runtime or protected-ref authority.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at e7e7265efd7773e3bf1fabace7af46ceb7d63566 with tracked state clean before the rejected v1 receipt and this corrected v2 receipt. Remote task branch is 324d37f086a51a60b260d02b38772594b6c205df. Local, origin and remotely queried master plus handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Staging remains explicit-path only and excludes docs/branding, unrelated untracked history and mutable failed behavior evidence.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Attempt 023 stopped at BTR-E01 with CF004 in register_observer_generation_v1 line 81, admitted zero of twenty scenarios and removed its exact owned container with absence verified. The dependency-satisfied next action is bounded diagnosis and evidence-backed recovery, not a product/runtime gate.",
+    "protected_evidence_boundaries": "Immutable behavior failures 001-023 and all prior parse failures remain preserved. Mutable provider-free-behavior-transaction-evidence.json and immutable failure 023 currently share SHA-256 de359f9acc731b0127517b6dc14accb9bfe7e9b5ae63b35213cf5d6e160649ee; the mutable file remains untracked and must not be staged until a successful behavior run replaces it. docs/branding and every unrelated untracked file remain untouched. No protected holdout, historical PHI, patient, clinical or product-derived data; provider; application/API/Diary wiring; operational migration/database; watcher/listener/feed; command/write; deployment; production; release; Pages; or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_immutable_attempt_023_failure_and_the_bounded_rls_lock_diagnosis_scaffold_before_any_diagnostic_container_run",
+  "source_evidence": {
+    "live_handover_current_baton": "Attempt 023 is immutable failed behavior evidence: BTR-E01, CF004, register_observer_generation_v1 line 81, zero of twenty scenarios and exact cleanup verified. The next safe action remains a bounded provider-free RLS lock-path diagnosis, not a behavior acceptance claim.",
+    "current_authority_allocation": "GPT Sol owns the serial diagnosis scaffold, exact cleanup and later recovery. The user-requested native codebase-health researcher completed read-only analysis with no repository changes and held no acceptance, runtime, integration or protected-ref authority. No implementation worker or external verifier is active.",
+    "active_plan_and_acceptance": "The diagnosis changes only two CF004 messages in one ephemeral CREATE OR REPLACE FUNCTION body in memory, immediately before exact BTR-E01. It records only plain SELECT head count, lifecycle binding outcome, SELECT FOR UPDATE zero/multiple class, hashes, owned container ID and cleanup absence. It calls run_rehearsal directly and cannot overwrite mutable behavior evidence. The register advances to revision 129 with 154 bounded incidents and zero open incidents. Exactly 121 focused tests, Ruff, format and diff checks pass.",
+    "protected_evidence_boundaries": "Immutable failures 001-023 are preserved. Mutable provider-free-behavior-transaction-evidence.json remains untracked at SHA-256 de359f9acc731b0127517b6dc14accb9bfe7e9b5ae63b35213cf5d6e160649ee and is excluded from staging. The diagnostic has no raw-error persistence and opens no protected, patient, clinical or product data, provider, application/API/Diary wiring, operational database, watcher/listener, command/write, deployment, production, release, Pages or protected-ref boundary. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Task HEAD before this explicit-path commit is e7e7265efd7773e3bf1fabace7af46ceb7d63566. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin and remotely queried master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the immutable attempt-023 evidence and preexecution pair, postcompaction receipt pairs, diagnosis scaffold/tests, register revision 129, pattern report and this precommit pair are eligible."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_failure_023_diagnosis_scaffold_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the immutable failure hash, exact diagnosis rewrite boundaries, 121 focused tests, Ruff, formatting and diff checks."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The user-requested codebase-health researcher completed read-only analysis and made no repository changes."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier is selected for this diagnosis scaffold commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
