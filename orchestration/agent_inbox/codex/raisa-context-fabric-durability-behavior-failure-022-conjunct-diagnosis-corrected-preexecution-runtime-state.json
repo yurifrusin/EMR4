@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_one_fresh_owned_networkless_pull_never_corrected_diagnosis_only_reproduction_that_releases_only_three_boolean_conjunct_results_then_exactly_cleans_up",
+  "source_evidence": {
+    "live_handover_current_baton": "Behavior run sequence 022 remains failed and unaccepted at BTR-E01 CF105 with zero admitted scenarios and exact cleanup. Diagnosis 022a locates cf_fence_stream_head_v1 line 34. Diagnosis 022b released nothing because its wrapper used an invalid schema-qualified PostgreSQL special form; the exact failed container is absent and AER-0150 preserves the incident. No accepted SQL, contract or behavior evidence changed.",
+    "current_authority_allocation": "GPT Sol owns this corrected diagnosis-only local database run, minimized boolean release and exact cleanup. No worker, native subagent, verifier, provider model or product surface is involved. Gemini 3.6 Flash/high remains reserved for a fresh exact-HEAD independent veto only after any deterministic repair candidate exists.",
+    "active_plan_and_acceptance": "Commit ef03e31e82d11e8e54650d795c243e28a76e2a06 preserves immutable failure 022, both diagnosis receipts, failed wrapper 022b, AER revision 125 with 150 incidents and zero open, and Yuri's durable mailbox policy. The corrected wrapper source SHA-256 is 9224e925ed3944b5638fce175184d70e0d167c2aeca8c82f93d67fa50be13ff3. It derives a 13,813-byte ephemeral CREATE OR REPLACE function at SHA-256 24a6b9d823c70cb6e07cc6bdd2de4f34159de07d545fc38098e563c8b59e7308, uses exactly three valid COALESCE special forms, contains no pg_catalog.coalesce residue, executes immediately before exact BTR-E01 and releases only the three boolean outcomes plus digests. The combined 121-test policy/register packet, Ruff, formatting, extraction and diff checks pass.",
+    "protected_evidence_boundaries": "One fresh local postgres:16-bookworm container may be created with the accepted --pull=never, --network=none, no-port, no-mount, tmpfs-only profile and exact-ID cleanup. It uses only fixed authored-synthetic fixtures. The accepted artifact is admitted and catalogue-reconciled before one database-local ephemeral diagnostic function replacement; no repository artifact, fixture, contract or acceptance claim is mutated. Raw error and row values remain process-memory-only. No scenario pass, product/provider call, patient/clinical/product/protected data, application/API/Diary wiring, watcher/listener, operational credential/database, command/write, deployment, release, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Primary HEAD and local task ref are ef03e31e82d11e8e54650d795c243e28a76e2a06. Local exact postgres image ID is sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8 and owned behavior-container population is zero. Exact failed diagnosis container a564b83a9b957a31a4f464c4d3e8fdc9158cf3a65f591c87fa22c0b797b0dee8 is absent. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Mutable failed behavior evidence remains untracked and unstaged at the immutable failure-022 hash; docs/branding and unrelated untracked files remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_behavior_failure_022_corrected_conjunct_diagnosis_preexecution_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified exact failure and wrapper-failure evidence, cleanup absence, local image identity, corrected diagnostic derivation, raw non-persistence and protected refs."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["No verifier call is planned or active for diagnosis."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek transport is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-conjunct-diagnosis-receipt.v1",
+  "date": "2026-08-09",
+  "status": "root_cause_diagnosed_cleanup_verified",
+  "source_head": "ef03e31e82d11e8e54650d795c243e28a76e2a06",
+  "parent_attempt": "raisa-context-fabric-durability-behavior-runtime-022",
+  "diagnosis_attempt": "raisa-context-fabric-durability-behavior-runtime-022c",
+  "parent_failure_evidence": {
+    "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-022.json",
+    "sha256": "sha256:6ae6ef74c6a44c8f022f54f54bbc31d6a867a6f9953b7ee52ca34e68bf71f224",
+    "internal_attempt_id": "c9288fb197ed96d136f6022b"
+  },
+  "conjuncts": {
+    "last_position_equals_zero": true,
+    "stream_epoch_equals_one": true,
+    "xmin_equals_current_top_level_transaction": false
+  },
+  "diagnosis_runtime": {
+    "internal_attempt_id": "cd69074ba4b4027bf585cb4a",
+    "ephemeral_function_sha256": "sha256:24a6b9d823c70cb6e07cc6bdd2de4f34159de07d545fc38098e563c8b59e7308",
+    "raw_diagnostic_sha256": "sha256:e16ca31305cc12989615093c34c40d22b2b7b6416224110fb60e380410782705",
+    "raw_error_persisted": false,
+    "container_id": "d378bcb352e9c70f3249207b8edd7d8aaf1512e92a01d3b7a08652fddb270e0b",
+    "cleanup_absence_verified": true
+  },
+  "root_cause": "The INSERT_OR_RELOAD_COMPARE renderer lowers its INSERT inside a PL/pgSQL block with an EXCEPTION clause. PostgreSQL creates a subtransaction for that block, so the inserted stream-head tuple receives a subtransaction xmin. PostgreSQL 16 pg_current_xact_id() deliberately returns the top-level transaction ID even when called inside a subtransaction. The accepted exact top-level XID32 equality therefore rejects the renderer-authored tuple exactly as designed.",
+  "authoritative_semantics": {
+    "postgresql_16_transaction_function": "https://www.postgresql.org/docs/16/functions-info.html",
+    "postgresql_16_subtransactions": "https://www.postgresql.org/docs/16/subxacts.html",
+    "accepted_emr4_rule": "Subtransaction-authored relevant tuples must fail; the repair may not broaden or normalize the exact top-level xmin comparison."
+  },
+  "recovery_boundary": "Renderer 2.0.10 must lower all twenty-one INSERT_OR_RELOAD_COMPARE nodes as INSERT ... ON CONFLICT ON CONSTRAINT <exact derived constraint> DO NOTHING RETURNING followed by an exact winner reload only when NOT FOUND. This removes write-bearing exception blocks while preserving exact conflict-target identity, nonmatching unique-error propagation, strict zero/multiple winner rejection, typed winner comparison and all top-level-XID/subtransaction rejection semantics.",
+  "authority_boundary": "provider_free_authored_synthetic_renderer_recovery_only_no_product_provider_command_deployment_or_protected_ref_authority"
+}

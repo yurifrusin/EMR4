@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_bounded_renderer_210_top_level_xid_insert_reload_recovery_and_preserved_behavior_022_root_cause_without_staging_mutable_behavior_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Renderer 2.0.10 converts all 21 INSERT_OR_RELOAD_COMPARE nodes from write-bearing exception blocks to exact INSERT ON CONFLICT ON CONSTRAINT DO NOTHING RETURNING plus read-only strict reload on NOT FOUND. The regenerated artifact remains 412 statements and is 1,391,453 LF bytes at SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb; manifest raw SHA-256 is d597e0df4c30bd7c5e3745345a34bee712632fb8803df7afe2762ad53fef6e57. All 21 targeted conflicts are present; unique_violation and cf_constraint_name occurrences are zero. Body semantic SHA-256 8ede994ba6f9bbeade0eb015bb9dd23dade21934e7c70fa6885a4a67654aab18 and structural SHA-256 d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6 are unchanged. The 180-test inert/AER packet, Ruff, formatting, regeneration, recognizer and diff checks pass. AER revision 126 validates with 151 incidents and zero open.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled renderer recovery, deterministic acceptance, explicit-path commit and later two-stage parse/catalogue proof. No worker or native subagent is used. Gemini 3.6 Flash/high remains mandatory in a fresh Antigravity project only after exact parse proof and behavior-contract rebind produce a reviewable candidate.",
+    "git_refs_and_worktree": "Primary HEAD and local task ref are ef03e31e82d11e8e54650d795c243e28a76e2a06 before this explicit-path commit. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Exact diagnosis container d378bcb352e9c70f3249207b8edd7d8aaf1512e92a01d3b7a08652fddb270e0b is absent and owned behavior-container population is zero. docs/branding, mutable behavior evidence and unrelated untracked files remain excluded; staging is explicit-path only.",
+    "live_handover_current_baton": "Behavior attempt 022 remains failed and unaccepted at BTR-E01 CF105 with zero scenarios and immutable exact cleanup. Diagnosis 022c proves exact position and epoch but false top-level-XID equality. The active bounded repair removes renderer-authored write subtransactions without weakening the frozen top-level-XID rule. The future Agent Execution Surface and Containment Gate remains recorded after this durability sequence.",
+    "protected_evidence_boundaries": "This commit contains only authored-synthetic renderer source, regenerated inert SQL/manifest, deterministic tests, immutable diagnosis evidence, recovery/threat documentation, AER controls and corrected-diagnosis receipts. It applies no migration, opens no database or runtime and grants no product/provider call, patient/clinical/product/protected data, application/API/Diary wiring, watcher/listener, command/write, deployment, release, Pages or protected-ref authority. Mutable failed behavior evidence remains untracked and must not be staged until successful replacement."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

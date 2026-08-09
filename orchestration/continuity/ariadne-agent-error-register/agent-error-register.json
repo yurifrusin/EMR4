@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 125,
+  "register_revision": 126,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -5876,6 +5876,52 @@
           "scripts/raisa_context_fabric_durability_behavior_failure_022_conjunct_diagnosis.py",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-022-conjunct-diagnosis-wrapper-failure-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-125.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0151",
+      "attempt_id": "raisa-context-fabric-durability-behavior-runtime-022",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-inert-ddl-renderer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "INSERT_OR_RELOAD_COMPARE lowering must preserve exact winner-race handling without authoring any relevant tuple in a PL/pgSQL exception subtransaction, because the frozen current-XID security rule intentionally rejects every subtransaction-authored relevant tuple.",
+      "observed_error": "Behavior attempt 022 stopped at BTR-E01 CF105 with zero scenarios and verified cleanup. The corrected conjunct diagnosis proved last_position and stream_epoch were exact but stream-head xmin differed from current top-level XID32. Renderer 2.0.9 had placed the INSERT inside an EXCEPTION block, which PostgreSQL executes as a subtransaction while pg_current_xact_id returns the top-level transaction ID.",
+      "detection_method": "Two bounded networkless PostgreSQL diagnoses first located cf_fence_stream_head_v1 line 34 and then released only the three invariant booleans. Static source mapping identified the write-bearing exception lowering. PostgreSQL 16 official transaction-function and subtransaction documentation confirms the top-level-versus-subxid semantics. Exact container cleanup was verified and raw errors or XID values were not persisted.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-022.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-022-conjunct-diagnosis-receipt.json",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-top-level-xid-insert-reload-recovery.md",
+        "docs/security/raisa-context-fabric-durability-top-level-xid-insert-reload-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-126.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.insert_reload_write_subtransaction_breaks_top_level_xid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Renderer 2.0.10 emits all twenty-one insert/reload nodes as exact constraint-targeted ON CONFLICT DO NOTHING writes outside exception blocks, followed only when NOT FOUND by a read-only strict winner reload. The exact top-level-XID expression and all typed consumers remain unchanged.",
+        "prevention_control": "Renderer and recognizer acceptance require twenty-one exact ON CONFLICT ON CONSTRAINT clauses, forbid any write-bearing unique_violation or cf_constraint_name machinery, reject untargeted or wrong constraints, and retain zero/multiple winner CF004 tests before fresh parse, veto and behavior eligibility.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-top-level-xid-insert-reload-recovery.md",
+          "docs/security/raisa-context-fabric-durability-top-level-xid-insert-reload-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-126.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

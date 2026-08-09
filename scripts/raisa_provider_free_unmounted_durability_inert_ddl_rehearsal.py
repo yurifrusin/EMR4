@@ -2271,9 +2271,10 @@ def _derive_conflict_constraint(
     effective: dict[str, Any], relation: str, conflict_key_columns: list[str]
 ) -> str:
     rows = effective["constraints"].get(_fabric(relation), [])
-    # Prefer primary keys, then unique constraints, then unique indexes; the
-    # enforcing constraint must be exactly one at the highest priority level.
-    for kind in ("PRIMARY_KEY", "UNIQUE_CONSTRAINT", "UNIQUE_INDEX"):
+    # ON CONFLICT ON CONSTRAINT requires a real PostgreSQL constraint, not a
+    # standalone unique index. The enforcing constraint must be exactly one at
+    # the highest priority level.
+    for kind in ("PRIMARY_KEY", "UNIQUE_CONSTRAINT"):
         matches = [
             row
             for row in rows
@@ -2308,12 +2309,10 @@ def _emit_insert_or_reload_compare(
     winner_pred = render_expr(ops["winner_predicate"])
     reload_pred = " AND ".join(conflict_predicates + [winner_pred])
     winner_cols = ", ".join(rel + "." + _ident(c) for c in ops["winner_columns"])
-    winner_out = ", ".join(_ident(c) for c in ops["winner_columns"])
     pad = "    " * indent
     lines = [
-        pad + "BEGIN",
         pad
-        + "    INSERT INTO "
+        + "INSERT INTO "
         + rel
         + " ("
         + columns
@@ -2321,43 +2320,38 @@ def _emit_insert_or_reload_compare(
         + values
         + ")\n"
         + pad
-        + "        RETURNING "
+        + "    ON CONFLICT ON CONSTRAINT "
+        + constraint_name
+        + " DO NOTHING\n"
+        + pad
+        + "    RETURNING "
         + returning
         + " INTO "
         + _symbol_ident(ops["output_symbol"])
         + ";",
-        pad + "    IF NOT FOUND THEN",
-        pad + "        " + CARDINALITY_FAILURE + ";",
-        pad + "    END IF;",
-        pad + "EXCEPTION",
-        pad + "    WHEN unique_violation THEN",
-        pad + "        GET STACKED DIAGNOSTICS cf_constraint_name = CONSTRAINT_NAME;",
-        pad + "        IF (cf_constraint_name = '" + constraint_name + "') THEN",
-        pad + "            BEGIN",
+        pad + "IF NOT FOUND THEN",
+        pad + "    BEGIN",
         pad
-        + "                SELECT "
+        + "        SELECT "
         + winner_cols
         + " INTO STRICT "
         + _symbol_ident(ops["output_symbol"])
         + "\n"
         + pad
-        + "                FROM "
+        + "        FROM "
         + rel
         + "\n"
         + pad
-        + "                WHERE "
+        + "        WHERE "
         + reload_pred
         + ";",
-        pad + "            EXCEPTION",
-        pad + "                WHEN NO_DATA_FOUND THEN",
-        pad + "                    " + CARDINALITY_FAILURE + ";",
-        pad + "                WHEN TOO_MANY_ROWS THEN",
-        pad + "                    " + CARDINALITY_FAILURE + ";",
-        pad + "            END;",
-        pad + "        ELSE",
-        pad + "            RAISE;",
-        pad + "        END IF;",
-        pad + "END;",
+        pad + "    EXCEPTION",
+        pad + "        WHEN NO_DATA_FOUND THEN",
+        pad + "            " + CARDINALITY_FAILURE + ";",
+        pad + "        WHEN TOO_MANY_ROWS THEN",
+        pad + "            " + CARDINALITY_FAILURE + ";",
+        pad + "    END;",
+        pad + "END IF;",
     ]
     return lines
 
@@ -2554,12 +2548,6 @@ def _render_function_body(program: dict[str, Any], ctx: dict[str, Any]) -> str:
             decls.append(_symbol_ident(sym["id"]) + " record;")
         else:
             decls.append(_symbol_ident(sym["id"]) + " " + _type_sql(sym["type"]) + ";")
-    has_ioc = any(
-        node["op"] == "INSERT_OR_RELOAD_COMPARE"
-        for node in _walk_program_nodes(program)
-    )
-    if has_ioc:
-        decls.append("cf_constraint_name pg_catalog.text;")
     lines = ["DECLARE"]
     lines.extend("    " + item for item in decls)
     lines.append("BEGIN")
@@ -3066,7 +3054,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.9"
+RENDERER_VERSION = "2.0.10"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "
@@ -4591,6 +4579,29 @@ def recognize_inert_sql(
                         "wrong_constraint", "unrecognized conflict constraint name"
                     )
                 )
+    targeted_conflicts = list(
+        re.finditer(
+            r"ON\s+CONFLICT\s+ON\s+CONSTRAINT\s+([a-zA-Z0-9_]+)\s+DO\s+NOTHING",
+            sql_text,
+            flags=re.IGNORECASE,
+        )
+    )
+    if len(re.findall(r"\bON\s+CONFLICT\b", sql_text, flags=re.IGNORECASE)) != len(
+        targeted_conflicts
+    ):
+        issues.append(
+            RecognitionIssue(
+                "on_conflict_do_nothing",
+                "every ON CONFLICT must name one exact rendered constraint",
+            )
+        )
+    for match in targeted_conflicts:
+        if match.group(1) not in constraint_names:
+            issues.append(
+                RecognitionIssue(
+                    "wrong_constraint", "unrecognized conflict constraint name"
+                )
+            )
     for stmt in statements:
         issues.extend(_statement_issues(stmt, statements, effective or {}))
     alter_owner_count = sum(

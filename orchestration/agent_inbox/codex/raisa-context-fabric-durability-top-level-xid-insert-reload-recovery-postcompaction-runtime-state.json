@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_the_bounded_renderer_210_top_level_xid_insert_reload_recovery_at_its_passed_precommit_gate_then_reprove_parse_catalogue_and_behavior_eligibility",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Attempt 022 is immutable failed evidence at BTR-E01 CF105 with zero admitted scenarios and verified cleanup. Corrected diagnosis 022c proves the renderer-authored subtransaction xmin mismatch. The current bounded recovery removes that write subtransaction without weakening the exact top-level-XID provenance rule.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled renderer repair, deterministic checks, explicit-path commits and fresh two-stage disposable parse/catalogue proof. No native subagent or implementation worker is selected. A fresh Gemini 3.6 Flash/high Antigravity veto remains mandatory only after deterministic parse proof and behavior-contract rebind are complete.",
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty scenarios, categories 6/4/3/4/3, authored-synthetic data, one serial networkless PostgreSQL 16 container per attempt and exact-ID cleanup. Recovery renderer 2.0.10 lowers all twenty-one INSERT_OR_RELOAD_COMPARE nodes to exact INSERT ON CONFLICT ON CONSTRAINT DO NOTHING RETURNING plus read-only strict reload on NOT FOUND. The regenerated 412-statement artifact is 1,391,453 canonical LF bytes at SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb; body semantic and structural parents remain unchanged. The renderer/AER packet passes 180 tests, Ruff, formatting, regeneration, recognition and diff checks. The existing precommit Ariadne receipt is passed with all five sources.",
+    "protected_evidence_boundaries": "Attempt-022 immutable failure evidence and diagnosis receipts are preserved. The mutable provider-free-behavior-transaction-evidence.json remains untracked and may not be staged until a successful behavior run replaces it. docs/branding and every unrelated untracked file remain untouched. No migration, operational database, application/API/Diary wiring, watcher/listener, provider, patient/clinical/product/protected data, command/write, deployment, production, release, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at ef03e31e82d11e8e54650d795c243e28a76e2a06 before the bounded repair commit. Local and remote master and handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Remote task branch is 324d37f086a51a60b260d02b38772594b6c205df. The worktree contains only the expected tracked renderer/AER modifications plus preserved untracked history; staging remains explicit-path only and excludes mutable behavior evidence and docs/branding."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reread AGENTS.md, the active behavior and parse plans/designs, recovery controls, API Spine rules, current Git refs and worktree state."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected for the serial disposable database work."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini review remains deferred until deterministic parse proof and behavior rebind."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -2476,24 +2476,24 @@
       "start": 7
     },
     "2": {
-      "end": 3270,
+      "end": 3075,
       "start": 643
     },
     "3": {
-      "end": 4449,
-      "start": 3273
+      "end": 4254,
+      "start": 3078
     },
     "4": {
-      "end": 4503,
-      "start": 4452
+      "end": 4308,
+      "start": 4257
     },
     "5": {
-      "end": 4584,
-      "start": 4506
+      "end": 4389,
+      "start": 4311
     },
     "6": {
-      "end": 4605,
-      "start": 4587
+      "end": 4410,
+      "start": 4392
     }
   },
   "phases": [
@@ -2759,10 +2759,10 @@
     ]
   },
   "postgresql_major": 16,
-  "renderer_version": "2.0.9",
+  "renderer_version": "2.0.10",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
-  "sql_byte_count": 1403578,
-  "sql_sha256": "sha256:42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112",
+  "sql_byte_count": 1391453,
+  "sql_sha256": "sha256:25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb",
   "statement_count": 412,
   "structural_parent": {
     "contract_sha256": "sha256:d481b991fa2d6835babe8372722d00775b31432802bdf9ec40e007369b0d34c6",

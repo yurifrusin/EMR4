@@ -574,8 +574,8 @@ def test_all_effective_programs_accounted_and_expression_ceiling() -> None:
 
 
 # ---------------------------------------------------------------------------
-# Clause 6 -- all 21 unique mappings plus wrong-constraint, zero/multiple-
-# winner and broad handler hostile mutations.
+# Clause 6 -- all 21 exact conflict mappings plus wrong/untargeted conflict,
+# zero/multiple-winner and write-subtransaction hostile mutations.
 # ---------------------------------------------------------------------------
 
 
@@ -585,15 +585,16 @@ def test_all_21_insert_or_reload_compare_unique_mappings() -> None:
     result = _base_render()
     ioc_nodes = _walk_ioc_nodes(parents["body"])
     assert len(ioc_nodes) == 21
-    for program_id, node in ioc_nodes:
+    assert result["sql_text"].count("ON CONFLICT ON CONSTRAINT ") == 21
+    for _program_id, node in ioc_nodes:
         ops = node["operands"]
         name = _derive_conflict_constraint(
             effective, ops["relation"], ops["conflict_key_columns"]
         )
-        assert re.search(
-            r"cf_constraint_name = '" + re.escape(name) + r"'", result["sql_text"]
-        )
-        assert "WHEN unique_violation THEN" in result["sql_text"]
+        assert "ON CONFLICT ON CONSTRAINT " + name + " DO NOTHING" in result["sql_text"]
+    assert "WHEN unique_violation THEN" not in result["sql_text"]
+    assert "GET STACKED DIAGNOSTICS cf_constraint_name" not in result["sql_text"]
+    assert "cf_constraint_name pg_catalog.text" not in result["sql_text"]
 
 
 def test_conflict_derivation_rejects_multiple_winners() -> None:
@@ -629,20 +630,24 @@ def test_conflict_derivation_rejects_zero_winners() -> None:
         _derive_conflict_constraint(effective, relation, ops["conflict_key_columns"])
 
 
-def test_broad_handler_mutation_is_rejected() -> None:
+def test_untargeted_conflict_mutation_is_rejected() -> None:
     result = _base_render()
     mutated = result["sql_text"].replace(
-        "WHEN unique_violation THEN", "WHEN OTHERS THEN"
+        "ON CONFLICT ON CONSTRAINT pk_cf_02 DO NOTHING",
+        "ON CONFLICT DO NOTHING",
+        1,
     )
     report = recognize_inert_sql(mutated, result["manifest"], result["effective"])
     assert not report.valid
-    assert any(issue.code == "when_others" for issue in report.issues)
+    assert any(issue.code == "on_conflict_do_nothing" for issue in report.issues)
 
 
 def test_wrong_constraint_name_mutation_is_rejected() -> None:
     result = _base_render()
     mutated = result["sql_text"].replace(
-        "cf_constraint_name = 'pk_cf_02'", "cf_constraint_name = 'pk_bogus'"
+        "ON CONFLICT ON CONSTRAINT pk_cf_02 DO NOTHING",
+        "ON CONFLICT ON CONSTRAINT pk_bogus DO NOTHING",
+        1,
     )
     report = recognize_inert_sql(mutated, result["manifest"], result["effective"])
     assert not report.valid
@@ -1115,22 +1120,26 @@ def test_renderer_isolation_assertions_are_read_only() -> None:
 
 def test_renderer_unique_race_reload_proves_exact_cardinality() -> None:
     sql = _base_render()["sql_text"]
-    # Insert-success arm proves exactly one row returned.
+    # Insert-success stays in the top-level transaction and an exact conflict
+    # target suppresses only the typed winner race.
     assert (
         sql.count(
             "RETURNING practice_id, source_contract_id, product_appointment_uuid, "
             "opaque_aggregate_alias, created_at, stream_id INTO alias;\n"
-            "        IF NOT FOUND THEN"
+            "    IF NOT FOUND THEN"
         )
         >= 1
     )
+    assert "ON CONFLICT ON CONSTRAINT pk_cf_02 DO NOTHING" in sql
     # Winner reload is a strict exact read mapping zero/multiple to CF004.
     assert "INTO STRICT alias\n" in sql
     assert "WHEN NO_DATA_FOUND THEN" in sql
     assert "WHEN TOO_MANY_ROWS THEN" in sql
-    # The expected-constraint fence and nonmatching RAISE remain exact.
-    assert "GET STACKED DIAGNOSTICS cf_constraint_name = CONSTRAINT_NAME;" in sql
-    assert re.search(r"ELSE\n\s+RAISE;\n\s+END IF;", sql) is not None
+    # No write-bearing exception block or mutable constraint-name diagnostic
+    # remains anywhere in the renderer output.
+    assert "WHEN unique_violation THEN" not in sql
+    assert "GET STACKED DIAGNOSTICS cf_constraint_name" not in sql
+    assert "cf_constraint_name pg_catalog.text" not in sql
 
 
 def test_renderer_digest_profile_frame_is_component_zero() -> None:

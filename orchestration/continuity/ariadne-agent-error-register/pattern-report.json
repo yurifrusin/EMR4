@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "852f69a1c4e91cd91f0e6301b810fb811fa9ecfd3389c849e7247236352d4dd4",
+  "canonical_register_sha256": "56c3d9026152fd27dda2a5a18fcab2926c09e5d852e59edf127917d9c6dcf3c8",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 37,
+      "accepted_candidate_changed": 38,
       "canonical_unchanged": 91,
       "untrusted_partial_worktree": 22
     },
@@ -13,18 +13,18 @@
       "output_contract_violation": 42,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
-      "repository_defect": 18,
+      "repository_defect": 19,
       "transport_timeout": 8
     },
     "by_origin": {
       "agent_behavior": 105,
       "harness": 19,
-      "repository": 18,
+      "repository": 19,
       "transport": 8
     },
     "by_process_severity": {
       "low": 43,
-      "material": 55,
+      "material": 56,
       "moderate": 52
     },
     "by_resource_and_role": {
@@ -44,7 +44,7 @@
       "deepseek-v4-flash-implementation-worker::implementer": 2,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-context-fabric-durability-body-contract::orchestrator": 1,
-      "emr4-context-fabric-durability-inert-ddl-renderer::orchestrator": 2,
+      "emr4-context-fabric-durability-inert-ddl-renderer::orchestrator": 3,
       "emr4-context-fabric-durability-structural-contract::orchestrator": 1,
       "emr4-context-fabric-durability-typed-body-renderer::orchestrator": 1,
       "emr4-disposable-postgresql-harness::orchestrator": 17,
@@ -58,12 +58,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 97,
+      "orchestrator": 98,
       "verifier": 39
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 150,
+  "incident_count": 151,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -408,7 +408,7 @@
       ]
     }
   ],
-  "register_revision": 125,
+  "register_revision": 126,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-09"
 }
