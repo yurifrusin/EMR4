@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_exact_dml_name_ambiguity_parse_catalogue_accepted_source_ledger",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. The renderer 2.0.14 exact parse/catalogue reproduction has passed and is committed at evidence source 5d31d5cfd0a95a771f28cca2c6c7baf903ae97ed; this commit adds only its accepted-source ledger for behavior-parent binding.",
+    "current_authority_allocation": "GPT Sol owns the evidence-source ledger and commit. No worker, verifier, provider model, database runtime or product surface is active in this ledger-only step.",
+    "active_plan_and_acceptance": "The ledger binds exact pass evidence SHA-256 122d2db7ec577875c1477eee6a4fa0c51dc9117ce0c23bc3704aa43f4c791ca0, artifact SHA-256 b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc, render-manifest file SHA-256 5282c1432171d16b039c321b03ef15be00902317186e4264e634b0667e58cfe4 and exact parse contract SHA-256 f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673. Both exact runtime container IDs are recorded removed and independently absent. The ledger grants parse/catalogue prerequisite authority only.",
+    "protected_evidence_boundaries": "No database runtime occurs. Function, trigger, RLS or transaction behavior, applied migration, operational database or credential, source/watcher/listener/feed, patient, clinical, product or protected data, provider call, application/API/Diary wiring, command or write, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Task HEAD is 5d31d5cfd0a95a771f28cca2c6c7baf903ae97ed before this ledger commit on codex/ariadne-bernie-davida-parallel-seam; origin task is 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean before explicit-path staging."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_accepted_source_ledger_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol matched every ledger digest and source commit to repository bytes."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No verifier is active in this ledger-only step."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane is selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
