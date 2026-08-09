@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 134,
+  "register_revision": 135,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6275,6 +6275,49 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-interval-construction-recovery.md",
           "docs/security/raisa-context-fabric-durability-interval-construction-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-134.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0160",
+      "attempt_id": "raisa-context-fabric-interval-construction-behavior-veto-predispatch-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "A fresh Antigravity verifier may be launched only after the exact Ariadne orchestrator receipt has been read and proves status passed plus worker_dispatch_permitted true; an external verifier worktree preflight must remain separate from native assigned-agent workspace receipts.",
+      "observed_error": "The first interval-construction veto state incorrectly predeclared the external Gemini verifier in active_instance_ids and assigned_agent_ids with no matching workspace_receipt. The deterministic preflight returned revision_required with workspace_receipt_missing:r134-interval-construction-veto, but Sol launched Antigravity without first reading and enforcing that persisted terminal status. The model completed one read-only clean pass; it is preserved but inadmissible and grants no behavior execution.",
+      "detection_method": "Post-review admission read the immutable predispatch receipt, found status revision_required and worker_dispatch_permitted false, stopped before any PostgreSQL behavior run, preserved the clean exact-HEAD verifier output as inadmissible evidence, and added an executable launcher guard that rejects every non-passing orchestrator receipt before transport invocation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-interval-construction-behavior-review-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-interval-construction-behavior-review-predispatch-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-interval-construction-behavior-review-receipt.json",
+        "scripts/ariadne_antigravity.py",
+        "tests/test_ariadne_antigravity.py",
+        "docs/ariadne-agent-error-correction-register-revision-135.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The first verifier pass remains inadmissible. A distinct v2 state leaves external verifier worker slots inactive and assigned_agent_ids empty, preserves the separate exact-worktree preflight in source evidence, and must pass before a fresh project/worktree veto. The Antigravity launcher now requires and hashes an exact passed orchestrator receipt and rejects revision_required before invoking the provider transport.",
+        "prevention_control": "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents.",
+        "evidence_paths": [
+          "scripts/ariadne_antigravity.py",
+          "tests/test_ariadne_antigravity.py",
+          "docs/ariadne-agent-error-correction-register-revision-135.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

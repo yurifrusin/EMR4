@@ -1,30 +1,30 @@
 {
-  "canonical_register_sha256": "7306bfc13b945e00b50212f457e9dfda87044981bee7e65e4a6e592344436a4a",
+  "canonical_register_sha256": "4eebd851167055de93fb0fd12df334e00af6b26c4a5e9ae8e9035e2b3a375a40",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 40,
-      "canonical_unchanged": 97,
+      "canonical_unchanged": 98,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 15,
       "evidence_misreport": 22,
       "harness_failure": 20,
-      "output_contract_violation": 47,
+      "output_contract_violation": 48,
       "read_only_violation": 3,
       "reasoning_claim_error": 23,
       "repository_defect": 21,
       "transport_timeout": 8
     },
     "by_origin": {
-      "agent_behavior": 110,
+      "agent_behavior": 111,
       "harness": 20,
       "repository": 21,
       "transport": 8
     },
     "by_process_severity": {
       "low": 49,
-      "material": 58,
+      "material": 59,
       "moderate": 52
     },
     "by_resource_and_role": {
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 67,
+      "codex-primary-orchestrator::orchestrator": 68,
       "codex-sol-orchestrator::orchestrator": 1,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
@@ -58,12 +58,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 106,
+      "orchestrator": 107,
       "verifier": 39
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 159,
+  "incident_count": 160,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -229,7 +229,7 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 7,
+      "incident_count": 8,
       "incident_ids": [
         "AER-0024",
         "AER-0030",
@@ -237,7 +237,8 @@
         "AER-0147",
         "AER-0153",
         "AER-0154",
-        "AER-0157"
+        "AER-0157",
+        "AER-0160"
       ],
       "origins": [
         "agent_behavior"
@@ -249,7 +250,8 @@
         "Before orchestrator preflight, treat workspace_receipts as a schema-governed assignment structure rather than an arbitrary evidence-path list; never predeclare an external verifier active or assigned when only the separate read-only worktree preflight exists.",
         "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
         "Construct every adapter observation by copying allowed_probe_methods from orchestration/harness_settings/transport_adapters.yaml for that exact adapter_id; never reuse the primary-session method when a native subagent is merely being observed.",
-        "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field."
+        "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
+        "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents."
       ],
       "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
       "resource_ids": [
@@ -418,7 +420,7 @@
       ]
     }
   ],
-  "register_revision": 134,
+  "register_revision": 135,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-09"
 }

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -38,6 +39,13 @@ STRUCTURED_DECISION_SCHEMA = {
         "review": {"type": "string", "minLength": 1, "maxLength": 40000},
     },
 }
+REHYDRATION_SOURCES = {
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree",
+}
 
 
 @dataclass(frozen=True)
@@ -66,7 +74,9 @@ def inspect_worktree(cwd: Path, *, require_clean: bool) -> WorktreeState:
         raise ValueError(f"Antigravity cwd must equal the Git worktree root: {root}")
     branch = _git(resolved, "branch", "--show-current")
     if not branch or branch in PROTECTED_BRANCHES:
-        raise ValueError(f"Antigravity refuses protected or detached branch: {branch!r}")
+        raise ValueError(
+            f"Antigravity refuses protected or detached branch: {branch!r}"
+        )
     dirty = bool(_git(resolved, "status", "--porcelain"))
     if require_clean and dirty:
         raise ValueError("Antigravity worktree must be clean before dispatch")
@@ -162,7 +172,9 @@ def parse_structured_decision(stdout: str) -> dict[str, str]:
     try:
         root = json.loads(stdout)
     except json.JSONDecodeError as error:
-        raise RuntimeError("Antigravity structured output was not one JSON value") from error
+        raise RuntimeError(
+            "Antigravity structured output was not one JSON value"
+        ) from error
 
     candidates: list[dict[str, str]] = []
     direct = _as_structured_decision(root)
@@ -186,15 +198,39 @@ def parse_structured_decision(stdout: str) -> dict[str, str]:
     return next(iter(unique.values()))
 
 
+def admit_orchestrator_receipt(path: Path) -> str:
+    raw = path.read_bytes()
+    try:
+        receipt = json.loads(raw)
+    except json.JSONDecodeError as error:
+        raise ValueError("orchestrator receipt must be valid JSON") from error
+    if not isinstance(receipt, dict):
+        raise ValueError("orchestrator receipt must be a JSON object")
+    if receipt.get("schema_version") != "ariadne.orchestrator_receipt.v1":
+        raise ValueError("orchestrator receipt schema is not admitted")
+    if receipt.get("status") != "passed":
+        raise ValueError("orchestrator receipt did not pass")
+    if receipt.get("worker_dispatch_permitted") is not True:
+        raise ValueError("orchestrator receipt does not permit worker dispatch")
+    sources = receipt.get("rehydration_sources")
+    if not isinstance(sources, list) or set(sources) != REHYDRATION_SOURCES:
+        raise ValueError(
+            "orchestrator receipt lacks the exact five rehydration sources"
+        )
+    return hashlib.sha256(raw).hexdigest()
+
+
 def run_worker(
     *,
     packet_path: Path,
     cwd: Path,
     output_path: Path,
+    orchestrator_receipt_path: Path,
     model: str,
     os_sandbox: bool,
     structured_decision: bool = True,
 ) -> dict:
+    orchestrator_receipt_sha256 = admit_orchestrator_receipt(orchestrator_receipt_path)
     packet = packet_path.read_text(encoding="utf-8")
     if not packet.strip():
         raise ValueError("worker packet must not be empty")
@@ -225,7 +261,9 @@ def run_worker(
     if after.root != before.root or after.branch != before.branch:
         raise RuntimeError("Antigravity changed or escaped its bound worktree/branch")
     if after.head != before.head or after.dirty:
-        raise RuntimeError("Antigravity verifier modified its read-only candidate worktree")
+        raise RuntimeError(
+            "Antigravity verifier modified its read-only candidate worktree"
+        )
     if structured_decision:
         decision_envelope = parse_structured_decision(completed.stdout)
         decision = decision_envelope["decision"]
@@ -257,6 +295,7 @@ def run_worker(
         "head_after": after.head,
         "dirty_after": after.dirty,
         "os_sandbox": os_sandbox,
+        "orchestrator_receipt_sha256": orchestrator_receipt_sha256,
         "result": result,
     }
     if decision_envelope is not None:
@@ -267,10 +306,13 @@ def run_worker(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run a worktree-bound Gemini verifier.")
+    parser = argparse.ArgumentParser(
+        description="Run a worktree-bound Gemini verifier."
+    )
     parser.add_argument("--packet", type=Path, required=True)
     parser.add_argument("--cwd", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--orchestrator-receipt", type=Path, required=True)
     parser.add_argument("--model", choices=sorted(MODELS), default=DEFAULT_MODEL)
     parser.add_argument(
         "--os-sandbox",
@@ -288,6 +330,7 @@ def main() -> int:
             packet_path=args.packet.resolve(),
             cwd=args.cwd.resolve(),
             output_path=args.output.resolve(),
+            orchestrator_receipt_path=args.orchestrator_receipt.resolve(),
             model=args.model,
             os_sandbox=args.os_sandbox,
             structured_decision=not args.legacy_text_decision,

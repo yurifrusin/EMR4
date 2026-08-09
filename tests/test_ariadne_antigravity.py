@@ -17,6 +17,23 @@ def _state(branch: str = "antigravity/bounded") -> WorktreeState:
     )
 
 
+def _passed_orchestrator_receipt(tmp_path: Path) -> Path:
+    path = tmp_path / "orchestrator-receipt.json"
+    path.write_text(
+        json.dumps(
+            {
+                "schema_version": "ariadne.orchestrator_receipt.v1",
+                "status": "passed",
+                "worker_dispatch_permitted": True,
+                "rehydration_sources": sorted(ariadne_antigravity.REHYDRATION_SOURCES),
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
 def test_command_always_binds_a_fresh_project_and_exact_worktree():
     command = build_command(
         packet="Review the change.",
@@ -79,6 +96,7 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
     packet = tmp_path / "packet.md"
     packet.write_text("Review only.", encoding="utf-8")
     output = tmp_path / "receipt.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
     state = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
@@ -113,6 +131,7 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
         packet_path=packet,
         cwd=tmp_path,
         output_path=output,
+        orchestrator_receipt_path=orchestrator_receipt,
         model="gemini-3.6-flash-high",
         os_sandbox=False,
     )
@@ -125,10 +144,43 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
         "decision": "pass",
         "review": "No material findings; focused checks passed.",
     }
-    assert receipt["transport"] == (
-        "antigravity_new_project_bound_readonly_worktree"
-    )
+    assert receipt["transport"] == ("antigravity_new_project_bound_readonly_worktree")
     assert output.is_file()
+    assert len(receipt["orchestrator_receipt_sha256"]) == 64
+
+
+def test_run_worker_rejects_revision_required_orchestrator_receipt_before_dispatch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "receipt.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    rejected = json.loads(orchestrator_receipt.read_text(encoding="utf-8"))
+    rejected["status"] = "revision_required"
+    rejected["worker_dispatch_permitted"] = False
+    orchestrator_receipt.write_text(json.dumps(rejected) + "\n", encoding="utf-8")
+    invoked = False
+
+    def _unexpected_dispatch(*_args, **_kwargs):
+        nonlocal invoked
+        invoked = True
+        raise AssertionError("provider transport must not run")
+
+    monkeypatch.setattr(ariadne_antigravity.subprocess, "run", _unexpected_dispatch)
+
+    with pytest.raises(ValueError, match="did not pass"):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=tmp_path,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.6-flash-high",
+            os_sandbox=False,
+        )
+
+    assert invoked is False
+    assert not output.exists()
 
 
 def test_run_worker_fails_if_verifier_modifies_candidate(
@@ -137,6 +189,7 @@ def test_run_worker_fails_if_verifier_modifies_candidate(
     packet = tmp_path / "packet.md"
     packet.write_text("Review only.", encoding="utf-8")
     output = tmp_path / "receipt.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
     before = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
@@ -172,6 +225,7 @@ def test_run_worker_fails_if_verifier_modifies_candidate(
             packet_path=packet,
             cwd=tmp_path,
             output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
             model="gemini-3.6-flash-high",
             os_sandbox=False,
         )
@@ -195,6 +249,7 @@ def test_run_worker_rejects_missing_or_duplicate_terminal_decision(
     packet = tmp_path / "packet.md"
     packet.write_text("Review only.", encoding="utf-8")
     output = tmp_path / "receipt.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
     state = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
@@ -223,6 +278,7 @@ def test_run_worker_rejects_missing_or_duplicate_terminal_decision(
             packet_path=packet,
             cwd=tmp_path,
             output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
             model="gemini-3.6-flash-high",
             os_sandbox=False,
             structured_decision=False,
@@ -261,6 +317,7 @@ def test_run_worker_rejects_missing_or_conflicting_structured_decision(
     packet = tmp_path / "packet.md"
     packet.write_text("Review only.", encoding="utf-8")
     output = tmp_path / "receipt.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
     state = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
@@ -284,14 +341,14 @@ def test_run_worker_rejects_missing_or_conflicting_structured_decision(
     with pytest.raises(
         RuntimeError,
         match=(
-            "exactly one schema-valid decision envelope; "
-            f"observed {envelope_count}"
+            f"exactly one schema-valid decision envelope; observed {envelope_count}"
         ),
     ):
         ariadne_antigravity.run_worker(
             packet_path=packet,
             cwd=tmp_path,
             output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
             model="gemini-3.6-flash-high",
             os_sandbox=False,
         )
