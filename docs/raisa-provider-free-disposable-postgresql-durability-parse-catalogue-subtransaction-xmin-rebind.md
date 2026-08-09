@@ -2,7 +2,7 @@
 
 Date: 2026-08-10
 
-Status: characterization preserved; exact reproduction remains required
+Status: exact reproduction passed; accepted-source binding remains required
 
 The disposable PostgreSQL parse/catalogue rehearsal is rebound to renderer
 2.0.15 source commit `561f5c896c16f31dcf6057da37d6ece7134c0da6` and its
@@ -34,9 +34,21 @@ The predecessor mutable parse evidence was restored byte-for-byte at SHA-256
 The contract is now rebound to those fifteen exact digests at canonical
 SHA-256
 `3dc318e64b9c30817c0e2cdca650fc284ae3d2f35e93e697d0cac5368fecbd03`.
-This characterization cannot accept itself. One distinct newly owned
-networkless container must reproduce the exact digest set and pass exact-ID
-cleanup before the parse prerequisite can be rebound into behavior recovery.
+This characterization cannot accept itself. Distinct exact reproduction
+attempt `4ec417dfc5e16ad6e462e66d` matched all seventeen catalogue digests and
+completed the required lifecycle. Its separately owned container
+`f784718297efd8d11250a2a34bbf7a25627036d2fcb9c745fb6c56e954f6e517`
+was removed and exact-ID absence was verified. Immutable exact-pass evidence
+is
+`provider-free-disposable-postgresql-evidence-subtransaction-xmin-exact-pass.json`
+at SHA-256
+`cb439eefe9eb243eb4eccda144ac51218d9e26ba71c0dd14402ee066b7c1fb14`.
+The generic accepted evidence path was restored byte-for-byte at SHA-256
+`97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec`.
+
+The pass proves exact PostgreSQL 16 parse, atomic installation and catalogue
+shape for this artifact. A separate accepted-source ledger must bind the
+committed exact-pass source before the behavior contract can inherit it.
 
 This rebind opens no behavior proof, application migration, operational
 database, source, watcher/listener/feed, patient/product/protected data,

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_subtransaction_xmin_exact_catalogue_reproduction_with_explicit_paths_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact attempt 4ec417dfc5e16ad6e462e66d matched all seventeen characterized catalogue digests under exact contract SHA-256 3dc318e64b9c30817c0e2cdca650fc284ae3d2f35e93e697d0cac5368fecbd03. It is distinct from characterization attempt 25b98f1da5c8de4d06188a70 and used distinct container f784718297efd8d11250a2a34bbf7a25627036d2fcb9c745fb6c56e954f6e517. Exact-ID cleanup and absence passed. Immutable evidence SHA-256 is cb439eefe9eb243eb4eccda144ac51218d9e26ba71c0dd14402ee066b7c1fb14. The 129-test parse/plan suite, Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns this immutable exact-reproduction checkpoint and explicit-path commit under Yuri's standing planned-gate authority. No worker, verifier, provider model or product surface is active.",
+    "git_refs_and_worktree": "Primary task branch HEAD is ad6516b30b0e78619c233543d2960a188a4e81a2 before this explicit-path commit; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The generic tracked pass evidence was restored byte-for-byte at SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec. Mutable behavior and parse failure evidence remain preserved and unstaged; the index is clean before explicit-path staging.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. The renderer repair and non-accepting catalogue characterization are committed through ad6516b30b0e78619c233543d2960a188a4e81a2. A distinct exact reproduction now passes; accepted-source ledger binding and behavior rebind remain next.",
+    "protected_evidence_boundaries": "This commit contains only repository-local authored-synthetic exact parse/catalogue evidence, updated bounded documentation/tests and its receipt pair. It proves PostgreSQL 16 parse, atomic installation and catalogue shape only. It applies no migration and opens no function behavior, operational database/credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model call, command/write authority, application/API/Diary wiring, deployment, production, release, Pages or protected-ref movement. The unrelated gp-pms-postgres container was not listed or touched. docs/branding and all unrelated untracked files remain unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

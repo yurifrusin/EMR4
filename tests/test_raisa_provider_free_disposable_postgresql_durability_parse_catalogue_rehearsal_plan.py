@@ -142,6 +142,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     assert "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c" in plan
     assert "4d140704d33624e90737022e5f9d095559152bd56554514ccebc73222d845750" in plan
     assert "3dc318e64b9c30817c0e2cdca650fc284ae3d2f35e93e697d0cac5368fecbd03" in plan
+    assert "cb439eefe9eb243eb4eccda144ac51218d9e26ba71c0dd14402ee066b7c1fb14" in plan
     assert "f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673" in plan
     assert "122d2db7ec577875c1477eee6a4fa0c51dc9117ce0c23bc3704aa43f4c791ca0" in plan
     assert "Distinct attempt `26f530dab9ed13ba20500267`" in plan
