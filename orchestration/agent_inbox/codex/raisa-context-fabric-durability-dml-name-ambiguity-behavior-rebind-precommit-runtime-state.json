@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_exact_six_parent_behavior_rebind_after_the_complete_512_test_deterministic_gate",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 028 is immutable fail-closed evidence. Renderer 2.0.14 now has accepted parse/catalogue source 5d31d5cfd0a95a771f28cca2c6c7baf903ae97ed and its exact six-parent behavior rebind is ready for commit.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled behavior parent rebind, deterministic gate and commit. The next external action after a clean exact candidate is one fresh Gemini 3.6 Flash/high Antigravity read-only veto in a new non-protected worktree. No implementation worker owns runtime or acceptance.",
+    "active_plan_and_acceptance": "The accepted-source ledger and parse prerequisite bind evidence source 5d31d5cfd0a95a771f28cca2c6c7baf903ae97ed; inert SQL and render manifest bind source 9513b1f8a845b29473a2ca402fcee2ac2b11eebe at SHA-256 b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc and 5282c1432171d16b039c321b03ef15be00902317186e4264e634b0667e58cfe4; structural/body parents remain 958f8178c872854ab0f8e1c56dbb9fe46afbea22. Canonical behavior contract SHA-256 is aabab28c1087e91d2b6267e24d55fd60e28a9204621dc38699c5df9e8feb7b24. All twenty scenarios and 6/4/3/4/3 population remain exact at SHA-256 eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. The complete 512-test packet passed; Ruff check and format passed over 27 files; diff checks passed.",
+    "protected_evidence_boundaries": "This commit authorizes no behavior database run. No scenario, fixture, SQL action, expected outcome, SQLSTATE, authority, Docker or cleanup rule changes. Applied migration, operational database or credential, source/watcher/listener/feed, patient, clinical, product or protected data, provider call other than the later bounded verifier, application/API/Diary wiring, command or write, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Task HEAD is 330ac27aaa5b5c6d1d9b3e164f0e693c8ec0b5c1 before this rebind commit on codex/ariadne-bernie-davida-parallel-seam; origin task is 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean before explicit-path staging."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_behavior_rebind_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the six exact parent bindings, unchanged scenario population, 512-test packet, 27-file Ruff gate and refs."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native implementation subagent is assigned to the stateful recovery."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["One fresh exact-HEAD Gemini 3.6 Flash/high veto is next after commit and worktree binding."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is assigned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane is selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

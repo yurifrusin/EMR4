@@ -749,24 +749,24 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "id": "accepted_runtime_source",
         "path": (
             "docs/raisa-provider-free-disposable-postgresql-durability-"
-            "parse-catalogue-alias-lock-visibility-accepted-source.md"
+            "parse-catalogue-dml-name-ambiguity-accepted-source.md"
         ),
-        "source_head": "a2a40577fa618f833c67dedd5bec52083fdeb0bc",
+        "source_head": "5d31d5cfd0a95a771f28cca2c6c7baf903ae97ed",
         "sha256": (
-            "sha256:141fe6c47963f1a9627b3b2ff4f49e3a8f2f91c5616132899bae9d5880a8685e"
+            "sha256:a967b264d1fc2c7fdfad8f30ee6ff698158ef2cb808ff9257197703ba1e4f51e"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "958f8178c872854ab0f8e1c56dbb9fe46afbea22"
+        "9513b1f8a845b29473a2ca402fcee2ac2b11eebe"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:64cbc2b0e17276387c6815af02a2d0635fc538e3408995c1054ecbc708b5cbae"
+        "sha256:b2e476995848b64d819ae6c545d5b8c9b93707288993a0120d09d19c503230dc"
     )
     assert bindings["render_manifest"]["source_head"] == (
-        "958f8178c872854ab0f8e1c56dbb9fe46afbea22"
+        "9513b1f8a845b29473a2ca402fcee2ac2b11eebe"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:65e7ac86dddd52a182c0416433e7f45d90a9227b8449b58cc5bfd602b972dfd4"
+        "sha256:5282c1432171d16b039c321b03ef15be00902317186e4264e634b0667e58cfe4"
     )
     assert bindings["structural_contract"] == {
         "id": "structural_contract",
@@ -781,7 +781,7 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         ),
     }
     assert bindings["parse_prerequisite_contract"]["source_head"] == (
-        "a2a40577fa618f833c67dedd5bec52083fdeb0bc"
+        "5d31d5cfd0a95a771f28cca2c6c7baf903ae97ed"
     )
     assert bindings["body_contract"] == {
         "id": "body_contract",
