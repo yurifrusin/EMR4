@@ -88,10 +88,14 @@ SUBTRANSACTION_XMIN_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
     "subtransaction-xmin-rebind.md"
 )
+SUPPORT_EXECUTE_GRANT_REBIND = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-"
+    "support-execute-grant-rebind.md"
+)
 
-PARENT_HEAD = "561f5c896c16f31dcf6057da37d6ece7134c0da6"
+PARENT_HEAD = "01da1ecf50b25a0086dcf977e0468f9f3ccbe12f"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0"
+PARENT_DIGEST = "934237c4525bf193999039aa1ad00ca815081152d32a6105f3cf730310695461"
 
 
 def _text(path: Path) -> str:
@@ -121,6 +125,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         ALIAS_LOCK_VISIBILITY_REBIND,
         DML_NAME_AMBIGUITY_REBIND,
         SUBTRANSACTION_XMIN_REBIND,
+        SUPPORT_EXECUTE_GRANT_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
@@ -129,15 +134,15 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_416_483
-    assert manifest["statement_count"] == 413
+    assert manifest["sql_byte_count"] == 1_419_518
+    assert manifest["statement_count"] == 421
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "1,416,483 canonical LF bytes" in plan
-    assert "statement count `413`" in plan
+    assert "1,419,518 canonical LF bytes" in plan
+    assert "statement count `421`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
     assert "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c" in plan
     assert "4d140704d33624e90737022e5f9d095559152bd56554514ccebc73222d845750" in plan
@@ -146,6 +151,8 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     assert "f696bc57c3bbe6e25fc6f817aff337ef85b199bffff66fbf33ffa327c982e673" in plan
     assert "122d2db7ec577875c1477eee6a4fa0c51dc9117ce0c23bc3704aa43f4c791ca0" in plan
     assert "Distinct attempt `26f530dab9ed13ba20500267`" in plan
+    assert "d0724ebd4a0caa07ee032ca031d54af1e99934d6966f45838d2fbe4450b588de" in plan
+    assert "d9237e6db14e314de5e2981be1073575db2e512ed1eff44b1f9ebf8b044c17bc" in plan
 
 
 def test_runtime_profile_is_no_pull_no_network_no_mount_and_exact_owned() -> None:

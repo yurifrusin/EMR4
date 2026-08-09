@@ -56,8 +56,8 @@
         "artifact_path": {"type": "string"},
         "manifest_path": {"type": "string"},
         "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-        "artifact_byte_count": {"const": 1416483},
-        "statement_count": {"const": 413},
+        "artifact_byte_count": {"const": 1419518},
+        "statement_count": {"const": 421},
         "postgresql_major": {"const": 16},
         "phase_count": {"const": 6}
       }

@@ -213,6 +213,13 @@ SUBTRANSACTION_XMIN_PASS_EVIDENCE_PATH = (
 SUBTRANSACTION_XMIN_PASS_EVIDENCE = json.loads(
     SUBTRANSACTION_XMIN_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-support-execute-grant-characterization.json"
+)
+SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE = json.loads(
+    SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1169,7 +1176,13 @@ def test_dml_name_ambiguity_characterization_is_exact_nonaccepting_parent() -> N
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
     }
-    assert exact_digests == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert exact_digests == {
+        key: value
+        for key, value in SUBTRANSACTION_XMIN_PASS_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
     assert exact_digests == {
         key: value
         for key, value in ALIAS_LOCK_VISIBILITY_PASS_EVIDENCE["catalogue"][
@@ -1219,7 +1232,13 @@ def test_subtransaction_xmin_characterization_is_exact_nonaccepting_parent() -> 
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
     }
-    assert exact_digests == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert exact_digests == {
+        key: value
+        for key, value in SUBTRANSACTION_XMIN_PASS_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
     assert exact_digests == {
         key: value
         for key, value in DML_NAME_AMBIGUITY_CHARACTERIZATION_EVIDENCE["catalogue"][
@@ -1276,6 +1295,66 @@ def test_subtransaction_xmin_exact_reproduction_is_distinct_pass() -> None:
         evidence["cleanup"]["container_id"]
         != characterization["cleanup"]["container_id"]
     )
+
+
+def test_support_execute_grant_characterization_is_exact_and_narrow() -> None:
+    evidence = SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            SUPPORT_EXECUTE_GRANT_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "d0724ebd4a0caa07ee032ca031d54af1e99934d6966f45838d2fbe4450b588de"
+    )
+    assert evidence["attempt_id"] == "1c99cb094789272b4fdfeec7"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_419_518,
+        "artifact_sha256": (
+            "sha256:934237c4525bf193999039aa1ad00ca815081152d32a6105f3cf730310695461"
+        ),
+        "contract_sha256": (
+            "sha256:501b886da9d0d549e71a619f1fbf01ce2c619fa987bfc6ff74445dadb24f03a2"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 421,
+    }
+    characterized = {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    previous = {
+        key: value
+        for key, value in SUBTRANSACTION_XMIN_CHARACTERIZATION_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
+    changed = {
+        key for key, value in characterized.items() if previous.get(key) != value
+    }
+    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert changed == {"function_acl", "functions"}
+    assert characterized["function_acl"] == (
+        "sha256:dba3aa331a66e608ac22e434b24637050e5f89f5e63fd653a51201df58a520f3"
+    )
+    assert characterized["functions"] == (
+        "sha256:5f7063b8f2a5d11c4088e5f66b9649f9842b977c1c8d0ccfaa8fcdb1d4d19c7d"
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "df7b8805d021f8b27b685b24d1d2e91cb3fd2ac5797ce0595e632d62c7ba36bb"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
 
 
 def test_dml_name_ambiguity_exact_reproduction_is_distinct_pass() -> None:
@@ -1505,9 +1584,9 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_416_483
+    assert len(artifact) == 1_419_518
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
-    assert len(manifest["ordered_nodes"]) == 389
+    assert len(manifest["ordered_nodes"]) == 397
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
     assert (  # noqa: SLF001
         rehearsal._canonical_sha(PREREQUISITE) == rehearsal.EXPECTED_PREREQUISITE_SHA256
@@ -1534,7 +1613,7 @@ def test_exact_catalogue_kind_population_is_frozen() -> None:
         "TRIGGER_FUNCTION": 14,
         "TRIGGER_DECLARATION": 14,
         "REVOKE": 43,
-        "GRANT": 33,
+        "GRANT": 41,
     }
 
 

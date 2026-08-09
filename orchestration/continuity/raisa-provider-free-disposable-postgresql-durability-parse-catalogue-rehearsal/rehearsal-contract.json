@@ -2,14 +2,14 @@
   "schema_version": "emr4.disposable-postgresql-durability-rehearsal-contract.v1",
   "status": "accepted_for_bounded_implementation",
   "parent": {
-    "accepted_source_head": "561f5c896c16f31dcf6057da37d6ece7134c0da6",
+    "accepted_source_head": "01da1ecf50b25a0086dcf977e0468f9f3ccbe12f",
     "planning_baseline_head": "253230a25ab172b90bc5f44772670c7df89b3052",
     "accepted_plan_head": "c5f0960a240b7f162b1b34e1b09fb166d12fd42e",
     "artifact_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
     "manifest_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-    "artifact_sha256": "03150dfec61944df8f26ca2473200afa49e88ddcf9d9fce950320a2a98bd96e0",
-    "artifact_byte_count": 1416483,
-    "statement_count": 413,
+    "artifact_sha256": "934237c4525bf193999039aa1ad00ca815081152d32a6105f3cf730310695461",
+    "artifact_byte_count": 1419518,
+    "statement_count": 421,
     "postgresql_major": 16,
     "phase_count": 6
   },
@@ -92,7 +92,7 @@
     "TRIGGER_FUNCTION": 14,
     "TRIGGER_DECLARATION": 14,
     "REVOKE": 43,
-    "GRANT": 33
+    "GRANT": 41
   },
   "catalogue_assertions": {
     "application_owner_changes": 0,
@@ -137,8 +137,8 @@
       "application_relations": "sha256:09d7abdc942548e8f7743f77d025dc6ecab74f17ae8ef93e1920e6a290ce0500",
       "columns": "sha256:d0cd2d7f4afb1daff162d37fd915a3ae6a59c8fd89b9654700eab40714173290",
       "constraints": "sha256:f8405bbd7919c5d676dabadf807d087413191e262db35b8e353c1fc2d050404f",
-      "function_acl": "sha256:2124eb217e89781d329876100c320446be676c885cf8eeb41aeababd0409346d",
-      "functions": "sha256:2f8f1f94bff6fc497aadfc80f88236bfe2661629d0360ca375a2899b698dd6cd",
+      "function_acl": "sha256:dba3aa331a66e608ac22e434b24637050e5f89f5e63fd653a51201df58a520f3",
+      "functions": "sha256:5f7063b8f2a5d11c4088e5f66b9649f9842b977c1c8d0ccfaa8fcdb1d4d19c7d",
       "indexes": "sha256:bf9960d578ec6c84e8b724d6375ec8ebecc6fce92b9b1f03fb64d78d91ff0aa3",
       "policies": "sha256:51f697aeb94a50f432f6683c9e9c93412eee38853617a113c1ab020216a57168",
       "relation_acl": "sha256:7cacd542f2a5d16e2a6b40cb537fb78aaa6f34eac56c207f91f8c84977a1d66e",

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "commit_the_nonaccepting_support_execute_grant_catalogue_characterization_then_run_one_distinct_exact_parse_catalogue_reproduction_before_any_behavior_rebind_or_runtime_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty authored-synthetic scenarios at category counts 6/4/3/4/3 and forbids weakening principals, SQLSTATEs, effects, RLS, grants, cleanup or claims. The support-grant recovery permits only the exact eight contract executor_roles. Characterization attempt 1c99cb094789272b4fdfeec7 under canonical contract 501b886da9d0d549e71a619f1fbf01ce2c619fa987bfc6ff74445dadb24f03a2 produced immutable evidence d0724ebd4a0caa07ee032ca031d54af1e99934d6966f45838d2fbe4450b588de, and froze exact-digest contract d9237e6db14e314de5e2981be1073575db2e512ed1eff44b1f9ebf8b044c17bc. Acceptance still requires one distinct exact reproduction and cleanup.",
+    "current_authority_allocation": "GPT Sol owns the serial explicit-path commit, one-shot exact parse/catalogue reproduction, evidence restoration and later behavior rebind/review/runtime recovery under Yuri's standing planned-gate and diagnose-repair-rerun authority. No implementation worker, subagent or provider owns runtime or acceptance. Gemini 3.6 Flash/high remains independent review only after a complete deterministic behavior packet.",
+    "git_refs_and_worktree": "Fresh fetch confirms task HEAD 01da1ecf50b25a0086dcf977e0468f9f3ccbe12f and origin task 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Characterization container df7b8805d021f8b27b685b24d1d2e91cb3fd2ac5797ce0595e632d62c7ba36bb is absent. Mutable accepted parse evidence is restored at SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec, preserved parse failure evidence at 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c, and mutable behavior evidence at 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b; all remain unstaged. docs/branding and every unrelated untracked path remain preserved.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Attempt 030 failed closed at BTR-E03 because renderer 2.0.15 omitted eight already-specified support-function EXECUTE grants. Renderer 2.0.16 is sealed at task HEAD 01da1ecf50b25a0086dcf977e0468f9f3ccbe12f, and one deliberately nonaccepting catalogue characterization has fixed the exact two changed catalogue digests. The next dependency-satisfied action is to commit that characterization and run one distinct exact reproduction before behavior rebind.",
+    "protected_evidence_boundaries": "No protected holdout or branding content may be opened, enumerated, staged or changed. Preserve all untracked files and stage only explicit intended paths. No migration application, operational database or credential, source/watcher/listener/feed, patient/clinical/product/protected data, provider/model/product call, application/API/Diary wiring, command/write outside one disposable authored-synthetic database, deployment, production, release, Pages or protected-ref movement is authorized. Any database run uses one newly owned pull-never networkless PostgreSQL 16 container and exact-ID cleanup without listing or touching the unrelated gp-pms-postgres container."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
