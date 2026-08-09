@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_path_interval_construction_accepted_parse_source_and_unchanged_twenty_scenario_behavior_parent_rebind_before_fresh_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The rebound canonical behavior contract is sha256:227d0bafe8d55cf935a2ebea9b8924e2d6b7d632f054950ddbff75fad45a66f6. It binds accepted parse source b0311480bb378553574b039ea536a003bd7ef382, accepted-source ledger sha256:65d98a18fd8d5e119d549f19027a6343f8d01784995924079855d6336b8926eb, renderer parent 8c307d28323c68744338e2290879994e4980b2dd, artifact sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51 and manifest sha256:7a0c5d15e65a4631cf9b590f7c7af67f2103f69ebe05fb2dd9ad5f002e1d1b2d. All twenty ordered scenario objects and 6/4/3/4/3 category counts remain unchanged at canonical scenario sha256:eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. Focused behavior and plan tests pass.",
+    "current_authority_allocation": "GPT Sol owns the parent rebind, deterministic gate, review admission, later serial behavior run, cleanup and acceptance. Gemini 3.6 Flash/high may perform only the required fresh exact-HEAD independent veto after the deterministic packet passes. No implementation worker, provider, product surface or protected integration is active.",
+    "git_refs_and_worktree": "Active task branch codex/ariadne-bernie-davida-parallel-seam is at tracked HEAD b0311480bb378553574b039ea536a003bd7ef382 before this explicit-path task-branch parent-rebind commit. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The commit excludes docs/branding, mutable behavior evidence and every unrelated untracked path.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. Exact parse evidence source b0311480bb378553574b039ea536a003bd7ef382 now passes for the repaired interval artifact. The candidate next action is the behavior-parent rebind with every scenario unchanged, followed by deterministic and fresh independent veto before attempt 025.",
+    "protected_evidence_boundaries": "Behavior attempts 001-024 remain immutable; mutable behavior evidence remains untracked and unstaged until a successful behavior run replaces it. Parse characterization and exact pass are preserved. docs/branding and all unrelated untracked files remain untouched; explicit-path staging only is permitted. No patient, clinical, product or protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
