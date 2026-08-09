@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_fresh_rls_lock_visibility_independent_veto_and_corrected_acceptance_provenance_before_behavior_attempt_024",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Review receipt SHA-256 cedc6627ef345899e8ed69d079957238b1aed7a37a4a1cfa9b29bc6572755c57 records one terminal pass, 412 tests, Ruff/diff pass, exact unchanged HEAD and clean postcondition. The first Sol acceptance receipt was fail-closed for an invalid descriptive Antigravity method; AER-0157 preserves it. Corrected v2 uses exact agy_cli_observation, passes, and register revision 132 validates 157 incidents with zero open. This commit records review/provenance only and does not itself run Docker.",
+    "current_authority_allocation": "Gemini supplied read-only veto evidence only and the review worktree is now absent. GPT Sol retains commit, runtime, cleanup, acceptance and continuity authority. The completed codebase-health subagent remains read-only and outside this commit. No external worker is active.",
+    "git_refs_and_worktree": "Primary task branch is at exact tracked HEAD 3f2473a878aa3c152d75795aeb0b87a7a4c7d633 with only the bounded review/AER files intended for explicit-path commit. Review worktree r132 and its disposable branch are absent after exact clean postflight. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remote master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active provider-free durability behavior tranche now has one fresh exact-HEAD Gemini 3.6 Flash/high pass for the lifecycle RLS lock-visibility recovery and unchanged twenty-scenario rebind. The clean review worktree was independently postflighted at 3f2473a878aa3c152d75795aeb0b87a7a4c7d633 and then exactly removed; its disposable branch was deleted. The next action after this evidence-only commit is one newly owned behavior attempt 024.",
+    "protected_evidence_boundaries": "Immutable failures 001-023 and all parse/review evidence remain preserved. Mutable behavior evidence remains untracked and excluded until successful replacement. docs/branding and all unrelated untracked files remain untouched. Explicit-path staging only; no provider/product data, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

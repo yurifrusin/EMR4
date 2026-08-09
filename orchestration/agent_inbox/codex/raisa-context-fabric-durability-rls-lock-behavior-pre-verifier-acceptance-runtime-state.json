@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_single_fresh_gemini_36_flash_high_read_only_veto_after_exact_machine_reconciliation_and_open_only_one_new_behavior_attempt_024",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability gate requires a fresh exact-HEAD veto before behavior attempt 024. The complete lifecycle RLS lock-visibility correction, exact parse proof and six-parent behavior rebind candidate now has one fresh terminal Gemini 3.6 Flash/high pass at exact candidate 3f2473a878aa3c152d75795aeb0b87a7a4c7d633.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied read-only review evidence only. GPT Sol retains sole review acceptance, runtime, cleanup, evidence, continuity and Git authority. The completed codebase-health subagent holds no implementation or acceptance authority. No implementation worker or product/provider runtime is active.",
+    "active_plan_and_acceptance": "The r132 review receipt at file SHA-256 cedc6627ef345899e8ed69d079957238b1aed7a37a4a1cfa9b29bc6572755c57 reports one schema-constrained terminal pass, exact candidate HEAD unchanged before/after, dirty_after false, 412 tests passed, Ruff check and format passed, both diff checks passed, exact failure-023/diagnosis and parse-evidence hashes reconciled, lifecycle present only in stream-head UPDATE USING, producer-only WITH CHECK preserved, zero lifecycle direct table DML/SELECT preserved, the row lock preserved, 412 inert statements, all fifteen parse digests, all twenty scenarios unchanged at 6/4/3/4/3 and canonical behavior SHA-256 af8f89a18c97663a458f314a34ba2f978392f681f38fa8641c0c9be3b19d9009. Sol independently confirmed exact HEAD and clean r132 postflight.",
+    "protected_evidence_boundaries": "Acceptance opens only eligibility for one newly owned pull-never networkless fixed-fixture behavior attempt after a fresh local execution receipt. Immutable attempts 001-023 remain preserved; mutable failed behavior evidence remains unstaged until successful replacement. No product/provider call, patient/clinical/product/protected data, application migration/runtime, watcher/listener/feed, operational credential/database, command/write, deployment, production, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Review worktree r132 remains clean on codex/review-context-fabric-rls-lock-behavior-3f2473a8 at exact HEAD 3f2473a878aa3c152d75795aeb0b87a7a4c7d633. Primary tracked candidate is the same with only bounded untracked review orchestration files and preserved pre-existing untracked files. Local, origin-tracking and remote master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_pre_verifier_acceptance_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol independently reconciled the exact review receipt, candidate HEAD, clean r132 postflight, deterministic count and protected refs."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The codebase-health research subagent completed a separate read-only lane and made no candidate changes."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "verifier_runtime_receipt",
+      "reachability": "reachable",
+      "evidence": ["Fresh project returned exactly one terminal pass from gemini-3.6-flash-high at high effort; head before/after exact, dirty_after false and no fallback."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_exact_head_veto_of_the_lifecycle_rls_lock_visibility_recovery_and_unchanged_twenty_scenario_behavior_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The review packet fixes baseline e7e7265efd7773e3bf1fabace7af46ceb7d63566, candidate 3f2473a878aa3c152d75795aeb0b87a7a4c7d633, exact RLS policy correction, exact parent hashes, all twenty unchanged scenarios at 6/4/3/4/3, a 412-test packet and one terminal pass-or-revision-required decision. Verifier worktree preflight passed at exact clean r132 with zero model calls. No Docker or behavior runtime is allowed during review; a deterministic or review failure forbids attempt 024.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project may perform one read-only independent veto in exact clean worktree r132. It receives no implementation, acceptance, integration, runtime, protected-ref, patient/product, provider, deployment or release authority. GPT Sol retains all acceptance, execution, cleanup and Git authority. The user-requested codebase-health research subagent has completed read-only work and is not part of this dispatch. No worker is predeclared assigned in this receipt.",
+    "git_refs_and_worktree": "Exact read-only worktree C:/Users/sarashera/EMR4-worktrees/r132 is clean on branch codex/review-context-fabric-rls-lock-behavior-3f2473a8 at candidate 3f2473a878aa3c152d75795aeb0b87a7a4c7d633; its preflight status is passed with zero calls. Primary tracked candidate is clean with only bounded untracked review orchestration files and all pre-existing untracked files preserved. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remote master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Attempts 001-023 are immutable failure evidence. The lifecycle row-lock visibility correction, inert regeneration, separate exact parse proof and unchanged twenty-scenario rebind are committed through exact candidate 3f2473a878aa3c152d75795aeb0b87a7a4c7d633. The complete 412-test deterministic candidate, Ruff and diff checks pass. One fresh independent veto is the final prerequisite before behavior attempt 024.",
+    "protected_evidence_boundaries": "The verifier is restricted to the exact packet allowlist and may not enumerate or open protected holdouts, historical Diary, docs/branding, patient, product-derived or unrelated paths. Immutable failures and parse evidence remain read-only; mutable behavior evidence remains untracked and unstaged. No product/provider call, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
