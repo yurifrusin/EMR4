@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_exact_head_veto_for_the_support_execute_grant_recovery_and_unchanged_behavior_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Local admission passes 534 exact tests, Ruff check/format over 32 exact files and diff checks. Candidate behavior contract SHA-256 is 88650862f2dc654813d3b6c9832a7691e5b630187286f129eb1e8bd102d683bf and scenario population remains eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19. The verifier must challenge failure diagnosis, exact eight-role privilege lowering, immutable parse evidence, six parent bindings, AER-0171 and all closed surfaces, then emit exactly one structured terminal decision.",
+    "current_authority_allocation": "GPT Sol remains Conductor and acceptance owner. One fresh Antigravity project using exact model slug gemini-3.6-flash-high and high effort receives read-only veto authority only. It cannot edit, implement, start Docker/PostgreSQL, accept itself, commit, push, move protected refs or access product/patient/protected data. No fallback is allowed.",
+    "git_refs_and_worktree": "Fresh review worktree preflight passes at clean exact HEAD 02673c8f6ed83f960b49ac8ba8dfbfd6d809c800 on branch codex/review-context-fabric-support-execute-grant-02673c8f in C:/Users/sarashera/EMR4-worktrees/r142. Task origin remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary worktree's unrelated untracked files remain outside the review worktree.",
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability behavior recovery. Exact candidate 02673c8f6ed83f960b49ac8ba8dfbfd6d809c800 contains the renderer repair, parse characterization/reproduction, accepted-source ledger and unchanged twenty-scenario behavior rebind. Behavior runtime remains closed pending one fresh independent veto.",
+    "protected_evidence_boundaries": "The verifier may inspect only repository code, diffs, tests and authored-synthetic evidence named in the packet. It must not inspect docs/branding or any protected holdout, run Docker or runtime harnesses, access product/patient/clinical data, call another provider/model, edit, deploy, release, rebuild Pages or move refs. This single verifier call is the only provider/model action authorized at this gate and no silent fallback is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
