@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_behavior_contract_parent_rebind_with_all_twenty_scenarios_unchanged_before_full_cross_layer_verification_and_fresh_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability behavior rehearsal remains in bounded attempt-023 recovery. Exact PostgreSQL 16 parse/catalogue evidence is committed at a7a780f9735d3c41095703d464611752f89685d9. The next result ready to seal is the behavior-contract parent rebind; behavior runtime remains closed pending the full deterministic packet and fresh independent veto.",
+    "current_authority_allocation": "GPT Sol owns this deterministic parent rebind and subsequent serial behavior run. No implementation worker or database container is active. Gemini 3.6 Flash/high is eligible only as the fresh exact-HEAD independent veto after the committed candidate passes the complete deterministic gate. The codebase-health research subagent has completed read-only.",
+    "active_plan_and_acceptance": "Behavior contract SHA-256 af8f89a18c97663a458f314a34ba2f978392f681f38fa8641c0c9be3b19d9009 binds accepted parse source a7a780f9735d3c41095703d464611752f89685d9, artifact source 3644c951f9b0a446d802ed31ef04c23f139cb0d7, structural source 338c30ddb01561ce97a4b9837317e771b555c221 and body source 987f64a9f68c8dec2b99d5d39aa74e28411a82fa. Scenario order, all twenty scenario objects and category coverage remain byte-for-byte unchanged at canonical SHA-256 eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19 with exact counts 6/4/3/4/3. All 74 focused behavior/plan tests, parent-source checks, hostile mutations, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "This commit opens no runtime. Immutable behavior failures 001-023 remain preserved and mutable failed behavior evidence stays untracked and unstaged until success replaces it. The exact SQLSTATEs, principals, isolation shapes, effects, rollback sets and no-network/no-pull/exact-cleanup profile are unchanged. No protected, patient, clinical, product-derived or historical-PHI data; provider; operational database; application/API/Diary wiring; watcher/listener/feed; command/write; deployment; production; release; Pages; or protected-ref movement opens.",
+    "git_refs_and_worktree": "Task HEAD before this explicit-path behavior-parent commit is a7a780f9735d3c41095703d464611752f89685d9; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remotely queried master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the accepted-source ledger, behavior rebind note, contract/harness, two focused tests and this precommit pair are eligible; docs/branding, unrelated untracked files and mutable behavior evidence remain excluded by explicit-path staging."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rls_lock_visibility_behavior_parent_rebind_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled all six exact parent files and source heads, unchanged canonical scenario digest, complete 6/4/3/4/3 population, focused and hostile tests, Ruff and diff checks."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The separately authorised codebase-health research subagent completed read-only without repository changes."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The fresh Gemini veto remains deferred until this exact committed candidate passes the full cross-layer deterministic packet."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker is active for this serial recovery."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude Code transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

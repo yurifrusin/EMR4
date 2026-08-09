@@ -50,6 +50,10 @@ SYSTEM_XMIN_ALIAS_REBIND = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-system-xmin-explicit-alias-parent-rebind.md"
 )
+RLS_LOCK_VISIBILITY_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-rls-lock-visibility-parent-rebind.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -83,33 +87,33 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-top-level-xid-insert-reload-accepted-source.md",
-        "2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb",
-        "907a00ef9493e42e9294e15485e89f8eee6bb212b1f082f9eb1914c8573c65f6",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rls-lock-visibility-accepted-source.md",
+        "a7a780f9735d3c41095703d464611752f89685d9",
+        "7ec64504f5baf10327ba257138603715d370faf6d615cfc710797b8c3d6fb6a5",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "c5d55b72441524d42b9724815dfa4c1a778ac73a",
-        "25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb",
+        "3644c951f9b0a446d802ed31ef04c23f139cb0d7",
+        "28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "c5d55b72441524d42b9724815dfa4c1a778ac73a",
-        "d597e0df4c30bd7c5e3745345a34bee712632fb8803df7afe2762ad53fef6e57",
+        "3644c951f9b0a446d802ed31ef04c23f139cb0d7",
+        "8ced08cb218b4a19cb1abbf41930db3dcec0ac1e60fa132d38e9fba8c813c49e",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-        "9fb107ab598fba418b42be6d233c4960a6f29840",
-        "2463efb28175d4dc8232c08e4401565ff00663698e072aa931144aa37cf0d53f",
+        "338c30ddb01561ce97a4b9837317e771b555c221",
+        "648acf79c86d16bf7fcd9ad1f88dcab5bc4aded01c4e0084f66c6c36b4adeca1",
     ),
     "body_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-        "73322f3d86d44f997c054331e06c3017831b345f",
-        "a4d270536f11ee143dbe947afe212de6906c2615063722845e6ff15d3f80c381",
+        "987f64a9f68c8dec2b99d5d39aa74e28411a82fa",
+        "78721338810c87df825bdf3a9d1e010cb3cdd04dcb7898badd127b76fec174d2",
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb",
+        "a7a780f9735d3c41095703d464611752f89685d9",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
@@ -297,6 +301,36 @@ def test_system_xmin_alias_rebind_preserves_twenty_scenarios_and_closure() -> No
         "patient/product/protected data",
     ):
         assert required in combined
+
+
+def test_rls_lock_visibility_rebind_preserves_twenty_scenarios_and_closure() -> None:
+    combined = _flat(RLS_LOCK_VISIBILITY_REBIND, PLAN, DESIGN).lower()
+
+    for required in (
+        "attempts 001-023 remain immutable",
+        "exactly twenty ordered",
+        "6/4/3/4/3",
+        "attempt 024",
+        "gemini 3.6 flash/high",
+        "docs/branding/",
+        "no applied migration",
+        "patient, product or protected data",
+    ):
+        assert required in combined
+    contract = _contract()
+    canonical = json.dumps(
+        {
+            "scenario_order": contract["scenario_order"],
+            "scenarios": contract["scenarios"],
+            "category_coverage": contract["category_coverage"],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    assert hashlib.sha256(canonical).hexdigest() == (
+        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+    )
 
 
 def test_scenario_population_is_exact_and_all_five_categories_are_present() -> None:

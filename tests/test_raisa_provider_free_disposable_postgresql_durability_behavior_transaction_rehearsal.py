@@ -708,24 +708,24 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "id": "accepted_runtime_source",
         "path": (
             "docs/raisa-provider-free-disposable-postgresql-durability-"
-            "parse-catalogue-top-level-xid-insert-reload-accepted-source.md"
+            "parse-catalogue-rls-lock-visibility-accepted-source.md"
         ),
-        "source_head": "2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb",
+        "source_head": "a7a780f9735d3c41095703d464611752f89685d9",
         "sha256": (
-            "sha256:907a00ef9493e42e9294e15485e89f8eee6bb212b1f082f9eb1914c8573c65f6"
+            "sha256:7ec64504f5baf10327ba257138603715d370faf6d615cfc710797b8c3d6fb6a5"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "c5d55b72441524d42b9724815dfa4c1a778ac73a"
+        "3644c951f9b0a446d802ed31ef04c23f139cb0d7"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb"
+        "sha256:28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800"
     )
     assert bindings["render_manifest"]["source_head"] == (
-        "c5d55b72441524d42b9724815dfa4c1a778ac73a"
+        "3644c951f9b0a446d802ed31ef04c23f139cb0d7"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:d597e0df4c30bd7c5e3745345a34bee712632fb8803df7afe2762ad53fef6e57"
+        "sha256:8ced08cb218b4a19cb1abbf41930db3dcec0ac1e60fa132d38e9fba8c813c49e"
     )
     assert bindings["body_contract"] == {
         "id": "body_contract",
@@ -734,9 +734,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-function-trigger-body-architecture/"
             "function-trigger-body-architecture-contract.json"
         ),
-        "source_head": "73322f3d86d44f997c054331e06c3017831b345f",
+        "source_head": "987f64a9f68c8dec2b99d5d39aa74e28411a82fa",
         "sha256": (
-            "sha256:a4d270536f11ee143dbe947afe212de6906c2615063722845e6ff15d3f80c381"
+            "sha256:78721338810c87df825bdf3a9d1e010cb3cdd04dcb7898badd127b76fec174d2"
         ),
     }
 
