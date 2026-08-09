@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_and_commit_the_fresh_subtransaction_xmin_behavior_veto_provenance_without_running_the_next_behavior_attempt",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. The fresh r141 veto passed exact candidate f087bd30a1c64eb5c276302b3efc261df420c145; this step preserves its result before any next behavior attempt is opened through a separate preexecution receipt.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied one read-only independent veto only. GPT Sol independently owns acceptance, provenance, the next serial behavior runtime, cleanup and later closeout. No worker owns integration, runtime or protected refs.",
+    "active_plan_and_acceptance": "Review receipt file SHA-256 7726a890babf530f60ca11325e982edbf0944870150839c9bc7bba8ea540edde records decision pass, exact candidate f087bd30a1c64eb5c276302b3efc261df420c145, 525 passing tests, all twenty-three substantive challenges, 30-file Ruff check/format, clean unchanged pre/post HEAD and no Docker execution. Register revision 145 contains 170 incidents with zero open. Local 525-test, 30-file Ruff check/format and diff checks independently pass.",
+    "protected_evidence_boundaries": "Acceptance is limited to the subtransaction-xmin renderer repair, exact parse proof and six-parent behavior rebind. It does not accept the next behavior attempt in advance. Mutable attempt-029 behavior evidence and mutable parse evidence remain untracked and unstaged. docs/branding and all unrelated untracked files remain untouched. No product or patient/protected data, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write authority, deployment, production, release, Pages or protected-ref action is opened.",
+    "git_refs_and_worktree": "Primary task branch remains at substantive candidate f087bd30a1c64eb5c276302b3efc261df420c145 before the explicit-path provenance commit. Review worktree r141 remains clean at that exact commit by passed preflight and postflight. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. The primary index is clean before staging only the named provenance files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "subtransaction_xmin_behavior_five_source_pre_verifier_acceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled the structured pass receipt, all 525 tests, twenty-three challenges and clean unchanged r141 postflight."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is active for verifier acceptance."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One fresh Gemini 3.6 Flash/high structured veto passed and its worktree remained clean."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
