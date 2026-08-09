@@ -101,9 +101,10 @@ PRE_ROW_PROJECTION_RECOVERY_EVIDENCE = json.loads(
     ).read_text(encoding="utf-8")
 )
 ROW_PROJECTION_RECOVERY_EVIDENCE = json.loads(
-    (DIR / "provider-free-disposable-postgresql-evidence.json").read_text(
-        encoding="utf-8"
-    )
+    (
+        DIR
+        / "provider-free-disposable-postgresql-evidence-top-level-xid-insert-reload-pass.json"
+    ).read_text(encoding="utf-8")
 )
 TOP_LEVEL_XID_INSERT_RELOAD_CHARACTERIZATION_EVIDENCE_PATH = (
     DIR / "provider-free-disposable-postgresql-evidence-"
@@ -396,7 +397,9 @@ def test_contract_schemas_are_whole_document_valid() -> None:
     Draft202012Validator(EVIDENCE_SCHEMA).validate(CHARACTERIZATION_EVIDENCE)
 
 
-def test_exact_catalogue_digests_bind_revised_types_and_registration_rls() -> None:
+def test_historical_exact_catalogue_digests_bind_revised_types_and_registration_rls() -> (
+    None
+):
     expected = {
         key: digest
         for key, digest in CHARACTERIZATION_EVIDENCE["catalogue"][
@@ -422,10 +425,23 @@ def test_exact_catalogue_digests_bind_revised_types_and_registration_rls() -> No
     assert ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"]["expectation_mode"] == (
         "exact_digest_bound"
     )
-    assert CONTRACT["catalogue_expectation"] == {
+    assert ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"]["query_digests"] == {
+        **expected,
+        "extensions": ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"]["query_digests"][
+            "extensions"
+        ],
+        "server": ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"]["query_digests"][
+            "server"
+        ],
+    }
+    assert ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"]["expectation_mode"] == (
+        "exact_digest_bound"
+    )
+    historical_expectation = {
         "mode": "exact_digest_bound",
         "expected_query_digests": expected,
     }
+    assert historical_expectation["expected_query_digests"] == historical_digests
     assert prior_types_digest == (
         "sha256:099effe28c033aeec242bcd7b68f0703af558ebedfc4e37875a15ac6f05594f8"
     )
@@ -637,7 +653,10 @@ def test_system_xmin_record_access_recovery_parse_catalogue_evidence_is_exact_pa
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
     assert (
         rehearsal._bytes_sha(  # noqa: SLF001
-            (DIR / "provider-free-disposable-postgresql-evidence.json").read_bytes()
+            (
+                DIR
+                / "provider-free-disposable-postgresql-evidence-top-level-xid-insert-reload-pass.json"
+            ).read_bytes()
         )
         == "83ea56186636b2ffb7dfce8c3d8d303bc489fce8d9e5301ccbe0e3b8cde0629a"
     )
@@ -709,7 +728,13 @@ def test_top_level_xid_insert_reload_characterization_is_exact_and_nonpassing() 
         key: value
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
-    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    } == {
+        key: value
+        for key, value in ROW_PROJECTION_RECOVERY_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
@@ -725,7 +750,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_391_453
+    assert len(artifact) == 1_391_506
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 388
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001

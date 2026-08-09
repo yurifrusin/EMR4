@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 130
+    assert register["register_revision"] == 131
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 156)
+        f"AER-{index:04d}" for index in range(1, 157)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 108
+    assert len(agent_incidents) == 109
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2027,13 +2027,29 @@ def test_aer_0155_preserves_rls_lock_visibility_repository_defect() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0156_rejects_repeated_unapproved_preexecution_event() -> None:
+    rows = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = rows["AER-0156"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert "continuation_event_missing_or_unapproved" in incident["observed_error"]
+    assert incident["recurrence_signature"] == (
+        "orchestrator.unapproved_continuation_event"
+    )
+    assert incident["related_incident_ids"] == []
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 155
+    assert report["incident_count"] == 156
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 108,
+        "agent_behavior": 109,
         "harness": 19,
         "repository": 20,
         "transport": 8,
@@ -2042,7 +2058,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         "command_scope_violation": 15,
         "evidence_misreport": 22,
         "harness_failure": 19,
-        "output_contract_violation": 45,
+        "output_contract_violation": 46,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
         "repository_defect": 20,
@@ -2050,7 +2066,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 39,
-        "canonical_unchanged": 94,
+        "canonical_unchanged": 95,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -2111,13 +2127,14 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "orchestrator.unapproved_continuation_event",
-            "incident_count": 5,
+            "incident_count": 6,
             "incident_ids": [
                 "AER-0013",
                 "AER-0023",
                 "AER-0113",
                 "AER-0149",
                 "AER-0152",
+                "AER-0156",
             ],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
@@ -2126,6 +2143,7 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
             "prevention_controls": [
                 "Before constructing any receipt, copy continuation_event verbatim from orchestration/harness_settings/orchestrator_requirements.yaml; descriptive lifecycle detail belongs in planned_action and source evidence, never in the enum field.",
                 "Before every orchestrator receipt, copy continuation_event from orchestration/harness_settings/orchestrator_requirements.yaml and put task-specific phase language only in planned_action; a revision_required receipt forbids runtime until a distinct corrected state passes.",
+                "Copy continuation_event from orchestration/harness_settings/orchestrator_requirements.yaml before drafting each runtime state; never infer an event label from a filename or planned action, especially after the same recurrence has already been recorded.",
                 "Every Ariadne receipt state must copy continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml before planned_action is drafted; any unapproved event produces immutable revision_required evidence and a distinct corrected state.",
                 "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml and preserve any fail-closed envelope before issuing a corrected distinct receipt.",
                 "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt.",

@@ -1,0 +1,15 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_one_newly_owned_networkless_postgresql_16_parse_catalogue_characterization_for_the_exact_rls_lock_visibility_inert_artifact_then_remove_the_exact_verified_container",
+  "reasons": [
+    "continuation_event_missing_or_unapproved"
+  ],
+  "rehydrated_from_receipt": false,
+  "rehydration_sources": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {},
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

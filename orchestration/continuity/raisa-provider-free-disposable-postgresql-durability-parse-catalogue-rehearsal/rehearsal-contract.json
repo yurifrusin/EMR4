@@ -2,13 +2,13 @@
   "schema_version": "emr4.disposable-postgresql-durability-rehearsal-contract.v1",
   "status": "accepted_for_bounded_implementation",
   "parent": {
-    "accepted_source_head": "c5d55b72441524d42b9724815dfa4c1a778ac73a",
+    "accepted_source_head": "3644c951f9b0a446d802ed31ef04c23f139cb0d7",
     "planning_baseline_head": "253230a25ab172b90bc5f44772670c7df89b3052",
     "accepted_plan_head": "c5f0960a240b7f162b1b34e1b09fb166d12fd42e",
     "artifact_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
     "manifest_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-    "artifact_sha256": "25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb",
-    "artifact_byte_count": 1391453,
+    "artifact_sha256": "28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800",
+    "artifact_byte_count": 1391506,
     "statement_count": 412,
     "postgresql_major": 16,
     "phase_count": 6
@@ -132,24 +132,8 @@
     "extensions"
   ],
   "catalogue_expectation": {
-    "mode": "exact_digest_bound",
-    "expected_query_digests": {
-      "application_relations": "sha256:09d7abdc942548e8f7743f77d025dc6ecab74f17ae8ef93e1920e6a290ce0500",
-      "columns": "sha256:d0cd2d7f4afb1daff162d37fd915a3ae6a59c8fd89b9654700eab40714173290",
-      "constraints": "sha256:f8405bbd7919c5d676dabadf807d087413191e262db35b8e353c1fc2d050404f",
-      "function_acl": "sha256:2124eb217e89781d329876100c320446be676c885cf8eeb41aeababd0409346d",
-      "functions": "sha256:2f8f1f94bff6fc497aadfc80f88236bfe2661629d0360ca375a2899b698dd6cd",
-      "indexes": "sha256:bf9960d578ec6c84e8b724d6375ec8ebecc6fce92b9b1f03fb64d78d91ff0aa3",
-      "policies": "sha256:7c847b9d0e153bb02101bc3704d33d72e8aefdf4cfc911e0b092149393cc1b37",
-      "relation_acl": "sha256:7cacd542f2a5d16e2a6b40cb537fb78aaa6f34eac56c207f91f8c84977a1d66e",
-      "relations": "sha256:2ce597e74361c8482530d4dc63a288de7302cab1e00dc816bac50567a37bacf6",
-      "rls": "sha256:ed39859c920b8a95925ae76bc1e1fb7922f366bde41ec626b4aa8733b18c2e37",
-      "roles": "sha256:e2219c1d27c48b6aadd344829067afdeb9ded5c87d5fd3ffd9e554b8c7eec208",
-      "schema": "sha256:643038903e79d2608b200362062a0d2ee42e4195df4d4c6d42964cb8484ae4a6",
-      "schema_acl": "sha256:63129f4571ab70a6191f118b6c752cc72c18d1dfbc6f654d5280e710b488aba2",
-      "triggers": "sha256:f8952068cbd262f70bcd8d040fbdf5596fcba8dcfedebf73e592d0f017e4d91a",
-      "types": "sha256:8ec5eddfcb4cd14d62f783bfcfeb02004204630510b8913ce769a1c49a2135af"
-    }
+    "mode": "characterization_only",
+    "expected_query_digests": {}
   },
   "evidence": {
     "output_path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",

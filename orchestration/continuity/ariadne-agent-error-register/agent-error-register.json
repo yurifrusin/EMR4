@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 130,
+  "register_revision": 131,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6095,6 +6095,48 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-rls-lock-visibility-recovery.md",
           "docs/security/raisa-context-fabric-durability-behavior-rls-lock-visibility-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-130.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0156",
+      "attempt_id": "raisa-context-fabric-rls-lock-visibility-parse-characterization-preexecution-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every local execution preflight must use one exact continuation_event admitted by the Ariadne requirements; the descriptive phase belongs in planned_action, not in a new event label.",
+      "observed_error": "The first RLS lock-visibility parse characterization preexecution state used descriptive continuation_event pre_execution. The deterministic preflight returned revision_required with continuation_event_missing_or_unapproved before Docker or PostgreSQL contact.",
+      "detection_method": "scripts/ariadne_orchestrator_preflight.py rejected the state, emitted no rehydration sources and set worker_dispatch_permitted false. Sol preserved the rejected pair and prepared a distinct v2 state using admitted pre_worker_dispatch with unchanged runtime boundaries.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-rls-lock-visibility-parse-characterization-preexecution-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-rls-lock-visibility-parse-characterization-preexecution-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-rls-lock-visibility-parse-characterization-preexecution-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-rls-lock-visibility-parse-characterization-preexecution-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-131.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unapproved_continuation_event",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed receipt remains immutable and authorizes no runtime. The distinct v2 state uses admitted pre_worker_dispatch while preserving the exact characterization action, five sources and every no-provider, no-product and exact-cleanup boundary.",
+        "prevention_control": "Copy continuation_event from orchestration/harness_settings/orchestrator_requirements.yaml before drafting each runtime state; never infer an event label from a filename or planned action, especially after the same recurrence has already been recorded.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-rls-lock-visibility-parse-characterization-preexecution-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-rls-lock-visibility-parse-characterization-preexecution-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-131.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

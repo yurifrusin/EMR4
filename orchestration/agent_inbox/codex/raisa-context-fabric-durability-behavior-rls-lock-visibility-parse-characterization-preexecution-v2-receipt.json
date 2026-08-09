@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_newly_owned_networkless_postgresql_16_parse_catalogue_characterization_for_the_exact_rls_lock_visibility_inert_artifact_then_remove_the_exact_verified_container",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The characterization contract SHA-256 is 5e44a7625995ed188b257af067d167c8cafe96622179c285a494fcce8312ae0e. It binds artifact source 3644c951f9b0a446d802ed31ef04c23f139cb0d7, exact artifact SHA-256 28dc21611c937cfa9d6db5bb58d571b1a267af02377294b16cef029a7e1e4800, 1391506 LF bytes, 412 statements, PostgreSQL 16 and the unchanged closed catalogue population. Characterization mode requires an empty expected-digest map and can return only nonpassing catalogue_characterization_required evidence. The full parse/plan test modules, schema validation, parent admission, hostile checks, Ruff and diff checks pass. The prior accepted exact pass evidence is preserved byte-for-byte as provider-free-disposable-postgresql-evidence-top-level-xid-insert-reload-pass.json with SHA-256 83ea56186636b2ffb7dfce8c3d8d303bc489fce8d9e5301ccbe0e3b8cde0629a.",
+    "current_authority_allocation": "GPT Sol alone owns the serial disposable PostgreSQL characterization, exact-ID cleanup, digest reconciliation and later exact pass. No worker or external verifier may start the database container. The codebase-health research subagent has completed read-only and no implementation worker is active.",
+    "git_refs_and_worktree": "Task HEAD before the explicit-path characterization-source commit is 3644c951f9b0a446d802ed31ef04c23f139cb0d7; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local, origin-tracking and remotely queried master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the parse rebind note, fixed harness, contract/schema, two focused tests, immutable prior-pass evidence and this preexecution pair are eligible; docs/branding and unrelated untracked files remain excluded by explicit-path staging.",
+    "live_handover_current_baton": "The active provider-free durability behavior rehearsal remains in bounded attempt-023 recovery. The exact inert artifact rebind is committed at 3644c951f9b0a446d802ed31ef04c23f139cb0d7. The next ordered dependency is a fresh parse/catalogue characterization followed by a separately exact-digest-bound pass before any behavior retry.",
+    "protected_evidence_boundaries": "The run uses only the exact already-local postgres:16-bookworm image with --pull=never, --network=none, no ports or mounts, tmpfs storage, authored-synthetic empty prerequisite shapes, fixed SQL and exact-ID cleanup. It invokes no function, trigger, policy behavior, application command or product route. Immutable behavior failures 001-023 and prior parse evidence remain preserved; mutable failed behavior evidence remains untracked and unstaged. No patient, clinical, product-derived, historical-PHI or protected data; provider; operational database; application/API/Diary wiring; watcher/listener/feed; command/write; deployment; production; release; Pages; or protected-ref movement opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
