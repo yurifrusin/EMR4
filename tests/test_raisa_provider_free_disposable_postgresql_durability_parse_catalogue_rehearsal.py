@@ -172,6 +172,15 @@ JSON_KEY_SET_ORDER_PASS_EVIDENCE_PATH = (
 JSON_KEY_SET_ORDER_PASS_EVIDENCE = json.loads(
     JSON_KEY_SET_ORDER_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-alias-lock-visibility-characterization.json"
+)
+ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE = json.loads(
+    ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_text(
+        encoding="utf-8"
+    )
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -961,7 +970,7 @@ def test_json_key_set_order_characterization_is_nonaccepting_and_exactly_cleaned
     assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
     assert evidence["catalogue"]["status"] == "characterized"
     assert characterized == UUID_MINIMUM_EXPECTED_DIGESTS
-    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert characterized == UUID_MINIMUM_EXPECTED_DIGESTS
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
@@ -1008,7 +1017,7 @@ def test_json_key_set_order_parse_catalogue_evidence_is_distinct_exact_pass() ->
         key: value
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
-    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    } == UUID_MINIMUM_EXPECTED_DIGESTS
     assert (
         evidence["catalogue"]["query_digests"]
         == (JSON_KEY_SET_ORDER_CHARACTERIZATION_EVIDENCE["catalogue"]["query_digests"])
@@ -1020,6 +1029,38 @@ def test_json_key_set_order_parse_catalogue_evidence_is_distinct_exact_pass() ->
         ),
         "removed": True,
         "status": "cleanup_verified",
+    }
+
+
+def test_alias_lock_visibility_characterization_is_nonaccepting_and_exact() -> None:
+    evidence = ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert rehearsal._bytes_sha(  # noqa: SLF001
+        ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+    ) == "32dee447d4c180799ad4afd3b038d715dde9cb6796997dbc3379ceec82f2001a"
+    assert evidence["attempt_id"] == "575003a3542e56595336dd59"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["kind_counts"]["policies"] == 45
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "f3ed6c479e09672673c598e1d7095a3bfece136271c1dae1925f3c1a98f4a748"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    previous = JSON_KEY_SET_ORDER_PASS_EVIDENCE["catalogue"]["query_digests"]
+    current = evidence["catalogue"]["query_digests"]
+    assert {
+        key: (previous[key], current[key])
+        for key in current
+        if previous[key] != current[key]
+    } == {
+        "policies": (
+            "sha256:3e3f043b4c3f103c8170805e0e0aff327c83916010dc0cef727665fa92c8ef03",
+            "sha256:51f697aeb94a50f432f6683c9e9c93412eee38853617a113c1ab020216a57168",
+        )
     }
     assert (
         evidence["cleanup"]["container_id"]
@@ -1211,9 +1252,9 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_391_670
+    assert len(artifact) == 1_392_201
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
-    assert len(manifest["ordered_nodes"]) == 388
+    assert len(manifest["ordered_nodes"]) == 389
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
     assert (  # noqa: SLF001
         rehearsal._canonical_sha(PREREQUISITE) == rehearsal.EXPECTED_PREREQUISITE_SHA256
@@ -1233,7 +1274,7 @@ def test_exact_catalogue_kind_population_is_frozen() -> None:
         "SUPPORT_FUNCTION": 1,
         "RLS_ENABLE": 18,
         "RLS_FORCE": 18,
-        "RLS_POLICY": 44,
+        "RLS_POLICY": 45,
         "TYPE_OWNER": 32,
         "RELATION_OWNER": 18,
         "ENTRY_POINT": 9,
@@ -1751,7 +1792,7 @@ def test_catalogue_projection_matches_every_frozen_population() -> None:
         "columns": 52,
         "constraints": 81,
         "indexes": 4,
-        "policies": 44,
+        "policies": 45,
         "functions": 24,
         "triggers": 14,
     }
