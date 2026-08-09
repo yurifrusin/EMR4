@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_top_level_xid_behavior_veto_provenance_and_closed_orchestration_incident_before_the_single_disposable_behavior_run",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the frozen twenty-scenario provider-free PostgreSQL behavior rehearsal. Candidate acae3131 passed its exact deterministic packet and one fresh independent veto; the next dependency is one new disposable behavior run after committing only its review and orchestration provenance.",
+    "current_authority_allocation": "GPT Sol owns this explicit-path task-branch commit and the later serial database execution. Gemini 3.6 Flash/high supplied only the accepted read-only veto. No native subagent, implementation worker, provider/product runtime or protected integration is active.",
+    "active_plan_and_acceptance": "The exact r107 receipt returned one schema-constrained pass at unchanged clean candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f after 404 tests, Ruff and diff checks. Sol accepted it through a passed five-source pre-verifier-acceptance receipt. AER-0153 preserves the rejected predispatch assignment envelope; its distinct v2 passed before the model call. Register revision 128 now contains 153 incidents and zero open incidents, and all 118 register tests, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "This commit contains only review packet/receipt/worktree checks, Ariadne receipt states, AER revision 128, its register/pattern/test update and this precommit pair. Mutable failed behavior evidence remains untracked and excluded. docs/branding and every unrelated untracked path remain unstaged. No database run, provider/product/patient/protected data, application/API/Diary change, migration, watcher/listener, command/write, deployment, release, Pages or protected ref is opened.",
+    "git_refs_and_worktree": "Primary is at source candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f with only the exact bounded provenance/AER files eligible for explicit staging. Review worktree r107 remains exact and clean at that source candidate. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_top_level_xid_behavior_review_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled the independent receipt, clean review postflight, AER-0153, 118 register tests and the exact explicit staging set."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The one fresh Gemini 3.6 Flash/high veto is complete, exact and consumed for source acceptance."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

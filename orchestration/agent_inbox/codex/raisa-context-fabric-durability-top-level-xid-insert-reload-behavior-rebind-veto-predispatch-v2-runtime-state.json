@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_veto_over_the_exact_top_level_xid_insert_reload_behavior_candidate_after_correcting_the_assignment_envelope",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the frozen provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Attempt 022 is immutable failed evidence; renderer 2.0.10, separate characterization and terminal parse proofs, accepted-source ledger and six-parent behavior rebind are committed. One independent veto is now the exact next dependency before any behavior runtime.",
+    "current_authority_allocation": "GPT Sol retains implementation, recovery, acceptance, database execution and Git ownership. Gemini 3.6 Flash/high through one fresh Antigravity project receives only a read-only exact-HEAD veto assignment in worktree r107. It receives no implementation, self-acceptance, integration, runtime, provider/product-data, deployment, production, release or protected-ref authority. No worker is predeclared active in this corrected receipt state.",
+    "active_plan_and_acceptance": "Candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f binds renderer 2.0.10's exact twenty-one targeted insert-or-reload lowerings, 412-statement and 1,391,453-LF-byte artifact SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb, terminal parse evidence SHA-256 83ea56186636b2ffb7dfce8c3d8d303bc489fce8d9e5301ccbe0e3b8cde0629a, behavior contract SHA-256 2fa4840da97439cbfe143be407a30de995244db2cfc5a69cfe54bb5580354358 and unchanged twenty-scenario digest 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3. All 404 exact deterministic tests, Ruff check, Ruff format check and diff checks pass.",
+    "protected_evidence_boundaries": "The verifier may inspect only the exact packet allowlist in the clean candidate. It may not inspect protected holdouts, historical Diary, docs/branding, patient/clinical/product-derived data or unrelated paths; edit; run Docker/PostgreSQL or runtime harnesses; call a product/provider; commit; push; deploy; release; rebuild Pages; or move refs. Immutable failures remain preserved and mutable failed behavior evidence remains untracked and unstaged in the primary worktree.",
+    "git_refs_and_worktree": "Read-only verifier worktree C:/Users/sarashera/EMR4-worktrees/r107 is on branch codex/review-context-fabric-top-level-xid-behavior-acae3131 at exact candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f and passed clean preflight with zero provider/model calls. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_top_level_xid_behavior_veto_predispatch_v2",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved the rejected assignment envelope, registered AER-0153 and retained the exact 404-test deterministic gate and clean r107 binding."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini 3.6 Flash/high remains eligible for one fresh read-only exact-candidate veto only after this corrected receipt passes."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

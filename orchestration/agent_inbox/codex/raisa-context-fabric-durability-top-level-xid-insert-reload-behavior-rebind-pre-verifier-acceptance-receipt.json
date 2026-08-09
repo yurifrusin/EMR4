@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "sol_accepts_the_single_fresh_gemini_36_flash_high_read_only_veto_after_exact_machine_reconciliation_and_opens_only_one_new_behavior_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The r107 receipt at SHA-256 4d9806284ef364471ce74b47865ff9fe5d71187988527a2ba56b91979d58d972 reports one schema-constrained terminal pass, exact candidate HEAD acae3131c0e583c8d4d344c9419f43bda9a82e9f before/after, dirty_after false, 404 tests passed, Ruff and diff checks passed, exact attempt-022 and parse-evidence hashes reconciled, all twenty-one insert/reload writes outside exception subtransactions, the top-level-XID fence unchanged, typed contracts unchanged, 412 statements, all twenty scenarios unchanged at 6/4/3/4/3 and canonical behavior SHA-256 2fa4840da97439cbfe143be407a30de995244db2cfc5a69cfe54bb5580354358. Sol independently confirmed exact HEAD, clean r107 postflight and protected refs after review.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied read-only review evidence only. GPT Sol retains sole verifier acceptance, runtime, cleanup, evidence, continuity and Git authority. No native subagent, implementation worker or provider/product runtime is active.",
+    "git_refs_and_worktree": "Review worktree r107 remains clean on codex/review-context-fabric-top-level-xid-behavior-acae3131 at exact HEAD acae3131c0e583c8d4d344c9419f43bda9a82e9f. Primary tracked candidate HEAD is the same with only bounded uncommitted review/AER orchestration files and preserved pre-existing untracked files. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active provider-free durability gate requires independent acceptance before a new behavior run. The complete top-level-XID insert/reload renderer correction, separate parse evidence and six-parent behavior rebind candidate now has one fresh terminal Gemini pass.",
+    "protected_evidence_boundaries": "Acceptance opens only eligibility for one newly owned, pull-never, networkless, fixed-fixture behavior attempt after a fresh preexecution receipt. No product/provider call, patient/clinical/product/protected data, application migration/runtime, watcher/listener/feed, operational credential/database, command/write, deployment, production, release, Pages or protected ref is opened. Mutable failed behavior evidence remains unstaged until successful replacement."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

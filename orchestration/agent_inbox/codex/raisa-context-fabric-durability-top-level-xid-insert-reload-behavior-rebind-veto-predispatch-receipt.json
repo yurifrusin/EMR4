@@ -1,0 +1,27 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_veto_over_the_exact_top_level_xid_insert_reload_behavior_candidate",
+  "reasons": [
+    "workspace_receipt_missing:gemini-36-flash-high-top-level-xid-behavior-veto-r107"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f binds renderer 2.0.10's exact twenty-one targeted insert-or-reload lowerings, 412-statement and 1,391,453-LF-byte artifact SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb, terminal parse evidence SHA-256 83ea56186636b2ffb7dfce8c3d8d303bc489fce8d9e5301ccbe0e3b8cde0629a, behavior contract SHA-256 2fa4840da97439cbfe143be407a30de995244db2cfc5a69cfe54bb5580354358 and unchanged twenty-scenario digest 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3. All 404 exact deterministic tests, Ruff check, Ruff format check and diff checks pass.",
+    "current_authority_allocation": "GPT Sol retains implementation, recovery, acceptance, database execution and Git ownership. Gemini 3.6 Flash/high through one fresh Antigravity project receives only a read-only exact-HEAD veto assignment in worktree r107. It receives no implementation, self-acceptance, integration, runtime, provider/product-data, deployment, production, release or protected-ref authority.",
+    "git_refs_and_worktree": "Read-only verifier worktree C:/Users/sarashera/EMR4-worktrees/r107 is on branch codex/review-context-fabric-top-level-xid-behavior-acae3131 at exact candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f and passed clean preflight with zero provider/model calls. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active baton remains the frozen provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Attempt 022 is immutable failed evidence; renderer 2.0.10, separate characterization and terminal parse proofs, accepted-source ledger and six-parent behavior rebind are committed. One independent veto is now the exact next dependency before any behavior runtime.",
+    "protected_evidence_boundaries": "The verifier may inspect only the exact packet allowlist in the clean candidate. It may not inspect protected holdouts, historical Diary, docs/branding, patient/clinical/product-derived data or unrelated paths; edit; run Docker/PostgreSQL or runtime harnesses; call a product/provider; commit; push; deploy; release; rebuild Pages; or move refs. Immutable failures remain preserved and mutable failed behavior evidence remains untracked and unstaged in the primary worktree."
+  },
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

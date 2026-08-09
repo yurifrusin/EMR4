@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 127,
+  "register_revision": 128,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -5964,6 +5964,48 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-parse-characterization-preexecution-v2-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-parse-characterization-preexecution-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-127.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0153",
+      "attempt_id": "raisa-context-fabric-top-level-xid-behavior-veto-predispatch-001",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A pre-worker-dispatch runtime state may declare an assigned active agent only when the closed Ariadne workspace-receipt contract contains a matching admitted receipt; a separate verifier-worktree preflight path is evidence but not that assignment receipt.",
+      "observed_error": "The first top-level-XID behavior-veto predispatch state declared the Gemini verifier in active_instance_ids and assigned_agent_ids while workspace_receipts contained only the verifier worktree-preflight path. The deterministic orchestrator preflight returned revision_required with workspace_receipt_missing before any Antigravity or model call.",
+      "detection_method": "scripts/ariadne_orchestrator_preflight.py rejected the state and set worker_dispatch_permitted false. Sol preserved that state and receipt, classified the mistake as a recurrence of the worker-dispatch runtime-contract family, and created a distinct v2 state with no pre-declared assignment while retaining the exact five sources, packet and clean r107 evidence.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-insert-reload-behavior-rebind-veto-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-insert-reload-behavior-rebind-veto-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-insert-reload-behavior-rebind-veto-predispatch-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-insert-reload-behavior-rebind-veto-predispatch-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-128.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed receipt remains immutable and authorizes no verifier call. The distinct v2 state leaves worker_slots inactive and assigned_agent_ids empty, retains the exact clean-worktree evidence separately, and uses the passing receipt only as a precondition for the bounded Antigravity dispatch.",
+        "prevention_control": "Before orchestrator preflight, treat workspace_receipts as a schema-governed assignment structure rather than an arbitrary evidence-path list; never predeclare an external verifier active or assigned when only the separate read-only worktree preflight exists.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-insert-reload-behavior-rebind-veto-predispatch-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-top-level-xid-insert-reload-behavior-rebind-veto-predispatch-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-128.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

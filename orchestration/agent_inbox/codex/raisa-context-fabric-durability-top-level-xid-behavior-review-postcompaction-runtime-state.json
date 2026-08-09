@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_the_exact_renderer_210_behavior_candidate_deterministic_gate_then_dispatch_one_fresh_gemini_36_flash_high_veto_before_any_behavior_runtime",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL durability behavior/transaction rehearsal. Attempt 022 remains immutable failed evidence at BTR-E01 CF105 with zero admitted scenarios and verified cleanup. Renderer 2.0.10, its two-stage parse/catalogue proof and the six-parent behavior-contract rebind are committed; the current next action is completion of the deterministic exact-candidate gate followed by one fresh independent veto, not a behavior container run yet.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled deterministic candidate, recovery, explicit-path commits and later serial disposable behavior run. No native subagent or implementation worker is selected. Gemini 3.6 Flash/high through a fresh Antigravity project owns the mandatory read-only exact-HEAD veto after the deterministic packet passes; it receives no implementation, acceptance, integration, runtime or protected-ref authority.",
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty ordered scenarios with category counts 6/4/3/4/3, repository-authored opaque synthetic data, one newly owned networkless PostgreSQL 16 container per attempt and exact-ID cleanup. The candidate binds accepted parse source 2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb, parse evidence SHA-256 83ea56186636b2ffb7dfce8c3d8d303bc489fce8d9e5301ccbe0e3b8cde0629a, renderer source c5d55b72441524d42b9724815dfa4c1a778ac73a, inert SQL SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb, manifest SHA-256 d597e0df4c30bd7c5e3745345a34bee712632fb8803df7afe2762ad53fef6e57 and behavior contract SHA-256 2fa4840da97439cbfe143be407a30de995244db2cfc5a69cfe54bb5580354358. The scenario digest remains unchanged at 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3.",
+    "protected_evidence_boundaries": "Immutable behavior failures 001-022 and all prior parse failures remain preserved. The mutable provider-free-behavior-transaction-evidence.json still has failed-attempt-022 SHA-256 6ae6ef74c6a44c8f022f54f54bbc31d6a867a6f9953b7ee52ca34e68bf71f224, remains untracked and may not be staged until a successful behavior run replaces it. docs/branding and every unrelated untracked file remain untouched. No product, patient, clinical or protected data; provider; application/API/Diary wiring; migration; watcher/listener; command/write; deployment; production; release; Pages; or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at acae3131c0e583c8d4d344c9419f43bda9a82e9f and is 61 commits ahead of origin task branch 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state was clean before this receipt; the worktree retains user-owned untracked history. Staging remains explicit-path only and excludes docs/branding, prior receipt/state history and the mutable failed behavior evidence."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reread AGENTS.md, the active behavior and parse plans/designs/recoveries, the top-level-XID recovery controls, API Spine rules and current Git/evidence state."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected for this serial stateful database tranche."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.6 Flash/high review remains deferred until the deterministic candidate gate passes."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

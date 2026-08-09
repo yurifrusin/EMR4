@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_top_level_xid_behavior_veto_provenance_and_closed_orchestration_incident_before_the_single_disposable_behavior_run",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact r107 receipt returned one schema-constrained pass at unchanged clean candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f after 404 tests, Ruff and diff checks. Sol accepted it through a passed five-source pre-verifier-acceptance receipt. AER-0153 preserves the rejected predispatch assignment envelope; its distinct v2 passed before the model call. Register revision 128 now contains 153 incidents and zero open incidents, and all 118 register tests, Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns this explicit-path task-branch commit and the later serial database execution. Gemini 3.6 Flash/high supplied only the accepted read-only veto. No native subagent, implementation worker, provider/product runtime or protected integration is active.",
+    "git_refs_and_worktree": "Primary is at source candidate acae3131c0e583c8d4d344c9419f43bda9a82e9f with only the exact bounded provenance/AER files eligible for explicit staging. Review worktree r107 remains exact and clean at that source candidate. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active baton remains the frozen twenty-scenario provider-free PostgreSQL behavior rehearsal. Candidate acae3131 passed its exact deterministic packet and one fresh independent veto; the next dependency is one new disposable behavior run after committing only its review and orchestration provenance.",
+    "protected_evidence_boundaries": "This commit contains only review packet/receipt/worktree checks, Ariadne receipt states, AER revision 128, its register/pattern/test update and this precommit pair. Mutable failed behavior evidence remains untracked and excluded. docs/branding and every unrelated untracked path remain unstaged. No database run, provider/product/patient/protected data, application/API/Diary change, migration, watcher/listener, command/write, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
