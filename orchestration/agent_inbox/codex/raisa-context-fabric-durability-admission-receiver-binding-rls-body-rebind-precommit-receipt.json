@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_unchanged_typed_body_rebound_to_the_repaired_structural_parent_then_regenerate_and_recognize_the_inert_sql_artifact_before_fresh_postgresql_parse_catalogue_proof",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The body builder and validator now bind structural digest sha256:ff64b568d65d243ad5bb3dd8159063f47732b0b360efcc12f58d3b28ceb00d9a. Regeneration produced body digest sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e and changed only parent_binding plus the canonical body digest. Focused body, normative-closure, plan and structural packets pass. Four separately run historical continuity assertions remain visibly stale at old programme revisions and are not rewritten by this rebind.",
+    "current_authority_allocation": "GPT Sol owns the serial typed-body rebind, inert-artifact regeneration, deterministic proof, disposable parse/catalogue characterization and exact reproduction, behavior rebind and recovery. Gemini 3.6 Flash/high remains independent veto only after the complete repaired exact-HEAD candidate. No provider call is currently eligible.",
+    "git_refs_and_worktree": "Task HEAD is a1a4a619222297b36fa6894a5cf5f12a179af48c. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602, and origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Only the body builder/validator, regenerated body contract/schema, plan test, parent-rebind note and this precommit pair are candidates for explicit staging. All unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. Attempt 031's admission binding-RLS diagnosis and exact two-owner parent repair are committed at a1a4a619222297b36fa6894a5cf5f12a179af48c. The next safe action is the deterministic descendant rebind; database execution remains closed.",
+    "protected_evidence_boundaries": "All body programs, operands, effects, roles, grants, commands and scenarios remain unchanged. Preserve all untracked files; never inspect or stage docs/branding; stage exact paths only. Mutable accepted parse and behavior evidence remain byte-restored and unstaged. No applied migration, operational database, watcher/feed, product/patient data, provider call, application wiring, deployment, production, release, Pages or protected-ref movement is authorized."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
