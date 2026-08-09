@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_the_corrected_exact_head_gemini_veto_then_run_the_frozen_twenty_scenario_behavior_transaction_rehearsal_once",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after restoration. The active task remains the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction sequence on codex/ariadne-bernie-davida-parallel-seam. The accepted future Agent Execution Surface and Containment Gate remains placed after this durability sequence and before any real-product-read or executable occupied Bureau descendant; it does not delay this networkless database-only proof.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial behavior runtime, evidence-backed diagnosis, exact cleanup and acceptance. Gemini 3.6 Flash/high through one fresh Antigravity project in the exact clean r106 worktree owns only the required independent veto after deterministic admission. No native subagent or implementation worker is selected, and no external reviewer receives runtime, integration, baton or protected-ref authority.",
+    "active_plan_and_acceptance": "The accepted behavior/transaction plan freezes exactly twenty ordered authored-synthetic scenarios with category counts 6/4/3/4/3 and no weakening. Accepted runtime source 579175e875fd34958e7bbe84e8aaa45c38e0478f binds renderer 2.0.9 canonical inert SQL SHA-256 42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112 at 1,403,578 LF bytes and 412 statements. The rebound behavior contract canonical SHA-256 is 8423c0b3f8ff47d4700b8cc42c3e313a756ecf86b7a6b6f2359e39be75ef3198 and its scenario-array canonical SHA-256 remains 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3. The first Gemini review was rejected because it mislabeled current failed run sequence 021 as attempt 016; AER-0147 and AER-0148 are closed at exact candidate HEAD 3a0185a2c2336926fb3cba4b164da8930c644457. The next admissible action is one corrected exact-HEAD independent veto, followed by one behavior run only if that veto passes.",
+    "protected_evidence_boundaries": "Only one newly owned local postgres:16-bookworm container may be used with --pull=never, --network=none, zero ports and mounts, tmpfs-only storage, closed authored-synthetic fixtures, minimized evidence and exact-ID cleanup. Failed run sequence 021 and its immutable evidence remain preserved; mutable provider-free-behavior-transaction-evidence.json at SHA-256 5c744ef559e438c7fc7de32ff26ea845a95f0d207363bd9bf60c10a718968ff2 must remain unstaged until a successful accepted run replaces it. No protected holdout, historical PHI, patient/clinical/product-derived data, provider call, operational database or credential, application/API/Diary wiring, watcher/listener, command/write, deployment, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "HEAD and local task ref are 3a0185a2c2336926fb3cba4b164da8930c644457; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current are aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Fresh verifier worktree C:/Users/sarashera/EMR4-worktrees/r106 is clean at the exact HEAD on codex/review-context-fabric-system-xmin-record-access-behavior-3a0185a. Numerous unrelated untracked receipts/evidence and user-owned docs/branding remain preserved; explicit-path staging only applies and mutable failed behavior evidence is excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_AGENTS_and_active_behavior_and_containment_plan_rehydration_after_restoration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reread the complete live handover, active behavior plan, design, threat delta, accepted parse source, future containment plan and its threat delta, then verified exact refs and the clean r106 worktree."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this serial runtime."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The corrected Gemini review is pending deterministic packet admission."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation worker is selected."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is active."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

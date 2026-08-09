@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "sol_accepts_the_distinct_fresh_corrected_gemini_veto_after_exact_run_021_packet_candidate_receipt_and_postflight_reconciliation_and_opens_only_run_sequence_022",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability behavior gate required an admissible independent veto before one new attempt. The first review remains rejected; one distinct fresh corrected veto now has a clean schema-constrained terminal pass and correctly distinguishes current failed run 021 from historical run 016 and future run 022.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied read-only review evidence only. GPT Sol retains sole verifier acceptance, database rehearsal, cleanup, continuity and task-branch authority. No native subagent, worker or product/provider runtime is active.",
+    "active_plan_and_acceptance": "The r106 receipt at SHA-256 c218e34adc7bf81bb02a7d13d30633366e4abf350756a954f0e2d0a5a288edfe reports terminal pass at exact unchanged HEAD 3a0185a2c2336926fb3cba4b164da8930c644457, dirty_after false, 186/186 focused tests, Ruff and diff checks passed, accepted parse source 579175e875fd34958e7bbe84e8aaa45c38e0478f, contract SHA-256 8423c0b3f8ff47d4700b8cc42c3e313a756ecf86b7a6b6f2359e39be75ef3198, unchanged scenario-array SHA-256 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3, exact twenty-scenario order and 6/4/3/4/3 category counts. It independently verified current failed run 021, internal attempt_id 7857ea2806e31ea385df385a, evidence SHA-256 5c744ef559e438c7fc7de32ff26ea845a95f0d207363bd9bf60c10a718968ff2, SQLSTATE 42703, zero admitted scenarios and complete cleanup. Sol independently confirmed the packet SHA-256 b031b9aac46d6f07b90a6438f14e42bbda31ba743d5763f259b6e43aee2c7744, exact HEAD, clean worktree and protected refs.",
+    "protected_evidence_boundaries": "Acceptance opens only eligibility for run sequence 022 in one new owned pull-never networkless fixed-fixture behavior container after a fresh preexecution receipt. No product/provider call, patient/clinical/product/protected data, operational database/credential, application migration/runtime, watcher/listener/feed, deployment, production, release, Pages or protected ref is opened. Mutable failed run-021 evidence remains unstaged until a successful accepted run replaces it.",
+    "git_refs_and_worktree": "r106 remains clean on codex/review-context-fabric-system-xmin-record-access-behavior-3a0185a at exact 3a0185a2c2336926fb3cba4b164da8930c644457. Primary is at the same HEAD with only bounded corrected-review orchestration files and preserved pre-existing untracked files. Local and origin master plus handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "five_source_rehydration_and_corrected_verifier_run_021_packet_candidate_receipt_postflight_reconciliation", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled the corrected receipt, run-021 identity, packet, candidate, HEAD, cleanliness, test total and protected refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One distinct fresh Gemini 3.6 Flash/high receipt returned an admissible schema-constrained terminal pass with current failed run 021 exact."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek transport is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

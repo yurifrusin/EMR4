@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_corrected_veto_with_current_failed_run_021_bound",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:449bb5416877c8f7fd959c69932410ef2e82d338f13d35b799bc9181684967df",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Corrected review packet SHA-256 b031b9aac46d6f07b90a6438f14e42bbda31ba743d5763f259b6e43aee2c7744 binds exact candidate 3a0185a2c2336926fb3cba4b164da8930c644457, accepted parent 579175e875fd34958e7bbe84e8aaa45c38e0478f, contract SHA-256 8423c0b3f8ff47d4700b8cc42c3e313a756ecf86b7a6b6f2359e39be75ef3198, unchanged scenario-array SHA-256 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3, exact order/coverage, immutable failed run-021 evidence SHA-256 5c744ef559e438c7fc7de32ff26ea845a95f0d207363bd9bf60c10a718968ff2 and closed AER-0147/AER-0148. The deterministic packet passes 73 behavior/plan plus 113 agent-error tests, 186 total, with Ruff and diff checks passing.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only independent review authority only. GPT Sol retains runtime, acceptance, recovery, integration, baton and protected-ref authority. No implementation worker or native subagent is selected.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r106 is clean at exact HEAD 3a0185a2c2336926fb3cba4b164da8930c644457 on codex/review-context-fabric-system-xmin-record-access-behavior-3a0185a; its separate verifier preflight passed. Primary tracked files are clean at the same HEAD with only preserved untracked material. Local and origin master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The frozen twenty-scenario provider-free behavior contract remains rebound at exact candidate 3a0185a2c2336926fb3cba4b164da8930c644457 to the accepted renderer 2.0.9 parse source. The first Gemini pass has no acceptance authority because it mislabeled current protected failed run 021 as attempt 016. One distinct fresh exact-HEAD corrected veto is mandatory before behavior runtime, and no runtime or candidate change has occurred.",
+    "protected_evidence_boundaries": "Review is limited to the exact allowlisted repository files and diff, with no protected holdout, PHI, patient/product data, credentials, Docker/PostgreSQL, runtime, provider/product call beyond the verifier itself, write, deployment, release, Pages or ref movement. The verifier cannot open the rejected verifier narrative, repair or accept its own work, and must leave the worktree unchanged. The mutable failed behavior evidence remains outside the review worktree and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
