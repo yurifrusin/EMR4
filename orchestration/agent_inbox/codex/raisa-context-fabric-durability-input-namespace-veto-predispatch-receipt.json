@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_independent_read_only_veto_no_edit_runtime_integration_or_acceptance_authority",
+  "continuation_event": "pre_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_3_6_flash_high_antigravity_project_to_exact_clean_43e0bfe0_worktree_for_independent_read_only_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0282c6c48b23d2882adbff04fa4d19da6dcf170bde2aff2f4fc86cf41745d13c",
+  "source_evidence": {
+    "live_handover_current_baton": "The provider-free durability recovery is complete through exact diagnosis, renderer repair, distinct catalogue characterization/reproduction and unchanged six-parent behavior rebind at candidate 43e0bfe0. Independent veto is the next safe dependency-satisfied action.",
+    "current_authority_allocation": "One fresh Gemini 3.6 Flash/high Antigravity project owns read-only independent veto only. GPT Sol retains acceptance and all execution authority. No earlier verdict is inherited.",
+    "active_plan_and_acceptance": "Exact candidate packet collected and passed 563 tests across 21 test files, Ruff check and format over 36 files, and both diff checks. Scenario population remains twenty in 6/4/3/4/3 with SHA-256 eec93b0d. No behavior run follows attempt 032.",
+    "protected_evidence_boundaries": "Verifier may read exact committed candidate and run the static packet only. It may not edit, format, commit, push, start Docker/PostgreSQL, run parse or behavior harnesses, inspect docs/branding, access patient/product/protected data, contact any other provider/product surface, deploy or move refs.",
+    "git_refs_and_worktree": "Review worktree r145 is clean at exact 43e0bfe05f30cac0248ab55a03351ed39cf8bdf5 on codex/review-context-fabric-input-namespace-43e0. Main task tracked state is clean. Local/origin master and handoff/current remain protected exact 2e34bdad; origin task remains 324d37f0."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

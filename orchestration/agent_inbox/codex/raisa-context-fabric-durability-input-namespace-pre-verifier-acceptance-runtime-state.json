@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_acceptance",
+  "planned_action": "accept_one_schema_valid_clean_exact_head_gemini_3_6_flash_high_pass_for_candidate_43e0bfe0_and_make_behavior_attempt_033_eligible_but_not_yet_executed",
+  "source_evidence": {
+    "live_handover_current_baton": "The active durability recovery candidate is exact 43e0bfe0. One fresh Gemini 3.6 Flash/high verifier returned a schema-valid pass after all required challenges and the exact packet; no verdict is inherited.",
+    "current_authority_allocation": "Gemini's authority ended at read-only veto. GPT Sol independently reconciles and accepts or rejects its receipt, and alone may later execute the fixed behavior harness under the standing planned-gate authority.",
+    "active_plan_and_acceptance": "Review receipt SHA-256 6ab27019 reports exact 563 passed, 36 Ruff-clean/formatted files, clean diff checks, exact head before/after 43e0bfe0 and dirty_after false. Every reported count and evidence identity matches the immutable packet.",
+    "protected_evidence_boundaries": "Acceptance proves only the bounded provider-free authored-synthetic candidate is eligible for the next fixed behavior attempt. It grants no patient/product data, operational database, watcher/feed, application wiring, command, deployment, Pages, release or protected-ref authority.",
+    "git_refs_and_worktree": "Review worktree r145 is independently postflight-clean at exact 43e0bfe0. Main tracked state is unchanged except untracked review evidence. Protected local/origin master and handoff/current remain exact 2e34bdad; origin task remains 324d37f0."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "input_namespace_veto_acceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_gemini_verifier",
+      "method": "schema_constrained_receipt_reconciliation",
+      "reachability": "reachable",
+      "evidence": [
+        "One pass, exact head stable, dirty_after false, 563 tests and 36 Ruff files exactly reconcile."
+      ]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-input-namespace-review-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}
