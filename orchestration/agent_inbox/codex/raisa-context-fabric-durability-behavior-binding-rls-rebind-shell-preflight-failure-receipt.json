@@ -1,0 +1,40 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-behavior-binding-rls-shell-preflight-failure.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-behavior-binding-rls-rebind-shell-inspection-001",
+  "status": "failed_closed_then_corrected",
+  "failed_read_only_probes": [
+    {
+      "reason": "bash_command_chaining_used_under_windows_powershell",
+      "occurrences": 2,
+      "exit_before_git_execution": true
+    },
+    {
+      "reason": "disabled_system_python_alias_used_before_repository_venv_resolution",
+      "occurrences": 1,
+      "exit_before_python_execution": true
+    },
+    {
+      "reason": "windows_invalid_wildcard_path_operands_passed_to_rg",
+      "occurrences": 1,
+      "exit_before_content_match": true
+    },
+    {
+      "reason": "guessed_receipt_path_did_not_exist",
+      "occurrences": 1,
+      "exit_before_file_read": true
+    }
+  ],
+  "candidate_or_evidence_changed_by_failures": false,
+  "docker_or_database_contact": false,
+  "provider_contact": false,
+  "protected_evidence_opened": false,
+  "correction": {
+    "powershell_commands_separated": true,
+    "exact_paths_resolved_before_read": true,
+    "rg_real_roots_with_g_filters": true,
+    "python_executable": ".venv\\Scripts\\python.exe",
+    "intended_checks_completed": true
+  },
+  "authority_boundary": "repository_local_read_only_inspection_and_error_registration_only"
+}

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 151
+    assert register["register_revision"] == 153
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 178)
+        f"AER-{index:04d}" for index in range(1, 180)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 114
+    assert len(agent_incidents) == 115
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2413,30 +2413,63 @@ def test_aer_0177_reconciles_parse_parent_expectations() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0178_corrects_windows_shell_preflight_omission() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0178"
+    ]
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.windows_shell_runtime_and_path_preflight_omitted"
+    )
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0179_reconciles_final_register_population() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0179"
+    ]
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["recurrence_signature"] == (
+        "repository.agent_error_register_exact_count_update_incomplete"
+    )
+    assert incident["related_incident_ids"] == []
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 177
+    assert report["incident_count"] == 179
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 114,
+        "agent_behavior": 115,
         "harness": 21,
-        "repository": 34,
+        "repository": 35,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 17,
+        "command_scope_violation": 18,
         "evidence_misreport": 22,
         "harness_failure": 21,
         "output_contract_violation": 49,
         "read_only_violation": 3,
         "reasoning_claim_error": 23,
-        "repository_defect": 34,
+        "repository_defect": 35,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 53,
-        "canonical_unchanged": 102,
+        "accepted_candidate_changed": 54,
+        "canonical_unchanged": 103,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -2624,6 +2657,21 @@ def test_pattern_report_detects_recurring_control_signals() -> None:
                 "All Windows verifier worktrees use the next short rNN path by default; descriptive tranche identity belongs only in branch, packet and receipt metadata.",
                 "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
                 "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "repository.agent_error_register_exact_count_update_incomplete"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0175", "AER-0179"],
+            "origins": ["repository"],
+            "categories": ["repository_defect"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["emr4-ariadne-agent-error-register-acceptance"],
+            "prevention_controls": [
+                "Before regenerating the report after any future register edit, search the whole exact register test for every revision, ID-range, seed, origin, category, candidate-state and total-count literal; then run the entire register file as the only acceptance packet.",
+                "Every register edit must run the whole exact register test file after regenerating pattern-report.json; partial node selection cannot serve as final register acceptance.",
             ],
         },
         {

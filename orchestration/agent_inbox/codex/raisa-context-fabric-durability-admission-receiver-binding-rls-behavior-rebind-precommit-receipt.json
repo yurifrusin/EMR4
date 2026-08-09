@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_frozen_behavior_six_parent_rebind_and_closed_error_register_then_build_one_fresh_exact_head_gemini_veto_candidate_without_running_postgresql_behavior",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. Structural repair a1a4a619, body rebind c0673fc7, renderer 2.0.17 at 30ff6b01, exact parse reproduction f842c023 and accepted source ledger 2757f5a5 are sealed. The next dependency-satisfied action is the frozen behavior six-parent rebind commit and exact-HEAD independent veto packet.",
+    "current_authority_allocation": "GPT Sol owns explicit-path commit, deterministic packet construction and acceptance. Gemini 3.6 Flash/high may perform one fresh read-only exact-HEAD veto after commit. No implementer, subagent, provider or reviewer owns PostgreSQL runtime, product authority or acceptance.",
+    "active_plan_and_acceptance": "Behavior contract canonical SHA-256 is 678252f6e5bca28118e041880c675e25ca4a51be999ccddd5c121d91d01c477a. Its six parents bind accepted evidence f842c023, renderer 30ff6b01, structural a1a4a619 and body c0673fc7. All 20 scenarios, order, 6/4/3/4/3 counts and population SHA-256 eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19 are unchanged. The combined 229-test deterministic packet passes. Error register revision 153 contains 179 corrected incidents and zero open incidents.",
+    "protected_evidence_boundaries": "No protected holdout or branding content was opened, enumerated, staged or changed. Preserve every untracked file and stage only exact intended paths. Mutable behavior, accepted parse and parse-failure evidence remain unstaged at SHA-256 09907bf6, 97d1385c and 3bf66870. No migration application, operational database or credential, watcher/listener/feed, patient/clinical/product data, application/API/Diary wiring, command/write, behavior runtime, deployment, production, release, Pages or protected-ref movement is authorized by this commit.",
+    "git_refs_and_worktree": "Task HEAD is 2757f5a54d324747e4319f6d9853aac7a71015cf and origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are limited to the behavior rebind and error-register correction set; intended new files are the rebind note, AER revision notes, two failure receipts and this precommit state/receipt. Mutable protected evidence remains byte-restored and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

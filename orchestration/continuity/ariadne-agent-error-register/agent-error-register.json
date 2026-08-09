@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 151,
+  "register_revision": 153,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7070,6 +7070,84 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
           "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-receiver-binding-rls-rebind.md",
           "docs/ariadne-agent-error-correction-register-revision-151.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0178",
+      "attempt_id": "raisa-context-fabric-durability-behavior-binding-rls-rebind-shell-inspection-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-5.6-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_and_python_cli",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every local inspection command must be preflighted for the active PowerShell shell, known repository paths and the repository virtual-environment Python before invocation.",
+      "observed_error": "Five bounded read-only probes were malformed or unpreflighted: Bash && chaining was attempted twice under Windows PowerShell, system python resolved only to the disabled Store alias, rg received Windows-invalid wildcard path operands, and one guessed receipt path did not exist.",
+      "detection_method": "Each command failed immediately with a PowerShell parser, path-shape, executable-resolution or file-not-found error before changing the repository, invoking Docker, contacting a provider or opening protected evidence.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-binding-rls-rebind-shell-preflight-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-152.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_shell_runtime_and_path_preflight_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "All affected checks were rerun through separate PowerShell-safe commands, exact existing paths and .venv\\Scripts\\python.exe; the intended status, reference, source and canonical-digest evidence was then obtained.",
+        "prevention_control": "For the rest of this tranche, execute one PowerShell command per probe or use explicit parallel tool calls, resolve repository paths before Get-Content, pass rg a real directory plus -g filters, and invoke Python only through the verified repository virtual environment.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-binding-rls-rebind-shell-preflight-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-152.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0179",
+      "attempt_id": "raisa-context-fabric-durability-behavior-binding-rls-rebind-register-tests-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every incident-register revision must reconcile revision, ID range, seed, origin, category, candidate-state and total-count assertions before the whole exact register file is run.",
+      "observed_error": "After AER-0178 was added, three live exact assertions retained revision 151, 114 agent-behavior incidents and 102 canonical-unchanged candidates; after those were reconciled, two attempted conceptual cross-links to AER-0175 were rejected because related_incident_ids is reserved for same-attempt peers, and the first underspecified link patch targeted AER-0003 before exact incident-context correction.",
+      "detection_method": "The exact whole-file register packet bounded the first defect to three stale population expectations, the validator failed closed on both invalid cross-attempt linkage states before writing a replacement report, and an immediate scoped search exposed the incorrect AER-0003 link before validation or acceptance.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-binding-rls-register-count-drift-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-153.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "All exact register expectations are reconciled to final revision 153 and its 179-incident population, including the newly recurring AER-0175/AER-0179 control signal.",
+        "prevention_control": "Before regenerating the report after any future register edit, search the whole exact register test for every revision, ID-range, seed, origin, category, candidate-state and total-count literal; then run the entire register file as the only acceptance packet.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-binding-rls-register-count-drift-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-153.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

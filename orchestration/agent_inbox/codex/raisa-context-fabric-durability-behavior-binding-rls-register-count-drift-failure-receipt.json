@@ -1,0 +1,31 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-behavior-binding-rls-register-count-drift-failure.v1",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-durability-behavior-binding-rls-rebind-register-tests-001",
+  "status": "failed_closed_then_corrected",
+  "test_result": {
+    "passed": 226,
+    "failed": 3,
+    "failed_assertions": [
+      "register_revision",
+      "agent_behavior_seed_count",
+      "canonical_unchanged_candidate_count"
+    ]
+  },
+  "durability_behavior_test_failures": 0,
+  "candidate_or_evidence_runtime_changed": false,
+  "docker_or_database_contact": false,
+  "provider_contact": false,
+  "correction": {
+    "final_register_revision": 153,
+    "final_incident_count": 179,
+    "whole_exact_register_file_required": true,
+    "recurring_control_signal": [
+      "AER-0175",
+      "AER-0179"
+    ],
+    "cross_attempt_related_incident_linkage_omitted_by_schema": true,
+    "underspecified_patch_target_detected_and_corrected_before_validation": true
+  },
+  "authority_boundary": "repository_local_error_register_reconciliation_only"
+}

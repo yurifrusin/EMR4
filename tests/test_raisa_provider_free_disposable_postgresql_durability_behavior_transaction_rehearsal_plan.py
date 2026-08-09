@@ -78,6 +78,10 @@ SUPPORT_EXECUTE_GRANT_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
     "support-execute-grant-parent-rebind.md"
 )
+ADMISSION_RECEIVER_BINDING_RLS_REBIND = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
+    "admission-receiver-binding-rls-parent-rebind.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -111,33 +115,33 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-support-execute-grant-accepted-source.md",
-        "edc311f0471b7b2796ecc21527015e88981448d7",
-        "2111fd6896421f26fa5b96719102176c2899376ca66b5730f52e484e350a9e04",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-receiver-binding-rls-accepted-source.md",
+        "f842c023f4db16e8b0ffc381f653fb16e98280cc",
+        "19d45f59222b1bab0120f4c00d79f7845eec701703d0eaa181e0bfa1f1f26d8f",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "01da1ecf50b25a0086dcf977e0468f9f3ccbe12f",
-        "934237c4525bf193999039aa1ad00ca815081152d32a6105f3cf730310695461",
+        "30ff6b01a54c339e3045977cda909628841fe57e",
+        "1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "01da1ecf50b25a0086dcf977e0468f9f3ccbe12f",
-        "adca5f5af9ef86e572b22eb66ea8838d563b340e895b7026246fbd05c4fb5def",
+        "30ff6b01a54c339e3045977cda909628841fe57e",
+        "2042eb8055cc55cd7cb4396093a897b4df5f86c5a1910dbca677a241c2d7325b",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-        "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
-        "6b2ec35d7be7cd33f683173f5ac12ef4c95b0d1bbf05bccf50d10e74c9ca00bc",
+        "a1a4a619222297b36fa6894a5cf5f12a179af48c",
+        "5b5e3bc3108dc1105017f57ceade03c4bce33b898d7b71f0ede0640ce0bc83c7",
     ),
     "body_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-        "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
-        "b43ea059a3f424e268631228aa9606d30f1c9f082bc805e550788b01e7bd8e76",
+        "c0673fc755457756719959dcfc6aea04531d6627",
+        "01f92356def997b96adb3115cfb4b82afc29a27e72cab5823c81a6b5f2e2a7f1",
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "edc311f0471b7b2796ecc21527015e88981448d7",
+        "f842c023f4db16e8b0ffc381f653fb16e98280cc",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
@@ -520,6 +524,39 @@ def test_support_execute_grant_rebind_preserves_twenty_scenarios_and_closure() -
         "01da1ecf50b25a0086dcf977e0468f9f3ccbe12f",
         "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
         "88650862f2dc654813d3b6c9832a7691e5b630187286f129eb1e8bd102d683bf",
+        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19",
+        "6/4/3/4/3",
+        "gemini 3.6 flash/high",
+        "docs/branding/",
+        "no applied migration",
+        "product or patient data",
+    ):
+        assert required in combined
+    contract = _contract()
+    canonical = json.dumps(
+        {
+            "scenario_order": contract["scenario_order"],
+            "scenarios": contract["scenarios"],
+            "category_coverage": contract["category_coverage"],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    assert hashlib.sha256(canonical).hexdigest() == (
+        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+    )
+
+
+def test_admission_receiver_binding_rls_rebind_preserves_scenarios_and_closure() -> None:
+    combined = _flat(ADMISSION_RECEIVER_BINDING_RLS_REBIND, PLAN, DESIGN).lower()
+
+    for required in (
+        "deterministic six-parent rebind",
+        "f842c023f4db16e8b0ffc381f653fb16e98280cc",
+        "30ff6b01a54c339e3045977cda909628841fe57e",
+        "a1a4a619222297b36fa6894a5cf5f12a179af48c",
+        "c0673fc755457756719959dcfc6aea04531d6627",
         "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19",
         "6/4/3/4/3",
         "gemini 3.6 flash/high",

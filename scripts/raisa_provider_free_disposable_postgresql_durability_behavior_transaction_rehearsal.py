@@ -51,7 +51,7 @@ EXPECTED_CONTRACT_PATH = (
     "behavior-transaction-rehearsal-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:88650862f2dc654813d3b6c9832a7691e5b630187286f129eb1e8bd102d683bf"
+    "sha256:678252f6e5bca28118e041880c675e25ca4a51be999ccddd5c121d91d01c477a"
 )
 PASS_RESULT = (
     "raisa_provider_free_disposable_postgresql_durability_"
