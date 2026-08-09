@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_clean_checkout_test_repair_independent_veto_provenance_and_error_register_revision_on_the_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The mutable-evidence assertion is now conditional on file existence while immutable failure and diagnosis evidence remain mandatory. AER-0191 and revision 165 preserve the veto. Builder and inert checks, the complete 321-test parent packet and nine-file Ruff lint/format all pass; canonical body and SQL bytes are unchanged from 09436890.",
+    "current_authority_allocation": "GPT Sol owns the narrow test repair, veto preservation, explicit-path commit and fresh descendant review. Gemini 3.6 Flash/high completed its first read-only lease and has no continuing authority. No worker or runtime owns this commit.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at 094368904acb79b214c68e8521f789709a832db6 before this narrow follow-up commit. First review worktree r147 remained clean at that exact rejected candidate. Local/origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability parent recovery. Candidate 09436890 repaired the database body but its first clean-worktree independent review correctly returned revision_required because one new diagnosis test required an intentionally untracked mutable evidence file.",
+    "protected_evidence_boundaries": "Commit only the named review packet, preflight, receipts, AER revision and guarded test repair. Preserve every unrelated untracked file and never stage docs/branding. No Docker/PostgreSQL, new provider call, product/patient/clinical data, watcher/feed, operational database, app/API/Diary command, deployment, Pages, production, release or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

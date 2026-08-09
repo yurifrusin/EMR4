@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_exactly_one_read_only_gemini_3_6_flash_high_independent_veto_for_committed_admission_row_shape_parent_recovery_09436890",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior proof. Attempt 034 failed closed with SQLSTATE 23514. Exact parent recovery is committed at 09436890 and must receive an independent veto before any disposable parse or behavior database run.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives one read-only independent verifier lease in clean worktree r147. GPT Sol retains acceptance, commit, runtime and cleanup authority. The verifier may not edit, run Docker, contact product surfaces or move refs.",
+    "active_plan_and_acceptance": "Candidate 09436890 repairs disjoint PRIMARY/CONFLICT admission row shapes and typed-null winner comparisons. Canonical body SHA-256 d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3, inert SQL SHA-256 ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb, builder/inert checks, 320 tests, nine-file Ruff and diff checks pass. Review packet names thirteen mandatory challenges and exact commands.",
+    "protected_evidence_boundaries": "One exact Gemini 3.6 Flash/high review call only, read-only and bound to clean r147 at 09436890. No Docker/PostgreSQL, provider fallback, patient/product/clinical or protected data, branding inspection, watcher/feed, operational database, application/API/Diary command, deployment, Pages, production, release or protected-ref movement is permitted.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r147 is clean on codex/review-context-fabric-admission-row-shape-09436890 at exact 094368904acb79b214c68e8521f789709a832db6. Main task branch is the same HEAD with only new unstaged review-provenance files. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "admission_row_shape_parent_recovery_pre_verifier_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol retains terminal acceptance and rejects any verifier boundary drift."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected; this is an external independent verifier lease."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Antigravity Gemini 3.6 Flash/high transport is available for one exact worktree-bound call."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    },
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Docker and PostgreSQL are explicitly closed during independent review."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

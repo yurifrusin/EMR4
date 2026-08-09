@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 164,
+  "register_revision": 165,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7633,6 +7633,47 @@
         "prevention_control": "Run each required deterministic gate in its own command or explicitly stop on the first nonzero exit; package modules must use python -m unless their script entry point is proven standalone.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-164.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0191",
+      "attempt_id": "raisa-context-fabric-admission-row-shape-parent-review-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-clean-checkout-diagnosis-test",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Every committed deterministic test must pass from a clean checkout and must not require an untracked mutable runtime-evidence file to exist.",
+      "observed_error": "The first exact-head independent review passed the database repair challenges but its clean worktree ran 319 of 320 tests because the new failure-034 diagnosis test unconditionally read the intentionally untracked mutable behavior evidence file.",
+      "detection_method": "Gemini 3.6 Flash/high executed the exact deterministic packet in clean review worktree r147 and returned revision_required with the FileNotFoundError coordinate and the matching guarded pattern from the failure-033 test.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-admission-row-shape-parent-recovery-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-165.md",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_034_admission_row_shape_diagnosis.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.clean_checkout_test_requires_untracked_mutable_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The diagnosis test now verifies the protected mutable evidence only when that intentionally untracked file exists; immutable failure and diagnosis evidence remain mandatory in every checkout. The full packet and a fresh clean descendant review remain required.",
+        "prevention_control": "Tests for immutable committed evidence must treat deliberately untracked mutable runtime evidence as optional and must be exercised in a clean verifier checkout before acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-admission-row-shape-parent-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-165.md",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_034_admission_row_shape_diagnosis.py",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

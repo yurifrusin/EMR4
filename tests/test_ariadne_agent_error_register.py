@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 164
+    assert register["register_revision"] == 165
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 191)
+        f"AER-{index:04d}" for index in range(1, 192)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2491,7 +2491,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 190
+    assert report["incident_count"] == 191
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2507,13 +2507,13 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 164
-    assert report["incident_count"] == 190
+    assert report["register_revision"] == 165
+    assert report["incident_count"] == 191
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 120,
         "harness": 21,
-        "repository": 41,
+        "repository": 42,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
@@ -2523,11 +2523,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "output_contract_violation": 51,
         "read_only_violation": 3,
         "reasoning_claim_error": 24,
-        "repository_defect": 41,
+        "repository_defect": 42,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 60,
+        "accepted_candidate_changed": 61,
         "canonical_unchanged": 108,
         "untrusted_partial_worktree": 22,
     }
@@ -3199,6 +3199,33 @@ def test_aer_0190_preserves_masked_builder_failure_and_independent_rerun() -> No
     assert "ModuleNotFoundError" in incident["observed_error"]
     assert "python -m" in incident["correction"]["action"]
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0191_preserves_clean_checkout_test_veto_and_guarded_repair() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0191"]
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "raisa-context-fabric-durability-admission-row-shape-parent-recovery-review-receipt.json"
+    )
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["stage"] == "independent_review"
+    assert incident["recurrence_signature"] == (
+        "repository.clean_checkout_test_requires_untracked_mutable_evidence"
+    )
+    assert receipt["decision"] == "revision_required"
+    assert receipt["head_before"] == "094368904acb79b214c68e8521f789709a832db6"
+    assert receipt["head_after"] == receipt["head_before"]
+    assert receipt["dirty_after"] is False
+    assert "319 passed, 1 failed" in receipt["result"]
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
     assert incident["status"] == "corrected"
 
 

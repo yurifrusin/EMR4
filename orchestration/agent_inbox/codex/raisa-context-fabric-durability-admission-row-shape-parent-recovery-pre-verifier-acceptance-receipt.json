@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_exactly_one_read_only_gemini_3_6_flash_high_independent_veto_for_committed_admission_row_shape_parent_recovery_09436890",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 09436890 repairs disjoint PRIMARY/CONFLICT admission row shapes and typed-null winner comparisons. Canonical body SHA-256 d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3, inert SQL SHA-256 ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb, builder/inert checks, 320 tests, nine-file Ruff and diff checks pass. Review packet names thirteen mandatory challenges and exact commands.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives one read-only independent verifier lease in clean worktree r147. GPT Sol retains acceptance, commit, runtime and cleanup authority. The verifier may not edit, run Docker, contact product surfaces or move refs.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r147 is clean on codex/review-context-fabric-admission-row-shape-09436890 at exact 094368904acb79b214c68e8521f789709a832db6. Main task branch is the same HEAD with only new unstaged review-provenance files. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior proof. Attempt 034 failed closed with SQLSTATE 23514. Exact parent recovery is committed at 09436890 and must receive an independent veto before any disposable parse or behavior database run.",
+    "protected_evidence_boundaries": "One exact Gemini 3.6 Flash/high review call only, read-only and bound to clean r147 at 09436890. No Docker/PostgreSQL, provider fallback, patient/product/clinical or protected data, branding inspection, watcher/feed, operational database, application/API/Diary command, deployment, Pages, production, release or protected-ref movement is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
