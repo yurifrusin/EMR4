@@ -1,0 +1,66 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_and_commit_the_fresh_binding_rls_veto_provenance_without_running_behavior_attempt_032",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains provider-free Context Fabric durability behavior recovery. Fresh r144 veto 002 passed exact candidate fde9027b with no inherited decision. This step preserves its provenance before any separate behavior preexecution gate.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied one read-only independent veto only. GPT Sol owns acceptance, provenance, the later serial behavior runtime, exact cleanup and closeout. No verifier or worker owns runtime or integration.",
+    "active_plan_and_acceptance": "Accepted review receipt SHA-256 is 008637f1655d196efdbdaa6bf46344da21d934c30867f19e79a4af360802fda3. It records one schema-valid pass, exact unchanged HEAD fde9027b, 554 passed tests, 34-file Ruff check/format, all original substantive challenges plus count-recovery challenges, no Docker and clean postflight. Register revision 157 has 183 corrected incidents and zero open.",
+    "protected_evidence_boundaries": "Acceptance is limited to the binding-RLS repair, exact parse proof, frozen six-parent behavior rebind and verifier provenance. It does not run or accept behavior attempt 032 in advance. Mutable behavior/parse evidence and docs/branding remain untracked and unstaged. No product/patient/protected data, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write authority, deployment, production, release, Pages or protected-ref action is opened.",
+    "git_refs_and_worktree": "Primary task HEAD is fde9027bc75a2b9620cb03538caeb685e323384f. Review r144 is clean at the same exact commit by preflight, wrapper and postflight. Origin task remains 324d37f0. Local/origin master and handoff/current remain protected exact 2e34bdad."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "binding_rls_fresh_veto_five_source_preacceptance_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh project veto 002 returned one internally consistent pass and left r144 clean."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol independently reconciled decision, counts, head, postflight and protected refs."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": [
+        "raisa-context-fabric-durability-binding-rls-veto-001",
+        "raisa-context-fabric-durability-binding-rls-veto-002"
+      ]
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-binding-rls-review-receipt-2.json",
+    "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-review-worktree-postflight-2.json"
+  ],
+  "assigned_agent_ids": []
+}

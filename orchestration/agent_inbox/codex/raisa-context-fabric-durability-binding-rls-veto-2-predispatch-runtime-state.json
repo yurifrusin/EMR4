@@ -1,0 +1,68 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "worker_dispatch",
+  "planned_action": "run_one_fresh_antigravity_gemini_36_flash_high_read_only_veto_on_exact_head_fde9027b_with_exact_554_test_contract",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains provider-free Context Fabric durability behavior recovery. First veto is preserved and rejected for its wrong decision on a count mismatch. Corrected candidate fde9027b has no behavior semantic change and no runtime followed attempt 031.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project is allocated exactly one read-only independent veto on r144. It inherits no prior verdict. GPT Sol retains all acceptance and runtime authority.",
+    "active_plan_and_acceptance": "Corrected exact packet collects and passes 554 tests; Ruff check and format pass on 34 files. AER revision 157 contains 183 corrected incidents and zero open. Full recovery diff, 13-file count-recovery delta, immutable evidence, RLS repair, six behavior parents and unchanged scenario population are mandatory challenges.",
+    "protected_evidence_boundaries": "Review only clean candidate bytes in r144. Do not inspect docs/branding, protected holdouts, patient/clinical/product data or mutable untracked evidence. Do not edit, run Docker/PostgreSQL/runtime harnesses, make any provider call beyond this verifier invocation, wire product surfaces, deploy, release, rebuild Pages or move protected refs.",
+    "git_refs_and_worktree": "Verifier r144 is clean on codex/review-context-fabric-binding-rls-fde9027b at exact fde9027bc75a2b9620cb03538caeb685e323384f. Main task HEAD is the same; origin task remains 324d37f0. Local/origin master and handoff/current remain protected exact 2e34bdad. Preflight passed with zero calls."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "binding_rls_veto_2_five_source_predispatch_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh r144 exact-head preflight passed; first project result is not inherited."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Local 554-test and 34-file deterministic packet passed."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [
+        "raisa-context-fabric-durability-binding-rls-veto-002"
+      ],
+      "stale_instance_ids": [
+        "raisa-context-fabric-durability-binding-rls-veto-001"
+      ]
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-review-worktree-preflight-2.json"
+  ],
+  "assigned_agent_ids": [
+    "raisa-context-fabric-durability-binding-rls-veto-002"
+  ]
+}
