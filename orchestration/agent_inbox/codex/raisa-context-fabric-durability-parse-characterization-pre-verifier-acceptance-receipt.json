@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_exactly_one_read_only_gemini_3_6_flash_high_veto_in_clean_r149_for_non_accepting_parse_characterization_candidate_2e59f606",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 2e59f606 binds c8ab7602 and exact inert SQL ca22e47e at 1435142 bytes and 421 statements. Contract mode is characterization_only with an empty expected map. The exact 456-test, twelve-file Ruff, builder/inert and diff packets pass locally.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives one read-only verifier lease in clean r149. GPT Sol retains acceptance and all runtime/cleanup authority. No worker or database has execution authority.",
+    "git_refs_and_worktree": "Review worktree r149 is clean at exact 2e59f606098b55e88bb2fbea0f0fdccaeb521193. Main task branch is the same HEAD with only new unstaged review provenance. Local/origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability dependency chain. Parent body recovery is accepted; non-accepting parse characterization candidate 2e59f606 requires a fresh exact-head veto before any Docker contact.",
+    "protected_evidence_boundaries": "One exact Gemini review call only. No Docker/PostgreSQL, provider fallback, mutable evidence write, patient/product/clinical data, branding inspection, watcher/feed, operational database, behavior execution, app/API/Diary command, deployment, Pages, release or protected-ref movement is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

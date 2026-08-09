@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -105,7 +106,7 @@ ADMISSION_ROW_SHAPE_REBIND = (
     / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-row-shape-rebind.md"
 )
 
-PARENT_HEAD = "c8ab760220bc40863a18feaa3fc13a3d6ba04ba6"
+PARENT_HEAD = "c8ab7602e16e24453dbf909597b4f702a2388416"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
 PARENT_DIGEST = "ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb"
 
@@ -116,6 +117,19 @@ def _text(path: Path) -> str:
 
 def _flat(*paths: Path) -> str:
     return " ".join("\n".join(_text(path) for path in paths).split())
+
+
+def test_parent_head_is_an_exact_resolvable_commit() -> None:
+    completed = subprocess.run(
+        ["git", "rev-parse", "--verify", f"{PARENT_HEAD}^{{commit}}"],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 0
+    assert completed.stdout.strip() == PARENT_HEAD
 
 
 def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:

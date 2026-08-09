@@ -1,0 +1,20 @@
+{
+  "schema_version": "emr4.ariadne-independent-review-rejection.v1",
+  "rejected_on": "2026-08-10",
+  "status": "rejected",
+  "candidate_head": "2e59f606098b55e88bb2fbea0f0fdccaeb521193",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-characterization-review-receipt.json",
+  "review_receipt_sha256": "cdeb8dd4d804f2f6c6f64ebffab941e35c066049eecee0fa14cb0b8e8be239a4",
+  "review_decision": "pass",
+  "accepted": false,
+  "reasons": [
+    "contract_accepted_source_head_is_not_a_git_object",
+    "review_claimed_exact_parent_binding_despite_full_hash_mismatch",
+    "review_claimed_invalid_parent_range_diff_check_passed"
+  ],
+  "actual_parent_head": "c8ab7602e16e24453dbf909597b4f702a2388416",
+  "rejected_recorded_parent_head": "c8ab760220bc40863a18feaa3fc13a3d6ba04ba6",
+  "corrected_contract_sha256": "sha256:a34fb46701396f9626a11f94024e233637e381f15e50d10bbec3cba6f1c4a0fa",
+  "additional_database_runs": 0,
+  "authority_boundary": "Reviewer pass grants no acceptance, Docker, PostgreSQL, behavior, product, data, command, deployment or protected-ref authority. A corrected committed descendant and fresh exact-head veto are required."
+}

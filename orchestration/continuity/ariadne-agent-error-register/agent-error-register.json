@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 165,
+  "register_revision": 167,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7674,6 +7674,88 @@
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-admission-row-shape-parent-recovery-review-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-165.md",
           "tests/test_raisa_context_fabric_durability_behavior_failure_034_admission_row_shape_diagnosis.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0192",
+      "attempt_id": "raisa-context-fabric-parse-characterization-parent-binding-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "implementation",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Every forty-character Git binding must be copied from an independently observed git rev-parse result and must resolve as a repository object before it enters a contract or receipt.",
+      "observed_error": "Sol correctly referred to short parent c8ab7602 but fabricated a forty-character expansion in the parse contract, ledger, test and precommit evidence. The recorded value was not a Git object; the actual accepted parent ends e16e24453dbf909597b4f702a2388416.",
+      "detection_method": "Sol compared the verifier receipt's full parent ID with the contract, ran git rev-parse c8ab7602, and proved the recorded forty-character value failed git cat-file object resolution before any Docker contact.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-characterization-review-sol-rejection.json",
+        "docs/ariadne-agent-error-correction-register-revision-166.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/rehearsal-contract.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_plan.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The parse contract, ledger and plan test now bind exact git rev-parse output c8ab7602e16e24453dbf909597b4f702a2388416, producing corrected characterization contract SHA-256 a34fb467. No database run occurred.",
+        "prevention_control": "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it with git cat-file, and test the full value before review or runtime dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-characterization-review-sol-rejection.json",
+          "docs/ariadne-agent-error-correction-register-revision-166.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/rehearsal-contract.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_plan.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0193",
+      "attempt_id": "raisa-context-fabric-parse-characterization-review-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "gemini-36-flash-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "An exact-parent veto must compare the complete recorded contract object ID with git rev-parse output and must not claim an invalid Git range command passed.",
+      "observed_error": "The r149 reviewer returned pass while its own receipt named the actual full parent ID and the reviewed contract contained a different nonexistent ID. It also claimed the packet's invalid parent-to-candidate diff range completed successfully.",
+      "detection_method": "Sol inspected the structured receipt instead of accepting its terminal label, compared both full IDs, and independently proved the packet's recorded parent was not a Git object.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-characterization-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-characterization-review-sol-rejection.json",
+        "docs/ariadne-agent-error-correction-register-revision-167.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.exact_git_parent_mismatch_and_invalid_range_claimed_pass",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Sol rejected the verifier pass, preserved its receipt as immutable evidence, opened no database run and requires a corrected committed descendant plus a fresh exact-head veto.",
+        "prevention_control": "Verifier acceptance must independently reconcile every full Git object ID and command claim; the orchestrator must inspect evidence details and may reject a schema-constrained pass.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-characterization-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-characterization-review-sol-rejection.json",
+          "docs/ariadne-agent-error-correction-register-revision-167.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

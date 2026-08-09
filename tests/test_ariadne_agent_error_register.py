@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 165
+    assert register["register_revision"] == 167
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 192)
+        f"AER-{index:04d}" for index in range(1, 194)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 120
+    assert len(agent_incidents) == 122
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2491,7 +2491,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 191
+    assert report["incident_count"] == 193
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2507,28 +2507,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 165
-    assert report["incident_count"] == 191
+    assert report["register_revision"] == 167
+    assert report["incident_count"] == 193
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 120,
+        "agent_behavior": 122,
         "harness": 21,
         "repository": 42,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 20,
-        "evidence_misreport": 22,
+        "evidence_misreport": 23,
         "harness_failure": 21,
         "output_contract_violation": 51,
         "read_only_violation": 3,
-        "reasoning_claim_error": 24,
+        "reasoning_claim_error": 25,
         "repository_defect": 42,
         "transport_timeout": 8,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 61,
-        "canonical_unchanged": 108,
+        "accepted_candidate_changed": 62,
+        "canonical_unchanged": 109,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -3226,6 +3226,63 @@ def test_aer_0191_preserves_clean_checkout_test_veto_and_guarded_repair() -> Non
     assert incident["correction"]["status"] == (
         "control_implemented_pending_acceptance"
     )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0192_preserves_nonexistent_parent_binding_and_exact_correction() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0192"]
+    contract = _json(
+        ROOT
+        / "orchestration"
+        / "continuity"
+        / "raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal"
+        / "rehearsal-contract.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
+    )
+    assert contract["parent"]["accepted_source_head"] == (
+        "c8ab7602e16e24453dbf909597b4f702a2388416"
+    )
+    assert "No database run occurred" in incident["correction"]["action"]
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0193_rejects_verifier_pass_with_exact_parent_mismatch() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0193"]
+    receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "raisa-context-fabric-durability-parse-characterization-review-receipt.json"
+    )
+    rejection = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-context-fabric-durability-parse-characterization-review-sol-rejection.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert receipt["decision"] == "pass"
+    assert rejection["accepted"] is False
+    assert rejection["additional_database_runs"] == 0
+    assert rejection["actual_parent_head"] == (
+        "c8ab7602e16e24453dbf909597b4f702a2388416"
+    )
+    assert incident["correction"]["status"] == "contained_then_escalated"
     assert incident["status"] == "corrected"
 
 
