@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_six_parent_behavior_contract_rebind_to_the_accepted_renderer_210_parse_source_without_changing_any_of_the_twenty_scenarios",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The new accepted-source ledger binds parse evidence source 2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb, exact parse evidence SHA-256 83ea56186636b2ffb7dfce8c3d8d303bc489fce8d9e5301ccbe0e3b8cde0629a, renderer source c5d55b72441524d42b9724815dfa4c1a778ac73a, inert SQL SHA-256 25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb and manifest SHA-256 d597e0df4c30bd7c5e3745345a34bee712632fb8803df7afe2762ad53fef6e57. Behavior contract canonical SHA-256 is 2fa4840da97439cbfe143be407a30de995244db2cfc5a69cfe54bb5580354358. Its scenario-array SHA-256 remains 7c8709c2ec1c0eb69da86fe037f551355ada6c1294e2ca4f2ce7f15ad89be5b3 with exact twenty-scenario order and 6/4/3/4/3 coverage unchanged. All 73 behavior/plan tests, Ruff and format checks pass.",
+    "current_authority_allocation": "GPT Sol owns this exact parent rebind, deterministic packet, acceptance and later serial behavior runtime. No implementation worker or native subagent is used. Gemini 3.6 Flash/high through a fresh Antigravity project owns the independent read-only veto only.",
+    "git_refs_and_worktree": "Task HEAD is 2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb before this explicit-path rebind commit. Local and remote master plus handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Only the accepted-source ledger, behavior contract/harness, two focused tests and this precommit pair are eligible.",
+    "live_handover_current_baton": "The terminal renderer 2.0.10 parse/catalogue proof passes. The active next gate is the frozen twenty-scenario behavior contract rebind followed by a fresh Gemini 3.6 Flash/high exact-head veto; no behavior container may start before that veto.",
+    "protected_evidence_boundaries": "Only the six canonical parent bindings, accepted-source ledger, harness expected hash and exact tests change. Immutable failures 001-022 and the mutable failed behavior evidence remain preserved; the mutable evidence is not staged. docs/branding and unrelated untracked files remain excluded. No Docker behavior run, provider/product/patient/clinical/protected data, application/API/Diary runtime, migration, watcher/listener, command/write, deployment, release, Pages or protected refs open."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

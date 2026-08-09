@@ -83,19 +83,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-system-xmin-record-access-accepted-source.md",
-        "579175e875fd34958e7bbe84e8aaa45c38e0478f",
-        "a12e6c17f40ff45cdcfe451f2c1b8bd873407b0683c9163501aca982e4e67eda",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-top-level-xid-insert-reload-accepted-source.md",
+        "2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb",
+        "907a00ef9493e42e9294e15485e89f8eee6bb212b1f082f9eb1914c8573c65f6",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2",
-        "42e7230a98447201400129ecba06fbc5e0cb4fddff2aab263133c21f5635f112",
+        "c5d55b72441524d42b9724815dfa4c1a778ac73a",
+        "25744edad60b0f76083cb6bb0d35a077b58cb9cad1fcff23089d2bcb064107cb",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "cd305e6b4dd160f8ebbc8b7487ec042b1278b9f2",
-        "566edc7be1be850711920ca88e89a2d520faaa057da13a8ddee456a5e5f51b14",
+        "c5d55b72441524d42b9724815dfa4c1a778ac73a",
+        "d597e0df4c30bd7c5e3745345a34bee712632fb8803df7afe2762ad53fef6e57",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
@@ -109,7 +109,7 @@ EXPECTED_PARENT_BINDINGS = {
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "579175e875fd34958e7bbe84e8aaa45c38e0478f",
+        "2d246443f5dc66a221c33d3dc1547f0c4a4f4fcb",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
