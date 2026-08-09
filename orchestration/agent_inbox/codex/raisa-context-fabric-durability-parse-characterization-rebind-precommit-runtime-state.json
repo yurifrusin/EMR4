@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_non_accepting_parse_catalogue_characterization_rebind_paths_on_the_task_branch",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability dependency chain. Parent row-shape recovery is independently accepted through c8ab7602. The next safe dependency is a non-accepting parse/catalogue characterization contract for the regenerated inert SQL.",
+    "current_authority_allocation": "GPT Sol owns the mechanical parse contract rebind, explicit-path commit and later gated one-shot characterization. No worker or database runtime owns this commit. A fresh Gemini verifier will review the exact committed candidate before Docker contact.",
+    "active_plan_and_acceptance": "Characterization contract binds source c8ab7602, inert SQL SHA-256 ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb, 1435142 LF bytes and 421 statements. Its expected digest map is empty and mode is characterization_only. The 456-test parent-plus-parse packet, twelve-file Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "Commit only the parse contract/schema/harness/tests, admission-row-shape parse rebind ledger and this receipt. Preserve all unrelated untracked files and docs/branding. Accepted mutable parse evidence remains SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and protected parse failure evidence remains 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c. No Docker run, provider call, behavior run, applied migration, operational database, data, watcher/feed, app/API/Diary command, deployment, Pages, release or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Task branch is exact c8ab760220bc40863a18feaa3fc13a3d6ba04ba6 before this commit. Local/origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Tracked changes are the explicit non-accepting parse rebind candidate; unrelated untracked files remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "parse_characterization_rebind_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns the explicit-path non-accepting parse rebind commit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Antigravity is available for a future fresh exact-head veto; no provider call occurs now."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    },
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Docker and PostgreSQL remain closed during this commit."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

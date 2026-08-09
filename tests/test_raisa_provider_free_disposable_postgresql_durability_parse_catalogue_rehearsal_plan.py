@@ -100,10 +100,14 @@ INPUT_NAMESPACE_REBIND = (
     ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-"
     "parse-catalogue-input-namespace-rebind.md"
 )
+ADMISSION_ROW_SHAPE_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-row-shape-rebind.md"
+)
 
-PARENT_HEAD = "f64f3cd7ad8577953c51c66309151cb288440acb"
+PARENT_HEAD = "c8ab760220bc40863a18feaa3fc13a3d6ba04ba6"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "8756f315a3f1112551550141c1fff83d047ff24103b357e97ddb17b0c805e470"
+PARENT_DIGEST = "ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb"
 
 
 def _text(path: Path) -> str:
@@ -136,6 +140,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         SUPPORT_EXECUTE_GRANT_REBIND,
         BINDING_RLS_REBIND,
         INPUT_NAMESPACE_REBIND,
+        ADMISSION_ROW_SHAPE_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
@@ -144,14 +149,14 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_448_546
+    assert manifest["sql_byte_count"] == 1_435_142
     assert manifest["statement_count"] == 421
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
     assert PLANNING_BASELINE in plan
     assert f"sha256:{PARENT_DIGEST}" in plan
-    assert "1,448,546" in plan
+    assert "1,435,142" in plan
     assert "statement count `421`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
     assert "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c" in plan
