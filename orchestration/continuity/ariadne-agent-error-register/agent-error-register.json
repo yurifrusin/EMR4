@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 157,
+  "register_revision": 158,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7321,6 +7321,56 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-binding-rls-review-count-mismatch-sol-rejection.json",
           "docs/ariadne-agent-error-correction-register-revision-157.md",
           "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0184",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-032",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-body-program-input-lowering",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "provider_free_disposable_local_postgresql_16",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Every generated body-program input must have a physical PostgreSQL spelling that cannot collide with a relation column referenced by the same embedded SQL statement.",
+      "observed_error": "Attempt 032 reached scenario BTR-E03, then PostgreSQL rejected the first proofread-observation SELECT_SET with SQLSTATE 42702 because the fully qualified source column source_position was compared with a bare function input carrying the same name.",
+      "detection_method": "The fail-closed rehearsal preserved SQLSTATE 42702, function admit_proofread_observation_v1 line 35, zero observed scenarios and verified cleanup; deterministic source diagnosis then proved the same input-column collision in the primary, conflict and receipt SELECT_SET predicates without another container run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-032.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-032.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_032_input_column_ambiguity_diagnosis.py",
+        "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-input-column-ambiguity-recovery.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-input-column-ambiguity-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-158.md",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_032_input_column_ambiguity_diagnosis.py",
+        "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.plpgsql_symbol_relation_column_ambiguity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The renderer now gives every body-program input a deterministic cf_arg_ physical prefix in program signatures and all INPUT references while leaving support-function parameters, logical body contracts, scenarios and authority unchanged.",
+        "prevention_control": "Body-program function inputs and locals must occupy explicit collision-proof physical namespaces, and acceptance must prove both the absence of bare input-column comparisons and byte-exact regeneration before any further database behavior attempt.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-032.json",
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-input-column-ambiguity-recovery.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-input-column-ambiguity-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-158.md",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_032_input_column_ambiguity_diagnosis.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py"
         ]
       },
       "status": "corrected"

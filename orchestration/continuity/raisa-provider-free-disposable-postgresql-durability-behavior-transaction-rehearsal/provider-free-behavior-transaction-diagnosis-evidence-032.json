@@ -1,0 +1,44 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "authority_change": false,
+    "body_program_change": false,
+    "input_parameter_physical_prefix": "cf_arg_",
+    "input_reference_rendering": "same_prefixed_physical_parameter",
+    "scenario_change": false,
+    "support_function_input_change": false
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "artifact_body_predicate_lines": {
+      "36": 1,
+      "39": 1,
+      "42": 1
+    },
+    "artifact_sha256": "sha256:1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407",
+    "body_contract_sha256": "sha256:edbc7f2361f8b5a2812dcff2a7cdf81bef7bd2a6d280be5a9023571c5121508e",
+    "body_source_sha256": "sha256:01f92356def997b96adb3115cfb4b82afc29a27e72cab5823c81a6b5f2e2a7f1",
+    "colliding_source_column": "source_position",
+    "collision_nodes": [
+      "emr4_context_fabric.admit_proofread_observation_v1.conflict_set",
+      "emr4_context_fabric.admit_proofread_observation_v1.primary_set",
+      "emr4_context_fabric.admit_proofread_observation_v1.receipt_set"
+    ],
+    "input_physical_spelling": "source_position",
+    "input_symbol": "source_position",
+    "raw_postgresql_error_persisted": false,
+    "renderer_source_sha256": "sha256:99ffd457f73f9517777f1565b4ab18baa0828434eb661aa7722fed3283cb1a2b"
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:8eb6932691a2ed26780b49f22ca760f8760b54a0befa86bb4f4bf4d68d4392fc",
+    "function_id": "emr4_context_fabric.admit_proofread_observation_v1",
+    "function_line": 35,
+    "internal_attempt_id": "38f0540820e100bf9cd9c239",
+    "run_sequence": 32,
+    "scenario_id": "BTR-E03",
+    "sqlstate": "42702"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-032-input-column-ambiguity-diagnosis.v1",
+  "status": "deterministic_select_input_column_ambiguity_proven_cleanup_verified"
+}

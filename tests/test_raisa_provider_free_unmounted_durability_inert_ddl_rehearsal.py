@@ -29,6 +29,7 @@ from scripts.raisa_provider_free_unmounted_durability_inert_ddl_rehearsal import
     STRUCTURAL_PATH,
     _derive_conflict_constraint,
     _emit_lock_exact,
+    _input_symbol_ident,
     _ordered_composites,
     _render_relations,
     _select_columns,
@@ -157,6 +158,29 @@ def test_support_execute_grants_exactly_match_effective_contract() -> None:
     assert len(observed_roles) == len(set(observed_roles))
     assert (
         "REVOKE ALL ON FUNCTION emr4_context_fabric.session_binding_allows_v1(" in sql
+    )
+
+
+def test_body_program_inputs_are_physically_collision_proof_but_support_is_unchanged() -> (
+    None
+):
+    effective = derive_effective_catalogue(_parents())
+    sql = render_inert(effective=effective)["sql_text"]
+
+    assert _input_symbol_ident("source_position") == "cf_arg_source_position"
+    assert (
+        "admit_proofread_observation_v1(cf_arg_generation_locator "
+        "emr4_context_fabric.generation_locator_v1, cf_arg_source_position "
+        "pg_catalog.int8, cf_arg_proofread_packet "
+        "emr4_context_fabric.proofread_packet_v1)" in sql
+    )
+    assert (
+        ".source_position = cf_arg_source_position" in sql
+        and ".source_position = source_position" not in sql
+    )
+    assert (
+        "session_binding_allows_v1(authenticated_login pg_catalog.name, " in sql
+        and "session_binding_allows_v1(cf_arg_authenticated_login" not in sql
     )
 
 

@@ -353,6 +353,11 @@ def _symbol_ident(identifier: str) -> str:
     return _ident(PLPGSQL_SYMBOL_ALIASES.get(identifier, identifier))
 
 
+def _input_symbol_ident(identifier: str) -> str:
+    """Emit a collision-proof physical name for a body-program input."""
+    return _ident("cf_arg_" + PLPGSQL_SYMBOL_ALIASES.get(identifier, identifier))
+
+
 def _type_sql(type_name: str) -> str:
     """Normalize a qualified type to PostgreSQL SQL type text."""
     physical_catalog_types = {
@@ -1675,7 +1680,7 @@ def _render_ref_like(ref: dict[str, Any]) -> str:
     if kind == "LOCAL":
         return BODY_BLOCK_LABEL + "." + _symbol_ident(ref["symbol"])
     if kind == "INPUT":
-        return _symbol_ident(ref["symbol"])
+        return _input_symbol_ident(ref["symbol"])
     raise ValueError("unknown bare symbol kind " + kind)
 
 
@@ -1735,7 +1740,7 @@ def _render_ref(expr: dict[str, Any]) -> str:
     if kind == "LOCAL":
         return BODY_BLOCK_LABEL + "." + _symbol_ident(expr["symbol"])
     if kind == "INPUT":
-        return _symbol_ident(expr["symbol"])
+        return _input_symbol_ident(expr["symbol"])
     if kind == "TRIGGER_COLUMN":
         return _ident(expr["image"]) + "." + _ident(expr["column"])
     raise ValueError("unknown REF kind " + kind)
@@ -2555,6 +2560,13 @@ def _render_signature_args(inputs: list[dict[str, Any]]) -> str:
     )
 
 
+def _render_program_signature_args(inputs: list[dict[str, Any]]) -> str:
+    return ", ".join(
+        _input_symbol_ident(item["name"]) + " " + _type_sql(item["type"])
+        for item in inputs
+    )
+
+
 def _xmin_read_symbols(program: dict[str, Any]) -> set[str]:
     """Symbols filled by an exact read whose projection includes system xmin."""
     out: set[str] = set()
@@ -2568,7 +2580,12 @@ def _xmin_read_symbols(program: dict[str, Any]) -> set[str]:
 
 def _render_function_body(program: dict[str, Any], ctx: dict[str, Any]) -> str:
     symbols = program["symbols"]
-    physical_symbols = [_symbol_ident(sym["id"]) for sym in symbols]
+    physical_symbols = [
+        _input_symbol_ident(sym["id"])
+        if sym["source"].get("kind") == "INPUT"
+        else _symbol_ident(sym["id"])
+        for sym in symbols
+    ]
     if len(set(physical_symbols)) != len(physical_symbols):
         raise ValueError("physical PL/pgSQL symbol alias collision")
     ctx["symbol_types"] = {sym["id"]: sym["type"] for sym in symbols}
@@ -2611,7 +2628,7 @@ def _render_program_function(
     program: dict[str, Any], signature: dict[str, Any], ctx: dict[str, Any]
 ) -> str:
     schema, fname = _split_qualified(program["id"])
-    args = _render_signature_args(signature["inputs"])
+    args = _render_program_signature_args(signature["inputs"])
     ret = _type_sql(signature["output"]["type"])
     body = _render_function_body(program, ctx)
     lines = [
@@ -2962,7 +2979,11 @@ def _render_revokes_grants(effective: dict[str, Any], ctx: dict[str, Any]) -> li
     for fid in func_ids:
         schema, fname = _split_qualified(fid)
         sig = _signature_by_id(effective, fid)
-        args = _render_signature_args(sig["inputs"])
+        args = (
+            _render_signature_args(sig["inputs"])
+            if fid == signatures["support"]["id"]
+            else _render_program_signature_args(sig["inputs"])
+        )
         lines.append(
             "REVOKE ALL ON FUNCTION "
             + schema
@@ -2991,7 +3012,7 @@ def _render_revokes_grants(effective: dict[str, Any], ctx: dict[str, Any]) -> li
         for fid in role.get("execute_entry_points", []):
             schema, fname = _split_qualified(fid)
             sig = _signature_by_id(effective, fid)
-            args = _render_signature_args(sig["inputs"])
+            args = _render_program_signature_args(sig["inputs"])
             lines.append(
                 "GRANT EXECUTE ON FUNCTION "
                 + schema
@@ -3089,7 +3110,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.17"
+RENDERER_VERSION = "2.0.18"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

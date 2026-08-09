@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_fixed_path_provider_free_authored_synthetic_behavior_attempt_032_in_one_new_networkless_postgresql_16_container_then_preserve_immutable_result_restore_mutable_evidence_and_verify_exact_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains provider-free Context Fabric durability behavior recovery. Binding-RLS repair, exact parse reproduction, six-parent behavior rebind and fresh independent veto are accepted through commit 0619300b. Behavior attempt 032 is the next dependency-satisfied action.",
+    "current_authority_allocation": "GPT Sol alone owns the serial fixed-path behavior run, exact result classification, immutable evidence copy, mutable-evidence restoration and cleanup acceptance. No worker, verifier, product surface or operational database owns execution.",
+    "active_plan_and_acceptance": "Behavior contract SHA-256 678252f6 binds six exact accepted parents and unchanged 20 scenarios in 6/4/3/4/3 with population SHA-256 eec93b0d. Local 554-test and 34-file Ruff packet passed. Fresh Gemini veto 002 passed exact fde9027b and is accepted at 0619300b. The local postgres:16-bookworm image ID is exact sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8.",
+    "protected_evidence_boundaries": "Run the fixed no-argument harness exactly once. It must use pull-never, network none, no ports, no mounts, container-local tmpfs and exact-ID cleanup. Inputs and outputs are authored-synthetic and bounded. Do not list or touch unrelated containers, especially gp-pms-postgres. Preserve mutable behavior evidence by external exact-path backup and restore SHA-256 09907bf6 after copying the run to a new immutable attempt-032 path. No operational credentials/database, product/patient/protected data, provider call, watcher/feed, product wiring, deployment, Pages or protected-ref action is opened.",
+    "git_refs_and_worktree": "Task HEAD is 0619300b106c0b9bfec0833a666bc1a5ff325f80. Origin task remains 324d37f0. Local/origin master and handoff/current remain protected exact 2e34bdad. Tracked worktree is clean; all existing untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
