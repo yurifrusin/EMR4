@@ -6,38 +6,38 @@
   "parent_bindings": [
     {
       "id": "accepted_runtime_source",
-      "path": "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-json-key-set-order-accepted-source.md",
-      "source_head": "19cc3fd6e79588605e3a315236cdd1e688433e17",
-      "sha256": "sha256:e7bd2ba57eccbe7a3222e55e1e2f595cf1e76f06a2894c256e5405101ffc4bcd"
+      "path": "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-alias-lock-visibility-accepted-source.md",
+      "source_head": "a2a40577fa618f833c67dedd5bec52083fdeb0bc",
+      "sha256": "sha256:141fe6c47963f1a9627b3b2ff4f49e3a8f2f91c5616132899bae9d5880a8685e"
     },
     {
       "id": "inert_sql",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-      "source_head": "f620f31e4576003855afe824a385a86badf77120",
-      "sha256": "sha256:f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714"
+      "source_head": "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+      "sha256": "sha256:64cbc2b0e17276387c6815af02a2d0635fc538e3408995c1054ecbc708b5cbae"
     },
     {
       "id": "render_manifest",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-      "source_head": "f620f31e4576003855afe824a385a86badf77120",
-      "sha256": "sha256:d414fb3f0c9d5b8075e913f5608b6146b7b9ee43eb849c9272ccf48df3a2c706"
+      "source_head": "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+      "sha256": "sha256:65e7ac86dddd52a182c0416433e7f45d90a9227b8449b58cc5bfd602b972dfd4"
     },
     {
       "id": "structural_contract",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-      "source_head": "338c30ddb01561ce97a4b9837317e771b555c221",
-      "sha256": "sha256:648acf79c86d16bf7fcd9ad1f88dcab5bc4aded01c4e0084f66c6c36b4adeca1"
+      "source_head": "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+      "sha256": "sha256:6b2ec35d7be7cd33f683173f5ac12ef4c95b0d1bbf05bccf50d10e74c9ca00bc"
     },
     {
       "id": "body_contract",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-      "source_head": "987f64a9f68c8dec2b99d5d39aa74e28411a82fa",
-      "sha256": "sha256:78721338810c87df825bdf3a9d1e010cb3cdd04dcb7898badd127b76fec174d2"
+      "source_head": "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+      "sha256": "sha256:b43ea059a3f424e268631228aa9606d30f1c9f082bc805e550788b01e7bd8e76"
     },
     {
       "id": "parse_prerequisite_contract",
       "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-      "source_head": "19cc3fd6e79588605e3a315236cdd1e688433e17",
+      "source_head": "a2a40577fa618f833c67dedd5bec52083fdeb0bc",
       "sha256": "sha256:313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7"
     }
   ],

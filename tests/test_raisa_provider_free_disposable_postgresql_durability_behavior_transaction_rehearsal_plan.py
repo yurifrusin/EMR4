@@ -99,33 +99,33 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-json-key-set-order-accepted-source.md",
-        "19cc3fd6e79588605e3a315236cdd1e688433e17",
-        "e7bd2ba57eccbe7a3222e55e1e2f595cf1e76f06a2894c256e5405101ffc4bcd",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-alias-lock-visibility-accepted-source.md",
+        "a2a40577fa618f833c67dedd5bec52083fdeb0bc",
+        "141fe6c47963f1a9627b3b2ff4f49e3a8f2f91c5616132899bae9d5880a8685e",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "f620f31e4576003855afe824a385a86badf77120",
-        "f4479c772f144973c1a1f373e16e0bcb3543fea6128c8054a282316ce5d02714",
+        "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+        "64cbc2b0e17276387c6815af02a2d0635fc538e3408995c1054ecbc708b5cbae",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "f620f31e4576003855afe824a385a86badf77120",
-        "d414fb3f0c9d5b8075e913f5608b6146b7b9ee43eb849c9272ccf48df3a2c706",
+        "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+        "65e7ac86dddd52a182c0416433e7f45d90a9227b8449b58cc5bfd602b972dfd4",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-        "338c30ddb01561ce97a4b9837317e771b555c221",
-        "648acf79c86d16bf7fcd9ad1f88dcab5bc4aded01c4e0084f66c6c36b4adeca1",
+        "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+        "6b2ec35d7be7cd33f683173f5ac12ef4c95b0d1bbf05bccf50d10e74c9ca00bc",
     ),
     "body_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-        "987f64a9f68c8dec2b99d5d39aa74e28411a82fa",
-        "78721338810c87df825bdf3a9d1e010cb3cdd04dcb7898badd127b76fec174d2",
+        "958f8178c872854ab0f8e1c56dbb9fe46afbea22",
+        "b43ea059a3f424e268631228aa9606d30f1c9f082bc805e550788b01e7bd8e76",
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
-        "19cc3fd6e79588605e3a315236cdd1e688433e17",
+        "a2a40577fa618f833c67dedd5bec52083fdeb0bc",
         "313d283b4a53c08a34b65f7c932457010cc9317c87a3bfe6a1b9dc218ba220b7",
     ),
 }
