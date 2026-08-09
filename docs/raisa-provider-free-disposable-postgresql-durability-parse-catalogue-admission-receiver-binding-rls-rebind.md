@@ -2,7 +2,7 @@
 
 Date: 2026-08-10
 
-Status: nonaccepting characterization passed; exact reproduction pending
+Status: exact parse/catalogue reproduction passed; behavior remains closed
 
 The fixed parse/catalogue harness is rebound to renderer 2.0.17 source commit
 `30ff6b01a54c339e3045977cda909628841fe57e` and its inert artifact:
@@ -35,6 +35,21 @@ The resulting exact-digest contract has canonical SHA-256
 `sha256:cf746ed8824ef8853677020e90083c2b4bfe1b4096a36ad7735cfeabf0eb4b91`.
 It is not accepted until a new, distinct container independently reproduces
 every fixed digest and cleans up exactly.
+
+Distinct exact attempt `bdc767620bfcaeb8d693be3e` then reproduced all
+fifteen fixed catalogue digests under contract `cf746ed8…` and returned
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`.
+Its immutable evidence SHA-256 is
+`sha256:bf842570457b09c78dd4e7685b618af535fea71d6f0093f27d1699c9876471c9`.
+Exact container
+`2cbe41c2589b2abd175f4807d89efcc14e0321738790ce92365fe9af60099ad7`
+is distinct from characterization, was removed and is verified absent. The
+mutable accepted and failure evidence files were again restored byte-for-byte.
+
+This accepts PostgreSQL 16 parse, atomic installation and catalogue shape for
+the inert artifact only. It proves no function, trigger, RLS or transaction
+behavior. Behavior-parent rebind, complete deterministic verification and a
+fresh independent veto remain required before another behavior runtime.
 
 Any eligible run is limited to one newly owned `postgres:16-bookworm`
 container with `--pull=never`, `--network=none`, no port or mount, tmpfs data,

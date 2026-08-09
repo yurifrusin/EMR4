@@ -234,6 +234,13 @@ BINDING_RLS_CHARACTERIZATION_EVIDENCE_PATH = (
 BINDING_RLS_CHARACTERIZATION_EVIDENCE = json.loads(
     BINDING_RLS_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+BINDING_RLS_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-admission-receiver-binding-rls-exact-pass.json"
+)
+BINDING_RLS_PASS_EVIDENCE = json.loads(
+    BINDING_RLS_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1429,6 +1436,52 @@ def test_admission_receiver_binding_rls_characterization_is_exact_and_narrow() -
         "removed": True,
         "status": "cleanup_verified",
     }
+
+
+def test_admission_receiver_binding_rls_exact_reproduction_is_distinct_pass() -> (
+    None
+):
+    evidence = BINDING_RLS_PASS_EVIDENCE
+    characterization = BINDING_RLS_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(BINDING_RLS_PASS_EVIDENCE_PATH.read_bytes())  # noqa: SLF001
+        == "bf842570457b09c78dd4e7685b618af535fea71d6f0093f27d1699c9876471c9"
+    )
+    assert evidence["attempt_id"] == "bdc767620bfcaeb8d693be3e"
+    assert evidence["attempt_id"] != characterization["attempt_id"]
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["catalogue"]["status"] == "matched"
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_419_573,
+        "artifact_sha256": (
+            "sha256:1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407"
+        ),
+        "contract_sha256": rehearsal.EXPECTED_CONTRACT_SHA256,
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 421,
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "2cbe41c2589b2abd175f4807d89efcc14e0321738790ce92365fe9af60099ad7"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert (
+        evidence["cleanup"]["container_id"]
+        != characterization["cleanup"]["container_id"]
+    )
 
 
 def test_support_execute_grant_exact_reproduction_is_distinct_pass() -> None:

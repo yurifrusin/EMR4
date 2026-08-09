@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_exactly_one_distinct_exact_digest_bound_catalogue_reproduction_in_one_new_owned_networkless_postgresql_16_container_then_exact_id_cleanup_and_byte_exact_mutable_evidence_restoration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact contract binds artifact 1d53c7ac, 1,419,573 bytes, 421 statements and fifteen fixed catalogue digests including policies 5bd0a662. A pass requires exact equality, a distinct attempt and container from characterization bef2c819/a1d64af0, and cleanup absence verification.",
+    "current_authority_allocation": "GPT Sol alone owns one serial exact parse/catalogue reproduction, immutable evidence capture, exact-ID cleanup and mutable-evidence restoration. No worker, verifier or provider owns runtime or acceptance.",
+    "git_refs_and_worktree": "Task HEAD is a7292cfafb003f3f141901533b82979c95b0113d. Protected refs remain exact 2e34bdad. Characterization container a1d64af0 is absent. Mutable accepted parse, failure and behavior evidence remain restored at exact hashes 97d1385c, 3bf66870 and 09907bf6; they will be backed up outside the repository and restored byte-for-byte.",
+    "live_handover_current_baton": "The active baton remains provider-free Context Fabric durability behavior recovery. Nonaccepting characterization and exact contract cf746ed8 are sealed at a7292cfa. The next safe action is one distinct exact reproduction; behavior remains closed.",
+    "protected_evidence_boundaries": "One already-local postgres:16-bookworm image at sha256:64154d0b may create one uniquely named --pull=never --network=none container with no ports or mounts, tmpfs data, four empty authored-synthetic prerequisite shapes and exact-ID cleanup. Do not list or touch unrelated containers. No behavior claim, migration, operational DB/credential, watcher/feed, product/patient data, provider, application wiring, deployment, release, Pages or protected-ref authority is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

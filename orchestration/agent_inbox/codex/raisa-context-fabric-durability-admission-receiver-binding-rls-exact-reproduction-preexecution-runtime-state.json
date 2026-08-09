@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_exactly_one_distinct_exact_digest_bound_catalogue_reproduction_in_one_new_owned_networkless_postgresql_16_container_then_exact_id_cleanup_and_byte_exact_mutable_evidence_restoration",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains provider-free Context Fabric durability behavior recovery. Nonaccepting characterization and exact contract cf746ed8 are sealed at a7292cfa. The next safe action is one distinct exact reproduction; behavior remains closed.",
+    "current_authority_allocation": "GPT Sol alone owns one serial exact parse/catalogue reproduction, immutable evidence capture, exact-ID cleanup and mutable-evidence restoration. No worker, verifier or provider owns runtime or acceptance.",
+    "active_plan_and_acceptance": "The exact contract binds artifact 1d53c7ac, 1,419,573 bytes, 421 statements and fifteen fixed catalogue digests including policies 5bd0a662. A pass requires exact equality, a distinct attempt and container from characterization bef2c819/a1d64af0, and cleanup absence verification.",
+    "protected_evidence_boundaries": "One already-local postgres:16-bookworm image at sha256:64154d0b may create one uniquely named --pull=never --network=none container with no ports or mounts, tmpfs data, four empty authored-synthetic prerequisite shapes and exact-ID cleanup. Do not list or touch unrelated containers. No behavior claim, migration, operational DB/credential, watcher/feed, product/patient data, provider, application wiring, deployment, release, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Task HEAD is a7292cfafb003f3f141901533b82979c95b0113d. Protected refs remain exact 2e34bdad. Characterization container a1d64af0 is absent. Mutable accepted parse, failure and behavior evidence remain restored at exact hashes 97d1385c, 3bf66870 and 09907bf6; they will be backed up outside the repository and restored byte-for-byte."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "binding_rls_exact_reproduction_complete_five_source_preexecution_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Committed exact contract, local image identity, protected refs and mutable evidence hashes verified."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No subagent selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["No verifier call active or eligible."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No worker active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport active."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
