@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_nonaccepting_catalogue_characterization_in_one_newly_owned_networkless_disposable_postgresql_16_container_then_verify_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact parent is renderer 2.0.11 artifact sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51 at 1,391,614 canonical LF bytes and 412 statements. The canonical characterization contract is sha256:11bdc9050bf26bc26cc61037b95911317ffcb7994e532e2f5a28ca742599e2b3 with empty expected digests. Focused plan/contract/hostile tests, Ruff and diff checks pass. The only eligible runtime result is catalogue_characterization_required with complete exact-ID cleanup; a pass is forbidden until a separate exact-bound attempt.",
+    "current_authority_allocation": "GPT Sol alone owns this tightly coupled serial disposable PostgreSQL characterization and exact-ID cleanup. No implementation worker, external model, provider, product surface or protected integration is involved. Characterization is a fixed deterministic precondition and cannot accept itself.",
+    "git_refs_and_worktree": "Active task HEAD is 8c307d28323c68744338e2290879994e4980b2dd on codex/ariadne-bernie-davida-parallel-seam with only the bounded explicit-path parse-rebind candidate plus preserved unrelated untracked files. Remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. No protected ref may move.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. Behavior attempt 024 and its diagnosis are preserved. Exact source HEAD 8c307d28323c68744338e2290879994e4980b2dd contains the bounded interval-construction repair; the working candidate now binds that artifact in characterization-only mode and preserves the predecessor exact pass byte-for-byte.",
+    "protected_evidence_boundaries": "The exact predecessor RLS-lock-visibility pass remains immutable at sha256:e417fc377e6b8e9ff723e21e88b40e41b9cfb2424d2fd6122e404c54bf068611. Behavior failures 001-024 and mutable behavior evidence remain preserved and unstaged. Only closed catalogue digests and bounded failure metadata may persist. docs/branding and unrelated untracked files remain untouched. No patient, clinical, product or protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

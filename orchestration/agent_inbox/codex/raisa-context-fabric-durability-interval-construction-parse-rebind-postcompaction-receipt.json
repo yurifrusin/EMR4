@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "preserve_the_prior_rls_lock_visibility_parse_pass_then_rebind_the_repaired_interval_artifact_through_separate_catalogue_characterization_and_exact_proof_before_the_unchanged_twenty_scenario_behavior_gate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted behavior plan freezes exactly twenty ordered scenarios with category counts 6/4/3/4/3, opaque repository-authored synthetic data, one newly owned networkless PostgreSQL 16 container per runtime attempt and exact-ID cleanup. The interval recovery requires renderer 2.0.11 artifact sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51 at 1,391,614 canonical LF bytes and 412 statements, followed first by a non-accepting characterization container and then by a separate exact-digest container. Only after that exact parse pass may the unchanged behavior contract be rebound, independently vetoed and executed.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled serial parse rebind, disposable PostgreSQL characterization, exact-bound reproduction, behavior-parent rebind, deterministic verification, cleanup and acceptance. No implementation worker, provider or external product surface is active. The two listed native durability review descendants are completed historical tasks and hold no current ownership. A fresh Gemini 3.6 Flash/high exact-HEAD veto becomes eligible only after the behavior candidate passes its complete deterministic gate.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam is at exact tracked HEAD 8c307d28323c68744338e2290879994e4980b2dd and is ahead of origin task branch 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current are all aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree contains preserved unrelated untracked receipts, ledgers, docs/branding and the mutable behavior evidence. No protected ref may move.",
+    "live_handover_current_baton": "The active baton is the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. Behavior attempt 024 remains an immutable fail-closed result at BTR-E02 with SQLSTATE 42883 and verified exact-ID cleanup. Exact task HEAD 8c307d28323c68744338e2290879994e4980b2dd now contains the bounded interval-construction correction and regenerated deterministic inert artifact. The next dependency-satisfied action is the required separate catalogue characterization and exact-bound parse proof, not product or runtime integration.",
+    "protected_evidence_boundaries": "Immutable behavior failures 001-024 and the accepted RLS lock-visibility parse pass remain preserved. The mutable behavior evidence stays untracked and unstaged until a successful behavior run replaces it. Raw PostgreSQL text remains bounded and unpersisted. docs/branding and every unrelated untracked file remain untouched; only explicit-path staging is permitted. Protected holdouts and historical PHI remain unopened. No patient, clinical, product or protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

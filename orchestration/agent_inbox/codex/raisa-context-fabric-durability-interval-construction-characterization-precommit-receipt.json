@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_path_interval_construction_catalogue_characterization_and_exact_contract_checkpoint_before_the_separate_exact_bound_run",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact parent remains renderer 2.0.11 artifact sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51 at 1,391,614 LF bytes and 412 statements. Characterization evidence sha256:257daa83f9d45c9397a3666fa54ee906016fd3fa4924d58af2269f3316b65139 recorded catalogue_characterization_required, all seventeen unchanged digests and removed exact container 6b0f34cb1bdd7faa3c6482bbe300e2ecb5f7ed9109890a90f18e846625ce7c8d with absence independently re-observed. The exact-bound canonical contract is sha256:e1c3b23bf2731f366a1eab342185a6f26eeb638a0a767fcdd391438b5e116e40, and focused tests, Ruff and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns the serial characterization checkpoint, exact-bound disposable run, cleanup and later behavior-parent rebind. No worker, provider, product surface or protected integration is active. Fresh Gemini review remains ineligible until the later behavior candidate passes all deterministic checks.",
+    "git_refs_and_worktree": "Active branch codex/ariadne-bernie-davida-parallel-seam remains at tracked HEAD 8c307d28323c68744338e2290879994e4980b2dd before this explicit-path task-branch commit; remote task branch remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The commit excludes docs/branding, mutable behavior evidence and all unrelated untracked material.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior/transaction rehearsal. The bounded interval correction is at deterministic parent 8c307d28323c68744338e2290879994e4980b2dd. One separate characterization has now completed exactly as non-accepting evidence; the next dependency is a separately owned exact-bound parse reproduction.",
+    "protected_evidence_boundaries": "The prior RLS-lock-visibility pass remains byte-identical and immutable at sha256:e417fc377e6b8e9ff723e21e88b40e41b9cfb2424d2fd6122e404c54bf068611. Behavior failures 001-024 and mutable behavior evidence remain preserved and unstaged. docs/branding and all unrelated untracked files remain untouched. Explicit-path staging only is permitted. No patient, clinical, product or protected data, provider, operational database, applied migration, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

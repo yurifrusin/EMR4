@@ -107,7 +107,7 @@ ROW_PROJECTION_RECOVERY_EVIDENCE = json.loads(
     ).read_text(encoding="utf-8")
 )
 RLS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH = (
-    DIR / "provider-free-disposable-postgresql-evidence.json"
+    DIR / "provider-free-disposable-postgresql-evidence-rls-lock-visibility-pass.json"
 )
 RLS_LOCK_VISIBILITY_PASS_EVIDENCE = json.loads(
     RLS_LOCK_VISIBILITY_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
@@ -127,6 +127,13 @@ RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH = (
 )
 RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE = json.loads(
     RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-interval-construction-characterization.json"
+)
+INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE = json.loads(
+    INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
@@ -631,10 +638,6 @@ def test_rls_lock_visibility_characterization_changes_only_policy_digest() -> No
     assert characterized["policies"] == (
         "sha256:3e3f043b4c3f103c8170805e0e0aff327c83916010dc0cef727665fa92c8ef03"
     )
-    assert CONTRACT["catalogue_expectation"] == {
-        "mode": "exact_digest_bound",
-        "expected_query_digests": characterized,
-    }
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
@@ -680,11 +683,68 @@ def test_rls_lock_visibility_parse_catalogue_evidence_is_exact_pass() -> None:
         key: value
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
-    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    } == {
+        key: value
+        for key, value in RLS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (
             "3156fb7876f366dd36bbd52645706aa3d4158526e5e1bcfdaa72ff4c56c3c22f"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_interval_construction_characterization_is_nonaccepting_and_exactly_cleaned_up() -> (
+    None
+):
+    evidence = INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            INTERVAL_CONSTRUCTION_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "257daa83f9d45c9397a3666fa54ee906016fd3fa4924d58af2269f3316b65139"
+    )
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_391_614,
+        "artifact_sha256": (
+            "sha256:c113b2480106441043562412ee3135d2a79bd56c76bb5bc2705734d9e5f8cf51"
+        ),
+        "contract_sha256": (
+            "sha256:11bdc9050bf26bc26cc61037b95911317ffcb7994e532e2f5a28ca742599e2b3"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 412,
+    }
+    characterized = {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert characterized == {
+        key: value
+        for key, value in RLS_LOCK_VISIBILITY_PASS_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "6b0f34cb1bdd7faa3c6482bbe300e2ecb5f7ed9109890a90f18e846625ce7c8d"
         ),
         "removed": True,
         "status": "cleanup_verified",
@@ -875,7 +935,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_391_506
+    assert len(artifact) == 1_391_614
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 388
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
