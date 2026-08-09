@@ -2,7 +2,7 @@
 
 Date: 2026-08-10
 
-Status: characterization passed; exact reproduction required
+Status: characterization and distinct exact reproduction passed
 
 Renderer `2.0.18` at accepted source
 `f64f3cd7ad8577953c51c66309151cb288440acb` regenerated the inert durability
@@ -26,8 +26,13 @@ The characterization evidence SHA-256 is
 `75700e214ac4b155602fe584f1fd0cbbe64c86426c51f449ae31a0e22b867971`.
 Its fifteen fixed digests are rebound under exact contract SHA-256
 `e783fedb13785672cad84c76984f39ec6ec0b7bb3787ca9b33fb61db1f59fc68`.
-A distinct exact-digest run is required before the behavior parent may be
-rebound or another behavior attempt may occur.
+A distinct exact-digest attempt `5edadc6475cfe1fc633eb8ff` then reproduced all
+fifteen bound digests, the atomic rollback/install lifecycle and verified
+cleanup in a different owned container. Its immutable evidence SHA-256 is
+`0ec5fb64d9b431e313067e2f550e052d947fecdc8dffa98809df44adb711a528`.
+The behavior contract may now be rebound to this accepted parse source; another
+behavior attempt remains closed until that six-parent rebind, a complete
+deterministic packet and a fresh exact-head independent veto all pass.
 
 No migration, operational database, source/watcher/listener/feed,
 patient/product data, provider, application, command, deployment, release,

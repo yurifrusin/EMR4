@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_distinct_fixed_path_provider_free_authored_synthetic_postgresql_16_exact_catalogue_reproduction_for_contract_e783fedb_then_preserve_cleanup_and_restore_mutable_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains provider-free Context Fabric durability behavior recovery. Renderer 2.0.18 and exact diagnosis are committed at f64f3cd7; fresh catalogue characterization and fifteen-digest binding are committed at a3962c8e. A distinct exact reproduction is now the next dependency-satisfied action.",
+    "current_authority_allocation": "GPT Sol alone owns the serial fixed-path exact catalogue run, result classification, immutable evidence copy, mutable-evidence restoration and cleanup acceptance. No worker, verifier, product surface or operational database owns execution.",
+    "active_plan_and_acceptance": "Characterization attempt a8eab730 passed its bounded characterization and cleanup. Contract SHA-256 e783fedb binds artifact SHA-256 8756f315 and the exact fifteen characterized query digests; only functions changed against the preceding accepted catalogue. Exact reproduction must pass before six-parent behavior rebind or another behavior attempt.",
+    "protected_evidence_boundaries": "Run the fixed no-argument parse/catalogue harness exactly once with pull-never, network none, no ports, no mounts, container-local tmpfs and exact-ID cleanup. Preserve and restore mutable accepted parse evidence SHA-256 97d1385c and protected parse-failure evidence SHA-256 3bf66870 after copying the result to a new immutable path. Never list or touch unrelated containers. No behavior, operational database, product/patient data, provider, watcher/feed, product wiring, deployment, Pages or protected-ref action is opened.",
+    "git_refs_and_worktree": "Task HEAD is a3962c8ea2fbdaf91970f61e86544499fda79976. Origin task remains 324d37f0. Local/origin master and handoff/current remain protected exact 2e34bdad. Tracked worktree is clean; all existing untracked files remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "input_namespace_catalogue_exact_five_source_preexecution_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "exact_image_inspect",
+      "reachability": "reachable",
+      "evidence": [
+        "postgres:16-bookworm resolves to the accepted pull-never image identity immediately before execution."
+      ]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-input-namespace-characterization-evidence.json"
+  ],
+  "assigned_agent_ids": []
+}
