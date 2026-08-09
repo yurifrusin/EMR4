@@ -241,6 +241,13 @@ BINDING_RLS_PASS_EVIDENCE_PATH = (
 BINDING_RLS_PASS_EVIDENCE = json.loads(
     BINDING_RLS_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+INPUT_NAMESPACE_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-input-namespace-characterization-evidence.json"
+)
+INPUT_NAMESPACE_CHARACTERIZATION_EVIDENCE = json.loads(
+    INPUT_NAMESPACE_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1363,6 +1370,9 @@ def test_support_execute_grant_characterization_is_exact_and_narrow() -> None:
     expected_at_support_repair = dict(
         CONTRACT["catalogue_expectation"]["expected_query_digests"]
     )
+    expected_at_support_repair["functions"] = (
+        "sha256:5f7063b8f2a5d11c4088e5f66b9649f9842b977c1c8d0ccfaa8fcdb1d4d19c7d"
+    )
     expected_at_support_repair["policies"] = (
         "sha256:51f697aeb94a50f432f6683c9e9c93412eee38853617a113c1ab020216a57168"
     )
@@ -1374,7 +1384,7 @@ def test_support_execute_grant_characterization_is_exact_and_narrow() -> None:
         key
         for key, value in characterized.items()
         if CONTRACT["catalogue_expectation"]["expected_query_digests"][key] != value
-    } == {"policies"}
+    } == {"functions", "policies"}
     assert changed == {"function_acl", "functions"}
     assert characterized["function_acl"] == (
         "sha256:dba3aa331a66e608ac22e434b24637050e5f89f5e63fd653a51201df58a520f3"
@@ -1431,7 +1441,13 @@ def test_admission_receiver_binding_rls_characterization_is_exact_and_narrow() -
         ].items()
         if key not in {"server", "extensions"}
     }
-    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    expected_at_binding_repair = dict(
+        CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    )
+    expected_at_binding_repair["functions"] = (
+        "sha256:5f7063b8f2a5d11c4088e5f66b9649f9842b977c1c8d0ccfaa8fcdb1d4d19c7d"
+    )
+    assert characterized == expected_at_binding_repair
     assert {
         key for key, value in characterized.items() if predecessor.get(key) != value
     } == {"policies"}
@@ -1465,13 +1481,20 @@ def test_admission_receiver_binding_rls_exact_reproduction_is_distinct_pass() ->
         key: value
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
-    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    } == {
+        **CONTRACT["catalogue_expectation"]["expected_query_digests"],
+        "functions": (
+            "sha256:5f7063b8f2a5d11c4088e5f66b9649f9842b977c1c8d0ccfaa8fcdb1d4d19c7d"
+        ),
+    }
     assert evidence["parent"] == {
         "artifact_byte_count": 1_419_573,
         "artifact_sha256": (
             "sha256:1d53c7ac1cd9a9fb19faafcca0ebcf8dacadf238f62df873d2d3fc78c657b407"
         ),
-        "contract_sha256": rehearsal.EXPECTED_CONTRACT_SHA256,
+        "contract_sha256": (
+            "sha256:cf746ed8824ef8853677020e90083c2b4bfe1b4096a36ad7735cfeabf0eb4b91"
+        ),
         "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
         "prerequisite_sql_sha256": (
             "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
@@ -1490,6 +1513,59 @@ def test_admission_receiver_binding_rls_exact_reproduction_is_distinct_pass() ->
         evidence["cleanup"]["container_id"]
         != characterization["cleanup"]["container_id"]
     )
+
+
+def test_input_namespace_characterization_is_exact_and_changes_only_functions() -> None:
+    evidence = INPUT_NAMESPACE_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            INPUT_NAMESPACE_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "75700e214ac4b155602fe584f1fd0cbbe64c86426c51f449ae31a0e22b867971"
+    )
+    assert evidence["attempt_id"] == "a8eab7307b3f1913a8d5d992"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_448_546,
+        "artifact_sha256": (
+            "sha256:8756f315a3f1112551550141c1fff83d047ff24103b357e97ddb17b0c805e470"
+        ),
+        "contract_sha256": (
+            "sha256:9c5975701655a8785d89cd3adc96e02be26eaf560f6bcc5e43d8fd8b529dfe10"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 421,
+    }
+    characterized = {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    predecessor = {
+        key: value
+        for key, value in BINDING_RLS_PASS_EVIDENCE["catalogue"][
+            "query_digests"
+        ].items()
+        if key not in {"server", "extensions"}
+    }
+    assert characterized == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert {
+        key for key, value in characterized.items() if predecessor.get(key) != value
+    } == {"functions"}
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "5ef5d8a9209a84f5033bc995f4c974eb2160e72ac3ed93cc9ec487c194c83ff7"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
 
 
 def test_support_execute_grant_exact_reproduction_is_distinct_pass() -> None:
@@ -1760,7 +1836,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_419_573
+    assert len(artifact) == 1_448_546
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 397
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001

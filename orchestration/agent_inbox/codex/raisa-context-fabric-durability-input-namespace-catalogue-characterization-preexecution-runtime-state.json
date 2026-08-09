@@ -1,0 +1,65 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_fixed_path_provider_free_authored_synthetic_postgresql_16_catalogue_characterization_for_renderer_2_0_18_then_preserve_cleanup_and_rebind_exact_digests",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. Attempt 032 failed closed at BTR-E03 with SQLSTATE 42702; exact diagnosis and renderer 2.0.18 input-namespace repair are preserved at f64f3cd7. Fresh catalogue characterization is the next dependency-satisfied action before exact reproduction or another behavior attempt.",
+    "current_authority_allocation": "GPT Sol alone owns this serial fixed-path parse/catalogue run, exact result classification, evidence preservation and cleanup acceptance. No worker, verifier, product surface or operational database owns execution.",
+    "active_plan_and_acceptance": "The accepted behavior implementation recovery and input-column ambiguity recovery require a fresh characterization-only PostgreSQL 16 catalogue read for the regenerated inert artifact SHA-256 8756f315, followed by a separately bound exact rerun, six-parent behavior rebind, complete static packet and fresh independent veto. The logical body contract and 20 frozen scenarios remain unchanged.",
+    "protected_evidence_boundaries": "Run the fixed no-argument parse/catalogue harness exactly once using pull-never, network none, no ports, no mounts, container-local tmpfs and exact-ID cleanup. Inputs are authored-synthetic. Preserve the accepted parse evidence externally and restore it after immutable characterization capture. Never list or touch unrelated containers, including gp-pms-postgres. No behavior scenario, operational credentials/database, product/patient/protected data, provider call, watcher/feed, product wiring, deployment, Pages or protected-ref action is opened.",
+    "git_refs_and_worktree": "Task HEAD is f64f3cd7ad8577953c51c66309151cb288440acb. Origin task remains 324d37f0. Local/origin master and handoff/current remain protected exact 2e34bdad. The tracked worktree contains only the explicit catalogue-characterization rebind candidate; all pre-existing untracked files remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "input_namespace_catalogue_characterization_five_source_preexecution_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Renderer repair and exact deterministic diagnosis are committed; no database run followed attempt 032."
+      ]
+    },
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "exact_image_inspect",
+      "reachability": "reachable",
+      "evidence": [
+        "postgres:16-bookworm remains the fixed pull-never image reference; exact image identity is verified immediately before execution."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": [
+        "raisa-context-fabric-durability-binding-rls-veto-001",
+        "raisa-context-fabric-durability-binding-rls-veto-002"
+      ]
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-032.json"
+  ],
+  "assigned_agent_ids": []
+}

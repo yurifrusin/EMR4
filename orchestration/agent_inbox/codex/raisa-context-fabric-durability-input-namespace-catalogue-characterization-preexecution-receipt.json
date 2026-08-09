@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_fixed_path_provider_free_authored_synthetic_postgresql_16_catalogue_characterization_for_renderer_2_0_18_then_preserve_cleanup_and_rebind_exact_digests",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:7c9a26bb74b80d31bf0986b1bd2edee9b4cc03fcdb5230ba60a546c87c899565",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free Context Fabric durability behavior recovery. Attempt 032 failed closed at BTR-E03 with SQLSTATE 42702; exact diagnosis and renderer 2.0.18 input-namespace repair are preserved at f64f3cd7. Fresh catalogue characterization is the next dependency-satisfied action before exact reproduction or another behavior attempt.",
+    "current_authority_allocation": "GPT Sol alone owns this serial fixed-path parse/catalogue run, exact result classification, evidence preservation and cleanup acceptance. No worker, verifier, product surface or operational database owns execution.",
+    "active_plan_and_acceptance": "The accepted behavior implementation recovery and input-column ambiguity recovery require a fresh characterization-only PostgreSQL 16 catalogue read for the regenerated inert artifact SHA-256 8756f315, followed by a separately bound exact rerun, six-parent behavior rebind, complete static packet and fresh independent veto. The logical body contract and 20 frozen scenarios remain unchanged.",
+    "protected_evidence_boundaries": "Run the fixed no-argument parse/catalogue harness exactly once using pull-never, network none, no ports, no mounts, container-local tmpfs and exact-ID cleanup. Inputs are authored-synthetic. Preserve the accepted parse evidence externally and restore it after immutable characterization capture. Never list or touch unrelated containers, including gp-pms-postgres. No behavior scenario, operational credentials/database, product/patient/protected data, provider call, watcher/feed, product wiring, deployment, Pages or protected-ref action is opened.",
+    "git_refs_and_worktree": "Task HEAD is f64f3cd7ad8577953c51c66309151cb288440acb. Origin task remains 324d37f0. Local/origin master and handoff/current remain protected exact 2e34bdad. The tracked worktree contains only the explicit catalogue-characterization rebind candidate; all pre-existing untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
