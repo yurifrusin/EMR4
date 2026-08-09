@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 129,
+  "register_revision": 130,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-09",
@@ -6048,6 +6048,53 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-023-postcompaction-v2-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-023-postcompaction-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-129.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0155",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-023",
+      "observed_on": "2026-08-09",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The lifecycle registration entry point must retain its exact stream-head row lock when reloading an existing head, while direct and post-update stream-head mutation remain producer-only.",
+      "observed_error": "Behavior attempt 023 stopped at BTR-E01 CF004 in register_observer_generation_v1 line 81 with zero scenarios and verified cleanup. A bounded diagnosis proved lifecycle plain SELECT saw one stream head and its binding was allowed, but SELECT FOR UPDATE saw no row because PostgreSQL applies the producer-only UPDATE USING policy as well as the SELECT policy to locking reads.",
+      "detection_method": "One ephemeral in-memory diagnostic body changed only the two lock-path CF004 messages, ran exact BTR-E01 in a newly owned networkless PostgreSQL 16 container and released only row count 1, binding true and lock result no_data. Raw error was not persisted, mutable behavior evidence stayed byte-identical and exact container absence was verified. Official PostgreSQL 16 CREATE POLICY documentation confirms the SELECT-plus-UPDATE policy combination for row locks.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-023.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-failure-023-rls-lock-diagnosis-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-rls-lock-visibility-recovery.md",
+        "docs/security/raisa-context-fabric-durability-behavior-rls-lock-visibility-recovery-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+        "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+        "docs/ariadne-agent-error-correction-register-revision-130.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.rls_update_using_hides_lifecycle_select_for_update_lock",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Only pol_cf_01_update USING now admits PRODUCER or LIFECYCLE so registration can lock an already selectable stream head. WITH CHECK remains PRODUCER-only, context_lifecycle retains zero direct table DML or SELECT and the lock itself remains intact.",
+        "prevention_control": "Structural semantics and hostile tests must independently require lifecycle in stream-head UPDATE USING, forbid it in UPDATE WITH CHECK, retain zero lifecycle direct table privileges and reject any equivalent widening before body rebind, inert regeneration, parse proof, fresh veto or behavior eligibility.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-rls-lock-visibility-recovery.md",
+          "docs/security/raisa-context-fabric-durability-behavior-rls-lock-visibility-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-130.md",
           "tests/test_ariadne_agent_error_register.py"
         ]
       },

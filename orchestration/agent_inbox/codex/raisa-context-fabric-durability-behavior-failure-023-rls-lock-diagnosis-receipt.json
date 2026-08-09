@@ -1,0 +1,23 @@
+{
+  "authority_boundary": "provider_free_authored_synthetic_disposable_postgresql_diagnosis_only_no_product_provider_command_deployment_or_protected_ref_authority",
+  "diagnosis_runtime": {
+    "cleanup_absence_verified": true,
+    "container_id": "9d72d81110ca2dcf8c9c5ffc0155d7c060d20fb6433c27fdaab1660919e279d7",
+    "ephemeral_function_sha256": "sha256:4e9c173bd482ed7a633a06284f8a6e5b892dc1bf24b69ead3588668cd21b223c",
+    "internal_attempt_id": "c886511325b81a831a6bbe94",
+    "raw_diagnostic_sha256": "sha256:d0752e7c8defaac0de4bb3a2d5c2732a0ad29aa2ecfc8ef7d5e62d624f648265",
+    "raw_error_persisted": false
+  },
+  "observations": {
+    "lifecycle_binding_allowed": "true",
+    "plain_select_head_count": 1,
+    "select_for_update_result": "no_data"
+  },
+  "parent_failure": {
+    "evidence_sha256": "sha256:de359f9acc731b0127517b6dc14accb9bfe7e9b5ae63b35213cf5d6e160649ee",
+    "internal_attempt_id": "67a7eab53961e8284fae1ac9",
+    "run_sequence": 23
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-023-rls-lock-diagnosis.v1",
+  "status": "rls_lock_diagnosis_complete_cleanup_verified"
+}

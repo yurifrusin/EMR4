@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_stream_head_rls_lock_visibility_structural_recovery_and_bounded_diagnosis_before_rebinding_the_function_body_parent",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The diagnosis released exactly plain-select count 1, lifecycle binding true and SELECT FOR UPDATE no_data, with raw error unpersisted and exact cleanup. Structural contract SHA-256 is resealed to a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e. Only pol_cf_01_update USING adds LIFECYCLE; WITH CHECK remains PRODUCER-only, pol_cf_10/11 update policies remain unchanged and context_lifecycle retains zero direct DML/SELECT. Register revision 130 has 155 incidents and zero open. Exactly 136 focused tests, Ruff, format and diff checks pass.",
+    "current_authority_allocation": "GPT Sol owns the structural recovery, exact parent rebind sequence, deterministic verification and later serial runtime. The codebase-health research is complete and read-only. No implementation worker or external verifier is active; the fresh Gemini veto remains deferred until all descendants are rebound and deterministic checks pass.",
+    "git_refs_and_worktree": "Task HEAD before this explicit-path structural commit is f16a646493c7db2bf9aff3bfd6d31f7d9be0b891. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the diagnosis receipt pair/result, structural recovery docs and threat delta, structural contract/schema/test, register revision 130 and this precommit pair are eligible; docs/branding, research receipts, unrelated untracked files and mutable behavior evidence remain excluded.",
+    "live_handover_current_baton": "Attempt 023 and its bounded diagnosis now establish the exact BTR-E01 CF004 cause. The active recovery changes only stream-head UPDATE USING lock visibility while retaining producer-only WITH CHECK and zero lifecycle direct table privileges. Behavior acceptance remains closed.",
+    "protected_evidence_boundaries": "This commit is an accurately labelled structural recovery source only. The function/body parent, renderer, inert artifact, parse evidence and behavior contract are intentionally stale and ineligible until their ordered descendant rebinds pass. Immutable failure 023 remains preserved and mutable failed behavior evidence remains untracked and unstaged. No protected, patient, clinical or product data, provider, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref authority is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

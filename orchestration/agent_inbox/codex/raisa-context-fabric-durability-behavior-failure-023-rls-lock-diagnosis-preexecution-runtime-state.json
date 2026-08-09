@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "sol_runs_the_failure_023_rls_lock_diagnosis_once_in_one_newly_owned_networkless_pull_never_postgresql_16_container_then_persists_only_the_bounded_observation_and_cleanup_receipt",
+  "source_evidence": {
+    "live_handover_current_baton": "Attempt 023 stopped at BTR-E01 CF004 in register_observer_generation_v1 line 81 with zero admitted scenarios and exact cleanup. The active dependency is one bounded diagnosis of the stream-head SELECT FOR UPDATE path before any structural recovery is accepted.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled serial diagnostic run, exact cleanup and evidence reconciliation. The user-requested codebase-health research is complete and read-only. No implementation worker, external verifier or provider is active, and no subagent receives runtime authority.",
+    "active_plan_and_acceptance": "Committed diagnosis scaffold f16a646493c7db2bf9aff3bfd6d31f7d9be0b891 changes only two CF004 messages in an ephemeral in-memory replacement of register_observer_generation_v1 immediately before exact BTR-E01. It records only plain SELECT row count, lifecycle binding boolean, SELECT FOR UPDATE zero/multiple class, hashes, exact owned container ID and cleanup absence. The expected closed result is 1, true and no_data. Exactly 121 focused tests, Ruff, format and diff checks pass.",
+    "protected_evidence_boundaries": "The diagnostic invokes run_rehearsal directly and cannot overwrite mutable provider-free-behavior-transaction-evidence.json, which remains untracked at SHA-256 de359f9acc731b0127517b6dc14accb9bfe7e9b5ae63b35213cf5d6e160649ee. It may create exactly one random closed-prefix postgres:16-bookworm container with --pull=never, --network=none, no ports or mounts, tmpfs-only data, fixed authored-synthetic fixtures and exact-ID cleanup. No raw error is persisted. No protected, patient, clinical or product data, provider, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Task HEAD is f16a646493c7db2bf9aff3bfd6d31f7d9be0b891 with tracked state clean before this receipt. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Attempt-023 container 3ff988eb00253bfe8d56512d33060b18b8495a920b66e00060f069dfcacead82 is absent. docs/branding, unrelated untracked files and mutable failed evidence remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_failure_023_rls_lock_diagnosis_preexecution",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the committed scaffold, exact failure hash, clean tracked state, previous container absence and bounded one-run contract."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The separately authorised read-only codebase-health researcher has completed and made no repository changes."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier is active for this diagnostic runtime."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

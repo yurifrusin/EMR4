@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_stream_head_rls_lock_visibility_structural_recovery_and_bounded_diagnosis_before_rebinding_the_function_body_parent",
+  "source_evidence": {
+    "live_handover_current_baton": "Attempt 023 and its bounded diagnosis now establish the exact BTR-E01 CF004 cause. The active recovery changes only stream-head UPDATE USING lock visibility while retaining producer-only WITH CHECK and zero lifecycle direct table privileges. Behavior acceptance remains closed.",
+    "current_authority_allocation": "GPT Sol owns the structural recovery, exact parent rebind sequence, deterministic verification and later serial runtime. The codebase-health research is complete and read-only. No implementation worker or external verifier is active; the fresh Gemini veto remains deferred until all descendants are rebound and deterministic checks pass.",
+    "active_plan_and_acceptance": "The diagnosis released exactly plain-select count 1, lifecycle binding true and SELECT FOR UPDATE no_data, with raw error unpersisted and exact cleanup. Structural contract SHA-256 is resealed to a79be2598a3e3c5a8636ab8a1c16c06523ce9716d2387764cfecc1004ff5d14e. Only pol_cf_01_update USING adds LIFECYCLE; WITH CHECK remains PRODUCER-only, pol_cf_10/11 update policies remain unchanged and context_lifecycle retains zero direct DML/SELECT. Register revision 130 has 155 incidents and zero open. Exactly 136 focused tests, Ruff, format and diff checks pass.",
+    "protected_evidence_boundaries": "This commit is an accurately labelled structural recovery source only. The function/body parent, renderer, inert artifact, parse evidence and behavior contract are intentionally stale and ineligible until their ordered descendant rebinds pass. Immutable failure 023 remains preserved and mutable failed behavior evidence remains untracked and unstaged. No protected, patient, clinical or product data, provider, operational database, application/API/Diary wiring, watcher/listener/feed, command/write, deployment, production, release, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Task HEAD before this explicit-path structural commit is f16a646493c7db2bf9aff3bfd6d31f7d9be0b891. Remote task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the diagnosis receipt pair/result, structural recovery docs and threat delta, structural contract/schema/test, register revision 130 and this precommit pair are eligible; docs/branding, research receipts, unrelated untracked files and mutable behavior evidence remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_rls_lock_visibility_structural_recovery_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified exact diagnosis output and cleanup, contract/schema equality, structural semantic guards, 136 focused tests, Ruff, formatting and diff checks."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The separately authorised read-only codebase-health researcher completed without repository changes."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh independent veto remains deferred until complete parent and artifact rebind."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

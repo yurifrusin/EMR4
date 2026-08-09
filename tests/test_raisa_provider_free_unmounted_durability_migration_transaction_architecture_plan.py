@@ -335,6 +335,14 @@ def validate_renderer_semantics(contract: dict) -> None:
                 )
     assert contract["rls_policy_catalogue"]["deny_when_no_applicable_policy"] is True
     assert contract["rls_policy_catalogue"]["public_privileges_revoked"] is True
+    lifecycle = "'LIFECYCLE'::emr4_context_fabric.logical_capability"
+    assert lifecycle in policies["pol_cf_01_select"]["using_sql"]
+    assert lifecycle in policies["pol_cf_01_insert"]["with_check_sql"]
+    assert lifecycle in policies["pol_cf_01_update"]["using_sql"]
+    assert lifecycle not in policies["pol_cf_01_update"]["with_check_sql"]
+    for policy_id in ("pol_cf_10_update", "pol_cf_11_update"):
+        assert lifecycle not in policies[policy_id]["using_sql"]
+        assert lifecycle not in policies[policy_id]["with_check_sql"]
 
     roles = {role["role"]: role for role in contract["role_matrix"]}
     assert set(roles) == {
@@ -640,17 +648,19 @@ def test_exact_schema_and_canonical_digest_pass() -> None:
     )
 
 
-def test_generation_registration_rls_covers_only_its_initial_projection_effects() -> None:
+def test_generation_registration_rls_covers_only_its_initial_projection_effects() -> (
+    None
+):
     contract = data(CONTRACT)
     policies = {
-        policy["id"]: policy
-        for policy in contract["rls_policy_catalogue"]["policies"]
+        policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
     }
     lifecycle = "'LIFECYCLE'::emr4_context_fabric.logical_capability"
 
     expected_lifecycle_predicates = {
         "pol_cf_01_select": "using_sql",
         "pol_cf_01_insert": "with_check_sql",
+        "pol_cf_01_update": "using_sql",
         "pol_cf_10_select": "using_sql",
         "pol_cf_10_insert": "with_check_sql",
         "pol_cf_11_select": "using_sql",
@@ -659,11 +669,49 @@ def test_generation_registration_rls_covers_only_its_initial_projection_effects(
     for policy_id, predicate_field in expected_lifecycle_predicates.items():
         assert lifecycle in policies[policy_id][predicate_field]
 
-    # Registration creates the initial head, frames and watermarks. It never
-    # receives the producer/coordinator authority to update those rows later.
-    for policy_id in ("pol_cf_01_update", "pol_cf_10_update", "pol_cf_11_update"):
+    # PostgreSQL applies UPDATE USING policy visibility to SELECT FOR UPDATE.
+    # Lifecycle may therefore lock an existing stream head during registration,
+    # while producer-only WITH CHECK and zero direct DML keep mutation closed.
+    assert lifecycle not in policies["pol_cf_01_update"]["with_check_sql"]
+    for policy_id in ("pol_cf_10_update", "pol_cf_11_update"):
         assert lifecycle not in policies[policy_id]["using_sql"]
         assert lifecycle not in policies[policy_id]["with_check_sql"]
+
+    roles = {role["role"]: role for role in contract["role_matrix"]}
+    lifecycle_role = roles["context_lifecycle"]
+    assert lifecycle_role["direct_table_dml"] == []
+    assert lifecycle_role["direct_table_select"] == []
+    assert "register_observer_generation_v1" in lifecycle_role["execute_entry_points"]
+
+
+def test_stream_head_lock_visibility_cannot_be_removed_or_widened_to_mutation() -> None:
+    contract = data(CONTRACT)
+    lifecycle = ", 'LIFECYCLE'::emr4_context_fabric.logical_capability"
+
+    missing_lock_visibility = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in missing_lock_visibility["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_01_update"]["using_sql"] = policies["pol_cf_01_update"][
+        "using_sql"
+    ].replace(lifecycle, "")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(missing_lock_visibility))
+
+    widened_write_check = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in widened_write_check["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_01_update"]["with_check_sql"] = policies["pol_cf_01_update"][
+        "with_check_sql"
+    ].replace(
+        "'PRODUCER'::emr4_context_fabric.logical_capability",
+        "'PRODUCER'::emr4_context_fabric.logical_capability" + lifecycle,
+    )
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(widened_write_check))
 
 
 def test_exact_schema_rejects_resealed_non_hash_mutation() -> None:
