@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_attempt_047_failure_diagnosis_and_harness_only_contiguous_rollback_fixture_recovery_before_fresh_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "Behavior attempt 047 at accepted HEAD 5f4067340be0958612b0dad351222f32f13900d1 failed once in BTR-B03, was preserved immutably and not rerun. Repository-only diagnosis proves a harness fixture gap rather than an artifact defect. The current candidate repairs only that fixture.",
+    "current_authority_allocation": "GPT Sol owns diagnosis, harness-only recovery and explicit-path commit. A fresh Gemini 3.6 Flash/high context may receive read-only exact-head veto authority after commit. No new database run is allowed until that veto passes; then exactly one newly numbered attempt 048 may be separately receipted. No provider, product or protected integration authority is open.",
+    "active_plan_and_acceptance": "Immutable failure evidence SHA-256 bc577de88b7acafac72828bb2ddae898181886d08676c8802acf84ef925ebd63 binds attempt 2be135bb50da12e457e64eb6, BTR-B03, expected P0001, observed 22012 and complete cleanup. Diagnosis proves position two exceeded checkpoint zero plus one and correctly produced a coverage-gap result. The candidate changes only rollback precondition/transition/probe position from two to one; behavior contract and artifact hashes remain unchanged. Focused behavior/diagnosis and AER suites plus Ruff pass. AER revision 203 contains 237 closed incidents through AER-0237.",
+    "protected_evidence_boundaries": "The protected mutable behavior alias was restored byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and exact container absence verified. Parse aliases remain restored. This commit starts no database and opens no operational persistence, watcher/feed, app/API/Diary wiring, patient/clinical/product data, provider, deployment, release, Pages or protected ref. docs/branding and unrelated untracked paths remain excluded.",
+    "git_refs_and_worktree": "Primary task branch is exact 5f4067340be0958612b0dad351222f32f13900d1 before this explicit-path commit with only declared failure/diagnosis/recovery/AER tracked changes. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

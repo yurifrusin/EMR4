@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 202
+    assert register["register_revision"] == 203
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 237)
+        f"AER-{index:04d}" for index in range(1, 238)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 236
+    assert report["incident_count"] == 237
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,19 +2508,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 202
-    assert report["incident_count"] == 236
+    assert report["register_revision"] == 203
+    assert report["incident_count"] == 237
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 147,
-        "harness": 29,
+        "harness": 30,
         "repository": 51,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 26,
         "evidence_misreport": 32,
-        "harness_failure": 29,
+        "harness_failure": 30,
         "output_contract_violation": 61,
         "read_only_violation": 3,
         "reasoning_claim_error": 25,
@@ -2528,7 +2528,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 80,
+        "accepted_candidate_changed": 81,
         "canonical_unchanged": 131,
         "untrusted_partial_worktree": 25,
     }

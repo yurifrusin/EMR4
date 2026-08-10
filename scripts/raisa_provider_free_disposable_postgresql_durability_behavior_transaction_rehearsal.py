@@ -1687,7 +1687,7 @@ def render_scenario_sql(contract: dict[str, Any], scenario_id: str) -> bytes:
             "context_coordinator",
             [
                 _transition_result_select(
-                    contract, "BTR-B03", observer="observer_rollback", position=2
+                    contract, "BTR-B03", observer="observer_rollback", position=1
                 ),
                 "DO $fixed_abort$ BEGIN RAISE EXCEPTION USING ERRCODE='P0001', MESSAGE='fixed_injected_rollback'; END $fixed_abort$;",
             ],
@@ -1721,13 +1721,13 @@ def render_position_two_precondition(contract: dict[str, Any]) -> bytes:
 
 def render_rollback_primary_precondition(contract: dict[str, Any]) -> bytes:
     f = contract["fixture_namespace"]
-    packet = _packet(f).replace("__POSITION__", "2")
+    packet = _packet(f).replace("__POSITION__", "1")
     return _script(
         "context_observer",
         [
             "SELECT (emr4_context_fabric.admit_proofread_observation_v1("
             + _locator(f, "observer_rollback")
-            + ",2,"
+            + ",1,"
             + packet
             + ")).entry_kind;"
         ],
@@ -2244,7 +2244,7 @@ def _probe_sql(contract: dict[str, Any], scenario_id: str) -> str:
             "(SELECT pg_catalog.bool_and(NOT rolbypassrls) FROM pg_catalog.pg_roles WHERE rolname LIKE 'context_%')",
         ],
         "BTR-B03": [
-            f"(SELECT count(*)=1 FROM emr4_context_fabric.context_proofread_observation_admission WHERE observer_id={_lit(f['observer_rollback'])}::pg_catalog.uuid AND source_position=2 AND entry_kind='PRIMARY')",
+            f"(SELECT count(*)=1 FROM emr4_context_fabric.context_proofread_observation_admission WHERE observer_id={_lit(f['observer_rollback'])}::pg_catalog.uuid AND source_position=1 AND entry_kind='PRIMARY')",
             f"(SELECT count(*)=0 FROM emr4_context_fabric.context_classified_observation_receipt WHERE observer_id={_lit(f['observer_rollback'])}::pg_catalog.uuid)",
         ],
     }

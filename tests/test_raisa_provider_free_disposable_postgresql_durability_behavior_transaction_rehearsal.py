@@ -963,6 +963,27 @@ def test_transition_scenarios_emit_one_exact_transaction_local_result_marker() -
     )
 
 
+def test_rollback_transition_fixture_uses_first_contiguous_position() -> None:
+    precondition = rehearsal.render_rollback_primary_precondition(CONTRACT).decode(
+        "utf-8"
+    )
+    scenario = rehearsal.render_scenario_sql(CONTRACT, "BTR-B03").decode("utf-8")
+    probe = rehearsal._probe_sql(CONTRACT, "BTR-B03")  # noqa: SLF001
+
+    assert "source_position=1" in probe
+    assert "source_position=2" not in probe
+    assert ",1,ROW(" in precondition
+    assert ",2,ROW(" not in precondition
+    assert "source.transaction_position=1::pg_catalog.int8" in precondition
+    assert "source.transaction_position=2::pg_catalog.int8" not in precondition
+    assert ",1::pg_catalog.int8)::emr4_context_fabric.admission_locator_v1" in scenario
+    assert ",2::pg_catalog.int8)::emr4_context_fabric.admission_locator_v1" not in scenario
+    assert "'expected_result_kind','RECEIPT_APPLIED'" in scenario
+    assert scenario.index(rehearsal.TRANSITION_RESULT_MARKER) < scenario.index(
+        "fixed_injected_rollback"
+    )
+
+
 def test_transition_result_hardening_does_not_widen_relation_deltas() -> None:
     assert (
         "emr4_context_fabric.context_observer_generation"

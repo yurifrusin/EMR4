@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 202,
+  "register_revision": 203,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -9515,6 +9515,47 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-admission-replay-parse-characterization-review-worktree-preflight.json",
           "docs/ariadne-agent-error-correction-register-revision-202.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0237",
+      "attempt_id": "raisa-context-fabric-behavior-attempt-047",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": "deterministic-python",
+      "reasoning_level": "deterministic",
+      "transport": "local_disposable_postgresql_16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The BTR-B03 injected-rollback fixture must invoke an otherwise applicable contiguous coordinator transition before raising fixed P0001, so it tests outer rollback rather than coverage-gap handling.",
+      "observed_error": "Immutable attempt 047 reached BTR-B03 with expected P0001 but observed 22012 because the fixture precommitted and transitioned source position two while observer_rollback remained at checkpoint zero; the artifact correctly returned REBASE_APPLIED for the coverage gap and the harness's typed RECEIPT_APPLIED assertion divided by zero before the fixed injection.",
+      "detection_method": "Bounded failure evidence identifies BTR-B03, expected P0001, observed 22012 and complete cleanup. Repository-only diagnosis binds the failed position-two precondition/transition, checkpoint-zero registration, the artifact's exact source_position greater than last_contiguous_position plus one gap guard and the typed result assertion without another database run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-047.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_047_rollback_gap_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_047_rollback_gap_diagnosis.py",
+        "docs/raisa-context-fabric-durability-behavior-failure-047-rollback-gap-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-203.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.rollback_fixture_skips_contiguous_position_before_expected_apply",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Use already available source position one for the rollback observer's precommitted primary, coordinator transition and post-rollback retention probe while preserving expected RECEIPT_APPLIED then P0001.",
+        "prevention_control": "Rollback fixtures that expect an applied coordinator transition must prove source_position equals last_contiguous_position plus one; deliberate gap positions belong to rebase scenarios, not rollback injection scenarios.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-203.md"
         ]
       },
       "status": "corrected"
