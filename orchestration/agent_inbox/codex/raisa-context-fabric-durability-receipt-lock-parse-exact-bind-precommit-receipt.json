@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_immutable_receipt_lock_parse_characterization_and_exact_digest_contract_before_reproduction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Immutable characterization evidence SHA-256 97b5fe865ba0db6399b7f1fca54ff922efa6cf6e695c3ca467282241d49cc277 proves atomic parse, 48 policies, all 17 bounded query digests and cleanup. The exact-digest contract seal is sha256:f2be7725ce86f8f6b603c6b1a734941b72a500b3c60308fb2a7b6ea7cd46101f. Fourteen focused contract/evidence/plan tests and Ruff pass.",
+    "current_authority_allocation": "GPT Sol owns immutable characterization acceptance, exact digest binding and task-branch integration. One later fixed exact-reproduction run remains within the closed plan. Provider, product runtime, behavior rehearsal, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Precommit task HEAD is exact 1562dcd0adfabbf58dd87b5cbe884fd0c408a83c. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging excludes both mutable evidence aliases, docs/branding and unrelated untracked files.",
+    "live_handover_current_baton": "Characterization-only parse attempt 2b0e682dfbcc78f583da2750 completed at task HEAD 1562dcd0adfabbf58dd87b5cbe884fd0c408a83c, returned the required nonpassing characterization result and removed its exact container.",
+    "protected_evidence_boundaries": "The parse characterization mutable alias is restored to prior SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536 and remains unstaged. Mutable behavior evidence remains exact 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. No raw logs, credentials, branding, patient/product data or operational database surface opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

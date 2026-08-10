@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_exactly_one_fixed_no_argument_provider_free_networkless_parse_characterization_and_verify_exact_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Contract seal sha256:15a80a1458fbd19fb7a4b04d20623ceaed7298ad2b711047340658fcf36f9d7e binds exact inert artifact bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38, 1,437,022 LF bytes, 424 statements and 48 policies. Successful characterization must still return nonpassing catalogue_characterization_required, preserve bounded digests and verify cleanup.",
+    "current_authority_allocation": "GPT Sol owns exactly one local provider-free disposable PostgreSQL characterization and exact owned-container cleanup. No behavior rehearsal, external worker, provider, product runtime, deployment, release, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Execution task HEAD is exact 1562dcd0adfabbf58dd87b5cbe884fd0c408a83c. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. No staging or Git ref movement occurs during the run.",
+    "live_handover_current_baton": "The characterization-only parse contract is committed at exact 1562dcd0adfabbf58dd87b5cbe884fd0c408a83c and cannot return an acceptance pass. One fixed no-argument disposable run is the next closed-plan action.",
+    "protected_evidence_boundaries": "Existing parse characterization evidence is backed up before the fixed harness writes its mutable alias. Only bounded authored-synthetic catalogue digests and exact cleanup metadata may persist. Mutable behavior evidence remains untouched at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b; branding, raw logs, credentials, patient/product data and operational databases remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

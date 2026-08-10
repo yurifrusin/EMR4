@@ -366,6 +366,20 @@ OUTBOX_SELECT_EXACT_PASS_EVIDENCE_PATH = (
 OUTBOX_SELECT_EXACT_PASS_EVIDENCE = json.loads(
     OUTBOX_SELECT_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+RECEIPT_LOCK_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-receipt-lock-rls-characterization.json"
+)
+RECEIPT_LOCK_CHARACTERIZATION_EVIDENCE = json.loads(
+    RECEIPT_LOCK_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS = {
+    key: value
+    for key, value in RECEIPT_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"][
+        "query_digests"
+    ].items()
+    if key not in {"server", "extensions"}
+}
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -2399,7 +2413,7 @@ def test_outbox_select_characterization_is_immutable_and_exactly_bound() -> None
     }
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
-        "expected_query_digests": OUTBOX_SELECT_EXPECTED_QUERY_DIGESTS,
+        "expected_query_digests": RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS,
     }
 
 
@@ -2451,6 +2465,46 @@ def test_outbox_select_exact_reproduction_is_immutable_and_complete() -> None:
         ),
         "removed": True,
         "status": "cleanup_verified",
+    }
+
+
+def test_receipt_lock_characterization_is_immutable_and_exactly_bound() -> None:
+    evidence = RECEIPT_LOCK_CHARACTERIZATION_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(RECEIPT_LOCK_CHARACTERIZATION_EVIDENCE_PATH.read_bytes())  # noqa: SLF001
+        == "97b5fe865ba0db6399b7f1fca54ff922efa6cf6e695c3ca467282241d49cc277"
+    )
+    assert evidence["attempt_id"] == "2b0e682dfbcc78f583da2750"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:15a80a1458fbd19fb7a4b04d20623ceaed7298ad2b711047340658fcf36f9d7e"
+    )
+    assert evidence["parent"]["artifact_sha256"] == (
+        "sha256:bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38"
+    )
+    assert {
+        key
+        for key, value in RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS.items()
+        if OUTBOX_SELECT_EXPECTED_QUERY_DIGESTS[key] != value
+    } == {"policies"}
+    assert evidence["catalogue"]["kind_counts"] == {
+        **OUTBOX_SELECT_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"],
+        "policies": 48,
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "e2a2f2c7de20bddb8c82c408b4223f2f0c73d1faff17aea9a3c6be23dd325114"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert CONTRACT["catalogue_expectation"] == {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS,
     }
 
 
