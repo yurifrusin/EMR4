@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 182,
+  "register_revision": 183,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8466,6 +8466,46 @@
         "evidence_paths": [
           "docs/raisa-provider-free-unmounted-durability-function-trigger-body-admission-lock-policy-parent-rebind.md",
           "docs/ariadne-agent-error-correction-register-revision-182.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0211",
+      "attempt_id": "raisa-context-fabric-admission-lock-behavior-rebind-register-veto-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every incident-register revision must reconcile revision, ID range, seed, origin, category, candidate-state and total-count assertions before the whole exact register file is run.",
+      "observed_error": "After AER-0209 and AER-0210 raised the exact agent-behavior population from 131 to 133, test_seed_separates_agent_behavior_from_transport retained the stale value 131. The fresh exact-head verifier passed every substantive admission-lock challenge but correctly returned revision_required when that whole-file register test failed.",
+      "detection_method": "The fresh r164 Gemini 3.6 Flash/high veto ran the complete packet in a clean unchanged worktree and reported the single assertion mismatch with observed 133 and expected 131; Ruff, diff hygiene and every durability-specific check passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-admission-lock-behavior-rebind-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-183.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Reconcile the seed assertion to 133, advance the register to revision 183 with 211 incidents, update every exact aggregate and recurring-pattern expectation, regenerate the pattern report and require the entire register test file in the corrected deterministic and verifier packets.",
+        "prevention_control": "Before regenerating the report after any future register edit, search the whole exact register test for every revision, ID-range, seed, origin, category, candidate-state and total-count literal; then run the entire register file as the only acceptance packet.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-admission-lock-behavior-rebind-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-183.md",
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },
       "status": "corrected"

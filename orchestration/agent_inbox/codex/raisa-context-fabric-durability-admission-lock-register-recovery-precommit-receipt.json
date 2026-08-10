@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_rejected_exact_head_review_provenance_aer_0211_complete_register_count_recovery_and_this_receipt_before_a_fresh_corrected_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "AER-0211 records the recurring repository.agent_error_register_exact_count_update_incomplete defect. Revision 183 contains 211 closed incidents with origin counts 133/22/47/9 and candidate-state counts 68/121/22. The complete register test file, Ruff and diff hygiene pass. Behavior contract and twenty scenarios remain unchanged at source 3cbaa4cb68acb78370183947a315f946f8d0ddaa.",
+    "current_authority_allocation": "GPT Sol owns repository correction, explicit-path integration and acceptance. The first Gemini 3.6 Flash/high reviewer has no continuing lease. A distinct fresh Antigravity project may perform a corrected exact-HEAD read-only veto only after this commit and fresh deterministic admission.",
+    "git_refs_and_worktree": "Precommit task HEAD is exact 3cbaa4cb68acb78370183947a315f946f8d0ddaa; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit staging is limited to revision 183, register, pattern report, focused register test, first review packet/state/receipt/preflight/result and this generated receipt; all unrelated untracked paths including docs/branding remain excluded.",
+    "live_handover_current_baton": "The exact admission-lock behavior rebind remains substantively unchanged and database runtime remains unopened. Fresh r164 review passed all durability and authority challenges but returned revision_required for one stale agent-error-register seed count; the next safe action is to preserve that receipt and commit the complete count reconciliation before a fresh veto.",
+    "protected_evidence_boundaries": "The rejected verifier worktree remained exact and clean and started no Docker or database. Mutable behavior and parse evidence remain byte-exact, untracked and unstaged. No protected holdout, branding, patient/clinical/product data, credential, provider, application/API/Diary, watcher/feed, deployment, release, Pages or protected-ref surface opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

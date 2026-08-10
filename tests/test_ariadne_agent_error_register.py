@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 182
+    assert register["register_revision"] == 183
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 211)
+        f"AER-{index:04d}" for index in range(1, 212)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 131
+    assert len(agent_incidents) == 133
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 210
+    assert report["incident_count"] == 211
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,13 +2508,13 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 182
-    assert report["incident_count"] == 210
+    assert report["register_revision"] == 183
+    assert report["incident_count"] == 211
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 133,
         "harness": 22,
-        "repository": 46,
+        "repository": 47,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
@@ -2524,11 +2524,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "output_contract_violation": 54,
         "read_only_violation": 3,
         "reasoning_claim_error": 25,
-        "repository_defect": 46,
+        "repository_defect": 47,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 67,
+        "accepted_candidate_changed": 68,
         "canonical_unchanged": 121,
         "untrusted_partial_worktree": 22,
     }
@@ -2747,8 +2747,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "repository.agent_error_register_exact_count_update_incomplete"
             ),
-            "incident_count": 2,
-            "incident_ids": ["AER-0175", "AER-0179"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0175", "AER-0179", "AER-0211"],
             "origins": ["repository"],
             "categories": ["repository_defect"],
             "roles": ["orchestrator"],
@@ -3586,6 +3586,25 @@ def test_aer_0210_rejects_recurrent_structural_parent_hash_inference() -> None:
     assert "3a19167e2f00" in incident["observed_error"]
     assert "3a19167e13ac" in incident["correction"]["action"]
     assert "No action used" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0211_reconciles_recurrent_register_count_drift() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0211"
+    ]
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "repository.agent_error_register_exact_count_update_incomplete"
+    )
+    assert "expected 131" in incident["detection_method"]
+    assert "revision 183 with 211 incidents" in incident["correction"]["action"]
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
     assert incident["status"] == "corrected"
 
 

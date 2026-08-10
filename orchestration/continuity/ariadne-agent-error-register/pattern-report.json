@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "7c927aa87110f84e7ec5b34488bcb43841e32a8585150c454ce62682a6dc5d43",
+  "canonical_register_sha256": "9dd844d99adeac26c7892b40195c3e4b23714c64629d1b9e0d8fe924f28256fb",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 67,
+      "accepted_candidate_changed": 68,
       "canonical_unchanged": 121,
       "untrusted_partial_worktree": 22
     },
@@ -13,17 +13,17 @@
       "output_contract_violation": 54,
       "read_only_violation": 3,
       "reasoning_claim_error": 25,
-      "repository_defect": 46,
+      "repository_defect": 47,
       "transport_timeout": 9
     },
     "by_origin": {
       "agent_behavior": 133,
       "harness": 22,
-      "repository": 46,
+      "repository": 47,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 66,
+      "low": 67,
       "material": 81,
       "moderate": 63
     },
@@ -45,7 +45,7 @@
       "deepseek-v4-flash-c5-worker::implementer": 1,
       "deepseek-v4-flash-implementation-worker::implementer": 2,
       "docker-desktop-windows::orchestrator": 1,
-      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 2,
+      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 3,
       "emr4-clean-checkout-diagnosis-test::orchestrator": 1,
       "emr4-context-fabric-admission-row-shape-generator::orchestrator": 1,
       "emr4-context-fabric-durability-body-contract::orchestrator": 1,
@@ -72,12 +72,12 @@
     },
     "by_role": {
       "implementer": 15,
-      "orchestrator": 149,
+      "orchestrator": 150,
       "verifier": 46
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 210,
+  "incident_count": 211,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -416,10 +416,11 @@
       "categories": [
         "repository_defect"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0175",
-        "AER-0179"
+        "AER-0179",
+        "AER-0211"
       ],
       "origins": [
         "repository"
@@ -515,7 +516,7 @@
       ]
     }
   ],
-  "register_revision": 182,
+  "register_revision": 183,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-10"
 }
