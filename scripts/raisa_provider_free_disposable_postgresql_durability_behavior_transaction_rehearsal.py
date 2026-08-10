@@ -267,6 +267,18 @@ EXPECTED_TRANSITION_RESULT_KINDS = {
     "BTR-I03": "RECEIPT_REPLAYED",
     "BTR-B03": "RECEIPT_APPLIED",
 }
+EXPECTED_PROBE_COUNTS = {
+    "BTR-E01": 6,
+    "BTR-E02": 7,
+    "BTR-E03": 3,
+    "BTR-I01": 2,
+    "BTR-E04": 7,
+    "BTR-I03": 2,
+    "BTR-E05": 2,
+    "BTR-I02": 3,
+    "BTR-R03": 2,
+    "BTR-B03": 2,
+}
 
 EXPECTED_DELTAS: dict[str, dict[str, int]] = {
     "BTR-E01": {
@@ -2152,13 +2164,29 @@ def _probe(
         profile,
         _probe_sql(contract, scenario_id),
     )
+    expected_probe_count = EXPECTED_PROBE_COUNTS.get(scenario_id, 1)
     if (
         not isinstance(value, dict)
         or set(value) != {"checks"}
-        or not value["checks"]
-        or not all(item is True for item in value["checks"])
+        or not isinstance(value["checks"], list)
+        or len(value["checks"]) != expected_probe_count
+        or any(type(item) is not bool for item in value["checks"])
     ):
-        raise BehaviorFailure("readback", "scenario_probe", scenario_id)
+        raise BehaviorFailure(
+            "readback", "scenario_probe_shape", {"scenario_id": scenario_id}
+        )
+    failed_probe_indexes = [
+        index for index, item in enumerate(value["checks"], start=1) if not item
+    ]
+    if failed_probe_indexes:
+        raise BehaviorFailure(
+            "readback",
+            "scenario_probe",
+            {
+                "scenario_id": scenario_id,
+                "failed_probe_indexes": failed_probe_indexes,
+            },
+        )
 
 
 def _bounded_outcome(
@@ -2639,6 +2667,19 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
             ):
                 if isinstance(detail.get(name), str):
                     failure_evidence[name] = detail[name]
+            failed_probe_indexes = detail.get("failed_probe_indexes")
+            if (
+                isinstance(failed_probe_indexes, list)
+                and 1 <= len(failed_probe_indexes) <= 16
+                and all(
+                    isinstance(value, int)
+                    and not isinstance(value, bool)
+                    and 1 <= value <= 16
+                    for value in failed_probe_indexes
+                )
+                and len(set(failed_probe_indexes)) == len(failed_probe_indexes)
+            ):
+                failure_evidence["failed_probe_indexes"] = failed_probe_indexes
             if (
                 isinstance(detail.get("function_line"), int)
                 and not isinstance(detail.get("function_line"), bool)

@@ -1,0 +1,33 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-039-probe-index-diagnosis.v1",
+  "status": "deterministic_e04_probe_mismatch_proven_probe_index_not_released_cleanup_verified",
+  "parent_failure": {
+    "run_sequence": 39,
+    "internal_attempt_id": "5dcf0e6427694521e3a2ca26",
+    "evidence_sha256": "sha256:4e0d7142187e64aa4516d115d444236b3b67582ef7a239bc37c00b00e0038f27",
+    "scenario_id": "BTR-E04",
+    "failure_stage": "readback",
+    "failure_code": "scenario_probe",
+    "cleanup_absence_verified": true
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "scenario_recovered_from_bounded_digest": true,
+    "transition_result_marker_admitted_before_probe": true,
+    "relation_delta_admitted_before_probe": true,
+    "probe_count": 7,
+    "failed_probe_index_released": false,
+    "raw_postgresql_values_persisted": false
+  },
+  "bounded_repair": {
+    "new_external_authority": false,
+    "behavior_contract_unchanged": true,
+    "database_artifact_unchanged": true,
+    "allowed_digest_changes_unchanged": true,
+    "failure_schema_adds_bounded_probe_indexes_only": true,
+    "probe_shape_must_be_exact_boolean_array": true,
+    "fresh_exact_head_veto_before_characterization": true,
+    "next_run_must_be_single_owned_disposable_attempt": true
+  },
+  "authority_boundary": "provider_free_repository_diagnosis_and_bounded_harness_evidence_repair_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority"
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_no_argument_provider_free_network_none_disposable_postgresql_twenty_scenario_outbox_result_marker_behavior_attempt_039_then_route_result_restore_mutable_evidence_and_verify_exact_id_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Behavior contract canonical digest 4ca9f7612bd79159bc2232cec5bc078219ac2145c9d1ad80927420d2f8706f16 binds six exact parents, inert SQL 265ce41e and twenty scenarios. Final r166 Gemini veto passed all 21 challenges and 341 tests. Required runtime result is raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_pass with 20 expected, 20 observed and 20 passed, exact E04/I03/B03 result kinds, nine BTR-R03 denials, exact catalogue reconciliation and owned-container cleanup. Any failure is routed immutably and diagnosed before another descendant.",
+    "current_authority_allocation": "GPT Sol alone owns exactly one no-argument local disposable behavior run, exact-ID cleanup verification, immutable result routing and protected mutable restoration. Gemini review is complete; no worker, model, product consumer or protected integrator is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exact ede9bfad1a35f34c13148354af54881e5037ba3f. Protected local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Runtime may write only the fixed mutable behavior output before Sol copies it to one immutable attempt-039 path and restores protected bytes.",
+    "live_handover_current_baton": "The complete coordinator-outbox visibility repair and result-marker behavior hardening are committed at exact task HEAD ede9bfad1a35f34c13148354af54881e5037ba3f. Fresh r166 Gemini 3.6 Flash/high veto passed. The single next safe action is the fixed twenty-scenario disposable behavior attempt 039.",
+    "protected_evidence_boundaries": "One owned PostgreSQL 16 container only, network none, no published port, no mount, container-local tmpfs, authored-synthetic fixtures and no caller input. Do not enumerate or touch unrelated containers. Mutable behavior evidence SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b is backed up under C:/Users/sarashera/AppData/Local/Temp/emr4-cf-outbox-result-marker-behavior-attempt-039-backup and must be restored after immutable routing. Parse evidence and all prior failures remain untouched. No applied migration, operational DB/credential, watcher/feed, application/API/Diary wiring, patient/product/clinical data, provider call, deploy, production, release, Pages or protected-ref movement. docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

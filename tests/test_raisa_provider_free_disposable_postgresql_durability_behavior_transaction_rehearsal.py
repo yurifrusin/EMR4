@@ -1326,6 +1326,75 @@ def test_transition_result_marker_fails_closed_on_hostile_shapes() -> None:
         rehearsal._bounded_outcome(unexpected, None, "BTR-E01")
 
 
+def test_probe_failure_releases_only_scenario_and_bounded_indexes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        rehearsal.parent,
+        "_query_json",
+        lambda *args, **kwargs: {
+            "checks": [True, False, True, False, True, True, True]
+        },
+    )
+    with pytest.raises(rehearsal.BehaviorFailure) as caught:
+        rehearsal._probe(
+            lambda *args: rehearsal.parent.ProcessResult(0, b"", b""),
+            "docker.exe",
+            "a" * 64,
+            {"postgres_database": "emr4_behavior"},
+            CONTRACT,
+            "BTR-E04",
+        )
+    assert caught.value.stage == "readback"
+    assert caught.value.code == "scenario_probe"
+    assert caught.value.detail == {
+        "scenario_id": "BTR-E04",
+        "failed_probe_indexes": [2, 4],
+    }
+
+
+@pytest.mark.parametrize(
+    "checks",
+    (
+        [True] * 6,
+        [True] * 8,
+        [True, True, True, True, True, True, 1],
+        "not-a-list",
+    ),
+)
+def test_probe_failure_shape_is_closed_and_value_free(
+    monkeypatch: pytest.MonkeyPatch, checks: Any
+) -> None:
+    monkeypatch.setattr(
+        rehearsal.parent,
+        "_query_json",
+        lambda *args, **kwargs: {"checks": checks},
+    )
+    with pytest.raises(rehearsal.BehaviorFailure) as caught:
+        rehearsal._probe(
+            lambda *args: rehearsal.parent.ProcessResult(0, b"", b""),
+            "docker.exe",
+            "a" * 64,
+            {"postgres_database": "emr4_behavior"},
+            CONTRACT,
+            "BTR-E04",
+        )
+    assert caught.value.code == "scenario_probe_shape"
+    assert caught.value.detail == {"scenario_id": "BTR-E04"}
+
+
+def test_failure_schema_admits_only_bounded_unique_probe_indexes() -> None:
+    validator = jsonschema.Draft202012Validator(EVIDENCE_SCHEMA)
+    evidence = copy.deepcopy(FAILURE_EVIDENCE_012)
+    evidence["environment"]["failure"]["failed_probe_indexes"] = [2, 4]
+    validator.validate(evidence)
+    for hostile in ([0], [17], [2, 2], [True], list(range(1, 18))):
+        mutated = copy.deepcopy(evidence)
+        mutated["environment"]["failure"]["failed_probe_indexes"] = hostile
+        with pytest.raises(jsonschema.ValidationError):
+            validator.validate(mutated)
+
+
 def test_expected_success_rejection_releases_only_scenario_and_sqlstate() -> None:
     rejected = rehearsal.parent.ProcessResult(
         3,

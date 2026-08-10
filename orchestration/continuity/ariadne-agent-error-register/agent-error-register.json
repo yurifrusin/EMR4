@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 185,
+  "register_revision": 186,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8634,6 +8634,48 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-outbox-select-body-parent-rebind-precommit-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-185.md",
           "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0215",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-failure-039-probe-index-recovery",
+      "stage": "deterministic_verification",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-behavior-semantic-probe",
+      "model": null,
+      "transport": "local_disposable_postgresql_behavior_harness",
+      "attempt_id": "5dcf0e6427694521e3a2ca26",
+      "origin": "harness",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "reasoning_level": "high",
+      "observed_error": "Behavior attempt 039 admitted the exact BTR-E04 transition result and relation deltas, then rejected the semantic probe but persisted only a digest of the scenario ID. The bounded evidence could recover BTR-E04 but could not distinguish which of seven value-free boolean predicates failed.",
+      "expected_invariant": "Every multi-item semantic probe must fail closed while releasing enough bounded, non-sensitive structure to identify the exact failed predicate without requiring an otherwise identical diagnostic database rerun.",
+      "detection_method": "Sol mapped the persisted detail digest exactly to BTR-E04, verified the control-flow order showing transition-result and relation-delta admission before the probe, and confirmed the failure evidence contained no probe index while exact container cleanup and mutable-evidence restoration passed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-039.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-039.json",
+        "docs/raisa-context-fabric-durability-behavior-failure-039-probe-index-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-186.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.semantic_probe_failure_index_elided",
+      "causal_claim_level": "observation_only",
+      "related_incident_ids": [],
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Require an exact boolean probe array and persist only unique one-based failed probe indexes bounded to 1 through 16 alongside the scenario ID. Reject missing, malformed, non-boolean, duplicate, overlong or out-of-range index material.",
+        "prevention_control": "Multi-item closed probes must pair their aggregate pass gate with a bounded predicate locator that contains no raw database value, so a safe failure remains independently diagnosable after exact-container cleanup.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-186.md"
         ]
       },
       "status": "corrected"

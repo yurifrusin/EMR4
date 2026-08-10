@@ -90,6 +90,13 @@
                 "BTR-R02", "BTR-R03", "BTR-B01", "BTR-B02", "BTR-B03"
               ]
             },
+            "failed_probe_indexes": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 16,
+              "uniqueItems": true,
+              "items": {"type": "integer", "minimum": 1, "maximum": 16}
+            },
             "function_id": {
               "enum": [
                 "emr4_context_fabric.register_observer_generation_v1",

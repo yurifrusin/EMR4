@@ -1,15 +1,15 @@
 {
-  "canonical_register_sha256": "031b2848a5a6ead3c77b898880dcd9364022070f2a44e75801fedee6a2e47d34",
+  "canonical_register_sha256": "6b5345e11fe1976abac202f4af6d560840885da3e2cd3fc2103997075e2fd881",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 70,
+      "accepted_candidate_changed": 71,
       "canonical_unchanged": 122,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 22,
       "evidence_misreport": 30,
-      "harness_failure": 23,
+      "harness_failure": 24,
       "output_contract_violation": 54,
       "read_only_violation": 3,
       "reasoning_claim_error": 25,
@@ -18,14 +18,14 @@
     },
     "by_origin": {
       "agent_behavior": 134,
-      "harness": 23,
+      "harness": 24,
       "repository": 48,
       "transport": 9
     },
     "by_process_severity": {
       "low": 67,
       "material": 83,
-      "moderate": 64
+      "moderate": 65
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 38,
@@ -50,6 +50,7 @@
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 3,
       "emr4-clean-checkout-diagnosis-test::orchestrator": 1,
       "emr4-context-fabric-admission-row-shape-generator::orchestrator": 1,
+      "emr4-context-fabric-behavior-semantic-probe::orchestrator": 1,
       "emr4-context-fabric-body-test-dispatch::orchestrator": 1,
       "emr4-context-fabric-durability-body-contract::orchestrator": 1,
       "emr4-context-fabric-durability-body-program-input-lowering::orchestrator": 1,
@@ -75,12 +76,12 @@
     },
     "by_role": {
       "implementer": 16,
-      "orchestrator": 152,
+      "orchestrator": 153,
       "verifier": 46
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 214,
+  "incident_count": 215,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -519,7 +520,7 @@
       ]
     }
   ],
-  "register_revision": 185,
+  "register_revision": 186,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-10"
 }

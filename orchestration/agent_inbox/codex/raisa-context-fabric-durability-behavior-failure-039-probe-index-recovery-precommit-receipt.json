@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_attempt_039_immutable_failure_diagnosis_and_bounded_probe_index_instrumentation_before_one_fresh_exact_head_gemini_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 039 immutable failure and deterministic diagnosis prove that the failed item was one of seven BTR-E04 semantic predicates but the prior evidence omitted its index. The candidate now validates exact boolean probe shape and may persist only unique one-based failed indexes bounded to 1 through 16. The database artifact, behavior contract, twenty scenarios and relation-delta allowlist are unchanged; the focused 237-test packet, Ruff and diff hygiene pass.",
+    "current_authority_allocation": "GPT Sol owns diagnosis, bounded repository repair, acceptance and task-branch integration. One new Gemini 3.6 Flash/high Antigravity project may receive read-only exact-HEAD veto authority after this commit. No provider, product-runtime, deployment, release, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Precommit task HEAD and local task branch are exact ede9bfad1a35f34c13148354af54881e5037ba3f; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Staging is explicit-path only and excludes docs/branding, the mutable behavior evidence alias and every unrelated untracked path.",
+    "live_handover_current_baton": "The Context Fabric PostgreSQL durability behavior descendant remains active. Exact task HEAD ede9bfad1a35f34c13148354af54881e5037ba3f passed the outbox result-marker behavior rebind veto; attempt 039 then failed safely at BTR-E04 after result-marker and relation-delta admission, and its exact owned container was removed.",
+    "protected_evidence_boundaries": "The mutable behavior evidence alias is restored and remains unstaged at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Only immutable authored-synthetic failure and diagnosis evidence is admitted. No protected holdout, branding, patient, clinical, product, credential, provider, application/API/Diary, watcher/feed, deployment, release or Pages surface opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
