@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.command-failure-receipt.v1",
+  "status": "corrected_fresh_attempt",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-anchor-lock-body-builder-check-001",
+  "failed_invocation": "python scripts/raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder.py --check",
+  "failure_class": "package_import_unavailable_under_direct_script_path",
+  "repository_write": false,
+  "candidate_changed_by_failed_invocation": false,
+  "corrected_invocation": "python -m scripts.raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder --check",
+  "corrected_result": "sha256:b54b2e6800b4484f84b2c7ba57566ecfe8c04b9a8c8e91ac6bd67be8f22b5840",
+  "authority_boundary": "provider_free_in_memory_body_builder_check_only"
+}

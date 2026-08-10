@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_the_parent_only_typed_body_rebind_to_the_accepted_recovery_anchor_lock_policy_structural_contract_with_no_body_program_change",
+  "source_evidence": {
+    "live_handover_current_baton": "Structural recovery-anchor lock policy repair is committed at exact 35c4ded8163a7d04667d1e53ccd3c6f41f059e59. It adds pol_cf_08_update_lock with exact COORDINATOR/LIFECYCLE visibility and false write check after deterministic failure 036 diagnosis.",
+    "current_authority_allocation": "GPT Sol owns this parent-only body rebind and explicit-path commit. No worker, verifier, provider runtime, product consumer or protected integrator is active.",
+    "active_plan_and_acceptance": "Rebind the byte-unchanged closed typed body from structural digest 3ce31780 to 6802a735, reseal it as b54b2e68, update exact builder/validator/tests and record the corrected module invocation incident. No body node, role, grant, scenario or runtime changes.",
+    "protected_evidence_boundaries": "Provider-free repository work only. Mutable behavior and parse evidence plus immutable failures remain unstaged and byte-preserved. No DDL regeneration in this commit, disposable run, applied migration, operational database, watcher/feed, application wiring, product/patient data, provider call, deployment, release, Pages or protected-ref movement. docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Task HEAD is exact 35c4ded8163a7d04667d1e53ccd3c6f41f059e59; protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit body-rebind, validator, test, incident and receipt paths may be staged; all unrelated untracked files remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "anchor_lock_body_parent_rebind_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns the exact parent-only body rebind commit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker lease is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh verifier use remains deferred until all descendants are reconstructed."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

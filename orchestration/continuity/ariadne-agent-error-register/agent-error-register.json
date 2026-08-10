@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 175,
+  "register_revision": 176,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8183,6 +8183,44 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-rls-recovery-precommit-corrected-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-rls-recovery-precommit-corrected-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-175.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0204",
+      "attempt_id": "raisa-context-fabric-anchor-lock-body-builder-check-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_cli",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A repository script that imports the scripts package must be invoked as a package module from the repository root, especially after the same direct-path failure has already been registered.",
+      "observed_error": "Sol directly invoked raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder.py with --check. The process failed before any write with ModuleNotFoundError for scripts.",
+      "detection_method": "The local process returned the import traceback immediately. Sol preserved the failure, made no generated-artifact claim and repeated the check only through python -m from the repository root.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-body-builder-direct-invocation-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-176.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed command is preserved. Sol invoked the builder as python -m scripts.raisa_provider_free_unmounted_durability_function_trigger_body_architecture_builder --check from the repository root; it returned exact body digest b54b2e6800 and wrote nothing.",
+        "prevention_control": "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-body-builder-direct-invocation-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-176.md"
         ]
       },
       "status": "corrected"
