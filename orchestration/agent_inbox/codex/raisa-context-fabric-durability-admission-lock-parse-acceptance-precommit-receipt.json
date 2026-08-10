@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_only_the_sol_parse_catalogue_acceptance_anchor_and_this_receipt_for_later_behavior_parent_binding",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Persist a read-only acceptance anchor for exact parse commit a1f8141b05e9f2218412d2d0e7772d3f4dcfead7 so the behavior contract can bind an immutable reviewed parent. No behavior contract is changed by this action.",
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance and explicit-path integration only. No runtime, worker, model or provider is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exact a1f8141b05e9f2218412d2d0e7772d3f4dcfead7. Protected refs remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only this acceptance file and receipt may be staged.",
+    "live_handover_current_baton": "The admission-lock parse/catalogue descendant and both immutable runtime evidence files are committed and fully tested. The next safe candidate is behavior-parent rebind.",
+    "protected_evidence_boundaries": "All protected mutable parse and behavior evidence remains unstaged and byte-exact. This action opens no database, provider, product, application, deployment, release, Pages or protected-ref surface."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
