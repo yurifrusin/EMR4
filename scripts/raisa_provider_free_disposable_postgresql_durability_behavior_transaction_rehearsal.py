@@ -57,7 +57,7 @@ EXPECTED_CONTRACT_PATH = (
     "behavior-transaction-rehearsal-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:a16769b43c8345b3c79cc79d1ca26e4cd0b2d7095515d2b13bc7e21cb27b5b8e"
+    "sha256:4ca9f7612bd79159bc2232cec5bc078219ac2145c9d1ad80927420d2f8706f16"
 )
 PASS_RESULT = (
     "raisa_provider_free_disposable_postgresql_durability_"
@@ -261,6 +261,12 @@ SNAPSHOT_RELATIONS = tuple(f"public.{name}" for name in APPLICATION_RELATIONS) +
     f"emr4_context_fabric.{name}" for name in FABRIC_RELATIONS
 )
 SERIALIZABLE_SCENARIOS = frozenset({"BTR-E01", "BTR-E04", "BTR-I03", "BTR-B03"})
+TRANSITION_RESULT_MARKER = "emr4.behavior.transition_result.v1"
+EXPECTED_TRANSITION_RESULT_KINDS = {
+    "BTR-E04": "RECEIPT_APPLIED",
+    "BTR-I03": "RECEIPT_REPLAYED",
+    "BTR-B03": "RECEIPT_APPLIED",
+}
 
 EXPECTED_DELTAS: dict[str, dict[str, int]] = {
     "BTR-E01": {
@@ -835,12 +841,7 @@ def _validate_contract() -> tuple[
         seen.add(binding["id"])
         if _sha256(_canonical_bytes(path)) != binding["sha256"]:
             raise BehaviorFailure("parent", "binding_sha256", binding["id"])
-        if binding["id"] == "accepted_runtime_source":
-            # This ledger names the accepted runtime source HEAD in its body; the
-            # ledger itself was necessarily committed by the later closeout.
-            if binding["source_head"].encode("ascii") not in _canonical_bytes(path):
-                raise BehaviorFailure("parent", "runtime_source_head_ledger")
-        elif (
+        if (
             _sha256(_git_source_bytes(binding["source_head"], binding["path"]))
             != binding["sha256"]
         ):
@@ -1032,6 +1033,29 @@ def _identity_select(principal: str) -> str:
         "'isolation',pg_catalog.current_setting('transaction_isolation'),"
         "'read_only',(pg_catalog.current_setting('transaction_read_only')='on'))"
         "::pg_catalog.text;"
+    )
+
+
+def _transition_result_select(
+    contract: dict[str, Any], scenario_id: str, *, observer: str, position: int
+) -> str:
+    expected = EXPECTED_TRANSITION_RESULT_KINDS.get(scenario_id)
+    if expected is None or position not in {1, 2}:
+        raise BehaviorFailure("render", "unsafe_transition_result_marker", scenario_id)
+    f = contract["fixture_namespace"]
+    return (
+        "WITH transition_result AS MATERIALIZED (SELECT ("
+        "emr4_context_fabric.apply_durability_transition_v1(ROW("
+        + _locator(f, observer)
+        + f",{position}::pg_catalog.int8)::emr4_context_fabric.admission_locator_v1))"
+        ".result_kind::pg_catalog.text AS result_kind) "
+        "SELECT pg_catalog.json_build_object("
+        f"'marker',{_lit(TRANSITION_RESULT_MARKER)},"
+        f"'scenario_id',{_lit(scenario_id)},"
+        "'result_kind',result_kind,"
+        f"'expected_result_kind',{_lit(expected)},"
+        f"'assertion',1 / CASE WHEN result_kind={_lit(expected)} THEN 1 ELSE 0 END"
+        ")::pg_catalog.text FROM transition_result;"
     )
 
 
@@ -1361,18 +1385,18 @@ def render_scenario_sql(contract: dict[str, Any], scenario_id: str) -> bytes:
         "BTR-E04": (
             "context_coordinator",
             [
-                "SELECT (emr4_context_fabric.apply_durability_transition_v1("
-                "ROW(" + _locator(f, "observer_happy") + ",1::pg_catalog.int8)"
-                "::emr4_context_fabric.admission_locator_v1)).result_kind;"
+                _transition_result_select(
+                    contract, "BTR-E04", observer="observer_happy", position=1
+                )
             ],
             False,
         ),
         "BTR-I03": (
             "context_coordinator",
             [
-                "SELECT (emr4_context_fabric.apply_durability_transition_v1("
-                "ROW(" + _locator(f, "observer_happy") + ",1::pg_catalog.int8)"
-                "::emr4_context_fabric.admission_locator_v1)).result_kind;"
+                _transition_result_select(
+                    contract, "BTR-I03", observer="observer_happy", position=1
+                )
             ],
             False,
         ),
@@ -1546,9 +1570,9 @@ def render_scenario_sql(contract: dict[str, Any], scenario_id: str) -> bytes:
         "BTR-B03": (
             "context_coordinator",
             [
-                "SELECT (emr4_context_fabric.apply_durability_transition_v1("
-                "ROW(" + _locator(f, "observer_rollback") + ",2::pg_catalog.int8)"
-                "::emr4_context_fabric.admission_locator_v1)).result_kind;",
+                _transition_result_select(
+                    contract, "BTR-B03", observer="observer_rollback", position=2
+                ),
                 "DO $fixed_abort$ BEGIN RAISE EXCEPTION USING ERRCODE='P0001', MESSAGE='fixed_injected_rollback'; END $fixed_abort$;",
             ],
             False,
@@ -1660,6 +1684,12 @@ def render_role_matrix(contract: dict[str, Any]) -> list[tuple[str, bytes]]:
             + _lit(f["stream_alpha"])
             + "::pg_catalog.uuid;",
         ),
+        (
+            "coordinator_outbox_direct_select",
+            "context_coordinator",
+            "SELECT count(*) FROM "
+            "emr4_context_fabric.diary_context_observation_outbox_v1;",
+        ),
     ]
     rendered: list[tuple[str, bytes]] = []
     for operation, principal, statement in operations:
@@ -1750,6 +1780,56 @@ def _identity_from_stdout(
         "isolation": expected_isolation,
         "read_only": expected_read_only,
     }
+
+
+def _transition_result_from_stdout(
+    result: parent.ProcessResult, scenario_id: str
+) -> str | None:
+    expected = EXPECTED_TRANSITION_RESULT_KINDS.get(scenario_id)
+    markers: list[dict[str, Any]] = []
+    for raw_line in result.stdout.decode("utf-8", errors="strict").splitlines():
+        line = raw_line.strip()
+        if not line.startswith("{"):
+            continue
+        try:
+            value = json.loads(line)
+        except json.JSONDecodeError:
+            if TRANSITION_RESULT_MARKER in line:
+                raise BehaviorFailure(
+                    "scenario", "transition_result_malformed", scenario_id
+                )
+            continue
+        if isinstance(value, dict) and "marker" in value:
+            if value.get("marker") != TRANSITION_RESULT_MARKER:
+                raise BehaviorFailure(
+                    "scenario", "transition_result_malformed", scenario_id
+                )
+            markers.append(value)
+    if expected is None:
+        if markers:
+            raise BehaviorFailure(
+                "scenario", "transition_result_unexpected", scenario_id
+            )
+        return None
+    if not markers:
+        raise BehaviorFailure("scenario", "transition_result_missing", scenario_id)
+    if len(markers) != 1:
+        raise BehaviorFailure("scenario", "transition_result_duplicate", scenario_id)
+    marker = markers[0]
+    expected_marker = {
+        "marker": TRANSITION_RESULT_MARKER,
+        "scenario_id": scenario_id,
+        "result_kind": expected,
+        "expected_result_kind": expected,
+        "assertion": 1,
+    }
+    if (
+        set(marker) != set(expected_marker)
+        or marker != expected_marker
+        or type(marker["assertion"]) is not int
+    ):
+        raise BehaviorFailure("scenario", "transition_result_mismatch", scenario_id)
+    return expected
 
 
 def _assert_rls_payload(result: parent.ProcessResult) -> None:
@@ -2084,6 +2164,7 @@ def _probe(
 def _bounded_outcome(
     result: parent.ProcessResult, expected_sqlstate: str | None, scenario_id: str
 ) -> tuple[str | None, dict[str, Any]]:
+    result_kind = _transition_result_from_stdout(result, scenario_id)
     bounded = parent._bounded_psql_rejection(  # noqa: SLF001
         result, max_error_line=1000, max_error_position=131072
     )
@@ -2096,16 +2177,22 @@ def _bounded_outcome(
                 detail["sqlstate"] = sqlstate
             detail.update(_safe_plpgsql_coordinate(result, scenario_id))
             raise BehaviorFailure("scenario", "unexpected_rejection", detail)
-        return None, {
+        transport = {
             "psql_exit": result.returncode,
             "stderr_digest": bounded["stderr"],
         }
+        if result_kind is not None:
+            transport["result_kind"] = result_kind
+        return None, transport
     if result.returncode == 0 or observed != [expected_sqlstate]:
         raise BehaviorFailure("scenario", "sqlstate_mismatch", expected_sqlstate)
-    return expected_sqlstate, {
+    transport = {
         "psql_exit": result.returncode,
         "stderr_digest": bounded["stderr"],
     }
+    if result_kind is not None:
+        transport["result_kind"] = result_kind
+    return expected_sqlstate, transport
 
 
 def _run_precondition(

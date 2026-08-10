@@ -252,7 +252,10 @@
           "required": ["psql_exit", "stderr_digest"],
           "properties": {
             "psql_exit": {"type": "integer", "minimum": 0},
-            "stderr_digest": {"$ref": "#/$defs/stderrDigest"}
+            "stderr_digest": {"$ref": "#/$defs/stderrDigest"},
+            "result_kind": {
+              "enum": ["RECEIPT_APPLIED", "RECEIPT_REPLAYED"]
+            }
           }
         },
         {
@@ -262,8 +265,11 @@
           "properties": {
             "matrix": {
               "type": "array",
-              "minItems": 5,
-              "maxItems": 5,
+              "anyOf": [
+                {"minItems": 5, "maxItems": 5},
+                {"minItems": 8, "maxItems": 8},
+                {"minItems": 9, "maxItems": 9}
+              ],
               "items": {"$ref": "#/$defs/matrixEntry"}
             },
             "psql_exit": {"type": "integer", "minimum": 1}

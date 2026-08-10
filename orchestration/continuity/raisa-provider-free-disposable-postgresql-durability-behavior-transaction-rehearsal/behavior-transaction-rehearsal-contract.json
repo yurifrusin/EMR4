@@ -6,33 +6,33 @@
   "parent_bindings": [
     {
       "id": "accepted_runtime_source",
-      "path": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-admission-lock-parse-reproduction-sol-acceptance.md",
-      "source_head": "a1f8141b05e9f2218412d2d0e7772d3f4dcfead7",
-      "sha256": "sha256:1a572140dd360e5be636251d2e62b677ec29d46b4c3aa8ce2c5a14dcb2c62164"
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-outbox-select-rls-exact-reproduction.json",
+      "source_head": "6a6088e525762c456c6df7fcba5c8377a94fb2ca",
+      "sha256": "sha256:b0ce639981a5822e9e66ebbb81cab74009b3ebe368f3d9e6efd75cfd32453386"
     },
     {
       "id": "inert_sql",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-      "source_head": "b0339bed1090f1f04c198ca0fb2bdf2932ca702c",
-      "sha256": "sha256:1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5"
+      "source_head": "497a4d1fe5b58fa4bcc03747abb3d389c3b51899",
+      "sha256": "sha256:265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a"
     },
     {
       "id": "render_manifest",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-      "source_head": "b0339bed1090f1f04c198ca0fb2bdf2932ca702c",
-      "sha256": "sha256:6adab0a48917c518df81035befe0991f15cba56950713f7329a08054a35f5dd7"
+      "source_head": "497a4d1fe5b58fa4bcc03747abb3d389c3b51899",
+      "sha256": "sha256:559a66e508c2a38dbfc037d3e1df482cff7106dc09ff35001b55afc63b119cbf"
     },
     {
       "id": "structural_contract",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-      "source_head": "3a19167e13ac01996180e1b5ada2a6e2ae7e135f",
-      "sha256": "sha256:1e127029e120879ec10031ffbb07d14ab386f4ce6861571f2d113e7f9fa7ef9c"
+      "source_head": "e1ca28915b09636e5d9d693216beef450f71a356",
+      "sha256": "sha256:d333ad3ef75725a8a85e7d45a072bca02a087ea869d395459140c405919814c6"
     },
     {
       "id": "body_contract",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-      "source_head": "f42558c14c59c2d37a5b96d4a880941f26038d26",
-      "sha256": "sha256:d9c7b60fa13c02d4b04f8cf68c73ae43dc0acc820a51b4a96ae8a2aed9c137c7"
+      "source_head": "1a06961916bcf73d553eb401eb08094aa4c45e20",
+      "sha256": "sha256:c88653b1db1e379e9d067dbe444a1c2cbdf0dd1dd148fe838bce274741f7c455"
     },
     {
       "id": "parse_prerequisite_contract",
@@ -356,13 +356,13 @@
       "id": "BTR-R03",
       "category": "RLS",
       "principal": "role_matrix",
-      "action": "exercise_exact_forbidden_direct_dml_and_execute_matrix",
+      "action": "exercise_exact_forbidden_direct_dml_execute_and_coordinator_outbox_select_matrix",
       "transaction_shape": "fresh_connection_per_denied_operation",
       "expected_outcome": "DENIED_STANDARD_PRIVILEGE",
       "expected_failure_id": null,
       "expected_sqlstate": "42501",
-      "readback": ["every_denied_operation_failed", "all_rows_unchanged", "no_role_membership", "no_bypassrls"],
-      "forbidden_effects": ["fabric_direct_dml", "trigger_function_execute", "cross_role_entry_execute", "set_role_success"]
+      "readback": ["every_denied_operation_failed", "all_rows_unchanged", "no_role_membership", "no_bypassrls", "coordinator_outbox_direct_select_denied"],
+      "forbidden_effects": ["fabric_direct_dml", "trigger_function_execute", "cross_role_entry_execute", "set_role_success", "coordinator_direct_outbox_select", "coordinator_direct_table_select_grant"]
     },
     {
       "id": "BTR-B01",

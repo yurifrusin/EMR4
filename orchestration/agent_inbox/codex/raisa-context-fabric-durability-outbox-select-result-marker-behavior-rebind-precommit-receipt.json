@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_outbox_select_result_marker_behavior_rebind_with_explicit_paths_before_one_fresh_exact_head_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "All six behavior parents are bound to exact accepted sources. The scenario order remains twenty and category counts remain 6/4/3/4/3. BTR-E04, BTR-I03 and BTR-B03 now require exact typed transition-result markers; BTR-R03 adds one fresh coordinator direct-outbox-SELECT denial. Canonical contract SHA-256 is 4ca9f7612bd79159bc2232cec5bc078219ac2145c9d1ad80927420d2f8706f16. The complete behavior harness and plan test pair passes.",
+    "current_authority_allocation": "GPT Sol owns deterministic rebind, integration and acceptance. Gemini 3.6 Flash/high through a fresh Antigravity project owns one read-only exact-HEAD veto after commit. No DeepSeek worker, native implementation subagent or provider runtime is assigned.",
+    "git_refs_and_worktree": "Primary task branch parent HEAD is 6a6088e525762c456c6df7fcba5c8377a94fb2ca. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Only the bounded behavior rebind files, ledger and this receipt pair are intended for the candidate commit.",
+    "live_handover_current_baton": "The outbox-select RLS structural repair, deterministic body rebind, inert DDL regeneration and exact parse/catalogue reproduction are accepted through parent HEAD 6a6088e525762c456c6df7fcba5c8377a94fb2ca. The next action is the closed behavior-contract rebind and exact-HEAD veto before one behavior attempt.",
+    "protected_evidence_boundaries": "Runtime remains closed until fresh independent veto. The protected mutable behavior evidence remains byte-unchanged at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. No applied migration, operational database or credential, persistence, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider runtime, command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

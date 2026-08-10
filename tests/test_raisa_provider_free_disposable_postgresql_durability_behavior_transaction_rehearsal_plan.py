@@ -127,29 +127,29 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-admission-lock-parse-reproduction-sol-acceptance.md",
-        "a1f8141b05e9f2218412d2d0e7772d3f4dcfead7",
-        "1a572140dd360e5be636251d2e62b677ec29d46b4c3aa8ce2c5a14dcb2c62164",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-outbox-select-rls-exact-reproduction.json",
+        "6a6088e525762c456c6df7fcba5c8377a94fb2ca",
+        "b0ce639981a5822e9e66ebbb81cab74009b3ebe368f3d9e6efd75cfd32453386",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "b0339bed1090f1f04c198ca0fb2bdf2932ca702c",
-        "1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5",
+        "497a4d1fe5b58fa4bcc03747abb3d389c3b51899",
+        "265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "b0339bed1090f1f04c198ca0fb2bdf2932ca702c",
-        "6adab0a48917c518df81035befe0991f15cba56950713f7329a08054a35f5dd7",
+        "497a4d1fe5b58fa4bcc03747abb3d389c3b51899",
+        "559a66e508c2a38dbfc037d3e1df482cff7106dc09ff35001b55afc63b119cbf",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-        "3a19167e13ac01996180e1b5ada2a6e2ae7e135f",
-        "1e127029e120879ec10031ffbb07d14ab386f4ce6861571f2d113e7f9fa7ef9c",
+        "e1ca28915b09636e5d9d693216beef450f71a356",
+        "d333ad3ef75725a8a85e7d45a072bca02a087ea869d395459140c405919814c6",
     ),
     "body_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-        "f42558c14c59c2d37a5b96d4a880941f26038d26",
-        "d9c7b60fa13c02d4b04f8cf68c73ae43dc0acc820a51b4a96ae8a2aed9c137c7",
+        "1a06961916bcf73d553eb401eb08094aa4c45e20",
+        "c88653b1db1e379e9d067dbe444a1c2cbdf0dd1dd148fe838bce274741f7c455",
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
@@ -369,7 +369,7 @@ def test_rls_lock_visibility_rebind_preserves_twenty_scenarios_and_closure() -> 
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -399,7 +399,7 @@ def test_interval_construction_rebind_preserves_twenty_scenarios_and_closure() -
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -429,7 +429,7 @@ def test_uuid_minimum_rebind_preserves_twenty_scenarios_and_closure() -> None:
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -459,7 +459,7 @@ def test_json_key_set_order_rebind_preserves_twenty_scenarios_and_closure() -> N
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -491,7 +491,7 @@ def test_dml_name_ambiguity_rebind_preserves_twenty_scenarios_and_closure() -> N
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -523,7 +523,7 @@ def test_subtransaction_xmin_rebind_preserves_twenty_scenarios_and_closure() -> 
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -556,7 +556,7 @@ def test_support_execute_grant_rebind_preserves_twenty_scenarios_and_closure() -
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -591,7 +591,7 @@ def test_admission_receiver_binding_rls_rebind_preserves_scenarios_and_closure()
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -624,7 +624,7 @@ def test_input_namespace_rebind_preserves_scenarios_and_closed_runtime() -> None
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 
@@ -662,7 +662,7 @@ def test_source_membership_fixture_recovery_preserves_scenarios_and_authority() 
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "eec93b0d67bd70a9640b3000bc63d43a08aa6817b438e0c99dbf2595a69c4c19"
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
     )
 
 

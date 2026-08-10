@@ -841,25 +841,26 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
     assert bindings["accepted_runtime_source"] == {
         "id": "accepted_runtime_source",
         "path": (
-            "orchestration/agent_inbox/codex/raisa-context-fabric-durability-"
-            "admission-lock-parse-reproduction-sol-acceptance.md"
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
+            "durability-parse-catalogue-rehearsal/provider-free-disposable-"
+            "postgresql-evidence-outbox-select-rls-exact-reproduction.json"
         ),
-        "source_head": "a1f8141b05e9f2218412d2d0e7772d3f4dcfead7",
+        "source_head": "6a6088e525762c456c6df7fcba5c8377a94fb2ca",
         "sha256": (
-            "sha256:1a572140dd360e5be636251d2e62b677ec29d46b4c3aa8ce2c5a14dcb2c62164"
+            "sha256:b0ce639981a5822e9e66ebbb81cab74009b3ebe368f3d9e6efd75cfd32453386"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "b0339bed1090f1f04c198ca0fb2bdf2932ca702c"
+        "497a4d1fe5b58fa4bcc03747abb3d389c3b51899"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5"
+        "sha256:265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a"
     )
     assert bindings["render_manifest"]["source_head"] == (
-        "b0339bed1090f1f04c198ca0fb2bdf2932ca702c"
+        "497a4d1fe5b58fa4bcc03747abb3d389c3b51899"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:6adab0a48917c518df81035befe0991f15cba56950713f7329a08054a35f5dd7"
+        "sha256:559a66e508c2a38dbfc037d3e1df482cff7106dc09ff35001b55afc63b119cbf"
     )
     assert bindings["structural_contract"] == {
         "id": "structural_contract",
@@ -868,9 +869,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-migration-transaction-architecture/"
             "migration-transaction-architecture-contract.json"
         ),
-        "source_head": "3a19167e13ac01996180e1b5ada2a6e2ae7e135f",
+        "source_head": "e1ca28915b09636e5d9d693216beef450f71a356",
         "sha256": (
-            "sha256:1e127029e120879ec10031ffbb07d14ab386f4ce6861571f2d113e7f9fa7ef9c"
+            "sha256:d333ad3ef75725a8a85e7d45a072bca02a087ea869d395459140c405919814c6"
         ),
     }
     assert bindings["parse_prerequisite_contract"]["source_head"] == (
@@ -883,9 +884,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-function-trigger-body-architecture/"
             "function-trigger-body-architecture-contract.json"
         ),
-        "source_head": "f42558c14c59c2d37a5b96d4a880941f26038d26",
+        "source_head": "1a06961916bcf73d553eb401eb08094aa4c45e20",
         "sha256": (
-            "sha256:d9c7b60fa13c02d4b04f8cf68c73ae43dc0acc820a51b4a96ae8a2aed9c137c7"
+            "sha256:c88653b1db1e379e9d067dbe444a1c2cbdf0dd1dd148fe838bce274741f7c455"
         ),
     }
 
@@ -944,6 +945,29 @@ def test_multi_transaction_scenarios_are_exactly_three_top_level_transactions() 
     for sql in (registration, conflict):
         assert sql.count("COMMIT;") == 3
         assert sql.count("SET SESSION AUTHORIZATION") == 1
+
+
+def test_transition_scenarios_emit_one_exact_transaction_local_result_marker() -> None:
+    for scenario_id, expected in rehearsal.EXPECTED_TRANSITION_RESULT_KINDS.items():
+        sql = rehearsal.render_scenario_sql(CONTRACT, scenario_id).decode("utf-8")
+        assert sql.count(rehearsal.TRANSITION_RESULT_MARKER) == 1
+        assert sql.count("apply_durability_transition_v1") == 1
+        assert "WITH transition_result AS MATERIALIZED" in sql
+        assert f"'scenario_id','{scenario_id}'" in sql
+        assert f"'expected_result_kind','{expected}'" in sql
+        assert f"CASE WHEN result_kind='{expected}' THEN 1 ELSE 0 END" in sql
+        assert sql.index(rehearsal.TRANSITION_RESULT_MARKER) < sql.index("COMMIT;")
+    rollback = rehearsal.render_scenario_sql(CONTRACT, "BTR-B03").decode("utf-8")
+    assert rollback.index(rehearsal.TRANSITION_RESULT_MARKER) < rollback.index(
+        "fixed_injected_rollback"
+    )
+
+
+def test_transition_result_hardening_does_not_widen_relation_deltas() -> None:
+    assert (
+        "emr4_context_fabric.context_observer_generation"
+        not in (rehearsal.ALLOWED_DIGEST_CHANGES["BTR-E04"])
+    )
 
 
 def test_entry_point_isolation_matches_parent_fail_closed_guards() -> None:
@@ -1006,7 +1030,7 @@ def test_trigger_scenarios_bind_the_first_reachable_producer_boundary() -> None:
     assert guard.count("ERRCODE = 'CF601'") >= 2
 
 
-def test_role_matrix_uses_eight_fresh_fixed_denial_connections() -> None:
+def test_role_matrix_uses_nine_fresh_fixed_denial_connections() -> None:
     matrix = rehearsal.render_role_matrix(CONTRACT)
     assert [name for name, _ in matrix] == [
         "producer_direct_fabric_dml",
@@ -1017,12 +1041,13 @@ def test_role_matrix_uses_eight_fresh_fixed_denial_connections() -> None:
         "coordinator_admission_direct_update",
         "coordinator_recovery_anchor_direct_update",
         "lifecycle_recovery_anchor_direct_update",
+        "coordinator_outbox_direct_select",
     ]
     for _, raw in matrix:
         sql = raw.decode("utf-8")
         assert sql.count("SET SESSION AUTHORIZATION") == 1
         assert sql.count("BEGIN ISOLATION LEVEL READ COMMITTED;") == 1
-    admission_operation, admission_raw = matrix[-3]
+    admission_operation, admission_raw = matrix[-4]
     admission_sql = admission_raw.decode("utf-8")
     assert admission_operation == "coordinator_admission_direct_update"
     assert (
@@ -1031,12 +1056,17 @@ def test_role_matrix_uses_eight_fresh_fixed_denial_connections() -> None:
     )
     assert "SET decision=decision" in admission_sql
     assert CONTRACT["fixture_namespace"]["observer_happy"] in admission_sql
-    for operation, raw in matrix[-2:]:
+    for operation, raw in matrix[-3:-1]:
         sql = raw.decode("utf-8")
         assert operation.endswith("recovery_anchor_direct_update")
         assert "UPDATE emr4_context_fabric.context_recovery_anchor" in sql
         assert CONTRACT["fixture_namespace"]["practice_alpha"] in sql
         assert CONTRACT["fixture_namespace"]["stream_alpha"] in sql
+    outbox_operation, outbox_raw = matrix[-1]
+    assert outbox_operation == "coordinator_outbox_direct_select"
+    assert (
+        "SELECT count(*) FROM emr4_context_fabric.diary_context_observation_outbox_v1;"
+    ) in outbox_raw.decode("utf-8")
 
 
 def test_bootstrap_is_fixed_to_six_bindings_four_opaque_appointments_and_no_credentials() -> (
@@ -1217,6 +1247,83 @@ def test_sqlstate_admission_is_exact_and_never_uses_error_text() -> None:
     assert set(bounded) == {"psql_exit", "stderr_digest"}
     with pytest.raises(rehearsal.BehaviorFailure, match="sqlstate_mismatch"):
         rehearsal._bounded_outcome(rejected, "CF601", "BTR-T02")
+
+
+def _transition_marker(scenario_id: str, result_kind: str, assertion: Any = 1) -> bytes:
+    return (
+        json.dumps(
+            {
+                "marker": rehearsal.TRANSITION_RESULT_MARKER,
+                "scenario_id": scenario_id,
+                "result_kind": result_kind,
+                "expected_result_kind": rehearsal.EXPECTED_TRANSITION_RESULT_KINDS[
+                    scenario_id
+                ],
+                "assertion": assertion,
+            },
+            separators=(",", ":"),
+        ).encode("utf-8")
+        + b"\n"
+    )
+
+
+def test_transition_result_marker_releases_only_exact_typed_outcomes() -> None:
+    applied = rehearsal.parent.ProcessResult(
+        0, _transition_marker("BTR-E04", "RECEIPT_APPLIED"), b""
+    )
+    observed, transport = rehearsal._bounded_outcome(applied, None, "BTR-E04")
+    assert observed is None
+    assert transport["result_kind"] == "RECEIPT_APPLIED"
+
+    replayed = rehearsal.parent.ProcessResult(
+        0, _transition_marker("BTR-I03", "RECEIPT_REPLAYED"), b""
+    )
+    assert (
+        rehearsal._bounded_outcome(replayed, None, "BTR-I03")[1]["result_kind"]
+        == "RECEIPT_REPLAYED"
+    )
+
+    rollback = rehearsal.parent.ProcessResult(
+        3,
+        _transition_marker("BTR-B03", "RECEIPT_APPLIED"),
+        b"psql:<stdin>:4: ERROR:  P0001: fixed_injected_rollback\n",
+    )
+    observed, transport = rehearsal._bounded_outcome(rollback, "P0001", "BTR-B03")
+    assert observed == "P0001"
+    assert transport["result_kind"] == "RECEIPT_APPLIED"
+
+
+def test_transition_result_marker_fails_closed_on_hostile_shapes() -> None:
+    missing = rehearsal.parent.ProcessResult(0, b"", b"")
+    with pytest.raises(rehearsal.BehaviorFailure, match="transition_result_missing"):
+        rehearsal._bounded_outcome(missing, None, "BTR-E04")
+
+    marker = _transition_marker("BTR-E04", "RECEIPT_APPLIED")
+    duplicate = rehearsal.parent.ProcessResult(0, marker + marker, b"")
+    with pytest.raises(rehearsal.BehaviorFailure, match="transition_result_duplicate"):
+        rehearsal._bounded_outcome(duplicate, None, "BTR-E04")
+
+    wrong = rehearsal.parent.ProcessResult(
+        0, _transition_marker("BTR-E04", "RECEIPT_REPLAYED"), b""
+    )
+    with pytest.raises(rehearsal.BehaviorFailure, match="transition_result_mismatch"):
+        rehearsal._bounded_outcome(wrong, None, "BTR-E04")
+
+    boolean_assertion = rehearsal.parent.ProcessResult(
+        0, _transition_marker("BTR-E04", "RECEIPT_APPLIED", True), b""
+    )
+    with pytest.raises(rehearsal.BehaviorFailure, match="transition_result_mismatch"):
+        rehearsal._bounded_outcome(boolean_assertion, None, "BTR-E04")
+
+    malformed = rehearsal.parent.ProcessResult(
+        0, b'{"marker":"emr4.behavior.transition_result.v1"\n', b""
+    )
+    with pytest.raises(rehearsal.BehaviorFailure, match="transition_result_malformed"):
+        rehearsal._bounded_outcome(malformed, None, "BTR-E04")
+
+    unexpected = rehearsal.parent.ProcessResult(0, marker, b"")
+    with pytest.raises(rehearsal.BehaviorFailure, match="transition_result_unexpected"):
+        rehearsal._bounded_outcome(unexpected, None, "BTR-E01")
 
 
 def test_expected_success_rejection_releases_only_scenario_and_sqlstate() -> None:
