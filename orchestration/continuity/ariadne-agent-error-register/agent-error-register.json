@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 199,
+  "register_revision": 201,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -9396,6 +9396,87 @@
         "prevention_control": "Expected-nonzero native probes must locally capture and interpret exit status instead of inheriting a broad terminating PowerShell error preference.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-199.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0234",
+      "attempt_id": "raisa-context-fabric-behavior-attempt-046",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": "deterministic-python",
+      "reasoning_level": "deterministic",
+      "transport": "local_disposable_postgresql_16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A committed INSERT_OR_RELOAD_COMPARE winner must be recognisable across later transactions without requiring a new transaction timestamp to equal its immutable server-authored admitted_at value.",
+      "observed_error": "Immutable attempt 046 stopped on the third BTR-I02 transaction with CF004 at admit_proofread_observation_v1 line 72 because the conflict insert correctly did nothing on its primary key, but the reload winner predicate compared stored admitted_at to the replay transaction timestamp and found no exact winner.",
+      "detection_method": "The immutable bounded failure identifies BTR-I02, CF004, function and line with complete cleanup. Repository-only diagnosis binds all three INSERT_OR_RELOAD_COMPARE nodes, their exact primary-key conflict columns, transaction_timestamp admitted_at bindings and the unstable admitted_at winner comparisons without another container run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-046.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-046.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_046_admission_replay_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_046_admission_replay_diagnosis.py",
+        "docs/raisa-context-fabric-durability-behavior-failure-046-admission-replay-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-200.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.server_authored_timestamp_used_as_cross_transaction_winner_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Remove only admitted_at equals transaction_timestamp from the three effective admission reload winner predicates while preserving database-authored insertion, immutable storage, returned row images and every true identity or semantic comparison.",
+        "prevention_control": "INSERT_OR_RELOAD_COMPARE winner predicates must distinguish stable caller-derived values from server-authored volatile values; volatile audit timestamps may be returned but cannot define cross-transaction semantic identity.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-200.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0235",
+      "attempt_id": "raisa-context-fabric-behavior-failure-046-diagnosis-tests-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A new deterministic diagnosis must read bounded failure telemetry from the exact schema location proved by the immutable evidence before its first focused test pass.",
+      "observed_error": "The first diagnosis draft treated preconditions as an object containing failure telemetry, but the evidence schema stores preconditions as an array and the bounded failure envelope under environment.failure; both focused tests stopped before any candidate or runtime action.",
+      "detection_method": "The first two-test run failed with AttributeError on preconditions.get. Direct schema inspection confirmed environment.failure, after which the path was corrected and both deterministic CLI tests passed.",
+      "evidence_paths": [
+        "scripts/raisa_context_fabric_durability_behavior_failure_046_admission_replay_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_046_admission_replay_diagnosis.py",
+        "docs/ariadne-agent-error-correction-register-revision-201.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.failure_evidence_schema_location_assumed_before_test",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Read the bounded failure envelope from environment.failure, rerun the deterministic two-test suite and require byte-identical CLI output before accepting the diagnosis.",
+        "prevention_control": "New diagnosis readers must enumerate and type-check immutable evidence top-level fields before coding nested-path assertions.",
+        "evidence_paths": [
+          "scripts/raisa_context_fabric_durability_behavior_failure_046_admission_replay_diagnosis.py",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_046_admission_replay_diagnosis.py",
+          "docs/ariadne-agent-error-correction-register-revision-201.md"
         ]
       },
       "status": "corrected"

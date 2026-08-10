@@ -1,0 +1,53 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "affected_nodes": [
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_mismatch",
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_primary",
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_reuse"
+    ],
+    "conflict_key_unchanged": true,
+    "immutable_body_parent_changed": false,
+    "preserve_admitted_at_insert_and_return_column": true,
+    "remove_only_admitted_at_from_winner_predicate": true,
+    "runtime_authority_changed": false
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "conflict_key_columns": [
+      "practice_id",
+      "source_contract_id",
+      "stream_id",
+      "stream_epoch",
+      "observer_id",
+      "observer_generation",
+      "source_position",
+      "entry_kind"
+    ],
+    "failed_path": "emr4_context_fabric.admit_proofread_observation_v1.insert_mismatch.reload_compare",
+    "failure_translation": "zero_or_ambiguous_reload_rows_to_F_CARDINALITY_CF004",
+    "raw_postgresql_error_persisted": false,
+    "server_authored_timestamp_bound_nodes": [
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_mismatch",
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_primary",
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_reuse"
+    ],
+    "unstable_timestamp_winner_comparison_nodes": [
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_mismatch",
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_primary",
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_reuse"
+    ]
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:ea2fc7f55121604b8f68b5bbacc55b97c98ead76a5793b6d7c766f2269b311c0",
+    "function_id": "emr4_context_fabric.admit_proofread_observation_v1",
+    "function_line": 72,
+    "internal_attempt_id": "e4db8cf23eb421e40744ea25",
+    "run_sequence": 46,
+    "scenario_id": "BTR-I02",
+    "sqlstate": "CF004"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-046-admission-replay-diagnosis.v1",
+  "status": "deterministic_server_authored_timestamp_replay_comparison_contradiction_proven_cleanup_verified"
+}

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 199
+    assert register["register_revision"] == 201
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 234)
+        f"AER-{index:04d}" for index in range(1, 236)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 145
+    assert len(agent_incidents) == 146
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 233
+    assert report["incident_count"] == 235
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,29 +2508,29 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 199
-    assert report["incident_count"] == 233
+    assert report["register_revision"] == 201
+    assert report["incident_count"] == 235
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 145,
-        "harness": 28,
+        "agent_behavior": 146,
+        "harness": 29,
         "repository": 51,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 26,
         "evidence_misreport": 32,
-        "harness_failure": 28,
-        "output_contract_violation": 59,
+        "harness_failure": 29,
+        "output_contract_violation": 60,
         "read_only_violation": 3,
         "reasoning_claim_error": 25,
         "repository_defect": 51,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 79,
+        "accepted_candidate_changed": 80,
         "canonical_unchanged": 130,
-        "untrusted_partial_worktree": 24,
+        "untrusted_partial_worktree": 25,
     }
     assert report["recurring_patterns"] == [
         {

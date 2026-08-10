@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_immutable_behavior_failure_046_and_its_repository_only_admission_replay_diagnosis_then_implement_the_sealed_effective_reload_winner_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Failure evidence SHA-256 ea2fc7f55121604b8f68b5bbacc55b97c98ead76a5793b6d7c766f2269b311c0 records attempt e4db8cf23eb421e40744ea25, BTR-I02, CF004, admit_proofread_observation_v1 line 72 and complete cleanup. Repository-only diagnosis proves that all three INSERT_OR_RELOAD_COMPARE admission nodes bind admitted_at to transaction_timestamp and wrongly include the same volatile equality in later winner reload predicates. The bounded repair removes only that comparison while preserving insert, stored and returned admitted_at plus all stable keys and semantics. Diagnosis tests and the 235-incident AER suite pass.",
+    "current_authority_allocation": "GPT Sol owns immutable failure/diagnosis acceptance, deterministic effective-renderer repair, tests, fresh parse/catalogue admission, independent veto and only then a newly numbered behavior attempt. No immediate database rerun, provider/model fallback, operational database, product/patient/clinical data, runtime wiring, deployment, release, Pages or protected-ref movement is open.",
+    "git_refs_and_worktree": "Primary task branch is at exact 0a3bddd3a3a6cc52bd3edf34826ca5a76aaa8369 before this evidence commit with only the declared diagnosis candidate plus preserved untracked files. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and must not move.",
+    "live_handover_current_baton": "Provider-free behavior attempt 046 ran exactly once from accepted gate head 0a3bddd3a3a6cc52bd3edf34826ca5a76aaa8369 and stopped at BTR-I02 with bounded CF004 telemetry. Its exact owned container is absent, the protected mutable alias is restored, and no rerun occurred.",
+    "protected_evidence_boundaries": "The immutable failure and diagnosis contain only authored-synthetic bounded telemetry. The mutable behavior evidence alias is restored byte-exact to SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Immutable attempts 001-045, historical parse evidence, holdouts, docs/branding and all unrelated untracked files remain preserved and excluded. Explicit-path staging only is mandatory."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
