@@ -123,6 +123,14 @@ EXPECTED_ADMISSION_LOCK_POLICY = (
     "ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], "
     "practice_id, source_contract_id, transaction_timestamp())"
 )
+EXPECTED_OUTBOX_SELECT_POLICY = (
+    "emr4_context_fabric.session_binding_allows_v1(session_user, "
+    "ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, "
+    "'OBSERVER'::emr4_context_fabric.logical_capability, "
+    "'COORDINATOR'::emr4_context_fabric.logical_capability, "
+    "'RETENTION'::emr4_context_fabric.logical_capability], "
+    "practice_id, source_contract_id, transaction_timestamp())"
+)
 
 
 def text(path: Path) -> str:
@@ -377,6 +385,16 @@ def validate_renderer_semantics(contract: dict) -> None:
     assert alias_lock["command"] == "UPDATE"
     assert alias_lock["using_sql"] == producer
     assert alias_lock["with_check_sql"] == producer + " AND FALSE"
+    outbox_select = policies["pol_cf_03_select"]
+    assert outbox_select == {
+        "id": "pol_cf_03_select",
+        "relation": "diary_context_observation_outbox_v1",
+        "command": "SELECT",
+        "roles": ["PUBLIC"],
+        "permissive": True,
+        "using_sql": EXPECTED_OUTBOX_SELECT_POLICY,
+        "with_check_sql": None,
+    }
     admission = mapped["context_proofread_observation_admission"]
     assert admission["rls_policy_ids"] == [
         "pol_cf_04_select",
@@ -438,6 +456,7 @@ def validate_renderer_semantics(contract: dict) -> None:
         assert role["replication"] is False
         if role["runtime_role"]:
             assert role["direct_table_dml"] == []
+    assert roles["context_coordinator"]["direct_table_select"] == []
     admission_owner = roles["context_admission_receiver"]
     assert admission_owner["login"] is False
     assert admission_owner["runtime_role"] is False
@@ -1039,6 +1058,51 @@ def test_admission_lock_visibility_cannot_be_removed_widened_or_reassigned() -> 
     policies["pol_cf_04_update_lock"]["roles"] = ["context_coordinator"]
     with pytest.raises(AssertionError):
         validate_renderer_semantics(reseal_contract(non_public))
+
+
+def test_outbox_coordinator_select_visibility_cannot_be_removed_or_widened() -> None:
+    contract = data(CONTRACT)
+    policies = {
+        policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
+    }
+    assert policies["pol_cf_03_select"]["using_sql"] == EXPECTED_OUTBOX_SELECT_POLICY
+
+    missing_coordinator = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in missing_coordinator["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_03_select"]["using_sql"] = policies["pol_cf_03_select"][
+        "using_sql"
+    ].replace(
+        ", 'COORDINATOR'::emr4_context_fabric.logical_capability",
+        "",
+    )
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(missing_coordinator))
+
+    widened_application = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in widened_application["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_03_select"]["using_sql"] = policies["pol_cf_03_select"][
+        "using_sql"
+    ].replace(
+        "'RETENTION'::emr4_context_fabric.logical_capability]",
+        "'RETENTION'::emr4_context_fabric.logical_capability, "
+        "'APPLICATION_READ'::emr4_context_fabric.logical_capability]",
+    )
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(widened_application))
+
+    direct_grant = copy.deepcopy(contract)
+    roles = {row["role"]: row for row in direct_grant["role_matrix"]}
+    roles["context_coordinator"]["direct_table_select"] = [
+        "diary_context_observation_outbox_v1"
+    ]
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(direct_grant))
 
 
 def test_exact_schema_rejects_resealed_non_hash_mutation() -> None:

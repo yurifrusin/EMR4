@@ -3,7 +3,7 @@
   "status": "architecture_only_unmounted",
   "source_contract": "diary.appointment_rescheduled.v1",
   "evidence_mode": "repository_authored_schema_metadata",
-  "contract_sha256": "sha256:80d5b57eadef0e6ede54c48fc842fe5567723c0a9cdebe288efbf63048c4b3ac",
+  "contract_sha256": "sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f",
   "postgresql_target": {
     "major": 16,
     "producer_isolation": "READ COMMITTED",
@@ -3848,7 +3848,7 @@
           "PUBLIC"
         ],
         "permissive": true,
-        "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'OBSERVER'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
+        "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'OBSERVER'::emr4_context_fabric.logical_capability, 'COORDINATOR'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
         "with_check_sql": null
       },
       {

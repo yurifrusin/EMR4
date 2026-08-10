@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_failure_038_diagnosis_outbox_select_rls_structural_repair_error_register_revision_and_tests_without_running_or_rebinding_any_descendant",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Persist only COORDINATOR logical visibility in existing pol_cf_03_select over diary_context_observation_outbox_v1. Forced RLS, coordinator direct SELECT/DML, function bodies, scenario population and every command boundary remain unchanged. Contract digest reseals to sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f. All descendants remain closed until separately rebound, regenerated, parsed and independently vetoed.",
+    "current_authority_allocation": "GPT Sol owns the bounded repository diagnosis, structural repair and explicit-path task-branch integration under standing closed-plan authority. The read-only durability validator independently confirmed the source_ambiguous branch. No provider runtime, product consumer or protected integrator is assigned.",
+    "git_refs_and_worktree": "Candidate parent is exact task HEAD 810a9dc11bdb39f76f70a6b65cb8afe10732e612 and origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current are exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicitly named failure, diagnosis, contract, register, test, documentation and receipt paths may be staged; every other untracked file remains preserved.",
+    "live_handover_current_baton": "Behavior attempt 038 is immutably preserved at SHA-256 68ebd0c6973c65048b8d1c73bc86573e4b6614587001b81b3ab2f396fd7f2f2d with exact container cleanup. Deterministic and independent source diagnosis prove BTR-E04 took source_ambiguous because forced-RLS pol_cf_03_select omitted the COORDINATOR capability required by apply_durability_transition_v1.",
+    "protected_evidence_boundaries": "Mutable behavior evidence is restored byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Parse evidence remains SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec. No further disposable run, applied migration, operational database or credential, persistence, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected-ref movement is open. Preserve every untracked file; docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

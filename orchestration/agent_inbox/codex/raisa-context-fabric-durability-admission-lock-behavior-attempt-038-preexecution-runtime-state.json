@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "back_up_protected_mutable_behavior_evidence_then_run_exactly_one_no_argument_provider_free_network_none_disposable_postgresql_twenty_scenario_admission_lock_behavior_attempt_038_route_result_restore_mutable_evidence_and_verify_exact_id_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "The admission-lock behavior parent rebind, repository count-gate repair and corrected independent pass are committed through exact task HEAD 810a9dc11bdb39f76f70a6b65cb8afe10732e612. The single next safe action is behavior attempt 038.",
+    "current_authority_allocation": "GPT Sol alone owns the protected-evidence backup, exactly one no-argument local disposable behavior run, exact-ID cleanup verification, immutable result routing and protected mutable restoration. Gemini review is complete; no implementation worker, model, product consumer or protected integrator is assigned.",
+    "active_plan_and_acceptance": "Behavior contract canonical digest a16769b43c8345b3c79cc79d1ca26e4cd0b2d7095515d2b13bc7e21cb27b5b8e binds the admitted lock-only parents and unchanged twenty-scenario proof. The corrected exact-head Gemini 3.6 Flash/high veto passed; its committed receipt SHA-256 is 9940c40d99b4fce70e8b5e8baf00f32879955274a53790274c987e0a86fcc2c4. Sol acceptance SHA-256 is 9b50060f8aefc1dac82de9c747ab84f6e0b9d29f10b9576c73c016b7e11b0840. Required runtime result is raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_pass with 20 expected, 20 observed and 20 passed, including eight distinct R03 role connections and lock-only admission. Any failure is routed immutably and diagnosed before another descendant.",
+    "protected_evidence_boundaries": "One newly owned PostgreSQL 16 container only, --pull=never, --network=none, no published port, no mount, container-local tmpfs, authored-synthetic fixtures and no caller input. Do not enumerate or touch unrelated containers. Mutable behavior evidence SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b must be backed up to a new exact temporary directory and restored byte-for-byte after immutable routing. Parse evidence SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and all prior immutable failures remain untouched. No applied migration, operational database or credentials, persistence, watcher, listener, feed, patient, clinical, product, application, API or Diary command/write wiring, provider call, deploy, production, release, Pages or protected-ref movement. Preserve every untracked file; docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Task HEAD is exact 810a9dc11bdb39f76f70a6b65cb8afe10732e612 and origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Runtime may write only the fixed mutable behavior output before Sol copies it to one new immutable attempt-038 path and restores protected bytes."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "admission_lock_behavior_attempt_038_preexecution_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns one exact disposable behavior run and result routing."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker lease is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Corrected exact-head verifier pass is committed; no model call occurs in runtime."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

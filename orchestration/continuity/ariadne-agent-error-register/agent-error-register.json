@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 183,
+  "register_revision": 184,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8506,6 +8506,93 @@
           "docs/ariadne-agent-error-correction-register-revision-183.md",
           "tests/test_ariadne_agent_error_register.py",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0212",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "stage": "deterministic_verification",
+      "role": "implementer",
+      "resource_id": "context-fabric-outbox-rls-catalogue",
+      "model": null,
+      "transport": "provider_free_disposable_postgresql_exact_owned_container",
+      "attempt_id": "raisa-context-fabric-outbox-select-behavior-attempt-038-001",
+      "origin": "repository",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "reasoning_level": "high",
+      "observed_error": "Behavior attempt 038 reached BTR-E04, but forced RLS filtered the coordinator's required diary_context_observation_outbox_v1 source re-read because pol_cf_03_select admitted PRODUCER, OBSERVER and RETENTION but omitted COORDINATOR. apply_durability_transition_v1 therefore took its source_ambiguous rebase path and changed context_observer_generation instead of applying the admitted observation.",
+      "expected_invariant": "The coordinator entry point must be able to re-read the exact source position through forced RLS while retaining zero direct table SELECT or DML grants and preserving the closed rebase path for genuinely absent or ambiguous source evidence.",
+      "detection_method": "The one-shot rehearsal preserved immutable failure-038 evidence, verified exact owned-container cleanup and rejected the unexpected generation digest change. Deterministic source diagnosis bound the failure detail to BTR-E04:context_observer_generation and proved the typed source_position_set reads the forced-RLS outbox under the omitted COORDINATOR capability.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-038.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-038.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_038_outbox_rls_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_038_outbox_rls_diagnosis.py",
+        "docs/raisa-context-fabric-durability-behavior-failure-038-outbox-rls-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-184.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.forced_rls_coordinator_outbox_select_visibility_missing",
+      "causal_claim_level": "observation_only",
+      "related_incident_ids": [],
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Add only COORDINATOR to the existing PUBLIC permissive pol_cf_03_select logical-capability array. Preserve forced RLS, zero coordinator direct table SELECT/DML, the source re-read and every typed body branch; reseal and regenerate all deterministic descendants before a fresh parse and behavior proof.",
+        "prevention_control": "For every forced-RLS relation read by a security-definer entry point, mechanically cross-check the session binding capability against the exact SELECT policy and add a hostile test that removes the needed capability or substitutes a direct grant.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-184.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0213",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "stage": "deterministic_verification",
+      "role": "orchestrator",
+      "resource_id": "context-fabric-behavior-result-admission",
+      "model": null,
+      "transport": "local_python_postgresql_cli_harness",
+      "attempt_id": "raisa-context-fabric-behavior-result-kind-admission-001",
+      "origin": "harness",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "reasoning_level": "high",
+      "observed_error": "The behavior harness selected apply_durability_transition_v1.result_kind for BTR-E04, BTR-I03 and BTR-B03 but admitted only process exit and SQLSTATE. It discarded the closed result enum, so a zero-exit REBASE_APPLIED was detected only later by relation-delta reconciliation rather than rejected transaction-locally as the wrong result kind.",
+      "expected_invariant": "Every scenario that invokes the coordinator transition must admit exactly one closed result marker and require RECEIPT_APPLIED, RECEIPT_REPLAYED or the rollback precondition kind before accepting the scenario outcome.",
+      "detection_method": "Failure-038 diagnosis traced the successful zero-exit coordinator call to REBASE_APPLIED while _bounded_outcome and _run_scenarios were shown to ignore the emitted result-kind line. The independent durability validator reproduced the same source-level gap without another database run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-038.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-038.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_038_outbox_rls_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_038_outbox_rls_diagnosis.py",
+        "docs/raisa-context-fabric-durability-behavior-failure-038-outbox-rls-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-184.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.behavior_success_result_kind_not_admitted",
+      "causal_claim_level": "observation_only",
+      "related_incident_ids": [],
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Require one closed result marker and exact transition kind for BTR-E04, BTR-I03 and BTR-B03, reject missing, duplicate and wrong markers, and preserve the existing forbidden-relation-change gate. Add a direct coordinator outbox SELECT denial to BTR-R03 without creating a twenty-first scenario.",
+        "prevention_control": "Any scenario SQL that emits a closed result enum must have an explicit expected-value map, transaction-local mismatch failure and hostile missing, duplicate and wrong-value tests; process exit alone is never success admission.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-184.md"
         ]
       },
       "status": "corrected"

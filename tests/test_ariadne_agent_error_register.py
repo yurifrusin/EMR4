@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 183
+    assert register["register_revision"] == 184
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 212)
+        f"AER-{index:04d}" for index in range(1, 214)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 211
+    assert report["incident_count"] == 213
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,27 +2508,27 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 183
-    assert report["incident_count"] == 211
+    assert report["register_revision"] == 184
+    assert report["incident_count"] == 213
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 133,
-        "harness": 22,
-        "repository": 47,
+        "harness": 23,
+        "repository": 48,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 21,
         "evidence_misreport": 30,
-        "harness_failure": 22,
+        "harness_failure": 23,
         "output_contract_violation": 54,
         "read_only_violation": 3,
         "reasoning_claim_error": 25,
-        "repository_defect": 47,
+        "repository_defect": 48,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 68,
+        "accepted_candidate_changed": 70,
         "canonical_unchanged": 121,
         "untrusted_partial_worktree": 22,
     }
@@ -3605,6 +3605,38 @@ def test_aer_0211_reconciles_recurrent_register_count_drift() -> None:
     assert incident["correction"]["status"] == (
         "control_implemented_pending_acceptance"
     )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0212_records_forced_rls_outbox_coordinator_visibility_gap() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0212"
+    ]
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "repository.forced_rls_coordinator_outbox_select_visibility_missing"
+    )
+    assert "pol_cf_03_select" in incident["observed_error"]
+    assert "zero coordinator direct table SELECT/DML" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0213_records_closed_result_kind_admission_gap() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0213"
+    ]
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "harness.behavior_success_result_kind_not_admitted"
+    )
+    assert "REBASE_APPLIED" in incident["observed_error"]
+    assert "missing, duplicate and wrong markers" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 

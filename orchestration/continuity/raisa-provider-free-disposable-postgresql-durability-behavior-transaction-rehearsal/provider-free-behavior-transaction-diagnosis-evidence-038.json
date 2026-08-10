@@ -1,0 +1,69 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "behavior_parent_rebind_required": true,
+    "command": "SELECT",
+    "direct_relation_grants_unchanged": true,
+    "exact_result_kind_assertion_required": {
+      "BTR-E04": "RECEIPT_APPLIED",
+      "BTR-I03": "RECEIPT_REPLAYED"
+    },
+    "forced_rls_unchanged": true,
+    "function_body_semantics_unchanged": true,
+    "inert_artifact_regeneration": true,
+    "new_external_authority": false,
+    "parse_catalogue_rebind_required": true,
+    "policy_id": "pol_cf_03_select",
+    "present_capabilities": [
+      "PRODUCER",
+      "OBSERVER",
+      "RETENTION"
+    ],
+    "relation": "diary_context_observation_outbox_v1",
+    "repaired_capabilities": [
+      "PRODUCER",
+      "OBSERVER",
+      "COORDINATOR",
+      "RETENTION"
+    ],
+    "runtime_role_dml_unchanged": true,
+    "scenario_population_change": false,
+    "statement_population_unchanged": true
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "body_contract_sha256": "sha256:8124957e32657076c3befc96a7b5e8770dcd37fcb5b91e33c136f01cbf2dd5ea",
+    "body_source_sha256": "sha256:d9c7b60fa13c02d4b04f8cf68c73ae43dc0acc820a51b4a96ae8a2aed9c137c7",
+    "coordinator_direct_table_dml": [],
+    "coordinator_direct_table_select": [],
+    "entry_point": "apply_durability_transition_v1",
+    "forced_rls_relation": "emr4_context_fabric.diary_context_observation_outbox_v1",
+    "inert_sql_source_sha256": "sha256:1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5",
+    "missing_required_capability": "COORDINATOR",
+    "present_select_capabilities": [
+      "PRODUCER",
+      "OBSERVER",
+      "RETENTION"
+    ],
+    "principal": "context_coordinator",
+    "raw_postgresql_values_persisted": false,
+    "resulting_mutation_node": "emr4_context_fabric.apply_durability_transition_v1.rebase_generation.source_ambiguous",
+    "resulting_transition_kind": "REBASE_APPLIED",
+    "select_policy_id": "pol_cf_03_select",
+    "source_exactness_branch": "emr4_context_fabric.apply_durability_transition_v1.source_position_exact",
+    "source_select_node": "emr4_context_fabric.apply_durability_transition_v1.source_position_set",
+    "structural_contract_sha256": "sha256:80d5b57eadef0e6ede54c48fc842fe5567723c0a9cdebe288efbf63048c4b3ac",
+    "structural_source_sha256": "sha256:1e127029e120879ec10031ffbb07d14ab386f4ce6861571f2d113e7f9fa7ef9c"
+  },
+  "parent_failure": {
+    "changed_relation": "emr4_context_fabric.context_observer_generation",
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:68ebd0c6973c65048b8d1c73bc86573e4b6614587001b81b3ab2f396fd7f2f2d",
+    "failure_code": "forbidden_relation_change",
+    "internal_attempt_id": "2171447fafa976485041ae03",
+    "run_sequence": 38,
+    "scenario_id": "BTR-E04"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-038-outbox-rls-diagnosis.v1",
+  "status": "deterministic_coordinator_outbox_select_policy_gap_proven_cleanup_verified"
+}
