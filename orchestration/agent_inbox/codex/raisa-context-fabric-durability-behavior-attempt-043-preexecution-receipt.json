@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "run_exactly_one_no_argument_owned_disposable_postgresql_behavior_characterization_attempt_043_after_receipt_lock_parent_rebind_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact task HEAD 9c78dc7bda13baa91500addc0691afac0070385a accepts the fresh Gemini replacement veto. All six behavior parents resolve byte-exactly; canonical behavior-contract SHA-256 is ee44dbf39c2458fdabc94768e3c3e8cdcc0372c10ae7f0a35709b55301c5d596; the twenty-scenario digest is d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9 with exact 6/4/3/4/3 coverage. The 594-test packet, Ruff and diff hygiene passed. Exactly one no-argument attempt 043 is next; an identical rerun is forbidden.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted progression through this planned provider-free durability sequence. GPT Sol owns exactly one disposable attempt 043, exact-ID cleanup, evidence routing, diagnosis and acceptance. The completed Gemini 3.6 Flash/high review used one bounded reviewer-model call and has no runtime lease. No additional provider, product, deployment, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean with a clean index at exact HEAD 9c78dc7bda13baa91500addc0691afac0070385a. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review worktree r171 is clean at reviewed commit 38c8b1cf3635e0f96d7200bda8c7d8b23e2b9b30. Explicit-path staging only will be used; user-owned untracked files remain preserved and excluded.",
+    "live_handover_current_baton": "The active Context Fabric durability descendant is the receipt-lock PostgreSQL behavior proof after immutable attempt 042. Exact task HEAD is 9c78dc7bda13baa91500addc0691afac0070385a; the six-parent receipt-lock behavior rebind and its clean-checkout repair are accepted, and no attempt 043 has run.",
+    "protected_evidence_boundaries": "Only repository-authored synthetic fixtures may enter one owned disposable PostgreSQL container using the harness's closed local image and isolation contract. The mutable evidence alias is backed up at C:\\Users\\sarashera\\AppData\\Local\\Temp\\emr4-cf-behavior-attempt-043-backup-66583e72f1fe4c998af50a88717e3c08\\provider-free-behavior-transaction-evidence.json with SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. On failure, route the result immutably, restore the alias and inspect only the exact emitted container ID. No Docker enumeration, operational database or credential, durable volume, watcher/feed, application/API/Diary wiring, patient/clinical/product data, provider/model call, external retrieval, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
