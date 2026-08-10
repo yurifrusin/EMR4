@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 234 / Compass 216. The first provider-free Context Fabric database behavior spine passes all twenty exact serial synthetic scenarios with immutable evidence and exact cleanup. Work is paused at Yuri's requested closeout before a read-only architectural-health pulse; operational and product boundaries remain closed.
+> EMR4 is at Continuity 235 / Compass 217. The bounded architecture-health review confirms the live GraphQL-read/REST-command/event/default-off authority shape and finds no P0. A narrow provider-free Python 3.11 CI and API lifecycle conformance repair is next before AES-C0; product, provider, tool, command and protected boundaries remain closed.
 
 ## North star
 
@@ -242,32 +242,33 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Twenty exact synthetic behavior/transaction scenarios are accepted for later implementation while the database run remains closed. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal`.
 113. **Prove the first serial database behavior spine — Disposable PostgreSQL durability behavior/transaction rehearsal**
    All twenty exact synthetic behavior/transaction scenarios pass with immutable evidence and exact cleanup. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan`.
+114. **Inspect system composition before executable Bureau containment — EMR4 codebase architectural-health and conformance review**
+   The authority architecture is sound; bounded CI and lifecycle conformance repair is required before AES-C0. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal`.
 
 ## Current position
 
-**Serial database durability accepted; closeout pause — Disposable PostgreSQL durability behavior/transaction rehearsal**
+**Architecture-health accepted; bounded conformance repair next — EMR4 codebase architectural-health and conformance review**
 
-**Why this proof came next:** The frozen database behavior experiment has passed, so system-level architectural conformance can be reviewed before executable Bureau containment work.
+**Why this proof came next:** The review confirmed the authority shape but reproduced CI target-coverage and lifecycle drift that should be corrected before executable containment contracts are added.
 
-Attempt 048 passes 20/20 scenarios and fresh r182 passes 498/498 focused checks with exact cleanup.
+No P0 is found; one remaining P1 and bounded P2 lifecycle defects define a narrow provider-free repair.
 
 ### What this unlocks
 
-- After Yuri's requested pause, perform the bounded read-only architecture-health and conformance review.
-- Use its findings to inform the already planned Agent Execution Surface and Containment Gate.
+- Implement the explicit maintained/protected/historical source-state and Python 3.11 CI conformance repair.
+- Repair current versus historical API Spine assertions and add baton consistency checks.
+- After the repair passes, begin AES-C0 architecture and contract with the new fitness constraints.
 
 ### What it does not solve
 
-- Concurrent behavior, crash restart, unknown-commit recovery, key rotation, retention execution, purge, performance or monitoring.
-- Applied migration, database/outbox/feed/watcher/listener/source access, credentials or operational persistence.
-- Application/runtime wiring, product reads, patient/product data, providers, tools, routes or commands.
+- Exhaustive code quality, appointment-router decomposition or production readiness.
+- Applied migration, operational database/source access, watcher/listener or persistence.
+- Patient/product/clinical data, providers, work-cell tools, routes or commands.
 - Deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -330,9 +331,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Exact durability structure, bodies, inert lowering, isolated PostgreSQL catalogue admission and twenty-scenario serial behavior now pass.
-- Run the requested read-only architecture-health pulse before the Agent Execution Surface and Containment Gate.
-- Separately gate concurrency, restart, rotation, retention, applied migration, application wiring, operational sources and product/patient data.
+- Serial database durability and the intervening architecture-health review pass.
+- Repair maintained-source Python 3.11 CI coverage and API Spine lifecycle supersession before AES-C0.
+- Keep applied migration, operational sources, product/patient data, providers, tools and commands separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -521,6 +522,7 @@ Prerequisites:
 
 ## Map limits
 
+- Architecture-health acceptance is a repository composition and focused-check review; it is not exhaustive assurance or production readiness.
 - Behavior/transaction acceptance proves the selected serial database slice only; it does not prove concurrency, restart, unknown-commit recovery, rotation, retention, applied migration or product runtime.
 - Behavior/transaction planning acceptance proves experiment completeness only; it does not prove PostgreSQL function, trigger, RLS, idempotency or rollback behavior and opens no applied migration or product runtime.
 - Disposable PostgreSQL catalogue acceptance proves exact parse, atomic installation/rollback and metadata shape only; it does not prove function, trigger or RLS behavior, concurrency, applied migration, application runtime, operational source access, persistence, command or deployment safety.
@@ -813,6 +815,10 @@ Prerequisites:
 - `docs/raisa-cloud-run-public-https-dev-host-operator-packet.md`
 - `docs/raisa-cloud-run-public-https-dev-host-readiness-closeout.md`
 - `docs/raisa-cloud-run-public-https-dev-host-readiness-plan.md`
+- `docs/raisa-codebase-architectural-health-conformance-review-closeout.md`
+- `docs/raisa-codebase-architectural-health-conformance-review-plan.md`
+- `docs/raisa-codebase-architectural-health-conformance-review.md`
+- `docs/raisa-codebase-as-built-architectural-state-map.md`
 - `docs/raisa-dual-host-foundation-closeout.md`
 - `docs/raisa-dual-host-foundation-plan.md`
 - `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md`
@@ -1081,6 +1087,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-codebase-architectural-health-conformance-review-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-codebase-architectural-health-conformance-review-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-codebase-architectural-health-conformance-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-codebase-architectural-health-review-research-predispatch-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md`
@@ -1606,6 +1616,7 @@ Prerequisites:
 - `orchestration/harness_settings/autonomous_continuation.yaml`
 - `orchestration/harness_settings/operating_model.yaml`
 - `orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md`
+- `orchestration/human_inbox/yuri/2026-08-11--codebase-architectural-health-conformance-review.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1695,4 +1706,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 216; continuity graph revision 234._
+_Compass map revision 217; continuity graph revision 235._

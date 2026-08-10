@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_native_read_only_research_subagent_to_recommend_codebase_integration_review_methods_cadence_and_agentic_quality_controls_while_sol_continues_the_active_durability_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The research must assess whether EMR4 needs a recurring integration-level architectural health review beyond per-tranche vetoes; recommend practical review scopes, triggers, cadence, evidence/metrics and a low-disruption first audit. It may inspect ordinary repository architecture, tests and public primary technical sources, but produces advice only and does not interrupt the active durability sequence.",
+    "current_authority_allocation": "GPT Sol retains all implementation, acceptance, Git and baton authority. Yuri explicitly requested one subagent for this research. The native subagent receives read-only analysis authority only and may not edit, dispatch other workers, accept code, integrate, commit, push or move refs.",
+    "git_refs_and_worktree": "Primary task branch is codex/ariadne-bernie-davida-parallel-seam at e7e7265efd7773e3bf1fabace7af46ceb7d63566 before current uncommitted diagnosis artifacts. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. The subagent is read-only in the shared workspace and must preserve every tracked and untracked file.",
+    "live_handover_current_baton": "The active implementation baton remains the provider-free disposable PostgreSQL durability behavior recovery; Sol continues it uninterrupted. Yuri separately requested a parallel read-only research review of whole-codebase quality, architectural fit, review tempo and agentic productivity-tailoff risks.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, docs/branding contents, patient/clinical/product-derived data, credentials, providers, runtime databases, deployment, production, release, Pages and protected refs remain closed. The subagent must not edit any file or use repository-wide discovery that opens protected paths."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

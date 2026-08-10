@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 234,
+  "graph_revision": 235,
   "harvests": [],
   "nodes": [
     {
@@ -14632,9 +14632,86 @@
         "Applied migration, operational database/outbox/feed/watcher/listener/source access, persistence and credentials remain closed.",
         "Application/runtime wiring, product reads, providers, tools, commands, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-codebase-architectural-health-conformance-review",
+      "title": "EMR4 codebase architectural-health and conformance review",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-11T00:00:00Z",
+      "updated_at": "2026-08-11T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "95ce6b75723d57e672858619c3621d4a273c1f34",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The review is repository-local and findings-only; it opens no product, provider, data, runtime, migration, tool or command boundary.",
+          "The mounted GraphQL read, REST command, event fresh-read and default-off boundaries remain sound at the reviewed source.",
+          "A bounded provider-free CI and lifecycle conformance repair is required before AES-C0 begins."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-architecture-health-review-with-bounded-repair",
+          "source": "docs/raisa-codebase-architectural-health-conformance-review-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the as-built review, fitness cadence and narrow conformance-repair successor without authorizing a broad refactor."
+        }
+      ],
+      "claim_scope": [
+        "No P0 or current patient or clinical authority breach was found in the selected repository composition and focused checks.",
+        "Runtime GraphQL remains authenticated, practice-scoped and Query-only; canonical commands remain REST/OpenAPI-owned.",
+        "P1 protected-CI Python-target coverage and P2 API Spine lifecycle drift require a bounded corrective successor.",
+        "The review proposes repository fitness functions and cadence; it does not prove exhaustive code quality or production health."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-codebase-architectural-health-conformance-review-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-codebase-as-built-architectural-state-map.md",
+          "docs/raisa-codebase-architectural-health-conformance-review.md"
+        ],
+        "closeouts": [
+          "docs/raisa-codebase-architectural-health-conformance-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-11--codebase-architectural-health-conformance-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-codebase-architectural-health-conformance-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-codebase-architectural-health-review-research-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-codebase-architectural-health-conformance-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-codebase-architectural-health-conformance-review-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_codebase_architectural_health_conformance_review_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/agent_inbox/codex/raisa-codebase-architectural-health-review-research-predispatch-runtime-state.json",
+          "scripts/raisa_codebase_architectural_health_conformance_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The protected Python workflow does not yet compile and bounded-test the full maintained Python 3.11 source selection.",
+        "Historical/current API Spine lifecycle assertions still require explicit supersession repair.",
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
+        "Applied migration, operational database/source, watcher/listener, providers, tools, commands, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-08T00:00:00Z"
+  "updated_at": "2026-08-11T00:00:00Z"
 }

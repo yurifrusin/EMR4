@@ -164,13 +164,19 @@ performance and operational availability remain unproved. Applied migration,
 application behavior, operational database/source access and runtime remain
 closed.
 
-The next recommended tranche is a bounded read-only architectural-health and
-conformance pulse: reconstruct the as-built system, trace critical authority
-and transaction paths, distinguish current from accepted-unmounted, future and
-retired state, assess verification topology and propose repository-owned
-fitness functions. It produces findings only, not a broad refactor. Yuri
-requested a pause after the database-durability closeout, so this pulse does
-not begin in the closing tranche.
+The bounded read-only architectural-health and conformance pulse now passes at
+reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
+mounted GraphQL read/REST command/event fresh-read/default-off boundaries and
+finds no P0 or current patient/clinical authority breach. It also exposes one
+remaining P1 protected-CI/Python-target coverage defect, a stale API Spine
+lifecycle test, an appointment-router change hotspot and a legacy fallback
+posture that must not enter a model-required Bureau. The exact result and
+five-state map are
+[`docs/raisa-codebase-architectural-health-conformance-review.md`](docs/raisa-codebase-architectural-health-conformance-review.md)
+and
+[`docs/raisa-codebase-as-built-architectural-state-map.md`](docs/raisa-codebase-as-built-architectural-state-map.md).
+The next safe tranche is the bounded provider-free conformance repair named in
+that review; it is not a broad product refactor.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -184,10 +190,12 @@ action budgets, generation revocation, inert Context Fabric data and an
 externally owned kill switch. Reasoning, information, egress and action budgets
 remain independent. The gate is deliberately placed after the current
 provider-free durability work and before real-product-read or executable Bureau
-runtime. The prerequisite serial database-only rehearsal now passes; the
-read-only architectural-health pulse is the recommended intervening tranche.
-Neither result can be mistaken for current provider, product-data, tool or
-command authority.
+runtime. The prerequisite serial database-only rehearsal and intervening
+read-only architectural-health pulse now pass. One bounded CI/lifecycle
+conformance repair must pass next, after which AES-C0 architecture and contract
+begins with the new source-state, no-fallback, route and baton fitness
+constraints. None of these results can be mistaken for current provider,
+product-data, tool or command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -216,11 +224,12 @@ typed and expiring context frames from authoritative current, event, temporal,
 session and later clinical/evidence sources. It is not provider-model memory or
 a broad practice-data dump. The direction, first unmounted provider-free
 contract, Current operational weave, patient-free temporal weave, provider-
-free intent-shaped retrieval rehearsal and occupied authored-synthetic model-
-required intent-shaping envelope are accepted. A provider-free one-source
-adapter plan is next. No product/patient data, further provider call, real
-historical-state retention, runtime route, command, deployment or production
-authority follows from this blueprint entry.
+free intent-shaped retrieval rehearsal, occupied authored-synthetic model-
+required intent-shaping envelope, one-source adapter, invalidation/reassembly,
+fresh-generation lifecycle and serial database durability evidence are
+accepted. They remain unmounted and unapplied. No product/patient data, further
+provider call, real historical-state retention, runtime route, command,
+deployment or production authority follows from this blueprint entry.
 
 ### 1.1 Business & Licensing Model
 

@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_native_read_only_research_subagent_to_recommend_codebase_integration_review_methods_cadence_and_agentic_quality_controls_while_sol_continues_the_active_durability_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "The active implementation baton remains the provider-free disposable PostgreSQL durability behavior recovery; Sol continues it uninterrupted. Yuri separately requested a parallel read-only research review of whole-codebase quality, architectural fit, review tempo and agentic productivity-tailoff risks.",
+    "current_authority_allocation": "GPT Sol retains all implementation, acceptance, Git and baton authority. Yuri explicitly requested one subagent for this research. The native subagent receives read-only analysis authority only and may not edit, dispatch other workers, accept code, integrate, commit, push or move refs.",
+    "active_plan_and_acceptance": "The research must assess whether EMR4 needs a recurring integration-level architectural health review beyond per-tranche vetoes; recommend practical review scopes, triggers, cadence, evidence/metrics and a low-disruption first audit. It may inspect ordinary repository architecture, tests and public primary technical sources, but produces advice only and does not interrupt the active durability sequence.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, docs/branding contents, patient/clinical/product-derived data, credentials, providers, runtime databases, deployment, production, release, Pages and protected refs remain closed. The subagent must not edit any file or use repository-wide discovery that opens protected paths.",
+    "git_refs_and_worktree": "Primary task branch is codex/ariadne-bernie-davida-parallel-seam at e7e7265efd7773e3bf1fabace7af46ceb7d63566 before current uncommitted diagnosis artifacts. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. The subagent is read-only in the shared workspace and must preserve every tracked and untracked file."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five_source_codebase_health_research_predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol continues the active durability recovery while preparing one bounded parallel read-only research lane requested by Yuri."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["One native research subagent is eligible after this receipt passes."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Antigravity call belongs to this research dispatch."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker belongs to this research dispatch."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport is selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
