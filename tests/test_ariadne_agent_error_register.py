@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 172
+    assert register["register_revision"] == 173
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 199)
+        f"AER-{index:04d}" for index in range(1, 200)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 124
+    assert len(agent_incidents) == 125
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 198
+    assert report["incident_count"] == 199
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,18 +2508,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 172
-    assert report["incident_count"] == 198
+    assert report["register_revision"] == 173
+    assert report["incident_count"] == 199
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 124,
+        "agent_behavior": 125,
         "harness": 22,
         "repository": 43,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 20,
-        "evidence_misreport": 25,
+        "evidence_misreport": 26,
         "harness_failure": 22,
         "output_contract_violation": 51,
         "read_only_violation": 3,
@@ -2529,7 +2529,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 64,
-        "canonical_unchanged": 112,
+        "canonical_unchanged": 113,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -3384,6 +3384,23 @@ def test_aer_0198_contains_antigravity_auth_timeout_before_retry_pass() -> None:
         "transport.antigravity_oauth_timeout_without_closeout"
     )
     assert "no reviewer receipt" in incident["observed_error"]
+    assert "opened no database or behavior run" in incident["detection_method"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0199_rejects_nonexistent_active_plan_path_before_behavior() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0199"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["recurrence_signature"] == (
+        "verifier.nonexistent_active_plan_path_reported_in_five_source_rehydration"
+    )
+    assert "did not exist" in incident["observed_error"]
     assert "opened no database or behavior run" in incident["detection_method"]
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert incident["status"] == "corrected"

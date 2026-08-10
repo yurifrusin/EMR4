@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 172,
+  "register_revision": 173,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7971,6 +7971,49 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-reproduction-veto-retry-predispatch-receipt.json",
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-parse-reproduction-review-retry-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-172.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0199",
+      "attempt_id": "raisa-context-fabric-generation-lock-behavior-rebind-review-r160-path-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A five-source reviewer receipt must name every active-plan artifact by an exact tracked path that exists at the reviewed candidate HEAD.",
+      "observed_error": "The first r160 receipt returned pass after every substantive check but named nonexistent docs/raisa-disposable-postgresql-durability-behavior-generation-lock-parent-rebind.md instead of the tracked provider-free path. The reported path did not exist at exact candidate eee0e197.",
+      "detection_method": "Sol reconciled every receipt path against the clean exact-HEAD worktree before admission, proved the reported path absent and the expected tracked path present, rejected the terminal pass and opened no database or behavior run.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-behavior-rebind-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-rebind-review-path-misreport-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-rebind-corrected-gemini-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-behavior-rebind-corrected-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-173.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.nonexistent_active_plan_path_reported_in_five_source_rehydration",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Reject the first r160 pass. One bounded same-HEAD, same-model fresh review used an exact four-path active-plan allowlist, explicitly prohibited the nonexistent abbreviation, returned pass after 305 tests and left eee0e197 clean and unchanged.",
+        "prevention_control": "Every review packet must enumerate exact active-plan paths when path identity is acceptance evidence; Sol must verify each reported path exists at the reviewed HEAD before admitting the five-source receipt.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-rebind-review-path-misreport-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-rebind-corrected-gemini-review-packet.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-behavior-rebind-corrected-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-173.md"
         ]
       },
       "status": "corrected"

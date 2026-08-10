@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_veto_for_generation_lock_behavior_parent_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "All six parents are exact-hash and exact-source bound; after removing only parent_bindings, baseline and candidate contracts are equal. All twenty scenarios and 6/4/3/4/3 category counts remain unchanged. Canonical contract SHA-256 is 6375e756efe85caa17d99d223747b2b6e7aa59cc846f99c702a27612529f7482. Local combined tests pass 305/305 plus Ruff and diff check.",
+    "current_authority_allocation": "GPT Sol conducts and accepts or rejects. One fresh Gemini 3.6 Flash/high Antigravity project may review the tracked exact-HEAD rebind read-only. It receives no database, implementation, integration, provider, baton or protected-ref authority.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r160 is clean at exact candidate eee0e1976d298a054b427f32ba489de13f7c951d; exact baseline is 2d4142ba7ff5b55ddb4e3c3c9503013bcc843aa5. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The accepted generation-lock parse reproduction has been rebound into the frozen twenty-scenario behavior rehearsal at exact candidate eee0e1976d298a054b427f32ba489de13f7c951d. Fresh independent veto is required before one behavior attempt.",
+    "protected_evidence_boundaries": "Review tracked exact-HEAD files only; do not start Docker/PostgreSQL or claim primary-only untracked mutable paths. No behavior run, applied migration, operational database/credential, listener/feed, patient/product/clinical data, provider runtime, command, deployment, release, Pages or protected-ref action is open. Preserve all untracked files and do not inspect docs/branding/."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_corrected_generation_lock_behavior_rebind_review_admission_and_closed_incident_record_before_one_preexecution_gate",
+  "source_evidence": {
+    "live_handover_current_baton": "Candidate eee0e197 exactly rebinds the frozen twenty-scenario behavior rehearsal to the accepted generation-lock parse source. The corrected independent veto passes and the first path-misreport receipt is rejected and preserved.",
+    "current_authority_allocation": "GPT Sol owns review admission, incident recording and the later single behavior-run gate. Gemini 3.6 Flash/high completed its corrected read-only veto and holds no continuing authority. No DeepSeek worker or provider runtime is assigned.",
+    "active_plan_and_acceptance": "Corrected r160 review passes all six exact parent bindings, canonical contract 6375e756, unchanged twenty scenarios and 305 focused tests. AER-0199 and register revision 173 preserve the rejected nonexistent-path claim. Sol acceptance permits only a fresh pre-execution gate for one provider-free disposable run.",
+    "protected_evidence_boundaries": "This commit contains review packets/receipts, Sol acceptance and a closed incident-register revision only. No database was run. No applied migration, operational database/credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model runtime, command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and all unrelated untracked files remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Primary task branch parent is exact eee0e1976d298a054b427f32ba489de13f7c951d. Review worktree r160 is exact and clean at the same HEAD. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "corrected_behavior_rebind_review_admission_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol admitted only the corrected exact-path veto and reconciled AER-0199."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native implementation worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Corrected Gemini 3.6 Flash/high exact-HEAD veto passed and is complete."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

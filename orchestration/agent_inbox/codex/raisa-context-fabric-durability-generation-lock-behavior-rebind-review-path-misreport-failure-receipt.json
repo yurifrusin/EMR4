@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.review-claim-failure-receipt.v1",
+  "observed_on": "2026-08-10",
+  "status": "review_rejected",
+  "candidate_head": "eee0e1976d298a054b427f32ba489de13f7c951d",
+  "review_worktree": "C:/Users/sarashera/EMR4-worktrees/r160",
+  "rejected_review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-behavior-rebind-review-receipt.json",
+  "terminal_decision_observed": "pass",
+  "failure": {
+    "code": "verifier_active_plan_path_misreport",
+    "expected_path": "docs/raisa-provider-free-disposable-postgresql-durability-behavior-generation-lock-parent-rebind.md",
+    "reported_path": "docs/raisa-disposable-postgresql-durability-behavior-generation-lock-parent-rebind.md",
+    "exact_observation": "The reported active-plan path does not exist at exact candidate HEAD. The expected tracked path exists and was created by the candidate. All substantive parent, contract, test and boundary checks passed, but complete five-source rehydration cannot be admitted with a fabricated path.",
+    "candidate_source_changed": false,
+    "database_or_container_started_after_review": false
+  },
+  "disposition": {
+    "review_admitted": false,
+    "code_test_results_may_be_reused_as_acceptance": false,
+    "fresh_review_required": true,
+    "correction": "One bounded same-HEAD, same-model fresh review must name only the exact allowlisted active-plan paths and explicitly reject the nonexistent abbreviated path.",
+    "authority_boundary": "No behavior rehearsal is authorised by the rejected receipt."
+  }
+}
