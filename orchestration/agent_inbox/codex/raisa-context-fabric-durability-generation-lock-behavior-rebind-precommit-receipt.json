@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_generation_lock_behavior_parent_rebind_with_explicit_paths_before_one_fresh_exact_head_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "All six behavior parents are rebound to their exact current accepted sources. Removing only parent_bindings leaves the prior and candidate contracts equal; all twenty scenario objects, order and category counts 6/4/3/4/3 remain unchanged. Canonical JSON contract SHA-256 is 6375e756efe85caa17d99d223747b2b6e7aa59cc846f99c702a27612529f7482. All 305 combined behavior-plan, behavior-harness, exact-parse and renderer tests pass, plus Ruff and diff check.",
+    "current_authority_allocation": "GPT Sol owns deterministic rebind, integration and acceptance. Gemini 3.6 Flash/high through a fresh Antigravity project owns one read-only exact-HEAD veto after commit. No DeepSeek worker, native implementation subagent or provider runtime is assigned.",
+    "git_refs_and_worktree": "Primary task branch is at exact parent HEAD 2d4142ba7ff5b55ddb4e3c3c9503013bcc843aa5. Local and origin master plus handoff/current remain exactly protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Only the bounded rebind files and this receipt pair are intended for the candidate commit.",
+    "live_handover_current_baton": "The generation-lock parse catalogue exact reproduction is accepted at behavior-rebind parent fb10f2555a246a2918d84c82e31ea5ea87f32a79. The next required action is a parent-only behavior-contract rebind and fresh independent veto before one behavior attempt.",
+    "protected_evidence_boundaries": "This commit changes only exact parent bindings, deterministic tests, the rebind ledger and this receipt pair. Runtime remains closed until fresh independent veto. No applied migration, operational database or credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider runtime, external retrieval, command/write, deployment, production, release, Pages or protected ref is opened. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

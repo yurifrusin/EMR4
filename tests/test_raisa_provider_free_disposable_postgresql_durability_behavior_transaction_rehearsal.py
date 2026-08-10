@@ -841,25 +841,25 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
     assert bindings["accepted_runtime_source"] == {
         "id": "accepted_runtime_source",
         "path": (
-            "docs/raisa-provider-free-disposable-postgresql-durability-"
-            "parse-catalogue-admission-row-shape-rebind.md"
+            "orchestration/agent_inbox/codex/raisa-context-fabric-durability-"
+            "generation-lock-parse-reproduction-sol-acceptance.md"
         ),
-        "source_head": "c8ab7602e16e24453dbf909597b4f702a2388416",
+        "source_head": "fb10f2555a246a2918d84c82e31ea5ea87f32a79",
         "sha256": (
-            "sha256:f8c013e522d0681a9414993a69eb73def2cfd656b5aa78fddf12f3caeb844fe1"
+            "sha256:36e2444607f175253bd276c874e8c8435ab8c6608ea55d623f961259ed284bc8"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "094368904acb79b214c68e8521f789709a832db6"
+        "e115f6f4cb31df1131c5c67d24f3a475a2ca6127"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb"
+        "sha256:aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9"
     )
     assert bindings["render_manifest"]["source_head"] == (
-        "094368904acb79b214c68e8521f789709a832db6"
+        "e115f6f4cb31df1131c5c67d24f3a475a2ca6127"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:c2ccc9303059b9e728e39da05d580055248389921f762f6bedb50a4b469de806"
+        "sha256:fdffefdd5d2d79292b1f9e8997d7a8b227fab80423cf544958d2020fa3aa153f"
     )
     assert bindings["structural_contract"] == {
         "id": "structural_contract",
@@ -868,13 +868,13 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-migration-transaction-architecture/"
             "migration-transaction-architecture-contract.json"
         ),
-        "source_head": "a1a4a619222297b36fa6894a5cf5f12a179af48c",
+        "source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
         "sha256": (
-            "sha256:5b5e3bc3108dc1105017f57ceade03c4bce33b898d7b71f0ede0640ce0bc83c7"
+            "sha256:58920ed1bf24ce1a8372b6ae46e50250e2fe053ae881e7992e2856f6648fc8ba"
         ),
     }
     assert bindings["parse_prerequisite_contract"]["source_head"] == (
-        "e8b902cf54d50d478912c5f01e38b719e380946d"
+        "1fd3445aea5839b7aa889fc962faa8ad2be0c95e"
     )
     assert bindings["body_contract"] == {
         "id": "body_contract",
@@ -883,9 +883,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-function-trigger-body-architecture/"
             "function-trigger-body-architecture-contract.json"
         ),
-        "source_head": "094368904acb79b214c68e8521f789709a832db6",
+        "source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
         "sha256": (
-            "sha256:985120aaa63ed665b6cf7acebf57dfa9feebe1bfeb74add3b025c17b9149f7f7"
+            "sha256:67817da7faafd6019c7d7f573dedef2b2a28d5cda2be6ce340f5b3e8997b51ef"
         ),
     }
 
