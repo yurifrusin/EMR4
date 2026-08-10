@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_provider_free_receipt_lock_behavior_parent_rebind_candidate_after_deterministic_validation",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant is the receipt-lock recovery after immutable attempt 042. Exact current HEAD is 662fcae68308061faf09f4b3a8820baeaa417d88; no new database behavior attempt has run.",
+    "current_authority_allocation": "GPT Sol retains architecture, implementation, acceptance, runtime, cleanup and task-branch integration authority. A fresh Gemini 3.6 Flash/high Antigravity worker may later receive read-only independent-veto authority only after this candidate is committed and separately preflighted. No provider fallback is allowed.",
+    "active_plan_and_acceptance": "The candidate rebinds all six behavior parents to the exact accepted receipt-lock structural, body, inert-DDL, manifest and parse sources. Canonical behavior-contract SHA-256 is ee44dbf39c2458fdabc94768e3c3e8cdcc0372c10ae7f0a35709b55301c5d596. All twenty ordered scenarios and 6/4/3/4/3 coverage remain unchanged. The exact 404-test deterministic packet, Ruff and diff hygiene pass; runtime remains closed pending fresh exact-HEAD veto.",
+    "protected_evidence_boundaries": "Only repository-local authored-synthetic provider-free contracts, tests and documentation may be committed. Mutable behavior evidence, attempts 001-042, protected holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, providers, application/API/Diary wiring, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Main task branch is codex/ariadne-bernie-davida-parallel-seam at exact 662fcae68308061faf09f4b3a8820baeaa417d88 before this commit. Tracked baseline was clean; explicit-path staging only will be used. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; user-owned untracked paths remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because no DeepSeek dispatch is planned for this bounded candidate commit."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because no DeepCode dispatch is planned for this bounded candidate commit."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because no Claude dispatch is planned for this bounded candidate commit."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Independent exact-HEAD veto remains deferred until this deterministic candidate is committed and isolated in a fresh verifier worktree."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["The exact six-parent rebind, canonical contract digest, 404-test packet, Ruff and diff hygiene pass in the primary session."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No Codex subagent is assigned or required for this bounded candidate commit."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

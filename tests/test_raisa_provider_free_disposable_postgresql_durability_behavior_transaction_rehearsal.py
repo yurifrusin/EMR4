@@ -843,24 +843,24 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "path": (
             "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
             "durability-parse-catalogue-rehearsal/provider-free-disposable-"
-            "postgresql-evidence-outbox-select-rls-exact-reproduction.json"
+            "postgresql-evidence-receipt-lock-rls-exact-reproduction.json"
         ),
-        "source_head": "6a6088e525762c456c6df7fcba5c8377a94fb2ca",
+        "source_head": "662fcae68308061faf09f4b3a8820baeaa417d88",
         "sha256": (
-            "sha256:b0ce639981a5822e9e66ebbb81cab74009b3ebe368f3d9e6efd75cfd32453386"
+            "sha256:67a490639840e217b740474afc331ab8aced5fb84871329099df6f504739288b"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "497a4d1fe5b58fa4bcc03747abb3d389c3b51899"
+        "1b37d217779a5d7c3a9876a50db8f2f7099dfb23"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a"
+        "sha256:bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38"
     )
     assert bindings["render_manifest"]["source_head"] == (
-        "497a4d1fe5b58fa4bcc03747abb3d389c3b51899"
+        "1b37d217779a5d7c3a9876a50db8f2f7099dfb23"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:559a66e508c2a38dbfc037d3e1df482cff7106dc09ff35001b55afc63b119cbf"
+        "sha256:dd4d98a8760487b17c0a70b08ef290c45607c71284a7cef804db126faac17cc6"
     )
     assert bindings["structural_contract"] == {
         "id": "structural_contract",
@@ -869,9 +869,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-migration-transaction-architecture/"
             "migration-transaction-architecture-contract.json"
         ),
-        "source_head": "e1ca28915b09636e5d9d693216beef450f71a356",
+        "source_head": "a1af31e89c13a0eea72fd90a2934a0c8e0154175",
         "sha256": (
-            "sha256:d333ad3ef75725a8a85e7d45a072bca02a087ea869d395459140c405919814c6"
+            "sha256:6c82c5a288c43ad2d8784f6eeb0c1f1efe1afea9a2b63721aebfc4371b63fe5e"
         ),
     }
     assert bindings["parse_prerequisite_contract"]["source_head"] == (
@@ -884,9 +884,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-function-trigger-body-architecture/"
             "function-trigger-body-architecture-contract.json"
         ),
-        "source_head": "1a06961916bcf73d553eb401eb08094aa4c45e20",
+        "source_head": "206803a26767d7be02b45514dd02c56cce773a46",
         "sha256": (
-            "sha256:c88653b1db1e379e9d067dbe444a1c2cbdf0dd1dd148fe838bce274741f7c455"
+            "sha256:21087e25e087c1865865d5f1cd24f192451f62658243420134deb903687e46bb"
         ),
     }
 
@@ -1368,9 +1368,7 @@ def test_transition_marker_admission_never_masks_rejection_classification() -> N
         b"psql:<stdin>:4: ERROR:  CF303: synthetic detail\n",
     )
     with pytest.raises(rehearsal.BehaviorFailure, match="sqlstate_mismatch"):
-        rehearsal._bounded_outcome(
-            wrong_expected_rejection, "P0001", "BTR-B03"
-        )
+        rehearsal._bounded_outcome(wrong_expected_rejection, "P0001", "BTR-B03")
 
     admitted_rejection_without_marker = rehearsal.parent.ProcessResult(
         3,

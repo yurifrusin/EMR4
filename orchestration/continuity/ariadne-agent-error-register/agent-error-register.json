@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 190,
+  "register_revision": 191,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8841,6 +8841,50 @@
         "evidence_paths": [
           "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-receipt-lock-rls-rebind.md",
           "docs/ariadne-agent-error-correction-register-revision-190.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0220",
+      "attempt_id": "raisa-context-fabric-receipt-lock-behavior-parent-rebind-preintegration-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-receipt-lock-rls-recovery",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "integration",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Before every continuation receipt, the runtime state must use an approved event and reconcile all declared adapter observations plus every managed worker-slot inventory from the current harness settings, including inactive resources.",
+      "observed_error": "The first receipt-lock behavior-parent precommit state used pre_commit without the required current adapter and worker inventory. A distinct pre_integration state still carried only two adapter observations and no managed DeepSeek slot. Both deterministic receipts returned revision_required before staging, commit, dispatch or runtime.",
+      "detection_method": "The generic orchestrator preflight reported the exact missing adapter observations and worker_slot_inventory_missing:deepseek-flash-workers. The two rejected receipts were preserved; a distinct v2 pre_integration state enumerated all six adapters and the empty managed worker slot and then passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-precommit-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-preintegration-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-preintegration-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-preintegration-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-preintegration-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-191.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preintegration_receipt_inventory_not_reconciled_to_current_settings",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve both failed states and receipts, then use a distinct v2 pre_integration state that enumerates all six configured adapters with admitted methods and the required deepseek-flash-workers slot with zero active or stale instances. Do not stage or commit until its receipt passes.",
+        "prevention_control": "Before drafting each runtime state, read the current required_adapter_observations and managed_resource_ids settings and build the complete zero-or-more inventory mechanically; never copy an older sparse receipt packet as current policy evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-preintegration-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-preintegration-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-191.md"
         ]
       },
       "status": "corrected"

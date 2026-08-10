@@ -94,6 +94,10 @@ SOURCE_MEMBERSHIP_FIXTURE_THREAT = (
     ROOT / "docs/security/raisa-provider-free-disposable-postgresql-durability-"
     "behavior-source-membership-fixture-recovery-threat-model-delta.md"
 )
+RECEIPT_LOCK_PARENT_REBIND = (
+    ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-behavior-"
+    "receipt-lock-parent-rebind.md"
+)
 
 EXPECTED_ORDER = [
     "BTR-E01",
@@ -127,29 +131,29 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-outbox-select-rls-exact-reproduction.json",
-        "6a6088e525762c456c6df7fcba5c8377a94fb2ca",
-        "b0ce639981a5822e9e66ebbb81cab74009b3ebe368f3d9e6efd75cfd32453386",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-receipt-lock-rls-exact-reproduction.json",
+        "662fcae68308061faf09f4b3a8820baeaa417d88",
+        "67a490639840e217b740474afc331ab8aced5fb84871329099df6f504739288b",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "497a4d1fe5b58fa4bcc03747abb3d389c3b51899",
-        "265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a",
+        "1b37d217779a5d7c3a9876a50db8f2f7099dfb23",
+        "bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "497a4d1fe5b58fa4bcc03747abb3d389c3b51899",
-        "559a66e508c2a38dbfc037d3e1df482cff7106dc09ff35001b55afc63b119cbf",
+        "1b37d217779a5d7c3a9876a50db8f2f7099dfb23",
+        "dd4d98a8760487b17c0a70b08ef290c45607c71284a7cef804db126faac17cc6",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-        "e1ca28915b09636e5d9d693216beef450f71a356",
-        "d333ad3ef75725a8a85e7d45a072bca02a087ea869d395459140c405919814c6",
+        "a1af31e89c13a0eea72fd90a2934a0c8e0154175",
+        "6c82c5a288c43ad2d8784f6eeb0c1f1efe1afea9a2b63721aebfc4371b63fe5e",
     ),
     "body_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-        "1a06961916bcf73d553eb401eb08094aa4c45e20",
-        "c88653b1db1e379e9d067dbe444a1c2cbdf0dd1dd148fe838bce274741f7c455",
+        "206803a26767d7be02b45514dd02c56cce773a46",
+        "21087e25e087c1865865d5f1cd24f192451f62658243420134deb903687e46bb",
     ),
     "parse_prerequisite_contract": (
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json",
@@ -651,6 +655,39 @@ def test_source_membership_fixture_recovery_preserves_scenarios_and_authority() 
     assert contract["fixture_namespace"]["source_membership_digest_rule"] == (
         "canonical_digest_of_complete_same_locator_outbox_row"
     )
+    canonical = json.dumps(
+        {
+            "scenario_order": contract["scenario_order"],
+            "scenarios": contract["scenarios"],
+            "category_coverage": contract["category_coverage"],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    assert hashlib.sha256(canonical).hexdigest() == (
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+    )
+
+
+def test_receipt_lock_parent_rebind_preserves_scenarios_and_authority() -> None:
+    combined = _flat(RECEIPT_LOCK_PARENT_REBIND, PLAN, DESIGN).lower()
+    for required in (
+        "attempt 042 remains immutable",
+        "receipt-lock parse reproduction",
+        "1,437,022 lf bytes",
+        "424 statements",
+        "all twenty scenario objects",
+        "6/4/3/4/3",
+        "attempt 043",
+        "gemini 3.6 flash/high",
+        "docs/branding/",
+        "no applied migration",
+        "patient",
+        "protected-ref",
+    ):
+        assert required in combined
+    contract = _contract()
     canonical = json.dumps(
         {
             "scenario_order": contract["scenario_order"],
