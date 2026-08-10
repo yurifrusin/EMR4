@@ -303,6 +303,20 @@ GENERATION_LOCK_EXACT_PASS_EVIDENCE_PATH = (
 GENERATION_LOCK_EXACT_PASS_EVIDENCE = json.loads(
     GENERATION_LOCK_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-anchor-lock-rls-characterization.json"
+)
+ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE = json.loads(
+    ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS = {
+    key: value
+    for key, value in ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"][
+        "query_digests"
+    ].items()
+    if key not in {"server", "extensions"}
+}
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1977,8 +1991,8 @@ def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound()
         if key not in {"server", "extensions"}
     }
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "characterization_only",
-        "expected_query_digests": {},
+        "mode": "exact_digest_bound",
+        "expected_query_digests": ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS,
     }
     assert {
         "mode": "exact_digest_bound",
@@ -2073,8 +2087,8 @@ def test_generation_lock_characterization_is_immutable_and_exactly_bound() -> No
         == (ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE["catalogue"]["kind_counts"])
     )
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "characterization_only",
-        "expected_query_digests": {},
+        "mode": "exact_digest_bound",
+        "expected_query_digests": ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS,
     }
 
 
@@ -2123,6 +2137,60 @@ def test_generation_lock_exact_reproduction_is_immutable_and_complete() -> None:
         ),
         "removed": True,
         "status": "cleanup_verified",
+    }
+
+
+def test_anchor_lock_characterization_is_immutable_and_exactly_bound() -> None:
+    evidence = ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "e1568e1218fc9663b1490349828a7ea40f5da933e9db0b7b7271164c8981e968"
+    )
+    assert evidence["attempt_id"] == "9c293b77a2ebc1364f602f17"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_435_884,
+        "artifact_sha256": (
+            "sha256:550336e145eac6ac004447d05ea3e72d970f6d8283d3af2689aed62cfff92bc6"
+        ),
+        "contract_sha256": (
+            "sha256:9f99140c0871db3374ca1d7971d5000a56491d70ab2a2bbd4a593a8df1f66663"
+        ),
+        "prerequisite_contract_sha256": (
+            "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
+        ),
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 422,
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "84066c4614b605a9150ab304155e9f64523fe1aecb4c773452ef9900e9937dd0"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert CONTRACT["catalogue_expectation"] == {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS,
+    }
+    assert {
+        key
+        for key, value in ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS.items()
+        if GENERATION_LOCK_EXPECTED_QUERY_DIGESTS[key] != value
+    } == {"policies"}
+    assert evidence["catalogue"]["kind_counts"]["policies"] == 46
+    assert evidence["catalogue"]["kind_counts"] == {
+        **GENERATION_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"],
+        "policies": 46,
     }
 
 

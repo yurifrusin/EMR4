@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_no_argument_provider_free_network_none_disposable_postgresql_parse_catalogue_characterization_for_the_422_statement_anchor_lock_artifact_then_route_and_restore_all_protected_mutable_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Run the fixed parse/catalogue harness once. Required result is catalogue_characterization_required with all non-policy digests unchanged, one newly characterized policy digest, exact catalogue populations, atomic rollback proof and owned-container cleanup. No exact acceptance follows until the digest map is rebound and a separate fresh reproduction is receipted.",
+    "current_authority_allocation": "GPT Sol alone owns one exact no-argument local disposable characterization, exact-ID cleanup verification, immutable routing and restoration. No worker, verifier, model, product consumer or protected integrator is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exact 96ecfe70258a6be929b37c148909086d896c8325; protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Runtime may write only the fixed generic characterization target before Sol copies it to one immutable anchor-lock path and restores protected mutable bytes.",
+    "live_handover_current_baton": "Parse characterization contract is committed at exact 96ecfe70258a6be929b37c148909086d896c8325. It binds inert source ad98e6d7, SQL SHA-256 550336e1, 1,435,884 LF bytes, 422 statements, 46 RLS policies and characterization_only mode.",
+    "protected_evidence_boundaries": "One owned PostgreSQL 16 container only, network none, no port, no mount, authored-synthetic prerequisites. Do not enumerate or touch unrelated containers. Accepted parse evidence 97d1385c, historical failure 3bf66870 and prior generic characterization 78c157c7 are backed up under the exact temp directory and must be restored after immutable routing. Behavior mutable 09907bf6 and failure 036 remain untouched. No applied migration, operational database/credential, watcher/feed, application wiring, product/patient data, provider call, deployment, release, Pages or protected-ref movement. docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
