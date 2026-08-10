@@ -112,6 +112,12 @@ EXPECTED_BINDING_SELECT_POLICY = (
     "active_from <= transaction_timestamp() AND "
     "(active_until IS NULL OR active_until > transaction_timestamp())"
 )
+EXPECTED_ANCHOR_LOCK_POLICY = (
+    "emr4_context_fabric.session_binding_allows_v1(session_user, "
+    "ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, "
+    "'LIFECYCLE'::emr4_context_fabric.logical_capability], "
+    "practice_id, source_contract_id, transaction_timestamp())"
+)
 
 
 def text(path: Path) -> str:
@@ -366,6 +372,22 @@ def validate_renderer_semantics(contract: dict) -> None:
     assert alias_lock["command"] == "UPDATE"
     assert alias_lock["using_sql"] == producer
     assert alias_lock["with_check_sql"] == producer + " AND FALSE"
+    anchor = mapped["context_recovery_anchor"]
+    assert anchor["rls_policy_ids"] == [
+        "pol_cf_08_select",
+        "pol_cf_08_insert",
+        "pol_cf_08_update_lock",
+    ]
+    anchor_lock = policies["pol_cf_08_update_lock"]
+    assert anchor_lock == {
+        "id": "pol_cf_08_update_lock",
+        "relation": "context_recovery_anchor",
+        "command": "UPDATE",
+        "roles": ["PUBLIC"],
+        "permissive": True,
+        "using_sql": EXPECTED_ANCHOR_LOCK_POLICY,
+        "with_check_sql": EXPECTED_ANCHOR_LOCK_POLICY + " AND FALSE",
+    }
     coordinator = "'COORDINATOR'::emr4_context_fabric.logical_capability"
     generation_update = policies["pol_cf_06_update"]
     assert coordinator in generation_update["using_sql"]
@@ -872,6 +894,68 @@ def test_alias_lock_visibility_cannot_be_removed_or_widened_to_mutation() -> Non
     ].replace("'PRODUCER'", "'OBSERVER'")
     with pytest.raises(AssertionError):
         validate_renderer_semantics(reseal_contract(foreign_lock_visibility))
+
+
+def test_anchor_lock_visibility_cannot_be_removed_widened_or_reassigned() -> None:
+    contract = data(CONTRACT)
+    policies = {
+        policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
+    }
+    anchor = relation_map(contract)["context_recovery_anchor"]
+    assert anchor["rls_policy_ids"] == [
+        "pol_cf_08_select",
+        "pol_cf_08_insert",
+        "pol_cf_08_update_lock",
+    ]
+    assert policies["pol_cf_08_update_lock"]["using_sql"] == (
+        EXPECTED_ANCHOR_LOCK_POLICY
+    )
+    assert policies["pol_cf_08_update_lock"]["with_check_sql"] == (
+        EXPECTED_ANCHOR_LOCK_POLICY + " AND FALSE"
+    )
+
+    missing_lock_visibility = copy.deepcopy(contract)
+    missing_lock_visibility["rls_policy_catalogue"]["policies"] = [
+        policy
+        for policy in missing_lock_visibility["rls_policy_catalogue"]["policies"]
+        if policy["id"] != "pol_cf_08_update_lock"
+    ]
+    relation_map(missing_lock_visibility)["context_recovery_anchor"][
+        "rls_policy_ids"
+    ].remove("pol_cf_08_update_lock")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(missing_lock_visibility))
+
+    widened_write_check = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in widened_write_check["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_08_update_lock"]["with_check_sql"] = policies[
+        "pol_cf_08_update_lock"
+    ]["using_sql"]
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(widened_write_check))
+
+    foreign_capability = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in foreign_capability["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_08_update_lock"]["using_sql"] = policies[
+        "pol_cf_08_update_lock"
+    ]["using_sql"].replace("'LIFECYCLE'", "'RETENTION'")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(foreign_capability))
+
+    non_public = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in non_public["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_08_update_lock"]["roles"] = ["context_coordinator"]
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(non_public))
 
 
 def test_exact_schema_rejects_resealed_non_hash_mutation() -> None:

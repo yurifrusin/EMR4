@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_no_argument_provider_free_authored_synthetic_network_none_disposable_postgresql_behavior_transaction_rehearsal_after_correcting_only_the_receipt_event",
+  "source_evidence": {
+    "live_handover_current_baton": "The generation-lock parse exact reproduction, parent-only behavior rebind and corrected independent veto are accepted. Exact task HEAD 978f54205966d412a9a5ead03b1c2c16ca46c5e0 is eligible for one behavior attempt over the frozen twenty scenarios. The first pre-execution envelope failed closed on unapproved descriptive event pre_execution and no runtime followed.",
+    "current_authority_allocation": "GPT Sol alone owns this one local disposable execution, evidence containment, diagnosis and acceptance. Gemini review is complete. No DeepSeek worker, native implementation worker, provider runtime or product consumer is assigned.",
+    "active_plan_and_acceptance": "Run the no-argument behavior harness once under contract SHA-256 6375e756 with exact artifact aa26f926 and unchanged category counts 6/4/3/4/3. Pass requires all 20 scenarios, exact SQLSTATE and readback contracts, rollback/idempotency/RLS checks, owned-container cleanup and exact-ID absence. Any failure is immutable evidence for bounded diagnose-repair-rerun recovery.",
+    "protected_evidence_boundaries": "The run uses one owned PostgreSQL 16 container with network none, no published port, no mount and authored-synthetic values only. It must not enumerate or touch unrelated containers. Mutable behavior evidence is backed up at exact SHA-256 09907bf6 and must be restored after immutable routing. Parse mutable 97d1385c, historical failure 3bf66870 and generic characterization 78c157c7 remain preserved. No applied migration, operational database/credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider/model call, external retrieval, command/write, deployment, production, release, Pages or protected ref is open. docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Primary task branch is exact 978f54205966d412a9a5ead03b1c2c16ca46c5e0 with only preserved untracked files outside this receipt set. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "corrected_generation_lock_behavior_preexecution_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns one exact behavior run and fail-closed evidence routing."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native implementation worker is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Corrected Gemini exact-HEAD veto is accepted and complete; no verifier call occurs in this run."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

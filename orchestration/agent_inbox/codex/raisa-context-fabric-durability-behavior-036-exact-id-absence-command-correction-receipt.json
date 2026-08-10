@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.orchestrator-command-correction-receipt.v1",
+  "status": "corrected_without_candidate_or_external_mutation",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-behavior-036-exact-id-absence-check-001",
+  "protected_container_id": "2fb4b0b9573e7b0c735eb0861f363ada93ac4606ceca503d414fb8e6d3ac69e9",
+  "errors": [
+    {
+      "stage": "docker_executable_resolution",
+      "observation": "The first exact-ID inspect command named an incorrect fixed Docker Desktop executable path and failed before Docker execution."
+    },
+    {
+      "stage": "powershell_output_formatting",
+      "observation": "A later exact-ID inspect command reached Docker but its inline PowerShell display expression was syntactically invalid after the inspect result."
+    }
+  ],
+  "correction": {
+    "docker_executable": "resolved_with_Get-Command_docker.exe",
+    "target_scope": "one_exact_owned_container_id_only",
+    "inspect_exit_code": 1,
+    "absence_verified": true,
+    "unrelated_containers_enumerated_or_touched": false
+  },
+  "candidate_changed": false,
+  "external_mutation": false,
+  "authority_boundary": "provider_free_exact_owned_container_cleanup_verification_only"
+}

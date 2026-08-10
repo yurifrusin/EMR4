@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_the_deterministic_failure_036_diagnosis_lock_only_recovery_anchor_rls_structural_repair_and_closed_error_register_revision_without_regenerating_or_running_any_descendant",
+  "source_evidence": {
+    "live_handover_current_baton": "Exact task HEAD 978f54205966d412a9a5ead03b1c2c16ca46c5e0 has accepted generation-lock parse reproduction and behavior rebind. Behavior attempt 036 then failed safely at BTR-E04 CF004 line 299 with cleanup verified; immutable failure evidence SHA-256 is 662022a5 and the protected mutable pass was restored at 09907bf6. The first structural-repair precommit envelope rejected invalid adapter method codex_native_subagent_observation and no integration followed.",
+    "current_authority_allocation": "GPT Sol owns deterministic diagnosis, the bounded structural repair, explicit-path integration and descendant recovery. A read-only native validator independently confirmed the source diagnosis and made no changes; it is represented only as a non-probing synthetic observation. No worker, provider runtime, product consumer or protected integrator is assigned by this commit.",
+    "active_plan_and_acceptance": "Persist failure 036 diagnosis and add exactly one PUBLIC permissive UPDATE policy pol_cf_08_update_lock over context_recovery_anchor. USING admits exact ordered COORDINATOR and LIFECYCLE session bindings; WITH CHECK repeats the binding followed by AND FALSE. Both direct-DML matrices, forced RLS, append-only invariants, entry-point grants, typed bodies and twenty behavior scenarios remain unchanged. This commit is a structural parent only; descendants remain ineligible until rebound, regenerated, parsed and independently vetoed.",
+    "protected_evidence_boundaries": "Provider-free repository work only. Preserve mutable behavior pass 09907bf6, parse pass 97d1385c, parse historical failure 3bf66870, generic characterization 78c157c7 and immutable behavior failure 036 SHA-256 662022a5. No disposable run, applied migration, operational database/credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected ref is open. docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Task HEAD is exact 978f54205966d412a9a5ead03b1c2c16ca46c5e0 and origin task is 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit intended repair, diagnosis, receipt, test, threat and register paths may be staged; all other untracked files remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "corrected_failure_036_anchor_lock_rls_recovery_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns the exact structural repair and explicit-path commit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The completed read-only native validator made no changes and has no active lease."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh exact-HEAD Gemini veto is required only after descendant reconstruction and before another behavior run."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 173,
+  "register_revision": 175,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8014,6 +8014,175 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-rebind-corrected-gemini-review-packet.md",
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-behavior-rebind-corrected-review-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-173.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0200",
+      "attempt_id": "raisa-context-fabric-generation-lock-behavior-preexecution-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne runtime state must use one approved continuation event so the five-source receipt can fail closed before any worker or disposable runtime dispatch.",
+      "observed_error": "The first attempt 036 pre-execution state used unsupported descriptive continuation event pre_execution. The orchestrator receipt returned revision_required with no sources admitted and no dispatch.",
+      "detection_method": "The deterministic preflight rejected the event before any Docker, database, model or worker action; Sol preserved the failed state and receipt and changed only the event in a fresh corrected envelope.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-preexecution-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-preexecution-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-preexecution-corrected-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-preexecution-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-174.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unsupported_descriptive_continuation_event_pre_execution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The corrected fresh state used approved event pre_worker_dispatch, passed all five source checks and retained the exact same closed behavior-attempt authority. No action followed the failed envelope.",
+        "prevention_control": "Select continuation events only from the repository-approved enum and require a passed five-source preflight receipt before every worker, verifier, provider or disposable-runtime dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-preexecution-corrected-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-behavior-preexecution-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-174.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0201",
+      "attempt_id": "raisa-context-fabric-behavior-036-exact-id-absence-check-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Post-run cleanup verification must resolve the installed Docker executable, inspect only the exact owned container ID and emit a syntactically valid absence result without enumerating unrelated containers.",
+      "observed_error": "One command hard-coded an incorrect Docker executable path and failed before Docker; a later command reached the exact-ID inspect but used an invalid inline PowerShell output expression.",
+      "detection_method": "Both commands failed visibly. Sol then resolved docker.exe with Get-Command, repeated only the exact-ID inspect and observed exit code 1 confirming absence without any container enumeration or mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-036-exact-id-absence-command-correction-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-174.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.exact_id_cleanup_check_command_construction_failed_before_valid_result",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The corrected command dynamically resolved the installed Docker CLI, inspected only container 2fb4b0b9573e7b0c735eb0861f363ada93ac4606ceca503d414fb8e6d3ac69e9 and confirmed exact-ID absence.",
+        "prevention_control": "Resolve external executables before use, keep verification commands single-purpose, avoid inline conditional display expressions and preserve exact target IDs without discovery or enumeration.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-036-exact-id-absence-command-correction-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-174.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0202",
+      "attempt_id": "701e15b874bd1c79f95466b5",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-structural-contract",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Coordinator and lifecycle security-definer entry points must be able to acquire their typed exact FOR SHARE locks on an existing recovery anchor while the append-only anchor remains unavailable for mutation.",
+      "observed_error": "Behavior attempt 036 stopped safely at BTR-E04 CF004 in apply_durability_transition_v1 line 299. The immediately preceding plain set read and count-one assertion passed, but the same recovery-anchor row became invisible to FOR SHARE because forced RLS had no applicable UPDATE policy.",
+      "detection_method": "Sol bound immutable failure 036 to exact inert SQL line 1254, the ordered typed select/cardinality/lock nodes, all five recovery-anchor FOR SHARE nodes, the forced-RLS policy catalogue and empty coordinator/lifecycle direct-DML matrices without opening another database run. An independent read-only validator confirmed the diagnosis and bounded repair.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-036.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-036.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-anchor-lock-rls-recovery.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-anchor-lock-rls-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-174.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.recovery_anchor_for_share_hidden_by_missing_lock_only_update_policy",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Add pol_cf_08_update_lock for exact ordered COORDINATOR and LIFECYCLE session bindings. Its WITH CHECK repeats the exact binding predicate followed by AND FALSE; both roles retain zero direct DML, forced RLS and all append-only invariants.",
+        "prevention_control": "Structural semantics and hostile tests must require exact PUBLIC lock-only anchor policy shape, reject missing false checks or foreign capabilities, preserve empty direct grants and require body rebind, inert regeneration, parse proof and a fresh veto before another behavior attempt.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-anchor-lock-rls-recovery.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-anchor-lock-rls-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-174.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0203",
+      "attempt_id": "raisa-context-fabric-anchor-lock-rls-recovery-precommit-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "integration",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne adapter observation must use a probe method admitted by the repository settings, and completed read-only native validation must not be misrepresented as a live adapter probe.",
+      "observed_error": "The first structural-repair precommit state used unsupported method codex_native_subagent_observation for codex_subagent_spawn, so the receipt returned revision_required before integration.",
+      "detection_method": "The deterministic five-source preflight reported adapter_probe_method_invalid:codex_subagent_spawn. Sol preserved the failed state and receipt and issued a fresh corrected envelope without staging or committing first.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-rls-recovery-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-rls-recovery-precommit-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-rls-recovery-precommit-corrected-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-rls-recovery-precommit-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-175.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unapproved_native_subagent_adapter_probe_method",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The corrected fresh state represented the completed read-only native validation as a non-probing synthetic fixture, passed all five source checks and retained the exact same closed structural-parent commit authority.",
+        "prevention_control": "Use only adapter methods enumerated by current harness settings; represent completed or inactive native validation as non-probing evidence and require a passed fresh receipt before integration.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-rls-recovery-precommit-corrected-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-rls-recovery-precommit-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-175.md"
         ]
       },
       "status": "corrected"
