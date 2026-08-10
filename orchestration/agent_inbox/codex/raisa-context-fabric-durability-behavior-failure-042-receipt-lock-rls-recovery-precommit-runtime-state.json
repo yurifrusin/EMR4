@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_attempt_042_immutable_failure_and_receipt_lock_rls_diagnosis_before_bounded_structural_repair",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability candidate 1b77505f8c6c20c8b37a4f8430f15649ecd13492 passed its rejection-precedence veto. Attempt 042 passed the earlier boundary, reached BTR-I03, exposed bounded CF004 at apply_durability_transition_v1 line 210 and removed its exact container.",
+    "current_authority_allocation": "GPT Sol owns deterministic diagnosis, bounded repository repair, acceptance and task-branch integration under Yuri's standing closed-plan authority. A fresh Gemini 3.6 Flash/high Antigravity project will receive read-only exact-HEAD veto authority before another disposable behavior attempt. No provider, product-runtime, deployment, release, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "Static diagnosis maps line 210 to the missing-row exception after the replay receipt FOR UPDATE lock. The prior plain read sees exactly one receipt, while the forced-RLS receipt relation has SELECT and INSERT policies but no lock-only UPDATE policy. The bounded repair is pol_cf_09_update_lock with exact COORDINATOR visibility and an identical WITH CHECK ending AND FALSE; two focused tests and Ruff pass.",
+    "protected_evidence_boundaries": "Failure 042 is preserved immutably at SHA-256 88cd6fb34ffb07895dc9bc11c4712f64dedc24394e6befa04b70b09a7d3184d7 and diagnosis evidence at 9ea4484bfe35164362b012a5bc72c6594dd18b3e0ce71a1e832b89b9c1e88278. The mutable behavior evidence alias is restored and remains unstaged at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. No raw stderr, branding, patient, clinical, product, credential, provider, application/API/Diary, watcher/feed, deployment, release or Pages surface opens.",
+    "git_refs_and_worktree": "Precommit task HEAD and local task branch are exact 1b77505f8c6c20c8b37a4f8430f15649ecd13492; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Staging is explicit-path only and excludes docs/branding, the mutable behavior evidence alias and every unrelated untracked path."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Attempt 042 failure, exact cleanup, static receipt-lock diagnosis and bounded repair are present and focused verification passes."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh exact-HEAD veto is deferred until the regenerated and re-bound candidate is committed."]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
