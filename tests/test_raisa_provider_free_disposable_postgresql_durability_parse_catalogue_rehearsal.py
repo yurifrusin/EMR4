@@ -1996,9 +1996,9 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_436_481
+    assert len(artifact) == 1_437_022
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
-    assert len(manifest["ordered_nodes"]) == 399
+    assert len(manifest["ordered_nodes"]) == 400
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
     assert (  # noqa: SLF001
         rehearsal._canonical_sha(PREREQUISITE) == rehearsal.EXPECTED_PREREQUISITE_SHA256
@@ -2467,7 +2467,7 @@ def test_exact_catalogue_kind_population_is_frozen() -> None:
         "SUPPORT_FUNCTION": 1,
         "RLS_ENABLE": 18,
         "RLS_FORCE": 18,
-        "RLS_POLICY": 47,
+        "RLS_POLICY": 48,
         "TYPE_OWNER": 32,
         "RELATION_OWNER": 18,
         "ENTRY_POINT": 9,

@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_receipt_lock_parse_characterization_contract_before_one_fixed_no_argument_disposable_run",
+  "source_evidence": {
+    "live_handover_current_baton": "Inert SQL commit 1b37d217779a5d7c3a9876a50db8f2f7099dfb23 is accepted as the exact parse parent. The first descendant is characterization-only and cannot pass acceptance.",
+    "current_authority_allocation": "GPT Sol owns the fixed provider-free disposable PostgreSQL parse characterization and cleanup. No worker, provider, product runtime, behavior rehearsal, deployment, release, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "The parse contract binds artifact bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38, 1,437,022 bytes, 424 statements and 48 policies. Characterization seal is sha256:15a80a1458fbd19fb7a4b04d20623ceaed7298ad2b711047340658fcf36f9d7e. Thirteen focused contract/plan tests and the complete AER suite pass; Ruff passes.",
+    "protected_evidence_boundaries": "The run may write only bounded parse-characterization evidence and must remove its exact owned networkless container. It retains no raw logs, credentials, product or patient values. Mutable behavior evidence remains unstaged at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b; branding remains untouched.",
+    "git_refs_and_worktree": "Precommit task HEAD is exact 1b37d217779a5d7c3a9876a50db8f2f7099dfb23. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging excludes docs/branding, mutable behavior evidence and unrelated untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Characterization contract, schema, exact parent bytes and fixed harness preflight pass."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Independent veto remains deferred until exact parse reproduction and behavior parent rebind are complete."]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
