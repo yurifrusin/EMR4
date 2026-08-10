@@ -2196,7 +2196,6 @@ def _probe(
 def _bounded_outcome(
     result: parent.ProcessResult, expected_sqlstate: str | None, scenario_id: str
 ) -> tuple[str | None, dict[str, Any]]:
-    result_kind = _transition_result_from_stdout(result, scenario_id)
     bounded = parent._bounded_psql_rejection(  # noqa: SLF001
         result, max_error_line=1000, max_error_position=131072
     )
@@ -2209,6 +2208,7 @@ def _bounded_outcome(
                 detail["sqlstate"] = sqlstate
             detail.update(_safe_plpgsql_coordinate(result, scenario_id))
             raise BehaviorFailure("scenario", "unexpected_rejection", detail)
+        result_kind = _transition_result_from_stdout(result, scenario_id)
         transport = {
             "psql_exit": result.returncode,
             "stderr_digest": bounded["stderr"],
@@ -2218,6 +2218,7 @@ def _bounded_outcome(
         return None, transport
     if result.returncode == 0 or observed != [expected_sqlstate]:
         raise BehaviorFailure("scenario", "sqlstate_mismatch", expected_sqlstate)
+    result_kind = _transition_result_from_stdout(result, scenario_id)
     transport = {
         "psql_exit": result.returncode,
         "stderr_digest": bounded["stderr"],

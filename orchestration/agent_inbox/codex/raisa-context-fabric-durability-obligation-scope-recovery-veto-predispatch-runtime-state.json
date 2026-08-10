@@ -1,0 +1,38 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_failure_040_obligation_scope_recovery_in_r168",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant is exact candidate c8a3d2b51b8249ab7fee0a373c9dc8b2d375ecc3. Attempt 040 localized BTR-E04 to an unscoped obligation readback and is preserved immutably; no further database run is permitted before this veto.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only independent-veto authority only in clean r168 at the exact candidate. GPT Sol retains implementation, acceptance, runtime, cleanup, integration and baton authority. No silent model fallback is allowed.",
+    "active_plan_and_acceptance": "The candidate binds only BTR-E04 and BTR-I03 obligation probes to exact alpha practice and stream. Database artifact, body, behavior contract, twenty scenarios and relation allowlist are unchanged. The 241-test focused packet, Ruff and diff hygiene pass.",
+    "protected_evidence_boundaries": "The verifier may inspect only the committed allowlist and immutable authored-synthetic evidence named in the packet. It may not inspect mutable evidence, protected holdouts, historical Diary data, docs/branding, patient/clinical/product data, start Docker/PostgreSQL, use credentials, contact product/provider surfaces, edit, commit, push, deploy, release, rebuild Pages or move refs.",
+    "git_refs_and_worktree": "Verifier worktree C:\\Users\\sarashera\\EMR4-worktrees\\r168 is clean on codex/review-context-fabric-obligation-scope-c8a3d2b at exact c8a3d2b51b8249ab7fee0a373c9dc8b2d375ecc3. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main tracked task worktree is clean and preserved untracked paths remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh project not yet opened; dispatch requires this receipt."]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

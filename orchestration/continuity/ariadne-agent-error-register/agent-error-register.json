@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 187,
+  "register_revision": 188,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8718,6 +8718,48 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/raisa-context-fabric-durability-behavior-failure-040-obligation-scope-diagnosis.md",
           "docs/ariadne-agent-error-correction-register-revision-187.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0217",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-failure-041-rejection-precedence-recovery",
+      "stage": "deterministic_verification",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-behavior-outcome-classifier",
+      "model": null,
+      "transport": "local_disposable_postgresql_behavior_harness",
+      "attempt_id": "d37f4f154a6dc1e6404a9c01",
+      "origin": "harness",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "reasoning_level": "high",
+      "observed_error": "Behavior attempt 041 advanced through the repaired BTR-E04 readback, then reported BTR-I03 transition_result_missing. The harness parsed the typed success marker before classifying process rejection and bounded SQLSTATE, masking any underlying rejection that correctly emitted no success marker.",
+      "expected_invariant": "Process exit and bounded SQLSTATE admission must precede any success-marker requirement, while the marker remains mandatory after the transport outcome itself is admitted.",
+      "detection_method": "The failure detail digest mapped uniquely to BTR-I03. Static parent-source inspection proved _transition_result_from_stdout executed before _bounded_psql_rejection, while immutable evidence intentionally retained no raw stderr and exact container cleanup passed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-041.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-041.json",
+        "docs/raisa-context-fabric-durability-behavior-failure-041-rejection-precedence-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-188.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.transition_marker_masked_rejection_classification",
+      "causal_claim_level": "observation_only",
+      "related_incident_ids": [],
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Classify unexpected rejection or SQLSTATE mismatch before parsing the transition marker, then retain the exact marker gate after the process outcome is admitted for both success and expected-rejection scenarios.",
+        "prevention_control": "Typed semantic markers must never obscure the lower transport and SQLSTATE evidence layer they are intended to refine.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-context-fabric-durability-behavior-failure-041-rejection-precedence-diagnosis.md",
+          "docs/ariadne-agent-error-correction-register-revision-188.md"
         ]
       },
       "status": "corrected"

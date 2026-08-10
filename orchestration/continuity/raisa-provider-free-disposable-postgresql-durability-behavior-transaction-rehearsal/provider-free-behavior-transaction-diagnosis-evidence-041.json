@@ -1,0 +1,37 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_and_harness_classification_repair_only_no_database_body_contract_product_provider_or_protected_ref_authority",
+  "bounded_repair": {
+    "behavior_contract_unchanged": true,
+    "classify_sqlstate_mismatch_before_expected_failure_marker": true,
+    "classify_unexpected_rejection_before_success_marker": true,
+    "database_artifact_unchanged": true,
+    "fresh_exact_head_veto_before_characterization": true,
+    "next_run_must_be_single_owned_disposable_attempt": true,
+    "retain_marker_requirement_after_transport_admission": true,
+    "scenario_population_unchanged": true
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "btr_e04_completed_before_failure": true,
+    "database_body_defect_indicated": false,
+    "failure_scenario_recovered_from_digest": true,
+    "parent_called_marker_parser_before_rejection_classifier": true,
+    "raw_stderr_persisted": false,
+    "underlying_psql_outcome_not_persisted": true
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:c1215b6dae6e1f2608c55d38ee35ecbea5df2f341f1141707239e8371f129491",
+    "failure_code": "transition_result_missing",
+    "internal_attempt_id": "d37f4f154a6dc1e6404a9c01",
+    "run_sequence": 41,
+    "scenario_id": "BTR-I03"
+  },
+  "parent_source": {
+    "commit": "c8a3d2b51b8249ab7fee0a373c9dc8b2d375ecc3",
+    "path": "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+    "sha256": "sha256:7a02fc1683f3d96941bfc955ce2e23d9351d0a8e6a0d9305cfd91f5697343599"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-041-rejection-precedence-diagnosis.v1",
+  "status": "transition_marker_masked_rejection_classification_proven"
+}

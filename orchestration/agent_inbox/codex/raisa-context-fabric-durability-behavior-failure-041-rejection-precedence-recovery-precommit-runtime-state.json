@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_attempt_041_immutable_failure_diagnosis_and_rejection_precedence_repair_before_one_fresh_exact_head_gemini_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability candidate c8a3d2b51b8249ab7fee0a373c9dc8b2d375ecc3 passed its scope-repair veto. Attempt 041 passed BTR-E04, reached BTR-I03, failed closed as transition_result_missing and removed its exact container.",
+    "current_authority_allocation": "GPT Sol owns diagnosis, bounded harness repair, acceptance and task-branch integration. One fresh Gemini 3.6 Flash/high Antigravity project may receive read-only exact-HEAD veto authority after this commit. No provider, product-runtime, deployment, release, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "Static diagnosis proves the parent parsed the transition marker before classifying process rejection and bounded SQLSTATE, masking the underlying BTR-I03 outcome. The candidate classifies rejection/SQLSTATE first and retains the exact typed marker after transport admission. Database artifact, body, behavior contract, twenty scenarios and relation allowlist are unchanged; 245 focused tests, Ruff and diff hygiene pass.",
+    "protected_evidence_boundaries": "Failure 041 is preserved immutably at SHA-256 c1215b6dae6e1f2608c55d38ee35ecbea5df2f341f1141707239e8371f129491. The mutable behavior evidence alias is restored and remains unstaged at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. No raw stderr, protected holdout, branding, patient, clinical, product, credential, provider, application/API/Diary, watcher/feed, deployment, release or Pages surface opens.",
+    "git_refs_and_worktree": "Precommit task HEAD and local task branch are exact c8a3d2b51b8249ab7fee0a373c9dc8b2d375ecc3; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Staging is explicit-path only and excludes docs/branding, the mutable behavior evidence alias and every unrelated untracked path."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Attempt 041 failure, exact cleanup, static precedence diagnosis and bounded classifier repair are present and focused verification passes."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh exact-HEAD veto is deferred until after this explicit-path commit."]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

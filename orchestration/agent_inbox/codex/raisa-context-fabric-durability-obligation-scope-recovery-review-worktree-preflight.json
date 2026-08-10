@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r168",
+  "branch": "codex/review-context-fabric-obligation-scope-c8a3d2b",
+  "head": "c8a3d2b51b8249ab7fee0a373c9dc8b2d375ecc3",
+  "expected_head": "c8a3d2b51b8249ab7fee0a373c9dc8b2d375ecc3",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-obligation-scope-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

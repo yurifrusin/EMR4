@@ -1348,6 +1348,41 @@ def test_transition_result_marker_fails_closed_on_hostile_shapes() -> None:
         rehearsal._bounded_outcome(unexpected, None, "BTR-E01")
 
 
+def test_transition_marker_admission_never_masks_rejection_classification() -> None:
+    unexpected_rejection = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        b"psql:<stdin>:4: ERROR:  CF303: synthetic detail\n",
+    )
+    with pytest.raises(rehearsal.BehaviorFailure) as caught:
+        rehearsal._bounded_outcome(unexpected_rejection, None, "BTR-I03")
+    assert (caught.value.stage, caught.value.code) == (
+        "scenario",
+        "unexpected_rejection",
+    )
+    assert caught.value.detail == {"scenario_id": "BTR-I03", "sqlstate": "CF303"}
+
+    wrong_expected_rejection = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        b"psql:<stdin>:4: ERROR:  CF303: synthetic detail\n",
+    )
+    with pytest.raises(rehearsal.BehaviorFailure, match="sqlstate_mismatch"):
+        rehearsal._bounded_outcome(
+            wrong_expected_rejection, "P0001", "BTR-B03"
+        )
+
+    admitted_rejection_without_marker = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        b"psql:<stdin>:4: ERROR:  P0001: fixed_injected_rollback\n",
+    )
+    with pytest.raises(rehearsal.BehaviorFailure, match="transition_result_missing"):
+        rehearsal._bounded_outcome(
+            admitted_rejection_without_marker, "P0001", "BTR-B03"
+        )
+
+
 def test_probe_failure_releases_only_scenario_and_bounded_indexes(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
