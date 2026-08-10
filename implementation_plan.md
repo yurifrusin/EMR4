@@ -175,8 +175,11 @@ five-state map are
 [`docs/raisa-codebase-architectural-health-conformance-review.md`](docs/raisa-codebase-architectural-health-conformance-review.md)
 and
 [`docs/raisa-codebase-as-built-architectural-state-map.md`](docs/raisa-codebase-as-built-architectural-state-map.md).
-The next safe tranche is the bounded provider-free conformance repair named in
-that review; it is not a broad product refactor.
+The bounded provider-free conformance repair named in that review now also
+passes. It adds an explicit maintained Python 3.11 source-state, protected-CI
+compile/lint/static-test enforcement, current API Spine lifecycle supersession
+and live baton consistency without changing product behavior. The next safe
+tranche is AES-C0 architecture and contract.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -191,10 +194,10 @@ externally owned kill switch. Reasoning, information, egress and action budgets
 remain independent. The gate is deliberately placed after the current
 provider-free durability work and before real-product-read or executable Bureau
 runtime. The prerequisite serial database-only rehearsal and intervening
-read-only architectural-health pulse now pass. One bounded CI/lifecycle
-conformance repair must pass next, after which AES-C0 architecture and contract
-begins with the new source-state, no-fallback, route and baton fitness
-constraints. None of these results can be mistaken for current provider,
+read-only architectural-health pulse and bounded CI/lifecycle conformance
+repair now pass. AES-C0 architecture and contract begins next with the new
+source-state, no-fallback, route and baton fitness constraints. None of these
+results can be mistaken for current provider,
 product-data, tool or command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
@@ -604,9 +607,9 @@ generation rehearsal. The architecture-only provider-free default-off
   restart, unknown-commit recovery, key rotation, retention, purge, performance
   or operational availability. Applied migration, application wiring,
   operational database/source access and every real-product or clinical
-  descendant remain closed. A bounded read-only architectural-health and
-  conformance pulse is next after Yuri's requested closeout pause, followed by
-  the Agent Execution Surface and Containment Gate.
+  descendant remain closed. The bounded architectural-health pulse and its
+  provider-free CI/lifecycle repair have passed; AES-C0 of the Agent Execution
+  Surface and Containment Gate is next.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

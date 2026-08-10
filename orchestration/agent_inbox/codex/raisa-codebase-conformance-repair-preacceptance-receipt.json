@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_commit_and_publish_bounded_codebase_conformance_repair_then_begin_aes_c0",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "All three frozen slices pass: 202 maintained Python files are selected and compiled without protected enumeration; the Python workflow requires exact 3.11 plus Ruff/leakage and 92 no-conftest static tests; the historical API gap packet is superseded by a five-surface current index; baton consistency passes at Continuity 236 / Compass 218. The canonical fast profile passes 98 tests and the focused API lifecycle packet passes 117.",
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance, exact-path task-branch commit and publication for this small tightly coupled repair. No worker or provider was selected. Protected integration remains closed.",
+    "git_refs_and_worktree": "After fetch, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam remain 8ce3a591fa0e63ad2d68bf95a8d7e24369dd872f. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are the exact conformance and Continuity/Compass paths; 518 untracked files remain, including five docs/branding paths. Only an explicit owned-path staging list may be used.",
+    "live_handover_current_baton": "The live baton records the bounded conformance repair passing at Continuity 236 / Compass 218 and names architecture-only AES-C0 as the next safe planned tranche with no user decision fork.",
+    "protected_evidence_boundaries": "No protected holdout, historical Diary PHI, patient/clinical/product data, provider, database behavior, migration, watcher/source, tool, command, credential, deployment, production, release, Pages or protected-ref boundary opened. All unrelated untracked files, especially docs/branding/, remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

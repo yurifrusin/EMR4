@@ -1,0 +1,215 @@
+{
+  "schema_version": "emr4.python_source_state.v1",
+  "target_python": "3.11",
+  "allowed_states": [
+    "mounted_current",
+    "mounted_default_off",
+    "accepted_unmounted"
+  ],
+  "forbidden_path_tokens": [
+    "holdout",
+    "local_data",
+    "historical-diary-trove"
+  ],
+  "forbidden_recursive_roots": [
+    "app/services/bernie",
+    "app/services/ai/evals"
+  ],
+  "source_entries": [
+    {
+      "path": "app/__init__.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/main.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/config.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/dependencies.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/graphql",
+      "mode": "recursive",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/middleware",
+      "mode": "recursive",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/models",
+      "mode": "recursive",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/routers",
+      "mode": "recursive",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/schemas",
+      "mode": "recursive",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services",
+      "mode": "top_level",
+      "state": "mounted_default_off"
+    },
+    {
+      "path": "app/services/ai",
+      "mode": "top_level",
+      "state": "accepted_unmounted"
+    },
+    {
+      "path": "app/services/ai/providers",
+      "mode": "recursive",
+      "state": "accepted_unmounted"
+    },
+    {
+      "path": "app/services/diary",
+      "mode": "recursive",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/practice",
+      "mode": "recursive",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/practice_knowledge",
+      "mode": "recursive",
+      "state": "accepted_unmounted"
+    },
+    {
+      "path": "app/services/bernie/__init__.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/action_grammar.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/capabilities.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/confirm_gate.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/context.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/evidence.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/frames.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/interpreter.py",
+      "mode": "file",
+      "state": "mounted_default_off"
+    },
+    {
+      "path": "app/services/bernie/normalizer.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/pilot.py",
+      "mode": "file",
+      "state": "mounted_default_off"
+    },
+    {
+      "path": "app/services/bernie/policy.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/schedule_explanations.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/semantic_extraction.py",
+      "mode": "file",
+      "state": "mounted_default_off"
+    },
+    {
+      "path": "app/services/bernie/session.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/session_store.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/temporal.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/transitions.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "app/services/bernie/ui_view_model.py",
+      "mode": "file",
+      "state": "mounted_current"
+    },
+    {
+      "path": "alembic",
+      "mode": "recursive",
+      "state": "accepted_unmounted"
+    },
+    {
+      "path": "orchestration_harness",
+      "mode": "recursive",
+      "state": "accepted_unmounted"
+    }
+  ],
+  "verification_paths": [
+    "scripts/ariadne_orchestrator_preflight.py",
+    "scripts/historical_diary_leakage_lint.py",
+    "scripts/python_source_state.py",
+    "scripts/raisa_codebase_conformance_repair_continuity_update.py",
+    "scripts/security_bandit_gate.py",
+    "scripts/verification_runtime.py",
+    "scripts/verify_empty_database_migrations.py",
+    "scripts/verify_repository.py",
+    "tests/test_agents_handover_archive.py",
+    "tests/test_api_spine_appointment_idempotency_model_migration.py",
+    "tests/test_api_spine_artifacts.py",
+    "tests/test_api_spine_external_read_model_current_surface_status.py",
+    "tests/test_api_spine_external_read_model_gap_inventory.py",
+    "tests/test_ariadne_orchestrator_preflight.py",
+    "tests/test_current_baton_consistency.py",
+    "tests/test_python_source_state.py",
+    "tests/test_raisa_codebase_conformance_repair_continuity.py",
+    "tests/test_repository_maintenance.py"
+  ]
+}

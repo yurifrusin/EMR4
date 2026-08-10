@@ -16,41 +16,34 @@ from scripts.verification_runtime import (
     VerificationCommand,
     run_commands,
 )
+from scripts.python_source_state import load_source_state
 
 
-RUFF_PATHS = [
-    "app/dependencies.py",
-    "app/middleware",
-    "app/models",
-    "app/routers",
-    "app/schemas",
-    "app/services/appointment_idempotency.py",
-    "app/services/bernie/session.py",
-    "app/services/bernie/session_store.py",
-    "app/services/diary",
-    "app/services/practice",
-    "alembic",
-    "orchestration_harness",
-    "scripts/ariadne_orchestrator_preflight.py",
-    "scripts/historical_diary_leakage_lint.py",
-    "scripts/security_bandit_gate.py",
-    "scripts/verification_runtime.py",
-    "scripts/verify_empty_database_migrations.py",
-    "scripts/verify_repository.py",
-    "tests/test_agents_handover_archive.py",
-    "tests/test_api_spine_appointment_idempotency_model_migration.py",
-    "tests/test_api_spine_artifacts.py",
-    "tests/test_ariadne_orchestrator_preflight.py",
-    "tests/test_repository_maintenance.py",
-]
-
-COMPILE_PATHS = [path for path in RUFF_PATHS if not path.startswith("tests/")]
+SOURCE_STATE = load_source_state()
+RUFF_PATHS = SOURCE_STATE["ruff_paths"]
 
 FOCUSED_TESTS = [
     "tests/test_agents_handover_archive.py",
     "tests/test_api_spine_appointment_idempotency_model_migration.py",
     "tests/test_api_spine_artifacts.py",
+    "tests/test_api_spine_external_read_model_current_surface_status.py",
+    "tests/test_api_spine_external_read_model_gap_inventory.py",
     "tests/test_ariadne_orchestrator_preflight.py",
+    "tests/test_current_baton_consistency.py",
+    "tests/test_python_source_state.py",
+    "tests/test_raisa_codebase_conformance_repair_continuity.py",
+    "tests/test_repository_maintenance.py",
+]
+
+CI_CORRECTNESS_TESTS = [
+    "tests/test_agents_handover_archive.py",
+    "tests/test_api_spine_artifacts.py",
+    "tests/test_api_spine_external_read_model_current_surface_status.py",
+    "tests/test_api_spine_external_read_model_gap_inventory.py",
+    "tests/test_ariadne_orchestrator_preflight.py",
+    "tests/test_current_baton_consistency.py",
+    "tests/test_python_source_state.py",
+    "tests/test_raisa_codebase_conformance_repair_continuity.py",
     "tests/test_repository_maintenance.py",
 ]
 
@@ -64,8 +57,8 @@ def _fast_commands() -> list[VerificationCommand]:
             TIMEOUT_SECONDS["tool"],
         ),
         VerificationCommand(
-            "Python compilation",
-            [python, "-m", "compileall", "-q", *COMPILE_PATHS],
+            "maintained Python source-state compilation",
+            [python, "scripts/python_source_state.py"],
             TIMEOUT_SECONDS["tool"],
         ),
         VerificationCommand(
@@ -108,6 +101,27 @@ def _lint_commands() -> list[VerificationCommand]:
     ]
 
 
+def _correctness_commands() -> list[VerificationCommand]:
+    python = sys.executable
+    return [
+        VerificationCommand(
+            "maintained Python 3.11 source-state compilation",
+            [
+                python,
+                "scripts/python_source_state.py",
+                "--require-target-runtime",
+            ],
+            TIMEOUT_SECONDS["tool"],
+        ),
+        *_lint_commands(),
+        VerificationCommand(
+            "bounded static correctness and conformance tests",
+            [python, "-m", "pytest", "--noconftest", *CI_CORRECTNESS_TESTS],
+            TIMEOUT_SECONDS["focused_tests"],
+        ),
+    ]
+
+
 def _bandit_commands() -> list[VerificationCommand]:
     return [
         VerificationCommand(
@@ -122,7 +136,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--profile",
-        choices=("fast", "ci-lint", "ci-bandit", "ci-security", "migration"),
+        choices=(
+            "fast",
+            "ci-correctness",
+            "ci-lint",
+            "ci-bandit",
+            "ci-security",
+            "migration",
+        ),
         default="fast",
     )
     args = parser.parse_args()
@@ -137,6 +158,8 @@ def main() -> int:
         ]
     elif args.profile == "ci-security":
         commands = [*_lint_commands(), *_bandit_commands()]
+    elif args.profile == "ci-correctness":
+        commands = _correctness_commands()
     elif args.profile == "ci-lint":
         commands = _lint_commands()
     elif args.profile == "ci-bandit":

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_freeze_and_execute_bounded_provider_free_codebase_conformance_repair",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted review and closeout require an explicit maintained/protected/historical Python source-state selection, protected CI compilation/lint/bounded tests for the maintained Python 3.11 surface without opening holdouts, explicit practitioner-directory lifecycle supersession, and baton/current-state consistency checks. No broad refactor is allowed.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled CI, API Spine lifecycle and baton-consistency repair, deterministic verification, acceptance and task-branch publication. The work is small and cross-file, so the worker-economy rule favors local Sol execution; no provider or external worker is selected.",
+    "git_refs_and_worktree": "After fetch, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are exact 8ce3a591fa0e63ad2d68bf95a8d7e24369dd872f with tracked-clean state. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. 490 untracked files remain preserved. Only explicit repair paths may be staged; broad Git staging is forbidden.",
+    "live_handover_current_baton": "The accepted architectural-health review is current at Continuity 235 / Compass 217. The live Next implementation row directs one bounded provider-free conformance repair before AES-C0 and records no user decision fork.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and their fixtures, support modules, manifests, seals and per-case evidence must not be enumerated, opened, searched, imported, run or inferred. Historical Diary PHI, patient/clinical/product data, providers, database behavior reruns, migration application, watcher/source access, tools, commands, deployment, production, release, Pages and protected refs remain closed. Existing unrelated untracked files, especially docs/branding/, remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

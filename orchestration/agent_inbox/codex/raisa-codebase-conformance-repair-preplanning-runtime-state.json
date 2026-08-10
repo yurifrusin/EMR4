@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_freeze_and_execute_bounded_provider_free_codebase_conformance_repair",
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted architectural-health review is current at Continuity 235 / Compass 217. The live Next implementation row directs one bounded provider-free conformance repair before AES-C0 and records no user decision fork.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled CI, API Spine lifecycle and baton-consistency repair, deterministic verification, acceptance and task-branch publication. The work is small and cross-file, so the worker-economy rule favors local Sol execution; no provider or external worker is selected.",
+    "active_plan_and_acceptance": "The accepted review and closeout require an explicit maintained/protected/historical Python source-state selection, protected CI compilation/lint/bounded tests for the maintained Python 3.11 surface without opening holdouts, explicit practitioner-directory lifecycle supersession, and baton/current-state consistency checks. No broad refactor is allowed.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and their fixtures, support modules, manifests, seals and per-case evidence must not be enumerated, opened, searched, imported, run or inferred. Historical Diary PHI, patient/clinical/product data, providers, database behavior reruns, migration application, watcher/source access, tools, commands, deployment, production, release, Pages and protected refs remain closed. Existing unrelated untracked files, especially docs/branding/, remain preserved and excluded.",
+    "git_refs_and_worktree": "After fetch, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are exact 8ce3a591fa0e63ad2d68bf95a8d7e24369dd872f with tracked-clean state. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. 490 untracked files remain preserved. Only explicit repair paths may be staged; broad Git staging is forbidden."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol repeated full AGENTS.md and implementation-plan rehydration, read the accepted review/closeout and verified refs plus tracked-clean state."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected because the repair is small, cross-file and acceptance-coupled."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent provider review is selected before deterministic repair evidence exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected under the worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

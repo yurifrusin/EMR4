@@ -28,8 +28,8 @@ jobs:
       - name: Install pinned verification tools
         run: pip install -r requirements-dev.txt
 
-      - name: Canonical Python lint and security gates
-        run: python scripts/verify_repository.py --profile ci-lint
+      - name: Canonical Python 3.11 correctness and lint gates
+        run: python scripts/verify_repository.py --profile ci-correctness
 
       - name: Dependency CVE scan (pip-audit)
         # Fails when known CVEs are found in requirements.txt.

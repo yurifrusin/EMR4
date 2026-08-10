@@ -3,7 +3,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Any, Mapping, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.schemas.appointments import BernieSessionSnapshotOut
 from app.services.bernie.session import BernieSessionState

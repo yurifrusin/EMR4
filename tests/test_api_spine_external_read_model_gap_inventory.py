@@ -1,10 +1,13 @@
 import ast
-import re
+import json
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 GAP_PATH = ROOT / "docs" / "api-spine" / "external-router-read-model-gap-inventory.md"
+CURRENT_STATUS_PATH = (
+    ROOT / "docs" / "api-spine" / "external-read-model-current-surface-status.json"
+)
 ROOT_INVENTORY_PATH = ROOT / "docs" / "api-spine" / "external-router-read-root-inventory.md"
 GRAPHQL_PATH = ROOT / "docs" / "api-spine" / "graphql" / "appointment-diary-read.graphql"
 TENANCY_MODEL = ROOT / "app" / "models" / "tenancy.py"
@@ -12,6 +15,7 @@ RESULTS_MODEL = ROOT / "app" / "models" / "results.py"
 MESSAGING_MODEL = ROOT / "app" / "models" / "messaging.py"
 BILLING_MODEL = ROOT / "app" / "models" / "billing.py"
 SEARCH_ROUTER = ROOT / "app" / "routers" / "search.py"
+PRACTICE_ROUTER = ROOT / "app" / "routers" / "practice.py"
 DIARY_ROUTER = ROOT / "app" / "routers" / "diary.py"
 PATIENTS_ROUTER = ROOT / "app" / "routers" / "patients.py"
 CLINICAL_ROUTER = ROOT / "app" / "routers" / "clinical.py"
@@ -160,7 +164,7 @@ def test_gap_inventory_surfaces_exist_in_graphql_sdl_without_mutation_root():
     graphql = GRAPHQL_PATH.read_text(encoding="utf-8")
 
     for fragment in [
-        "practitioners(activeOnly: Boolean = true)",
+        "practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0)",
         "reminders: [PatientReminder!]!",
         "messages: [PatientMessageSummary!]!",
         "RACGP_GUIDELINES",
@@ -170,14 +174,26 @@ def test_gap_inventory_surfaces_exist_in_graphql_sdl_without_mutation_root():
     assert "type Mutation" not in graphql
 
 
-def test_gap_inventory_does_not_claim_current_missing_routes_exist():
+def test_historical_gap_inventory_is_superseded_without_rewriting_history():
+    current = json.loads(CURRENT_STATUS_PATH.read_text(encoding="utf-8"))
+    current_rows = {row["surface"]: row for row in current["surfaces"]}
+    practitioner_history = next(
+        row for row in _gap_rows() if row["surface"] == "Query.practice.practitioners"
+    )
+    practitioner_current = current_rows["Query.practice.practitioners"]
+
+    assert practitioner_history["gap_posture"] == "route_gap"
+    assert practitioner_history["route_source"] == "none"
+    assert practitioner_current["implementation_status"] == "implemented_mounted"
+    assert practitioner_current["rest"]["mounted"] is True
+    assert '@router.get("/practitioners"' in PRACTICE_ROUTER.read_text(encoding="utf-8")
+
     router_text = "\n".join(
         path.read_text(encoding="utf-8", errors="replace")
         for path in [DIARY_ROUTER, PATIENTS_ROUTER, CLINICAL_ROUTER, SEARCH_ROUTER]
     )
 
     for missing in [
-        '@router.get("/practitioners"',
         '@router.get("/{patient_id}/reminders"',
         '@router.get("/{patient_id}/messages"',
         '@router.get("/search-racgp"',

@@ -1,0 +1,154 @@
+{
+  "schema_version": "api_spine.external_read_model_current_surface_status.v1",
+  "date": "2026-08-11",
+  "historical_inventory": "docs/api-spine/external-router-read-model-gap-inventory.md",
+  "current_status_authority": "This index is the current-state lifecycle authority for the five reserved external read-model surfaces. The July 8 gap inventory remains immutable historical posture and cannot override later implementation evidence.",
+  "surfaces": [
+    {
+      "surface": "Query.practice.practitioners",
+      "authority_kind": "read_only",
+      "implementation_status": "implemented_mounted",
+      "rest": {
+        "status": "implemented",
+        "mounted": true,
+        "evidence": [
+          "app/routers/practice.py",
+          "app/main.py",
+          "docs/api-spine/practitioner-directory-post-implementation-readiness-review.json"
+        ]
+      },
+      "graphql": {
+        "status": "implemented",
+        "mounted": true,
+        "evidence": [
+          "app/graphql/schema.py",
+          "app/main.py",
+          "docs/api-spine/practitioner-directory-graphql-resolver-runtime.json"
+        ]
+      },
+      "deployment_ready": false,
+      "production_ready": false,
+      "supersedes": {
+        "historical_posture": "route_gap",
+        "current_posture": "implemented_mounted_read_only",
+        "evidence": [
+          "docs/api-spine/practitioner-directory-post-implementation-readiness-review.json",
+          "docs/api-spine/practitioner-directory-graphql-resolver-runtime.json"
+        ]
+      }
+    },
+    {
+      "surface": "Query.patient.reminders",
+      "authority_kind": "read_only",
+      "implementation_status": "route_and_shape_gap",
+      "rest": {
+        "status": "absent",
+        "mounted": false,
+        "evidence": [
+          "docs/api-spine/external-router-read-model-gap-inventory.md"
+        ]
+      },
+      "graphql": {
+        "status": "reserved_contract_only",
+        "mounted": false,
+        "evidence": [
+          "docs/api-spine/graphql/appointment-diary-read.graphql"
+        ]
+      },
+      "deployment_ready": false,
+      "production_ready": false,
+      "supersedes": {
+        "historical_posture": "route_and_shape_gap",
+        "current_posture": "route_and_shape_gap",
+        "evidence": [
+          "docs/api-spine/external-router-read-model-gap-inventory.md"
+        ]
+      }
+    },
+    {
+      "surface": "Query.patient.messages",
+      "authority_kind": "read_only",
+      "implementation_status": "route_and_shape_gap",
+      "rest": {
+        "status": "absent",
+        "mounted": false,
+        "evidence": [
+          "docs/api-spine/external-router-read-model-gap-inventory.md"
+        ]
+      },
+      "graphql": {
+        "status": "reserved_contract_only",
+        "mounted": false,
+        "evidence": [
+          "docs/api-spine/graphql/appointment-diary-read.graphql"
+        ]
+      },
+      "deployment_ready": false,
+      "production_ready": false,
+      "supersedes": {
+        "historical_posture": "route_and_shape_gap",
+        "current_posture": "route_and_shape_gap",
+        "evidence": [
+          "docs/api-spine/external-router-read-model-gap-inventory.md"
+        ]
+      }
+    },
+    {
+      "surface": "Query.directorySearch.RACGP_GUIDELINES",
+      "authority_kind": "read_only",
+      "implementation_status": "source_and_licensing_gap",
+      "rest": {
+        "status": "absent",
+        "mounted": false,
+        "evidence": [
+          "docs/api-spine/external-router-read-model-gap-inventory.md"
+        ]
+      },
+      "graphql": {
+        "status": "reserved_contract_only",
+        "mounted": false,
+        "evidence": [
+          "docs/api-spine/graphql/appointment-diary-read.graphql"
+        ]
+      },
+      "deployment_ready": false,
+      "production_ready": false,
+      "supersedes": {
+        "historical_posture": "source_and_licensing_gap",
+        "current_posture": "source_and_licensing_gap",
+        "evidence": [
+          "docs/api-spine/external-router-read-model-gap-inventory.md"
+        ]
+      }
+    },
+    {
+      "surface": "Query.directorySearch.COCHRANE_LIBRARY",
+      "authority_kind": "read_only",
+      "implementation_status": "source_and_licensing_gap",
+      "rest": {
+        "status": "absent",
+        "mounted": false,
+        "evidence": [
+          "docs/api-spine/external-router-read-model-gap-inventory.md"
+        ]
+      },
+      "graphql": {
+        "status": "reserved_contract_only",
+        "mounted": false,
+        "evidence": [
+          "docs/api-spine/graphql/appointment-diary-read.graphql"
+        ]
+      },
+      "deployment_ready": false,
+      "production_ready": false,
+      "supersedes": {
+        "historical_posture": "source_and_licensing_gap",
+        "current_posture": "source_and_licensing_gap",
+        "evidence": [
+          "docs/api-spine/external-router-read-model-gap-inventory.md"
+        ]
+      }
+    }
+  ],
+  "claim_boundary": "This index records implementation and lifecycle state only. It grants no new resolver, route, external source, provider, patient read, write authority, deployment or production readiness."
+}

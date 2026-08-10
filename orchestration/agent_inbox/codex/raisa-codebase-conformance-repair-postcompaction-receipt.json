@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_exact_bounded_provider_free_codebase_conformance_repair",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen 2026-08-11 conformance-repair plan admits only CR-1 maintained Python 3.11 source-state and CI correctness, CR-2 API Spine lifecycle supersession, and CR-3 live baton/plan consistency. AES-C0 follows only after exact acceptance.",
+    "current_authority_allocation": "GPT Sol retains the tightly coupled CI, API Spine lifecycle and baton-consistency repair, deterministic verification, acceptance and task-branch publication. No worker, provider or external reviewer is selected for this small serial repair.",
+    "git_refs_and_worktree": "After fetch, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam remain exact 8ce3a591fa0e63ad2d68bf95a8d7e24369dd872f. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree contains only the in-progress explicit-path conformance edits among tracked changes; 501 untracked files, including five docs/branding paths, remain preserved. Broad Git staging is forbidden.",
+    "live_handover_current_baton": "The accepted architectural-health review is current at Continuity 235 / Compass 217. The live baton directs one bounded provider-free conformance repair before AES-C0 and records no user decision fork.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and their fixtures, support modules, manifests, seals and per-case evidence remain closed to enumeration, access, search, import, run and inference. Historical Diary PHI, patient/clinical/product data, providers, database behavior reruns, migrations, watchers, tools, commands, deployment, production, release, Pages and protected refs remain closed. Every unrelated untracked file, especially docs/branding/, remains preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -9,6 +9,7 @@ from scripts.verification_runtime import (
     run_command,
 )
 from scripts.verify_repository import RUFF_PATHS
+from scripts.python_source_state import DEFAULT_MANIFEST, load_source_state
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +61,9 @@ def test_ruff_baseline_is_pinned_and_explicitly_protected_safe():
     assert "app/services/bernie/session.py" in RUFF_PATHS
     assert "app/services/bernie/session_store.py" in RUFF_PATHS
     assert all("holdout" not in path.lower() for path in RUFF_PATHS)
+    state = load_source_state(DEFAULT_MANIFEST)
+    assert state["target_python"] == "3.11"
+    assert state["source_files"]
 
 
 def test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup():

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 235 / Compass 217. The bounded architecture-health review confirms the live GraphQL-read/REST-command/event/default-off authority shape and finds no P0. A narrow provider-free Python 3.11 CI and API lifecycle conformance repair is next before AES-C0; product, provider, tool, command and protected boundaries remain closed.
+> EMR4 is at Continuity 236 / Compass 218. The bounded Python 3.11 CI, API lifecycle and baton-consistency repair passes without product behavior change. AES-C0 architecture and contract is next; product, provider, data, tool, command and protected boundaries remain closed.
 
 ## North star
 
@@ -244,26 +244,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    All twenty exact synthetic behavior/transaction scenarios pass with immutable evidence and exact cleanup. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan`.
 114. **Inspect system composition before executable Bureau containment — EMR4 codebase architectural-health and conformance review**
    The authority architecture is sound; bounded CI and lifecycle conformance repair is required before AES-C0. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal`.
+115. **Repair repository fitness before executable Bureau containment — EMR4 bounded codebase conformance repair**
+   Maintained Python 3.11 CI, API lifecycle supersession and baton consistency now pass; AES-C0 architecture is next. Lineage parent: `raisa-codebase-architectural-health-conformance-review`.
 
 ## Current position
 
-**Architecture-health accepted; bounded conformance repair next — EMR4 codebase architectural-health and conformance review**
+**Repository conformance repaired; AES-C0 architecture next — EMR4 bounded codebase conformance repair**
 
-**Why this proof came next:** The review confirmed the authority shape but reproduced CI target-coverage and lifecycle drift that should be corrected before executable containment contracts are added.
+**Why this proof came next:** The prerequisite database slice, architecture-health review and narrow CI/lifecycle repair pass, so the selected containment programme can begin without opening runtime capability.
 
-No P0 is found; one remaining P1 and bounded P2 lifecycle defects define a narrow provider-free repair.
+The maintained source, current API lifecycle and live baton now have executable consistency checks.
 
 ### What this unlocks
 
-- Implement the explicit maintained/protected/historical source-state and Python 3.11 CI conformance repair.
-- Repair current versus historical API Spine assertions and add baton consistency checks.
-- After the repair passes, begin AES-C0 architecture and contract with the new fitness constraints.
+- Freeze AES-C0 capability classes, external broker trust boundary and immutable generation manifest.
+- Bind no-fallback state, route classification, command separation and exact denial behavior into AES-C0 acceptance.
+- Continue the planned provider-free containment sequence after architecture acceptance.
 
 ### What it does not solve
 
-- Exhaustive code quality, appointment-router decomposition or production readiness.
+- Capability-broker implementation, hostile execution rehearsal or occupied work cells.
 - Applied migration, operational database/source access, watcher/listener or persistence.
-- Patient/product/clinical data, providers, work-cell tools, routes or commands.
+- Patient/product/clinical data, providers, tools, routes or commands.
 - Deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
@@ -331,9 +333,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Serial database durability and the intervening architecture-health review pass.
-- Repair maintained-source Python 3.11 CI coverage and API Spine lifecycle supersession before AES-C0.
-- Keep applied migration, operational sources, product/patient data, providers, tools and commands separately gated.
+- Serial database durability, architecture-health review and bounded codebase conformance repair pass.
+- Freeze and accept AES-C0 architecture and contract before any executable capability descendant.
+- Keep product/patient data, providers, operational persistence, tools and commands separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -522,6 +524,7 @@ Prerequisites:
 
 ## Map limits
 
+- Codebase conformance repair proves the selected maintained-source and lifecycle checks, not exhaustive code quality or production readiness.
 - Architecture-health acceptance is a repository composition and focused-check review; it is not exhaustive assurance or production readiness.
 - Behavior/transaction acceptance proves the selected serial database slice only; it does not prove concurrency, restart, unknown-commit recovery, rotation, retention, applied migration or product runtime.
 - Behavior/transaction planning acceptance proves experiment completeness only; it does not prove PostgreSQL function, trigger, RLS, idempotency or rollback behavior and opens no applied migration or product runtime.
@@ -651,6 +654,8 @@ Prerequisites:
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
 - `deploy/raisa-office-web-dev/server.mjs`
+- `docs/api-spine/external-read-model-current-surface-status.json`
+- `docs/api-spine/external-read-model-current-surface-status.schema.json`
 - `docs/api-spine/manifests/agent-capability-charters.yaml`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
@@ -819,6 +824,8 @@ Prerequisites:
 - `docs/raisa-codebase-architectural-health-conformance-review-plan.md`
 - `docs/raisa-codebase-architectural-health-conformance-review.md`
 - `docs/raisa-codebase-as-built-architectural-state-map.md`
+- `docs/raisa-codebase-conformance-repair-closeout.md`
+- `docs/raisa-codebase-conformance-repair-plan.md`
 - `docs/raisa-dual-host-foundation-closeout.md`
 - `docs/raisa-dual-host-foundation-plan.md`
 - `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md`
@@ -1091,6 +1098,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-codebase-architectural-health-conformance-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-codebase-architectural-health-conformance-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-codebase-architectural-health-review-research-predispatch-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-postcompaction-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md`
@@ -1615,8 +1627,10 @@ Prerequisites:
 - `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json`
 - `orchestration/harness_settings/autonomous_continuation.yaml`
 - `orchestration/harness_settings/operating_model.yaml`
+- `orchestration/harness_settings/python_source_state.json`
 - `orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md`
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-architectural-health-conformance-review.md`
+- `orchestration/human_inbox/yuri/2026-08-11--codebase-conformance-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1706,4 +1720,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 217; continuity graph revision 235._
+_Compass map revision 218; continuity graph revision 236._
