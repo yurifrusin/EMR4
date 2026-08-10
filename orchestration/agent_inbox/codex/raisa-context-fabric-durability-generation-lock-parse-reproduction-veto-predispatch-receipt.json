@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_veto_for_generation_lock_parse_reproduction_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Immutable reproduction sha256:c82ebc7a binds attempt 9f71b0e4, exact matched digests and exact cleanup/absence under contract dbedcaf7. Local focused evidence tests pass 141/141 plus Ruff. A pass admits parse evidence only for a later committed behavior-parent rebind.",
+    "current_authority_allocation": "GPT Sol conducts and accepts or rejects. One fresh Gemini 3.6 Flash/high Antigravity project may review tracked exact-HEAD evidence read-only. It receives no database, implementation, integration, baton or protected-ref authority.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r159 is clean at exact candidate fb10f2555a246a2918d84c82e31ea5ea87f32a79; exact baseline is 97d71063c9f9f8629c70581a1b38d76cdd353ed1. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active provider-free Context Fabric durability sequence requires fresh evidence veto of exact parse reproduction before behavior-parent rebind. Candidate fb10f255 contains the immutable pass and focused evidence binding only.",
+    "protected_evidence_boundaries": "Review tracked evidence only; do not start Docker/PostgreSQL or claim primary-only untracked mutable paths. Sol separately verifies mutable parse 97d1385c, historical failure 3bf66870 and mutable behavior 09907bf6. No behavior run, migration, operational persistence, listener/feed, patient/product/clinical data, provider, command, deployment, Pages, release or protected-ref action is open. Preserve all untracked files and do not inspect docs/branding/."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 171
+    assert register["register_revision"] == 172
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 198)
+        f"AER-{index:04d}" for index in range(1, 199)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -54,7 +54,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
     assert len(agent_incidents) == 124
-    assert len(transport_incidents) == 8
+    assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
@@ -64,6 +64,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
         "AER-0038",
         "AER-0039",
         "AER-0081",
+        "AER-0198",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -2491,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 197
+    assert report["incident_count"] == 198
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2507,14 +2508,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 171
-    assert report["incident_count"] == 197
+    assert report["register_revision"] == 172
+    assert report["incident_count"] == 198
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 124,
         "harness": 22,
         "repository": 43,
-        "transport": 8,
+        "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 20,
@@ -2524,11 +2525,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "read_only_violation": 3,
         "reasoning_claim_error": 25,
         "repository_defect": 43,
-        "transport_timeout": 8,
+        "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 64,
-        "canonical_unchanged": 111,
+        "canonical_unchanged": 112,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -2780,8 +2781,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
-            "incident_count": 4,
-            "incident_ids": ["AER-0022", "AER-0031", "AER-0034", "AER-0039"],
+            "incident_count": 5,
+            "incident_ids": [
+                "AER-0022",
+                "AER-0031",
+                "AER-0034",
+                "AER-0039",
+                "AER-0198",
+            ],
             "origins": ["transport"],
             "categories": ["transport_timeout"],
             "roles": ["verifier"],
@@ -2789,6 +2796,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "After one bounded fresh-project authentication retry, preserve a sanitized zero-call receipt and use the configured authentication-or-transport fallback against the same exact clean HEAD instead of repeatedly interrupting the programme for ceremonial reauthentication.",
                 "Authentication failures remain transport incidents with no inferred reviewer decision; preserve a sanitized failure, require human credential restoration, then use a fresh process and reverify exact HEAD, clean status and single-decision admission.",
+                "Preserve every Antigravity OAuth timeout as a sanitized zero-model transport incident, permit at most one same-head same-model retry, and require exact clean postflight plus a distinct successful receipt before review admission; never silently change verifier or model.",
                 "Treat Antigravity OAuth as a human-restored transport boundary distinct from ADC and gcloud stores; preserve every sanitized timeout and require exact-head plus clean-worktree readback before a fresh-project recovery result is admitted.",
                 "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance.",
             ],
@@ -3360,6 +3368,23 @@ def test_aer_0197_rejects_hash_equal_evidence_path_substitution() -> None:
     )
     assert "identical bytes" in incident["expected_invariant"]
     assert "opened no reproduction database run" in incident["detection_method"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0198_contains_antigravity_auth_timeout_before_retry_pass() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0198"]
+
+    assert incident["origin"] == "transport"
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "transport_timeout"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["recurrence_signature"] == (
+        "transport.antigravity_oauth_timeout_without_closeout"
+    )
+    assert "no reviewer receipt" in incident["observed_error"]
+    assert "opened no database or behavior run" in incident["detection_method"]
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert incident["status"] == "corrected"
 

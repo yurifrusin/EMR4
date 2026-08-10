@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.transport-failure-receipt.v1",
+  "observed_on": "2026-08-10",
+  "status": "transport_failed_before_model",
+  "candidate_head": "fb10f2555a246a2918d84c82e31ea5ea87f32a79",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r159",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model_requested": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "failure": {
+    "code": "antigravity_authentication_timeout",
+    "model_reached": false,
+    "candidate_review_started": false,
+    "authorization_code_or_url_retained": false,
+    "worktree_changed": false
+  },
+  "disposition": {
+    "bounded_same_head_retry_permitted": true,
+    "max_additional_transport_attempts": 1,
+    "silent_model_fallback_permitted": false,
+    "database_or_behavior_authority": false,
+    "human_action_if_retry_fails": "restore the existing Antigravity OAuth session without changing model, candidate, scope or protected refs"
+  }
+}

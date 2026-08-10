@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r159",
+  "branch": "codex/review-context-fabric-generation-lock-parse-reproduction-fb10f255",
+  "head": "fb10f2555a246a2918d84c82e31ea5ea87f32a79",
+  "expected_head": "fb10f2555a246a2918d84c82e31ea5ea87f32a79",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-generation-lock-parse-reproduction-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

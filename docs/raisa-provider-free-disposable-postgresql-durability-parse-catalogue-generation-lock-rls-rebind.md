@@ -2,8 +2,9 @@
 
 Date: 2026-08-10
 
-Status: characterization and exact reproduction passed with exact-ID cleanup;
-immutable reproduction evidence pending fresh independent evidence veto.
+Status: characterization and exact reproduction accepted after exact-ID
+cleanup and fresh independent evidence veto; eligible as the next behavior-
+contract parse parent only.
 
 The independently accepted source commit
 `e115f6f4cb31df1131c5c67d24f3a475a2ca6127` regenerates the inert durability
@@ -56,9 +57,12 @@ at SHA-256
 The previous mutable accepted parse alias was restored byte-exact after this
 immutable copy was made.
 
-Fresh deterministic evidence checks and one fresh exact-HEAD evidence veto are
-still required before this reproduction is admitted as the behavior-parent
-parse source.
+Fresh deterministic evidence checks passed 141/141. The first r159 verifier
+transport timed out at Antigravity OAuth before model admission; AER-0198
+preserves the zero-model failure. One bounded same-head, same-model retry then
+passed tracked immutable evidence reconciliation and left r159 unchanged and
+clean. Sol therefore admits this immutable reproduction as the parse parent
+for a separately tested and reviewed behavior-contract rebind only.
 
 The accepted mutable parse evidence, protected historical failure and mutable
 behavior evidence remained byte-exact at their frozen hashes; characterization

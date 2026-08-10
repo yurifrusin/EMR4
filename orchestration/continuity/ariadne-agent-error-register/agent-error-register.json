@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 171,
+  "register_revision": 172,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7928,6 +7928,49 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-exact-review-path-misreport-failure-receipt.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-exact-corrected-gemini-review-packet.md",
           "docs/ariadne-agent-error-correction-register-revision-171.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0198",
+      "attempt_id": "raisa-context-fabric-generation-lock-parse-reproduction-review-r159-auth-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "transport",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh exact-HEAD Antigravity veto must authenticate and return one non-transferable review receipt, or fail with sanitized containment while leaving the candidate unchanged before the single bounded retry.",
+      "observed_error": "The first r159 evidence-veto transport requested Google OAuth and timed out before model admission. It produced no reviewer receipt or terminal decision; candidate fb10f255 remained clean and unchanged.",
+      "detection_method": "The launcher returned authentication_required and timed out after sixty seconds. Sol retained no OAuth URL or code, preserved a sanitized no-model failure receipt, reverified exact HEAD and clean status and opened no database or behavior run.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-reproduction-antigravity-auth-timeout-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-reproduction-review-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-reproduction-veto-retry-predispatch-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-parse-reproduction-review-retry-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-172.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Exactly one bounded same-head, same-model, same-packet retry used a distinct orchestrator receipt. The retry reached Gemini 3.6 Flash/high, returned one pass over 141 tests and tracked evidence only, and left r159 clean at exact fb10f255.",
+        "prevention_control": "Preserve every Antigravity OAuth timeout as a sanitized zero-model transport incident, permit at most one same-head same-model retry, and require exact clean postflight plus a distinct successful receipt before review admission; never silently change verifier or model.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-reproduction-antigravity-auth-timeout-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-reproduction-veto-retry-predispatch-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-parse-reproduction-review-retry-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-172.md"
         ]
       },
       "status": "corrected"

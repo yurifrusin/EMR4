@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "da911c5ce82c1e92ab25e32fab9b5bf3cc8b3cf2cdd795a3afe9d212dd16b05a",
+  "canonical_register_sha256": "eb05efdf606e8246659dfe62bbe8e787bec30b1ca409d9a9a395f6b55441c129",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 64,
-      "canonical_unchanged": 111,
+      "canonical_unchanged": 112,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
@@ -14,21 +14,21 @@
       "read_only_violation": 3,
       "reasoning_claim_error": 25,
       "repository_defect": 43,
-      "transport_timeout": 8
+      "transport_timeout": 9
     },
     "by_origin": {
       "agent_behavior": 124,
       "harness": 22,
       "repository": 43,
-      "transport": 8
+      "transport": 9
     },
     "by_process_severity": {
       "low": 62,
       "material": 73,
-      "moderate": 62
+      "moderate": 63
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 36,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 37,
       "api-spine-historical-regression-suite::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "codex-native-architecture-challenger::verifier": 1,
@@ -71,11 +71,11 @@
     "by_role": {
       "implementer": 14,
       "orchestrator": 140,
-      "verifier": 43
+      "verifier": 44
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 197,
+  "incident_count": 198,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -481,12 +481,13 @@
       "categories": [
         "transport_timeout"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0022",
         "AER-0031",
         "AER-0034",
-        "AER-0039"
+        "AER-0039",
+        "AER-0198"
       ],
       "origins": [
         "transport"
@@ -494,6 +495,7 @@
       "prevention_controls": [
         "After one bounded fresh-project authentication retry, preserve a sanitized zero-call receipt and use the configured authentication-or-transport fallback against the same exact clean HEAD instead of repeatedly interrupting the programme for ceremonial reauthentication.",
         "Authentication failures remain transport incidents with no inferred reviewer decision; preserve a sanitized failure, require human credential restoration, then use a fresh process and reverify exact HEAD, clean status and single-decision admission.",
+        "Preserve every Antigravity OAuth timeout as a sanitized zero-model transport incident, permit at most one same-head same-model retry, and require exact clean postflight plus a distinct successful receipt before review admission; never silently change verifier or model.",
         "Treat Antigravity OAuth as a human-restored transport boundary distinct from ADC and gcloud stores; preserve every sanitized timeout and require exact-head plus clean-worktree readback before a fresh-project recovery result is admitted.",
         "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance."
       ],
@@ -506,7 +508,7 @@
       ]
     }
   ],
-  "register_revision": 171,
+  "register_revision": 172,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-10"
 }

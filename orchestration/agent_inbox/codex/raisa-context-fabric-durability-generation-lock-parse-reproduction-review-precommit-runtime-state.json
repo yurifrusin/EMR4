@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_generation_lock_parse_reproduction_review_acceptance_and_aer_0198_provenance",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free Context Fabric durability sequence requires accepted parse reproduction before behavior-parent rebind. Candidate fb10f255 evidence now has a valid fresh r159 review retry pass.",
+    "current_authority_allocation": "GPT Sol owns transport containment, review admission and explicit-path task-branch commit. The first Antigravity attempt reached no model; one bounded Gemini 3.6 Flash/high retry supplied independent review only.",
+    "active_plan_and_acceptance": "AER-0198 preserves the initial OAuth timeout. The bounded same-head retry passed 141/141 focused tests, Ruff and tracked immutable evidence, made no primary-only mutable claim, and left r159 clean at exact fb10f255. Sol accepts immutable reproduction c82ebc7a only as the next behavior-rebind parse parent.",
+    "protected_evidence_boundaries": "Commit only the reproduction review packet/preflight/dispatch pair, auth-timeout and retry receipts, successful reviewer receipt, AER revision 172 register/report/test/doc, Sol acceptance, updated rebind doc and this precommit pair. Preserve generic characterization evidence and every unrelated untracked path. Do not inspect or stage docs/branding/. No behavior, database, migration, operational persistence, patient/product/clinical data, provider, command, deployment, Pages, release or protected-ref action is open.",
+    "git_refs_and_worktree": "Task branch remains exact fb10f2555a246a2918d84c82e31ea5ea87f32a79 before this provenance commit; r159 is clean at the same exact HEAD. Local and origin master and handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "generation_lock_parse_reproduction_review_acceptance_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved the timeout and admitted only the bounded successful retry."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native implementation worker is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Bounded r159 retry completed one Gemini 3.6 Flash/high pass with clean unchanged postflight."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

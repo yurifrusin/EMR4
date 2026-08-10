@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "perform_one_bounded_same_head_antigravity_transport_retry_for_generation_lock_parse_reproduction_evidence_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free durability sequence still requires a fresh Gemini 3.6 Flash/high evidence veto. The first r159 transport reached no model because Antigravity authentication timed out; exact candidate fb10f255 is unchanged.",
+    "current_authority_allocation": "GPT Sol permits exactly one bounded same-head same-model transport retry with no fallback. If OAuth still requires human action, execution must pause at that human-only gate.",
+    "active_plan_and_acceptance": "Tracked immutable reproduction sha256:c82ebc7a and the 141-test packet remain unchanged. The first transport generated no reviewer receipt or decision and grants no authority. The retry uses the same packet, exact clean r159 and Gemini 3.6 Flash/high.",
+    "protected_evidence_boundaries": "No Docker/PostgreSQL, behavior, primary-only mutable evidence claim, model fallback, credential mutation, migration, operational persistence, patient/product/clinical data, command, deployment, Pages, release or protected-ref action is open. Preserve all untracked files and do not inspect docs/branding/.",
+    "git_refs_and_worktree": "r159 remains clean at exact fb10f2555a246a2918d84c82e31ea5ea87f32a79. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "generation_lock_parse_reproduction_retry_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved the no-model auth timeout and bounded one retry."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["The first attempt reached no model and timed out waiting for authentication; one bounded retry remains."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease or fallback is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

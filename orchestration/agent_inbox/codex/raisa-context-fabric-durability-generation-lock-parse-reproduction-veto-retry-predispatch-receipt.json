@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "perform_one_bounded_same_head_antigravity_transport_retry_for_generation_lock_parse_reproduction_evidence_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Tracked immutable reproduction sha256:c82ebc7a and the 141-test packet remain unchanged. The first transport generated no reviewer receipt or decision and grants no authority. The retry uses the same packet, exact clean r159 and Gemini 3.6 Flash/high.",
+    "current_authority_allocation": "GPT Sol permits exactly one bounded same-head same-model transport retry with no fallback. If OAuth still requires human action, execution must pause at that human-only gate.",
+    "git_refs_and_worktree": "r159 remains clean at exact fb10f2555a246a2918d84c82e31ea5ea87f32a79. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df.",
+    "live_handover_current_baton": "The active provider-free durability sequence still requires a fresh Gemini 3.6 Flash/high evidence veto. The first r159 transport reached no model because Antigravity authentication timed out; exact candidate fb10f255 is unchanged.",
+    "protected_evidence_boundaries": "No Docker/PostgreSQL, behavior, primary-only mutable evidence claim, model fallback, credential mutation, migration, operational persistence, patient/product/clinical data, command, deployment, Pages, release or protected-ref action is open. Preserve all untracked files and do not inspect docs/branding/."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
