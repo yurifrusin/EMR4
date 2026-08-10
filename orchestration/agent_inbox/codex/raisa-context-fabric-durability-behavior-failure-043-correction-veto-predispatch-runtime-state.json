@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_behavior_failure_043_missing_source_sqlstate_correction_in_r172",
+  "source_evidence": {
+    "live_handover_current_baton": "Immutable behavior attempt 043 failed at BTR-E06 and is diagnosed; exact correction candidate 77afc48114328061c6cd3deef12b46fdf2a51ae6 is committed, while a fresh attempt remains closed pending this independent veto.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only veto authority only in clean r172 at the exact candidate. GPT Sol retains implementation, acceptance, disposable-runtime, cleanup, integration and baton authority. No fallback or second reviewer call is authorised by this dispatch.",
+    "active_plan_and_acceptance": "The candidate aligns only BTR-E06 with the accepted exact-row F_CARDINALITY/CF004 lowering, preserves all database/body/DDL/fixture/effect authority, and adds bounded mismatch telemetry plus regression evidence. Ruff, 105 focused behavior tests, 192 AER tests and the exact renderer CF004 test pass. Canonical behavior contract is sha256:897e07895116eecedaf8a2506ad10f9f5e5207b7e78e68ab79afb09347018a57; current scenario seal is e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb.",
+    "protected_evidence_boundaries": "The verifier may inspect only committed immutable authored-synthetic evidence and the exact packet allowlist. The protected mutable alias, protected holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, other providers, product surfaces, edits, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Verifier r172 is clean at exact 77afc48114328061c6cd3deef12b46fdf2a51ae6 on codex/review-context-fabric-behavior-043-correction-77afc481 and passed the local zero-provider preflight. Primary tracked worktree is clean at the same candidate with preserved unrelated untracked paths excluded. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_failure_043_correction_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh clean r172 passed the exact local verifier-worktree preflight with zero provider/model calls."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed and reverified the narrow behavior correction candidate and preserved protected evidence before dispatch."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The completed read-only Codex validator independently agreed with the exact correction; no Codex subagent is assigned to this external veto."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
