@@ -2,8 +2,8 @@
 
 Date: 2026-08-10
 
-Status: characterization passed with exact-ID cleanup; deterministic exact-
-digest binding candidate pending fresh independent review.
+Status: characterization and exact reproduction passed with exact-ID cleanup;
+immutable reproduction evidence pending fresh independent evidence veto.
 
 The independently accepted source commit
 `e115f6f4cb31df1131c5c67d24f3a475a2ca6127` regenerates the inert durability
@@ -36,8 +36,29 @@ roles.
 The contract now binds those fifteen exact observed digests in
 `exact_digest_bound` mode at canonical SHA-256
 `dbedcaf7628a68859412d898e86292b2366209941d18f58363c45174b6fc60ba`.
-Fresh deterministic checks and one fresh exact-HEAD independent veto are still
-required before one exact reproduction run.
+Fresh deterministic checks and one corrected fresh exact-HEAD independent veto
+passed before exact reproduction. The first r157 review was rejected because
+it substituted a hash-equal tracked historical file for an absent primary-only
+mutable path; AER-0197 preserves that failure. Corrected fresh r158 reviewed
+only tracked immutable evidence and passed 140 focused tests with an unchanged
+clean candidate.
+
+Exactly one subsequent fixed run returned
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`
+as attempt `9f71b0e4f0c8f99ab8a6f2d1`. All seventeen observed catalogue digests,
+including the fifteen acceptance-bound digests, reproduced exactly. Exact
+container
+`fdd29923e074419b93706b89131e384fff13a46d9717cab12458cfcf8c70a59d`
+was removed and independently absent. Immutable pass evidence is
+`orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-generation-lock-rls-exact-reproduction.json`
+at SHA-256
+`c82ebc7a0ec45ab2d01b55e33f14adaf120a2f65d9e7f151757a65e4d482e68b`.
+The previous mutable accepted parse alias was restored byte-exact after this
+immutable copy was made.
+
+Fresh deterministic evidence checks and one fresh exact-HEAD evidence veto are
+still required before this reproduction is admitted as the behavior-parent
+parse source.
 
 The accepted mutable parse evidence, protected historical failure and mutable
 behavior evidence remained byte-exact at their frozen hashes; characterization

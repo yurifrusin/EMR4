@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_generation_lock_parse_exact_reproduction_evidence_candidate_for_fresh_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free Context Fabric durability sequence requires exact parse reproduction acceptance before behavior-parent rebind. One exact reproduction has completed after corrected veto acceptance commit 97d71063.",
+    "current_authority_allocation": "GPT Sol owns runtime evidence preservation and explicit-path candidate commit. No database is active now. One later fresh Gemini 3.6 Flash/high read-only veto remains required before evidence admission.",
+    "active_plan_and_acceptance": "Attempt 9f71b0e4 reproduced every exact digest under contract canonical dbedcaf7, emitted immutable evidence sha256:c82ebc7a, removed exact container fdd29923 with independent absence and restored the previous mutable parse alias. Focused deterministic evidence checks now pass 141/141 plus Ruff.",
+    "protected_evidence_boundaries": "Commit only the exact-reproduction preexecution pair, immutable exact-reproduction evidence, focused test, updated rebind document and this precommit pair. Preserve generic characterization evidence and every unrelated untracked path. Do not inspect or stage docs/branding/. Mutable parse remains 97d1385c, historical failure 3bf66870 and mutable behavior 09907bf6. No further database run, behavior, migration, operational persistence, watcher/listener/feed, patient/product/clinical data, provider, command, deployment, Pages, release or protected-ref action is open.",
+    "git_refs_and_worktree": "Task branch is exact 97d71063c9f9f8629c70581a1b38d76cdd353ed1 before this evidence candidate commit. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "generation_lock_parse_exact_reproduction_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled exact reproduction, cleanup, absence and mutable evidence restoration."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native implementation worker is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh exact-HEAD evidence veto is pending after this candidate commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

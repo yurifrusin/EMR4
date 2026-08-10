@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_fixed_no_argument_generation_lock_parse_catalogue_exact_reproduction_in_one_owned_disposable_postgresql_16_container",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free Context Fabric durability sequence requires one exact parse reproduction before behavior-parent rebind. Corrected exact-binding review acceptance is committed at exact 97d71063c9f9f8629c70581a1b38d76cdd353ed1.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled one-shot database run, exact-ID cleanup, immutable evidence preservation, mutable alias restoration and acceptance. No external worker or model participates in the run.",
+    "active_plan_and_acceptance": "Exact-bound contract canonical sha256:dbedcaf7 binds all fifteen digests observed in immutable characterization sha256:78c157c7. Corrected fresh r158 Gemini 3.6 Flash/high veto passed 140/140 focused tests and clean unchanged postflight. Exactly one fixed no-argument exact reproduction is eligible.",
+    "protected_evidence_boundaries": "Back up and preserve mutable accepted parse sha256:97d1385c, historical failure sha256:3bf66870 and mutable behavior sha256:09907bf6 before execution. A successful pass temporarily writes the mutable parse target; copy it to a new immutable generation-lock exact-reproduction path and restore the prior mutable alias byte-exact before acceptance. Generic characterization evidence and all unrelated untracked files remain preserved. No behavior, applied migration, operational database, credential, watcher/listener/feed, patient/product/clinical data, provider, app/API/Diary command, deployment, production, release, Pages or protected-ref action is open. Do not inspect or stage docs/branding/.",
+    "git_refs_and_worktree": "Task branch is exact 97d71063c9f9f8629c70581a1b38d76cdd353ed1. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df. Exact local image postgres:16-bookworm remains immutable sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. The harness alone selects its unique owned container; unrelated containers must not be listed or touched."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "generation_lock_parse_exact_reproduction_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol controls the fixed serial harness invocation and evidence reconciliation."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker receives database authority."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The corrected independent review lease is complete; no model call occurs during reproduction."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

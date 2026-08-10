@@ -296,6 +296,13 @@ GENERATION_LOCK_EXPECTED_QUERY_DIGESTS = {
     ].items()
     if key not in {"server", "extensions"}
 }
+GENERATION_LOCK_EXACT_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-generation-lock-rls-exact-reproduction.json"
+)
+GENERATION_LOCK_EXACT_PASS_EVIDENCE = json.loads(
+    GENERATION_LOCK_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -2068,6 +2075,54 @@ def test_generation_lock_characterization_is_immutable_and_exactly_bound() -> No
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
         "expected_query_digests": GENERATION_LOCK_EXPECTED_QUERY_DIGESTS,
+    }
+
+
+def test_generation_lock_exact_reproduction_is_immutable_and_complete() -> None:
+    evidence = GENERATION_LOCK_EXACT_PASS_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            GENERATION_LOCK_EXACT_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "c82ebc7a0ec45ab2d01b55e33f14adaf120a2f65d9e7f151757a65e4d482e68b"
+    )
+    assert evidence["attempt_id"] == "9f71b0e4f0c8f99ab8a6f2d1"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1435252,
+        "artifact_sha256": (
+            "sha256:aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9"
+        ),
+        "contract_sha256": (
+            "sha256:dbedcaf7628a68859412d898e86292b2366209941d18f58363c45174b6fc60ba"
+        ),
+        "prerequisite_contract_sha256": (
+            "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
+        ),
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 421,
+    }
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == (GENERATION_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["query_digests"])
+    )
+    assert (
+        evidence["catalogue"]["kind_counts"]
+        == (GENERATION_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"])
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "fdd29923e074419b93706b89131e384fff13a46d9717cab12458cfcf8c70a59d"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
     }
 
 
