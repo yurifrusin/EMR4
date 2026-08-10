@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-durability-parse-r177",
+  "branch": "codex/review-context-fabric-admission-replay-parse-char-f5c8fb0f",
+  "head": "f5c8fb0f01dc5836647b90acdf96c8ed6c21fc05",
+  "expected_head": "f5c8fb0f01dc5836647b90acdf96c8ed6c21fc05",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-admission-replay-parse-char-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

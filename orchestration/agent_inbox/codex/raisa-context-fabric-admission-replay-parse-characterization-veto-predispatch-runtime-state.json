@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_the_parse_characterization_rebind_in_r177",
+  "source_evidence": {
+    "live_handover_current_baton": "The active durability descendant has a deterministic characterization-only parse rebind at exact f5c8fb0f01dc5836647b90acdf96c8ed6c21fc05. It is not yet accepted for a database run.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through exactly one fresh Antigravity project receives read-only veto authority only in clean r177. GPT Sol retains implementation, acceptance, database execution, cleanup and integration authority. No fallback is allowed.",
+    "active_plan_and_acceptance": "The candidate binds reviewed source 5a9a7ae907308aa0a8a4256e9043b833f8c416ae, artifact SHA-256 dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7, 1,436,664 bytes, 424 statements and canonical characterization contract SHA-256 942ed41554fee46b3c4d11e663afd5e62c3c5e00250fc21fabb3e06009c98726. Full focused tests and Ruff pass.",
+    "protected_evidence_boundaries": "The reviewer may inspect only the allowlisted exact-head files. Mutable evidence aliases, holdouts, historical Diary data, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, providers, edits, commits, pushes, deployment, release, Pages and protected refs are closed.",
+    "git_refs_and_worktree": "Clean verifier worktree C:\\Users\\sarashera\\EMR4-worktrees\\raisa-context-fabric-durability-parse-r177 is exact f5c8fb0f01dc5836647b90acdf96c8ed6c21fc05 on codex/review-context-fabric-admission-replay-parse-char-f5c8fb0f. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary-only AER-0236 records and corrects an abbreviated-hash preflight invocation; they do not alter the reviewed candidate."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Corrected full-HEAD preflight passed; exact candidate and refs verified."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Selected exact gemini-3.6-flash-high in one fresh project."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

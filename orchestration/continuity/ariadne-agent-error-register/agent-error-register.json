@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 201,
+  "register_revision": 202,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -9477,6 +9477,44 @@
           "scripts/raisa_context_fabric_durability_behavior_failure_046_admission_replay_diagnosis.py",
           "tests/test_raisa_context_fabric_durability_behavior_failure_046_admission_replay_diagnosis.py",
           "docs/ariadne-agent-error-correction-register-revision-201.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0236",
+      "attempt_id": "raisa-context-fabric-admission-replay-parse-review-preflight-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-parse-catalogue-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_verifier_preflight",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The verifier worktree preflight must receive the exact full 40-character candidate HEAD before any independent reviewer dispatch.",
+      "observed_error": "The first local preflight invocation supplied abbreviated f5c8fb0f as expected_head, so the strict helper returned revision_required against the correct full worktree HEAD before writing a pass receipt.",
+      "detection_method": "The deterministic preflight rejected the abbreviated/full comparison before any provider call; git rev-parse confirmed the clean worktree at full f5c8fb0f01dc5836647b90acdf96c8ed6c21fc05 and a corrected invocation passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-admission-replay-parse-characterization-review-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-202.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.abbreviated_head_supplied_to_exact_head_preflight",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve and supply the full 40-character candidate HEAD, rerun the local preflight and require a clean passed receipt before dispatch.",
+        "prevention_control": "All exact-head preflight invocations must use git rev-parse HEAD output rather than a display abbreviation.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-admission-replay-parse-characterization-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-202.md"
         ]
       },
       "status": "corrected"
