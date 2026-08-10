@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "accept_the_exact_head_gemini_pass_for_behavior_failure_044_bounded_not_null_coordinate_telemetry_and_preserve_attempt_045_as_the_next_separately_gated_action",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The structured reviewer receipt is pass at exact d19de28f91fbdc05aeec96cabcb329ee7002a7f4 with clean pre/post state, 1083 focused tests, Ruff lint/format and exact diff checks passing. It confirms SQLSTATE 23502-only coordinate extraction, exact relation and 20-column allowlisting, hostile and unlisted coordinate rejection, base SQLSTATE retention for every rejection class, no raw stderr release, immutable attempt-044 failure SHA-256 0bacbe855a818c4dbb6bfa5c95ffbdb4fd5a91ac9ace431153669d17cb277345, all 231 AER incidents closed, canonical behavior contract sha256:897e07895116eecedaf8a2506ad10f9f5e5207b7e78e68ab79afb09347018a57 and unchanged scenario seal e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb. One fresh attempt 045 is next only after its own preexecution receipt and protected-evidence backup.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high completed exactly one bounded read-only Antigravity reviewer-model call and has no continuing lease. GPT Sol owns acceptance, evidence commit, a separately rehydrated single disposable attempt 045, exact-ID cleanup, diagnosis and terminal closeout. No fallback, other provider, product runtime, deployment, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at exact d19de28f91fbdc05aeec96cabcb329ee7002a7f4 apart from preserved untracked files. Review r173 is clean at the same exact head on codex/review-context-fabric-behavior-044-telemetry-d19de28f. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only remains mandatory.",
+    "live_handover_current_baton": "The active Context Fabric durability descendant is the bounded not-null-coordinate telemetry correction after immutable behavior attempt 044. Exact candidate d19de28f91fbdc05aeec96cabcb329ee7002a7f4 has a fresh clean exact-HEAD independent veto pass; no attempt 045 has run.",
+    "protected_evidence_boundaries": "The reviewer used only committed authored-synthetic allowlisted paths. It did not inspect the protected mutable alias, docs/branding, holdouts or patient/clinical/product data and did not start Docker/PostgreSQL or edit the checkout. The primary mutable evidence alias remains untracked and byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. This acceptance opens no runtime, operational database, watcher/feed, application/API/Diary, provider fallback, deployment, release, Pages or protected-ref boundary."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

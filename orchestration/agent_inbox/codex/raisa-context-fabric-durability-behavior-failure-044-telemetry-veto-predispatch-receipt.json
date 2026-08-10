@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_behavior_failure_044_bounded_not_null_telemetry_in_r173",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate reuses the existing safe not-null parser only for SQLSTATE 23502 behind one exact admission relation/column allowlist, preserves the base SQLSTATE and all non-23502 envelopes, and emits no raw messages. The body, DDL, behavior contract and scenarios are unchanged. Ruff and the focused diagnosis, harness and 231-incident AER suites pass.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only veto authority only in clean r173 at the exact candidate. GPT Sol retains implementation, acceptance, disposable-runtime, cleanup, integration and baton authority. No fallback or second reviewer call is authorised.",
+    "git_refs_and_worktree": "Verifier r173 is clean at exact d19de28f91fbdc05aeec96cabcb329ee7002a7f4 on codex/review-context-fabric-behavior-044-telemetry-d19de28f and passed the local zero-provider preflight. Primary tracked worktree is clean at the same candidate apart from preserved unrelated untracked paths. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "Immutable attempt 044 failed at BTR-I02 SQLSTATE 23502. Exact telemetry-only candidate d19de28f91fbdc05aeec96cabcb329ee7002a7f4 is committed, while attempt 045 remains closed pending this independent veto.",
+    "protected_evidence_boundaries": "The verifier may inspect only committed immutable authored-synthetic evidence and the exact packet allowlist. Protected mutable evidence, holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, other providers, product surfaces, edits, deployment, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

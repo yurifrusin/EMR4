@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-durability-behavior-r173",
+  "branch": "codex/review-context-fabric-behavior-044-telemetry-d19de28f",
+  "head": "d19de28f91fbdc05aeec96cabcb329ee7002a7f4",
+  "expected_head": "d19de28f91fbdc05aeec96cabcb329ee7002a7f4",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-behavior-044-telemetry-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
