@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_explicit_generation_lock_characterization_and_exact_digest_binding_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 7ab702e5fa8cd5c75a7a8e6c returned catalogue_characterization_required for artifact aa26f926, preserved immutable evidence sha256:78c157c7 and removed exact container aa3d7ccc with independent absence. Relative to the immediately preceding admission-row-shape exact reproduction, only policies changed. The contract now binds all fifteen exact digests at canonical sha256:dbedcaf7, and 140/140 focused tests plus Ruff pass.",
+    "current_authority_allocation": "GPT Sol owns characterization acceptance, exact-digest binding and explicit-path candidate commit. No external worker, provider or database run is active during this commit; fresh Gemini veto remains required before reproduction.",
+    "git_refs_and_worktree": "Task branch is exact 9518504f66919b62a833ae6ba87c5ccbba20e65f before this explicit candidate commit. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only.",
+    "live_handover_current_baton": "The active provider-free Context Fabric durability sequence requires characterization, exact parse reproduction and then behavior-parent rebind before another behavior attempt. Characterization has completed cleanly after exact review acceptance commit 9518504f.",
+    "protected_evidence_boundaries": "Commit only the characterization preexecution pair, immutable named characterization, exact-bound contract/script/test/doc, Sol acceptance and this precommit pair. Leave the generic characterization target untracked and preserve every unrelated untracked file. Do not inspect or stage docs/branding/. Mutable accepted parse evidence remains 97d1385c, historical failure 3bf66870 and mutable behavior evidence 09907bf6. No second database run, behavior, migration, operational persistence, watcher/listener/feed, patient/product/clinical data, provider, command, deployment, Pages, release or protected-ref action is open."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_fixed_no_argument_generation_lock_parse_catalogue_characterization_in_one_owned_disposable_postgresql_16_container",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted generation-lock parse rebind binds artifact sha256:aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9, 1435252 canonical LF bytes, 421 statements, PostgreSQL 16 and characterization_only with an empty digest map. Fresh exact-HEAD Gemini 3.6 Flash/high review passed 139/139 focused tests and clean r156 postflight. Exactly one no-argument harness run is eligible and is expected to terminate catalogue_characterization_required after complete characterization and verified cleanup.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled serial database run, exact-ID cleanup, evidence preservation, diagnosis and acceptance. No external worker or provider participates in the run.",
+    "git_refs_and_worktree": "Task branch is exact 9518504f66919b62a833ae6ba87c5ccbba20e65f. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df. Exact local image postgres:16-bookworm resolves to immutable sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8. The harness alone chooses and records its unique owned container; unrelated containers must not be listed or touched.",
+    "live_handover_current_baton": "The active provider-free Context Fabric durability sequence permits bounded evidence-backed parse characterization and exact reproduction before another behavior attempt. Review acceptance commit is exact 9518504f66919b62a833ae6ba87c5ccbba20e65f.",
+    "protected_evidence_boundaries": "Before the run, preserve external byte-exact backups and verify mutable parse accepted evidence sha256:97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec, protected historical parse failure sha256:3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c and mutable behavior accepted evidence sha256:09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. The characterization target is distinct. No applied migration, operational database, credential, watcher/listener/feed, patient/product/clinical data, provider, app/API/Diary command, deployment, production, release, Pages or protected-ref action is open. Do not inspect or stage docs/branding/; preserve all untracked files."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -282,6 +282,20 @@ ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE_PATH = (
 ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE = json.loads(
     ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+GENERATION_LOCK_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-generation-lock-rls-characterization.json"
+)
+GENERATION_LOCK_CHARACTERIZATION_EVIDENCE = json.loads(
+    GENERATION_LOCK_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+GENERATION_LOCK_EXPECTED_QUERY_DIGESTS = {
+    key: value
+    for key, value in GENERATION_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"][
+        "query_digests"
+    ].items()
+    if key not in {"server", "extensions"}
+}
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1956,8 +1970,8 @@ def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound()
         if key not in {"server", "extensions"}
     }
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "characterization_only",
-        "expected_query_digests": {},
+        "mode": "exact_digest_bound",
+        "expected_query_digests": GENERATION_LOCK_EXPECTED_QUERY_DIGESTS,
     }
     assert {
         "mode": "exact_digest_bound",
@@ -1996,6 +2010,64 @@ def test_admission_row_shape_exact_reproduction_is_immutable_and_complete() -> N
         ),
         "removed": True,
         "status": "cleanup_verified",
+    }
+
+
+def test_generation_lock_characterization_is_immutable_and_exactly_bound() -> None:
+    evidence = GENERATION_LOCK_CHARACTERIZATION_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            GENERATION_LOCK_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536"
+    )
+    assert evidence["attempt_id"] == "7ab702e5fa8cd5c75a7a8e6c"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1435252,
+        "artifact_sha256": (
+            "sha256:aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9"
+        ),
+        "contract_sha256": (
+            "sha256:aea61c7344f6b4990fed848994f63a0f42788c807477fbed1ce1d845dd579227"
+        ),
+        "prerequisite_contract_sha256": (
+            "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
+        ),
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 421,
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "aa3d7ccc5a542e2a4531d371405e9ceeee091b0372edeacd1643b76478a87496"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert GENERATION_LOCK_EXPECTED_QUERY_DIGESTS == {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
+    assert {
+        key
+        for key, value in GENERATION_LOCK_EXPECTED_QUERY_DIGESTS.items()
+        if ADMISSION_ROW_SHAPE_EXPECTED_QUERY_DIGESTS[key] != value
+    } == {"policies"}
+    assert (
+        evidence["catalogue"]["kind_counts"]
+        == (ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE["catalogue"]["kind_counts"])
+    )
+    assert CONTRACT["catalogue_expectation"] == {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": GENERATION_LOCK_EXPECTED_QUERY_DIGESTS,
     }
 
 
