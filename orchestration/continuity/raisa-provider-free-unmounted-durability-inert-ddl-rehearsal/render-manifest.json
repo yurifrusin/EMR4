@@ -28,7 +28,7 @@
       "node_count": 28
     },
     {
-      "expression_count": 965,
+      "expression_count": 956,
       "id": "emr4_context_fabric.admit_proofread_observation_v1",
       "instruction_counts": {
         "ASSERT": 5,
@@ -695,7 +695,7 @@
       ]
     }
   ],
-  "effective_catalogue_digest": "sha256:64430bc8124b8c62795af12504fc2d6183b5cc337c1b501960993f3b5777056b",
+  "effective_catalogue_digest": "sha256:46460a9d5dbc344636d6761109f2c4e937a7ddcede7efe576d337d3fdebba077",
   "effective_program_count": 23,
   "immutable_parent_program_count": 22,
   "opcode_populations": {
@@ -2657,6 +2657,7 @@
     "operation_order": [
       "RELAX_DIGEST_DOMAIN_NULLABILITY",
       "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
+      "NORMALIZE_ADMISSION_RELOAD_WINNER_PREDICATES",
       "ADD_APPOINTMENT_GUARD_SIGNATURE",
       "ADD_APPOINTMENT_GUARD_PROGRAM",
       "ADD_APPOINTMENT_GUARD_DECLARATION",
@@ -2682,6 +2683,42 @@
         "id": "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
         "new_fragment_sha256": "sha256:882d7bd557da279514c23d8d7238cb70fa8f0d852f7cb3616f1be14cc49be720",
         "old_fragment_sha256": "sha256:65ed966857fe68c9d8fec7ddf553f988b4c053cc3d1117eb1462b9ab7813a1f5"
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.admit_proofread_observation_v1.insert_mismatch",
+          "emr4_context_fabric.admit_proofread_observation_v1.insert_primary",
+          "emr4_context_fabric.admit_proofread_observation_v1.insert_reuse"
+        ],
+        "id": "NORMALIZE_ADMISSION_RELOAD_WINNER_PREDICATES",
+        "new_fragment_sha256": "sha256:ba6450c0c7128b7a9e5e5dbd86c25779dae47f18695a881fc275d80bc684d725",
+        "old_fragment_sha256": "sha256:54fa1fc175ae0661bcc71caa627511822bd7970a9ed8d1049f91cacd824c675e",
+        "sites": [
+          {
+            "admitted_at_insert_preserved": true,
+            "admitted_at_return_preserved": true,
+            "conflict_key_preserved": true,
+            "new_winner_predicate_sha256": "sha256:4d5f354a3170dc74b83065d75390991aff21ae623f3193e22241aceedeeff331",
+            "node_id": "emr4_context_fabric.admit_proofread_observation_v1.insert_mismatch",
+            "old_winner_predicate_sha256": "sha256:9466ebf314c24fd5bb4006c71c911d68dece8a1a544ee97904a026fbc577c28c"
+          },
+          {
+            "admitted_at_insert_preserved": true,
+            "admitted_at_return_preserved": true,
+            "conflict_key_preserved": true,
+            "new_winner_predicate_sha256": "sha256:fb2226d32c8823a9f64f84082336f8169413f66c00d6584ea2c14a6d9321ec1c",
+            "node_id": "emr4_context_fabric.admit_proofread_observation_v1.insert_primary",
+            "old_winner_predicate_sha256": "sha256:f5e9eca437b2b72c3a863feca8ccad0ce19e6a97f0a0b9470b16a332c847e16a"
+          },
+          {
+            "admitted_at_insert_preserved": true,
+            "admitted_at_return_preserved": true,
+            "conflict_key_preserved": true,
+            "new_winner_predicate_sha256": "sha256:c7c32a9dc4826affc8dc2acd64faaacc52b84208743044437f005876dc5bae9c",
+            "node_id": "emr4_context_fabric.admit_proofread_observation_v1.insert_reuse",
+            "old_winner_predicate_sha256": "sha256:b6812e307e596e40d03fc564f089c7336c42165e5b6a3ac506f5083d0c938690"
+          }
+        ]
       },
       {
         "affected_ids": [
@@ -2816,10 +2853,10 @@
     ]
   },
   "postgresql_major": 16,
-  "renderer_version": "2.0.19",
+  "renderer_version": "2.0.20",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
-  "sql_byte_count": 1437009,
-  "sql_sha256": "sha256:fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa",
+  "sql_byte_count": 1436664,
+  "sql_sha256": "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7",
   "statement_count": 424,
   "structural_parent": {
     "contract_sha256": "sha256:18fb00ff02820c31b4fcab4de096393cbea49e0a37ebb28d65c5eb2d6f154cfd",

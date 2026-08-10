@@ -532,7 +532,7 @@ def test_positional_row_projection_order_is_mechanically_closed() -> None:
 def test_recovery_operations_are_position_closed_and_fragment_sealed() -> None:
     operations = RECOVERY_SPEC["operations"]
     assert [row["id"] for row in operations] == RECOVERY_SPEC["operation_order"]
-    assert len(operations) == 10
+    assert len(operations) == 11
     for operation in operations:
         assert operation["affected_ids"]
         assert operation["old_fragment_sha256"].startswith("sha256:")
@@ -543,7 +543,16 @@ def test_recovery_operations_are_position_closed_and_fragment_sealed() -> None:
     frame_nullability = operations[1]
     assert frame_nullability["id"] == "RELAX_FRAME_MASK_DOMAIN_NULLABILITY"
     assert frame_nullability["affected_ids"] == ["emr4_context_fabric.frame_mask"]
-    reselect = operations[6]
+    admission_replay = operations[2]
+    assert admission_replay["id"] == ("NORMALIZE_ADMISSION_RELOAD_WINNER_PREDICATES")
+    assert len(admission_replay["sites"]) == 3
+    for site in admission_replay["sites"]:
+        assert site["old_winner_predicate_sha256"].startswith("sha256:")
+        assert site["new_winner_predicate_sha256"].startswith("sha256:")
+        assert site["admitted_at_insert_preserved"] is True
+        assert site["admitted_at_return_preserved"] is True
+        assert site["conflict_key_preserved"] is True
+    reselect = operations[7]
     assert len(reselect["sites"]) == 4
     for site in reselect["sites"]:
         assert site["source_node_id"]
@@ -577,6 +586,48 @@ def test_frame_mask_domain_defers_presence_to_column_and_conflict_shape() -> Non
     assert "affected_frame_mask emr4_context_fabric.frame_mask," in sql
     assert "affected_frame_mask emr4_context_fabric.frame_mask NOT NULL," in sql
     assert "NULL::emr4_context_fabric.frame_mask" in sql
+
+
+def test_admission_reload_ignores_only_volatile_server_authored_time() -> None:
+    parents = _parents()
+    effective = derive_effective_catalogue(parents)
+    body, _ = derive_effective_body(parents["body"], effective)
+    admission = next(
+        program
+        for program in body["body_programs"]
+        if program["id"] == "emr4_context_fabric.admit_proofread_observation_v1"
+    )
+    reload_nodes = [
+        node
+        for node in _walk_program_nodes(admission)
+        if node["op"] == "INSERT_OR_RELOAD_COMPARE"
+    ]
+    assert len(reload_nodes) == 3
+    for node in reload_nodes:
+        operands = node["operands"]
+        admitted_at = next(
+            binding["value"]
+            for binding in operands["bindings"]
+            if binding["column"] == "admitted_at"
+        )
+        assert admitted_at == {
+            "op": "TRANSACTION_TIMESTAMP",
+            "type": "pg_catalog.timestamptz",
+        }
+        assert "admitted_at" in operands["returning_columns"]
+        assert "admitted_at" in operands["winner_columns"]
+        assert all(
+            not (
+                term.get("op") == "EQ"
+                and term.get("left", {}).get("column") == "admitted_at"
+            )
+            for term in operands["winner_predicate"]["operands"]
+        )
+    sql = _base_render()["sql_text"]
+    assert (
+        "context_proofread_observation_admission.admitted_at = "
+        "pg_catalog.transaction_timestamp()"
+    ) not in sql
 
 
 def test_recovery_fragment_seal_drift_fails_closed(
@@ -955,7 +1006,7 @@ def test_all_effective_programs_accounted_and_expression_ceiling() -> None:
     assert manifest["effective_program_count"] == 23
     assert len(accounting) == 23
     assert sum(row["node_count"] for row in accounting) == 756
-    assert sum(row["expression_count"] for row in accounting) == 14397
+    assert sum(row["expression_count"] for row in accounting) == 14388
     for row in accounting:
         assert sum(row["instruction_counts"].values()) == row["node_count"]
     parents = _parents()

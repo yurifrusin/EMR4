@@ -83,6 +83,12 @@ BINDING = FABRIC + "context_service_practice_binding"
 OUTBOX = FABRIC + "diary_context_observation_outbox_v1"
 DIGEST_DOMAIN_NAME = "digest_sha256"
 FRAME_MASK_DOMAIN_NAME = "frame_mask"
+ADMISSION_PROGRAM_ID = FABRIC + "admit_proofread_observation_v1"
+ADMISSION_RELOAD_NODE_IDS = (
+    ADMISSION_PROGRAM_ID + ".insert_mismatch",
+    ADMISSION_PROGRAM_ID + ".insert_primary",
+    ADMISSION_PROGRAM_ID + ".insert_reuse",
+)
 
 RECOVERY_SPEC: dict[str, Any] = {
     "id": "postgresql_16_representability_recovery_v1",
@@ -96,6 +102,7 @@ RECOVERY_SPEC: dict[str, Any] = {
     "operation_order": [
         "RELAX_DIGEST_DOMAIN_NULLABILITY",
         "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
+        "NORMALIZE_ADMISSION_RELOAD_WINNER_PREDICATES",
         "ADD_APPOINTMENT_GUARD_SIGNATURE",
         "ADD_APPOINTMENT_GUARD_PROGRAM",
         "ADD_APPOINTMENT_GUARD_DECLARATION",
@@ -117,6 +124,38 @@ RECOVERY_SPEC: dict[str, Any] = {
             "affected_ids": [FABRIC + FRAME_MASK_DOMAIN_NAME],
             "old_fragment_sha256": "sha256:65ed966857fe68c9d8fec7ddf553f988b4c053cc3d1117eb1462b9ab7813a1f5",
             "new_fragment_sha256": "sha256:882d7bd557da279514c23d8d7238cb70fa8f0d852f7cb3616f1be14cc49be720",
+        },
+        {
+            "id": "NORMALIZE_ADMISSION_RELOAD_WINNER_PREDICATES",
+            "affected_ids": list(ADMISSION_RELOAD_NODE_IDS),
+            "old_fragment_sha256": "sha256:54fa1fc175ae0661bcc71caa627511822bd7970a9ed8d1049f91cacd824c675e",
+            "new_fragment_sha256": "sha256:ba6450c0c7128b7a9e5e5dbd86c25779dae47f18695a881fc275d80bc684d725",
+            "sites": [
+                {
+                    "node_id": ADMISSION_PROGRAM_ID + ".insert_mismatch",
+                    "old_winner_predicate_sha256": "sha256:9466ebf314c24fd5bb4006c71c911d68dece8a1a544ee97904a026fbc577c28c",
+                    "new_winner_predicate_sha256": "sha256:4d5f354a3170dc74b83065d75390991aff21ae623f3193e22241aceedeeff331",
+                    "admitted_at_insert_preserved": True,
+                    "admitted_at_return_preserved": True,
+                    "conflict_key_preserved": True,
+                },
+                {
+                    "node_id": ADMISSION_PROGRAM_ID + ".insert_primary",
+                    "old_winner_predicate_sha256": "sha256:f5e9eca437b2b72c3a863feca8ccad0ce19e6a97f0a0b9470b16a332c847e16a",
+                    "new_winner_predicate_sha256": "sha256:fb2226d32c8823a9f64f84082336f8169413f66c00d6584ea2c14a6d9321ec1c",
+                    "admitted_at_insert_preserved": True,
+                    "admitted_at_return_preserved": True,
+                    "conflict_key_preserved": True,
+                },
+                {
+                    "node_id": ADMISSION_PROGRAM_ID + ".insert_reuse",
+                    "old_winner_predicate_sha256": "sha256:b6812e307e596e40d03fc564f089c7336c42165e5b6a3ac506f5083d0c938690",
+                    "new_winner_predicate_sha256": "sha256:c7c32a9dc4826affc8dc2acd64faaacc52b84208743044437f005876dc5bae9c",
+                    "admitted_at_insert_preserved": True,
+                    "admitted_at_return_preserved": True,
+                    "conflict_key_preserved": True,
+                },
+            ],
         },
         {
             "id": "ADD_APPOINTMENT_GUARD_SIGNATURE",
@@ -1069,6 +1108,63 @@ def _predicate(body: dict[str, Any], program_id: str, node_id: str) -> dict[str,
     return operands["condition"]
 
 
+def _is_admission_timestamp_winner_term(term: dict[str, Any]) -> bool:
+    return term == {
+        "op": "EQ",
+        "left": {
+            "op": "REF",
+            "kind": "SOURCE_COLUMN",
+            "relation": FABRIC + "context_proofread_observation_admission",
+            "column": "admitted_at",
+            "type": PG + "timestamptz",
+        },
+        "right": {
+            "op": "TRANSACTION_TIMESTAMP",
+            "type": PG + "timestamptz",
+        },
+        "type": PG + "boolean",
+    }
+
+
+def _normalize_admission_reload_winner_predicates(body: dict[str, Any]) -> None:
+    """Exclude volatile server-authored time from cross-transaction identity."""
+    program = _program(body, ADMISSION_PROGRAM_ID)
+    for node_id in ADMISSION_RELOAD_NODE_IDS:
+        node = _find_node(program["ast"]["nodes"], node_id)
+        if node.get("op") != "INSERT_OR_RELOAD_COMPARE":
+            raise ValueError("admission reload operation shape drift")
+        operands = node["operands"]
+        admitted_at_bindings = [
+            binding
+            for binding in operands.get("bindings", [])
+            if binding.get("column") == "admitted_at"
+        ]
+        if len(admitted_at_bindings) != 1 or admitted_at_bindings[0].get("value") != {
+            "op": "TRANSACTION_TIMESTAMP",
+            "type": PG + "timestamptz",
+        }:
+            raise ValueError("admission admitted-at binding drift")
+        if "admitted_at" not in operands.get("returning_columns", []) or (
+            "admitted_at" not in operands.get("winner_columns", [])
+        ):
+            raise ValueError("admission admitted-at projection drift")
+        winner = operands.get("winner_predicate", {})
+        if winner.get("op") != "AND" or not isinstance(winner.get("operands"), list):
+            raise ValueError("admission winner predicate shape drift")
+        timestamp_terms = [
+            term
+            for term in winner["operands"]
+            if _is_admission_timestamp_winner_term(term)
+        ]
+        if len(timestamp_terms) != 1:
+            raise ValueError("admission timestamp winner term drift")
+        winner["operands"] = [
+            term
+            for term in winner["operands"]
+            if not _is_admission_timestamp_winner_term(term)
+        ]
+
+
 def _recovery_operation_evidence(
     immutable_body: dict[str, Any],
     effective_body: dict[str, Any],
@@ -1197,6 +1293,43 @@ def _recovery_operation_evidence(
     )
     source_frame_mask_domain = copy.deepcopy(frame_mask_domain)
     source_frame_mask_domain["not_null_values"] = True
+    admission_reload_sites = []
+    source_admission = _program(immutable_body, ADMISSION_PROGRAM_ID)
+    effective_admission = _program(effective_body, ADMISSION_PROGRAM_ID)
+    for node_id in ADMISSION_RELOAD_NODE_IDS:
+        source_node = _find_node(source_admission["ast"]["nodes"], node_id)
+        effective_node = _find_node(effective_admission["ast"]["nodes"], node_id)
+        source_winner = source_node["operands"]["winner_predicate"]
+        effective_winner = effective_node["operands"]["winner_predicate"]
+        if not any(
+            _is_admission_timestamp_winner_term(term)
+            for term in source_winner.get("operands", [])
+        ) or any(
+            _is_admission_timestamp_winner_term(term)
+            for term in effective_winner.get("operands", [])
+        ):
+            raise ValueError("admission timestamp winner recovery drift")
+        if (
+            source_node["operands"]["bindings"]
+            != effective_node["operands"]["bindings"]
+            or source_node["operands"]["returning_columns"]
+            != effective_node["operands"]["returning_columns"]
+            or source_node["operands"]["winner_columns"]
+            != effective_node["operands"]["winner_columns"]
+            or source_node["operands"]["conflict_key_columns"]
+            != effective_node["operands"]["conflict_key_columns"]
+        ):
+            raise ValueError("admission reload recovery expanded beyond predicate")
+        admission_reload_sites.append(
+            {
+                "node_id": node_id,
+                "old_winner_predicate_sha256": _json_seal(source_winner),
+                "new_winner_predicate_sha256": _json_seal(effective_winner),
+                "admitted_at_insert_preserved": True,
+                "admitted_at_return_preserved": True,
+                "conflict_key_preserved": True,
+            }
+        )
     operations = [
         {
             "id": "RELAX_DIGEST_DOMAIN_NULLABILITY",
@@ -1209,6 +1342,17 @@ def _recovery_operation_evidence(
             "affected_ids": [FABRIC + FRAME_MASK_DOMAIN_NAME],
             "old_fragment_sha256": _json_seal(source_frame_mask_domain),
             "new_fragment_sha256": _json_seal(frame_mask_domain),
+        },
+        {
+            "id": "NORMALIZE_ADMISSION_RELOAD_WINNER_PREDICATES",
+            "affected_ids": list(ADMISSION_RELOAD_NODE_IDS),
+            "old_fragment_sha256": _json_seal(
+                [row["old_winner_predicate_sha256"] for row in admission_reload_sites]
+            ),
+            "new_fragment_sha256": _json_seal(
+                [row["new_winner_predicate_sha256"] for row in admission_reload_sites]
+            ),
+            "sites": admission_reload_sites,
         },
         {
             "id": "ADD_APPOINTMENT_GUARD_SIGNATURE",
@@ -1274,6 +1418,7 @@ def derive_effective_body(
     recovered = copy.deepcopy(effective)
 
     programs = {program["id"]: program for program in body["body_programs"]}
+    _normalize_admission_reload_winner_predicates(body)
 
     claim = programs[FABRIC + "cf_guard_claim_v1"]
     claim_exact = _find_node(
@@ -3144,7 +3289,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.19"
+RENDERER_VERSION = "2.0.20"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

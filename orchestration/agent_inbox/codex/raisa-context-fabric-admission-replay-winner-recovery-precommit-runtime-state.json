@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_sealed_effective_admission_reload_winner_recovery_then_dispatch_one_fresh_exact_head_independent_veto_before_any_parse_catalogue_database_run",
+  "source_evidence": {
+    "live_handover_current_baton": "Immutable behavior attempt 046 and its repository-only diagnosis are accepted at exact head 5237a083. The active candidate is the sealed effective renderer correction for cross-transaction admission replay; no attempt 047 or parse/catalogue run has occurred.",
+    "current_authority_allocation": "GPT Sol owns candidate acceptance and explicit-path commit. Gemini 3.6 Flash/high may receive one fresh read-only exact-HEAD veto lease after commit. PostgreSQL/Docker remains closed until the candidate passes that veto and a new parse/catalogue characterization preexecution receipt. No provider fallback, product/patient/clinical data, operational database, runtime wiring, deployment, release, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "Renderer 2.0.20 adds exactly one sealed NORMALIZE_ADMISSION_RELOAD_WINNER_PREDICATES operation affecting the mismatch, primary and reuse INSERT_OR_RELOAD_COMPARE nodes. It removes only admitted_at equals transaction_timestamp from winner reload predicates while preserving the admitted_at insert binding, stored/returned column, exact conflict key and all stable comparisons. Immutable structural/body parents and all authority boundaries are unchanged. The 424-statement inert SQL is 1,436,664 LF bytes at SHA-256 dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7; manifest SHA-256 is 2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271. Renderer, diagnosis and 235-incident AER suites plus Ruff and exact renderer check pass.",
+    "protected_evidence_boundaries": "The candidate is repository-local authored-synthetic rendering only. The mutable behavior evidence alias remains untracked and byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Immutable attempts 001-046, historical parse evidence, holdouts, docs/branding and all unrelated untracked files remain preserved and excluded. Explicit-path staging only is mandatory.",
+    "git_refs_and_worktree": "Primary task branch is at exact 5237a083 before this candidate commit with only the declared renderer candidate plus preserved untracked files. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and must not move."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "admission_replay_winner_recovery_precommit_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek transport was active or needed for this deterministic renderer correction."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code was not selected for this deterministic renderer correction."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport was active or needed for this deterministic renderer correction."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["A fresh exact-HEAD independent verifier lease is planned only after commit."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified fragment seals, exact semantic narrowing, generated artifact hashes and complete deterministic suites."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No Codex subagent was assigned to this serial renderer correction."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
