@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_deterministic_frame_mask_recovery_behavior_parent_rebind_then_dispatch_one_fresh_exact_head_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant has a first-run disposable PostgreSQL parse/catalogue pass accepted at exact 9bf59ed860e2c4e119b13e5dd38911dbb9591ad0. No behavior rehearsal has followed it; the next candidate is an inert six-parent behavior-contract rebind.",
+    "current_authority_allocation": "GPT Sol owns deterministic rebind acceptance and explicit-path commit. Gemini 3.6 Flash/high may receive exactly one fresh read-only exact-HEAD veto lease after commit. No database behavior run is authorised by this receipt; that requires a later separately rehydrated preexecution gate. No provider, product data, patient/clinical data, operational database, runtime wiring, deployment, release, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "The behavior contract changes only accepted_runtime_source, inert_sql and render_manifest bindings. It binds immutable parse pass SHA-256 4583c8b0bca881964ba9a337cfd1b5c9ae535ad7cc78c06766f844ffe95d998a at 9bf59ed860e2c4e119b13e5dd38911dbb9591ad0 and inert SQL/manifest at a8cef7045fcada54a33a1060e83fd4d9929ac56b with SHA-256 fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa and fec0bb1399ebf5af0d06ca933069614ca4a8c84a9593d5eee0e983b0afffb9fd. Canonical behavior contract SHA-256 is 9dd97600289733fb48a03a54d0b4a2418c6c502c98f75ba0181213a6088518dc. All 20 scenarios and every authority boundary are unchanged. The focused 105 behavior/plan tests pass.",
+    "protected_evidence_boundaries": "The mutable behavior evidence alias remains untracked and byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and must not be staged or inspected by the reviewer. Immutable attempts 001-045 remain preserved. Historical canonical parse evidence remains SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec. User-owned docs/branding and all other untracked files remain excluded. Explicit-path staging only is mandatory.",
+    "git_refs_and_worktree": "Primary task branch is at exact 9bf59ed860e2c4e119b13e5dd38911dbb9591ad0 before this candidate commit. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and must not move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "frame_mask_recovery_behavior_parent_rebind_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek transport was active or needed for this deterministic rebind."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code was not selected for this deterministic rebind."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport was active or needed for this deterministic rebind."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["A fresh reviewer lease is planned only after an exact committed candidate exists."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified all six canonical bindings, the unchanged scenario population and focused deterministic test pass."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No Codex subagent was assigned to this deterministic rebind."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
