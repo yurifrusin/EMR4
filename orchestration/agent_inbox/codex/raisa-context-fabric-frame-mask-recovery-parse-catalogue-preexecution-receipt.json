@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "run_exactly_one_no_argument_owned_disposable_postgresql_parse_catalogue_rehearsal_for_the_independently_accepted_frame_mask_domain_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Renderer 2.0.19 and the parse contract bind exact 424-statement inert SQL SHA-256 fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa, byte count 1437009 and parse contract canonical SHA-256 sha256:2993e547050212054b512f3ad5c6a9adaa64130f40f9cc93beb735079d28d840. Only the expected types digest changes to sha256:b7244669f109b81a3907c2f7a5397a253e8a374e261177a7567042d064c25c90. The exact independent veto passed 436 tests and renderer/Ruff checks. Exactly one no-argument parse/catalogue run is next; an identical rerun is forbidden.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted progression through this planned provider-free durability sequence. GPT Sol owns exactly one disposable no-argument parse/catalogue run, exact-ID cleanup, failure routing or pass acceptance. The Gemini reviewer used one completed model call and has no runtime lease. No additional provider, product, deployment, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean with a clean index at exact HEAD 132bdd9f673eed1994a6ff77079d8193e19b8158. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review r174 is clean at accepted candidate a8cef7045fcada54a33a1060e83fd4d9929ac56b. Explicit-path staging only remains mandatory; user-owned untracked files remain preserved and excluded.",
+    "live_handover_current_baton": "The active Context Fabric durability descendant is exact task HEAD 132bdd9f673eed1994a6ff77079d8193e19b8158, which accepts the fresh exact-HEAD Gemini veto of the frame-mask domain recovery. No post-recovery database run has occurred.",
+    "protected_evidence_boundaries": "Only repository-authored synthetic prerequisites and inert SQL may enter one owned disposable PostgreSQL 16 container through the closed local harness. The prior tracked parse pass is backed up at C:\\Users\\sarashera\\AppData\\Local\\Temp\\emr4-cf-parse-frame-mask-recovery-backup-0ad39452aaba4e549a015347cbffed8e\\provider-free-disposable-postgresql-evidence.json with SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec. On failure, preserve the new result immutably, restore the prior canonical evidence and inspect only the exact emitted container ID. No Docker enumeration, operational database or credential, durable volume, watcher/feed, application/API/Diary wiring, patient/clinical/product data, provider/model call, external retrieval, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
