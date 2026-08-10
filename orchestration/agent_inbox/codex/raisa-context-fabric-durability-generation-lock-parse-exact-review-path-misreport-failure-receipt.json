@@ -1,0 +1,25 @@
+{
+  "schema_version": "ariadne.review-claim-failure-receipt.v1",
+  "observed_on": "2026-08-10",
+  "status": "review_rejected",
+  "candidate_head": "3b35f173d7a09fd4a8dfb65f0716c49b4de6e7f9",
+  "review_worktree": "C:/Users/sarashera/EMR4-worktrees/r157",
+  "rejected_review_receipt": "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-parse-exact-review-receipt.json",
+  "terminal_decision_observed": "pass",
+  "failure": {
+    "code": "verifier_evidence_path_substitution",
+    "expected_path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+    "reported_path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-029.json",
+    "shared_sha256": "09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b",
+    "exact_observation": "The expected mutable untracked alias is absent from the clean exact-HEAD review worktree. The reported tracked historical failure file exists there with the same bytes and hash. The review therefore could not and did not verify the requested mutable primary-worktree path.",
+    "candidate_source_changed": false,
+    "database_or_container_started_after_review": false
+  },
+  "disposition": {
+    "review_admitted": false,
+    "code_test_results_may_be_reused_as_acceptance": false,
+    "fresh_review_required": true,
+    "correction": "The corrected packet removes the impossible review-worktree claim over primary-only untracked evidence, binds the three primary evidence hashes as Sol-owned pre/postflight facts, and requires the verifier to review only tracked immutable evidence present at exact HEAD.",
+    "authority_boundary": "No exact reproduction or behavior run is authorised by the rejected receipt."
+  }
+}

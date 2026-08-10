@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_corrected_fresh_read_only_gemini_36_flash_high_exact_head_veto_without_primary_only_mutable_path_claims",
+  "source_evidence": {
+    "live_handover_current_baton": "The active provider-free Context Fabric durability sequence still requires one valid fresh veto before exact parse reproduction. The r157 pass is rejected under AER-0197 for a path-substitution misreport; candidate source 3b35f173 is unchanged.",
+    "current_authority_allocation": "GPT Sol conducts, records the rejected review and owns primary-only mutable evidence checks. One new Antigravity project with Gemini 3.6 Flash/high may review only tracked immutable exact-HEAD material in fresh clean r158. No implementation, database, integration, baton or protected-ref authority transfers.",
+    "active_plan_and_acceptance": "Tracked characterization sha256:78c157c7, admission-row-shape predecessor comparison, canonical exact contract sha256:dbedcaf7 and 140 focused tests remain the bounded veto surface. The corrected packet prohibits claims about absent primary-only untracked evidence and requires no path substitution by hash equality.",
+    "protected_evidence_boundaries": "Review only; do not start Docker/PostgreSQL. Sol independently verifies primary mutable parse 97d1385c, historical failure 3bf66870 and mutable behavior 09907bf6 before and after any later run; the verifier must not claim those absent paths. No behavior, migration, operational persistence, listener/feed, patient/product/clinical data, provider, command, deployment, Pages, release or protected-ref action is open. Preserve all untracked files and do not inspect docs/branding/.",
+    "git_refs_and_worktree": "Fresh corrected review worktree C:/Users/sarashera/EMR4-worktrees/r158 is clean at exact candidate 3b35f173d7a09fd4a8dfb65f0716c49b4de6e7f9 on its bounded review branch. Exact baseline is 9518504f66919b62a833ae6ba87c5ccbba20e65f. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "generation_lock_parse_exact_corrected_veto_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol rejected r157, recorded AER-0197 and owns the corrected dispatch."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["One corrected fresh Gemini 3.6 Flash/high project is selected for tracked exact-HEAD review only."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

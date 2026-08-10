@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 170,
+  "register_revision": 171,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7887,6 +7887,47 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-baseline-failure-receipt.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-gemini-review-packet.md",
           "docs/ariadne-agent-error-correction-register-revision-170.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0197",
+      "attempt_id": "raisa-context-fabric-generation-lock-parse-exact-review-r157",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A verifier must identify and hash the exact requested evidence path, and must report an unavailable primary-only untracked path rather than substitute a different tracked file with identical bytes.",
+      "observed_error": "The r157 review labelled provider-free-behavior-transaction-failure-evidence-029.json as the mutable provider-free-behavior-transaction-evidence.json because both had SHA-256 09907bf6. The requested mutable alias was absent from the clean exact-HEAD review worktree, so that path claim was impossible and the terminal pass was rejected.",
+      "detection_method": "Sol reconciled the review prose against exact worktree path existence and SHA-256 facts before acceptance, proved the reported historical file existed with the shared hash while the requested mutable alias was absent, and opened no reproduction database run.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-generation-lock-parse-exact-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-exact-review-path-misreport-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-exact-corrected-gemini-review-packet.md",
+        "docs/ariadne-agent-error-correction-register-revision-171.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.absent_mutable_evidence_path_substituted_by_hash_equal_historical_file",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Reject the r157 pass. The corrected fresh packet scopes review evidence to tracked immutable files present in the exact review worktree and records the three primary-only mutable hashes as Sol-owned pre/postflight facts that cannot be delegated across worktree isolation.",
+        "prevention_control": "Before dispatch, classify every requested evidence path as tracked-at-HEAD or primary-only mutable. Verifiers may claim only tracked-at-HEAD observations; hash equality never permits path substitution, and primary-only mutable evidence remains an independently reconciled Sol responsibility.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-exact-review-path-misreport-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-exact-corrected-gemini-review-packet.md",
+          "docs/ariadne-agent-error-correction-register-revision-171.md"
         ]
       },
       "status": "corrected"
