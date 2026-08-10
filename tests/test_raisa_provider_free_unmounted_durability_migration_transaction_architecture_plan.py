@@ -123,6 +123,7 @@ EXPECTED_ADMISSION_LOCK_POLICY = (
     "ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], "
     "practice_id, source_contract_id, transaction_timestamp())"
 )
+EXPECTED_RECEIPT_LOCK_POLICY = EXPECTED_ADMISSION_LOCK_POLICY
 EXPECTED_OUTBOX_SELECT_POLICY = (
     "emr4_context_fabric.session_binding_allows_v1(session_user, "
     "ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, "
@@ -410,6 +411,22 @@ def validate_renderer_semantics(contract: dict) -> None:
         "permissive": True,
         "using_sql": EXPECTED_ADMISSION_LOCK_POLICY,
         "with_check_sql": EXPECTED_ADMISSION_LOCK_POLICY + " AND FALSE",
+    }
+    receipt = mapped["context_classified_observation_receipt"]
+    assert receipt["rls_policy_ids"] == [
+        "pol_cf_09_select",
+        "pol_cf_09_insert",
+        "pol_cf_09_update_lock",
+    ]
+    receipt_lock = policies["pol_cf_09_update_lock"]
+    assert receipt_lock == {
+        "id": "pol_cf_09_update_lock",
+        "relation": "context_classified_observation_receipt",
+        "command": "UPDATE",
+        "roles": ["PUBLIC"],
+        "permissive": True,
+        "using_sql": EXPECTED_RECEIPT_LOCK_POLICY,
+        "with_check_sql": EXPECTED_RECEIPT_LOCK_POLICY + " AND FALSE",
     }
     anchor = mapped["context_recovery_anchor"]
     assert anchor["rls_policy_ids"] == [
@@ -1056,6 +1073,68 @@ def test_admission_lock_visibility_cannot_be_removed_widened_or_reassigned() -> 
         for policy in non_public["rls_policy_catalogue"]["policies"]
     }
     policies["pol_cf_04_update_lock"]["roles"] = ["context_coordinator"]
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(non_public))
+
+
+def test_receipt_lock_visibility_cannot_be_removed_widened_or_reassigned() -> None:
+    contract = data(CONTRACT)
+    policies = {
+        policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
+    }
+    receipt = relation_map(contract)["context_classified_observation_receipt"]
+    assert receipt["rls_policy_ids"] == [
+        "pol_cf_09_select",
+        "pol_cf_09_insert",
+        "pol_cf_09_update_lock",
+    ]
+    assert policies["pol_cf_09_update_lock"]["using_sql"] == (
+        EXPECTED_RECEIPT_LOCK_POLICY
+    )
+    assert policies["pol_cf_09_update_lock"]["with_check_sql"] == (
+        EXPECTED_RECEIPT_LOCK_POLICY + " AND FALSE"
+    )
+
+    missing_lock_visibility = copy.deepcopy(contract)
+    missing_lock_visibility["rls_policy_catalogue"]["policies"] = [
+        policy
+        for policy in missing_lock_visibility["rls_policy_catalogue"]["policies"]
+        if policy["id"] != "pol_cf_09_update_lock"
+    ]
+    relation_map(missing_lock_visibility)["context_classified_observation_receipt"][
+        "rls_policy_ids"
+    ].remove("pol_cf_09_update_lock")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(missing_lock_visibility))
+
+    widened_write_check = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in widened_write_check["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_09_update_lock"]["with_check_sql"] = policies[
+        "pol_cf_09_update_lock"
+    ]["using_sql"]
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(widened_write_check))
+
+    foreign_capability = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in foreign_capability["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_09_update_lock"]["using_sql"] = policies[
+        "pol_cf_09_update_lock"
+    ]["using_sql"].replace("'COORDINATOR'", "'RETENTION'")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(foreign_capability))
+
+    non_public = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in non_public["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_09_update_lock"]["roles"] = ["context_coordinator"]
     with pytest.raises(AssertionError):
         validate_renderer_semantics(reseal_contract(non_public))
 

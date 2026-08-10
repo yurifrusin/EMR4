@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 188,
+  "register_revision": 189,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8760,6 +8760,49 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/raisa-context-fabric-durability-behavior-failure-041-rejection-precedence-diagnosis.md",
           "docs/ariadne-agent-error-correction-register-revision-188.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0218",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-receipt-lock-rls-recovery",
+      "stage": "deterministic_verification",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-structural-contract",
+      "model": null,
+      "transport": "local_disposable_postgresql_behavior_harness",
+      "attempt_id": "34bd47975bfc0ec2049dc7a9",
+      "origin": "repository",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "reasoning_level": "high",
+      "observed_error": "Behavior attempt 042 reached BTR-I03 and PostgreSQL returned CF004 at apply_durability_transition_v1 line 210. The ordinary replay read found one classified observation receipt, but the subsequent FOR UPDATE lock treated it as absent because the forced-RLS receipt relation had SELECT and INSERT policies without the lock-only UPDATE policy required by PostgreSQL row-lock semantics.",
+      "expected_invariant": "Every typed coordinator row lock over a forced-RLS append-only relation must have exact practice-and-source-scoped lock visibility while its WITH CHECK predicate remains false and direct table DML remains empty.",
+      "detection_method": "The repaired harness preserved SQLSTATE and function line; deterministic mapping bound line 210 to the missing-row exception after lock_receipt. Static body and structural reconciliation proved the preceding receipt_set read, exact FOR UPDATE node, existing SELECT visibility and missing UPDATE lock policy without another container run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-042.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-042.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-receipt-lock-rls-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-189.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "repository.forced_rls_lock_policy_missing",
+      "causal_claim_level": "observation_only",
+      "related_incident_ids": [],
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Add pol_cf_09_update_lock for exact COORDINATOR session-binding visibility with an identical WITH CHECK ending AND FALSE, retain empty coordinator direct-table DML, and regenerate every sealed descendant before another disposable behavior attempt.",
+        "prevention_control": "For every LOCK_EXACT node over a forced-RLS relation, structural validation must require a matching least-capability UPDATE visibility policy whose WITH CHECK is the same bound predicate followed by AND FALSE unless mutation is explicitly authorised.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/raisa-provider-free-unmounted-durability-migration-transaction-receipt-lock-rls-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-189.md"
         ]
       },
       "status": "corrected"

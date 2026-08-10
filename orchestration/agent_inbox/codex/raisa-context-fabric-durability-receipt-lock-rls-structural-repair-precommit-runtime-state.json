@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_bounded_receipt_lock_rls_structural_parent_and_aer_0218_before_descendant_rebind",
+  "source_evidence": {
+    "live_handover_current_baton": "Attempt 042 diagnosis is committed at dd55e739c8e6696129894b88fe188d8cc64cd2d9. The next closed-plan action is the canonical structural repair before any body, SQL, parse or behavior descendant is regenerated.",
+    "current_authority_allocation": "GPT Sol owns the bounded provider-free repository repair and task-branch integration. No external worker, provider, product runtime, deployment, release, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "The structural parent adds only pol_cf_09_update_lock for exact COORDINATOR session binding with identical WITH CHECK ending AND FALSE. Coordinator direct-table DML remains empty. Contract seal is sha256:18fb00ff02820c31b4fcab4de096393cbea49e0a37ebb28d65c5eb2d6f154cfd; 21 structural tests plus the complete register suite and Ruff pass.",
+    "protected_evidence_boundaries": "Immutable failure 042 and diagnosis remain committed. Mutable behavior evidence remains unstaged at exact SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. The structural change opens no mutation, raw evidence, branding, patient, clinical, product, credential, provider, application/API/Diary, watcher/feed, deployment, release or Pages surface.",
+    "git_refs_and_worktree": "Precommit task HEAD is exact dd55e739c8e6696129894b88fe188d8cc64cd2d9. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Staging is explicit-path only and excludes docs/branding, mutable behavior evidence and unrelated untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["The canonical structural contract, exact schema, mutation tests, threat delta and AER-0218 are present and verified."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Independent exact-HEAD veto remains deferred until all sealed descendants are regenerated and behavior is rebound."]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
