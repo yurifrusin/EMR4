@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_no_argument_provider_free_networkless_tmpfs_disposable_postgresql_exact_parse_catalogue_reproduction_for_the_outbox_select_policy_descendant_then_route_immutable_evidence_restore_both_protected_mutable_parse_files_and_verify_exact_owned_container_absence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "One exact disposable reproduction is permitted for contract sha256:f74edcc816fb5794272352a482c1ae699f1dce822d301d86cb56ad6831cc2d8f. It binds all fifteen characterized catalogue digests; only policies changed from the admission-lock generation, to sha256:32f7416e38351c706d93ac235d8a1f19f4d67a3d691a86a17e8bb3032a72e4c0 with exact policy count 47. It must prove rollback, exact catalogue match and exact owned-container cleanup.",
+    "current_authority_allocation": "GPT Sol owns this fixed no-argument local harness invocation, immutable evidence routing and cleanup verification. No model, provider, product consumer or operational database is assigned.",
+    "git_refs_and_worktree": "Task HEAD remains exact 497a4d1fe5b58fa4bcc03747abb3d389c3b51899. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exact-bound candidate files remain unstaged and every unrelated untracked file remains preserved.",
+    "live_handover_current_baton": "Characterization attempt 5f15d3b6444fa2b76d3a432c produced immutable SHA-256 e053ac337a7b6db258b94bd56d0d55a0bd7c7ea42e428899bd566b154ba6c724, proved only the policy digest changed, and cleaned exact container a786d6cb144400cd9668734dac91f749e31bb623e9a120ffdbfccb5d572c2ed1. The protected generic characterization was restored at SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536.",
+    "protected_evidence_boundaries": "Mutable exact pass SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and mutable characterization SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536 are backed up and must both be restored. Mutable behavior pass remains 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Only the newly created exact owned container may be touched. No unrelated container enumeration, applied migration, persistent or operational database, credentials, external network/provider, product/patient data, watcher, application wiring, deployment, release, Pages or protected-ref action is open."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

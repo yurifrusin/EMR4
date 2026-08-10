@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_the_outbox_select_parse_catalogue_characterization_and_exact_reproduction_without_staging_protected_mutable_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Accept only the immutable characterization SHA-256 e053ac337a7b6db258b94bd56d0d55a0bd7c7ea42e428899bd566b154ba6c724 and exact pass SHA-256 b0ce639981a5822e9e66ebbb81cab74009b3ebe368f3d9e6efd75cfd32453386 for inert SQL sha256:265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a. Only the policies digest changed and both owned containers are absent.",
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance and explicit-path task-branch commit. No model, provider, product consumer, operational database or protected integrator is assigned.",
+    "git_refs_and_worktree": "Task HEAD remains exact 497a4d1fe5b58fa4bcc03747abb3d389c3b51899. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the parse contract/schema/harness/tests/note, two immutable evidence files and exact receipts may be staged.",
+    "live_handover_current_baton": "The fresh outbox-select parse/catalogue pair passes. The next deterministic descendant is behavior-parent rebind and result-kind admission hardening; another behavior execution remains closed pending fresh independent veto.",
+    "protected_evidence_boundaries": "Protected mutable characterization SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536, exact parse pass SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and behavior pass SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b remain restored and must not be staged. No database, provider, product, patient, application/API/Diary, deployment, Pages, release or protected-ref action is open."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

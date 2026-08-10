@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_no_argument_provider_free_networkless_tmpfs_disposable_postgresql_parse_catalogue_characterization_for_the_outbox_select_policy_descendant_then_route_immutable_evidence_restore_both_protected_mutable_parse_files_and_verify_exact_owned_container_absence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "One non-accepting disposable characterization is permitted for inert SQL sha256:265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a, 1,436,481 bytes and 423 statements. Candidate contract sha256:8dea0bebfe6644975b4eaf5b6e5b9095f66778de3d8d0f4e2a726f389afa7163 is characterization_only with no expected catalogue digests and must clean its exact owned container.",
+    "current_authority_allocation": "GPT Sol owns this fixed no-argument local harness invocation, evidence routing and cleanup verification. No model, provider, product consumer or operational database is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exact 497a4d1fe5b58fa4bcc03747abb3d389c3b51899. Protected local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Candidate parse files remain unstaged and every unrelated untracked file remains preserved.",
+    "live_handover_current_baton": "Structural, body and inert descendants are committed. The next closed descendant is one fresh outbox-policy parse/catalogue characterization followed, only after exact digest resealing, by one fresh exact reproduction.",
+    "protected_evidence_boundaries": "Before execution, mutable characterization SHA-256 is 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536 and mutable exact pass is 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec; both have exact backups under C:/Users/sarashera/AppData/Local/Temp/emr4-parse-outbox-20260808-001. Mutable behavior pass remains 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Only the newly created exact owned container may be touched. No unrelated container enumeration, applied migration, persistent or operational database, credentials, external network/provider, product/patient data, watcher, application wiring, deployment, release, Pages or protected-ref action is open."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
