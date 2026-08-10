@@ -2,7 +2,7 @@
 
 Date: 2026-08-10
 
-Status: exact reproduction passed; independent acceptance pending
+Status: exact reproduction independently accepted
 
 The independently accepted parent recovery at source commit
 `c8ab7602e16e24453dbf909597b4f702a2388416` regenerates the inert durability

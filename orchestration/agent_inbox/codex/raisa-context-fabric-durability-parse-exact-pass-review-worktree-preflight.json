@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r153",
+  "branch": "codex/review-context-fabric-parse-exact-pass-ebcd813b",
+  "head": "ebcd813b22db6f8da49af5aa44652d047a323b8c",
+  "expected_head": "ebcd813b22db6f8da49af5aa44652d047a323b8c",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-parse-exact-pass-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
