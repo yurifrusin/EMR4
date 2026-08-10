@@ -139,29 +139,38 @@ inert DDL lowering also passes at exact independently reviewed source HEAD
 `46e16622471a192353cb82a33acf301dc2cfb7aa`: one byte-stable PostgreSQL-16
 artifact statically closes the exact catalogue, trigger, owner and privilege
 inventory without execution. The disposable local PostgreSQL-16 parse-and-
-catalogue rehearsal now passes, and its next provider-free database-backed
-behavior/transaction experiment is completely frozen at exact independently
-reviewed planning source `07e8750548ed69aba5a19f693a72397121a340e5` as
-twenty serial authored-synthetic entry-point, trigger, RLS, idempotency and
-rollback scenarios. Its fixed harness, evidence schema and hostile tests are a
-runtime-closed implementation candidate. First-effective-boundary tracing
-corrected two unreachable trigger drafts without adding privilege: `BTR-T02`
-now binds the immediate committed-event immutability `CF601`, and `BTR-T03`
-uses the producer-reachable committed-event update guard rather than forbidden
-direct Fabric DML. The disposable cluster uses passwordless local peer
-authentication, rejected host authentication and Unix-socket-only access.
-Fifteen fail-closed behavior attempts subsequently exposed bounded harness and
-source defects without admitting a scenario. Attempt 015 finally localized
-`BTR-E01` / `22P02` to positional assignment of a complete row projection whose
-field order differed from its physical table composite. The source-wide
-correction and renderer invariant pass, and the corrected 1,404,420-byte,
-412-statement artifact now passes a newly rebound PostgreSQL-16 parse/catalogue
-proof at exact independently reviewed evidence HEAD
-`2f0047cd90a8448ec4e738483a7237fbf2860bcb`, reproducing all fifteen exact
-catalogue digests with complete exact-ID cleanup. The next step is a separate
-behavior-contract rebind and fresh exact-HEAD veto before attempt 016. Applied
-migration, application behavior, operational database/source access and
-runtime remain closed.
+catalogue rehearsal passes, and the subsequent provider-free database-backed
+behavior/transaction sequence is now closed successfully. Its frozen twenty
+authored-synthetic scenarios cover selected entry-point, trigger, RLS,
+idempotency and rollback behavior in one serial, networkless, mountless,
+portless and tmpfs-backed disposable container. Attempts 001-047 remain
+immutable fail-closed evidence of the bounded source, renderer, PostgreSQL-
+representability, evidence, harness and fixture defects found and repaired
+without weakening the scenario contract. Attempt 048 then passed all twenty
+scenarios in exact order at independently reviewed evidence source
+`f3383dc4099b4ee590014bea62dddb146f5d2a16`: six entry-point, four idempotency,
+three RLS/privilege, four trigger and three rollback. It binds the 424-statement
+inert artifact SHA-256
+`dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7` and
+immutable evidence SHA-256
+`26c6dec802e46dec055c1c42aecc97df9942180014fc9fa410f96e1305798200`.
+Cross-transaction replay is stable without volatile timestamp identity, and
+the outer-rollback scenario proves fixed `P0001` plus complete coordinator
+rollback readback. Exact container cleanup and absence passed. Fresh Gemini
+3.6 Flash/high review passed 498/498 focused checks with no P0-P2 finding.
+This proves the selected serial behavior slice only; concurrency, crash
+restart, unknown-commit recovery, key rotation, retention execution, purge,
+performance and operational availability remain unproved. Applied migration,
+application behavior, operational database/source access and runtime remain
+closed.
+
+The next recommended tranche is a bounded read-only architectural-health and
+conformance pulse: reconstruct the as-built system, trace critical authority
+and transaction paths, distinguish current from accepted-unmounted, future and
+retired state, assess verification topology and propose repository-owned
+fitness functions. It produces findings only, not a broad refactor. Yuri
+requested a pause after the database-durability closeout, so this pulse does
+not begin in the closing tranche.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -175,9 +184,10 @@ action budgets, generation revocation, inert Context Fabric data and an
 externally owned kill switch. Reasoning, information, egress and action budgets
 remain independent. The gate is deliberately placed after the current
 provider-free durability work and before real-product-read or executable Bureau
-runtime, so it does not delay the networkless database-only rehearsal and
-cannot be mistaken for current provider, product-data, tool or command
-authority.
+runtime. The prerequisite serial database-only rehearsal now passes; the
+read-only architectural-health pulse is the recommended intervening tranche.
+Neither result can be mistaken for current provider, product-data, tool or
+command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -573,17 +583,21 @@ generation rehearsal. The architecture-only provider-free default-off
   1,404,420-byte artifact installs atomically, the fixed failed copy rolls back
   without surviving Fabric objects or roles, all fifteen value-bearing
   catalogue digests match, and exact-ID cleanup proves absence. This proves
-  server admission and metadata shape only. The provider-free database-backed authored-synthetic behavior/
-  transaction rehearsal plan now also passes at exact independently reviewed
-  planning source `07e8750548ed69aba5a19f693a72397121a340e5`. Its exact
-  twenty-scenario population covers selected entry-point, trigger, RLS,
-  idempotency and outer-rollback paths with fixed principals, fixtures,
-  SQLSTATEs, readback and container containment. It proves planning
-  completeness, not database behavior. Attempts 001-015 remain immutable
-  fail-closed evidence; the corrected artifact must now be rebound into the
-  behavior contract and pass a fresh exact-HEAD veto before attempt 016.
-  Applied migration, application wiring, operational database/source access
-  and every real-product or clinical descendant remain closed.
+  server admission and metadata shape only. The subsequent provider-free
+  database-backed authored-synthetic behavior/transaction rehearsal now also
+  passes at exact independently reviewed evidence source
+  `f3383dc4099b4ee590014bea62dddb146f5d2a16`. Attempt 048 passes all twenty
+  frozen scenarios: six entry-point, four idempotency, three RLS/privilege,
+  four trigger and three rollback. It proves the selected serial behavior
+  slice, including stable cross-transaction replay and full outer-transaction
+  rollback readback, with exact disposable-container cleanup. Attempts 001-047
+  remain immutable fail-closed evidence. It does not prove concurrency, crash
+  restart, unknown-commit recovery, key rotation, retention, purge, performance
+  or operational availability. Applied migration, application wiring,
+  operational database/source access and every real-product or clinical
+  descendant remain closed. A bounded read-only architectural-health and
+  conformance pulse is next after Yuri's requested closeout pause, followed by
+  the Agent Execution Surface and Containment Gate.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is

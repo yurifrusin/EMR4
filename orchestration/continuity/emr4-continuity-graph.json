@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 233,
+  "graph_revision": 234,
   "harvests": [],
   "nodes": [
     {
@@ -14518,6 +14518,119 @@
         "Concurrency, key rotation, retention execution and unknown-commit recovery remain later finite gates.",
         "Applied migration, operational database/outbox/feed/watcher/listener/source access, persistence and credentials remain closed.",
         "Product reads, providers, routes, commands, deployment, production, release, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal",
+      "title": "Disposable PostgreSQL durability behavior/transaction rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-08T00:00:00Z",
+      "updated_at": "2026-08-08T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f3383dc4099b4ee590014bea62dddb146f5d2a16",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted runtime used exactly one owned networkless tmpfs-only local PostgreSQL 16 container with opaque authored-synthetic fixtures.",
+          "Twenty selected serial entry-point, idempotency, RLS, trigger and outer-rollback scenarios passed; this is not a claim of infallibility or concurrent/operational behavior.",
+          "No applied migration, operational database/source, watcher, product read, provider, command, deployment or protected capability is opened.",
+          "Yuri explicitly requested a pause after this closeout; the next read-only architectural-health review has not begun."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-disposable-postgresql-durability-behavior-transaction-rehearsal",
+          "source": "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the first complete twenty-scenario serial database behavior pass with exact cleanup and no operational authority."
+        }
+      ],
+      "claim_scope": [
+        "Immutable attempt-048 evidence passes 20/20 frozen scenarios in exact contract order and category counts 6/4/3/4/3.",
+        "Cross-transaction replay and fixed injected outer rollback pass with bounded readback.",
+        "Fresh r182 independently passes 498/498 focused tests with no P0-P2 finding and clean unchanged postflight.",
+        "The exact owned container is removed and absence verified; no call follows success.",
+        "Concurrency, restart, unknown commit, rotation, retention, applied migration and operational/product boundaries remain unproved and closed."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json",
+            "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json",
+            "tests/test_raisa_context_fabric_durability_behavior_attempt_048_pass.py",
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md"
+          ],
+          "note": "The selected synthetic update-confirm projection thread is transactionally server-proven without opening the product command or event runtime."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json",
+            "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json",
+            "tests/test_raisa_context_fabric_durability_behavior_attempt_048_pass.py",
+            "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md"
+          ],
+          "note": "Fixtures remain opaque and authored-synthetic; no patient identity, appointment reason or clinical value is admitted."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-204.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-attempt-048-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_context_fabric_durability_behavior_attempt_048_pass.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_continuity_engine.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Patient, clinical, product-derived, financial, protected and historical-PHI data remain closed.",
+        "Concurrency, crash restart, unknown-commit recovery, key rotation, retention execution, purge, performance and monitoring remain later finite gates.",
+        "Applied migration, operational database/outbox/feed/watcher/listener/source access, persistence and credentials remain closed.",
+        "Application/runtime wiring, product reads, providers, tools, commands, deployment, production, release, Pages and protected refs remain closed."
       ]
     }
   ],

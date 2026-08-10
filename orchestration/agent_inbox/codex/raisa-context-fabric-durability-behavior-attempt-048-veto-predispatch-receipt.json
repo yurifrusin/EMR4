@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_final_veto_of_attempt_048_immutable_pass_in_r182",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "Exactly one attempt 048 passed and is preserved immutably at SHA-256 26c6dec802e46dec055c1c42aecc97df9942180014fc9fa410f96e1305798200. The mutable behavior alias is restored to SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and no call followed success.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only exact-head final evidence-veto authority only in clean r182. GPT Sol retains evidence acceptance, closeout, task-branch push and baton authority. No fallback is allowed.",
+    "active_plan_and_acceptance": "Candidate f3383dc4099b4ee590014bea62dddb146f5d2a16 binds the first complete twenty-scenario behavior pass, exact parent hashes, cleanup, whole-document schema validation and AER-0238 correction. No database rerun is planned or permitted.",
+    "protected_evidence_boundaries": "Reviewer access is limited to tracked allowlisted exact-head files. Mutable aliases, holdouts, historical Diary data, docs/branding, patient/clinical/product data, Docker/database, other providers, edits, deployment, Pages and protected refs are closed.",
+    "git_refs_and_worktree": "Clean r182 is exact f3383dc4099b4ee590014bea62dddb146f5d2a16 on codex/review-context-fabric-behavior-pass-f3383dc4. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary tracked state matches candidate; all untracked paths remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

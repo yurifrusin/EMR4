@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 215,
+  "map_revision": 216,
   "updated_at": "2026-08-08T00:00:00Z",
-  "source_graph_revision": 233,
-  "orientation_statement": "EMR4 is at Continuity 233 / Compass 215. The first provider-free database-backed durability behavior/transaction experiment is frozen as twenty exact synthetic scenarios at a fresh reviewed planning HEAD. Runtime implementation is paused at Yuri's request; every operational and product boundary remains closed.",
+  "source_graph_revision": 234,
+  "orientation_statement": "EMR4 is at Continuity 234 / Compass 216. The first provider-free Context Fabric database behavior spine passes all twenty exact serial synthetic scenarios with immutable evidence and exact cleanup. Work is paused at Yuri's requested closeout before a read-only architectural-health pulse; operational and product boundaries remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1929,22 +1929,40 @@
         "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal",
+      "lineage_parent": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan",
+      "strategic_role": "Prove the first serial database behavior spine",
+      "outcome": "All twenty exact synthetic behavior/transaction scenarios pass with immutable evidence and exact cleanup.",
+      "evidence": [
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-204.md",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan",
-    "strategic_role": "Behavior experiment frozen; runtime implementation paused",
-    "why_now": "PostgreSQL already accepts the exact durability catalogue, so the next safe proof is now finite and implementation-ready.",
-    "outcome": "The exact twenty-scenario plan passes 124 planning tests and 79 AER tests under a fresh zero-finding independent veto.",
+    "node_id": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal",
+    "strategic_role": "Serial database durability accepted; closeout pause",
+    "why_now": "The frozen database behavior experiment has passed, so system-level architectural conformance can be reviewed before executable Bureau containment work.",
+    "outcome": "Attempt 048 passes 20/20 scenarios and fresh r182 passes 498/498 focused checks with exact cleanup.",
     "unlocks": [
-      "After the requested pause, implement the fixed-path provider-free harness and evidence schema.",
-      "Obtain a fresh exact-HEAD implementation veto before one owned disposable PostgreSQL run."
+      "After Yuri's requested pause, perform the bounded read-only architecture-health and conformance review.",
+      "Use its findings to inform the already planned Agent Execution Surface and Containment Gate."
     ],
     "does_not_solve": [
-      "Function, trigger, RLS, idempotency or rollback behavior until the planned runtime passes.",
-      "Concurrency, key rotation, retention execution or unknown-commit recovery.",
-      "Applied migration, database/outbox/feed/watcher/listener/source access, credentials or persistence.",
-      "Application/runtime wiring, product reads, patient/product data, providers, routes or commands.",
+      "Concurrent behavior, crash restart, unknown-commit recovery, key rotation, retention execution, purge, performance or monitoring.",
+      "Applied migration, database/outbox/feed/watcher/listener/source access, credentials or operational persistence.",
+      "Application/runtime wiring, product reads, patient/product data, providers, tools, routes or commands.",
       "Deployment, production, release, Pages or protected-ref movement."
     ],
     "evidence": [
@@ -1952,12 +1970,13 @@
       "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md",
       "docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md",
       "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.schema.json",
-      "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json",
-      "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-correction-review-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-92.md",
-      "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md"
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+      "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-204.md",
+      "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md"
     ]
   },
   "decision_horizon": [
@@ -2053,9 +2072,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Exact durability structure, bodies, inert lowering and isolated PostgreSQL-16 catalogue admission are accepted.",
-        "The twenty-scenario serial behavior/transaction experiment is frozen and awaits its fixed harness after Yuri's requested pause.",
-        "Separately gate concurrency, rotation, retention, applied migration, application wiring, operational sources and product/patient data."
+        "Exact durability structure, bodies, inert lowering, isolated PostgreSQL catalogue admission and twenty-scenario serial behavior now pass.",
+        "Run the requested read-only architecture-health pulse before the Agent Execution Surface and Containment Gate.",
+        "Separately gate concurrency, restart, rotation, retention, applied migration, application wiring, operational sources and product/patient data."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -2224,7 +2243,14 @@
         "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-correction-review-receipt.json",
         "docs/ariadne-agent-error-correction-register-revision-92.md",
         "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md",
-        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md"
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-204.md",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md"
       ]
     },
     {
@@ -3069,6 +3095,7 @@
     }
   ],
   "map_limits": [
+    "Behavior/transaction acceptance proves the selected serial database slice only; it does not prove concurrency, restart, unknown-commit recovery, rotation, retention, applied migration or product runtime.",
     "Behavior/transaction planning acceptance proves experiment completeness only; it does not prove PostgreSQL function, trigger, RLS, idempotency or rollback behavior and opens no applied migration or product runtime.",
     "Disposable PostgreSQL catalogue acceptance proves exact parse, atomic installation/rollback and metadata shape only; it does not prove function, trigger or RLS behavior, concurrency, applied migration, application runtime, operational source access, persistence, command or deployment safety.",
     "Inert DDL acceptance proves deterministic closed-subset PostgreSQL-16 text, not server parse, catalogue creation, trigger/RLS behavior, an applied migration, database/source access, persistence, command, runtime or deployment safety.",

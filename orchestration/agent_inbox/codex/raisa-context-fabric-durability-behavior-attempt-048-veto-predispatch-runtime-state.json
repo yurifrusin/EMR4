@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_final_veto_of_attempt_048_immutable_pass_in_r182",
+  "source_evidence": {
+    "live_handover_current_baton": "Exactly one attempt 048 passed and is preserved immutably at SHA-256 26c6dec802e46dec055c1c42aecc97df9942180014fc9fa410f96e1305798200. The mutable behavior alias is restored to SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and no call followed success.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only exact-head final evidence-veto authority only in clean r182. GPT Sol retains evidence acceptance, closeout, task-branch push and baton authority. No fallback is allowed.",
+    "active_plan_and_acceptance": "Candidate f3383dc4099b4ee590014bea62dddb146f5d2a16 binds the first complete twenty-scenario behavior pass, exact parent hashes, cleanup, whole-document schema validation and AER-0238 correction. No database rerun is planned or permitted.",
+    "protected_evidence_boundaries": "Reviewer access is limited to tracked allowlisted exact-head files. Mutable aliases, holdouts, historical Diary data, docs/branding, patient/clinical/product data, Docker/database, other providers, edits, deployment, Pages and protected refs are closed.",
+    "git_refs_and_worktree": "Clean r182 is exact f3383dc4099b4ee590014bea62dddb146f5d2a16 on codex/review-context-fabric-behavior-pass-f3383dc4. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary tracked state matches candidate; all untracked paths remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [{"agent_id": "orchestrator", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Exact candidate, immutable pass, schema recovery, aliases and clean r182 preflight verified."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Selected exact gemini-3.6-flash-high in a fresh project."]}
+  ],
+  "worker_slots": [{"resource_id": "gemini-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-attempt-048-review-worktree-preflight.json"],
+  "assigned_agent_ids": []
+}
