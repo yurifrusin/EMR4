@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_codex_ariadne_bernie_davida_parallel_seam_then_notify_and_pause",
+  "source_evidence": {
+    "live_handover_current_baton": "Closeout commit a4b8667baf32f8f82ccb705416cb87fa4605cbc2 advances Continuity to revision 234 and Compass to map revision 216, records attempt 048 as the accepted terminal 20/20 serial durability behavior result and records Yuri's requested pause.",
+    "current_authority_allocation": "GPT Sol may push only the existing non-protected task branch and send the required no-PHI closeout notification. No next tranche, protected integration, provider, runtime, deployment or Pages work is authorised by this continuation event.",
+    "active_plan_and_acceptance": "The closeout commit contains the Sol acceptance, final Gemini 3.6 Flash/high review receipt, dual technical/lay mailbox summary, live AGENTS and implementation-plan handoff, continuity updater and passing continuity tests. The independently reviewed evidence source remains f3383dc4099b4ee590014bea62dddb146f5d2a16.",
+    "protected_evidence_boundaries": "Mutable behavior alias SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and protected parse alias SHA-256 values 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536 remain exact. All unrelated untracked files, especially docs/branding/, remain preserved and excluded. No database attempt, applied migration, operational source, real data, provider, command, deployment, release, Pages or protected-ref change is opened.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at exact closeout commit a4b8667baf32f8f82ccb705416cb87fa4605cbc2. Protected local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task branch remains 324d37f086a51a60b260d02b38772594b6c205df before the authorised non-force push."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Closeout commit a4b8667baf32f8f82ccb705416cb87fa4605cbc2 succeeded after explicit-path staging and passing checks."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No worker is assigned for the requested closeout pause."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Final exact-evidence veto completed successfully and is included in the closeout commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
