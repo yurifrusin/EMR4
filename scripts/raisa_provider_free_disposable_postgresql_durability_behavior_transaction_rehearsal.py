@@ -57,7 +57,7 @@ EXPECTED_CONTRACT_PATH = (
     "behavior-transaction-rehearsal-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:ee44dbf39c2458fdabc94768e3c3e8cdcc0372c10ae7f0a35709b55301c5d596"
+    "sha256:897e07895116eecedaf8a2506ad10f9f5e5207b7e78e68ab79afb09347018a57"
 )
 PASS_RESULT = (
     "raisa_provider_free_disposable_postgresql_durability_"
@@ -329,7 +329,7 @@ ALLOWED_DIGEST_CHANGES: dict[str, set[str]] = {
 STABLE_REASONS = {
     None: "accepted",
     "CF101": "producer_claim_ineligible",
-    "CF201": "admission_source_missing",
+    "CF201": "admission_source_mismatch",
     "CF004": "required_row_missing_or_ambiguous",
     "CF601": "immutable_member_rejected",
     "CF603": "temporal_bijection_rejected",
@@ -439,6 +439,72 @@ def _canonical_bytes(path: Path) -> bytes:
 
 def _sha256(raw: bytes) -> str:
     return "sha256:" + hashlib.sha256(raw).hexdigest()
+
+
+def _bounded_failure_evidence(failure: parent.RehearsalFailure) -> dict[str, Any]:
+    detail = failure.detail
+    detail_bytes = (
+        json.dumps(detail, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        if isinstance(detail, dict)
+        else str(detail).encode("utf-8")
+    )
+    failure_evidence: dict[str, Any] = {
+        "stage": failure.stage,
+        "code": failure.code,
+        "detail_digest": _sha256(detail_bytes),
+    }
+    if isinstance(detail, dict):
+        for name in (
+            "sqlstate",
+            "coordinate_status",
+            "relation",
+            "column",
+            "query_id",
+            "scenario_id",
+            "function_id",
+            "expected_sqlstate",
+        ):
+            if isinstance(detail.get(name), str):
+                failure_evidence[name] = detail[name]
+        failed_probe_indexes = detail.get("failed_probe_indexes")
+        if (
+            isinstance(failed_probe_indexes, list)
+            and 1 <= len(failed_probe_indexes) <= 16
+            and all(
+                isinstance(value, int)
+                and not isinstance(value, bool)
+                and 1 <= value <= 16
+                for value in failed_probe_indexes
+            )
+            and len(set(failed_probe_indexes)) == len(failed_probe_indexes)
+        ):
+            failure_evidence["failed_probe_indexes"] = failed_probe_indexes
+        if (
+            isinstance(detail.get("function_line"), int)
+            and not isinstance(detail.get("function_line"), bool)
+            and 1 <= detail["function_line"] <= 100000
+        ):
+            failure_evidence["function_line"] = detail["function_line"]
+        observed_sqlstates = detail.get("observed_sqlstates")
+        if (
+            isinstance(observed_sqlstates, list)
+            and len(observed_sqlstates) <= 4
+            and all(
+                isinstance(value, str) and SQLSTATE.fullmatch(value)
+                for value in observed_sqlstates
+            )
+            and len(set(observed_sqlstates)) == len(observed_sqlstates)
+        ):
+            failure_evidence["observed_sqlstates"] = observed_sqlstates
+        if (
+            isinstance(detail.get("psql_exit"), int)
+            and not isinstance(detail.get("psql_exit"), bool)
+            and 0 <= detail["psql_exit"] <= 255
+        ):
+            failure_evidence["psql_exit"] = detail["psql_exit"]
+    elif SQLSTATE.fullmatch(str(detail)):
+        failure_evidence["sqlstate"] = str(detail)
+    return failure_evidence
 
 
 def _json(path: Path) -> dict[str, Any]:
@@ -2217,7 +2283,15 @@ def _bounded_outcome(
             transport["result_kind"] = result_kind
         return None, transport
     if result.returncode == 0 or observed != [expected_sqlstate]:
-        raise BehaviorFailure("scenario", "sqlstate_mismatch", expected_sqlstate)
+        detail: dict[str, Any] = {
+            "scenario_id": scenario_id,
+            "expected_sqlstate": expected_sqlstate,
+            "observed_sqlstates": observed,
+            "psql_exit": result.returncode,
+        }
+        if len(observed) == 1:
+            detail["sqlstate"] = observed[0]
+        raise BehaviorFailure("scenario", "sqlstate_mismatch", detail)
     result_kind = _transition_result_from_stdout(result, scenario_id)
     transport = {
         "psql_exit": result.returncode,
@@ -2649,51 +2723,7 @@ def run_rehearsal(*, runner: Runner = parent._subprocess_runner) -> dict[str, An
         "claim_boundary": CLAIM_BOUNDARY,
     }
     if failure is not None:
-        detail = failure.detail
-        detail_bytes = (
-            json.dumps(detail, sort_keys=True, separators=(",", ":")).encode("utf-8")
-            if isinstance(detail, dict)
-            else str(detail).encode("utf-8")
-        )
-        failure_evidence = {
-            "stage": failure.stage,
-            "code": failure.code,
-            "detail_digest": _sha256(detail_bytes),
-        }
-        if isinstance(detail, dict):
-            for name in (
-                "sqlstate",
-                "coordinate_status",
-                "relation",
-                "column",
-                "query_id",
-                "scenario_id",
-                "function_id",
-            ):
-                if isinstance(detail.get(name), str):
-                    failure_evidence[name] = detail[name]
-            failed_probe_indexes = detail.get("failed_probe_indexes")
-            if (
-                isinstance(failed_probe_indexes, list)
-                and 1 <= len(failed_probe_indexes) <= 16
-                and all(
-                    isinstance(value, int)
-                    and not isinstance(value, bool)
-                    and 1 <= value <= 16
-                    for value in failed_probe_indexes
-                )
-                and len(set(failed_probe_indexes)) == len(failed_probe_indexes)
-            ):
-                failure_evidence["failed_probe_indexes"] = failed_probe_indexes
-            if (
-                isinstance(detail.get("function_line"), int)
-                and not isinstance(detail.get("function_line"), bool)
-                and 1 <= detail["function_line"] <= 100000
-            ):
-                failure_evidence["function_line"] = detail["function_line"]
-        elif SQLSTATE.fullmatch(str(detail)):
-            failure_evidence["sqlstate"] = str(detail)
-        evidence["environment"]["failure"] = failure_evidence
+        evidence["environment"]["failure"] = _bounded_failure_evidence(failure)
     evidence["environment"]["elapsed_ms"] = int((time.monotonic() - started) * 1000)
     return evidence
 

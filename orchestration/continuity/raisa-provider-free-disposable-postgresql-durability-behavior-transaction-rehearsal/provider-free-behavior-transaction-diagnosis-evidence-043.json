@@ -1,0 +1,42 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_and_behavior_evidence_repair_only_no_database_body_product_provider_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "btr_e06_expected_failure_id": "F_CARDINALITY",
+    "btr_e06_expected_sqlstate": "CF004",
+    "database_body_contract_unchanged": true,
+    "fresh_exact_head_veto_before_characterization": true,
+    "inert_sql_and_parse_evidence_unchanged": true,
+    "next_run_must_be_single_owned_disposable_attempt": true,
+    "persist_scenario_and_expected_observed_sqlstates_on_future_mismatch": true,
+    "scenario_population_and_order_unchanged": true
+  },
+  "diagnosis": {
+    "actual_sqlstate_not_persisted_by_parent_harness": true,
+    "additional_container_runs": 0,
+    "behavior_contract_expected_failure_mismatch": true,
+    "database_body_defect_indicated": false,
+    "deterministic_observed_sqlstate_for_missing_row": "CF004",
+    "raw_postgresql_error_persisted": false,
+    "rendered_cf201_is_later_packet_to_present_source_digest_assertion": true,
+    "rendered_exact_source_select_maps_no_data_found_to_cf004": true,
+    "scenario_action_is_missing_exact_outbox_position": true,
+    "scenario_recovered_as_first_expected_cf201_case": true
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:00805d8b31ba445523a9a3e82581e07a4232873164ba49961ae5913f15617801",
+    "expected_sqlstate": "CF201",
+    "failure_code": "sqlstate_mismatch",
+    "internal_attempt_id": "ab47183c26c84f1d61209e49",
+    "run_sequence": 43,
+    "scenario_id": "BTR-E06"
+  },
+  "parent_sources": {
+    "behavior_contract_sha256": "sha256:237b9cc14757d09c790bfc3668962f09a7507b7ce31c3c6f481e4d0b305543e1",
+    "commit": "656da9851f113c7ab639fc7634307c7be4a32cd6",
+    "harness_sha256": "sha256:872dc98c31f0ae1fd92b2fd504c1459b5d0e196aca164a3918d7c9d6072afdd6",
+    "inert_sql_sha256": "sha256:bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-043-missing-source-sqlstate-diagnosis.v1",
+  "status": "behavior_expectation_to_rendered_missing_source_sqlstate_mismatch_proven"
+}

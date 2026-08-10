@@ -111,6 +111,14 @@
               "maximum": 100000
             },
             "sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"},
+            "expected_sqlstate": {"type": "string", "pattern": "^[0-9A-Z]{5}$"},
+            "observed_sqlstates": {
+              "type": "array",
+              "maxItems": 4,
+              "uniqueItems": true,
+              "items": {"type": "string", "pattern": "^[0-9A-Z]{5}$"}
+            },
+            "psql_exit": {"type": "integer", "minimum": 0, "maximum": 255},
             "coordinate_status": {
               "enum": [
                 "missing",

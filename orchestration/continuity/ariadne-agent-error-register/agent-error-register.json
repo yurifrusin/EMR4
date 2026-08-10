@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 193,
+  "register_revision": 194,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -9040,6 +9040,125 @@
         "evidence_paths": [
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-receipt-lock-behavior-rebind-clean-checkout-repair-review-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-193.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0225",
+      "attempt_id": "raisa-context-fabric-behavior-attempt-043-evidence-backup-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_filesystem",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "The protected mutable-evidence backup must use a valid PowerShell directory-creation parameter, stop on the first error and copy only after the unique validated temporary directory exists.",
+      "observed_error": "The first attempt used New-Item -LiteralPath, which is unsupported by the available PowerShell New-Item command. Directory creation failed and later statements emitted dependent errors; no directory, backup, Git action or database action occurred.",
+      "detection_method": "PowerShell returned ParameterBindingException before the backup existed. The corrected fresh command set ErrorActionPreference to Stop, used New-Item -Path on a unique path validated beneath the system temporary directory, and proved source and backup SHA-256 were identical before attempt 043.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-194.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_new_item_literalpath_parameter_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Create the unique backup directory with supported New-Item -Path under ErrorActionPreference Stop, validate the resolved path is beneath the temporary root, then copy and compare the exact SHA-256 before any runtime action.",
+        "prevention_control": "For PowerShell filesystem setup, validate cmdlet parameters and enable stop-on-error before dependent statements; never continue to copy or hash after directory creation fails.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-194.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0226",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-043",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_disposable_postgresql_16",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Every behavior scenario's expected failure ID and SQLSTATE must match the accepted typed body and rendered SQL path exercised by its exact fixture.",
+      "observed_error": "Immutable attempt 043 reached BTR-E06 and failed as sqlstate_mismatch because the behavior contract expected F_ADMISSION_SOURCE/CF201 for an absent outbox position, while the accepted exact-row lowering deterministically raises F_CARDINALITY/CF004 before the later present-row membership-digest assertion.",
+      "detection_method": "The immutable failure digest equals SHA-256 of the expected string CF201. Static reconstruction identified BTR-E06 as the first CF201 scenario, and both Sol and an independent read-only validator proved the rendered SELECT INTO STRICT maps NO_DATA_FOUND to CF004 before the CF201 digest assertion. Exact container cleanup and absence were verified.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-043.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-043.json",
+        "docs/raisa-context-fabric-durability-behavior-failure-043-missing-source-sqlstate-diagnosis.md",
+        "docs/raisa-context-fabric-durability-behavior-failure-043-correction.md",
+        "docs/ariadne-agent-error-correction-register-revision-194.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "repository.behavior_missing_source_expected_sqlstate_mismatched_body",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Align only BTR-E06 with F_CARDINALITY/CF004, preserve its population, order, fixture, readbacks and effects, retain the database body and parse parents byte-identically, and add bounded expected-versus-observed SQLSTATE telemetry before a fresh veto and single new attempt.",
+        "prevention_control": "For every negative behavior scenario, mechanically trace the exact fixture through the typed body and rendered SQL failure order; bind both failure ID and SQLSTATE before freezing the scenario seal.",
+        "evidence_paths": [
+          "docs/raisa-context-fabric-durability-behavior-failure-043-correction.md",
+          "scripts/raisa_context_fabric_durability_behavior_failure_043_missing_source_sqlstate_diagnosis.py",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_043_missing_source_sqlstate_diagnosis.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0227",
+      "attempt_id": "raisa-context-fabric-durability-behavior-failure-043-diagnosis-generation-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_repository_diagnosis",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A deterministic diagnosis generator must bind its source slice to an actually present stable delimiter before attempting to emit evidence.",
+      "observed_error": "The first failure-043 diagnosis generation assumed the rendered function ended with the exact substring newline-END-semicolon-newline-dollar-dollar-semicolon. That delimiter was absent, so str.index raised ValueError before any diagnosis evidence was written.",
+      "detection_method": "The generator traceback named the missing substring and output path remained absent. The corrected fresh invocation bounds the admission function with the exact following apply_durability_transition_v1 CREATE FUNCTION declaration and emits deterministic evidence.",
+      "evidence_paths": [
+        "scripts/raisa_context_fabric_durability_behavior_failure_043_missing_source_sqlstate_diagnosis.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-043.json",
+        "docs/ariadne-agent-error-correction-register-revision-194.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.diagnosis_rendered_function_end_delimiter_assumed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use the next exact rendered apply_durability_transition_v1 CREATE FUNCTION declaration as the stable admission-body boundary, regenerate once and prove byte-determinism with a focused test.",
+        "prevention_control": "Before hard-coding a generated-artifact delimiter, confirm it exists in the exact source commit; prefer a unique named successor declaration over formatting-sensitive punctuation sequences.",
+        "evidence_paths": [
+          "scripts/raisa_context_fabric_durability_behavior_failure_043_missing_source_sqlstate_diagnosis.py",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_043_missing_source_sqlstate_diagnosis.py",
+          "docs/ariadne-agent-error-correction-register-revision-194.md"
         ]
       },
       "status": "corrected"

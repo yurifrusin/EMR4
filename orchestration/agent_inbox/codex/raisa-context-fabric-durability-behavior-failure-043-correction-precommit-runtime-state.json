@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_bounded_behavior_attempt_043_missing_source_sqlstate_contract_correction_for_fresh_exact_head_veto_review",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant remains the owned disposable PostgreSQL behavior proof. Immutable attempt 043 failed at BTR-E06, exact-ID cleanup passed, and the protected mutable evidence alias was restored byte-exactly. The next bounded action is to commit only the diagnosed expectation correction and typed failure telemetry for a fresh exact-HEAD verifier veto; no new database attempt is authorised by this receipt.",
+    "current_authority_allocation": "Yuri's recorded standing programme authority permits uninterrupted movement through planned provider-free durability gates unless a genuine unplanned decision fork needs him. GPT Sol owns diagnosis, deterministic verification, exact-path staging and task-branch commit. The completed read-only Codex validator independently agreed with the correction. No worker, provider runtime, product, deployment, Pages or protected-ref authority is opened here.",
+    "active_plan_and_acceptance": "Attempt 043 failure evidence has SHA-256 00805d8b31ba445523a9a3e82581e07a4232873164ba49961ae5913f15617801 and deterministic diagnosis evidence has SHA-256 b30b84c9b1724fb4ac6a7bbb2c472c6ae23d572a9d9718b7a2459c0fbb3b8d0b. The accepted exact-row lowering proves absent source position BTR-E06 reaches F_CARDINALITY/CF004 before the later present-row membership-digest F_ADMISSION_SOURCE/CF201 assertion. The repair changes only that scenario pair, aligns plan/design prose, and adds bounded expected-versus-observed SQLSTATE telemetry. Canonical current behavior contract is sha256:897e07895116eecedaf8a2506ad10f9f5e5207b7e78e68ab79afb09347018a57 and scenario seal is e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb. Ruff passes; 105 focused behavior tests, 192 error-register tests and the exact CF004 renderer test pass. The accepted body, renderer, inert SQL, parse evidence, manifest and six parent receipts remain unchanged.",
+    "protected_evidence_boundaries": "The existing mutable behavior evidence alias remains untracked and byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and must not be staged. Immutable failure 043 and diagnosis 043 may be staged explicitly. docs/branding and every unrelated untracked file remain preserved and excluded. No Docker execution, operational database or credential, durable volume, watcher/feed, application/API/Diary wiring, patient/clinical/product data, provider/model call, external retrieval, command/write, deployment, production, release, Pages or protected-ref movement is authorised by this precommit action.",
+    "git_refs_and_worktree": "Primary worktree is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 656da9851f113c7ab639fc7634307c7be4a32cd6 with only the bounded correction paths modified or newly authored among tracked/intended files. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Staging must use explicit paths only and must exclude the mutable alias, docs/branding and all unrelated user-owned untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_failure_043_correction_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation transport is active or needed for this bounded correction commit."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected for this bounded correction commit."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active or needed for this bounded correction commit."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["A fresh Gemini 3.6 Flash/high exact-HEAD veto will be dispatched only after this candidate is committed and separately rehydrated."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the immutable failure, exact accepted lowering, current hashes, focused tests, protected mutable-evidence hash, task HEAD and protected refs before explicit-path staging."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["One read-only Codex validator independently traced BTR-E06 to F_CARDINALITY/CF004 and recommended the same narrow contract correction without editing the worktree."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

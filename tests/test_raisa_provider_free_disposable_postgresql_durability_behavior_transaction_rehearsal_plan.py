@@ -373,7 +373,7 @@ def test_rls_lock_visibility_rebind_preserves_twenty_scenarios_and_closure() -> 
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -403,7 +403,7 @@ def test_interval_construction_rebind_preserves_twenty_scenarios_and_closure() -
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -433,7 +433,7 @@ def test_uuid_minimum_rebind_preserves_twenty_scenarios_and_closure() -> None:
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -463,7 +463,7 @@ def test_json_key_set_order_rebind_preserves_twenty_scenarios_and_closure() -> N
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -495,7 +495,7 @@ def test_dml_name_ambiguity_rebind_preserves_twenty_scenarios_and_closure() -> N
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -527,7 +527,7 @@ def test_subtransaction_xmin_rebind_preserves_twenty_scenarios_and_closure() -> 
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -560,7 +560,7 @@ def test_support_execute_grant_rebind_preserves_twenty_scenarios_and_closure() -
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -595,7 +595,7 @@ def test_admission_receiver_binding_rls_rebind_preserves_scenarios_and_closure()
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -628,7 +628,7 @@ def test_input_namespace_rebind_preserves_scenarios_and_closed_runtime() -> None
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -666,7 +666,7 @@ def test_source_membership_fixture_recovery_preserves_scenarios_and_authority() 
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -699,7 +699,7 @@ def test_receipt_lock_parent_rebind_preserves_scenarios_and_authority() -> None:
         ensure_ascii=False,
     ).encode("utf-8")
     assert hashlib.sha256(canonical).hexdigest() == (
-        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9"
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -710,6 +710,29 @@ def test_scenario_population_is_exact_and_all_five_categories_are_present() -> N
     assert contract["category_coverage"] == EXPECTED_COVERAGE
     assert Counter(s["category"] for s in contract["scenarios"]) == Counter(
         {key: value for key, value in EXPECTED_COVERAGE.items() if key != "total"}
+    )
+
+
+def test_failure_043_descendant_preserves_historical_and_current_scenario_seals() -> (
+    None
+):
+    historical = RECEIPT_LOCK_PARENT_REBIND.read_text(encoding="utf-8")
+    assert (
+        "d83130af81fffe6d4fd2c404cd6a9376fc7d77332095399b023998c8c2bf92b9" in historical
+    )
+    contract = _contract()
+    current = json.dumps(
+        {
+            "scenario_order": contract["scenario_order"],
+            "scenarios": contract["scenarios"],
+            "category_coverage": contract["category_coverage"],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    assert hashlib.sha256(current).hexdigest() == (
+        "e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb"
     )
 
 
@@ -736,6 +759,9 @@ def test_custom_failures_bind_the_accepted_failure_registry() -> None:
                 failures[scenario["expected_failure_id"]]
                 == scenario["expected_sqlstate"]
             )
+    scenarios = {row["id"]: row for row in _contract()["scenarios"]}
+    assert scenarios["BTR-E06"]["expected_failure_id"] == "F_CARDINALITY"
+    assert scenarios["BTR-E06"]["expected_sqlstate"] == "CF004"
 
 
 def test_fixture_namespace_is_opaque_and_contains_no_patient_or_narrative_field() -> (

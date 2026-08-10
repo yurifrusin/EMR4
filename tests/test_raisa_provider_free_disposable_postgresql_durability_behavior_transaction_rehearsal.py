@@ -1267,8 +1267,15 @@ def test_sqlstate_admission_is_exact_and_never_uses_error_text() -> None:
     observed, bounded = rehearsal._bounded_outcome(rejected, "CF603", "BTR-T01")
     assert observed == "CF603"
     assert set(bounded) == {"psql_exit", "stderr_digest"}
-    with pytest.raises(rehearsal.BehaviorFailure, match="sqlstate_mismatch"):
+    with pytest.raises(rehearsal.BehaviorFailure, match="sqlstate_mismatch") as caught:
         rehearsal._bounded_outcome(rejected, "CF601", "BTR-T02")
+    assert caught.value.detail == {
+        "scenario_id": "BTR-T02",
+        "expected_sqlstate": "CF601",
+        "observed_sqlstates": ["CF603"],
+        "psql_exit": 3,
+        "sqlstate": "CF603",
+    }
 
 
 def _transition_marker(scenario_id: str, result_kind: str, assertion: Any = 1) -> bytes:
@@ -1367,8 +1374,15 @@ def test_transition_marker_admission_never_masks_rejection_classification() -> N
         b"",
         b"psql:<stdin>:4: ERROR:  CF303: synthetic detail\n",
     )
-    with pytest.raises(rehearsal.BehaviorFailure, match="sqlstate_mismatch"):
+    with pytest.raises(rehearsal.BehaviorFailure, match="sqlstate_mismatch") as caught:
         rehearsal._bounded_outcome(wrong_expected_rejection, "P0001", "BTR-B03")
+    assert caught.value.detail == {
+        "scenario_id": "BTR-B03",
+        "expected_sqlstate": "P0001",
+        "observed_sqlstates": ["CF303"],
+        "psql_exit": 3,
+        "sqlstate": "CF303",
+    }
 
     admitted_rejection_without_marker = rehearsal.parent.ProcessResult(
         3,
@@ -1448,6 +1462,65 @@ def test_failure_schema_admits_only_bounded_unique_probe_indexes() -> None:
         mutated["environment"]["failure"]["failed_probe_indexes"] = hostile
         with pytest.raises(jsonschema.ValidationError):
             validator.validate(mutated)
+
+
+def test_failure_schema_admits_only_bounded_sqlstate_mismatch_telemetry() -> None:
+    validator = jsonschema.Draft202012Validator(EVIDENCE_SCHEMA)
+    evidence = copy.deepcopy(FAILURE_EVIDENCE_012)
+    failure = evidence["environment"]["failure"]
+    failure.update(
+        {
+            "scenario_id": "BTR-E06",
+            "expected_sqlstate": "CF201",
+            "observed_sqlstates": ["CF004"],
+            "psql_exit": 3,
+            "sqlstate": "CF004",
+        }
+    )
+    validator.validate(evidence)
+    for field, hostile in (
+        ("expected_sqlstate", "not-sqlstate"),
+        ("observed_sqlstates", ["CF004", "CF004"]),
+        ("observed_sqlstates", ["CF004"] * 5),
+        ("observed_sqlstates", ["secret"]),
+        ("psql_exit", -1),
+        ("psql_exit", True),
+        ("psql_exit", 256),
+    ):
+        mutated = copy.deepcopy(evidence)
+        mutated["environment"]["failure"][field] = hostile
+        with pytest.raises(jsonschema.ValidationError):
+            validator.validate(mutated)
+
+
+def test_sqlstate_mismatch_projects_only_bounded_typed_evidence() -> None:
+    failure = rehearsal.BehaviorFailure(
+        "scenario",
+        "sqlstate_mismatch",
+        {
+            "scenario_id": "BTR-E06",
+            "expected_sqlstate": "CF201",
+            "observed_sqlstates": ["CF004"],
+            "psql_exit": 3,
+            "sqlstate": "CF004",
+            "raw_stderr": "must not leave the process",
+        },
+    )
+    projected = rehearsal._bounded_failure_evidence(failure)
+    assert projected == {
+        "stage": "scenario",
+        "code": "sqlstate_mismatch",
+        "detail_digest": "sha256:"
+        "2ee4ad3d06f09a88d0fb9e76a02b85e795d5f4cb87fc6211cf655318064b575b",
+        "scenario_id": "BTR-E06",
+        "expected_sqlstate": "CF201",
+        "observed_sqlstates": ["CF004"],
+        "psql_exit": 3,
+        "sqlstate": "CF004",
+    }
+    evidence = copy.deepcopy(FAILURE_EVIDENCE_012)
+    evidence["environment"]["failure"] = projected
+    jsonschema.Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
 
 
 def test_expected_success_rejection_releases_only_scenario_and_sqlstate() -> None:

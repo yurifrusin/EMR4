@@ -198,8 +198,10 @@ updates from temporal Context Fabric publication.
 ### Entry-point and idempotency negatives
 
 `BTR-E06` submits a valid registered generation with a source position absent
-from the exact outbox. It must fail with `F_ADMISSION_SOURCE` / SQLSTATE
-`CF201`, leaving no primary or conflict.
+from the exact outbox. The accepted body's exact source selection maps that
+missing required row to `F_CARDINALITY` / SQLSTATE `CF004`, leaving no primary
+or conflict. `F_ADMISSION_SOURCE` / `CF201` remains the later packet-to-present-
+source membership-digest mismatch and is not reachable when the row is absent.
 
 `BTR-I02` first produces exact position two on the same stream, then admits a
 primary for the isolated conflict generation, submits one different proofread

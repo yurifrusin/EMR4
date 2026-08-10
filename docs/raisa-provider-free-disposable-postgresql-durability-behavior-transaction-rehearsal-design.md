@@ -135,8 +135,10 @@ generation/position may append one receiver-authored CONFLICT. Repeating that
 same mismatch must return the same conflict. The primary/conflict set is
 bounded to exactly two rows.
 
-A valid generation with a missing position fails `CF201`; a beta locator under
-the alpha observer binding fails before source access with `CF004`.
+A valid generation with a missing position fails the accepted exact-row
+cardinality gate with `CF004`; a present source whose packet membership digest
+does not match fails the later source assertion with `CF201`. A beta locator
+under the alpha observer binding also fails before source access with `CF004`.
 
 ## Coordinator proof
 
