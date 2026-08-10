@@ -366,6 +366,12 @@ def validate_renderer_semantics(contract: dict) -> None:
     assert alias_lock["command"] == "UPDATE"
     assert alias_lock["using_sql"] == producer
     assert alias_lock["with_check_sql"] == producer + " AND FALSE"
+    coordinator = "'COORDINATOR'::emr4_context_fabric.logical_capability"
+    generation_update = policies["pol_cf_06_update"]
+    assert coordinator in generation_update["using_sql"]
+    assert coordinator in generation_update["with_check_sql"]
+    assert lifecycle in generation_update["using_sql"]
+    assert lifecycle in generation_update["with_check_sql"]
     for policy_id in ("pol_cf_10_update", "pol_cf_11_update"):
         assert lifecycle not in policies[policy_id]["using_sql"]
         assert lifecycle not in policies[policy_id]["with_check_sql"]
@@ -790,6 +796,32 @@ def test_stream_head_lock_visibility_cannot_be_removed_or_widened_to_mutation() 
     )
     with pytest.raises(AssertionError):
         validate_renderer_semantics(reseal_contract(widened_write_check))
+
+
+def test_coordinator_generation_lock_and_transition_visibility_cannot_be_removed() -> (
+    None
+):
+    contract = data(CONTRACT)
+    coordinator = "'COORDINATOR'::emr4_context_fabric.logical_capability, "
+
+    for predicate_field in ("using_sql", "with_check_sql"):
+        candidate = copy.deepcopy(contract)
+        policies = {
+            policy["id"]: policy
+            for policy in candidate["rls_policy_catalogue"]["policies"]
+        }
+        policies["pol_cf_06_update"][predicate_field] = policies["pol_cf_06_update"][
+            predicate_field
+        ].replace(coordinator, "")
+        with pytest.raises(AssertionError):
+            validate_renderer_semantics(reseal_contract(candidate))
+
+    roles = {role["role"]: role for role in contract["role_matrix"]}
+    assert roles["context_coordinator"]["direct_table_dml"] == []
+    assert roles["context_coordinator"]["direct_table_select"] == []
+    assert roles["context_coordinator"]["execute_entry_points"] == [
+        "apply_durability_transition_v1"
+    ]
 
 
 def test_alias_lock_visibility_cannot_be_removed_or_widened_to_mutation() -> None:

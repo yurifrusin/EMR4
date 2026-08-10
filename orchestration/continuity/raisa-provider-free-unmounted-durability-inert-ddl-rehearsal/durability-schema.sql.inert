@@ -527,8 +527,8 @@ CREATE POLICY pol_cf_06_select ON emr4_context_fabric.context_observer_generatio
 CREATE POLICY pol_cf_06_insert ON emr4_context_fabric.context_observer_generation FOR INSERT TO PUBLIC
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_06_update ON emr4_context_fabric.context_observer_generation FOR UPDATE TO PUBLIC
-    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
-    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
+    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_07_select ON emr4_context_fabric.context_durability_checkpoint FOR SELECT TO PUBLIC
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['OBSERVER'::emr4_context_fabric.logical_capability, 'COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_07_insert ON emr4_context_fabric.context_durability_checkpoint FOR INSERT TO PUBLIC

@@ -210,13 +210,13 @@
   },
   "parents": {
     "body": {
-      "contract_sha256": "sha256:d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3",
+      "contract_sha256": "sha256:32edb340c490d509015bcafe9fecddb1057400a14c537f5d3fdb4bbfee6d3e9c",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
       "schema_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.schema.json",
       "source_head": "c0673fc755457756719959dcfc6aea04531d6627"
     },
     "structural": {
-      "contract_sha256": "sha256:ff64b568d65d243ad5bb3dd8159063f47732b0b360efcc12f58d3b28ceb00d9a",
+      "contract_sha256": "sha256:3ce317803da9cbd1a38a1f922627784467b3e8cc7e34dac924c09c4be6bf6a16",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
       "schema_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
       "source_head": "a1a4a619222297b36fa6894a5cf5f12a179af48c"
@@ -268,7 +268,7 @@
     },
     "executable_ddl": false,
     "id": "postgresql_16_representability_recovery_v1",
-    "immutable_body_parent_sha256": "sha256:d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3",
+    "immutable_body_parent_sha256": "sha256:32edb340c490d509015bcafe9fecddb1057400a14c537f5d3fdb4bbfee6d3e9c",
     "keyed_xmin_reselects": [
       {
         "cardinality_failure": {

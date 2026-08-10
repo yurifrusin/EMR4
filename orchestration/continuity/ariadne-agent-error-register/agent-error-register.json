@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 168,
+  "register_revision": 169,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7800,6 +7800,53 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
           "docs/security/raisa-provider-free-disposable-postgresql-durability-parse-characterization-evidence-routing-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-168.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0195",
+      "attempt_id": "3456f41a72c5cb413f9dcb06",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-durability-structural-contract",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The coordinator-authorised durability transition must retain exact generation FOR UPDATE visibility and its bounded generation-state transitions while the coordinator retains no direct table privilege.",
+      "observed_error": "Behavior attempt 035 stopped at BTR-E04 CF004 in apply_durability_transition_v1 line 143 with zero scenarios and verified cleanup. Deterministic source diagnosis proved the coordinator's exact generation FOR UPDATE lock and ten bounded generation updates were hidden by pol_cf_06_update admitting only LIFECYCLE.",
+      "detection_method": "Sol bound the immutable failure to the exact typed lock node, forced-RLS policy catalogue, coordinator role matrix and regenerated SQL without opening another database run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-035.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-035.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_035_generation_lock_rls_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_035_generation_lock_rls_diagnosis.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-generation-lock-rls-recovery.md",
+        "docs/security/raisa-context-fabric-durability-behavior-generation-lock-rls-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-169.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.coordinator_generation_update_policy_hides_authorized_transition_lock",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "pol_cf_06_update USING and WITH CHECK now admit the existing COORDINATOR capability alongside LIFECYCLE. The coordinator retains zero direct table SELECT or DML, the execute grant and typed body are unchanged, and descendants are regenerated for fresh proof.",
+        "prevention_control": "Structural semantics and hostile tests must require coordinator visibility in both generation UPDATE predicates, preserve zero coordinator direct relation grants, and reject removal before body rebind, inert regeneration, parse proof, fresh veto or behavior eligibility.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-generation-lock-rls-recovery.md",
+          "docs/security/raisa-context-fabric-durability-behavior-generation-lock-rls-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-169.md"
         ]
       },
       "status": "corrected"

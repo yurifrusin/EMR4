@@ -40,7 +40,7 @@
       "const": "repository_authored_schema_metadata"
     },
     "contract_sha256": {
-      "const": "sha256:ff64b568d65d243ad5bb3dd8159063f47732b0b360efcc12f58d3b28ceb00d9a"
+      "const": "sha256:3ce317803da9cbd1a38a1f922627784467b3e8cc7e34dac924c09c4be6bf6a16"
     },
     "postgresql_target": {
       "const": {
@@ -4015,8 +4015,8 @@
               "PUBLIC"
             ],
             "permissive": true,
-            "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
-            "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
+            "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
+            "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
           },
           {
             "id": "pol_cf_07_select",

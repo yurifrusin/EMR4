@@ -1,0 +1,56 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-035-generation-lock-rls-diagnosis.v1",
+  "status": "deterministic_coordinator_generation_update_policy_mismatch_proven_cleanup_verified",
+  "parent_failure": {
+    "run_sequence": 35,
+    "internal_attempt_id": "3456f41a72c5cb413f9dcb06",
+    "evidence_sha256": "sha256:9ee9265487f0c14ea7987f979166e6b900241cbb820a9faa522eab14aea0d7d5",
+    "scenario_id": "BTR-E04",
+    "sqlstate": "CF004",
+    "function_line": 143,
+    "cleanup_absence_verified": true
+  },
+  "diagnosis": {
+    "entry_point": "apply_durability_transition_v1",
+    "principal": "context_coordinator",
+    "locked_relation": "context_observer_generation",
+    "lock_mode": "FOR_UPDATE",
+    "lock_node": "emr4_context_fabric.apply_durability_transition_v1.lock_generation",
+    "generation_update_policy": "pol_cf_06_update",
+    "policy_using_capabilities": [
+      "LIFECYCLE"
+    ],
+    "policy_with_check_capabilities": [
+      "LIFECYCLE"
+    ],
+    "required_existing_capability": "COORDINATOR",
+    "coordinator_generation_update_node_count": 10,
+    "coordinator_direct_table_dml": [],
+    "body_source_sha256": "sha256:985120aaa63ed665b6cf7acebf57dfa9feebe1bfeb74add3b025c17b9149f7f7",
+    "body_contract_sha256": "sha256:d60eb4bd018a5f9180985db10f9b18c92d797b45844fbba345871085da4834c3",
+    "structural_source_sha256": "sha256:5b5e3bc3108dc1105017f57ceade03c4bce33b898d7b71f0ede0640ce0bc83c7",
+    "inert_sql_source_sha256": "sha256:ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb",
+    "raw_postgresql_error_persisted": false,
+    "additional_container_runs": 0
+  },
+  "bounded_repair": {
+    "generation_update_policy_using_capabilities": [
+      "COORDINATOR",
+      "LIFECYCLE"
+    ],
+    "generation_update_policy_with_check_capabilities": [
+      "COORDINATOR",
+      "LIFECYCLE"
+    ],
+    "coordinator_direct_table_dml_remains_empty": true,
+    "entry_point_execute_grant_unchanged": true,
+    "body_program_change": false,
+    "inert_artifact_regeneration": true,
+    "parse_catalogue_rebind_required": true,
+    "behavior_parent_rebind_required": true,
+    "scenario_population_change": false,
+    "principal_or_sqlstate_change": false,
+    "new_external_authority": false
+  },
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority"
+}

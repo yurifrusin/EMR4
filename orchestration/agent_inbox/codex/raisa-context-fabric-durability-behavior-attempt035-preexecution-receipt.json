@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_fixed_path_twenty_scenario_provider_free_authored_synthetic_behavior_transaction_rehearsal_attempt035_in_one_new_networkless_postgresql_16_container_then_preserve_result_restore_prior_mutable_evidence_and_verify_exact_cleanup",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Behavior contract SHA-256 dbb656a5 binds accepted inert SQL ca22e47e and unchanged twenty-scenario population eec93b0d. Fresh r154 Gemini veto passed 379/379 tests and six-file Ruff. Exact local postgres:16-bookworm image is sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8.",
+    "current_authority_allocation": "GPT Sol alone owns the one-shot fixed-path behavior rehearsal, immutable result preservation, protected mutable-evidence restoration and exact cleanup acceptance. No worker, verifier, product surface or operational database owns execution.",
+    "git_refs_and_worktree": "Task branch is exact 4385dfcb926109b6e8c310e075a2e1c5e5c543cc with tracked worktree clean. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All unrelated untracked files and docs/branding remain preserved.",
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability behavior dependency. Rebound contract is independently accepted through task HEAD 4385dfcb; attempt 35 is the next dependency-satisfied action.",
+    "protected_evidence_boundaries": "Run the no-argument behavior harness exactly once. It must use pull-never, network none, no ports, no mounts, container-local tmpfs and exact captured-ID cleanup. Never list or touch unrelated containers. Protected mutable behavior evidence is backed up at C:/Users/sarashera/AppData/Local/Temp/emr4-context-fabric-behavior-evidence-before-attempt035-4385dfcb.json with SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Preserve the new result immutably, then restore the prior mutable file until acceptance. No migration, operational database/credential, patient/product/clinical data, watcher/feed, app/API/Diary command, provider call, deployment, Pages, production, release or protected-ref action is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
