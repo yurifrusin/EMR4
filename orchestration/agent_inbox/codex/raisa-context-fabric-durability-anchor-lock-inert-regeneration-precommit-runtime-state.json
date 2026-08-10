@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_the_inert_renderer_parent_rebind_one_lock_only_policy_regeneration_tests_and_closed_git_binding_incident_without_executing_the_sql",
+  "source_evidence": {
+    "live_handover_current_baton": "Structural anchor-lock repair is exact 35c4ded8163a7d04667d1e53ccd3c6f41f059e59 and unchanged typed-body rebind is exact f94d4c610dbff3ddb448eb4ac8677ca230a298e3. A false inferred body source ID was rejected and corrected before regeneration.",
+    "current_authority_allocation": "GPT Sol owns deterministic renderer rebind, inert artifact generation, tests and explicit-path commit. No worker, verifier, provider runtime, database consumer or protected integrator is active.",
+    "active_plan_and_acceptance": "Bind structural digest 6802a735 and body digest b54b2e68, render exactly one additional pol_cf_08_update_lock policy, preserve every typed body and grant boundary, and emit 422 inert statements. Canonical SQL SHA-256 is 550336e1 and manifest SHA-256 is 95a5c0a6. SQL remains forbidden to execute or apply.",
+    "protected_evidence_boundaries": "Provider-free repository generation only. Mutable behavior and parse evidence plus immutable failures remain unstaged and byte-preserved. No disposable run, applied migration, operational database, watcher/feed, application wiring, product/patient data, provider call, deployment, release, Pages or protected-ref movement. docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Task HEAD is exact f94d4c610dbff3ddb448eb4ac8677ca230a298e3; protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit renderer, generated artifact, test, rebind, incident and receipt paths may be staged; unrelated untracked files remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "anchor_lock_inert_regeneration_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns this inert-only explicit-path commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker lease is active."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Verifier dispatch remains deferred until parse and behavior descendants are reconstructed."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

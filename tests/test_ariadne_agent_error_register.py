@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 176
+    assert register["register_revision"] == 177
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 205)
+        f"AER-{index:04d}" for index in range(1, 206)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 129
+    assert len(agent_incidents) == 130
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 204
+    assert report["incident_count"] == 205
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,18 +2508,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 176
-    assert report["incident_count"] == 204
+    assert report["register_revision"] == 177
+    assert report["incident_count"] == 205
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 129,
+        "agent_behavior": 130,
         "harness": 22,
         "repository": 44,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 21,
-        "evidence_misreport": 26,
+        "evidence_misreport": 27,
         "harness_failure": 22,
         "output_contract_violation": 54,
         "read_only_violation": 3,
@@ -2529,7 +2529,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 65,
-        "canonical_unchanged": 117,
+        "canonical_unchanged": 118,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -2564,8 +2564,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
             ),
-            "incident_count": 2,
-            "incident_ids": ["AER-0192", "AER-0196"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0192", "AER-0196", "AER-0205"],
             "origins": ["agent_behavior"],
             "categories": ["evidence_misreport"],
             "roles": ["orchestrator"],
@@ -3475,6 +3475,22 @@ def test_aer_0204_reuses_module_invocation_control_after_direct_path_failure() -
     assert "ModuleNotFoundError" in incident["observed_error"]
     assert "python -m scripts." in incident["correction"]["action"]
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0205_rejects_inferred_body_source_commit_before_regeneration() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0205"
+    ]
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
+    )
+    assert "f94d4c61f1fe" in incident["observed_error"]
+    assert "f94d4c610dbf" in incident["correction"]["action"]
+    assert "No artifact regeneration" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 

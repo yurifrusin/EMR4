@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 176,
+  "register_revision": 177,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8221,6 +8221,44 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-body-builder-direct-invocation-failure-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-176.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0205",
+      "attempt_id": "raisa-context-fabric-anchor-lock-inert-body-source-binding-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Every forty-character Git binding must be copied from git rev-parse output and resolve as a repository commit before it enters a renderer or evidence record.",
+      "observed_error": "Sol inferred nonexistent f94d4c61f1fe080c617a6500ea76151b4971b709 from displayed short commit f94d4c61 while preparing the inert renderer body source binding.",
+      "detection_method": "Before regeneration, Sol ran git rev-parse HEAD, obtained exact f94d4c610dbff3ddb448eb4ac8677ca230a298e3, corrected both candidate paths and preserved the rejected binding.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-body-source-head-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-177.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The renderer and rebind document now bind exact git rev-parse output f94d4c610dbff3ddb448eb4ac8677ca230a298e3. No artifact regeneration or runtime action occurred under the rejected value.",
+        "prevention_control": "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it resolves, and reconcile every packet diff range before generating the final dispatch receipt.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-body-source-head-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-177.md"
         ]
       },
       "status": "corrected"

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_the_inert_renderer_parent_rebind_one_lock_only_policy_regeneration_tests_and_closed_git_binding_incident_without_executing_the_sql",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Bind structural digest 6802a735 and body digest b54b2e68, render exactly one additional pol_cf_08_update_lock policy, preserve every typed body and grant boundary, and emit 422 inert statements. Canonical SQL SHA-256 is 550336e1 and manifest SHA-256 is 95a5c0a6. SQL remains forbidden to execute or apply.",
+    "current_authority_allocation": "GPT Sol owns deterministic renderer rebind, inert artifact generation, tests and explicit-path commit. No worker, verifier, provider runtime, database consumer or protected integrator is active.",
+    "git_refs_and_worktree": "Task HEAD is exact f94d4c610dbff3ddb448eb4ac8677ca230a298e3; protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit renderer, generated artifact, test, rebind, incident and receipt paths may be staged; unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "Structural anchor-lock repair is exact 35c4ded8163a7d04667d1e53ccd3c6f41f059e59 and unchanged typed-body rebind is exact f94d4c610dbff3ddb448eb4ac8677ca230a298e3. A false inferred body source ID was rejected and corrected before regeneration.",
+    "protected_evidence_boundaries": "Provider-free repository generation only. Mutable behavior and parse evidence plus immutable failures remain unstaged and byte-preserved. No disposable run, applied migration, operational database, watcher/feed, application wiring, product/patient data, provider call, deployment, release, Pages or protected-ref movement. docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

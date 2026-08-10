@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.git-binding-failure-receipt.v1",
+  "status": "corrected_before_regeneration",
+  "observed_on": "2026-08-10",
+  "attempt_id": "raisa-context-fabric-anchor-lock-inert-body-source-binding-001",
+  "displayed_short_commit": "f94d4c61",
+  "rejected_inferred_commit": "f94d4c61f1fe080c617a6500ea76151b4971b709",
+  "exact_git_rev_parse_commit": "f94d4c610dbff3ddb448eb4ac8677ca230a298e3",
+  "rejected_commit_resolves": false,
+  "exact_commit_resolves": true,
+  "artifact_regeneration_before_correction": false,
+  "provider_or_database_action": false,
+  "authority_boundary": "repository_git_binding_correction_only"
+}

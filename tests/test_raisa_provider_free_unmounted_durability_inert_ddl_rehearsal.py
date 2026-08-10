@@ -119,7 +119,7 @@ def test_recovery_population_and_effective_catalogue_reconcile() -> None:
     assert len(effective["relations"]) == 22
     assert len(fabric_relations) == 18
     assert len(effective["roles"]) == 8
-    assert len(effective["rls_policies"]) == 45
+    assert len(effective["rls_policies"]) == 46
     digest_domain = next(
         row
         for row in effective["effective_structural"]["type_catalogue"]["domains"]
@@ -266,6 +266,51 @@ def test_rendered_stream_head_update_policy_preserves_lock_only_lifecycle_access
             rendered["effective"],
         )
         assert not report.valid
+
+
+def test_rendered_recovery_anchor_policy_is_lock_visible_but_never_writable() -> None:
+    rendered = _base_render()
+    effective = {
+        policy["id"]: policy for policy in rendered["effective"]["rls_policies"]
+    }
+    policy = effective["pol_cf_08_update_lock"]
+    expected = (
+        "emr4_context_fabric.session_binding_allows_v1(session_user, "
+        "ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, "
+        "'LIFECYCLE'::emr4_context_fabric.logical_capability], practice_id, "
+        "source_contract_id, stream_id, transaction_timestamp())"
+    )
+    assert policy == {
+        "id": "pol_cf_08_update_lock",
+        "relation": "context_recovery_anchor",
+        "command": "UPDATE",
+        "roles": ["PUBLIC"],
+        "permissive": True,
+        "using_sql": expected,
+        "with_check_sql": expected + " AND FALSE",
+    }
+
+    sql = rendered["sql_text"]
+    match = re.search(
+        r"CREATE POLICY pol_cf_08_update_lock\b.*?;",
+        sql,
+        flags=re.DOTALL,
+    )
+    assert match is not None
+    assert match.group(0) == (
+        "CREATE POLICY pol_cf_08_update_lock ON "
+        "emr4_context_fabric.context_recovery_anchor FOR UPDATE TO PUBLIC\n"
+        "    USING (" + expected + ")\n"
+        "    WITH CHECK (" + expected + " AND FALSE);"
+    )
+    assert rendered["manifest"]["statement_count"] == 422
+
+    roles = {
+        role["role"]: role
+        for role in rendered["effective"]["effective_structural"]["role_matrix"]
+    }
+    assert roles["emr4_context_fabric.context_coordinator"]["direct_table_dml"] == []
+    assert roles["emr4_context_fabric.context_lifecycle"]["direct_table_dml"] == []
 
 
 def test_rendered_binding_select_policy_preserves_exact_owner_session_time_fences() -> (
@@ -677,7 +722,7 @@ def test_phase_populations_and_counts() -> None:
     assert sql.count("CREATE DOMAIN ") == 4
     assert sql.count("CREATE TYPE ") == 28  # 19 enums + 9 composites
     assert sql.count("CREATE TABLE emr4_context_fabric.") == 18
-    assert sql.count("CREATE POLICY ") == 45
+    assert sql.count("CREATE POLICY ") == 46
     assert sql.count("CREATE TRIGGER ") == 7
     assert sql.count("CREATE CONSTRAINT TRIGGER ") == 7
     assert sql.count("CREATE FUNCTION emr4_context_fabric.") == 24
