@@ -136,7 +136,7 @@ def _snapshot() -> dict[str, dict[str, Any]]:
 
 def _passing_evidence() -> dict[str, Any]:
     snapshot = _snapshot()
-    stderr = {"byte_count": 0, "sha256": "0" * 64}
+    stderr = {"byte_count": 0, "sha256": "sha256:" + "0" * 64}
     records: list[dict[str, Any]] = []
     for scenario in CONTRACT["scenarios"]:
         records.append(
@@ -304,6 +304,17 @@ def test_contract_and_evidence_schemas_are_whole_document_valid() -> None:
     ]
     assert FAILURE_EVIDENCE_009["scenario_reconciliation"]["observed"] == 0
     assert FAILURE_EVIDENCE_009["cleanup"]["absence_verified"] is True
+
+
+def test_stderr_digest_schema_requires_the_emitted_prefixed_sha256_form() -> None:
+    validator = jsonschema.Draft202012Validator(EVIDENCE_SCHEMA)
+    evidence = _passing_evidence()
+    validator.validate(evidence)
+
+    hostile = copy.deepcopy(evidence)
+    hostile["scenarios"][0]["transport"]["stderr_digest"]["sha256"] = "0" * 64
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(hostile)
 
 
 def test_snapshot_query_failure_releases_only_bounded_site_and_sqlstate() -> None:

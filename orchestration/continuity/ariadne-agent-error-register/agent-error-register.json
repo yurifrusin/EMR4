@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 203,
+  "register_revision": 204,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -9556,6 +9556,48 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-203.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0238",
+      "attempt_id": "raisa-context-fabric-behavior-attempt-048-pass-schema-validation-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-behavior-evidence-schema",
+      "model": "deterministic-json-schema",
+      "reasoning_level": "deterministic",
+      "transport": "local_python_jsonschema",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A passing evidence document emitted by the fixed behavior harness must validate as a whole against its declared repository schema without rewriting immutable runtime evidence.",
+      "observed_error": "The first post-pass whole-document validation rejected the immutable attempt-048 evidence because stderrDigest.sha256 required a bare 64-character value while the harness and repository digest convention emit the bounded sha256-prefixed form.",
+      "detection_method": "The new immutable-pass regression test validated the exact SHA-256-sealed attempt-048 document and jsonschema identified the nested stderrDigest pattern mismatch before closeout or evidence acceptance.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "tests/test_raisa_context_fabric_durability_behavior_attempt_048_pass.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-204.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.stderr_digest_schema_drift_from_emitter",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Bind stderrDigest.sha256 to the existing prefixed digest definition, update the synthetic passing fixture, reject the former bare form and validate the untouched immutable attempt-048 pass as a whole document.",
+        "prevention_control": "Every first successful evidence family closeout must validate the exact immutable runtime document against its repository schema in addition to validating synthetic passing fixtures.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "tests/test_raisa_context_fabric_durability_behavior_attempt_048_pass.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-204.md"
         ]
       },
       "status": "corrected"

@@ -241,7 +241,7 @@
       "required": ["byte_count", "sha256"],
       "properties": {
         "byte_count": {"type": "integer", "minimum": 0},
-        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        "sha256": {"$ref": "#/$defs/digest"}
       }
     },
     "matrixEntry": {
