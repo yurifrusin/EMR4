@@ -2,7 +2,8 @@
 
 Date: 2026-08-08
 
-Status: characterization candidate; database execution remains closed
+Status: characterization passed; exact reproduction remains closed pending
+fresh review
 
 The parse/catalogue harness is rebound to independently accepted source
 `5a9a7ae907308aa0a8a4256e9043b833f8c416ae`, its 424-statement inert SQL
@@ -22,3 +23,24 @@ transaction or command boundary. It opens no applied migration, operational
 database, watcher/listener/feed, application/API/Diary wiring,
 patient/clinical/product data, provider call, deployment, release, Pages or
 protected-ref movement.
+
+Exactly one characterization attempt, `50991d94ce26e0a074dbbfd1`, returned
+`catalogue_characterization_required` as designed. Immutable evidence is
+`provider-free-disposable-postgresql-evidence-admission-replay-winner-characterization.json`
+at SHA-256
+`f1320a45b3c604315f04985e36221bfaa5ddfe5788ace621b7d1566706b4b29a`.
+Atomic rollback matched SQLSTATE `42601`, the exact artifact parsed, all object
+populations matched, exact owned container
+`97ee4ed8ef6b731a71d5db7f477ec86213390ecd6a28590e434643de4d8ff032`
+was removed and exact-ID absence was independently confirmed.
+
+All fifteen acceptance-bound catalogue digests equal the preceding accepted
+frame-mask catalogue. The repair changes a function body but not its catalogue
+signature/security shape; the exact artifact seal and successful PostgreSQL
+parse therefore carry the changed-body admission proof, while the unchanged
+catalogue digests correctly freeze the unchanged externally visible catalogue
+shape. The contract now binds those fifteen observed digests in
+`exact_digest_bound` mode at canonical SHA-256
+`b891ab30e5173475b8e15ead861013b2e4b209575a66ce0028a5c3ad974107f6`.
+No exact reproduction is authorised until this binding passes a fresh
+exact-HEAD independent veto.

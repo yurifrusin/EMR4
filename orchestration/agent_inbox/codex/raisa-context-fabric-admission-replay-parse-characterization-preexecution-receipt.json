@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "run_exactly_one_no_argument_owned_disposable_postgresql_parse_catalogue_characterization_for_the_admission_replay_winner_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant is exact task HEAD d5f49d4061c80af4696ec1a975148b3e634b7805, which accepts the fresh exact-HEAD Gemini veto of the characterization-only parse rebind. No post-recovery database run has occurred.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted progression through this planned provider-free durability sequence. GPT Sol owns exactly one disposable no-argument characterization run, exact-ID cleanup, immutable evidence routing and failure diagnosis. The Gemini reviewer lease is complete. No provider, product, deployment, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "The fixed contract binds exact source 5a9a7ae907308aa0a8a4256e9043b833f8c416ae, 424 statements, artifact SHA-256 dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7, byte count 1,436,664 and canonical contract SHA-256 942ed41554fee46b3c4d11e663afd5e62c3c5e00250fc21fabb3e06009c98726. Catalogue mode is characterization_only with an empty expected map. Exactly one no-argument run is next; an identical rerun is forbidden.",
+    "protected_evidence_boundaries": "Only repository-authored synthetic prerequisites and inert SQL may enter one newly owned pull-never, networkless, portless, mountless, tmpfs PostgreSQL 16 container. The prior mutable characterization alias is backed up at C:\\Users\\sarashera\\AppData\\Local\\Temp\\emr4-cf-admission-replay-parse-char-backup-6ac08f3da5c94c6d8fc6a0e768de93e1\\provider-free-disposable-postgresql-characterization-evidence.json with SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536. The accepted parse alias remains SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and behavior alias remains SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Preserve the new result immutably, restore the prior mutable characterization alias, and inspect only the exact emitted container ID. No Docker enumeration, operational database/credential, durable volume, watcher/feed, app/API/Diary wiring, patient/clinical/product data, provider/model call, external retrieval, deployment, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean with a clean index at exact d5f49d4061c80af4696ec1a975148b3e634b7805. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only remains mandatory."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "accept_and_explicit_path_commit_the_first_run_characterization_then_review_the_exact_digest_binding_before_reproduction",
+  "source_evidence": {
+    "live_handover_current_baton": "The independently reviewed admission-replay characterization rebind completed exactly one disposable attempt 50991d94ce26e0a074dbbfd1. It characterized successfully with complete cleanup; no exact reproduction or behavior run followed.",
+    "current_authority_allocation": "GPT Sol owns bounded evidence acceptance, explicit-path commit and deterministic exact-digest binding. A fresh Gemini 3.6 Flash/high context may then receive read-only exact-HEAD veto authority. Exact reproduction remains closed until that veto passes. No provider, product, operational or protected integration authority is open.",
+    "active_plan_and_acceptance": "Immutable characterization evidence SHA-256 f1320a45b3c604315f04985e36221bfaa5ddfe5788ace621b7d1566706b4b29a binds attempt 50991d94ce26e0a074dbbfd1, artifact SHA-256 dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7, all seventeen observed query digests, matched rollback and complete exact-ID cleanup. All fifteen acceptance-bound digests equal the prior accepted map. The exact-bound contract canonical SHA-256 is b891ab30e5173475b8e15ead861013b2e4b209575a66ce0028a5c3ad974107f6 and deterministic tests pass.",
+    "protected_evidence_boundaries": "The new characterization is preserved under a distinct immutable filename. The mutable characterization alias is restored at SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536, accepted parse alias at 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and behavior alias at 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. docs/branding and unrelated untracked files remain excluded. No database, watcher/feed, product/patient/clinical data, provider, deployment, release, Pages or protected-ref surface is open.",
+    "git_refs_and_worktree": "Primary task branch is at exact d5f49d4061c80af4696ec1a975148b3e634b7805 with only the declared characterization evidence/binding/receipts plus preserved untracked files. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "admission_replay_parse_characterization_preacceptance_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Immutable evidence, restored aliases, exact cleanup and deterministic binding reconciled."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh exact-bound review planned only after commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

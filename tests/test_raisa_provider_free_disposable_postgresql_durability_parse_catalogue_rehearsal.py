@@ -179,6 +179,13 @@ FRAME_MASK_NULLABILITY_PASS_EVIDENCE_PATH = (
 FRAME_MASK_NULLABILITY_PASS_EVIDENCE = json.loads(
     FRAME_MASK_NULLABILITY_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-admission-replay-winner-characterization.json"
+)
+ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE = json.loads(
+    ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH = (
     DIR
     / "provider-free-disposable-postgresql-evidence-alias-lock-visibility-characterization.json"
@@ -1298,6 +1305,53 @@ def test_frame_mask_nullability_exact_pass_is_immutable_and_complete() -> None:
         "absence_verified": True,
         "container_id": (
             "508b4adbc840710d801f2a281bfb883eb17cf81c112b5a8194139c9f0901c485"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_admission_replay_winner_characterization_is_nonaccepting_and_exact() -> None:
+    evidence = ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "f1320a45b3c604315f04985e36221bfaa5ddfe5788ace621b7d1566706b4b29a"
+    )
+    assert evidence["attempt_id"] == "50991d94ce26e0a074dbbfd1"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_436_664,
+        "artifact_sha256": (
+            "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7"
+        ),
+        "contract_sha256": (
+            "sha256:942ed41554fee46b3c4d11e663afd5e62c3c5e00250fc21fabb3e06009c98726"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 424,
+    }
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["catalogue"]["status"] == "characterized"
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS
+    assert (
+        evidence["catalogue"]["kind_counts"]
+        == FRAME_MASK_NULLABILITY_PASS_EVIDENCE["catalogue"]["kind_counts"]
+    )
+    assert evidence["rollback"]["status"] == "matched"
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "97ee4ed8ef6b731a71d5db7f477ec86213390ecd6a28590e434643de4d8ff032"
         ),
         "removed": True,
         "status": "cleanup_verified",
@@ -2485,8 +2539,8 @@ def test_outbox_select_characterization_is_immutable_and_exactly_bound() -> None
         "status": "cleanup_verified",
     }
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "characterization_only",
-        "expected_query_digests": {},
+        "mode": "exact_digest_bound",
+        "expected_query_digests": FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS,
     }
 
 
@@ -2576,8 +2630,8 @@ def test_receipt_lock_characterization_is_immutable_and_exactly_bound() -> None:
         "status": "cleanup_verified",
     }
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "characterization_only",
-        "expected_query_digests": {},
+        "mode": "exact_digest_bound",
+        "expected_query_digests": FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS,
     }
 
 
