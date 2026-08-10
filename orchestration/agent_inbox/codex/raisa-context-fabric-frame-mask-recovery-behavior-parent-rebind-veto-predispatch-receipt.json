@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_the_frame_mask_recovery_behavior_parent_rebind_in_r175",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate changes only three canonical behavior parent bindings, binds the immutable first-run parse pass and exact frame-mask inert SQL/manifest, preserves the other three parents and all 20 behavior scenarios, and sets canonical behavior contract SHA-256 9dd97600289733fb48a03a54d0b4a2418c6c502c98f75ba0181213a6088518dc. The complete deterministic combined suite, Ruff lint/format and renderer check pass. Runtime remains closed.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only veto authority only in clean r175 at the exact candidate. GPT Sol retains implementation, acceptance, disposable-runtime, cleanup, integration and baton authority. No fallback or second reviewer call is authorised.",
+    "git_refs_and_worktree": "Verifier r175 is clean at exact ddec752578b39b708b76f0bfa75953fce14607fa on codex/review-context-fabric-behavior-frame-mask-rebind-ddec7525 and passed a local zero-provider preflight. Primary tracked worktree is clean at the same candidate apart from preserved unrelated untracked paths and declared dispatch artifacts. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active Context Fabric durability descendant has accepted first-run parse/catalogue evidence and a deterministic behavior-parent rebind committed at exact ddec752578b39b708b76f0bfa75953fce14607fa. No behavior attempt 046 or later has run.",
+    "protected_evidence_boundaries": "The verifier may inspect only committed immutable authored-synthetic evidence and the exact packet allowlist. The protected mutable behavior evidence alias at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b, holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, other providers, product surfaces, edits, deployment, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
