@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r163",
+  "branch": "codex/review-context-fabric-anchor-lock-final-aaaa80cb",
+  "head": "aaaa80cbac0f510f1a3e3c5e8b6acfff6a4a13a7",
+  "expected_head": "aaaa80cbac0f510f1a3e3c5e8b6acfff6a4a13a7",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

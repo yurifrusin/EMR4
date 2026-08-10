@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
   "continuation_event": "pre_worker_dispatch",
-  "planned_action": "dispatch_one_fresh_read_only_gemini_3_6_flash_high_veto_for_exact_descendant_040a069b_in_clean_r162_after_the_tracked_evidence_portability_repair",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_3_6_flash_high_veto_for_exact_descendant_aaaa80cb_in_clean_r163_after_the_tracked_evidence_portability_and_exact_head_capture_repairs",
   "source_evidence": {
-    "live_handover_current_baton": "The anchor-lock repair descendant is exact 040a069b4b6496b84ba402c2407a44e47aa39a02. First r161 review was rejected only for a clean-worktree test dependency; AER-0206 and the tracked immutable-evidence repair are now committed.",
-    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project owns one read-only exact-descendant veto in r162. GPT Sol retains acceptance and any later runtime authority. No worker, product consumer or protected integrator is assigned.",
-    "active_plan_and_acceptance": "Rerun the complete corrected packet from baseline 978f5420 to descendant 040a069b. It must independently reverify the lock-only RLS semantics and all accepted parents, then prove the r161-only defect is closed through tracked diagnosis 029 and that the full deterministic review bundle passes in a clean checkout. Any P0-P2 finding vetoes behavior runtime.",
+    "live_handover_current_baton": "The anchor-lock repair descendant is exact aaaa80cbac0f510f1a3e3c5e8b6acfff6a4a13a7. First r161 review was rejected only for a clean-worktree test dependency; AER-0206 and the tracked immutable-evidence repair are committed. AER-0207 then recorded and stopped a draft short-hash expansion before any receipt or call.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project owns one read-only exact-descendant veto in r163. GPT Sol retains acceptance and any later runtime authority. No worker, product consumer or protected integrator is assigned.",
+    "active_plan_and_acceptance": "Rerun the complete corrected packet from baseline 978f5420 to descendant aaaa80cb. It must independently reverify the lock-only RLS semantics and all accepted parents, prove the r161-only defect is closed through tracked diagnosis 029, verify AER-0207 exact-head containment and run the full deterministic review bundle in a clean checkout. Any P0-P2 finding vetoes behavior runtime.",
     "protected_evidence_boundaries": "Read-only allowlisted exact worktree only. No edits, Docker/PostgreSQL, runtime harness, provider beyond this verifier call, protected mutable path, patient/product/clinical data, docs/branding, operational DB, watcher/feed, application/API/Diary wiring, deployment, production, release, Pages or protected-ref movement.",
-    "git_refs_and_worktree": "Fresh r162 is branch codex/review-context-fabric-anchor-lock-portable-040a069b at exact 040a069b4b6496b84ba402c2407a44e47aa39a02 and must remain clean. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+    "git_refs_and_worktree": "Fresh r163 is branch codex/review-context-fabric-anchor-lock-final-aaaa80cb at exact aaaa80cbac0f510f1a3e3c5e8b6acfff6a4a13a7 and must remain clean. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
   },
   "context_health": {
     "agent_contexts": [
       {
         "agent_id": "orchestrator",
-        "measurement_source": "anchor_lock_behavior_rebind_corrected_veto_predispatch_complete_five_source_rehydration",
+        "measurement_source": "anchor_lock_behavior_rebind_final_veto_predispatch_complete_five_source_rehydration",
         "rehydrated_from_receipt": true,
         "rehydration_sources": [
           "live_handover_current_baton",
@@ -30,7 +30,7 @@
       "adapter_id": "codex_primary_session",
       "method": "codex_session_observation",
       "reachability": "reachable",
-      "evidence": ["Sol verified exact descendant and prepared clean r162."]
+      "evidence": ["Sol captured exact descendant with git rev-parse and prepared clean r163."]
     },
     {
       "adapter_id": "codex_subagent_spawn",

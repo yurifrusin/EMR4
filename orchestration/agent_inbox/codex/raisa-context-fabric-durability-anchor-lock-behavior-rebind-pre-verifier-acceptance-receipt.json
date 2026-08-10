@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "accept_the_exact_aaaa80cb_gemini_3_6_flash_high_pass_and_commit_review_provenance_before_one_disposable_behavior_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Final r163 receipt returns pass after 479 tests, Ruff, diff hygiene, all sixteen exact challenges and clean exact postflight at aaaa80cb. First r161 revision_required is preserved and AER-0206/0207 are closed. Sol acceptance permits one fixed twenty-scenario run only after this review provenance commit.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high completed one read-only r163 veto and has no continuing lease. GPT Sol alone may accept that receipt, commit review provenance and later dispatch exactly one fixed local disposable behavior run under a fresh receipt. No product or protected integrator is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exact reviewed aaaa80cbac0f510f1a3e3c5e8b6acfff6a4a13a7; r163 is clean at the same value. Protected local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only is permitted.",
+    "live_handover_current_baton": "The active durability descendant is exact aaaa80cbac0f510f1a3e3c5e8b6acfff6a4a13a7. It contains the complete anchor-lock repair, exact parse reproduction and clean-worktree evidence portability controls; behavior runtime remains unopened.",
+    "protected_evidence_boundaries": "This acceptance commit starts no Docker or database. Mutable behavior evidence 09907bf6 stays untracked and unstaged. No operational DB, watcher/feed, app/API/Diary wiring, patient/product/clinical data, further model call, deploy, production, release, Pages or protected-ref movement. docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

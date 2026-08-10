@@ -6,11 +6,12 @@ Decision required: exactly one terminal `pass` or `fail`
 
 ## Exact checkout
 
-- Worktree: `C:\Users\sarashera\EMR4-worktrees\r162`
-- Branch: `codex/review-context-fabric-anchor-lock-portable-040a069b`
+- Worktree: `C:\Users\sarashera\EMR4-worktrees\r163`
+- Branch: `codex/review-context-fabric-anchor-lock-final-aaaa80cb`
 - Baseline: `978f54205966d412a9a5ead03b1c2c16ca46c5e0`
-- Rejected predecessor: `263c1ca833dfdc53d5db32c6d57caeadb1edd20d`
-- Candidate: `040a069b4b6496b84ba402c2407a44e47aa39a02`
+- First rejected predecessor: `263c1ca833dfdc53d5db32c6d57caeadb1edd20d`
+- Portability-repair predecessor: `040a069b4b6496b84ba402c2407a44e47aa39a02`
+- Candidate: `aaaa80cbac0f510f1a3e3c5e8b6acfff6a4a13a7`
 - Protected local/origin `master` and `handoff/current` must remain exactly
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 
@@ -29,7 +30,7 @@ receipt is preserved at
 `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-anchor-lock-behavior-rebind-review-receipt.json`.
 
 Independently verify the complete baseline-to-candidate repair and decide
-whether descendant `040a069b...` fixes that evidence-portability defect without
+whether descendant `aaaa80cb...` fixes that evidence-portability defect without
 altering the accepted database or behavior semantics. Prior prose is context,
 not acceptance; rerun all required checks.
 
@@ -83,7 +84,7 @@ Verify and report:
 9. exact parse reproduction SHA-256 is `28be342c...`, matches all 15 bound
    digests under contract `ce968bac...`, proves rollback and exact cleanup;
 10. behavior contract binds all six parents at canonical SHA-256 `ade8a499...`;
-11. descendant change from `263c1ca8` to `040a069b` does not touch structural,
+11. descendant change from `263c1ca8` to `aaaa80cb` does not touch structural,
     body, inert, parse or behavior contract semantics; it replaces only the
     untracked mutable-path test dependency with tracked immutable diagnosis 029;
 12. diagnosis 029 has exact file SHA-256
@@ -91,8 +92,10 @@ Verify and report:
     and anchors the protected mutable evidence at SHA-256
     `09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b`
     and attempt `fce9773c076f3ede41a4875c`; no test requires the untracked path;
-13. AER-0206/revision 178 accurately records the rejected review and repair,
-    the register has 206 closed incidents, and the pattern report is exact;
+13. AER-0206/revision 178 accurately records the rejected review and repair;
+    AER-0207/revision 179 accurately records the stopped short-hash draft before
+    any receipt or call; the register has 207 closed incidents and the pattern
+    report is exact;
 14. no Docker runtime, credential, network, mount, port, data, product,
     deployment, release, Pages or protected-ref boundary widened;
 15. all tests below, Ruff and diff checks pass; and
@@ -101,9 +104,9 @@ Verify and report:
 Run at least:
 
 ```powershell
-C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider --basetemp C:\Users\sarashera\AppData\Local\Temp\emr4-gemini-r162 tests\test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py tests\test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py tests\test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py tests\test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py tests\test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py tests\test_raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py tests\test_ariadne_agent_error_register.py
+C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider --basetemp C:\Users\sarashera\AppData\Local\Temp\emr4-gemini-r163 tests\test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py tests\test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py tests\test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py tests\test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py tests\test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py tests\test_raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py tests\test_ariadne_agent_error_register.py
 C:\Users\sarashera\emr4\.venv\Scripts\ruff.exe check scripts\raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py scripts\raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py scripts\raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py scripts\raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py tests\test_raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py tests\test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py tests\test_raisa_provider_free_unmounted_durability_function_trigger_body_architecture.py tests\test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py tests\test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py tests\test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py tests\test_ariadne_agent_error_register.py
-git diff --check 978f54205966d412a9a5ead03b1c2c16ca46c5e0..040a069b4b6496b84ba402c2407a44e47aa39a02
+git diff --check 978f54205966d412a9a5ead03b1c2c16ca46c5e0..aaaa80cbac0f510f1a3e3c5e8b6acfff6a4a13a7
 git status --short --branch
 git rev-parse HEAD
 ```
