@@ -1,41 +1,41 @@
 {
-  "canonical_register_sha256": "233cf4d77ce5c739c2d127077dbd6121835159b1061f0b05854535def1d4915f",
+  "canonical_register_sha256": "693d243aec0789ec3403de06ee9de3ed0eb62dfddfe5c12d9eadd16bb7ef8337",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 74,
-      "canonical_unchanged": 124,
+      "accepted_candidate_changed": 76,
+      "canonical_unchanged": 125,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
-      "command_scope_violation": 22,
+      "command_scope_violation": 23,
       "evidence_misreport": 31,
       "harness_failure": 26,
-      "output_contract_violation": 55,
+      "output_contract_violation": 56,
       "read_only_violation": 3,
       "reasoning_claim_error": 25,
-      "repository_defect": 49,
+      "repository_defect": 50,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 136,
+      "agent_behavior": 138,
       "harness": 26,
-      "repository": 49,
+      "repository": 50,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 68,
+      "low": 70,
       "material": 85,
-      "moderate": 67
+      "moderate": 68
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 38,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 39,
       "api-spine-historical-regression-suite::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 95,
+      "codex-primary-orchestrator::orchestrator": 97,
       "codex-sol-orchestrator::orchestrator": 1,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
@@ -78,12 +78,12 @@
     },
     "by_role": {
       "implementer": 16,
-      "orchestrator": 158,
-      "verifier": 46
+      "orchestrator": 160,
+      "verifier": 47
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 220,
+  "incident_count": 223,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -212,6 +212,30 @@
         "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate."
       ],
       "recurrence_signature": "orchestrator.detached_verifier_branch",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0124",
+        "AER-0223"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Derive local Ruff check and format targets from every touched Python path in the candidate and run the exact packet commands after the final formatting pass, not a hand-selected subset.",
+        "Derive local Ruff lint and format targets mechanically from git diff --name-only filtered to Python after the final edit; do not use a hand-selected subset copied from an earlier candidate stage."
+      ],
+      "recurrence_signature": "orchestrator.touched_python_format_preflight_incomplete",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -470,6 +494,30 @@
     },
     {
       "categories": [
+        "repository_defect"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0163",
+        "AER-0222"
+      ],
+      "origins": [
+        "repository"
+      ],
+      "prevention_controls": [
+        "Review-packet tests must be collected and executed in a clean committed worktree before verifier admission; assertions over mutable untracked evidence must state and handle its optional clean-checkout absence.",
+        "Run each exact review packet from a clean committed worktree before verifier admission; diagnosis code and tests may compare a mutable untracked alias only behind an explicit existence guard while immutable evidence remains mandatory."
+      ],
+      "recurrence_signature": "repository.clean_checkout_mutable_fixture_dependency",
+      "resource_ids": [
+        "antigravity-gemini-flash-3-6-high-verifier"
+      ],
+      "roles": [
+        "verifier"
+      ]
+    },
+    {
+      "categories": [
         "transport_timeout"
       ],
       "incident_count": 2,
@@ -523,7 +571,7 @@
       ]
     }
   ],
-  "register_revision": 191,
+  "register_revision": 192,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-10"
 }

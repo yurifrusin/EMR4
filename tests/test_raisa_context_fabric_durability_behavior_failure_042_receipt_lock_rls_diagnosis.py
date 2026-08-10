@@ -4,6 +4,8 @@ import importlib.util
 import json
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = ROOT / (
@@ -41,9 +43,7 @@ def test_failure_042_diagnosis_is_deterministic_and_bounded(tmp_path: Path) -> N
     assert expected["parent_failure"]["function_line"] == 210
     assert expected["parent_failure"]["mapped_sql_line"] == 1171
     assert expected["diagnosis"]["lock_mode"] == "FOR_UPDATE"
-    assert expected["diagnosis"]["missing_lock_policy_id"] == (
-        "pol_cf_09_update_lock"
-    )
+    assert expected["diagnosis"]["missing_lock_policy_id"] == ("pol_cf_09_update_lock")
     assert expected["diagnosis"]["additional_container_runs"] == 0
 
 
@@ -58,3 +58,22 @@ def test_failure_042_repair_preserves_append_only_and_authority_boundaries() -> 
     assert repair["body_program_change"] is False
     assert repair["scenario_population_change"] is False
     assert repair["new_external_authority"] is False
+
+
+def test_failure_042_diagnosis_allows_clean_checkout_without_mutable_alias(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    module = _load_module()
+    monkeypatch.setattr(module, "MUTABLE_PATH", tmp_path / "absent-mutable.json")
+    assert module.build_evidence()["parent_failure"]["run_sequence"] == 42
+
+
+def test_failure_042_diagnosis_rejects_wrong_mutable_alias_when_present(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    module = _load_module()
+    mutable = tmp_path / "wrong-mutable.json"
+    mutable.write_bytes(b"wrong\n")
+    monkeypatch.setattr(module, "MUTABLE_PATH", mutable)
+    with pytest.raises(RuntimeError, match="protected_mutable_evidence_not_restored"):
+        module.build_evidence()

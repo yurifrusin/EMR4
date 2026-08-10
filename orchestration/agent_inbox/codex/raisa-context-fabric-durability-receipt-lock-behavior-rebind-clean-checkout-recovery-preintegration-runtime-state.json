@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_receipt_lock_behavior_rebind_clean_checkout_replacement_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "The first exact-head behavior-parent veto at ba25816d65b4f50dfc2d71bb0ed1ead44166c5cd is immutably revision_required only for a clean-checkout mutable-alias dependency and one Ruff format drift. Attempt 042 remains the latest database run and attempt 043 remains closed.",
+    "current_authority_allocation": "GPT Sol owns the bounded repository repair and task-branch commit. Gemini 3.6 Flash/high retains independent-veto authority only in a future fresh clean descendant worktree. No implementation worker, database runtime or provider fallback is open.",
+    "active_plan_and_acceptance": "The replacement makes no database-contract or scenario change. It conditionally validates the optional mutable alias when present while immutable failure-042 evidence remains mandatory, adds absence and wrong-present tests, formats every changed Python path, records AER-0221 through AER-0223, and preserves the rejected review. The exact 594-test packet, Ruff check, Ruff format and diff hygiene pass.",
+    "protected_evidence_boundaries": "Mutable behavior evidence remains exact and unstaged; attempts 001-042, protected holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, other providers, application/API/Diary wiring, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Main task branch parent HEAD is exact ba25816d65b4f50dfc2d71bb0ed1ead44166c5cd before the replacement commit. Explicit-path staging only will include the rejected review, bounded test repair, register revision and receipts. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; preserved untracked paths remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because no DeepSeek dispatch is planned for this bounded replacement commit."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because no DeepCode dispatch is planned for this bounded replacement commit."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because no Claude dispatch is planned for this bounded replacement commit."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The first exact-head review returned revision_required and remains immutable; a fresh descendant review is deferred until this repair is committed."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["The bounded repair and exact 594-test, Ruff, format and diff packet pass in the primary session."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No Codex subagent is assigned or required for this bounded replacement commit."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

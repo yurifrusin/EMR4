@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 191,
+  "register_revision": 192,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8885,6 +8885,123 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-preintegration-v2-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-receipt-lock-behavior-parent-rebind-preintegration-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-191.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0221",
+      "attempt_id": "raisa-context-fabric-receipt-lock-behavior-r170-worktree-add-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-receipt-lock-rls-recovery",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_git_cli",
+      "stage": "integration",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A worktree creation preflight must compute path and branch existence in separate syntactically valid PowerShell statements before any git worktree mutation.",
+      "observed_error": "The first r170 creation command embedded a semicolon-separated git invocation inside a parenthesized if expression and PowerShell rejected the command at parse time before Git ran.",
+      "detection_method": "PowerShell returned missing-closing-parenthesis and unexpected-token parser errors with exit code 1. A read-only check confirmed neither the path nor branch existed; the corrected command assigned branch existence separately and created exactly r170 once.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-192.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_inline_git_condition_parse_error",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Run path and branch existence checks as separate statements, store their booleans, stop if either exists, then create only C:/Users/sarashera/EMR4-worktrees/r170 at exact ba25816d65b4f50dfc2d71bb0ed1ead44166c5cd.",
+        "prevention_control": "Do not place external command invocations and LASTEXITCODE evaluation inside PowerShell boolean-expression parentheses; execute the command first and assign its result before the conditional.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-192.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0222",
+      "attempt_id": "raisa-context-fabric-receipt-lock-behavior-rebind-review-clean-checkout-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-receipt-lock-rls-recovery",
+      "origin": "repository",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_cli_print",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Every exact review packet must pass in a clean committed checkout without depending on a deliberately untracked mutable behavior-evidence alias.",
+      "observed_error": "The fresh r170 veto verified every substantive receipt-lock, parent, scenario and boundary claim but two failure-042 diagnosis tests raised FileNotFoundError because build_evidence unconditionally read provider-free-behavior-transaction-evidence.json, which is deliberately untracked and absent from a clean worktree.",
+      "detection_method": "Gemini 3.6 Flash/high ran the prescribed packet at exact ba25816d and returned revision_required. The immutable failure evidence and diagnosis were present; only the protected mutable alias was absent.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-receipt-lock-behavior-rebind-review-receipt.json",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_042_receipt_lock_rls_diagnosis.py",
+        "scripts/raisa_context_fabric_durability_behavior_failure_042_receipt_lock_rls_diagnosis.py",
+        "docs/ariadne-agent-error-correction-register-revision-192.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "repository.clean_checkout_mutable_fixture_dependency",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The diagnosis always validates tracked immutable failure-042 bytes and validates the protected mutable alias only when that optional untracked file exists. New tests prove clean-checkout absence passes and a present wrong alias still fails closed.",
+        "prevention_control": "Run each exact review packet from a clean committed worktree before verifier admission; diagnosis code and tests may compare a mutable untracked alias only behind an explicit existence guard while immutable evidence remains mandatory.",
+        "evidence_paths": [
+          "scripts/raisa_context_fabric_durability_behavior_failure_042_receipt_lock_rls_diagnosis.py",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_042_receipt_lock_rls_diagnosis.py",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-receipt-lock-behavior-rebind-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-192.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0223",
+      "attempt_id": "raisa-context-fabric-receipt-lock-behavior-rebind-review-format-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-receipt-lock-rls-recovery",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ruff_cli",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every touched Python file named in an independent review packet must pass the identical Ruff format command locally after the final edit and before dispatch.",
+      "observed_error": "The exact-head r170 review found tests/test_ariadne_agent_error_register.py would be reformatted. Sol had run Ruff format only over the three behavior-parent files and omitted the touched register test from the final format target set.",
+      "detection_method": "The fresh Gemini verifier ran the prescribed Ruff format check and returned exit code 1 naming exactly tests/test_ariadne_agent_error_register.py while Ruff lint and every substantive database-repair challenge passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-receipt-lock-behavior-rebind-review-receipt.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-192.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "orchestrator.touched_python_format_preflight_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Ruff formatted the exact omitted register test and the new failure-042 test, and the descendant must run Ruff check and format over every changed Python path before a fresh exact-HEAD review.",
+        "prevention_control": "Derive local Ruff lint and format targets mechanically from git diff --name-only filtered to Python after the final edit; do not use a hand-selected subset copied from an earlier candidate stage.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_042_receipt_lock_rls_diagnosis.py",
+          "docs/ariadne-agent-error-correction-register-revision-192.md"
         ]
       },
       "status": "corrected"

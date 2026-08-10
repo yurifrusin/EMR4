@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_receipt_lock_behavior_rebind_clean_checkout_replacement_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The replacement makes no database-contract or scenario change. It conditionally validates the optional mutable alias when present while immutable failure-042 evidence remains mandatory, adds absence and wrong-present tests, formats every changed Python path, records AER-0221 through AER-0223, and preserves the rejected review. The exact 594-test packet, Ruff check, Ruff format and diff hygiene pass.",
+    "current_authority_allocation": "GPT Sol owns the bounded repository repair and task-branch commit. Gemini 3.6 Flash/high retains independent-veto authority only in a future fresh clean descendant worktree. No implementation worker, database runtime or provider fallback is open.",
+    "git_refs_and_worktree": "Main task branch parent HEAD is exact ba25816d65b4f50dfc2d71bb0ed1ead44166c5cd before the replacement commit. Explicit-path staging only will include the rejected review, bounded test repair, register revision and receipts. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; preserved untracked paths remain excluded.",
+    "live_handover_current_baton": "The first exact-head behavior-parent veto at ba25816d65b4f50dfc2d71bb0ed1ead44166c5cd is immutably revision_required only for a clean-checkout mutable-alias dependency and one Ruff format drift. Attempt 042 remains the latest database run and attempt 043 remains closed.",
+    "protected_evidence_boundaries": "Mutable behavior evidence remains exact and unstaged; attempts 001-042, protected holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, other providers, application/API/Diary wiring, deployment, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

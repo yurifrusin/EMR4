@@ -16,8 +16,12 @@ BEHAVIOR_DIR = (
     / "continuity"
     / "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal"
 )
-FAILURE_PATH = BEHAVIOR_DIR / "provider-free-behavior-transaction-failure-evidence-042.json"
-EVIDENCE_PATH = BEHAVIOR_DIR / "provider-free-behavior-transaction-diagnosis-evidence-042.json"
+FAILURE_PATH = (
+    BEHAVIOR_DIR / "provider-free-behavior-transaction-failure-evidence-042.json"
+)
+EVIDENCE_PATH = (
+    BEHAVIOR_DIR / "provider-free-behavior-transaction-diagnosis-evidence-042.json"
+)
 MUTABLE_PATH = BEHAVIOR_DIR / "provider-free-behavior-transaction-evidence.json"
 BODY_PATH = (
     ROOT
@@ -42,13 +46,27 @@ INERT_SQL_PATH = (
 )
 
 SOURCE_HEAD = "1b77505f8c6c20c8b37a4f8430f15649ecd13492"
-EXPECTED_FAILURE_SHA256 = "88cd6fb34ffb07895dc9bc11c4712f64dedc24394e6befa04b70b09a7d3184d7"
-EXPECTED_MUTABLE_SHA256 = "09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b"
-EXPECTED_BODY_SOURCE_SHA256 = "c88653b1db1e379e9d067dbe444a1c2cbdf0dd1dd148fe838bce274741f7c455"
-EXPECTED_BODY_CONTRACT_SHA256 = "9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62"
-EXPECTED_STRUCTURAL_SOURCE_SHA256 = "d333ad3ef75725a8a85e7d45a072bca02a087ea869d395459140c405919814c6"
-EXPECTED_STRUCTURAL_CONTRACT_SHA256 = "30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f"
-EXPECTED_INERT_SQL_SHA256 = "265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a"
+EXPECTED_FAILURE_SHA256 = (
+    "88cd6fb34ffb07895dc9bc11c4712f64dedc24394e6befa04b70b09a7d3184d7"
+)
+EXPECTED_MUTABLE_SHA256 = (
+    "09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b"
+)
+EXPECTED_BODY_SOURCE_SHA256 = (
+    "c88653b1db1e379e9d067dbe444a1c2cbdf0dd1dd148fe838bce274741f7c455"
+)
+EXPECTED_BODY_CONTRACT_SHA256 = (
+    "9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62"
+)
+EXPECTED_STRUCTURAL_SOURCE_SHA256 = (
+    "d333ad3ef75725a8a85e7d45a072bca02a087ea869d395459140c405919814c6"
+)
+EXPECTED_STRUCTURAL_CONTRACT_SHA256 = (
+    "30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f"
+)
+EXPECTED_INERT_SQL_SHA256 = (
+    "265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a"
+)
 
 SELECT_NODE_ID = "emr4_context_fabric.apply_durability_transition_v1.receipt_set"
 BRANCH_NODE_ID = "emr4_context_fabric.apply_durability_transition_v1.has_receipt"
@@ -113,7 +131,9 @@ def build_evidence() -> dict[str, Any]:
     failure_bytes = FAILURE_PATH.read_bytes()
     if _sha256(failure_bytes) != EXPECTED_FAILURE_SHA256:
         raise RuntimeError("failure_042_sha256")
-    if _sha256(MUTABLE_PATH.read_bytes()) != EXPECTED_MUTABLE_SHA256:
+    if MUTABLE_PATH.exists() and (
+        _sha256(MUTABLE_PATH.read_bytes()) != EXPECTED_MUTABLE_SHA256
+    ):
         raise RuntimeError("protected_mutable_evidence_not_restored")
     failure = json.loads(failure_bytes)
     detail = failure.get("environment", {}).get("failure", {})
@@ -221,8 +241,7 @@ def build_evidence() -> dict[str, Any]:
         "coordinator_role",
     )
     if not (
-        "apply_durability_transition_v1"
-        in coordinator.get("execute_entry_points", [])
+        "apply_durability_transition_v1" in coordinator.get("execute_entry_points", [])
         and coordinator.get("direct_table_dml") == []
         and coordinator.get("nobypassrls") is True
     ):
@@ -266,7 +285,8 @@ def build_evidence() -> dict[str, Any]:
             "body_source_sha256": "sha256:" + EXPECTED_BODY_SOURCE_SHA256,
             "body_contract_sha256": "sha256:" + EXPECTED_BODY_CONTRACT_SHA256,
             "structural_source_sha256": "sha256:" + EXPECTED_STRUCTURAL_SOURCE_SHA256,
-            "structural_contract_sha256": "sha256:" + EXPECTED_STRUCTURAL_CONTRACT_SHA256,
+            "structural_contract_sha256": "sha256:"
+            + EXPECTED_STRUCTURAL_CONTRACT_SHA256,
             "inert_sql_source_sha256": "sha256:" + EXPECTED_INERT_SQL_SHA256,
             "additional_container_runs": 0,
             "raw_postgresql_error_persisted": False,

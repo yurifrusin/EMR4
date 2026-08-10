@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_the_receipt_lock_behavior_parent_rebind_in_r170",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant is exact committed behavior-parent candidate ba25816d65b4f50dfc2d71bb0ed1ead44166c5cd. Attempt 042 remains the latest database run; attempt 043 is closed pending this veto.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only independent-veto authority only in clean r170 at the exact candidate. GPT Sol retains implementation, acceptance, runtime, cleanup, integration and baton authority. No fallback is allowed.",
+    "active_plan_and_acceptance": "The candidate binds six exact repaired parents, canonical behavior contract ee44dbf39c2458fdabc94768e3c3e8cdcc0372c10ae7f0a35709b55301c5d596, and the unchanged twenty scenarios with 6/4/3/4/3 coverage. The 404-test packet, Ruff, format and diff hygiene pass. The reviewer must veto any semantic, evidence, authority or cleanliness defect.",
+    "protected_evidence_boundaries": "The verifier may inspect only committed immutable authored-synthetic evidence and the packet allowlist. Mutable evidence, protected holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, other providers, product surfaces, edits, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Verifier r170 is clean at exact ba25816d65b4f50dfc2d71bb0ed1ead44166c5cd on codex/review-context-fabric-receipt-lock-behavior-ba25816d. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main tracked worktree is clean and preserved untracked paths remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh clean r170 passed the exact local verifier-worktree preflight with zero provider/model calls."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["The primary orchestrator committed and independently reverified the exact candidate and protected boundaries."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No Codex subagent is assigned or used for this external independent-veto dispatch."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
