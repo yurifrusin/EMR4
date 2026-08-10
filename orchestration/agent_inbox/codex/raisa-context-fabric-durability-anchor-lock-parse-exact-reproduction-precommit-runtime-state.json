@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "commit_the_immutable_anchor_lock_parse_catalogue_exact_reproduction_and_focused_acceptance_without_moving_protected_refs_or_mutable_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "Exact parse contract remains committed at task HEAD ed855807dd8023ae40ae9822438eefbf57828b29. Fresh attempt dec52bbdd6905cf0748d1967 has now independently reproduced its exact catalogue and is ready for immutable acceptance.",
+    "current_authority_allocation": "GPT Sol owns immutable evidence routing, deterministic tests and explicit-path commit. No worker, verifier, product consumer or protected integrator is assigned.",
+    "active_plan_and_acceptance": "Attempt dec52bbdd6905cf0748d1967 returned the exact pass result with all bound digests matched, 46 policies, 422 statements, atomic rollback and exact-container cleanup. Immutable evidence SHA-256 is 28be342cec5fb011a128027e090ebf206be9af034e82596fa69c8cef4fd2d0c0; the focused parse suite and Ruff pass.",
+    "protected_evidence_boundaries": "Accepted mutable parse evidence is restored to 97d1385c, historical failure to 3bf66870, generic characterization to 78c157c7 and behavior evidence remains 09907bf6; all remain unstaged. Only the immutable exact reproduction and its receipts are eligible. No operational container remains, and no applied migration, operational database, watcher/feed, app/API/Diary wiring, product/patient data, provider call, deployment, release, Pages or protected-ref movement is authorised. docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Task HEAD is exact ed855807dd8023ae40ae9822438eefbf57828b29. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; explicit-path staging only is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "anchor_lock_parse_exact_reproduction_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns immutable exact-reproduction acceptance."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker lease is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["No verifier call occurs in deterministic acceptance."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

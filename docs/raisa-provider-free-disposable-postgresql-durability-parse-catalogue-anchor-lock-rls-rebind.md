@@ -2,8 +2,7 @@
 
 Date: 2026-08-08
 
-Status: parent rebind and fresh characterization complete; exact reproduction
-remains required.
+Status: parent rebind, fresh characterization and exact reproduction pass.
 
 The fixed rehearsal contract now binds accepted inert source
 `ad98e6d7148781323ddc963c2d6523c4232cb52a`, canonical LF artifact
@@ -23,10 +22,17 @@ kind counts remained exact. The contract now binds those characterized digests
 at canonical digest
 `sha256:ce968baca442a3a9c3a3b0a6a13e635115378ec91434bd29baaf58dce07786f3`.
 
+Exact reproduction attempt `dec52bbdd6905cf0748d1967` then matched every
+bound digest and exact kind count, proved atomic rollback, and verified removal
+of its exact owned container. Its immutable evidence is
+`provider-free-disposable-postgresql-evidence-anchor-lock-rls-exact-reproduction.json`
+with SHA-256
+`28be342cec5fb011a128027e090ebf206be9af034e82596fa69c8cef4fd2d0c0`.
+The accepted mutable parse evidence and historical failure were restored
+byte-for-byte after routing.
+
 The new exact row is `pol_cf_08_update_lock`; all other object, role, function,
-trigger, privilege and phase populations remain unchanged. The previous
-accepted mutable parse evidence and historical failure stay protected until a
-fresh exact reproduction pass has been routed.
+trigger, privilege and phase populations remain unchanged.
 
 This grants one provider-free, networkless, authored-synthetic disposable
 PostgreSQL parse/catalogue recovery sequence only. It grants no behavior claim,

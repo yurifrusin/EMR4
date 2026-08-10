@@ -317,6 +317,13 @@ ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS = {
     ].items()
     if key not in {"server", "extensions"}
 }
+ANCHOR_LOCK_EXACT_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-anchor-lock-rls-exact-reproduction.json"
+)
+ANCHOR_LOCK_EXACT_PASS_EVIDENCE = json.loads(
+    ANCHOR_LOCK_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -2191,6 +2198,59 @@ def test_anchor_lock_characterization_is_immutable_and_exactly_bound() -> None:
     assert evidence["catalogue"]["kind_counts"] == {
         **GENERATION_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"],
         "policies": 46,
+    }
+
+
+def test_anchor_lock_exact_reproduction_is_immutable_and_complete() -> None:
+    evidence = ANCHOR_LOCK_EXACT_PASS_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            ANCHOR_LOCK_EXACT_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "28be342cec5fb011a128027e090ebf206be9af034e82596fa69c8cef4fd2d0c0"
+    )
+    assert evidence["attempt_id"] == "dec52bbdd6905cf0748d1967"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_435_884,
+        "artifact_sha256": (
+            "sha256:550336e145eac6ac004447d05ea3e72d970f6d8283d3af2689aed62cfff92bc6"
+        ),
+        "contract_sha256": (
+            "sha256:ce968baca442a3a9c3a3b0a6a13e635115378ec91434bd29baaf58dce07786f3"
+        ),
+        "prerequisite_contract_sha256": (
+            "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
+        ),
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 422,
+    }
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["query_digests"]
+    )
+    assert (
+        evidence["catalogue"]["kind_counts"]
+        == ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"]
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "ae450ec99726230c87549a49229eb121da936b09e555f4c741da2fd0f2f00203"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
     }
 
 
