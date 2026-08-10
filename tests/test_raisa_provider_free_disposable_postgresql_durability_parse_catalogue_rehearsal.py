@@ -2083,7 +2083,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_437_009
+    assert len(artifact) == 1_436_664
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 400
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
@@ -2485,8 +2485,8 @@ def test_outbox_select_characterization_is_immutable_and_exactly_bound() -> None
         "status": "cleanup_verified",
     }
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "exact_digest_bound",
-        "expected_query_digests": FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS,
+        "mode": "characterization_only",
+        "expected_query_digests": {},
     }
 
 
@@ -2576,8 +2576,8 @@ def test_receipt_lock_characterization_is_immutable_and_exactly_bound() -> None:
         "status": "cleanup_verified",
     }
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "exact_digest_bound",
-        "expected_query_digests": FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS,
+        "mode": "characterization_only",
+        "expected_query_digests": {},
     }
 
 

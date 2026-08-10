@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_characterization_only_parse_catalogue_rebind_before_fresh_exact_head_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The independently accepted admission replay recovery is sealed at source 5a9a7ae907308aa0a8a4256e9043b833f8c416ae. The current candidate rebinds only the closed parse/catalogue harness to that exact artifact in characterization-only mode; no database run has occurred.",
+    "current_authority_allocation": "GPT Sol owns this deterministic rebind, explicit-path commit and later serial database execution. A fresh Gemini 3.6 Flash/high context may receive read-only exact-HEAD veto authority only after commit. No worker or provider has runtime, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The contract binds exact source 5a9a7ae907308aa0a8a4256e9043b833f8c416ae, 424 statements, 1,436,664 LF bytes, artifact SHA-256 dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7 and characterization_only with an empty digest map. Canonical contract SHA-256 is 942ed41554fee46b3c4d11e663afd5e62c3c5e00250fc21fabb3e06009c98726. The full parse and renderer suites, Ruff and diff hygiene pass.",
+    "protected_evidence_boundaries": "No Docker/PostgreSQL is started by this commit. Protected mutable parse evidence remains untracked at SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536 and protected mutable behavior evidence remains untracked at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. All holdouts, historical Diary data, docs/branding and unrelated untracked files remain preserved and excluded. No operational or external surface opens.",
+    "git_refs_and_worktree": "Primary task branch is at exact cbac3a940890baa48b3ee245026a5935f61058db before this explicit-path commit with only the declared characterization candidate tracked changes. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
