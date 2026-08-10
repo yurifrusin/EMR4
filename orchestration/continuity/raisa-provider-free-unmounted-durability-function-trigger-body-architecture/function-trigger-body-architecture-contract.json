@@ -1,10 +1,10 @@
 {
   "schema_version": "raisa.context_fabric.function_trigger_body_architecture.v3",
   "status": "architecture_only_unmounted_typed_ir",
-  "contract_sha256": "sha256:8124957e32657076c3befc96a7b5e8770dcd37fcb5b91e33c136f01cbf2dd5ea",
+  "contract_sha256": "sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62",
   "parent_binding": {
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-    "contract_sha256": "sha256:80d5b57eadef0e6ede54c48fc842fe5567723c0a9cdebe288efbf63048c4b3ac",
+    "contract_sha256": "sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f",
     "relation_signature_trigger_and_role_authority": "RETAINED_EXCEPT_EXPLICIT_RECOVERY_OPERATIONS"
   },
   "structural_feasibility_recovery_v1": {

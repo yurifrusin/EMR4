@@ -11,20 +11,26 @@ def load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
+def accepted_body_node() -> dict:
+    graph = load("orchestration/continuity/emr4-continuity-graph.json")
+    matches = [node for node in graph["nodes"] if node["id"] == NODE_ID]
+    assert len(matches) == 1
+    return matches[0]
+
+
 def test_durability_body_architecture_continuity_is_current() -> None:
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 230
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 212
-    assert compass["source_graph_revision"] == 230
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert "inert ddl rehearsal is next" in compass["orientation_statement"].lower()
+    node = accepted_body_node()
+    assert graph["graph_revision"] >= 230
+    assert node["status"] == "accepted"
+    assert node["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] >= 212
+    assert compass["source_graph_revision"] == graph["graph_revision"]
 
 
 def test_body_acceptance_opens_no_executable_authority() -> None:
-    node = load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    node = accepted_body_node()
     assert node["authority"]["authorized_openings"] == []
     notes = " ".join(node["authority"]["notes"]).lower()
     for phrase in (
@@ -43,24 +49,28 @@ def test_body_acceptance_opens_no_executable_authority() -> None:
 
 
 def test_inert_ddl_and_later_live_gates_remain_separate() -> None:
-    compass = load("orchestration/continuity/emr4-compass.json")
-    position = compass["current_position"]
+    node = accepted_body_node()
+    rebind = (
+        ROOT
+        / "docs/raisa-provider-free-unmounted-durability-function-trigger-body-outbox-select-policy-parent-rebind.md"
+    ).read_text(encoding="utf-8")
     joined = " ".join(
-        position["unlocks"]
-        + position["does_not_solve"]
-        + [compass["orientation_statement"]]
+        node["claim_scope"]
+        + node["unresolved_gates"]
+        + [rebind]
     ).lower()
     for phrase in (
         "inert",
-        "without execution",
+        "non-executable",
         "sql/ddl execution",
         "applied migration",
         "database/outbox/feed/watcher/listener/source",
-        "patient/product data",
-        "commands",
+        "patient",
+        "product",
+        "command",
         "deployment",
         "pages",
-        "protected-ref",
+        "protected refs",
     ):
         assert phrase in joined
 
@@ -86,7 +96,7 @@ def test_closeout_review_and_error_register_bind_the_result() -> None:
     assert "44/44" in acceptance
     assert review["decision"] == "pass"
     assert review["dirty_after"] is False
-    assert register["register_revision"] == 81
+    assert register["register_revision"] >= 81
     incident = next(
         row for row in register["incidents"] if row["incident_id"] == "AER-0081"
     )

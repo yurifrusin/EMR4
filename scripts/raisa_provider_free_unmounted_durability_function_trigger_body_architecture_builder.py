@@ -28,7 +28,7 @@ CONTRACT_PATH = OUTPUT_DIR / "function-trigger-body-architecture-contract.json"
 SCHEMA_PATH = OUTPUT_DIR / "function-trigger-body-architecture-contract.schema.json"
 
 PARENT_DIGEST = (
-    "sha256:80d5b57eadef0e6ede54c48fc842fe5567723c0a9cdebe288efbf63048c4b3ac"
+    "sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f"
 )
 FABRIC = "emr4_context_fabric."
 PG = "pg_catalog."

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 184,
+  "register_revision": 185,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8593,6 +8593,47 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-184.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0214",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-outbox-select-policy-descendant-rebind",
+      "stage": "deterministic_verification",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-body-test-dispatch",
+      "model": null,
+      "transport": "local_windows_powershell_pytest",
+      "attempt_id": "raisa-context-fabric-body-rebind-test-dispatch-001",
+      "origin": "agent_behavior",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "reasoning_level": "high",
+      "observed_error": "The first body-rebind verification command passed a Windows wildcard as a literal pytest path, then chained later checks without preserving pytest's non-zero exit. Pytest reported that the file was not found, but a later successful command masked the aggregate shell exit code.",
+      "expected_invariant": "Windows test dispatch must resolve every intended test file to an explicit path before pytest and must check each command's exit code independently so no later success can mask an earlier failure.",
+      "detection_method": "The orchestrator read the complete command output, identified pytest's file-not-found message despite the aggregate zero exit, stopped acceptance and reran the suite using rg --files resolution plus immediate LASTEXITCODE checks after pytest, Ruff and git diff --check.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-outbox-select-policy-parent-rebind.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-outbox-select-body-parent-rebind-precommit-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-185.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_wildcard_literal_and_chained_exit_masked",
+      "causal_claim_level": "observation_only",
+      "related_incident_ids": [],
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Resolve the exact body-test paths with rg --files, reject an empty resolution, invoke pytest with the resulting explicit path array and check LASTEXITCODE immediately; then run Ruff and git diff --check as separately admitted commands with their own immediate exit checks.",
+        "prevention_control": "On Windows, never rely on pytest to expand wildcard path arguments and never use a chained verification command's final exit as evidence for earlier steps; resolve exact paths and admit every command independently.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-outbox-select-policy-parent-rebind.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-outbox-select-body-parent-rebind-precommit-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-185.md",
+          "tests/test_ariadne_agent_error_register.py"
         ]
       },
       "status": "corrected"
