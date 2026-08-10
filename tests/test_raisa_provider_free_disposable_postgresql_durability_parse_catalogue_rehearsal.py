@@ -324,6 +324,27 @@ ANCHOR_LOCK_EXACT_PASS_EVIDENCE_PATH = (
 ANCHOR_LOCK_EXACT_PASS_EVIDENCE = json.loads(
     ANCHOR_LOCK_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+ADMISSION_LOCK_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-admission-lock-rls-characterization.json"
+)
+ADMISSION_LOCK_CHARACTERIZATION_EVIDENCE = json.loads(
+    ADMISSION_LOCK_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+ADMISSION_LOCK_EXPECTED_QUERY_DIGESTS = {
+    key: value
+    for key, value in ADMISSION_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"][
+        "query_digests"
+    ].items()
+    if key not in {"server", "extensions"}
+}
+ADMISSION_LOCK_EXACT_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-admission-lock-rls-exact-reproduction.json"
+)
+ADMISSION_LOCK_EXACT_PASS_EVIDENCE = json.loads(
+    ADMISSION_LOCK_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1954,9 +1975,9 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_435_884
+    assert len(artifact) == 1_436_426
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
-    assert len(manifest["ordered_nodes"]) == 398
+    assert len(manifest["ordered_nodes"]) == 399
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
     assert (  # noqa: SLF001
         rehearsal._canonical_sha(PREREQUISITE) == rehearsal.EXPECTED_PREREQUISITE_SHA256
@@ -1999,7 +2020,7 @@ def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound()
     }
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
-        "expected_query_digests": ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS,
+        "expected_query_digests": ADMISSION_LOCK_EXPECTED_QUERY_DIGESTS,
     }
     assert {
         "mode": "exact_digest_bound",
@@ -2095,7 +2116,7 @@ def test_generation_lock_characterization_is_immutable_and_exactly_bound() -> No
     )
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
-        "expected_query_digests": ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS,
+        "expected_query_digests": ADMISSION_LOCK_EXPECTED_QUERY_DIGESTS,
     }
 
 
@@ -2187,7 +2208,7 @@ def test_anchor_lock_characterization_is_immutable_and_exactly_bound() -> None:
     }
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
-        "expected_query_digests": ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS,
+        "expected_query_digests": ADMISSION_LOCK_EXPECTED_QUERY_DIGESTS,
     }
     assert {
         key
@@ -2254,6 +2275,97 @@ def test_anchor_lock_exact_reproduction_is_immutable_and_complete() -> None:
     }
 
 
+def test_admission_lock_characterization_is_immutable_and_exactly_bound() -> None:
+    evidence = ADMISSION_LOCK_CHARACTERIZATION_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(ADMISSION_LOCK_CHARACTERIZATION_EVIDENCE_PATH.read_bytes())  # noqa: SLF001
+        == "21c9139cf194f8077837de0f97d07a189e89bc5826413a7ddae27ae14a0c18fb"
+    )
+    assert evidence["attempt_id"] == "085b2aca8e37483090017aa6"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:04b9ccd5c52f937974b3f286de0bd05b499338e2e9cacef3304da45b0bff301c"
+    )
+    assert evidence["parent"]["artifact_sha256"] == (
+        "sha256:1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5"
+    )
+    assert {
+        key
+        for key, value in ADMISSION_LOCK_EXPECTED_QUERY_DIGESTS.items()
+        if ANCHOR_LOCK_EXPECTED_QUERY_DIGESTS[key] != value
+    } == {"policies"}
+    assert evidence["catalogue"]["kind_counts"] == {
+        **ANCHOR_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"],
+        "policies": 47,
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "27906c172b216018f2655bdfe1ff3338f14c417a87e58df4509222a0389fdac9"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert CONTRACT["catalogue_expectation"] == {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": ADMISSION_LOCK_EXPECTED_QUERY_DIGESTS,
+    }
+
+
+def test_admission_lock_exact_reproduction_is_immutable_and_complete() -> None:
+    evidence = ADMISSION_LOCK_EXACT_PASS_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(ADMISSION_LOCK_EXACT_PASS_EVIDENCE_PATH.read_bytes())  # noqa: SLF001
+        == "aeaaafc309b2f083688988aed21f77f39283b2c64d391133e8223effc1224de5"
+    )
+    assert evidence["attempt_id"] == "8007945b44c65d3ba0670274"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_436_426,
+        "artifact_sha256": (
+            "sha256:1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5"
+        ),
+        "contract_sha256": (
+            "sha256:c48d34397de7c2bb433a28af2c064acdf780877933ee9d7edb28c2cc2c9644e5"
+        ),
+        "prerequisite_contract_sha256": (
+            "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
+        ),
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 423,
+    }
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == ADMISSION_LOCK_EXPECTED_QUERY_DIGESTS
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == ADMISSION_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["query_digests"]
+    )
+    assert (
+        evidence["catalogue"]["kind_counts"]
+        == ADMISSION_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"]
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "e6d7ad1b2c2b47424077b50f37809b2eeb55b96ab46db78a6fada4e483bd690c"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
 def test_exact_catalogue_kind_population_is_frozen() -> None:
     assert CONTRACT["manifest_kind_counts"] == {
         "ROLE": 8,
@@ -2267,7 +2379,7 @@ def test_exact_catalogue_kind_population_is_frozen() -> None:
         "SUPPORT_FUNCTION": 1,
         "RLS_ENABLE": 18,
         "RLS_FORCE": 18,
-        "RLS_POLICY": 46,
+        "RLS_POLICY": 47,
         "TYPE_OWNER": 32,
         "RELATION_OWNER": 18,
         "ENTRY_POINT": 9,
@@ -2785,7 +2897,7 @@ def test_catalogue_projection_matches_every_frozen_population() -> None:
         "columns": 52,
         "constraints": 81,
         "indexes": 4,
-        "policies": 46,
+        "policies": 47,
         "functions": 24,
         "triggers": 14,
     }

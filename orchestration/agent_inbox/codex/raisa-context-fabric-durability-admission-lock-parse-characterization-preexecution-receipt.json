@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_no_argument_provider_free_networkless_tmpfs_disposable_postgresql_parse_catalogue_characterization_for_the_admission_lock_inert_descendant_then_route_immutable_evidence_restore_the_protected_mutable_characterization_and_verify_exact_owned_container_absence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "One disposable characterization is permitted for inert SQL SHA-256 1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5, 1,436,426 bytes and 423 statements. The candidate contract digest is sha256:04b9ccd5c52f937974b3f286de0bd05b499338e2e9cacef3304da45b0bff301c, mode characterization_only with no expected catalogue digests. It cannot pass acceptance and must clean its exact owned container.",
+    "current_authority_allocation": "GPT Sol owns this fixed no-argument local harness invocation, evidence routing and cleanup verification. No model, provider, product consumer or operational database is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exact b0339bed1090f1f04c198ca0fb2bdf2932ca702c. Protected local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Candidate contract changes remain unstaged; all unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "The admission-lock inert descendant is committed and statically checks. The parse candidate binds exact source b0339bed1090f1f04c198ca0fb2bdf2932ca702c, one additional RLS policy and no other intended catalogue change.",
+    "protected_evidence_boundaries": "Before execution, mutable characterization SHA-256 is 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536, mutable exact pass is 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec, historical failure is 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c and mutable behavior pass is 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Only the newly created exact owned container may be touched. No unrelated container enumeration, applied migration, persistent or operational database, credentials, external network/provider, product/patient data, watcher, application wiring, deployment, release, Pages or protected-ref action is open."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_only_the_admission_lock_parse_catalogue_exact_bound_contract_immutable_characterization_and_exact_evidence_tests_documentation_and_execution_receipts_while_excluding_all_restored_mutable_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Accept exact-bound parse contract sha256:c48d34397de7c2bb433a28af2c064acdf780877933ee9d7edb28c2cc2c9644e5 and its two immutable evidence rows. Characterization SHA-256 21c9139cf194f8077837de0f97d07a189e89bc5826413a7ddae27ae14a0c18fb and exact reproduction SHA-256 aeaaafc309b2f083688988aed21f77f39283b2c64d391133e8223effc1224de5 prove exactly one policy digest/count change, exact catalogue match, rollback and cleanup. No behavior claim is opened.",
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance and explicit-path integration of repository and disposable authored-synthetic evidence. No model, provider, product consumer or operational database is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exact b0339bed1090f1f04c198ca0fb2bdf2932ca702c. Protected local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicitly named contract, schema, harness, test, immutable evidence, documentation and receipt paths may be staged; all other untracked files remain preserved.",
+    "live_handover_current_baton": "Admission-lock inert SQL is committed. Characterization attempt 085b2aca8e37483090017aa6 and exact attempt 8007945b44c65d3ba0670274 both cleaned their exact owned containers; exact-ID inspect returned absence after each. The parse descendant is ready for integration before behavior-parent rebind.",
+    "protected_evidence_boundaries": "Mutable characterization remains SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536, mutable exact pass remains 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec, historical failure remains 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c and mutable behavior pass remains 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. None may be staged. No further database run, applied migration, operational persistence, external provider/network, product/patient data, application wiring, deployment, release, Pages or protected-ref action is open."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
