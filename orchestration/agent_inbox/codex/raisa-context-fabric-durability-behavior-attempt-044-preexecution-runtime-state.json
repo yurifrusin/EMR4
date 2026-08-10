@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "run_exactly_one_no_argument_owned_disposable_postgresql_behavior_characterization_attempt_044_after_accepted_missing_source_sqlstate_correction",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant is the corrected disposable PostgreSQL behavior proof after immutable failed attempt 043. Exact task HEAD 5e660ce35b14a89f36f399a363ebf83f900269d9 accepts the fresh exact-HEAD Gemini veto. No attempt 044 has run.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted progression through this planned provider-free durability sequence. GPT Sol owns exactly one disposable no-argument attempt 044, exact-ID cleanup, failure routing or pass acceptance. The Gemini reviewer used one completed model call and has no runtime lease. No additional provider, product, deployment, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "Exact task HEAD 5e660ce35b14a89f36f399a363ebf83f900269d9 accepts BTR-E06 F_CARDINALITY/CF004 with fresh structured verifier pass. Current canonical behavior contract is sha256:897e07895116eecedaf8a2506ad10f9f5e5207b7e78e68ab79afb09347018a57 and the twenty-scenario seal is e7647c498e3ae121653a0c9e0cbf7d0d892ce133f49d40b66a865e4d4a6f25eb with unchanged exact 6/4/3/4/3 coverage. The independent packet passed 298 tests, Ruff and exact diff checks. Exactly one no-argument attempt 044 is next; an identical rerun is forbidden.",
+    "protected_evidence_boundaries": "Only repository-authored synthetic fixtures may enter one owned disposable PostgreSQL container using the harness's closed local image and isolation contract. The mutable evidence alias is backed up at C:\\Users\\sarashera\\AppData\\Local\\Temp\\emr4-cf-behavior-attempt-044-backup-c440ea50dcc749ea97ce57b09f076753\\provider-free-behavior-transaction-evidence.json with SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. On failure, route the result to a new immutable attempt-044 failure path, restore the alias and inspect only the exact emitted container ID. No Docker enumeration, operational database or credential, durable volume, watcher/feed, application/API/Diary wiring, patient/clinical/product data, provider/model call, external retrieval, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean with a clean index at exact HEAD 5e660ce35b14a89f36f399a363ebf83f900269d9. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review r172 is clean at reviewed correction commit 77afc48114328061c6cd3deef12b46fdf2a51ae6. Explicit-path staging only remains mandatory; user-owned untracked files remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_attempt_044_preexecution_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation transport is active or needed for this serial disposable database run."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected for this serial disposable database run."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active or needed for this serial disposable database run."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh r172 Gemini 3.6 Flash/high exact-candidate veto passed with a clean unchanged postcondition; its one reviewer-model call is complete."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified exact task HEAD, tracked/index cleanliness, protected refs, accepted veto, current contract/scenario seals and byte-exact protected evidence backup immediately before execution."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The prior read-only diagnosis validator is complete; no Codex subagent is assigned to or needed for this serial disposable PostgreSQL run."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
