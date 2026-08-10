@@ -3287,9 +3287,7 @@ def test_aer_0193_rejects_verifier_pass_with_exact_parent_mismatch() -> None:
 
 
 def test_aer_0194_separates_characterization_from_protected_evidence() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0194"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0194"]
 
     assert incident["origin"] == "harness"
     assert incident["category"] == "harness_failure"

@@ -1914,7 +1914,9 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     )
 
 
-def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound() -> None:
+def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound() -> (
+    None
+):
     evidence = ADMISSION_ROW_SHAPE_CHARACTERIZATION_EVIDENCE
 
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
@@ -2980,13 +2982,16 @@ def test_failed_exact_rerun_cannot_overwrite_last_accepted_evidence(
 
 
 def test_evidence_result_classes_have_distinct_repository_targets() -> None:
-    assert len(
-        {
-            rehearsal.EVIDENCE_PATH.resolve(),
-            rehearsal.CHARACTERIZATION_EVIDENCE_PATH.resolve(),
-            rehearsal.FAILURE_EVIDENCE_PATH.resolve(),
-        }
-    ) == 3
+    assert (
+        len(
+            {
+                rehearsal.EVIDENCE_PATH.resolve(),
+                rehearsal.CHARACTERIZATION_EVIDENCE_PATH.resolve(),
+                rehearsal.FAILURE_EVIDENCE_PATH.resolve(),
+            }
+        )
+        == 3
+    )
 
 
 def test_evidence_schema_accepts_bounded_environment_stop() -> None:
