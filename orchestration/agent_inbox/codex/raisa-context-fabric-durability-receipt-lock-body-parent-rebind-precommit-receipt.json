@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_unchanged_typed_body_rebound_to_receipt_lock_structural_parent",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The body parent is sha256:18fb00ff02820c31b4fcab4de096393cbea49e0a37ebb28d65c5eb2d6f154cfd and the new body seal is sha256:9ef411aa353ba6b39d9fbbd769d94ef5a9237bb7c6aa031dbdafce1bfa62ce83. The exhaustive body mutation suite passed every semantic case; its sole stale historical-doc assertion was corrected and the complete plan file then passed. Builder check and Ruff pass.",
+    "current_authority_allocation": "GPT Sol owns the deterministic parent rebind and task-branch integration. SQL mounting, database runtime, external verifier, provider, product runtime, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Precommit task HEAD is exact a1af31e89c13a0eea72fd90a2934a0c8e0154175. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging excludes docs/branding, mutable behavior evidence and unrelated untracked files.",
+    "live_handover_current_baton": "The receipt-lock structural parent is committed at a1af31e89c13a0eea72fd90a2934a0c8e0154175. The typed body is now regenerated from that exact parent without a program change.",
+    "protected_evidence_boundaries": "The change rebinds metadata only; typed operations, effects, entry points, grants, behavior scenarios and mutable evidence remain unchanged. No branding, raw evidence, patient, clinical, product, credential, provider, runtime, deployment, release or Pages surface opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

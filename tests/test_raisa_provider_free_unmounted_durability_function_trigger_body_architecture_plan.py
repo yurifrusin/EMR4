@@ -48,6 +48,10 @@ OUTBOX_SELECT_POLICY_REBIND = ROOT / (
     "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
     "outbox-select-policy-parent-rebind.md"
 )
+RECEIPT_LOCK_POLICY_REBIND = ROOT / (
+    "docs/raisa-provider-free-unmounted-durability-function-trigger-body-"
+    "receipt-lock-policy-parent-rebind.md"
+)
 PARENT = ROOT / (
     "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-"
     "transaction-architecture/migration-transaction-architecture-contract.json"
@@ -56,6 +60,9 @@ PLAN_PARENT_HASH = (
     "sha256:4b0ec20ba00010a1034c6d3c5eedfe8de3f329d7cd5ef495e5878689cdaacba8"
 )
 CURRENT_PARENT_HASH = (
+    "sha256:18fb00ff02820c31b4fcab4de096393cbea49e0a37ebb28d65c5eb2d6f154cfd"
+)
+OUTBOX_SELECT_PARENT_HASH = (
     "sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f"
 )
 
@@ -114,7 +121,10 @@ def test_plan_binds_exact_parent_and_complete_body_population() -> None:
     assert "sha256:8124957e" in ADMISSION_LOCK_POLICY_REBIND.read_text(
         encoding="utf-8"
     )
-    assert CURRENT_PARENT_HASH in OUTBOX_SELECT_POLICY_REBIND.read_text(
+    assert OUTBOX_SELECT_PARENT_HASH in OUTBOX_SELECT_POLICY_REBIND.read_text(
+        encoding="utf-8"
+    )
+    assert CURRENT_PARENT_HASH in RECEIPT_LOCK_POLICY_REBIND.read_text(
         encoding="utf-8"
     )
     assert parent["contract_sha256"] == CURRENT_PARENT_HASH
