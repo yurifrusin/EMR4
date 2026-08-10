@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_admission_replay_behavior_parent_rebind_before_fresh_exact_head_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The admission-replay parse characterization and exact reproduction are accepted at exact task HEAD 36f076775e676620f99650043b05bd852e3a84be. The current deterministic candidate rebinds the unchanged behavior contract to that exact parent; no behavior run has occurred.",
+    "current_authority_allocation": "GPT Sol owns this deterministic parent rebind and explicit-path commit. A fresh Gemini 3.6 Flash/high context may receive read-only exact-head veto authority after commit. Only after a pass may GPT Sol run one separately receipted behavior attempt 047. No provider, product, deployment or protected integration authority is open.",
+    "active_plan_and_acceptance": "The unchanged twenty scenarios retain order and category counts 6/4/3/4/3. Parent bindings now use immutable parse pass SHA-256 9ad82882150f8795789c332db8bed6e4b50d150986a6066ce832f12e48246d24, inert SQL dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7 and manifest 2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271. Canonical behavior-contract SHA-256 is 43b25bd7509439f069643dcb0ae8e62e27002834fe9903d84e7478486b452615. Combined behavior/parse/renderer suites, Ruff and diff hygiene pass.",
+    "protected_evidence_boundaries": "This commit starts no Docker/database. Mutable behavior alias remains untracked at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b; accepted parse and characterization aliases remain 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536. Holdouts, historical Diary data, docs/branding and unrelated untracked files remain excluded. No operational persistence, watcher/feed, app/API/Diary wiring, product/patient/clinical data, provider, deployment, release, Pages or protected refs open.",
+    "git_refs_and_worktree": "Primary task branch is exact 36f076775e676620f99650043b05bd852e3a84be before this explicit-path commit with only the declared behavior-parent candidate tracked changes. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

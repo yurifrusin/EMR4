@@ -843,24 +843,24 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "path": (
             "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
             "durability-parse-catalogue-rehearsal/provider-free-disposable-"
-            "postgresql-evidence-frame-mask-domain-nullability-pass.json"
+            "postgresql-evidence-admission-replay-winner-exact-reproduction.json"
         ),
-        "source_head": "9bf59ed860e2c4e119b13e5dd38911dbb9591ad0",
+        "source_head": "36f076775e676620f99650043b05bd852e3a84be",
         "sha256": (
-            "sha256:4583c8b0bca881964ba9a337cfd1b5c9ae535ad7cc78c06766f844ffe95d998a"
+            "sha256:9ad82882150f8795789c332db8bed6e4b50d150986a6066ce832f12e48246d24"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "a8cef7045fcada54a33a1060e83fd4d9929ac56b"
+        "5a9a7ae907308aa0a8a4256e9043b833f8c416ae"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa"
+        "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7"
     )
     assert bindings["render_manifest"]["source_head"] == (
-        "a8cef7045fcada54a33a1060e83fd4d9929ac56b"
+        "5a9a7ae907308aa0a8a4256e9043b833f8c416ae"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:fec0bb1399ebf5af0d06ca933069614ca4a8c84a9593d5eee0e983b0afffb9fd"
+        "sha256:2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271"
     )
     assert bindings["structural_contract"] == {
         "id": "structural_contract",
