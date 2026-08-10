@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/raisa-context-fabric-durability-behavior-r180",
+  "branch": "codex/review-context-fabric-rollback-gap-3e73606a",
+  "head": "3e73606a0b451d02d2bb3d4d9d22eee161aa084f",
+  "expected_head": "3e73606a0b451d02d2bb3d4d9d22eee161aa084f",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-rollback-gap-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

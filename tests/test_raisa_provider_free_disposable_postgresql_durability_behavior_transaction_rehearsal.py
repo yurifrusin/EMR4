@@ -977,7 +977,9 @@ def test_rollback_transition_fixture_uses_first_contiguous_position() -> None:
     assert "source.transaction_position=1::pg_catalog.int8" in precondition
     assert "source.transaction_position=2::pg_catalog.int8" not in precondition
     assert ",1::pg_catalog.int8)::emr4_context_fabric.admission_locator_v1" in scenario
-    assert ",2::pg_catalog.int8)::emr4_context_fabric.admission_locator_v1" not in scenario
+    assert (
+        ",2::pg_catalog.int8)::emr4_context_fabric.admission_locator_v1" not in scenario
+    )
     assert "'expected_result_kind','RECEIPT_APPLIED'" in scenario
     assert scenario.index(rehearsal.TRANSITION_RESULT_MARKER) < scenario.index(
         "fixed_injected_rollback"

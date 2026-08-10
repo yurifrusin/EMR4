@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_attempt_047_rollback_gap_fixture_recovery_in_r180",
+  "source_evidence": {
+    "live_handover_current_baton": "Behavior attempt 047 is preserved as immutable failure evidence; candidate 3e73606a0b451d02d2bb3d4d9d22eee161aa084f contains the bounded rollback-fixture diagnosis and recovery only. No behavior attempt has followed attempt 047.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only exact-head veto authority only in clean r180. GPT Sol retains acceptance, the one next behavior run, cleanup and integration authority. No fallback is allowed.",
+    "active_plan_and_acceptance": "The unchanged twenty-scenario contract remains SHA-256 43b25bd7509439f069643dcb0ae8e62e27002834fe9903d84e7478486b452615. The candidate changes only the BTR-B03 rollback fixture's precondition, transition and probe from position two to contiguous position one; artifact SQL and manifest remain unchanged.",
+    "protected_evidence_boundaries": "Reviewer access is limited to tracked allowlisted exact-head files. Mutable aliases, holdouts, historical Diary data, docs/branding, patient/clinical/product data, Docker/database, other providers, edits, deployment, Pages and protected refs are closed.",
+    "git_refs_and_worktree": "Clean r180 is exact 3e73606a0b451d02d2bb3d4d9d22eee161aa084f on codex/review-context-fabric-rollback-gap-3e73606a. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary task tracked state matches candidate; all untracked paths remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Exact candidate, failure seal, aliases, parent seals and clean preflight verified."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Selected exact gemini-3.6-flash-high in a fresh project."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "gemini-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-context-fabric-behavior-failure-047-rollback-gap-review-worktree-preflight.json"
+  ],
+  "assigned_agent_ids": []
+}

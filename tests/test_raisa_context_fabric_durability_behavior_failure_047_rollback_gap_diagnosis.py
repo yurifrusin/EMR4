@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 
 from scripts import (
     raisa_context_fabric_durability_behavior_failure_047_rollback_gap_diagnosis as diagnosis,
@@ -38,7 +39,7 @@ def test_attempt_047_diagnosis_is_exact_and_repository_only() -> None:
 
 def test_attempt_047_diagnosis_cli_is_byte_stable() -> None:
     result = subprocess.run(
-        [str(diagnosis.ROOT / ".venv/Scripts/python.exe"), str(diagnosis.__file__)],
+        [sys.executable, str(diagnosis.__file__)],
         cwd=diagnosis.ROOT,
         stdin=subprocess.DEVNULL,
         stdout=subprocess.PIPE,
