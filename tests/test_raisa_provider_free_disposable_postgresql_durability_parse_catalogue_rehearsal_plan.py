@@ -109,10 +109,14 @@ GENERATION_LOCK_RLS_REBIND = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-generation-lock-rls-rebind.md"
 )
+ANCHOR_LOCK_RLS_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-anchor-lock-rls-rebind.md"
+)
 
-PARENT_HEAD = "e115f6f4cb31df1131c5c67d24f3a475a2ca6127"
+PARENT_HEAD = "ad98e6d7148781323ddc963c2d6523c4232cb52a"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9"
+PARENT_DIGEST = "550336e145eac6ac004447d05ea3e72d970f6d8283d3af2689aed62cfff92bc6"
 
 
 def _text(path: Path) -> str:
@@ -160,6 +164,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         INPUT_NAMESPACE_REBIND,
         ADMISSION_ROW_SHAPE_REBIND,
         GENERATION_LOCK_RLS_REBIND,
+        ANCHOR_LOCK_RLS_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
@@ -168,8 +173,8 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_435_252
-    assert manifest["statement_count"] == 421
+    assert manifest["sql_byte_count"] == 1_435_884
+    assert manifest["statement_count"] == 422
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
     assert PARENT_HEAD in plan
@@ -177,6 +182,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     assert f"sha256:{PARENT_DIGEST}" in plan
     assert "1,435,142" in plan
     assert "statement count `421`" in plan
+    assert "statement count `422`" in plan
     assert "mechanical CRLF-to-LF normalization" in " ".join(plan.split())
     assert "3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c" in plan
     assert "4d140704d33624e90737022e5f9d095559152bd56554514ccebc73222d845750" in plan

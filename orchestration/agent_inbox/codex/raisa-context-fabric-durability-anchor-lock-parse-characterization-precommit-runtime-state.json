@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_the_anchor_lock_parse_catalogue_parent_rebind_in_characterization_only_mode_without_opening_postgresql",
+  "source_evidence": {
+    "live_handover_current_baton": "Exact inert descendant ad98e6d7148781323ddc963c2d6523c4232cb52a contains 422 statements and one new lock-only anchor policy at canonical SQL SHA-256 550336e1. Its renderer and focused tests pass.",
+    "current_authority_allocation": "GPT Sol owns the parse-contract characterization rebind and explicit-path commit. No worker, verifier, model, database runtime or product consumer is active for this commit.",
+    "active_plan_and_acceptance": "Bind exact inert source ad98e6d7, SHA-256 550336e1, 1,435,884 LF bytes, 422 statements and 46 RLS policies. Set catalogue expectation to characterization_only with an empty digest map. Fresh disposable PostgreSQL characterization remains a later separately receipted action.",
+    "protected_evidence_boundaries": "Provider-free repository work only. Accepted parse mutable evidence 97d1385c, historical failure 3bf66870, generic characterization 78c157c7, behavior mutable 09907bf6 and immutable behavior failure 036 remain unstaged and byte-preserved. No database run, applied migration, operational database, watcher/feed, application wiring, product/patient data, provider call, deployment, release, Pages or protected-ref movement. docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Task HEAD is exact ad98e6d7148781323ddc963c2d6523c4232cb52a; protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit parse contract/schema/harness/test/rebind/receipt paths may be staged; unrelated untracked files remain preserved."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "anchor_lock_parse_characterization_rebind_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns this parse-parent-only commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker lease is active."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Verifier dispatch remains deferred until parse exact reproduction and behavior rebind."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

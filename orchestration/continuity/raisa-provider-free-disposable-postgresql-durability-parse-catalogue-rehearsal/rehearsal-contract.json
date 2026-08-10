@@ -2,14 +2,14 @@
   "schema_version": "emr4.disposable-postgresql-durability-rehearsal-contract.v1",
   "status": "accepted_for_bounded_implementation",
   "parent": {
-    "accepted_source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
+    "accepted_source_head": "ad98e6d7148781323ddc963c2d6523c4232cb52a",
     "planning_baseline_head": "253230a25ab172b90bc5f44772670c7df89b3052",
     "accepted_plan_head": "c5f0960a240b7f162b1b34e1b09fb166d12fd42e",
     "artifact_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
     "manifest_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-    "artifact_sha256": "aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9",
-    "artifact_byte_count": 1435252,
-    "statement_count": 421,
+    "artifact_sha256": "550336e145eac6ac004447d05ea3e72d970f6d8283d3af2689aed62cfff92bc6",
+    "artifact_byte_count": 1435884,
+    "statement_count": 422,
     "postgresql_major": 16,
     "phase_count": 6
   },
@@ -85,7 +85,7 @@
     "SUPPORT_FUNCTION": 1,
     "RLS_ENABLE": 18,
     "RLS_FORCE": 18,
-    "RLS_POLICY": 45,
+    "RLS_POLICY": 46,
     "TYPE_OWNER": 32,
     "RELATION_OWNER": 18,
     "ENTRY_POINT": 9,
@@ -103,7 +103,7 @@
     "fabric_relations": 18,
     "fabric_type_owner_count": 32,
     "insert_or_reload_compare": 21,
-    "rls_policies": 45,
+    "rls_policies": 46,
     "roles": 8,
     "runtime_schema_create_grants": 0,
     "schema_owner": "context_schema_owner",
@@ -132,24 +132,8 @@
     "extensions"
   ],
   "catalogue_expectation": {
-    "mode": "exact_digest_bound",
-    "expected_query_digests": {
-      "roles": "sha256:e2219c1d27c48b6aadd344829067afdeb9ded5c87d5fd3ffd9e554b8c7eec208",
-      "schema": "sha256:643038903e79d2608b200362062a0d2ee42e4195df4d4c6d42964cb8484ae4a6",
-      "types": "sha256:8ec5eddfcb4cd14d62f783bfcfeb02004204630510b8913ce769a1c49a2135af",
-      "relations": "sha256:2ce597e74361c8482530d4dc63a288de7302cab1e00dc816bac50567a37bacf6",
-      "columns": "sha256:d0cd2d7f4afb1daff162d37fd915a3ae6a59c8fd89b9654700eab40714173290",
-      "constraints": "sha256:f8405bbd7919c5d676dabadf807d087413191e262db35b8e353c1fc2d050404f",
-      "indexes": "sha256:bf9960d578ec6c84e8b724d6375ec8ebecc6fce92b9b1f03fb64d78d91ff0aa3",
-      "rls": "sha256:ed39859c920b8a95925ae76bc1e1fb7922f366bde41ec626b4aa8733b18c2e37",
-      "policies": "sha256:dd4adfdcab27a88164854bf0f7586bb8108b397033283ead3a6a5ec2c78e0d3c",
-      "functions": "sha256:771cdde55cdd111f8ee4591ee13e26941d913aaa2eee22623e1de06610bb714a",
-      "triggers": "sha256:f8952068cbd262f70bcd8d040fbdf5596fcba8dcfedebf73e592d0f017e4d91a",
-      "schema_acl": "sha256:63129f4571ab70a6191f118b6c752cc72c18d1dfbc6f654d5280e710b488aba2",
-      "relation_acl": "sha256:7cacd542f2a5d16e2a6b40cb537fb78aaa6f34eac56c207f91f8c84977a1d66e",
-      "function_acl": "sha256:dba3aa331a66e608ac22e434b24637050e5f89f5e63fd653a51201df58a520f3",
-      "application_relations": "sha256:09d7abdc942548e8f7743f77d025dc6ecab74f17ae8ef93e1920e6a290ce0500"
-    }
+    "mode": "characterization_only",
+    "expected_query_digests": {}
   },
   "evidence": {
     "output_path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",

@@ -1933,9 +1933,9 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_435_252
+    assert len(artifact) == 1_435_884
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
-    assert len(manifest["ordered_nodes"]) == 397
+    assert len(manifest["ordered_nodes"]) == 398
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
     assert (  # noqa: SLF001
         rehearsal._canonical_sha(PREREQUISITE) == rehearsal.EXPECTED_PREREQUISITE_SHA256
@@ -1977,8 +1977,8 @@ def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound()
         if key not in {"server", "extensions"}
     }
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "exact_digest_bound",
-        "expected_query_digests": GENERATION_LOCK_EXPECTED_QUERY_DIGESTS,
+        "mode": "characterization_only",
+        "expected_query_digests": {},
     }
     assert {
         "mode": "exact_digest_bound",
@@ -2073,8 +2073,8 @@ def test_generation_lock_characterization_is_immutable_and_exactly_bound() -> No
         == (ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE["catalogue"]["kind_counts"])
     )
     assert CONTRACT["catalogue_expectation"] == {
-        "mode": "exact_digest_bound",
-        "expected_query_digests": GENERATION_LOCK_EXPECTED_QUERY_DIGESTS,
+        "mode": "characterization_only",
+        "expected_query_digests": {},
     }
 
 
@@ -2139,7 +2139,7 @@ def test_exact_catalogue_kind_population_is_frozen() -> None:
         "SUPPORT_FUNCTION": 1,
         "RLS_ENABLE": 18,
         "RLS_FORCE": 18,
-        "RLS_POLICY": 45,
+        "RLS_POLICY": 46,
         "TYPE_OWNER": 32,
         "RELATION_OWNER": 18,
         "ENTRY_POINT": 9,
@@ -2657,7 +2657,7 @@ def test_catalogue_projection_matches_every_frozen_population() -> None:
         "columns": 52,
         "constraints": 81,
         "indexes": 4,
-        "policies": 45,
+        "policies": 46,
         "functions": 24,
         "triggers": 14,
     }
