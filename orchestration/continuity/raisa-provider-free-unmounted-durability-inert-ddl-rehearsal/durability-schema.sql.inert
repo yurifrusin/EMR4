@@ -515,6 +515,9 @@ CREATE POLICY pol_cf_04_select ON emr4_context_fabric.context_proofread_observat
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['OBSERVER'::emr4_context_fabric.logical_capability, 'COORDINATOR'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_04_insert ON emr4_context_fabric.context_proofread_observation_admission FOR INSERT TO PUBLIC
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['OBSERVER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+CREATE POLICY pol_cf_04_update_lock ON emr4_context_fabric.context_proofread_observation_admission FOR UPDATE TO PUBLIC
+    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
+    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()) AND FALSE);
 CREATE POLICY pol_cf_05_select ON emr4_context_fabric.context_generation_registry_barrier FOR SELECT TO PUBLIC
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_05_insert ON emr4_context_fabric.context_generation_registry_barrier FOR INSERT TO PUBLIC
@@ -4276,7 +4279,7 @@ GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenti
 -- postgresql_major: 16
 -- fabric_schema: emr4_context_fabric
 -- fabric_relations: 18
--- rls_policies: 46
+-- rls_policies: 47
 -- roles: 8
 -- entry_points: 9
 -- trigger_functions: 14
