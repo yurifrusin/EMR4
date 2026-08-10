@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 180,
+  "register_revision": 181,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8390,6 +8390,44 @@
           "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
           "docs/raisa-provider-free-unmounted-durability-migration-transaction-admission-lock-rls-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-180.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0209",
+      "attempt_id": "raisa-context-fabric-admission-lock-structural-precommit-count-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "integration",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "A precommit receipt that states an exact staged-path count must reconcile mechanically with git diff --cached --name-only before integration.",
+      "observed_error": "The structural precommit receipt stated eight intended paths, while the explicit staging command and commit contained nine intended paths because the two test files were miscounted as one.",
+      "detection_method": "The commit's exact file-change summary reported nine files immediately after integration; Sol reconciled it against the receipt before any descendant rebind or runtime action.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-admission-lock-rls-recovery-precommit-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-181.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.precommit_receipt_staged_path_count_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Correct the preserved receipt from eight to nine paths and record the mismatch before any descendant action. The staged path names themselves, structural candidate and protected evidence boundaries were exact and unchanged.",
+        "prevention_control": "Derive every exact staged-path count from git diff --cached --name-only after staging; if a receipt is required before staging, omit the numeric count and bind the explicit path list instead.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-admission-lock-rls-recovery-precommit-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-181.md"
         ]
       },
       "status": "corrected"
