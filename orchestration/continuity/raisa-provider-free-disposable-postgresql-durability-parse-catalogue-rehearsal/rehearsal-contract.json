@@ -7,8 +7,8 @@
     "accepted_plan_head": "c5f0960a240b7f162b1b34e1b09fb166d12fd42e",
     "artifact_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
     "manifest_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-    "artifact_sha256": "bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38",
-    "artifact_byte_count": 1437022,
+    "artifact_sha256": "fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa",
+    "artifact_byte_count": 1437009,
     "statement_count": 424,
     "postgresql_major": 16,
     "phase_count": 6
@@ -136,7 +136,7 @@
     "expected_query_digests": {
       "roles": "sha256:e2219c1d27c48b6aadd344829067afdeb9ded5c87d5fd3ffd9e554b8c7eec208",
       "schema": "sha256:643038903e79d2608b200362062a0d2ee42e4195df4d4c6d42964cb8484ae4a6",
-      "types": "sha256:8ec5eddfcb4cd14d62f783bfcfeb02004204630510b8913ce769a1c49a2135af",
+      "types": "sha256:b7244669f109b81a3907c2f7a5397a253e8a374e261177a7567042d064c25c90",
       "relations": "sha256:2ce597e74361c8482530d4dc63a288de7302cab1e00dc816bac50567a37bacf6",
       "columns": "sha256:d0cd2d7f4afb1daff162d37fd915a3ae6a59c8fd89b9654700eab40714173290",
       "constraints": "sha256:f8405bbd7919c5d676dabadf807d087413191e262db35b8e353c1fc2d050404f",

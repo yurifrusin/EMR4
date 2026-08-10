@@ -328,6 +328,7 @@
     ],
     "operation_order": [
       "RELAX_DIGEST_DOMAIN_NULLABILITY",
+      "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
       "ADD_APPOINTMENT_GUARD_SIGNATURE",
       "ADD_APPOINTMENT_GUARD_PROGRAM",
       "ADD_APPOINTMENT_GUARD_DECLARATION",
@@ -345,6 +346,14 @@
         "id": "RELAX_DIGEST_DOMAIN_NULLABILITY",
         "new_fragment_sha256": "sha256:7c5c7e3bee71b953863b744de868b797439498fbea56b6e8f13ac969fd598e6c",
         "old_fragment_sha256": "sha256:5f00a27475a8b38a8168fda1a91f371c25c5666fd7028ef334873b3a7f24db89"
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.frame_mask"
+        ],
+        "id": "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
+        "new_fragment_sha256": "sha256:882d7bd557da279514c23d8d7238cb70fa8f0d852f7cb3616f1be14cc49be720",
+        "old_fragment_sha256": "sha256:65ed966857fe68c9d8fec7ddf553f988b4c053cc3d1117eb1462b9ab7813a1f5"
       },
       {
         "affected_ids": [

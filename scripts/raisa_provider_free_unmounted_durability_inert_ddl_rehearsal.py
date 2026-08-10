@@ -82,6 +82,7 @@ EVENT = "public.diary_committed_events"
 BINDING = FABRIC + "context_service_practice_binding"
 OUTBOX = FABRIC + "diary_context_observation_outbox_v1"
 DIGEST_DOMAIN_NAME = "digest_sha256"
+FRAME_MASK_DOMAIN_NAME = "frame_mask"
 
 RECOVERY_SPEC: dict[str, Any] = {
     "id": "postgresql_16_representability_recovery_v1",
@@ -94,6 +95,7 @@ RECOVERY_SPEC: dict[str, Any] = {
     },
     "operation_order": [
         "RELAX_DIGEST_DOMAIN_NULLABILITY",
+        "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
         "ADD_APPOINTMENT_GUARD_SIGNATURE",
         "ADD_APPOINTMENT_GUARD_PROGRAM",
         "ADD_APPOINTMENT_GUARD_DECLARATION",
@@ -109,6 +111,12 @@ RECOVERY_SPEC: dict[str, Any] = {
             "affected_ids": [FABRIC + DIGEST_DOMAIN_NAME],
             "old_fragment_sha256": "sha256:5f00a27475a8b38a8168fda1a91f371c25c5666fd7028ef334873b3a7f24db89",
             "new_fragment_sha256": "sha256:7c5c7e3bee71b953863b744de868b797439498fbea56b6e8f13ac969fd598e6c",
+        },
+        {
+            "id": "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
+            "affected_ids": [FABRIC + FRAME_MASK_DOMAIN_NAME],
+            "old_fragment_sha256": "sha256:65ed966857fe68c9d8fec7ddf553f988b4c053cc3d1117eb1462b9ab7813a1f5",
+            "new_fragment_sha256": "sha256:882d7bd557da279514c23d8d7238cb70fa8f0d852f7cb3616f1be14cc49be720",
         },
         {
             "id": "ADD_APPOINTMENT_GUARD_SIGNATURE",
@@ -692,6 +700,17 @@ def derive_effective_catalogue(
     if len(digest_domains) != 1 or digest_domains[0].get("not_null_values") is not True:
         raise ValueError("digest domain nullability source drift")
     digest_domains[0]["not_null_values"] = False
+    frame_mask_domains = [
+        domain
+        for domain in effective["type_catalogue"]["domains"]
+        if domain["name"] == FRAME_MASK_DOMAIN_NAME
+    ]
+    if (
+        len(frame_mask_domains) != 1
+        or frame_mask_domains[0].get("not_null_values") is not True
+    ):
+        raise ValueError("frame-mask domain nullability source drift")
+    frame_mask_domains[0]["not_null_values"] = False
 
     catalogue = build_catalogue(structural)
     signatures = build_signatures(structural)
@@ -1169,12 +1188,27 @@ def _recovery_operation_evidence(
     )
     source_digest_domain = copy.deepcopy(digest_domain)
     source_digest_domain["not_null_values"] = True
+    frame_mask_domain = next(
+        domain
+        for domain in recovered_effective["effective_structural"]["type_catalogue"][
+            "domains"
+        ]
+        if domain["name"] == FRAME_MASK_DOMAIN_NAME
+    )
+    source_frame_mask_domain = copy.deepcopy(frame_mask_domain)
+    source_frame_mask_domain["not_null_values"] = True
     operations = [
         {
             "id": "RELAX_DIGEST_DOMAIN_NULLABILITY",
             "affected_ids": [FABRIC + DIGEST_DOMAIN_NAME],
             "old_fragment_sha256": _json_seal(source_digest_domain),
             "new_fragment_sha256": _json_seal(digest_domain),
+        },
+        {
+            "id": "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
+            "affected_ids": [FABRIC + FRAME_MASK_DOMAIN_NAME],
+            "old_fragment_sha256": _json_seal(source_frame_mask_domain),
+            "new_fragment_sha256": _json_seal(frame_mask_domain),
         },
         {
             "id": "ADD_APPOINTMENT_GUARD_SIGNATURE",
@@ -3110,7 +3144,7 @@ def _verify_opcode_populations(body: dict[str, Any]) -> None:
 # Render plan, manifest and main render
 # ---------------------------------------------------------------------------
 
-RENDERER_VERSION = "2.0.18"
+RENDERER_VERSION = "2.0.19"
 PHASE_HEADERS: dict[int, str] = {
     1: (
         "PHASE 1 -- exact role/schema/type/relation/constraint/index/forced-RLS "

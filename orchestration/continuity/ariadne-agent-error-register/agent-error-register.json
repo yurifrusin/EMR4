@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 197,
+  "register_revision": 199,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -9318,6 +9318,84 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-197.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0232",
+      "attempt_id": "raisa-context-fabric-behavior-attempt-045",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": "deterministic-python",
+      "reasoning_level": "deterministic",
+      "transport": "local_disposable_postgresql_16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A domain used by an intentionally nullable conflict-only column must permit null while required uses preserve presence through column-level constraints.",
+      "observed_error": "Immutable attempt 045 stopped at BTR-I02 with SQLSTATE 23502 and no table-column coordinate because the globally NOT NULL frame_mask domain rejected the conflict row's intentional NULL::frame_mask before table insertion.",
+      "detection_method": "The immutable evidence proves the exact SQLSTATE, missing coordinate and cleanup. Repository-only diagnosis binds the accepted frame_mask domain, nullable admission column, conflict-row check, two typed-null body nodes and exact inert lowering without another container run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-045.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-045.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_045_frame_mask_domain_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_045_frame_mask_domain_diagnosis.py",
+        "docs/raisa-context-fabric-durability-behavior-failure-045-frame-mask-domain-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-198.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.domain_not_null_contradicts_nullable_relation_semantics",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Relax only effective frame_mask domain nullability in the inert renderer, preserve the 0..3 check and required column-level NOT NULL constraints, then freshly rebind and verify renderer, catalogue and behavior evidence.",
+        "prevention_control": "Every domain-level NOT NULL declaration must be reconciled against all nullable relation columns, composites and typed-null body expressions before executable-artifact acceptance.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_durability_inert_ddl_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-198.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0233",
+      "attempt_id": "raisa-context-fabric-behavior-attempt-045-container-absence-check-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "An exact-ID absence probe must treat Docker's expected exit 1 and no-such-object stderr as evidence rather than as a terminating PowerShell error.",
+      "observed_error": "The first post-attempt probe inherited ErrorActionPreference Stop, so PowerShell terminated on Docker's expected no-such-object stderr after the immutable copy and protected-alias restore had completed.",
+      "detection_method": "The command stopped at the native inspect call. A fresh check first verified both file hashes, then captured the same exact-ID Docker exit and confirmed exit 1 plus no such object without enumeration.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-199.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.expected_native_nonzero_promoted_to_terminating_error",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Capture the exact native process output and exit code under a locally non-terminating preference, then require exit 1 and the exact no-such-object shape.",
+        "prevention_control": "Expected-nonzero native probes must locally capture and interpret exit status instead of inheriting a broad terminating PowerShell error preference.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-199.md"
         ]
       },
       "status": "corrected"

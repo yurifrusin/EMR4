@@ -380,6 +380,10 @@ RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS = {
     ].items()
     if key not in {"server", "extensions"}
 }
+FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS = {
+    **RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS,
+    "types": "sha256:b7244669f109b81a3907c2f7a5397a253e8a374e261177a7567042d064c25c90",
+}
 RECEIPT_LOCK_EXACT_PASS_EVIDENCE_PATH = (
     DIR
     / "provider-free-disposable-postgresql-evidence-receipt-lock-rls-exact-reproduction.json"
@@ -572,7 +576,9 @@ def _valid_facts() -> dict[str, Any]:
     return facts
 
 
-def _reconstructed_type_facts(*, digest_domain_not_null: bool) -> list[dict[str, Any]]:
+def _reconstructed_type_facts(
+    *, digest_domain_not_null: bool, frame_mask_domain_not_null: bool
+) -> list[dict[str, Any]]:
     type_catalogue = ddl_rehearsal.derive_effective_catalogue()["effective_structural"][
         "type_catalogue"
     ]
@@ -589,6 +595,8 @@ def _reconstructed_type_facts(*, digest_domain_not_null: bool) -> list[dict[str,
         not_null = domain["not_null_values"]
         if domain["name"] == "digest_sha256":
             not_null = digest_domain_not_null
+        if domain["name"] == "frame_mask":
+            not_null = frame_mask_domain_not_null
         rows.append(
             {
                 "name": "emr4_context_fabric." + domain["name"],
@@ -680,8 +688,12 @@ def test_historical_exact_catalogue_digests_bind_revised_types_and_registration_
         if key not in {"server", "extensions"}
     }
     prior_types_digest = expected["types"]
-    original_type_facts = _reconstructed_type_facts(digest_domain_not_null=True)
-    revised_type_facts = _reconstructed_type_facts(digest_domain_not_null=False)
+    original_type_facts = _reconstructed_type_facts(
+        digest_domain_not_null=True, frame_mask_domain_not_null=True
+    )
+    revised_type_facts = _reconstructed_type_facts(
+        digest_domain_not_null=False, frame_mask_domain_not_null=True
+    )
     expected["types"] = rehearsal._facts_digest(revised_type_facts)  # noqa: SLF001
     expected["policies"] = REGISTRATION_RLS_CHARACTERIZATION_EVIDENCE["catalogue"][
         "query_digests"
@@ -2017,7 +2029,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_437_022
+    assert len(artifact) == 1_437_009
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 400
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
@@ -2420,7 +2432,7 @@ def test_outbox_select_characterization_is_immutable_and_exactly_bound() -> None
     }
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
-        "expected_query_digests": RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS,
+        "expected_query_digests": FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS,
     }
 
 
@@ -2511,7 +2523,7 @@ def test_receipt_lock_characterization_is_immutable_and_exactly_bound() -> None:
     }
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
-        "expected_query_digests": RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS,
+        "expected_query_digests": FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS,
     }
 
 

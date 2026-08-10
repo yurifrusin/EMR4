@@ -1,0 +1,37 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "body_parent_changed": false,
+    "effective_frame_mask_domain_not_null": false,
+    "frame_mask_range_check_preserved": true,
+    "nullable_conflict_column_and_shape_preserved": true,
+    "required_column_not_null_constraints_preserved": true,
+    "runtime_authority_changed": false,
+    "structural_parent_changed": false
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "conflict_body_nodes_emit_typed_null": [
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_mismatch",
+      "emr4_context_fabric.admit_proofread_observation_v1.insert_reuse"
+    ],
+    "conflict_shape_requires_null": true,
+    "domain": "emr4_context_fabric.frame_mask",
+    "domain_not_null": true,
+    "inert_sql_contains_typed_null": true,
+    "nullable_relation_column": "emr4_context_fabric.context_proofread_observation_admission.affected_frame_mask",
+    "postgresql_failure_class": "not_null_violation_before_table_column_coordinate",
+    "raw_postgresql_error_persisted": false
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "coordinate_status": "missing",
+    "evidence_sha256": "sha256:e4af201491241a904d337650a7dbd7c3e8a36daf8bb0ea85aaae462da1045d67",
+    "internal_attempt_id": "67070f55e5bc3898e906bb64",
+    "run_sequence": 45,
+    "scenario_id": "BTR-I02",
+    "sqlstate": "23502"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-045-frame-mask-domain-diagnosis.v1",
+  "status": "deterministic_frame_mask_domain_nullable_conflict_row_contradiction_proven_cleanup_verified"
+}

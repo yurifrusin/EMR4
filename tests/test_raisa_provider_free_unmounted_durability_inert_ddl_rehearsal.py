@@ -126,6 +126,12 @@ def test_recovery_population_and_effective_catalogue_reconcile() -> None:
         if row["name"] == "digest_sha256"
     )
     assert digest_domain["not_null_values"] is False
+    frame_mask_domain = next(
+        row
+        for row in effective["effective_structural"]["type_catalogue"]["domains"]
+        if row["name"] == "frame_mask"
+    )
+    assert frame_mask_domain["not_null_values"] is False
 
 
 def test_support_execute_grants_exactly_match_effective_contract() -> None:
@@ -526,7 +532,7 @@ def test_positional_row_projection_order_is_mechanically_closed() -> None:
 def test_recovery_operations_are_position_closed_and_fragment_sealed() -> None:
     operations = RECOVERY_SPEC["operations"]
     assert [row["id"] for row in operations] == RECOVERY_SPEC["operation_order"]
-    assert len(operations) == 9
+    assert len(operations) == 10
     for operation in operations:
         assert operation["affected_ids"]
         assert operation["old_fragment_sha256"].startswith("sha256:")
@@ -534,7 +540,10 @@ def test_recovery_operations_are_position_closed_and_fragment_sealed() -> None:
     nullability = operations[0]
     assert nullability["id"] == "RELAX_DIGEST_DOMAIN_NULLABILITY"
     assert nullability["affected_ids"] == ["emr4_context_fabric.digest_sha256"]
-    reselect = operations[5]
+    frame_nullability = operations[1]
+    assert frame_nullability["id"] == "RELAX_FRAME_MASK_DOMAIN_NULLABILITY"
+    assert frame_nullability["affected_ids"] == ["emr4_context_fabric.frame_mask"]
+    reselect = operations[6]
     assert len(reselect["sites"]) == 4
     for site in reselect["sites"]:
         assert site["source_node_id"]
@@ -556,6 +565,18 @@ def test_digest_domain_defers_presence_to_nullable_and_required_columns() -> Non
     assert ("audit_head_digest emr4_context_fabric.digest_sha256 NOT NULL,") in sql
     assert ("last_contiguous_position = 0 AND last_observation_digest IS NULL") in sql
     assert "NULL::emr4_context_fabric.digest_sha256" in sql
+
+
+def test_frame_mask_domain_defers_presence_to_column_and_conflict_shape() -> None:
+    sql = _base_render()["sql_text"]
+
+    assert (
+        "CREATE DOMAIN emr4_context_fabric.frame_mask AS pg_catalog.int2\n"
+        "    CONSTRAINT frame_mask_check CHECK (VALUE BETWEEN 0 AND 3);"
+    ) in sql
+    assert "affected_frame_mask emr4_context_fabric.frame_mask," in sql
+    assert "affected_frame_mask emr4_context_fabric.frame_mask NOT NULL," in sql
+    assert "NULL::emr4_context_fabric.frame_mask" in sql
 
 
 def test_recovery_fragment_seal_drift_fails_closed(

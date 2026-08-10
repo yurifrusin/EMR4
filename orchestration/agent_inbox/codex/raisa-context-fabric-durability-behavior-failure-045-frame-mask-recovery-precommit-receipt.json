@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_provider_free_behavior_failure_045_frame_mask_domain_diagnosis_effective_renderer_recovery_and_deterministic_parse_contract_rebind_for_fresh_exact_head_veto_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Repository-only diagnosis proves the effective frame_mask domain's global NOT NULL contradicts the intentionally nullable admission conflict affected_frame_mask and both typed-null conflict insert nodes. Renderer 2.0.19 relaxes only effective frame-mask domain nullability, retains its 0..3 range check and every required column NOT NULL, leaves immutable structural/body parents unchanged, and renders 424 statements at SHA-256 fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa. The parse contract is deterministically rebound with only the types digest changed to sha256:b7244669f109b81a3907c2f7a5397a253e8a374e261177a7567042d064c25c90. Renderer, parse-contract, diagnosis and AER deterministic suites pass; runtime remains closed pending independent veto.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted progression through the planned provider-free durability sequence. GPT Sol owns diagnosis, bounded implementation, explicit-path commit, fresh independent veto dispatch and later separately rehydrated disposable parse and behavior runs. No provider, product runtime, deployment, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is at exact HEAD 6b00f067348b7810336286fdf335609327251557 with a clean index before explicit-path staging and only the declared recovery paths modified or newly created among this tranche. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only remains mandatory.",
+    "live_handover_current_baton": "The active Context Fabric durability descendant is the repository-only correction after immutable failed behavior attempt 045. Attempt 045 is preserved at SHA-256 e4af201491241a904d337650a7dbd7c3e8a36daf8bb0ea85aaae462da1045d67, its exact owned container is absent, and the protected mutable evidence alias is restored. No later database attempt has run.",
+    "protected_evidence_boundaries": "The immutable attempt-045 failure and deterministic diagnosis contain only repository-authored synthetic bounded evidence. No raw PostgreSQL error is persisted. The primary mutable alias remains untracked and byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. docs/branding and all unrelated untracked files remain preserved and excluded. This commit opens no database run, operational database, watcher/feed, application/API/Diary wiring, patient/clinical/product data, provider/model call, deployment, release, Pages or protected-ref boundary."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

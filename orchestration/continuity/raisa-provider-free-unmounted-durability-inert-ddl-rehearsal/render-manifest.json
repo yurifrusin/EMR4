@@ -695,7 +695,7 @@
       ]
     }
   ],
-  "effective_catalogue_digest": "sha256:74a5bddaae9b898bf91f54949606edcf9f15a50a382e14b180bea02b825de18c",
+  "effective_catalogue_digest": "sha256:64430bc8124b8c62795af12504fc2d6183b5cc337c1b501960993f3b5777056b",
   "effective_program_count": 23,
   "immutable_parent_program_count": 22,
   "opcode_populations": {
@@ -2520,28 +2520,28 @@
   },
   "phase_spans": {
     "1": {
-      "end": 652,
+      "end": 651,
       "start": 7
     },
     "2": {
-      "end": 2940,
-      "start": 655
+      "end": 2939,
+      "start": 654
     },
     "3": {
-      "end": 4133,
-      "start": 2943
+      "end": 4132,
+      "start": 2942
     },
     "4": {
-      "end": 4187,
-      "start": 4136
+      "end": 4186,
+      "start": 4135
     },
     "5": {
-      "end": 4276,
-      "start": 4190
+      "end": 4275,
+      "start": 4189
     },
     "6": {
-      "end": 4297,
-      "start": 4279
+      "end": 4296,
+      "start": 4278
     }
   },
   "phases": [
@@ -2656,6 +2656,7 @@
     ],
     "operation_order": [
       "RELAX_DIGEST_DOMAIN_NULLABILITY",
+      "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
       "ADD_APPOINTMENT_GUARD_SIGNATURE",
       "ADD_APPOINTMENT_GUARD_PROGRAM",
       "ADD_APPOINTMENT_GUARD_DECLARATION",
@@ -2673,6 +2674,14 @@
         "id": "RELAX_DIGEST_DOMAIN_NULLABILITY",
         "new_fragment_sha256": "sha256:7c5c7e3bee71b953863b744de868b797439498fbea56b6e8f13ac969fd598e6c",
         "old_fragment_sha256": "sha256:5f00a27475a8b38a8168fda1a91f371c25c5666fd7028ef334873b3a7f24db89"
+      },
+      {
+        "affected_ids": [
+          "emr4_context_fabric.frame_mask"
+        ],
+        "id": "RELAX_FRAME_MASK_DOMAIN_NULLABILITY",
+        "new_fragment_sha256": "sha256:882d7bd557da279514c23d8d7238cb70fa8f0d852f7cb3616f1be14cc49be720",
+        "old_fragment_sha256": "sha256:65ed966857fe68c9d8fec7ddf553f988b4c053cc3d1117eb1462b9ab7813a1f5"
       },
       {
         "affected_ids": [
@@ -2807,10 +2816,10 @@
     ]
   },
   "postgresql_major": 16,
-  "renderer_version": "2.0.18",
+  "renderer_version": "2.0.19",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
-  "sql_byte_count": 1437022,
-  "sql_sha256": "sha256:bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38",
+  "sql_byte_count": 1437009,
+  "sql_sha256": "sha256:fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa",
   "statement_count": 424,
   "structural_parent": {
     "contract_sha256": "sha256:18fb00ff02820c31b4fcab4de096393cbea49e0a37ebb28d65c5eb2d6f154cfd",

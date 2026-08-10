@@ -1,6 +1,6 @@
 -- -- durability-schema.sql.inert -- inert evidence artifact; never execute or apply
 -- generated_by: raisa_provider_free_unmounted_durability_inert_ddl_rehearsal
--- renderer_version: 2.0.18
+-- renderer_version: 2.0.19
 -- do_not_execute: true
 
 -- ==========================================================================
@@ -24,7 +24,6 @@ CREATE DOMAIN emr4_context_fabric.key_id AS pg_catalog.text
     NOT NULL
     CONSTRAINT key_id_check CHECK (VALUE ~ '^[A-Za-z0-9][A-Za-z0-9._:-]{0,126}$');
 CREATE DOMAIN emr4_context_fabric.frame_mask AS pg_catalog.int2
-    NOT NULL
     CONSTRAINT frame_mask_check CHECK (VALUE BETWEEN 0 AND 3);
 CREATE TYPE emr4_context_fabric.admission_entry_kind AS ENUM ('PRIMARY', 'CONFLICT');
 CREATE TYPE emr4_context_fabric.observation_decision AS ENUM ('ADMIT_SELECTIVE', 'ADMIT_NO_INTERSECTION', 'ADMIT_FULL_INVALIDATION', 'REBASE_REQUIRED');
