@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_only_the_immutable_failure_037_evidence_deterministic_admission_lock_rls_diagnosis_tests_and_bounded_recovery_threat_delta_without_changing_any_structural_parent_or_opening_a_runtime",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Standing closed-plan authority permits evidence-backed diagnose-repair-rerun cycles without merely formal pauses. This action persists only failure 037 and its deterministic repository diagnosis. The proven next candidate is exactly one lock-only RLS policy pol_cf_04_update_lock; that structural repair is not part of this commit.",
+    "current_authority_allocation": "GPT Sol owns deterministic diagnosis, explicit-path integration and bounded durability recovery. No worker, provider runtime, product consumer or protected integrator is assigned by this commit.",
+    "git_refs_and_worktree": "Task HEAD is exact 3b9be4ff669eeeacb0eacf02042a72368aff57f3 and origin task is 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the seven exact diagnosis paths named by this receipt may be staged; all other untracked files remain preserved.",
+    "live_handover_current_baton": "The anchor-lock structural, typed-body, inert-DDL, parse/catalogue and behavior descendants passed exact-head Gemini veto at task HEAD 3b9be4ff669eeeacb0eacf02042a72368aff57f3. Exactly one behavior attempt 037 then failed safely at BTR-E04 CF004 function line 307; immutable failure SHA-256 is a5767ddcc04643a949ea465abadd94fdb8dbc28c272bdf19808abc3e7759b852 and cleanup is independently recorded as exact.",
+    "protected_evidence_boundaries": "Preserve mutable behavior pass 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b, parse pass 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec, parse historical failure 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c and generic characterization 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536. No disposable run, applied migration, operational database/credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected ref is open. docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

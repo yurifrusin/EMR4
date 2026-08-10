@@ -1,0 +1,58 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_only_no_runtime_product_provider_command_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "append_only_invariant_unchanged": true,
+    "behavior_parent_rebind_required": true,
+    "body_program_change": false,
+    "command": "UPDATE",
+    "coordinator_direct_table_dml_remains_empty": true,
+    "entry_point_execute_grants_unchanged": true,
+    "inert_artifact_regeneration": true,
+    "new_external_authority": false,
+    "new_policy_id": "pol_cf_04_update_lock",
+    "parse_catalogue_rebind_required": true,
+    "relation": "context_proofread_observation_admission",
+    "scenario_population_change": false,
+    "using_capabilities": [
+      "COORDINATOR"
+    ],
+    "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
+    "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp()) AND FALSE"
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "admission_lock_node_count": 3,
+    "append_only_lock_policy_precedent": "pol_cf_08_update_lock",
+    "body_contract_sha256": "sha256:b54b2e6800b4484f84b2c7ba57566ecfe8c04b9a8c8e91ac6bd67be8f22b5840",
+    "body_source_sha256": "sha256:34d3febf2a5fe02214102ccbabe93d600a5178c3ad050c154dd73837ec06996e",
+    "branch_before_lock": "emr4_context_fabric.apply_durability_transition_v1.has_primary",
+    "coordinator_direct_table_dml": [],
+    "entry_point": "apply_durability_transition_v1",
+    "failing_lock": "emr4_context_fabric.apply_durability_transition_v1.lock_primary",
+    "inert_sql_source_sha256": "sha256:550336e145eac6ac004447d05ea3e72d970f6d8283d3af2689aed62cfff92bc6",
+    "lock_mode": "FOR_UPDATE",
+    "locked_relation": "emr4_context_fabric.context_proofread_observation_admission",
+    "missing_lock_policy_id": "pol_cf_04_update_lock",
+    "plain_select_before_lock": "emr4_context_fabric.apply_durability_transition_v1.primary_set",
+    "present_admission_policy_ids": [
+      "pol_cf_04_select",
+      "pol_cf_04_insert"
+    ],
+    "principal": "context_coordinator",
+    "raw_postgresql_error_persisted": false,
+    "structural_contract_sha256": "sha256:6802a7355e62d9d29f735a4c0703e90f2c9bcfaa4606d694070fa62380dc741c",
+    "structural_source_sha256": "sha256:7508a124b68db4c46dd1b91a4591065a0f0238911491ba9db9b6011e8c6259dc"
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:a5767ddcc04643a949ea465abadd94fdb8dbc28c272bdf19808abc3e7759b852",
+    "function_line": 307,
+    "internal_attempt_id": "d38e0bd5b2621bcea59d5397",
+    "mapped_sql_line": 1262,
+    "run_sequence": 37,
+    "scenario_id": "BTR-E04",
+    "sqlstate": "CF004"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-037-admission-lock-rls-diagnosis.v1",
+  "status": "deterministic_admission_for_update_policy_gap_proven_cleanup_verified"
+}
