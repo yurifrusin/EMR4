@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_only_the_admission_lock_structural_parent_rebind_into_the_byte_semantically_unchanged_typed_body_plus_closed_process_corrections_without_generating_or_running_a_descendant",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Rebind the unchanged typed function/trigger body to structural digest sha256:80d5b57eadef0e6ede54c48fc842fe5567723c0a9cdebe288efbf63048c4b3ac and reseal it at sha256:8124957e32657076c3befc96a7b5e8770dcd37fcb5b91e33c136f01cbf2dd5ea. No node, predicate, failure mapping, call edge, effect, entry point or trigger changes. Inert generation remains a later action.",
+    "current_authority_allocation": "GPT Sol owns the deterministic parent rebind and explicit-path integration. No worker, provider runtime, product consumer or protected integrator is assigned by this commit.",
+    "git_refs_and_worktree": "Task HEAD is exact f1632a3ab3dafe8fb1e9eba4fa9baa09c7295b53 and origin task is 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicitly named body-contract, schema, builder, validator, focused test, documentation, register and receipt paths may be staged; all other untracked files remain preserved.",
+    "live_handover_current_baton": "The failure 037 diagnosis and structural lock-only admission RLS repair are committed. A precommit path-count error and a repeated short-hash draft were detected, corrected and closed before this body rebind; the exact structural source commit is 3a19167e13ac01996180e1b5ada2a6e2ae7e135f.",
+    "protected_evidence_boundaries": "All mutable behavior and parse evidence remains untracked, unstaged and byte-protected. No inert SQL generation, disposable run, applied migration, operational database/credential, watcher/listener/feed, application/API/Diary wiring, patient/clinical/product/protected data, provider call, command/write, deployment, production, release, Pages or protected ref is open. docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

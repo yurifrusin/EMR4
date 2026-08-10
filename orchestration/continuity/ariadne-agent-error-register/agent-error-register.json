@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 181,
+  "register_revision": 182,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8428,6 +8428,44 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-admission-lock-rls-recovery-precommit-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-181.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0210",
+      "attempt_id": "raisa-context-fabric-admission-lock-body-parent-hash-binding-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "After AER-0205 and AER-0207, no full Git object ID may be authored from a displayed short hash; the exact value must be captured with git rev-parse before drafting.",
+      "observed_error": "While drafting the admission-lock typed-body parent-rebind note, Sol expanded short structural commit 3a19167e into nonexistent 3a19167e2f00421db91b4406909ed3b8e66ce9da.",
+      "detection_method": "Before testing, staging, receipt generation or descendant regeneration, exact quoted git rev-parse returned 3a19167e13ac01996180e1b5ada2a6e2ae7e135f and the draft was corrected.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-unmounted-durability-function-trigger-body-admission-lock-policy-parent-rebind.md",
+        "docs/ariadne-agent-error-correction-register-revision-182.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the inferred value with exact quoted git rev-parse output 3a19167e13ac01996180e1b5ada2a6e2ae7e135f before any test, stage, receipt, regeneration or runtime action. No action used the rejected draft value.",
+        "prevention_control": "Move exact git rev-parse capture ahead of every packet or runtime-state drafting step and mechanically interpolate only the captured forty-character value; do not begin authoring from abbreviated commit output.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-durability-function-trigger-body-admission-lock-policy-parent-rebind.md",
+          "docs/ariadne-agent-error-correction-register-revision-182.md"
         ]
       },
       "status": "corrected"

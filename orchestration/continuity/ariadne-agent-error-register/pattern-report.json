@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "c1aa230a7018214ca6583e222936e159a1b5a4d3a8651c854526bdefef079e4f",
+  "canonical_register_sha256": "7c927aa87110f84e7ec5b34488bcb43841e32a8585150c454ce62682a6dc5d43",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 67,
-      "canonical_unchanged": 120,
+      "canonical_unchanged": 121,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 21,
-      "evidence_misreport": 29,
+      "evidence_misreport": 30,
       "harness_failure": 22,
       "output_contract_violation": 54,
       "read_only_violation": 3,
@@ -17,14 +17,14 @@
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 132,
+      "agent_behavior": 133,
       "harness": 22,
       "repository": 46,
       "transport": 9
     },
     "by_process_severity": {
       "low": 66,
-      "material": 80,
+      "material": 81,
       "moderate": 63
     },
     "by_resource_and_role": {
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 92,
+      "codex-primary-orchestrator::orchestrator": 93,
       "codex-sol-orchestrator::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
@@ -72,12 +72,12 @@
     },
     "by_role": {
       "implementer": 15,
-      "orchestrator": 148,
+      "orchestrator": 149,
       "verifier": 46
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 209,
+  "incident_count": 210,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -136,12 +136,13 @@
       "categories": [
         "evidence_misreport"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0192",
         "AER-0196",
         "AER-0205",
-        "AER-0207"
+        "AER-0207",
+        "AER-0210"
       ],
       "origins": [
         "agent_behavior"
@@ -514,7 +515,7 @@
       ]
     }
   ],
-  "register_revision": 181,
+  "register_revision": 182,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-10"
 }
