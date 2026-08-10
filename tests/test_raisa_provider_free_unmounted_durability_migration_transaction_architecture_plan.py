@@ -118,6 +118,11 @@ EXPECTED_ANCHOR_LOCK_POLICY = (
     "'LIFECYCLE'::emr4_context_fabric.logical_capability], "
     "practice_id, source_contract_id, transaction_timestamp())"
 )
+EXPECTED_ADMISSION_LOCK_POLICY = (
+    "emr4_context_fabric.session_binding_allows_v1(session_user, "
+    "ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], "
+    "practice_id, source_contract_id, transaction_timestamp())"
+)
 
 
 def text(path: Path) -> str:
@@ -372,6 +377,22 @@ def validate_renderer_semantics(contract: dict) -> None:
     assert alias_lock["command"] == "UPDATE"
     assert alias_lock["using_sql"] == producer
     assert alias_lock["with_check_sql"] == producer + " AND FALSE"
+    admission = mapped["context_proofread_observation_admission"]
+    assert admission["rls_policy_ids"] == [
+        "pol_cf_04_select",
+        "pol_cf_04_insert",
+        "pol_cf_04_update_lock",
+    ]
+    admission_lock = policies["pol_cf_04_update_lock"]
+    assert admission_lock == {
+        "id": "pol_cf_04_update_lock",
+        "relation": "context_proofread_observation_admission",
+        "command": "UPDATE",
+        "roles": ["PUBLIC"],
+        "permissive": True,
+        "using_sql": EXPECTED_ADMISSION_LOCK_POLICY,
+        "with_check_sql": EXPECTED_ADMISSION_LOCK_POLICY + " AND FALSE",
+    }
     anchor = mapped["context_recovery_anchor"]
     assert anchor["rls_policy_ids"] == [
         "pol_cf_08_select",
@@ -954,6 +975,68 @@ def test_anchor_lock_visibility_cannot_be_removed_widened_or_reassigned() -> Non
         for policy in non_public["rls_policy_catalogue"]["policies"]
     }
     policies["pol_cf_08_update_lock"]["roles"] = ["context_coordinator"]
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(non_public))
+
+
+def test_admission_lock_visibility_cannot_be_removed_widened_or_reassigned() -> None:
+    contract = data(CONTRACT)
+    policies = {
+        policy["id"]: policy for policy in contract["rls_policy_catalogue"]["policies"]
+    }
+    admission = relation_map(contract)["context_proofread_observation_admission"]
+    assert admission["rls_policy_ids"] == [
+        "pol_cf_04_select",
+        "pol_cf_04_insert",
+        "pol_cf_04_update_lock",
+    ]
+    assert policies["pol_cf_04_update_lock"]["using_sql"] == (
+        EXPECTED_ADMISSION_LOCK_POLICY
+    )
+    assert policies["pol_cf_04_update_lock"]["with_check_sql"] == (
+        EXPECTED_ADMISSION_LOCK_POLICY + " AND FALSE"
+    )
+
+    missing_lock_visibility = copy.deepcopy(contract)
+    missing_lock_visibility["rls_policy_catalogue"]["policies"] = [
+        policy
+        for policy in missing_lock_visibility["rls_policy_catalogue"]["policies"]
+        if policy["id"] != "pol_cf_04_update_lock"
+    ]
+    relation_map(missing_lock_visibility)["context_proofread_observation_admission"][
+        "rls_policy_ids"
+    ].remove("pol_cf_04_update_lock")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(missing_lock_visibility))
+
+    widened_write_check = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in widened_write_check["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_04_update_lock"]["with_check_sql"] = policies[
+        "pol_cf_04_update_lock"
+    ]["using_sql"]
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(widened_write_check))
+
+    foreign_capability = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in foreign_capability["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_04_update_lock"]["using_sql"] = policies[
+        "pol_cf_04_update_lock"
+    ]["using_sql"].replace("'COORDINATOR'", "'OBSERVER'")
+    with pytest.raises(AssertionError):
+        validate_renderer_semantics(reseal_contract(foreign_capability))
+
+    non_public = copy.deepcopy(contract)
+    policies = {
+        policy["id"]: policy
+        for policy in non_public["rls_policy_catalogue"]["policies"]
+    }
+    policies["pol_cf_04_update_lock"]["roles"] = ["context_coordinator"]
     with pytest.raises(AssertionError):
         validate_renderer_semantics(reseal_contract(non_public))
 

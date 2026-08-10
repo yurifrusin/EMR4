@@ -40,7 +40,7 @@
       "const": "repository_authored_schema_metadata"
     },
     "contract_sha256": {
-      "const": "sha256:6802a7355e62d9d29f735a4c0703e90f2c9bcfaa4606d694070fa62380dc741c"
+      "const": "sha256:80d5b57eadef0e6ede54c48fc842fe5567723c0a9cdebe288efbf63048c4b3ac"
     },
     "postgresql_target": {
       "const": {
@@ -664,7 +664,8 @@
             "rls_forced": true,
             "rls_policy_ids": [
               "pol_cf_04_select",
-              "pol_cf_04_insert"
+              "pol_cf_04_insert",
+              "pol_cf_04_update_lock"
             ],
             "invariant_enforcement_ids": [
               "admission_bounded_immutable_v1"
@@ -3952,6 +3953,17 @@
             "permissive": true,
             "using_sql": null,
             "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['OBSERVER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())"
+          },
+          {
+            "id": "pol_cf_04_update_lock",
+            "relation": "context_proofread_observation_admission",
+            "command": "UPDATE",
+            "roles": [
+              "PUBLIC"
+            ],
+            "permissive": true,
+            "using_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp())",
+            "with_check_sql": "emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, transaction_timestamp()) AND FALSE"
           },
           {
             "id": "pol_cf_05_select",

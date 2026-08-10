@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 179,
+  "register_revision": 180,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8344,6 +8344,52 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-behavior-rebind-corrected-gemini-review-packet.md",
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-behavior-rebind-corrected-veto-predispatch-runtime-state.json",
           "docs/ariadne-agent-error-correction-register-revision-179.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0208",
+      "attempt_id": "raisa-context-fabric-admission-lock-behavior-attempt-037-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "implementer",
+      "resource_id": "context-proofread-observation-admission-rls-catalogue",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "provider_free_disposable_postgresql_exact_owned_container",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The coordinator entry point must be able to lock an already visible immutable proofread admission without acquiring direct table mutation authority or crossing practice and source scope.",
+      "observed_error": "Behavior attempt 037 reached authored-synthetic BTR-E04 and returned contract-owned CF004 at apply_durability_transition_v1 function line 307 because forced RLS admitted the ordinary SELECT but provided no UPDATE policy visibility for the required admission FOR UPDATE row lock.",
+      "detection_method": "The one-shot rehearsal preserved immutable failure evidence and verified exact owned-container cleanup. Deterministic source diagnosis mapped function line 307 to inert SQL line 1262 and the typed lock_primary node, then proved the relation had only pol_cf_04_select and pol_cf_04_insert.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-037.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-037.json",
+        "scripts/raisa_context_fabric_durability_behavior_failure_037_admission_lock_rls_diagnosis.py",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_037_admission_lock_rls_diagnosis.py",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-admission-lock-rls-recovery.md",
+        "docs/raisa-provider-free-unmounted-durability-migration-transaction-admission-lock-rls-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-180.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.forced_rls_admission_row_lock_missing_update_visibility",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Add exactly one PUBLIC permissive pol_cf_04_update_lock policy for the existing COORDINATOR binding. Its USING predicate provides row-lock visibility and its identical WITH CHECK ends in AND FALSE; coordinator direct table DML, immutable-admission enforcement, entry-point grants and the typed body remain unchanged.",
+        "prevention_control": "Every forced-RLS relation named by a typed LOCK_EXACT node must have an explicit lock-visibility policy whose capabilities match the executing entry point, whose write check fails closed for immutable relations, and whose presence, scope and removal are mutation-tested before runtime rehearsal.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
+          "tests/test_raisa_provider_free_unmounted_durability_migration_transaction_architecture_plan.py",
+          "docs/raisa-provider-free-unmounted-durability-migration-transaction-admission-lock-rls-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-180.md"
         ]
       },
       "status": "corrected"
