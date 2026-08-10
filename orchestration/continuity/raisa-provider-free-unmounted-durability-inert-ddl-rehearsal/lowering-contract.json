@@ -7,7 +7,7 @@
     "fabric_relations": 18,
     "fabric_type_owners": 32,
     "invariant_enforcement_bindings": 25,
-    "rls_policies": 47,
+    "rls_policies": 48,
     "roles": 8,
     "runtime_schema_create_grants": 0,
     "support_functions": 1,
@@ -210,16 +210,16 @@
   },
   "parents": {
     "body": {
-      "contract_sha256": "sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62",
+      "contract_sha256": "sha256:9ef411aa353ba6b39d9fbbd769d94ef5a9237bb7c6aa031dbdafce1bfa62ce83",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
       "schema_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.schema.json",
-      "source_head": "1a06961916bcf73d553eb401eb08094aa4c45e20"
+      "source_head": "206803a26767d7be02b45514dd02c56cce773a46"
     },
     "structural": {
-      "contract_sha256": "sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f",
+      "contract_sha256": "sha256:18fb00ff02820c31b4fcab4de096393cbea49e0a37ebb28d65c5eb2d6f154cfd",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
       "schema_path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.schema.json",
-      "source_head": "e1ca28915b09636e5d9d693216beef450f71a356"
+      "source_head": "a1af31e89c13a0eea72fd90a2934a0c8e0154175"
     }
   },
   "phases": [
@@ -268,7 +268,7 @@
     },
     "executable_ddl": false,
     "id": "postgresql_16_representability_recovery_v1",
-    "immutable_body_parent_sha256": "sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62",
+    "immutable_body_parent_sha256": "sha256:9ef411aa353ba6b39d9fbbd769d94ef5a9237bb7c6aa031dbdafce1bfa62ce83",
     "keyed_xmin_reselects": [
       {
         "cardinality_failure": {

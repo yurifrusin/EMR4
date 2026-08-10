@@ -119,7 +119,7 @@ def test_recovery_population_and_effective_catalogue_reconcile() -> None:
     assert len(effective["relations"]) == 22
     assert len(fabric_relations) == 18
     assert len(effective["roles"]) == 8
-    assert len(effective["rls_policies"]) == 47
+    assert len(effective["rls_policies"]) == 48
     digest_domain = next(
         row
         for row in effective["effective_structural"]["type_catalogue"]["domains"]
@@ -357,7 +357,7 @@ def test_rendered_recovery_anchor_policy_is_lock_visible_but_never_writable() ->
         "    USING (" + expected + ")\n"
         "    WITH CHECK (" + expected + " AND FALSE);"
     )
-    assert rendered["manifest"]["statement_count"] == 423
+    assert rendered["manifest"]["statement_count"] == 424
 
     roles = {
         role["role"]: role
@@ -384,6 +384,34 @@ def test_rendered_admission_policy_is_lock_visible_but_never_writable() -> None:
     assert match.group(0) == (
         "CREATE POLICY pol_cf_04_update_lock ON "
         "emr4_context_fabric.context_proofread_observation_admission "
+        "FOR UPDATE TO PUBLIC\n"
+        "    USING (" + expected + ")\n"
+        "    WITH CHECK (" + expected + " AND FALSE);"
+    )
+    roles = {
+        role["role"]: role
+        for role in rendered["effective"]["effective_structural"]["role_matrix"]
+    }
+    assert roles["emr4_context_fabric.context_coordinator"]["direct_table_dml"] == []
+
+
+def test_rendered_receipt_policy_is_lock_visible_but_never_writable() -> None:
+    rendered = _base_render()
+    sql = rendered["sql_text"]
+    expected = (
+        "emr4_context_fabric.session_binding_allows_v1(session_user, "
+        "ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], "
+        "practice_id, source_contract_id, stream_id, transaction_timestamp())"
+    )
+    match = re.search(
+        r"CREATE POLICY pol_cf_09_update_lock\b.*?;",
+        sql,
+        flags=re.DOTALL,
+    )
+    assert match is not None
+    assert match.group(0) == (
+        "CREATE POLICY pol_cf_09_update_lock ON "
+        "emr4_context_fabric.context_classified_observation_receipt "
         "FOR UPDATE TO PUBLIC\n"
         "    USING (" + expected + ")\n"
         "    WITH CHECK (" + expected + " AND FALSE);"
@@ -804,7 +832,7 @@ def test_phase_populations_and_counts() -> None:
     assert sql.count("CREATE DOMAIN ") == 4
     assert sql.count("CREATE TYPE ") == 28  # 19 enums + 9 composites
     assert sql.count("CREATE TABLE emr4_context_fabric.") == 18
-    assert sql.count("CREATE POLICY ") == 47
+    assert sql.count("CREATE POLICY ") == 48
     assert sql.count("CREATE TRIGGER ") == 7
     assert sql.count("CREATE CONSTRAINT TRIGGER ") == 7
     assert sql.count("CREATE FUNCTION emr4_context_fabric.") == 24

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_inert_ddl_regenerated_from_receipt_lock_parents_before_parse_reproduction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The LF inert artifact has 424 statements, 1,437,022 bytes and SHA-256 bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38. The only semantic addition is pol_cf_09_update_lock with exact COORDINATOR visibility and WITH CHECK ending AND FALSE. Renderer check, recognizer/recovery tests and Ruff pass.",
+    "current_authority_allocation": "GPT Sol owns deterministic inert generation and task-branch integration. The artifact remains unmounted; database execution, external review, provider, product runtime, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Precommit task HEAD is exact 206803a26767d7be02b45514dd02c56cce773a46. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging excludes docs/branding, mutable behavior evidence and unrelated untracked files.",
+    "live_handover_current_baton": "The unchanged typed body is committed at 206803a26767d7be02b45514dd02c56cce773a46. The inert DDL descendant has been regenerated from that body and structural commit a1af31e89c13a0eea72fd90a2934a0c8e0154175.",
+    "protected_evidence_boundaries": "The SQL file is evidence-only and never executed in this step. Mutable behavior evidence remains unstaged at exact SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. No branding, raw evidence, patient, clinical, product, credential, provider, runtime, deployment, release or Pages surface opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

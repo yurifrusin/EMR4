@@ -1,9 +1,9 @@
 {
   "artifact": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
   "body_parent": {
-    "contract_sha256": "sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62",
+    "contract_sha256": "sha256:9ef411aa353ba6b39d9fbbd769d94ef5a9237bb7c6aa031dbdafce1bfa62ce83",
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-    "source_head": "1a06961916bcf73d553eb401eb08094aa4c45e20"
+    "source_head": "206803a26767d7be02b45514dd02c56cce773a46"
   },
   "body_program_accounting": [
     {
@@ -407,7 +407,7 @@
     "fabric_relations": 18,
     "fabric_type_owner_count": 32,
     "insert_or_reload_compare": 21,
-    "rls_policies": 47,
+    "rls_policies": 48,
     "roles": 8,
     "runtime_schema_create_grants": 0,
     "schema_owner": "context_schema_owner",
@@ -695,7 +695,7 @@
       ]
     }
   ],
-  "effective_catalogue_digest": "sha256:50de85209d1dc8873fee71f8638a29aeaf4ea01515ad038a9ea91222f5be1851",
+  "effective_catalogue_digest": "sha256:74a5bddaae9b898bf91f54949606edcf9f15a50a382e14b180bea02b825de18c",
   "effective_program_count": 23,
   "immutable_parent_program_count": 22,
   "opcode_populations": {
@@ -1532,6 +1532,10 @@
     },
     {
       "identifier": "pol_cf_09_insert",
+      "kind": "RLS_POLICY"
+    },
+    {
+      "identifier": "pol_cf_09_update_lock",
       "kind": "RLS_POLICY"
     },
     {
@@ -2516,28 +2520,28 @@
   },
   "phase_spans": {
     "1": {
-      "end": 649,
+      "end": 652,
       "start": 7
     },
     "2": {
-      "end": 2937,
-      "start": 652
+      "end": 2940,
+      "start": 655
     },
     "3": {
-      "end": 4130,
-      "start": 2940
+      "end": 4133,
+      "start": 2943
     },
     "4": {
-      "end": 4184,
-      "start": 4133
+      "end": 4187,
+      "start": 4136
     },
     "5": {
-      "end": 4273,
-      "start": 4187
+      "end": 4276,
+      "start": 4190
     },
     "6": {
-      "end": 4294,
-      "start": 4276
+      "end": 4297,
+      "start": 4279
     }
   },
   "phases": [
@@ -2592,7 +2596,7 @@
     },
     "executable_ddl": false,
     "id": "postgresql_16_representability_recovery_v1",
-    "immutable_body_parent_sha256": "sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62",
+    "immutable_body_parent_sha256": "sha256:9ef411aa353ba6b39d9fbbd769d94ef5a9237bb7c6aa031dbdafce1bfa62ce83",
     "keyed_xmin_reselects": [
       {
         "cardinality_failure": {
@@ -2805,12 +2809,12 @@
   "postgresql_major": 16,
   "renderer_version": "2.0.18",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
-  "sql_byte_count": 1436481,
-  "sql_sha256": "sha256:265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a",
-  "statement_count": 423,
+  "sql_byte_count": 1437022,
+  "sql_sha256": "sha256:bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38",
+  "statement_count": 424,
   "structural_parent": {
-    "contract_sha256": "sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f",
+    "contract_sha256": "sha256:18fb00ff02820c31b4fcab4de096393cbea49e0a37ebb28d65c5eb2d6f154cfd",
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-    "source_head": "e1ca28915b09636e5d9d693216beef450f71a356"
+    "source_head": "a1af31e89c13a0eea72fd90a2934a0c8e0154175"
   }
 }

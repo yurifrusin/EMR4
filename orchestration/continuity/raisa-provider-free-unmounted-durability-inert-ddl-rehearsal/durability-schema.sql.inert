@@ -550,6 +550,9 @@ CREATE POLICY pol_cf_09_select ON emr4_context_fabric.context_classified_observa
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['OBSERVER'::emr4_context_fabric.logical_capability, 'COORDINATOR'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_09_insert ON emr4_context_fabric.context_classified_observation_receipt FOR INSERT TO PUBLIC
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+CREATE POLICY pol_cf_09_update_lock ON emr4_context_fabric.context_classified_observation_receipt FOR UPDATE TO PUBLIC
+    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
+    WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()) AND FALSE);
 CREATE POLICY pol_cf_10_select ON emr4_context_fabric.context_frame_generation FOR SELECT TO PUBLIC
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['COORDINATOR'::emr4_context_fabric.logical_capability, 'LIFECYCLE'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability, 'APPLICATION_READ'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_10_insert ON emr4_context_fabric.context_frame_generation FOR INSERT TO PUBLIC
@@ -4279,7 +4282,7 @@ GRANT EXECUTE ON FUNCTION emr4_context_fabric.session_binding_allows_v1(authenti
 -- postgresql_major: 16
 -- fabric_schema: emr4_context_fabric
 -- fabric_relations: 18
--- rls_policies: 47
+-- rls_policies: 48
 -- roles: 8
 -- entry_points: 9
 -- trigger_functions: 14
