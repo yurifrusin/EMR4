@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_fixed_path_non_accepting_provider_free_authored_synthetic_parse_catalogue_characterization_in_one_new_networkless_postgresql_16_container_then_preserve_result_restore_mutable_evidence_and_verify_exact_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability parse dependency. Corrected parse characterization candidate is independently accepted through task HEAD 71064767. One non-accepting characterization is the next dependency-satisfied action under standing uninterrupted authority.",
+    "current_authority_allocation": "GPT Sol alone owns the one-shot fixed-path characterization, immutable evidence preservation, mutable-evidence restoration and exact cleanup acceptance. No worker, verifier, behavior harness, product surface or operational database owns execution.",
+    "active_plan_and_acceptance": "Characterization contract canonical SHA-256 a34fb46701396f9626a11f94024e233637e381f15e50d10bbec3cba6f1c4a0fa binds exact Git parent c8ab7602e16e24453dbf909597b4f702a2388416 and inert SQL ca22e47e at 1435142 LF bytes and 421 statements. Mode is characterization_only with empty expected digest map. The accepted exact-head review passed 459 tests, twelve-file Ruff and literal Git-object challenges. Local postgres:16-bookworm resolves exactly to image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8.",
+    "protected_evidence_boundaries": "Run the fixed no-argument parse harness exactly once. It must use pull-never, network none, no ports, no mounts, container-local tmpfs and exact captured-ID cleanup, and must return non-pass catalogue_characterization_required. Never list or touch unrelated containers. Mutable accepted parse evidence was copied to C:/Users/sarashera/AppData/Local/Temp/emr4-context-fabric-parse-evidence-characterization-71064767.json at exact SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and must be restored after the new result is copied to a distinct immutable characterization path. No operational database/credential, behavior, patient/product/clinical data, watcher/feed, app/API/Diary command, deployment, Pages, production, release or protected-ref action is opened.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is exact 71064767fd91676ff5e3e6706b8340c840784912 with tracked worktree clean. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All unrelated untracked files, especially docs/branding, remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "parse_characterization_preexecution_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns the one-shot harness, evidence restoration and exact-ID cleanup."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected for the serial database characterization."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh r150 Gemini 3.6 Flash/high exact-parent veto passed and was accepted; no provider call occurs during execution."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    },
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "exact_image_inspect",
+      "reachability": "reachable",
+      "evidence": ["postgres:16-bookworm resolves without a pull to exact image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

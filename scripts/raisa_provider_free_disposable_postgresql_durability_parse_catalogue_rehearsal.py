@@ -31,6 +31,9 @@ REHEARSAL_DIR = ROOT / (
 CONTRACT_PATH = REHEARSAL_DIR / "rehearsal-contract.json"
 PREREQUISITE_PATH = REHEARSAL_DIR / "synthetic-prerequisite-contract.json"
 EVIDENCE_PATH = REHEARSAL_DIR / "provider-free-disposable-postgresql-evidence.json"
+CHARACTERIZATION_EVIDENCE_PATH = REHEARSAL_DIR / (
+    "provider-free-disposable-postgresql-characterization-evidence.json"
+)
 FAILURE_EVIDENCE_PATH = REHEARSAL_DIR / (
     "provider-free-disposable-postgresql-evidence-json-key-set-order-exact-rerun-failure.json"
 )
@@ -44,7 +47,7 @@ EXPECTED_PREREQUISITE_PATH = (
     "durability-parse-catalogue-rehearsal/synthetic-prerequisite-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:a34fb46701396f9626a11f94024e233637e381f15e50d10bbec3cba6f1c4a0fa"
+    "sha256:b81be9b783ba102a663fd3244ee4d1a81c4a2320745aa6f6eac537821b6e1e79"
 )
 EXPECTED_PREREQUISITE_SHA256 = (
     "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
@@ -1988,9 +1991,13 @@ def run_rehearsal(*, runner: Runner = _subprocess_runner) -> dict[str, Any]:
 
 def write_evidence(payload: dict[str, Any]) -> Path:
     rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    target = (
-        EVIDENCE_PATH if payload.get("result") == PASS_RESULT else FAILURE_EVIDENCE_PATH
-    )
+    result = payload.get("result")
+    if result == PASS_RESULT:
+        target = EVIDENCE_PATH
+    elif result == "catalogue_characterization_required":
+        target = CHARACTERIZATION_EVIDENCE_PATH
+    else:
+        target = FAILURE_EVIDENCE_PATH
     target.write_bytes(rendered.encode("utf-8"))
     return target
 

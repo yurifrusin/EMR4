@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 167,
+  "register_revision": 168,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7757,6 +7757,49 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-characterization-review-sol-rejection.json",
           "docs/ariadne-agent-error-correction-register-revision-167.md",
           "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0194",
+      "attempt_id": "raisa-context-fabric-parse-admission-row-shape-characterization-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-parse-evidence-router",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "A deliberately non-accepting catalogue characterization must write to its own evidence target and must never overwrite either the last accepted pass or an immutable historical exact-rerun failure.",
+      "observed_error": "The fixed harness routed every non-pass result to the historical exact-rerun failure path, so the successful admission-row-shape characterization temporarily replaced that protected failure file before exact reproduction.",
+      "detection_method": "Sol copied the new characterization to its immutable named path immediately, compared the mutable accepted and historical failure hashes with their protected boundaries, restored the historical failure byte-exact, and opened no second database run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-admission-row-shape-characterization.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-row-shape-rebind.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-durability-parse-characterization-evidence-routing-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-168.md",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.characterization_and_historical_failure_share_evidence_target",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The harness now routes accepted pass, characterization-required and all other failure results to three distinct paths; tests prepopulate every target and prove each result class changes only its own file. The characterization is preserved immutably, the historical failure is restored at SHA-256 3bf66870, the accepted mutable pass remains SHA-256 97d1385c, and exact reproduction still requires fresh acceptance.",
+        "prevention_control": "Every diagnostic evidence result class must have an explicit non-aliasing target and mutation-oriented target-isolation tests before runtime; protected mutable evidence hashes must be checked and externally backed up before each one-shot rehearsal.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-parse-characterization-evidence-routing-recovery-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-168.md"
         ]
       },
       "status": "corrected"

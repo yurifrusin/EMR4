@@ -261,6 +261,20 @@ INPUT_NAMESPACE_EXPECTED_QUERY_DIGESTS = {
     ].items()
     if key not in {"server", "extensions"}
 }
+ADMISSION_ROW_SHAPE_CHARACTERIZATION_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-admission-row-shape-characterization.json"
+)
+ADMISSION_ROW_SHAPE_CHARACTERIZATION_EVIDENCE = json.loads(
+    ADMISSION_ROW_SHAPE_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
+ADMISSION_ROW_SHAPE_EXPECTED_QUERY_DIGESTS = {
+    key: value
+    for key, value in ADMISSION_ROW_SHAPE_CHARACTERIZATION_EVIDENCE["catalogue"][
+        "query_digests"
+    ].items()
+    if key not in {"server", "extensions"}
+}
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1900,6 +1914,39 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     )
 
 
+def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound() -> None:
+    evidence = ADMISSION_ROW_SHAPE_CHARACTERIZATION_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            ADMISSION_ROW_SHAPE_CHARACTERIZATION_EVIDENCE_PATH.read_bytes()
+        )
+        == "fc2268693334c03d6aed78efca8f58d1ba654c1cd0f32709a1ef2d24fd1a5c63"
+    )
+    assert evidence["attempt_id"] == "2fb9bbacbd4cd172aec49c51"
+    assert evidence["result"] == "catalogue_characterization_required"
+    assert evidence["catalogue"]["expectation_mode"] == "characterization_only"
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:a34fb46701396f9626a11f94024e233637e381f15e50d10bbec3cba6f1c4a0fa"
+    )
+    assert evidence["parent"]["artifact_sha256"] == (
+        "sha256:ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb"
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "6515210c07830a7d6df037d12887ecf05961b5c34323e378a3186a9a2f4cd600"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert CONTRACT["catalogue_expectation"] == {
+        "mode": "exact_digest_bound",
+        "expected_query_digests": ADMISSION_ROW_SHAPE_EXPECTED_QUERY_DIGESTS,
+    }
+
+
 def test_exact_catalogue_kind_population_is_frozen() -> None:
     assert CONTRACT["manifest_kind_counts"] == {
         "ROLE": 8,
@@ -2896,14 +2943,31 @@ def test_failed_exact_rerun_cannot_overwrite_last_accepted_evidence(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     accepted = tmp_path / "accepted.json"
+    characterized = tmp_path / "characterized.json"
     failed = tmp_path / "failed.json"
     accepted.write_text("accepted-before\n", encoding="utf-8")
+    characterized.write_text("characterized-before\n", encoding="utf-8")
+    failed.write_text("failed-before\n", encoding="utf-8")
     monkeypatch.setattr(rehearsal, "EVIDENCE_PATH", accepted)
+    monkeypatch.setattr(rehearsal, "CHARACTERIZATION_EVIDENCE_PATH", characterized)
     monkeypatch.setattr(rehearsal, "FAILURE_EVIDENCE_PATH", failed)
 
     failed_target = rehearsal.write_evidence({"result": "rehearsal_failed"})
     assert failed_target == failed
     assert accepted.read_text(encoding="utf-8") == "accepted-before\n"
+    assert characterized.read_text(encoding="utf-8") == "characterized-before\n"
+    assert json.loads(failed.read_text(encoding="utf-8")) == {
+        "result": "rehearsal_failed"
+    }
+
+    characterized_target = rehearsal.write_evidence(
+        {"result": "catalogue_characterization_required"}
+    )
+    assert characterized_target == characterized
+    assert accepted.read_text(encoding="utf-8") == "accepted-before\n"
+    assert json.loads(characterized.read_text(encoding="utf-8")) == {
+        "result": "catalogue_characterization_required"
+    }
     assert json.loads(failed.read_text(encoding="utf-8")) == {
         "result": "rehearsal_failed"
     }
@@ -2913,6 +2977,16 @@ def test_failed_exact_rerun_cannot_overwrite_last_accepted_evidence(
     assert json.loads(accepted.read_text(encoding="utf-8")) == {
         "result": rehearsal.PASS_RESULT
     }
+
+
+def test_evidence_result_classes_have_distinct_repository_targets() -> None:
+    assert len(
+        {
+            rehearsal.EVIDENCE_PATH.resolve(),
+            rehearsal.CHARACTERIZATION_EVIDENCE_PATH.resolve(),
+            rehearsal.FAILURE_EVIDENCE_PATH.resolve(),
+        }
+    ) == 3
 
 
 def test_evidence_schema_accepts_bounded_environment_stop() -> None:
