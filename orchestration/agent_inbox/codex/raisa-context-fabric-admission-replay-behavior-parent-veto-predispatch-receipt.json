@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_the_admission_replay_behavior_parent_rebind_in_r179",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted parse pass now parents deterministic behavior-rebind candidate 116fcca713f804e8234e60b3cdff9ebac567f50d. No behavior attempt has followed attempt 046.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only exact-head veto authority only in clean r179. GPT Sol retains acceptance, one behavior run, cleanup and integration authority. No fallback is allowed.",
+    "active_plan_and_acceptance": "The unchanged twenty-scenario contract binds accepted parse SHA-256 9ad82882150f8795789c332db8bed6e4b50d150986a6066ce832f12e48246d24 and exact SQL/manifest parents. Canonical contract SHA-256 is 43b25bd7509439f069643dcb0ae8e62e27002834fe9903d84e7478486b452615. Combined suites and Ruff pass.",
+    "protected_evidence_boundaries": "Reviewer access is limited to tracked allowlisted exact-head files. Mutable evidence, holdouts, historical Diary data, docs/branding, patient/clinical/product data, Docker/database, providers, edits, deployment, Pages and protected refs are closed.",
+    "git_refs_and_worktree": "Clean r179 is exact 116fcca713f804e8234e60b3cdff9ebac567f50d on codex/review-context-fabric-admission-replay-behavior-116fcca7. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary task tracked state matches candidate; untracked paths remain preserved."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

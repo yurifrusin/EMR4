@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_behavior_parent_pass_review_and_sol_one_attempt_acceptance_before_attempt_047",
+  "source_evidence": {
+    "live_handover_current_baton": "Behavior-parent candidate 116fcca713f804e8234e60b3cdff9ebac567f50d passed fresh Gemini 3.6 Flash/high veto with clean postflight. No behavior run has followed failed attempt 046.",
+    "current_authority_allocation": "The reviewer lease is complete. GPT Sol alone may accept its exact receipt, commit provenance and run one no-argument behavior attempt 047 under a distinct fresh preexecution receipt. No provider, product, deployment or protected integration authority is open.",
+    "active_plan_and_acceptance": "Review receipt SHA-256 32104bf427029ac726d68de7564aa1ca52a5fa75d994bb6b15646b5da84f2f15 accepts exact behavior contract 43b25bd7509439f069643dcb0ae8e62e27002834fe9903d84e7478486b452615 with twenty unchanged scenarios at 6/4/3/4/3. Exactly one attempt 047 is next; no rerun is permitted.",
+    "protected_evidence_boundaries": "This commit starts no database. Mutable behavior alias remains untracked at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b; parse aliases remain restored. Holdouts, historical Diary data, docs/branding and unrelated untracked paths remain excluded. No operational persistence, watcher/feed, app/API/Diary wiring, product/patient/clinical data, provider, deployment, release, Pages or protected refs open.",
+    "git_refs_and_worktree": "Primary and clean r179 reviewed HEAD are exact 116fcca713f804e8234e60b3cdff9ebac567f50d. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit staging is limited to review provenance and acceptance."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Exact pass receipt and clean postflight reconciled."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh r179 pass complete; no continuing lease."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
