@@ -970,6 +970,28 @@ def test_transition_result_hardening_does_not_widen_relation_deltas() -> None:
     )
 
 
+def test_happy_obligation_probes_are_exactly_alpha_scoped() -> None:
+    fixture = CONTRACT["fixture_namespace"]
+    expected_scope = (
+        f"practice_id='{fixture['practice_alpha']}'::pg_catalog.uuid AND "
+        f"stream_id='{fixture['stream_alpha']}'::pg_catalog.uuid AND "
+        f"observer_id='{fixture['observer_happy']}'::pg_catalog.uuid"
+    )
+
+    for scenario_id in ("BTR-E04", "BTR-I03"):
+        sql = rehearsal._probe_sql(CONTRACT, scenario_id)  # noqa: SLF001
+        obligation_probe = sql.split(
+            "FROM emr4_context_fabric.context_reassembly_obligation WHERE ", 1
+        )[1].split(")", 1)[0]
+        assert expected_scope in obligation_probe
+
+    bootstrap = rehearsal.render_bootstrap_sql(CONTRACT).decode("utf-8")
+    assert fixture["practice_beta"] in bootstrap
+    assert fixture["stream_beta"] in bootstrap
+    assert fixture["observer_happy"] in bootstrap
+    assert "beta_obligation AS (" in bootstrap
+
+
 def test_entry_point_isolation_matches_parent_fail_closed_guards() -> None:
     for scenario in CONTRACT["scenarios"]:
         if scenario["id"] == "BTR-R03":

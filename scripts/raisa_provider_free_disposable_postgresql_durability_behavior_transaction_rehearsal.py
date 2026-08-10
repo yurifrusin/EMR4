@@ -2082,6 +2082,10 @@ def _probe_sql(contract: dict[str, Any], scenario_id: str) -> str:
     f = contract["fixture_namespace"]
     p = _lit(f["practice_alpha"]) + "::pg_catalog.uuid"
     s = _lit(f["stream_alpha"]) + "::pg_catalog.uuid"
+    happy_obligation_scope = (
+        f"practice_id={p} AND stream_id={s} AND "
+        f"observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid"
+    )
     probes: dict[str, list[str]] = {
         "BTR-E01": [
             f"(SELECT count(*)=1 AND min(barrier_revision)=3 AND max(barrier_revision)=3 FROM emr4_context_fabric.context_generation_registry_barrier WHERE practice_id={p} AND stream_id={s})",
@@ -2114,13 +2118,13 @@ def _probe_sql(contract: dict[str, Any], scenario_id: str) -> str:
             f"(SELECT count(*)=1 FROM emr4_context_fabric.context_durability_checkpoint WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND last_contiguous_position=1)",
             f"(SELECT count(*)=1 FROM emr4_context_fabric.context_invalidation_watermark WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND frame_type='CURRENT_DIARY_PROJECTION' AND watermark_position=1)",
             f"(SELECT count(*)=1 FROM emr4_context_fabric.context_frame_generation WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND frame_type='CURRENT_DIARY_PROJECTION' AND lifecycle_state='RETIRED')",
-            f"(SELECT count(*)=1 FROM emr4_context_fabric.context_reassembly_obligation WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND obligation_state='PENDING')",
+            f"(SELECT count(*)=1 FROM emr4_context_fabric.context_reassembly_obligation WHERE {happy_obligation_scope} AND obligation_state='PENDING')",
             f"(SELECT count(*)=1 FROM emr4_context_fabric.context_durability_lifecycle WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND entry_kind='DECISION')",
             f"(SELECT count(*)=1 FROM emr4_context_fabric.context_durability_audit WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid)",
         ],
         "BTR-I03": [
             f"(SELECT count(*)=1 FROM emr4_context_fabric.context_classified_observation_receipt WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid AND source_position=1)",
-            f"(SELECT count(*)=1 FROM emr4_context_fabric.context_reassembly_obligation WHERE observer_id={_lit(f['observer_happy'])}::pg_catalog.uuid)",
+            f"(SELECT count(*)=1 FROM emr4_context_fabric.context_reassembly_obligation WHERE {happy_obligation_scope})",
         ],
         "BTR-E05": [
             f"(SELECT count(*)=1 FROM public.appointments WHERE id={_lit(f['appointment_non_temporal'])}::pg_catalog.uuid AND location_id={_lit(f['location_beta'])}::pg_catalog.uuid)",

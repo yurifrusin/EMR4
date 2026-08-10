@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_execution",
+  "planned_action": "run_exactly_one_no_argument_owned_disposable_postgresql_behavior_characterization_attempt_040_to_localize_the_btr_e04_failed_probe_index",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate c23c65a adds exact boolean probe-shape validation and value-free one-based failed probe indexes. The focused 237-test packet, Ruff and diff hygiene pass; a fresh Gemini 3.6 Flash/high veto passed at the exact clean candidate. The next evidence-producing action is exactly one no-argument harness run. No identical second run is permitted.",
+    "current_authority_allocation": "Yuri's standing authority permits uninterrupted progression through this planned provider-free durability sequence. GPT Sol owns this single bounded disposable run, exact-container cleanup, diagnosis and acceptance. The Gemini 3.6 Flash/high verifier has completed its read-only veto and has no runtime lease. No provider, product, deployment, release, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Task HEAD and branch are exact c23c65a364a576b553ab0640cf4206c2d95f7e24; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree is clean; docs/branding and all unrelated untracked files remain preserved and excluded.",
+    "live_handover_current_baton": "The active Context Fabric durability behavior descendant is exact task candidate c23c65a364a576b553ab0640cf4206c2d95f7e24. Attempt 039 failed safely at the BTR-E04 semantic probe after exact marker and relation-delta admission; its container is absent and immutable failure evidence is committed.",
+    "protected_evidence_boundaries": "Only repository-authored synthetic fixtures may enter one owned disposable PostgreSQL container. The mutable evidence alias is backed up byte-exact at C:\\Users\\sarashera\\AppData\\Local\\Temp\\emr4-cf-behavior-attempt-040-backup\\provider-free-behavior-transaction-evidence.json with SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. On failure, copy the new evidence immutably, restore the alias, and inspect/remove only the exact emitted container ID. No Docker enumeration is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 186,
+  "register_revision": 187,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8676,6 +8676,48 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-186.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0216",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-failure-040-obligation-scope-recovery",
+      "stage": "deterministic_verification",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-behavior-obligation-probe",
+      "model": null,
+      "transport": "local_disposable_postgresql_behavior_harness",
+      "attempt_id": "75824e149eb55dfe398872e0",
+      "origin": "harness",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "reasoning_level": "high",
+      "observed_error": "Behavior attempt 040 localized BTR-E04 to semantic probe 5. The harness expected one pending obligation but filtered only by an authored-synthetic observer identifier reused by the deliberately isolated beta fixture, so it counted both the preseeded beta obligation and the newly admitted alpha obligation.",
+      "expected_invariant": "Behavior readback predicates must bind the full practice-and-stream scope whenever an authored-synthetic identifier is intentionally reused across isolated practice fixtures.",
+      "detection_method": "The bounded failed-probe index identified the obligation predicate. Static reconciliation proved the beta bootstrap preseed, the shared observer identifier, BTR-E04's admitted plus-one obligation delta, the readback order and the old predicate's missing practice and stream constraints, without another database run.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-040.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-040.json",
+        "docs/raisa-context-fabric-durability-behavior-failure-040-obligation-scope-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-187.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.behavior_obligation_probe_scope_omitted",
+      "causal_claim_level": "observation_only",
+      "related_incident_ids": [],
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Bind the BTR-E04 and BTR-I03 obligation probes to the exact alpha practice and stream in addition to the observer, preserving the beta isolation fixture and all database, contract, scenario, authority and product boundaries.",
+        "prevention_control": "Every readback over a practice-scoped durability relation must include exact practice and stream coordinates when any other closed fixture may reuse a subordinate identifier.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/raisa-context-fabric-durability-behavior-failure-040-obligation-scope-diagnosis.md",
+          "docs/ariadne-agent-error-correction-register-revision-187.md"
         ]
       },
       "status": "corrected"

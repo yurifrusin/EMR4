@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 186
+    assert register["register_revision"] == 187
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 216)
+        f"AER-{index:04d}" for index in range(1, 217)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 215
+    assert report["incident_count"] == 216
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,19 +2508,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 186
-    assert report["incident_count"] == 215
+    assert report["register_revision"] == 187
+    assert report["incident_count"] == 216
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 134,
-        "harness": 24,
+        "harness": 25,
         "repository": 48,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 22,
         "evidence_misreport": 30,
-        "harness_failure": 24,
+        "harness_failure": 25,
         "output_contract_violation": 54,
         "read_only_violation": 3,
         "reasoning_claim_error": 25,
@@ -2528,7 +2528,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 71,
+        "accepted_candidate_changed": 72,
         "canonical_unchanged": 122,
         "untrusted_partial_worktree": 22,
     }
@@ -3671,6 +3671,23 @@ def test_aer_0215_records_behavior_probe_index_elision() -> None:
     assert incident["related_incident_ids"] == []
     assert "seven value-free boolean predicates" in incident["observed_error"]
     assert "one-based failed probe indexes" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0216_records_behavior_obligation_probe_scope_omission() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0216"
+    ]
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "attempt_rejected_and_escalated"
+    assert incident["recurrence_signature"] == (
+        "harness.behavior_obligation_probe_scope_omitted"
+    )
+    assert incident["related_incident_ids"] == []
+    assert "preseeded beta obligation" in incident["observed_error"]
+    assert "exact alpha practice and stream" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 

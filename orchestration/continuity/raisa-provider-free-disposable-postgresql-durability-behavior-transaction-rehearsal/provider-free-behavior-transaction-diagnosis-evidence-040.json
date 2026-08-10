@@ -1,0 +1,42 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_and_probe_scope_repair_only_no_database_body_contract_product_provider_or_protected_ref_authority",
+  "bounded_repair": {
+    "allowed_digest_changes_unchanged": true,
+    "behavior_contract_unchanged": true,
+    "database_artifact_unchanged": true,
+    "fresh_exact_head_veto_before_characterization": true,
+    "next_run_must_be_single_owned_disposable_attempt": true,
+    "scenario_population_unchanged": true,
+    "scope_btr_e04_and_i03_obligation_probes_to_practice_alpha": true,
+    "scope_btr_e04_and_i03_obligation_probes_to_stream_alpha": true
+  },
+  "diagnosis": {
+    "additional_container_runs": 0,
+    "beta_fixture_preseeds_pending_obligation": true,
+    "beta_fixture_reuses_happy_observer_id": true,
+    "btr_e04_relation_delta_one_admitted_before_probe": true,
+    "database_body_defect_indicated": false,
+    "logical_matching_rows": 2,
+    "parent_probe_filtered_only_observer_and_state": true,
+    "parent_probe_omitted_practice_and_stream": true,
+    "probe_semantic": "one_pending_reassembly_obligation",
+    "raw_postgresql_values_persisted": false
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:93af223dfb25aab6a217f98eea45aa43c27efdb2d85d102caaf0f3b05b41ff98",
+    "failed_probe_indexes": [
+      5
+    ],
+    "internal_attempt_id": "75824e149eb55dfe398872e0",
+    "run_sequence": 40,
+    "scenario_id": "BTR-E04"
+  },
+  "parent_source": {
+    "commit": "c23c65a364a576b553ab0640cf4206c2d95f7e24",
+    "path": "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+    "sha256": "sha256:6898425497bb1361b096932bedc9f637ad5b381434100a45df11e6ac227d9928"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-040-obligation-scope-diagnosis.v1",
+  "status": "unscoped_cross_practice_fixture_collision_proven"
+}
