@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_exact_head_pass_review_sol_parse_admission_acceptance_and_this_receipt_before_any_database_run",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The admission replay winner recovery is exact reviewed candidate 5a9a7ae907308aa0a8a4256e9043b833f8c416ae. Fresh r176 Gemini 3.6 Flash/high review returns pass with clean exact postflight. Database execution remains unopened until this provenance and acceptance commit.",
+    "current_authority_allocation": "The Gemini reviewer completed one read-only veto and has no continuing lease. GPT Sol alone may accept its exact receipt, commit provenance and then conduct the plan's distinct characterization and exact-reproduction parse admissions under fresh receipts. No provider, product or protected integrator is assigned.",
+    "active_plan_and_acceptance": "Renderer 2.0.20 changes only three admission reload-winner predicates and regenerates 424 statements at SQL SHA-256 dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7. Review receipt SHA-256 d897a75e7346de93cb89dcd22e3958781c8a2464ca7a50111b8fdc732b6b58b9 returns pass. Fresh parse/catalogue characterization and exact reproduction must precede behavior-contract rebind or attempt 047.",
+    "protected_evidence_boundaries": "This acceptance commit starts no Docker or database. Protected mutable behavior and parse evidence remain byte-exact, untracked and unstaged. No operational persistence, watcher/feed, app/API/Diary wiring, patient/product/clinical data, provider, deployment, production, release, Pages or protected-ref movement opens.",
+    "git_refs_and_worktree": "Task HEAD and clean r176 reviewed HEAD are exact 5a9a7ae907308aa0a8a4256e9043b833f8c416ae. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit staging is limited to the review packet/state/receipt/preflight/postflight/result, Sol acceptance and this generated receipt; all unrelated untracked paths including docs/branding remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

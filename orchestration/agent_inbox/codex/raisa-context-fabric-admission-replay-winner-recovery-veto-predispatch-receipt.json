@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_the_admission_replay_winner_recovery_in_r176",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant is exact recovery candidate 5a9a7ae907308aa0a8a4256e9043b833f8c416ae after attempt 046 exposed a cross-transaction admission-replay winner-predicate defect. The candidate is locally deterministic only; database execution remains unopened pending this veto and fresh parse/catalogue admission.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through exactly one fresh Antigravity project receives read-only independent-veto authority only in clean r176 at the exact candidate. GPT Sol retains implementation, acceptance, database-run, cleanup, integration and baton authority. No silent model fallback is allowed.",
+    "active_plan_and_acceptance": "The accepted Context Fabric durability plan requires a fresh exact-HEAD veto before any disposable PostgreSQL execution after a generated-artifact recovery. Candidate renderer 2.0.20 removes only the volatile admitted_at transaction_timestamp equality from three admission reload-winner predicates while preserving insertion, storage, return and all stable identity comparisons. Focused deterministic tests, Ruff, renderer check and diff hygiene pass.",
+    "protected_evidence_boundaries": "The verifier may inspect only the exact repository-authored allowlist and immutable authored-synthetic evidence named in the packet. It may not inspect mutable evidence aliases, protected holdouts, historical Diary data, docs/branding, patient/clinical/product data, start Docker/PostgreSQL, use credentials, contact product/provider surfaces, edit, commit, push, deploy, release, rebuild Pages or move refs.",
+    "git_refs_and_worktree": "Verifier worktree C:\\Users\\sarashera\\EMR4-worktrees\\raisa-context-fabric-durability-behavior-r176 is clean on codex/review-context-fabric-admission-replay-5a9a7ae9 at exact 5a9a7ae907308aa0a8a4256e9043b833f8c416ae. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main task worktree has no tracked modifications; all unrelated untracked paths, including docs/branding, remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
