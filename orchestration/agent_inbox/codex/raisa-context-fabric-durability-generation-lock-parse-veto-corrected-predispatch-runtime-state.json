@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_veto_for_generation_lock_parse_characterization_rebind_after_exact_baseline_correction",
+  "source_evidence": {
+    "live_handover_current_baton": "The generation-lock RLS repair passed independent veto. Exact candidate a85224f0 rebinds only the disposable parse contract for characterization; the first review packet baseline was rejected before dispatch and corrected from exact git rev-parse output.",
+    "current_authority_allocation": "GPT Sol conducts and accepts or rejects. One fresh Gemini 3.6 Flash/high Antigravity project may review read-only exact HEAD; a pass permits only one later bounded characterization container.",
+    "active_plan_and_acceptance": "Parse contract canonical aea61c73 binds accepted artifact source e115f6f4, inert aa26f926/1435252 bytes/421 statements, and characterization_only with an empty digest map. Local exact 139-test/three-file Ruff gates pass; AER-0196 preserves the pre-dispatch baseline error and the packet now uses exact baseline 661ebe93e13f35e5cdfb8cb73da1063cf8cb05c0.",
+    "protected_evidence_boundaries": "Review only; do not start Docker/PostgreSQL. Mutable parse accepted evidence remains 97d1385c, protected historical parse failure 3bf66870 and mutable behavior evidence 09907bf6. No exact reproduction, behavior, applied migration, operational database, listener/feed, patient/product/clinical data, product command, deployment, Pages, release or protected-ref action is open.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r156 is clean at exact a85224f095f32ab4f77cb81ae5691011eedfc1cb; exact baseline is git rev-parse result 661ebe93e13f35e5cdfb8cb73da1063cf8cb05c0. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Unrelated untracked files and docs/branding remain preserved."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "generation_lock_parse_corrected_veto_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns corrected review dispatch and acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One fresh Gemini 3.6 Flash/high veto selected after exact baseline correction."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

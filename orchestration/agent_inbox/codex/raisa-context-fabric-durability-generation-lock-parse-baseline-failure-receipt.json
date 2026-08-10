@@ -1,0 +1,19 @@
+{
+  "schema_version": "emr4.ariadne-pre-dispatch-git-binding-failure.v1",
+  "status": "revision_required",
+  "stage": "pre_verifier_dispatch",
+  "candidate_head": "a85224f095f32ab4f77cb81ae5691011eedfc1cb",
+  "abbreviated_baseline": "661ebe93",
+  "incorrect_inferred_baseline": "661ebe9347981cbfd928989171cd6a53ddccff2c",
+  "exact_git_rev_parse_baseline": "661ebe93e13f35e5cdfb8cb73da1063cf8cb05c0",
+  "model_or_provider_calls": 0,
+  "database_runs": 0,
+  "detection": "pre_dispatch_git_rev_parse_and_packet_diff_range_reconciliation",
+  "object_verification": {
+    "first_invocation": "failed_locally_because_powershell_revision_expression_was_unquoted",
+    "successful_invocation": "git_cat_file_and_git_rev_parse_with_single_quoted_commit_expression",
+    "resolved_commit": "661ebe93e13f35e5cdfb8cb73da1063cf8cb05c0"
+  },
+  "correction": "packet_rebound_to_exact_git_rev_parse_output_and_fresh_distinct_orchestrator_receipt_required",
+  "authority_boundary": "repository_evidence_only_no_review_database_product_command_deployment_or_protected_ref_authority"
+}

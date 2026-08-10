@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_explicit_generation_lock_parse_review_acceptance_and_aer_0196_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Candidate a85224f0 contains only the generation-lock parse characterization rebind; its fresh independent review now passes.",
+    "current_authority_allocation": "GPT Sol owns acceptance and explicit-path task-branch commit. The fresh Gemini 3.6 Flash/high r156 review lease is complete and admitted. No worker or database runtime receives authority from this commit.",
+    "active_plan_and_acceptance": "The accepted review binds exact candidate a85224f095f32ab4f77cb81ae5691011eedfc1cb, exact baseline 661ebe93e13f35e5cdfb8cb73da1063cf8cb05c0, artifact aa26f926 at 1435252 LF bytes and 421 statements, characterization_only mode, 139/139 focused tests, Ruff, clean diff and unchanged r156 postflight. AER-0196 preserves the rejected inferred-baseline packet before the corrected fresh dispatch.",
+    "protected_evidence_boundaries": "Commit only the explicit generation-lock parse review packet, preflights, original and corrected dispatch receipts/states, reviewer receipt, Sol acceptance, postcompaction receipts, AER revision 170 files and this precommit pair. Preserve every unrelated untracked file and do not inspect or stage docs/branding/. No Docker/PostgreSQL, exact reproduction, behavior, migration, operational persistence, watcher/listener/feed, patient/product/clinical data, provider, command, deployment, Pages, release or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Task branch is exact a85224f095f32ab4f77cb81ae5691011eedfc1cb before this provenance commit; r156 is clean at the same exact HEAD. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "generation_lock_parse_review_acceptance_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol independently reconciled the exact review packet, receipt and clean postflight."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native implementation worker is selected for the serial runtime lane."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh r156 Gemini 3.6 Flash/high lease completed pass with an unchanged clean candidate."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport is active."]
+    },
+    {
+      "adapter_id": "local_docker_postgresql",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Docker and PostgreSQL remain closed during this provenance commit."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

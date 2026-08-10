@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 169
+    assert register["register_revision"] == 170
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 196)
+        f"AER-{index:04d}" for index in range(1, 197)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 122
+    assert len(agent_incidents) == 123
     assert len(transport_incidents) == 8
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2491,7 +2491,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 195
+    assert report["incident_count"] == 196
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2507,18 +2507,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 169
-    assert report["incident_count"] == 195
+    assert report["register_revision"] == 170
+    assert report["incident_count"] == 196
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 122,
+        "agent_behavior": 123,
         "harness": 22,
         "repository": 43,
         "transport": 8,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 20,
-        "evidence_misreport": 23,
+        "evidence_misreport": 24,
         "harness_failure": 22,
         "output_contract_violation": 51,
         "read_only_violation": 3,
@@ -2528,7 +2528,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 64,
-        "canonical_unchanged": 109,
+        "canonical_unchanged": 110,
         "untrusted_partial_worktree": 22,
     }
     assert report["recurring_patterns"] == [
@@ -2557,6 +2557,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
                 "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
                 "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0192", "AER-0196"],
+            "origins": ["agent_behavior"],
+            "categories": ["evidence_misreport"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it resolves, and reconcile every packet diff range before generating the final dispatch receipt.",
+                "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it with git cat-file, and test the full value before review or runtime dispatch.",
             ],
         },
         {
@@ -3231,13 +3246,6 @@ def test_aer_0191_preserves_clean_checkout_test_veto_and_guarded_repair() -> Non
 
 def test_aer_0192_preserves_nonexistent_parent_binding_and_exact_correction() -> None:
     incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0192"]
-    contract = _json(
-        ROOT
-        / "orchestration"
-        / "continuity"
-        / "raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal"
-        / "rehearsal-contract.json"
-    )
 
     assert incident["origin"] == "agent_behavior"
     assert incident["role"] == "orchestrator"
@@ -3245,8 +3253,8 @@ def test_aer_0192_preserves_nonexistent_parent_binding_and_exact_correction() ->
     assert incident["recurrence_signature"] == (
         "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
     )
-    assert contract["parent"]["accepted_source_head"] == (
-        "c8ab7602e16e24453dbf909597b4f702a2388416"
+    assert (
+        "c8ab7602e16e24453dbf909597b4f702a2388416" in incident["correction"]["action"]
     )
     assert "No database run occurred" in incident["correction"]["action"]
     assert incident["correction"]["status"] == (
@@ -3321,6 +3329,21 @@ def test_aer_0195_aligns_coordinator_generation_lock_rls_without_direct_dml() ->
         "control_implemented_pending_acceptance"
     )
     assert "zero direct table SELECT or DML" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0196_catches_inferred_full_git_hash_before_dispatch() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0196"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
+    )
+    assert "Before any verifier or database call" in incident["detection_method"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert incident["status"] == "corrected"
 
 

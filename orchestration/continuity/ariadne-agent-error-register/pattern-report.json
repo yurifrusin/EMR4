@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "4f3fb4456ea15d13bc66420d5862116e525e8e7468e52d37c9f4235536779653",
+  "canonical_register_sha256": "0e4c7ea37de47dd54599a19337bcd0c8c4587fb68e1408d653f223d139913d73",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 64,
-      "canonical_unchanged": 109,
+      "canonical_unchanged": 110,
       "untrusted_partial_worktree": 22
     },
     "by_category": {
       "command_scope_violation": 20,
-      "evidence_misreport": 23,
+      "evidence_misreport": 24,
       "harness_failure": 22,
       "output_contract_violation": 51,
       "read_only_violation": 3,
@@ -17,14 +17,14 @@
       "transport_timeout": 8
     },
     "by_origin": {
-      "agent_behavior": 122,
+      "agent_behavior": 123,
       "harness": 22,
       "repository": 43,
       "transport": 8
     },
     "by_process_severity": {
       "low": 62,
-      "material": 71,
+      "material": 72,
       "moderate": 62
     },
     "by_resource_and_role": {
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 84,
+      "codex-primary-orchestrator::orchestrator": 85,
       "codex-sol-orchestrator::orchestrator": 1,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
@@ -70,12 +70,12 @@
     },
     "by_role": {
       "implementer": 14,
-      "orchestrator": 139,
+      "orchestrator": 140,
       "verifier": 42
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 195,
+  "incident_count": 196,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -122,6 +122,30 @@
         "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path."
       ],
       "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "evidence_misreport"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0192",
+        "AER-0196"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it resolves, and reconcile every packet diff range before generating the final dispatch receipt.",
+        "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it with git cat-file, and test the full value before review or runtime dispatch."
+      ],
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -482,7 +506,7 @@
       ]
     }
   ],
-  "register_revision": 169,
+  "register_revision": 170,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-10"
 }

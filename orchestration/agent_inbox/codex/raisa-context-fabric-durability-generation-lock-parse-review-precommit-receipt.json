@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_explicit_generation_lock_parse_review_acceptance_and_aer_0196_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted review binds exact candidate a85224f095f32ab4f77cb81ae5691011eedfc1cb, exact baseline 661ebe93e13f35e5cdfb8cb73da1063cf8cb05c0, artifact aa26f926 at 1435252 LF bytes and 421 statements, characterization_only mode, 139/139 focused tests, Ruff, clean diff and unchanged r156 postflight. AER-0196 preserves the rejected inferred-baseline packet before the corrected fresh dispatch.",
+    "current_authority_allocation": "GPT Sol owns acceptance and explicit-path task-branch commit. The fresh Gemini 3.6 Flash/high r156 review lease is complete and admitted. No worker or database runtime receives authority from this commit.",
+    "git_refs_and_worktree": "Task branch is exact a85224f095f32ab4f77cb81ae5691011eedfc1cb before this provenance commit; r156 is clean at the same exact HEAD. Local and origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains exact 324d37f086a51a60b260d02b38772594b6c205df. Explicit-path staging only.",
+    "live_handover_current_baton": "The active baton remains the provider-free disposable PostgreSQL Context Fabric durability behavior recovery. Candidate a85224f0 contains only the generation-lock parse characterization rebind; its fresh independent review now passes.",
+    "protected_evidence_boundaries": "Commit only the explicit generation-lock parse review packet, preflights, original and corrected dispatch receipts/states, reviewer receipt, Sol acceptance, postcompaction receipts, AER revision 170 files and this precommit pair. Preserve every unrelated untracked file and do not inspect or stage docs/branding/. No Docker/PostgreSQL, exact reproduction, behavior, migration, operational persistence, watcher/listener/feed, patient/product/clinical data, provider, command, deployment, Pages, release or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

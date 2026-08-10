@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 169,
+  "register_revision": 170,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -7847,6 +7847,46 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-generation-lock-rls-recovery.md",
           "docs/security/raisa-context-fabric-durability-behavior-generation-lock-rls-recovery-threat-model-delta.md",
           "docs/ariadne-agent-error-correction-register-revision-169.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0196",
+      "attempt_id": "raisa-context-fabric-generation-lock-parse-review-predispatch-001",
+      "observed_on": "2026-08-10",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Every forty-character Git binding must be copied from an independently observed git rev-parse result and resolve as a repository object before it enters a verifier packet.",
+      "observed_error": "Sol inferred a nonexistent forty-character baseline from displayed short commit 661ebe93 in the generation-lock parse review packet instead of copying the exact git rev-parse value.",
+      "detection_method": "Before any verifier or database call, Sol ran git rev-parse 661ebe93, compared the result with the packet and preserved a fail-closed pre-dispatch receipt. An initially unquoted PowerShell cat-file revision expression failed locally; the single-quoted cat-file and rev-parse commit checks then resolved the exact baseline.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-baseline-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-gemini-review-packet.md",
+        "docs/ariadne-agent-error-correction-register-revision-170.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The packet now binds exact git rev-parse output 661ebe93e13f35e5cdfb8cb73da1063cf8cb05c0, the wrong value remains preserved, no model or database call occurred, and dispatch requires a fresh distinct orchestrator receipt.",
+        "prevention_control": "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it resolves, and reconcile every packet diff range before generating the final dispatch receipt.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-baseline-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-gemini-review-packet.md",
+          "docs/ariadne-agent-error-correction-register-revision-170.md"
         ]
       },
       "status": "corrected"
