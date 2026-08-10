@@ -506,7 +506,7 @@ CREATE POLICY pol_cf_02_update_lock ON emr4_context_fabric.diary_context_aggrega
     USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()))
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()) AND FALSE);
 CREATE POLICY pol_cf_03_select ON emr4_context_fabric.diary_context_observation_outbox_v1 FOR SELECT TO PUBLIC
-    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'OBSERVER'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
+    USING (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, 'OBSERVER'::emr4_context_fabric.logical_capability, 'COORDINATOR'::emr4_context_fabric.logical_capability, 'RETENTION'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_03_insert ON emr4_context_fabric.diary_context_observation_outbox_v1 FOR INSERT TO PUBLIC
     WITH CHECK (emr4_context_fabric.session_binding_allows_v1(session_user, ARRAY['PRODUCER'::emr4_context_fabric.logical_capability], practice_id, source_contract_id, stream_id, transaction_timestamp()));
 CREATE POLICY pol_cf_03_delete ON emr4_context_fabric.diary_context_observation_outbox_v1 FOR DELETE TO PUBLIC

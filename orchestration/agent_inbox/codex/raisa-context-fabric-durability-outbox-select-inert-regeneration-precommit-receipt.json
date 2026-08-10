@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_the_inert_outbox_select_policy_regeneration_without_executing_or_applying_sql",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Lower exact committed structural parent sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f and body parent sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62 to inert PostgreSQL 16 SQL. Require exactly 423 statements, one intended pol_cf_03_select expression change and zero direct coordinator table grants.",
+    "current_authority_allocation": "GPT Sol owns deterministic provider-free inert regeneration and explicit-path task-branch commit. No model, worker, database runtime, product consumer or protected integrator is assigned.",
+    "git_refs_and_worktree": "Body source commit is exact 1a06961916bcf73d553eb401eb08094aa4c45e20. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the renderer, four canonical inert artifacts, exact inert tests, note and this receipt may be staged.",
+    "live_handover_current_baton": "The structural RLS repair and byte-unchanged body reseal are committed. Inert regeneration is the next deterministic descendant; parse and behavior execution remain closed.",
+    "protected_evidence_boundaries": "Mutable behavior evidence remains SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and parse evidence remains SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec. No database, provider, product, patient, application/API/Diary, deployment, Pages, release or protected-ref action is open. Preserve every untracked path; docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

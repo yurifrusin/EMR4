@@ -1,9 +1,9 @@
 {
   "artifact": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
   "body_parent": {
-    "contract_sha256": "sha256:8124957e32657076c3befc96a7b5e8770dcd37fcb5b91e33c136f01cbf2dd5ea",
+    "contract_sha256": "sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62",
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-    "source_head": "f42558c14c59c2d37a5b96d4a880941f26038d26"
+    "source_head": "1a06961916bcf73d553eb401eb08094aa4c45e20"
   },
   "body_program_accounting": [
     {
@@ -695,7 +695,7 @@
       ]
     }
   ],
-  "effective_catalogue_digest": "sha256:628acce4cbf208ac2bb2dab9c48bf6573cb448532f572e1c297ba6c9e3f7f35e",
+  "effective_catalogue_digest": "sha256:50de85209d1dc8873fee71f8638a29aeaf4ea01515ad038a9ea91222f5be1851",
   "effective_program_count": 23,
   "immutable_parent_program_count": 22,
   "opcode_populations": {
@@ -2592,7 +2592,7 @@
     },
     "executable_ddl": false,
     "id": "postgresql_16_representability_recovery_v1",
-    "immutable_body_parent_sha256": "sha256:8124957e32657076c3befc96a7b5e8770dcd37fcb5b91e33c136f01cbf2dd5ea",
+    "immutable_body_parent_sha256": "sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62",
     "keyed_xmin_reselects": [
       {
         "cardinality_failure": {
@@ -2805,12 +2805,12 @@
   "postgresql_major": 16,
   "renderer_version": "2.0.18",
   "schema_version": "raisa.context_fabric.durability_inert_ddl_rehearsal.render_manifest.v1",
-  "sql_byte_count": 1436426,
-  "sql_sha256": "sha256:1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5",
+  "sql_byte_count": 1436481,
+  "sql_sha256": "sha256:265ce41ec4c3b318cc42c544ab06ebb0fcc67904072b0f8406af4ec8ddec6b0a",
   "statement_count": 423,
   "structural_parent": {
-    "contract_sha256": "sha256:80d5b57eadef0e6ede54c48fc842fe5567723c0a9cdebe288efbf63048c4b3ac",
+    "contract_sha256": "sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f",
     "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-    "source_head": "3a19167e13ac01996180e1b5ada2a6e2ae7e135f"
+    "source_head": "e1ca28915b09636e5d9d693216beef450f71a356"
   }
 }

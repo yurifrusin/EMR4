@@ -51,6 +51,14 @@ CURRENT_ADMISSION_LOCK_BODY_REBIND = (
     ROOT
     / "docs/raisa-provider-free-unmounted-durability-function-trigger-body-admission-lock-policy-parent-rebind.md"
 )
+CURRENT_OUTBOX_SELECT_RLS_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-unmounted-durability-inert-ddl-outbox-select-rls-rebind.md"
+)
+CURRENT_OUTBOX_SELECT_BODY_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-unmounted-durability-function-trigger-body-outbox-select-policy-parent-rebind.md"
+)
 STRUCTURAL_PARENT = (
     ROOT
     / "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture"
@@ -69,10 +77,10 @@ PLAN_BODY_DIGEST = (
     "sha256:b3eaa041dc96a6117957b9dd9bde0205afd1023fc521b3183410e7b3c4b8b1b1"
 )
 CURRENT_STRUCTURAL_DIGEST = (
-    "sha256:80d5b57eadef0e6ede54c48fc842fe5567723c0a9cdebe288efbf63048c4b3ac"
+    "sha256:30401808c97e45ad0ecf23242a21c1b7be35bc7d37343bb2f1ab4ef139e83a5f"
 )
 CURRENT_BODY_DIGEST = (
-    "sha256:8124957e32657076c3befc96a7b5e8770dcd37fcb5b91e33c136f01cbf2dd5ea"
+    "sha256:9b079af00e46b5e18f464cc39f9283ce400ee7b2621d875a127af19cb908ee62"
 )
 
 
@@ -104,6 +112,8 @@ def test_plan_binds_both_exact_accepted_parents_and_postgresql_16() -> None:
             _text(CURRENT_ANCHOR_LOCK_BODY_REBIND),
             _text(CURRENT_ADMISSION_LOCK_RLS_REBIND),
             _text(CURRENT_ADMISSION_LOCK_BODY_REBIND),
+            _text(CURRENT_OUTBOX_SELECT_RLS_REBIND),
+            _text(CURRENT_OUTBOX_SELECT_BODY_REBIND),
         )
     )
     assert CURRENT_STRUCTURAL_DIGEST in rebind

@@ -11,23 +11,26 @@ def load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
+def accepted_inert_node() -> dict:
+    graph = load("orchestration/continuity/emr4-continuity-graph.json")
+    matches = [node for node in graph["nodes"] if node["id"] == NODE_ID]
+    assert len(matches) == 1
+    return matches[0]
+
+
 def test_inert_ddl_continuity_is_current() -> None:
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 231
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 213
-    assert compass["source_graph_revision"] == 231
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert (
-        "parse-and-catalogue rehearsal is next"
-        in compass["orientation_statement"].lower()
-    )
+    node = accepted_inert_node()
+    assert graph["graph_revision"] >= 231
+    assert node["status"] == "accepted"
+    assert node["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] >= 213
+    assert compass["source_graph_revision"] == graph["graph_revision"]
 
 
 def test_inert_ddl_acceptance_opens_no_executable_authority() -> None:
-    node = load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    node = accepted_inert_node()
     assert node["authority"]["authorized_openings"] == []
     notes = " ".join(node["authority"]["notes"]).lower()
     for phrase in (
@@ -46,23 +49,27 @@ def test_inert_ddl_acceptance_opens_no_executable_authority() -> None:
 
 
 def test_database_execution_and_later_live_gates_remain_separate() -> None:
-    compass = load("orchestration/continuity/emr4-compass.json")
-    position = compass["current_position"]
+    node = accepted_inert_node()
+    rebind = (
+        ROOT
+        / "docs/raisa-provider-free-unmounted-durability-inert-ddl-outbox-select-rls-rebind.md"
+    ).read_text(encoding="utf-8")
     joined = " ".join(
-        position["unlocks"]
-        + position["does_not_solve"]
-        + [compass["orientation_statement"]]
+        node["claim_scope"]
+        + node["unresolved_gates"]
+        + [rebind]
     ).lower()
     for phrase in (
         "disposable",
         "postgresql",
         "applied migration",
         "database/outbox/feed/watcher/listener/source",
-        "patient/product data",
-        "commands",
+        "patient",
+        "product",
+        "command",
         "deployment",
         "pages",
-        "protected-ref",
+        "protected refs",
     ):
         assert phrase in joined
 

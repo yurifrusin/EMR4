@@ -233,6 +233,60 @@ def test_registration_initial_projection_policies_retain_narrow_lifecycle_access
     assert lifecycle_role["direct_table_select"] == []
 
 
+def test_rendered_outbox_select_policy_adds_coordinator_only_through_forced_rls() -> (
+    None
+):
+    rendered = _base_render()
+    sql = rendered["sql_text"]
+    expected_predicate = (
+        "emr4_context_fabric.session_binding_allows_v1(session_user, "
+        "ARRAY['PRODUCER'::emr4_context_fabric.logical_capability, "
+        "'OBSERVER'::emr4_context_fabric.logical_capability, "
+        "'COORDINATOR'::emr4_context_fabric.logical_capability, "
+        "'RETENTION'::emr4_context_fabric.logical_capability], practice_id, "
+        "source_contract_id, stream_id, transaction_timestamp())"
+    )
+    match = re.search(r"CREATE POLICY pol_cf_03_select\b.*?;", sql, flags=re.DOTALL)
+    assert match is not None
+    policy_sql = match.group(0)
+    assert policy_sql == (
+        "CREATE POLICY pol_cf_03_select ON "
+        "emr4_context_fabric.diary_context_observation_outbox_v1 "
+        "FOR SELECT TO PUBLIC\n"
+        "    USING (" + expected_predicate + ");"
+    )
+
+    roles = {
+        role["role"]: role
+        for role in rendered["effective"]["effective_structural"]["role_matrix"]
+    }
+    coordinator = roles["emr4_context_fabric.context_coordinator"]
+    assert coordinator["direct_table_select"] == []
+    assert coordinator["direct_table_dml"] == []
+
+    missing_coordinator = policy_sql.replace(
+        ", 'COORDINATOR'::emr4_context_fabric.logical_capability", "", 1
+    )
+    report = recognize_inert_sql(
+        sql.replace(policy_sql, missing_coordinator, 1),
+        rendered["manifest"],
+        rendered["effective"],
+    )
+    assert not report.valid
+
+    direct_grant = (
+        "GRANT SELECT ON "
+        "emr4_context_fabric.diary_context_observation_outbox_v1 TO "
+        "emr4_context_fabric.context_coordinator;\n"
+    )
+    report = recognize_inert_sql(
+        sql.replace(policy_sql, direct_grant + policy_sql, 1),
+        rendered["manifest"],
+        rendered["effective"],
+    )
+    assert not report.valid
+
+
 def test_rendered_stream_head_update_policy_preserves_lock_only_lifecycle_access() -> (
     None
 ):
