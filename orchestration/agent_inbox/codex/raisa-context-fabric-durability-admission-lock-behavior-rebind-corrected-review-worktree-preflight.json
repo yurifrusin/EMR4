@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r165",
+  "branch": "codex/review-context-fabric-admission-lock-corrected-8ae67f6b",
+  "head": "8ae67f6b0150ce7621f49c92c2f83bde1d46418e",
+  "expected_head": "8ae67f6b0150ce7621f49c92c2f83bde1d46418e",
+  "clean": true,
+  "branch_prefix": "codex/review-context-fabric-admission-lock-corrected-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_corrected_exact_head_pass_review_sol_one_attempt_acceptance_and_this_receipt_before_behavior_attempt_038",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact reviewed behavior contract remains twenty scenarios at 6/4/3/4/3 and canonical digest sha256:a16769b43c8345b3c79cc79d1ca26e4cd0b2d7095515d2b13bc7e21cb27b5b8e. The corrected review receipt SHA-256 aa65188ed36bfe660bb5f5039c5461559f8afe39ca07d3329534bc9b28c5176a passes all required challenges and authorizes exactly one attempt 038 after commit.",
+    "current_authority_allocation": "The Gemini reviewer completed one read-only veto and has no continuing lease. GPT Sol alone may accept its exact receipt, commit provenance and then run one fixed local disposable behavior attempt under a distinct fresh preexecution receipt. No provider, product or protected integrator is assigned.",
+    "git_refs_and_worktree": "Task HEAD and clean r165 reviewed HEAD are exact 8ae67f6b0150ce7621f49c92c2f83bde1d46418e. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit staging is limited to corrected review packet/state/receipt/preflight/result, Sol acceptance and this generated receipt; all unrelated untracked paths including docs/branding remain excluded.",
+    "live_handover_current_baton": "The corrected admission-lock behavior-rebind candidate is exact 8ae67f6b0150ce7621f49c92c2f83bde1d46418e. Fresh r165 Gemini 3.6 Flash/high review returns pass after 556 tests and clean exact postflight. Behavior runtime remains unopened until this provenance and acceptance commit.",
+    "protected_evidence_boundaries": "This acceptance commit starts no Docker or database. Protected mutable behavior and parse evidence remain byte-exact, untracked and unstaged. No operational persistence, watcher/feed, app/API/Diary wiring, patient/product/clinical data, provider, deployment, production, release, Pages or protected-ref movement opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_corrected_veto_of_revision_183_and_the_unchanged_admission_lock_behavior_rebind_in_r165",
+  "source_evidence": {
+    "live_handover_current_baton": "The active corrected durability candidate is exact 8ae67f6b0150ce7621f49c92c2f83bde1d46418e. The behavior rebind remains exact source 3cbaa4cb68acb78370183947a315f946f8d0ddaa and database runtime remains unopened. First r164 review passed every substantive durability challenge and stopped only on the now-corrected register seed count.",
+    "current_authority_allocation": "A distinct fresh Gemini 3.6 Flash/high Antigravity project receives read-only independent-veto authority only in clean r165 at the exact corrected candidate. GPT Sol retains implementation, acceptance, runtime, cleanup, integration and baton authority. No fallback is allowed.",
+    "active_plan_and_acceptance": "Revision 183 and AER-0211 reconcile the complete register to 211 closed incidents and the whole exact register file passes. The twenty behavior scenarios, counts 6/4/3/4/3, contract digest a16769b43c8345b3c79cc79d1ca26e4cd0b2d7095515d2b13bc7e21cb27b5b8e and all database parents are unchanged. A fresh exact-head veto remains required before attempt 038.",
+    "protected_evidence_boundaries": "The verifier may inspect only the exact repository-authored allowlist and immutable authored-synthetic evidence named by the corrected and first packets. Mutable evidence, protected holdouts, historical Diary data, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, providers, product surfaces, edits, commits, pushes, deployment, release, Pages and protected refs remain forbidden.",
+    "git_refs_and_worktree": "Verifier worktree C:\\Users\\sarashera\\EMR4-worktrees\\r165 is clean on codex/review-context-fabric-admission-lock-corrected-8ae67f6b at exact 8ae67f6b0150ce7621f49c92c2f83bde1d46418e. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The main task worktree has no tracked modifications and all unrelated untracked paths remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Corrected complete register gate and exact r165 candidate verified."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native implementation worker selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Selected a distinct fresh project with exact model gemini-3.6-flash-high and high reasoning."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
