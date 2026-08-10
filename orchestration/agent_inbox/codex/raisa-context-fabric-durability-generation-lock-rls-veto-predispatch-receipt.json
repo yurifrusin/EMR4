@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_veto_for_durability_generation_lock_rls_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Structural contract 3ce31780 admits the existing coordinator capability only in generation UPDATE RLS predicates; coordinator direct relation grants remain empty, unchanged body rebind is 32edb340, inert SQL is aa26f926 with 421 statements, and the exact 201-test/ten-file Ruff packet passes locally. Parse and behavior descendants remain deliberately ineligible pending rebind and fresh proof.",
+    "current_authority_allocation": "GPT Sol conducts and accepts or rejects. One fresh Gemini 3.6 Flash/high Antigravity project may review read-only exact HEAD; it has no implementation, database, product or protected-ref authority.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r155 is clean at exact e115f6f4cb31df1131c5c67d24f3a475a2ca6127. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Unrelated untracked files and docs/branding remain preserved.",
+    "live_handover_current_baton": "The active baton is provider-free Context Fabric durability behavior recovery. Attempt 035 failed closed and exact candidate e115f6f4 repairs the diagnosed generation-lock RLS mismatch; fresh independent veto is next.",
+    "protected_evidence_boundaries": "Review only; do not start Docker/PostgreSQL. Mutable behavior evidence remains untracked at SHA-256 09907bf6, parse accepted evidence at 97d1385c and protected historical parse failure at 3bf66870. No applied migration, operational database, listener/feed, patient/product/clinical data, product command, deployment, Pages, release or protected-ref action is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
