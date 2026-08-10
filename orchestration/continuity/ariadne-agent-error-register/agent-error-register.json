@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 178,
+  "register_revision": 179,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8304,6 +8304,46 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-029.json",
           "docs/raisa-provider-free-disposable-postgresql-durability-behavior-anchor-lock-parent-rebind.md",
           "docs/ariadne-agent-error-correction-register-revision-178.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0207",
+      "attempt_id": "raisa-context-fabric-anchor-lock-corrected-veto-head-binding-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "After AER-0205, every forty-character candidate binding must be copied from exact git rev-parse output before it appears in a verifier packet or runtime state; short hashes must never be expanded by inference.",
+      "observed_error": "While drafting the corrected r162 veto packet and predispatch state, Sol expanded displayed short commit 040a069b into nonexistent 040a069b95e0a6c7f6e50672e536013202bc070d instead of first obtaining the exact object ID.",
+      "detection_method": "Before generating any orchestrator receipt or making a verifier call, Sol ran git rev-parse HEAD in both primary and r162, obtained exact 040a069b4b6496b84ba402c2407a44e47aa39a02 and corrected every draft binding.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-behavior-rebind-corrected-gemini-review-packet.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-behavior-rebind-corrected-veto-predispatch-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-179.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace every inferred value with exact git rev-parse output 040a069b4b6496b84ba402c2407a44e47aa39a02 before preflight, verify primary and r162 agree, and issue no receipt or model call under the rejected draft.",
+        "prevention_control": "Move exact git rev-parse capture ahead of every packet or runtime-state drafting step and mechanically interpolate only the captured forty-character value; do not begin authoring from abbreviated commit output.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-behavior-rebind-corrected-gemini-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-behavior-rebind-corrected-veto-predispatch-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-179.md"
         ]
       },
       "status": "corrected"

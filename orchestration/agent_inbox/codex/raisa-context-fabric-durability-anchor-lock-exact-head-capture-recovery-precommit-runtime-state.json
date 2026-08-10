@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "commit_aer_0207_and_the_corrected_exact_head_draft_evidence_before_creating_a_new_review_descendant",
+  "source_evidence": {
+    "live_handover_current_baton": "The evidence-portability repair is committed at exact 040a069b4b6496b84ba402c2407a44e47aa39a02. Before any corrected veto receipt or call, a draft inferred the wrong full object ID from short 040a069b and was stopped.",
+    "current_authority_allocation": "GPT Sol owns the incident registration, corrected draft preservation, deterministic validation and explicit-path commit. No reviewer or runtime executor is assigned until a new exact descendant is committed and preflighted.",
+    "active_plan_and_acceptance": "AER-0207/register revision 179 preserves the rejected value and exact correction. Primary and r162 both resolve exact 040a069b4b6496b84ba402c2407a44e47aa39a02. The corrected draft packet/state use only that captured value; the AER and diagnosis tests, pattern report, Ruff and diff hygiene pass. A new review candidate must descend from this incident commit.",
+    "protected_evidence_boundaries": "No orchestrator receipt or model call used the rejected draft. No PostgreSQL runtime, mutable evidence staging, operational DB, watcher/feed, app/API/Diary wiring, patient/product/clinical data, deployment, production, release, Pages or protected-ref movement occurs. docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Task HEAD and clean r162 are exact 040a069b4b6496b84ba402c2407a44e47aa39a02. Local/origin master and local/origin handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "anchor_lock_exact_head_capture_recovery_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol captured exact rev-parse output before any dispatch action."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker lease is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["No fresh verifier call occurred under the rejected draft."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
