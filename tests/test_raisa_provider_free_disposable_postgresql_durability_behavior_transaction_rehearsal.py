@@ -842,24 +842,24 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "id": "accepted_runtime_source",
         "path": (
             "orchestration/agent_inbox/codex/raisa-context-fabric-durability-"
-            "generation-lock-parse-reproduction-sol-acceptance.md"
+            "anchor-lock-parse-reproduction-sol-acceptance.md"
         ),
-        "source_head": "fb10f2555a246a2918d84c82e31ea5ea87f32a79",
+        "source_head": "0dd603bc5508bb99f827365399f830b152ed165e",
         "sha256": (
-            "sha256:36e2444607f175253bd276c874e8c8435ab8c6608ea55d623f961259ed284bc8"
+            "sha256:3ba2ebc99b123a87e82e6062f31ff1fb9d8773b124c6dcb8b7febf33aa5b24df"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "e115f6f4cb31df1131c5c67d24f3a475a2ca6127"
+        "ad98e6d7148781323ddc963c2d6523c4232cb52a"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9"
+        "sha256:550336e145eac6ac004447d05ea3e72d970f6d8283d3af2689aed62cfff92bc6"
     )
     assert bindings["render_manifest"]["source_head"] == (
-        "e115f6f4cb31df1131c5c67d24f3a475a2ca6127"
+        "ad98e6d7148781323ddc963c2d6523c4232cb52a"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:fdffefdd5d2d79292b1f9e8997d7a8b227fab80423cf544958d2020fa3aa153f"
+        "sha256:95a5c0a613329bd8e6f103130b217a73d597e4e065ca547f658f96db72e8c205"
     )
     assert bindings["structural_contract"] == {
         "id": "structural_contract",
@@ -868,9 +868,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-migration-transaction-architecture/"
             "migration-transaction-architecture-contract.json"
         ),
-        "source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
+        "source_head": "35c4ded8163a7d04667d1e53ccd3c6f41f059e59",
         "sha256": (
-            "sha256:58920ed1bf24ce1a8372b6ae46e50250e2fe053ae881e7992e2856f6648fc8ba"
+            "sha256:7508a124b68db4c46dd1b91a4591065a0f0238911491ba9db9b6011e8c6259dc"
         ),
     }
     assert bindings["parse_prerequisite_contract"]["source_head"] == (
@@ -883,9 +883,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-function-trigger-body-architecture/"
             "function-trigger-body-architecture-contract.json"
         ),
-        "source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
+        "source_head": "f94d4c610dbff3ddb448eb4ac8677ca230a298e3",
         "sha256": (
-            "sha256:67817da7faafd6019c7d7f573dedef2b2a28d5cda2be6ce340f5b3e8997b51ef"
+            "sha256:34d3febf2a5fe02214102ccbabe93d600a5178c3ad050c154dd73837ec06996e"
         ),
     }
 
@@ -1006,7 +1006,7 @@ def test_trigger_scenarios_bind_the_first_reachable_producer_boundary() -> None:
     assert guard.count("ERRCODE = 'CF601'") >= 2
 
 
-def test_role_matrix_uses_five_fresh_fixed_denial_connections() -> None:
+def test_role_matrix_uses_seven_fresh_fixed_denial_connections() -> None:
     matrix = rehearsal.render_role_matrix(CONTRACT)
     assert [name for name, _ in matrix] == [
         "producer_direct_fabric_dml",
@@ -1014,11 +1014,19 @@ def test_role_matrix_uses_five_fresh_fixed_denial_connections() -> None:
         "producer_trigger_execute",
         "observer_set_role",
         "application_read_direct_update",
+        "coordinator_recovery_anchor_direct_update",
+        "lifecycle_recovery_anchor_direct_update",
     ]
     for _, raw in matrix:
         sql = raw.decode("utf-8")
         assert sql.count("SET SESSION AUTHORIZATION") == 1
         assert sql.count("BEGIN ISOLATION LEVEL READ COMMITTED;") == 1
+    for operation, raw in matrix[-2:]:
+        sql = raw.decode("utf-8")
+        assert operation.endswith("recovery_anchor_direct_update")
+        assert "UPDATE emr4_context_fabric.context_recovery_anchor" in sql
+        assert CONTRACT["fixture_namespace"]["practice_alpha"] in sql
+        assert CONTRACT["fixture_namespace"]["stream_alpha"] in sql
 
 
 def test_bootstrap_is_fixed_to_six_bindings_four_opaque_appointments_and_no_credentials() -> (

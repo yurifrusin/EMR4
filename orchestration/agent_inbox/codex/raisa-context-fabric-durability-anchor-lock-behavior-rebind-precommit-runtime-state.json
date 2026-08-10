@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "commit_the_six_parent_anchor_lock_behavior_rebind_and_strengthened_direct_update_denial_matrix_before_exact_head_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "Anchor-lock parse characterization and exact reproduction are committed through task HEAD 0dd603bc5508bb99f827365399f830b152ed165e. The next closed step is the deterministic behavior-parent rebind before independent review.",
+    "current_authority_allocation": "GPT Sol owns the six-parent rebind, fixed hostile denial additions, deterministic tests and explicit-path commit. Gemini 3.6 Flash/high remains unassigned until the exact committed review candidate exists; no other worker or protected integrator is assigned.",
+    "active_plan_and_acceptance": "The behavior contract binds exact runtime source 0dd603bc, inert SQL 550336e1, manifest 95a5c0a6, structural contract canonical 7508a124, body contract canonical 34d3febf and unchanged prerequisite 313d283b. Canonical contract digest is ade8a499. Twenty scenario objects and 6/4/3/4/3 counts are unchanged. BTR-R03 adds two fresh-connection denials proving coordinator and lifecycle cannot directly update recovery anchors. All 45 focused tests, Ruff and diff hygiene pass.",
+    "protected_evidence_boundaries": "Mutable behavior evidence remains accepted SHA-256 09907bf6 and unstaged; failure 036 and all parse evidence remain immutable or restored. This commit runs no PostgreSQL container and grants no behavior execution. No applied migration, operational DB/credential, watcher/feed, application/API/Diary wiring, patient/product/clinical data, provider call, deployment, production, release, Pages or protected-ref movement. docs/branding remains uninspected and unstaged.",
+    "git_refs_and_worktree": "Task HEAD is exact 0dd603bc5508bb99f827365399f830b152ed165e; local/origin master and local/origin handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "anchor_lock_behavior_rebind_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns deterministic parent rebind and hostile tests."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker lease is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh exact-HEAD verifier lease follows commit only."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

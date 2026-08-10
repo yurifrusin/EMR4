@@ -6,33 +6,33 @@
   "parent_bindings": [
     {
       "id": "accepted_runtime_source",
-      "path": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-generation-lock-parse-reproduction-sol-acceptance.md",
-      "source_head": "fb10f2555a246a2918d84c82e31ea5ea87f32a79",
-      "sha256": "sha256:36e2444607f175253bd276c874e8c8435ab8c6608ea55d623f961259ed284bc8"
+      "path": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-parse-reproduction-sol-acceptance.md",
+      "source_head": "0dd603bc5508bb99f827365399f830b152ed165e",
+      "sha256": "sha256:3ba2ebc99b123a87e82e6062f31ff1fb9d8773b124c6dcb8b7febf33aa5b24df"
     },
     {
       "id": "inert_sql",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-      "source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
-      "sha256": "sha256:aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9"
+      "source_head": "ad98e6d7148781323ddc963c2d6523c4232cb52a",
+      "sha256": "sha256:550336e145eac6ac004447d05ea3e72d970f6d8283d3af2689aed62cfff92bc6"
     },
     {
       "id": "render_manifest",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-      "source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
-      "sha256": "sha256:fdffefdd5d2d79292b1f9e8997d7a8b227fab80423cf544958d2020fa3aa153f"
+      "source_head": "ad98e6d7148781323ddc963c2d6523c4232cb52a",
+      "sha256": "sha256:95a5c0a613329bd8e6f103130b217a73d597e4e065ca547f658f96db72e8c205"
     },
     {
       "id": "structural_contract",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",
-      "source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
-      "sha256": "sha256:58920ed1bf24ce1a8372b6ae46e50250e2fe053ae881e7992e2856f6648fc8ba"
+      "source_head": "35c4ded8163a7d04667d1e53ccd3c6f41f059e59",
+      "sha256": "sha256:7508a124b68db4c46dd1b91a4591065a0f0238911491ba9db9b6011e8c6259dc"
     },
     {
       "id": "body_contract",
       "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-function-trigger-body-architecture/function-trigger-body-architecture-contract.json",
-      "source_head": "e115f6f4cb31df1131c5c67d24f3a475a2ca6127",
-      "sha256": "sha256:67817da7faafd6019c7d7f573dedef2b2a28d5cda2be6ce340f5b3e8997b51ef"
+      "source_head": "f94d4c610dbff3ddb448eb4ac8677ca230a298e3",
+      "sha256": "sha256:34d3febf2a5fe02214102ccbabe93d600a5178c3ad050c154dd73837ec06996e"
     },
     {
       "id": "parse_prerequisite_contract",

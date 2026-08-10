@@ -57,7 +57,7 @@ EXPECTED_CONTRACT_PATH = (
     "behavior-transaction-rehearsal-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:6375e756efe85caa17d99d223747b2b6e7aa59cc846f99c702a27612529f7482"
+    "sha256:ade8a499d67baa06f23e37ae80cacebe3c6a7b647715f83ca3ee8bf0edcf4e65"
 )
 PASS_RESULT = (
     "raisa_provider_free_disposable_postgresql_durability_"
@@ -1626,6 +1626,26 @@ def render_role_matrix(contract: dict[str, Any]) -> list[tuple[str, bytes]]:
             "application_read_direct_update",
             "context_application_read",
             "UPDATE emr4_context_fabric.context_frame_generation SET assembled_through_position=99;",
+        ),
+        (
+            "coordinator_recovery_anchor_direct_update",
+            "context_coordinator",
+            "UPDATE emr4_context_fabric.context_recovery_anchor "
+            "SET lifecycle_revision=lifecycle_revision+1 WHERE practice_id="
+            + _lit(f["practice_alpha"])
+            + "::pg_catalog.uuid AND stream_id="
+            + _lit(f["stream_alpha"])
+            + "::pg_catalog.uuid;",
+        ),
+        (
+            "lifecycle_recovery_anchor_direct_update",
+            "context_lifecycle",
+            "UPDATE emr4_context_fabric.context_recovery_anchor "
+            "SET lifecycle_revision=lifecycle_revision+1 WHERE practice_id="
+            + _lit(f["practice_alpha"])
+            + "::pg_catalog.uuid AND stream_id="
+            + _lit(f["stream_alpha"])
+            + "::pg_catalog.uuid;",
         ),
     ]
     rendered: list[tuple[str, bytes]] = []
