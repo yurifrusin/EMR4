@@ -1912,7 +1912,7 @@ def test_parent_artifact_and_manifest_are_exact_before_docker() -> None:
     assert contract == CONTRACT
     assert prerequisite == PREREQUISITE
     assert manifest == MANIFEST
-    assert len(artifact) == 1_435_142
+    assert len(artifact) == 1_435_252
     assert rehearsal._bytes_sha(artifact) == CONTRACT["parent"]["artifact_sha256"]  # noqa: SLF001
     assert len(manifest["ordered_nodes"]) == 397
     assert rehearsal._canonical_sha(CONTRACT) == rehearsal.EXPECTED_CONTRACT_SHA256  # noqa: SLF001
@@ -1950,10 +1950,19 @@ def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound()
         "removed": True,
         "status": "cleanup_verified",
     }
+    assert ADMISSION_ROW_SHAPE_EXPECTED_QUERY_DIGESTS == {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    }
     assert CONTRACT["catalogue_expectation"] == {
+        "mode": "characterization_only",
+        "expected_query_digests": {},
+    }
+    assert {
         "mode": "exact_digest_bound",
         "expected_query_digests": ADMISSION_ROW_SHAPE_EXPECTED_QUERY_DIGESTS,
-    }
+    } != CONTRACT["catalogue_expectation"]
 
 
 def test_admission_row_shape_exact_reproduction_is_immutable_and_complete() -> None:
@@ -1969,7 +1978,9 @@ def test_admission_row_shape_exact_reproduction_is_immutable_and_complete() -> N
     assert evidence["attempt_id"] == "1b606b88bd168f7e48d65224"
     assert evidence["result"] == rehearsal.PASS_RESULT
     assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
-    assert evidence["parent"]["contract_sha256"] == rehearsal.EXPECTED_CONTRACT_SHA256
+    assert evidence["parent"]["contract_sha256"] == (
+        "sha256:b81be9b783ba102a663fd3244ee4d1a81c4a2320745aa6f6eac537821b6e1e79"
+    )
     assert evidence["parent"]["artifact_sha256"] == (
         "sha256:ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb"
     )
@@ -1977,7 +1988,7 @@ def test_admission_row_shape_exact_reproduction_is_immutable_and_complete() -> N
         key: value
         for key, value in evidence["catalogue"]["query_digests"].items()
         if key not in {"server", "extensions"}
-    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    } == ADMISSION_ROW_SHAPE_EXPECTED_QUERY_DIGESTS
     assert evidence["cleanup"] == {
         "absence_verified": True,
         "container_id": (

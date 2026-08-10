@@ -105,10 +105,14 @@ ADMISSION_ROW_SHAPE_REBIND = (
     ROOT
     / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-row-shape-rebind.md"
 )
+GENERATION_LOCK_RLS_REBIND = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-generation-lock-rls-rebind.md"
+)
 
-PARENT_HEAD = "c8ab7602e16e24453dbf909597b4f702a2388416"
+PARENT_HEAD = "e115f6f4cb31df1131c5c67d24f3a475a2ca6127"
 PLANNING_BASELINE = "253230a25ab172b90bc5f44772670c7df89b3052"
-PARENT_DIGEST = "ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb"
+PARENT_DIGEST = "aa26f92671a18d927e423f9d7df80973a19a87f32d49d85cc3f3d55f6808e8e9"
 
 
 def _text(path: Path) -> str:
@@ -155,6 +159,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
         BINDING_RLS_REBIND,
         INPUT_NAMESPACE_REBIND,
         ADMISSION_ROW_SHAPE_REBIND,
+        GENERATION_LOCK_RLS_REBIND,
     )
     manifest = json.loads(PARENT_MANIFEST.read_text(encoding="utf-8"))
 
@@ -163,7 +168,7 @@ def test_plan_binds_exact_accepted_parent_bytes_and_manifest() -> None:
     canonical = raw.replace(b"\r\n", b"\n")
     assert hashlib.sha256(canonical).hexdigest() == PARENT_DIGEST
     assert manifest["sql_sha256"] == f"sha256:{PARENT_DIGEST}"
-    assert manifest["sql_byte_count"] == 1_435_142
+    assert manifest["sql_byte_count"] == 1_435_252
     assert manifest["statement_count"] == 421
     assert manifest["postgresql_major"] == 16
     assert len(manifest["phases"]) == 6
