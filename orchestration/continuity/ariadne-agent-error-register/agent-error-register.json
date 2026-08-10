@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 194,
+  "register_revision": 197,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -9159,6 +9159,165 @@
           "scripts/raisa_context_fabric_durability_behavior_failure_043_missing_source_sqlstate_diagnosis.py",
           "tests/test_raisa_context_fabric_durability_behavior_failure_043_missing_source_sqlstate_diagnosis.py",
           "docs/ariadne-agent-error-correction-register-revision-194.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0228",
+      "attempt_id": "raisa-context-fabric-behavior-attempt-044-container-absence-check-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "The exact-ID-only Docker absence check must use the locally resolved executable path rather than assuming a system installation directory.",
+      "observed_error": "The first exact-ID absence-check command assumed Docker Desktop was installed under Program Files. That exact executable path was absent, so the command stopped before invoking Docker and made no container query or state change.",
+      "detection_method": "Test-Path rejected the assumed executable before invocation. Get-Command docker.exe then resolved the installed per-user executable, and exactly one inspect of the emitted attempt-044 container ID returned no such object with exit 1.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-195.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.docker_executable_system_path_assumed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the known docker.exe executable name locally, then invoke only the exact emitted container ID and require the no-such-object exit before continuing.",
+        "prevention_control": "Resolve locally installed CLI executables before composing exact-path commands; never assume a system-wide installation directory.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-195.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0229",
+      "attempt_id": "raisa-context-fabric-durability-behavior-attempt-044",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": "deterministic-python",
+      "reasoning_level": "deterministic",
+      "transport": "local_disposable_postgresql_16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "An unexpected safe PostgreSQL not-null rejection in a success scenario must persist enough allowlisted typed coordinate evidence to identify the affected repository field without retaining raw database error text.",
+      "observed_error": "Immutable attempt 044 reached BTR-I02 and safely persisted unexpected_rejection with SQLSTATE 23502, but the success-scenario path omitted the affected relation and column even though a bounded not-null header parser already existed for bootstrap failures. The responsible database expression cannot yet be identified without guessing.",
+      "detection_method": "The immutable failure detail digest exactly matches only scenario_id BTR-I02 and sqlstate 23502. Static parent-source analysis proves the safe not-null parser existed but was not called by the unexpected success-scenario rejection path; cleanup and exact container absence passed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence-044.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-044.json",
+        "docs/raisa-context-fabric-durability-behavior-failure-044-not-null-coordinate-diagnosis.md",
+        "docs/raisa-context-fabric-durability-behavior-failure-044-telemetry-correction.md",
+        "docs/ariadne-agent-error-correction-register-revision-195.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.success_scenario_not_null_coordinate_not_projected",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Reuse the existing bounded not-null parser with an exact admission-relation and typed-column allowlist in the unexpected success-scenario path; release only SQLSTATE, coordinate status and allowlisted relation/column while raw stderr remains digest-only.",
+        "prevention_control": "Every persisted unexpected database failure class must carry a closed typed diagnostic projection sufficient for repository diagnosis, with hostile unlisted-field tests and no raw message retention.",
+        "evidence_paths": [
+          "scripts/raisa_context_fabric_durability_behavior_failure_044_not_null_coordinate_diagnosis.py",
+          "tests/test_raisa_context_fabric_durability_behavior_failure_044_not_null_coordinate_diagnosis.py",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0230",
+      "attempt_id": "raisa-context-fabric-behavior-failure-044-telemetry-focused-tests-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The new not-null coordinate projection must add coordinate_status only for PostgreSQL SQLSTATE 23502 and preserve every other unexpected-rejection evidence shape byte-for-shape.",
+      "observed_error": "The first telemetry implementation called the not-null parser for every unexpected rejection, adding coordinate_status missing to three existing non-23502 failure details and breaking their exact bounded-evidence tests.",
+      "detection_method": "The focused behavior suite failed exactly three tests for CF303 and 42883 evidence shapes; all additional fields were the same unintended coordinate_status missing value and no runtime action occurred.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-196.md",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.failure_telemetry_applied_outside_target_sqlstate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Guard scenario not-null coordinate parsing behind exact SQLSTATE 23502, preserving the prior evidence shape for every other rejection while retaining the new allowlisted 23502 path.",
+        "prevention_control": "A failure-class-specific telemetry extension must be gated by that exact typed failure class and regression-tested against all pre-existing rejection envelopes.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-196.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0231",
+      "attempt_id": "raisa-context-fabric-behavior-failure-044-telemetry-focused-tests-002",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Gating the new coordinate parser to SQLSTATE 23502 must retain the pre-existing safe SQLSTATE field for every unexpected rejection class.",
+      "observed_error": "The first scope guard stopped coordinate_status drift for non-23502 failures but also omitted their previously persisted SQLSTATE because the implementation had removed the independent base SQLSTATE assignment. The same three exact-envelope tests failed on the missing field.",
+      "detection_method": "The second focused suite showed each non-23502 envelope retained its scenario and optional function coordinate but lacked only its expected SQLSTATE; no runtime action occurred.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-197.md",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.failure_telemetry_base_sqlstate_not_restored",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the independent safe SQLSTATE assignment for every unexpected rejection, then conditionally add not-null coordinates only when that SQLSTATE is exactly 23502.",
+        "prevention_control": "When extending a bounded envelope, retain its established base fields explicitly before applying failure-class-specific optional projections.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-197.md"
         ]
       },
       "status": "corrected"

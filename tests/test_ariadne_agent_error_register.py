@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 194
+    assert register["register_revision"] == 197
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 228)
+        f"AER-{index:04d}" for index in range(1, 232)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 141
+    assert len(agent_incidents) == 144
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 227
+    assert report["incident_count"] == 231
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,29 +2508,29 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 194
-    assert report["incident_count"] == 227
+    assert report["register_revision"] == 197
+    assert report["incident_count"] == 231
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 141,
-        "harness": 26,
+        "agent_behavior": 144,
+        "harness": 27,
         "repository": 51,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 24,
+        "command_scope_violation": 25,
         "evidence_misreport": 32,
-        "harness_failure": 26,
-        "output_contract_violation": 57,
+        "harness_failure": 27,
+        "output_contract_violation": 59,
         "read_only_violation": 3,
         "reasoning_claim_error": 25,
         "repository_defect": 51,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 77,
-        "canonical_unchanged": 128,
-        "untrusted_partial_worktree": 22,
+        "accepted_candidate_changed": 78,
+        "canonical_unchanged": 129,
+        "untrusted_partial_worktree": 24,
     }
     assert report["recurring_patterns"] == [
         {
@@ -3842,6 +3842,55 @@ def test_aer_0227_records_diagnosis_end_delimiter_assumption() -> None:
     assert incident["related_incident_ids"] == []
     assert "str.index" in incident["observed_error"]
     assert "apply_durability_transition_v1" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0228_records_assumed_docker_executable_location() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0228"]
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert "Program Files" in incident["observed_error"]
+    assert "docker.exe" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0229_records_scenario_not_null_coordinate_gap() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0229"]
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "attempt_rejected_and_escalated"
+    assert incident["related_incident_ids"] == []
+    assert "BTR-I02" in incident["observed_error"]
+    assert "23502" in incident["observed_error"]
+    assert "raw stderr remains digest-only" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0230_records_not_null_telemetry_scope_drift() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0230"]
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert "non-23502" in incident["observed_error"]
+    assert "exact SQLSTATE 23502" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0231_records_base_sqlstate_omission() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0231"]
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert "lacked only its expected SQLSTATE" in incident["detection_method"]
+    assert "exactly 23502" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 

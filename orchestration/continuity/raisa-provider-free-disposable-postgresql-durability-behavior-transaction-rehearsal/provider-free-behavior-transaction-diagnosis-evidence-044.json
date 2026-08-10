@@ -1,0 +1,73 @@
+{
+  "authority_boundary": "provider_free_repository_diagnosis_and_bounded_failure_telemetry_only_no_database_body_product_provider_deployment_or_protected_ref_authority",
+  "bounded_repair": {
+    "behavior_contract_and_scenarios_unchanged": true,
+    "database_body_contract_unchanged": true,
+    "fresh_exact_head_veto_before_new_attempt": true,
+    "inert_sql_and_parse_evidence_unchanged": true,
+    "persist_only_sqlstate_coordinate_status_relation_and_column": true,
+    "raw_stderr_remains_digest_only": true,
+    "reuse_existing_header_and_diagnostic_parsers": true,
+    "scenario_column_allowlist": [
+      "practice_id",
+      "source_contract_id",
+      "stream_id",
+      "stream_epoch",
+      "observer_id",
+      "observer_generation",
+      "source_position",
+      "entry_kind",
+      "observer_binding_revision",
+      "key_id",
+      "source_membership_digest",
+      "admission_digest",
+      "admitted_at"
+    ],
+    "scenario_relation_allowlist": [
+      "emr4_context_fabric.context_proofread_observation_admission"
+    ],
+    "unlisted_relation_or_column_fails_closed": true
+  },
+  "diagnosis": {
+    "actual_null_column_determined": false,
+    "additional_container_runs": 0,
+    "admission_not_null_candidate_columns": [
+      "practice_id",
+      "source_contract_id",
+      "stream_id",
+      "stream_epoch",
+      "observer_id",
+      "observer_generation",
+      "source_position",
+      "entry_kind",
+      "observer_binding_revision",
+      "key_id",
+      "source_membership_digest",
+      "admission_digest",
+      "admitted_at"
+    ],
+    "database_body_defect_claimed": false,
+    "parent_parser_is_used_only_for_bootstrap_failures": true,
+    "persisted_relation_or_column_exists": false,
+    "postgresql_failure_class_is_not_null_violation": true,
+    "raw_postgresql_error_persisted": false,
+    "safe_not_null_header_parser_already_exists": true,
+    "scenario_failure_coordinate_projection_exists": false
+  },
+  "parent_failure": {
+    "cleanup_absence_verified": true,
+    "evidence_sha256": "sha256:0bacbe855a818c4dbb6bfa5c95ffbdb4fd5a91ac9ace431153669d17cb277345",
+    "failure_code": "unexpected_rejection",
+    "internal_attempt_id": "9e078edf28400c199b16b56b",
+    "observed_sqlstate": "23502",
+    "run_sequence": 44,
+    "scenario_id": "BTR-I02"
+  },
+  "parent_sources": {
+    "commit": "70545fd2012ec8f92ff9d89658e455e8ff3c5b07",
+    "harness_sha256": "sha256:990c4118585eadc4c6799fadae3917f459c7f787999389935a49e502779539b6",
+    "inert_sql_sha256": "sha256:bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38"
+  },
+  "schema_version": "emr4.raisa-context-fabric-durability-failure-044-not-null-coordinate-diagnosis.v1",
+  "status": "scenario_not_null_coordinate_telemetry_gap_proven"
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "commit_the_bounded_behavior_attempt_044_not_null_coordinate_telemetry_correction_for_fresh_exact_head_veto_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 044 failure evidence SHA-256 is 0bacbe855a818c4dbb6bfa5c95ffbdb4fd5a91ac9ace431153669d17cb277345 and deterministic diagnosis proves only a scenario-coordinate telemetry gap: BTR-I02, unexpected_rejection, SQLSTATE 23502, no persisted relation/column. The correction reuses the existing bounded parser behind exact SQLSTATE 23502 and one closed admission relation/column allowlist; unknown coordinates fail closed and raw stderr remains digest-only. The database body, DDL, behavior contract, scenario set and parents are unchanged. Ruff and the full focused diagnosis, harness and 231-incident AER suites pass after exact-envelope regressions caught and corrected two implementation-scope errors.",
+    "current_authority_allocation": "Yuri's standing programme authority permits uninterrupted movement through the planned provider-free durability sequence. GPT Sol owns diagnosis, exact-path commit, review acceptance and the separately gated next disposable attempt. No implementation worker or provider runtime is needed for this telemetry repair; no product, deployment, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam has exact HEAD 70545fd2012ec8f92ff9d89658e455e8ff3c5b07 with only the bounded telemetry/diagnosis/AER paths modified or newly authored among intended files. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only will be used.",
+    "live_handover_current_baton": "The active Context Fabric durability descendant is immutable failed attempt 044 at BTR-I02 SQLSTATE 23502 after accepted BTR-E06 correction. Exact task HEAD remains 70545fd2012ec8f92ff9d89658e455e8ff3c5b07; the protected alias is restored and no attempt 045 has run. The next bounded action is a telemetry-only commit for fresh exact-HEAD veto.",
+    "protected_evidence_boundaries": "Immutable failure 044 and diagnosis 044 may be staged explicitly. The mutable behavior evidence alias remains untracked and byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and must not be staged. docs/branding and every unrelated untracked file remain preserved and excluded. This action opens no Docker/PostgreSQL run, operational database or credential, watcher/feed, application/API/Diary wiring, patient/clinical/product data, provider/model call, deployment, production, release, Pages or protected-ref movement."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

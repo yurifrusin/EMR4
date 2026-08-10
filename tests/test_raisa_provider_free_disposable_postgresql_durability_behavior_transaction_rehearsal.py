@@ -1278,6 +1278,39 @@ def test_sqlstate_admission_is_exact_and_never_uses_error_text() -> None:
     }
 
 
+def test_unexpected_rejection_releases_only_allowlisted_not_null_coordinate() -> None:
+    rejected = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        b'psql:<stdin>:4: ERROR:  23502: null value in column "source_membership_digest" of relation "context_proofread_observation_admission" violates not-null constraint\n'
+        b"CONTEXT:  synthetic detail that must not leave the process\n",
+    )
+    with pytest.raises(
+        rehearsal.BehaviorFailure, match="unexpected_rejection"
+    ) as caught:
+        rehearsal._bounded_outcome(rejected, None, "BTR-I02")
+    assert caught.value.detail == {
+        "scenario_id": "BTR-I02",
+        "sqlstate": "23502",
+        "coordinate_status": "released",
+        "relation": ("emr4_context_fabric.context_proofread_observation_admission"),
+        "column": "source_membership_digest",
+    }
+
+    unlisted = rehearsal.parent.ProcessResult(
+        3,
+        b"",
+        b'psql:<stdin>:4: ERROR:  23502: null value in column "secret_value" of relation "context_proofread_observation_admission" violates not-null constraint\n',
+    )
+    with pytest.raises(rehearsal.BehaviorFailure) as hidden:
+        rehearsal._bounded_outcome(unlisted, None, "BTR-I02")
+    assert hidden.value.detail == {
+        "scenario_id": "BTR-I02",
+        "sqlstate": "23502",
+        "coordinate_status": "unlisted_column",
+    }
+
+
 def _transition_marker(scenario_id: str, result_kind: str, assertion: Any = 1) -> bytes:
     return (
         json.dumps(

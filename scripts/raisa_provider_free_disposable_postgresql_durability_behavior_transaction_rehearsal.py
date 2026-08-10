@@ -230,6 +230,30 @@ SAFE_BOOTSTRAP_COLUMNS = {
         "updated_at",
     },
 }
+SAFE_SCENARIO_COLUMNS = {
+    "emr4_context_fabric.context_proofread_observation_admission": {
+        "practice_id",
+        "source_contract_id",
+        "stream_id",
+        "stream_epoch",
+        "observer_id",
+        "observer_generation",
+        "source_position",
+        "entry_kind",
+        "observer_binding_revision",
+        "key_id",
+        "source_membership_digest",
+        "admission_digest",
+        "observation_digest",
+        "decision",
+        "reason_code",
+        "affected_frame_mask",
+        "checkpoint_disposition",
+        "attempted_admission_digest",
+        "conflict_reason",
+        "admitted_at",
+    }
+}
 
 APPLICATION_RELATIONS = (
     "appointments",
@@ -374,8 +398,8 @@ def _safe_plpgsql_coordinate(
     }
 
 
-def _safe_bootstrap_failure_metadata(
-    result: parent.ProcessResult,
+def _safe_not_null_failure_metadata(
+    result: parent.ProcessResult, allowed_columns: dict[str, set[str]]
 ) -> dict[str, str]:
     metadata: dict[str, str] = {}
     sqlstate = _safe_sqlstate(result)
@@ -395,12 +419,12 @@ def _safe_bootstrap_failure_metadata(
             table = table_raw.decode("ascii")
             relations = [
                 relation
-                for relation in SAFE_BOOTSTRAP_COLUMNS
+                for relation in allowed_columns
                 if relation.rsplit(".", 1)[1] == table
             ]
             if len(relations) == 1:
                 relation = relations[0]
-                if column in SAFE_BOOTSTRAP_COLUMNS[relation]:
+                if column in allowed_columns[relation]:
                     metadata.update(
                         coordinate_status="released",
                         relation=relation,
@@ -421,13 +445,27 @@ def _safe_bootstrap_failure_metadata(
     table = next(iter(fields[b"TABLE NAME"])).decode("ascii")
     column = next(iter(fields[b"COLUMN NAME"])).decode("ascii")
     relation = f"{schema}.{table}"
-    if relation not in SAFE_BOOTSTRAP_COLUMNS:
+    if relation not in allowed_columns:
         metadata["coordinate_status"] = "unlisted_relation"
-    elif column not in SAFE_BOOTSTRAP_COLUMNS[relation]:
+    elif column not in allowed_columns[relation]:
         metadata["coordinate_status"] = "unlisted_column"
     else:
         metadata.update(coordinate_status="released", relation=relation, column=column)
     return metadata
+
+
+def _safe_bootstrap_failure_metadata(
+    result: parent.ProcessResult,
+) -> dict[str, str]:
+    return _safe_not_null_failure_metadata(result, SAFE_BOOTSTRAP_COLUMNS)
+
+
+def _safe_scenario_failure_metadata(
+    result: parent.ProcessResult,
+) -> dict[str, str]:
+    if _safe_sqlstate(result) != "23502":
+        return {}
+    return _safe_not_null_failure_metadata(result, SAFE_SCENARIO_COLUMNS)
 
 
 def _canonical_bytes(path: Path) -> bytes:
@@ -2272,6 +2310,7 @@ def _bounded_outcome(
             sqlstate = _safe_sqlstate(result)
             if sqlstate is not None:
                 detail["sqlstate"] = sqlstate
+            detail.update(_safe_scenario_failure_metadata(result))
             detail.update(_safe_plpgsql_coordinate(result, scenario_id))
             raise BehaviorFailure("scenario", "unexpected_rejection", detail)
         result_kind = _transition_result_from_stdout(result, scenario_id)
