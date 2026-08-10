@@ -172,6 +172,13 @@ JSON_KEY_SET_ORDER_PASS_EVIDENCE_PATH = (
 JSON_KEY_SET_ORDER_PASS_EVIDENCE = json.loads(
     JSON_KEY_SET_ORDER_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+FRAME_MASK_NULLABILITY_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-frame-mask-domain-nullability-pass.json"
+)
+FRAME_MASK_NULLABILITY_PASS_EVIDENCE = json.loads(
+    FRAME_MASK_NULLABILITY_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH = (
     DIR
     / "provider-free-disposable-postgresql-evidence-alias-lock-visibility-characterization.json"
@@ -1244,6 +1251,53 @@ def test_json_key_set_order_parse_catalogue_evidence_is_distinct_exact_pass() ->
         "absence_verified": True,
         "container_id": (
             "fabe8880296727bcd501f4fb7fe8918829b9695eb2f419950db9165bafefc1ad"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
+def test_frame_mask_nullability_exact_pass_is_immutable_and_complete() -> None:
+    evidence = FRAME_MASK_NULLABILITY_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            FRAME_MASK_NULLABILITY_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "4583c8b0bca881964ba9a337cfd1b5c9ae535ad7cc78c06766f844ffe95d998a"
+    )
+    assert evidence["attempt_id"] == "9e006c12fcdea5844c2fe4ad"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_437_009,
+        "artifact_sha256": (
+            "sha256:fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa"
+        ),
+        "contract_sha256": (
+            "sha256:2993e547050212054b512f3ad5c6a9adaa64130f40f9cc93beb735079d28d840"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 424,
+    }
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["catalogue"]["status"] == "matched"
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == FRAME_MASK_NULLABILITY_EXPECTED_QUERY_DIGESTS
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "508b4adbc840710d801f2a281bfb883eb17cf81c112b5a8194139c9f0901c485"
         ),
         "removed": True,
         "status": "cleanup_verified",

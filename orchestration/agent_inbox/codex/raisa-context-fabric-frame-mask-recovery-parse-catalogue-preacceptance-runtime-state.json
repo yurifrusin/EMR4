@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "accept_and_commit_the_first_run_disposable_postgresql_parse_catalogue_pass_for_frame_mask_domain_recovery_then_rebind_the_behavior_contract",
+  "source_evidence": {
+    "live_handover_current_baton": "The active Context Fabric durability descendant is the independently accepted frame-mask domain recovery. Its first and only fresh disposable PostgreSQL parse/catalogue attempt 9e006c12fcdea5844c2fe4ad passed; no behavior rehearsal has followed it.",
+    "current_authority_allocation": "GPT Sol owns bounded acceptance, explicit-path evidence commit, deterministic behavior-contract rebind, fresh independent veto and one separately gated provider-free behavior rehearsal. Standing sequence authority applies unless an unplanned material decision fork arises. No provider, patient/clinical/product data, operational database, runtime wiring, deployment, release, Pages or protected-ref authority is open.",
+    "active_plan_and_acceptance": "The fresh parse/catalogue result is pass with immutable evidence SHA-256 4583c8b0bca881964ba9a337cfd1b5c9ae535ad7cc78c06766f844ffe95d998a, artifact SHA-256 fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa, contract SHA-256 2993e547050212054b512f3ad5c6a9adaa64130f40f9cc93beb735079d28d840, exact 424 statements, all catalogue digests matched, rollback verified and complete owned cleanup. The next action is to accept this immutable evidence and rebind the still-inert behavior contract; it is not permission to run that behavior harness yet.",
+    "protected_evidence_boundaries": "The new parse pass is preserved under a distinct immutable filename. The historical canonical parse evidence was restored byte-exact at SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec. The mutable behavior evidence alias remains untracked and byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. User-owned docs/branding remains excluded. Explicit-path staging only is mandatory.",
+    "git_refs_and_worktree": "Primary task branch is at exact 2bc67ed7156b093007bbaecf70a28f8ba83769e5 with only the declared parse-pass acceptance candidate plus preserved untracked files. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and must not move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "frame_mask_recovery_parse_catalogue_preacceptance_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek transport was active or needed for this deterministic acceptance."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not selected for this deterministic acceptance."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude Code transport was active or needed for this deterministic acceptance."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No model or provider call was needed for this deterministic parse/catalogue acceptance."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved the immutable first-run pass, restored the historical canonical alias and verified owned cleanup before acceptance."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No Codex subagent was assigned to this deterministic acceptance."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
