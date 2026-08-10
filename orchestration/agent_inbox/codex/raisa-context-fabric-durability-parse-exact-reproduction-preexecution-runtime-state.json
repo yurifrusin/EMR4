@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_fixed_path_exact_digest_bound_provider_free_authored_synthetic_parse_catalogue_reproduction_in_one_new_networkless_postgresql_16_container_then_preserve_result_restore_prior_mutable_evidence_and_verify_exact_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability parse dependency. Exact evidence and routing recovery are independently accepted through task HEAD f4cdb2ca. One exact reproduction is the next dependency-satisfied action under standing uninterrupted authority.",
+    "current_authority_allocation": "GPT Sol alone owns the one-shot fixed-path exact reproduction, immutable result preservation, protected mutable-evidence restoration and exact cleanup acceptance. No worker, verifier, behavior harness, product surface or operational database owns execution.",
+    "active_plan_and_acceptance": "Exact contract canonical SHA-256 b81be9b783ba102a663fd3244ee4d1a81c4a2320745aa6f6eac537821b6e1e79 binds 15 characterized catalogue digests, exact Git parent c8ab7602e16e24453dbf909597b4f702a2388416 and inert SQL ca22e47e at 1435142 LF bytes and 421 statements. Fresh r152 Gemini 3.6 Flash/high exact-head veto passed 462/462 tests, twelve-file Ruff check and format, artifact, digest and path challenges. Local postgres:16-bookworm resolves pull-free to exact image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8.",
+    "protected_evidence_boundaries": "Run the fixed no-argument parse harness exactly once. It must use pull-never, network none, no ports, no mounts, container-local tmpfs and exact captured-ID cleanup, and must return only the exact parse pass to proceed. Never list or touch unrelated containers. The accepted mutable parse evidence and historical failure were backed up respectively to C:/Users/sarashera/AppData/Local/Temp/emr4-context-fabric-parse-accepted-before-exact-reproduction-f4cdb2ca.json at SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and C:/Users/sarashera/AppData/Local/Temp/emr4-context-fabric-parse-failure-before-exact-reproduction-f4cdb2ca.json at SHA-256 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c. Copy the new result to a distinct immutable path, then restore the prior accepted mutable file until independent acceptance. No operational database/credential, behavior, patient/product/clinical data, watcher/feed, app/API/Diary command, deployment, Pages, production, release or protected-ref action is opened.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is exact f4cdb2ca04510f70d238e9b0d6df84586938f6df with tracked worktree clean. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All unrelated untracked files, especially docs/branding, remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "parse_exact_reproduction_preexecution_complete_five_source_rehydration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns the one-shot harness, evidence restoration and exact-ID cleanup."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker is selected for the serial database reproduction."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh r152 exact-head veto passed; no provider call occurs during execution."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport is active."]},
+    {"adapter_id": "local_docker_postgresql", "method": "exact_image_inspect", "reachability": "reachable", "evidence": ["postgres:16-bookworm resolves without pull to exact image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

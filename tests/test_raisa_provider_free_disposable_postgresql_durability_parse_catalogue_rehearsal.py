@@ -275,6 +275,13 @@ ADMISSION_ROW_SHAPE_EXPECTED_QUERY_DIGESTS = {
     ].items()
     if key not in {"server", "extensions"}
 }
+ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-admission-row-shape-exact-reproduction.json"
+)
+ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE = json.loads(
+    ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -1946,6 +1953,38 @@ def test_admission_row_shape_characterization_is_immutable_and_exactly_rebound()
     assert CONTRACT["catalogue_expectation"] == {
         "mode": "exact_digest_bound",
         "expected_query_digests": ADMISSION_ROW_SHAPE_EXPECTED_QUERY_DIGESTS,
+    }
+
+
+def test_admission_row_shape_exact_reproduction_is_immutable_and_complete() -> None:
+    evidence = ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            ADMISSION_ROW_SHAPE_EXACT_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "041ccbf16d22b80872a397968470c8e215625350e31c87511789775cd2bbb2ce"
+    )
+    assert evidence["attempt_id"] == "1b606b88bd168f7e48d65224"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["parent"]["contract_sha256"] == rehearsal.EXPECTED_CONTRACT_SHA256
+    assert evidence["parent"]["artifact_sha256"] == (
+        "sha256:ca22e47e847409f1ae8a81f62dd7f5f8402a43176d9015211f657204460fbdbb"
+    )
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == CONTRACT["catalogue_expectation"]["expected_query_digests"]
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "633a6466452e93679526a61265854d1d32bb0b8c2a454a549c6d847845dd51ee"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
     }
 
 

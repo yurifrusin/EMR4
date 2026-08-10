@@ -2,7 +2,7 @@
 
 Date: 2026-08-10
 
-Status: non-accepting characterization passed; exact reproduction candidate
+Status: exact reproduction passed; independent acceptance pending
 
 The independently accepted parent recovery at source commit
 `c8ab7602e16e24453dbf909597b4f702a2388416` regenerates the inert durability
@@ -30,8 +30,18 @@ The current exact-digest contract has canonical SHA-256
 `sha256:b81be9b783ba102a663fd3244ee4d1a81c4a2320745aa6f6eac537821b6e1e79`.
 It binds the characterization's 15 value-bearing catalogue query digests;
 server-version and extension observations remain fixed parent gates rather than
-digest-map members. A distinct fresh container must reproduce the exact map
-before the parse parent can pass.
+digest-map members. Attempt `1b606b88bd168f7e48d65224` reproduced the exact
+map on the single authorised run and returned
+`raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_pass`.
+It used exact container
+`633a6466452e93679526a61265854d1d32bb0b8c2a454a549c6d847845dd51ee`;
+harness cleanup and independent exact-ID absence verification both passed. Its
+immutable evidence is
+`provider-free-disposable-postgresql-evidence-admission-row-shape-exact-reproduction.json`
+with SHA-256
+`sha256:041ccbf16d22b80872a397968470c8e215625350e31c87511789775cd2bbb2ce`.
+The prior mutable accepted evidence was restored byte-exact pending independent
+acceptance, while the protected historical failure remained unchanged.
 
 The characterization revealed an evidence-routing defect: every non-pass
 result previously targeted the immutable historical exact-rerun failure slot.
