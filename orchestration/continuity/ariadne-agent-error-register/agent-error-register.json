@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 192,
+  "register_revision": 193,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -9002,6 +9002,44 @@
           "tests/test_ariadne_agent_error_register.py",
           "tests/test_raisa_context_fabric_durability_behavior_failure_042_receipt_lock_rls_diagnosis.py",
           "docs/ariadne-agent-error-correction-register-revision-192.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0224",
+      "attempt_id": "raisa-context-fabric-receipt-lock-behavior-rebind-replacement-review-provider-claim-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-receipt-lock-rls-recovery",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_cli_print",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "An occupied independent-review receipt must count its own model transport and may claim zero only for additional provider, product, database or runtime calls excluded by the packet.",
+      "observed_error": "The passing r171 review's protected-boundary rehydration prose said zero provider calls even though the receipt itself proves one Gemini 3.6 Flash/high Antigravity verifier call. The same review correctly reports zero Docker/PostgreSQL and no other provider or product call.",
+      "detection_method": "Sol acceptance reconciled the receipt's transport/model fields and terminal review prose before admitting the decision. Exact head, clean postcondition, 594-test result and every substantive challenge remain internally consistent.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-receipt-lock-behavior-rebind-clean-checkout-repair-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-193.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.self_model_call_misreported_as_zero_provider_calls",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admission preserves the review verbatim but states the exact corrected claim: one bounded Gemini 3.6 Flash/high Antigravity reviewer call occurred, with zero additional provider, product, Docker/PostgreSQL or application-runtime calls.",
+        "prevention_control": "Before accepting any occupied reviewer receipt, reconcile provider/model call counts against the receipt transport fields and qualify every zero-call statement by surface; never copy an unqualified zero-provider claim from a model review.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-receipt-lock-behavior-rebind-clean-checkout-repair-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-193.md"
         ]
       },
       "status": "corrected"

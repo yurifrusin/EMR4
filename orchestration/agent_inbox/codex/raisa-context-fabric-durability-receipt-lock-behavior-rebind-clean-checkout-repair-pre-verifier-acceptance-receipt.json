@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_fresh_exact_head_receipt_lock_behavior_rebind_replacement_veto_with_explicit_provider_call_claim_correction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The review independently verifies both predecessor findings repaired, all six behavior parents exact, contract SHA ee44dbf39c2458fdabc94768e3c3e8cdcc0372c10ae7f0a35709b55301c5d596, unchanged twenty scenarios and every boundary. Sol corrects only its unqualified zero-provider prose: one bounded Gemini reviewer call occurred, with zero additional provider/product/database/runtime calls. AER-0224 and the complete register suite pass.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high exercised read-only independent-veto authority only. GPT Sol now owns mechanical review admission, claim reconciliation, runtime gating and task-branch integration. No worker or reviewer may self-open the database gate.",
+    "git_refs_and_worktree": "Verifier r171 remains clean at exact 38c8b1cf3635e0f96d7200bda8c7d8b23e2b9b30 on the expected review branch. Main task HEAD is the same exact candidate before review-acceptance commit. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The fresh r171 replacement review is structured pass at exact 38c8b1cf3635e0f96d7200bda8c7d8b23e2b9b30 with unchanged head, clean postcondition and 594/594 tests. Attempt 042 remains the latest database run; attempt 043 remains unopened during acceptance.",
+    "protected_evidence_boundaries": "The review opened no Docker/PostgreSQL, applied migration, product, patient/clinical data, application/API/Diary, deployment, release, Pages or protected-ref surface. Mutable evidence remains excluded. Exactly one Antigravity verifier-model call is admitted; zero other provider or product calls occurred."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

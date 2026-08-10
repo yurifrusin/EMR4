@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_replacement_veto_of_the_receipt_lock_behavior_rebind_clean_checkout_repair_in_r171",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The replacement preserves all accepted receipt-lock/database behavior semantics, makes the mutable alias optional only when absent, hostile-tests wrong-present rejection, formats every changed Python file and records the rejection. The exact 594-test packet, Ruff, format and both diff checks pass.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only replacement-veto authority only in clean r171 at the exact descendant. GPT Sol retains implementation, acceptance, runtime, cleanup, integration and baton authority. No fallback is allowed.",
+    "git_refs_and_worktree": "Verifier r171 is clean at exact 38c8b1cf3635e0f96d7200bda8c7d8b23e2b9b30 on codex/review-context-fabric-receipt-lock-behavior-repair-38c8b1cf. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main tracked worktree is clean and preserved untracked paths remain excluded.",
+    "live_handover_current_baton": "The first behavior-parent veto at ba25816d is immutably revision_required for two verification-layer defects. Exact replacement 38c8b1cf3635e0f96d7200bda8c7d8b23e2b9b30 repairs both; attempt 042 remains latest and attempt 043 remains closed pending this fresh veto.",
+    "protected_evidence_boundaries": "The verifier may inspect only committed immutable authored-synthetic evidence and the packet allowlist. Mutable evidence, protected holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, other providers, product surfaces, edits, deployment, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
