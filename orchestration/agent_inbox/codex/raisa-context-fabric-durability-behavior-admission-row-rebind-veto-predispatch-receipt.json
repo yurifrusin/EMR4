@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_veto_for_behavior_admission_row_shape_parent_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Behavior contract dbb656a5 binds accepted parse parent, inert SQL ca22e47e, manifest c2ccc930, body contract 985120aa and unchanged structural/prerequisite contracts. All 20 scenarios remain eec93b0d and local 379-test/six-file Ruff gates pass.",
+    "current_authority_allocation": "GPT Sol conducts and accepts or rejects. One fresh Gemini 3.6 Flash/high Antigravity project may review read-only exact HEAD; it has no implementation, database, product or protected-ref authority.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r154 is clean at exact 97b8ad95f6d94979c7b78e13650c5ef5398473de. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Unrelated untracked files and docs/branding remain preserved.",
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability behavior dependency. Parse exact reproduction is accepted; behavior rebind candidate 97b8ad95 is the next dependency-satisfied action.",
+    "protected_evidence_boundaries": "Review only; do not start Docker/PostgreSQL. Mutable behavior evidence remains untracked at SHA-256 09907bf6. No applied migration, operational database, listener/feed, patient/product/clinical data, product command, deployment, Pages, release or protected-ref action is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

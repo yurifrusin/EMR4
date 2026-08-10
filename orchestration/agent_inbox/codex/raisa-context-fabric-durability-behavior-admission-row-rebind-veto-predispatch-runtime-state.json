@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_veto_for_behavior_admission_row_shape_parent_rebind",
+  "source_evidence": {
+    "live_handover_current_baton": "The active baton is the provider-free Context Fabric durability behavior dependency. Parse exact reproduction is accepted; behavior rebind candidate 97b8ad95 is the next dependency-satisfied action.",
+    "current_authority_allocation": "GPT Sol conducts and accepts or rejects. One fresh Gemini 3.6 Flash/high Antigravity project may review read-only exact HEAD; it has no implementation, database, product or protected-ref authority.",
+    "active_plan_and_acceptance": "Behavior contract dbb656a5 binds accepted parse parent, inert SQL ca22e47e, manifest c2ccc930, body contract 985120aa and unchanged structural/prerequisite contracts. All 20 scenarios remain eec93b0d and local 379-test/six-file Ruff gates pass.",
+    "protected_evidence_boundaries": "Review only; do not start Docker/PostgreSQL. Mutable behavior evidence remains untracked at SHA-256 09907bf6. No applied migration, operational database, listener/feed, patient/product/clinical data, product command, deployment, Pages, release or protected-ref action is opened.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r154 is clean at exact 97b8ad95f6d94979c7b78e13650c5ef5398473de. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Unrelated untracked files and docs/branding remain preserved."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "behavior_admission_row_rebind_veto_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns review dispatch and acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One fresh Gemini 3.6 Flash/high veto selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude Code transport."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
