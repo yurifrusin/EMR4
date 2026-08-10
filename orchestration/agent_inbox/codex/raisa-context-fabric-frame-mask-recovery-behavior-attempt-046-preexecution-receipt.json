@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_no_argument_provider_free_disposable_postgresql_behavior_transaction_rehearsal_as_attempt_046_then_verify_exact_owned_cleanup_and_preserve_the_terminal_result_immutably",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Behavior contract canonical SHA-256 9dd97600289733fb48a03a54d0b4a2418c6c502c98f75ba0181213a6088518dc binds accepted parse pass SHA-256 4583c8b0bca881964ba9a337cfd1b5c9ae535ad7cc78c06766f844ffe95d998a and frame-mask inert SQL SHA-256 fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa. All 20 scenarios are unchanged. The exact-head Gemini 3.6 Flash/high veto passed 260 tests plus Ruff, renderer, Git and source-head checks. Attempt 046 must either pass once or stop with one immutable bounded failure for fresh diagnosis.",
+    "current_authority_allocation": "GPT Sol owns exactly one no-argument provider-free disposable PostgreSQL behavior rehearsal, exact captured-container cleanup verification, immutable result preservation and protected mutable-alias restoration. The standing sequence authority authorises this already planned gate. No same-attempt rerun, provider/model call, fallback, product/patient/clinical data, operational database, runtime wiring, deployment, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at exact 8a06fff34aef841694b71634e15a59484e7813bd apart from preserved untracked files and this declared preexecution evidence. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and must not move. Explicit-path staging only remains mandatory.",
+    "live_handover_current_baton": "The active Context Fabric durability descendant has a first-run parse/catalogue pass, accepted frame-mask recovery behavior-parent rebind, and fresh independent veto pass through exact acceptance head 8a06fff34aef841694b71634e15a59484e7813bd. No behavior attempt 046 or later has run.",
+    "protected_evidence_boundaries": "Before execution the mutable behavior evidence alias and its temp backup at C:/Users/sarashera/AppData/Local/Temp/emr4-cf-behavior-attempt-046-backup-20260808/provider-free-behavior-transaction-evidence.json are byte-exact SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. The run may mutate only that declared alias and its single captured container. After preserving the result under a distinct immutable filename, restore the alias byte-exact. Immutable attempts 001-045, historical parse evidence, docs/branding, holdouts and all unrelated untracked files remain excluded. No broad staging is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
