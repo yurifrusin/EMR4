@@ -842,24 +842,24 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
         "id": "accepted_runtime_source",
         "path": (
             "orchestration/agent_inbox/codex/raisa-context-fabric-durability-"
-            "anchor-lock-parse-reproduction-sol-acceptance.md"
+            "admission-lock-parse-reproduction-sol-acceptance.md"
         ),
-        "source_head": "0dd603bc5508bb99f827365399f830b152ed165e",
+        "source_head": "a1f8141b05e9f2218412d2d0e7772d3f4dcfead7",
         "sha256": (
-            "sha256:3ba2ebc99b123a87e82e6062f31ff1fb9d8773b124c6dcb8b7febf33aa5b24df"
+            "sha256:1a572140dd360e5be636251d2e62b677ec29d46b4c3aa8ce2c5a14dcb2c62164"
         ),
     }
     assert bindings["inert_sql"]["source_head"] == (
-        "ad98e6d7148781323ddc963c2d6523c4232cb52a"
+        "b0339bed1090f1f04c198ca0fb2bdf2932ca702c"
     )
     assert bindings["inert_sql"]["sha256"] == (
-        "sha256:550336e145eac6ac004447d05ea3e72d970f6d8283d3af2689aed62cfff92bc6"
+        "sha256:1ab976d0555021aa6ec41778b2c3de6ef27105f17f8d1d941b714006da93b1d5"
     )
     assert bindings["render_manifest"]["source_head"] == (
-        "ad98e6d7148781323ddc963c2d6523c4232cb52a"
+        "b0339bed1090f1f04c198ca0fb2bdf2932ca702c"
     )
     assert bindings["render_manifest"]["sha256"] == (
-        "sha256:95a5c0a613329bd8e6f103130b217a73d597e4e065ca547f658f96db72e8c205"
+        "sha256:6adab0a48917c518df81035befe0991f15cba56950713f7329a08054a35f5dd7"
     )
     assert bindings["structural_contract"] == {
         "id": "structural_contract",
@@ -868,9 +868,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-migration-transaction-architecture/"
             "migration-transaction-architecture-contract.json"
         ),
-        "source_head": "35c4ded8163a7d04667d1e53ccd3c6f41f059e59",
+        "source_head": "3a19167e13ac01996180e1b5ada2a6e2ae7e135f",
         "sha256": (
-            "sha256:7508a124b68db4c46dd1b91a4591065a0f0238911491ba9db9b6011e8c6259dc"
+            "sha256:1e127029e120879ec10031ffbb07d14ab386f4ce6861571f2d113e7f9fa7ef9c"
         ),
     }
     assert bindings["parse_prerequisite_contract"]["source_head"] == (
@@ -883,9 +883,9 @@ def test_contract_is_exactly_hash_bound_to_six_canonical_parent_files() -> None:
             "durability-function-trigger-body-architecture/"
             "function-trigger-body-architecture-contract.json"
         ),
-        "source_head": "f94d4c610dbff3ddb448eb4ac8677ca230a298e3",
+        "source_head": "f42558c14c59c2d37a5b96d4a880941f26038d26",
         "sha256": (
-            "sha256:34d3febf2a5fe02214102ccbabe93d600a5178c3ad050c154dd73837ec06996e"
+            "sha256:d9c7b60fa13c02d4b04f8cf68c73ae43dc0acc820a51b4a96ae8a2aed9c137c7"
         ),
     }
 
@@ -1006,7 +1006,7 @@ def test_trigger_scenarios_bind_the_first_reachable_producer_boundary() -> None:
     assert guard.count("ERRCODE = 'CF601'") >= 2
 
 
-def test_role_matrix_uses_seven_fresh_fixed_denial_connections() -> None:
+def test_role_matrix_uses_eight_fresh_fixed_denial_connections() -> None:
     matrix = rehearsal.render_role_matrix(CONTRACT)
     assert [name for name, _ in matrix] == [
         "producer_direct_fabric_dml",
@@ -1014,6 +1014,7 @@ def test_role_matrix_uses_seven_fresh_fixed_denial_connections() -> None:
         "producer_trigger_execute",
         "observer_set_role",
         "application_read_direct_update",
+        "coordinator_admission_direct_update",
         "coordinator_recovery_anchor_direct_update",
         "lifecycle_recovery_anchor_direct_update",
     ]
@@ -1021,6 +1022,15 @@ def test_role_matrix_uses_seven_fresh_fixed_denial_connections() -> None:
         sql = raw.decode("utf-8")
         assert sql.count("SET SESSION AUTHORIZATION") == 1
         assert sql.count("BEGIN ISOLATION LEVEL READ COMMITTED;") == 1
+    admission_operation, admission_raw = matrix[-3]
+    admission_sql = admission_raw.decode("utf-8")
+    assert admission_operation == "coordinator_admission_direct_update"
+    assert (
+        "UPDATE emr4_context_fabric.context_proofread_observation_admission"
+        in admission_sql
+    )
+    assert "SET decision=decision" in admission_sql
+    assert CONTRACT["fixture_namespace"]["observer_happy"] in admission_sql
     for operation, raw in matrix[-2:]:
         sql = raw.decode("utf-8")
         assert operation.endswith("recovery_anchor_direct_update")

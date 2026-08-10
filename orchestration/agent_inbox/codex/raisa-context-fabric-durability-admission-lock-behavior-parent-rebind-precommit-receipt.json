@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_stage_and_commit_only_the_admission_lock_behavior_parent_rebind_contract_harness_tests_document_and_this_receipt_before_fresh_exact_head_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The behavior contract remains exactly twenty scenarios in unchanged order and categories 6/4/3/4/3 at canonical digest sha256:a16769b43c8345b3c79cc79d1ca26e4cd0b2d7095515d2b13bc7e21cb27b5b8e. The repaired-parent chain and new eighth fresh-connection BTR-R03 denial cell passed 380 serial focused tests, Ruff and diff hygiene. Runtime remains closed pending the fresh veto.",
+    "current_authority_allocation": "GPT Sol owns explicit-path candidate integration and deterministic acceptance. Gemini 3.6 Flash/high through a fresh Antigravity project is reserved for the subsequent read-only exact-HEAD veto; no worker, provider runtime or disposable database is active in this commit step.",
+    "git_refs_and_worktree": "Precommit task HEAD is exact 2adf4d165b722fe8998aa8ce3646266c4272fbfe and origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Local and origin master plus handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit staging is limited to the behavior contract, harness, two focused tests, behavior admission-lock parent-rebind document and this generated receipt; every unrelated untracked path including docs/branding/ and all existing receipt/state files remains excluded.",
+    "live_handover_current_baton": "The admission-lock structural repair, typed-body rebind, inert regeneration and exact parse/catalogue reproduction pass. The frozen behavior contract is now rebound to those parents and BTR-R03 explicitly proves that the coordinator receives no direct admission UPDATE authority. The next safe action is this bounded task-branch commit followed by a fresh exact-HEAD independent veto.",
+    "protected_evidence_boundaries": "Protected mutable behavior evidence remains SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b; protected mutable parse evidence remains 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec; historical parse failure and characterization remain 3bf66870cf80edc507b191d6022a5e3d22f3b7f3073c9ae4e696fed2fc54155c and 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536. All stay unstaged. No database, provider, product, application, deployment, release, Pages or protected-ref surface opens."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

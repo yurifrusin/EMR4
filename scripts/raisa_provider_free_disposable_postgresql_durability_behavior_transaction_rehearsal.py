@@ -57,7 +57,7 @@ EXPECTED_CONTRACT_PATH = (
     "behavior-transaction-rehearsal-contract.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:ade8a499d67baa06f23e37ae80cacebe3c6a7b647715f83ca3ee8bf0edcf4e65"
+    "sha256:a16769b43c8345b3c79cc79d1ca26e4cd0b2d7095515d2b13bc7e21cb27b5b8e"
 )
 PASS_RESULT = (
     "raisa_provider_free_disposable_postgresql_durability_"
@@ -1626,6 +1626,19 @@ def render_role_matrix(contract: dict[str, Any]) -> list[tuple[str, bytes]]:
             "application_read_direct_update",
             "context_application_read",
             "UPDATE emr4_context_fabric.context_frame_generation SET assembled_through_position=99;",
+        ),
+        (
+            "coordinator_admission_direct_update",
+            "context_coordinator",
+            "UPDATE emr4_context_fabric.context_proofread_observation_admission "
+            "SET decision=decision WHERE practice_id="
+            + _lit(f["practice_alpha"])
+            + "::pg_catalog.uuid AND stream_id="
+            + _lit(f["stream_alpha"])
+            + "::pg_catalog.uuid AND observer_id="
+            + _lit(f["observer_happy"])
+            + "::pg_catalog.uuid AND observer_generation=1 AND source_position=1 "
+            "AND entry_kind='PRIMARY';",
         ),
         (
             "coordinator_recovery_anchor_direct_update",
