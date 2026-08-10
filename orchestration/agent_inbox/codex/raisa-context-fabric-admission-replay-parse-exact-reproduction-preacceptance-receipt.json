@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "accept_and_explicit_path_commit_the_first_run_exact_parse_reproduction_before_behavior_parent_rebind",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "live_handover_current_baton": "The independently accepted exact catalogue binding completed its first and only disposable reproduction attempt 998254a6cd25841a2ff9a4e8 with pass. No behavior rebind or behavior run followed.",
+    "current_authority_allocation": "GPT Sol owns bounded parse-pass acceptance, explicit-path commit and a later deterministic behavior-parent rebind. Any behavior rebind must pass fresh exact-head independent veto before one separately receipted behavior attempt 047. No provider, product, operational or protected integration authority is open.",
+    "active_plan_and_acceptance": "Immutable exact reproduction evidence SHA-256 9ad82882150f8795789c332db8bed6e4b50d150986a6066ce832f12e48246d24 binds attempt 998254a6cd25841a2ff9a4e8, contract b891ab30e5173475b8e15ead861013b2e4b209575a66ce0028a5c3ad974107f6 and artifact dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7. All digests/counts reproduce, rollback matches and cleanup is complete. Full tests passed; focused post-format tests and Ruff pass.",
+    "protected_evidence_boundaries": "The pass is preserved immutably. Historical mutable accepted parse alias is restored at SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec, characterization alias at 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536 and behavior alias at 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. docs/branding and unrelated untracked paths remain excluded. No operational database, watcher/feed, product/patient/clinical data, provider, deployment, release, Pages or protected refs open.",
+    "git_refs_and_worktree": "Primary task branch is exact 5d53f8324e603ecaac45b2c6befc0f15d9bd7510 with only declared reproduction evidence/tests/docs/receipts plus preserved untracked files. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

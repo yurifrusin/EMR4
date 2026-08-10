@@ -186,6 +186,13 @@ ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE_PATH = (
 ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE = json.loads(
     ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE_PATH.read_text(encoding="utf-8")
 )
+ADMISSION_REPLAY_WINNER_EXACT_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-admission-replay-winner-exact-reproduction.json"
+)
+ADMISSION_REPLAY_WINNER_EXACT_PASS_EVIDENCE = json.loads(
+    ADMISSION_REPLAY_WINNER_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 ALIAS_LOCK_VISIBILITY_CHARACTERIZATION_EVIDENCE_PATH = (
     DIR
     / "provider-free-disposable-postgresql-evidence-alias-lock-visibility-characterization.json"
@@ -1356,6 +1363,59 @@ def test_admission_replay_winner_characterization_is_nonaccepting_and_exact() ->
         "removed": True,
         "status": "cleanup_verified",
     }
+
+
+def test_admission_replay_winner_exact_reproduction_is_immutable_and_complete() -> None:
+    evidence = ADMISSION_REPLAY_WINNER_EXACT_PASS_EVIDENCE
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(  # noqa: SLF001
+            ADMISSION_REPLAY_WINNER_EXACT_PASS_EVIDENCE_PATH.read_bytes()
+        )
+        == "9ad82882150f8795789c332db8bed6e4b50d150986a6066ce832f12e48246d24"
+    )
+    assert evidence["attempt_id"] == "998254a6cd25841a2ff9a4e8"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_436_664,
+        "artifact_sha256": (
+            "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7"
+        ),
+        "contract_sha256": (
+            "sha256:b891ab30e5173475b8e15ead861013b2e4b209575a66ce0028a5c3ad974107f6"
+        ),
+        "prerequisite_contract_sha256": rehearsal.EXPECTED_PREREQUISITE_SHA256,
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 424,
+    }
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["catalogue"]["status"] == "matched"
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE["catalogue"][
+            "query_digests"
+        ]
+    )
+    assert (
+        evidence["catalogue"]["kind_counts"]
+        == ADMISSION_REPLAY_WINNER_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"]
+    )
+    assert evidence["rollback"]["status"] == "matched"
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "1d02ce338f2f40dc00c9cb634523c808b17eea5a1eadb9dc1da68457907557d3"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert evidence["lifecycle"][-3:] == [
+        "catalogue_matched",
+        "cleanup_verified",
+        "passed",
+    ]
 
 
 def test_alias_lock_visibility_characterization_is_nonaccepting_and_exact() -> None:

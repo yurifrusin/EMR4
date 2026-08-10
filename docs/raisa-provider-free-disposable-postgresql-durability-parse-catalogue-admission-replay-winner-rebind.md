@@ -2,8 +2,8 @@
 
 Date: 2026-08-08
 
-Status: characterization passed; exact reproduction remains closed pending
-fresh review
+Status: characterization and exact reproduction passed; behavior parent rebind
+remains closed pending acceptance
 
 The parse/catalogue harness is rebound to independently accepted source
 `5a9a7ae907308aa0a8a4256e9043b833f8c416ae`, its 424-statement inert SQL
@@ -44,3 +44,16 @@ shape. The contract now binds those fifteen observed digests in
 `b891ab30e5173475b8e15ead861013b2e4b209575a66ce0028a5c3ad974107f6`.
 No exact reproduction is authorised until this binding passes a fresh
 exact-HEAD independent veto.
+
+That veto passed. Exactly one subsequent reproduction attempt,
+`998254a6cd25841a2ff9a4e8`, matched every bound catalogue digest and object
+count, proved atomic rollback and removed exact owned container
+`1d02ce338f2f40dc00c9cb634523c808b17eea5a1eadb9dc1da68457907557d3`.
+Immutable pass evidence is
+`provider-free-disposable-postgresql-evidence-admission-replay-winner-exact-reproduction.json`
+at SHA-256
+`9ad82882150f8795789c332db8bed6e4b50d150986a6066ce832f12e48246d24`.
+The historical mutable accepted parse alias was then restored byte-exact. This
+pass is eligible only as the parent of a separately tested and independently
+reviewed behavior-contract rebind; it does not itself authorize behavior
+execution.
