@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_the_exact_binding_review_and_sol_one_run_acceptance_before_reproduction",
+  "source_evidence": {
+    "live_handover_current_baton": "Exact catalogue-binding candidate e5912ea490c35772a142a40e0ff9030de492f8ac passed fresh Gemini 3.6 Flash/high veto with clean postflight. No reproduction or behavior run has followed.",
+    "current_authority_allocation": "The reviewer lease is complete. GPT Sol alone may accept its exact receipt, commit provenance and run one fixed no-argument reproduction under a distinct preexecution receipt. No provider, product, deployment or protected integration authority is open.",
+    "active_plan_and_acceptance": "Review receipt SHA-256 8ae096d2bf75c5c112efd8a7a8af262d08ae8fb17862b01603172a05fa7ddddd accepts immutable characterization f1320a45b3c604315f04985e36221bfaa5ddfe5788ace621b7d1566706b4b29a and exact contract b891ab30e5173475b8e15ead861013b2e4b209575a66ce0028a5c3ad974107f6. Exactly one reproduction is next; behavior remains closed.",
+    "protected_evidence_boundaries": "This commit starts no database. Mutable characterization, accepted parse and behavior aliases remain untracked at SHA-256 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536, 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec and 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. Holdouts, historical Diary data, docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Primary and clean r178 reviewed HEAD are exact e5912ea490c35772a142a40e0ff9030de492f8ac. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Explicit staging is limited to review provenance and this acceptance."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Exact pass receipt and clean postflight reconciled."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh r178 pass complete; no continuing lease."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
