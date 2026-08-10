@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_read_only_gemini_3_6_flash_high_veto_of_behavior_failure_045_frame_mask_domain_recovery_in_r174",
+  "source_evidence": {
+    "live_handover_current_baton": "Immutable behavior attempt 045 failed at BTR-I02 SQLSTATE 23502 with no table-column coordinate. Exact provider-free recovery candidate a8cef7045fcada54a33a1060e83fd4d9929ac56b is committed; no later database attempt has run.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project receives read-only veto authority only in clean r174 at the exact candidate. GPT Sol retains implementation, acceptance, disposable-runtime, cleanup, integration and baton authority. No fallback or second reviewer call is authorised.",
+    "active_plan_and_acceptance": "The candidate deterministically proves the frame-mask domain/nullable conflict-row contradiction, adds one sealed effective nullability recovery, regenerates the inert artifact at exact SHA-256 fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa and rebinds only the parse types digest. Combined renderer, catalogue, diagnosis, AER and orchestrator suites plus Ruff pass; runtime remains closed.",
+    "protected_evidence_boundaries": "The verifier may inspect only committed immutable authored-synthetic evidence and the exact packet allowlist. Protected mutable evidence, holdouts, docs/branding, patient/clinical/product data, Docker/PostgreSQL, credentials, other providers, product surfaces, edits, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Verifier r174 is clean at exact a8cef7045fcada54a33a1060e83fd4d9929ac56b on codex/review-context-fabric-behavior-045-frame-mask-a8cef704 and will pass a local zero-provider preflight before dispatch. Primary tracked worktree is clean at the same candidate apart from preserved unrelated untracked paths and these untracked dispatch artifacts. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "behavior_failure_045_frame_mask_recovery_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not probed because this dispatch selects only the independent Antigravity verifier."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh clean r174 is allocated for exact local verifier-worktree preflight with zero provider/model calls."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol committed and reverified the bounded candidate and protected evidence boundaries before dispatch."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No Codex subagent is assigned or used for this external veto dispatch."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

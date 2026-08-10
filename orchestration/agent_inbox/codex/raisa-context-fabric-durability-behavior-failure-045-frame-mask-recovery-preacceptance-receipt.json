@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "accept_the_exact_head_gemini_pass_for_behavior_failure_045_frame_mask_domain_recovery_and_preserve_one_fresh_parse_catalogue_run_as_the_next_separately_gated_action",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The structured reviewer receipt is pass at exact a8cef7045fcada54a33a1060e83fd4d9929ac56b with clean pre/post state, 436 focused tests, Ruff lint/format, inert renderer check and exact diff checks passing. It confirms the exact frame-mask domain/nullable conflict-row contradiction, one sealed effective nullability recovery, unchanged immutable structural/body parents, exact 424-statement artifact SHA-256 fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa, parse types digest sha256:b7244669f109b81a3907c2f7a5397a253e8a374e261177a7567042d064c25c90 and 233 closed AER incidents. A fresh parse/catalogue run is next only after its own preexecution receipt and protected mutable-evidence handling.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high completed exactly one bounded read-only Antigravity reviewer-model call and has no continuing lease. GPT Sol owns acceptance, evidence commit, a separately rehydrated disposable parse/catalogue run, its cleanup and subsequent behavior-contract rebind. No fallback, other provider, product runtime, deployment, Pages or protected-ref authority is open.",
+    "git_refs_and_worktree": "Primary task branch is tracked-clean at exact a8cef7045fcada54a33a1060e83fd4d9929ac56b apart from preserved untracked files and the declared review artifacts. Review r174 is clean at the same exact head on codex/review-context-fabric-behavior-045-frame-mask-a8cef704. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only remains mandatory.",
+    "live_handover_current_baton": "The active Context Fabric durability descendant is the accepted-candidate frame-mask domain recovery after immutable failed behavior attempt 045. Exact candidate a8cef7045fcada54a33a1060e83fd4d9929ac56b has a fresh clean exact-HEAD independent veto pass; no later database run has occurred.",
+    "protected_evidence_boundaries": "The reviewer used only committed authored-synthetic allowlisted paths. It did not inspect the protected mutable alias, docs/branding, holdouts or patient/clinical/product data and did not start Docker/PostgreSQL or edit the checkout. The primary mutable behavior evidence alias remains untracked and byte-exact at SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. This acceptance opens no operational database, watcher/feed, application/API/Diary, provider fallback, deployment, release, Pages or protected-ref boundary."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
