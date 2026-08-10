@@ -380,6 +380,13 @@ RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS = {
     ].items()
     if key not in {"server", "extensions"}
 }
+RECEIPT_LOCK_EXACT_PASS_EVIDENCE_PATH = (
+    DIR
+    / "provider-free-disposable-postgresql-evidence-receipt-lock-rls-exact-reproduction.json"
+)
+RECEIPT_LOCK_EXACT_PASS_EVIDENCE = json.loads(
+    RECEIPT_LOCK_EXACT_PASS_EVIDENCE_PATH.read_text(encoding="utf-8")
+)
 MANIFEST = json.loads(
     (ROOT / CONTRACT["parent"]["manifest_path"]).read_text(encoding="utf-8")
 )
@@ -2508,6 +2515,57 @@ def test_receipt_lock_characterization_is_immutable_and_exactly_bound() -> None:
     }
 
 
+def test_receipt_lock_exact_reproduction_is_immutable_and_complete() -> None:
+    evidence = RECEIPT_LOCK_EXACT_PASS_EVIDENCE
+
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    assert (
+        rehearsal._bytes_sha(RECEIPT_LOCK_EXACT_PASS_EVIDENCE_PATH.read_bytes())  # noqa: SLF001
+        == "67a490639840e217b740474afc331ab8aced5fb84871329099df6f504739288b"
+    )
+    assert evidence["attempt_id"] == "f1c3252a51a7af8be6d4fdb3"
+    assert evidence["result"] == rehearsal.PASS_RESULT
+    assert evidence["catalogue"]["status"] == "matched"
+    assert evidence["catalogue"]["expectation_mode"] == "exact_digest_bound"
+    assert evidence["parent"] == {
+        "artifact_byte_count": 1_437_022,
+        "artifact_sha256": (
+            "sha256:bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38"
+        ),
+        "contract_sha256": (
+            "sha256:f2be7725ce86f8f6b603c6b1a734941b72a500b3c60308fb2a7b6ea7cd46101f"
+        ),
+        "prerequisite_contract_sha256": (
+            "sha256:0cafc71c8368b227fdb626df386b6ebdac659a77c279901ac2a3e4aa844c0b11"
+        ),
+        "prerequisite_sql_sha256": (
+            "sha256:fab760ba9a1d82987ddb1b89476570f5d06a32d08de99b87476f970ba2628b38"
+        ),
+        "statement_count": 424,
+    }
+    assert {
+        key: value
+        for key, value in evidence["catalogue"]["query_digests"].items()
+        if key not in {"server", "extensions"}
+    } == RECEIPT_LOCK_EXPECTED_QUERY_DIGESTS
+    assert (
+        evidence["catalogue"]["query_digests"]
+        == RECEIPT_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["query_digests"]
+    )
+    assert (
+        evidence["catalogue"]["kind_counts"]
+        == RECEIPT_LOCK_CHARACTERIZATION_EVIDENCE["catalogue"]["kind_counts"]
+    )
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "container_id": (
+            "b74c36ca057a82302ce90b6fc2c18f5dde5880a675c60d5d2f19dfc181d11bcc"
+        ),
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+
+
 def test_exact_catalogue_kind_population_is_frozen() -> None:
     assert CONTRACT["manifest_kind_counts"] == {
         "ROLE": 8,
@@ -3039,7 +3097,7 @@ def test_catalogue_projection_matches_every_frozen_population() -> None:
         "columns": 52,
         "constraints": 81,
         "indexes": 4,
-        "policies": 47,
+        "policies": 48,
         "functions": 24,
         "triggers": 14,
     }

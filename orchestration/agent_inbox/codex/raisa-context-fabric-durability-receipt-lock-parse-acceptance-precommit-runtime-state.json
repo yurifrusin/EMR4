@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_receipt_lock_exact_parse_reproduction_and_close_parse_descendant",
+  "source_evidence": {
+    "live_handover_current_baton": "Exact parse reproduction attempt f1c3252a51a7af8be6d4fdb3 passed at task HEAD e8bc06917c98ff401c7bc16591c4c3fb2ad37d9d and removed its exact owned container.",
+    "current_authority_allocation": "GPT Sol owns parse acceptance and task-branch integration. The next descendant is behavior-parent rebind; no behavior run, external verifier, provider, product runtime, deployment, release, Pages or protected-ref action is included here.",
+    "active_plan_and_acceptance": "Immutable exact evidence SHA-256 67a490639840e217b740474afc331ab8aced5fb84871329099df6f504739288b matches all characterized catalogue digests, 48 policies, artifact bfd8fd924a1771ea03a2395fbd1f154253f098a3e488188a2f77778c197d7f38 and contract f2be7725ce86f8f6b603c6b1a734941b72a500b3c60308fb2a7b6ea7cd46101f. The complete parse suite passed every semantic case; one stale current policy-count assertion was corrected and all affected tests plus Ruff pass.",
+    "protected_evidence_boundaries": "The exact-pass mutable alias is restored to prior SHA-256 97d1385c6b617890cb0f155122e30eb283d49e42af1d44db385a2b9f4a9c2bec. Characterization mutable remains exact 78c157c72243036d395c3bcff30f778fa8b1032bb98eec9a32b37110efbcf536 and behavior mutable remains exact 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b. All aliases remain unstaged; branding and raw/sensitive surfaces remain closed.",
+    "git_refs_and_worktree": "Precommit task HEAD is exact e8bc06917c98ff401c7bc16591c4c3fb2ad37d9d. Origin task remains 324d37f086a51a60b260d02b38772594b6c205df. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging excludes mutable aliases, docs/branding and unrelated untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Exact reproduction, digest equality, schema admission, immutable evidence and cleanup pass."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Independent veto remains deferred until behavior-parent rebind is committed."]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
