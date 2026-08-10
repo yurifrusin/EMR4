@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_exactly_one_read_only_gemini_3_6_flash_high_independent_veto_against_clean_exact_head_263c1ca8_in_fresh_worktree_r161",
+  "source_evidence": {
+    "live_handover_current_baton": "Anchor-lock structural repair, typed-body rebind, inert regeneration, parse characterization/reproduction and behavior parent rebind are committed through exact candidate 263c1ca833dfdc53d5db32c6d57caeadb1edd20d. The next gate is one independent veto before any behavior runtime.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project is assigned one read-only independent veto in r161. GPT Sol retains acceptance, integration and runtime authority. No DeepSeek, native subagent, product consumer or protected integrator is assigned.",
+    "active_plan_and_acceptance": "Review baseline 978f54205966d412a9a5ead03b1c2c16ca46c5e0 to candidate 263c1ca833dfdc53d5db32c6d57caeadb1edd20d using the closed packet. Required checks cover failure/diagnosis 036, exact lock-only RLS semantics, unchanged body/scenarios, regenerated artifact, parse characterization and exact reproduction, six parent bindings, direct UPDATE denials, AER coherence and deterministic tests. Any P0-P2 finding is a veto.",
+    "protected_evidence_boundaries": "Read-only exact worktree and listed files only. No edits, Docker/PostgreSQL, runtime harness, provider other than this one verifier call, patient/product/clinical data, protected holdout, docs/branding, operational database, watcher/feed, application/API/Diary wiring, deployment, production, release, Pages or protected-ref movement.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r161 is branch codex/review-context-fabric-anchor-lock-263c1ca8 at exact candidate 263c1ca833dfdc53d5db32c6d57caeadb1edd20d and must stay clean. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "anchor_lock_behavior_rebind_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol prepared exact candidate, packet and clean review worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker lease is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["One fresh Gemini 3.6 Flash/high read-only veto is allocated."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

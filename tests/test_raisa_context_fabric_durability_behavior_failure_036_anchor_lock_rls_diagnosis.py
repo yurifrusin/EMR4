@@ -8,21 +8,24 @@ from scripts import (
 )
 
 
-def test_failure_036_is_preserved_and_mutable_evidence_is_restored() -> None:
+def test_failure_036_and_prior_mutable_restoration_anchor_are_preserved() -> None:
     failure_bytes = diagnosis.FAILURE_PATH.read_bytes()
     assert hashlib.sha256(failure_bytes).hexdigest() == (
         diagnosis.EXPECTED_FAILURE_SHA256
     )
     failure = json.loads(failure_bytes)
-    mutable = (
-        diagnosis.BEHAVIOR_DIR / "provider-free-behavior-transaction-evidence.json"
+    anchor_bytes = diagnosis.RESTORED_MUTABLE_ANCHOR_PATH.read_bytes()
+    assert hashlib.sha256(anchor_bytes).hexdigest() == (
+        diagnosis.EXPECTED_RESTORED_MUTABLE_ANCHOR_SHA256
     )
-    assert mutable.exists()
-    mutable_bytes = mutable.read_bytes()
-    assert json.loads(mutable_bytes).get("attempt_id") != failure.get("attempt_id")
-    assert hashlib.sha256(mutable_bytes).hexdigest() == (
-        "09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b"
+    anchor = json.loads(anchor_bytes)
+    assert anchor["parent_failure"]["internal_attempt_id"] == (
+        diagnosis.EXPECTED_RESTORED_MUTABLE_ATTEMPT_ID
     )
+    assert anchor["parent_failure"]["evidence_sha256"] == (
+        "sha256:" + diagnosis.EXPECTED_RESTORED_MUTABLE_EVIDENCE_SHA256
+    )
+    assert anchor["parent_failure"]["internal_attempt_id"] != failure["attempt_id"]
 
 
 def test_diagnosis_is_deterministic_and_matches_receipt() -> None:

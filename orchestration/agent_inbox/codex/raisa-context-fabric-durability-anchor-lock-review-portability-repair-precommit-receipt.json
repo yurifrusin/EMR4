@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "commit_the_clean_worktree_evidence_portability_repair_and_aer_0206_before_a_fresh_exact_descendant_gemini_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The repaired diagnosis test validates tracked immutable diagnosis 029 at SHA-256 1e5c22aa, which anchors the protected mutable behavior evidence at SHA-256 09907bf6 and attempt fce9773c. The full seven-file deterministic review bundle passes, as do focused AER/diagnosis tests, Ruff and diff hygiene. AER-0206 and register revision 178 record the rejected first review and correction.",
+    "current_authority_allocation": "GPT Sol owns the tracked immutable-evidence portability repair, deterministic validation, AER registration and explicit-path commit. No reviewer is assigned until a fresh exact descendant and clean worktree exist; no database or product executor is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exact 263c1ca833dfdc53d5db32c6d57caeadb1edd20d. Review r161 remains clean at the same exact rejected candidate. Local/origin master and local/origin handoff/current remain protected exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only is permitted.",
+    "live_handover_current_baton": "The complete anchor-lock repair candidate reached exact HEAD 263c1ca833dfdc53d5db32c6d57caeadb1edd20d. Its first r161 veto passed all substantive checks but returned revision_required because one required diagnosis test depended on protected untracked mutable evidence.",
+    "protected_evidence_boundaries": "The mutable behavior evidence remains byte-exact, untracked and unstaged; no copy enters a clean review worktree. First review receipt is preserved. No PostgreSQL runtime, applied migration, operational DB, watcher/feed, application/API/Diary wiring, patient/product/clinical data, second model call, deployment, production, release, Pages or protected-ref movement is authorised by this commit. docs/branding remains uninspected and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

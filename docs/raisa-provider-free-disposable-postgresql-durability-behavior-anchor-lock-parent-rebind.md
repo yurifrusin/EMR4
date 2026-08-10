@@ -44,6 +44,15 @@ directly update recovery anchors despite the lock-visibility policy.
 The rebound behavior contract has canonical SHA-256
 `ade8a499d67baa06f23e37ae80cacebe3c6a7b647715f83ca3ee8bf0edcf4e65`.
 
+The first clean-worktree independent veto passed every substantive challenge
+but correctly returned `revision_required` because the failure-036 diagnosis
+test tried to read intentionally untracked mutable evidence. The repaired test
+now proves the same restoration boundary through tracked immutable diagnosis
+029, whose exact content anchors mutable evidence SHA-256 `09907bf6...` and
+attempt `fce9773c076f3ede41a4875c`. The mutable file remains preserved,
+untracked and unstaged; it is neither copied into nor required by a review
+checkout.
+
 ## Gate posture
 
 This rebind permits focused deterministic tests and one fresh exact-HEAD

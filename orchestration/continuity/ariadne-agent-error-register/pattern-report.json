@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "90ce6f8d32abe420d648178416f8782507063ac314a841f15571f0613e38804e",
+  "canonical_register_sha256": "aa8b5d57b7d29051c76b0b00ff300ebc17a8eae9374b18725bc4eab222d37125",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 65,
+      "accepted_candidate_changed": 66,
       "canonical_unchanged": 118,
       "untrusted_partial_worktree": 22
     },
@@ -13,18 +13,18 @@
       "output_contract_violation": 54,
       "read_only_violation": 3,
       "reasoning_claim_error": 25,
-      "repository_defect": 44,
+      "repository_defect": 45,
       "transport_timeout": 9
     },
     "by_origin": {
       "agent_behavior": 130,
       "harness": 22,
-      "repository": 44,
+      "repository": 45,
       "transport": 9
     },
     "by_process_severity": {
       "low": 66,
-      "material": 76,
+      "material": 77,
       "moderate": 63
     },
     "by_resource_and_role": {
@@ -37,6 +37,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::orchestrator": 90,
       "codex-sol-orchestrator::orchestrator": 1,
+      "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "deepseek-flash-workers::implementer": 3,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -71,11 +72,11 @@
     "by_role": {
       "implementer": 14,
       "orchestrator": 146,
-      "verifier": 45
+      "verifier": 46
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 205,
+  "incident_count": 206,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -510,7 +511,7 @@
       ]
     }
   ],
-  "register_revision": 177,
+  "register_revision": 178,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-10"
 }

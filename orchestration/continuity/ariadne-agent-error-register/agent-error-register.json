@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 177,
+  "register_revision": 178,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-10",
@@ -8259,6 +8259,51 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-anchor-lock-body-source-head-failure-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-177.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0206",
+      "attempt_id": "raisa-context-fabric-anchor-lock-behavior-rebind-review-r161-001",
+      "observed_on": "2026-08-08",
+      "tranche": "raisa-context-fabric-durability-behavior-transaction-rehearsal-implementation",
+      "origin": "repository",
+      "role": "verifier",
+      "resource_id": "context-fabric-durability-failure-036-diagnosis-test",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every required verifier test must be reproducible from tracked immutable evidence in a clean exact-HEAD worktree and must never depend on a protected intentionally untracked mutable evidence path.",
+      "observed_error": "The first exact r161 veto passed every substantive anchor-lock challenge but the required test test_failure_036_is_preserved_and_mutable_evidence_is_restored failed because provider-free-behavior-transaction-evidence.json is intentionally untracked and therefore absent from a clean review checkout.",
+      "detection_method": "Gemini 3.6 Flash/high executed the exact packet in clean r161 and returned revision_required with the missing-path assertion. Sol confirmed the mutable evidence remains present and byte-protected only in the primary worktree, while tracked diagnosis 029 already anchors its exact SHA-256 and attempt identity.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-anchor-lock-behavior-rebind-review-receipt.json",
+        "tests/test_raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py",
+        "scripts/raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-029.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-anchor-lock-parent-rebind.md",
+        "docs/ariadne-agent-error-correction-register-revision-178.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "repository.verifier_test_depended_on_protected_untracked_mutable_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Replace the clean-worktree-incompatible mutable-path assertion with exact validation of tracked immutable diagnosis 029, which anchors mutable evidence SHA-256 09907bf6569944f51fe0c13ba2b07f118e9f151173a19c188837e4e2a0deb12b and attempt fce9773c076f3ede41a4875c. The full deterministic review bundle then passed while the mutable file remained untracked and unstaged.",
+        "prevention_control": "Every independent-review packet test must run in a fresh clean worktree before model dispatch. Protected mutable evidence may be verified only through tracked immutable hash/identity anchors; tests must not require the mutable path itself.",
+        "evidence_paths": [
+          "tests/test_raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py",
+          "scripts/raisa_context_fabric_durability_behavior_failure_036_anchor_lock_rls_diagnosis.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-diagnosis-evidence-029.json",
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-anchor-lock-parent-rebind.md",
+          "docs/ariadne-agent-error-correction-register-revision-178.md"
         ]
       },
       "status": "corrected"

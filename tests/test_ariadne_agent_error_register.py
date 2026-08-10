@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 177
+    assert register["register_revision"] == 178
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 206)
+        f"AER-{index:04d}" for index in range(1, 207)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 205
+    assert report["incident_count"] == 206
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,13 +2508,13 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 177
-    assert report["incident_count"] == 205
+    assert report["register_revision"] == 178
+    assert report["incident_count"] == 206
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 130,
         "harness": 22,
-        "repository": 44,
+        "repository": 45,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
@@ -2524,11 +2524,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "output_contract_violation": 54,
         "read_only_violation": 3,
         "reasoning_claim_error": 25,
-        "repository_defect": 44,
+        "repository_defect": 45,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 65,
+        "accepted_candidate_changed": 66,
         "canonical_unchanged": 118,
         "untrusted_partial_worktree": 22,
     }
@@ -3491,6 +3491,26 @@ def test_aer_0205_rejects_inferred_body_source_commit_before_regeneration() -> N
     assert "f94d4c61f1fe" in incident["observed_error"]
     assert "f94d4c610dbf" in incident["correction"]["action"]
     assert "No artifact regeneration" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0206_rejects_untracked_mutable_evidence_test_dependency() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0206"
+    ]
+    assert incident["origin"] == "repository"
+    assert incident["role"] == "verifier"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["recurrence_signature"] == (
+        "repository.verifier_test_depended_on_protected_untracked_mutable_evidence"
+    )
+    assert "intentionally untracked" in incident["observed_error"]
+    assert "diagnosis 029" in incident["correction"]["action"]
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
     assert incident["status"] == "corrected"
 
 
