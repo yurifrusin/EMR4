@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/aes-c5-product-runtime-envelope.schema.json",
+  "title": "EMR4 AES-C5 product-runtime envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "envelope_id",
+    "status",
+    "authority_source",
+    "source_boundary",
+    "principal_and_tenant_boundary",
+    "field_and_freshness_boundary",
+    "provider_binding",
+    "data_and_retention_boundary",
+    "request_contract",
+    "call_and_cost_boundary",
+    "broker_and_isolation_boundary",
+    "preexecution_checks",
+    "proofreader_and_release_boundary",
+    "evidence_and_cleanup_boundary",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.aes_c5.product_runtime_envelope.v1"},
+    "envelope_id": {"const": "raisa-aes-c5-practitioner-directory-reception-one-001"},
+    "status": {"enum": ["frozen_pending_exact_head_preexecution_gates", "preexecution_pass", "consumed"]},
+    "authority_source": {"$ref": "#/$defs/closedObject"},
+    "source_boundary": {"$ref": "#/$defs/closedObject"},
+    "principal_and_tenant_boundary": {"$ref": "#/$defs/closedObject"},
+    "field_and_freshness_boundary": {"$ref": "#/$defs/closedObject"},
+    "provider_binding": {"$ref": "#/$defs/closedObject"},
+    "data_and_retention_boundary": {"$ref": "#/$defs/closedObject"},
+    "request_contract": {"$ref": "#/$defs/closedObject"},
+    "call_and_cost_boundary": {"$ref": "#/$defs/closedObject"},
+    "broker_and_isolation_boundary": {"$ref": "#/$defs/closedObject"},
+    "preexecution_checks": {"$ref": "#/$defs/closedObject"},
+    "proofreader_and_release_boundary": {"$ref": "#/$defs/closedObject"},
+    "evidence_and_cleanup_boundary": {"$ref": "#/$defs/closedObject"},
+    "claim_boundary": {"$ref": "#/$defs/closedObject"}
+  },
+  "$defs": {
+    "closedObject": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"pattern": "^[a-z][a-z0-9_]*$"},
+      "additionalProperties": {
+        "anyOf": [
+          {"type": "string"},
+          {"type": "boolean"},
+          {"type": "integer"},
+          {"type": "number"},
+          {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        ]
+      }
+    }
+  }
+}

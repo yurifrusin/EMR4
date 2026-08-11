@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_aes_c5_plan_envelope_plan_tests_and_contained_aer_0262_through_aer_0264_evidence_before_bounded_implementation_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. AES-C4 is accepted at Continuity 241 / Compass 223 and AES-C5 is the sole remaining named AES descendant. Yuri resolved the source/purpose fork by selecting the authenticated practitioner-directory GET for Reception One booking context.",
+    "current_authority_allocation": "GPT Sol owns architecture, privacy, authority freezing, review, acceptance and task-branch publication. DeepSeek V4 Flash/high may receive only a bounded non-protected implementation/test packet after this freeze commit; it receives no product data, provider call, acceptance or integration authority. Gemini 3.6 Flash/high remains a later fresh exact-head veto only after deterministic gates pass.",
+    "active_plan_and_acceptance": "The parent AES plan and AES-C4 closeout/acceptance were reread. The new AES-C5 plan freezes one real FastAPI/PostgreSQL route path populated only with disposable authored-synthetic practitioner records, exact Reception One booking-context purpose, one route call, minimized opaque-reference/display-name/role-label frames, one Sydney Vertex call maximum, deterministic no-command release and complete cleanup. Plan/schema tests pass. The expired 2026-07 general route approval remains fail-closed and unchanged; Yuri's 2026-08-11 choice supplies only the exact one-run descendant authority.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and all protected fixtures/support/authoring/manifests/seals/receipts/reports remain excluded. AER-0263 contains the earlier broad-search traversal and none of its output is used. Real-person, patient, clinical, appointment, operational-practice, historical Diary/PHI, licensed/external corpus, raw audit, credentials, provider tools, commands/writes, deployment, production, Pages and protected refs remain closed. docs/branding and every unrelated untracked path remain preserved and unstaged.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at cdb9ff3df66666ac569c289bc1734c119683c9a3. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed AES-C4 source e569da0a9081117b799e9437d8b7025230e2162b are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Three tracked files contain task-owned register updates and Git reports 512 untracked file entries before this receipt pair; all pre-existing untracked files remain unstaged and preserved. git diff --check passes."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol froze and deterministically checked the exact AES-C5 plan, envelope, legacy-expiry disposition and incident corrections with zero product reads and zero provider calls."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex subagent is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Independent review is ineligible until implementation and deterministic evidence pass."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek is not dispatched until after this exact freeze commit and a distinct pre-dispatch receipt."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude/Fable/Opus is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

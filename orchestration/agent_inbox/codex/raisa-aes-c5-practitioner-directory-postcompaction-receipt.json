@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "freeze_and_execute_the_narrowest_fail_closed_aes_c5_authenticated_practice_scoped_practitioner_directory_product_runtime_admission_rehearsal_for_reception_one_booking_context",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted parent AES gate plan defines AES-C5 as one one-source, one-purpose occupied Bureau read with no command or autonomous write. AES-C4 closeout and Sol acceptance were reread completely; their one-call ledger is consumed. Yuri selected GET /api/v1/practice/practitioners for the exact purpose of supplying active practitioner choices for Reception One booking context. Before any product-source execution or provider call, AES-C5 must freeze exact principal, tenant, field minimization, freshness, privacy, retention, provider/call/cost, proofreader, cleanup, no-command and claim boundaries against the existing route and API Spine contract.",
+    "current_authority_allocation": "GPT Sol owns AES-C5 architecture, privacy and authority freezing, deterministic implementation, review, acceptance and task-branch publication. Gemini 3.6 Flash/high may provide a later fresh exact-head veto only after deterministic gates pass. No external worker receives product data, integration authority or protected-ref authority. Yuri's standing Sydney Vertex Bernie model selection removes routine model-choice pauses but creates no provider call until a distinct exact AES-C5 envelope is frozen and admitted.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at cdb9ff3df66666ac569c289bc1734c119683c9a3, aligned with origin task. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and independently reviewed AES-C4 source e569da0a9081117b799e9437d8b7025230e2162b are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Three tracked files carry the contained AER-0262/AER-0263 correction work. Git reports 503 current untracked file entries including the preserved original closeout set and AES-C5 task artifacts; no untracked path has been staged, removed or overwritten. The current untracked name-list SHA-256 is 17ec174121a60cf616fd8d9e17c6ff48d3ee5ad9b43d03046d57a48a397dea38 before this post-compaction pair is added.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after conversation compaction. The live baton records AES-C4 accepted at Continuity 241 / Compass 223 and AES-C5 as the sole remaining named AES descendant. Yuri has now resolved the former attention fork by selecting the authenticated practice-scoped practitioner-directory source and Reception One booking-context purpose.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and every protected fixture, support module, authoring surface, manifest, seal, receipt and per-case report remain unopened and excluded. The earlier AES-C5 broad-search scope breach is contained as AER-0263; its output supplies no evidence and cannot shape the tranche. Historical Diary/PHI, patient and clinical data, real-person practitioner data, appointment content, licensed/external corpora, raw audit, credentials, raw provider prompt/output/reasoning, provider tools, filesystem capability, commands/writes, reusable runtime, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

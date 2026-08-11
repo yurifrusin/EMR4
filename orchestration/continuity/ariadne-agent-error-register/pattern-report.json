@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "7f676a2ad1711d372fab118671f540c31a8b2ee9cf19cd7d3bd9077397e15f79",
+  "canonical_register_sha256": "df6cfa1aa201f27dcf73dbf10f4f1931523b55fea622515bb29eaceb423c668a",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 82,
-      "canonical_unchanged": 152,
+      "accepted_candidate_changed": 83,
+      "canonical_unchanged": 154,
       "untrusted_partial_worktree": 27
     },
     "by_category": {
-      "command_scope_violation": 29,
+      "command_scope_violation": 30,
       "evidence_misreport": 34,
       "harness_failure": 31,
-      "output_contract_violation": 75,
+      "output_contract_violation": 76,
       "read_only_violation": 3,
-      "reasoning_claim_error": 28,
+      "reasoning_claim_error": 29,
       "repository_defect": 52,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 169,
+      "agent_behavior": 172,
       "harness": 31,
       "repository": 52,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 98,
-      "material": 87,
-      "moderate": 76
+      "low": 99,
+      "material": 88,
+      "moderate": 77
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 40,
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 126,
+      "codex-primary-orchestrator::orchestrator": 129,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 1,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -80,12 +80,12 @@
     },
     "by_role": {
       "implementer": 18,
-      "orchestrator": 195,
+      "orchestrator": 198,
       "verifier": 48
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 261,
+  "incident_count": 264,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -241,6 +241,30 @@
         "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate."
       ],
       "recurrence_signature": "orchestrator.detached_verifier_branch",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0259",
+        "AER-0262"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Copy every continuation event directly from orchestration/harness_settings/orchestrator_requirements.yaml or a current passed receipt; never abbreviate or infer the machine event label from prose.",
+        "Copy receipt continuation events from the configured schema or a current passing repository example before running preflight; never abbreviate or infer the machine event from prose."
+      ],
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -626,7 +650,7 @@
       ]
     }
   ],
-  "register_revision": 227,
+  "register_revision": 229,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-11"
 }

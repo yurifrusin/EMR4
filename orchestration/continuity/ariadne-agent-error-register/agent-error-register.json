@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 227,
+  "register_revision": 229,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10464,6 +10464,125 @@
           "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-ledger.json",
           "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-postcompaction-3-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-227.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0262",
+      "attempt_id": "raisa-aes-c5-practitioner-directory-preplanning-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c5-practitioner-directory-product-runtime-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne pre-planning receipt runtime state must use exact configured continuation event pre_sprint_planning before it can supply five-source rehydration or planning authority.",
+      "observed_error": "The first AES-C5 pre-planning runtime state repeated the inferred event label pre_plan already recorded in AER-0259. The orchestrator receipt returned revision_required with continuation_event_missing_or_unapproved and supplied no admitted rehydration or planning evidence. No product read, provider call or external mutation occurred.",
+      "detection_method": "The deterministic orchestrator preflight rejected the unapproved event before planning. Sol preserved the invalid state and receipt, read the exact configured vocabulary and repeated the full five-source attempt using pre_sprint_planning; the corrected receipt passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c5-practitioner-directory-preplan-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-practitioner-directory-preplan-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-practitioner-directory-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-practitioner-directory-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-228.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit no evidence from the invalid event. Preserve the rejected state and receipt, read the current configured vocabulary and repeat the complete five-source receipt with exact event pre_sprint_planning before any AES-C5 inspection or planning proceeds.",
+        "prevention_control": "Copy every continuation event directly from orchestration/harness_settings/orchestrator_requirements.yaml or a current passed receipt; never abbreviate or infer the machine event label from prose.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c5-practitioner-directory-preplan-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-practitioner-directory-preplan-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-practitioner-directory-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-practitioner-directory-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-228.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0263",
+      "attempt_id": "raisa-aes-c5-practitioner-directory-source-inspection-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c5-practitioner-directory-product-runtime-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "AES-C5 repository inspection must use exact named non-protected source files and must never list, search, enumerate or open a protected holdout fixture, support module, manifest, seal, receipt or per-case report.",
+      "observed_error": "The first AES-C5 source inspection used one broad recursive text query over application, API-documentation, test and orchestration roots. Its scope traversed protected holdout fixture paths and returned matches. No output from that search is admitted or used, and no protected filename, label, case, value or content is retained in register evidence.",
+      "detection_method": "The command output visibly crossed into a protected holdout fixture namespace. Sol stopped using the result, recorded a sanitized scope-breach analysis without protected content and replaced broad discovery with an explicit named-file allowlist.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c5-protected-search-scope-breach-analysis.md",
+        "docs/ariadne-agent-error-correction-register-revision-228.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.broad_repository_search_traversed_protected_holdout_paths",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Abandon the entire broad-search output and admit none of it as AES-C5 evidence. Record the prohibited traversal, keep the worktree unchanged and restart inspection using only explicit named non-protected route, schema, service, authorization, API Spine and focused test files.",
+        "prevention_control": "Never use a repository-root or broad tests/orchestration search for product-source discovery. Construct an exact source allowlist from already accepted route artifacts and direct imports, and explicitly exclude every fixture, support, holdout, manifest, seal, receipt and report path before inspection.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c5-protected-search-scope-breach-analysis.md",
+          "docs/ariadne-agent-error-correction-register-revision-228.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0264",
+      "attempt_id": "raisa-aes-c5-expired-legacy-route-readiness-gate-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c5-practitioner-directory-product-runtime-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A frozen AES-C5 plan that records the legacy route-readiness approval as expired must preserve that fail-closed status and must not require the expired general readiness check to pass as authority for the newer exact one-run rehearsal.",
+      "observed_error": "The first frozen plan correctly named the 2026-08-08 expiry but still listed static route-readiness release checks among passing deterministic gates. The exact script failed with route readiness approval has expired. No product source, PostgreSQL rehearsal, credential, cloud control or provider operation occurred.",
+      "detection_method": "The exact legacy release-check script stopped before implementation dispatch. Sol preserved a sanitized analysis, did not change the approval or readiness fixture and revised the gate to require the expected expired disposition while using fresh route/auth/tenancy tests for the dedicated AES-C5 envelope.",
+      "evidence_paths": [
+        "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-plan.md",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-expired-legacy-readiness-gate-analysis.md",
+        "docs/ariadne-agent-error-correction-register-revision-229.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.expired_general_route_readiness_check_required_as_passing_descendant_gate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Do not renew or consume the expired approval. Require the legacy scripts to retain their expiry failure, make any pass or readiness change a stop and bind the exact AES-C5 one-run authority to Yuri's newer source/purpose selection plus fresh route, authentication, tenancy and minimization tests.",
+        "prevention_control": "When a plan records an expired or closed predecessor gate, every later checklist item must preserve that exact disposition. Separate current descendant authority from historical generic readiness and test both explicitly before freezing.",
+        "evidence_paths": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-plan.md",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-expired-legacy-readiness-gate-analysis.md",
+          "docs/ariadne-agent-error-correction-register-revision-229.md"
         ]
       },
       "status": "corrected"

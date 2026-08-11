@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "inspect_the_exact_existing_authenticated_practice_scoped_practitioner_directory_contract_then_freeze_the_narrowest_fail_closed_aes_c5_one_source_one_purpose_product_runtime_admission_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted parent AES gate plan defines AES-C5 as one one-source, one-purpose occupied Bureau read with no command or autonomous write. AES-C4 closeout and Sol acceptance are complete and its ledger is consumed. Yuri has now selected the recommended exact source GET /api/v1/practice/practitioners and the exact purpose of supplying active practitioner choices for Reception One booking context. Before any product read or provider call, Sol must inspect the repository route/schema/authorization contract and freeze exact principal, tenant, fields, freshness, privacy, retention, calls, cost, proofreader, cleanup and claim boundaries.",
+    "current_authority_allocation": "GPT Sol owns AES-C5 architecture, privacy and authority freezing, deterministic implementation, review, acceptance and task-branch publication. Gemini 3.6 Flash/high may provide a later fresh exact-head veto only after deterministic gates pass. No external worker receives product data, integration authority or protected-ref authority. Yuri's standing Sydney Vertex Bernie model selection removes routine model-choice pauses but creates no call until an exact AES-C5 envelope is frozen and admitted.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is clean for tracked files on codex/ariadne-bernie-davida-parallel-seam at cdb9ff3df66666ac569c289bc1734c119683c9a3, aligned with origin task. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and accepted AES-C4 source e569da0a9081117b799e9437d8b7025230e2162b are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked paths remain exact at SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five under docs/branding before the AES-C5 task-owned receipt artifacts. The first preserved AES-C5 receipt attempt used unapproved event label pre_plan and returned revision_required without reading product data or calling a provider; this corrected state uses the approved pre_sprint_planning label.",
+    "live_handover_current_baton": "AGENTS.md was reread completely. The live baton records AES-C4 accepted at Continuity 241 / Compass 223 and names AES-C5 as the sole remaining planned AES descendant, previously closed only for Yuri's non-inferable choice of one exact product source and purpose.",
+    "protected_evidence_boundaries": "No product source has been read and no provider has been called for AES-C5. Protected holdouts v1-v10, historical Diary/PHI, patient and clinical data, appointment content, licensed/external corpora, raw audit, credentials, raw provider prompt/output/reasoning, provider tools, filesystem capability, commands/writes, reusable runtime, deployment, production, release, Pages and protected refs remain closed. Practitioner-directory scope must exclude provider/prescriber/AHPRA/HPI-I numbers, contact details and every field not required for the selected booking-context purpose. docs/branding and all unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
