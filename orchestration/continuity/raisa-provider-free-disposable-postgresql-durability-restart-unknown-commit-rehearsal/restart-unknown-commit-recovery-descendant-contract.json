@@ -1,0 +1,177 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-cf-d2-recovery-descendant.v1",
+  "status": "frozen_provider_free_recovery_runtime_closed",
+  "planning_baseline_head": "2edfbf0c5990335947b40a370b676aad25aba023",
+  "authority_basis": "yuri_explicitly_selected_fresh_narrow_cf_d2_recovery_descendant_2026_08_12",
+  "last_accepted_durability": {
+    "result": "raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_pass",
+    "continuity_revision": 243,
+    "compass_revision": 225
+  },
+  "immutable_failures": [
+    {
+      "attempt": "CFD2-ATTEMPT-001",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/provider-free-durability-restart-unknown-commit-evidence-attempt-001.json",
+      "sha256": "sha256:8e2519be3986a6dcb2721f83560a5c62bbb7ac6061f507a6479aab2f58c7b32e",
+      "sigkill": 0
+    },
+    {
+      "attempt": "CFD2-ATTEMPT-002",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/provider-free-durability-restart-unknown-commit-evidence-attempt-002.json",
+      "sha256": "sha256:a7e88a267d597ba41d245df926a66ddb6bd98cf000afc46f269871b48604d6b6",
+      "sigkill": 0
+    }
+  ],
+  "phase_order": [
+    "CLOSED_COORDINATE_INSTRUMENTATION",
+    "NO_CRASH_FIRST_SEQUENCE_DIAGNOSTIC",
+    "ONE_NEW_FOUR_SCENARIO_ATTEMPT"
+  ],
+  "terminal_evidence": {
+    "coordinate_required": true,
+    "failure_stage_equals_coordinate": true,
+    "returncode_classes": [
+      "zero",
+      "nonzero"
+    ],
+    "result_token_vocabulary": [
+      "PRIMARY",
+      "RECEIPT_APPLIED",
+      "RECEIPT_REPLAYED",
+      "1",
+      "2"
+    ],
+    "allowed_sqlstates": [
+      "P0001",
+      "CF303"
+    ],
+    "forbidden": [
+      "raw_sql",
+      "query_text",
+      "stdout",
+      "stderr",
+      "error_text",
+      "server_log",
+      "wal",
+      "backend_pid",
+      "lock_key",
+      "database_url",
+      "credential",
+      "environment_value",
+      "authored_synthetic_coordinate_value"
+    ]
+  },
+  "terminal_coordinates": [
+    "fixture_register_observer_r01",
+    "fixture_register_observer_r02",
+    "fixture_register_observer_r03",
+    "fixture_register_observer_r04",
+    "fixture_produce_position_1",
+    "fixture_produce_position_2",
+    "fixture_admit_observer_r01_position_1",
+    "fixture_admit_observer_r02_position_1",
+    "fixture_admit_observer_r03_position_1",
+    "fixture_admit_observer_r04_position_1",
+    "cfd2_r01_apply_position_1",
+    "cfd2_r01_append_anchor_2",
+    "cfd2_r01_replay_position_1",
+    "cfd2_r01_admit_position_2",
+    "cfd2_r01_apply_position_2",
+    "cfd2_r02_rollback_position_1",
+    "cfd2_r02_apply_position_1_after_rollback",
+    "cfd2_r02_append_anchor_2",
+    "cfd2_r02_replay_position_1",
+    "cfd2_r03_replay_position_1",
+    "cfd2_r03_admit_position_2",
+    "cfd2_r03_reject_position_2_before_anchor",
+    "cfd2_r03_append_anchor_2",
+    "cfd2_r03_apply_position_2",
+    "cfd2_r04_apply_position_1_after_recovery",
+    "cfd2_r04_append_anchor_2",
+    "cfd2_r04_replay_position_1"
+  ],
+  "diagnostic_profile": {
+    "image": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "network_mode": "none",
+    "container_count": 1,
+    "database_count": 1,
+    "published_ports": 0,
+    "bind_mounts": 0,
+    "named_volumes": 0,
+    "anonymous_volumes": 0,
+    "setup_precondition_count": 10,
+    "measured_coordinate_order": [
+      "cfd2_r01_apply_position_1",
+      "cfd2_r01_append_anchor_2"
+    ],
+    "stop_after_first_failure": true,
+    "sigkill_count": 0,
+    "restart_count": 0,
+    "participant_retry_count": 0,
+    "maximum_immutable_attempts": 2,
+    "maximum_corrections": 1,
+    "second_attempt_requires_first_failure_and_fresh_exact_head_review": true,
+    "cleanup": "exact_captured_container_id_after_ownership_reverification"
+  },
+  "correction_allowlist": [
+    "terminal_expectation",
+    "participant_script_framing",
+    "coordinate_propagation",
+    "harness_sequencing"
+  ],
+  "correction_forbidden": [
+    "accepted_inert_sql",
+    "role_or_rls_grants",
+    "atomic_transition_membership",
+    "recovery_classification",
+    "anchor_authority",
+    "transaction_isolation",
+    "durability_settings",
+    "scenario_meaning",
+    "claim_boundary"
+  ],
+  "full_attempt_gate": {
+    "attempt_id": "CFD2-ATTEMPT-003",
+    "requires_passing_no_crash_diagnostic": true,
+    "requires_fresh_exact_repaired_head_review": true,
+    "scenario_order": [
+      "CFD2-R01",
+      "CFD2-R02",
+      "CFD2-R03",
+      "CFD2-R04"
+    ],
+    "sigkill_count": 4,
+    "restart_count": 4,
+    "participant_retry_count": 0,
+    "maximum_attempts": 1,
+    "post_attempt_correction_or_retry": false
+  },
+  "claim_boundary": {
+    "diagnostic_proves": "exact_r01_position_one_apply_and_revision_two_anchor_sequence_without_crash_only",
+    "diagnostic_does_not_prove": [
+      "restart_persistence",
+      "unknown_commit_classification",
+      "wal_or_protocol_ack_boundary",
+      "driver_or_pool_retry",
+      "operational_recovery"
+    ],
+    "cf_d2_pass_requires": "one_complete_valid_attempt_003_covering_all_four_original_scenarios"
+  },
+  "closed_surfaces": [
+    "protected_holdouts",
+    "historical_diary_phi",
+    "docs_branding",
+    "unrelated_untracked_files",
+    "real_product_patient_clinical_data",
+    "operational_database_source_or_watcher",
+    "provider_or_external_retrieval",
+    "credentials_or_iam",
+    "host_network_or_published_port",
+    "server_logs_or_wal",
+    "executable_product_tool_or_command",
+    "reusable_runtime",
+    "deployment_production_release_pages",
+    "protected_refs"
+  ]
+}

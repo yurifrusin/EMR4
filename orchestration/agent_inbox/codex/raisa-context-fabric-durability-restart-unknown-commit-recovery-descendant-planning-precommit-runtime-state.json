@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_frozen_cf_d2_recovery_descendant_planning_packet_by_explicit_paths_before_fresh_exact_head_read_only_review",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and now records Yuri's explicit 2026-08-12 selection of the fresh narrow CF-D2 recovery descendant while keeping CF-D1 at Continuity 243 / Compass 225 as the last accepted durability result. The live next-work row opens only the frozen coordinate-specific/no-crash recovery sequence and keeps key rotation plus retention/purge blocked until CF-D2 passes.",
+    "current_authority_allocation": "GPT Sol owns the recovery plan, implementation, serial disposable-database lifecycle, acceptance and explicit-path task-branch publication. No native subagent or DeepSeek worker is selected. Gemini 3.6 Flash/high through a fresh Antigravity project owns only the upcoming exact-HEAD read-only veto after deterministic gates, with no implementation, self-acceptance, runtime, data, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The new whole-document recovery contract freezes three ordered phases: mandatory closed terminal-coordinate instrumentation, an at-most-two-attempt no-crash R01 apply/anchor diagnostic with one evidence-backed correction maximum, and one later four-scenario CF-D2 attempt 003 only after a passing diagnostic and fresh exact-repaired-HEAD veto. Attempts 001 and 002 remain immutable with their exact hashes. Focused original and recovery planning/harness tests passed 73 checks; baton/archive plus recovery planning passed 20 checks; Ruff and git diff --check pass.",
+    "protected_evidence_boundaries": "The recovery plan leaves the accepted inert SQL, grants/RLS, atomic membership, classifier, anchor authority, isolation, durability and scenario meaning outside correction authority. Protected holdouts, historical Diary/PHI, docs/branding and all unrelated untracked files remain excluded. No diagnostic crash/restart, blind retry, raw output/log/WAL retention, operational source/database, product or patient data, provider, credential/IAM, external network, executable product tool/command, reusable runtime, deployment, production, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "The planning packet is based on task HEAD and origin task 2edfbf0c5990335947b40a370b676aad25aba023 on codex/ariadne-bernie-davida-parallel-seam; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Intentional tracked/untracked planning files are limited to AGENTS.md, the recovery plan/threat/contract/schema/test and this tranche's two preplanning receipt files; all 494 pre-existing untracked files including five docs/branding paths remain preserved and unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_recovery_descendant_planning_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["The frozen recovery planning packet passed its deterministic gate and is ready for explicit-path commit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The fresh planning veto remains next and has not been dispatched before commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

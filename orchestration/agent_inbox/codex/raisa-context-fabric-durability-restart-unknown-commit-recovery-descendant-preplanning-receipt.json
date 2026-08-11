@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_the_narrowest_provider_free_cf_d2_recovery_descendant_beginning_with_coordinate_specific_closed_failure_evidence_and_a_no_crash_first_sequence_proof_before_any_new_restart_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen CF-D2 plan, design and threat delta require complete durable classification, no blind retry, minimized evidence and exact cleanup. Immutable attempt 001 exposed successor admission before predecessor progress and consumed the original mechanical correction. Attempt 002 at 28cd0ce6639fd831960c57d5289b08f3d36ca3fb passed all ten setup preconditions but stopped before any scenario record, restart or SIGKILL with the coordinate-ambiguous scenario/unexpected_terminal_success envelope. Its evidence SHA-256 is a7e88a267d597ba41d245df926a66ddb6bd98cf000afc46f269871b48604d6b6. Yuri has authorised a new descendant that first separates measured terminal coordinates, then proves the first sequence without crash or blind retry, diagnoses harness versus contract, obtains change-proportionate exact-HEAD review and permits only one new immutable four-scenario attempt after those gates pass.",
+    "current_authority_allocation": "GPT Sol owns recovery planning, the tightly coupled provider-free disposable PostgreSQL implementation and diagnostic lifecycle, acceptance and explicit-path task-branch publication. No native subagent is selected. A fresh Gemini 3.6 Flash/high Antigravity project may perform an exact-HEAD read-only veto only after deterministic gates pass; it receives no implementation, self-acceptance, runtime, data, integration, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Immediately before this receipt, task HEAD and origin task were exactly 2edfbf0c5990335947b40a370b676aad25aba023 on codex/ariadne-bernie-davida-parallel-seam. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current were all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index were clean. All 494 existing untracked files, including five docs/branding paths, were present and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the CF-D2 stop. Its live baton keeps CF-D1 at Continuity 243 / Compass 225 as the last accepted durability result, preserves immutable CF-D2 attempts 001 and 002 as stopped evidence, and records that a fresh narrow CF-D2 recovery descendant required Yuri's choice. Yuri has now explicitly chosen that recovery direction. The dependent key-rotation and retention/purge direction remains blocked until CF-D2 passes.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, docs/branding and all unrelated untracked files remain excluded. Only repository-authored synthetic fixtures and a newly owned networkless disposable local PostgreSQL 16 lifecycle may be used. The diagnostic may not SIGKILL, restart, guess an outcome, inspect server logs or WAL, retain raw SQL/stdout/stderr/query text/PIDs, alter the accepted inert SQL, or contact any provider, product route, operational database/source, watcher, credential, IAM, external network, executable product tool or command. No reusable runtime, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

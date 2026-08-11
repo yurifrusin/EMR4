@@ -29,7 +29,7 @@ def test_continuity_and_compass_bind_the_live_cf_d1_result() -> None:
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_preserve_cf_d1_and_stop_cf_d2() -> None:
+def test_live_baton_rows_preserve_cf_d1_and_bound_cf_d2_recovery() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
@@ -42,12 +42,15 @@ def test_live_baton_rows_preserve_cf_d1_and_stop_cf_d2() -> None:
     assert "all ten fixed preconditions" in current
     assert "zero `SIGKILL`" in current
     assert "AER-0278 and AER-0279" in current
+    assert "Yuri explicitly selected a fresh narrow CF-D2 recovery descendant" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
     assert "CF-D2" in next_work
-    assert "no authorised runtime attempt" in next_work
-    assert "Yuri attention is required" in next_work
+    assert "coordinate explicit" in next_work
+    assert "at most two immutable no-crash diagnostics" in next_work
+    assert "one immutable four-scenario attempt 003" in next_work
+    assert "no post-attempt correction or rerun is authorised" in next_work
     assert (
         "key-rotation plus retention/purge rehearsal is not dependency-satisfied"
         in next_work
@@ -88,7 +91,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
         "cf-d2",
-        "no authorised runtime attempt",
+        "no-crash diagnostics",
+        "attempt 003",
+        "no post-attempt correction or rerun",
         "operational database/source",
         "real/product/patient/clinical data",
         "tool/command",

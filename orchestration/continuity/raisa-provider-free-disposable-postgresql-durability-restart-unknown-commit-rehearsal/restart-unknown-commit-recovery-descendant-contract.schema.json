@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/restart-unknown-commit-recovery-descendant-contract.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline_head",
+    "authority_basis",
+    "last_accepted_durability",
+    "immutable_failures",
+    "phase_order",
+    "terminal_evidence",
+    "terminal_coordinates",
+    "diagnostic_profile",
+    "correction_allowlist",
+    "correction_forbidden",
+    "full_attempt_gate",
+    "claim_boundary",
+    "closed_surfaces"
+  ],
+  "properties": {
+    "schema_version": { "const": "emr4.raisa-context-fabric-cf-d2-recovery-descendant.v1" },
+    "status": { "const": "frozen_provider_free_recovery_runtime_closed" },
+    "planning_baseline_head": { "$ref": "#/$defs/head" },
+    "authority_basis": { "$ref": "#/$defs/identifier" },
+    "last_accepted_durability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "continuity_revision", "compass_revision"],
+      "properties": {
+        "result": { "$ref": "#/$defs/identifier" },
+        "continuity_revision": { "const": 243 },
+        "compass_revision": { "const": 225 }
+      }
+    },
+    "immutable_failures": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["attempt", "path", "sha256", "sigkill"],
+        "properties": {
+          "attempt": { "type": "string", "pattern": "^CFD2-ATTEMPT-00[12]$" },
+          "path": { "type": "string", "pattern": "^[a-zA-Z0-9_./-]+$" },
+          "sha256": { "$ref": "#/$defs/digest" },
+          "sigkill": { "const": 0 }
+        }
+      }
+    },
+    "phase_order": {
+      "const": [
+        "CLOSED_COORDINATE_INSTRUMENTATION",
+        "NO_CRASH_FIRST_SEQUENCE_DIAGNOSTIC",
+        "ONE_NEW_FOUR_SCENARIO_ATTEMPT"
+      ]
+    },
+    "terminal_evidence": { "$ref": "#/$defs/terminal_evidence" },
+    "terminal_coordinates": {
+      "type": "array",
+      "minItems": 27,
+      "maxItems": 27,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/identifier" }
+    },
+    "diagnostic_profile": { "$ref": "#/$defs/diagnostic_profile" },
+    "correction_allowlist": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/identifier" }
+    },
+    "correction_forbidden": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/identifier" }
+    },
+    "full_attempt_gate": { "$ref": "#/$defs/full_attempt_gate" },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["diagnostic_proves", "diagnostic_does_not_prove", "cf_d2_pass_requires"],
+      "properties": {
+        "diagnostic_proves": { "$ref": "#/$defs/identifier" },
+        "diagnostic_does_not_prove": {
+          "type": "array",
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "cf_d2_pass_requires": { "$ref": "#/$defs/identifier" }
+      }
+    },
+    "closed_surfaces": {
+      "type": "array",
+      "minItems": 14,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/identifier" }
+    }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,127}$" },
+    "head": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "terminal_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinate_required", "failure_stage_equals_coordinate", "returncode_classes", "result_token_vocabulary", "allowed_sqlstates", "forbidden"],
+      "properties": {
+        "coordinate_required": { "const": true },
+        "failure_stage_equals_coordinate": { "const": true },
+        "returncode_classes": { "const": ["zero", "nonzero"] },
+        "result_token_vocabulary": { "const": ["PRIMARY", "RECEIPT_APPLIED", "RECEIPT_REPLAYED", "1", "2"] },
+        "allowed_sqlstates": { "const": ["P0001", "CF303"] },
+        "forbidden": { "type": "array", "minItems": 13, "uniqueItems": true, "items": { "$ref": "#/$defs/identifier" } }
+      }
+    },
+    "diagnostic_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["image", "pull_policy", "network_mode", "container_count", "database_count", "published_ports", "bind_mounts", "named_volumes", "anonymous_volumes", "setup_precondition_count", "measured_coordinate_order", "stop_after_first_failure", "sigkill_count", "restart_count", "participant_retry_count", "maximum_immutable_attempts", "maximum_corrections", "second_attempt_requires_first_failure_and_fresh_exact_head_review", "cleanup"],
+      "properties": {
+        "image": { "const": "postgres:16-bookworm" },
+        "pull_policy": { "const": "never" },
+        "network_mode": { "const": "none" },
+        "container_count": { "const": 1 },
+        "database_count": { "const": 1 },
+        "published_ports": { "const": 0 },
+        "bind_mounts": { "const": 0 },
+        "named_volumes": { "const": 0 },
+        "anonymous_volumes": { "const": 0 },
+        "setup_precondition_count": { "const": 10 },
+        "measured_coordinate_order": { "const": ["cfd2_r01_apply_position_1", "cfd2_r01_append_anchor_2"] },
+        "stop_after_first_failure": { "const": true },
+        "sigkill_count": { "const": 0 },
+        "restart_count": { "const": 0 },
+        "participant_retry_count": { "const": 0 },
+        "maximum_immutable_attempts": { "const": 2 },
+        "maximum_corrections": { "const": 1 },
+        "second_attempt_requires_first_failure_and_fresh_exact_head_review": { "const": true },
+        "cleanup": { "const": "exact_captured_container_id_after_ownership_reverification" }
+      }
+    },
+    "full_attempt_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "requires_passing_no_crash_diagnostic", "requires_fresh_exact_repaired_head_review", "scenario_order", "sigkill_count", "restart_count", "participant_retry_count", "maximum_attempts", "post_attempt_correction_or_retry"],
+      "properties": {
+        "attempt_id": { "const": "CFD2-ATTEMPT-003" },
+        "requires_passing_no_crash_diagnostic": { "const": true },
+        "requires_fresh_exact_repaired_head_review": { "const": true },
+        "scenario_order": { "const": ["CFD2-R01", "CFD2-R02", "CFD2-R03", "CFD2-R04"] },
+        "sigkill_count": { "const": 4 },
+        "restart_count": { "const": 4 },
+        "participant_retry_count": { "const": 0 },
+        "maximum_attempts": { "const": 1 },
+        "post_attempt_correction_or_retry": { "const": false }
+      }
+    }
+  }
+}
