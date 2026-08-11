@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import copy
 import json
+import subprocess
+import sys
 from concurrent.futures import Future
 from pathlib import Path
 from typing import Any, Callable
@@ -482,5 +484,23 @@ def test_source_and_evidence_surface_keep_forbidden_authorities_absent() -> None
     ):
         assert forbidden not in source
     assert rehearsal.EVIDENCE_PATH.name == (
-        "provider-free-durability-concurrency-evidence-attempt-001.json"
+        "provider-free-durability-concurrency-evidence-attempt-002.json"
     )
+
+
+def test_direct_script_entrypoint_imports_before_rejecting_caller_input() -> None:
+    completed = subprocess.run(  # noqa: S603
+        [sys.executable, str(Path(rehearsal.__file__)), "--forbidden-probe"],
+        cwd=ROOT,
+        capture_output=True,
+        check=False,
+        timeout=15,
+    )
+    assert completed.returncode == 2
+    assert completed.stdout == b""
+    assert completed.stderr.decode("utf-8").strip() == (
+        "This fixed-path harness accepts no arguments."
+    )
+    assert not (
+        BASE / "provider-free-durability-concurrency-evidence-attempt-002.json"
+    ).exists()

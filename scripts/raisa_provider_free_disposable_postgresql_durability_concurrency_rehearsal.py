@@ -16,10 +16,15 @@ from typing import Any, Callable
 
 from jsonschema import Draft202012Validator
 
-import scripts.raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal as serial
-
-
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts import (  # noqa: E402
+    raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal as serial,
+)
+
+
 BASE = ROOT / (
     "orchestration/continuity/"
     "raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal"
@@ -29,7 +34,7 @@ CONTRACT_SCHEMA_PATH = BASE / "concurrency-rehearsal-contract.schema.json"
 EVIDENCE_SCHEMA_PATH = (
     BASE / "provider-free-durability-concurrency-evidence.schema.json"
 )
-EVIDENCE_PATH = BASE / "provider-free-durability-concurrency-evidence-attempt-001.json"
+EVIDENCE_PATH = BASE / "provider-free-durability-concurrency-evidence-attempt-002.json"
 EXPECTED_CONTRACT_SHA256 = (
     "sha256:96b3fb92d302206eb757f51203044c2aeeb76248a6844422404d13c79b785391"
 )

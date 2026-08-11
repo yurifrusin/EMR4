@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_exact_head_cf_d1_implementation_veto_before_any_docker_or_database_operation",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and the full five-source rehydration passed. The live baton accepts AES-C5 at Continuity 242 / Compass 224, records no AES-C6, keeps the Practice Context Fabric active, and authorises CF-D1 under Yuri's standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol retains implementation, runtime, acceptance, integration and protected-ref control. Exactly one fresh Antigravity project using Gemini 3.6 Flash/high receives a read-only veto over the exact clean candidate HEAD. It may inspect only allowlisted files and run only allowlisted provider-free static tests; it may not edit, run Docker/PostgreSQL, execute either rehearsal harness, contact a provider or accept the tranche.",
+    "active_plan_and_acceptance": "The frozen CF-D1 plan and planning veto pass. Exact implementation source 46b220284467fb3a3d5a440d7d3fa9839d4f8c28 contains the six-race harness, closed evidence schema and tests. Thirty-seven focused checks, Ruff, py_compile and diff checks pass. The implementation veto must independently validate scenario mechanics, overlap proof, evidence minimisation, containment and cleanup before the single runtime attempt.",
+    "protected_evidence_boundaries": "The verifier is provider-free and read-only. Docker starts, database operations, provider calls, product reads and external operations must all remain zero. It may not inspect docs/branding, untracked files, holdouts or non-allowlisted paths and has no patient/product data, operational source, command, deployment, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "The candidate source is exact task-branch HEAD 46b220284467fb3a3d5a440d7d3fa9839d4f8c28, descendant of planning HEAD bbb446c50e6c33e2e1079960d68dfe2e597b9cce. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. A new dedicated worktree and branch will be created at the exact candidate HEAD and must remain clean and unchanged through review."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_durability_concurrency_implementation_veto_predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol bound the exact implementation source and the second-veto packet."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh Gemini 3.6 Flash/high project is allocated only for the exact-HEAD pre-runtime veto."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is opened."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

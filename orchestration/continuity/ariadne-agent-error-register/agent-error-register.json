@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 233,
+  "register_revision": 235,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10748,6 +10748,89 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0269",
+      "attempt_id": "raisa-context-fabric-durability-concurrency-attempt-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-concurrency-rehearsal",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_cli",
+      "stage": "implementation",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A fixed no-argument repository harness that imports the scripts package and is dispatched by file path must place the repository root on sys.path before that package import, and its direct entrypoint must be exercised before runtime authority opens.",
+      "observed_error": "The CF-D1 harness imported its parent through scripts before installing the repository-root path. Attempt 001 failed closed with ModuleNotFoundError before run_rehearsal, Docker or PostgreSQL. The fixed evidence path remained absent and an exact label-filtered check found zero CF-D1 containers.",
+      "detection_method": "The first authorised no-argument invocation returned the import error immediately. Sol verified that no attempt evidence existed and that the exact CF-D1 ownership label matched zero containers, then compared the descendant header with the accepted parent's standalone-entrypoint bootstrap.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-receipt.json",
+        "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-234.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Install the repository-root path before the parent package import, add a direct child-process entrypoint test, reserve a distinct attempt-002 evidence path and require a fresh exact-HEAD review before runtime.",
+        "prevention_control": "Every file-path-dispatched Python harness that imports repository packages must copy the accepted root-bootstrap pattern and pass a child-process direct-entrypoint probe before implementation review and runtime dispatch.",
+        "evidence_paths": [
+          "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-234.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0270",
+      "attempt_id": "raisa-context-fabric-durability-concurrency-implementation-review-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-concurrency-rehearsal",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A pre-runtime implementation veto must reconcile the executable harness entrypoint with the accepted parent bootstrap and return revision_required when a direct file-path invocation cannot import its repository package dependency.",
+      "observed_error": "The first implementation review returned pass and stated that no schema/runtime mismatch existed, although the reviewed harness imported the scripts package before defining or installing ROOT. The subsequent authorised invocation failed at that exact import before any runtime effect.",
+      "detection_method": "Attempt 001 produced ModuleNotFoundError immediately. Direct comparison of the reviewed descendant header with the allowlisted accepted parent showed the missing root-bootstrap lines that the review had inspected but not challenged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-implementation-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-implementation-gemini-review-packet.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-receipt.json",
+        "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
+        "docs/ariadne-agent-error-correction-register-revision-235.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.executable_entrypoint_import_mismatch_missed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Reject the first review for runtime admission and require a fresh clean exact-HEAD Gemini 3.6 Flash/high review whose command allowlist includes the direct child-process entrypoint test.",
+        "prevention_control": "Implementation review packets for executable Python harnesses must require an entrypoint-level test, not compilation alone, and must compare package bootstrap order with the accepted parent before returning pass.",
+        "evidence_paths": [
+          "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-235.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

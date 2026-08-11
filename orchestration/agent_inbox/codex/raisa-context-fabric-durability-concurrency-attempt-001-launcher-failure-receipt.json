@@ -1,0 +1,24 @@
+{
+  "schema_version": "emr4.cf-d1-launcher-failure-receipt.v1",
+  "status": "attempt_rejected",
+  "attempt_id": "cf-d1-concurrency-attempt-001",
+  "source_head": "46b220284467fb3a3d5a440d7d3fa9839d4f8c28",
+  "stage": "direct_script_import",
+  "failure": {
+    "exception_class": "ModuleNotFoundError",
+    "missing_module": "scripts",
+    "raw_traceback_retained": false
+  },
+  "runtime_reached": false,
+  "evidence_path_created": false,
+  "exact_label_container_count_after_failure": 0,
+  "operation_counts": {
+    "docker_container_starts": 0,
+    "database_operations": 0,
+    "participant_transactions": 0,
+    "provider_calls": 0,
+    "product_reads": 0,
+    "external_network_operations": 0
+  },
+  "disposition": "repair_only_the_repository_root_import_bootstrap_and_use_a_new_attempt_number_after_fresh_exact_head_review"
+}
