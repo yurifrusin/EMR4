@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_explicit_aes_c1_closeout_continuity_and_review_provenance_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219 while AES-C1 acceptance and Continuity 238 / Compass 220 are prepared as the next exact descendant.",
+    "current_authority_allocation": "GPT Sol alone owns acceptance, explicit-path staging, task-branch commit and push. DeepSeek blue and Gemini veto assignments are complete and neither has integration or protected-ref authority.",
+    "active_plan_and_acceptance": "Reviewed source 285e60216cf22907e8a0f5596ece11f74f455c81 has a clean independent pass. The pending closeout binds exact 2 allow, 25 deny, 18 stop and 32 hostile zero-admission results, deterministic test evidence, Yuri paired summary and AES-C2 as next planned gate.",
+    "protected_evidence_boundaries": "Only exact AES-C1 owned closeout, receipt, continuity, current-baton and verification-binding paths may be committed. docs/branding and all unrelated untracked paths remain unstaged. No runtime, provider, data, credential, network, database/source, tool, command, deployment, release, Pages or protected-ref action is authorized.",
+    "git_refs_and_worktree": "Task branch HEAD before closeout commit is exact 285e60216cf22907e8a0f5596ece11f74f455c81. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging only is required and the preserved baseline is 494 untracked paths."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns and inspected every pending closeout path and will stage only the explicit allowlist."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The independent AES-C1 veto completed pass at the exact reviewed source HEAD."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek blue provenance is complete; no worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude is not selected as an implementation or review model."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

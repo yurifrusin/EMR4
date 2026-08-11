@@ -13,23 +13,26 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_aes_c0_is_current_and_aes_c1_is_next_after_explicit_pause() -> None:
+def test_aes_c0_remains_accepted_in_the_descendant_lineage() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
+    nodes = {node["id"]: node for node in graph["nodes"]}
+    journeys = {item["node_id"]: item for item in compass["journey"]}
 
-    assert graph["graph_revision"] == 237
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 219
-    assert compass["source_graph_revision"] == 237
-    assert compass["current_position"]["node_id"] == NODE_ID
-    orientation = compass["orientation_statement"].lower()
-    assert "aes-c0 passes" in orientation
-    assert "fresh task window before aes-c1" in orientation
+    assert graph["graph_revision"] >= 237
+    assert nodes[NODE_ID]["coordinates"]["source_head"] == SOURCE_HEAD
+    assert nodes[NODE_ID]["status"] == "accepted"
+    assert compass["map_revision"] >= 219
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    assert NODE_ID in journeys
+    assert "aes-c1 provider-free admission rehearsal is next" in journeys[NODE_ID][
+        "outcome"
+    ].lower()
 
 
 def test_aes_c0_continuity_opens_no_runtime_authority() -> None:
-    node = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    nodes = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"]
+    node = next(item for item in nodes if item["id"] == NODE_ID)
 
     assert node["kind"] == "foundation"
     assert node["authority"]["authorized_openings"] == []
@@ -53,7 +56,8 @@ def test_aes_c0_continuity_opens_no_runtime_authority() -> None:
 
 
 def test_aes_c0_contract_and_user_mailbox_are_bound() -> None:
-    node = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    nodes = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"]
+    node = next(item for item in nodes if item["id"] == NODE_ID)
 
     assert node["contract_evidence"] == []
     assert {
@@ -70,21 +74,26 @@ def test_aes_c0_contract_and_user_mailbox_are_bound() -> None:
     assert node["status"] == "accepted"
 
 
-def test_compass_handoff_is_provider_free_admission_only() -> None:
-    position = _load("orchestration/continuity/emr4-compass.json")[
-        "current_position"
-    ]
-    joined = " ".join(position["unlocks"] + position["does_not_solve"]).lower()
+def test_aes_c0_historical_handoff_was_provider_free_admission_only() -> None:
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
+    compass = _load("orchestration/continuity/emr4-compass.json")
+    node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
+    joined = " ".join(
+        node["authority"]["notes"]
+        + node["claim_scope"]
+        + node["unresolved_gates"]
+        + [journey["outcome"]]
+    ).lower()
 
     for phrase in (
-        "authored-synthetic admission",
-        "manifest/grant/lease intersection",
-        "default denial",
-        "runtime broker",
-        "patient/product/clinical",
+        "provider-free admission rehearsal",
+        "no capability broker",
+        "patient/clinical/product",
         "provider",
         "database/source",
+        "tool",
         "command",
-        "protected-ref",
+        "protected refs",
     ):
         assert phrase in joined

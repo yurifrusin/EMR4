@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_exact_head_aes_c1_provider_free_admission_after_clean_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219. AES-C1 is the active planned descendant and its reviewed candidate is ready for Sol acceptance without opening runtime authority.",
+    "current_authority_allocation": "GPT Sol owns final review, recovery, acceptance, continuity and Git closeout. DeepSeek blue and its bounded revision are complete. Fresh Gemini 3.6 Flash/high independent red/veto returned pass with no implementation authority.",
+    "active_plan_and_acceptance": "Exact candidate 285e60216cf22907e8a0f5596ece11f74f455c81 passes 45 canonical scenarios as 2 allow, 25 deny and 18 stop; 24 hostile attempt and 8 hostile contract mutations admit zero. Focused 59, maintained static 125 and canonical fast 131 tests pass. Fresh Gemini veto passes 73 focused tests at unchanged clean HEAD.",
+    "protected_evidence_boundaries": "Evidence is authored-synthetic, provider-free and unmounted. No protected evidence, PHI, patient/clinical/product data, runtime broker, adapter execution, provider, credential, network, database/source, watcher, tool, command, deployment, release, Pages or protected-ref movement is opened.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam and clean review worktree are at exact reviewed candidate 285e60216cf22907e8a0f5596ece11f74f455c81. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The 494 pre-existing untracked paths remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified candidate source, deterministic gates, protected refs and untracked preservation."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.6 Flash/high exact-HEAD red/veto completed with decision pass and clean postcondition."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Blue implementation and its one bounded revision completed; no further DeepSeek call is selected for AES-C1."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude was not selected as a model; Claude Code was transport only."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

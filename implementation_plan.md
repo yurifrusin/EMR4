@@ -179,8 +179,8 @@ The bounded provider-free conformance repair named in that review now also
 passes. It adds an explicit maintained Python 3.11 source-state, protected-CI
 compile/lint/static-test enforcement, current API Spine lifecycle supersession
 and live baton consistency without changing product behavior. AES-C0
-architecture and contract now also passes; AES-C1 provider-free admission is
-the next safe tranche after Yuri's requested fresh-task-window handoff.
+architecture and AES-C1 provider-free admission now also pass. AES-C2
+provider-free broker simulation is the next safe tranche.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -199,9 +199,11 @@ read-only architectural-health pulse, bounded CI/lifecycle conformance repair
 and AES-C0 architecture contract now pass. AES-C0 freezes six closed messages,
 the exact leaseable capability vocabulary, independent cumulative budgets,
 no-fallback state, external revocation and the read/event/command route
-separation. AES-C1 provider-free admission is next; none of these results can
-be mistaken for current provider,
-product-data, tool or command authority.
+separation. AES-C1 now proves their exact admission intersection, current-
+authority check, default denial, budget and revocation behavior over unmounted
+authored-synthetic objects. AES-C2 provider-free broker simulation is next;
+none of these results can be mistaken for current provider, product-data, tool
+or command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -611,9 +613,9 @@ generation rehearsal. The architecture-only provider-free default-off
   or operational availability. Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
-  provider-free CI/lifecycle repair and AES-C0 architecture contract have
-  passed; AES-C1 provider-free admission is next after the requested fresh
-  task-window handoff.
+  provider-free CI/lifecycle repair, AES-C0 architecture contract and AES-C1
+  provider-free admission rehearsal have passed; AES-C2 provider-free broker
+  simulation is next.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is
@@ -652,10 +654,15 @@ AES-C0 now passes as the unmounted architecture descendant. Its closed
 `RevocationRecord` and `AuditEvidenceEnvelope` bind one generation to exact
 broker-resolved capability identity, independent cumulative budgets,
 generation-wide external revocation, pinned supply-chain identity and
-minimized evidence. All 37 hostile contract mutations fail closed. This proves
-contract coherence only; it implements no broker, work cell, adapter, provider,
-product read, database/source, tool or command. AES-C1 will next rehearse
-authored-synthetic admission and default denial against the exact contract.
+minimized evidence. All 37 hostile contract mutations fail closed. AES-C1 now
+also passes as the unmounted provider-free admission descendant. Its exact 45
+scenarios resolve as two inert allows, 25 denials and 18 terminal stops, while
+24 hostile attempt mutations and eight hostile contract mutations gain zero
+admission. It proves exact manifest/grant/lease/current-authority intersection,
+default denial, cumulative budget accounting and revocation precedence without
+executing an operation. AES-C2 will next simulate one inert allowlisted
+authored-synthetic adapter and prove broker-owned destination, method,
+executable and credential custody.
 
 The controlling plan is
 [`docs/raisa-agent-execution-surface-containment-gate-plan.md`](docs/raisa-agent-execution-surface-containment-gate-plan.md)
@@ -663,8 +670,11 @@ and its threat-model delta is
 [`docs/security/raisa-agent-execution-surface-containment-gate-threat-model-delta.md`](docs/security/raisa-agent-execution-surface-containment-gate-threat-model-delta.md).
 The accepted AES-C0 result is
 [`docs/raisa-agent-execution-surface-containment-gate-aes-c0-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c0-closeout.md).
+The accepted AES-C1 result is
+[`docs/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-closeout.md).
 This entry grants no broker implementation, provider call, real context,
-credential flow, tool, command, deployment or production authority.
+credential flow, tool, command, deployment or production authority. It also
+grants no real adapter, generic network or executable tool.
 
 ---
 

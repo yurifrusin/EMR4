@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_exact_head_aes_c1_provider_free_admission_after_clean_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate 285e60216cf22907e8a0f5596ece11f74f455c81 passes 45 canonical scenarios as 2 allow, 25 deny and 18 stop; 24 hostile attempt and 8 hostile contract mutations admit zero. Focused 59, maintained static 125 and canonical fast 131 tests pass. Fresh Gemini veto passes 73 focused tests at unchanged clean HEAD.",
+    "current_authority_allocation": "GPT Sol owns final review, recovery, acceptance, continuity and Git closeout. DeepSeek blue and its bounded revision are complete. Fresh Gemini 3.6 Flash/high independent red/veto returned pass with no implementation authority.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam and clean review worktree are at exact reviewed candidate 285e60216cf22907e8a0f5596ece11f74f455c81. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The 494 pre-existing untracked paths remain preserved and excluded.",
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219. AES-C1 is the active planned descendant and its reviewed candidate is ready for Sol acceptance without opening runtime authority.",
+    "protected_evidence_boundaries": "Evidence is authored-synthetic, provider-free and unmounted. No protected evidence, PHI, patient/clinical/product data, runtime broker, adapter execution, provider, credential, network, database/source, watcher, tool, command, deployment, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

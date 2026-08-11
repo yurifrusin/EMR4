@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_exact_head_aes_c1_red_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219; the recovered AES-C1 candidate is deterministically green and now requires its configured fresh independent red/veto before Sol acceptance.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project has read-only review authority only. Sol retains architecture, recovery, integration and acceptance. DeepSeek blue and its single bounded revision are complete and no other reviewer is selected.",
+    "active_plan_and_acceptance": "Candidate 285e60216cf22907e8a0f5596ece11f74f455c81 passes 59 focused AES-C1/AES-C0/API tests, eight hostile contract mutations, 125 maintained CI-static tests and 131 canonical fast-profile tests. Review packet SHA-256 is b27dd9143998f7eb992160da28704c1c73392ab4058c5dcf5520a3a8aba3c6e8 and excludes blue closeout/provenance from the red read allowlist.",
+    "protected_evidence_boundaries": "The reviewer is confined to the exact non-protected read allowlist and a clean worktree. It may not edit, access protected/historical/branding/patient/product data, start runtime/container/database, contact provider/product surfaces, use credentials/network, execute adapters/tools/commands, deploy, release, move Pages or protected refs.",
+    "git_refs_and_worktree": "Primary and clean review worktree are at exact candidate 285e60216cf22907e8a0f5596ece11f74f455c81. Review branch is codex/review-aes-c1-provider-free-admission at C:/Users/sarashera/EMR4-worktrees/aes-c1-gemini-red; its deterministic preflight passed. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact candidate, clean review worktree, deterministic gates and review packet hash."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fresh-project reachability will be established only by the one bounded review dispatch; no fallback is preselected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Both blue transports completed; no further DeepSeek call is selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude/Fable/Opus is not selected; Claude Code was transport only."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

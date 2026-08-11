@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 237,
+  "graph_revision": 238,
   "harvests": [],
   "nodes": [
     {
@@ -14871,6 +14871,86 @@
         "AES-C1 provider-free admission rehearsal has not yet been frozen or executed.",
         "No capability broker, work-cell process, adapter, provider, product context, tool or command is implemented or opened.",
         "Protected evidence, patient/clinical/product data, credentials, database/source access, deployment, production, release, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-agent-execution-surface-containment-gate-aes-c1",
+      "title": "Raisa Agent Execution Surface AES-C1 provider-free admission rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-11T00:00:00Z",
+      "updated_at": "2026-08-11T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "285e60216cf22907e8a0f5596ece11f74f455c81",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-agent-execution-surface-containment-gate-aes-c0",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "AES-C1 is authored-synthetic, provider-free and unmounted; an allow is an inert decision and executes nothing.",
+          "The work cell receives no lease or credential and cannot select capability, adapter, destination, method or executable.",
+          "GraphQL remains read-only, events signal fresh reads, and REST/OpenAPI commands remain separately authorized and human/policy gated."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-aes-c1-provider-free-admission",
+          "source": "docs/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact fail-closed manifest/grant/lease/current-authority admission over 45 unmounted authored-synthetic scenarios."
+        }
+      ],
+      "claim_scope": [
+        "Two exact inert intersections allow, 25 scenarios deny and 18 scenarios stop; no admitted operation executes.",
+        "All 24 hostile attempt mutations and eight hostile contract mutations reject with zero admission.",
+        "Immutable generation, current authority, revocation, kill and all 19 cumulative budget counters are checked before admission.",
+        "The result proves pure admission behavior, not runtime broker, adapter custody, provider behavior or product-data safety."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-threat-model-delta.md",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/provider-free-admission-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-11--aes-c1-provider-free-admission.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-aes-c1-provider-free-admission-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-aes-c1-provider-free-admission-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c1-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c1-precommit-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-aes-c1-provider-free-admission-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c1.py",
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c1_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_agent_execution_surface_containment_gate_aes_c1_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "AES-C2 provider-free broker simulator has not yet been frozen or executed.",
+        "No runtime broker, work-cell process, real adapter, provider, product context, database/source, network, executable tool or command is opened.",
+        "Protected evidence, patient/clinical/product data, credentials, deployment, production, release, Pages and protected refs remain closed."
       ]
     }
   ],
