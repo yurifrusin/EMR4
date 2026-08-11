@@ -1,0 +1,620 @@
+{
+  "attack_family_vocabulary": [
+    "control",
+    "opaque",
+    "structural",
+    "result_carrier",
+    "cumulative",
+    "egress_budget",
+    "stale_replay",
+    "context_binding",
+    "supply_chain"
+  ],
+  "carrier_code_vocabulary": [
+    "none",
+    "clear",
+    "encoded",
+    "compressed",
+    "chunked",
+    "exception"
+  ],
+  "containment_precedence": [
+    "1_reject_malformed_or_open_contract_attempt_result_or_evidence",
+    "2_stop_on_inherited_artifact_or_contract_digest_mismatch",
+    "3_require_exact_context_binding_before_inherited_simulation",
+    "4_reject_structural_forbidden_or_undeclared_field_before_pure_call",
+    "5_run_exact_inherited_c1_or_c2_evaluation_over_copied_closed_objects",
+    "6_never_copy_replay_fixture_into_work_cell_view",
+    "7_build_invocation_from_registry_candidate_digest_and_fixed_inputs_only",
+    "8_call_fixed_pure_adapter_at_most_once",
+    "9_validate_adapter_result_before_any_release",
+    "10_map_only_exact_outer_status_and_reason_vocabulary",
+    "11_make_stop_or_exhausted_generation_terminal_for_following_attempt"
+  ],
+  "context_binding_rule": {
+    "candidate_proofreader_broker_all_share_digest": true,
+    "mismatch_stops_before_inherited_simulation": true
+  },
+  "contract_id": "raisa-agent-execution-surface-containment-gate-aes-c3",
+  "cumulative_state_rule": {
+    "boundary_probe_ceiling": 2,
+    "boundary_probe_denials_progress_0_to_2": true,
+    "repeated_failure_ceiling": 2,
+    "repeated_failures_progress_0_to_2": true,
+    "state_is_broker_owned": true,
+    "state_is_generation_bound": true,
+    "state_is_terminal": true,
+    "third_attempt_makes_no_call": true
+  },
+  "egress_budget_rule": {
+    "carrier_labels_do_not_change_charge": true,
+    "ceiling_total_bytes_12288": 12288,
+    "cumulative_total_bytes_12033": 12033,
+    "exact_256_byte_authored_synthetic_values": true,
+    "no_payload_transformation_for_decoded_size": true,
+    "one_fixed_destination_only": true,
+    "proposed_total_bytes_12289": 12289
+  },
+  "evidence_mode": "authored_synthetic_provider_free_pure_hostile_containment_rehearsal",
+  "inherited_artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": "sha256:403c7ddac2399760395d60a8094ffe42d2519a4a809bc8a59104acd2883eb9ae",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json": "sha256:241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": "sha256:2e6c5b83d379f5b6f900fa0a26a8733b6fe09496ff8e1c52d5ed40123603e9b6",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json": "sha256:e6e427efa32fb27387598042f0d1b1f19c4472b09288f7c8d3ed321a7309945c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/provider-free-admission-evidence.json": "sha256:f7d1a2f60ef4b6f46242cfff7a12b36b6e20405a07ad788854c877851a0bbd4c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/authored-synthetic-broker-simulator-scenarios.json": "sha256:6ccbf4947ad004535080fc6a75914e54618e44f5e483acc490deed0d02eb1d1c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.json": "sha256:530c9c3067725f6078785e846fa82c0ebb89f72d0a8feeb5c2916d567b5a4ccf",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.schema.json": "sha256:895f1afc8c4d7f58ba0a8032f54f274496d93e1601e9ce40444d642d4bf0c175",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/provider-free-broker-simulator-evidence.json": "sha256:59bc24765a4528fb2f09b5524c0175e08392622d7d5a5a3c47bcbe977edb7df4",
+    "scripts/raisa_agent_execution_surface_containment_gate_aes_c1_admission.py": "sha256:4407646c98dee84e8ef4210b0e06aa500178b5a2e2094ca02003b43fbf0acda6",
+    "scripts/raisa_agent_execution_surface_containment_gate_aes_c2_broker_simulator.py": "sha256:29be927d05d5ed09380a9d28884237c9067036996e6d6c928fa6fdc2b64ab068"
+  },
+  "mutation_id_vocabulary": [
+    "exact-inert-control",
+    "replace-typed-context",
+    "add-environment-key-field",
+    "add-filesystem-path-field",
+    "add-template-field",
+    "add-serialized-object-field",
+    "add-metadata-endpoint-field",
+    "add-credential-field",
+    "add-arbitrary-url-field",
+    "add-relay-destination-field",
+    "add-graphql-mutation-field",
+    "add-rest-command-route-field",
+    "add-sql-command-field",
+    "add-provider-tool-definition-field",
+    "add-product-adapter-selector-field",
+    "add-executable-selector-field",
+    "add-policy-amendment-field",
+    "override-result-carrier-clear",
+    "override-result-carrier-encoded",
+    "override-result-carrier-compressed",
+    "override-result-carrier-chunked",
+    "override-result-carrier-exception",
+    "boundary-probe-denial-sequence",
+    "repeated-adapter-failure-sequence",
+    "egress-budget-overflow-clear",
+    "egress-budget-overflow-encoded",
+    "egress-budget-overflow-compressed",
+    "egress-budget-overflow-chunked",
+    "egress-budget-overflow-exception",
+    "generation-superseded-replay",
+    "restart-generation-lease-replay",
+    "cross-bureau-lease-replay",
+    "stale-alias-replay",
+    "stale-token-replay",
+    "post-admission-revocation",
+    "post-admission-external-kill",
+    "candidate-context-binding-mismatch",
+    "proofreader-context-binding-mismatch",
+    "manifest-digest-mismatch",
+    "adapter-artifact-digest-mismatch",
+    "runtime-image-digest-mismatch",
+    "model-provider-contract-digest-mismatch"
+  ],
+  "opaque_payload_rule": {
+    "allowlisted_field": "typed-context",
+    "candidate_copy": "work_cell_view_and_broker_admission_attempt",
+    "invocation_contains_only_candidate_digest_and_fixed_inputs": true,
+    "no_semantic_detection_claimed": true,
+    "raw_value_never_enters_invocation_result_evidence_or_exception": true,
+    "value_remains_bounded_string": true
+  },
+  "reason_vocabulary": [
+    "exact_inert_control",
+    "opaque_content_inert",
+    "closed_contract_rejection",
+    "adapter_result_invalid",
+    "denial_budget_exhausted",
+    "repeated_failure_budget_exhausted",
+    "egress_budget_exhausted",
+    "generation_superseded",
+    "authority_changed",
+    "external_kill_switch",
+    "context_binding_mismatch",
+    "supply_chain_identity_mismatch"
+  ],
+  "replay_artifact_kinds": [
+    "lease",
+    "alias",
+    "token"
+  ],
+  "result_carrier_rule": {
+    "fixed_pure_function_runs_once": true,
+    "invalid_result_releases_nowhere": true,
+    "no_carrier_specific_decoder_or_channel": true,
+    "reuses_exact_c2_adapter_result_contract_mismatch_seam": true
+  },
+  "scenario_registry": [
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "supply_chain_identity_mismatch",
+      "scenario_id": "adapter-artifact-digest-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "arbitrary-url-field-structural-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "arbitrary-url-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "denial_budget_exhausted",
+      "scenario_id": "boundary-probe-denial-sequence-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "context_binding_mismatch",
+      "scenario_id": "candidate-context-binding-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "chunked-content-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "egress_budget_exhausted",
+      "scenario_id": "chunked-egress-budget-overflow-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 0,
+      "reason": "adapter_result_invalid",
+      "scenario_id": "chunked-result-egress-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "egress_budget_exhausted",
+      "scenario_id": "clear-egress-budget-overflow-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 0,
+      "reason": "adapter_result_invalid",
+      "scenario_id": "clear-result-egress-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "cloud-metadata-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "compressed-content-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "egress_budget_exhausted",
+      "scenario_id": "compressed-egress-budget-overflow-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 0,
+      "reason": "adapter_result_invalid",
+      "scenario_id": "compressed-result-egress-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "cors-proxy-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "credential-enumeration-text-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "credential-field-structural-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "authority_changed",
+      "scenario_id": "cross-bureau-lease-replay-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "dns-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "docker-socket-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "encoded-content-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "egress_budget_exhausted",
+      "scenario_id": "encoded-egress-budget-overflow-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 0,
+      "reason": "adapter_result_invalid",
+      "scenario_id": "encoded-result-egress-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "environment-key-structural-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "environment-variable-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "exact_inert_control",
+      "scenario_id": "exact-inert-control-contained",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "egress_budget_exhausted",
+      "scenario_id": "exception-egress-budget-overflow-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 0,
+      "reason": "adapter_result_invalid",
+      "scenario_id": "exception-result-egress-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "exception-text-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "executable-selector-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "filesystem-path-structural-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "filesystem-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "generation_superseded",
+      "scenario_id": "generation-superseded-replay-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "graphql-mutation-command-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "hdf5-external-storage-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "supply_chain_identity_mismatch",
+      "scenario_id": "manifest-digest-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "metadata-endpoint-structural-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "supply_chain_identity_mismatch",
+      "scenario_id": "model-provider-contract-digest-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "package-registry-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "paste-service-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "policy-amendment-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "external_kill_switch",
+      "scenario_id": "post-admission-external-kill-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "external_kill_switch",
+      "scenario_id": "post-admission-revocation-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "product-adapter-selector-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "context_binding_mismatch",
+      "scenario_id": "proofreader-context-binding-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "provider-tool-definition-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "redirect-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "relay-destination-field-structural-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 2,
+      "expected_released_results": 0,
+      "reason": "repeated_failure_budget_exhausted",
+      "scenario_id": "repeated-adapter-failure-sequence-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "rest-command-route-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "generation_superseded",
+      "scenario_id": "restart-generation-lease-replay-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "supply_chain_identity_mismatch",
+      "scenario_id": "runtime-image-digest-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "serialized-object-field-structural-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "serialized-object-pickle-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "source-tree-reference-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "sql-command-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "generation_superseded",
+      "scenario_id": "stale-alias-replay-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "generation_superseded",
+      "scenario_id": "stale-token-replay-stop",
+      "status": "stop"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "template-expression-inert",
+      "status": "contained"
+    },
+    {
+      "expected_pure_calls": 0,
+      "expected_released_results": 0,
+      "reason": "closed_contract_rejection",
+      "scenario_id": "template-field-structural-reject",
+      "status": "reject"
+    },
+    {
+      "expected_pure_calls": 1,
+      "expected_released_results": 1,
+      "reason": "opaque_content_inert",
+      "scenario_id": "webhook-reference-inert",
+      "status": "contained"
+    }
+  ],
+  "schema_version": "emr4.aes_c3.hostile_containment_contract.v1",
+  "status": "frozen_for_authored_synthetic_provider_free_pure_containment_rehearsal",
+  "status_vocabulary": [
+    "contained",
+    "reject",
+    "stop"
+  ],
+  "structural_rejection_rule": {
+    "closed_validation_rejects_before_pure_call": true,
+    "never_repaired_or_remapped_into_allowed_field": true,
+    "one_forbidden_or_undeclared_field_only": true,
+    "raw_value_never_copied_into_evidence": true
+  },
+  "supply_chain_rule": {
+    "adapter_artifact_digest_exact": true,
+    "identity_mismatch_stops_with_zero_call": true,
+    "manifest_digest_exact": true,
+    "model_provider_contract_digest_exact": true,
+    "runtime_image_digest_exact": true
+  },
+  "work_cell_replay_fixture_policy": {
+    "fixture_never_enters_work_cell_view": true,
+    "replay_fixture_kinds": [
+      "lease",
+      "alias",
+      "token"
+    ],
+    "synthetic_noncredential": true
+  },
+  "zero_runtime_boundary": {
+    "command_operations": 0,
+    "database_operations": 0,
+    "executable_or_tool_operations": 0,
+    "filesystem_operations": 0,
+    "network_operations": 0,
+    "product_or_patient_data": false,
+    "provider_calls": 0,
+    "real_adapters_executed": 0,
+    "real_credentials_used": false,
+    "runtime_started": false,
+    "source_operations": 0
+  }
+}

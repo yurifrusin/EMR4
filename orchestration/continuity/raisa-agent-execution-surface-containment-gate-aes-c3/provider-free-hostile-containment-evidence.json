@@ -1,0 +1,1416 @@
+{
+  "artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/authored-synthetic-hostile-containment-scenarios.json": "sha256:c11fbf7caad2bd9246c1ff9213e8b4186481cc99168f29ece5bae3333f21e265",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/containment-rehearsal-contract.json": "sha256:2cdd61eb46f371cb984e5777598f39c1beae5f073ffc79b523f0d7ab8c17cb4d",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/containment-rehearsal-contract.schema.json": "sha256:7626f3249206d9accfb2fa8b37575dd84573fb391c31bc25017952e3ec8113a1"
+  },
+  "command_operations": 0,
+  "contained_count": 21,
+  "contract_mutation_admitted": [],
+  "contract_mutation_count": 18,
+  "contract_mutation_rejected_count": 18,
+  "database_operations": 0,
+  "digest_only_release_count": 21,
+  "evidence_mode": "authored_synthetic_provider_free_pure_hostile_containment_rehearsal",
+  "executable_or_tool_operations": 0,
+  "filesystem_operations": 0,
+  "inherited_artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": "sha256:403c7ddac2399760395d60a8094ffe42d2519a4a809bc8a59104acd2883eb9ae",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json": "sha256:241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": "sha256:2e6c5b83d379f5b6f900fa0a26a8733b6fe09496ff8e1c52d5ed40123603e9b6",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json": "sha256:e6e427efa32fb27387598042f0d1b1f19c4472b09288f7c8d3ed321a7309945c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/provider-free-admission-evidence.json": "sha256:f7d1a2f60ef4b6f46242cfff7a12b36b6e20405a07ad788854c877851a0bbd4c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/authored-synthetic-broker-simulator-scenarios.json": "sha256:6ccbf4947ad004535080fc6a75914e54618e44f5e483acc490deed0d02eb1d1c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.json": "sha256:530c9c3067725f6078785e846fa82c0ebb89f72d0a8feeb5c2916d567b5a4ccf",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.schema.json": "sha256:895f1afc8c4d7f58ba0a8032f54f274496d93e1601e9ce40444d642d4bf0c175",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/provider-free-broker-simulator-evidence.json": "sha256:59bc24765a4528fb2f09b5524c0175e08392622d7d5a5a3c47bcbe977edb7df4",
+    "scripts/raisa_agent_execution_surface_containment_gate_aes_c1_admission.py": "sha256:4407646c98dee84e8ef4210b0e06aa500178b5a2e2094ca02003b43fbf0acda6",
+    "scripts/raisa_agent_execution_surface_containment_gate_aes_c2_broker_simulator.py": "sha256:29be927d05d5ed09380a9d28884237c9067036996e6d6c928fa6fdc2b64ab068"
+  },
+  "mutation_admitted": [],
+  "mutation_count": 20,
+  "mutation_rejected_count": 20,
+  "network_operations": 0,
+  "opaque_payload_non_release": true,
+  "product_or_patient_data": false,
+  "provider_calls": 0,
+  "pure_python_call_count": 28,
+  "raw_payload_leak_scenarios": [],
+  "real_adapters_executed": 0,
+  "real_credentials_used": false,
+  "reasons": [],
+  "reject_count": 15,
+  "runtime_started": false,
+  "scenario_count": 61,
+  "scenario_results": [
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:91eee16baf0f329d0c9b0266f290d3e855eab3e9451da87d012b6a754907d0a8",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "exact_inert_control"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:cca35769b59c6c11036a0cc35a64a61dd72962e90d53f751a892f4d1c019f080",
+      "result_id": "containment-result-exact-inert-control-contained",
+      "scenario_id": "exact-inert-control-contained",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:459e394f37b88bfde542a78e55a9b2bcc8d2370d721b8b5718a1c5ca98f1f615",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:5eeb765d64930a97a9a7a9b3614622662696098f1ccc2b33130c46f01da410f6",
+      "result_id": "containment-result-environment-variable-reference-inert",
+      "scenario_id": "environment-variable-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:23c296971dbf09fd1b0becf1249bcc4fb6524f346677daddc316609823ef3049",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:f37de88ca37d6d3c65c44c7a3c725bd056b151f754f3ef8e32907aae8aabf378",
+      "result_id": "containment-result-filesystem-reference-inert",
+      "scenario_id": "filesystem-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:75d0d9f63338e698411f6027b739d9386ef175007c1115c18e4d203e490c23bf",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:6031c6492637a68f01d6e6fa6a693e165786e2160a28801b068bab29a488ffbe",
+      "result_id": "containment-result-source-tree-reference-inert",
+      "scenario_id": "source-tree-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:91624b689d9c49c8d9a356a6d18c5b9e23e6b0d6f8137d085a34db82723770c4",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:f74f503d2a43afca10cfd8adb7d6aee81970da23751477dc701d5331228704be",
+      "result_id": "containment-result-docker-socket-reference-inert",
+      "scenario_id": "docker-socket-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:3e9893da7572e917eb5c42a2a497106555f2fa71f2895e93113d2438dbbc75ca",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:a6edb7c48da888a5a58476637386168111e4916f14f5d10c57529433c9377e39",
+      "result_id": "containment-result-hdf5-external-storage-reference-inert",
+      "scenario_id": "hdf5-external-storage-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:a9ea2b0c43a6f7acde34b0940cecebc3114365b7b273e9897df90b0891906240",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:f7c64f921d5de79c718ac90bb33638fcacd98809d87ec6ffee086aa501f764db",
+      "result_id": "containment-result-template-expression-inert",
+      "scenario_id": "template-expression-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:d1fcb516c93093d57a07a1d3a9331e2d385afc8553a565654fb7c69e089643e7",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:b735ae6f74d766d6a4613e0169f752567cbe3b4f38f2b0b7a96b9ac5a2b4109a",
+      "result_id": "containment-result-serialized-object-pickle-inert",
+      "scenario_id": "serialized-object-pickle-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:b96d248a1f303ab4900f7e598acddc803d453242821966a5cafb22ce172900ba",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:d196ec828b7d7887090c40b2dbbdd712d3e08a0d7215e346acb0164d350d6142",
+      "result_id": "containment-result-cloud-metadata-reference-inert",
+      "scenario_id": "cloud-metadata-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:2473bdba1ff7b7d8d2f1a26afd5cf42beae3d1c68b38cb3da09500d88c070f1b",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:ce4ad622253252c44f687e948c4e261ec49c7e7c3b5d5c9080317b20d21ce5e0",
+      "result_id": "containment-result-credential-enumeration-text-inert",
+      "scenario_id": "credential-enumeration-text-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:a45868612ae0b7228268836dc992ead85973a8b0e00536104ee84b43fceca0ec",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:0761151f36dc5ba529dd85e564861807fb496c31f1f39c1febcbcd6b52ba2ab2",
+      "result_id": "containment-result-arbitrary-url-inert",
+      "scenario_id": "arbitrary-url-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:63d716a2d96bc88855b11ba91a6f6baf25e5ba0d24b49e8505483144c7d6eca0",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:042509e39354aeee96f1fcb305f75a8325d621b93b9467f6c906adcd9eaeba48",
+      "result_id": "containment-result-redirect-reference-inert",
+      "scenario_id": "redirect-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:8706989832133b7c8acbfec2049958894e570bc5a6e487eed5588c9dee7d0077",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:1369afd8da9b1f1041e366e43777fb6f9042cc632b5a5982e93ecc0a6322185e",
+      "result_id": "containment-result-dns-reference-inert",
+      "scenario_id": "dns-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:c0fed2cbd565ff8a53fccdeda0fbb5b9d0cec466f2e23e0c6ed5d51612a2c04f",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:d4912201128b767c001c1abf3ec67b903b6c3b48465179d425334b0cbdc48bce",
+      "result_id": "containment-result-package-registry-reference-inert",
+      "scenario_id": "package-registry-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:d70333744bea3b3b68c65c3b3cd913ebfbd472ac4a1ab4025cde0f105a661c46",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:862154febd5145bacd7ad996f2d3529038d9e37b920ff52350c830e660d3c257",
+      "result_id": "containment-result-webhook-reference-inert",
+      "scenario_id": "webhook-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:6856839b605dbff23cd7b8f3eb4f15f5793d93cb432b621977814a6b87bf17df",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:ef22560cdca64c5c17b42c310b262d2756550c464df3962ebf9acbb56da97768",
+      "result_id": "containment-result-paste-service-reference-inert",
+      "scenario_id": "paste-service-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:791d4806402415d66619b3ecdff38cd872a86e7391790a038549b5682f18cc22",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:ab60591e5af04bd89f8194cda23c546592a0a922ab0fa01b2c1bdf857c683204",
+      "result_id": "containment-result-cors-proxy-reference-inert",
+      "scenario_id": "cors-proxy-reference-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:99a09a8900315e78ddc38cb9fa2ebf76d9b3939a6b9abcbb866fab45ae1a09f1",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:93b4f49842df1e241fe47ccb2cde99724d389ca4afed4e1ddc07ddee72732596",
+      "result_id": "containment-result-encoded-content-inert",
+      "scenario_id": "encoded-content-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:abf2ca083967f439380ca996d7139f67d3d9ed9f357161e414e3c404c3b0f65a",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:4cb0c6807b4c6b5ebd3a04c40699e4c10576804be6bc54332c1c510beb750685",
+      "result_id": "containment-result-compressed-content-inert",
+      "scenario_id": "compressed-content-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:ca5314cad812a9290b70e55ba0df665f1c9a1c8ef8117c68d46d3943610d3323",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:f2e9595f937ab9b718a344c77a1ce3d1557f21ba99df84433a82ec8c9b7a0be6",
+      "result_id": "containment-result-chunked-content-inert",
+      "scenario_id": "chunked-content-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": "sha256:a5aa51a0488e41c529eb30ccb3f73d526ca2610405d49302eed25d167e6f4119",
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "opaque_content_inert"
+      ],
+      "released_result_count": 1,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": "sha256:7b817018b4848bb21c1c76291469889ff813a8c57ae91483a71dbc515a8d8370",
+      "result_id": "containment-result-exception-text-inert",
+      "scenario_id": "exception-text-inert",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "contained"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-environment-key-structural-reject",
+      "scenario_id": "environment-key-structural-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-filesystem-path-structural-reject",
+      "scenario_id": "filesystem-path-structural-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-template-field-structural-reject",
+      "scenario_id": "template-field-structural-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-serialized-object-field-structural-reject",
+      "scenario_id": "serialized-object-field-structural-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-metadata-endpoint-structural-reject",
+      "scenario_id": "metadata-endpoint-structural-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-credential-field-structural-reject",
+      "scenario_id": "credential-field-structural-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-arbitrary-url-field-structural-reject",
+      "scenario_id": "arbitrary-url-field-structural-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-relay-destination-field-structural-reject",
+      "scenario_id": "relay-destination-field-structural-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-graphql-mutation-command-reject",
+      "scenario_id": "graphql-mutation-command-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-rest-command-route-reject",
+      "scenario_id": "rest-command-route-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-sql-command-reject",
+      "scenario_id": "sql-command-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-provider-tool-definition-reject",
+      "scenario_id": "provider-tool-definition-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-product-adapter-selector-reject",
+      "scenario_id": "product-adapter-selector-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-executable-selector-reject",
+      "scenario_id": "executable-selector-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "closed_contract_rejection"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-policy-amendment-reject",
+      "scenario_id": "policy-amendment-reject",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "reject"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "adapter-result-contract-mismatch-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "adapter_result_invalid"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-clear-result-egress-stop",
+      "scenario_id": "clear-result-egress-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "adapter-result-contract-mismatch-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "adapter_result_invalid"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-encoded-result-egress-stop",
+      "scenario_id": "encoded-result-egress-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "adapter-result-contract-mismatch-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "adapter_result_invalid"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-compressed-result-egress-stop",
+      "scenario_id": "compressed-result-egress-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "adapter-result-contract-mismatch-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "adapter_result_invalid"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-chunked-result-egress-stop",
+      "scenario_id": "chunked-result-egress-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "adapter-result-contract-mismatch-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 1,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "adapter_result_invalid"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-exception-result-egress-stop",
+      "scenario_id": "exception-result-egress-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "candidate-operation-identity-deny",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "denial_budget_exhausted"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-boundary-probe-denial-sequence-stop",
+      "scenario_id": "boundary-probe-denial-sequence-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "adapter-result-contract-mismatch-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 2,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "repeated_failure_budget_exhausted"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-repeated-adapter-failure-sequence-stop",
+      "scenario_id": "repeated-adapter-failure-sequence-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "budget_exhausted"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "egress_budget_exhausted"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-clear-egress-budget-overflow-stop",
+      "scenario_id": "clear-egress-budget-overflow-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "budget_exhausted"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "egress_budget_exhausted"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-encoded-egress-budget-overflow-stop",
+      "scenario_id": "encoded-egress-budget-overflow-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "budget_exhausted"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "egress_budget_exhausted"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-compressed-egress-budget-overflow-stop",
+      "scenario_id": "compressed-egress-budget-overflow-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "budget_exhausted"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "egress_budget_exhausted"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-chunked-egress-budget-overflow-stop",
+      "scenario_id": "chunked-egress-budget-overflow-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "budget_exhausted"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "egress_budget_exhausted"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-exception-egress-budget-overflow-stop",
+      "scenario_id": "exception-egress-budget-overflow-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "generation_superseded"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "generation-superseded-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "generation_superseded"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-generation-superseded-replay-stop",
+      "scenario_id": "generation-superseded-replay-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "generation_superseded"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "cross-generation-replay-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "generation_superseded"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-restart-generation-lease-replay-stop",
+      "scenario_id": "restart-generation-lease-replay-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "authority_changed"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "authority-bureau-changed-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "authority_changed"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-cross-bureau-lease-replay-stop",
+      "scenario_id": "cross-bureau-lease-replay-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "generation_superseded"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "generation-superseded-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "generation_superseded"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-stale-alias-replay-stop",
+      "scenario_id": "stale-alias-replay-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "generation_superseded"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "generation-superseded-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "generation_superseded"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-stale-token-replay-stop",
+      "scenario_id": "stale-token-replay-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "external_kill_switch"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-post-admission-revocation-stop",
+      "scenario_id": "post-admission-revocation-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "external_kill_switch"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-post-admission-external-kill-stop",
+      "scenario_id": "post-admission-external-kill-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": false,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "context_binding_mismatch"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-candidate-context-binding-mismatch-stop",
+      "scenario_id": "candidate-context-binding-mismatch-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": null,
+      "admission_reason_codes": [],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": false,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "context_binding_mismatch"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-proofreader-context-binding-mismatch-stop",
+      "scenario_id": "proofreader-context-binding-mismatch-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "manifest-content-digest-mismatch-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-manifest-digest-mismatch-stop",
+      "scenario_id": "manifest-digest-mismatch-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-adapter-artifact-digest-mismatch-stop",
+      "scenario_id": "adapter-artifact-digest-mismatch-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "supply-chain-identity-mismatch-stop",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-runtime-image-digest-mismatch-stop",
+      "scenario_id": "runtime-image-digest-mismatch-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    },
+    {
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "command_authority": false,
+      "contains_sensitive_values": false,
+      "context_binding_matched": true,
+      "inherited_base_scenario_id": "exact-inert-dispatch-simulated",
+      "invocation_digest": null,
+      "pure_python_call_count": 0,
+      "real_runtime_or_external_effect": false,
+      "reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "released_result_count": 0,
+      "replay_fixture_presented_to_work_cell": false,
+      "result_digest": null,
+      "result_id": "containment-result-model-provider-contract-digest-mismatch-stop",
+      "scenario_id": "model-provider-contract-digest-mismatch-stop",
+      "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
+      "status": "stop"
+    }
+  ],
+  "schema_version": "emr4.aes_c3.hostile_containment_report.v1",
+  "source_operations": 0,
+  "status": "passed",
+  "stop_count": 25
+}
