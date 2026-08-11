@@ -1,0 +1,226 @@
+{
+  "attempt_id": "1461fa9f706d5cad93598e7f",
+  "claim_boundary": "four_fixed_postgresql16_sigkill_same_cluster_restart_outcomes_only_no_literal_wal_ack_boundary_power_loss_driver_pool_operational_runtime_product_provider_command_deployment_production_release_or_protected_ref_claim",
+  "cleanup": {
+    "absence_verified": true,
+    "removed": true,
+    "status": "cleanup_verified"
+  },
+  "environment": {
+    "container": {
+      "actual_pgdata_storage": "owned_container_writable_layer",
+      "anonymous_volumes": 0,
+      "bind_mounts": 0,
+      "declared_volume_shield": "tmpfs",
+      "identity_digest": "sha256:506ce6ca6c66947721b1b441622aad2eb64841c5e4db0563a21a44438cfb9fcf",
+      "named_volumes": 0,
+      "network_mode": "none",
+      "published_ports": 0
+    },
+    "docker_client": "resolved_exact_docker_exe",
+    "durability": {
+      "cluster_identity_digest": "sha256:6d0030fff13dbe815349f8634f3a83b732f6e895d16a3eb49bd66cd082e5b065",
+      "data_checksums": "on",
+      "fsync": "on",
+      "full_page_writes": "on",
+      "postgresql_major": 16,
+      "synchronous_commit": "on"
+    },
+    "elapsed_ms": 14750,
+    "failure": {
+      "code": "unexpected_terminal_success",
+      "stage": "scenario"
+    },
+    "image": {
+      "identity_digest": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "pull_attempted": false,
+      "reference": "postgres:16-bookworm"
+    }
+  },
+  "evidence_mode": "provider_free_disposable_postgresql_authored_synthetic_restart_unknown_commit_recovery",
+  "lifecycle": [
+    "eight_parent_bindings_verified",
+    "container_owned_and_storage_closed",
+    "postgres16_artifact_and_durability_reconciled",
+    "four_disjoint_generations_prepared",
+    "cleanup_verified"
+  ],
+  "operation_counters": {
+    "external_network_operations": 0,
+    "participant_retry": 0,
+    "product_commands": 0,
+    "product_reads": 0,
+    "provider_calls": 0,
+    "sigkill": 0
+  },
+  "parent": {
+    "artifact_sha256": "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7",
+    "contract_sha256": "sha256:73aad6f20ec68cae75617b090b38b82b611af2e56b6cebeaffd41079102cfd74",
+    "manifest_sha256": "sha256:2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271",
+    "source_head": "28cd0ce6639fd831960c57d5289b08f3d36ca3fb",
+    "statement_count": 424
+  },
+  "preconditions": [
+    {
+      "name": "register_observer_r01",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "register_observer_r02",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "register_observer_r03",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "register_observer_r04",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "produce_position_one",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "1"
+        ],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "produce_position_two",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "2"
+        ],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "admit_observer_r01_position_1",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "admit_observer_r02_position_1",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "admit_observer_r03_position_1",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null
+      }
+    },
+    {
+      "name": "admit_observer_r04_position_1",
+      "outcome": {
+        "identity": {
+          "current_user_matches_expected": true,
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user_matches_expected": true
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null
+      }
+    }
+  ],
+  "restarts": [],
+  "result": "rehearsal_failed",
+  "scenario_reconciliation": {
+    "expected": 4,
+    "observed": 0,
+    "passed": 0
+  },
+  "scenarios": [],
+  "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-evidence.v1"
+}

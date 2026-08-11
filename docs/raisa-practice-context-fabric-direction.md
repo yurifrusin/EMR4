@@ -370,17 +370,25 @@ large “memory” feature:
    Six fixed two-session races prove bounded `PgSleep`/`Lock` overlap, exact
    winner/loser outcomes, native replay, outer rollback, zero retry and exact
    cleanup. Crash/restart and unknown-commit recovery remain unproved.
-18. **Agent Execution Surface and Containment Gate** — required after the
+18. **CF-D2 restart and unknown-commit rehearsal** — **stopped without a pass**.
+   Attempt 001 failed during fixture setup; its one plan-permitted mechanical
+   recovery corrected successor-admission ordering. Attempt 002 passed all ten
+   fixed preconditions but stopped before any `SIGKILL` with a minimized
+   scenario failure. Both exact containers were removed and proven absent;
+   provider, product and external-network counters remained zero. No restart or
+   unknown-commit claim is released, and a new recovery descendant requires
+   Yuri's explicit choice.
+19. **Agent Execution Surface and Containment Gate** — required after the
    provider-free durability sequence and before any real-product-read or
    executable occupied Bureau descendant. The selected external capability
    broker, immutable generation manifest, no-ambient-credential, exact-egress,
    cumulative-budget, revocation and kill-switch design is recorded in
    `docs/raisa-agent-execution-surface-containment-gate-plan.md`. It does not
    block the database-only rehearsal and grants no current runtime authority.
-19. **Real product read descendants** — open one source and one role/purpose at
+20. **Real product read descendants** — open one source and one role/purpose at
    a time only after the containment gate and their own privacy, identity,
    audit, retention and database acceptance.
-20. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+21. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    containment, clinical, data and provider gates.
 

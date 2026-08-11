@@ -629,9 +629,16 @@ generation rehearsal. The architecture-only provider-free default-off
   source `fed81847b4155d49cf997905e79cf31808ceb017`: all six frozen
   authored-synthetic two-session races prove exact `PgSleep`/`Lock` overlap,
   winner/loser outcomes, native replay, outer rollback, zero retry and exact
-  cleanup. Attempts 001-003 remain immutable rejected evidence. Crash restart,
-  unknown-commit recovery, key rotation, retention, purge, performance and
-  operational availability remain unproved. Applied migration, application wiring,
+  cleanup. Attempts 001-003 remain immutable rejected evidence. CF-D2's first
+  restart/unknown-commit candidate then stopped twice before any `SIGKILL`.
+  Attempt 001 exposed an early successor-admission fixture ordering defect; the
+  single plan-permitted mechanical recovery corrected that ordering. Attempt 002
+  passed all ten fixed preconditions but stopped before the first restart with
+  minimized `scenario/unexpected_terminal_success`; exact cleanup passed and no
+  runtime success was released. CF-D2 has no authorised attempt remaining, so
+  crash restart, unknown-commit recovery, key rotation, retention, purge,
+  performance and operational availability remain unproved pending Yuri's next
+  programme choice. Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1

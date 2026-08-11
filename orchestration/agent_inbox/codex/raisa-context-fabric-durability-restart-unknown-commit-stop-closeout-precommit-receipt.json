@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_cf_d2_stopped_without_pass_closeout_and_return_the_genuine_recovery_or_closure_fork_to_yuri",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 002 at source 28cd0ce6639fd831960c57d5289b08f3d36ca3fb passed all ten fixed preconditions but stopped before any scenario record, restart or SIGKILL with minimized scenario/unexpected_terminal_success. Whole-document validation and exact cleanup pass; its SHA-256 is a7e88a267d597ba41d245df926a66ddb6bd98cf000afc46f269871b48604d6b6. AER-0278/AER-0279 are contained at revision 246. The 219-check full register, 66 focused baton/CF-D2 checks, Ruff lint/format, JSON/schema and diff gates pass. No Continuity or Compass success revision is minted.",
+    "current_authority_allocation": "GPT Sol owns preservation, fail-closed acceptance, explicit-path commit, task-branch push and non-PHI closeout notification. No worker, verifier, provider, native subagent or product actor is assigned. A further diagnosis, repair, runtime or downstream durability tranche requires Yuri's explicit choice.",
+    "git_refs_and_worktree": "Task HEAD before this closeout commit is exactly 28cd0ce6639fd831960c57d5289b08f3d36ca3fb and contains required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked files including docs/branding remain preserved; only the exact attempt-002, closeout, AER, baton, Yuri and receipt paths are eligible for explicit staging.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The live baton is updated to retain CF-D1 as the last accepted durability result and to record CF-D2 as stopped without a pass after two immutable pre-restart failures.",
+    "protected_evidence_boundaries": "The closeout releases no crash/restart, unknown-commit, retry, key-rotation, retention/purge, operational database/source, watcher, provider, real/product/patient/clinical data, credential, reusable runtime, tool/command, deployment, production, release, Pages or protected-ref authority. Both failed evidence artifacts remain immutable. The Pushover message will contain only non-PHI tranche status and an attention request."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

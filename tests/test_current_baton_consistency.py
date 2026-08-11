@@ -29,29 +29,29 @@ def test_continuity_and_compass_bind_the_live_cf_d1_result() -> None:
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_agree_on_cf_d1_and_cf_d2_handoff() -> None:
+def test_live_baton_rows_preserve_cf_d1_and_stop_cf_d2() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
     assert "Continuity 243 / Compass 225" in current
-    assert "CF-D1 passes" in current
-    assert "fed81847b4155d49cf997905e79cf31808ceb017" in current
-    assert "43f168f3d5d1f71ec0f9071c40fadf14b6107621" in current
-    assert "Timeout/PgSleep" in current
-    assert "12 participants and 11 preconditions" in current
-    assert "zero retry" in current
-    assert "AER-0269 through AER-0272" in current
+    assert "accepted CF-D1 remain the last successful durability result" in current
+    assert "CF-D2 does not pass" in current
+    assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in current
+    assert "all ten fixed preconditions" in current
+    assert "zero `SIGKILL`" in current
+    assert "AER-0278 and AER-0279" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
-    assert "fed81847b4155d49cf997905e79cf31808ceb017" in relation
+    assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
     assert "CF-D2" in next_work
-    assert "restart and unknown-commit" in next_work
-    assert "five-source rehydration" in next_work
-    assert "definitely committed" in next_work
-    assert "genuinely indeterminate" in next_work
-    assert "without guessing success" in next_work
+    assert "no authorised runtime attempt" in next_work
+    assert "Yuri attention is required" in next_work
+    assert (
+        "key-rotation plus retention/purge rehearsal is not dependency-satisfied"
+        in next_work
+    )
     assert "operational database/source" in next_work
     assert "tool/command" in next_work
     assert "attempt-016" not in relation.lower()
@@ -88,7 +88,7 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
         "cf-d2",
-        "restart and unknown-commit",
+        "no authorised runtime attempt",
         "operational database/source",
         "real/product/patient/clinical data",
         "tool/command",
