@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 244,
+  "register_revision": 245,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -11140,6 +11140,50 @@
           "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-preexecution-v2-receipt.json",
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-244.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0278",
+      "attempt_id": "cf-d2-runtime-attempt-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-cf-d2-restart-harness",
+      "model": null,
+      "reasoning_level": "deterministic",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A successor position must be admitted only after the same observer generation has durably progressed through its predecessor; the launcher must mirror the accepted ordered admission protocol before measured restart scenarios.",
+      "observed_error": "Immutable CF-D2 attempt 001 stopped during authored-synthetic fixture setup before any scenario or SIGKILL with unexpected_terminal_success, zero provider/product/network operations and cleanup_verified. The bounded setup-only characterization proved calls 1 through 7 passed, while call 8 attempted position-two admission for the first generation before position one had advanced. PostgreSQL exited zero but returned no allowlisted admission row.",
+      "detection_method": "The immutable attempt-001 minimized evidence established the pre-scenario stop and exact cleanup. A separately authorised setup-only wrapper retained only fixture ordinal, return-code class, safe SQLSTATE and allowlisted result tokens, stopped before the first scenario participant and reproduced the empty position-two admission result at ordinal 8.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/provider-free-durability-restart-unknown-commit-evidence-attempt-001.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-attempt-001-setup-characterization-receipt.json",
+        "docs/raisa-context-fabric-durability-restart-unknown-commit-attempt-001-fixture-ordering-recovery.md",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/provider-free-durability-restart-unknown-commit-evidence.schema.json",
+        "docs/ariadne-agent-error-correction-register-revision-245.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.successor_admission_before_predecessor_progress",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Preserve attempt 001, admit only position one during the ten setup preconditions, admit position two inside R01 and R03 only after durable predecessor progress, record those least-privilege calls as scenario actions, widen only the closed action-count schema to six, and bind any fresh result to immutable attempt 002.",
+        "prevention_control": "Every multi-position rehearsal must derive fixture ordering from the accepted predecessor-progress protocol and include a deterministic test proving no successor admission exists in setup and every successor admission occurs at the exact scenario boundary before its coordinator action.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/provider-free-durability-restart-unknown-commit-evidence.schema.json",
+          "docs/raisa-context-fabric-durability-restart-unknown-commit-attempt-001-fixture-ordering-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-245.md"
         ]
       },
       "status": "corrected"

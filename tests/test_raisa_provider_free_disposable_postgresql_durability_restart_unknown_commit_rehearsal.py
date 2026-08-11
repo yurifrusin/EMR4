@@ -139,15 +139,37 @@ def _passing_evidence() -> dict[str, Any]:
     ]
     scenarios = []
     for index, spec in enumerate(CONTRACT["scenarios"]):
-        actions = [
-            _terminal(lines=["RECEIPT_APPLIED"]),
-            _terminal(lines=["2"]),
-            _terminal(lines=["RECEIPT_REPLAYED"]),
-        ]
-        if index == 1:
-            actions[0] = _terminal(outcome="rollback", sqlstate="P0001")
-        if index in {2, 3}:
-            actions.insert(0, _indeterminate())
+        if index == 0:
+            actions = [
+                _terminal(lines=["RECEIPT_APPLIED"]),
+                _terminal(lines=["2"]),
+                _terminal(lines=["RECEIPT_REPLAYED"]),
+                _terminal(lines=["PRIMARY"], isolation="read committed"),
+                _terminal(lines=["RECEIPT_APPLIED"]),
+            ]
+        elif index == 1:
+            actions = [
+                _terminal(outcome="rollback", sqlstate="P0001"),
+                _terminal(lines=["RECEIPT_APPLIED"]),
+                _terminal(lines=["2"]),
+                _terminal(lines=["RECEIPT_REPLAYED"]),
+            ]
+        elif index == 2:
+            actions = [
+                _indeterminate(),
+                _terminal(lines=["RECEIPT_REPLAYED"]),
+                _terminal(lines=["PRIMARY"], isolation="read committed"),
+                _terminal(outcome="rollback", sqlstate="CF303"),
+                _terminal(lines=["2"]),
+                _terminal(lines=["RECEIPT_APPLIED"]),
+            ]
+        else:
+            actions = [
+                _indeterminate(),
+                _terminal(lines=["RECEIPT_APPLIED"]),
+                _terminal(lines=["2"]),
+                _terminal(lines=["RECEIPT_REPLAYED"]),
+            ]
         scenarios.append(
             {
                 "scenario_id": spec["id"],
@@ -187,11 +209,10 @@ def _passing_evidence() -> dict[str, Any]:
         },
         *(
             {
-                "name": f"admit_observer_r0{number}_position_{position}",
+                "name": f"admit_observer_r0{number}_position_1",
                 "outcome": _terminal(lines=["PRIMARY"], isolation="read committed"),
             }
             for number in range(1, 5)
-            for position in (1, 2)
         ),
     ]
     return {
@@ -268,6 +289,16 @@ def test_contract_and_all_parent_bindings_are_exact() -> None:
             / "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert"
         ).read_bytes()
     )
+
+
+def test_fixture_ordering_admits_successors_only_after_predecessor_progress() -> None:
+    setup_source = inspect.getsource(rehearsal._setup_fixtures)
+    scenario_source = inspect.getsource(rehearsal._run_scenarios)
+
+    assert "_admission_statements(facts, observer, 1)" in setup_source
+    assert "_admission_statements(facts, observer, 2)" not in setup_source
+    assert scenario_source.count("_admission_statements(facts, observer, 2)") == 2
+    assert rehearsal.EVIDENCE_PATH.name.endswith("attempt-002.json")
 
 
 def test_storage_and_command_topology_is_exact_and_volume_free() -> None:

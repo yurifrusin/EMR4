@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_single_bounded_cf_d2_fixture_ordering_and_attempt_002_recovery_by_explicit_paths_only_before_any_fresh_runtime",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 001 is committed and immutable. The setup-only characterization proved successor admission was attempted before predecessor progress. The repair admits only position one in the ten setup preconditions, admits position two inside R01 and R03 after predecessor progress, records those calls as scenario actions, widens only the closed action maximum to six and binds new output to attempt 002. All 62 focused CF-D2 checks, 208 inherited CF-D2/CF-D1/serial checks, 218 full register checks, Ruff lint/format, py_compile, JSON/schema validation and diff checks pass. AER-0278 is contained at register revision 245.",
+    "current_authority_allocation": "GPT Sol owns the bounded mechanical recovery, deterministic acceptance, explicit-path Git commit and later attempt-002 runtime. No worker, verifier, provider, native subagent or product actor is assigned; the earlier Gemini veto remains closed because no classifier, atomic member, anchor, restart identity, durability or claim semantic changed.",
+    "git_refs_and_worktree": "Task HEAD before this explicit recovery commit is 81a8c70050e7919ac5bb87c1ab5d9d0b593bae62 and contains required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All original 494 untracked files including docs/branding remain preserved; only the named recovery, register, harness, test, schema, characterization and receipt artifacts are eligible for explicit staging.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. CF-D2 remains active. Its frozen recovery clause permits one bounded launcher/schema correction and requires failed evidence to remain immutable.",
+    "protected_evidence_boundaries": "The correction changes no inert SQL, frozen contract, recovery classifier, atomic member, recovery-anchor authority, durability setting or claim boundary. It authorises no blind retry, provider, product/patient/clinical data, production database/source/watcher, credential, external network, deployment, Pages, release, protected ref or unrelated-file staging."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

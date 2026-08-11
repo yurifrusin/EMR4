@@ -40,7 +40,7 @@ EVIDENCE_SCHEMA_PATH = (
     BASE / "provider-free-durability-restart-unknown-commit-evidence.schema.json"
 )
 EVIDENCE_PATH = (
-    BASE / "provider-free-durability-restart-unknown-commit-evidence-attempt-001.json"
+    BASE / "provider-free-durability-restart-unknown-commit-evidence-attempt-002.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
     "sha256:73aad6f20ec68cae75617b090b38b82b611af2e56b6cebeaffd41079102cfd74"
@@ -1011,25 +1011,24 @@ def _setup_fixtures(
             }
         )
     for observer in ("observer_r01", "observer_r02", "observer_r03", "observer_r04"):
-        for position in (1, 2):
-            records.append(
-                {
-                    "name": f"admit_{observer}_position_{position}",
-                    "outcome": _execute(
-                        runner,
-                        docker,
-                        container_id,
-                        profile,
-                        contract,
-                        scenario_id="CFD2-R01",
-                        principal="context_observer",
-                        isolation="read committed",
-                        statements=_admission_statements(facts, observer, position),
-                        expected_lines=["PRIMARY"],
-                    ),
-                }
-            )
-    if len(records) != 14:
+        records.append(
+            {
+                "name": f"admit_{observer}_position_1",
+                "outcome": _execute(
+                    runner,
+                    docker,
+                    container_id,
+                    profile,
+                    contract,
+                    scenario_id="CFD2-R01",
+                    principal="context_observer",
+                    isolation="read committed",
+                    statements=_admission_statements(facts, observer, 1),
+                    expected_lines=["PRIMARY"],
+                ),
+            }
+        )
+    if len(records) != 10:
         raise RestartFailure("fixture", "precondition_count")
     return records
 
@@ -1240,6 +1239,20 @@ def _run_scenarios(
     )
     if _snapshot(runner, docker, container_id, profile) != before_replay:
         raise RestartFailure("readback", "confirmed_replay_not_inert")
+    actions.append(
+        _execute(
+            runner,
+            docker,
+            container_id,
+            profile,
+            contract,
+            scenario_id=scenario_id,
+            principal="context_observer",
+            isolation="read committed",
+            statements=_admission_statements(facts, observer, 2),
+            expected_lines=["PRIMARY"],
+        )
+    )
     position_two_before = _recovery_packet(
         runner, docker, container_id, profile, facts, observer, 2
     )
@@ -1439,6 +1452,20 @@ def _run_scenarios(
     )
     if _snapshot(runner, docker, container_id, profile) != before_replay:
         raise RestartFailure("readback", "recovered_replay_not_inert")
+    actions.append(
+        _execute(
+            runner,
+            docker,
+            container_id,
+            profile,
+            contract,
+            scenario_id=scenario_id,
+            principal="context_observer",
+            isolation="read committed",
+            statements=_admission_statements(facts, observer, 2),
+            expected_lines=["PRIMARY"],
+        )
+    )
     position_two_before = _recovery_packet(
         runner, docker, container_id, profile, facts, observer, 2
     )
@@ -2050,11 +2077,7 @@ def validate_evidence(payload: dict[str, Any]) -> None:
         *(f"register_observer_r0{number}" for number in range(1, 5)),
         "produce_position_one",
         "produce_position_two",
-        *(
-            f"admit_observer_r0{number}_position_{position}"
-            for number in range(1, 5)
-            for position in (1, 2)
-        ),
+        *(f"admit_observer_r0{number}_position_1" for number in range(1, 5)),
     ]
     if [row["name"] for row in payload["preconditions"]] != expected_preconditions:
         raise RestartFailure("evidence", "precondition_order")

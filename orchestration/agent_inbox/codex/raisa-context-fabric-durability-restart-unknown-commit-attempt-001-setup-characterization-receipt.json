@@ -1,0 +1,25 @@
+{
+  "schema_version": "emr4.cf-d2.setup-characterization-receipt.v1",
+  "source_head": "81a8c70050e7919ac5bb87c1ab5d9d0b593bae62",
+  "boundary": "setup_only_stop_before_first_scenario_participant_no_sigkill_no_raw_sql_stdout_stderr_server_log_or_identifier_release",
+  "fixture_calls": [
+    {"ordinal": 1, "returncode_class": "zero", "safe_sqlstate": null, "allowlisted_result_lines": []},
+    {"ordinal": 2, "returncode_class": "zero", "safe_sqlstate": null, "allowlisted_result_lines": []},
+    {"ordinal": 3, "returncode_class": "zero", "safe_sqlstate": null, "allowlisted_result_lines": []},
+    {"ordinal": 4, "returncode_class": "zero", "safe_sqlstate": null, "allowlisted_result_lines": []},
+    {"ordinal": 5, "returncode_class": "zero", "safe_sqlstate": null, "allowlisted_result_lines": ["1"]},
+    {"ordinal": 6, "returncode_class": "zero", "safe_sqlstate": null, "allowlisted_result_lines": ["2"]},
+    {"ordinal": 7, "returncode_class": "zero", "safe_sqlstate": null, "allowlisted_result_lines": ["PRIMARY"]},
+    {"ordinal": 8, "returncode_class": "zero", "safe_sqlstate": null, "allowlisted_result_lines": []}
+  ],
+  "diagnosis": "position_two_admission_was_attempted_before_position_one_transition_progress_and_returned_no_admitted_row",
+  "operation_counters": {
+    "sigkill": 0,
+    "participant_retry": 0,
+    "provider_calls": 0,
+    "product_reads": 0,
+    "product_commands": 0,
+    "external_network_operations": 0
+  },
+  "cleanup": {"status": "cleanup_verified", "removed": true, "absence_verified": true}
+}

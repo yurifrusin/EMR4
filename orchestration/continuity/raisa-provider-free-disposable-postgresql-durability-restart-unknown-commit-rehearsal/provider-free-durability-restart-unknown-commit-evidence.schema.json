@@ -116,7 +116,7 @@
     "preconditions": {
       "type": "array",
       "items": { "$ref": "#/$defs/precondition" },
-      "maxItems": 14
+      "maxItems": 10
     },
     "restarts": {
       "type": "array",
@@ -204,7 +204,7 @@
             "required": ["container", "durability"],
             "not": { "required": ["failure"] }
           },
-          "preconditions": { "minItems": 14, "maxItems": 14 },
+          "preconditions": { "minItems": 10, "maxItems": 10 },
           "restarts": { "minItems": 4, "maxItems": 4 },
           "scenarios": { "minItems": 4, "maxItems": 4 },
           "scenario_reconciliation": {
@@ -507,7 +507,7 @@
             ]
           },
           "minItems": 3,
-          "maxItems": 5
+          "maxItems": 6
         },
         "readback_checks": { "$ref": "#/$defs/boolean_checks" },
         "forbidden_effects_absent": { "$ref": "#/$defs/boolean_checks" },
