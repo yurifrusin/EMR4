@@ -1,0 +1,153 @@
+{
+  "schema_version": "emr4.aes_c1.admission_rehearsal_contract.v1",
+  "contract_id": "raisa-agent-execution-surface-containment-gate-aes-c1",
+  "status": "frozen_for_authored_synthetic_unmounted_execution",
+  "evidence_mode": "authored_synthetic_provider_free_unmounted",
+  "inherited_artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": "sha256:403c7ddac2399760395d60a8094ffe42d2519a4a809bc8a59104acd2883eb9ae",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json": "sha256:344d88c59a5d781ebb205de575b66f2e3d64f3878f73c9c0bf4d86eb996b1740",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json": "sha256:f77801d2d752ca2daeed1b3116d78a965441bc1996f6b6da60eccf72fbee9f3e"
+  },
+  "manifest_digest_rule": {
+    "algorithm": "sha256",
+    "canonicalization": "json_utf8_sorted_keys_compact_separators",
+    "sentinel": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "sentinel_replacement_fields": [
+      "manifest_digest",
+      "supply_chain_identity.generation_manifest_digest"
+    ],
+    "equality_required": [
+      "manifest_digest",
+      "supply_chain_identity.generation_manifest_digest",
+      "current_generation_state.current_manifest_digest"
+    ]
+  },
+  "candidate_and_budget_digest_rule": {
+    "algorithm": "sha256",
+    "canonicalization": "json_utf8_sorted_keys_compact_separators",
+    "sentinel": null,
+    "digested_objects": ["candidate", "budget_before", "budget_after"]
+  },
+  "broker_reason_vocabulary": [
+    "manifest_grant_and_current_authority",
+    "manifest_grant_missing",
+    "lease_invalid",
+    "authority_changed",
+    "proofreader_not_admitted",
+    "budget_exhausted",
+    "operation_identity_candidate_controlled",
+    "forbidden_capability_class",
+    "generation_superseded",
+    "supply_chain_identity_mismatch",
+    "external_kill_switch"
+  ],
+  "evidence_reason_vocabulary": [
+    "manifest-grant-and-current-authority",
+    "manifest-grant-missing",
+    "lease-invalid",
+    "authority-changed",
+    "proofreader-not-admitted",
+    "budget-exhausted",
+    "operation-identity-candidate-controlled",
+    "forbidden-capability-class",
+    "generation-superseded",
+    "supply-chain-identity-mismatch",
+    "external-kill-switch"
+  ],
+  "decision_precedence": [
+    "1_reject_malformed_or_non_closed_input",
+    "2_stop_on_aes_c0_artifact_digest_mismatch",
+    "3_stop_on_external_kill_revocation_non_current_generation_manifest_digest_or_supply_chain_mismatch",
+    "4_stop_on_manifest_or_lease_not_temporally_valid",
+    "5_stop_on_current_authority_absent_stale_or_mismatched",
+    "6_deny_forbidden_capability_or_missing_non_exact_manifest_grant",
+    "7_deny_missing_inactive_or_non_exact_lease_intersection",
+    "8_deny_proofreader_rejection_or_candidate_controlled_operation_identity",
+    "9_stop_on_reached_positive_cumulative_ceiling_prospective_overflow_or_zero_disabled_capability",
+    "10_otherwise_allow_broker_observed_operation_without_executing"
+  ],
+  "denial_counter_policy": {
+    "non_terminal_denials_increment": ["denied_operations"],
+    "boundary_probe_denials_also_increment": ["boundary_probes"],
+    "reaching_positive_denial_ceiling_blocks_following_attempt": true,
+    "budgets_do_not_transfer_between_generations": true
+  },
+  "budget_dimensions": {
+    "reasoning": ["model_calls", "model_tokens"],
+    "information": ["input_bytes", "output_bytes", "source_count"],
+    "egress": [
+      "request_count",
+      "request_bytes",
+      "response_bytes",
+      "total_bytes",
+      "distinct_destinations",
+      "redirects"
+    ],
+    "action": [
+      "broker_operations",
+      "inert_tool_operations",
+      "product_mutations",
+      "command_confirmations"
+    ],
+    "denial": ["denied_operations", "boundary_probes", "repeated_failures"],
+    "time": ["elapsed_ms"]
+  },
+  "scenario_registry": [
+    { "scenario_id": "exact-inert-intersection-allow", "decision": "allow", "reason_codes": ["manifest_grant_and_current_authority"], "expected_after_terminal": false },
+    { "scenario_id": "exact-inert-second-within-budget-allow", "decision": "allow", "reason_codes": ["manifest_grant_and_current_authority"], "expected_after_terminal": true },
+    { "scenario_id": "grant-missing-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-class-mismatch-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-operation-mismatch-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-adapter-mismatch-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-destination-mismatch-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-method-mismatch-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-media-type-mismatch-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-audience-mismatch-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-source-class-mismatch-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-input-field-overreach-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-output-field-overreach-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-call-limit-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-request-byte-limit-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "grant-response-byte-limit-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": false },
+    { "scenario_id": "candidate-operation-identity-deny", "decision": "deny", "reason_codes": ["operation_identity_candidate_controlled"], "expected_after_terminal": false },
+    { "scenario_id": "proofreader-not-admitted-deny", "decision": "deny", "reason_codes": ["proofreader_not_admitted"], "expected_after_terminal": false },
+    { "scenario_id": "forbidden-capability-class-deny", "decision": "deny", "reason_codes": ["forbidden_capability_class"], "expected_after_terminal": false },
+    { "scenario_id": "lease-state-inactive-deny", "decision": "deny", "reason_codes": ["lease_invalid"], "expected_after_terminal": false },
+    { "scenario_id": "lease-manifest-mismatch-deny", "decision": "deny", "reason_codes": ["lease_invalid"], "expected_after_terminal": false },
+    { "scenario_id": "lease-generation-mismatch-deny", "decision": "deny", "reason_codes": ["lease_invalid"], "expected_after_terminal": false },
+    { "scenario_id": "lease-capability-mismatch-deny", "decision": "deny", "reason_codes": ["lease_invalid"], "expected_after_terminal": false },
+    { "scenario_id": "lease-class-mismatch-deny", "decision": "deny", "reason_codes": ["lease_invalid"], "expected_after_terminal": false },
+    { "scenario_id": "lease-audience-mismatch-deny", "decision": "deny", "reason_codes": ["lease_invalid"], "expected_after_terminal": false },
+    { "scenario_id": "lease-authority-mismatch-deny", "decision": "deny", "reason_codes": ["lease_invalid"], "expected_after_terminal": false },
+    { "scenario_id": "lease-outlives-manifest-stop", "decision": "stop", "reason_codes": ["lease_invalid"], "expected_after_terminal": true },
+    { "scenario_id": "lease-expired-stop", "decision": "stop", "reason_codes": ["lease_invalid"], "expected_after_terminal": true },
+    { "scenario_id": "manifest-expired-stop", "decision": "stop", "reason_codes": ["authority_changed"], "expected_after_terminal": true },
+    { "scenario_id": "manifest-content-digest-mismatch-stop", "decision": "stop", "reason_codes": ["supply_chain_identity_mismatch"], "expected_after_terminal": true },
+    { "scenario_id": "generation-superseded-stop", "decision": "stop", "reason_codes": ["generation_superseded"], "expected_after_terminal": true },
+    { "scenario_id": "cross-generation-replay-stop", "decision": "stop", "reason_codes": ["generation_superseded"], "expected_after_terminal": true },
+    { "scenario_id": "authority-binding-changed-stop", "decision": "stop", "reason_codes": ["authority_changed"], "expected_after_terminal": true },
+    { "scenario_id": "authority-purpose-changed-stop", "decision": "stop", "reason_codes": ["authority_changed"], "expected_after_terminal": true },
+    { "scenario_id": "authority-bureau-changed-stop", "decision": "stop", "reason_codes": ["authority_changed"], "expected_after_terminal": true },
+    { "scenario_id": "authority-work-cell-changed-stop", "decision": "stop", "reason_codes": ["authority_changed"], "expected_after_terminal": true },
+    { "scenario_id": "authority-stale-stop", "decision": "stop", "reason_codes": ["authority_changed"], "expected_after_terminal": true },
+    { "scenario_id": "supply-chain-identity-mismatch-stop", "decision": "stop", "reason_codes": ["supply_chain_identity_mismatch"], "expected_after_terminal": true },
+    { "scenario_id": "existing-revocation-stop", "decision": "stop", "reason_codes": ["external_kill_switch"], "expected_after_terminal": true },
+    { "scenario_id": "external-kill-switch-stop", "decision": "stop", "reason_codes": ["external_kill_switch"], "expected_after_terminal": true },
+    { "scenario_id": "cumulative-budget-already-exhausted-stop", "decision": "stop", "reason_codes": ["budget_exhausted"], "expected_after_terminal": true },
+    { "scenario_id": "prospective-budget-overflow-stop", "decision": "stop", "reason_codes": ["budget_exhausted"], "expected_after_terminal": true },
+    { "scenario_id": "zero-disabled-capability-stop", "decision": "stop", "reason_codes": ["budget_exhausted"], "expected_after_terminal": true },
+    { "scenario_id": "denial-ceiling-reached-after-deny", "decision": "deny", "reason_codes": ["manifest_grant_missing"], "expected_after_terminal": true },
+    { "scenario_id": "attempt-after-denial-ceiling-stop", "decision": "stop", "reason_codes": ["budget_exhausted"], "expected_after_terminal": true }
+  ],
+  "zero_runtime_boundary": {
+    "runtime_started": false,
+    "provider_calls": 0,
+    "adapters_executed": 0,
+    "network_operations": 0,
+    "database_operations": 0,
+    "source_operations": 0,
+    "tool_operations": 0,
+    "command_operations": 0,
+    "product_or_patient_data": false
+  }
+}

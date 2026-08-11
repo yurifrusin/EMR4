@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/aes-c1/admission-rehearsal-contract.v1.json",
+  "title": "Raisa AES-C1 provider-free admission rehearsal contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "status",
+    "evidence_mode",
+    "inherited_artifact_digests",
+    "manifest_digest_rule",
+    "candidate_and_budget_digest_rule",
+    "broker_reason_vocabulary",
+    "evidence_reason_vocabulary",
+    "decision_precedence",
+    "denial_counter_policy",
+    "budget_dimensions",
+    "scenario_registry",
+    "zero_runtime_boundary"
+  ],
+  "properties": {
+    "schema_version": { "const": "emr4.aes_c1.admission_rehearsal_contract.v1" },
+    "contract_id": {
+      "const": "raisa-agent-execution-surface-containment-gate-aes-c1"
+    },
+    "status": { "const": "frozen_for_authored_synthetic_unmounted_execution" },
+    "evidence_mode": { "const": "authored_synthetic_provider_free_unmounted" },
+    "inherited_artifact_digests": { "type": "object" },
+    "manifest_digest_rule": { "type": "object" },
+    "candidate_and_budget_digest_rule": { "type": "object" },
+    "broker_reason_vocabulary": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "evidence_reason_vocabulary": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "decision_precedence": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "denial_counter_policy": { "type": "object" },
+    "budget_dimensions": { "type": "object" },
+    "scenario_registry": {
+      "type": "array",
+      "minItems": 45,
+      "maxItems": 45,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/ScenarioRegistryEntry" }
+    },
+    "zero_runtime_boundary": { "type": "object" }
+  },
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ProspectiveBudgetDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_calls",
+        "model_tokens",
+        "input_bytes",
+        "output_bytes",
+        "source_count",
+        "request_count",
+        "request_bytes",
+        "response_bytes",
+        "total_bytes",
+        "distinct_destinations",
+        "redirects",
+        "broker_operations",
+        "inert_tool_operations",
+        "product_mutations",
+        "command_confirmations",
+        "denied_operations",
+        "boundary_probes",
+        "repeated_failures",
+        "elapsed_ms"
+      ],
+      "properties": {
+        "model_calls": { "type": "integer", "minimum": 0 },
+        "model_tokens": { "type": "integer", "minimum": 0 },
+        "input_bytes": { "type": "integer", "minimum": 0 },
+        "output_bytes": { "type": "integer", "minimum": 0 },
+        "source_count": { "type": "integer", "minimum": 0 },
+        "request_count": { "type": "integer", "minimum": 0 },
+        "request_bytes": { "type": "integer", "minimum": 0 },
+        "response_bytes": { "type": "integer", "minimum": 0 },
+        "total_bytes": { "type": "integer", "minimum": 0 },
+        "distinct_destinations": { "type": "integer", "minimum": 0 },
+        "redirects": { "type": "integer", "minimum": 0 },
+        "broker_operations": { "type": "integer", "minimum": 0 },
+        "inert_tool_operations": { "type": "integer", "minimum": 0 },
+        "product_mutations": { "type": "integer", "minimum": 0 },
+        "command_confirmations": { "type": "integer", "minimum": 0 },
+        "denied_operations": { "type": "integer", "minimum": 0 },
+        "boundary_probes": { "type": "integer", "minimum": 0 },
+        "repeated_failures": { "type": "integer", "minimum": 0 },
+        "elapsed_ms": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "CurrentGenerationState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "current_generation_id",
+        "current_manifest_id",
+        "current_manifest_digest",
+        "supply_chain_identity"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c1.current_generation_state.v1" },
+        "current_generation_id": { "$ref": "#/$defs/Identifier" },
+        "current_manifest_id": { "$ref": "#/$defs/Identifier" },
+        "current_manifest_digest": { "$ref": "#/$defs/Digest" },
+        "supply_chain_identity": { "type": "object" }
+      }
+    },
+    "CurrentAuthorityState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "authority_binding_digest",
+        "purpose_code",
+        "bureau_id",
+        "work_cell_id",
+        "checked_at",
+        "is_stale"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c1.current_authority_state.v1" },
+        "authority_binding_digest": { "$ref": "#/$defs/Digest" },
+        "purpose_code": { "$ref": "#/$defs/Identifier" },
+        "bureau_id": { "$ref": "#/$defs/Identifier" },
+        "work_cell_id": { "$ref": "#/$defs/Identifier" },
+        "checked_at": { "$ref": "#/$defs/Timestamp" },
+        "is_stale": { "type": "boolean" }
+      }
+    },
+    "ProofreaderResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "admitted", "reasons"],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c1.proofreader_result.v1" },
+        "admitted": { "type": "boolean" },
+        "reasons": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Identifier" }
+        }
+      }
+    },
+    "ClosedCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "candidate_id",
+        "typed_arguments",
+        "proposal_fields",
+        "explanation_codes"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c1.closed_candidate.v1" },
+        "candidate_id": { "$ref": "#/$defs/Identifier" },
+        "typed_arguments": {
+          "type": "object",
+          "minProperties": 1
+        },
+        "proposal_fields": {
+          "type": "object",
+          "minProperties": 1
+        },
+        "explanation_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Identifier" }
+        }
+      }
+    },
+    "BrokerObservedOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "capability_id",
+        "capability_class",
+        "requested_capability_class",
+        "operation_id",
+        "adapter_id",
+        "destination_id",
+        "method",
+        "media_type",
+        "audience",
+        "source_class",
+        "source_fields",
+        "output_fields",
+        "prospective"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c1.broker_observed_operation.v1" },
+        "capability_id": { "$ref": "#/$defs/Identifier" },
+        "capability_class": {
+          "enum": [
+            "provider_inference",
+            "authoritative_read",
+            "inert_tool_adapter"
+          ]
+        },
+        "requested_capability_class": {
+          "enum": [
+            "provider_inference",
+            "authoritative_read",
+            "inert_tool_adapter",
+            "generic_network",
+            "filesystem",
+            "database_or_sql",
+            "shell_or_process",
+            "cloud_or_container_metadata",
+            "repository_or_ci_write",
+            "provider_executed_tool",
+            "runtime_or_deployment_control",
+            "product_command",
+            "credential_enumeration"
+          ]
+        },
+        "operation_id": { "$ref": "#/$defs/Identifier" },
+        "adapter_id": { "$ref": "#/$defs/Identifier" },
+        "destination_id": { "$ref": "#/$defs/Identifier" },
+        "method": { "enum": ["GET", "POST", "PUT", "DELETE"] },
+        "media_type": { "enum": ["application/json", "text/plain"] },
+        "audience": { "$ref": "#/$defs/Identifier" },
+        "source_class": {
+          "enum": ["authored_synthetic", "authorized_product_read"]
+        },
+        "source_fields": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Identifier" }
+        },
+        "output_fields": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Identifier" }
+        },
+        "prospective": { "$ref": "#/$defs/ProspectiveBudgetDelta" }
+      }
+    },
+    "AdmissionAttempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "attempt_id",
+        "scenario_id",
+        "evaluation_clock",
+        "external_kill_switch_active",
+        "current_generation_state",
+        "current_authority_state",
+        "generation_manifest",
+        "capability_lease",
+        "budget_state",
+        "revocation_record",
+        "proofreader_result",
+        "candidate",
+        "broker_observed_operation"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c1.admission_attempt.v1" },
+        "attempt_id": { "$ref": "#/$defs/Identifier" },
+        "scenario_id": { "$ref": "#/$defs/Identifier" },
+        "evaluation_clock": { "$ref": "#/$defs/Timestamp" },
+        "external_kill_switch_active": { "type": "boolean" },
+        "current_generation_state": { "$ref": "#/$defs/CurrentGenerationState" },
+        "current_authority_state": { "$ref": "#/$defs/CurrentAuthorityState" },
+        "generation_manifest": { "type": "object" },
+        "capability_lease": { "type": "object" },
+        "budget_state": { "type": "object" },
+        "revocation_record": {
+          "oneOf": [
+            { "type": "object" },
+            { "type": "null" }
+          ]
+        },
+        "proofreader_result": { "$ref": "#/$defs/ProofreaderResult" },
+        "candidate": { "$ref": "#/$defs/ClosedCandidate" },
+        "broker_observed_operation": { "$ref": "#/$defs/BrokerObservedOperation" }
+      }
+    },
+    "ScenarioRegistryEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_id", "decision", "reason_codes", "expected_after_terminal"],
+      "properties": {
+        "scenario_id": { "$ref": "#/$defs/Identifier" },
+        "decision": { "enum": ["allow", "deny", "stop"] },
+        "reason_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string" }
+        },
+        "expected_after_terminal": { "type": "boolean" }
+      }
+    }
+  }
+}

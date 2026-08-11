@@ -1,0 +1,3364 @@
+{
+  "adapters_executed": 0,
+  "allow_count": 2,
+  "artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json": "sha256:241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": "sha256:507f4a719f2c9166b1c559dfca07530e2fc368d53cd61e37905e868234d2844d",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json": "sha256:e6e427efa32fb27387598042f0d1b1f19c4472b09288f7c8d3ed321a7309945c"
+  },
+  "command_operations": 0,
+  "database_operations": 0,
+  "deny_count": 25,
+  "evidence_mode": "authored_synthetic_provider_free_unmounted",
+  "inherited_artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": "sha256:403c7ddac2399760395d60a8094ffe42d2519a4a809bc8a59104acd2883eb9ae",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json": "sha256:344d88c59a5d781ebb205de575b66f2e3d64f3878f73c9c0bf4d86eb996b1740",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json": "sha256:f77801d2d752ca2daeed1b3116d78a965441bc1996f6b6da60eccf72fbee9f3e"
+  },
+  "mutation_admitted": [],
+  "mutation_count": 22,
+  "mutation_rejected_count": 22,
+  "network_operations": 0,
+  "product_or_patient_data": false,
+  "provider_calls": 0,
+  "reasons": [],
+  "runtime_started": false,
+  "scenario_count": 45,
+  "scenario_results": [
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:a42dfc4274f76fa0095913ff7bc456fec05e202c3634cd6514b963bb4b6c3636",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "allow",
+        "decision_id": "decision-exact-inert-intersection-allow",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_and_current_authority"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:6d1e2ac6a18f8b4b01c667c980fd86d8262e77c19373d0c02788b8d37efb3066",
+      "decision": "allow",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:a42dfc4274f76fa0095913ff7bc456fec05e202c3634cd6514b963bb4b6c3636",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-exact-inert-intersection-allow",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 1,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 500,
+          "inert_tool_operations": 1,
+          "input_bytes": 1024,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 256,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 1024,
+          "request_count": 1,
+          "response_bytes": 256,
+          "source_count": 1,
+          "total_bytes": 1280
+        },
+        "decision": "allow",
+        "evidence_id": "evidence-exact-inert-intersection-allow",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-and-current-authority"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:8336c736b8054b4975277d514c80813ad058a0894e815372f5159ae73172c5b0",
+      "reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "scenario_id": "exact-inert-intersection-allow"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "broker_decision": {
+        "budget_after_digest": "sha256:163208fd44401fccf62329622546ea3b57c3d49bc340e04240d641b2f80ad6b6",
+        "budget_before_digest": "sha256:d890c10acadf8cb83126518dd045b9af3d9bb3d08addb3216224452d578cdb11",
+        "candidate_digest": "sha256:6b7702d7cd6a2936c8e514178386fe3bd62a4d90365ddbdbca9e36447e9289fb",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "allow",
+        "decision_id": "decision-exact-inert-second-within-budget-allow",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_and_current_authority"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:eaad31758a6df395a1ba80f1de590e6e42f3739c3ef629d9803511b41248ddab",
+      "decision": "allow",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:6b7702d7cd6a2936c8e514178386fe3bd62a4d90365ddbdbca9e36447e9289fb",
+          "sha256:d890c10acadf8cb83126518dd045b9af3d9bb3d08addb3216224452d578cdb11",
+          "sha256:163208fd44401fccf62329622546ea3b57c3d49bc340e04240d641b2f80ad6b6"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-exact-inert-second-within-budget-allow",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 2,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 1000,
+          "inert_tool_operations": 2,
+          "input_bytes": 2048,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 512,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 2048,
+          "request_count": 2,
+          "response_bytes": 512,
+          "source_count": 2,
+          "total_bytes": 2560
+        },
+        "decision": "allow",
+        "evidence_id": "evidence-exact-inert-second-within-budget-allow",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-and-current-authority"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:7dab45e814066fa90312a3d642608a82ba799b7fd19c5aba2fbd30e945640846",
+      "reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "scenario_id": "exact-inert-second-within-budget-allow"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:4f58bc395c358dd0e378282090c1c8b1f50f2780b048cf0b412bcd1f4c223c03",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-absent",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-missing-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:0bfd882cd663c17ee5a4e5c43a4717c5b3074508d0c8df0a75458510fd64a2a7",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:4f58bc395c358dd0e378282090c1c8b1f50f2780b048cf0b412bcd1f4c223c03",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-missing-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-missing-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:d196e1a337ff0faed219ee14d9ede01ad7d4345270b9fe32f7e906aaf6604422",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-missing-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:83aeabfb456848f9a7c40241aaa79b664c021b2f0d295bd2e574456e1db2b504",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "authoritative_read",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-class-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:e5f7fa4620ba563859260c845063e422289343f86c49adca1de9d443086eb01b",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:83aeabfb456848f9a7c40241aaa79b664c021b2f0d295bd2e574456e1db2b504",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-class-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-class-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:83c3446dd4e3e2524590fa87ba6e4f734553b945a83c79065fac02b88b3774b1",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-class-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:7a9ac2752c12fa7b24b9e3714fb50405aa5ae63e6836f75ef18ce6d1b2b7e9db",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-operation-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:db55e1516daeb70a21320ba37ead53886b1de5ea26e2752d3a15fc41c89a3dc4",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:7a9ac2752c12fa7b24b9e3714fb50405aa5ae63e6836f75ef18ce6d1b2b7e9db",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-operation-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-operation-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:23a57c1ee9d32d47680070bac1db1b856cd452606eb830dab4169bbccad53da9",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-operation-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:fc7e8ab4d5a45b821d8a874cea772eeea2cb442398c15c0c67a8ba3ffdcd2d37",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-adapter-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:69767498bf43f5291b3af8dfa94efb7386e3e55ffb874dd75064110f32cec333",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:fc7e8ab4d5a45b821d8a874cea772eeea2cb442398c15c0c67a8ba3ffdcd2d37",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-adapter-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-adapter-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:01fd3e034e04ddb2214848dc2fe29bb76e50d3bbe84dfb4000985dae5e31ece1",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-adapter-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:0e91bf7c2bcce8ae1e6526c676455edfeb0138f21b7ddb50b8785dec080f097c",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-destination-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:9a71b79c03eb9ef50c6213da6e66b11bd2fef13db72b2d6aecfbe134f588c3e4",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:0e91bf7c2bcce8ae1e6526c676455edfeb0138f21b7ddb50b8785dec080f097c",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-destination-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-destination-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:d325fdfe7faff0ce00c578e289f01f4ca5ff800394ab4f1bba4fbdbbb28df979",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-destination-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:d524621e64e529f5a678590e7cf5b1198ec59d35be1f4307a93b8169b3fd8dc9",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-method-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:5813c902a5daf2d0756de27699deac10f3836346decadf7b102937ee7efb284c",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:d524621e64e529f5a678590e7cf5b1198ec59d35be1f4307a93b8169b3fd8dc9",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-method-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-method-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:e8b346bc7a86498cb72d50c661b7dbd327c4a040b8ad2c04b53c691317156b6e",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-method-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:0c6a74bead4efdf4543b62a3539a538ddafccfcb9248e5e2e66b379b02ef917d",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-media-type-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:99172869d067632505751c9e8e90d8243bfd739a68781aff961e07b655ecd272",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:0c6a74bead4efdf4543b62a3539a538ddafccfcb9248e5e2e66b379b02ef917d",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-media-type-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-media-type-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:99bc9e94deca84f672c2185397d783ff2dc3d42cfb1dc2860c419e3add8ef48a",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-media-type-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:9747d9af6d32817141e4b625ab2b350c19b9186c3b478aa5facc3a98638685da",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-audience-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:9bc341b22ad1bda07af9cb5994dff0acd73bd3e173643bed0ecef2b9e6e34749",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:9747d9af6d32817141e4b625ab2b350c19b9186c3b478aa5facc3a98638685da",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-audience-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-audience-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:b5353c585718f1c35e49f1040fd48753c4de0c6e33b5777c3fbade3235d29c7a",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-audience-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:94cfd35b49041dc5c30d6bfe3377ea4eea6c07568a92d3f23dd46b0eef931db7",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-source-class-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:7a1b4c42d7306786f2e9fd45aaf20d9579ffe6c28df7ebd4f4cd538f2096ba65",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:94cfd35b49041dc5c30d6bfe3377ea4eea6c07568a92d3f23dd46b0eef931db7",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-source-class-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-source-class-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:15660bee817e70950baf2c65efcdaca605d7b8a464ca132e0a6e9b85c4b08e13",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-source-class-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:ae761ce68fa485acf3cbffa38402aa6c20e43e6040d3dfb6a80043960c30d084",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-input-field-overreach-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:419a86b1913b36aa3498b3dcadc4cb118dacee478e3c33b7e8dbb8f71bee2470",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:ae761ce68fa485acf3cbffa38402aa6c20e43e6040d3dfb6a80043960c30d084",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-input-field-overreach-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-input-field-overreach-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:4f3b7a9e7df03d05c978e40d19a28afb829b24d71fbd528b92d01d07ddc9c6bf",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-input-field-overreach-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:e345e444eaa93a99c20632ce8adb85c1b010145918d0ba17072dd9f100244df6",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-output-field-overreach-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:bdace1768949755b72aa22265b8fc9b5e0de623c238b1760f791f5ef6c58543d",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:e345e444eaa93a99c20632ce8adb85c1b010145918d0ba17072dd9f100244df6",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-output-field-overreach-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-output-field-overreach-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:22210e8c9b6f9e8808917d46149fc62bf907f43219cdd98464ac1029b548364a",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-output-field-overreach-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:d1abf5017021a849c820f5cd924dc574e751020b8d236fc37844ad52bba87c64",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-call-limit-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ae9520b5930e0a2d94161a0a4e7d6531f7ee99959f10d49c205aba4c1a12bd5b",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:c56ad216fe4fa41af9ec4269dbe639a294e8828378f6779e82a31ed7a035506c",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:d1abf5017021a849c820f5cd924dc574e751020b8d236fc37844ad52bba87c64",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-call-limit-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-call-limit-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ae9520b5930e0a2d94161a0a4e7d6531f7ee99959f10d49c205aba4c1a12bd5b",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:1188e19852130598dd7441cd2e568fe45fd4eee9b19335252d11d16400511bee",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-call-limit-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:c3c0a48dc1bb4e5b654389443c360e15d393bf59be223de352113cf958a7ca28",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-request-byte-limit-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:e56a2b1cf378717f6fca7bb96d5d5b19292c757cebc883ae75539755b0f28ae0",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:c3c0a48dc1bb4e5b654389443c360e15d393bf59be223de352113cf958a7ca28",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-request-byte-limit-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-request-byte-limit-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:a2eed2d7f55bff2cab429ba9b05129aa3771ab6f905242a203a5b48c8f7d566e",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-request-byte-limit-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:0118d1c7843ad8462f8b89ccf0ea0dc951f6e4d732ab034c7bcc8691976120ec",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-grant-response-byte-limit-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:668f789ee1dec8c0b8c777e19d2acf7557786eefb444f6ea3870dd6226e0d970",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:0118d1c7843ad8462f8b89ccf0ea0dc951f6e4d732ab034c7bcc8691976120ec",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-grant-response-byte-limit-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-grant-response-byte-limit-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:b87b20edf7c54a1efe11409bcd67bcad8b9bbc5d14c13923bf3f2b5741ea8cca",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "grant-response-byte-limit-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:2ff570a2a9180935f00d77cbfc2c2081c09805cd00a308c2797b0e74d9d4c12c",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:1b13d4b8345c88251174eb330134cc687dbcb978a7b2fbd120b05d5fd0ae7859",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-candidate-operation-identity-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "operation_identity_candidate_controlled"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:e20cd978d7d39a832cb951d54321dc0ca42dc18ad9a2ecd1de50f611419c364e",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:1b13d4b8345c88251174eb330134cc687dbcb978a7b2fbd120b05d5fd0ae7859",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:2ff570a2a9180935f00d77cbfc2c2081c09805cd00a308c2797b0e74d9d4c12c"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-candidate-operation-identity-deny",
+        "cumulative_counts": {
+          "boundary_probes": 1,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-candidate-operation-identity-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "operation-identity-candidate-controlled"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:228a62ad7073dba7d8d40618f20526a8e933cefd5bcb8e531fc63f5bce4b6373",
+      "reason_codes": [
+        "operation_identity_candidate_controlled"
+      ],
+      "scenario_id": "candidate-operation-identity-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:8e175371eff8991371c6637fd230f72316f2f1ee0f25031be9c47041452a2c54",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-proofreader-not-admitted-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": false,
+        "reason_codes": [
+          "proofreader_not_admitted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:70faf66b045e2c3973ecceb72732c15f917e2f37f2686228f91c60404fcd7f13",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:8e175371eff8991371c6637fd230f72316f2f1ee0f25031be9c47041452a2c54",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-proofreader-not-admitted-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-proofreader-not-admitted-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "proofreader-not-admitted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:50dbc92c1c0508043baf9d0565c41fca1c360f60f964c400670e9465b7562f3a",
+      "reason_codes": [
+        "proofreader_not_admitted"
+      ],
+      "scenario_id": "proofreader-not-admitted-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:2ff570a2a9180935f00d77cbfc2c2081c09805cd00a308c2797b0e74d9d4c12c",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:a831c958012bd7a7c4a611013d887d301cbf78ff12e485f2703917d5149e7607",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-forbidden-capability-class-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "forbidden_capability_class"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:a0bbc3b3dc0e165a3721e0d4f1b729e2f30f7ce0c6c4ce049a84a5aa65849764",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:a831c958012bd7a7c4a611013d887d301cbf78ff12e485f2703917d5149e7607",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:2ff570a2a9180935f00d77cbfc2c2081c09805cd00a308c2797b0e74d9d4c12c"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-forbidden-capability-class-deny",
+        "cumulative_counts": {
+          "boundary_probes": 1,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-forbidden-capability-class-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "forbidden-capability-class"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:a33a237d2419086dbc1987b3f2ace75fa52c08ca9adeb307e2df1908182163fa",
+      "reason_codes": [
+        "forbidden_capability_class"
+      ],
+      "scenario_id": "forbidden-capability-class-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:4c733ff460ba70479c12d9a9ab6a0ed33ebdd1e97d1949f41f4d4e49213c8614",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-lease-state-inactive-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": false,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:0cda139c6b9ca28bdfe7931af762a178a72626ebd77b3d43dc9c18227b62c3a5",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:4c733ff460ba70479c12d9a9ab6a0ed33ebdd1e97d1949f41f4d4e49213c8614",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-state-inactive-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-lease-state-inactive-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:14fce9d90e97ff91dd14944a88687997724e68a7c4378e543467a7d9068768ed",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-state-inactive-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:7c9b58e232115668d84110694f885786123dc743a6b1dbd30847f13ac4e4ca11",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-lease-manifest-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": false,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:c09a9586a66e558bc3282c1bd875025b38f6c187fc85183e86dd288daa5767f5",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:7c9b58e232115668d84110694f885786123dc743a6b1dbd30847f13ac4e4ca11",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-manifest-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-lease-manifest-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:7af3bde553d5098dab2c9fb8196577f34d42fdc1418d75dfc451fb466de268e4",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-manifest-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:07465ab964e1efc2d9a89cf67fd30d876e62cd016b0700881bbb5ae6abcfb4a6",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-lease-generation-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": false,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:b6f87e3efb96d278fe1a7a005c7a496d8414561fb62c1eec38bd3a501693fbc4",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:07465ab964e1efc2d9a89cf67fd30d876e62cd016b0700881bbb5ae6abcfb4a6",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-generation-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-lease-generation-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:df0946c94c53c53e351d61f5c0dca452629e02e95ea1bd64c46249be3f6faf23",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-generation-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:c2e2c62179a5f2f566329f8a040a990ddb72a9407d959aacd71f42018b0aee65",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-lease-capability-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": false,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:8cf59dc62a6c18566d7b2755b37efaaa43d85b590077e812ba989bf38fcf1d62",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:c2e2c62179a5f2f566329f8a040a990ddb72a9407d959aacd71f42018b0aee65",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-capability-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-lease-capability-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:ce73c6236e0d9b5dbed9ee07029bb4cc10d4ebb21ced3507e4655f035e27f5f2",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-capability-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:f9f0575d53b1476860063618b39831dd386571ee6dc821906b00560b27658fef",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-lease-class-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": false,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:7ffc43a1c421ade5311e2c3646cf219c07b1e4741c12ea440a18acd6b1884b32",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:f9f0575d53b1476860063618b39831dd386571ee6dc821906b00560b27658fef",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-class-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-lease-class-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:729460567403cb7f533563366e84c4642587609e74ebffa1aae3afef08983b09",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-class-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:29be2222b7893a1ea417f92d35e9677234336248ae6ff6a48079d4d0a949da73",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-lease-audience-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": false,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:d24da9fa470f70443cba5a99bfd4d281c9981c238c26c189a1b4be1acd25d4b9",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:29be2222b7893a1ea417f92d35e9677234336248ae6ff6a48079d4d0a949da73",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-audience-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-lease-audience-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:cc4ed973507b893f2ac0e612e29377b0df98c2a4439719db2a53369def3762d6",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-audience-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": true,
+      "after_terminal_state": "active",
+      "broker_decision": {
+        "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:152919a3d4d8ea2dc65f52631c90161d30f230ffbbb688e20af8386ed55bb475",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-lease-authority-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": false,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:66968a72c2693004c8964e5bcac4da08e62a9ab97e10864e899e421666b3b983",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:152919a3d4d8ea2dc65f52631c90161d30f230ffbbb688e20af8386ed55bb475",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-authority-mismatch-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 1,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-lease-authority-mismatch-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:cfd36bafb8bf25c492e9f4e2c9bc289c77167fcb4a28504ca5c0e95e85c6a0eb",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-authority-mismatch-deny"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "broker_decision": {
+        "budget_after_digest": "sha256:c6d476e16c15f8496bbccf24976f263f1cabea88d77e10325ce1422842c49720",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:fd9439569bbc9c0243358884ba2e8675fe8275dcc499c495ff639f12e546cf01",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-lease-outlives-manifest-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:d200aeb8e5614cb1cb195c9498e8e49e65ccabee884f3eea61e20ee4ab0b1526",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:fd9439569bbc9c0243358884ba2e8675fe8275dcc499c495ff639f12e546cf01",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:c6d476e16c15f8496bbccf24976f263f1cabea88d77e10325ce1422842c49720"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-outlives-manifest-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-lease-outlives-manifest-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:87750efd1a90cddf3eb703e31290740c39bc99663a86b64c0bfe451218e6652a",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-outlives-manifest-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "broker_decision": {
+        "budget_after_digest": "sha256:c6d476e16c15f8496bbccf24976f263f1cabea88d77e10325ce1422842c49720",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:17f4cfefd1a5a2f501ed391d832e11f2a23520f651b7e660870ac5c359f4f1cc",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-lease-expired-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "lease_invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:c0182b884966dc8e7f51bde9fe025889e922ecafb6e31e77f8ea1ba9d988c8de",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:17f4cfefd1a5a2f501ed391d832e11f2a23520f651b7e660870ac5c359f4f1cc",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:c6d476e16c15f8496bbccf24976f263f1cabea88d77e10325ce1422842c49720"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-lease-expired-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-lease-expired-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "lease-invalid"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:cc896e1450b5e7c6b331c56199fb37a59bf43af3a3faf4a3465753f44665d6ae",
+      "reason_codes": [
+        "lease_invalid"
+      ],
+      "scenario_id": "lease-expired-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "superseded",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:f58ac239ea3d0c3bca7c25e4af2cb65ccf75137bd11f5602a986660f1ecb3e1c",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-manifest-expired-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:9ea748e7cda4c6e38e0007e73c3fa89f03c7d0d3cbcd2d0dafb25aa60f64880d",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "authority_changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:15cb2fe5e9d7ac2d5527763cb67a917e13fd08d41e4852e871fa900bfd57c1fd",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:f58ac239ea3d0c3bca7c25e4af2cb65ccf75137bd11f5602a986660f1ecb3e1c",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-manifest-expired-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-manifest-expired-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:9ea748e7cda4c6e38e0007e73c3fa89f03c7d0d3cbcd2d0dafb25aa60f64880d",
+        "reason_codes": [
+          "authority-changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "superseded",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:06fc40af8f0651e47d0b643534e3df262798b6d231ff46e1050890b1cbae2136",
+      "reason_codes": [
+        "authority_changed"
+      ],
+      "scenario_id": "manifest-expired-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "quarantined",
+      "broker_decision": {
+        "budget_after_digest": "sha256:db2966269688e49b92e0757ba7cb1525346d24ee03ef217c60d0c855c0f8019a",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:97acb6e0c4d19a147fecdf927e23f11d2a8f15e80ba2bc6919fac963c65ea8f5",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-manifest-content-digest-mismatch-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "supply_chain_identity_mismatch"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:a8007a6a507544eb15522addb5d007f5a384a82e629bbf0aa18cb7e667a1abc5",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:97acb6e0c4d19a147fecdf927e23f11d2a8f15e80ba2bc6919fac963c65ea8f5",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:db2966269688e49b92e0757ba7cb1525346d24ee03ef217c60d0c855c0f8019a"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-manifest-content-digest-mismatch-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-manifest-content-digest-mismatch-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "reason_codes": [
+          "supply-chain-identity-mismatch"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "quarantined",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:ca8c08ca6210afd1b580a175d20285e23bb8c4c28fbafdfc56a2bf7594e2bff9",
+      "reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "scenario_id": "manifest-content-digest-mismatch-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "superseded",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:d721821251ec4af586cdbcb8bd6b7f366caffda377bbbcb243a86124792e813f",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-generation-superseded-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "generation_superseded"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:5eb66e0a4ed678033d54e56ac76c1a532c4e34a9e9c18d0b0f1207c48baa4a7e",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:d721821251ec4af586cdbcb8bd6b7f366caffda377bbbcb243a86124792e813f",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-generation-superseded-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-generation-superseded-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "generation-superseded"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "superseded",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:39743189326592f2c84f10a90142d77cf7f4d00a322f8a224c72138d01fbf82d",
+      "reason_codes": [
+        "generation_superseded"
+      ],
+      "scenario_id": "generation-superseded-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "superseded",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:0ec61e88c5966aa904ce96cbf40ea4e7065f207a11c677335f859d6165a8df7a",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-cross-generation-replay-stop",
+        "generation_id": "generation-synthetic-002",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:f33c37188d1f22d47add2a730c689c005b0a896b7fc2cdf3e579d76a683b00d5",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "generation_superseded"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:caf0cd991306a1aa401bec137888c879a77beb2c2bb32897faee4f9262ae3802",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:0ec61e88c5966aa904ce96cbf40ea4e7065f207a11c677335f859d6165a8df7a",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-cross-generation-replay-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-cross-generation-replay-stop",
+        "generation_id": "generation-synthetic-002",
+        "manifest_digest": "sha256:f33c37188d1f22d47add2a730c689c005b0a896b7fc2cdf3e579d76a683b00d5",
+        "reason_codes": [
+          "generation-superseded"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "superseded",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:f5fe70e2cb6865e7b5ffc5d9fc5ca8a00b0893b7085b19e960439b77efc931ee",
+      "reason_codes": [
+        "generation_superseded"
+      ],
+      "scenario_id": "cross-generation-replay-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "superseded",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:ca19c3f5a29fd71be842f0607f7e86e5a2511354286acb537b01e40ee738d7a4",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-authority-binding-changed-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "authority_changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:15930c69e4ca60fac9266ab0f1ec9db64957b7e04836a5cc7ad191ec7592ad69",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:ca19c3f5a29fd71be842f0607f7e86e5a2511354286acb537b01e40ee738d7a4",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-authority-binding-changed-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-authority-binding-changed-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "authority-changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "superseded",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:fc6a7529f4fcc1ff0576e73845d2470453a28a07090ddcf8a8549b8825582a96",
+      "reason_codes": [
+        "authority_changed"
+      ],
+      "scenario_id": "authority-binding-changed-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "superseded",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:4e32b94ef13af371ca2dde9af2a1fc1171cd44d80424a358a34ce63a1fa76069",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-authority-purpose-changed-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "authority_changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:edcca56254dcd6a9bd95977e5b2c10a537c0279e5991f6505759b3bd7562b059",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:4e32b94ef13af371ca2dde9af2a1fc1171cd44d80424a358a34ce63a1fa76069",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-authority-purpose-changed-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-authority-purpose-changed-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "authority-changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "superseded",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:aca84c48fcbeda3b48defe381eaccce5152c9f67a7bba55c5db51fc3fcd03bcc",
+      "reason_codes": [
+        "authority_changed"
+      ],
+      "scenario_id": "authority-purpose-changed-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "superseded",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:75dbd1b95ee3bd504370f180ee1eb56e09a08c0f0fbb54faa70a59766ee8e65d",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-authority-bureau-changed-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "authority_changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:3f37e626b96263e4e496c38f3454f21417b47c5d42a756b0c162ed3f0a7f93c4",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:75dbd1b95ee3bd504370f180ee1eb56e09a08c0f0fbb54faa70a59766ee8e65d",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-authority-bureau-changed-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-authority-bureau-changed-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "authority-changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "superseded",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:419cbd3cc59380c813a3ba3cfbb4fd2ed296c4abd11e52c44deeaf55954cea59",
+      "reason_codes": [
+        "authority_changed"
+      ],
+      "scenario_id": "authority-bureau-changed-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "superseded",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:4412405d7001a9a6998d7c52a8d0592aa0e9cccaa443a522d2f13bca4cd1cb6e",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-authority-work-cell-changed-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "authority_changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:6f64a9d798c4a12f670ecb619f679c33398862ea63f6fdc37530fcc52fd8a2d4",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:4412405d7001a9a6998d7c52a8d0592aa0e9cccaa443a522d2f13bca4cd1cb6e",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-authority-work-cell-changed-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-authority-work-cell-changed-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "authority-changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "superseded",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:2477633d2e5349a4e74c6d6d5773230c6e96d8d86658e5b332574b85aa92aaef",
+      "reason_codes": [
+        "authority_changed"
+      ],
+      "scenario_id": "authority-work-cell-changed-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "superseded",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:f18d85475f4ba94fe60c40e8685e37c728006be5f0b6a91b5c14e5530dc10590",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-authority-stale-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "authority_changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:e863155dac84555ba3ee533e23cf401712b60cbbd801e1d06376f0b4e78dda87",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:f18d85475f4ba94fe60c40e8685e37c728006be5f0b6a91b5c14e5530dc10590",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9b1955715021e4ff6755b1969bf0a996d074dd6888efa493192662c0df1e96c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-authority-stale-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-authority-stale-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "authority-changed"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "superseded",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:2395f6abfc6a1dfa2de3201fae18cab6ff9f61532f475149422c40d3cac304e9",
+      "reason_codes": [
+        "authority_changed"
+      ],
+      "scenario_id": "authority-stale-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "quarantined",
+      "broker_decision": {
+        "budget_after_digest": "sha256:db2966269688e49b92e0757ba7cb1525346d24ee03ef217c60d0c855c0f8019a",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:cc3ea02572e62d6925c31f16bcfa3a168fd25ba1fedae8b1e2057f755b5c848e",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-supply-chain-identity-mismatch-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "supply_chain_identity_mismatch"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:e596bb149922d8f3cd16871489db791d47197996312b34bce097bdaff237b2f3",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:cc3ea02572e62d6925c31f16bcfa3a168fd25ba1fedae8b1e2057f755b5c848e",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:db2966269688e49b92e0757ba7cb1525346d24ee03ef217c60d0c855c0f8019a"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-supply-chain-identity-mismatch-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-supply-chain-identity-mismatch-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "supply-chain-identity-mismatch"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "quarantined",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:94c8df2af2b68c6484ca1c209b5fa25122e9b500a160aae206d97dcbe55520f8",
+      "reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "scenario_id": "supply-chain-identity-mismatch-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "revoked",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9f5045324be490bf7789e8afa481a6064c6a4242313cf6a7dfb7186d56ad77a1",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:a878309358c638e9b3ada16fa928afca2e20630f3789ac3ada2306e9f4313c04",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-existing-revocation-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "external_kill_switch"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:b4044fcbc74b38c5e76ab2eab79591a688a5c4bb5121d5fca361d33e75a3416e",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:a878309358c638e9b3ada16fa928afca2e20630f3789ac3ada2306e9f4313c04",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9f5045324be490bf7789e8afa481a6064c6a4242313cf6a7dfb7186d56ad77a1"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-existing-revocation-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-existing-revocation-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "external-kill-switch"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:3e60ea5e548f2c82ead63a91748e57abfd4e075f4f4c40c874ca405cbb78f466",
+      "reason_codes": [
+        "external_kill_switch"
+      ],
+      "scenario_id": "existing-revocation-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "revoked",
+      "broker_decision": {
+        "budget_after_digest": "sha256:9f5045324be490bf7789e8afa481a6064c6a4242313cf6a7dfb7186d56ad77a1",
+        "budget_before_digest": "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+        "candidate_digest": "sha256:3694cedd6694f761d4be298c9aff1895415f3957c3df21ca1ff334b09a7422bc",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-external-kill-switch-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "external_kill_switch"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:1c6236c83afe3c18a65172353c70483e5a1de7518708f9048e167bb5ccc0c795",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:3694cedd6694f761d4be298c9aff1895415f3957c3df21ca1ff334b09a7422bc",
+          "sha256:0de89ddaa6eba9e429a1108e87b76f1ef5119f50d21cea73879629cc4ab96076",
+          "sha256:9f5045324be490bf7789e8afa481a6064c6a4242313cf6a7dfb7186d56ad77a1"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-external-kill-switch-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-external-kill-switch-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "external-kill-switch"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:fb871c864d628b38131f0f54f1c9a4df28221b6535fe4ec0dfbbe2e8cd293f4c",
+      "reason_codes": [
+        "external_kill_switch"
+      ],
+      "scenario_id": "external-kill-switch-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "broker_decision": {
+        "budget_after_digest": "sha256:3748bf2d47836e954f15927b51c53ae9870def15583d5142a06da9c309a208c5",
+        "budget_before_digest": "sha256:4749d50a8bf796ffc94ee6a2fd44419ccc2597d97acee157911568a80c79440e",
+        "candidate_digest": "sha256:fef5a6766e4438ec2b9f3278a6410b43afc3c15cd0e6e0960a94601a0cc5f67b",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-cumulative-budget-already-exhausted-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "budget_exhausted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:c801f3d487e39c6e38ea83504be757b1a2dc24f8443e8bf9914f10980fb5c86d",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:fef5a6766e4438ec2b9f3278a6410b43afc3c15cd0e6e0960a94601a0cc5f67b",
+          "sha256:4749d50a8bf796ffc94ee6a2fd44419ccc2597d97acee157911568a80c79440e",
+          "sha256:3748bf2d47836e954f15927b51c53ae9870def15583d5142a06da9c309a208c5"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-cumulative-budget-already-exhausted-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 2,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-cumulative-budget-already-exhausted-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "budget-exhausted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:e84dbbbc95ca2bc3594aeb5a9e3c8a13b0a2c82062611bffba5c3d69bd09dc6e",
+      "reason_codes": [
+        "budget_exhausted"
+      ],
+      "scenario_id": "cumulative-budget-already-exhausted-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "broker_decision": {
+        "budget_after_digest": "sha256:06961e555360f8dbe043aa9fe7109001b36dd60e0e6ded40c856e04b155fa8d0",
+        "budget_before_digest": "sha256:cce5945cc2ea26f2f1f45c13cbbc5633efbc7fc562755d13eb6ee3030daa3441",
+        "candidate_digest": "sha256:1c1526cac6d6a93e72077ecbff7e78cfc7a5b384d63b4b698c06edec62b7782a",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-prospective-budget-overflow-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "budget_exhausted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:2702d8b8527e16c075bb043abed40655aba0b855aa014b94be50301221d25b47",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:1c1526cac6d6a93e72077ecbff7e78cfc7a5b384d63b4b698c06edec62b7782a",
+          "sha256:cce5945cc2ea26f2f1f45c13cbbc5633efbc7fc562755d13eb6ee3030daa3441",
+          "sha256:06961e555360f8dbe043aa9fe7109001b36dd60e0e6ded40c856e04b155fa8d0"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-prospective-budget-overflow-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 1,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-prospective-budget-overflow-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "budget-exhausted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:c7be8e76ce7778f56842c4c3c8a2930675b3959813861be593cd916dfe45e3fa",
+      "reason_codes": [
+        "budget_exhausted"
+      ],
+      "scenario_id": "prospective-budget-overflow-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "broker_decision": {
+        "budget_after_digest": "sha256:25241e4348a1c85d1ce1a2e0c9ffe55fde0e691d2bb0bce2e4ccf8e98e831c2b",
+        "budget_before_digest": "sha256:1fd67d0c13b5c8714a72093c0f6b14265807a720331a1316885638f4ea50652f",
+        "candidate_digest": "sha256:049953a1408688c7bc653731b9405e5f16e45784edbfb3e8cd2e6987664ad2cf",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-zero-disabled-capability-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:d1ce850d1b5976f58d1899012746883230101baf4ccd4719600966fb9ecb45b5",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "budget_exhausted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:2d075c7f9ed312ab77c85de5e229df1534f0db2ca7f7dbb665c86c2a87a9f24e",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:049953a1408688c7bc653731b9405e5f16e45784edbfb3e8cd2e6987664ad2cf",
+          "sha256:1fd67d0c13b5c8714a72093c0f6b14265807a720331a1316885638f4ea50652f",
+          "sha256:25241e4348a1c85d1ce1a2e0c9ffe55fde0e691d2bb0bce2e4ccf8e98e831c2b"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-zero-disabled-capability-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 0,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-zero-disabled-capability-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:d1ce850d1b5976f58d1899012746883230101baf4ccd4719600966fb9ecb45b5",
+        "reason_codes": [
+          "budget-exhausted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:6acafc60acbd5c5674de46cb5726e962f8049244aed9962542e60152276c3b61",
+      "reason_codes": [
+        "budget_exhausted"
+      ],
+      "scenario_id": "zero-disabled-capability-stop"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "broker_decision": {
+        "budget_after_digest": "sha256:ad269fbdbb18c9096a5fb2d8efff9ee8fe21747290272f6ad62dd3f21d9bc27c",
+        "budget_before_digest": "sha256:8a6e68817c13bde6a24269f6633a7448aa6eee5450f9815da9be8b94cfaea17d",
+        "candidate_digest": "sha256:60b6c23cfecacf0670637467c1f5336a0664dd9b7879ea4dcd531ef90bf46f0b",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-absent",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "deny",
+        "decision_id": "decision-denial-ceiling-reached-after-deny",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "manifest_grant_missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:602170392c054ab9a1871745b6dfe365c4e544d97f1ed8127eee102cb200780c",
+      "decision": "deny",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:60b6c23cfecacf0670637467c1f5336a0664dd9b7879ea4dcd531ef90bf46f0b",
+          "sha256:8a6e68817c13bde6a24269f6633a7448aa6eee5450f9815da9be8b94cfaea17d",
+          "sha256:ad269fbdbb18c9096a5fb2d8efff9ee8fe21747290272f6ad62dd3f21d9bc27c"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-denial-ceiling-reached-after-deny",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 3,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "deny",
+        "evidence_id": "evidence-denial-ceiling-reached-after-deny",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "manifest-grant-missing"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:d5ba3d19a642f62af63f463e24262391338e5ed95b8269cb1f3d820d3621475f",
+      "reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "scenario_id": "denial-ceiling-reached-after-deny"
+    },
+    {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "broker_decision": {
+        "budget_after_digest": "sha256:ad269fbdbb18c9096a5fb2d8efff9ee8fe21747290272f6ad62dd3f21d9bc27c",
+        "budget_before_digest": "sha256:b2335a1fb7936c67f58112695714d4a2b2264f3502996f3bd0cd14265be2dad4",
+        "candidate_digest": "sha256:608045bc5189becfb0f5ee2f49a66d066574f6c07307743b7d43916c033efefc",
+        "candidate_supplied_operation_identity": false,
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "decision": "stop",
+        "decision_id": "decision-attempt-after-denial-ceiling-stop",
+        "generation_id": "generation-synthetic-001",
+        "lease_id": "lease-synthetic-001",
+        "manifest_and_lease_match": true,
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "operation_identity_broker_resolved": true,
+        "proofreader_admitted": true,
+        "reason_codes": [
+          "budget_exhausted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "schema_version": "emr4.aes_c0.broker_decision.v1"
+      },
+      "broker_decision_digest": "sha256:504eb88f0a1e2b6d33b4213328b89d0baa96d0ebbe756937a1951b2ae77039d0",
+      "decision": "stop",
+      "evidence": {
+        "artifact_digests": [
+          "sha256:608045bc5189becfb0f5ee2f49a66d066574f6c07307743b7d43916c033efefc",
+          "sha256:b2335a1fb7936c67f58112695714d4a2b2264f3502996f3bd0cd14265be2dad4",
+          "sha256:ad269fbdbb18c9096a5fb2d8efff9ee8fe21747290272f6ad62dd3f21d9bc27c"
+        ],
+        "contains_sensitive_values": false,
+        "correlation_id": "correlation-attempt-after-denial-ceiling-stop",
+        "cumulative_counts": {
+          "boundary_probes": 0,
+          "broker_operations": 0,
+          "command_confirmations": 0,
+          "denied_operations": 3,
+          "distinct_destinations": 0,
+          "elapsed_ms": 0,
+          "inert_tool_operations": 0,
+          "input_bytes": 0,
+          "model_calls": 0,
+          "model_tokens": 0,
+          "output_bytes": 0,
+          "product_mutations": 0,
+          "redirects": 0,
+          "repeated_failures": 0,
+          "request_bytes": 0,
+          "request_count": 0,
+          "response_bytes": 0,
+          "source_count": 0,
+          "total_bytes": 0
+        },
+        "decision": "stop",
+        "evidence_id": "evidence-attempt-after-denial-ceiling-stop",
+        "generation_id": "generation-synthetic-001",
+        "manifest_digest": "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11",
+        "reason_codes": [
+          "budget-exhausted"
+        ],
+        "recorded_at": "2026-08-11T00:00:01Z",
+        "revocation_state": "not_revoked",
+        "schema_version": "emr4.aes_c0.audit_evidence.v1"
+      },
+      "evidence_envelope_digest": "sha256:763ae7319cda54e83699d39d6bb2229b396ce4630d9fec77f669706231d1ee1d",
+      "reason_codes": [
+        "budget_exhausted"
+      ],
+      "scenario_id": "attempt-after-denial-ceiling-stop"
+    }
+  ],
+  "schema_version": "emr4.aes_c1.admission_report.v1",
+  "source_operations": 0,
+  "status": "passed",
+  "stop_count": 18,
+  "tool_operations": 0
+}
