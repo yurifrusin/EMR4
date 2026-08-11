@@ -29,7 +29,7 @@ def test_continuity_and_compass_bind_the_live_aes_c3_result() -> None:
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_agree_on_aes_c3_and_aes_c4_attention_fork() -> None:
+def test_live_baton_rows_agree_on_aes_c3_and_active_aes_c4_envelope() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
@@ -39,10 +39,14 @@ def test_live_baton_rows_agree_on_aes_c3_and_aes_c4_attention_fork() -> None:
     assert "AES-C3 passes" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
-    assert "AES-C4 bounded occupied authored-synthetic provider proof" in next_work
-    assert "genuine Yuri-attention fork" in next_work
-    assert "provider/model" in next_work
-    assert "call and cost ceilings" in next_work
+    assert "AES-C4's narrowest exact occupied envelope is now frozen" in next_work
+    assert "gemini-2.5-flash" in next_work
+    assert "bernie-emr4-dev" in next_work
+    assert "australia-southeast1" in next_work
+    assert "one call/no retry" in next_work
+    assert "USD 0.25" in next_work
+    assert "initial sanitized read-only ADC/cloud" in next_work
+    assert "fresh exact-reviewed-HEAD repetition remains required" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -67,7 +71,7 @@ def test_master_plan_and_handover_contain_no_stale_next_work_instruction() -> No
         in compact_plan
     )
     assert (
-        "AES-C4 is the next named descendant but remains closed pending a new exact occupied-provider envelope"
+        "AES-C4 is the next named descendant; its exact one-call/no-retry, USD 0.25, authored-synthetic Sydney Vertex Bernie envelope is frozen and provider-free implementation is active"
         in compact_plan
     )
 
@@ -76,14 +80,14 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "no real runtime broker",
+        "no patient/clinical/product data",
         "product read",
         "database/source",
-        "no aes-c4 plan, provider call or data transmission",
-        "filesystem",
-        "tool",
+        "one occupied call",
+        "filesystem capability",
+        "provider tool",
         "command",
-        "genuine yuri-attention fork",
+        "reusable runtime",
         "docs/branding/",
     ):
         assert phrase in next_work

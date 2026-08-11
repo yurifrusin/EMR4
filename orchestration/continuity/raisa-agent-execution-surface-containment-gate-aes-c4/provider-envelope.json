@@ -1,0 +1,160 @@
+{
+  "schema_version": "emr4.aes_c4.provider_envelope.v1",
+  "envelope_id": "raisa-aes-c4-sydney-vertex-gemini-25-authored-synthetic-001",
+  "status": "frozen_pending_exact_head_preexecution_gates",
+  "authority_source": {
+    "decided_on": "2026-08-11",
+    "decision": "use_the_usual_sydney_vertex_bernie_project_keyless_impersonated_adc_lane_and_treat_this_vertex_model_as_the_default_until_user_changes_it"
+  },
+  "standing_model_selection": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "effective_until_user_changes": true,
+    "routine_model_selection_pause_required": false,
+    "provider_call_authority": false,
+    "per_descendant_data_call_cost_and_effect_envelope_required": true,
+    "current_lifecycle_and_regional_support_recheck_required": true
+  },
+  "provider_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "launch_stage": "GA",
+    "published_retirement_on": "2026-10-16",
+    "project": "bernie-emr4-dev",
+    "quota_project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "oauth_scope": "https://www.googleapis.com/auth/cloud-platform",
+    "required_permission": "aiplatform.endpoints.predict",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "request_path": "/v1/projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash:generateContent",
+    "allowed_identity_hosts": [
+      "oauth2.googleapis.com",
+      "iamcredentials.googleapis.com"
+    ],
+    "allowed_data_plane_hosts": [
+      "australia-southeast1-aiplatform.googleapis.com"
+    ]
+  },
+  "data_boundary": {
+    "classification": "newly_authored_synthetic_only",
+    "product_derived": false,
+    "patient_or_health_information": false,
+    "practice_or_operational_information": false,
+    "historical_diary_or_protected_evidence": false,
+    "licensed_or_external_corpus_content": false,
+    "raw_prompt_retained": false,
+    "raw_response_retained": false,
+    "provider_text_retained": false,
+    "model_reasoning_retained": false
+  },
+  "request_contract": {
+    "candidate_count": 1,
+    "temperature": 0,
+    "thinking_budget_tokens": 1024,
+    "maximum_output_tokens": 2048,
+    "maximum_request_bytes": 8192,
+    "maximum_provider_response_bytes": 16384,
+    "maximum_provider_error_bytes": 65536,
+    "provider_http_timeout_seconds": 45,
+    "provider_tools": false,
+    "function_calling": false,
+    "grounding": false,
+    "retrieval": false,
+    "code_execution": false,
+    "explicit_context_cache": false,
+    "automatic_fallback": false
+  },
+  "call_and_cost_boundary": {
+    "maximum_provider_calls": 1,
+    "maximum_retries": 0,
+    "call_after_any_provider_attempt": false,
+    "call_after_admission": false,
+    "application_cost_ceiling_usd": 0.25,
+    "reserved_cost_per_call_usd": 0.25,
+    "published_input_price_per_million_tokens_usd": 0.15,
+    "published_nonthinking_output_price_per_million_tokens_usd": 0.6,
+    "published_thinking_output_price_per_million_tokens_usd": 3.5
+  },
+  "broker_and_isolation_boundary": {
+    "capability_class": "provider_inference",
+    "external_broker_owns_adc_and_short_lived_token": true,
+    "work_cell_receives_adc_or_token": false,
+    "work_cell_selects_provider_model_project_identity_region_destination_method_or_path": false,
+    "broker_registry_resolves_exact_operation_identity": true,
+    "generic_network": false,
+    "redirects": 0,
+    "distinct_data_plane_destinations": 1,
+    "provider_executed_tools": false,
+    "product_database_filesystem_command_or_runtime_adapter": false,
+    "generation_manifest_immutable": true,
+    "current_authority_recheck_before_dispatch": true,
+    "external_kill_switch": true,
+    "generation_wide_revocation": true,
+    "generation_elapsed_time_ceiling_ms": 120000
+  },
+  "preexecution_checks": {
+    "gcloud_cli_and_adc_stores_verified_separately": true,
+    "impersonated_adc_refresh_required": true,
+    "quota_project_exact_required": true,
+    "billing_enabled_required": true,
+    "vertex_ai_api_enabled_required": true,
+    "service_account_enabled_and_exact_required": true,
+    "prediction_only_role_binding_and_permission_exact_required": true,
+    "vertex_data_access_audit_required": true,
+    "request_response_logging_disabled_or_absent_required": true,
+    "provider_in_memory_cache_disabled_required": true,
+    "zero_user_managed_service_account_keys_required": true,
+    "regional_catalogue_support_required": true,
+    "no_cloud_iam_or_configuration_mutation": true,
+    "provider_prompt_transmitted_during_preflight": false
+  },
+  "proofreader_and_release_boundary": {
+    "pre_dispatch_candidate_proofreader_required": true,
+    "post_provider_deterministic_proofreader_required": true,
+    "input_frame_digest_binding_required": true,
+    "generation_manifest_digest_binding_required": true,
+    "closed_schema_additional_properties_false": true,
+    "release_fields": [
+      "decision_code",
+      "synthetic_nonce",
+      "summary_code",
+      "command_authority"
+    ],
+    "command_authority": false,
+    "invalid_or_unproved_output_state": "intelligence_unavailable",
+    "repair_call_permitted": false
+  },
+  "evidence_and_cleanup_boundary": {
+    "evidence_label": "occupied_authored_synthetic_brokered_provider_containment_proof",
+    "external_hash_chain_audit_required": true,
+    "allowed_provider_evidence": [
+      "provider",
+      "model_id",
+      "project",
+      "location",
+      "endpoint_hostname",
+      "http_status",
+      "finish_reason",
+      "latency_ms",
+      "safe_token_counts",
+      "request_digest",
+      "response_digest",
+      "proofreader_decision",
+      "cumulative_budget_counts"
+    ],
+    "credential_or_token_retained": false,
+    "lease_alias_or_token_reusable_after_terminal_state": false,
+    "open_provider_ledger_after_terminal_state": false,
+    "broker_process_or_listener_after_terminal_state": false,
+    "task_runtime_or_temporary_root_after_terminal_state": false
+  },
+  "claim_boundary": {
+    "proves_only": "one_exact_broker_admitted_authored_synthetic_vertex_request_and_deterministic_release_or_fail_closed_stop_with_complete_cleanup",
+    "australian_physical_or_sovereign_processing_proved": false,
+    "product_data_or_runtime_safety_proved": false,
+    "reusable_provider_runtime_authorised": false,
+    "product_read_database_source_tool_command_write_deployment_production_release_or_protected_ref_authorised": false
+  }
+}

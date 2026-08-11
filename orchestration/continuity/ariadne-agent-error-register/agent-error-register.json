@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 224,
+  "register_revision": 225,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10339,6 +10339,45 @@
         "evidence_paths": [
           "orchestration/agent_inbox/claude/raisa-aes-c3-blue-implementation-worker-packet.md",
           "docs/ariadne-agent-error-correction-register-revision-223.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0259",
+      "attempt_id": "raisa-aes-c4-envelope-reconstruction-preplanning-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c4-envelope-reconstruction",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne receipt runtime state must use an exact continuation event from the configured vocabulary before its receipt can supply rehydration or continuation evidence.",
+      "observed_error": "The first AES-C4 preplanning runtime state used inferred event label pre_plan. The orchestrator preflight returned revision_required because the exact configured preplanning event is pre_sprint_planning. The invalid attempt supplied no admitted receipt evidence and preceded no dispatch, provider call or external mutation.",
+      "detection_method": "The orchestrator receipt status and reason rejected the unrecognized continuation event. Sol checked the current configured vocabulary, repeated the complete receipt attempt with pre_sprint_planning and admitted only the resulting passed five-source receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c4-preplanning-invalid-continuation-event-analysis.md",
+        "orchestration/agent_inbox/codex/raisa-aes-c4-envelope-reconstruction-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-225.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit no evidence from the invalid event. Preserve the observation and repeat the complete receipt attempt with exact configured event pre_sprint_planning; the corrected five-source receipt passed before AES-C4 planning proceeded.",
+        "prevention_control": "Copy receipt continuation events from the configured schema or a current passing repository example before running preflight; never abbreviate or infer the machine event from prose.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c4-preplanning-invalid-continuation-event-analysis.md",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-envelope-reconstruction-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-225.md"
         ]
       },
       "status": "corrected"

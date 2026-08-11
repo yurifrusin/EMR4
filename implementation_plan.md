@@ -181,7 +181,8 @@ compile/lint/static-test enforcement, current API Spine lifecycle supersession
 and live baton consistency without changing product behavior. AES-C0
 architecture, AES-C1 provider-free admission, AES-C2 inert broker simulation
 and AES-C3 provider-free hostile containment now pass. AES-C4 is the next named
-descendant but remains closed pending a new exact occupied-provider envelope.
+descendant; its exact one-call/no-retry, USD 0.25, authored-synthetic Sydney
+Vertex Bernie envelope is frozen and provider-free implementation is active.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -207,9 +208,10 @@ synthetic custody, dispatch-time control-state recheck and exact budget commit
 around one pure inert function with zero external effect. AES-C3 now proves
 structural rejection, opaque digest-only handling, carrier-independent egress
 accounting, cumulative terminal latching and stale-authority binding for pure
-authored-synthetic objects. AES-C4 remains closed until a newly frozen exact
-provider/data/cost envelope exists; none of these results can be mistaken for
-current provider, product-data, filesystem, tool or command authority.
+authored-synthetic objects. AES-C4 now has a frozen exact provider/data/cost
+envelope for one conditionally authorised call after provider-free and read-only
+preflight gates; none of these results can be mistaken for product-data,
+filesystem, provider-tool or command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -621,8 +623,10 @@ generation rehearsal. The architecture-only provider-free default-off
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1
   provider-free admission rehearsal, AES-C2 inert broker simulation and AES-C3
-  provider-free hostile containment rehearsal have passed. AES-C4 remains
-  closed pending a newly frozen exact occupied-provider envelope.
+  provider-free hostile containment rehearsal have passed. AES-C4's exact
+  authored-synthetic Sydney Vertex envelope is frozen; provider-free
+  implementation, exact-head review and read-only preflight precede its sole
+  occupied call.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is
@@ -677,9 +681,10 @@ stops; 51 hostile mutations reject, and exactly 28 pure calls produce 21
 digest-only releases with zero external effect. It proves tested structural
 rejection, opaque digest-only handling, carrier-independent egress accounting,
 cumulative terminal latching and stale-authority binding without opening a real
-runtime or adapter. AES-C4 is an occupied provider proof and remains closed
-until a newly frozen exact provider/model, region, identity, data, call, cost,
-isolation, proofreader, cleanup and no-fallback envelope is available.
+runtime or adapter. AES-C4 is an occupied provider proof. Its exact Google
+Vertex AI `gemini-2.5-flash`, Bernie project/keyless-ADC, Sydney region,
+newly-authored-synthetic, one-call/no-retry, USD 0.25, no-tool/no-fallback and
+complete-cleanup envelope is now frozen; occupied evidence remains pending.
 
 The controlling plan is
 [`docs/raisa-agent-execution-surface-containment-gate-plan.md`](docs/raisa-agent-execution-surface-containment-gate-plan.md)

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/aes-c4-provider-envelope.schema.json",
+  "title": "EMR4 AES-C4 provider envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "envelope_id",
+    "status",
+    "authority_source",
+    "standing_model_selection",
+    "provider_binding",
+    "data_boundary",
+    "request_contract",
+    "call_and_cost_boundary",
+    "broker_and_isolation_boundary",
+    "preexecution_checks",
+    "proofreader_and_release_boundary",
+    "evidence_and_cleanup_boundary",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.aes_c4.provider_envelope.v1"},
+    "envelope_id": {"const": "raisa-aes-c4-sydney-vertex-gemini-25-authored-synthetic-001"},
+    "status": {"enum": ["frozen_pending_human_adc_and_preexecution_gates", "frozen_pending_exact_head_preexecution_gates", "preexecution_pass", "consumed"]},
+    "authority_source": {"$ref": "#/$defs/closedObject"},
+    "standing_model_selection": {"$ref": "#/$defs/closedObject"},
+    "provider_binding": {"$ref": "#/$defs/closedObject"},
+    "data_boundary": {"$ref": "#/$defs/closedObject"},
+    "request_contract": {"$ref": "#/$defs/closedObject"},
+    "call_and_cost_boundary": {"$ref": "#/$defs/closedObject"},
+    "broker_and_isolation_boundary": {"$ref": "#/$defs/closedObject"},
+    "preexecution_checks": {"$ref": "#/$defs/closedObject"},
+    "proofreader_and_release_boundary": {"$ref": "#/$defs/closedObject"},
+    "evidence_and_cleanup_boundary": {"$ref": "#/$defs/closedObject"},
+    "claim_boundary": {"$ref": "#/$defs/closedObject"}
+  },
+  "$defs": {
+    "closedObject": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"pattern": "^[a-z][a-z0-9_]*$"},
+      "additionalProperties": {
+        "anyOf": [
+          {"type": "string"},
+          {"type": "boolean"},
+          {"type": "integer"},
+          {"type": "number"},
+          {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        ]
+      }
+    }
+  }
+}
