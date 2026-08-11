@@ -1,0 +1,518 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/raisa-provider-free-durability-restart-unknown-commit-evidence.v1.json",
+  "title": "CF-D2 provider-free restart and unknown-commit evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_mode",
+    "attempt_id",
+    "parent",
+    "environment",
+    "lifecycle",
+    "preconditions",
+    "restarts",
+    "scenarios",
+    "scenario_reconciliation",
+    "operation_counters",
+    "cleanup",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-evidence.v1"
+    },
+    "result": {
+      "enum": [
+        "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_pass",
+        "rehearsal_failed",
+        "environment_unavailable",
+        "cleanup_ownership_unverified"
+      ]
+    },
+    "evidence_mode": {
+      "const": "provider_free_disposable_postgresql_authored_synthetic_restart_unknown_commit_recovery"
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "parent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_head": { "$ref": "#/$defs/head" },
+        "contract_sha256": { "$ref": "#/$defs/digest" },
+        "artifact_sha256": { "$ref": "#/$defs/digest" },
+        "manifest_sha256": { "$ref": "#/$defs/digest" },
+        "statement_count": { "const": 424 }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["docker_client", "image", "elapsed_ms"],
+      "properties": {
+        "docker_client": {
+          "enum": ["unresolved", "resolved_exact_docker_exe"]
+        },
+        "image": {
+          "oneOf": [
+            { "const": "uninspected" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["reference", "identity_digest", "pull_attempted"],
+              "properties": {
+                "reference": { "const": "postgres:16-bookworm" },
+                "identity_digest": { "$ref": "#/$defs/digest" },
+                "pull_attempted": { "const": false }
+              }
+            }
+          ]
+        },
+        "container": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "identity_digest",
+            "network_mode",
+            "published_ports",
+            "bind_mounts",
+            "named_volumes",
+            "anonymous_volumes",
+            "declared_volume_shield",
+            "actual_pgdata_storage"
+          ],
+          "properties": {
+            "identity_digest": { "$ref": "#/$defs/digest" },
+            "network_mode": { "const": "none" },
+            "published_ports": { "const": 0 },
+            "bind_mounts": { "const": 0 },
+            "named_volumes": { "const": 0 },
+            "anonymous_volumes": { "const": 0 },
+            "declared_volume_shield": { "const": "tmpfs" },
+            "actual_pgdata_storage": {
+              "const": "owned_container_writable_layer"
+            }
+          }
+        },
+        "durability": { "$ref": "#/$defs/durability" },
+        "failure": { "$ref": "#/$defs/failure" },
+        "elapsed_ms": { "type": "integer", "minimum": 0, "maximum": 600000 }
+      }
+    },
+    "lifecycle": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,95}$"
+      },
+      "uniqueItems": true,
+      "maxItems": 12
+    },
+    "preconditions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/precondition" },
+      "maxItems": 14
+    },
+    "restarts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/restart" },
+      "maxItems": 4
+    },
+    "scenarios": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/scenario" },
+      "maxItems": 4
+    },
+    "scenario_reconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expected", "observed", "passed"],
+      "properties": {
+        "expected": { "const": 4 },
+        "observed": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "passed": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
+    },
+    "operation_counters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sigkill",
+        "participant_retry",
+        "provider_calls",
+        "product_reads",
+        "product_commands",
+        "external_network_operations"
+      ],
+      "properties": {
+        "sigkill": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "participant_retry": { "const": 0 },
+        "provider_calls": { "const": 0 },
+        "product_reads": { "const": 0 },
+        "product_commands": { "const": 0 },
+        "external_network_operations": { "const": 0 }
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "removed", "absence_verified"],
+      "properties": {
+        "status": {
+          "enum": [
+            "not_needed",
+            "cleanup_verified",
+            "cleanup_ownership_unverified",
+            "cleanup_failed"
+          ]
+        },
+        "removed": { "type": "boolean" },
+        "absence_verified": { "type": "boolean" }
+      }
+    },
+    "claim_boundary": {
+      "const": "four_fixed_postgresql16_sigkill_same_cluster_restart_outcomes_only_no_literal_wal_ack_boundary_power_loss_driver_pool_operational_runtime_product_provider_command_deployment_production_release_or_protected_ref_claim"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_pass"
+          }
+        },
+        "required": ["result"]
+      },
+      "then": {
+        "properties": {
+          "parent": {
+            "required": [
+              "source_head",
+              "contract_sha256",
+              "artifact_sha256",
+              "manifest_sha256",
+              "statement_count"
+            ]
+          },
+          "environment": {
+            "required": ["container", "durability"],
+            "not": { "required": ["failure"] }
+          },
+          "preconditions": { "minItems": 14, "maxItems": 14 },
+          "restarts": { "minItems": 4, "maxItems": 4 },
+          "scenarios": { "minItems": 4, "maxItems": 4 },
+          "scenario_reconciliation": {
+            "properties": {
+              "observed": { "const": 4 },
+              "passed": { "const": 4 }
+            }
+          },
+          "operation_counters": {
+            "properties": { "sigkill": { "const": 4 } }
+          },
+          "cleanup": {
+            "properties": {
+              "status": { "const": "cleanup_verified" },
+              "removed": { "const": true },
+              "absence_verified": { "const": true }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code"],
+      "properties": {
+        "stage": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,62}$" },
+        "code": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,62}$" }
+      }
+    },
+    "member": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "digest"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admission",
+        "receipt",
+        "checkpoint",
+        "lifecycle",
+        "audit",
+        "watermark",
+        "frame",
+        "obligation",
+        "anchor"
+      ],
+      "properties": {
+        "admission": { "$ref": "#/$defs/member" },
+        "receipt": { "$ref": "#/$defs/member" },
+        "checkpoint": { "$ref": "#/$defs/member" },
+        "lifecycle": { "$ref": "#/$defs/member" },
+        "audit": { "$ref": "#/$defs/member" },
+        "watermark": { "$ref": "#/$defs/member" },
+        "frame": { "$ref": "#/$defs/member" },
+        "obligation": { "$ref": "#/$defs/member" },
+        "anchor": { "$ref": "#/$defs/member" }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "minProperties": 22,
+      "maxProperties": 22,
+      "propertyNames": {
+        "enum": [
+          "public.appointments",
+          "public.appointment_command_idempotency",
+          "public.appointment_audit_log",
+          "public.diary_committed_events",
+          "emr4_context_fabric.context_observation_stream_head",
+          "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+          "emr4_context_fabric.diary_context_observation_outbox_v1",
+          "emr4_context_fabric.context_proofread_observation_admission",
+          "emr4_context_fabric.context_generation_registry_barrier",
+          "emr4_context_fabric.context_observer_generation",
+          "emr4_context_fabric.context_durability_checkpoint",
+          "emr4_context_fabric.context_recovery_anchor",
+          "emr4_context_fabric.context_classified_observation_receipt",
+          "emr4_context_fabric.context_frame_generation",
+          "emr4_context_fabric.context_invalidation_watermark",
+          "emr4_context_fabric.context_reassembly_obligation",
+          "emr4_context_fabric.context_durability_lifecycle",
+          "emr4_context_fabric.context_durability_audit",
+          "emr4_context_fabric.context_observation_key_interval",
+          "emr4_context_fabric.context_recovery_pin",
+          "emr4_context_fabric.context_service_practice_binding",
+          "emr4_context_fabric.context_retention_policy"
+        ]
+      },
+      "additionalProperties": { "$ref": "#/$defs/member" }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "session_user_matches_expected",
+        "current_user_matches_expected",
+        "isolation",
+        "read_only"
+      ],
+      "properties": {
+        "session_user_matches_expected": { "const": true },
+        "current_user_matches_expected": { "const": true },
+        "isolation": { "enum": ["read committed", "serializable"] },
+        "read_only": { "const": false }
+      }
+    },
+    "terminal_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "sqlstate", "result_lines", "identity"],
+      "properties": {
+        "outcome": { "enum": ["commit", "rollback"] },
+        "sqlstate": {
+          "oneOf": [
+            { "type": "null" },
+            { "enum": ["P0001", "CF303"] }
+          ]
+        },
+        "result_lines": {
+          "type": "array",
+          "items": {
+            "enum": ["PRIMARY", "RECEIPT_APPLIED", "RECEIPT_REPLAYED", "1", "2"]
+          },
+          "maxItems": 2
+        },
+        "identity": { "$ref": "#/$defs/identity" }
+      }
+    },
+    "indeterminate_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "client_observation",
+        "wait_event_type",
+        "wait_event",
+        "cutpoint_observed_ms",
+        "normal_process_exit",
+        "partial_output_parsed_or_retained"
+      ],
+      "properties": {
+        "outcome": { "const": "indeterminate" },
+        "client_observation": {
+          "const": "CONNECTION_LOST_WITHOUT_ALLOWLISTED_TERMINAL_RESULT"
+        },
+        "wait_event_type": { "const": "Timeout" },
+        "wait_event": { "const": "PgSleep" },
+        "cutpoint_observed_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3000
+        },
+        "normal_process_exit": { "const": false },
+        "partial_output_parsed_or_retained": { "const": false }
+      }
+    },
+    "precondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "outcome"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,95}$" },
+        "outcome": { "$ref": "#/$defs/terminal_action" }
+      }
+    },
+    "durability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "postgresql_major",
+        "fsync",
+        "synchronous_commit",
+        "full_page_writes",
+        "data_checksums",
+        "cluster_identity_digest"
+      ],
+      "properties": {
+        "postgresql_major": { "const": 16 },
+        "fsync": { "const": "on" },
+        "synchronous_commit": { "const": "on" },
+        "full_page_writes": { "const": "on" },
+        "data_checksums": { "const": "on" },
+        "cluster_identity_digest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "restart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "crash_method",
+        "stopped_state",
+        "started_state",
+        "same_container",
+        "same_cluster",
+        "startup_ms",
+        "durability"
+      ],
+      "properties": {
+        "crash_method": {
+          "const": "docker_kill_sigkill_exact_captured_container"
+        },
+        "stopped_state": { "const": "stopped_after_sigkill" },
+        "started_state": { "const": "running" },
+        "same_container": { "const": true },
+        "same_cluster": { "const": true },
+        "startup_ms": { "type": "integer", "minimum": 0, "maximum": 15000 },
+        "durability": { "$ref": "#/$defs/durability" }
+      }
+    },
+    "boolean_checks": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "const": true },
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]{0,127}$" }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "category",
+        "client_observation",
+        "cutpoint",
+        "recovery_classification",
+        "pre_transition_packet",
+        "post_restart_packet",
+        "pre_crash_snapshot",
+        "post_restart_snapshot",
+        "restart_exact_match",
+        "restart",
+        "actions",
+        "readback_checks",
+        "forbidden_effects_absent",
+        "passed"
+      ],
+      "properties": {
+        "scenario_id": {
+          "enum": ["CFD2-R01", "CFD2-R02", "CFD2-R03", "CFD2-R04"]
+        },
+        "category": {
+          "enum": [
+            "CONFIRMED_COMMIT_RESTART",
+            "CONFIRMED_ROLLBACK_RESTART",
+            "UNKNOWN_COMMIT_COMMITTED_RECOVERY",
+            "UNKNOWN_COMMIT_ROLLED_BACK_RECOVERY"
+          ]
+        },
+        "client_observation": {
+          "enum": [
+            "COMMIT_ACKNOWLEDGED",
+            "ROLLBACK_SQLSTATE_P0001_ACKNOWLEDGED",
+            "CONNECTION_LOST_WITHOUT_ALLOWLISTED_TERMINAL_RESULT"
+          ]
+        },
+        "cutpoint": {
+          "enum": [
+            "after_confirmed_anchor_commit",
+            "after_confirmed_rollback",
+            "observed_post_commit_pg_sleep_then_sigkill",
+            "observed_pre_commit_pg_sleep_then_sigkill"
+          ]
+        },
+        "recovery_classification": {
+          "enum": [
+            "COMMITTED_CONFIRMED",
+            "ROLLED_BACK_CONFIRMED",
+            "COMMITTED_RECOVERED",
+            "ROLLED_BACK_RECOVERED"
+          ]
+        },
+        "pre_transition_packet": { "$ref": "#/$defs/packet" },
+        "post_restart_packet": { "$ref": "#/$defs/packet" },
+        "pre_crash_snapshot": { "$ref": "#/$defs/snapshot" },
+        "post_restart_snapshot": { "$ref": "#/$defs/snapshot" },
+        "restart_exact_match": { "const": true },
+        "restart": { "$ref": "#/$defs/restart" },
+        "actions": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/$defs/terminal_action" },
+              { "$ref": "#/$defs/indeterminate_action" }
+            ]
+          },
+          "minItems": 3,
+          "maxItems": 5
+        },
+        "readback_checks": { "$ref": "#/$defs/boolean_checks" },
+        "forbidden_effects_absent": { "$ref": "#/$defs/boolean_checks" },
+        "passed": { "const": true }
+      }
+    }
+  }
+}

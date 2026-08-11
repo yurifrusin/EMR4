@@ -131,19 +131,19 @@ EXPECTED_COVERAGE = {
 }
 EXPECTED_PARENT_BINDINGS = {
     "accepted_runtime_source": (
-        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-frame-mask-domain-nullability-pass.json",
-        "9bf59ed860e2c4e119b13e5dd38911dbb9591ad0",
-        "4583c8b0bca881964ba9a337cfd1b5c9ae535ad7cc78c06766f844ffe95d998a",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-admission-replay-winner-exact-reproduction.json",
+        "36f076775e676620f99650043b05bd852e3a84be",
+        "9ad82882150f8795789c332db8bed6e4b50d150986a6066ce832f12e48246d24",
     ),
     "inert_sql": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
-        "a8cef7045fcada54a33a1060e83fd4d9929ac56b",
-        "fc1c00ab7209a6689f4de29a14a134719a0110dfd3b556172781384332af41fa",
+        "5a9a7ae907308aa0a8a4256e9043b833f8c416ae",
+        "dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7",
     ),
     "render_manifest": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
-        "a8cef7045fcada54a33a1060e83fd4d9929ac56b",
-        "fec0bb1399ebf5af0d06ca933069614ca4a8c84a9593d5eee0e983b0afffb9fd",
+        "5a9a7ae907308aa0a8a4256e9043b833f8c416ae",
+        "2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271",
     ),
     "structural_contract": (
         "orchestration/continuity/raisa-provider-free-unmounted-durability-migration-transaction-architecture/migration-transaction-architecture-contract.json",

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_deterministically_passing_cf_d2_provider_free_restart_unknown_commit_harness_before_the_second_exact_head_read_only_veto_without_docker_contact",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The implementation now freezes one checksum-enabled PostgreSQL 16 cluster in the exact container writable layer, four exact SIGKILL/same-ID restarts, nine-member coordinate-scoped recovery packets, a pure two-input no-schedule classifier, pending-anchor CF303 fencing, exact replay and controlled rollback recovery, scoped cleanup and a closed whole-document evidence schema. The complete 207-check CF-D2/CF-D1/serial inherited packet and the 215-check agent-error register packet pass; Ruff lint/format, py_compile, evidence-schema validation and git diff --check pass. The broad gate exposed one stale inherited behavior-parent equality tuple set; only its three duplicated accepted values changed, its focused regression passes, and repository defect AER-0275 is corrected at register revision 242.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled harness, deterministic verification, later single disposable runtime, recovery, acceptance and explicit-path task-branch publication. DeepSeek and native subagents are unassigned. Gemini 3.6 Flash/high through one fresh Antigravity project receives only the next exact-HEAD read-only veto packet and no implementation, self-acceptance, runtime, integration, protected-ref, data, deployment or release authority.",
+    "git_refs_and_worktree": "Immediately before this receipt, task HEAD remained exactly 704a2fe464d1ebe1d8dcb06fc1f473c9ad88f62a on codex/ariadne-bernie-davida-parallel-seam and origin task remained e690eefaf91115343b8fcbbecc7c3f5fe0b25193. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Four intended tracked files are modified and six new CF-D2/AER files exist alongside all original 494 untracked files, including five docs/branding files; the index is empty before explicit-path staging.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. CF-D2 remains the active dependency-satisfied provider-free restart and unknown-commit durability tranche under standing uninterrupted-development authority; Docker execution remains closed until the deterministic implementation packet and second fresh exact-HEAD veto pass.",
+    "protected_evidence_boundaries": "No Docker command, database process, product/source read, provider call, external network, protected evidence, patient/clinical/product data, credential/IAM surface, tool or product command, deployment, production, release, Pages or protected-ref operation occurred. The implementation retains no partial indeterminate stdout/stderr, PID, query, server log or WAL. docs/branding and all original unrelated untracked files remain excluded and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

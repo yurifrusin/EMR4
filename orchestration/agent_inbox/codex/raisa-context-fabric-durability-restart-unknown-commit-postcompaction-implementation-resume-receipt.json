@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_cf_d2_provider_free_restart_unknown_commit_harness_implementation_after_the_accepted_exact_head_planning_veto_without_docker_contact_before_the_second_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen CF-D2 plan, design, threat delta and machine contract bind four ordered scenarios: confirmed commit, confirmed rollback, lost terminal result resolved only from a complete committed packet, and lost terminal result resolved only from exact prior state and zero residue. Fresh Gemini planning review passed exact corrected source e5d58d0483eccf09d1018a19bada984dd5e9944f; AER-0273 and AER-0274 are corrected at register revision 241; task HEAD 704a2fe464d1ebe1d8dcb06fc1f473c9ad88f62a admits implementation but not Docker contact before the second veto.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled implementation, deterministic gate, shared disposable PostgreSQL lifecycle, recovery, acceptance and explicit-path task-branch publication. DeepSeek and native subagents remain unassigned. A fresh Gemini 3.6 Flash/high Antigravity project may perform only the second exact-HEAD read-only veto after the deterministic implementation gate passes and receives no implementation, runtime, self-acceptance, integration, protected-ref, data, deployment or release authority.",
+    "git_refs_and_worktree": "Immediately before this receipt, task HEAD was exactly 704a2fe464d1ebe1d8dcb06fc1f473c9ad88f62a on codex/ariadne-bernie-davida-parallel-seam and origin task remained the accepted CF-D1 closeout e690eefaf91115343b8fcbbecc7c3f5fe0b25193. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current were all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index were clean; all original 494 untracked files, including five docs/branding files, were present and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after conversation compaction. The live baton accepts CF-D1 at Continuity 243 / Compass 225 and names CF-D2 provider-free disposable restart and unknown-commit recovery as the active dependency-satisfied durability tranche under Yuri's standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, docs/branding and all unrelated untracked files remain excluded. CF-D2 is restricted to authored-synthetic, provider-free, networkless disposable local PostgreSQL 16 evidence over the unchanged inert SQL. It grants no operational database/source or watcher, application/API/Diary wiring, real-person/patient/clinical/product data, provider call, credentials or IAM mutation, reusable runtime, executable tool or product command/write, deployment, production, release, Pages or protected-ref movement. Connection loss is never commit or rollback evidence; only the complete post-restart canonical durable packet may classify an unknown result."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

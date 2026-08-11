@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 241,
+  "register_revision": 242,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -11016,6 +11016,46 @@
           "docs/ariadne-agent-error-correction-register-revision-240.md",
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-planning-format-recovery-review-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-241.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0275",
+      "attempt_id": "cf-d2-implementation-broad-deterministic-gate-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-behavior-plan-parent-binding-test",
+      "model": "deterministic-pytest",
+      "reasoning_level": "deterministic",
+      "transport": "local_python_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The accepted behavior plan parent-binding equality test must track the exact current behavior contract after an independently accepted parent rebind.",
+      "observed_error": "The CF-D2 broad deterministic gate found that the historical behavior-plan equality node still expected the pre-recovery frame-mask runtime source and pre-rebind inert SQL and manifest heads and hashes, while the accepted behavior contract now binds the later admission-replay exact reproduction and unchanged 424-statement SQL at its accepted recovery heads. The live CF-D2 parent validator correctly admitted the current contract; only the duplicated historical test constants were stale.",
+      "detection_method": "The serial inherited pytest packet passed every other collected node and failed test_all_parent_paths_heads_and_hashes_are_exact at the first accepted_runtime_source path comparison. Direct current-contract readback identified exactly three stale binding tuples, and the corrected focused node then passed.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-admission-replay-winner-rebind.md",
+        "docs/ariadne-agent-error-correction-register-revision-242.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.behavior_plan_parent_binding_test_stale_after_rebind",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Update only the three stale expected binding tuples to the exact accepted behavior-contract path, source head and SHA-256 values; preserve all contract, runtime evidence and historical artifacts; rerun the focused equality node and the full CF-D2 deterministic packet before review.",
+        "prevention_control": "Every accepted parent rebind must update and execute any duplicated exact-binding regression tuple in the same candidate, while downstream harnesses continue to validate the contract and bound bytes independently.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+          "docs/ariadne-agent-error-correction-register-revision-242.md"
         ]
       },
       "status": "corrected"
