@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_exact_head_veto_of_the_cf_d2_restart_and_unknown_commit_planning_packet",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after CF-D1 closeout. The baton accepts CF-D1 at Continuity 243 / Compass 225 and directs CF-D2 restart and unknown-commit recovery under standing authority.",
+    "current_authority_allocation": "GPT Sol retains planning, implementation, recovery, acceptance, integration and Git authority. Gemini 3.6 Flash/high through one fresh Antigravity project receives only an exact-head read-only planning veto in a new non-protected worktree; it may not edit, start Docker, access data/providers, self-accept, push or move refs. DeepSeek and native subagents are unassigned.",
+    "active_plan_and_acceptance": "Planning commit a0797a17e99f4adfa65ce6bef96ffdcfcdf18c02 freezes four exact process-crash/restart cases, complete post-restart durable classification, independent pending-anchor recovery, zero retry, minimized evidence and exact cleanup. Forty focused planning checks, including 38 hostile mutations, Ruff and whitespace pass. Runtime remains closed pending this veto.",
+    "protected_evidence_boundaries": "The verifier may inspect only AGENTS.md and the exact allowlisted CF-D2 and parent paths in its packet and run only the listed read-only Git, pytest and Ruff commands. Protected holdouts, historical Diary/PHI, docs/branding, all untracked files, Docker/PostgreSQL runtime, providers, product routes, credentials, external network, commands, deployment, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Immediately before dispatch, the primary task branch is clean except original untracked files at exact planning source a0797a17e99f4adfa65ce6bef96ffdcfcdf18c02. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains e690eefaf91115343b8fcbbecc7c3f5fe0b25193. The fresh review worktree is bound to codex/cf-d2-planning-gemini-review at the exact planning source. All 494 original untracked files including five docs/branding paths remain preserved and unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "cf_d2_planning_gemini_predispatch_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is dispatching the exact committed planning packet only."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The repository launcher exposes the required stable gemini-3.6-flash-high model and structured single-decision contract."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is open."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

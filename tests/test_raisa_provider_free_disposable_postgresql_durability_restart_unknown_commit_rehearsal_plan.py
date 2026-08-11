@@ -11,12 +11,24 @@ import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal"
+BASE = (
+    ROOT
+    / "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal"
+)
 CONTRACT_PATH = BASE / "restart-unknown-commit-rehearsal-contract.json"
 SCHEMA_PATH = BASE / "restart-unknown-commit-rehearsal-contract.schema.json"
-PLAN_PATH = ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal-plan.md"
-DESIGN_PATH = ROOT / "docs/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal-design.md"
-THREAT_PATH = ROOT / "docs/security/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal-threat-model-delta.md"
+PLAN_PATH = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal-plan.md"
+)
+DESIGN_PATH = (
+    ROOT
+    / "docs/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal-design.md"
+)
+THREAT_PATH = (
+    ROOT
+    / "docs/security/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal-threat-model-delta.md"
+)
 
 SCENARIO_ORDER = ["CFD2-R01", "CFD2-R02", "CFD2-R03", "CFD2-R04"]
 CATEGORIES = [
@@ -57,7 +69,9 @@ def _validate_semantics(contract: dict[str, Any]) -> None:
         "restart-unknown-commit-rehearsal.v1"
     )
     assert contract["status"] == "frozen_provider_free_planning_runtime_closed"
-    assert contract["planning_baseline_head"] == "e690eefaf91115343b8fcbbecc7c3f5fe0b25193"
+    assert (
+        contract["planning_baseline_head"] == "e690eefaf91115343b8fcbbecc7c3f5fe0b25193"
+    )
     assert contract["accepted_concurrency_runtime_source_head"] == (
         "fed81847b4155d49cf997905e79cf31808ceb017"
     )
@@ -171,7 +185,9 @@ def _validate_semantics(contract: dict[str, Any]) -> None:
         assert len(row["post_restart_outcomes"]) >= 2
         assert len(row["readback"]) >= 4
         assert len(row["forbidden_effects"]) >= 3
-        assert len(set(row["post_restart_outcomes"])) == len(row["post_restart_outcomes"])
+        assert len(set(row["post_restart_outcomes"])) == len(
+            row["post_restart_outcomes"]
+        )
         assert len(set(row["readback"])) == len(row["readback"])
         assert len(set(row["forbidden_effects"])) == len(row["forbidden_effects"])
 
@@ -198,7 +214,9 @@ def _validate_semantics(contract: dict[str, Any]) -> None:
     }
 
     evidence = contract["evidence_contract"]
-    assert all(value is True for key, value in evidence.items() if key.startswith("record_"))
+    assert all(
+        value is True for key, value in evidence.items() if key.startswith("record_")
+    )
     assert set(evidence["forbidden"]) >= {
         "raw_sql_or_query_text",
         "raw_server_log_or_error_text",
@@ -210,7 +228,10 @@ def _validate_semantics(contract: dict[str, Any]) -> None:
     }
 
     claim = contract["claim_boundary"]
-    assert "two_no_terminal_result_cases_resolved_only_from_complete_post_restart_durable_state" in claim["proves"]
+    assert (
+        "two_no_terminal_result_cases_resolved_only_from_complete_post_restart_durable_state"
+        in claim["proves"]
+    )
     assert set(claim["does_not_prove"]) >= {
         "literal_crash_during_wal_commit_or_protocol_ack_boundary",
         "hardware_storage_power_loss_or_filesystem_durability",
@@ -318,7 +339,10 @@ HOSTILE_MUTATIONS: list[Mutation] = [
     _set(("durability_profile", "crash_count"), 3),
     _set(("durability_profile", "participant_retry_count"), 1),
     _set(("client_observation_profile", "unresolved_or_partial_is_pass"), True),
-    _set(("client_observation_profile", "accepted_recovery_classes"), ["COMMITTED_RECOVERED"]),
+    _set(
+        ("client_observation_profile", "accepted_recovery_classes"),
+        ["COMMITTED_RECOVERED"],
+    ),
     _set(("client_observation_profile", "forbidden_recovery_decision_inputs"), []),
     _set(("fixture_authority", "data_class"), "product_data"),
     _set(("fixture_authority", "fabric_direct_grant_changes"), ["grant_all"]),
@@ -326,8 +350,14 @@ HOSTILE_MUTATIONS: list[Mutation] = [
     _set(("scenarios", 2, "client_observation"), "COMMIT_ACKNOWLEDGED"),
     _set(("scenarios", 2, "post_restart_classification"), "ROLLED_BACK_RECOVERED"),
     _set(("scenarios", 3, "post_restart_classification"), "COMMITTED_RECOVERED"),
-    _set(("scenarios", 2, "post_restart_outcomes"), ["RECEIPT_REPLAYED", "RECEIPT_APPLIED_AFTER_ANCHOR"]),
-    _set(("scenarios", 3, "post_restart_outcomes"), ["RECEIPT_APPLIED", "RECEIPT_REPLAYED"]),
+    _set(
+        ("scenarios", 2, "post_restart_outcomes"),
+        ["RECEIPT_REPLAYED", "RECEIPT_APPLIED_AFTER_ANCHOR"],
+    ),
+    _set(
+        ("scenarios", 3, "post_restart_outcomes"),
+        ["RECEIPT_APPLIED", "RECEIPT_REPLAYED"],
+    ),
     _set(("category_coverage", "total"), 3),
     _delete(("evidence_contract", "record_closed_recovery_classification")),
     _set(("evidence_contract", "forbidden"), []),

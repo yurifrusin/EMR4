@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 239,
+  "register_revision": 240,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10937,6 +10937,86 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0273",
+      "attempt_id": "cf-d2-planning-predispatch-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-sol-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "reasoning_claim_error",
+      "process_severity": "low",
+      "expected_invariant": "A verifier pre-dispatch runtime state must use only allowlisted adapter observation methods and must not assign a worker id without a matching workspace receipt.",
+      "observed_error": "The first CF-D2 planning pre-dispatch state used direct_process_observation for antigravity_cli_print and pre-populated one assigned agent id while workspace_receipts was empty. The orchestrator preflight returned revision_required and forbade dispatch before any model call.",
+      "detection_method": "The generated Ariadne receipt reported adapter_probe_method_invalid and workspace_receipt_missing with worker_dispatch_permitted false.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-planning-predispatch-receipt-revision-required.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-planning-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-planning-predispatch-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-240.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_predispatch_state_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the adapter method with the allowlisted agy_cli_observation value, leave assigned_agent_ids empty before dispatch and regenerate a distinct passing pre-dispatch receipt before any model call.",
+        "prevention_control": "Clone verifier pre-dispatch adapter and assignment shapes from the current accepted runtime-state schema and require worker_dispatch_permitted true before invoking the launcher.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-planning-predispatch-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-planning-predispatch-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-240.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0274",
+      "attempt_id": "cf-d2-planning-gemini-veto-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-sol-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every deterministic command required by a fresh veto packet, including ruff format --check, must pass on the exact committed candidate before the external review is dispatched.",
+      "observed_error": "The CF-D2 planning packet passed all 40 semantic tests, Ruff lint and whitespace checks, but Sol had omitted the packet's Ruff formatter check before commit. The fresh Gemini review correctly returned revision_required when ruff format --check reported that the planning test would be reformatted. The reviewer found no architectural, authority, hash, storage, scenario, classifier, anchor or claim defect and performed zero external operations.",
+      "detection_method": "The exact-head Antigravity review receipt records command 5 exit code 1 with Would reformat while the worktree remained clean and unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-planning-review-receipt.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_plan.py",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-planning-gemini-review-packet.md",
+        "docs/ariadne-agent-error-correction-register-revision-240.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "orchestrator.pre_review_format_gate_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Apply Ruff formatting only to the planning test, rerun all 40 planning checks plus Ruff lint and format, commit the exact correction with immutable rejected-review evidence, and require a genuinely fresh exact-head veto before implementation.",
+        "prevention_control": "Before every external review, execute and record every command in the packet's allowlist locally, including format checks, rather than treating Ruff lint as a formatter substitute.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_plan.py",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-planning-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-240.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

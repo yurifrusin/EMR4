@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_cf_d2_planning_format_recovery_rejected_review_and_aer_controls_before_a_fresh_exact_head_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The first fresh planning review accepted every material CF-D2 architecture and authority property but returned revision_required because ruff format --check failed on the planning test. Only Ruff formatting changed that test. All planning and current incident-register checks, Ruff lint/format and whitespace now pass. AER-0273 preserves the stopped predispatch metadata error and AER-0274 contains the rejected formatter review pending fresh acceptance at register revision 240.",
+    "current_authority_allocation": "GPT Sol owns the bounded mechanical recovery and Git commit. The rejected Gemini review has no acceptance or implementation authority. A genuinely fresh Gemini 3.6 Flash/high project may review the corrected exact commit read-only; DeepSeek and native subagents remain unassigned.",
+    "git_refs_and_worktree": "Current task HEAD is a0797a17e99f4adfa65ce6bef96ffdcfcdf18c02 on codex/ariadne-bernie-davida-parallel-seam. The rejected review worktree and branch were verified clean at that exact source and removed. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; all original 494 untracked files including five docs/branding paths remain preserved and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after CF-D1 closeout. CF-D2 remains the active provider-free restart and unknown-commit planning tranche under standing authority; implementation and runtime remain closed until a fresh veto passes.",
+    "protected_evidence_boundaries": "No Docker, database, provider, product read, external network or protected evidence was touched by the rejected review or recovery. Historical Diary/PHI, docs/branding, all unrelated untracked files, operational sources, real data, application commands, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
