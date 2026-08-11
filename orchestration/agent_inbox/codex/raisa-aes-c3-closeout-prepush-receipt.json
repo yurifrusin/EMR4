@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_codex_ariadne_bernie_davida_parallel_seam_with_accepted_aes_c3_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 0f04fd049856cb9a92808b337773c1165a78a4d0 contains the accepted AES-C3 closeout over exact reviewed source c45ff191af420b801e9917a7efc69c17aeb5698b. The 61 scenarios, 33 attempt mutations, 18 contract mutations, 106-test recovered packet, final 184-test maintained static packet, canonical 190-test fast profile, revision-224 258-incident register and fresh Gemini 120-test pass are green. The committed Yuri mailbox message names the exact AES-C4 attention fork.",
+    "current_authority_allocation": "GPT Sol owns this non-protected task-branch publication and user-attention closeout. The rejected DeepSeek self-pass and completed Sol recovery remain preserved; fresh Gemini 3.6 Flash/high supplied one exact-head read-only veto only. No external worker has implementation, integration, push, acceptance, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "After fresh origin fetch, primary C:/Users/sarashera/emr4 is clean-tracked on codex/ariadne-bernie-davida-parallel-seam at 0f04fd049856cb9a92808b337773c1165a78a4d0; origin task is 9955865a49d4803f1f0b7ad696148d908626483b. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Review worktree remains clean at c45ff191af420b801e9917a7efc69c17aeb5698b. Local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked paths remain exact with SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 and five docs/branding paths.",
+    "live_handover_current_baton": "AES-C3 is accepted and committed at Continuity 240 / Compass 222. AES-C4 is the next named programme descendant but remains closed at a genuine Yuri-attention fork because its required new exact occupied-provider envelope is unavailable.",
+    "protected_evidence_boundaries": "Only the non-protected task branch may move. No master, handoff/current, Pages, deployment, production or release action is authorised. No real runtime broker or adapter, provider call, patient/product data, credential, IAM/metadata, network, filesystem capability, database/source, executable tool or command is opened. docs/branding and every unrelated untracked path remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
