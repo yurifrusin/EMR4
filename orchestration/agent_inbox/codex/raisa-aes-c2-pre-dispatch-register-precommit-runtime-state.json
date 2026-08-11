@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_aer_0242_correction_before_any_aes_c2_worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220 and AES-C2 remains the active frozen next tranche. Register revision 208 does not change the product or AES authority baton.",
+    "current_authority_allocation": "GPT Sol owns incident classification, correction and commit. No DeepSeek C2 worker has been created or dispatched and Gemini review remains ineligible before deterministic implementation gates.",
+    "active_plan_and_acceptance": "AER-0242 records parse-time rejection of invalid read-only PowerShell statement composition during C2 preplanning. The corrected probes succeeded, candidate state remained canonical_unchanged, the register generator passes and all 197 register tests pass.",
+    "protected_evidence_boundaries": "The incident contains no raw prompt, secret, credential, patient, clinical, product or protected value. This commit is limited to the register, deterministic report/test, revision note, live register pointer and exact receipt pair; it opens no C2 runtime or external surface.",
+    "git_refs_and_worktree": "Task branch plan source HEAD is exact 606d95896d76923c3a81ec3c5946efbfcc66597c. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Original 494 untracked paths remain excluded and explicit-path staging only is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol generated and validated register revision 208 and its exact deterministic test update."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Antigravity is not selected for this register-only correction."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["No C2 DeepSeek worker dispatch has occurred; its managed slot remains empty."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude is not selected as a model."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

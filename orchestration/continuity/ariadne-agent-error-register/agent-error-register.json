@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 207,
+  "register_revision": 208,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -9713,6 +9713,41 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-aes-c1-deterministic-gate-precommit-runtime-state.json",
           "docs/ariadne-agent-error-correction-register-revision-207.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0242",
+      "attempt_id": "raisa-aes-c2-preplanning-readonly-probes-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_readonly_probe",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Read-only PowerShell evidence probes must use syntactically valid statement boundaries and capture command exit codes in named variables before constructing arrays or objects.",
+      "observed_error": "During AES-C2 preplanning, Sol twice piped directly from a foreach statement without first capturing its output and three times embedded a command plus $LASTEXITCODE statement sequence inside a parenthesized object-property expression. PowerShell rejected every affected command at parse time before any probe, worker, source, ref or evidence action ran.",
+      "detection_method": "PowerShell returned EmptyPipeElement or MissingEndParenthesisInExpression before execution. Corrected read-only probes first assigned foreach output and command exit state to named variables, then rendered the result; each corrected probe completed successfully.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-208.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_statement_sequence_embedded_inside_expression",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace direct foreach piping with an explicit array assignment and replace inline command-plus-exit-code expressions with separate command execution followed by a named Boolean variable before rendering output.",
+        "prevention_control": "For PowerShell orchestration probes, use one statement per step: capture collection output, run Git or shell commands, capture $LASTEXITCODE, and only then construct the final object. Never place a semicolon-delimited statement sequence inside a property expression.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-208.md"
         ]
       },
       "status": "corrected"
