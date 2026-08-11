@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicitly_stage_and_commit_only_the_accepted_aes_c4_occupied_provider_proof_closeout_evidence_continuity_baton_tests_and_receipts_on_the_task_branch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records AES-C4 accepted at Continuity 241 / Compass 223 over exact independently reviewed source e569da0a9081117b799e9437d8b7025230e2162b. Its sole authored-synthetic Sydney Vertex call passed, its one-call/no-retry ledger is consumed, and AES-C5 remains closed at the first-product-source and purpose fork.",
+    "current_authority_allocation": "GPT Sol owns deterministic closeout review, acceptance, explicit-path task-branch commit and task-branch publication. The completed Gemini 3.6 Flash/high veto is independent evidence only. No worker, provider retry, product read, command, credential/IAM/cloud mutation, protected integration or protected-ref action is selected or authorised.",
+    "active_plan_and_acceptance": "The exact AES-C4 plan, factual rebind, threat model, provider envelope, source-bound review, live read-only preflight, occupied evidence, consumed ledger, closeout, Sol acceptance and Continuity/Compass update agree on result raisa_agent_execution_surface_containment_gate_aes_c4_bounded_occupied_provider_proof_pass. The complete serial AES-C0 through C4, gate-plan, API Spine, baton, Python-source, error-register and Compass packet passes 400 tests; Ruff, Python compilation, idempotent continuity update and Git whitespace checks pass. API Spine classification remains an internal Access AI/provider invocation with no new route, GraphQL call, command or product authority.",
+    "protected_evidence_boundaries": "Only authored-synthetic minimized evidence and closed identifiers are included. No raw prompt, provider text, response, reasoning, token, credential, patient, clinical, product-derived, practice, licensed, external-corpus or protected evidence is retained. Product/database/source/filesystem/tool/command/reusable-runtime/deployment/production/release/Pages and protected-ref surfaces remain closed. docs/branding and every unrelated untracked path remain explicitly unstaged.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at e569da0a9081117b799e9437d8b7025230e2162b before closeout commit; origin task remains 07c70ebb03eae7ccbcb3b7f831766b7f6eef52d6. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted AES-C3 c45ff191af420b801e9917a7efc69c17aeb5698b are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review worktree r186 remains clean at e569da0a9081117b799e9437d8b7025230e2162b. The closeout comprises ten intentional tracked edits and nineteen task-owned untracked artifacts including this state/receipt pair. Excluding those nineteen exact task-owned paths, the original 494 untracked paths remain at SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five under docs/branding. Explicit-path staging only will be used."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed exact evidence reconciliation, API Steward review, the 400-test serial packet, static checks and the untracked-path preservation audit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is selected for the serial closeout."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The completed exact-head Gemini 3.6 Flash/high veto remains accepted; no repeat is needed."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude/Fable/Opus is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

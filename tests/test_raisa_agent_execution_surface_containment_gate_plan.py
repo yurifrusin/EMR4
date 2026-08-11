@@ -90,7 +90,8 @@ def test_master_plan_records_gate_without_opening_runtime() -> None:
 
     assert "### 2.12 Agent Execution Surface and Containment Gate" in master
     assert "does not delay the networkless database-only rehearsal" in master
-    assert "grants no broker implementation, provider call, real context" in master
+    assert "grants no continuing provider call, real product context" in master
     assert (
-        "credential flow, tool, command, deployment or production authority" in master
+        "read, credential flow, provider tool, command, deployment or production"
+        in master
     )

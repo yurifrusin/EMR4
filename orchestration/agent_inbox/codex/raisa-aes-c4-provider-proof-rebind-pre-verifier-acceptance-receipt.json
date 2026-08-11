@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_fresh_exact_head_aes_c4_provider_fact_rebind_veto_and_advance_only_to_fresh_public_fact_and_read_only_cloud_preexecution_checks",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The fresh Antigravity review receipt returns exactly one schema-constrained pass for exact candidate e569da0a9081117b799e9437d8b7025230e2162b. It reports 368 serial tests, Ruff, py_compile and restricted Git whitespace passing; it verifies the non-existent source string is rejected, the corrected source commit exists, provider calls remain zero and the exact claim/cleanup boundaries remain closed.",
+    "current_authority_allocation": "Fresh Gemini 3.6 Flash/high owns only the completed independent veto. GPT Sol alone may accept it, perform fresh public-fact and read-only cloud gates, open the sole occupied ledger, assess evidence and close the tranche. No worker receives implementation, credential, provider, Git or protected authority.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r186 remains clean and unchanged on codex/review-aes-c4-provider-proof-rebind-e569da0a at exact HEAD e569da0a9081117b799e9437d8b7025230e2162b. The main task branch is at the same HEAD with a clean tracked tree. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked paths remain preserved and excluded.",
+    "live_handover_current_baton": "AGENTS.md keeps AES-C3 accepted at Continuity 240 / Compass 222 and AES-C4 as the active exact one-call Sydney Vertex authored-synthetic proof. Candidate e569da0a9081117b799e9437d8b7025230e2162b contains the current provider-fact rebind, corrected zero-call evidence and AER-0261 failure preservation.",
+    "protected_evidence_boundaries": "The accepted review is read-only repository evidence only. It did not call Vertex, gcloud, cloud APIs or the web; read product/database/source/patient/clinical/practice data; or edit its worktree. Protected holdouts, historical Diary, docs/branding, provider tools, product commands, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

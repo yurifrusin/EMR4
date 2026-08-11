@@ -179,10 +179,12 @@ The bounded provider-free conformance repair named in that review now also
 passes. It adds an explicit maintained Python 3.11 source-state, protected-CI
 compile/lint/static-test enforcement, current API Spine lifecycle supersession
 and live baton consistency without changing product behavior. AES-C0
-architecture, AES-C1 provider-free admission, AES-C2 inert broker simulation
-and AES-C3 provider-free hostile containment now pass. AES-C4 is the next named
-descendant; its exact one-call/no-retry, USD 0.25, authored-synthetic Sydney
-Vertex Bernie envelope is frozen and provider-free implementation is active.
+architecture, AES-C1 provider-free admission, AES-C2 inert broker simulation,
+AES-C3 provider-free hostile containment and AES-C4 bounded occupied authored-
+synthetic provider proof now pass. AES-C4 consumed exactly one no-retry Sydney
+Vertex Bernie call and left no continuing provider authority. AES-C5 is the
+next named descendant but remains closed pending its first exact product source
+and purpose plus privacy, identity, retention and product-data boundaries.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -208,10 +210,11 @@ synthetic custody, dispatch-time control-state recheck and exact budget commit
 around one pure inert function with zero external effect. AES-C3 now proves
 structural rejection, opaque digest-only handling, carrier-independent egress
 accounting, cumulative terminal latching and stale-authority binding for pure
-authored-synthetic objects. AES-C4 now has a frozen exact provider/data/cost
-envelope for one conditionally authorised call after provider-free and read-only
-preflight gates; none of these results can be mistaken for product-data,
-filesystem, provider-tool or command authority.
+authored-synthetic objects. AES-C4 now proves one exact provider/data/cost
+envelope through one consumed Sydney Vertex call after provider-free, fresh
+exact-head veto and read-only preflight gates. Its four-field release carries
+no command authority, and none of these results can be mistaken for product-
+data, filesystem, provider-tool, reusable-runtime or command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -622,11 +625,12 @@ generation rehearsal. The architecture-only provider-free default-off
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1
-  provider-free admission rehearsal, AES-C2 inert broker simulation and AES-C3
-  provider-free hostile containment rehearsal have passed. AES-C4's exact
-  authored-synthetic Sydney Vertex envelope is frozen; provider-free
-  implementation, exact-head review and read-only preflight precede its sole
-  occupied call.
+  provider-free admission rehearsal, AES-C2 inert broker simulation, AES-C3
+  provider-free hostile containment rehearsal and AES-C4 bounded occupied
+  authored-synthetic provider proof have passed. AES-C4's sole Sydney Vertex
+  call, deterministic four-field release, terminal ledger and cleanup are
+  complete. AES-C5 remains closed until one exact product source and purpose
+  plus privacy, identity, retention and product-data boundaries are selected.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is
@@ -681,10 +685,11 @@ stops; 51 hostile mutations reject, and exactly 28 pure calls produce 21
 digest-only releases with zero external effect. It proves tested structural
 rejection, opaque digest-only handling, carrier-independent egress accounting,
 cumulative terminal latching and stale-authority binding without opening a real
-runtime or adapter. AES-C4 is an occupied provider proof. Its exact Google
-Vertex AI `gemini-2.5-flash`, Bernie project/keyless-ADC, Sydney region,
-newly-authored-synthetic, one-call/no-retry, USD 0.25, no-tool/no-fallback and
-complete-cleanup envelope is now frozen; occupied evidence remains pending.
+runtime or adapter. AES-C4 now also passes: its exact Google Vertex AI
+`gemini-2.5-flash`, Bernie project/keyless-ADC, Sydney region, newly-authored-
+synthetic, one-call/no-retry, USD 0.25, no-tool/no-fallback envelope produced
+one deterministic four-field no-command release and a consumed ledger with
+complete cleanup. It opens no continuing provider or product-runtime authority.
 
 The controlling plan is
 [`docs/raisa-agent-execution-surface-containment-gate-plan.md`](docs/raisa-agent-execution-surface-containment-gate-plan.md)
@@ -698,9 +703,12 @@ The accepted AES-C2 result is
 [`docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-closeout.md).
 The accepted AES-C3 result is
 [`docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md).
-This entry grants no broker implementation, provider call, real context,
-credential flow, tool, command, deployment or production authority. It also
-grants no real adapter, generic network or executable tool.
+The accepted AES-C4 result is
+[`docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-closeout.md).
+This entry grants no continuing provider call, real product context, product
+read, credential flow, provider tool, command, deployment or production
+authority. It also grants no reusable adapter, generic network or executable
+tool.
 
 ---
 

@@ -19,6 +19,14 @@ PROVIDER_FREE_SOURCE_HEAD = "b06ade2efc72cc6af5e11f72a56426f4319573bc"
 REBIND_EVIDENCE = aes_c4.BASE / "provider-free-factual-rebind-evidence.json"
 REBIND_LEDGER = aes_c4.BASE / "provider-free-factual-rebind-ledger.json"
 REBIND_SOURCE_HEAD = "ec6a043410661d563c53d205cd4958d100732e97"
+LIVE_PREFLIGHT = aes_c4.BASE / "live-preexecution-cloud-preflight.json"
+OCCUPIED_EVIDENCE = aes_c4.BASE / "occupied-provider-proof-evidence.json"
+OCCUPIED_LEDGER = aes_c4.BASE / "occupied-provider-proof-ledger.json"
+OCCUPIED_SOURCE_HEAD = "e569da0a9081117b799e9437d8b7025230e2162b"
+REBIND_REVIEW = aes_c4.ROOT / (
+    "orchestration/agent_inbox/antigravity/"
+    "raisa-aes-c4-provider-proof-rebind-review-receipt.json"
+)
 
 
 class FakeLiveAdapter:
@@ -137,6 +145,108 @@ def test_committed_provider_free_evidence_is_zero_call_source_bound_and_consumed
     assert ledger["status"] == "consumed"
     assert evidence["cleanup"]["further_generation_calls"] is False
     assert evidence["contains_sensitive_values"] is False
+
+
+def test_committed_occupied_evidence_is_one_call_exact_release_and_consumed():
+    evidence = json.loads(OCCUPIED_EVIDENCE.read_text(encoding="utf-8"))
+    ledger = json.loads(OCCUPIED_LEDGER.read_text(encoding="utf-8"))
+
+    assert evidence["result"].endswith("bounded_occupied_provider_proof_pass")
+    assert evidence["mode"] == "live"
+    assert evidence["source_head"] == OCCUPIED_SOURCE_HEAD
+    assert evidence["operation_counters"] == {
+        "provider_calls": 1,
+        "product_operations": 0,
+        "database_or_source_operations": 0,
+        "filesystem_capability_operations": 0,
+        "provider_tool_operations": 0,
+        "command_or_write_operations": 0,
+        "deployment_or_production_operations": 0,
+        "protected_operations": 0,
+    }
+    assert evidence["provider"] == {
+        "provider": "google_vertex_ai",
+        "model_id": "gemini-2.5-flash",
+        "project": "bernie-emr4-dev",
+        "location": "australia-southeast1",
+        "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+        "provider_contacted": True,
+        "http_status": 200,
+        "finish_reason": "STOP",
+        "latency_ms": 1726,
+        "safe_token_counts": {
+            "candidatesTokenCount": 40,
+            "promptTokenCount": 363,
+            "thoughtsTokenCount": 139,
+            "totalTokenCount": 542,
+        },
+        "request_digest": "sha256:883091e0fa1562e20de1374136be52f0aef27dc4d23b2bda052374ea2728c988",
+        "response_digest": "sha256:9436fd06c7f35f57ce2cf85ae2936b8b07d44837447e1d5947c60721672a7a08",
+        "provider_response_bytes": 917,
+        "raw_prompt_retained": False,
+        "raw_response_retained": False,
+        "provider_text_retained": False,
+        "model_reasoning_retained": False,
+    }
+    assert evidence["release"] == {
+        "decision_code": "contained",
+        "synthetic_nonce": aes_c4.SYNTHETIC_NONCE,
+        "summary_code": "broker_boundary_confirmed",
+        "command_authority": False,
+    }
+    assert evidence["proofreader"] == {
+        "decision": "admitted",
+        "release_digest": "sha256:dd0559ca8e566f34d0cff7f19777ee3549e5b3818ac11b0f1ba83436f64e487d",
+        "release_performed": True,
+        "repair_call_permitted": False,
+    }
+    assert evidence["provider_ledger"] == ledger
+    assert ledger["source_head"] == OCCUPIED_SOURCE_HEAD
+    assert ledger["status"] == "consumed"
+    assert ledger["maximum_provider_calls"] == 1
+    assert ledger["provider_call_allowances_consumed"] == 1
+    assert ledger["actual_provider_calls"] == 1
+    assert ledger["maximum_retries"] == 0
+    assert ledger["retries_consumed"] == 0
+    assert ledger["reserved_cost_usd"] == 0.0
+    assert evidence["reason_codes"] == []
+    assert evidence["contains_sensitive_values"] is False
+    assert all(value is False for value in evidence["retention"].values())
+    assert evidence["cleanup"] == {
+        "lease_alias_and_token_revoked": True,
+        "provider_ledger_consumed": True,
+        "broker_process_or_listener": False,
+        "task_runtime_or_temporary_root": False,
+        "reusable_capability": False,
+        "further_generation_calls": False,
+    }
+    assert [row["event_type"] for row in evidence["audit_chain"]] == [
+        "generation_admitted",
+        "provider_ledger_reserved",
+        "provider_result_proofread",
+        "generation_revoked_and_cleaned",
+    ]
+
+
+def test_occupied_call_followed_exact_read_only_preflight_and_fresh_veto():
+    preflight = json.loads(LIVE_PREFLIGHT.read_text(encoding="utf-8"))
+    review = json.loads(REBIND_REVIEW.read_text(encoding="utf-8"))
+
+    assert preflight["result"] == "ariadne_vertex_sydney_gemini_25_adc_preflight_pass"
+    assert preflight["model_inference_called"] is False
+    assert preflight["provider_prompt_transmitted"] is False
+    assert preflight["external_state_changed"] is False
+    assert preflight["authentication"] == "keyless_impersonated_service_account_adc"
+    assert preflight["endpoint_hostname"] == (
+        "australia-southeast1-aiplatform.googleapis.com"
+    )
+    assert all(preflight["checks"].values())
+    assert review["decision"] == "pass"
+    assert review["model"] == "gemini-3.6-flash-high"
+    assert review["reasoning_effort"] == "high"
+    assert review["head_before"] == OCCUPIED_SOURCE_HEAD
+    assert review["head_after"] == OCCUPIED_SOURCE_HEAD
+    assert review["dirty_after"] is False
 
 
 def test_fake_live_path_consumes_one_call_and_cost_reservation(tmp_path):

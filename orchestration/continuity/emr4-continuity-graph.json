@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 240,
+  "graph_revision": 241,
   "harvests": [],
   "nodes": [
     {
@@ -15114,6 +15114,96 @@
         "AES-C4 occupied authored-synthetic provider proof requires a newly frozen exact provider/model, region, identity, data, call, cost, isolation, proofreader, cleanup and no-fallback envelope; no current authority supplies it.",
         "No real runtime broker, work-cell process, container, adapter, provider, product context, database/source, filesystem, network, credential, executable tool or command is opened.",
         "Protected evidence, patient/clinical/product data, deployment, production, release, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-agent-execution-surface-containment-gate-aes-c4",
+      "title": "Raisa Agent Execution Surface AES-C4 bounded occupied provider proof",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-11T00:00:00Z",
+      "updated_at": "2026-08-11T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "e569da0a9081117b799e9437d8b7025230e2162b",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-agent-execution-surface-containment-gate-aes-c3",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "AES-C4 consumed exactly one newly authored-synthetic Sydney Vertex call; its ledger is terminal and grants no continuing provider authority.",
+          "The model received no product/patient context, credential, provider tool, database/source, filesystem capability or command authority.",
+          "GraphQL remained read-only and unused; product mutations remain separately authorized and human/policy-gated REST/OpenAPI commands."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-aes-c4-bounded-occupied-provider-proof",
+          "source": "docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-closeout.md",
+          "status": "accepted",
+          "summary": "Accept one exact broker-admitted authored-synthetic Sydney Vertex call, deterministic four-field release, terminal accounting and complete cleanup."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one gemini-2.5-flash call reached the Australia Southeast 1 hostname with HTTP 200/STOP and no retry, redirect, fallback or provider tool.",
+        "The deterministic proofreader released exactly four nonce-bound fields with command_authority false.",
+        "The one-call ledger is consumed; every lease, alias and token is revoked; no broker listener/process, temporary runtime or reusable capability remains.",
+        "The result proves the configured and observed Sydney path and exact authored-synthetic containment only, not physical or sovereign processing, product-data safety, reusable runtime or command safety."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-plan.md",
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c4-preexecution-factual-rebind.md"
+        ],
+        "findings": [
+          "docs/security/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-threat-model-delta.md",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-envelope.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-envelope.schema.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-ledger.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-invalid-source-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-invalid-source-ledger.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/live-preexecution-cloud-preflight.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/occupied-provider-proof-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/occupied-provider-proof-ledger.json"
+        ],
+        "closeouts": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-11--aes-c4-bounded-occupied-provider-proof.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-aes-c4-bounded-occupied-provider-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-postcompaction-3-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-factual-rebind-evidence-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-rebind-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-rebind-review-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-rebind-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-aes-c4-provider-proof-rebind-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c4.py",
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c4_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_agent_execution_surface_containment_gate_aes_c4_continuity_update.py",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-rebind-review-packet.md",
+          "docs/ariadne-agent-error-correction-register-revision-227.md"
+        ]
+      },
+      "unresolved_gates": [
+        "AES-C5 product-runtime admission requires a separately frozen privacy, identity, retention and product-data authority plus one exact source and one exact purpose.",
+        "No continuing provider call, product read, database/source adapter, filesystem capability, provider tool, generic network, command/write or reusable runtime is opened.",
+        "Protected evidence, patient/clinical/product-derived data, deployment, production, release, Pages and protected refs remain closed."
       ]
     }
   ],

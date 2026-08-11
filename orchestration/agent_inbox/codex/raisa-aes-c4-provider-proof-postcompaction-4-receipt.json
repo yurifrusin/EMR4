@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_deterministic_aes_c4_acceptance_packaging_commit_task_branch_publication_and_pause_at_the_closed_aes_c5_product_source_and_purpose_fork_without_any_further_provider_call",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete AES-C4 occupied-provider plan, factual rebind, threat-model delta, closeout, Sol acceptance, fresh exact-head review receipt and the parent AES gate plan were reread. The EMR4 API Steward instructions, detailed checklist, API Spine ADR/programme, Access AI provider design and Bernie release boundary were also reread. The exact result is one authored-synthetic brokered provider pass with no route, GraphQL call, product entitlement, database/source adapter, command or reusable runtime. AES-C5 needs one exact real product source and purpose plus separately frozen privacy, identity, tenant, field, freshness, retention, provider/cost, proofreader and cleanup boundaries.",
+    "current_authority_allocation": "GPT Sol owns the remaining deterministic AES-C4 closeout, acceptance packaging, explicit-path task-branch commit and publication. The completed fresh Gemini 3.6 Flash/high veto remains independent evidence only. No further worker or provider call is needed or authorised, and Codex has no credential, IAM, cloud-configuration, protected-integration or protected-ref authority.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at e569da0a9081117b799e9437d8b7025230e2162b; origin task remains 07c70ebb03eae7ccbcb3b7f831766b7f6eef52d6. Local/origin master and local/origin handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review worktree r186 is unchanged and clean at e569da0a9081117b799e9437d8b7025230e2162b. The main worktree has eight intentional tracked AES-C4 closeout edits and fifteen task-owned untracked closeout artifacts; excluding those fifteen paths, the original 494 untracked paths retain SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five under docs/branding.",
+    "live_handover_current_baton": "After this context restoration, all 505 lines of AGENTS.md were reread. The live baton records AES-C4 as passing at Continuity 241 / Compass 223 over independently reviewed source e569da0a9081117b799e9437d8b7025230e2162b, with its sole occupied ledger consumed and AES-C5 separately closed at a genuine Yuri-attention fork.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical Diary/PHI, patient, clinical, product-derived, practice, licensed and external-corpus content, credential and token material, raw prompts and provider output, consumed provider ledgers, provider tools, database/source access, filesystem capability, command/write, deployment, production, release, Pages and protected refs remain closed. All 494 original unrelated untracked paths, including five under docs/branding, remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

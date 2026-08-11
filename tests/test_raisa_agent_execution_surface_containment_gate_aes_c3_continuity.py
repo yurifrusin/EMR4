@@ -13,24 +13,20 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_aes_c3_is_current_and_aes_c4_requires_an_exact_envelope() -> None:
+def test_aes_c3_remains_accepted_in_the_aes_c4_lineage() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
 
-    assert graph["graph_revision"] == 240
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 222
-    assert compass["source_graph_revision"] == 240
-    assert compass["current_position"]["node_id"] == NODE_ID
-    orientation = compass["orientation_statement"].lower()
-    assert "aes-c3 passes" in orientation
-    assert "aes-c4 remains closed" in orientation
-    assert "yuri" in orientation
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    assert node["coordinates"]["source_head"] == SOURCE_HEAD
+    assert node["status"] == "accepted"
+    assert any(row["node_id"] == NODE_ID for row in compass["journey"])
+    assert compass["source_graph_revision"] == graph["graph_revision"]
 
 
 def test_aes_c3_continuity_opens_no_runtime_authority() -> None:
-    node = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
 
     assert node["kind"] == "foundation"
     assert node["authority"]["authorized_openings"] == []
@@ -58,7 +54,8 @@ def test_aes_c3_continuity_opens_no_runtime_authority() -> None:
 
 
 def test_aes_c3_exact_evidence_recovery_and_mailbox_are_bound() -> None:
-    node = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
 
     assert node["contract_evidence"] == []
     assert {
@@ -82,25 +79,16 @@ def test_aes_c3_exact_evidence_recovery_and_mailbox_are_bound() -> None:
     assert node["status"] == "accepted"
 
 
-def test_compass_handoff_names_exact_occupied_provider_fork() -> None:
-    position = _load("orchestration/continuity/emr4-compass.json")["current_position"]
-    joined = " ".join(position["unlocks"] + position["does_not_solve"]).lower()
+def test_aes_c3_journey_names_exact_occupied_provider_fork() -> None:
+    compass = _load("orchestration/continuity/emr4-compass.json")
+    journey = next(row for row in compass["journey"] if row["node_id"] == NODE_ID)
+    joined = (journey["strategic_role"] + " " + journey["outcome"]).lower()
 
     for phrase in (
-        "provider/model",
-        "region",
-        "identity",
         "authored-synthetic",
-        "call",
-        "cost",
-        "isolation",
-        "proofreader",
-        "cleanup",
-        "no-fallback",
-        "semantic prompt-injection",
-        "patient/product/clinical",
-        "database/source",
-        "command",
-        "protected-ref",
+        "hostile-content",
+        "cumulative-stop",
+        "stale-authority",
+        "occupied provider",
     ):
         assert phrase in joined

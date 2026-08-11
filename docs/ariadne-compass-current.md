@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 240 / Compass 222. AES-C3 passes as an exact, provider-free pure hostile-containment rehearsal: 21 contained, 15 rejected and 25 stopped scenarios, 51 hostile mutations, 28 pure calls and 21 digest-only releases with zero external effect. AES-C4 remains closed until Yuri supplies a new exact occupied-provider envelope.
+> EMR4 is at Continuity 241 / Compass 223. AES-C4 passes one exact, broker-admitted authored-synthetic Sydney Vertex call: HTTP 200/STOP, one deterministic four-field no-command release, a consumed no-retry ledger and complete cleanup. AES-C5 remains closed until Yuri selects or authorizes its first real product source, purpose and privacy boundary.
 
 ## North star
 
@@ -254,26 +254,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    AES-C2 passes 26 authored-synthetic scenarios and 32 hostile mutations with exactly three pure calls and zero external effect; AES-C3 hostile containment is next. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c1`.
 119. **Prove hostile-content, cumulative-stop and stale-authority containment before any occupied provider capability — Raisa Agent Execution Surface AES-C3 provider-free hostile containment**
    AES-C3 passes 61 authored-synthetic scenarios and 51 hostile mutations with 28 pure calls, 21 digest-only releases and zero external effect; AES-C4 is closed pending a new exact occupied-provider envelope. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c2`.
+120. **Prove one exact occupied provider crossing under the external capability broker before any product-derived Bureau context — Raisa Agent Execution Surface AES-C4 bounded occupied provider proof**
+   AES-C4 passes one authored-synthetic Sydney Vertex call with exact typed release, terminal accounting and complete cleanup; AES-C5 remains closed at its product-data/source/purpose fork. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c3`.
 
 ## Current position
 
-**AES-C3 hostile containment accepted; AES-C4 occupied-provider envelope requires Yuri — Raisa Agent Execution Surface AES-C3 provider-free hostile containment**
+**AES-C4 occupied authored-synthetic provider containment accepted; AES-C5 awaits its first product-data choice — Raisa Agent Execution Surface AES-C4 bounded occupied provider proof**
 
-**Why this proof came next:** AES-C2 proved exact inert dispatch, allowing the hostile-content, cumulative-stop and replay boundary to be tested before any occupied provider capability.
+**Why this proof came next:** AES-C3 proved hostile containment, and Yuri supplied the exact Sydney Vertex authored-synthetic envelope needed for one consumed provider crossing.
 
-All 61 canonical scenarios and 51 hostile mutations pass fail closed; exactly 28 pure calls and 21 digest-only releases occur with zero external effect.
+One exact provider call returned HTTP 200/STOP, released four deterministic no-command fields, consumed its ledger and left no reusable capability or runtime residue.
 
 ### What this unlocks
 
-- Ask Yuri to choose or authorize the exact current AES-C4 occupied-provider envelope before planning or dispatch.
-- If authorized, freeze the narrowest authored-synthetic provider proof with exact provider/model, region, identity, data, call, cost, isolation, proofreader, cleanup and no-fallback controls.
-- Preserve AES-C0/C1/C2/C3 authority, custody, current-state, egress and hostile-containment controls throughout any later occupied proof.
+- Ask Yuri to nominate one exact real product source and one exact purpose for AES-C5, or request bounded alternatives.
+- Freeze AES-C5 privacy, principal/identity, tenant, field, freshness, retention, proofreader, provider, cost, cleanup and no-command boundaries before any product read.
+- Preserve AES-C0/C1/C2/C3/C4 authority, custody, current-state, egress, hostile-containment and terminal-ledger controls in any later product-runtime proof.
 
 ### What it does not solve
 
-- Semantic prompt-injection detection or real runtime/process/container/kernel isolation.
-- Provider behaviour, patient/product/clinical data safety, database/source access, watcher/listener or operational persistence.
-- Real credentials, IAM, metadata, generic network, filesystem capability, executable tools, routes or commands.
+- Patient, clinical, product-derived, practice, licensed or external-corpus data safety.
+- Reusable provider/broker runtime, database/source adapters, watcher/listener, filesystem capability or provider-executed tools.
+- Command/write safety, concurrency, general model safety, semantic prompt-injection detection or Australian physical/sovereign processing.
 - Deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
@@ -341,9 +343,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Serial database durability, architecture-health review, bounded conformance repair and AES-C0 through AES-C3 pass.
-- Obtain Yuri's exact provider/model, region, identity, authored-synthetic data, call, cost, isolation, proofreader, cleanup and no-fallback envelope before AES-C4.
-- Keep product/patient data, real credentials, external adapters, operational persistence, tools and commands separately gated.
+- Serial durability, architecture-health repair and AES-C0 through AES-C4 pass.
+- Before AES-C5, Yuri must select or authorize one exact product source and purpose and freeze privacy, identity, retention and product-data boundaries.
+- Keep every command/write, broader product context, reusable runtime, deployment and production surface separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -532,6 +534,7 @@ Prerequisites:
 
 ## Map limits
 
+- AES-C4 proves one exact authored-synthetic brokered provider crossing and cleanup, not physical or sovereign processing, product-data safety, reusable runtime or command safety.
 - AES-C3 proves pure authored-synthetic structural and stale-authority containment, not semantic injection detection, real runtime isolation, provider behaviour or product-data safety.
 - AES-C2 proves broker-owned in-process inert dispatch over authored-synthetic objects, not real runtime containment, credential custody, adapter safety or product-data safety.
 - AES-C1 proves deterministic unmounted admission over authored-synthetic objects, not runtime broker containment, adapter custody or product-data safety.
@@ -675,6 +678,7 @@ Prerequisites:
 - `docs/api-spine/openapi/technical-control-simulator-commands.yaml`
 - `docs/ariadne-agent-error-correction-register-revision-204.md`
 - `docs/ariadne-agent-error-correction-register-revision-224.md`
+- `docs/ariadne-agent-error-correction-register-revision-227.md`
 - `docs/ariadne-agent-error-correction-register-revision-23.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
@@ -827,6 +831,9 @@ Prerequisites:
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-plan.md`
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md`
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-plan.md`
+- `docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-closeout.md`
+- `docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-plan.md`
+- `docs/raisa-agent-execution-surface-containment-gate-aes-c4-preexecution-factual-rebind.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
@@ -1000,6 +1007,7 @@ Prerequisites:
 - `docs/security/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-threat-model-delta.md`
 - `docs/security/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-threat-model-delta.md`
 - `docs/security/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-threat-model-delta.md`
+- `docs/security/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-threat-model-delta.md`
 - `docs/security/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
@@ -1062,6 +1070,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-aes-c1-provider-free-admission-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-aes-c2-provider-free-broker-simulator-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-aes-c3-provider-free-hostile-containment-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-aes-c4-provider-proof-rebind-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json`
@@ -1136,6 +1145,13 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-aes-c3-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-aes-c3-provider-free-hostile-containment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-aes-c3-sol-recovery.md`
+- `orchestration/agent_inbox/codex/raisa-aes-c4-bounded-occupied-provider-proof-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-aes-c4-factual-rebind-evidence-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-postcompaction-3-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-rebind-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-rebind-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-rebind-review-predispatch-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-rebind-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
@@ -1389,6 +1405,15 @@ Prerequisites:
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/containment-rehearsal-contract.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/containment-rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/provider-free-hostile-containment-evidence.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/live-preexecution-cloud-preflight.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/occupied-provider-proof-evidence.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/occupied-provider-proof-ledger.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-envelope.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-envelope.schema.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-evidence.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-invalid-source-evidence.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-invalid-source-ledger.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-ledger.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-acceptance-evidence.json`
@@ -1696,6 +1721,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-11--aes-c1-provider-free-admission.md`
 - `orchestration/human_inbox/yuri/2026-08-11--aes-c2-provider-free-broker-simulator.md`
 - `orchestration/human_inbox/yuri/2026-08-11--aes-c3-provider-free-hostile-containment.md`
+- `orchestration/human_inbox/yuri/2026-08-11--aes-c4-bounded-occupied-provider-proof.md`
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-architectural-health-conformance-review.md`
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-conformance-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -1787,4 +1813,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 222; continuity graph revision 240._
+_Compass map revision 223; continuity graph revision 241._
