@@ -90,8 +90,13 @@ def test_master_plan_records_gate_without_opening_runtime() -> None:
 
     assert "### 2.12 Agent Execution Surface and Containment Gate" in master
     assert "does not delay the networkless database-only rehearsal" in master
-    assert "grants no continuing provider call, real product context" in master
     assert (
-        "read, credential flow, provider tool, command, deployment or production"
+        "grants no continuing provider call, real-person or operational"
         in master
     )
+    assert (
+        "product context, product/database read, credential flow, provider tool,"
+        in master
+    )
+    assert "command, deployment or production authority" in master
+    assert "no AES-C6 is planned or authorised" in master

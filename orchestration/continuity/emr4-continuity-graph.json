@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 241,
+  "graph_revision": 242,
   "harvests": [],
   "nodes": [
     {
@@ -15204,6 +15204,104 @@
         "AES-C5 product-runtime admission requires a separately frozen privacy, identity, retention and product-data authority plus one exact source and one exact purpose.",
         "No continuing provider call, product read, database/source adapter, filesystem capability, provider tool, generic network, command/write or reusable runtime is opened.",
         "Protected evidence, patient/clinical/product-derived data, deployment, production, release, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-agent-execution-surface-containment-gate-aes-c5",
+      "title": "Raisa Agent Execution Surface AES-C5 product-runtime admission",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-11T00:00:00Z",
+      "updated_at": "2026-08-11T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4e5d96ada19c51432fa4db46c76e23c952147c52",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-agent-execution-surface-containment-gate-aes-c4",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "AES-C5 consumed exactly one authenticated authored-synthetic application-route read and exactly one Sydney Vertex call; both ledgers are terminal.",
+          "The source and provider operations used separate one-grant, one-destination immutable generations with no lease or budget transfer.",
+          "The released booking-context match is inert with command_authority false; no continuing product, database, provider, tool, command or runtime authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-aes-c5-product-runtime-admission",
+          "source": "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-closeout.md",
+          "status": "accepted",
+          "summary": "Accept one exact authenticated authored-synthetic practitioner-directory read, minimized provider crossing, deterministic no-command release, terminal accounting and exact cleanup."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one practice-scoped product route read returned three active authored-synthetic rows with unchanged database counts and exact disposable-schema cleanup.",
+        "Exactly one gemini-2.5-flash call reached the Australia Southeast 1 hostname with HTTP 200/STOP and no retry, redirect, fallback or provider tool.",
+        "Both generations exhausted and both ledgers are consumed; every lease, alias and token is revoked and no reusable process, listener or capability remains.",
+        "The result proves the exact authored-synthetic application-route containment path, not real-person or patient-data safety, production identity/RLS, physical or sovereign processing, reusable runtime or command safety."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-threat-model-delta.md",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.schema.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/local-fake-core-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/local-fake-lifecycle-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/local-fake-ledgers/source-ledger.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/local-fake-ledgers/provider-ledger.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/live-preexecution-factual-and-cli-check.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/live-preexecution-cloud-preflight.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/occupied-core-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/occupied-lifecycle-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/occupied-ledgers/source-ledger.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/occupied-ledgers/provider-ledger.json"
+        ],
+        "closeouts": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-11--aes-c5-product-runtime-admission.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-aes-c5-product-runtime-admission-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-aes-c5-postcompaction-2-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-occupied-preintegration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-deepseek-implementation-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-gemini-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-gemini-veto-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-aes-c5-gemini-36-high-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c5.py",
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c5_local_route.py",
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c5_plan.py",
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c5_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_agent_execution_surface_containment_gate_aes_c5_continuity_update.py",
+          "scripts/raisa_agent_execution_surface_containment_gate_aes_c5_product_runtime_admission.py",
+          "scripts/raisa_agent_execution_surface_containment_gate_aes_c5_local_route.py",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-gemini-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md",
+          "docs/ariadne-agent-error-correction-register-revision-233.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No AES-C6 or later Agent Execution Surface tranche is planned or authorized.",
+        "Any real practice population, patient/clinical data, new product-data class, reusable runtime, tool or command requires a new Yuri-owned programme choice and exact fail-closed plan.",
+        "No continuing provider call, product/database read, watcher, filesystem capability, provider tool, generic network, credential/IAM change, command/write, deployment, production, release, Pages or protected-ref movement is opened."
       ]
     }
   ],

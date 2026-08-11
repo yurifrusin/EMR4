@@ -180,11 +180,13 @@ passes. It adds an explicit maintained Python 3.11 source-state, protected-CI
 compile/lint/static-test enforcement, current API Spine lifecycle supersession
 and live baton consistency without changing product behavior. AES-C0
 architecture, AES-C1 provider-free admission, AES-C2 inert broker simulation,
-AES-C3 provider-free hostile containment and AES-C4 bounded occupied authored-
-synthetic provider proof now pass. AES-C4 consumed exactly one no-retry Sydney
-Vertex Bernie call and left no continuing provider authority. AES-C5 is the
-next named descendant but remains closed pending its first exact product source
-and purpose plus privacy, identity, retention and product-data boundaries.
+AES-C3 provider-free hostile containment, AES-C4 bounded occupied authored-
+synthetic provider proof and AES-C5 product-runtime admission now pass. AES-C5
+used one authenticated practice-scoped application route over a disposable
+authored-synthetic PostgreSQL schema, then one separately immutable no-retry
+Sydney Vertex Bernie generation. Both ledgers are consumed and cleanup is
+complete. The finite AES-C0 through AES-C5 sequence is complete; no AES-C6 is
+planned or authorised.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -213,8 +215,12 @@ accounting, cumulative terminal latching and stale-authority binding for pure
 authored-synthetic objects. AES-C4 now proves one exact provider/data/cost
 envelope through one consumed Sydney Vertex call after provider-free, fresh
 exact-head veto and read-only preflight gates. Its four-field release carries
-no command authority, and none of these results can be mistaken for product-
-data, filesystem, provider-tool, reusable-runtime or command authority.
+no command authority. AES-C5 now proves the next exact boundary: one
+authenticated, practice-scoped, authored-synthetic practitioner-directory
+route/PostgreSQL read minimized into one fresh ContextFrameSet, followed by one
+separately immutable provider generation and deterministic no-command release.
+None of these results can be mistaken for real-person product data,
+filesystem, provider-tool, reusable-runtime or command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -626,11 +632,13 @@ generation rehearsal. The architecture-only provider-free default-off
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1
   provider-free admission rehearsal, AES-C2 inert broker simulation, AES-C3
-  provider-free hostile containment rehearsal and AES-C4 bounded occupied
-  authored-synthetic provider proof have passed. AES-C4's sole Sydney Vertex
-  call, deterministic four-field release, terminal ledger and cleanup are
-  complete. AES-C5 remains closed until one exact product source and purpose
-  plus privacy, identity, retention and product-data boundaries are selected.
+  provider-free hostile containment rehearsal, AES-C4 bounded occupied
+  authored-synthetic provider proof and AES-C5 product-runtime admission have
+  passed. AES-C5's sole authenticated authored-synthetic route read and sole
+  separately brokered Sydney Vertex call, deterministic four-field release,
+  terminal ledgers and cleanup are complete. No AES-C6 is planned or
+  authorised; any further real-data, reusable-runtime, tool/command, deployment
+  or production descendant is a new programme choice.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is
@@ -690,6 +698,15 @@ runtime or adapter. AES-C4 now also passes: its exact Google Vertex AI
 synthetic, one-call/no-retry, USD 0.25, no-tool/no-fallback envelope produced
 one deterministic four-field no-command release and a consumed ledger with
 complete cleanup. It opens no continuing provider or product-runtime authority.
+AES-C5 now also passes: one ordinary bearer-authenticated practice-scoped
+practitioner-directory request traversed FastAPI, SQLAlchemy and a disposable
+authored-synthetic PostgreSQL schema, was minimized into one fresh typed frame,
+and supplied one separately immutable Sydney Vertex generation. Exactly one
+provider call produced one deterministic digest-bound no-command release; both
+ledgers are consumed, database counts are unchanged and the schema is absent.
+It opens no real-person data, continuing source/provider access, reusable
+runtime, tool or command authority. The finite AES-C0 through AES-C5 sequence
+is complete and no AES-C6 is planned or authorised.
 
 The controlling plan is
 [`docs/raisa-agent-execution-surface-containment-gate-plan.md`](docs/raisa-agent-execution-surface-containment-gate-plan.md)
@@ -705,10 +722,12 @@ The accepted AES-C3 result is
 [`docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md).
 The accepted AES-C4 result is
 [`docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-closeout.md).
-This entry grants no continuing provider call, real product context, product
-read, credential flow, provider tool, command, deployment or production
-authority. It also grants no reusable adapter, generic network or executable
-tool.
+The accepted AES-C5 result is
+[`docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-closeout.md).
+This entry grants no continuing provider call, real-person or operational
+product context, product/database read, credential flow, provider tool,
+command, deployment or production authority. It also grants no reusable
+adapter, generic network or executable tool.
 
 ---
 

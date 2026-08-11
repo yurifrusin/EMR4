@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_exact_aes_c5_occupied_evidence_acceptance_closeout_continuity_governance_and_receipt_paths_by_explicit_staging",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Reviewed source 4e5d96ada19c51432fa4db46c76e23c952147c52 passed one authenticated authored-synthetic practice route/PostgreSQL read and one separate Sydney Vertex call: HTTP 200/STOP, 2713 ms, 451 prompt, 105 candidate, 391 thought and 947 total tokens. Both ledgers are consumed, the schema is absent and no sensitive value or reusable capability remains. Final gates pass: 75 AES-C5 focused/continuity tests, wider serial governance checks, canonical fast 190, CI-static 184, Ruff, target-3.11 source compilation, Diary JavaScript, leakage lint and whitespace. The local CI wrapper's literal Python 3.11 runtime assertion is unavailable on this Python 3.14-only workstation; its exact remaining checks passed independently.",
+    "current_authority_allocation": "GPT Sol owns final acceptance, closeout, explicit-path commit and task-branch publication. DeepSeek's bounded candidate is preserved with Sol's recorded recovery; Gemini 3.6 Flash/high supplied only the accepted exact-head veto. No worker owns integration, occupied retry, protected refs, deployment, production or release.",
+    "git_refs_and_worktree": "The task branch is at 8889ef0233e2b00ce2e086c71d355691252632ce, whose only delta after reviewed source 4e5d96ada19c51432fa4db46c76e23c952147c52 is accepted review/orchestration evidence; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains cdb9ff3df66666ac569c289bc1734c119683c9a3. The index is empty; 507 untracked files including five docs/branding paths are preserved. Explicit-path staging only will be used.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and is now updated to the accepted AES-C5 result at Continuity 242 / Compass 224. It records that AES-C0 through AES-C5 are complete, no AES-C6 is planned or authorized, protected refs remain fixed and all unrelated untracked files must be preserved.",
+    "protected_evidence_boundaries": "Only exact AES-C5 plan/implementation/evidence/review/acceptance/closeout/Continuity/Compass/governance/receipt paths are eligible for staging. Protected holdouts, historical Diary/PHI, docs/branding and every unrelated untracked file remain excluded. No continuing product/database/provider access, real-person or patient/clinical data, credential/IAM change, filesystem/provider tool, generic network, command/write, reusable runtime, deployment, production, release, Pages or protected-ref movement is authorized."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

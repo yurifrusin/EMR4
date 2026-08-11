@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "execute_exactly_one_no_retry_aes_c5_occupied_rehearsal_with_one_authenticated_authored_synthetic_product_route_read_and_one_sydney_vertex_call_then_cleanup",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 is accepted at Continuity 241 / Compass 223; AES-C5 is the final named AES descendant and is frozen to one exact practitioner-directory source and Reception One booking-context purpose.",
+    "current_authority_allocation": "GPT Sol retains occupied execution, acceptance, recovery, Git and publication authority. DeepSeek's worker artifact is complete and idle. Gemini 3.6 Flash/high supplied one accepted read-only exact-head veto and is idle. The Vertex inference receives only the frozen minimized authored-synthetic packet and no tool, lease, credential or command authority.",
+    "active_plan_and_acceptance": "Reviewed source 4e5d96ada19c51432fa4db46c76e23c952147c52 passes the independent veto with 71 focused tests and zero external operations; the only later commit adds review/orchestration evidence and changes no product-runtime source. Current official Google facts still match the plan. The sanitized read-only preflight passes all 22 controls with SHA-256 0c4fe229adb9e0a9e6d39e00fd0b2753ed0643cf627d191a233b8163f3ef7dc4, no prompt/inference and no state change. The separate gcloud impersonation-store check passes without printing or persisting a token; its first wrapper falsely promoted the routine impersonation warning and was discarded without inference or external mutation.",
+    "protected_evidence_boundaries": "The attempt is limited to one fresh disposable PostgreSQL schema containing only the five frozen authored-synthetic practitioner records, one authenticated practice-scoped GET yielding three active rows, one minimized ContextFrameSet and at most one gemini-2.5-flash request. No real-person, patient, clinical, appointment, operational-practice, protected or licensed data; no watcher, generic database/source, filesystem, provider tool, command/write, retry/fallback, reusable runtime, deployment, production, release, Pages or protected ref is authorized. Every unrelated untracked file and docs/branding remain excluded.",
+    "git_refs_and_worktree": "The task branch is at 8889ef0233e2b00ce2e086c71d355691252632ce; exact independently reviewed source 4e5d96ada19c51432fa4db46c76e23c952147c52 is its parent source and the intervening commit contains only review/orchestration evidence. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index are clean, 496 untracked files including five docs/branding paths are preserved, and all three occupied output targets are absent."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c5_single_occupied_attempt_preintegration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the exact preexecution facts, cloud/ADC, residue and Git gates."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Completed worker is idle."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The accepted exact-head veto is complete; review worktree was clean and unchanged."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

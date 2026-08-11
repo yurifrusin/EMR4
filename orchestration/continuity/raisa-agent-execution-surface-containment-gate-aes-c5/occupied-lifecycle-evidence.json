@@ -1,0 +1,19 @@
+{
+  "contains_sensitive_values": false,
+  "core_evidence_digest": "sha256:8728abb02e8adbb8f418a0a11db1e595e6e03d34e325c77d9a4825934c27f237",
+  "database_counts_unchanged": true,
+  "database_statement_count": 3,
+  "mode": "occupied",
+  "patient_clinical_or_real_person_data": false,
+  "product_reads": 1,
+  "provider_calls": 1,
+  "raw_route_jwt_database_url_prompt_or_provider_text_retained": false,
+  "result": "raisa_agent_execution_surface_containment_gate_aes_c5_product_runtime_admission_pass",
+  "route_calls": 1,
+  "schema_absent_after_terminal_state": true,
+  "schema_name_digest": "sha256:1d04eaadbf82bf296ae49e9a1fb8748cc4b1e04ed72238e4b8c69d7d73b16771",
+  "schema_name_retained": false,
+  "schema_preexisted": false,
+  "schema_version": "emr4.aes_c5.local_route_lifecycle_evidence.v1",
+  "source_head": "4e5d96ada19c51432fa4db46c76e23c952147c52"
+}

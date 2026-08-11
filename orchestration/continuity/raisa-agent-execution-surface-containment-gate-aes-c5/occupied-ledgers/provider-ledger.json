@@ -1,0 +1,18 @@
+{
+  "actual_provider_calls": 1,
+  "generation_id": "generation-aes-c5-provider-inference-001",
+  "ledger_id": "aes-c5-provider-ledger-001",
+  "manifest_digest": "sha256:2922ba44f33ad0caa945f8ac3ed9a2adb4e9329868ac1d1f0504815de057a345",
+  "maximum_cost_usd": 0.25,
+  "maximum_provider_calls": 1,
+  "maximum_retries": 0,
+  "mode": "occupied",
+  "provider_call_allowances_consumed": 1,
+  "provider_calls_reserved": 0,
+  "reserved_cost_per_call_usd": 0.25,
+  "reserved_cost_usd": 0.0,
+  "retries_consumed": 0,
+  "schema_version": "emr4.aes_c5.provider_ledger.v1",
+  "source_head": "4e5d96ada19c51432fa4db46c76e23c952147c52",
+  "status": "consumed"
+}

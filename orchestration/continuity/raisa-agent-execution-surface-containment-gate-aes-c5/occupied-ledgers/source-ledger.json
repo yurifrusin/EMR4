@@ -1,0 +1,16 @@
+{
+  "actual_source_calls": 1,
+  "generation_id": "generation-aes-c5-authoritative-read-001",
+  "ledger_id": "aes-c5-source-ledger-001",
+  "manifest_digest": "sha256:454b485b4e05c833c09eaa7b632587cb020fb080b52cec86e85b512d4005ea53",
+  "maximum_route_calls": 1,
+  "maximum_route_retries": 0,
+  "maximum_source_calls": 1,
+  "mode": "occupied",
+  "route_retries_consumed": 0,
+  "schema_version": "emr4.aes_c5.source_ledger.v1",
+  "source_call_allowances_consumed": 1,
+  "source_call_allowances_reserved": 0,
+  "source_head": "4e5d96ada19c51432fa4db46c76e23c952147c52",
+  "status": "consumed"
+}
