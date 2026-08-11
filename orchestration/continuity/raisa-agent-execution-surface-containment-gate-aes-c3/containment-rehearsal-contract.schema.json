@@ -107,6 +107,9 @@
         "manifest_id": {
           "$ref": "#/$defs/Identifier"
         },
+        "manifest_digest": {
+          "$ref": "#/$defs/Digest"
+        },
         "mutation_id": {
           "$ref": "#/$defs/Identifier"
         },
@@ -157,6 +160,7 @@
         "mutation_id",
         "generation_id",
         "manifest_id",
+        "manifest_digest",
         "bureau_id",
         "work_cell_id",
         "authority_binding_digest",
@@ -292,10 +296,19 @@
     "ReplayArtifactFixture": {
       "additionalProperties": false,
       "properties": {
+        "authority_binding_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "bureau_id": {
+          "$ref": "#/$defs/Identifier"
+        },
         "fixture_digest": {
           "$ref": "#/$defs/Digest"
         },
         "fixture_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "generation_id": {
           "$ref": "#/$defs/Identifier"
         },
         "kind": {
@@ -305,14 +318,29 @@
             "token"
           ]
         },
+        "manifest_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "manifest_id": {
+          "$ref": "#/$defs/Identifier"
+        },
         "synthetic_noncredential": {
           "const": true
+        },
+        "work_cell_id": {
+          "$ref": "#/$defs/Identifier"
         }
       },
       "required": [
         "kind",
         "fixture_id",
         "fixture_digest",
+        "generation_id",
+        "manifest_id",
+        "manifest_digest",
+        "bureau_id",
+        "work_cell_id",
+        "authority_binding_digest",
         "synthetic_noncredential"
       ],
       "type": "object"
@@ -622,13 +650,24 @@
     },
     "work_cell_replay_fixture_policy": {
       "const": {
+        "binding_fields": [
+          "generation_id",
+          "manifest_id",
+          "manifest_digest",
+          "bureau_id",
+          "work_cell_id",
+          "authority_binding_digest"
+        ],
+        "current_identity_is_broker_owned": true,
+        "exact_binding_compared_before_inherited_admission": true,
         "fixture_never_enters_work_cell_view": true,
         "replay_fixture_kinds": [
           "lease",
           "alias",
           "token"
         ],
-        "synthetic_noncredential": true
+        "synthetic_noncredential": true,
+        "unchanged_binding_cannot_claim_stale_replay": true
       }
     },
     "zero_runtime_boundary": {

@@ -50,6 +50,7 @@ from scripts.raisa_agent_execution_surface_containment_gate_aes_c2_broker_simula
     _adopt_c1,
     _base_attempt,
     _canonical_expected_budget_commit,
+    _canonical_post_admission_state,
     _c1_attempt,
     _set_path,
     evaluate_simulation_attempt,
@@ -76,6 +77,21 @@ CONTEXT_FRAME_SET_DIGEST = "sha256:" + "cd" * 32
 REPLAY_LEASE_DIGEST = "sha256:" + "11" * 32
 REPLAY_ALIAS_DIGEST = "sha256:" + "22" * 32
 REPLAY_TOKEN_DIGEST = "sha256:" + "33" * 32
+CURRENT_GENERATION_ID = "generation-synthetic-001"
+CURRENT_MANIFEST_ID = "manifest-synthetic-001"
+CURRENT_MANIFEST_DIGEST = (
+    "sha256:ef00224803805901c88cd02ce208e2831559c0261220df43adebdf77efe1da11"
+)
+CURRENT_BUREAU_ID = "bureau-synthetic"
+CURRENT_WORK_CELL_ID = "work-cell-synthetic-001"
+REPLAY_BINDING_FIELDS: list[str] = [
+    "generation_id",
+    "manifest_id",
+    "manifest_digest",
+    "bureau_id",
+    "work_cell_id",
+    "authority_binding_digest",
+]
 
 # Exact inherited AES-C0/C1/C2 artifact identities frozen by the C3 plan.
 INHERITED_ARTIFACT_DIGESTS: dict[str, str] = {
@@ -261,6 +277,10 @@ SUPPLY_CHAIN_RULE: dict[str, Any] = {
 WORK_CELL_REPLAY_FIXTURE_POLICY: dict[str, Any] = {
     "replay_fixture_kinds": ["lease", "alias", "token"],
     "synthetic_noncredential": True,
+    "binding_fields": list(REPLAY_BINDING_FIELDS),
+    "current_identity_is_broker_owned": True,
+    "exact_binding_compared_before_inherited_admission": True,
+    "unchanged_binding_cannot_claim_stale_replay": True,
     "fixture_never_enters_work_cell_view": True,
 }
 ZERO_RUNTIME_BOUNDARY: dict[str, Any] = {
@@ -415,12 +435,14 @@ def _payload_digest(value: str) -> str:
 
 
 def _context_binding_matches(attempt: dict[str, Any]) -> bool:
-    canonical = attempt["context_frame_set_digest"]
-    binding = attempt["context_binding"]
-    return (
-        binding["candidate"] == canonical
-        and binding["proofreader"] == canonical
-        and binding["broker"] == canonical
+    canonical = attempt.get("context_frame_set_digest")
+    binding = attempt.get("context_binding")
+    return bool(
+        isinstance(canonical, str)
+        and isinstance(binding, dict)
+        and binding.get("candidate") == canonical
+        and binding.get("proofreader") == canonical
+        and binding.get("broker") == canonical
     )
 
 
@@ -447,8 +469,28 @@ def _sample_revocation(manifest: dict[str, Any]) -> dict[str, Any]:
 
 
 def _base_c2_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
-    """Build the canonical exact C2 success attempt for the outer scenario id."""
-    c2 = _base_attempt(attempt["scenario_id"])
+    """Return the exact declared inherited C2 base or C1-in-C2 base.
+
+    C2 bases come byte-for-byte from the committed canonical C2 scenario
+    packet.  C1 bases are the exact committed C1 scenario embedded in a fresh
+    closed C2 wrapper.  The outer C3 scenario ID never selects the inherited
+    base implicitly.
+    """
+    base_scenario_id = attempt["base_scenario_id"]
+    c2_packet = _load(AES_C2_SCENARIOS_PATH)
+    for scenario in c2_packet["scenarios"]:
+        if scenario["scenario_id"] == base_scenario_id:
+            return copy.deepcopy(scenario)
+
+    # _c1_attempt rejects an unknown C1 scenario ID.  The public evaluator
+    # validates the exact canonical C3 binding before this helper is reached.
+    c1 = _c1_attempt(base_scenario_id)
+    c2 = _base_attempt(f"c3-wrapper-{attempt['scenario_id']}")
+    c2["broker_admission_attempt"] = copy.deepcopy(c1)
+    c2["work_cell_view"]["candidate"] = copy.deepcopy(c1["candidate"])
+    c2["work_cell_view"]["proofreader_result"] = copy.deepcopy(c1["proofreader_result"])
+    c2["post_admission_control_state"] = _canonical_post_admission_state(c1)
+    c2["expected_budget_commit"] = _canonical_expected_budget_commit(c1)
     return c2
 
 
@@ -456,6 +498,45 @@ def _recompute_budget_commit(c2: dict[str, Any]) -> None:
     c2["expected_budget_commit"] = _canonical_expected_budget_commit(
         c2["broker_admission_attempt"]
     )
+
+
+def _value_occurs(value: Any, needles: set[str]) -> bool:
+    if isinstance(value, str):
+        return value in needles
+    if isinstance(value, dict):
+        return any(_value_occurs(child, needles) for child in value.values())
+    if isinstance(value, list):
+        return any(_value_occurs(child, needles) for child in value)
+    return False
+
+
+def _replay_fixture_exposed_to_work_cell(
+    attempt: dict[str, Any], c2: dict[str, Any]
+) -> bool:
+    replay = attempt.get("replay_artifact")
+    if replay is None:
+        return False
+    fixture_values = {value for value in replay.values() if isinstance(value, str)}
+    return _value_occurs(c2["work_cell_view"], fixture_values)
+
+
+def _replay_binding_reason(attempt: dict[str, Any]) -> str | None:
+    replay = attempt.get("replay_artifact")
+    if replay is None:
+        return None
+    if (
+        replay["bureau_id"] != attempt["bureau_id"]
+        or replay["work_cell_id"] != attempt["work_cell_id"]
+        or replay["authority_binding_digest"] != attempt["authority_binding_digest"]
+    ):
+        return "authority_changed"
+    if (
+        replay["generation_id"] != attempt["generation_id"]
+        or replay["manifest_id"] != attempt["manifest_id"]
+        or replay["manifest_digest"] != attempt["manifest_digest"]
+    ):
+        return "generation_superseded"
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -637,14 +718,20 @@ def _stale_reason(mutation_id: str) -> str:
 
 
 def _build_result(
-    attempt: dict[str, Any],
+    attempt: Any,
     status: str,
     reason: str,
     calls: int,
     released: int,
     c2_result: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    scenario_id = attempt["scenario_id"]
+    attempt_map = attempt if isinstance(attempt, dict) else {}
+    scenario_id = attempt_map.get("scenario_id")
+    if scenario_id not in SCENARIO_EXPECTATIONS:
+        scenario_id = "invalid-hostile-containment-attempt"
+    base_scenario_id = attempt_map.get("base_scenario_id")
+    if not isinstance(base_scenario_id, str):
+        base_scenario_id = "invalid-inherited-base"
     return {
         "schema_version": "emr4.aes_c3.hostile_containment_result.v1",
         "result_id": f"containment-result-{scenario_id}",
@@ -653,12 +740,12 @@ def _build_result(
         "reason_codes": [reason],
         "pure_python_call_count": calls,
         "released_result_count": released,
-        "inherited_base_scenario_id": attempt["base_scenario_id"],
+        "inherited_base_scenario_id": base_scenario_id,
         "admission_decision": (
-            c2_result["admission_decision"] if c2_result is not None else None
+            c2_result.get("admission_decision") if c2_result is not None else None
         ),
         "admission_reason_codes": (
-            c2_result["admission_reason_codes"] if c2_result is not None else []
+            c2_result.get("admission_reason_codes", []) if c2_result is not None else []
         ),
         "invocation_digest": (
             c2_result.get("invocation_digest") if c2_result is not None else None
@@ -666,12 +753,66 @@ def _build_result(
         "result_digest": (
             c2_result.get("result_digest") if c2_result is not None else None
         ),
-        "context_binding_matched": _context_binding_matches(attempt),
+        "context_binding_matched": _context_binding_matches(attempt_map),
         "replay_fixture_presented_to_work_cell": False,
         "command_authority": False,
         "real_runtime_or_external_effect": False,
         "contains_sensitive_values": False,
     }
+
+
+def _inner_call_count(result: dict[str, Any] | None) -> int:
+    if result is None:
+        return 0
+    value = result.get("simulated_invocation_count")
+    return value if isinstance(value, int) and value >= 0 else 0
+
+
+def _inner_result_matches(
+    result: dict[str, Any],
+    *,
+    status: str,
+    reasons: list[str],
+    admission_decision: str,
+    admission_reasons: list[str],
+    calls: int,
+    released: bool,
+    require_release_digests: bool = False,
+) -> bool:
+    c2_schema = _load(AES_C2_SCHEMA_PATH)
+    if validate_instance(
+        result,
+        c2_schema["$defs"]["BrokerSimulationResult"],
+        root_schema=c2_schema,
+    ):
+        return False
+    if (
+        result.get("status") != status
+        or result.get("reason_codes") != reasons
+        or result.get("admission_decision") != admission_decision
+        or result.get("admission_reason_codes") != admission_reasons
+        or result.get("simulated_invocation_count") != calls
+        or result.get("released_simulated_result") is not released
+    ):
+        return False
+    if require_release_digests:
+        return bool(result.get("invocation_digest") and result.get("result_digest"))
+    return (
+        result.get("invocation_digest") is None and result.get("result_digest") is None
+    )
+
+
+def _inner_contradiction(
+    attempt: Any, result: dict[str, Any] | None = None
+) -> dict[str, Any]:
+    """Fail closed without laundering a contradictory inherited call count."""
+    return _build_result(
+        attempt,
+        "reject",
+        "closed_contract_rejection",
+        _inner_call_count(result),
+        0,
+    )
 
 
 def _evaluate_boundary_probe_sequence(attempt: dict[str, Any]) -> dict[str, Any]:
@@ -683,13 +824,26 @@ def _evaluate_boundary_probe_sequence(attempt: dict[str, Any]) -> dict[str, Any]
     """
     denied = 0
     probes = 0
-    for _ in range(2):
+    for step in range(2):
         c1 = _c1_attempt("candidate-operation-identity-deny")
         c1["budget_state"]["observed"]["denied_operations"] = denied
         c1["budget_state"]["observed"]["boundary_probes"] = probes
         c1["budget_state"]["terminal_state"] = "active"
         c1["budget_state"]["next_operation_permitted"] = True
         result = evaluate_c1_attempt(c1)
+        expected_count = step + 1
+        expected_terminal = "exhausted" if expected_count == 2 else "active"
+        expected_permitted = expected_count != 2
+        if (
+            result.get("decision") != "deny"
+            or result.get("reason_codes") != ["operation_identity_candidate_controlled"]
+            or result.get("after_observed", {}).get("denied_operations")
+            != expected_count
+            or result.get("after_observed", {}).get("boundary_probes") != expected_count
+            or result.get("after_terminal_state") != expected_terminal
+            or result.get("after_next_operation_permitted") is not expected_permitted
+        ):
+            return _inner_contradiction(attempt)
         denied = result["after_observed"]["denied_operations"]
         probes = result["after_observed"]["boundary_probes"]
     # The third exact operation observes the terminal generation and stops
@@ -699,7 +853,16 @@ def _evaluate_boundary_probe_sequence(attempt: dict[str, Any]) -> dict[str, Any]
     c1["budget_state"]["observed"]["boundary_probes"] = probes
     c1["budget_state"]["terminal_state"] = "exhausted"
     c1["budget_state"]["next_operation_permitted"] = False
-    evaluate_c1_attempt(c1)
+    terminal_result = evaluate_c1_attempt(c1)
+    if (
+        terminal_result.get("decision") != "stop"
+        or terminal_result.get("reason_codes") != ["budget_exhausted"]
+        or terminal_result.get("after_observed", {}).get("denied_operations") != 2
+        or terminal_result.get("after_observed", {}).get("boundary_probes") != 2
+        or terminal_result.get("after_terminal_state") != "exhausted"
+        or terminal_result.get("after_next_operation_permitted") is not False
+    ):
+        return _inner_contradiction(attempt)
     return _build_result(attempt, "stop", "denial_budget_exhausted", 0, 0)
 
 
@@ -734,6 +897,16 @@ def _evaluate_repeated_failure_sequence(attempt: dict[str, Any]) -> dict[str, An
         c1["budget_state"]["observed"]["repeated_failures"] = failures
         _recompute_budget_commit(c2)
         result = evaluate_simulation_attempt(c2)
+        if not _inner_result_matches(
+            result,
+            status="stop",
+            reasons=["adapter_result_invalid"],
+            admission_decision="allow",
+            admission_reasons=["manifest_grant_and_current_authority"],
+            calls=1,
+            released=False,
+        ):
+            return _inner_contradiction(attempt, result)
         calls += result["simulated_invocation_count"]
         failures += 1
     # Third attempt: the broker-owned state is terminal, so no pure call occurs.
@@ -744,20 +917,32 @@ def _evaluate_repeated_failure_sequence(attempt: dict[str, Any]) -> dict[str, An
     c1["budget_state"]["terminal_state"] = "exhausted"
     c1["budget_state"]["next_operation_permitted"] = False
     _recompute_budget_commit(c2)
-    result = evaluate_simulation_attempt(c2)
-    calls += result["simulated_invocation_count"]
+    terminal_result = evaluate_simulation_attempt(c2)
+    if not _inner_result_matches(
+        terminal_result,
+        status="not_dispatched",
+        reasons=["admission_not_allow"],
+        admission_decision="stop",
+        admission_reasons=["budget_exhausted"],
+        calls=0,
+        released=False,
+    ):
+        return _inner_contradiction(attempt, terminal_result)
+    calls += terminal_result["simulated_invocation_count"]
     return _build_result(attempt, "stop", "repeated_failure_budget_exhausted", calls, 0)
 
 
-def evaluate_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
+def evaluate_attempt(attempt: Any) -> dict[str, Any]:
     """Evaluate one closed HostileContainmentAttempt with fixed fail-closed order."""
-    scenario_id = attempt["scenario_id"]
+    if validate_attempt(attempt):
+        return _inner_contradiction(attempt)
+
     family = attempt["attack_family"]
     mutation_id = attempt["mutation_id"]
 
     # Closed mutation-ID table lookup; the document never supplies a callable.
     if mutation_id not in MUTATION_TABLE:
-        return _build_result(attempt, "reject", "closed_contract_rejection", 0, 0)
+        return _inner_contradiction(attempt)
 
     # Exact context binding before any inherited simulation.
     if not _context_binding_matches(attempt):
@@ -767,12 +952,28 @@ def evaluate_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
         c2 = _base_c2_attempt(attempt)
         MUTATION_TABLE[mutation_id](c2, attempt)
         c2_result = evaluate_simulation_attempt(c2)
-        if c2_result["status"] == "simulated":
-            reason = (
-                "exact_inert_control" if family == "control" else "opaque_content_inert"
-            )
-            return _build_result(attempt, "contained", reason, 1, 1, c2_result)
-        return _build_result(attempt, "stop", "opaque_content_inert", 0, 0, c2_result)
+        if not _inner_result_matches(
+            c2_result,
+            status="simulated",
+            reasons=["simulated_inert_adapter"],
+            admission_decision="allow",
+            admission_reasons=["manifest_grant_and_current_authority"],
+            calls=1,
+            released=True,
+            require_release_digests=True,
+        ):
+            return _inner_contradiction(attempt, c2_result)
+        reason = (
+            "exact_inert_control" if family == "control" else "opaque_content_inert"
+        )
+        return _build_result(
+            attempt,
+            "contained",
+            reason,
+            c2_result["simulated_invocation_count"],
+            int(c2_result["released_simulated_result"]),
+            c2_result,
+        )
 
     if family == "structural":
         c2 = _base_c2_attempt(attempt)
@@ -780,17 +981,29 @@ def evaluate_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
         errors = validate_c2_attempt(c2)
         if errors:
             return _build_result(attempt, "reject", "closed_contract_rejection", 0, 0)
-        # Defensive: a structural attack that slipped through validation still
-        # fails closed as a stop with zero release.
-        return _build_result(attempt, "stop", "closed_contract_rejection", 0, 0)
+        return _inner_contradiction(attempt)
 
     if family == "result_carrier":
         c2 = _base_c2_attempt(attempt)
         MUTATION_TABLE[mutation_id](c2, attempt)
         c2_result = evaluate_simulation_attempt(c2)
-        calls = c2_result["simulated_invocation_count"]
+        if not _inner_result_matches(
+            c2_result,
+            status="stop",
+            reasons=["adapter_result_invalid"],
+            admission_decision="allow",
+            admission_reasons=["manifest_grant_and_current_authority"],
+            calls=1,
+            released=False,
+        ):
+            return _inner_contradiction(attempt, c2_result)
         return _build_result(
-            attempt, "stop", "adapter_result_invalid", calls, 0, c2_result
+            attempt,
+            "stop",
+            "adapter_result_invalid",
+            c2_result["simulated_invocation_count"],
+            0,
+            c2_result,
         )
 
     if family == "cumulative":
@@ -802,32 +1015,116 @@ def evaluate_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
         c2 = _base_c2_attempt(attempt)
         MUTATION_TABLE[mutation_id](c2, attempt)
         c2_result = evaluate_simulation_attempt(c2)
+        if not _inner_result_matches(
+            c2_result,
+            status="not_dispatched",
+            reasons=["admission_not_allow"],
+            admission_decision="stop",
+            admission_reasons=["budget_exhausted"],
+            calls=0,
+            released=False,
+        ):
+            return _inner_contradiction(attempt, c2_result)
         return _build_result(
-            attempt, "stop", "egress_budget_exhausted", 0, 0, c2_result
+            attempt,
+            "stop",
+            "egress_budget_exhausted",
+            c2_result["simulated_invocation_count"],
+            0,
+            c2_result,
         )
 
     if family == "stale_replay":
         c2 = _base_c2_attempt(attempt)
+        if _replay_fixture_exposed_to_work_cell(attempt, c2):
+            return _inner_contradiction(attempt)
         MUTATION_TABLE[mutation_id](c2, attempt)
         c2_result = evaluate_simulation_attempt(c2)
+
+        replay_reason = _replay_binding_reason(attempt)
+        if replay_reason is not None:
+            if replay_reason != _stale_reason(mutation_id) or not _inner_result_matches(
+                c2_result,
+                status="not_dispatched",
+                reasons=["admission_not_allow"],
+                admission_decision="stop",
+                admission_reasons=[replay_reason],
+                calls=0,
+                released=False,
+            ):
+                return _inner_contradiction(attempt, c2_result)
+            return _build_result(
+                attempt,
+                "stop",
+                replay_reason,
+                c2_result["simulated_invocation_count"],
+                0,
+                c2_result,
+            )
+
+        expected_control_reason = (
+            "external_kill_switch"
+            if mutation_id == "post-admission-external-kill"
+            else "control_state_changed"
+        )
+        if mutation_id not in (
+            "post-admission-revocation",
+            "post-admission-external-kill",
+        ) or not _inner_result_matches(
+            c2_result,
+            status="stop",
+            reasons=[expected_control_reason],
+            admission_decision="allow",
+            admission_reasons=["manifest_grant_and_current_authority"],
+            calls=0,
+            released=False,
+        ):
+            return _inner_contradiction(attempt, c2_result)
         return _build_result(
-            attempt, "stop", _stale_reason(mutation_id), 0, 0, c2_result
+            attempt,
+            "stop",
+            "external_kill_switch",
+            c2_result["simulated_invocation_count"],
+            0,
+            c2_result,
         )
 
     if family == "supply_chain":
         c2 = _base_c2_attempt(attempt)
         MUTATION_TABLE[mutation_id](c2, attempt)
         c2_result = evaluate_simulation_attempt(c2)
+        if mutation_id == "adapter-artifact-digest-mismatch":
+            inner_matches = _inner_result_matches(
+                c2_result,
+                status="stop",
+                reasons=["supply_chain_identity_mismatch"],
+                admission_decision="allow",
+                admission_reasons=["manifest_grant_and_current_authority"],
+                calls=0,
+                released=False,
+            )
+        else:
+            inner_matches = _inner_result_matches(
+                c2_result,
+                status="not_dispatched",
+                reasons=["admission_not_allow"],
+                admission_decision="stop",
+                admission_reasons=["supply_chain_identity_mismatch"],
+                calls=0,
+                released=False,
+            )
+        if not inner_matches:
+            return _inner_contradiction(attempt, c2_result)
         return _build_result(
             attempt,
             "stop",
             "supply_chain_identity_mismatch",
-            0,
+            c2_result["simulated_invocation_count"],
             0,
             c2_result,
         )
 
-    return _build_result(attempt, "stop", "closed_contract_rejection", 0, 0)
+    return _inner_contradiction(attempt)
 
 
 # ---------------------------------------------------------------------------
@@ -894,30 +1191,60 @@ REPLAY_ARTIFACTS: dict[str, dict[str, Any]] = {
         "kind": "lease",
         "fixture_id": "fixture-lease-superseded",
         "fixture_digest": REPLAY_LEASE_DIGEST,
+        "generation_id": "generation-synthetic-stale",
+        "manifest_id": "manifest-synthetic-stale",
+        "manifest_digest": WRONG_DIGEST,
+        "bureau_id": CURRENT_BUREAU_ID,
+        "work_cell_id": CURRENT_WORK_CELL_ID,
+        "authority_binding_digest": AUTHORITY_DIGEST,
         "synthetic_noncredential": True,
     },
     "restart-generation-lease-replay-stop": {
         "kind": "lease",
         "fixture_id": "fixture-lease-restart",
         "fixture_digest": REPLAY_LEASE_DIGEST,
+        "generation_id": "generation-synthetic-before-restart",
+        "manifest_id": "manifest-synthetic-before-restart",
+        "manifest_digest": WRONG_DIGEST,
+        "bureau_id": CURRENT_BUREAU_ID,
+        "work_cell_id": CURRENT_WORK_CELL_ID,
+        "authority_binding_digest": AUTHORITY_DIGEST,
         "synthetic_noncredential": True,
     },
     "cross-bureau-lease-replay-stop": {
         "kind": "lease",
         "fixture_id": "fixture-lease-cross-bureau",
         "fixture_digest": REPLAY_LEASE_DIGEST,
+        "generation_id": CURRENT_GENERATION_ID,
+        "manifest_id": CURRENT_MANIFEST_ID,
+        "manifest_digest": CURRENT_MANIFEST_DIGEST,
+        "bureau_id": "bureau-synthetic-other",
+        "work_cell_id": CURRENT_WORK_CELL_ID,
+        "authority_binding_digest": AUTHORITY_DIGEST,
         "synthetic_noncredential": True,
     },
     "stale-alias-replay-stop": {
         "kind": "alias",
         "fixture_id": "fixture-alias-stale",
         "fixture_digest": REPLAY_ALIAS_DIGEST,
+        "generation_id": "generation-synthetic-stale",
+        "manifest_id": "manifest-synthetic-stale",
+        "manifest_digest": WRONG_DIGEST,
+        "bureau_id": CURRENT_BUREAU_ID,
+        "work_cell_id": CURRENT_WORK_CELL_ID,
+        "authority_binding_digest": AUTHORITY_DIGEST,
         "synthetic_noncredential": True,
     },
     "stale-token-replay-stop": {
         "kind": "token",
         "fixture_id": "fixture-token-stale",
         "fixture_digest": REPLAY_TOKEN_DIGEST,
+        "generation_id": "generation-synthetic-stale",
+        "manifest_id": "manifest-synthetic-stale",
+        "manifest_digest": WRONG_DIGEST,
+        "bureau_id": CURRENT_BUREAU_ID,
+        "work_cell_id": CURRENT_WORK_CELL_ID,
+        "authority_binding_digest": AUTHORITY_DIGEST,
         "synthetic_noncredential": True,
     },
 }
@@ -961,10 +1288,11 @@ def _make_attempt(
         "payload_sha256": _payload_digest(payload_value),
         "base_scenario_id": base_scenario_id,
         "mutation_id": mutation_id,
-        "generation_id": "generation-synthetic-001",
-        "manifest_id": "manifest-synthetic-001",
-        "bureau_id": "bureau-synthetic",
-        "work_cell_id": "work-cell-synthetic-001",
+        "generation_id": CURRENT_GENERATION_ID,
+        "manifest_id": CURRENT_MANIFEST_ID,
+        "manifest_digest": CURRENT_MANIFEST_DIGEST,
+        "bureau_id": CURRENT_BUREAU_ID,
+        "work_cell_id": CURRENT_WORK_CELL_ID,
         "authority_binding_digest": AUTHORITY_DIGEST,
         "context_frame_set_digest": CONTEXT_FRAME_SET_DIGEST,
         "context_binding": (
@@ -1314,7 +1642,9 @@ def generate_scenarios() -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
-def validate_attempt(attempt: dict[str, Any]) -> list[str]:
+def validate_attempt(attempt: Any) -> list[str]:
+    if not isinstance(attempt, dict):
+        return ["$:type"]
     schema = _load(SCHEMA_PATH)
     errors = list(
         validate_instance(
@@ -1348,13 +1678,15 @@ def validate_attempt(attempt: dict[str, Any]) -> list[str]:
         errors.append("$.expected_released_results:range")
     # Frozen wrapper identities: the wrapper never redeclares a different
     # generation/manifest/bureau/work-cell/authority binding.
-    if attempt.get("generation_id") != "generation-synthetic-001":
+    if attempt.get("generation_id") != CURRENT_GENERATION_ID:
         errors.append("$.generation_id:not_exact")
-    if attempt.get("manifest_id") != "manifest-synthetic-001":
+    if attempt.get("manifest_id") != CURRENT_MANIFEST_ID:
         errors.append("$.manifest_id:not_exact")
-    if attempt.get("bureau_id") != "bureau-synthetic":
+    if attempt.get("manifest_digest") != CURRENT_MANIFEST_DIGEST:
+        errors.append("$.manifest_digest:not_exact")
+    if attempt.get("bureau_id") != CURRENT_BUREAU_ID:
         errors.append("$.bureau_id:not_exact")
-    if attempt.get("work_cell_id") != "work-cell-synthetic-001":
+    if attempt.get("work_cell_id") != CURRENT_WORK_CELL_ID:
         errors.append("$.work_cell_id:not_exact")
     if attempt.get("authority_binding_digest") != AUTHORITY_DIGEST:
         errors.append("$.authority_binding_digest:not_exact")
@@ -1379,6 +1711,17 @@ def validate_attempt(attempt: dict[str, Any]) -> list[str]:
     if attempt.get("attack_family") == "egress_budget":
         if attempt.get("payload_utf8_byte_count") != 256:
             errors.append("$.egress_budget:payload_byte_count_not_256")
+    scenario_id = attempt.get("scenario_id")
+    if isinstance(scenario_id, str) and scenario_id in SCENARIO_EXPECTATIONS:
+        canonical = next(
+            scenario
+            for scenario in _build_scenarios()
+            if scenario["scenario_id"] == scenario_id
+        )
+        if attempt != canonical:
+            errors.append("$:canonical_scenario_binding_mismatch")
+    else:
+        errors.append("$.scenario_id:not_canonical")
     return sorted(set(errors))
 
 
@@ -1518,12 +1861,14 @@ def validate_scenario_packet(
 # ---------------------------------------------------------------------------
 
 
-def _base_mutation_scenario() -> dict[str, Any]:
+def _base_mutation_scenario(
+    scenario_id: str = "exact-inert-control-contained",
+) -> dict[str, Any]:
     packet = generate_scenarios()
     for scenario in packet["scenarios"]:
-        if scenario["scenario_id"] == "exact-inert-control-contained":
+        if scenario["scenario_id"] == scenario_id:
             return copy.deepcopy(scenario)
-    raise ValueError("missing control scenario")
+    raise ValueError(f"missing mutation scenario: {scenario_id}")
 
 
 def _hostile_mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
@@ -1551,6 +1896,10 @@ def _hostile_mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
         (
             "unknown_mutation_id",
             lambda a: _set_path(a, ("mutation_id",), "forged-mutation"),
+        ),
+        (
+            "wrong_base_scenario_id",
+            lambda a: _set_path(a, ("base_scenario_id",), "generation-superseded-stop"),
         ),
         (
             "wrong_payload_byte_count",
@@ -1605,8 +1954,28 @@ def _hostile_mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
             lambda a: _set_path(a, ("expected_pure_calls",), 7),
         ),
         (
+            "wrong_expected_released_results",
+            lambda a: _set_path(a, ("expected_released_results",), 3),
+        ),
+        (
             "wrong_generation_id",
             lambda a: _set_path(a, ("generation_id",), "generation-forged"),
+        ),
+        (
+            "wrong_manifest_id",
+            lambda a: _set_path(a, ("manifest_id",), "manifest-forged"),
+        ),
+        (
+            "wrong_manifest_digest",
+            lambda a: _set_path(a, ("manifest_digest",), WRONG_DIGEST),
+        ),
+        (
+            "wrong_bureau_id",
+            lambda a: _set_path(a, ("bureau_id",), "bureau-forged"),
+        ),
+        (
+            "wrong_work_cell_id",
+            lambda a: _set_path(a, ("work_cell_id",), "work-cell-forged"),
         ),
         (
             "wrong_authority_binding",
@@ -1633,14 +2002,59 @@ def _hostile_mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
                 },
             ),
         ),
+        (
+            "replay_artifact_removed",
+            lambda a: a.__setitem__("replay_artifact", None),
+        ),
+        (
+            "replay_generation_rebound_to_current",
+            lambda a: _set_path(
+                a, ("replay_artifact", "generation_id"), CURRENT_GENERATION_ID
+            ),
+        ),
+        (
+            "replay_manifest_id_rebound_to_current",
+            lambda a: _set_path(
+                a, ("replay_artifact", "manifest_id"), CURRENT_MANIFEST_ID
+            ),
+        ),
+        (
+            "replay_manifest_digest_rebound_to_current",
+            lambda a: _set_path(
+                a,
+                ("replay_artifact", "manifest_digest"),
+                CURRENT_MANIFEST_DIGEST,
+            ),
+        ),
+        (
+            "replay_bureau_changed",
+            lambda a: _set_path(a, ("replay_artifact", "bureau_id"), "bureau-forged"),
+        ),
+        (
+            "replay_work_cell_changed",
+            lambda a: _set_path(
+                a, ("replay_artifact", "work_cell_id"), "work-cell-forged"
+            ),
+        ),
+        (
+            "replay_authority_binding_changed",
+            lambda a: _set_path(
+                a, ("replay_artifact", "authority_binding_digest"), WRONG_DIGEST
+            ),
+        ),
     ]
 
 
 def validate_hostile_mutations() -> tuple[list[str], list[str]]:
-    base = _base_mutation_scenario()
     rejected: list[str] = []
     admitted: list[str] = []
     for name, mutate in _hostile_mutations():
+        base_scenario_id = (
+            "stale-alias-replay-stop"
+            if "replay" in name
+            else "exact-inert-control-contained"
+        )
+        base = _base_mutation_scenario(base_scenario_id)
         candidate = copy.deepcopy(base)
         try:
             mutate(candidate)

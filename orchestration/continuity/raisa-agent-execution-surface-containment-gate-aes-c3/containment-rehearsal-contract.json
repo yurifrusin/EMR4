@@ -596,13 +596,24 @@
     "runtime_image_digest_exact": true
   },
   "work_cell_replay_fixture_policy": {
+    "binding_fields": [
+      "generation_id",
+      "manifest_id",
+      "manifest_digest",
+      "bureau_id",
+      "work_cell_id",
+      "authority_binding_digest"
+    ],
+    "current_identity_is_broker_owned": true,
+    "exact_binding_compared_before_inherited_admission": true,
     "fixture_never_enters_work_cell_view": true,
     "replay_fixture_kinds": [
       "lease",
       "alias",
       "token"
     ],
-    "synthetic_noncredential": true
+    "synthetic_noncredential": true,
+    "unchanged_binding_cannot_claim_stale_replay": true
   },
   "zero_runtime_boundary": {
     "command_operations": 0,

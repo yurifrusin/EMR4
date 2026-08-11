@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_explicit_sol_owned_aes_c3_recovered_candidate_for_fresh_exact_head_gemini_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. AES-C2 remains accepted at Continuity 239 / Compass 221, and AES-C3 remains the current dependency-satisfied dual-review tranche. The DeepSeek self-pass is rejected and preserved; this commit creates only the Sol-owned recovered candidate.",
+    "current_authority_allocation": "GPT Sol owns the conceptual recovery, candidate commit, final acceptance and Git closeout. DeepSeek's exact candidate and closeout remain untrusted non-transferable provenance under AER-0257. Gemini 3.6 Flash/high through a fresh Antigravity project owns the next exact-head independent veto and receives no implementation or acceptance authority.",
+    "active_plan_and_acceptance": "The frozen AES-C3 plan and threat delta require exact inherited-base behavior, stale generation/restart/Bureau lease and alias/token binding, malformed-input rejection, context/supply identity, cumulative terminal latching, 61 scenarios, 28 pure calls, 21 digest-only releases and zero external effect. Sol recovery now derives every claimed outcome from a schema-valid exact C1/C2 result or explicit current-versus-replay binding. Standalone evidence passes 61 scenarios and 33/33 attempt plus 18/18 contract mutations; focused C3 is 25/25, serial AES/API is 106/106, maintained static is 180/180, canonical fast is 186/186 and register is 207/207.",
+    "protected_evidence_boundaries": "All recovery inputs are exact accepted repository artifacts or newly authored synthetic inert C3 objects. No protected evidence, historical Diary/PHI, patient/clinical/product/licensed data, provider/model call, real broker/process/container/adapter/credential, IAM/metadata, network, filesystem capability, database/source/watcher, decoder/interpreter, executable tool, command/write, deployment, production, release, Pages or protected-ref action occurred or is authorised. docs/branding and every unrelated untracked path remain unstaged.",
+    "git_refs_and_worktree": "Primary is on codex/ariadne-bernie-davida-parallel-seam at 102fdd343792141eda26cb564201f28af80f5954 before the recovered-candidate commit. Origin task remains 9955865a49d4803f1f0b7ad696148d908626483b. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked paths remain exact at Windows Sort-Object UTF-8 LF-no-final-newline SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five docs/branding paths. Explicit staging is limited to twelve tracked recovered/register/profile paths plus revision 223, the Sol recovery record and this receipt pair."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol recovery and all named deterministic gates passed; exact scope and original untracked-path hash were freshly verified before this receipt."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No AES-C3 Gemini call has occurred yet; the fresh veto becomes eligible only after this recovered candidate is committed at an exact HEAD."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The worker transport is complete and inactive; its rejected candidate and closeout remain preserved without same-lane revision."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude/Fable/Opus is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

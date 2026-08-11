@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 222,
+  "register_revision": 223,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10303,6 +10303,43 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0258",
+      "attempt_id": "raisa-aes-c3-sol-recovery-focused-test-dispatch-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c3",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The AES-C3 focused regression command must use the exact API Spine test path frozen in the worker packet, tests/test_api_spine_artifacts.py, so the complete serial packet actually runs before any pass claim.",
+      "observed_error": "The first Sol recovery focused-test command named nonexistent tests/test_api_spine_contract.py. Pytest returned file-or-directory-not-found before collecting any tests, so no result from that command was admitted.",
+      "detection_method": "Pytest exited 1 with the exact missing-path error. Sol read the already committed bounded worker packet, recovered its exact tests/test_api_spine_artifacts.py path, and reran the complete C3/C2/C1/C0/API packet serially; all 106 tests passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/claude/raisa-aes-c3-blue-implementation-worker-packet.md",
+        "docs/ariadne-agent-error-correction-register-revision-223.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.aes_c3_focused_api_test_filename_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit no evidence from the missing-path command. Recover the exact API Spine test filename from the frozen worker packet and rerun the complete serial focused packet from the start; the corrected 106-test packet passed.",
+        "prevention_control": "Copy exact focused test paths from the frozen tranche packet or obtain them from an exact-path repository query before dispatch; a pytest missing-path exit is always zero test evidence and requires a fresh complete packet.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/claude/raisa-aes-c3-blue-implementation-worker-packet.md",
+          "docs/ariadne-agent-error-correction-register-revision-223.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

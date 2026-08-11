@@ -10,14 +10,21 @@ from scripts.raisa_agent_execution_surface_containment_gate_aes_c0_acceptance im
 )
 from scripts.raisa_agent_execution_surface_containment_gate_aes_c3_hostile_containment import (
     CONTRACT_PATH,
+    CURRENT_BUREAU_ID,
+    CURRENT_GENERATION_ID,
+    CURRENT_MANIFEST_DIGEST,
+    CURRENT_MANIFEST_ID,
+    CURRENT_WORK_CELL_ID,
     INHERITED_ARTIFACT_DIGESTS,
     MUTATION_ID_VOCABULARY,
+    REPLAY_BINDING_FIELDS,
     SCENARIOS_PATH,
     SCENARIO_EXPECTATIONS,
     SCHEMA_PATH,
     STATUS_VOCABULARY,
     _hostile_contract_mutations,
     _hostile_mutations,
+    _base_c2_attempt,
     _load,
     build_report,
     evaluate_attempt,
@@ -131,6 +138,23 @@ def test_aes_c3_replay_fixture_never_enters_work_cell_view() -> None:
         if replay is not None:
             assert replay["synthetic_noncredential"] is True
             assert replay["kind"] in ("lease", "alias", "token")
+            assert set(REPLAY_BINDING_FIELDS) <= set(replay)
+            current_binding = {
+                "generation_id": CURRENT_GENERATION_ID,
+                "manifest_id": CURRENT_MANIFEST_ID,
+                "manifest_digest": CURRENT_MANIFEST_DIGEST,
+                "bureau_id": CURRENT_BUREAU_ID,
+                "work_cell_id": CURRENT_WORK_CELL_ID,
+                "authority_binding_digest": scenario["authority_binding_digest"],
+            }
+            assert any(
+                replay[field] != current_binding[field]
+                for field in REPLAY_BINDING_FIELDS
+            )
+            c2 = _base_c2_attempt(scenario)
+            work_cell_json = json.dumps(c2["work_cell_view"], sort_keys=True)
+            assert replay["fixture_id"] not in work_cell_json
+            assert replay["fixture_digest"] not in work_cell_json
         # The C3 wrapper is metadata-only; it carries no work-cell view at all.
         assert "work_cell_view" not in scenario, scenario_id
 
@@ -164,8 +188,8 @@ def test_aes_c3_raw_payloads_absent_from_results_and_evidence() -> None:
 def test_aes_c3_all_hostile_mutations_fail_closed_with_zero_release() -> None:
     rejected, admitted = validate_hostile_mutations()
 
-    assert len(_hostile_mutations()) == 20
-    assert len(rejected) == 20
+    assert len(_hostile_mutations()) == 33
+    assert len(rejected) == 33
     assert admitted == []
 
 
@@ -221,6 +245,140 @@ def test_aes_c3_every_scenario_attempt_is_closed_and_validates() -> None:
             )
             == []
         ), scenario["scenario_id"]
+
+
+def test_aes_c3_public_evaluator_rejects_malformed_input_without_raising() -> None:
+    malformed = copy.deepcopy(_all_scenarios()["stale-alias-replay-stop"])
+    del malformed["scenario_id"]
+
+    assert "$:missing:scenario_id" in validate_attempt(malformed)
+    result = evaluate_attempt(malformed)
+
+    assert result["status"] == "reject"
+    assert result["reason_codes"] == ["closed_contract_rejection"]
+    assert result["pure_python_call_count"] == 0
+    assert result["released_result_count"] == 0
+    assert result["scenario_id"] == "invalid-hostile-containment-attempt"
+    assert result["invocation_digest"] is None
+    assert result["result_digest"] is None
+
+    for malformed_root in (None, [], "forged"):
+        assert validate_attempt(malformed_root) == ["$:type"]
+        root_result = evaluate_attempt(malformed_root)
+        assert root_result["status"] == "reject"
+        assert root_result["reason_codes"] == ["closed_contract_rejection"]
+        assert root_result["pure_python_call_count"] == 0
+        assert root_result["released_result_count"] == 0
+
+
+def test_aes_c3_replay_presence_and_declared_base_are_not_cosmetic() -> None:
+    canonical = _all_scenarios()["stale-alias-replay-stop"]
+
+    no_fixture = copy.deepcopy(canonical)
+    no_fixture["replay_artifact"] = None
+    assert "$:canonical_scenario_binding_mismatch" in validate_attempt(no_fixture)
+    no_fixture_result = evaluate_attempt(no_fixture)
+    assert no_fixture_result["status"] == "reject"
+    assert no_fixture_result["released_result_count"] == 0
+
+    changed_base = copy.deepcopy(canonical)
+    changed_base["base_scenario_id"] = "exact-inert-dispatch-simulated"
+    assert "$:canonical_scenario_binding_mismatch" in validate_attempt(changed_base)
+    changed_base_result = evaluate_attempt(changed_base)
+    assert changed_base_result["status"] == "reject"
+    assert changed_base_result["released_result_count"] == 0
+
+
+def test_aes_c3_declared_inherited_base_controls_the_inner_object() -> None:
+    c2_packet = _load(c3_module.AES_C2_SCENARIOS_PATH)
+    c2_ids = {scenario["scenario_id"] for scenario in c2_packet["scenarios"]}
+
+    for scenario in _all_scenarios().values():
+        if scenario["attack_family"] in ("cumulative", "context_binding"):
+            continue
+        c2 = _base_c2_attempt(scenario)
+        base_id = scenario["base_scenario_id"]
+        if base_id in c2_ids:
+            assert c2["scenario_id"] == base_id
+        else:
+            assert c2["broker_admission_attempt"]["scenario_id"] == base_id
+
+
+def test_aes_c3_contradictory_inner_release_cannot_be_relabelled_as_stop(
+    monkeypatch,
+) -> None:
+    def contradictory_simulated(_attempt):
+        return {
+            "status": "simulated",
+            "reason_codes": ["simulated_inert_adapter"],
+            "admission_decision": "allow",
+            "admission_reason_codes": ["manifest_grant_and_current_authority"],
+            "simulated_invocation_count": 1,
+            "released_simulated_result": True,
+            "invocation_digest": "sha256:" + "1" * 64,
+            "result_digest": "sha256:" + "2" * 64,
+        }
+
+    monkeypatch.setattr(
+        c3_module, "evaluate_simulation_attempt", contradictory_simulated
+    )
+    by_id = _all_scenarios()
+
+    for scenario_id in (
+        "stale-alias-replay-stop",
+        "clear-egress-budget-overflow-stop",
+    ):
+        result = evaluate_attempt(by_id[scenario_id])
+        assert result["status"] == "reject", scenario_id
+        assert result["reason_codes"] == ["closed_contract_rejection"], scenario_id
+        assert result["pure_python_call_count"] == 1, scenario_id
+        assert result["released_result_count"] == 0, scenario_id
+        assert result["invocation_digest"] is None, scenario_id
+        assert result["result_digest"] is None, scenario_id
+
+
+def test_aes_c3_cumulative_sequences_reject_contradictory_inner_results(
+    monkeypatch,
+) -> None:
+    boundary = _all_scenarios()["boundary-probe-denial-sequence-stop"]
+
+    def permissive_c1(attempt):
+        observed = copy.deepcopy(attempt["budget_state"]["observed"])
+        observed["denied_operations"] += 1
+        observed["boundary_probes"] += 1
+        return {
+            "decision": "allow",
+            "reason_codes": ["manifest_grant_and_current_authority"],
+            "after_observed": observed,
+            "after_terminal_state": "active",
+            "after_next_operation_permitted": True,
+        }
+
+    monkeypatch.setattr(c3_module, "evaluate_c1_attempt", permissive_c1)
+    boundary_result = evaluate_attempt(boundary)
+    assert boundary_result["status"] == "reject"
+    assert boundary_result["pure_python_call_count"] == 0
+    assert boundary_result["released_result_count"] == 0
+
+    repeated = _all_scenarios()["repeated-adapter-failure-sequence-stop"]
+
+    def released_c2(_attempt):
+        return {
+            "status": "simulated",
+            "reason_codes": ["simulated_inert_adapter"],
+            "admission_decision": "allow",
+            "admission_reason_codes": ["manifest_grant_and_current_authority"],
+            "simulated_invocation_count": 1,
+            "released_simulated_result": True,
+            "invocation_digest": "sha256:" + "3" * 64,
+            "result_digest": "sha256:" + "4" * 64,
+        }
+
+    monkeypatch.setattr(c3_module, "evaluate_simulation_attempt", released_c2)
+    repeated_result = evaluate_attempt(repeated)
+    assert repeated_result["status"] == "reject"
+    assert repeated_result["pure_python_call_count"] == 1
+    assert repeated_result["released_result_count"] == 0
 
 
 def test_aes_c3_regenerated_packet_is_stable() -> None:
