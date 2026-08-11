@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_exact_head_veto_of_the_cf_d2_provider_free_restart_unknown_commit_implementation_before_any_docker_contact",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. CF-D2 is the active dependency-satisfied provider-free durability tranche, and the frozen plan requires a second fresh exact-HEAD implementation veto before any Docker or PostgreSQL contact.",
+    "current_authority_allocation": "GPT Sol retains implementation, runtime, recovery, acceptance, Git and publication authority. One genuinely fresh Gemini 3.6 Flash/high Antigravity project receives only the exact allowlisted read-only veto. DeepSeek and native subagents are unassigned. The verifier receives no edit, self-acceptance, runtime, data, integration, protected-ref, deployment or release authority.",
+    "active_plan_and_acceptance": "Implementation source a5b1107736ce64c0ee3861cb51b231d861b12764 passes the complete 207-check CF-D2/CF-D1/serial inherited packet, the 215-check register packet, Ruff lint/format, py_compile, evidence-schema validation and diff checks. AER-0275 separately records and closes the stale inherited behavior-parent equality constants. The review packet permits only exact static files and read-only commands and explicitly forbids the harness, Docker and PostgreSQL.",
+    "protected_evidence_boundaries": "The verifier may inspect only the exact packet allowlist and run only the exact listed read-only commands. Protected evidence, historical Diary/PHI, docs/branding, untracked files, Docker/database runtime, real/product/patient/clinical data, providers, external network, credentials, tools/commands, deployment, Pages, release and protected refs remain closed.",
+    "git_refs_and_worktree": "Task and review source HEAD are exactly a5b1107736ce64c0ee3861cb51b231d861b12764. Fresh non-protected worktree C:/Users/sarashera/EMR4-worktrees/r242 on codex/cf-d2-implementation-veto-r242 passed the exact-head clean preflight. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains e690eefaf91115343b8fcbbecc7c3f5fe0b25193. All original 494 untracked files including five docs/branding files remain preserved and unstaged in the active worktree."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_implementation_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the exact implementation deterministic gate and fresh-worktree preflight."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "One fresh exact-HEAD Gemini 3.6 Flash/high read-only veto is selected."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is open."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

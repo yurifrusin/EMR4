@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 242,
+  "register_revision": 243,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -11056,6 +11056,47 @@
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
           "docs/ariadne-agent-error-correction-register-revision-242.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0276",
+      "attempt_id": "cf-d2-implementation-gemini-veto-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-rehearsal",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_cli_print",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "A fresh independent veto report must reproduce exact safety-control values from the reviewed contract and source when summarizing its passing decision.",
+      "observed_error": "The fresh exact-HEAD CF-D2 implementation veto passed all prescribed commands with zero P0-P2 findings and zero external operations, but one prose sentence reported statement and idle timeouts as 5000ms. The reviewed frozen contract and implementation both set those two values to exactly 8000ms. The discrepancy does not change the decision, source, executed commands, scenario semantics or runtime authority.",
+      "detection_method": "Sol mechanically compared the verifier report with durability_profile.statement_timeout_milliseconds and idle_in_transaction_timeout_milliseconds in the exact reviewed contract and the corresponding participant-script rendering at source a5b1107736ce64c0ee3861cb51b231d861b12764.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-implementation-review-receipt.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/restart-unknown-commit-rehearsal-contract.json",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-243.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.numeric_control_value_misreported_despite_exact_source",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the immutable passing review receipt, record that the exact reviewed statement and idle transaction timeouts are 8000ms, retain the pass only for its correctly executed commands and zero-finding decision, and require runtime/acceptance evidence to use the contract value rather than the prose misstatement.",
+        "prevention_control": "Before admitting any verifier summary, mechanically compare every reported numeric authority, budget, timeout, count and hash against the exact reviewed contract and source; preserve and reconcile any mismatch before acceptance or runtime dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-implementation-review-receipt.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/restart-unknown-commit-rehearsal-contract.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-243.md"
         ]
       },
       "status": "corrected"
