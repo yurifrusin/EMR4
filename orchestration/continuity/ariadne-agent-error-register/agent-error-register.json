@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 206,
+  "register_revision": 207,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -9676,6 +9676,43 @@
           "orchestration/agent_inbox/codex/raisa-aes-c1-sol-recovery-preintegration-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-aes-c1-sol-recovery-preintegration-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-206.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0241",
+      "attempt_id": "raisa-aes-c1-deterministic-gate-precommit-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c1",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_orchestrator_preflight",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every full Git object ID in a receipt state must be captured by exact git rev-parse output before drafting; a displayed short hash may never be expanded or inferred.",
+      "observed_error": "While drafting the AES-C1 deterministic-gate precommit state, Sol expanded displayed short HEAD a1a92443 into nonexistent a1a92443855530dfe252a3573a6fa2e05bc0e005 instead of first reading the repository object ID.",
+      "detection_method": "Before orchestrator preflight, staging, commit or verifier dispatch, Sol ran git rev-parse HEAD, obtained exact a1a924433d6ea9788dcf54bd52bf4f07e3ba8a46 and corrected the unsubmitted state.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c1-deterministic-gate-precommit-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-207.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the inferred value with exact git rev-parse HEAD output a1a924433d6ea9788dcf54bd52bf4f07e3ba8a46 before preflight, staging, commit or verifier dispatch. No receipt or action used the rejected draft value.",
+        "prevention_control": "Move exact git rev-parse capture ahead of every packet or runtime-state drafting step and mechanically interpolate only the captured forty-character value; do not begin authoring from abbreviated commit output.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c1-deterministic-gate-precommit-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-207.md"
         ]
       },
       "status": "corrected"

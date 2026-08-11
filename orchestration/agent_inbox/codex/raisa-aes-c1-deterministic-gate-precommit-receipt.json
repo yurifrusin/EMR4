@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_aes_c1_master_plan_and_maintained_verification_wiring",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The recovered AES-C1 candidate passes 59 focused AES-C1/AES-C0/API tests, all eight hostile contract mutations, 125 maintained --noconftest CI-static tests and the canonical fast profile with 131 tests. The master-plan gate phrase is restored and C1 plus gate-plan tests are now explicit in source-state and verification profiles.",
+    "current_authority_allocation": "Sol owns repository verification wiring and task-branch commit. DeepSeek blue and bounded revision are complete; fresh Gemini 3.6 Flash/high red/veto remains the only external review lane.",
+    "git_refs_and_worktree": "Primary task HEAD is a1a924433d6ea9788dcf54bd52bf4f07e3ba8a46, captured by git rev-parse HEAD. Pending paths are only implementation_plan.md, orchestration/harness_settings/python_source_state.json and scripts/verify_repository.py plus this receipt pair. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding and unrelated untracked paths remain excluded.",
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219; AES-C1 recovered implementation is the active candidate and must enter fresh review only after exact maintained deterministic gates.",
+    "protected_evidence_boundaries": "Verification is provider-free and repository-local. No protected evidence, patient/clinical/product data, runtime/broker/adapter, provider call, credential/network, database/source, executable capability, command, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

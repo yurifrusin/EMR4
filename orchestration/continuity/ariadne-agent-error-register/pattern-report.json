@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "e957092c2ebd7b5760f308785d928c8fdda3ecb54012b073626ace83fa67aec5",
+  "canonical_register_sha256": "65492d6189125823d460a9271cbb942832d916cd5922673a4f80fca55b99605e",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 82,
-      "canonical_unchanged": 133,
+      "canonical_unchanged": 134,
       "untrusted_partial_worktree": 25
     },
     "by_category": {
       "command_scope_violation": 26,
-      "evidence_misreport": 32,
+      "evidence_misreport": 33,
       "harness_failure": 30,
       "output_contract_violation": 63,
       "read_only_violation": 3,
@@ -17,13 +17,13 @@
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 149,
+      "agent_behavior": 150,
       "harness": 30,
       "repository": 52,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 81,
+      "low": 82,
       "material": 85,
       "moderate": 74
     },
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 108,
+      "codex-primary-orchestrator::orchestrator": 109,
       "codex-sol-orchestrator::orchestrator": 1,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
@@ -79,12 +79,12 @@
     },
     "by_role": {
       "implementer": 16,
-      "orchestrator": 176,
+      "orchestrator": 177,
       "verifier": 48
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 240,
+  "incident_count": 241,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -143,14 +143,15 @@
       "categories": [
         "evidence_misreport"
       ],
-      "incident_count": 6,
+      "incident_count": 7,
       "incident_ids": [
         "AER-0192",
         "AER-0196",
         "AER-0205",
         "AER-0207",
         "AER-0210",
-        "AER-0219"
+        "AER-0219",
+        "AER-0241"
       ],
       "origins": [
         "agent_behavior"
@@ -572,7 +573,7 @@
       ]
     }
   ],
-  "register_revision": 206,
+  "register_revision": 207,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-11"
 }

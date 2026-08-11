@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 206
+    assert register["register_revision"] == 207
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 241)
+        f"AER-{index:04d}" for index in range(1, 242)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 149
+    assert len(agent_incidents) == 150
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 240
+    assert report["incident_count"] == 241
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,18 +2508,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 206
-    assert report["incident_count"] == 240
+    assert report["register_revision"] == 207
+    assert report["incident_count"] == 241
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 149,
+        "agent_behavior": 150,
         "harness": 30,
         "repository": 52,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 26,
-        "evidence_misreport": 32,
+        "evidence_misreport": 33,
         "harness_failure": 30,
         "output_contract_violation": 63,
         "read_only_violation": 3,
@@ -2529,7 +2529,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 82,
-        "canonical_unchanged": 133,
+        "canonical_unchanged": 134,
         "untrusted_partial_worktree": 25,
     }
     assert report["recurring_patterns"] == [
@@ -2564,7 +2564,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
             ),
-            "incident_count": 6,
+            "incident_count": 7,
             "incident_ids": [
                 "AER-0192",
                 "AER-0196",
@@ -2572,6 +2572,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0207",
                 "AER-0210",
                 "AER-0219",
+                "AER-0241",
             ],
             "origins": ["agent_behavior"],
             "categories": ["evidence_misreport"],

@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_aes_c1_master_plan_and_maintained_verification_wiring",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219; AES-C1 recovered implementation is the active candidate and must enter fresh review only after exact maintained deterministic gates.",
+    "current_authority_allocation": "Sol owns repository verification wiring and task-branch commit. DeepSeek blue and bounded revision are complete; fresh Gemini 3.6 Flash/high red/veto remains the only external review lane.",
+    "active_plan_and_acceptance": "The recovered AES-C1 candidate passes 59 focused AES-C1/AES-C0/API tests, all eight hostile contract mutations, 125 maintained --noconftest CI-static tests and the canonical fast profile with 131 tests. The master-plan gate phrase is restored and C1 plus gate-plan tests are now explicit in source-state and verification profiles.",
+    "protected_evidence_boundaries": "Verification is provider-free and repository-local. No protected evidence, patient/clinical/product data, runtime/broker/adapter, provider call, credential/network, database/source, executable capability, command, deployment, production, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Primary task HEAD is a1a924433d6ea9788dcf54bd52bf4f07e3ba8a46, captured by git rev-parse HEAD. Pending paths are only implementation_plan.md, orchestration/harness_settings/python_source_state.json and scripts/verify_repository.py plus this receipt pair. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding and unrelated untracked paths remain excluded."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol ran the exact recovered focused, static and fast deterministic gates."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fresh Gemini review is next but not yet dispatched."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Both bounded blue calls completed and no further DeepSeek call is selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude/Fable/Opus is not selected; Claude Code was transport only."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

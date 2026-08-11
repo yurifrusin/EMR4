@@ -644,6 +644,9 @@ replay. GraphQL remains read-only, events remain signals, and product mutations
 remain human-gated REST/OpenAPI commands with current authorization,
 idempotency, audit and readback.
 
+This gate does not delay the networkless database-only rehearsal; that
+prerequisite already passed before AES-C0 and AES-C1 began.
+
 AES-C0 now passes as the unmounted architecture descendant. Its closed
 `GenerationManifest`, `CapabilityLease`, `BudgetState`, `BrokerDecision`,
 `RevocationRecord` and `AuditEvidenceEnvelope` bind one generation to exact
