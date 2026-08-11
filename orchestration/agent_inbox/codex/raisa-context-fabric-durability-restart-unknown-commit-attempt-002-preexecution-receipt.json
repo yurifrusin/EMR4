@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_exactly_one_recovered_provider_free_four_scenario_cf_d2_disposable_postgresql_attempt_002_and_preserve_its_whole_document_result_immutably",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Committed recovery source b167aae977508f1d52318623cc4df07287fe908b admits only predecessor position one during setup and delays the two required successor admissions until exact scenario progress. Attempt 001 and its setup-only diagnosis are preserved. All 62 focused CF-D2 checks, 208 inherited CF-D2/CF-D1/serial checks, 218 full AER checks, Ruff lint/format, py_compile, JSON/schema and diff gates pass. AER-0278 is contained at revision 245. Attempt-002 evidence does not yet exist.",
+    "current_authority_allocation": "GPT Sol retains sole attempt-002 runtime, cleanup, evidence admission, acceptance, Git and publication authority. No worker, verifier, provider, native subagent or product actor is assigned. The prior Gemini implementation veto is closed; the plan explicitly does not require a fresh veto for this launcher/schema-only correction.",
+    "git_refs_and_worktree": "Task HEAD before this receipt-only commit is exactly b167aae977508f1d52318623cc4df07287fe908b and contains required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All original 494 untracked files including docs/branding remain preserved and unstaged; only this receipt pair is eligible for explicit staging before runtime.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. CF-D2 remains the active dependency-satisfied tranche. Attempt 001 is immutable and the frozen plan's single bounded launcher/schema recovery has been used and committed.",
+    "protected_evidence_boundaries": "Attempt 002 is the only authorised fresh run. It uses authored-synthetic fixtures in one newly owned networkless postgres:16-bookworm container, exact four SIGKILL/same-cluster restarts, zero participant retries and exact cleanup. It authorises no provider, product/patient/clinical data, production database/source/watcher, credential, external network, deployment, Pages, release, protected ref movement or unrelated-file staging. Any failure remains immutable and cannot be retried under the already-consumed bounded correction."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
