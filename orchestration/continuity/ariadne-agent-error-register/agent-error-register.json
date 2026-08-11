@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 238,
+  "register_revision": 239,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10913,7 +10913,9 @@
         "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
         "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
-        "docs/ariadne-agent-error-correction-register-revision-238.md"
+        "docs/ariadne-agent-error-correction-register-revision-238.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-replay-vocabulary-recovery-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-239.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
@@ -10921,7 +10923,7 @@
       "recurrence_signature": "harness.accepted_native_result_vocabulary_mismatch",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
+        "status": "corrected_fresh_attempt",
         "action": "Replace only the CF-D1 misspelling with native RECEIPT_REPLAYED in the parser allowlist, both coordinator replay expectations and evidence schema; add an exact vocabulary regression and require fresh exact-HEAD review before a distinct attempt 004.",
         "prevention_control": "Before a disposable harness admits a closed database result marker, reconcile every literal against both the accepted database enum and the prior accepted behavior harness, with a regression rejecting near-match spellings.",
         "evidence_paths": [
@@ -10929,10 +10931,12 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
-          "docs/ariadne-agent-error-correction-register-revision-238.md"
+          "docs/ariadne-agent-error-correction-register-revision-238.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-replay-vocabulary-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-239.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     }
   ]
 }
