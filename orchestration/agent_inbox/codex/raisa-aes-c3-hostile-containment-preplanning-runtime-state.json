@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_narrowest_fail_closed_aes_c3_provider_free_hostile_containment_plan",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after the AES-C2 closeout. AES-C2 is accepted at Continuity 239 / Compass 221, and AES-C3 hostile containment rehearsal is the exact dependency-satisfied next tranche under standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol owns the C3 boundary, architecture, acceptance, recovery, integration and Git closeout. DeepSeek V4 Flash/high through Claude Code --bare is the preferred bounded implementation/test worker after the plan freezes. Gemini 3.6 Flash/high through a fresh Antigravity project owns exact-head independent veto review only after deterministic gates pass.",
+    "active_plan_and_acceptance": "The complete accepted AES gate plan, AES-C2 plan/threat delta, C2 closeout and Sol acceptance were reread. C2 exact reviewed source d54f0476448f1218cd55477d42b958721359eae8 proves broker-owned identity, synthetic custody, current-state recheck, budget commit and exactly three pure calls with zero external effect. C3 must narrowly challenge local-file references, templates and deserialization, metadata and credential probing, arbitrary relay or encoded egress, cumulative probing, stale leases and cross-generation replay against the exact C0/C1/C2 contracts.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; the provider lane, historical Diary and PHI remain closed. C3 may use only newly authored synthetic inert objects and pure validation. It cannot open a real broker or work-cell process, container, real adapter or credential, provider call, patient/clinical/product data, filesystem or source access, database/watcher, IAM/metadata access, network/socket/HTTP/DNS, executable tool, command/write, deployment, production, release, Pages or protected-ref movement. docs/branding and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Primary C:/Users/sarashera/emr4 is clean-tracked on codex/ariadne-bernie-davida-parallel-seam at exact local/origin task HEAD 9955865a49d4803f1f0b7ad696148d908626483b. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed C2 source d54f0476448f1218cd55477d42b958721359eae8 are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exactly 494 preserved untracked paths remain with Windows Sort-Object UTF-8 LF-no-final-newline SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162; five are under docs/branding/."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the fresh five-source rehydration, rebound exact C2 acceptance and gate sequence, and verified task/protected refs plus the 494-path baseline before C3 planning."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native Codex worker is assigned for the serial plan-freezing step."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The prior exact-model veto completed successfully; no C3 verifier call is eligible until its deterministic candidate passes."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The prior implementation transport completed; no C3 worker is active before its plan and dispatch receipt."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude/Fable/Opus is not selected; Claude Code remains only the configured DeepSeek transport."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

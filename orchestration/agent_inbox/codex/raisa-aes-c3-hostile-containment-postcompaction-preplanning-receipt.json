@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "derive_and_freeze_narrowest_fail_closed_aes_c3_provider_free_hostile_containment_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete accepted AES gate plan, AES-C2 plan/threat delta, C2 closeout and Sol acceptance were reread after compaction. C2 exact reviewed source d54f0476448f1218cd55477d42b958721359eae8 proves broker-owned identity, synthetic custody, current-state recheck, budget commit and exactly three pure calls with zero external effect. C3 must freeze only newly authored synthetic provider-free attacks on local-file references, templates/deserialization, metadata/credential probing, arbitrary relay or encoded egress, cumulative probing, stale leases and cross-generation replay against the exact C0/C1/C2 contracts.",
+    "current_authority_allocation": "GPT Sol owns the C3 boundary, architecture, acceptance, recovery, integration and Git closeout. DeepSeek V4 Flash/high through Claude Code --bare is the preferred bounded implementation/test worker only after the plan freezes. Gemini 3.6 Flash/high through a fresh Antigravity project owns exact-head independent veto review only after deterministic gates pass.",
+    "git_refs_and_worktree": "Primary C:/Users/sarashera/emr4 is clean-tracked on codex/ariadne-bernie-davida-parallel-seam at exact local/origin task HEAD 9955865a49d4803f1f0b7ad696148d908626483b. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed C2 source d54f0476448f1218cd55477d42b958721359eae8 are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exactly 494 preserved original untracked paths remain with Windows Sort-Object UTF-8 LF-no-final-newline SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162; five are under docs/branding/. The two already-created C3 preplanning receipt/state files are additional tranche-owned untracked artifacts and the tracked diff is empty.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after conversation compaction. AES-C2 remains accepted at Continuity 239 / Compass 221, and AES-C3 hostile containment rehearsal remains the exact dependency-satisfied next tranche under standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; provider experiments, historical Diary and PHI remain closed. C3 may use only newly authored synthetic inert objects and pure validation. It cannot open a real broker or work-cell process, container, adapter, credential, provider call, patient/clinical/product data, filesystem or source access, database/watcher, IAM/metadata, network/socket/HTTP/DNS, executable tool, command/write, deployment, production, release, Pages or protected-ref movement. docs/branding and all unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
