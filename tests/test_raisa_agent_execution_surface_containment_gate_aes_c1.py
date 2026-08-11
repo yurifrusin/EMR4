@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 
 from scripts.raisa_agent_execution_surface_containment_gate_aes_c0_acceptance import (
@@ -14,6 +15,7 @@ from scripts.raisa_agent_execution_surface_containment_gate_aes_c1_admission imp
     SCENARIOS_PATH,
     SCENARIO_EXPECTATIONS,
     SCHEMA_PATH,
+    _hostile_contract_mutations,
     _hostile_mutations,
     _load,
     build_report,
@@ -21,7 +23,9 @@ from scripts.raisa_agent_execution_surface_containment_gate_aes_c1_admission imp
     digest_of,
     evaluate_attempt,
     generate_scenarios,
+    validate_attempt,
     validate_contract,
+    validate_hostile_contract_mutations,
     validate_hostile_mutations,
 )
 
@@ -58,6 +62,10 @@ def test_aes_c1_report_passes_with_zero_runtime_provider_or_data() -> None:
     assert report["product_or_patient_data"] is False
     assert report["mutation_admitted"] == []
     assert report["mutation_rejected_count"] == len(_hostile_mutations())
+    assert report["contract_mutation_admitted"] == []
+    assert report["contract_mutation_rejected_count"] == len(
+        _hostile_contract_mutations()
+    )
 
 
 def test_aes_c1_inherited_aes_c0_digests_match_frozen_hashes() -> None:
@@ -190,9 +198,84 @@ def test_aes_c1_every_decision_and_evidence_is_a_closed_aes_c0_message() -> None
 def test_aes_c1_all_hostile_mutations_fail_closed_with_zero_admission() -> None:
     rejected, admitted = validate_hostile_mutations()
 
-    assert len(_hostile_mutations()) == 22
-    assert len(rejected) == 22
+    assert len(_hostile_mutations()) == 24
+    assert len(rejected) == 24
     assert admitted == []
+
+
+def test_aes_c1_contract_rejects_undeclared_nested_rules() -> None:
+    contract, schema, _ = _packet()
+
+    manifest_extra = copy.deepcopy(contract)
+    manifest_extra["manifest_digest_rule"]["forged_rule"] = "forged"
+    assert validate_contract(manifest_extra, schema)
+
+    precedence_changed = copy.deepcopy(contract)
+    precedence_changed["decision_precedence"][0] = "0_forged_precedence"
+    assert validate_contract(precedence_changed, schema)
+
+    denial_policy_extra = copy.deepcopy(contract)
+    denial_policy_extra["denial_counter_policy"]["forged_policy"] = True
+    assert validate_contract(denial_policy_extra, schema)
+
+    budget_dimensions_extra = copy.deepcopy(contract)
+    budget_dimensions_extra["budget_dimensions"]["forged_dimension"] = ["forged"]
+    assert validate_contract(budget_dimensions_extra, schema)
+
+    zero_runtime_opened = copy.deepcopy(contract)
+    zero_runtime_opened["zero_runtime_boundary"]["runtime_started"] = True
+    assert validate_contract(zero_runtime_opened, schema)
+
+    candidate_rule_extra = copy.deepcopy(contract)
+    candidate_rule_extra["candidate_and_budget_digest_rule"]["forged_rule"] = "forged"
+    assert validate_contract(candidate_rule_extra, schema)
+
+    inherited_extra = copy.deepcopy(contract)
+    inherited_extra["inherited_artifact_digests"]["forged/path.json"] = (
+        "sha256:" + "0" * 64
+    )
+    assert validate_contract(inherited_extra, schema)
+
+
+def test_aes_c1_all_hostile_contract_mutations_fail_closed() -> None:
+    rejected, admitted = validate_hostile_contract_mutations()
+
+    assert len(_hostile_contract_mutations()) == 7
+    assert len(rejected) == 7
+    assert admitted == []
+
+
+def test_aes_c1_candidate_rejects_undeclared_typed_and_proposal_fields() -> None:
+    _, _, packet = _packet()
+    allow = next(
+        s for s in packet["scenarios"]
+        if s["scenario_id"] == "exact-inert-intersection-allow"
+    )
+
+    typed_extra = copy.deepcopy(allow)
+    typed_extra["candidate"]["typed_arguments"]["unrecognized-benign-key"] = "x"
+    assert validate_attempt(typed_extra)
+    result = evaluate_attempt(typed_extra)
+    assert result["decision"] == "deny"
+    assert result["reason_codes"] == ["operation_identity_candidate_controlled"]
+
+    proposal_extra = copy.deepcopy(allow)
+    proposal_extra["candidate"]["proposal_fields"]["unrecognized-benign-key"] = "x"
+    assert validate_attempt(proposal_extra)
+    result = evaluate_attempt(proposal_extra)
+    assert result["decision"] == "deny"
+    assert result["reason_codes"] == ["operation_identity_candidate_controlled"]
+
+    # The declared hostile operation_id remains schema-shaped but semantically
+    # denied, preserving the frozen candidate-operation-identity-deny scenario.
+    identity_deny = next(
+        s for s in packet["scenarios"]
+        if s["scenario_id"] == "candidate-operation-identity-deny"
+    )
+    assert validate_attempt(identity_deny) == []
+    result = evaluate_attempt(identity_deny)
+    assert result["decision"] == "deny"
+    assert result["reason_codes"] == ["operation_identity_candidate_controlled"]
 
 
 def test_aes_c1_regenerated_packet_is_stable() -> None:

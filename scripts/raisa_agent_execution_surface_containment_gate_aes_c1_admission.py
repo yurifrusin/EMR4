@@ -94,6 +94,19 @@ FORBIDDEN_CANDIDATE_KEYS = set(
     AES_C0_CONTRACT["candidate_influence_policy"]["candidate_must_not_supply"]
 )
 
+# Exact closed candidate field sets. The benign authored-synthetic candidate
+# carries only `scenario-code`/`typed-context` typed arguments and a single
+# `proposal-code` proposal field. `operation_id` is additionally declared as the
+# one deliberately hostile key exercised by the frozen
+# `candidate-operation-identity-deny` scenario; it is schema-shaped but is
+# always denied by the FORBIDDEN_CANDIDATE_KEYS scan. Any other undeclared key
+# is a schema violation and is additionally denied here so it can never reach
+# `allow`.
+AUTHORED_TYPED_ARGUMENT_KEYS = frozenset(
+    {"scenario-code", "typed-context", "operation_id"}
+)
+AUTHORED_PROPOSAL_FIELD_KEYS = frozenset({"proposal-code"})
+
 _STOP_TERMINAL_STATE = {
     "budget_exhausted": "exhausted",
     "generation_superseded": "superseded",
@@ -160,6 +173,79 @@ SCENARIO_EXPECTATIONS: dict[str, tuple[str, list[str], bool]] = {
     "attempt-after-denial-ceiling-stop": ("stop", ["budget_exhausted"], True),
 }
 
+# Exact frozen contract rules. `validate_contract()` compares the committed
+# contract against these exact objects so a changed or extended nested rule
+# fails validation rather than being silently accepted.
+DECISION_PRECEDENCE: list[str] = [
+    "1_reject_malformed_or_non_closed_input",
+    "2_stop_on_aes_c0_artifact_digest_mismatch",
+    "3_stop_on_external_kill_revocation_non_current_generation_manifest_digest_or_supply_chain_mismatch",
+    "4_stop_on_manifest_or_lease_not_temporally_valid",
+    "5_stop_on_current_authority_absent_stale_or_mismatched",
+    "6_deny_forbidden_capability_or_missing_non_exact_manifest_grant",
+    "7_deny_missing_inactive_or_non_exact_lease_intersection",
+    "8_deny_proofreader_rejection_or_candidate_controlled_operation_identity",
+    "9_stop_on_reached_positive_cumulative_ceiling_prospective_overflow_or_zero_disabled_capability",
+    "10_otherwise_allow_broker_observed_operation_without_executing",
+]
+MANIFEST_DIGEST_RULE: dict[str, Any] = {
+    "algorithm": "sha256",
+    "canonicalization": "json_utf8_sorted_keys_compact_separators",
+    "sentinel": "sha256:" + "0" * 64,
+    "sentinel_replacement_fields": [
+        "manifest_digest",
+        "supply_chain_identity.generation_manifest_digest",
+    ],
+    "equality_required": [
+        "manifest_digest",
+        "supply_chain_identity.generation_manifest_digest",
+        "current_generation_state.current_manifest_digest",
+    ],
+}
+CANDIDATE_BUDGET_DIGEST_RULE: dict[str, Any] = {
+    "algorithm": "sha256",
+    "canonicalization": "json_utf8_sorted_keys_compact_separators",
+    "sentinel": None,
+    "digested_objects": ["candidate", "budget_before", "budget_after"],
+}
+DENIAL_COUNTER_POLICY: dict[str, Any] = {
+    "non_terminal_denials_increment": ["denied_operations"],
+    "boundary_probe_denials_also_increment": ["boundary_probes"],
+    "reaching_positive_denial_ceiling_blocks_following_attempt": True,
+    "budgets_do_not_transfer_between_generations": True,
+}
+BUDGET_DIMENSIONS_CONTRACT: dict[str, list[str]] = {
+    "reasoning": ["model_calls", "model_tokens"],
+    "information": ["input_bytes", "output_bytes", "source_count"],
+    "egress": [
+        "request_count",
+        "request_bytes",
+        "response_bytes",
+        "total_bytes",
+        "distinct_destinations",
+        "redirects",
+    ],
+    "action": [
+        "broker_operations",
+        "inert_tool_operations",
+        "product_mutations",
+        "command_confirmations",
+    ],
+    "denial": ["denied_operations", "boundary_probes", "repeated_failures"],
+    "time": ["elapsed_ms"],
+}
+ZERO_RUNTIME_BOUNDARY: dict[str, Any] = {
+    "runtime_started": False,
+    "provider_calls": 0,
+    "adapters_executed": 0,
+    "network_operations": 0,
+    "database_operations": 0,
+    "source_operations": 0,
+    "tool_operations": 0,
+    "command_operations": 0,
+    "product_or_patient_data": False,
+}
+
 
 def canonical_json(value: Any) -> bytes:
     """Return canonical JSON bytes (UTF-8, sorted keys, compact separators)."""
@@ -217,6 +303,25 @@ def _forbidden_keys(value: Any, forbidden: set[str], path: str = "$") -> list[st
     elif isinstance(value, list):
         for index, child in enumerate(value):
             errors.extend(_forbidden_keys(child, forbidden, f"{path}[{index}]"))
+    return errors
+
+
+def _undeclared_candidate_keys(candidate: dict[str, Any]) -> list[str]:
+    """Return undeclared typed-argument/proposal-field keys.
+
+    The closed candidate carries exactly the authored-synthetic fields used by
+    this rehearsal. Any other key is undeclared and must fail schema validation
+    and can never reach ``allow``.
+    """
+    errors: list[str] = []
+    typed = candidate.get("typed_arguments")
+    if isinstance(typed, dict):
+        for key in sorted(set(typed) - AUTHORED_TYPED_ARGUMENT_KEYS):
+            errors.append(f"$.candidate.typed_arguments:extra:{key}")
+    proposal = candidate.get("proposal_fields")
+    if isinstance(proposal, dict):
+        for key in sorted(set(proposal) - AUTHORED_PROPOSAL_FIELD_KEYS):
+            errors.append(f"$.candidate.proposal_fields:extra:{key}")
     return errors
 
 
@@ -387,6 +492,9 @@ def validate_attempt(attempt: dict[str, Any]) -> list[str]:
         errors.append("$.budget_state.generation_id:cross_record_mismatch")
     if budget_state.get("ceilings") != manifest.get("budgets"):
         errors.append("$.budget_state.ceilings:cross_record_mismatch")
+    candidate = attempt.get("candidate")
+    if isinstance(candidate, dict):
+        errors.extend(_undeclared_candidate_keys(candidate))
     return sorted(set(errors))
 
 
@@ -396,6 +504,18 @@ def validate_contract(contract: dict[str, Any], schema: dict[str, Any]) -> list[
         errors.append("broker_reason_vocabulary:not_exact")
     if contract.get("evidence_reason_vocabulary") != EVIDENCE_REASON_CODES:
         errors.append("evidence_reason_vocabulary:not_exact")
+    if contract.get("decision_precedence") != DECISION_PRECEDENCE:
+        errors.append("decision_precedence:not_exact")
+    if contract.get("manifest_digest_rule") != MANIFEST_DIGEST_RULE:
+        errors.append("manifest_digest_rule:not_exact")
+    if contract.get("candidate_and_budget_digest_rule") != CANDIDATE_BUDGET_DIGEST_RULE:
+        errors.append("candidate_and_budget_digest_rule:not_exact")
+    if contract.get("denial_counter_policy") != DENIAL_COUNTER_POLICY:
+        errors.append("denial_counter_policy:not_exact")
+    if contract.get("budget_dimensions") != BUDGET_DIMENSIONS_CONTRACT:
+        errors.append("budget_dimensions:not_exact")
+    if contract.get("zero_runtime_boundary") != ZERO_RUNTIME_BOUNDARY:
+        errors.append("zero_runtime_boundary:not_exact")
     expected_inherited = {
         "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json",
         "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json",
@@ -734,7 +854,11 @@ def evaluate_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
         )
 
     # Step 8: candidate-controlled operation identity / proofreader rejection.
-    if _forbidden_keys(candidate, FORBIDDEN_CANDIDATE_KEYS):
+    # An undeclared typed/proposal field can never reach `allow`, even if it
+    # bypassed schema validation.
+    if _forbidden_keys(candidate, FORBIDDEN_CANDIDATE_KEYS) or (
+        _undeclared_candidate_keys(candidate)
+    ):
         return _finish(
             attempt, grant, ceilings, observed, prospective, "deny",
             "operation_identity_candidate_controlled",
@@ -1359,6 +1483,10 @@ def _hostile_mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
             a, ("candidate", "typed_arguments", "credential"), "secret")),
         ("candidate_forged_sql", lambda a: _set_path(
             a, ("candidate", "typed_arguments", "sql"), "SELECT 1")),
+        ("candidate_typed_arguments_extra_benign_key", lambda a: _set_path(
+            a, ("candidate", "typed_arguments", "unrecognized-benign-key"), "x")),
+        ("candidate_proposal_fields_extra_benign_key", lambda a: _set_path(
+            a, ("candidate", "proposal_fields", "unrecognized-benign-key"), "x")),
         ("over_budget_prospective", lambda a: _set_path(
             a, ("broker_observed_operation", "prospective", "request_count"), 3)),
         ("forbidden_requested_class", lambda a: _set_path(
@@ -1403,6 +1531,48 @@ def validate_hostile_mutations() -> tuple[list[str], list[str]]:
             admitted.append(name)
         else:
             rejected.append(name)
+    return rejected, admitted
+
+
+def _hostile_contract_mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
+    """Independent hostile mutations over the closed admission contract.
+
+    Every changed or extended nested rule must fail ``validate_contract``. A
+    mutation that is silently accepted is a default-denial boundary violation.
+    """
+    return [
+        ("contract_inherited_digests_extra", lambda c: _set_path(
+            c, ("inherited_artifact_digests", "forged/path.json"),
+            "sha256:" + "0" * 64)),
+        ("contract_manifest_rule_extra", lambda c: _set_path(
+            c, ("manifest_digest_rule", "forged_rule"), "forged")),
+        ("contract_candidate_budget_rule_extra", lambda c: _set_path(
+            c, ("candidate_and_budget_digest_rule", "forged_rule"), "forged")),
+        ("contract_precedence_changed", lambda c: c["decision_precedence"].__setitem__(
+            0, "0_forged_precedence")),
+        ("contract_denial_policy_extra", lambda c: _set_path(
+            c, ("denial_counter_policy", "forged_policy"), True)),
+        ("contract_budget_dimensions_extra", lambda c: _set_path(
+            c, ("budget_dimensions", "forged_dimension"), ["forged"])),
+        ("contract_zero_runtime_opened", lambda c: _set_path(
+            c, ("zero_runtime_boundary", "runtime_started"), True)),
+    ]
+
+
+def validate_hostile_contract_mutations() -> tuple[list[str], list[str]]:
+    """Apply hostile contract mutations; zero may be silently accepted."""
+    contract = _load(CONTRACT_PATH)
+    schema = _load(SCHEMA_PATH)
+    rejected: list[str] = []
+    admitted: list[str] = []
+    for name, mutate in _hostile_contract_mutations():
+        candidate = copy.deepcopy(contract)
+        mutate(candidate)
+        errors = validate_contract(candidate, schema)
+        if errors:
+            rejected.append(name)
+        else:
+            admitted.append(name)
     return rejected, admitted
 
 
@@ -1483,6 +1653,11 @@ def build_report() -> dict[str, Any]:
     rejected, admitted = validate_hostile_mutations()
     if admitted:
         reasons.append("hostile_mutations_admitted:" + ",".join(admitted))
+    contract_rejected, contract_admitted = validate_hostile_contract_mutations()
+    if contract_admitted:
+        reasons.append(
+            "contract_hostile_mutations_admitted:" + ",".join(contract_admitted)
+        )
 
     status = "passed" if not reasons else "revision_required"
     return {
@@ -1507,6 +1682,9 @@ def build_report() -> dict[str, Any]:
         "mutation_count": len(_hostile_mutations()),
         "mutation_rejected_count": len(rejected),
         "mutation_admitted": admitted,
+        "contract_mutation_count": len(_hostile_contract_mutations()),
+        "contract_mutation_rejected_count": len(contract_rejected),
+        "contract_mutation_admitted": contract_admitted,
         "reasons": sorted(set(reasons)),
         "artifact_digests": {
             CONTRACT_PATH.relative_to(ROOT).as_posix(): _digest(CONTRACT_PATH),

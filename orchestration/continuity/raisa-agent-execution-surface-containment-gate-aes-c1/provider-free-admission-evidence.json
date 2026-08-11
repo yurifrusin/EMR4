@@ -3,10 +3,13 @@
   "allow_count": 2,
   "artifact_digests": {
     "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json": "sha256:241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90",
-    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": "sha256:507f4a719f2c9166b1c559dfca07530e2fc368d53cd61e37905e868234d2844d",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": "sha256:c5e8cbeba526c660f487bbb447d966c0b2c41adb6110ee31fc03e6d2743c4af4",
     "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json": "sha256:e6e427efa32fb27387598042f0d1b1f19c4472b09288f7c8d3ed321a7309945c"
   },
   "command_operations": 0,
+  "contract_mutation_admitted": [],
+  "contract_mutation_count": 7,
+  "contract_mutation_rejected_count": 7,
   "database_operations": 0,
   "deny_count": 25,
   "evidence_mode": "authored_synthetic_provider_free_unmounted",
@@ -16,8 +19,8 @@
     "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json": "sha256:f77801d2d752ca2daeed1b3116d78a965441bc1996f6b6da60eccf72fbee9f3e"
   },
   "mutation_admitted": [],
-  "mutation_count": 22,
-  "mutation_rejected_count": 22,
+  "mutation_count": 24,
+  "mutation_rejected_count": 24,
   "network_operations": 0,
   "product_or_patient_data": false,
   "provider_calls": 0,

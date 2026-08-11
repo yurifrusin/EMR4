@@ -27,32 +27,162 @@
     },
     "status": { "const": "frozen_for_authored_synthetic_unmounted_execution" },
     "evidence_mode": { "const": "authored_synthetic_provider_free_unmounted" },
-    "inherited_artifact_digests": { "type": "object" },
-    "manifest_digest_rule": { "type": "object" },
-    "candidate_and_budget_digest_rule": { "type": "object" },
+    "inherited_artifact_digests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json",
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json",
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json"
+      ],
+      "properties": {
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": { "$ref": "#/$defs/Digest" },
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json": { "$ref": "#/$defs/Digest" },
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json": { "$ref": "#/$defs/Digest" }
+      }
+    },
+    "manifest_digest_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "sentinel",
+        "sentinel_replacement_fields",
+        "equality_required"
+      ],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "canonicalization": { "const": "json_utf8_sorted_keys_compact_separators" },
+        "sentinel": {
+          "const": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "sentinel_replacement_fields": {
+          "const": [
+            "manifest_digest",
+            "supply_chain_identity.generation_manifest_digest"
+          ]
+        },
+        "equality_required": {
+          "const": [
+            "manifest_digest",
+            "supply_chain_identity.generation_manifest_digest",
+            "current_generation_state.current_manifest_digest"
+          ]
+        }
+      }
+    },
+    "candidate_and_budget_digest_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "sentinel",
+        "digested_objects"
+      ],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "canonicalization": { "const": "json_utf8_sorted_keys_compact_separators" },
+        "sentinel": { "const": null },
+        "digested_objects": {
+          "const": ["candidate", "budget_before", "budget_after"]
+        }
+      }
+    },
     "broker_reason_vocabulary": {
-      "type": "array",
-      "minItems": 11,
-      "maxItems": 11,
-      "uniqueItems": true,
-      "items": { "type": "string" }
+      "const": [
+        "manifest_grant_and_current_authority",
+        "manifest_grant_missing",
+        "lease_invalid",
+        "authority_changed",
+        "proofreader_not_admitted",
+        "budget_exhausted",
+        "operation_identity_candidate_controlled",
+        "forbidden_capability_class",
+        "generation_superseded",
+        "supply_chain_identity_mismatch",
+        "external_kill_switch"
+      ]
     },
     "evidence_reason_vocabulary": {
-      "type": "array",
-      "minItems": 11,
-      "maxItems": 11,
-      "uniqueItems": true,
-      "items": { "type": "string" }
+      "const": [
+        "manifest-grant-and-current-authority",
+        "manifest-grant-missing",
+        "lease-invalid",
+        "authority-changed",
+        "proofreader-not-admitted",
+        "budget-exhausted",
+        "operation-identity-candidate-controlled",
+        "forbidden-capability-class",
+        "generation-superseded",
+        "supply-chain-identity-mismatch",
+        "external-kill-switch"
+      ]
     },
     "decision_precedence": {
-      "type": "array",
-      "minItems": 10,
-      "maxItems": 10,
-      "uniqueItems": true,
-      "items": { "type": "string" }
+      "const": [
+        "1_reject_malformed_or_non_closed_input",
+        "2_stop_on_aes_c0_artifact_digest_mismatch",
+        "3_stop_on_external_kill_revocation_non_current_generation_manifest_digest_or_supply_chain_mismatch",
+        "4_stop_on_manifest_or_lease_not_temporally_valid",
+        "5_stop_on_current_authority_absent_stale_or_mismatched",
+        "6_deny_forbidden_capability_or_missing_non_exact_manifest_grant",
+        "7_deny_missing_inactive_or_non_exact_lease_intersection",
+        "8_deny_proofreader_rejection_or_candidate_controlled_operation_identity",
+        "9_stop_on_reached_positive_cumulative_ceiling_prospective_overflow_or_zero_disabled_capability",
+        "10_otherwise_allow_broker_observed_operation_without_executing"
+      ]
     },
-    "denial_counter_policy": { "type": "object" },
-    "budget_dimensions": { "type": "object" },
+    "denial_counter_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "non_terminal_denials_increment",
+        "boundary_probe_denials_also_increment",
+        "reaching_positive_denial_ceiling_blocks_following_attempt",
+        "budgets_do_not_transfer_between_generations"
+      ],
+      "properties": {
+        "non_terminal_denials_increment": { "const": ["denied_operations"] },
+        "boundary_probe_denials_also_increment": { "const": ["boundary_probes"] },
+        "reaching_positive_denial_ceiling_blocks_following_attempt": { "const": true },
+        "budgets_do_not_transfer_between_generations": { "const": true }
+      }
+    },
+    "budget_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reasoning", "information", "egress", "action", "denial", "time"],
+      "properties": {
+        "reasoning": { "const": ["model_calls", "model_tokens"] },
+        "information": {
+          "const": ["input_bytes", "output_bytes", "source_count"]
+        },
+        "egress": {
+          "const": [
+            "request_count",
+            "request_bytes",
+            "response_bytes",
+            "total_bytes",
+            "distinct_destinations",
+            "redirects"
+          ]
+        },
+        "action": {
+          "const": [
+            "broker_operations",
+            "inert_tool_operations",
+            "product_mutations",
+            "command_confirmations"
+          ]
+        },
+        "denial": {
+          "const": ["denied_operations", "boundary_probes", "repeated_failures"]
+        },
+        "time": { "const": ["elapsed_ms"] }
+      }
+    },
     "scenario_registry": {
       "type": "array",
       "minItems": 45,
@@ -60,7 +190,32 @@
       "uniqueItems": true,
       "items": { "$ref": "#/$defs/ScenarioRegistryEntry" }
     },
-    "zero_runtime_boundary": { "type": "object" }
+    "zero_runtime_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_started",
+        "provider_calls",
+        "adapters_executed",
+        "network_operations",
+        "database_operations",
+        "source_operations",
+        "tool_operations",
+        "command_operations",
+        "product_or_patient_data"
+      ],
+      "properties": {
+        "runtime_started": { "const": false },
+        "provider_calls": { "const": 0 },
+        "adapters_executed": { "const": 0 },
+        "network_operations": { "const": 0 },
+        "database_operations": { "const": 0 },
+        "source_operations": { "const": 0 },
+        "tool_operations": { "const": 0 },
+        "command_operations": { "const": 0 },
+        "product_or_patient_data": { "const": false }
+      }
+    }
   },
   "$defs": {
     "Identifier": {
@@ -191,11 +346,21 @@
         "candidate_id": { "$ref": "#/$defs/Identifier" },
         "typed_arguments": {
           "type": "object",
-          "minProperties": 1
+          "additionalProperties": false,
+          "required": ["scenario-code", "typed-context"],
+          "properties": {
+            "scenario-code": { "$ref": "#/$defs/Identifier" },
+            "typed-context": { "$ref": "#/$defs/Identifier" },
+            "operation_id": { "$ref": "#/$defs/Identifier" }
+          }
         },
         "proposal_fields": {
           "type": "object",
-          "minProperties": 1
+          "additionalProperties": false,
+          "required": ["proposal-code"],
+          "properties": {
+            "proposal-code": { "$ref": "#/$defs/Identifier" }
+          }
         },
         "explanation_codes": {
           "type": "array",
