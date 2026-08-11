@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 208,
+  "register_revision": 214,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -9748,6 +9748,257 @@
         "prevention_control": "For PowerShell orchestration probes, use one statement per step: capture collection output, run Git or shell commands, capture $LASTEXITCODE, and only then construct the final object. Never place a semicolon-delimited statement sequence inside a property expression.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-208.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0243",
+      "attempt_id": "raisa-aes-c2-plan-challenge-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_plan_challenge",
+      "stage": "dispatch",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A frozen AES-C2 plan must distinguish the accepted C1 authored-synthetic adapter-artifact identity from the independently computed digest of the new C2 declarative adapter definition.",
+      "observed_error": "The first frozen C2 plan required the newly computed implementation-definition digest to equal the C1 manifest adapter_artifact_digest, whose accepted authored-synthetic value is sha256 followed by 64 f characters. That created an infeasible preimage requirement and conflated two different identity layers.",
+      "detection_method": "Sol's mandatory pre-dispatch plan challenge read the exact C1 success manifest and compared its pinned adapter_artifact_digest with the C2 plan's proposed computation rule before any DeepSeek worker call.",
+      "evidence_paths": [
+        "docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-plan.md",
+        "docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-plan-correction.md",
+        "docs/ariadne-agent-error-correction-register-revision-209.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.conflates_inherited_artifact_identity_with_new_definition_digest",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Keep the exact inherited C1 adapter-artifact identity as one equality check and independently recompute the C2 implementation-definition digest against its own registry field, with an explicit prohibition on equality or preimage claims between them.",
+        "prevention_control": "Every descendant digest rule must name its semantic layer and preimage. Inherited declared identities and newly computed content digests remain separate fields unless an accepted predecessor explicitly defines them as the same content hash.",
+        "evidence_paths": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-plan.md",
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-plan-correction.md",
+          "docs/ariadne-agent-error-correction-register-revision-209.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0244",
+      "attempt_id": "raisa-aes-c2-plan-challenge-register-validation-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_register_validation",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident entry must use one of the register schema's exact closed process_severity values: low, moderate or material.",
+      "observed_error": "The first AER-0243 register draft used process_severity value medium. The schema, deterministic report builder and register tests rejected that unrecognised literal before the corrected register or any worker dispatch could be accepted.",
+      "detection_method": "The deterministic agent-error register validator returned an exact JSON Schema enum failure at incidents[242].process_severity, and the serial register suite failed only downstream checks that require a schema-valid register.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-210.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.uses_natural_language_severity_outside_closed_register_enum",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace medium with the schema-valid value moderate for AER-0243, add this bounded incident, and rerun schema validation, deterministic report generation and the full register control suite before accepting either entry.",
+        "prevention_control": "Before adding an incident, read closed enums directly from agent-error-register.schema.json and validate the single draft entry against those exact literals before running the repository-wide derived-report step.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-210.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0245",
+      "attempt_id": "raisa-aes-c2-plan-challenge-register-validation-002",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_register_validation",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident entry must use one of the register schema's exact closed stage values, including deterministic_verification for deterministic schema and report checks.",
+      "observed_error": "After the invalid AER-0243 severity value was corrected, the next validator pass exposed validation as a second unrecognised closed-enum literal in AER-0244's stage field. The first enum failure had masked this independent field violation.",
+      "detection_method": "The deterministic agent-error register validator returned an exact JSON Schema enum failure at incidents[243].stage before report generation, tests, worker dispatch or candidate work.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-211.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.uses_descriptive_stage_outside_closed_register_enum",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace validation with the schema-valid stage deterministic_verification, link the two masked enum incidents, and validate every enum-valued field in the complete new entries before regenerating the report.",
+        "prevention_control": "Extract and compare all enum-valued fields in each proposed incident against agent-error-register.schema.json in one prevalidation step; do not correct only the first validator-reported field and assume the remaining literals are admitted.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-211.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0246",
+      "attempt_id": "raisa-aes-c2-plan-challenge-register-probe-003",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_readonly_probe",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "After AER-0242, PowerShell evidence probes must capture each command and object as a separate statement and must quote Git revision-path expressions before consuming their output.",
+      "observed_error": "While diagnosing the mis-targeted register patch, one read-only probe again placed a variable expression after a pipeline operator and failed at PowerShell parse time; a second probe left the Git HEAD:path expression unquoted, yielded no JSON to Python and failed before producing evidence. Neither probe changed a file, ref, process or worker state.",
+      "detection_method": "PowerShell returned Expressions are only allowed as the first element of a pipeline for the first probe, and Python returned JSONDecodeError on empty stdin for the unquoted Git revision-path probe. A corrected statement-separated PowerShell probe with a quoted Git expression then returned the exact committed value.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-212.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_statement_sequence_embedded_inside_expression",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use separate PowerShell assignments for Git output, joined JSON text, parsed objects and selected rows; quote HEAD:path as one Git argument; never pipe a variable expression as a mid-pipeline command.",
+        "prevention_control": "For the rest of AES-C2 orchestration, every PowerShell diagnostic uses literal command statements with named intermediate values and no script-text variable in command position; Git revision-path arguments are always quoted.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-212.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0247",
+      "attempt_id": "raisa-aes-c2-plan-challenge-register-linkage-patch-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Register patches must use incident-specific context and related_incident_ids must remain reserved for same-attempt peer incidents.",
+      "observed_error": "An underspecified patch intended for AER-0244 matched AER-0003's first empty related_incident_ids block, and the draft also proposed cross-attempt AER-0244/AER-0245 links that the established register contract forbids. Immediate exact-ID inspection found both defects before schema validation, report generation, commit or worker dispatch.",
+      "detection_method": "A parsed register probe printed the last incident IDs and selected exact AER-0003, AER-0244 and AER-0245 fields; comparison with quoted git show HEAD evidence established AER-0003's committed empty linkage and the accepted register history confirmed same-attempt-only linkage.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-212.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_patch_uses_underspecified_context",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore AER-0003 to its exact committed empty linkage, keep AER-0244 and AER-0245 unlinked, and patch every remaining register field with the incident_id in the same apply_patch hunk.",
+        "prevention_control": "Never patch a repeated register key such as status, stage or related_incident_ids without the target incident_id in the same context block; inspect exact target and sentinel incident values immediately after every register patch.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-212.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0248",
+      "attempt_id": "raisa-aes-c2-plan-challenge-register-tests-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A register revision must reconcile all exact derived-pattern fixtures and each new incident assertion with the final validated register wording before the full serial suite is run.",
+      "observed_error": "The first schema-valid revision-212 test run passed 214 tests but failed two newly edited expectations: the exact recurring_patterns fixture omitted the admitted AER-0242/AER-0246 recurrence, and the AER-0246 action assertion looked for quoted while the register text used quote.",
+      "detection_method": "The complete serial register-control suite reported exactly two assertion failures and 214 passes after schema validation and deterministic report generation had succeeded.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-213.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_derived_expectations_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Insert the exact generated AER-0242/AER-0246 recurring-pattern object in deterministic order and assert the literal quote HEAD:path wording used by the accepted incident entry, then regenerate and rerun the whole suite.",
+        "prevention_control": "After every register addition, mechanically compare the freshly generated report's complete recurring_patterns value with the exact test fixture and copy assertion substrings from the final register entry rather than drafting them independently.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-213.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0249",
+      "attempt_id": "raisa-aes-c2-untracked-baseline-hash-probe-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_readonly_probe",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A preservation-hash probe must use APIs supported by the active Windows PowerShell/.NET runtime and return an exact digest before its result is used as evidence.",
+      "observed_error": "The first read-only preservation-hash probe collected the exact 494 baseline paths but attempted Convert.ToHexString, which is unavailable in the active Windows PowerShell/.NET runtime, so the hash field was null and the command reported a method-invocation error. It changed no file, ref, process or worker state.",
+      "detection_method": "PowerShell reported that System.Convert has no ToHexString method and rendered a null hash. A corrected probe used System.BitConverter.ToString over the same SHA-256 bytes and returned the accepted f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 digest for all 494 paths.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-214.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.uses_unavailable_runtime_hash_format_api_without_preflight",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Format SHA-256 bytes with System.BitConverter.ToString, remove hyphens and lowercase the result; accept the preservation claim only after the exact 494-count and historical digest both match.",
+        "prevention_control": "Use the already-proven Windows PowerShell-compatible BitConverter hash-rendering snippet for every remaining untracked-set check in AES-C2; do not substitute newer .NET convenience APIs.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-214.md"
         ]
       },
       "status": "corrected"

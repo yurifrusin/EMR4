@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "48dfb88c9592e853ba34b16b1aed36ad7ce5099eb67faaa78ccd6bbf54299156",
+  "canonical_register_sha256": "01ce416f35278eefcde6424eafebd8be8ecc7e65e78316b2c341f103b71fc234",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 82,
-      "canonical_unchanged": 135,
+      "canonical_unchanged": 142,
       "untrusted_partial_worktree": 25
     },
     "by_category": {
-      "command_scope_violation": 27,
+      "command_scope_violation": 29,
       "evidence_misreport": 33,
       "harness_failure": 30,
-      "output_contract_violation": 63,
+      "output_contract_violation": 67,
       "read_only_violation": 3,
-      "reasoning_claim_error": 25,
+      "reasoning_claim_error": 26,
       "repository_defect": 52,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 151,
+      "agent_behavior": 158,
       "harness": 30,
       "repository": 52,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 83,
+      "low": 89,
       "material": 85,
-      "moderate": 74
+      "moderate": 75
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 40,
@@ -35,7 +35,7 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 110,
+      "codex-primary-orchestrator::orchestrator": 117,
       "codex-sol-orchestrator::orchestrator": 1,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
@@ -79,12 +79,12 @@
     },
     "by_role": {
       "implementer": 16,
-      "orchestrator": 178,
+      "orchestrator": 185,
       "verifier": 48
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 242,
+  "incident_count": 249,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -105,6 +105,30 @@
         "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search."
       ],
       "recurrence_signature": "orchestrator.overbroad_repository_content_search",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0242",
+        "AER-0246"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "For PowerShell orchestration probes, use one statement per step: capture collection output, run Git or shell commands, capture $LASTEXITCODE, and only then construct the final object. Never place a semicolon-delimited statement sequence inside a property expression.",
+        "For the rest of AES-C2 orchestration, every PowerShell diagnostic uses literal command statements with named intermediate values and no script-text variable in command position; Git revision-path arguments are always quoted."
+      ],
+      "recurrence_signature": "orchestrator.powershell_statement_sequence_embedded_inside_expression",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -573,7 +597,7 @@
       ]
     }
   ],
-  "register_revision": 208,
+  "register_revision": 214,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-11"
 }

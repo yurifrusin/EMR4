@@ -66,7 +66,7 @@ is unusable outside the simulator.
 | Candidate chooses adapter, operation, destination, method or executable | closed work-cell view plus identity resolved only from exact one-entry registry | selector scenario is not dispatched and work-cell identity mutations reject |
 | Candidate receives a lease, registry or custody value | work-cell schema excludes all authority/custody fields and recursively checks forbidden keys | custody-exposure scenario stops with zero released result |
 | Add or mutate a registry entry | exact registry count, closed schema and full identity equality | every registry mismatch scenario stops before call |
-| Swap the pure implementation behind a valid adapter ID | implementation and adapter-artifact digest binding | implementation/artifact mismatch scenarios stop |
+| Swap the pure implementation behind a valid adapter ID | separate exact inherited C1 adapter-artifact identity and recomputed C2 definition-digest bindings | implementation/artifact mismatch scenarios stop |
 | Revoke or supersede after admission but before dispatch | mandatory fresh control-state recheck immediately before call | generation, authority, revocation and kill scenarios stop |
 | Dispatch before cumulative state is committed | exact AES-C1 budget-after digest/count equality before call | budget-commit mismatch stops |
 | Smuggle selector or executable content through allowed values | adapter treats values as opaque strings and has no parser/template/deserializer | generated selector mutations reject or remain inert |

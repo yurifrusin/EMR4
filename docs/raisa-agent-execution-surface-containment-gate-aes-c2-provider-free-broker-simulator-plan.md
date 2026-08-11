@@ -56,10 +56,15 @@ The simulator registry contains exactly one immutable entry:
 | external I/O | `false` |
 | command authority | `false` |
 
-Its implementation digest is calculated over one closed declarative adapter
-definition and must equal the manifest's pinned adapter-artifact identity. The
-definition contains no URL, host, port, path, SQL, executable, command route,
-tool definition, cleanup target, environment variable or provider identifier.
+Two distinct bindings are required and may never be conflated. The inherited
+`adapter_artifact_digest` in the registry must exactly equal the authored-
+synthetic identity already pinned by the C1 manifest and current-generation
+state (`sha256:` plus 64 `f` characters). Separately, the C2
+`implementation_definition_digest` is recomputed over the one closed
+declarative adapter definition and must equal the stored C2 registry value.
+There is no equality or preimage claim between those two digests. The definition
+contains no URL, host, port, path, SQL, executable, command route, tool
+definition, cleanup target, environment variable or provider identifier.
 
 The pure adapter accepts a broker-created closed invocation containing only a
 broker-generated invocation ID, the fixed operation identity, the admitted
@@ -293,7 +298,8 @@ AES-C2 passes only when:
    dispatch and always outrank a prior allow;
 8. the exact C1 budget-after state is committed before dispatch and no following
    operation occurs after terminal state;
-9. invocation and adapter-result digests are independently recomputed and exact;
+9. the inherited C1 adapter-artifact identity and independently recomputed C2
+   implementation-definition, invocation and adapter-result digests are exact;
 10. all 26 scenarios match their exact status, reason and invocation count;
 11. all 18 generated hostile attempt/result mutations and all nested contract
     mutations fail closed with zero released result;
