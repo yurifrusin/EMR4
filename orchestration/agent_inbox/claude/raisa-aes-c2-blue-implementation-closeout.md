@@ -1,48 +1,66 @@
-# Raisa AES-C2 provider-free inert broker simulator - DeepSeek blue implementation closeout
+# Raisa AES-C2 provider-free inert broker simulator - DeepSeek blue revision closeout
 
 Date: 2026-08-11
 
-Decision: `pass`
+Task ID: `raisa-aes-c2-blue-revision-001`
+
+Decision: `pass` (bounded revision candidate only)
 
 Worker: DeepSeek V4 Flash/high through Claude Code `--bare`
-Task ID: `raisa-aes-c2-blue-implementation-001`
+
+Incident: AER-0251 at register revision 216 (Sol rejection of the original
+`52f1dbb1...` candidate).
 
 ## Source and candidate heads
 
-- Required source HEAD: `bd11333d462424b40f5f8f014b1c4a945b3a5133`
-- Final candidate HEAD: `bd11333d462424b40f5f8f014b1c4a945b3a5133` plus staged candidate commit on `codex/aes-c2-blue-deepseek` (this closeout records the candidate before Sol adoption).
-- Protected refs `master` and `handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`; they were verified and never moved.
+- Required revision source HEAD: `52f1dbb10fd6e616d3190aa896e60d8facf5897d`
+  (exact; verified clean and preflighted).
+- Original corrected-plan source: `bd11333d462424b40f5f8f014b1c4a945b3a5133`.
+- Candidate commit: `resolved_by_receipt` - the closeout is committed in the
+  candidate commit, so its final self-referential SHA is not guessed here; the
+  candidate SHA is resolved from the commit receipt after commit.
+- Protected refs are named exactly and were verified but never moved:
+  - local `master` = `2e34bdad732fdab32fbf778280b3d3c70d66d602`
+  - local `handoff/current` = `2e34bdad732fdab32fbf778280b3d3c70d66d602`
+  - `origin/master` = `2e34bdad732fdab32fbf778280b3d3c70d66d602`
+  - `origin/handoff/current` = `2e34bdad732fdab32fbf778280b3d3c70d66d602`
 
-## Plan challenge
+## Bounded revision performed
 
-The frozen corrected plan was challenged against the accepted AES-C1/C0 contracts
-before implementation:
+This is the single mechanical same-lane revision permitted by the frozen plan.
+No acceptance, recovery, integration, baton, push or protected-ref authority is
+conveyed. The revision corrected the contained implementation-and-evidence
+closure error:
 
-- The C1 manifest and current-generation supply-chain identity carry
-  `adapter_artifact_digest` = `sha256:` + 64 `f` characters. The frozen plan
-  requires the C2 registry to carry exactly that inherited identity, and the C2
-  `implementation_definition_digest` is recomputed over the closed C2 declarative
-  definition and compared only with its own registry field. There is no equality
-  or preimage claim between them.
-- C2 reuses the exact C1 validation, digest and admission functions and preserves
-  the exact C1 closed contract, decision and reason vocabulary. C2 never weakens
-  C1 and never admits a C1 denial/stop.
-
-No conceptual, digest-layer or authority contradiction remains. Implementation
-proceeded.
+1. `_dispatch_adapter` no longer returns `adapter_result_override` before the
+   pure adapter. The sole pure adapter call is unconditional and executes
+   exactly once, after every preceding gate and before the negative result seam
+   is observed. A supplied result can no longer bypass the actual call. No
+   second callable or dynamic selection path was added.
+2. `validate_scenario_packet` now rejects every undeclared top-level packet key,
+   every missing packet field, every noncanonical scenario value and every
+   schema-valid result override outside the one exact malformed-result scenario.
+   The committed scenario packet is bound to the exact generated 26-scenario
+   catalogue (`scenarios:not_canonical_generated_catalogue`).
+3. Independent tests instrument the actual `_pure_inert_render` callable and
+   prove:
+   - the malformed-result scenario executes it exactly once;
+   - a schema-valid override cannot bypass that actual call;
+   - an extra packet key plus any noncanonical packet fail validation.
 
 ## Changed files (owned paths only)
 
-- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.json`
-- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.schema.json`
-- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/authored-synthetic-broker-simulator-scenarios.json`
-- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/provider-free-broker-simulator-evidence.json`
 - `scripts/raisa_agent_execution_surface_containment_gate_aes_c2_broker_simulator.py`
 - `tests/test_raisa_agent_execution_surface_containment_gate_aes_c2.py`
 - `orchestration/agent_inbox/claude/raisa-aes-c2-blue-implementation-closeout.md`
 
-No AES-C0/C1 artifact, plan, threat delta, AGENTS, implementation plan, API Spine
-artifact, fast-profile configuration or pre-existing test was modified.
+The regenerated minimized evidence
+(`orchestration/continuity/.../provider-free-broker-simulator-evidence.json`) is
+byte-identical to the frozen evidence: the corrected source preserves the exact
+2 simulated / 4 not_dispatched / 20 stop accounting and the three actual pure
+calls. The frozen scenarios, contract and schema are unchanged. No AES-C0/C1
+artifact, plan, threat delta, AGENTS, implementation plan, API Spine artifact,
+fast-profile configuration or pre-existing test was modified.
 
 ## Exact 26-scenario accounting
 
@@ -77,8 +95,11 @@ Status counts: 2 `simulated`, 4 `not_dispatched`, 20 terminal `stop`.
 | `budget-commit-mismatch-stop` | stop | `budget_commit_mismatch` | 0 |
 | `repeat-after-terminal-stop` | stop | `generation_terminal` | 0 |
 
-Total pure-adapter calls: 3 (two success scenarios plus the malformed-result
-scenario, which releases nothing). Every other scenario calls zero times.
+Total pure-adapter calls: 3 - two released simulations plus the malformed-result
+scenario, which calls once and releases nothing. Every other scenario calls zero
+times. This claim is made only after instrumented proof (the focused C2 tests
+wrap the real `_pure_inert_render` with a counting wrapper and assert the exact
+call count across the whole committed catalogue).
 
 ## Hostile mutations
 
@@ -109,29 +130,41 @@ scenario, which releases nothing). Every other scenario calls zero times.
 - The two digest values are distinct and have no equality or preimage relation.
 - Invocation and adapter-result digests are independently recomputed and compared.
 
+## Synthetic fixture custody binding
+
+The broker-private synthetic noncredential fixture
+(`synthetic-noncredential-fixture:` prefix, `real_credential: false`) is
+supplied directly to the fixed pure adapter (as the second argument of the real
+`_pure_inert_render` call) to prove the broker-custody rehearsal shape, but it is
+never emitted into any result. Only its digest alone is compared for custody
+binding (`fixture_value_digest`); the handle and value never reach the work-cell
+view, admission attempt/decision, adapter invocation/result, evidence, exception
+text or returned simulator result. Recursive checks prove the handle/value occur
+nowhere in any emitted surface.
+
 ## Tests and exact results
 
-Focused AES-C2 packet: 18/18 tests pass.
+- Focused AES-C2 packet: 22/22 tests pass, including the four new instrumented
+  regressions:
+  - malformed result executes `_pure_inert_render` exactly once;
+  - schema-valid override cannot bypass the actual pure call;
+  - the full 26-scenario catalogue executes `_pure_inert_render` exactly three
+    times;
+  - extra packet key and noncanonical scenario fail validation.
+- Exact serial packet (repository `conftest.py`, exact safe paths only):
+  81/81 pass, exit code 0 (22 AES-C2 + 14 AES-C1 + 9 AES-C0 + 36 API Spine).
 
 ## Verification
 
-- `scripts/raisa_agent_execution_surface_containment_gate_aes_c2_broker_simulator.py`: status `passed`, reasons `[]`.
-- Serial pytest (repository `conftest.py`, exact safe paths only): 77/77 pass
-  (18 AES-C2 + 14 AES-C1 + 9 AES-C0 + 36 API Spine), exit code 0.
-- `ruff check` on the C2 script and C2 test file: all checks passed.
+- Corrected simulator script: status `passed`, reasons `[]`, evidence
+  regenerated.
+- Ruff check and Ruff format check on the two touched Python files: pass.
+- Compile/syntax for the C2 script and test: pass.
 - `git diff --check`: clean.
-- Final diff against required source HEAD touches only the seven owned paths; no
-  AES-C0/C1 artifact, plan, AGENTS, implementation plan, API Spine artifact,
-  fast-profile configuration or pre-existing test changed.
-
-## Issues found or residual risks
-
-No unresolved issue was found in this candidate. Residual risks are inherited
-from the frozen plan and remain outside C2 claim scope: process/container
-isolation, real credential custody, real adapter safety, concurrent atomicity,
-provider behavior, product-data safety, command safety, deployment and
-production readiness are not proven by this in-process authored-synthetic
-simulation.
+- Exact seven-path diff check against `52f1dbb10fd6e616d3190aa896e60d8facf5897d`:
+  only the seven owned paths may change; no AES-C0/C1 artifact, plan, threat
+  delta, AGENTS, implementation plan, API Spine artifact, fast-profile
+  configuration or pre-existing test changed.
 
 ## Zero-runtime/provider/data evidence
 
@@ -151,20 +184,24 @@ Evidence mode: `authored_synthetic_provider_free_in_process_inert_simulation`.
 - real_credentials_used: false
 - product_or_patient_data: false
 
-The broker-private synthetic noncredential fixture
-(`synthetic-noncredential-fixture:` prefix, `real_credential: false`) is
-never emitted. Recursive checks prove its handle/value occur nowhere in the
-work-cell view, admission attempt/decision, adapter invocation/result, evidence,
-exception text or returned simulator results. Only the broker-private digest
-comparison observes it.
-
 Static boundary checks prove no dynamic import, reflection, plugin loading,
 candidate-indexed callable map, `eval`, `exec`, template/deserialization engine,
 environment read, subprocess, socket, HTTP or database client, and no external
 filesystem capability beyond the owned evidence writer.
 
-## Unfulfilled acceptance items
+## Pending acceptance items (outside worker authority)
 
-None. All 15 deterministic acceptance criteria of the frozen plan are satisfied
-by this candidate. Final adoption, integration, baton movement and Yuri mailbox
-steps remain Sol-owned per the standing allocation.
+This bounded revision claims no acceptance. Sol final review/adoption, broader
+maintained/canonical gates, a fresh Gemini veto after deterministic admission,
+integration, baton/continuity movement, Yuri mailbox handoff and publication all
+remain pending and are outside worker authority. No all-plan-criteria-complete
+claim is made.
+
+## Issues found or residual risks
+
+No unresolved finding remains in this bounded revision. Residual risks are
+inherited from the frozen plan and remain outside C2 claim scope: process/
+container isolation, real credential custody, real adapter safety, concurrent
+atomicity, provider behavior, product-data safety, command safety, deployment
+and production readiness are not proven by this in-process authored-synthetic
+simulation.

@@ -34,7 +34,9 @@ from scripts.raisa_agent_execution_surface_containment_gate_aes_c2_broker_simula
     validate_contract,
     validate_hostile_contract_mutations,
     validate_hostile_mutations,
+    validate_scenario_packet,
 )
+import scripts.raisa_agent_execution_surface_containment_gate_aes_c2_broker_simulator as c2_module
 
 
 def _packet() -> tuple[dict, dict, dict]:
@@ -73,6 +75,7 @@ def test_aes_c2_report_passes_with_zero_runtime_provider_or_data() -> None:
     assert report["contract_mutation_rejected_count"] == len(
         _hostile_contract_mutations()
     )
+
 
 def test_aes_c2_inherited_aes_c1_digests_match_frozen_hashes() -> None:
     contract, _, _ = _packet()
@@ -124,7 +127,10 @@ def test_aes_c2_all_26_scenarios_match_expected_status_reason_and_calls() -> Non
             scenario_id
         )
 
-def test_aes_c2_registry_has_exactly_one_entry_and_identity_is_broker_resolved() -> None:
+
+def test_aes_c2_registry_has_exactly_one_entry_and_identity_is_broker_resolved() -> (
+    None
+):
     contract, _, _ = _packet()
     registry = contract["broker_registry"]
     entries = registry["entries"]
@@ -162,6 +168,7 @@ def test_aes_c2_two_digest_layers_are_independent_and_exact() -> None:
     assert entry["adapter_artifact_digest"] != entry["implementation_definition_digest"]
     assert digest_of(IMPLEMENTATION_DEFINITION) != ADAPTER_ARTIFACT_DIGEST
 
+
 def test_aes_c2_work_cell_never_receives_registry_lease_or_credential() -> None:
     by_id = _all_scenarios()
 
@@ -173,9 +180,18 @@ def test_aes_c2_work_cell_never_receives_registry_lease_or_credential() -> None:
         assert SYNTHETIC_FIXTURE_HANDLE not in serialized, scenario_id
         assert SYNTHETIC_FIXTURE_VALUE not in serialized, scenario_id
         result = evaluate_simulation_attempt(scenario)
-        assert result["boundary_assertions"]["work_cell_received_lease_or_registry"] is False
-        assert result["boundary_assertions"]["work_cell_received_credential_fixture"] is False
-        assert result["boundary_assertions"]["candidate_selected_operation_identity"] is False
+        assert (
+            result["boundary_assertions"]["work_cell_received_lease_or_registry"]
+            is False
+        )
+        assert (
+            result["boundary_assertions"]["work_cell_received_credential_fixture"]
+            is False
+        )
+        assert (
+            result["boundary_assertions"]["candidate_selected_operation_identity"]
+            is False
+        )
         assert result["boundary_assertions"]["command_authority"] is False
         assert result["contains_sensitive_values"] is False
 
@@ -215,6 +231,7 @@ def test_aes_c2_all_hostile_contract_mutations_fail_closed() -> None:
     assert len(rejected) == 14
     assert admitted == []
 
+
 def test_aes_c2_contract_rejects_undeclared_nested_rules_and_changed_digests() -> None:
     contract, schema, _ = _packet()
 
@@ -252,8 +269,13 @@ def test_aes_c2_invocation_and_result_digests_are_independent() -> None:
     results = {r["scenario_id"]: r for r in report["scenario_results"]}
 
     simulated = [
-        s for s in by_id.values()
-        if s["scenario_id"] in ("exact-inert-dispatch-simulated", "exact-inert-second-within-budget-simulated")
+        s
+        for s in by_id.values()
+        if s["scenario_id"]
+        in (
+            "exact-inert-dispatch-simulated",
+            "exact-inert-second-within-budget-simulated",
+        )
     ]
     assert len(simulated) == 2
     for scenario in simulated:
@@ -261,23 +283,30 @@ def test_aes_c2_invocation_and_result_digests_are_independent() -> None:
         assert result["invocation_digest"] is not None
         assert result["result_digest"] is not None
         assert result["invocation_digest"] != result["result_digest"]
-        assert result["implementation_definition_digest"] == IMPLEMENTATION_DEFINITION_DIGEST
+        assert (
+            result["implementation_definition_digest"]
+            == IMPLEMENTATION_DEFINITION_DIGEST
+        )
         assert result["adapter_artifact_identity_digest"] == ADAPTER_ARTIFACT_DIGEST
 
 
 def test_aes_c2_static_boundary_check_finds_no_external_effect_path() -> None:
     assert static_boundary_check() == []
 
+
 def test_aes_c2_every_scenario_attempt_is_closed_and_validates() -> None:
     _, schema, packet = _packet()
     for scenario in packet["scenarios"]:
         assert validate_attempt(scenario) == [], scenario["scenario_id"]
         result = evaluate_simulation_attempt(scenario)
-        assert validate_instance(
-            result,
-            schema["$defs"]["BrokerSimulationResult"],
-            root_schema=schema,
-        ) == [], scenario["scenario_id"]
+        assert (
+            validate_instance(
+                result,
+                schema["$defs"]["BrokerSimulationResult"],
+                root_schema=schema,
+            )
+            == []
+        ), scenario["scenario_id"]
 
 
 def test_aes_c2_regenerated_packet_is_stable() -> None:
@@ -312,9 +341,10 @@ def test_aes_c2_repeat_after_terminal_stops_before_invocation() -> None:
     by_id = _all_scenarios()
     scenario = by_id["repeat-after-terminal-stop"]
 
-    assert scenario["broker_admission_attempt"]["budget_state"][
-        "next_operation_permitted"
-    ] is False
+    assert (
+        scenario["broker_admission_attempt"]["budget_state"]["next_operation_permitted"]
+        is False
+    )
     result = evaluate_simulation_attempt(scenario)
     assert result["status"] == "stop"
     assert result["reason_codes"] == ["generation_terminal"]
@@ -331,3 +361,127 @@ def test_aes_c2_malformed_result_calls_once_and_releases_nothing() -> None:
     assert result["reason_codes"] == ["adapter_result_invalid"]
     assert result["simulated_invocation_count"] == 1
     assert result["released_simulated_result"] is False
+
+
+def _count_pure_adapter_calls(attempt) -> tuple[list, dict]:
+    """Run one attempt with a counting wrapper on the real pure adapter."""
+    calls: list = []
+    original = c2_module._pure_inert_render
+
+    def counting(invocation, fixture_value):
+        calls.append(invocation)
+        return original(invocation, fixture_value)
+
+    c2_module._pure_inert_render = counting
+    try:
+        result = evaluate_simulation_attempt(attempt)
+    finally:
+        c2_module._pure_inert_render = original
+    return calls, result
+
+
+def test_aes_c2_malformed_result_executes_pure_adapter_exactly_once() -> None:
+    by_id = _all_scenarios()
+    scenario = by_id["adapter-result-contract-mismatch-stop"]
+    calls, result = _count_pure_adapter_calls(scenario)
+
+    assert len(calls) == 1
+    assert result["status"] == "stop"
+    assert result["reason_codes"] == ["adapter_result_invalid"]
+    assert result["simulated_invocation_count"] == 1
+    assert result["released_simulated_result"] is False
+
+
+def test_aes_c2_schema_valid_override_cannot_bypass_actual_pure_call() -> None:
+    """A schema-valid override still executes the real pure adapter exactly once."""
+    by_id = _all_scenarios()
+    scenario = copy.deepcopy(by_id["exact-inert-dispatch-simulated"])
+    admission = scenario["broker_admission_attempt"]
+    c1 = c2_module.evaluate_attempt(admission)
+    admitted_candidate_digest = c1["broker_decision"]["candidate_digest"]
+    invocation = c2_module._build_invocation(scenario, admitted_candidate_digest)
+    invocation_digest = digest_of(invocation)
+    result_payload = {
+        "result_code": "inert-render-ok",
+        "invocation_digest": invocation_digest,
+    }
+    result_digest = digest_of(result_payload)
+    scenario["adapter_result_override"] = {
+        "schema_version": "emr4.aes_c2.adapter_result.v1",
+        "result_id": "result-schema-valid-override",
+        "result_code": "inert-render-ok",
+        "invocation_digest": invocation_digest,
+        "result_digest": result_digest,
+        "command_authority": False,
+        "effect_class": "none",
+        "contains_sensitive_values": False,
+    }
+
+    calls, result = _count_pure_adapter_calls(scenario)
+
+    # The actual pure adapter still executes exactly once; the override cannot
+    # bypass the call.  A schema-valid override alone would otherwise release a
+    # simulated result, which is exactly why packet validation must reject it.
+    assert len(calls) == 1
+    assert result["status"] == "simulated"
+    assert result["released_simulated_result"] is True
+    assert result["simulated_invocation_count"] == 1
+
+    # The same override on a non-malformed scenario fails packet validation.
+    packet = copy.deepcopy(_packet()[2])
+    for i, s in enumerate(packet["scenarios"]):
+        if s["scenario_id"] == "exact-inert-dispatch-simulated":
+            packet["scenarios"][i] = scenario
+            break
+    errors = validate_scenario_packet(packet, _packet()[1])
+    assert (
+        "scenarios:adapter_result_override_outside_exact_malformed_scenario" in errors
+    )
+    assert "scenarios:not_canonical_generated_catalogue" in errors
+
+
+def test_aes_c2_all_26_scenarios_execute_pure_adapter_exactly_three_times() -> None:
+    _, _, packet = _packet()
+    calls: list = []
+    original = c2_module._pure_inert_render
+
+    def counting(invocation, fixture_value):
+        calls.append(invocation)
+        return original(invocation, fixture_value)
+
+    c2_module._pure_inert_render = counting
+    try:
+        for scenario in packet["scenarios"]:
+            evaluate_simulation_attempt(scenario)
+    finally:
+        c2_module._pure_inert_render = original
+
+    # Two released simulations plus one malformed result with no release.
+    assert len(calls) == 3
+
+
+def test_aes_c2_packet_rejects_extra_key_and_noncanonical_scenario() -> None:
+    _, schema, packet = _packet()
+
+    # Undeclared top-level packet key is rejected.
+    extra_key = copy.deepcopy(packet)
+    extra_key["forged_field"] = "forged"
+    errors = validate_scenario_packet(extra_key, schema)
+    assert "scenarios:keys_not_exact" in errors
+
+    # Missing top-level packet key is rejected.
+    missing_key = copy.deepcopy(packet)
+    del missing_key["evidence_mode"]
+    errors = validate_scenario_packet(missing_key, schema)
+    assert "scenarios:keys_not_exact" in errors
+    assert "scenarios:evidence_mode" in errors
+
+    # Noncanonical scenario value (tampered malformed result code) is rejected.
+    noncanonical = copy.deepcopy(packet)
+    for scenario in noncanonical["scenarios"]:
+        if scenario["scenario_id"] == "adapter-result-contract-mismatch-stop":
+            scenario["adapter_result_override"]["result_code"] = "forged-code"
+            break
+    errors = validate_scenario_packet(noncanonical, schema)
+    assert "scenarios:not_canonical_generated_catalogue" in errors
+    assert errors

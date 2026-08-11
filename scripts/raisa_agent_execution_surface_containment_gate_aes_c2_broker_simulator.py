@@ -46,8 +46,7 @@ from scripts.raisa_agent_execution_surface_containment_gate_aes_c1_admission imp
 )
 
 BASE = (
-    ROOT
-    / "orchestration/continuity/"
+    ROOT / "orchestration/continuity/"
     "raisa-agent-execution-surface-containment-gate-aes-c2"
 )
 CONTRACT_PATH = BASE / "broker-simulator-contract.json"
@@ -296,7 +295,10 @@ ADAPTER_RESULT_CONTRACT: dict[str, Any] = {
 SCENARIO_EXPECTATIONS: dict[str, tuple[str, list[str], int]] = {
     "exact-inert-dispatch-simulated": ("simulated", ["simulated_inert_adapter"], 1),
     "exact-inert-second-within-budget-simulated": (
-        "simulated", ["simulated_inert_adapter"], 1),
+        "simulated",
+        ["simulated_inert_adapter"],
+        1,
+    ),
     "admission-deny-not-dispatched": ("not_dispatched", ["admission_not_allow"], 0),
     "admission-stop-not-dispatched": ("not_dispatched", ["admission_not_allow"], 0),
     "proofreader-deny-not-dispatched": ("not_dispatched", ["admission_not_allow"], 0),
@@ -310,21 +312,35 @@ SCENARIO_EXPECTATIONS: dict[str, tuple[str, list[str], int]] = {
     "registry-media-type-mismatch-stop": ("stop", ["adapter_identity_mismatch"], 0),
     "registry-operation-mismatch-stop": ("stop", ["adapter_identity_mismatch"], 0),
     "registry-implementation-digest-mismatch-stop": (
-        "stop", ["adapter_identity_mismatch"], 0),
+        "stop",
+        ["adapter_identity_mismatch"],
+        0,
+    ),
     "registry-custody-binding-mismatch-stop": (
-        "stop", ["credential_custody_violation"], 0),
+        "stop",
+        ["credential_custody_violation"],
+        0,
+    ),
     "adapter-artifact-digest-mismatch-stop": (
-        "stop", ["supply_chain_identity_mismatch"], 0),
+        "stop",
+        ["supply_chain_identity_mismatch"],
+        0,
+    ),
     "work-cell-custody-exposure-stop": ("stop", ["credential_custody_violation"], 0),
     "generation-superseded-before-dispatch-stop": (
-        "stop", ["control_state_changed"], 0),
+        "stop",
+        ["control_state_changed"],
+        0,
+    ),
     "authority-changed-before-dispatch-stop": ("stop", ["control_state_changed"], 0),
     "revocation-before-dispatch-stop": ("stop", ["control_state_changed"], 0),
     "external-kill-before-dispatch-stop": ("stop", ["external_kill_switch"], 0),
     "invocation-candidate-digest-mismatch-stop": (
-        "stop", ["invocation_contract_mismatch"], 0),
-    "adapter-result-contract-mismatch-stop": (
-        "stop", ["adapter_result_invalid"], 1),
+        "stop",
+        ["invocation_contract_mismatch"],
+        0,
+    ),
+    "adapter-result-contract-mismatch-stop": ("stop", ["adapter_result_invalid"], 1),
     "budget-commit-mismatch-stop": ("stop", ["budget_commit_mismatch"], 0),
     "repeat-after-terminal-stop": ("stop", ["generation_terminal"], 0),
 }
@@ -411,9 +427,11 @@ def _sample_revocation(manifest: dict[str, Any]) -> dict[str, Any]:
         ),
     }
 
+
 # ---------------------------------------------------------------------------
 # Pure adapter
 # ---------------------------------------------------------------------------
+
 
 def _pure_inert_render(
     invocation: dict[str, Any], _fixture_value: str
@@ -447,22 +465,26 @@ def _dispatch_adapter(
     invocation: dict[str, Any],
     fixture_value: str,
 ) -> dict[str, Any]:
-    """Call the single pure adapter at most once.
+    """Call the single fixed pure adapter exactly once, then observe the seam.
 
     The optional ``adapter_result_override`` is the deterministic malformed-
     result seam used only by the frozen ``adapter-result-contract-mismatch-stop``
-    scenario.  The adapter is still called once; the override is the observed
-    result that must fail closed.
+    scenario.  The sole pure adapter call is unconditional: it happens exactly
+    once, after every preceding gate and before the negative result seam is
+    observed, so a supplied result can never bypass the actual call.  No second
+    callable or dynamic selection path exists.
     """
+    actual_result = _pure_inert_render(invocation, fixture_value)
     override = attempt.get("adapter_result_override")
     if override is not None:
         return copy.deepcopy(override)
-    return _pure_inert_render(invocation, fixture_value)
+    return actual_result
 
 
 # ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
+
 
 def validate_attempt(attempt: dict[str, Any]) -> list[str]:
     schema = _load(SCHEMA_PATH)
@@ -502,11 +524,15 @@ def validate_attempt(attempt: dict[str, Any]) -> list[str]:
                 )
     return sorted(set(errors))
 
+
 def validate_contract(contract: dict[str, Any], schema: dict[str, Any]) -> list[str]:
     errors = list(validate_instance(contract, schema, root_schema=schema))
     if contract.get("schema_version") != "emr4.aes_c2.broker_simulator_contract.v1":
         errors.append("schema_version:not_exact")
-    if contract.get("contract_id") != "raisa-agent-execution-surface-containment-gate-aes-c2":
+    if (
+        contract.get("contract_id")
+        != "raisa-agent-execution-surface-containment-gate-aes-c2"
+    ):
         errors.append("contract_id:not_exact")
     if (
         contract.get("status")
@@ -586,6 +612,9 @@ def validate_scenario_packet(
     packet: dict[str, Any], schema: dict[str, Any]
 ) -> list[str]:
     errors: list[str] = []
+    expected_keys = {"schema_version", "evidence_mode", "scenarios"}
+    if set(packet) != expected_keys:
+        errors.append("scenarios:keys_not_exact")
     if (
         packet.get("schema_version")
         != "emr4.aes_c2.authored_synthetic_broker_simulator_scenarios.v1"
@@ -605,13 +634,26 @@ def validate_scenario_packet(
         errors.append("scenarios:duplicate_ids")
     if set(ids) != set(SCENARIO_EXPECTATIONS):
         errors.append("scenarios:undeclared_ids")
+    # Bind the committed packet to the exact generated 26-scenario catalogue:
+    # every extra/missing field and every noncanonical scenario value is rejected.
+    if packet != generate_scenarios():
+        errors.append("scenarios:not_canonical_generated_catalogue")
     for attempt in scenarios:
+        if (
+            attempt.get("adapter_result_override") is not None
+            and attempt.get("scenario_id") != "adapter-result-contract-mismatch-stop"
+        ):
+            errors.append(
+                "scenarios:adapter_result_override_outside_exact_malformed_scenario"
+            )
         errors.extend(validate_attempt(attempt))
     return sorted(set(errors))
+
 
 # ---------------------------------------------------------------------------
 # Ordered fail-closed simulation
 # ---------------------------------------------------------------------------
+
 
 def _registry_stop_reason(
     registry: dict[str, Any], admission_attempt: dict[str, Any]
@@ -760,6 +802,7 @@ def _build_result(
         "contains_sensitive_values": False,
     }
 
+
 def evaluate_simulation_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
     """Evaluate one closed BrokerSimulationAttempt with fixed fail-closed order."""
     admission_attempt = attempt["broker_admission_attempt"]
@@ -849,9 +892,11 @@ def evaluate_simulation_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
         adapter_result["result_digest"],
     )
 
+
 # ---------------------------------------------------------------------------
 # Authored-synthetic scenario authoring
 # ---------------------------------------------------------------------------
+
 
 def _base_attempt(scenario_id: str) -> dict[str, Any]:
     c1 = _c1_attempt("exact-inert-intersection-allow")
@@ -883,84 +928,153 @@ def _adopt_c1(scenario_id: str) -> Callable[[dict[str, Any]], None]:
         )
         attempt["post_admission_control_state"] = _canonical_post_admission_state(c1)
         attempt["expected_budget_commit"] = _canonical_expected_budget_commit(c1)
+
     return mutate
 
 
 def _build_scenarios() -> list[dict[str, Any]]:
     attempts: list[dict[str, Any]] = []
 
-    def add(
-        scenario_id: str, mutate: Callable[[dict[str, Any]], None]
-    ) -> None:
+    def add(scenario_id: str, mutate: Callable[[dict[str, Any]], None]) -> None:
         attempt = _base_attempt(scenario_id)
         mutate(attempt)
         attempts.append(attempt)
 
     # 1-2: simulated success scenarios.
     add("exact-inert-dispatch-simulated", lambda a: None)
-    add("exact-inert-second-within-budget-simulated", _adopt_c1(
-        "exact-inert-second-within-budget-allow"))
+    add(
+        "exact-inert-second-within-budget-simulated",
+        _adopt_c1("exact-inert-second-within-budget-allow"),
+    )
 
     # 3-6: AES-C1 deny/stop -> not_dispatched.
     add("admission-deny-not-dispatched", _adopt_c1("grant-missing-deny"))
     add("admission-stop-not-dispatched", _adopt_c1("external-kill-switch-stop"))
     add("proofreader-deny-not-dispatched", _adopt_c1("proofreader-not-admitted-deny"))
-    add("candidate-selector-not-dispatched", _adopt_c1(
-        "candidate-operation-identity-deny"))
+    add(
+        "candidate-selector-not-dispatched",
+        _adopt_c1("candidate-operation-identity-deny"),
+    )
 
     # 7-8: registry count.
     add("registry-missing-stop", lambda a: a["broker_registry"]["entries"].clear())
-    add("registry-extra-entry-stop", lambda a: a["broker_registry"]["entries"].append(
-        copy.deepcopy(BROKER_REGISTRY_ENTRY)))
+    add(
+        "registry-extra-entry-stop",
+        lambda a: a["broker_registry"]["entries"].append(
+            copy.deepcopy(BROKER_REGISTRY_ENTRY)
+        ),
+    )
 
     # 9-17: registry field mismatches.
-    add("registry-capability-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "entries", 0, "capability_class"),
-        "authoritative_read"))
-    add("registry-adapter-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "entries", 0, "adapter_id"),
-        "synthetic-other-adapter"))
-    add("registry-destination-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "entries", 0, "destination_id"),
-        "synthetic-other-destination"))
-    add("registry-method-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "entries", 0, "method"), "GET"))
-    add("registry-media-type-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "entries", 0, "media_type"), "text/plain"))
-    add("registry-operation-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "entries", 0, "operation_id"),
-        "render-other-operation"))
-    add("registry-implementation-digest-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "entries", 0, "implementation_definition_digest"),
-        WRONG_DIGEST))
-    add("registry-custody-binding-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "synthetic_custody_binding", "fixture_value_digest"),
-        WRONG_DIGEST))
-    add("adapter-artifact-digest-mismatch-stop", lambda a: _set_path(
-        a, ("broker_registry", "entries", 0, "adapter_artifact_digest"),
-        WRONG_DIGEST))
+    add(
+        "registry-capability-mismatch-stop",
+        lambda a: _set_path(
+            a,
+            ("broker_registry", "entries", 0, "capability_class"),
+            "authoritative_read",
+        ),
+    )
+    add(
+        "registry-adapter-mismatch-stop",
+        lambda a: _set_path(
+            a,
+            ("broker_registry", "entries", 0, "adapter_id"),
+            "synthetic-other-adapter",
+        ),
+    )
+    add(
+        "registry-destination-mismatch-stop",
+        lambda a: _set_path(
+            a,
+            ("broker_registry", "entries", 0, "destination_id"),
+            "synthetic-other-destination",
+        ),
+    )
+    add(
+        "registry-method-mismatch-stop",
+        lambda a: _set_path(a, ("broker_registry", "entries", 0, "method"), "GET"),
+    )
+    add(
+        "registry-media-type-mismatch-stop",
+        lambda a: _set_path(
+            a, ("broker_registry", "entries", 0, "media_type"), "text/plain"
+        ),
+    )
+    add(
+        "registry-operation-mismatch-stop",
+        lambda a: _set_path(
+            a,
+            ("broker_registry", "entries", 0, "operation_id"),
+            "render-other-operation",
+        ),
+    )
+    add(
+        "registry-implementation-digest-mismatch-stop",
+        lambda a: _set_path(
+            a,
+            ("broker_registry", "entries", 0, "implementation_definition_digest"),
+            WRONG_DIGEST,
+        ),
+    )
+    add(
+        "registry-custody-binding-mismatch-stop",
+        lambda a: _set_path(
+            a,
+            ("broker_registry", "synthetic_custody_binding", "fixture_value_digest"),
+            WRONG_DIGEST,
+        ),
+    )
+    add(
+        "adapter-artifact-digest-mismatch-stop",
+        lambda a: _set_path(
+            a,
+            ("broker_registry", "entries", 0, "adapter_artifact_digest"),
+            WRONG_DIGEST,
+        ),
+    )
 
     # 18: work-cell custody exposure (declared hostile field in the view).
     def sc18(a: dict[str, Any]) -> None:
         a["work_cell_view"]["credential_reference"] = "attacker-placed-custody-marker"
+
     add("work-cell-custody-exposure-stop", sc18)
 
     # 19-22: control-state changes after admission.
-    add("generation-superseded-before-dispatch-stop", lambda a: _set_path(
-        a, ("post_admission_control_state", "generation_id"),
-        "generation-synthetic-002"))
-    add("authority-changed-before-dispatch-stop", lambda a: _set_path(
-        a, ("post_admission_control_state", "authority_binding_digest"),
-        WRONG_DIGEST))
-    add("revocation-before-dispatch-stop", lambda a: _set_path(
-        a, ("post_admission_control_state", "revocation_record"),
-        _sample_revocation(a["broker_admission_attempt"]["generation_manifest"])))
-    add("external-kill-before-dispatch-stop", lambda a: _set_path(
-        a, ("post_admission_control_state", "external_kill_switch_active"), True))
+    add(
+        "generation-superseded-before-dispatch-stop",
+        lambda a: _set_path(
+            a,
+            ("post_admission_control_state", "generation_id"),
+            "generation-synthetic-002",
+        ),
+    )
+    add(
+        "authority-changed-before-dispatch-stop",
+        lambda a: _set_path(
+            a,
+            ("post_admission_control_state", "authority_binding_digest"),
+            WRONG_DIGEST,
+        ),
+    )
+    add(
+        "revocation-before-dispatch-stop",
+        lambda a: _set_path(
+            a,
+            ("post_admission_control_state", "revocation_record"),
+            _sample_revocation(a["broker_admission_attempt"]["generation_manifest"]),
+        ),
+    )
+    add(
+        "external-kill-before-dispatch-stop",
+        lambda a: _set_path(
+            a, ("post_admission_control_state", "external_kill_switch_active"), True
+        ),
+    )
 
     # 23: invocation candidate-digest mismatch.
     def sc23(a: dict[str, Any]) -> None:
         a["invocation_override"] = _build_invocation(a, WRONG_DIGEST)
+
     add("invocation-candidate-digest-mismatch-stop", sc23)
 
     # 24: malformed adapter result (the adapter is still called once).
@@ -975,11 +1089,16 @@ def _build_scenarios() -> list[dict[str, Any]]:
             "effect_class": "none",
             "contains_sensitive_values": False,
         }
+
     add("adapter-result-contract-mismatch-stop", sc24)
 
     # 25: budget commit mismatch.
-    add("budget-commit-mismatch-stop", lambda a: _set_path(
-        a, ("expected_budget_commit", "budget_after_digest"), WRONG_DIGEST))
+    add(
+        "budget-commit-mismatch-stop",
+        lambda a: _set_path(
+            a, ("expected_budget_commit", "budget_after_digest"), WRONG_DIGEST
+        ),
+    )
 
     # 26: following attempt after a terminal/exhausted generation.
     def sc26(a: dict[str, Any]) -> None:
@@ -993,6 +1112,7 @@ def _build_scenarios() -> list[dict[str, Any]]:
         )
         a["post_admission_control_state"] = _canonical_post_admission_state(c1)
         a["expected_budget_commit"] = _canonical_expected_budget_commit(c1)
+
     add("repeat-after-terminal-stop", sc26)
 
     return attempts
@@ -1006,45 +1126,100 @@ def generate_scenarios() -> dict[str, Any]:
         "scenarios": attempts,
     }
 
+
 # ---------------------------------------------------------------------------
 # Hostile mutations
 # ---------------------------------------------------------------------------
 
+
 def _hostile_mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
     return [
-        ("additional_top_level_key", lambda a: _set_path(a, ("forged_field",), "forged")),
+        (
+            "additional_top_level_key",
+            lambda a: _set_path(a, ("forged_field",), "forged"),
+        ),
         ("missing_required_key", lambda a: a.__delitem__("expected_budget_commit")),
         ("wrong_type_scenario_id", lambda a: _set_path(a, ("scenario_id",), 7)),
-        ("additional_work_cell_key", lambda a: _set_path(
-            a, ("work_cell_view", "forged_benign_key"), "forged")),
-        ("work_cell_capability_field", lambda a: _set_path(
-            a, ("work_cell_view", "capability_id"), "capability-forged")),
-        ("work_cell_adapter_field", lambda a: _set_path(
-            a, ("work_cell_view", "adapter_id"), "adapter-forged")),
-        ("work_cell_destination_field", lambda a: _set_path(
-            a, ("work_cell_view", "destination_id"), "destination-forged")),
-        ("work_cell_method_field", lambda a: _set_path(
-            a, ("work_cell_view", "method"), "GET")),
-        ("work_cell_executable_field", lambda a: _set_path(
-            a, ("work_cell_view", "executable"), "forged.exe")),
-        ("work_cell_credential_field", lambda a: _set_path(
-            a, ("work_cell_view", "credential"), "forged-credential")),
-        ("work_cell_command_route_field", lambda a: _set_path(
-            a, ("work_cell_view", "command_route"), "forged/route")),
-        ("second_registry_entry", lambda a: a["broker_registry"]["entries"].append(
-            copy.deepcopy(BROKER_REGISTRY_ENTRY))),
-        ("registry_url_field", lambda a: _set_path(
-            a, ("broker_registry", "entries", 0, "url"), "https://forged.invalid")),
-        ("registry_filesystem_path_field", lambda a: _set_path(
-            a, ("broker_registry", "entries", 0, "filesystem_path"), "/tmp/forged")),
-        ("registry_sql_field", lambda a: _set_path(
-            a, ("broker_registry", "entries", 0, "sql"), "SELECT 1")),
-        ("registry_executable_selector_field", lambda a: _set_path(
-            a, ("broker_registry", "entries", 0, "executable"), "forged.exe")),
-        ("adapter_result_sensitive_field", lambda a: _set_path(
-            a, ("adapter_result_override", "contains_sensitive_values"), True)),
-        ("adapter_result_command_authority_field", lambda a: _set_path(
-            a, ("adapter_result_override", "command_authority"), True)),
+        (
+            "additional_work_cell_key",
+            lambda a: _set_path(a, ("work_cell_view", "forged_benign_key"), "forged"),
+        ),
+        (
+            "work_cell_capability_field",
+            lambda a: _set_path(
+                a, ("work_cell_view", "capability_id"), "capability-forged"
+            ),
+        ),
+        (
+            "work_cell_adapter_field",
+            lambda a: _set_path(a, ("work_cell_view", "adapter_id"), "adapter-forged"),
+        ),
+        (
+            "work_cell_destination_field",
+            lambda a: _set_path(
+                a, ("work_cell_view", "destination_id"), "destination-forged"
+            ),
+        ),
+        (
+            "work_cell_method_field",
+            lambda a: _set_path(a, ("work_cell_view", "method"), "GET"),
+        ),
+        (
+            "work_cell_executable_field",
+            lambda a: _set_path(a, ("work_cell_view", "executable"), "forged.exe"),
+        ),
+        (
+            "work_cell_credential_field",
+            lambda a: _set_path(
+                a, ("work_cell_view", "credential"), "forged-credential"
+            ),
+        ),
+        (
+            "work_cell_command_route_field",
+            lambda a: _set_path(a, ("work_cell_view", "command_route"), "forged/route"),
+        ),
+        (
+            "second_registry_entry",
+            lambda a: a["broker_registry"]["entries"].append(
+                copy.deepcopy(BROKER_REGISTRY_ENTRY)
+            ),
+        ),
+        (
+            "registry_url_field",
+            lambda a: _set_path(
+                a, ("broker_registry", "entries", 0, "url"), "https://forged.invalid"
+            ),
+        ),
+        (
+            "registry_filesystem_path_field",
+            lambda a: _set_path(
+                a, ("broker_registry", "entries", 0, "filesystem_path"), "/tmp/forged"
+            ),
+        ),
+        (
+            "registry_sql_field",
+            lambda a: _set_path(
+                a, ("broker_registry", "entries", 0, "sql"), "SELECT 1"
+            ),
+        ),
+        (
+            "registry_executable_selector_field",
+            lambda a: _set_path(
+                a, ("broker_registry", "entries", 0, "executable"), "forged.exe"
+            ),
+        ),
+        (
+            "adapter_result_sensitive_field",
+            lambda a: _set_path(
+                a, ("adapter_result_override", "contains_sensitive_values"), True
+            ),
+        ),
+        (
+            "adapter_result_command_authority_field",
+            lambda a: _set_path(
+                a, ("adapter_result_override", "command_authority"), True
+            ),
+        ),
     ]
 
 
@@ -1071,39 +1246,84 @@ def validate_hostile_mutations() -> tuple[list[str], list[str]]:
             rejected.append(name)
     return rejected, admitted
 
+
 def _hostile_contract_mutations() -> list[tuple[str, Callable[[dict[str, Any]], None]]]:
     inherited_key = next(iter(INHERITED_ARTIFACT_DIGESTS))
     return [
-        ("contract_inherited_digest_value_changed", lambda c: _set_path(
-            c, ("inherited_artifact_digests", inherited_key), WRONG_DIGEST)),
-        ("contract_inherited_digests_extra", lambda c: _set_path(
-            c, ("inherited_artifact_digests", "forged/path.json"),
-            "sha256:" + "0" * 64)),
-        ("contract_registry_adapter_changed", lambda c: _set_path(
-            c, ("broker_registry", "entries", 0, "adapter_id"),
-            "synthetic-other-adapter")),
-        ("contract_registry_second_entry", lambda c: c["broker_registry"][
-            "entries"].append(copy.deepcopy(BROKER_REGISTRY_ENTRY))),
-        ("contract_implementation_definition_extra", lambda c: _set_path(
-            c, ("implementation_definition", "forged_rule"), "forged")),
-        ("contract_status_vocabulary_changed", lambda c: c["status_vocabulary"].__setitem__(
-            0, "forged_status")),
-        ("contract_reason_vocabulary_changed", lambda c: c["reason_vocabulary"].__setitem__(
-            0, "forged_reason")),
-        ("contract_dispatch_precedence_changed", lambda c: c["dispatch_precedence"].__setitem__(
-            0, "0_forged_precedence")),
-        ("contract_custody_policy_extra", lambda c: _set_path(
-            c, ("synthetic_custody_policy", "forged_policy"), True)),
-        ("contract_work_cell_forbidden_fields_changed", lambda c: c[
-            "work_cell_forbidden_fields"].append("forged-field")),
-        ("contract_digest_rules_extra", lambda c: _set_path(
-            c, ("digest_rules", "forged_rule"), {"forged": True})),
-        ("contract_invocation_contract_extra", lambda c: _set_path(
-            c, ("adapter_invocation_contract", "forged_rule"), "forged")),
-        ("contract_result_contract_extra", lambda c: _set_path(
-            c, ("adapter_result_contract", "forged_rule"), "forged")),
-        ("contract_zero_runtime_opened", lambda c: _set_path(
-            c, ("zero_runtime_boundary", "runtime_started"), True)),
+        (
+            "contract_inherited_digest_value_changed",
+            lambda c: _set_path(
+                c, ("inherited_artifact_digests", inherited_key), WRONG_DIGEST
+            ),
+        ),
+        (
+            "contract_inherited_digests_extra",
+            lambda c: _set_path(
+                c,
+                ("inherited_artifact_digests", "forged/path.json"),
+                "sha256:" + "0" * 64,
+            ),
+        ),
+        (
+            "contract_registry_adapter_changed",
+            lambda c: _set_path(
+                c,
+                ("broker_registry", "entries", 0, "adapter_id"),
+                "synthetic-other-adapter",
+            ),
+        ),
+        (
+            "contract_registry_second_entry",
+            lambda c: c["broker_registry"]["entries"].append(
+                copy.deepcopy(BROKER_REGISTRY_ENTRY)
+            ),
+        ),
+        (
+            "contract_implementation_definition_extra",
+            lambda c: _set_path(
+                c, ("implementation_definition", "forged_rule"), "forged"
+            ),
+        ),
+        (
+            "contract_status_vocabulary_changed",
+            lambda c: c["status_vocabulary"].__setitem__(0, "forged_status"),
+        ),
+        (
+            "contract_reason_vocabulary_changed",
+            lambda c: c["reason_vocabulary"].__setitem__(0, "forged_reason"),
+        ),
+        (
+            "contract_dispatch_precedence_changed",
+            lambda c: c["dispatch_precedence"].__setitem__(0, "0_forged_precedence"),
+        ),
+        (
+            "contract_custody_policy_extra",
+            lambda c: _set_path(c, ("synthetic_custody_policy", "forged_policy"), True),
+        ),
+        (
+            "contract_work_cell_forbidden_fields_changed",
+            lambda c: c["work_cell_forbidden_fields"].append("forged-field"),
+        ),
+        (
+            "contract_digest_rules_extra",
+            lambda c: _set_path(c, ("digest_rules", "forged_rule"), {"forged": True}),
+        ),
+        (
+            "contract_invocation_contract_extra",
+            lambda c: _set_path(
+                c, ("adapter_invocation_contract", "forged_rule"), "forged"
+            ),
+        ),
+        (
+            "contract_result_contract_extra",
+            lambda c: _set_path(
+                c, ("adapter_result_contract", "forged_rule"), "forged"
+            ),
+        ),
+        (
+            "contract_zero_runtime_opened",
+            lambda c: _set_path(c, ("zero_runtime_boundary", "runtime_started"), True),
+        ),
     ]
 
 
@@ -1122,9 +1342,11 @@ def validate_hostile_contract_mutations() -> tuple[list[str], list[str]]:
             admitted.append(name)
     return rejected, admitted
 
+
 # ---------------------------------------------------------------------------
 # Evidence and static boundary checks
 # ---------------------------------------------------------------------------
+
 
 def _digest(path: Path) -> str:
     return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
@@ -1219,6 +1441,7 @@ def _fixture_leaks(results: list[dict[str, Any]], report: dict[str, Any]) -> lis
     if _fixture_occurs(report):
         leaks.append("report")
     return sorted(set(leaks))
+
 
 def build_report() -> dict[str, Any]:
     contract = _load(CONTRACT_PATH)
@@ -1321,6 +1544,7 @@ def _write_lf(path: Path, content: str) -> None:
     with open(path, "w", encoding="utf-8", newline="\n") as handle:
         handle.write(content)
 
+
 def _contract_payload() -> dict[str, Any]:
     scenario_registry = [
         {
@@ -1329,7 +1553,9 @@ def _contract_payload() -> dict[str, Any]:
             "reason_codes": reasons,
             "expected_invocations": calls,
         }
-        for scenario_id, (status, reasons, calls) in sorted(SCENARIO_EXPECTATIONS.items())
+        for scenario_id, (status, reasons, calls) in sorted(
+            SCENARIO_EXPECTATIONS.items()
+        )
     ]
     return {
         "schema_version": "emr4.aes_c2.broker_simulator_contract.v1",
