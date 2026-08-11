@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 242 / Compass 224. AES-C5 completes the finite AES-C0 through AES-C5 sequence with one authenticated practice-scoped authored-synthetic route read, one minimized Sydney Vertex call, one deterministic no-command release, consumed ledgers and exact cleanup. No AES-C6 is planned or authorized; any further product-data, reusable-runtime, tool, command, deployment or production direction is a new Yuri-owned programme choice.
+> EMR4 is at Continuity 243 / Compass 225. CF-D1 proves six exact provider-free authored-synthetic PostgreSQL 16 two-session races with bounded overlap, native replay, outer rollback, zero retry and exact cleanup. CF-D2 provider-free disposable restart and unknown-commit recovery is the next dependency-satisfied planned tranche under Yuri's standing authority.
 
 ## North star
 
@@ -258,26 +258,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    AES-C4 passes one authored-synthetic Sydney Vertex call with exact typed release, terminal accounting and complete cleanup; AES-C5 remains closed at its product-data/source/purpose fork. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c3`.
 121. **Complete the finite AES sequence with one exact authenticated authored-synthetic application-route and provider crossing — Raisa Agent Execution Surface AES-C5 product-runtime admission**
    AES-C5 passes one practice-scoped route read, one minimized Sydney Vertex call, deterministic no-command release, terminal accounting and complete cleanup; no AES-C6 is planned or authorized. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c4`.
+122. **Prove exact Context Fabric database behavior under six fixed two-session races — Raisa Context Fabric CF-D1 disposable PostgreSQL concurrency rehearsal**
+   CF-D1 passes bounded overlap, exact winner/loser outcomes, native replay, outer rollback, whole-document evidence and cleanup without product or provider access. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c5`.
 
 ## Current position
 
-**Finite AES-C0 through AES-C5 containment sequence complete — Raisa Agent Execution Surface AES-C5 product-runtime admission**
+**Context Fabric CF-D1 concurrency evidence accepted — Raisa Context Fabric CF-D1 disposable PostgreSQL concurrency rehearsal**
 
-**Why this proof came next:** Yuri selected the exact practitioner-directory source and Reception One booking-context purpose needed for the final planned authored-synthetic product-runtime proof.
+**Why this proof came next:** Yuri selected the first post-AES programme descendant and standing authority continues through dependency-satisfied planned tranches.
 
-One authenticated application-route read and one Sydney Vertex call released one deterministic inert booking-context match, consumed both ledgers and left the database unchanged with exact cleanup.
+Six exact authored-synthetic two-session PostgreSQL races passed with bounded overlap, exact outcomes, no retry and complete owned cleanup.
 
 ### What this unlocks
 
-- Use the accepted AES-C0 through AES-C5 evidence as the containment baseline when Yuri selects a future programme descendant.
-- Require a new exact source, data, principal, purpose, retention, provider/cost, proofreader, cleanup and authority plan before any broader or reusable runtime.
-- No AES-C6 exists in the accepted sequence; the next direction is a Yuri-owned programme choice rather than an automatic tranche.
+- Freeze the narrowest CF-D2 provider-free disposable restart and unknown-commit recovery plan.
+- Separate definitely committed, definitely rolled back and genuinely indeterminate client observations without guessing success.
+- Require fresh five-source rehydration and a new evidence path before CF-D2 runtime.
 
 ### What it does not solve
 
-- Real-person, patient, clinical, appointment or operational-practice data safety, production identity or RLS.
-- Continuing product/database/provider access, watcher/listener, reusable broker/runtime, filesystem capability, generic network or provider-executed tools.
-- Command/write safety, concurrency, general model safety, semantic prompt-injection detection or Australian physical/sovereign processing.
+- Crash/restart or unknown-commit recovery, arbitrary retry/deadlock/load behavior, performance or operational availability.
+- Key rotation, retention/purge, long-lived persistence, applied migration, application/API/Diary wiring or watchers/listeners.
+- Operational database/source access, real/product/patient/clinical data, providers, tools or commands.
 - Credential/IAM change, deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
@@ -345,9 +347,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Serial durability, architecture-health repair and AES-C0 through AES-C5 pass.
-- Any future real practice population, new product-data class, reusable runtime, tool, command, deployment or production descendant requires a new Yuri-owned programme choice and exact fail-closed plan.
-- Keep patient/clinical data, continuing source/provider access, credentials, commands, production and protected refs separately closed.
+- Serial durability, architecture-health repair, AES-C0 through AES-C5 and CF-D1 concurrency pass.
+- CF-D2 restart/unknown-commit recovery requires a fresh five-source rehydration and its own narrow fail-closed plan.
+- Keep operational database/source access, real data, providers, tools, commands, production and protected refs separately closed.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -536,6 +538,7 @@ Prerequisites:
 
 ## Map limits
 
+- CF-D1 proves six fixed two-session database races, not crash/restart, unknown commit, arbitrary deadlock freedom, load, performance, more than two participants or operational availability.
 - AES-C5 proves one exact authored-synthetic application-route and brokered provider crossing with cleanup, not real-person or patient-data safety, production identity/RLS, reusable runtime, command safety or physical/sovereign processing.
 - AES-C4 proves one exact authored-synthetic brokered provider crossing and cleanup, not physical or sovereign processing, product-data safety, reusable runtime or command safety.
 - AES-C3 proves pure authored-synthetic structural and stale-authority containment, not semantic injection detection, real runtime isolation, provider behaviour or product-data safety.
@@ -684,6 +687,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-227.md`
 - `docs/ariadne-agent-error-correction-register-revision-23.md`
 - `docs/ariadne-agent-error-correction-register-revision-233.md`
+- `docs/ariadne-agent-error-correction-register-revision-239.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -861,6 +865,9 @@ Prerequisites:
 - `docs/raisa-codebase-as-built-architectural-state-map.md`
 - `docs/raisa-codebase-conformance-repair-closeout.md`
 - `docs/raisa-codebase-conformance-repair-plan.md`
+- `docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md`
+- `docs/raisa-context-fabric-durability-concurrency-attempt-002-marker-telemetry-analysis.md`
+- `docs/raisa-context-fabric-durability-concurrency-attempt-003-replay-vocabulary-analysis.md`
 - `docs/raisa-dual-host-foundation-closeout.md`
 - `docs/raisa-dual-host-foundation-plan.md`
 - `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md`
@@ -886,6 +893,9 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md`
+- `docs/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-closeout.md`
+- `docs/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-design.md`
+- `docs/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md`
@@ -1028,6 +1038,7 @@ Prerequisites:
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md`
@@ -1084,6 +1095,11 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-correction-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-implementation-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-launcher-recovery-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-marker-telemetry-recovery-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-planning-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-replay-vocabulary-recovery-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-inert-ddl-postgresql-recovery-implementation-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json`
@@ -1186,6 +1202,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-attempt-004-preexecution-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-inert-ddl-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-recovery-9-independent-veto.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-migration-transaction-architecture-sol-acceptance.md`
@@ -1469,6 +1487,12 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/concurrency-rehearsal-contract.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/concurrency-rehearsal-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-002.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-003.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-004.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-catalogue-characterization.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
@@ -1754,6 +1778,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-11--aes-c5-product-runtime-admission.md`
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-architectural-health-conformance-review.md`
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-conformance-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-11--context-fabric-durability-concurrency-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1843,4 +1868,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 224; continuity graph revision 242._
+_Compass map revision 225; continuity graph revision 243._

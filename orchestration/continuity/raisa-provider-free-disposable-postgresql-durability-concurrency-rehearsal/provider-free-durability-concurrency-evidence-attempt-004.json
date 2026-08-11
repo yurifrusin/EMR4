@@ -1,0 +1,1918 @@
+{
+  "attempt_id": "cadb8fd91a0771b203998f32",
+  "claim_boundary": "six_exact_two_session_postgresql16_concurrency_outcomes_only_no_restart_unknown_commit_runtime_product_provider_command_deployment_or_production_claim",
+  "cleanup": {
+    "absence_verified": true,
+    "container_id": "0e8900cf035d9af6e38926d43586f9510efd2ef36a39410377054fbe0e9ee175",
+    "removed": true,
+    "status": "cleanup_verified"
+  },
+  "environment": {
+    "docker_client": "resolved_exact_docker_exe",
+    "elapsed_ms": 31629,
+    "image": {
+      "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "pull_attempted": false,
+      "reference": "postgres:16-bookworm"
+    },
+    "readiness": {
+      "continuous_success_ms": 3528,
+      "last_pg_isready_exit": 0,
+      "last_pg_isready_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "last_sql_failure_class": "none",
+      "last_sql_probe_exit": 0,
+      "last_sql_stderr_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "last_sql_stdout_digest": "sha256:cc290b35686ba5625a414ce876721a541897e6f17a00d4aa8e2ea5c436c31be8",
+      "pg_isready_attempts": 7,
+      "pg_isready_successes": 7,
+      "sql_probe_attempts": 7,
+      "sql_probe_successes": 7,
+      "status": "stable"
+    }
+  },
+  "evidence_mode": "provider_free_disposable_postgresql_authored_synthetic_concurrency",
+  "lifecycle": [
+    "eight_parent_bindings_verified",
+    "container_owned",
+    "passwordless_peer_cluster_started",
+    "postgres_ready",
+    "concurrency_database_ready",
+    "artifact_admitted",
+    "catalogue_reconciled",
+    "fixtures_closed",
+    "six_concurrency_scenarios_matched",
+    "catalogue_reconciled_after_concurrency",
+    "cleanup_verified",
+    "passed"
+  ],
+  "operation_counts": {
+    "docker_containers": 1,
+    "external_network_operations": 0,
+    "participant_retries": 0,
+    "participant_transactions": 12,
+    "precondition_transactions": 11,
+    "product_commands": 0,
+    "product_reads": 0,
+    "provider_calls": 0
+  },
+  "parent": {
+    "concurrency_contract_schema_sha256": "sha256:e5d89547cea0fd7a890e9000b034316d935072a6ced5fccab8c8508530116f95",
+    "concurrency_contract_sha256": "sha256:96b3fb92d302206eb757f51203044c2aeeb76248a6844422404d13c79b785391",
+    "inert_sql_sha256": "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7",
+    "render_manifest_sha256": "sha256:2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271",
+    "serial_pass_evidence_sha256": "sha256:26c6dec802e46dec055c1c42aecc97df9942180014fc9fa410f96e1305798200",
+    "statement_count": 424
+  },
+  "preconditions": [
+    {
+      "name": "register_observer_admission_same",
+      "outcome": {
+        "identity": {
+          "current_user": "context_lifecycle",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_lifecycle"
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 209,
+            "sha256": "sha256:c9b2b745e919305b6c85a13905ae17aa01d46f0384d74cf133f4b30887cca9c8"
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "register_observer_admission_divergent",
+      "outcome": {
+        "identity": {
+          "current_user": "context_lifecycle",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_lifecycle"
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 209,
+            "sha256": "sha256:c683622f38f43abfc531a50ca1e28cb283abd5b59ecd1664226100451d2d3cc3"
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "register_observer_coordinator_commit",
+      "outcome": {
+        "identity": {
+          "current_user": "context_lifecycle",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_lifecycle"
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 209,
+            "sha256": "sha256:8710cc89756d326b9ac03b51db754fca0686d59a0b7163b6dc94050c502f9d63"
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "register_observer_coordinator_rollback",
+      "outcome": {
+        "identity": {
+          "current_user": "context_lifecycle",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_lifecycle"
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 209,
+            "sha256": "sha256:d0822ff192d032a9b59ef537ff1c3d417afe1cd991604acf81c2a74290e2f8eb"
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "admit_coordinator_commit_primary",
+      "outcome": {
+        "identity": {
+          "current_user": "context_observer",
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user": "context_observer"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 179,
+            "sha256": "sha256:8fdf35fa5d658c09d1c3c26c4988aa8d93ca21692dee330e27eeb18eaf84735a"
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "admit_coordinator_rollback_primary",
+      "outcome": {
+        "identity": {
+          "current_user": "context_observer",
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user": "context_observer"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 179,
+            "sha256": "sha256:8fdf35fa5d658c09d1c3c26c4988aa8d93ca21692dee330e27eeb18eaf84735a"
+          }
+        }
+      },
+      "passed": true
+    }
+  ],
+  "result": "raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_pass",
+  "scenario_reconciliation": {
+    "expected": 6,
+    "observed": 6,
+    "passed": 6
+  },
+  "scenarios": [
+    {
+      "after": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 2,
+          "digest": "sha256:72084074963cf4f612efcca5c177b03519f0b0176446073f283058ec8a8f833f"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 3,
+          "digest": "sha256:8351a5233efdabe6c56e978415f895df88a43c93befe990c59db6362ff4e84f9"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:2635bdbcf5465dd569f25cda4fc261dd5eab93a747a432633485f562248ab210"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 3,
+          "digest": "sha256:10c0ef654173034ded13246fc8d9c16aff0af1801bdad1b966d4d3c1d7def8bb"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 1,
+          "digest": "sha256:d927e1843ffc192d1fa129adc336c7b5a0adce41f796589ab7aae6bcb3e1c44b"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:52b9f5ce86c1e8a3f36e19cb6b6689a5a840fafc40b813acdf158979a5270ce3"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 2,
+          "digest": "sha256:c117413910dc15741852d62ff2d6f6aafcb1d3302dc89de5bc61114e8d4252d7"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 1,
+          "digest": "sha256:38ce80d3a8b1b0bc34e02c479d6755708bdf871f8d8fe3383cdeafde5e50710c"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointment_audit_log": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:49747ab25a26d7c0e382c0b80026fa2f626e3506f84cd23855be0fe6f28f8f89"
+        },
+        "public.diary_committed_events": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "before": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 1,
+          "digest": "sha256:26a071ef3f88638302af84ba1dd66ce594dbd5dd68e9579d7939a83ceed540d6"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 1,
+          "digest": "sha256:7c8bc6cf347d32bfef08f421d6212563275843e0b95cf4ef6f36d84b8042f0bc"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:994101743603eb9fba8b72bc609b7da279f91463a23d8c5ab0a01a647f6a8451"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 1,
+          "digest": "sha256:dd338c87ec366232c49818edd31653e98e7cfab3cfa02846644b62a4c815e679"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 1,
+          "digest": "sha256:f1214e986ec761179f0f218b3ea9f1ffde52523af85c48c8241cbef04f55d169"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointment_audit_log": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:49747ab25a26d7c0e382c0b80026fa2f626e3506f84cd23855be0fe6f28f8f89"
+        },
+        "public.diary_committed_events": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "category": "REGISTRATION",
+      "contender": {
+        "identity": {
+          "current_user": "context_lifecycle",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_lifecycle"
+        },
+        "outcome": "rollback",
+        "result_lines": [],
+        "sqlstate": "40001",
+        "transport": {
+          "psql_exit": 3,
+          "stderr": {
+            "byte_count": 1115,
+            "sha256": "sha256:6948d17204f4552a50030382556c4c03a6330e8bf0ce5235f31a86e0c1564512"
+          },
+          "stdout": {
+            "byte_count": 172,
+            "sha256": "sha256:be2696640c8c2c2410edc791363b687cddb836c43540e063300260819e053ec0"
+          }
+        }
+      },
+      "forbidden_effects_absent": {
+        "duplicate_generation_member": true,
+        "partial_loser_member": true,
+        "second_registry_increment_on_replay": true
+      },
+      "isolation": "serializable",
+      "leader": {
+        "identity": {
+          "current_user": "context_lifecycle",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_lifecycle"
+        },
+        "outcome": "commit",
+        "result_lines": [],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 210,
+            "sha256": "sha256:3363c074643ead4d9f47a86d70a3b78de6f8c270f5604e1263c19b6fe572ea65"
+          }
+        }
+      },
+      "overlap": {
+        "contender_lock_wait_observed": true,
+        "contender_observed_within_ms": 314,
+        "contender_wait_event_type": "Lock",
+        "leader_observed_within_ms": 316,
+        "leader_post_function_hold_observed": true,
+        "leader_wait_event": "PgSleep",
+        "leader_wait_event_type": "Timeout"
+      },
+      "passed": true,
+      "post_race": [
+        {
+          "name": "c01_exact_registration_replay",
+          "outcome": {
+            "identity": {
+              "current_user": "context_lifecycle",
+              "isolation": "serializable",
+              "read_only": false,
+              "session_user": "context_lifecycle"
+            },
+            "outcome": "commit",
+            "result_lines": [],
+            "sqlstate": null,
+            "transport": {
+              "psql_exit": 0,
+              "stderr": {
+                "byte_count": 0,
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "stdout": {
+                "byte_count": 209,
+                "sha256": "sha256:ab04ab00ec5070caf0f0660f8b463cdc398aadddb51640e3cab0766cd05babe4"
+              }
+            }
+          },
+          "passed": true
+        }
+      ],
+      "principal": "context_lifecycle",
+      "readback_checks": {
+        "one_baseline_anchor": true,
+        "one_checkpoint": true,
+        "one_effective_registry_increment": true,
+        "one_generation": true,
+        "one_initial_key_interval": true,
+        "one_stream_head_at_zero": true,
+        "two_current_frames": true
+      },
+      "scenario_id": "CFD1-C01"
+    },
+    {
+      "after": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:4171a7dec215b23b6680ee045a03bc8b18513f6b8c37d891d77034084d4e3910"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:330b78d45d2a42480efbd73126ef14fd037710f121b94cc274e10bf6d7248dd2"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:78ebba1575d00b1cc3dbf2bbbe253de86a7e8dd84bbf4e45167cfdc7c0772187"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "before": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:4171a7dec215b23b6680ee045a03bc8b18513f6b8c37d891d77034084d4e3910"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:330b78d45d2a42480efbd73126ef14fd037710f121b94cc274e10bf6d7248dd2"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:78ebba1575d00b1cc3dbf2bbbe253de86a7e8dd84bbf4e45167cfdc7c0772187"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:52b9f5ce86c1e8a3f36e19cb6b6689a5a840fafc40b813acdf158979a5270ce3"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointment_audit_log": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:49747ab25a26d7c0e382c0b80026fa2f626e3506f84cd23855be0fe6f28f8f89"
+        },
+        "public.diary_committed_events": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "category": "PRODUCER",
+      "contender": {
+        "identity": {
+          "current_user": "context_producer",
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user": "context_producer"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "2"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 173,
+            "sha256": "sha256:33bea26583a1e2050bc532ea6b61f198b5f0ef1f2ca0a03c4d57bafd28b812f9"
+          }
+        }
+      },
+      "forbidden_effects_absent": {
+        "duplicate_position": true,
+        "lost_stream_head_update": true,
+        "partial_application_or_fabric_member": true
+      },
+      "isolation": "read committed",
+      "leader": {
+        "identity": {
+          "current_user": "context_producer",
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user": "context_producer"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "1"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 174,
+            "sha256": "sha256:8e8eb9645df00c17b3ce819e01427553499d28a6253dd087f029f7227bf35d10"
+          }
+        }
+      },
+      "overlap": {
+        "contender_lock_wait_observed": true,
+        "contender_observed_within_ms": 301,
+        "contender_wait_event_type": "Lock",
+        "leader_observed_within_ms": 320,
+        "leader_post_function_hold_observed": true,
+        "leader_wait_event": "PgSleep",
+        "leader_wait_event_type": "Timeout"
+      },
+      "passed": true,
+      "post_race": [],
+      "principal": "context_producer",
+      "readback_checks": {
+        "contiguous_positions_one_and_two": true,
+        "two_audits": true,
+        "two_committed_events": true,
+        "two_completed_claims": true,
+        "two_immutable_aliases": true,
+        "two_payload_free_outbox_rows": true
+      },
+      "scenario_id": "CFD1-C02"
+    },
+    {
+      "after": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:4171a7dec215b23b6680ee045a03bc8b18513f6b8c37d891d77034084d4e3910"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:330b78d45d2a42480efbd73126ef14fd037710f121b94cc274e10bf6d7248dd2"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:78ebba1575d00b1cc3dbf2bbbe253de86a7e8dd84bbf4e45167cfdc7c0772187"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 1,
+          "digest": "sha256:be9df68dd1520e349d45cd3406753a8a6ecf2377f984492c92a3c27b18c185df"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "before": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:4171a7dec215b23b6680ee045a03bc8b18513f6b8c37d891d77034084d4e3910"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:330b78d45d2a42480efbd73126ef14fd037710f121b94cc274e10bf6d7248dd2"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:78ebba1575d00b1cc3dbf2bbbe253de86a7e8dd84bbf4e45167cfdc7c0772187"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "category": "ADMISSION",
+      "contender": {
+        "identity": {
+          "current_user": "context_observer",
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user": "context_observer"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 179,
+            "sha256": "sha256:8fdf35fa5d658c09d1c3c26c4988aa8d93ca21692dee330e27eeb18eaf84735a"
+          }
+        }
+      },
+      "forbidden_effects_absent": {
+        "coordinator_advance": true,
+        "second_primary": true,
+        "timestamp_as_semantic_identity": true
+      },
+      "isolation": "read committed",
+      "leader": {
+        "identity": {
+          "current_user": "context_observer",
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user": "context_observer"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 180,
+            "sha256": "sha256:51a28d65ee95cd6245761a4f2be330d5c1e30c68abf97926b06195d4fe708abd"
+          }
+        }
+      },
+      "overlap": {
+        "contender_lock_wait_observed": true,
+        "contender_observed_within_ms": 307,
+        "contender_wait_event_type": "Lock",
+        "leader_observed_within_ms": 335,
+        "leader_post_function_hold_observed": true,
+        "leader_wait_event": "PgSleep",
+        "leader_wait_event_type": "Timeout"
+      },
+      "passed": true,
+      "post_race": [],
+      "principal": "context_observer",
+      "readback_checks": {
+        "one_primary": true,
+        "same_admission_digest_returned": true,
+        "zero_conflicts": true,
+        "zero_coordinator_effect": true
+      },
+      "scenario_id": "CFD1-C03"
+    },
+    {
+      "after": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:4171a7dec215b23b6680ee045a03bc8b18513f6b8c37d891d77034084d4e3910"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:330b78d45d2a42480efbd73126ef14fd037710f121b94cc274e10bf6d7248dd2"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:78ebba1575d00b1cc3dbf2bbbe253de86a7e8dd84bbf4e45167cfdc7c0772187"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 3,
+          "digest": "sha256:bf287884f79980c2f7c1dba4b041906e18b320bd6020856c39d177aee776d161"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "before": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:4171a7dec215b23b6680ee045a03bc8b18513f6b8c37d891d77034084d4e3910"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:330b78d45d2a42480efbd73126ef14fd037710f121b94cc274e10bf6d7248dd2"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:78ebba1575d00b1cc3dbf2bbbe253de86a7e8dd84bbf4e45167cfdc7c0772187"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 1,
+          "digest": "sha256:be9df68dd1520e349d45cd3406753a8a6ecf2377f984492c92a3c27b18c185df"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "category": "ADMISSION",
+      "contender": {
+        "identity": {
+          "current_user": "context_observer",
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user": "context_observer"
+        },
+        "outcome": "rollback",
+        "result_lines": [],
+        "sqlstate": "CF004",
+        "transport": {
+          "psql_exit": 3,
+          "stderr": {
+            "byte_count": 235,
+            "sha256": "sha256:5758ad0dd65b8a83f2c606d3fbbf573caed77e4c134b384f35cfe0903190d38d"
+          },
+          "stdout": {
+            "byte_count": 171,
+            "sha256": "sha256:d6d1fd4fbc2d62d7d1a64d726f9c37ee3427fafc94c95a7a7e115d0aa9fddc22"
+          }
+        }
+      },
+      "forbidden_effects_absent": {
+        "guessed_winner_during_invisible_race": true,
+        "primary_overwrite": true,
+        "third_admission_row": true
+      },
+      "isolation": "read committed",
+      "leader": {
+        "identity": {
+          "current_user": "context_observer",
+          "isolation": "read committed",
+          "read_only": false,
+          "session_user": "context_observer"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "PRIMARY"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 180,
+            "sha256": "sha256:51a28d65ee95cd6245761a4f2be330d5c1e30c68abf97926b06195d4fe708abd"
+          }
+        }
+      },
+      "overlap": {
+        "contender_lock_wait_observed": true,
+        "contender_observed_within_ms": 335,
+        "contender_wait_event_type": "Lock",
+        "leader_observed_within_ms": 332,
+        "leader_post_function_hold_observed": true,
+        "leader_wait_event": "PgSleep",
+        "leader_wait_event_type": "Timeout"
+      },
+      "passed": true,
+      "post_race": [
+        {
+          "name": "c04_fresh_conflict",
+          "outcome": {
+            "identity": {
+              "current_user": "context_observer",
+              "isolation": "read committed",
+              "read_only": false,
+              "session_user": "context_observer"
+            },
+            "outcome": "commit",
+            "result_lines": [
+              "CONFLICT"
+            ],
+            "sqlstate": null,
+            "transport": {
+              "psql_exit": 0,
+              "stderr": {
+                "byte_count": 0,
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "stdout": {
+                "byte_count": 180,
+                "sha256": "sha256:3150d098223a42834b9713d1c0b6cf6ce31cf012c1873ededb49f1d11ebc305d"
+              }
+            }
+          },
+          "passed": true
+        },
+        {
+          "name": "c04_exact_conflict_replay",
+          "outcome": {
+            "identity": {
+              "current_user": "context_observer",
+              "isolation": "read committed",
+              "read_only": false,
+              "session_user": "context_observer"
+            },
+            "outcome": "commit",
+            "result_lines": [
+              "CONFLICT"
+            ],
+            "sqlstate": null,
+            "transport": {
+              "psql_exit": 0,
+              "stderr": {
+                "byte_count": 0,
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "stdout": {
+                "byte_count": 180,
+                "sha256": "sha256:3150d098223a42834b9713d1c0b6cf6ce31cf012c1873ededb49f1d11ebc305d"
+              }
+            }
+          },
+          "passed": true
+        }
+      ],
+      "principal": "context_observer",
+      "readback_checks": {
+        "one_immutable_primary": true,
+        "one_stable_conflict": true,
+        "two_total_rows_for_locator": true,
+        "zero_coordinator_advance": true
+      },
+      "scenario_id": "CFD1-C04"
+    },
+    {
+      "after": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 1,
+          "digest": "sha256:ad40ddb49a31963956ed571d8d59b729139e73b46077422664c1ca9b909ab32d"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 1,
+          "digest": "sha256:d904a0d511f9585f7dc5c68bb14b2d1eb062b3b0c2cafded72a93533a66b51b8"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:bc586440700bba048f93f23c03769d44a1c2678e3e83dae607714abf82258153"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 1,
+          "digest": "sha256:3577443723fc7b6ee2f0d6b24616cb78e966895a7a5011b004baa3dc802cbd8c"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:02a39eca7c8a54d5c8156335160865d5daf1e849f05e77bb763f62b14ef4cae7"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:9afda19ff67642b71a61e1c8b2929925c82f1a83525d2e86e25697a368bc4d0c"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 5,
+          "digest": "sha256:ff852b1c45d21f8882061898cdf956e894a447ab4af5da51177371755bc80f77"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 2,
+          "digest": "sha256:a1bb2046aa3e0f14fa3e8cc22a3fda8feca19da1224b9cef0079c50ca90f560b"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "before": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:4171a7dec215b23b6680ee045a03bc8b18513f6b8c37d891d77034084d4e3910"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:330b78d45d2a42480efbd73126ef14fd037710f121b94cc274e10bf6d7248dd2"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:78ebba1575d00b1cc3dbf2bbbe253de86a7e8dd84bbf4e45167cfdc7c0772187"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 5,
+          "digest": "sha256:ff852b1c45d21f8882061898cdf956e894a447ab4af5da51177371755bc80f77"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 1,
+          "digest": "sha256:613dfb594c6bd173fcd381377a31c159ab6061e2e2c8d70781d3fbb1b45c40aa"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "category": "COORDINATOR",
+      "contender": {
+        "identity": {
+          "current_user": "context_coordinator",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_coordinator"
+        },
+        "outcome": "rollback",
+        "result_lines": [],
+        "sqlstate": "40001",
+        "transport": {
+          "psql_exit": 3,
+          "stderr": {
+            "byte_count": 2048,
+            "sha256": "sha256:2fe29dec9217c0e5e92a5d6154119fa26c5f8933cf59c3e5cca1c5629b0a8088"
+          },
+          "stdout": {
+            "byte_count": 178,
+            "sha256": "sha256:d78e2a217b1f3877b94af15037e3fc2cebb7e7fc8fba498d2f7f83eb93621438"
+          }
+        }
+      },
+      "forbidden_effects_absent": {
+        "duplicate_transition_effect": true,
+        "second_receipt": true,
+        "source_access_required_for_replay": true
+      },
+      "isolation": "serializable",
+      "leader": {
+        "identity": {
+          "current_user": "context_coordinator",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_coordinator"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "RECEIPT_APPLIED"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 195,
+            "sha256": "sha256:1a065f67596f6527262a5fffd90395d790364067f87121c9c0ae21d08c1b4aac"
+          }
+        }
+      },
+      "overlap": {
+        "contender_lock_wait_observed": true,
+        "contender_observed_within_ms": 328,
+        "contender_wait_event_type": "Lock",
+        "leader_observed_within_ms": 322,
+        "leader_post_function_hold_observed": true,
+        "leader_wait_event": "PgSleep",
+        "leader_wait_event_type": "Timeout"
+      },
+      "passed": true,
+      "post_race": [
+        {
+          "name": "c05_exact_coordinator_replay",
+          "outcome": {
+            "identity": {
+              "current_user": "context_coordinator",
+              "isolation": "serializable",
+              "read_only": false,
+              "session_user": "context_coordinator"
+            },
+            "outcome": "commit",
+            "result_lines": [
+              "RECEIPT_REPLAYED"
+            ],
+            "sqlstate": null,
+            "transport": {
+              "psql_exit": 0,
+              "stderr": {
+                "byte_count": 0,
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "stdout": {
+                "byte_count": 195,
+                "sha256": "sha256:736e19ab0d116482eb38ddb5f002f817a410a6ba17250a9ed86cbce3c78b8cb0"
+              }
+            }
+          },
+          "passed": true
+        }
+      ],
+      "principal": "context_coordinator",
+      "readback_checks": {
+        "exact_watermarks": true,
+        "matching_frames_retired_once": true,
+        "one_checkpoint_advance": true,
+        "one_coalesced_obligation": true,
+        "one_lifecycle_row": true,
+        "one_minimal_audit": true,
+        "one_receipt": true
+      },
+      "scenario_id": "CFD1-C05"
+    },
+    {
+      "after": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 2,
+          "digest": "sha256:639bc75f7e590de93d36682fd2a44edffaa45d0d5caf9a81e85927a0734e955f"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 2,
+          "digest": "sha256:9a222931f1b826b472a4cffda36024f76fbfc70da7e0e545275f9c3f70913084"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:072c8128d528fbd05eee6f81df6077d4883393515e468cd105ee0ca4ab1d63b6"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 2,
+          "digest": "sha256:7963f173c90e23ea6f6a0c712fa0eeb2a1abbe5fd164dc9e1804e3a21f754fd3"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:7e651fb2cce26f70d91df89a2395bb998258c2cc5761a5a3189acc266e3f4795"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:0ecfb556cb93c2e31b196dcab11aaf15e7d33751bcc461151915278204418803"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 5,
+          "digest": "sha256:ff852b1c45d21f8882061898cdf956e894a447ab4af5da51177371755bc80f77"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 3,
+          "digest": "sha256:ac2298684702d809f5def8994cda92208284955924396c4ed0b41757480e0164"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "before": {
+        "emr4_context_fabric.context_classified_observation_receipt": {
+          "count": 1,
+          "digest": "sha256:ad40ddb49a31963956ed571d8d59b729139e73b46077422664c1ca9b909ab32d"
+        },
+        "emr4_context_fabric.context_durability_audit": {
+          "count": 1,
+          "digest": "sha256:d904a0d511f9585f7dc5c68bb14b2d1eb062b3b0c2cafded72a93533a66b51b8"
+        },
+        "emr4_context_fabric.context_durability_checkpoint": {
+          "count": 6,
+          "digest": "sha256:bc586440700bba048f93f23c03769d44a1c2678e3e83dae607714abf82258153"
+        },
+        "emr4_context_fabric.context_durability_lifecycle": {
+          "count": 1,
+          "digest": "sha256:3577443723fc7b6ee2f0d6b24616cb78e966895a7a5011b004baa3dc802cbd8c"
+        },
+        "emr4_context_fabric.context_frame_generation": {
+          "count": 11,
+          "digest": "sha256:02a39eca7c8a54d5c8156335160865d5daf1e849f05e77bb763f62b14ef4cae7"
+        },
+        "emr4_context_fabric.context_generation_registry_barrier": {
+          "count": 2,
+          "digest": "sha256:a9bd816fc91cc48547067e59807887772a5f6ea5f8bd6df4130fa2545985c102"
+        },
+        "emr4_context_fabric.context_invalidation_watermark": {
+          "count": 11,
+          "digest": "sha256:9afda19ff67642b71a61e1c8b2929925c82f1a83525d2e86e25697a368bc4d0c"
+        },
+        "emr4_context_fabric.context_observation_key_interval": {
+          "count": 5,
+          "digest": "sha256:705bebeba2d7307547eb144bc01c90890ccca28d156c57e759ec9773ee68011c"
+        },
+        "emr4_context_fabric.context_observation_stream_head": {
+          "count": 1,
+          "digest": "sha256:412f738e8af5043d9013d10017994f50626c683f7f2ef8303282c58f017259d2"
+        },
+        "emr4_context_fabric.context_observer_generation": {
+          "count": 6,
+          "digest": "sha256:5996e9857365d503591b1459045017dc629d5f3528b3f2ec093f088b633d31e3"
+        },
+        "emr4_context_fabric.context_proofread_observation_admission": {
+          "count": 5,
+          "digest": "sha256:ff852b1c45d21f8882061898cdf956e894a447ab4af5da51177371755bc80f77"
+        },
+        "emr4_context_fabric.context_reassembly_obligation": {
+          "count": 2,
+          "digest": "sha256:a1bb2046aa3e0f14fa3e8cc22a3fda8feca19da1224b9cef0079c50ca90f560b"
+        },
+        "emr4_context_fabric.context_recovery_anchor": {
+          "count": 5,
+          "digest": "sha256:13c00f59cdca05d3af83f485d2ca21ab1bd958a17efe5b43b2d37f141656a168"
+        },
+        "emr4_context_fabric.context_recovery_pin": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_retention_policy": {
+          "count": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "emr4_context_fabric.context_service_practice_binding": {
+          "count": 6,
+          "digest": "sha256:bb3bce2ad804877de866f55bb8a6eaca67a9ee29f60aa5f889aa306d9fcc09a4"
+        },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": {
+          "count": 2,
+          "digest": "sha256:2e1fded97e8a1da71a5321c05c74ba51f1244242e56b8fad0271a8b8ca70f2f5"
+        },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": {
+          "count": 2,
+          "digest": "sha256:472967c78f6e37871aaad56d3318069faec17aa1a61dbd64162a6ef685cee077"
+        },
+        "public.appointment_audit_log": {
+          "count": 2,
+          "digest": "sha256:6b5082251f303149efa96112b2de2b1b124232d06d6970b9de2aae68fca19c1f"
+        },
+        "public.appointment_command_idempotency": {
+          "count": 2,
+          "digest": "sha256:5b18bd7b86bc9745037cbf751701d97371dcc169f68e293eeb4fefb9fa38e0b6"
+        },
+        "public.appointments": {
+          "count": 4,
+          "digest": "sha256:4f8ebac6d363bc2701baa6fa9bbdbfc9870bcc10d42b056f47d60cfb0175e019"
+        },
+        "public.diary_committed_events": {
+          "count": 2,
+          "digest": "sha256:7d4cf31f5ce772b27ce04483c151b02e4305c0a45c67b434a10bca0c7b89eb90"
+        }
+      },
+      "category": "COORDINATOR",
+      "contender": {
+        "identity": {
+          "current_user": "context_coordinator",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_coordinator"
+        },
+        "outcome": "commit",
+        "result_lines": [
+          "RECEIPT_APPLIED"
+        ],
+        "sqlstate": null,
+        "transport": {
+          "psql_exit": 0,
+          "stderr": {
+            "byte_count": 0,
+            "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "byte_count": 194,
+            "sha256": "sha256:77bfca2e3065bb23573a994989d8667ecde44972df0c62fb87f15ed682203e69"
+          }
+        }
+      },
+      "forbidden_effects_absent": {
+        "duplicate_transition_effect": true,
+        "leader_partial_effect": true,
+        "skipped_checkpoint": true
+      },
+      "isolation": "serializable",
+      "leader": {
+        "identity": {
+          "current_user": "context_coordinator",
+          "isolation": "serializable",
+          "read_only": false,
+          "session_user": "context_coordinator"
+        },
+        "outcome": "rollback",
+        "result_lines": [
+          "RECEIPT_APPLIED"
+        ],
+        "sqlstate": "P0001",
+        "transport": {
+          "psql_exit": 3,
+          "stderr": {
+            "byte_count": 161,
+            "sha256": "sha256:a1d52bbb3fd1b8a210b6ba45a6582d26aaf5f4c7d0fe56ebdaab4503f868f2e0"
+          },
+          "stdout": {
+            "byte_count": 195,
+            "sha256": "sha256:1a065f67596f6527262a5fffd90395d790364067f87121c9c0ae21d08c1b4aac"
+          }
+        }
+      },
+      "overlap": {
+        "contender_lock_wait_observed": true,
+        "contender_observed_within_ms": 317,
+        "contender_wait_event_type": "Lock",
+        "leader_observed_within_ms": 479,
+        "leader_post_function_hold_observed": true,
+        "leader_wait_event": "PgSleep",
+        "leader_wait_event_type": "Timeout"
+      },
+      "passed": true,
+      "post_race": [
+        {
+          "name": "c06_exact_coordinator_replay",
+          "outcome": {
+            "identity": {
+              "current_user": "context_coordinator",
+              "isolation": "serializable",
+              "read_only": false,
+              "session_user": "context_coordinator"
+            },
+            "outcome": "commit",
+            "result_lines": [
+              "RECEIPT_REPLAYED"
+            ],
+            "sqlstate": null,
+            "transport": {
+              "psql_exit": 0,
+              "stderr": {
+                "byte_count": 0,
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "stdout": {
+                "byte_count": 195,
+                "sha256": "sha256:736e19ab0d116482eb38ddb5f002f817a410a6ba17250a9ed86cbce3c78b8cb0"
+              }
+            }
+          },
+          "passed": true
+        }
+      ],
+      "principal": "context_coordinator",
+      "readback_checks": {
+        "exact_watermarks": true,
+        "matching_frames_retired_once": true,
+        "one_checkpoint_advance": true,
+        "one_coalesced_obligation": true,
+        "one_contender_owned_receipt": true,
+        "one_lifecycle_row": true,
+        "one_minimal_audit": true
+      },
+      "scenario_id": "CFD1-C06"
+    }
+  ],
+  "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-durability-concurrency-evidence.v1"
+}

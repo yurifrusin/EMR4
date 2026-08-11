@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 242,
+  "graph_revision": 243,
   "harvests": [],
   "nodes": [
     {
@@ -15302,6 +15302,99 @@
         "No AES-C6 or later Agent Execution Surface tranche is planned or authorized.",
         "Any real practice population, patient/clinical data, new product-data class, reusable runtime, tool or command requires a new Yuri-owned programme choice and exact fail-closed plan.",
         "No continuing provider call, product/database read, watcher, filesystem capability, provider tool, generic network, credential/IAM change, command/write, deployment, production, release, Pages or protected-ref movement is opened."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal",
+      "title": "Raisa Context Fabric CF-D1 disposable PostgreSQL concurrency rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-11T00:00:00Z",
+      "updated_at": "2026-08-11T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "fed81847b4155d49cf997905e79cf31808ceb017",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-agent-execution-surface-containment-gate-aes-c5",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "CF-D1 consumed one local provider-free disposable PostgreSQL run over six fixed authored-synthetic two-session races.",
+          "All overlap, outcomes, relation readbacks and forbidden-effect checks passed with zero automatic retries.",
+          "The exact container is absent; no operational database, source, provider, product data, tool, command or reusable runtime authority remains open."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-context-fabric-durability-concurrency-rehearsal",
+          "source": "docs/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept six exact two-session PostgreSQL 16 concurrency outcomes, native replay, outer rollback and exact cleanup."
+        }
+      ],
+      "claim_scope": [
+        "All six fixed races proved leader Timeout/PgSleep and contender Lock overlap before result admission.",
+        "The result proves exact registration, position, admission and coordinator winner/loser behavior with 12 participants, 11 preconditions and zero retries.",
+        "Attempt 004 passed whole-document evidence admission and exact container cleanup; attempts 001-003 remain immutable failures.",
+        "The result does not prove crash/restart, unknown commit, arbitrary deadlock freedom, load, performance, more than two participants or operational availability."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-design.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-002.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-003.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-004.json",
+          "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
+          "docs/raisa-context-fabric-durability-concurrency-attempt-002-marker-telemetry-analysis.md",
+          "docs/raisa-context-fabric-durability-concurrency-attempt-003-replay-vocabulary-analysis.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-11--context-fabric-durability-concurrency-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-planning-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-implementation-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-launcher-recovery-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-marker-telemetry-recovery-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-replay-vocabulary-recovery-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-attempt-004-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_continuity_update.py",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-239.md"
+        ]
+      },
+      "unresolved_gates": [
+        "CF-D2 restart and unknown-commit recovery needs its own fresh five-source rehydration, frozen fail-closed plan and separate disposable evidence.",
+        "Key rotation, retention/purge, arbitrary retry/deadlock/load behavior, long-lived persistence and operational availability remain unproved.",
+        "No operational database/source, watcher/listener, real/product/patient/clinical data, provider, tool, command, deployment, production, release, Pages or protected-ref movement is opened."
       ]
     }
   ],

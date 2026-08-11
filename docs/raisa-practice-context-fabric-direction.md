@@ -359,27 +359,28 @@ large “memory” feature:
    `c3ca2515b9f2c4b20cb7230364de7417f48eab54`; one byte-stable PostgreSQL 16
    artifact installs and catalogues correctly in an isolated disposable
    container, proving no behavior or operational migration.
-16. **Disposable behavior/transaction rehearsal** — planning is **accepted**
-   at exact independently reviewed source
-   `07e8750548ed69aba5a19f693a72397121a340e5`. The fixed harness, evidence
-   schema and hostile tests are now a runtime-closed implementation candidate.
-   Pre-runtime first-effective-boundary tracing corrected `BTR-T02/T03`
-   without adding privilege, and the container lifecycle now uses local peer
-   authentication with host authentication rejected and no password. A fresh
-   exact-HEAD veto remains mandatory before one run of twenty serial
+16. **Disposable behavior/transaction rehearsal** — **accepted** at exact
+   independently reviewed source
+   `f3383dc4099b4ee590014bea62dddb146f5d2a16`. All twenty frozen serial
    authored-synthetic entry-point, trigger, RLS, idempotency and rollback
-   scenarios.
-17. **Agent Execution Surface and Containment Gate** — required after the
+   scenarios pass with exact container cleanup.
+17. **CF-D1 disposable concurrency rehearsal** — **accepted** at runtime
+   source `fed81847b4155d49cf997905e79cf31808ceb017` and exact independently
+   reviewed functional source `43f168f3d5d1f71ec0f9071c40fadf14b6107621`.
+   Six fixed two-session races prove bounded `PgSleep`/`Lock` overlap, exact
+   winner/loser outcomes, native replay, outer rollback, zero retry and exact
+   cleanup. Crash/restart and unknown-commit recovery remain unproved.
+18. **Agent Execution Surface and Containment Gate** — required after the
    provider-free durability sequence and before any real-product-read or
    executable occupied Bureau descendant. The selected external capability
    broker, immutable generation manifest, no-ambient-credential, exact-egress,
    cumulative-budget, revocation and kill-switch design is recorded in
    `docs/raisa-agent-execution-surface-containment-gate-plan.md`. It does not
    block the database-only rehearsal and grants no current runtime authority.
-18. **Real product read descendants** — open one source and one role/purpose at
+19. **Real product read descendants** — open one source and one role/purpose at
    a time only after the containment gate and their own privacy, identity,
    audit, retention and database acceptance.
-19. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
+20. **Cross-Bureau and clinical descendants** — introduce typed handoffs,
    Diagnostic Thread frames and licensed evidence frames only after their own
    containment, clinical, data and provider gates.
 

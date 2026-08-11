@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "explicit_path_commit_and_task_branch_publication_of_accepted_cf_d1_closeout_then_fresh_cf_d2_rehydration",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and the full five-source rehydration passed. The live baton is updated in the closeout candidate to CF-D1 at Continuity 243 / Compass 225 with CF-D2 as the next dependency-satisfied planned tranche under Yuri's standing authority.",
+    "current_authority_allocation": "GPT Sol retains closeout, explicit-path task-branch commit/push and subsequent CF-D2 planning authority. No reviewer, provider or database process has integration or protected-ref authority. The non-PHI closeout notification was accepted as request 48b36c7f-4af9-49c7-bcf5-8b5630fd1a37.",
+    "active_plan_and_acceptance": "Immutable attempt 004 passes the six-scenario contract as raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_pass at evidence SHA-256 7dd7372a8f45b6a049aca4f835057a33ab37952be98088bbbf34ed94875dd0e4. Whole-document admission, exact cleanup, 266 closeout tests, Ruff, format, compilation, Compass/index checks and diff hygiene pass. Closeout, Sol acceptance and paired Yuri lay/technical summary are complete.",
+    "protected_evidence_boundaries": "Attempts 001-003 and all unrelated evidence remain immutable. docs/branding and every original untracked file are excluded. No operational database/source, watcher, patient/clinical/product data, provider, credential/IAM change, reusable runtime, product tool/command, deployment, production, release, Pages or protected-ref movement is authorised. Staging must use exact paths only.",
+    "git_refs_and_worktree": "Task HEAD remains fed81847b4155d49cf997905e79cf31808ceb017 with the accepted closeout as an unstaged tracked/untracked candidate. Origin task remains c72d712bcccbfb225d3c71ad3b633c33bec56d29. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exactly 494 pre-existing untracked files, including five docs/branding paths, remain preserved; the eight additional untracked paths belong only to this closeout candidate."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_durability_concurrency_closeout_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled immutable evidence, cleanup, refs, tests, closeout artifacts and exact staging scope."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh planning and implementation/recovery vetoes are terminal and all disposable review worktrees are removed."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

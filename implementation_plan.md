@@ -625,9 +625,13 @@ generation rehearsal. The architecture-only provider-free default-off
   four trigger and three rollback. It proves the selected serial behavior
   slice, including stable cross-transaction replay and full outer-transaction
   rollback readback, with exact disposable-container cleanup. Attempts 001-047
-  remain immutable fail-closed evidence. It does not prove concurrency, crash
-  restart, unknown-commit recovery, key rotation, retention, purge, performance
-  or operational availability. Applied migration, application wiring,
+  remain immutable fail-closed evidence. CF-D1 now also passes at runtime
+  source `fed81847b4155d49cf997905e79cf31808ceb017`: all six frozen
+  authored-synthetic two-session races prove exact `PgSleep`/`Lock` overlap,
+  winner/loser outcomes, native replay, outer rollback, zero retry and exact
+  cleanup. Attempts 001-003 remain immutable rejected evidence. Crash restart,
+  unknown-commit recovery, key rotation, retention, purge, performance and
+  operational availability remain unproved. Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1
