@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_the_non_protected_cf_d2_stopped_without_pass_closeout_descendant_then_send_the_required_non_phi_pushover_attention_notice",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Closeout commit 453631b8fcc8d1e379b1c5f68a1516df3dedc858 preserves both immutable failure artifacts, the paired Yuri summary, AER-0278/AER-0279 at revision 246 and the no-pass baton. The full 219-check AER suite, 66 focused baton/CF-D2 checks, Ruff, format, JSON/schema and diff gates pass. No Continuity/Compass success revision was created.",
+    "current_authority_allocation": "GPT Sol owns task-branch publication and the non-PHI Pushover closeout notice only. No protected integration, worker, verifier, provider, native subagent, product actor or further runtime is assigned.",
+    "git_refs_and_worktree": "Task HEAD before this receipt-only commit is exactly 453631b8fcc8d1e379b1c5f68a1516df3dedc858; origin task is e690eefaf91115343b8fcbbecc7c3f5fe0b25193. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All original 494 untracked files including docs/branding remain preserved and unstaged; only this receipt pair may be explicitly committed before the task-branch push.",
+    "live_handover_current_baton": "AGENTS.md now records CF-D1 as the last accepted durability result and CF-D2 as stopped without a pass, with no authorised retry or downstream durability tranche pending Yuri's choice.",
+    "protected_evidence_boundaries": "Push only codex/ariadne-bernie-davida-parallel-seam. Do not move master, handoff/current or Pages. The notification names only CF-D2, stopped-without-pass status, compact checks and the required Yuri choice; it contains no PHI, product/patient/clinical data, provider payload, credential or protected evidence."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
