@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "Done. The bounded AES-C3 blue implementation candidate is committed and verified.\n\n**Decision: `pass` (bounded candidate only \u2014 no acceptance claimed)**\n\n- **Branch/refs:** `codex/aes-c3-blue-deepseek`; HEAD `d44be5cbe0774b6340c7e4f6ca76075242b2f156` \u2192 candidate `480a0301a1102108fa0779efb98809d55adf0ffa`. Protected `master`/`handoff/current` remain `2e34bdad732fdab32fbf778280b3d3c70d66d602`, untouched. No push.\n- **Changed files (exactly the 7 owned paths):** 4 C3 continuity JSONs, the C3 script, the C3 test, and the closeout. No C0/C1/C2/plan/AGENTS/API/Spine/pre-existing-test changes; worktree clean.\n- **61 scenarios:** 21 `contained`, 15 `reject`, 25 `stop`; 28 pure calls; 21 digest-only releases \u2014 exact IDs/order/outcomes per the frozen catalogue. Both cumulative sequences latch terminally; five egress budgets overflow at 12,033+256=12,289/12,288; five result carriers call once and release nothing.\n- **Mutations:** 20/20 hostile attempt mutations and 18/18 hostile contract mutations fail closed with zero release.\n- **Verification:** standalone script `passed` (reasons `[]`, exit 0); serial packet 93/93 pass (20 C3 + 22 C2 + 14 C1 + 9 C0 + 28 API Spine); Ruff check + format pass; `git diff --check` clean; `static_boundary_check()` `[]`.\n- **Containment:** raw hostile payloads absent from invocation, adapter result, C2 result, evidence and failure surfaces (`opaque_payload_non_release: true`, zero leaks); evidence records zero runtime/provider/data/credential/network/database/source/filesystem-capability/decoder/tool/command operation.\n- **Blocker:** none. Sol alone decides adoption.",
+  "usage": {
+    "input_tokens": 158159,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 24021248,
+    "output_tokens": 228550,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 18.532108999999995,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

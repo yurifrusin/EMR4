@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 217
+    assert register["register_revision"] == 222
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 253)
+        f"AER-{index:04d}" for index in range(1, 258)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 161
+    assert len(agent_incidents) == 165
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 252
+    assert report["incident_count"] == 257
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,29 +2508,29 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 217
-    assert report["incident_count"] == 252
+    assert report["register_revision"] == 222
+    assert report["incident_count"] == 257
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 161,
-        "harness": 30,
+        "agent_behavior": 165,
+        "harness": 31,
         "repository": 52,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 29,
         "evidence_misreport": 33,
-        "harness_failure": 30,
-        "output_contract_violation": 69,
+        "harness_failure": 31,
+        "output_contract_violation": 72,
         "read_only_violation": 3,
-        "reasoning_claim_error": 27,
+        "reasoning_claim_error": 28,
         "repository_defect": 52,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 82,
-        "canonical_unchanged": 144,
-        "untrusted_partial_worktree": 26,
+        "canonical_unchanged": 148,
+        "untrusted_partial_worktree": 27,
     }
     assert report["recurring_patterns"] == [
         {
@@ -2681,6 +2681,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "Populate verifier expected_head only from the literal output of git rev-parse HEAD in the target worktree.",
                 "The closeout protocol now requires a standalone git rev-parse HEAD read immediately before every verifier preflight and forbids manually completing abbreviated hashes.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "orchestrator.worker_dispatch_continuation_event_and_assignment_envelope"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0080", "AER-0253"],
+            "origins": ["agent_behavior"],
+            "categories": ["output_contract_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Copy the approved continuation event from a passing native-worker predispatch receipt and leave assigned_agent_ids empty unless an actual workspace receipt is already present; descriptive lane availability belongs in adapter evidence and worker_slots.",
+                "For every remaining AES-C3 dispatch receipt, copy continuation_event and assignment fields from a passing external-worker receipt; a separately preflighted worktree belongs in source evidence, while workspace_receipts and assigned_agent_ids remain empty until their harness-governed assignment exists.",
             ],
         },
         {

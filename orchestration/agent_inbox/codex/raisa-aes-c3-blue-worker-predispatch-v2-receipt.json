@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_v4_flash_high_aes_c3_blue_implementation_worker",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Frozen plan commit d44be5cbe0774b6340c7e4f6ca76075242b2f156 binds exact C0/C1/C2 hashes, a closed wrapper, 61 scenarios, 21 contained/15 rejected/25 stopped results, 28 pure calls, 21 digest-only releases, carrier-independent budgets, cumulative terminal latches, stale replay and context/supply binding. Worker packet SHA-256 is c368169b747b6ba53a7a8c8df2b8e66a72b7770f384b5b0012b4305d6ff711c5.",
+    "current_authority_allocation": "GPT Sol remains conductor, plan/acceptance/recovery owner and integrator. DeepSeek V4 Flash/high through Claude Code --bare receives only the bounded seven-path blue implementation/test candidate at high effort. A fresh Gemini 3.6 Flash/high veto is ineligible until deterministic gates pass.",
+    "git_refs_and_worktree": "Primary is at d44be5cbe0774b6340c7e4f6ca76075242b2f156 on codex/ariadne-bernie-davida-parallel-seam apart from owned uncommitted dispatch evidence. Disposable C:/Users/sarashera/EMR4-worktrees/aes-c3-deepseek-blue is clean at the same source on codex/aes-c3-blue-deepseek; dedicated preflight SHA-256 9da6f8e9dba56bf4206e1b5b356d6b9053087733cd7c7a0295d6c3466075d03b passed with zero provider/model calls. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked-path SHA-256 remains f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five branding paths. The refused first dispatch receipt is preserved and authorises no worker.",
+    "live_handover_current_baton": "The live baton was reread completely after compaction and names AES-C3 as the exact next dependency-satisfied tranche after accepted AES-C2 at Continuity 239 / Compass 221.",
+    "protected_evidence_boundaries": "Worker access is limited to exact repository contract/code paths and newly authored synthetic C3 fixtures. Protected holdouts, historical Diary/PHI, patient/clinical/product data, real broker/runtime/adapter/credential/provider, database/source/watchers, metadata/IAM, network/HTTP/DNS, decoder/interpreter, executable tool, command/write, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked paths remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

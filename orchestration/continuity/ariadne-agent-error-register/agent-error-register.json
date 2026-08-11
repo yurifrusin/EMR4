@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 217,
+  "register_revision": 222,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10119,6 +10119,190 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0253",
+      "attempt_id": "raisa-aes-c3-blue-worker-predispatch-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c3",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A worker predispatch runtime state must use the exact approved pre_worker_dispatch continuation event and must not declare an assigned external worker or invent a workspace receipt before the closed assignment contract exists.",
+      "observed_error": "The first AES-C3 worker predispatch state used the unapproved continuation event pre_dispatch, declared deepseek-aes-c3-blue-001 in assigned_agent_ids, and supplied a handwritten workspace entry. The deterministic preflight returned revision_required with continuation_event_missing_or_unapproved and workspace_receipt_missing:deepseek-aes-c3-blue-001. No worker, provider or model call followed that receipt.",
+      "detection_method": "scripts/ariadne_orchestrator_preflight.py persisted both exact reasons, set rehydrated_from_receipt false and prohibited dispatch. Sol preserved the failed state/receipt, generated a dedicated clean-worktree preflight, and produced a distinct v2 state using pre_worker_dispatch with empty workspace_receipts and assigned_agent_ids; the v2 receipt passed with all five sources and worker_dispatch_permitted true.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c3-blue-worker-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c3-blue-worker-predispatch-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-218.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_continuation_event_and_assignment_envelope",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "No worker dispatch followed the failed receipt. Preserve it, use the exact pre_worker_dispatch event, keep external worker assignment/workspace structures empty, cite the separate dedicated worktree preflight in five-source evidence, and bind launch only to the distinct passing v2 receipt.",
+        "prevention_control": "For every remaining AES-C3 dispatch receipt, copy continuation_event and assignment fields from a passing external-worker receipt; a separately preflighted worktree belongs in source evidence, while workspace_receipts and assigned_agent_ids remain empty until their harness-governed assignment exists.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c3-blue-worker-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c3-blue-worker-predispatch-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-218.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0254",
+      "attempt_id": "raisa-aes-c3-predispatch-register-validation-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c3",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validation",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A new recurrence may reuse an exact recurrence signature without declaring an asymmetric related_incident_ids peer, and every derived count assertion must advance with the validated register population.",
+      "observed_error": "The first AER-0253 register draft listed AER-0080 as a one-way related incident even though that historical record could not list the future peer, and it did not yet advance the maintained count assertions. Register validation returned attempt peer linkage mismatch for AER-0253 and the focused suite reported the stale agent-incident count. Pattern generation stopped and no worker dispatch followed.",
+      "detection_method": "The deterministic register validator rejected the asymmetric peer linkage before producing a new pattern report, and the focused test identified 162 observed agent incidents versus the stale expected 161. Sol removed the asymmetric peer array, retained the exact recurrence signature as the grouping control, added this incident, advanced all maintained revision/count assertions and regenerated the derived report before dispatch.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-219.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_asymmetric_peer_and_stale_count",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Keep AER-0253 related_incident_ids empty, retain its exact historical recurrence signature for pattern grouping, add AER-0254 as distinct failed validation evidence, advance register revision/count assertions, regenerate the pattern report and require the full focused register suite to pass before launch.",
+        "prevention_control": "Before validating a new incident, leave related_incident_ids empty unless the schema's symmetric peer relationship can already exist in both records; update register revision and population assertions in the same patch, then generate the derived report only after standalone validation passes.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-219.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0255",
+      "attempt_id": "raisa-aes-c3-predispatch-register-validation-002",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c3",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validation",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A register-population correction must update the exact ordered incident range, every maintained aggregate count and the newly recurring pattern fixture before its focused suite can pass.",
+      "observed_error": "The second AES-C3 predispatch register correction validated and generated an exact 254-incident pattern report, but the focused suite still found two stale fixtures: the ordered incident range stopped at AER-0252 and the by-origin assertion retained 161 agent-behavior incidents. The exact recurring-pattern fixture also had not yet been extended for the AER-0080/AER-0253 signature. No worker dispatch followed.",
+      "detection_method": "The standalone validator and pattern builder passed, then tests/test_ariadne_agent_error_register.py failed the ordered ID list and by-origin count before reaching the stale recurring-pattern assertion. Sol inspected all register-wide exact assertions, added this preserved incident, advanced every affected count/range and inserted the exact generated recurrence block before a fresh validation.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-220.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance the register to 255 incidents, ordered range through AER-0255, 164 agent-behavior and 72 output-contract incidents, 147 canonical-unchanged candidates, and add the exact AER-0080/AER-0253 recurring-pattern fixture before regenerating and rerunning the full focused suite.",
+        "prevention_control": "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, origin/category/candidate-state aggregates and recurring-pattern equality; update them as one atomic mechanical change before running pattern generation.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-220.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0256",
+      "attempt_id": "raisa-aes-c3-blue-worker-shell-wrapper-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c3",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "codex-shell-command-timeout-wrapper",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_shell_command_wrapper",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "The local command wrapper around a bounded external worker must outlive the worker's own active execution window or yield asynchronously without reporting the active transport as terminally timed out.",
+      "observed_error": "The first local shell wrapper for the AES-C3 DeepSeek launch had a 120-second command timeout and returned exit 124 before the underlying launcher/Claude process completed. No transport receipt or source edit existed at that instant, but exact process inspection showed the same launcher and Claude child remained live; Yuri's provider-usage observation was consistent with active work. No duplicate worker was launched.",
+      "detection_method": "Immediately after the shell timeout, exact process-tree inspection found the original launcher and claude.exe alive with the authorized packet, worktree and model arguments, while the worktree remained at source d44be5cbe0774b6340c7e4f6ca76075242b2f156. Bounded polling then observed the same process create only seven owned paths, commit candidate 480a0301a1102108fa0779efb98809d55adf0ffa, terminate and write the completed transport receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c3-blue-worker-transport-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-221.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.shell_wrapper_timeout_before_live_external_worker_completion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Do not relaunch or terminate the still-live bounded worker. Verify the exact process tree, worktree and absence of a terminal receipt, then monitor the original process until its receipt/commit or the plan's genuine no-artifact terminal window. Admit no source solely from liveness.",
+        "prevention_control": "Run future long external worker launchers through a sufficiently long or asynchronous wrapper and monitor their own terminal receipt; a shell timeout is harness evidence, not a worker decision, while the exact authorized process remains live.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c3-blue-worker-transport-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-221.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0257",
+      "attempt_id": "raisa-aes-c3-blue-implementation-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c3",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "An AES-C3 worker candidate may report pass only when stale lease, alias and token fixtures are exactly bound and actively compared; declared inherited bases control evaluation; malformed attempts return a closed rejection; and every outer status, reason, call count and release count is derived from a checked exact C1/C2 result rather than the scenario label.",
+      "observed_error": "DeepSeek candidate 480a0301a1102108fa0779efb98809d55adf0ffa reported the exact 61-scenario totals, but a stale-alias attempt still validated and returned generation_superseded with its replay fixture removed, and changing its declared inherited base to an exact success base also validated without changing behavior. A malformed missing scenario_id raised KeyError. Deterministic contradictory-result probes made the inherited C2 evaluator return allow/simulated with one call and release digests, while the stale-replay and egress branches still emitted their planned outer stop and zero-call claims. The cumulative branches likewise discarded or failed to verify exact returned terminal results before constructing planned outer labels.",
+      "detection_method": "After the worker's 93-test packet passed, Sol read the exact seven-path candidate and ran newly authored provider-free probes against validate_attempt and evaluate_attempt. The probes returned no validation errors for a stale alias with replay_artifact null or for a changed inherited base, raised KeyError for a missing required scenario ID, and produced outer stop/zero-call objects that retained contradictory allow/simulated C2 admission and non-null invocation/result digests. Source inspection confirmed replay fixtures had no generation/manifest/Bureau/work-cell/authority binding and were never compared, while the existing tests asserted the hard-coded outer outcomes.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c3-blue-candidate-sol-rejection.md",
+        "orchestration/agent_inbox/codex/raisa-aes-c3-blue-worker-transport-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-222.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.aes_c3_outer_labels_override_inherited_result_and_replay_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Reject the worker self-pass, preserve its exact closeout and candidate as untrusted, skip a same-lane revision because the error is conceptual, and recover under GPT Sol's explicit orchestrator recovery lease with exact replay bindings, scenario/base coupling, pre-evaluation validation, result-derived evidence and contradictory-result regressions before fresh Gemini veto.",
+        "prevention_control": "Containment rehearsals must adversarially replace inherited evaluator results, remove or cross-bind replay fixtures, change declared bases and call the public evaluator with malformed objects. An outer result is admissible only when it checks and derives every claimed status, reason, call and release field from the exact inner result and binding comparison.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c3-blue-candidate-sol-rejection.md",
+          "docs/ariadne-agent-error-correction-register-revision-222.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

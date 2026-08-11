@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_aes_c3_dispatch_rejection_register_and_rehydration_evidence_before_sol_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. AES-C2 remains the accepted baton result at Continuity 239 / Compass 221, AES-C3 remains current work, and the DeepSeek candidate 480a0301a1102108fa0779efb98809d55adf0ffa remains unaccepted after conceptual review failure.",
+    "current_authority_allocation": "GPT Sol owns the rejection, recovery lease, acceptance and Git closeout. DeepSeek's completed blue closeout is immutable non-transferable provenance and receives no correction loop because AER-0257 is conceptual. Gemini remains ineligible until Sol recovery passes deterministic gates.",
+    "active_plan_and_acceptance": "The frozen AES-C3 plan and threat delta require genuine replay/current-identity comparison, exact inherited result derivation, fail-closed malformed input, cumulative terminal latching and independent veto. Sol's deterministic probes proved the submitted candidate does not meet those criteria. This commit records only dispatch provenance, rejection, AER-0253 through AER-0257 register evidence, the fresh post-compaction receipt and recovery transition; it accepts no C3 source.",
+    "protected_evidence_boundaries": "Only authored-synthetic provider-free pure candidate review occurred. No protected evidence, historical Diary/PHI, patient/clinical/product/licensed data, provider/model call, real broker/adapter/credential, IAM/metadata, network, filesystem capability, database/source/watcher, decoder/interpreter, executable tool, command/write, deployment, production, release, Pages or protected-ref action occurred or is authorised. docs/branding and every unrelated untracked path remain unstaged.",
+    "git_refs_and_worktree": "Primary is on codex/ariadne-bernie-davida-parallel-seam at d44be5cbe0774b6340c7e4f6ca76075242b2f156 before this explicit evidence-only commit. Worker aes-c3-deepseek-blue is unchanged and clean at rejected candidate 480a0301a1102108fa0779efb98809d55adf0ffa. Origin task remains 9955865a49d4803f1f0b7ad696148d908626483b. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked paths remain exact at SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five docs/branding paths; explicit-path staging only will include the named AES-C3 evidence and register files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol's fresh receipt passed; direct adversarial probes and the 207-test focused register suite bind the rejection and incident record before commit."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No AES-C3 Gemini call has occurred because the rejected candidate never became review eligible."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The exact completed worker transport receipt and rejected candidate are preserved; no duplicate or revision worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude/Fable/Opus is not selected; Claude Code was only the completed DeepSeek transport."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

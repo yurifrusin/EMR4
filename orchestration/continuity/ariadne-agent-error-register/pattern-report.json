@@ -1,30 +1,30 @@
 {
-  "canonical_register_sha256": "019d9291917a16a1a3c6eb4334d5544b2894bfbddf11775e34a2bb96cb4a5b89",
+  "canonical_register_sha256": "f88126d289bb537590d22e6f28736f05240f02bf9a3e6c657de98fde04821ef7",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 82,
-      "canonical_unchanged": 144,
-      "untrusted_partial_worktree": 26
+      "canonical_unchanged": 148,
+      "untrusted_partial_worktree": 27
     },
     "by_category": {
       "command_scope_violation": 29,
       "evidence_misreport": 33,
-      "harness_failure": 30,
-      "output_contract_violation": 69,
+      "harness_failure": 31,
+      "output_contract_violation": 72,
       "read_only_violation": 3,
-      "reasoning_claim_error": 27,
+      "reasoning_claim_error": 28,
       "repository_defect": 52,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 161,
-      "harness": 30,
+      "agent_behavior": 165,
+      "harness": 31,
       "repository": 52,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 91,
-      "material": 86,
+      "low": 95,
+      "material": 87,
       "moderate": 75
     },
     "by_resource_and_role": {
@@ -35,13 +35,14 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 119,
+      "codex-primary-orchestrator::orchestrator": 122,
+      "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 1,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 4,
+      "deepseek-flash-workers::implementer": 5,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -78,13 +79,13 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 17,
-      "orchestrator": 187,
+      "implementer": 18,
+      "orchestrator": 191,
       "verifier": 48
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 252,
+  "incident_count": 257,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -320,6 +321,30 @@
         "The closeout protocol now requires a standalone git rev-parse HEAD read immediately before every verifier preflight and forbids manually completing abbreviated hashes."
       ],
       "recurrence_signature": "orchestrator.verifier_preflight_expected_head_not_read_from_git",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0080",
+        "AER-0253"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Copy the approved continuation event from a passing native-worker predispatch receipt and leave assigned_agent_ids empty unless an actual workspace receipt is already present; descriptive lane availability belongs in adapter evidence and worker_slots.",
+        "For every remaining AES-C3 dispatch receipt, copy continuation_event and assignment fields from a passing external-worker receipt; a separately preflighted worktree belongs in source evidence, while workspace_receipts and assigned_agent_ids remain empty until their harness-governed assignment exists."
+      ],
+      "recurrence_signature": "orchestrator.worker_dispatch_continuation_event_and_assignment_envelope",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -599,7 +624,7 @@
       ]
     }
   ],
-  "register_revision": 217,
+  "register_revision": 222,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-11"
 }
