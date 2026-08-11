@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_exact_aes_c1_prepush_pair_then_push_only_task_branch_descendant",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C1 is accepted at Continuity 238 / Compass 220 in closeout commit 32bf19824baef5b4e5d7e05f315ac2d2c1217e11. AES-C2 provider-free broker simulation is the next planned descendant.",
+    "current_authority_allocation": "GPT Sol alone owns the explicit receipt-pair commit and task-branch push. DeepSeek blue and Gemini veto are complete. No agent has protected integration or protected-ref authority.",
+    "active_plan_and_acceptance": "AES-C1 passes exact 45-scenario admission, 32 hostile zero-admission mutations, 59 focused tests, 129 final maintained static tests, 135 canonical fast-profile tests and the fresh Gemini 73-test veto. The paired Yuri summary is committed and states attention required no.",
+    "protected_evidence_boundaries": "The only remaining write before push is this exact pre-push runtime-state/receipt pair. Push is limited to codex/ariadne-bernie-davida-parallel-seam. No docs/branding, unrelated untracked evidence, protected data, runtime, provider, credential, network, database/source, tool, command, deployment, release, Pages or protected ref is opened.",
+    "git_refs_and_worktree": "Task branch closeout HEAD is exact 32bf19824baef5b4e5d7e05f315ac2d2c1217e11 and is seven commits ahead of its origin before the receipt-pair commit. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree has no tracked modification and the exact original 494 untracked paths remain with SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the exact closeout commit, final tests, protected refs and original untracked-path hash."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini exact-HEAD veto completed pass and its receipt is committed."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek blue transport receipts are committed and no worker remains active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude is not selected as a model; Claude Code was DeepSeek transport only."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

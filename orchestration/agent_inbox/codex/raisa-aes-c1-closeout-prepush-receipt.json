@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_exact_aes_c1_prepush_pair_then_push_only_task_branch_descendant",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "AES-C1 passes exact 45-scenario admission, 32 hostile zero-admission mutations, 59 focused tests, 129 final maintained static tests, 135 canonical fast-profile tests and the fresh Gemini 73-test veto. The paired Yuri summary is committed and states attention required no.",
+    "current_authority_allocation": "GPT Sol alone owns the explicit receipt-pair commit and task-branch push. DeepSeek blue and Gemini veto are complete. No agent has protected integration or protected-ref authority.",
+    "git_refs_and_worktree": "Task branch closeout HEAD is exact 32bf19824baef5b4e5d7e05f315ac2d2c1217e11 and is seven commits ahead of its origin before the receipt-pair commit. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree has no tracked modification and the exact original 494 untracked paths remain with SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162.",
+    "live_handover_current_baton": "AES-C1 is accepted at Continuity 238 / Compass 220 in closeout commit 32bf19824baef5b4e5d7e05f315ac2d2c1217e11. AES-C2 provider-free broker simulation is the next planned descendant.",
+    "protected_evidence_boundaries": "The only remaining write before push is this exact pre-push runtime-state/receipt pair. Push is limited to codex/ariadne-bernie-davida-parallel-seam. No docs/branding, unrelated untracked evidence, protected data, runtime, provider, credential, network, database/source, tool, command, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
