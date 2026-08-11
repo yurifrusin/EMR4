@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 204,
+  "register_revision": 206,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-10",
+    "source_cutoff_on": "2026-08-11",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -9598,6 +9598,84 @@
           "tests/test_raisa_context_fabric_durability_behavior_attempt_048_pass.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-204.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0239",
+      "attempt_id": "raisa-aes-c1-blue-revision-predispatch-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c1",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A revision runtime-state packet must include the complete adapter-observation set required by the active Ariadne settings before any worker dispatch is permitted.",
+      "observed_error": "The first AES-C1 bounded-revision predispatch state omitted codex_subagent_spawn, antigravity_cli_print, deepcode_cli and claude_cli_print observations, so the deterministic orchestrator preflight returned revision_required and worker_dispatch_permitted false before any second DeepSeek call started.",
+      "detection_method": "The orchestrator preflight reported the four exact adapter_observation_missing reasons; the state was completed with explicit unknown/not-selected observations and the same deterministic preflight then passed with no reasons before dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c1-blue-revision-worker-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c1-blue-revision-worker-predispatch-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-205.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.runtime_state_omits_required_adapter_observations",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add the four missing observations with explicit reachability and selection evidence, rerun the same deterministic preflight and require worker_dispatch_permitted true before starting the bounded revision.",
+        "prevention_control": "New runtime-state packets must carry the complete adapter ID set required by transport_adapters.yaml even when an adapter is not selected or remains unreachable.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c1-blue-revision-worker-predispatch-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c1-blue-revision-worker-predispatch-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-205.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0240",
+      "attempt_id": "raisa-aes-c1-sol-recovery-preintegration-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c1",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_orchestrator_preflight",
+      "stage": "integration",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A pre-integration recovery state must use an approved continuation event, exact adapter-specific probe methods and the complete managed worker-slot inventory before source adoption.",
+      "observed_error": "The first recovery state used an unapproved pre_integration_recovery event, codex_session_observation for the DeepSeek adapter and omitted the empty deepseek-flash-workers inventory; an imprecise first correction then swapped the Codex and DeepSeek probe methods. Deterministic preflight returned revision_required on both attempts and no integration occurred.",
+      "detection_method": "The first preflight named continuation_event_missing_or_unapproved, adapter_probe_method_invalid and worker_slot_inventory_missing; the second named both swapped adapter methods. Direct settings readback supplied pre_integration, codex_session_observation, deepseek_claude_cli_observation and an explicit empty managed slot, after which preflight passed with no reasons.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c1-sol-recovery-preintegration-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c1-sol-recovery-preintegration-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-206.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preintegration_state_uses_unvalidated_schema_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Read the active requirements and transport settings, bind the state to pre_integration and each exact adapter method, include an explicit empty managed DeepSeek slot and require a reason-free receipt before integration.",
+        "prevention_control": "Every new continuation-state template must be populated from orchestrator_requirements.yaml and transport_adapters.yaml before its first preflight; adapter methods must be keyed by adapter ID rather than patched by positional text match.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c1-sol-recovery-preintegration-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c1-sol-recovery-preintegration-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-206.md"
         ]
       },
       "status": "corrected"

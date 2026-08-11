@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All verification complete. Final state:\n\n## Summary\n\n**Decision: `pass`** (blue artifact ready; Sol alone decides adoption)\n\n**Candidate HEAD:** `fadecf47a24ee1837047ffddbd5ab306a30f2c8c` on `codex/aes-c1-deepseek-blue` (committed, not pushed)\n**Source HEAD:** `d47010743d25e05d7d758f91507179374a91bb04`\n**Protected refs:** `master`/`handoff/current`/`origin/master`/`origin/handoff/current` all unchanged at `2e34bdad732fdab32fbf778280b3d3c70d66d602`\n\n### Changed files (exactly the 7 owned paths)\n1. `orchestration/continuity/.../admission-rehearsal-contract.json`\n2. `orchestration/continuity/.../admission-rehearsal-contract.schema.json`\n3. `orchestration/continuity/.../authored-synthetic-admission-scenarios.json`\n4. `orchestration/continuity/.../provider-free-admission-evidence.json`\n5. `scripts/raisa_agent_execution_surface_containment_gate_aes_c1_admission.py`\n6. `tests/test_raisa_agent_execution_surface_containment_gate_aes_c1.py`\n7. `orchestration/agent_inbox/claude/raisa-aes-c1-blue-implementation-closeout.md`\n\n### Results\n- **Script:** `status: passed`, `reasons: []` \u2014 45 scenarios (2 allow, 25 deny, 18 stop), 22/22 hostile mutations rejected, 0 admitted.\n- **Serial pytest:** 56 tests passed (11 AES-C1 + 9 AES-C0 + 36 API Spine), zero failures.\n- **Ruff:** clean. **`git diff --check`:** clean (worktree and committed). **`py_compile`:** clean.\n- **Zero runtime/provider/data:** `runtime_started:false`, `provider_calls:0`, `adapters_executed:0`, `network/database/source/tool/command_operations:0`, `product_or_patient_data:false`; evidence contains only closed IDs/decisions/reason codes/counts/digests (recursive forbidden-key scan clean).\n\n### Plan challenge\nNo conceptual/authority contradiction against AES-C0. Resolved design points documented in the closeout (forbidden-class via `requested_capability_class` while `BrokerDecision.capability_class` stays leaseable; candidate-controlled identity records `false` since it is never adopted; zero-ceiling via egress/action dimensions).\n\n### Notes for Sol\n- Static CI packet and canonical fast profile were left to Sol (would require repo-wide discovery over protected paths).\n- Fresh exact-head Gemini red/veto (dual-review item 12) and acceptance remain Sol-owned.",
+  "usage": {
+    "input_tokens": 105202,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 24327424,
+    "output_tokens": 224018,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 18.304917000000003,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

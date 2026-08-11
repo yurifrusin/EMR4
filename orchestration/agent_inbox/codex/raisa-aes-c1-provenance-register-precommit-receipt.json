@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_aes_c1_worker_provenance_and_agent_error_register_revisions_205_206_before_sol_recovery_integration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The AES-C1 plan requires non-transferable worker closeout, exact scope and recorded recovery. The closed agent-error register requires qualifying preflight refusals before corrected attempts are accepted. The full 240-incident register test passes after revisions 205 and 206.",
+    "current_authority_allocation": "Sol owns explicit-path task-branch commits. This commit contains no AES implementation adoption; it preserves the two DeepSeek packets/receipts, worktree preflight, Sol recovery preintegration receipt and AER-0239/AER-0240 corrections.",
+    "git_refs_and_worktree": "Primary task HEAD is d47010743d25e05d7d758f91507179374a91bb04. The blue worktree is clean at cb950e4b048956435c0412cacbb2675ae8c99a09 but is not yet integrated. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit staging will name only the register, tests, revisions and AES-C1 provenance paths.",
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219; AES-C1 is active and blue provenance plus qualifying preflight refusals must be durable before the corrected integration attempt is accepted.",
+    "protected_evidence_boundaries": "No protected evidence, patient/clinical/product data, runtime/provider action, database/source, credential/network, executable capability, command/write outside repository provenance, deployment, release, Pages or protected-ref movement is involved. docs/branding and every unrelated untracked path remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

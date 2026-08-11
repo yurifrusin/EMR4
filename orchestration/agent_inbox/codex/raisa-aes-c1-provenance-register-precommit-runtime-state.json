@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_aes_c1_worker_provenance_and_agent_error_register_revisions_205_206_before_sol_recovery_integration",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219; AES-C1 is active and blue provenance plus qualifying preflight refusals must be durable before the corrected integration attempt is accepted.",
+    "current_authority_allocation": "Sol owns explicit-path task-branch commits. This commit contains no AES implementation adoption; it preserves the two DeepSeek packets/receipts, worktree preflight, Sol recovery preintegration receipt and AER-0239/AER-0240 corrections.",
+    "active_plan_and_acceptance": "The AES-C1 plan requires non-transferable worker closeout, exact scope and recorded recovery. The closed agent-error register requires qualifying preflight refusals before corrected attempts are accepted. The full 240-incident register test passes after revisions 205 and 206.",
+    "protected_evidence_boundaries": "No protected evidence, patient/clinical/product data, runtime/provider action, database/source, credential/network, executable capability, command/write outside repository provenance, deployment, release, Pages or protected-ref movement is involved. docs/branding and every unrelated untracked path remain excluded.",
+    "git_refs_and_worktree": "Primary task HEAD is d47010743d25e05d7d758f91507179374a91bb04. The blue worktree is clean at cb950e4b048956435c0412cacbb2675ae8c99a09 but is not yet integrated. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit staging will name only the register, tests, revisions and AES-C1 provenance paths."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact tracked/untracked provenance scope and the passing full register test."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Gemini red/veto remains blocked pending recovered deterministic pass."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Both bounded AES-C1 blue transport receipts completed and are included as provenance; no further blue call is selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude/Fable/Opus is not selected; Claude Code was transport only."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

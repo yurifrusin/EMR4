@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All verifications pass. The bounded revision is complete.\n\n## Summary\n\n**Final HEAD:** `cb950e4b048956435c0412cacbb2675ae8c99a09` on `codex/aes-c1-deepseek-blue` \u2014 a direct descendant of the required source HEAD `fadecf47a24ee1837047ffddbd5ab306a30f2c8c`. Worktree is clean. Protected refs remain at `2e34bdad...` (untouched, no push).\n\n**Changed files (5 of the 7 owned paths; the other 2 were unchanged because they already conform):**\n1. `admission-rehearsal-contract.schema.json` \u2014 closed every nested contract rule (inherited digests, manifest/candidate-budget digest rules, decision precedence, denial policy, budget dimensions, zero-runtime boundary) with `const`/closed properties and `additionalProperties: false`; closed `ClosedCandidate.typed_arguments`/`proposal_fields` to the exact authored-synthetic fields.\n2. `scripts/...aes_c1_admission.py` \u2014 added exact in-module rule constants compared by `validate_contract()`; added `_undeclared_candidate_keys` with explicit errors in `validate_attempt()` and a defense-in-depth deny in `evaluate_attempt()` (an undeclared field can never reach `allow`); added 7 hostile contract mutations and 2 new candidate mutations.\n3. `tests/test_...aes_c1.py` \u2014 added focused regression tests for every Sol finding; updated counts (24 candidate + 7 contract hostile mutations).\n4. `provider-free-admission-evidence.json` \u2014 regenerated deterministically (status `passed`, reasons `[]`).\n5. `orchestration/agent_inbox/claude/raisa-aes-c1-blue-implementation-closeout.md` \u2014 rewritten as the bounded-revision closeout.\n\n**Sol findings repaired (reproduced first, not just documented):**\n- `contract_manifest_rule_extra`, `contract_precedence_changed`, `contract_denial_policy_extra` now each return non-empty validation errors.\n- `unrecognized-benign-key` under `typed_arguments` or `proposal_fields` now fails `validate_attempt()` and `evaluate_attempt()` denies with `operation_identity_candidate_controlled` (never `allow`).\n\n**Tests / checks:**\n- Focused AES-C1/AES-C0/API Spine packet: **59 passed** (14 + 9 + 36), zero failures.\n- Ruff: all checks passed. `py_compile`: OK. `git diff --check`: clean.\n- Scenario/mutation counts: 45 scenarios (2 allow / 25 deny / 18 stop) unchanged; 24 candidate hostile mutations all rejected; 7 contract hostile mutations all rejected; zero admission.\n- Zero-runtime/provider/data claims verified (`runtime_started: false`, `provider_calls: 0`, `product_or_patient_data: false`); AES-C0 hashes preserved exactly.\n\n**Remaining concern (out of scope):** `tests/test_raisa_agent_execution_surface_containment_gate_plan.py::test_master_plan_records_gate_without_opening_runtime` fails in this worktree because `implementation_plan.md` (not an owned path, unmodified here) lacks the phrase `does not delay the networkless database-only rehearsal`. This is pre-existing at this HEAD and outside the exact owned-path scope; it is not in the required focused packet. This worker's `pass` is advisory; Sol alone decides adoption.",
+  "usage": {
+    "input_tokens": 94121,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 10848000,
+    "output_tokens": 111100,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 8.682105,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_v4_flash_high_aes_c1_blue_implementation_worker",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 is accepted at Continuity 237 / Compass 219 and the committed frozen AES-C1 plan is the exact next dependency-satisfied tranche under standing uninterrupted-development authority.",
+    "current_authority_allocation": "Sol owns architecture, authority, recovery, integration and acceptance. One DeepSeek V4 Flash/high worker through Claude Code --bare may implement and defensively test only the seven frozen AES-C1 owned paths. A separate fresh Gemini 3.6 Flash/high red/veto remains required after deterministic candidate gates. The worker may commit only its non-protected branch and may not push.",
+    "active_plan_and_acceptance": "Plan commit d47010743d25e05d7d758f91507179374a91bb04 freezes exact AES-C0 hashes, a pure unmounted evaluator, the manifest digest rule, ordered stop/deny/allow precedence, exact 45 scenarios, malformed/semantic hostile tests, minimized evidence and dual review. Worker packet SHA-256 is 4de9506459a382f98014697e8fcd91f209c19c80bd690d7c7491052486f1b0da.",
+    "protected_evidence_boundaries": "The worker receives no protected-evidence or historical-Diary authority and no patient/clinical/product/licensed data. Runtime broker/work cell/container/adapter, provider/model call, credential/IAM/metadata/network, database/source/watcher, filesystem capability, executable tool, command/write, deployment, production, release, Pages and protected refs remain closed. Primary docs/branding/ and all 494 pre-existing untracked paths remain outside the isolated worker worktree.",
+    "git_refs_and_worktree": "Primary task HEAD is d47010743d25e05d7d758f91507179374a91bb04. Fresh isolated worktree C:/Users/sarashera/EMR4-worktrees/aes-c1-deepseek-blue is clean on codex/aes-c1-blue-deepseek at that exact source; its preflight passed. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worker may edit only its seven named paths."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified the frozen plan commit, exact packet, clean isolated branch and protected refs."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native worker is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fresh red/veto dispatch remains blocked until the candidate deterministic gate passes."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The configured exact DeepSeek V4 Flash/high Claude Code bare lane is selected; live reachability will be established by the dispatch itself with no fallback."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude/Fable/Opus is not selected; Claude Code is transport only."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [
+        "raisa-aes-c1-blue-implementation-001"
+      ],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

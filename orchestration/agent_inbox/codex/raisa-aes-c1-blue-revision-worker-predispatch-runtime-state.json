@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_single_bounded_deepseek_v4_flash_high_aes_c1_blue_revision",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 is accepted at Continuity 237 / Compass 219; AES-C1 remains the exact active tranche and its first blue candidate is revision_required before integration.",
+    "current_authority_allocation": "Sol owns architecture, recovery, integration and acceptance. The frozen plan permits one bounded DeepSeek revision of the seven exact blue-owned paths. Fresh Gemini red/veto remains blocked pending deterministic pass.",
+    "active_plan_and_acceptance": "Plan commit d47010743d25e05d7d758f91507179374a91bb04 requires closed exact shapes and hostile default denial. Sol independently proved nested contract mutation and undeclared candidate-field admission at candidate fadecf47a24ee1837047ffddbd5ab306a30f2c8c; the revision packet requires schema closure and regression coverage without changing the 45 frozen scenarios.",
+    "protected_evidence_boundaries": "No protected-evidence access, patient/clinical/product/licensed data, runtime/broker/adapter, provider/model call, credential/IAM/metadata/network, database/source/watcher, filesystem capability, executable tool, command/write, deployment, production, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Isolated worktree C:/Users/sarashera/EMR4-worktrees/aes-c1-deepseek-blue is clean on codex/aes-c1-blue-deepseek at fadecf47a24ee1837047ffddbd5ab306a30f2c8c. Primary task branch remains d47010743d25e05d7d758f91507179374a91bb04. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reproduced both fail-closed findings without mutating the isolated worktree."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The same configured DeepSeek V4 Flash/high lane is selected for the single bounded revision; live reachability will be established by dispatch with no fallback."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is assigned to this provider-allocated revision."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh Gemini red/veto dispatch remains blocked until the revised candidate passes deterministic gates."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude/Fable/Opus is not selected; Claude Code is transport only."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": ["raisa-aes-c1-blue-implementation-revision-001"],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

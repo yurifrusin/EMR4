@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "adopt_aes_c1_blue_commits_as_untrusted_candidate_and_apply_exact_inherited_digest_binding",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen AES-C1 plan requires inherited AES-C0 hashes and all nested contract rules to be exact. Candidate cb950e4b048956435c0412cacbb2675ae8c99a09 closes extensions and changed precedence, but validate_contract still accepts mutation of an existing inherited digest value. Recovery must bind the three exact digest values in schema and code and add a hostile regression before deterministic gates.",
+    "current_authority_allocation": "Sol owns recovery, integration and acceptance. The single bounded DeepSeek revision is consumed; no further blue call is authorised. Sol may adopt the two clean blue commits as an untrusted candidate under the orchestrator recovery lease and amend only the independently reproduced residual defect.",
+    "git_refs_and_worktree": "Primary task branch is at d47010743d25e05d7d758f91507179374a91bb04 with only AER-0239/provenance changes pending. The isolated blue worktree is clean at cb950e4b048956435c0412cacbb2675ae8c99a09 and differs from d47010743d25e05d7d758f91507179374a91bb04 only by the seven blue-owned paths. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AES-C0 is accepted at Continuity 237 / Compass 219; AES-C1 remains active and cannot enter external review until its deterministic contract is closed and exact.",
+    "protected_evidence_boundaries": "Recovery is repository-local, provider-free and unmounted. No protected evidence, patient/clinical/product/licensed data, runtime/broker/adapter, credential/IAM/metadata/network, database/source/watcher, executable tool, command/write, deployment, production, release, Pages or protected-ref action is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

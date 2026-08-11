@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_single_bounded_deepseek_v4_flash_high_aes_c1_blue_revision",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Plan commit d47010743d25e05d7d758f91507179374a91bb04 requires closed exact shapes and hostile default denial. Sol independently proved nested contract mutation and undeclared candidate-field admission at candidate fadecf47a24ee1837047ffddbd5ab306a30f2c8c; the revision packet requires schema closure and regression coverage without changing the 45 frozen scenarios.",
+    "current_authority_allocation": "Sol owns architecture, recovery, integration and acceptance. The frozen plan permits one bounded DeepSeek revision of the seven exact blue-owned paths. Fresh Gemini red/veto remains blocked pending deterministic pass.",
+    "git_refs_and_worktree": "Isolated worktree C:/Users/sarashera/EMR4-worktrees/aes-c1-deepseek-blue is clean on codex/aes-c1-blue-deepseek at fadecf47a24ee1837047ffddbd5ab306a30f2c8c. Primary task branch remains d47010743d25e05d7d758f91507179374a91bb04. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AES-C0 is accepted at Continuity 237 / Compass 219; AES-C1 remains the exact active tranche and its first blue candidate is revision_required before integration.",
+    "protected_evidence_boundaries": "No protected-evidence access, patient/clinical/product/licensed data, runtime/broker/adapter, provider/model call, credential/IAM/metadata/network, database/source/watcher, filesystem capability, executable tool, command/write, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
