@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_exactly_one_provider_free_four_scenario_cf_d2_disposable_postgresql_restart_unknown_commit_rehearsal_and_preserve_attempt_001_immutably",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Functional source a5b1107736ce64c0ee3861cb51b231d861b12764 passed the full deterministic gate and fresh Gemini exact-HEAD veto. Review/AER evidence is committed at e154f0a2a371413cc504a158b6532e4506c11a90. The first preexecution receipt at 5fdb0041 failed closed solely because its event label was outside the admitted vocabulary; AER-0277 preserves it and this distinct v2 state uses pre_worker_dispatch. Runtime attempt 001 remains unconsumed.",
+    "current_authority_allocation": "GPT Sol retains sole runtime, recovery, acceptance, Git and publication authority under Yuri's standing uninterrupted-development authority. Gemini completed a read-only veto and has no runtime authority. DeepSeek and native subagents are unassigned.",
+    "git_refs_and_worktree": "Active task HEAD before this correction commit is 5fdb00416c8d37e6eb4302bd910f7a132dfb22c4 and contains required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked files including docs/branding remain preserved; only the explicit correction, register and v2 receipt artifacts are eligible for staging.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. CF-D2 remains the active dependency-satisfied provider-free durability tranche, and the frozen plan authorises one exact disposable PostgreSQL run only after deterministic proof and fresh exact-HEAD implementation veto.",
+    "protected_evidence_boundaries": "The single run is authored-synthetic and provider-free in one owned postgres:16-bookworm container with no network, ports, mounts or external data. It authorises no provider, product/patient/clinical data, production database/source/watcher, credentials, deployment, Pages, release, protected ref movement or unrelated-file staging. Attempt 001 is immutable whether pass or fail; cleanup must prove exact owned-container absence."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

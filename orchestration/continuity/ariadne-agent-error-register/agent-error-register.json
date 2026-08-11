@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 243,
+  "register_revision": 244,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -11097,6 +11097,49 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/restart-unknown-commit-rehearsal-contract.json",
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-243.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0277",
+      "attempt_id": "cf-d2-preexecution-receipt-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne execution preflight must copy its continuation_event from the closed orchestrator-requirements vocabulary; descriptive phase language belongs only in planned_action.",
+      "observed_error": "The first CF-D2 preexecution runtime state used descriptive continuation_event pre_execution. The deterministic Ariadne preflight returned revision_required with continuation_event_missing_or_unapproved, admitted no rehydration sources and prohibited dispatch. No Docker, PostgreSQL, provider, product, network or runtime operation followed that receipt, and attempt 001 remained unconsumed.",
+      "detection_method": "scripts/ariadne_orchestrator_preflight.py emitted and preserved the exact revision_required receipt before the runtime harness command was issued. Direct readback of orchestration/harness_settings/orchestrator_requirements.yaml identified pre_worker_dispatch as the admitted execution-envelope event.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-preexecution-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-preexecution-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-preexecution-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-preexecution-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-244.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed receipt immutably, create a distinct v2 state using admitted continuation_event pre_worker_dispatch with the same exact five-source evidence and authority boundary, regenerate a passing receipt, and do not execute the runtime until that v2 pair is committed.",
+        "prevention_control": "Before every future receipt generation, mechanically test continuation_event membership against orchestration/harness_settings/orchestrator_requirements.yaml; never infer a descriptive event label from a filename or phase name.",
+        "evidence_paths": [
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-preexecution-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-preexecution-v2-receipt.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-244.md"
         ]
       },
       "status": "corrected"
