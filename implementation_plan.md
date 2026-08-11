@@ -179,9 +179,9 @@ The bounded provider-free conformance repair named in that review now also
 passes. It adds an explicit maintained Python 3.11 source-state, protected-CI
 compile/lint/static-test enforcement, current API Spine lifecycle supersession
 and live baton consistency without changing product behavior. AES-C0
-architecture, AES-C1 provider-free admission and AES-C2 inert broker simulation
-now pass. AES-C3 provider-free hostile containment rehearsal is the next safe
-tranche.
+architecture, AES-C1 provider-free admission, AES-C2 inert broker simulation
+and AES-C3 provider-free hostile containment now pass. AES-C4 is the next named
+descendant but remains closed pending a new exact occupied-provider envelope.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -202,11 +202,14 @@ the exact leaseable capability vocabulary, independent cumulative budgets,
 no-fallback state, external revocation and the read/event/command route
 separation. AES-C1 now proves their exact admission intersection, current-
 authority check, default denial, budget and revocation behavior over unmounted
-authored-synthetic objects. AES-C2 now proves broker-owned operation identity,
+authored-synthetic objects. AES-C2 proves broker-owned operation identity,
 synthetic custody, dispatch-time control-state recheck and exact budget commit
-around one pure inert function with zero external effect. AES-C3 provider-free
-hostile containment rehearsal is next; none of these results can be mistaken
-for current provider, product-data, filesystem, tool or command authority.
+around one pure inert function with zero external effect. AES-C3 now proves
+structural rejection, opaque digest-only handling, carrier-independent egress
+accounting, cumulative terminal latching and stale-authority binding for pure
+authored-synthetic objects. AES-C4 remains closed until a newly frozen exact
+provider/data/cost envelope exists; none of these results can be mistaken for
+current provider, product-data, filesystem, tool or command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
 Clinician agent. Alongside Consultant's diagnosis and patient-safety work,
@@ -617,8 +620,9 @@ generation rehearsal. The architecture-only provider-free default-off
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1
-  provider-free admission rehearsal and AES-C2 inert broker simulation have
-  passed; AES-C3 provider-free hostile containment rehearsal is next.
+  provider-free admission rehearsal, AES-C2 inert broker simulation and AES-C3
+  provider-free hostile containment rehearsal have passed. AES-C4 remains
+  closed pending a newly frozen exact occupied-provider envelope.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is
@@ -667,10 +671,15 @@ executing an operation. AES-C2 now also passes: its 26 authored-synthetic
 scenarios return two released inert simulations, four non-dispatches and 20
 terminal stops; 32 hostile mutations reject, and exactly three pure Python
 calls occur with zero external effect. It proves broker-owned destination,
-method, implementation and synthetic custody. AES-C3 will next challenge
-local-file, template/deserialization, metadata/credential probing, arbitrary
-or encoded egress, cumulative probing, stale lease and cross-generation replay
-surfaces without opening a real runtime or adapter.
+method, implementation and synthetic custody. AES-C3 now also passes: its 61
+authored-synthetic scenarios return 21 contained, 15 rejected and 25 terminal
+stops; 51 hostile mutations reject, and exactly 28 pure calls produce 21
+digest-only releases with zero external effect. It proves tested structural
+rejection, opaque digest-only handling, carrier-independent egress accounting,
+cumulative terminal latching and stale-authority binding without opening a real
+runtime or adapter. AES-C4 is an occupied provider proof and remains closed
+until a newly frozen exact provider/model, region, identity, data, call, cost,
+isolation, proofreader, cleanup and no-fallback envelope is available.
 
 The controlling plan is
 [`docs/raisa-agent-execution-surface-containment-gate-plan.md`](docs/raisa-agent-execution-surface-containment-gate-plan.md)
@@ -682,6 +691,8 @@ The accepted AES-C1 result is
 [`docs/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c1-provider-free-admission-closeout.md).
 The accepted AES-C2 result is
 [`docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-closeout.md).
+The accepted AES-C3 result is
+[`docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md).
 This entry grants no broker implementation, provider call, real context,
 credential flow, tool, command, deployment or production authority. It also
 grants no real adapter, generic network or executable tool.

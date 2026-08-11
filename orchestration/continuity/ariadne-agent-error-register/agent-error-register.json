@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 223,
+  "register_revision": 224,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10294,15 +10294,17 @@
       "recurrence_signature": "implementer.aes_c3_outer_labels_override_inherited_result_and_replay_binding",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "Reject the worker self-pass, preserve its exact closeout and candidate as untrusted, skip a same-lane revision because the error is conceptual, and recover under GPT Sol's explicit orchestrator recovery lease with exact replay bindings, scenario/base coupling, pre-evaluation validation, result-derived evidence and contradictory-result regressions before fresh Gemini veto.",
+        "status": "recovery_lease_applied",
+        "action": "The worker self-pass and non-transferable closeout remain rejected. GPT Sol adopted only the seven-path source as untrusted under the recorded recovery lease, added exact replay/current-authority bindings, scenario/base coupling, pre-evaluation validation, result-derived evidence, full cumulative-transition checks and contradictory-result regressions, then obtained one fresh exact-HEAD Gemini 3.6 Flash/high pass over clean recovered commit c45ff191af420b801e9917a7efc69c17aeb5698b.",
         "prevention_control": "Containment rehearsals must adversarially replace inherited evaluator results, remove or cross-bind replay fixtures, change declared bases and call the public evaluator with malformed objects. An outer result is admissible only when it checks and derives every claimed status, reason, call and release field from the exact inner result and binding comparison.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-aes-c3-blue-candidate-sol-rejection.md",
-          "docs/ariadne-agent-error-correction-register-revision-222.md"
+          "orchestration/agent_inbox/codex/raisa-aes-c3-sol-recovery.md",
+          "orchestration/agent_inbox/antigravity/raisa-aes-c3-provider-free-hostile-containment-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-224.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0258",

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_exact_head_aes_c3_security_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate c45ff191af420b801e9917a7efc69c17aeb5698b passes the exact 61 scenarios, 33 hostile attempt mutations, 18 hostile contract mutations, 106 focused C3/C2/C1/C0/API tests, 180 maintained static tests and 186 canonical fast-profile tests. Review packet SHA-256 is 7bfb0c5038b830dabf21c905e2b9a95634adcfd11068dbe43bea1b8593e27f7f and excludes worker, rejection, recovery, error-register and prior-review framing from the exact read allowlist.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project has read-only veto authority only. Sol retains architecture, recovery, integration and acceptance. The rejected DeepSeek lane and Sol recovery are complete; no implementation worker or fallback reviewer is selected.",
+    "git_refs_and_worktree": "Primary is at candidate c45ff191af420b801e9917a7efc69c17aeb5698b with zero tracked changes. Review branch codex/review-aes-c3-hostile-containment-c45ff191 is clean at the same exact HEAD in C:/Users/sarashera/EMR4-worktrees/r184 and its deterministic worktree preflight passed. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task is 9955865a49d4803f1f0b7ad696148d908626483b. The primary retains all original 494 untracked paths with exact hash f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 after excluding exact tranche-owned verifier files.",
+    "live_handover_current_baton": "AES-C2 remains accepted at Continuity 239 / Compass 221. AES-C3 is the active dependency-satisfied tranche, and recovered candidate c45ff191af420b801e9917a7efc69c17aeb5698b requires the configured fresh independent security veto before Sol acceptance.",
+    "protected_evidence_boundaries": "The reviewer is confined to the exact non-protected authored-synthetic read allowlist and clean exact-head worktree. It may not edit, access protected, historical, branding, patient, clinical, product or licensed data, start a broker/runtime/container/database, contact a provider or product surface, use credentials/IAM/metadata/network/filesystem capability, decode or execute hostile content, execute a real adapter/tool/command, deploy, release, rebuild Pages or move refs."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

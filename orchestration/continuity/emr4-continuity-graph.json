@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 239,
+  "graph_revision": 240,
   "harvests": [],
   "nodes": [
     {
@@ -15031,6 +15031,89 @@
         "AES-C3 provider-free hostile containment rehearsal has not yet been frozen or executed.",
         "No real runtime broker, work-cell process, container, adapter, provider, product context, database/source, filesystem, network, executable tool or command is opened.",
         "Protected evidence, patient/clinical/product data, credentials, deployment, production, release, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-agent-execution-surface-containment-gate-aes-c3",
+      "title": "Raisa Agent Execution Surface AES-C3 provider-free hostile containment",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-11T00:00:00Z",
+      "updated_at": "2026-08-11T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "c45ff191af420b801e9917a7efc69c17aeb5698b",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-agent-execution-surface-containment-gate-aes-c2",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "AES-C3 is authored-synthetic, provider-free and pure; hostile references remain inert strings and no referenced resource is opened.",
+          "The only executed adapter is one statically selected pure Python function; no real runtime, provider, credential, network, filesystem capability, database/source, tool or command is opened.",
+          "GraphQL remains read-only, events signal fresh reads, and REST/OpenAPI commands remain separately authorized and human/policy gated."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-aes-c3-provider-free-hostile-containment",
+          "source": "docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact hostile-content inertness, structural rejection, output non-release, cumulative latching and stale-authority binding over 61 pure authored-synthetic scenarios."
+        }
+      ],
+      "claim_scope": [
+        "Exactly 21 scenarios are contained, 15 reject and 25 stop; 28 pure calls make 21 digest-only releases.",
+        "All 33 hostile attempt mutations and 18 contract mutations fail closed with zero released result.",
+        "Opaque content has no decoder, interpreter, dereference, transport or operation-selection path; structural command-shaped content rejects before a call.",
+        "The result proves only the pure authored-synthetic rehearsal, not semantic injection detection, real runtime/process/container isolation, credential/provider behaviour, product-data safety or command safety."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-threat-model-delta.md",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/containment-rehearsal-contract.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/containment-rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/authored-synthetic-hostile-containment-scenarios.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/provider-free-hostile-containment-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c3-provider-free-hostile-containment-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-11--aes-c3-provider-free-hostile-containment.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-aes-c3-provider-free-hostile-containment-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-aes-c3-hostile-containment-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c3-pre-verifier-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c3-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c3-precommit-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-aes-c3-provider-free-hostile-containment-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c3.py",
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c3_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_agent_execution_surface_containment_gate_aes_c3_continuity_update.py",
+          "orchestration/agent_inbox/codex/raisa-aes-c3-sol-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-224.md"
+        ]
+      },
+      "unresolved_gates": [
+        "AES-C4 occupied authored-synthetic provider proof requires a newly frozen exact provider/model, region, identity, data, call, cost, isolation, proofreader, cleanup and no-fallback envelope; no current authority supplies it.",
+        "No real runtime broker, work-cell process, container, adapter, provider, product context, database/source, filesystem, network, credential, executable tool or command is opened.",
+        "Protected evidence, patient/clinical/product data, deployment, production, release, Pages and protected refs remain closed."
       ]
     }
   ],

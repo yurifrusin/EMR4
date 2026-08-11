@@ -17,16 +17,18 @@
     "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
     "Model-required Bureau C5 plan and recovery state",
     "Provider-free unmounted durability inert DDL rehearsal acceptance",
+    "Agent Execution Surface AES-C3 acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
-    "Raisa Practice Context Fabric direction"
+    "Raisa Practice Context Fabric direction",
+    "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 160322,
-  "ledger_line_count": 135,
+  "ledger_byte_count": 170102,
+  "ledger_line_count": 142,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "8a865f02213a905fcff125de3d30ea24aeb88d331107a0f52fd8a5bcf44c0dae",
+  "ledger_sha256": "5f4f84a718027bb007c6e965b9576102ae80bf26b385742bdaed0103d05394b3",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -146,14 +148,21 @@
     "Context Fabric model-required intent-shaping acceptance",
     "Context Fabric unmounted Rayleen waiting-room source-adapter acceptance",
     "Context Fabric unmounted Rayleen invalidation/reassembly acceptance",
-    "Context Fabric unmounted Rayleen fresh-generation acceptance"
+    "Context Fabric unmounted Rayleen fresh-generation acceptance",
+    "Provider-free disposable PostgreSQL durability parse/catalogue rehearsal acceptance",
+    "Provider-free disposable PostgreSQL durability behavior/transaction rehearsal acceptance",
+    "Codebase architectural-health and conformance review acceptance",
+    "Codebase conformance repair acceptance",
+    "Agent Execution Surface AES-C0 acceptance",
+    "Agent Execution Surface AES-C1 acceptance",
+    "Agent Execution Surface AES-C2 acceptance"
   ],
-  "moved_row_count": 119,
+  "moved_row_count": 126,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 61014,
-  "source_agents_git_blob_sha1": "18662b55918be647c690c049e5a8330fd4e41025",
-  "source_agents_line_count": 486,
+  "source_agents_byte_count": 73996,
+  "source_agents_git_blob_sha1": "183974831e3a8bdc700316a26aa21fdd5bea524f",
+  "source_agents_line_count": 500,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "b4e544a7357922c5ead06a674777ccccd6eb93255583464a272d9b36942b68d4",
-  "source_git_head": "c5f0960a240b7f162b1b34e1b09fb166d12fd42e"
+  "source_agents_sha256": "cbb6fbf30d0275bf29c5606c1a182c24f53952f5bd3b1bd1e97a81153a834713",
+  "source_git_head": "c45ff191af420b801e9917a7efc69c17aeb5698b"
 }

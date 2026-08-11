@@ -203,6 +203,7 @@
     "scripts/raisa_agent_execution_surface_containment_gate_aes_c2_broker_simulator.py",
     "scripts/raisa_agent_execution_surface_containment_gate_aes_c2_continuity_update.py",
     "scripts/raisa_agent_execution_surface_containment_gate_aes_c3_hostile_containment.py",
+    "scripts/raisa_agent_execution_surface_containment_gate_aes_c3_continuity_update.py",
     "scripts/raisa_codebase_conformance_repair_continuity_update.py",
     "scripts/security_bandit_gate.py",
     "scripts/verification_runtime.py",
@@ -223,6 +224,7 @@
     "tests/test_raisa_agent_execution_surface_containment_gate_aes_c2.py",
     "tests/test_raisa_agent_execution_surface_containment_gate_aes_c2_continuity.py",
     "tests/test_raisa_agent_execution_surface_containment_gate_aes_c3.py",
+    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c3_continuity.py",
     "tests/test_raisa_agent_execution_surface_containment_gate_plan.py",
     "tests/test_raisa_codebase_conformance_repair_continuity.py",
     "tests/test_repository_maintenance.py"

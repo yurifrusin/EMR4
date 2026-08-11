@@ -39,10 +39,12 @@ ACTIVE_LABELS = (
     "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
     "Model-required Bureau C5 plan and recovery state",
     "Provider-free unmounted durability inert DDL rehearsal acceptance",
+    "Agent Execution Surface AES-C3 acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
     "Raisa Practice Context Fabric direction",
+    "Agent Execution Surface and Containment Gate direction",
 )
 
 
@@ -160,9 +162,7 @@ def write_compaction() -> dict[str, Any]:
         if _row_label(row) not in active and _row_label(row) != INDEX_LABEL
     ]
     if INDEX_LABEL in labels:
-        ledger_lines = LEDGER_PATH.read_text(encoding="utf-8").splitlines(
-            keepends=True
-        )
+        ledger_lines = LEDGER_PATH.read_text(encoding="utf-8").splitlines(keepends=True)
         ledger_header = next(
             i for i, line in enumerate(ledger_lines) if line.startswith("| Item |")
         )

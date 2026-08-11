@@ -38,7 +38,7 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 223
+    assert register["register_revision"] == 224
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 259)
@@ -2508,7 +2508,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 223
+    assert report["register_revision"] == 224
     assert report["incident_count"] == 258
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
