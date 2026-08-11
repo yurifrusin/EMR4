@@ -39,23 +39,52 @@ CONTRACT_PATH = BASE / "restart-unknown-commit-rehearsal-contract.json"
 EVIDENCE_SCHEMA_PATH = (
     BASE / "provider-free-durability-restart-unknown-commit-evidence.schema.json"
 )
+RECOVERY_CONTRACT_PATH = (
+    BASE / "restart-unknown-commit-recovery-descendant-contract.json"
+)
+RECOVERY_CONTRACT_SCHEMA_PATH = (
+    BASE / "restart-unknown-commit-recovery-descendant-contract.schema.json"
+)
+DIAGNOSTIC_EVIDENCE_SCHEMA_PATH = BASE / (
+    "provider-free-durability-restart-unknown-commit-recovery-diagnostic-evidence.schema.json"
+)
+DIAGNOSTIC_EVIDENCE_PATH = BASE / (
+    "provider-free-durability-restart-unknown-commit-recovery-diagnostic-evidence-attempt-001.json"
+)
 EVIDENCE_PATH = (
     BASE / "provider-free-durability-restart-unknown-commit-evidence-attempt-002.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
     "sha256:73aad6f20ec68cae75617b090b38b82b611af2e56b6cebeaffd41079102cfd74"
 )
+EXPECTED_RECOVERY_CONTRACT_SHA256 = (
+    "sha256:d492af4102510c94cbfde1263ee399ba52be612039fceba43572e8b894056ad9"
+)
 PASS_RESULT = "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_pass"
+DIAGNOSTIC_PASS_RESULT = (
+    "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_"
+    "no_crash_first_sequence_diagnostic_pass"
+)
 EVIDENCE_MODE = "provider_free_disposable_postgresql_authored_synthetic_restart_unknown_commit_recovery"
+DIAGNOSTIC_EVIDENCE_MODE = (
+    "provider_free_disposable_postgresql_authored_synthetic_no_crash_"
+    "first_sequence_diagnostic"
+)
 CLAIM_BOUNDARY = (
     "four_fixed_postgresql16_sigkill_same_cluster_restart_outcomes_only_no_literal_"
     "wal_ack_boundary_power_loss_driver_pool_operational_runtime_product_provider_"
     "command_deployment_production_release_or_protected_ref_claim"
 )
+DIAGNOSTIC_CLAIM_BOUNDARY = (
+    "exact_r01_position_one_apply_and_revision_two_anchor_sequence_without_crash_"
+    "only_no_restart_unknown_commit_wal_driver_pool_operational_runtime_product_"
+    "provider_command_deployment_production_release_or_protected_ref_claim"
+)
 SCENARIO_ORDER = ("CFD2-R01", "CFD2-R02", "CFD2-R03", "CFD2-R04")
 RESULT_VOCABULARY = frozenset(
     {"PRIMARY", "RECEIPT_APPLIED", "RECEIPT_REPLAYED", "1", "2"}
 )
+ALLOWED_SQLSTATES = frozenset({"P0001", "CF303"})
 APPLICATION_LABEL = re.compile(r"^emr4_cf_d2_r0[1-4]_[cru]$")
 DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
 IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]{0,62}$")
@@ -82,6 +111,28 @@ class RestartFailure(serial.BehaviorFailure):
     """Closed failure for the CF-D2 harness."""
 
 
+class TerminalFailure(RestartFailure):
+    """Closed coordinate-specific participant terminal failure."""
+
+    def __init__(
+        self,
+        coordinate: str,
+        code: str,
+        result: serial.parent.ProcessResult,
+    ) -> None:
+        super().__init__(coordinate, code)
+        observed_sqlstate = serial._safe_sqlstate(result)  # noqa: SLF001
+        self.terminal_evidence = {
+            "coordinate": coordinate,
+            "code": code,
+            "returncode_class": "zero" if result.returncode == 0 else "nonzero",
+            "sqlstate": (
+                observed_sqlstate if observed_sqlstate in ALLOWED_SQLSTATES else None
+            ),
+            "result_lines": _result_lines(result)[:2],
+        }
+
+
 def _canonical_sha(value: Any) -> str:
     raw = json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return "sha256:" + hashlib.sha256(raw).hexdigest()
@@ -93,6 +144,30 @@ def _file_digest(path: Path) -> str:
 
 def _json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _validate_recovery_contract() -> dict[str, Any]:
+    contract = _json(RECOVERY_CONTRACT_PATH)
+    schema = _json(RECOVERY_CONTRACT_SCHEMA_PATH)
+    Draft202012Validator.check_schema(schema)
+    errors = sorted(
+        Draft202012Validator(schema).iter_errors(contract),
+        key=lambda error: tuple(str(part) for part in error.absolute_path),
+    )
+    if errors:
+        raise RestartFailure("recovery_contract", "schema_validation")
+    if _canonical_sha(contract) != EXPECTED_RECOVERY_CONTRACT_SHA256:
+        raise RestartFailure("recovery_contract", "digest_mismatch")
+    coordinates = contract.get("terminal_coordinates")
+    if not isinstance(coordinates, list) or len(coordinates) != 27:
+        raise RestartFailure("recovery_contract", "terminal_coordinates")
+    return contract
+
+
+def _assert_terminal_coordinate(coordinate: str, contract: dict[str, Any]) -> None:
+    coordinates = contract.get("terminal_coordinates", [])
+    if not IDENTIFIER.fullmatch(coordinate) or coordinate not in coordinates:
+        raise RestartFailure("terminal_coordinate", "not_allowlisted")
 
 
 def _source_head() -> str:
@@ -453,12 +528,13 @@ def _closed_identity(
 def _expect_success(
     result: serial.parent.ProcessResult,
     *,
+    coordinate: str,
     principal: str,
     isolation: str,
     expected_lines: list[str],
 ) -> dict[str, Any]:
     if result.returncode != 0 or _result_lines(result) != expected_lines:
-        raise RestartFailure("scenario", "unexpected_terminal_success")
+        raise TerminalFailure(coordinate, "unexpected_terminal_success", result)
     return {
         "outcome": "commit",
         "sqlstate": None,
@@ -470,13 +546,14 @@ def _expect_success(
 def _expect_failure(
     result: serial.parent.ProcessResult,
     *,
+    coordinate: str,
     principal: str,
     isolation: str,
     sqlstate: str,
 ) -> dict[str, Any]:
     observed = serial._safe_sqlstate(result)  # noqa: SLF001
     if result.returncode == 0 or observed != sqlstate:
-        raise RestartFailure("scenario", "unexpected_terminal_sqlstate")
+        raise TerminalFailure(coordinate, "unexpected_terminal_sqlstate", result)
     return {
         "outcome": "rollback",
         "sqlstate": sqlstate,
@@ -492,6 +569,7 @@ def _execute(
     profile: dict[str, Any],
     contract: dict[str, Any],
     *,
+    coordinate: str,
     scenario_id: str,
     principal: str,
     isolation: str,
@@ -500,6 +578,8 @@ def _execute(
     expected_sqlstate: str | None = None,
     injected_rollback: bool = False,
 ) -> dict[str, Any]:
+    recovery_contract = _validate_recovery_contract()
+    _assert_terminal_coordinate(coordinate, recovery_contract)
     result = _call_script(
         runner,
         docker,
@@ -518,6 +598,7 @@ def _execute(
     if expected_sqlstate is not None:
         return _expect_failure(
             result,
+            coordinate=coordinate,
             principal=principal,
             isolation=isolation,
             sqlstate=expected_sqlstate,
@@ -526,6 +607,7 @@ def _execute(
         raise RestartFailure("scenario", "expected_result_missing")
     return _expect_success(
         result,
+        coordinate=coordinate,
         principal=principal,
         isolation=isolation,
         expected_lines=expected_lines,
@@ -984,6 +1066,7 @@ def _setup_fixtures(
                     container_id,
                     profile,
                     contract,
+                    coordinate=f"fixture_register_{observer}",
                     scenario_id="CFD2-R01",
                     principal="context_lifecycle",
                     isolation="serializable",
@@ -1002,6 +1085,7 @@ def _setup_fixtures(
                     container_id,
                     profile,
                     contract,
+                    coordinate=f"fixture_produce_position_{2 if second else 1}",
                     scenario_id="CFD2-R01",
                     principal="context_producer",
                     isolation="read committed",
@@ -1020,6 +1104,7 @@ def _setup_fixtures(
                     container_id,
                     profile,
                     contract,
+                    coordinate=f"fixture_admit_{observer}_position_1",
                     scenario_id="CFD2-R01",
                     principal="context_observer",
                     isolation="read committed",
@@ -1145,6 +1230,74 @@ def _record(
     }
 
 
+def _diagnostic_terminal_observation(
+    coordinate: str, outcome: dict[str, Any]
+) -> dict[str, Any]:
+    return {
+        "coordinate": coordinate,
+        "code": "matched_expected_terminal",
+        "returncode_class": "zero",
+        "sqlstate": outcome["sqlstate"],
+        "result_lines": outcome["result_lines"],
+        "passed": True,
+    }
+
+
+def _run_no_crash_first_sequence(
+    runner: Runner,
+    docker: str,
+    container_id: str,
+    profile: dict[str, Any],
+    contract: dict[str, Any],
+    facts: dict[str, Any],
+) -> list[dict[str, Any]]:
+    observer = "observer_r01"
+    pre_packet = _recovery_packet(
+        runner, docker, container_id, profile, facts, observer, 1
+    )
+    apply_coordinate = "cfd2_r01_apply_position_1"
+    applied_outcome = _execute(
+        runner,
+        docker,
+        container_id,
+        profile,
+        contract,
+        coordinate=apply_coordinate,
+        scenario_id="CFD2-R01",
+        principal="context_coordinator",
+        isolation="serializable",
+        statements=_coordinator_statements(facts, observer, 1),
+        expected_lines=["RECEIPT_APPLIED"],
+    )
+    applied = _recovery_packet(
+        runner, docker, container_id, profile, facts, observer, 1
+    )
+    _assert_transition_delta(pre_packet, applied)
+
+    anchor_coordinate = "cfd2_r01_append_anchor_2"
+    anchor_outcome = _execute(
+        runner,
+        docker,
+        container_id,
+        profile,
+        contract,
+        coordinate=anchor_coordinate,
+        scenario_id="CFD2-R01",
+        principal="context_lifecycle",
+        isolation="serializable",
+        statements=_anchor_statements(facts, observer, 2),
+        expected_lines=["2"],
+    )
+    anchored = _recovery_packet(
+        runner, docker, container_id, profile, facts, observer, 1
+    )
+    _assert_anchor_delta(applied, anchored)
+    return [
+        _diagnostic_terminal_observation(apply_coordinate, applied_outcome),
+        _diagnostic_terminal_observation(anchor_coordinate, anchor_outcome),
+    ]
+
+
 def _run_scenarios(
     runner: Runner,
     docker: str,
@@ -1174,6 +1327,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r01_apply_position_1",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1192,6 +1346,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r01_append_anchor_2",
             scenario_id=scenario_id,
             principal="context_lifecycle",
             isolation="serializable",
@@ -1230,6 +1385,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r01_replay_position_1",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1246,6 +1402,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r01_admit_position_2",
             scenario_id=scenario_id,
             principal="context_observer",
             isolation="read committed",
@@ -1263,6 +1420,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r01_apply_position_2",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1304,6 +1462,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r02_rollback_position_1",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1340,6 +1499,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r02_apply_position_1_after_rollback",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1358,6 +1518,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r02_append_anchor_2",
             scenario_id=scenario_id,
             principal="context_lifecycle",
             isolation="serializable",
@@ -1377,6 +1538,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r02_replay_position_1",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1443,6 +1605,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r03_replay_position_1",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1459,6 +1622,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r03_admit_position_2",
             scenario_id=scenario_id,
             principal="context_observer",
             isolation="read committed",
@@ -1476,6 +1640,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r03_reject_position_2_before_anchor",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1498,6 +1663,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r03_append_anchor_2",
             scenario_id=scenario_id,
             principal="context_lifecycle",
             isolation="serializable",
@@ -1516,6 +1682,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r03_apply_position_2",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1586,6 +1753,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r04_apply_position_1_after_recovery",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1604,6 +1772,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r04_append_anchor_2",
             scenario_id=scenario_id,
             principal="context_lifecycle",
             isolation="serializable",
@@ -1623,6 +1792,7 @@ def _run_scenarios(
             container_id,
             profile,
             contract,
+            coordinate="cfd2_r04_replay_position_1",
             scenario_id=scenario_id,
             principal="context_coordinator",
             isolation="serializable",
@@ -1703,6 +1873,7 @@ def _cleanup(
 def run_rehearsal(
     *,
     runner: Runner = serial.parent._subprocess_runner,  # noqa: SLF001
+    diagnostic_mode: bool = False,
 ) -> dict[str, Any]:
     started = time.monotonic()
     attempt_id = secrets.token_hex(12)
@@ -1720,6 +1891,7 @@ def run_rehearsal(
     preconditions: list[dict[str, Any]] = []
     scenarios: list[dict[str, Any]] = []
     restarts: list[dict[str, Any]] = []
+    diagnostic_observations: list[dict[str, Any]] = []
     result = "rehearsal_failed"
     failure: serial.parent.RehearsalFailure | None = None
     container_id = image_id = name = nonce = docker = ""
@@ -1729,6 +1901,7 @@ def run_rehearsal(
         contract, serial_contract, prerequisite, manifest, artifact = (
             _validate_contract()
         )
+        recovery_contract = _validate_recovery_contract()
         source_head = _source_head()
         profile = _profile()
         cleanup_reserve = 3 * profile["cleanup_timeout_seconds"]
@@ -1745,6 +1918,10 @@ def run_rehearsal(
             ),
             "statement_count": manifest["statement_count"],
         }
+        if diagnostic_mode:
+            parent_evidence["recovery_contract_sha256"] = _canonical_sha(
+                recovery_contract
+            )
         lifecycle.append("eight_parent_bindings_verified")
         docker = shutil.which(profile["executable"]) or ""
         if not docker or Path(docker).name.lower() != "docker.exe":
@@ -1922,19 +2099,29 @@ def run_rehearsal(
             runner, docker, container_id, profile, contract, facts
         )
         lifecycle.append("four_disjoint_generations_prepared")
-        scenarios, restarts = _run_scenarios(
-            runner,
-            docker,
-            container_id,
-            name,
-            nonce,
-            image_id,
-            profile,
-            contract,
-            facts,
-            baseline_durability,
-            fixture_catalogue_digests,
-        )
+        if diagnostic_mode:
+            diagnostic_observations = _run_no_crash_first_sequence(
+                runner,
+                docker,
+                container_id,
+                profile,
+                contract,
+                facts,
+            )
+        else:
+            scenarios, restarts = _run_scenarios(
+                runner,
+                docker,
+                container_id,
+                name,
+                nonce,
+                image_id,
+                profile,
+                contract,
+                facts,
+                baseline_durability,
+                fixture_catalogue_digests,
+            )
         final_catalogue = serial.parent._read_catalogue(  # noqa: SLF001
             runner,
             docker,
@@ -1945,10 +2132,16 @@ def run_rehearsal(
         serial._assert_post_behavior_catalogue_stability(  # noqa: SLF001
             fixture_catalogue_digests, final_catalogue
         )
-        lifecycle.extend(
-            ["four_sigkill_same_cluster_restarts_matched", "catalogue_reconciled"]
-        )
-        result = PASS_RESULT
+        if diagnostic_mode:
+            lifecycle.extend(
+                ["no_crash_r01_apply_anchor_matched", "catalogue_reconciled"]
+            )
+            result = DIAGNOSTIC_PASS_RESULT
+        else:
+            lifecycle.extend(
+                ["four_sigkill_same_cluster_restarts_matched", "catalogue_reconciled"]
+            )
+            result = PASS_RESULT
     except (
         RestartFailure,
         serial.BehaviorFailure,
@@ -1982,39 +2175,62 @@ def run_rehearsal(
                 if failure is None:
                     failure = cleanup_error
                 result = "rehearsal_failed"
-        if result == PASS_RESULT and cleanup.get("absence_verified"):
+        if result in {PASS_RESULT, DIAGNOSTIC_PASS_RESULT} and cleanup.get(
+            "absence_verified"
+        ):
             lifecycle.append("passed")
-        elif result == PASS_RESULT:
+        elif result in {PASS_RESULT, DIAGNOSTIC_PASS_RESULT}:
             result = "rehearsal_failed"
-    evidence: dict[str, Any] = {
-        "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-evidence.v1",
-        "result": result,
-        "evidence_mode": EVIDENCE_MODE,
-        "attempt_id": attempt_id,
-        "parent": parent_evidence,
-        "environment": environment,
-        "lifecycle": lifecycle,
-        "preconditions": preconditions,
-        "restarts": restarts,
-        "scenarios": scenarios,
-        "scenario_reconciliation": {
-            "expected": 4,
-            "observed": len(scenarios),
-            "passed": sum(1 for row in scenarios if row.get("passed")),
-        },
-        "operation_counters": {
-            "sigkill": len(restarts),
-            "participant_retry": 0,
-            "provider_calls": 0,
-            "product_reads": 0,
-            "product_commands": 0,
-            "external_network_operations": 0,
-        },
-        "cleanup": _cleanup_evidence(cleanup),
-        "claim_boundary": CLAIM_BOUNDARY,
+    operation_counters = {
+        "sigkill": len(restarts),
+        "participant_retry": 0,
+        "provider_calls": 0,
+        "product_reads": 0,
+        "product_commands": 0,
+        "external_network_operations": 0,
     }
-    if failure is not None:
-        evidence["environment"]["failure"] = _bounded_failure(failure)
+    if diagnostic_mode:
+        evidence = {
+            "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-recovery-diagnostic-evidence.v1",
+            "result": result,
+            "evidence_mode": DIAGNOSTIC_EVIDENCE_MODE,
+            "attempt_id": attempt_id,
+            "parent": parent_evidence,
+            "environment": environment,
+            "lifecycle": lifecycle,
+            "preconditions": [row["name"] for row in preconditions],
+            "terminal_observations": diagnostic_observations,
+            "operation_counters": {**operation_counters, "restart": 0},
+            "cleanup": _cleanup_evidence(cleanup),
+            "claim_boundary": DIAGNOSTIC_CLAIM_BOUNDARY,
+        }
+        if failure is not None:
+            evidence["failure"] = _bounded_failure(failure)
+            if isinstance(failure, TerminalFailure):
+                evidence["terminal_failure"] = failure.terminal_evidence
+    else:
+        evidence = {
+            "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-evidence.v1",
+            "result": result,
+            "evidence_mode": EVIDENCE_MODE,
+            "attempt_id": attempt_id,
+            "parent": parent_evidence,
+            "environment": environment,
+            "lifecycle": lifecycle,
+            "preconditions": preconditions,
+            "restarts": restarts,
+            "scenarios": scenarios,
+            "scenario_reconciliation": {
+                "expected": 4,
+                "observed": len(scenarios),
+                "passed": sum(1 for row in scenarios if row.get("passed")),
+            },
+            "operation_counters": operation_counters,
+            "cleanup": _cleanup_evidence(cleanup),
+            "claim_boundary": CLAIM_BOUNDARY,
+        }
+        if failure is not None:
+            evidence["environment"]["failure"] = _bounded_failure(failure)
     evidence["environment"]["elapsed_ms"] = int((time.monotonic() - started) * 1000)
     return evidence
 
@@ -2105,6 +2321,128 @@ def validate_evidence(payload: dict[str, Any]) -> None:
                 visit(member)
 
     visit(payload)
+
+
+def validate_diagnostic_evidence(payload: dict[str, Any]) -> None:
+    schema = _json(DIAGNOSTIC_EVIDENCE_SCHEMA_PATH)
+    Draft202012Validator.check_schema(schema)
+    errors = sorted(
+        Draft202012Validator(schema).iter_errors(payload),
+        key=lambda error: tuple(str(part) for part in error.absolute_path),
+    )
+    if errors:
+        raise RestartFailure("diagnostic_evidence", "schema_validation")
+
+    terminal_failure = payload.get("terminal_failure")
+    failure = payload.get("failure")
+    if terminal_failure is not None:
+        if failure is None or (
+            terminal_failure["coordinate"] != failure["stage"]
+            or terminal_failure["code"] != failure["code"]
+        ):
+            raise RestartFailure("diagnostic_evidence", "failure_reconciliation")
+
+    forbidden_keys = {
+        "stdout",
+        "stderr",
+        "query",
+        "query_text",
+        "raw_sql",
+        "error_text",
+        "server_log",
+        "wal",
+        "backend_pid",
+        "lock_key",
+        "credential",
+        "database_url",
+        "environment_value",
+    }
+
+    def visit(value: Any) -> None:
+        if isinstance(value, dict):
+            if forbidden_keys.intersection(value):
+                raise RestartFailure("diagnostic_evidence", "forbidden_key")
+            for member in value.values():
+                visit(member)
+        elif isinstance(value, list):
+            for member in value:
+                visit(member)
+
+    visit(payload)
+    if payload.get("result") != DIAGNOSTIC_PASS_RESULT:
+        return
+    if (
+        payload["parent"]["contract_sha256"] != EXPECTED_CONTRACT_SHA256
+        or payload["parent"]["recovery_contract_sha256"]
+        != EXPECTED_RECOVERY_CONTRACT_SHA256
+    ):
+        raise RestartFailure("diagnostic_evidence", "parent_contract_digest")
+    if payload["lifecycle"] != [
+        "eight_parent_bindings_verified",
+        "container_owned_and_storage_closed",
+        "postgres16_artifact_and_durability_reconciled",
+        "four_disjoint_generations_prepared",
+        "no_crash_r01_apply_anchor_matched",
+        "catalogue_reconciled",
+        "cleanup_verified",
+        "passed",
+    ]:
+        raise RestartFailure("diagnostic_evidence", "lifecycle_order")
+    expected_preconditions = [
+        *(f"register_observer_r0{number}" for number in range(1, 5)),
+        "produce_position_one",
+        "produce_position_two",
+        *(f"admit_observer_r0{number}_position_1" for number in range(1, 5)),
+    ]
+    if payload["preconditions"] != expected_preconditions:
+        raise RestartFailure("diagnostic_evidence", "precondition_order")
+    if payload["terminal_observations"] != [
+        {
+            "coordinate": "cfd2_r01_apply_position_1",
+            "code": "matched_expected_terminal",
+            "returncode_class": "zero",
+            "sqlstate": None,
+            "result_lines": ["RECEIPT_APPLIED"],
+            "passed": True,
+        },
+        {
+            "coordinate": "cfd2_r01_append_anchor_2",
+            "code": "matched_expected_terminal",
+            "returncode_class": "zero",
+            "sqlstate": None,
+            "result_lines": ["2"],
+            "passed": True,
+        },
+    ]:
+        raise RestartFailure("diagnostic_evidence", "terminal_order")
+    if any(payload["operation_counters"].values()):
+        raise RestartFailure("diagnostic_evidence", "external_operation")
+    if payload["cleanup"] != {
+        "status": "cleanup_verified",
+        "removed": True,
+        "absence_verified": True,
+    }:
+        raise RestartFailure("diagnostic_evidence", "cleanup")
+    if failure is not None or terminal_failure is not None:
+        raise RestartFailure("diagnostic_evidence", "passing_failure")
+
+
+def run_recovery_diagnostic(
+    *,
+    runner: Runner = serial.parent._subprocess_runner,  # noqa: SLF001
+) -> dict[str, Any]:
+    return run_rehearsal(runner=runner, diagnostic_mode=True)
+
+
+def write_diagnostic_evidence(payload: dict[str, Any]) -> None:
+    validate_diagnostic_evidence(payload)
+    if DIAGNOSTIC_EVIDENCE_PATH.exists():
+        raise RestartFailure("diagnostic_evidence", "immutable_attempt_exists")
+    DIAGNOSTIC_EVIDENCE_PATH.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
 
 def write_evidence(payload: dict[str, Any]) -> None:

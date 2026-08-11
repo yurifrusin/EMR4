@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 248,
+  "register_revision": 249,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11269,6 +11269,45 @@
           "docs/ariadne-agent-error-correction-register-revision-247.md",
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant-planning-format-recovery-review-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-248.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0281",
+      "attempt_id": "cf-d2-recovery-canonical-fast-gate-001",
+      "observed_on": "2026-08-12",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-context-fabric-roadmap-order-test",
+      "model": "deterministic-pytest",
+      "reasoning_level": "deterministic",
+      "transport": "local_python_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The canonical fast profile must verify the semantic ordering of the durability, containment and real-product-read roadmap items without binding that invariant to mutable display numbering.",
+      "observed_error": "The CF-D2 recovery implementation gate passed its complete focused packet, then the canonical fast profile failed one of 190 tests because the historical containment-order test still required roadmap headings 17 and 18 while the accepted Context Fabric direction now numbers those unchanged semantic items 19 and 20. The same stale assertion was already present at the CF-D2 recovery planning baseline; no CF-D2 source change caused it.",
+      "detection_method": "The canonical verify_repository fast profile passed Ruff and maintained-source compilation, then reported exactly one ValueError in test_containment_gate_is_placed_after_database_only_durability. Exact baseline readback showed the test expected numbered headings 17 and 18 while the baseline direction contained headings 19 and 20 in the required semantic order.",
+      "evidence_paths": [
+        "tests/test_raisa_agent_execution_surface_containment_gate_plan.py",
+        "docs/raisa-practice-context-fabric-direction.md",
+        "docs/ariadne-agent-error-correction-register-revision-249.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.semantic_order_test_bound_to_mutable_roadmap_number",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the two stale number-bearing heading literals with the same three exact semantic heading labels, retaining both relative-order assertions; then rerun the focused test, complete canonical fast profile and CF-D2 implementation packet before review.",
+        "prevention_control": "Roadmap tests whose invariant is relative semantic order must identify unique semantic headings independently of mutable display numbering; separate tests may assert numbering only when numbering itself is an accepted contract.",
+        "evidence_paths": [
+          "tests/test_raisa_agent_execution_surface_containment_gate_plan.py",
+          "docs/raisa-practice-context-fabric-direction.md",
+          "docs/ariadne-agent-error-correction-register-revision-249.md"
         ]
       },
       "status": "corrected"

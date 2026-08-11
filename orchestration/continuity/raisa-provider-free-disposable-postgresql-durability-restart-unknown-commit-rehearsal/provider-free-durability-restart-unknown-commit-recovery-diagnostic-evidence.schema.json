@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/provider-free-durability-restart-unknown-commit-recovery-diagnostic-evidence.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_mode",
+    "attempt_id",
+    "parent",
+    "environment",
+    "lifecycle",
+    "preconditions",
+    "terminal_observations",
+    "operation_counters",
+    "cleanup",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": { "const": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-recovery-diagnostic-evidence.v1" },
+    "result": {
+      "enum": [
+        "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_no_crash_first_sequence_diagnostic_pass",
+        "rehearsal_failed",
+        "environment_unavailable",
+        "cleanup_ownership_unverified"
+      ]
+    },
+    "evidence_mode": { "const": "provider_free_disposable_postgresql_authored_synthetic_no_crash_first_sequence_diagnostic" },
+    "attempt_id": { "type": "string", "pattern": "^[0-9a-f]{24}$" },
+    "parent": { "$ref": "#/$defs/parent" },
+    "environment": { "$ref": "#/$defs/environment" },
+    "lifecycle": {
+      "type": "array",
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,95}$" }
+    },
+    "preconditions": {
+      "type": "array",
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$" }
+    },
+    "terminal_observations": {
+      "type": "array",
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/terminal_observation" }
+    },
+    "operation_counters": { "$ref": "#/$defs/operation_counters" },
+    "cleanup": { "$ref": "#/$defs/cleanup" },
+    "claim_boundary": { "const": "exact_r01_position_one_apply_and_revision_two_anchor_sequence_without_crash_only_no_restart_unknown_commit_wal_driver_pool_operational_runtime_product_provider_command_deployment_production_release_or_protected_ref_claim" },
+    "failure": { "$ref": "#/$defs/failure" },
+    "terminal_failure": { "$ref": "#/$defs/terminal_failure" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": { "const": "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_no_crash_first_sequence_diagnostic_pass" }
+        },
+        "required": ["result"]
+      },
+      "then": {
+        "not": { "anyOf": [{ "required": ["failure"] }, { "required": ["terminal_failure"] }] },
+        "properties": {
+          "parent": {
+            "required": ["source_head", "contract_sha256", "recovery_contract_sha256", "artifact_sha256", "manifest_sha256", "statement_count"]
+          },
+          "environment": {
+            "required": ["docker_client", "image", "container", "durability", "elapsed_ms"]
+          },
+          "preconditions": { "minItems": 10, "maxItems": 10 },
+          "terminal_observations": { "minItems": 2, "maxItems": 2 },
+          "cleanup": {
+            "properties": {
+              "status": { "const": "cleanup_verified" },
+              "removed": { "const": true },
+              "absence_verified": { "const": true }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "required": ["terminal_failure"] },
+      "then": { "required": ["failure"] }
+    }
+  ],
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "head": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "parent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_head": { "$ref": "#/$defs/head" },
+        "contract_sha256": { "const": "sha256:73aad6f20ec68cae75617b090b38b82b611af2e56b6cebeaffd41079102cfd74" },
+        "recovery_contract_sha256": { "const": "sha256:d492af4102510c94cbfde1263ee399ba52be612039fceba43572e8b894056ad9" },
+        "artifact_sha256": { "$ref": "#/$defs/digest" },
+        "manifest_sha256": { "$ref": "#/$defs/digest" },
+        "statement_count": { "const": 424 }
+      }
+    },
+    "image": {
+      "oneOf": [
+        { "const": "uninspected" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reference", "identity_digest", "pull_attempted"],
+          "properties": {
+            "reference": { "const": "postgres:16-bookworm" },
+            "identity_digest": { "$ref": "#/$defs/digest" },
+            "pull_attempted": { "const": false }
+          }
+        }
+      ]
+    },
+    "container": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity_digest", "network_mode", "published_ports", "bind_mounts", "named_volumes", "anonymous_volumes", "declared_volume_shield", "actual_pgdata_storage"],
+      "properties": {
+        "identity_digest": { "$ref": "#/$defs/digest" },
+        "network_mode": { "const": "none" },
+        "published_ports": { "const": 0 },
+        "bind_mounts": { "const": 0 },
+        "named_volumes": { "const": 0 },
+        "anonymous_volumes": { "const": 0 },
+        "declared_volume_shield": { "const": "tmpfs" },
+        "actual_pgdata_storage": { "const": "owned_container_writable_layer" }
+      }
+    },
+    "durability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cluster_identity_digest", "postgresql_major", "fsync", "synchronous_commit", "full_page_writes", "data_checksums"],
+      "properties": {
+        "cluster_identity_digest": { "$ref": "#/$defs/digest" },
+        "postgresql_major": { "const": 16 },
+        "fsync": { "const": "on" },
+        "synchronous_commit": { "const": "on" },
+        "full_page_writes": { "const": "on" },
+        "data_checksums": { "const": "on" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["docker_client", "image", "elapsed_ms"],
+      "properties": {
+        "docker_client": { "enum": ["unresolved", "resolved_exact_docker_exe"] },
+        "image": { "$ref": "#/$defs/image" },
+        "container": { "$ref": "#/$defs/container" },
+        "durability": { "$ref": "#/$defs/durability" },
+        "elapsed_ms": { "type": "integer", "minimum": 0, "maximum": 600000 }
+      }
+    },
+    "coordinate": {
+      "enum": [
+        "fixture_register_observer_r01",
+        "fixture_register_observer_r02",
+        "fixture_register_observer_r03",
+        "fixture_register_observer_r04",
+        "fixture_produce_position_1",
+        "fixture_produce_position_2",
+        "fixture_admit_observer_r01_position_1",
+        "fixture_admit_observer_r02_position_1",
+        "fixture_admit_observer_r03_position_1",
+        "fixture_admit_observer_r04_position_1",
+        "cfd2_r01_apply_position_1",
+        "cfd2_r01_append_anchor_2",
+        "cfd2_r01_replay_position_1",
+        "cfd2_r01_admit_position_2",
+        "cfd2_r01_apply_position_2",
+        "cfd2_r02_rollback_position_1",
+        "cfd2_r02_apply_position_1_after_rollback",
+        "cfd2_r02_append_anchor_2",
+        "cfd2_r02_replay_position_1",
+        "cfd2_r03_replay_position_1",
+        "cfd2_r03_admit_position_2",
+        "cfd2_r03_reject_position_2_before_anchor",
+        "cfd2_r03_append_anchor_2",
+        "cfd2_r03_apply_position_2",
+        "cfd2_r04_apply_position_1_after_recovery",
+        "cfd2_r04_append_anchor_2",
+        "cfd2_r04_replay_position_1"
+      ]
+    },
+    "result_lines": {
+      "type": "array",
+      "maxItems": 2,
+      "items": { "enum": ["PRIMARY", "RECEIPT_APPLIED", "RECEIPT_REPLAYED", "1", "2"] }
+    },
+    "sqlstate": {
+      "type": ["string", "null"],
+      "enum": [null, "P0001", "CF303"]
+    },
+    "terminal_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinate", "code", "returncode_class", "sqlstate", "result_lines", "passed"],
+      "properties": {
+        "coordinate": { "enum": ["cfd2_r01_apply_position_1", "cfd2_r01_append_anchor_2"] },
+        "code": { "const": "matched_expected_terminal" },
+        "returncode_class": { "const": "zero" },
+        "sqlstate": { "const": null },
+        "result_lines": { "$ref": "#/$defs/result_lines" },
+        "passed": { "const": true }
+      }
+    },
+    "terminal_failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinate", "code", "returncode_class", "sqlstate", "result_lines"],
+      "properties": {
+        "coordinate": { "$ref": "#/$defs/coordinate" },
+        "code": { "enum": ["unexpected_terminal_success", "unexpected_terminal_sqlstate"] },
+        "returncode_class": { "enum": ["zero", "nonzero"] },
+        "sqlstate": { "$ref": "#/$defs/sqlstate" },
+        "result_lines": { "$ref": "#/$defs/result_lines" }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code"],
+      "properties": {
+        "stage": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,62}$" },
+        "code": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,62}$" }
+      }
+    },
+    "operation_counters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sigkill", "restart", "participant_retry", "provider_calls", "product_reads", "product_commands", "external_network_operations"],
+      "properties": {
+        "sigkill": { "const": 0 },
+        "restart": { "const": 0 },
+        "participant_retry": { "const": 0 },
+        "provider_calls": { "const": 0 },
+        "product_reads": { "const": 0 },
+        "product_commands": { "const": 0 },
+        "external_network_operations": { "const": 0 }
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "removed", "absence_verified"],
+      "properties": {
+        "status": { "enum": ["not_needed", "cleanup_verified", "cleanup_failed"] },
+        "removed": { "type": "boolean" },
+        "absence_verified": { "type": "boolean" }
+      }
+    }
+  }
+}

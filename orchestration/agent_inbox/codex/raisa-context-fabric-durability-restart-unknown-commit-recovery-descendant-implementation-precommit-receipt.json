@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_deterministically_passing_cf_d2_recovery_coordinate_evidence_and_no_crash_diagnostic_before_any_docker_contact_or_exact_head_implementation_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted recovery plan permits Phase A closed terminal coordinates and Phase B one no-crash R01 apply/anchor diagnostic before any crash attempt. The implementation binds all 27 terminal coordinates, minimizes failure evidence, digest-binds the frozen recovery contract, stops after the first failed measured coordinate, proves zero restart/provider/product/network counters and writes one immutable closed evidence document. The complete 332-test focused packet, Ruff lint/format, compilation and diff checks pass. The canonical fast profile passes Ruff, maintained-source compilation, 190 tests, Diary JavaScript syntax and Git whitespace. Its first run exposed the baseline number-coupled roadmap test; the semantic-order-only correction is AER-0281 at register revision 249 and all gates now pass.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled provider-free recovery implementation, deterministic verification, later serial diagnostic/runtime, acceptance and explicit-path task-branch publication. No native subagent or DeepSeek worker is assigned. Gemini 3.6 Flash/high through a fresh Antigravity project may perform only the next exact-HEAD read-only veto and receives no implementation, self-acceptance, Docker/database runtime, data, integration, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "At the measured pre-receipt snapshot, task HEAD was 799812170f2ada596e1b013c0f26fedd2264f34b on codex/ariadne-bernie-davida-parallel-seam and origin task remained 2edfbf0c5990335947b40a370b676aad25aba023. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 was an ancestor. Local/origin master and local/origin handoff/current were exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index was empty. Exactly 498 files were untracked: the preserved original 494, including five docs/branding paths, plus four intended implementation/AER files; intended tracked modifications were limited to six explicit existing paths. This state/receipt pair adds exactly two further intended untracked files.",
+    "live_handover_current_baton": "AGENTS.md was read completely and the fresh CF-D2 recovery descendant remains the active dependency-satisfied tranche. CF-D1 at Continuity 243 / Compass 225 is still the last accepted durability result; immutable CF-D2 attempts 001 and 002 remain stopped evidence, and no new restart or unknown-commit claim exists.",
+    "protected_evidence_boundaries": "No Docker command, database process, provider call, product/source read, external network, protected evidence, patient/clinical/product data, credential/IAM surface, executable product tool or command, deployment, production, release, Pages or protected-ref operation occurred. The diagnostic retains no raw SQL, stdout, stderr, query text, PID, server log, WAL, credential or authored-synthetic coordinate value. docs/branding and all original unrelated untracked files remain excluded and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

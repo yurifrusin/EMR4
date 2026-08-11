@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 248
+    assert register["register_revision"] == 249
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 281)
+        f"AER-{index:04d}" for index in range(1, 282)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 280
+    assert report["incident_count"] == 281
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -2675,6 +2675,18 @@ def test_aer_0280_rejects_the_repeated_missing_formatter_gate() -> None:
     assert "fresh exact-head" in incident["correction"]["action"]
 
 
+def test_aer_0281_replaces_mutable_roadmap_numbers_with_semantic_order() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0281"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert incident["status"] == "corrected"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "semantic heading labels" in incident["correction"]["action"]
+
+
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
     incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0184"]
 
@@ -2688,13 +2700,13 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 248
-    assert report["incident_count"] == 280
+    assert report["register_revision"] == 249
+    assert report["incident_count"] == 281
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 183,
         "harness": 35,
-        "repository": 53,
+        "repository": 54,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
@@ -2704,11 +2716,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "output_contract_violation": 79,
         "read_only_violation": 3,
         "reasoning_claim_error": 34,
-        "repository_defect": 53,
+        "repository_defect": 54,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 92,
+        "accepted_candidate_changed": 93,
         "canonical_unchanged": 161,
         "untrusted_partial_worktree": 27,
     }

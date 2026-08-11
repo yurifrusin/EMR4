@@ -23,12 +23,12 @@ def test_containment_gate_is_placed_after_database_only_durability() -> None:
 
     assert "after the current provider-free Context Fabric durability" in plan
     assert "does not block the current disposable PostgreSQL behavior/" in plan
-    assert fabric.index(
-        "16. **Disposable behavior/transaction rehearsal**"
-    ) < fabric.index("17. **Agent Execution Surface and Containment Gate**")
-    assert fabric.index(
-        "17. **Agent Execution Surface and Containment Gate**"
-    ) < fabric.index("18. **Real product read descendants**")
+    assert fabric.index("**Disposable behavior/transaction rehearsal**") < fabric.index(
+        "**Agent Execution Surface and Containment Gate**"
+    )
+    assert fabric.index("**Agent Execution Surface and Containment Gate**") < (
+        fabric.index("**Real product read descendants**")
+    )
 
 
 def test_selected_boundary_is_external_and_generation_scoped() -> None:
@@ -90,10 +90,7 @@ def test_master_plan_records_gate_without_opening_runtime() -> None:
 
     assert "### 2.12 Agent Execution Surface and Containment Gate" in master
     assert "does not delay the networkless database-only rehearsal" in master
-    assert (
-        "grants no continuing provider call, real-person or operational"
-        in master
-    )
+    assert "grants no continuing provider call, real-person or operational" in master
     assert (
         "product context, product/database read, credential flow, provider tool,"
         in master
