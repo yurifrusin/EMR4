@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_frozen_cf_d2_provider_free_restart_and_unknown_commit_planning_packet_by_explicit_paths_before_fresh_independent_review",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after CF-D1 closeout. The live baton accepts CF-D1 at Continuity 243 / Compass 225 and directs CF-D2 provider-free disposable restart and unknown-commit recovery as the next tranche under standing authority.",
+    "current_authority_allocation": "GPT Sol owns the material plan, tightly coupled implementation/runtime, recovery, acceptance and task-branch publication. No DeepSeek or native subagent lease is open. Gemini 3.6 Flash/high remains eligible only for a fresh exact-HEAD read-only veto after this deterministic planning packet is committed.",
+    "active_plan_and_acceptance": "The CF-D2 plan now freezes four cases: terminal commit, terminal P0001 rollback, lost terminal result resolved as committed and lost terminal result resolved as rolled back. Complete durable facts, not disconnect or schedule, control recovery. The closed contract/schema, design, threat delta and 38 hostile mutations plus whole-packet validation pass; Docker/runtime remains closed until fresh independent planning acceptance.",
+    "protected_evidence_boundaries": "Only authored-synthetic fixed fixtures and a future exact owned networkless PostgreSQL 16 container are in scope. No protected evidence, historical Diary/PHI, docs/branding, unrelated untracked file, operational source/database, real product/patient/clinical data, provider, network, application command, deployment, production, release, Pages or protected-ref movement is permitted.",
+    "git_refs_and_worktree": "Planning baseline and current task HEAD are e690eefaf91115343b8fcbbecc7c3f5fe0b25193 on codex/ariadne-bernie-davida-parallel-seam; required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The only tracked-tree additions are the explicit CF-D2 planning packet and receipts; all original 494 untracked files including five docs/branding paths remain preserved and will not be staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_planning_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol froze and deterministically validated the CF-D2 planning packet."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh planning veto begins only after the exact commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

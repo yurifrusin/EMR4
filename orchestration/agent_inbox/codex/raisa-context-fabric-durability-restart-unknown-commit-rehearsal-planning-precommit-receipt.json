@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_frozen_cf_d2_provider_free_restart_and_unknown_commit_planning_packet_by_explicit_paths_before_fresh_independent_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The CF-D2 plan now freezes four cases: terminal commit, terminal P0001 rollback, lost terminal result resolved as committed and lost terminal result resolved as rolled back. Complete durable facts, not disconnect or schedule, control recovery. The closed contract/schema, design, threat delta and 38 hostile mutations plus whole-packet validation pass; Docker/runtime remains closed until fresh independent planning acceptance.",
+    "current_authority_allocation": "GPT Sol owns the material plan, tightly coupled implementation/runtime, recovery, acceptance and task-branch publication. No DeepSeek or native subagent lease is open. Gemini 3.6 Flash/high remains eligible only for a fresh exact-HEAD read-only veto after this deterministic planning packet is committed.",
+    "git_refs_and_worktree": "Planning baseline and current task HEAD are e690eefaf91115343b8fcbbecc7c3f5fe0b25193 on codex/ariadne-bernie-davida-parallel-seam; required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The only tracked-tree additions are the explicit CF-D2 planning packet and receipts; all original 494 untracked files including five docs/branding paths remain preserved and will not be staged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after CF-D1 closeout. The live baton accepts CF-D1 at Continuity 243 / Compass 225 and directs CF-D2 provider-free disposable restart and unknown-commit recovery as the next tranche under standing authority.",
+    "protected_evidence_boundaries": "Only authored-synthetic fixed fixtures and a future exact owned networkless PostgreSQL 16 container are in scope. No protected evidence, historical Diary/PHI, docs/branding, unrelated untracked file, operational source/database, real product/patient/clinical data, provider, network, application command, deployment, production, release, Pages or protected-ref movement is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

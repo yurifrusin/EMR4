@@ -1,0 +1,317 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-rehearsal.v1",
+  "status": "frozen_provider_free_planning_runtime_closed",
+  "planning_baseline_head": "e690eefaf91115343b8fcbbecc7c3f5fe0b25193",
+  "target_result": "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_pass",
+  "evidence_label": "provider_free_disposable_postgresql_authored_synthetic_restart_unknown_commit_recovery",
+  "accepted_concurrency_runtime_source_head": "fed81847b4155d49cf997905e79cf31808ceb017",
+  "accepted_concurrency_functional_source_head": "43f168f3d5d1f71ec0f9071c40fadf14b6107621",
+  "parent_bindings": [
+    {
+      "id": "accepted_concurrency_pass_evidence",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-004.json",
+      "sha256": "sha256:7dd7372a8f45b6a049aca4f835057a33ab37952be98088bbbf34ed94875dd0e4"
+    },
+    {
+      "id": "current_concurrency_contract",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/concurrency-rehearsal-contract.json",
+      "sha256": "sha256:96b3fb92d302206eb757f51203044c2aeeb76248a6844422404d13c79b785391"
+    },
+    {
+      "id": "current_concurrency_evidence_schema",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
+      "sha256": "sha256:5ef5910afc58df8ca68e842301f340b614cd4be6db15c634428d0c4298f6fd39"
+    },
+    {
+      "id": "current_concurrency_harness",
+      "path": "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+      "sha256": "sha256:3b710b941c5dbadd2a0e2460fc8c5d5cfb3804ce54695c90f3a4bb545a86b185"
+    },
+    {
+      "id": "accepted_concurrency_closeout",
+      "path": "docs/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-closeout.md",
+      "sha256": "sha256:bd7cf079785c9c02c6800cc049aa7b6603f09a7fd61ad5e98d449c4306ed44e4"
+    },
+    {
+      "id": "accepted_concurrency_sol_acceptance",
+      "path": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-rehearsal-sol-acceptance.md",
+      "sha256": "sha256:44855d8d040df83d9c985e86c2ff919de4495550b3871c6a588be00c83d3e254"
+    },
+    {
+      "id": "inert_sql",
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+      "sha256": "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7"
+    },
+    {
+      "id": "render_manifest",
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
+      "sha256": "sha256:2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271"
+    }
+  ],
+  "runtime_profile": {
+    "postgresql_major": 16,
+    "image": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "network_mode": "none",
+    "published_ports": 0,
+    "bind_mounts": 0,
+    "named_volumes": 0,
+    "anonymous_volumes": 0,
+    "declared_volume_shield": "tmpfs_at_image_declared_default_pgdata_only",
+    "durable_cluster_storage": "owned_container_writable_layer_outside_declared_volume",
+    "database_count": 1,
+    "container_count": 1,
+    "restart_policy": "none",
+    "max_total_connections": 4,
+    "connection_pool": false,
+    "caller_selected_inputs": false,
+    "cleanup": "exact_captured_container_id_after_ownership_reverification"
+  },
+  "durability_profile": {
+    "fsync": "on",
+    "synchronous_commit": "on",
+    "full_page_writes": "on",
+    "data_checksums": "on",
+    "crash_method": "docker_kill_sigkill_exact_captured_container_then_start_same_id",
+    "crash_count": 4,
+    "graceful_stop_accepted_as_crash_evidence": false,
+    "restart_reuses_exact_cluster": true,
+    "wal_reset_or_recovery_target": false,
+    "server_log_or_wal_payload_inspection": false,
+    "startup_ceiling_milliseconds": 15000,
+    "statement_timeout_milliseconds": 8000,
+    "idle_in_transaction_timeout_milliseconds": 8000,
+    "participant_retry_count": 0
+  },
+  "client_observation_profile": {
+    "operation_boundary": "one_shot_client_process_exit_and_allowlisted_terminal_result",
+    "terminal_commit_observation": "COMMIT_ACKNOWLEDGED",
+    "terminal_rollback_observation": "ROLLBACK_SQLSTATE_P0001_ACKNOWLEDGED",
+    "indeterminate_observation": "CONNECTION_LOST_WITHOUT_ALLOWLISTED_TERMINAL_RESULT",
+    "committed_cutpoint": "server_post_commit_pg_sleep_before_one_shot_client_process_exit",
+    "rolled_back_cutpoint": "server_pre_commit_pg_sleep_after_transition_staging",
+    "required_cutpoint_wait_event_type": "Timeout",
+    "required_cutpoint_wait_event": "PgSleep",
+    "recovery_decision_inputs": [
+      "post_restart_exact_receipt_set",
+      "post_restart_exact_checkpoint",
+      "post_restart_exact_lifecycle",
+      "post_restart_exact_minimal_audit",
+      "post_restart_exact_watermarks_frames_and_obligation",
+      "post_restart_exact_recovery_anchor_set"
+    ],
+    "forbidden_recovery_decision_inputs": [
+      "client_guess",
+      "connection_loss_as_success",
+      "connection_loss_as_rollback",
+      "cutpoint_schedule_as_outcome",
+      "stdout_fragment",
+      "stderr_fragment",
+      "server_log",
+      "wal_payload",
+      "blind_retry"
+    ],
+    "accepted_recovery_classes": [
+      "COMMITTED_RECOVERED",
+      "ROLLED_BACK_RECOVERED"
+    ],
+    "unresolved_or_partial_is_pass": false
+  },
+  "fixture_authority": {
+    "data_class": "repository_authored_opaque_synthetic_only",
+    "practice_scope": "one_exact_alpha_practice_with_unbound_and_beta_rows_never_visible_or_mutable",
+    "identity_method": "fresh_connection_set_session_authorization_once_before_begin",
+    "principals": [
+      "context_lifecycle",
+      "context_producer",
+      "context_observer",
+      "context_coordinator"
+    ],
+    "fabric_direct_grant_changes": [],
+    "forbidden": [
+      "superuser_as_recovery_classifier_or_participant",
+      "set_role_after_begin",
+      "role_membership",
+      "role_inheritance",
+      "bypassrls",
+      "fabric_direct_dml",
+      "trigger_function_execute",
+      "operational_credential",
+      "product_or_patient_value"
+    ]
+  },
+  "scenario_order": [
+    "CFD2-R01",
+    "CFD2-R02",
+    "CFD2-R03",
+    "CFD2-R04"
+  ],
+  "scenarios": [
+    {
+      "id": "CFD2-R01",
+      "category": "CONFIRMED_COMMIT_RESTART",
+      "client_observation": "COMMIT_ACKNOWLEDGED",
+      "pre_crash_action": "apply_position_one_commit_then_append_revision_two_anchor_commit",
+      "crash_cutpoint": "after_confirmed_anchor_commit",
+      "post_restart_classification": "COMMITTED_CONFIRMED",
+      "post_restart_action": "exact_position_one_replay_then_position_two_apply",
+      "post_restart_outcomes": [
+        "RECEIPT_REPLAYED",
+        "RECEIPT_APPLIED"
+      ],
+      "readback": [
+        "pre_crash_snapshot_survives_restart_exactly",
+        "anchored_position_one_receipt_and_effect_remain_exact",
+        "position_one_replay_is_inert",
+        "position_two_contiguous_transition_applies_once"
+      ],
+      "forbidden_effects": [
+        "restart_recreates_or_drops_committed_member",
+        "duplicate_position_one_effect",
+        "skip_or_guess_position_two"
+      ]
+    },
+    {
+      "id": "CFD2-R02",
+      "category": "CONFIRMED_ROLLBACK_RESTART",
+      "client_observation": "ROLLBACK_SQLSTATE_P0001_ACKNOWLEDGED",
+      "pre_crash_action": "apply_position_one_then_raise_fixed_p0001_before_commit",
+      "crash_cutpoint": "after_confirmed_rollback",
+      "post_restart_classification": "ROLLED_BACK_CONFIRMED",
+      "post_restart_action": "verify_zero_residue_then_apply_once_append_anchor_and_replay",
+      "post_restart_outcomes": [
+        "RECEIPT_APPLIED",
+        "RECEIPT_REPLAYED"
+      ],
+      "readback": [
+        "pre_transition_snapshot_survives_restart_exactly",
+        "zero_rolled_back_transition_residue",
+        "baseline_anchor_remains_exact",
+        "controlled_post_restart_apply_occurs_once"
+      ],
+      "forbidden_effects": [
+        "rollback_promoted_to_success",
+        "partial_receipt_checkpoint_or_audit",
+        "blind_retry_before_durable_absence_proof"
+      ]
+    },
+    {
+      "id": "CFD2-R03",
+      "category": "UNKNOWN_COMMIT_COMMITTED_RECOVERY",
+      "client_observation": "CONNECTION_LOST_WITHOUT_ALLOWLISTED_TERMINAL_RESULT",
+      "pre_crash_action": "apply_position_one_commit_then_enter_post_commit_hold_without_one_shot_terminal_result",
+      "crash_cutpoint": "observed_post_commit_pg_sleep_then_sigkill",
+      "post_restart_classification": "COMMITTED_RECOVERED",
+      "post_restart_action": "classify_from_complete_durable_effect_replay_inert_prove_next_transition_fenced_append_anchor_then_continue",
+      "post_restart_outcomes": [
+        "RECEIPT_REPLAYED",
+        "CF303_BEFORE_ANCHOR",
+        "ANCHOR_APPENDED",
+        "RECEIPT_APPLIED_AFTER_ANCHOR"
+      ],
+      "readback": [
+        "complete_position_one_effect_or_fail",
+        "no_revision_two_anchor_before_recovery",
+        "exact_replay_is_inert",
+        "position_two_blocked_until_independent_anchor",
+        "independently_reverified_anchor_enables_contiguous_position_two"
+      ],
+      "forbidden_effects": [
+        "connection_loss_treated_as_success_without_readback",
+        "partial_effect_accepted",
+        "anchor_inferred_from_client_or_candidate",
+        "next_transition_before_anchor"
+      ]
+    },
+    {
+      "id": "CFD2-R04",
+      "category": "UNKNOWN_COMMIT_ROLLED_BACK_RECOVERY",
+      "client_observation": "CONNECTION_LOST_WITHOUT_ALLOWLISTED_TERMINAL_RESULT",
+      "pre_crash_action": "apply_position_one_then_enter_pre_commit_hold_without_one_shot_terminal_result",
+      "crash_cutpoint": "observed_pre_commit_pg_sleep_then_sigkill",
+      "post_restart_classification": "ROLLED_BACK_RECOVERED",
+      "post_restart_action": "classify_from_exact_pre_transition_state_then_controlled_apply_append_anchor_and_replay",
+      "post_restart_outcomes": [
+        "NO_RECEIPT_OR_EFFECT",
+        "RECEIPT_APPLIED",
+        "ANCHOR_APPENDED",
+        "RECEIPT_REPLAYED"
+      ],
+      "readback": [
+        "exact_pre_transition_state_or_fail",
+        "zero_partial_transition_residue",
+        "baseline_anchor_remains_exact",
+        "controlled_apply_and_replay_are_single_effect"
+      ],
+      "forbidden_effects": [
+        "connection_loss_treated_as_rollback_without_readback",
+        "partial_effect_accepted",
+        "blind_retry_before_durable_absence_proof",
+        "duplicate_recovery_effect"
+      ]
+    }
+  ],
+  "category_coverage": {
+    "CONFIRMED_COMMIT_RESTART": 1,
+    "CONFIRMED_ROLLBACK_RESTART": 1,
+    "UNKNOWN_COMMIT_COMMITTED_RECOVERY": 1,
+    "UNKNOWN_COMMIT_ROLLED_BACK_RECOVERY": 1,
+    "total": 4
+  },
+  "evidence_contract": {
+    "record_closed_client_observation": true,
+    "record_closed_recovery_classification": true,
+    "record_exact_sqlstate": true,
+    "record_stable_reason_only": true,
+    "record_closed_wait_class": true,
+    "record_before_crash_after_restart_relation_counts": true,
+    "record_allowlisted_row_digests": true,
+    "record_session_user_and_current_user": true,
+    "record_exact_container_lifecycle_and_cleanup_absence": true,
+    "forbidden": [
+      "raw_sql_or_query_text",
+      "raw_server_log_or_error_text",
+      "backend_pid_or_lock_key",
+      "database_url_or_credential",
+      "patient_product_or_real_person_value",
+      "raw_prompt_or_model_output",
+      "stdout_or_stderr_fragment_from_indeterminate_client",
+      "global_docker_enumeration"
+    ]
+  },
+  "claim_boundary": {
+    "proves": [
+      "four_exact_postgresql_process_crash_and_same_cluster_restart_outcomes",
+      "confirmed_commit_and_confirmed_rollback_survive_restart_exactly",
+      "two_no_terminal_result_cases_resolved_only_from_complete_post_restart_durable_state",
+      "pending_anchor_fences_next_transition_until_independent_reverification",
+      "exact_replay_and_controlled_rollback_recovery_are_single_effect",
+      "least_privilege_session_identity_and_exact_cleanup"
+    ],
+    "does_not_prove": [
+      "literal_crash_during_wal_commit_or_protocol_ack_boundary",
+      "hardware_storage_power_loss_or_filesystem_durability",
+      "application_driver_retry_or_connection_pool_behavior",
+      "arbitrary_crash_point_or repeated_restart_safety",
+      "automatic_retry_policy_or operational_availability",
+      "key_rotation_retention_purge_load_or_performance",
+      "alembic_or_application_runtime_wiring",
+      "operational_source_or_long_lived_persistence",
+      "patient_clinical_product_or_provider_safety"
+    ]
+  },
+  "closed_surfaces": [
+    "app",
+    "alembic",
+    "api_spine_change",
+    "diary_ui",
+    "outbox_feed_watcher_listener",
+    "operational_database_or_persistence",
+    "patient_product_protected_data",
+    "provider_model_external_retrieval",
+    "tool_command_or_product_write_authority",
+    "deployment_production_release_pages",
+    "protected_refs",
+    "docs_branding"
+  ]
+}

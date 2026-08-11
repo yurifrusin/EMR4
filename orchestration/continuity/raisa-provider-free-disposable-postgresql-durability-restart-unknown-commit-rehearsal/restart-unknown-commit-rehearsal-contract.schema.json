@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-rehearsal-contract.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline_head",
+    "target_result",
+    "evidence_label",
+    "accepted_concurrency_runtime_source_head",
+    "accepted_concurrency_functional_source_head",
+    "parent_bindings",
+    "runtime_profile",
+    "durability_profile",
+    "client_observation_profile",
+    "fixture_authority",
+    "scenario_order",
+    "scenarios",
+    "category_coverage",
+    "evidence_contract",
+    "claim_boundary",
+    "closed_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-rehearsal.v1"},
+    "status": {"const": "frozen_provider_free_planning_runtime_closed"},
+    "planning_baseline_head": {"pattern": "^[0-9a-f]{40}$"},
+    "target_result": {"const": "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_pass"},
+    "evidence_label": {"const": "provider_free_disposable_postgresql_authored_synthetic_restart_unknown_commit_recovery"},
+    "accepted_concurrency_runtime_source_head": {"pattern": "^[0-9a-f]{40}$"},
+    "accepted_concurrency_functional_source_head": {"pattern": "^[0-9a-f]{40}$"},
+    "parent_bindings": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/binding"}
+    },
+    "runtime_profile": {"$ref": "#/$defs/runtimeProfile"},
+    "durability_profile": {"$ref": "#/$defs/durabilityProfile"},
+    "client_observation_profile": {"$ref": "#/$defs/clientObservationProfile"},
+    "fixture_authority": {"$ref": "#/$defs/fixtureAuthority"},
+    "scenario_order": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "CFD2-R01"},
+        {"const": "CFD2-R02"},
+        {"const": "CFD2-R03"},
+        {"const": "CFD2-R04"}
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/scenario"}
+    },
+    "category_coverage": {"$ref": "#/$defs/categoryCoverage"},
+    "evidence_contract": {"$ref": "#/$defs/evidenceContract"},
+    "claim_boundary": {"$ref": "#/$defs/claimBoundary"},
+    "closed_surfaces": {
+      "type": "array",
+      "minItems": 12,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "sha256"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "category",
+        "client_observation",
+        "pre_crash_action",
+        "crash_cutpoint",
+        "post_restart_classification",
+        "post_restart_action",
+        "post_restart_outcomes",
+        "readback",
+        "forbidden_effects"
+      ],
+      "properties": {
+        "id": {"enum": ["CFD2-R01", "CFD2-R02", "CFD2-R03", "CFD2-R04"]},
+        "category": {"enum": ["CONFIRMED_COMMIT_RESTART", "CONFIRMED_ROLLBACK_RESTART", "UNKNOWN_COMMIT_COMMITTED_RECOVERY", "UNKNOWN_COMMIT_ROLLED_BACK_RECOVERY"]},
+        "client_observation": {"enum": ["COMMIT_ACKNOWLEDGED", "ROLLBACK_SQLSTATE_P0001_ACKNOWLEDGED", "CONNECTION_LOST_WITHOUT_ALLOWLISTED_TERMINAL_RESULT"]},
+        "pre_crash_action": {"type": "string", "minLength": 1},
+        "crash_cutpoint": {"type": "string", "minLength": 1},
+        "post_restart_classification": {"enum": ["COMMITTED_CONFIRMED", "ROLLED_BACK_CONFIRMED", "COMMITTED_RECOVERED", "ROLLED_BACK_RECOVERED"]},
+        "post_restart_action": {"type": "string", "minLength": 1},
+        "post_restart_outcomes": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "readback": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "forbidden_effects": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "runtimeProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["postgresql_major", "image", "pull_policy", "network_mode", "published_ports", "bind_mounts", "named_volumes", "anonymous_volumes", "declared_volume_shield", "durable_cluster_storage", "database_count", "container_count", "restart_policy", "max_total_connections", "connection_pool", "caller_selected_inputs", "cleanup"],
+      "properties": {
+        "postgresql_major": {"const": 16},
+        "image": {"const": "postgres:16-bookworm"},
+        "pull_policy": {"const": "never"},
+        "network_mode": {"const": "none"},
+        "published_ports": {"const": 0},
+        "bind_mounts": {"const": 0},
+        "named_volumes": {"const": 0},
+        "anonymous_volumes": {"const": 0},
+        "declared_volume_shield": {"const": "tmpfs_at_image_declared_default_pgdata_only"},
+        "durable_cluster_storage": {"const": "owned_container_writable_layer_outside_declared_volume"},
+        "database_count": {"const": 1},
+        "container_count": {"const": 1},
+        "restart_policy": {"const": "none"},
+        "max_total_connections": {"const": 4},
+        "connection_pool": {"const": false},
+        "caller_selected_inputs": {"const": false},
+        "cleanup": {"const": "exact_captured_container_id_after_ownership_reverification"}
+      }
+    },
+    "durabilityProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fsync", "synchronous_commit", "full_page_writes", "data_checksums", "crash_method", "crash_count", "graceful_stop_accepted_as_crash_evidence", "restart_reuses_exact_cluster", "wal_reset_or_recovery_target", "server_log_or_wal_payload_inspection", "startup_ceiling_milliseconds", "statement_timeout_milliseconds", "idle_in_transaction_timeout_milliseconds", "participant_retry_count"],
+      "properties": {
+        "fsync": {"const": "on"},
+        "synchronous_commit": {"const": "on"},
+        "full_page_writes": {"const": "on"},
+        "data_checksums": {"const": "on"},
+        "crash_method": {"const": "docker_kill_sigkill_exact_captured_container_then_start_same_id"},
+        "crash_count": {"const": 4},
+        "graceful_stop_accepted_as_crash_evidence": {"const": false},
+        "restart_reuses_exact_cluster": {"const": true},
+        "wal_reset_or_recovery_target": {"const": false},
+        "server_log_or_wal_payload_inspection": {"const": false},
+        "startup_ceiling_milliseconds": {"const": 15000},
+        "statement_timeout_milliseconds": {"const": 8000},
+        "idle_in_transaction_timeout_milliseconds": {"const": 8000},
+        "participant_retry_count": {"const": 0}
+      }
+    },
+    "clientObservationProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation_boundary", "terminal_commit_observation", "terminal_rollback_observation", "indeterminate_observation", "committed_cutpoint", "rolled_back_cutpoint", "required_cutpoint_wait_event_type", "required_cutpoint_wait_event", "recovery_decision_inputs", "forbidden_recovery_decision_inputs", "accepted_recovery_classes", "unresolved_or_partial_is_pass"],
+      "properties": {
+        "operation_boundary": {"const": "one_shot_client_process_exit_and_allowlisted_terminal_result"},
+        "terminal_commit_observation": {"const": "COMMIT_ACKNOWLEDGED"},
+        "terminal_rollback_observation": {"const": "ROLLBACK_SQLSTATE_P0001_ACKNOWLEDGED"},
+        "indeterminate_observation": {"const": "CONNECTION_LOST_WITHOUT_ALLOWLISTED_TERMINAL_RESULT"},
+        "committed_cutpoint": {"const": "server_post_commit_pg_sleep_before_one_shot_client_process_exit"},
+        "rolled_back_cutpoint": {"const": "server_pre_commit_pg_sleep_after_transition_staging"},
+        "required_cutpoint_wait_event_type": {"const": "Timeout"},
+        "required_cutpoint_wait_event": {"const": "PgSleep"},
+        "recovery_decision_inputs": {"type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "forbidden_recovery_decision_inputs": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "accepted_recovery_classes": {"type": "array", "prefixItems": [{"const": "COMMITTED_RECOVERED"}, {"const": "ROLLED_BACK_RECOVERED"}], "items": false, "minItems": 2, "maxItems": 2},
+        "unresolved_or_partial_is_pass": {"const": false}
+      }
+    },
+    "fixtureAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["data_class", "practice_scope", "identity_method", "principals", "fabric_direct_grant_changes", "forbidden"],
+      "properties": {
+        "data_class": {"const": "repository_authored_opaque_synthetic_only"},
+        "practice_scope": {"const": "one_exact_alpha_practice_with_unbound_and_beta_rows_never_visible_or_mutable"},
+        "identity_method": {"const": "fresh_connection_set_session_authorization_once_before_begin"},
+        "principals": {"type": "array", "prefixItems": [{"const": "context_lifecycle"}, {"const": "context_producer"}, {"const": "context_observer"}, {"const": "context_coordinator"}], "items": false, "minItems": 4, "maxItems": 4},
+        "fabric_direct_grant_changes": {"type": "array", "maxItems": 0},
+        "forbidden": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "categoryCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["CONFIRMED_COMMIT_RESTART", "CONFIRMED_ROLLBACK_RESTART", "UNKNOWN_COMMIT_COMMITTED_RECOVERY", "UNKNOWN_COMMIT_ROLLED_BACK_RECOVERY", "total"],
+      "properties": {
+        "CONFIRMED_COMMIT_RESTART": {"const": 1},
+        "CONFIRMED_ROLLBACK_RESTART": {"const": 1},
+        "UNKNOWN_COMMIT_COMMITTED_RECOVERY": {"const": 1},
+        "UNKNOWN_COMMIT_ROLLED_BACK_RECOVERY": {"const": 1},
+        "total": {"const": 4}
+      }
+    },
+    "evidenceContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_closed_client_observation", "record_closed_recovery_classification", "record_exact_sqlstate", "record_stable_reason_only", "record_closed_wait_class", "record_before_crash_after_restart_relation_counts", "record_allowlisted_row_digests", "record_session_user_and_current_user", "record_exact_container_lifecycle_and_cleanup_absence", "forbidden"],
+      "properties": {
+        "record_closed_client_observation": {"const": true},
+        "record_closed_recovery_classification": {"const": true},
+        "record_exact_sqlstate": {"const": true},
+        "record_stable_reason_only": {"const": true},
+        "record_closed_wait_class": {"const": true},
+        "record_before_crash_after_restart_relation_counts": {"const": true},
+        "record_allowlisted_row_digests": {"const": true},
+        "record_session_user_and_current_user": {"const": true},
+        "record_exact_container_lifecycle_and_cleanup_absence": {"const": true},
+        "forbidden": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "claimBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proves", "does_not_prove"],
+      "properties": {
+        "proves": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "does_not_prove": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}

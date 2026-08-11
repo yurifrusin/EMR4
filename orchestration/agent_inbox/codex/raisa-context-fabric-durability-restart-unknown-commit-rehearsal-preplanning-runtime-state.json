@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_the_narrowest_provider_free_disposable_postgresql_context_fabric_restart_and_unknown_commit_recovery_rehearsal_without_operational_source_or_runtime_authority",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the CF-D1 tranche boundary. Its live baton accepts CF-D1 at Continuity 243 / Compass 225 and names CF-D2 provider-free disposable restart and unknown-commit recovery rehearsal as the next dependency-satisfied planned tranche under Yuri's standing uninterrupted-development authority. The new plan must distinguish definitely committed, definitely rolled back and genuinely indeterminate client observations without guessing success.",
+    "current_authority_allocation": "GPT Sol owns the material fail-closed plan, tightly coupled disposable PostgreSQL implementation, serial runtime orchestration, bounded recovery, acceptance and explicit-path task-branch publication. DeepSeek is not economical for the shared stateful database lifecycle sequence. Fresh Gemini 3.6 Flash/high Antigravity projects may receive only later exact-HEAD read-only veto packets after deterministic gates pass and receive no implementation, self-acceptance, integration, protected-ref, data, runtime, deployment or release authority.",
+    "active_plan_and_acceptance": "The accepted CF-D1 closeout and Sol acceptance bind six fixed two-session PostgreSQL 16 races at runtime source fed81847b4155d49cf997905e79cf31808ceb017 and exact independently reviewed functional source 43f168f3d5d1f71ec0f9071c40fadf14b6107621, immutable evidence SHA-256 7dd7372a8f45b6a049aca4f835057a33ab37952be98088bbbf34ed94875dd0e4, exact cleanup and zero external operations. They explicitly leave crash/restart and unknown-commit recovery unproved. CF-D2 must freeze its own narrow plan before runtime and may inherit only the exact authored-synthetic accepted schema, least-privilege principals, atomic effects, durable receipts, anchors, checkpoints and replay behavior needed to classify bounded recovery outcomes.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, docs/branding and every unrelated untracked file remain excluded. The tranche may use only fixed repository-authored synthetic fixtures and a newly owned networkless disposable local PostgreSQL 16 lifecycle. It grants no operational database or source, watcher/listener, application/API/Diary wiring, real-person/patient/clinical/product-derived data, provider call, external retrieval, credential/IAM change, reusable runtime, executable tool or product command/write, deployment, production, release, Pages or protected-ref movement. An ambiguous client observation may be resolved only from an independently established durable recovery fact and is never guessed as success.",
+    "git_refs_and_worktree": "Immediately before this receipt, task HEAD and origin task were exactly e690eefaf91115343b8fcbbecc7c3f5fe0b25193 on codex/ariadne-bernie-davida-parallel-seam. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current were all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index were clean; all original 494 untracked files, including five docs/branding paths, were present and unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_durability_restart_unknown_commit_rehearsal_preplanning_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the five-source rehydration and is freezing the exact provider-free restart and unknown-commit recovery boundary."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for this tightly coupled planning and disposable-database lifecycle tranche."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No independent verifier dispatch occurs before the exact plan and deterministic gate pass."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is opened for the shared stateful PostgreSQL restart and recovery sequence."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
