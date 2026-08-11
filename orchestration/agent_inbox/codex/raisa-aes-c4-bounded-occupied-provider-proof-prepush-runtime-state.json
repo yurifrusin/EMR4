@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "publish_the_accepted_aes_c4_closeout_commits_to_only_the_existing_task_branch_then_verify_remote_and_notify_the_genuine_aes_c5_user_attention_pause",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the accepted AES-C4 result at Continuity 241 / Compass 223 and keeps AES-C5 separately closed pending one exact real product source, one exact purpose and its privacy boundary. No further provider call or product read is authorised.",
+    "current_authority_allocation": "GPT Sol may publish its accepted task-branch closeout after exact deterministic checks and ref verification. This grants no protected integration, master or handoff movement, Pages rebuild, provider retry, product read, command, credential/IAM/cloud mutation, deployment, production or release authority.",
+    "active_plan_and_acceptance": "Commit a75bf1758dc7cef5d2d2a78fe68e1eda4e5c9821 contains the accepted one-call AES-C4 occupied evidence, consumed ledger, fresh exact-head veto receipt, live read-only preflight, closeout, Sol acceptance, Yuri mailbox message, Continuity 241 / Compass 223 binding and deterministic tests. The complete closeout packet passed 400 serial tests, Ruff, compilation, idempotent continuity generation, whitespace and staged-secret-pattern checks. The API Spine remains an internal Access AI invocation with no route, GraphQL call, product capability or command authority.",
+    "protected_evidence_boundaries": "Protected evidence, historical Diary/PHI, patient, clinical, product-derived, practice, licensed and external-corpus data, raw provider prompt/output/reasoning, credentials, provider tools, database/source, filesystem capability, commands/writes, reusable runtime, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is clean for tracked files on codex/ariadne-bernie-davida-parallel-seam at a75bf1758dc7cef5d2d2a78fe68e1eda4e5c9821 before this pre-push pair. Required 648c8ec9805af63729264ea9c22fd695f062a741 and exact AES-C4 reviewed source e569da0a9081117b799e9437d8b7025230e2162b are ancestors. Origin task remains 07c70ebb03eae7ccbcb3b7f831766b7f6eef52d6. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review worktree r186 remains clean at e569da0a9081117b799e9437d8b7025230e2162b. Before this pair, the only untracked paths are the preserved original 494 at SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five under docs/branding; explicit-path staging will add only this pre-push state/receipt pair."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed the accepted closeout, fetched origin, verified all protected refs and task ancestry, and reverified the exact original-untracked baseline."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The completed exact-head veto remains accepted; no repeat review or provider call is selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude/Fable/Opus is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
