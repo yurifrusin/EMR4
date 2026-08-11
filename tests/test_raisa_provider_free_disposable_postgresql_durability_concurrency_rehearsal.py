@@ -241,6 +241,21 @@ def test_current_parent_bindings_contract_and_evidence_schema_validate() -> None
     _validator().validate(_passing_evidence())
 
 
+def test_coordinator_replay_marker_matches_accepted_native_enum() -> None:
+    native_result = "RECEIPT_REPLAYED"
+    legacy_misspelling = "RECEIPT_REPLAY"
+
+    assert native_result in rehearsal.RESULT_VOCABULARY
+    assert legacy_misspelling not in rehearsal.RESULT_VOCABULARY
+    result_enum = EVIDENCE_SCHEMA["$defs"]["outcome"]["properties"]["result_lines"][
+        "items"
+    ]["enum"]
+    assert native_result in result_enum
+    assert legacy_misspelling not in result_enum
+    source = Path(rehearsal.__file__).read_text(encoding="utf-8")
+    assert source.count('expected_lines=["RECEIPT_REPLAYED"]') == 2
+
+
 def test_participant_renderer_is_one_short_bounded_least_privilege_transaction() -> (
     None
 ):
@@ -505,11 +520,13 @@ def test_source_and_evidence_surface_keep_forbidden_authorities_absent() -> None
     ):
         assert forbidden not in source
     assert rehearsal.EVIDENCE_PATH.name == (
-        "provider-free-durability-concurrency-evidence-attempt-003.json"
+        "provider-free-durability-concurrency-evidence-attempt-004.json"
     )
 
 
 def test_direct_script_entrypoint_imports_before_rejecting_caller_input() -> None:
+    evidence = BASE / "provider-free-durability-concurrency-evidence-attempt-004.json"
+    before = evidence.read_bytes() if evidence.exists() else None
     completed = subprocess.run(  # noqa: S603
         [sys.executable, str(Path(rehearsal.__file__)), "--forbidden-probe"],
         cwd=ROOT,
@@ -522,9 +539,8 @@ def test_direct_script_entrypoint_imports_before_rejecting_caller_input() -> Non
     assert completed.stderr.decode("utf-8").strip() == (
         "This fixed-path harness accepts no arguments."
     )
-    assert not (
-        BASE / "provider-free-durability-concurrency-evidence-attempt-003.json"
-    ).exists()
+    after = evidence.read_bytes() if evidence.exists() else None
+    assert after == before
 
 
 def test_result_mismatch_failure_releases_only_closed_diagnostic_fields() -> None:

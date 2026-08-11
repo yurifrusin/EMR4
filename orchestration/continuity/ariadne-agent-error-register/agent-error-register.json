@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 237,
+  "register_revision": 238,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10861,7 +10861,10 @@
         "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
         "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
-        "docs/ariadne-agent-error-correction-register-revision-237.md"
+        "docs/ariadne-agent-error-correction-register-revision-237.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-003.json",
+        "docs/raisa-context-fabric-durability-concurrency-attempt-003-replay-vocabulary-analysis.md",
+        "docs/ariadne-agent-error-correction-register-revision-238.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
@@ -10869,7 +10872,7 @@
       "recurrence_signature": "harness.concurrency_result_marker_failure_telemetry_not_actionable",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
+        "status": "corrected_fresh_attempt",
         "action": "Add exact closed coordinate, principal, isolation, expected/observed marker and SQLSTATE diagnostics; count each started participant and precondition transaction through the fixed runner; preserve attempt 002 and use a distinct attempt-003 evidence target after fresh review.",
         "prevention_control": "Before a disposable concurrency run, inject a unit failure at every result/SQLSTATE admission boundary and prove the evidence reports an actionable closed coordinate plus actual started operation counts while excluding raw stdout, stderr, query and server text.",
         "evidence_paths": [
@@ -10877,7 +10880,56 @@
           "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
-          "docs/ariadne-agent-error-correction-register-revision-237.md"
+          "docs/ariadne-agent-error-correction-register-revision-237.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-003.json",
+          "docs/raisa-context-fabric-durability-concurrency-attempt-003-replay-vocabulary-analysis.md",
+          "docs/ariadne-agent-error-correction-register-revision-238.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0272",
+      "attempt_id": "raisa-context-fabric-durability-concurrency-attempt-003",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-concurrency-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": "deterministic-python",
+      "reasoning_level": "deterministic",
+      "transport": "local_disposable_postgresql_16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Every CF-D1 result marker must use the exact accepted PostgreSQL durability_transition_result_kind vocabulary already bound by the inert SQL and serial behavior rehearsal.",
+      "observed_error": "Attempt 003 reached the fresh serializable coordinator replay after CFD1-C05, but CF-D1 expected and allowlisted RECEIPT_REPLAY while the accepted PostgreSQL function returned native RECEIPT_REPLAYED. The closed parser correctly discarded the unallowlisted scalar and failed with an empty observed marker list. Exact container cleanup passed and no provider, product or external operation occurred.",
+      "detection_method": "The recovered attempt telemetry named c05_exact_coordinator_replay and its closed expected and observed marker sets. Source-only comparison then proved that the inert enum and function replay branch plus the accepted serial BTR-I03 harness all use RECEIPT_REPLAYED; only CF-D1 used RECEIPT_REPLAY.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-003.json",
+        "docs/raisa-context-fabric-durability-concurrency-attempt-003-replay-vocabulary-analysis.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-238.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.accepted_native_result_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Replace only the CF-D1 misspelling with native RECEIPT_REPLAYED in the parser allowlist, both coordinator replay expectations and evidence schema; add an exact vocabulary regression and require fresh exact-HEAD review before a distinct attempt 004.",
+        "prevention_control": "Before a disposable harness admits a closed database result marker, reconcile every literal against both the accepted database enum and the prior accepted behavior harness, with a regression rejecting near-match spellings.",
+        "evidence_paths": [
+          "docs/raisa-context-fabric-durability-concurrency-attempt-003-replay-vocabulary-analysis.md",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-238.md"
         ]
       },
       "status": "contained"

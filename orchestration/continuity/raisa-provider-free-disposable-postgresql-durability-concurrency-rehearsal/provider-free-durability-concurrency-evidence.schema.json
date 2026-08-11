@@ -153,12 +153,12 @@
         "expected_result_lines": {
           "type": "array",
           "maxItems": 4,
-          "items": { "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAY", "1", "2"] }
+          "items": { "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAYED", "1", "2"] }
         },
         "observed_result_lines": {
           "type": "array",
           "maxItems": 4,
-          "items": { "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAY", "1", "2"] }
+          "items": { "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAYED", "1", "2"] }
         },
         "observed_result_count": { "type": "integer", "minimum": 0, "maximum": 65536 }
       }
@@ -324,7 +324,7 @@
           "type": "array",
           "maxItems": 2,
           "items": {
-            "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAY", "1", "2"]
+            "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAYED", "1", "2"]
           }
         },
         "transport": { "$ref": "#/$defs/transport" }

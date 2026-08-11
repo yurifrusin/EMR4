@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_exactly_one_fixed_local_no_argument_provider_free_disposable_postgresql_cf_d1_concurrency_rehearsal_as_attempt_003",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and the full five-source rehydration passed. The live baton accepts AES-C5 at Continuity 242 / Compass 224 and authorises CF-D1 under Yuri's standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol holds authority for exactly one no-argument CF-D1 attempt 003, immutable evidence capture, exact owned-container cleanup, diagnosis and acceptance. The fresh Gemini 3.6 Flash/high verifier passed exact clean source 359989a77fb3c26d4fa732bac0e52f392b3dd70b and has no runtime, cleanup, acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "Attempts 001 and 002 are rejected and immutable. Attempt 003 must execute the unchanged frozen six-scenario contract SHA-256 96b3fb92d302206eb757f51203044c2aeeb76248a6844422404d13c79b785391 against accepted serial attempt-048 and inert SQL/render manifest SHA-256 dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7 and 2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271. The recovery changes only closed marker/SQLSTATE telemetry and actual started-transaction counting. Fresh review reran 253 tests and passed. Exactly one attempt-003 run is next and no identical rerun is permitted.",
+    "protected_evidence_boundaries": "Only repository-authored opaque synthetic fixtures and one newly named, nonce-owned, networkless, unmounted, unexposed disposable PostgreSQL 16 container are open. The fixed attempt-003 evidence path is absent. Evidence retains only closed outcomes, coordinate, SQLSTATE, wait classes, counts and digests. No operational database/source, watcher/listener, product/patient/clinical data, provider, application route, tool/command, deployment, production, release, Pages or protected refs are open. Cleanup may target only the captured exact container ID after ownership revalidation.",
+    "git_refs_and_worktree": "Primary task HEAD and independently reviewed source are both exact 359989a77fb3c26d4fa732bac0e52f392b3dd70b. Origin task remains c72d712bcccbfb225d3c71ad3b633c33bec56d29. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index are clean; all original 494 untracked files plus four owned recovery-review files are preserved, with five docs/branding paths excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_durability_concurrency_attempt_003_preexecution",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Exact reviewed source, protected refs, evidence-path absence and clean tracked state were verified immediately before dispatch."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned; Sol controls the fixed local harness directly."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The fresh marker-telemetry recovery veto passed and its clean worktree is removed."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is opened."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

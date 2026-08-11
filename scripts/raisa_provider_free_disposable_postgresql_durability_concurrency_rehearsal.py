@@ -35,7 +35,7 @@ CONTRACT_SCHEMA_PATH = BASE / "concurrency-rehearsal-contract.schema.json"
 EVIDENCE_SCHEMA_PATH = (
     BASE / "provider-free-durability-concurrency-evidence.schema.json"
 )
-EVIDENCE_PATH = BASE / "provider-free-durability-concurrency-evidence-attempt-003.json"
+EVIDENCE_PATH = BASE / "provider-free-durability-concurrency-evidence-attempt-004.json"
 EXPECTED_CONTRACT_SHA256 = (
     "sha256:96b3fb92d302206eb757f51203044c2aeeb76248a6844422404d13c79b785391"
 )
@@ -52,7 +52,7 @@ RESULT_VOCABULARY = frozenset(
         "PRIMARY",
         "CONFLICT",
         "RECEIPT_APPLIED",
-        "RECEIPT_REPLAY",
+        "RECEIPT_REPLAYED",
         "1",
         "2",
     }
@@ -1116,7 +1116,7 @@ def _run_scenarios(
         principal="context_coordinator",
         isolation="serializable",
         statements=_coordinator_statements(facts, "observer_coordinator_commit", 1),
-        expected_lines=["RECEIPT_REPLAY"],
+        expected_lines=["RECEIPT_REPLAYED"],
     )
     after = serial._snapshot(runner, docker, container_id, profile)  # noqa: SLF001
     _assert_snapshot_effect(scenario_id, before, after_race)
@@ -1192,7 +1192,7 @@ def _run_scenarios(
         principal="context_coordinator",
         isolation="serializable",
         statements=_coordinator_statements(facts, "observer_coordinator_rollback", 1),
-        expected_lines=["RECEIPT_REPLAY"],
+        expected_lines=["RECEIPT_REPLAYED"],
     )
     after = serial._snapshot(runner, docker, container_id, profile)  # noqa: SLF001
     _assert_snapshot_effect(scenario_id, before, after_race)
