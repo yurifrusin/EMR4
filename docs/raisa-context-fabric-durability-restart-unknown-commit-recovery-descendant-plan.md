@@ -83,7 +83,9 @@ One newly owned networkless disposable `postgres:16-bookworm` container may:
 3. perform the exact ten CF-D2 authored-synthetic setup preconditions once;
 4. call only `cfd2_r01_apply_position_1` once;
 5. if and only if that succeeds and the complete atomic delta is exact, call
-   `cfd2_r01_append_anchor_2` once and verify the exact anchor-only delta; and
+   `cfd2_r01_append_anchor_2` once, where `_2` denotes the second anchor after
+   the revision-zero baseline and the entry point receives lifecycle revision
+   one, then verify the exact anchor-only delta; and
 6. remove only the exact captured container ID and prove scoped absence.
 
 This phase has zero `SIGKILL`, restart, blind retry, provider, product read,
@@ -150,8 +152,8 @@ is selected because the sequence is small, serial and stateful.
 ## Evidence and claim boundary
 
 A passing diagnostic proves only that the exact R01 position-one apply and
-revision-two anchor sequence matches the harness without crash. It proves no
-restart or unknown-commit behavior.
+lifecycle-revision-one second-anchor sequence matches the harness without
+crash. It proves no restart or unknown-commit behavior.
 
 Only a later passing attempt 003 can release the original CF-D2 four-scenario
 claim. Even then it proves no literal WAL/protocol acknowledgement cut, power

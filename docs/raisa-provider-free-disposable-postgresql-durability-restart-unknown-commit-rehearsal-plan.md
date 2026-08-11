@@ -183,8 +183,9 @@ eventual convergence or retry until an expected answer appears.
 A fresh observer generation receives fixed positions one and two. Position one
 is admitted and applied under `SERIALIZABLE`; the client observes exact
 `RECEIPT_APPLIED`, and lifecycle authority appends the independently verified
-revision-two recovery anchor. The complete snapshot is captured, the container
-is killed, and the same cluster is restarted.
+second recovery anchor at lifecycle revision one. The baseline anchor at
+lifecycle revision zero is the first anchor. The complete snapshot is captured,
+the container is killed, and the same cluster is restarted.
 
 Post-restart readback must match the pre-crash snapshot exactly. A fresh
 position-one call returns `RECEIPT_REPLAYED` without mutation. Position two then
@@ -199,7 +200,8 @@ Canonical readback must equal the pre-transition state before the container is
 killed and again after restart.
 
 Only after the exact zero-residue proof may one controlled transaction apply
-position one, lifecycle authority append its revision-two anchor, and one fresh
+position one, lifecycle authority append its second anchor at lifecycle revision
+one, and one fresh
 replay return `RECEIPT_REPLAYED` inertly. A receipt or partial effect surviving
 the acknowledged rollback fails the whole artifact.
 
@@ -212,9 +214,10 @@ only `CONNECTION_LOST_WITHOUT_ALLOWLISTED_TERMINAL_RESULT`.
 
 After restart, the classifier must derive `COMMITTED_RECOVERED` solely from the
 complete durable packet. Exact replay must be inert. Position two must fail
-exact `CF303` while the revision-two recovery anchor is pending. Lifecycle
-authority may append that anchor only by calling the accepted entry point that
-reverifies the complete committed state. Position two may then apply once.
+exact `CF303` while the lifecycle-revision-one recovery anchor is pending.
+Lifecycle authority may append that anchor only by calling the accepted entry
+point that reverifies the complete committed state. Position two may then apply
+once.
 
 ### `CFD2-R04` — lost terminal result resolved as rolled back
 
@@ -225,7 +228,7 @@ exact container is killed, so the caller again has no terminal result.
 After restart, the classifier must derive `ROLLED_BACK_RECOVERED` solely from
 the exact pre-transition state and zero-residue proof. Only then may one
 controlled transaction apply position one, lifecycle authority append its
-revision-two anchor and a fresh exact replay remain inert.
+lifecycle-revision-one anchor and a fresh exact replay remain inert.
 
 ## Evidence minimization
 

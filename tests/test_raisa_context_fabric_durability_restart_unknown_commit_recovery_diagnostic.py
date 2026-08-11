@@ -96,7 +96,7 @@ def _passing_diagnostic() -> dict[str, Any]:
                 "code": "matched_expected_terminal",
                 "returncode_class": "zero",
                 "sqlstate": None,
-                "result_lines": ["2"],
+                "result_lines": ["1"],
                 "passed": True,
             },
         ],
@@ -128,7 +128,30 @@ def test_recovery_contract_and_diagnostic_schema_are_closed() -> None:
     assert len(contract["terminal_coordinates"]) == 27
     assert contract["diagnostic_profile"]["sigkill_count"] == 0
     assert contract["diagnostic_profile"]["restart_count"] == 0
-    assert rehearsal.DIAGNOSTIC_EVIDENCE_PATH.name.endswith("attempt-001.json")
+    assert rehearsal.DIAGNOSTIC_EVIDENCE_PATH.name.endswith("attempt-002.json")
+
+
+def test_second_anchor_uses_current_lifecycle_revision_one() -> None:
+    sql = rehearsal.serial.inert_renderer.SQL_INERT_PATH.read_text(encoding="utf-8")
+    assert "checkpoint.lifecycle_revision + 1::pg_catalog.int8" in sql
+    assert "cf_arg_lifecycle_revision = checkpoint.lifecycle_revision" in sql
+    source = Path(rehearsal.__file__).read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    anchor_calls = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "_anchor_statements"
+    ]
+    assert len(anchor_calls) == 5
+    assert all(
+        isinstance(call.args[2], ast.Constant) and call.args[2].value == 1
+        for call in anchor_calls
+    )
+    with pytest.raises(rehearsal.RestartFailure) as raised:
+        rehearsal._anchor_statements({}, "observer_r01", 2)
+    assert (raised.value.stage, raised.value.code) == ("render", "anchor_revision")
 
 
 def test_every_participant_call_has_one_closed_coordinate() -> None:
@@ -249,7 +272,7 @@ def test_no_crash_sequence_runs_exact_apply_then_anchor(
         return {
             "outcome": "commit",
             "sqlstate": None,
-            "result_lines": ["RECEIPT_APPLIED"] if len(calls) == 1 else ["2"],
+            "result_lines": ["RECEIPT_APPLIED"] if len(calls) == 1 else ["1"],
             "identity": {},
         }
 
@@ -271,6 +294,18 @@ def test_no_crash_sequence_runs_exact_apply_then_anchor(
 
 def test_passing_diagnostic_validates_as_one_minimized_document() -> None:
     payload = _passing_diagnostic()
+    rehearsal.validate_diagnostic_evidence(payload)
+    Draft202012Validator(DIAGNOSTIC_SCHEMA).validate(payload)
+
+
+def test_immutable_failed_diagnostic_attempt_one_remains_admissible() -> None:
+    path = rehearsal.BASE / (
+        "provider-free-durability-restart-unknown-commit-recovery-"
+        "diagnostic-evidence-attempt-001.json"
+    )
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    assert payload["result"] == "rehearsal_failed"
+    assert payload["terminal_failure"]["coordinate"] == ("cfd2_r01_append_anchor_2")
     rehearsal.validate_diagnostic_evidence(payload)
     Draft202012Validator(DIAGNOSTIC_SCHEMA).validate(payload)
 

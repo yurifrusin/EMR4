@@ -50,7 +50,12 @@
     },
     "operation_counters": { "$ref": "#/$defs/operation_counters" },
     "cleanup": { "$ref": "#/$defs/cleanup" },
-    "claim_boundary": { "const": "exact_r01_position_one_apply_and_revision_two_anchor_sequence_without_crash_only_no_restart_unknown_commit_wal_driver_pool_operational_runtime_product_provider_command_deployment_production_release_or_protected_ref_claim" },
+    "claim_boundary": {
+      "enum": [
+        "exact_r01_position_one_apply_and_revision_two_anchor_sequence_without_crash_only_no_restart_unknown_commit_wal_driver_pool_operational_runtime_product_provider_command_deployment_production_release_or_protected_ref_claim",
+        "exact_r01_position_one_apply_and_lifecycle_revision_one_anchor_sequence_without_crash_only_no_restart_unknown_commit_wal_driver_pool_operational_runtime_product_provider_command_deployment_production_release_or_protected_ref_claim"
+      ]
+    },
     "failure": { "$ref": "#/$defs/failure" },
     "terminal_failure": { "$ref": "#/$defs/terminal_failure" }
   },
@@ -96,8 +101,18 @@
       "additionalProperties": false,
       "properties": {
         "source_head": { "$ref": "#/$defs/head" },
-        "contract_sha256": { "const": "sha256:73aad6f20ec68cae75617b090b38b82b611af2e56b6cebeaffd41079102cfd74" },
-        "recovery_contract_sha256": { "const": "sha256:d492af4102510c94cbfde1263ee399ba52be612039fceba43572e8b894056ad9" },
+        "contract_sha256": {
+          "enum": [
+            "sha256:73aad6f20ec68cae75617b090b38b82b611af2e56b6cebeaffd41079102cfd74",
+            "sha256:40bb9f341c183c84bee96f63d000282b149b0b55f4a0a1e9ab49308b4e843c99"
+          ]
+        },
+        "recovery_contract_sha256": {
+          "enum": [
+            "sha256:d492af4102510c94cbfde1263ee399ba52be612039fceba43572e8b894056ad9",
+            "sha256:2535884cad0cb4789396f2ae12989c1448cc74c5cba80c8fc3ec7a708d1f9ec7"
+          ]
+        },
         "artifact_sha256": { "$ref": "#/$defs/digest" },
         "manifest_sha256": { "$ref": "#/$defs/digest" },
         "statement_count": { "const": 424 }

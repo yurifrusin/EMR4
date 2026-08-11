@@ -148,7 +148,7 @@
     "post_attempt_correction_or_retry": false
   },
   "claim_boundary": {
-    "diagnostic_proves": "exact_r01_position_one_apply_and_revision_two_anchor_sequence_without_crash_only",
+    "diagnostic_proves": "exact_r01_position_one_apply_and_lifecycle_revision_one_second_anchor_sequence_without_crash_only",
     "diagnostic_does_not_prove": [
       "restart_persistence",
       "unknown_commit_classification",

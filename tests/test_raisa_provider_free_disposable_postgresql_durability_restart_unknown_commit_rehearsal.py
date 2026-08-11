@@ -298,7 +298,7 @@ def test_fixture_ordering_admits_successors_only_after_predecessor_progress() ->
     assert "_admission_statements(facts, observer, 1)" in setup_source
     assert "_admission_statements(facts, observer, 2)" not in setup_source
     assert scenario_source.count("_admission_statements(facts, observer, 2)") == 2
-    assert rehearsal.EVIDENCE_PATH.name.endswith("attempt-002.json")
+    assert rehearsal.EVIDENCE_PATH.name.endswith("attempt-003.json")
 
 
 def test_storage_and_command_topology_is_exact_and_volume_free() -> None:

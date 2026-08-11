@@ -49,16 +49,16 @@ DIAGNOSTIC_EVIDENCE_SCHEMA_PATH = BASE / (
     "provider-free-durability-restart-unknown-commit-recovery-diagnostic-evidence.schema.json"
 )
 DIAGNOSTIC_EVIDENCE_PATH = BASE / (
-    "provider-free-durability-restart-unknown-commit-recovery-diagnostic-evidence-attempt-001.json"
+    "provider-free-durability-restart-unknown-commit-recovery-diagnostic-evidence-attempt-002.json"
 )
 EVIDENCE_PATH = (
-    BASE / "provider-free-durability-restart-unknown-commit-evidence-attempt-002.json"
+    BASE / "provider-free-durability-restart-unknown-commit-evidence-attempt-003.json"
 )
 EXPECTED_CONTRACT_SHA256 = (
-    "sha256:73aad6f20ec68cae75617b090b38b82b611af2e56b6cebeaffd41079102cfd74"
+    "sha256:40bb9f341c183c84bee96f63d000282b149b0b55f4a0a1e9ab49308b4e843c99"
 )
 EXPECTED_RECOVERY_CONTRACT_SHA256 = (
-    "sha256:d492af4102510c94cbfde1263ee399ba52be612039fceba43572e8b894056ad9"
+    "sha256:2535884cad0cb4789396f2ae12989c1448cc74c5cba80c8fc3ec7a708d1f9ec7"
 )
 PASS_RESULT = "raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_pass"
 DIAGNOSTIC_PASS_RESULT = (
@@ -76,7 +76,7 @@ CLAIM_BOUNDARY = (
     "command_deployment_production_release_or_protected_ref_claim"
 )
 DIAGNOSTIC_CLAIM_BOUNDARY = (
-    "exact_r01_position_one_apply_and_revision_two_anchor_sequence_without_crash_"
+    "exact_r01_position_one_apply_and_lifecycle_revision_one_anchor_sequence_without_crash_"
     "only_no_restart_unknown_commit_wal_driver_pool_operational_runtime_product_"
     "provider_command_deployment_production_release_or_protected_ref_claim"
 )
@@ -1038,7 +1038,7 @@ def _coordinator_statements(
 def _anchor_statements(
     facts: dict[str, Any], observer: str, revision: int
 ) -> list[str]:
-    if revision not in {2, 3}:
+    if revision != 1:
         raise RestartFailure("render", "anchor_revision")
     return [
         "SELECT (emr4_context_fabric.append_recovery_anchor_v1("
@@ -1285,8 +1285,8 @@ def _run_no_crash_first_sequence(
         scenario_id="CFD2-R01",
         principal="context_lifecycle",
         isolation="serializable",
-        statements=_anchor_statements(facts, observer, 2),
-        expected_lines=["2"],
+        statements=_anchor_statements(facts, observer, 1),
+        expected_lines=["1"],
     )
     anchored = _recovery_packet(
         runner, docker, container_id, profile, facts, observer, 1
@@ -1350,8 +1350,8 @@ def _run_scenarios(
             scenario_id=scenario_id,
             principal="context_lifecycle",
             isolation="serializable",
-            statements=_anchor_statements(facts, observer, 2),
-            expected_lines=["2"],
+            statements=_anchor_statements(facts, observer, 1),
+            expected_lines=["1"],
         )
     )
     anchored = _recovery_packet(
@@ -1522,8 +1522,8 @@ def _run_scenarios(
             scenario_id=scenario_id,
             principal="context_lifecycle",
             isolation="serializable",
-            statements=_anchor_statements(facts, observer, 2),
-            expected_lines=["2"],
+            statements=_anchor_statements(facts, observer, 1),
+            expected_lines=["1"],
         )
     )
     anchored = _recovery_packet(
@@ -1667,8 +1667,8 @@ def _run_scenarios(
             scenario_id=scenario_id,
             principal="context_lifecycle",
             isolation="serializable",
-            statements=_anchor_statements(facts, observer, 2),
-            expected_lines=["2"],
+            statements=_anchor_statements(facts, observer, 1),
+            expected_lines=["1"],
         )
     )
     anchor_after = _recovery_packet(
@@ -1776,8 +1776,8 @@ def _run_scenarios(
             scenario_id=scenario_id,
             principal="context_lifecycle",
             isolation="serializable",
-            statements=_anchor_statements(facts, observer, 2),
-            expected_lines=["2"],
+            statements=_anchor_statements(facts, observer, 1),
+            expected_lines=["1"],
         )
     )
     anchored = _recovery_packet(
@@ -2410,7 +2410,7 @@ def validate_diagnostic_evidence(payload: dict[str, Any]) -> None:
             "code": "matched_expected_terminal",
             "returncode_class": "zero",
             "sqlstate": None,
-            "result_lines": ["2"],
+            "result_lines": ["1"],
             "passed": True,
         },
     ]:

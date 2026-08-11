@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 249,
+  "register_revision": 250,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11308,6 +11308,49 @@
           "tests/test_raisa_agent_execution_surface_containment_gate_plan.py",
           "docs/raisa-practice-context-fabric-direction.md",
           "docs/ariadne-agent-error-correction-register-revision-249.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0282",
+      "attempt_id": "cf-d2-recovery-diagnostic-attempt-001",
+      "observed_on": "2026-08-12",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-cf-d2-restart-harness",
+      "model": null,
+      "reasoning_level": "deterministic",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "After position one advances a newly registered generation from lifecycle revision zero to revision one, the independent anchor participant must append the anchor for that exact current revision before position two can proceed.",
+      "observed_error": "Immutable no-crash diagnostic attempt 001 passed all ten setup preconditions and the complete position-one atomic delta, then failed at closed coordinate cfd2_r01_append_anchor_2 because the harness passed numeric lifecycle revision two. The accepted inert SQL had advanced the checkpoint only to revision one, and append_recovery_anchor_v1 correctly rejected any argument other than the current checkpoint revision. Zero SIGKILL, restart, retry, provider, product or external-network operations occurred and cleanup passed.",
+      "detection_method": "Coordinate-specific diagnostic evidence isolated the lifecycle participant. Repository-only reconciliation then proved registration creates checkpoint and baseline anchor revision zero, the first decision writes checkpoint.lifecycle_revision + 1, and the anchor entry point requires cf_arg_lifecycle_revision = checkpoint.lifecycle_revision. Position two was deliberately fenced behind the missing anchor, so revision two could not be legal at that point.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/provider-free-durability-restart-unknown-commit-recovery-diagnostic-evidence-attempt-001.json",
+        "docs/raisa-context-fabric-durability-restart-unknown-commit-diagnostic-attempt-001-anchor-revision-diagnosis.md",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+        "docs/ariadne-agent-error-correction-register-revision-250.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.lifecycle_anchor_revision_off_by_one",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Retain the ordinal coordinate suffix append_anchor_2 for the second anchor after the revision-zero baseline, pass and expect lifecycle revision one, correct the active plan and contract language, bind distinct diagnostic-attempt-002 and full-attempt-003 paths, and require a fresh exact-HEAD review before either execution.",
+        "prevention_control": "Every lifecycle rehearsal must mechanically cross-check registration baseline revision, each accepted transition's revision arithmetic, and every anchor argument against the exact inert SQL before review; prose anchor ordinals must be explicitly separated from numeric lifecycle revisions.",
+        "evidence_paths": [
+          "tests/test_raisa_context_fabric_durability_restart_unknown_commit_recovery_diagnostic.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/restart-unknown-commit-rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/restart-unknown-commit-recovery-descendant-contract.json",
+          "docs/raisa-context-fabric-durability-restart-unknown-commit-diagnostic-attempt-001-anchor-revision-diagnosis.md",
+          "docs/ariadne-agent-error-correction-register-revision-250.md"
         ]
       },
       "status": "corrected"

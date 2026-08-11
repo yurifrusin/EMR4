@@ -151,7 +151,7 @@
       "id": "CFD2-R01",
       "category": "CONFIRMED_COMMIT_RESTART",
       "client_observation": "COMMIT_ACKNOWLEDGED",
-      "pre_crash_action": "apply_position_one_commit_then_append_revision_two_anchor_commit",
+      "pre_crash_action": "apply_position_one_commit_then_append_second_anchor_at_lifecycle_revision_one_commit",
       "crash_cutpoint": "after_confirmed_anchor_commit",
       "post_restart_classification": "COMMITTED_CONFIRMED",
       "post_restart_action": "exact_position_one_replay_then_position_two_apply",
@@ -211,7 +211,7 @@
       ],
       "readback": [
         "complete_position_one_effect_or_fail",
-        "no_revision_two_anchor_before_recovery",
+        "no_lifecycle_revision_one_second_anchor_before_recovery",
         "exact_replay_is_inert",
         "position_two_blocked_until_independent_anchor",
         "independently_reverified_anchor_enables_contiguous_position_two"
