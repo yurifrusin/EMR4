@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_provider_free_aes_c0_architecture_contract_after_hostile_validation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen AES-C0 plan requires closed GenerationManifest, CapabilityLease, BudgetState, BrokerDecision, RevocationRecord and AuditEvidenceEnvelope schemas, at least twenty hostile failures, preserved API Spine and zero runtime/provider/data. The canonical packet passes and all 37 independent hostile mutations fail closed; the canonical fast profile passes 107 tests.",
+    "current_authority_allocation": "GPT Sol owns AES-C0 architecture, deterministic acceptance, recovery and task-branch publication under Yuri's standing uninterrupted gate authority. No worker, provider or external verifier was selected because the tranche is one tightly coupled repository-local security and API contract.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam remain exact 01d355f42df5981341196f3aa0caec2cccce7a2d before AES-C0 commit. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the two exact maintained verification files are tracked-modified; AES-C0 owned artifacts are untracked. The pre-AES base plus earlier receipt/state evidence and all five docs/branding paths remain preserved. Explicit-path staging only. The long conversation is not used as authority: after compaction Sol repeated five-source repository rehydration and generated the AES-C0 preplanning receipt before freezing or validating the contract.",
+    "live_handover_current_baton": "The accepted codebase conformance repair remains current at Continuity 236 / Compass 218 and hands off directly to architecture-only AES-C0. The AES-C0 candidate now defines the six frozen messages, external broker boundary, immutable generation, independent budgets, explicit no-fallback state, external revocation and API command separation without runtime implementation.",
+    "protected_evidence_boundaries": "Protected holdouts and their fixtures, support, manifests, seals and per-case evidence were not enumerated or accessed. Historical Diary PHI, patient/clinical/product data, licensed content, providers, credentials, IAM, metadata, network, database/source behavior, migrations, watchers, runtime tools, commands, deployment, production, release, Pages and protected refs remain closed. docs/branding/ and all unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

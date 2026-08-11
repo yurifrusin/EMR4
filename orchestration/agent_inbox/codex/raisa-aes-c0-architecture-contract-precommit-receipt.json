@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_accepted_provider_free_aes_c0_architecture_closeout_to_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen AES-C0 acceptance is satisfied: canonical authored-synthetic validation passes, 37 of 37 hostile mutations reject, 45 focused AES/API tests pass, the 105-test no-conftest static packet passes and the canonical fast profile passes 111 tests. The closeout, Sol acceptance, threat delta and Yuri mailbox bind the result and its limits.",
+    "current_authority_allocation": "GPT Sol owns AES-C0 acceptance and exact task-branch commit/publication under Yuri's standing authority. Yuri explicitly requested a pause and new-window prompt after this closeout. No worker, external verifier, provider or protected integration is selected.",
+    "git_refs_and_worktree": "Before AES-C0 commit, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam remain exact 01d355f42df5981341196f3aa0caec2cccce7a2d. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The candidate diff is limited to explicit AES-C0, handover, implementation-plan and maintained-verification paths; pre-existing untracked evidence and all five docs/branding paths remain unstaged.",
+    "live_handover_current_baton": "The candidate live handover advances AES-C0 to Continuity 237 / Compass 219, records the six closed messages and 37 hostile rejections, and identifies AES-C1 provider-free admission as next after Yuri's explicit fresh-window pause.",
+    "protected_evidence_boundaries": "Protected holdouts and their fixtures, support, manifests, seals and per-case evidence were not opened. Historical Diary PHI, patient/clinical/product data, licensed content, providers, credentials, IAM, metadata, network, database/source behavior, migrations, watchers, runtime tools, commands, deployment, production, release, Pages and protected refs remain closed. docs/branding/ and all unrelated untracked files remain preserved and excluded from explicit-path staging."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

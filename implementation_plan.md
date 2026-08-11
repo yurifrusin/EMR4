@@ -178,8 +178,9 @@ and
 The bounded provider-free conformance repair named in that review now also
 passes. It adds an explicit maintained Python 3.11 source-state, protected-CI
 compile/lint/static-test enforcement, current API Spine lifecycle supersession
-and live baton consistency without changing product behavior. The next safe
-tranche is AES-C0 architecture and contract.
+and live baton consistency without changing product behavior. AES-C0
+architecture and contract now also passes; AES-C1 provider-free admission is
+the next safe tranche after Yuri's requested fresh-task-window handoff.
 
 Before any later Context Fabric descendant supplies real product-derived
 context to an occupied Bureau, or gives a model an executable tool, filesystem,
@@ -194,10 +195,12 @@ externally owned kill switch. Reasoning, information, egress and action budgets
 remain independent. The gate is deliberately placed after the current
 provider-free durability work and before real-product-read or executable Bureau
 runtime. The prerequisite serial database-only rehearsal and intervening
-read-only architectural-health pulse and bounded CI/lifecycle conformance
-repair now pass. AES-C0 architecture and contract begins next with the new
-source-state, no-fallback, route and baton fitness constraints. None of these
-results can be mistaken for current provider,
+read-only architectural-health pulse, bounded CI/lifecycle conformance repair
+and AES-C0 architecture contract now pass. AES-C0 freezes six closed messages,
+the exact leaseable capability vocabulary, independent cumulative budgets,
+no-fallback state, external revocation and the read/event/command route
+separation. AES-C1 provider-free admission is next; none of these results can
+be mistaken for current provider,
 product-data, tool or command authority.
 
 The longer clinical/practice Bureau programme must not collapse into one
@@ -608,8 +611,9 @@ generation rehearsal. The architecture-only provider-free default-off
   or operational availability. Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
-  provider-free CI/lifecycle repair have passed; AES-C0 of the Agent Execution
-  Surface and Containment Gate is next.
+  provider-free CI/lifecycle repair and AES-C0 architecture contract have
+  passed; AES-C1 provider-free admission is next after the requested fresh
+  task-window handoff.
 GraphQL/query services remain read-only; mutations
 remain backend REST/OpenAPI commands with fresh authorization, human gates
 where required, idempotency, audit and deterministic readback. The controlling direction is
@@ -640,10 +644,22 @@ replay. GraphQL remains read-only, events remain signals, and product mutations
 remain human-gated REST/OpenAPI commands with current authorization,
 idempotency, audit and readback.
 
+AES-C0 now passes as the unmounted architecture descendant. Its closed
+`GenerationManifest`, `CapabilityLease`, `BudgetState`, `BrokerDecision`,
+`RevocationRecord` and `AuditEvidenceEnvelope` bind one generation to exact
+broker-resolved capability identity, independent cumulative budgets,
+generation-wide external revocation, pinned supply-chain identity and
+minimized evidence. All 37 hostile contract mutations fail closed. This proves
+contract coherence only; it implements no broker, work cell, adapter, provider,
+product read, database/source, tool or command. AES-C1 will next rehearse
+authored-synthetic admission and default denial against the exact contract.
+
 The controlling plan is
 [`docs/raisa-agent-execution-surface-containment-gate-plan.md`](docs/raisa-agent-execution-surface-containment-gate-plan.md)
 and its threat-model delta is
 [`docs/security/raisa-agent-execution-surface-containment-gate-threat-model-delta.md`](docs/security/raisa-agent-execution-surface-containment-gate-threat-model-delta.md).
+The accepted AES-C0 result is
+[`docs/raisa-agent-execution-surface-containment-gate-aes-c0-closeout.md`](docs/raisa-agent-execution-surface-containment-gate-aes-c0-closeout.md).
 This entry grants no broker implementation, provider call, real context,
 credential flow, tool, command, deployment or production authority.
 

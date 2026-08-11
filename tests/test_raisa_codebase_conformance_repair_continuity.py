@@ -11,23 +11,26 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_conformance_repair_is_current() -> None:
+def _repair_node(graph: dict) -> dict:
+    matches = [node for node in graph["nodes"] if node["id"] == NODE_ID]
+    assert len(matches) == 1
+    return matches[0]
+
+
+def test_conformance_repair_remains_accepted_in_history() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
 
-    assert graph["graph_revision"] == 236
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 218
-    assert compass["source_graph_revision"] == 236
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert "aes-c0 architecture and contract is next" in compass[
-        "orientation_statement"
-    ].lower()
+    node = _repair_node(graph)
+    assert graph["graph_revision"] >= 236
+    assert node["status"] == "accepted"
+    assert node["coordinates"]["source_head"] == SOURCE_HEAD
+    assert any(step["node_id"] == NODE_ID for step in compass["journey"])
 
 
 def test_repair_opens_no_product_or_runtime_authority() -> None:
-    node = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
+    node = _repair_node(graph)
     assert node["kind"] == "maintenance"
     assert node["authority"]["authorized_openings"] == []
     joined = " ".join(
@@ -52,28 +55,19 @@ def test_repair_opens_no_product_or_runtime_authority() -> None:
 
 def test_compass_hands_off_to_architecture_only_aes_c0() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    position = compass["current_position"]
-    joined = " ".join(
-        position["unlocks"]
-        + position["does_not_solve"]
-        + [compass["orientation_statement"]]
-    ).lower()
+    steps = [step for step in compass["journey"] if step["node_id"] == NODE_ID]
+    assert len(steps) == 1
+    joined = " ".join([steps[0]["strategic_role"], steps[0]["outcome"]]).lower()
     for phrase in (
-        "capability classes",
-        "external broker",
-        "immutable generation manifest",
-        "no-fallback",
-        "command separation",
-        "provider-free",
-        "patient/product/clinical",
-        "deployment",
-        "protected-ref",
+        "repair repository fitness",
+        "aes-c0 architecture",
     ):
         assert phrase in joined
 
 
 def test_repair_evidence_is_bound() -> None:
-    node = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
+    node = _repair_node(graph)
     evidence = node["evidence"]
     assert "orchestration/harness_settings/python_source_state.json" in evidence[
         "findings"

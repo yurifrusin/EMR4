@@ -1,0 +1,247 @@
+{
+  "schema_version": "emr4.aes_c0.authored_synthetic_examples.v1",
+  "evidence_mode": "authored_synthetic_provider_free",
+  "messages": {
+    "generation_manifest": {
+      "schema_version": "emr4.aes_c0.generation_manifest.v1",
+      "manifest_id": "manifest-synthetic-001",
+      "manifest_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "generation_id": "generation-synthetic-001",
+      "bureau_id": "bureau-synthetic",
+      "work_cell_id": "work-cell-synthetic-001",
+      "authority_binding_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "purpose_code": "contract-validation",
+      "issued_at": "2026-08-11T00:00:00Z",
+      "expires_at": "2026-08-11T00:05:00Z",
+      "immutable": true,
+      "capability_grants": [
+        {
+          "capability_id": "capability-synthetic-provider",
+          "capability_class": "provider_inference",
+          "operation_id": "generate-typed-candidate",
+          "adapter_id": "synthetic-provider-adapter",
+          "destination_id": "synthetic-provider-destination",
+          "method": "POST",
+          "media_type": "application/json",
+          "audience": "synthetic-provider-audience",
+          "source_class": "authored_synthetic",
+          "allowed_input_fields": ["scenario-code", "typed-context"],
+          "allowed_output_fields": ["candidate-code", "explanation-code"],
+          "max_calls": 1,
+          "max_request_bytes": 8192,
+          "max_response_bytes": 4096,
+          "candidate_selects_operation_identity": false,
+          "provider_executed_tools": false,
+          "command_authority": false
+        }
+      ],
+      "budgets": {
+        "reasoning": {
+          "max_model_calls": 1,
+          "max_model_tokens": 4096
+        },
+        "information": {
+          "max_input_bytes": 8192,
+          "max_output_bytes": 4096,
+          "max_source_count": 2
+        },
+        "egress": {
+          "max_requests": 1,
+          "max_request_bytes": 8192,
+          "max_response_bytes": 4096,
+          "max_total_bytes": 12288,
+          "max_distinct_destinations": 1,
+          "max_redirects": 0
+        },
+        "action": {
+          "max_broker_operations": 1,
+          "max_inert_tool_operations": 0,
+          "max_product_mutations": 0,
+          "max_command_confirmations": 0
+        },
+        "denial": {
+          "max_denials": 3,
+          "max_boundary_probes": 1,
+          "max_repeated_failures": 2
+        },
+        "time": {
+          "max_elapsed_ms": 30000
+        }
+      },
+      "stop_conditions": [
+        "reasoning-budget-exhausted",
+        "information-budget-exhausted",
+        "egress-budget-exhausted",
+        "action-budget-exhausted",
+        "denial-budget-exhausted",
+        "elapsed-time-exhausted",
+        "boundary-probe-detected",
+        "authority-changed",
+        "generation-superseded",
+        "supply-chain-identity-mismatch",
+        "external-kill-switch"
+      ],
+      "supply_chain_identity": {
+        "runtime_image_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "model_provider_contract_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "system_contract_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "adapter_artifact_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "generation_manifest_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "command_authority": false
+    },
+    "capability_lease": {
+      "schema_version": "emr4.aes_c0.capability_lease.v1",
+      "lease_id": "lease-synthetic-001",
+      "manifest_id": "manifest-synthetic-001",
+      "generation_id": "generation-synthetic-001",
+      "capability_id": "capability-synthetic-provider",
+      "capability_class": "provider_inference",
+      "audience": "synthetic-provider-audience",
+      "broker_id": "broker-synthetic",
+      "authority_binding_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "issued_at": "2026-08-11T00:00:00Z",
+      "expires_at": "2026-08-11T00:05:00Z",
+      "state": "active",
+      "presented_to_work_cell": false,
+      "reusable_credential": false,
+      "command_authority": false
+    },
+    "budget_state": {
+      "schema_version": "emr4.aes_c0.budget_state.v1",
+      "manifest_id": "manifest-synthetic-001",
+      "generation_id": "generation-synthetic-001",
+      "ceilings": {
+        "reasoning": {
+          "max_model_calls": 1,
+          "max_model_tokens": 4096
+        },
+        "information": {
+          "max_input_bytes": 8192,
+          "max_output_bytes": 4096,
+          "max_source_count": 2
+        },
+        "egress": {
+          "max_requests": 1,
+          "max_request_bytes": 8192,
+          "max_response_bytes": 4096,
+          "max_total_bytes": 12288,
+          "max_distinct_destinations": 1,
+          "max_redirects": 0
+        },
+        "action": {
+          "max_broker_operations": 1,
+          "max_inert_tool_operations": 0,
+          "max_product_mutations": 0,
+          "max_command_confirmations": 0
+        },
+        "denial": {
+          "max_denials": 3,
+          "max_boundary_probes": 1,
+          "max_repeated_failures": 2
+        },
+        "time": {
+          "max_elapsed_ms": 30000
+        }
+      },
+      "observed": {
+        "model_calls": 1,
+        "model_tokens": 512,
+        "input_bytes": 1024,
+        "output_bytes": 256,
+        "source_count": 1,
+        "request_count": 1,
+        "request_bytes": 1024,
+        "response_bytes": 256,
+        "total_bytes": 1280,
+        "distinct_destinations": 1,
+        "redirects": 0,
+        "broker_operations": 1,
+        "inert_tool_operations": 0,
+        "product_mutations": 0,
+        "command_confirmations": 0,
+        "denied_operations": 0,
+        "boundary_probes": 0,
+        "repeated_failures": 0,
+        "elapsed_ms": 800
+      },
+      "counts_cumulative": true,
+      "terminal_state": "exhausted",
+      "next_operation_permitted": false
+    },
+    "broker_decision": {
+      "schema_version": "emr4.aes_c0.broker_decision.v1",
+      "decision_id": "decision-synthetic-001",
+      "generation_id": "generation-synthetic-001",
+      "manifest_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "lease_id": "lease-synthetic-001",
+      "capability_id": "capability-synthetic-provider",
+      "capability_class": "provider_inference",
+      "candidate_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "decision": "allow",
+      "reason_codes": ["manifest_grant_and_current_authority"],
+      "proofreader_admitted": true,
+      "current_authority_checked": true,
+      "manifest_and_lease_match": true,
+      "operation_identity_broker_resolved": true,
+      "candidate_supplied_operation_identity": false,
+      "budget_before_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "budget_after_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "command_authority": false,
+      "recorded_at": "2026-08-11T00:00:01Z"
+    },
+    "revocation_record": {
+      "schema_version": "emr4.aes_c0.revocation_record.v1",
+      "revocation_id": "revocation-synthetic-001",
+      "generation_id": "generation-synthetic-001",
+      "manifest_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "initiated_by": "external_operator",
+      "reason_code": "external_stop",
+      "effective_at": "2026-08-11T00:00:02Z",
+      "all_leases_revoked": true,
+      "all_aliases_invalidated": true,
+      "all_tokens_invalidated": true,
+      "all_writable_caches_quarantined": true,
+      "all_further_calls_blocked": true,
+      "conversation_clear_is_cleanup": false,
+      "model_influenced_revocation": false,
+      "evidence_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+    },
+    "audit_evidence": {
+      "schema_version": "emr4.aes_c0.audit_evidence.v1",
+      "evidence_id": "evidence-synthetic-001",
+      "generation_id": "generation-synthetic-001",
+      "manifest_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "correlation_id": "correlation-synthetic-001",
+      "recorded_at": "2026-08-11T00:00:02Z",
+      "decision": "stop",
+      "reason_codes": ["external-stop"],
+      "cumulative_counts": {
+        "model_calls": 1,
+        "model_tokens": 512,
+        "input_bytes": 1024,
+        "output_bytes": 256,
+        "source_count": 1,
+        "request_count": 1,
+        "request_bytes": 1024,
+        "response_bytes": 256,
+        "total_bytes": 1280,
+        "distinct_destinations": 1,
+        "redirects": 0,
+        "broker_operations": 1,
+        "inert_tool_operations": 0,
+        "product_mutations": 0,
+        "command_confirmations": 0,
+        "denied_operations": 0,
+        "boundary_probes": 0,
+        "repeated_failures": 0,
+        "elapsed_ms": 800
+      },
+      "artifact_digests": [
+        "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+      ],
+      "revocation_state": "revoked",
+      "contains_sensitive_values": false
+    }
+  }
+}

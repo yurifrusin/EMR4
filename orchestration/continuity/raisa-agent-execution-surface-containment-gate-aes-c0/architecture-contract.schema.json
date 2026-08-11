@@ -1,0 +1,570 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/aes-c0/architecture-contract.v1.json",
+  "title": "Raisa AES-C0 architecture contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "status",
+    "evidence_mode",
+    "authority_boundary",
+    "trust_boundaries",
+    "capability_classes",
+    "candidate_influence_policy",
+    "generation_manifest_policy",
+    "budget_policy",
+    "route_classification",
+    "fallback_policy",
+    "revocation_and_kill_switch",
+    "supply_chain_identity",
+    "audit_evidence_policy",
+    "schema_registry",
+    "next_descendant"
+  ],
+  "properties": {
+    "schema_version": { "const": "emr4.aes_c0.architecture_contract.v1" },
+    "contract_id": {
+      "const": "raisa-agent-execution-surface-containment-gate-aes-c0"
+    },
+    "status": { "const": "architecture_only_unmounted" },
+    "evidence_mode": { "const": "authored_synthetic_provider_free" },
+    "authority_boundary": { "type": "object" },
+    "trust_boundaries": { "type": "array", "minItems": 8, "maxItems": 8 },
+    "capability_classes": { "type": "object" },
+    "candidate_influence_policy": { "type": "object" },
+    "generation_manifest_policy": { "type": "object" },
+    "budget_policy": { "type": "object" },
+    "route_classification": { "type": "object" },
+    "fallback_policy": { "type": "object" },
+    "revocation_and_kill_switch": { "type": "object" },
+    "supply_chain_identity": { "type": "object" },
+    "audit_evidence_policy": { "type": "object" },
+    "schema_registry": { "type": "array", "minItems": 6, "maxItems": 6 },
+    "next_descendant": { "type": "object" }
+  },
+  "$defs": {
+    "Digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "Identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "CapabilityGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability_id",
+        "capability_class",
+        "operation_id",
+        "adapter_id",
+        "destination_id",
+        "method",
+        "media_type",
+        "audience",
+        "source_class",
+        "allowed_input_fields",
+        "allowed_output_fields",
+        "max_calls",
+        "max_request_bytes",
+        "max_response_bytes",
+        "candidate_selects_operation_identity",
+        "provider_executed_tools",
+        "command_authority"
+      ],
+      "properties": {
+        "capability_id": { "$ref": "#/$defs/Identifier" },
+        "capability_class": {
+          "enum": [
+            "provider_inference",
+            "authoritative_read",
+            "inert_tool_adapter"
+          ]
+        },
+        "operation_id": { "$ref": "#/$defs/Identifier" },
+        "adapter_id": { "$ref": "#/$defs/Identifier" },
+        "destination_id": { "$ref": "#/$defs/Identifier" },
+        "method": { "enum": ["GET", "POST"] },
+        "media_type": { "enum": ["application/json"] },
+        "audience": { "$ref": "#/$defs/Identifier" },
+        "source_class": {
+          "enum": ["authored_synthetic", "authorized_product_read"]
+        },
+        "allowed_input_fields": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Identifier" }
+        },
+        "allowed_output_fields": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Identifier" }
+        },
+        "max_calls": { "type": "integer", "minimum": 1 },
+        "max_request_bytes": { "type": "integer", "minimum": 1 },
+        "max_response_bytes": { "type": "integer", "minimum": 1 },
+        "candidate_selects_operation_identity": { "const": false },
+        "provider_executed_tools": { "const": false },
+        "command_authority": { "const": false }
+      }
+    },
+    "ReasoningBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_model_calls", "max_model_tokens"],
+      "properties": {
+        "max_model_calls": { "type": "integer", "minimum": 1 },
+        "max_model_tokens": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "InformationBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_input_bytes", "max_output_bytes", "max_source_count"],
+      "properties": {
+        "max_input_bytes": { "type": "integer", "minimum": 1 },
+        "max_output_bytes": { "type": "integer", "minimum": 1 },
+        "max_source_count": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "EgressBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_requests",
+        "max_request_bytes",
+        "max_response_bytes",
+        "max_total_bytes",
+        "max_distinct_destinations",
+        "max_redirects"
+      ],
+      "properties": {
+        "max_requests": { "type": "integer", "minimum": 0 },
+        "max_request_bytes": { "type": "integer", "minimum": 0 },
+        "max_response_bytes": { "type": "integer", "minimum": 0 },
+        "max_total_bytes": { "type": "integer", "minimum": 0 },
+        "max_distinct_destinations": { "const": 1 },
+        "max_redirects": { "const": 0 }
+      }
+    },
+    "ActionBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_broker_operations",
+        "max_inert_tool_operations",
+        "max_product_mutations",
+        "max_command_confirmations"
+      ],
+      "properties": {
+        "max_broker_operations": { "type": "integer", "minimum": 0 },
+        "max_inert_tool_operations": { "type": "integer", "minimum": 0 },
+        "max_product_mutations": { "const": 0 },
+        "max_command_confirmations": { "const": 0 }
+      }
+    },
+    "DenialBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_denials", "max_boundary_probes", "max_repeated_failures"],
+      "properties": {
+        "max_denials": { "type": "integer", "minimum": 1 },
+        "max_boundary_probes": { "type": "integer", "minimum": 1 },
+        "max_repeated_failures": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "TimeBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_elapsed_ms"],
+      "properties": {
+        "max_elapsed_ms": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "BudgetLimits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reasoning",
+        "information",
+        "egress",
+        "action",
+        "denial",
+        "time"
+      ],
+      "properties": {
+        "reasoning": { "$ref": "#/$defs/ReasoningBudget" },
+        "information": { "$ref": "#/$defs/InformationBudget" },
+        "egress": { "$ref": "#/$defs/EgressBudget" },
+        "action": { "$ref": "#/$defs/ActionBudget" },
+        "denial": { "$ref": "#/$defs/DenialBudget" },
+        "time": { "$ref": "#/$defs/TimeBudget" }
+      }
+    },
+    "BudgetCounters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_calls",
+        "model_tokens",
+        "input_bytes",
+        "output_bytes",
+        "source_count",
+        "request_count",
+        "request_bytes",
+        "response_bytes",
+        "total_bytes",
+        "distinct_destinations",
+        "redirects",
+        "broker_operations",
+        "inert_tool_operations",
+        "product_mutations",
+        "command_confirmations",
+        "denied_operations",
+        "boundary_probes",
+        "repeated_failures",
+        "elapsed_ms"
+      ],
+      "properties": {
+        "model_calls": { "type": "integer", "minimum": 0 },
+        "model_tokens": { "type": "integer", "minimum": 0 },
+        "input_bytes": { "type": "integer", "minimum": 0 },
+        "output_bytes": { "type": "integer", "minimum": 0 },
+        "source_count": { "type": "integer", "minimum": 0 },
+        "request_count": { "type": "integer", "minimum": 0 },
+        "request_bytes": { "type": "integer", "minimum": 0 },
+        "response_bytes": { "type": "integer", "minimum": 0 },
+        "total_bytes": { "type": "integer", "minimum": 0 },
+        "distinct_destinations": { "type": "integer", "minimum": 0 },
+        "redirects": { "type": "integer", "minimum": 0 },
+        "broker_operations": { "type": "integer", "minimum": 0 },
+        "inert_tool_operations": { "type": "integer", "minimum": 0 },
+        "product_mutations": { "const": 0 },
+        "command_confirmations": { "const": 0 },
+        "denied_operations": { "type": "integer", "minimum": 0 },
+        "boundary_probes": { "type": "integer", "minimum": 0 },
+        "repeated_failures": { "type": "integer", "minimum": 0 },
+        "elapsed_ms": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "SupplyChainIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_image_digest",
+        "model_provider_contract_digest",
+        "system_contract_digest",
+        "adapter_artifact_digest",
+        "generation_manifest_digest"
+      ],
+      "properties": {
+        "runtime_image_digest": { "$ref": "#/$defs/Digest" },
+        "model_provider_contract_digest": { "$ref": "#/$defs/Digest" },
+        "system_contract_digest": { "$ref": "#/$defs/Digest" },
+        "adapter_artifact_digest": { "$ref": "#/$defs/Digest" },
+        "generation_manifest_digest": { "$ref": "#/$defs/Digest" }
+      }
+    },
+    "GenerationManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "manifest_id",
+        "manifest_digest",
+        "generation_id",
+        "bureau_id",
+        "work_cell_id",
+        "authority_binding_digest",
+        "purpose_code",
+        "issued_at",
+        "expires_at",
+        "immutable",
+        "capability_grants",
+        "budgets",
+        "stop_conditions",
+        "supply_chain_identity",
+        "command_authority"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c0.generation_manifest.v1" },
+        "manifest_id": { "$ref": "#/$defs/Identifier" },
+        "manifest_digest": { "$ref": "#/$defs/Digest" },
+        "generation_id": { "$ref": "#/$defs/Identifier" },
+        "bureau_id": { "$ref": "#/$defs/Identifier" },
+        "work_cell_id": { "$ref": "#/$defs/Identifier" },
+        "authority_binding_digest": { "$ref": "#/$defs/Digest" },
+        "purpose_code": { "$ref": "#/$defs/Identifier" },
+        "issued_at": { "$ref": "#/$defs/Timestamp" },
+        "expires_at": { "$ref": "#/$defs/Timestamp" },
+        "immutable": { "const": true },
+        "capability_grants": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CapabilityGrant" }
+        },
+        "budgets": { "$ref": "#/$defs/BudgetLimits" },
+        "stop_conditions": {
+          "type": "array",
+          "minItems": 11,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Identifier" }
+        },
+        "supply_chain_identity": { "$ref": "#/$defs/SupplyChainIdentity" },
+        "command_authority": { "const": false }
+      }
+    },
+    "CapabilityLease": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "lease_id",
+        "manifest_id",
+        "generation_id",
+        "capability_id",
+        "capability_class",
+        "audience",
+        "broker_id",
+        "authority_binding_digest",
+        "issued_at",
+        "expires_at",
+        "state",
+        "presented_to_work_cell",
+        "reusable_credential",
+        "command_authority"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c0.capability_lease.v1" },
+        "lease_id": { "$ref": "#/$defs/Identifier" },
+        "manifest_id": { "$ref": "#/$defs/Identifier" },
+        "generation_id": { "$ref": "#/$defs/Identifier" },
+        "capability_id": { "$ref": "#/$defs/Identifier" },
+        "capability_class": {
+          "enum": [
+            "provider_inference",
+            "authoritative_read",
+            "inert_tool_adapter"
+          ]
+        },
+        "audience": { "$ref": "#/$defs/Identifier" },
+        "broker_id": { "$ref": "#/$defs/Identifier" },
+        "authority_binding_digest": { "$ref": "#/$defs/Digest" },
+        "issued_at": { "$ref": "#/$defs/Timestamp" },
+        "expires_at": { "$ref": "#/$defs/Timestamp" },
+        "state": {
+          "enum": ["active", "expired", "revoked", "superseded", "quarantined"]
+        },
+        "presented_to_work_cell": { "const": false },
+        "reusable_credential": { "const": false },
+        "command_authority": { "const": false }
+      }
+    },
+    "BudgetState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "manifest_id",
+        "generation_id",
+        "ceilings",
+        "observed",
+        "counts_cumulative",
+        "terminal_state",
+        "next_operation_permitted"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c0.budget_state.v1" },
+        "manifest_id": { "$ref": "#/$defs/Identifier" },
+        "generation_id": { "$ref": "#/$defs/Identifier" },
+        "ceilings": { "$ref": "#/$defs/BudgetLimits" },
+        "observed": { "$ref": "#/$defs/BudgetCounters" },
+        "counts_cumulative": { "const": true },
+        "terminal_state": {
+          "enum": ["active", "exhausted", "revoked", "superseded", "quarantined"]
+        },
+        "next_operation_permitted": { "type": "boolean" }
+      }
+    },
+    "BrokerDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "decision_id",
+        "generation_id",
+        "manifest_digest",
+        "lease_id",
+        "capability_id",
+        "capability_class",
+        "candidate_digest",
+        "decision",
+        "reason_codes",
+        "proofreader_admitted",
+        "current_authority_checked",
+        "manifest_and_lease_match",
+        "operation_identity_broker_resolved",
+        "candidate_supplied_operation_identity",
+        "budget_before_digest",
+        "budget_after_digest",
+        "command_authority",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c0.broker_decision.v1" },
+        "decision_id": { "$ref": "#/$defs/Identifier" },
+        "generation_id": { "$ref": "#/$defs/Identifier" },
+        "manifest_digest": { "$ref": "#/$defs/Digest" },
+        "lease_id": { "$ref": "#/$defs/Identifier" },
+        "capability_id": { "$ref": "#/$defs/Identifier" },
+        "capability_class": {
+          "enum": [
+            "provider_inference",
+            "authoritative_read",
+            "inert_tool_adapter"
+          ]
+        },
+        "candidate_digest": { "$ref": "#/$defs/Digest" },
+        "decision": { "enum": ["allow", "deny", "stop"] },
+        "reason_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "manifest_grant_and_current_authority",
+              "manifest_grant_missing",
+              "lease_invalid",
+              "authority_changed",
+              "proofreader_not_admitted",
+              "budget_exhausted",
+              "operation_identity_candidate_controlled",
+              "forbidden_capability_class",
+              "generation_superseded",
+              "supply_chain_identity_mismatch",
+              "external_kill_switch"
+            ]
+          }
+        },
+        "proofreader_admitted": { "type": "boolean" },
+        "current_authority_checked": { "const": true },
+        "manifest_and_lease_match": { "type": "boolean" },
+        "operation_identity_broker_resolved": { "const": true },
+        "candidate_supplied_operation_identity": { "const": false },
+        "budget_before_digest": { "$ref": "#/$defs/Digest" },
+        "budget_after_digest": { "$ref": "#/$defs/Digest" },
+        "command_authority": { "const": false },
+        "recorded_at": { "$ref": "#/$defs/Timestamp" }
+      }
+    },
+    "RevocationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "revocation_id",
+        "generation_id",
+        "manifest_digest",
+        "initiated_by",
+        "reason_code",
+        "effective_at",
+        "all_leases_revoked",
+        "all_aliases_invalidated",
+        "all_tokens_invalidated",
+        "all_writable_caches_quarantined",
+        "all_further_calls_blocked",
+        "conversation_clear_is_cleanup",
+        "model_influenced_revocation",
+        "evidence_digest"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c0.revocation_record.v1" },
+        "revocation_id": { "$ref": "#/$defs/Identifier" },
+        "generation_id": { "$ref": "#/$defs/Identifier" },
+        "manifest_digest": { "$ref": "#/$defs/Digest" },
+        "initiated_by": {
+          "enum": [
+            "external_kill_switch",
+            "external_operator",
+            "authority_kernel",
+            "budget_monitor"
+          ]
+        },
+        "reason_code": {
+          "enum": [
+            "boundary_probe",
+            "budget_exhausted",
+            "authority_changed",
+            "generation_superseded",
+            "supply_chain_identity_mismatch",
+            "suspected_escape",
+            "external_stop"
+          ]
+        },
+        "effective_at": { "$ref": "#/$defs/Timestamp" },
+        "all_leases_revoked": { "const": true },
+        "all_aliases_invalidated": { "const": true },
+        "all_tokens_invalidated": { "const": true },
+        "all_writable_caches_quarantined": { "const": true },
+        "all_further_calls_blocked": { "const": true },
+        "conversation_clear_is_cleanup": { "const": false },
+        "model_influenced_revocation": { "const": false },
+        "evidence_digest": { "$ref": "#/$defs/Digest" }
+      }
+    },
+    "AuditEvidenceEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "evidence_id",
+        "generation_id",
+        "manifest_digest",
+        "correlation_id",
+        "recorded_at",
+        "decision",
+        "reason_codes",
+        "cumulative_counts",
+        "artifact_digests",
+        "revocation_state",
+        "contains_sensitive_values"
+      ],
+      "properties": {
+        "schema_version": { "const": "emr4.aes_c0.audit_evidence.v1" },
+        "evidence_id": { "$ref": "#/$defs/Identifier" },
+        "generation_id": { "$ref": "#/$defs/Identifier" },
+        "manifest_digest": { "$ref": "#/$defs/Digest" },
+        "correlation_id": { "$ref": "#/$defs/Identifier" },
+        "recorded_at": { "$ref": "#/$defs/Timestamp" },
+        "decision": { "enum": ["allow", "deny", "stop"] },
+        "reason_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Identifier" }
+        },
+        "cumulative_counts": { "$ref": "#/$defs/BudgetCounters" },
+        "artifact_digests": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Digest" }
+        },
+        "revocation_state": {
+          "enum": ["not_revoked", "revoked", "superseded", "quarantined"]
+        },
+        "contains_sensitive_values": { "const": false }
+      }
+    }
+  }
+}

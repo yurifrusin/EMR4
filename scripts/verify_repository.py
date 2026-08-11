@@ -31,6 +31,8 @@ FOCUSED_TESTS = [
     "tests/test_ariadne_orchestrator_preflight.py",
     "tests/test_current_baton_consistency.py",
     "tests/test_python_source_state.py",
+    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c0.py",
+    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c0_continuity.py",
     "tests/test_raisa_codebase_conformance_repair_continuity.py",
     "tests/test_repository_maintenance.py",
 ]
@@ -43,6 +45,8 @@ CI_CORRECTNESS_TESTS = [
     "tests/test_ariadne_orchestrator_preflight.py",
     "tests/test_current_baton_consistency.py",
     "tests/test_python_source_state.py",
+    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c0.py",
+    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c0_continuity.py",
     "tests/test_raisa_codebase_conformance_repair_continuity.py",
     "tests/test_repository_maintenance.py",
 ]

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 236 / Compass 218. The bounded Python 3.11 CI, API lifecycle and baton-consistency repair passes without product behavior change. AES-C0 architecture and contract is next; product, provider, data, tool, command and protected boundaries remain closed.
+> EMR4 is at Continuity 237 / Compass 219. AES-C0 passes as a closed, provider-free and unmounted Agent Execution Surface authority contract. Work is explicitly paused for a fresh task window before AES-C1; product, provider, data, runtime, tool, command and protected boundaries remain closed.
 
 ## North star
 
@@ -246,24 +246,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The authority architecture is sound; bounded CI and lifecycle conformance repair is required before AES-C0. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal`.
 115. **Repair repository fitness before executable Bureau containment — EMR4 bounded codebase conformance repair**
    Maintained Python 3.11 CI, API lifecycle supersession and baton consistency now pass; AES-C0 architecture is next. Lineage parent: `raisa-codebase-architectural-health-conformance-review`.
+116. **Freeze deterministic authority before executable Bureau capability — Raisa Agent Execution Surface AES-C0 architecture contract**
+   AES-C0 closed messages and hostile contract tests pass; AES-C1 provider-free admission rehearsal is next after the requested fresh-window pause. Lineage parent: `raisa-codebase-conformance-repair`.
 
 ## Current position
 
-**Repository conformance repaired; AES-C0 architecture next — EMR4 bounded codebase conformance repair**
+**AES-C0 authority grammar accepted; fresh-window pause before AES-C1 — Raisa Agent Execution Surface AES-C0 architecture contract**
 
-**Why this proof came next:** The prerequisite database slice, architecture-health review and narrow CI/lifecycle repair pass, so the selected containment programme can begin without opening runtime capability.
+**Why this proof came next:** The prerequisite durability, architectural-health and conformance work passed, allowing the selected containment boundary to be frozen without opening runtime capability.
 
-The maintained source, current API lifecycle and live baton now have executable consistency checks.
+Six closed containment records and all 37 hostile mutations now pass as provider-free architecture evidence.
 
 ### What this unlocks
 
-- Freeze AES-C0 capability classes, external broker trust boundary and immutable generation manifest.
-- Bind no-fallback state, route classification, command separation and exact denial behavior into AES-C0 acceptance.
-- Continue the planned provider-free containment sequence after architecture acceptance.
+- In a fresh task window, freeze AES-C1 authored-synthetic admission scenarios against the exact AES-C0 contract.
+- Prove manifest/grant/lease intersection, immutable generation and default denial without implementing a runtime broker.
+- Continue the planned containment sequence under standing authority after the requested context handoff.
 
 ### What it does not solve
 
-- Capability-broker implementation, hostile execution rehearsal or occupied work cells.
+- Capability-broker implementation, hostile process isolation or occupied work cells.
 - Applied migration, operational database/source access, watcher/listener or persistence.
 - Patient/product/clinical data, providers, tools, routes or commands.
 - Deployment, production, release, Pages or protected-ref movement.
@@ -333,8 +335,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Serial database durability, architecture-health review and bounded codebase conformance repair pass.
-- Freeze and accept AES-C0 architecture and contract before any executable capability descendant.
+- Serial database durability, architecture-health review, bounded conformance repair and AES-C0 architecture pass.
+- Freeze and execute AES-C1 provider-free admission before any broker simulation or occupied capability descendant.
 - Keep product/patient data, providers, operational persistence, tools and commands separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -524,6 +526,7 @@ Prerequisites:
 
 ## Map limits
 
+- AES-C0 proves closed contract coherence and finite hostile mutations, not runtime containment, broker correctness or product-data safety.
 - Codebase conformance repair proves the selected maintained-source and lifecycle checks, not exhaustive code quality or production readiness.
 - Architecture-health acceptance is a repository composition and focused-check review; it is not exhaustive assurance or production readiness.
 - Behavior/transaction acceptance proves the selected serial database slice only; it does not prove concurrency, restart, unknown-commit recovery, rotation, retention, applied migration or product runtime.
@@ -805,6 +808,9 @@ Prerequisites:
 - `docs/emr4-model-required-bureau-provider-free-successor-lanes.md`
 - `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`
 - `docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md`
+- `docs/raisa-agent-execution-surface-containment-gate-aes-c0-architecture.md`
+- `docs/raisa-agent-execution-surface-containment-gate-aes-c0-closeout.md`
+- `docs/raisa-agent-execution-surface-containment-gate-aes-c0-plan.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
@@ -974,6 +980,7 @@ Prerequisites:
 - `docs/security/hardening/model-required-bureau-gate-minus-one/hardening.json`
 - `docs/security/hardening/raisa-two-component-oidc-verifier/hardening.md`
 - `docs/security/pr70-codeql-alerts-543-544-triage-2026-08-01.md`
+- `docs/security/raisa-agent-execution-surface-containment-gate-aes-c0-threat-model-delta.md`
 - `docs/security/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
@@ -1089,6 +1096,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-aes-c0-architecture-contract-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-aes-c0-architecture-contract-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-aes-c0-architecture-contract-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-aes-c0-architecture-contract-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
@@ -1326,6 +1337,10 @@ Prerequisites:
 - `orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json`
 - `orchestration/continuity/model-required-bureau-provider-free-successor-lanes/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json`
+- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-acceptance-evidence.json`
@@ -1629,6 +1644,7 @@ Prerequisites:
 - `orchestration/harness_settings/operating_model.yaml`
 - `orchestration/harness_settings/python_source_state.json`
 - `orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md`
+- `orchestration/human_inbox/yuri/2026-08-11--aes-c0-architecture-contract.md`
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-architectural-health-conformance-review.md`
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-conformance-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -1720,4 +1736,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 218; continuity graph revision 236._
+_Compass map revision 219; continuity graph revision 237._

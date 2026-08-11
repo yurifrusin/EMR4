@@ -1,0 +1,18 @@
+{
+  "schema_version": "emr4.aes_c0.acceptance_report.v1",
+  "status": "passed",
+  "evidence_mode": "authored_synthetic_provider_free",
+  "runtime_started": false,
+  "provider_calls": 0,
+  "product_or_patient_data": false,
+  "canonical_error_count": 0,
+  "hostile_mutation_count": 37,
+  "hostile_mutation_rejected_count": 37,
+  "hostile_mutation_admitted": [],
+  "reasons": [],
+  "artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": "sha256:403c7ddac2399760395d60a8094ffe42d2519a4a809bc8a59104acd2883eb9ae",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json": "sha256:344d88c59a5d781ebb205de575b66f2e3d64f3878f73c9c0bf4d86eb996b1740",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json": "sha256:f77801d2d752ca2daeed1b3116d78a965441bc1996f6b6da60eccf72fbee9f3e"
+  }
+}

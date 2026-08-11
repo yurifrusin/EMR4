@@ -7,7 +7,7 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-codebase-conformance-repair"
+NODE_ID = "raisa-agent-execution-surface-containment-gate-aes-c0"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
 
@@ -18,29 +18,29 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_the_live_repair() -> None:
+def test_continuity_and_compass_bind_the_live_aes_c0_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 236
+    assert graph["graph_revision"] == 237
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 218
-    assert compass["source_graph_revision"] == 236
+    assert compass["map_revision"] == 219
+    assert compass["source_graph_revision"] == 237
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_agree_on_repair_and_aes_c0_handoff() -> None:
+def test_live_baton_rows_agree_on_aes_c0_and_aes_c1_handoff() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 236 / Compass 218" in current
-    assert "conformance repair passes" in current
+    assert "Continuity 237 / Compass 219" in current
+    assert "AES-C0 passes" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
-    assert "Begin AES-C0 architecture and contract" in next_work
-    assert "architecture-only" in next_work
+    assert "AES-C1 provider-free admission rehearsal" in next_work
+    assert "fresh task-window" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -62,23 +62,21 @@ def test_master_plan_and_handover_contain_no_stale_next_work_instruction() -> No
     assert stale_review_next not in handover
     assert stale_pause not in plan
     assert "conformance repair named in that review now also" in compact_plan
-    assert "The next safe tranche is AES-C0 architecture and contract" in compact_plan
+    assert "AES-C0 architecture and contract now also passes" in compact_plan
+    assert "AES-C1 provider-free admission is the next safe tranche" in compact_plan
 
 
 def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "product/runtime behavior",
-        "applied migration",
+        "no runtime broker",
+        "product read",
+        "database/source",
         "provider call",
         "tool",
-        "command/write",
-        "deployment",
-        "production",
-        "release",
-        "pages",
-        "protected-ref movement",
+        "command",
+        "standing uninterrupted-development authority",
         "docs/branding/",
     ):
         assert phrase in next_work

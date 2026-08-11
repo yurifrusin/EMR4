@@ -1,0 +1,400 @@
+{
+  "schema_version": "emr4.aes_c0.architecture_contract.v1",
+  "contract_id": "raisa-agent-execution-surface-containment-gate-aes-c0",
+  "status": "architecture_only_unmounted",
+  "evidence_mode": "authored_synthetic_provider_free",
+  "authority_boundary": {
+    "runtime_implementation": false,
+    "provider_call": false,
+    "product_or_patient_data": false,
+    "credential_or_iam": false,
+    "network_or_metadata_access": false,
+    "database_or_source_access": false,
+    "tool_execution": false,
+    "command_or_write": false,
+    "deployment_or_production": false,
+    "release_or_pages": false,
+    "protected_ref_movement": false
+  },
+  "trust_boundaries": [
+    {
+      "boundary_id": "authorized_surface_to_authority_kernel",
+      "from": "authorized_product_surface",
+      "to": "backend_authority_kernel",
+      "enforcement_owner": "backend",
+      "model_controls_boundary": false
+    },
+    {
+      "boundary_id": "context_assembler_to_work_cell",
+      "from": "context_fabric_assembler",
+      "to": "occupied_bureau_work_cell",
+      "enforcement_owner": "context_admission_gate",
+      "model_controls_boundary": false
+    },
+    {
+      "boundary_id": "work_cell_to_proofreader",
+      "from": "occupied_bureau_work_cell",
+      "to": "deterministic_proofreader",
+      "enforcement_owner": "proofreader",
+      "model_controls_boundary": false
+    },
+    {
+      "boundary_id": "proofreader_to_capability_broker",
+      "from": "deterministic_proofreader",
+      "to": "external_capability_broker",
+      "enforcement_owner": "capability_broker",
+      "model_controls_boundary": false
+    },
+    {
+      "boundary_id": "broker_to_exact_adapter",
+      "from": "external_capability_broker",
+      "to": "exact_allowlisted_adapter",
+      "enforcement_owner": "capability_broker_and_adapter",
+      "model_controls_boundary": false
+    },
+    {
+      "boundary_id": "adapter_to_external_or_product_system",
+      "from": "exact_allowlisted_adapter",
+      "to": "external_or_product_system",
+      "enforcement_owner": "adapter_and_target_policy",
+      "model_controls_boundary": false
+    },
+    {
+      "boundary_id": "proposal_to_rest_command_plane",
+      "from": "typed_proposal",
+      "to": "separately_authorized_rest_command",
+      "enforcement_owner": "backend_command_kernel",
+      "model_controls_boundary": false
+    },
+    {
+      "boundary_id": "telemetry_to_external_stop_control",
+      "from": "minimized_runtime_telemetry",
+      "to": "external_stop_revocation_and_incident_control",
+      "enforcement_owner": "external_control_plane",
+      "model_controls_boundary": false
+    }
+  ],
+  "capability_classes": {
+    "leaseable": [
+      {
+        "class_id": "provider_inference",
+        "side_effect_posture": "billable_inference_only",
+        "broker_resolves_operation_identity": true,
+        "candidate_selects_operation_identity": false,
+        "command_authority": false,
+        "provider_executed_tools": false
+      },
+      {
+        "class_id": "authoritative_read",
+        "side_effect_posture": "read_only_fresh_authorized_context",
+        "broker_resolves_operation_identity": true,
+        "candidate_selects_operation_identity": false,
+        "command_authority": false,
+        "provider_executed_tools": false
+      },
+      {
+        "class_id": "inert_tool_adapter",
+        "side_effect_posture": "authored_synthetic_no_external_effect",
+        "broker_resolves_operation_identity": true,
+        "candidate_selects_operation_identity": false,
+        "command_authority": false,
+        "provider_executed_tools": false
+      }
+    ],
+    "non_leaseable_outputs": [
+      {
+        "class_id": "typed_proposal_egress",
+        "destination": "deterministic_proofreader_only",
+        "executable": false,
+        "command_authority": false
+      }
+    ],
+    "always_denied": [
+      "generic_network",
+      "filesystem",
+      "database_or_sql",
+      "shell_or_process",
+      "cloud_or_container_metadata",
+      "repository_or_ci_write",
+      "provider_executed_tool",
+      "runtime_or_deployment_control",
+      "product_command",
+      "credential_enumeration"
+    ]
+  },
+  "candidate_influence_policy": {
+    "candidate_may_supply": [
+      "closed_typed_operation_arguments",
+      "closed_typed_proposal_fields",
+      "bounded_explanation_codes"
+    ],
+    "broker_must_resolve": [
+      "capability_id",
+      "adapter_id",
+      "operation_id",
+      "destination_id",
+      "method",
+      "media_type",
+      "audience",
+      "credential_reference",
+      "cleanup_target"
+    ],
+    "candidate_must_not_supply": [
+      "capability_id",
+      "adapter_id",
+      "operation_id",
+      "destination_id",
+      "url",
+      "method",
+      "media_type",
+      "audience",
+      "credential",
+      "filesystem_path",
+      "sql",
+      "executable",
+      "tool_definition",
+      "command_route",
+      "cleanup_target",
+      "policy_amendment"
+    ],
+    "context_and_memory_are_inert": true,
+    "template_interpretation": false,
+    "path_dereference": false,
+    "url_fetch_from_content": false,
+    "executable_deserialization": false
+  },
+  "generation_manifest_policy": {
+    "immutable_per_generation": true,
+    "policy_change_requires_new_generation": true,
+    "one_bureau_per_generation": true,
+    "one_work_cell_per_generation": true,
+    "principal_purpose_binding_required": true,
+    "current_authority_recheck_required": true,
+    "exact_capability_grants_required": true,
+    "work_cell_receives_manifest_as_authority": false,
+    "work_cell_receives_lease_or_credential": false,
+    "required_stop_conditions": [
+      "reasoning_budget_exhausted",
+      "information_budget_exhausted",
+      "egress_budget_exhausted",
+      "action_budget_exhausted",
+      "denial_budget_exhausted",
+      "elapsed_time_exhausted",
+      "boundary_probe_detected",
+      "authority_changed",
+      "generation_superseded",
+      "supply_chain_identity_mismatch",
+      "external_kill_switch"
+    ]
+  },
+  "budget_policy": {
+    "dimensions": [
+      {
+        "dimension": "reasoning",
+        "counters": ["model_calls", "model_tokens"],
+        "cumulative": true
+      },
+      {
+        "dimension": "information",
+        "counters": ["input_bytes", "output_bytes", "source_count"],
+        "cumulative": true
+      },
+      {
+        "dimension": "egress",
+        "counters": [
+          "request_count",
+          "request_bytes",
+          "response_bytes",
+          "total_bytes",
+          "distinct_destinations",
+          "redirects"
+        ],
+        "cumulative": true
+      },
+      {
+        "dimension": "action",
+        "counters": [
+          "broker_operations",
+          "inert_tool_operations",
+          "product_mutations",
+          "command_confirmations"
+        ],
+        "cumulative": true
+      },
+      {
+        "dimension": "denial",
+        "counters": ["denied_operations", "boundary_probes", "repeated_failures"],
+        "cumulative": true
+      },
+      {
+        "dimension": "time",
+        "counters": ["elapsed_ms"],
+        "cumulative": true
+      }
+    ],
+    "encoded_compressed_chunked_and_exception_channels_share_egress_budget": true,
+    "denied_attempts_are_counted": true,
+    "exhaustion_stops_before_next_operation": true,
+    "budgets_transfer_between_generations": false,
+    "maximum_distinct_destinations_per_generation": 1,
+    "maximum_redirects_per_generation": 0,
+    "maximum_product_mutations_per_generation": 0,
+    "maximum_command_confirmations_per_generation": 0
+  },
+  "route_classification": {
+    "graphql_query": {
+      "classification": "read_only_context_plane",
+      "work_cell_direct_access": false,
+      "generic_broker_query": false,
+      "typed_adapter_only": true,
+      "current_authority_required": true,
+      "command_authority": false
+    },
+    "event_signal": {
+      "classification": "signal_for_fresh_read_only",
+      "current_truth": false,
+      "capability_lease": false,
+      "fresh_authorized_read_required": true,
+      "command_authority": false
+    },
+    "access_ai_provider_invocation": {
+      "classification": "backend_brokered_model_command",
+      "frontend_direct_access": false,
+      "work_cell_direct_credential": false,
+      "provider_executed_tools": false,
+      "proofreader_release_required": true
+    },
+    "rest_openapi_command": {
+      "classification": "separate_single_purpose_command_plane",
+      "work_cell_direct_access": false,
+      "broker_may_prepare_proposal": true,
+      "broker_may_confirm_command": false,
+      "current_authorization_required": true,
+      "human_or_policy_gate_required": true,
+      "idempotency_required": true,
+      "audit_required": true,
+      "deterministic_readback_required": true
+    },
+    "sql_or_database_connection": {
+      "classification": "always_denied_to_work_cell",
+      "work_cell_direct_access": false,
+      "generic_broker_access": false,
+      "command_authority": false
+    }
+  },
+  "fallback_policy": {
+    "intelligent_release_requires": [
+      "admitted_provider_model_result",
+      "current_authorized_typed_context",
+      "deterministic_proofreader_admission"
+    ],
+    "provider_unavailable_state": "intelligence_unavailable",
+    "ordinary_manual_product_controls_remain_available": true,
+    "preconfigured_infrastructure_safeguards_continue": true,
+    "silent_provider_fallback": false,
+    "silent_model_fallback": false,
+    "deterministic_equivalent_intelligence_fallback": false,
+    "alternate_provider_requires_new_generation_and_separate_acceptance": true
+  },
+  "revocation_and_kill_switch": {
+    "owner": "external_control_plane",
+    "model_may_disable_or_delay": false,
+    "revocation_scope": [
+      "all_generation_leases",
+      "all_generation_aliases",
+      "all_generation_tokens",
+      "all_generation_writable_caches",
+      "all_further_generation_calls"
+    ],
+    "conversation_clear_is_revocation": false,
+    "fresh_model_context_is_revocation": false,
+    "suspected_escape_reuses_work_cell": false,
+    "evidence_preservation_required": true,
+    "quarantine_required": true
+  },
+  "supply_chain_identity": {
+    "digest_algorithm": "sha256",
+    "required_identities": [
+      "runtime_image_digest",
+      "model_provider_contract_digest",
+      "system_contract_digest",
+      "adapter_artifact_digest",
+      "generation_manifest_digest"
+    ],
+    "verify_before_generation_start": true,
+    "verify_at_broker_admission": true,
+    "work_cell_repository_write_credential": false,
+    "work_cell_ci_cd_credential": false,
+    "identity_mismatch_stops_generation": true
+  },
+  "audit_evidence_policy": {
+    "allowed_fields": [
+      "schema_version",
+      "evidence_id",
+      "generation_id",
+      "manifest_digest",
+      "correlation_id",
+      "recorded_at",
+      "decision",
+      "reason_codes",
+      "cumulative_counts",
+      "artifact_digests",
+      "revocation_state",
+      "contains_sensitive_values"
+    ],
+    "forbidden_fields": [
+      "raw_prompt",
+      "model_reasoning",
+      "raw_provider_response",
+      "credential",
+      "access_token",
+      "environment_variables",
+      "file_contents",
+      "source_code",
+      "sql",
+      "patient_identifier",
+      "patient_or_product_value",
+      "licensed_full_text",
+      "raw_exception_message",
+      "unrestricted_log"
+    ],
+    "reason_codes_are_closed": true,
+    "counts_are_cumulative": true,
+    "digests_are_version_bound": true,
+    "contains_sensitive_values_must_be_false": true
+  },
+  "schema_registry": [
+    {
+      "message_type": "GenerationManifest",
+      "schema_ref": "architecture-contract.schema.json#/$defs/GenerationManifest"
+    },
+    {
+      "message_type": "CapabilityLease",
+      "schema_ref": "architecture-contract.schema.json#/$defs/CapabilityLease"
+    },
+    {
+      "message_type": "BudgetState",
+      "schema_ref": "architecture-contract.schema.json#/$defs/BudgetState"
+    },
+    {
+      "message_type": "BrokerDecision",
+      "schema_ref": "architecture-contract.schema.json#/$defs/BrokerDecision"
+    },
+    {
+      "message_type": "RevocationRecord",
+      "schema_ref": "architecture-contract.schema.json#/$defs/RevocationRecord"
+    },
+    {
+      "message_type": "AuditEvidenceEnvelope",
+      "schema_ref": "architecture-contract.schema.json#/$defs/AuditEvidenceEnvelope"
+    }
+  ],
+  "next_descendant": {
+    "id": "aes-c1-provider-free-admission-rehearsal",
+    "runtime": false,
+    "provider_call": false,
+    "product_or_patient_data": false,
+    "tool_or_command": false,
+    "requires_fresh_frozen_plan": true
+  }
+}
