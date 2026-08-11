@@ -1,0 +1,523 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-provider-free-durability-concurrency-evidence.v1.json",
+  "title": "Raisa provider-free disposable PostgreSQL durability concurrency evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_mode",
+    "attempt_id",
+    "parent",
+    "environment",
+    "lifecycle",
+    "preconditions",
+    "scenarios",
+    "scenario_reconciliation",
+    "operation_counts",
+    "cleanup",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.raisa-context-fabric-disposable-postgresql-durability-concurrency-evidence.v1"
+    },
+    "result": {
+      "enum": [
+        "raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_pass",
+        "rehearsal_failed",
+        "environment_unavailable",
+        "cleanup_ownership_unverified"
+      ]
+    },
+    "evidence_mode": {
+      "const": "provider_free_disposable_postgresql_authored_synthetic_concurrency"
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "parent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "concurrency_contract_sha256": { "$ref": "#/$defs/digest" },
+        "concurrency_contract_schema_sha256": { "$ref": "#/$defs/digest" },
+        "serial_pass_evidence_sha256": { "$ref": "#/$defs/digest" },
+        "inert_sql_sha256": { "$ref": "#/$defs/digest" },
+        "render_manifest_sha256": { "$ref": "#/$defs/digest" },
+        "statement_count": { "const": 424 }
+      }
+    },
+    "environment": { "$ref": "#/$defs/environment" },
+    "lifecycle": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "eight_parent_bindings_verified",
+          "container_owned",
+          "passwordless_peer_cluster_started",
+          "postgres_ready",
+          "concurrency_database_ready",
+          "artifact_admitted",
+          "catalogue_reconciled",
+          "fixtures_closed",
+          "six_concurrency_scenarios_matched",
+          "catalogue_reconciled_after_concurrency",
+          "cleanup_verified",
+          "passed"
+        ]
+      }
+    },
+    "preconditions": {
+      "type": "array",
+      "maxItems": 6,
+      "items": { "$ref": "#/$defs/precondition" }
+    },
+    "scenarios": {
+      "type": "array",
+      "maxItems": 6,
+      "items": { "$ref": "#/$defs/scenario" }
+    },
+    "scenario_reconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expected", "observed", "passed"],
+      "properties": {
+        "expected": { "const": 6 },
+        "observed": { "type": "integer", "minimum": 0, "maximum": 6 },
+        "passed": { "type": "integer", "minimum": 0, "maximum": 6 }
+      }
+    },
+    "operation_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "participant_transactions",
+        "participant_retries",
+        "docker_containers",
+        "provider_calls",
+        "product_reads",
+        "product_commands",
+        "external_network_operations"
+      ],
+      "properties": {
+        "participant_transactions": { "const": 12 },
+        "participant_retries": { "const": 0 },
+        "docker_containers": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "provider_calls": { "const": 0 },
+        "product_reads": { "const": 0 },
+        "product_commands": { "const": 0 },
+        "external_network_operations": { "const": 0 }
+      }
+    },
+    "cleanup": { "$ref": "#/$defs/cleanup" },
+    "claim_boundary": {
+      "const": "six_exact_two_session_postgresql16_concurrency_outcomes_only_no_restart_unknown_commit_runtime_product_provider_command_deployment_or_production_claim"
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code"],
+      "properties": {
+        "stage": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$" },
+        "code": { "type": "string", "pattern": "^[A-Za-z0-9_]{1,128}$" },
+        "detail": { "type": "string", "maxLength": 128 },
+        "scenario_id": { "type": "string", "pattern": "^CFD1-C0[1-6]$" },
+        "relation": { "type": "string", "maxLength": 128 },
+        "sqlstate": { "type": "string", "pattern": "^[0-9A-Z]{5}$" }
+      }
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reference", "id", "pull_attempted"],
+      "properties": {
+        "reference": { "const": "postgres:16-bookworm" },
+        "id": { "$ref": "#/$defs/digest" },
+        "pull_attempted": { "const": false }
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "continuous_success_ms": { "type": "integer", "minimum": 0 },
+        "last_pg_isready_exit": { "type": "integer" },
+        "last_pg_isready_stderr_digest": { "$ref": "#/$defs/digest" },
+        "last_sql_failure_class": {
+          "enum": ["none", "transport", "authentication", "server", "unknown"]
+        },
+        "last_sql_probe_exit": { "type": "integer" },
+        "last_sql_stderr_digest": { "$ref": "#/$defs/digest" },
+        "last_sql_stdout_digest": { "$ref": "#/$defs/digest" },
+        "pg_isready_attempts": { "type": "integer", "minimum": 0 },
+        "pg_isready_successes": { "type": "integer", "minimum": 0 },
+        "sql_probe_attempts": { "type": "integer", "minimum": 0 },
+        "sql_probe_successes": { "type": "integer", "minimum": 0 },
+        "status": { "enum": ["probing", "stable", "failed"] }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["docker_client", "image", "elapsed_ms"],
+      "properties": {
+        "docker_client": {
+          "enum": ["unresolved", "resolved_exact_docker_exe"]
+        },
+        "image": {
+          "oneOf": [
+            { "const": "uninspected" },
+            { "$ref": "#/$defs/image" }
+          ]
+        },
+        "readiness": { "$ref": "#/$defs/readiness" },
+        "failure": { "$ref": "#/$defs/failure" },
+        "elapsed_ms": { "type": "integer", "minimum": 0, "maximum": 600000 }
+      }
+    },
+    "snapshotFact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "digest"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "public.appointments",
+        "public.appointment_command_idempotency",
+        "public.appointment_audit_log",
+        "public.diary_committed_events",
+        "emr4_context_fabric.context_observation_stream_head",
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1",
+        "emr4_context_fabric.diary_context_observation_outbox_v1",
+        "emr4_context_fabric.context_proofread_observation_admission",
+        "emr4_context_fabric.context_generation_registry_barrier",
+        "emr4_context_fabric.context_observer_generation",
+        "emr4_context_fabric.context_durability_checkpoint",
+        "emr4_context_fabric.context_recovery_anchor",
+        "emr4_context_fabric.context_classified_observation_receipt",
+        "emr4_context_fabric.context_frame_generation",
+        "emr4_context_fabric.context_invalidation_watermark",
+        "emr4_context_fabric.context_reassembly_obligation",
+        "emr4_context_fabric.context_durability_lifecycle",
+        "emr4_context_fabric.context_durability_audit",
+        "emr4_context_fabric.context_observation_key_interval",
+        "emr4_context_fabric.context_recovery_pin",
+        "emr4_context_fabric.context_service_practice_binding",
+        "emr4_context_fabric.context_retention_policy"
+      ],
+      "properties": {
+        "public.appointments": { "$ref": "#/$defs/snapshotFact" },
+        "public.appointment_command_idempotency": { "$ref": "#/$defs/snapshotFact" },
+        "public.appointment_audit_log": { "$ref": "#/$defs/snapshotFact" },
+        "public.diary_committed_events": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_observation_stream_head": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.diary_context_aggregate_aliases_v1": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.diary_context_observation_outbox_v1": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_proofread_observation_admission": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_generation_registry_barrier": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_observer_generation": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_durability_checkpoint": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_recovery_anchor": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_classified_observation_receipt": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_frame_generation": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_invalidation_watermark": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_reassembly_obligation": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_durability_lifecycle": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_durability_audit": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_observation_key_interval": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_recovery_pin": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_service_practice_binding": { "$ref": "#/$defs/snapshotFact" },
+        "emr4_context_fabric.context_retention_policy": { "$ref": "#/$defs/snapshotFact" }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session_user", "current_user", "isolation", "read_only"],
+      "properties": {
+        "session_user": {
+          "enum": ["context_lifecycle", "context_producer", "context_observer", "context_coordinator"]
+        },
+        "current_user": {
+          "enum": ["context_lifecycle", "context_producer", "context_observer", "context_coordinator"]
+        },
+        "isolation": { "enum": ["read committed", "serializable"] },
+        "read_only": { "const": false }
+      }
+    },
+    "transportDigest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["byte_count", "sha256"],
+      "properties": {
+        "byte_count": { "type": "integer", "minimum": 0, "maximum": 65536 },
+        "sha256": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "transport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["psql_exit", "stdout", "stderr"],
+      "properties": {
+        "psql_exit": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "stdout": { "$ref": "#/$defs/transportDigest" },
+        "stderr": { "$ref": "#/$defs/transportDigest" }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "sqlstate", "identity", "result_lines", "transport"],
+      "properties": {
+        "outcome": { "enum": ["commit", "rollback"] },
+        "sqlstate": {
+          "oneOf": [
+            { "type": "null" },
+            { "enum": ["40001", "CF004", "P0001"] }
+          ]
+        },
+        "identity": { "$ref": "#/$defs/identity" },
+        "result_lines": {
+          "type": "array",
+          "maxItems": 2,
+          "items": {
+            "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAY", "1", "2"]
+          }
+        },
+        "transport": { "$ref": "#/$defs/transport" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "outcome": { "const": "commit" } } },
+          "then": { "properties": { "sqlstate": { "type": "null" }, "transport": { "properties": { "psql_exit": { "const": 0 } } } } }
+        },
+        {
+          "if": { "properties": { "outcome": { "const": "rollback" } } },
+          "then": { "properties": { "sqlstate": { "type": "string" }, "transport": { "properties": { "psql_exit": { "minimum": 1 } } } } }
+        }
+      ]
+    },
+    "precondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "passed", "outcome"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$" },
+        "passed": { "const": true },
+        "outcome": { "$ref": "#/$defs/outcome" }
+      }
+    },
+    "overlap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "leader_post_function_hold_observed",
+        "leader_wait_event_type",
+        "leader_wait_event",
+        "leader_observed_within_ms",
+        "contender_lock_wait_observed",
+        "contender_wait_event_type",
+        "contender_observed_within_ms"
+      ],
+      "properties": {
+        "leader_post_function_hold_observed": { "const": true },
+        "leader_wait_event_type": { "const": "Timeout" },
+        "leader_wait_event": { "const": "PgSleep" },
+        "leader_observed_within_ms": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "contender_lock_wait_observed": { "const": true },
+        "contender_wait_event_type": { "const": "Lock" },
+        "contender_observed_within_ms": { "type": "integer", "minimum": 0, "maximum": 1000 }
+      }
+    },
+    "booleanMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "const": true },
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]{0,127}$" }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "category",
+        "principal",
+        "isolation",
+        "overlap",
+        "leader",
+        "contender",
+        "post_race",
+        "before",
+        "after",
+        "readback_checks",
+        "forbidden_effects_absent",
+        "passed"
+      ],
+      "properties": {
+        "scenario_id": { "type": "string", "pattern": "^CFD1-C0[1-6]$" },
+        "category": { "enum": ["REGISTRATION", "PRODUCER", "ADMISSION", "COORDINATOR"] },
+        "principal": { "enum": ["context_lifecycle", "context_producer", "context_observer", "context_coordinator"] },
+        "isolation": { "enum": ["read committed", "serializable"] },
+        "overlap": { "$ref": "#/$defs/overlap" },
+        "leader": { "$ref": "#/$defs/outcome" },
+        "contender": { "$ref": "#/$defs/outcome" },
+        "post_race": {
+          "type": "array",
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/precondition" }
+        },
+        "before": { "$ref": "#/$defs/snapshot" },
+        "after": { "$ref": "#/$defs/snapshot" },
+        "readback_checks": { "$ref": "#/$defs/booleanMap" },
+        "forbidden_effects_absent": { "$ref": "#/$defs/booleanMap" },
+        "passed": { "const": true }
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "removed", "absence_verified"],
+      "properties": {
+        "status": {
+          "enum": ["not_needed", "cleanup_verified", "cleanup_ownership_unverified", "cleanup_failed"]
+        },
+        "container_id": { "type": "string", "pattern": "^[0-9a-f]{12,64}$" },
+        "removed": { "type": "boolean" },
+        "absence_verified": { "type": "boolean" },
+        "failure": { "$ref": "#/$defs/failure" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_pass"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "parent": {
+            "required": [
+              "concurrency_contract_sha256",
+              "concurrency_contract_schema_sha256",
+              "serial_pass_evidence_sha256",
+              "inert_sql_sha256",
+              "render_manifest_sha256",
+              "statement_count"
+            ]
+          },
+          "environment": {
+            "required": ["docker_client", "image", "readiness", "elapsed_ms"],
+            "properties": {
+              "docker_client": { "const": "resolved_exact_docker_exe" },
+              "image": { "$ref": "#/$defs/image" },
+              "readiness": {
+                "required": [
+                  "continuous_success_ms",
+                  "last_pg_isready_exit",
+                  "last_pg_isready_stderr_digest",
+                  "last_sql_failure_class",
+                  "last_sql_probe_exit",
+                  "last_sql_stderr_digest",
+                  "last_sql_stdout_digest",
+                  "pg_isready_attempts",
+                  "pg_isready_successes",
+                  "sql_probe_attempts",
+                  "sql_probe_successes",
+                  "status"
+                ],
+                "properties": { "status": { "const": "stable" } }
+              }
+            },
+            "not": { "required": ["failure"] }
+          },
+          "lifecycle": {
+            "const": [
+              "eight_parent_bindings_verified",
+              "container_owned",
+              "passwordless_peer_cluster_started",
+              "postgres_ready",
+              "concurrency_database_ready",
+              "artifact_admitted",
+              "catalogue_reconciled",
+              "fixtures_closed",
+              "six_concurrency_scenarios_matched",
+              "catalogue_reconciled_after_concurrency",
+              "cleanup_verified",
+              "passed"
+            ]
+          },
+          "preconditions": {
+            "minItems": 6,
+            "maxItems": 6,
+            "prefixItems": [
+              { "$ref": "#/$defs/precondition", "properties": { "name": { "const": "register_observer_admission_same" } } },
+              { "$ref": "#/$defs/precondition", "properties": { "name": { "const": "register_observer_admission_divergent" } } },
+              { "$ref": "#/$defs/precondition", "properties": { "name": { "const": "register_observer_coordinator_commit" } } },
+              { "$ref": "#/$defs/precondition", "properties": { "name": { "const": "register_observer_coordinator_rollback" } } },
+              { "$ref": "#/$defs/precondition", "properties": { "name": { "const": "admit_coordinator_commit_primary" } } },
+              { "$ref": "#/$defs/precondition", "properties": { "name": { "const": "admit_coordinator_rollback_primary" } } }
+            ],
+            "items": false
+          },
+          "scenarios": {
+            "minItems": 6,
+            "maxItems": 6,
+            "prefixItems": [
+              { "$ref": "#/$defs/scenario", "properties": { "scenario_id": { "const": "CFD1-C01" }, "category": { "const": "REGISTRATION" }, "principal": { "const": "context_lifecycle" }, "isolation": { "const": "serializable" } } },
+              { "$ref": "#/$defs/scenario", "properties": { "scenario_id": { "const": "CFD1-C02" }, "category": { "const": "PRODUCER" }, "principal": { "const": "context_producer" }, "isolation": { "const": "read committed" } } },
+              { "$ref": "#/$defs/scenario", "properties": { "scenario_id": { "const": "CFD1-C03" }, "category": { "const": "ADMISSION" }, "principal": { "const": "context_observer" }, "isolation": { "const": "read committed" } } },
+              { "$ref": "#/$defs/scenario", "properties": { "scenario_id": { "const": "CFD1-C04" }, "category": { "const": "ADMISSION" }, "principal": { "const": "context_observer" }, "isolation": { "const": "read committed" } } },
+              { "$ref": "#/$defs/scenario", "properties": { "scenario_id": { "const": "CFD1-C05" }, "category": { "const": "COORDINATOR" }, "principal": { "const": "context_coordinator" }, "isolation": { "const": "serializable" } } },
+              { "$ref": "#/$defs/scenario", "properties": { "scenario_id": { "const": "CFD1-C06" }, "category": { "const": "COORDINATOR" }, "principal": { "const": "context_coordinator" }, "isolation": { "const": "serializable" } } }
+            ],
+            "items": false
+          },
+          "scenario_reconciliation": {
+            "properties": {
+              "expected": { "const": 6 },
+              "observed": { "const": 6 },
+              "passed": { "const": 6 }
+            }
+          },
+          "operation_counts": {
+            "properties": { "docker_containers": { "const": 1 } }
+          },
+          "cleanup": {
+            "required": ["status", "container_id", "removed", "absence_verified"],
+            "properties": {
+              "status": { "const": "cleanup_verified" },
+              "removed": { "const": true },
+              "absence_verified": { "const": true }
+            },
+            "not": { "required": ["failure"] }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "environment": { "required": ["failure"] }
+        }
+      }
+    }
+  ]
+}

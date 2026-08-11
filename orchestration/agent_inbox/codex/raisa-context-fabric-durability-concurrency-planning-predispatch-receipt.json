@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_exact_head_veto_of_the_cf_d1_concurrency_planning_packet",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Planning commit bbb446c50e6c33e2e1079960d68dfe2e597b9cce freezes six exact two-session races, wait-state overlap proof, least-privilege roles, zero participant retry, bounded evidence and exact cleanup while keeping restart/unknown-commit separate. Fourteen focused checks, Ruff and whitespace passed before commit.",
+    "current_authority_allocation": "GPT Sol retains planning, implementation, recovery, acceptance, integration and Git authority. Gemini 3.6 Flash/high through one fresh Antigravity project receives only an exact-head read-only planning veto in a new non-protected worktree; it may not edit, start Docker, access data/providers, self-accept, push or move refs. DeepSeek and native subagents are unassigned.",
+    "git_refs_and_worktree": "Immediately before this receipt, the task branch was clean at exact planning source bbb446c50e6c33e2e1079960d68dfe2e597b9cce. Local/origin master and handoff/current remained exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remained c72d712bcccbfb225d3c71ad3b633c33bec56d29. The fresh review path and branch were absent. The primary worktree preserved 494 original untracked files plus the one task-owned review packet; docs/branding remained unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The baton accepts AES-C5 at Continuity 242 / Compass 224, records no AES-C6, keeps Context Fabric active and identifies concurrency as unproved. Yuri selected CF-D1 and directed uninterrupted continuation.",
+    "protected_evidence_boundaries": "The verifier may inspect only AGENTS.md and the exact allowlisted CF-D1 and parent paths in its packet. It may run only the listed read-only Git, pytest and Ruff commands. Protected holdouts, historical Diary/PHI, docs/branding, all untracked files, Docker/PostgreSQL runtime, providers, product routes, credentials, network, commands, deployment, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

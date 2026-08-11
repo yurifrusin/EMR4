@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_cf_d1_provider_free_concurrency_harness_schema_tests_and_planning_veto_provenance_by_explicit_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen CF-D1 contract binds accepted serial attempt-048 and exact parent hashes. The implementation adds only the fixed six-race provider-free disposable PostgreSQL 16 harness, recursively closed minimized evidence schema and deterministic tests. Thirty-seven focused plan, schema, hostile-mutation and implementation checks pass with Ruff, py_compile and git diff checks; no Docker, database, provider, product or external-network operation occurred.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled CF-D1 implementation, deterministic verification, exact-path task-branch commit and later acceptance. The fresh Gemini 3.6 Flash/high planning veto passed at exact clean planning HEAD bbb446c50e6c33e2e1079960d68dfe2e597b9cce. A second fresh Gemini 3.6 Flash/high exact-HEAD implementation veto is required after this commit and before Docker; it has no implementation, runtime, acceptance, integration or protected-ref authority.",
+    "git_refs_and_worktree": "Immediately before this receipt, HEAD was planning commit bbb446c50e6c33e2e1079960d68dfe2e597b9cce and origin task remained c72d712bcccbfb225d3c71ad3b633c33bec56d29. Local/origin master and handoff/current were all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index and tracked tree were clean; seven owned CF-D1 implementation/planning-review files plus the preserved original 494 untracked files were present. Staging will use exact paths only and exclude docs/branding.",
+    "live_handover_current_baton": "AGENTS.md was read completely and the full five-source rehydration passed. The live baton accepts AES-C5 at Continuity 242 / Compass 224, records no AES-C6, keeps the Practice Context Fabric active, and names concurrency among the remaining unproved durability surfaces. Yuri selected CF-D1 and directed uninterrupted continuation.",
+    "protected_evidence_boundaries": "The commit is limited to the exact CF-D1 implementation files plus its planning-veto provenance and this receipt pair. All original 494 untracked files, including five docs/branding paths, remain preserved and unstaged. The tranche opens no restart, unknown-commit, provider, real/product/patient data, operational database/source, watcher/listener, application mutation, tool/command, deployment, production, release, Pages or protected-ref authority."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
