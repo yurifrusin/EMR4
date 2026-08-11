@@ -1,0 +1,72 @@
+{
+  "attempt_id": "fc490b904be367c98ec4a572",
+  "claim_boundary": "four_fixed_postgresql16_sigkill_same_cluster_restart_outcomes_only_no_literal_wal_ack_boundary_power_loss_driver_pool_operational_runtime_product_provider_command_deployment_production_release_or_protected_ref_claim",
+  "cleanup": {
+    "absence_verified": true,
+    "removed": true,
+    "status": "cleanup_verified"
+  },
+  "environment": {
+    "container": {
+      "actual_pgdata_storage": "owned_container_writable_layer",
+      "anonymous_volumes": 0,
+      "bind_mounts": 0,
+      "declared_volume_shield": "tmpfs",
+      "identity_digest": "sha256:489bd22687a51afb5e4fcb774b13b7354ca456d93bfb7f4fb6b06f05dad03354",
+      "named_volumes": 0,
+      "network_mode": "none",
+      "published_ports": 0
+    },
+    "docker_client": "resolved_exact_docker_exe",
+    "durability": {
+      "cluster_identity_digest": "sha256:622a8aaa4ba733adb2019c20544e4fe33cfe6ba7b0d67f7901e1cafcbc60d3dc",
+      "data_checksums": "on",
+      "fsync": "on",
+      "full_page_writes": "on",
+      "postgresql_major": 16,
+      "synchronous_commit": "on"
+    },
+    "elapsed_ms": 13589,
+    "failure": {
+      "code": "unexpected_terminal_success",
+      "stage": "scenario"
+    },
+    "image": {
+      "identity_digest": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "pull_attempted": false,
+      "reference": "postgres:16-bookworm"
+    }
+  },
+  "evidence_mode": "provider_free_disposable_postgresql_authored_synthetic_restart_unknown_commit_recovery",
+  "lifecycle": [
+    "eight_parent_bindings_verified",
+    "container_owned_and_storage_closed",
+    "postgres16_artifact_and_durability_reconciled",
+    "cleanup_verified"
+  ],
+  "operation_counters": {
+    "external_network_operations": 0,
+    "participant_retry": 0,
+    "product_commands": 0,
+    "product_reads": 0,
+    "provider_calls": 0,
+    "sigkill": 0
+  },
+  "parent": {
+    "artifact_sha256": "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7",
+    "contract_sha256": "sha256:73aad6f20ec68cae75617b090b38b82b611af2e56b6cebeaffd41079102cfd74",
+    "manifest_sha256": "sha256:2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271",
+    "source_head": "6575fc9016b784ed4baf33e61ce960612d6f6912",
+    "statement_count": 424
+  },
+  "preconditions": [],
+  "restarts": [],
+  "result": "rehearsal_failed",
+  "scenario_reconciliation": {
+    "expected": 4,
+    "observed": 0,
+    "passed": 0
+  },
+  "scenarios": [],
+  "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-durability-restart-unknown-commit-evidence.v1"
+}

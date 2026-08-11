@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_one_setup_only_provider_free_cf_d2_characterization_that_stops_before_any_sigkill_and_releases_only_fixture_coordinate_return_class_safe_sqlstate_and_allowlisted_result_tokens",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Immutable attempt 001 at source 6575fc9016b784ed4baf33e61ce960612d6f6912 failed before any scenario or SIGKILL with minimized code unexpected_terminal_success, zero external operations and cleanup_verified. Its whole-document schema and semantic validation passes and SHA-256 is 8e2519be3986a6dcb2721f83560a5c62bbb7ac6061f507a6479aab2f58c7b32e. A blind rerun is prohibited. The setup-only wrapper must stop before the fifteenth participant call and may report only ordinal, return-code class, safe SQLSTATE and allowlisted token list.",
+    "current_authority_allocation": "GPT Sol holds the bounded recovery lease and sole diagnosis, repair, acceptance and Git authority. Gemini's earlier read-only implementation veto is closed. No worker, provider, native subagent or product actor is assigned.",
+    "git_refs_and_worktree": "Task HEAD is exactly 6575fc9016b784ed4baf33e61ce960612d6f6912 and contains required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked files including docs/branding remain preserved; attempt 001 and this receipt pair are the only new eligible files and will be explicitly staged before diagnosis.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. CF-D2 is active. Its frozen stop-and-recovery rule permits one bounded mechanical correction after a preserved deterministic launcher, serialization, schema or test defect and forbids blind retry.",
+    "protected_evidence_boundaries": "The characterization uses only authored-synthetic fixtures in one newly owned networkless postgres:16-bookworm container and may not reach a crash cutpoint, SIGKILL, provider, product/patient/clinical data, production database/source/watcher, credentials, external network, deployment, Pages, release or protected refs. Raw SQL, stdout, stderr, query text, identifiers and server logs may not be printed or persisted. Exact owned-container cleanup remains mandatory."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
