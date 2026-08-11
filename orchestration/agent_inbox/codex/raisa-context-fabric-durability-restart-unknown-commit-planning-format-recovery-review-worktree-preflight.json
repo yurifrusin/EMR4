@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/cf-d2-planning-format-recovery-gemini-review",
+  "branch": "codex/cf-d2-planning-format-recovery-gemini-review",
+  "head": "e5d58d0483eccf09d1018a19bada984dd5e9944f",
+  "expected_head": "e5d58d0483eccf09d1018a19bada984dd5e9944f",
+  "clean": true,
+  "branch_prefix": "codex/cf-d2-planning-format-recovery-gemini-review",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

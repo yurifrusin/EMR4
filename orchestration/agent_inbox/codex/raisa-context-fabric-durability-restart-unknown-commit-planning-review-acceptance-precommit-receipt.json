@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_fresh_cf_d2_planning_pass_and_aer_0274_closure_before_implementation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "A genuinely fresh Gemini 3.6 Flash/high review passed exact corrected planning source e5d58d0483eccf09d1018a19bada984dd5e9944f with all 40 plan checks, Ruff lint/format, clean Git and zero P0-P2 findings or external operations. The prior rejection remains preserved. AER-0274 is corrected at register revision 241; implementation may begin within the frozen four-scenario boundary.",
+    "current_authority_allocation": "GPT Sol accepts the planning veto and owns the tightly coupled implementation. Gemini's pass is a read-only veto only. DeepSeek and native subagents remain unassigned; no runtime or Docker contact occurs before the separate implementation gate.",
+    "git_refs_and_worktree": "Task HEAD remains e5d58d0483eccf09d1018a19bada984dd5e9944f. The fresh review worktree was clean and unchanged at that source and is removed with its branch. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; all original 494 untracked files including five docs/branding paths remain preserved and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely. CF-D2 remains the active provider-free restart and unknown-commit tranche under standing authority.",
+    "protected_evidence_boundaries": "No Docker, database, provider, product read, external network, protected evidence or operational source was touched by either planning review. Real/product/patient/clinical data, credentials, application commands, deployment, production, release, Pages, protected refs, docs/branding and unrelated untracked files remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

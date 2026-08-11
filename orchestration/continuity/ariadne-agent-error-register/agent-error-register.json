@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 240,
+  "register_revision": 241,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -11007,16 +11007,18 @@
       "recurrence_signature": "orchestrator.pre_review_format_gate_omitted",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
+        "status": "corrected_fresh_attempt",
         "action": "Apply Ruff formatting only to the planning test, rerun all 40 planning checks plus Ruff lint and format, commit the exact correction with immutable rejected-review evidence, and require a genuinely fresh exact-head veto before implementation.",
         "prevention_control": "Before every external review, execute and record every command in the packet's allowlist locally, including format checks, rather than treating Ruff lint as a formatter substitute.",
         "evidence_paths": [
           "tests/test_raisa_provider_free_disposable_postgresql_durability_restart_unknown_commit_rehearsal_plan.py",
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-planning-review-receipt.json",
-          "docs/ariadne-agent-error-correction-register-revision-240.md"
+          "docs/ariadne-agent-error-correction-register-revision-240.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-planning-format-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-241.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     }
   ]
 }

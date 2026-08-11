@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_genuinely_fresh_gemini_36_flash_high_read_only_exact_head_veto_of_the_cf_d2_planning_format_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. CF-D2 remains the active provider-free restart and unknown-commit tranche under standing authority, with runtime closed pending fresh planning acceptance.",
+    "current_authority_allocation": "GPT Sol retains all planning, implementation, recovery, acceptance, Git and runtime authority. A new Gemini 3.6 Flash/high Antigravity project receives only a clean exact-head read-only veto. The prior rejected project is removed; DeepSeek and native subagents remain unassigned.",
+    "active_plan_and_acceptance": "Recovery commit e5d58d0483eccf09d1018a19bada984dd5e9944f preserves the rejected review and AER controls, changes only Ruff formatting in the material planning packet, and passes all current planning/register tests plus Ruff lint/format. AER-0274 remains contained until this fresh veto passes. No implementation or Docker runtime is open.",
+    "protected_evidence_boundaries": "The new verifier may inspect only the exact allowlist and run only the exact read-only commands in its packet. Protected evidence, historical Diary/PHI, docs/branding, untracked files, Docker/database runtime, real/product data, providers, external network, credentials, commands, deployment, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Task HEAD is exact recovery source e5d58d0483eccf09d1018a19bada984dd5e9944f. The fresh non-protected review worktree and branch are bound to that source. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains e690eefaf91115343b8fcbbecc7c3f5fe0b25193. All 494 original untracked files including five docs/branding paths remain preserved and unstaged."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "cf_d2_planning_format_recovery_predispatch_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed the exact corrected deterministic gate."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One genuinely fresh exact-head Gemini 3.6 Flash/high read-only veto is selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is open."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

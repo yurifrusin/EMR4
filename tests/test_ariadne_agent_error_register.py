@@ -38,7 +38,7 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 240
+    assert register["register_revision"] == 241
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 275)
@@ -2592,10 +2592,8 @@ def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
     assert formatting["stage"] == "independent_review"
     assert formatting["candidate_state"] == "accepted_candidate_changed"
     assert formatting["workflow_disposition"] == "review_rejected"
-    assert formatting["status"] == "contained"
-    assert formatting["correction"]["status"] == (
-        "control_implemented_pending_acceptance"
-    )
+    assert formatting["status"] == "corrected"
+    assert formatting["correction"]["status"] == ("corrected_fresh_attempt")
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2611,7 +2609,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 240
+    assert report["register_revision"] == 241
     assert report["incident_count"] == 274
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {

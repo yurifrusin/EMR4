@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_genuinely_fresh_gemini_36_flash_high_read_only_exact_head_veto_of_the_cf_d2_planning_format_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Recovery commit e5d58d0483eccf09d1018a19bada984dd5e9944f preserves the rejected review and AER controls, changes only Ruff formatting in the material planning packet, and passes all current planning/register tests plus Ruff lint/format. AER-0274 remains contained until this fresh veto passes. No implementation or Docker runtime is open.",
+    "current_authority_allocation": "GPT Sol retains all planning, implementation, recovery, acceptance, Git and runtime authority. A new Gemini 3.6 Flash/high Antigravity project receives only a clean exact-head read-only veto. The prior rejected project is removed; DeepSeek and native subagents remain unassigned.",
+    "git_refs_and_worktree": "Task HEAD is exact recovery source e5d58d0483eccf09d1018a19bada984dd5e9944f. The fresh non-protected review worktree and branch are bound to that source. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains e690eefaf91115343b8fcbbecc7c3f5fe0b25193. All 494 original untracked files including five docs/branding paths remain preserved and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely. CF-D2 remains the active provider-free restart and unknown-commit tranche under standing authority, with runtime closed pending fresh planning acceptance.",
+    "protected_evidence_boundaries": "The new verifier may inspect only the exact allowlist and run only the exact read-only commands in its packet. Protected evidence, historical Diary/PHI, docs/branding, untracked files, Docker/database runtime, real/product data, providers, external network, credentials, commands, deployment, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
