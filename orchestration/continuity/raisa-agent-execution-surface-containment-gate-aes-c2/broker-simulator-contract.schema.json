@@ -1,0 +1,1151 @@
+{
+  "$defs": {
+    "AdapterResult": {
+      "additionalProperties": false,
+      "properties": {
+        "command_authority": {
+          "const": false
+        },
+        "contains_sensitive_values": {
+          "const": false
+        },
+        "effect_class": {
+          "const": "none"
+        },
+        "invocation_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "result_code": {
+          "const": "inert-render-ok"
+        },
+        "result_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "result_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.adapter_result.v1"
+        }
+      },
+      "required": [
+        "schema_version",
+        "result_id",
+        "result_code",
+        "invocation_digest",
+        "result_digest",
+        "command_authority",
+        "effect_class",
+        "contains_sensitive_values"
+      ],
+      "type": "object"
+    },
+    "BrokerInvocation": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "invocation_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "operation_id": {
+          "const": "render-inert-adapter"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.broker_invocation.v1"
+        },
+        "synthetic_input_alpha": {
+          "const": "authored-synthetic-inert-input-alpha"
+        },
+        "synthetic_input_beta": {
+          "const": "authored-synthetic-inert-input-beta"
+        }
+      },
+      "required": [
+        "schema_version",
+        "invocation_id",
+        "operation_id",
+        "candidate_digest",
+        "synthetic_input_alpha",
+        "synthetic_input_beta"
+      ],
+      "type": "object"
+    },
+    "BrokerRegistry": {
+      "additionalProperties": false,
+      "properties": {
+        "entries": {
+          "items": {
+            "$ref": "#/$defs/BrokerRegistryEntry"
+          },
+          "maxItems": 2,
+          "minItems": 0,
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.broker_registry.v1"
+        },
+        "synthetic_custody_binding": {
+          "$ref": "#/$defs/SyntheticCustodyBinding"
+        }
+      },
+      "required": [
+        "schema_version",
+        "entries",
+        "synthetic_custody_binding"
+      ],
+      "type": "object"
+    },
+    "BrokerRegistryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "adapter_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "capability_class": {
+          "enum": [
+            "inert_tool_adapter",
+            "authoritative_read",
+            "provider_inference"
+          ]
+        },
+        "capability_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "command_authority": {
+          "type": "boolean"
+        },
+        "destination_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "effect_class": {
+          "enum": [
+            "none"
+          ]
+        },
+        "entry_id": {
+          "const": "registry-synthetic-inert-001"
+        },
+        "external_io": {
+          "type": "boolean"
+        },
+        "implementation_definition_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "implementation_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "media_type": {
+          "enum": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        "method": {
+          "enum": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "operation_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.broker_registry_entry.v1"
+        },
+        "source_class": {
+          "enum": [
+            "authored_synthetic",
+            "authorized_product_read"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "entry_id",
+        "capability_class",
+        "capability_id",
+        "adapter_id",
+        "operation_id",
+        "destination_id",
+        "method",
+        "media_type",
+        "source_class",
+        "implementation_id",
+        "effect_class",
+        "external_io",
+        "command_authority",
+        "adapter_artifact_digest",
+        "implementation_definition_digest"
+      ],
+      "type": "object"
+    },
+    "BrokerSimulationAttempt": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_result_override": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AdapterResult"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attempt_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "broker_admission_attempt": {
+          "type": "object"
+        },
+        "broker_registry": {
+          "$ref": "#/$defs/BrokerRegistry"
+        },
+        "expected_budget_commit": {
+          "$ref": "#/$defs/BudgetCommit"
+        },
+        "invocation_override": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BrokerInvocation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "post_admission_control_state": {
+          "$ref": "#/$defs/PostAdmissionControlState"
+        },
+        "scenario_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.broker_simulation_attempt.v1"
+        },
+        "work_cell_view": {
+          "$ref": "#/$defs/WorkCellView"
+        }
+      },
+      "required": [
+        "schema_version",
+        "attempt_id",
+        "scenario_id",
+        "work_cell_view",
+        "broker_admission_attempt",
+        "post_admission_control_state",
+        "broker_registry",
+        "expected_budget_commit",
+        "invocation_override",
+        "adapter_result_override"
+      ],
+      "type": "object"
+    },
+    "BrokerSimulationResult": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_artifact_identity_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "admission_decision": {
+          "enum": [
+            "allow",
+            "deny",
+            "stop"
+          ]
+        },
+        "admission_reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "boundary_assertions": {
+          "type": "object"
+        },
+        "budget_after_digest": {
+          "oneOf": [
+            {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "contains_sensitive_values": {
+          "const": false
+        },
+        "implementation_definition_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "invocation_digest": {
+          "oneOf": [
+            {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "released_simulated_result": {
+          "type": "boolean"
+        },
+        "result_digest": {
+          "oneOf": [
+            {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "result_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "scenario_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.broker_simulation_result.v1"
+        },
+        "simulated_invocation_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "simulated",
+            "not_dispatched",
+            "stop"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "result_id",
+        "scenario_id",
+        "status",
+        "reason_codes",
+        "admission_decision",
+        "admission_reason_codes",
+        "simulated_invocation_count",
+        "released_simulated_result",
+        "adapter_artifact_identity_digest",
+        "implementation_definition_digest",
+        "budget_after_digest",
+        "invocation_digest",
+        "result_digest",
+        "boundary_assertions",
+        "contains_sensitive_values"
+      ],
+      "type": "object"
+    },
+    "BudgetCommit": {
+      "additionalProperties": false,
+      "properties": {
+        "budget_after_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "cumulative_counts": {
+          "$ref": "#/$defs/BudgetCounters"
+        },
+        "next_operation_permitted": {
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.budget_commit.v1"
+        },
+        "terminal_state": {
+          "enum": [
+            "active",
+            "exhausted",
+            "revoked",
+            "superseded",
+            "quarantined"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "budget_after_digest",
+        "cumulative_counts",
+        "terminal_state",
+        "next_operation_permitted"
+      ],
+      "type": "object"
+    },
+    "BudgetCounters": {
+      "additionalProperties": false,
+      "properties": {
+        "boundary_probes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "broker_operations": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "command_confirmations": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "denied_operations": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "distinct_destinations": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "elapsed_ms": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "inert_tool_operations": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "input_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "model_calls": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "model_tokens": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "output_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "product_mutations": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "redirects": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "repeated_failures": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "request_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "request_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "response_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "source_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model_calls",
+        "model_tokens",
+        "input_bytes",
+        "output_bytes",
+        "source_count",
+        "request_count",
+        "request_bytes",
+        "response_bytes",
+        "total_bytes",
+        "distinct_destinations",
+        "redirects",
+        "broker_operations",
+        "inert_tool_operations",
+        "product_mutations",
+        "command_confirmations",
+        "denied_operations",
+        "boundary_probes",
+        "repeated_failures",
+        "elapsed_ms"
+      ],
+      "type": "object"
+    },
+    "ClosedCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "explanation_codes": {
+          "items": {
+            "$ref": "#/$defs/Identifier"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "proposal_fields": {
+          "additionalProperties": false,
+          "properties": {
+            "proposal-code": {
+              "$ref": "#/$defs/Identifier"
+            }
+          },
+          "required": [
+            "proposal-code"
+          ],
+          "type": "object"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c1.closed_candidate.v1"
+        },
+        "typed_arguments": {
+          "additionalProperties": false,
+          "properties": {
+            "operation_id": {
+              "$ref": "#/$defs/Identifier"
+            },
+            "scenario-code": {
+              "$ref": "#/$defs/Identifier"
+            },
+            "typed-context": {
+              "$ref": "#/$defs/Identifier"
+            }
+          },
+          "required": [
+            "scenario-code",
+            "typed-context"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema_version",
+        "candidate_id",
+        "typed_arguments",
+        "proposal_fields",
+        "explanation_codes"
+      ],
+      "type": "object"
+    },
+    "Digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "Identifier": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+    },
+    "ImplementationDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "command_authority": {
+          "const": false
+        },
+        "contains_provider_identifier": {
+          "const": false
+        },
+        "contains_url_host_port_path_sql_executable_command_tool": {
+          "const": false
+        },
+        "effect_class": {
+          "const": "none"
+        },
+        "external_io": {
+          "const": false
+        },
+        "implementation_id": {
+          "const": "aes-c2-pure-inert-render-v1"
+        },
+        "input_fields": {
+          "const": [
+            "invocation-id",
+            "operation-id",
+            "candidate-digest",
+            "synthetic-input-alpha",
+            "synthetic-input-beta"
+          ]
+        },
+        "kind": {
+          "const": "pure_inert_render"
+        },
+        "result_fields": {
+          "const": [
+            "result-code",
+            "invocation-digest",
+            "result-digest"
+          ]
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.adapter_definition.v1"
+        }
+      },
+      "required": [
+        "command_authority",
+        "contains_provider_identifier",
+        "contains_url_host_port_path_sql_executable_command_tool",
+        "effect_class",
+        "external_io",
+        "implementation_id",
+        "input_fields",
+        "kind",
+        "result_fields",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "PostAdmissionControlState": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_binding_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "external_kill_switch_active": {
+          "type": "boolean"
+        },
+        "generation_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "manifest_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "manifest_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "revocation_record": {
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.post_admission_control_state.v1"
+        }
+      },
+      "required": [
+        "schema_version",
+        "generation_id",
+        "manifest_id",
+        "manifest_digest",
+        "authority_binding_digest",
+        "revocation_record",
+        "external_kill_switch_active"
+      ],
+      "type": "object"
+    },
+    "ProofreaderResult": {
+      "additionalProperties": false,
+      "properties": {
+        "admitted": {
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "$ref": "#/$defs/Identifier"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "schema_version": {
+          "const": "emr4.aes_c1.proofreader_result.v1"
+        }
+      },
+      "required": [
+        "schema_version",
+        "admitted",
+        "reasons"
+      ],
+      "type": "object"
+    },
+    "ScenarioRegistryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_invocations": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "scenario_id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "simulated",
+            "not_dispatched",
+            "stop"
+          ]
+        }
+      },
+      "required": [
+        "scenario_id",
+        "status",
+        "reason_codes",
+        "expected_invocations"
+      ],
+      "type": "object"
+    },
+    "SyntheticCustodyBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "fixture_value_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "real_credential": {
+          "const": false
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.synthetic_custody_binding.v1"
+        }
+      },
+      "required": [
+        "fixture_value_digest",
+        "real_credential",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "Timestamp": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "WorkCellView": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate": {
+          "$ref": "#/$defs/ClosedCandidate"
+        },
+        "credential_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "proofreader_result": {
+          "$ref": "#/$defs/ProofreaderResult"
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.work_cell_view.v1"
+        }
+      },
+      "required": [
+        "schema_version",
+        "candidate",
+        "proofreader_result"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://emr4.local/schemas/aes-c2/broker-simulator-contract.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "adapter_invocation_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_content_selects_no_identity": {
+          "const": true
+        },
+        "fields": {
+          "const": [
+            "schema_version",
+            "invocation_id",
+            "operation_id",
+            "candidate_digest",
+            "synthetic_input_alpha",
+            "synthetic_input_beta"
+          ]
+        },
+        "operation_identity_broker_resolved": {
+          "const": true
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.broker_invocation.v1"
+        }
+      },
+      "required": [
+        "candidate_content_selects_no_identity",
+        "fields",
+        "operation_identity_broker_resolved",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "adapter_result_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "command_authority": {
+          "const": false
+        },
+        "contains_sensitive_values": {
+          "const": false
+        },
+        "effect_class": {
+          "const": "none"
+        },
+        "fields": {
+          "const": [
+            "schema_version",
+            "result_id",
+            "result_code",
+            "invocation_digest",
+            "result_digest",
+            "command_authority",
+            "effect_class",
+            "contains_sensitive_values"
+          ]
+        },
+        "schema_version": {
+          "const": "emr4.aes_c2.adapter_result.v1"
+        }
+      },
+      "required": [
+        "command_authority",
+        "contains_sensitive_values",
+        "effect_class",
+        "fields",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "broker_registry": {
+      "$ref": "#/$defs/BrokerRegistry"
+    },
+    "contract_id": {
+      "const": "raisa-agent-execution-surface-containment-gate-aes-c2"
+    },
+    "digest_rules": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_artifact_identity_rule": {
+          "const": {
+            "algorithm": "sha256",
+            "canonicalization": "inherited_c1_manifest_and_current_generation_identity",
+            "compared_with": "broker_registry.entries[0].adapter_artifact_digest",
+            "expected": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "no_equality_or_preimage_with_implementation_definition_digest": true
+          }
+        },
+        "adapter_result_digest_rule": {
+          "const": {
+            "algorithm": "sha256",
+            "canonicalization": "json_utf8_sorted_keys_compact_separators",
+            "digested_object": "adapter_result_payload"
+          }
+        },
+        "implementation_definition_digest_rule": {
+          "const": {
+            "algorithm": "sha256",
+            "canonicalization": "json_utf8_sorted_keys_compact_separators",
+            "compared_with": "broker_registry.entries[0].implementation_definition_digest",
+            "digested_object": "implementation_definition"
+          }
+        },
+        "invocation_digest_rule": {
+          "const": {
+            "algorithm": "sha256",
+            "canonicalization": "json_utf8_sorted_keys_compact_separators",
+            "digested_object": "broker_invocation"
+          }
+        }
+      },
+      "required": [
+        "adapter_artifact_identity_rule",
+        "adapter_result_digest_rule",
+        "implementation_definition_digest_rule",
+        "invocation_digest_rule"
+      ],
+      "type": "object"
+    },
+    "dispatch_precedence": {
+      "const": [
+        "1_reject_malformed_or_open_contract_attempt_registry_result_or_evidence",
+        "2_stop_on_inherited_aes_c1_artifact_or_simulator_contract_digest_mismatch",
+        "3_recompute_and_run_exact_aes_c1_admission_over_broker_side_attempt",
+        "4_return_not_dispatched_when_aes_c1_returns_deny_or_stop",
+        "5_stop_unless_registry_is_exactly_one_frozen_definition_and_identity_equals_admitted_operation",
+        "6_stop_if_work_cell_view_contains_forbidden_custody_or_identity_field",
+        "7_recheck_generation_manifest_authority_revocation_and_external_kill_before_dispatch",
+        "8_verify_and_commit_exact_aes_c1_budget_after_digest_and_cumulative_counts_before_invocation",
+        "9_build_invocation_entirely_from_registry_and_admitted_candidate_digest_and_allowlisted_fields",
+        "10_compare_broker_private_synthetic_custody_binding_without_copying_handle_or_value",
+        "11_call_single_fixed_pure_adapter_function_at_most_once",
+        "12_validate_exact_adapter_result_before_returning_minimized_evidence",
+        "13_make_any_stop_or_exhausted_generation_terminal_for_following_attempt"
+      ]
+    },
+    "evidence_mode": {
+      "const": "authored_synthetic_provider_free_in_process_inert_simulation"
+    },
+    "implementation_definition": {
+      "$ref": "#/$defs/ImplementationDefinition"
+    },
+    "inherited_artifact_digests": {
+      "additionalProperties": false,
+      "properties": {
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json": {
+          "const": "sha256:241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90"
+        },
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": {
+          "const": "sha256:2e6c5b83d379f5b6f900fa0a26a8733b6fe09496ff8e1c52d5ed40123603e9b6"
+        },
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json": {
+          "const": "sha256:e6e427efa32fb27387598042f0d1b1f19c4472b09288f7c8d3ed321a7309945c"
+        },
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/provider-free-admission-evidence.json": {
+          "const": "sha256:f7d1a2f60ef4b6f46242cfff7a12b36b6e20405a07ad788854c877851a0bbd4c"
+        },
+        "scripts/raisa_agent_execution_surface_containment_gate_aes_c1_admission.py": {
+          "const": "sha256:4407646c98dee84e8ef4210b0e06aa500178b5a2e2094ca02003b43fbf0acda6"
+        }
+      },
+      "required": [
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json",
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json",
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json",
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/provider-free-admission-evidence.json",
+        "scripts/raisa_agent_execution_surface_containment_gate_aes_c1_admission.py"
+      ],
+      "type": "object"
+    },
+    "reason_vocabulary": {
+      "const": [
+        "simulated_inert_adapter",
+        "admission_not_allow",
+        "registry_not_exact",
+        "adapter_identity_mismatch",
+        "supply_chain_identity_mismatch",
+        "credential_custody_violation",
+        "control_state_changed",
+        "external_kill_switch",
+        "invocation_contract_mismatch",
+        "adapter_result_invalid",
+        "budget_commit_mismatch",
+        "generation_terminal"
+      ]
+    },
+    "scenario_registry": {
+      "items": {
+        "$ref": "#/$defs/ScenarioRegistryEntry"
+      },
+      "maxItems": 26,
+      "minItems": 26,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "emr4.aes_c2.broker_simulator_contract.v1"
+    },
+    "status": {
+      "const": "frozen_for_authored_synthetic_provider_free_in_process_simulation"
+    },
+    "status_vocabulary": {
+      "const": [
+        "simulated",
+        "not_dispatched",
+        "stop"
+      ]
+    },
+    "synthetic_custody_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "digest_only_comparison": {
+          "const": true
+        },
+        "fixture_is_broker_private": {
+          "const": true
+        },
+        "fixture_never_emitted": {
+          "const": true
+        },
+        "fixture_value_prefix": {
+          "const": "synthetic-noncredential-fixture:"
+        },
+        "no_cross_generation_transfer": {
+          "const": true
+        },
+        "real_credential": {
+          "const": false
+        }
+      },
+      "required": [
+        "digest_only_comparison",
+        "fixture_is_broker_private",
+        "fixture_never_emitted",
+        "fixture_value_prefix",
+        "no_cross_generation_transfer",
+        "real_credential"
+      ],
+      "type": "object"
+    },
+    "work_cell_forbidden_fields": {
+      "const": [
+        "lease",
+        "capability_lease",
+        "registry",
+        "broker_registry",
+        "capability",
+        "capability_id",
+        "capability_class",
+        "operation",
+        "operation_id",
+        "adapter",
+        "adapter_id",
+        "destination",
+        "destination_id",
+        "method",
+        "media_type",
+        "executable",
+        "credential",
+        "credential_reference",
+        "filesystem_path",
+        "path",
+        "url",
+        "sql",
+        "tool",
+        "tool_definition",
+        "command_route",
+        "cleanup_target",
+        "policy",
+        "policy_amendment"
+      ]
+    },
+    "zero_runtime_boundary": {
+      "additionalProperties": false,
+      "properties": {
+        "command_operations": {
+          "const": 0
+        },
+        "database_operations": {
+          "const": 0
+        },
+        "executable_or_tool_operations": {
+          "const": 0
+        },
+        "filesystem_operations": {
+          "const": 0
+        },
+        "network_operations": {
+          "const": 0
+        },
+        "product_or_patient_data": {
+          "const": false
+        },
+        "provider_calls": {
+          "const": 0
+        },
+        "real_adapters_executed": {
+          "const": 0
+        },
+        "real_credentials_used": {
+          "const": false
+        },
+        "runtime_started": {
+          "const": false
+        },
+        "source_operations": {
+          "const": 0
+        }
+      },
+      "required": [
+        "command_operations",
+        "database_operations",
+        "executable_or_tool_operations",
+        "filesystem_operations",
+        "network_operations",
+        "product_or_patient_data",
+        "provider_calls",
+        "real_adapters_executed",
+        "real_credentials_used",
+        "runtime_started",
+        "source_operations"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "contract_id",
+    "status",
+    "evidence_mode",
+    "inherited_artifact_digests",
+    "status_vocabulary",
+    "reason_vocabulary",
+    "dispatch_precedence",
+    "implementation_definition",
+    "broker_registry",
+    "synthetic_custody_policy",
+    "work_cell_forbidden_fields",
+    "digest_rules",
+    "adapter_invocation_contract",
+    "adapter_result_contract",
+    "zero_runtime_boundary",
+    "scenario_registry"
+  ],
+  "title": "Raisa AES-C2 provider-free broker simulator contract",
+  "type": "object"
+}

@@ -1,0 +1,772 @@
+{
+  "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/authored-synthetic-broker-simulator-scenarios.json": "sha256:6ccbf4947ad004535080fc6a75914e54618e44f5e483acc490deed0d02eb1d1c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.json": "sha256:530c9c3067725f6078785e846fa82c0ebb89f72d0a8feeb5c2916d567b5a4ccf",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.schema.json": "sha256:895f1afc8c4d7f58ba0a8032f54f274496d93e1601e9ce40444d642d4bf0c175"
+  },
+  "command_operations": 0,
+  "contract_mutation_admitted": [],
+  "contract_mutation_count": 14,
+  "contract_mutation_rejected_count": 14,
+  "database_operations": 0,
+  "evidence_mode": "authored_synthetic_provider_free_in_process_inert_simulation",
+  "executable_or_tool_operations": 0,
+  "filesystem_operations": 0,
+  "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+  "inherited_artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json": "sha256:241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": "sha256:2e6c5b83d379f5b6f900fa0a26a8733b6fe09496ff8e1c52d5ed40123603e9b6",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json": "sha256:e6e427efa32fb27387598042f0d1b1f19c4472b09288f7c8d3ed321a7309945c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/provider-free-admission-evidence.json": "sha256:f7d1a2f60ef4b6f46242cfff7a12b36b6e20405a07ad788854c877851a0bbd4c",
+    "scripts/raisa_agent_execution_surface_containment_gate_aes_c1_admission.py": "sha256:4407646c98dee84e8ef4210b0e06aa500178b5a2e2094ca02003b43fbf0acda6"
+  },
+  "mutation_admitted": [],
+  "mutation_count": 18,
+  "mutation_rejected_count": 18,
+  "network_operations": 0,
+  "not_dispatched_count": 4,
+  "product_or_patient_data": false,
+  "provider_calls": 0,
+  "real_adapters_executed": 0,
+  "real_credentials_used": false,
+  "reasons": [],
+  "runtime_started": false,
+  "scenario_count": 26,
+  "scenario_results": [
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": "sha256:7062654640024a56cb6a3234da87fe1526c4c85a3559a8eee1772cad81bd7da3",
+      "reason_codes": [
+        "simulated_inert_adapter"
+      ],
+      "released_simulated_result": true,
+      "result_digest": "sha256:c55adcfe04c04d03a7a77eb73bbe1f42b72abab39cfce9482db58fe574daa18e",
+      "result_id": "simulation-result-exact-inert-dispatch-simulated",
+      "scenario_id": "exact-inert-dispatch-simulated",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 1,
+      "status": "simulated"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:163208fd44401fccf62329622546ea3b57c3d49bc340e04240d641b2f80ad6b6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": "sha256:553d89e939cf0c0e392930285f3becdec2565e9c031ccbd0ac20a65bd80afe49",
+      "reason_codes": [
+        "simulated_inert_adapter"
+      ],
+      "released_simulated_result": true,
+      "result_digest": "sha256:32e6b73bc13313e233d5db8815afdc3b3561fbfa1ea33483fa98b3b955e4e6b7",
+      "result_id": "simulation-result-exact-inert-second-within-budget-simulated",
+      "scenario_id": "exact-inert-second-within-budget-simulated",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 1,
+      "status": "simulated"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "deny",
+      "admission_reason_codes": [
+        "manifest_grant_missing"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "admission_not_allow"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-admission-deny-not-dispatched",
+      "scenario_id": "admission-deny-not-dispatched",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "not_dispatched"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "stop",
+      "admission_reason_codes": [
+        "external_kill_switch"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:9f5045324be490bf7789e8afa481a6064c6a4242313cf6a7dfb7186d56ad77a1",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "admission_not_allow"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-admission-stop-not-dispatched",
+      "scenario_id": "admission-stop-not-dispatched",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "not_dispatched"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "deny",
+      "admission_reason_codes": [
+        "proofreader_not_admitted"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:883782d2fc914ec69affd4dc2502c9795bb8a57c3588c004330d99c360e500a5",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "admission_not_allow"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-proofreader-deny-not-dispatched",
+      "scenario_id": "proofreader-deny-not-dispatched",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "not_dispatched"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "deny",
+      "admission_reason_codes": [
+        "operation_identity_candidate_controlled"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:2ff570a2a9180935f00d77cbfc2c2081c09805cd00a308c2797b0e74d9d4c12c",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "admission_not_allow"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-candidate-selector-not-dispatched",
+      "scenario_id": "candidate-selector-not-dispatched",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "not_dispatched"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "registry_not_exact"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-missing-stop",
+      "scenario_id": "registry-missing-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "registry_not_exact"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-extra-entry-stop",
+      "scenario_id": "registry-extra-entry-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "registry_not_exact"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-capability-mismatch-stop",
+      "scenario_id": "registry-capability-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-adapter-mismatch-stop",
+      "scenario_id": "registry-adapter-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-destination-mismatch-stop",
+      "scenario_id": "registry-destination-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-method-mismatch-stop",
+      "scenario_id": "registry-method-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-media-type-mismatch-stop",
+      "scenario_id": "registry-media-type-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-operation-mismatch-stop",
+      "scenario_id": "registry-operation-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-implementation-digest-mismatch-stop",
+      "scenario_id": "registry-implementation-digest-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "credential_custody_violation"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-registry-custody-binding-mismatch-stop",
+      "scenario_id": "registry-custody-binding-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-adapter-artifact-digest-mismatch-stop",
+      "scenario_id": "adapter-artifact-digest-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "credential_custody_violation"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-work-cell-custody-exposure-stop",
+      "scenario_id": "work-cell-custody-exposure-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "control_state_changed"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-generation-superseded-before-dispatch-stop",
+      "scenario_id": "generation-superseded-before-dispatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "control_state_changed"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-authority-changed-before-dispatch-stop",
+      "scenario_id": "authority-changed-before-dispatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "control_state_changed"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-revocation-before-dispatch-stop",
+      "scenario_id": "revocation-before-dispatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "external_kill_switch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-external-kill-before-dispatch-stop",
+      "scenario_id": "external-kill-before-dispatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "invocation_contract_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-invocation-candidate-digest-mismatch-stop",
+      "scenario_id": "invocation-candidate-digest-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "adapter_result_invalid"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-adapter-result-contract-mismatch-stop",
+      "scenario_id": "adapter-result-contract-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 1,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:4d7e8563d7d7a3e17eef9434b5aed8fc5f32c8374c6d89f775658d92a28969f6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "budget_commit_mismatch"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-budget-commit-mismatch-stop",
+      "scenario_id": "budget-commit-mismatch-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    },
+    {
+      "adapter_artifact_identity_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "admission_decision": "allow",
+      "admission_reason_codes": [
+        "manifest_grant_and_current_authority"
+      ],
+      "boundary_assertions": {
+        "candidate_selected_operation_identity": false,
+        "command_authority": false,
+        "real_runtime_or_external_effect": false,
+        "work_cell_received_credential_fixture": false,
+        "work_cell_received_lease_or_registry": false
+      },
+      "budget_after_digest": "sha256:163208fd44401fccf62329622546ea3b57c3d49bc340e04240d641b2f80ad6b6",
+      "contains_sensitive_values": false,
+      "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+      "invocation_digest": null,
+      "reason_codes": [
+        "generation_terminal"
+      ],
+      "released_simulated_result": false,
+      "result_digest": null,
+      "result_id": "simulation-result-repeat-after-terminal-stop",
+      "scenario_id": "repeat-after-terminal-stop",
+      "schema_version": "emr4.aes_c2.broker_simulation_result.v1",
+      "simulated_invocation_count": 0,
+      "status": "stop"
+    }
+  ],
+  "schema_version": "emr4.aes_c2.broker_simulator_report.v1",
+  "simulated_count": 2,
+  "simulated_inert_invocation_count": 3,
+  "source_operations": 0,
+  "status": "passed",
+  "stop_count": 20
+}

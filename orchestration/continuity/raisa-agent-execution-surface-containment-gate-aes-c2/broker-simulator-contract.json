@@ -1,0 +1,412 @@
+{
+  "adapter_invocation_contract": {
+    "candidate_content_selects_no_identity": true,
+    "fields": [
+      "schema_version",
+      "invocation_id",
+      "operation_id",
+      "candidate_digest",
+      "synthetic_input_alpha",
+      "synthetic_input_beta"
+    ],
+    "operation_identity_broker_resolved": true,
+    "schema_version": "emr4.aes_c2.broker_invocation.v1"
+  },
+  "adapter_result_contract": {
+    "command_authority": false,
+    "contains_sensitive_values": false,
+    "effect_class": "none",
+    "fields": [
+      "schema_version",
+      "result_id",
+      "result_code",
+      "invocation_digest",
+      "result_digest",
+      "command_authority",
+      "effect_class",
+      "contains_sensitive_values"
+    ],
+    "schema_version": "emr4.aes_c2.adapter_result.v1"
+  },
+  "broker_registry": {
+    "entries": [
+      {
+        "adapter_artifact_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "adapter_id": "synthetic-inert-adapter",
+        "capability_class": "inert_tool_adapter",
+        "capability_id": "capability-synthetic-inert",
+        "command_authority": false,
+        "destination_id": "synthetic-inert-destination",
+        "effect_class": "none",
+        "entry_id": "registry-synthetic-inert-001",
+        "external_io": false,
+        "implementation_definition_digest": "sha256:887429a4faee4eba7611ffbb8653fa8c9a730132446c9a7fc6e9ebab59efcb5d",
+        "implementation_id": "aes-c2-pure-inert-render-v1",
+        "media_type": "application/json",
+        "method": "POST",
+        "operation_id": "render-inert-adapter",
+        "schema_version": "emr4.aes_c2.broker_registry_entry.v1",
+        "source_class": "authored_synthetic"
+      }
+    ],
+    "schema_version": "emr4.aes_c2.broker_registry.v1",
+    "synthetic_custody_binding": {
+      "fixture_value_digest": "sha256:2f7b75acaf4e81534040e8311cb8edd38df4091e420f50e10614ae7b56e363a5",
+      "real_credential": false,
+      "schema_version": "emr4.aes_c2.synthetic_custody_binding.v1"
+    }
+  },
+  "contract_id": "raisa-agent-execution-surface-containment-gate-aes-c2",
+  "digest_rules": {
+    "adapter_artifact_identity_rule": {
+      "algorithm": "sha256",
+      "canonicalization": "inherited_c1_manifest_and_current_generation_identity",
+      "compared_with": "broker_registry.entries[0].adapter_artifact_digest",
+      "expected": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "no_equality_or_preimage_with_implementation_definition_digest": true
+    },
+    "adapter_result_digest_rule": {
+      "algorithm": "sha256",
+      "canonicalization": "json_utf8_sorted_keys_compact_separators",
+      "digested_object": "adapter_result_payload"
+    },
+    "implementation_definition_digest_rule": {
+      "algorithm": "sha256",
+      "canonicalization": "json_utf8_sorted_keys_compact_separators",
+      "compared_with": "broker_registry.entries[0].implementation_definition_digest",
+      "digested_object": "implementation_definition"
+    },
+    "invocation_digest_rule": {
+      "algorithm": "sha256",
+      "canonicalization": "json_utf8_sorted_keys_compact_separators",
+      "digested_object": "broker_invocation"
+    }
+  },
+  "dispatch_precedence": [
+    "1_reject_malformed_or_open_contract_attempt_registry_result_or_evidence",
+    "2_stop_on_inherited_aes_c1_artifact_or_simulator_contract_digest_mismatch",
+    "3_recompute_and_run_exact_aes_c1_admission_over_broker_side_attempt",
+    "4_return_not_dispatched_when_aes_c1_returns_deny_or_stop",
+    "5_stop_unless_registry_is_exactly_one_frozen_definition_and_identity_equals_admitted_operation",
+    "6_stop_if_work_cell_view_contains_forbidden_custody_or_identity_field",
+    "7_recheck_generation_manifest_authority_revocation_and_external_kill_before_dispatch",
+    "8_verify_and_commit_exact_aes_c1_budget_after_digest_and_cumulative_counts_before_invocation",
+    "9_build_invocation_entirely_from_registry_and_admitted_candidate_digest_and_allowlisted_fields",
+    "10_compare_broker_private_synthetic_custody_binding_without_copying_handle_or_value",
+    "11_call_single_fixed_pure_adapter_function_at_most_once",
+    "12_validate_exact_adapter_result_before_returning_minimized_evidence",
+    "13_make_any_stop_or_exhausted_generation_terminal_for_following_attempt"
+  ],
+  "evidence_mode": "authored_synthetic_provider_free_in_process_inert_simulation",
+  "implementation_definition": {
+    "command_authority": false,
+    "contains_provider_identifier": false,
+    "contains_url_host_port_path_sql_executable_command_tool": false,
+    "effect_class": "none",
+    "external_io": false,
+    "implementation_id": "aes-c2-pure-inert-render-v1",
+    "input_fields": [
+      "invocation-id",
+      "operation-id",
+      "candidate-digest",
+      "synthetic-input-alpha",
+      "synthetic-input-beta"
+    ],
+    "kind": "pure_inert_render",
+    "result_fields": [
+      "result-code",
+      "invocation-digest",
+      "result-digest"
+    ],
+    "schema_version": "emr4.aes_c2.adapter_definition.v1"
+  },
+  "inherited_artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json": "sha256:241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": "sha256:2e6c5b83d379f5b6f900fa0a26a8733b6fe09496ff8e1c52d5ed40123603e9b6",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/authored-synthetic-admission-scenarios.json": "sha256:e6e427efa32fb27387598042f0d1b1f19c4472b09288f7c8d3ed321a7309945c",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/provider-free-admission-evidence.json": "sha256:f7d1a2f60ef4b6f46242cfff7a12b36b6e20405a07ad788854c877851a0bbd4c",
+    "scripts/raisa_agent_execution_surface_containment_gate_aes_c1_admission.py": "sha256:4407646c98dee84e8ef4210b0e06aa500178b5a2e2094ca02003b43fbf0acda6"
+  },
+  "reason_vocabulary": [
+    "simulated_inert_adapter",
+    "admission_not_allow",
+    "registry_not_exact",
+    "adapter_identity_mismatch",
+    "supply_chain_identity_mismatch",
+    "credential_custody_violation",
+    "control_state_changed",
+    "external_kill_switch",
+    "invocation_contract_mismatch",
+    "adapter_result_invalid",
+    "budget_commit_mismatch",
+    "generation_terminal"
+  ],
+  "scenario_registry": [
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "supply_chain_identity_mismatch"
+      ],
+      "scenario_id": "adapter-artifact-digest-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 1,
+      "reason_codes": [
+        "adapter_result_invalid"
+      ],
+      "scenario_id": "adapter-result-contract-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "admission_not_allow"
+      ],
+      "scenario_id": "admission-deny-not-dispatched",
+      "status": "not_dispatched"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "admission_not_allow"
+      ],
+      "scenario_id": "admission-stop-not-dispatched",
+      "status": "not_dispatched"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "control_state_changed"
+      ],
+      "scenario_id": "authority-changed-before-dispatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "budget_commit_mismatch"
+      ],
+      "scenario_id": "budget-commit-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "admission_not_allow"
+      ],
+      "scenario_id": "candidate-selector-not-dispatched",
+      "status": "not_dispatched"
+    },
+    {
+      "expected_invocations": 1,
+      "reason_codes": [
+        "simulated_inert_adapter"
+      ],
+      "scenario_id": "exact-inert-dispatch-simulated",
+      "status": "simulated"
+    },
+    {
+      "expected_invocations": 1,
+      "reason_codes": [
+        "simulated_inert_adapter"
+      ],
+      "scenario_id": "exact-inert-second-within-budget-simulated",
+      "status": "simulated"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "external_kill_switch"
+      ],
+      "scenario_id": "external-kill-before-dispatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "control_state_changed"
+      ],
+      "scenario_id": "generation-superseded-before-dispatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "invocation_contract_mismatch"
+      ],
+      "scenario_id": "invocation-candidate-digest-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "admission_not_allow"
+      ],
+      "scenario_id": "proofreader-deny-not-dispatched",
+      "status": "not_dispatched"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "scenario_id": "registry-adapter-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "registry_not_exact"
+      ],
+      "scenario_id": "registry-capability-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "credential_custody_violation"
+      ],
+      "scenario_id": "registry-custody-binding-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "scenario_id": "registry-destination-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "registry_not_exact"
+      ],
+      "scenario_id": "registry-extra-entry-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "scenario_id": "registry-implementation-digest-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "scenario_id": "registry-media-type-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "scenario_id": "registry-method-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "registry_not_exact"
+      ],
+      "scenario_id": "registry-missing-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "adapter_identity_mismatch"
+      ],
+      "scenario_id": "registry-operation-mismatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "generation_terminal"
+      ],
+      "scenario_id": "repeat-after-terminal-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "control_state_changed"
+      ],
+      "scenario_id": "revocation-before-dispatch-stop",
+      "status": "stop"
+    },
+    {
+      "expected_invocations": 0,
+      "reason_codes": [
+        "credential_custody_violation"
+      ],
+      "scenario_id": "work-cell-custody-exposure-stop",
+      "status": "stop"
+    }
+  ],
+  "schema_version": "emr4.aes_c2.broker_simulator_contract.v1",
+  "status": "frozen_for_authored_synthetic_provider_free_in_process_simulation",
+  "status_vocabulary": [
+    "simulated",
+    "not_dispatched",
+    "stop"
+  ],
+  "synthetic_custody_policy": {
+    "digest_only_comparison": true,
+    "fixture_is_broker_private": true,
+    "fixture_never_emitted": true,
+    "fixture_value_prefix": "synthetic-noncredential-fixture:",
+    "no_cross_generation_transfer": true,
+    "real_credential": false
+  },
+  "work_cell_forbidden_fields": [
+    "lease",
+    "capability_lease",
+    "registry",
+    "broker_registry",
+    "capability",
+    "capability_id",
+    "capability_class",
+    "operation",
+    "operation_id",
+    "adapter",
+    "adapter_id",
+    "destination",
+    "destination_id",
+    "method",
+    "media_type",
+    "executable",
+    "credential",
+    "credential_reference",
+    "filesystem_path",
+    "path",
+    "url",
+    "sql",
+    "tool",
+    "tool_definition",
+    "command_route",
+    "cleanup_target",
+    "policy",
+    "policy_amendment"
+  ],
+  "zero_runtime_boundary": {
+    "command_operations": 0,
+    "database_operations": 0,
+    "executable_or_tool_operations": 0,
+    "filesystem_operations": 0,
+    "network_operations": 0,
+    "product_or_patient_data": false,
+    "provider_calls": 0,
+    "real_adapters_executed": 0,
+    "real_credentials_used": false,
+    "runtime_started": false,
+    "source_operations": 0
+  }
+}
