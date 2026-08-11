@@ -140,33 +140,44 @@ path. Google explicitly states that an endpoint alone does not guarantee data
 residency or in-region ML processing. No Australian physical or sovereign
 processing claim is permitted.
 
-## Immutable generation and two broker admissions
+## Two immutable generations and two broker admissions
 
-One immutable AES-C5 generation contains exactly two grants:
+AES-C0 permits exactly one destination per immutable generation. AES-C5
+therefore uses the narrowest honest composition: two separately immutable,
+non-overlapping generations with exactly one grant and one destination each:
 
-1. `authoritative_read` for the exact local practitioner-directory GET; and
-2. `provider_inference` for the exact Sydney Vertex request.
+1. the source generation grants `authoritative_read` for the exact local
+   practitioner-directory GET; and
+2. only after the source generation is exhausted and revoked, the provider
+   generation grants `provider_inference` for the exact Sydney Vertex request.
 
-Each operation has a distinct broker-owned, single-use lease and ledger. The
-manifest binds one purpose, Bureau, Reception One work cell, synthetic
-principal, disposable tenant, route, query, response/minimized fields, provider
-binding, budgets, adapter/runtime/source-contract digests and proofreader
-contracts. Candidate/model content cannot select a capability, lease, adapter,
-destination, method, route, URL, credential, SQL, filesystem path, executable,
-tool, command or cleanup target.
+Each generation has its own broker-owned, single-use lease, ledger, manifest
+digest, current-generation state and AES-C1 admission. The provider generation
+is not instantiated until validation and minimization produce the exact fresh
+`ContextFrameSet`; its immutable manifest binds that frame digest. Neither a
+lease, credential nor budget transfers between generations. Both manifests
+bind the same purpose, Bureau, Reception One work cell, synthetic principal,
+envelope and current-authority decision. Candidate/model content cannot select
+a capability, lease, adapter, destination, method, route, URL, credential, SQL,
+filesystem path, executable, tool, command or cleanup target.
 
-The broker repeats the AES-C1 manifest/grant/lease/current-generation/current-
-authority/revocation/supply-chain/budget intersection immediately before each
-operation. Source and provider allowances are committed before their respective
-I/O. A post-reservation failure consumes the relevant allowance; no rollback
-reopens it. The provider operation is ineligible unless the one source read,
-minimizer and pre-dispatch proofreader all pass and the frame remains fresh.
+The broker performs the complete AES-C1 schema validation and then repeats the
+manifest/grant/lease/current-generation/current-authority/revocation/supply-
+chain/budget intersection immediately before each operation. Source and
+provider allowances are committed before their respective I/O. A post-
+reservation failure consumes the relevant allowance; no rollback reopens it.
+The provider generation is ineligible unless the one source read, minimizer and
+pre-dispatch proofreader all pass and the frame remains fresh.
 
-Budgets are cumulative across both admissions: two broker operations, two
-fixed destinations, one product route call, one provider call, one source,
-bounded bytes/tokens/time, zero redirects, zero tools, zero product mutations
-and zero command confirmations. The final provider admission exhausts the
-model-call budget; terminal cleanup revokes any unused numeric headroom.
+AES-C0 budgets remain generation-local and cumulative only within their own
+generation, exactly as the parent contract requires. A separate external,
+broker-owned attempt ledger caps the whole AES-C5 sequence at two broker
+operations, two fixed downstream destinations, one product route call, one
+provider call, one source, bounded aggregate bytes/tokens/time, zero redirects,
+zero tools, zero product mutations and zero command confirmations. It supplies
+no grant and cannot transfer or enlarge either generation's budget. Each
+single-operation generation exhausts before terminal revocation; cleanup
+invalidates all remaining numeric headroom.
 
 ## Product adapter and transaction boundary
 
@@ -182,7 +193,7 @@ During the measured read, an SQL observer permits only the expected read/control
 statements and rejects any DML or DDL. The harness verifies that practitioner,
 appointment and appointment-audit counts are unchanged across the route call.
 Seed and schema teardown are test-fixture setup/cleanup, not product commands,
-and occur outside the occupied generation. Cleanup drops only the exact
+and occur outside the occupied generations. Cleanup drops only the exact
 validated task-owned schema after disposing its engine and clearing app
 dependency overrides.
 

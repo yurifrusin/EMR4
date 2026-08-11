@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_bounded_deepseek_v4_flash_high_worker_to_implement_only_the_provider_free_database_free_aes_c5_containment_core_and_focused_tests",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen AES-C5 plan, threat-model delta, envelope/schema and focused plan tests are committed at source 1e2756f15eb3ff3fe051b72855d773b4a82ff6a6. They require one immutable generation with authoritative_read plus provider_inference grants, strict practitioner-directory minimization, an expiring ContextFrameSet, deterministic no-command release and complete cleanup. The worker packet limits implementation to a pure provider-free/database-free core and focused tests; Sol alone later binds the real local route and Vertex adapter after deterministic review.",
+    "current_authority_allocation": "DeepSeek V4 Flash/high through Claude Code bare receives one bounded implementation/test lease for exactly two new files. GPT Sol retains architecture, privacy, plan, review, recovery, acceptance, occupied source/provider execution, Git integration and publication authority. The worker has no product data, database, provider, credential, integration, push, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "The clean worker worktree C:/Users/sarashera/EMR4-worktrees/aes-c5-deepseek-blue is on codex/aes-c5-blue-deepseek at exact frozen source 1e2756f15eb3ff3fe051b72855d773b4a82ff6a6. The main task worktree is on codex/ariadne-bernie-davida-parallel-seam at the same commit with only the task-owned packet and this receipt pair untracked. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed AES-C4 source e569da0a9081117b799e9437d8b7025230e2162b are ancestors. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Every pre-existing untracked path remains preserved and excluded.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223 and AES-C5 is the final named AES descendant. Yuri selected the authenticated practitioner-directory GET and Reception One booking-context purpose.",
+    "protected_evidence_boundaries": "The exact packet forbids repository-wide discovery and every protected fixture, support module, holdout, authoring surface, manifest, seal, receipt and per-case report. It also forbids docs/branding, unrelated untracked files, historical Diary/PHI, patient/clinical/real-person/product data, application/database runtime, provider/network/cloud/credentials, command/write, deployment, production, Pages and protected refs. AER-0263 output is excluded and supplies no evidence."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

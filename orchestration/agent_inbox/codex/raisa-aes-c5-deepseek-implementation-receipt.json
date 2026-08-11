@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All complete. Here is my report.\n\n---\n\n## AES-C5 provider-free containment core \u2014 report\n\n**decision:** `candidate_ready`\n\n**exact commit SHA:** `4ade7ce5d2989e03325786b29db911488927a8b8`\n\n**branch:** `codex/aes-c5-blue-deepseek` (HEAD was clean at source `1e2756f15eb3ff3fe051b72855d773b4a82ff6a6` before commit)\n\n**changed files (exactly the two owned files):**\n- `scripts/raisa_agent_execution_surface_containment_gate_aes_c5_product_runtime_admission.py` (1876 lines)\n- `tests/test_raisa_agent_execution_surface_containment_gate_aes_c5.py` (932 lines)\n\n**Verification results (serially, via root interpreter `C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe` \u2014 the worktree has no `.venv`):**\n- `pytest` on my test file + the committed plan test: **62 passed** (51 mine incl. 9 parametrized + 11 plan), exit 0\n- `ruff check` on both owned files: **All checks passed**\n- `py_compile` on both owned files: **OK**\n- `git diff --check`: **OK**\n- Worktree clean after commit.\n\n**Hostile-test count:** 43 test functions + 9 parametrized candidate-selector cases = **51 hostile/deterministic test items**, covering every required class: envelope/schema and inherited-digest drift; missing/extra grant; wrong class/route/method/query/provider/destination; candidate selector/URL/SQL/path/tool/command/credential fields; wrong/duplicate/malformed/non-UUID ids; inactive/missing/extra/fourth row; blank/duplicate/oversized/non-string display name; malformed/oversized role label; unexpected route field and nested sensitive field; UUID/name/alias-map leakage into minimized evidence; stale/expired ContextFrameSet; wrong manifest/source/context digest; wrong target alias; extra/missing/wrong provider output fields; duplicate JSON keys; wrong command authority; cumulative budget exhaustion; stale lease; supersession; authority change; external kill/revocation; replay; ledger consumption/cleanup after allow and every denial/failure; and CLI live/local-source denial before adapter invocation.\n\n**Provider calls, product reads, database operations:** all **zero**. The core uses only injected provider-free source/provider fixtures; evidence `operation_counters` report `provider_calls: 0`, `product_reads: 0`, `database_operations: 0` (source fixture = 1 simulated provider-free operation). No network, ADC, token, TestClient, SQLAlchemy engine/session, or subprocess is used.\n\n**Implementation highlights:** one immutable generation with exactly two grants (`authoritative_read` GET + `provider_inference` Vertex POST); two distinct broker-owned single-use leases; two sequential AES-C1 admission attempts with cumulative budget state (first stays `active`, second exhausts to `exhausted`); strict 3-row route validation; order-derived opaque aliases with UUID/active/location/alias-map kept broker-side; 60-second digest-bound ContextFrameSet with 30-second source-to-dispatch age; closed Vertex request over the minimized frame targeting `Marlow Quill`; deterministic 4-field proofreader (`decision_code`, `selected_practitioner_ref`, `context_frame_set_digest`, `command_authority: false`); separate single-use source/provider ledgers consumed on every terminal path; minimized evidence (digests/counts/reason codes only); provider-free-only CLI with closed pre-I/O denial for local-source/live.\n\n**Blockers / deviations (none blocking):**\n1. The frozen AES-C5 envelope requires **two distinct destinations**, but the AES-C0 schema constrains `EgressBudget.max_distinct_destinations` to `const: 1`. The core therefore drives the AES-C1 admission intersection via `c1.evaluate_attempt` directly (manifest/grant/lease/current-authority/revocation/supply-chain/budget checks) rather than `c1.validate_attempt` (which would reject a two-destination budget). The two-destination boundary is enforced by the frozen envelope values, `validate_generation`, and the two distinct grants \u2014 a documented choice honoring the frozen AES-C5 envelope.\n2. The envelope schema's `closedObject` allows additional nested keys by design; the exact frozen-value check (`validate_envelope_values`) plus the root-level `additionalProperties: false` enforce the real boundary (the hostile test uses a top-level schema violation).\n3. No local `.venv` existed, so the exact root interpreter was used per the packet.",
+  "usage": {
+    "input_tokens": 100249,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 19493504,
+    "output_tokens": 157630,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 14.203796999999998,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

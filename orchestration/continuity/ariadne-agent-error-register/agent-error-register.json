@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 229,
+  "register_revision": 231,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10583,6 +10583,87 @@
           "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-plan.md",
           "orchestration/agent_inbox/codex/raisa-aes-c5-expired-legacy-readiness-gate-analysis.md",
           "docs/ariadne-agent-error-correction-register-revision-229.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0265",
+      "attempt_id": "raisa-aes-c5-deepseek-pure-core-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c5-practitioner-directory-product-runtime-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "Every AES-C5 generation must validate against the exact AES-C0 and AES-C1 message schemas, including the exact one-destination-per-generation egress ceiling, before admission evaluation or any I/O.",
+      "observed_error": "The first frozen AES-C5 plan placed an authoritative local read and Sydney provider inference in one generation with two destinations. The worker candidate accurately disclosed the AES-C0 conflict but bypassed c1.validate_attempt and called c1.evaluate_attempt over an inadmissible two-destination manifest. The same review found that its fixture treated optional roleLabel and nullable or object defaultLocation as required strings. No product, database, credential, cloud or provider operation occurred.",
+      "detection_method": "Sol compared the candidate's disclosed deviation and code against the exact inherited AES-C0 EgressBudget schema, AES-C1 validator, application Pydantic response schema and focused route tests. The inherited schema fixes max_distinct_destinations to one and the application contract permits roleLabel null plus defaultLocation null or a closed id/name object.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c5-deepseek-implementation-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md",
+        "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-230.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descendant_manifest_exceeded_parent_one_destination_per_generation_ceiling",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use two separately immutable single-grant and single-destination generations with no budget or lease transfer. Instantiate the provider generation only after the source generation is exhausted and revoked, bind the fresh ContextFrameSet digest, and require zero c1.validate_attempt errors before either c1.evaluate_attempt call. Rebind the source validator to the exact nullable route field types.",
+        "prevention_control": "Before freezing a descendant composition, construct its complete inherited message packet and run the parent schema validator. Derive response field types from the exact current application schema and route tests, not from a field-name list.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md",
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-plan.md",
+          "docs/ariadne-agent-error-correction-register-revision-230.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0266",
+      "attempt_id": "raisa-aes-c5-sol-recovery-precommit-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c5-practitioner-directory-product-runtime-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne receipt state must explicitly inventory each configured worker resource, including a completed resource with empty active and stale instance lists.",
+      "observed_error": "The first AES-C5 Sol-recovery precommit state used an empty worker_slots list after the DeepSeek lease completed. The preflight returned revision_required with worker_slot_inventory_missing:deepseek-flash-workers and supplied no commit authority. No database, product route, credential, cloud or provider action occurred.",
+      "detection_method": "The deterministic orchestrator preflight rejected the state before staging. Sol preserved the rejected pair and generated a fresh v2 state with the exact deepseek-flash-workers resource and empty active_instance_ids and stale_instance_ids.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c5-sol-recovery-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-sol-recovery-precommit-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-precommit-worker-inventory-omission-analysis.md",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-sol-recovery-precommit-v2-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-231.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.completed_worker_resource_omitted_from_explicit_inventory",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected pair, repeat all five rehydration sources and explicitly list deepseek-flash-workers with empty active and stale instance arrays before generating a fresh precommit receipt.",
+        "prevention_control": "Treat configured worker resource inventory as structural, not activity-dependent: every runtime state lists every required resource even when no instance is active or stale.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c5-precommit-worker-inventory-omission-analysis.md",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-sol-recovery-precommit-v2-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-231.md"
         ]
       },
       "status": "corrected"

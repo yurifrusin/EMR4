@@ -34,8 +34,6 @@ FIXTURE_NAMES = [
     "Nyra Sol",
     "General Practitioner",
     "Practice Nurse",
-    "Main",
-    "Consult",
 ]
 FIXTURE_ALIASES = [
     "practitioner-choice-001",
@@ -52,7 +50,7 @@ def _row(**overrides: object) -> dict[str, object]:
         "displayName": "Aster Finch",
         "roleLabel": "General Practitioner",
         "active": True,
-        "defaultLocation": "Main",
+        "defaultLocation": None,
     }
     base.update(overrides)
     return base
@@ -66,7 +64,7 @@ def _full_rows() -> list[dict[str, object]]:
             id=UUID_C,
             displayName="Nyra Sol",
             roleLabel="Practice Nurse",
-            defaultLocation="Consult",
+            defaultLocation=None,
         ),
     ]
 
@@ -193,6 +191,14 @@ def test_envelope_schema_drift_rejected():
     assert errors
 
 
+def test_envelope_nested_extra_key_rejected_by_exact_freezer():
+    drifted = copy.deepcopy(mod.validate_envelope())
+    drifted["source_boundary"]["forged_nested_selector"] = "value"
+    with pytest.raises(mod.AesC5Error) as exc:
+        mod.validate_envelope_values(drifted)
+    assert exc.value.reason_code == "product_runtime_envelope_key_set_invalid"
+
+
 def test_inherited_artifact_digest_drift_rejected(monkeypatch):
     tampered = dict(mod.INHERITED_ARTIFACT_DIGESTS)
     key = (
@@ -206,80 +212,123 @@ def test_inherited_artifact_digest_drift_rejected(monkeypatch):
     assert exc.value.reason_code == "inherited_artifact_digest_mismatch"
 
 
-def test_generation_has_exactly_two_grants():
+def _read_manifest():
     envelope = mod.validate_envelope()
-    manifest = mod.build_generation_manifest(envelope, now=T0)
-    mod.validate_generation(manifest)
-    classes = [g["capability_class"] for g in manifest["capability_grants"]]
-    assert classes == ["authoritative_read", "provider_inference"]
-    assert len(manifest["capability_grants"]) == 2
+    return mod.build_generation_manifest(
+        envelope, capability_class="authoritative_read", now=T0
+    )
+
+
+def _provider_manifest():
+    envelope = mod.validate_envelope()
+    return mod.build_generation_manifest(
+        envelope,
+        capability_class="provider_inference",
+        now=T0,
+        context_frame_set_digest=WRONG_DIGEST,
+    )
+
+
+def test_two_generations_have_one_exact_grant_and_destination_each():
+    read_manifest = _read_manifest()
+    provider_manifest = _provider_manifest()
+    mod.validate_generation(
+        read_manifest, expected_capability_class="authoritative_read"
+    )
+    mod.validate_generation(
+        provider_manifest, expected_capability_class="provider_inference"
+    )
+    assert [g["capability_class"] for g in read_manifest["capability_grants"]] == [
+        "authoritative_read"
+    ]
+    assert [
+        g["capability_class"] for g in provider_manifest["capability_grants"]
+    ] == ["provider_inference"]
+    assert read_manifest["budgets"]["egress"]["max_distinct_destinations"] == 1
+    assert provider_manifest["budgets"]["egress"]["max_distinct_destinations"] == 1
+    assert read_manifest["generation_id"] != provider_manifest["generation_id"]
+
+
+def test_both_generation_attempts_pass_exact_c1_schema_without_budget_transfer():
+    envelope, frame = _frame()
+    read_manifest = _read_manifest()
+    read_attempt, _, _ = mod.build_read_attempt(read_manifest, envelope, now=T0)
+    assert mod.c1.validate_attempt(read_attempt) == []
+    provider_manifest = mod.build_generation_manifest(
+        envelope,
+        capability_class="provider_inference",
+        now=T0,
+        context_frame_set_digest=frame["context_frame_set_digest"],
+    )
+    request = mod.build_vertex_request(frame, envelope)
+    provider_attempt, _, _ = mod.build_provider_attempt(
+        provider_manifest,
+        envelope,
+        frame,
+        request,
+        now=T0,
+        observed={counter: 0 for counter in mod.c1.COUNTER_KEYS},
+    )
+    assert mod.c1.validate_attempt(provider_attempt) == []
+    assert all(value == 0 for value in provider_attempt["budget_state"]["observed"].values())
+    assert provider_manifest["supply_chain_identity"]["system_contract_digest"] != (
+        read_manifest["supply_chain_identity"]["system_contract_digest"]
+    )
+
+
+def test_two_destination_generation_fails_exact_c1_schema():
+    envelope = mod.validate_envelope()
+    manifest = _read_manifest()
+    manifest["budgets"]["egress"]["max_distinct_destinations"] = 2
+    manifest["manifest_digest"] = mod.c1.compute_manifest_digest(manifest)
+    manifest["supply_chain_identity"]["generation_manifest_digest"] = manifest[
+        "manifest_digest"
+    ]
+    attempt, _, _ = mod.build_read_attempt(manifest, envelope, now=T0)
+    assert any(
+        "max_distinct_destinations:const" in error
+        for error in mod.c1.validate_attempt(attempt)
+    )
 
 
 def test_missing_or_extra_grant_rejected():
-    envelope = mod.validate_envelope()
-    manifest = mod.build_generation_manifest(envelope, now=T0)
-    one = copy.deepcopy(manifest)
-    one["capability_grants"] = one["capability_grants"][:1]
+    manifest = _read_manifest()
+    missing = copy.deepcopy(manifest)
+    missing["capability_grants"] = []
     with pytest.raises(mod.AesC5Error) as exc:
-        mod.validate_generation(one)
-    assert exc.value.reason_code == "generation_grant_count_invalid"
-    three = copy.deepcopy(manifest)
-    three["capability_grants"] = [
-        three["capability_grants"][0],
-        three["capability_grants"][1],
-        copy.deepcopy(three["capability_grants"][1]),
-    ]
+        mod.validate_generation(
+            missing, expected_capability_class="authoritative_read"
+        )
+    assert exc.value.reason_code == "generation_schema_invalid"
+    extra = copy.deepcopy(manifest)
+    extra["capability_grants"].append(mod._provider_grant())
     with pytest.raises(mod.AesC5Error):
-        mod.validate_generation(three)
+        mod.validate_generation(extra, expected_capability_class="authoritative_read")
 
 
 def test_wrong_grant_class_route_method_provider_destination_rejected():
-    envelope = mod.validate_envelope()
-    manifest = mod.build_generation_manifest(envelope, now=T0)
-    cases = {
-        "generation_capability_classes_invalid": (
-            "capability_grants",
-            0,
-            "capability_class",
-            "inert_tool_adapter",
-        ),
-        "generation_read_grant_invalid": (
-            "capability_grants",
-            0,
-            "method",
-            "POST",
-        ),
-        "generation_read_grant_invalid": (
-            "capability_grants",
-            0,
-            "destination_id",
-            "somewhere-else",
-        ),
-        "generation_provider_grant_invalid": (
-            "capability_grants",
-            1,
-            "destination_id",
-            "vertex-somewhere-else",
-        ),
-        "generation_provider_grant_invalid": (
-            "capability_grants",
-            1,
-            "method",
-            "GET",
-        ),
-        "generation_provider_grant_invalid": (
-            "capability_grants",
-            1,
-            "audience",
-            "some-other-audience",
-        ),
-    }
-    for expected, (path, index, field, value) in cases.items():
+    cases = [
+        (_read_manifest, "authoritative_read", "capability_class", "inert_tool_adapter"),
+        (_read_manifest, "authoritative_read", "method", "POST"),
+        (_read_manifest, "authoritative_read", "destination_id", "somewhere-else"),
+        (_provider_manifest, "provider_inference", "destination_id", "vertex-elsewhere"),
+        (_provider_manifest, "provider_inference", "method", "GET"),
+        (_provider_manifest, "provider_inference", "audience", "other-audience"),
+    ]
+    for factory, expected_class, field, value in cases:
+        manifest = factory()
         mutated = copy.deepcopy(manifest)
-        mutated[path][index][field] = value
+        mutated["capability_grants"][0][field] = value
         with pytest.raises(mod.AesC5Error) as exc:
-            mod.validate_generation(mutated)
-        assert exc.value.reason_code == expected
+            mod.validate_generation(
+                mutated, expected_capability_class=expected_class
+            )
+        assert exc.value.reason_code in {
+            "generation_schema_invalid",
+            "generation_capability_classes_invalid",
+            "generation_read_grant_invalid",
+            "generation_provider_grant_invalid",
+        }
 
 
 def test_wrong_query_frozen_value_rejected():
@@ -297,8 +346,9 @@ def test_wrong_query_frozen_value_rejected():
 
 def _read_attempt():
     envelope = mod.validate_envelope()
-    manifest = mod.build_generation_manifest(envelope, now=T0)
+    manifest = _read_manifest()
     attempt, _, _ = mod.build_read_attempt(manifest, envelope, now=T0)
+    assert mod.c1.validate_attempt(attempt) == []
     return attempt
 
 
@@ -417,6 +467,11 @@ def test_route_response_malformed_oversized_role_label():
     assert exc.value.reason_code == "route_response_role_label_oversized"
     rows = _full_rows()
     rows[0]["roleLabel"] = None
+    validated = mod.validate_route_response(rows, envelope)
+    minimized, _ = mod.minimize(validated, envelope)
+    assert "role_label" not in minimized[0]
+    rows = _full_rows()
+    rows[0]["roleLabel"] = 5
     with pytest.raises(mod.AesC5Error) as exc:
         mod.validate_route_response(rows, envelope)
     assert exc.value.reason_code == "route_response_role_label_invalid"
@@ -431,6 +486,20 @@ def test_route_response_unexpected_field_and_nested_sensitive_rejected():
     assert exc.value.reason_code == "route_response_field_set_invalid"
     rows = _full_rows()
     rows[0]["defaultLocation"] = {"nested": {"address": "secret"}}
+    with pytest.raises(mod.AesC5Error) as exc:
+        mod.validate_route_response(rows, envelope)
+    assert exc.value.reason_code == "route_response_default_location_invalid"
+
+
+def test_route_response_nullable_or_exact_default_location_object():
+    envelope = mod.validate_envelope()
+    rows = _full_rows()
+    rows[0]["defaultLocation"] = {
+        "id": "7a7a7a7a-0000-4000-8000-000000000000",
+        "name": "Synthetic Clinic",
+    }
+    assert mod.validate_route_response(rows, envelope) == rows
+    rows[0]["defaultLocation"]["address"] = "forbidden"
     with pytest.raises(mod.AesC5Error) as exc:
         mod.validate_route_response(rows, envelope)
     assert exc.value.reason_code == "route_response_default_location_invalid"
@@ -492,6 +561,8 @@ def test_frame_and_vertex_request_exclude_uuid_active_location_and_alias_map():
     assert "display_name" in frame_text
     assert "role_label" in frame_text
     assert alias_map  # broker-side alias map exists but is never in frame/request
+    for broker_only in ("/api/v1/practice/practitioners", "source_digest", "observed_at", "expires_at"):
+        assert broker_only not in request_text
     # Every minimized alias is grounded in the frame; the alias->UUID map is not.
     for practitioner in frame["practitioners"]:
         assert practitioner["practitioner_ref"] in FIXTURE_ALIASES
@@ -530,6 +601,8 @@ def test_stale_source_execute_rejected(tmp_path):
     assert evidence["reason_codes"] == ["source_to_provider_dispatch_age_exceeded"]
     assert evidence["source_ledger"]["status"] == "consumed"
     assert evidence["provider_ledger"]["status"] == "consumed"
+    assert evidence["provider_ledger"]["maximum_provider_calls"] == 0
+    assert evidence["provider_ledger"]["provider_call_allowances_consumed"] == 0
 
 
 def test_wrong_source_digest_rejected():
@@ -541,7 +614,7 @@ def test_wrong_source_digest_rejected():
 
 def test_wrong_manifest_digest_stops():
     envelope = mod.validate_envelope()
-    manifest = mod.build_generation_manifest(envelope, now=T0)
+    manifest = _read_manifest()
     attempt, _, _ = mod.build_read_attempt(manifest, envelope, now=T0)
     attempt["current_generation_state"]["current_manifest_digest"] = WRONG_DIGEST
     result = mod.c1.evaluate_attempt(attempt)
@@ -673,7 +746,7 @@ def test_cumulative_budget_exhaustion_stops(tmp_path):
 
 def test_stale_lease_stops():
     envelope = mod.validate_envelope()
-    manifest = mod.build_generation_manifest(envelope, now=T0)
+    manifest = _read_manifest()
     attempt, lease, _ = mod.build_read_attempt(manifest, envelope, now=T0)
     lease["expires_at"] = (T0 - timedelta(seconds=1)).isoformat().replace("+00:00", "Z")
     result = mod.c1.evaluate_attempt(attempt)
@@ -684,8 +757,7 @@ def test_stale_lease_stops():
 def test_supersession_authority_change_kill_and_revocation_stop(tmp_path):
     evidence = _execute(tmp_path / "s", current_generation_id="generation-other")
     assert evidence["reason_codes"] == ["generation_superseded"]
-    envelope = mod.validate_envelope()
-    manifest = mod.build_generation_manifest(envelope, now=T0)
+    manifest = _read_manifest()
     authority = mod._current_authority_state(manifest)
     authority["purpose_code"] = "different-purpose"
     evidence2 = _execute(tmp_path / "a", current_authority_state=authority)
@@ -887,8 +959,8 @@ def test_provider_free_execute_full_pass(tmp_path):
     source_read = evidence["broker_admissions"]["source_read"]
     provider = evidence["broker_admissions"]["provider_inference"]
     assert source_read["decision"] == "allow"
-    assert source_read["after_terminal_state"] == "active"
-    assert source_read["after_next_operation_permitted"] is True
+    assert source_read["after_terminal_state"] == "exhausted"
+    assert source_read["after_next_operation_permitted"] is False
     assert provider["decision"] == "allow"
     assert provider["after_terminal_state"] == "exhausted"
     assert provider["after_next_operation_permitted"] is False
@@ -901,6 +973,9 @@ def test_provider_free_execute_full_pass(tmp_path):
     assert evidence["source"]["row_count"] == 3
     assert evidence["source"]["context_digest"] is not None
     assert evidence["source"]["source_digest"] is not None
+    assert evidence["manifest_digests"]["source"] != evidence["manifest_digests"][
+        "provider"
+    ]
     assert evidence["cleanup"]["reusable_capability"] is False
     assert evidence["cleanup"]["further_generation_calls"] is False
 

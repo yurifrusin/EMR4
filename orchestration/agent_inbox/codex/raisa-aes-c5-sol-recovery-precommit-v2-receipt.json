@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_source_bound_aes_c5_two_generation_sol_recovery_and_disposable_local_route_harness_before_any_real_local_postgresql_execution_after_explicit_empty_worker_inventory_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The corrected AES-C5 plan uses two separately immutable single-grant and single-destination generations, complete AES-C1 schema validation before both evaluations, no lease or AES-C0 budget transfer, and a later provider generation bound to the fresh minimized ContextFrameSet digest. The recovered core and disposable exact-route harness pass 71 focused provider-free tests plus Ruff, compilation and diff checks. The next post-commit gate is one exact local FastAPI/auth/SQLAlchemy/PostgreSQL run with a fake provider and complete cleanup.",
+    "current_authority_allocation": "GPT Sol retains architecture, privacy, recovery, exact application/database execution, provider execution, Git integration and acceptance authority. The DeepSeek V4 Flash/high lease completed and its resource inventory is explicitly present with zero active or stale instances. No worker, Gemini review or occupied provider call is active.",
+    "git_refs_and_worktree": "The main worktree is on codex/ariadne-bernie-davida-parallel-seam at ef045706d5b66a26d41bd2f4505cd637e0f8e2ca before the recovery commit. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted AES-C4 are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains cdb9ff3df66666ac569c289bc1734c119683c9a3. The 502 untracked paths include five under docs/branding; only explicit AES-C5 recovery paths may be staged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223 and AES-C5 is the final named AES descendant selected by Yuri for the authenticated practitioner-directory GET and Reception One booking-context purpose.",
+    "protected_evidence_boundaries": "AER-0263 output remains excluded. No protected fixture, support module, holdout, authoring surface, manifest, seal or per-case report supplies evidence. Only authored-synthetic values are permitted. The task-owned schema must match aes_c5 plus 32 lowercase hex; setup and exact teardown remain outside both AES generations. No operational practice/database, real person, patient, clinical, provider, cloud, command, deployment, production, release, Pages or protected-ref authority is granted. docs/branding and every unrelated untracked path remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

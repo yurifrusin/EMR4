@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_source_bound_aes_c5_two_generation_sol_recovery_and_disposable_local_route_harness_before_any_real_local_postgresql_execution",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223 and AES-C5 is the final named AES descendant selected by Yuri for the authenticated practitioner-directory GET and Reception One booking-context purpose.",
+    "current_authority_allocation": "GPT Sol retains architecture, privacy, recovery, exact application/database execution, provider execution, Git integration and acceptance authority. The completed DeepSeek V4 Flash/high worker supplied only a provider-free two-file candidate; its disclosed two-destination workaround is rejected as acceptance evidence and Sol owns the recorded recovery. No Gemini review or occupied provider call is yet dispatched.",
+    "active_plan_and_acceptance": "The corrected AES-C5 plan uses two separately immutable single-grant and single-destination generations, requires complete AES-C1 schema validation before both evaluations, transfers no lease or AES-C0 budget, and binds the fresh minimized ContextFrameSet digest into the later provider generation. The recovered core plus disposable exact-route harness pass 71 focused provider-free tests, Ruff, compilation and diff checks. The next operation after this commit is one exact local FastAPI/auth/SQLAlchemy/PostgreSQL run with a fake provider and complete schema cleanup.",
+    "protected_evidence_boundaries": "AER-0263 output remains excluded. No protected fixture, support module, holdout, authoring surface, manifest, seal or per-case report supplies evidence. The candidate contains only authored-synthetic values and grants no operational database/practice, real person, patient, clinical, provider, cloud, command, write, deployment, production, release, Pages or protected-ref authority. The task-owned database schema must match the exact aes_c5 plus 32 lowercase hex pattern; setup and exact DROP SCHEMA occur outside both AES generations; docs/branding and all unrelated untracked paths remain preserved and excluded.",
+    "git_refs_and_worktree": "The main worktree is on codex/ariadne-bernie-davida-parallel-seam at ef045706d5b66a26d41bd2f4505cd637e0f8e2ca before the Sol recovery commit. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and the accepted AES-C4 source are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains cdb9ff3df66666ac569c289bc1734c119683c9a3. There are 502 untracked paths, including five under docs/branding; only explicit AES-C5 paths may be staged and every unrelated path remains untouched."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c5_sol_recovery_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed exact inherited-contract and application-route review and the 71-test recovery gate."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The bounded candidate completed at worker commit 4ade7ce5d2989e03325786b29db911488927a8b8 with zero product reads, database operations or provider calls; Sol preserved and corrected its disclosed contract conflict."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh Gemini 3.6 Flash/high exact-head veto remains downstream of the real local provider-free gate."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude subscription models are not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native Codex subagent is assigned."]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

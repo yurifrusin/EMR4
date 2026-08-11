@@ -7,15 +7,16 @@ inference are supplied by injectable provider-free fixtures, and any request
 for ``local-source`` or ``live`` mode fails before I/O with a closed reason
 code.
 
-The broker builds one immutable generation with exactly two grants
-(``authoritative_read`` for the frozen practitioner-directory GET and
-``provider_inference`` for the exact Sydney Vertex POST), runs two sequential
-AES-C1 admission attempts with cumulative budget state, minimizes the admitted
-route response into order-derived opaque aliases, builds one digest-bound
-60-second ContextFrameSet with a 30-second source-to-dispatch age, constructs a
-closed Vertex request, and deterministically proofreads exactly four release
-fields with ``command_authority: false``.  Separate single-use source/provider
-ledgers are consumed and both leases revoked on every terminal path.  Evidence
+The broker builds two separately immutable, non-overlapping generations with
+exactly one grant and one destination each: ``authoritative_read`` for the
+frozen practitioner-directory GET, then ``provider_inference`` for the exact
+Sydney Vertex POST.  Both packets must pass the complete AES-C1 schema
+validator before evaluation.  No lease or AES-C0 budget transfers between the
+generations; a separate inert attempt ledger enforces the aggregate ceiling.
+The admitted route response is minimized into order-derived opaque aliases and
+one digest-bound 60-second ContextFrameSet with a 30-second source-to-dispatch
+age.  The provider generation binds that fresh frame digest.  Separate
+single-use source/provider ledgers are closed on every terminal path. Evidence
 carries digests/counts/reason codes only.
 """
 
@@ -62,8 +63,10 @@ INHERITED_ARTIFACT_DIGESTS = {
     "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-envelope.schema.json": "sha256:df3c56c5c67f44d66b3b2c4c93af2fc040c636dffb33a4301eb276a96e0d2412",
 }
 
-GENERATION_ID = "generation-aes-c5-product-runtime-001"
-MANIFEST_ID = "manifest-aes-c5-product-runtime-001"
+READ_GENERATION_ID = "generation-aes-c5-authoritative-read-001"
+READ_MANIFEST_ID = "manifest-aes-c5-authoritative-read-001"
+PROVIDER_GENERATION_ID = "generation-aes-c5-provider-inference-001"
+PROVIDER_MANIFEST_ID = "manifest-aes-c5-provider-inference-001"
 BUREAU_ID = "bureau-raisa-containment"
 WORK_CELL_ID = "work-cell-aes-c5-reception-one-001"
 PURPOSE_CODE = "aes-c5-product-runtime-admission"
@@ -82,6 +85,8 @@ READ_AUDIENCE = "emr4-reception-one-product-read"
 PROVIDER_AUDIENCE = "google-vertex-ai-prediction"
 CANDIDATE_ID = "candidate-aes-c5-product-runtime-001"
 SCENARIO_ID = "aes-c5-product-runtime-admission"
+READ_SCENARIO_ID = "aes-c5-product-runtime-admission-source-read"
+PROVIDER_SCENARIO_ID = "aes-c5-product-runtime-admission-provider-inference"
 FRAME_ID = "context-frame-aes-c5-001"
 TARGET_DISPLAY_NAME = "Marlow Quill"
 TARGET_ALIAS = "practitioner-choice-002"
@@ -173,6 +178,9 @@ FROZEN_VALUES: dict[str, Any] = {
     "authority_source.purpose_decision": (
         "supply_active_practitioner_choices_for_reception_one_booking_context"
     ),
+    "authority_source.model_decision": (
+        "standing_sydney_vertex_bernie_gemini_2_5_flash_until_user_changes"
+    ),
     "source_boundary.source_class": "authored_synthetic_product_runtime",
     "source_boundary.evidence_mode": "live_local_backend_postgres",
     "source_boundary.method": "GET",
@@ -192,6 +200,12 @@ FROZEN_VALUES: dict[str, Any] = {
     ),
     "principal_and_tenant_boundary.ordinary_bearer_auth_dependency_required": True,
     "principal_and_tenant_boundary.token_user_practice_equality_required": True,
+    "principal_and_tenant_boundary.tenant_class": (
+        "fresh_authored_synthetic_disposable_practice"
+    ),
+    "principal_and_tenant_boundary.postgresql_schema_class": (
+        "random_exact_task_owned_aes_c5_prefix"
+    ),
     "principal_and_tenant_boundary.operational_database_or_practice": False,
     "principal_and_tenant_boundary.work_cell_receives_jwt_database_credential_or_lease": False,
     "principal_and_tenant_boundary.evidence_retains_user_or_practice_identifier": False,
@@ -259,6 +273,10 @@ FROZEN_VALUES: dict[str, Any] = {
     "data_and_retention_boundary.raw_prompt_retained": False,
     "data_and_retention_boundary.raw_provider_response_retained": False,
     "data_and_retention_boundary.provider_text_or_reasoning_retained": False,
+    "data_and_retention_boundary.request_response_logging_required_disabled": True,
+    "data_and_retention_boundary.provider_in_memory_cache_required_disabled": True,
+    "data_and_retention_boundary.platform_wide_zero_retention_claimed": False,
+    "data_and_retention_boundary.abuse_monitoring_retention_exception_claimed": False,
     "request_contract.candidate_count": 1,
     "request_contract.temperature": 0,
     "request_contract.thinking_budget_tokens": 1024,
@@ -288,10 +306,14 @@ FROZEN_VALUES: dict[str, Any] = {
         "authoritative_read",
         "provider_inference",
     ],
-    "broker_and_isolation_boundary.immutable_generation": True,
+    "broker_and_isolation_boundary.immutable_generations": 2,
+    "broker_and_isolation_boundary.one_grant_per_generation": True,
+    "broker_and_isolation_boundary.maximum_distinct_destinations_per_generation": 1,
+    "broker_and_isolation_boundary.attempt_wide_fixed_downstream_destinations": 2,
+    "broker_and_isolation_boundary.budget_or_lease_transfer_between_generations": False,
+    "broker_and_isolation_boundary.provider_generation_binds_context_frame_set_digest": True,
     "broker_and_isolation_boundary.distinct_single_use_leases": 2,
     "broker_and_isolation_boundary.broker_operations": 2,
-    "broker_and_isolation_boundary.distinct_destinations": 2,
     "broker_and_isolation_boundary.external_broker_owns_route_jwt_adc_database_session_alias_map_and_tokens": True,
     "broker_and_isolation_boundary.work_cell_selects_operation_identity": False,
     "broker_and_isolation_boundary.current_authority_recheck_before_each_operation": True,
@@ -303,6 +325,20 @@ FROZEN_VALUES: dict[str, Any] = {
     "broker_and_isolation_boundary.external_kill_switch": True,
     "broker_and_isolation_boundary.generation_wide_revocation": True,
     "broker_and_isolation_boundary.generation_elapsed_time_ceiling_ms": 120000,
+    "preexecution_checks.exact_route_contract_and_tests_required": True,
+    "preexecution_checks.static_readiness_checks_required_without_runtime_fixture_import": True,
+    "preexecution_checks.real_local_route_postgresql_provider_free_proof_required": True,
+    "preexecution_checks.fresh_exact_head_independent_veto_required": True,
+    "preexecution_checks.gcloud_cli_and_adc_stores_verified_separately": True,
+    "preexecution_checks.impersonated_adc_refresh_required": True,
+    "preexecution_checks.billing_api_identity_prediction_permission_exact_required": True,
+    "preexecution_checks.vertex_data_access_audit_required": True,
+    "preexecution_checks.request_response_logging_disabled_or_absent_required": True,
+    "preexecution_checks.provider_in_memory_cache_disabled_required": True,
+    "preexecution_checks.zero_user_managed_service_account_keys_required": True,
+    "preexecution_checks.regional_catalogue_and_lifecycle_support_required": True,
+    "preexecution_checks.no_cloud_iam_or_configuration_mutation": True,
+    "preexecution_checks.provider_prompt_transmitted_during_preflight": False,
     "proofreader_and_release_boundary.source_response_validator_required": True,
     "proofreader_and_release_boundary.field_minimizer_required": True,
     "proofreader_and_release_boundary.pre_dispatch_candidate_proofreader_required": True,
@@ -323,11 +359,42 @@ FROZEN_VALUES: dict[str, Any] = {
     "evidence_and_cleanup_boundary.evidence_label": (
         "occupied_authored_synthetic_product_runtime_route_postgres_brokered_provider_proof"
     ),
+    "evidence_and_cleanup_boundary.external_hash_chain_audit_required": True,
     "evidence_and_cleanup_boundary.evidence_retains_route_values_display_names_uuids_jwt_database_url_prompt_or_provider_text": False,
+    "evidence_and_cleanup_boundary.allowed_source_evidence": [
+        "route",
+        "role",
+        "row_count",
+        "statement_count",
+        "source_digest",
+        "context_digest",
+        "freshness_disposition",
+        "data_classification",
+    ],
+    "evidence_and_cleanup_boundary.allowed_provider_evidence": [
+        "provider",
+        "model_id",
+        "project",
+        "location",
+        "endpoint_hostname",
+        "http_status",
+        "finish_reason",
+        "latency_ms",
+        "safe_token_counts",
+        "request_digest",
+        "response_digest",
+        "proofreader_decision",
+        "cumulative_budget_counts",
+    ],
     "evidence_and_cleanup_boundary.disposable_schema_absent_after_terminal_state": True,
     "evidence_and_cleanup_boundary.jwt_alias_map_credential_or_token_retained": False,
     "evidence_and_cleanup_boundary.lease_or_ledger_reusable_after_terminal_state": False,
     "evidence_and_cleanup_boundary.broker_process_listener_or_task_root_after_terminal_state": False,
+    "claim_boundary.proves_only": (
+        "one_exact_authenticated_practice_scoped_authored_synthetic_product_runtime_read_"
+        "minimized_into_one_expiring_context_frame_set_and_used_by_one_broker_admitted_"
+        "vertex_request_with_non_command_release_and_complete_cleanup"
+    ),
     "claim_boundary.real_person_patient_clinical_or_operational_data_safety_proved": False,
     "claim_boundary.australian_physical_or_sovereign_processing_proved": False,
     "claim_boundary.production_identity_rls_or_deployment_proved": False,
@@ -438,6 +505,20 @@ def validate_inherited_artifacts() -> None:
 
 
 def validate_envelope_values(envelope: Mapping[str, Any]) -> None:
+    expected_root_keys = {path.split(".", 1)[0] for path in FROZEN_VALUES}
+    if set(envelope) != expected_root_keys:
+        raise AesC5Error("product_runtime_envelope_key_set_invalid")
+    for root_key in expected_root_keys:
+        child_keys = {
+            path.split(".", 1)[1]
+            for path in FROZEN_VALUES
+            if path.startswith(root_key + ".")
+        }
+        if not child_keys:
+            continue
+        value = envelope.get(root_key)
+        if not isinstance(value, Mapping) or set(value) != child_keys:
+            raise AesC5Error("product_runtime_envelope_key_set_invalid")
     for dotted, expected in FROZEN_VALUES.items():
         try:
             actual = _get_path(envelope, dotted)
@@ -535,27 +616,45 @@ def _authority_digest() -> str:
     )
 
 
-def _budgets(envelope: Mapping[str, Any]) -> dict[str, Any]:
+def _budgets(envelope: Mapping[str, Any], capability_class: str) -> dict[str, Any]:
     request = envelope["request_contract"]
-    max_req = request["maximum_request_bytes"]
-    max_resp = request["maximum_provider_response_bytes"]
+    if capability_class == "authoritative_read":
+        # AES-C0 requires positive reasoning ceilings even for a generation
+        # without a provider grant. The grant intersection keeps model use
+        # impossible; this unused numeric headroom is revoked at exhaustion.
+        max_model_calls = 1
+        max_model_tokens = 1
+        max_req = 4096
+        max_resp = 8192
+        max_source_count = 1
+    elif capability_class == "provider_inference":
+        max_model_calls = 1
+        max_model_tokens = 4096
+        max_req = request["maximum_request_bytes"]
+        max_resp = request["maximum_provider_response_bytes"]
+        max_source_count = 1
+    else:
+        raise AesC5Error("generation_capability_class_invalid")
     return {
-        "reasoning": {"max_model_calls": 1, "max_model_tokens": 4096},
+        "reasoning": {
+            "max_model_calls": max_model_calls,
+            "max_model_tokens": max_model_tokens,
+        },
         "information": {
-            "max_input_bytes": max_req * 2,
-            "max_output_bytes": max_resp * 2,
-            "max_source_count": 2,
+            "max_input_bytes": max_req,
+            "max_output_bytes": max_resp,
+            "max_source_count": max_source_count,
         },
         "egress": {
-            "max_requests": 2,
-            "max_request_bytes": max_req * 2,
-            "max_response_bytes": max_resp * 2,
-            "max_total_bytes": (max_req + max_resp) * 2,
-            "max_distinct_destinations": 2,
+            "max_requests": 1,
+            "max_request_bytes": max_req,
+            "max_response_bytes": max_resp,
+            "max_total_bytes": max_req + max_resp,
+            "max_distinct_destinations": 1,
             "max_redirects": 0,
         },
         "action": {
-            "max_broker_operations": 2,
+            "max_broker_operations": 1,
             "max_inert_tool_operations": 0,
             "max_product_mutations": 0,
             "max_command_confirmations": 0,
@@ -573,15 +672,39 @@ def _budgets(envelope: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 def build_generation_manifest(
-    envelope: Mapping[str, Any], *, now: datetime | None = None
+    envelope: Mapping[str, Any],
+    *,
+    capability_class: str,
+    now: datetime | None = None,
+    context_frame_set_digest: str | None = None,
 ) -> dict[str, Any]:
     now = now or datetime.now(timezone.utc)
     expires = now + timedelta(minutes=2)
+    if capability_class == "authoritative_read":
+        generation_id = READ_GENERATION_ID
+        manifest_id = READ_MANIFEST_ID
+        grants = [_read_grant()]
+        if context_frame_set_digest is not None:
+            raise AesC5Error("read_generation_context_digest_forbidden")
+    elif capability_class == "provider_inference":
+        generation_id = PROVIDER_GENERATION_ID
+        manifest_id = PROVIDER_MANIFEST_ID
+        grants = [_provider_grant()]
+        if not (
+            isinstance(context_frame_set_digest, str)
+            and len(context_frame_set_digest) == 71
+            and context_frame_set_digest.startswith("sha256:")
+        ):
+            raise AesC5Error("provider_generation_context_digest_invalid")
+    else:
+        raise AesC5Error("generation_capability_class_invalid")
     system_contract_digest = digest_of(
         {
             "instructions_version": PROVIDER_INSTRUCTIONS_VERSION,
             "release_schema": RELEASE_SCHEMA_BASE,
             "context_frame_set_schema_version": "emr4.aes_c5.context_frame_set.v1",
+            "capability_class": capability_class,
+            "context_frame_set_digest": context_frame_set_digest,
         }
     )
     supply = {
@@ -593,9 +716,9 @@ def build_generation_manifest(
     }
     manifest = {
         "schema_version": "emr4.aes_c0.generation_manifest.v1",
-        "manifest_id": MANIFEST_ID,
+        "manifest_id": manifest_id,
         "manifest_digest": "PLACEHOLDER_DIGEST",
-        "generation_id": GENERATION_ID,
+        "generation_id": generation_id,
         "bureau_id": BUREAU_ID,
         "work_cell_id": WORK_CELL_ID,
         "authority_binding_digest": _authority_digest(),
@@ -603,8 +726,8 @@ def build_generation_manifest(
         "issued_at": _iso(now),
         "expires_at": _iso(expires),
         "immutable": True,
-        "capability_grants": [_read_grant(), _provider_grant()],
-        "budgets": _budgets(envelope),
+        "capability_grants": grants,
+        "budgets": _budgets(envelope, capability_class),
         "stop_conditions": [
             "reasoning-budget-exhausted",
             "information-budget-exhausted",
@@ -627,36 +750,33 @@ def build_generation_manifest(
     return manifest
 
 
-def validate_generation(manifest: Mapping[str, Any]) -> None:
+def validate_generation(
+    manifest: Mapping[str, Any], *, expected_capability_class: str
+) -> None:
+    schema_errors = list(
+        c1.validate_instance(
+            dict(manifest),
+            c1.AES_C0_SCHEMA["$defs"]["GenerationManifest"],
+            root_schema=c1.AES_C0_SCHEMA,
+            path="$.generation_manifest",
+        )
+    )
+    if schema_errors:
+        raise AesC5Error("generation_schema_invalid")
     grants = manifest.get("capability_grants")
-    if not isinstance(grants, list) or len(grants) != 2:
+    if not isinstance(grants, list) or len(grants) != 1:
         raise AesC5Error("generation_grant_count_invalid")
-    classes = [grant.get("capability_class") for grant in grants]
-    if classes != ["authoritative_read", "provider_inference"]:
+    grant = grants[0]
+    if grant.get("capability_class") != expected_capability_class:
         raise AesC5Error("generation_capability_classes_invalid")
-    ids = [grant.get("capability_id") for grant in grants]
-    if ids != [READ_CAPABILITY_ID, PROVIDER_CAPABILITY_ID]:
-        raise AesC5Error("generation_capability_ids_invalid")
-    read_grant = grants[0]
-    if (
-        read_grant.get("method") != "GET"
-        or read_grant.get("operation_id") != READ_OPERATION_ID
-        or read_grant.get("adapter_id") != READ_ADAPTER_ID
-        or read_grant.get("destination_id") != READ_DESTINATION_ID
-        or read_grant.get("audience") != READ_AUDIENCE
-        or read_grant.get("source_class") != "authored_synthetic"
-    ):
-        raise AesC5Error("generation_read_grant_invalid")
-    provider_grant = grants[1]
-    if (
-        provider_grant.get("method") != "POST"
-        or provider_grant.get("operation_id") != PROVIDER_OPERATION_ID
-        or provider_grant.get("adapter_id") != PROVIDER_ADAPTER_ID
-        or provider_grant.get("destination_id") != PROVIDER_DESTINATION_ID
-        or provider_grant.get("audience") != PROVIDER_AUDIENCE
-        or provider_grant.get("source_class") != "authored_synthetic"
-    ):
-        raise AesC5Error("generation_provider_grant_invalid")
+    expected = _read_grant() if expected_capability_class == "authoritative_read" else _provider_grant()
+    if grant != expected:
+        reason = (
+            "generation_read_grant_invalid"
+            if expected_capability_class == "authoritative_read"
+            else "generation_provider_grant_invalid"
+        )
+        raise AesC5Error(reason)
 
 
 def _zeros() -> dict[str, int]:
@@ -884,6 +1004,7 @@ def build_read_attempt(
         now=now,
         typed_context="route-read-admission",
         attempt_id="attempt-aes-c5-authoritative-read-001",
+        scenario_id=READ_SCENARIO_ID,
         **overrides,
     )
     return attempt, lease, prospective
@@ -899,7 +1020,7 @@ def build_provider_attempt(
     observed: Mapping[str, int],
     **overrides: Any,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-    provider_grant = manifest["capability_grants"][1]
+    provider_grant = manifest["capability_grants"][0]
     lease = _lease(provider_grant, PROVIDER_LEASE_ID, manifest)
     prospective = _provider_prospective(envelope, request_body)
     budget_state = _budget_state(manifest, observed)
@@ -925,6 +1046,7 @@ def build_provider_attempt(
         now=now,
         typed_context=typed_context,
         attempt_id="attempt-aes-c5-provider-inference-001",
+        scenario_id=PROVIDER_SCENARIO_ID,
         **overrides,
     )
     return attempt, lease, prospective
@@ -982,17 +1104,24 @@ def validate_route_response(
         if len(display.encode("utf-8")) > max_name:
             raise AesC5Error("route_response_display_name_oversized")
         role = row["roleLabel"]
-        if not isinstance(role, str) or not role.strip():
-            raise AesC5Error("route_response_role_label_invalid")
-        if len(role.encode("utf-8")) > max_role:
-            raise AesC5Error("route_response_role_label_oversized")
+        if role is not None:
+            if not isinstance(role, str) or not role.strip():
+                raise AesC5Error("route_response_role_label_invalid")
+            if len(role.encode("utf-8")) > max_role:
+                raise AesC5Error("route_response_role_label_oversized")
         if row["active"] is not True:
             raise AesC5Error("route_response_inactive_row")
         location = row["defaultLocation"]
-        if not isinstance(location, str) or not location.strip():
-            raise AesC5Error("route_response_default_location_invalid")
-        if len(location.encode("utf-8")) > 120:
-            raise AesC5Error("route_response_default_location_oversized")
+        if location is not None:
+            if not isinstance(location, dict) or set(location) != {"id", "name"}:
+                raise AesC5Error("route_response_default_location_invalid")
+            if not _is_valid_uuid(location["id"]):
+                raise AesC5Error("route_response_default_location_id_invalid")
+            location_name = location["name"]
+            if not isinstance(location_name, str) or not location_name.strip():
+                raise AesC5Error("route_response_default_location_name_invalid")
+            if len(location_name.encode("utf-8")) > 120:
+                raise AesC5Error("route_response_default_location_name_oversized")
         ids.append(raw_id)
         names.append(display)
     if len(set(ids)) != len(ids):
@@ -1102,7 +1231,7 @@ def validate_frame_freshness(
 def build_release_schema(frame: Mapping[str, Any]) -> dict[str, Any]:
     schema = copy.deepcopy(RELEASE_SCHEMA_BASE)
     schema["properties"]["selected_practitioner_ref"]["enum"] = [
-        frame["target_alias"]
+        practitioner["practitioner_ref"] for practitioner in frame["practitioners"]
     ]
     schema["properties"]["context_frame_set_digest"]["enum"] = [
         frame["context_frame_set_digest"]
@@ -1114,6 +1243,12 @@ def build_vertex_request(
     frame: Mapping[str, Any], envelope: Mapping[str, Any]
 ) -> dict[str, Any]:
     request_contract = envelope["request_contract"]
+    provider_frame = {
+        "context_frame_set_digest": frame["context_frame_set_digest"],
+        "practitioners": frame["practitioners"],
+        "target_display_name": frame["target_display_name"],
+        "command_authority": False,
+    }
     instructions = [
         "Use only the closed authored-synthetic context frame below.",
         "Return one JSON object matching the response schema exactly.",
@@ -1125,7 +1260,7 @@ def build_vertex_request(
         "Do not use tools, functions, grounding, retrieval, code execution or URLs.",
         "Do not add explanation, markdown or fields.",
         "CONTEXT_FRAME_SET_JSON:",
-        canonical_bytes(frame).decode("utf-8"),
+        canonical_bytes(provider_frame).decode("utf-8"),
     ]
     return {
         "contents": [
@@ -1228,21 +1363,21 @@ def source_provider_free_fixture() -> SourceResult:
             "displayName": "Aster Finch",
             "roleLabel": "General Practitioner",
             "active": True,
-            "defaultLocation": "Main",
+            "defaultLocation": None,
         },
         {
             "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
             "displayName": "Marlow Quill",
             "roleLabel": "General Practitioner",
             "active": True,
-            "defaultLocation": "Main",
+            "defaultLocation": None,
         },
         {
             "id": "6d5c4b3a-2f1e-4d0c-9b8a-7f6e5d4c3b2a",
             "displayName": "Nyra Sol",
             "roleLabel": "Practice Nurse",
             "active": True,
-            "defaultLocation": "Consult",
+            "defaultLocation": None,
         },
     ]
     return SourceResult(
@@ -1324,12 +1459,12 @@ def _initial_source_ledger(
     source_head: str,
     manifest_digest: str,
 ) -> dict[str, Any]:
-    maximum = 1 if mode == "provider-free" else 0
+    maximum = 1
     return {
         "schema_version": "emr4.aes_c5.source_ledger.v1",
         "ledger_id": "aes-c5-source-ledger-001",
         "source_head": source_head,
-        "generation_id": GENERATION_ID,
+        "generation_id": READ_GENERATION_ID,
         "manifest_digest": manifest_digest,
         "mode": mode,
         "status": "open",
@@ -1348,14 +1483,14 @@ def _initial_provider_ledger(
     envelope: Mapping[str, Any],
     *,
     source_head: str,
-    manifest_digest: str,
+    manifest_digest: str | None,
 ) -> dict[str, Any]:
-    maximum = 0 if mode == "provider-free" else 1
+    maximum = 1 if mode == "occupied" else 0
     return {
         "schema_version": "emr4.aes_c5.provider_ledger.v1",
         "ledger_id": "aes-c5-provider-ledger-001",
         "source_head": source_head,
-        "generation_id": GENERATION_ID,
+        "generation_id": PROVIDER_GENERATION_ID,
         "manifest_digest": manifest_digest,
         "mode": mode,
         "status": "open",
@@ -1380,7 +1515,7 @@ def _initial_provider_ledger(
 
 
 def _reserve_source_ledger(ledger: dict[str, Any]) -> None:
-    if ledger["mode"] != "provider-free" or ledger["status"] != "open":
+    if ledger["status"] != "open" or ledger["maximum_source_calls"] != 1:
         raise AesC5Error("source_ledger_not_open")
     ledger["status"] = "reserved"
     ledger["source_call_allowances_reserved"] = 1
@@ -1393,13 +1528,24 @@ def _consume_source_ledger(ledger: dict[str, Any], *, actual_source_calls: int) 
     ledger["source_call_allowances_reserved"] = 0
 
 
+def _reserve_provider_ledger(ledger: dict[str, Any]) -> None:
+    if ledger["status"] != "open" or ledger["maximum_provider_calls"] != 1:
+        raise AesC5Error("provider_ledger_not_open")
+    ledger["status"] = "reserved"
+    ledger["provider_calls_reserved"] = 1
+    ledger["provider_call_allowances_consumed"] = 1
+    ledger["reserved_cost_usd"] = ledger["reserved_cost_per_call_usd"]
+
+
 def _consume_provider_ledger(
     ledger: dict[str, Any], *, actual_provider_calls: int
 ) -> None:
     ledger["status"] = "consumed"
     ledger["actual_provider_calls"] = actual_provider_calls
     ledger["provider_calls_reserved"] = 0
-    ledger["provider_call_allowances_consumed"] = 1
+    ledger["provider_call_allowances_consumed"] = (
+        1 if ledger["maximum_provider_calls"] > 0 else 0
+    )
     ledger["reserved_cost_usd"] = 0.0
 
 
@@ -1437,6 +1583,24 @@ def _safe_provider_metadata(value: Mapping[str, Any]) -> dict[str, Any]:
         }
     return result
 
+
+def _safe_source_metadata(value: Mapping[str, Any]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key in (
+        "product_runtime_route_read",
+        "ordinary_bearer_auth_dependency_used",
+        "token_user_practice_equality_observed",
+        "counts_unchanged",
+        "fixture_used",
+    ):
+        if type(value.get(key)) is bool:
+            result[key] = value[key]
+    for key in ("route_status", "database_statement_count"):
+        item = value.get(key)
+        if type(item) is int and item >= 0:
+            result[key] = item
+    return result
+
 # ---------------------------------------------------------------------------
 # Execution
 # ---------------------------------------------------------------------------
@@ -1463,8 +1627,12 @@ def execute(
     initial_observed: Mapping[str, int] | None = None,
     observed_at: datetime | None = None,
 ) -> dict[str, Any]:
-    if mode != "provider-free":
+    if mode not in {"provider-free", "local-route-fake-provider", "occupied"}:
         raise AesC5Error("local_source_or_live_mode_denied")
+    if mode != "provider-free" and (
+        source_adapter is None or provider_adapter is None
+    ):
+        raise AesC5Error("bounded_adapter_missing")
     if evidence_output.exists() or ledger_output.exists():
         raise AesC5Error("output_or_ledger_already_exists")
     if not (
@@ -1475,10 +1643,18 @@ def execute(
         raise AesC5Error("source_head_invalid")
     validate_inherited_artifacts()
     envelope = validate_envelope()
+    deterministic_clock = now is not None
     now = now or datetime.now(timezone.utc)
 
-    manifest = build_generation_manifest(envelope, now=now)
-    validate_generation(manifest)
+    read_manifest = build_generation_manifest(
+        envelope,
+        capability_class="authoritative_read",
+        now=now,
+    )
+    validate_generation(
+        read_manifest, expected_capability_class="authoritative_read"
+    )
+    provider_manifest: dict[str, Any] | None = None
 
     cg_overrides: dict[str, Any] = {}
     if current_generation_id is not None:
@@ -1487,7 +1663,7 @@ def execute(
         cg_overrides["current_manifest_id"] = current_manifest_id
     if current_manifest_digest is not None:
         cg_overrides["current_manifest_digest"] = current_manifest_digest
-    current_generation_state = _current_generation_state(manifest)
+    current_generation_state = _current_generation_state(read_manifest)
     if cg_overrides:
         current_generation_state = copy.deepcopy(current_generation_state)
         current_generation_state.update(cg_overrides)
@@ -1498,21 +1674,24 @@ def execute(
     authority_state = (
         copy.deepcopy(dict(current_authority_state))
         if current_authority_state is not None
-        else _current_authority_state(manifest)
+        else _current_authority_state(read_manifest)
     )
 
     source_ledger = _initial_source_ledger(
-        mode, envelope, source_head=source_head, manifest_digest=manifest["manifest_digest"]
+        mode,
+        envelope,
+        source_head=source_head,
+        manifest_digest=read_manifest["manifest_digest"],
     )
     provider_ledger = _initial_provider_ledger(
-        mode, envelope, source_head=source_head, manifest_digest=manifest["manifest_digest"]
+        mode, envelope, source_head=source_head, manifest_digest=None
     )
     audit = AuditChain()
     audit.append(
-        "generation_admitted",
+        "source_generation_admitted",
         {
-            "generation_id": GENERATION_ID,
-            "manifest_digest": manifest["manifest_digest"],
+            "generation_id": READ_GENERATION_ID,
+            "manifest_digest": read_manifest["manifest_digest"],
             "current_authority_checked": True,
             "command_authority": False,
         },
@@ -1521,6 +1700,7 @@ def execute(
     actual_source_calls = 0
     actual_provider_calls = 0
     provider_metadata: dict[str, Any] = {}
+    source_metadata: dict[str, Any] = {}
     release: dict[str, Any] | None = None
     result = "revision_required"
     reason_codes: list[str] = []
@@ -1534,7 +1714,7 @@ def execute(
 
     try:
         read_attempt, _, _ = build_read_attempt(
-            manifest,
+            read_manifest,
             envelope,
             now=now,
             observed=initial_observed,
@@ -1543,16 +1723,19 @@ def execute(
             current_generation_state=current_generation_state,
             current_authority_state=authority_state,
         )
+        validation_errors = c1.validate_attempt(read_attempt)
+        if validation_errors:
+            raise AesC5Error("source_admission_packet_schema_invalid")
         admission1 = c1.evaluate_attempt(read_attempt)
         if admission1["decision"] != "allow":
             raise AesC5Error(admission1["reason_codes"][0])
         if admission1["reason_codes"] != ["manifest_grant_and_current_authority"]:
             raise AesC5Error("broker_admission_not_exact_allow")
         if (
-            admission1["after_terminal_state"] != "active"
-            or admission1["after_next_operation_permitted"] is not True
+            admission1["after_terminal_state"] != "exhausted"
+            or admission1["after_next_operation_permitted"] is not False
         ):
-            raise AesC5Error("broker_admission_first_not_active")
+            raise AesC5Error("source_generation_not_exhausted")
         audit.append(
             "source_admission_allowed",
             {
@@ -1569,18 +1752,33 @@ def execute(
         _reserve_source_ledger(source_ledger)
         source_result = (source_adapter or source_provider_free_fixture)()
         actual_source_calls = 1
+        source_metadata = _safe_source_metadata(source_result.metadata)
+        if mode != "provider-free" and (
+            source_metadata.get("product_runtime_route_read") is not True
+            or source_metadata.get("ordinary_bearer_auth_dependency_used") is not True
+            or source_metadata.get("token_user_practice_equality_observed") is not True
+            or source_metadata.get("counts_unchanged") is not True
+            or source_metadata.get("route_status") != 200
+            or not source_metadata.get("database_statement_count")
+        ):
+            raise AesC5Error("local_source_metadata_invalid")
         row_count = len(source_result.rows)
         validated = validate_route_response(source_result.rows, envelope)
         minimized, _alias_map = minimize(validated, envelope)
         source_digest = digest_of(validated)
+        adapter_observed_at = source_result.metadata.get("observed_at")
+        source_observed_at = observed_at or adapter_observed_at or now
+        if not isinstance(source_observed_at, datetime):
+            raise AesC5Error("source_observation_clock_invalid")
         frame = build_context_frame_set(
             envelope,
             minimized,
-            observed_at=observed_at or now,
+            observed_at=source_observed_at,
             source_digest=source_digest,
         )
         validate_frame_source_digest(frame, source_digest)
-        validate_frame_freshness(frame, now)
+        dispatch_now = now if deterministic_clock else datetime.now(timezone.utc)
+        validate_frame_freshness(frame, dispatch_now)
         audit.append(
             "source_read_and_minimized",
             {
@@ -1595,18 +1793,49 @@ def execute(
             "maximum_request_bytes"
         ]:
             raise AesC5Error("provider_request_oversized")
+        provider_manifest = build_generation_manifest(
+            envelope,
+            capability_class="provider_inference",
+            now=dispatch_now,
+            context_frame_set_digest=frame["context_frame_set_digest"],
+        )
+        validate_generation(
+            provider_manifest, expected_capability_class="provider_inference"
+        )
+        provider_ledger["manifest_digest"] = provider_manifest["manifest_digest"]
+        provider_generation_state = _current_generation_state(provider_manifest)
+        provider_authority_state = (
+            copy.deepcopy(dict(current_authority_state))
+            if current_authority_state is not None
+            else _current_authority_state(provider_manifest)
+        )
+        audit.append(
+            "source_generation_revoked_provider_generation_admitted",
+            {
+                "source_generation_id": READ_GENERATION_ID,
+                "source_generation_exhausted": True,
+                "source_lease_revoked": True,
+                "provider_generation_id": PROVIDER_GENERATION_ID,
+                "provider_manifest_digest": provider_manifest["manifest_digest"],
+                "context_frame_set_digest": frame["context_frame_set_digest"],
+                "budget_or_lease_transferred": False,
+            },
+        )
         provider_attempt, _, _ = build_provider_attempt(
-            manifest,
+            provider_manifest,
             envelope,
             frame,
             request_body,
-            now=now,
-            observed=admission1["after_observed"],
+            now=dispatch_now,
+            observed=_zeros(),
             kill_switch=kill_switch,
-            revocation_record=revocation_record,
-            current_generation_state=current_generation_state,
-            current_authority_state=authority_state,
+            revocation_record=None,
+            current_generation_state=provider_generation_state,
+            current_authority_state=provider_authority_state,
         )
+        validation_errors = c1.validate_attempt(provider_attempt)
+        if validation_errors:
+            raise AesC5Error("provider_admission_packet_schema_invalid")
         admission2 = c1.evaluate_attempt(provider_attempt)
         if admission2["decision"] != "allow":
             raise AesC5Error(admission2["reason_codes"][0])
@@ -1630,9 +1859,16 @@ def execute(
             },
         )
 
+        if mode == "occupied":
+            _reserve_provider_ledger(provider_ledger)
         provider_result = (provider_adapter or provider_provider_free_fixture)(
             request_body, frame
         )
+        contacted = provider_result.metadata.get("provider_contacted") is True
+        if mode == "occupied" and not contacted:
+            raise AesC5Error("occupied_provider_not_contacted")
+        if mode != "occupied" and contacted:
+            raise AesC5Error("provider_contact_forbidden")
         actual_provider_calls = 1 if provider_result.metadata.get(
             "provider_contacted"
         ) else 0
@@ -1657,6 +1893,8 @@ def execute(
         )
     except AesC5Error as error:
         provider_metadata = _safe_provider_metadata(error.metadata)
+        if provider_metadata.get("provider_contacted") is True:
+            actual_provider_calls = 1
         reason_codes = [error.reason_code]
         audit.append(
             "broker_or_proofreader_stopped",
@@ -1689,9 +1927,11 @@ def execute(
         atomic_write(ledger_output / "source-ledger.json", source_ledger)
         atomic_write(ledger_output / "provider-ledger.json", provider_ledger)
         audit.append(
-            "generation_revoked_and_cleaned",
+            "generations_revoked_and_cleaned",
             {
-                "lease_revoked": True,
+                "source_generation_revoked": True,
+                "provider_generation_revoked_or_not_instantiated": True,
+                "leases_revoked": True,
                 "source_ledger_consumed": True,
                 "provider_ledger_consumed": True,
                 "credential_or_token_retained": False,
@@ -1712,7 +1952,14 @@ def execute(
         "reason_codes": reason_codes,
         "envelope_digest": file_digest(ENVELOPE_PATH),
         "inherited_artifact_digests": dict(INHERITED_ARTIFACT_DIGESTS),
-        "manifest_digest": manifest["manifest_digest"],
+        "manifest_digests": {
+            "source": read_manifest["manifest_digest"],
+            "provider": (
+                provider_manifest["manifest_digest"]
+                if provider_manifest is not None
+                else None
+            ),
+        },
         "broker_admissions": {
             "source_read": _admission_summary(admission1),
             "provider_inference": _admission_summary(admission2),
@@ -1721,7 +1968,7 @@ def execute(
             "route": envelope["source_boundary"]["route"],
             "role": envelope["principal_and_tenant_boundary"]["human_role"],
             "row_count": row_count,
-            "statement_count": 0,
+            "statement_count": source_metadata.get("database_statement_count", 0),
             "source_digest": source_digest,
             "context_digest": (
                 frame["context_frame_set_digest"] if frame is not None else None
@@ -1752,10 +1999,12 @@ def execute(
     evidence["provider_ledger"] = provider_ledger
     evidence["operation_counters"] = {
         "provider_calls": actual_provider_calls,
-        "product_reads": 0,
-        "database_operations": 0,
+        "product_reads": (
+            1 if source_metadata.get("product_runtime_route_read") is True else 0
+        ),
+        "database_operations": source_metadata.get("database_statement_count", 0),
         "source_operations": actual_source_calls,
-        "network_operations": 0,
+        "network_operations": actual_provider_calls,
         "filesystem_capability_operations": 0,
         "provider_tool_operations": 0,
         "command_or_write_operations": 0,

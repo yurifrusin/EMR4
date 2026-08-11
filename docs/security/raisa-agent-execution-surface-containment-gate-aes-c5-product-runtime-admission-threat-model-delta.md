@@ -40,6 +40,7 @@ provider credentials and cannot choose either operation.
 | Provider retention exceeds claim | request/response logging and in-memory cache disabled by read-only preflight; payload synthetic; no platform-wide zero-retention claim | stop on uncertain controls |
 | Schema-valid but wrong practitioner selection | deterministic proofreader checks target display name against admitted alias and exact context digest | `intelligence_unavailable` |
 | Product read or provider replay | separate single-use ledgers, cumulative budgets, current-authority recheck, generation-wide revocation | terminal stop |
+| Two downstream destinations are misrepresented as one AES-C0 generation | two separately immutable single-grant generations; exact AES-C1 schema validation before both admissions; no lease or budget transfer; provider manifest binds the fresh frame digest | stop before I/O or provider generation creation |
 | Cleanup drops wrong data | random AES-C5-prefixed schema validated before exact `DROP SCHEMA`; engine disposed; no broad/glob target | quarantine; never pass |
 | Regional claim overreach | claim configured/observed Sydney endpoint only; cite Google's endpoint limitation | revision required |
 
