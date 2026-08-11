@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 225,
+  "register_revision": 226,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10378,6 +10378,47 @@
           "orchestration/agent_inbox/codex/raisa-aes-c4-preplanning-invalid-continuation-event-analysis.md",
           "orchestration/agent_inbox/codex/raisa-aes-c4-envelope-reconstruction-preplanning-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-225.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0260",
+      "attempt_id": "raisa-aes-c4-provider-proof-review-predispatch-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c4-bounded-occupied-provider-proof",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A pre-worker-dispatch runtime state must use an exact configured adapter observation method, include every required worker-slot inventory and declare only workspace receipts supported by the current orchestrator profile before it can authorize a verifier.",
+      "observed_error": "The first AES-C4 verifier pre-dispatch state used method antigravity_new_project_bound_readonly_worktree instead of agy_cli_observation, omitted the required deepseek-flash-workers slot by substituting a Gemini slot and declared workspace receipt gemini-aes-c4-provider-proof-review-001 without a matching configured inventory. The receipt returned revision_required with adapter_probe_method_invalid, worker_slot_inventory_missing and workspace_receipt_missing. No worker started.",
+      "detection_method": "The orchestrator preflight emitted the three exact rejection reasons before dispatch. Sol read one current passing Gemini pre-dispatch runtime state, preserved the invalid state/receipt and repeated the complete attempt using exact adapter method agy_cli_observation and its accepted inventory shape.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-review-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-review-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-review-predispatch-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-226.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.orchestrator_predispatch_runtime_state_profile_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit no dispatch authority from the invalid receipt. Preserve it, recover the exact current Antigravity pre-dispatch observation and inventory shape from a passing repository state, then repeat the full receipt before launching the verifier.",
+        "prevention_control": "Build dispatch runtime states from the current configured adapter methods and slot inventory or an exact current passing example; do not infer adapter method names or declare reviewer slots/workspace receipts absent from the profile.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-review-predispatch-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-review-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-review-predispatch-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-226.md"
         ]
       },
       "status": "corrected"

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_aes_c4_review_evidence_aer_0260_and_the_current_provider_lifecycle_and_pricing_fact_rebind_before_regenerating_zero_call_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely and now records AES-C3 accepted at Continuity 240 / Compass 222, the 743c6354 provider-free source veto, AER-0260 and the active AES-C4 public-fact rebind required before any inference.",
+    "current_authority_allocation": "GPT Sol owns factual rebind, implementation, recovery, acceptance and occupied execution. Gemini 3.6 Flash/high supplied one independent exact-source veto and will review the rebound source afresh. Yuri's standing model choice and USD 0.25 ceiling remain unchanged. Codex has no credential/IAM/cloud-configuration/protected-ref authority.",
+    "active_plan_and_acceptance": "The complete gate/AES-C4 plans, threat model, envelope/schema, AES-C3 acceptance, reviewer receipt and official current model/lifecycle/pricing pages were read. The current pages retain GA and Sydney support, extend retirement to 2026-10-20 and price Standard input at USD 0.30/M plus text output including reasoning at USD 2.50/M. The envelope and enforcement are rebound with no inference; new zero-call evidence and exact-head veto are mandatory.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, patient/clinical/product/practice/licensed/external-corpus data, docs/branding and unrelated paths remain closed. No Vertex inference, prompt, product/database/source/filesystem/tool/command/deployment/production/release/Pages/protected-ref operation occurred. The original 494 untracked paths remain preserved and excluded.",
+    "git_refs_and_worktree": "The task branch remains at 743c6354eadd3661d668bb0d567e0693d4b32e9c, descendant of required 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed AES-C3 c45ff191af420b801e9917a7efc69c17aeb5698b. Review worktree r185 remained clean at that exact source. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Nine tracked files contain intentional review/AER/rebind changes; eleven explicit AES-C4/AER artifacts are additional to the unchanged original 494 untracked set."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c4_fact_rebind_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The first exact-source veto passed and is preserved; a distinct rebound-source veto remains required."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the provider-free factual rebind and focused deterministic checks without inference."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek is not selected for this tightly coupled rebind."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

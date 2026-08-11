@@ -248,6 +248,11 @@ def validate_envelope() -> dict[str, Any]:
     for key, expected in exact_binding.items():
         if binding.get(key) != expected:
             raise AesC4Error(f"provider_envelope_binding_invalid:{key}")
+    if (
+        binding.get("launch_stage") != "GA"
+        or binding.get("published_retirement_on") != "2026-10-20"
+    ):
+        raise AesC4Error("provider_envelope_lifecycle_invalid")
 
     request = envelope["request_contract"]
     exact_request = {
@@ -275,6 +280,11 @@ def validate_envelope() -> dict[str, Any]:
         or cost["maximum_retries"] != 0
         or cost["application_cost_ceiling_usd"] != 0.25
         or cost["reserved_cost_per_call_usd"] != 0.25
+        or cost["published_input_price_per_million_tokens_usd"] != 0.3
+        or cost[
+            "published_text_output_including_reasoning_price_per_million_tokens_usd"
+        ]
+        != 2.5
     ):
         raise AesC4Error("provider_envelope_cost_contract_invalid")
     if any(

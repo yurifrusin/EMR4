@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_fresh_exact_head_gemini_veto_as_aes_c4_provider_free_source_review_only_and_proceed_to_fresh_preexecution_checks",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete gate plan, AES-C4 plan/threat model/envelope/schema, AES-C3 acceptance, reviewer packet and schema-constrained receipt were read. Gemini passed 367 exact tests, Ruff, compilation and whitespace plus adversarial review at source 743c6354eadd3661d668bb0d567e0693d4b32e9c. This admits the provider-free source veto only; the initial cloud evidence is not promoted to the mandatory fresh preexecution gate.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high supplied independent veto evidence only. GPT Sol retains acceptance, occupied execution, recovery, Git and claim authority. No reviewer receives provider, credential, product-data, write, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/r185 remained clean on codex/review-aes-c4-provider-proof-743c6354 at identical before/after HEAD 743c6354eadd3661d668bb0d567e0693d4b32e9c. The main task branch is at the same committed HEAD with intentional post-review orchestration/AER working changes only. Required 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed AES-C3 c45ff191af420b801e9917a7efc69c17aeb5698b remain ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; the original 494 untracked paths remain preserved and excluded.",
+    "live_handover_current_baton": "AGENTS.md binds AES-C3 as accepted at Continuity 240 / Compass 222 and AES-C4 as the active frozen one-call Sydney Vertex proof. Its provider-free zero-call evidence is committed and the fresh exact-source veto has now returned one pass.",
+    "protected_evidence_boundaries": "The reviewer accessed only its exact source/plan/test/authored-synthetic allowlist, no protected fixture or docs/branding path, and no Vertex/gcloud/credential/product/database/source/filesystem/tool/command/deployment/production/release/Pages/protected-ref operation. All patient/clinical/product/practice/licensed/external-corpus data remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

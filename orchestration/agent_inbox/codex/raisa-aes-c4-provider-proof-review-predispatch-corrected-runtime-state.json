@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_exact_head_read_only_security_veto_for_aes_c4",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after restoration. AES-C3 remains accepted at Continuity 240 / Compass 222 and AES-C4's frozen one-call Sydney Vertex proof is active. The provider-free source and zero-call evidence are committed at exact candidate 743c6354eadd3661d668bb0d567e0693d4b32e9c.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project owns only one independent veto. GPT Sol retains implementation, acceptance, occupied execution, Git and all authority decisions. The verifier has no source-write, provider, product-data, credential, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "The complete gate plan, AES-C4 plan/threat model/envelope/schema, AES-C3 closeout/Sol acceptance and the exact reviewer packet were read. Review is restricted to the committed provider-free candidate, its exact allowlist and deterministic security/evidence tests; it expressly forbids Vertex, cloud preflight and gcloud.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical Diary/PHI, patient/clinical/product/practice/licensed/external-corpus data, docs/branding, unrelated inboxes and all paths outside the review allowlist are closed. The reviewer must not enumerate protected paths. No credential, provider inference, product/database/source/filesystem/tool/command/deployment/production/release/Pages/protected-ref operation is authorised.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r185 passed executable preflight clean at branch codex/review-aes-c4-provider-proof-743c6354 and exact HEAD 743c6354eadd3661d668bb0d567e0693d4b32e9c. The main task branch is at the same HEAD. Required 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed AES-C3 c45ff191af420b801e9917a7efc69c17aeb5698b are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked paths remain exact and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c4_corrected_pre_verifier_dispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The launcher exposes exact gemini-3.6-flash-high/high and the fresh exact-head worktree preflight passed."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol retains all implementation, occupied execution, recovery and acceptance authority."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek is not dispatched for this independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains unused."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare is not selected for this review."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned to this fresh external veto."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

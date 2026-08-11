@@ -39,14 +39,17 @@ def test_live_baton_rows_agree_on_aes_c3_and_active_aes_c4_envelope() -> None:
     assert "AES-C3 passes" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
-    assert "AES-C4's narrowest exact occupied envelope is now frozen" in next_work
+    assert "AES-C4's narrowest exact occupied envelope remains" in next_work
     assert "gemini-2.5-flash" in next_work
     assert "bernie-emr4-dev" in next_work
     assert "australia-southeast1" in next_work
     assert "one call/no retry" in next_work
     assert "USD 0.25" in next_work
-    assert "initial sanitized read-only ADC/cloud" in next_work
-    assert "fresh exact-reviewed-HEAD repetition remains required" in next_work
+    assert "retirement date extended to 2026-10-20" in next_work
+    assert "USD 0.30/M input" in next_work
+    assert "USD 2.50/M text output including reasoning" in next_work
+    assert "regenerate zero-call evidence" in next_work
+    assert "repeat cloud/ADC/CLI checks" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -83,7 +86,7 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         "no patient/clinical/product data",
         "product read",
         "database/source",
-        "one occupied call",
+        "sole call",
         "filesystem capability",
         "provider tool",
         "command",

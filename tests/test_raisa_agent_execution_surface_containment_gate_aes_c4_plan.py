@@ -46,7 +46,7 @@ def test_aes_c4_exact_sydney_vertex_identity_and_path_are_frozen():
         "provider": "google_vertex_ai",
         "model_id": "gemini-2.5-flash",
         "launch_stage": "GA",
-        "published_retirement_on": "2026-10-16",
+        "published_retirement_on": "2026-10-20",
         "project": "bernie-emr4-dev",
         "quota_project": "bernie-emr4-dev",
         "service_account": (
@@ -109,9 +109,13 @@ def test_aes_c4_is_one_call_no_retry_and_cost_limited():
     assert cost["call_after_admission"] is False
     assert cost["application_cost_ceiling_usd"] == 0.25
     assert cost["reserved_cost_per_call_usd"] == 0.25
-    assert cost["published_input_price_per_million_tokens_usd"] == 0.15
-    assert cost["published_nonthinking_output_price_per_million_tokens_usd"] == 0.6
-    assert cost["published_thinking_output_price_per_million_tokens_usd"] == 3.5
+    assert cost["published_input_price_per_million_tokens_usd"] == 0.3
+    assert (
+        cost[
+            "published_text_output_including_reasoning_price_per_million_tokens_usd"
+        ]
+        == 2.5
+    )
 
 
 def test_data_broker_and_command_boundaries_fail_closed():

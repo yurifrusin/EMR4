@@ -52,15 +52,18 @@ The canonical machine-readable authority is
 | Provider features | no tools, functions, grounding, retrieval, code execution, explicit context cache or automatic fallback |
 
 The cost reservation is deliberately conservative. Current published Standard
-pricing observed on 2026-08-11 is USD 0.15 per million input tokens, USD 0.60
-per million non-thinking output tokens and USD 3.50 per million thinking output
-tokens. The fixed request/output ceilings remain far below USD 0.25; a pricing
-or billing ambiguity still stops before transmission rather than weakening the
-ceiling.
+pricing rechecked on 2026-08-11 is USD 0.30 per million input tokens and USD
+2.50 per million text-output tokens including reasoning. Even charging the
+8,192-byte input ceiling as 8,192 tokens plus the full 2,048-token output would
+remain below USD 0.008, far below USD 0.25. A pricing or billing ambiguity still
+stops before transmission rather than weakening the ceiling.
 
 Google currently publishes `gemini-2.5-flash` as GA, includes
 `australia-southeast1` for its regional ML-processing availability and records
-retirement on 2026-10-16. Those facts must be rechecked immediately before the
+retirement on 2026-10-20. The 2026-08-11 preexecution recheck found that current
+model/lifecycle pages had extended the earlier 2026-10-16 date and that Standard
+pricing had changed; the envelope was rebound before any inference and requires
+a new exact-head veto. Those facts must be rechecked immediately before the
 call. The regional endpoint proves the configured and observed locational
 request path only; it does not prove Australian physical or sovereign
 processing.
