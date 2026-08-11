@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_exact_aes_c5_gemini_review_packet_preflight_dispatch_postcompaction_acceptance_and_pass_receipt_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The live baton accepts AES-C4 and identifies the frozen AES-C5 product-runtime admission gate as the finite AES sequence's final descendant.",
+    "current_authority_allocation": "GPT Sol alone may admit and commit the independent veto evidence. Gemini 3.6 Flash/high supplied one read-only exact-head pass and has no Git, implementation, integration or occupied-execution authority. DeepSeek is idle.",
+    "active_plan_and_acceptance": "The exact reviewed source 4e5d96ada19c51432fa4db46c76e23c952147c52 passed the dedicated Gemini veto with 71 focused tests, Ruff, compilation, same before/after HEAD, clean postflight and zero provider/product/database operations. The pre-verifier-acceptance receipt passes. This commit binds only the review packet, worktree preflight, dispatch receipt/state, verifier receipt, post-compaction receipt/state and verifier-acceptance receipt/state; source semantics remain unchanged.",
+    "protected_evidence_boundaries": "Only exact AES-C5 task-owned review and orchestration paths may be staged. Protected evidence, docs/branding and all unrelated untracked files remain untouched. The commit grants no product read, database operation, provider call, credential/cloud mutation, command/write, deployment, production, release, Pages or protected-ref movement.",
+    "git_refs_and_worktree": "The task branch is at exact reviewed HEAD 4e5d96ada19c51432fa4db46c76e23c952147c52 and required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean; explicit-path staging will preserve every unrelated untracked file, including docs/branding."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c5_gemini_veto_explicit_path_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reviewed and admitted the structured pass."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Completed worker is idle."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The exact-head pass receipt and clean wrapper postflight are present."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

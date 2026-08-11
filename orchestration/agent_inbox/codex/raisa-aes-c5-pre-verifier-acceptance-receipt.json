@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_single_exact_head_gemini_3_6_flash_high_aes_c5_veto_and_bind_its_zero_external_operation_receipt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The completed verifier receipt returns exactly one pass decision for source 4e5d96ada19c51432fa4db46c76e23c952147c52. It records 71 focused tests plus Ruff, compilation and Git gates passing; zero provider calls, product reads and database operations; the same before/after HEAD; and a clean unchanged review worktree. Its review affirms the two independently immutable generations, AES-C1 prevalidation, exact auth/practice route, minimization, one-call adapter, consumed ledgers and cleanup boundaries.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high held only one fresh read-only veto lease in the dedicated exact-head worktree. GPT Sol retains architecture, recovery, acceptance, occupied execution, Git and publication authority. The verifier received no implementation, product, database, provider, cloud, credential, integration, push, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "The task branch and dedicated clean review worktree are both bound to exact reviewed source 4e5d96ada19c51432fa4db46c76e23c952147c52; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. After explicit fetch, local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The task tracked tree is clean and all pre-existing unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223 and AES-C5 is the selected final named descendant under its frozen exact product-source and purpose boundary.",
+    "protected_evidence_boundaries": "The verifier used only the exact packet allowlist and authored-synthetic minimized evidence. It made no protected-evidence, historical Diary, patient/clinical, real-person, product-runtime, database, credential, provider or cloud access. docs/branding and every unrelated untracked path remain excluded. The pass grants only progression to the frozen read-only factual/cloud gates and cannot itself authorize the occupied call."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

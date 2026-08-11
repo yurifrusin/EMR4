@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "admit_the_completed_exact_head_gemini_veto_then_conditionally_execute_the_single_frozen_aes_c5_occupied_rehearsal_and_close_out_the_finite_aes_sequence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The AES-C5 plan was read completely together with the exact AES-C0 architecture contract and accepted AES-C4 closeout/Sol acceptance. Exact source 4e5d96ada19c51432fa4db46c76e23c952147c52 contains the recovered two-generation containment implementation and passing one-read/zero-provider local PostgreSQL proof. The next action is bounded admission of the completed Gemini veto; only a pass may advance to current official-fact and read-only cloud/ADC gates before the one-call/no-retry occupied attempt.",
+    "current_authority_allocation": "GPT Sol retains architecture, recovery, acceptance, occupied execution, Git and publication authority. DeepSeek completed its bounded implementation artifact and is idle. Gemini 3.6 Flash/high completed one exact-head read-only veto in the clean dedicated review worktree and has no implementation, product, provider, database, credential, integration, push, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "After an explicit fetch, the task worktree is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 4e5d96ada19c51432fa4db46c76e23c952147c52; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task remains cdb9ff3df66666ac569c289bc1734c119683c9a3. The tracked worktree is clean; 499 untracked files including five docs/branding paths are preserved, with only exact task-owned paths eligible for explicit staging.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The live baton accepts AES-C4 at Continuity 241 / Compass 223, identifies AES-C5 as the final named descendant, and preserves the protected master/handoff boundary and all unrelated untracked files.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, raw historical Diary/PHI, licensed or external corpora, real-person and patient/clinical data remain closed. AES-C5 is limited to one authenticated practice-scoped route over newly authored synthetic practitioner rows, one minimized Sydney Vertex request, deterministic non-command release and exact cleanup. No protected path, docs/branding, unrelated untracked file, generic source/database access, tool, command/write, deployment, production, release, Pages or protected ref is authorized."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_antigravity_gemini_3_6_flash_high_read_only_veto_over_exact_aes_c5_local_pass_source_and_minimized_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223; AES-C5 is the final named descendant selected for the authenticated practitioner-directory GET and Reception One booking context.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives one fresh Antigravity read-only veto lease over the exact allowlisted AES-C5 source and minimized evidence. GPT Sol retains architecture, recovery, acceptance, provider execution, Git integration and publication authority. The verifier has no edit, database, product, credential, provider, cloud, integration, push, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "Exact source 4e5d96ada19c51432fa4db46c76e23c952147c52 contains the recovered two-generation containment core and the passing one-read/zero-provider local PostgreSQL evidence with exact cleanup. The review packet freezes the exact source/application/evidence allowlist, nine veto questions and seven permitted read-only commands. An exact verifier-worktree preflight passes clean at the same HEAD.",
+    "protected_evidence_boundaries": "The verifier may read only AGENTS.md and the exact packet allowlist. It must not list/search any repository root or inspect fixtures, support, holdouts, reports, receipts, untracked paths or docs/branding. It may not run the local/occupied harness or contact any database, product route, credential, provider, cloud or network destination. Evidence is authored-synthetic and minimized; protected material remains excluded.",
+    "git_refs_and_worktree": "The clean review worktree C:/Users/sarashera/EMR4-worktrees/aes-c5-gemini-review is on codex/aes-c5-gemini-review at mechanically captured and verified 4e5d96ada19c51432fa4db46c76e23c952147c52. The task branch is at the same source. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted AES-C4 are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref movement is authorized."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c5_gemini_veto_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol retains acceptance and recovery authority."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Completed worker is idle."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["agy is present; the dedicated review worktree preflight passes clean at the exact source."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected while Antigravity is reachable."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is assigned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_antigravity_gemini_3_6_flash_high_read_only_veto_over_exact_aes_c5_local_pass_source_and_minimized_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact source 4e5d96ada19c51432fa4db46c76e23c952147c52 contains the recovered two-generation containment core and the passing one-read/zero-provider local PostgreSQL evidence with exact cleanup. The review packet freezes the exact source/application/evidence allowlist, nine veto questions and seven permitted read-only commands. An exact verifier-worktree preflight passes clean at the same HEAD.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives one fresh Antigravity read-only veto lease over the exact allowlisted AES-C5 source and minimized evidence. GPT Sol retains architecture, recovery, acceptance, provider execution, Git integration and publication authority. The verifier has no edit, database, product, credential, provider, cloud, integration, push, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "The clean review worktree C:/Users/sarashera/EMR4-worktrees/aes-c5-gemini-review is on codex/aes-c5-gemini-review at mechanically captured and verified 4e5d96ada19c51432fa4db46c76e23c952147c52. The task branch is at the same source. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted AES-C4 are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref movement is authorized.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223; AES-C5 is the final named descendant selected for the authenticated practitioner-directory GET and Reception One booking context.",
+    "protected_evidence_boundaries": "The verifier may read only AGENTS.md and the exact packet allowlist. It must not list/search any repository root or inspect fixtures, support, holdouts, reports, receipts, untracked paths or docs/branding. It may not run the local/occupied harness or contact any database, product route, credential, provider, cloud or network destination. Evidence is authored-synthetic and minimized; protected material remains excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
