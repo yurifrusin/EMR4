@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "execute_one_exact_source_bound_local_fastapi_bearer_auth_sqlalchemy_postgresql_practitioner_directory_read_with_one_fake_provider_result_and_exact_disposable_schema_cleanup_after_full_head_and_event_vocabulary_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Mechanically captured and verified source e3ebc119f81909555faa0147dfa428c0d6a78097 implements two AES-C0/AES-C1-valid single-destination generations, exact route minimization and a disposable local-route harness. The recovered candidate passed the 266-incident plus AES-C5 regression gate, 71 focused tests, Ruff, compilation and diff checks. This gate authorizes one local route call, zero provider calls and exact cleanup only; AER-0267 and AER-0268 preserve the two rejected preexecution states.",
+    "current_authority_allocation": "GPT Sol alone owns this exact local application/database integration gate and acceptance. No worker or independent verifier is active. The provider adapter is deterministic and provider-free; cloud credentials and Vertex are not accessed.",
+    "git_refs_and_worktree": "The task branch is codex/ariadne-bernie-davida-parallel-seam at mechanically captured and git-cat-file-verified source e3ebc119f81909555faa0147dfa428c0d6a78097. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted AES-C4 are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Every pre-existing untracked path remains preserved; no protected ref movement is authorized.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223; AES-C5 is the final named AES descendant and Yuri selected the authenticated practitioner-directory GET for Reception One booking context.",
+    "protected_evidence_boundaries": "Only fresh authored-synthetic Receptionist, practice, location and practitioner records may exist in one schema matching aes_c5 plus 32 lowercase hex. The measured route permits SELECT/WITH only; setup DDL/DML and exact validated DROP SCHEMA occur outside both AES generations. No operational database/practice, real person, patient, clinical, historical Diary, protected evidence, provider, cloud, credential export, command, deployment, production, release, Pages or protected-ref action is permitted. docs/branding and all unrelated untracked paths remain untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

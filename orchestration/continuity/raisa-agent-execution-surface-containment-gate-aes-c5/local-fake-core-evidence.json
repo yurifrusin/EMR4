@@ -1,0 +1,240 @@
+{
+  "audit_chain": [
+    {
+      "event_hash": "sha256:046c0b7e6e7853654b5bf47d03288f4212ddceb1c9fff4c35029b32f9307da46",
+      "event_type": "source_generation_admitted",
+      "fields": {
+        "command_authority": false,
+        "current_authority_checked": true,
+        "generation_id": "generation-aes-c5-authoritative-read-001",
+        "manifest_digest": "sha256:3a2714d2a0419f0eedc704b37ccbe43dc14e56610c2752a33811aeb843aed832"
+      },
+      "previous_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "sequence": 1
+    },
+    {
+      "event_hash": "sha256:e99b74fa46c258d22b65bc04a0c504646c7bd9d0601e06ed4665c8899db1596f",
+      "event_type": "source_admission_allowed",
+      "fields": {
+        "after_next_operation_permitted": false,
+        "after_terminal_state": "exhausted",
+        "audit_evidence_digest": "sha256:ecb10df10c3eb477b9193383904c0989f21431ef1bef3c592421a4407599c91b",
+        "decision": "allow",
+        "reason_codes": [
+          "manifest_grant_and_current_authority"
+        ]
+      },
+      "previous_hash": "sha256:046c0b7e6e7853654b5bf47d03288f4212ddceb1c9fff4c35029b32f9307da46",
+      "sequence": 2
+    },
+    {
+      "event_hash": "sha256:e5a706b36e242e818767f864267a339ee2f2a9f7c20d00a0c9ff5b94db7699dc",
+      "event_type": "source_read_and_minimized",
+      "fields": {
+        "minimized_field_count": 3,
+        "row_count": 3,
+        "source_digest": "sha256:4bbeaa5a9ee68bc70214f1f1e75098599343275388260386f2f9d703a423e9d3"
+      },
+      "previous_hash": "sha256:e99b74fa46c258d22b65bc04a0c504646c7bd9d0601e06ed4665c8899db1596f",
+      "sequence": 3
+    },
+    {
+      "event_hash": "sha256:e0911631629f2cc606fa1f2b42fe601f41c9281614f5169a3ee7668df9b4696c",
+      "event_type": "source_generation_revoked_provider_generation_admitted",
+      "fields": {
+        "budget_or_lease_transferred": false,
+        "context_frame_set_digest": "sha256:541d12433d838890489f67bbbc37e158b7bbaefda7a0f68b12db98ce30f5c5f0",
+        "provider_generation_id": "generation-aes-c5-provider-inference-001",
+        "provider_manifest_digest": "sha256:0872f3cf8c0824b03fb025f70de6dc98a5ae506107eb75fe7ddd07086dded920",
+        "source_generation_exhausted": true,
+        "source_generation_id": "generation-aes-c5-authoritative-read-001",
+        "source_lease_revoked": true
+      },
+      "previous_hash": "sha256:e5a706b36e242e818767f864267a339ee2f2a9f7c20d00a0c9ff5b94db7699dc",
+      "sequence": 4
+    },
+    {
+      "event_hash": "sha256:a4d9a10661573768f721e91e449398672cf7026981c146532c3a8257b89b9fde",
+      "event_type": "provider_admission_allowed",
+      "fields": {
+        "after_next_operation_permitted": false,
+        "after_terminal_state": "exhausted",
+        "audit_evidence_digest": "sha256:f534d012cc9ec973903a952e314d92178b899e4c6420a6458761319657e255e2",
+        "decision": "allow",
+        "reason_codes": [
+          "manifest_grant_and_current_authority"
+        ]
+      },
+      "previous_hash": "sha256:e0911631629f2cc606fa1f2b42fe601f41c9281614f5169a3ee7668df9b4696c",
+      "sequence": 5
+    },
+    {
+      "event_hash": "sha256:7f52758d6a50bcb99962cbb3495a9906ee3283eb35edd264225927b1f9f917fb",
+      "event_type": "provider_result_proofread",
+      "fields": {
+        "command_authority": false,
+        "proofreader_decision": "admitted",
+        "release_digest": "sha256:5b4a0da2d690b3a2ded38131a208b71beefe522d3ca7819e1d8b3a363bf37265"
+      },
+      "previous_hash": "sha256:a4d9a10661573768f721e91e449398672cf7026981c146532c3a8257b89b9fde",
+      "sequence": 6
+    },
+    {
+      "event_hash": "sha256:c8e13551c9a78ec3b1db61ac09ac16363fb8f8b9910092ab65c3fbd2b0e68adf",
+      "event_type": "generations_revoked_and_cleaned",
+      "fields": {
+        "broker_process_or_listener": false,
+        "credential_or_token_retained": false,
+        "further_generation_calls": false,
+        "leases_revoked": true,
+        "provider_generation_revoked_or_not_instantiated": true,
+        "provider_ledger_consumed": true,
+        "source_generation_revoked": true,
+        "source_ledger_consumed": true,
+        "task_runtime_or_temporary_root": false
+      },
+      "previous_hash": "sha256:7f52758d6a50bcb99962cbb3495a9906ee3283eb35edd264225927b1f9f917fb",
+      "sequence": 7
+    }
+  ],
+  "broker_admissions": {
+    "provider_inference": {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "audit_evidence_digest": "sha256:f534d012cc9ec973903a952e314d92178b899e4c6420a6458761319657e255e2",
+      "decision": "allow",
+      "reason_codes": [
+        "manifest_grant_and_current_authority"
+      ]
+    },
+    "source_read": {
+      "after_next_operation_permitted": false,
+      "after_terminal_state": "exhausted",
+      "audit_evidence_digest": "sha256:ecb10df10c3eb477b9193383904c0989f21431ef1bef3c592421a4407599c91b",
+      "decision": "allow",
+      "reason_codes": [
+        "manifest_grant_and_current_authority"
+      ]
+    }
+  },
+  "cleanup": {
+    "broker_process_or_listener": false,
+    "further_generation_calls": false,
+    "lease_alias_and_token_revoked": true,
+    "provider_ledger_consumed": true,
+    "reusable_capability": false,
+    "source_ledger_consumed": true,
+    "task_runtime_or_temporary_root": false
+  },
+  "contains_sensitive_values": false,
+  "envelope_digest": "sha256:df6e19dd67129323a232b3c73a73620ec0cefe2fa2f9aca1ebc1838fa80f9ffb",
+  "evidence_label": "occupied_authored_synthetic_product_runtime_route_postgres_brokered_provider_proof",
+  "inherited_artifact_digests": {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": "sha256:403c7ddac2399760395d60a8094ffe42d2519a4a809bc8a59104acd2883eb9ae",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json": "sha256:344d88c59a5d781ebb205de575b66f2e3d64f3878f73c9c0bf4d86eb996b1740",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.json": "sha256:241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c1/admission-rehearsal-contract.schema.json": "sha256:2e6c5b83d379f5b6f900fa0a26a8733b6fe09496ff8e1c52d5ed40123603e9b6",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.json": "sha256:530c9c3067725f6078785e846fa82c0ebb89f72d0a8feeb5c2916d567b5a4ccf",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.schema.json": "sha256:895f1afc8c4d7f58ba0a8032f54f274496d93e1601e9ce40444d642d4bf0c175",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/containment-rehearsal-contract.json": "sha256:4b4e94b07823576b469921308fd46f741d02834f860759db56985285ceb67d3e",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c3/containment-rehearsal-contract.schema.json": "sha256:fc9e1ae2e42e6178586c51faabf1dabc7ae292d9889091b310a8fd9c021e3de1",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-envelope.json": "sha256:baa22577ca29b09a783765bb5e5893a7d907f98578bf4b1fbc9d6cce24670393",
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-envelope.schema.json": "sha256:df3c56c5c67f44d66b3b2c4c93af2fc040c636dffb33a4301eb276a96e0d2412"
+  },
+  "manifest_digests": {
+    "provider": "sha256:0872f3cf8c0824b03fb025f70de6dc98a5ae506107eb75fe7ddd07086dded920",
+    "source": "sha256:3a2714d2a0419f0eedc704b37ccbe43dc14e56610c2752a33811aeb843aed832"
+  },
+  "mode": "local-route-fake-provider",
+  "operation_counters": {
+    "command_or_write_operations": 0,
+    "database_operations": 3,
+    "deployment_or_production_operations": 0,
+    "filesystem_capability_operations": 0,
+    "network_operations": 0,
+    "product_reads": 1,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "provider_tool_operations": 0,
+    "source_operations": 1
+  },
+  "proofreader": {
+    "decision": "admitted",
+    "release_digest": "sha256:5b4a0da2d690b3a2ded38131a208b71beefe522d3ca7819e1d8b3a363bf37265",
+    "release_performed": true,
+    "repair_call_permitted": false
+  },
+  "provider": {
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "finish_reason": "STOP",
+    "fixture_used": true,
+    "http_status": 200,
+    "latency_ms": 0,
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "model_reasoning_retained": false,
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "provider_contacted": false,
+    "provider_response_bytes": 485,
+    "provider_text_retained": false,
+    "raw_prompt_retained": false,
+    "raw_response_retained": false,
+    "request_digest": "sha256:dac58f58e5a3f1a5fb9b9681fbc2001a4f1a756c48941a7b5882963888779847",
+    "response_digest": "sha256:dd4a343b93a9c7b4bef0cbdca3fccf17c845241930b6abafc3860e6b88781763",
+    "safe_token_counts": {
+      "candidatesTokenCount": 32,
+      "promptTokenCount": 128,
+      "thoughtsTokenCount": 64,
+      "totalTokenCount": 224
+    }
+  },
+  "provider_ledger": {
+    "actual_provider_calls": 0,
+    "generation_id": "generation-aes-c5-provider-inference-001",
+    "ledger_id": "aes-c5-provider-ledger-001",
+    "manifest_digest": "sha256:0872f3cf8c0824b03fb025f70de6dc98a5ae506107eb75fe7ddd07086dded920",
+    "maximum_cost_usd": 0.25,
+    "maximum_provider_calls": 0,
+    "maximum_retries": 0,
+    "mode": "local-route-fake-provider",
+    "provider_call_allowances_consumed": 0,
+    "provider_calls_reserved": 0,
+    "reserved_cost_per_call_usd": 0.25,
+    "reserved_cost_usd": 0.0,
+    "retries_consumed": 0,
+    "schema_version": "emr4.aes_c5.provider_ledger.v1",
+    "source_head": "e3ebc119f81909555faa0147dfa428c0d6a78097",
+    "status": "consumed"
+  },
+  "reason_codes": [],
+  "result": "raisa_agent_execution_surface_containment_gate_aes_c5_product_runtime_admission_pass",
+  "schema_version": "emr4.aes_c5.product_runtime_admission_evidence.v1",
+  "source": {
+    "context_digest": "sha256:541d12433d838890489f67bbbc37e158b7bbaefda7a0f68b12db98ce30f5c5f0",
+    "data_classification": "authored_synthetic_product_runtime_derived_non_phi",
+    "freshness_disposition": "fresh",
+    "role": "Receptionist",
+    "route": "/api/v1/practice/practitioners",
+    "row_count": 3,
+    "source_digest": "sha256:4bbeaa5a9ee68bc70214f1f1e75098599343275388260386f2f9d703a423e9d3",
+    "statement_count": 3
+  },
+  "source_head": "e3ebc119f81909555faa0147dfa428c0d6a78097",
+  "source_ledger": {
+    "actual_source_calls": 1,
+    "generation_id": "generation-aes-c5-authoritative-read-001",
+    "ledger_id": "aes-c5-source-ledger-001",
+    "manifest_digest": "sha256:3a2714d2a0419f0eedc704b37ccbe43dc14e56610c2752a33811aeb843aed832",
+    "maximum_route_calls": 1,
+    "maximum_route_retries": 0,
+    "maximum_source_calls": 1,
+    "mode": "local-route-fake-provider",
+    "route_retries_consumed": 0,
+    "schema_version": "emr4.aes_c5.source_ledger.v1",
+    "source_call_allowances_consumed": 1,
+    "source_call_allowances_reserved": 0,
+    "source_head": "e3ebc119f81909555faa0147dfa428c0d6a78097",
+    "status": "consumed"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 231,
+  "register_revision": 233,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10664,6 +10664,87 @@
           "orchestration/agent_inbox/codex/raisa-aes-c5-precommit-worker-inventory-omission-analysis.md",
           "orchestration/agent_inbox/codex/raisa-aes-c5-sol-recovery-precommit-v2-runtime-state.json",
           "docs/ariadne-agent-error-correction-register-revision-231.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0267",
+      "attempt_id": "raisa-aes-c5-local-fake-preexecution-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c5-practitioner-directory-product-runtime-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Every source-bound runtime state must receive its exact forty-character commit ID directly from git rev-parse HEAD and verify that object before it can supply preexecution evidence.",
+      "observed_error": "Sol expanded the displayed short recovery commit e3ebc119 into a nonexistent forty-character source ID while drafting the first local-fake preexecution state. The error was detected before preflight, and no database, product route, credential, cloud or provider operation occurred.",
+      "detection_method": "Sol compared the drafted state with a fresh git rev-parse HEAD capture and verified the actual object e3ebc119f81909555faa0147dfa428c0d6a78097 using git cat-file -e before generating any receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-source-head-misbind-analysis.md",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-v2-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-232.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit no evidence from the invalid state. Capture git rev-parse HEAD, verify that exact object with git cat-file -e and repeat all five rehydration sources in a new preexecution state using only the captured value.",
+        "prevention_control": "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it with git cat-file, and test the full value before review or runtime dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-source-head-misbind-analysis.md",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-v2-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-232.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0268",
+      "attempt_id": "raisa-aes-c5-local-fake-preexecution-002",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c5-practitioner-directory-product-runtime-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne runtime state must copy its continuation_event exactly from the current orchestrator_requirements.yaml vocabulary before receipt generation.",
+      "observed_error": "The source-corrected local-fake v2 state used inferred event pre_execution. The orchestrator receipt returned revision_required with continuation_event_missing_or_unapproved and admitted no rehydration evidence. No database, product route, credential, cloud or provider operation occurred.",
+      "detection_method": "The deterministic preflight rejected the event. Sol preserved the rejected state and receipt, read orchestrator_requirements.yaml directly and selected exact configured event pre_integration for the application/database binding gate.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-v2-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-event-rejection-analysis.md",
+        "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-v3-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-233.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected pair, copy exact configured event pre_integration from orchestrator_requirements.yaml and repeat all five rehydration sources in a fresh v3 state before any local schema creation.",
+        "prevention_control": "Copy every continuation event directly from orchestration/harness_settings/orchestrator_requirements.yaml or a current passed receipt; never abbreviate or infer the machine event label from prose.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-event-rejection-analysis.md",
+          "orchestration/agent_inbox/codex/raisa-aes-c5-local-fake-preexecution-v3-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-233.md"
         ]
       },
       "status": "corrected"

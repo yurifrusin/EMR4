@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_source_bound_aes_c5_local_route_fake_provider_pass_and_preserved_orchestration_corrections_without_staging_any_unrelated_path",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223; AES-C5 remains the final named AES descendant selected for the authenticated practitioner-directory GET and Reception One booking context.",
+    "current_authority_allocation": "GPT Sol owns local execution, recovery, Git integration and acceptance. The DeepSeek worker is complete and idle; no Gemini verifier or occupied provider call has begun.",
+    "active_plan_and_acceptance": "Exact committed source e3ebc119f81909555faa0147dfa428c0d6a78097 passed one local authored-synthetic FastAPI bearer-auth and PostgreSQL route rehearsal with a fake provider: one product read, three admitted rows, three SELECT statements, zero provider/network calls, both single-destination generations exhausted, both ledgers consumed, counts unchanged and exact schema cleanup. Seventy-five post-run focused/register checks pass. AER-0267 and AER-0268 preserve the stopped source-ID and event-vocabulary attempts.",
+    "protected_evidence_boundaries": "The run used only newly authored synthetic staff/practice/location/practitioner values in one exact validated task schema. Evidence retains no display names, UUIDs, JWT, database URL, raw route response, prompt, provider text or schema name. No operational practice/database, real person, patient, clinical, protected evidence, cloud/provider, command, deployment, production, release, Pages or protected-ref action occurred. docs/branding and every unrelated untracked path remain untouched.",
+    "git_refs_and_worktree": "The task branch remains at mechanically captured and verified source e3ebc119f81909555faa0147dfa428c0d6a78097 before this evidence commit. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted AES-C4 are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit AES-C5 local-run evidence, receipts, register and tests may be staged; all other untracked paths remain preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c5_local_fake_closeout_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified the local pass and exact cleanup."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Completed worker is idle."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Independent review remains downstream of this commit."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is assigned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

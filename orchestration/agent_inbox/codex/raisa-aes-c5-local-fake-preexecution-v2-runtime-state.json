@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_execution",
+  "planned_action": "execute_one_exact_source_bound_local_fastapi_bearer_auth_sqlalchemy_postgresql_practitioner_directory_read_with_one_fake_provider_result_and_exact_disposable_schema_cleanup_after_mechanical_full_head_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. AES-C4 remains accepted at Continuity 241 / Compass 223; AES-C5 is the final named AES descendant and Yuri selected the authenticated practitioner-directory GET for Reception One booking context.",
+    "current_authority_allocation": "GPT Sol alone owns this exact local database/application execution and acceptance. No worker or independent verifier is active. The provider adapter is deterministic and provider-free; cloud credentials and Vertex are not accessed in this gate.",
+    "active_plan_and_acceptance": "Mechanically captured and verified source e3ebc119f81909555faa0147dfa428c0d6a78097 implements two AES-C0/AES-C1-valid single-destination generations, exact route-field minimization and a disposable local-route harness. The 266-incident register plus AES-C5 regression run passed, as did 71 focused tests, Ruff, compilation and diff checks. This gate authorizes one local route call, zero provider calls and exact cleanup only.",
+    "protected_evidence_boundaries": "Only fresh authored-synthetic Receptionist, practice, location and practitioner records may exist in one schema matching aes_c5 plus 32 lowercase hex. The measured route permits SELECT/WITH only; setup DDL/DML and exact validated DROP SCHEMA occur outside both AES generations. No operational database/practice, real person, patient, clinical, historical Diary, protected evidence, provider, cloud, credential export, command, deployment, production, release, Pages or protected-ref action is permitted. docs/branding and all unrelated untracked paths remain untouched.",
+    "git_refs_and_worktree": "The task branch is codex/ariadne-bernie-davida-parallel-seam at mechanically captured and git-cat-file-verified source e3ebc119f81909555faa0147dfa428c0d6a78097. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted AES-C4 are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected ref movement is authorized. Every pre-existing untracked path is preserved.",
+    "invalid_predecessor_disposition": "The first local-fake preexecution state contains a fabricated full source ID, was stopped before preflight and supplies no authority or evidence."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c5_local_fake_preexecution_v2_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol exact-source local execution controller is active."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Completed worker is idle."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Independent review remains downstream."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is assigned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
