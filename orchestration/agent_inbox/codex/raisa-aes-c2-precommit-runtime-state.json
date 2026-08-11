@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "apply_aes_c2_continuity_run_final_gates_and_commit_only_explicit_closeout_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C1 remains the committed live result at Continuity 238 / Compass 220 while accepted AES-C2 closeout and Continuity 239 / Compass 221 are prepared as its exact descendant; AES-C3 hostile containment is the frozen next handoff.",
+    "current_authority_allocation": "GPT Sol alone owns acceptance, continuity, explicit-path staging, task-branch commit and push. DeepSeek blue and its one mechanical revision are complete. Fresh Gemini 3.6 Flash/high returned one exact-head pass and has no integration or protected-ref authority.",
+    "active_plan_and_acceptance": "Reviewed source d54f0476448f1218cd55477d42b958721359eae8 has an unchanged-clean independent pass. The pending closeout binds exact 2 simulated, 4 not_dispatched, 20 stop, 18 hostile attempt/result and 14 hostile contract results; three actual pure calls with zero external effect; 95 focused tests; error-register revision 217; the Yuri paired summary; and AES-C3 hostile containment as next work.",
+    "protected_evidence_boundaries": "Only exact AES-C2 closeout, receipt, continuity, current-baton, verification-binding and AER-0251 correction paths may be committed. docs/branding and all unrelated untracked paths remain unstaged. No real runtime, adapter, provider, patient/product data, real credential, network, filesystem, database/source, executable tool, command, deployment, release, Pages or protected-ref action is authorised.",
+    "git_refs_and_worktree": "Task branch HEAD before closeout is exact d54f0476448f1218cd55477d42b958721359eae8. The review worktree remains unchanged and clean at that HEAD. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary has the original 494 untracked paths plus 14 explicit AES-C2 closeout paths; the original-path baseline remains 494 paths with SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162. Explicit-path staging only is required."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol inspected the exact implementation, reviewer receipt, closeout delta, register correction, planned continuity update and explicit staging boundary."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native Codex worker is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh Gemini 3.6 Flash/high veto completed pass at exact reviewed source d54f0476448f1218cd55477d42b958721359eae8 and left its worktree unchanged and clean."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The DeepSeek implementation and one plan-permitted mechanical revision are complete; no worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude/Fable/Opus is not selected; Claude Code served only as the completed DeepSeek transport."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/raisa-aes-c2-gemini-review-worktree-postflight.json"
+  ],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_exact_head_aes_c2_red_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate d54f0476448f1218cd55477d42b958721359eae8 passes the exact 26 scenarios, 18 hostile attempt/result mutations, 14 hostile contract mutations, 81 focused C2/C1/C0/API tests, 151 maintained static tests and 135 canonical fast-profile tests. Review packet SHA-256 is 369899e684bdfbb6807724a56f3d252b11b4cd6f6713764fa709dcb82c87314f and excludes blue worker, rejection, recovery and prior-review framing from the red read allowlist.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through one fresh Antigravity project has read-only review authority only. Sol retains architecture, recovery, integration and acceptance. DeepSeek blue and its one bounded mechanical revision are complete; no further implementation worker or fallback reviewer is selected.",
+    "git_refs_and_worktree": "Primary and clean review worktree are at exact candidate d54f0476448f1218cd55477d42b958721359eae8. Review branch codex/review-aes-c2-broker-simulator-d54f0476 is checked out at C:/Users/sarashera/EMR4-worktrees/r183 and its deterministic worktree preflight passed. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary retains the original 494 untracked paths with exact hash f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162.",
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220. The corrected AES-C2 candidate is deterministically green and now requires its configured fresh independent red/veto before Sol acceptance.",
+    "protected_evidence_boundaries": "The reviewer is confined to the exact non-protected read allowlist and clean exact-head worktree. It may not edit, access protected, historical, branding, patient, product or licensed data, start a runtime, container or database, contact provider or product surfaces, use credentials or network, execute a real adapter, tool or command, deploy, release, move Pages or move protected refs."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

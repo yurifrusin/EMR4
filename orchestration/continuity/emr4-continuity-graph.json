@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 238,
+  "graph_revision": 239,
   "harvests": [],
   "nodes": [
     {
@@ -14950,6 +14950,86 @@
       "unresolved_gates": [
         "AES-C2 provider-free broker simulator has not yet been frozen or executed.",
         "No runtime broker, work-cell process, real adapter, provider, product context, database/source, network, executable tool or command is opened.",
+        "Protected evidence, patient/clinical/product data, credentials, deployment, production, release, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "title": "Raisa Agent Execution Surface AES-C2 provider-free inert broker simulator",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-11T00:00:00Z",
+      "updated_at": "2026-08-11T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "d54f0476448f1218cd55477d42b958721359eae8",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-agent-execution-surface-containment-gate-aes-c1",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "AES-C2 is authored-synthetic and provider-free; its only adapter is one statically selected pure in-process function with no external effect.",
+          "The work cell receives no lease, registry or credential fixture and cannot select capability, adapter, destination, method, implementation or executable.",
+          "GraphQL remains read-only, events signal fresh reads, and REST/OpenAPI commands remain separately authorized and human/policy gated."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-aes-c2-provider-free-broker-simulator",
+          "source": "docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact broker-owned identity, custody, control-state recheck and budget commit over one pure inert function and 26 authored-synthetic scenarios."
+        }
+      ],
+      "claim_scope": [
+        "Two exact simulations release, four attempts are not dispatched and 20 stop; the pure function is actually called exactly three times.",
+        "All 18 hostile attempt/result mutations and 14 hostile contract mutations reject without a released simulation.",
+        "The broker owns operation identity, current-control recheck, cumulative budget commit and the private synthetic noncredential fixture.",
+        "The result proves in-process inert simulation, not a real runtime broker, process/container isolation, real credential custody, provider behavior, product-data safety or command safety."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-threat-model-delta.md",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.schema.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/authored-synthetic-broker-simulator-scenarios.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/provider-free-broker-simulator-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-11--aes-c2-provider-free-broker-simulator.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-aes-c2-provider-free-broker-simulator-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-aes-c2-provider-free-broker-simulator-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c2-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c2-precommit-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-aes-c2-provider-free-broker-simulator-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c2.py",
+          "tests/test_raisa_agent_execution_surface_containment_gate_aes_c2_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_agent_execution_surface_containment_gate_aes_c2_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "AES-C3 provider-free hostile containment rehearsal has not yet been frozen or executed.",
+        "No real runtime broker, work-cell process, container, adapter, provider, product context, database/source, filesystem, network, executable tool or command is opened.",
         "Protected evidence, patient/clinical/product data, credentials, deployment, production, release, Pages and protected refs remain closed."
       ]
     }

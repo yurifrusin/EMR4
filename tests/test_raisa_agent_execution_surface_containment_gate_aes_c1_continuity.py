@@ -13,23 +13,25 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_aes_c1_is_current_and_aes_c2_is_next() -> None:
+def _node(graph: dict) -> dict:
+    return next(node for node in graph["nodes"] if node["id"] == NODE_ID)
+
+
+def test_aes_c1_remains_bound_after_aes_c2_acceptance() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
 
-    assert graph["graph_revision"] == 238
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 220
-    assert compass["source_graph_revision"] == 238
-    assert compass["current_position"]["node_id"] == NODE_ID
-    orientation = compass["orientation_statement"].lower()
-    assert "aes-c1 passes" in orientation
-    assert "aes-c2 inert broker simulation is next" in orientation
+    assert graph["graph_revision"] >= 238
+    assert _node(graph)["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] >= 220
+    assert compass["source_graph_revision"] >= 238
+    journey = next(row for row in compass["journey"] if row["node_id"] == NODE_ID)
+    assert journey["lineage_parent"] == "raisa-agent-execution-surface-containment-gate-aes-c0"
+    assert "aes-c2 provider-free broker simulation is next" in journey["outcome"].lower()
 
 
 def test_aes_c1_continuity_opens_no_runtime_authority() -> None:
-    node = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    node = _node(_load("orchestration/continuity/emr4-continuity-graph.json"))
 
     assert node["kind"] == "foundation"
     assert node["authority"]["authorized_openings"] == []
@@ -55,7 +57,7 @@ def test_aes_c1_continuity_opens_no_runtime_authority() -> None:
 
 
 def test_aes_c1_exact_evidence_and_user_mailbox_are_bound() -> None:
-    node = _load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    node = _node(_load("orchestration/continuity/emr4-continuity-graph.json"))
 
     assert node["contract_evidence"] == []
     assert {
@@ -75,19 +77,18 @@ def test_aes_c1_exact_evidence_and_user_mailbox_are_bound() -> None:
     assert node["status"] == "accepted"
 
 
-def test_compass_handoff_is_one_inert_adapter_only() -> None:
-    position = _load("orchestration/continuity/emr4-compass.json")["current_position"]
-    joined = " ".join(position["unlocks"] + position["does_not_solve"]).lower()
+def test_aes_c1_handoff_was_one_inert_adapter_only() -> None:
+    node = _node(_load("orchestration/continuity/emr4-continuity-graph.json"))
+    joined = " ".join(node["claim_scope"] + node["unresolved_gates"]).lower()
 
     for phrase in (
-        "one inert allowlisted",
-        "never receives a credential",
-        "destination, method or executable",
-        "real runtime broker",
-        "patient/product/clinical",
+        "two exact inert intersections",
+        "aes-c2 provider-free broker simulator",
+        "no runtime broker",
+        "patient/clinical/product",
         "provider",
         "database/source",
         "command",
-        "protected-ref",
+        "protected refs",
     ):
         assert phrase in joined

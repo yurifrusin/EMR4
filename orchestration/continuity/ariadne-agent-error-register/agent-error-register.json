@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 216,
+  "register_revision": 217,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10070,13 +10070,15 @@
       "recurrence_signature": "implementer.aes_c2_adapter_override_bypasses_fixed_call_and_packet_closure",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Use the plan's one bounded same-lane revision to make the pure adapter call unconditional before observing the exact malformed-result seam, reject any noncanonical or open scenario packet, add actual-call instrumentation and packet-closure regressions, regenerate evidence, and correct every HEAD, protected-ref, fixture-observation and pending-acceptance statement in the worker closeout.",
+        "status": "corrected_fresh_attempt",
+        "action": "The plan's one bounded same-lane revision made the pure adapter call unconditional before observing the exact malformed-result seam, rejected every noncanonical or open scenario packet, added actual-call instrumentation and packet-closure regressions, regenerated evidence, and corrected every HEAD, protected-ref, fixture-observation and pending-acceptance statement. Sol independently reproduced actual call counts, and a fresh exact-head Gemini 3.6 Flash/high veto passed before AES-C2 acceptance.",
         "prevention_control": "For simulated adapters, acceptance must instrument the actual fixed callable rather than trust a reported counter, adversarially test every override seam with a schema-valid value, require exact generated scenario-packet equality, and reconcile worker closeout claims against Git and still-pending independent gates.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-aes-c2-blue-candidate-sol-rejection.md",
           "orchestration/agent_inbox/codex/raisa-aes-c2-blue-worker-transport-receipt.json",
-          "docs/ariadne-agent-error-correction-register-revision-215.md"
+          "orchestration/agent_inbox/antigravity/raisa-aes-c2-provider-free-broker-simulator-review-receipt.json",
+          "docs/raisa-agent-execution-surface-containment-gate-aes-c2-provider-free-broker-simulator-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-217.md"
         ]
       },
       "status": "corrected"

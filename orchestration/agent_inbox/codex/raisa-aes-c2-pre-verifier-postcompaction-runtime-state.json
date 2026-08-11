@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "prepare_and_dispatch_fresh_gemini_aes_c2_exact_head_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. AES-C1 remains accepted at Continuity 238 / Compass 220, and AES-C2 provider-free inert broker simulation remains the exact dependency-satisfied active tranche under Yuri's standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol owns the frozen boundary, deterministic review, recovery, acceptance and Git closeout. DeepSeek V4 Flash/high through Claude Code --bare supplied bounded implementation evidence and its one permitted mechanical revision; it has no acceptance or integration authority. Gemini 3.6 Flash/high through a fresh Antigravity project owns the independent exact-head veto only.",
+    "active_plan_and_acceptance": "The complete frozen AES-C2 plan and threat-model delta were reread. They bind the exact inherited AES-C1 artifacts, one statically selected pure inert adapter function, separate adapter-artifact and implementation-definition identities, 26 exact scenarios, 18 hostile attempt/result mutations, all nested contract mutations, broker-private authored-synthetic noncredential custody and dual review. AES-C1 exact reviewed source 285e60216cf22907e8a0f5596ece11f74f455c81 remains accepted. The corrected C2 implementation is integrated at exact candidate d54f0476448f1218cd55477d42b958721359eae8 and has passed the deterministic gates; acceptance remains pending a fresh Gemini veto and Sol closeout.",
+    "protected_evidence_boundaries": "No protected evidence or historical Diary material may be enumerated, opened, searched, imported, executed or inferred. Patient, clinical, product-derived, licensed and real credential data remain closed. No real broker, work-cell process, container, adapter, provider call, IAM, metadata, network, database/source/watcher, filesystem capability, executable tool, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding/ and all 494 original untracked paths remain preserved and excluded.",
+    "git_refs_and_worktree": "Primary C:/Users/sarashera/emr4 is clean on codex/ariadne-bernie-davida-parallel-seam at d54f0476448f1218cd55477d42b958721359eae8. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e. The primary has exactly the original 494 untracked paths, five under docs/branding/, with Windows Sort-Object UTF-8 LF-no-final-newline SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162. Review branch codex/review-aes-c2-broker-simulator-d54f0476 points exactly at d54f0476448f1218cd55477d42b958721359eae8 and awaits a fresh clean non-protected worktree path."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reread AGENTS.md completely after compaction, rebound the complete active C2 plan and threat delta, reread AES-C1 acceptance and current allocation, and verified exact Git and preserved-untracked state."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned for this serial independent-veto boundary."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The exact fresh Gemini review is the planned next action; its live observation will be recorded in the distinct pre-verifier-dispatch receipt."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The authorised DeepSeek worker and its one permitted mechanical revision completed; corrected source is integrated but remains non-authoritative pending independent veto and Sol acceptance."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude/Fable/Opus is not selected; Claude Code served only as the completed DeepSeek transport."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

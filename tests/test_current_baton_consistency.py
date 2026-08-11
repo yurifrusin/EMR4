@@ -7,7 +7,7 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-agent-execution-surface-containment-gate-aes-c1"
+NODE_ID = "raisa-agent-execution-surface-containment-gate-aes-c2"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
 
@@ -18,28 +18,28 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_the_live_aes_c1_result() -> None:
+def test_continuity_and_compass_bind_the_live_aes_c2_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 238
+    assert graph["graph_revision"] == 239
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 220
-    assert compass["source_graph_revision"] == 238
+    assert compass["map_revision"] == 221
+    assert compass["source_graph_revision"] == 239
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_agree_on_aes_c1_and_aes_c2_handoff() -> None:
+def test_live_baton_rows_agree_on_aes_c2_and_aes_c3_handoff() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 238 / Compass 220" in current
-    assert "AES-C1 passes" in current
+    assert "Continuity 239 / Compass 221" in current
+    assert "AES-C2 passes" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
-    assert "AES-C2 provider-free broker simulator" in next_work
+    assert "AES-C3 hostile containment rehearsal" in next_work
     assert "fresh complete five-source rehydration" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
@@ -62,8 +62,8 @@ def test_master_plan_and_handover_contain_no_stale_next_work_instruction() -> No
     assert stale_review_next not in handover
     assert stale_pause not in plan
     assert "conformance repair named in that review now also" in compact_plan
-    assert "AES-C0 architecture and AES-C1 provider-free admission now also pass" in compact_plan
-    assert "AES-C2 provider-free broker simulation is the next safe tranche" in compact_plan
+    assert "AES-C0 architecture, AES-C1 provider-free admission and AES-C2 inert broker simulation now pass" in compact_plan
+    assert "AES-C3 provider-free hostile containment rehearsal is the next safe tranche" in compact_plan
 
 
 def test_current_rows_preserve_closed_surface_boundary() -> None:
@@ -74,6 +74,7 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         "product read",
         "database/source",
         "provider call",
+        "filesystem",
         "tool",
         "command",
         "standing uninterrupted-development authority",
