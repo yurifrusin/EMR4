@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "2d53b98cdcfb357088b79526c746acb518a14b93d97c183dc2d38f8b73f2c83a",
+  "canonical_register_sha256": "33808c03aa380e21047e66515bd404ad6d5a47487e80a5929f9f046139e792c6",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 91,
+      "accepted_candidate_changed": 92,
       "canonical_unchanged": 161,
       "untrusted_partial_worktree": 27
     },
@@ -12,12 +12,12 @@
       "harness_failure": 35,
       "output_contract_violation": 79,
       "read_only_violation": 3,
-      "reasoning_claim_error": 33,
+      "reasoning_claim_error": 34,
       "repository_defect": 53,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 182,
+      "agent_behavior": 183,
       "harness": 35,
       "repository": 53,
       "transport": 9
@@ -25,7 +25,7 @@
     "by_process_severity": {
       "low": 104,
       "material": 91,
-      "moderate": 84
+      "moderate": 85
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 42,
@@ -38,7 +38,7 @@
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::orchestrator": 134,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
-      "codex-sol-orchestrator::orchestrator": 3,
+      "codex-sol-orchestrator::orchestrator": 4,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
@@ -83,12 +83,12 @@
     },
     "by_role": {
       "implementer": 19,
-      "orchestrator": 210,
+      "orchestrator": 211,
       "verifier": 50
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 279,
+  "incident_count": 280,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -481,6 +481,30 @@
     },
     {
       "categories": [
+        "reasoning_claim_error"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0274",
+        "AER-0280"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Before every external review, execute and record every command in the packet's allowlist locally, including format checks, rather than treating Ruff lint as a formatter substitute.",
+        "Generate verifier allowed-command blocks from one executable local gate list, persist each exit code before dispatch, and make the launcher reject any external pass receipt whose required command outcomes are nonzero."
+      ],
+      "recurrence_signature": "orchestrator.pre_review_format_gate_omitted",
+      "resource_ids": [
+        "codex-sol-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
         "harness_failure"
       ],
       "incident_count": 2,
@@ -657,7 +681,7 @@
       ]
     }
   ],
-  "register_revision": 246,
+  "register_revision": 247,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-11"
+  "source_cutoff_on": "2026-08-12"
 }

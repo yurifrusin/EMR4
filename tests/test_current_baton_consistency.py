@@ -42,7 +42,9 @@ def test_live_baton_rows_preserve_cf_d1_and_bound_cf_d2_recovery() -> None:
     assert "all ten fixed preconditions" in current
     assert "zero `SIGKILL`" in current
     assert "AER-0278 and AER-0279" in current
-    assert "Yuri explicitly selected a fresh narrow CF-D2 recovery descendant" in current
+    assert (
+        "Yuri explicitly selected a fresh narrow CF-D2 recovery descendant" in current
+    )
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation

@@ -190,15 +190,21 @@ Mutation = Callable[[dict[str, Any]], None]
     "mutate",
     [
         lambda value: value.update(status="runtime_open"),
-        lambda value: value["immutable_failures"][1].update(sha256="sha256:" + "0" * 64),
+        lambda value: value["immutable_failures"][1].update(
+            sha256="sha256:" + "0" * 64
+        ),
         lambda value: value["terminal_coordinates"].pop(),
-        lambda value: value["terminal_coordinates"].__setitem__(1, value["terminal_coordinates"][0]),
+        lambda value: value["terminal_coordinates"].__setitem__(
+            1, value["terminal_coordinates"][0]
+        ),
         lambda value: value["diagnostic_profile"].update(network_mode="bridge"),
         lambda value: value["diagnostic_profile"].update(sigkill_count=1),
         lambda value: value["diagnostic_profile"].update(maximum_immutable_attempts=3),
         lambda value: value["diagnostic_profile"].update(maximum_corrections=2),
         lambda value: value["full_attempt_gate"].update(maximum_attempts=2),
-        lambda value: value["full_attempt_gate"].update(post_attempt_correction_or_retry=True),
+        lambda value: value["full_attempt_gate"].update(
+            post_attempt_correction_or_retry=True
+        ),
     ],
 )
 def test_recovery_contract_rejects_boundary_mutations(mutate: Mutation) -> None:

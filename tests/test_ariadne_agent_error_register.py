@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 246
+    assert register["register_revision"] == 247
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 280)
+        f"AER-{index:04d}" for index in range(1, 281)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 182
+    assert len(agent_incidents) == 183
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 279
+    assert report["incident_count"] == 280
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -2660,6 +2660,23 @@ def test_aer_0279_stops_cf_d2_after_attempt_002() -> None:
     assert "Yuri" in incident["correction"]["action"]
 
 
+def test_aer_0280_rejects_the_repeated_missing_formatter_gate() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0280"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.pre_review_format_gate_omitted"
+    )
+    assert incident["status"] == "contained"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert "fresh exact-head" in incident["correction"]["action"]
+
+
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
     incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0184"]
 
@@ -2673,11 +2690,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 246
-    assert report["incident_count"] == 279
+    assert report["register_revision"] == 247
+    assert report["incident_count"] == 280
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 182,
+        "agent_behavior": 183,
         "harness": 35,
         "repository": 53,
         "transport": 9,
@@ -2688,12 +2705,12 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "harness_failure": 35,
         "output_contract_violation": 79,
         "read_only_violation": 3,
-        "reasoning_claim_error": 33,
+        "reasoning_claim_error": 34,
         "repository_defect": 53,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 91,
+        "accepted_candidate_changed": 92,
         "canonical_unchanged": 161,
         "untrusted_partial_worktree": 27,
     }
@@ -2949,6 +2966,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
                 "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness.",
+            ],
+        },
+        {
+            "recurrence_signature": "orchestrator.pre_review_format_gate_omitted",
+            "incident_count": 2,
+            "incident_ids": ["AER-0274", "AER-0280"],
+            "origins": ["agent_behavior"],
+            "categories": ["reasoning_claim_error"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-sol-orchestrator"],
+            "prevention_controls": [
+                "Before every external review, execute and record every command in the packet's allowlist locally, including format checks, rather than treating Ruff lint as a formatter substitute.",
+                "Generate verifier allowed-command blocks from one executable local gate list, persist each exit code before dispatch, and make the launcher reject any external pass receipt whose required command outcomes are nonzero.",
             ],
         },
         {

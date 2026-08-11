@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_exact_head_read_only_veto_over_the_frozen_cf_d2_recovery_descendant_planning_packet",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit b89cfc52d2a1d3c43836fb9e8159df3068d2ebec freezes the three-phase recovery contract, at most two no-crash diagnostics, one evidence-backed correction maximum and one later full attempt 003. The deterministic planning gate passed 73 combined original/recovery CF-D2 checks plus 20 recovery/baton/archive checks, Ruff and diff checks. The veto must challenge coordinate closure, evidence minimization, correction limits, diagnostic non-crash containment, immutable failure binding, one-attempt full gate and claim boundary.",
+    "current_authority_allocation": "GPT Sol retains planning, implementation, runtime, acceptance and publication ownership. Gemini 3.6 Flash/high through a genuinely fresh Antigravity project receives only this exact-HEAD read-only veto packet over an allowlisted non-protected worktree. It receives no edit, implementation, self-acceptance, Docker/database runtime, data, integration, protected-ref, deployment or release authority and no silent model fallback is allowed.",
+    "git_refs_and_worktree": "Task source HEAD is exactly b89cfc52d2a1d3c43836fb9e8159df3068d2ebec on codex/ariadne-bernie-davida-parallel-seam. The fresh bound review worktree will be C:/Users/sarashera/EMR4-worktrees/cf-d2-recovery-planning-gemini-review on codex/cf-d2-recovery-planning-gemini-review at that exact source. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 494 pre-existing untracked files, including five docs/branding paths, remain preserved and outside the clean review worktree.",
+    "live_handover_current_baton": "AGENTS.md was read completely and records Yuri's selected CF-D2 recovery descendant while CF-D1 at Continuity 243 / Compass 225 remains the last successful durability result. The new recovery plan is committed but no diagnostic or crash runtime is yet open before its exact-HEAD planning veto.",
+    "protected_evidence_boundaries": "The verifier may inspect only the exact allowlisted recovery/original CF-D2 planning paths and immutable attempt-001/002 failure artifacts. It may not list or search repositories, inspect protected holdouts, historical Diary/PHI, docs/branding or unrelated untracked files, start Docker/PostgreSQL, run an evidence generator, contact any provider/product/database/credential/cloud/network surface, or edit/create/delete/stage/commit/push. All operational, real-data, command, deployment, production, release, Pages and protected-ref surfaces remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

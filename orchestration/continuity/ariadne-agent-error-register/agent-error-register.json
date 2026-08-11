@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 246,
+  "register_revision": 247,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-11",
+    "source_cutoff_on": "2026-08-12",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -11225,6 +11225,48 @@
           "docs/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal-stop-closeout.md",
           "orchestration/human_inbox/yuri/2026-08-11--context-fabric-durability-restart-unknown-commit-stop.md",
           "docs/ariadne-agent-error-correction-register-revision-246.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0280",
+      "attempt_id": "cf-d2-recovery-planning-gemini-veto-001",
+      "observed_on": "2026-08-12",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-sol-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every deterministic command in an exact-head verifier packet, including Ruff format checking, must pass locally before dispatch; a reviewer decision cannot override a failed required command.",
+      "observed_error": "Sol repeated the AER-0274 pre-review omission by running Ruff lint but not Ruff format --check over the newly added CF-D2 recovery planning test before committing and dispatching. The fresh Gemini receipt then recorded that its required Ruff format command exited 1 with Would reformat, yet emitted decision pass. Sol rejected that pass; the worktree stayed clean and no Docker, database, provider, product or external-network operation occurred.",
+      "detection_method": "Direct readback of the schema-constrained Antigravity receipt showed command 5 exit code 1 alongside decision pass. A local complete formatter gate identified only the new recovery planning test and its paired baton-consistency test; those two files were formatted and all 51 planning checks, 20 recovery/baton/archive checks, Ruff lint, Ruff format and diff checks passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant-planning-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant-planning-gemini-review-packet.md",
+        "tests/test_raisa_context_fabric_durability_restart_unknown_commit_recovery_descendant_plan.py",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-247.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "orchestrator.pre_review_format_gate_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Reject the contradictory pass, preserve its receipt, apply Ruff formatting only to the named recovery planning and paired baton-consistency tests, rerun every packet command plus the baton gate locally, commit the exact mechanical change and incident evidence, and require a genuinely fresh exact-head Gemini 3.6 Flash/high veto before implementation.",
+        "prevention_control": "Generate verifier allowed-command blocks from one executable local gate list, persist each exit code before dispatch, and make the launcher reject any external pass receipt whose required command outcomes are nonzero.",
+        "evidence_paths": [
+          "tests/test_raisa_context_fabric_durability_restart_unknown_commit_recovery_descendant_plan.py",
+          "tests/test_current_baton_consistency.py",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant-planning-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-247.md"
         ]
       },
       "status": "contained"
