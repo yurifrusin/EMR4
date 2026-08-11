@@ -1,0 +1,27 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "independently_review_untrusted_aes_c2_blue_candidate",
+  "reasons": [
+    "adapter_probe_method_invalid:deepseek_via_claude_code_bare"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The corrected AES-C2 plan at primary source bd11333d462424b40f5f8f014b1c4a945b3a5133 freezes the exact five inherited AES-C1 hashes, separate inherited adapter-artifact and computed implementation-definition digest layers, one statically selected pure inert function, 26 exact scenarios, 18 hostile attempt/result mutations, all nested contract mutations, broker-private synthetic noncredential custody and dual review. AES-C1 exact reviewed source 285e60216cf22907e8a0f5596ece11f74f455c81 remains accepted. Worker candidate 52f1dbb10fd6e616d3190aa896e60d8facf5897d is untrusted pending complete Sol review and any permitted correction.",
+    "current_authority_allocation": "GPT Sol owns the frozen boundary, independent candidate review, recovery, acceptance and Git closeout. The completed DeepSeek V4 Flash/high Claude Code --bare worker owns implementation evidence only and cannot self-accept. Fresh Gemini 3.6 Flash/high red/veto review remains required only after deterministic gates pass.",
+    "git_refs_and_worktree": "Primary worktree C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at bd11333d462424b40f5f8f014b1c4a945b3a5133 with clean tracked state, 499 total untracked paths comprising the original 494 plus five AES-C2 orchestration files, and original-path hash f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162. Worker worktree C:/Users/sarashera/EMR4-worktrees/aes-c2-deepseek-blue is clean on codex/aes-c2-blue-deepseek at candidate 52f1dbb10fd6e616d3190aa896e60d8facf5897d, parent bd11333d462424b40f5f8f014b1c4a945b3a5133, with exactly seven owned paths. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e.",
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220. AES-C2 provider-free inert broker simulation remains the exact dependency-satisfied active tranche under standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "No protected evidence or historical Diary material may be enumerated, opened, searched, imported, executed or inferred. Patient, clinical, product-derived, licensed and real credential data remain closed. No real broker/work-cell process/container/adapter, provider call, IAM/metadata/network, database/source/watcher, filesystem capability, executable tool, command/write, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding/ and all 494 original untracked paths remain preserved and excluded."
+  },
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

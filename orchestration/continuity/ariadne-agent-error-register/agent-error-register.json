@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 214,
+  "register_revision": 216,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -9999,6 +9999,121 @@
         "prevention_control": "Use the already-proven Windows PowerShell-compatible BitConverter hash-rendering snippet for every remaining untracked-set check in AES-C2; do not substitute newer .NET convenience APIs.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-214.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0250",
+      "attempt_id": "raisa-aes-c2-postcompaction-sol-review-preflight-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne adapter observation must use an exact adapter-specific probe method copied from the active transport settings before a post-compaction receipt can authorise candidate review.",
+      "observed_error": "The first AES-C2 post-compaction review state described the completed DeepSeek transport with unconfigured method completed_transport_receipt. The orchestrator preflight returned revision_required with adapter_probe_method_invalid:deepseek_via_claude_code_bare, and no candidate correction, integration or external review proceeded on that receipt.",
+      "detection_method": "The deterministic preflight emitted the exact invalid-method reason. Direct transport_adapters.yaml readback identified deepseek_claude_cli_observation; a distinct v2 receipt using that exact method then passed with all five rehydration sources and no reasons.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c2-postcompaction-sol-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c2-postcompaction-sol-review-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-215.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the descriptive completed_transport_receipt method with the configured deepseek_claude_cli_observation value, preserve the refused receipt, and bind all further candidate review only to the reason-free v2 receipt.",
+        "prevention_control": "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c2-postcompaction-sol-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c2-postcompaction-sol-review-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-215.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0251",
+      "attempt_id": "raisa-aes-c2-blue-implementation-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A worker may self-report AES-C2 pass only when the exact fixed pure adapter is actually called for every reported invocation, no supplied result can bypass that call, the scenario packet rejects undeclared structure, and the closeout distinguishes worker evidence from pending Sol and Gemini acceptance.",
+      "observed_error": "DeepSeek candidate 52f1dbb10fd6e616d3190aa896e60d8facf5897d reported pass and three pure-adapter calls, but its adapter-result override returned before calling the pure adapter. Sol measured reported one versus actual zero calls in the malformed-result scenario and showed that a well-formed supplied result could be released as simulated with actual zero adapter calls. The scenario-packet validator also admitted an undeclared top-level field. The closeout consequently overstated total calls and all 15 criteria, misstated the final candidate HEAD and four-ref verification, and said only digest comparison observed a fixture that the plan intentionally supplies to the pure adapter.",
+      "detection_method": "Sol read the exact clean seven-path candidate, monkeypatched the only pure adapter to count actual calls, injected a schema-valid result override, and added an undeclared scenario-packet key. The deterministic probes returned MALFORMED_REPORTED 1 ACTUAL 0, VALID_OVERRIDE status simulated and released with ACTUAL 0, and PACKET_EXTRA_KEY_ERRORS as an empty list.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c2-blue-candidate-sol-rejection.md",
+        "orchestration/agent_inbox/codex/raisa-aes-c2-blue-worker-transport-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-215.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.aes_c2_adapter_override_bypasses_fixed_call_and_packet_closure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Use the plan's one bounded same-lane revision to make the pure adapter call unconditional before observing the exact malformed-result seam, reject any noncanonical or open scenario packet, add actual-call instrumentation and packet-closure regressions, regenerate evidence, and correct every HEAD, protected-ref, fixture-observation and pending-acceptance statement in the worker closeout.",
+        "prevention_control": "For simulated adapters, acceptance must instrument the actual fixed callable rather than trust a reported counter, adversarially test every override seam with a schema-valid value, require exact generated scenario-packet equality, and reconcile worker closeout claims against Git and still-pending independent gates.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c2-blue-candidate-sol-rejection.md",
+          "orchestration/agent_inbox/codex/raisa-aes-c2-blue-worker-transport-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-215.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0252",
+      "attempt_id": "raisa-aes-c2-blue-rejection-register-validation-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-agent-execution-surface-containment-gate-aes-c2",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validation",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every agent-error evidence path must resolve to a file in the primary repository root; a file that exists only in an isolated unintegrated worker worktree cannot serve as primary register evidence.",
+      "observed_error": "The first AER-0251 draft cited the rejected candidate's closeout, script and test paths as though they existed in the primary worktree. They existed only in the clean isolated worker worktree, so register validation failed on the first missing closeout path before pattern generation; no corrected worker attempt or candidate adoption proceeded.",
+      "detection_method": "The full register validator returned evidence path is missing or not a file for orchestration/agent_inbox/claude/raisa-aes-c2-blue-implementation-closeout.md. Exact primary and worker worktree inspection confirmed the provenance distinction.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-aes-c2-blue-candidate-sol-rejection.md",
+        "docs/ariadne-agent-error-correction-register-revision-216.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_evidence_path_not_in_primary_tree",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Create a primary Sol rejection record containing the exact candidate SHA and reproduced findings, retain the primary transport receipt, replace every worker-only AER-0251 evidence path with those primary files, and rerun validation plus the complete derived-report suite.",
+        "prevention_control": "Before every register validation, resolve each newly added evidence path from the primary repository root; represent an unintegrated worker candidate through a primary rejection/receipt artifact rather than its isolated worktree-relative files.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-aes-c2-blue-candidate-sol-rejection.md",
+          "docs/ariadne-agent-error-correction-register-revision-216.md"
         ]
       },
       "status": "corrected"

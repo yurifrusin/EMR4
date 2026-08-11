@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_deepseek_v4_flash_high_aes_c2_blue_implementation_worker",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C1 is accepted at Continuity 238 / Compass 220. The corrected frozen AES-C2 provider-free inert broker simulator is the exact dependency-satisfied next tranche under standing uninterrupted-development authority.",
+    "current_authority_allocation": "Sol owns architecture, authority, recovery, integration and acceptance. Exactly one DeepSeek V4 Flash/high worker through Claude Code --bare may implement and defensively test only the seven frozen AES-C2 owned paths. A separate fresh Gemini 3.6 Flash/high red/veto remains required after deterministic candidate gates. The worker may commit only its non-protected branch and may not push.",
+    "active_plan_and_acceptance": "Corrected plan source bd11333d462424b40f5f8f014b1c4a945b3a5133 freezes the exact five AES-C1 hashes, separate inherited adapter-artifact and computed implementation-definition digest layers, one pure inert fixed function, exact 26 scenarios, 18 hostile attempt/result mutations, nested contract mutation, synthetic noncredential custody and dual review. Worker packet SHA-256 is 2415b835e76fddda5835d44d7fab08aeb252ff7d2013ee0b00677dfc00fb8df4; clean exact-head preflight SHA-256 is bbda00daa08c725a736d8e583a7cedca34c448cb17929d8f3fc4823944df87f5.",
+    "protected_evidence_boundaries": "The worker receives no protected-evidence or historical-Diary authority and no patient/clinical/product/licensed data. Real broker/work-cell process/container/adapter, provider/model call, real credential/IAM/metadata/network, database/source/watcher, filesystem capability, executable tool, command/write, deployment, production, release, Pages and protected refs remain closed. Primary docs/branding/ and all 494 original untracked paths remain outside the isolated clean worker worktree.",
+    "git_refs_and_worktree": "Primary task HEAD is bd11333d462424b40f5f8f014b1c4a945b3a5133. Isolated worktree C:/Users/sarashera/EMR4-worktrees/aes-c2-deepseek-blue is clean on codex/aes-c2-blue-deepseek at that exact source and its preflight passed with zero provider/model calls. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed C1 source 285e60216cf22907e8a0f5596ece11f74f455c81 remain ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worker may edit only its seven named paths."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the complete five-source state, corrected plan source, exact packet digest, clean isolated branch, preflight and protected refs."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh red/veto dispatch remains blocked until the C2 candidate deterministic gate passes."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The configured exact DeepSeek V4 Flash/high Claude Code bare lane is selected. Yuri confirmed prior active-platform observations are non-pausing; the exact C2 launch itself establishes this task's reachability with no fallback."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude/Fable/Opus is not selected; Claude Code is transport only."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": ["raisa-aes-c2-blue-implementation-001"],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

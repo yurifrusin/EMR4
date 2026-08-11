@@ -1,30 +1,30 @@
 {
-  "canonical_register_sha256": "01ce416f35278eefcde6424eafebd8be8ecc7e65e78316b2c341f103b71fc234",
+  "canonical_register_sha256": "fec9bd8fc62d26e01d20b9742c3299a1c45097deaeed0a72b377b1245baf36dc",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 82,
-      "canonical_unchanged": 142,
-      "untrusted_partial_worktree": 25
+      "canonical_unchanged": 144,
+      "untrusted_partial_worktree": 26
     },
     "by_category": {
       "command_scope_violation": 29,
       "evidence_misreport": 33,
       "harness_failure": 30,
-      "output_contract_violation": 67,
+      "output_contract_violation": 69,
       "read_only_violation": 3,
-      "reasoning_claim_error": 26,
+      "reasoning_claim_error": 27,
       "repository_defect": 52,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 158,
+      "agent_behavior": 161,
       "harness": 30,
       "repository": 52,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 89,
-      "material": 85,
+      "low": 91,
+      "material": 86,
       "moderate": 75
     },
     "by_resource_and_role": {
@@ -35,13 +35,13 @@
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator::orchestrator": 117,
+      "codex-primary-orchestrator::orchestrator": 119,
       "codex-sol-orchestrator::orchestrator": 1,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 3,
+      "deepseek-flash-workers::implementer": 4,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -78,13 +78,13 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 16,
-      "orchestrator": 185,
+      "implementer": 17,
+      "orchestrator": 187,
       "verifier": 48
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 249,
+  "incident_count": 252,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -331,7 +331,7 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 8,
+      "incident_count": 9,
       "incident_ids": [
         "AER-0024",
         "AER-0030",
@@ -340,7 +340,8 @@
         "AER-0153",
         "AER-0154",
         "AER-0157",
-        "AER-0160"
+        "AER-0160",
+        "AER-0250"
       ],
       "origins": [
         "agent_behavior"
@@ -353,7 +354,8 @@
         "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
         "Construct every adapter observation by copying allowed_probe_methods from orchestration/harness_settings/transport_adapters.yaml for that exact adapter_id; never reuse the primary-session method when a native subagent is merely being observed.",
         "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
-        "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents."
+        "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents.",
+        "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string."
       ],
       "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
       "resource_ids": [
@@ -597,7 +599,7 @@
       ]
     }
   ],
-  "register_revision": 214,
+  "register_revision": 216,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-11"
 }

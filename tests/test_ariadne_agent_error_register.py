@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 214
+    assert register["register_revision"] == 216
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 250)
+        f"AER-{index:04d}" for index in range(1, 253)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 158
+    assert len(agent_incidents) == 161
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2492,7 +2492,7 @@ def test_aer_0183_rejects_wrong_decision_on_exact_count_mismatch() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 249
+    assert report["incident_count"] == 252
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2508,11 +2508,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 214
-    assert report["incident_count"] == 249
+    assert report["register_revision"] == 216
+    assert report["incident_count"] == 252
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 158,
+        "agent_behavior": 161,
         "harness": 30,
         "repository": 52,
         "transport": 9,
@@ -2521,16 +2521,16 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "command_scope_violation": 29,
         "evidence_misreport": 33,
         "harness_failure": 30,
-        "output_contract_violation": 67,
+        "output_contract_violation": 69,
         "read_only_violation": 3,
-        "reasoning_claim_error": 26,
+        "reasoning_claim_error": 27,
         "repository_defect": 52,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 82,
-        "canonical_unchanged": 142,
-        "untrusted_partial_worktree": 25,
+        "canonical_unchanged": 144,
+        "untrusted_partial_worktree": 26,
     }
     assert report["recurring_patterns"] == [
         {
@@ -2685,7 +2685,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
-            "incident_count": 8,
+            "incident_count": 9,
             "incident_ids": [
                 "AER-0024",
                 "AER-0030",
@@ -2695,6 +2695,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0154",
                 "AER-0157",
                 "AER-0160",
+                "AER-0250",
             ],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
@@ -2709,6 +2710,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Construct every adapter observation by copying allowed_probe_methods from orchestration/harness_settings/transport_adapters.yaml for that exact adapter_id; never reuse the primary-session method when a native subagent is merely being observed.",
                 "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
                 "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents.",
+                "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string.",
             ],
         },
         {
@@ -3911,9 +3913,7 @@ def test_aer_0231_records_base_sqlstate_omission() -> None:
 
 
 def test_aer_0242_records_fail_closed_powershell_statement_composition() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0242"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0242"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "dispatch"
@@ -3927,9 +3927,7 @@ def test_aer_0242_records_fail_closed_powershell_statement_composition() -> None
 
 
 def test_aer_0243_separates_inherited_identity_from_definition_digest() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0243"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0243"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "dispatch"
@@ -3943,9 +3941,7 @@ def test_aer_0243_separates_inherited_identity_from_definition_digest() -> None:
 
 
 def test_aer_0244_records_closed_severity_enum_validation() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0244"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0244"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "deterministic_verification"
@@ -3960,9 +3956,7 @@ def test_aer_0244_records_closed_severity_enum_validation() -> None:
 
 
 def test_aer_0245_records_masked_closed_stage_enum_validation() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0245"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0245"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "deterministic_verification"
@@ -3977,9 +3971,7 @@ def test_aer_0245_records_masked_closed_stage_enum_validation() -> None:
 
 
 def test_aer_0246_records_powershell_probe_composition_recurrence() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0246"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0246"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "deterministic_verification"
@@ -3993,9 +3985,7 @@ def test_aer_0246_records_powershell_probe_composition_recurrence() -> None:
 
 
 def test_aer_0247_records_incident_specific_patch_context() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0247"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0247"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "deterministic_verification"
@@ -4009,9 +3999,7 @@ def test_aer_0247_records_incident_specific_patch_context() -> None:
 
 
 def test_aer_0248_records_derived_register_expectation_reconciliation() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0248"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0248"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "deterministic_verification"
@@ -4025,9 +4013,7 @@ def test_aer_0248_records_derived_register_expectation_reconciliation() -> None:
 
 
 def test_aer_0249_records_runtime_compatible_hash_formatting() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0249"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0249"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["stage"] == "deterministic_verification"
@@ -4037,6 +4023,53 @@ def test_aer_0249_records_runtime_compatible_hash_formatting() -> None:
     assert incident["related_incident_ids"] == []
     assert "ToHexString" in incident["observed_error"]
     assert "BitConverter" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0250_records_exact_adapter_observation_method_recovery() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0250"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "deterministic_verification"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert "completed_transport_receipt" in incident["observed_error"]
+    assert "deepseek_claude_cli_observation" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0251_rejects_false_adapter_call_and_open_packet_self_pass() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0251"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "implementer"
+    assert incident["resource_id"] == "deepseek-flash-workers"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["process_severity"] == "material"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert "ACTUAL 0" in incident["detection_method"]
+    assert "undeclared top-level field" in incident["observed_error"]
+    assert "actual fixed callable" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0252_keeps_worker_only_paths_out_of_primary_register_evidence() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0252"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "deterministic_verification"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert "isolated worker worktree" in incident["observed_error"]
+    assert "primary repository root" in incident["correction"]["prevention_control"]
     assert incident["status"] == "corrected"
 
 

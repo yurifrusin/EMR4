@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_aes_c2_candidate_rejection_and_agent_error_register_revision_216",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The corrected frozen AES-C2 plan remains unchanged. Sol rejected candidate 52f1dbb10fd6e616d3190aa896e60d8facf5897d because reported adapter invocation did not occur, a valid result override bypassed the fixed call, and open scenario-packet structure was admitted. AER-0250 through AER-0252 are closed at register revision 216 and the complete 207-control register suite passes.",
+    "current_authority_allocation": "Sol owns review, rejection, correction scope, integration and acceptance. DeepSeek owns no acceptance; its one permitted correction has not yet been dispatched. Gemini remains blocked until a corrected deterministic gate passes.",
+    "git_refs_and_worktree": "Primary task branch remains at bd11333d462424b40f5f8f014b1c4a945b3a5133 before this explicit-path rejection commit with only the named register/rejection/receipt changes intended. Worker branch remains clean at rejected 52f1dbb10fd6e616d3190aa896e60d8facf5897d. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e.",
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220 and AES-C2 remains active. The first AES-C2 blue candidate is rejected before adoption; the plan permits one bounded mechanical revision.",
+    "protected_evidence_boundaries": "No protected evidence, historical Diary, patient/clinical/product/licensed data, provider call, real credential, real runtime/adapter, network, database/source, executable, command, deployment, production, release, Pages or protected-ref authority is opened. docs/branding/ and all 494 original untracked paths remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

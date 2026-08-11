@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "Implementation complete. Concise summary:\n\n**Result: candidate committed (no acceptance claimed \u2014 Sol decides adoption)**\n\n**Changed files (exactly the 7 owned paths, committed on `codex/aes-c2-blue-deepseek`):**\n- `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c2/broker-simulator-contract.json`\n- `orchestration/continuity/.../broker-simulator-contract.schema.json`\n- `orchestration/continuity/.../authored-synthetic-broker-simulator-scenarios.json`\n- `orchestration/continuity/.../provider-free-broker-simulator-evidence.json`\n- `scripts/raisa_agent_execution_surface_containment_gate_aes_c2_broker_simulator.py`\n- `tests/test_raisa_agent_execution_surface_containment_gate_aes_c2.py`\n- `orchestration/agent_inbox/claude/raisa-aes-c2-blue-implementation-closeout.md`\n\n**Verification (all passed):**\n- Simulator script: `status: passed`, `reasons: []`\n- Serial pytest (C2+C1+C0+API Spine, exact safe paths): 77/77 pass, exit 0\n- Ruff on C2 script + test: all checks passed\n- `git diff --check`: clean\n- Final diff touches only the 7 owned paths; protected `master`/`handoff/current` remain at `2e34bdad\u2026`; worktree clean; no push\n\n**Key accounting:**\n- 26 scenarios \u2192 2 `simulated`, 4 `not_dispatched`, 20 `stop`; 3 pure-adapter calls total (2 success + malformed-result which releases nothing)\n- 18/18 hostile attempt/result mutations fail closed; 14/14 contract mutations rejected\n- Inherited C1 identity `sha256:`+64\u00d7`f` and independently recomputed implementation-definition digest `sha256:887429a4\u2026` verified distinct; fixture handle/value never appear in any output/evidence\n- Zero runtime/provider/network/database/filesystem(\u2260owned evidence writer)/tool/command/credential/product-data evidence\n\nNo blockers.",
+  "usage": {
+    "input_tokens": 131184,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 21196032,
+    "output_tokens": 171133,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 15.549950999999997,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

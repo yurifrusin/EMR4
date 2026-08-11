@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_aes_c2_candidate_rejection_and_agent_error_register_revision_216",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220 and AES-C2 remains active. The first AES-C2 blue candidate is rejected before adoption; the plan permits one bounded mechanical revision.",
+    "current_authority_allocation": "Sol owns review, rejection, correction scope, integration and acceptance. DeepSeek owns no acceptance; its one permitted correction has not yet been dispatched. Gemini remains blocked until a corrected deterministic gate passes.",
+    "active_plan_and_acceptance": "The corrected frozen AES-C2 plan remains unchanged. Sol rejected candidate 52f1dbb10fd6e616d3190aa896e60d8facf5897d because reported adapter invocation did not occur, a valid result override bypassed the fixed call, and open scenario-packet structure was admitted. AER-0250 through AER-0252 are closed at register revision 216 and the complete 207-control register suite passes.",
+    "protected_evidence_boundaries": "No protected evidence, historical Diary, patient/clinical/product/licensed data, provider call, real credential, real runtime/adapter, network, database/source, executable, command, deployment, production, release, Pages or protected-ref authority is opened. docs/branding/ and all 494 original untracked paths remain excluded.",
+    "git_refs_and_worktree": "Primary task branch remains at bd11333d462424b40f5f8f014b1c4a945b3a5133 before this explicit-path rejection commit with only the named register/rejection/receipt changes intended. Worker branch remains clean at rejected 52f1dbb10fd6e616d3190aa896e60d8facf5897d. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and origin task remains 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed exact candidate review, reproduced the rejection, generated the deterministic register report and passed all 207 register controls."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini review remains blocked until the corrected candidate passes deterministic gates."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The completed candidate is preserved clean and rejected; no revision is active during this commit."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude/Fable/Opus is not selected; Claude Code was transport only."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
