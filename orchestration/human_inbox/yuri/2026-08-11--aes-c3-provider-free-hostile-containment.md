@@ -66,4 +66,3 @@ no-fallback envelope. The provider lane is currently paused and all historical
 call envelopes are consumed, so the standing authority cannot infer those
 user-owned choices. AES-C3 is complete; Yuri's attention is genuinely required
 before AES-C4 planning or any provider call.
-
