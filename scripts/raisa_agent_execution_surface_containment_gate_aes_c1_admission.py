@@ -208,6 +208,17 @@ CANDIDATE_BUDGET_DIGEST_RULE: dict[str, Any] = {
     "sentinel": None,
     "digested_objects": ["candidate", "budget_before", "budget_after"],
 }
+INHERITED_ARTIFACT_DIGESTS: dict[str, str] = {
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": (
+        "sha256:403c7ddac2399760395d60a8094ffe42d2519a4a809bc8a59104acd2883eb9ae"
+    ),
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json": (
+        "sha256:344d88c59a5d781ebb205de575b66f2e3d64f3878f73c9c0bf4d86eb996b1740"
+    ),
+    "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json": (
+        "sha256:f77801d2d752ca2daeed1b3116d78a965441bc1996f6b6da60eccf72fbee9f3e"
+    ),
+}
 DENIAL_COUNTER_POLICY: dict[str, Any] = {
     "non_terminal_denials_increment": ["denied_operations"],
     "boundary_probe_denials_also_increment": ["boundary_probes"],
@@ -516,12 +527,7 @@ def validate_contract(contract: dict[str, Any], schema: dict[str, Any]) -> list[
         errors.append("budget_dimensions:not_exact")
     if contract.get("zero_runtime_boundary") != ZERO_RUNTIME_BOUNDARY:
         errors.append("zero_runtime_boundary:not_exact")
-    expected_inherited = {
-        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json",
-        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json",
-        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json",
-    }
-    if set(contract.get("inherited_artifact_digests", {})) != expected_inherited:
+    if contract.get("inherited_artifact_digests") != INHERITED_ARTIFACT_DIGESTS:
         errors.append("inherited_artifact_digests:not_exact")
     registry = contract.get("scenario_registry", [])
     if len(registry) != len(SCENARIO_EXPECTATIONS):
@@ -1541,6 +1547,14 @@ def _hostile_contract_mutations() -> list[tuple[str, Callable[[dict[str, Any]], 
     mutation that is silently accepted is a default-denial boundary violation.
     """
     return [
+        ("contract_inherited_digest_value_changed", lambda c: _set_path(
+            c,
+            (
+                "inherited_artifact_digests",
+                "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json",
+            ),
+            WRONG_DIGEST,
+        )),
         ("contract_inherited_digests_extra", lambda c: _set_path(
             c, ("inherited_artifact_digests", "forged/path.json"),
             "sha256:" + "0" * 64)),

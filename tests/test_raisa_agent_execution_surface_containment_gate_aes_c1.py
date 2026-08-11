@@ -206,6 +206,13 @@ def test_aes_c1_all_hostile_mutations_fail_closed_with_zero_admission() -> None:
 def test_aes_c1_contract_rejects_undeclared_nested_rules() -> None:
     contract, schema, _ = _packet()
 
+    inherited_changed = copy.deepcopy(contract)
+    inherited_key = next(iter(inherited_changed["inherited_artifact_digests"]))
+    inherited_changed["inherited_artifact_digests"][inherited_key] = (
+        "sha256:" + "9" * 64
+    )
+    assert validate_contract(inherited_changed, schema)
+
     manifest_extra = copy.deepcopy(contract)
     manifest_extra["manifest_digest_rule"]["forged_rule"] = "forged"
     assert validate_contract(manifest_extra, schema)
@@ -240,8 +247,8 @@ def test_aes_c1_contract_rejects_undeclared_nested_rules() -> None:
 def test_aes_c1_all_hostile_contract_mutations_fail_closed() -> None:
     rejected, admitted = validate_hostile_contract_mutations()
 
-    assert len(_hostile_contract_mutations()) == 7
-    assert len(rejected) == 7
+    assert len(_hostile_contract_mutations()) == 8
+    assert len(rejected) == 8
     assert admitted == []
 
 

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_aes_c1_inherited_digest_sol_recovery_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Frozen acceptance requires the three inherited AES-C0 hashes plus every nested contract rule to be closed and exact. Existing inherited digest mutation now yields schema const and evaluator not_exact errors; all eight hostile contract mutations reject, and 59 focused AES-C1/AES-C0/API tests plus Ruff pass.",
+    "current_authority_allocation": "Sol owns recovery and integration. The single DeepSeek revision is consumed; Sol adopted its two clean commits under the recovery lease and changed only the residual inherited-digest exactness defect. Gemini remains the required independent red/veto.",
+    "git_refs_and_worktree": "Primary task HEAD is f227f625334712f7d70e339a181100e09a9e4215 after provenance commit df7b6ca7eac9edbf920d775a4d1f8694e2aa6703 and cherry-picking both blue commits. Only the AES-C1 schema, evaluator, evidence, focused tests and Sol recovery document are pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding and unrelated untracked paths remain excluded.",
+    "live_handover_current_baton": "AES-C0 is accepted at Continuity 237 / Compass 219; AES-C1 remains active and external review is blocked until the recovered candidate is committed and deterministically gated.",
+    "protected_evidence_boundaries": "This commit is repository-local authored-synthetic unmounted recovery only. It authorises no protected evidence, patient/clinical/product data, runtime/broker/adapter, provider call, credential/IAM/network, database/source, executable tool, command, deployment, release, Pages or protected ref."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

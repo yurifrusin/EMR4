@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_aes_c1_inherited_digest_sol_recovery_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 is accepted at Continuity 237 / Compass 219; AES-C1 remains active and external review is blocked until the recovered candidate is committed and deterministically gated.",
+    "current_authority_allocation": "Sol owns recovery and integration. The single DeepSeek revision is consumed; Sol adopted its two clean commits under the recovery lease and changed only the residual inherited-digest exactness defect. Gemini remains the required independent red/veto.",
+    "active_plan_and_acceptance": "Frozen acceptance requires the three inherited AES-C0 hashes plus every nested contract rule to be closed and exact. Existing inherited digest mutation now yields schema const and evaluator not_exact errors; all eight hostile contract mutations reject, and 59 focused AES-C1/AES-C0/API tests plus Ruff pass.",
+    "protected_evidence_boundaries": "This commit is repository-local authored-synthetic unmounted recovery only. It authorises no protected evidence, patient/clinical/product data, runtime/broker/adapter, provider call, credential/IAM/network, database/source, executable tool, command, deployment, release, Pages or protected ref.",
+    "git_refs_and_worktree": "Primary task HEAD is f227f625334712f7d70e339a181100e09a9e4215 after provenance commit df7b6ca7eac9edbf920d775a4d1f8694e2aa6703 and cherry-picking both blue commits. Only the AES-C1 schema, evaluator, evidence, focused tests and Sol recovery document are pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding and unrelated untracked paths remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reproduced, repaired and independently retested the exact inherited-digest defect."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native Codex worker is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Gemini review remains blocked until the full committed deterministic gate passes."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Both blue calls completed; the bounded revision is consumed and no further DeepSeek call is selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude/Fable/Opus is not selected; Claude Code was transport only."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

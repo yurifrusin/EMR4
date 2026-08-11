@@ -36,9 +36,15 @@
         "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json"
       ],
       "properties": {
-        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": { "$ref": "#/$defs/Digest" },
-        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json": { "$ref": "#/$defs/Digest" },
-        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json": { "$ref": "#/$defs/Digest" }
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.json": {
+          "const": "sha256:403c7ddac2399760395d60a8094ffe42d2519a4a809bc8a59104acd2883eb9ae"
+        },
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/architecture-contract.schema.json": {
+          "const": "sha256:344d88c59a5d781ebb205de575b66f2e3d64f3878f73c9c0bf4d86eb996b1740"
+        },
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c0/authored-synthetic-contract-examples.json": {
+          "const": "sha256:f77801d2d752ca2daeed1b3116d78a965441bc1996f6b6da60eccf72fbee9f3e"
+        }
       }
     },
     "manifest_digest_rule": {
