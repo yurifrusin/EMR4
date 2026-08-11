@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_frozen_aes_c2_plan_threat_and_exact_five_source_receipts",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The C2 plan freezes one exact pure in-process inert adapter, 26 canonical scenarios, 18 hostile mutations, exact inherited C1 hashes, broker-only identity/custody, dispatch-time control recheck, budget commit, minimized evidence and AES-C3 as next. The threat delta classifies it dual_review.",
+    "current_authority_allocation": "GPT Sol owns the frozen C2 boundary and plan commit. DeepSeek Flash/high may implement one bounded blue candidate only after a separate pre-dispatch receipt; Gemini Flash/high remains the later fresh exact-head veto reviewer.",
+    "git_refs_and_worktree": "Task branch remains at exact clean tracked source HEAD 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e before this explicit plan commit. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The 494 original untracked paths remain excluded; only six named C2 planning/receipt files are owned for this commit.",
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220 and names AES-C2 provider-free broker simulation as the dependency-satisfied next tranche.",
+    "protected_evidence_boundaries": "C2 is authored-synthetic and provider-free. It opens no real broker/work-cell process, real adapter or credential, provider/model, patient/clinical/product data, network, metadata, database/source, filesystem capability, executable tool, command/write, deployment, production, release, Pages or protected ref. Protected holdouts and historical Diary remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

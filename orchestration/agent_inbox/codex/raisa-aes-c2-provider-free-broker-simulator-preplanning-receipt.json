@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_narrowest_fail_closed_aes_c2_provider_free_inert_broker_simulator_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted programme sequence names AES-C2 after AES-C1. C1 exact artifacts are frozen at SHA-256 241f081b1c3346ef50e80eb495c9bfb6ea3b99f67956b439c7c7638962069f90, 2e6c5b83d379f5b6f900fa0a26a8733b6fe09496ff8e1c52d5ed40123603e9b6, e6e427efa32fb27387598042f0d1b1f19c4472b09288f7c8d3ed321a7309945c and f7d1a2f60ef4b6f46242cfff7a12b36b6e20405a07ad788854c877851a0bbd4c. C2 will be pure in-process simulation, with one fixed inert adapter and no external I/O.",
+    "current_authority_allocation": "GPT Sol owns C2 boundary, architecture, acceptance, recovery, integration and Git closeout. DeepSeek V4 Flash/high via Claude Code --bare is the preferred bounded implementation/test worker. Gemini 3.6 Flash/high via a fresh Antigravity project owns exact-head independent veto review only.",
+    "git_refs_and_worktree": "Primary worktree is C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam at exact local/origin HEAD 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed C1 source 285e60216cf22907e8a0f5596ece11f74f455c81 are ancestors. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; 494 preserved untracked paths have SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162.",
+    "live_handover_current_baton": "AES-C1 is accepted at Continuity 238 / Compass 220. AES-C2 provider-free broker simulator is the dependency-satisfied next tranche and is limited to exactly one inert allowlisted authored-synthetic adapter with no external effect.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; the provider lane and historical Diary/PHI remain closed. C2 may use authored-synthetic fixtures only and cannot open a real broker/work-cell process, real adapter or credential, provider/model call, patient/clinical/product data, database/source or watcher, IAM/metadata, network, filesystem capability, executable tool, command/write, deployment, production, release, Pages or protected ref."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
