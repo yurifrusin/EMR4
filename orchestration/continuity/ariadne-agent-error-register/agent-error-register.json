@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 226,
+  "register_revision": 227,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10419,6 +10419,51 @@
           "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-review-predispatch-receipt.json",
           "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-review-predispatch-corrected-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-226.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0261",
+      "attempt_id": "raisa-aes-c4-provider-free-factual-rebind-evidence-001",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-aes-c4-bounded-occupied-provider-proof",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every source-bound AES-C4 evidence packet and terminal ledger must receive the exact forty-character current commit object captured from git rev-parse and verified as an existing commit before evidence generation.",
+      "observed_error": "The first factual-rebind zero-call evidence and ledger used non-existent source string ec6a04345fb8a5ec65da112fbacbc98bfb040030 copied from restored summary state instead of actual committed HEAD ec6a043410661d563c53d205cd4958d100732e97. Complete post-compaction Git verification found the mismatch before review, cloud preflight, ledger opening or provider inference. The invalid pair made zero provider calls and supplied no admitted evidence.",
+      "detection_method": "The mandatory five-source rehydration captured git rev-parse HEAD, git cat-file resolution and the evidence source_head independently. Sol preserved the invalid pair under explicit invalid-source filenames, verified the actual commit object and regenerated the complete zero-call pair from the exact current HEAD.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-invalid-source-evidence.json",
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-invalid-source-ledger.json",
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-evidence.json",
+        "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-ledger.json",
+        "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-postcompaction-3-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-227.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit neither invalid-source file. Preserve both, verify the exact current commit with git rev-parse and git cat-file, regenerate a distinct complete zero-call evidence/ledger pair bound to ec6a043410661d563c53d205cd4958d100732e97 and require that corrected pair to pass deterministic tests before any verifier or cloud gate.",
+        "prevention_control": "Before any source-bound evidence generation, capture full HEAD from git rev-parse, verify it with git cat-file, and pass that same captured value directly to the harness; never copy a restored summary or abbreviated display hash into source_head.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-invalid-source-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-invalid-source-ledger.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-evidence.json",
+          "orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c4/provider-free-factual-rebind-ledger.json",
+          "orchestration/agent_inbox/codex/raisa-aes-c4-provider-proof-postcompaction-3-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-227.md"
         ]
       },
       "status": "corrected"

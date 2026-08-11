@@ -1,0 +1,19 @@
+{
+  "actual_provider_calls": 0,
+  "generation_id": "generation-aes-c4-sydney-vertex-001",
+  "ledger_id": "aes-c4-provider-free-ledger-001",
+  "manifest_digest": "sha256:c2060d71ecf67d380b4677859ab884a61595358dd78c37b3676b713f714ef767",
+  "maximum_cost_usd": 0.0,
+  "maximum_provider_calls": 0,
+  "maximum_retries": 0,
+  "mode": "provider-free",
+  "provider_call_allowances_consumed": 0,
+  "provider_calls_reserved": 0,
+  "provider_envelope_digest": "sha256:baa22577ca29b09a783765bb5e5893a7d907f98578bf4b1fbc9d6cce24670393",
+  "reserved_cost_per_call_usd": 0.0,
+  "reserved_cost_usd": 0.0,
+  "retries_consumed": 0,
+  "schema_version": "emr4.aes_c4.provider_ledger.v1",
+  "source_head": "ec6a04345fb8a5ec65da112fbacbc98bfb040030",
+  "status": "consumed"
+}

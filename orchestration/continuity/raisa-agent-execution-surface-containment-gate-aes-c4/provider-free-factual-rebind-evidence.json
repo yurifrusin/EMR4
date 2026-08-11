@@ -1,0 +1,198 @@
+{
+  "audit_chain": [
+    {
+      "event_hash": "sha256:c945545f9f533655ac062d7d3dc1a8bfd5eb9fb8976e55a8ddceb36806cf1d6b",
+      "event_type": "generation_admitted",
+      "fields": {
+        "candidate_digest": "sha256:0ea94770b8b522f4d79cfd83df81cbd3397ad0e28e735b9abcea22982992bb47",
+        "command_authority": false,
+        "current_authority_checked": true,
+        "generation_id": "generation-aes-c4-sydney-vertex-001",
+        "manifest_digest": "sha256:5d79bf0d9e03ba64c4035a018eaf427f63bbdc67ea539b9b6c9d276db8205715"
+      },
+      "previous_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "sequence": 1
+    },
+    {
+      "event_hash": "sha256:b05186833f7e181450357a40527b542edfb8e0b7b0c921cf2ab2962c3d0023a9",
+      "event_type": "provider_call_simulated",
+      "fields": {
+        "maximum_provider_calls": 0,
+        "provider_contacted": false
+      },
+      "previous_hash": "sha256:c945545f9f533655ac062d7d3dc1a8bfd5eb9fb8976e55a8ddceb36806cf1d6b",
+      "sequence": 2
+    },
+    {
+      "event_hash": "sha256:59cc08f5758558cd2b0ca70fa201614d90ac7809ef1e629147f9668f8d2de202",
+      "event_type": "provider_result_proofread",
+      "fields": {
+        "command_authority": false,
+        "proofreader_decision": "admitted",
+        "release_digest": "sha256:dd0559ca8e566f34d0cff7f19777ee3549e5b3818ac11b0f1ba83436f64e487d"
+      },
+      "previous_hash": "sha256:b05186833f7e181450357a40527b542edfb8e0b7b0c921cf2ab2962c3d0023a9",
+      "sequence": 3
+    },
+    {
+      "event_hash": "sha256:7692a423a34f64ef0421a152a42da9f37cbf0094c7044801530e8b6df4e413ea",
+      "event_type": "generation_revoked_and_cleaned",
+      "fields": {
+        "broker_process_or_listener": false,
+        "credential_or_token_retained": false,
+        "further_generation_calls": false,
+        "lease_revoked": true,
+        "ledger_consumed": true,
+        "task_runtime_or_temporary_root": false
+      },
+      "previous_hash": "sha256:59cc08f5758558cd2b0ca70fa201614d90ac7809ef1e629147f9668f8d2de202",
+      "sequence": 4
+    }
+  ],
+  "broker_admission": {
+    "after_next_operation_permitted": false,
+    "after_terminal_state": "exhausted",
+    "audit_evidence": {
+      "artifact_digests": [
+        "sha256:0ea94770b8b522f4d79cfd83df81cbd3397ad0e28e735b9abcea22982992bb47",
+        "sha256:a591a608610218c3941ab776c3a5897c56ce9e20b4b25cdc36001efc79e372e1",
+        "sha256:405c6c21d021c7443dae3980ce4e7054144c990c9008036c225bfcee2a51c884"
+      ],
+      "contains_sensitive_values": false,
+      "correlation_id": "correlation-aes-c4-provider-proof",
+      "cumulative_counts": {
+        "boundary_probes": 0,
+        "broker_operations": 1,
+        "command_confirmations": 0,
+        "denied_operations": 0,
+        "distinct_destinations": 1,
+        "elapsed_ms": 45000,
+        "inert_tool_operations": 0,
+        "input_bytes": 1549,
+        "model_calls": 1,
+        "model_tokens": 4096,
+        "output_bytes": 16384,
+        "product_mutations": 0,
+        "redirects": 0,
+        "repeated_failures": 0,
+        "request_bytes": 1549,
+        "request_count": 1,
+        "response_bytes": 16384,
+        "source_count": 1,
+        "total_bytes": 17933
+      },
+      "decision": "allow",
+      "evidence_id": "evidence-aes-c4-provider-proof",
+      "generation_id": "generation-aes-c4-sydney-vertex-001",
+      "manifest_digest": "sha256:5d79bf0d9e03ba64c4035a018eaf427f63bbdc67ea539b9b6c9d276db8205715",
+      "reason_codes": [
+        "manifest-grant-and-current-authority"
+      ],
+      "recorded_at": "2026-08-11T08:36:02.285162Z",
+      "revocation_state": "not_revoked",
+      "schema_version": "emr4.aes_c0.audit_evidence.v1"
+    },
+    "decision": "allow",
+    "reason_codes": [
+      "manifest_grant_and_current_authority"
+    ]
+  },
+  "cleanup": {
+    "broker_process_or_listener": false,
+    "further_generation_calls": false,
+    "lease_alias_and_token_revoked": true,
+    "provider_ledger_consumed": true,
+    "reusable_capability": false,
+    "task_runtime_or_temporary_root": false
+  },
+  "contains_sensitive_values": false,
+  "evidence_label": "occupied_authored_synthetic_brokered_provider_containment_proof",
+  "manifest_digest": "sha256:5d79bf0d9e03ba64c4035a018eaf427f63bbdc67ea539b9b6c9d276db8205715",
+  "mode": "provider-free",
+  "operation_counters": {
+    "command_or_write_operations": 0,
+    "database_or_source_operations": 0,
+    "deployment_or_production_operations": 0,
+    "filesystem_capability_operations": 0,
+    "product_operations": 0,
+    "protected_operations": 0,
+    "provider_calls": 0,
+    "provider_tool_operations": 0
+  },
+  "predispatch_proofreader": {
+    "admitted": true,
+    "command_authority": false,
+    "generation_manifest_digest": "sha256:5d79bf0d9e03ba64c4035a018eaf427f63bbdc67ea539b9b6c9d276db8205715",
+    "packet_digest": "sha256:97a80f813b047ce057d439dbce648ce82b2b14f883fefac8bc75714466d32648",
+    "schema_version": "emr4.aes_c4.predispatch_proofreader.v1"
+  },
+  "proofreader": {
+    "decision": "admitted",
+    "release_digest": "sha256:dd0559ca8e566f34d0cff7f19777ee3549e5b3818ac11b0f1ba83436f64e487d",
+    "release_performed": true,
+    "repair_call_permitted": false
+  },
+  "provider": {
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "finish_reason": "STOP",
+    "fixture_used": true,
+    "http_status": 200,
+    "latency_ms": 0,
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "model_reasoning_retained": false,
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "provider_contacted": false,
+    "provider_response_bytes": 395,
+    "provider_text_retained": false,
+    "raw_prompt_retained": false,
+    "raw_response_retained": false,
+    "request_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "response_digest": "sha256:0370dc56ec3e5e30342fea2a4ae4dd88b61341597df2e0f9b793bfb8f88b95ea",
+    "safe_token_counts": {
+      "candidatesTokenCount": 32,
+      "promptTokenCount": 128,
+      "thoughtsTokenCount": 64,
+      "totalTokenCount": 224
+    }
+  },
+  "provider_envelope_digest": "sha256:baa22577ca29b09a783765bb5e5893a7d907f98578bf4b1fbc9d6cce24670393",
+  "provider_ledger": {
+    "actual_provider_calls": 0,
+    "generation_id": "generation-aes-c4-sydney-vertex-001",
+    "ledger_id": "aes-c4-provider-free-ledger-001",
+    "manifest_digest": "sha256:5d79bf0d9e03ba64c4035a018eaf427f63bbdc67ea539b9b6c9d276db8205715",
+    "maximum_cost_usd": 0.0,
+    "maximum_provider_calls": 0,
+    "maximum_retries": 0,
+    "mode": "provider-free",
+    "provider_call_allowances_consumed": 0,
+    "provider_calls_reserved": 0,
+    "provider_envelope_digest": "sha256:baa22577ca29b09a783765bb5e5893a7d907f98578bf4b1fbc9d6cce24670393",
+    "reserved_cost_per_call_usd": 0.0,
+    "reserved_cost_usd": 0.0,
+    "retries_consumed": 0,
+    "schema_version": "emr4.aes_c4.provider_ledger.v1",
+    "source_head": "ec6a043410661d563c53d205cd4958d100732e97",
+    "status": "consumed"
+  },
+  "reason_codes": [],
+  "release": {
+    "command_authority": false,
+    "decision_code": "contained",
+    "summary_code": "broker_boundary_confirmed",
+    "synthetic_nonce": "aes-c4-synthetic-nonce-001"
+  },
+  "result": "raisa_agent_execution_surface_containment_gate_aes_c4_provider_free_dry_run_pass",
+  "retention": {
+    "credential_or_token_retained": false,
+    "model_reasoning_retained": false,
+    "patient_or_product_data_retained": false,
+    "provider_text_retained": false,
+    "raw_prompt_retained": false,
+    "raw_response_retained": false
+  },
+  "schema_version": "emr4.aes_c4.provider_proof_evidence.v1",
+  "source_head": "ec6a043410661d563c53d205cd4958d100732e97"
+}

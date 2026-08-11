@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_corrected_exact_source_bound_aes_c4_provider_free_factual_rebind_evidence_and_aer_0261_before_fresh_independent_review",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records AES-C3 accepted at Continuity 240 / Compass 222 and AES-C4 as the active exact one-call Sydney Vertex proof. Its next-work row now binds the current provider facts and corrected zero-call evidence to exact existing source ec6a043410661d563c53d205cd4958d100732e97 and rejects the non-existent source-string pair as AER-0261.",
+    "current_authority_allocation": "GPT Sol owns the exact-source correction, deterministic gates, task-branch commit and later occupied execution. Gemini 3.6 Flash/high through a fresh Antigravity project owns only the next independent veto. Yuri's completed human authentication changes no credential, IAM or cloud-configuration authority for Codex.",
+    "active_plan_and_acceptance": "The frozen AES-C4 plan/envelope remain unchanged except for the accepted current lifecycle and price facts: retirement 2026-10-20, USD 0.30/M input and USD 2.50/M text output including reasoning. The corrected provider-free evidence and consumed ledger are bound to exact commit ec6a043410661d563c53d205cd4958d100732e97, report zero provider calls and pass the complete 11-file AES/API/baton/register deterministic packet, focused corrected-evidence tests, Ruff and Git whitespace.",
+    "protected_evidence_boundaries": "The commit contains only AES-C4 authored-synthetic zero-call evidence, its preserved invalid-source failure evidence, AER-0261, tests, baton wording and five-source receipts. Protected holdouts, Diary/PHI, patient/clinical/product/practice/licensed/external content, product/database/filesystem/tool/command/runtime/deployment/production/release/Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain unstaged.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at ec6a043410661d563c53d205cd4958d100732e97 before commit. Required 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed AES-C3 c45ff191af420b801e9917a7efc69c17aeb5698b are ancestors. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 07c70ebb03eae7ccbcb3b7f831766b7f6eef52d6. The original 494 untracked paths remain exact at SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five under docs/branding after excluding seven task-owned new artifacts. Explicit-path staging only will be used."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the source-binding correction, full deterministic rerun and exact preservation audit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native Codex worker is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh exact-head verifier dispatch follows only after this commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude/Fable/Opus is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

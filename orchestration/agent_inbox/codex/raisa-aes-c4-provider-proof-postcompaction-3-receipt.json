@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "bind_the_aes_c4_factual_rebind_evidence_to_the_exact_current_head_then_obtain_a_fresh_exact_head_veto_before_the_single_conditionally_authorised_occupied_call",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete AES-C4 plan, preexecution factual rebind, threat-model delta, provider envelope and schema, AES-C3 closeout and Sol acceptance, prior source-specific Gemini veto, Access AI API design and relevant API Spine contracts were reread. The current public facts are retirement on 2026-10-20 and Standard prices USD 0.30/M input plus USD 2.50/M text output including reasoning. The provider/model/project/identity/region, newly authored-synthetic data, one-call/no-retry rule, USD 0.25 ceiling, proofreader, cleanup and all closed surfaces are unchanged.",
+    "current_authority_allocation": "GPT Sol owns AES-C4 implementation, deterministic gates, exact-head independent-veto admission, occupied execution and acceptance. Gemini 3.6 Flash/high through a fresh Antigravity project owns only the fresh independent veto. Yuri has completed the human CLI and impersonated-ADC authentication; Codex has no credential, IAM or cloud-configuration mutation authority.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at ec6a043410661d563c53d205cd4958d100732e97; origin task remains 07c70ebb03eae7ccbcb3b7f831766b7f6eef52d6. Reviewed AES-C3 source c45ff191af420b801e9917a7efc69c17aeb5698b and required 648c8ec9805af63729264ea9c22fd695f062a741 are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Two tracked AES-C4-owned files contain a recovered partial follow-on edit that must be bound to the actual HEAD, and two AES-C4 factual-rebind evidence files are additional untracked owned artifacts. Excluding those two owned evidence files, the original 494 untracked paths remain exact at SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five under docs/branding. Prior review worktree r185 remains clean at its historical reviewed source 743c6354eadd3661d668bb0d567e0693d4b32e9c and will not be reused for the required fresh veto.",
+    "live_handover_current_baton": "After this context restoration, AGENTS.md was reread completely. AES-C3 remains accepted at Continuity 240 / Compass 222, and AES-C4 remains the active exact one-call Sydney Vertex authored-synthetic provider proof with the preexecution lifecycle and pricing rebind now pending exact-head review.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical Diary/PHI, patient/clinical/product/practice/licensed/external-corpus data, consumed provider ledgers and every unrelated untracked file remain closed. No product read, database/source, filesystem capability, provider tool, generic network, command/write, reusable runtime, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding remains preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

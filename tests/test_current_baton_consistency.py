@@ -45,10 +45,13 @@ def test_live_baton_rows_agree_on_aes_c3_and_active_aes_c4_envelope() -> None:
     assert "australia-southeast1" in next_work
     assert "one call/no retry" in next_work
     assert "USD 0.25" in next_work
-    assert "retirement date extended to 2026-10-20" in next_work
+    assert "current 2026-10-20 lifecycle" in next_work
     assert "USD 0.30/M input" in next_work
-    assert "USD 2.50/M text output including reasoning" in next_work
-    assert "regenerate zero-call evidence" in next_work
+    assert "USD 2.50/M text-output" in next_work
+    assert "ec6a043410661d563c53d205cd4958d100732e97" in next_work
+    assert "corrected distinct zero-call evidence passes" in next_work
+    assert "AER-0261" in next_work
+    assert "obtain a new exact-head veto" in next_work
     assert "repeat cloud/ADC/CLI checks" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()

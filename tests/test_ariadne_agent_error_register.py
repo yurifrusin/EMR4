@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 226
+    assert register["register_revision"] == 227
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 261)
+        f"AER-{index:04d}" for index in range(1, 262)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 168
+    assert len(agent_incidents) == 169
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2520,10 +2520,25 @@ def test_aer_0260_records_predispatch_profile_correction() -> None:
     assert "agy_cli_observation" in incident["detection_method"]
 
 
+def test_aer_0261_preserves_and_corrects_nonexistent_source_binding() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0261"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["status"] == "corrected"
+    assert "ec6a04345fb8a5ec65da112fbacbc98bfb040030" in incident["observed_error"]
+    assert "ec6a043410661d563c53d205cd4958d100732e97" in incident["correction"]["action"]
+
+
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 260
+    assert report["incident_count"] == 261
 
 
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
@@ -2539,18 +2554,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 226
-    assert report["incident_count"] == 260
+    assert report["register_revision"] == 227
+    assert report["incident_count"] == 261
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 168,
+        "agent_behavior": 169,
         "harness": 31,
         "repository": 52,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 29,
-        "evidence_misreport": 33,
+        "evidence_misreport": 34,
         "harness_failure": 31,
         "output_contract_violation": 75,
         "read_only_violation": 3,
@@ -2560,7 +2575,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 82,
-        "canonical_unchanged": 151,
+        "canonical_unchanged": 152,
         "untrusted_partial_worktree": 27,
     }
     assert report["recurring_patterns"] == [
@@ -2610,7 +2625,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
             ),
-            "incident_count": 7,
+            "incident_count": 8,
             "incident_ids": [
                 "AER-0192",
                 "AER-0196",
@@ -2619,12 +2634,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0210",
                 "AER-0219",
                 "AER-0241",
+                "AER-0261",
             ],
             "origins": ["agent_behavior"],
             "categories": ["evidence_misreport"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
+                "Before any source-bound evidence generation, capture full HEAD from git rev-parse, verify it with git cat-file, and pass that same captured value directly to the harness; never copy a restored summary or abbreviated display hash into source_head.",
                 "Move exact git rev-parse capture ahead of every packet or runtime-state drafting step and mechanically interpolate only the captured forty-character value; do not begin authoring from abbreviated commit output.",
                 "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it resolves, and reconcile every packet diff range before generating the final dispatch receipt.",
                 "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it with git cat-file, and test the full value before review or runtime dispatch.",

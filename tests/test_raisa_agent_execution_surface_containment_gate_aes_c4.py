@@ -16,6 +16,9 @@ PREFLIGHT = (
 PROVIDER_FREE_EVIDENCE = aes_c4.BASE / "provider-free-dry-run-evidence.json"
 PROVIDER_FREE_LEDGER = aes_c4.BASE / "provider-free-dry-run-ledger.json"
 PROVIDER_FREE_SOURCE_HEAD = "b06ade2efc72cc6af5e11f72a56426f4319573bc"
+REBIND_EVIDENCE = aes_c4.BASE / "provider-free-factual-rebind-evidence.json"
+REBIND_LEDGER = aes_c4.BASE / "provider-free-factual-rebind-ledger.json"
+REBIND_SOURCE_HEAD = "ec6a043410661d563c53d205cd4958d100732e97"
 
 
 class FakeLiveAdapter:
@@ -109,12 +112,21 @@ def test_provider_free_cleanup_has_no_reusable_capability(tmp_path):
     }
 
 
-def test_committed_provider_free_evidence_is_zero_call_source_bound_and_consumed():
-    evidence = json.loads(PROVIDER_FREE_EVIDENCE.read_text(encoding="utf-8"))
-    ledger = json.loads(PROVIDER_FREE_LEDGER.read_text(encoding="utf-8"))
+@pytest.mark.parametrize(
+    ("evidence_path", "ledger_path", "source_head"),
+    [
+        (PROVIDER_FREE_EVIDENCE, PROVIDER_FREE_LEDGER, PROVIDER_FREE_SOURCE_HEAD),
+        (REBIND_EVIDENCE, REBIND_LEDGER, REBIND_SOURCE_HEAD),
+    ],
+)
+def test_committed_provider_free_evidence_is_zero_call_source_bound_and_consumed(
+    evidence_path, ledger_path, source_head
+):
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
 
-    assert evidence["source_head"] == PROVIDER_FREE_SOURCE_HEAD
-    assert ledger["source_head"] == PROVIDER_FREE_SOURCE_HEAD
+    assert evidence["source_head"] == source_head
+    assert ledger["source_head"] == source_head
     assert evidence["result"].endswith("provider_free_dry_run_pass")
     assert evidence["operation_counters"]["provider_calls"] == 0
     assert evidence["proofreader"]["release_performed"] is True
