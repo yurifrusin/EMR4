@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_single_bounded_aes_c2_blue_mechanical_revision",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The corrected frozen C2 plan remains unchanged. AER-0251 binds the exact failure: the result override bypasses the sole pure adapter while reporting a call, a valid override can release with zero actual calls, and the scenario packet admits open structure. Revision packet SHA-256 baee6186f943e8929a1ac85e39f95eaae8f9edb1670615d8bf72fa6f928b2320 freezes unconditional actual call, exact packet closure, instrumented regressions, regenerated evidence and corrected closeout claims. Exact-head clean preflight SHA-256 is 361d47b1780ca0b5248c89d899dde1555077419cd27a118053ec0cc288603b79.",
+    "current_authority_allocation": "Sol owns the rejection, exact revision scope, final review, recovery, integration and acceptance. One DeepSeek V4 Flash/high call through Claude Code --bare may correct only the seven existing worker-owned paths. A failed revision ends this lane. Fresh Gemini 3.6 Flash/high veto remains separate and blocked until corrected deterministic gates pass.",
+    "git_refs_and_worktree": "Primary task branch is b20c301e416c4f5eb4a9e20821bea7d56e916c12. Worker worktree C:/Users/sarashera/EMR4-worktrees/aes-c2-deepseek-blue is clean on codex/aes-c2-blue-deepseek at rejected revision source 52f1dbb10fd6e616d3190aa896e60d8facf5897d and may edit only its exact seven paths. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and C1 reviewed source 285e60216cf22907e8a0f5596ece11f74f455c81 remain ancestors of the plan source. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e.",
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220. AES-C2 remains the active planned tranche; first blue candidate 52f1dbb10fd6e616d3190aa896e60d8facf5897d is rejected and the frozen plan permits exactly one bounded same-lane mechanical revision.",
+    "protected_evidence_boundaries": "No protected evidence or historical Diary authority and no patient/clinical/product/licensed data is granted. Real broker/process/container/adapter, provider/model call, real credential/IAM/metadata/network, database/source/watcher, executable tool, command/write, deployment, production, release, Pages and protected refs remain closed. The primary original 494 untracked paths including docs/branding remain outside the clean isolated worker worktree."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

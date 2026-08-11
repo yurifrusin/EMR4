@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_aes_c2_revision_and_deterministic_gate_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220. AES-C2 remains active and its corrected blue candidate is adopted only on the task branch pending mandatory fresh Gemini veto and final Sol acceptance.",
+    "current_authority_allocation": "Sol owns this deterministic checkpoint and the next verifier dispatch. DeepSeek's correction lane is consumed and inactive. Gemini 3.6 Flash/high will receive a fresh read-only exact-head red/veto packet only after this commit; neither worker owns acceptance or integration.",
+    "active_plan_and_acceptance": "Adopted task HEAD 94ef2d0c98ebfbd6e2d5b59f38c2cb5f26614a28 passes the exact simulator with no reasons; independent actual-call measurements 1/1 for the malformed result and 3 across the catalogue; 81/81 serial C2/C1/C0/API tests; 151/151 maintained no-conftest tests with C2 explicitly included; canonical fast 135/135 plus Ruff, maintained 202-file compilation, Diary syntax and whitespace; and clean exact seven-path scope. Final dual-review and acceptance remain pending.",
+    "protected_evidence_boundaries": "No protected evidence or historical Diary authority and no patient/clinical/product/licensed data is granted. Real broker/process/container/adapter, provider/model call, real credential/IAM/metadata/network, database/source/watcher, executable tool, command/write, deployment, production, release, Pages and protected refs remain closed. docs/branding and all 494 original untracked paths remain preserved and excluded.",
+    "git_refs_and_worktree": "Primary worktree is clean in tracked state on codex/ariadne-bernie-davida-parallel-seam at 94ef2d0c98ebfbd6e2d5b59f38c2cb5f26614a28 after exact cherry-picks 396644ea and 94ef2d0c. Worker worktree remains clean at 1b485a1db9ffcad13d007191e8422fe967969851. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e. Only exact AES-C2 revision orchestration files and this receipt pair will be explicitly staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol adopted the exact corrected commits on the task branch and independently passed actual-call, focused, maintained and canonical deterministic gates."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh Gemini review is next but has not started; its exact read-only worktree and packet remain to be created from the committed deterministic candidate."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The single revision completed and its lane is consumed; no DeepSeek worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude/Fable/Opus is not selected; Claude Code was transport only."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

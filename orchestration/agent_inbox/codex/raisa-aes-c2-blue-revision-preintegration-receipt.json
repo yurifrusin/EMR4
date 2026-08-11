@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "adopt_exact_corrected_aes_c2_blue_candidate_on_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Corrected worker HEAD 1b485a1db9ffcad13d007191e8422fe967969851 descends rejected 52f1dbb10fd6e616d3190aa896e60d8facf5897d. Sol measured malformed reported/actual calls 1/1 with no release, catalogue actual calls 3 with two releases, exact open-packet rejection, 81/81 serial C2/C1/C0/API tests, Ruff, format, compile and whitespace. AST comparison shows only _dispatch_adapter and validate_scenario_packet changed in production source, plus five exact new test functions; the cumulative candidate remains exactly seven owned paths.",
+    "current_authority_allocation": "Sol independently reviewed and may adopt the corrected candidate on the non-protected task branch. DeepSeek owns no acceptance or integration. Gemini 3.6 Flash/high remains a mandatory fresh veto only after the adopted candidate passes broader deterministic gates.",
+    "git_refs_and_worktree": "Primary task branch is clean in tracked state at b20c301e416c4f5eb4a9e20821bea7d56e916c12. Worker worktree is clean on codex/aes-c2-blue-deepseek at 1b485a1db9ffcad13d007191e8422fe967969851 with parent 52f1dbb10fd6e616d3190aa896e60d8facf5897d and plan source parent bd11333d462424b40f5f8f014b1c4a945b3a5133. Sol will cherry-pick the two exact worker commits onto the task branch without touching protected refs. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 789e37fb43c2ad1ae57e4a59bf7e945a5dd6208e.",
+    "live_handover_current_baton": "AES-C1 remains accepted at Continuity 238 / Compass 220. AES-C2 remains active and the single permitted DeepSeek correction is complete; task-branch adoption is the next deterministic step, not final acceptance.",
+    "protected_evidence_boundaries": "No protected evidence or historical Diary authority and no patient/clinical/product/licensed data is granted. Real broker/process/container/adapter, provider/model call, real credential/IAM/metadata/network, database/source/watcher, executable tool, command/write, deployment, production, release, Pages and protected refs remain closed. docs/branding and all 494 original untracked paths remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

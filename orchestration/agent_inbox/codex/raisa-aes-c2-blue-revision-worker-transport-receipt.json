@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All verifications pass and the worktree is clean. Here is the final report.\n\n## Summary\n\nThe bounded revision is complete. Three of the seven owned paths changed (script, test, closeout); the scenarios/contract/schema/evidence remain byte-identical because the corrected source preserves the frozen accounting and the regenerated evidence is deterministic.\n\n**Mandatory findings addressed:**\n1. `_dispatch_adapter` now calls `_pure_inert_render` unconditionally exactly once, before observing the malformed-result seam (no second callable/selection path).\n2. `validate_scenario_packet` rejects extra/missing packet keys (`scenarios:keys_not_exact`), binds to the exact generated 26-scenario catalogue (`scenarios:not_canonical_generated_catalogue`), and rejects any schema-valid override outside `adapter-result-contract-mismatch-stop`.\n3. Added 4 independent instrumented tests proving the malformed scenario executes the real pure adapter exactly once, a schema-valid override cannot bypass the actual call, the full catalogue makes exactly 3 actual calls, and an extra key/noncanonical packet fails validation.\n4. Evidence regenerated after passing source/tests; exact 2 simulated / 4 not_dispatched / 20 stop / 3 actual pure calls preserved.\n5. Closeout corrected: source `52f1dbb\u2026`, `candidate_commit: resolved_by_receipt`, all four protected refs named at `2e34bdad\u2026`, fixture-supplied-directly-and-never-emitted claim, actual-call claim only after instrumented proof, and pending-acceptance items explicitly not claimed.\n\n**Verification (all serial, primary env `C:\\Users\\sarashera\\emr4\\.venv`):**\n- Simulator: status `passed`, reasons `[]`, evidence regenerated\n- Focused C2: 22/22\n- Exact serial C2+C1+C0+API Spine packet: 81/81, exit 0\n- Ruff check + Ruff format check: pass\n- Compile: pass\n- `git diff --check`: clean; exact seven-path diff vs `52f1dbb\u2026` confirmed\n\n```json\n{\n  \"decision\": \"pass\",\n  \"source_head\": \"52f1dbb10fd6e616d3190aa896e60d8facf5897d\",\n  \"candidate_head\": \"1b485a1db9ffcad13d007191e8422fe967969851\",\n  \"changed_paths\": [\n    \"orchestration/agent_inbox/claude/raisa-aes-c2-blue-implementation-closeout.md\",\n    \"scripts/raisa_agent_execution_surface_containment_gate_aes_c2_broker_simulator.py\",\n    \"tests/test_raisa_agent_execution_surface_containment_gate_aes_c2.py\"\n  ],\n  \"actual_adapter_calls\": 3,\n  \"scenario_count\": 26,\n  \"simulated_count\": 2,\n  \"not_dispatched_count\": 4,\n  \"stop_count\": 20,\n  \"hostile_mutation_rejected\": \"18/18\",\n  \"contract_mutation_rejected\": \"14/14\",\n  \"focused_c2_tests\": \"22/22\",\n  \"serial_packet_tests\": \"81/81\",\n  \"serial_packet_breakdown\": {\"aes_c2\": 22, \"aes_c1\": 14, \"aes_c0\": 9, \"api_spine\": 36},\n  \"closeout_path\": \"orchestration/agent_inbox/claude/raisa-aes-c2-blue-implementation-closeout.md\",\n  \"worktree_clean\": true,\n  \"protected_refs_unchanged\": true,\n  \"protected_ref_head\": \"2e34bdad732fdab32fbf778280b3d3c70d66d602\",\n  \"unresolved_findings\": []\n}\n```\n\nThis worker `pass` is candidate evidence only. Sol remains the sole acceptance and integration owner, and a fresh Gemini veto remains mandatory after deterministic admission. No push or protected-ref movement was performed.",
+  "usage": {
+    "input_tokens": 77707,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 7898368,
+    "output_tokens": 63532,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 5.947429000000001,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
