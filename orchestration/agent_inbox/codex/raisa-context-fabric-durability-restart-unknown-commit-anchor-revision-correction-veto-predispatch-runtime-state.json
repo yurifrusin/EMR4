@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_exact_head_veto_of_the_single_cf_d2_anchor_revision_correction_before_diagnostic_attempt_002",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and CF-D2 recovery remains the active dependency-satisfied durability tranche. CF-D1 at Continuity 243 / Compass 225 remains the last accepted durability result; CF-D2 has released no restart or unknown-commit claim.",
+    "current_authority_allocation": "GPT Sol retains implementation, runtime, recovery, acceptance, Git and publication authority under Yuri's standing uninterrupted-development authority. One genuinely fresh Gemini 3.6 Flash/high Antigravity project receives only the exact allowlisted read-only veto in r188. DeepSeek and native subagents are unassigned.",
+    "active_plan_and_acceptance": "Immutable diagnostic attempt 001 at source 2d2cc5e0d0aff8166c147e1396bbea42645d7a00 passed all ten setup preconditions and the position-one atomic delta, then isolated the lifecycle-anchor failure at cfd2_r01_append_anchor_2 with zero runtime/external counters and exact cleanup. Correction source d93d55c3e6b1e28764d8b86d8ccac233d0826222 aligns the second anchor with current lifecycle revision one, changes no accepted SQL or authority meaning, records AER-0282/revision 250, passes the focused diagnostic/rehearsal/plan packets, all 222 register tests, Ruff lint/format, diff checks and the canonical fast profile with 190 tests.",
+    "protected_evidence_boundaries": "The verifier may inspect only the exact packet allowlist and run only the exact listed read-only commands. Immutable CF-D2 full attempts 001 and 002 plus diagnostic attempt 001 remain preserved. Docker/PostgreSQL runtime, real or product/patient/clinical data, providers, external network, credentials/IAM, server logs/WAL, executable product tools/commands, docs/branding, unrelated untracked files, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Primary task source is exact HEAD d93d55c3e6b1e28764d8b86d8ccac233d0826222 on codex/ariadne-bernie-davida-parallel-seam with an empty index and no tracked changes. Review worktree C:/Users/sarashera/EMR4-worktrees/r188 is exact clean branch codex/cf-d2-anchor-revision-correction-gemini-review at that candidate. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and all unrelated untracked files remain preserved and unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_anchor_revision_correction_veto_predispatch_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled the immutable diagnostic, exact lifecycle arithmetic, deterministic gates and fresh clean review worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["One fresh exact-HEAD Gemini 3.6 Flash/high read-only veto is ready in r188."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

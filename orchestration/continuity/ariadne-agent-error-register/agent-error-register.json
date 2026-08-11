@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 250,
+  "register_revision": 251,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11351,6 +11351,46 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal/restart-unknown-commit-recovery-descendant-contract.json",
           "docs/raisa-context-fabric-durability-restart-unknown-commit-diagnostic-attempt-001-anchor-revision-diagnosis.md",
           "docs/ariadne-agent-error-correction-register-revision-250.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0283",
+      "attempt_id": "cf-d2-anchor-revision-correction-gemini-veto-001",
+      "observed_on": "2026-08-12",
+      "tranche": "raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_cli_print",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "An exact-head read-only veto must execute and report only the literal command allowlist in its packet; a pass decision cannot substitute different tests or widen lint and compilation targets.",
+      "observed_error": "The first fresh CF-D2 anchor-revision verifier returned pass with zero P0-P2 findings and a clean unchanged worktree, but its own receipt reported a different third register test and widened Ruff and py_compile target lists beyond the packet's exact allowed commands. It also claimed those were the nine specified commands. No Docker, database, provider, product or external-network operation occurred.",
+      "detection_method": "Sol compared the immutable schema-constrained receipt's command summary line by line with the exact review packet immediately after completion. The test selector and target lists differed even though every reported command exited zero.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-anchor-revision-correction-gemini-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-anchor-revision-correction-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-251.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.allowed_command_target_drift",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Reject the nominal pass, preserve its receipt, keep the source and runtime closed, construct a replacement packet whose command manifest is separately enumerated and whose terminal review must reproduce each exact command string, then require a genuinely fresh Gemini 3.6 Flash/high project against the newly committed exact HEAD.",
+        "prevention_control": "Before admitting any external veto, mechanically compare the receipt's normalized command list with the packet's literal allowlist; any missing, substituted or widened command rejects the verdict regardless of exit codes or terminal decision.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-restart-unknown-commit-anchor-revision-correction-gemini-review-packet.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-anchor-revision-correction-review-receipt.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-251.md"
         ]
       },
       "status": "corrected"
