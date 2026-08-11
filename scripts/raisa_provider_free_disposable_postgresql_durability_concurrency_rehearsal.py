@@ -9,6 +9,7 @@ import re
 import secrets
 import shutil
 import sys
+import threading
 import time
 from concurrent.futures import Future, ThreadPoolExecutor
 from pathlib import Path
@@ -34,7 +35,7 @@ CONTRACT_SCHEMA_PATH = BASE / "concurrency-rehearsal-contract.schema.json"
 EVIDENCE_SCHEMA_PATH = (
     BASE / "provider-free-durability-concurrency-evidence.schema.json"
 )
-EVIDENCE_PATH = BASE / "provider-free-durability-concurrency-evidence-attempt-002.json"
+EVIDENCE_PATH = BASE / "provider-free-durability-concurrency-evidence-attempt-003.json"
 EXPECTED_CONTRACT_SHA256 = (
     "sha256:96b3fb92d302206eb757f51203044c2aeeb76248a6844422404d13c79b785391"
 )
@@ -57,6 +58,9 @@ RESULT_VOCABULARY = frozenset(
     }
 )
 PARTICIPANT_LABEL = re.compile(r"^emr4_cf_d1_c0[1-6]_[abr]$")
+RESULT_COORDINATE = re.compile(
+    r"^(?:CFD1-C0[1-6]\.(?:leader|contender)|[a-z][a-z0-9_]{0,63})$"
+)
 EXPECTED_CHANGED_RELATIONS = {
     "CFD1-C01": {
         "emr4_context_fabric.context_durability_checkpoint": 1,
@@ -108,6 +112,30 @@ Runner = Callable[[list[str], bytes | None, int, int], serial.parent.ProcessResu
 
 class ConcurrencyFailure(serial.BehaviorFailure):
     """Bounded CF-D1 failure."""
+
+
+def _counting_runner(runner: Runner, counts: dict[str, int]) -> Runner:
+    lock = threading.Lock()
+    marker = re.compile(rb"(?m)^SET application_name TO 'emr4_cf_d1_c0[1-6]_([abr])';$")
+
+    def counted(
+        argv: list[str], stdin: bytes | None, timeout: int, cap: int
+    ) -> serial.parent.ProcessResult:
+        if stdin is not None:
+            matches = marker.findall(stdin)
+            if len(matches) > 1:
+                raise ConcurrencyFailure("counting", "participant_marker_ambiguous")
+            if matches:
+                key = (
+                    "precondition_transactions"
+                    if matches[0] == b"r"
+                    else "participant_transactions"
+                )
+                with lock:
+                    counts[key] += 1
+        return runner(argv, stdin, timeout, cap)
+
+    return counted
 
 
 def _json(path: Path) -> dict[str, Any]:
@@ -456,19 +484,39 @@ def _transport(result: serial.parent.ProcessResult) -> dict[str, Any]:
 def _expect_success(
     result: serial.parent.ProcessResult,
     *,
+    coordinate: str,
     principal: str,
     isolation: str,
     expected_lines: list[str],
 ) -> dict[str, Any]:
+    if not RESULT_COORDINATE.fullmatch(coordinate):
+        raise ConcurrencyFailure("scenario", "diagnostic_coordinate")
     if result.returncode != 0:
         raise ConcurrencyFailure(
             "scenario",
             "unexpected_participant_failure",
-            serial._safe_sqlstate(result),  # noqa: SLF001
+            {
+                "coordinate": coordinate,
+                "principal": principal,
+                "isolation": isolation,
+                "observed_sqlstate": serial._safe_sqlstate(result),  # noqa: SLF001
+            },
         )
     identity = _identity(result, principal, isolation)
-    if _result_lines(result) != expected_lines:
-        raise ConcurrencyFailure("scenario", "result_marker", expected_lines)
+    observed_lines = _result_lines(result)
+    if observed_lines != expected_lines:
+        raise ConcurrencyFailure(
+            "scenario",
+            "result_marker",
+            {
+                "coordinate": coordinate,
+                "principal": principal,
+                "isolation": isolation,
+                "expected_result_lines": expected_lines,
+                "observed_result_lines": observed_lines[:4],
+                "observed_result_count": len(observed_lines),
+            },
+        )
     return {
         "outcome": "commit",
         "sqlstate": None,
@@ -481,17 +529,42 @@ def _expect_success(
 def _expect_failure(
     result: serial.parent.ProcessResult,
     *,
+    coordinate: str,
     principal: str,
     isolation: str,
     sqlstate: str,
     expected_lines: list[str] | None = None,
 ) -> dict[str, Any]:
-    if result.returncode == 0 or serial._safe_sqlstate(result) != sqlstate:  # noqa: SLF001
-        raise ConcurrencyFailure("scenario", "unexpected_sqlstate", sqlstate)
+    if not RESULT_COORDINATE.fullmatch(coordinate):
+        raise ConcurrencyFailure("scenario", "diagnostic_coordinate")
+    observed_sqlstate = serial._safe_sqlstate(result)  # noqa: SLF001
+    if result.returncode == 0 or observed_sqlstate != sqlstate:
+        raise ConcurrencyFailure(
+            "scenario",
+            "unexpected_sqlstate",
+            {
+                "coordinate": coordinate,
+                "principal": principal,
+                "isolation": isolation,
+                "expected_sqlstate": sqlstate,
+                "observed_sqlstate": observed_sqlstate,
+            },
+        )
     identity = _identity(result, principal, isolation)
     lines = _result_lines(result)
     if expected_lines is not None and lines != expected_lines:
-        raise ConcurrencyFailure("scenario", "failure_result_marker")
+        raise ConcurrencyFailure(
+            "scenario",
+            "failure_result_marker",
+            {
+                "coordinate": coordinate,
+                "principal": principal,
+                "isolation": isolation,
+                "expected_result_lines": expected_lines,
+                "observed_result_lines": lines[:4],
+                "observed_result_count": len(lines),
+            },
+        )
     return {
         "outcome": "rollback",
         "sqlstate": sqlstate,
@@ -606,6 +679,7 @@ def _run_precondition(
     )
     outcome = _expect_success(
         result,
+        coordinate=name,
         principal=principal,
         isolation=isolation,
         expected_lines=expected_lines,
@@ -686,12 +760,14 @@ def _run_scenarios(
     )
     leader = _expect_success(
         leader_result,
+        coordinate="CFD1-C01.leader",
         principal="context_lifecycle",
         isolation="serializable",
         expected_lines=[],
     )
     contender = _expect_failure(
         contender_result,
+        coordinate="CFD1-C01.contender",
         principal="context_lifecycle",
         isolation="serializable",
         sqlstate="40001",
@@ -782,12 +858,14 @@ def _run_scenarios(
     )
     leader = _expect_success(
         leader_result,
+        coordinate="CFD1-C02.leader",
         principal="context_producer",
         isolation="read committed",
         expected_lines=["1"],
     )
     contender = _expect_success(
         contender_result,
+        coordinate="CFD1-C02.contender",
         principal="context_producer",
         isolation="read committed",
         expected_lines=["2"],
@@ -839,12 +917,14 @@ def _run_scenarios(
     )
     leader = _expect_success(
         leader_result,
+        coordinate="CFD1-C03.leader",
         principal="context_observer",
         isolation="read committed",
         expected_lines=["PRIMARY"],
     )
     contender = _expect_success(
         contender_result,
+        coordinate="CFD1-C03.contender",
         principal="context_observer",
         isolation="read committed",
         expected_lines=["PRIMARY"],
@@ -898,12 +978,14 @@ def _run_scenarios(
     )
     leader = _expect_success(
         leader_result,
+        coordinate="CFD1-C04.leader",
         principal="context_observer",
         isolation="read committed",
         expected_lines=["PRIMARY"],
     )
     contender = _expect_failure(
         contender_result,
+        coordinate="CFD1-C04.contender",
         principal="context_observer",
         isolation="read committed",
         sqlstate="CF004",
@@ -1009,12 +1091,14 @@ def _run_scenarios(
     )
     leader = _expect_success(
         leader_result,
+        coordinate="CFD1-C05.leader",
         principal="context_coordinator",
         isolation="serializable",
         expected_lines=["RECEIPT_APPLIED"],
     )
     contender = _expect_failure(
         contender_result,
+        coordinate="CFD1-C05.contender",
         principal="context_coordinator",
         isolation="serializable",
         sqlstate="40001",
@@ -1083,6 +1167,7 @@ def _run_scenarios(
     )
     leader = _expect_failure(
         leader_result,
+        coordinate="CFD1-C06.leader",
         principal="context_coordinator",
         isolation="serializable",
         sqlstate="P0001",
@@ -1090,6 +1175,7 @@ def _run_scenarios(
     )
     contender = _expect_success(
         contender_result,
+        coordinate="CFD1-C06.contender",
         principal="context_coordinator",
         isolation="serializable",
         expected_lines=["RECEIPT_APPLIED"],
@@ -1131,10 +1217,34 @@ def _bounded_failure(error: Exception) -> dict[str, Any]:
     if isinstance(error, serial.parent.RehearsalFailure):
         payload: dict[str, Any] = {"stage": error.stage, "code": error.code}
         if isinstance(error.detail, dict):
-            for key in ("scenario_id", "relation", "sqlstate"):
+            for key in (
+                "scenario_id",
+                "coordinate",
+                "principal",
+                "isolation",
+                "relation",
+                "sqlstate",
+                "expected_sqlstate",
+                "observed_sqlstate",
+            ):
                 value = error.detail.get(key)
                 if isinstance(value, str) and len(value) <= 128:
                     payload[key] = value
+                elif (
+                    key == "observed_sqlstate" and key in error.detail and value is None
+                ):
+                    payload[key] = None
+            for key in ("expected_result_lines", "observed_result_lines"):
+                value = error.detail.get(key)
+                if (
+                    isinstance(value, list)
+                    and len(value) <= 4
+                    and all(item in RESULT_VOCABULARY for item in value)
+                ):
+                    payload[key] = value
+            count = error.detail.get("observed_result_count")
+            if type(count) is int and 0 <= count <= 65536:
+                payload["observed_result_count"] = count
         elif isinstance(error.detail, str) and len(error.detail) <= 128:
             payload["detail"] = error.detail
         return payload
@@ -1160,6 +1270,10 @@ def run_rehearsal(
     parent_evidence: dict[str, Any] = {}
     scenarios: list[dict[str, Any]] = []
     preconditions: list[dict[str, Any]] = []
+    transaction_counts = {
+        "participant_transactions": 0,
+        "precondition_transactions": 0,
+    }
     failure: Exception | None = None
     result = "rehearsal_failed"
     docker = container_id = image_id = name = nonce = ""
@@ -1175,6 +1289,7 @@ def run_rehearsal(
         runner = serial.parent._with_total_deadline(  # noqa: SLF001
             runner, started + execution_seconds
         )
+        runner = _counting_runner(runner, transaction_counts)
         prerequisite_sql = serial.parent.render_prerequisite_sql(prerequisite)
         parent_evidence = {
             "concurrency_contract_sha256": _file_digest(CONTRACT_PATH),
@@ -1449,7 +1564,7 @@ def run_rehearsal(
             "passed": sum(1 for row in scenarios if row.get("passed")),
         },
         "operation_counts": {
-            "participant_transactions": 12,
+            **transaction_counts,
             "participant_retries": 0,
             "docker_containers": 1 if container_id else 0,
             "provider_calls": 0,

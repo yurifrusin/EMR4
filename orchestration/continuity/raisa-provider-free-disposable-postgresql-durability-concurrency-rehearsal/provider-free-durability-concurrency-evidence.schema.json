@@ -104,7 +104,8 @@
         "external_network_operations"
       ],
       "properties": {
-        "participant_transactions": { "const": 12 },
+        "participant_transactions": { "type": "integer", "minimum": 0, "maximum": 12 },
+        "precondition_transactions": { "type": "integer", "minimum": 0, "maximum": 11 },
         "participant_retries": { "const": 0 },
         "docker_containers": { "type": "integer", "minimum": 0, "maximum": 1 },
         "provider_calls": { "const": 0 },
@@ -132,8 +133,34 @@
         "code": { "type": "string", "pattern": "^[A-Za-z0-9_]{1,128}$" },
         "detail": { "type": "string", "maxLength": 128 },
         "scenario_id": { "type": "string", "pattern": "^CFD1-C0[1-6]$" },
+        "coordinate": {
+          "type": "string",
+          "pattern": "^(?:CFD1-C0[1-6]\\.(?:leader|contender)|[a-z][a-z0-9_]{0,63})$"
+        },
+        "principal": {
+          "enum": ["context_lifecycle", "context_producer", "context_observer", "context_coordinator"]
+        },
+        "isolation": { "enum": ["read committed", "serializable"] },
         "relation": { "type": "string", "maxLength": 128 },
-        "sqlstate": { "type": "string", "pattern": "^[0-9A-Z]{5}$" }
+        "sqlstate": { "type": "string", "pattern": "^[0-9A-Z]{5}$" },
+        "expected_sqlstate": { "type": "string", "pattern": "^[0-9A-Z]{5}$" },
+        "observed_sqlstate": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9A-Z]{5}$" }
+          ]
+        },
+        "expected_result_lines": {
+          "type": "array",
+          "maxItems": 4,
+          "items": { "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAY", "1", "2"] }
+        },
+        "observed_result_lines": {
+          "type": "array",
+          "maxItems": 4,
+          "items": { "enum": ["PRIMARY", "CONFLICT", "RECEIPT_APPLIED", "RECEIPT_REPLAY", "1", "2"] }
+        },
+        "observed_result_count": { "type": "integer", "minimum": 0, "maximum": 65536 }
       }
     },
     "image": {
@@ -500,7 +527,12 @@
             }
           },
           "operation_counts": {
-            "properties": { "docker_containers": { "const": 1 } }
+            "required": ["precondition_transactions"],
+            "properties": {
+              "participant_transactions": { "const": 12 },
+              "precondition_transactions": { "const": 11 },
+              "docker_containers": { "const": 1 }
+            }
           },
           "cleanup": {
             "required": ["status", "container_id", "removed", "absence_verified"],

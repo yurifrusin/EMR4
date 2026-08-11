@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_cf_d1_attempt_002_failure_evidence_closed_marker_telemetry_actual_counters_and_aer_0271_by_explicit_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Attempt 002 admitted the exact schema/fixtures, failed closed before completing CFD1-C01 with result_marker, and verified exact-ID cleanup. Its evidence lacked an actionable coordinate/closed marker comparison and used a static pass-ceiling participant count. The correction adds only closed failure telemetry, thread-safe started-transaction counting, optional historical failure compatibility and immutable attempt-003 naming. Exactly 213 AER, 26 CF-D1 implementation and 14 CF-D1 plan tests pass, 253 total, with Ruff, py_compile and diff checks. No SQL, scenario, fixture, role, transaction, wait-state, containment or claim logic changed.",
+    "current_authority_allocation": "GPT Sol owns the bounded attempt-002 diagnosis, telemetry recovery, exact-path commit and mandatory fresh-review dispatch. No worker or verifier has runtime, cleanup, acceptance, integration or protected-ref authority. A new Gemini 3.6 Flash/high exact-HEAD veto is required after this commit and before attempt 003.",
+    "git_refs_and_worktree": "Immediately before this receipt, task HEAD was exact 73cd360c68e835d8abe86846810198ee5cc9f6b7 and origin task remained c72d712bcccbfb225d3c71ad3b633c33bec56d29. Local/origin master and handoff/current were all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index was clean; six tracked recovery files and five owned untracked attempt-002/AER files were present in addition to the preserved original 494 untracked files. Staging will use exact paths only and exclude docs/branding.",
+    "live_handover_current_baton": "AGENTS.md was read completely and the full five-source rehydration passed. The live baton accepts AES-C5 at Continuity 242 / Compass 224 and authorises CF-D1 under Yuri's standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "This commit is limited to the attempt-002 predispatch pair/evidence/analysis, closed evidence-schema and harness telemetry, deterministic tests, AER-0271/revision-237 and pattern report. All original 494 untracked files, including five docs/branding paths, remain preserved and unstaged. No provider, real/product/patient data, operational database/source, watcher/listener, application mutation, command, deployment, production, release, Pages or protected-ref authority is opened."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

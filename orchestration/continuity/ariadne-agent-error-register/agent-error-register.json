@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 236,
+  "register_revision": 237,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10837,6 +10837,50 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0271",
+      "attempt_id": "raisa-context-fabric-durability-concurrency-attempt-002",
+      "observed_on": "2026-08-11",
+      "tranche": "raisa-context-fabric-durability-concurrency-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-disposable-postgresql-harness",
+      "model": "deterministic-python",
+      "reasoning_level": "deterministic",
+      "transport": "local_disposable_postgresql_16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A rejected concurrency attempt must identify the exact closed scenario coordinate, expected and observed allowlisted markers, and actual started participant/precondition transaction counts without retaining raw PostgreSQL output.",
+      "observed_error": "Attempt 002 reached the accepted schema and fixtures, then failed closed before completing CFD1-C01 with code result_marker. Its minimized failure omitted the leader/replay coordinate and expected/observed closed markers, while operation_counts reported the static twelve-transaction pass ceiling instead of the started count. Exact container cleanup passed and no provider, product or external operation occurred.",
+      "detection_method": "The immutable attempt-002 evidence records result_marker, zero completed scenarios, verified exact-ID cleanup and no closed marker detail. Source inspection showed _expect_success raised only the expected list and _bounded_failure discarded list detail; operation_counts was a literal twelve independent of execution progress.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence-attempt-002.json",
+        "docs/raisa-context-fabric-durability-concurrency-attempt-002-marker-telemetry-analysis.md",
+        "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-237.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.concurrency_result_marker_failure_telemetry_not_actionable",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Add exact closed coordinate, principal, isolation, expected/observed marker and SQLSTATE diagnostics; count each started participant and precondition transaction through the fixed runner; preserve attempt 002 and use a distinct attempt-003 evidence target after fresh review.",
+        "prevention_control": "Before a disposable concurrency run, inject a unit failure at every result/SQLSTATE admission boundary and prove the evidence reports an actionable closed coordinate plus actual started operation counts while excluding raw stdout, stderr, query and server text.",
+        "evidence_paths": [
+          "docs/raisa-context-fabric-durability-concurrency-attempt-002-marker-telemetry-analysis.md",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-237.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

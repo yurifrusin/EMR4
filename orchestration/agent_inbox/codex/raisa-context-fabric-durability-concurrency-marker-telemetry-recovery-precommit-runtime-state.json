@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_cf_d1_attempt_002_failure_evidence_closed_marker_telemetry_actual_counters_and_aer_0271_by_explicit_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and the full five-source rehydration passed. The live baton accepts AES-C5 at Continuity 242 / Compass 224 and authorises CF-D1 under Yuri's standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol owns the bounded attempt-002 diagnosis, telemetry recovery, exact-path commit and mandatory fresh-review dispatch. No worker or verifier has runtime, cleanup, acceptance, integration or protected-ref authority. A new Gemini 3.6 Flash/high exact-HEAD veto is required after this commit and before attempt 003.",
+    "active_plan_and_acceptance": "Attempt 002 admitted the exact schema/fixtures, failed closed before completing CFD1-C01 with result_marker, and verified exact-ID cleanup. Its evidence lacked an actionable coordinate/closed marker comparison and used a static pass-ceiling participant count. The correction adds only closed failure telemetry, thread-safe started-transaction counting, optional historical failure compatibility and immutable attempt-003 naming. Exactly 213 AER, 26 CF-D1 implementation and 14 CF-D1 plan tests pass, 253 total, with Ruff, py_compile and diff checks. No SQL, scenario, fixture, role, transaction, wait-state, containment or claim logic changed.",
+    "protected_evidence_boundaries": "This commit is limited to the attempt-002 predispatch pair/evidence/analysis, closed evidence-schema and harness telemetry, deterministic tests, AER-0271/revision-237 and pattern report. All original 494 untracked files, including five docs/branding paths, remain preserved and unstaged. No provider, real/product/patient data, operational database/source, watcher/listener, application mutation, command, deployment, production, release, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Immediately before this receipt, task HEAD was exact 73cd360c68e835d8abe86846810198ee5cc9f6b7 and origin task remained c72d712bcccbfb225d3c71ad3b633c33bec56d29. Local/origin master and handoff/current were all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index was clean; six tracked recovery files and five owned untracked attempt-002/AER files were present in addition to the preserved original 494 untracked files. Staging will use exact paths only and exclude docs/branding."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_durability_concurrency_marker_telemetry_recovery_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol preserved attempt 002 and implemented only closed diagnostic and accounting recovery."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A new project opens only after the recovery source is committed."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is opened."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

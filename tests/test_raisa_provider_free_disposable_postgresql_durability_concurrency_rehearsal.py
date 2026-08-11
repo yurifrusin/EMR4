@@ -204,6 +204,7 @@ def _passing_evidence() -> dict[str, Any]:
         "scenario_reconciliation": {"expected": 6, "observed": 6, "passed": 6},
         "operation_counts": {
             "participant_transactions": 12,
+            "precondition_transactions": 11,
             "participant_retries": 0,
             "docker_containers": 1,
             "provider_calls": 0,
@@ -286,6 +287,25 @@ def test_participant_renderer_rejects_unfrozen_coordinates() -> None:
         )
 
 
+def test_transaction_counter_records_started_pair_and_precondition_calls() -> None:
+    counts = {"participant_transactions": 0, "precondition_transactions": 0}
+
+    def base_runner(
+        _argv: list[str], _stdin: bytes | None, _timeout: int, _cap: int
+    ) -> rehearsal.serial.parent.ProcessResult:
+        return rehearsal.serial.parent.ProcessResult(0, b"", b"")
+
+    runner = rehearsal._counting_runner(base_runner, counts)  # noqa: SLF001
+    runner([], b"SET application_name TO 'emr4_cf_d1_c01_a';\n", 1, 1)
+    runner([], b"SET application_name TO 'emr4_cf_d1_c01_b';\n", 1, 1)
+    runner([], b"SET application_name TO 'emr4_cf_d1_c01_r';\n", 1, 1)
+    runner([], b"SELECT 1;\n", 1, 1)
+    assert counts == {
+        "participant_transactions": 2,
+        "precondition_transactions": 1,
+    }
+
+
 def test_wait_observation_accepts_only_the_exact_classified_state(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -355,6 +375,7 @@ def test_result_release_is_closed_and_transport_is_digest_only() -> None:
     )
     released = rehearsal._expect_success(  # noqa: SLF001
         result,
+        coordinate="CFD1-C03.leader",
         principal="context_observer",
         isolation="read committed",
         expected_lines=["PRIMARY"],
@@ -484,7 +505,7 @@ def test_source_and_evidence_surface_keep_forbidden_authorities_absent() -> None
     ):
         assert forbidden not in source
     assert rehearsal.EVIDENCE_PATH.name == (
-        "provider-free-durability-concurrency-evidence-attempt-002.json"
+        "provider-free-durability-concurrency-evidence-attempt-003.json"
     )
 
 
@@ -502,5 +523,47 @@ def test_direct_script_entrypoint_imports_before_rejecting_caller_input() -> Non
         "This fixed-path harness accepts no arguments."
     )
     assert not (
-        BASE / "provider-free-durability-concurrency-evidence-attempt-002.json"
+        BASE / "provider-free-durability-concurrency-evidence-attempt-003.json"
     ).exists()
+
+
+def test_result_mismatch_failure_releases_only_closed_diagnostic_fields() -> None:
+    identity = json.dumps(
+        {
+            "expected_principal": "context_lifecycle",
+            "session_user": "context_lifecycle",
+            "current_user": "context_lifecycle",
+            "isolation": "serializable",
+            "read_only": False,
+        }
+    ).encode("utf-8")
+    result = rehearsal.serial.parent.ProcessResult(
+        0,
+        identity + b"\n1\nraw prose that must not leave\n",
+        b"raw server detail",
+    )
+    with pytest.raises(rehearsal.ConcurrencyFailure) as raised:
+        rehearsal._expect_success(  # noqa: SLF001
+            result,
+            coordinate="CFD1-C01.leader",
+            principal="context_lifecycle",
+            isolation="serializable",
+            expected_lines=[],
+        )
+    bounded = rehearsal._bounded_failure(raised.value)  # noqa: SLF001
+    assert bounded == {
+        "stage": "scenario",
+        "code": "result_marker",
+        "coordinate": "CFD1-C01.leader",
+        "principal": "context_lifecycle",
+        "isolation": "serializable",
+        "expected_result_lines": [],
+        "observed_result_lines": ["1"],
+        "observed_result_count": 1,
+    }
+    failure = _passing_evidence()
+    failure["result"] = "rehearsal_failed"
+    failure["environment"]["failure"] = bounded
+    _validator().validate(failure)
+    assert "raw prose" not in json.dumps(failure)
+    assert "raw server" not in json.dumps(failure)
