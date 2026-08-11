@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 235,
+  "register_revision": 236,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-11",
@@ -10771,7 +10771,9 @@
         "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
         "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
         "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
-        "docs/ariadne-agent-error-correction-register-revision-234.md"
+        "docs/ariadne-agent-error-correction-register-revision-234.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-launcher-recovery-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-236.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
@@ -10779,17 +10781,18 @@
       "recurrence_signature": "orchestrator.python_package_script_path_invocation",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
+        "status": "corrected_fresh_attempt",
         "action": "Install the repository-root path before the parent package import, add a direct child-process entrypoint test, reserve a distinct attempt-002 evidence path and require a fresh exact-HEAD review before runtime.",
         "prevention_control": "Every file-path-dispatched Python harness that imports repository packages must copy the accepted root-bootstrap pattern and pass a child-process direct-entrypoint probe before implementation review and runtime dispatch.",
         "evidence_paths": [
           "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
           "scripts/raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
-          "docs/ariadne-agent-error-correction-register-revision-234.md"
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-launcher-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-236.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0270",
@@ -10813,7 +10816,9 @@
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-implementation-gemini-review-packet.md",
         "orchestration/agent_inbox/codex/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-receipt.json",
         "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
-        "docs/ariadne-agent-error-correction-register-revision-235.md"
+        "docs/ariadne-agent-error-correction-register-revision-235.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-launcher-recovery-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-236.md"
       ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
@@ -10821,16 +10826,17 @@
       "recurrence_signature": "verifier.executable_entrypoint_import_mismatch_missed",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
+        "status": "corrected_fresh_attempt",
         "action": "Reject the first review for runtime admission and require a fresh clean exact-HEAD Gemini 3.6 Flash/high review whose command allowlist includes the direct child-process entrypoint test.",
         "prevention_control": "Implementation review packets for executable Python harnesses must require an entrypoint-level test, not compilation alone, and must compare package bootstrap order with the accepted parent before returning pass.",
         "evidence_paths": [
           "docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md",
           "tests/test_raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal.py",
-          "docs/ariadne-agent-error-correction-register-revision-235.md"
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-concurrency-launcher-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-236.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     }
   ]
 }

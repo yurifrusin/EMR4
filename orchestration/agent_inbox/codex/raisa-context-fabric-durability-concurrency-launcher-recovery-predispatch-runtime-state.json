@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_genuinely_fresh_gemini_36_flash_high_read_only_exact_head_veto_of_the_cf_d1_launcher_recovery_before_attempt_002",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and the full five-source rehydration passed. The live baton accepts AES-C5 at Continuity 242 / Compass 224 and authorises CF-D1 under Yuri's standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol retains recovery, runtime, acceptance, integration and Git authority. One genuinely fresh Antigravity project using Gemini 3.6 Flash/high receives only a read-only exact-HEAD recovery veto. The first implementation review is rejected for runtime admission. No verifier may edit, run Docker/PostgreSQL, contact a provider, self-accept, push or move refs.",
+    "active_plan_and_acceptance": "Exact recovery source d007188c574d5c61a270a5911b4d16d3fc019d98 adds the parent-style import bootstrap, direct child-process entrypoint proof, immutable attempt-002 target and AER-0269/AER-0270 with no contract drift. The 251-test packet, Ruff, py_compile and diff checks pass. A fresh pass is mandatory before attempt 002.",
+    "protected_evidence_boundaries": "The verifier may inspect only packet-allowlisted paths and run only listed Git, pytest, Ruff and py_compile commands. The pytest entrypoint probe supplies a forbidden argument and cannot enter runtime. Docker/PostgreSQL, providers, product routes, credentials, network, commands, operational data/source, docs/branding, untracked files, deployment, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Task source is exact clean recovery commit d007188c574d5c61a270a5911b4d16d3fc019d98. Origin task remains c72d712bcccbfb225d3c71ad3b633c33bec56d29. Protected local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. A new dedicated non-protected worktree and branch will be created at that exact source and must remain clean and unchanged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_durability_concurrency_launcher_recovery_predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol bound the exact recovery commit and fresh review packet."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A genuinely new project is allocated for the recovery veto only."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is opened."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

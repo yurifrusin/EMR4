@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_fresh_cf_d1_launcher_recovery_review_and_aer_0269_0270_closure_by_explicit_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and the full five-source rehydration passed. The live baton accepts AES-C5 at Continuity 242 / Compass 224 and authorises CF-D1 under Yuri's standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol owns recovery acceptance, exact-path commit and attempt-002 runtime. A genuinely fresh Gemini 3.6 Flash/high project completed its read-only exact-HEAD recovery veto and has no remaining runtime, cleanup, acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "Fresh recovery review passed exact clean source d007188c574d5c61a270a5911b4d16d3fc019d98 with zero P0-P2 findings, exactly 213 AER tests, 24 CF-D1 implementation tests and 14 CF-D1 plan tests, and zero Docker/database/provider/product/external operations. Revision 236 closes AER-0269/AER-0270. Attempt 001 remains rejected; attempt 002 is eligible only after this provenance commit and a fresh passed predispatch receipt.",
+    "protected_evidence_boundaries": "This commit is limited to the recovery packet, predispatch pair, fresh review receipt, revision-236 closure, register/pattern report and matching register test. All original 494 untracked files, including five docs/branding paths, remain preserved and unstaged. No provider, real/product/patient data, operational database/source, watcher/listener, application mutation, command, deployment, production, release, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Immediately before this receipt, task HEAD was exact recovery source d007188c574d5c61a270a5911b4d16d3fc019d98 and origin task remained c72d712bcccbfb225d3c71ad3b633c33bec56d29. Local/origin master and handoff/current were all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The review worktree and branch were removed cleanly. The index was clean; three tracked AER files and five owned untracked recovery-review files were present in addition to the preserved original 494 untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_durability_concurrency_launcher_recovery_review_acceptance_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reconciled the fresh review, exact test counts and clean worktree before closure."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The fresh recovery review passed and its clean worktree was removed."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is opened."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
