@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 247,
+  "register_revision": 248,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11259,17 +11259,19 @@
       "recurrence_signature": "orchestrator.pre_review_format_gate_omitted",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
+        "status": "corrected_fresh_attempt",
         "action": "Reject the contradictory pass, preserve its receipt, apply Ruff formatting only to the named recovery planning and paired baton-consistency tests, rerun every packet command plus the baton gate locally, commit the exact mechanical change and incident evidence, and require a genuinely fresh exact-head Gemini 3.6 Flash/high veto before implementation.",
         "prevention_control": "Generate verifier allowed-command blocks from one executable local gate list, persist each exit code before dispatch, and make the launcher reject any external pass receipt whose required command outcomes are nonzero.",
         "evidence_paths": [
           "tests/test_raisa_context_fabric_durability_restart_unknown_commit_recovery_descendant_plan.py",
           "tests/test_current_baton_consistency.py",
           "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant-planning-review-receipt.json",
-          "docs/ariadne-agent-error-correction-register-revision-247.md"
+          "docs/ariadne-agent-error-correction-register-revision-247.md",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant-planning-format-recovery-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-248.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     }
   ]
 }

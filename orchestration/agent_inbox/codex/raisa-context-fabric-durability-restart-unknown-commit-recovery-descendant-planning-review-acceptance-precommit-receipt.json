@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_fresh_corrected_cf_d2_recovery_planning_veto_acceptance_and_aer_0280_closure_before_implementation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Corrected source 76dafe7afa643296b94e9e6c78542fc51b51e8da passed a genuinely fresh exact-HEAD Gemini 3.6 Flash/high veto with zero P0-P2 findings, 60 tests and all seven allowed commands at exit zero. The worktree remained clean, and all Docker/database/provider/product/network counters were zero. AER-0280 is corrected at register revision 248 with 280 incidents and none open.",
+    "current_authority_allocation": "GPT Sol accepts and commits the independently reviewed planning packet. Gemini 3.6 Flash/high supplied one fresh read-only veto only; it receives no implementation, self-acceptance, runtime, integration or protected-ref authority. Sol next owns the provider-free coordinate instrumentation and no-crash diagnostic implementation.",
+    "git_refs_and_worktree": "Task HEAD is 76dafe7afa643296b94e9e6c78542fc51b51e8da. The corrected review worktree is clean and unchanged at that exact HEAD. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 2edfbf0c5990335947b40a370b676aad25aba023. All 494 pre-existing untracked files including five docs/branding paths remain preserved and excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely and now records the fresh formatter-corrected planning veto pass while CF-D1 at Continuity 243 / Compass 225 remains the last durability success and CF-D2 runtime remains unproved.",
+    "protected_evidence_boundaries": "The accepted planning review changes no SQL, database authority, durability, classifier, scenario or claim. Implementation remains provider-free and runtime-closed until its separate deterministic and independent veto gates. Protected evidence, docs/branding, unrelated untracked files, operational data/source, provider, credential, command, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

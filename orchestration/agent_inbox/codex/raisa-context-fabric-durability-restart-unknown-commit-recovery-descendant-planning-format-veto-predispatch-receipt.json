@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_genuinely_fresh_gemini_36_flash_high_exact_head_read_only_veto_of_the_formatter_corrected_cf_d2_recovery_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact corrected source 76dafe7afa643296b94e9e6c78542fc51b51e8da contains only Ruff formatting of the two named tests plus immutable rejected-review/AER-0280 evidence and handover reconciliation. Before dispatch, the exact local gate recorded pytest exit 0 with 60 tests, Ruff lint exit 0, Ruff format exit 0 over all three changed test files and git diff --check exit 0. The register validates 280 incidents at revision 247. No plan, contract, SQL, durability or claim semantic changed.",
+    "current_authority_allocation": "GPT Sol retains all planning, implementation, runtime, acceptance and Git authority. Gemini 3.6 Flash/high in a genuinely fresh Antigravity project receives only an exact-HEAD read-only veto over the corrected non-protected worktree. It receives no edit, implementation, self-acceptance, Docker/database runtime, data, integration, protected-ref, deployment or release authority and no silent model fallback.",
+    "git_refs_and_worktree": "Task source HEAD is exactly 76dafe7afa643296b94e9e6c78542fc51b51e8da. Fresh clean worktree C:/Users/sarashera/EMR4-worktrees/cf-d2-recovery-planning-format-gemini-review on codex/cf-d2-recovery-planning-format-gemini-review passed exact-head preflight. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 2edfbf0c5990335947b40a370b676aad25aba023. All 494 pre-existing untracked files including five docs/branding paths remain preserved and outside the review worktree.",
+    "live_handover_current_baton": "AGENTS.md was read completely. It preserves CF-D1 at Continuity 243 / Compass 225, the non-passing CF-D2 attempts, Yuri's selected recovery descendant and the rejected contradictory first planning veto. Implementation remains closed until this genuinely fresh corrected-source veto passes.",
+    "protected_evidence_boundaries": "The reviewer may inspect only the exact allowlisted planning, incident and immutable CF-D2 failure files and run only the listed read-only commands. It may not list/search the repository, inspect protected holdouts, historical Diary/PHI, docs/branding or unrelated untracked files, start Docker/PostgreSQL, run an evidence generator, contact providers/products/databases/credentials/cloud/network destinations, or edit/create/delete/stage/commit/push. All operational, real-data, command, deployment, production, release, Pages and protected-ref surfaces remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
