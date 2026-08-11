@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_distinct_zero_call_aes_c4_provider_free_ledger_and_source_bound_evidence_before_exact_head_independent_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete gate plan, AES-C4 plan/threat model/envelope/schema and AES-C3 acceptance were reread. The generated provider-free result proves exact C1 broker admission, immutable manifest binding, deterministic four-field release, a consumed zero-call source-bound ledger and complete cleanup with zero provider calls.",
+    "current_authority_allocation": "GPT Sol owns provider-free evidence packaging and the later AES-C4 occupied sequence. Gemini 3.6 Flash/high owns only the next fresh exact-head veto. Yuri completed human authentication. No worker, verifier or provider inference is active during this evidence commit.",
+    "git_refs_and_worktree": "The task branch is at committed source b06ade2efc72cc6af5e11f72a56426f4319573bc, a descendant of required 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed AES-C3 source c45ff191af420b801e9917a7efc69c17aeb5698b. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The original 494 untracked paths remain exact at SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162 with five under docs/branding; only the two generated provider-free evidence paths and this explicit receipt pair are additional.",
+    "live_handover_current_baton": "AGENTS.md binds AES-C3 as accepted at Continuity 240 / Compass 222 and AES-C4 as the active frozen Sydney Vertex proof. The provider-free harness source is committed at b06ade2efc72cc6af5e11f72a56426f4319573bc and its distinct zero-call evidence now passes.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, patient/clinical/product/practice/licensed/external-corpus data and consumed provider ledgers remain closed. No credential, provider inference, product/database/source/filesystem/tool/command/deployment/production/release/Pages/protected-ref operation occurred. docs/branding and every unrelated untracked path remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

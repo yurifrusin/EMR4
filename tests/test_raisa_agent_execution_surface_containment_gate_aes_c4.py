@@ -13,6 +13,9 @@ SOURCE_HEAD = "a" * 40
 PREFLIGHT = (
     aes_c4.BASE / "initial-auth-readiness-evidence.json"
 )
+PROVIDER_FREE_EVIDENCE = aes_c4.BASE / "provider-free-dry-run-evidence.json"
+PROVIDER_FREE_LEDGER = aes_c4.BASE / "provider-free-dry-run-ledger.json"
+PROVIDER_FREE_SOURCE_HEAD = "b06ade2efc72cc6af5e11f72a56426f4319573bc"
 
 
 class FakeLiveAdapter:
@@ -104,6 +107,24 @@ def test_provider_free_cleanup_has_no_reusable_capability(tmp_path):
         "model_reasoning_retained": False,
         "patient_or_product_data_retained": False,
     }
+
+
+def test_committed_provider_free_evidence_is_zero_call_source_bound_and_consumed():
+    evidence = json.loads(PROVIDER_FREE_EVIDENCE.read_text(encoding="utf-8"))
+    ledger = json.loads(PROVIDER_FREE_LEDGER.read_text(encoding="utf-8"))
+
+    assert evidence["source_head"] == PROVIDER_FREE_SOURCE_HEAD
+    assert ledger["source_head"] == PROVIDER_FREE_SOURCE_HEAD
+    assert evidence["result"].endswith("provider_free_dry_run_pass")
+    assert evidence["operation_counters"]["provider_calls"] == 0
+    assert evidence["proofreader"]["release_performed"] is True
+    assert evidence["provider_ledger"] == ledger
+    assert ledger["maximum_provider_calls"] == 0
+    assert ledger["provider_call_allowances_consumed"] == 0
+    assert ledger["actual_provider_calls"] == 0
+    assert ledger["status"] == "consumed"
+    assert evidence["cleanup"]["further_generation_calls"] is False
+    assert evidence["contains_sensitive_values"] is False
 
 
 def test_fake_live_path_consumes_one_call_and_cost_reservation(tmp_path):
