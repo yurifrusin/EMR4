@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "new_session",
+  "planned_action": "rehydrate_and_freeze_narrowest_aes_c1_provider_free_admission_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted Agent Execution Surface programme plan, AES-C0 plan, architecture, threat deltas, closeout, Sol acceptance, Yuri mailbox summary, exact contract/schema/authored-synthetic packet and provider-free evidence were read. AES-C1 is limited to exact AES-C0 manifest/grant/lease intersection, immutable-generation, current-authority, default-denial, cumulative-budget and revocation admission scenarios with authored-synthetic unmounted evidence only.",
+    "current_authority_allocation": "GPT Sol remains Conductor, architecture and acceptance owner. DeepSeek V4 Flash/high through Claude Code --bare is the preferred bounded implementation/blue worker and Gemini 3.6 Flash/high through a fresh Antigravity project is the preferred independent veto reviewer. AES-C1 is a security-control admission tranche, so deterministic gates precede any risk-triggered external review; no worker has integration, baton or protected-ref authority.",
+    "git_refs_and_worktree": "After git fetch, HEAD and codex/ariadne-bernie-davida-parallel-seam are exact 648c8ec9805af63729264ea9c22fd695f062a741, whose parent is accepted source 01d355f42df5981341196f3aa0caec2cccce7a2d. Local/origin master and local/origin handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state was clean before this receipt; 494 pre-existing untracked files, including five docs/branding paths and the AES-C0 pre-push receipt/state pair, were counted and will be preserved. Explicit-path staging only is mandatory.",
+    "live_handover_current_baton": "AGENTS.md was read completely. AES-C0 is accepted as raisa_agent_execution_surface_containment_gate_aes_c0_architecture_pass at Continuity 237 / Compass 219. AES-C1 provider-free admission rehearsal is the next dependency-satisfied planned tranche under standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI and every protected fixture/support/authoring/manifest/seal/receipt/per-case surface remain unopened and unenumerated. AES-C1 grants no runtime broker, real adapter, provider call, patient/clinical/product data, database/source/watcher access, credential, IAM, metadata, network, executable tool, command/write, deployment, production, release, Pages or protected-ref movement. docs/branding/ and every unrelated untracked file remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

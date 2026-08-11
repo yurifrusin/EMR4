@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "new_session",
+  "planned_action": "rehydrate_and_freeze_narrowest_aes_c1_provider_free_admission_plan",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. AES-C0 is accepted as raisa_agent_execution_surface_containment_gate_aes_c0_architecture_pass at Continuity 237 / Compass 219. AES-C1 provider-free admission rehearsal is the next dependency-satisfied planned tranche under standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol remains Conductor, architecture and acceptance owner. DeepSeek V4 Flash/high through Claude Code --bare is the preferred bounded implementation/blue worker and Gemini 3.6 Flash/high through a fresh Antigravity project is the preferred independent veto reviewer. AES-C1 is a security-control admission tranche, so deterministic gates precede any risk-triggered external review; no worker has integration, baton or protected-ref authority.",
+    "active_plan_and_acceptance": "The accepted Agent Execution Surface programme plan, AES-C0 plan, architecture, threat deltas, closeout, Sol acceptance, Yuri mailbox summary, exact contract/schema/authored-synthetic packet and provider-free evidence were read. AES-C1 is limited to exact AES-C0 manifest/grant/lease intersection, immutable-generation, current-authority, default-denial, cumulative-budget and revocation admission scenarios with authored-synthetic unmounted evidence only.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI and every protected fixture/support/authoring/manifest/seal/receipt/per-case surface remain unopened and unenumerated. AES-C1 grants no runtime broker, real adapter, provider call, patient/clinical/product data, database/source/watcher access, credential, IAM, metadata, network, executable tool, command/write, deployment, production, release, Pages or protected-ref movement. docs/branding/ and every unrelated untracked file remain preserved and excluded.",
+    "git_refs_and_worktree": "After git fetch, HEAD and codex/ariadne-bernie-davida-parallel-seam are exact 648c8ec9805af63729264ea9c22fd695f062a741, whose parent is accepted source 01d355f42df5981341196f3aa0caec2cccce7a2d. Local/origin master and local/origin handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state was clean before this receipt; 494 pre-existing untracked files, including five docs/branding paths and the AES-C0 pre-push receipt/state pair, were counted and will be preserved. Explicit-path staging only is mandatory."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the five-source read and exact ref/worktree verification in this fresh task window."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native worker is active or selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external verifier has been dispatched; eligibility follows the frozen plan and deterministic gate."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation or blue worker has been dispatched; allocation follows the frozen plan."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains an unselected real-TTY fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude/Fable/Opus transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

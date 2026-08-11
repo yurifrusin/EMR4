@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_aes_c1_authored_synthetic_unmounted_admission_boundary",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "AES-C1 must instantiate the exact accepted AES-C0 contract without modifying its meaning. The narrow tranche will use a pure provider-free in-memory admission evaluator and authored-synthetic scenarios to prove manifest/grant/lease intersection, immutable/current generation binding, fresh current authority, default denial, independent prospective cumulative budgets and generation-wide revocation. No real broker or adapter is permitted.",
+    "current_authority_allocation": "GPT Sol owns the AES-C1 boundary, plan, acceptance and recovery. DeepSeek V4 Flash/high through Claude Code --bare may own a bounded implementation/defensive test artifact, and Gemini 3.6 Flash/high through a fresh Antigravity project may own the independent red/veto review after deterministic gates. No worker receives integration or protected-ref authority.",
+    "git_refs_and_worktree": "Fresh fetch and verification bound task HEAD 648c8ec9805af63729264ea9c22fd695f062a741 on codex/ariadne-bernie-davida-parallel-seam, descendant of 01d355f42df5981341196f3aa0caec2cccce7a2d. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Before new-session evidence creation the tracked tree was clean with exactly 494 preserved untracked files; only exact AES-C1 receipt paths have since been added.",
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219 and the live baton names AES-C1 provider-free admission as the next safe planned tranche. Standing uninterrupted-development authority requires the narrowest fail-closed descendant plan and execution without a ceremonial pause.",
+    "protected_evidence_boundaries": "Only exact allowlisted AES-C0, API Spine, authority-policy and newly authored AES-C1 paths are in scope. Protected fixtures and historical Diary PHI remain unopened and unenumerated. Patient/clinical/product data, licensed content, runtime/provider/credential/IAM/metadata/network/database/source/watcher/tool/command/deployment/production/release/Pages/protected-ref surfaces remain closed. All 494 pre-existing untracked files remain preserved, including docs/branding/ and the AES-C0 pre-push pair."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

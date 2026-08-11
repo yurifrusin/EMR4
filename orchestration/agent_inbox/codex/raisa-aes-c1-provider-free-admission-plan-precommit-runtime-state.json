@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_frozen_aes_c1_plan_and_security_delta_to_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AES-C0 remains accepted at Continuity 237 / Compass 219 and AES-C1 provider-free admission remains the exact next planned tranche under standing uninterrupted-development authority.",
+    "current_authority_allocation": "GPT Sol authored and owns the AES-C1 boundary. The committed plan allocates bounded blue implementation/defensive testing to DeepSeek V4 Flash/high through Claude Code --bare and a post-deterministic fresh red/veto to Gemini 3.6 Flash/high through Antigravity. Neither receives acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The frozen plan binds exact AES-C0 artifact hashes, a pure unmounted admission function, one canonical manifest digest rule, exact 45 authored-synthetic scenarios, closed evidence, dual review, recovery and stop conditions. The plan and threat delta pass Git whitespace; the existing AES-C0/API Spine focused packet passes 45 tests.",
+    "protected_evidence_boundaries": "The plan preserves every closed AES-C0 surface and explicitly forbids protected evidence, historical Diary PHI, patient/clinical/product/licensed data, runtime, broker, adapter, provider, credential, IAM, metadata, network, database/source/watcher, executable tool, command/write, deployment, production, release, Pages and protected refs. All 494 pre-existing untracked files remain preserved and excluded with path-set SHA-256 f9381b3e31389b512ed04a2eb2c9eec4c5a0a77bf6a673613a746bbc5dd99162.",
+    "git_refs_and_worktree": "HEAD remains 648c8ec9805af63729264ea9c22fd695f062a741 on codex/ariadne-bernie-davida-parallel-seam. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; only exact new AES-C1 plan, threat-delta and receipt paths will be staged explicitly, never docs/branding/ or unrelated untracked files."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the plan, threat delta, focused plan checks and explicit-scope review."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native worker is active or selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Red/veto dispatch remains gated on a complete exact candidate and deterministic pass."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Blue implementation dispatch follows this frozen-plan commit and a distinct pre-dispatch receipt."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code remains an unselected real-TTY fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude/Fable/Opus transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
