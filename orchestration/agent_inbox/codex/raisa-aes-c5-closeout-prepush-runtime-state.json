@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_codex_ariadne_bernie_davida_parallel_seam_with_the_accepted_aes_c5_closeout_and_no_protected_ref_or_pages_movement",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and the committed live baton now accepts AES-C5 at Continuity 242 / Compass 224, records the finite AES-C0 through AES-C5 sequence complete, and states that no AES-C6 is planned or authorized.",
+    "current_authority_allocation": "GPT Sol may publish the accepted bounded task branch. DeepSeek and Gemini are complete and idle with no Git, integration, protected-ref, deployment, production or release authority. Protected integration remains closed and single-track.",
+    "active_plan_and_acceptance": "Commit 864c8db26baa596b47df553bb871c0b2670b2319 binds the one-read/one-call AES-C5 pass, consumed ledgers, exact cleanup, closeout, Sol acceptance, Yuri mailbox report and Continuity 242 / Compass 224. Final gates pass: 75 AES-C5 focused/continuity tests, the wider serial governance packet, canonical fast 190, CI-static 184, Ruff, maintained target-3.11 source compilation, Diary JavaScript, leakage lint and Git whitespace. No provider retry occurred.",
+    "protected_evidence_boundaries": "Publication is limited to the task branch. Protected holdouts, historical Diary/PHI, docs/branding and all unrelated untracked files remain excluded. No real-person, patient/clinical or operational-practice data, continuing source/provider access, credential/IAM change, tool, command/write, reusable runtime, deployment, production, release, Pages or protected-ref movement is authorized.",
+    "git_refs_and_worktree": "Immediately before this receipt, an explicit fetch verified task HEAD 864c8db26baa596b47df553bb871c0b2670b2319 with required 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed source 4e5d96ada19c51432fa4db46c76e23c952147c52 as ancestors. Local/origin master and local/origin handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task is cdb9ff3df66666ac569c289bc1734c119683c9a3. The tracked tree and index are clean; the original 494 untracked files including five docs/branding paths are preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "aes_c5_final_task_branch_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol has accepted and committed the exact closeout and will push only the task branch."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Completed worker is idle."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Accepted exact-head veto is complete; no further external review is required for mechanical closeout publication."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
