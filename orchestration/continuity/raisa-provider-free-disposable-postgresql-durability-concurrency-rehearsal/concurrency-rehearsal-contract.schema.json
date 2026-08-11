@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-disposable-postgresql-durability-concurrency-rehearsal.v1.json",
+  "title": "Raisa Context Fabric disposable PostgreSQL concurrency rehearsal contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline_head",
+    "target_result",
+    "evidence_label",
+    "accepted_serial_source_head",
+    "parent_bindings",
+    "runtime_profile",
+    "synchronization_profile",
+    "fixture_authority",
+    "scenario_order",
+    "scenarios",
+    "category_coverage",
+    "evidence_contract",
+    "claim_boundary",
+    "closed_surfaces"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.raisa-context-fabric-disposable-postgresql-durability-concurrency-rehearsal.v1"
+    },
+    "status": {"const": "frozen_provider_free_planning_runtime_closed"},
+    "planning_baseline_head": {"$ref": "#/$defs/git_sha"},
+    "target_result": {
+      "const": "raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_pass"
+    },
+    "evidence_label": {
+      "const": "provider_free_disposable_postgresql_authored_synthetic_concurrency"
+    },
+    "accepted_serial_source_head": {"$ref": "#/$defs/git_sha"},
+    "parent_bindings": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/parent_binding"}
+    },
+    "runtime_profile": {"$ref": "#/$defs/runtime_profile"},
+    "synchronization_profile": {"$ref": "#/$defs/synchronization_profile"},
+    "fixture_authority": {"$ref": "#/$defs/fixture_authority"},
+    "scenario_order": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "CFD1-C01"},
+        {"const": "CFD1-C02"},
+        {"const": "CFD1-C03"},
+        {"const": "CFD1-C04"},
+        {"const": "CFD1-C05"},
+        {"const": "CFD1-C06"}
+      ],
+      "items": false,
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/scenario"}
+    },
+    "category_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["REGISTRATION", "PRODUCER", "ADMISSION", "COORDINATOR", "total"],
+      "properties": {
+        "REGISTRATION": {"const": 1},
+        "PRODUCER": {"const": 1},
+        "ADMISSION": {"const": 2},
+        "COORDINATOR": {"const": 2},
+        "total": {"const": 6}
+      }
+    },
+    "evidence_contract": {"$ref": "#/$defs/evidence_contract"},
+    "claim_boundary": {"$ref": "#/$defs/claim_boundary"},
+    "closed_surfaces": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 96}
+    }
+  },
+  "$defs": {
+    "git_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "closed_string": {"type": "string", "pattern": "^[a-z0-9_]+$", "minLength": 1, "maxLength": 128},
+    "closed_string_array": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/closed_string"}
+    },
+    "parent_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "sha256"],
+      "properties": {
+        "id": {"$ref": "#/$defs/closed_string"},
+        "path": {
+          "type": "string",
+          "pattern": "^(docs|orchestration|scripts)/[A-Za-z0-9_./-]+$",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "runtime_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "postgresql_major",
+        "image",
+        "pull_policy",
+        "network_mode",
+        "published_ports",
+        "mounts",
+        "storage",
+        "database_count",
+        "container_count",
+        "max_concurrent_participants",
+        "max_total_connections",
+        "connection_pool",
+        "shell",
+        "caller_selected_inputs",
+        "cleanup"
+      ],
+      "properties": {
+        "postgresql_major": {"const": 16},
+        "image": {"const": "postgres:16-bookworm"},
+        "pull_policy": {"const": "never"},
+        "network_mode": {"const": "none"},
+        "published_ports": {"const": 0},
+        "mounts": {"const": 0},
+        "storage": {"const": "container_local_tmpfs"},
+        "database_count": {"const": 1},
+        "container_count": {"const": 1},
+        "max_concurrent_participants": {"const": 2},
+        "max_total_connections": {"const": 4},
+        "connection_pool": {"const": false},
+        "shell": {"const": false},
+        "caller_selected_inputs": {"const": false},
+        "cleanup": {"const": "exact_captured_container_id_after_ownership_reverification"}
+      }
+    },
+    "synchronization_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "leader_hold",
+        "leader_hold_milliseconds",
+        "leader_required_wait_event_type",
+        "leader_required_wait_event",
+        "contender_required_wait_event_type",
+        "poll_interval_milliseconds",
+        "overlap_observation_ceiling_milliseconds",
+        "statement_timeout_milliseconds",
+        "lock_timeout_milliseconds",
+        "idle_in_transaction_timeout_milliseconds",
+        "participant_retry_count",
+        "raw_activity_fields_retained"
+      ],
+      "properties": {
+        "leader_hold": {"const": "fixed_pg_sleep_after_target_function_before_transaction_end"},
+        "leader_hold_milliseconds": {"type": "integer", "minimum": 1000, "maximum": 2000},
+        "leader_required_wait_event_type": {"const": "Timeout"},
+        "leader_required_wait_event": {"const": "PgSleep"},
+        "contender_required_wait_event_type": {"const": "Lock"},
+        "poll_interval_milliseconds": {"type": "integer", "minimum": 10, "maximum": 50},
+        "overlap_observation_ceiling_milliseconds": {"type": "integer", "minimum": 500, "maximum": 1250},
+        "statement_timeout_milliseconds": {"type": "integer", "minimum": 5000, "maximum": 10000},
+        "lock_timeout_milliseconds": {"type": "integer", "minimum": 3000, "maximum": 6000},
+        "idle_in_transaction_timeout_milliseconds": {"type": "integer", "minimum": 5000, "maximum": 10000},
+        "participant_retry_count": {"const": 0},
+        "raw_activity_fields_retained": {"type": "array", "maxItems": 0}
+      }
+    },
+    "fixture_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["data_class", "practice_scope", "identity_method", "principals", "fabric_direct_grant_changes", "forbidden"],
+      "properties": {
+        "data_class": {"const": "repository_authored_opaque_synthetic_only"},
+        "practice_scope": {"const": "one_exact_alpha_practice_with_unbound_and_beta_rows_never_visible_or_mutable"},
+        "identity_method": {"const": "fresh_connection_set_session_authorization_once_before_begin"},
+        "principals": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "context_lifecycle"},
+            {"const": "context_producer"},
+            {"const": "context_observer"},
+            {"const": "context_coordinator"}
+          ],
+          "items": false,
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "fabric_direct_grant_changes": {"type": "array", "maxItems": 0},
+        "forbidden": {"$ref": "#/$defs/closed_string_array"}
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "category",
+        "principal",
+        "isolation",
+        "shared_coordinate",
+        "leader_action",
+        "contender_action",
+        "leader_outcome",
+        "contender_outcome",
+        "contender_sqlstate",
+        "post_race_action",
+        "post_race_outcome",
+        "readback",
+        "forbidden_effects"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^CFD1-C0[1-6]$"},
+        "category": {"enum": ["REGISTRATION", "PRODUCER", "ADMISSION", "COORDINATOR"]},
+        "principal": {"enum": ["context_lifecycle", "context_producer", "context_observer", "context_coordinator"]},
+        "isolation": {"enum": ["read committed", "serializable"]},
+        "shared_coordinate": {"$ref": "#/$defs/closed_string"},
+        "leader_action": {"$ref": "#/$defs/closed_string"},
+        "contender_action": {"$ref": "#/$defs/closed_string"},
+        "leader_outcome": {"enum": ["COMMIT_PASS", "ROLLBACK_INJECTED"]},
+        "contender_outcome": {"enum": ["COMMIT_PASS", "COMMIT_IDEMPOTENT_REPLAY", "ROLLBACK_SERIALIZATION", "ROLLBACK_EXPECTED_SQLSTATE"]},
+        "contender_sqlstate": {"type": ["string", "null"], "pattern": "^[0-9A-Z]{5}$"},
+        "post_race_action": {"$ref": "#/$defs/closed_string"},
+        "post_race_outcome": {"enum": ["NOT_APPLICABLE", "COMMIT_IDEMPOTENT_REPLAY", "COMMIT_ONE_STABLE_CONFLICT"]},
+        "readback": {"$ref": "#/$defs/closed_string_array"},
+        "forbidden_effects": {"$ref": "#/$defs/closed_string_array"}
+      }
+    },
+    "evidence_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_exact_sqlstate",
+        "record_stable_reason_only",
+        "record_closed_wait_classes",
+        "record_before_after_relation_counts",
+        "record_allowlisted_row_digests",
+        "record_session_user_and_current_user",
+        "record_exact_cleanup_absence",
+        "forbidden"
+      ],
+      "properties": {
+        "record_exact_sqlstate": {"const": true},
+        "record_stable_reason_only": {"const": true},
+        "record_closed_wait_classes": {"const": true},
+        "record_before_after_relation_counts": {"const": true},
+        "record_allowlisted_row_digests": {"const": true},
+        "record_session_user_and_current_user": {"const": true},
+        "record_exact_cleanup_absence": {"const": true},
+        "forbidden": {"$ref": "#/$defs/closed_string_array"}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proves", "does_not_prove"],
+      "properties": {
+        "proves": {"$ref": "#/$defs/closed_string_array"},
+        "does_not_prove": {"$ref": "#/$defs/closed_string_array"}
+      }
+    }
+  }
+}

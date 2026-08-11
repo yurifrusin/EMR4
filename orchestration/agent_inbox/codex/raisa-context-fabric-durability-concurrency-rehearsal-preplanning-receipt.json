@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_the_narrowest_provider_free_disposable_postgresql_context_fabric_concurrency_rehearsal_without_restart_or_unknown_commit_scope",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted Context Fabric direction and independently reviewed attempt-048 closeout prove exactly twenty serial PostgreSQL 16 entry-point, trigger, RLS, idempotency and outer-rollback scenarios at source f3383dc4099b4ee590014bea62dddb146f5d2a16 with exact cleanup. AES-C0 through AES-C5 supply the accepted containment baseline but no continuing source or provider authority. The new descendant is limited to simultaneous authored-synthetic database sessions and must not claim restart, crash, unknown commit, rotation, retention, purge, performance, operational persistence, application wiring or reusable runtime.",
+    "current_authority_allocation": "GPT Sol owns the material fail-closed plan, tightly coupled disposable PostgreSQL implementation, serial orchestration, recovery, acceptance and explicit-path task-branch publication. DeepSeek is not economical for the shared stateful database sequence. A fresh Gemini 3.6 Flash/high Antigravity project may receive only a later exact-HEAD read-only veto packet after deterministic gates pass and receives no implementation, self-acceptance, integration, protected-ref, data, runtime, deployment or release authority.",
+    "git_refs_and_worktree": "Immediately before this receipt, task HEAD and local/origin task were exactly c72d712bcccbfb225d3c71ad3b633c33bec56d29 on codex/ariadne-bernie-davida-parallel-seam. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed AES-C5 source 4e5d96ada19c51432fa4db46c76e23c952147c52 are ancestors. Local/origin master and local/origin handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index were clean; the original 494 untracked files, including five docs/branding paths, were present and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Its live baton accepts AES-C5 at Continuity 242 / Compass 224, records the finite AES-C0 through AES-C5 sequence complete, preserves the Practice Context Fabric as the active cross-Bureau direction, and lists concurrency, restart and unknown-commit behavior as separate unproved durability surfaces. Yuri has now selected the recommended first post-AES programme descendant: provider-free Context Fabric concurrency rehearsal under the standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, docs/branding and every unrelated untracked file remain excluded. The tranche permits only fixed repository-authored synthetic fixtures and one newly owned networkless disposable local PostgreSQL 16 container. No provider call, external retrieval, real-person/patient/clinical/product-derived data, operational database or source, watcher/listener, credential/IAM change, application/API/Diary mutation, product command/write, deployment, production, release, Pages or protected-ref movement is authorized."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

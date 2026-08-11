@@ -1,0 +1,335 @@
+{
+  "schema_version": "emr4.raisa-context-fabric-disposable-postgresql-durability-concurrency-rehearsal.v1",
+  "status": "frozen_provider_free_planning_runtime_closed",
+  "planning_baseline_head": "c72d712bcccbfb225d3c71ad3b633c33bec56d29",
+  "target_result": "raisa_provider_free_disposable_postgresql_durability_concurrency_rehearsal_pass",
+  "evidence_label": "provider_free_disposable_postgresql_authored_synthetic_concurrency",
+  "accepted_serial_source_head": "f3383dc4099b4ee590014bea62dddb146f5d2a16",
+  "parent_bindings": [
+    {
+      "id": "accepted_serial_pass_evidence",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json",
+      "sha256": "sha256:26c6dec802e46dec055c1c42aecc97df9942180014fc9fa410f96e1305798200"
+    },
+    {
+      "id": "current_serial_contract",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+      "sha256": "sha256:273856de0d66dc58169c1f5fb2e933ae0171ddd95ccb1e1b37de3a77ca27a220"
+    },
+    {
+      "id": "current_serial_evidence_schema",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+      "sha256": "sha256:d946d8aa9bc763892a9f724ffc8de1413519fc1e172b1bf5a55f57335b93d3fd"
+    },
+    {
+      "id": "current_serial_harness",
+      "path": "scripts/raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal.py",
+      "sha256": "sha256:83ee8865e984603851b46469ef32d4367bdf7a07a489aa6e76f441da5c01cb02"
+    },
+    {
+      "id": "accepted_serial_closeout",
+      "path": "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md",
+      "sha256": "sha256:86192f5587d9eb37f427f3196d96381bf57d094221e28a967ee68037ff4075fa"
+    },
+    {
+      "id": "accepted_serial_sol_acceptance",
+      "path": "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md",
+      "sha256": "sha256:1afeb63d4958d927f1dbf5920002d0a3ffcbf7e9bc1828c15048add56131d682"
+    },
+    {
+      "id": "inert_sql",
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+      "sha256": "sha256:dc475f71005a2b5a37de829e7f5e21be425dc970091e5b5567099cf2449142d7"
+    },
+    {
+      "id": "render_manifest",
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/render-manifest.json",
+      "sha256": "sha256:2013d4e7d13d10808c2e872ed8e689edc1639f7e97b1f96fa3559826130a7271"
+    }
+  ],
+  "runtime_profile": {
+    "postgresql_major": 16,
+    "image": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "network_mode": "none",
+    "published_ports": 0,
+    "mounts": 0,
+    "storage": "container_local_tmpfs",
+    "database_count": 1,
+    "container_count": 1,
+    "max_concurrent_participants": 2,
+    "max_total_connections": 4,
+    "connection_pool": false,
+    "shell": false,
+    "caller_selected_inputs": false,
+    "cleanup": "exact_captured_container_id_after_ownership_reverification"
+  },
+  "synchronization_profile": {
+    "leader_hold": "fixed_pg_sleep_after_target_function_before_transaction_end",
+    "leader_hold_milliseconds": 1500,
+    "leader_required_wait_event_type": "Timeout",
+    "leader_required_wait_event": "PgSleep",
+    "contender_required_wait_event_type": "Lock",
+    "poll_interval_milliseconds": 25,
+    "overlap_observation_ceiling_milliseconds": 1000,
+    "statement_timeout_milliseconds": 8000,
+    "lock_timeout_milliseconds": 5000,
+    "idle_in_transaction_timeout_milliseconds": 8000,
+    "participant_retry_count": 0,
+    "raw_activity_fields_retained": []
+  },
+  "fixture_authority": {
+    "data_class": "repository_authored_opaque_synthetic_only",
+    "practice_scope": "one_exact_alpha_practice_with_unbound_and_beta_rows_never_visible_or_mutable",
+    "identity_method": "fresh_connection_set_session_authorization_once_before_begin",
+    "principals": [
+      "context_lifecycle",
+      "context_producer",
+      "context_observer",
+      "context_coordinator"
+    ],
+    "fabric_direct_grant_changes": [],
+    "forbidden": [
+      "superuser_as_participant",
+      "set_role_after_begin",
+      "role_membership",
+      "role_inheritance",
+      "bypassrls",
+      "fabric_direct_dml",
+      "trigger_function_execute",
+      "operational_credential",
+      "product_or_patient_value"
+    ]
+  },
+  "scenario_order": [
+    "CFD1-C01",
+    "CFD1-C02",
+    "CFD1-C03",
+    "CFD1-C04",
+    "CFD1-C05",
+    "CFD1-C06"
+  ],
+  "scenarios": [
+    {
+      "id": "CFD1-C01",
+      "category": "REGISTRATION",
+      "principal": "context_lifecycle",
+      "isolation": "serializable",
+      "shared_coordinate": "same_generation_registration_and_registry_barrier",
+      "leader_action": "register_exact_generation_then_hold_then_commit",
+      "contender_action": "register_same_generation_while_leader_holds",
+      "leader_outcome": "COMMIT_PASS",
+      "contender_outcome": "ROLLBACK_SERIALIZATION",
+      "contender_sqlstate": "40001",
+      "post_race_action": "fresh_exact_registration_replay",
+      "post_race_outcome": "COMMIT_IDEMPOTENT_REPLAY",
+      "readback": [
+        "one_generation",
+        "one_checkpoint",
+        "one_baseline_anchor",
+        "one_initial_key_interval",
+        "two_current_frames",
+        "one_stream_head_at_zero",
+        "one_effective_registry_increment"
+      ],
+      "forbidden_effects": [
+        "duplicate_generation_member",
+        "partial_loser_member",
+        "second_registry_increment_on_replay"
+      ]
+    },
+    {
+      "id": "CFD1-C02",
+      "category": "PRODUCER",
+      "principal": "context_producer",
+      "isolation": "read committed",
+      "shared_coordinate": "same_stream_head_distinct_commands_and_appointments",
+      "leader_action": "project_position_one_then_hold_then_commit",
+      "contender_action": "project_distinct_position_two_while_leader_holds",
+      "leader_outcome": "COMMIT_PASS",
+      "contender_outcome": "COMMIT_PASS",
+      "contender_sqlstate": null,
+      "post_race_action": "none",
+      "post_race_outcome": "NOT_APPLICABLE",
+      "readback": [
+        "two_completed_claims",
+        "two_audits",
+        "two_committed_events",
+        "two_immutable_aliases",
+        "two_payload_free_outbox_rows",
+        "contiguous_positions_one_and_two"
+      ],
+      "forbidden_effects": [
+        "lost_stream_head_update",
+        "duplicate_position",
+        "partial_application_or_fabric_member"
+      ]
+    },
+    {
+      "id": "CFD1-C03",
+      "category": "ADMISSION",
+      "principal": "context_observer",
+      "isolation": "read committed",
+      "shared_coordinate": "same_generation_position_and_exact_packet",
+      "leader_action": "insert_primary_then_hold_then_commit",
+      "contender_action": "submit_same_packet_while_primary_uncommitted",
+      "leader_outcome": "COMMIT_PASS",
+      "contender_outcome": "COMMIT_IDEMPOTENT_REPLAY",
+      "contender_sqlstate": null,
+      "post_race_action": "none",
+      "post_race_outcome": "NOT_APPLICABLE",
+      "readback": [
+        "one_primary",
+        "zero_conflicts",
+        "same_admission_digest_returned",
+        "zero_coordinator_effect"
+      ],
+      "forbidden_effects": [
+        "second_primary",
+        "timestamp_as_semantic_identity",
+        "coordinator_advance"
+      ]
+    },
+    {
+      "id": "CFD1-C04",
+      "category": "ADMISSION",
+      "principal": "context_observer",
+      "isolation": "read committed",
+      "shared_coordinate": "same_generation_position_divergent_packet",
+      "leader_action": "insert_frozen_primary_then_hold_then_commit",
+      "contender_action": "submit_frozen_divergent_packet_before_primary_visible",
+      "leader_outcome": "COMMIT_PASS",
+      "contender_outcome": "ROLLBACK_EXPECTED_SQLSTATE",
+      "contender_sqlstate": "CF004",
+      "post_race_action": "fresh_divergent_submission_then_exact_conflict_replay",
+      "post_race_outcome": "COMMIT_ONE_STABLE_CONFLICT",
+      "readback": [
+        "one_immutable_primary",
+        "one_stable_conflict",
+        "two_total_rows_for_locator",
+        "zero_coordinator_advance"
+      ],
+      "forbidden_effects": [
+        "primary_overwrite",
+        "third_admission_row",
+        "guessed_winner_during_invisible_race"
+      ]
+    },
+    {
+      "id": "CFD1-C05",
+      "category": "COORDINATOR",
+      "principal": "context_coordinator",
+      "isolation": "serializable",
+      "shared_coordinate": "same_primary_admission_locator",
+      "leader_action": "apply_transition_then_hold_then_commit",
+      "contender_action": "apply_same_transition_while_leader_holds",
+      "leader_outcome": "COMMIT_PASS",
+      "contender_outcome": "ROLLBACK_SERIALIZATION",
+      "contender_sqlstate": "40001",
+      "post_race_action": "fresh_exact_coordinator_replay",
+      "post_race_outcome": "COMMIT_IDEMPOTENT_REPLAY",
+      "readback": [
+        "one_receipt",
+        "one_checkpoint_advance",
+        "exact_watermarks",
+        "matching_frames_retired_once",
+        "one_coalesced_obligation",
+        "one_lifecycle_row",
+        "one_minimal_audit"
+      ],
+      "forbidden_effects": [
+        "duplicate_transition_effect",
+        "source_access_required_for_replay",
+        "second_receipt"
+      ]
+    },
+    {
+      "id": "CFD1-C06",
+      "category": "COORDINATOR",
+      "principal": "context_coordinator",
+      "isolation": "serializable",
+      "shared_coordinate": "same_primary_admission_locator_with_leader_rollback",
+      "leader_action": "apply_transition_then_hold_then_raise_fixed_p0001",
+      "contender_action": "apply_same_transition_while_leader_holds_then_commit_after_rollback",
+      "leader_outcome": "ROLLBACK_INJECTED",
+      "contender_outcome": "COMMIT_PASS",
+      "contender_sqlstate": null,
+      "post_race_action": "fresh_exact_coordinator_replay",
+      "post_race_outcome": "COMMIT_IDEMPOTENT_REPLAY",
+      "readback": [
+        "one_contender_owned_receipt",
+        "one_checkpoint_advance",
+        "exact_watermarks",
+        "matching_frames_retired_once",
+        "one_coalesced_obligation",
+        "one_lifecycle_row",
+        "one_minimal_audit"
+      ],
+      "forbidden_effects": [
+        "leader_partial_effect",
+        "duplicate_transition_effect",
+        "skipped_checkpoint"
+      ]
+    }
+  ],
+  "category_coverage": {
+    "REGISTRATION": 1,
+    "PRODUCER": 1,
+    "ADMISSION": 2,
+    "COORDINATOR": 2,
+    "total": 6
+  },
+  "evidence_contract": {
+    "record_exact_sqlstate": true,
+    "record_stable_reason_only": true,
+    "record_closed_wait_classes": true,
+    "record_before_after_relation_counts": true,
+    "record_allowlisted_row_digests": true,
+    "record_session_user_and_current_user": true,
+    "record_exact_cleanup_absence": true,
+    "forbidden": [
+      "raw_sql_or_query_text",
+      "raw_server_log_or_error_text",
+      "backend_pid_or_lock_key",
+      "database_url_or_credential",
+      "patient_product_or_real_person_value",
+      "raw_prompt_or_model_output",
+      "global_docker_enumeration"
+    ]
+  },
+  "claim_boundary": {
+    "proves": [
+      "six_exact_two_session_concurrency_outcomes",
+      "deterministic_leader_and_observed_lock_overlap",
+      "monotone_winner_loser_and_replay_accounting",
+      "selected_outer_rollback_with_waiting_contender",
+      "least_privilege_session_identity_and_exact_cleanup"
+    ],
+    "does_not_prove": [
+      "server_crash_or_restart",
+      "unknown_commit_recovery",
+      "arbitrary_deadlock_freedom",
+      "automatic_retry_policy",
+      "more_than_two_participants_or_load",
+      "performance_capacity_or_operations",
+      "key_rotation_retention_or_purge",
+      "alembic_or_application_runtime_wiring",
+      "operational_source_or_persistence",
+      "patient_clinical_product_or_provider_safety"
+    ]
+  },
+  "closed_surfaces": [
+    "app",
+    "alembic",
+    "api_spine_change",
+    "diary_ui",
+    "outbox_feed_watcher_listener",
+    "operational_database_or_persistence",
+    "patient_product_protected_data",
+    "provider_model_external_retrieval",
+    "tool_command_or_product_write_authority",
+    "deployment_production_release_pages",
+    "protected_refs",
+    "docs_branding"
+  ]
+}

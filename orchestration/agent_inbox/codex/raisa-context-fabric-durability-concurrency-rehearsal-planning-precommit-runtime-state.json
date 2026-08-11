@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_frozen_cf_d1_provider_free_concurrency_planning_packet_by_explicit_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The live baton accepts AES-C5 at Continuity 242 / Compass 224, records no AES-C6, keeps the Practice Context Fabric active and identifies concurrency as an unproved durability surface. Yuri selected CF-D1 and directed uninterrupted continuation.",
+    "current_authority_allocation": "GPT Sol owns the material planning and explicit-path task-branch commit. No implementation worker or native subagent is assigned because the database sequence is tightly coupled. Gemini 3.6 Flash/high receives only a later fresh read-only exact-HEAD veto after this commit and has no implementation, acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The frozen CF-D1 packet binds the accepted serial attempt-048 evidence and exact current parent artifacts, specifies six deterministic two-session races, requires explicit PostgreSQL wait-state overlap, and keeps restart/unknown-commit separate. Fourteen focused plan/schema/hostile checks, Ruff check, Ruff format and git diff --check pass; no Docker or provider operation occurred.",
+    "protected_evidence_boundaries": "The commit is limited to the exact CF-D1 planning docs, contract/schema/test and Ariadne receipt pairs. Protected holdouts, historical Diary/PHI, docs/branding and all 494 original untracked files remain unstaged. No provider, real/product/patient data, operational database, application mutation, command, deployment, Pages or protected-ref authority is opened.",
+    "git_refs_and_worktree": "Immediately before this receipt, HEAD and local/origin task were c72d712bcccbfb225d3c71ad3b633c33bec56d29. Local/origin master and handoff/current were all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index were clean; eight owned CF-D1 untracked files plus the preserved original 494 untracked files were present, with five docs/branding paths."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_durability_concurrency_planning_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the deterministic planning gate and will commit only exact CF-D1 paths."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh exact-HEAD review begins only after the planning commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek lease is opened for this tightly coupled tranche."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
