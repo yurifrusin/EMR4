@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_verified_provider_free_read_only_status_confirm_physical_representability_review_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact-file plan freezes eleven source hashes and six physical/API sources. All three domains are representable_with_additive_change, while overall_verdict remains implementation_not_admitted. Forty-six of 46 hostile mutations, 14 focused review tests, the 232-test register suite and the final 385-test review/register/lineage/continuity/Compass/API/baton packet pass. AER-0292 records and corrects the prior broad filename-metadata scope breach before this plan and evidence.",
+    "current_authority_allocation": "GPT Sol directly performed the tightly coupled exact-file review. No subagent or external worker was used. No provider was called, and the user's Google authentication and Bernie impersonation configuration were not exercised.",
+    "git_refs_and_worktree": "Task HEAD and origin task remain 3af1af85cc3e6ee646f856a1ce6f306495741894. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Four bounded tracked paths are modified and eleven bounded review/register paths are among 527 preserved untracked paths, including five docs/branding paths.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published HEAD 3af1af85cc3e6ee646f856a1ce6f306495741894. Continuity 260 / Compass 242 authorizes only the provider-free read-only status-confirm physical representability review next.",
+    "protected_evidence_boundaries": "AER-0292 discards the prohibited path-name output and no protected content was opened. Corrected review commands named exact allowlisted non-protected files only. No application/model/migration/service edit or import, route/database/SQL/real-lock execution, physical design, migration/backfill, provider, credential/browser authorization, product/patient data, watcher/event, product command, deployment, release, Pages or protected-ref action is authorized or occurred. docs/branding and unrelated untracked files remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_the_provider_free_read_only_status_confirm_physical_representability_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted rehearsal plan, closeout and Sol acceptance were read completely. Source a1629f2441e2bdb350d00c6d6016e94123ff0d8d proves 24 pure in-memory schedules and 88 hostile rejections while leaving implementation_authorized false. The next review may freeze and inspect only exact non-protected model, migration and service sources needed to assess appointment_state_version, private completed-receipt correlation and the ordered practice-appointment-idempotency boundary.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled read-only review under Yuri's standing uninterrupted-development authority and the API Steward boundary. No subagent or external worker is selected. No provider is eligible, and the user's Google authentication and Bernie impersonation configuration remain unused.",
+    "git_refs_and_worktree": "Task HEAD and origin task align at 3af1af85cc3e6ee646f856a1ce6f306495741894. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and rehearsal source a1629f2441e2bdb350d00c6d6016e94123ff0d8d are ancestors. Tracked state is clean and exactly 516 untracked paths, including five docs/branding paths, precede this review state.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published HEAD 3af1af85cc3e6ee646f856a1ce6f306495741894. Continuity 260 / Compass 242 names the provider-free read-only status-confirm physical representability review as the exact next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "Sections 5 and 6 were restored completely. Protected holdouts and historical Diary material remain closed. AER-0291 exact-file control applies: no application/model/migration/service content may be read until an exact path allowlist is frozen from read-only Git metadata. The review cannot edit/import/execute application sources, choose a physical design/migration/backfill, open database/SQL/real locks, alter a route, use provider/credential/browser authorization, access product/patient data, add watcher/event or command authority, deploy, release, rebuild Pages or move protected refs. docs/branding and unrelated untracked paths remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

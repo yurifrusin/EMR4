@@ -1,0 +1,55 @@
+{
+  "schema_version": "raisa.status_confirm_physical_representability_review_evidence.v1",
+  "result": "raisa_provider_free_read_only_status_confirm_physical_representability_review_pass",
+  "source_head": "3af1af85cc3e6ee646f856a1ce6f306495741894",
+  "evidence_label": "provider_free_exact_file_read_only_source_review",
+  "overall_verdict": "implementation_not_admitted",
+  "source_hashes": {
+    "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-closeout.md": "2b379cbaefeac83a79a3776f78c58b48a94b4695de3356d56a57318a5ab594e7",
+    "orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md": "5aa5cfb2bc7690904fbebcb8ff053b176bb9cb0bea12650a766b8391278a48f5",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json": "6f2c970a4ab9234e72d6ffb08b2aa9b8738b779b94cee1885dbf262bfb5306ce",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal/rehearsal-packet.json": "18c5bf4f6b6c22ab310e1571f794598a4317ff32f9103445b9d23edc5d112918",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal/provider-free-rehearsal-evidence.json": "503b8ea4fcd92fa8043ff5caf8fd8440e038470530a90fde9509d7ff126d1e06",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6",
+    "app/models/appointments.py": "af00f7318da3f19732843c75b56721db89a3fa0c94b6e0feeb12a614850c4952",
+    "app/services/appointment_idempotency.py": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410",
+    "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py": "a77be7e159614a579eb2dec2d3d8e5b401f1c1d1722f5f740367ae74e6a8a59a",
+    "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py": "da6493f60b8a8d39186c273db0b9615758b3927cc913d1117d12df0003f245fd",
+    "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+  },
+  "domain_verdicts": {
+    "locked_state_version": "representable_with_additive_change",
+    "private_completed_receipt": "representable_with_additive_change",
+    "ordered_lock_boundary": "representable_with_additive_change"
+  },
+  "physical_observations": {
+    "appointment_state_version_absent": true,
+    "appointment_created_at_not_used_as_version": true,
+    "receipt_existing_field_count": 13,
+    "receipt_additive_gap_count": 4,
+    "audit_correlation_primitives_present": true,
+    "idempotency_insert_precedes_only_row_lock": true,
+    "idempotency_lock_precedes_conflict_and_replay": true,
+    "response_json_and_canonical_hash_stored": true,
+    "additive_migration_primitive_present": true,
+    "status_idempotency_parameter_present": true,
+    "public_status_and_result_schemas_closed": true
+  },
+  "hostile_mutations": {
+    "attempted": 46,
+    "rejected": 46
+  },
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "application_or_migration_edited": false,
+    "application_or_database_imported": false,
+    "route_or_database_executed": false,
+    "physical_design_selected": false,
+    "migration_or_backfill_selected": false,
+    "provider_or_credential_used": false,
+    "product_or_patient_data_used": false,
+    "command_or_deployment_executed": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_unmounted_status_confirm_physical_design_architecture"
+}

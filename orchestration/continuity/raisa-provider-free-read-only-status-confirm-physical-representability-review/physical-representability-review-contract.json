@@ -1,0 +1,210 @@
+{
+  "schema_version": "raisa.status_confirm_physical_representability_review.v1",
+  "result": "raisa_provider_free_read_only_status_confirm_physical_representability_review_pass",
+  "source_head": "3af1af85cc3e6ee646f856a1ce6f306495741894",
+  "evidence_label": "provider_free_exact_file_read_only_source_review",
+  "overall_verdict": "implementation_not_admitted",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-closeout.md",
+      "sha256": "2b379cbaefeac83a79a3776f78c58b48a94b4695de3356d56a57318a5ab594e7"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md",
+      "sha256": "5aa5cfb2bc7690904fbebcb8ff053b176bb9cb0bea12650a766b8391278a48f5"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json",
+      "sha256": "6f2c970a4ab9234e72d6ffb08b2aa9b8738b779b94cee1885dbf262bfb5306ce"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal/rehearsal-packet.json",
+      "sha256": "18c5bf4f6b6c22ab310e1571f794598a4317ff32f9103445b9d23edc5d112918"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal/provider-free-rehearsal-evidence.json",
+      "sha256": "503b8ea4fcd92fa8043ff5caf8fd8440e038470530a90fde9509d7ff126d1e06"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+    },
+    {
+      "path": "app/models/appointments.py",
+      "sha256": "af00f7318da3f19732843c75b56721db89a3fa0c94b6e0feeb12a614850c4952"
+    },
+    {
+      "path": "app/services/appointment_idempotency.py",
+      "sha256": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410"
+    },
+    {
+      "path": "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py",
+      "sha256": "a77be7e159614a579eb2dec2d3d8e5b401f1c1d1722f5f740367ae74e6a8a59a"
+    },
+    {
+      "path": "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py",
+      "sha256": "da6493f60b8a8d39186c273db0b9615758b3927cc913d1117d12df0003f245fd"
+    },
+    {
+      "path": "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py",
+      "sha256": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+    }
+  ],
+  "domains": [
+    {
+      "id": "locked_state_version",
+      "verdict": "representable_with_additive_change",
+      "accepted_requirement": "A positive monotonic appointment_state_version is read under the appointment lock and advances on every committed appointment state change.",
+      "current_observations": [
+        {
+          "path": "app/models/appointments.py",
+          "line_start": 47,
+          "line_end": 96,
+          "fact": "Appointment has no appointment_state_version or other explicit state-version column; created_at is the only timestamp in the class and is not an admissible substitute."
+        },
+        {
+          "path": "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py",
+          "line_start": 20,
+          "line_end": 23,
+          "fact": "The exact migration lineage demonstrates additive-column representability without selecting the future column definition."
+        }
+      ],
+      "existing_primitives": [
+        "SQLAlchemy appointment mapping",
+        "Alembic additive-column operation",
+        "integer column support"
+      ],
+      "additive_requirements": [
+        "explicit positive monotonic appointment state identity",
+        "locked read of the identity",
+        "advance on every committed appointment state change",
+        "safe migration and backfill contract"
+      ],
+      "deliberately_unselected": [
+        "physical column type",
+        "server default",
+        "backfill value and sequencing",
+        "service versus database increment mechanism",
+        "migration revision and downgrade policy"
+      ]
+    },
+    {
+      "id": "private_completed_receipt",
+      "verdict": "representable_with_additive_change",
+      "accepted_requirement": "The completed private receipt binds operation, practice, target, actor, opaque session digest, idempotency identity, request digest, audit identity, pre/post state versions and canonical public response digest/bytes.",
+      "current_observations": [
+        {
+          "path": "app/models/appointments.py",
+          "line_start": 183,
+          "line_end": 221,
+          "fact": "The idempotency model already represents practice, actor, operation, hashed key, request hash, response status/hash/JSON, target, audit and session-shaped correlation, but not pre/post state versions or a stored canonical-byte field."
+        },
+        {
+          "path": "app/services/appointment_idempotency.py",
+          "line_start": 160,
+          "line_end": 182,
+          "fact": "Completion stores response JSON and its canonical hash then flushes; it does not store canonical response bytes or pre/post appointment versions."
+        },
+        {
+          "path": "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py",
+          "line_start": 21,
+          "line_end": 64,
+          "fact": "The idempotency migration establishes a durable table, completed-response constraint, uniqueness and target/audit references, demonstrating additive receipt representability."
+        },
+        {
+          "path": "docs/api-spine/openapi/appointment-commands.yaml",
+          "line_start": 1167,
+          "line_end": 1204,
+          "fact": "The public result envelope is closed and can remain unchanged while additional correlation stays private."
+        }
+      ],
+      "existing_primitives": [
+        "durable idempotency row",
+        "practice/actor/operation/key/request correlation",
+        "target and audit foreign-key correlation",
+        "response JSON and canonical hash",
+        "closed public response envelope"
+      ],
+      "additive_requirements": [
+        "pre-state version",
+        "post-state version",
+        "opaque session-binding digest semantics",
+        "stored canonical public response bytes or an exactly equivalent byte-preserving representation",
+        "completed-status constraints covering the full private receipt"
+      ],
+      "deliberately_unselected": [
+        "reuse versus replacement of existing session-shaped field",
+        "byte storage type",
+        "constraint form",
+        "retention or expiry policy",
+        "migration and backfill"
+      ]
+    },
+    {
+      "id": "ordered_lock_boundary",
+      "verdict": "representable_with_additive_change",
+      "accepted_requirement": "One backend transaction holds practice then appointment then idempotency-record locks, validates target and current authority, and only then classifies or discloses replay/conflict.",
+      "current_observations": [
+        {
+          "path": "app/services/appointment_idempotency.py",
+          "line_start": 76,
+          "line_end": 151,
+          "fact": "The existing shared claim attempts an idempotency insert and then acquires only the idempotency row with with_for_update before classifying conflict or replay."
+        },
+        {
+          "path": "app/models/appointments.py",
+          "line_start": 47,
+          "line_end": 96,
+          "fact": "The appointment mapping has practice identity and an appointment primary key suitable for an ordered locked lookup, but this review does not select the query."
+        },
+        {
+          "path": "docs/api-spine/openapi/appointment-commands.yaml",
+          "line_start": 254,
+          "line_end": 273,
+          "fact": "Status confirmation already requires the shared Idempotency-Key boundary and a typed confirmation/result envelope."
+        }
+      ],
+      "existing_primitives": [
+        "backend-owned SQLAlchemy Session",
+        "PostgreSQL row-lock expression through with_for_update",
+        "practice-scoped appointment identity",
+        "idempotency uniqueness and replay vocabulary"
+      ],
+      "additive_requirements": [
+        "one caller-owned transaction boundary",
+        "practice lock before appointment lock",
+        "target absence stop before idempotency access",
+        "idempotency lock after appointment lock",
+        "current authority recheck before conflict/replay classification",
+        "no insert or receipt disclosure before the accepted preconditions"
+      ],
+      "deliberately_unselected": [
+        "practice mapping/query expression",
+        "lock strength and wait policy",
+        "claim helper signature",
+        "exception mapping",
+        "isolation level and deadlock recovery"
+      ]
+    }
+  ],
+  "cross_domain_findings": [
+    "All three semantic domains are physically representable only through additive schema/service architecture; none is already represented end to end.",
+    "Existing timestamps are operational metadata and cannot substitute for the monotonic appointment state identity.",
+    "Existing response JSON/hash and audit correlation are useful primitives but do not prove stored canonical-byte replay or complete private receipt correlation.",
+    "Existing with_for_update use proves a row-lock primitive, not the accepted practice-appointment-idempotency order or authority-first disclosure.",
+    "The exact migration set does not prove the full later model-to-migration lineage; a physical design must bind every selected field to an exact additive migration."
+  ],
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "application_or_migration_edited": false,
+    "application_or_database_imported": false,
+    "route_or_database_executed": false,
+    "physical_design_selected": false,
+    "migration_or_backfill_selected": false,
+    "provider_or_credential_used": false,
+    "product_or_patient_data_used": false,
+    "command_or_deployment_executed": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_unmounted_status_confirm_physical_design_architecture"
+}

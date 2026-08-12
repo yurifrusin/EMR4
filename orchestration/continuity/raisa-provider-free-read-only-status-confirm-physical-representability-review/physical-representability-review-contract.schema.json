@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/status-confirm-physical-representability-review.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "overall_verdict",
+    "source_bindings",
+    "domains",
+    "cross_domain_findings",
+    "forbidden",
+    "next_candidate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.status_confirm_physical_representability_review.v1"
+    },
+    "result": {
+      "const": "raisa_provider_free_read_only_status_confirm_physical_representability_review_pass"
+    },
+    "source_head": {
+      "const": "3af1af85cc3e6ee646f856a1ce6f306495741894"
+    },
+    "evidence_label": {
+      "const": "provider_free_exact_file_read_only_source_review"
+    },
+    "overall_verdict": {
+      "const": "implementation_not_admitted"
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/source_binding"}
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"$ref": "#/$defs/domain"}
+    },
+    "cross_domain_findings": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "forbidden": {"$ref": "#/$defs/forbidden"},
+    "next_candidate": {
+      "const": "provider_free_unmounted_status_confirm_physical_design_architecture"
+    }
+  },
+  "$defs": {
+    "source_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "line_start", "line_end", "fact"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "line_start": {"type": "integer", "minimum": 1},
+        "line_end": {"type": "integer", "minimum": 1},
+        "fact": {"type": "string", "minLength": 1}
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "verdict",
+        "accepted_requirement",
+        "current_observations",
+        "existing_primitives",
+        "additive_requirements",
+        "deliberately_unselected"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "locked_state_version",
+            "private_completed_receipt",
+            "ordered_lock_boundary"
+          ]
+        },
+        "verdict": {
+          "enum": [
+            "already_represented",
+            "representable_with_additive_change",
+            "not_representable_without_contract_change",
+            "insufficient_exact_evidence"
+          ]
+        },
+        "accepted_requirement": {"type": "string", "minLength": 1},
+        "current_observations": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/observation"}
+        },
+        "existing_primitives": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "additive_requirements": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "deliberately_unselected": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "forbidden": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protected_path_content_or_metadata_used",
+        "application_or_migration_edited",
+        "application_or_database_imported",
+        "route_or_database_executed",
+        "physical_design_selected",
+        "migration_or_backfill_selected",
+        "provider_or_credential_used",
+        "product_or_patient_data_used",
+        "command_or_deployment_executed",
+        "protected_ref_moved"
+      ],
+      "properties": {
+        "protected_path_content_or_metadata_used": {"const": false},
+        "application_or_migration_edited": {"const": false},
+        "application_or_database_imported": {"const": false},
+        "route_or_database_executed": {"const": false},
+        "physical_design_selected": {"const": false},
+        "migration_or_backfill_selected": {"const": false},
+        "provider_or_credential_used": {"const": false},
+        "product_or_patient_data_used": {"const": false},
+        "command_or_deployment_executed": {"const": false},
+        "protected_ref_moved": {"const": false}
+      }
+    }
+  }
+}

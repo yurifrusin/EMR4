@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.sanitized-command-scope-incident.v1",
+  "incident_id": "AER-0292",
+  "attempt_id": "raisa-status-confirm-physical-representability-discovery-001",
+  "observed_on": "2026-08-12",
+  "status": "corrected",
+  "candidate_state": "canonical_unchanged",
+  "workflow_disposition": "revision_required",
+  "observation": "A Git filename-metadata query used the broad app path and printed prohibited protected authoring path names among otherwise non-protected candidates. No file content was opened. The output is discarded and prohibited from planning, implementation, tests and acceptance.",
+  "effects": {
+    "protected_content_opened": false,
+    "repository_file_mutated_by_query": false,
+    "application_or_database_executed": false,
+    "provider_or_credential_used": false,
+    "product_or_patient_data_used": false,
+    "command_or_protected_ref_mutated": false
+  },
+  "correction": "Stop broad metadata discovery, register the incident before any review plan, and restart only from exact already-known non-protected paths. Never enumerate a directory root to derive a candidate allowlist near protected evidence."
+}
