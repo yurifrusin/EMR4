@@ -27,15 +27,26 @@ OWNED_TESTS = (
 TRANCHE_PATHS = frozenset(
     OWNED_TESTS
     + (
+        "AGENTS.md",
+        "docs/ariadne-compass-current.md",
+        "docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md",
         "docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md",
         "docs/security/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-threat-model-delta.md",
+        "implementation_plan.md",
+        "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-sol-acceptance.md",
         "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-preplanning-runtime-state.json",
         "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-precommit-receipt.json",
         "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-precommit-runtime-state.json",
         "orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json",
+        "orchestration/continuity/emr4-compass.json",
+        "orchestration/continuity/emr4-continuity-graph.json",
+        "orchestration/human_inbox/yuri/2026-08-12--compatibility-conformance-harness-readiness-repair.md",
         "scripts/raisa_provider_free_compatibility_conformance_harness_readiness_repair.py",
+        "scripts/raisa_provider_free_compatibility_conformance_harness_readiness_repair_continuity_update.py",
+        "tests/test_current_baton_consistency.py",
         "tests/test_raisa_provider_free_compatibility_conformance_harness_readiness_repair.py",
+        "tests/test_raisa_provider_free_compatibility_conformance_harness_readiness_repair_continuity.py",
     )
 )
 
