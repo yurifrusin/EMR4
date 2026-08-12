@@ -1,0 +1,77 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_the_repository_only_context_fabric_source_owned_truth_conditional_command_and_deferred_durable_cue_delivery_reorientation",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after Yuri selected a genuinely independent Context Fabric architecture direction. Continuity 244 / Compass 226 remains current; CF-D1 remains accepted, CF-D2 and its recovery descendant remain stopped and unproved, and no CF-D2 retry is opened. Yuri has now selected source-owned truth, ephemeral Context Fabric assembly, cue-oriented events and conditional command freshness as the replacement first-runtime direction, while requiring durable event and cue delivery to remain an explicit later horizon.",
+    "current_authority_allocation": "GPT Sol owns material architecture, planning, repository-only implementation, deterministic verification, acceptance and task-branch closeout under Yuri's explicit programme choice and standing uninterrupted-development authority. DeepSeek and native subagents are unassigned because this first tranche is tightly coupled architecture and authority reconciliation. One final fresh Gemini 3.6 Flash/high read-only veto is risk-triggered only after deterministic gates; it receives no implementation, acceptance, integration, data, runtime or Git authority.",
+    "active_plan_and_acceptance": "The narrowest fail-closed tranche freezes source-owned durability and Fabric-owned ephemerality; request-time version-fenced ContextFrameSet assembly; events as prompt cue signals only; conditional appointment command preconditions distinct from explicit human confirmation; typed winner, stale/conflict loser, replay and gap outcomes; and a named future Durable Event and Cue Delivery horizon that retains CF-D1 evidence while reopening CF-D2 only through an observability-first design. It is repository-only and changes no mounted route, database, watcher or product behavior.",
+    "protected_evidence_boundaries": "The tranche may read and edit only ordinary tracked architecture, API Spine, continuity, tests and handover artifacts needed for the decision. Protected holdouts, historical Diary/PHI, docs/branding, every unrelated untracked file, operational database/source/watcher access, Docker/database runtime, provider calls, real/product/patient/clinical data, credentials/IAM, executable product tools or commands, migrations, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "The active task branch codex/ariadne-bernie-davida-parallel-seam and origin counterpart are exactly 0a5c9d336f7e7cba08fddb94ab0233e399474cb8 before this receipt. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602 after a fresh fetch. The index and tracked worktree are clean, and all 492 pre-existing untracked paths remain preserved. Explicit-path staging only applies and docs/branding is never staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "context_fabric_source_owned_truth_reorientation_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol read the live handover, active CF-D1/CF-D2/workflow acceptances, Context Fabric direction, API Spine contracts, raw-compatibility route maps, source code and exact Git refs."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No verifier dispatch occurs before a deterministic candidate passes."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

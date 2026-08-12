@@ -70,6 +70,27 @@ visible as legacy-supported surfaces while the proposal-confirm families remain
 the preferred API Spine path for ordinary product clients and Bernie-authored
 actions.
 
+## Conditional-command reorientation (2026-08-12)
+
+The target migration now has an additional invariant: all four compatibility
+writes must converge internally on the same backend-owned conditional-command
+kernel as their proposal/confirm replacements before removal. This architecture
+does not change current route behavior.
+
+- update, status and delete must lock and recheck the current appointment;
+- create must serialize and recheck the relevant schedule-conflict domain,
+  because there is no pre-existing appointment row to lock;
+- current authority must be checked inside the mutation transaction;
+- backend freshness/precondition evidence, human or policy confirmation,
+  idempotency and audit must remain distinct; and
+- stale, schedule-conflict, revoked-authority, confirmation-required,
+  validation and idempotency-conflict results must fail closed with no mutation.
+
+An implicit backend freshness check is therefore part of the desired common
+kernel. It is not implicit human confirmation: a route whose action requires
+confirmation must present separate valid confirmation evidence or return a
+typed `confirmation_required` result.
+
 ## Boundary
 
 This map does not authorize:

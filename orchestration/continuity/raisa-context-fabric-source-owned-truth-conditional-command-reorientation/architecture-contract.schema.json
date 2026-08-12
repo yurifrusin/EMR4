@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-v1.json",
+  "title": "Raisa Context Fabric source-owned-truth conditional-command architecture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_id",
+    "status",
+    "source_head",
+    "data_ceiling",
+    "authority_planes",
+    "conditional_command_packet",
+    "transaction_policy",
+    "operation_families",
+    "outcomes",
+    "legacy_compatibility_migration",
+    "deferred_durable_event_and_cue_delivery",
+    "forbidden_effects",
+    "next_descendant"
+  ],
+  "properties": {
+    "contract_id": {"const": "raisa.context_fabric.source_owned_truth.conditional_commands.v1"},
+    "status": {"const": "architecture_only_unmounted"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "data_ceiling": {"const": "authored_synthetic_only"},
+    "authority_planes": {"$ref": "#/$defs/authorityPlanes"},
+    "conditional_command_packet": {"$ref": "#/$defs/conditionalCommandPacket"},
+    "transaction_policy": {"$ref": "#/$defs/transactionPolicy"},
+    "operation_families": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/operationFamily"}
+    },
+    "outcomes": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/outcome"}
+    },
+    "legacy_compatibility_migration": {"$ref": "#/$defs/legacyMigration"},
+    "deferred_durable_event_and_cue_delivery": {"$ref": "#/$defs/deferredDurability"},
+    "forbidden_effects": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "enum": [
+          "runtime_route_change",
+          "database_or_source_access",
+          "migration_or_persistence",
+          "watcher_or_worker_start",
+          "patient_or_product_data",
+          "provider_call",
+          "credential_or_iam_action",
+          "network_or_executable_tool",
+          "command_or_write",
+          "deployment_or_release",
+          "pages_or_protected_ref_movement"
+        ]
+      }
+    },
+    "next_descendant": {"$ref": "#/$defs/nextDescendant"}
+  },
+  "$defs": {
+    "authoritativeSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owns_current_truth", "owns_mutation_serialization", "depends_on_cue_delivery_for_correctness"],
+      "properties": {
+        "owns_current_truth": {"type": "boolean"},
+        "owns_mutation_serialization": {"type": "boolean"},
+        "depends_on_cue_delivery_for_correctness": {"type": "boolean"}
+      }
+    },
+    "contextFabric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["read_only", "expiring", "may_mint_write_authority", "may_transport_opaque_backend_precondition"],
+      "properties": {
+        "read_only": {"type": "boolean"},
+        "expiring": {"type": "boolean"},
+        "may_mint_write_authority": {"type": "boolean"},
+        "may_transport_opaque_backend_precondition": {"type": "boolean"}
+      }
+    },
+    "eventWatcher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority", "fresh_authorized_read_required", "may_assert_current_truth", "may_assert_command_success"],
+      "properties": {
+        "authority": {"enum": ["acceleration_hint_only", "current_truth", "command"]},
+        "fresh_authorized_read_required": {"type": "boolean"},
+        "may_assert_current_truth": {"type": "boolean"},
+        "may_assert_command_success": {"type": "boolean"}
+      }
+    },
+    "commandService": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owns_current_authority_check", "owns_atomic_precondition_check", "owns_idempotency", "owns_audit_and_readback"],
+      "properties": {
+        "owns_current_authority_check": {"type": "boolean"},
+        "owns_atomic_precondition_check": {"type": "boolean"},
+        "owns_idempotency": {"type": "boolean"},
+        "owns_audit_and_readback": {"type": "boolean"}
+      }
+    },
+    "authorityPlanes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authoritative_source", "context_fabric", "event_watcher", "command_service"],
+      "properties": {
+        "authoritative_source": {"$ref": "#/$defs/authoritativeSource"},
+        "context_fabric": {"$ref": "#/$defs/contextFabric"},
+        "event_watcher": {"$ref": "#/$defs/eventWatcher"},
+        "command_service": {"$ref": "#/$defs/commandService"}
+      }
+    },
+    "conditionalCommandPacket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["precondition_owner", "client_may_mint_or_amend", "required_bindings", "separate_evidence", "token_alone_closes_toctou", "current_authority_checked_in_transaction"],
+      "properties": {
+        "precondition_owner": {"const": "backend_command_service"},
+        "client_may_mint_or_amend": {"type": "boolean"},
+        "required_bindings": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 15,
+          "maxItems": 15,
+          "items": {
+            "enum": ["schema_version", "token_version", "practice_id", "actor_or_session_id", "purpose_id", "operation_id", "target_appointment_id_or_null", "schedule_conflict_domain", "expected_source_state_digest", "expected_conflict_domain_digest", "command_digest", "issued_at", "expires_at", "nonce", "signing_key_id"]
+          }
+        },
+        "separate_evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"enum": ["human_or_policy_confirmation", "idempotency_identity", "audit_attribution"]}
+        },
+        "token_alone_closes_toctou": {"type": "boolean"},
+        "current_authority_checked_in_transaction": {"type": "boolean"}
+      }
+    },
+    "transactionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_lock_order", "short_transaction_required", "final_database_invariant_check_required", "skip_unneeded_locks_without_reordering"],
+      "properties": {
+        "canonical_lock_order": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {"const": "practice"},
+            {"const": "schedule_conflict_domain"},
+            {"const": "appointment"},
+            {"const": "idempotency_record"}
+          ],
+          "items": false
+        },
+        "short_transaction_required": {"type": "boolean"},
+        "final_database_invariant_check_required": {"type": "boolean"},
+        "skip_unneeded_locks_without_reordering": {"type": "boolean"}
+      }
+    },
+    "operationFamily": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation", "target_row_exists_before_command", "required_serialization", "required_rechecks"],
+      "properties": {
+        "operation": {"enum": ["create", "update", "status", "delete"]},
+        "target_row_exists_before_command": {"type": "boolean"},
+        "required_serialization": {"enum": ["schedule_conflict_domain_fence", "schedule_domain_then_appointment_lock", "appointment_lock"]},
+        "required_rechecks": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 3,
+          "maxItems": 4,
+          "items": {"enum": ["current_authority", "appointment_state", "schedule_overlap", "database_constraint", "transition_legality", "cancellation_policy"]}
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "mutation", "returns_original_receipt", "fresh_read_required"],
+      "properties": {
+        "code": {"enum": ["committed", "idempotent_replay", "stale_precondition", "schedule_conflict", "authority_revoked", "confirmation_required", "validation_rejected", "idempotency_conflict"]},
+        "mutation": {"type": "boolean"},
+        "returns_original_receipt": {"type": "boolean"},
+        "fresh_read_required": {"type": "boolean"}
+      }
+    },
+    "legacyMigration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_behavior_changed_by_this_contract", "routes", "target_kernel", "implicit_freshness_is_human_confirmation", "retirement_requires_client_parity"],
+      "properties": {
+        "current_behavior_changed_by_this_contract": {"type": "boolean"},
+        "routes": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"type": "string"}
+        },
+        "target_kernel": {"const": "single_backend_conditional_command_kernel"},
+        "implicit_freshness_is_human_confirmation": {"type": "boolean"},
+        "retirement_requires_client_parity": {"type": "boolean"}
+      }
+    },
+    "deferredDurability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "improves", "may_add", "consumer_topology", "command_authority", "current_truth_authority", "cf_d1_evidence_retained", "cf_d2_reopen_policy"],
+      "properties": {
+        "status": {"const": "named_future_extension_not_abandoned"},
+        "improves": {"type": "array", "minItems": 3, "maxItems": 3, "uniqueItems": true, "items": {"enum": ["restart_recovery", "cue_latency", "delivery_observability"]}},
+        "may_add": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"enum": ["source_position", "durable_checkpoint", "classification_receipt", "pending_cue_obligation", "at_least_once_delivery"]}},
+        "consumer_topology": {"$ref": "#/$defs/consumerTopology"},
+        "command_authority": {"type": "boolean"},
+        "current_truth_authority": {"type": "boolean"},
+        "cf_d1_evidence_retained": {"type": "boolean"},
+        "cf_d2_reopen_policy": {"enum": ["fresh_observability_first_plan_only", "retry_old_authority"]}
+      }
+    },
+    "consumerTopology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logical_consumers_per_partition", "initial_physical_processes_per_database", "high_availability_mode", "equal_checkpoint_writers_per_partition", "duplicate_delivery_policy"],
+      "properties": {
+        "logical_consumers_per_partition": {"type": "integer", "minimum": 1, "maximum": 2},
+        "initial_physical_processes_per_database": {"type": "integer", "minimum": 1, "maximum": 2},
+        "high_availability_mode": {"enum": ["active_standby_with_external_fencing", "equal_active_writers"]},
+        "equal_checkpoint_writers_per_partition": {"type": "boolean"},
+        "duplicate_delivery_policy": {"enum": ["idempotent_at_least_once", "non_idempotent"]}
+      }
+    },
+    "nextDescendant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "authored_synthetic_only", "runtime", "database", "route_change", "provider_call", "command_or_write"],
+      "properties": {
+        "id": {"const": "provider-free-unmounted-conditional-command-admission-rehearsal"},
+        "authored_synthetic_only": {"type": "boolean"},
+        "runtime": {"type": "boolean"},
+        "database": {"type": "boolean"},
+        "route_change": {"type": "boolean"},
+        "provider_call": {"type": "boolean"},
+        "command_or_write": {"type": "boolean"}
+      }
+    }
+  }
+}

@@ -397,6 +397,32 @@ large “memory” feature:
    Diagnostic Thread frames and licensed evidence frames only after their own
    containment, clinical, data and provider gates.
 
+### Source-owned-truth reorientation (2026-08-12)
+
+The first Context Fabric runtime no longer depends on durable watcher delivery
+for record correctness. Authoritative domain services own current truth and
+atomic conditional commands; the Fabric owns only minimal expiring evidence;
+and events remain acceleration hints that trigger fresh authorised reads. A
+missed cue may delay a projection refresh, but it cannot permit a stale command
+to commit.
+
+Every consequential appointment command is to converge on one backend-owned
+conditional-command kernel. Freshness/precondition evidence, explicit human or
+policy confirmation, idempotency and audit are distinct. Update, status and
+delete recheck current authority and locked appointment state. Create also
+requires database-owned serialization of the applicable schedule-conflict
+domain because no appointment row exists to lock before insertion. The four
+legacy compatibility writes remain unchanged until a separate migration proves
+ordinary-client parity and moves them onto that same kernel.
+
+The accepted durability work is preserved as evidence and a later **Durable
+Event and Cue Delivery** extension. Its topology is one logical consumer per
+database event partition, initially realizable as one physical watcher for the
+database; any later active/standby replicas require external ownership fencing
+and idempotent at-least-once delivery. CF-D1 remains positive concurrency
+evidence. CF-D2 may return only under a fresh observability-first plan and is no
+longer a prerequisite for the first Fabric runtime.
+
 Each descendant must preserve GraphQL/query services as read-only, use REST or
 OpenAPI command paths for mutations, revalidate fresh authority at execution,
 and release no success based on a context frame alone.

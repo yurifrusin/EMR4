@@ -187,6 +187,14 @@ Near-term production blockers before external clients or live providers:
 
 Async integrations observe or ingest typed events; they do not bypass commands.
 
+Events are acceleration hints, not current truth, authority or command
+receipts. One logical watcher may serve a database event partition and fan
+practice-scoped cues to many user sessions. A later active/standby deployment
+must fence checkpoint ownership so that only one replica advances a partition;
+duplicate delivery during takeover must be idempotent. Regardless of cue
+delivery, every consequential REST/OpenAPI command rechecks current authority
+and authoritative source state inside its mutation transaction.
+
 Initial event families:
 
 - appointment/proposal staged, expired, confirmed, cancelled, changed;

@@ -170,6 +170,21 @@ cause before another correction or retry. It does not prove CF-D2; key rotation
 and retention/purge remain blocked and the next independent programme direction
 requires Yuri's choice.
 
+Yuri subsequently selected the independent source-owned-truth reorientation.
+The first Context Fabric runtime is to depend on authoritative source services
+and atomic conditional commands for correctness, while committed events remain
+best-effort acceleration hints that request fresh authorised reads. A missed
+cue may delay the interface but cannot validate a stale mutation. Appointment
+freshness/precondition evidence, human or policy confirmation, idempotency and
+audit remain separate; update/status/delete lock and recheck existing state,
+while create must serialize the relevant schedule-conflict domain and retain a
+final database invariant check. The four legacy compatibility writes are to
+converge on the same backend kernel before deprecation, without treating an
+implicit freshness check as human confirmation. Durable Event and Cue Delivery
+remains a named later extension with one logical consumer per database event
+partition, optional externally fenced active/standby replicas, retained CF-D1
+evidence and any CF-D2 return gated by a fresh observability-first plan.
+
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
 mounted GraphQL read/REST command/event fresh-read/default-off boundaries and

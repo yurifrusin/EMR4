@@ -1,0 +1,156 @@
+{
+  "contract_id": "raisa.context_fabric.source_owned_truth.conditional_commands.v1",
+  "status": "architecture_only_unmounted",
+  "source_head": "0a5c9d336f7e7cba08fddb94ab0233e399474cb8",
+  "data_ceiling": "authored_synthetic_only",
+  "authority_planes": {
+    "authoritative_source": {
+      "owns_current_truth": true,
+      "owns_mutation_serialization": true,
+      "depends_on_cue_delivery_for_correctness": false
+    },
+    "context_fabric": {
+      "read_only": true,
+      "expiring": true,
+      "may_mint_write_authority": false,
+      "may_transport_opaque_backend_precondition": true
+    },
+    "event_watcher": {
+      "authority": "acceleration_hint_only",
+      "fresh_authorized_read_required": true,
+      "may_assert_current_truth": false,
+      "may_assert_command_success": false
+    },
+    "command_service": {
+      "owns_current_authority_check": true,
+      "owns_atomic_precondition_check": true,
+      "owns_idempotency": true,
+      "owns_audit_and_readback": true
+    }
+  },
+  "conditional_command_packet": {
+    "precondition_owner": "backend_command_service",
+    "client_may_mint_or_amend": false,
+    "required_bindings": [
+      "schema_version",
+      "token_version",
+      "practice_id",
+      "actor_or_session_id",
+      "purpose_id",
+      "operation_id",
+      "target_appointment_id_or_null",
+      "schedule_conflict_domain",
+      "expected_source_state_digest",
+      "expected_conflict_domain_digest",
+      "command_digest",
+      "issued_at",
+      "expires_at",
+      "nonce",
+      "signing_key_id"
+    ],
+    "separate_evidence": [
+      "human_or_policy_confirmation",
+      "idempotency_identity",
+      "audit_attribution"
+    ],
+    "token_alone_closes_toctou": false,
+    "current_authority_checked_in_transaction": true
+  },
+  "transaction_policy": {
+    "canonical_lock_order": [
+      "practice",
+      "schedule_conflict_domain",
+      "appointment",
+      "idempotency_record"
+    ],
+    "short_transaction_required": true,
+    "final_database_invariant_check_required": true,
+    "skip_unneeded_locks_without_reordering": true
+  },
+  "operation_families": [
+    {
+      "operation": "create",
+      "target_row_exists_before_command": false,
+      "required_serialization": "schedule_conflict_domain_fence",
+      "required_rechecks": ["current_authority", "schedule_overlap", "database_constraint"]
+    },
+    {
+      "operation": "update",
+      "target_row_exists_before_command": true,
+      "required_serialization": "schedule_domain_then_appointment_lock",
+      "required_rechecks": ["current_authority", "appointment_state", "schedule_overlap", "database_constraint"]
+    },
+    {
+      "operation": "status",
+      "target_row_exists_before_command": true,
+      "required_serialization": "appointment_lock",
+      "required_rechecks": ["current_authority", "appointment_state", "transition_legality"]
+    },
+    {
+      "operation": "delete",
+      "target_row_exists_before_command": true,
+      "required_serialization": "appointment_lock",
+      "required_rechecks": ["current_authority", "appointment_state", "cancellation_policy"]
+    }
+  ],
+  "outcomes": [
+    {"code": "committed", "mutation": true, "returns_original_receipt": false, "fresh_read_required": false},
+    {"code": "idempotent_replay", "mutation": false, "returns_original_receipt": true, "fresh_read_required": false},
+    {"code": "stale_precondition", "mutation": false, "returns_original_receipt": false, "fresh_read_required": true},
+    {"code": "schedule_conflict", "mutation": false, "returns_original_receipt": false, "fresh_read_required": true},
+    {"code": "authority_revoked", "mutation": false, "returns_original_receipt": false, "fresh_read_required": false},
+    {"code": "confirmation_required", "mutation": false, "returns_original_receipt": false, "fresh_read_required": false},
+    {"code": "validation_rejected", "mutation": false, "returns_original_receipt": false, "fresh_read_required": false},
+    {"code": "idempotency_conflict", "mutation": false, "returns_original_receipt": false, "fresh_read_required": false}
+  ],
+  "legacy_compatibility_migration": {
+    "current_behavior_changed_by_this_contract": false,
+    "routes": [
+      "POST /api/v1/appointments",
+      "PUT /api/v1/appointments/{appointment_id}",
+      "PATCH /api/v1/appointments/{appointment_id}/status",
+      "DELETE /api/v1/appointments/{appointment_id}"
+    ],
+    "target_kernel": "single_backend_conditional_command_kernel",
+    "implicit_freshness_is_human_confirmation": false,
+    "retirement_requires_client_parity": true
+  },
+  "deferred_durable_event_and_cue_delivery": {
+    "status": "named_future_extension_not_abandoned",
+    "improves": ["restart_recovery", "cue_latency", "delivery_observability"],
+    "may_add": ["source_position", "durable_checkpoint", "classification_receipt", "pending_cue_obligation", "at_least_once_delivery"],
+    "consumer_topology": {
+      "logical_consumers_per_partition": 1,
+      "initial_physical_processes_per_database": 1,
+      "high_availability_mode": "active_standby_with_external_fencing",
+      "equal_checkpoint_writers_per_partition": false,
+      "duplicate_delivery_policy": "idempotent_at_least_once"
+    },
+    "command_authority": false,
+    "current_truth_authority": false,
+    "cf_d1_evidence_retained": true,
+    "cf_d2_reopen_policy": "fresh_observability_first_plan_only"
+  },
+  "forbidden_effects": [
+    "runtime_route_change",
+    "database_or_source_access",
+    "migration_or_persistence",
+    "watcher_or_worker_start",
+    "patient_or_product_data",
+    "provider_call",
+    "credential_or_iam_action",
+    "network_or_executable_tool",
+    "command_or_write",
+    "deployment_or_release",
+    "pages_or_protected_ref_movement"
+  ],
+  "next_descendant": {
+    "id": "provider-free-unmounted-conditional-command-admission-rehearsal",
+    "authored_synthetic_only": true,
+    "runtime": false,
+    "database": false,
+    "route_change": false,
+    "provider_call": false,
+    "command_or_write": false
+  }
+}
