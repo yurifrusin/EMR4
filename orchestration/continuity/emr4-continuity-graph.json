@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 263,
+  "graph_revision": 264,
   "harvests": [],
   "nodes": [
     {
@@ -16975,6 +16975,90 @@
         "PostgreSQL has not parsed or installed the migration and exact catalogues/trigger behavior remain unproved.",
         "No real lock, transaction, rollback, concurrency, restart, unknown-commit or route behavior has run.",
         "Product/patient data, providers, credentials, watchers/events, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal",
+      "title": "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "bccc64f87eb0c1ae755b642fb6c4eb082298051d",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted result is provider-free, authored-synthetic and limited to one removed disposable PostgreSQL 16 instance.",
+          "It proves exact migration admission, catalogue shape and nine rolled-back invariants; runtime authority remains false.",
+          "Existing/product databases, routes, commands, patient/product data, providers, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-scaffold-parse-catalogue-rehearsal",
+          "source": "docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact PostgreSQL 16 migration/catalogue admission and nine rolled-back authored-synthetic invariants; hand off only to the disposable behavior/transaction rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "Offline Alembic SQL for only v1w2x3y4z5b6:w2x3y4z5a6b7 installed into one networkless, portless, tmpfs-backed cached PostgreSQL 16 container.",
+        "The exact Alembic head, six columns, three constraints, one invoker function, one enabled trigger and cutover version matched.",
+        "Nine rolled-back probes proved defaults, database-owned increment, invalid-version rejection, v1 receipt admission, malformed-receipt rejection and legacy-null compatibility.",
+        "Eight source bindings, 80 hostile mutations and 13 focused tests pass with captured-ID cleanup verified."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-scaffold-parse-catalogue-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-scaffold-parse-catalogue-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-closeout-prepush-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-closeout-prepush-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py",
+          "scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The application transaction seam, ordered real locks, atomic appointment/audit/receipt write set, stored replay, response-loss retry and outer rollback remain unproved.",
+        "No mounted route, product command, product data, concurrency, restart, unknown-commit, retention, performance or operations behavior has run.",
+        "Providers, credentials, patient/product data, watchers/events, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

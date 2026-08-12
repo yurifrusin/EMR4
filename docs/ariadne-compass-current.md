@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 263 / Compass 245. The unmounted status-confirm physical schema-and-transaction scaffold passes with exact mapping, inert DDL, receipt helpers and ordered-lock composition. A disposable PostgreSQL parse/catalogue rehearsal is next; routes and product commands remain closed.
+> EMR4 is at Continuity 264 / Compass 246. The exact status-confirm scaffold migration, PostgreSQL catalogue and nine rolled-back authored-synthetic invariants pass with complete disposable cleanup. The provider-free behavior/transaction rehearsal is next; routes and product commands remain closed.
 
 ## North star
 
@@ -300,26 +300,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One exact additive database-owned version, private receipt and ordered transaction design passes; implementation remains unmounted. Lineage parent: `raisa-provider-free-read-only-status-confirm-physical-representability-review`.
 142. **Embody the accepted status safety design without opening a database or route — Provider-free unmounted status-confirm physical schema-and-transaction scaffold**
    The exact mapping, inert migration, receipt helpers and ordered transaction seam pass as an unmounted scaffold. Lineage parent: `raisa-provider-free-unmounted-status-confirm-physical-design-architecture`.
+143. **Prove the exact status-confirm physical scaffold is admitted by PostgreSQL before application behavior is attempted — Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal**
+   PostgreSQL 16 accepts the exact migration and catalogue, nine rolled-back synthetic invariants pass and the owned container is absent. Lineage parent: `raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold`.
 
 ## Current position
 
-**The status safety kernel has an unmounted physical source scaffold but no executed database embodiment — Provider-free unmounted status-confirm physical schema-and-transaction scaffold**
+**The status safety scaffold is admitted by PostgreSQL but application transaction behavior remains unproved — Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal**
 
-**Why this proof came next:** The exact physical design passed, allowing a narrow source lowering before any live database or route proof.
+**Why this proof came next:** The inert source scaffold passed, permitting one isolated PostgreSQL parse/catalogue proof before composing application behavior.
 
-Mapping, inert DDL, exact-byte/session-digest helpers and the authority-first lock seam pass deterministic gates without runtime authority.
+Exact migration/catalogue admission, nine rolled-back invariants and complete exact-ID cleanup pass without route or durable product authority.
 
 ### What this unlocks
 
-- Run a provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal.
-- Verify only exact columns, constraints, function, trigger and rollback-safe authored-synthetic invariants.
-- Clean up the owned disposable database completely before any later behavior gate.
+- Run a provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal.
+- Prove current-authority and lock order, atomic appointment/audit/v1-receipt commit, stored replay, response-loss retry and outer rollback.
+- Use only authored-synthetic rows and remove the owned disposable database completely.
 
 ### What it does not solve
 
-- Mounted-route, real command, application transaction or operational rollout behavior.
+- Mounted-route, real command, product-data or operational rollout behavior.
 - Concurrency, restart, unknown commit, retention, performance or production safety.
-- Provider/credential activity, patient/product data, watchers/events, product commands, deployment, release, Pages or protected-ref movement.
+- Provider/credential activity, patient/product data, watchers/events, deployment, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -386,9 +388,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted source-owned-truth, status convergence and physical-design lineage.
-- Prove only the exact inert migration and catalogue shape in an owned disposable PostgreSQL instance next.
-- Keep route integration, product data, commands, providers and protected integration separately gated.
+- Preserve the accepted source-owned-truth, conditional-command and status-confirm physical lineage.
+- Prove the exact unmounted transaction seam in a provider-free disposable PostgreSQL behavior/transaction rehearsal next.
+- Keep mounted routes, product data, commands, providers and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -577,6 +579,7 @@ Prerequisites:
 
 ## Map limits
 
+- The accepted status-confirm PostgreSQL rehearsal proves parse/catalogue and selected rolled-back invariants only, not application transaction, route or product-command safety.
 - The accepted status-confirm physical scaffold proves source lowering only, not PostgreSQL installation, real locks, route behavior or product command safety.
 - The accepted status-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring or a mounted route.
 - The status-confirm physical representability review proves additive feasibility, not a selected schema, transaction design, migration or mounted implementation.
@@ -983,6 +986,8 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan.md`
+- `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md`
+- `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-plan.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md`
@@ -1168,6 +1173,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md`
@@ -1410,6 +1416,12 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-closeout-prepush-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-closeout-prepush-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json`
@@ -1454,6 +1466,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-schema-transaction-scaffold-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-scaffold-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
@@ -1707,6 +1720,11 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal/provider-free-durability-concurrency-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-catalogue-characterization.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
@@ -2046,6 +2064,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-scaffold-parse-catalogue-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2060,6 +2079,7 @@ Prerequisites:
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
+- `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `scripts/raisa_provider_free_office_practitioner_directory_consumer.py`
 - `scripts/reception_one_bureau_model_text_lane_audit.py`
 - `scripts/reception_one_bureau_model_text_lane_live.py`
@@ -2110,6 +2130,7 @@ Prerequisites:
 - `tests/test_model_required_bureau_successor_lanes.py`
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
+- `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py`
 - `tests/test_reception_one_bureau_explicit_selection_retry_readiness.py`
 - `tests/test_reception_one_bureau_model_text_lane.py`
@@ -2137,4 +2158,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 245; continuity graph revision 263._
+_Compass map revision 246; continuity graph revision 264._

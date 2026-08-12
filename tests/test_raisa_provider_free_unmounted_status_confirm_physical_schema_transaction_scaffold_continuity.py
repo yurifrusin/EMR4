@@ -17,7 +17,7 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_physical_scaffold_is_the_accepted_current_position() -> None:
+def test_physical_scaffold_remains_an_accepted_ancestor() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
     node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
@@ -25,7 +25,7 @@ def test_physical_scaffold_is_the_accepted_current_position() -> None:
     assert graph["graph_revision"] >= 263
     assert compass["map_revision"] >= 245
     assert compass["source_graph_revision"] == graph["graph_revision"]
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert NODE_ID in {item["node_id"] for item in compass["journey"]}
     assert node["status"] == "accepted"
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
@@ -76,22 +76,19 @@ def test_source_receipts_acceptance_and_mailbox_are_bound() -> None:
     assert any("precommit-receipt" in item for item in receipts)
 
 
-def test_next_direction_is_disposable_postgresql_parse_catalogue() -> None:
+def test_scaffold_handed_off_to_disposable_postgresql_parse_catalogue() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
-    joined = " ".join(current["unlocks"] + current["does_not_solve"]).lower()
+    descendant = next(
+        item for item in compass["journey"] if item.get("lineage_parent") == NODE_ID
+    )
+    joined = " ".join(
+        [descendant["node_id"], descendant["strategic_role"], descendant["outcome"]]
+    ).lower()
     for phrase in (
-        "provider-free disposable postgresql",
-        "parse/catalogue",
-        "columns",
-        "constraints",
-        "trigger",
-        "rollback-safe",
-        "mounted-route",
-        "real command",
-        "patient/product",
-        "product commands",
-        "pages",
-        "protected-ref",
+        "disposable-postgresql",
+        "migration and catalogue",
+        "postgresql 16",
+        "nine rolled-back",
+        "container is absent",
     ):
         assert phrase in joined

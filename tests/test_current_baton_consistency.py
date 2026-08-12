@@ -8,8 +8,8 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-"
-    "scaffold"
+    "raisa-provider-free-disposable-postgresql-status-confirm-scaffold-"
+    "parse-catalogue-rehearsal"
 )
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
@@ -25,10 +25,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 263
+    assert graph["graph_revision"] == 264
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 245
-    assert compass["source_graph_revision"] == 263
+    assert compass["map_revision"] == 246
+    assert compass["source_graph_revision"] == 264
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -38,17 +38,17 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 263 / Compass 245" in current
-    assert "b36b8a455b70d8bc3e99b5e5dd84a8237375ff3c" in current
+    assert "Continuity 264 / Compass 246" in current
+    assert "bccc64f87eb0c1ae755b642fb6c4eb082298051d" in current
     assert "runtime authority false" in current
-    assert "positive database-owned `BIGINT` appointment version" in current
-    assert "inert seven-phase migration" in current
-    assert "five nullable-for-legacy private receipt fields" in current
-    assert "raw 32-byte domain-separated session HMACs" in current
-    assert "Exact canonical response bytes" in current
-    assert "authority-first `READ COMMITTED` transaction seam" in current
+    assert "cached, networkless, portless and tmpfs-backed PostgreSQL 16" in current
+    assert "six columns" in current
+    assert "three constraints" in current
+    assert "ordinary-invoker function" in current
+    assert "one enabled trigger" in current
+    assert "nine rolled-back authored-synthetic probes" in current
     assert "80 hostile mutations" in current
-    assert "274-test current descendant packet" in current
+    assert "13 focused checks" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
@@ -72,11 +72,11 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal" in next_work
-    assert "exact migration `w2x3y4z5a6b7`" in next_work
-    assert "owned empty disposable PostgreSQL instance" in next_work
-    assert "exact columns, constraints, function, trigger and Alembic head" in next_work
-    assert "transactionally rolled-back authored-synthetic invariant probes" in next_work
+    assert "Provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal" in next_work
+    assert "exact unmounted transaction seam and migration" in next_work
+    assert "current-authority and practice/appointment/idempotency lock order" in next_work
+    assert "atomic appointment/audit/v1-receipt behavior" in next_work
+    assert "stored replay, response-loss retry and full outer rollback" in next_work
     assert "route mounting/calling" in next_work
     assert "patient/product data" in next_work
     assert "provider/ADC/credential/browser authorization" in next_work
@@ -113,15 +113,20 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free disposable postgresql status-confirm scaffold parse/catalogue rehearsal",
-        "exact migration `w2x3y4z5a6b7`",
-        "owned empty disposable postgresql instance",
-        "exact columns, constraints, function, trigger and alembic head",
-        "transactionally rolled-back authored-synthetic invariant probes",
+        "provider-free disposable postgresql status-confirm behavior/transaction rehearsal",
+        "exact unmounted transaction seam and migration",
+        "authored-synthetic rows",
+        "current-authority and practice/appointment/idempotency lock order",
+        "atomic appointment/audit/v1-receipt behavior",
+        "stored replay",
+        "response-loss retry",
+        "full outer rollback",
         "no existing/product database",
-        "durable data",
+        "durable product data",
         "route mounting/calling",
-        "application command",
+        "concurrency",
+        "restart",
+        "unknown-commit",
         "patient/product data",
         "provider/adc/credential/browser authorization",
         "watcher/event authority",
@@ -130,7 +135,7 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         "release",
         "pages",
         "protected-ref movement",
-        "freeze the executable/environment/port/ownership/cleanup contract before start",
+        "freeze the scenario, executable, environment, ownership and cleanup contract before start",
         "explicit-path staging only",
     ):
         assert phrase in next_work

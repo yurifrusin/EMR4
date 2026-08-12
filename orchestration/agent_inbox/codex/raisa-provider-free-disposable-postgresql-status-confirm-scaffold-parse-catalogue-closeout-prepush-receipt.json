@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_and_push_the_accepted_status_confirm_scaffold_parse_catalogue_closeout_on_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact fixed rehearsal passed eight source bindings, 80 hostile mutations, PostgreSQL 16 migration/catalogue admission, nine rolled-back authored-synthetic probes and verified exact-ID cleanup. Sol acceptance grants only this evidence and selects the disposable behavior/transaction rehearsal next; no route, command or operational authority is granted.",
+    "current_authority_allocation": "GPT Sol remains conductor, acceptance owner and sole task-branch publisher. The provider-free serial rehearsal used no subagent, external worker or provider lane; protected integration remains closed.",
+    "git_refs_and_worktree": "Task HEAD is bccc64f87eb0c1ae755b642fb6c4eb082298051d and origin task remains 163e0403cc3f18ebb2fbd0e47e14d01abf2554b6 before closeout publication. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Twelve tracked closeout/continuity paths and 521 untracked paths are visible; only named tranche closeout paths may be staged, and five docs/branding paths plus all unrelated untracked paths remain excluded.",
+    "live_handover_current_baton": "AGENTS.md now records Continuity 264 / Compass 246 and the accepted provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal at source bccc64f87eb0c1ae755b642fb6c4eb082298051d. Its paired closeout and next behavior/transaction direction are explicit.",
+    "protected_evidence_boundaries": "Protected holdouts and historical diary data remained sealed and AER-0292 exact-file-only access remains binding. No existing/product database, durable product data, patient/product data, provider/ADC/credential/browser action, route, watcher/event, application command, deployment, production, release, Pages or protected-ref movement occurred. docs/branding and every unrelated untracked path remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
