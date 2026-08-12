@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 237,
+  "map_revision": 238,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 255,
-  "orientation_statement": "EMR4 is at Continuity 255 / Compass 237. The provider-free compatibility conformance-harness repair restores the exact 311/311 baseline without an application change; the unmounted status transaction-kernel protocol rehearsal is next.",
+  "source_graph_revision": 256,
+  "orientation_statement": "EMR4 is at Continuity 256 / Compass 238. The provider-free unmounted status transaction-kernel protocol passes; the pure status-confirm kernel adapter contract is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2376,30 +2376,52 @@
         "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-precommit-receipt.json",
         "orchestration/human_inbox/yuri/2026-08-12--compatibility-conformance-harness-readiness-repair.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal",
+      "lineage_parent": "raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair",
+      "strategic_role": "Freeze status transaction semantics before any adapter or runtime",
+      "outcome": "The closed protocol proves authority, lock, replay and atomic receipt behavior without an effectful surface.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md",
+        "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md",
+        "docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json",
+        "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair",
-    "strategic_role": "Compatibility baseline trustworthy; status protocol next",
-    "why_now": "The exact ordinary suite is current, so transaction-kernel semantics can be evaluated against a clean behavioral baseline.",
-    "outcome": "The same 311 tests move from 45 classified harness failures to 311/311 without an application change.",
+    "node_id": "raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal",
+    "strategic_role": "Status transaction semantics frozen; pure adapter contract next",
+    "why_now": "Authority, locking, rollback and replay are closed before any route can depend on them.",
+    "outcome": "Fifteen decisions, eleven schedules and thirty-seven hostile mutations prove the unmounted protocol.",
     "unlocks": [
-      "Rehearse authority-first status transaction-kernel schedules in an unmounted authored-synthetic protocol.",
-      "Freeze atomic mutation, audit and completed-receipt behavior plus typed loser outcomes."
+      "Freeze the pure signed-confirmation-envelope to status-kernel transformation.",
+      "Bind fail-closed terminal parity and post-commit receipt serialization without executing a route."
     ],
     "does_not_solve": [
-      "Status route integration, raw-route convergence, external consumers or create schedule fencing.",
+      "Status route integration, raw-route convergence or create schedule fencing.",
       "Operational data, providers, commands, deployment, Pages or protected refs."
     ],
     "evidence": [
-      "docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md",
-      "docs/security/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json",
-      "docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-sol-acceptance.md",
-      "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-precommit-receipt.json",
-      "orchestration/human_inbox/yuri/2026-08-12--compatibility-conformance-harness-readiness-repair.md"
+      "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md",
+      "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md",
+      "docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json",
+      "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md"
     ]
   },
   "decision_horizon": [
@@ -2495,9 +2517,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Rehearse the provider-free unmounted status transaction-kernel protocol.",
-        "Keep every application route outside the protocol rehearsal.",
-        "Retain raw status until precondition, confirmation and idempotency ingress is accepted.",
+        "Freeze the provider-free unmounted status-confirm kernel adapter contract.",
+        "Preserve current fail-closed terminal-transition behavior until explicit policy acceptance.",
+        "Keep every application route outside the adapter contract.",
         "Select and prove a database-owned create schedule fence before create convergence."
       ],
       "boundary_changes": [],
@@ -2934,7 +2956,18 @@
         "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-sol-acceptance.md",
         "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-precommit-receipt.json",
-        "orchestration/human_inbox/yuri/2026-08-12--compatibility-conformance-harness-readiness-repair.md"
+        "orchestration/human_inbox/yuri/2026-08-12--compatibility-conformance-harness-readiness-repair.md",
+        "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md",
+        "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md",
+        "docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json",
+        "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md"
       ]
     },
     {
@@ -3779,6 +3812,8 @@
     }
   ],
   "map_limits": [
+    "Terminal status re-transition remains policy-deferred and fail-closed.",
+    "Protocol schedule success does not authorise an application route, database transaction or command.",
     "Test-only clock and header repair grants no application or command authority.",
     "A green compatibility suite does not prove external-consumer readiness or route-convergence safety.",
     "Forty-five stale tests are a harness repair obligation, not authority to weaken temporal or idempotency controls.",

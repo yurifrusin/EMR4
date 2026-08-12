@@ -212,12 +212,18 @@ status confirm-first without changing raw status. The subsequent test-only
 temporal/idempotency readiness repair also passes: the same 311-test collection
 moves from 266 pass / 45 classified harness failures to 311/311 through exactly
 eight test files, with the application tree and status-code assertions
-unchanged. The next bounded gate is the provider-free unmounted status
-transaction-kernel protocol rehearsal. It must prove authority-first ordering,
-canonical practice/appointment/idempotency locking, atomic mutation/audit/
-receipt behavior, replay and typed loser outcomes without importing or
-executing an application route, database, provider, watcher, event or command.
-No route change, kernel runtime or schedule fence begins in that rehearsal.
+unchanged. The provider-free unmounted status transaction-kernel protocol now
+also passes at exact source `bd381de83bc0b5d4b6b43b4bbb4e1e70a68d7f62`.
+Its fifteen decisions, eleven schedules and thirty-seven rejected hostile
+mutations bind authority-first receipt disclosure, the exact practice/
+appointment/idempotency lock subset, separate confirmation/freshness/
+idempotency, atomic mutation/audit/completed-receipt behavior and deterministic
+response-loss replay. Terminal re-transition remains effect-free and policy-
+deferred. The next bounded gate is a provider-free unmounted status-confirm
+kernel adapter contract: a pure mapping from the signed confirmation envelope
+to this protocol, including current fail-closed terminal parity and post-commit
+receipt serialization. No route, database, provider, watcher, event, command,
+kernel runtime or schedule fence opens in either unmounted tranche.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

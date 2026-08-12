@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 255,
+  "graph_revision": 256,
   "harvests": [],
   "nodes": [
     {
@@ -16272,7 +16272,7 @@
       "updated_at": "2026-08-12T00:00:00Z",
       "coordinates": {
         "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
-        "source_head": "48c1821af79f9d22b7c029fdbba8c4f984d239e5",
+        "source_head": "48c1821ad8b28c68204e70dea9972b6ba27e4dc1",
         "thread_id": null,
         "worktree_role": "task"
       },
@@ -16287,7 +16287,8 @@
         "notes": [
           "This is provider-free test-only conformance evidence.",
           "The application tree and status-code assertion set are unchanged.",
-          "All raw compatibility routes remain mounted and unchanged."
+          "All raw compatibility routes remain mounted and unchanged.",
+          "Live coordinate corrected from a nonexistent expanded SHA to the existing accepted Git object; historical evidence is unchanged."
         ]
       },
       "decisions": [
@@ -16337,6 +16338,86 @@
         "No status route imports or executes a kernel yet.",
         "External consumer readiness, raw-route convergence and create schedule fencing remain unproved.",
         "Operational data, providers, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal",
+      "title": "Provider-free unmounted status transaction-kernel protocol rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "bd381de83bc0b5d4b6b43b4bbb4e1e70a68d7f62",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is an authored-synthetic, provider-free and unmounted protocol.",
+          "No application route, database, provider, watcher, event or command executes.",
+          "The prior live parent-source citation is corrected to an existing Git object without rewriting historical closeout evidence."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unmounted-status-transaction-kernel-protocol",
+          "source": "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the closed status transaction protocol and keep all runtime authority closed."
+        }
+      ],
+      "claim_scope": [
+        "Fifteen decision scenarios and eleven transaction schedules bind authority-first evaluation and exact status locking.",
+        "All thirty-seven hostile mutations fail closed and only committed plans an effect.",
+        "Mutation, audit and completed receipt commit or roll back together; response loss replays the original receipt.",
+        "Terminal re-transition remains effect-free and policy-deferred.",
+        "Nine focused, 106 dependency/API, 308 compatibility and canonical 191 fast-profile tests pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md",
+          "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_status_transaction_kernel_protocol_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_status_transaction_kernel_protocol_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json",
+          "scripts/raisa_provider_free_unmounted_status_transaction_kernel_protocol_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The provider-free unmounted status-confirm kernel adapter contract is next.",
+        "Terminal-transition parity and post-commit receipt serialization must remain fail-closed in that pure contract.",
+        "No status route imports or executes a kernel yet; raw status remains mounted and unchanged.",
+        "Create schedule fencing, operational data, providers, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

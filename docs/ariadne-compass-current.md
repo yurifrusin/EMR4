@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 255 / Compass 237. The provider-free compatibility conformance-harness repair restores the exact 311/311 baseline without an application change; the unmounted status transaction-kernel protocol rehearsal is next.
+> EMR4 is at Continuity 256 / Compass 238. The provider-free unmounted status transaction-kernel protocol passes; the pure status-confirm kernel adapter contract is next.
 
 ## North star
 
@@ -284,23 +284,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Repository consumers are exactly classified; test-harness readiness repair is next before status-kernel protocol work. Lineage parent: `raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity`.
 134. **Restore a trustworthy compatibility baseline before status-kernel protocol work — Provider-free compatibility conformance-harness temporal/idempotency readiness repair**
    All 311 ordinary compatibility tests pass without application or assertion weakening. Lineage parent: `raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review`.
+135. **Freeze status transaction semantics before any adapter or runtime — Provider-free unmounted status transaction-kernel protocol rehearsal**
+   The closed protocol proves authority, lock, replay and atomic receipt behavior without an effectful surface. Lineage parent: `raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair`.
 
 ## Current position
 
-**Compatibility baseline trustworthy; status protocol next — Provider-free compatibility conformance-harness temporal/idempotency readiness repair**
+**Status transaction semantics frozen; pure adapter contract next — Provider-free unmounted status transaction-kernel protocol rehearsal**
 
-**Why this proof came next:** The exact ordinary suite is current, so transaction-kernel semantics can be evaluated against a clean behavioral baseline.
+**Why this proof came next:** Authority, locking, rollback and replay are closed before any route can depend on them.
 
-The same 311 tests move from 45 classified harness failures to 311/311 without an application change.
+Fifteen decisions, eleven schedules and thirty-seven hostile mutations prove the unmounted protocol.
 
 ### What this unlocks
 
-- Rehearse authority-first status transaction-kernel schedules in an unmounted authored-synthetic protocol.
-- Freeze atomic mutation, audit and completed-receipt behavior plus typed loser outcomes.
+- Freeze the pure signed-confirmation-envelope to status-kernel transformation.
+- Bind fail-closed terminal parity and post-commit receipt serialization without executing a route.
 
 ### What it does not solve
 
-- Status route integration, raw-route convergence, external consumers or create schedule fencing.
+- Status route integration, raw-route convergence or create schedule fencing.
 - Operational data, providers, commands, deployment, Pages or protected refs.
 
 ## Continuity and authority
@@ -368,9 +370,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Rehearse the provider-free unmounted status transaction-kernel protocol.
-- Keep every application route outside the protocol rehearsal.
-- Retain raw status until precondition, confirmation and idempotency ingress is accepted.
+- Freeze the provider-free unmounted status-confirm kernel adapter contract.
+- Preserve current fail-closed terminal-transition behavior until explicit policy acceptance.
+- Keep every application route outside the adapter contract.
 - Select and prove a database-owned create schedule fence before create convergence.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -560,6 +562,8 @@ Prerequisites:
 
 ## Map limits
 
+- Terminal status re-transition remains policy-deferred and fail-closed.
+- Protocol schedule success does not authorise an application route, database transaction or command.
 - Test-only clock and header repair grants no application or command authority.
 - A green compatibility suite does not prove external-consumer readiness or route-convergence safety.
 - Forty-five stale tests are a harness repair obligation, not authority to weaken temporal or idempotency controls.
@@ -1037,6 +1041,9 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-design.md`
 - `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-plan.md`
+- `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md`
+- `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-closeout.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
@@ -1143,6 +1150,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-source-specific-durability-architecture-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
@@ -1364,9 +1372,12 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-source-specific-durability-architecture-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-sol-acceptance.md`
@@ -1658,6 +1669,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/adapter-result.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/authored-synthetic-waiting-room-frame.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json`
@@ -1927,6 +1941,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md`
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2017,4 +2032,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 237; continuity graph revision 255._
+_Compass map revision 238; continuity graph revision 256._
