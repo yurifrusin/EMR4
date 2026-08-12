@@ -38,6 +38,10 @@ review_command_evidence:
 receipt_authoring:
   configured_event_discovery_command: python -m scripts.ariadne_orchestrator_preflight --list-continuation-events
   inferred_or_abbreviated_event_names: forbidden
+git_identity:
+  full_commit_ids: resolve_with_git_rev_parse
+  manual_short_sha_expansion: forbidden
+  verifier_worktree: reverify_exact_head_before_dispatch
 closed_surfaces:
   - database_or_docker_runtime
   - provider_or_external_retrieval

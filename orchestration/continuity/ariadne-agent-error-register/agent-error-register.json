@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 253,
+  "register_revision": 254,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11474,6 +11474,45 @@
           "orchestration/harness_settings/orchestrator_requirements.yaml",
           "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-incident-diagnosis-preplanning-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-253.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0286",
+      "attempt_id": "cf-d2-workflow-fluidity-review-worktree-001",
+      "observed_on": "2026-08-12",
+      "tranche": "ariadne-cf-d2-workflow-incident-diagnosis",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "reasoning_claim_error",
+      "process_severity": "low",
+      "expected_invariant": "Every exact candidate commit used for review-worktree creation must be the literal full object ID returned by Git and must be reverified before dispatch; short display IDs are never manually expanded.",
+      "observed_error": "Sol manually completed short candidate ID 9c040ec4 into a nonexistent 40-character value in the first git worktree add command. Git returned invalid reference before creating the r190 directory, branch or worktree. No verifier, provider, database, product or network operation occurred and the candidate remained unchanged.",
+      "detection_method": "The nonzero git worktree add result named invalid reference. Immediate git rev-parse HEAD returned exact candidate 9c040ec433f07ca82f42c1dae91d34b805ffefd3; path and branch checks proved the failed command created neither target.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-254.md",
+        "docs/ariadne-cf-d2-workflow-incident-diagnosis.md",
+        "orchestration/harness_settings/evidence_led_workflow.yaml"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_short_sha_expansion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the literal full candidate ID with git rev-parse HEAD, use that exact output for worktree creation and require ariadne_verifier_worktree_preflight to reverify the same full HEAD before dispatch.",
+        "prevention_control": "Treat full Git identities as command outputs, never memory or completion tasks. Worktree creation and verifier packets copy the literal git rev-parse result and a separate preflight compares the resulting worktree HEAD before any external call.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-254.md",
+          "orchestration/harness_settings/evidence_led_workflow.yaml",
+          "scripts/ariadne_verifier_worktree_preflight.py"
         ]
       },
       "status": "corrected"

@@ -50,6 +50,11 @@ The incident chain contained six independent process signals:
 6. coordinate-specific evidence isolated the anchor participant but not its
    internal assertions, leading to an overclaimed sole cause (AER-0284).
 
+During final-review preparation, Sol also manually expanded a short candidate
+ID into a nonexistent full SHA. Git rejected it before worktree creation;
+AER-0286 now requires exact identities to be copied from `git rev-parse` and
+reverified by worktree preflight rather than reconstructed from memory.
+
 During this diagnosis, intuitive receipt event `pre_plan` was rejected because
 the configured value is `pre_sprint_planning`. This is the fifth recurrence of
 the same vocabulary mismatch and is preserved as AER-0285. The repeated advice
@@ -106,6 +111,8 @@ all worked here.
 - Structured argv manifests and exact command-result admission replace command
   recitation in review text.
 - Receipt event values become CLI-discoverable.
+- Candidate identities are resolved and reverified by Git, never manually
+  expanded from short display IDs.
 - A second same-coordinate failure after a correction is an automatic stop or
   programme-direction change, not an invitation to nest another recovery.
 

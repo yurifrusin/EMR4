@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_failed_manual_sha_expansion_incident_and_git_resolved_identity_control_before_final_review_worktree_creation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The evidence-led repair candidate passed its deterministic gates at 9c040ec433f07ca82f42c1dae91d34b805ffefd3. The first worktree command used a manually fabricated nonexistent full SHA and failed before creating any path or branch. AER-0286 at register revision 254 now requires literal git rev-parse output plus verifier-worktree preflight; all 238 combined register/evidence tests and whitespace pass.",
+    "current_authority_allocation": "GPT Sol owns this contained workflow correction and exact candidate commit. No worker or verifier has been dispatched; the single fresh Gemini veto remains pending a valid Git-resolved worktree.",
+    "git_refs_and_worktree": "The active branch is codex/ariadne-bernie-davida-parallel-seam at exact Git-resolved HEAD 9c040ec433f07ca82f42c1dae91d34b805ffefd3 with only AER-0286, its revision note, policy/diagnosis amendment, regenerated pattern report and tests pending. Failed target C:/Users/sarashera/EMR4-worktrees/r190 and review branch do not exist. Required resumed HEAD remains an ancestor; local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md remains fully rehydrated for the active repository-only CF-D2 workflow diagnosis; CF-D2 runtime and all dependent durability work remain closed.",
+    "protected_evidence_boundaries": "No external reviewer, provider, Docker/database, product/patient/clinical data, protected evidence, credentials/IAM, product command, deployment, production, release, Pages or protected-ref operation occurred. docs/branding and unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
