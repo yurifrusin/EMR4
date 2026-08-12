@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "close_accept_advance_and_publish_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, threat delta, exact contract, pass evidence and Sol acceptance bind all sixteen serial scenarios, 100 hostile mutation rejections, 13 focused checks and 45 current seam/scaffold/API-contract checks. The route-mounting admission review is next and remains read-only; route edit/mount/call authority stays closed.",
+    "current_authority_allocation": "GPT Sol remains conductor, deterministic verifier, acceptance owner and explicit-path task-branch publisher. No subagent, provider worker, protected integrator or external runtime is selected.",
+    "git_refs_and_worktree": "Task HEAD is aed1bb076835e8cb6302f614869a285dba79983b after the exact source-evidence commit and required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Before closeout publication, origin task remains d4f637d6c2afadccc95d4b7ae8cfc1f522444133. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit current-tranche closeout/baton paths will be staged; all unrelated untracked paths, including docs/branding, remain excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely before this tranche. Its live baton at Continuity 264 / Compass 246 named this exact disposable PostgreSQL behavior/transaction rehearsal next; the accepted source packet is now immutable at aed1bb076835e8cb6302f614869a285dba79983b.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary data remain sealed; AER-0292 exact-file-only access remains binding. No existing/product database, durable or product data, mounted route, command/write, concurrency/restart/unknown-commit claim, patient/product data, provider/ADC/credential/browser action, watcher/event authority, deployment, production, release, Pages or protected-ref movement is authorized. docs/branding and every unrelated untracked path remain preserved; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

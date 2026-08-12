@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 264,
+  "graph_revision": 265,
   "harvests": [],
   "nodes": [
     {
@@ -17058,6 +17058,92 @@
       "unresolved_gates": [
         "The application transaction seam, ordered real locks, atomic appointment/audit/receipt write set, stored replay, response-loss retry and outer rollback remain unproved.",
         "No mounted route, product command, product data, concurrency, restart, unknown-commit, retention, performance or operations behavior has run.",
+        "Providers, credentials, patient/product data, watchers/events, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal",
+      "title": "Provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "aed1bb076835e8cb6302f614869a285dba79983b",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The result is provider-free, authored-synthetic and limited to one fully removed disposable PostgreSQL 16 server.",
+          "It proves the exact serial unmounted transaction seam and selected rollback boundaries; runtime authority remains false.",
+          "Routes, product databases/data, concurrency, providers, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-behavior-transaction-rehearsal",
+          "source": "docs/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact serial PostgreSQL lock order, atomic appointment/audit/v1-receipt behavior, stored replay and selected rollback evidence; hand off only to read-only route-mounting admission."
+        }
+      ],
+      "claim_scope": [
+        "One internal-network, portless, tmpfs-backed cached PostgreSQL 16 server admitted the exact selected schema and host SQLAlchemy seam through a fixed local relay.",
+        "Sixteen serial authored-synthetic scenarios proved current-authority precedence, exact statement lock classes, one atomic effect, stored replay and four rollback boundaries.",
+        "Eleven source bindings, 100 hostile mutations, 13 focused tests and 45 current lineage checks pass.",
+        "The relay stopped and exact captured-ID container and network cleanup was verified."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/attempt-001-cleanup-recovery.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/attempt-002-cleanup-recovery.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-behavior-transaction-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-behavior-transaction-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-closeout-prepush-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-closeout-prepush-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py",
+          "scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Mounted-route and adapter convergence remain unreviewed; no route was edited, mounted or called.",
+        "No product command/database/data, concurrency, restart, crash, unknown-commit, performance, retention or operations behavior is proved.",
         "Providers, credentials, patient/product data, watchers/events, deployment, Pages and protected refs remain closed."
       ]
     }

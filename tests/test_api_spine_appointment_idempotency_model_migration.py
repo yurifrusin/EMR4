@@ -24,6 +24,12 @@ A5_MIGRATION = (
     / "versions"
     / "v1w2x3y4z5a6_add_a5_check_in_runtime.py"
 )
+STATUS_CONFIRM_MIGRATION = (
+    ROOT
+    / "alembic"
+    / "versions"
+    / "w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py"
+)
 PREFLIGHT_DOC = (
     ROOT
     / "orchestration"
@@ -55,6 +61,11 @@ REQUIRED_COLUMNS = (
     "expires_at",
     "confirmation_evidence_hash",
     "confirmation_evidence_consumed_at",
+    "completed_receipt_version",
+    "session_binding_digest",
+    "pre_state_version",
+    "post_state_version",
+    "response_body_canonical_bytes",
 )
 FORBIDDEN_FIELDS = (
     "raw_idempotency_key",
@@ -98,6 +109,11 @@ def test_model_declares_appointment_command_idempotency_table_contract():
         "expires_at",
         "confirmation_evidence_hash",
         "confirmation_evidence_consumed_at",
+        "completed_receipt_version",
+        "session_binding_digest",
+        "pre_state_version",
+        "post_state_version",
+        "response_body_canonical_bytes",
     ):
         assert table.c[column].nullable is True
     assert str(table.c.actor_user_id.type) == "VARCHAR(64)"
@@ -178,6 +194,7 @@ def test_migration_matches_model_contract_and_previous_revision():
     text = _read(MIGRATION)
     stage2_text = _read(STAGE2_MIGRATION)
     a5_text = _read(A5_MIGRATION)
+    status_confirm_text = _read(STATUS_CONFIRM_MIGRATION)
 
     assert 'revision: str = "l1m2n3o4p5q6"' in text
     assert 'down_revision: Union[str, Sequence[str], None] = "k0l1m2n3o4p5"' in text
@@ -186,6 +203,11 @@ def test_migration_matches_model_contract_and_previous_revision():
         "bernie_session_id",
         "confirmation_evidence_hash",
         "confirmation_evidence_consumed_at",
+        "completed_receipt_version",
+        "session_binding_digest",
+        "pre_state_version",
+        "post_state_version",
+        "response_body_canonical_bytes",
     }
     for column in tuple(column for column in REQUIRED_COLUMNS if column not in later_columns):
         assert f'"{column}"' in text
@@ -194,6 +216,14 @@ def test_migration_matches_model_contract_and_previous_revision():
     assert 'sa.Column("bernie_session_id"' in stage2_text
     assert '"confirmation_evidence_hash"' in a5_text
     assert '"confirmation_evidence_consumed_at"' in a5_text
+    for column in (
+        "completed_receipt_version",
+        "session_binding_digest",
+        "pre_state_version",
+        "post_state_version",
+        "response_body_canonical_bytes",
+    ):
+        assert f'"{column}"' in status_confirm_text
     assert "ck_appt_cmd_idem_completed_create_correlation" in stage2_text
     assert "uq_appt_cmd_idem_audit_log_id" in stage2_text
     assert "uq_appt_cmd_idem_practice_actor_operation_key" in text

@@ -265,10 +265,17 @@ PostgreSQL 16 parse/catalogue rehearsal passes at exact source
 `bccc64f87eb0c1ae755b642fb6c4eb082298051d`: the exact target head, six
 columns, three constraints, trigger function, enabled trigger and version-one
 cutover match, all nine rolled-back authored-synthetic invariant probes pass,
-and captured-ID cleanup is verified. The next bounded gate is the disposable
-provider-free status-confirm behavior/transaction rehearsal. Route mounting,
-product data, providers, concurrency, restart, unknown commit, watchers,
-events, commands, deployment and schedule fencing remain closed.
+and captured-ID cleanup is verified. The disposable provider-free
+status-confirm behavior/transaction rehearsal now also passes at exact source
+`aed1bb076835e8cb6302f614869a285dba79983b`: all sixteen serial scenarios
+prove the frozen current-authority and statement-lock order, one atomic
+appointment/audit/v1-receipt effect, byte-stable stored replay, conflict and
+integrity classification, revocation precedence and four complete rollback
+boundaries. The fixed local relay stops and exact captured-ID container/network
+cleanup is verified. The next bounded gate is the provider-free read-only
+route-mounting admission review. Route edits/calls, product data, providers,
+concurrency, restart, unknown commit, watchers, events, commands, deployment
+and schedule fencing remain closed.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

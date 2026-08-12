@@ -29,10 +29,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 173434,
-  "ledger_line_count": 145,
+  "ledger_byte_count": 174625,
+  "ledger_line_count": 146,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "5ccf2a9fd63798fc3825cea2db4c4fb11681aec4315a19b36acb850c1b2f29cf",
+  "ledger_sha256": "4157a6b5d7f554cd8941789dad7b87fbcaa763b3f2619d926700a1fb1cde258e",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -162,14 +162,15 @@
     "Agent Execution Surface AES-C2 acceptance",
     "Provider-free unmounted status-confirm runtime convergence rehearsal acceptance",
     "Provider-free read-only status-confirm physical representability review acceptance",
-    "Provider-free unmounted status-confirm physical-design architecture acceptance"
+    "Provider-free unmounted status-confirm physical-design architecture acceptance",
+    "Provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal acceptance"
   ],
-  "moved_row_count": 129,
+  "moved_row_count": 130,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 72880,
-  "source_agents_git_blob_sha1": "75f7ac0db098dd83b09d0fa526245cf59a67f26c",
-  "source_agents_line_count": 487,
+  "source_agents_byte_count": 74070,
+  "source_agents_git_blob_sha1": "c35430ce02550a318a665f5fe8cba5a6cd489a21",
+  "source_agents_line_count": 488,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "ec2fae11dbfddca4ba350acfc02b393d1ed0df151a49abd458416c4eb0768692",
-  "source_git_head": "bccc64f87eb0c1ae755b642fb6c4eb082298051d"
+  "source_agents_sha256": "15b101c242cc64922e76edc73208e59b66cd6506d9dd8e95f6818d9ae77bc9f7",
+  "source_git_head": "aed1bb076835e8cb6302f614869a285dba79983b"
 }

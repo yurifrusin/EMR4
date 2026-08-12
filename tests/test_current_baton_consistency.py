@@ -8,8 +8,8 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-disposable-postgresql-status-confirm-scaffold-"
-    "parse-catalogue-rehearsal"
+    "raisa-provider-free-disposable-postgresql-status-confirm-behavior-"
+    "transaction-rehearsal"
 )
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
@@ -25,10 +25,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 264
+    assert graph["graph_revision"] == 265
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 246
-    assert compass["source_graph_revision"] == 264
+    assert compass["map_revision"] == 247
+    assert compass["source_graph_revision"] == 265
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -38,17 +38,18 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 264 / Compass 246" in current
-    assert "bccc64f87eb0c1ae755b642fb6c4eb082298051d" in current
+    assert "Continuity 265 / Compass 247" in current
+    assert "aed1bb076835e8cb6302f614869a285dba79983b" in current
     assert "runtime authority false" in current
-    assert "cached, networkless, portless and tmpfs-backed PostgreSQL 16" in current
-    assert "six columns" in current
-    assert "three constraints" in current
-    assert "ordinary-invoker function" in current
-    assert "one enabled trigger" in current
-    assert "nine rolled-back authored-synthetic probes" in current
-    assert "80 hostile mutations" in current
+    assert "cached, internal-network, portless and tmpfs-backed PostgreSQL 16" in current
+    assert "sixteen serial authored-synthetic scenarios" in current
+    assert "practice/appointment/idempotency lock classes" in current
+    assert "atomic appointment/audit/v1-receipt effect" in current
+    assert "byte-stable stored replay" in current
+    assert "four rollback boundaries" in current
+    assert "100 hostile mutations" in current
     assert "13 focused checks" in current
+    assert "45 current lineage checks" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
@@ -72,12 +73,10 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "Provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal" in next_work
-    assert "exact unmounted transaction seam and migration" in next_work
-    assert "current-authority and practice/appointment/idempotency lock order" in next_work
-    assert "atomic appointment/audit/v1-receipt behavior" in next_work
-    assert "stored replay, response-loss retry and full outer rollback" in next_work
-    assert "route mounting/calling" in next_work
+    assert "Provider-free read-only status-confirm route-mounting admission review" in next_work
+    assert "route, dependency, adapter, kernel and transaction boundaries" in next_work
+    assert "evidence-backed converge/block decision" in next_work
+    assert "no route edit, mounting or call" in next_work
     assert "patient/product data" in next_work
     assert "provider/ADC/credential/browser authorization" in next_work
     assert "attempt-016" not in relation.lower()
@@ -113,17 +112,13 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free disposable postgresql status-confirm behavior/transaction rehearsal",
-        "exact unmounted transaction seam and migration",
-        "authored-synthetic rows",
-        "current-authority and practice/appointment/idempotency lock order",
-        "atomic appointment/audit/v1-receipt behavior",
-        "stored replay",
-        "response-loss retry",
-        "full outer rollback",
-        "no existing/product database",
-        "durable product data",
-        "route mounting/calling",
+        "provider-free read-only status-confirm route-mounting admission review",
+        "route, dependency, adapter, kernel and transaction boundaries",
+        "evidence-backed converge/block decision",
+        "no route edit, mounting or call",
+        "existing/product database",
+        "durable or product data",
+        "command/write",
         "concurrency",
         "restart",
         "unknown-commit",
@@ -135,7 +130,6 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         "release",
         "pages",
         "protected-ref movement",
-        "freeze the scenario, executable, environment, ownership and cleanup contract before start",
         "explicit-path staging only",
     ):
         assert phrase in next_work
