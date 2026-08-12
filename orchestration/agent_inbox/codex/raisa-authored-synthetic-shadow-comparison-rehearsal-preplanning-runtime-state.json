@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "execute_the_provider_free_unmounted_authored_synthetic_shadow_comparison_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the default-off shadow-comparison architecture closeout. At Continuity 249 / Compass 231 it accepts exact architecture source e1dca1c6dc5d3f3e241548f80a226e5bb776417f and names the provider-free unmounted authored-synthetic shadow-comparison rehearsal as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "GPT Sol owns the narrow frozen plan, implementation, deterministic review and acceptance under Yuri's standing uninterrupted-development authority and the EMR4 API Steward rules. This tightly coupled provider-free pure rehearsal remains Sol-owned with no subagent, external worker or provider verifier. Yuri's authenticated Sydney Vertex Bernie ADC and standing model choice are acknowledged but unused because this tranche permits zero provider calls.",
+    "active_plan_and_acceptance": "The accepted default-off shadow architecture plan, design, exact contract, closeout and Sol acceptance were read with the parent pure-adapter design and closeout. The rehearsal must exercise disabled, admitted, expected-gap, unexpected-gap, unexpected-candidate, equivalent and divergent candidate, observer-failure, timeout, overflow and sink-failure cases; preserve each sealed primary result byte-for-byte; and emit at most one exact minimized diagnostic record without feedback or a command outcome.",
+    "protected_evidence_boundaries": "The tranche is provider-free, unmounted and authored-synthetic. It may add only a frozen rehearsal plan/design/threat delta, closed evidence schema and fixture, pure evaluator, deterministic tests, receipt and closeout/lifecycle artifacts. It may not import or execute an application route, create runtime wiring, queue, sink or persistence, access a database, source, watcher, event, network, provider, credential, IAM, metadata, product, patient, clinical, financial or free-text data, invoke the kernel, use an executable tool, issue a command/write, deploy, release, rebuild Pages, open protected evidence or move protected refs. docs/branding and every unrelated untracked file remain excluded.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at fb899b26966c1a171528306ae5ab49b80bacc947. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. The tracked tree is clean and exactly 504 untracked files are preserved before this new preplanning pair, including five docs/branding files and the accepted shadow-architecture pre-push receipt/state pair. Explicit-path staging only applies."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "authored_synthetic_shadow_comparison_rehearsal_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol is executing one pure authored-synthetic shadow-comparison rehearsal against the accepted static architecture."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external veto is selected before deterministic rehearsal evidence exists."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The tightly coupled pure rehearsal remains Sol-owned under the worker-lane economy rule."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

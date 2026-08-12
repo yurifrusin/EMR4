@@ -1,0 +1,878 @@
+{
+  "schema_version": "emr4.authored-synthetic-shadow-comparison-evidence.v1",
+  "artifact_kind": "provider_free_unmounted_authored_synthetic_rehearsal",
+  "status": "passed",
+  "source_head": "fb899b26966c1a171528306ae5ab49b80bacc947",
+  "source_bindings": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json",
+      "sha256": "1a4f7c4bc552a24594b2375d3f4773fe2770773b5b4d84418a10187f9ab72389"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-plan.md",
+      "sha256": "e1199e1902fa776c8b965567d4b6ba1aae10fbb13ba45e6c9a93073a3d6971bc"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture.md",
+      "sha256": "04aeb534c025ad48f498cfe89e09ccbb62b04da14f3331827fe82e384cf8c97e"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-closeout.md",
+      "sha256": "639490e15e6ccfec146cc5b48c22bf167b66c1cd24b4fcdfe071f67636baf2ae"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-sol-acceptance.md",
+      "sha256": "fbc47ae99c3e9dcf629a5af772d95aa131b5082cc04f5e5f2621f330b7feece0"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json",
+      "sha256": "7261a813562b2e01d5d91cb63e8576ec20a8764a7360e6f98fae14fb9a34d7d2"
+    },
+    {
+      "path": "scripts/raisa_provider_free_unmounted_pure_route_adapter_differential_rehearsal.py",
+      "sha256": "4caf07c8e2763c992d00354750f62603d28aebddbeda633d10913181ab8c82e7"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    }
+  ],
+  "architecture_binding": {
+    "architecture_schema_version": "emr4.default-off-shadow-comparison-architecture.v1",
+    "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+    "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+    "parent_posture": "current_raw_not_kernel_eligible",
+    "observer_runtime_created": false
+  },
+  "evidence_label": "provider_free_unmounted_authored_synthetic",
+  "semantic_expectation_digests": {
+    "raw_compat_create": "4f9e3e15feace896f83fa1868a44cafc968145c8716d89274cded93b4c387f1f",
+    "raw_compat_update": "ba9af26c4c49cb6614963bf98983d0ef1f11df1ab220d5f74da5d48d630d5347",
+    "raw_compat_status": "fc2612db4256da953090aa76e4ba9cc0f0a6a9b80c2ab8960a3b403fb704829b",
+    "raw_compat_delete": "5ad4cd47e5b5b67e2dd9e3d1233ebd8a6ef584eca0c3a55c696ec16ea2f5b42d"
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "shd-001-global-default-denied",
+      "case_kind": "disabled",
+      "route_adapter_id": "raw_compat_create",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "disabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "disabled_no_observation",
+        "adapter_called": false,
+        "adapter_result": "not_observed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "disabled_no_observation",
+        "observation_disposition": "disabled_no_observation",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_after_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 0,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    },
+    {
+      "scenario_id": "shd-002-practice-default-denied",
+      "case_kind": "disabled",
+      "route_adapter_id": "raw_compat_update",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "disabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "disabled_no_observation",
+        "adapter_called": false,
+        "adapter_result": "not_observed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "disabled_no_observation",
+        "observation_disposition": "disabled_no_observation",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_after_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 0,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    },
+    {
+      "scenario_id": "shd-003-route-default-denied",
+      "case_kind": "disabled",
+      "route_adapter_id": "raw_compat_status",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": false,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "disabled_no_observation",
+        "adapter_called": false,
+        "adapter_result": "not_observed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "disabled_no_observation",
+        "observation_disposition": "disabled_no_observation",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "9502707838ffe8a4373424ac8d4af460fd81909fbd49db44fad86acb80445267",
+        "primary_after_sha256": "9502707838ffe8a4373424ac8d4af460fd81909fbd49db44fad86acb80445267",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 0,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    },
+    {
+      "scenario_id": "shd-004-stale-generation-denied",
+      "case_kind": "disabled",
+      "route_adapter_id": "raw_compat_delete",
+      "controls": {
+        "generation_status": "stale",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "disabled_no_observation",
+        "adapter_called": false,
+        "adapter_result": "not_observed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "disabled_no_observation",
+        "observation_disposition": "disabled_no_observation",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "11746d335e48ba2c13db38e874076533b8843b28ecfb506ff0b0fab557c1b2cb",
+        "primary_after_sha256": "11746d335e48ba2c13db38e874076533b8843b28ecfb506ff0b0fab557c1b2cb",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 0,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    },
+    {
+      "scenario_id": "shd-005-missing-generation-denied",
+      "case_kind": "disabled",
+      "route_adapter_id": "raw_compat_create",
+      "controls": {
+        "generation_status": null,
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "disabled_no_observation",
+        "adapter_called": false,
+        "adapter_result": "not_observed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "disabled_no_observation",
+        "observation_disposition": "disabled_no_observation",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_after_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 0,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    },
+    {
+      "scenario_id": "shd-006-external-disable-denied",
+      "case_kind": "disabled",
+      "route_adapter_id": "raw_compat_update",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": true
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "disabled_no_observation",
+        "adapter_called": false,
+        "adapter_result": "not_observed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "disabled_no_observation",
+        "observation_disposition": "disabled_no_observation",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_after_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 0,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    },
+    {
+      "scenario_id": "shd-007-expected-current-gaps-create",
+      "case_kind": "admitted_expected_gap",
+      "route_adapter_id": "raw_compat_create",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "adapter_rejected",
+        "gap_codes": [
+          "backend_precondition_missing",
+          "confirmation_evidence_missing",
+          "idempotency_identity_missing"
+        ],
+        "mismatch_field_codes": [],
+        "comparison_class": "expected_current_gap_match",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_after_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_create",
+            "canonical_operation_id": "confirmAppointmentCreateProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-create-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-create-001",
+            "adapter_result": "adapter_rejected",
+            "gap_codes": [
+              "backend_precondition_missing",
+              "confirmation_evidence_missing",
+              "idempotency_identity_missing"
+            ],
+            "mismatch_field_codes": [],
+            "comparison_class": "expected_current_gap_match",
+            "timing_category": "within_budget",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-008-expected-current-gaps-update",
+      "case_kind": "admitted_expected_gap",
+      "route_adapter_id": "raw_compat_update",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "adapter_rejected",
+        "gap_codes": [
+          "backend_precondition_missing",
+          "confirmation_evidence_missing",
+          "idempotency_identity_missing"
+        ],
+        "mismatch_field_codes": [],
+        "comparison_class": "expected_current_gap_match",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_after_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_update",
+            "canonical_operation_id": "confirmAppointmentUpdateProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-update-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-update-001",
+            "adapter_result": "adapter_rejected",
+            "gap_codes": [
+              "backend_precondition_missing",
+              "confirmation_evidence_missing",
+              "idempotency_identity_missing"
+            ],
+            "mismatch_field_codes": [],
+            "comparison_class": "expected_current_gap_match",
+            "timing_category": "within_budget",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-009-expected-current-gaps-status",
+      "case_kind": "admitted_expected_gap",
+      "route_adapter_id": "raw_compat_status",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "adapter_rejected",
+        "gap_codes": [
+          "backend_precondition_missing",
+          "confirmation_evidence_missing",
+          "idempotency_identity_missing"
+        ],
+        "mismatch_field_codes": [],
+        "comparison_class": "expected_current_gap_match",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "9502707838ffe8a4373424ac8d4af460fd81909fbd49db44fad86acb80445267",
+        "primary_after_sha256": "9502707838ffe8a4373424ac8d4af460fd81909fbd49db44fad86acb80445267",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_status",
+            "canonical_operation_id": "confirmAppointmentStatusProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-status-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-status-001",
+            "adapter_result": "adapter_rejected",
+            "gap_codes": [
+              "backend_precondition_missing",
+              "confirmation_evidence_missing",
+              "idempotency_identity_missing"
+            ],
+            "mismatch_field_codes": [],
+            "comparison_class": "expected_current_gap_match",
+            "timing_category": "within_budget",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-010-expected-current-gaps-delete",
+      "case_kind": "admitted_expected_gap",
+      "route_adapter_id": "raw_compat_delete",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "adapter_rejected",
+        "gap_codes": [
+          "backend_precondition_missing",
+          "confirmation_evidence_missing",
+          "idempotency_identity_missing"
+        ],
+        "mismatch_field_codes": [],
+        "comparison_class": "expected_current_gap_match",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "11746d335e48ba2c13db38e874076533b8843b28ecfb506ff0b0fab557c1b2cb",
+        "primary_after_sha256": "11746d335e48ba2c13db38e874076533b8843b28ecfb506ff0b0fab557c1b2cb",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_delete",
+            "canonical_operation_id": "confirmAppointmentDeleteProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-delete-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-delete-001",
+            "adapter_result": "adapter_rejected",
+            "gap_codes": [
+              "backend_precondition_missing",
+              "confirmation_evidence_missing",
+              "idempotency_identity_missing"
+            ],
+            "mismatch_field_codes": [],
+            "comparison_class": "expected_current_gap_match",
+            "timing_category": "within_budget",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-011-unexpected-gap-set",
+      "case_kind": "unexpected_gap",
+      "route_adapter_id": "raw_compat_update",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_precondition_only",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "adapter_rejected",
+        "gap_codes": [
+          "confirmation_evidence_missing",
+          "idempotency_identity_missing"
+        ],
+        "mismatch_field_codes": [],
+        "comparison_class": "unexpected_gap_set",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_after_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_update",
+            "canonical_operation_id": "confirmAppointmentUpdateProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-update-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-update-001",
+            "adapter_result": "adapter_rejected",
+            "gap_codes": [
+              "confirmation_evidence_missing",
+              "idempotency_identity_missing"
+            ],
+            "mismatch_field_codes": [],
+            "comparison_class": "unexpected_gap_set",
+            "timing_category": "within_budget",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-012-unexpected-candidate",
+      "case_kind": "unexpected_candidate",
+      "route_adapter_id": "raw_compat_create",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_future_complete",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "candidate_mapped",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "unexpected_candidate_mapped",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_after_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_create",
+            "canonical_operation_id": "confirmAppointmentCreateProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-create-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-create-001",
+            "adapter_result": "candidate_mapped",
+            "gap_codes": [],
+            "mismatch_field_codes": [],
+            "comparison_class": "unexpected_candidate_mapped",
+            "timing_category": "within_budget",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-013-candidate-equivalent",
+      "case_kind": "candidate_equivalent",
+      "route_adapter_id": "raw_compat_status",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_future_complete",
+      "comparison_mode": "semantic_expectation",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "candidate_mapped",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "candidate_projection_equivalent",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "9502707838ffe8a4373424ac8d4af460fd81909fbd49db44fad86acb80445267",
+        "primary_after_sha256": "9502707838ffe8a4373424ac8d4af460fd81909fbd49db44fad86acb80445267",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_status",
+            "canonical_operation_id": "confirmAppointmentStatusProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-status-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-status-001",
+            "adapter_result": "candidate_mapped",
+            "gap_codes": [],
+            "mismatch_field_codes": [],
+            "comparison_class": "candidate_projection_equivalent",
+            "timing_category": "within_budget",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-014-candidate-divergent",
+      "case_kind": "candidate_divergent",
+      "route_adapter_id": "raw_compat_delete",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_future_divergent",
+      "comparison_mode": "semantic_expectation",
+      "fault": "none",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "candidate_mapped",
+        "gap_codes": [],
+        "mismatch_field_codes": [
+          "command_digest"
+        ],
+        "comparison_class": "candidate_projection_divergent",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "11746d335e48ba2c13db38e874076533b8843b28ecfb506ff0b0fab557c1b2cb",
+        "primary_after_sha256": "11746d335e48ba2c13db38e874076533b8843b28ecfb506ff0b0fab557c1b2cb",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_delete",
+            "canonical_operation_id": "confirmAppointmentDeleteProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-delete-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-delete-001",
+            "adapter_result": "candidate_mapped",
+            "gap_codes": [],
+            "mismatch_field_codes": [
+              "command_digest"
+            ],
+            "comparison_class": "candidate_projection_divergent",
+            "timing_category": "within_budget",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-015-observer-failure",
+      "case_kind": "observer_failure",
+      "route_adapter_id": "raw_compat_update",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "observer_failure",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": false,
+        "adapter_result": "observer_failed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": "observer_failed",
+        "observation_disposition": "record_emitted",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_after_sha256": "764f6811cd5bdd8270f8a5a6b1abf10f2df7553e87170e043d33a4acbb6fec20",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 1,
+        "diagnostic_records": [
+          {
+            "schema_version": "emr4.shadow-comparison-record.v1",
+            "architecture_generation_digest": "syn-hmac-sha256-architecture-generation-001",
+            "configuration_digest": "syn-hmac-sha256-shadow-configuration-001",
+            "route_adapter_id": "raw_compat_update",
+            "canonical_operation_id": "confirmAppointmentUpdateProposal",
+            "practice_scope_digest": "syn-hmac-sha256-practice-001",
+            "correlation_digest": "syn-hmac-sha256-correlation-update-001",
+            "request_shape_digest": "syn-hmac-sha256-request-shape-update-001",
+            "adapter_result": "observer_failed",
+            "gap_codes": [],
+            "mismatch_field_codes": [],
+            "comparison_class": "observer_failed",
+            "timing_category": "observer_failed_before_comparison",
+            "overflow_category": "not_overflowed",
+            "recorded_at": "2026-08-12T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "shd-016-timeout-drop",
+      "case_kind": "timeout",
+      "route_adapter_id": "raw_compat_status",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "timeout",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": false,
+        "adapter_result": "not_observed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": null,
+        "observation_disposition": "timeout_dropped",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "9502707838ffe8a4373424ac8d4af460fd81909fbd49db44fad86acb80445267",
+        "primary_after_sha256": "9502707838ffe8a4373424ac8d4af460fd81909fbd49db44fad86acb80445267",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 0,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    },
+    {
+      "scenario_id": "shd-017-overflow-drop",
+      "case_kind": "overflow",
+      "route_adapter_id": "raw_compat_delete",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "overflow",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": false,
+        "adapter_result": "not_observed",
+        "gap_codes": [],
+        "mismatch_field_codes": [],
+        "comparison_class": null,
+        "observation_disposition": "overflow_dropped",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "11746d335e48ba2c13db38e874076533b8843b28ecfb506ff0b0fab557c1b2cb",
+        "primary_after_sha256": "11746d335e48ba2c13db38e874076533b8843b28ecfb506ff0b0fab557c1b2cb",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 0,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    },
+    {
+      "scenario_id": "shd-018-sink-failure-drop",
+      "case_kind": "sink_failure",
+      "route_adapter_id": "raw_compat_create",
+      "controls": {
+        "generation_status": "current",
+        "global_state": "enabled",
+        "practice_state": "enabled",
+        "route_allowed": true,
+        "externally_disabled": false
+      },
+      "projection_profile": "raw_current",
+      "comparison_mode": "expected_current_gaps",
+      "fault": "sink_failure",
+      "observed": {
+        "admission_decision": "shadow_observation_admitted",
+        "adapter_called": true,
+        "adapter_result": "adapter_rejected",
+        "gap_codes": [
+          "backend_precondition_missing",
+          "confirmation_evidence_missing",
+          "idempotency_identity_missing"
+        ],
+        "mismatch_field_codes": [],
+        "comparison_class": "expected_current_gap_match",
+        "observation_disposition": "sink_failure_dropped",
+        "retry_count": 0,
+        "command_outcome": null,
+        "primary_before_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_after_sha256": "491a22f08acb27285f15dc6aac1e1b1a12c7d5b6efa3548a9875ebd3445ed260",
+        "primary_bytes_equal": true,
+        "record_candidate_count": 1,
+        "diagnostic_record_count": 0,
+        "diagnostic_records": []
+      }
+    }
+  ],
+  "summary": {
+    "scenario_count": 18,
+    "disabled_count": 6,
+    "admitted_count": 12,
+    "adapter_call_count": 9,
+    "primary_byte_equal_count": 18,
+    "record_candidate_count": 10,
+    "diagnostic_record_count": 9,
+    "maximum_records_per_scenario": 1,
+    "observer_failure_count": 1,
+    "timeout_drop_count": 1,
+    "overflow_drop_count": 1,
+    "sink_failure_drop_count": 1,
+    "command_outcome_count": 0
+  },
+  "claim_boundary": {
+    "application_route_imported_or_executed": false,
+    "observer_runtime_created": false,
+    "database_or_source_accessed": false,
+    "event_or_watcher_consumed": false,
+    "provider_or_network_used": false,
+    "product_or_patient_data_used": false,
+    "kernel_or_command_invoked": false,
+    "command_or_write_performed": false,
+    "deployment_or_release_performed": false,
+    "protected_ref_moved": false
+  },
+  "effect_boundary": {
+    "runtime_hook_or_feature_flag": false,
+    "thread_process_queue_or_sink": false,
+    "persistence_retention_or_aggregation": false,
+    "response_or_header_change": false,
+    "transaction_or_audit_change": false,
+    "retry_or_latency_feedback": false,
+    "kernel_eligibility_or_command_outcome": false,
+    "client_behavior_change": false
+  },
+  "next_safe_descendant": "separately_reviewed_default_off_runtime_instrumentation_plan"
+}

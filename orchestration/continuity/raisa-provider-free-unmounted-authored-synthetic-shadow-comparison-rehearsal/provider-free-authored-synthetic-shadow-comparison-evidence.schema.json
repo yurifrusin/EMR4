@@ -1,0 +1,443 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json",
+  "title": "Provider-free authored-synthetic shadow-comparison evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "status",
+    "source_head",
+    "source_bindings",
+    "architecture_binding",
+    "evidence_label",
+    "semantic_expectation_digests",
+    "scenario_results",
+    "summary",
+    "claim_boundary",
+    "effect_boundary",
+    "next_safe_descendant"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.authored-synthetic-shadow-comparison-evidence.v1"
+    },
+    "artifact_kind": {
+      "const": "provider_free_unmounted_authored_synthetic_rehearsal"
+    },
+    "status": {"const": "passed"},
+    "source_head": {"$ref": "#/$defs/gitSha"},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/sourceBinding"}
+    },
+    "architecture_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "architecture_schema_version",
+        "architecture_generation_digest",
+        "configuration_digest",
+        "parent_posture",
+        "observer_runtime_created"
+      ],
+      "properties": {
+        "architecture_schema_version": {
+          "const": "emr4.default-off-shadow-comparison-architecture.v1"
+        },
+        "architecture_generation_digest": {"$ref": "#/$defs/syntheticLabel"},
+        "configuration_digest": {"$ref": "#/$defs/syntheticLabel"},
+        "parent_posture": {"const": "current_raw_not_kernel_eligible"},
+        "observer_runtime_created": {"const": false}
+      }
+    },
+    "evidence_label": {
+      "const": "provider_free_unmounted_authored_synthetic"
+    },
+    "semantic_expectation_digests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_compat_create",
+        "raw_compat_update",
+        "raw_compat_status",
+        "raw_compat_delete"
+      ],
+      "properties": {
+        "raw_compat_create": {"$ref": "#/$defs/sha256"},
+        "raw_compat_update": {"$ref": "#/$defs/sha256"},
+        "raw_compat_status": {"$ref": "#/$defs/sha256"},
+        "raw_compat_delete": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "scenario_results": {
+      "type": "array",
+      "minItems": 18,
+      "maxItems": 18,
+      "items": {"$ref": "#/$defs/scenario"}
+    },
+    "summary": {"$ref": "#/$defs/summary"},
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "application_route_imported_or_executed",
+        "observer_runtime_created",
+        "database_or_source_accessed",
+        "event_or_watcher_consumed",
+        "provider_or_network_used",
+        "product_or_patient_data_used",
+        "kernel_or_command_invoked",
+        "command_or_write_performed",
+        "deployment_or_release_performed",
+        "protected_ref_moved"
+      ],
+      "properties": {
+        "application_route_imported_or_executed": {"const": false},
+        "observer_runtime_created": {"const": false},
+        "database_or_source_accessed": {"const": false},
+        "event_or_watcher_consumed": {"const": false},
+        "provider_or_network_used": {"const": false},
+        "product_or_patient_data_used": {"const": false},
+        "kernel_or_command_invoked": {"const": false},
+        "command_or_write_performed": {"const": false},
+        "deployment_or_release_performed": {"const": false},
+        "protected_ref_moved": {"const": false}
+      }
+    },
+    "effect_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_hook_or_feature_flag",
+        "thread_process_queue_or_sink",
+        "persistence_retention_or_aggregation",
+        "response_or_header_change",
+        "transaction_or_audit_change",
+        "retry_or_latency_feedback",
+        "kernel_eligibility_or_command_outcome",
+        "client_behavior_change"
+      ],
+      "properties": {
+        "runtime_hook_or_feature_flag": {"const": false},
+        "thread_process_queue_or_sink": {"const": false},
+        "persistence_retention_or_aggregation": {"const": false},
+        "response_or_header_change": {"const": false},
+        "transaction_or_audit_change": {"const": false},
+        "retry_or_latency_feedback": {"const": false},
+        "kernel_eligibility_or_command_outcome": {"const": false},
+        "client_behavior_change": {"const": false}
+      }
+    },
+    "next_safe_descendant": {
+      "const": "separately_reviewed_default_off_runtime_instrumentation_plan"
+    }
+  },
+  "$defs": {
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "syntheticLabel": {
+      "type": "string",
+      "pattern": "^syn-[a-z0-9-]+$"
+    },
+    "routeAdapter": {
+      "enum": [
+        "raw_compat_create",
+        "raw_compat_update",
+        "raw_compat_status",
+        "raw_compat_delete"
+      ]
+    },
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generation_status",
+        "global_state",
+        "practice_state",
+        "route_allowed",
+        "externally_disabled"
+      ],
+      "properties": {
+        "generation_status": {
+          "type": ["string", "null"],
+          "enum": ["current", "stale", null]
+        },
+        "global_state": {
+          "type": ["string", "null"],
+          "enum": ["enabled", "disabled", null]
+        },
+        "practice_state": {
+          "type": ["string", "null"],
+          "enum": ["enabled", "disabled", null]
+        },
+        "route_allowed": {"type": ["boolean", "null"]},
+        "externally_disabled": {"type": ["boolean", "null"]}
+      }
+    },
+    "diagnosticRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "architecture_generation_digest",
+        "configuration_digest",
+        "route_adapter_id",
+        "canonical_operation_id",
+        "practice_scope_digest",
+        "correlation_digest",
+        "request_shape_digest",
+        "adapter_result",
+        "gap_codes",
+        "mismatch_field_codes",
+        "comparison_class",
+        "timing_category",
+        "overflow_category",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.shadow-comparison-record.v1"},
+        "architecture_generation_digest": {"$ref": "#/$defs/syntheticLabel"},
+        "configuration_digest": {"$ref": "#/$defs/syntheticLabel"},
+        "route_adapter_id": {"$ref": "#/$defs/routeAdapter"},
+        "canonical_operation_id": {
+          "enum": [
+            "confirmAppointmentCreateProposal",
+            "confirmAppointmentUpdateProposal",
+            "confirmAppointmentStatusProposal",
+            "confirmAppointmentDeleteProposal"
+          ]
+        },
+        "practice_scope_digest": {"$ref": "#/$defs/syntheticLabel"},
+        "correlation_digest": {"$ref": "#/$defs/syntheticLabel"},
+        "request_shape_digest": {"$ref": "#/$defs/syntheticLabel"},
+        "adapter_result": {
+          "enum": ["adapter_rejected", "candidate_mapped", "observer_failed"]
+        },
+        "gap_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 3,
+          "items": {
+            "enum": [
+              "backend_precondition_missing",
+              "confirmation_evidence_missing",
+              "idempotency_identity_missing"
+            ]
+          }
+        },
+        "mismatch_field_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 1,
+          "items": {"const": "command_digest"}
+        },
+        "comparison_class": {
+          "enum": [
+            "expected_current_gap_match",
+            "unexpected_gap_set",
+            "unexpected_candidate_mapped",
+            "candidate_projection_divergent",
+            "candidate_projection_equivalent",
+            "observer_failed"
+          ]
+        },
+        "timing_category": {
+          "enum": ["within_budget", "observer_failed_before_comparison"]
+        },
+        "overflow_category": {"const": "not_overflowed"},
+        "recorded_at": {"const": "2026-08-12T00:00:00Z"}
+      }
+    },
+    "observed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admission_decision",
+        "adapter_called",
+        "adapter_result",
+        "gap_codes",
+        "mismatch_field_codes",
+        "comparison_class",
+        "observation_disposition",
+        "retry_count",
+        "command_outcome",
+        "primary_before_sha256",
+        "primary_after_sha256",
+        "primary_bytes_equal",
+        "record_candidate_count",
+        "diagnostic_record_count",
+        "diagnostic_records"
+      ],
+      "properties": {
+        "admission_decision": {
+          "enum": ["disabled_no_observation", "shadow_observation_admitted"]
+        },
+        "adapter_called": {"type": "boolean"},
+        "adapter_result": {
+          "enum": [
+            "not_observed",
+            "adapter_rejected",
+            "candidate_mapped",
+            "observer_failed"
+          ]
+        },
+        "gap_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 3,
+          "items": {
+            "enum": [
+              "backend_precondition_missing",
+              "confirmation_evidence_missing",
+              "idempotency_identity_missing"
+            ]
+          }
+        },
+        "mismatch_field_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 1,
+          "items": {"const": "command_digest"}
+        },
+        "comparison_class": {
+          "type": ["string", "null"],
+          "enum": [
+            "expected_current_gap_match",
+            "unexpected_gap_set",
+            "unexpected_candidate_mapped",
+            "candidate_projection_divergent",
+            "candidate_projection_equivalent",
+            "observer_failed",
+            "disabled_no_observation",
+            null
+          ]
+        },
+        "observation_disposition": {
+          "enum": [
+            "disabled_no_observation",
+            "record_emitted",
+            "timeout_dropped",
+            "overflow_dropped",
+            "sink_failure_dropped"
+          ]
+        },
+        "retry_count": {"const": 0},
+        "command_outcome": {"type": "null"},
+        "primary_before_sha256": {"$ref": "#/$defs/sha256"},
+        "primary_after_sha256": {"$ref": "#/$defs/sha256"},
+        "primary_bytes_equal": {"const": true},
+        "record_candidate_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "diagnostic_record_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "diagnostic_records": {
+          "type": "array",
+          "maxItems": 1,
+          "items": {"$ref": "#/$defs/diagnosticRecord"}
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "case_kind",
+        "route_adapter_id",
+        "controls",
+        "projection_profile",
+        "comparison_mode",
+        "fault",
+        "observed"
+      ],
+      "properties": {
+        "scenario_id": {
+          "type": "string",
+          "pattern": "^shd-[0-9]{3}-[a-z0-9-]+$"
+        },
+        "case_kind": {
+          "enum": [
+            "disabled",
+            "admitted_expected_gap",
+            "unexpected_gap",
+            "unexpected_candidate",
+            "candidate_equivalent",
+            "candidate_divergent",
+            "observer_failure",
+            "timeout",
+            "overflow",
+            "sink_failure"
+          ]
+        },
+        "route_adapter_id": {"$ref": "#/$defs/routeAdapter"},
+        "controls": {"$ref": "#/$defs/controls"},
+        "projection_profile": {
+          "enum": [
+            "raw_current",
+            "raw_precondition_only",
+            "raw_future_complete",
+            "raw_future_divergent"
+          ]
+        },
+        "comparison_mode": {
+          "enum": ["expected_current_gaps", "semantic_expectation"]
+        },
+        "fault": {
+          "enum": ["none", "observer_failure", "timeout", "overflow", "sink_failure"]
+        },
+        "observed": {"$ref": "#/$defs/observed"}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_count",
+        "disabled_count",
+        "admitted_count",
+        "adapter_call_count",
+        "primary_byte_equal_count",
+        "record_candidate_count",
+        "diagnostic_record_count",
+        "maximum_records_per_scenario",
+        "observer_failure_count",
+        "timeout_drop_count",
+        "overflow_drop_count",
+        "sink_failure_drop_count",
+        "command_outcome_count"
+      ],
+      "properties": {
+        "scenario_count": {"const": 18},
+        "disabled_count": {"const": 6},
+        "admitted_count": {"const": 12},
+        "adapter_call_count": {"const": 9},
+        "primary_byte_equal_count": {"const": 18},
+        "record_candidate_count": {"const": 10},
+        "diagnostic_record_count": {"const": 9},
+        "maximum_records_per_scenario": {"const": 1},
+        "observer_failure_count": {"const": 1},
+        "timeout_drop_count": {"const": 1},
+        "overflow_drop_count": {"const": 1},
+        "sink_failure_drop_count": {"const": 1},
+        "command_outcome_count": {"const": 0}
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_verified_provider_free_unmounted_authored_synthetic_shadow_comparison_rehearsal_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely for this tranche. At Continuity 249 / Compass 231 it accepts exact shadow-architecture source e1dca1c6dc5d3f3e241548f80a226e5bb776417f and requires the provider-free unmounted authored-synthetic shadow-comparison rehearsal next.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled pure implementation, deterministic review and candidate commit under Yuri's standing uninterrupted-development authority and the API Steward rules. No subagent, external worker, provider verifier or provider call was used; the authenticated Sydney Vertex Bernie ADC remained unused.",
+    "active_plan_and_acceptance": "The frozen rehearsal plan implements exactly eighteen cases: six denied admissions, four admitted current-gap cases, unexpected gap/candidate, equivalent/divergent candidate, observer failure, timeout, overflow and sink failure. The exact fixture replays, all 51 hostile mutations fail closed, 17 tranche tests and 209 focused parent/API Spine tests pass, and the canonical 191-test fast profile passes with Ruff, 202 maintained-source compilation, Diary syntax and whitespace.",
+    "protected_evidence_boundaries": "The candidate remains provider-free, unmounted and authored-synthetic. It imports no application route and creates no runtime hook, queue, sink or persistence. It accesses no database, source, watcher, event, network, provider, credential, IAM, metadata, product, patient, clinical, financial or free-text data; invokes no kernel; issues no command/write; deploys or releases nothing; rebuilds no Pages and moves no protected ref. All diagnostic records are exact minimized fixtures with no command outcome.",
+    "git_refs_and_worktree": "Before candidate staging, task HEAD and origin task remain fb899b26966c1a171528306ae5ab49b80bacc947; local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. The original 504 untracked-file path set, including five docs/branding files and the shadow-architecture pre-push pair, exactly matches SHA-256 c2c9fb1220c27422dc93ba5bcc07ee4c1663f736c5963e09efc1dc3674a096fc after excluding only this tranche's owned files. Explicit-path staging only applies."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "authored_synthetic_shadow_comparison_rehearsal_candidate_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol has reviewed the exact pure candidate and its deterministic passing evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external veto was needed for this provider-free pure rehearsal."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker was assigned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport was not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
