@@ -185,6 +185,17 @@ remains a named later extension with one logical consumer per database event
 partition, optional externally fenced active/standby replicas, retained CF-D1
 evidence and any CF-D2 return gated by a fresh observability-first plan.
 
+The provider-free legacy-route sequence now also passes through a source-bound
+default-off runtime-instrumentation architecture. Four exact raw appointment
+route seams preserve the source-owned command result: route-local code may only
+stage one minimized projection after helper success, and a separate outer ASGI
+finalizer may offer it only after the original final response-body send
+succeeds. Immutable configuration is globally disabled with empty practice and
+route allowlists; missing server-owned session/correlation context denies. No
+observer, sink or runtime was created. The next bounded descendant is a
+globally-disabled typed scaffold with zero-work disabled-path and exact
+authored-synthetic route-parity proof before any enablement can be considered.
+
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
 mounted GraphQL read/REST command/event fresh-read/default-off boundaries and

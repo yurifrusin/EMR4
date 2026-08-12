@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 250,
+  "graph_revision": 251,
   "harvests": [],
   "nodes": [
     {
@@ -15945,6 +15945,84 @@
         "No application hook, route edit, feature runtime, thread, process, queue, sink, persistence, retention or monitoring exists.",
         "Real route placement, dependency exclusion, product hashing, latency and backpressure remain unproved.",
         "Database/source/watcher/event access, patient/product data, providers, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-default-off-runtime-instrumentation-architecture",
+      "title": "Provider-free default-off runtime-instrumentation architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "ed52950f451af88892a8f469157ecf8c8567da81",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is a provider-free source-bound static architecture.",
+          "It edits, imports or executes no application route and creates no runtime instrumentation.",
+          "Missing safe server-owned request context denies staging; the shadow has no response or command feedback."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-default-off-runtime-instrumentation-architecture",
+          "source": "docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the two-phase post-helper staging and post-final-send no-return handoff architecture."
+        }
+      ],
+      "claim_scope": [
+        "Exactly four raw route seams are source-hashed with current helper and return-form facts.",
+        "Route success seals transaction, audit and logical result, not serialized response bytes.",
+        "A single-assignment cell bridges route-local staging to one post-final-send offer_nowait handoff.",
+        "The exact twenty-four projection and fifteen diagnostic fields accept no free text or response material.",
+        "All twelve feedback edges and all sixty hostile mutations fail closed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-default-off-runtime-instrumentation-architecture.md",
+          "docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--default-off-runtime-instrumentation-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_runtime_instrumentation_architecture.py",
+          "tests/test_raisa_provider_free_default_off_runtime_instrumentation_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json",
+          "orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.schema.json",
+          "scripts/raisa_provider_free_default_off_runtime_instrumentation_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No request context, configuration, middleware, route hook, observer, queue, sink or persistence is implemented.",
+        "Disabled-path route parity, ASGI ordering, request-cell lifecycle and failure isolation remain runtime-scaffold proof obligations.",
+        "Practice enablement, operational data, kernel convergence, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

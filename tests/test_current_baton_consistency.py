@@ -8,7 +8,7 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal"
+    "raisa-provider-free-default-off-runtime-instrumentation-architecture"
 )
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
@@ -24,10 +24,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 250
+    assert graph["graph_revision"] == 251
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 232
-    assert compass["source_graph_revision"] == 250
+    assert compass["map_revision"] == 233
+    assert compass["source_graph_revision"] == 251
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -37,12 +37,12 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 250 / Compass 232" in current
-    assert "Eighteen pure cases" in current
-    assert "six fail-closed admissions" in current
-    assert "All 51 hostile mutations" in current
-    assert "never more than one per case" in current
-    assert "47b5f09ecf35225da25812ba87bb656a1094fc7e" in current
+    assert "Continuity 251 / Compass 233" in current
+    assert "two-phase seam" in current
+    assert "original final ASGI response-body send succeeds" in current
+    assert "all 60 hostile mutations" in current
+    assert "No application route was edited/imported/executed" in current
+    assert "ed52950f451af88892a8f469157ecf8c8567da81" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
@@ -54,10 +54,12 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "beb4e65cddf72437948d72e08dd18c2ea4f0c609" in relation
     assert "e1dca1c6dc5d3f3e241548f80a226e5bb776417f" in relation
     assert "47b5f09ecf35225da25812ba87bb656a1094fc7e" in relation
-    assert "default-off runtime-instrumentation architecture plan" in next_work
-    assert "database/source/watcher/event/provider" in next_work
-    assert "product/patient data" in next_work
-    assert "executable tool" in next_work
+    assert "ed52950f451af88892a8f469157ecf8c8567da81" in relation
+    assert "provider-free globally-disabled instrumentation scaffold" in next_work
+    assert "zero context/projection/digest/handoff work" in next_work
+    assert "database/source/watcher/event/provider access" in next_work
+    assert "real product/patient data" in next_work
+    assert "no downstream observer or sink" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -91,15 +93,15 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "default-off runtime-instrumentation architecture plan",
-        "may read repository source",
-        "database/source/watcher/event/provider",
-        "product/patient data",
-        "executable tool",
-        "command/write",
+        "provider-free globally-disabled instrumentation scaffold",
+        "global default disabled",
+        "database/source/watcher/event/provider access",
+        "real product/patient data",
+        "command expansion",
+        "no downstream observer or sink",
         "docs/branding/",
         "deployment",
         "pages",
-        "protected refs",
+        "protected-ref movement",
     ):
         assert phrase in next_work

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 250 / Compass 232. The provider-free unmounted authored-synthetic shadow rehearsal passes eighteen cases with all primary bytes unchanged, nine minimized records and 51 hostile mutations rejected. The next safe tranche is a separately reviewed default-off runtime-instrumentation architecture plan.
+> EMR4 is at Continuity 251 / Compass 233. The provider-free source-bound runtime-instrumentation architecture passes with four exact route seams, a two-phase post-final-send handoff and 60 hostile mutations rejected. The next safe tranche is the globally-disabled typed scaffold.
 
 ## North star
 
@@ -274,23 +274,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Static default-off architecture passes; authored-synthetic shadow behavior rehearsal is next. Lineage parent: `raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal`.
 129. **Prove diagnostic shadow behavior without route or runtime authority — Provider-free unmounted authored-synthetic shadow-comparison rehearsal**
    Eighteen pure cases pass with byte-identical primary results; runtime-instrumentation architecture review is next. Lineage parent: `raisa-provider-free-unmounted-default-off-shadow-comparison-architecture`.
+130. **Freeze an honest default-off mounting seam at the four raw routes — Provider-free default-off runtime-instrumentation architecture**
+   Two-phase static architecture passes; the globally-disabled typed scaffold is next. Lineage parent: `raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal`.
 
 ## Current position
 
-**Pure shadow behavior proved; default-off mounting architecture next — Provider-free unmounted authored-synthetic shadow-comparison rehearsal**
+**Default-off mounting architecture proved; globally-disabled typed scaffold next — Provider-free default-off runtime-instrumentation architecture**
 
-**Why this proof came next:** The static boundary and pure failure behavior now pass, so the four real route seams can be inspected without yet editing or executing them.
+**Why this proof came next:** The pure shadow rehearsal and exact source seams now support the narrowest reversible implementation without enabling observation.
 
-Eighteen scenarios preserve every primary byte, bound output to one minimized record and contain timeout, overflow, observer and sink failure.
+Four route-local staging seams and one post-final-send handoff boundary pass sixty hostile mutations with no runtime creation.
 
 ### What this unlocks
 
-- Freeze exact post-result hook points, dependency exclusions and immutable default-off controls for the four raw route seams.
-- Define the deterministic static proof required before any route instrumentation implementation can begin.
+- Implement immutable generation, safe request context, minimized projection, request cell and after-send interfaces in the disabled state.
+- Prove zero disabled-path reads/handoffs and exact four-route authored-synthetic behavioral parity.
 
 ### What it does not solve
 
-- Application instrumentation, feature runtime, product hashing, queue/sink persistence, latency isolation, client migration or database fencing.
+- Practice enablement, observer/sink operation, persistence, monitoring, client migration or database fencing.
 - Durable cue delivery, CF-D2, patient/product data, providers, commands, deployment, Pages or protected refs.
 
 ## Continuity and authority
@@ -358,8 +360,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Freeze the separately reviewed default-off runtime-instrumentation architecture before any route edit.
-- Prove exact post-result placement, default-off configuration and dependency exclusion at the four raw route seams.
+- Implement only a globally-disabled typed instrumentation scaffold with no observer or sink.
+- Prove disabled-path zero projection/handoff plus exact authored-synthetic response, header, audit, commit and failure parity.
 - Then prove ordinary and fallback client proposal/confirm parity before raw-route kernel convergence.
 - Select and prove a database-owned create schedule fence before create convergence.
 - Retain Durable Event and Cue Delivery as a later observability-first extension.
@@ -551,6 +553,7 @@ Prerequisites:
 
 ## Map limits
 
+- The runtime-instrumentation result is static architecture only; no request context, route hook, middleware, observer, queue, sink or persistence exists.
 - The shadow result is pure authored-synthetic evidence only; no route instrumentation, observer runtime, queue, sink or persistence exists.
 - The shadow result is static architecture only; no route hook, observer, queue, sink, persistence or runtime exists.
 - The pure route-adapter result is authored-synthetic and inert; complete mapping does not grant current raw-route or runtime eligibility.
@@ -917,6 +920,9 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`
 - `docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md`
 - `docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md`
+- `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-closeout.md`
+- `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-plan.md`
+- `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md`
@@ -1081,6 +1087,7 @@ Prerequisites:
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md`
@@ -1295,6 +1302,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-independent-veto.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-sol-recovery-lease.md`
+- `orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-candidate-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-sol-acceptance.md`
@@ -1553,6 +1563,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json`
+- `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json`
@@ -1863,6 +1875,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--authored-synthetic-shadow-comparison-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md`
+- `orchestration/human_inbox/yuri/2026-08-12--default-off-runtime-instrumentation-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--default-off-shadow-comparison-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md`
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
@@ -1957,4 +1970,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 232; continuity graph revision 250._
+_Compass map revision 233; continuity graph revision 251._
