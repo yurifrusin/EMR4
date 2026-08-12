@@ -1,0 +1,205 @@
+{
+  "schema_version": "raisa.status_confirm_physical_schema_transaction_scaffold.v1",
+  "result": "raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold_pass",
+  "source_head": "a30db2e8bfcb6b067b55985cabf2e6200906f182",
+  "evidence_label": "authored_synthetic_provider_free_unmounted_scaffold",
+  "implementation_status": "unmounted_scaffold_only",
+  "input_bindings": [
+    {
+      "path": "docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-plan.md",
+      "sha256": "0c7a02078aa360ecc14a6af1af8a12047bad39c68c38862d9e4360c9577556c0"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-threat-model-delta.md",
+      "sha256": "3ca874ef0215fb57c74bb8e886c9bc48a912666830c9530e4165a21186dfcfc5"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-closeout.md",
+      "sha256": "f129c571af6115ac511cab657b80469c8ae7f31397882e2831af377259b480c0"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-status-confirm-physical-design-architecture-sol-acceptance.md",
+      "sha256": "87b58e839e1f27339c2ca5759a02f518691a39fa3fb2aeae6d01848b3e7cb2a8"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-design-architecture/physical-design-contract.json",
+      "sha256": "a9c173091ab428732e176d90450fde388ef16d8557465b34c2b5cc9719420548"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+    },
+    {
+      "path": "app/models/__init__.py",
+      "sha256": "52650eeb8bc97abd79de78cfc47c78396d38e5f714b512ca065603b1cfefeecc"
+    },
+    {
+      "path": "app/models/tenancy.py",
+      "sha256": "6be0d9ab4fc33a8709268d2f2a4550b6063e3f3e4188349c5fe3b0b6acd14431"
+    },
+    {
+      "path": "app/services/appointment_idempotency.py",
+      "sha256": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410"
+    },
+    {
+      "path": "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py",
+      "sha256": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+    }
+  ],
+  "implementation_bindings": [
+    {
+      "path": "app/models/appointments.py",
+      "sha256": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915"
+    },
+    {
+      "path": "app/services/appointment_status_physical.py",
+      "sha256": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b"
+    },
+    {
+      "path": "alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py",
+      "sha256": "bfa72b627061b8e477903ec9fc2cfbb35a4970b26ab7115db18c3daef1d3696c"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+      "sha256": "28060c2f5b1cb4ff00f62b498511995a35a630963e586920115f34740c5d1ac3"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-plan.md",
+      "sha256": "67467644fcda5a8d3c0329a2433cb7e8dd597d4a96fcf77b24b7002e8932b211"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
+      "sha256": "66fe04232681f3818e2b2d1714b4a2da963d15f714f261eefa437ad26448ebf4"
+    }
+  ],
+  "mapping": {
+    "appointment_state_version": {
+      "type": "BIGINT",
+      "nullable": false,
+      "server_default": 1,
+      "minimum": 1,
+      "increment_owner": "postgresql_before_update_trigger"
+    },
+    "private_receipt_fields": [
+      {"name": "completed_receipt_version", "type": "SMALLINT", "nullable": true},
+      {"name": "session_binding_digest", "type": "BYTEA", "nullable": true},
+      {"name": "pre_state_version", "type": "BIGINT", "nullable": true},
+      {"name": "post_state_version", "type": "BIGINT", "nullable": true},
+      {"name": "response_body_canonical_bytes", "type": "BYTEA", "nullable": true}
+    ],
+    "legacy_receipt_backfill": false,
+    "completed_v1_constraint": {
+      "receipt_version": 1,
+      "operation_id": "confirmAppointmentStatusProposal",
+      "route_family": "status-confirm",
+      "result_kind": "confirmed_write",
+      "digest_bytes": 32,
+      "positive_adjacent_versions": true,
+      "nonempty_canonical_bytes": true,
+      "existing_completion_fields_required": true
+    }
+  },
+  "migration": {
+    "revision": "w2x3y4z5a6b7",
+    "down_revision": "v1w2x3y4z5b6",
+    "head_count_observed": 1,
+    "executed": false,
+    "database_contacted": false,
+    "phases": [
+      "add_nullable_bigint_without_default",
+      "set_server_default_one_for_new_inserts",
+      "backfill_existing_nulls_to_cutover_baseline_one",
+      "add_not_valid_positive_range_check_validate_then_set_not_null",
+      "install_database_owned_before_update_trigger",
+      "prove_no_null_nonpositive_or_overrange_rows",
+      "retain_server_default_one"
+    ],
+    "trigger": {
+      "timing": "BEFORE UPDATE",
+      "scope": "FOR EACH ROW",
+      "submitted_value_policy": "replace_with_old_plus_one",
+      "overflow_aborts": true,
+      "event_or_watcher": false
+    },
+    "downgrade": {
+      "allowed_before_v1_use": true,
+      "fails_closed_when_v1_receipt_exists": true,
+      "post_adoption_recovery": "forward_only"
+    }
+  },
+  "helpers": {
+    "canonical_response": {
+      "fields": [
+        "appointment_id",
+        "status",
+        "status_reason_code",
+        "waiting_area_id",
+        "warning_codes"
+      ],
+      "encoding": "UTF-8",
+      "bom": false,
+      "insignificant_whitespace": false,
+      "duplicate_warning_codes": "reject",
+      "delivery_source": "exact_stored_bytes"
+    },
+    "session_binding": {
+      "algorithm": "HMAC-SHA-256",
+      "domain": "appointment-status-session:v1",
+      "framing": "unsigned_32_bit_big_endian_length_per_utf8_field",
+      "fields": ["practice_id", "actor_user_id", "authenticated_session_id"],
+      "stored_bytes": 32,
+      "raw_session_stored": false
+    },
+    "response_integrity": {
+      "digest": "lowercase_hex_sha256",
+      "comparison": "constant_time",
+      "failure_releases_body": false
+    }
+  },
+  "transaction_seam": {
+    "mounted": false,
+    "called_by_route": false,
+    "isolation": "READ COMMITTED",
+    "transaction_count": 1,
+    "positive_bounded_lock_timeout": true,
+    "nowait": false,
+    "skip_locked": false,
+    "hidden_effect_retry": false,
+    "lock_order": [
+      "practice_for_share",
+      "practice_scoped_appointment_for_update",
+      "idempotency_record_for_update_or_new_row_held"
+    ],
+    "authority_checks": [
+      "before_idempotency_access",
+      "after_idempotency_lock_before_classification"
+    ],
+    "new_row_after_first_authority_check": true,
+    "classification_after_second_authority_check": true,
+    "replay_requires_complete_integrity_valid_v1": true,
+    "legacy_replay": false,
+    "product_mutation_staged": false,
+    "audit_staged": false,
+    "receipt_completion_staged": false,
+    "future_atomic_write_set_required_before_commit": true
+  },
+  "api_boundary": {
+    "public_openapi_changed": false,
+    "graphql_mutation_added": false,
+    "event_command_authority_added": false,
+    "private_fields_publicly_mapped": false
+  },
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "route_edited_mounted_or_called": false,
+    "migration_or_database_executed": false,
+    "real_lock_acquired": false,
+    "provider_adc_or_credentials_used": false,
+    "product_or_patient_data_used": false,
+    "watcher_or_event_authority_added": false,
+    "product_command_executed": false,
+    "deployment_release_or_pages_opened": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal"
+}

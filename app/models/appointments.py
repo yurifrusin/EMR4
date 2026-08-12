@@ -2,8 +2,8 @@ import uuid
 import enum
 from datetime import timedelta
 from sqlalchemy import (
-    Column, String, Boolean, DateTime, Integer, Enum, ForeignKey, Date,
-    Time, Index, CheckConstraint, UniqueConstraint,
+    Column, String, Boolean, DateTime, Integer, BigInteger, SmallInteger,
+    LargeBinary, Enum, ForeignKey, Date, Time, Index, CheckConstraint, UniqueConstraint,
     ForeignKeyConstraint,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
@@ -68,6 +68,7 @@ class Appointment(Base):
     waiting_room = Column(String(50))
     waiting_area_id = Column(UUID(as_uuid=True), ForeignKey("waiting_areas.id"), nullable=True)
     queue_position = Column(Integer)
+    appointment_state_version = Column(BigInteger, nullable=False, server_default="1")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     patient = relationship("Patient")
@@ -83,6 +84,10 @@ class Appointment(Base):
             "practice_id",
             "id",
             name="uq_appointments_practice_id_id",
+        ),
+        CheckConstraint(
+            "appointment_state_version >= 1",
+            name="ck_appointments_state_version_positive",
         ),
         Index("ix_appointments_practice_id", "practice_id"),
         Index("ix_appointments_patient_id", "patient_id"),
@@ -219,6 +224,13 @@ class AppointmentCommandIdempotency(Base):
     # operations preserve NULL.
     confirmation_evidence_hash = Column(String(128), nullable=True)
     confirmation_evidence_consumed_at = Column(DateTime(timezone=True), nullable=True)
+    # Private status-confirm receipt v1. These remain NULL for legacy rows and
+    # are never mapped to the public AppointmentStatusResult envelope.
+    completed_receipt_version = Column(SmallInteger, nullable=True)
+    session_binding_digest = Column(LargeBinary, nullable=True)
+    pre_state_version = Column(BigInteger, nullable=True)
+    post_state_version = Column(BigInteger, nullable=True)
+    response_body_canonical_bytes = Column(LargeBinary, nullable=True)
 
     __table_args__ = (
         UniqueConstraint(
@@ -258,6 +270,29 @@ class AppointmentCommandIdempotency(Base):
             "(confirmation_evidence_hash IS NOT NULL AND "
             "confirmation_evidence_consumed_at IS NOT NULL)",
             name="ck_appt_cmd_idem_completed_check_in_evidence",
+        ),
+        CheckConstraint(
+            "completed_receipt_version IS NULL OR "
+            "completed_receipt_version = 1",
+            name="ck_appt_cmd_idem_receipt_version",
+        ),
+        CheckConstraint(
+            "completed_receipt_version IS NULL OR "
+            "(state = 'completed' AND "
+            "operation_id = 'confirmAppointmentStatusProposal' AND "
+            "route_family = 'status-confirm' AND "
+            "result_kind = 'confirmed_write' AND "
+            "session_binding_digest IS NOT NULL AND "
+            "octet_length(session_binding_digest) = 32 AND "
+            "pre_state_version IS NOT NULL AND pre_state_version >= 1 AND "
+            "post_state_version IS NOT NULL AND "
+            "post_state_version = pre_state_version + 1 AND "
+            "response_body_canonical_bytes IS NOT NULL AND "
+            "octet_length(response_body_canonical_bytes) > 0 AND "
+            "target_appointment_id IS NOT NULL AND audit_log_id IS NOT NULL AND "
+            "response_status_code IS NOT NULL AND response_body_hash IS NOT NULL AND "
+            "response_body_json IS NOT NULL)",
+            name="ck_appt_cmd_idem_status_receipt_v1_complete",
         ),
         ForeignKeyConstraint(
             ["practice_id", "target_appointment_id"],

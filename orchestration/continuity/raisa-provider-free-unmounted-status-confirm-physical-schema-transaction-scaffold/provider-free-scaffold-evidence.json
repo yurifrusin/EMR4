@@ -1,0 +1,17 @@
+{
+  "schema_version": "raisa.status_confirm_physical_schema_transaction_scaffold.evidence.v1",
+  "result": "raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold_pass",
+  "source_head": "a30db2e8bfcb6b067b55985cabf2e6200906f182",
+  "contract_sha256": "16301ce02d9cd764452f16c0a0dc467bf2182d6953883d214bb7a13b993c14a0",
+  "source_bindings_checked": 16,
+  "hostile_mutations_attempted": 80,
+  "hostile_mutations_rejected": 80,
+  "focused_tests_passed": 11,
+  "migration_executed": false,
+  "database_contacted": false,
+  "real_lock_acquired": false,
+  "route_mounted_or_called": false,
+  "provider_adc_or_credentials_used": false,
+  "product_or_patient_data_used": false,
+  "errors": []
+}

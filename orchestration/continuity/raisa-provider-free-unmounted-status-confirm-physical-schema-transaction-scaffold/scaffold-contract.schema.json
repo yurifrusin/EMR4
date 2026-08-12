@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-status-confirm-physical-schema-transaction-scaffold-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "implementation_status",
+    "input_bindings",
+    "implementation_bindings",
+    "mapping",
+    "migration",
+    "helpers",
+    "transaction_seam",
+    "api_boundary",
+    "forbidden",
+    "next_candidate"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.status_confirm_physical_schema_transaction_scaffold.v1"},
+    "result": {"const": "raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold_pass"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_unmounted_scaffold"},
+    "implementation_status": {"const": "unmounted_scaffold_only"},
+    "input_bindings": {"$ref": "#/$defs/bindings"},
+    "implementation_bindings": {"$ref": "#/$defs/bindings"},
+    "mapping": {"type": "object"},
+    "migration": {"type": "object"},
+    "helpers": {"type": "object"},
+    "transaction_seam": {"type": "object"},
+    "api_boundary": {"type": "object"},
+    "forbidden": {"type": "object"},
+    "next_candidate": {"const": "provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal"}
+  },
+  "$defs": {
+    "bindings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}
