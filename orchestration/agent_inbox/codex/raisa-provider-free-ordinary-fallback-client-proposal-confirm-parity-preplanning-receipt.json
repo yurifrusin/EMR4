@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_the_provider_free_ordinary_fallback_client_proposal_confirm_parity_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted globally-disabled scaffold closeout requires an exact inventory of every Diary client site that can still choose raw create/update/status/delete, followed by proof that each corresponding proposal plus signed-confirm path preserves ordinary and fallback behavior. Compatibility routes remain mounted and unblocked until parity is accepted. The narrow plan must distinguish raw fallback preservation from proposal/confirm selection and must not begin backend kernel convergence.",
+    "current_authority_allocation": "GPT Sol owns narrow inventory, plan derivation, tightly coupled client/API analysis, deterministic verification and acceptance under Yuri's standing uninterrupted-development authority and the EMR4 API Steward rules. No subagent or external model/provider worker is selected before the exact client-call inventory and parity boundary are known. Authenticated Sydney Vertex Bernie ADC is acknowledged and unused because provider calls are forbidden.",
+    "git_refs_and_worktree": "After fresh origin fetch, task HEAD and origin task align at d08b32db3f7cfbfb2307f3b03b8b83ec3d017f34. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. The tracked tree is clean and exactly 510 untracked files are preserved before this runtime-state file, including five docs/branding files and the preceding closeout pre-push receipt/state pair. Explicit-path staging only applies.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after the preceding published closeout. At Continuity 252 / Compass 234 it accepts exact scaffold source 410ea6dbbe28b94cfaa83ac5f6b586910c77aa6a and names provider-free ordinary/fallback Diary client proposal-confirm parity as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "The tranche may inspect and edit only the native Diary client, its API Spine inventory/contracts, authored-synthetic provider-free tests and exact plan/evidence/lifecycle artifacts required for parity. It may not enable shadow instrumentation; attach an observer/sink; use operational database/source/watcher/event/provider access, patient/product/clinical/free-text data or credentials; remove, rename, block or change compatibility routes; begin raw-route kernel convergence or create schedule fencing; expand commands; deploy, release, rebuild Pages or move protected refs. docs/branding and every unrelated untracked file remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

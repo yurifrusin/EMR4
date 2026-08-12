@@ -142,7 +142,7 @@ def test_deprecation_map_replacements_are_current_non_raw_routes():
     route_inventory = _route_inventory_by_public_route()
 
     for row in _document_rows():
-        assert row["posture"] == "compatibility_supported_until_client_parity"
+        assert row["posture"] == "compatibility_supported_native_client_parity_proven"
 
         for route in row["proposal_routes"]:
             assert route_inventory[route] in {"proposal command", "command-style read"}
@@ -190,7 +190,8 @@ def test_deprecation_map_records_existing_raw_compat_signal_modes():
 def test_deprecation_map_requires_all_retirement_preconditions():
     text = MAP_PATH.read_text(encoding="utf-8")
 
-    assert "The current decision is `map_only`." in text
+    assert "The current decision is `native_client_parity_proven_keep_routes_mounted`." in text
+    assert "zero raw appointment mutation call sites" in text
     for phrase in REQUIRED_PRECONDITIONS:
         assert phrase in text
 

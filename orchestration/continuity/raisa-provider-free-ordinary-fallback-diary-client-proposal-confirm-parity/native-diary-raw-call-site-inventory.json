@@ -1,0 +1,79 @@
+{
+  "schema_version": "raisa.native_diary_raw_call_site_inventory.v1",
+  "source_head": "d08b32db3f7cfbfb2307f3b03b8b83ec3d017f34",
+  "client_path": "docs/diary/diary.js",
+  "pre_tranche_raw_call_count": 7,
+  "accepted_target_raw_call_count": 0,
+  "backend_compatibility_routes_remain_mounted": true,
+  "sites": [
+    {
+      "site_id": "create_modal_raw_post_fallback",
+      "function": "saveBooking",
+      "raw_method": "POST",
+      "raw_route": "/appointments",
+      "precondition": "create proposal lacks confirm_endpoint or confirm_payload",
+      "replacement": "create proposal plus allowlisted signed create confirm",
+      "missing_evidence_posture": "fail_closed"
+    },
+    {
+      "site_id": "edit_modal_raw_put_fallback",
+      "function": "saveBooking",
+      "raw_method": "PUT",
+      "raw_route": "/appointments/{editingAppointmentId}",
+      "precondition": "update proposal lacks confirm_endpoint or confirm_payload",
+      "replacement": "update proposal plus allowlisted signed update confirm",
+      "missing_evidence_posture": "fail_closed"
+    },
+    {
+      "site_id": "drag_resize_raw_put_fallback",
+      "function": "handleMoveResize",
+      "raw_method": "PUT",
+      "raw_route": "/appointments/{appointmentId}",
+      "precondition": "update proposal lacks confirm_endpoint or confirm_payload",
+      "replacement": "update proposal plus allowlisted signed update confirm",
+      "missing_evidence_posture": "fail_closed"
+    },
+    {
+      "site_id": "edit_modal_raw_status_patch",
+      "function": "saveBooking",
+      "raw_method": "PATCH",
+      "raw_route": "/appointments/{editingAppointmentId}/status",
+      "precondition": "selected status differs after confirmed detail update",
+      "replacement": "status proposal plus allowlisted signed status confirm",
+      "missing_evidence_posture": "fail_closed_partial_base_write_reported"
+    },
+    {
+      "site_id": "create_modal_raw_status_patch",
+      "function": "saveBooking",
+      "raw_method": "PATCH",
+      "raw_route": "/appointments/{newAppointmentId}/status",
+      "precondition": "selected initial status is not Booked after confirmed create",
+      "replacement": "status proposal plus allowlisted signed status confirm",
+      "missing_evidence_posture": "fail_closed_partial_base_write_reported"
+    },
+    {
+      "site_id": "status_proposal_raw_patch_fallback",
+      "function": "applySignedStatusProposal",
+      "raw_method": "PATCH",
+      "raw_route": "/appointments/{appointmentId}/status",
+      "precondition": "status or waiting-area proposal lacks confirm_endpoint or confirm_payload",
+      "replacement": "allowlisted signed status confirm only",
+      "missing_evidence_posture": "fail_closed"
+    },
+    {
+      "site_id": "delete_modal_raw_delete_fallback",
+      "function": "applySignedDeleteProposal",
+      "raw_method": "DELETE",
+      "raw_route": "/appointments/{editingAppointmentId}",
+      "precondition": "delete proposal lacks confirm_endpoint or confirm_payload",
+      "replacement": "allowlisted signed delete confirm; bounded 404 status proposal/confirm compatibility branch",
+      "missing_evidence_posture": "fail_closed"
+    }
+  ],
+  "excluded_claims": [
+    "backend_route_retirement",
+    "external_consumer_readiness",
+    "raw_route_kernel_convergence",
+    "deployment_or_production_readiness"
+  ]
+}

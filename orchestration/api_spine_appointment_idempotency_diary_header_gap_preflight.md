@@ -6,7 +6,7 @@
 | Programme | Programme 2G / EMR4 API Spine |
 | Classification | Frontend/API header inventory and preflight |
 | Runtime behavior changed | No |
-| Decision | Do not broaden enforcement in Sprint 154; record the remaining diary/API header gap before choosing one Sprint 155 implementation slice |
+| Decision | Historical Sprint 154 preflight; native Diary proposal and confirm callers are now header-complete, while broader backend enforcement remains separately gated |
 
 ## Context
 
@@ -31,6 +31,12 @@ The following Diary callers currently emit HTTP `Idempotency-Key`:
 | drag/reschedule update-confirm branch | `POST /api/v1/appointments/proposals/update/confirm` | Wired in Sprint 157; key is derived from `update_proposal_freshness_id` |
 | `applySignedStatusProposal` | `POST /api/v1/appointments/proposals/status-confirm` | Wired in Sprint 156; key is derived from `status_proposal_freshness_id` |
 | `applySignedDeleteProposal` | `POST /api/v1/appointments/proposals/delete-confirm` | Wired in Sprint 156; key is derived from `delete_proposal_freshness_id` |
+| `saveBooking` update-proposal branch | `POST /api/v1/appointments/proposals/update/{appointment_id}` | Native-client parity descendant; booking-modal key remains stable across warning re-proposal |
+| drag/reschedule update proposal | `POST /api/v1/appointments/proposals/update/{appointment_id}` | Native-client parity descendant; one key per gesture |
+| `setAppointmentStatus` status proposal | `POST /api/v1/appointments/proposals/status/{appointment_id}` | Native-client parity descendant; one key per gesture |
+| `setAppointmentStatus` waiting-area proposal | `POST /api/v1/appointments/proposals/waiting-area/{appointment_id}` | Native-client parity descendant; one key per gesture without adding replay semantics |
+| `deleteBooking` delete proposal and bounded status-proposal branch | `POST /api/v1/appointments/proposals/delete/{appointment_id}`; `POST /api/v1/appointments/proposals/status/{appointment_id}` | Native-client parity descendant; one shared key per delete gesture |
+| post-create/update selected-status proposal | `POST /api/v1/appointments/proposals/status/{appointment_id}` | Native-client parity descendant; new key for the separate status command |
 
 ## Enforced Backend Confirm Routes And Diary Headers
 
@@ -53,19 +59,23 @@ The Bernie session layer can carry body-level session idempotency fields such as
 the HTTP `Idempotency-Key` header only. Body fields do not satisfy these
 confirmation routes.
 
-## Proposal-Only Backend Binding Gap
+## Proposal-Only Backend And Client State
 
 OpenAPI documents shared proposal-command `Idempotency-Key` parameters for the
-canonical proposal operations. FastAPI currently binds the header only for
-create-proposal. These proposal-only routes remain a deferred binding gap and
-must not inherit confirmation replay authority by accident.
+canonical proposal operations. FastAPI now syntactically requires a nonblank
+header on create, update, status and delete proposal routes. Waiting-area
+proposal enforcement remains a separate backend decision. The native Diary
+nevertheless sends a non-empty header on every proposal family. Proposal keys
+identify an attempt only and do not inherit confirmation replay or reservation
+authority.
 
 | FastAPI handler | Current route | Runtime header binding |
 |---|---|---|
-| `propose_update_appointment` | `POST /api/v1/appointments/proposals/update/{appointment_id}` | Not bound |
-| `propose_status_update` | `POST /api/v1/appointments/proposals/status/{appointment_id}` | Not bound |
-| `propose_waiting_area_update` | `POST /api/v1/appointments/proposals/waiting-area/{appointment_id}` | Not bound |
-| `propose_delete_appointment` | `POST /api/v1/appointments/proposals/delete/{appointment_id}` | Not bound |
+| `propose_create_appointment` | `POST /api/v1/appointments/proposals/create` | Nonblank header required; deterministic re-evaluation only |
+| `propose_update_appointment` | `POST /api/v1/appointments/proposals/update/{appointment_id}` | Nonblank header required; deterministic re-evaluation only |
+| `propose_status_update` | `POST /api/v1/appointments/proposals/status/{appointment_id}` | Nonblank header required; deterministic re-evaluation only |
+| `propose_waiting_area_update` | `POST /api/v1/appointments/proposals/waiting-area/{appointment_id}` | Client sends header; backend enforcement remains separately gated |
+| `propose_delete_appointment` | `POST /api/v1/appointments/proposals/delete/{appointment_id}` | Nonblank header required; deterministic re-evaluation only |
 
 ## Deferred Surfaces
 
@@ -93,8 +103,10 @@ paths:
 4. ordinary update confirm from edit-modal and drag/reschedule flows;
 5. Bernie tool-intent update confirm.
 
-The remaining idempotency decisions should be handled as separate backend/API
-spine slices rather than as confirm-client header plumbing.
+The native Diary header gap is closed. Remaining idempotency decisions should
+be handled as separate backend/API Spine slices rather than as client header
+plumbing.
 
-Proposal-only header binding and strict `minLength: 8` runtime enforcement
-should follow only in later bounded sprints.
+Waiting-area proposal enforcement and strict `minLength: 8` runtime enforcement
+should follow only in later bounded tranches. This artifact grants no proposal
+ledger, reservation, raw compatibility change or route retirement.

@@ -7935,14 +7935,16 @@ def test_human_drag_resize_uses_signed_update_confirm_route(diary_page):
     assert captured_confirms[0]["body"]["update_proposal"]["command"]["start_time_local"] == "15:15"
 
 
-def test_edit_modal_uses_signed_update_confirm_before_status_patch(diary_page):
-    """Edit modal detail changes use the signed update-confirm route, then patch status separately."""
+def test_edit_modal_uses_signed_update_and_status_confirms_without_raw_writes(diary_page):
+    """Edit details and follow-up status both use signed confirms."""
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
     captured_proposals = []
     captured_confirms = []
-    captured_status_patches = []
+    captured_status_proposals = []
+    captured_status_confirms = []
+    captured_raw_status_patches = []
     captured_raw_puts = []
 
     def handle_api(route):
@@ -8028,13 +8030,74 @@ def test_edit_modal_uses_signed_update_confirm_before_status_patch(diary_page):
                 }),
             )
             return
-        if request.method == "PATCH" and request.url.endswith("/appointments/appt-edit-1/status"):
-            captured_status_patches.append(request.post_data_json)
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status/appt-edit-1"):
+            body = request.post_data_json
+            captured_status_proposals.append({
+                "body": body,
+                "idempotency_key": request.headers.get("idempotency-key"),
+            })
+            proposal = {
+                "intent": "update_appointment_status",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "execute_with_report",
+                "summary": "Change status to Arrived.",
+                "command": {
+                    "appointment_id": "appt-edit-1",
+                    "status": body["status"],
+                    "waiting_area_id": None,
+                    "waiting_area_id_supplied": False,
+                    "clears_waiting_area": False,
+                },
+                "warnings": [],
+                "blocks": [],
+            }
             route.fulfill(
                 status=200,
                 content_type="application/json",
-                body=json.dumps({"id": "appt-edit-1", "status": request.post_data_json.get("status")}),
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/status-confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "status_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "status_proposal_freshness_id": "edit-status-fresh-1",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "diary_confirm_status_proposal",
+                            "payload": {"fixture": "edit-modal-status"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                }),
             )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status-confirm"):
+            captured_status_confirms.append({
+                "body": request.post_data_json,
+                "idempotency_key": request.headers.get("idempotency-key"),
+            })
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_status_appointment",
+                    "safe": True,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "confirmed_write",
+                    "summary": "Status updated.",
+                    "appointment": {"id": "appt-edit-1", "status": "Arrived", "waiting_area_id": None},
+                    "warnings": [],
+                    "blocks": [],
+                    "audit_evidence": ["diary_confirm_status_proposal"],
+                }),
+            )
+            return
+        if request.method == "PATCH" and request.url.endswith("/appointments/appt-edit-1/status"):
+            captured_raw_status_patches.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw PATCH should not be used"}))
             return
         if request.method == "PUT" and request.url.endswith("/appointments/appt-edit-1"):
             captured_raw_puts.append(request.post_data_json)
@@ -8049,6 +8112,7 @@ def test_edit_modal_uses_signed_update_confirm_before_status_patch(diary_page):
         diary_page.evaluate(
             """() => {
               history.replaceState(null, "", "/diary/diary.html");
+              isSmokeMode = () => false;
               diaryDate = new Date(2026, 6, 3);
               activeTemplate = {
                 columns: [{
@@ -8095,13 +8159,18 @@ def test_edit_modal_uses_signed_update_confirm_before_status_patch(diary_page):
 
     assert captured_proposals, "Expected edit modal update proposal request"
     assert captured_confirms, "Expected signed update confirm request"
-    assert captured_status_patches, "Expected separate status PATCH after detail confirm"
+    assert captured_status_proposals, "Expected status proposal after detail confirm"
+    assert captured_status_confirms, "Expected signed status confirm after detail confirm"
+    assert captured_raw_status_patches == []
     assert captured_raw_puts == []
     assert captured_confirms[0]["idempotency_key"] == "update-confirm-edit-fresh-1"
     assert captured_confirms[0]["body"]["confirmed"] is True
     assert captured_confirms[0]["body"]["update_proposal"]["command"]["appointment_id"] == "appt-edit-1"
     assert captured_confirms[0]["body"]["update_proposal"]["command"]["duration_minutes"] == 30
-    assert captured_status_patches[0]["status"] == "Arrived"
+    assert captured_status_proposals[0]["body"]["status"] == "Arrived"
+    assert captured_status_proposals[0]["idempotency_key"]
+    assert captured_status_confirms[0]["idempotency_key"] == "status-confirm-edit-status-fresh-1"
+    assert captured_status_confirms[0]["body"]["confirmed"] is True
 
 
 def test_edit_modal_does_not_patch_status_when_signed_update_confirm_fails(diary_page):
@@ -8189,6 +8258,7 @@ def test_edit_modal_does_not_patch_status_when_signed_update_confirm_fails(diary
         diary_page.evaluate(
             """() => {
               history.replaceState(null, "", "/diary/diary.html");
+              isSmokeMode = () => false;
               diaryDate = new Date(2026, 6, 3);
               activeTemplate = {
                 columns: [{
@@ -8238,14 +8308,16 @@ def test_edit_modal_does_not_patch_status_when_signed_update_confirm_fails(diary
     assert captured_status_patches == []
 
 
-def test_create_modal_uses_signed_create_confirm_before_status_patch(diary_page):
-    """Create modal writes through signed create-confirm, then patches non-Booked status separately."""
+def test_create_modal_uses_signed_create_and_status_confirms_without_raw_writes(diary_page):
+    """Create and its non-Booked follow-up status both use signed confirms."""
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
     captured_proposals = []
     captured_confirms = []
-    captured_status_patches = []
+    captured_status_proposals = []
+    captured_status_confirms = []
+    captured_raw_status_patches = []
     captured_raw_posts = []
 
     def handle_api(route):
@@ -8328,13 +8400,78 @@ def test_create_modal_uses_signed_create_confirm_before_status_patch(diary_page)
                 }),
             )
             return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status/appt-create-1"):
+            body = request.post_data_json
+            captured_status_proposals.append({
+                "body": body,
+                "idempotency_key": request.headers.get("idempotency-key"),
+            })
+            proposal = {
+                "intent": "update_appointment_status",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "execute_with_report",
+                "summary": "Change status to Arrived.",
+                "command": {
+                    "appointment_id": "appt-create-1",
+                    "status": body["status"],
+                    "waiting_area_id": None,
+                    "waiting_area_id_supplied": False,
+                    "clears_waiting_area": False,
+                },
+                "warnings": [],
+                "blocks": [],
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/status-confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "status_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "status_proposal_freshness_id": "create-status-fresh-1",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "diary_confirm_status_proposal",
+                            "payload": {"fixture": "create-modal-status"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status-confirm"):
+            captured_status_confirms.append({
+                "body": request.post_data_json,
+                "idempotency_key": request.headers.get("idempotency-key"),
+            })
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_status_appointment",
+                    "safe": True,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "confirmed_write",
+                    "summary": "Status updated.",
+                    "appointment": {"id": "appt-create-1", "status": "Arrived", "waiting_area_id": None},
+                    "warnings": [],
+                    "blocks": [],
+                    "audit_evidence": ["diary_confirm_status_proposal"],
+                }),
+            )
+            return
         if request.method == "POST" and request.url.endswith("/appointments"):
             captured_raw_posts.append(request.post_data_json)
             route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw POST should not be used"}))
             return
         if request.method == "PATCH" and request.url.endswith("/appointments/appt-create-1/status"):
-            captured_status_patches.append(request.post_data_json)
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"id": "appt-create-1", "status": request.post_data_json.get("status")}))
+            captured_raw_status_patches.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw PATCH should not be used"}))
             return
         route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
 
@@ -8379,10 +8516,167 @@ def test_create_modal_uses_signed_create_confirm_before_status_patch(diary_page)
     assert captured_proposals, "Expected create proposal request"
     assert captured_confirms, "Expected signed create-confirm request"
     assert captured_raw_posts == []
-    assert captured_status_patches, "Expected status PATCH after confirmed create"
+    assert captured_status_proposals, "Expected status proposal after confirmed create"
+    assert captured_status_confirms, "Expected signed status confirm after confirmed create"
+    assert captured_raw_status_patches == []
     assert captured_confirms[0]["confirmed"] is True
     assert captured_confirms[0]["create_proposal"]["command"]["duration_minutes"] == 15
-    assert captured_status_patches[0]["status"] == "Arrived"
+    assert captured_status_proposals[0]["body"]["status"] == "Arrived"
+    assert captured_status_proposals[0]["idempotency_key"]
+    assert captured_status_confirms[0]["idempotency_key"] == "status-confirm-create-status-fresh-1"
+    assert captured_status_confirms[0]["body"]["confirmed"] is True
+
+
+def test_create_modal_second_click_reproposal_block_fails_closed(diary_page):
+    """A fresh block after warning review cannot fall through to create or confirm."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_proposals = []
+    captured_proposal_keys = []
+    captured_confirms = []
+    captured_raw_posts = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/create"):
+            captured_proposals.append(request.post_data_json)
+            captured_proposal_keys.append(request.headers.get("idempotency-key"))
+            body = request.post_data_json
+            if len(captured_proposals) == 1:
+                proposal = {
+                    "intent": "create_appointment",
+                    "safe": True,
+                    "requires_confirmation": True,
+                    "autonomy_tier": "proposal",
+                    "summary": "Create booking with a break warning.",
+                    "command": {
+                        "patient_id": body.get("patient_id"),
+                        "patient_name_provisional": body.get("patient_name_provisional"),
+                        "practitioner_id": body["practitioner_id"],
+                        "appointment_type_id": body.get("appointment_type_id"),
+                        "location_id": body.get("location_id"),
+                        "appointment_date": body["appointment_date"],
+                        "start_time": "2026-07-03T05:00:00Z",
+                        "start_time_local": body["start_time_local"],
+                        "duration_minutes": body["duration_minutes"],
+                        "reason": body.get("reason") or "",
+                        "notes": None,
+                        "booked_via": "Receptionist",
+                    },
+                    "warnings": [{
+                        "code": "break_overlap",
+                        "severity": "warning",
+                        "message": "This appointment overlaps Tea break.",
+                    }],
+                    "blocks": [],
+                    "conflict": None,
+                    "breaks_overlap": ["Tea break"],
+                    "patient_identity": "linked",
+                }
+                route.fulfill(
+                    status=200,
+                    content_type="application/json",
+                    body=json.dumps({
+                        **proposal,
+                        "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm",
+                        "confirm_payload": {
+                            "confirmed": False,
+                            "create_proposal": proposal,
+                            "confirmed_warnings": [],
+                            "create_proposal_freshness_id": "warning-fresh-1",
+                            "signed_confirmation_evidence": {
+                                "schema_version": "bernie.confirmation_evidence.v1",
+                                "purpose": "staff_confirm_create_proposal",
+                                "payload": {"fixture": "first-warning"},
+                                "signature": "signed",
+                            },
+                            "signed_confirmation_evidence_required": True,
+                        },
+                    }),
+                )
+            else:
+                route.fulfill(
+                    status=200,
+                    content_type="application/json",
+                    body=json.dumps({
+                        "intent": "create_appointment",
+                        "safe": False,
+                        "requires_confirmation": True,
+                        "autonomy_tier": "blocked",
+                        "summary": "The fresh slot is no longer available.",
+                        "command": None,
+                        "warnings": [],
+                        "blocks": [{
+                            "code": "appointment_conflict",
+                            "severity": "blocked",
+                            "message": "The fresh slot is no longer available.",
+                        }],
+                    }),
+                )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/create/confirm"):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "confirm should not be called"}))
+            return
+        if request.method == "POST" and request.url.endswith("/appointments"):
+            captured_raw_posts.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw POST should not be used"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              diaryDate = new Date(2026, 6, 3);
+              activeTemplate = {
+                columns: [{
+                  practitioner_ahpra: "MED0001234567",
+                  room_label: "Room 1",
+                  assignment: "Dr Alex Shera",
+                  slot_interval_minutes: 15
+                }],
+                slot_defaults: { interval_minutes: 15 }
+              };
+              activeTypes = [{ id: "type-1", name: "Standard", default_duration: 15 }];
+              activeLocationId = "loc-1";
+              ahpraToPractitionerMap["MED0001234567"] = {
+                id: "practitioner-123",
+                first_name: "Alex",
+                last_name: "Shera",
+                ahpra_number: "MED0001234567"
+              };
+              openBookingModalForCreate(activeTemplate.columns[0], "15:00");
+              selectedPatient = { id: "patient-123", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" };
+              document.getElementById("booking-type").value = "type-1";
+              isSmokeMode = () => false;
+              window.__warningSavePromise = saveBooking();
+            }"""
+        )
+        diary_page.wait_for_function(
+            "() => document.getElementById('btn-booking-save').textContent === 'Confirm & Save'",
+            timeout=5000,
+        )
+        assert len(captured_proposals) == 1
+        diary_page.click("#btn-booking-save")
+        diary_page.wait_for_function(
+            "() => document.getElementById('booking-error').textContent.includes('fresh slot')",
+            timeout=5000,
+        )
+        assert len(captured_proposals) == 2
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_proposal_keys[0]
+    assert captured_proposal_keys[0] == captured_proposal_keys[1]
+    assert captured_confirms == []
+    assert captured_raw_posts == []
 
 
 def test_create_modal_does_not_patch_status_when_signed_create_confirm_fails(diary_page):
@@ -8506,6 +8800,74 @@ def test_create_modal_does_not_patch_status_when_signed_create_confirm_fails(dia
 
     assert captured_confirms, "Expected signed create-confirm request"
     assert captured_status_patches == []
+
+
+def test_follow_up_status_missing_evidence_reports_partial_base_outcome_without_raw_patch(diary_page):
+    """A post-base status proposal without evidence reports the committed base truth."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_proposal_keys = []
+    captured_raw_patches = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status/appt-partial-1"):
+            captured_proposal_keys.append(request.headers.get("idempotency-key"))
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "update_appointment_status",
+                    "safe": True,
+                    "requires_confirmation": True,
+                    "autonomy_tier": "execute_with_report",
+                    "summary": "Change status.",
+                    "command": {
+                        "appointment_id": "appt-partial-1",
+                        "status": "Arrived",
+                        "waiting_area_id": None,
+                        "waiting_area_id_supplied": False,
+                        "clears_waiting_area": False,
+                    },
+                    "warnings": [],
+                    "blocks": [],
+                }),
+            )
+            return
+        if request.method == "PATCH" and request.url.endswith("/appointments/appt-partial-1/status"):
+            captured_raw_patches.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw PATCH should not be used"}))
+            return
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected request"}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        result = diary_page.evaluate(
+            """async () => {
+              try {
+                await applyBookingStatusAfterConfirmedBase(
+                  { id: "appt-partial-1", status: "Booked", waiting_area_id: null },
+                  "Arrived",
+                  null
+                );
+                return "unexpected success";
+              } catch (error) {
+                return error.message;
+              }
+            }"""
+        )
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_proposal_keys[0]
+    assert "Booking details were saved, but the selected status was not applied." in result
+    assert "could not be prepared securely" in result
+    assert captured_raw_patches == []
 
 
 def test_status_control_uses_signed_status_confirm_without_raw_patch(diary_page):
@@ -8881,6 +9243,157 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
     assert captured_confirm_keys == ["delete-confirm-delete-fresh-1"]
     assert captured_confirms[0]["confirmed"] is True
     assert captured_confirms[0]["delete_proposal"]["command"]["cancellation_reason"] == "Patient had transport issues"
+    assert captured_raw_deletes == []
+
+
+def test_cancel_flow_delete_404_uses_signed_status_fallback_without_raw_delete(diary_page):
+    """An unavailable delete proposal may fall back only to signed status confirm."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    delete_proposal_keys = []
+    status_proposal_keys = []
+    captured_status_confirms = []
+    captured_raw_deletes = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete/appt-delete-fallback"):
+            delete_proposal_keys.append(request.headers.get("idempotency-key"))
+            route.fulfill(status=404, content_type="application/json", body=json.dumps({"detail": "not mounted"}))
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status/appt-delete-fallback"):
+            status_proposal_keys.append(request.headers.get("idempotency-key"))
+            body = request.post_data_json
+            proposal = {
+                "intent": "update_appointment_status",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "proposal",
+                "summary": "Change status to Cancelled.",
+                "command": {
+                    "appointment_id": "appt-delete-fallback",
+                    "status": body["status"],
+                    "waiting_area_id": body.get("waiting_area_id"),
+                    "waiting_area_id_supplied": "waiting_area_id" in body,
+                    "clears_waiting_area": False,
+                    "status_reason_code": body.get("status_reason_code"),
+                },
+                "warnings": [],
+                "blocks": [],
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/status-confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "status_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "status_proposal_freshness_id": "delete-status-fresh-1",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "diary_confirm_status_proposal",
+                            "payload": {"fixture": "delete-status-fallback"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status-confirm"):
+            captured_status_confirms.append({
+                "body": request.post_data_json,
+                "idempotency_key": request.headers.get("idempotency-key"),
+            })
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_status_appointment",
+                    "safe": True,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "confirmed_write",
+                    "summary": "Cancelled.",
+                    "appointment": {
+                        "id": "appt-delete-fallback",
+                        "status": "Cancelled",
+                        "waiting_area_id": None,
+                    },
+                    "warnings": [],
+                    "blocks": [],
+                    "audit_evidence": ["diary_confirm_status_proposal"],
+                }),
+            )
+            return
+        if request.method == "DELETE" and request.url.endswith("/appointments/appt-delete-fallback"):
+            captured_raw_deletes.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw DELETE should not be used"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              isSmokeMode = () => false;
+              activeTemplate = {
+                columns: [{
+                  practitioner_ahpra: "MED0001234567",
+                  room_label: "Room 1",
+                  assignment: "Dr Alex Shera",
+                  slot_interval_minutes: 15
+                }],
+                slot_defaults: { interval_minutes: 15 }
+              };
+              activeTypes = [{ id: "type-1", name: "Standard", default_duration: 15 }];
+              ahpraToPractitionerMap["MED0001234567"] = {
+                id: "practitioner-123",
+                first_name: "Alex",
+                last_name: "Shera",
+                ahpra_number: "MED0001234567"
+              };
+              const appt = {
+                id: "appt-delete-fallback",
+                status: "Booked",
+                waiting_area_id: null,
+                patient_id: "patient-123",
+                patient: { id: "patient-123", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
+                practitioner: { id: "practitioner-123", first_name: "Alex", last_name: "Shera", ahpra_number: "MED0001234567" },
+                practitioner_id: "practitioner-123",
+                appointment_type_id: "type-1",
+                appointment_date: "2026-07-03",
+                start_time_local: "09:00:00",
+                duration_minutes: 15,
+                reason: "Follow-up"
+              };
+              todayAppointments = [appt];
+              openBookingModalForEdit(appt);
+            }"""
+        )
+        diary_page.click("#btn-booking-delete")
+        diary_page.fill("#booking-cancel-reason", "Patient had transport issues")
+        diary_page.select_option("[data-testid='booking-status-reason-code']", "PATIENT_TRANSPORT")
+        diary_page.click("#btn-booking-delete")
+        diary_page.wait_for_selector(".identity-confirm-overlay", state="visible", timeout=5000)
+        diary_page.click(".identity-confirm-overlay button:has-text('Confirm & Save')")
+        diary_page.wait_for_timeout(500)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert delete_proposal_keys[0]
+    assert delete_proposal_keys == status_proposal_keys
+    assert captured_status_confirms
+    assert captured_status_confirms[0]["idempotency_key"] == "status-confirm-delete-status-fresh-1"
+    assert captured_status_confirms[0]["body"]["status_proposal"]["command"]["status"] == "Cancelled"
     assert captured_raw_deletes == []
 
 

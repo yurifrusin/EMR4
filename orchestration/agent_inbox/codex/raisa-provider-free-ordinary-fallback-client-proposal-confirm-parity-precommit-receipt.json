@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_ordinary_fallback_diary_client_proposal_confirm_parity_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen source-bound plan inventories exactly seven native raw appointment mutation call sites and accepts zero after replacement with existing proposal plus signed-confirm families. Eight tranche tests, all 142 Diary browser smoke tests, a 242-test focused backend/API matrix and the canonical 191-test fast profile pass. The second-click fresh block, warning identity, missing evidence, partial base-write reporting and delete-404 signed status fallback all fail closed without raw writes.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled client/API implementation and deterministic verification under Yuri's standing uninterrupted-development authority and the EMR4 API Steward boundary. No subagent, external verifier or provider/model worker was used. The authenticated Sydney Vertex Bernie ADC remains unused because this tranche is provider-free.",
+    "git_refs_and_worktree": "Candidate parent HEAD and origin task are d08b32db3f7cfbfb2307f3b03b8b83ec3d017f34. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602, and required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Before this runtime-state file the worktree contains eight bounded tracked edits plus 517 preserved untracked files including five docs/branding files and seven owned current-tranche files. Candidate staging will use explicit paths only.",
+    "live_handover_current_baton": "AGENTS.md was reread completely for this tranche. At Continuity 252 / Compass 234 it accepts the globally-disabled instrumentation scaffold and directs ordinary/fallback native Diary proposal-confirm parity as the next dependency-satisfied gate.",
+    "protected_evidence_boundaries": "The four backend raw compatibility routes remain mounted and behaviorally unchanged with default audit signaling. No raw-route kernel convergence, create fence, route retirement, database/source/watcher/event, observer, sink, persistence, provider call, patient/product dataset, new command authority, deployment, release, Pages or protected-ref movement is opened. docs/branding and every unrelated untracked file remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

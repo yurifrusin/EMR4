@@ -25,14 +25,20 @@ and no environment allowed to default to `header`. Sprint 211 adds
 reports the gate remains blocked without emitting route, payload, patient, or
 consumer details.
 
+The 2026-08-12 provider-free native-client parity descendant removes all seven
+raw appointment mutation call sites from `docs/diary/diary.js`. The four
+backend compatibility routes remain mounted for unidentified external,
+recovery or migration consumers, so this result does not authorize a signal-
+mode change or route retirement.
+
 ## Consumer Signal Inventory
 
 | Compatibility write | Handler | Raw compatibility tag | Backend signal site | Frontend consumer | Frontend raw call sites | Frontend condition | Header consumed | Readiness posture |
 |---|---|---|---|---|---|---|---|---|
-| `POST /api/v1/appointments` | `create_appointment` | `raw_compat_create` | `_raw_compat_evidence_and_headers("raw_compat_create")` | `docs/diary/diary.js` | `create_modal_raw_post` | create fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn_proven` | `consumer_cors_backend_and_browser_harness_checked_keep_audit_mode` |
-| `PUT /api/v1/appointments/{appointment_id}` | `update_appointment` | `raw_compat_update` | `_raw_compat_evidence_and_headers("raw_compat_update")` | `docs/diary/diary.js` | `edit_modal_raw_put`; `drag_resize_raw_put` | edit-modal or drag/resize fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn_proven` | `consumer_cors_backend_and_browser_harness_checked_keep_audit_mode` |
-| `PATCH /api/v1/appointments/{appointment_id}/status` | `update_appointment_status` | `raw_compat_status` | `_raw_compat_evidence_and_headers("raw_compat_status")` | `docs/diary/diary.js` | `edit_modal_raw_status_patch`; `create_modal_raw_status_patch`; `status_proposal_raw_patch` | status side-write after edit/create or fallback when signed status confirmation is unavailable | `console_warn_proven` | `consumer_cors_backend_and_browser_harness_checked_keep_audit_mode` |
-| `DELETE /api/v1/appointments/{appointment_id}` | `cancel_appointment` | `raw_compat_delete` | `_raw_compat_evidence_and_headers("raw_compat_delete")` | `docs/diary/diary.js` | `delete_modal_raw_delete` | delete fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn_proven` | `consumer_cors_backend_and_browser_harness_checked_keep_audit_mode` |
+| `POST /api/v1/appointments` | `create_appointment` | `raw_compat_create` | `_raw_compat_evidence_and_headers("raw_compat_create")` | `docs/diary/diary.js` | none | native create uses proposal plus signed confirm; missing evidence fails closed | `console_warn_proven` | `native_client_parity_proven_compat_route_mounted_keep_audit_mode` |
+| `PUT /api/v1/appointments/{appointment_id}` | `update_appointment` | `raw_compat_update` | `_raw_compat_evidence_and_headers("raw_compat_update")` | `docs/diary/diary.js` | none | native edit and drag/resize use proposal plus signed confirm; missing evidence fails closed | `console_warn_proven` | `native_client_parity_proven_compat_route_mounted_keep_audit_mode` |
+| `PATCH /api/v1/appointments/{appointment_id}/status` | `update_appointment_status` | `raw_compat_status` | `_raw_compat_evidence_and_headers("raw_compat_status")` | `docs/diary/diary.js` | none | native status, waiting-area and post-create/update status use proposal plus signed confirm | `console_warn_proven` | `native_client_parity_proven_compat_route_mounted_keep_audit_mode` |
+| `DELETE /api/v1/appointments/{appointment_id}` | `cancel_appointment` | `raw_compat_delete` | `_raw_compat_evidence_and_headers("raw_compat_delete")` | `docs/diary/diary.js` | none | native delete uses delete or bounded status proposal plus signed confirm; missing evidence fails closed | `console_warn_proven` | `native_client_parity_proven_compat_route_mounted_keep_audit_mode` |
 
 ## Signal Baseline
 
@@ -54,9 +60,8 @@ consumer details.
 
 ## Consumer Baseline
 
-- `docs/diary/diary.js` uses the shared `apiFetch()` helper and browser
-  `fetch()`, so extra response headers should be tolerated by ordinary response
-  handling.
+- `docs/diary/diary.js` contains zero raw appointment mutation calls. It still
+  uses shared `apiFetch()` for proposal/confirm and read requests.
 - `docs/diary/diary.js` now reads the `Deprecation` response header inside the
   shared `apiFetch()` helper after the 401 branch and writes a developer-facing
   `console.warn()` when the header is present.
@@ -80,14 +85,15 @@ emitting that signal by default. The current authoritative rollout gate is
 is `blocked`.
 
 Do not change `appointment_raw_compat_mode` to `off` while any raw compatibility
-write remains available to product clients or system compatibility paths.
+write remains available to unidentified external or system compatibility paths.
 
 ## Future Preconditions For Header Mode
 
 Before `header` mode can become a reviewed default, prove all of the following:
 
 - every raw compatibility write still uses `_raw_compat_evidence_and_headers()`;
-- every known frontend raw call site is inventoried with its fallback condition;
+- every known frontend raw call site is inventoried, including an explicit zero
+  count after native-client parity;
 - frontend code deliberately observes or logs the `Deprecation` response header;
 - FastAPI CORS exposes the `Deprecation` response header to cross-origin
   browser JavaScript;
@@ -109,7 +115,8 @@ This preflight does not authorize:
 - changing `appointment_raw_compat_mode`;
 - removing, renaming, blocking, or changing compatibility write routes;
 - raw compatibility `PUT`, `PATCH`, or `DELETE` idempotency enforcement;
-- proposal-only route idempotency expansion;
+- backend proposal-only route idempotency expansion beyond the accepted
+  syntactic bindings;
 - provider prompt wiring or live provider calls;
 - provider dry-run wiring;
 - memory/RAG/GraphRAG runtime wiring;
@@ -124,8 +131,9 @@ This preflight does not authorize:
 
 ## Boundary
 
-This is a declaration-continuity artifact plus a bounded route-intercepted
-browser execution proof. It does not prove production observability,
+This is a declaration-continuity artifact plus bounded route-intercepted
+browser execution proof. It proves native-client parity only and does not prove
+external-consumer readiness, production observability,
 route-removal safety, external client readiness, provider readiness, deployment
 readiness, or that any environment should switch `appointment_raw_compat_mode`
 away from `audit`.

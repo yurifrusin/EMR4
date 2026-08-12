@@ -9052,6 +9052,26 @@ function idempotencyHeadersFor(key) {
   return { "Idempotency-Key": key };
 }
 
+function proposalWarningCodes(proposal) {
+  return (proposal?.warnings || [])
+    .map(issue => String(issue?.code || "").trim())
+    .filter(Boolean)
+    .sort();
+}
+
+function storedProposalWarningCodes(element) {
+  try {
+    const parsed = JSON.parse(element.dataset.confirmedWarningCodes || "[]");
+    return Array.isArray(parsed) ? parsed.map(String).sort() : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function sameWarningCodes(left, right) {
+  return left.length === right.length && left.every((code, index) => code === right[index]);
+}
+
 function isCreateConfirmEndpoint(endpoint) {
   const normalized = normalizeApiPath(endpoint || "");
   return normalized.endsWith("/appointments/proposals/create/confirm") ||
@@ -9066,6 +9086,7 @@ function resetProposalConfirmation() {
     saveBtn.classList.remove("btn-warning-action");
     delete saveBtn.dataset.idempotencyKey;
     delete saveBtn.dataset.confirmIdempotencyKey;
+    delete saveBtn.dataset.confirmedWarningCodes;
   }
   const warningEl = document.getElementById("booking-warnings");
   if (warningEl) {
@@ -9438,10 +9459,7 @@ async function saveBooking() {
         const url = editingAppointmentId
           ? `/appointments/proposals/update/${editingAppointmentId}`
           : "/appointments/proposals/create";
-        const headers = {};
-        if (!editingAppointmentId) {
-          headers["Idempotency-Key"] = ensureElementIdempotencyKey(saveBtn);
-        }
+        const headers = idempotencyHeadersFor(ensureElementIdempotencyKey(saveBtn));
         const propRes = await apiFetch(url, {
           method: "POST",
           headers: headers,
@@ -9454,36 +9472,48 @@ async function saveBooking() {
       }
     }
 
-    if (!isConfirmed && proposal) {
+    if (proposal) {
       if (proposal.blocks && proposal.blocks.length > 0) {
         errorEl.textContent = proposal.blocks.map(b => b.message).join(" ");
         errorEl.classList.remove("hidden");
+        saveBtn.dataset.confirmed = "false";
+        saveBtn.textContent = "Save Booking";
+        saveBtn.classList.remove("btn-warning-action");
+        delete saveBtn.dataset.confirmedWarningCodes;
         saveBtn.disabled = false;
         return;
       }
 
       if (proposal.warnings && proposal.warnings.length > 0) {
-        if (warningEl) {
-          const warningTitle = document.createElement("div");
-          warningTitle.style.fontWeight = "bold";
-          warningTitle.textContent = "Warning: Please review before saving:";
-          warningEl.appendChild(warningTitle);
+        const warningCodes = proposalWarningCodes(proposal);
+        const warningCodesAlreadyConfirmed = isConfirmed && sameWarningCodes(
+          warningCodes,
+          storedProposalWarningCodes(saveBtn)
+        );
+        if (!warningCodesAlreadyConfirmed) {
+          if (warningEl) {
+            const warningTitle = document.createElement("div");
+            warningTitle.style.fontWeight = "bold";
+            warningTitle.textContent = "Warning: Please review before saving:";
+            warningEl.appendChild(warningTitle);
 
-          const list = document.createElement("ul");
-          proposal.warnings.forEach(w => {
-            const item = document.createElement("li");
-            item.textContent = w.message;
-            list.appendChild(item);
-          });
-          warningEl.appendChild(list);
-          warningEl.classList.remove("hidden");
+            const list = document.createElement("ul");
+            proposal.warnings.forEach(w => {
+              const item = document.createElement("li");
+              item.textContent = w.message;
+              list.appendChild(item);
+            });
+            warningEl.appendChild(list);
+            warningEl.classList.remove("hidden");
+          }
+
+          saveBtn.textContent = "Confirm & Save";
+          saveBtn.classList.add("btn-warning-action");
+          saveBtn.dataset.confirmed = "true";
+          saveBtn.dataset.confirmedWarningCodes = JSON.stringify(warningCodes);
+          saveBtn.disabled = false;
+          return;
         }
-
-        saveBtn.textContent = "Confirm & Save";
-        saveBtn.classList.add("btn-warning-action");
-        saveBtn.dataset.confirmed = "true";
-        saveBtn.disabled = false;
-        return;
       }
     }
 
@@ -9536,48 +9566,40 @@ async function saveBooking() {
         const confirmedWarnings = (proposal?.warnings || []).map(issue => issue.code).filter(Boolean);
         const confirmEndpoint = proposal?.confirm_endpoint;
         const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
-        let updateRes;
-        if (confirmEndpoint && confirmPayload) {
-          confirmPayload.confirmed = true;
-          confirmPayload.confirmed_warnings = Array.from(new Set([
-            ...(confirmPayload.confirmed_warnings || []),
-            ...confirmedWarnings
-          ]));
-          const confirmHeaders = idempotencyHeadersFor(
-            updateConfirmIdempotencyKey(proposal, confirmPayload)
-          );
-          updateRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
-            method: "POST",
-            headers: confirmHeaders,
-            body: JSON.stringify(confirmPayload)
-          });
-        } else {
-          updateRes = await apiFetch(`/appointments/${editingAppointmentId}`, {
-            method: "PUT",
-            body: JSON.stringify(payload)
-          });
+        if (!confirmEndpoint || !confirmPayload) {
+          throw new Error("The appointment update could not be prepared securely. Refresh the Diary and try again.");
         }
+        confirmPayload.confirmed = true;
+        confirmPayload.confirmed_warnings = Array.from(new Set([
+          ...(confirmPayload.confirmed_warnings || []),
+          ...confirmedWarnings
+        ]));
+        const confirmHeaders = idempotencyHeadersFor(
+          updateConfirmIdempotencyKey(proposal, confirmPayload)
+        );
+        const updateRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
+          method: "POST",
+          headers: confirmHeaders,
+          body: JSON.stringify(confirmPayload)
+        });
         if (!updateRes.ok) {
           throw new Error(await apiErrorMessage(updateRes, "Update"));
         }
-        if (confirmEndpoint) {
-          const confirmResult = await updateRes.json();
-          if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
-            const issue = (confirmResult?.blocks || [])[0];
-            throw new Error(issue?.message || confirmResult?.summary || "The appointment update could not be confirmed.");
-          }
+        const confirmResult = await updateRes.json();
+        if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
+          const issue = (confirmResult?.blocks || [])[0];
+          throw new Error(issue?.message || confirmResult?.summary || "The appointment update could not be confirmed.");
+        }
+        if (!confirmResult.appointment) {
+          throw new Error("Update confirm response did not include an appointment.");
         }
 
         if (statusToSend !== (editingAppointmentOriginalStatus || "Booked")) {
-          const statusPayload = { status: statusToSend };
-          if (statusReasonCode) statusPayload.status_reason_code = statusReasonCode;
-          const statusRes = await apiFetch(`/appointments/${editingAppointmentId}/status`, {
-            method: "PATCH",
-            body: JSON.stringify(statusPayload)
-          });
-          if (!statusRes.ok) {
-            throw new Error(await apiErrorMessage(statusRes, "Status update"));
-          }
+          await applyBookingStatusAfterConfirmedBase(
+            confirmResult.appointment,
+            statusToSend,
+            statusReasonCode
+          );
         }
       }
       setStatus("Booking updated successfully.");
@@ -9603,67 +9625,37 @@ async function saveBooking() {
         const confirmedWarnings = (proposal?.warnings || []).map(issue => issue.code).filter(Boolean);
         const confirmEndpoint = proposal?.confirm_endpoint;
         const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
-        let createRes;
-        if (confirmEndpoint && confirmPayload) {
-          confirmPayload.confirmed = true;
-          confirmPayload.confirmed_warnings = Array.from(new Set([
-            ...(confirmPayload.confirmed_warnings || []),
-            ...confirmedWarnings
-          ]));
-          const confirmHeaders = isCreateConfirmEndpoint(confirmEndpoint)
-            ? idempotencyHeadersFor(ensureElementConfirmIdempotencyKey(saveBtn))
-            : {};
-          createRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
-            method: "POST",
-            headers: confirmHeaders,
-            body: JSON.stringify(confirmPayload)
-          });
-        } else {
-          const createPayload = {
-            practitioner_id: practitioner.id,
-            appointment_type_id: typeId,
-            appointment_date: dateVal,
-            start_time_local: timeVal,
-            duration_minutes: duration,
-            reason: reason,
-          };
-          if (activeLocationId) {
-            createPayload.location_id = activeLocationId;
-          }
-          if (selectedPatient) {
-            createPayload.patient_id = selectedPatient.id;
-          } else {
-            createPayload.patient_id = null;
-            createPayload.patient_name_provisional = provisionalName;
-          }
-          createRes = await apiFetch(`/appointments`, {
-            method: "POST",
-            body: JSON.stringify(createPayload)
-          });
+        if (!confirmEndpoint || !confirmPayload) {
+          throw new Error("The appointment could not be prepared securely. Refresh the Diary and try again.");
         }
+        confirmPayload.confirmed = true;
+        confirmPayload.confirmed_warnings = Array.from(new Set([
+          ...(confirmPayload.confirmed_warnings || []),
+          ...confirmedWarnings
+        ]));
+        const confirmHeaders = isCreateConfirmEndpoint(confirmEndpoint)
+          ? idempotencyHeadersFor(ensureElementConfirmIdempotencyKey(saveBtn))
+          : {};
+        const createRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
+          method: "POST",
+          headers: confirmHeaders,
+          body: JSON.stringify(confirmPayload)
+        });
         if (!createRes.ok) {
           throw new Error(await apiErrorMessage(createRes, "Create"));
         }
         const createResult = await createRes.json();
-        if (confirmEndpoint && (createResult?.safe !== true || createResult?.autonomy_tier !== "confirmed_write")) {
+        if (createResult?.safe !== true || createResult?.autonomy_tier !== "confirmed_write") {
           const issue = (createResult?.blocks || [])[0];
           throw new Error(issue?.message || createResult?.summary || "The appointment could not be confirmed.");
         }
-        const newApptObj = confirmEndpoint ? createResult.appointment : createResult;
+        const newApptObj = createResult.appointment;
         if (!newApptObj || !newApptObj.id) {
           throw new Error("Create response did not include an appointment id.");
         }
 
         if (statusToSend !== "Booked") {
-          const statusPayload = { status: statusToSend };
-          if (statusReasonCode) statusPayload.status_reason_code = statusReasonCode;
-          const statusRes = await apiFetch(`/appointments/${newApptObj.id}/status`, {
-            method: "PATCH",
-            body: JSON.stringify(statusPayload)
-          });
-          if (!statusRes.ok) {
-            throw new Error(await apiErrorMessage(statusRes, "Set status"));
-          }
+          await applyBookingStatusAfterConfirmedBase(newApptObj, statusToSend, statusReasonCode);
         }
       }
       setStatus("Booking created successfully.");
@@ -9733,9 +9725,11 @@ async function deleteBooking() {
         status_reason_code: statusReasonCode
       });
     } else {
+      const proposalHeaders = idempotencyHeadersFor(generateClientIdempotencyKey());
       try {
         const propRes = await apiFetch(`/appointments/proposals/delete/${editingAppointmentId}`, {
           method: "POST",
+          headers: proposalHeaders,
           body: JSON.stringify({
             intent: "delete_appointment",
             cancellation_reason,
@@ -9754,6 +9748,7 @@ async function deleteBooking() {
           // Fallback to status proposal (omitting cancellation_reason)
           const propRes = await apiFetch(`/appointments/proposals/status/${editingAppointmentId}`, {
             method: "POST",
+            headers: proposalHeaders,
             body: JSON.stringify({
               status: "Cancelled",
               waiting_area_id: null,
@@ -10041,6 +10036,7 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
     } else {
       const propRes = await apiFetch(`/appointments/proposals/update/${appt.id}`, {
         method: "POST",
+        headers: idempotencyHeadersFor(generateClientIdempotencyKey()),
         body: JSON.stringify(payload)
       });
       if (!propRes.ok) {
@@ -10080,36 +10076,32 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
       const confirmedWarnings = (proposal.warnings || []).map(issue => issue.code).filter(Boolean);
       const confirmEndpoint = proposal.confirm_endpoint;
       const confirmPayload = proposal.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
-      let updateRes;
-      if (confirmEndpoint && confirmPayload) {
-        confirmPayload.confirmed = true;
-        confirmPayload.confirmed_warnings = Array.from(new Set([
-          ...(confirmPayload.confirmed_warnings || []),
-          ...confirmedWarnings
-        ]));
-        const confirmHeaders = idempotencyHeadersFor(
-          updateConfirmIdempotencyKey(proposal, confirmPayload)
-        );
-        updateRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
-          method: "POST",
-          headers: confirmHeaders,
-          body: JSON.stringify(confirmPayload)
-        });
-      } else {
-        updateRes = await apiFetch(`/appointments/${appt.id}`, {
-          method: "PUT",
-          body: JSON.stringify(payload)
-        });
+      if (!confirmEndpoint || !confirmPayload) {
+        throw new Error("The appointment update could not be prepared securely. Refresh the Diary and try again.");
       }
+      confirmPayload.confirmed = true;
+      confirmPayload.confirmed_warnings = Array.from(new Set([
+        ...(confirmPayload.confirmed_warnings || []),
+        ...confirmedWarnings
+      ]));
+      const confirmHeaders = idempotencyHeadersFor(
+        updateConfirmIdempotencyKey(proposal, confirmPayload)
+      );
+      const updateRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
+        method: "POST",
+        headers: confirmHeaders,
+        body: JSON.stringify(confirmPayload)
+      });
       if (!updateRes.ok) {
         throw new Error(await apiErrorMessage(updateRes, "Update"));
       }
-      if (confirmEndpoint) {
-        const confirmResult = await updateRes.json();
-        if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
-          const issue = (confirmResult?.blocks || [])[0];
-          throw new Error(issue?.message || confirmResult?.summary || "The appointment update could not be confirmed.");
-        }
+      const confirmResult = await updateRes.json();
+      if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
+        const issue = (confirmResult?.blocks || [])[0];
+        throw new Error(issue?.message || confirmResult?.summary || "The appointment update could not be confirmed.");
+      }
+      if (!confirmResult.appointment) {
+        throw new Error("Update confirm response did not include an appointment.");
       }
       setStatus("Booking updated successfully.");
       await loadDiary(true);
@@ -10127,47 +10119,65 @@ async function applySignedStatusProposal(appt, proposal, newStatus, waitingAreaI
   const confirmEndpoint = proposal?.confirm_endpoint;
   const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
 
-  if (confirmEndpoint && confirmPayload) {
-    confirmPayload.confirmed = true;
-    confirmPayload.confirmed_warnings = Array.from(new Set([
-      ...(confirmPayload.confirmed_warnings || []),
-      ...confirmedWarnings
-    ]));
-    const confirmHeaders = idempotencyHeadersFor(
-      statusConfirmIdempotencyKey(proposal, confirmPayload)
-    );
-    const confirmRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
-      method: "POST",
-      headers: confirmHeaders,
-      body: JSON.stringify(confirmPayload)
-    });
-    if (!confirmRes.ok) {
-      throw new Error(await apiErrorMessage(confirmRes, "Status confirm"));
-    }
-    const confirmResult = await confirmRes.json();
-    if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
-      const issue = (confirmResult?.blocks || [])[0];
-      throw new Error(issue?.message || confirmResult?.summary || "The status change could not be confirmed.");
-    }
-    if (!confirmResult.appointment) {
-      throw new Error("Status confirm response did not include an appointment.");
-    }
-    return confirmResult.appointment;
+  if (!confirmEndpoint || !confirmPayload) {
+    throw new Error("The status change could not be prepared securely. Refresh the Diary and try again.");
   }
-
-  const bodyPayload = { status: newStatus };
-  if (waitingAreaId !== null) {
-    bodyPayload.waiting_area_id = waitingAreaId || null;
-  }
-  const res = await apiFetch(`/appointments/${appt.id}/status`, {
-    method: "PATCH",
-    body: JSON.stringify(bodyPayload)
+  confirmPayload.confirmed = true;
+  confirmPayload.confirmed_warnings = Array.from(new Set([
+    ...(confirmPayload.confirmed_warnings || []),
+    ...confirmedWarnings
+  ]));
+  const confirmHeaders = idempotencyHeadersFor(
+    statusConfirmIdempotencyKey(proposal, confirmPayload)
+  );
+  const confirmRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
+    method: "POST",
+    headers: confirmHeaders,
+    body: JSON.stringify(confirmPayload)
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Failed to update status: ${res.status} ${text}`);
+  if (!confirmRes.ok) {
+    throw new Error(await apiErrorMessage(confirmRes, "Status confirm"));
   }
-  return await res.json();
+  const confirmResult = await confirmRes.json();
+  if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
+    const issue = (confirmResult?.blocks || [])[0];
+    throw new Error(issue?.message || confirmResult?.summary || "The status change could not be confirmed.");
+  }
+  if (!confirmResult.appointment) {
+    throw new Error("Status confirm response did not include an appointment.");
+  }
+  return confirmResult.appointment;
+}
+
+async function applyBookingStatusAfterConfirmedBase(appt, newStatus, statusReasonCode = null) {
+  try {
+    const payload = { status: newStatus };
+    if (statusReasonCode) payload.status_reason_code = statusReasonCode;
+    const propRes = await apiFetch(`/appointments/proposals/status/${appt.id}`, {
+      method: "POST",
+      headers: idempotencyHeadersFor(generateClientIdempotencyKey()),
+      body: JSON.stringify(payload)
+    });
+    if (!propRes.ok) {
+      throw new Error(await apiErrorMessage(propRes, "Status proposal check"));
+    }
+    const proposal = await propRes.json();
+    const terminalStatuses = ["Completed", "Cancelled", "NoShow", "DNA"];
+    const needsConfirm = (
+      proposal?.safe !== true ||
+      (proposal?.warnings && proposal.warnings.length > 0) ||
+      proposal?.autonomy_tier === "proposal" ||
+      terminalStatuses.includes(newStatus)
+    );
+    if (needsConfirm && !await showStatusProposalDialog(proposal)) {
+      throw new Error("the selected status was not confirmed");
+    }
+    return await applySignedStatusProposal(appt, proposal, newStatus, null);
+  } catch (err) {
+    throw new Error(
+      `Booking details were saved, but the selected status was not applied. ${err.message || "The status step failed."} Refresh the Diary before trying again.`
+    );
+  }
 }
 
 async function applySignedDeleteProposal(proposal, cancellationReason, statusReasonCode = null) {
@@ -10175,46 +10185,37 @@ async function applySignedDeleteProposal(proposal, cancellationReason, statusRea
   const confirmEndpoint = proposal?.confirm_endpoint;
   const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
 
-  if (confirmEndpoint && confirmPayload) {
-    confirmPayload.confirmed = true;
-    confirmPayload.confirmed_warnings = Array.from(new Set([
-      ...(confirmPayload.confirmed_warnings || []),
-      ...confirmedWarnings
-    ]));
-    const confirmHeaders = idempotencyHeadersFor(
-      deleteConfirmIdempotencyKey(proposal, confirmPayload)
-    );
-    const confirmRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
-      method: "POST",
-      headers: confirmHeaders,
-      body: JSON.stringify(confirmPayload)
-    });
-    if (!confirmRes.ok) {
-      throw new Error(await apiErrorMessage(confirmRes, "Delete confirm"));
-    }
-    const confirmResult = await confirmRes.json();
-    if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
-      const issue = (confirmResult?.blocks || [])[0];
-      throw new Error(issue?.message || confirmResult?.summary || "The appointment cancellation could not be confirmed.");
-    }
-    if (!confirmResult.appointment) {
-      throw new Error("Delete confirm response did not include an appointment.");
-    }
-    return confirmResult.appointment;
+  if (!confirmEndpoint || !confirmPayload) {
+    throw new Error("The appointment cancellation could not be prepared securely. Refresh the Diary and try again.");
   }
-
-  const res = await apiFetch(`/appointments/${editingAppointmentId}`, {
-    method: "DELETE",
-    body: JSON.stringify({
-      cancellation_reason: cancellationReason,
-      status_reason_code: statusReasonCode
-    })
+  confirmPayload.confirmed = true;
+  confirmPayload.confirmed_warnings = Array.from(new Set([
+    ...(confirmPayload.confirmed_warnings || []),
+    ...confirmedWarnings
+  ]));
+  const normalizedConfirmPath = allowlistedConfirmApiPath(confirmEndpoint);
+  const confirmHeaders = idempotencyHeadersFor(
+    normalizedConfirmPath.endsWith("/appointments/proposals/status-confirm")
+      ? statusConfirmIdempotencyKey(proposal, confirmPayload)
+      : deleteConfirmIdempotencyKey(proposal, confirmPayload)
+  );
+  const confirmRes = await apiFetch(normalizedConfirmPath, {
+    method: "POST",
+    headers: confirmHeaders,
+    body: JSON.stringify(confirmPayload)
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Delete failed: ${res.status} ${text}`);
+  if (!confirmRes.ok) {
+    throw new Error(await apiErrorMessage(confirmRes, "Delete confirm"));
   }
-  return null;
+  const confirmResult = await confirmRes.json();
+  if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
+    const issue = (confirmResult?.blocks || [])[0];
+    throw new Error(issue?.message || confirmResult?.summary || "The appointment cancellation could not be confirmed.");
+  }
+  if (!confirmResult.appointment) {
+    throw new Error("Delete confirm response did not include an appointment.");
+  }
+  return confirmResult.appointment;
 }
 
 async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null) {
@@ -10233,6 +10234,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       status: newStatus,
       waiting_area_id: waitingAreaId !== null ? (waitingAreaId || null) : (appt.waiting_area_id || null)
     };
+    const proposalHeaders = idempotencyHeadersFor(generateClientIdempotencyKey());
 
     let proposal;
     if (isSmokeMode()) {
@@ -10245,6 +10247,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       if (isWaitingAreaChangeOnly) {
         const propRes = await apiFetch(`/appointments/proposals/waiting-area/${appt.id}`, {
           method: "POST",
+          headers: proposalHeaders,
           body: JSON.stringify({ waiting_area_id: payload.waiting_area_id })
         });
         if (!propRes.ok) {
@@ -10254,6 +10257,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       } else {
         const propRes = await apiFetch(`/appointments/proposals/status/${appt.id}`, {
           method: "POST",
+          headers: proposalHeaders,
           body: JSON.stringify(payload)
         });
         if (!propRes.ok) {

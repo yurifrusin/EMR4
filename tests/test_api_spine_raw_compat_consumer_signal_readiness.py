@@ -21,48 +21,34 @@ EXPECTED_ROWS = {
     "POST /api/v1/appointments": {
         "handler": "create_appointment",
         "tag": "raw_compat_create",
-        "sites": {"create_modal_raw_post"},
-        "condition": "create fallback when `confirmEndpoint` or `confirmPayload` is absent",
+        "sites": set(),
+        "condition": "native create uses proposal plus signed confirm; missing evidence fails closed",
     },
     "PUT /api/v1/appointments/{appointment_id}": {
         "handler": "update_appointment",
         "tag": "raw_compat_update",
-        "sites": {"edit_modal_raw_put", "drag_resize_raw_put"},
-        "condition": "edit-modal or drag/resize fallback when `confirmEndpoint` or `confirmPayload` is absent",
+        "sites": set(),
+        "condition": "native edit and drag/resize use proposal plus signed confirm; missing evidence fails closed",
     },
     "PATCH /api/v1/appointments/{appointment_id}/status": {
         "handler": "update_appointment_status",
         "tag": "raw_compat_status",
-        "sites": {
-            "edit_modal_raw_status_patch",
-            "create_modal_raw_status_patch",
-            "status_proposal_raw_patch",
-        },
-        "condition": "status side-write after edit/create or fallback when signed status confirmation is unavailable",
+        "sites": set(),
+        "condition": "native status, waiting-area and post-create/update status use proposal plus signed confirm",
     },
     "DELETE /api/v1/appointments/{appointment_id}": {
         "handler": "cancel_appointment",
         "tag": "raw_compat_delete",
-        "sites": {"delete_modal_raw_delete"},
-        "condition": "delete fallback when `confirmEndpoint` or `confirmPayload` is absent",
+        "sites": set(),
+        "condition": "native delete uses delete or bounded status proposal plus signed confirm; missing evidence fails closed",
     },
-}
-
-SITE_FRAGMENTS = {
-    "create_modal_raw_post": ('apiFetch(`/appointments`,', 'method: "POST"'),
-    "edit_modal_raw_put": ('apiFetch(`/appointments/${editingAppointmentId}`,', 'method: "PUT"'),
-    "drag_resize_raw_put": ('apiFetch(`/appointments/${appt.id}`,', 'method: "PUT"'),
-    "edit_modal_raw_status_patch": ('apiFetch(`/appointments/${editingAppointmentId}/status`,', 'method: "PATCH"'),
-    "create_modal_raw_status_patch": ('apiFetch(`/appointments/${newApptObj.id}/status`,', 'method: "PATCH"'),
-    "status_proposal_raw_patch": ('apiFetch(`/appointments/${appt.id}/status`,', 'method: "PATCH"'),
-    "delete_modal_raw_delete": ('apiFetch(`/appointments/${editingAppointmentId}`,', 'method: "DELETE"'),
 }
 
 REQUIRED_CLOSED_GATES = {
     "changing `appointment_raw_compat_mode`",
     "removing, renaming, blocking, or changing compatibility write routes",
     "raw compatibility `PUT`, `PATCH`, or `DELETE` idempotency enforcement",
-    "proposal-only route idempotency expansion",
+    "backend proposal-only route idempotency expansion",
     "provider prompt wiring or live provider calls",
     "provider dry-run wiring",
     "memory/RAG/GraphRAG runtime wiring",
@@ -115,7 +101,7 @@ def test_readiness_inventory_covers_same_raw_writes_as_deprecation_map():
     rows = _inventory_rows()
     assert {row["compatibility_write"] for row in rows} == expected_routes
     assert set(EXPECTED_ROWS) == expected_routes
-    assert "compatibility_supported_until_client_parity" in DEPRECATION_MAP_PATH.read_text(encoding="utf-8")
+    assert "compatibility_supported_native_client_parity_proven" in DEPRECATION_MAP_PATH.read_text(encoding="utf-8")
 
 
 def test_readiness_inventory_rows_match_expected_consumers_and_posture():
@@ -128,7 +114,7 @@ def test_readiness_inventory_rows_match_expected_consumers_and_posture():
         assert row["sites"] == expected["sites"]
         assert row["condition"] == expected["condition"]
         assert row["header_consumed"] == "console_warn_proven"
-        assert row["readiness"] == "consumer_cors_backend_and_browser_harness_checked_keep_audit_mode"
+        assert row["readiness"] == "native_client_parity_proven_compat_route_mounted_keep_audit_mode"
 
 
 def test_backend_raw_compat_handlers_emit_expected_signals():
@@ -148,25 +134,22 @@ def test_backend_raw_compat_handlers_emit_expected_signals():
         )
 
 
-def test_diary_frontend_contains_the_documented_raw_call_sites_only():
+def test_diary_frontend_contains_no_raw_appointment_mutation_call_sites():
     text = DIARY_JS.read_text(encoding="utf-8")
 
-    expected_fragments = {
-        "apiFetch(`/appointments`,": 1,
-        "apiFetch(`/appointments/${editingAppointmentId}`,": 2,
-        "apiFetch(`/appointments/${appt.id}`,": 1,
-        "apiFetch(`/appointments/${editingAppointmentId}/status`,": 1,
-        "apiFetch(`/appointments/${newApptObj.id}/status`,": 1,
-        "apiFetch(`/appointments/${appt.id}/status`,": 1,
-    }
-    for fragment, count in expected_fragments.items():
-        assert text.count(fragment) == count
+    for fragment in (
+        'apiFetch(`/appointments`,',
+        'apiFetch(`/appointments/${editingAppointmentId}`,',
+        'apiFetch(`/appointments/${appt.id}`,',
+        'apiFetch(`/appointments/${editingAppointmentId}/status`,',
+        'apiFetch(`/appointments/${newApptObj.id}/status`,',
+        'apiFetch(`/appointments/${appt.id}/status`,',
+    ):
+        assert fragment not in text
 
-    for expected in EXPECTED_ROWS.values():
-        for site in expected["sites"]:
-            route_fragment, method_fragment = SITE_FRAGMENTS[site]
-            assert route_fragment in text
-            assert method_fragment in text
+    readiness = READINESS_PATH.read_text(encoding="utf-8")
+    assert "removes all seven raw appointment mutation call sites" in " ".join(readiness.split())
+    assert "compatibility routes remain mounted" in readiness
 
 
 def test_frontend_consumes_deprecation_header_only_at_shared_api_fetch_boundary():
@@ -260,6 +243,7 @@ def test_readiness_preflight_preserves_closed_gate_boundary():
     for gate in REQUIRED_CLOSED_GATES:
         assert gate in text
     assert "bounded route-intercepted browser execution proof" in compact
-    assert "does not prove production observability" in compact
+    assert "does not prove external-consumer readiness, production observability" in compact
     assert "Existing route-intercepted smoke tests" in text
     assert "no mode change yet" in text
+    assert "native-client parity only" in text

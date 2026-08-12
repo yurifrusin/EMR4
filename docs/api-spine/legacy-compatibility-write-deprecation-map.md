@@ -18,10 +18,10 @@ routes, or open any GraphQL mutation or provider surface.
 
 | Compatibility write | Handler | Raw compatibility tag | Replacement proposal route | Replacement confirm route | Read-model witness routes | Deprecation posture |
 |---|---|---|---|---|---|
-| `POST /api/v1/appointments` | `create_appointment` | `raw_compat_create` | `POST /api/v1/appointments/proposals/create` | `POST /api/v1/appointments/proposals/create/confirm`; `POST /api/v1/appointments/proposals/create/confirm-bernie` | `GET /api/v1/appointments`; `GET /api/v1/appointments/{appointment_id}`; `GET /api/v1/appointments/{appointment_id}/audit` | `compatibility_supported_until_client_parity` |
-| `PUT /api/v1/appointments/{appointment_id}` | `update_appointment` | `raw_compat_update` | `POST /api/v1/appointments/proposals/update/{appointment_id}`; `POST /api/v1/appointments/proposals/bernie/tool-intent` | `POST /api/v1/appointments/proposals/update/confirm` | `GET /api/v1/appointments/{appointment_id}`; `GET /api/v1/appointments/{appointment_id}/audit` | `compatibility_supported_until_client_parity` |
-| `PATCH /api/v1/appointments/{appointment_id}/status` | `update_appointment_status` | `raw_compat_status` | `POST /api/v1/appointments/proposals/status/{appointment_id}`; `POST /api/v1/appointments/proposals/waiting-area/{appointment_id}` | `POST /api/v1/appointments/proposals/status-confirm` | `GET /api/v1/appointments/{appointment_id}`; `GET /api/v1/appointments/waiting-room`; `GET /api/v1/appointments/{appointment_id}/audit` | `compatibility_supported_until_client_parity` |
-| `DELETE /api/v1/appointments/{appointment_id}` | `cancel_appointment` | `raw_compat_delete` | `POST /api/v1/appointments/proposals/delete/{appointment_id}` | `POST /api/v1/appointments/proposals/delete-confirm` | `GET /api/v1/appointments/{appointment_id}`; `GET /api/v1/appointments/{appointment_id}/audit` | `compatibility_supported_until_client_parity` |
+| `POST /api/v1/appointments` | `create_appointment` | `raw_compat_create` | `POST /api/v1/appointments/proposals/create` | `POST /api/v1/appointments/proposals/create/confirm`; `POST /api/v1/appointments/proposals/create/confirm-bernie` | `GET /api/v1/appointments`; `GET /api/v1/appointments/{appointment_id}`; `GET /api/v1/appointments/{appointment_id}/audit` | `compatibility_supported_native_client_parity_proven` |
+| `PUT /api/v1/appointments/{appointment_id}` | `update_appointment` | `raw_compat_update` | `POST /api/v1/appointments/proposals/update/{appointment_id}`; `POST /api/v1/appointments/proposals/bernie/tool-intent` | `POST /api/v1/appointments/proposals/update/confirm` | `GET /api/v1/appointments/{appointment_id}`; `GET /api/v1/appointments/{appointment_id}/audit` | `compatibility_supported_native_client_parity_proven` |
+| `PATCH /api/v1/appointments/{appointment_id}/status` | `update_appointment_status` | `raw_compat_status` | `POST /api/v1/appointments/proposals/status/{appointment_id}`; `POST /api/v1/appointments/proposals/waiting-area/{appointment_id}` | `POST /api/v1/appointments/proposals/status-confirm` | `GET /api/v1/appointments/{appointment_id}`; `GET /api/v1/appointments/waiting-room`; `GET /api/v1/appointments/{appointment_id}/audit` | `compatibility_supported_native_client_parity_proven` |
+| `DELETE /api/v1/appointments/{appointment_id}` | `cancel_appointment` | `raw_compat_delete` | `POST /api/v1/appointments/proposals/delete/{appointment_id}` | `POST /api/v1/appointments/proposals/delete-confirm` | `GET /api/v1/appointments/{appointment_id}`; `GET /api/v1/appointments/{appointment_id}/audit` | `compatibility_supported_native_client_parity_proven` |
 
 ## Current Raw Compatibility Signal
 
@@ -63,12 +63,14 @@ are proven for its replacement family:
 
 ## Current Non-Deprecation Decision
 
-The current decision is `map_only`.
+The current decision is `native_client_parity_proven_keep_routes_mounted`.
 
-No route is deprecated in code by this artifact. The compatibility writes stay
-visible as legacy-supported surfaces while the proposal-confirm families remain
-the preferred API Spine path for ordinary product clients and Bernie-authored
-actions.
+No route is deprecated in code by this artifact. On 2026-08-12 the native Diary
+reached zero raw appointment mutation call sites and now fails closed when
+signed confirmation evidence is unavailable. The compatibility writes stay
+visible as legacy-supported surfaces for unidentified external, recovery or
+migration consumers while proposal-confirm remains the preferred API Spine path
+for ordinary product clients and Bernie-authored actions.
 
 ## Conditional-command reorientation (2026-08-12)
 

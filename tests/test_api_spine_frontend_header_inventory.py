@@ -31,21 +31,21 @@ def _block(source: str, start_marker: str, end_marker: str) -> str:
     return source[start:end]
 
 
-def test_frontend_create_proposal_and_create_confirm_emit_http_idempotency_headers():
+def test_frontend_booking_proposals_and_create_confirm_emit_http_idempotency_headers():
     source = _read(DIARY_JS)
     save_booking = _function_source(source, "saveBooking")
 
     assert "function generateClientIdempotencyKey()" in source
     assert "function ensureElementIdempotencyKey(element)" in source
     assert "function idempotencyHeadersFor(key)" in source
-    assert 'headers["Idempotency-Key"] = ensureElementIdempotencyKey(saveBtn);' in save_booking
-    assert save_booking.index('headers["Idempotency-Key"]') < save_booking.index(
+    assert "const headers = idempotencyHeadersFor(ensureElementIdempotencyKey(saveBtn));" in save_booking
+    assert save_booking.index("const headers = idempotencyHeadersFor") < save_booking.index(
         'const propRes = await apiFetch(url, {'
     )
 
     create_confirm_block = _block(
         save_booking,
-        "let createRes;",
+        "const confirmHeaders = isCreateConfirmEndpoint",
         "if (!createRes.ok)",
     )
     assert "isCreateConfirmEndpoint(confirmEndpoint)" in create_confirm_block
@@ -88,12 +88,12 @@ def test_frontend_update_confirm_callers_emit_stable_headers():
 
     update_confirm_block = _block(
         save_booking,
-        "let updateRes;",
+        "const confirmHeaders = idempotencyHeadersFor(\n          updateConfirmIdempotencyKey",
         "if (!updateRes.ok)",
     )
     move_resize_confirm_block = _block(
         move_resize,
-        "let updateRes;",
+        "const confirmHeaders = idempotencyHeadersFor(\n        updateConfirmIdempotencyKey",
         "if (!updateRes.ok)",
     )
 
@@ -137,9 +137,15 @@ def test_frontend_confirm_callers_are_wired_or_explicitly_tracked():
         assert phrase in preflight
 
 
-def test_frontend_proposal_only_callers_are_explicitly_tracked_as_deferred():
+def test_frontend_proposal_only_callers_all_emit_headers_and_are_currently_tracked():
     source = _read(DIARY_JS)
     preflight = _read(PREFLIGHT)
+
+    save_booking = _function_source(source, "saveBooking")
+    move_resize = _function_source(source, "handleMoveResize")
+    set_status = _function_source(source, "setAppointmentStatus")
+    delete_booking = _function_source(source, "deleteBooking")
+    follow_up_status = _function_source(source, "applyBookingStatusAfterConfirmedBase")
 
     for route_fragment in (
         "/appointments/proposals/update/",
@@ -150,6 +156,7 @@ def test_frontend_proposal_only_callers_are_explicitly_tracked_as_deferred():
         assert route_fragment in source
 
     for handler in (
+        "propose_create_appointment",
         "propose_update_appointment",
         "propose_status_update",
         "propose_waiting_area_update",
@@ -157,7 +164,13 @@ def test_frontend_proposal_only_callers_are_explicitly_tracked_as_deferred():
     ):
         assert handler in preflight
 
-    assert "proposal-only routes remain a deferred binding gap" in preflight
+    assert "idempotencyHeadersFor(ensureElementIdempotencyKey(saveBtn))" in save_booking
+    assert "headers: idempotencyHeadersFor(generateClientIdempotencyKey())" in move_resize
+    assert set_status.count("headers: proposalHeaders") == 2
+    assert delete_booking.count("headers: proposalHeaders") == 2
+    assert "headers: idempotencyHeadersFor(generateClientIdempotencyKey())" in follow_up_status
+    assert "The native Diary header gap is closed." in preflight
+    assert "identify an attempt only" in preflight
 
 
 def test_frontend_header_preflight_keeps_closed_gates_closed():
@@ -177,4 +190,4 @@ def test_frontend_header_preflight_keeps_closed_gates_closed():
         assert phrase in text
 
     assert "Bernie tool-intent update confirm" in text
-    assert "Proposal-only header binding and strict `minLength: 8` runtime enforcement" in text
+    assert "Waiting-area proposal enforcement and strict `minLength: 8` runtime enforcement" in text
