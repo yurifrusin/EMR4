@@ -1,0 +1,10 @@
+{
+  "admitted_hostile_mutations": [],
+  "canonical_errors": [],
+  "case_count": 15,
+  "hostile_mutation_count": 37,
+  "result_mapping_count": 8,
+  "runtime_or_command_authority_granted": false,
+  "schema_version": "raisa.status_confirm_kernel_adapter_evidence.v1",
+  "status": "passed"
+}

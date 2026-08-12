@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_unmounted_status_confirm_kernel_adapter_contract_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen status-only adapter maps the existing signed confirmation shape plus server-owned current authority/state into either one immutable effect-free kernel request or one typed stop. Fifteen cases, eight result mappings, thirty-seven hostile mutations and eleven focused tests pass. Waiting-area union, terminal re-transition, missing session, stale evidence, warning mismatch and revoked authority emit no request; stored receipt identity controls committed and replay delivery.",
+    "current_authority_allocation": "GPT Sol retains all tranche ownership under standing authority and the API Steward boundary. No subagent, external worker or provider is selected.",
+    "git_refs_and_worktree": "Task HEAD and origin task align at fe43ff09bcca67e7634790bb6aeadace51702305. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Tracked state contains only this tranche and exactly 526 untracked paths, including five docs/branding paths, precede this state.",
+    "live_handover_current_baton": "AGENTS.md was read completely at SHA-256 229e0e0fc90de7f7e7bbddc35b0e918779cc86e753df7765522c72068529933a. Continuity 256 / Compass 238 names this pure adapter contract next; AER-0291 / register revision 258 is corrected and published.",
+    "protected_evidence_boundaries": "Only the exact AER-0291 non-protected file allowlist was used after the incident. The script imports no app, database, network or provider package. No route, kernel, command, product/patient data, deployment, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_the_provider_free_unmounted_status_confirm_kernel_adapter_contract",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at SHA-256 229e0e0fc90de7f7e7bbddc35b0e918779cc86e753df7765522c72068529933a. Continuity 256 / Compass 238 accepts the status transaction protocol and names the pure unmounted status-confirm adapter contract next. AER-0291 / register revision 258 records and corrects the protected-scope discovery breach before this receipt.",
+    "current_authority_allocation": "GPT Sol retains conductor, architecture, implementation, testing, acceptance and task-branch integration ownership under Yuri's standing uninterrupted-development authority and the EMR4 API Steward boundary. No subagent, external worker or provider is selected; Sydney Vertex Bernie ADC remains unused.",
+    "active_plan_and_acceptance": "The accepted protocol plan, design, closeout and Sol acceptance were read. Exact allowlisted reads of the appointment router, appointment schemas, appointment-command OpenAPI contract, status-confirm route contract, confirmation matrix and terminal-rollback review show a signed confirmation envelope plus server-owned practice, actor, authority and current-state inputs. The narrow adapter is status-only: waiting-area union input stops unsupported; terminal re-transition stops policy-deferred; confirmation and exact warning acknowledgement, signed-evidence verification, freshness, session, idempotency identity and current authority must all bind before a pure kernel request can be emitted. Result mapping must preserve typed blocked/conflict/replay/committed shapes and a durable canonical receipt body for safe post-commit delivery retry.",
+    "protected_evidence_boundaries": "AER-0291's control is active: every further content search names exact non-protected files; no repository, tests or docs directory root may be searched. Protected output already exposed is discarded and prohibited from all adapter evidence. The tranche may not import or execute an application route, Pydantic application schema, database driver, source, watcher, event, provider, network, credential, tool or command. No runtime kernel, raw-route change, operational or patient/product data, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked file remain preserved and excluded.",
+    "git_refs_and_worktree": "The branch is codex/ariadne-bernie-davida-parallel-seam. Task HEAD and origin task align at fe43ff09bcca67e7634790bb6aeadace51702305. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Tracked state is clean and exactly 516 untracked paths, including five docs/branding paths and prior closeout receipts, are preserved before this runtime-state file."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "provider_free_unmounted_status_confirm_kernel_adapter_contract_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed full rehydration, contained AER-0291 and inspected only the exact non-protected adapter allowlist."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier is selected before deterministic gates."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is selected for this tightly coupled pure adapter contract."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,979 @@
+{
+  "cases": [
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "effect_authority": false,
+          "idempotency_key": "status-key-001",
+          "lock_plan": [
+            "practice",
+            "appointment",
+            "idempotency_record"
+          ],
+          "operation_id": "confirmAppointmentStatusProposal",
+          "practice_id": "practice-synthetic-001",
+          "request_digest": "57756aed20a1edc71afa59ab9a45ef2db2a9beaa76723da0f757a05f85b1c15b",
+          "route_family": "status-confirm",
+          "schema_version": "raisa.status_kernel_request.v1",
+          "session_id": "session-synthetic-001",
+          "signed_evidence_binding_digest": "6edf05d218e42693149488417d4b2dcb5c14e508ad1f9c42b5347844d99c49f7",
+          "source_version": 7,
+          "target_appointment_id": "apt-synthetic-001",
+          "warning_codes": []
+        },
+        "kind": "kernel_request_ready",
+        "outcome": null,
+        "reason": null
+      },
+      "id": "ska-001-ready",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "structure_invalid"
+      },
+      "id": "ska-002-structure",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "invalid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "operation_binding_mismatch"
+      },
+      "id": "ska-003-operation",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "rawStatusPatch",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "unsupported_status_confirm_variant"
+      },
+      "id": "ska-004-waiting-variant",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_waiting_area",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "idempotency_conflict",
+        "reason": "idempotency_key_required"
+      },
+      "id": "ska-005-idempotency",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": " ",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "authority_revoked",
+        "reason": "current_authority_revoked"
+      },
+      "id": "ska-006-authority",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": false,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "server_session_binding_required"
+      },
+      "id": "ska-007-session",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": ""
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "explicit_confirmation_required"
+      },
+      "id": "ska-008-confirmation",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": false,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "signed_confirmation_evidence_invalid"
+      },
+      "id": "ska-009-evidence",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "invalid",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_status_proposal_freshness_id"
+      },
+      "id": "ska-010-freshness",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "stale",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "current_target_mismatch"
+      },
+      "id": "ska-011-target",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-other",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "warning_acknowledgement_mismatch"
+      },
+      "id": "ska-012-warning",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [
+            "already_terminal"
+          ],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "transition_policy_deferred"
+      },
+      "id": "ska-013-terminal",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Completed",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "status_proposal_not_safe"
+      },
+      "id": "ska-014-unsafe",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "appointment.status.confirm.v1",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": false,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    },
+    {
+      "expected": {
+        "effect_authority": false,
+        "kernel_request": null,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "signed_confirmation_evidence_invalid"
+      },
+      "id": "ska-015-purpose",
+      "input": {
+        "server": {
+          "actor_id": "actor-synthetic-001",
+          "actor_role": "Receptionist",
+          "authority_current": true,
+          "current_state": {
+            "appointment_id": "apt-synthetic-001",
+            "source_version": 7,
+            "status": "Booked",
+            "status_reason_code": null,
+            "waiting_area_id": null
+          },
+          "evidence_binding": "exact",
+          "evidence_purpose": "wrong-purpose",
+          "evidence_status": "verified",
+          "expected_evidence_purpose": "appointment.status.confirm.v1",
+          "expected_freshness_id": "fresh-001",
+          "practice_id": "practice-synthetic-001",
+          "session_id": "session-synthetic-001"
+        },
+        "structure": "valid",
+        "transport": {
+          "autonomy_tier": "execute_with_report",
+          "command": {
+            "appointment_id": "apt-synthetic-001",
+            "clears_waiting_area": false,
+            "kind": "status",
+            "status": "Confirmed",
+            "status_reason_code": null,
+            "waiting_area_id": null,
+            "waiting_area_id_supplied": false
+          },
+          "confirmed": true,
+          "confirmed_warning_codes": [],
+          "freshness_id": "fresh-001",
+          "idempotency_key": "status-key-001",
+          "operation_id": "confirmAppointmentStatusProposal",
+          "proposal_intent": "update_appointment_status",
+          "proposal_safe": true,
+          "proposal_warning_codes": [],
+          "requires_confirmation": true,
+          "route_family": "status-confirm",
+          "signed_evidence_required": true
+        }
+      }
+    }
+  ],
+  "delivery_recovery": {
+    "delivery_failure_changes_receipt": false,
+    "duplicate_kernel_request": false,
+    "retry_uses_stored_receipt": true,
+    "stored_body": {
+      "appointment": {
+        "id": "apt-synthetic-001",
+        "status": "Confirmed"
+      },
+      "autonomy_tier": "confirmed_write",
+      "safe": true
+    },
+    "stored_digest": "9e4858594995b5e88281ee0e05680d9f8653b99fc2cd4368a463aa330d5f87e5"
+  },
+  "effect_boundary": {
+    "application_import": false,
+    "command": false,
+    "database": false,
+    "network": false,
+    "product_data": false,
+    "provider": false,
+    "route_execution": false
+  },
+  "lock_plan": [
+    "practice",
+    "appointment",
+    "idempotency_record"
+  ],
+  "result_mappings": [
+    {
+      "outcome": "committed",
+      "release": true,
+      "status": 200,
+      "transport": "stored_receipt"
+    },
+    {
+      "outcome": "idempotent_replay",
+      "release": true,
+      "status": 200,
+      "transport": "stored_receipt_exact"
+    },
+    {
+      "outcome": "stale_precondition",
+      "release": true,
+      "status": 200,
+      "transport": "blocked"
+    },
+    {
+      "outcome": "schedule_conflict",
+      "release": false,
+      "status": null,
+      "transport": "internal_contract_error"
+    },
+    {
+      "outcome": "authority_revoked",
+      "release": true,
+      "status": 403,
+      "transport": "error"
+    },
+    {
+      "outcome": "confirmation_required",
+      "release": true,
+      "status": 200,
+      "transport": "blocked"
+    },
+    {
+      "outcome": "validation_rejected",
+      "release": true,
+      "status": 200,
+      "transport": "blocked"
+    },
+    {
+      "outcome": "idempotency_conflict",
+      "release": true,
+      "status": 409,
+      "transport": "error"
+    }
+  ],
+  "schema_version": "raisa.status_confirm_kernel_adapter_contract.v1",
+  "source_bindings": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json",
+      "sha256": "2967703f8baf395439a6e2c88885074fefe9f4bea308c0294ba7e67c57b26633"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json",
+      "sha256": "c95288aa9903ebfa7d10abd199567038cfcc1c72d3e3b80f763dc6d7a588f23c"
+    },
+    {
+      "path": "app/routers/appointments.py",
+      "sha256": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb"
+    },
+    {
+      "path": "app/schemas/appointments.py",
+      "sha256": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+    },
+    {
+      "path": "tests/test_api_spine_status_confirm_idempotency_route_contract.py",
+      "sha256": "0ecc5b2bff0853d3f9797163b979f575f9604c6ba0895cf5bd36c165664eb8af"
+    },
+    {
+      "path": "tests/test_api_spine_confirmation_contract_matrix.py",
+      "sha256": "4881bde300c6c62a061518aec8a1ddfc5e7b185e0c1cd4f86c490c5fef2c6ef6"
+    },
+    {
+      "path": "review/test_raw_status_terminal_rollback_guard.py",
+      "sha256": "fbfa53e8fc8cf22b522437c1d74aa77638ef930bfc1fec5ff678b45c221555b6"
+    }
+  ],
+  "terminal_statuses": [
+    "Completed",
+    "Cancelled",
+    "DNA",
+    "NoShow"
+  ]
+}

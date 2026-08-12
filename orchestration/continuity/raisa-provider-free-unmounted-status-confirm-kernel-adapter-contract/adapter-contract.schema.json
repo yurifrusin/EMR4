@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cases": {
+      "minItems": 15,
+      "type": "array"
+    },
+    "delivery_recovery": {
+      "type": "object"
+    },
+    "effect_boundary": {
+      "additionalProperties": {
+        "const": false
+      },
+      "type": "object"
+    },
+    "lock_plan": {
+      "const": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ]
+    },
+    "result_mappings": {
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "raisa.status_confirm_kernel_adapter_contract.v1"
+    },
+    "source_bindings": {
+      "minItems": 8,
+      "type": "array"
+    },
+    "terminal_statuses": {
+      "const": [
+        "Completed",
+        "Cancelled",
+        "DNA",
+        "NoShow"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_bindings",
+    "lock_plan",
+    "terminal_statuses",
+    "cases",
+    "result_mappings",
+    "delivery_recovery",
+    "effect_boundary"
+  ],
+  "type": "object"
+}
