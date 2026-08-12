@@ -22,6 +22,7 @@
     "Context Fabric CF-D1 concurrency rehearsal acceptance",
     "Ariadne CF-D2 workflow incident diagnosis and fluidity repair acceptance",
     "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal acceptance",
+    "Provider-free read-only status-confirm route-mounting admission review acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -32,7 +33,7 @@
   "ledger_byte_count": 174625,
   "ledger_line_count": 146,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "4157a6b5d7f554cd8941789dad7b87fbcaa763b3f2619d926700a1fb1cde258e",
+  "ledger_sha256": "5d85865ff902271aa902baa4329bb292815dc0b1cb16a081dad2b98d4d4a44cf",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -167,10 +168,10 @@
   ],
   "moved_row_count": 130,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 74070,
-  "source_agents_git_blob_sha1": "c35430ce02550a318a665f5fe8cba5a6cd489a21",
+  "source_agents_byte_count": 74198,
+  "source_agents_git_blob_sha1": "fd62defcada9450456af49e8f81eebc526e6d24c",
   "source_agents_line_count": 488,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "15b101c242cc64922e76edc73208e59b66cd6506d9dd8e95f6818d9ae77bc9f7",
-  "source_git_head": "aed1bb076835e8cb6302f614869a285dba79983b"
+  "source_agents_sha256": "25c6eccabbc864265371954d84cc2c75ce234b64d0a1e4e98ff7fbcfb91d120b",
+  "source_git_head": "fb3772dea0c27a7572df00e1b9d5153f9165ccf3"
 }

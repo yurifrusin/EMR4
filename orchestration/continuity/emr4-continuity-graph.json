@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 265,
+  "graph_revision": 266,
   "harvests": [],
   "nodes": [
     {
@@ -17145,6 +17145,87 @@
         "Mounted-route and adapter convergence remain unreviewed; no route was edited, mounted or called.",
         "No product command/database/data, concurrency, restart, crash, unknown-commit, performance, retention or operations behavior is proved.",
         "Providers, credentials, patient/product data, watchers/events, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-status-confirm-route-mounting-admission-review",
+      "title": "Provider-free read-only status-confirm route-mounting admission review",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "fb3772dea0c27a7572df00e1b9d5153f9165ccf3",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The result is provider-free, exact-file and read-only; implementation authority remains false.",
+          "It distinguishes literal route mounting from admission onto the accepted physical seam.",
+          "Routes, product databases/data, commands, providers, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-route-mounting-review",
+          "source": "docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md",
+          "status": "accepted",
+          "summary": "Accept mounted-but-not-admitted verdict; preserve the PostgreSQL proof and hand off only to bounded test hygiene then unmounted composition rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "The status-confirm endpoint is literally mounted at POST /api/v1/appointments/proposals/status-confirm.",
+        "Ten exact hashes, 25 structural assertions, 45 hostile mutations and 11 focused review tests pass.",
+        "Two foundations are satisfied, one API-path alias matter is partial and seven composition gaps block unchanged physical convergence.",
+        "The accepted sixteen-scenario PostgreSQL durability proof remains closed and is not reopened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-evidence.json",
+          "docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-mounting-admission-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-route-mounting-admission-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preacceptance-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py",
+          "tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_admission_review_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py",
+          "scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "One stale Sprint-138 test expectation must be corrected without changing product behavior.",
+        "The accepted adapter, server authority/session ingress, physical seam and public-response mapper remain uncomposed and unmounted.",
+        "No route call/edit, product command/database/data, concurrency, restart, unknown commit, provider, deployment or protected integration is proved or authorized."
       ]
     }
   ],

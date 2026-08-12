@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 265 / Compass 247. The exact serial unmounted status-confirm transaction now passes PostgreSQL 16 lock-order, atomic effect, stored-replay and rollback evidence with complete disposable cleanup. Read-only route-mounting admission is next; route execution and product commands remain closed.
+> EMR4 is at Continuity 266 / Compass 248. The status-confirm endpoint is literally mounted and its physical PostgreSQL seam is proved, but the unchanged legacy handler is not admitted onto it. One stale test expectation and then an unmounted composition rehearsal are next; route execution and product commands remain closed.
 
 ## North star
 
@@ -304,26 +304,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    PostgreSQL 16 accepts the exact migration and catalogue, nine rolled-back synthetic invariants pass and the owned container is absent. Lineage parent: `raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold`.
 144. **Prove the exact status-confirm application transaction against PostgreSQL before route convergence is considered — Provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal**
    Sixteen serial transaction scenarios, exact lock classes, atomic effects, stored replay, rollback and complete disposable cleanup pass. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal`.
+145. **Decide whether the mounted status-confirm handler can consume the accepted physical seam unchanged — Provider-free read-only status-confirm route-mounting admission review**
+   The endpoint is mounted and the physical foundation passes, but seven bounded composition gaps block unchanged convergence. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal`.
 
 ## Current position
 
-**The unmounted status-confirm transaction is PostgreSQL-proved; route convergence remains unopened — Provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal**
+**The mounted legacy status-confirm route is mapped precisely but remains unadmitted onto the physical seam — Provider-free read-only status-confirm route-mounting admission review**
 
-**Why this proof came next:** The exact physical migration passed PostgreSQL catalogue admission, permitting one isolated serial transaction proof.
+**Why this proof came next:** The PostgreSQL transaction proof permitted an exact read-only inspection of the final route composition boundary.
 
-Current-authority/lock order, atomic appointment-audit-receipt behavior, stored replay, selected rollback and exact cleanup pass.
+Literal mounting and physical durability are satisfied; seven bounded composition gaps block unchanged convergence.
 
 ### What this unlocks
 
-- Run a provider-free read-only status-confirm route-mounting admission review.
-- Inspect and classify only the exact route, dependency, adapter, kernel and transaction boundaries.
-- Return an evidence-backed converge/block decision without editing, mounting or calling a route.
+- Repair one stale Sprint-138 test expectation without changing product behavior.
+- Freeze a provider-free unmounted route-convergence composition rehearsal.
+- Join the accepted status-only adapter, server authority/session ingress, physical seam and closed response mapper off-route.
 
 ### What it does not solve
 
-- Mounted-route, adapter, real command, product-database or product-data safety.
+- Mounted-route convergence, route execution or a real product command.
 - Concurrency, restart, crash, unknown commit, retention, performance or production operations.
-- Provider/credential activity, patient/product data, watchers/events, deployment, release, Pages or protected-ref movement.
+- Provider/credential activity, patient/product data, deployment, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -390,8 +392,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted source-owned-truth, conditional-command and status-confirm physical/transaction lineage.
-- Run a provider-free read-only status-confirm route-mounting admission review next.
+- Preserve the accepted physical PostgreSQL status-confirm proof without reopening durability.
+- Correct the isolated stale Sprint-138 idempotency-header expectation as test-only lifecycle hygiene.
+- Then rehearse one provider-free unmounted status-confirm route-convergence composition.
 - Keep route edits/calls, product data/commands, providers and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -581,6 +584,7 @@ Prerequisites:
 
 ## Map limits
 
+- The accepted route-mounting review proves static composition facts only; it does not admit or execute the mounted handler against the physical seam.
 - The accepted status-confirm behavior rehearsal proves the exact serial unmounted PostgreSQL transaction and selected rollback boundaries only, not route, concurrency or product-command safety.
 - The accepted status-confirm PostgreSQL rehearsal proves parse/catalogue and selected rolled-back invariants only, not application transaction, route or product-command safety.
 - The accepted status-confirm physical scaffold proves source lowering only, not PostgreSQL installation, real locks, route behavior or product command safety.
@@ -1033,6 +1037,9 @@ Prerequisites:
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-plan.md`
+- `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md`
+- `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-plan.md`
+- `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review.md`
@@ -1192,6 +1199,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-physical-representability-review-threat-model-delta.md`
+- `docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
@@ -1443,6 +1451,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-physical-representability-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-physical-representability-review-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preacceptance-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md`
@@ -1477,6 +1489,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-protected-metadata-scope-incident.json`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-schema-transaction-scaffold-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-route-mounting-admission-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-scaffold-parse-catalogue-sol-acceptance.md`
@@ -1764,6 +1777,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/provider-free-read-only-review-evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-contract.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json`
@@ -2082,6 +2098,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-design-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-representability-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-schema-transaction-scaffold.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-mounting-admission-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md`
@@ -2103,6 +2120,7 @@ Prerequisites:
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `scripts/raisa_provider_free_office_practitioner_directory_consumer.py`
+- `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
 - `scripts/reception_one_bureau_model_text_lane_audit.py`
 - `scripts/reception_one_bureau_model_text_lane_live.py`
 - `scripts/reception_one_preprinted_form_v5.py`
@@ -2155,6 +2173,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py`
+- `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
 - `tests/test_reception_one_bureau_explicit_selection_retry_readiness.py`
 - `tests/test_reception_one_bureau_model_text_lane.py`
 - `tests/test_reception_one_bureau_post_admission_runtime_hardening.py`
@@ -2181,4 +2200,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 247; continuity graph revision 265._
+_Compass map revision 248; continuity graph revision 266._

@@ -272,10 +272,17 @@ prove the frozen current-authority and statement-lock order, one atomic
 appointment/audit/v1-receipt effect, byte-stable stored replay, conflict and
 integrity classification, revocation precedence and four complete rollback
 boundaries. The fixed local relay stops and exact captured-ID container/network
-cleanup is verified. The next bounded gate is the provider-free read-only
-route-mounting admission review. Route edits/calls, product data, providers,
-concurrency, restart, unknown commit, watchers, events, commands, deployment
-and schedule fencing remain closed.
+cleanup is verified. The subsequent provider-free read-only route-mounting
+admission review passes at exact source
+`fb3772dea0c27a7572df00e1b9d5153f9165ccf3`: the status-confirm endpoint is
+literally mounted and the physical foundation remains accepted, but seven
+bounded composition gaps block the unchanged legacy handler from entering the
+physical seam. One stale Sprint-138 test expectation is isolated for test-only
+lifecycle repair; the next product-direction gate is an unmounted composition
+rehearsal joining status-only admission, server session/current authority, the
+physical seam and closed response mapping. Route edits/calls, product data,
+providers, concurrency, restart, unknown commit, watchers, events, commands,
+deployment and schedule fencing remain closed.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

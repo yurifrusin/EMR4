@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_provider_free_read_only_status_confirm_route_mounting_review_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, threat delta and ten-source contract were followed by the deterministic reviewer. Ten source hashes, 25 structural assertions and 45 hostile mutations pass. The endpoint is literally mounted and the PostgreSQL seam is accepted, but the unchanged handler has seven blocking composition gaps and one nonblocking canonical-path alias matter. The exact verdict is mounted_legacy_route_not_admitted_for_physical_convergence; no implementation is authorized.",
+    "current_authority_allocation": "GPT Sol remains conductor, exact-file reviewer, deterministic verifier, acceptance owner and task-branch publisher. No subagent, provider worker or external verifier is selected.",
+    "git_refs_and_worktree": "HEAD and task branch are source commit fb3772dea0c27a7572df00e1b9d5153f9165ccf3; origin task remains d5684d934f80d1db49030b27b34b1b59a0c87f82 pending closeout. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean. There are 516 untracked paths including 5 docs/branding paths; this receipt pair and closeout artifacts are the only new in-scope paths.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD d5684d934f80d1db49030b27b34b1b59a0c87f82. Continuity 265 / Compass 247 names this exact provider-free read-only route-mounting admission review as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain restored. Protected holdouts and historical Diary data remain sealed; AER-0292 exact-file-only evidence remains binding. No route edit/call, product database/data, command/write, concurrency/restart/unknown-commit claim, provider/ADC/credential/browser action, deployment, release, Pages or protected-ref movement is authorized. docs/branding and every unrelated untracked path remain preserved; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
