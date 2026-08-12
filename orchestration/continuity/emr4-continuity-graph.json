@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 266,
+  "graph_revision": 267,
   "harvests": [],
   "nodes": [
     {
@@ -17226,6 +17226,76 @@
         "One stale Sprint-138 test expectation must be corrected without changing product behavior.",
         "The accepted adapter, server authority/session ingress, physical seam and public-response mapper remain uncomposed and unmounted.",
         "No route call/edit, product command/database/data, concurrency, restart, unknown commit, provider, deployment or protected integration is proved or authorized."
+      ]
+    },
+    {
+      "id": "raisa-status-confirm-preflight-idempotency-expectation-repair",
+      "title": "Status-confirm preflight idempotency expectation repair",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "ec9aa1b1d2813b3e864b37f331ac6b587816610a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-status-confirm-route-mounting-admission-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The result changes one test expectation only; no application behavior changes.",
+          "It restores current idempotency-route lineage evidence and opens no runtime authority.",
+          "Product data, commands, providers, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-preflight-expectation-repair",
+          "source": "docs/raisa-status-confirm-preflight-idempotency-expectation-repair-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the test-only rebinding and proceed to the already-planned provider-free unmounted composition rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "The current update, status and delete confirmation-route tests now agree on required Idempotency-Key handling.",
+        "Six focused, 125 status-confirm lineage and 191 canonical tests pass.",
+        "The historical Sprint-136 preflight and all application source remain unchanged."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-status-confirm-preflight-idempotency-expectation-repair-plan.md"
+        ],
+        "findings": [],
+        "closeouts": [
+          "docs/raisa-status-confirm-preflight-idempotency-expectation-repair-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-preflight-idempotency-expectation-repair.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_api_spine_status_confirm_idempotency_preflight.py",
+          "tests/test_raisa_status_confirm_preflight_idempotency_expectation_repair_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_status_confirm_preflight_idempotency_expectation_repair_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The accepted adapter, server authority/session ingress, physical seam and response mapper remain uncomposed and unmounted.",
+        "No mounted-route edit/call, product command/database/data, concurrency, restart, unknown commit, provider, deployment or protected integration is proved or authorized."
       ]
     }
   ],

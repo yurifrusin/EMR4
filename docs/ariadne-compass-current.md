@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 266 / Compass 248. The status-confirm endpoint is literally mounted and its physical PostgreSQL seam is proved, but the unchanged legacy handler is not admitted onto it. One stale test expectation and then an unmounted composition rehearsal are next; route execution and product commands remain closed.
+> EMR4 is at Continuity 267 / Compass 249. The stale status-confirm preflight expectation is repaired with no product change, and all 125 current lineage checks pass. The provider-free unmounted route composition rehearsal is next; mounted execution remains closed.
 
 ## North star
 
@@ -306,19 +306,20 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Sixteen serial transaction scenarios, exact lock classes, atomic effects, stored replay, rollback and complete disposable cleanup pass. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal`.
 145. **Decide whether the mounted status-confirm handler can consume the accepted physical seam unchanged — Provider-free read-only status-confirm route-mounting admission review**
    The endpoint is mounted and the physical foundation passes, but seven bounded composition gaps block unchanged convergence. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal`.
+146. **Remove one stale lifecycle-test contradiction before composing the status-confirm route seam — Status-confirm preflight idempotency expectation repair**
+   The test-only expectation now matches accepted idempotency behavior and all 125 lineage checks pass. Lineage parent: `raisa-provider-free-read-only-status-confirm-route-mounting-admission-review`.
 
 ## Current position
 
-**The mounted legacy status-confirm route is mapped precisely but remains unadmitted onto the physical seam — Provider-free read-only status-confirm route-mounting admission review**
+**The status-confirm route lineage is internally consistent and ready for off-route composition — Status-confirm preflight idempotency expectation repair**
 
-**Why this proof came next:** The PostgreSQL transaction proof permitted an exact read-only inspection of the final route composition boundary.
+**Why this proof came next:** The admission review isolated one historical test contradiction before implementation rehearsal.
 
-Literal mounting and physical durability are satisfied; seven bounded composition gaps block unchanged convergence.
+The contradiction is corrected test-only; 125 current lineage checks and the canonical profile pass.
 
 ### What this unlocks
 
-- Repair one stale Sprint-138 test expectation without changing product behavior.
-- Freeze a provider-free unmounted route-convergence composition rehearsal.
+- Freeze and run a provider-free unmounted status-confirm route-convergence composition rehearsal.
 - Join the accepted status-only adapter, server authority/session ingress, physical seam and closed response mapper off-route.
 
 ### What it does not solve
@@ -393,8 +394,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 Prerequisites:
 
 - Preserve the accepted physical PostgreSQL status-confirm proof without reopening durability.
-- Correct the isolated stale Sprint-138 idempotency-header expectation as test-only lifecycle hygiene.
-- Then rehearse one provider-free unmounted status-confirm route-convergence composition.
+- Rehearse one provider-free unmounted status-confirm route-convergence composition.
+- Join status-only admission, server authority/session ingress, physical seam and closed response mapping.
 - Keep route edits/calls, product data/commands, providers and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -1123,6 +1124,8 @@ Prerequisites:
 - `docs/raisa-shared-application-auth-runtime-foundation-plan.md`
 - `docs/raisa-shared-application-auth-runtime-role-secure-transport-closeout.md`
 - `docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md`
+- `docs/raisa-status-confirm-preflight-idempotency-expectation-repair-closeout.md`
+- `docs/raisa-status-confirm-preflight-idempotency-expectation-repair-plan.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-closeout.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-design.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-plan.md`
@@ -1489,6 +1492,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-protected-metadata-scope-incident.json`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-schema-transaction-scaffold-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-route-mounting-admission-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
@@ -2098,6 +2104,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-design-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-representability-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-schema-transaction-scaffold.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-preflight-idempotency-expectation-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-mounting-admission-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-rehearsal.md`
@@ -2160,6 +2167,7 @@ Prerequisites:
 - `scripts/reception_one_receptionist_first_v6_cohort.py`
 - `scripts/reception_one_receptionist_first_v6_isolation.py`
 - `scripts/reception_one_structured_source_plan_language.py`
+- `tests/test_api_spine_status_confirm_idempotency_preflight.py`
 - `tests/test_ariadne_autonomous_continuation.py`
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
@@ -2200,4 +2208,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 248; continuity graph revision 266._
+_Compass map revision 249; continuity graph revision 267._

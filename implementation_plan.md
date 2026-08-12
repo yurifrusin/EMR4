@@ -278,11 +278,14 @@ admission review passes at exact source
 literally mounted and the physical foundation remains accepted, but seven
 bounded composition gaps block the unchanged legacy handler from entering the
 physical seam. One stale Sprint-138 test expectation is isolated for test-only
-lifecycle repair; the next product-direction gate is an unmounted composition
-rehearsal joining status-only admission, server session/current authority, the
-physical seam and closed response mapping. Route edits/calls, product data,
-providers, concurrency, restart, unknown commit, watchers, events, commands,
-deployment and schedule fencing remain closed.
+lifecycle repair. That repair now passes at exact source
+`ec9aa1b1d2813b3e864b37f331ac6b587816610a`: update/delete confirmation tests
+match their accepted idempotency headers and all 125 current status-confirm
+lineage checks pass without application change. The next product-direction gate
+is an unmounted composition rehearsal joining status-only admission, server
+session/current authority, the physical seam and closed response mapping. Route
+edits/calls, product data, providers, concurrency, restart, unknown commit,
+watchers, events, commands, deployment and schedule fencing remain closed.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

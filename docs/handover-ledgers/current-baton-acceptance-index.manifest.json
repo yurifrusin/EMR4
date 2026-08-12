@@ -23,6 +23,7 @@
     "Ariadne CF-D2 workflow incident diagnosis and fluidity repair acceptance",
     "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal acceptance",
     "Provider-free read-only status-confirm route-mounting admission review acceptance",
+    "Status-confirm preflight idempotency expectation repair acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -33,7 +34,7 @@
   "ledger_byte_count": 174625,
   "ledger_line_count": 146,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "5d85865ff902271aa902baa4329bb292815dc0b1cb16a081dad2b98d4d4a44cf",
+  "ledger_sha256": "037b31d28bb84a2d77c32c502f02c8249fa6f884671f04e3c296d2133278f7cf",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -168,10 +169,10 @@
   ],
   "moved_row_count": 130,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 74198,
-  "source_agents_git_blob_sha1": "fd62defcada9450456af49e8f81eebc526e6d24c",
-  "source_agents_line_count": 488,
+  "source_agents_byte_count": 74635,
+  "source_agents_git_blob_sha1": "a74e118824fcddd921b981473f1e694c93ce76f5",
+  "source_agents_line_count": 489,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "25c6eccabbc864265371954d84cc2c75ce234b64d0a1e4e98ff7fbcfb91d120b",
-  "source_git_head": "fb3772dea0c27a7572df00e1b9d5153f9165ccf3"
+  "source_agents_sha256": "b0ecb7b435b84b8e18045feecf91620e61271b5809be99f405148e5b59b543c4",
+  "source_git_head": "ec9aa1b1d2813b3e864b37f331ac6b587816610a"
 }
