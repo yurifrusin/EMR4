@@ -1,0 +1,22 @@
+{
+  "schema_version": "emr4.ariadne.protected_scope_incident.v1",
+  "incident_id": "AER-0291",
+  "observed_on": "2026-08-12",
+  "status": "contained_before_planning",
+  "operation_class": "repository_content_search",
+  "intended_scope": "status-confirm API and adapter symbols",
+  "actual_scope": "broad tests tree plus known application and API documentation roots",
+  "protected_result": "one protected-fixture matching line was printed in truncated tool output",
+  "content_use_disposition": "discarded_and_prohibited_from_planning_implementation_testing_and_acceptance",
+  "mutation_or_external_effect": false,
+  "planning_or_dispatch_preceded_incident": false,
+  "correction": {
+    "registered_before_fresh_preplanning_receipt": true,
+    "future_search_scope": "exact_non_protected_file_allowlist_only",
+    "forbidden_search_roots": [
+      "repository_root",
+      "tests_directory_root",
+      "docs_directory_root"
+    ]
+  }
+}

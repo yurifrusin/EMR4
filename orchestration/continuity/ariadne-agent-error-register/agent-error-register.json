@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 257,
+  "register_revision": 258,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11677,6 +11677,44 @@
           "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-257.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0291",
+      "attempt_id": "raisa-status-confirm-kernel-adapter-discovery-001",
+      "observed_on": "2026-08-12",
+      "tranche": "raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_search",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "Protected holdout and protected fixture trees must never be opened, enumerated or searched; repository discovery under protected-evidence containment must use an exact predeclared non-protected path allowlist.",
+      "observed_error": "During adapter-boundary discovery, Sol ran a content search over the broad tests tree. One matching line from a protected fixture was printed in truncated tool output. Sol stopped immediately, did not run another broad search and will not use the exposed content in planning, implementation, tests or acceptance. No file, application, database, provider, product data, command or ref was mutated by the search.",
+      "detection_method": "The tool result visibly identified that the search output had crossed into a protected fixture while otherwise listing status-confirm symbols. Sol classified the command-scope breach before any adapter plan or fresh preplanning receipt was written.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-protected-scope-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-258.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.overbroad_repository_content_search",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discard and prohibit use of the exposed protected content, preserve a sanitized incident receipt, register AER-0291 before adapter planning, and restart discovery only over an exact non-protected allowlist naming the appointment router, appointment schemas, appointment-command OpenAPI contract and selected status-confirm/API tests.",
+        "prevention_control": "Every content-search command in this and later protected-evidence-adjacent work must supply an explicit exact-file allowlist assembled from already known non-protected baton/API paths. Searching a directory root such as tests, docs or the repository root is prohibited even when the textual pattern appears narrow.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-protected-scope-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-258.md"
         ]
       },
       "status": "corrected"
