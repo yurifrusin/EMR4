@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_unmounted_default_off_shadow_comparison_architecture_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen architecture covers exactly four raw routes. Immutable-generation, global, practice and exact-route controls intersect with all defaults denying and a disable-only external kill switch. The primary result seals before a one-way handoff; a 24-field digest projection can yield only a 15-field lossy diagnostic record, with twelve feedback edges forbidden and all observer capabilities false. All 46 hostile mutations and 133 focused architecture/adapter/kernel/admission/API Spine tests pass.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled static architecture, deterministic review and task-branch candidate commit under standing uninterrupted-development authority. The EMR4 API Steward boundary was applied. No subagent, provider worker or external verifier was used.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at 71e240218b1adf1214fff87b542a9d0f6764230e. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Nine task-owned untracked files sit beside exactly 502 preserved pre-existing untracked files before this precommit pair. There are no tracked or staged changes. Explicit-path staging only applies and docs/branding remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely and names this provider-free unmounted default-off non-enforcing shadow-comparison architecture as the current dependency-satisfied tranche at Continuity 248 / Compass 230.",
+    "protected_evidence_boundaries": "The tranche remained provider-free, unmounted, static and authored-synthetic. It imported, executed or changed no application route; created no observer/flag/queue/sink runtime; accessed no database/source/event/watcher; used no network/provider/product/patient data/credential/IAM; invoked no kernel/tool/command/write; and performed no deployment/release/Pages/protected-ref action. docs/branding and every unrelated untracked file remain untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

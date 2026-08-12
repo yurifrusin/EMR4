@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/default-off-shadow-comparison-architecture.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_kind", "status", "source_head", "source_bindings", "claim_boundary", "scope", "enablement", "placement", "projection", "observer", "diagnostic_record", "forbidden_feedback_edges", "future_evidence_sequence", "effect_boundary"],
+  "properties": {
+    "schema_version": {"const": "emr4.default-off-shadow-comparison-architecture.v1"},
+    "artifact_kind": {"const": "provider_free_unmounted_static_architecture_contract"},
+    "status": {"const": "frozen_no_runtime_behavior_change"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_bindings": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/sourceBinding"}},
+    "claim_boundary": {"$ref": "#/$defs/falseMap11"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "enablement": {"$ref": "#/$defs/enablement"},
+    "placement": {"$ref": "#/$defs/placement"},
+    "projection": {"$ref": "#/$defs/projection"},
+    "observer": {"$ref": "#/$defs/observer"},
+    "diagnostic_record": {"$ref": "#/$defs/diagnosticRecord"},
+    "forbidden_feedback_edges": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "string"}, "uniqueItems": true},
+    "future_evidence_sequence": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "string"}, "uniqueItems": true},
+    "effect_boundary": {"$ref": "#/$defs/falseMap12"}
+  },
+  "$defs": {
+    "sourceBinding": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}},
+    "falseMap11": {
+      "type": "object", "additionalProperties": false,
+      "required": ["route_behavior_changed", "application_route_imported", "observer_runtime_created", "database_or_source_accessed", "event_or_watcher_consumed", "provider_or_network_used", "product_or_patient_data_used", "kernel_or_command_invoked", "command_or_write_performed", "deployment_or_release_performed", "protected_ref_moved"],
+      "properties": {"route_behavior_changed": {"const": false}, "application_route_imported": {"const": false}, "observer_runtime_created": {"const": false}, "database_or_source_accessed": {"const": false}, "event_or_watcher_consumed": {"const": false}, "provider_or_network_used": {"const": false}, "product_or_patient_data_used": {"const": false}, "kernel_or_command_invoked": {"const": false}, "command_or_write_performed": {"const": false}, "deployment_or_release_performed": {"const": false}, "protected_ref_moved": {"const": false}}
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["route_adapters", "proposal_routes_in_scope", "confirm_routes_in_scope", "current_parent_posture"],
+      "properties": {"route_adapters": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/routeAdapter"}}, "proposal_routes_in_scope": {"const": false}, "confirm_routes_in_scope": {"const": false}, "current_parent_posture": {"const": "current_raw_not_kernel_eligible"}}
+    },
+    "routeAdapter": {
+      "type": "object", "additionalProperties": false,
+      "required": ["adapter_id", "family_id", "method", "path", "canonical_operation_id"],
+      "properties": {"adapter_id": {"type": "string", "pattern": "^raw_compat_"}, "family_id": {"enum": ["appointment_create", "appointment_update", "appointment_status", "appointment_delete"]}, "method": {"enum": ["POST", "PUT", "PATCH", "DELETE"]}, "path": {"type": "string", "pattern": "^/api/v1/appointments"}, "canonical_operation_id": {"type": "string", "pattern": "^confirmAppointment"}}
+    },
+    "enablement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["generation_model", "required_generation_status", "global_default", "practice_default", "route_allowlist_default", "admission_expression", "unknown_or_missing_control", "stale_superseded_or_revoked_generation", "external_kill_switch", "enablement_authority_granted"],
+      "properties": {"generation_model": {"const": "immutable_new_generation_for_any_amendment"}, "required_generation_status": {"const": "current"}, "global_default": {"const": "disabled"}, "practice_default": {"const": "disabled"}, "route_allowlist_default": {"type": "array", "maxItems": 0}, "admission_expression": {"const": "generation_current AND global_enabled AND practice_enabled AND exact_route_allowlisted AND NOT externally_disabled"}, "unknown_or_missing_control": {"const": "disabled_no_observation"}, "stale_superseded_or_revoked_generation": {"const": "disabled_no_observation"}, "external_kill_switch": {"const": "disable_only_cannot_enable"}, "enablement_authority_granted": {"const": false}}
+    },
+    "placement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["primary_owner", "primary_result_components", "primary_result_state_before_observation", "handoff_direction", "handler_return_channel", "delivery", "overflow", "timeout", "observer_failure", "retry_required", "correctness_dependency"],
+      "properties": {"primary_owner": {"const": "authoritative_appointment_handler"}, "primary_result_components": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"type": "string"}, "uniqueItems": true}, "primary_result_state_before_observation": {"const": "sealed_immutable"}, "handoff_direction": {"const": "primary_to_shadow_only"}, "handler_return_channel": {"const": "none"}, "delivery": {"const": "bounded_best_effort_at_most_once"}, "overflow": {"const": "drop_shadow_evidence_only"}, "timeout": {"const": "drop_shadow_evidence_only"}, "observer_failure": {"const": "contain_and_drop_or_emit_bounded_failure_record"}, "retry_required": {"const": false}, "correctness_dependency": {"const": false}}
+    },
+    "projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "identity_encoding", "allowed_fields", "forbidden_material", "unrelated_fields", "current_tranche_values"],
+      "properties": {"type": {"const": "ShadowRouteProjection"}, "identity_encoding": {"const": "versioned_one_way_hmac_digest"}, "allowed_fields": {"type": "array", "minItems": 24, "maxItems": 24, "items": {"type": "string"}, "uniqueItems": true}, "forbidden_material": {"type": "array", "minItems": 21, "maxItems": 21, "items": {"type": "string"}, "uniqueItems": true}, "unrelated_fields": {"const": "omit"}, "current_tranche_values": {"const": "authored_synthetic_only"}}
+    },
+    "observer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["input_type", "adapter_dependency", "candidate_type", "candidate_executable", "runtime_execution_authorized", "expected_current_gap_codes", "comparison_classes", "capabilities", "command_outcome_emitted", "parent_route_posture_changed"],
+      "properties": {"input_type": {"const": "ShadowRouteProjection"}, "adapter_dependency": {"const": "pure_route_adapter_differential_v1"}, "candidate_type": {"const": "ShadowConditionalAppointmentCandidate"}, "candidate_executable": {"const": false}, "runtime_execution_authorized": {"const": false}, "expected_current_gap_codes": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "string"}, "uniqueItems": true}, "comparison_classes": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"type": "string"}, "uniqueItems": true}, "capabilities": {"$ref": "#/$defs/falseMap11Capabilities"}, "command_outcome_emitted": {"const": false}, "parent_route_posture_changed": {"const": false}}
+    },
+    "falseMap11Capabilities": {
+      "type": "object", "additionalProperties": false,
+      "required": ["response_writer", "transaction_or_session", "kernel_entry_point", "command_service", "source_adapter", "database_client", "event_publisher", "audit_writer", "eligibility_grant", "network_client", "provider_client"],
+      "properties": {"response_writer": {"const": false}, "transaction_or_session": {"const": false}, "kernel_entry_point": {"const": false}, "command_service": {"const": false}, "source_adapter": {"const": false}, "database_client": {"const": false}, "event_publisher": {"const": false}, "audit_writer": {"const": false}, "eligibility_grant": {"const": false}, "network_client": {"const": false}, "provider_client": {"const": false}}
+    },
+    "diagnosticRecord": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "allowed_fields", "forbidden_material", "authority", "is_audit_record", "is_command_receipt", "is_source_truth", "persistence_selected", "retention_selected", "aggregation_selected"],
+      "properties": {"type": {"const": "ShadowComparisonRecord"}, "allowed_fields": {"type": "array", "minItems": 15, "maxItems": 15, "items": {"type": "string"}, "uniqueItems": true}, "forbidden_material": {"type": "array", "minItems": 14, "maxItems": 14, "items": {"type": "string"}, "uniqueItems": true}, "authority": {"const": "diagnostic_only_non_authoritative_lossy"}, "is_audit_record": {"const": false}, "is_command_receipt": {"const": false}, "is_source_truth": {"const": false}, "persistence_selected": {"const": false}, "retention_selected": {"const": false}, "aggregation_selected": {"const": false}}
+    },
+    "falseMap12": {
+      "type": "object", "additionalProperties": false,
+      "required": ["application_import", "observer_runtime", "feature_flag_runtime", "queue_or_sink", "database_read_or_write", "event_or_watcher", "provider_or_network", "kernel_invocation", "command_or_mutation", "response_change", "audit_change", "runtime_execution_authority"],
+      "properties": {"application_import": {"const": false}, "observer_runtime": {"const": false}, "feature_flag_runtime": {"const": false}, "queue_or_sink": {"const": false}, "database_read_or_write": {"const": false}, "event_or_watcher": {"const": false}, "provider_or_network": {"const": false}, "kernel_invocation": {"const": false}, "command_or_mutation": {"const": false}, "response_change": {"const": false}, "audit_change": {"const": false}, "runtime_execution_authority": {"const": false}}
+    }
+  }
+}

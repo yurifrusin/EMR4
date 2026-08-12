@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_provider_free_unmounted_default_off_non_enforcing_shadow_comparison_architecture",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the pure-adapter closeout. At Continuity 248 / Compass 230 it accepts the pure route-adapter differential rehearsal and names the provider-free unmounted default-off non-enforcing shadow-comparison architecture as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "GPT Sol owns architecture, plan, deterministic contract review and acceptance under Yuri's standing uninterrupted-development authority. The EMR4 API Steward boundary applies. This tightly coupled static architecture remains Sol-owned with no subagent, provider worker or external verifier.",
+    "active_plan_and_acceptance": "The accepted pure-adapter plan, design, closeout and Sol acceptance were read alongside their legacy-route/kernel parent and the API Spine rules. The next architecture must freeze the narrowest route-local observation boundary for four raw appointment routes: default off, explicit dual enablement, immutable minimized input, pure-adapter-only comparison, one-way minimized record, no handler feedback and failure isolation. It must not claim runtime wiring or satisfy the later shadow-rehearsal/client-parity gates.",
+    "protected_evidence_boundaries": "The tranche is provider-free, unmounted and authored-synthetic/static. It may add only design, threat, closed architecture contract, validator and deterministic tests. It may not import, execute or modify application routes; access a database, source, watcher or event; use network, provider, credential, IAM, metadata, product, patient, clinical or financial data; expose a tool; invoke the kernel; issue a command/write; deploy, release, rebuild Pages, open protected evidence or move protected refs. docs/branding and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at 71e240218b1adf1214fff87b542a9d0f6764230e. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. The tracked tree is clean and exactly 502 untracked files are preserved before this new preplanning pair: the 500 pre-existing closeout files plus the pure-adapter pre-push receipt/state pair, including five docs/branding files. Explicit-path staging only applies."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "default_off_shadow_comparison_architecture_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is freezing one static default-off shadow-comparison boundary against the accepted pure adapter."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external veto is selected before deterministic architecture evidence exists."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["The tightly coupled static architecture remains Sol-owned under the worker-lane economy rule."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code transport is not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
