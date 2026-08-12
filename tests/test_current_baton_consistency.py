@@ -29,7 +29,7 @@ def test_continuity_and_compass_bind_the_live_cf_d1_result() -> None:
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_preserve_cf_d1_and_bound_cf_d2_recovery() -> None:
+def test_live_baton_rows_preserve_cf_d1_and_stop_cf_d2_recovery() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
@@ -37,24 +37,21 @@ def test_live_baton_rows_preserve_cf_d1_and_bound_cf_d2_recovery() -> None:
 
     assert "Continuity 243 / Compass 225" in current
     assert "accepted CF-D1 remain the last successful durability result" in current
-    assert "CF-D2 does not pass" in current
-    assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in current
-    assert "all ten fixed preconditions" in current
+    assert "CF-D2 and its recovery descendant do not pass" in current
+    assert "fe8313d224a92115aa31bea14f0cd3b14e4c9967" in current
+    assert "all ten preconditions" in current
     assert "zero `SIGKILL`" in current
-    assert "AER-0278 and AER-0279" in current
-    assert (
-        "Yuri explicitly selected a fresh narrow CF-D2 recovery descendant" in current
-    )
+    assert "AER-0284" in current
+    assert "Attempt 003 is ineligible" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
-    assert "CF-D2" in next_work
-    assert "coordinate explicit" in next_work
-    assert "at most two immutable no-crash diagnostics" in next_work
-    assert "one immutable four-scenario attempt 003" in next_work
-    assert "no post-attempt correction or rerun is authorised" in next_work
+    assert "fe8313d224a92115aa31bea14f0cd3b14e4c9967" in relation
+    assert "workflow-incident diagnosis" in next_work
+    assert "repository-only fluidity repair" in next_work
+    assert "opens no further CF-D2 or Docker/database runtime" in next_work
     assert (
-        "key-rotation plus retention/purge rehearsal is not dependency-satisfied"
+        "Key rotation plus retention/purge remains not dependency-satisfied"
         in next_work
     )
     assert "operational database/source" in next_work
@@ -93,9 +90,8 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
         "cf-d2",
-        "no-crash diagnostics",
-        "attempt 003",
-        "no post-attempt correction or rerun",
+        "no further cf-d2 or docker/database runtime",
+        "workflow-incident diagnosis",
         "operational database/source",
         "real/product/patient/clinical data",
         "tool/command",

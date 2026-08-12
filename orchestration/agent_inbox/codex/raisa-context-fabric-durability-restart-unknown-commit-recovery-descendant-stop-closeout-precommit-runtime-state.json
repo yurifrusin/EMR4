@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_cf_d2_recovery_descendant_stopped_unproved_closeout_and_begin_the_authorized_repository_only_workflow_incident_diagnosis",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and now truthfully records CF-D1 at Continuity 243 / Compass 225 as the last accepted durability result, both CF-D2 sequences stopped without pass, attempt 003 ineligible and the independent workflow-incident diagnosis next.",
+    "current_authority_allocation": "GPT Sol owns stop acceptance, explicit-path Git closeout and the next repository-only workflow diagnosis under Yuri's standing uninterrupted-development authority. The accepted fresh replacement Gemini review supplied correction evidence only; no worker has runtime, acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The frozen recovery descendant consumed two no-crash diagnostics and one correction. Attempt 002 at source fe8313d224a92115aa31bea14f0cd3b14e4c9967 failed at the same anchor coordinate, so full attempt 003 is ineligible. The closeout, Sol stop, paired Yuri summary and AER-0284 preserve the unresolved cause and the overclaimed first diagnosis without releasing restart or unknown-commit success.",
+    "protected_evidence_boundaries": "No further Docker/database runtime, crash, restart, retry, provider, real/product/patient/clinical data, operational database/source/watcher, credential/IAM, server-log/WAL, executable tool or command, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked file remain preserved and excluded; explicit-path staging only applies.",
+    "git_refs_and_worktree": "The active branch remains codex/ariadne-bernie-davida-parallel-seam based on fe8313d224a92115aa31bea14f0cd3b14e4c9967 with only the intentional stopped-closeout tracked edits and exact named new artifacts pending. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit staging."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_recovery_descendant_stop_closeout_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled both diagnostic documents, accepted/rejected verifier receipts, exact cleanup, zero prohibited operations, focused tests, the complete register suite, Ruff and whitespace checks."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh r189 replacement review passed all nine literal commands at unchanged exact HEAD; it granted no runtime or acceptance authority."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

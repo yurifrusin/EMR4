@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_replacement_gemini_36_flash_high_read_only_exact_head_veto_with_closed_command_manifest_before_cf_d2_diagnostic_attempt_002",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and CF-D2 recovery remains active. CF-D1 at Continuity 243 / Compass 225 is the last accepted durability result; no CF-D2 restart or unknown-commit claim exists.",
+    "current_authority_allocation": "GPT Sol retains implementation, runtime, recovery, acceptance, Git and publication authority. The first anchor-correction verifier verdict was rejected for reported command-scope drift. One genuinely new Gemini 3.6 Flash/high Antigravity project receives only the replacement exact-HEAD read-only veto in r189. DeepSeek and native subagents are unassigned.",
+    "active_plan_and_acceptance": "Correction d93d55c3e6b1e28764d8b86d8ccac233d0826222 aligns the second anchor with current lifecycle revision one and passed deterministic gates. Commit fe8313d224a92115aa31bea14f0cd3b14e4c9967 adds only the preserved rejected review, AER-0283, register revision 251 and its passing 223-test register evidence. The replacement packet closes commands C01-C09 and requires literal command reproduction. Diagnostic attempt 002 remains unopened.",
+    "protected_evidence_boundaries": "The verifier may inspect only the packet allowlist and run only C01-C09. Immutable full attempts 001/002 and diagnostic attempt 001 remain preserved. Docker/PostgreSQL runtime, product/patient/clinical data, providers, external network, credentials/IAM, server logs/WAL, executable product tools/commands, docs/branding, unrelated untracked files, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Primary task source is exact HEAD fe8313d224a92115aa31bea14f0cd3b14e4c9967 on codex/ariadne-bernie-davida-parallel-seam with empty index and no tracked changes. Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r189 is exact clean branch codex/cf-d2-anchor-revision-correction-gemini-replacement-review at that candidate. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and all unrelated untracked files remain preserved and unstaged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_anchor_revision_replacement_veto_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol rejected the first verdict, committed the incident evidence, verified exact refs and prepared fresh clean r189."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["One fresh replacement Gemini 3.6 Flash/high exact-HEAD read-only veto is ready in r189."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

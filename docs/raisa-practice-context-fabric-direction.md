@@ -370,14 +370,19 @@ large “memory” feature:
    Six fixed two-session races prove bounded `PgSleep`/`Lock` overlap, exact
    winner/loser outcomes, native replay, outer rollback, zero retry and exact
    cleanup. Crash/restart and unknown-commit recovery remain unproved.
-18. **CF-D2 restart and unknown-commit rehearsal** — **stopped without a pass**.
+18. **CF-D2 restart and unknown-commit rehearsal** — **stopped without a pass,
+   including its bounded recovery descendant**.
    Attempt 001 failed during fixture setup; its one plan-permitted mechanical
    recovery corrected successor-admission ordering. Attempt 002 passed all ten
    fixed preconditions but stopped before any `SIGKILL` with a minimized
    scenario failure. Both exact containers were removed and proven absent;
    provider, product and external-network counters remained zero. No restart or
-   unknown-commit claim is released, and a new recovery descendant requires
-   Yuri's explicit choice.
+   unknown-commit claim is released. Yuri selected one narrow recovery
+   descendant: coordinate-specific evidence isolated the first no-crash
+   failure to the anchor participant, but its only correction was insufficient
+   and the second diagnostic failed at the same coordinate. Full attempt 003
+   is ineligible. The next authorised work is an independent workflow-incident
+   diagnosis and repository-only fluidity repair, not another database run.
 19. **Agent Execution Surface and Containment Gate** — required after the
    provider-free durability sequence and before any real-product-read or
    executable occupied Bureau descendant. The selected external capability

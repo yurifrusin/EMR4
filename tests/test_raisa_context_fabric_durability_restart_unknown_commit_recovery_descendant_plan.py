@@ -25,6 +25,14 @@ THREAT_PATH = ROOT / (
     "docs/security/raisa-context-fabric-durability-restart-unknown-commit-"
     "recovery-descendant-threat-model-delta.md"
 )
+DIAGNOSTIC_ATTEMPT_002_PATH = BASE / (
+    "provider-free-durability-restart-unknown-commit-recovery-diagnostic-"
+    "evidence-attempt-002.json"
+)
+STOP_CLOSEOUT_PATH = ROOT / (
+    "docs/raisa-context-fabric-durability-restart-unknown-commit-recovery-"
+    "descendant-stop-closeout.md"
+)
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -212,3 +220,46 @@ def test_recovery_contract_rejects_boundary_mutations(mutate: Mutation) -> None:
     mutate(candidate)
     with pytest.raises((jsonschema.ValidationError, AssertionError)):
         _validate(candidate)
+
+
+def test_recovery_descendant_stops_after_failed_diagnostic_attempt_002() -> None:
+    evidence = _load(DIAGNOSTIC_ATTEMPT_002_PATH)
+    closeout = " ".join(STOP_CLOSEOUT_PATH.read_text(encoding="utf-8").split())
+
+    assert evidence["parent"]["source_head"] == (
+        "fe8313d224a92115aa31bea14f0cd3b14e4c9967"
+    )
+    assert evidence["result"] == "rehearsal_failed"
+    assert evidence["terminal_failure"] == {
+        "code": "unexpected_terminal_success",
+        "coordinate": "cfd2_r01_append_anchor_2",
+        "result_lines": [],
+        "returncode_class": "nonzero",
+        "sqlstate": None,
+    }
+    assert len(evidence["preconditions"]) == 10
+    assert evidence["terminal_observations"] == []
+    assert evidence["operation_counters"] == {
+        "external_network_operations": 0,
+        "participant_retry": 0,
+        "product_commands": 0,
+        "product_reads": 0,
+        "provider_calls": 0,
+        "restart": 0,
+        "sigkill": 0,
+    }
+    assert evidence["cleanup"] == {
+        "absence_verified": True,
+        "removed": True,
+        "status": "cleanup_verified",
+    }
+    assert _sha256(DIAGNOSTIC_ATTEMPT_002_PATH) == (
+        "sha256:c595cd56b5b9a24dfdecc77fe12d998d1f16d593a33142cc3e9e9deffe7f1d12"
+    )
+    for phrase in (
+        "stopped_unproved_after_diagnostic_attempt_002",
+        "falsifies the earlier sole-cause claim",
+        "attempt 003 is ineligible and was not run",
+        "workflow-incident diagnosis",
+    ):
+        assert phrase in closeout

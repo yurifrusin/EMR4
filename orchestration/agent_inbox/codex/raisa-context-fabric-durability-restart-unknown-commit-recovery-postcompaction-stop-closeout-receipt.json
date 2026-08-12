@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "close_cf_d2_recovery_descendant_as_stopped_unproved_after_immutable_diagnostic_attempt_002_then_begin_the_authorized_independent_workflow_incident_diagnosis_without_any_further_database_runtime",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen recovery descendant plan and contract make full attempt 003 ineligible unless a no-crash diagnostic passes. Immutable diagnostic attempt 002 at source fe8313d224a92115aa31bea14f0cd3b14e4c9967 again stopped at cfd2_r01_append_anchor_2 with unexpected_terminal_success after all ten preconditions and the first apply passed. The sole numeric-revision correction is therefore insufficient, no second correction or runtime rerun is authorised, and CF-D2 must close stopped/unproved before a repository-only workflow diagnosis.",
+    "current_authority_allocation": "GPT Sol retains serial diagnosis, stop-closeout, workflow-repair, acceptance, Git and publication authority under Yuri's standing uninterrupted-development authority. Gemini 3.6 Flash/high supplied the accepted fresh exact-HEAD correction veto only; DeepSeek and native subagents are unassigned. Yuri explicitly requested an independent workflow-incident diagnosis after CF-D2 closes.",
+    "git_refs_and_worktree": "The active branch is codex/ariadne-bernie-davida-parallel-seam at fe8313d224a92115aa31bea14f0cd3b14e4c9967, six commits ahead of its origin and with no tracked worktree or index change. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. There are 504 preserved untracked paths including docs/branding and the new CF-D2 attempt-002 diagnostic/review artifacts; explicit-path staging only applies.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. CF-D1 at Continuity 243 / Compass 225 remains the last accepted durability result. The active CF-D2 recovery descendant permits at most two no-crash diagnostic attempts and requires recovery to stop if attempt 002 does not pass.",
+    "protected_evidence_boundaries": "No further Docker/database runtime, SIGKILL, restart, retry, provider, patient/clinical/product data, operational database/source/watcher, credentials/IAM, server-log/WAL inspection, executable tool or command, deployment, production, release, Pages or protected-ref movement is authorised. Both diagnostic artifacts remain immutable; docs/branding and all unrelated untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

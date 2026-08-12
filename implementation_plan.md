@@ -635,10 +635,17 @@ generation rehearsal. The architecture-only provider-free default-off
   single plan-permitted mechanical recovery corrected that ordering. Attempt 002
   passed all ten fixed preconditions but stopped before the first restart with
   minimized `scenario/unexpected_terminal_success`; exact cleanup passed and no
-  runtime success was released. CF-D2 has no authorised attempt remaining, so
-  crash restart, unknown-commit recovery, key rotation, retention, purge,
-  performance and operational availability remain unproved pending Yuri's next
-  programme choice. Applied migration, application wiring,
+  runtime success was released. Yuri then selected a narrow recovery
+  descendant with coordinate-specific evidence and a no-crash apply/anchor
+  proof. Its first diagnostic exposed a real lifecycle-revision mismatch, but
+  the sole plan-authorised correction was insufficient: the reviewed second
+  diagnostic failed at the same anchor coordinate. Both diagnostics used zero
+  `SIGKILL` or restart and cleaned up exactly. Full attempt 003 is ineligible,
+  so crash restart, unknown-commit recovery, key rotation, retention, purge,
+  performance and operational availability remain unproved. The next work is
+  Yuri's authorised independent workflow-incident diagnosis and bounded
+  repository-only fluidity repair, not another database run. Applied
+  migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1

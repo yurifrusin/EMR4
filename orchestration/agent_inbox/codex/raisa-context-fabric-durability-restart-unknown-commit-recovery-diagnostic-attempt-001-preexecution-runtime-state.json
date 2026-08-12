@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_execution",
+  "planned_action": "execute_exactly_one_provider_free_no_crash_cf_d2_recovery_diagnostic_attempt_001_and_preserve_its_whole_document_result_immutably",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and CF-D2 recovery remains the active dependency-satisfied tranche. CF-D1 at Continuity 243 / Compass 225 remains the last accepted durability result; immutable CF-D2 attempts 001 and 002 remain stopped evidence and no restart or unknown-commit claim has been released.",
+    "current_authority_allocation": "GPT Sol retains sole serial diagnostic, recovery, acceptance, Git and publication authority under Yuri's standing uninterrupted-development authority. Fresh Gemini 3.6 Flash/high completed the read-only exact-source veto and has no runtime authority. DeepSeek and native subagents are unassigned.",
+    "active_plan_and_acceptance": "Source 2d2cc5e0d0aff8166c147e1396bbea42645d7a00 passed 332 focused checks and the canonical fast profile with 190 tests, Ruff, compilation, JavaScript syntax and whitespace. The fresh exact-source Gemini 3.6 Flash/high veto passed all nine allowlisted commands, 96 implementation tests plus four register/order tests, zero P0-P2 findings and zero external operations. It authorises exactly one no-crash diagnostic attempt 001: ten setup preconditions followed by R01 position-one apply and, only after exact delta proof, revision-two anchor; zero SIGKILL, restart or participant retry.",
+    "protected_evidence_boundaries": "The diagnostic is authored-synthetic and provider-free in one newly owned postgres:16-bookworm container with pull never, network none, zero ports and zero bind/named/anonymous volumes. It authorises no crash/restart, provider, product/patient/clinical data, operational database/source/watcher, credentials/IAM, server log/WAL inspection, raw SQL/stdout/stderr retention, executable product tool or command, deployment, production, release, Pages or protected-ref movement. Attempt 001 is immutable whether pass or fail; cleanup must prove exact owned-container absence.",
+    "git_refs_and_worktree": "At the measured preexecution snapshot, active task HEAD was the exact reviewed source 2d2cc5e0d0aff8166c147e1396bbea42645d7a00 on codex/ariadne-bernie-davida-parallel-seam, with an empty index and no tracked changes. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 was an ancestor. Local/origin master and local/origin handoff/current were all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exactly 496 files were untracked: the preserved original 494, including five docs/branding paths, plus the intended review packet and receipt. This preexecution state/receipt pair adds two intended untracked files. The fixed diagnostic attempt-001 evidence path did not exist."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_recovery_diagnostic_attempt_001_preexecution_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed deterministic gates, exact-source veto reconciliation, immutable-path absence and protected-ref verification."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "schema_constrained_review_receipt",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh exact-source implementation veto passed and its project is closed to runtime authority."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation lease is open."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_exactly_one_provider_free_no_crash_cf_d2_recovery_diagnostic_attempt_002_against_the_exact_reviewed_anchor_revision_correction_and_preserve_its_whole_document_result_immutably",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:58289d2a97a8e77898addfe3a34370c2eba0222bb9d1d2af08f4592fed777a1a",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact source fe8313d224a92115aa31bea14f0cd3b14e4c9967 contains the single correction: the second anchor ordinal receives current lifecycle revision one. Replacement review r189 reproduced literal commands C01-C09: 95 CF-D2 tests, all 223 register tests, Ruff lint/format, py_compile and exact diff checks passed with zero P0-P2 findings and zero runtime/external operations. Exactly one no-crash diagnostic attempt 002 is eligible; the evidence path is absent.",
+    "current_authority_allocation": "GPT Sol retains sole serial diagnostic, recovery, acceptance, Git and publication authority under Yuri's standing uninterrupted-development authority. The first anchor-correction verifier verdict was rejected. The genuinely fresh replacement Gemini 3.6 Flash/high exact-HEAD veto passed and has no runtime authority. DeepSeek and native subagents are unassigned.",
+    "git_refs_and_worktree": "Active task HEAD is exact reviewed source fe8313d224a92115aa31bea14f0cd3b14e4c9967 on codex/ariadne-bernie-davida-parallel-seam with empty index and no tracked changes. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The fixed diagnostic attempt-002 evidence path does not exist. docs/branding and every unrelated untracked file remain preserved and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely and CF-D2 recovery remains the active dependency-satisfied tranche. CF-D1 at Continuity 243 / Compass 225 is the last accepted durability result. Immutable full attempts 001/002 and diagnostic attempt 001 remain failed/stopped evidence; no restart or unknown-commit claim exists.",
+    "protected_evidence_boundaries": "The diagnostic is authored-synthetic and provider-free in one newly owned postgres:16-bookworm container with pull never, network none, zero ports and zero bind/named/anonymous volumes. It authorises no SIGKILL, restart, retry, provider, product/patient/clinical data, operational database/source/watcher, credentials/IAM, server-log/WAL inspection, raw SQL/stdout/stderr retention, executable product tool or command, deployment, production, release, Pages or protected-ref movement. Attempt 002 is immutable whether pass or fail; cleanup must prove exact owned-container absence."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
