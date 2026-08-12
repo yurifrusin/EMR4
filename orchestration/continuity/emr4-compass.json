@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 228,
+  "map_revision": 229,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 246,
-  "orientation_statement": "EMR4 is at Continuity 246 / Compass 228. The provider-free unmounted conditional-command admission rehearsal passes all 37 canonical cases and 32 hostile mutations with zero effects. The next safe tranche is the legacy-route convergence map and common kernel-interface design.",
+  "source_graph_revision": 247,
+  "orientation_statement": "EMR4 is at Continuity 247 / Compass 229. The provider-free unmounted legacy-route convergence contract maps four raw, six proposal and five confirm routes onto one fail-closed kernel; all 48 hostile mutations pass. The next safe tranche is the pure route-adapter differential rehearsal.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2219,32 +2219,52 @@
         "docs/ariadne-agent-error-correction-register-revision-256.md",
         "orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface",
+      "lineage_parent": "raisa-provider-free-unmounted-conditional-command-admission-rehearsal",
+      "strategic_role": "Map every appointment write ingress onto one fail-closed backend command kernel",
+      "outcome": "Static convergence contract passes; pure authored-synthetic route-adapter differential rehearsal is next.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-plan.md",
+        "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-design.md",
+        "docs/security/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.schema.json",
+        "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-257.md",
+        "orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-conditional-command-admission-rehearsal",
-    "strategic_role": "Conditional-command admission semantics proved; common kernel interface next",
-    "why_now": "The accepted architecture required a mechanical proof that malformed packets stop and valid packets resolve to one non-ambiguous outcome before designing route convergence.",
-    "outcome": "Thirty-seven authored-synthetic cases and thirty-two attacks pass without a route, database, event or mutation.",
+    "node_id": "raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface",
+    "strategic_role": "Common command kernel mapped; inert route-adapter differential proof next",
+    "why_now": "The admission semantics passed, so every current write ingress can now be classified against one exact confirmation, freshness, idempotency, audit and locking contract.",
+    "outcome": "Four raw, six proposal and five confirm routes are mapped; all raw routes remain ineligible and all 48 attacks fail closed.",
     "unlocks": [
-      "Map all four raw compatibility routes and proposal/confirm replacements onto one abstract backend conditional-command interface.",
-      "Freeze route-specific confirmation and idempotency migration requirements without changing behavior."
+      "Transform authored-synthetic raw and confirm envelopes into one ConditionalAppointmentCommand request.",
+      "Prove exact semantic equivalence for complete envelopes and exact missing-control rejection for current raw shapes."
     ],
     "does_not_solve": [
-      "Production tokens, route implementation, database fencing, persistent idempotency or audit.",
+      "Application route imports, HTTP behavior, database fencing, persistent idempotency/audit or client migration.",
       "Durable cue delivery, CF-D2, patient/product data, provider tools, commands, deployment, Pages or protected refs."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-plan.md",
-      "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md",
-      "docs/security/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json",
-      "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-sol-acceptance.md",
-      "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-source-head-draft-failure-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-256.md",
-      "orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md"
+      "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-plan.md",
+      "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-design.md",
+      "docs/security/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.schema.json",
+      "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-257.md",
+      "orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md"
     ]
   },
   "decision_horizon": [
@@ -2340,8 +2360,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Freeze the provider-free unmounted legacy-route convergence map and common kernel-interface design.",
-        "Keep route/database behavior closed until a later implementation descendant has its own acceptance.",
+        "Rehearse pure authored-synthetic raw and confirm route adapters against the frozen common kernel request.",
+        "Keep application route and database behavior closed until a later separately accepted runtime descendant.",
+        "Select and prove a database-owned create schedule fence before create convergence.",
         "Retain Durable Event and Cue Delivery as a later observability-first extension."
       ],
       "boundary_changes": [],
@@ -2693,7 +2714,18 @@
         "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-sol-acceptance.md",
         "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-source-head-draft-failure-receipt.json",
         "docs/ariadne-agent-error-correction-register-revision-256.md",
-        "orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md"
+        "orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md",
+        "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-plan.md",
+        "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-design.md",
+        "docs/security/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.schema.json",
+        "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-257.md",
+        "orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md"
       ]
     },
     {
@@ -3538,6 +3570,7 @@
     }
   ],
   "map_limits": [
+    "The legacy-route convergence result is a static contract only; every raw route remains mounted, unchanged and kernel-ineligible.",
     "The conditional-command admission rehearsal is pure authored-synthetic evaluation; it does not prove route behavior, database serialization or persistent effects.",
     "The source-owned-truth reorientation proves architecture only; it does not prove a runtime command kernel, database fence, watcher or durable cue delivery.",
     "The workflow repair proves discriminating diagnostic and exact review admission controls; it does not prove the unresolved CF-D2 database behavior.",

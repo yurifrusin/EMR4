@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 246,
+  "graph_revision": 247,
   "harvests": [],
   "nodes": [
     {
@@ -15633,6 +15633,84 @@
         "No production token, cryptography, route, common kernel, database fence or persistent idempotency/audit is implemented.",
         "Legacy compatibility routes remain mounted and unchanged.",
         "Operational database/source/watcher access, real events, patient/product data, provider, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface",
+      "title": "Provider-free unmounted legacy-route kernel convergence design",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "47e08eada878d8f6dd2a9b100e706404d3594e5a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-conditional-command-admission-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is a provider-free unmounted source-hashed API Spine contract.",
+          "It imports or changes no application route and performs no database, provider or command effect.",
+          "All raw compatibility routes remain kernel-ineligible today."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-legacy-route-kernel-convergence-design",
+          "source": "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-closeout.md",
+          "status": "accepted",
+          "summary": "Accept one common conditional-command interface and fail-closed migration DAG without route behavior change."
+        }
+      ],
+      "claim_scope": [
+        "Exactly four raw, six proposal and five confirm routes map to four canonical operations.",
+        "All forty-eight hostile mutations fail closed.",
+        "Separate confirmation, precondition, idempotency and audit remain mandatory for raw convergence.",
+        "Create remains blocked on a separately reviewed database-owned schedule-domain fence.",
+        "Deprecation and retirement remain downstream release decisions after convergence."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-design.md",
+          "docs/security/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_legacy_route_convergence_kernel_interface.py",
+          "tests/test_raisa_provider_free_unmounted_legacy_route_convergence_kernel_interface_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.schema.json",
+          "scripts/raisa_provider_free_unmounted_legacy_route_convergence_kernel_interface_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No application route adapter, shadow mapping or behavior change is implemented.",
+        "No production precondition token, database fence, persistent idempotency/audit or RLS behavior is proved.",
+        "Database/source/watcher/event access, patient/product data, provider, commands, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "accept_close_commit_push_notify_and_continue_from_the_provider_free_unmounted_legacy_route_convergence_kernel_interface_design",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact source 47e08eada878d8f6dd2a9b100e706404d3594e5a maps four raw, six proposal and five confirm routes onto one fail-closed conditional-command kernel. All 48 hostile mutations, 110 focused convergence/API Spine tests, 140 lifecycle/API tests, the full register suite and 191 canonical repository tests pass. All raw routes remain ineligible; confirmation, precondition, idempotency and audit stay separate; create remains blocked on a database-owned schedule fence.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled static API Spine design, deterministic acceptance and task-branch closeout under standing uninterrupted authority. The EMR4 API Steward rules were applied. No implementation worker or external provider verifier was used.",
+    "git_refs_and_worktree": "Current task HEAD is literal git rev-parse output 47e08eada878d8f6dd2a9b100e706404d3594e5a; origin task is 4af9966928b9d453eed372f158e566185aaad5da before closeout push. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Six tracked lifecycle/baton files and five task-owned untracked closeout files sit beside 498 preserved pre-existing untracked entries before this paired receipt is generated. Explicit-path staging only applies and docs/branding remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely and is updated to the acceptance-ready Continuity 247 / Compass 229 legacy-route convergence result. It names the provider-free unmounted pure route-adapter differential rehearsal as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "The tranche used repository-local API contract documents and authored-synthetic inert objects only. It imported or changed no application route, accessed no database/source/event/watcher, used no provider/network/product/patient data/credential/IAM, performed no command/write/deployment/release/Pages/protected-ref action and did not touch docs/branding or unrelated untracked files. AER-0290 preserves the rejected pre_plan receipt before its passing correction."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
