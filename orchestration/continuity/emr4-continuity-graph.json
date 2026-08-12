@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 247,
+  "graph_revision": 248,
   "harvests": [],
   "nodes": [
     {
@@ -15710,6 +15710,84 @@
       "unresolved_gates": [
         "No application route adapter, shadow mapping or behavior change is implemented.",
         "No production precondition token, database fence, persistent idempotency/audit or RLS behavior is proved.",
+        "Database/source/watcher/event access, patient/product data, provider, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal",
+      "title": "Provider-free unmounted pure route-adapter differential rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "beb4e65cddf72437948d72e08dd18c2ea4f0c609",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is a provider-free unmounted authored-synthetic pure adapter rehearsal.",
+          "It imports or changes no application route and executes no kernel command.",
+          "A complete hypothetical raw envelope grants no current route eligibility."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-pure-route-adapter-differential-rehearsal",
+          "source": "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact pure mapping equivalence and current-raw missing-control rejection without runtime wiring."
+        }
+      ],
+      "claim_scope": [
+        "Exactly nine adapters, four synthetic intents and thirteen scenarios are covered.",
+        "Nine complete candidates map all eighteen fields and four current raw profiles reject with three exact gap codes.",
+        "Four differential groups match on all seventeen semantic fields; only route_adapter_id differs.",
+        "All forty-five hostile mutations fail closed.",
+        "All candidates remain inert and runtime-ineligible."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-design.md",
+          "docs/security/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_pure_route_adapter_differential_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_pure_route_adapter_differential_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.schema.json",
+          "scripts/raisa_provider_free_unmounted_pure_route_adapter_differential_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No application route adapter, default-off shadow observer or client behavior is wired.",
+        "No production precondition token, database fence, idempotency/audit persistence or RLS behavior is proved.",
         "Database/source/watcher/event access, patient/product data, provider, commands, deployment, Pages and protected refs remain closed."
       ]
     }

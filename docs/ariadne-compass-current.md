@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 247 / Compass 229. The provider-free unmounted legacy-route convergence contract maps four raw, six proposal and five confirm routes onto one fail-closed kernel; all 48 hostile mutations pass. The next safe tranche is the pure route-adapter differential rehearsal.
+> EMR4 is at Continuity 248 / Compass 230. The provider-free unmounted pure route-adapter rehearsal maps nine complete candidates, rejects four current raw profiles with three exact gaps and contains all 45 hostile mutations. The next safe tranche is the default-off non-enforcing shadow-comparison architecture.
 
 ## North star
 
@@ -268,24 +268,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Rehearsal passes; the next safe tranche maps legacy and proposal/confirm routes onto one abstract backend kernel. Lineage parent: `raisa-context-fabric-source-owned-truth-conditional-command-reorientation`.
 126. **Map every appointment write ingress onto one fail-closed backend command kernel — Provider-free unmounted legacy-route kernel convergence design**
    Static convergence contract passes; pure authored-synthetic route-adapter differential rehearsal is next. Lineage parent: `raisa-provider-free-unmounted-conditional-command-admission-rehearsal`.
+127. **Prove route-specific envelopes preserve one conditional-command meaning — Provider-free unmounted pure route-adapter differential rehearsal**
+   Pure differential rehearsal passes; a default-off non-enforcing shadow-comparison architecture is next. Lineage parent: `raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface`.
 
 ## Current position
 
-**Common command kernel mapped; inert route-adapter differential proof next — Provider-free unmounted legacy-route kernel convergence design**
+**Pure route mapping proved; inert shadow-comparison boundary next — Provider-free unmounted pure route-adapter differential rehearsal**
 
-**Why this proof came next:** The admission semantics passed, so every current write ingress can now be classified against one exact confirmation, freshness, idempotency, audit and locking contract.
+**Why this proof came next:** The common kernel and pure adapters now agree, so the next safe question is how to observe differences without influencing live behavior.
 
-Four raw, six proposal and five confirm routes are mapped; all raw routes remain ineligible and all 48 attacks fail closed.
+Nine complete candidates map, four current raw profiles fail with three exact gaps, and all 45 hostile mutations are contained.
 
 ### What this unlocks
 
-- Transform authored-synthetic raw and confirm envelopes into one ConditionalAppointmentCommand request.
-- Prove exact semantic equivalence for complete envelopes and exact missing-control rejection for current raw shapes.
+- Define a default-off non-enforcing route-local comparison record with minimized authored-synthetic fields.
+- Prove the observer cannot gate a request, mutate a response, invoke the kernel or affect a write.
 
 ### What it does not solve
 
-- Application route imports, HTTP behavior, database fencing, persistent idempotency/audit or client migration.
-- Durable cue delivery, CF-D2, patient/product data, provider tools, commands, deployment, Pages or protected refs.
+- Application route wiring, HTTP compatibility, database fencing, persistent idempotency/audit or client migration.
+- Durable cue delivery, CF-D2, patient/product data, providers, commands, deployment, Pages or protected refs.
 
 ## Continuity and authority
 
@@ -352,8 +354,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Rehearse pure authored-synthetic raw and confirm route adapters against the frozen common kernel request.
-- Keep application route and database behavior closed until a later separately accepted runtime descendant.
+- Freeze a provider-free unmounted default-off non-enforcing shadow-comparison architecture.
+- Prove any future observer cannot gate, mutate or alter a route response before runtime wiring is considered.
+- Then prove ordinary and fallback client proposal/confirm parity before raw-route convergence.
 - Select and prove a database-owned create schedule fence before create convergence.
 - Retain Durable Event and Cue Delivery as a later observability-first extension.
 
@@ -544,6 +547,7 @@ Prerequisites:
 
 ## Map limits
 
+- The pure route-adapter result is authored-synthetic and inert; complete mapping does not grant current raw-route or runtime eligibility.
 - The legacy-route convergence result is a static contract only; every raw route remains mounted, unchanged and kernel-ineligible.
 - The conditional-command admission rehearsal is pure authored-synthetic evaluation; it does not prove route behavior, database serialization or persistent effects.
 - The source-owned-truth reorientation proves architecture only; it does not prove a runtime command kernel, database fence, watcher or durable cue delivery.
@@ -976,6 +980,9 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-closeout.md`
 - `docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-design.md`
 - `docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-plan.md`
+- `docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-design.md`
+- `docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-plan.md`
@@ -1082,6 +1089,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-threat-model-delta.md`
@@ -1286,6 +1294,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-source-specific-durability-architecture-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-candidate-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-sol-acceptance.md`
@@ -1554,6 +1565,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/acceptance-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/authored-synthetic-fresh-generation-packet.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/fresh-generation-packet.schema.json`
@@ -1827,6 +1840,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md`
 - `orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md`
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1917,4 +1931,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 229; continuity graph revision 247._
+_Compass map revision 230; continuity graph revision 248._
