@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 254 / Compass 236. The provider-free compatibility-consumer admission review finds zero committed system raw-route callers, preserves unknown external consumers, selects status confirm-first and names a 45-test temporal/idempotency harness repair as the next gate.
+> EMR4 is at Continuity 255 / Compass 237. The provider-free compatibility conformance-harness repair restores the exact 311/311 baseline without an application change; the unmounted status transaction-kernel protocol rehearsal is next.
 
 ## North star
 
@@ -282,24 +282,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Seven native raw call sites are closed; compatibility-consumer and kernel-convergence admission review is next. Lineage parent: `raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold`.
 133. **Separate real compatibility obligations from unknown external consumers before convergence — Provider-free compatibility-consumer and kernel-convergence admission review**
    Repository consumers are exactly classified; test-harness readiness repair is next before status-kernel protocol work. Lineage parent: `raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity`.
+134. **Restore a trustworthy compatibility baseline before status-kernel protocol work — Provider-free compatibility conformance-harness temporal/idempotency readiness repair**
+   All 311 ordinary compatibility tests pass without application or assertion weakening. Lineage parent: `raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review`.
 
 ## Current position
 
-**Compatibility obligations classified; conformance readiness next — Provider-free compatibility-consumer and kernel-convergence admission review**
+**Compatibility baseline trustworthy; status protocol next — Provider-free compatibility conformance-harness temporal/idempotency readiness repair**
 
-**Why this proof came next:** The native client is clean, and the remaining repository consumers can now be made trustworthy before status-kernel protocol work.
+**Why this proof came next:** The exact ordinary suite is current, so transaction-kernel semantics can be evaluated against a clean behavioral baseline.
 
-Zero committed system callers, 126 conformance calls, four direct fixtures and unknown external consumers are distinguished without changing a route.
+The same 311 tests move from 45 classified harness failures to 311/311 without an application change.
 
 ### What this unlocks
 
-- Repair only stale test clocks and proposal idempotency headers.
-- Then rehearse status transaction-kernel semantics in a provider-free unmounted protocol.
+- Rehearse authority-first status transaction-kernel schedules in an unmounted authored-synthetic protocol.
+- Freeze atomic mutation, audit and completed-receipt behavior plus typed loser outcomes.
 
 ### What it does not solve
 
-- External-consumer readiness, route retirement, header-mode rollout or raw-route convergence.
-- Kernel runtime, create schedule fencing, product data, deployment, Pages or protected refs.
+- Status route integration, raw-route convergence, external consumers or create schedule fencing.
+- Operational data, providers, commands, deployment, Pages or protected refs.
 
 ## Continuity and authority
 
@@ -366,10 +368,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Repair the 45 stale temporal/idempotency conformance tests without changing application behavior.
-- Prove all 311 ordinary compatibility tests green.
-- Rehearse the unmounted status transaction-kernel protocol before any runtime convergence.
-- Keep raw status unchanged until precondition, confirmation and idempotency ingress is accepted.
+- Rehearse the provider-free unmounted status transaction-kernel protocol.
+- Keep every application route outside the protocol rehearsal.
+- Retain raw status until precondition, confirmation and idempotency ingress is accepted.
 - Select and prove a database-owned create schedule fence before create convergence.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -559,6 +560,8 @@ Prerequisites:
 
 ## Map limits
 
+- Test-only clock and header repair grants no application or command authority.
+- A green compatibility suite does not prove external-consumer readiness or route-convergence safety.
 - Forty-five stale tests are a harness repair obligation, not authority to weaken temporal or idempotency controls.
 - Zero committed compatibility consumers does not prove absence of external consumers.
 - Native-client parity does not identify external compatibility consumers or authorize route retirement or kernel convergence.
@@ -925,6 +928,8 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-design.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
 - `docs/raisa-practice-context-fabric-direction.md`
+- `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
+- `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md`
@@ -1105,6 +1110,7 @@ Prerequisites:
 - `docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md`
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-threat-model-delta.md`
 - `docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md`
@@ -1282,6 +1288,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-compatibility-consumer-kernel-convergence-admission-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-source-head-draft-failure-receipt.json`
@@ -1594,6 +1603,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.schema.json`
@@ -1907,6 +1917,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-11--context-fabric-durability-concurrency-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--authored-synthetic-shadow-comparison-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-12--compatibility-conformance-harness-readiness-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-12--compatibility-consumer-kernel-convergence-admission-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md`
 - `orchestration/human_inbox/yuri/2026-08-12--default-off-runtime-instrumentation-architecture.md`
@@ -2006,4 +2017,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 236; continuity graph revision 254._
+_Compass map revision 237; continuity graph revision 255._

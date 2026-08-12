@@ -208,12 +208,16 @@ also passes. It finds zero committed product/runtime/import/recovery/migration/
 operational raw HTTP consumers, 126 conformance calls in 21 files, four direct
 database fixtures and an unknown external-consumer population. It freezes
 current response, audit, idempotency-gap and helper commit behavior and selects
-status confirm-first without changing raw status. A broad 311-test collection
-has 45 stale temporal/idempotency harness failures while a current 184-test
-behavior baseline passes. The next bounded gate is a test-only repair of those
-eight fixture files; after all 311 pass, the unmounted status transaction-kernel
-protocol rehearsal follows. No route change, kernel runtime or schedule fence
-begins before those gates pass.
+status confirm-first without changing raw status. The subsequent test-only
+temporal/idempotency readiness repair also passes: the same 311-test collection
+moves from 266 pass / 45 classified harness failures to 311/311 through exactly
+eight test files, with the application tree and status-code assertions
+unchanged. The next bounded gate is the provider-free unmounted status
+transaction-kernel protocol rehearsal. It must prove authority-first ordering,
+canonical practice/appointment/idempotency locking, atomic mutation/audit/
+receipt behavior, replay and typed loser outcomes without importing or
+executing an application route, database, provider, watcher, event or command.
+No route change, kernel runtime or schedule fence begins in that rehearsal.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

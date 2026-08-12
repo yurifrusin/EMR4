@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 254,
+  "graph_revision": 255,
   "harvests": [],
   "nodes": [
     {
@@ -16261,6 +16261,82 @@
         "External consumer readiness, route retirement and header-mode rollout remain unproved.",
         "Kernel execution, raw convergence and create schedule fencing remain closed.",
         "Product data, providers, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair",
+      "title": "Provider-free compatibility conformance-harness temporal/idempotency readiness repair",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "48c1821af79f9d22b7c029fdbba8c4f984d239e5",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is provider-free test-only conformance evidence.",
+          "The application tree and status-code assertion set are unchanged.",
+          "All raw compatibility routes remain mounted and unchanged."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-compatibility-conformance-harness-readiness-repair",
+          "source": "docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the exact 311/311 current compatibility baseline without an application change."
+        }
+      ],
+      "claim_scope": [
+        "The exact pre-repair collection reproduced 266 pass and 45 fail with 33 temporal and 12 header cases.",
+        "The same ordinary compatibility collection now passes 311 of 311 tests.",
+        "Two structural tests prove exactly eight changed test files, an unchanged application tree and unchanged status-code assertions.",
+        "The source-bound combined run passes 313 of 313 and the canonical 191-test fast profile passes."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--compatibility-conformance-harness-readiness-repair.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-compatibility-conformance-harness-readiness-repair-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_compatibility_conformance_harness_readiness_repair.py",
+          "tests/test_raisa_provider_free_compatibility_conformance_harness_readiness_repair_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json",
+          "scripts/raisa_provider_free_compatibility_conformance_harness_readiness_repair_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The provider-free unmounted status transaction-kernel protocol rehearsal is next.",
+        "No status route imports or executes a kernel yet.",
+        "External consumer readiness, raw-route convergence and create schedule fencing remain unproved.",
+        "Operational data, providers, deployment, Pages and protected refs remain closed."
       ]
     }
   ],
